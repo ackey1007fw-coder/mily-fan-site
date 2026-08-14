@@ -64,7 +64,7 @@ export function verifySiteUrlConsistency() {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
   }
 
-  const hardcodedOrigin = /https:\/\/milly-fan-site\.vercel\.app/;
+  const hardcodedOrigin = /https:\/\/mily-fan-site\.vercel\.app/;
   if (hardcodedOrigin.test(html)) {
     errors.push("index.html must not hardcode the public origin; use site.siteUrl placeholders");
   }

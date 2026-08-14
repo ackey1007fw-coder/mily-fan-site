@@ -6,9 +6,10 @@ export const EXPECTED = {
   branch: "main",
   displayName: "みりぃ",
   legalName: "三橋莉子",
-  packageName: "milly-fan-site",
+  packageName: "mily-fan-site",
   titleIncludes: "みりぃ",
-  repoName: "milly-fan-site",
+  repoName: "mily-fan-site",
+  siteUrl: "https://mily-fan-site.vercel.app",
 };
 
 export const FORBIDDEN = [
@@ -44,6 +45,7 @@ const SKIP_FILES = new Set([
   "check-site-identity.mjs",
   "content-invariants.mjs",
   "content-invariants.test.mjs",
+  "site-identity.test.mjs",
 ]);
 
 export async function collectFiles(dir = root) {
@@ -72,6 +74,14 @@ function readRelative(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
+function spellingScanText(relative, content) {
+  const normalized = relative.replaceAll("\\", "/");
+  if (normalized === "AGENTS.md") {
+    return content.replaceAll("millyではない", "");
+  }
+  return content;
+}
+
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   if (branch && branch !== EXPECTED.branch) {
     console.log(
@@ -90,8 +100,27 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     errors.push(`package.json name is "${pkg.name}", expected "${EXPECTED.packageName}".`);
   }
 
-  if (typeof pkg.name === "string" && /(^|[^l])mily([^l]|$)/.test(pkg.name)) {
-    errors.push(`package.json name uses the misspelling "mily" instead of "milly".`);
+  if (typeof pkg.name === "string" && /milly/i.test(pkg.name)) {
+    errors.push(`package.json name uses the misspelling "milly" instead of "mily".`);
+  }
+
+  const siteSrc = await readRelative("src/data/site.ts");
+  if (!siteSrc.includes(`repoName: "${EXPECTED.repoName}"`)) {
+    errors.push(`site.ts must set repoName to "${EXPECTED.repoName}".`);
+  }
+  if (!siteSrc.includes(`repoFullName: "ackey1007fw-coder/${EXPECTED.repoName}"`)) {
+    errors.push(`site.ts must set repoFullName to "ackey1007fw-coder/${EXPECTED.repoName}".`);
+  }
+  if (!siteSrc.includes(`siteUrl: "${EXPECTED.siteUrl}"`)) {
+    errors.push(`site.ts must set siteUrl to "${EXPECTED.siteUrl}".`);
+  }
+
+  const agents = await readRelative("AGENTS.md");
+  if (!agents.includes("**mily**（millyではない）")) {
+    errors.push('AGENTS.md must keep the spelling rule "mily（millyではない）".');
+  }
+  if (agents.includes("milly-fan-site")) {
+    errors.push("AGENTS.md must not use the misspelling milly-fan-site.");
   }
 
   if (!profile.includes(`displayName: "${EXPECTED.displayName}"`)) {
@@ -118,17 +147,24 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   const files = await collectFiles(root);
   for (const filePath of files) {
     const content = await readFile(filePath, "utf8").catch(() => "");
+    const relative = path.relative(root, filePath);
     for (const value of FORBIDDEN) {
       if (content.includes(value)) {
         errors.push(
-          `Forbidden sibling-site or official-claim signal "${value}" found in ${path.relative(root, filePath)}.`,
+          `Forbidden sibling-site or official-claim signal "${value}" found in ${relative}.`,
         );
       }
+    }
+    const spellingText = spellingScanText(relative, content);
+    if (/milly/i.test(spellingText)) {
+      errors.push(
+        `Forbidden misspelling "milly" found in ${relative}; this repository uses "mily".`,
+      );
     }
   }
 
   if (errors.length > 0) {
-    console.error("\nSite identity mismatch: this repository is the milly fan site only.");
+    console.error("\nSite identity mismatch: this repository is the mily fan site only.");
     for (const error of errors) console.error(`  - ${error}`);
     return 1;
   }

@@ -1,20 +1,20 @@
 # みりぃ ファンサイト — エージェント向けガイド
 
-このリポジトリ（`ackey1007fw-coder/milly-fan-site`）は、みりぃ（三橋莉子）さんの**ファン制作・非公式サイト**です。
+このリポジトリ（`ackey1007fw-coder/mily-fan-site`）は、みりぃ（三橋莉子）さんの**ファン制作・非公式サイト**です。
 公式・公認・本人運営ではありません。年号付きの専用サイトにもしません。2027年以降も同じ repo で続けます。
 
 他のファンサイトの人物情報・写真・ニュース・イベント・SNS・プロフィールをコピーしないでください。みりぃは別人物・別プロジェクトです。
 
 ## 作業前チェック
 
-1. `git remote -v` が `milly-fan-site` を指していること。
+1. `git remote -v` が `mily-fan-site` を指していること。
 2. `src/data/profile.ts` の `displayName` が **みりぃ**、`legalName` が **三橋莉子** であること。
-3. パッケージ名の spelling は **milly**（`mily` ではない）。
+3. パッケージ名の spelling は **mily**（millyではない）。
 4. 別人物の名前や別サイトの URL が入っていたら、編集せず止まって報告する。
 
 ## リポジトリ運用
 
-- GitHub: `ackey1007fw-coder/milly-fan-site`
+- GitHub: `ackey1007fw-coder/mily-fan-site`
 - 通常運用では `main` へ直接 push しない。
 - `main` から作業ブランチを切り、PR にする。
 - マージ方式の指定がなければ **squash merge**。
@@ -24,7 +24,7 @@
 
 ### マージしてよい条件
 
-1. 対象が `milly-fan-site`、base が `main`、head が作業ブランチ。
+1. 対象が `mily-fan-site`、base が `main`、head が作業ブランチ。
 2. PR が Draft ではなく、競合がなく、マージ可能。
 3. CI（install / typecheck / test / build / identity guard）が成功。
 4. 未解決のレビュー指摘がない。
@@ -40,8 +40,8 @@
 ## セットアップ
 
 ```bash
-git clone https://github.com/ackey1007fw-coder/milly-fan-site.git
-cd milly-fan-site
+git clone https://github.com/ackey1007fw-coder/mily-fan-site.git
+cd mily-fan-site
 pnpm install
 pnpm dev
 ```
