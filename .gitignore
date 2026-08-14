@@ -1,0 +1,13 @@
+node_modules/
+dist/
+package-lock.json
+.env
+.env.*
+!.env.example
+*.local
+
+.DS_Store
+Thumbs.db
+
+*.tsbuildinfo
+.vite/
