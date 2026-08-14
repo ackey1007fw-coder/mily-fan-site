@@ -58,16 +58,22 @@ export function Schedule() {
                       {item.notes ? (
                         <p className="mt-2 text-sm text-ink-muted">{item.notes}</p>
                       ) : null}
-                      {item.url ? (
-                        <p className="mt-3">
+                      <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                        <ExternalLink
+                          href={item.source}
+                          className="text-sm font-medium text-sage hover:underline"
+                        >
+                          出典を見る
+                        </ExternalLink>
+                        {item.url && item.url !== item.source ? (
                           <ExternalLink
                             href={item.url}
                             className="text-sm font-medium text-sage hover:underline"
                           >
-                            詳細・出典
+                            詳細
                           </ExternalLink>
-                        </p>
-                      ) : null}
+                        ) : null}
+                      </p>
                     </li>
                   ))}
                 </ul>

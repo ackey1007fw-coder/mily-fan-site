@@ -3,6 +3,9 @@ import { describe, it } from "node:test";
 import {
   groupEventsByYear,
   isUpcomingEvent,
+  isValidDateOnly,
+  isValidDateTime,
+  isValidEventTimestamp,
   parseEventInstant,
 } from "../src/data/events.ts";
 
@@ -61,6 +64,15 @@ describe("event timestamp parsing", () => {
       Number.isNaN(new Date(`${datetime}T23:59:59+09:00`).getTime()),
       true,
     );
+  });
+
+  it("rejects calendar overflow and impossible clock values", () => {
+    assert.equal(isValidDateOnly("2026-02-31"), false);
+    assert.equal(isValidDateTime("2026-08-14T99:00:00+09:00"), false);
+    assert.equal(isValidEventTimestamp("2026-02-31"), false);
+    assert.equal(isValidEventTimestamp("2026-08-14T20:00:00+09:00"), true);
+    assert.throws(() => parseEventInstant("2026-02-31"));
+    assert.throws(() => parseEventInstant("2026-08-14T99:00:00+09:00"));
   });
 
   it("treats date-only events as upcoming through the JST end of that day", () => {

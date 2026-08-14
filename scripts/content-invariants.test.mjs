@@ -11,6 +11,7 @@ import {
   verifyEvents,
   verifyNews,
   verifySocials,
+  claimsThisSiteIsOfficial,
 } from "./content-invariants.mjs";
 
 const validNews = {
@@ -93,10 +94,61 @@ describe("content verification invariants", () => {
         body: "吉井優花子さんの情報",
       },
     ]);
-    assert.ok(errors.some((error) => error.includes("YYYY-MM-DD")));
+    assert.ok(errors.some((error) => error.includes("real YYYY-MM-DD")));
     assert.ok(errors.some((error) => error.includes("confirmed http(s) URL")));
     assert.ok(errors.some((error) => error.includes("another person")));
-    assert.ok(errors.some((error) => error.includes("official status")));
+    assert.ok(errors.some((error) => error.includes("this site is official")));
+  });
+
+  it("allows truthful references to external official sources", () => {
+    const errors = verifyNews([
+      {
+        id: "external-official",
+        date: "2026-08-14",
+        title: "主催者公式サイトと本人公式アカウントの案内",
+        body: "公式チケットページと公式発表を確認した。",
+        source: "https://example.com/organizer",
+      },
+    ]);
+    assert.deepEqual(errors, []);
+    assert.equal(claimsThisSiteIsOfficial("主催者公式サイト"), false);
+    assert.equal(claimsThisSiteIsOfficial("本人公式アカウント"), false);
+    assert.equal(claimsThisSiteIsOfficial("公式チケットページ"), false);
+    assert.equal(claimsThisSiteIsOfficial("公式サイトです"), true);
+    assert.equal(claimsThisSiteIsOfficial("このサイトは公式です"), true);
+    assert.equal(claimsThisSiteIsOfficial("公式ファンサイト"), true);
+  });
+
+  it("rejects semantically invalid timestamps even when the regex shape matches", () => {
+    const impossibleDate = verifyEvents([
+      {
+        ...validEvent,
+        id: "feb-31",
+        startAt: "2026-02-31",
+      },
+    ]);
+    const impossibleTime = verifyEvents([
+      {
+        ...validEvent,
+        id: "hour-99",
+        startAt: "2026-08-14T99:00:00+09:00",
+      },
+    ]);
+
+    assert.ok(
+      impossibleDate.some((error) => error.includes("real date-only or datetime")),
+    );
+    assert.ok(
+      impossibleTime.some((error) => error.includes("real date-only or datetime")),
+    );
+    assert.equal(
+      verifyEvents([{ ...validEvent, startAt: "2026-08-14" }]).length,
+      0,
+    );
+    assert.equal(
+      verifyEvents([{ ...validEvent, startAt: "2026-08-14T20:00:00+09:00" }]).length,
+      0,
+    );
   });
 
   it("rejects unconfirmed socials and invalid event timestamps", () => {
@@ -122,7 +174,7 @@ describe("content verification invariants", () => {
         source: "not-a-url",
       },
     ]);
-    assert.ok(eventErrors.some((error) => error.includes("date-only or datetime")));
+    assert.ok(eventErrors.some((error) => error.includes("real date-only or datetime")));
     assert.ok(eventErrors.some((error) => error.includes("Asia/Tokyo")));
   });
 });

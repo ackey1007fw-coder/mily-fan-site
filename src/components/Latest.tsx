@@ -1,8 +1,10 @@
-import { news } from "../data/news";
+import { news, sortNewsByDateDesc } from "../data/news";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
 export function Latest() {
+  const latestNews = sortNewsByDateDesc(news);
+
   return (
     <section id="latest" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
@@ -10,7 +12,7 @@ export function Latest() {
         <p className="mt-2 text-sm text-ink-muted">
           確認できた更新だけを載せます。未確認の話題は入れません。
         </p>
-        {news.length === 0 ? (
+        {latestNews.length === 0 ? (
           <div className="mt-6">
             <EmptyState
               title="まだ掲載できる最新情報はありません"
@@ -19,7 +21,7 @@ export function Latest() {
           </div>
         ) : (
           <ul className="mt-6 space-y-3">
-            {news.map((item) => (
+            {latestNews.map((item) => (
               <li
                 key={item.id}
                 className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
@@ -29,16 +31,22 @@ export function Latest() {
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                   {item.body}
                 </p>
-                {item.url ? (
-                  <p className="mt-3">
+                <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                  <ExternalLink
+                    href={item.source}
+                    className="text-sm font-medium text-sage hover:underline"
+                  >
+                    出典を見る
+                  </ExternalLink>
+                  {item.url && item.url !== item.source ? (
                     <ExternalLink
                       href={item.url}
                       className="text-sm font-medium text-sage hover:underline"
                     >
-                      出典を見る
+                      関連リンク
                     </ExternalLink>
-                  </p>
-                ) : null}
+                  ) : null}
+                </p>
               </li>
             ))}
           </ul>

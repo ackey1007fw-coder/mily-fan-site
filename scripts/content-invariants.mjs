@@ -1,16 +1,14 @@
+import {
+  isValidDateOnly,
+  isValidEventTimestamp,
+} from "../src/data/events.ts";
+
 const FORBIDDEN_PERSONS = [
   "吉井優花子",
   "吉井 優花子",
   "夏凪里季",
   "夏凪 里季",
 ];
-
-const OFFICIAL_CLAIM_RE =
-  /(?<!非)公式(?:サイト|アカウント|ポータル)|公認|本人運営/;
-
-const DATE_ONLY_RE = /^\d{4}-\d{2}-\d{2}$/;
-const DATETIME_RE =
-  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 
 const EVENT_KINDS = new Set(["appearance", "stream", "event", "other"]);
 const SOCIAL_PLATFORMS = new Set([
@@ -63,10 +61,45 @@ function assertNoPersonMixup(item, label, errors) {
   }
 }
 
+function stripAllowedOfficialReferences(text) {
+  return text
+    .replaceAll("非公式", "")
+    .replaceAll("公式・公認・本人運営ではありません", "")
+    .replaceAll("本人運営ではありません", "")
+    .replaceAll("主催者公式サイト", "")
+    .replaceAll("主催者公式", "")
+    .replaceAll("本人公式アカウント", "")
+    .replaceAll("本人公式", "")
+    .replaceAll("公式チケットページ", "")
+    .replaceAll("公式チケット", "")
+    .replaceAll("公式ホームページ", "")
+    .replaceAll("公式HP", "")
+    .replaceAll("公式ページ", "")
+    .replaceAll("公式発表", "")
+    .replaceAll("公式アカウント", "")
+    .replace(/公式サイト(?:での|では|から|を|に|へ|で(?!す))/g, "");
+}
+
+export function claimsThisSiteIsOfficial(text) {
+  if (!text) return false;
+  const remainder = stripAllowedOfficialReferences(text);
+  return (
+    /(?<!非)公式ファンサイト/.test(remainder) ||
+    /公認ファンサイト/.test(remainder) ||
+    /このサイトは(?:公式|公認|本人運営)/.test(remainder) ||
+    /本サイトは(?:公式|公認|本人運営)/.test(remainder) ||
+    /本人運営/.test(remainder) ||
+    /(?:^|[。．\n\s])公式です/.test(remainder) ||
+    /(?:^|[。．\n\s])公認です/.test(remainder) ||
+    /(?:^|[。．\n\s])公式サイトです/.test(remainder) ||
+    /(?:^|[。．\n\s])公認サイトです/.test(remainder)
+  );
+}
+
 function assertNoOfficialClaim(item, label, errors) {
   const text = collectStrings(item).join("\n");
-  if (OFFICIAL_CLAIM_RE.test(text)) {
-    errors.push(`${label} "${item.id ?? "?"}" must not claim official status`);
+  if (claimsThisSiteIsOfficial(text)) {
+    errors.push(`${label} "${item.id ?? "?"}" must not claim this site is official`);
   }
 }
 
@@ -83,8 +116,8 @@ export function verifyNews(items) {
     if (!item.title || !item.body) {
       errors.push(`news "${item.id ?? "?"}" is missing title or body`);
     }
-    if (!DATE_ONLY_RE.test(item.date ?? "")) {
-      errors.push(`news "${item.id ?? "?"}" date must be YYYY-MM-DD`);
+    if (!isValidDateOnly(item.date ?? "")) {
+      errors.push(`news "${item.id ?? "?"}" date must be a real YYYY-MM-DD`);
     }
     assertConfirmedUrl(item.source, "news", item.id ?? "?", errors);
     if (item.url) assertConfirmedUrl(item.url, "news", item.id ?? "?", errors);
@@ -105,15 +138,11 @@ export function verifyEvents(items) {
     if (!EVENT_KINDS.has(item.kind)) {
       errors.push(`events "${item.id ?? "?"}" has an invalid kind`);
     }
-    if (!DATE_ONLY_RE.test(item.startAt ?? "") && !DATETIME_RE.test(item.startAt ?? "")) {
-      errors.push(`events "${item.id ?? "?"}" startAt must be date-only or datetime`);
+    if (!isValidEventTimestamp(item.startAt ?? "")) {
+      errors.push(`events "${item.id ?? "?"}" startAt must be a real date-only or datetime value`);
     }
-    if (
-      item.endAt &&
-      !DATE_ONLY_RE.test(item.endAt) &&
-      !DATETIME_RE.test(item.endAt)
-    ) {
-      errors.push(`events "${item.id ?? "?"}" endAt must be date-only or datetime`);
+    if (item.endAt && !isValidEventTimestamp(item.endAt)) {
+      errors.push(`events "${item.id ?? "?"}" endAt must be a real date-only or datetime value`);
     }
     assertConfirmedUrl(item.source, "events", item.id ?? "?", errors);
     if (item.url) assertConfirmedUrl(item.url, "events", item.id ?? "?", errors);
