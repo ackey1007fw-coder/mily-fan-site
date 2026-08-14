@@ -2,7 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const EXPECTED = {
+export const EXPECTED = {
   branch: "main",
   displayName: "みりぃ",
   legalName: "三橋莉子",
@@ -11,7 +11,7 @@ const EXPECTED = {
   repoName: "milly-fan-site",
 };
 
-const FORBIDDEN = [
+export const FORBIDDEN = [
   "yukako-schedule-2026",
   "riri-schedule-2026",
   "mako-schedule-2026",
@@ -21,8 +21,8 @@ const FORBIDDEN = [
   "夏凪 里季",
 ];
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SCAN_EXTENSIONS = new Set([
+export const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+export const SCAN_EXTENSIONS = new Set([
   ".ts",
   ".tsx",
   ".js",
@@ -34,6 +34,10 @@ const SCAN_EXTENSIONS = new Set([
   ".yml",
   ".yaml",
   ".css",
+  ".webmanifest",
+  ".xml",
+  ".txt",
+  ".svg",
 ]);
 const SKIP_DIRS = new Set(["node_modules", "dist", ".git", ".vercel"]);
 const SKIP_FILES = new Set([
@@ -42,16 +46,7 @@ const SKIP_FILES = new Set([
   "content-invariants.test.mjs",
 ]);
 
-const branch = (process.argv[2] || "").trim();
-
-if (branch && branch !== EXPECTED.branch) {
-  console.log(
-    `site-guard: "${branch}" is not the protected branch (${EXPECTED.branch}); skipping.`,
-  );
-  process.exit(0);
-}
-
-async function collectFiles(dir) {
+export async function collectFiles(dir = root) {
   let entries;
   try {
     entries = await readdir(dir, { withFileTypes: true });
@@ -77,59 +72,78 @@ function readRelative(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
-const errors = [];
+export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
+  if (branch && branch !== EXPECTED.branch) {
+    console.log(
+      `site-guard: "${branch}" is not the protected branch (${EXPECTED.branch}); skipping.`,
+    );
+    return 0;
+  }
 
-const profile = await readRelative("src/data/profile.ts");
-const html = await readRelative("index.html");
-const pkg = JSON.parse(await readRelative("package.json"));
+  const errors = [];
 
-if (pkg.name !== EXPECTED.packageName) {
-  errors.push(`package.json name is "${pkg.name}", expected "${EXPECTED.packageName}".`);
-}
+  const profile = await readRelative("src/data/profile.ts");
+  const html = await readRelative("index.html");
+  const pkg = JSON.parse(await readRelative("package.json"));
 
-if (typeof pkg.name === "string" && /(^|[^l])mily([^l]|$)/.test(pkg.name)) {
-  errors.push(`package.json name uses the misspelling "mily" instead of "milly".`);
-}
+  if (pkg.name !== EXPECTED.packageName) {
+    errors.push(`package.json name is "${pkg.name}", expected "${EXPECTED.packageName}".`);
+  }
 
-if (!profile.includes(`displayName: "${EXPECTED.displayName}"`)) {
-  errors.push(`profile.ts must set displayName to "${EXPECTED.displayName}".`);
-}
+  if (typeof pkg.name === "string" && /(^|[^l])mily([^l]|$)/.test(pkg.name)) {
+    errors.push(`package.json name uses the misspelling "mily" instead of "milly".`);
+  }
 
-if (!profile.includes(`legalName: "${EXPECTED.legalName}"`)) {
-  errors.push(`profile.ts must set legalName to "${EXPECTED.legalName}".`);
-}
+  if (!profile.includes(`displayName: "${EXPECTED.displayName}"`)) {
+    errors.push(`profile.ts must set displayName to "${EXPECTED.displayName}".`);
+  }
 
-const titleMatch = html.match(/<title>([^<]*)<\/title>/);
-const title = titleMatch ? titleMatch[1] : "";
-if (!title.includes(EXPECTED.titleIncludes)) {
-  errors.push(`index.html title does not include "${EXPECTED.titleIncludes}" (title="${title}").`);
-}
-if (!title.includes("非公式")) {
-  errors.push(`index.html title must include "非公式".`);
-}
+  if (!profile.includes(`legalName: "${EXPECTED.legalName}"`)) {
+    errors.push(`profile.ts must set legalName to "${EXPECTED.legalName}".`);
+  }
 
-if (!html.includes("公式・公認・本人運営ではありません")) {
-  errors.push("index.html must keep the unofficial disclaimer.");
-}
+  const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+  const title = titleMatch ? titleMatch[1] : "";
+  if (!title.includes(EXPECTED.titleIncludes)) {
+    errors.push(`index.html title does not include "${EXPECTED.titleIncludes}" (title="${title}").`);
+  }
+  if (!title.includes("非公式")) {
+    errors.push(`index.html title must include "非公式".`);
+  }
 
-const files = await collectFiles(root);
-for (const filePath of files) {
-  const content = await readFile(filePath, "utf8").catch(() => "");
-  for (const value of FORBIDDEN) {
-    if (content.includes(value)) {
-      errors.push(
-        `Forbidden sibling-site or official-claim signal "${value}" found in ${path.relative(root, filePath)}.`,
-      );
+  if (!html.includes("公式・公認・本人運営ではありません")) {
+    errors.push("index.html must keep the unofficial disclaimer.");
+  }
+
+  const files = await collectFiles(root);
+  for (const filePath of files) {
+    const content = await readFile(filePath, "utf8").catch(() => "");
+    for (const value of FORBIDDEN) {
+      if (content.includes(value)) {
+        errors.push(
+          `Forbidden sibling-site or official-claim signal "${value}" found in ${path.relative(root, filePath)}.`,
+        );
+      }
     }
   }
+
+  if (errors.length > 0) {
+    console.error("\nSite identity mismatch: this repository is the milly fan site only.");
+    for (const error of errors) console.error(`  - ${error}`);
+    return 1;
+  }
+
+  console.log(
+    `site-guard: identity ok (${EXPECTED.displayName} / ${EXPECTED.legalName} / ${EXPECTED.repoName}).`,
+  );
+  return 0;
 }
 
-if (errors.length > 0) {
-  console.error("\nSite identity mismatch: this repository is the milly fan site only.");
-  for (const error of errors) console.error(`  - ${error}`);
-  process.exit(1);
+function isDirectRun() {
+  const invoked = process.argv[1] ? path.resolve(process.argv[1]) : "";
+  return invoked === fileURLToPath(import.meta.url);
 }
 
-console.log(
-  `site-guard: identity ok (${EXPECTED.displayName} / ${EXPECTED.legalName} / ${EXPECTED.repoName}).`,
-);
+if (isDirectRun()) {
+  process.exit(await checkIdentity());
+}

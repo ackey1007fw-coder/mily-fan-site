@@ -17,3 +17,34 @@ export const site = {
 } as const;
 
 export type Site = typeof site;
+
+export function siteOrigin(): string {
+  return site.siteUrl.replace(/\/+$/, "");
+}
+
+export function canonicalUrl(): string {
+  return `${siteOrigin()}/`;
+}
+
+export function ogImageUrl(): string {
+  const imagePath = site.ogImagePath.startsWith("/")
+    ? site.ogImagePath
+    : `/${site.ogImagePath}`;
+  return `${siteOrigin()}${imagePath}`;
+}
+
+export function robotsTxt(): string {
+  return `User-agent: *\nAllow: /\n\nSitemap: ${siteOrigin()}/sitemap.xml\n`;
+}
+
+export function sitemapXml(): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>${canonicalUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+`;
+}

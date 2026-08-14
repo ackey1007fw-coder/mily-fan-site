@@ -128,7 +128,32 @@ export function isValidEventTimestamp(value: string): boolean {
   return isValidDateOnly(value) || isValidDateTime(value);
 }
 
-export function parseEventInstant(value: string): Date {
+const TOKYO_YEAR_FORMATTER = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Asia/Tokyo",
+  year: "numeric",
+});
+
+export function tokyoCalendarYear(instant: Date): number {
+  const year = Number.parseInt(TOKYO_YEAR_FORMATTER.format(instant), 10);
+  if (!Number.isInteger(year)) {
+    throw new Error(`Unable to resolve Asia/Tokyo year for ${instant.toISOString()}`);
+  }
+  return year;
+}
+
+export function parseEventStartInstant(value: string): Date {
+  if (isValidDateOnly(value)) {
+    return new Date(`${value}T00:00:00+09:00`);
+  }
+
+  if (isValidDateTime(value)) {
+    return new Date(value);
+  }
+
+  throw new Error(`Invalid event timestamp: ${value}`);
+}
+
+export function parseEventEndInstant(value: string): Date {
   if (isValidDateOnly(value)) {
     return new Date(`${value}T23:59:59+09:00`);
   }
@@ -140,12 +165,12 @@ export function parseEventInstant(value: string): Date {
   throw new Error(`Invalid event timestamp: ${value}`);
 }
 
+export function parseEventInstant(value: string): Date {
+  return parseEventEndInstant(value);
+}
+
 export function eventYear(event: FanEvent): number {
-  const year = Number.parseInt(event.startAt.slice(0, 4), 10);
-  if (Number.isNaN(year)) {
-    throw new Error(`Event "${event.id}" has an invalid startAt: ${event.startAt}`);
-  }
-  return year;
+  return tokyoCalendarYear(parseEventStartInstant(event.startAt));
 }
 
 export function groupEventsByYear(
@@ -167,7 +192,11 @@ export function groupEventsByYear(
     .sort((a, b) => a[0] - b[0])
     .map(([year, yearEvents]) => ({
       year,
-      events: [...yearEvents].sort((a, b) => a.startAt.localeCompare(b.startAt)),
+      events: [...yearEvents].sort(
+        (a, b) =>
+          parseEventStartInstant(a.startAt).getTime() -
+          parseEventStartInstant(b.startAt).getTime(),
+      ),
     }));
 }
 

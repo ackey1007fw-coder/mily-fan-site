@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { collectFiles, SCAN_EXTENSIONS } from "./check-site-identity.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -83,5 +84,25 @@ describe("milly site identity", () => {
       { encoding: "utf8" },
     );
     assert.equal(result.status, 0, result.stderr || result.stdout);
+  });
+
+  it("scans public metadata files in the identity guard", async () => {
+    for (const extension of [".webmanifest", ".xml", ".txt", ".svg"]) {
+      assert.equal(SCAN_EXTENSIONS.has(extension), true, `should scan ${extension}`);
+    }
+
+    const files = await collectFiles(root);
+    const rel = files.map((filePath) =>
+      path.relative(root, filePath).replaceAll("\\", "/"),
+    );
+
+    for (const expected of [
+      "public/site.webmanifest",
+      "public/sitemap.xml",
+      "public/robots.txt",
+      "public/favicon.svg",
+    ]) {
+      assert.ok(rel.includes(expected), `should scan ${expected}`);
+    }
   });
 });

@@ -1,12 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  eventYear,
   groupEventsByYear,
   isUpcomingEvent,
   isValidDateOnly,
   isValidDateTime,
   isValidEventTimestamp,
   parseEventInstant,
+  tokyoCalendarYear,
 } from "../src/data/events.ts";
 
 describe("year-agnostic event grouping", () => {
@@ -43,6 +45,46 @@ describe("year-agnostic event grouping", () => {
       [2026, 2027, 2028],
     );
     assert.equal(grouped[0].events[0].id, "a");
+  });
+
+  it("groups offset timestamps by their Asia/Tokyo calendar year", () => {
+    const utcNewYear = {
+      id: "nye-utc",
+      title: "年またぎ",
+      startAt: "2026-12-31T16:00:00Z",
+      timezone: "Asia/Tokyo",
+      kind: "event",
+      source: "https://example.com/tokyo-nye",
+    };
+    const still2026 = {
+      id: "pre-midnight",
+      title: "年内",
+      startAt: "2026-12-31T14:59:59Z",
+      timezone: "Asia/Tokyo",
+      kind: "event",
+      source: "https://example.com/pre-midnight",
+    };
+    const offsetNewYear = {
+      id: "nye-offset",
+      title: "オフセット年またぎ",
+      startAt: "2026-12-31T16:00:00+00:00",
+      timezone: "Asia/Tokyo",
+      kind: "event",
+      source: "https://example.com/offset-nye",
+    };
+
+    assert.equal(eventYear(utcNewYear), 2027);
+    assert.equal(eventYear(still2026), 2026);
+    assert.equal(eventYear(offsetNewYear), 2027);
+    assert.equal(tokyoCalendarYear(new Date("2026-12-31T16:00:00Z")), 2027);
+
+    const grouped = groupEventsByYear([utcNewYear, still2026]);
+    assert.deepEqual(
+      grouped.map((group) => group.year),
+      [2026, 2027],
+    );
+    assert.equal(grouped[0].events[0].id, "pre-midnight");
+    assert.equal(grouped[1].events[0].id, "nye-utc");
   });
 });
 

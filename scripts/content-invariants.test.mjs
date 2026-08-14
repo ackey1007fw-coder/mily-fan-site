@@ -117,6 +117,58 @@ describe("content verification invariants", () => {
     assert.equal(claimsThisSiteIsOfficial("公式サイトです"), true);
     assert.equal(claimsThisSiteIsOfficial("このサイトは公式です"), true);
     assert.equal(claimsThisSiteIsOfficial("公式ファンサイト"), true);
+    assert.equal(claimsThisSiteIsOfficial("当サイトは公式です"), true);
+    assert.equal(claimsThisSiteIsOfficial("このファンサイトは公式です"), true);
+    assert.equal(claimsThisSiteIsOfficial("当ファンサイトは公認です"), true);
+    assert.equal(claimsThisSiteIsOfficial("このページは本人運営です"), true);
+  });
+
+  it("rejects event ranges whose end precedes the start", () => {
+    const dateOnly = verifyEvents([
+      {
+        ...validEvent,
+        id: "end-before-start-date",
+        startAt: "2027-01-10",
+        endAt: "2027-01-09",
+      },
+    ]);
+    const datetime = verifyEvents([
+      {
+        ...validEvent,
+        id: "end-before-start-datetime",
+        startAt: "2027-01-10T20:00:00+09:00",
+        endAt: "2027-01-10T19:00:00+09:00",
+      },
+    ]);
+    const mixed = verifyEvents([
+      {
+        ...validEvent,
+        id: "end-before-start-mixed",
+        startAt: "2027-01-10T00:00:00+09:00",
+        endAt: "2027-01-09",
+      },
+    ]);
+
+    assert.ok(dateOnly.some((error) => error.includes("endAt must not precede startAt")));
+    assert.ok(datetime.some((error) => error.includes("endAt must not precede startAt")));
+    assert.ok(mixed.some((error) => error.includes("endAt must not precede startAt")));
+    assert.equal(
+      verifyEvents([
+        { ...validEvent, id: "same-day", startAt: "2027-01-10", endAt: "2027-01-10" },
+      ]).length,
+      0,
+    );
+    assert.equal(
+      verifyEvents([
+        {
+          ...validEvent,
+          id: "same-instant",
+          startAt: "2027-01-10T20:00:00+09:00",
+          endAt: "2027-01-10T20:00:00+09:00",
+        },
+      ]).length,
+      0,
+    );
   });
 
   it("rejects semantically invalid timestamps even when the regex shape matches", () => {

@@ -10,7 +10,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test scripts/*.test.mjs",
-    "guard": "node scripts/check-site-identity.mjs main"
+    "guard": "node scripts/check-site-identity.mjs main && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-site-url.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react-swc": "^3.7.2",

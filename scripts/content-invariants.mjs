@@ -1,6 +1,8 @@
 import {
   isValidDateOnly,
   isValidEventTimestamp,
+  parseEventEndInstant,
+  parseEventStartInstant,
 } from "../src/data/events.ts";
 
 const FORBIDDEN_PERSONS = [
@@ -80,10 +82,14 @@ function stripAllowedOfficialReferences(text) {
     .replace(/公式サイト(?:での|では|から|を|に|へ|で(?!す))/g, "");
 }
 
+const THIS_SITE_OFFICIAL_CLAIM =
+  /(?:この|本|当)(?:非公式)?(?:ファン)?(?:サイト|ページ)(?:は|が|こそ)(?:公式|公認|本人運営)/;
+
 export function claimsThisSiteIsOfficial(text) {
   if (!text) return false;
   const remainder = stripAllowedOfficialReferences(text);
   return (
+    THIS_SITE_OFFICIAL_CLAIM.test(remainder) ||
     /(?<!非)公式ファンサイト/.test(remainder) ||
     /公認ファンサイト/.test(remainder) ||
     /このサイトは(?:公式|公認|本人運営)/.test(remainder) ||
@@ -143,6 +149,19 @@ export function verifyEvents(items) {
     }
     if (item.endAt && !isValidEventTimestamp(item.endAt)) {
       errors.push(`events "${item.id ?? "?"}" endAt must be a real date-only or datetime value`);
+    }
+    if (
+      item.endAt &&
+      isValidEventTimestamp(item.startAt ?? "") &&
+      isValidEventTimestamp(item.endAt)
+    ) {
+      const startMs = parseEventStartInstant(item.startAt).getTime();
+      const endMs = parseEventEndInstant(item.endAt).getTime();
+      if (endMs < startMs) {
+        errors.push(
+          `events "${item.id ?? "?"}" endAt must not precede startAt (${item.startAt} → ${item.endAt})`,
+        );
+      }
     }
     assertConfirmedUrl(item.source, "events", item.id ?? "?", errors);
     if (item.url) assertConfirmedUrl(item.url, "events", item.id ?? "?", errors);

@@ -1,5 +1,6 @@
 import { highlights } from "../data/highlights";
 import { profile } from "../data/profile";
+import { ExternalLink } from "./ExternalLink";
 
 export function About() {
   return (
@@ -28,11 +29,22 @@ export function About() {
             {profile.summary}
           </p>
           {profile.facts.length > 0 ? (
-            <dl className="mt-5 grid gap-3 sm:grid-cols-2">
+            <dl className="mt-5 grid gap-3">
               {profile.facts.map((fact) => (
-                <div key={fact.label}>
+                <div
+                  key={fact.label}
+                  className="rounded-xl bg-sage-soft/60 px-4 py-3"
+                >
                   <dt className="text-xs text-ink-muted">{fact.label}</dt>
                   <dd className="mt-1 text-sm text-ink">{fact.value}</dd>
+                  <dd className="mt-2">
+                    <ExternalLink
+                      href={fact.source}
+                      className="text-sm font-medium text-sage hover:underline"
+                    >
+                      出典を見る
+                    </ExternalLink>
+                  </dd>
                 </div>
               ))}
             </dl>
