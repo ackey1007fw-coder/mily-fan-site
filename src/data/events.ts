@@ -7,18 +7,49 @@ export type EventKind = "appearance" | "stream" | "event" | "other";
 export type FanEvent = {
   id: string;
   title: string;
-  /** ISO 8601 date (`YYYY-MM-DD`) or datetime. */
+  /**
+   * Date-only: `YYYY-MM-DD`
+   * Datetime: `YYYY-MM-DDTHH:mm:ss+09:00`
+   */
   startAt: string;
   endAt?: string;
   timezone: "Asia/Tokyo";
   kind: EventKind;
   venue?: string;
   url?: string;
-  source?: string;
+  source: string;
   notes?: string;
 };
 
 export const events: FanEvent[] = [];
+
+export const DATE_ONLY_RE = /^\d{4}-\d{2}-\d{2}$/;
+export const DATETIME_RE =
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+
+export function isDateOnly(value: string): boolean {
+  return DATE_ONLY_RE.test(value);
+}
+
+export function isDateTime(value: string): boolean {
+  return DATETIME_RE.test(value);
+}
+
+export function parseEventInstant(value: string): Date {
+  if (isDateOnly(value)) {
+    return new Date(`${value}T23:59:59+09:00`);
+  }
+
+  if (isDateTime(value)) {
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) {
+      throw new Error(`Invalid event datetime: ${value}`);
+    }
+    return parsed;
+  }
+
+  throw new Error(`Invalid event timestamp: ${value}`);
+}
 
 export function eventYear(event: FanEvent): number {
   const year = Number.parseInt(event.startAt.slice(0, 4), 10);
@@ -53,5 +84,5 @@ export function groupEventsByYear(
 
 export function isUpcomingEvent(event: FanEvent, now = new Date()): boolean {
   const end = event.endAt ?? event.startAt;
-  return new Date(`${end}T23:59:59+09:00`).getTime() >= now.getTime();
+  return parseEventInstant(end).getTime() >= now.getTime();
 }

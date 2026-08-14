@@ -20,6 +20,7 @@ export default {
         apricot: {
           DEFAULT: "#e4a06a",
           soft: "#f8e4d2",
+          ink: "#8a4e20",
         },
       },
       fontFamily: {

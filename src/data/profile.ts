@@ -5,7 +5,7 @@
 export type ProfileFact = {
   label: string;
   value: string;
-  source?: string;
+  source: string;
 };
 
 export type Profile = {

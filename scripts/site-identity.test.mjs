@@ -11,6 +11,29 @@ async function read(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
+function relativeLuminance(hex) {
+  const value = hex.replace("#", "");
+  const channels = [0, 2, 4].map((offset) => {
+    const channel = Number.parseInt(value.slice(offset, offset + 2), 16) / 255;
+    return channel <= 0.03928
+      ? channel / 12.92
+      : ((channel + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * channels[0] + 0.7152 * channels[1] + 0.0722 * channels[2];
+}
+
+function contrastRatio(foreground, background) {
+  const lighter = Math.max(
+    relativeLuminance(foreground),
+    relativeLuminance(background),
+  );
+  const darker = Math.min(
+    relativeLuminance(foreground),
+    relativeLuminance(background),
+  );
+  return (lighter + 0.05) / (darker + 0.05);
+}
+
 describe("milly site identity", () => {
   it("uses milly spelling in package and repo metadata", async () => {
     const pkg = JSON.parse(await read("package.json"));
@@ -27,18 +50,30 @@ describe("milly site identity", () => {
     assert.match(html, /公式・公認・本人運営ではありません/);
   });
 
-  it("starts with empty unverified content collections", async () => {
-    const news = await read("src/data/news.ts");
-    const events = await read("src/data/events.ts");
-    const socials = await read("src/data/socials.ts");
-    const links = await read("src/data/links.ts");
-    const highlights = await read("src/data/highlights.ts");
+  it("keeps standalone / home-screen names unofficial", async () => {
+    const manifest = JSON.parse(await read("public/site.webmanifest"));
+    assert.match(manifest.name, /非公式|ファンサイト/);
+    assert.match(manifest.short_name, /非公式|ファンサイト/);
+    assert.doesNotMatch(manifest.short_name, /^みりぃ$/);
+    assert.match(manifest.description, /非公式/);
+    assert.match(manifest.description, /公式・公認・本人運営ではありません/);
+    assert.equal(manifest.display, "standalone");
+  });
 
-    assert.match(news, /export const news: NewsItem\[] = \[\];/);
-    assert.match(events, /export const events: FanEvent\[] = \[\];/);
-    assert.match(socials, /export const socials: SocialLink\[] = \[\];/);
-    assert.match(links, /export const links: SiteLink\[] = \[\];/);
-    assert.match(highlights, /export const highlights: Highlight\[] = \[\];/);
+  it("stores favicon.svg as valid UTF-8 XML", async () => {
+    const bytes = await readFile(path.join(root, "public/favicon.svg"));
+    const text = new TextDecoder("utf-8", { fatal: true }).decode(bytes);
+    assert.match(text, /encoding="UTF-8"/);
+    assert.match(text, /aria-label="みりぃ ファンサイト（非公式）"/);
+    assert.doesNotMatch(text, /\uFFFD/);
+  });
+
+  it("uses a WCAG AA contrast color for schedule kind labels", async () => {
+    const ratio = contrastRatio("#8a4e20", "#fffcf8");
+    assert.ok(ratio >= 4.5, `contrast ratio ${ratio.toFixed(2)} is below 4.5`);
+    const css = await read("src/components/Schedule.tsx");
+    assert.match(css, /text-apricot-ink/);
+    assert.doesNotMatch(css, /text-apricot[^-]/);
   });
 
   it("passes the site identity guard", () => {

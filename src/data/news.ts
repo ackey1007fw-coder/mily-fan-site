@@ -8,8 +8,8 @@ export type NewsItem = {
   date: string;
   title: string;
   body: string;
+  source: string;
   url?: string;
-  source?: string;
 };
 
 export const news: NewsItem[] = [];

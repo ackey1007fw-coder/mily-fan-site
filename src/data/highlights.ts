@@ -7,7 +7,7 @@ export type Highlight = {
   year: number;
   title: string;
   body?: string;
-  source?: string;
+  source: string;
 };
 
 export const highlights: Highlight[] = [];

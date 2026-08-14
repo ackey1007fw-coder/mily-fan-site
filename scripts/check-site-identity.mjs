@@ -36,7 +36,11 @@ const SCAN_EXTENSIONS = new Set([
   ".css",
 ]);
 const SKIP_DIRS = new Set(["node_modules", "dist", ".git", ".vercel"]);
-const SKIP_FILES = new Set(["check-site-identity.mjs"]);
+const SKIP_FILES = new Set([
+  "check-site-identity.mjs",
+  "content-invariants.mjs",
+  "content-invariants.test.mjs",
+]);
 
 const branch = (process.argv[2] || "").trim();
 

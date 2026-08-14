@@ -46,7 +46,7 @@ export function Schedule() {
                       key={item.id}
                       className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
                     >
-                      <p className="text-xs font-medium uppercase tracking-wide text-apricot">
+                      <p className="text-xs font-medium uppercase tracking-wide text-apricot-ink">
                         {kindLabel[item.kind]}
                       </p>
                       <p className="mt-1 font-semibold text-ink">{item.title}</p>
