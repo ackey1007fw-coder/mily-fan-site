@@ -18,4 +18,12 @@ export type SocialLink = {
   confirmed: true;
 };
 
-export const socials: SocialLink[] = [];
+export const socials: SocialLink[] = [
+  {
+    id: "instagram-mily-chan36",
+    platform: "instagram",
+    label: "Instagram @mily_chan36",
+    url: "https://www.instagram.com/mily_chan36/",
+    confirmed: true,
+  },
+];
