@@ -7,9 +7,10 @@
 
 ## いまの状態（v1）
 
-- 初期ページ: Hero / 最新情報 / スケジュール / プロフィール / リンク / Footer
-- 最新情報・予定・SNS は、確認できるまで空です
-- 本人写真は未掲載です
+- 初期ページ: Hero / 最新情報 / ギャラリー / スケジュール / プロフィール / リンク / Footer
+- 最新情報に、21歳誕生日の投稿要約を掲載しています
+- ギャラリーは写真・動画を足せるデータ構造です。本人写真の掲載は、ファイルが揃ってから行います
+- 予定・SNS は、確認できるまで空です
 - Vercel 本番公開はまだ行いません
 
 ## 開発
@@ -29,6 +30,7 @@ pnpm build
 | `src/data/profile.ts` | 確認できた最小限のプロフィール |
 | `src/data/events.ts` | 年をまたげる予定 |
 | `src/data/news.ts` | 最新情報 |
+| `src/data/media.ts` | 写真・動画 |
 | `src/data/socials.ts` | 本人 SNS |
 | `src/data/links.ts` | その他リンク |
 | `src/data/highlights.ts` | ハイライト |

@@ -48,6 +48,23 @@ describe("latest news ordering", () => {
   });
 });
 
+describe("birthday news item", () => {
+  it("keeps the 21st birthday update sourced to the Instagram post", async () => {
+    const source = await readFile(path.join(root, "src/data/news.ts"), "utf8");
+    const { news } = await import("../src/data/news.ts");
+    const birthday = news.find((item) => item.id === "2026-08-02-21st-birthday");
+
+    assert.ok(birthday);
+    assert.equal(birthday.date, "2026-08-02");
+    assert.match(birthday.title, /21歳/);
+    assert.match(birthday.body, /21歳の誕生日を迎えました/);
+    assert.match(birthday.body, /感謝/);
+    assert.match(birthday.body, /考えていることを脳内に留めず行動に移す。/);
+    assert.equal(birthday.source, "https://www.instagram.com/p/DbiY3PHk1c8/");
+    assert.match(source, /mily-fan-site|みりぃ|21歳/);
+  });
+});
+
 describe("source and url are not mixed", () => {
   it("uses required source for 出典を見る in Latest and Schedule", async () => {
     const latest = await readFile(
