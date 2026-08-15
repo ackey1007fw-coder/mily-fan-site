@@ -66,6 +66,14 @@ export function About() {
                 {item.body ? (
                   <p className="mt-2 text-sm text-ink-muted">{item.body}</p>
                 ) : null}
+                <p className="mt-3">
+                  <ExternalLink
+                    href={item.source}
+                    className="text-sm font-medium text-sage hover:underline"
+                  >
+                    出典を見る
+                  </ExternalLink>
+                </p>
               </li>
             ))}
           </ol>

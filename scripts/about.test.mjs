@@ -18,3 +18,16 @@ describe("profile fact provenance", () => {
     assert.match(source, /出典を見る/);
   });
 });
+
+describe("highlight provenance", () => {
+  it("shows each highlight's year, title, body, and source via ExternalLink", async () => {
+    const source = await readFile(path.join(root, "src/components/About.tsx"), "utf8");
+
+    assert.match(source, /highlights\.map\(\(item\) =>/);
+    assert.match(source, /item\.year/);
+    assert.match(source, /item\.title/);
+    assert.match(source, /item\.body/);
+    assert.match(source, /href=\{item\.source\}/);
+    assert.match(source, /出典を見る/);
+  });
+});
