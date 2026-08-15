@@ -27,25 +27,33 @@ export function Gallery() {
                 className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card shadow-card"
               >
                 {item.kind === "photo" ? (
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet={srcSetFor(item, "webp")}
-                      sizes={SIZES}
-                    />
-                    <img
-                      src={defaultSrc(item)}
-                      srcSet={srcSetFor(item, "jpg")}
-                      sizes={SIZES}
-                      width={item.width}
-                      height={item.height}
-                      loading="lazy"
-                      decoding="async"
-                      alt={item.alt}
-                      className="aspect-[4/3] w-full object-cover"
-                      style={item.focal ? { objectPosition: item.focal } : undefined}
-                    />
-                  </picture>
+                  <a
+                    href={`${item.basePath}-${item.widths[item.widths.length - 1]}.jpg`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block cursor-zoom-in"
+                    aria-label={`${item.alt}（拡大表示）`}
+                  >
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcSet={srcSetFor(item, "webp")}
+                        sizes={SIZES}
+                      />
+                      <img
+                        src={defaultSrc(item)}
+                        srcSet={srcSetFor(item, "jpg")}
+                        sizes={SIZES}
+                        width={item.width}
+                        height={item.height}
+                        loading="lazy"
+                        decoding="async"
+                        alt={item.alt}
+                        className="aspect-[4/3] w-full object-cover"
+                        style={item.focal ? { objectPosition: item.focal } : undefined}
+                      />
+                    </picture>
+                  </a>
                 ) : (
                   <div className="flex aspect-video items-center justify-center bg-sage-soft px-4 text-sm text-sage-deep">
                     動画は準備中です

@@ -36,7 +36,9 @@ describe("confirmed public identity", () => {
   });
 
   it("keeps only confirmed socials and contest/FM links separate", () => {
-    assert.equal(socials.length, 3);
+    assert.equal(socials.length, 4);
+    const showroom = socials.find((item) => item.platform === "showroom");
+    assert.equal(showroom?.url, "https://www.showroom-live.com/r/circle2026_0734");
     const instagram = socials.find((item) => item.platform === "instagram");
     assert.equal(instagram?.label, "@mily_chan36");
     assert.equal(instagram?.url, "https://www.instagram.com/mily_chan36");
