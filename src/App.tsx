@@ -9,6 +9,7 @@ import { Schedule } from "./components/Schedule";
 import { Socials } from "./components/Socials";
 import { StreamSchedule } from "./components/StreamSchedule";
 import { Support } from "./components/Support";
+import { TodayDashboard } from "./components/TodayDashboard";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <TodayDashboard />
         <Support />
         <StreamSchedule />
         <Socials />
