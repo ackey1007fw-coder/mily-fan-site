@@ -139,11 +139,15 @@ describe("stream schedule safety", () => {
   });
 
   it("keeps the UI safe when the auto fetch fails", async () => {
+    const hook = await read("src/lib/useStreamSchedule.ts");
+    assert.match(hook, /\.catch\(/);
+    assert.match(hook, /Asia\/Tokyo/);
+    assert.match(hook, /startsWith\("https:\/\/www\.showroom-live\.com\/"\)/);
+
     const component = await read("src/components/StreamSchedule.tsx");
-    assert.match(component, /\.catch\(/);
+    assert.match(component, /useStreamSchedule/);
     assert.match(component, /return null/);
     assert.match(component, /配信予定は変更になる場合があります/);
-    assert.match(component, /Asia\/Tokyo/);
     assert.match(component, /本日/);
   });
 
@@ -236,6 +240,7 @@ describe("entry url consistency", () => {
       "src/components/Support.tsx",
       "src/components/MobileActionDock.tsx",
       "src/components/StreamSchedule.tsx",
+      "src/data/contest.ts",
     ]) {
       const source = await read(relative);
       const urls = source.match(/https:\/\/2026\.misscircle\.jp\/entry\/\d+/g) ?? [];

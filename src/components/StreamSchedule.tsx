@@ -1,65 +1,18 @@
-import { useEffect, useState } from "react";
 import {
-  streamSchedule,
-  upcomingSlots,
-  type StreamSlot,
-} from "../data/streamSchedule";
+  formatSlotDate,
+  slotStatus,
+  useStreamSchedule,
+} from "../lib/useStreamSchedule";
 import { ExternalLink } from "./ExternalLink";
 
 const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 
-const dateFmt = new Intl.DateTimeFormat("ja-JP", {
-  timeZone: "Asia/Tokyo",
-  month: "numeric",
-  day: "numeric",
-  weekday: "short",
-});
-
-function todayKey(): string {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(
-    new Date(),
-  );
-}
-
-type ScheduleResponse = {
-  slots?: StreamSlot[];
-  source?: { roomUrl?: string | null };
-};
-
 export function StreamSchedule() {
-  const [autoSlots, setAutoSlots] = useState<StreamSlot[]>([]);
-  const [roomUrl, setRoomUrl] = useState<string | null>(null);
-
-  useEffect(() => {
-    let active = true;
-    fetch("/api/mily-schedule")
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data: ScheduleResponse | null) => {
-        if (!active || !data) return;
-        if (Array.isArray(data.slots)) setAutoSlots(data.slots);
-        const url = data.source?.roomUrl;
-        if (
-          typeof url === "string" &&
-          url.startsWith("https://www.showroom-live.com/")
-        ) {
-          setRoomUrl(url);
-        }
-      })
-      .catch(() => {
-        // 自動取得に失敗しても手入力リストだけで表示する（画面は壊さない）
-      });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  const slots = upcomingSlots(streamSchedule, autoSlots);
+  const { slots, roomUrl } = useStreamSchedule();
 
   if (slots.length === 0) {
     return null;
   }
-
-  const today = todayKey();
 
   return (
     <section id="stream" className="scroll-mt-24 px-4 py-10">
@@ -68,10 +21,8 @@ export function StreamSchedule() {
         <p className="mt-2 text-sm text-ink-muted">みりぃさんの次の配信。</p>
         <ul className="mt-6 space-y-3">
           {slots.map((slot, index) => {
-            const start = new Date(`${slot.date}T${slot.time}:00+09:00`);
-            const isToday = slot.date === today;
+            const status = slotStatus(slot);
             const isNext = index === 0;
-            const isLive = start.getTime() <= Date.now();
             return (
               <li
                 key={`${slot.date}-${slot.time}`}
@@ -83,13 +34,13 @@ export function StreamSchedule() {
               >
                 <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <span className="text-lg font-bold text-ink">
-                    {dateFmt.format(start)}
+                    {formatSlotDate(slot)}
                   </span>
-                  {isLive ? (
+                  {status === "live-window" ? (
                     <span className="rounded-full bg-apricot-ink px-2 py-0.5 text-xs font-semibold text-white">
                       配信中の時間帯
                     </span>
-                  ) : isToday ? (
+                  ) : status === "today" ? (
                     <span className="rounded-full bg-sage px-2 py-0.5 text-xs font-semibold text-white">
                       本日
                     </span>
