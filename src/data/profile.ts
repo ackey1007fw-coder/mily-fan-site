@@ -18,6 +18,18 @@ export type Profile = {
 export const profile: Profile = {
   displayName: "みりぃ",
   legalName: "三橋莉子",
-  facts: [],
-  summary: "みりぃさんのプロフィールは、これから少しずつ充実させていきます。",
+  facts: [
+    {
+      label: "MISS CIRCLE CONTEST 2026",
+      value: "ENTRY 734",
+      source: "https://2026.misscircle.jp/entry/734",
+    },
+    {
+      label: "公開活動",
+      value:
+        "FM湘南マジックウェイブのスタッフページに、Mily（ミリー）と担当番組「湘南シーサイドサークル」の記載があります。",
+      source: "https://fm-smw.jp/staff",
+    },
+  ],
+  summary: "確認できた公開情報を、少しずつまとめています。未確認のことは書きません。",
 };

@@ -45,6 +45,9 @@ export type MediaItem = {
   published: boolean;
 };
 
+const BIRTHDAY_POST = "https://www.instagram.com/p/DbiY3PHk1c8/";
+const BIRTHDAY_DATE = "2026-08-02";
+
 export const media: MediaItem[] = [
   {
     id: "mily-b01-03",
@@ -54,9 +57,10 @@ export const media: MediaItem[] = [
     width: 1600,
     height: 1200,
     alt: "花束と緑のバッグを持ち、笑顔でカメラを見るみりぃさん",
-    provenance: "owner-provided",
-    sourceUrl: null,
-    sourceDate: null,
+    caption: "21歳の誕生日投稿より",
+    provenance: "sns-post",
+    sourceUrl: BIRTHDAY_POST,
+    sourceDate: BIRTHDAY_DATE,
     credit: null,
     focal: "49% 28%",
     featured: true,
@@ -70,9 +74,9 @@ export const media: MediaItem[] = [
     width: 1600,
     height: 1200,
     alt: "水色の紙に包まれた花束を抱えるみりぃさん",
-    provenance: "owner-provided",
-    sourceUrl: null,
-    sourceDate: null,
+    provenance: "sns-post",
+    sourceUrl: BIRTHDAY_POST,
+    sourceDate: BIRTHDAY_DATE,
     credit: null,
     focal: "48% 26%",
     published: true,
@@ -85,9 +89,9 @@ export const media: MediaItem[] = [
     width: 1600,
     height: 1200,
     alt: "花束を両手に持って立つみりぃさん",
-    provenance: "owner-provided",
-    sourceUrl: null,
-    sourceDate: null,
+    provenance: "sns-post",
+    sourceUrl: BIRTHDAY_POST,
+    sourceDate: BIRTHDAY_DATE,
     credit: null,
     focal: "52% 26%",
     published: true,
@@ -115,10 +119,10 @@ export const media: MediaItem[] = [
     width: 1600,
     height: 1200,
     alt: "ハートで飾られたプレートに載ったバースデーケーキと、2つの花束",
-    caption: "バースデーケーキと花束",
-    provenance: "owner-provided",
-    sourceUrl: null,
-    sourceDate: null,
+    caption: "誕生日のテーブル",
+    provenance: "sns-post",
+    sourceUrl: BIRTHDAY_POST,
+    sourceDate: BIRTHDAY_DATE,
     credit: null,
     focal: "50% 70%",
     published: true,

@@ -37,16 +37,16 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="#latest"
+              href="#support"
               className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
             >
-              最新情報を見る
+              応援する
             </a>
             <a
-              href="#gallery"
+              href="#latest"
               className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
             >
-              ギャラリーへ
+              最新情報を見る
             </a>
           </div>
         </div>

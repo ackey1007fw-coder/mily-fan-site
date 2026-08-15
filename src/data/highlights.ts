@@ -10,12 +10,4 @@ export type Highlight = {
   source: string;
 };
 
-export const highlights: Highlight[] = [
-  {
-    id: "2026-miss-circle-contest-entry",
-    year: 2026,
-    title: "MISS CIRCLE CONTEST 2026 にエントリー",
-    body: "ENTRY 734 として出場しています。応援よろしくお願いします。",
-    source: "https://2026.misscircle.jp/entry/734",
-  },
-];
+export const highlights: Highlight[] = [];

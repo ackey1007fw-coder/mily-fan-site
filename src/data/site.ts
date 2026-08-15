@@ -8,8 +8,7 @@ export const site = {
   locale: "ja_JP",
   language: "ja",
   /**
-   * Planned public origin after Vercel is connected in a later phase.
-   * This v1 does not create or deploy a Vercel project.
+   * Public origin of the current Vercel deployment.
    */
   siteUrl: "https://mily-fan-site.vercel.app",
   ogImagePath: "/og.png",

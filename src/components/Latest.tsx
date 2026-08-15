@@ -45,6 +45,16 @@ export function Latest() {
                     </ExternalLink>
                   ) : null}
                 </p>
+                {item.ctaLabel ? (
+                  <p className="mt-4">
+                    <ExternalLink
+                      href={item.url ?? item.source}
+                      className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+                    >
+                      {item.ctaLabel}
+                    </ExternalLink>
+                  </p>
+                ) : null}
               </li>
             ))}
           </ul>
