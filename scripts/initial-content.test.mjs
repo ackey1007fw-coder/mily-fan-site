@@ -35,13 +35,15 @@ describe("confirmed public identity", () => {
     assert.doesNotMatch(factText, /生年月日|日本大学|神奈川|身長|所属サークル/);
   });
 
-  it("keeps only owner-confirmed socials and contest/FM links separate", () => {
-    assert.equal(socials.length, 2);
+  it("keeps only confirmed socials and contest/FM links separate", () => {
+    assert.equal(socials.length, 3);
     const instagram = socials.find((item) => item.platform === "instagram");
     assert.equal(instagram?.label, "@mily_chan36");
     assert.equal(instagram?.url, "https://www.instagram.com/mily_chan36");
     const x = socials.find((item) => item.platform === "x");
     assert.equal(x?.url, "https://x.com/Mily_chan36");
+    const tiktok = socials.find((item) => item.platform === "tiktok");
+    assert.equal(tiktok?.url, "https://www.tiktok.com/@mily_chan36");
     assert.ok(socials.every((item) => item.confirmed === true));
 
     assert.ok(

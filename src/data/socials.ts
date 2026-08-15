@@ -33,4 +33,11 @@ export const socials: SocialLink[] = [
     url: "https://www.instagram.com/mily_chan36",
     confirmed: true,
   },
+  {
+    id: "tiktok-mily-chan36",
+    platform: "tiktok",
+    label: "@mily_chan36",
+    url: "https://www.tiktok.com/@mily_chan36",
+    confirmed: true,
+  },
 ];

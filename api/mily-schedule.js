@@ -5,8 +5,9 @@
 //   1. https://2026.misscircle.jp/entry/734 を取得し、本人ページであることを
 //      検証（"734" と みりぃ / 三橋 / Mily の表記を確認）
 //   2. ページ内（動的ページの埋め込みJSON含む）から SHOWROOM リンクを抽出
-//   3. room_url_key → SHOWROOM room/status API で数値 room_id を解決し、
-//      ルーム名の人物整合性を検証
+//      （/r/<key> 形式と room/profile?room_id=<数値> 形式の両対応）
+//   3. SHOWROOM API（status / profile）で room を照会し、ルーム名の
+//      人物整合性を検証してから採用（複数一致は曖昧として不採用）
 //   4. https://marquez.age.co.jp/schedule/<room_id>.json を取得・正規化
 //
 // room ID をコードに直書きしない。環境変数は「自動解決が失敗したときの
@@ -20,6 +21,8 @@
 const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 const SHOWROOM_STATUS_API =
   "https://www.showroom-live.com/api/room/status?room_url_key=";
+const SHOWROOM_PROFILE_API =
+  "https://www.showroom-live.com/api/room/profile?room_id=";
 const AGE_SCHEDULE_BASE = "https://marquez.age.co.jp/schedule/";
 const FETCH_TIMEOUT_MS = 8000;
 const RESOLVE_TTL_MS = 6 * 60 * 60 * 1000;
@@ -63,7 +66,7 @@ export function extractShowroomKeys(html) {
   for (const match of text.matchAll(
     /showroom-live\.com\/r\/([A-Za-z0-9_-]+)/g,
   )) {
-    keys.add(match[1]);
+    if (match[1] !== "room") keys.add(match[1]);
   }
   for (const match of text.matchAll(/room_url_key=([A-Za-z0-9_-]+)/g)) {
     keys.add(match[1]);
@@ -71,16 +74,41 @@ export function extractShowroomKeys(html) {
   return [...keys];
 }
 
-/** ページに掲載されている SNS リンクを抽出する（報告・確認用）。 */
+/**
+ * SHOWROOM の数値 room_id 候補をページから抽出する。
+ * ENTRY ページのリンクは room/profile?room_id=<数値> 形式（実ページで確認済み）。
+ * ページには関連エントラントの room_id も含まれ得るため、ここでは候補を
+ * 集めるだけにして、本人かどうかは SHOWROOM プロフィール API のルーム名で
+ * 検証してから採用する。
+ */
+export function extractShowroomRoomIds(html) {
+  const text = unescapeJsonSlashes(String(html ?? ""));
+  const ids = new Set();
+  for (const match of text.matchAll(/room_id=(\d{1,12})/g)) {
+    ids.add(Number(match[1]));
+  }
+  return [...ids];
+}
+
+/**
+ * ページに掲載されている SNS リンクを抽出する（報告・確認用）。
+ * ENTRY ページには他エントラントの SNS も並ぶため、レスポンスに載せるのは
+ * mily 名義のリンクだけに絞る（他人のアカウントを配信しない）。
+ */
 export function extractSnsLinks(html) {
   const text = unescapeJsonSlashes(String(html ?? ""));
   const found = new Set();
   const re =
-    /https:\/\/(?:x\.com|twitter\.com|(?:www\.)?instagram\.com|(?:www\.)?tiktok\.com|(?:www\.)?showroom-live\.com)\/[A-Za-z0-9_@./-]+/g;
+    /https:\/\/(?:x\.com|twitter\.com|(?:www\.)?instagram\.com|(?:www\.)?tiktok\.com|(?:www\.)?showroom-live\.com)\/[A-Za-z0-9_@.\/?=&%-]+/g;
   for (const match of text.matchAll(re)) {
     found.add(match[0].replace(/[.,)]+$/, ""));
   }
   return [...found];
+}
+
+/** 本人（mily 名義）のリンクだけに絞る。 */
+export function filterMilyLinks(links) {
+  return (Array.isArray(links) ? links : []).filter((url) => /mily/i.test(url));
 }
 
 /** SHOWROOM ルーム名が本人のものかを検証する。 */
@@ -130,10 +158,10 @@ async function resolveFromEntryPage() {
   const html = await page.text();
   if (!looksLikeEntryPage(html)) return null;
 
-  const sns = extractSnsLinks(html);
-  const keys = extractShowroomKeys(html);
+  const sns = filterMilyLinks(extractSnsLinks(html));
 
-  for (const key of keys) {
+  // (a) /r/<key> 形式のリンクがあれば status API で解決
+  for (const key of extractShowroomKeys(html)) {
     const statusRes = await fetchWithTimeout(
       `${SHOWROOM_STATUS_API}${encodeURIComponent(key)}`,
       { headers: { Accept: "application/json" } },
@@ -149,6 +177,44 @@ async function resolveFromEntryPage() {
       roomUrl: `https://www.showroom-live.com/r/${key}`,
       roomId,
       roomName: status.room_name,
+      sns,
+    };
+    resolvedCache = { at: Date.now(), value };
+    return value;
+  }
+
+  // (b) room/profile?room_id=<数値> 形式（ENTRY ページの実形式）。
+  //     ページには関連エントラントの room_id も含まれ得るため、
+  //     プロフィール API のルーム名が本人のものだけを採用し、
+  //     複数一致した場合は曖昧として不採用にする（推測しない）。
+  const matches = [];
+  for (const candidateId of extractShowroomRoomIds(html).slice(0, 10)) {
+    const profileRes = await fetchWithTimeout(
+      `${SHOWROOM_PROFILE_API}${candidateId}`,
+      { headers: { Accept: "application/json" } },
+    );
+    if (!profileRes.ok) continue;
+    const roomProfile = await profileRes.json().catch(() => null);
+    if (!roomNameMatchesMily(roomProfile?.room_name)) continue;
+    matches.push({
+      roomId: candidateId,
+      roomName: roomProfile.room_name,
+      roomUrlKey:
+        typeof roomProfile.room_url_key === "string"
+          ? roomProfile.room_url_key
+          : null,
+    });
+  }
+
+  if (matches.length === 1) {
+    const match = matches[0];
+    const value = {
+      roomUrlKey: match.roomUrlKey,
+      roomUrl: match.roomUrlKey
+        ? `https://www.showroom-live.com/r/${match.roomUrlKey}`
+        : `https://www.showroom-live.com/room/profile?room_id=${match.roomId}`,
+      roomId: match.roomId,
+      roomName: match.roomName,
       sns,
     };
     resolvedCache = { at: Date.now(), value };

@@ -10,7 +10,9 @@
  */
 import {
   extractShowroomKeys,
+  extractShowroomRoomIds,
   extractSnsLinks,
+  filterMilyLinks,
   looksLikeEntryPage,
   resolveAndFetchSchedule,
 } from "../api/mily-schedule.js";
@@ -32,7 +34,14 @@ async function diagnostics() {
     console.log(`entry page: ${html.length} bytes`);
     console.log(`looksLikeEntryPage: ${looksLikeEntryPage(html)}`);
     console.log("showroom keys:", JSON.stringify(extractShowroomKeys(html)));
-    console.log("sns links:", JSON.stringify(extractSnsLinks(html), null, 2));
+    console.log(
+      "showroom room_id candidates:",
+      JSON.stringify(extractShowroomRoomIds(html)),
+    );
+    console.log(
+      "mily sns links:",
+      JSON.stringify(filterMilyLinks(extractSnsLinks(html)), null, 2),
+    );
   } catch (err) {
     console.log(`entry page fetch failed: ${err.message}`);
   }

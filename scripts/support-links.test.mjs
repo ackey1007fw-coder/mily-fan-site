@@ -12,7 +12,9 @@ import {
 } from "../src/data/streamSchedule.ts";
 import {
   extractShowroomKeys,
+  extractShowroomRoomIds,
   extractSnsLinks,
+  filterMilyLinks,
   looksLikeEntryPage,
   normalizeSchedule,
   roomNameMatchesMily,
@@ -55,6 +57,9 @@ describe("SNS registry stays verified-only", () => {
       ),
     );
     assert.ok(socials.some((item) => item.url === "https://x.com/Mily_chan36"));
+    assert.ok(
+      socials.some((item) => item.url === "https://www.tiktok.com/@mily_chan36"),
+    );
     for (const item of socials) {
       assert.equal(item.confirmed, true);
       assert.match(item.url, /^https:\/\//);
@@ -162,6 +167,7 @@ describe("stream schedule safety", () => {
     const html = [
       '<html><body>ENTRY 734 みりぃ（三橋莉子）',
       '<a href="https://www.showroom-live.com/r/mily_room_key">SHOWROOM</a>',
+      '<a href="https://www.showroom-live.com/room/profile?room_id=573963">SHOWROOM</a>',
       '{"sns":[{"url":"https:\\/\\/x.com\\/Mily_chan36"},',
       '{"url":"https:\\/\\/www.tiktok.com\\/@example_account"}]}',
       "</body></html>",
@@ -173,9 +179,16 @@ describe("stream schedule safety", () => {
     assert.deepEqual(extractShowroomKeys(html), ["mily_room_key"]);
     assert.deepEqual(extractShowroomKeys("<html>no links</html>"), []);
 
+    assert.deepEqual(extractShowroomRoomIds(html), [573963]);
+    assert.deepEqual(extractShowroomRoomIds("<html>no ids</html>"), []);
+
     const sns = extractSnsLinks(html);
     assert.ok(sns.includes("https://x.com/Mily_chan36"));
     assert.ok(sns.includes("https://www.tiktok.com/@example_account"));
+
+    const milyOnly = filterMilyLinks(sns);
+    assert.ok(milyOnly.includes("https://x.com/Mily_chan36"));
+    assert.ok(!milyOnly.includes("https://www.tiktok.com/@example_account"));
 
     assert.equal(roomNameMatchesMily("【MISS CIRCLE】みりぃ"), true);
     assert.equal(roomNameMatchesMily("Mily room"), true);
