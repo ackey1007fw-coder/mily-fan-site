@@ -5,10 +5,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
-    @apply bg-paper font-sans text-ink antialiased;
+    @apply overflow-x-hidden bg-paper font-sans text-ink antialiased;
   }
 
   :focus-visible {

@@ -61,6 +61,7 @@ describe("birthday news item", () => {
     assert.match(birthday.body, /感謝/);
     assert.match(birthday.body, /考えていることを脳内に留めず行動に移す。/);
     assert.equal(birthday.source, "https://www.instagram.com/p/DbiY3PHk1c8/");
+    assert.equal(birthday.ctaLabel, "Instagramの投稿を見る");
     assert.match(source, /mily-fan-site|みりぃ|21歳/);
   });
 });
@@ -80,6 +81,8 @@ describe("source and url are not mixed", () => {
     assert.match(latest, /href=\{item\.source\}/);
     assert.match(latest, /出典を見る/);
     assert.match(latest, /関連リンク/);
+    assert.match(latest, /item\.ctaLabel/);
+    assert.match(latest, /Instagramの投稿を見る|ctaLabel/);
     assert.doesNotMatch(latest, /href=\{item\.url\}[\s\S]{0,80}出典を見る/);
 
     assert.match(schedule, /href=\{item\.source\}/);
