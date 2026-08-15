@@ -11,6 +11,13 @@ on:
     # 毎日 09:10 JST（= 00:10 UTC）
     - cron: "10 0 * * *"
   workflow_dispatch:
+  # 監視ロジック自体を変更したときの動作確認（作業ブランチ限定）
+  push:
+    branches: ["claude/**"]
+    paths:
+      - "scripts/watch-public-sources.mjs"
+      - "scripts/watch-lib.mjs"
+      - ".github/workflows/watch-public-sources.yml"
 
 permissions:
   contents: read
