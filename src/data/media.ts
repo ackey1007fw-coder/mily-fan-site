@@ -4,8 +4,9 @@
  * - Derivative files live in /public/media/gallery as
  *   `<basePath>-<width>.jpg` and `.webp`. Originals stay outside the
  *   repository (media/original/, gitignored) and are never overwritten.
- * - Filenames start with `milly-` (two l). Once published, a filename is
- *   immutable — changed content gets a new name.
+ * - Filenames start with `mily-` — Mily is 本人の公開表記 (Instagram
+ *   @mily_chan36), not a typo. Once published, a filename is immutable —
+ *   changed content gets a new name.
  * - sourceUrl / sourceDate / credit hold confirmed values only.
  *   Keep them null rather than guessing; docs/MEDIA.md tracks what is
  *   still unconfirmed.
@@ -24,7 +25,7 @@ export type MediaItem = {
   /** Stable id, never reused. */
   id: string;
   kind: MediaKind;
-  /** Public path prefix, e.g. "/media/gallery/milly-b01-03-bouquet-smile". */
+  /** Public path prefix, e.g. "/media/gallery/mily-b01-03-bouquet-smile". */
   basePath: string;
   /** Derivative widths in px, ascending. */
   widths: readonly number[];
@@ -46,9 +47,9 @@ export type MediaItem = {
 
 export const media: MediaItem[] = [
   {
-    id: "milly-b01-03",
+    id: "mily-b01-03",
     kind: "photo",
-    basePath: "/media/gallery/milly-b01-03-bouquet-smile",
+    basePath: "/media/gallery/mily-b01-03-bouquet-smile",
     widths: [480, 960, 1600],
     width: 1600,
     height: 1200,
@@ -62,9 +63,9 @@ export const media: MediaItem[] = [
     published: true,
   },
   {
-    id: "milly-b01-05",
+    id: "mily-b01-05",
     kind: "photo",
-    basePath: "/media/gallery/milly-b01-05-bouquet-closeup",
+    basePath: "/media/gallery/mily-b01-05-bouquet-closeup",
     widths: [480, 960, 1600],
     width: 1600,
     height: 1200,
@@ -77,9 +78,9 @@ export const media: MediaItem[] = [
     published: true,
   },
   {
-    id: "milly-b01-02",
+    id: "mily-b01-02",
     kind: "photo",
-    basePath: "/media/gallery/milly-b01-02-bouquet-standing",
+    basePath: "/media/gallery/mily-b01-02-bouquet-standing",
     widths: [480, 960, 1600],
     width: 1600,
     height: 1200,
@@ -92,9 +93,9 @@ export const media: MediaItem[] = [
     published: true,
   },
   {
-    id: "milly-b01-06",
+    id: "mily-b01-06",
     kind: "photo",
-    basePath: "/media/gallery/milly-b01-06-necklace-gift",
+    basePath: "/media/gallery/mily-b01-06-necklace-gift",
     widths: [480, 960, 1600],
     width: 1600,
     height: 1200,
@@ -104,6 +105,22 @@ export const media: MediaItem[] = [
     sourceUrl: null,
     sourceDate: null,
     credit: null,
+    published: true,
+  },
+  {
+    id: "mily-b01-01",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b01-01-birthday-cake",
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1200,
+    alt: "ハートで飾られたプレートに載ったバースデーケーキと、2つの花束",
+    caption: "バースデーケーキと花束",
+    provenance: "owner-provided",
+    sourceUrl: null,
+    sourceDate: null,
+    credit: null,
+    focal: "50% 70%",
     published: true,
   },
 ];

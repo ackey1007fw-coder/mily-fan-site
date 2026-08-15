@@ -88,7 +88,7 @@ describe("content verification invariants", () => {
         {
           id: "sample-photo",
           kind: "photo",
-          basePath: "/media/gallery/milly-b01-01-sample",
+          basePath: "/media/gallery/mily-b01-01-sample",
           widths: [480, 960],
           width: 960,
           height: 720,
@@ -105,12 +105,12 @@ describe("content verification invariants", () => {
     assert.deepEqual(errors, []);
   });
 
-  it("rejects incomplete media and filenames off the milly- scheme", () => {
+  it("rejects incomplete media and filenames off the mily- scheme", () => {
     const kindErrors = verifyMedia([
       {
         id: "bad-kind",
         kind: "clip",
-        basePath: "/media/gallery/milly-b01-01-sample",
+        basePath: "/media/gallery/mily-b01-01-sample",
         widths: [480],
         width: 480,
         height: 360,
@@ -139,7 +139,7 @@ describe("content verification invariants", () => {
       },
     ]);
     assert.ok(kindErrors.some((error) => error.includes("invalid kind")));
-    assert.ok(fileErrors.some((error) => error.includes("milly-bNN-NN")));
+    assert.ok(fileErrors.some((error) => error.includes("mily-bNN-NN")));
     assert.ok(fileErrors.some((error) => error.includes("sourceUrl")));
     assert.ok(fileErrors.some((error) => error.includes("another person")));
   });

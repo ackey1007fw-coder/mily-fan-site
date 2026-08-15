@@ -19,7 +19,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SOURCE_DIR = path.join(root, "media/original");
 const OUTPUT_DIR = path.join(root, "public/media/gallery");
 export const DERIVATIVE_WIDTHS = [480, 960, 1600];
-const NAME_RE = /^milly-b\d{2}-\d{2}(-[a-z0-9]+)+\.(jpg|jpeg)$/;
+const NAME_RE = /^mily-b\d{2}-\d{2}(-[a-z0-9]+)+\.(jpg|jpeg)$/;
 
 async function exists(filePath) {
   try {
@@ -41,7 +41,7 @@ async function main() {
 
   const badNames = sources.filter((name) => !NAME_RE.test(name));
   if (badNames.length > 0) {
-    console.error("media:build — source filenames must match milly-bNN-NN-<slug>.jpg:");
+    console.error("media:build — source filenames must match mily-bNN-NN-<slug>.jpg:");
     for (const name of badNames) console.error(`  - ${name}`);
     process.exit(1);
   }

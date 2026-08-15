@@ -80,7 +80,7 @@ export function Hero() {
         ) : (
           <div className="rounded-3xl border border-sage/15 bg-paper-card p-6 shadow-card">
             <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
-              Milly Fan Site
+              Mily Fan Site
             </p>
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">
               写真はこれから、ギャラリーに増えていきます。

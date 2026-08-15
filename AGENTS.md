@@ -1,6 +1,6 @@
 # みりぃ ファンサイト — エージェント向けガイド
 
-このリポジトリ（`ackey1007fw-coder/milly-fan-site`）は、みりぃ（三橋莉子）さんの**ファン制作・非公式サイト**です。
+このリポジトリ（`ackey1007fw-coder/mily-fan-site`）は、みりぃ（三橋莉子）さんの**ファン制作・非公式サイト**です。
 公式・公認・本人運営ではありません。年号付きの専用サイトにもしません。2027年以降も同じ repo で続けます。
 
 他のファンサイトの人物情報・写真・ニュース・イベント・SNS・プロフィールをコピーしないでください。みりぃは別人物・別プロジェクトです。
@@ -9,14 +9,14 @@
 
 ## 作業前チェック
 
-1. `git remote -v` が `milly-fan-site` を指していること。
+1. `git remote -v` が `mily-fan-site` を指していること。
 2. `src/data/profile.ts` の `displayName` が **みりぃ**、`legalName` が **三橋莉子** であること。
-3. サイト名の spelling は必ず **milly**（l を2つ重ねる）。l がひとつ欠けた短縮形は誤記であり、見つけたら修正する。guard が全ファイルを検査します。
+3. 英語表記は必ず **Mily / mily**。これは本人が使用している公開identity（Instagram **@mily_chan36**）であり、一般英単語の綴りではない。spellcheck・lint・AIの推測より本人の公開表記を優先し、「typoかもしれない」という判断で l を重ねた表記へ"修正"しない。l を重ねた表記の方が誤りで、guard が全ファイルを検査して検出する。
 4. 別人物の名前や別サイトの URL が入っていたら、編集せず止まって報告する。
 
 ## リポジトリ運用
 
-- GitHub: `ackey1007fw-coder/milly-fan-site`
+- GitHub: `ackey1007fw-coder/mily-fan-site`
 - 通常運用では `main` へ直接 push しない。
 - `main` から作業ブランチを切り、PR にする。
 - マージ方式の指定がなければ **squash merge**。
@@ -26,7 +26,7 @@
 
 ### マージしてよい条件
 
-1. 対象が `milly-fan-site`、base が `main`、head が作業ブランチ。
+1. 対象が `mily-fan-site`、base が `main`、head が作業ブランチ。
 2. PR が Draft ではなく、競合がなく、マージ可能。
 3. CI（install / typecheck / test / build / identity guard）が成功。
 4. 未解決のレビュー指摘がない。
@@ -42,8 +42,8 @@
 ## セットアップ
 
 ```bash
-git clone https://github.com/ackey1007fw-coder/milly-fan-site.git
-cd milly-fan-site
+git clone https://github.com/ackey1007fw-coder/mily-fan-site.git
+cd mily-fan-site
 pnpm install
 pnpm dev
 ```
@@ -79,7 +79,7 @@ pnpm dev
 - 元素材は `media/original/`（gitignore 済み・コミットしない）。**元ファイルを上書き・リネーム・再エンコードしない。**
 - 公開用派生は `pnpm media:build` で `public/media/gallery/` に生成する（EXIF / GPS / IPTC は自動で除去される）。
 - 生成スクリプトは既存ファイルを**上書きせず停止**する。内容を変えるときは新しいファイル名にする（公開済みファイル名は不変）。
-- ファイル名は `milly-bNN-NN-<slug>` 形式。日付が未確認のうちはファイル名に日付を入れない（捏造しない）。
+- ファイル名は `mily-bNN-NN-<slug>` 形式。日付が未確認のうちはファイル名に日付を入れない（捏造しない）。
 - 掲載は `src/data/media.ts` の `published: true` のみ。出典 URL・投稿日・撮影者が未確認の項目は `null` のまま残す（推測して埋めない）。
 - 本人の顔の AI 生成・置換・加工、生成塗り足し、SNS からの自動取得は禁止。
 

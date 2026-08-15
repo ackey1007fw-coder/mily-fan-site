@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://milly-fan-site.vercel.app/sitemap.xml
+Sitemap: https://mily-fan-site.vercel.app/sitemap.xml

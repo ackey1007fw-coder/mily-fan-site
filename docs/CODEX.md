@@ -1,4 +1,4 @@
-# Codex 向けメモ — milly-fan-site
+# Codex 向けメモ — mily-fan-site
 
 このサイトの共同運営者向けメモです。対象はみりぃ（三橋莉子）さんだけです。
 他のファンサイトの人物データ・画像・文章を持ち込まないでください。
@@ -12,7 +12,7 @@
 
 - お知らせ → `src/data/news.ts`（配列の先頭）
 - 出演・配信・イベント → `src/data/events.ts`（年をまたいで同じ配列）
-- 写真・動画 → `src/data/media.ts`（ローカル写真は `public/media/gallery/milly-…`（命名は docs/MEDIA.md））
+- 写真・動画 → `src/data/media.ts`（ローカル写真は `public/media/gallery/mily-…`（命名は docs/MEDIA.md））
 - 本人 SNS → `src/data/socials.ts`（確認できた URL のみ）
 - プロフィール事実 → `src/data/profile.ts`（出典確認後）
 

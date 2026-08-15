@@ -224,7 +224,7 @@ export function verifyHighlights(items) {
 }
 
 const MEDIA_PROVENANCES = new Set(["owner-provided", "sns-post", "third-party"]);
-const MEDIA_BASENAME_RE = /^milly-b\d{2}-\d{2}(-[a-z0-9]+)+$/;
+const MEDIA_BASENAME_RE = /^mily-b\d{2}-\d{2}(-[a-z0-9]+)+$/;
 
 export function verifyMedia(items) {
   const errors = [];
@@ -243,7 +243,7 @@ export function verifyMedia(items) {
       const basename = item.basePath.split("/").pop() ?? "";
       if (!MEDIA_BASENAME_RE.test(basename)) {
         errors.push(
-          `media "${id}" filename must match milly-bNN-NN-<slug> (got "${basename}")`,
+          `media "${id}" filename must match mily-bNN-NN-<slug> (got "${basename}")`,
         );
       }
     }

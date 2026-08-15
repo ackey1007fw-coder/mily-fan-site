@@ -6,10 +6,10 @@ export const EXPECTED = {
   branch: "main",
   displayName: "みりぃ",
   legalName: "三橋莉子",
-  packageName: "milly-fan-site",
+  packageName: "mily-fan-site",
   titleIncludes: "みりぃ",
-  repoName: "milly-fan-site",
-  siteUrl: "https://milly-fan-site.vercel.app",
+  repoName: "mily-fan-site",
+  siteUrl: "https://mily-fan-site.vercel.app",
 };
 
 export const FORBIDDEN = [
@@ -74,10 +74,11 @@ function readRelative(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
-// "milly" is the only correct spelling. The single-l form is a recurring
-// mistake, so scan every text file for it as a standalone token
-// (word boundaries keep e.g. "family" from matching).
-const MISSPELLING_RE = /\bmily\b/i;
+// "Mily" / "mily" is 本人の公開表記 (Instagram @mily_chan36) — a proper
+// noun, not a typo, so spellcheckers and AI judgement must not "fix" it.
+// The doubled-l variant is the actual misspelling; scan every text file
+// for it as a standalone token.
+const MISSPELLING_RE = /\bmilly\b/i;
 
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   if (branch && branch !== EXPECTED.branch) {
@@ -98,7 +99,7 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   }
 
   if (typeof pkg.name === "string" && MISSPELLING_RE.test(pkg.name)) {
-    errors.push(`package.json name drops an "l" from "milly".`);
+    errors.push(`package.json name doubles the "l"; the public identity is "mily".`);
   }
 
   const siteSrc = await readRelative("src/data/site.ts");
@@ -113,8 +114,11 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   }
 
   const agents = await readRelative("AGENTS.md");
-  if (!agents.includes("milly-fan-site")) {
-    errors.push("AGENTS.md must reference milly-fan-site (two l).");
+  if (!agents.includes("mily-fan-site")) {
+    errors.push("AGENTS.md must reference mily-fan-site.");
+  }
+  if (!agents.includes("@mily_chan36")) {
+    errors.push("AGENTS.md must keep the @mily_chan36 identity reference.");
   }
 
   if (!profile.includes(`displayName: "${EXPECTED.displayName}"`)) {
@@ -151,13 +155,13 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     }
     if (MISSPELLING_RE.test(content)) {
       errors.push(
-        `Misspelled site name (single "l") found in ${relative}; this repository uses "milly".`,
+        `Misspelled identity (doubled "l") found in ${relative}; the public identity is "mily" (@mily_chan36).`,
       );
     }
   }
 
   if (errors.length > 0) {
-    console.error("\nSite identity mismatch: this repository is the milly fan site only.");
+    console.error("\nSite identity mismatch: this repository is the mily fan site only.");
     for (const error of errors) console.error(`  - ${error}`);
     return 1;
   }

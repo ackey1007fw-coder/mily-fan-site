@@ -12,7 +12,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const validItem = {
   id: "fixture",
   kind: "photo",
-  basePath: "/media/gallery/milly-b01-03-bouquet-smile",
+  basePath: "/media/gallery/mily-b01-03-bouquet-smile",
   widths: [480, 960, 1600],
   width: 1600,
   height: 1200,
@@ -29,13 +29,13 @@ describe("media collection", () => {
     assert.deepEqual(verifyMedia(media), []);
   });
 
-  it("enforces the milly- filename scheme", () => {
+  it("enforces the mily- filename scheme", () => {
     assert.deepEqual(verifyMedia([validItem]), []);
 
     const errors = verifyMedia([
       { ...validItem, id: "bad", basePath: "/media/gallery/birthday" },
     ]);
-    assert.ok(errors.some((error) => error.includes("milly-bNN-NN")));
+    assert.ok(errors.some((error) => error.includes("mily-bNN-NN")));
   });
 
   it("requires a sourceUrl when provenance claims an SNS post", () => {
