@@ -108,12 +108,13 @@ export function todayKey(): string {
 
 /**
  * 配信枠の状態。実際のライブ状態は取得していないため、
- * 「配信中の時間帯」（開始〜約3時間）という控えめな表現に留める。
+ * 予定由来の状態なので「開始時刻を過ぎています」という表現に留める。
+ * 実ライブ（ただいまSHOWROOMで配信中）は /api/mily-live のみが根拠。
  */
-export type SlotStatus = "live-window" | "today" | "upcoming";
+export type SlotStatus = "past-start" | "today" | "upcoming";
 
 export function slotStatus(slot: StreamSlot, now: number = Date.now()): SlotStatus {
-  if (slotStart(slot).getTime() <= now) return "live-window";
+  if (slotStart(slot).getTime() <= now) return "past-start";
   if (slot.date === todayKey()) return "today";
   return "upcoming";
 }

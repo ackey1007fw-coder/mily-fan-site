@@ -36,24 +36,32 @@ export function resetRoomCache() {
   roomCache = null;
 }
 
-export async function fetchWithTimeout(url, init = {}) {
+/**
+ * body の読み取り完了まで timeout を効かせる。
+ * headers 受信時点で timer を解除すると、本文が届かないまま待ち続けられる。
+ * @param {"json"|"text"} as
+ */
+export async function fetchWithTimeout(url, { as = "text", ...init } = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    return await fetch(url, {
+    const res = await fetch(url, {
       ...init,
       signal: controller.signal,
       headers: { "User-Agent": USER_AGENT, ...init.headers },
     });
+    if (!res.ok) return null;
+    // 読了までが timeout の対象
+    return as === "json" ? await res.json() : await res.text();
+  } catch {
+    return null;
   } finally {
     clearTimeout(timer);
   }
 }
 
 async function fetchJson(url) {
-  const res = await fetchWithTimeout(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) return null;
-  return res.json().catch(() => null);
+  return fetchWithTimeout(url, { as: "json", headers: { Accept: "application/json" } });
 }
 
 /** JSON 埋め込みの \/ エスケープも戻して URL を拾えるようにする。 */
@@ -107,9 +115,37 @@ export function filterMilyLinks(links) {
   return (Array.isArray(links) ? links : []).filter((url) => /mily/i.test(url));
 }
 
-/** SHOWROOM ルーム名が本人のものかを検証する。 */
-export function roomNameMatchesMily(roomName) {
-  return typeof roomName === "string" && /みりぃ|三橋|mily/i.test(roomName);
+/** ENTRY 番号（room URL との整合チェックに使う）。 */
+export const ENTRY_NUMBER = "734";
+
+/** 本名・愛称の明確な一致。 */
+const STRONG_NAME_RE = /三橋\s*莉子|みりぃ|みりい/;
+/**
+ * 独立した Mily 表記だけを拾う。
+ * 前後が英数字なら不一致にするので "family" の mily には反応しない。
+ */
+const MILY_TOKEN_RE = /(?<![\p{L}\p{N}])mily(?![\p{L}\p{N}])/iu;
+
+/** 本人判定に使えるシグナルを取り出す。 */
+export function identitySignals({ roomName, roomUrlKey } = {}) {
+  const name = typeof roomName === "string" ? roomName.normalize("NFKC") : "";
+  const key = typeof roomUrlKey === "string" ? roomUrlKey : "";
+  return {
+    strongName: STRONG_NAME_RE.test(name),
+    milyToken: MILY_TOKEN_RE.test(name),
+    entryKey: key.includes(ENTRY_NUMBER),
+  };
+}
+
+/**
+ * SHOWROOM ルームが本人のものかを検証する。
+ * 単純部分一致に頼らず、本名・愛称の明確一致、または
+ * 独立した Mily 表記 + room URL の ENTRY 整合、の組み合わせで判定する。
+ */
+export function roomNameMatchesMily(roomName, roomUrlKey = null) {
+  const signals = identitySignals({ roomName, roomUrlKey });
+  if (signals.strongName) return true;
+  return signals.milyToken && signals.entryKey;
 }
 
 /** 候補群から本人 room を一意に決める。曖昧なら null。 */
@@ -119,7 +155,7 @@ export function pickUniqueRoom(candidates) {
     if (!candidate) continue;
     const roomId = Number(candidate.roomId);
     if (!Number.isInteger(roomId) || roomId <= 0) continue;
-    if (!roomNameMatchesMily(candidate.roomName)) continue;
+    if (!roomNameMatchesMily(candidate.roomName, candidate.roomUrlKey)) continue;
     // 同じ room が key 経由と id 経由の両方で来ても1件として数える
     if (!byRoomId.has(roomId)) byRoomId.set(roomId, { ...candidate, roomId });
   }
@@ -185,9 +221,11 @@ export async function resolveMilyRoom(env = process.env) {
   const candidates = [];
 
   try {
-    const page = await fetchWithTimeout(ENTRY_URL, { headers: { Accept: "text/html" } });
-    if (page.ok) {
-      const html = await page.text();
+    const html = await fetchWithTimeout(ENTRY_URL, {
+      as: "text",
+      headers: { Accept: "text/html" },
+    });
+    if (typeof html === "string") {
       if (looksLikeEntryPage(html)) {
         sns = filterMilyLinks(extractSnsLinks(html));
         // 最初の一致で打ち切らず、全候補を本人確認する

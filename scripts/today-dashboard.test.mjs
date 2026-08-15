@@ -44,7 +44,7 @@ describe("today dashboard", () => {
     assert.match(source, /next && showNextStream \?/);
     assert.match(source, /contest\.currentPhase \?/);
     assert.match(source, /showroomUrl \?/);
-    assert.match(source, /配信中の時間帯/);
+    assert.match(source, /開始時刻を過ぎています/);
     // 予定由来の表示に「LIVE」と書かない（実ライブは ActivityBanner の担当）
     assert.doesNotMatch(source, />\s*LIVE/);
     assert.doesNotMatch(source, /ただいま[^"]*配信中/);

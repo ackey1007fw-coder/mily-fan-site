@@ -71,9 +71,9 @@ export function TodayDashboard() {
             <span className="text-base font-bold text-ink">
               {formatSlotDate(next)} {next.time}〜
             </span>
-            {status === "live-window" ? (
+            {status === "past-start" ? (
               <span className="rounded-full bg-apricot-ink px-2 py-0.5 text-xs font-semibold text-white">
-                配信中の時間帯
+                開始時刻を過ぎています
               </span>
             ) : status === "today" ? (
               <span className="rounded-full bg-sage px-2 py-0.5 text-xs font-semibold text-white">

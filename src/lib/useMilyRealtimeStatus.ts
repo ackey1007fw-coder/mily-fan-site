@@ -18,21 +18,37 @@ export { toLiveView };
 const LIVE_POLL_MS = 60_000;
 const RADIO_POLL_MS = 180_000;
 
-async function fetchJson<T>(url: string): Promise<T> {
-  const res = await fetch(url, { headers: { Accept: "application/json" } });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return (await res.json()) as T;
+const CLIENT_TIMEOUT_MS = 8000;
+
+/** 8秒のクライアント timeout。unmount 時の abort signal とも連動させる。 */
+async function fetchJson<T>(url: string, signal: AbortSignal): Promise<T> {
+  const timeout = new AbortController();
+  const timer = window.setTimeout(() => timeout.abort(), CLIENT_TIMEOUT_MS);
+  const onAbort = () => timeout.abort();
+  signal.addEventListener("abort", onAbort);
+  try {
+    const res = await fetch(url, {
+      headers: { Accept: "application/json" },
+      signal: timeout.signal,
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    // body 読了までを timeout の対象にする
+    return (await res.json()) as T;
+  } finally {
+    window.clearTimeout(timer);
+    signal.removeEventListener("abort", onAbort);
+  }
 }
 
 // 取得失敗時はライブ状態を捨てる（古い「配信中」を残さない）
 const liveStore = createPollStore<LivePayload>({
-  fetcher: () => fetchJson<LivePayload>("/api/mily-live"),
+  fetcher: (signal) => fetchJson<LivePayload>("/api/mily-live", signal),
   intervalMs: LIVE_POLL_MS,
   clearOnError: true,
 });
 
 const radioStore = createPollStore<RadioStatus>({
-  fetcher: () => fetchJson<RadioStatus>("/api/mily-radio-status"),
+  fetcher: (signal) => fetchJson<RadioStatus>("/api/mily-radio-status", signal),
   intervalMs: RADIO_POLL_MS,
 });
 

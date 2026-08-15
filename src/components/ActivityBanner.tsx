@@ -54,7 +54,9 @@ export function ActivityBanner() {
                     aria-hidden="true"
                     className={`h-2.5 w-2.5 shrink-0 rounded-full ${style.mark}`}
                   />
-                  <span className="min-w-0 flex-1 leading-snug">
+                  {/* 320px でも文字がリンクに重ならないよう、
+                      本文は最低幅を持ち、足りなければリンクを次の行へ送る。 */}
+                  <span className="min-w-0 grow basis-48 leading-snug [overflow-wrap:anywhere]">
                     <span className="mr-2 rounded-full bg-white/70 px-2 py-0.5 text-[11px] font-bold">
                       {STATE_LABEL[banner.kind]}
                     </span>
@@ -63,12 +65,12 @@ export function ActivityBanner() {
                       <span className="ml-1 text-sm font-semibold">{banner.detail}</span>
                     ) : null}
                   </span>
-                  <span className="shrink-0 text-xs font-semibold underline">
+                  <span className="ml-auto shrink-0 text-xs font-semibold underline">
                     {banner.linkLabel}
                   </span>
                 </>
               );
-              const className = `flex min-h-11 items-center gap-2.5 rounded-2xl border px-3 py-2 sm:px-4 ${style.box}`;
+              const className = `flex min-h-11 flex-wrap items-center gap-x-2.5 gap-y-1 rounded-2xl border px-3 py-2 sm:flex-nowrap sm:px-4 ${style.box}`;
 
               return isAnchor ? (
                 <a href={banner.href} className={className}>

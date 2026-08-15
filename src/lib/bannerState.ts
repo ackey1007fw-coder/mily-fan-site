@@ -57,7 +57,12 @@ const NONE: BannerState = { kind: "NONE", title: "" };
 export function programState(radio: RadioStatus | null): ProgramState {
   if (!radio) return "UNKNOWN";
   if (radio.inScheduledWindow === true) return "PROGRAM_WINDOW";
-  if (radio.todayScheduled === true) return "PROGRAM_TODAY";
+  // 13:00 を過ぎた放送日に「今日10:00〜」を出さない。
+  // schedulePhase が無い古いレスポンスでも、開始前だけを PROGRAM_TODAY とする。
+  if (radio.schedulePhase === "upcoming") return "PROGRAM_TODAY";
+  if (radio.schedulePhase === undefined && radio.todayScheduled === true) {
+    return "PROGRAM_TODAY";
+  }
   return "IDLE";
 }
 
@@ -99,9 +104,15 @@ export function radioStartMs(
   radio: RadioStatus | null,
   now: number = Date.now(),
 ): number | null {
-  if (!radio?.todayScheduled) return null;
-  const today = tokyoToday(now);
-  const start = new Date(`${today}T${radio.scheduledStart}:00+09:00`).getTime();
+  if (programState(radio) !== "PROGRAM_TODAY" || !radio) return null;
+  // API が返した nextStartAt を優先（JST 計算はサーバ側に一本化）
+  if (radio.nextStartAt) {
+    const parsed = Date.parse(radio.nextStartAt);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+  const start = new Date(
+    `${tokyoToday(now)}T${radio.scheduledStart}:00+09:00`,
+  ).getTime();
   return Number.isNaN(start) ? null : start;
 }
 

@@ -449,6 +449,16 @@ describe("ui contract", () => {
     assert.doesNotMatch(component, /573253|circle2026_0734/);
   });
 
+  it("keeps the banner readable down to 320px", async () => {
+    const component = await read("src/components/ActivityBanner.tsx");
+    // 幅が足りなければリンクを次の行へ送る（本文と重ねない）
+    assert.match(component, /flex-wrap/);
+    assert.match(component, /sm:flex-nowrap/);
+    // 本文には最低幅を持たせ、長い語でも枠外へはみ出させない
+    assert.match(component, /basis-48/);
+    assert.match(component, /\[overflow-wrap:anywhere\]/);
+  });
+
   it("opens external links safely with a screen-reader hint", async () => {
     const external = await read("src/components/ExternalLink.tsx");
     assert.match(external, /rel="noopener noreferrer"/);
@@ -471,12 +481,17 @@ describe("ui contract", () => {
     assert.match(dashboard, /showNextStream/);
   });
 
-  it("keeps 配信中の時間帯 separate from the real live wording", async () => {
+  it("keeps the schedule wording from reading like a real live", async () => {
     const dashboard = await read("src/components/TodayDashboard.tsx");
+    const stream = await read("src/components/StreamSchedule.tsx");
     const banner = await read("src/lib/bannerState.ts");
-    assert.match(dashboard, /配信中の時間帯/);
+    // 予定由来の表示は実ライブと読めない表現にする
+    assert.match(dashboard, /開始時刻を過ぎています/);
+    assert.match(stream, /開始時刻を過ぎています/);
+    assert.doesNotMatch(dashboard, /配信中/);
+    assert.doesNotMatch(stream, /配信中/);
+    // 実ライブの文言は ActivityBanner 側だけ
     assert.match(banner, /ただいまSHOWROOMで配信中/);
-    assert.doesNotMatch(banner, /配信中の時間帯/);
   });
 
   it("keeps the existing schedule exports after the refactor", async () => {

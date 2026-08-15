@@ -53,11 +53,12 @@ export function normalizeSchedule(data) {
 }
 
 async function fetchSlots(scheduleUrl) {
-  const r = await fetchWithTimeout(scheduleUrl, {
+  // body 読了まで timeout の対象（fetchWithTimeout が読み切って返す）
+  const data = await fetchWithTimeout(scheduleUrl, {
+    as: "json",
     headers: { Accept: "application/json" },
   });
-  if (!r.ok) return { ok: false, reason: `HTTP ${r.status}`, slots: [] };
-  const data = await r.json().catch(() => null);
+  if (data === null) return { ok: false, reason: "fetch failed", slots: [] };
   return { ok: true, slots: normalizeSchedule(data) };
 }
 

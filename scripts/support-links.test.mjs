@@ -204,7 +204,9 @@ describe("stream schedule safety", () => {
     assert.ok(!milyOnly.includes("https://www.tiktok.com/@example_account"));
 
     assert.equal(roomNameMatchesMily("【MISS CIRCLE】みりぃ"), true);
-    assert.equal(roomNameMatchesMily("Mily room"), true);
+    // 単独の "Mily" は弱いシグナル。ENTRY 734 の裏付けがある時だけ採用する。
+    assert.equal(roomNameMatchesMily("Mily room"), false);
+    assert.equal(roomNameMatchesMily("Mily room", "circle2026_0734"), true);
     assert.equal(roomNameMatchesMily("別人のルーム"), false);
     assert.equal(roomNameMatchesMily(undefined), false);
   });

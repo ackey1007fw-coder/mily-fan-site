@@ -7,7 +7,7 @@
  * - 購読者が0になったら止める
  */
 export type PollStoreOptions<T> = {
-  fetcher: () => Promise<T>;
+  fetcher: (signal: AbortSignal) => Promise<T>;
   intervalMs: number;
   /** 取得失敗時に前回値を捨てるか（ライブ状態は捨てたい） */
   clearOnError?: boolean;
@@ -36,6 +36,7 @@ export function createPollStore<T>(
 ): PollStore<T> {
   let value: T | null = null;
   let inFlight: Promise<void> | null = null;
+  let controller: AbortController | null = null;
   let timerId: number | null = null;
   const listeners = new Set<() => void>();
 
@@ -64,8 +65,9 @@ export function createPollStore<T>(
   const refresh = (): Promise<void> => {
     // 重複 fetch 禁止: 進行中があればそれを共有する
     if (inFlight) return inFlight;
+    controller = new AbortController();
     inFlight = options
-      .fetcher()
+      .fetcher(controller.signal)
       .then((next) => {
         value = next;
         notify();
@@ -78,6 +80,7 @@ export function createPollStore<T>(
       })
       .finally(() => {
         inFlight = null;
+        controller = null;
         scheduleNext();
       });
     return inFlight;
@@ -118,6 +121,9 @@ export function createPollStore<T>(
         listeners.delete(listener);
         if (listeners.size === 0) {
           clearTimer();
+          // 最後の購読者が消えたら進行中の fetch も止める
+          controller?.abort();
+          controller = null;
           unbind?.();
           unbind = null;
         }
