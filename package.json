@@ -1,0 +1,33 @@
+{
+  "name": "mily-fan-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "packageManager": "pnpm@10.33.3",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "typecheck": "tsc -b",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test scripts/*.test.mjs",
+    "guard": "node scripts/check-site-identity.mjs main && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-site-url.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react-swc": "^3.7.2",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^5.4.21"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["@swc/core", "esbuild"]
+  }
+}
