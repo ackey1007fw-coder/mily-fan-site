@@ -6,6 +6,11 @@ name: Probe stream schedule
 
 on:
   workflow_dispatch:
+    inputs:
+      deployment_url:
+        description: "検証するデプロイURL（Vercel Preview 等）。空なら HTTP契約の検証をスキップ"
+        required: false
+        default: ""
   push:
     branches: ["claude/**"]
     paths:
@@ -37,3 +42,22 @@ jobs:
 
       - name: Probe live + radio chain
         run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/probe-live.mjs
+
+      # デプロイ済み Function の HTTP 契約（GET/OPTIONS のみ・405・Allow・短命キャッシュ）。
+      # URL は入力なので shell へ直接展開せず、環境変数経由で渡す。
+      - name: Verify deployed HTTP contract
+        if: inputs.deployment_url != ''
+        env:
+          DEPLOYMENT_URL: ${{ inputs.deployment_url }}
+        run: |
+          set -euo pipefail
+          for path in /api/mily-live /api/mily-radio-status; do
+            echo "--- ${path} ---"
+            curl -sS -D - -o /dev/null -X GET "${DEPLOYMENT_URL}${path}" \
+              | grep -iE '^(HTTP/|cache-control|allow)'
+            echo "(POST should be 405)"
+            curl -sS -D - -o /dev/null -X POST "${DEPLOYMENT_URL}${path}" \
+              | grep -iE '^(HTTP/|allow)'
+            code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "${DEPLOYMENT_URL}${path}")
+            test "${code}" = "405"
+          done
