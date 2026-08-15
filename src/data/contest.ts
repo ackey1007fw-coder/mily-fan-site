@@ -30,14 +30,17 @@ export const contest: Contest = {
   contestName: "MISS CIRCLE CONTEST 2026",
   entryNumber: "ENTRY 734",
   entryUrl: "https://2026.misscircle.jp/entry/734",
-  // ENTRY 734 ページから解決した本人SHOWROOMルーム名
-  // 「🔥2次審査🩵三橋莉子🍅✨ #ミスサークル2026」で「2次審査」を確認（2026-08-15）。
-  // 期間は一次ソースで未確認のため null。
+  // ENTRY 734 ページから解決した本人SHOWROOMルーム名の公開表記をそのまま採用する。
+  //   2026-08-15: 「🔥2次審査🩵三橋莉子🍅✨ #ミスサークル2026」→「2次審査」
+  //   2026-08-16: 「🔥2次最終日🩵三橋莉子🍅✨ #ミスサークル2026」→「2次最終日」
+  //     （Watch public sources が検知。Issue #9）
+  // 「最終日」表記から締切日を推定して end に入れることはしない。
+  // 期間が一次ソースで公表されたら start / end を埋める。
   currentPhase: {
-    name: "2次審査",
+    name: "2次最終日",
     start: null,
     end: null,
     source: "https://www.showroom-live.com/r/circle2026_0734",
   },
-  lastVerifiedAt: "2026-08-15",
+  lastVerifiedAt: "2026-08-16",
 };
