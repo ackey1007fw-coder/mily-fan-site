@@ -13,6 +13,7 @@
 - 最新情報に、21歳誕生日の投稿要約を掲載しています
 - MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線（Hero / Support / モバイルドック）
 - 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。失敗時は手入力 fallback → 非表示）
+- FM「湘南シーサイドサークル」の放送状態を自動取得（`/api/mily-radio-status`。取得失敗でもサイトは壊れない）
 - Follow Mily: X / Instagram / TikTok / SHOWROOM（すべてENTRY 734実ページで確認済み）
 - FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）
 - ギャラリーに写真を掲載しています（最適化・出典管理の手順は `docs/MEDIA.md`）
@@ -39,6 +40,7 @@ pnpm build
 | `src/data/socials.ts` | 本人 SNS |
 | `src/data/links.ts` | その他リンク |
 | `src/data/highlights.ts` | ハイライト |
+| `src/data/radio.ts` | FM湘南マジックウェイブの確認済み番組枠 |
 
 ## 運用
 
