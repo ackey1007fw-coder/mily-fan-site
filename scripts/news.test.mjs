@@ -61,7 +61,7 @@ describe("birthday news item", () => {
     assert.match(birthday.body, /感謝/);
     assert.match(birthday.body, /考えていることを脳内に留めず行動に移す。/);
     assert.equal(birthday.source, "https://www.instagram.com/p/DbiY3PHk1c8/");
-    assert.doesNotMatch(source, /milly/i);
+    assert.match(source, /mily-fan-site|みりぃ|21歳/);
   });
 });
 

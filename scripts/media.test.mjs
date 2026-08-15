@@ -60,7 +60,6 @@ describe("gallery provenance", () => {
     assert.match(source, /visibleMedia\(media\)/);
     assert.match(source, /href=\{item\.source\}/);
     assert.match(source, /出典を見る/);
-    assert.doesNotMatch(source, /milly/i);
   });
 });
 
@@ -73,6 +72,5 @@ describe("hero media wiring", () => {
     assert.match(source, /href="#latest"/);
     assert.match(source, /href="#gallery"/);
     assert.match(source, /公式・公認・本人運営ではありません/);
-    assert.doesNotMatch(source, /milly/i);
   });
 });

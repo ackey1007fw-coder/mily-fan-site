@@ -99,18 +99,27 @@ describe("content verification invariants", () => {
   });
 
   it("rejects incomplete media and photo filenames that are not mily-", () => {
-    const errors = verifyMedia([
+    const kindErrors = verifyMedia([
       {
-        id: "bad-media",
+        id: "bad-kind",
         kind: "clip",
+        src: "/media/mily-sample.webp",
+        alt: "確認済みの写真",
+        source: "https://example.com/photo-source",
+      },
+    ]);
+    const fileErrors = verifyMedia([
+      {
+        id: "bad-filename",
+        kind: "photo",
         src: "/media/birthday.webp",
         alt: "吉井優花子さんの写真",
       },
     ]);
-    assert.ok(errors.some((error) => error.includes("invalid kind")));
-    assert.ok(errors.some((error) => error.includes("mily-")));
-    assert.ok(errors.some((error) => error.includes("confirmed http(s) URL")));
-    assert.ok(errors.some((error) => error.includes("another person")));
+    assert.ok(kindErrors.some((error) => error.includes("invalid kind")));
+    assert.ok(fileErrors.some((error) => error.includes("mily-")));
+    assert.ok(fileErrors.some((error) => error.includes("confirmed http(s) URL")));
+    assert.ok(fileErrors.some((error) => error.includes("another person")));
   });
 
   it("rejects unverified or incomplete news", () => {
