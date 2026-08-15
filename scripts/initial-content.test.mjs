@@ -50,7 +50,7 @@ describe("confirmed public identity", () => {
       links.filter((item) => /instagram/i.test(item.url)).length,
       0,
     );
-    assert.equal(media.length, 0);
+    assert.ok(media.length > 0);
   });
 });
 
