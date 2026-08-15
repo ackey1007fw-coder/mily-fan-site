@@ -1,0 +1,55 @@
+import { useSyncExternalStore } from "react";
+import type { RadioStatus } from "../data/radio";
+import {
+  createPollStore,
+  toLiveView,
+  type LivePayload,
+  type LiveView,
+} from "./realtimeStore";
+
+export type { LivePayload, LiveView };
+export { toLiveView };
+
+/**
+ * リアルタイム状態の取得を1系統に集約するフック。
+ * ActivityBanner と TodayDashboard が別々に poll しないよう、
+ * モジュールスコープの store を共有する。
+ */
+const LIVE_POLL_MS = 60_000;
+const RADIO_POLL_MS = 180_000;
+
+async function fetchJson<T>(url: string): Promise<T> {
+  const res = await fetch(url, { headers: { Accept: "application/json" } });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return (await res.json()) as T;
+}
+
+// 取得失敗時はライブ状態を捨てる（古い「配信中」を残さない）
+const liveStore = createPollStore<LivePayload>({
+  fetcher: () => fetchJson<LivePayload>("/api/mily-live"),
+  intervalMs: LIVE_POLL_MS,
+  clearOnError: true,
+});
+
+const radioStore = createPollStore<RadioStatus>({
+  fetcher: () => fetchJson<RadioStatus>("/api/mily-radio-status"),
+  intervalMs: RADIO_POLL_MS,
+});
+
+export function useMilyRealtimeStatus(): {
+  live: LiveView;
+  radio: RadioStatus | null;
+} {
+  const livePayload = useSyncExternalStore(
+    liveStore.subscribe,
+    liveStore.getSnapshot,
+    () => null,
+  );
+  const radio = useSyncExternalStore(
+    radioStore.subscribe,
+    radioStore.getSnapshot,
+    () => null,
+  );
+
+  return { live: toLiveView(livePayload), radio };
+}

@@ -166,10 +166,14 @@ describe("stream schedule safety", () => {
   it("does not hardcode a guessed room id in the API", async () => {
     const api = await read("api/mily-schedule.js");
     assert.match(api, /MILY_SCHEDULE_URL/);
-    assert.match(api, /MILY_SHOWROOM_ROOM_ID/);
     assert.doesNotMatch(api, /marquez\.age\.co\.jp\/schedule\/\d/);
     assert.doesNotMatch(api, /room_url_key=[A-Za-z0-9]/);
     assert.match(api, /s-maxage=180,stale-while-revalidate=600/);
+
+    // room 解決と env fallback は共有モジュール側（本人確認つき）
+    const shared = await read("server/mily-showroom.js");
+    assert.match(shared, /MILY_SHOWROOM_ROOM_ID/);
+    assert.doesNotMatch(shared, /573253|circle2026_0734/);
   });
 
   it("resolves the room from the entry page, not from guesses", () => {

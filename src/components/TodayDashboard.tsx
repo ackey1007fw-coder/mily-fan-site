@@ -1,5 +1,7 @@
 import { contest } from "../data/contest";
 import { socials } from "../data/socials";
+import { deriveBannerState } from "../lib/bannerState";
+import { useMilyRealtimeStatus } from "../lib/useMilyRealtimeStatus";
 import {
   formatSlotDate,
   slotStatus,
@@ -21,12 +23,23 @@ const snsLabel: Record<string, string> = {
  */
 export function TodayDashboard() {
   const { slots, roomUrl } = useStreamSchedule();
+  const { live, radio } = useMilyRealtimeStatus();
   const next = slots[0];
   const status = next ? slotStatus(next) : null;
 
+  // ActivityBanner が同じ配信をすでに出しているときは、ここでは繰り返さない
+  // （上下で同じ内容・CTA を重複させない）。
+  const banner = deriveBannerState({ live, radio, slots });
+  const bannerShowsThisSlot =
+    banner.kind === "SHOWROOM_LIVE" ||
+    (banner.kind === "SHOWROOM_TODAY" &&
+      banner.slot?.date === next?.date &&
+      banner.slot?.time === next?.time);
+  const showNextStream = Boolean(next) && !bannerShowsThisSlot;
+
   // SHOWROOM導線: APIの解決結果を最優先、なければ確認済みの静的リンク
   const showroomStatic = socials.find((item) => item.platform === "showroom");
-  const showroomUrl = roomUrl ?? showroomStatic?.url ?? null;
+  const showroomUrl = live.roomUrl ?? roomUrl ?? showroomStatic?.url ?? null;
   const snsLinks = SNS_PLATFORMS.map((platform) =>
     socials.find((item) => item.platform === platform),
   ).filter((item) => item !== undefined);
@@ -52,7 +65,7 @@ export function TodayDashboard() {
           ) : null}
         </div>
 
-        {next ? (
+        {next && showNextStream ? (
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-sage/15 pt-3">
             <span className="text-sm text-ink-muted">次回配信</span>
             <span className="text-base font-bold text-ink">

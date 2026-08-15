@@ -10,7 +10,10 @@ on:
     branches: ["claude/**"]
     paths:
       - "api/mily-schedule.js"
+      - "api/mily-live.js"
+      - "server/mily-showroom.js"
       - "scripts/probe-schedule.mjs"
+      - "scripts/probe-live.mjs"
       - ".github/workflows/probe-schedule.yml"
 
 permissions:
@@ -31,3 +34,6 @@ jobs:
 
       - name: Run probe
         run: node scripts/probe-schedule.mjs
+
+      - name: Probe live + radio chain
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/probe-live.mjs
