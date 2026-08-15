@@ -57,7 +57,7 @@ export function Hero() {
             <img
               src={photo.src}
               alt={photo.alt}
-              className="aspect-[4/5] w-full object-cover object-top"
+              className="aspect-[4/5] w-full object-cover object-center"
             />
             {photo.caption ? (
               <figcaption className="px-4 py-3 text-xs leading-relaxed text-ink-muted">

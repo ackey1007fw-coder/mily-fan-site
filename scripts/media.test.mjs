@@ -47,6 +47,24 @@ describe("media collection", () => {
     assert.equal(photo.src.startsWith("/"), true);
     assert.equal(existsSync(path.join(root, "public", photo.src)), true);
   });
+
+  it("registers the birthday photos with one featured hero image", () => {
+    const photos = media.filter((item) => item.kind === "photo");
+    const featured = photos.filter((item) => item.featured);
+
+    assert.ok(photos.length >= 4);
+    assert.equal(featured.length, 1);
+    assert.equal(featured[0].src, "/media/mily-birthday-21-01.jpg");
+    assert.equal(media.filter((item) => item.kind === "video").length, 0);
+
+    for (const item of photos) {
+      assert.equal(item.src.startsWith("/media/mily-"), true);
+      assert.equal(item.source, "https://www.instagram.com/p/DbiY3PHk1c8/");
+      assert.equal(existsSync(path.join(root, "public", item.src)), true);
+      assert.doesNotMatch(item.alt, /幸せそう|嬉しそう|最高の気分/);
+      assert.doesNotMatch(item.caption ?? "", /幸せそう|嬉しそう|最高の気分/);
+    }
+  });
 });
 
 describe("gallery provenance", () => {
