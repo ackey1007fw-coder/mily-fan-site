@@ -70,6 +70,8 @@ pnpm dev
 - `src/data/highlights.ts` … 年をまたげるハイライト
 - `src/data/site.ts` … サイト名・説明・予定 origin
 
+日常更新の手順・テンプレートは `docs/CONTENT-OPS.md`。写真の受け入れフローは `docs/MEDIA.md`。
+
 未確認の項目は空のままにする。空より間違った値の方が悪い。
 
 ## メディア（写真・動画）の扱い

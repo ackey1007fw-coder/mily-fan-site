@@ -1,6 +1,11 @@
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date; do not rely on array order alone.
+ * How to add an item: docs/CONTENT-OPS.md
+ *
+ * - source: required 出典 URL（「出典を見る」）
+ * - url: optional. Only when it differs from source（「関連リンク」）
+ * - ctaLabel: optional. href is url ?? source
  */
 export type NewsItem = {
   id: string;

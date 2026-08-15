@@ -7,6 +7,7 @@
  * - Filenames start with `mily-` — Mily is 本人の公開表記 (Instagram
  *   @mily_chan36), not a typo. Once published, a filename is immutable —
  *   changed content gets a new name.
+ * - Daily add flow: docs/CONTENT-OPS.md and docs/MEDIA.md.
  * - sourceUrl / sourceDate / credit hold confirmed values only.
  *   Keep them null rather than guessing; docs/MEDIA.md tracks what is
  *   still unconfirmed.

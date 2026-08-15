@@ -12,5 +12,7 @@ Thumbs.db
 *.tsbuildinfo
 .vite/
 
-# Source media originals stay out of the repository (see docs/MEDIA.md)
-media/original/
+# Source media originals stay out of the repository (see docs/MEDIA.md).
+# Keep the README so agents can find the drop folder.
+media/original/*
+!media/original/README.md

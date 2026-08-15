@@ -1,6 +1,11 @@
 /**
  * Events are year-agnostic. Add future years in this same list.
  * Only include appearances that have a confirmed public source.
+ * How to add an item: docs/CONTENT-OPS.md
+ * Regular SHOWROOM slots are auto-fetched; do not duplicate them here.
+ *
+ * - source: required 出典 URL（「出典を見る」）
+ * - url: optional. Only when it differs from source（「詳細」）
  */
 export type EventKind = "appearance" | "stream" | "event" | "other";
 
