@@ -20,6 +20,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | ENTRY 734、FMスタッフページの Mily / 番組記載 | 各 `source` | 誕生日・出身・所属などは未確認のまま |
 | `highlights.ts` | **空** | — | 節目の記録用。推測で埋めない |
+| `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
 維持する公開情報（消さない）:
 
@@ -28,6 +29,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 - FM湘南マジックウェイブ（Mily / 湘南シーサイドサークル）
 - 本人写真（ギャラリー派生ファイル）
 - 配信予定の自動取得
+- FMラジオ放送状態の自動取得（`/api/mily-radio-status`）
 - **Mily / mily** 表記（l を重ねない）
 - 非公式であることの明示
 
@@ -136,6 +138,17 @@ Google Drive 原本 → 選定 → media/original/ → pnpm media:build
 - 失敗時の空 fallback: `src/data/streamSchedule.ts`（空なら非表示）
 - 未確認の時刻を fallback に書かない。
 - 検証は Actions の「Probe stream schedule」（`scripts/probe-schedule.mjs`）。
+
+---
+
+## FMラジオ放送状態
+
+原則、出演中かどうかは手で書かない。
+
+- 自動判定: `/api/mily-radio-status`（日曜 10:00–13:00 + FMトップの NOW ON AIR）
+- 確認済み事実: `src/data/radio.ts`
+- NOW ON AIR の番組名一致だけを `onAirConfirmed: true` にする。取得失敗は `null`。
+- 時間帯だけでは「Mily本人出演中」と書かない。
 
 ---
 

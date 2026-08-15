@@ -93,6 +93,14 @@ pnpm dev
 - 手入力 fallback は `src/data/streamSchedule.ts`。**未確認の配信時刻を書かない。** 空なら配信予定セクションは非表示。
 - 解決チェーンの実環境検証は Actions の「Probe stream schedule」を workflow_dispatch で実行（`scripts/probe-schedule.mjs`）。
 
+## FMラジオ放送状態
+
+- `/api/mily-radio-status` が Asia/Tokyo で「湘南シーサイドサークル」の放送日・時間帯を返す。確認済み枠は日曜 10:00–13:00。
+- FMトップ（https://fm-smw.jp/）の NOW ON AIR を実行時取得し、番組名が明確に一致したときだけ `onAirConfirmed: true`。
+- 取得失敗・HTML変更・曖昧な場合は `onAirConfirmed: null`。別番組または NOT ON AIR が読めた場合は `false`。false と unavailable を混ぜない。
+- 時間帯や NOW ON AIR だけでは `milyAppearanceConfirmed` を true にしない。毎週本人が3時間出演しているとは断定しない。
+- 確認済み事実は `src/data/radio.ts`。未確認の出演者・コーナー・例外放送を推測して足さない。
+
 ## 絶対ルール
 
 - 「公式」「公認」「本人運営」と誤認させる表現を使わない。
