@@ -40,4 +40,13 @@ export const socials: SocialLink[] = [
     url: "https://www.tiktok.com/@mily_chan36",
     confirmed: true,
   },
+  {
+    // ENTRY 734 ページのリンクから解決し、ルーム名「三橋莉子」で本人確認済み
+    // （2026-08-15、コンテスト用ルームのため終了後に変わる可能性あり）
+    id: "showroom-circle2026-0734",
+    platform: "showroom",
+    label: "SHOWROOM #ミスサークル2026",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    confirmed: true,
+  },
 ];
