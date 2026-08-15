@@ -60,6 +60,11 @@ describe("SNS registry stays verified-only", () => {
     assert.ok(
       socials.some((item) => item.url === "https://www.tiktok.com/@mily_chan36"),
     );
+    assert.ok(
+      socials.some(
+        (item) => item.url === "https://www.showroom-live.com/r/circle2026_0734",
+      ),
+    );
     for (const item of socials) {
       assert.equal(item.confirmed, true);
       assert.match(item.url, /^https:\/\//);
@@ -209,6 +214,18 @@ describe("follow section", () => {
     assert.match(source, /miss-circle-2026-734/);
     assert.match(source, /エントリーページへ/);
     assert.match(source, /FM湘南マジックウェイブ/);
+  });
+});
+
+describe("structured data", () => {
+  it("declares unofficial WebSite and confirmed Person sameAs in JSON-LD", async () => {
+    const html = await read("index.html");
+    assert.match(html, /application\/ld\+json/);
+    assert.match(html, /"name": "みりぃ ファンサイト（非公式）"/);
+    assert.match(html, /https:\/\/x\.com\/Mily_chan36/);
+    assert.match(html, /https:\/\/www\.tiktok\.com\/@mily_chan36/);
+    assert.match(html, /https:\/\/www\.showroom-live\.com\/r\/circle2026_0734/);
+    assert.match(html, /https:\/\/2026\.misscircle\.jp\/entry\/734/);
   });
 });
 

@@ -11,8 +11,10 @@
 
 - 初期ページ: Hero / 応援する / 最新情報 / ギャラリー / スケジュール / プロフィール / リンク / Footer
 - 最新情報に、21歳誕生日の投稿要約を掲載しています
-- Instagram（@mily_chan36）と、確認できた外部リンクを掲載しています
-- MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線があります
+- MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線（Hero / Support / モバイルドック）
+- 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。失敗時は手入力 fallback → 非表示）
+- Follow Mily: X / Instagram / TikTok / SHOWROOM（すべてENTRY 734実ページで確認済み）
+- FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）
 - ギャラリーに写真を掲載しています（最適化・出典管理の手順は `docs/MEDIA.md`）
 - 予定は、確認できるまでセクションを非表示にします
 

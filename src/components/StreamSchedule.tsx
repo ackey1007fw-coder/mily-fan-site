@@ -71,6 +71,7 @@ export function StreamSchedule() {
             const start = new Date(`${slot.date}T${slot.time}:00+09:00`);
             const isToday = slot.date === today;
             const isNext = index === 0;
+            const isLive = start.getTime() <= Date.now();
             return (
               <li
                 key={`${slot.date}-${slot.time}`}
@@ -84,7 +85,11 @@ export function StreamSchedule() {
                   <span className="text-lg font-bold text-ink">
                     {dateFmt.format(start)}
                   </span>
-                  {isToday ? (
+                  {isLive ? (
+                    <span className="rounded-full bg-apricot-ink px-2 py-0.5 text-xs font-semibold text-white">
+                      配信中の時間帯
+                    </span>
+                  ) : isToday ? (
                     <span className="rounded-full bg-sage px-2 py-0.5 text-xs font-semibold text-white">
                       本日
                     </span>

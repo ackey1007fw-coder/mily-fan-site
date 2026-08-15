@@ -83,6 +83,14 @@ pnpm dev
 - 掲載は `src/data/media.ts` の `published: true` のみ。出典 URL・投稿日・撮影者が未確認の項目は `null` のまま残す（推測して埋めない）。
 - 本人の顔の AI 生成・置換・加工、生成塗り足し、SNS からの自動取得は禁止。
 
+## 配信予定の自動取得
+
+- `/api/mily-schedule`（Vercel Function）が毎回 ENTRY 734 ページ起点で SHOWROOM room を自動解決し、AGE schedule JSON から配信予定を返す。**room ID をコードに直書きしない・推測しない。**
+- 候補 room は SHOWROOM プロフィール API のルーム名（みりぃ / 三橋 / Mily）で本人検証してから採用。複数一致は曖昧として不採用。
+- 環境変数 `MILY_SHOWROOM_ROOM_ID` / `MILY_SCHEDULE_URL` は自動解決失敗時の任意フォールバック（必須の手入力値ではない）。
+- 手入力 fallback は `src/data/streamSchedule.ts`。**未確認の配信時刻を書かない。** 空なら配信予定セクションは非表示。
+- 解決チェーンの実環境検証は Actions の「Probe stream schedule」を workflow_dispatch で実行（`scripts/probe-schedule.mjs`）。
+
 ## 絶対ルール
 
 - 「公式」「公認」「本人運営」と誤認させる表現を使わない。
