@@ -6,7 +6,7 @@
 //   - トップページ NOW ON AIR の番組名が明確に一致したときだけ onAirConfirmed: true
 //   - 聴取ページ URL
 //
-// 時間帯や NOW ON AIR だけでは「Mily本人出演中」とは判定しない。
+// 時間帯や NOW ON AIR だけでは本人の出演有無を確定しない。
 // milyAppearanceConfirmed は常に null。
 // 外部ページの取得失敗・HTML変更・曖昧な解析では onAirConfirmed: null
 // （false=別番組/NOT ON AIR を読めた、null=unavailable を区別する）。

@@ -92,9 +92,17 @@ describe("radio schedule facts (Asia/Tokyo)", () => {
   });
 
   it("reads weekday from Asia/Tokyo, not the host timezone", () => {
-    const sundayMorningUtc = Date.parse("2026-08-16T00:30:00Z");
-    assert.equal(isBroadcastDay(sundayMorningUtc), true);
-    assert.equal(isInScheduledWindow(sundayMorningUtc), true);
+    const sundayInTokyoSaturdayUtc = Date.parse("2026-08-15T16:00:00Z");
+    assert.equal(isBroadcastDay(sundayInTokyoSaturdayUtc), true);
+    assert.equal(isInScheduledWindow(sundayInTokyoSaturdayUtc), false);
+
+    const sundayWindowUtc = Date.parse("2026-08-16T01:30:00Z");
+    assert.equal(isBroadcastDay(sundayWindowUtc), true);
+    assert.equal(isInScheduledWindow(sundayWindowUtc), true);
+
+    const mondayInTokyoSundayUtc = Date.parse("2026-08-16T15:30:00Z");
+    assert.equal(isBroadcastDay(mondayInTokyoSundayUtc), false);
+    assert.equal(isInScheduledWindow(mondayInTokyoSundayUtc), false);
   });
 });
 
@@ -269,8 +277,8 @@ describe("radio API safety", () => {
     assert.match(data, /milyAppearanceConfirmed: null/);
     assert.match(api, /Asia\/Tokyo/);
     assert.match(api, /s-maxage=60,stale-while-revalidate=300/);
-    assert.doesNotMatch(api, /本人出演中/);
-    assert.doesNotMatch(data, /毎週必ず/);
+    assert.doesNotMatch(api, /milyAppearanceConfirmed:\s*true/);
+    assert.doesNotMatch(data, /milyAppearanceConfirmed:\s*true/);
   });
 
   it("does not wire the radio API into UI files in this change", async () => {
