@@ -129,8 +129,14 @@ describe("content verification invariants", () => {
     assert.equal(claimsThisSiteIsOfficial("主催者公式サイトはこちら"), false);
     assert.equal(claimsThisSiteIsOfficial("本人公式サイトを参照"), false);
     assert.equal(claimsThisSiteIsOfficial("イベント公式サイト"), false);
+    assert.equal(claimsThisSiteIsOfficial("イベント公式サイトはこちら"), false);
+    assert.equal(claimsThisSiteIsOfficial("主催者公式サイトで確認した"), false);
     assert.equal(claimsThisSiteIsOfficial("公式サイトで確認した"), false);
     assert.equal(claimsThisSiteIsOfficial("公式サイトでの発表を確認した"), false);
+    assert.equal(claimsThisSiteIsOfficial("当サイトは本人公式サイトです"), true);
+    assert.equal(claimsThisSiteIsOfficial("このサイトはイベント公式サイトです"), true);
+    assert.equal(claimsThisSiteIsOfficial("本サイトは本人公式サイトです"), true);
+    assert.equal(claimsThisSiteIsOfficial("このファンサイトはイベント公式サイトです"), true);
   });
 
   it("rejects self-referential official-site claims without stripping 公式サイト", () => {
@@ -148,6 +154,10 @@ describe("content verification invariants", () => {
       "当サイトは公式サイトです",
       "このファンサイトは公式サイトです",
       "当ファンサイトは公認サイトです",
+      "当サイトは本人公式サイトです",
+      "このサイトはイベント公式サイトです",
+      "本サイトは本人公式サイトです",
+      "このファンサイトはイベント公式サイトです",
     ]) {
       assert.ok(
         asNews(title).some((error) => error.includes("this site is official")),
@@ -159,6 +169,8 @@ describe("content verification invariants", () => {
       "主催者公式サイトはこちら",
       "本人公式サイトを参照",
       "イベント公式サイトの案内",
+      "イベント公式サイトはこちら",
+      "主催者公式サイトで確認した",
     ]) {
       assert.equal(
         asNews(title).filter((error) => error.includes("this site is official"))

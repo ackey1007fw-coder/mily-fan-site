@@ -83,11 +83,16 @@ function stripAllowedExternalOfficialReferences(text) {
     .replaceAll("公式アカウント", "");
 }
 
-const THIS_SITE_OFFICIAL_CLAIM =
-  /(?:この|本|当)(?:非公式)?(?:ファン)?(?:サイト|ページ)(?:は|が|こそ)(?:公式|公認|本人運営)/;
+const THIS_SITE_SUBJECT =
+  /(?:この|本|当)(?:非公式)?(?:ファン)?(?:サイト|ページ)/;
+const THIS_SITE_OFFICIAL_CLAIM = new RegExp(
+  `${THIS_SITE_SUBJECT.source}(?:は|が|こそ)(?:本人公式サイト|イベント公式サイト|主催者公式サイト|公式|公認|本人運営)`,
+);
 
 export function claimsThisSiteIsOfficial(text) {
   if (!text) return false;
+  if (THIS_SITE_OFFICIAL_CLAIM.test(text)) return true;
+
   const remainder = stripAllowedExternalOfficialReferences(text);
   return (
     THIS_SITE_OFFICIAL_CLAIM.test(remainder) ||
