@@ -21,16 +21,28 @@ function todayKey(): string {
   );
 }
 
+type ScheduleResponse = {
+  slots?: StreamSlot[];
+  source?: { roomUrl?: string | null };
+};
+
 export function StreamSchedule() {
   const [autoSlots, setAutoSlots] = useState<StreamSlot[]>([]);
+  const [roomUrl, setRoomUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
     fetch("/api/mily-schedule")
       .then((res) => (res.ok ? res.json() : null))
-      .then((data: { slots?: StreamSlot[] } | null) => {
-        if (active && data && Array.isArray(data.slots)) {
-          setAutoSlots(data.slots);
+      .then((data: ScheduleResponse | null) => {
+        if (!active || !data) return;
+        if (Array.isArray(data.slots)) setAutoSlots(data.slots);
+        const url = data.source?.roomUrl;
+        if (
+          typeof url === "string" &&
+          url.startsWith("https://www.showroom-live.com/")
+        ) {
+          setRoomUrl(url);
         }
       })
       .catch(() => {
@@ -88,7 +100,15 @@ export function StreamSchedule() {
             );
           })}
         </ul>
-        <p className="mt-4">
+        <p className="mt-4 flex flex-wrap gap-3">
+          {roomUrl ? (
+            <ExternalLink
+              href={roomUrl}
+              className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+            >
+              SHOWROOMで見る
+            </ExternalLink>
+          ) : null}
           <ExternalLink
             href={ENTRY_URL}
             className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"

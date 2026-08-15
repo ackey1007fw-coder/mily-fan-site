@@ -20,6 +20,13 @@ export type SocialLink = {
 
 export const socials: SocialLink[] = [
   {
+    id: "x-mily-chan36",
+    platform: "x",
+    label: "@Mily_chan36",
+    url: "https://x.com/Mily_chan36",
+    confirmed: true,
+  },
+  {
     id: "instagram-mily-chan36",
     platform: "instagram",
     label: "@mily_chan36",

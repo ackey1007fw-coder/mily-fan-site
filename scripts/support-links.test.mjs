@@ -10,7 +10,13 @@ import {
   upcomingSlots,
   VISIBLE_AFTER_START_MS,
 } from "../src/data/streamSchedule.ts";
-import { normalizeSchedule } from "../api/mily-schedule.js";
+import {
+  extractShowroomKeys,
+  extractSnsLinks,
+  looksLikeEntryPage,
+  normalizeSchedule,
+  roomNameMatchesMily,
+} from "../api/mily-schedule.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
@@ -42,12 +48,13 @@ describe("ENTRY 734 funnel", () => {
 });
 
 describe("SNS registry stays verified-only", () => {
-  it("keeps Instagram and adds no unverified accounts", () => {
+  it("keeps X and Instagram and adds no unverified accounts", () => {
     assert.ok(
       socials.some(
         (item) => item.url === "https://www.instagram.com/mily_chan36",
       ),
     );
+    assert.ok(socials.some((item) => item.url === "https://x.com/Mily_chan36"));
     for (const item of socials) {
       assert.equal(item.confirmed, true);
       assert.match(item.url, /^https:\/\//);
@@ -147,7 +154,33 @@ describe("stream schedule safety", () => {
     assert.match(api, /MILY_SCHEDULE_URL/);
     assert.match(api, /MILY_SHOWROOM_ROOM_ID/);
     assert.doesNotMatch(api, /marquez\.age\.co\.jp\/schedule\/\d/);
+    assert.doesNotMatch(api, /room_url_key=[A-Za-z0-9]/);
     assert.match(api, /s-maxage=180,stale-while-revalidate=600/);
+  });
+
+  it("resolves the room from the entry page, not from guesses", () => {
+    const html = [
+      '<html><body>ENTRY 734 みりぃ（三橋莉子）',
+      '<a href="https://www.showroom-live.com/r/mily_room_key">SHOWROOM</a>',
+      '{"sns":[{"url":"https:\\/\\/x.com\\/Mily_chan36"},',
+      '{"url":"https:\\/\\/www.tiktok.com\\/@example_account"}]}',
+      "</body></html>",
+    ].join("");
+
+    assert.equal(looksLikeEntryPage(html), true);
+    assert.equal(looksLikeEntryPage("<html>まったく別のページ</html>"), false);
+
+    assert.deepEqual(extractShowroomKeys(html), ["mily_room_key"]);
+    assert.deepEqual(extractShowroomKeys("<html>no links</html>"), []);
+
+    const sns = extractSnsLinks(html);
+    assert.ok(sns.includes("https://x.com/Mily_chan36"));
+    assert.ok(sns.includes("https://www.tiktok.com/@example_account"));
+
+    assert.equal(roomNameMatchesMily("【MISS CIRCLE】みりぃ"), true);
+    assert.equal(roomNameMatchesMily("Mily room"), true);
+    assert.equal(roomNameMatchesMily("別人のルーム"), false);
+    assert.equal(roomNameMatchesMily(undefined), false);
   });
 
   it("links the stream section to the entry page", async () => {

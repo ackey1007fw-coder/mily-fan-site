@@ -35,12 +35,14 @@ describe("confirmed public identity", () => {
     assert.doesNotMatch(factText, /生年月日|日本大学|神奈川|身長|所属サークル/);
   });
 
-  it("adds Instagram once in socials and keeps contest/FM links separate", () => {
-    assert.equal(socials.length, 1);
-    assert.equal(socials[0].platform, "instagram");
-    assert.equal(socials[0].label, "@mily_chan36");
-    assert.equal(socials[0].url, "https://www.instagram.com/mily_chan36");
-    assert.equal(socials[0].confirmed, true);
+  it("keeps only owner-confirmed socials and contest/FM links separate", () => {
+    assert.equal(socials.length, 2);
+    const instagram = socials.find((item) => item.platform === "instagram");
+    assert.equal(instagram?.label, "@mily_chan36");
+    assert.equal(instagram?.url, "https://www.instagram.com/mily_chan36");
+    const x = socials.find((item) => item.platform === "x");
+    assert.equal(x?.url, "https://x.com/Mily_chan36");
+    assert.ok(socials.every((item) => item.confirmed === true));
 
     assert.ok(
       links.some((item) => item.url === "https://2026.misscircle.jp/entry/734"),

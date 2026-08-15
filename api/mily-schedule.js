@@ -1,25 +1,91 @@
 // api/mily-schedule.js
 // 配信予定の自動取得（Vercel Serverless Function）。
 //
-// ENTRY 734 ページがどの配信予定データを参照しているか（SHOWROOM room ID /
-// schedule JSON endpoint）は、まだ実ページで確認できていない。
-// 推測で room ID を埋め込まないため、取得元は環境変数でのみ有効化する:
+// この関数は毎回 ENTRY 734 の公開ページを起点に自動解決する:
+//   1. https://2026.misscircle.jp/entry/734 を取得し、本人ページであることを
+//      検証（"734" と みりぃ / 三橋 / Mily の表記を確認）
+//   2. ページ内（動的ページの埋め込みJSON含む）から SHOWROOM リンクを抽出
+//   3. room_url_key → SHOWROOM room/status API で数値 room_id を解決し、
+//      ルーム名の人物整合性を検証
+//   4. https://marquez.age.co.jp/schedule/<room_id>.json を取得・正規化
 //
-//   MILY_SCHEDULE_URL        … 確認済みの schedule JSON の完全URL（最優先）
-//   MILY_SHOWROOM_ROOM_ID    … AGE schedule API の room ID
-//                              (https://marquez.age.co.jp/schedule/<ID>.json)
+// room ID をコードに直書きしない。環境変数は「自動解決が失敗したときの
+// 任意フォールバック」であり、必須の手入力値ではない:
+//   MILY_SCHEDULE_URL     … 確認済み schedule JSON の完全URL（明示上書き）
+//   MILY_SHOWROOM_ROOM_ID … 自動解決不能時のみ使われる room ID
 //
-// どちらも未設定の間は ok:false / slots:[] を返すだけで、サイトは壊れない。
+// どの段階で失敗しても ok:false / slots:[] を返すだけでサイトは壊れない。
 // フロント側は手入力リスト（src/data/streamSchedule.ts）にフォールバックする。
 
-function resolveScheduleUrl() {
-  const direct = process.env.MILY_SCHEDULE_URL;
-  if (direct && /^https:\/\//.test(direct)) return direct;
-  const roomId = process.env.MILY_SHOWROOM_ROOM_ID;
-  if (roomId && /^\d+$/.test(roomId)) {
-    return `https://marquez.age.co.jp/schedule/${roomId}.json`;
+const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
+const SHOWROOM_STATUS_API =
+  "https://www.showroom-live.com/api/room/status?room_url_key=";
+const AGE_SCHEDULE_BASE = "https://marquez.age.co.jp/schedule/";
+const FETCH_TIMEOUT_MS = 8000;
+const RESOLVE_TTL_MS = 6 * 60 * 60 * 1000;
+
+const USER_AGENT =
+  "Mozilla/5.0 (compatible; MilyFanSite/1.0; +https://mily-fan-site.vercel.app)";
+
+// 直近の解決結果（room ID など）をプロセス内で保持し、上流への負荷を抑える。
+let resolvedCache = null;
+
+async function fetchWithTimeout(url, init = {}) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+  try {
+    return await fetch(url, {
+      ...init,
+      signal: controller.signal,
+      headers: { "User-Agent": USER_AGENT, ...init.headers },
+    });
+  } finally {
+    clearTimeout(timer);
   }
-  return null;
+}
+
+/** JSON 埋め込みの \/ エスケープも戻して URL を拾えるようにする。 */
+function unescapeJsonSlashes(html) {
+  return html.replaceAll("\\/", "/");
+}
+
+/** ENTRY 734 のページ本文が本人のものかを軽く検証する。 */
+export function looksLikeEntryPage(html) {
+  if (typeof html !== "string" || html.length === 0) return false;
+  if (!html.includes("734")) return false;
+  return /みりぃ|三橋|mily/i.test(html);
+}
+
+/** SHOWROOM の room_url_key 候補をページから抽出する。 */
+export function extractShowroomKeys(html) {
+  const text = unescapeJsonSlashes(String(html ?? ""));
+  const keys = new Set();
+  for (const match of text.matchAll(
+    /showroom-live\.com\/r\/([A-Za-z0-9_-]+)/g,
+  )) {
+    keys.add(match[1]);
+  }
+  for (const match of text.matchAll(/room_url_key=([A-Za-z0-9_-]+)/g)) {
+    keys.add(match[1]);
+  }
+  return [...keys];
+}
+
+/** ページに掲載されている SNS リンクを抽出する（報告・確認用）。 */
+export function extractSnsLinks(html) {
+  const text = unescapeJsonSlashes(String(html ?? ""));
+  const found = new Set();
+  const re =
+    /https:\/\/(?:x\.com|twitter\.com|(?:www\.)?instagram\.com|(?:www\.)?tiktok\.com|(?:www\.)?showroom-live\.com)\/[A-Za-z0-9_@./-]+/g;
+  for (const match of text.matchAll(re)) {
+    found.add(match[0].replace(/[.,)]+$/, ""));
+  }
+  return [...found];
+}
+
+/** SHOWROOM ルーム名が本人のものかを検証する。 */
+export function roomNameMatchesMily(roomName) {
+  return typeof roomName === "string" && /みりぃ|三橋|mily/i.test(roomName);
 }
 
 export function normalizeSlot(item) {
@@ -51,33 +117,118 @@ export function normalizeSchedule(data) {
     .slice(0, 12);
 }
 
+/** ENTRY 734 ページから room を自動解決する。失敗時は null。 */
+async function resolveFromEntryPage() {
+  if (resolvedCache && Date.now() - resolvedCache.at < RESOLVE_TTL_MS) {
+    return resolvedCache.value;
+  }
+
+  const page = await fetchWithTimeout(ENTRY_URL, {
+    headers: { Accept: "text/html" },
+  });
+  if (!page.ok) return null;
+  const html = await page.text();
+  if (!looksLikeEntryPage(html)) return null;
+
+  const sns = extractSnsLinks(html);
+  const keys = extractShowroomKeys(html);
+
+  for (const key of keys) {
+    const statusRes = await fetchWithTimeout(
+      `${SHOWROOM_STATUS_API}${encodeURIComponent(key)}`,
+      { headers: { Accept: "application/json" } },
+    );
+    if (!statusRes.ok) continue;
+    const status = await statusRes.json().catch(() => null);
+    const roomId = Number(status?.room_id);
+    if (!Number.isInteger(roomId) || roomId <= 0) continue;
+    if (!roomNameMatchesMily(status?.room_name)) continue;
+
+    const value = {
+      roomUrlKey: key,
+      roomUrl: `https://www.showroom-live.com/r/${key}`,
+      roomId,
+      roomName: status.room_name,
+      sns,
+    };
+    resolvedCache = { at: Date.now(), value };
+    return value;
+  }
+
+  // SNS だけでも報告できるよう、room 不明でも sns は返す
+  const value = { roomUrlKey: null, roomUrl: null, roomId: null, roomName: null, sns };
+  resolvedCache = { at: Date.now(), value };
+  return value;
+}
+
+async function fetchSlots(scheduleUrl) {
+  const r = await fetchWithTimeout(scheduleUrl, {
+    headers: { Accept: "application/json" },
+  });
+  if (!r.ok) return { ok: false, reason: `HTTP ${r.status}`, slots: [] };
+  const data = await r.json().catch(() => null);
+  return { ok: true, slots: normalizeSchedule(data) };
+}
+
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "s-maxage=180,stale-while-revalidate=600");
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  const scheduleUrl = resolveScheduleUrl();
-  if (!scheduleUrl) {
-    return res
-      .status(200)
-      .json({ ok: false, slots: [], reason: "schedule source not configured" });
-  }
-
   try {
-    const r = await fetch(scheduleUrl, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (compatible; MilyFanSite/1.0; +https://mily-fan-site.vercel.app)",
-        Accept: "application/json",
+    // 明示上書き（確認済みURLがある場合のみ運用者が設定する）
+    const directUrl = process.env.MILY_SCHEDULE_URL;
+    if (directUrl && /^https:\/\//.test(directUrl)) {
+      const result = await fetchSlots(directUrl);
+      return res.status(200).json({
+        ...result,
+        source: { mode: "explicit-url", scheduleUrl: directUrl },
+      });
+    }
+
+    // 自動解決（ENTRY 734 ページ起点）
+    let resolved = null;
+    try {
+      resolved = await resolveFromEntryPage();
+    } catch {
+      resolved = null;
+    }
+
+    let roomId = resolved?.roomId ?? null;
+    let mode = "entry-page";
+
+    // 自動解決不能時のみ optional fallback を使う
+    if (!roomId) {
+      const fallbackId = process.env.MILY_SHOWROOM_ROOM_ID;
+      if (fallbackId && /^\d+$/.test(fallbackId)) {
+        roomId = Number(fallbackId);
+        mode = "env-fallback";
+      }
+    }
+
+    if (!roomId) {
+      return res.status(200).json({
+        ok: false,
+        slots: [],
+        reason: "room not resolved",
+        source: { mode: "unresolved", sns: resolved?.sns ?? [] },
+      });
+    }
+
+    const scheduleUrl = `${AGE_SCHEDULE_BASE}${roomId}.json`;
+    const result = await fetchSlots(scheduleUrl);
+    return res.status(200).json({
+      ...result,
+      source: {
+        mode,
+        scheduleUrl,
+        roomId,
+        roomUrlKey: resolved?.roomUrlKey ?? null,
+        roomUrl: resolved?.roomUrl ?? null,
+        roomName: resolved?.roomName ?? null,
+        sns: resolved?.sns ?? [],
       },
     });
-    if (!r.ok) {
-      return res
-        .status(200)
-        .json({ ok: false, slots: [], reason: `HTTP ${r.status}` });
-    }
-    const slots = normalizeSchedule(await r.json());
-    return res.status(200).json({ ok: true, slots, source: "schedule-json" });
   } catch (err) {
     return res.status(200).json({ ok: false, slots: [], reason: err.message });
   }
