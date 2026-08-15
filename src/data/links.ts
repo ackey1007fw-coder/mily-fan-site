@@ -9,4 +9,17 @@ export type SiteLink = {
   note?: string;
 };
 
-export const links: SiteLink[] = [];
+export const links: SiteLink[] = [
+  {
+    id: "miss-circle-2026-734",
+    label: "MISS CIRCLE CONTEST 2026 ENTRY 734",
+    url: "https://2026.misscircle.jp/entry/734",
+    note: "コンテストのエントリーページです。投票方法や最新情報はリンク先でご確認ください。",
+  },
+  {
+    id: "fm-smw-staff",
+    label: "FM湘南マジックウェイブ スタッフ",
+    url: "https://fm-smw.jp/staff",
+    note: "Mily（ミリー）と湘南シーサイドサークルの記載があるスタッフページです。",
+  },
+];

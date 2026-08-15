@@ -27,11 +27,13 @@ export function Gallery() {
                 className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card shadow-card"
               >
                 {item.kind === "photo" ? (
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className="aspect-[4/5] w-full object-cover object-top"
-                  />
+                  <div className="bg-sage-soft/50">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="mx-auto max-h-[32rem] w-full object-contain"
+                    />
+                  </div>
                 ) : (
                   <div className="flex aspect-video items-center justify-center bg-sage-soft px-4 text-sm text-sage-deep">
                     動画は準備中です

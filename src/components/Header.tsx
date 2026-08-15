@@ -1,17 +1,13 @@
+import { events } from "../data/events";
 import { profile } from "../data/profile";
-
-const navItems = [
-  { href: "#latest", label: "最新情報" },
-  { href: "#gallery", label: "ギャラリー" },
-  { href: "#schedule", label: "スケジュール" },
-  { href: "#about", label: "プロフィール" },
-  { href: "#links", label: "リンク" },
-] as const;
+import { visibleNavItems } from "../lib/navigation";
 
 export function Header() {
+  const navItems = visibleNavItems(events.length);
+
   return (
     <header className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-3">
+      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2.5">
         <a href="#top" className="min-w-0 font-semibold tracking-wide text-sage-deep">
           {profile.displayName}
           <span className="ml-2 text-xs font-medium text-ink-muted">ファンサイト</span>
@@ -30,13 +26,13 @@ export function Header() {
       </div>
       <nav
         aria-label="モバイルナビ"
-        className="flex gap-2 overflow-x-auto px-4 pb-3 sm:hidden"
+        className="flex flex-wrap gap-2 px-4 pb-2.5 sm:hidden"
       >
         {navItems.map((item) => (
           <a
             key={item.href}
             href={item.href}
-            className="shrink-0 rounded-full bg-sage-soft px-3 py-1.5 text-sm text-sage-deep"
+            className="inline-flex min-h-10 shrink-0 items-center rounded-full bg-sage-soft px-3 py-2 text-sm text-sage-deep"
           >
             {item.label}
           </a>
