@@ -121,6 +121,38 @@ describe("content verification invariants", () => {
     assert.equal(claimsThisSiteIsOfficial("このファンサイトは公式です"), true);
     assert.equal(claimsThisSiteIsOfficial("当ファンサイトは公認です"), true);
     assert.equal(claimsThisSiteIsOfficial("このページは本人運営です"), true);
+    assert.equal(claimsThisSiteIsOfficial("このサイトは公式サイトである"), true);
+    assert.equal(claimsThisSiteIsOfficial("当サイトは公式サイトではあります"), true);
+    assert.equal(claimsThisSiteIsOfficial("公式サイトで確認した"), false);
+    assert.equal(claimsThisSiteIsOfficial("公式サイトでの発表を確認した"), false);
+  });
+
+  it("rejects self-referential official-site claims that used to be stripped", () => {
+    const asNews = (title) =>
+      verifyNews([
+        {
+          ...validNews,
+          id: "self-official-site",
+          title,
+        },
+      ]);
+
+    assert.ok(
+      asNews("このサイトは公式サイトである").some((error) =>
+        error.includes("this site is official"),
+      ),
+    );
+    assert.ok(
+      asNews("当サイトは公式サイトではあります").some((error) =>
+        error.includes("this site is official"),
+      ),
+    );
+    assert.equal(
+      asNews("公式サイトで公演情報を確認した").filter((error) =>
+        error.includes("this site is official"),
+      ).length,
+      0,
+    );
   });
 
   it("rejects event ranges whose end precedes the start", () => {
