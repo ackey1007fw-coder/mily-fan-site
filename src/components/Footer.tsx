@@ -9,14 +9,10 @@ export function Footer() {
           {site.displayTitle}はファン制作の非公式サイトです。
         </p>
         <p className="mt-2">
-          {profile.displayName}（{profile.legalName}）さん本人、関係者、所属先の公式サイトではありません。
-          公認・後援・本人運営と受け取れる表現は使いません。
+          {profile.displayName}（{profile.legalName}）さんの公式・公認・本人運営ではありません。
         </p>
         <p className="mt-2">
-          掲載内容は確認できた公開情報に限っています。間違いを見つけた場合は、確認のうえ修正します。
-        </p>
-        <p className="mt-6 text-xs">
-          写真・画像の自動取得や、実在する本人の顔の生成は行いません。
+          掲載内容に間違いを見つけた場合は、確認のうえ修正します。
         </p>
       </div>
     </footer>

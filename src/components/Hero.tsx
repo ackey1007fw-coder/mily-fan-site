@@ -1,7 +1,10 @@
-import { featuredPhoto } from "../data/media";
+import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
+import { ExternalLink } from "./ExternalLink";
+
+const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 
 export function Hero() {
   const photo = featuredPhoto();
@@ -33,16 +36,15 @@ export function Hero() {
           </h1>
           <p className="mt-2 text-lg text-ink-muted">{profile.legalName}</p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink">
-            確認できた活動情報だけを、ゆっくり残していくファンサイトです。
-            公式・公認・本人運営ではありません。
+            みりぃさんの活動の記録を、ファンの手でゆっくり集めていく場所です。
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#support"
-              className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+            <ExternalLink
+              href={ENTRY_URL}
+              className="inline-flex min-h-11 items-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white hover:bg-sage-deep"
             >
-              応援する
-            </a>
+              ENTRY 734を応援する
+            </ExternalLink>
             <a
               href="#latest"
               className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
@@ -50,15 +52,31 @@ export function Hero() {
               最新情報を見る
             </a>
           </div>
+          <p className="mt-3 text-xs text-ink-muted">
+            MISS CIRCLE CONTEST 2026 / <a href="#support" className="underline hover:text-sage-deep">応援について</a>
+          </p>
         </div>
 
         {photo ? (
           <figure className="overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card">
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              className="aspect-[4/5] w-full object-cover object-center"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={srcSetFor(photo, "webp")}
+                sizes="(min-width: 1024px) 17rem, 100vw"
+              />
+              <img
+                src={defaultSrc(photo)}
+                srcSet={srcSetFor(photo, "jpg")}
+                sizes="(min-width: 1024px) 17rem, 100vw"
+                width={photo.width}
+                height={photo.height}
+                fetchPriority="high"
+                alt={photo.alt}
+                className="aspect-[4/5] w-full object-cover"
+                style={photo.focal ? { objectPosition: photo.focal } : undefined}
+              />
+            </picture>
             {photo.caption ? (
               <figcaption className="px-4 py-3 text-xs leading-relaxed text-ink-muted">
                 {photo.caption}
@@ -71,7 +89,7 @@ export function Hero() {
               Mily Fan Site
             </p>
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              写真は、出典が確認できたものからギャラリーに残していきます。
+              写真はこれから、ギャラリーに増えていきます。
             </p>
           </div>
         )}
@@ -86,7 +104,7 @@ export function Hero() {
             href="#latest"
             className="mt-3 inline-flex text-sm font-medium text-sage hover:underline"
           >
-            最新情報で出典を見る
+            最新情報へ
           </a>
         </aside>
       ) : null}

@@ -31,6 +31,5 @@ export const profile: Profile = {
       source: "https://fm-smw.jp/staff",
     },
   ],
-  summary:
-    "このページには、いま確認できている公開情報だけを載せています。未確認の経歴・所属・身体情報は書きません。",
+  summary: "確認できた公開情報を、少しずつまとめています。未確認のことは書きません。",
 };

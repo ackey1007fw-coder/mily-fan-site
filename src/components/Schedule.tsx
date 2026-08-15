@@ -20,9 +20,7 @@ export function Schedule() {
     <section id="schedule" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">スケジュール</h2>
-        <p className="mt-2 text-sm text-ink-muted">
-          出演・配信・イベントは年をまたいで同じ一覧に足せます。確認できた予定だけを掲載します。
-        </p>
+        <p className="mt-2 text-sm text-ink-muted">出演・配信・イベントの予定と記録。</p>
         <div className="mt-6 space-y-8">
           <p className="text-sm text-ink-muted">
             今後の掲載件数: {upcoming.length}件

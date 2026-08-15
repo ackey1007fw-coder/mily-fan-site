@@ -88,37 +88,59 @@ describe("content verification invariants", () => {
         {
           id: "sample-photo",
           kind: "photo",
-          src: "/media/mily-sample.webp",
+          basePath: "/media/gallery/mily-b01-01-sample",
+          widths: [480, 960],
+          width: 960,
+          height: 720,
           alt: "確認済みの写真",
-          source: "https://example.com/photo-source",
+          provenance: "sns-post",
+          sourceUrl: "https://example.com/photo-source",
+          sourceDate: "2026-08-02",
+          credit: null,
           featured: true,
+          published: true,
         },
       ],
     });
     assert.deepEqual(errors, []);
   });
 
-  it("rejects incomplete media and photo filenames that are not mily-", () => {
+  it("rejects incomplete media and filenames off the mily- scheme", () => {
     const kindErrors = verifyMedia([
       {
         id: "bad-kind",
         kind: "clip",
-        src: "/media/mily-sample.webp",
+        basePath: "/media/gallery/mily-b01-01-sample",
+        widths: [480],
+        width: 480,
+        height: 360,
         alt: "確認済みの写真",
-        source: "https://example.com/photo-source",
+        provenance: "owner-provided",
+        sourceUrl: null,
+        sourceDate: null,
+        credit: null,
+        published: true,
       },
     ]);
     const fileErrors = verifyMedia([
       {
         id: "bad-filename",
         kind: "photo",
-        src: "/media/birthday.webp",
+        basePath: "/media/gallery/birthday",
+        widths: [480],
+        width: 480,
+        height: 360,
         alt: "吉井優花子さんの写真",
+        provenance: "sns-post",
+        sourceUrl: null,
+        sourceDate: null,
+        credit: null,
+        published: true,
       },
     ]);
     assert.ok(kindErrors.some((error) => error.includes("invalid kind")));
-    assert.ok(fileErrors.some((error) => error.includes("mily-")));
-    assert.ok(fileErrors.some((error) => error.includes("confirmed http(s) URL")));
+    assert.ok(fileErrors.some((error) => error.includes("mily-bNN-NN")));
+    assert.ok(fileErrors.some((error) => error.includes("sourceUrl")));
     assert.ok(fileErrors.some((error) => error.includes("another person")));
   });
 

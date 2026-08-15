@@ -74,13 +74,11 @@ function readRelative(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
-function spellingScanText(relative, content) {
-  const normalized = relative.replaceAll("\\", "/");
-  if (normalized === "AGENTS.md") {
-    return content.replaceAll("millyではない", "");
-  }
-  return content;
-}
+// "Mily" / "mily" is 本人の公開表記 (Instagram @mily_chan36) — a proper
+// noun, not a typo, so spellcheckers and AI judgement must not "fix" it.
+// The doubled-l variant is the actual misspelling; scan every text file
+// for it as a standalone token.
+const MISSPELLING_RE = /\bmilly\b/i;
 
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   if (branch && branch !== EXPECTED.branch) {
@@ -100,8 +98,8 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     errors.push(`package.json name is "${pkg.name}", expected "${EXPECTED.packageName}".`);
   }
 
-  if (typeof pkg.name === "string" && /milly/i.test(pkg.name)) {
-    errors.push(`package.json name uses the misspelling "milly" instead of "mily".`);
+  if (typeof pkg.name === "string" && MISSPELLING_RE.test(pkg.name)) {
+    errors.push(`package.json name doubles the "l"; the public identity is "mily".`);
   }
 
   const siteSrc = await readRelative("src/data/site.ts");
@@ -116,11 +114,11 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   }
 
   const agents = await readRelative("AGENTS.md");
-  if (!agents.includes("**mily**（millyではない）")) {
-    errors.push('AGENTS.md must keep the spelling rule "mily（millyではない）".');
+  if (!agents.includes("mily-fan-site")) {
+    errors.push("AGENTS.md must reference mily-fan-site.");
   }
-  if (agents.includes("milly-fan-site")) {
-    errors.push("AGENTS.md must not use the misspelling milly-fan-site.");
+  if (!agents.includes("@mily_chan36")) {
+    errors.push("AGENTS.md must keep the @mily_chan36 identity reference.");
   }
 
   if (!profile.includes(`displayName: "${EXPECTED.displayName}"`)) {
@@ -155,10 +153,9 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
         );
       }
     }
-    const spellingText = spellingScanText(relative, content);
-    if (/milly/i.test(spellingText)) {
+    if (MISSPELLING_RE.test(content)) {
       errors.push(
-        `Forbidden misspelling "milly" found in ${relative}; this repository uses "mily".`,
+        `Misspelled identity (doubled "l") found in ${relative}; the public identity is "mily" (@mily_chan36).`,
       );
     }
   }

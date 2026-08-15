@@ -11,3 +11,6 @@ Thumbs.db
 
 *.tsbuildinfo
 .vite/
+
+# Source media originals stay out of the repository (see docs/MEDIA.md)
+media/original/

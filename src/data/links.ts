@@ -22,4 +22,16 @@ export const links: SiteLink[] = [
     url: "https://fm-smw.jp/staff",
     note: "Mily（ミリー）と湘南シーサイドサークルの記載があるスタッフページです。",
   },
+  {
+    id: "fm-smw-mily-profile",
+    label: "MilyのFMプロフィール",
+    url: "https://fm-smw.jp/staff/mily%EF%BC%88%E3%83%9F%E3%83%AA%E3%83%BC%EF%BC%89",
+    note: "FM湘南マジックウェイブの個別スタッフページです。",
+  },
+  {
+    id: "fm-smw-ssc-program",
+    label: "湘南シーサイドサークル",
+    url: "https://fm-smw.jp/program/%E3%80%8E-%E6%B9%98%E5%8D%97%E3%82%B7%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-%E3%80%8F%E3%80%80%EF%BC%83ssc",
+    note: "湘南シーサイドサークルの番組ページです。",
+  },
 ];

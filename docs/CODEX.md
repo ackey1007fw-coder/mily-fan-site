@@ -12,7 +12,7 @@
 
 - お知らせ → `src/data/news.ts`（配列の先頭）
 - 出演・配信・イベント → `src/data/events.ts`（年をまたいで同じ配列）
-- 写真・動画 → `src/data/media.ts`（ローカル写真は `public/media/mily-`）
+- 写真・動画 → `src/data/media.ts`（ローカル写真は `public/media/gallery/mily-…`（命名は docs/MEDIA.md））
 - 本人 SNS → `src/data/socials.ts`（確認できた URL のみ）
 - プロフィール事実 → `src/data/profile.ts`（出典確認後）
 
@@ -31,4 +31,4 @@
 ## マージ
 
 通常は PR 経由。squash merge 前提。CI が赤、出典が未確認、レビューが未完了ならマージしない。
-v1 では Vercel 本番公開をしない。
+Vercel で本番公開済み（https://mily-fan-site.vercel.app/）。main への merge は本番反映。

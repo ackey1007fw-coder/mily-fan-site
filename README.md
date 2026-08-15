@@ -13,7 +13,7 @@
 - 最新情報に、21歳誕生日の投稿要約を掲載しています
 - Instagram（@mily_chan36）と、確認できた外部リンクを掲載しています
 - MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線があります
-- ギャラリーは写真・動画を足せるデータ構造です。本人写真の掲載は、ファイルが揃ってから行います
+- ギャラリーに写真を掲載しています（最適化・出典管理の手順は `docs/MEDIA.md`）
 - 予定は、確認できるまでセクションを非表示にします
 
 ## 開発
@@ -33,7 +33,7 @@ pnpm build
 | `src/data/profile.ts` | 確認できた最小限のプロフィール |
 | `src/data/events.ts` | 年をまたげる予定 |
 | `src/data/news.ts` | 最新情報 |
-| `src/data/media.ts` | 写真・動画 |
+| `src/data/media.ts` | 写真・動画（手順: `docs/MEDIA.md`） |
 | `src/data/socials.ts` | 本人 SNS |
 | `src/data/links.ts` | その他リンク |
 | `src/data/highlights.ts` | ハイライト |
