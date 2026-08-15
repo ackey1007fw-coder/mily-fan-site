@@ -204,4 +204,13 @@ describe("watcher never writes site data", () => {
     assert.match(workflow, /--body-file/);
     assert.doesNotMatch(workflow, /git push/);
   });
+
+  it("dedupes issues by fingerprint in both title and body", async () => {
+    const workflow = await readFile(
+      path.join(root, ".github/workflows/watch-public-sources.yml"),
+      "utf8",
+    );
+    assert.match(workflow, /\(\.title \+ \.body\) \| contains/);
+    assert.match(workflow, /--title "ENTRY 734 公開情報の変更を検出 \(\$FINGERPRINT\)"/);
+  });
 });

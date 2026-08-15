@@ -55,13 +55,15 @@ jobs:
           FINGERPRINT: ${{ steps.watch.outputs.fingerprint }}
         run: |
           set -euo pipefail
+          # タイトルと本文の両方で指紋を探す。
+          # （本文の HTML コメントは環境によって落ちうるため、タイトル側も見る）
           matches=$(gh issue list \
             --repo "$GITHUB_REPOSITORY" \
             --state open \
             --label public-source-watch \
-            --json number,body \
+            --json number,title,body \
             --limit 50 \
-            --jq "[.[] | select(.body | contains(\"mily-watch:fingerprint=$FINGERPRINT\"))] | length")
+            --jq "[.[] | select((.title + .body) | contains(\"$FINGERPRINT\"))] | length")
           echo "count=$matches" >> "$GITHUB_OUTPUT"
 
       - name: Open an issue for human review
@@ -69,6 +71,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPORT_PATH: ${{ runner.temp }}/watch-report.md
+          # 固定文字列 + 16進8桁の指紋のみ。外部 HTML 由来の文字列は入らない。
+          FINGERPRINT: ${{ steps.watch.outputs.fingerprint }}
         run: |
           set -euo pipefail
           # ラベルが無ければ作る（初回実行時）
@@ -79,7 +83,7 @@ jobs:
           # 本文はスクリプトが sanitize 済みのファイルから読む（shell へ展開しない）
           gh issue create \
             --repo "$GITHUB_REPOSITORY" \
-            --title "ENTRY 734 公開情報の変更を検出" \
+            --title "ENTRY 734 公開情報の変更を検出 ($FINGERPRINT)" \
             --label public-source-watch \
             --body-file "$REPORT_PATH"
 
