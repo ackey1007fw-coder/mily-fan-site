@@ -3,12 +3,14 @@ import { describe, it } from "node:test";
 import { events } from "../src/data/events.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { links } from "../src/data/links.ts";
+import { media } from "../src/data/media.ts";
 import { news } from "../src/data/news.ts";
 import { profile } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 import {
   verifyAllContent,
   verifyEvents,
+  verifyMedia,
   verifyNews,
   verifySocials,
   claimsThisSiteIsOfficial,
@@ -50,6 +52,7 @@ describe("content verification invariants", () => {
       links,
       highlights,
       facts: profile.facts,
+      media,
     });
     assert.deepEqual(errors, []);
   });
@@ -81,8 +84,33 @@ describe("content verification invariants", () => {
           source: "https://example.com/profile",
         },
       ],
+      media: [
+        {
+          id: "sample-photo",
+          kind: "photo",
+          src: "/media/mily-sample.webp",
+          alt: "確認済みの写真",
+          source: "https://example.com/photo-source",
+          featured: true,
+        },
+      ],
     });
     assert.deepEqual(errors, []);
+  });
+
+  it("rejects incomplete media and photo filenames that are not mily-", () => {
+    const errors = verifyMedia([
+      {
+        id: "bad-media",
+        kind: "clip",
+        src: "/media/birthday.webp",
+        alt: "吉井優花子さんの写真",
+      },
+    ]);
+    assert.ok(errors.some((error) => error.includes("invalid kind")));
+    assert.ok(errors.some((error) => error.includes("mily-")));
+    assert.ok(errors.some((error) => error.includes("confirmed http(s) URL")));
+    assert.ok(errors.some((error) => error.includes("another person")));
   });
 
   it("rejects unverified or incomplete news", () => {

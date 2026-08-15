@@ -62,6 +62,7 @@ pnpm dev
 - `src/data/profile.ts` … 確認できた最小限のプロフィール
 - `src/data/events.ts` … 出演・配信・イベント。年をまたいで同じ配列に追加する
 - `src/data/news.ts` … 最新情報。新しいものを配列の先頭へ
+- `src/data/media.ts` … 写真・動画。ローカル写真は `public/media/mily-` で始める
 - `src/data/socials.ts` … 確認できた本人 SNS のみ
 - `src/data/links.ts` … その他リンク
 - `src/data/highlights.ts` … 年をまたげるハイライト

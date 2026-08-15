@@ -12,7 +12,15 @@ export type NewsItem = {
   url?: string;
 };
 
-export const news: NewsItem[] = [];
+export const news: NewsItem[] = [
+  {
+    id: "2026-08-02-21st-birthday",
+    date: "2026-08-02",
+    title: "21歳の誕生日を迎えました",
+    body: "みりぃが21歳の誕生日を迎えました。お祝いしてくれたみなさんへの感謝とともに、21歳の抱負として「考えていることを脳内に留めず行動に移す。」と綴っています。",
+    source: "https://www.instagram.com/p/DbiY3PHk1c8/",
+  },
+];
 
 export function sortNewsByDateDesc(items: NewsItem[]): NewsItem[] {
   return [...items].sort((a, b) => {

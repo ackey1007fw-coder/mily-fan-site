@@ -1,5 +1,6 @@
 import { About } from "./components/About";
 import { Footer } from "./components/Footer";
+import { Gallery } from "./components/Gallery";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Latest } from "./components/Latest";
@@ -19,6 +20,7 @@ export default function App() {
       <main id="main">
         <Hero />
         <Latest />
+        <Gallery />
         <Schedule />
         <About />
         <Socials />

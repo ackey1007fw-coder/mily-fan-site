@@ -2,6 +2,7 @@ import { profile } from "../data/profile";
 
 const navItems = [
   { href: "#latest", label: "最新情報" },
+  { href: "#gallery", label: "ギャラリー" },
   { href: "#schedule", label: "スケジュール" },
   { href: "#about", label: "プロフィール" },
   { href: "#links", label: "リンク" },

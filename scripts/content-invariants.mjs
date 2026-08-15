@@ -13,6 +13,7 @@ const FORBIDDEN_PERSONS = [
 ];
 
 const EVENT_KINDS = new Set(["appearance", "stream", "event", "other"]);
+const MEDIA_KINDS = new Set(["photo", "video"]);
 const SOCIAL_PLATFORMS = new Set([
   "x",
   "instagram",
@@ -222,6 +223,31 @@ export function verifyHighlights(items) {
   return errors;
 }
 
+export function verifyMedia(items) {
+  const errors = [];
+  assertUniqueIds(items, "media", errors);
+  for (const item of items) {
+    if (!MEDIA_KINDS.has(item.kind)) {
+      errors.push(`media "${item.id ?? "?"}" has an invalid kind`);
+    }
+    if (!item.src || !item.alt) {
+      errors.push(`media "${item.id ?? "?"}" is missing src or alt`);
+    }
+    if (typeof item.src === "string" && item.src.startsWith("/")) {
+      const filename = item.src.split("/").pop() ?? "";
+      if (item.kind === "photo" && !filename.startsWith("mily-")) {
+        errors.push(`media "${item.id}" photo filename must start with mily-`);
+      }
+    } else if (item.src) {
+      assertConfirmedUrl(item.src, "media", item.id ?? "?", errors);
+    }
+    assertConfirmedUrl(item.source, "media", item.id ?? "?", errors);
+    assertNoPersonMixup(item, "media", errors);
+    assertNoOfficialClaim(item, "media", errors);
+  }
+  return errors;
+}
+
 export function verifyFacts(items) {
   const errors = [];
   for (const item of items) {
@@ -236,7 +262,15 @@ export function verifyFacts(items) {
   return errors;
 }
 
-export function verifyAllContent({ news, events, socials, links, highlights, facts }) {
+export function verifyAllContent({
+  news,
+  events,
+  socials,
+  links,
+  highlights,
+  facts,
+  media = [],
+}) {
   return [
     ...verifyNews(news),
     ...verifyEvents(events),
@@ -244,5 +278,6 @@ export function verifyAllContent({ news, events, socials, links, highlights, fac
     ...verifyLinks(links),
     ...verifyHighlights(highlights),
     ...verifyFacts(facts),
+    ...verifyMedia(media),
   ];
 }

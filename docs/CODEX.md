@@ -12,6 +12,7 @@
 
 - お知らせ → `src/data/news.ts`（配列の先頭）
 - 出演・配信・イベント → `src/data/events.ts`（年をまたいで同じ配列）
+- 写真・動画 → `src/data/media.ts`（ローカル写真は `public/media/mily-`）
 - 本人 SNS → `src/data/socials.ts`（確認できた URL のみ）
 - プロフィール事実 → `src/data/profile.ts`（出典確認後）
 
