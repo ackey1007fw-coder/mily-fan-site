@@ -46,7 +46,6 @@ export type MediaItem = {
 };
 
 const BIRTHDAY_POST = "https://www.instagram.com/p/DbiY3PHk1c8/";
-const BIRTHDAY_DATE = "2026-08-02";
 
 export const media: MediaItem[] = [
   {
@@ -60,7 +59,7 @@ export const media: MediaItem[] = [
     caption: "21歳の誕生日投稿より",
     provenance: "sns-post",
     sourceUrl: BIRTHDAY_POST,
-    sourceDate: BIRTHDAY_DATE,
+    sourceDate: null,
     credit: null,
     focal: "49% 28%",
     featured: true,
@@ -76,7 +75,7 @@ export const media: MediaItem[] = [
     alt: "水色の紙に包まれた花束を抱えるみりぃさん",
     provenance: "sns-post",
     sourceUrl: BIRTHDAY_POST,
-    sourceDate: BIRTHDAY_DATE,
+    sourceDate: null,
     credit: null,
     focal: "48% 26%",
     published: true,
@@ -91,7 +90,7 @@ export const media: MediaItem[] = [
     alt: "花束を両手に持って立つみりぃさん",
     provenance: "sns-post",
     sourceUrl: BIRTHDAY_POST,
-    sourceDate: BIRTHDAY_DATE,
+    sourceDate: null,
     credit: null,
     focal: "52% 26%",
     published: true,
@@ -106,7 +105,7 @@ export const media: MediaItem[] = [
     alt: "花束と緑のバッグを持って壁の前に立つみりぃさん",
     provenance: "sns-post",
     sourceUrl: BIRTHDAY_POST,
-    sourceDate: BIRTHDAY_DATE,
+    sourceDate: null,
     credit: null,
     focal: "49% 26%",
     published: true,
@@ -137,7 +136,7 @@ export const media: MediaItem[] = [
     caption: "誕生日のテーブル",
     provenance: "sns-post",
     sourceUrl: BIRTHDAY_POST,
-    sourceDate: BIRTHDAY_DATE,
+    sourceDate: null,
     credit: null,
     focal: "50% 70%",
     published: true,

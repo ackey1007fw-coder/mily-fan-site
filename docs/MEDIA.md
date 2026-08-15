@@ -60,8 +60,9 @@ mily-b<batch 2桁>-<seq 2桁>-<slug>-<width>.<ext> … 派生
 ### 出典の確認状況
 
 - b01-01 / 02 / 03 / 04 / 05: 本人 Instagram の21歳誕生日投稿
-  （https://www.instagram.com/p/DbiY3PHk1c8/ 、2026-08-02）が出典として
-  main に取り込まれたため `sns-post` として記録。
+  （https://www.instagram.com/p/DbiY3PHk1c8/）が出典として main に取り込まれたため
+  `sns-post` として記録。**投稿日は一次ソースで再確認できていないため
+  `sourceDate` は null のまま**（確認でき次第記入）。
 - b01-06（ネックレス）: 出典未確認のまま `owner-provided` / null。判明したら反映。
 - 撮影者（credit）は全素材で未確認。第三者撮影と判明した場合は credit を追記する。
 

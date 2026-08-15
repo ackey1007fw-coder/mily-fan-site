@@ -32,6 +32,6 @@ export const links: SiteLink[] = [
     id: "fm-smw-ssc-program",
     label: "湘南シーサイドサークル",
     url: "https://fm-smw.jp/program/%E3%80%8E-%E6%B9%98%E5%8D%97%E3%82%B7%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-%E3%80%8F%E3%80%80%EF%BC%83ssc",
-    note: "Mily（ミリー）が担当として記載されている番組ページです。出演日時はリンク先でご確認ください。",
+    note: "湘南シーサイドサークルの番組ページです。",
   },
 ];

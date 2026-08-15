@@ -1,0 +1,33 @@
+name: Probe stream schedule
+
+# 配信予定の自動解決（ENTRY 734 → SHOWROOM → schedule JSON）を
+# 実ネットワークで検証するための手動/ブランチ限定ワークフロー。
+# サイトのビルドやデプロイには関与しない。
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["claude/**"]
+    paths:
+      - "api/mily-schedule.js"
+      - "scripts/probe-schedule.mjs"
+      - ".github/workflows/probe-schedule.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: Resolve schedule from entry page
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Run probe
+        run: node scripts/probe-schedule.mjs

@@ -74,7 +74,7 @@ export function Socials() {
                   FM湘南マジックウェイブ
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  Mily（ミリー）が担当として記載されている番組と、個別プロフィールです。
+                  スタッフページでは、Mily（ミリー）の担当番組として「湘南シーサイドサークル」が確認できます。
                 </p>
                 <p className="mt-4 flex flex-wrap gap-3">
                   {fmLinks

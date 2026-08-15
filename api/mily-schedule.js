@@ -170,20 +170,20 @@ async function fetchSlots(scheduleUrl) {
   return { ok: true, slots: normalizeSchedule(data) };
 }
 
-export default async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Cache-Control", "s-maxage=180,stale-while-revalidate=600");
-  if (req.method === "OPTIONS") return res.status(200).end();
-
+/**
+ * 解決チェーン全体を実行してレスポンス形のオブジェクトを返す。
+ * handler（Vercel）と scripts/probe-schedule.mjs（CI検証）の両方から使う。
+ */
+export async function resolveAndFetchSchedule(env = process.env) {
   try {
     // 明示上書き（確認済みURLがある場合のみ運用者が設定する）
-    const directUrl = process.env.MILY_SCHEDULE_URL;
+    const directUrl = env.MILY_SCHEDULE_URL;
     if (directUrl && /^https:\/\//.test(directUrl)) {
       const result = await fetchSlots(directUrl);
-      return res.status(200).json({
+      return {
         ...result,
         source: { mode: "explicit-url", scheduleUrl: directUrl },
-      });
+      };
     }
 
     // 自動解決（ENTRY 734 ページ起点）
@@ -199,7 +199,7 @@ export default async function handler(req, res) {
 
     // 自動解決不能時のみ optional fallback を使う
     if (!roomId) {
-      const fallbackId = process.env.MILY_SHOWROOM_ROOM_ID;
+      const fallbackId = env.MILY_SHOWROOM_ROOM_ID;
       if (fallbackId && /^\d+$/.test(fallbackId)) {
         roomId = Number(fallbackId);
         mode = "env-fallback";
@@ -207,17 +207,17 @@ export default async function handler(req, res) {
     }
 
     if (!roomId) {
-      return res.status(200).json({
+      return {
         ok: false,
         slots: [],
         reason: "room not resolved",
         source: { mode: "unresolved", sns: resolved?.sns ?? [] },
-      });
+      };
     }
 
     const scheduleUrl = `${AGE_SCHEDULE_BASE}${roomId}.json`;
     const result = await fetchSlots(scheduleUrl);
-    return res.status(200).json({
+    return {
       ...result,
       source: {
         mode,
@@ -228,8 +228,16 @@ export default async function handler(req, res) {
         roomName: resolved?.roomName ?? null,
         sns: resolved?.sns ?? [],
       },
-    });
+    };
   } catch (err) {
-    return res.status(200).json({ ok: false, slots: [], reason: err.message });
+    return { ok: false, slots: [], reason: err.message };
   }
+}
+
+export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Cache-Control", "s-maxage=180,stale-while-revalidate=600");
+  if (req.method === "OPTIONS") return res.status(200).end();
+  const payload = await resolveAndFetchSchedule();
+  return res.status(200).json(payload);
 }
