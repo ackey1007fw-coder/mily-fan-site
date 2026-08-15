@@ -51,19 +51,34 @@ async function main() {
   for (const name of sources) {
     const sourcePath = path.join(SOURCE_DIR, name);
     const base = name.replace(/\.jpe?g$/i, "");
+
+    const outPaths = DERIVATIVE_WIDTHS.flatMap((width) =>
+      ["jpg", "webp"].map((format) =>
+        path.join(OUTPUT_DIR, `${base}-${width}.${format}`),
+      ),
+    );
+    const existing = [];
+    for (const outPath of outPaths) {
+      if (await exists(outPath)) existing.push(outPath);
+    }
+    if (existing.length === outPaths.length) {
+      console.log(`${name}  already built — skipping`);
+      continue;
+    }
+    if (existing.length > 0) {
+      console.error(
+        `media:build — ${name} has a partial derivative set. ` +
+          "Refusing to overwrite published files; use a new name for changed content.",
+      );
+      process.exit(1);
+    }
+
     const meta = await sharp(sourcePath).metadata();
     console.log(`${name}  ${meta.width}x${meta.height}`);
 
     for (const width of DERIVATIVE_WIDTHS) {
       for (const format of ["jpg", "webp"]) {
         const outPath = path.join(OUTPUT_DIR, `${base}-${width}.${format}`);
-        if (await exists(outPath)) {
-          console.error(
-            `media:build — refusing to overwrite ${path.relative(root, outPath)}. ` +
-              "Published filenames are immutable; use a new name for changed content.",
-          );
-          process.exit(1);
-        }
 
         const pipeline = sharp(sourcePath)
           .rotate()

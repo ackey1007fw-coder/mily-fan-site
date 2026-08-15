@@ -31,4 +31,4 @@
 ## マージ
 
 通常は PR 経由。squash merge 前提。CI が赤、出典が未確認、レビューが未完了ならマージしない。
-v1 では Vercel 本番公開をしない。
+Vercel で本番公開済み（https://mily-fan-site.vercel.app/）。main への merge は本番反映。

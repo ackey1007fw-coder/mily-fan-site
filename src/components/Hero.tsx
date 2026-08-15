@@ -2,6 +2,9 @@ import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
+import { ExternalLink } from "./ExternalLink";
+
+const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 
 export function Hero() {
   const photo = featuredPhoto();
@@ -36,12 +39,12 @@ export function Hero() {
             みりぃさんの活動の記録を、ファンの手でゆっくり集めていく場所です。
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href="#support"
-              className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+            <ExternalLink
+              href={ENTRY_URL}
+              className="inline-flex min-h-11 items-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white hover:bg-sage-deep"
             >
-              応援する
-            </a>
+              ENTRY 734を応援する
+            </ExternalLink>
             <a
               href="#latest"
               className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
@@ -49,6 +52,9 @@ export function Hero() {
               最新情報を見る
             </a>
           </div>
+          <p className="mt-3 text-xs text-ink-muted">
+            MISS CIRCLE CONTEST 2026 / <a href="#support" className="underline hover:text-sage-deep">応援について</a>
+          </p>
         </div>
 
         {photo ? (

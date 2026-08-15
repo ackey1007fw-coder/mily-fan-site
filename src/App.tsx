@@ -4,13 +4,15 @@ import { Gallery } from "./components/Gallery";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Latest } from "./components/Latest";
+import { MobileActionDock } from "./components/MobileActionDock";
 import { Schedule } from "./components/Schedule";
 import { Socials } from "./components/Socials";
+import { StreamSchedule } from "./components/StreamSchedule";
 import { Support } from "./components/Support";
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-paper text-ink">
+    <div className="min-h-screen overflow-x-hidden bg-paper pb-20 text-ink sm:pb-0">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-sage focus:px-4 focus:py-2 focus:text-white"
@@ -21,13 +23,15 @@ export default function App() {
       <main id="main">
         <Hero />
         <Support />
+        <StreamSchedule />
+        <Socials />
         <Latest />
         <Gallery />
         <Schedule />
         <About />
-        <Socials />
       </main>
       <Footer />
+      <MobileActionDock />
     </div>
   );
 }

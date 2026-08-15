@@ -16,14 +16,16 @@ export function Support() {
           <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
             MISS CIRCLE CONTEST 2026
           </p>
-          <p className="mt-2 text-2xl font-bold tracking-tight text-ink">ENTRY 734</p>
+          <p className="mt-2 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+            ENTRY 734
+          </p>
           <p className="mt-1 text-base text-ink-muted">
             {profile.displayName} / {profile.legalName}
           </p>
-          <p className="mt-5">
+          <p className="mt-6">
             <ExternalLink
               href={VOTE_URL}
-              className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white hover:bg-sage-deep sm:w-auto"
             >
               投票ページを見る
             </ExternalLink>

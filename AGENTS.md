@@ -20,7 +20,7 @@
 - 通常運用では `main` へ直接 push しない。
 - `main` から作業ブランチを切り、PR にする。
 - マージ方式の指定がなければ **squash merge**。
-- Vercel 本番公開・独自ドメインはまだ行わない。
+- Vercel で本番公開済み（https://mily-fan-site.vercel.app/）。`main` への merge は本番に反映されるため、CI とオーナー確認を経てから merge する。
 - `@codex review` はオーナーが投稿する。エージェントは投稿しない。
 - 接続エラーをレビュー成功として扱わない。
 
@@ -57,7 +57,7 @@ pnpm dev
 - Vite
 - pnpm
 - GitHub Actions
-- Vercel（次フェーズで接続。まだ本番公開しない）
+- Vercel（本番公開済み: https://mily-fan-site.vercel.app/）
 
 ## データの場所
 

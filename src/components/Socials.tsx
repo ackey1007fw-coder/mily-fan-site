@@ -3,13 +3,21 @@ import { socials } from "../data/socials";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
+const ENTRY_LINK_ID = "miss-circle-2026-734";
+const FM_LINK_IDS = new Set(["fm-smw-mily-profile", "fm-smw-ssc-program", "fm-smw-staff"]);
+
 export function Socials() {
+  const entryLink = links.find((item) => item.id === ENTRY_LINK_ID);
+  const fmLinks = links.filter((item) => FM_LINK_IDS.has(item.id));
+  const otherLinks = links.filter(
+    (item) => item.id !== ENTRY_LINK_ID && !FM_LINK_IDS.has(item.id),
+  );
   const hasAny = socials.length > 0 || links.length > 0;
 
   return (
     <section id="links" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-ink">SNS / リンク</h2>
+        <h2 className="text-2xl font-bold text-ink">Follow Mily</h2>
         <p className="mt-2 text-sm text-ink-muted">みりぃさんのSNSと関連リンク。</p>
         {!hasAny ? (
           <div className="mt-6">
@@ -39,9 +47,54 @@ export function Socials() {
                 ))}
               </ul>
             ) : null}
-            {links.length > 0 ? (
+
+            {entryLink ? (
+              <div className="rounded-2xl border-2 border-sage/40 bg-sage-soft/60 p-5 shadow-card">
+                <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
+                  MISS CIRCLE CONTEST 2026
+                </p>
+                <p className="mt-1 font-semibold text-ink">{entryLink.label}</p>
+                {entryLink.note ? (
+                  <p className="mt-2 text-sm text-ink-muted">{entryLink.note}</p>
+                ) : null}
+                <p className="mt-4">
+                  <ExternalLink
+                    href={entryLink.url}
+                    className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+                  >
+                    エントリーページへ
+                  </ExternalLink>
+                </p>
+              </div>
+            ) : null}
+
+            {fmLinks.length > 0 ? (
+              <div className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
+                <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
+                  FM湘南マジックウェイブ
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                  Mily（ミリー）が担当として記載されている番組と、個別プロフィールです。
+                </p>
+                <p className="mt-4 flex flex-wrap gap-3">
+                  {fmLinks
+                    .filter((item) => item.id !== "fm-smw-staff")
+                    .map((item) => (
+                      <ExternalLink
+                        key={item.id}
+                        href={item.url}
+                        className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+                      >
+                        {item.label}
+                      </ExternalLink>
+                    ))}
+                </p>
+              </div>
+            ) : null}
+
+            {otherLinks.length > 0 ? (
               <ul className="space-y-3">
-                {links.map((item) => (
+                {otherLinks.map((item) => (
                   <li key={item.id}>
                     <ExternalLink
                       href={item.url}
