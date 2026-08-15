@@ -1,0 +1,93 @@
+name: Watch public sources
+
+# ENTRY 734 の公開情報（SNS / SHOWROOM / 審査フェーズ / 配信予定 endpoint）を
+# 1日1回チェックし、サイト登録値との差分を検出したら Issue で人間に確認を求める。
+#
+# 重要: このワークフローはリポジトリのデータを自動更新しない。
+# commit / push / merge は行わず、Issue と summary の出力だけを行う。
+
+on:
+  schedule:
+    # 毎日 09:10 JST（= 00:10 UTC）
+    - cron: "10 0 * * *"
+  workflow_dispatch:
+  # 監視ロジック自体を変更したときの動作確認（作業ブランチ限定）
+  push:
+    branches: ["claude/**"]
+    paths:
+      - "scripts/watch-public-sources.mjs"
+      - "scripts/watch-lib.mjs"
+      - ".github/workflows/watch-public-sources.yml"
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: watch-public-sources
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    name: Check ENTRY 734 public sources
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Compare public sources with registered values
+        id: watch
+        env:
+          WATCH_REPORT_PATH: ${{ runner.temp }}/watch-report.md
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/watch-public-sources.mjs
+
+      - name: Find existing open issue for this change
+        id: existing
+        if: steps.watch.outputs.has-changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # 外部由来の文字列は shell へ展開しない。fingerprint は16進8桁のみ。
+          FINGERPRINT: ${{ steps.watch.outputs.fingerprint }}
+        run: |
+          set -euo pipefail
+          # タイトルと本文の両方で指紋を探す。
+          # （本文の HTML コメントは環境によって落ちうるため、タイトル側も見る）
+          matches=$(gh issue list \
+            --repo "$GITHUB_REPOSITORY" \
+            --state open \
+            --label public-source-watch \
+            --json number,title,body \
+            --limit 50 \
+            --jq "[.[] | select((.title + .body) | contains(\"$FINGERPRINT\"))] | length")
+          echo "count=$matches" >> "$GITHUB_OUTPUT"
+
+      - name: Open an issue for human review
+        if: steps.watch.outputs.has-changes == 'true' && steps.existing.outputs.count == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPORT_PATH: ${{ runner.temp }}/watch-report.md
+          # 固定文字列 + 16進8桁の指紋のみ。外部 HTML 由来の文字列は入らない。
+          FINGERPRINT: ${{ steps.watch.outputs.fingerprint }}
+        run: |
+          set -euo pipefail
+          # ラベルが無ければ作る（初回実行時）
+          gh label create public-source-watch \
+            --repo "$GITHUB_REPOSITORY" \
+            --description "ENTRY 734 等の公開情報の変更検知" \
+            --color FBCA04 || true
+          # 本文はスクリプトが sanitize 済みのファイルから読む（shell へ展開しない）
+          gh issue create \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "ENTRY 734 公開情報の変更を検出 ($FINGERPRINT)" \
+            --label public-source-watch \
+            --body-file "$REPORT_PATH"
+
+      - name: Note when issue creation is skipped
+        if: steps.watch.outputs.has-changes == 'true' && steps.existing.outputs.count != '0'
+        run: |
+          echo "同じ内容の open Issue が既にあるため、新規作成をスキップしました。" >> "$GITHUB_STEP_SUMMARY"
