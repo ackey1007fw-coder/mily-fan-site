@@ -2,11 +2,31 @@
 
 写真・動画の受け入れから掲載までの手順と、受領済み素材の台帳です。
 どのツール（Claude Code / Codex / Cursor）で作業しても、この手順に従ってください。
+日常更新の振り分け（news / events / 配信予定）は `docs/CONTENT-OPS.md`。
+
+## 受け入れフロー
+
+```
+Google Drive 原本
+  → 選定（オーナー了承。SNSから自動取得しない）
+  → media/original/   （無改変 jpg。gitignore 済み）
+  → pnpm media:build
+  → public/media/gallery/   （jpg / webp × 480 / 960 / 1600。コミットする）
+  → src/data/media.ts       （マニフェスト。了承まで published: false）
+```
+
+1. Drive の原本フォルダから、掲載する枚だけを選ぶ。フォルダ URL はオーナーに確認する（ここには書かない）。
+2. 選んだファイルを `media/original/` へ、命名規則どおりの**新しい**名前でコピーする。Drive 側の原本は動かさない。
+3. `pnpm media:build` を実行する。既存の派生と同名ならスクリプトは**上書きせず停止**する。
+4. `public/media/gallery/` の派生を確認し、`src/data/media.ts` に項目を足す。
+5. オーナー確認が取れるまで `published: false`。了承後に `true`。
+
+この流れを省略して SNS 画像を直接 `public/media/` に置かない。
 
 ## ディレクトリ構成
 
 ```
-media/original/            元素材。無改変で保管。gitignore 済み（コミットしない）
+media/original/            元素材。無改変で保管。jpg は gitignore（README のみコミット）
 public/media/gallery/      公開用派生（jpg / webp × 480 / 960 / 1600px）。コミットする
 src/data/media.ts          マニフェスト。掲載可否・出典・alt を管理
 ```

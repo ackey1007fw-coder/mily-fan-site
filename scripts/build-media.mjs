@@ -12,14 +12,36 @@
  */
 import { readdir, mkdir, access } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const SOURCE_DIR = path.join(root, "media/original");
-const OUTPUT_DIR = path.join(root, "public/media/gallery");
+export const SOURCE_DIR = path.join(root, "media/original");
+export const OUTPUT_DIR = path.join(root, "public/media/gallery");
 export const DERIVATIVE_WIDTHS = [480, 960, 1600];
-const NAME_RE = /^mily-b\d{2}-\d{2}(-[a-z0-9]+)+\.(jpg|jpeg)$/;
+export const NAME_RE = /^mily-b\d{2}-\d{2}(-[a-z0-9]+)+\.(jpg|jpeg)$/;
+
+export function invalidSourceNames(sources) {
+  return sources.filter((name) => !NAME_RE.test(name));
+}
+
+export function derivativeFilenames(sourceName) {
+  const base = sourceName.replace(/\.jpe?g$/i, "");
+  return DERIVATIVE_WIDTHS.flatMap((width) =>
+    ["jpg", "webp"].map((format) => `${base}-${width}.${format}`),
+  );
+}
+
+/**
+ * @returns {"build" | "skip" | "partial"}
+ */
+export function classifyExistingDerivatives(sourceName, existingNames) {
+  const expected = derivativeFilenames(sourceName);
+  const existing = expected.filter((name) => existingNames.has(name));
+  if (existing.length === 0) return "build";
+  if (existing.length === expected.length) return "skip";
+  return "partial";
+}
 
 async function exists(filePath) {
   try {
@@ -39,7 +61,7 @@ async function main() {
     process.exit(1);
   }
 
-  const badNames = sources.filter((name) => !NAME_RE.test(name));
+  const badNames = invalidSourceNames(sources);
   if (badNames.length > 0) {
     console.error("media:build — source filenames must match mily-bNN-NN-<slug>.jpg:");
     for (const name of badNames) console.error(`  - ${name}`);
@@ -50,22 +72,19 @@ async function main() {
 
   for (const name of sources) {
     const sourcePath = path.join(SOURCE_DIR, name);
-    const base = name.replace(/\.jpe?g$/i, "");
-
-    const outPaths = DERIVATIVE_WIDTHS.flatMap((width) =>
-      ["jpg", "webp"].map((format) =>
-        path.join(OUTPUT_DIR, `${base}-${width}.${format}`),
-      ),
-    );
+    const outNames = derivativeFilenames(name);
     const existing = [];
-    for (const outPath of outPaths) {
+    for (const outName of outNames) {
+      const outPath = path.join(OUTPUT_DIR, outName);
       if (await exists(outPath)) existing.push(outPath);
     }
-    if (existing.length === outPaths.length) {
+
+    const decision = classifyExistingDerivatives(name, new Set(existing.map((file) => path.basename(file))));
+    if (decision === "skip") {
       console.log(`${name}  already built — skipping`);
       continue;
     }
-    if (existing.length > 0) {
+    if (decision === "partial") {
       console.error(
         `media:build — ${name} has a partial derivative set. ` +
           "Refusing to overwrite published files; use a new name for changed content.",
@@ -78,7 +97,7 @@ async function main() {
 
     for (const width of DERIVATIVE_WIDTHS) {
       for (const format of ["jpg", "webp"]) {
-        const outPath = path.join(OUTPUT_DIR, `${base}-${width}.${format}`);
+        const outPath = path.join(OUTPUT_DIR, `${name.replace(/\.jpe?g$/i, "")}-${width}.${format}`);
 
         const pipeline = sharp(sourcePath)
           .rotate()
@@ -96,4 +115,10 @@ async function main() {
   console.log("media:build — done.");
 }
 
-await main();
+const isDirectRun =
+  Boolean(process.argv[1]) &&
+  import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+
+if (isDirectRun) {
+  await main();
+}
