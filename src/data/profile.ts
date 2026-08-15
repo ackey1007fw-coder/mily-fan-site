@@ -19,6 +19,5 @@ export const profile: Profile = {
   displayName: "みりぃ",
   legalName: "三橋莉子",
   facts: [],
-  summary:
-    "このページには、いま確認できている名前だけを載せています。未確認の経歴・所属・身体情報は書きません。",
+  summary: "みりぃさんのプロフィールは、これから少しずつ充実させていきます。",
 };

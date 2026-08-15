@@ -9,14 +9,12 @@ export function Latest() {
     <section id="latest" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">最新情報</h2>
-        <p className="mt-2 text-sm text-ink-muted">
-          確認できた更新だけを載せます。未確認の話題は入れません。
-        </p>
+        <p className="mt-2 text-sm text-ink-muted">みりぃさんの近況とお知らせ。</p>
         {latestNews.length === 0 ? (
           <div className="mt-6">
             <EmptyState
-              title="まだ掲載できる最新情報はありません"
-              body="出典が確認できたお知らせから、ここに追加していきます。"
+              title="お知らせはまだありません"
+              body="更新があり次第、ここに載せていきます。"
             />
           </div>
         ) : (

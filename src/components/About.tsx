@@ -7,9 +7,7 @@ export function About() {
     <section id="about" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">プロフィール</h2>
-        <p className="mt-2 text-sm text-ink-muted">
-          確認できている最小限の情報だけです。推測はしません。
-        </p>
+        <p className="mt-2 text-sm text-ink-muted">みりぃさんのこと。</p>
         <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
           <dl className="grid gap-4 sm:grid-cols-2">
             <div>
@@ -50,7 +48,7 @@ export function About() {
             </dl>
           ) : (
             <p className="mt-5 rounded-xl bg-sage-soft/60 px-4 py-3 text-sm text-sage-deep">
-              誕生日・出身・所属などの詳細は、公開情報を確認してから追加します。
+              誕生日や出身などの情報は、これから少しずつ追加していきます。
             </p>
           )}
         </div>

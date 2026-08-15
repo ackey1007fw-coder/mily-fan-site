@@ -35,19 +35,19 @@ function contrastRatio(foreground, background) {
   return (lighter + 0.05) / (darker + 0.05);
 }
 
-describe("mily site identity", () => {
-  it("uses mily spelling in package and repo metadata", async () => {
+describe("milly site identity", () => {
+  it("uses the milly spelling (two l) in package and repo metadata", async () => {
     const pkg = JSON.parse(await read("package.json"));
     const site = await read("src/data/site.ts");
     const agents = await read("AGENTS.md");
 
-    assert.equal(pkg.name, "mily-fan-site");
-    assert.match(site, /mily-fan-site/);
-    assert.match(site, /https:\/\/mily-fan-site\.vercel\.app/);
-    assert.doesNotMatch(pkg.name, /milly/i);
-    assert.doesNotMatch(site, /milly/i);
-    assert.match(agents, /\*\*mily\*\*（millyではない）/);
-    assert.doesNotMatch(agents, /milly-fan-site/);
+    assert.equal(pkg.name, "milly-fan-site");
+    assert.match(site, /milly-fan-site/);
+    assert.match(site, /https:\/\/milly-fan-site\.vercel\.app/);
+    assert.doesNotMatch(pkg.name, /\bmily\b/i);
+    assert.doesNotMatch(site, /\bmily\b/i);
+    assert.match(agents, /milly-fan-site/);
+    assert.doesNotMatch(agents, /\bmily\b/i);
   });
 
   it("keeps the unofficial disclaimer in the document title", async () => {

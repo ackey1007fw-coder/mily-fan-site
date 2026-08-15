@@ -10,14 +10,12 @@ export function Socials() {
     <section id="links" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">SNS / リンク</h2>
-        <p className="mt-2 text-sm text-ink-muted">
-          本人のSNSは、確認できたものだけを載せます。未確認のURLは追加しません。
-        </p>
+        <p className="mt-2 text-sm text-ink-muted">みりぃさんのSNSと関連リンク。</p>
         {!hasAny ? (
           <div className="mt-6">
             <EmptyState
-              title="確認できたリンクはまだありません"
-              body="本人アカウントと分かったSNSから、ここに追加していきます。"
+              title="リンクはまだありません"
+              body="準備ができ次第、ここに並べます。"
             />
           </div>
         ) : (

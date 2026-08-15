@@ -1,4 +1,4 @@
-import { featuredPhoto } from "../data/media";
+import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
@@ -33,8 +33,7 @@ export function Hero() {
           </h1>
           <p className="mt-2 text-lg text-ink-muted">{profile.legalName}</p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink">
-            確認できた活動情報だけを、ゆっくり残していくファンサイトです。
-            公式・公認・本人運営ではありません。
+            みりぃさんの活動の記録を、ファンの手でゆっくり集めていく場所です。
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -54,11 +53,24 @@ export function Hero() {
 
         {photo ? (
           <figure className="overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card">
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              className="aspect-[4/5] w-full object-cover object-top"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={srcSetFor(photo, "webp")}
+                sizes="(min-width: 1024px) 17rem, 100vw"
+              />
+              <img
+                src={defaultSrc(photo)}
+                srcSet={srcSetFor(photo, "jpg")}
+                sizes="(min-width: 1024px) 17rem, 100vw"
+                width={photo.width}
+                height={photo.height}
+                fetchPriority="high"
+                alt={photo.alt}
+                className="aspect-[4/5] w-full object-cover"
+                style={photo.focal ? { objectPosition: photo.focal } : undefined}
+              />
+            </picture>
             {photo.caption ? (
               <figcaption className="px-4 py-3 text-xs leading-relaxed text-ink-muted">
                 {photo.caption}
@@ -68,10 +80,10 @@ export function Hero() {
         ) : (
           <div className="rounded-3xl border border-sage/15 bg-paper-card p-6 shadow-card">
             <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
-              Mily Fan Site
+              Milly Fan Site
             </p>
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              写真は、出典が確認できたものからギャラリーに残していきます。
+              写真はこれから、ギャラリーに増えていきます。
             </p>
           </div>
         )}
@@ -86,7 +98,7 @@ export function Hero() {
             href="#latest"
             className="mt-3 inline-flex text-sm font-medium text-sage hover:underline"
           >
-            最新情報で出典を見る
+            最新情報へ
           </a>
         </aside>
       ) : null}

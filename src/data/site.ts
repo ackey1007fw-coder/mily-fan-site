@@ -1,6 +1,6 @@
 export const site = {
-  repoName: "mily-fan-site",
-  repoFullName: "ackey1007fw-coder/mily-fan-site",
+  repoName: "milly-fan-site",
+  repoFullName: "ackey1007fw-coder/milly-fan-site",
   displayTitle: "みりぃ ファンサイト",
   shortTitle: "みりぃ",
   description:
@@ -11,7 +11,7 @@ export const site = {
    * Planned public origin after Vercel is connected in a later phase.
    * This v1 does not create or deploy a Vercel project.
    */
-  siteUrl: "https://mily-fan-site.vercel.app",
+  siteUrl: "https://milly-fan-site.vercel.app",
   ogImagePath: "/og.png",
   themeColor: "#f6f3ee",
 } as const;

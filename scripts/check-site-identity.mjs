@@ -6,10 +6,10 @@ export const EXPECTED = {
   branch: "main",
   displayName: "みりぃ",
   legalName: "三橋莉子",
-  packageName: "mily-fan-site",
+  packageName: "milly-fan-site",
   titleIncludes: "みりぃ",
-  repoName: "mily-fan-site",
-  siteUrl: "https://mily-fan-site.vercel.app",
+  repoName: "milly-fan-site",
+  siteUrl: "https://milly-fan-site.vercel.app",
 };
 
 export const FORBIDDEN = [
@@ -74,13 +74,10 @@ function readRelative(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
-function spellingScanText(relative, content) {
-  const normalized = relative.replaceAll("\\", "/");
-  if (normalized === "AGENTS.md") {
-    return content.replaceAll("millyではない", "");
-  }
-  return content;
-}
+// "milly" is the only correct spelling. The single-l form is a recurring
+// mistake, so scan every text file for it as a standalone token
+// (word boundaries keep e.g. "family" from matching).
+const MISSPELLING_RE = /\bmily\b/i;
 
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   if (branch && branch !== EXPECTED.branch) {
@@ -100,8 +97,8 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     errors.push(`package.json name is "${pkg.name}", expected "${EXPECTED.packageName}".`);
   }
 
-  if (typeof pkg.name === "string" && /milly/i.test(pkg.name)) {
-    errors.push(`package.json name uses the misspelling "milly" instead of "mily".`);
+  if (typeof pkg.name === "string" && MISSPELLING_RE.test(pkg.name)) {
+    errors.push(`package.json name drops an "l" from "milly".`);
   }
 
   const siteSrc = await readRelative("src/data/site.ts");
@@ -116,11 +113,8 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   }
 
   const agents = await readRelative("AGENTS.md");
-  if (!agents.includes("**mily**（millyではない）")) {
-    errors.push('AGENTS.md must keep the spelling rule "mily（millyではない）".');
-  }
-  if (agents.includes("milly-fan-site")) {
-    errors.push("AGENTS.md must not use the misspelling milly-fan-site.");
+  if (!agents.includes("milly-fan-site")) {
+    errors.push("AGENTS.md must reference milly-fan-site (two l).");
   }
 
   if (!profile.includes(`displayName: "${EXPECTED.displayName}"`)) {
@@ -155,16 +149,15 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
         );
       }
     }
-    const spellingText = spellingScanText(relative, content);
-    if (/milly/i.test(spellingText)) {
+    if (MISSPELLING_RE.test(content)) {
       errors.push(
-        `Forbidden misspelling "milly" found in ${relative}; this repository uses "mily".`,
+        `Misspelled site name (single "l") found in ${relative}; this repository uses "milly".`,
       );
     }
   }
 
   if (errors.length > 0) {
-    console.error("\nSite identity mismatch: this repository is the mily fan site only.");
+    console.error("\nSite identity mismatch: this repository is the milly fan site only.");
     for (const error of errors) console.error(`  - ${error}`);
     return 1;
   }

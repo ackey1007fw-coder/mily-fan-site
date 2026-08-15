@@ -223,25 +223,57 @@ export function verifyHighlights(items) {
   return errors;
 }
 
+const MEDIA_PROVENANCES = new Set(["owner-provided", "sns-post", "third-party"]);
+const MEDIA_BASENAME_RE = /^milly-b\d{2}-\d{2}(-[a-z0-9]+)+$/;
+
 export function verifyMedia(items) {
   const errors = [];
   assertUniqueIds(items, "media", errors);
   for (const item of items) {
+    const id = item.id ?? "?";
     if (!MEDIA_KINDS.has(item.kind)) {
-      errors.push(`media "${item.id ?? "?"}" has an invalid kind`);
+      errors.push(`media "${id}" has an invalid kind`);
     }
-    if (!item.src || !item.alt) {
-      errors.push(`media "${item.id ?? "?"}" is missing src or alt`);
+    if (!item.alt) {
+      errors.push(`media "${id}" is missing alt text`);
     }
-    if (typeof item.src === "string" && item.src.startsWith("/")) {
-      const filename = item.src.split("/").pop() ?? "";
-      if (item.kind === "photo" && !filename.startsWith("mily-")) {
-        errors.push(`media "${item.id}" photo filename must start with mily-`);
+    if (typeof item.basePath !== "string" || !item.basePath.startsWith("/media/")) {
+      errors.push(`media "${id}" basePath must live under /media/`);
+    } else {
+      const basename = item.basePath.split("/").pop() ?? "";
+      if (!MEDIA_BASENAME_RE.test(basename)) {
+        errors.push(
+          `media "${id}" filename must match milly-bNN-NN-<slug> (got "${basename}")`,
+        );
       }
-    } else if (item.src) {
-      assertConfirmedUrl(item.src, "media", item.id ?? "?", errors);
     }
-    assertConfirmedUrl(item.source, "media", item.id ?? "?", errors);
+    if (
+      !Array.isArray(item.widths) ||
+      item.widths.length === 0 ||
+      item.widths.some((w, i) => !Number.isInteger(w) || w <= 0 || (i > 0 && w <= item.widths[i - 1]))
+    ) {
+      errors.push(`media "${id}" widths must be ascending positive integers`);
+    }
+    if (!Number.isInteger(item.width) || !Number.isInteger(item.height)) {
+      errors.push(`media "${id}" needs intrinsic width/height`);
+    }
+    if (!MEDIA_PROVENANCES.has(item.provenance)) {
+      errors.push(`media "${id}" has an invalid provenance`);
+    }
+    if (item.sourceUrl !== null) {
+      assertConfirmedUrl(item.sourceUrl, "media", id, errors);
+    } else if (item.provenance === "sns-post") {
+      errors.push(`media "${id}" claims sns-post provenance but has no sourceUrl`);
+    }
+    if (item.provenance === "third-party" && !item.credit) {
+      errors.push(`media "${id}" is third-party but has no credit`);
+    }
+    if (item.sourceDate !== null && !isValidDateOnly(item.sourceDate ?? "")) {
+      errors.push(`media "${id}" sourceDate must be null or a real YYYY-MM-DD`);
+    }
+    if (typeof item.published !== "boolean") {
+      errors.push(`media "${id}" must set published explicitly`);
+    }
     assertNoPersonMixup(item, "media", errors);
     assertNoOfficialClaim(item, "media", errors);
   }
