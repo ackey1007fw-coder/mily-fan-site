@@ -122,12 +122,18 @@ describe("content verification invariants", () => {
     assert.equal(claimsThisSiteIsOfficial("当ファンサイトは公認です"), true);
     assert.equal(claimsThisSiteIsOfficial("このページは本人運営です"), true);
     assert.equal(claimsThisSiteIsOfficial("このサイトは公式サイトである"), true);
+    assert.equal(claimsThisSiteIsOfficial("当サイトは公式サイトです"), true);
     assert.equal(claimsThisSiteIsOfficial("当サイトは公式サイトではあります"), true);
+    assert.equal(claimsThisSiteIsOfficial("このファンサイトは公式サイトです"), true);
+    assert.equal(claimsThisSiteIsOfficial("当ファンサイトは公認サイトです"), true);
+    assert.equal(claimsThisSiteIsOfficial("主催者公式サイトはこちら"), false);
+    assert.equal(claimsThisSiteIsOfficial("本人公式サイトを参照"), false);
+    assert.equal(claimsThisSiteIsOfficial("イベント公式サイト"), false);
     assert.equal(claimsThisSiteIsOfficial("公式サイトで確認した"), false);
     assert.equal(claimsThisSiteIsOfficial("公式サイトでの発表を確認した"), false);
   });
 
-  it("rejects self-referential official-site claims that used to be stripped", () => {
+  it("rejects self-referential official-site claims without stripping 公式サイト", () => {
     const asNews = (title) =>
       verifyNews([
         {
@@ -137,22 +143,30 @@ describe("content verification invariants", () => {
         },
       ]);
 
-    assert.ok(
-      asNews("このサイトは公式サイトである").some((error) =>
-        error.includes("this site is official"),
-      ),
-    );
-    assert.ok(
-      asNews("当サイトは公式サイトではあります").some((error) =>
-        error.includes("this site is official"),
-      ),
-    );
-    assert.equal(
-      asNews("公式サイトで公演情報を確認した").filter((error) =>
-        error.includes("this site is official"),
-      ).length,
-      0,
-    );
+    for (const title of [
+      "このサイトは公式サイトである",
+      "当サイトは公式サイトです",
+      "このファンサイトは公式サイトです",
+      "当ファンサイトは公認サイトです",
+    ]) {
+      assert.ok(
+        asNews(title).some((error) => error.includes("this site is official")),
+        `should reject: ${title}`,
+      );
+    }
+
+    for (const title of [
+      "主催者公式サイトはこちら",
+      "本人公式サイトを参照",
+      "イベント公式サイトの案内",
+    ]) {
+      assert.equal(
+        asNews(title).filter((error) => error.includes("this site is official"))
+          .length,
+        0,
+        `should allow: ${title}`,
+      );
+    }
   });
 
   it("rejects event ranges whose end precedes the start", () => {

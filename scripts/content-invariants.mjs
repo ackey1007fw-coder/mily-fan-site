@@ -63,13 +63,15 @@ function assertNoPersonMixup(item, label, errors) {
   }
 }
 
-function stripNamedOfficialSources(text) {
+function stripAllowedExternalOfficialReferences(text) {
   return text
     .replaceAll("非公式", "")
     .replaceAll("公式・公認・本人運営ではありません", "")
     .replaceAll("本人運営ではありません", "")
     .replaceAll("主催者公式サイト", "")
     .replaceAll("主催者公式", "")
+    .replaceAll("イベント公式サイト", "")
+    .replaceAll("本人公式サイト", "")
     .replaceAll("本人公式アカウント", "")
     .replaceAll("本人公式", "")
     .replaceAll("公式チケットページ", "")
@@ -81,43 +83,14 @@ function stripNamedOfficialSources(text) {
     .replaceAll("公式アカウント", "");
 }
 
-function stripExternalOfficialSiteMentions(text) {
-  return text
-    .replace(/公式サイトでの/g, "")
-    .replace(/公式サイトから/g, "")
-    .replace(/公式サイトを/g, "")
-    .replace(/公式サイトに/g, "")
-    .replace(/公式サイトへ/g, "")
-    .replace(/公式サイトでは(?!あります|ある)/g, "")
-    .replace(/公式サイトで(?!す|ある)/g, "");
-}
-
-const THIS_SITE_SUBJECT =
-  /(?:この|本|当)(?:非公式)?(?:ファン)?(?:サイト|ページ)/;
-const THIS_SITE_OFFICIAL_CLAIM = new RegExp(
-  `${THIS_SITE_SUBJECT.source}(?:は|が|こそ)(?:公式|公認|本人運営)`,
-);
-
-function claimsThisSiteSubjectIsOfficial(text) {
-  return (
-    THIS_SITE_OFFICIAL_CLAIM.test(text) ||
-    new RegExp(
-      `${THIS_SITE_SUBJECT.source}(?:は|が|こそ)公式サイトで(?:す|ある)`,
-    ).test(text) ||
-    new RegExp(
-      `${THIS_SITE_SUBJECT.source}(?:は|が|こそ)公式サイトではあります`,
-    ).test(text)
-  );
-}
+const THIS_SITE_OFFICIAL_CLAIM =
+  /(?:この|本|当)(?:非公式)?(?:ファン)?(?:サイト|ページ)(?:は|が|こそ)(?:公式|公認|本人運営)/;
 
 export function claimsThisSiteIsOfficial(text) {
   if (!text) return false;
-  const namedStripped = stripNamedOfficialSources(text);
-  if (claimsThisSiteSubjectIsOfficial(namedStripped)) return true;
-
-  const remainder = stripExternalOfficialSiteMentions(namedStripped);
+  const remainder = stripAllowedExternalOfficialReferences(text);
   return (
-    claimsThisSiteSubjectIsOfficial(remainder) ||
+    THIS_SITE_OFFICIAL_CLAIM.test(remainder) ||
     /(?<!非)公式ファンサイト/.test(remainder) ||
     /公認ファンサイト/.test(remainder) ||
     /このサイトは(?:公式|公認|本人運営)/.test(remainder) ||
