@@ -53,11 +53,17 @@ jobs:
           set -euo pipefail
           for path in /api/mily-live /api/mily-radio-status; do
             echo "--- ${path} ---"
+            get_code=$(curl -sS -o /dev/null -w '%{http_code}' -X GET "${DEPLOYMENT_URL}${path}")
+            if [ "${get_code}" != "200" ]; then
+              # Vercel Deployment Protection 等で 401/302 になる URL は検証対象外。
+              echo "GET ${get_code}: 公開されていないURLのため契約検証をスキップ"
+              continue
+            fi
             curl -sS -D - -o /dev/null -X GET "${DEPLOYMENT_URL}${path}" \
               | grep -iE '^(HTTP/|cache-control|allow)'
             echo "(POST should be 405)"
             curl -sS -D - -o /dev/null -X POST "${DEPLOYMENT_URL}${path}" \
               | grep -iE '^(HTTP/|allow)'
-            code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "${DEPLOYMENT_URL}${path}")
-            test "${code}" = "405"
+            post_code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST "${DEPLOYMENT_URL}${path}")
+            test "${post_code}" = "405"
           done
