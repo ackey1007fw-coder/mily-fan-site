@@ -11,6 +11,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test scripts/*.test.mjs",
     "media:build": "node scripts/build-media.mjs",
+    "drive-gallery:build": "node scripts/build-drive-gallery.mjs",
     "guard": "node scripts/check-site-identity.mjs main && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-site-url.mjs"
   },
   "dependencies": {

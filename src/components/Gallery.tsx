@@ -1,8 +1,4 @@
-import {
-  driveGallery,
-  driveGallerySections,
-  visibleDriveGallery,
-} from "../data/driveGallery";
+import { driveGallerySections, visibleDriveGallery } from "../data/driveGallery";
 import { defaultSrc, media, srcSetFor, visibleMedia } from "../data/media";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
@@ -11,7 +7,7 @@ const SIZES = "(min-width: 640px) 350px, 100vw";
 
 export function Gallery() {
   const items = visibleMedia(media);
-  const drive = driveGallerySections(visibleDriveGallery(driveGallery));
+  const drive = driveGallerySections(visibleDriveGallery());
   const hasAny = items.length > 0 || drive.hasAny;
 
   return (
@@ -104,25 +100,24 @@ export function Gallery() {
                   key={photo.key}
                   className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card shadow-card"
                 >
-                  <a
-                    href={photo.linkHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
-                    aria-label={photo.linkLabel}
-                  >
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={photo.img.webpSrcSet}
+                      sizes={photo.img.sizes}
+                    />
                     <img
                       src={photo.img.src}
                       srcSet={photo.img.srcSet}
                       sizes={photo.img.sizes}
                       alt={photo.img.alt}
+                      width={photo.img.width}
+                      height={photo.img.height}
                       loading={photo.img.loading}
                       decoding={photo.img.decoding}
-                      referrerPolicy={photo.img.referrerPolicy}
-                      className="aspect-[4/5] w-full bg-sage-soft/30 object-contain"
+                      className="aspect-[4/5] w-full bg-sage-soft/30 object-cover"
                     />
-                    <span className="sr-only">（新しいタブで開きます）</span>
-                  </a>
+                  </picture>
                 </li>
               ))}
             </ul>
@@ -141,23 +136,19 @@ export function Gallery() {
                   key={video.key}
                   className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card"
                 >
-                  <iframe
-                    src={video.frame.src}
-                    title={video.frame.title}
-                    sandbox={video.frame.sandbox}
-                    loading={video.frame.loading}
-                    referrerPolicy={video.frame.referrerPolicy}
-                    allow="fullscreen"
-                    allowFullScreen
-                    className="aspect-[9/16] max-h-[72vh] w-full rounded-xl border-0 bg-sage-soft"
+                  <video
+                    src={video.video.src}
+                    poster={video.video.poster}
+                    width={video.video.width}
+                    height={video.video.height}
+                    controls={video.video.controls}
+                    playsInline={video.video.playsInline}
+                    preload={video.video.preload}
+                    aria-label={video.video.label}
+                    className="aspect-[9/16] max-h-[72vh] w-full rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
                   />
-                  <p className="px-2 pb-1 pt-2">
-                    <ExternalLink
-                      href={video.fallback.href}
-                      className="rounded text-sm font-medium text-sage hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
-                    >
-                      {video.fallback.label}
-                    </ExternalLink>
+                  <p className="px-2 pb-1 pt-2 text-sm leading-relaxed text-ink">
+                    {video.video.label}
                   </p>
                 </li>
               ))}

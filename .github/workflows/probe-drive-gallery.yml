@@ -42,3 +42,57 @@ jobs:
 
       - name: Probe individual Drive downloads and sanitize
         run: node scripts/probe-drive-gallery.mjs
+
+      # 実際の ingest を published 相当で1往復させ、sanitized static media と
+      # manifest が生成されることを確認する。出力は使い捨てディレクトリで、
+      # リポジトリの manifest も public/ も書き換えない。
+      - name: Rehearse the published ingest (throwaway output)
+        env:
+          DRIVE_GALLERY_STATE: published
+          DRIVE_GALLERY_OUTPUT_DIR: ${{ runner.temp }}/drive-gallery-out
+          DRIVE_GALLERY_MANIFEST: ${{ runner.temp }}/drive-gallery-manifest.json
+          DRIVE_GALLERY_ONLY: mily-drive-b02-p46,mily-drive-b02-v06
+        run: |
+          set -euo pipefail
+          node scripts/build-drive-gallery.mjs
+          echo "--- generated manifest ---"
+          cat "${DRIVE_GALLERY_MANIFEST}"
+          echo "--- generated files ---"
+          ls -la "${DRIVE_GALLERY_OUTPUT_DIR}"
+          node -e '
+            const fs = require("node:fs");
+            const m = JSON.parse(fs.readFileSync(process.env.DRIVE_GALLERY_MANIFEST, "utf8"));
+            const raw = JSON.stringify(m);
+            if (m.items.length !== 2) throw new Error("expected 2 manifest items");
+            if (/drive\.google\.com|drive\.usercontent\.google\.com/.test(raw)) {
+              throw new Error("manifest references a Drive host");
+            }
+            if (/"fileId"/.test(raw)) throw new Error("manifest carries a fileId");
+            for (const item of m.items) {
+              if (!item.src.startsWith("/media/drive-gallery/")) {
+                throw new Error(`${item.id} is not a local asset`);
+              }
+            }
+            const files = fs.readdirSync(process.env.DRIVE_GALLERY_OUTPUT_DIR);
+            const expected = [
+              "mily-b02-p46-480.jpg", "mily-b02-p46-480.webp",
+              "mily-b02-p46-960.jpg", "mily-b02-p46-960.webp",
+              "mily-b02-p46-1600.jpg", "mily-b02-p46-1600.webp",
+              "mily-b02-v06.mp4", "mily-b02-v06-poster.jpg",
+            ];
+            for (const name of expected) {
+              if (!files.includes(name)) throw new Error(`missing derivative ${name}`);
+            }
+            console.log("ingest rehearsal OK:", files.length, "files");
+          '
+
+      # 未公開状態では 1 度もネットワークへ出ないこと。
+      - name: Verify the review gate makes no request
+        env:
+          DRIVE_GALLERY_OUTPUT_DIR: ${{ runner.temp }}/drive-gallery-review
+          DRIVE_GALLERY_MANIFEST: ${{ runner.temp }}/drive-gallery-review.json
+        run: |
+          set -euo pipefail
+          node scripts/build-drive-gallery.mjs
+          cat "${DRIVE_GALLERY_MANIFEST}"
+          test "$(node -p "require('${DRIVE_GALLERY_MANIFEST}').items.length")" = "0"
