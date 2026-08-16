@@ -280,18 +280,133 @@ export function verifyMedia(items) {
   return errors;
 }
 
-export function verifyFacts(items) {
+const PROFILE_SECTIONS = new Set(["identity", "education", "interest", "skill"]);
+const PROFILE_STATUSES = new Set(["confirmed", "time-sensitive"]);
+const FM_IDENTITY_EVIDENCE = ["missCircle", "instagramProfile", "fmProgramInstagram"];
+
+export function verifyProfileSources(sources) {
   const errors = [];
+  const values = Object.values(sources ?? {});
+  assertUniqueIds(values, "profile sources", errors);
+
+  for (const source of values) {
+    const id = source.id ?? "?";
+    if (!source.title || !source.publisher) {
+      errors.push(`profile source "${id}" is missing title or publisher`);
+    }
+    assertConfirmedUrl(source.url, "profile source", id, errors);
+    if (!isValidDateOnly(source.verifiedAt ?? "")) {
+      errors.push(`profile source "${id}" verifiedAt must be a real YYYY-MM-DD`);
+    }
+    assertNoPersonMixup(source, "profile source", errors);
+    assertNoOfficialClaim(source, "profile source", errors);
+  }
+
+  return errors;
+}
+
+export function verifyFacts(items, sources) {
+  const errors = [];
+  assertUniqueIds(items, "profile facts", errors);
+  const knownSourceIds = new Set(Object.keys(sources ?? {}));
+
   for (const item of items) {
-    const id = item.label ?? "?";
+    const id = item.id ?? "?";
     if (!item.label || !item.value) {
       errors.push(`profile fact "${id}" is missing label or value`);
     }
-    assertConfirmedUrl(item.source, "profile fact", id, errors);
-    assertNoPersonMixup(item, "profile fact", errors);
-    assertNoOfficialClaim(item, "profile fact", errors);
+    if (!PROFILE_SECTIONS.has(item.section)) {
+      errors.push(`profile fact "${id}" has an invalid section`);
+    }
+    verifyProfileProvenance(item, "profile fact", knownSourceIds, errors);
   }
   return errors;
+}
+
+function verifyProfileProvenance(item, label, knownSourceIds, errors) {
+  const id = item?.id ?? "?";
+  if (!Array.isArray(item?.sourceIds) || item.sourceIds.length === 0) {
+    errors.push(`${label} "${id}" needs at least one sourceId`);
+  } else {
+    for (const sourceId of item.sourceIds) {
+      if (!knownSourceIds.has(sourceId)) {
+        errors.push(`${label} "${id}" references unknown sourceId "${sourceId}"`);
+      }
+    }
+    if (
+      item.sourceIds.includes("fmProfile") &&
+      !FM_IDENTITY_EVIDENCE.every((sourceId) => item.sourceIds.includes(sourceId))
+    ) {
+      errors.push(
+        `${label} "${id}" using fmProfile needs the full cross-source identity evidence set`,
+      );
+    }
+  }
+  if (!PROFILE_STATUSES.has(item?.status)) {
+    errors.push(`${label} "${id}" has an invalid status`);
+  }
+  if (item?.status === "time-sensitive" && !isValidDateOnly(item.asOf ?? "")) {
+    errors.push(`${label} "${id}" time-sensitive items need a real asOf date`);
+  }
+  if (item?.asOf && !isValidDateOnly(item.asOf)) {
+    errors.push(`${label} "${id}" asOf must be a real YYYY-MM-DD`);
+  }
+  assertNoPersonMixup(item, label, errors);
+  assertNoOfficialClaim(item, label, errors);
+}
+
+export function verifyVision(item, sources) {
+  const errors = [];
+  const knownSourceIds = new Set(Object.keys(sources ?? {}));
+  if (!item?.id || !item.title || !item.body) {
+    errors.push(`profile vision "${item?.id ?? "?"}" is missing id, title, or body`);
+  }
+  verifyProfileProvenance(item, "profile vision", knownSourceIds, errors);
+  return errors;
+}
+
+export function verifyActivities(items, sources) {
+  const errors = [];
+  const knownSourceIds = new Set(Object.keys(sources ?? {}));
+  assertUniqueIds(items, "profile activities", errors);
+  for (const item of items) {
+    const id = item.id ?? "?";
+    if (!item.eyebrow || !item.title || !item.body) {
+      errors.push(`profile activity "${id}" is missing eyebrow, title, or body`);
+    }
+    if (!Array.isArray(item.points) || item.points.length === 0) {
+      errors.push(`profile activity "${id}" needs at least one point`);
+    }
+    verifyProfileProvenance(item, "profile activity", knownSourceIds, errors);
+  }
+  return errors;
+}
+
+export function verifyCollections(items, sources) {
+  const errors = [];
+  const knownSourceIds = new Set(Object.keys(sources ?? {}));
+  assertUniqueIds(items, "profile collections", errors);
+  for (const item of items) {
+    const id = item.id ?? "?";
+    if (!item.title || !item.note) {
+      errors.push(`profile collection "${id}" is missing title or note`);
+    }
+    if (!Array.isArray(item.items) || item.items.length === 0) {
+      errors.push(`profile collection "${id}" needs at least one item`);
+    }
+    verifyProfileProvenance(item, "profile collection", knownSourceIds, errors);
+  }
+  return errors;
+}
+
+export function verifyProfile(profile, sources) {
+  if (!profile || typeof profile !== "object") return ["profile content is missing"];
+  return [
+    ...verifyFacts(profile.facts ?? [], sources),
+    ...verifyVision(profile.vision, sources),
+    ...verifyActivities(profile.activities ?? [], sources),
+    ...verifyCollections(profile.collections ?? [], sources),
+  ];
 }
 
 export function verifyAllContent({
@@ -300,7 +415,8 @@ export function verifyAllContent({
   socials,
   links,
   highlights,
-  facts,
+  profile,
+  profileSources = {},
   media = [],
 }) {
   return [
@@ -309,7 +425,8 @@ export function verifyAllContent({
     ...verifySocials(socials),
     ...verifyLinks(links),
     ...verifyHighlights(highlights),
-    ...verifyFacts(facts),
+    ...verifyProfileSources(profileSources),
+    ...verifyProfile(profile, profileSources),
     ...verifyMedia(media),
   ];
 }

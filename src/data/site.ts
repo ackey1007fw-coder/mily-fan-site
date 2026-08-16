@@ -25,6 +25,10 @@ export function canonicalUrl(): string {
   return `${siteOrigin()}/`;
 }
 
+export function profileUrl(): string {
+  return `${siteOrigin()}/profile/`;
+}
+
 export function ogImageUrl(): string {
   const imagePath = site.ogImagePath.startsWith("/")
     ? site.ogImagePath
@@ -43,6 +47,11 @@ export function sitemapXml(): string {
     <loc>${canonicalUrl()}</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>${profileUrl()}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
 `;

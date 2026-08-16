@@ -89,7 +89,7 @@ describe("daily content-ops guide", () => {
 
   it("does not invent facts while documenting the current inventory", () => {
     assert.equal(profile.displayName, "みりぃ");
-    assert.equal(profile.legalName, "三橋莉子");
+    assert.equal(profile.publicName, "三橋莉子");
     assert.ok(news.some((item) => item.id === "2026-08-02-21st-birthday"));
     assert.ok(socials.some((item) => item.platform === "x"));
     assert.ok(socials.some((item) => item.platform === "instagram"));
@@ -98,7 +98,9 @@ describe("daily content-ops guide", () => {
     assert.ok(links.some((item) => item.url.includes("fm-smw.jp")));
     assert.ok(media.filter((item) => item.published).length >= 6);
     assert.ok(
-      profile.facts.some((fact) => /ENTRY 734/.test(`${fact.label} ${fact.value}`)),
+      profile.activities.some((activity) =>
+        /ENTRY 734/.test(`${activity.title} ${activity.body} ${activity.points.join(" ")}`),
+      ),
     );
   });
 });

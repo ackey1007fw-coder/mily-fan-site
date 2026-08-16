@@ -7,7 +7,7 @@ const baseNavItems: NavItem[] = [
   { href: "#latest", label: "最新情報" },
   { href: "#support", label: "応援する" },
   { href: "#gallery", label: "ギャラリー" },
-  { href: "#about", label: "プロフィール" },
+  { href: "/profile/", label: "プロフィール" },
   { href: "#links", label: "リンク" },
 ];
 

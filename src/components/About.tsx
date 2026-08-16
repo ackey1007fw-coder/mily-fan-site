@@ -1,81 +1,51 @@
-import { highlights } from "../data/highlights";
 import { profile } from "../data/profile";
-import { ExternalLink } from "./ExternalLink";
+
+const previewFactIds = new Set(["hometown", "university", "special-skill", "fan-name"]);
+
+function formatDate(date: string) {
+  const [year, month, day] = date.split("-").map(Number);
+  return `${year}年${month}月${day}日`;
+}
 
 export function About() {
+  const previewFacts = profile.facts.filter((fact) => previewFactIds.has(fact.id));
+
   return (
     <section id="about" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-ink">プロフィール</h2>
-        <p className="mt-2 text-sm text-ink-muted">みりぃさんのこと。</p>
-        <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
-          <dl className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <dt className="text-xs text-ink-muted">呼び名</dt>
-              <dd className="mt-1 text-lg font-semibold text-ink">
-                {profile.displayName}
-              </dd>
-            </div>
-            <div>
-              <dt className="text-xs text-ink-muted">氏名</dt>
-              <dd className="mt-1 text-lg font-semibold text-ink">
-                {profile.legalName}
-              </dd>
-            </div>
-          </dl>
-          <p className="mt-5 text-sm leading-relaxed text-ink-muted">
-            {profile.summary}
-          </p>
-          {profile.facts.length > 0 ? (
-            <dl className="mt-5 grid gap-3">
-              {profile.facts.map((fact) => (
-                <div
-                  key={fact.label}
-                  className="rounded-xl bg-sage-soft/60 px-4 py-3"
-                >
+        <div className="overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card">
+          <div className="bg-sage-soft/70 px-5 py-6 sm:px-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+              Meet Mily
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-ink">みりぃをもっと知る</h2>
+            <p className="mt-3 text-sm leading-7 text-ink-muted">{profile.summary}</p>
+          </div>
+          <div className="p-5 sm:p-8">
+            <dl className="grid gap-3 sm:grid-cols-2">
+              {previewFacts.map((fact) => (
+                <div key={fact.id} className="rounded-2xl bg-paper px-4 py-3">
                   <dt className="text-xs text-ink-muted">{fact.label}</dt>
-                  <dd className="mt-1 text-sm text-ink">{fact.value}</dd>
-                  <dd className="mt-2">
-                    <ExternalLink
-                      href={fact.source}
-                      className="text-sm font-medium text-sage hover:underline"
-                    >
-                      出典を見る
-                    </ExternalLink>
-                  </dd>
+                  <dd className="mt-1 font-semibold text-ink">{fact.value}</dd>
+                  {fact.asOf ? (
+                    <dd className="mt-1 text-xs text-ink-muted">
+                      {formatDate(fact.asOf)}確認
+                    </dd>
+                  ) : null}
                 </div>
               ))}
             </dl>
-          ) : (
-            <p className="mt-5 rounded-xl bg-sage-soft/60 px-4 py-3 text-sm text-sage-deep">
-              誕生日や出身などの情報は、これから少しずつ追加していきます。
+            <p className="mt-6 text-sm leading-7 text-ink-muted">
+              ラジオ、吹奏楽、SHOWROOM、大学生コンテスト、好きなものまで。確認時点が分かる公開情報を、出典付きの専用ページにまとめました。
             </p>
-          )}
+            <a
+              href="/profile/"
+              className="mt-5 inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+            >
+              詳しいプロフィールを見る
+            </a>
+          </div>
         </div>
-        {highlights.length > 0 ? (
-          <ol className="mt-6 space-y-3">
-            {highlights.map((item) => (
-              <li
-                key={item.id}
-                className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
-              >
-                <p className="text-xs text-ink-muted">{item.year}</p>
-                <p className="mt-1 font-semibold text-ink">{item.title}</p>
-                {item.body ? (
-                  <p className="mt-2 text-sm text-ink-muted">{item.body}</p>
-                ) : null}
-                <p className="mt-3">
-                  <ExternalLink
-                    href={item.source}
-                    className="text-sm font-medium text-sage hover:underline"
-                  >
-                    出典を見る
-                  </ExternalLink>
-                </p>
-              </li>
-            ))}
-          </ol>
-        ) : null}
       </div>
     </section>
   );

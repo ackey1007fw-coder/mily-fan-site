@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 export const EXPECTED = {
   branch: "main",
   displayName: "みりぃ",
-  legalName: "三橋莉子",
+  publicName: "三橋莉子",
   packageName: "mily-fan-site",
   titleIncludes: "みりぃ",
   repoName: "mily-fan-site",
@@ -125,8 +125,8 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     errors.push(`profile.ts must set displayName to "${EXPECTED.displayName}".`);
   }
 
-  if (!profile.includes(`legalName: "${EXPECTED.legalName}"`)) {
-    errors.push(`profile.ts must set legalName to "${EXPECTED.legalName}".`);
+  if (!profile.includes(`publicName: "${EXPECTED.publicName}"`)) {
+    errors.push(`profile.ts must set publicName to "${EXPECTED.publicName}".`);
   }
 
   const titleMatch = html.match(/<title>([^<]*)<\/title>/);
@@ -167,7 +167,7 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   }
 
   console.log(
-    `site-guard: identity ok (${EXPECTED.displayName} / ${EXPECTED.legalName} / ${EXPECTED.repoName}).`,
+    `site-guard: identity ok (${EXPECTED.displayName} / ${EXPECTED.publicName} / ${EXPECTED.repoName}).`,
   );
   return 0;
 }

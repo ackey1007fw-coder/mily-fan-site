@@ -34,7 +34,7 @@ export function Hero() {
           <h1 className="mt-2 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
             {profile.displayName}
           </h1>
-          <p className="mt-2 text-lg text-ink-muted">{profile.legalName}</p>
+          <p className="mt-2 text-lg text-ink-muted">{profile.publicName}</p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink">
             みりぃさんの活動の記録を、ファンの手でゆっくり集めていく場所です。
           </p>

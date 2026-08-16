@@ -5,14 +5,19 @@ import { highlights } from "../src/data/highlights.ts";
 import { links } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
 import { news } from "../src/data/news.ts";
-import { profile } from "../src/data/profile.ts";
+import { profile, profileSources } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 import {
   verifyAllContent,
   verifyEvents,
   verifyMedia,
   verifyNews,
+  verifyActivities,
+  verifyCollections,
+  verifyFacts,
+  verifyProfileSources,
   verifySocials,
+  verifyVision,
   claimsThisSiteIsOfficial,
 } from "./content-invariants.mjs";
 
@@ -51,7 +56,8 @@ describe("content verification invariants", () => {
       socials,
       links,
       highlights,
-      facts: profile.facts,
+      profile,
+      profileSources,
       media,
     });
     assert.deepEqual(errors, []);
@@ -77,13 +83,37 @@ describe("content verification invariants", () => {
           source: "https://example.com/highlight",
         },
       ],
-      facts: [
-        {
-          label: "公開名",
-          value: "みりぃ",
-          source: "https://example.com/profile",
+      profile: {
+        facts: [
+          {
+            id: "public-name",
+            section: "identity",
+            label: "公開名",
+            value: "みりぃ",
+            sourceIds: ["example"],
+            status: "confirmed",
+          },
+        ],
+        vision: {
+          id: "vision",
+          title: "確認済みの目標",
+          body: "公開プロフィールに記載されている目標。",
+          sourceIds: ["example"],
+          status: "time-sensitive",
+          asOf: "2026-08-16",
         },
-      ],
+        activities: [],
+        collections: [],
+      },
+      profileSources: {
+        example: {
+          id: "example",
+          title: "確認済みプロフィール",
+          publisher: "主催者",
+          url: "https://example.com/profile",
+          verifiedAt: "2026-08-14",
+        },
+      },
       media: [
         {
           id: "sample-photo",
@@ -103,6 +133,115 @@ describe("content verification invariants", () => {
       ],
     });
     assert.deepEqual(errors, []);
+  });
+
+  it("rejects unsourced or stale-shaped profile facts", () => {
+    const sources = {
+      confirmed: {
+        id: "confirmed-source",
+        title: "確認済みプロフィール",
+        publisher: "主催者",
+        url: "https://example.com/profile",
+        verifiedAt: "2026-08-16",
+      },
+    };
+    assert.deepEqual(verifyProfileSources(sources), []);
+
+    const errors = verifyFacts(
+      [
+        {
+          id: "bad-fact",
+          section: "unknown",
+          label: "変動情報",
+          value: "現在の値",
+          sourceIds: ["missing"],
+          status: "time-sensitive",
+        },
+      ],
+      sources,
+    );
+
+    assert.ok(errors.some((error) => error.includes("invalid section")));
+    assert.ok(errors.some((error) => error.includes("unknown sourceId")));
+    assert.ok(errors.some((error) => error.includes("need a real asOf")));
+  });
+
+  it("enforces provenance, safety, and asOf across vision, activities, and collections", () => {
+    const sources = {
+      confirmed: {
+        id: "confirmed-source",
+        title: "確認済みプロフィール",
+        publisher: "主催者",
+        url: "https://example.com/profile",
+        verifiedAt: "2026-08-16",
+      },
+    };
+    const sharedBadContent = {
+      sourceIds: ["missing"],
+      status: "time-sensitive",
+      body: "このサイトは公式です。吉井優花子さんの情報です。",
+    };
+
+    const visionErrors = verifyVision(
+      { id: "bad-vision", title: "変動する目標", ...sharedBadContent },
+      sources,
+    );
+    const activityErrors = verifyActivities(
+      [
+        {
+          id: "bad-activity",
+          eyebrow: "ACTIVITY",
+          title: "変動する活動",
+          points: ["確認前の情報"],
+          ...sharedBadContent,
+        },
+      ],
+      sources,
+    );
+    const collectionErrors = verifyCollections(
+      [
+        {
+          id: "bad-collection",
+          title: "変動する好み",
+          note: "このサイトは公式です。吉井優花子さんの情報です。",
+          items: ["確認前の情報"],
+          sourceIds: [],
+          status: "time-sensitive",
+        },
+      ],
+      sources,
+    );
+
+    for (const errors of [visionErrors, activityErrors, collectionErrors]) {
+      assert.ok(errors.some((error) => error.includes("sourceId")));
+      assert.ok(errors.some((error) => error.includes("asOf")));
+      assert.ok(errors.some((error) => error.includes("another person")));
+      assert.ok(errors.some((error) => error.includes("must not claim this site is official")));
+    }
+  });
+
+  it("rejects FM-derived profile content without the cross-source identity evidence set", () => {
+    const errors = verifyCollections(
+      [
+        {
+          id: "fm-only",
+          title: "FM掲載内容",
+          note: "FMプロフィールに掲載された内容。",
+          items: ["公開情報"],
+          sourceIds: ["fmProfile"],
+          status: "time-sensitive",
+          asOf: "2026-08-16",
+        },
+      ],
+      {
+        fmProfile: {},
+        missCircle: {},
+        instagramProfile: {},
+        fmProgramInstagram: {},
+      },
+    );
+
+    assert.ok(errors.some((error) => error.includes("cross-source identity evidence")));
   });
 
   it("rejects incomplete media and filenames off the mily- scheme", () => {

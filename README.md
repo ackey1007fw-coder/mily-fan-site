@@ -17,6 +17,7 @@
 - Follow Mily: X / Instagram / TikTok / SHOWROOM（すべてENTRY 734実ページで確認済み）
 - FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）
 - ギャラリーに写真を掲載しています（最適化・出典管理の手順は `docs/MEDIA.md`）
+- `/profile/` に、ラジオ・音楽経験・配信・コンテスト・好きなものを一次情報の出典付きでまとめた詳細プロフィール
 - 予定は、確認できるまでセクションを非表示にします
 
 ## 開発
@@ -33,7 +34,7 @@ pnpm build
 
 | ファイル | 内容 |
 | --- | --- |
-| `src/data/profile.ts` | 確認できた最小限のプロフィール |
+| `src/data/profile.ts` | 出典台帳・確認済みプロフィール・活動・嗜好 |
 | `src/data/events.ts` | 年をまたげる予定 |
 | `src/data/news.ts` | 最新情報 |
 | `src/data/media.ts` | 写真・動画（手順: `docs/MEDIA.md`） |

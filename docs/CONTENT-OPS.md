@@ -18,8 +18,8 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `media.ts` | 写真6枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスは `owner-provided` | `sourceDate` / `credit` は未確認のため `null` |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM | ENTRY 734 実ページで確認済み | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
-| `profile.ts` | ENTRY 734、FMスタッフページの Mily / 番組記載 | 各 `source` | 誕生日・出身・所属などは未確認のまま |
-| `highlights.ts` | **空** | — | 節目の記録用。推測で埋めない |
+| `profile.ts` | 公表名、活動名、生年月日、出身、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳 | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける |
+| `highlights.ts` | MISS CIRCLE、CAMPUS GIRLS、SHOWROOM開始の確認済み3件 | 主催者・本人・SHOWROOM | 結果未確定の順位や掲載権は入れない |
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
 維持する公開情報（消さない）:
@@ -43,7 +43,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 - 全メディアの `sourceDate` / `credit`
 - `mily-b01-06`（ネックレス）の公開投稿 URL
 - 出演・イベント（`events.ts` は空で正しい）
-- ハイライト
+- 所属事務所、商業音源、現在順位、フォロワー数など不存在・変動を伴う情報
 
 ---
 
@@ -57,7 +57,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | 写真 | Drive → `media/original/` → `pnpm media:build` → `media.ts` | SNS から自動ダウンロードしない |
 | SNS URL の追加・変更 | オーナー確認後に `socials.ts` | 未確認アカウントを足さない |
 | FM の番組名・ページ変更 | オーナー確認後に `profile.ts` / `links.ts` | スタッフページを読んで推測で肩書を足さない |
-| プロフィール事実 | オーナー確認後に `profile.ts` | 空欄を埋めるために検索結果を採用しない |
+| プロフィール事実 | オーナー確認後に `profile.ts` と `profileSources` | 空欄を埋めるために検索結果だけを採用しない |
 
 ---
 
@@ -127,6 +127,24 @@ Google Drive 原本 → 選定 → media/original/ → pnpm media:build
 - 公開表記は **Mily（ミリー）**。ファンサイトの呼びは **みりぃ**。どちらも消さない。
 - 番組名・URL・担当の記載が一次ソースで変わったときだけ、`profile.ts` の該当 fact と `links.ts` を同じ根拠で直す。
 - 放送時刻・コーナー名・共演者は、スタッフページに無いなら書かない。
+
+---
+
+## 詳細プロフィールを更新するとき
+
+プロフィール本文は `src/data/profile.ts`、節目は `src/data/highlights.ts`、表示は専用の `/profile/` ページです。
+
+1. 本人、主催者、放送局、配信プラットフォームの一次ページを開いて内容を確認する。
+2. 新しい出典は `profileSources` に `id / title / publisher / url / verifiedAt` を登録する。
+3. 各事実・将来像・活動・コレクションから `sourceIds` で出典へ結び付ける。存在しない id や出典なしはCIで拒否される。
+4. 大学・学年、所属、趣味、ファンネーム、将来像、活動、Favoritesなど変わり得る内容は `time-sensitive` とし、`asOf` を必ず付ける。
+5. 生年月日は固定情報として保存しても、年齢を固定文字列で書かない。
+6. フォロワー数、現在順位、配信予定、審査中の結果はプロフィールへ固定しない。
+7. 「所属事務所なし」「音源なし」「論争なし」など不存在を推測して埋めない。
+8. 活動名は **Mily / mily**。l を重ねた表記へ変更しない。
+9. FM由来の内容は、本人Instagramの公開identity、MISS CIRCLEのFM活動記載、番組側のMily表記、FMプロフィールをセットで出典化し、FMページ単独で氏名を推測しない。
+
+プロフィール事実の追加・変更は、一次情報をPR本文へ列挙し、オーナー確認を受けてから公開します。
 
 ---
 

@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import {
   canonicalUrl,
   ogImageUrl,
+  profileUrl,
   robotsTxt,
   site,
   siteOrigin,
@@ -15,9 +16,11 @@ describe("site.siteUrl metadata source of truth", () => {
     const origin = siteOrigin();
     assert.equal(origin, "https://mily-fan-site.vercel.app");
     assert.equal(canonicalUrl(), `${origin}/`);
+    assert.equal(profileUrl(), `${origin}/profile/`);
     assert.equal(ogImageUrl(), `${origin}${site.ogImagePath}`);
     assert.match(robotsTxt(), new RegExp(`Sitemap: ${origin}/sitemap.xml`));
     assert.match(sitemapXml(), new RegExp(`<loc>${canonicalUrl()}</loc>`));
+    assert.match(sitemapXml(), new RegExp(`<loc>${profileUrl()}</loc>`));
   });
 
   it("fails when public metadata drifts from site.siteUrl", () => {

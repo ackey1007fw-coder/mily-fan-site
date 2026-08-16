@@ -30,9 +30,9 @@ export default function App() {
         <StreamSchedule />
         <Socials />
         <Latest />
+        <About />
         <Gallery />
         <Schedule />
-        <About />
       </main>
       <Footer />
       <MobileActionDock />
