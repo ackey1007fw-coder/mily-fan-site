@@ -7,6 +7,9 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+
+// Avoid Windows retaining fixture file handles through libvips' operation cache.
+sharp.cache(false);
 import {
   DRIVE_PHOTO_SIZES,
   driveGalleryManifest,
@@ -80,6 +83,23 @@ const sourceVideos = driveGallerySource.filter((item) => item.kind === "video");
 
 async function read(relative) {
   return readFile(path.join(root, relative), "utf8");
+}
+
+/** Sharp/ffprobe can release Windows file handles a few milliseconds after an
+ * assertion completes. Keep fixture cleanup deterministic across platforms. */
+async function removeFixture(target, options = {}) {
+  let lastError;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    try {
+      await rm(target, options);
+      return;
+    } catch (error) {
+      if (!new Set(["EBUSY", "EPERM", "ENOTEMPTY"]).has(error.code)) throw error;
+      lastError = error;
+      await new Promise((resolve) => setTimeout(resolve, 50 * (attempt + 1)));
+    }
+  }
+  throw lastError;
 }
 
 /** A published manifest built from the registry, without any original. */
@@ -255,18 +275,23 @@ describe("Public repository carries no Drive identifier", () => {
 });
 
 describe("Drive gallery publication gate", () => {
-  it("stays in review in both the entry registry and the generated manifest", () => {
-    assert.equal(driveGalleryPublication.state, "review");
-    assert.equal(driveGalleryManifest.publicationState, "review");
-    assert.equal(isDriveGalleryPublished(), false);
+  it("is published in both the entry registry and the generated manifest", () => {
+    assert.equal(driveGalleryPublication.state, "published");
+    assert.equal(driveGalleryManifest.publicationState, "published");
+    assert.equal(isDriveGalleryPublished(), true);
   });
 
-  it("ships an empty manifest and no derivative while unpublished", async () => {
-    assert.deepEqual(driveGalleryManifest.items, []);
-    assert.deepEqual(visibleDriveGallery(), []);
-    assert.equal(driveGallerySections(visibleDriveGallery()).hasAny, false);
+  it("ships the complete sanitized derivative set while published", async () => {
+    const visible = visibleDriveGallery();
+    const sections = driveGallerySections(visible);
+    assert.equal(visible.length, PUBLISHABLE_COUNT);
+    assert.equal(sections.photos.length, PUBLISHABLE_PHOTO_COUNT);
+    assert.equal(sections.videos.length, VIDEO_COUNT);
+    assert.equal(sections.hasAny, true);
+
+    const expected = publishableSource(driveGallerySource).flatMap(derivativesFor).sort();
     const entries = await readdir(path.join(root, "public/media/drive-gallery"));
-    assert.deepEqual(entries.filter((n) => !n.startsWith(".")), []);
+    assert.deepEqual(entries.filter((n) => !n.startsWith(".")).sort(), expected);
   });
 
   it("renders 45 photos and 11 videos from a published fixture", () => {
@@ -300,18 +325,20 @@ describe("Drive gallery publication gate", () => {
         cwd: root,
         env: {
           ...process.env,
+          DRIVE_GALLERY_STATE: "review",
           // Point the input at a directory that does not exist: a review run
           // must never touch it.
           DRIVE_GALLERY_INPUT_DIR: path.join(dir, "absent"),
           DRIVE_GALLERY_OUTPUT_DIR: path.join(dir, "out"),
           DRIVE_GALLERY_MANIFEST: manifestPath,
+          DRIVE_GALLERY_ATTESTATION: path.join(dir, "attestation.json"),
         },
       });
       const written = JSON.parse(await readFile(manifestPath, "utf8"));
       assert.equal(written.publicationState, "review");
       assert.deepEqual(written.items, []);
     } finally {
-      await rm(dir, { recursive: true, force: true });
+      await removeFixture(dir, { recursive: true, force: true });
     }
   });
 });
@@ -472,7 +499,7 @@ describe("Sanitize pipeline (local fixtures)", () => {
   });
 
   after(async () => {
-    await rm(dir, { recursive: true, force: true });
+    await removeFixture(dir, { recursive: true, force: true });
   });
 
   it("strips EXIF, GPS, IPTC and XMP from photos", async () => {
@@ -616,7 +643,7 @@ describe("Existing derivatives are re-validated before reuse", () => {
       source,
     ]);
     await sanitizeVideo({ id, kind: "video", alt: id }, source, out);
-    await rm(source, { force: true });
+    await removeFixture(source, { force: true });
     return out;
   }
 
@@ -630,7 +657,7 @@ describe("Existing derivatives are re-validated before reuse", () => {
   });
 
   after(async () => {
-    await rm(dir, { recursive: true, force: true });
+    await removeFixture(dir, { recursive: true, force: true });
   });
 
   it("reuses a clean existing photo set and reads its real dimensions", async () => {
@@ -705,7 +732,7 @@ describe("Existing derivatives are re-validated before reuse", () => {
       /does not decode/,
     );
 
-    await rm(path.join(out, `${id}-480.webp`));
+    await removeFixture(path.join(out, `${id}-480.webp`));
     await assert.rejects(
       () => validatePhotoDerivatives(entry, out, attested),
       /missing derivative/,
@@ -775,7 +802,7 @@ describe("Existing derivatives are re-validated before reuse", () => {
     await writeFile(path.join(out, `${id}-poster.jpg`), "not an image");
     await assert.rejects(() => validateVideoDerivatives(entry, out), /poster does not decode/);
 
-    await rm(path.join(out, `${id}-poster.jpg`));
+    await removeFixture(path.join(out, `${id}-poster.jpg`));
     await assert.rejects(() => validateVideoDerivatives(entry, out), /missing derivative/);
   });
 
@@ -804,7 +831,7 @@ describe("Existing derivatives are re-validated before reuse", () => {
     const out = await buildVideoSet(id);
     const entry = { id, kind: "video", alt: "reuse" };
 
-    await rm(path.join(out, `${id}-poster.jpg`));
+    await removeFixture(path.join(out, `${id}-poster.jpg`));
     assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "partial");
   });
 
@@ -871,7 +898,7 @@ describe("MP4 stream-level metadata", () => {
   });
 
   after(async () => {
-    await rm(dir, { recursive: true, force: true });
+    await removeFixture(dir, { recursive: true, force: true });
   });
 
   it("allowlists only the tags this muxer writes itself", () => {
@@ -991,7 +1018,7 @@ describe("Trusted photo source attestation", () => {
   });
 
   after(async () => {
-    await rm(dir, { recursive: true, force: true });
+    await removeFixture(dir, { recursive: true, force: true });
   });
 
   it("measures the oriented size of the original", async () => {
@@ -1115,10 +1142,17 @@ describe("Trusted photo source attestation", () => {
     );
   });
 
-  it("keeps the committed attestation non-identifying and empty while unpublished", async () => {
+  it("keeps the committed published attestation complete and non-identifying", async () => {
     const raw = await read("scripts/drive-gallery-attestation.json");
     const parsed = JSON.parse(raw);
-    assert.deepEqual(parsed.entries, {});
+    assert.equal(Object.keys(parsed.entries).length, PUBLISHABLE_PHOTO_COUNT);
+    for (const id of PRIVACY_HOLD_IDS) assert.equal(id in parsed.entries, false);
+    for (const [id, entry] of Object.entries(parsed.entries)) {
+      assert.match(id, /^mily-drive-b02-p\d{2}$/);
+      assert.deepEqual(Object.keys(entry).sort(), ["sourceHeight", "sourceWidth"]);
+      assert.equal(Number.isInteger(entry.sourceWidth) && entry.sourceWidth > 0, true);
+      assert.equal(Number.isInteger(entry.sourceHeight) && entry.sourceHeight > 0, true);
+    }
     assert.equal(DRIVE_HOST_PATTERN.test(raw), false);
     assert.deepEqual(findDriveIds(raw), []);
   });
@@ -1143,7 +1177,7 @@ describe("Repository scan is extension-independent", () => {
   });
 
   after(async () => {
-    await rm(dir, { recursive: true, force: true });
+    await removeFixture(dir, { recursive: true, force: true });
   });
 
   it("finds id-shaped tokens in files no extension allowlist would cover", async () => {

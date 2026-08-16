@@ -113,7 +113,7 @@ private credentials 経由とし、**public repository には秘密情報を置�
 `scripts/drive-gallery-source.mjs` の `driveGalleryPublication.state` がバッチ全体のゲートです。
 
 ```js
-export const driveGalleryPublication = { state: "review" };
+export const driveGalleryPublication = { state: "published" };
 ```
 
 ゲートは 2 段で効きます。

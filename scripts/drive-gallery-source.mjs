@@ -34,7 +34,7 @@
 /** Publication gate for the whole batch. Flip to "published" only after every
  *  alt is verified and the owner has approved publication. While "review", the
  *  ingest reads nothing and writes an empty manifest. */
-export const driveGalleryPublication = { state: "review" };
+export const driveGalleryPublication = { state: "published" };
 
 /** Output basename for an entry: "mily-drive-b02-p02" -> "mily-b02-p02". */
 export function outputSlug(id) {
