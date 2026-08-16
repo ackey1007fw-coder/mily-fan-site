@@ -19,7 +19,8 @@ async function read(relative) {
 describe("confirmed public identity", () => {
   it("keeps mily spelling and stores detailed facts with confirmed sources", () => {
     assert.equal(profile.displayName, "みりぃ");
-    assert.equal(profile.legalName, "三橋莉子");
+    assert.equal(profile.publicName, "三橋莉子");
+    assert.equal("legalName" in profile, false);
     assert.ok(profile.facts.length >= 9);
 
     const factText = profile.facts
@@ -45,18 +46,27 @@ describe("confirmed public identity", () => {
           /^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt),
       ),
     );
+    const sourcedProfileItems = [
+      ...profile.facts,
+      profile.vision,
+      ...profile.activities,
+      ...profile.collections,
+    ];
     assert.ok(
-      profile.facts.every(
-        (fact) =>
-          fact.sourceIds.length > 0 &&
-          fact.sourceIds.every((sourceId) => sourceKeys.has(sourceId)),
+      sourcedProfileItems.every(
+        (item) =>
+          item.sourceIds.length > 0 &&
+          item.sourceIds.every((sourceId) => sourceKeys.has(sourceId)),
       ),
     );
     assert.ok(
-      profile.facts
-        .filter((fact) => fact.status === "time-sensitive")
-        .every((fact) => /^\d{4}-\d{2}-\d{2}$/.test(fact.asOf ?? "")),
+      sourcedProfileItems
+        .filter((item) => item.status === "time-sensitive")
+        .every((item) => /^\d{4}-\d{2}-\d{2}$/.test(item.asOf ?? "")),
     );
+    for (const id of ["food", "inspirations", "episodes"]) {
+      assert.equal(profile.collections.find((item) => item.id === id)?.collapsed, true, id);
+    }
   });
 
   it("keeps only confirmed socials and contest/FM links separate", () => {

@@ -10,7 +10,7 @@
 ## 作業前チェック
 
 1. `git remote -v` が `mily-fan-site` を指していること。
-2. `src/data/profile.ts` の `displayName` が **みりぃ**、`legalName` が **三橋莉子** であること。
+2. `src/data/profile.ts` の `displayName` が **みりぃ**、`publicName` が **三橋莉子** であること。
 3. 英語表記は必ず **Mily / mily**。これは本人が使用している公開identity（Instagram **@mily_chan36**）であり、一般英単語の綴りではない。spellcheck・lint・AIの推測より本人の公開表記を優先し、「typoかもしれない」という判断で l を重ねた表記へ"修正"しない。l を重ねた表記の方が誤りで、guard が全ファイルを検査して検出する。
 4. 別人物の名前や別サイトの URL が入っていたら、編集せず止まって報告する。
 

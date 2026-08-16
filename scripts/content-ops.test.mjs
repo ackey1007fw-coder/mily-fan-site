@@ -89,7 +89,7 @@ describe("daily content-ops guide", () => {
 
   it("does not invent facts while documenting the current inventory", () => {
     assert.equal(profile.displayName, "みりぃ");
-    assert.equal(profile.legalName, "三橋莉子");
+    assert.equal(profile.publicName, "三橋莉子");
     assert.ok(news.some((item) => item.id === "2026-08-02-21st-birthday"));
     assert.ok(socials.some((item) => item.platform === "x"));
     assert.ok(socials.some((item) => item.platform === "instagram"));

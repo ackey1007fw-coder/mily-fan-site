@@ -9,7 +9,7 @@ export function Support() {
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">応援する</h2>
         <p className="mt-2 text-sm text-ink-muted">
-          {profile.displayName}（{profile.legalName}）さんのエントリーを、ファンとして応援できます。
+          {profile.displayName}（{profile.publicName}）さんのエントリーを、ファンとして応援できます。
           このサイトはファン制作の非公式サイトです。
         </p>
         <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card sm:p-6">
@@ -20,7 +20,7 @@ export function Support() {
             ENTRY 734
           </p>
           <p className="mt-1 text-base text-ink-muted">
-            {profile.displayName} / {profile.legalName}
+            {profile.displayName} / {profile.publicName}
           </p>
           <p className="mt-6">
             <ExternalLink

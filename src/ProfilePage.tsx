@@ -85,7 +85,8 @@ function ProfileHero() {
           <h1 className="mt-2 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
             {profile.displayName}
           </h1>
-          <p className="mt-2 text-xl font-semibold text-ink">{profile.legalName}</p>
+          <p className="mt-2 text-xs font-medium text-ink-muted">公表名</p>
+          <p className="mt-1 text-xl font-semibold text-ink">{profile.publicName}</p>
           <p className="mt-1 text-sm text-ink-muted">{profile.aliases.join(" / ")}</p>
           <p className="mt-5 text-base leading-8 text-ink">{profile.summary}</p>
           <p className="mt-4 text-xs leading-relaxed text-ink-muted">
@@ -162,7 +163,7 @@ function ProfileBasics() {
               ) : null}
               {fact.asOf ? (
                 <dd className="mt-2 text-xs text-ink-muted">
-                  {formatDate(fact.asOf)}時点
+                  {formatDate(fact.asOf)}確認
                 </dd>
               ) : null}
               <dd>
@@ -180,6 +181,11 @@ function ProfileBasics() {
             {profile.vision.title}
           </p>
           <p className="mt-3 text-sm leading-7 text-ink-muted">{profile.vision.body}</p>
+          {profile.vision.asOf ? (
+            <p className="mt-3 text-xs text-ink-muted">
+              {formatDate(profile.vision.asOf)}確認
+            </p>
+          ) : null}
           <SourceLinks sourceIds={profile.vision.sourceIds} />
         </div>
       </div>
@@ -218,7 +224,7 @@ function ProfileActivities() {
               </ul>
               {activity.asOf ? (
                 <p className="mt-4 text-xs text-ink-muted">
-                  {formatDate(activity.asOf)}時点
+                  {formatDate(activity.asOf)}確認
                 </p>
               ) : null}
               <SourceLinks sourceIds={activity.sourceIds} />
@@ -234,10 +240,12 @@ function CollectionBody({
   items,
   note,
   sourceIds,
+  asOf,
 }: {
   items: string[];
   note: string;
   sourceIds: ProfileSourceId[];
+  asOf?: string;
 }) {
   return (
     <>
@@ -252,6 +260,9 @@ function CollectionBody({
           </li>
         ))}
       </ul>
+      {asOf ? (
+        <p className="mt-4 text-xs text-ink-muted">{formatDate(asOf)}確認</p>
+      ) : null}
       <SourceLinks sourceIds={sourceIds} />
     </>
   );
@@ -282,6 +293,7 @@ function ProfileCollections() {
                   items={collection.items}
                   note={collection.note}
                   sourceIds={collection.sourceIds}
+                  asOf={collection.asOf}
                 />
               </details>
             ) : (
@@ -294,6 +306,7 @@ function ProfileCollections() {
                   items={collection.items}
                   note={collection.note}
                   sourceIds={collection.sourceIds}
+                  asOf={collection.asOf}
                 />
               </article>
             ),

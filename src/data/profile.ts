@@ -1,6 +1,6 @@
 /**
- * Public profile facts must be tied to a first-party or organizer source.
- * Time-sensitive facts always carry an `asOf` date.
+ * Public profile content must be tied to a first-party or organizer source.
+ * Time-sensitive facts, vision, activities, and collections always carry an `asOf` date.
  */
 export type ProfileSource = {
   id: string;
@@ -39,6 +39,13 @@ export const profileSources = {
     url: "https://www.instagram.com/p/DbiY3PHk1c8/",
     verifiedAt: "2026-08-16",
   },
+  instagramProfile: {
+    id: "instagram-mily-profile",
+    title: "三橋莉子（みりぃ）プロフィール",
+    publisher: "三橋莉子 本人Instagram",
+    url: "https://www.instagram.com/mily_chan36/",
+    verifiedAt: "2026-08-16",
+  },
   fmProfile: {
     id: "fm-mily-profile",
     title: "Mily（ミリー）スタッフプロフィール",
@@ -51,6 +58,13 @@ export const profileSources = {
     title: "『湘南シーサイドサークル』番組ページ",
     publisher: "FM湘南マジックウェイブ",
     url: "https://fm-smw.jp/program/%E3%80%8E-%E6%B9%98%E5%8D%97%E3%82%B7%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-%E3%80%8F%E3%80%80%EF%BC%83ssc",
+    verifiedAt: "2026-08-16",
+  },
+  fmProgramInstagram: {
+    id: "fm-program-mily-instagram",
+    title: "Milyのパーソナリティ表記がある番組告知",
+    publisher: "湘南シーサイドサークル Instagram",
+    url: "https://www.instagram.com/seasidecircle/p/DbuTqbtyqzU/",
     verifiedAt: "2026-08-16",
   },
   campusGirlsAward: {
@@ -71,6 +85,7 @@ export const profileSources = {
 
 export type ProfileSourceId = keyof typeof profileSources;
 export type ProfileFactSection = "identity" | "education" | "interest" | "skill";
+export type ProfileStatus = "confirmed" | "time-sensitive";
 
 export type ProfileFact = {
   id: string;
@@ -79,7 +94,16 @@ export type ProfileFact = {
   value: string;
   detail?: string;
   sourceIds: ProfileSourceId[];
-  status: "confirmed" | "time-sensitive";
+  status: ProfileStatus;
+  asOf?: string;
+};
+
+export type ProfileVision = {
+  id: string;
+  title: string;
+  body: string;
+  sourceIds: ProfileSourceId[];
+  status: ProfileStatus;
   asOf?: string;
 };
 
@@ -90,6 +114,7 @@ export type ProfileActivity = {
   body: string;
   points: string[];
   sourceIds: ProfileSourceId[];
+  status: ProfileStatus;
   asOf?: string;
 };
 
@@ -99,31 +124,29 @@ export type ProfileCollection = {
   items: string[];
   note: string;
   sourceIds: ProfileSourceId[];
+  status: ProfileStatus;
+  asOf?: string;
   collapsed?: boolean;
 };
 
 export type Profile = {
   displayName: string;
-  legalName: string;
+  publicName: string;
   aliases: string[];
   summary: string;
   lastVerifiedAt: string;
   facts: ProfileFact[];
-  vision: {
-    title: string;
-    body: string;
-    sourceIds: ProfileSourceId[];
-  };
+  vision: ProfileVision;
   activities: ProfileActivity[];
   collections: ProfileCollection[];
 };
 
 export const profile: Profile = {
   displayName: "みりぃ",
-  legalName: "三橋莉子",
+  publicName: "三橋莉子",
   aliases: ["Mily（ミリー）"],
   summary:
-    "神奈川県出身、日本大学3年。地域ラジオで声を届け、ライブ配信で人とつながり、大学生コンテストでは自ら新しい一歩を踏み出しています。話すこと・歌うこと・挑戦することを大切にする大学生です。",
+    "神奈川県出身、日本大学3年。ラジオパーソナリティとして声を届け、ライブ配信で人とつながり、大学生コンテストでは自ら新しい一歩を踏み出しています。話すこと・歌うこと・挑戦することを大切にする大学生です。",
   lastVerifiedAt: "2026-08-16",
   facts: [
     {
@@ -139,8 +162,14 @@ export const profile: Profile = {
       section: "identity",
       label: "活動名",
       value: "みりぃ / Mily（ミリー）",
-      detail: "SHOWROOMでは「みりぃ」、FM公式ページでは「Mily（ミリー）」の表記が確認できます。",
-      sourceIds: ["showroom", "fmProfile"],
+      detail: "SHOWROOMでは「みりぃ」、本人Instagramでは「mily」、FM公式ページでは「Mily（ミリー）」の表記を照合できます。",
+      sourceIds: [
+        "showroom",
+        "missCircle",
+        "instagramProfile",
+        "fmProgramInstagram",
+        "fmProfile",
+      ],
       status: "confirmed",
     },
     {
@@ -157,7 +186,7 @@ export const profile: Profile = {
       section: "identity",
       label: "出身地",
       value: "神奈川県",
-      sourceIds: ["missCircle", "showroom", "fmProfile"],
+      sourceIds: ["missCircle", "showroom"],
       status: "confirmed",
     },
     {
@@ -207,10 +236,13 @@ export const profile: Profile = {
     },
   ],
   vision: {
+    id: "vision",
     title: "一歩を踏み出すための「根拠のない自信、勇気」を届ける",
     body:
       "自己肯定感や自己効力感が低いと感じる人にも、一歩を踏み出すきっかけを渡せる人になることを将来の夢として掲げています。自分自身も挑戦を重ね、その姿を通して誰かの背中をそっと押そうとしています。",
     sourceIds: ["missCircle"],
+    status: "time-sensitive",
+    asOf: "2026-08-16",
   },
   activities: [
     {
@@ -218,13 +250,20 @@ export const profile: Profile = {
       eyebrow: "RADIO",
       title: "湘南から、等身大の声を届ける",
       body:
-        "FM湘南マジックウェイブの公式ページには「Mily（ミリー）」として掲載され、『湘南シーサイドサークル』の日曜パーソナリティに名前があります。",
+        "本人のMISS CIRCLEプロフィールにある毎週のFM活動と、番組公式Instagram・FM公式ページにある「Mily」のパーソナリティ表記を照合して掲載しています。",
       points: [
+        "『湘南シーサイドサークル』の日曜パーソナリティとして掲載",
         "番組枠は日曜10:00〜13:00",
-        "湘南エリアに通う大学生が近況や地域の魅力を伝える地域密着トーク番組",
         "本人が毎回3時間すべて出演するとまでは断定していません",
       ],
-      sourceIds: ["fmProfile", "fmProgram", "missCircle"],
+      sourceIds: [
+        "missCircle",
+        "instagramProfile",
+        "fmProgramInstagram",
+        "fmProfile",
+        "fmProgram",
+      ],
+      status: "time-sensitive",
       asOf: "2026-08-16",
     },
     {
@@ -235,6 +274,7 @@ export const profile: Profile = {
         "コンテスト用のSHOWROOMルームで、2026年8月1日に初配信。歌うこと・話すこと・挑戦することを好きなこととして紹介しています。",
       points: ["初配信は2026年8月1日", "ファンネームは「トマトの栄養素🍅」"],
       sourceIds: ["showroom"],
+      status: "time-sensitive",
       asOf: "2026-08-16",
     },
     {
@@ -245,6 +285,7 @@ export const profile: Profile = {
         "MISS CIRCLE CONTEST 2026に三橋莉子として出場。Bブロックから二次審査へ進出したことが、コンテスト側の公開ページで確認できます。",
       points: ["ENTRY 734", "Bブロック", "二次審査進出"],
       sourceIds: ["missCircle", "missCircleSecond"],
+      status: "time-sensitive",
       asOf: "2026-08-16",
     },
     {
@@ -255,6 +296,7 @@ export const profile: Profile = {
         "CAMPUS GIRLS 2027の予選A・1st STAGEで審査員賞に選出され、本人も2nd STAGE進出を報告しています。",
       points: ["予選A 1st STAGE 審査員賞", "2nd STAGE進出"],
       sourceIds: ["campusGirlsAward", "campusGirlsSecond"],
+      status: "time-sensitive",
       asOf: "2026-08-16",
     },
   ],
@@ -268,8 +310,10 @@ export const profile: Profile = {
         "大所帯の吹奏楽部でキャプテン",
         "現在の特技は篠笛",
       ],
-      note: "吹奏楽で培った音楽経験とチームをまとめる経験の両方を持っています。",
-      sourceIds: ["fmProfile", "missCircle"],
+      note: "FM公式Milyプロフィール掲載の音楽経験と、MISS CIRCLEで公表している特技を整理しています。",
+      sourceIds: ["missCircle", "instagramProfile", "fmProgramInstagram", "fmProfile"],
+      status: "time-sensitive",
+      asOf: "2026-08-16",
     },
     {
       id: "interests",
@@ -285,8 +329,16 @@ export const profile: Profile = {
         "メイク",
         "ファッション",
       ],
-      note: "複数の公開プロフィールにある内容を横断して整理しています。",
-      sourceIds: ["missCircle", "showroom", "fmProfile"],
+      note: "本人のMISS CIRCLE・SHOWROOMと、FM公式Milyプロフィールの掲載内容を横断して整理しています。",
+      sourceIds: [
+        "missCircle",
+        "showroom",
+        "instagramProfile",
+        "fmProgramInstagram",
+        "fmProfile",
+      ],
+      status: "time-sensitive",
+      asOf: "2026-08-16",
     },
     {
       id: "food",
@@ -303,6 +355,9 @@ export const profile: Profile = {
       ],
       note: "SHOWROOMプロフィール掲載時の内容です。",
       sourceIds: ["showroom"],
+      status: "time-sensitive",
+      asOf: "2026-08-16",
+      collapsed: true,
     },
     {
       id: "inspirations",
@@ -322,8 +377,10 @@ export const profile: Profile = {
         "ニシコリユーダイド",
         "ニシコリジュンジ",
       ],
-      note: "FMプロフィール掲載時のFavoritesです。変わる可能性があるため、確認日を添えて掲載します。",
-      sourceIds: ["fmProfile"],
+      note: "FM公式Milyプロフィール掲載時のFavoritesです。",
+      sourceIds: ["missCircle", "instagramProfile", "fmProgramInstagram", "fmProfile"],
+      status: "time-sensitive",
+      asOf: "2026-08-16",
       collapsed: true,
     },
     {
@@ -336,8 +393,17 @@ export const profile: Profile = {
         "FM仲間から「キャプテンMily」と呼ばれることも",
         "大磯・二宮・中井の、静かでゆったりした場所がおすすめ",
       ],
-      note: "SHOWROOMとFMプロフィールから見える、親しみやすいエピソードです。",
-      sourceIds: ["showroom", "fmProfile"],
+      note: "SHOWROOMとFM公式Milyプロフィールに掲載されているエピソードです。",
+      sourceIds: [
+        "showroom",
+        "missCircle",
+        "instagramProfile",
+        "fmProgramInstagram",
+        "fmProfile",
+      ],
+      status: "time-sensitive",
+      asOf: "2026-08-16",
+      collapsed: true,
     },
   ],
 };

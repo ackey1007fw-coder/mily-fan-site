@@ -14,6 +14,8 @@ describe("home profile preview", () => {
     assert.match(source, /previewFactIds/);
     assert.match(source, /fact\.label/);
     assert.match(source, /fact\.value/);
+    assert.match(source, /fact\.asOf/);
+    assert.match(source, /確認時点が分かる公開情報/);
     assert.match(source, /href="\/profile\/"/);
     assert.match(source, /詳しいプロフィールを見る/);
     assert.doesNotMatch(source, /profile\.activities\.map/);
@@ -30,7 +32,10 @@ describe("detailed profile provenance", () => {
     assert.match(source, /fact\.sourceIds/);
     assert.match(source, /profile\.activities\.map\(\(activity\) =>/);
     assert.match(source, /activity\.sourceIds/);
+    assert.match(source, /activity\.asOf/);
     assert.match(source, /profile\.collections\.map\(\(collection\) =>/);
+    assert.match(source, /profile\.vision\.asOf/);
+    assert.match(source, /collection\.asOf/);
     assert.match(source, /highlights\.map\(\(item\) =>/);
     assert.match(source, /href=\{item\.source\}/);
     assert.match(source, /Object\.values\(profileSources\)\.map/);
@@ -45,7 +50,8 @@ describe("detailed profile provenance", () => {
     assert.match(html, /__PROFILE_CANONICAL__/);
     assert.match(html, /"@type": "ProfilePage"/);
     assert.match(html, /"@type": "BreadcrumbList"/);
-    assert.match(html, /"birthDate": "2005-08-02"/);
+    assert.match(html, /"name": "三橋莉子"/);
+    assert.doesNotMatch(html, /"birthDate"/);
     assert.match(html, /src="\/src\/profile-main\.tsx"/);
   });
 });

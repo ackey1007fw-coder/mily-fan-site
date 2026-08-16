@@ -2,6 +2,11 @@ import { profile } from "../data/profile";
 
 const previewFactIds = new Set(["hometown", "university", "special-skill", "fan-name"]);
 
+function formatDate(date: string) {
+  const [year, month, day] = date.split("-").map(Number);
+  return `${year}年${month}月${day}日`;
+}
+
 export function About() {
   const previewFacts = profile.facts.filter((fact) => previewFactIds.has(fact.id));
 
@@ -22,11 +27,16 @@ export function About() {
                 <div key={fact.id} className="rounded-2xl bg-paper px-4 py-3">
                   <dt className="text-xs text-ink-muted">{fact.label}</dt>
                   <dd className="mt-1 font-semibold text-ink">{fact.value}</dd>
+                  {fact.asOf ? (
+                    <dd className="mt-1 text-xs text-ink-muted">
+                      {formatDate(fact.asOf)}確認
+                    </dd>
+                  ) : null}
                 </div>
               ))}
             </dl>
             <p className="mt-6 text-sm leading-7 text-ink-muted">
-              ラジオ、吹奏楽、SHOWROOM、大学生コンテスト、好きなものまで。確認済みの公開情報を、出典付きの専用ページにまとめました。
+              ラジオ、吹奏楽、SHOWROOM、大学生コンテスト、好きなものまで。確認時点が分かる公開情報を、出典付きの専用ページにまとめました。
             </p>
             <a
               href="/profile/"
