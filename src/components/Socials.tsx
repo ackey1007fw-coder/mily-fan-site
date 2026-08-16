@@ -4,7 +4,12 @@ import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
 const ENTRY_LINK_ID = "miss-circle-2026-734";
-const FM_LINK_IDS = new Set(["fm-smw-mily-profile", "fm-smw-ssc-program", "fm-smw-staff"]);
+const FM_LINK_IDS = new Set([
+  "fm-smw-mily-profile",
+  "fm-smw-ssc-program",
+  "fm-smw-ssc-instagram",
+  "fm-smw-staff",
+]);
 
 export function Socials() {
   const entryLink = links.find((item) => item.id === ENTRY_LINK_ID);
