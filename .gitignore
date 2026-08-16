@@ -16,3 +16,8 @@ Thumbs.db
 # Keep the README so agents can find the drop folder.
 media/original/*
 !media/original/README.md
+
+# Drive batch b02 originals and their private id mapping. Never committed:
+# the repository is public and these are the unsanitized files.
+media/drive-b02-original/*
+!media/drive-b02-original/README.md

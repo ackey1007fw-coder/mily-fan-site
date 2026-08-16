@@ -1,0 +1,645 @@
+{
+  "generatedBy": "scripts/build-drive-gallery.mjs",
+  "publicationState": "published",
+  "items": [
+    {
+      "id": "mily-drive-b02-p02",
+      "kind": "photo",
+      "alt": "具材を選ぶ飲食店で、野菜などを入れたボウルを手にしている様子",
+      "src": "/media/drive-gallery/mily-b02-p02-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p02-480.jpg 480w, /media/drive-gallery/mily-b02-p02-960.jpg 960w, /media/drive-gallery/mily-b02-p02-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p02-480.webp 480w, /media/drive-gallery/mily-b02-p02-960.webp 960w, /media/drive-gallery/mily-b02-p02-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p03",
+      "kind": "photo",
+      "alt": "飲食店で大きな麺料理の器を両手で持つみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p03-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p03-480.jpg 480w, /media/drive-gallery/mily-b02-p03-960.jpg 960w, /media/drive-gallery/mily-b02-p03-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p03-480.webp 480w, /media/drive-gallery/mily-b02-p03-960.webp 960w, /media/drive-gallery/mily-b02-p03-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p04",
+      "kind": "photo",
+      "alt": "飲食店のテーブルで麺料理を前に笑うみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p04-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p04-480.jpg 480w, /media/drive-gallery/mily-b02-p04-960.jpg 960w, /media/drive-gallery/mily-b02-p04-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p04-480.webp 480w, /media/drive-gallery/mily-b02-p04-960.webp 960w, /media/drive-gallery/mily-b02-p04-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p05",
+      "kind": "photo",
+      "alt": "青いキャップと紺色のジャージ姿で、屋外に立つみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p05-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p05-480.jpg 480w, /media/drive-gallery/mily-b02-p05-960.jpg 960w, /media/drive-gallery/mily-b02-p05-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p05-480.webp 480w, /media/drive-gallery/mily-b02-p05-960.webp 960w, /media/drive-gallery/mily-b02-p05-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p06",
+      "kind": "photo",
+      "alt": "青いキャップと紺色のジャージ姿で、帽子のつばに手を添えて立つみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p06-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p06-480.jpg 480w, /media/drive-gallery/mily-b02-p06-960.jpg 960w, /media/drive-gallery/mily-b02-p06-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p06-480.webp 480w, /media/drive-gallery/mily-b02-p06-960.webp 960w, /media/drive-gallery/mily-b02-p06-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p07",
+      "kind": "photo",
+      "alt": "青いキャップとダウンジャケット姿で、衣料品売り場の前で服を手に取るみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p07-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p07-480.jpg 480w, /media/drive-gallery/mily-b02-p07-960.jpg 960w, /media/drive-gallery/mily-b02-p07-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p07-480.webp 480w, /media/drive-gallery/mily-b02-p07-960.webp 960w, /media/drive-gallery/mily-b02-p07-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p08",
+      "kind": "photo",
+      "alt": "カフェのカウンター席で、ノートパソコンとノートを開いて作業するBeReal写真",
+      "src": "/media/drive-gallery/mily-b02-p08-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p08-480.jpg 480w, /media/drive-gallery/mily-b02-p08-960.jpg 960w, /media/drive-gallery/mily-b02-p08-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p08-480.webp 480w, /media/drive-gallery/mily-b02-p08-960.webp 960w, /media/drive-gallery/mily-b02-p08-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p09",
+      "kind": "photo",
+      "alt": "飲食店で大きな麺料理を前に、カメラを見るみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p09-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p09-480.jpg 480w, /media/drive-gallery/mily-b02-p09-960.jpg 960w, /media/drive-gallery/mily-b02-p09-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p09-480.webp 480w, /media/drive-gallery/mily-b02-p09-960.webp 960w, /media/drive-gallery/mily-b02-p09-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p10",
+      "kind": "photo",
+      "alt": "飲食店のテーブルで麺料理を前に、手元を見るみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p10-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p10-480.jpg 480w, /media/drive-gallery/mily-b02-p10-960.jpg 960w, /media/drive-gallery/mily-b02-p10-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p10-480.webp 480w, /media/drive-gallery/mily-b02-p10-960.webp 960w, /media/drive-gallery/mily-b02-p10-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p11",
+      "kind": "photo",
+      "alt": "カフェのテーブルに広げた英語のプリントとメニュー",
+      "src": "/media/drive-gallery/mily-b02-p11-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p11-480.jpg 480w, /media/drive-gallery/mily-b02-p11-960.jpg 960w, /media/drive-gallery/mily-b02-p11-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p11-480.webp 480w, /media/drive-gallery/mily-b02-p11-960.webp 960w, /media/drive-gallery/mily-b02-p11-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p12",
+      "kind": "photo",
+      "alt": "ノートパソコンでニュース記事を開き、水のボトルを置いた机",
+      "src": "/media/drive-gallery/mily-b02-p12-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p12-480.jpg 480w, /media/drive-gallery/mily-b02-p12-960.jpg 960w, /media/drive-gallery/mily-b02-p12-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p12-480.webp 480w, /media/drive-gallery/mily-b02-p12-960.webp 960w, /media/drive-gallery/mily-b02-p12-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p13",
+      "kind": "photo",
+      "alt": "ノートパソコンと書き込んだノートを広げた勉強机（自撮りの小窓つき）",
+      "src": "/media/drive-gallery/mily-b02-p13-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p13-480.jpg 480w, /media/drive-gallery/mily-b02-p13-960.jpg 960w, /media/drive-gallery/mily-b02-p13-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p13-480.webp 480w, /media/drive-gallery/mily-b02-p13-960.webp 960w, /media/drive-gallery/mily-b02-p13-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p14",
+      "kind": "photo",
+      "alt": "自習スペースの木の机に並べたノートパソコン・ノート・プリントと飲み物",
+      "src": "/media/drive-gallery/mily-b02-p14-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p14-480.jpg 480w, /media/drive-gallery/mily-b02-p14-960.jpg 960w, /media/drive-gallery/mily-b02-p14-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p14-480.webp 480w, /media/drive-gallery/mily-b02-p14-960.webp 960w, /media/drive-gallery/mily-b02-p14-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p15",
+      "kind": "photo",
+      "alt": "キャップとパーカー姿で自習スペースに着いたみりぃさん（机にはノートパソコンとプリント）",
+      "src": "/media/drive-gallery/mily-b02-p15-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p15-480.jpg 480w, /media/drive-gallery/mily-b02-p15-960.jpg 960w, /media/drive-gallery/mily-b02-p15-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p15-480.webp 480w, /media/drive-gallery/mily-b02-p15-960.webp 960w, /media/drive-gallery/mily-b02-p15-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p16",
+      "kind": "photo",
+      "alt": "机に並んだマスキングテープ・ペン・カフェオーレの紙パックとデジタル時計",
+      "src": "/media/drive-gallery/mily-b02-p16-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p16-480.jpg 480w, /media/drive-gallery/mily-b02-p16-960.jpg 960w, /media/drive-gallery/mily-b02-p16-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p16-480.webp 480w, /media/drive-gallery/mily-b02-p16-960.webp 960w, /media/drive-gallery/mily-b02-p16-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p17",
+      "kind": "photo",
+      "alt": "ノートパソコンのキーボードの横に開いた英単語帳",
+      "src": "/media/drive-gallery/mily-b02-p17-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p17-480.jpg 480w, /media/drive-gallery/mily-b02-p17-960.jpg 960w, /media/drive-gallery/mily-b02-p17-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p17-480.webp 480w, /media/drive-gallery/mily-b02-p17-960.webp 960w, /media/drive-gallery/mily-b02-p17-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p18",
+      "kind": "photo",
+      "alt": "タブレットにベートーヴェンの資料を表示した勉強机と文具",
+      "src": "/media/drive-gallery/mily-b02-p18-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p18-480.jpg 480w, /media/drive-gallery/mily-b02-p18-960.jpg 960w, /media/drive-gallery/mily-b02-p18-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p18-480.webp 480w, /media/drive-gallery/mily-b02-p18-960.webp 960w, /media/drive-gallery/mily-b02-p18-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p19",
+      "kind": "photo",
+      "alt": "国際関係の用語を書き込んだルーズリーフとボールペン",
+      "src": "/media/drive-gallery/mily-b02-p19-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p19-480.jpg 480w, /media/drive-gallery/mily-b02-p19-960.jpg 960w, /media/drive-gallery/mily-b02-p19-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p19-480.webp 480w, /media/drive-gallery/mily-b02-p19-960.webp 960w, /media/drive-gallery/mily-b02-p19-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p20",
+      "kind": "photo",
+      "alt": "タブレットにショパンの資料を表示した机とリングノート",
+      "src": "/media/drive-gallery/mily-b02-p20-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p20-480.jpg 480w, /media/drive-gallery/mily-b02-p20-960.jpg 960w, /media/drive-gallery/mily-b02-p20-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p20-480.webp 480w, /media/drive-gallery/mily-b02-p20-960.webp 960w, /media/drive-gallery/mily-b02-p20-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p21",
+      "kind": "photo",
+      "alt": "2次関数の教科書とタブレットの手書きノートを並べた勉強机",
+      "src": "/media/drive-gallery/mily-b02-p21-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p21-480.jpg 480w, /media/drive-gallery/mily-b02-p21-960.jpg 960w, /media/drive-gallery/mily-b02-p21-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p21-480.webp 480w, /media/drive-gallery/mily-b02-p21-960.webp 960w, /media/drive-gallery/mily-b02-p21-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p22",
+      "kind": "photo",
+      "alt": "夕暮れの海の写真を表示したタブレットと2冊のリングノート",
+      "src": "/media/drive-gallery/mily-b02-p22-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p22-480.jpg 480w, /media/drive-gallery/mily-b02-p22-960.jpg 960w, /media/drive-gallery/mily-b02-p22-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p22-480.webp 480w, /media/drive-gallery/mily-b02-p22-960.webp 960w, /media/drive-gallery/mily-b02-p22-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p23",
+      "kind": "photo",
+      "alt": "赤ペンで丸つけをした漢字の問題集",
+      "src": "/media/drive-gallery/mily-b02-p23-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p23-480.jpg 480w, /media/drive-gallery/mily-b02-p23-960.jpg 960w, /media/drive-gallery/mily-b02-p23-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p23-480.webp 480w, /media/drive-gallery/mily-b02-p23-960.webp 960w, /media/drive-gallery/mily-b02-p23-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p24",
+      "kind": "photo",
+      "alt": "フットサルのコート図とルールを書き込んだ手書きノート",
+      "src": "/media/drive-gallery/mily-b02-p24-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p24-480.jpg 480w, /media/drive-gallery/mily-b02-p24-960.jpg 960w, /media/drive-gallery/mily-b02-p24-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p24-480.webp 480w, /media/drive-gallery/mily-b02-p24-960.webp 960w, /media/drive-gallery/mily-b02-p24-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p25",
+      "kind": "photo",
+      "alt": "アプリのホーム画面を開いたタブレットと文具を置いた机",
+      "src": "/media/drive-gallery/mily-b02-p25-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p25-480.jpg 480w, /media/drive-gallery/mily-b02-p25-960.jpg 960w, /media/drive-gallery/mily-b02-p25-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p25-480.webp 480w, /media/drive-gallery/mily-b02-p25-960.webp 960w, /media/drive-gallery/mily-b02-p25-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p26",
+      "kind": "photo",
+      "alt": "色ペンを並べた国語のプリントとタブレットの本文表示",
+      "src": "/media/drive-gallery/mily-b02-p26-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p26-480.jpg 480w, /media/drive-gallery/mily-b02-p26-960.jpg 960w, /media/drive-gallery/mily-b02-p26-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p26-480.webp 480w, /media/drive-gallery/mily-b02-p26-960.webp 960w, /media/drive-gallery/mily-b02-p26-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p27",
+      "kind": "photo",
+      "alt": "関数のグラフを書いたノートとタブレット、数学の教科書",
+      "src": "/media/drive-gallery/mily-b02-p27-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p27-480.jpg 480w, /media/drive-gallery/mily-b02-p27-960.jpg 960w, /media/drive-gallery/mily-b02-p27-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p27-480.webp 480w, /media/drive-gallery/mily-b02-p27-960.webp 960w, /media/drive-gallery/mily-b02-p27-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p28",
+      "kind": "photo",
+      "alt": "抹茶ラテのボトルを置いて、マーカーを引いた政治・経済の参考書",
+      "src": "/media/drive-gallery/mily-b02-p28-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p28-480.jpg 480w, /media/drive-gallery/mily-b02-p28-960.jpg 960w, /media/drive-gallery/mily-b02-p28-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p28-480.webp 480w, /media/drive-gallery/mily-b02-p28-960.webp 960w, /media/drive-gallery/mily-b02-p28-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p29",
+      "kind": "photo",
+      "alt": "英単語帳を手に持って開いたところ（自撮りの小窓つき）",
+      "src": "/media/drive-gallery/mily-b02-p29-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p29-480.jpg 480w, /media/drive-gallery/mily-b02-p29-960.jpg 960w, /media/drive-gallery/mily-b02-p29-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p29-480.webp 480w, /media/drive-gallery/mily-b02-p29-960.webp 960w, /media/drive-gallery/mily-b02-p29-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p30",
+      "kind": "photo",
+      "alt": "英語の勉強メモを書いたルーズリーフと腕時計・ペン",
+      "src": "/media/drive-gallery/mily-b02-p30-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p30-480.jpg 480w, /media/drive-gallery/mily-b02-p30-960.jpg 960w, /media/drive-gallery/mily-b02-p30-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p30-480.webp 480w, /media/drive-gallery/mily-b02-p30-960.webp 960w, /media/drive-gallery/mily-b02-p30-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p31",
+      "kind": "photo",
+      "alt": "薄暗い部屋で開いた英単語帳のページ",
+      "src": "/media/drive-gallery/mily-b02-p31-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p31-480.jpg 480w, /media/drive-gallery/mily-b02-p31-960.jpg 960w, /media/drive-gallery/mily-b02-p31-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p31-480.webp 480w, /media/drive-gallery/mily-b02-p31-960.webp 960w, /media/drive-gallery/mily-b02-p31-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p32",
+      "kind": "photo",
+      "alt": "物理基礎の加速度の公式を書いたリングノート",
+      "src": "/media/drive-gallery/mily-b02-p32-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p32-480.jpg 480w, /media/drive-gallery/mily-b02-p32-960.jpg 960w, /media/drive-gallery/mily-b02-p32-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p32-480.webp 480w, /media/drive-gallery/mily-b02-p32-960.webp 960w, /media/drive-gallery/mily-b02-p32-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p33",
+      "kind": "photo",
+      "alt": "窓辺で英単語帳を手に持って開いたところ",
+      "src": "/media/drive-gallery/mily-b02-p33-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p33-480.jpg 480w, /media/drive-gallery/mily-b02-p33-960.jpg 960w, /media/drive-gallery/mily-b02-p33-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p33-480.webp 480w, /media/drive-gallery/mily-b02-p33-960.webp 960w, /media/drive-gallery/mily-b02-p33-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p34",
+      "kind": "photo",
+      "alt": "照明の下で参考書を見開きにして手に持ったところ",
+      "src": "/media/drive-gallery/mily-b02-p34-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p34-480.jpg 480w, /media/drive-gallery/mily-b02-p34-960.jpg 960w, /media/drive-gallery/mily-b02-p34-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p34-480.webp 480w, /media/drive-gallery/mily-b02-p34-960.webp 960w, /media/drive-gallery/mily-b02-p34-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p35",
+      "kind": "photo",
+      "alt": "蛍光ペンを並べた国語のプリントとタブレットの文書",
+      "src": "/media/drive-gallery/mily-b02-p35-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p35-480.jpg 480w, /media/drive-gallery/mily-b02-p35-960.jpg 960w, /media/drive-gallery/mily-b02-p35-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p35-480.webp 480w, /media/drive-gallery/mily-b02-p35-960.webp 960w, /media/drive-gallery/mily-b02-p35-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p36",
+      "kind": "photo",
+      "alt": "キャップ姿で花束を持ち、ピースサインをするみりぃさんとバースデープレート",
+      "src": "/media/drive-gallery/mily-b02-p36-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p36-480.jpg 480w, /media/drive-gallery/mily-b02-p36-960.jpg 960w, /media/drive-gallery/mily-b02-p36-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p36-480.webp 480w, /media/drive-gallery/mily-b02-p36-960.webp 960w, /media/drive-gallery/mily-b02-p36-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-p37",
+      "kind": "photo",
+      "alt": "腕時計とペンを添えた英語の勉強メモ（別アングル）",
+      "src": "/media/drive-gallery/mily-b02-p37-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p37-480.jpg 480w, /media/drive-gallery/mily-b02-p37-960.jpg 960w, /media/drive-gallery/mily-b02-p37-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p37-480.webp 480w, /media/drive-gallery/mily-b02-p37-960.webp 960w, /media/drive-gallery/mily-b02-p37-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p38",
+      "kind": "photo",
+      "alt": "フットサルの戦術を図解した手書きノート（別アングル）",
+      "src": "/media/drive-gallery/mily-b02-p38-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p38-480.jpg 480w, /media/drive-gallery/mily-b02-p38-960.jpg 960w, /media/drive-gallery/mily-b02-p38-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p38-480.webp 480w, /media/drive-gallery/mily-b02-p38-960.webp 960w, /media/drive-gallery/mily-b02-p38-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1600
+    },
+    {
+      "id": "mily-drive-b02-p39",
+      "kind": "photo",
+      "alt": "夜のイチョウ並木で、イチョウの落ち葉を顔の前にかざすみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p39-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p39-480.jpg 480w, /media/drive-gallery/mily-b02-p39-960.jpg 960w, /media/drive-gallery/mily-b02-p39-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p39-480.webp 480w, /media/drive-gallery/mily-b02-p39-960.webp 960w, /media/drive-gallery/mily-b02-p39-1600.webp 1600w"
+      },
+      "width": 400,
+      "height": 320
+    },
+    {
+      "id": "mily-drive-b02-p40",
+      "kind": "photo",
+      "alt": "2つの花束と「Happy Birthday」と書かれたバースデープレート",
+      "src": "/media/drive-gallery/mily-b02-p40-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p40-480.jpg 480w, /media/drive-gallery/mily-b02-p40-960.jpg 960w, /media/drive-gallery/mily-b02-p40-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p40-480.webp 480w, /media/drive-gallery/mily-b02-p40-960.webp 960w, /media/drive-gallery/mily-b02-p40-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "id": "mily-drive-b02-p41",
+      "kind": "photo",
+      "alt": "水色の包みの花束を抱えて立つみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p41-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p41-480.jpg 480w, /media/drive-gallery/mily-b02-p41-960.jpg 960w, /media/drive-gallery/mily-b02-p41-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p41-480.webp 480w, /media/drive-gallery/mily-b02-p41-960.webp 960w, /media/drive-gallery/mily-b02-p41-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "id": "mily-drive-b02-p42",
+      "kind": "photo",
+      "alt": "花束を抱えて笑うみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p42-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p42-480.jpg 480w, /media/drive-gallery/mily-b02-p42-960.jpg 960w, /media/drive-gallery/mily-b02-p42-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p42-480.webp 480w, /media/drive-gallery/mily-b02-p42-960.webp 960w, /media/drive-gallery/mily-b02-p42-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "id": "mily-drive-b02-p43",
+      "kind": "photo",
+      "alt": "ギフトボックスに入ったネックレスとショップの紙袋",
+      "src": "/media/drive-gallery/mily-b02-p43-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p43-480.jpg 480w, /media/drive-gallery/mily-b02-p43-960.jpg 960w, /media/drive-gallery/mily-b02-p43-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p43-480.webp 480w, /media/drive-gallery/mily-b02-p43-960.webp 960w, /media/drive-gallery/mily-b02-p43-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "id": "mily-drive-b02-p44",
+      "kind": "photo",
+      "alt": "花束を持ってカメラに向かって表情をつくるみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p44-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p44-480.jpg 480w, /media/drive-gallery/mily-b02-p44-960.jpg 960w, /media/drive-gallery/mily-b02-p44-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p44-480.webp 480w, /media/drive-gallery/mily-b02-p44-960.webp 960w, /media/drive-gallery/mily-b02-p44-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "id": "mily-drive-b02-p45",
+      "kind": "photo",
+      "alt": "花束を肩に抱えて立つみりぃさんの全身",
+      "src": "/media/drive-gallery/mily-b02-p45-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p45-480.jpg 480w, /media/drive-gallery/mily-b02-p45-960.jpg 960w, /media/drive-gallery/mily-b02-p45-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p45-480.webp 480w, /media/drive-gallery/mily-b02-p45-960.webp 960w, /media/drive-gallery/mily-b02-p45-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 1200
+    },
+    {
+      "id": "mily-drive-b02-p46",
+      "kind": "photo",
+      "alt": "白い背景でファーのベストを着て腕を組むみりぃさん",
+      "src": "/media/drive-gallery/mily-b02-p46-960.jpg",
+      "srcSet": {
+        "jpg": "/media/drive-gallery/mily-b02-p46-480.jpg 480w, /media/drive-gallery/mily-b02-p46-960.jpg 960w, /media/drive-gallery/mily-b02-p46-1600.jpg 1600w",
+        "webp": "/media/drive-gallery/mily-b02-p46-480.webp 480w, /media/drive-gallery/mily-b02-p46-960.webp 960w, /media/drive-gallery/mily-b02-p46-1600.webp 1600w"
+      },
+      "width": 1600,
+      "height": 2133
+    },
+    {
+      "id": "mily-drive-b02-v01",
+      "kind": "video",
+      "alt": "IKEAでの移動や食事を、時刻表示とともにまとめた1日の縦動画",
+      "src": "/media/drive-gallery/mily-b02-v01.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v01-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v02",
+      "kind": "video",
+      "alt": "授業・移動・夜の食事を、時刻表示とともにまとめた1日の縦動画",
+      "src": "/media/drive-gallery/mily-b02-v02.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v02-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v03",
+      "kind": "video",
+      "alt": "カフェでノートパソコンとノートを広げ、勉強する様子を「Study time」と表示した縦動画",
+      "src": "/media/drive-gallery/mily-b02-v03.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v03-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v04",
+      "kind": "video",
+      "alt": "通学・移動・買い物を、時刻表示とともにまとめた1日の縦動画",
+      "src": "/media/drive-gallery/mily-b02-v04.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v04-poster.jpg",
+      "width": 540,
+      "height": 960
+    },
+    {
+      "id": "mily-drive-b02-v05",
+      "kind": "video",
+      "alt": "机でプリントやノートに書き込みながら、勉強する手元を映した縦動画",
+      "src": "/media/drive-gallery/mily-b02-v05.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v05-poster.jpg",
+      "width": 576,
+      "height": 1024
+    },
+    {
+      "id": "mily-drive-b02-v06",
+      "kind": "video",
+      "alt": "ピンクのキャップでマイクの前に座り、テーマ「部活動」を紹介する縦動画",
+      "src": "/media/drive-gallery/mily-b02-v06.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v06-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v07",
+      "kind": "video",
+      "alt": "「おはよう」の挨拶とラジオ放送の予告を表示した短い自撮り動画",
+      "src": "/media/drive-gallery/mily-b02-v07.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v07-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v08",
+      "kind": "video",
+      "alt": "「おはよう〜！」と挨拶し、本日の投票案内を表示する自撮り動画",
+      "src": "/media/drive-gallery/mily-b02-v08.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v08-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v09",
+      "kind": "video",
+      "alt": "ジャケット姿で「OHAYO!」と表示して呼びかける自撮り動画",
+      "src": "/media/drive-gallery/mily-b02-v09.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v09-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v10",
+      "kind": "video",
+      "alt": "車内でキャップをかぶり「OHAYO!」と表示して挨拶する縦動画",
+      "src": "/media/drive-gallery/mily-b02-v10.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v10-poster.jpg",
+      "width": 720,
+      "height": 1280
+    },
+    {
+      "id": "mily-drive-b02-v11",
+      "kind": "video",
+      "alt": "湘南シーサイドサークルの10:00〜13:00放送を、バレーボール風の映像とともに案内する縦動画",
+      "src": "/media/drive-gallery/mily-b02-v11.mp4",
+      "poster": "/media/drive-gallery/mily-b02-v11-poster.jpg",
+      "width": 656,
+      "height": 1166
+    }
+  ]
+}
