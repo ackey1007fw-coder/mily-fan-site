@@ -1,0 +1,44 @@
+name: Probe Drive gallery ingest
+
+# Drive受領素材のビルド時取り込み（個別ファイル取得 → metadata除去）を
+# 実ネットワークで検証するための手動/ブランチ限定ワークフロー。
+# サイトのビルドやデプロイには関与せず、公開物も生成しない。
+#
+# フォルダ一覧は取得しない。登録済みの個別 file id だけを取得する。
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["feat/drive-gallery-b02", "claude/**"]
+    paths:
+      - "scripts/probe-drive-gallery.mjs"
+      - "scripts/drive-gallery-fetch.mjs"
+      - "scripts/drive-gallery-source.mjs"
+      - ".github/workflows/probe-drive-gallery.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    name: Fetch and sanitize sample media
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Probe individual Drive downloads and sanitize
+        run: node scripts/probe-drive-gallery.mjs
