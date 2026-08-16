@@ -37,7 +37,7 @@ export function About() {
             </dl>
             <a
               href="/profile/"
-              className="mt-6 inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+              className="mt-5 inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
             >
               詳しいプロフィールを見る
             </a>
