@@ -12,6 +12,7 @@ import {
   drivePreviewUrl,
   driveThumbnailSrcSet,
   driveThumbnailUrl,
+  privacyHoldDriveGallery,
   unverifiedDriveGallery,
   visibleDriveGallery,
   DRIVE_VIDEO_SANDBOX,
@@ -32,6 +33,12 @@ const FOLDER_PATH_PATTERN = /\/drive\/folders\//;
 const PHOTO_COUNT = 46;
 const VIDEO_COUNT = 11;
 const TOTAL_COUNT = PHOTO_COUNT + VIDEO_COUNT;
+
+/** p01 shows a readable private chat transcript on the laptop screen, so it is
+ *  registered but never rendered. Registered 57, publishable 56. */
+const PRIVACY_HOLD_IDS = ["mily-drive-b02-p01"];
+const PUBLISHABLE_PHOTO_COUNT = PHOTO_COUNT - PRIVACY_HOLD_IDS.length;
+const PUBLISHABLE_COUNT = PUBLISHABLE_PHOTO_COUNT + VIDEO_COUNT;
 
 /** Second Drive copy of 582B7A70…: identical SHA256, collapsed to one entry.
  *  Recorded in docs/DRIVE-GALLERY.md. */
@@ -106,17 +113,20 @@ describe("Drive gallery registry", () => {
     );
   });
 
-  it("flags entries whose content is not confirmed yet", () => {
-    const pending = unverifiedDriveGallery();
-    for (const item of pending) {
-      assert.equal(item.contentVerified, false);
-      assert.match(item.alt, /オーナー確認待ち/);
+  it("has no entry left waiting for an owner-confirmed description", () => {
+    assert.deepEqual(unverifiedDriveGallery(), []);
+    assert.deepEqual(unverifiedDriveGallery(driveGallery), []);
+    for (const item of driveGallery) {
+      assert.equal(item.contentVerified, true, `${item.id} is still unverified`);
+      assert.equal(/確認待ち/.test(item.alt), false, `${item.id} keeps a placeholder alt`);
     }
-    // Publishing requires this list to be empty; docs/DRIVE-GALLERY.md tracks it.
-    assert.equal(
-      pending.length,
-      unverifiedDriveGallery(driveGallery).length,
-    );
+  });
+
+  it("does not transcribe screen contents or personal names into alt text", () => {
+    const hold = driveGallery.find((item) => item.id === "mily-drive-b02-p01");
+    assert.ok(hold);
+    assert.equal(/ChatGPT|会話/.test(hold.alt), false);
+    assert.match(hold.alt, /ノートパソコン/);
   });
 });
 
@@ -135,13 +145,71 @@ describe("Drive gallery publication gate", () => {
     );
   });
 
-  it("renders every entry once the batch is published", () => {
+  it("renders every publishable entry once the batch is published", () => {
     const visible = visibleDriveGallery(driveGallery, published);
-    assert.equal(visible.length, TOTAL_COUNT);
+    assert.equal(visible.length, PUBLISHABLE_COUNT);
     const sections = driveGallerySections(visible);
-    assert.equal(sections.photos.length, PHOTO_COUNT);
+    assert.equal(sections.photos.length, PUBLISHABLE_PHOTO_COUNT);
     assert.equal(sections.videos.length, VIDEO_COUNT);
     assert.equal(sections.hasAny, true);
+  });
+});
+
+describe("Drive gallery privacy gate", () => {
+  it("lists exactly the entries held back by privacy review", () => {
+    const held = privacyHoldDriveGallery();
+    assert.deepEqual(held.map((item) => item.id), PRIVACY_HOLD_IDS);
+    for (const item of held) {
+      assert.equal(item.privacyState, "hold");
+      assert.equal(item.contentVerified, true, "a hold is still content-verified");
+    }
+  });
+
+  it("keeps p01 out of the gallery even when the batch is published", () => {
+    const visibleIds = visibleDriveGallery(driveGallery, published).map(
+      (item) => item.id,
+    );
+    for (const id of PRIVACY_HOLD_IDS) {
+      assert.equal(visibleIds.includes(id), false, `${id} must never render`);
+    }
+    assert.equal(visibleIds.includes("mily-drive-b02-p01"), false);
+  });
+
+  it("renders an approved entry and hides a held one from the same list", () => {
+    const approved = driveGallery.find(
+      (item) => item.id === "mily-drive-b02-p02",
+    );
+    const held = driveGallery.find((item) => item.id === "mily-drive-b02-p01");
+    assert.deepEqual(
+      visibleDriveGallery([approved, held], published).map((item) => item.id),
+      [approved.id],
+    );
+  });
+
+  it("hides an entry that is verified and approved but not published", () => {
+    const approved = driveGallery.find(
+      (item) => item.id === "mily-drive-b02-p02",
+    );
+    assert.deepEqual(visibleDriveGallery([approved], { state: "review" }), []);
+  });
+
+  it("hides an unverified entry even when published and approved", () => {
+    const pending = {
+      id: "pending-fixture",
+      kind: "photo",
+      fileId: "0123456789abc",
+      alt: "内容未確認のフィクスチャ",
+      contentVerified: false,
+      privacyState: "approved",
+    };
+    assert.deepEqual(visibleDriveGallery([pending], published), []);
+  });
+
+  it("publishes 56 of the 57 registered entries", () => {
+    const visible = visibleDriveGallery(driveGallery, published);
+    assert.equal(driveGallery.length, TOTAL_COUNT);
+    assert.equal(visible.length, PUBLISHABLE_COUNT);
+    assert.equal(TOTAL_COUNT - visible.length, PRIVACY_HOLD_IDS.length);
   });
 });
 
@@ -259,12 +327,12 @@ describe("Drive gallery render model", () => {
 
   it("keeps ids and URLs unique across the rendered sections", () => {
     const keys = [...sections.photos, ...sections.videos].map((view) => view.key);
-    assert.equal(new Set(keys).size, TOTAL_COUNT);
+    assert.equal(new Set(keys).size, PUBLISHABLE_COUNT);
     const srcs = [
       ...sections.photos.map((photo) => photo.img.src),
       ...sections.videos.map((video) => video.frame.src),
     ];
-    assert.equal(new Set(srcs).size, TOTAL_COUNT);
+    assert.equal(new Set(srcs).size, PUBLISHABLE_COUNT);
   });
 
   it("keeps distinct entries for the first, middle and last registrations", () => {
