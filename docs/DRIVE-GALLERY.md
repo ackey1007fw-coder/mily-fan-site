@@ -86,6 +86,13 @@ SHA256: 2ddb087117106bba9f24535fa32bf07e03daf60a3153c74982c68d75a1dadd39
 テストが tracked file を全走査し、Drive ホスト・フォルダ URL・Drive ID 形状のトークンが
 1 件も無いことを固定します。
 
+走査は**拡張子に依存しません**。`git ls-files` で全 tracked file を列挙し、git 自身と同じ
+判定（先頭 8000 バイトに NUL があれば binary）で text/binary を分けます。固定拡張子の
+allowlist だと `.xml` `.svg` `.webmanifest` や将来増えるテキストファイルを見落とすためです。
+実装は `scripts/scan-tracked-text.mjs`。一時 git リポジトリを使った回帰テストで、
+`.xml` / `.svg` / `.webmanifest` 内の疑似トークンを検出すること、binary を誤読しないこと、
+`Access-Control-Allow-Origin` や SHA256、slug を誤検出しないことを固定しています。
+
 ## 取り込み（ローカル入力）
 
 原本は手元にダウンロードして `media/drive-b02-original/` へ置きます。置き方は
@@ -149,7 +156,8 @@ Vercel 側に ffmpeg も原本も不要にするためで、`pnpm build` は取�
 - sharp で正常に decode できる
 - EXIF / IPTC / XMP が無い
 - 幅が各要求サイズを超えない
-- 各派生の実幅が `min(要求幅, 原本幅)` と一致する（**アップスケールされた派生を許可しない**）
+- 各派生の実幅が **trusted attestation** の `min(要求幅, 原本幅)` と一致する
+- 高さがアスペクト比から導かれる値と一致する（丸め誤差 1px まで許容）
 - 同じ幅の jpg と webp の寸法が一致する
 - manifest の寸法は**実ファイルから**取得する
 
@@ -159,12 +167,47 @@ Vercel 側に ffmpeg も原本も不要にするためで、`pnpm build` は取�
 - ffprobe が成功する
 - video codec が h264
 - audio があれば codec が aac
-- `leftoverTags()` が空（container metadata の残存なし）
+- container tags が allowlist のみ（`leftoverTags()` が空）
+- **全 stream の tags が allowlist のみ**（`streamTagViolations()` が空）
 - faststart（moov が mdat より前）
 - 幅が `VIDEO_MAX_WIDTH` 以下
 - poster が sharp で decode でき、EXIF / IPTC / XMP を持たない
 
 1 つでも満たさなければ **fail closed**。manifest には載せません。
+
+#### metadata の allowlist
+
+denylist ではなく **allowlist** です。未知の tag は失敗であって通過ではありません。
+許可する key は、この ffmpeg build が sanitize 済みファイルへ自分で書き込むものだけで、
+実 fixture の ffprobe 出力で確認しています。
+
+| 対象 | 許可する key |
+| --- | --- |
+| container | `major_brand` / `minor_version` / `compatible_brands` / `encoder` |
+| stream | `language` / `handler_name` / `encoder` |
+
+`handler_name` は許可 key の中で唯一、端末由来の文字列（`Core Media Video` など）を
+運びうるため、値も muxer の既定値（`VideoHandler` / `SoundHandler` / `DataHandler` / 空）に
+限定します。`encoder` は `Lavc` 始まり、`language` は 3 文字コードのみ許可します。
+
+#### trusted source attestation（写真）
+
+派生同士だけを突き合わせると、**6 枚すべてを整合したアップスケール一式に差し替えた場合**に
+原本幅を復元できません。そこで初回 sanitize 時に private 原本から
+**oriented（EXIF orientation 反映後）な寸法**を測り、build-only の
+`scripts/drive-gallery-attestation.json` に記録します。
+
+```json
+{ "entries": { "mily-drive-b02-p02": { "sourceWidth": 320, "sourceHeight": 426 } } }
+```
+
+Drive ID・元ファイル名・private path は含めません。寸法だけの非識別情報です。
+client bundle にも載せません（表示に不要なため）。
+
+再検証は各 slot について `expectedWidth = min(slotWidth, sourceWidth)` と比較するので、
+原本 320px に対する 480 / 960 / 1600 のアップスケール一式は**必ず失敗**します。
+初回 sanitize 直後と skip 再利用は同じ attestation を参照します。
+attestation が無いエントリは「信頼できない」として fail closed です。
 
 ### fail closed
 
@@ -245,7 +288,8 @@ hold を解除する場合は、原本側で画面をぼかすか別カットへ
 動画（公開候補 11 本）:
 
 - `public/media/drive-gallery/mily-b02-vNN.mp4`（H.264 / AAC / `+faststart`）
-- `-map_metadata -1` / `-map_chapters -1` で container metadata を除去
+- container / per-stream / chapters すべての metadata コピーを明示的に無効化
+  （`-map_metadata -1` `-map_metadata:s:v -1` `-map_metadata:s:a -1` `-map_chapters -1`）
 - `scale='min(720,iw)':-2` — アスペクト比維持、アップスケールなし、crop なし
 - `<video controls playsInline preload="none" poster="...">`
 - **autoplay しない**
@@ -267,6 +311,9 @@ fallback も廃止しています（原本へ到達させないため）。
 - `+faststart`（moov が mdat より前）
 - poster が実フレームであること
 - 読めない入力で fail closed すること
+- **video / audio stream の metadata が除去されること**（stream tag を持てる
+  Matroska fixture へ秘密値を注入し、sanitize 後に全 stream から消えることを確認）
+- stream tag を注入した既存 MP4 が validator で failure になること
 
 既存派生の再利用についても実行テストがあります。
 
@@ -275,7 +322,11 @@ fallback も廃止しています（原本へ到達させないため）。
 - 要求幅を超える（アップスケールされた）派生 → failure
 - 壊れた・欠けた派生 → failure
 - 不許可 metadata 付き MP4 → failure
+- video stream / audio stream に不許可 tag を持つ MP4 → failure
 - faststart でない MP4 → failure
+- 原本 320px の attestation に対する整合アップスケール一式 → failure
+- 原本 320px の attestation に対する正常な派生 → pass
+- attestation が無い既存派生 → failure
 - 壊れた poster / metadata 付き poster → failure
 - partial 出力 → 従来どおり failure
 

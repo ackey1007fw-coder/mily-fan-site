@@ -49,6 +49,15 @@ export const VIDEO_MAX_WIDTH = 720;
 /** Optional gitignored map of entry id -> original file name. */
 export const SOURCE_MAP_NAME = "sources.json";
 
+/** Build-only record of each original's oriented dimensions. Non-identifying:
+ *  no Drive id, no original file name, no private path. It is the trusted
+ *  reference that lets an incremental run tell a legitimate derivative from a
+ *  self-consistent set of upscales. */
+export const ATTESTATION_PATH = path.join(
+  root,
+  "scripts/drive-gallery-attestation.json",
+);
+
 export function photoDerivatives(slug) {
   return PHOTO_WIDTHS.flatMap((width) =>
     ["jpg", "webp"].map((format) => `${slug}-${width}.${format}`),
@@ -73,16 +82,80 @@ export function classifyOutputs(entry, existingNames) {
   return "partial";
 }
 
-/** ffmpeg always writes the ISO brand tags and an encoder string; anything else
- *  would be carried-over source metadata. */
+/* ---------------------------------------------------------------- *
+ * Metadata allowlists
+ *
+ * Allowlist, never denylist: an unknown tag is a failure, not a pass. The
+ * permitted keys are exactly what this ffmpeg build writes into a freshly
+ * sanitized file, confirmed by probing real fixtures (see the sanitize tests).
+ * ---------------------------------------------------------------- */
+
+/** Container tags the MP4 muxer always writes. */
+export const ALLOWED_FORMAT_TAGS = new Set([
+  "major_brand",
+  "minor_version",
+  "compatible_brands",
+  "encoder",
+]);
+
+/** Per-stream tags the MP4 muxer writes for re-encoded streams. */
+export const ALLOWED_STREAM_TAGS = new Set(["language", "handler_name", "encoder"]);
+
+/** handler_name is the one allowed key that historically carries device strings
+ *  ("Core Media Video"). Only the muxer's own defaults are acceptable. */
+const ALLOWED_HANDLER_NAMES = new Set([
+  "VideoHandler",
+  "SoundHandler",
+  "DataHandler",
+  "",
+]);
+
+/** Container-level tags that are not muxer boilerplate. */
 export function leftoverTags(tags) {
-  const allowed = new Set([
-    "major_brand",
-    "minor_version",
-    "compatible_brands",
-    "encoder",
-  ]);
-  return Object.keys(tags ?? {}).filter((key) => !allowed.has(key.toLowerCase()));
+  return Object.keys(tags ?? {}).filter(
+    (key) => !ALLOWED_FORMAT_TAGS.has(key.toLowerCase()),
+  );
+}
+
+/**
+ * Stream-level tags that are not muxer boilerplate, plus any allowed key whose
+ * value looks source-derived rather than generated.
+ * @returns {string[]} human-readable violations
+ */
+export function streamTagViolations(tags) {
+  const violations = [];
+  for (const [key, value] of Object.entries(tags ?? {})) {
+    const lower = key.toLowerCase();
+    if (!ALLOWED_STREAM_TAGS.has(lower)) {
+      violations.push(`unexpected tag ${key}`);
+      continue;
+    }
+    if (lower === "handler_name" && !ALLOWED_HANDLER_NAMES.has(String(value).trim())) {
+      violations.push(`handler_name is "${value}"`);
+    }
+    if (lower === "encoder" && !String(value).startsWith("Lavc")) {
+      violations.push(`encoder is "${value}"`);
+    }
+    if (lower === "language" && !/^[a-z]{3}$/i.test(String(value))) {
+      violations.push(`language is "${value}"`);
+    }
+  }
+  return violations;
+}
+
+/** Oriented dimensions of an original: the size the pipeline actually works
+ *  with after `rotate()` applies the EXIF orientation. */
+export async function orientedSourceSize(bytes) {
+  const meta = await sharp(bytes, { failOn: "error" }).metadata();
+  if (!meta.width || !meta.height) {
+    throw new Error("original has no readable dimensions");
+  }
+  // EXIF orientations 5-8 rotate by 90 degrees, swapping width and height.
+  const swapped = typeof meta.orientation === "number" && meta.orientation >= 5;
+  return {
+    sourceWidth: swapped ? meta.height : meta.width,
+    sourceHeight: swapped ? meta.width : meta.height,
+  };
 }
 
 /**
@@ -166,12 +239,24 @@ async function ffprobeExe() {
  * ------------------------------------------------------------------ */
 
 /**
- * Validate a complete photo derivative set and read its real dimensions.
+ * Validate a complete photo derivative set against the trusted attestation of
+ * the original's oriented size, and read the real dimensions back off disk.
+ *
+ * The attestation is what makes an incremental run safe: without it, a set of
+ * six mutually consistent upscales is indistinguishable from a legitimate set.
+ *
+ * @param {{sourceWidth: number, sourceHeight: number}} attested
  * @returns {Promise<{width: number, height: number}>}
  */
-export async function validatePhotoDerivatives(entry, outputDir) {
+export async function validatePhotoDerivatives(entry, outputDir, attested) {
   const slug = outputSlug(entry.id);
   const measured = new Map();
+
+  if (!attested || !attested.sourceWidth || !attested.sourceHeight) {
+    throw new Error(
+      `${entry.id}: no trusted source attestation; refusing to trust existing derivatives`,
+    );
+  }
 
   for (const width of PHOTO_WIDTHS) {
     for (const format of ["jpg", "webp"]) {
@@ -202,18 +287,29 @@ export async function validatePhotoDerivatives(entry, outputDir) {
     }
   }
 
-  // withoutEnlargement means every derivative is min(slot, original). Anything
-  // else is an upscaled or mismatched file that did not come from this pipeline.
-  const cap = Math.max(...[...measured.values()].map((m) => m.width));
+  // withoutEnlargement means every derivative is min(slot, attested original).
+  // Comparing against the attestation - not against the other derivatives -
+  // also rejects a set of upscales that agree with each other.
+  const { sourceWidth, sourceHeight } = attested;
   for (const width of PHOTO_WIDTHS) {
-    const expected = Math.min(width, cap);
+    const expectedWidth = Math.min(width, sourceWidth);
+    // Aspect ratio is preserved and there is no crop, so the height follows.
+    const expectedHeight = Math.round((sourceHeight * expectedWidth) / sourceWidth);
     for (const format of ["jpg", "webp"]) {
       const name = `${slug}-${width}.${format}`;
       const actual = measured.get(name);
-      if (actual.width !== expected) {
+      if (actual.width !== expectedWidth) {
         throw new Error(
-          `${entry.id}: ${name} is ${actual.width}px wide, expected ${expected}px ` +
-            "(upscaled or inconsistent derivative)",
+          `${entry.id}: ${name} is ${actual.width}px wide, expected ${expectedWidth}px ` +
+            `for a ${sourceWidth}px original (upscaled or inconsistent derivative)`,
+        );
+      }
+      // Rounding can move the height by a pixel; anything more is a crop or a
+      // different image altogether.
+      if (Math.abs(actual.height - expectedHeight) > 1) {
+        throw new Error(
+          `${entry.id}: ${name} is ${actual.height}px tall, expected about ` +
+            `${expectedHeight}px (aspect ratio changed or cropped)`,
         );
       }
     }
@@ -268,6 +364,17 @@ export async function validateVideoDerivatives(entry, outputDir) {
   if (stray.length > 0) {
     throw new Error(`${entry.id}: ${slug}.mp4 carries metadata ${stray.join(", ")}`);
   }
+  // Per-stream metadata is tracked separately from container metadata, so it
+  // gets its own allowlist rather than riding on the format-level check.
+  for (const stream of info.streams ?? []) {
+    const strayStream = streamTagViolations(stream.tags);
+    if (strayStream.length > 0) {
+      throw new Error(
+        `${entry.id}: ${slug}.mp4 ${stream.codec_type} stream carries metadata ` +
+          strayStream.join(", "),
+      );
+    }
+  }
   if (!video.width || video.width > VIDEO_MAX_WIDTH) {
     throw new Error(
       `${entry.id}: ${slug}.mp4 is ${video.width}px wide, over the ${VIDEO_MAX_WIDTH}px cap`,
@@ -295,6 +402,9 @@ export async function validateVideoDerivatives(entry, outputDir) {
  *  This never calls it, and validates the result against the shared contract. */
 export async function sanitizePhoto(entry, bytes, outputDir) {
   const slug = outputSlug(entry.id);
+  // Measured from the private original, before any derivative exists. This is
+  // the attestation every later run compares against.
+  const attested = await orientedSourceSize(bytes);
 
   for (const width of PHOTO_WIDTHS) {
     for (const format of ["jpg", "webp"]) {
@@ -310,8 +420,8 @@ export async function sanitizePhoto(entry, bytes, outputDir) {
     }
   }
 
-  const { width, height } = await validatePhotoDerivatives(entry, outputDir);
-  return photoManifestEntry(entry, width, height);
+  const { width, height } = await validatePhotoDerivatives(entry, outputDir, attested);
+  return { item: photoManifestEntry(entry, width, height), attested };
 }
 
 export async function sanitizeVideo(entry, inputPath, outputDir) {
@@ -325,8 +435,12 @@ export async function sanitizeVideo(entry, inputPath, outputDir) {
     [
       "-hide_banner", "-loglevel", "error", "-y",
       "-i", inputPath,
-      // Drop every container/stream tag and chapter: no GPS, no device, no dates.
+      // Drop container metadata, per-stream metadata and chapters: no GPS, no
+      // device, no dates, no stream titles. Global and per-stream metadata are
+      // mapped separately in ffmpeg, so both are disabled explicitly.
       "-map_metadata", "-1",
+      "-map_metadata:s:v", "-1",
+      "-map_metadata:s:a", "-1",
       "-map_chapters", "-1",
       "-c:v", "libx264", "-profile:v", "high", "-crf", "24", "-preset", "medium",
       "-pix_fmt", "yuv420p",
@@ -398,17 +512,21 @@ function config() {
     manifestPath: process.env.DRIVE_GALLERY_MANIFEST
       ? path.resolve(process.env.DRIVE_GALLERY_MANIFEST)
       : MANIFEST_PATH,
+    attestationPath: process.env.DRIVE_GALLERY_ATTESTATION
+      ? path.resolve(process.env.DRIVE_GALLERY_ATTESTATION)
+      : ATTESTATION_PATH,
     only: only ? new Set(only.split(",").map((s) => s.trim())) : null,
   };
 }
 
 async function main() {
-  const { state, inputDir, outputDir, manifestPath, only } = config();
+  const { state, inputDir, outputDir, manifestPath, attestationPath, only } = config();
   await mkdir(outputDir, { recursive: true });
 
   if (state !== "published") {
     const leftovers = (await readdir(outputDir)).filter((n) => !n.startsWith("."));
     await writeManifest(manifestPath, state, []);
+    await writeAttestation(attestationPath, {});
     console.log(
       `drive-gallery:build — publication is "${state}". ` +
         "No original was read; manifest is empty.",
@@ -467,19 +585,32 @@ async function main() {
     process.exit(1);
   }
 
+  // Carried forward so an incremental run re-validates untouched entries
+  // against the dimensions measured when their originals were first read.
+  const attestation = await readAttestation(attestationPath);
+  const attestedEntries = { ...attestation.entries };
+
   const items = [];
   for (const { entry, inputName } of resolved) {
     if (!inputName) {
       console.log(`  = ${entry.id} (derivatives already built)`);
-      items.push(await manifestFromExisting(entry, outputDir));
+      items.push(await manifestFromExisting(entry, outputDir, attestation));
       continue;
     }
     const started = Date.now();
     const inputPath = path.join(inputDir, inputName);
-    const item =
-      entry.kind === "photo"
-        ? await sanitizePhoto(entry, await readFile(inputPath), outputDir)
-        : await sanitizeVideo(entry, inputPath, outputDir);
+    let item;
+    if (entry.kind === "photo") {
+      const sanitized = await sanitizePhoto(
+        entry,
+        await readFile(inputPath),
+        outputDir,
+      );
+      item = sanitized.item;
+      attestedEntries[entry.id] = sanitized.attested;
+    } else {
+      item = await sanitizeVideo(entry, inputPath, outputDir);
+    }
     items.push(item);
     // The original file name is never logged: it is private operations data.
     console.log(
@@ -502,18 +633,42 @@ async function main() {
   }
 
   await writeManifest(manifestPath, state, items);
+  await writeAttestation(attestationPath, attestedEntries);
   console.log(`drive-gallery:build — wrote ${items.length} manifest entries.`);
 }
 
 /** Reuse an already-built derivative set — but only after it passes the same
- *  contract a freshly sanitized set must pass. Being on disk is not evidence. */
-export async function manifestFromExisting(entry, outputDir) {
+ *  contract a freshly sanitized set must pass, against the same trusted source
+ *  attestation. Being on disk is not evidence. */
+export async function manifestFromExisting(entry, outputDir, attestation) {
   if (entry.kind === "photo") {
-    const { width, height } = await validatePhotoDerivatives(entry, outputDir);
+    const attested = attestation?.entries?.[entry.id];
+    const { width, height } = await validatePhotoDerivatives(entry, outputDir, attested);
     return photoManifestEntry(entry, width, height);
   }
   const { width, height } = await validateVideoDerivatives(entry, outputDir);
   return videoManifestEntry(entry, width, height);
+}
+
+export async function readAttestation(attestationPath) {
+  try {
+    const raw = await readFile(attestationPath, "utf8");
+    const parsed = JSON.parse(raw);
+    return { entries: parsed.entries ?? {} };
+  } catch (error) {
+    if (error.code === "ENOENT") return { entries: {} };
+    throw new Error(`attestation is not readable JSON: ${error.message}`);
+  }
+}
+
+async function writeAttestation(attestationPath, entries) {
+  const payload = {
+    generatedBy: "scripts/build-drive-gallery.mjs",
+    note: "Oriented dimensions of each original. No Drive id, no file name, no path.",
+    entries,
+  };
+  await mkdir(path.dirname(attestationPath), { recursive: true });
+  await writeFile(attestationPath, `${JSON.stringify(payload, null, 2)}\n`, "utf8");
 }
 
 export async function exists(filePath) {

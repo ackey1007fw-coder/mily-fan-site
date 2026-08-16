@@ -31,10 +31,13 @@ import {
   SOURCE_MAP_NAME,
   classifyOutputs,
   derivativesFor,
+  ALLOWED_STREAM_TAGS,
   VIDEO_MAX_WIDTH,
   isFaststart,
   leftoverTags,
   manifestFromExisting,
+  orientedSourceSize,
+  streamTagViolations,
   photoDerivatives,
   photoManifestEntry,
   resolveInputName,
@@ -45,24 +48,18 @@ import {
   videoManifestEntry,
 } from "./build-drive-gallery.mjs";
 
+import {
+  DRIVE_HOST_PATTERN,
+  findDriveIds,
+  isProbablyBinary,
+  listTrackedFiles,
+  looksLikeDriveId,
+  readTrackedTextFiles,
+  scanForDriveIdentifiers,
+} from "./scan-tracked-text.mjs";
+
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-
-/** No Drive identifier or URL may appear anywhere in the public repository. */
-const DRIVE_HOST_PATTERN = /drive\.(google|usercontent\.google)\.com/;
-const FOLDER_URL_PATTERN = /drive\.google\.com\/drive\/folders/;
-/** Drive ids are long, opaque and mixed-case with digits. Slugs, SCREAMING_CASE
- *  constants, header names and hex digests are none of those, so they do not
- *  trip this check. */
-const ID_CANDIDATE = /[A-Za-z0-9_-]{25,}/g;
-function looksLikeDriveId(token) {
-  return (
-    /[A-Z]/.test(token) && /[a-z]/.test(token) && /[0-9]/.test(token)
-  );
-}
-function findDriveIds(text) {
-  return (text.match(ID_CANDIDATE) ?? []).filter(looksLikeDriveId);
-}
 
 const PHOTO_COUNT = 46;
 const VIDEO_COUNT = 11;
@@ -179,22 +176,44 @@ describe("Drive gallery entry registry (build-only)", () => {
 });
 
 describe("Public repository carries no Drive identifier", () => {
-  it("has no Drive host, folder URL or id-shaped token in tracked sources", async () => {
-    const { stdout } = await run("git", ["ls-files"], { cwd: root, maxBuffer: 1024 * 1024 * 8 });
-    const tracked = stdout.split("\n").filter(Boolean);
-    const scannable = tracked.filter((f) =>
-      /\.(ts|tsx|js|mjs|cjs|json|md|yml|yaml|html|css|txt)$/.test(f),
+  it("scans every tracked text file, not an extension allowlist", async () => {
+    const { scanned, skippedBinary, findings } = await scanForDriveIdentifiers(root);
+    assert.ok(scanned > 80, `expected to scan the tracked tree, scanned ${scanned}`);
+    assert.deepEqual(
+      findings,
+      [],
+      `Drive identifiers found: ${JSON.stringify(findings.slice(0, 5))}`,
     );
-    assert.ok(scannable.length > 40, "expected to scan the tracked source tree");
-
-    for (const file of scannable) {
-      const source = await read(file);
-      assert.equal(DRIVE_HOST_PATTERN.test(source), false, `${file} references a Drive host`);
-      assert.equal(FOLDER_URL_PATTERN.test(source), false, `${file} builds a folder URL`);
-      // pnpm-lock.yaml is full of base64 integrity digests, not Drive ids.
-      if (file === "pnpm-lock.yaml") continue;
-      assert.deepEqual(findDriveIds(source), [], `${file} contains a Drive-id-shaped token`);
+    // Binary blobs are skipped by content, never by file name.
+    for (const file of skippedBinary) {
+      assert.ok(typeof file === "string");
     }
+  });
+
+  it("scans every tracked file that is not binary", async () => {
+    const tracked = await listTrackedFiles(root);
+    const { files, skippedBinary } = await readTrackedTextFiles(root);
+    const scannedNames = new Set(files.map((f) => f.file));
+    const skipped = new Set(skippedBinary);
+
+    // Whatever the repository grows next is covered without editing this test:
+    // membership is decided by content, not by extension.
+    for (const file of tracked) {
+      assert.ok(
+        scannedNames.has(file) || skipped.has(file),
+        `${file} was neither scanned nor classified as binary`,
+      );
+    }
+    assert.equal(scannedNames.size + skipped.size, tracked.length);
+
+    // The old allowlist would have skipped these extensions entirely.
+    const covered = [...scannedNames].filter((f) =>
+      /\.(svg|xml|webmanifest)$/i.test(f),
+    );
+    assert.ok(
+      covered.length > 0,
+      "expected the tree to contain a file the old extension allowlist missed",
+    );
   });
 
   it("distinguishes Drive ids from ordinary long identifiers", () => {
@@ -473,7 +492,7 @@ describe("Sanitize pipeline (local fixtures)", () => {
     const before = await sharp(withMeta).metadata();
     assert.ok(before.exif, "fixture must actually carry EXIF");
 
-    const item = await sanitizePhoto(entry, withMeta, dir);
+    const { item } = await sanitizePhoto(entry, withMeta, dir);
 
     for (const name of photoDerivatives("fixture-photo")) {
       const meta = await sharp(path.join(dir, name)).metadata();
@@ -499,7 +518,7 @@ describe("Sanitize pipeline (local fixtures)", () => {
       .jpeg()
       .toBuffer();
 
-    const item = await sanitizePhoto(entry, small, dir);
+    const { item } = await sanitizePhoto(entry, small, dir);
     assert.equal(item.width, 320);
     assert.equal(item.height, 240);
     const largest = await sharp(path.join(dir, "fixture-small-1600.jpg")).metadata();
@@ -580,8 +599,8 @@ describe("Existing derivatives are re-validated before reuse", () => {
     })
       .jpeg()
       .toBuffer();
-    await sanitizePhoto({ id, kind: "photo", alt: id }, bytes, out);
-    return out;
+    const { attested } = await sanitizePhoto({ id, kind: "photo", alt: id }, bytes, out);
+    return { out, attested, attestation: { entries: { [id]: attested } } };
   }
 
   /** Build a clean, contract-passing video set for `id` in its own directory. */
@@ -616,14 +635,14 @@ describe("Existing derivatives are re-validated before reuse", () => {
 
   it("reuses a clean existing photo set and reads its real dimensions", async () => {
     const id = "reuse-photo-ok";
-    const out = await buildPhotoSet(id, { width: 2000, height: 1500 });
+    const { out, attestation } = await buildPhotoSet(id, { width: 2000, height: 1500 });
     const entry = { id, kind: "photo", alt: "reuse" };
 
     // The whole set is present, so the ingest would classify it as "skip".
     const names = new Set(await readdir(out));
     assert.equal(classifyOutputs(entry, names), "skip");
 
-    const item = await manifestFromExisting(entry, out);
+    const item = await manifestFromExisting(entry, out, attestation);
     assert.equal(item.width, 1600);
     assert.equal(item.height, 1200);
     assert.equal(item.src, `${PUBLIC_PREFIX}/${id}-960.jpg`);
@@ -631,7 +650,7 @@ describe("Existing derivatives are re-validated before reuse", () => {
 
   it("rejects a complete photo set when one derivative regained metadata", async () => {
     const id = "reuse-photo-exif";
-    const out = await buildPhotoSet(id);
+    const { out, attested, attestation } = await buildPhotoSet(id);
     const entry = { id, kind: "photo", alt: "reuse" };
     assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "skip");
 
@@ -649,15 +668,15 @@ describe("Existing derivatives are re-validated before reuse", () => {
     await writeFile(path.join(out, `${id}-960.jpg`), swapped);
 
     await assert.rejects(
-      () => validatePhotoDerivatives(entry, out),
+      () => validatePhotoDerivatives(entry, out, attested),
       /carries EXIF\/IPTC\/XMP metadata/,
     );
-    await assert.rejects(() => manifestFromExisting(entry, out));
+    await assert.rejects(() => manifestFromExisting(entry, out, attestation));
   });
 
   it("rejects a photo derivative that was upscaled past its slot", async () => {
     const id = "reuse-photo-upscaled";
-    const out = await buildPhotoSet(id, { width: 800, height: 600 });
+    const { out, attested } = await buildPhotoSet(id, { width: 800, height: 600 });
     const entry = { id, kind: "photo", alt: "reuse" };
 
     // The original was 800px, so every slot should cap at 800. Drop in a
@@ -670,21 +689,27 @@ describe("Existing derivatives are re-validated before reuse", () => {
     await writeFile(path.join(out, `${id}-1600.jpg`), upscaled);
 
     await assert.rejects(
-      () => validatePhotoDerivatives(entry, out),
+      () => validatePhotoDerivatives(entry, out, attested),
       /upscaled or inconsistent derivative/,
     );
   });
 
   it("rejects a photo set with a corrupt or missing derivative", async () => {
     const id = "reuse-photo-corrupt";
-    const out = await buildPhotoSet(id);
+    const { out, attested } = await buildPhotoSet(id);
     const entry = { id, kind: "photo", alt: "reuse" };
 
     await writeFile(path.join(out, `${id}-480.webp`), "not an image");
-    await assert.rejects(() => validatePhotoDerivatives(entry, out), /does not decode/);
+    await assert.rejects(
+      () => validatePhotoDerivatives(entry, out, attested),
+      /does not decode/,
+    );
 
     await rm(path.join(out, `${id}-480.webp`));
-    await assert.rejects(() => validatePhotoDerivatives(entry, out), /missing derivative/);
+    await assert.rejects(
+      () => validatePhotoDerivatives(entry, out, attested),
+      /missing derivative/,
+    );
   });
 
   it("reuses a clean existing video set and reads its real dimensions", async () => {
@@ -786,12 +811,412 @@ describe("Existing derivatives are re-validated before reuse", () => {
   it("runs the same contract after a fresh sanitize and on reuse", async () => {
     // A freshly sanitized set must satisfy exactly what the reuse path checks.
     const id = "reuse-same-contract";
-    const out = await buildPhotoSet(id);
+    const { out, attested, attestation } = await buildPhotoSet(id);
     const entry = { id, kind: "photo", alt: "reuse" };
-    const fresh = await validatePhotoDerivatives(entry, out);
-    const reused = await manifestFromExisting(entry, out);
+    const fresh = await validatePhotoDerivatives(entry, out, attested);
+    const reused = await manifestFromExisting(entry, out, attestation);
     assert.equal(reused.width, fresh.width);
     assert.equal(reused.height, fresh.height);
+  });
+});
+
+describe("MP4 stream-level metadata", () => {
+  let dir;
+  let ffmpeg;
+  let ffprobe;
+
+  const SECRETS = [
+    "SECRET_VIDEO_TITLE",
+    "SECRET_VIDEO_COMMENT",
+    "SECRET_AUDIO_TITLE",
+    "SECRET_AUDIO_COMMENT",
+    "SECRET_GLOBAL_COMMENT",
+    "SECRET_DEVICE_HANDLER",
+  ];
+
+  async function probe(file) {
+    const { stdout } = await run(ffprobe, [
+      "-hide_banner", "-loglevel", "error",
+      "-show_format", "-show_streams", "-print_format", "json", file,
+    ]);
+    return JSON.parse(stdout);
+  }
+
+  /** Matroska keeps arbitrary per-stream tags, so it can carry the leak we are
+   *  defending against into the pipeline. */
+  async function makeLeakySource(name) {
+    const src = path.join(dir, name);
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-f", "lavfi", "-i", "testsrc=size=360x640:rate=15:duration=1",
+      "-f", "lavfi", "-i", "sine=frequency=440:duration=1",
+      "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac",
+      "-metadata", "comment=SECRET_GLOBAL_COMMENT",
+      "-metadata:s:v:0", "title=SECRET_VIDEO_TITLE",
+      "-metadata:s:v:0", "comment=SECRET_VIDEO_COMMENT",
+      "-metadata:s:a:0", "title=SECRET_AUDIO_TITLE",
+      "-metadata:s:a:0", "comment=SECRET_AUDIO_COMMENT",
+      src,
+    ]);
+    return src;
+  }
+
+  before(async () => {
+    dir = await mkdtemp(path.join(tmpdir(), "drive-streams-"));
+    const ffmpegMod = await import("ffmpeg-static");
+    ffmpeg = ffmpegMod.default ?? ffmpegMod;
+    const ffprobeMod = await import("ffprobe-static");
+    const resolved = ffprobeMod.default ?? ffprobeMod;
+    ffprobe = resolved.path ?? resolved;
+  });
+
+  after(async () => {
+    await rm(dir, { recursive: true, force: true });
+  });
+
+  it("allowlists only the tags this muxer writes itself", () => {
+    assert.deepEqual([...ALLOWED_STREAM_TAGS].sort(), ["encoder", "handler_name", "language"]);
+
+    // Unknown keys fail: allowlist, not denylist.
+    assert.deepEqual(streamTagViolations({ language: "und" }), []);
+    assert.deepEqual(streamTagViolations({ handler_name: "VideoHandler" }), []);
+    assert.deepEqual(streamTagViolations({ encoder: "Lavc61.3.100 libx264" }), []);
+    assert.deepEqual(streamTagViolations({}), []);
+    assert.deepEqual(streamTagViolations(undefined), []);
+
+    assert.deepEqual(streamTagViolations({ title: "x" }), ["unexpected tag title"]);
+    assert.deepEqual(streamTagViolations({ creation_time: "2020" }), [
+      "unexpected tag creation_time",
+    ]);
+    assert.deepEqual(streamTagViolations({ some_future_tag: "x" }), [
+      "unexpected tag some_future_tag",
+    ]);
+    // Allowed key, source-derived value.
+    assert.deepEqual(streamTagViolations({ handler_name: "Core Media Video" }), [
+      'handler_name is "Core Media Video"',
+    ]);
+    assert.deepEqual(streamTagViolations({ encoder: "MyPhone 1.0" }), [
+      'encoder is "MyPhone 1.0"',
+    ]);
+  });
+
+  it("strips video and audio stream metadata during sanitize", async () => {
+    const src = await makeLeakySource("leaky.mkv");
+    const sourceInfo = await probe(src);
+    const sourceBlob = JSON.stringify(sourceInfo);
+    // The fixture must actually carry the leak, or the test proves nothing.
+    assert.ok(sourceBlob.includes("SECRET_VIDEO_TITLE"), "fixture lost its video tag");
+    assert.ok(sourceBlob.includes("SECRET_AUDIO_TITLE"), "fixture lost its audio tag");
+
+    const out = path.join(dir, "sanitized");
+    await mkdir(out, { recursive: true });
+    const entry = { id: "stream-clean", kind: "video", alt: "clean" };
+    await sanitizeVideo(entry, src, out);
+
+    const info = await probe(path.join(out, "stream-clean.mp4"));
+    const blob = JSON.stringify(info);
+    for (const secret of SECRETS) {
+      assert.equal(blob.includes(secret), false, `${secret} survived sanitize`);
+    }
+    assert.deepEqual(leftoverTags(info.format.tags), []);
+    for (const stream of info.streams) {
+      assert.deepEqual(
+        streamTagViolations(stream.tags),
+        [],
+        `${stream.codec_type} stream kept metadata`,
+      );
+    }
+    // C. clean sanitized output passes the validator.
+    await validateVideoDerivatives(entry, out);
+  });
+
+  it("rejects an existing MP4 whose video stream carries metadata", async () => {
+    const src = await makeLeakySource("leaky-v.mkv");
+    const out = path.join(dir, "video-leak");
+    await mkdir(out, { recursive: true });
+    const entry = { id: "video-leak", kind: "video", alt: "leak" };
+    await sanitizeVideo(entry, src, out);
+
+    // Re-mux the clean output, injecting a video stream tag as a careless
+    // hand-edit or a different toolchain would.
+    const mp4 = path.join(out, "video-leak.mp4");
+    const tampered = path.join(dir, "video-leak-tampered.mp4");
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-i", mp4, "-c", "copy",
+      "-metadata:s:v:0", "handler_name=SECRET_DEVICE_HANDLER",
+      "-movflags", "+faststart", tampered,
+    ]);
+    await writeFile(mp4, await readFile(tampered));
+
+    const info = await probe(mp4);
+    const video = info.streams.find((s) => s.codec_type === "video");
+    assert.ok(streamTagViolations(video.tags).length > 0, "fixture must be tainted");
+
+    await assert.rejects(
+      () => validateVideoDerivatives(entry, out),
+      /video stream carries metadata/,
+    );
+  });
+
+  it("rejects an existing MP4 whose audio stream carries metadata", async () => {
+    const src = await makeLeakySource("leaky-a.mkv");
+    const out = path.join(dir, "audio-leak");
+    await mkdir(out, { recursive: true });
+    const entry = { id: "audio-leak", kind: "video", alt: "leak" };
+    await sanitizeVideo(entry, src, out);
+
+    const mp4 = path.join(out, "audio-leak.mp4");
+    const tampered = path.join(dir, "audio-leak-tampered.mp4");
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-i", mp4, "-c", "copy",
+      "-metadata:s:a:0", "handler_name=SECRET_DEVICE_HANDLER",
+      "-movflags", "+faststart", tampered,
+    ]);
+    await writeFile(mp4, await readFile(tampered));
+
+    await assert.rejects(
+      () => validateVideoDerivatives(entry, out),
+      /audio stream carries metadata/,
+    );
+  });
+});
+
+describe("Trusted photo source attestation", () => {
+  let dir;
+
+  before(async () => {
+    dir = await mkdtemp(path.join(tmpdir(), "drive-attest-"));
+  });
+
+  after(async () => {
+    await rm(dir, { recursive: true, force: true });
+  });
+
+  it("measures the oriented size of the original", async () => {
+    const upright = await sharp({
+      create: { width: 320, height: 426, channels: 3, background: "#357" },
+    })
+      .jpeg()
+      .toBuffer();
+    assert.deepEqual(await orientedSourceSize(upright), {
+      sourceWidth: 320,
+      sourceHeight: 426,
+    });
+
+    // EXIF orientation 6 means the pipeline will rotate it, swapping the axes.
+    const rotated = await sharp({
+      create: { width: 426, height: 320, channels: 3, background: "#357" },
+    })
+      .withMetadata({ orientation: 6 })
+      .jpeg()
+      .toBuffer();
+    assert.equal((await sharp(rotated).metadata()).orientation, 6);
+    assert.deepEqual(await orientedSourceSize(rotated), {
+      sourceWidth: 320,
+      sourceHeight: 426,
+    });
+  });
+
+  it("passes a genuine 320px original whose derivatives never enlarge", async () => {
+    const id = "attest-small";
+    const out = path.join(dir, id);
+    await mkdir(out, { recursive: true });
+    const bytes = await sharp({
+      create: { width: 320, height: 426, channels: 3, background: "#357" },
+    })
+      .jpeg()
+      .toBuffer();
+
+    const { item, attested } = await sanitizePhoto({ id, kind: "photo", alt: id }, bytes, out);
+    assert.deepEqual(attested, { sourceWidth: 320, sourceHeight: 426 });
+    assert.equal(item.width, 320);
+    assert.equal(item.height, 426);
+
+    // Every slot caps at the original width, and reuse agrees.
+    const reused = await manifestFromExisting({ id, kind: "photo", alt: id }, out, {
+      entries: { [id]: attested },
+    });
+    assert.equal(reused.width, 320);
+    assert.equal(reused.height, 426);
+  });
+
+  it("rejects a fully self-consistent set of upscales", async () => {
+    const id = "attest-upscaled";
+    const out = path.join(dir, id);
+    await mkdir(out, { recursive: true });
+
+    // Six derivatives that agree with each other perfectly: 480/960/1600 at
+    // exactly their slot widths, jpg and webp matching. Only the attestation
+    // reveals that the original was 320px wide.
+    for (const width of PHOTO_WIDTHS) {
+      const height = Math.round((426 * width) / 320);
+      const upscaled = sharp({
+        create: { width, height, channels: 3, background: "#357" },
+      });
+      await upscaled.clone().jpeg().toFile(path.join(out, `${id}-${width}.jpg`));
+      await upscaled.clone().webp().toFile(path.join(out, `${id}-${width}.webp`));
+    }
+
+    const entry = { id, kind: "photo", alt: id };
+    const attested = { sourceWidth: 320, sourceHeight: 426 };
+
+    // The set is complete, so the ingest would otherwise reuse it.
+    assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "skip");
+
+    await assert.rejects(
+      () => validatePhotoDerivatives(entry, out, attested),
+      /upscaled or inconsistent derivative/,
+    );
+    await assert.rejects(
+      () => manifestFromExisting(entry, out, { entries: { [id]: attested } }),
+      /upscaled or inconsistent derivative/,
+    );
+  });
+
+  it("refuses to trust existing derivatives with no attestation", async () => {
+    const id = "attest-missing";
+    const out = path.join(dir, id);
+    await mkdir(out, { recursive: true });
+    const bytes = await sharp({
+      create: { width: 900, height: 600, channels: 3, background: "#357" },
+    })
+      .jpeg()
+      .toBuffer();
+    await sanitizePhoto({ id, kind: "photo", alt: id }, bytes, out);
+
+    const entry = { id, kind: "photo", alt: id };
+    await assert.rejects(
+      () => manifestFromExisting(entry, out, { entries: {} }),
+      /no trusted source attestation/,
+    );
+  });
+
+  it("rejects a derivative whose aspect ratio was changed", async () => {
+    const id = "attest-aspect";
+    const out = path.join(dir, id);
+    await mkdir(out, { recursive: true });
+    const bytes = await sharp({
+      create: { width: 800, height: 600, channels: 3, background: "#357" },
+    })
+      .jpeg()
+      .toBuffer();
+    const { attested } = await sanitizePhoto({ id, kind: "photo", alt: id }, bytes, out);
+
+    // Correct width, wrong height: a crop rather than a resize.
+    await sharp({ create: { width: 480, height: 480, channels: 3, background: "#357" } })
+      .jpeg()
+      .toFile(path.join(out, `${id}-480.jpg`));
+
+    await assert.rejects(
+      () => validatePhotoDerivatives({ id, kind: "photo", alt: id }, out, attested),
+      /aspect ratio changed or cropped/,
+    );
+  });
+
+  it("keeps the committed attestation non-identifying and empty while unpublished", async () => {
+    const raw = await read("scripts/drive-gallery-attestation.json");
+    const parsed = JSON.parse(raw);
+    assert.deepEqual(parsed.entries, {});
+    assert.equal(DRIVE_HOST_PATTERN.test(raw), false);
+    assert.deepEqual(findDriveIds(raw), []);
+  });
+});
+
+describe("Repository scan is extension-independent", () => {
+  let dir;
+
+  /** A Drive-shaped token assembled at runtime: embedding an id-shaped literal
+   *  would (correctly) trip the repository scan of this very file. */
+  const synthetic = ["Synthetic", "Example0123456789", "Token"].join("");
+
+  async function git(args, cwd) {
+    return run("git", args, { cwd });
+  }
+
+  before(async () => {
+    dir = await mkdtemp(path.join(tmpdir(), "drive-scan-"));
+    await git(["init", "-q"], dir);
+    await git(["config", "user.email", "test@example.com"], dir);
+    await git(["config", "user.name", "test"], dir);
+  });
+
+  after(async () => {
+    await rm(dir, { recursive: true, force: true });
+  });
+
+  it("finds id-shaped tokens in files no extension allowlist would cover", async () => {
+    await writeFile(path.join(dir, "sitemap.xml"), `<url><loc>${synthetic}</loc></url>`);
+    await writeFile(path.join(dir, "icon.svg"), `<svg><desc>${synthetic}</desc></svg>`);
+    await writeFile(
+      path.join(dir, "site.webmanifest"),
+      JSON.stringify({ name: synthetic }),
+    );
+    await git(["add", "-A"], dir);
+
+    const { findings, scanned } = await scanForDriveIdentifiers(dir);
+    const flagged = findings.filter((f) => f.kind === "id-shape").map((f) => f.file);
+    assert.equal(scanned, 3);
+    assert.deepEqual(flagged.sort(), ["icon.svg", "site.webmanifest", "sitemap.xml"]);
+  });
+
+  it("skips binary files instead of misreading them", async () => {
+    const png = await sharp({
+      create: { width: 8, height: 8, channels: 3, background: "#123" },
+    })
+      .png()
+      .toBuffer();
+    await writeFile(path.join(dir, "pixel.png"), png);
+    await writeFile(path.join(dir, "raw.bin"), Buffer.from([0x00, 0x01, 0x02, 0x00]));
+    await git(["add", "-A"], dir);
+
+    const { findings, skippedBinary } = await scanForDriveIdentifiers(dir);
+    assert.ok(skippedBinary.includes("pixel.png"));
+    assert.ok(skippedBinary.includes("raw.bin"));
+    for (const finding of findings) {
+      assert.equal(finding.file.endsWith(".png"), false);
+      assert.equal(finding.file.endsWith(".bin"), false);
+    }
+    assert.equal(isProbablyBinary(png), true);
+    assert.equal(isProbablyBinary(Buffer.from("plain text")), false);
+  });
+
+  it("does not flag ordinary long identifiers", async () => {
+    const clean = path.join(dir, "clean");
+    await mkdir(clean, { recursive: true });
+    await writeFile(
+      path.join(clean, "headers.xml"),
+      "<h>Access-Control-Allow-Origin</h><h>REPLACE_WITH_REAL_ANNOUNCEMENT</h>",
+    );
+    await writeFile(path.join(clean, "digest.txt"), DUPLICATE_SHA256);
+    await writeFile(path.join(clean, "slug.svg"), "<desc>mily-b01-01-birthday-cake</desc>");
+    await git(["add", "-A"], dir);
+
+    const { findings } = await scanForDriveIdentifiers(dir);
+    const inClean = findings.filter((f) => f.file.startsWith("clean/"));
+    assert.deepEqual(inClean, [], "ordinary identifiers must not be flagged");
+  });
+
+  it("finds Drive hosts and folder paths regardless of extension", async () => {
+    const hosts = path.join(dir, "hosts");
+    await mkdir(hosts, { recursive: true });
+    // Assembled at runtime for the same reason as the synthetic token.
+    const host = ["drive", ".google", ".com"].join("");
+    const folderPath = ["/drive", "/folders", "/x"].join("");
+    await writeFile(path.join(hosts, "feed.xml"), `<link>https://${host}/file/d/x/view</link>`);
+    await writeFile(
+      path.join(hosts, "map.webmanifest"),
+      JSON.stringify({ u: `https://${host}${folderPath}` }),
+    );
+    await git(["add", "-A"], dir);
+
+    const { findings } = await scanForDriveIdentifiers(dir);
+    const kinds = new Set(
+      findings.filter((f) => f.file.startsWith("hosts/")).map((f) => f.kind),
+    );
+    assert.ok(kinds.has("drive-host"), "must flag the Drive host");
+    assert.ok(kinds.has("drive-folder"), "must flag the folder path");
   });
 });
 
