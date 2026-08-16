@@ -293,7 +293,7 @@ export const profile: Profile = {
       eyebrow: "CAMPUS GIRLS",
       title: "審査員賞で2nd STAGEへ",
       body:
-        "CAMPUS GIRLS 2027の予選A・1st STAGEで審査員賞に選出され、本人も2nd STAGE進出を報告しています。",
+        "CAMPUS GIRLS 2027の予選A・1st STAGEで審査員賞に選出され、2nd STAGEへ進出。",
       points: ["予選A 1st STAGE 審査員賞", "2nd STAGE進出"],
       sourceIds: ["campusGirlsAward", "campusGirlsSecond"],
       status: "time-sensitive",
