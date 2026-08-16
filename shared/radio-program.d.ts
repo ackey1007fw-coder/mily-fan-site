@@ -32,10 +32,18 @@ export declare function minutesFromMidnight(clock: {
 export declare function parseHm(value: string): number;
 export declare function isBroadcastDay(now?: Date | number): boolean;
 export declare function isInScheduledWindow(now?: Date | number): boolean;
-export declare function schedulePhase(
-  now?: Date | number,
-): "upcoming" | "window" | "ended" | "idle";
+/** 放送日の中での位置。放送日でなければ "idle"。 */
+export type SchedulePhase = "upcoming" | "window" | "ended" | "idle";
+
+export declare function schedulePhase(now?: Date | number): SchedulePhase;
 export declare function nextStartAtIso(now?: Date | number): string | null;
+export declare function msUntilNextPhaseChange(now?: Date | number): number;
+export declare const ONAIR_STALE_MS: number;
+export declare function isOnAirObservationStale(
+  updatedAt: string | null | undefined,
+  now?: Date | number,
+  staleMs?: number,
+): boolean;
 export declare function programNameMatches(raw: string | null | undefined): boolean;
 export declare function scheduledFlags(now?: Date | number): {
   todayScheduled: boolean;

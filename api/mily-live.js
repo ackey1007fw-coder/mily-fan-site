@@ -52,9 +52,10 @@ export async function getLiveStatus(env = process.env) {
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "s-maxage=12,stale-while-revalidate=12");
+  // 許可メソッドは常に告知する（OPTIONS の preflight でも読めるように）
+  res.setHeader("Allow", "GET, OPTIONS");
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "GET") {
-    res.setHeader("Allow", "GET, OPTIONS");
     return res.status(405).json({ ok: false, error: "method not allowed" });
   }
   try {

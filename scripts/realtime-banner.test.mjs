@@ -8,16 +8,24 @@ import {
   appearanceState,
   deriveBannerState,
   nextTodaySlot,
+  onAirConfirmedFresh,
   programState,
   radioStartMs,
   tokyoToday,
 } from "../src/lib/bannerState.ts";
 import {
   createPollStore,
+  expireLivePayload,
+  expireRadioOnAir,
   isObservationStale,
+  liveExpiresAt,
+  radioExpiresAt,
   toLiveView,
   LIVE_STALE_MS,
+  ONAIR_STALE_MS,
 } from "../src/lib/realtimeStore.ts";
+import { createSchedulePhaseStore } from "../src/lib/scheduleClock.ts";
+import { msUntilNextPhaseChange } from "../shared/radio-program.js";
 import {
   normalizeEpochToIso,
   pickUniqueRoom,
@@ -32,6 +40,11 @@ const read = (relative) => readFile(path.join(root, relative), "utf8");
 
 const ROOM_URL = "https://www.showroom-live.com/r/circle2026_0734";
 const SUNDAY_NOON = Date.parse("2026-08-16T12:00:00+09:00");
+const SUNDAY_0959 = Date.parse("2026-08-16T09:59:00+09:00");
+const SUNDAY_1000 = Date.parse("2026-08-16T10:00:00+09:00");
+const SUNDAY_1259 = Date.parse("2026-08-16T12:59:00+09:00");
+const SUNDAY_1300 = Date.parse("2026-08-16T13:00:00+09:00");
+const MONDAY_NOON = Date.parse("2026-08-17T12:00:00+09:00");
 const TODAY = tokyoToday(SUNDAY_NOON);
 
 const liveOn = { state: "live", roomUrl: ROOM_URL };
@@ -86,11 +99,16 @@ describe("showroom room resolution safety", () => {
 });
 
 describe("live state comes only from status.is_live", () => {
-  it("reads true / false / missing", () => {
+  it("accepts only a strict boolean is_live", () => {
     assert.equal(readLiveState({ is_live: true }).state, "live");
-    assert.equal(readLiveState({ is_live: 1 }).state, "live");
     assert.equal(readLiveState({ is_live: false }).state, "offline");
-    assert.equal(readLiveState({ is_live: 0 }).state, "offline");
+    // 型が想定と違うものは「配信中」「配信していない」のどちらにも読み替えない
+    assert.equal(readLiveState({ is_live: 1 }).state, "unknown");
+    assert.equal(readLiveState({ is_live: 0 }).state, "unknown");
+    assert.equal(readLiveState({ is_live: "true" }).state, "unknown");
+    assert.equal(readLiveState({ is_live: "false" }).state, "unknown");
+    assert.equal(readLiveState({ is_live: null }).state, "unknown");
+    assert.equal(readLiveState({ is_live: undefined }).state, "unknown");
     assert.equal(readLiveState({}).state, "unknown");
     assert.equal(readLiveState(null).state, "unknown");
     assert.equal(readLiveState("live").state, "unknown");
@@ -161,15 +179,48 @@ describe("stale live observations expire", () => {
 });
 
 describe("poll store", () => {
-  function fakeTimers() {
-    const queue = [];
+  // 仮想時計。now() を進めて期限の来た timer だけを実行する。
+  function fakeTimers(start = 0) {
+    let now = start;
+    let seq = 0;
+    const queue = new Map();
+    const dueBefore = (limit) =>
+      [...queue.entries()]
+        .filter(([, timer]) => timer.at <= limit)
+        .sort((a, b) => a[1].at - b[1].at)[0];
     return {
       timers: {
-        setTimeout: (handler, ms) => queue.push({ handler, ms }),
-        clearTimeout: () => {},
+        setTimeout: (handler, ms) => {
+          const id = ++seq;
+          queue.set(id, { handler, at: now + ms });
+          return id;
+        },
+        clearTimeout: (id) => queue.delete(id),
+        now: () => now,
       },
-      runNext: () => queue.shift()?.handler(),
-      pending: () => queue.length,
+      now: () => now,
+      pending: () => queue.size,
+      /** ms 進める。途中で期限の来た timer を発火順に実行する。 */
+      advance(ms) {
+        const target = now + ms;
+        for (;;) {
+          const due = dueBefore(target);
+          if (!due) break;
+          const [id, timer] = due;
+          queue.delete(id);
+          now = timer.at;
+          timer.handler();
+        }
+        now = target;
+      },
+      runNext() {
+        const next = [...queue.entries()].sort((a, b) => a[1].at - b[1].at)[0];
+        if (!next) return;
+        const [id, timer] = next;
+        queue.delete(id);
+        now = Math.max(now, timer.at);
+        timer.handler();
+      },
     };
   }
 
@@ -246,11 +297,22 @@ describe("poll store", () => {
 });
 
 describe("radio program vs appearance", () => {
+  it("derives the program phase from the clock, not from the API payload", () => {
+    // API が「放送中」と言っていても、13:00 を過ぎていれば IDLE
+    assert.equal(
+      programState(radio({ inScheduledWindow: true }), SUNDAY_1300),
+      "IDLE",
+    );
+    // API が何も言っていなくても、放送枠に入っていれば WINDOW
+    assert.equal(programState(null, SUNDAY_NOON), "PROGRAM_WINDOW");
+    assert.equal(programState(null, SUNDAY_0959), "PROGRAM_TODAY");
+    assert.equal(programState(null, MONDAY_NOON), "IDLE");
+  });
+
   it("separates program state from appearance state", () => {
-    assert.equal(programState(radio({ inScheduledWindow: true })), "PROGRAM_WINDOW");
-    assert.equal(programState(radio({ todayScheduled: true })), "PROGRAM_TODAY");
-    assert.equal(programState(radio()), "IDLE");
-    assert.equal(programState(null), "UNKNOWN");
+    assert.equal(programState(radio(), SUNDAY_NOON), "PROGRAM_WINDOW");
+    assert.equal(programState(radio(), SUNDAY_0959), "PROGRAM_TODAY");
+    assert.equal(programState(radio(), MONDAY_NOON), "IDLE");
     // milyAppearanceConfirmed は現状 null なので断定しない
     assert.equal(appearanceState(radio()), "LISTED_PERSONALITY");
     assert.equal(
@@ -269,6 +331,7 @@ describe("radio program vs appearance", () => {
       SUNDAY_NOON,
     );
     assert.equal(confirmed.kind, "RADIO_PROGRAM_WINDOW");
+    assert.equal(confirmed.stateLabel, "放送中");
     assert.match(confirmed.title, /放送中/);
 
     const windowOnly = deriveBannerState(
@@ -280,8 +343,48 @@ describe("radio program vs appearance", () => {
       SUNDAY_NOON,
     );
     assert.equal(windowOnly.kind, "RADIO_PROGRAM_WINDOW");
+    // 状態ラベルまで含めた最終レンダー文字列で断定しない
+    assert.equal(windowOnly.stateLabel, "放送時間");
     assert.match(windowOnly.title, /放送時間です/);
-    assert.doesNotMatch(windowOnly.title, /放送中/);
+    assert.doesNotMatch(
+      `${windowOnly.stateLabel}${windowOnly.title}${windowOnly.detail ?? ""}`,
+      /放送中/,
+    );
+  });
+
+  it("stops trusting an old NOW ON AIR confirmation", () => {
+    const observed = "2026-08-16T03:00:00.000Z"; // JST 12:00
+    const fresh = deriveBannerState(
+      {
+        live: liveOff,
+        radio: radio({ onAirConfirmed: true, updatedAt: observed }),
+        slots: [],
+      },
+      Date.parse(observed) + 60_000,
+    );
+    assert.equal(fresh.stateLabel, "放送中");
+
+    // TTL を過ぎたら「放送中」を維持しない（放送枠なので「放送時間」には留まる）
+    const stale = deriveBannerState(
+      {
+        live: liveOff,
+        radio: radio({ onAirConfirmed: true, updatedAt: observed }),
+        slots: [],
+      },
+      Date.parse(observed) + ONAIR_STALE_MS,
+    );
+    assert.equal(stale.kind, "RADIO_PROGRAM_WINDOW");
+    assert.equal(stale.stateLabel, "放送時間");
+    assert.doesNotMatch(`${stale.stateLabel}${stale.title}`, /放送中/);
+
+    // 未来の updatedAt も信用しない
+    assert.equal(
+      onAirConfirmedFresh(
+        radio({ onAirConfirmed: true, updatedAt: observed }),
+        Date.parse(observed) - 1000,
+      ),
+      false,
+    );
   });
 
   it("never claims a personal appearance", async () => {
@@ -300,15 +403,28 @@ describe("radio program vs appearance", () => {
     }
   });
 
-  it("hides on non-broadcast days and on fetch failure", () => {
+  it("hides on non-broadcast days", () => {
     assert.equal(
-      deriveBannerState({ live: liveOff, radio: radio(), slots: [] }, SUNDAY_NOON).kind,
+      deriveBannerState({ live: liveOff, radio: radio(), slots: [] }, MONDAY_NOON).kind,
       "NONE",
     );
     assert.equal(
-      deriveBannerState({ live: liveOff, radio: null, slots: [] }, SUNDAY_NOON).kind,
+      deriveBannerState({ live: liveOff, radio: null, slots: [] }, MONDAY_NOON).kind,
       "NONE",
     );
+  });
+
+  it("still shows the window from the fixed schedule when the API is down", () => {
+    // 放送枠は確定事実なので API が落ちていても「放送時間です」までは出せる。
+    // ただし「放送中」とは言わない。
+    const state = deriveBannerState(
+      { live: liveOff, radio: null, slots: [] },
+      SUNDAY_NOON,
+    );
+    assert.equal(state.kind, "RADIO_PROGRAM_WINDOW");
+    assert.equal(state.stateLabel, "放送時間");
+    assert.match(state.title, /放送時間です/);
+    assert.doesNotMatch(`${state.stateLabel}${state.title}`, /放送中/);
   });
 });
 
@@ -419,9 +535,16 @@ describe("JST edge cases", () => {
   });
 
   it("computes the radio start in Tokyo time", () => {
-    const start = radioStartMs(radio({ todayScheduled: true }), SUNDAY_NOON);
+    const start = radioStartMs(radio(), SUNDAY_0959);
     assert.equal(new Date(start).toISOString(), "2026-08-16T01:00:00.000Z");
+    // 放送枠に入った後・終わった後は「今日これから」ではない
     assert.equal(radioStartMs(radio(), SUNDAY_NOON), null);
+    assert.equal(radioStartMs(radio(), SUNDAY_1300), null);
+    // API が無くても固定スケジュールから出せる
+    assert.equal(
+      new Date(radioStartMs(null, SUNDAY_0959)).toISOString(),
+      "2026-08-16T01:00:00.000Z",
+    );
   });
 });
 
@@ -443,7 +566,9 @@ describe("ui contract", () => {
     assert.match(component, /role="status"/);
     assert.match(component, /aria-live="polite"/);
     assert.match(component, /aria-atomic="true"/);
-    assert.match(component, /STATE_LABEL/);
+    // 状態ラベルは kind 固定表ではなく BannerState.stateLabel から出す
+    assert.match(component, /banner\.stateLabel/);
+    assert.doesNotMatch(component, /const STATE_LABEL/);
     assert.match(component, /motion-safe:animate-pulse/);
     assert.match(component, /min-h-11/);
     assert.doesNotMatch(component, /573253|circle2026_0734/);

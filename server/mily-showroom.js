@@ -148,8 +148,15 @@ export function roomNameMatchesMily(roomName, roomUrlKey = null) {
   return signals.milyToken && signals.entryKey;
 }
 
-/** 候補群から本人 room を一意に決める。曖昧なら null。 */
-export function pickUniqueRoom(candidates) {
+/**
+ * 候補群から本人 room を選ぶ。**「該当なし」と「曖昧（複数一致）」を区別する。**
+ *
+ * 区別しないと、外部 HTML に本人候補が2件あるという危険な状態を
+ * env fallback で都合よく1件に決めてしまえる。曖昧なら未解決のままにする。
+ *
+ * @returns {{state: "unique"|"none"|"ambiguous", room: object|null, matched: number}}
+ */
+export function selectRoom(candidates) {
   const byRoomId = new Map();
   for (const candidate of candidates) {
     if (!candidate) continue;
@@ -159,16 +166,27 @@ export function pickUniqueRoom(candidates) {
     // 同じ room が key 経由と id 経由の両方で来ても1件として数える
     if (!byRoomId.has(roomId)) byRoomId.set(roomId, { ...candidate, roomId });
   }
-  if (byRoomId.size !== 1) return null;
+  const matched = byRoomId.size;
+  if (matched === 0) return { state: "none", room: null, matched };
+  if (matched > 1) return { state: "ambiguous", room: null, matched };
   const room = [...byRoomId.values()][0];
   return {
-    roomId: room.roomId,
-    roomUrlKey: room.roomUrlKey ?? null,
-    roomUrl: room.roomUrlKey
-      ? `https://www.showroom-live.com/r/${room.roomUrlKey}`
-      : `https://www.showroom-live.com/room/profile?room_id=${room.roomId}`,
-    roomName: room.roomName,
+    state: "unique",
+    matched,
+    room: {
+      roomId: room.roomId,
+      roomUrlKey: room.roomUrlKey ?? null,
+      roomUrl: room.roomUrlKey
+        ? `https://www.showroom-live.com/r/${room.roomUrlKey}`
+        : `https://www.showroom-live.com/room/profile?room_id=${room.roomId}`,
+      roomName: room.roomName,
+    },
   };
+}
+
+/** 候補群から本人 room を一意に決める。曖昧・該当なしは null。 */
+export function pickUniqueRoom(candidates) {
+  return selectRoom(candidates).room;
 }
 
 /** epoch（秒 / ミリ秒のどちらでも）を ISO 文字列にする。読めなければ null。 */
@@ -241,14 +259,18 @@ export async function resolveMilyRoom(env = process.env) {
     // 取得失敗はキャッシュしない
   }
 
-  const room = pickUniqueRoom(candidates);
-  if (room) {
-    const value = { ...room, sns, source: "entry-page" };
+  const selected = selectRoom(candidates);
+  if (selected.state === "unique") {
+    const value = { ...selected.room, sns, source: "entry-page" };
     roomCache = { at: Date.now(), value };
     return value;
   }
 
-  // 自動解決できないときだけ optional fallback。これも profile で本人確認する。
+  // **曖昧（本人候補が2件以上）なら env fallback を使わない。**
+  // 「どれが本人か決められない」状態を env で1件に確定させない。
+  if (selected.state === "ambiguous") return null;
+
+  // 候補0件のときだけ optional fallback。これも profile で本人確認する。
   const fallbackId = env?.MILY_SHOWROOM_ROOM_ID;
   if (fallbackId && /^\d+$/.test(String(fallbackId))) {
     const verified = await verifyById(Number(fallbackId)).catch(() => null);
@@ -265,27 +287,26 @@ export async function resolveMilyRoom(env = process.env) {
 }
 
 /**
- * 実ライブ判定。**status API の is_live === true のみ**を live とする。
+ * 実ライブ判定。**status API の `is_live` が厳密な boolean のときだけ**採用する。
+ *
+ * `1` / `0` / `"true"` / `"false"` などは **型が想定と違う**ということなので、
+ * 「配信中」「配信していない」のどちらにも解釈しない（すべて unknown）。
+ * 数値や文字列を真偽に読み替えると、API 仕様変更をそのまま誤表示にしてしまう。
+ *
  * @returns {{state: "live"|"offline"|"unknown", liveId: number|null, startedAt: string|null}}
  */
 export function readLiveState(status) {
-  if (!status || typeof status !== "object") {
-    return { state: "unknown", liveId: null, startedAt: null };
-  }
+  const unknown = { state: "unknown", liveId: null, startedAt: null };
+  if (!status || typeof status !== "object") return unknown;
   const isLive = status.is_live;
-  if (isLive === true || isLive === 1) {
-    const liveId = Number(status.live_id);
-    return {
-      state: "live",
-      liveId: Number.isInteger(liveId) && liveId > 0 ? liveId : null,
-      startedAt: normalizeEpochToIso(status.started_at ?? status.current_live_started_at),
-    };
-  }
-  if (isLive === false || isLive === 0) {
-    return { state: "offline", liveId: null, startedAt: null };
-  }
-  // is_live が無い / 型が違う → 推測しない
-  return { state: "unknown", liveId: null, startedAt: null };
+  if (typeof isLive !== "boolean") return unknown;
+  if (isLive === false) return { state: "offline", liveId: null, startedAt: null };
+  const liveId = Number(status.live_id);
+  return {
+    state: "live",
+    liveId: Number.isInteger(liveId) && liveId > 0 ? liveId : null,
+    startedAt: normalizeEpochToIso(status.started_at ?? status.current_live_started_at),
+  };
 }
 
 /** 本人確認済み room の実ライブ状態を取得する。失敗は unknown。 */

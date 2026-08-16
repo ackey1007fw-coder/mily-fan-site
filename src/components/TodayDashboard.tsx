@@ -1,6 +1,6 @@
 import { contest } from "../data/contest";
 import { socials } from "../data/socials";
-import { deriveBannerState } from "../lib/bannerState";
+import { dashboardDisplay, deriveBannerState } from "../lib/bannerState";
 import { useMilyRealtimeStatus } from "../lib/useMilyRealtimeStatus";
 import {
   formatSlotDate,
@@ -28,18 +28,21 @@ export function TodayDashboard() {
   const status = next ? slotStatus(next) : null;
 
   // ActivityBanner が同じ配信をすでに出しているときは、ここでは繰り返さない
-  // （上下で同じ内容・CTA を重複させない）。
+  // （上下で同じ内容・CTA を重複させない）。判定は純粋関数に切り出してある。
   const banner = deriveBannerState({ live, radio, slots });
-  const bannerShowsThisSlot =
-    banner.kind === "SHOWROOM_LIVE" ||
-    (banner.kind === "SHOWROOM_TODAY" &&
-      banner.slot?.date === next?.date &&
-      banner.slot?.time === next?.time);
-  const showNextStream = Boolean(next) && !bannerShowsThisSlot;
 
   // SHOWROOM導線: APIの解決結果を最優先、なければ確認済みの静的リンク
   const showroomStatic = socials.find((item) => item.platform === "showroom");
   const showroomUrl = live.roomUrl ?? roomUrl ?? showroomStatic?.url ?? null;
+
+  const { showNextStream, nextStreamLabel, showShowroomCta } = dashboardDisplay({
+    banner,
+    hasNextSlot: Boolean(next),
+    bannerShowsSameSlot:
+      banner.slot?.date === next?.date && banner.slot?.time === next?.time,
+    nextSlotStatus: status,
+    showroomUrl,
+  });
   const snsLinks = SNS_PLATFORMS.map((platform) =>
     socials.find((item) => item.platform === platform),
   ).filter((item) => item !== undefined);
@@ -67,7 +70,7 @@ export function TodayDashboard() {
 
         {next && showNextStream ? (
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-sage/15 pt-3">
-            <span className="text-sm text-ink-muted">次回配信</span>
+            <span className="text-sm text-ink-muted">{nextStreamLabel}</span>
             <span className="text-base font-bold text-ink">
               {formatSlotDate(next)} {next.time}〜
             </span>
@@ -90,7 +93,7 @@ export function TodayDashboard() {
           >
             ENTRY 734を応援する
           </ExternalLink>
-          {showroomUrl ? (
+          {showroomUrl && showShowroomCta ? (
             <ExternalLink
               href={showroomUrl}
               className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"

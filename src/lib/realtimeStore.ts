@@ -6,11 +6,28 @@
  * - 画面が隠れている間は止め、visible / focus / online 復帰で即取得
  * - 購読者が0になったら止める
  */
+import {
+  ONAIR_STALE_MS,
+  isOnAirObservationStale,
+} from "../../shared/radio-program.js";
+
+export { ONAIR_STALE_MS, isOnAirObservationStale };
+
 export type PollStoreOptions<T> = {
   fetcher: (signal: AbortSignal) => Promise<T>;
   intervalMs: number;
   /** 取得失敗時に前回値を捨てるか（ライブ状態は捨てたい） */
   clearOnError?: boolean;
+  /**
+   * 値が「事実として古すぎる」ようになる時刻(ms)。null なら失効しない。
+   * fetch の成否と無関係に、この時刻で store 自身が値を畳んで通知する。
+   */
+  expiresAt?: (value: T) => number | null;
+  /**
+   * 失効時に値をどう畳むか。**新しい参照を返すこと**（useSyncExternalStore が
+   * 変化を検知して再レンダーできるように）。省略時は null にする。
+   */
+  onExpire?: (value: T) => T | null;
 };
 
 export type PollStore<T> = {
@@ -18,16 +35,23 @@ export type PollStore<T> = {
   subscribe: (listener: () => void) => () => void;
   /** 手動更新（テスト・即時取得用）。 */
   refresh: () => Promise<void>;
+  /**
+   * 現在時刻で失効判定だけを同期的に行う。失効していれば値を畳んで通知する。
+   * @returns 失効させたら true
+   */
+  expireIfStale: () => boolean;
 };
 
 type Timers = {
   setTimeout: (handler: () => void, ms: number) => number;
   clearTimeout: (id: number) => void;
+  now: () => number;
 };
 
 const defaultTimers: Timers = {
   setTimeout: (handler, ms) => globalThis.setTimeout(handler, ms) as unknown as number,
   clearTimeout: (id) => globalThis.clearTimeout(id),
+  now: () => Date.now(),
 };
 
 export function createPollStore<T>(
@@ -38,6 +62,7 @@ export function createPollStore<T>(
   let inFlight: Promise<void> | null = null;
   let controller: AbortController | null = null;
   let timerId: number | null = null;
+  let expiryTimerId: number | null = null;
   const listeners = new Set<() => void>();
 
   const notify = () => {
@@ -51,15 +76,47 @@ export function createPollStore<T>(
     }
   };
 
+  const clearExpiryTimer = () => {
+    if (expiryTimerId !== null) {
+      timers.clearTimeout(expiryTimerId);
+      expiryTimerId = null;
+    }
+  };
+
   const isHidden = () =>
     typeof document !== "undefined" && document.visibilityState === "hidden";
 
-  const scheduleNext = () => {
-    clearTimer();
-    if (listeners.size === 0 || isHidden()) return;
-    timerId = timers.setTimeout(() => {
-      void refresh();
-    }, options.intervalMs);
+  /** 失効していれば値を畳んで通知する（fetch は起こさない）。 */
+  const expireIfStale = (): boolean => {
+    if (value === null || !options.expiresAt) return false;
+    const at = options.expiresAt(value);
+    if (at === null || timers.now() < at) return false;
+    clearExpiryTimer();
+    value = options.onExpire ? options.onExpire(value) : null;
+    notify();
+    return true;
+  };
+
+  /**
+   * 次の失効時刻に合わせて timer を張る。
+   * hidden 中でも張る（タブが隠れている間に事実が古くなるのを止めない）。
+   */
+  const scheduleExpiry = () => {
+    clearExpiryTimer();
+    if (value === null || !options.expiresAt) return;
+    const at = options.expiresAt(value);
+    if (at === null) return;
+    const delay = Math.max(0, at - timers.now());
+    expiryTimerId = timers.setTimeout(() => {
+      expiryTimerId = null;
+      expireIfStale();
+    }, delay);
+  };
+
+  const setValue = (next: T | null) => {
+    value = next;
+    notify();
+    scheduleExpiry();
   };
 
   const refresh = (): Promise<void> => {
@@ -69,13 +126,12 @@ export function createPollStore<T>(
     inFlight = options
       .fetcher(controller.signal)
       .then((next) => {
-        value = next;
-        notify();
+        setValue(next);
       })
       .catch(() => {
         if (options.clearOnError) {
-          value = null;
-          notify();
+          clearExpiryTimer();
+          setValue(null);
         }
       })
       .finally(() => {
@@ -86,8 +142,21 @@ export function createPollStore<T>(
     return inFlight;
   };
 
+  const scheduleNext = () => {
+    clearTimer();
+    if (listeners.size === 0 || isHidden()) return;
+    timerId = timers.setTimeout(() => {
+      void refresh();
+    }, options.intervalMs);
+  };
+
+  /**
+   * 復帰時は **先に同期で失効判定**してから fetch する。
+   * fetch の完了を待つ間、古い LIVE が DOM に残らないようにするため。
+   */
   const onWake = () => {
     if (listeners.size === 0) return;
+    expireIfStale();
     if (isHidden()) {
       clearTimer();
       return;
@@ -115,12 +184,15 @@ export function createPollStore<T>(
       listeners.add(listener);
       if (listeners.size === 1) {
         unbind = bindWindowEvents();
-        void refresh();
+        expireIfStale();
+        // hidden 中に mount されたら取得しない。visible 復帰時に取りに行く。
+        if (!isHidden()) void refresh();
       }
       return () => {
         listeners.delete(listener);
         if (listeners.size === 0) {
           clearTimer();
+          clearExpiryTimer();
           // 最後の購読者が消えたら進行中の fetch も止める
           controller?.abort();
           controller = null;
@@ -130,12 +202,20 @@ export function createPollStore<T>(
       };
     },
     refresh,
+    expireIfStale,
   };
 }
 
 /** observedAt がこの時間より古い LIVE 情報は unknown に失効させる。 */
 export const LIVE_STALE_MS = 90_000;
 
+/**
+ * 観測時刻が使えるか。
+ *
+ * **未来の timestamp は clock skew を許容せず即 stale** とする。
+ * 許容してしまうと、壊れた・細工された observedAt で LIVE を無期限に
+ * 保持できてしまう。安全側に倒して UNKNOWN にする。
+ */
 export function isObservationStale(
   observedAt: string | null | undefined,
   now: number = Date.now(),
@@ -144,7 +224,37 @@ export function isObservationStale(
   if (typeof observedAt !== "string") return true;
   const parsed = Date.parse(observedAt);
   if (Number.isNaN(parsed)) return true;
+  if (parsed > now) return true;
   return now - parsed >= staleMs;
+}
+
+/**
+ * LIVE 情報の失効時刻(ms)。失効させる必要が無ければ null。
+ * すでに unknown な観測はこれ以上畳めないので null（再失効ループを作らない）。
+ */
+export function liveExpiresAt(
+  payload: LivePayload | null,
+  staleMs: number = LIVE_STALE_MS,
+): number | null {
+  const state = payload?.live?.state;
+  if (state !== "live" && state !== "offline") return null;
+  const observedAt = payload?.live?.observedAt;
+  if (typeof observedAt !== "string") return null;
+  const parsed = Date.parse(observedAt);
+  if (Number.isNaN(parsed)) return null;
+  return parsed + staleMs;
+}
+
+/**
+ * 失効した LIVE 情報を UNKNOWN へ畳む。
+ * roomUrl / next（予定）は事実として残せるので保持する。
+ * **新しい参照を返す**ので、購読側は変化を検知できる。
+ */
+export function expireLivePayload(payload: LivePayload): LivePayload {
+  return {
+    ...payload,
+    live: { ...payload.live, state: "unknown", liveId: null, startedAt: null },
+  };
 }
 
 /** /api/mily-live のレスポンス。 */
@@ -167,6 +277,45 @@ export type LiveView = {
   roomUrl: string | null;
   next: { state: "scheduled" | "none" | "unknown"; at: string | null };
 };
+
+/**
+ * NOW ON AIR 確認結果の鮮度。判定本体は shared/radio-program.js が持つ
+ * （表示側 bannerState.ts と store 側の両方から同じ規則を使うため）。
+ */
+export const RADIO_ONAIR_STALE_MS = ONAIR_STALE_MS;
+
+/** /api/mily-radio-status のうち freshness 判定に使う部分だけ。 */
+export type RadioFreshness = {
+  onAirConfirmed?: boolean | null;
+  updatedAt?: string | null;
+};
+
+/**
+ * NOW ON AIR 確認結果の失効時刻(ms)。
+ * `onAirConfirmed` が確定値でなければ畳むものが無いので null。
+ */
+export function radioExpiresAt<T extends RadioFreshness>(
+  payload: T | null,
+  staleMs: number = RADIO_ONAIR_STALE_MS,
+): number | null {
+  if (payload?.onAirConfirmed !== true && payload?.onAirConfirmed !== false) {
+    return null;
+  }
+  const updatedAt = payload?.updatedAt;
+  if (typeof updatedAt !== "string") return null;
+  const parsed = Date.parse(updatedAt);
+  if (Number.isNaN(parsed)) return null;
+  return parsed + staleMs;
+}
+
+/**
+ * 古い NOW ON AIR 確認結果を「未確認(null)」へ畳む。
+ * 番組の放送枠自体は shared/radio-program.js から再導出できるので、
+ * ここで捨てるのは「いま何が流れているか」の確認結果だけでよい。
+ */
+export function expireRadioOnAir<T extends RadioFreshness>(payload: T): T {
+  return { ...payload, onAirConfirmed: null };
+}
 
 /** payload を、失効を考慮した表示用の形にする。 */
 export function toLiveView(

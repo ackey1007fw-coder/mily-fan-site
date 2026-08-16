@@ -122,12 +122,68 @@ export function schedulePhase(now = Date.now()) {
   return "ended";
 }
 
+/**
+ * 次に schedulePhase が変わるまでのミリ秒。
+ *
+ * 10:00 / 13:00 の境界で、外部 API の成否と無関係に再評価を発火させるために使う。
+ * JST は UTC から分単位のオフセットなので、分未満の端数は `now % 60000` で出せる
+ * （tokyoClock を秒まで拡張しなくてよい）。
+ */
+export function msUntilNextPhaseChange(now = Date.now()) {
+  const at = typeof now === "number" ? now : new Date(now).getTime();
+  const clock = tokyoClock(at);
+  const start = parseHm(radioProgram.scheduledStart);
+  const end = parseHm(radioProgram.scheduledEnd);
+  const current = minutesFromMidnight(clock);
+
+  let minutesAhead;
+  if (clock.weekday === radioProgram.weekday && current < start) {
+    minutesAhead = start - current;
+  } else if (clock.weekday === radioProgram.weekday && current < end) {
+    minutesAhead = end - current;
+  } else {
+    // 次の放送日の開始まで（今日が放送日で 13:00 を過ぎていれば7日後）
+    const daysAhead = (radioProgram.weekday - clock.weekday + 7) % 7 || 7;
+    minutesAhead = daysAhead * 24 * 60 - current + start;
+  }
+
+  const msIntoMinute = ((at % 60000) + 60000) % 60000;
+  const delay = minutesAhead * 60000 - msIntoMinute;
+  return delay > 0 ? delay : delay + 60000;
+}
+
 /** 今日これから始まる場合の開始時刻（ISO）。それ以外は null。 */
 export function nextStartAtIso(now = Date.now()) {
   if (schedulePhase(now) !== "upcoming") return null;
   const iso = `${tokyoDate(now)}T${radioProgram.scheduledStart}:00+09:00`;
   const parsed = new Date(iso);
   return Number.isNaN(parsed.getTime()) ? null : parsed.toISOString();
+}
+
+/**
+ * NOW ON AIR の確認結果をどれだけ信用するか（ミリ秒）。
+ * クライアントの poll 間隔(180秒)の約2回分。
+ */
+export const ONAIR_STALE_MS = 360_000;
+
+/**
+ * NOW ON AIR 確認結果が古すぎないか。
+ *
+ * 放送枠そのものは時刻から再導出できるが、「いま何が流れているか」は
+ * 外部ページの取得結果なので鮮度が要る。API 障害中に昔の「放送中！」を
+ * 残さないため、古い・未来・読めない updatedAt はすべて stale とする。
+ */
+export function isOnAirObservationStale(
+  updatedAt,
+  now = Date.now(),
+  staleMs = ONAIR_STALE_MS,
+) {
+  if (typeof updatedAt !== "string") return true;
+  const parsed = Date.parse(updatedAt);
+  if (Number.isNaN(parsed)) return true;
+  const at = typeof now === "number" ? now : new Date(now).getTime();
+  if (parsed > at) return true;
+  return at - parsed >= staleMs;
 }
 
 /** 装飾・空白・＃SSC を除いて番組名が明確に一致するか。 */

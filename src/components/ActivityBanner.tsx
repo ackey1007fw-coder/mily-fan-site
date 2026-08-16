@@ -27,13 +27,10 @@ const STYLES: Record<Exclude<BannerKind, "NONE">, { box: string; mark: string }>
   },
 };
 
-/** 色だけで状態を伝えないための短いラベル。 */
-const STATE_LABEL: Record<Exclude<BannerKind, "NONE">, string> = {
-  SHOWROOM_LIVE: "配信中",
-  RADIO_PROGRAM_WINDOW: "放送中",
-  SHOWROOM_TODAY: "予定",
-  RADIO_PROGRAM_TODAY: "予定",
-};
+// 色だけで状態を伝えないためのラベルは BannerState.stateLabel が持つ。
+// kind だけでは断定度が決まらない（放送枠に入っていても、NOW ON AIR を
+// 確認できていなければ「放送中」ではなく「放送時間」）ため、ここに固定表を
+// 置かない。
 
 export function ActivityBanner() {
   const { live, radio } = useMilyRealtimeStatus();
@@ -58,7 +55,7 @@ export function ActivityBanner() {
                       本文は最低幅を持ち、足りなければリンクを次の行へ送る。 */}
                   <span className="min-w-0 grow basis-48 leading-snug [overflow-wrap:anywhere]">
                     <span className="mr-2 rounded-full bg-white/70 px-2 py-0.5 text-[11px] font-bold">
-                      {STATE_LABEL[banner.kind]}
+                      {banner.stateLabel}
                     </span>
                     <span className="text-sm font-semibold">{banner.title}</span>
                     {banner.detail ? (
