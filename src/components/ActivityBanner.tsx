@@ -3,6 +3,9 @@ import { useMilyRealtimeStatus } from "../lib/useMilyRealtimeStatus";
 import { useStreamSchedule } from "../lib/useStreamSchedule";
 import { ExternalLink } from "./ExternalLink";
 
+/** JCBAインターネットサイマルラジオのFM湘南マジックウェイブ聴取ページ。 */
+const RADIO_PLAYER_URL = "https://www.jcbasimul.com/magicwave";
+
 /**
  * ページ最上部の即時ステータス（非 sticky）。
  * 「いま」または「今日の最優先1件」だけを出す。
@@ -44,7 +47,13 @@ export function ActivityBanner() {
           <div className="mx-auto max-w-3xl">
             {(() => {
               const style = STYLES[banner.kind];
-              const isAnchor = banner.href?.startsWith("#") ?? false;
+              // ラジオのCTAは情報ページではなく、すぐ聴けるJCBAの配信ページへ送る。
+              const href =
+                banner.kind === "RADIO_PROGRAM_WINDOW" ||
+                banner.kind === "RADIO_PROGRAM_TODAY"
+                  ? RADIO_PLAYER_URL
+                  : banner.href;
+              const isAnchor = href?.startsWith("#") ?? false;
               const content = (
                 <>
                   <span
@@ -70,11 +79,11 @@ export function ActivityBanner() {
               const className = `flex min-h-11 flex-wrap items-center gap-x-2.5 gap-y-1 rounded-2xl border px-3 py-2 sm:flex-nowrap sm:px-4 ${style.box}`;
 
               return isAnchor ? (
-                <a href={banner.href} className={className}>
+                <a href={href} className={className}>
                   {content}
                 </a>
               ) : (
-                <ExternalLink href={banner.href ?? "#"} className={className}>
+                <ExternalLink href={href ?? "#"} className={className}>
                   {content}
                 </ExternalLink>
               );
