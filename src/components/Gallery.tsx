@@ -1,8 +1,6 @@
 import {
-  driveFileViewUrl,
   driveGallery,
-  drivePreviewUrl,
-  driveThumbnailUrl,
+  driveGallerySections,
   visibleDriveGallery,
 } from "../data/driveGallery";
 import { defaultSrc, media, srcSetFor, visibleMedia } from "../data/media";
@@ -13,10 +11,8 @@ const SIZES = "(min-width: 640px) 350px, 100vw";
 
 export function Gallery() {
   const items = visibleMedia(media);
-  const driveItems = visibleDriveGallery(driveGallery);
-  const drivePhotos = driveItems.filter((item) => item.kind === "photo");
-  const driveVideos = driveItems.filter((item) => item.kind === "video");
-  const hasAny = items.length > 0 || driveItems.length > 0;
+  const drive = driveGallerySections(visibleDriveGallery(driveGallery));
+  const hasAny = items.length > 0 || drive.hasAny;
 
   return (
     <section id="gallery" className="scroll-mt-24 px-4 py-10">
@@ -96,37 +92,36 @@ export function Gallery() {
           </ul>
         ) : null}
 
-        {drivePhotos.length > 0 ? (
+        {drive.photos.length > 0 ? (
           <div className="mt-10">
-            <div className="flex flex-wrap items-end justify-between gap-2">
-              <div>
-                <h3 className="text-lg font-bold text-ink">写真アーカイブ</h3>
-                <p className="mt-1 text-sm text-ink-muted">
-                  オーナー提供素材 {drivePhotos.length}点
-                </p>
-              </div>
-            </div>
-            <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {drivePhotos.map((item) => (
+            <h3 className="text-lg font-bold text-ink">写真アーカイブ</h3>
+            <p className="mt-1 text-sm text-ink-muted">
+              オーナー提供素材 {drive.photos.length}点
+            </p>
+            <ul className="mt-4 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3">
+              {drive.photos.map((photo) => (
                 <li
-                  key={item.id}
+                  key={photo.key}
                   className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card shadow-card"
                 >
                   <a
-                    href={driveFileViewUrl(item.fileId)}
+                    href={photo.linkHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block cursor-zoom-in focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
-                    aria-label={`${item.alt}（Google Driveで拡大表示・新しいタブ）`}
+                    aria-label={photo.linkLabel}
                   >
                     <img
-                      src={driveThumbnailUrl(item.fileId, 1200)}
-                      loading="lazy"
-                      decoding="async"
-                      alt={item.alt}
-                      referrerPolicy="no-referrer"
+                      src={photo.img.src}
+                      srcSet={photo.img.srcSet}
+                      sizes={photo.img.sizes}
+                      alt={photo.img.alt}
+                      loading={photo.img.loading}
+                      decoding={photo.img.decoding}
+                      referrerPolicy={photo.img.referrerPolicy}
                       className="aspect-[4/5] w-full bg-sage-soft/30 object-contain"
                     />
+                    <span className="sr-only">（新しいタブで開きます）</span>
                   </a>
                 </li>
               ))}
@@ -134,31 +129,42 @@ export function Gallery() {
           </div>
         ) : null}
 
-        {driveVideos.length > 0 ? (
+        {drive.videos.length > 0 ? (
           <div className="mt-10">
             <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
             <p className="mt-1 text-sm text-ink-muted">
-              オーナー提供動画 {driveVideos.length}本。完全に重複した1本は1件にまとめています。
+              オーナー提供動画 {drive.videos.length}本。完全に重複した1本は1件にまとめています。
             </p>
             <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
-              {driveVideos.map((item) => (
+              {drive.videos.map((video) => (
                 <li
-                  key={item.id}
+                  key={video.key}
                   className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card"
                 >
                   <iframe
-                    src={drivePreviewUrl(item.fileId)}
-                    title={item.alt}
-                    loading="lazy"
+                    src={video.frame.src}
+                    title={video.frame.title}
+                    sandbox={video.frame.sandbox}
+                    loading={video.frame.loading}
+                    referrerPolicy={video.frame.referrerPolicy}
+                    allow="fullscreen"
                     allowFullScreen
-                    referrerPolicy="no-referrer"
                     className="aspect-[9/16] max-h-[72vh] w-full rounded-xl border-0 bg-sage-soft"
                   />
+                  <p className="px-2 pb-1 pt-2">
+                    <ExternalLink
+                      href={video.fallback.href}
+                      className="rounded text-sm font-medium text-sage hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+                    >
+                      {video.fallback.label}
+                    </ExternalLink>
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
         ) : null}
+
       </div>
     </section>
   );
