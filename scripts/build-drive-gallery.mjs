@@ -1,38 +1,34 @@
 /**
- * Ingests owner-provided Drive media into sanitized static assets.
+ * Turns owner-provided batch b02 originals into sanitized static assets.
  *
- *   Drive individual file ids  (build input only)
- *        -> download            scripts/drive-gallery-fetch.mjs
+ *   media/drive-b02-original/   gitignored local input (never committed)
  *        -> sanitize            sharp / ffmpeg, all metadata dropped
  *        -> public/media/drive-gallery/
  *        -> src/data/driveGalleryManifest.json   (what the client renders)
  *
- * The browser never talks to Google: no Drive iframe, no Drive thumbnail and no
- * Drive file id in the client bundle.
+ * There is no network access and no Drive identifier anywhere in this
+ * repository. The browser never talks to Google, and neither does the build:
+ * the receiving Drive folder is Restricted, so the identifiers in this branch's
+ * earlier commits no longer resolve. Originals are carried to the machine
+ * running this script by hand.
  *
  * Gate behaviour:
- * - publication "review"    -> no network request at all, empty manifest
- * - publication "published" -> download only contentVerified + approved entries
+ * - publication "review"    -> reads nothing, writes an empty manifest
+ * - publication "published" -> sanitizes contentVerified + approved entries only
  *
- * Fail closed. Any HTTP error, HTML interstitial, MIME mismatch, empty payload
- * or partial output stops the run with a non-zero exit.
+ * Fail closed. A missing input, an unreadable file, a metadata leak or a
+ * partial output set stops the run with a non-zero exit.
  *
  * Run deliberately (`pnpm drive-gallery:build`), not from `pnpm build`:
  * derivatives are committed like public/media/gallery, so deploys stay
- * reproducible and never re-download hundreds of MB.
- *
- * The DRIVE_GALLERY_* environment variables exist so CI can rehearse a
- * published run into a throwaway directory. They cannot publish anything: the
- * client only reads the committed manifest, and it renders nothing unless that
- * manifest's own publicationState is "published".
+ * reproducible and need neither the originals nor ffmpeg.
  */
-import { mkdir, readdir, writeFile, rm, access } from "node:fs/promises";
+import { mkdir, readdir, readFile, writeFile, access, open } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import sharp from "sharp";
-import { downloadDriveFile } from "./drive-gallery-fetch.mjs";
 import {
   driveGalleryPublication,
   driveGallerySource,
@@ -43,12 +39,15 @@ import {
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
+export const INPUT_DIR = path.join(root, "media/drive-b02-original");
 export const OUTPUT_DIR = path.join(root, "public/media/drive-gallery");
 export const MANIFEST_PATH = path.join(root, "src/data/driveGalleryManifest.json");
 export const PUBLIC_PREFIX = "/media/drive-gallery";
 export const PHOTO_WIDTHS = [480, 960, 1600];
 /** Portrait clips stay at most 720 wide; never upscale. */
 export const VIDEO_MAX_WIDTH = 720;
+/** Optional gitignored map of entry id -> original file name. */
+export const SOURCE_MAP_NAME = "sources.json";
 
 export function photoDerivatives(slug) {
   return PHOTO_WIDTHS.flatMap((width) =>
@@ -86,6 +85,31 @@ export function leftoverTags(tags) {
   return Object.keys(tags ?? {}).filter((key) => !allowed.has(key.toLowerCase()));
 }
 
+/**
+ * Resolve an entry to a local input file, either through the private
+ * `sources.json` map or by its slug. Never reads anything outside the input
+ * directory, and never records the resolved name anywhere public.
+ */
+export function resolveInputName(entry, availableNames, sourceMap) {
+  const mapped = sourceMap?.[entry.id];
+  if (mapped) {
+    if (path.basename(mapped) !== mapped) {
+      throw new Error(`${entry.id}: sources.json entry must be a bare file name`);
+    }
+    if (!availableNames.includes(mapped)) {
+      throw new Error(`${entry.id}: sources.json points at a missing file`);
+    }
+    return mapped;
+  }
+  const slug = outputSlug(entry.id);
+  const matches = availableNames.filter((name) => path.parse(name).name === slug);
+  if (matches.length === 1) return matches[0];
+  if (matches.length > 1) {
+    throw new Error(`${entry.id}: ${matches.length} input files match "${slug}"`);
+  }
+  return null;
+}
+
 export function photoManifestEntry(entry, width, height) {
   const slug = outputSlug(entry.id);
   return {
@@ -115,20 +139,6 @@ export function videoManifestEntry(entry, width, height) {
   };
 }
 
-function config() {
-  const only = process.env.DRIVE_GALLERY_ONLY;
-  return {
-    state: process.env.DRIVE_GALLERY_STATE ?? driveGalleryPublication.state,
-    outputDir: process.env.DRIVE_GALLERY_OUTPUT_DIR
-      ? path.resolve(process.env.DRIVE_GALLERY_OUTPUT_DIR)
-      : OUTPUT_DIR,
-    manifestPath: process.env.DRIVE_GALLERY_MANIFEST
-      ? path.resolve(process.env.DRIVE_GALLERY_MANIFEST)
-      : MANIFEST_PATH,
-    only: only ? new Set(only.split(",").map((s) => s.trim())) : null,
-  };
-}
-
 async function ffmpegExe() {
   if (process.env.FFMPEG_PATH) return process.env.FFMPEG_PATH;
   const mod = await import("ffmpeg-static");
@@ -146,7 +156,7 @@ async function ffprobeExe() {
 
 /** Sharp drops EXIF / GPS / IPTC / XMP unless withMetadata() is called.
  *  This never calls it, and verifies the result. */
-async function sanitizePhoto(entry, bytes, outputDir) {
+export async function sanitizePhoto(entry, bytes, outputDir) {
   const slug = outputSlug(entry.id);
   let largest = null;
 
@@ -167,19 +177,18 @@ async function sanitizePhoto(entry, bytes, outputDir) {
     }
   }
 
-  const check = await sharp(path.join(outputDir, `${slug}-${PHOTO_WIDTHS[1]}.jpg`)).metadata();
-  if (check.exif || check.iptc || check.xmp) {
-    throw new Error(`${entry.id}: metadata survived sanitize`);
+  for (const name of photoDerivatives(slug)) {
+    const meta = await sharp(path.join(outputDir, name)).metadata();
+    if (meta.exif || meta.iptc || meta.xmp) {
+      throw new Error(`${entry.id}: metadata survived sanitize in ${name}`);
+    }
   }
 
   return photoManifestEntry(entry, largest.width, largest.height);
 }
 
-async function sanitizeVideo(entry, bytes, outputDir, tmpDir) {
+export async function sanitizeVideo(entry, inputPath, outputDir) {
   const slug = outputSlug(entry.id);
-  const src = path.join(tmpDir, `${slug}.src`);
-  await writeFile(src, bytes);
-
   const mp4 = path.join(outputDir, `${slug}.mp4`);
   const poster = path.join(outputDir, `${slug}-poster.jpg`);
   const ffmpeg = await ffmpegExe();
@@ -189,7 +198,7 @@ async function sanitizeVideo(entry, bytes, outputDir, tmpDir) {
     ffmpeg,
     [
       "-hide_banner", "-loglevel", "error", "-y",
-      "-i", src,
+      "-i", inputPath,
       // Drop every container/stream tag and chapter: no GPS, no device, no dates.
       "-map_metadata", "-1",
       "-map_chapters", "-1",
@@ -223,9 +232,38 @@ async function sanitizeVideo(entry, bytes, outputDir, tmpDir) {
   if (leftoverTags(info.format.tags).length > 0) {
     throw new Error(`${entry.id}: container metadata survived sanitize`);
   }
-  await rm(src, { force: true });
+  const posterMeta = await sharp(poster).metadata();
+  if (posterMeta.exif || posterMeta.iptc || posterMeta.xmp) {
+    throw new Error(`${entry.id}: poster carries metadata`);
+  }
 
   return videoManifestEntry(entry, video.width, video.height);
+}
+
+/** True when the MP4 moov atom precedes mdat, i.e. it can start streaming.
+ *  Only the head of the file is read; mdat may be far larger than memory. */
+export async function isFaststart(mp4Path) {
+  const handle = await open(mp4Path, "r");
+  try {
+    const head = Buffer.alloc(64 * 1024);
+    const { bytesRead } = await handle.read(head, 0, head.length, 0);
+    const window = head.subarray(0, bytesRead);
+    const moov = window.indexOf("moov", 0, "latin1");
+    const mdat = window.indexOf("mdat", 0, "latin1");
+    return moov !== -1 && (mdat === -1 || moov < mdat);
+  } finally {
+    await handle.close();
+  }
+}
+
+async function readSourceMap(inputDir) {
+  try {
+    const raw = await readFile(path.join(inputDir, SOURCE_MAP_NAME), "utf8");
+    return JSON.parse(raw);
+  } catch (error) {
+    if (error.code === "ENOENT") return null;
+    throw new Error(`${SOURCE_MAP_NAME} is not readable JSON: ${error.message}`);
+  }
 }
 
 async function writeManifest(manifestPath, state, items) {
@@ -238,8 +276,25 @@ async function writeManifest(manifestPath, state, items) {
   await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf8");
 }
 
+function config() {
+  const only = process.env.DRIVE_GALLERY_ONLY;
+  return {
+    state: process.env.DRIVE_GALLERY_STATE ?? driveGalleryPublication.state,
+    inputDir: process.env.DRIVE_GALLERY_INPUT_DIR
+      ? path.resolve(process.env.DRIVE_GALLERY_INPUT_DIR)
+      : INPUT_DIR,
+    outputDir: process.env.DRIVE_GALLERY_OUTPUT_DIR
+      ? path.resolve(process.env.DRIVE_GALLERY_OUTPUT_DIR)
+      : OUTPUT_DIR,
+    manifestPath: process.env.DRIVE_GALLERY_MANIFEST
+      ? path.resolve(process.env.DRIVE_GALLERY_MANIFEST)
+      : MANIFEST_PATH,
+    only: only ? new Set(only.split(",").map((s) => s.trim())) : null,
+  };
+}
+
 async function main() {
-  const { state, outputDir, manifestPath, only } = config();
+  const { state, inputDir, outputDir, manifestPath, only } = config();
   await mkdir(outputDir, { recursive: true });
 
   if (state !== "published") {
@@ -247,7 +302,7 @@ async function main() {
     await writeManifest(manifestPath, state, []);
     console.log(
       `drive-gallery:build — publication is "${state}". ` +
-        "No network request made; manifest is empty.",
+        "No original was read; manifest is empty.",
     );
     if (leftovers.length > 0) {
       console.error(
@@ -261,10 +316,15 @@ async function main() {
 
   let entries = publishableSource(driveGallerySource);
   if (only) entries = entries.filter((entry) => only.has(entry.id));
+
+  const available = (await readdir(inputDir)).filter(
+    (name) => !name.startsWith(".") && name !== "README.md" && name !== SOURCE_MAP_NAME,
+  );
+  const sourceMap = await readSourceMap(inputDir);
   console.log(
     `drive-gallery:build — publication is "published". ` +
-      `${entries.length} entr${entries.length === 1 ? "y" : "ies"} to ingest ` +
-      `(${driveGallerySource.length} registered).`,
+      `${entries.length} entr${entries.length === 1 ? "y" : "ies"} to sanitize ` +
+      `from ${path.relative(root, inputDir)} (${available.length} input files).`,
   );
 
   const existing = new Set(await readdir(outputDir));
@@ -275,34 +335,49 @@ async function main() {
     process.exit(1);
   }
 
-  const tmpDir = path.join(root, "node_modules/.cache/drive-gallery");
-  await mkdir(tmpDir, { recursive: true });
-
-  const items = [];
+  // Resolve every input before writing anything, so a missing original fails
+  // the run instead of producing a half-built gallery.
+  const resolved = [];
+  const missing = [];
   for (const entry of entries) {
     if (classifyOutputs(entry, existing) === "skip") {
+      resolved.push({ entry, inputName: null });
+      continue;
+    }
+    const inputName = resolveInputName(entry, available, sourceMap);
+    if (!inputName) missing.push(entry.id);
+    else resolved.push({ entry, inputName });
+  }
+  if (missing.length > 0) {
+    console.error(
+      `drive-gallery:build — no input found for ${missing.length} entr` +
+        `${missing.length === 1 ? "y" : "ies"} in ${path.relative(root, inputDir)}:`,
+    );
+    for (const id of missing) console.error(`  - ${id}`);
+    console.error("See media/drive-b02-original/README.md for the naming rules.");
+    process.exit(1);
+  }
+
+  const items = [];
+  for (const { entry, inputName } of resolved) {
+    if (!inputName) {
       console.log(`  = ${entry.id} (derivatives already built)`);
       items.push(await manifestFromExisting(entry, outputDir));
       continue;
     }
     const started = Date.now();
-    const { bytes, contentType, usedConfirm } = await downloadDriveFile(
-      entry.fileId,
-      entry.kind,
-    );
+    const inputPath = path.join(inputDir, inputName);
     const item =
       entry.kind === "photo"
-        ? await sanitizePhoto(entry, bytes, outputDir)
-        : await sanitizeVideo(entry, bytes, outputDir, tmpDir);
+        ? await sanitizePhoto(entry, await readFile(inputPath), outputDir)
+        : await sanitizeVideo(entry, inputPath, outputDir);
     items.push(item);
+    // The original file name is never logged: it is private operations data.
     console.log(
-      `  + ${entry.id} ${bytes.length}B ${contentType}` +
-        `${usedConfirm ? " (confirmed)" : ""} -> ${item.width}x${item.height} ` +
-        `in ${Date.now() - started}ms`,
+      `  + ${entry.id} -> ${item.width}x${item.height} in ${Date.now() - started}ms`,
     );
   }
 
-  // Every requested entry must have produced a complete output set.
   const finalNames = new Set(await readdir(outputDir));
   const incomplete = entries.filter((e) => classifyOutputs(e, finalNames) !== "skip");
   if (incomplete.length > 0) {

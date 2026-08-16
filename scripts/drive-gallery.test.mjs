@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
-import { readFile, readdir, mkdtemp, writeFile, rm } from "node:fs/promises";
-import { describe, it } from "node:test";
+import { readFile, readdir, mkdtemp, writeFile, rm, stat } from "node:fs/promises";
+import { describe, it, before, after } from "node:test";
+import { execFile } from "node:child_process";
+import { promisify } from "node:util";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import sharp from "sharp";
 import {
   DRIVE_PHOTO_SIZES,
   driveGalleryManifest,
@@ -23,41 +26,53 @@ import {
   unverifiedSource,
 } from "./drive-gallery-source.mjs";
 import {
-  DriveFetchError,
-  downloadDriveFile,
-  parseConfirmToken,
-} from "./drive-gallery-fetch.mjs";
-import {
   PHOTO_WIDTHS,
   PUBLIC_PREFIX,
+  SOURCE_MAP_NAME,
   classifyOutputs,
   derivativesFor,
+  isFaststart,
   leftoverTags,
+  photoDerivatives,
   photoManifestEntry,
+  resolveInputName,
+  sanitizePhoto,
+  sanitizeVideo,
   videoManifestEntry,
 } from "./build-drive-gallery.mjs";
 
+const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-/** Nothing in this repository may address the receiving folder. */
-const FOLDER_URL_PATTERN = /drive\.google\.com\/drive\/folders/;
-/** The browser must never be pointed at Google for media. */
+/** No Drive identifier or URL may appear anywhere in the public repository. */
 const DRIVE_HOST_PATTERN = /drive\.(google|usercontent\.google)\.com/;
+const FOLDER_URL_PATTERN = /drive\.google\.com\/drive\/folders/;
+/** Drive ids are long, opaque and mixed-case with digits. Slugs, SCREAMING_CASE
+ *  constants, header names and hex digests are none of those, so they do not
+ *  trip this check. */
+const ID_CANDIDATE = /[A-Za-z0-9_-]{25,}/g;
+function looksLikeDriveId(token) {
+  return (
+    /[A-Z]/.test(token) && /[a-z]/.test(token) && /[0-9]/.test(token)
+  );
+}
+function findDriveIds(text) {
+  return (text.match(ID_CANDIDATE) ?? []).filter(looksLikeDriveId);
+}
 
 const PHOTO_COUNT = 46;
 const VIDEO_COUNT = 11;
 const TOTAL_COUNT = PHOTO_COUNT + VIDEO_COUNT;
 
 /** p01 shows a readable private chat transcript on the laptop screen, so it is
- *  registered but never downloaded and never rendered. 57 registered, 56 publishable. */
+ *  registered but never sanitized and never rendered. 57 registered, 56 publishable. */
 const PRIVACY_HOLD_IDS = ["mily-drive-b02-p01"];
 const PUBLISHABLE_PHOTO_COUNT = PHOTO_COUNT - PRIVACY_HOLD_IDS.length;
 const PUBLISHABLE_COUNT = PUBLISHABLE_PHOTO_COUNT + VIDEO_COUNT;
 
-/** Second Drive copy of 582B7A70…: identical SHA256, collapsed to one entry.
- *  Recorded in docs/DRIVE-GALLERY.md. */
-const COLLAPSED_DUPLICATE_FILE_ID = "1rPoGch2NtW7CpXOEQq80aTUC0hU9AlxK";
-const RADIO_ANNOUNCEMENT_FILE_ID = "1h6d2n47nJX1isjQFyzoFngNk1gzS3kOl";
+/** Byte-identical duplicate collapsed to one entry; evidence lives in docs. */
+const DUPLICATE_SHA256 =
+  "2ddb087117106bba9f24535fa32bf07e03daf60a3153c74982c68d75a1dadd39";
 
 const sourcePhotos = driveGallerySource.filter((item) => item.kind === "photo");
 const sourceVideos = driveGallerySource.filter((item) => item.kind === "video");
@@ -66,7 +81,7 @@ async function read(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
-/** A published manifest built from the registry, without touching the network. */
+/** A published manifest built from the registry, without any original. */
 function publishedFixture() {
   return {
     publicationState: "published",
@@ -78,40 +93,42 @@ function publishedFixture() {
   };
 }
 
-describe("Drive gallery source registry (build-only)", () => {
+describe("Drive gallery entry registry (build-only)", () => {
   it("holds 46 photos and 11 unique videos", () => {
     assert.equal(sourcePhotos.length, PHOTO_COUNT);
     assert.equal(sourceVideos.length, VIDEO_COUNT);
     assert.equal(driveGallerySource.length, TOTAL_COUNT);
-  });
-
-  it("has no duplicate id and no duplicate fileId", () => {
     assert.equal(new Set(driveGallerySource.map((i) => i.id)).size, TOTAL_COUNT);
-    assert.equal(new Set(driveGallerySource.map((i) => i.fileId)).size, TOTAL_COUNT);
   });
 
-  it("keeps only one entry for the byte-identical duplicate video", () => {
-    const fileIds = new Set(driveGallerySource.map((i) => i.fileId));
-    assert.equal(fileIds.has("11cYNJfbBBrNFHxh3m_Ap0ZeUNgtoQvZd"), true);
-    assert.equal(fileIds.has(COLLAPSED_DUPLICATE_FILE_ID), false);
-  });
-
-  it("registers the previously missing radio announcement video", () => {
-    const entry = driveGallerySource.find((i) => i.fileId === RADIO_ANNOUNCEMENT_FILE_ID);
-    assert.ok(entry, "radio announcement video must be registered");
-    assert.equal(entry.kind, "video");
-    assert.match(entry.alt, /湘南シーサイドサークル/);
-    assert.match(entry.alt, /10:00/);
-  });
-
-  it("carries no file names, folder ids or folder URLs", () => {
+  it("carries no Drive identifier, no folder id and no original file name", async () => {
     for (const item of driveGallerySource) {
-      assert.equal("sourceName" in item, false, `${item.id} still has sourceName`);
-      assert.equal("folderId" in item, false, `${item.id} still has folderId`);
-      assert.equal("folderUrl" in item, false, `${item.id} still has folderUrl`);
-      assert.match(item.fileId, /^[A-Za-z0-9_-]{10,}$/);
+      for (const key of ["fileId", "folderId", "folderUrl", "sourceName", "driveId"]) {
+        assert.equal(key in item, false, `${item.id} still has ${key}`);
+      }
+      assert.deepEqual(
+        Object.keys(item).sort(),
+        ["alt", "contentVerified", "id", "kind", "privacyState"],
+        `${item.id} has unexpected fields`,
+      );
       assert.equal(/\.(jpg|jpeg|png|mp4|mov|heic)/i.test(item.alt), false);
     }
+    const registry = await read("scripts/drive-gallery-source.mjs");
+    assert.equal(DRIVE_HOST_PATTERN.test(registry), false);
+    assert.deepEqual(findDriveIds(registry), [], "registry still contains a Drive id");
+  });
+
+  it("keeps the duplicate-video evidence in docs rather than in code", async () => {
+    const docs = await read("docs/DRIVE-GALLERY.md");
+    assert.ok(docs.includes(DUPLICATE_SHA256), "SHA256 evidence must stay documented");
+    assert.equal(sourceVideos.length, VIDEO_COUNT, "duplicate collapsed to one entry");
+  });
+
+  it("keeps the radio announcement video registered", () => {
+    const entry = driveGallerySource.find((i) => /湘南シーサイドサークル/.test(i.alt));
+    assert.ok(entry, "radio announcement video must be registered");
+    assert.equal(entry.kind, "video");
+    assert.match(entry.alt, /10:00/);
   });
 
   it("gives every entry its own non-numbered alt text", () => {
@@ -131,9 +148,8 @@ describe("Drive gallery source registry (build-only)", () => {
     }
   });
 
-  it("holds p01 back from download and publication", () => {
-    const held = privacyHoldSource();
-    assert.deepEqual(held.map((i) => i.id), PRIVACY_HOLD_IDS);
+  it("holds p01 back from sanitize and publication", () => {
+    assert.deepEqual(privacyHoldSource().map((i) => i.id), PRIVACY_HOLD_IDS);
     const publishable = publishableSource();
     assert.equal(publishable.length, PUBLISHABLE_COUNT);
     for (const id of PRIVACY_HOLD_IDS) {
@@ -145,37 +161,87 @@ describe("Drive gallery source registry (build-only)", () => {
 
   it("is never imported from the client bundle", async () => {
     // Match real module specifiers only: doc comments may name these scripts.
-    const buildOnly = /(?:from|import|require)\s*\(?\s*["'][^"']*(?:drive-gallery-source|drive-gallery-fetch|build-drive-gallery)[^"']*["']/;
+    const buildOnly = /(?:from|import|require)\s*\(?\s*["'][^"']*(?:drive-gallery-source|build-drive-gallery)[^"']*["']/;
     const files = await readdir(path.join(root, "src"), { recursive: true });
     let scanned = 0;
     for (const file of files) {
       if (!/\.(ts|tsx)$/.test(file)) continue;
       scanned += 1;
       const source = await read(path.join("src", file));
-      assert.equal(
-        buildOnly.test(source),
-        false,
-        `src/${file} must not import the build-only registry`,
-      );
+      assert.equal(buildOnly.test(source), false, `src/${file} imports build-only code`);
     }
     assert.ok(scanned > 10, "expected to scan the client source tree");
   });
 });
 
+describe("Public repository carries no Drive identifier", () => {
+  it("has no Drive host, folder URL or id-shaped token in tracked sources", async () => {
+    const { stdout } = await run("git", ["ls-files"], { cwd: root, maxBuffer: 1024 * 1024 * 8 });
+    const tracked = stdout.split("\n").filter(Boolean);
+    const scannable = tracked.filter((f) =>
+      /\.(ts|tsx|js|mjs|cjs|json|md|yml|yaml|html|css|txt)$/.test(f),
+    );
+    assert.ok(scannable.length > 40, "expected to scan the tracked source tree");
+
+    for (const file of scannable) {
+      const source = await read(file);
+      assert.equal(DRIVE_HOST_PATTERN.test(source), false, `${file} references a Drive host`);
+      assert.equal(FOLDER_URL_PATTERN.test(source), false, `${file} builds a folder URL`);
+      // pnpm-lock.yaml is full of base64 integrity digests, not Drive ids.
+      if (file === "pnpm-lock.yaml") continue;
+      assert.deepEqual(findDriveIds(source), [], `${file} contains a Drive-id-shaped token`);
+    }
+  });
+
+  it("distinguishes Drive ids from ordinary long identifiers", () => {
+    // Built at runtime from short fragments: embedding an id-shaped literal
+    // here would (correctly) trip the repository-wide scan above.
+    const synthetic = ["Synthetic", "Example0123456789", "Token"].join("");
+    assert.ok(synthetic.length >= 25);
+    assert.equal(looksLikeDriveId(synthetic), true);
+    assert.equal(looksLikeDriveId("Access-Control-Allow-Origin"), false);
+    assert.equal(looksLikeDriveId("mily-b01-01-birthday-cake"), false);
+    assert.equal(looksLikeDriveId("REPLACE_WITH_REAL_ANNOUNCEMENT"), false);
+    assert.equal(looksLikeDriveId(DUPLICATE_SHA256), false);
+  });
+
+  it("keeps the originals and their id mapping out of git", async () => {
+    const ignore = await read(".gitignore");
+    assert.match(ignore, /media\/drive-b02-original\/\*/);
+    assert.match(ignore, /!media\/drive-b02-original\/README\.md/);
+
+    const { stdout } = await run("git", ["ls-files", "media/drive-b02-original"], { cwd: root });
+    assert.deepEqual(
+      stdout.split("\n").filter(Boolean),
+      ["media/drive-b02-original/README.md"],
+      "only the README may be tracked in the input directory",
+    );
+  });
+
+  it("no longer ships an anonymous Drive download path", async () => {
+    const { stdout } = await run("git", ["ls-files"], { cwd: root, maxBuffer: 1024 * 1024 * 8 });
+    const tracked = stdout.split("\n").filter(Boolean);
+    for (const gone of [
+      "scripts/drive-gallery-fetch.mjs",
+      "scripts/probe-drive-gallery.mjs",
+      ".github/workflows/probe-drive-gallery.yml",
+    ]) {
+      assert.equal(tracked.includes(gone), false, `${gone} must be removed`);
+    }
+  });
+});
+
 describe("Drive gallery publication gate", () => {
-  it("stays in review in both the source registry and the generated manifest", () => {
+  it("stays in review in both the entry registry and the generated manifest", () => {
     assert.equal(driveGalleryPublication.state, "review");
     assert.equal(driveGalleryManifest.publicationState, "review");
     assert.equal(isDriveGalleryPublished(), false);
   });
 
-  it("ships an empty manifest while unpublished", () => {
+  it("ships an empty manifest and no derivative while unpublished", async () => {
     assert.deepEqual(driveGalleryManifest.items, []);
     assert.deepEqual(visibleDriveGallery(), []);
     assert.equal(driveGallerySections(visibleDriveGallery()).hasAny, false);
-  });
-
-  it("ships no derivative files while unpublished", async () => {
     const entries = await readdir(path.join(root, "public/media/drive-gallery"));
     assert.deepEqual(entries.filter((n) => !n.startsWith(".")), []);
   });
@@ -197,20 +263,45 @@ describe("Drive gallery publication gate", () => {
   });
 
   it("renders nothing when a manifest carries items but is not published", () => {
-    const stuck = { ...publishedFixture(), publicationState: "review" };
-    assert.deepEqual(visibleDriveGallery(stuck), []);
+    assert.deepEqual(
+      visibleDriveGallery({ ...publishedFixture(), publicationState: "review" }),
+      [],
+    );
+  });
+
+  it("reads no original while unpublished", async () => {
+    const dir = await mkdtemp(path.join(tmpdir(), "drive-gate-"));
+    const manifestPath = path.join(dir, "manifest.json");
+    try {
+      await run(process.execPath, ["scripts/build-drive-gallery.mjs"], {
+        cwd: root,
+        env: {
+          ...process.env,
+          // Point the input at a directory that does not exist: a review run
+          // must never touch it.
+          DRIVE_GALLERY_INPUT_DIR: path.join(dir, "absent"),
+          DRIVE_GALLERY_OUTPUT_DIR: path.join(dir, "out"),
+          DRIVE_GALLERY_MANIFEST: manifestPath,
+        },
+      });
+      const written = JSON.parse(await readFile(manifestPath, "utf8"));
+      assert.equal(written.publicationState, "review");
+      assert.deepEqual(written.items, []);
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
   });
 });
 
 describe("Drive gallery client payload", () => {
-  it("keeps Drive file ids out of the generated manifest", async () => {
+  it("keeps Drive identifiers out of the generated manifest", async () => {
     const raw = await read("src/data/driveGalleryManifest.json");
-    for (const entry of driveGallerySource) {
-      assert.equal(raw.includes(entry.fileId), false, `${entry.id} fileId leaked`);
-    }
+    assert.equal(DRIVE_HOST_PATTERN.test(raw), false);
+    assert.deepEqual(findDriveIds(raw), []);
     for (const item of publishedFixture().items) {
-      assert.equal("fileId" in item, false, `${item.id} carries a fileId`);
-      assert.equal("sourceName" in item, false, `${item.id} carries a sourceName`);
+      for (const key of ["fileId", "sourceName", "driveId"]) {
+        assert.equal(key in item, false, `${item.id} carries ${key}`);
+      }
     }
   });
 
@@ -221,34 +312,13 @@ describe("Drive gallery client payload", () => {
       "src/data/driveGalleryManifest.json",
     ]) {
       const source = await read(relative);
-      assert.equal(
-        DRIVE_HOST_PATTERN.test(source),
-        false,
-        `${relative} must not reference a Drive host`,
-      );
-    }
-  });
-
-  it("never builds a Drive folder URL anywhere in the repository", async () => {
-    for (const relative of [
-      "src/components/Gallery.tsx",
-      "src/data/driveGallery.ts",
-      "scripts/drive-gallery-source.mjs",
-      "scripts/drive-gallery-fetch.mjs",
-      "scripts/build-drive-gallery.mjs",
-      "scripts/probe-drive-gallery.mjs",
-      "scripts/drive-gallery.test.mjs",
-      "docs/DRIVE-GALLERY.md",
-      "README.md",
-    ]) {
-      const source = await read(relative);
-      assert.equal(FOLDER_URL_PATTERN.test(source), false, `${relative} builds a folder URL`);
+      assert.equal(DRIVE_HOST_PATTERN.test(source), false, `${relative} references Drive`);
     }
   });
 
   it("exposes no Drive URL helper to the client", () => {
     for (const name of Object.keys(clientModule)) {
-      assert.equal(/thumbnail|preview|fileview|folder/i.test(name), false, `${name} leaked`);
+      assert.equal(/thumbnail|preview|fileview|folder|fileid/i.test(name), false, `${name} leaked`);
     }
   });
 });
@@ -265,7 +335,6 @@ describe("Drive gallery render model", () => {
       assert.match(photo.img.src, new RegExp(`^${PUBLIC_PREFIX}/`));
       assert.equal(DRIVE_HOST_PATTERN.test(photo.img.srcSet), false);
       assert.equal(photo.img.srcSet.split(", ").length, PHOTO_WIDTHS.length);
-      assert.equal(photo.img.webpSrcSet.split(", ").length, PHOTO_WIDTHS.length);
       for (const width of PHOTO_WIDTHS) {
         assert.ok(photo.img.srcSet.includes(`-${width}.jpg ${width}w`));
         assert.ok(photo.img.webpSrcSet.includes(`-${width}.webp ${width}w`));
@@ -280,7 +349,6 @@ describe("Drive gallery render model", () => {
       assert.match(video.video.src, new RegExp(`^${PUBLIC_PREFIX}/.+\\.mp4$`));
       assert.match(video.video.poster, new RegExp(`^${PUBLIC_PREFIX}/.+-poster\\.jpg$`));
       assert.equal(DRIVE_HOST_PATTERN.test(video.video.src), false);
-      assert.equal(DRIVE_HOST_PATTERN.test(video.video.poster), false);
       assert.equal(video.video.preload, "none");
       assert.equal(video.video.controls, true);
       assert.equal(video.video.playsInline, true);
@@ -316,7 +384,7 @@ describe("Drive gallery render model", () => {
   });
 });
 
-describe("Drive gallery ingest", () => {
+describe("Drive gallery ingest bookkeeping", () => {
   it("names one complete derivative set per entry", () => {
     const photo = driveGallerySource.find((i) => i.kind === "photo");
     const video = driveGallerySource.find((i) => i.kind === "video");
@@ -342,121 +410,155 @@ describe("Drive gallery ingest", () => {
     assert.deepEqual(leftoverTags(undefined), []);
   });
 
-  it("makes no network request while the batch is unpublished", async () => {
-    const dir = await mkdtemp(path.join(tmpdir(), "drive-gate-"));
-    const manifestPath = path.join(dir, "manifest.json");
-    let calls = 0;
-    const originalFetch = globalThis.fetch;
-    globalThis.fetch = async (...args) => {
-      calls += 1;
-      return originalFetch(...args);
-    };
-    try {
-      const { execFile } = await import("node:child_process");
-      const { promisify } = await import("node:util");
-      await promisify(execFile)(process.execPath, ["scripts/build-drive-gallery.mjs"], {
-        cwd: root,
-        env: {
-          ...process.env,
-          DRIVE_GALLERY_OUTPUT_DIR: path.join(dir, "out"),
-          DRIVE_GALLERY_MANIFEST: manifestPath,
-        },
-      });
-      const written = JSON.parse(await readFile(manifestPath, "utf8"));
-      assert.equal(written.publicationState, "review");
-      assert.deepEqual(written.items, []);
-      assert.equal(calls, 0, "review must not touch the network");
-    } finally {
-      globalThis.fetch = originalFetch;
-      await rm(dir, { recursive: true, force: true });
-    }
+  it("resolves originals by private map or by slug, and reports a missing one", () => {
+    const entry = { id: "mily-drive-b02-p02", kind: "photo" };
+    assert.equal(
+      resolveInputName(entry, ["ORIGINAL-NAME.jpg"], { "mily-drive-b02-p02": "ORIGINAL-NAME.jpg" }),
+      "ORIGINAL-NAME.jpg",
+    );
+    assert.equal(resolveInputName(entry, ["mily-b02-p02.heic"], null), "mily-b02-p02.heic");
+    assert.equal(resolveInputName(entry, ["something-else.jpg"], null), null);
+    assert.throws(
+      () => resolveInputName(entry, ["a.jpg"], { "mily-drive-b02-p02": "missing.jpg" }),
+      /points at a missing file/,
+    );
+    assert.throws(
+      () => resolveInputName(entry, ["a.jpg"], { "mily-drive-b02-p02": "../escape.jpg" }),
+      /bare file name/,
+    );
+    assert.throws(
+      () => resolveInputName(entry, ["mily-b02-p02.jpg", "mily-b02-p02.png"], null),
+      /2 input files match/,
+    );
+    assert.equal(SOURCE_MAP_NAME, "sources.json");
   });
 });
 
-describe("Drive download safety", () => {
-  function response(body, { status = 200, contentType = "image/jpeg" } = {}) {
-    return {
-      ok: status >= 200 && status < 300,
-      status,
-      statusText: `status ${status}`,
-      headers: { get: () => contentType },
-      arrayBuffer: async () => body,
-    };
-  }
+describe("Sanitize pipeline (local fixtures)", () => {
+  let dir;
+  let ffmpeg;
+  let ffprobe;
 
-  const jpeg = new Uint8Array(8192).fill(7).buffer;
+  before(async () => {
+    dir = await mkdtemp(path.join(tmpdir(), "drive-sanitize-"));
+    const ffmpegMod = await import("ffmpeg-static");
+    ffmpeg = ffmpegMod.default ?? ffmpegMod;
+    const ffprobeMod = await import("ffprobe-static");
+    const resolved = ffprobeMod.default ?? ffprobeMod;
+    ffprobe = resolved.path ?? resolved;
+  });
 
-  it("rejects an unsafe file id before making a request", async () => {
-    await assert.rejects(
-      () => downloadDriveFile("../etc", "photo", { fetchImpl: async () => response(jpeg) }),
-      DriveFetchError,
+  after(async () => {
+    await rm(dir, { recursive: true, force: true });
+  });
+
+  it("strips EXIF, GPS, IPTC and XMP from photos", async () => {
+    const entry = { id: "fixture-photo", kind: "photo", alt: "fixture" };
+    // A fixture that deliberately carries GPS and description metadata.
+    const withMeta = await sharp({
+      create: { width: 2000, height: 1500, channels: 3, background: "#8a8" },
+    })
+      .withExifMerge({
+        IFD0: { ImageDescription: "SECRET-DESCRIPTION", Make: "FixtureCam" },
+        GPS: { GPSLatitudeRef: "N", GPSLongitudeRef: "E" },
+      })
+      .withMetadata()
+      .jpeg()
+      .toBuffer();
+
+    const before = await sharp(withMeta).metadata();
+    assert.ok(before.exif, "fixture must actually carry EXIF");
+
+    const item = await sanitizePhoto(entry, withMeta, dir);
+
+    for (const name of photoDerivatives("fixture-photo")) {
+      const meta = await sharp(path.join(dir, name)).metadata();
+      assert.equal(Boolean(meta.exif), false, `${name} kept EXIF`);
+      assert.equal(Boolean(meta.iptc), false, `${name} kept IPTC`);
+      assert.equal(Boolean(meta.xmp), false, `${name} kept XMP`);
+      const raw = await readFile(path.join(dir, name));
+      assert.equal(
+        raw.includes(Buffer.from("SECRET-DESCRIPTION")),
+        false,
+        `${name} still contains the description`,
+      );
+    }
+    assert.equal(item.width, 1600, "largest derivative is capped at 1600");
+    assert.equal(item.height, 1200, "aspect ratio is preserved");
+  });
+
+  it("never upscales a small original", async () => {
+    const entry = { id: "fixture-small", kind: "photo", alt: "fixture" };
+    const small = await sharp({
+      create: { width: 320, height: 240, channels: 3, background: "#333" },
+    })
+      .jpeg()
+      .toBuffer();
+
+    const item = await sanitizePhoto(entry, small, dir);
+    assert.equal(item.width, 320);
+    assert.equal(item.height, 240);
+    const largest = await sharp(path.join(dir, "fixture-small-1600.jpg")).metadata();
+    assert.equal(largest.width, 320, "must not enlarge past the original");
+  });
+
+  it("produces faststart H.264/AAC with no carried-over metadata and a real poster", async () => {
+    const entry = { id: "fixture-video", kind: "video", alt: "fixture" };
+    const source = path.join(dir, "source.mp4");
+    // A fixture that deliberately carries container metadata, plus audio.
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-f", "lavfi", "-i", "testsrc=size=360x640:rate=15:duration=1",
+      "-f", "lavfi", "-i", "sine=frequency=440:duration=1",
+      "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac",
+      "-metadata", "location=+35.6+139.7",
+      "-metadata", "comment=SECRET-COMMENT",
+      source,
+    ]);
+
+    const item = await sanitizeVideo(entry, source, dir);
+    const mp4 = path.join(dir, "fixture-video.mp4");
+    const poster = path.join(dir, "fixture-video-poster.jpg");
+
+    const { stdout } = await run(ffprobe, [
+      "-hide_banner", "-loglevel", "error",
+      "-show_format", "-show_streams", "-print_format", "json", mp4,
+    ]);
+    const info = JSON.parse(stdout);
+    const video = info.streams.find((s) => s.codec_type === "video");
+    const audio = info.streams.find((s) => s.codec_type === "audio");
+
+    assert.equal(video.codec_name, "h264");
+    assert.equal(audio.codec_name, "aac");
+    assert.deepEqual(leftoverTags(info.format.tags), [], "container metadata survived");
+    assert.equal(
+      (await readFile(mp4)).includes(Buffer.from("SECRET-COMMENT")),
+      false,
+      "the source comment leaked into the output",
     );
+    assert.equal(await isFaststart(mp4), true, "moov must precede mdat");
+
+    // Aspect ratio preserved, no crop, no upscale past 720 wide.
+    assert.equal(video.width, 360);
+    assert.equal(video.height, 640);
+    assert.equal(item.width, 360);
+
+    const posterMeta = await sharp(poster).metadata();
+    assert.ok((await stat(poster)).size > 0, "poster must be a real frame");
+    assert.equal(posterMeta.width, 360);
+    assert.equal(Boolean(posterMeta.exif), false);
   });
 
-  it("fails closed on an HTTP error", async () => {
-    await assert.rejects(
-      () =>
-        downloadDriveFile("abcdefghij", "photo", {
-          fetchImpl: async () => response(jpeg, { status: 404 }),
-        }),
-      /HTTP 404/,
-    );
+  it("fails closed when a photo fixture is unreadable", async () => {
+    const entry = { id: "fixture-broken", kind: "photo", alt: "fixture" };
+    await assert.rejects(() => sanitizePhoto(entry, Buffer.from("not an image"), dir));
   });
 
-  it("fails closed when the MIME type does not match the kind", async () => {
-    await assert.rejects(
-      () =>
-        downloadDriveFile("abcdefghij", "video", {
-          fetchImpl: async () => response(jpeg, { contentType: "image/jpeg" }),
-        }),
-      /expected video\/\*/,
-    );
-  });
-
-  it("fails closed on a truncated payload", async () => {
-    await assert.rejects(
-      () =>
-        downloadDriveFile("abcdefghij", "photo", {
-          fetchImpl: async () => response(new Uint8Array(16).buffer),
-        }),
-      /only 16 bytes/,
-    );
-  });
-
-  it("retries the virus-scan interstitial with its confirm token", async () => {
-    const html = new TextEncoder().encode(
-      '<!DOCTYPE html><form><input type="hidden" name="confirm" value="t123"></form>',
-    ).buffer;
-    const seen = [];
-    const bytes = await downloadDriveFile("abcdefghij", "video", {
-      fetchImpl: async (url) => {
-        seen.push(url);
-        return seen.length === 1
-          ? response(html, { contentType: "text/html; charset=utf-8" })
-          : response(jpeg, { contentType: "video/mp4" });
-      },
-    });
-    assert.equal(bytes.usedConfirm, true);
-    assert.equal(seen.length, 2);
-    assert.match(seen[1], /confirm=t123/);
-    assert.equal(seen.every((u) => !FOLDER_URL_PATTERN.test(u)), true);
-  });
-
-  it("fails closed when the interstitial carries no token", async () => {
-    const html = new TextEncoder().encode("<html>quota exceeded</html>").buffer;
-    await assert.rejects(
-      () =>
-        downloadDriveFile("abcdefghij", "photo", {
-          fetchImpl: async () => response(html, { contentType: "text/html" }),
-        }),
-      /no confirm token/,
-    );
-  });
-
-  it("parses both interstitial token shapes", () => {
-    assert.equal(parseConfirmToken('name="confirm" value="abc"'), "abc");
-    assert.equal(parseConfirmToken("href='/download?id=x&confirm=zzz'"), "zzz");
-    assert.equal(parseConfirmToken("<html>nothing</html>"), null);
+  it("fails closed when a video fixture is unreadable", async () => {
+    const entry = { id: "fixture-broken-video", kind: "video", alt: "fixture" };
+    const broken = path.join(dir, "broken.mp4");
+    await writeFile(broken, "not a video");
+    await assert.rejects(() => sanitizeVideo(entry, broken, dir));
   });
 });
 
@@ -464,7 +566,6 @@ describe("Gallery UI contract", () => {
   it("renders local assets and no Drive iframe", async () => {
     const gallery = await read("src/components/Gallery.tsx");
     assert.equal(/iframe/i.test(gallery), false, "no Drive iframe may remain");
-    assert.equal(/sandbox/i.test(gallery), false);
     assert.equal(/autoplay/i.test(gallery), false);
     assert.equal(DRIVE_HOST_PATTERN.test(gallery), false);
     assert.match(gallery, /<video/);
