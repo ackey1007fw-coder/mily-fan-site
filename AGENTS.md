@@ -61,7 +61,7 @@ pnpm dev
 
 ## データの場所
 
-- `src/data/profile.ts` … 確認できた最小限のプロフィール
+- `src/data/profile.ts` … 出典台帳と確認済みの詳細プロフィール（変動項目は `asOf` 必須）
 - `src/data/events.ts` … 出演・配信・イベント。年をまたいで同じ配列に追加する
 - `src/data/news.ts` … 最新情報。新しいものを配列の先頭へ
 - `src/data/media.ts` … 写真・動画のマニフェスト（運用手順は `docs/MEDIA.md`）

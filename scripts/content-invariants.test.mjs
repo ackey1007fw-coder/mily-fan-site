@@ -5,13 +5,15 @@ import { highlights } from "../src/data/highlights.ts";
 import { links } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
 import { news } from "../src/data/news.ts";
-import { profile } from "../src/data/profile.ts";
+import { profile, profileSources } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 import {
   verifyAllContent,
   verifyEvents,
   verifyMedia,
   verifyNews,
+  verifyFacts,
+  verifyProfileSources,
   verifySocials,
   claimsThisSiteIsOfficial,
 } from "./content-invariants.mjs";
@@ -52,6 +54,7 @@ describe("content verification invariants", () => {
       links,
       highlights,
       facts: profile.facts,
+      profileSources,
       media,
     });
     assert.deepEqual(errors, []);
@@ -79,11 +82,23 @@ describe("content verification invariants", () => {
       ],
       facts: [
         {
+          id: "public-name",
+          section: "identity",
           label: "公開名",
           value: "みりぃ",
-          source: "https://example.com/profile",
+          sourceIds: ["example"],
+          status: "confirmed",
         },
       ],
+      profileSources: {
+        example: {
+          id: "example",
+          title: "確認済みプロフィール",
+          publisher: "主催者",
+          url: "https://example.com/profile",
+          verifiedAt: "2026-08-14",
+        },
+      },
       media: [
         {
           id: "sample-photo",
@@ -103,6 +118,37 @@ describe("content verification invariants", () => {
       ],
     });
     assert.deepEqual(errors, []);
+  });
+
+  it("rejects unsourced or stale-shaped profile facts", () => {
+    const sources = {
+      confirmed: {
+        id: "confirmed-source",
+        title: "確認済みプロフィール",
+        publisher: "主催者",
+        url: "https://example.com/profile",
+        verifiedAt: "2026-08-16",
+      },
+    };
+    assert.deepEqual(verifyProfileSources(sources), []);
+
+    const errors = verifyFacts(
+      [
+        {
+          id: "bad-fact",
+          section: "unknown",
+          label: "変動情報",
+          value: "現在の値",
+          sourceIds: ["missing"],
+          status: "time-sensitive",
+        },
+      ],
+      sources,
+    );
+
+    assert.ok(errors.some((error) => error.includes("invalid section")));
+    assert.ok(errors.some((error) => error.includes("unknown sourceId")));
+    assert.ok(errors.some((error) => error.includes("need a real asOf")));
   });
 
   it("rejects incomplete media and filenames off the mily- scheme", () => {

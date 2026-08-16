@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import {
   canonicalUrl,
   ogImageUrl,
+  profileUrl,
   robotsTxt,
   site,
   siteOrigin,
@@ -20,8 +21,10 @@ export function verifySiteUrlConsistency() {
   const errors = [];
   const origin = siteOrigin();
   const canonical = canonicalUrl();
+  const profileCanonical = profileUrl();
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
+  const profileHtml = readRelative("profile/index.html");
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
   const viteConfig = readRelative("vite.config.ts");
@@ -45,6 +48,18 @@ export function verifySiteUrlConsistency() {
   if (!html.includes('name="twitter:image"') || !html.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("index.html twitter:image must use __SITE_OG_IMAGE__ from site.siteUrl");
   }
+  if (!profileHtml.includes('href="__PROFILE_CANONICAL__"')) {
+    errors.push("profile/index.html canonical href must use __PROFILE_CANONICAL__");
+  }
+  if (
+    !profileHtml.includes('property="og:url"') ||
+    !profileHtml.includes('content="__PROFILE_CANONICAL__"')
+  ) {
+    errors.push("profile/index.html og:url must use __PROFILE_CANONICAL__");
+  }
+  if (!profileHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("profile/index.html images must use __SITE_OG_IMAGE__");
+  }
 
   if (robots !== robotsTxt()) {
     errors.push("public/robots.txt must be generated from site.siteUrl");
@@ -59,8 +74,15 @@ export function verifySiteUrlConsistency() {
   if (!sitemap.includes(`<loc>${canonical}</loc>`)) {
     errors.push("public/sitemap.xml loc must follow site.siteUrl");
   }
+  if (!sitemap.includes(`<loc>${profileCanonical}</loc>`)) {
+    errors.push("public/sitemap.xml must include the profile canonical URL");
+  }
 
-  if (!viteConfig.includes("canonicalUrl()") || !viteConfig.includes("ogImageUrl()")) {
+  if (
+    !viteConfig.includes("canonicalUrl()") ||
+    !viteConfig.includes("profileUrl()") ||
+    !viteConfig.includes("ogImageUrl()")
+  ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
   }
 
@@ -70,8 +92,17 @@ export function verifySiteUrlConsistency() {
   if (hardcodedOrigin.test(html)) {
     errors.push("index.html must not hardcode the public origin; use site.siteUrl placeholders");
   }
+  if (hardcodedOrigin.test(profileHtml)) {
+    errors.push(
+      "profile/index.html must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
 
-  if (!canonical.startsWith(origin) || !ogImage.startsWith(origin)) {
+  if (
+    !canonical.startsWith(origin) ||
+    !profileCanonical.startsWith(origin) ||
+    !ogImage.startsWith(origin)
+  ) {
     errors.push("canonical and og image URLs must stay on site.siteUrl");
   }
 

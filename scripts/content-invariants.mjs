@@ -280,14 +280,61 @@ export function verifyMedia(items) {
   return errors;
 }
 
-export function verifyFacts(items) {
+const PROFILE_SECTIONS = new Set(["identity", "education", "interest", "skill"]);
+const PROFILE_STATUSES = new Set(["confirmed", "time-sensitive"]);
+
+export function verifyProfileSources(sources) {
   const errors = [];
+  const values = Object.values(sources ?? {});
+  assertUniqueIds(values, "profile sources", errors);
+
+  for (const source of values) {
+    const id = source.id ?? "?";
+    if (!source.title || !source.publisher) {
+      errors.push(`profile source "${id}" is missing title or publisher`);
+    }
+    assertConfirmedUrl(source.url, "profile source", id, errors);
+    if (!isValidDateOnly(source.verifiedAt ?? "")) {
+      errors.push(`profile source "${id}" verifiedAt must be a real YYYY-MM-DD`);
+    }
+    assertNoPersonMixup(source, "profile source", errors);
+    assertNoOfficialClaim(source, "profile source", errors);
+  }
+
+  return errors;
+}
+
+export function verifyFacts(items, sources) {
+  const errors = [];
+  assertUniqueIds(items, "profile facts", errors);
+  const knownSourceIds = new Set(Object.keys(sources ?? {}));
+
   for (const item of items) {
-    const id = item.label ?? "?";
+    const id = item.id ?? "?";
     if (!item.label || !item.value) {
       errors.push(`profile fact "${id}" is missing label or value`);
     }
-    assertConfirmedUrl(item.source, "profile fact", id, errors);
+    if (!PROFILE_SECTIONS.has(item.section)) {
+      errors.push(`profile fact "${id}" has an invalid section`);
+    }
+    if (!PROFILE_STATUSES.has(item.status)) {
+      errors.push(`profile fact "${id}" has an invalid status`);
+    }
+    if (!Array.isArray(item.sourceIds) || item.sourceIds.length === 0) {
+      errors.push(`profile fact "${id}" needs at least one sourceId`);
+    } else {
+      for (const sourceId of item.sourceIds) {
+        if (!knownSourceIds.has(sourceId)) {
+          errors.push(`profile fact "${id}" references unknown sourceId "${sourceId}"`);
+        }
+      }
+    }
+    if (item.status === "time-sensitive" && !isValidDateOnly(item.asOf ?? "")) {
+      errors.push(`profile fact "${id}" time-sensitive facts need a real asOf date`);
+    }
+    if (item.asOf && !isValidDateOnly(item.asOf)) {
+      errors.push(`profile fact "${id}" asOf must be a real YYYY-MM-DD`);
+    }
     assertNoPersonMixup(item, "profile fact", errors);
     assertNoOfficialClaim(item, "profile fact", errors);
   }
@@ -301,6 +348,7 @@ export function verifyAllContent({
   links,
   highlights,
   facts,
+  profileSources = {},
   media = [],
 }) {
   return [
@@ -309,7 +357,8 @@ export function verifyAllContent({
     ...verifySocials(socials),
     ...verifyLinks(links),
     ...verifyHighlights(highlights),
-    ...verifyFacts(facts),
+    ...verifyProfileSources(profileSources),
+    ...verifyFacts(facts, profileSources),
     ...verifyMedia(media),
   ];
 }

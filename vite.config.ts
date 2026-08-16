@@ -1,6 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { canonicalUrl, ogImageUrl } from "./src/data/site";
+import { canonicalUrl, ogImageUrl, profileUrl } from "./src/data/site";
 
 function siteMetadataPlugin(): Plugin {
   return {
@@ -8,6 +8,7 @@ function siteMetadataPlugin(): Plugin {
     transformIndexHtml(html) {
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
+        .replaceAll("__PROFILE_CANONICAL__", profileUrl())
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -20,6 +21,10 @@ export default defineConfig({
     minify: "esbuild",
     cssMinify: true,
     rollupOptions: {
+      input: {
+        home: "index.html",
+        profile: "profile/index.html",
+      },
       output: {
         manualChunks: {
           react: ["react", "react-dom"],

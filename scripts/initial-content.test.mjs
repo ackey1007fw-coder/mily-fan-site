@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { events } from "../src/data/events.ts";
 import { links } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
-import { profile } from "../src/data/profile.ts";
+import { profile, profileSources } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 import { visibleNavItems } from "../src/lib/navigation.ts";
 
@@ -17,22 +17,46 @@ async function read(relative) {
 }
 
 describe("confirmed public identity", () => {
-  it("keeps mily spelling and does not add unverified profile fields", () => {
+  it("keeps mily spelling and stores detailed facts with confirmed sources", () => {
     assert.equal(profile.displayName, "みりぃ");
     assert.equal(profile.legalName, "三橋莉子");
-    assert.match(profile.summary, /推測はしません|未確認/);
+    assert.ok(profile.facts.length >= 9);
 
     const factText = profile.facts
       .flatMap((fact) => [fact.label, fact.value])
       .join("\n");
 
-    assert.equal(profile.facts.length, 2);
-    assert.ok(profile.facts.every((fact) => /^https?:\/\//.test(fact.source)));
-    assert.match(factText, /MISS CIRCLE CONTEST 2026/);
-    assert.match(factText, /ENTRY 734/);
-    assert.match(factText, /湘南シーサイドサークル/);
+    assert.match(factText, /公表名/);
+    assert.match(factText, /三橋莉子/);
     assert.match(factText, /Mily（ミリー）/);
-    assert.doesNotMatch(factText, /生年月日|日本大学|神奈川|身長|所属サークル/);
+    assert.match(factText, /2005年8月2日/);
+    assert.match(factText, /日本大学 3年/);
+    assert.match(factText, /神奈川県/);
+    assert.match(factText, /ラジオ研究/);
+    assert.match(factText, /篠笛/);
+    assert.match(factText, /トマトの栄養素🍅/);
+    assert.doesNotMatch(factText, /フォロワー|現在順位|所属事務所|本名/);
+
+    const sourceKeys = new Set(Object.keys(profileSources));
+    assert.ok(
+      Object.values(profileSources).every(
+        (source) =>
+          /^https?:\/\//.test(source.url) &&
+          /^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt),
+      ),
+    );
+    assert.ok(
+      profile.facts.every(
+        (fact) =>
+          fact.sourceIds.length > 0 &&
+          fact.sourceIds.every((sourceId) => sourceKeys.has(sourceId)),
+      ),
+    );
+    assert.ok(
+      profile.facts
+        .filter((fact) => fact.status === "time-sensitive")
+        .every((fact) => /^\d{4}-\d{2}-\d{2}$/.test(fact.asOf ?? "")),
+    );
   });
 
   it("keeps only confirmed socials and contest/FM links separate", () => {
