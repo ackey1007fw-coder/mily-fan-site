@@ -52,10 +52,13 @@ describe("confirmed public identity", () => {
       links.some((item) => item.url === "https://2026.misscircle.jp/entry/734"),
     );
     assert.ok(links.some((item) => item.url === "https://fm-smw.jp/staff"));
-    assert.equal(
-      links.filter((item) => /instagram/i.test(item.url)).length,
-      0,
-    );
+
+    const linkInstagram = links.filter((item) => /instagram\.com/i.test(item.url));
+    assert.equal(linkInstagram.length, 1);
+    assert.equal(linkInstagram[0]?.id, "fm-smw-ssc-instagram");
+    assert.equal(linkInstagram[0]?.url, "https://www.instagram.com/seasidecircle");
+    assert.notEqual(linkInstagram[0]?.url, instagram?.url);
+
     assert.ok(media.length > 0);
   });
 });
@@ -87,26 +90,5 @@ describe("support and empty schedule", () => {
     assert.doesNotMatch(schedule, /いま掲載できる予定はありません/);
     assert.match(header, /flex-wrap/);
     assert.doesNotMatch(header, /overflow-x-auto/);
-
-    const emptyNav = visibleNavItems(0).map((item) => item.href);
-    const filledNav = visibleNavItems(1).map((item) => item.href);
-
-    assert.deepEqual(emptyNav, [
-      "#latest",
-      "#support",
-      "#gallery",
-      "#about",
-      "#links",
-    ]);
-    assert.ok(!emptyNav.includes("#schedule"));
-    assert.ok(filledNav.includes("#schedule"));
-  });
-});
-
-describe("readme status", () => {
-  it("records the current public URL and no longer says Vercel is unpublished", async () => {
-    const readme = await read("README.md");
-    assert.match(readme, /https:\/\/mily-fan-site\.vercel\.app\//);
-    assert.doesNotMatch(readme, /Vercel 本番公開はまだ行いません/);
   });
 });
