@@ -124,7 +124,7 @@ describe("LIVE は fetch を待たずに90秒で失効する", () => {
         },
         intervalMs: 600_000,
         clearOnError: true,
-        expiresAt: (payload) => liveExpiresAt(payload),
+        expiresAt: (payload, now) => liveExpiresAt(payload, now),
         onExpire: expireLivePayload,
       },
       clock.timers,
@@ -170,6 +170,60 @@ describe("LIVE は fetch を待たずに90秒で失効する", () => {
     assert.equal(toLiveView(livePayload("live", future), now).state, "unknown");
   });
 
+  it("未来の observedAt を保存前に UNKNOWN へ畳み、時刻が追いついても復活させない", async () => {
+    const start = Date.parse("2026-08-16T09:22:00+09:00");
+    const clock = fakeClock(start);
+    const future = new Date(start + 1000).toISOString();
+    const store = createPollStore(
+      {
+        fetcher: async () => livePayload("live", future),
+        intervalMs: 600_000,
+        clearOnError: true,
+        expiresAt: (payload, now) => liveExpiresAt(payload, now),
+        onExpire: expireLivePayload,
+      },
+      clock.timers,
+    );
+
+    const unsubscribe = store.subscribe(() => {});
+    await store.refresh();
+    const collapsed = store.getSnapshot();
+    assert.equal(collapsed.live.state, "unknown", "raw LIVE を store に保持しない");
+
+    // 現実時間が future timestamp を追い越しても、同じ snapshot は復活しない。
+    clock.advance(2000);
+    const unsubscribeSecond = store.subscribe(() => {});
+    assert.equal(store.expireIfStale(), false, "UNKNOWN は再失効も再評価も不要");
+    assert.equal(store.getSnapshot(), collapsed, "collapse 済みの参照を維持する");
+    assert.equal(store.getSnapshot().live.state, "unknown");
+    assert.equal(toLiveView(store.getSnapshot(), clock.now()).state, "unknown");
+
+    unsubscribeSecond();
+    unsubscribe();
+  });
+
+  it("invalid / TTL 超過の LIVE 観測も保存前に UNKNOWN へ畳む", async () => {
+    const clock = fakeClock();
+    for (const observedAt of [
+      "not-a-date",
+      new Date(clock.now() - LIVE_STALE_MS).toISOString(),
+    ]) {
+      const store = createPollStore(
+        {
+          fetcher: async () => livePayload("live", observedAt),
+          intervalMs: 600_000,
+          expiresAt: (payload, now) => liveExpiresAt(payload, now),
+          onExpire: expireLivePayload,
+        },
+        clock.timers,
+      );
+      const unsubscribe = store.subscribe(() => {});
+      await store.refresh();
+      assert.equal(store.getSnapshot().live.state, "unknown");
+      unsubscribe();
+    }
+  });
+
   it("hidden 中に失効し、visible 復帰時は fetch 完了前に UNKNOWN になる", async () => {
     const dom = stubDom("visible");
     try {
@@ -190,7 +244,7 @@ describe("LIVE は fetch を待たずに90秒で失効する", () => {
           },
           intervalMs: 600_000,
           clearOnError: true,
-          expiresAt: (payload) => liveExpiresAt(payload),
+          expiresAt: (payload, now) => liveExpiresAt(payload, now),
           onExpire: expireLivePayload,
         },
         clock.timers,
@@ -365,7 +419,7 @@ describe("ラジオは境界時刻で必ず再評価される", () => {
         fetcher: async () => payload,
         intervalMs: 600_000,
         clearOnError: true,
-        expiresAt: (value) => radioExpiresAt(value),
+        expiresAt: (value, now) => radioExpiresAt(value, now),
         onExpire: expireRadioOnAir,
       },
       clock.timers,
@@ -381,6 +435,42 @@ describe("ラジオは境界時刻で必ず再評価される", () => {
       "TTL を過ぎた NOW ON AIR 確認結果は未確認へ戻す",
     );
     assert.equal(radioExpiresAt(store.getSnapshot()), null);
+  });
+
+  it("未来の updatedAt を保存前に null へ畳み、時刻が追いついても復活させない", async () => {
+    const start = Date.parse("2026-08-16T09:22:00+09:00");
+    const clock = fakeClock(start);
+    const future = new Date(start + 1000).toISOString();
+    const payload = {
+      programName: radioProgram.programName,
+      onAirConfirmed: true,
+      listenUrl: radioProgram.listenUrl,
+      updatedAt: future,
+    };
+    const store = createPollStore(
+      {
+        fetcher: async () => payload,
+        intervalMs: 600_000,
+        clearOnError: true,
+        expiresAt: (value, now) => radioExpiresAt(value, now),
+        onExpire: expireRadioOnAir,
+      },
+      clock.timers,
+    );
+
+    const unsubscribe = store.subscribe(() => {});
+    await store.refresh();
+    const collapsed = store.getSnapshot();
+    assert.equal(collapsed.onAirConfirmed, null, "raw true を store に保持しない");
+
+    clock.advance(2000);
+    const unsubscribeSecond = store.subscribe(() => {});
+    assert.equal(store.expireIfStale(), false);
+    assert.equal(store.getSnapshot(), collapsed);
+    assert.equal(store.getSnapshot().onAirConfirmed, null);
+
+    unsubscribeSecond();
+    unsubscribe();
   });
 });
 

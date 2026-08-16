@@ -53,7 +53,7 @@ const liveStore = createPollStore<LivePayload>({
   fetcher: (signal) => fetchJson<LivePayload>("/api/mily-live", signal),
   intervalMs: LIVE_POLL_MS,
   clearOnError: true,
-  expiresAt: (payload) => liveExpiresAt(payload),
+  expiresAt: (payload, now) => liveExpiresAt(payload, now),
   onExpire: expireLivePayload,
 });
 
@@ -64,7 +64,7 @@ const radioStore = createPollStore<RadioStatus>({
   fetcher: (signal) => fetchJson<RadioStatus>("/api/mily-radio-status", signal),
   intervalMs: RADIO_POLL_MS,
   clearOnError: true,
-  expiresAt: (payload) => radioExpiresAt(payload),
+  expiresAt: (payload, now) => radioExpiresAt(payload, now),
   onExpire: expireRadioOnAir,
 });
 

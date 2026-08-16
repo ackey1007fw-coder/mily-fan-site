@@ -22,7 +22,7 @@ export type PollStoreOptions<T> = {
    * 値が「事実として古すぎる」ようになる時刻(ms)。null なら失効しない。
    * fetch の成否と無関係に、この時刻で store 自身が値を畳んで通知する。
    */
-  expiresAt?: (value: T) => number | null;
+  expiresAt?: (value: T, now: number) => number | null;
   /**
    * 失効時に値をどう畳むか。**新しい参照を返すこと**（useSyncExternalStore が
    * 変化を検知して再レンダーできるように）。省略時は null にする。
@@ -89,8 +89,9 @@ export function createPollStore<T>(
   /** 失効していれば値を畳んで通知する（fetch は起こさない）。 */
   const expireIfStale = (): boolean => {
     if (value === null || !options.expiresAt) return false;
-    const at = options.expiresAt(value);
-    if (at === null || timers.now() < at) return false;
+    const now = timers.now();
+    const at = options.expiresAt(value, now);
+    if (at === null || now < at) return false;
     clearExpiryTimer();
     value = options.onExpire ? options.onExpire(value) : null;
     notify();
@@ -104,9 +105,10 @@ export function createPollStore<T>(
   const scheduleExpiry = () => {
     clearExpiryTimer();
     if (value === null || !options.expiresAt) return;
-    const at = options.expiresAt(value);
+    const now = timers.now();
+    const at = options.expiresAt(value, now);
     if (at === null) return;
-    const delay = Math.max(0, at - timers.now());
+    const delay = Math.max(0, at - now);
     expiryTimerId = timers.setTimeout(() => {
       expiryTimerId = null;
       expireIfStale();
@@ -114,7 +116,20 @@ export function createPollStore<T>(
   };
 
   const setValue = (next: T | null) => {
-    value = next;
+    const now = timers.now();
+    if (next !== null && options.expiresAt) {
+      const at = options.expiresAt(next, now);
+      // Future / invalid / already-expired observations are collapsed before
+      // they ever become the store snapshot. Keeping the raw value here would
+      // let it become fresh later when wall-clock time catches up.
+      value = at !== null && now >= at
+        ? options.onExpire
+          ? options.onExpire(next)
+          : null
+        : next;
+    } else {
+      value = next;
+    }
     notify();
     scheduleExpiry();
   };
@@ -234,14 +249,15 @@ export function isObservationStale(
  */
 export function liveExpiresAt(
   payload: LivePayload | null,
+  now: number = Date.now(),
   staleMs: number = LIVE_STALE_MS,
 ): number | null {
   const state = payload?.live?.state;
   if (state !== "live" && state !== "offline") return null;
   const observedAt = payload?.live?.observedAt;
-  if (typeof observedAt !== "string") return null;
+  if (typeof observedAt !== "string") return now;
   const parsed = Date.parse(observedAt);
-  if (Number.isNaN(parsed)) return null;
+  if (Number.isNaN(parsed) || parsed > now) return now;
   return parsed + staleMs;
 }
 
@@ -296,15 +312,16 @@ export type RadioFreshness = {
  */
 export function radioExpiresAt<T extends RadioFreshness>(
   payload: T | null,
+  now: number = Date.now(),
   staleMs: number = RADIO_ONAIR_STALE_MS,
 ): number | null {
   if (payload?.onAirConfirmed !== true && payload?.onAirConfirmed !== false) {
     return null;
   }
   const updatedAt = payload?.updatedAt;
-  if (typeof updatedAt !== "string") return null;
+  if (typeof updatedAt !== "string") return now;
   const parsed = Date.parse(updatedAt);
-  if (Number.isNaN(parsed)) return null;
+  if (Number.isNaN(parsed) || parsed > now) return now;
   return parsed + staleMs;
 }
 
