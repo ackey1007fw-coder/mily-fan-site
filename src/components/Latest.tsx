@@ -14,7 +14,7 @@ export function Latest() {
           <div className="mt-6">
             <EmptyState
               title="お知らせはまだありません"
-              body="更新があり次第、ここに載せていきます。"
+              body="新しいお知らせはまだありません。"
             />
           </div>
         ) : (

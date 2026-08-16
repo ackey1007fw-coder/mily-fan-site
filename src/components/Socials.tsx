@@ -28,7 +28,7 @@ export function Socials() {
           <div className="mt-6">
             <EmptyState
               title="リンクはまだありません"
-              body="準備ができ次第、ここに並べます。"
+              body="今はリンクがありません。"
             />
           </div>
         ) : (
@@ -79,7 +79,7 @@ export function Socials() {
                   FM湘南マジックウェイブ
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  スタッフページでは、Mily（ミリー）の担当番組として「湘南シーサイドサークル」が確認できます。
+                  Mily（ミリー） / 湘南シーサイドサークル
                 </p>
                 <p className="mt-4 flex flex-wrap gap-3">
                   {fmLinks

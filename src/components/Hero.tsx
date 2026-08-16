@@ -36,7 +36,7 @@ export function Hero() {
           </h1>
           <p className="mt-2 text-lg text-ink-muted">{profile.publicName}</p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink">
-            みりぃさんの活動の記録を、ファンの手でゆっくり集めていく場所です。
+            ラジオ、配信、コンテスト。みりぃの今をひとつに。
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ExternalLink
@@ -89,7 +89,7 @@ export function Hero() {
               Mily Fan Site
             </p>
             <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-              写真はこれから、ギャラリーに増えていきます。
+              写真はまだありません。
             </p>
           </div>
         )}

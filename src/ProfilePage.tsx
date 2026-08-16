@@ -20,7 +20,7 @@ const profileNav = [
 
 function formatDate(date: string) {
   const [year, month, day] = date.split("-").map(Number);
-  return `${year}年${month}月${day}日`;
+  return `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
 }
 
 function SourceLinks({ sourceIds }: { sourceIds: ProfileSourceId[] }) {
@@ -34,7 +34,7 @@ function SourceLinks({ sourceIds }: { sourceIds: ProfileSourceId[] }) {
               href={source.url}
               className="inline-flex min-h-11 items-center rounded-full border border-sage/25 bg-paper px-3 py-2 text-xs font-medium leading-snug text-sage-deep hover:bg-sage-soft"
             >
-              {source.publisher}の出典を開く
+              {source.title}
             </ExternalLink>
           </li>
         );
@@ -90,7 +90,7 @@ function ProfileHero() {
           <p className="mt-1 text-sm text-ink-muted">{profile.aliases.join(" / ")}</p>
           <p className="mt-5 text-base leading-8 text-ink">{profile.summary}</p>
           <p className="mt-4 text-xs leading-relaxed text-ink-muted">
-            公開情報の最終確認：{formatDate(profile.lastVerifiedAt)}
+            {formatDate(profile.lastVerifiedAt)}時点
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <ExternalLink
@@ -143,9 +143,6 @@ function ProfileBasics() {
           At a glance
         </p>
         <h2 className="mt-2 text-2xl font-bold text-ink">ひと目でわかる基本情報</h2>
-        <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-          年齢・順位・フォロワー数のように変わり続ける数字は固定せず、確認できた公表情報を出典と一緒に掲載しています。
-        </p>
         <dl className="mt-6 grid gap-4 sm:grid-cols-2">
           {profile.facts.map((fact) => (
             <div
@@ -163,7 +160,7 @@ function ProfileBasics() {
               ) : null}
               {fact.asOf ? (
                 <dd className="mt-2 text-xs text-ink-muted">
-                  {formatDate(fact.asOf)}確認
+                  {formatDate(fact.asOf)}時点
                 </dd>
               ) : null}
               <dd>
@@ -183,7 +180,7 @@ function ProfileBasics() {
           <p className="mt-3 text-sm leading-7 text-ink-muted">{profile.vision.body}</p>
           {profile.vision.asOf ? (
             <p className="mt-3 text-xs text-ink-muted">
-              {formatDate(profile.vision.asOf)}確認
+              {formatDate(profile.vision.asOf)}時点
             </p>
           ) : null}
           <SourceLinks sourceIds={profile.vision.sourceIds} />
@@ -200,7 +197,7 @@ function ProfileActivities() {
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Activities
         </p>
-        <h2 className="mt-2 text-2xl font-bold text-ink">活動の4つのフィールド</h2>
+        <h2 className="mt-2 text-2xl font-bold text-ink">みりぃの活動</h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
           {profile.activities.map((activity) => (
             <article
@@ -224,7 +221,7 @@ function ProfileActivities() {
               </ul>
               {activity.asOf ? (
                 <p className="mt-4 text-xs text-ink-muted">
-                  {formatDate(activity.asOf)}確認
+                  {formatDate(activity.asOf)}時点
                 </p>
               ) : null}
               <SourceLinks sourceIds={activity.sourceIds} />
@@ -261,7 +258,7 @@ function CollectionBody({
         ))}
       </ul>
       {asOf ? (
-        <p className="mt-4 text-xs text-ink-muted">{formatDate(asOf)}確認</p>
+        <p className="mt-4 text-xs text-ink-muted">{formatDate(asOf)}時点</p>
       ) : null}
       <SourceLinks sourceIds={sourceIds} />
     </>
@@ -344,7 +341,7 @@ function ProfileTimeline() {
                   href={item.source}
                   className="inline-flex min-h-11 items-center rounded-full border border-sage/25 bg-paper-card px-3 py-2 text-xs font-medium text-sage-deep hover:bg-sage-soft"
                 >
-                  この記録の出典を開く
+                  出典を見る
                 </ExternalLink>
               </p>
             </li>
@@ -360,12 +357,9 @@ function ProfileSources() {
     <section id="sources" className="scroll-mt-24 px-4 py-10">
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/15 bg-paper-card p-6 shadow-card sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          Sources & policy
+          Sources
         </p>
-        <h2 className="mt-2 text-2xl font-bold text-ink">出典と掲載方針</h2>
-        <p className="mt-3 text-sm leading-7 text-ink-muted">
-          本人・主催者・放送局・配信プラットフォームが公開しているページを優先しています。未確認情報、フォロワー数や順位などの変動値、同姓同名の別人情報は掲載しません。
-        </p>
+        <h2 className="mt-2 text-2xl font-bold text-ink">出典</h2>
         <ol className="mt-5 space-y-3">
           {Object.values(profileSources).map((source, index) => (
             <li key={source.id} className="rounded-2xl bg-sage-soft/45 p-4">
@@ -377,14 +371,11 @@ function ProfileSources() {
                 {source.title}
               </ExternalLink>
               <p className="mt-1 text-xs text-ink-muted">
-                確認日：{formatDate(source.verifiedAt)}
+                {formatDate(source.verifiedAt)}時点
               </p>
             </li>
           ))}
         </ol>
-        <p className="mt-5 rounded-2xl bg-apricot-soft/70 p-4 text-sm leading-7 text-apricot-ink">
-          このページはファン制作の非公式プロフィールです。公式・公認・本人運営ではありません。内容に誤りが見つかった場合は、出典を確認して修正します。
-        </p>
       </div>
     </section>
   );

@@ -15,7 +15,8 @@ describe("home profile preview", () => {
     assert.match(source, /fact\.label/);
     assert.match(source, /fact\.value/);
     assert.match(source, /fact\.asOf/);
-    assert.match(source, /確認時点が分かる公開情報/);
+    assert.match(source, /時点/);
+    assert.doesNotMatch(source, /確認時点が分かる公開情報|まとめました|掲載しています/);
     assert.match(source, /href="\/profile\/"/);
     assert.match(source, /詳しいプロフィールを見る/);
     assert.doesNotMatch(source, /profile\.activities\.map/);
@@ -27,6 +28,7 @@ describe("home profile preview", () => {
 describe("detailed profile provenance", () => {
   it("renders facts, activities, milestones, and the source registry", async () => {
     const source = await readFile(path.join(root, "src/ProfilePage.tsx"), "utf8");
+    const footer = await readFile(path.join(root, "src/components/Footer.tsx"), "utf8");
 
     assert.match(source, /profile\.facts\.map\(\(fact\) =>/);
     assert.match(source, /fact\.sourceIds/);
@@ -40,7 +42,9 @@ describe("detailed profile provenance", () => {
     assert.match(source, /href=\{item\.source\}/);
     assert.match(source, /Object\.values\(profileSources\)\.map/);
     assert.match(source, /ExternalLink/);
-    assert.match(source, /公式・公認・本人運営ではありません/);
+    assert.match(source, /ファン制作・非公式プロフィール/);
+    assert.match(source, /<Footer \/>/);
+    assert.match(footer, /公式・公認・本人運営ではありません/);
   });
 
   it("ships a standalone, indexable profile document", async () => {

@@ -100,6 +100,7 @@ describe("confirmed public identity", () => {
 describe("support and empty schedule", () => {
   it("introduces a MISS CIRCLE support section without guessing contest rules", async () => {
     const support = await read("src/components/Support.tsx");
+    const footer = await read("src/components/Footer.tsx");
     const app = await read("src/App.tsx");
 
     assert.match(app, /<Support \/>/);
@@ -108,10 +109,11 @@ describe("support and empty schedule", () => {
     assert.match(support, /ENTRY 734/);
     assert.match(support, /投票ページを見る/);
     assert.match(support, /https:\/\/2026\.misscircle\.jp\/entry\/734/);
-    assert.match(support, /投票方法や最新情報はリンク先でご確認ください/);
+    assert.match(support, /投票方法・最新情報はENTRY 734ページへ/);
     assert.doesNotMatch(support, /順位|締切|投票期間/);
-    assert.match(support, /非公式サイト/);
     assert.doesNotMatch(support, /このサイトは公式|公認|本人運営/);
+    assert.match(footer, /ファン制作の非公式サイト/);
+    assert.match(footer, /公式・公認・本人運営ではありません/);
   });
 
   it("hides the empty schedule section and its nav link until events exist", async () => {

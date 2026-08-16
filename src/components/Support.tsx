@@ -9,8 +9,7 @@ export function Support() {
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">応援する</h2>
         <p className="mt-2 text-sm text-ink-muted">
-          {profile.displayName}（{profile.publicName}）さんのエントリーを、ファンとして応援できます。
-          このサイトはファン制作の非公式サイトです。
+          MISS CIRCLE CONTEST 2026、ENTRY 734のみりぃを応援。
         </p>
         <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card sm:p-6">
           <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
@@ -31,7 +30,7 @@ export function Support() {
             </ExternalLink>
           </p>
           <p className="mt-4 text-sm leading-relaxed text-ink-muted">
-            投票方法や最新情報はリンク先でご確認ください。
+            投票方法・最新情報はENTRY 734ページへ。
           </p>
         </div>
       </div>

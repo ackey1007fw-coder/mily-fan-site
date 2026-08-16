@@ -11,9 +11,6 @@ export function Footer() {
         <p className="mt-2">
           {profile.displayName}（{profile.publicName}）さんの公式・公認・本人運営ではありません。
         </p>
-        <p className="mt-2">
-          掲載内容に間違いを見つけた場合は、確認のうえ修正します。
-        </p>
       </div>
     </footer>
   );

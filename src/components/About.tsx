@@ -4,7 +4,7 @@ const previewFactIds = new Set(["hometown", "university", "special-skill", "fan-
 
 function formatDate(date: string) {
   const [year, month, day] = date.split("-").map(Number);
-  return `${year}年${month}月${day}日`;
+  return `${year}.${String(month).padStart(2, "0")}.${String(day).padStart(2, "0")}`;
 }
 
 export function About() {
@@ -29,15 +29,12 @@ export function About() {
                   <dd className="mt-1 font-semibold text-ink">{fact.value}</dd>
                   {fact.asOf ? (
                     <dd className="mt-1 text-xs text-ink-muted">
-                      {formatDate(fact.asOf)}確認
+                      {formatDate(fact.asOf)}時点
                     </dd>
                   ) : null}
                 </div>
               ))}
             </dl>
-            <p className="mt-6 text-sm leading-7 text-ink-muted">
-              ラジオ、吹奏楽、SHOWROOM、大学生コンテスト、好きなものまで。確認時点が分かる公開情報を、出典付きの専用ページにまとめました。
-            </p>
             <a
               href="/profile/"
               className="mt-5 inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"

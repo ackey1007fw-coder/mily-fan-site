@@ -15,13 +15,13 @@ export function Gallery() {
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">ギャラリー</h2>
         <p className="mt-2 text-sm text-ink-muted">
-          みりぃさんの写真と動画をまとめています。
+          みりぃの写真と動画を、ひとつのギャラリーに。
         </p>
         {!hasAny ? (
           <div className="mt-6">
             <EmptyState
               title="写真・動画はまだありません"
-              body="これから増やしていきます。"
+              body="最初の一枚をお楽しみに。"
             />
           </div>
         ) : null}
@@ -63,7 +63,7 @@ export function Gallery() {
                   </a>
                 ) : (
                   <div className="flex aspect-video items-center justify-center bg-sage-soft px-4 text-sm text-sage-deep">
-                    動画は準備中です
+                    動画はまだ見られません。
                   </div>
                 )}
                 {item.caption || item.sourceUrl ? (
@@ -92,7 +92,7 @@ export function Gallery() {
           <div className="mt-10">
             <h3 className="text-lg font-bold text-ink">写真アーカイブ</h3>
             <p className="mt-1 text-sm text-ink-muted">
-              オーナー提供素材 {drive.photos.length}点
+              お預かりした写真、全{drive.photos.length}点。
             </p>
             <ul className="mt-4 grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3">
               {drive.photos.map((photo) => (
@@ -128,7 +128,7 @@ export function Gallery() {
           <div className="mt-10">
             <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
             <p className="mt-1 text-sm text-ink-muted">
-              オーナー提供動画 {drive.videos.length}本。完全に重複した1本は1件にまとめています。
+              お預かりした動画、全{drive.videos.length}本（同一動画の重複1本を除く）。
             </p>
             <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
               {drive.videos.map((video) => (

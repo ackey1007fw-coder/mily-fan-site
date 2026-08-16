@@ -57,7 +57,7 @@ describe("birthday news item", () => {
     assert.ok(birthday);
     assert.equal(birthday.date, "2026-08-02");
     assert.match(birthday.title, /21歳/);
-    assert.match(birthday.body, /21歳の誕生日を迎えました/);
+    assert.match(birthday.body, /21歳の誕生日/);
     assert.match(birthday.body, /感謝/);
     assert.match(birthday.body, /考えていることを脳内に留めず行動に移す。/);
     assert.equal(birthday.source, "https://www.instagram.com/p/DbiY3PHk1c8/");
