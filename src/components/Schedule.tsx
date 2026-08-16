@@ -1,4 +1,4 @@
-import { events, groupEventsByYear, isUpcomingEvent } from "../data/events";
+import { events, groupEventsByYear } from "../data/events";
 import { ExternalLink } from "./ExternalLink";
 
 const kindLabel = {
@@ -14,7 +14,6 @@ export function Schedule() {
   }
 
   const grouped = groupEventsByYear(events);
-  const upcoming = events.filter((item) => isUpcomingEvent(item));
 
   return (
     <section id="schedule" className="scroll-mt-24 px-4 py-10">
@@ -22,9 +21,6 @@ export function Schedule() {
         <h2 className="text-2xl font-bold text-ink">スケジュール</h2>
         <p className="mt-2 text-sm text-ink-muted">出演・配信・イベントの予定と記録。</p>
         <div className="mt-6 space-y-8">
-          <p className="text-sm text-ink-muted">
-            今後の掲載件数: {upcoming.length}件
-          </p>
           {grouped.map((group) => (
             <section key={group.year} aria-labelledby={`year-${group.year}`}>
               <h3
