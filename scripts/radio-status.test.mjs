@@ -237,7 +237,7 @@ describe("radio status payload", () => {
   it("returns null onAirConfirmed on HTTP failure", async () => {
     const payload = await fetchRadioStatus({
       now: SUNDAY_0900,
-      fetchPage: async () => ({ ok: false, status: 503, text: async () => "" }),
+      fetchPage: async () => null,
     });
     assert.equal(payload.onAirConfirmed, null);
     assert.equal(payload.ok, true);
@@ -250,7 +250,7 @@ describe("radio status payload", () => {
     );
     const payload = await fetchRadioStatus({
       now: SUNDAY_1030,
-      fetchPage: async () => ({ ok: true, text: async () => html }),
+      fetchPage: async () => html,
     });
     assert.equal(payload.onAirConfirmed, true);
     assert.equal(payload.milyAppearanceConfirmed, null);
@@ -263,7 +263,7 @@ describe("radio status payload", () => {
     );
     const payload = await fetchRadioStatus({
       now: SUNDAY_1030,
-      fetchPage: async () => ({ ok: true, text: async () => html }),
+      fetchPage: async () => html,
     });
     assert.equal(payload.onAirConfirmed, false);
   });
@@ -276,7 +276,8 @@ describe("radio API safety", () => {
     assert.match(api, /milyAppearanceConfirmed: null/);
     assert.match(data, /milyAppearanceConfirmed: null/);
     assert.match(api, /Asia\/Tokyo/);
-    assert.match(api, /s-maxage=60,stale-while-revalidate=300/);
+    // リアルタイム表示に載るので短命キャッシュ（Codex #11）。
+    assert.match(api, /s-maxage=12,stale-while-revalidate=12/);
     assert.doesNotMatch(api, /milyAppearanceConfirmed:\s*true/);
     assert.doesNotMatch(data, /milyAppearanceConfirmed:\s*true/);
   });

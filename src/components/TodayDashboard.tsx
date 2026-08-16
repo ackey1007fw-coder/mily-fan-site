@@ -1,5 +1,7 @@
 import { contest } from "../data/contest";
 import { socials } from "../data/socials";
+import { dashboardDisplay, deriveBannerState } from "../lib/bannerState";
+import { useMilyRealtimeStatus } from "../lib/useMilyRealtimeStatus";
 import {
   formatSlotDate,
   slotStatus,
@@ -21,12 +23,26 @@ const snsLabel: Record<string, string> = {
  */
 export function TodayDashboard() {
   const { slots, roomUrl } = useStreamSchedule();
+  const { live, radio } = useMilyRealtimeStatus();
   const next = slots[0];
   const status = next ? slotStatus(next) : null;
 
+  // ActivityBanner が同じ配信をすでに出しているときは、ここでは繰り返さない
+  // （上下で同じ内容・CTA を重複させない）。判定は純粋関数に切り出してある。
+  const banner = deriveBannerState({ live, radio, slots });
+
   // SHOWROOM導線: APIの解決結果を最優先、なければ確認済みの静的リンク
   const showroomStatic = socials.find((item) => item.platform === "showroom");
-  const showroomUrl = roomUrl ?? showroomStatic?.url ?? null;
+  const showroomUrl = live.roomUrl ?? roomUrl ?? showroomStatic?.url ?? null;
+
+  const { showNextStream, nextStreamLabel, showShowroomCta } = dashboardDisplay({
+    banner,
+    hasNextSlot: Boolean(next),
+    bannerShowsSameSlot:
+      banner.slot?.date === next?.date && banner.slot?.time === next?.time,
+    nextSlotStatus: status,
+    showroomUrl,
+  });
   const snsLinks = SNS_PLATFORMS.map((platform) =>
     socials.find((item) => item.platform === platform),
   ).filter((item) => item !== undefined);
@@ -52,15 +68,15 @@ export function TodayDashboard() {
           ) : null}
         </div>
 
-        {next ? (
+        {next && showNextStream ? (
           <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-sage/15 pt-3">
-            <span className="text-sm text-ink-muted">次回配信</span>
+            <span className="text-sm text-ink-muted">{nextStreamLabel}</span>
             <span className="text-base font-bold text-ink">
               {formatSlotDate(next)} {next.time}〜
             </span>
-            {status === "live-window" ? (
+            {status === "past-start" ? (
               <span className="rounded-full bg-apricot-ink px-2 py-0.5 text-xs font-semibold text-white">
-                配信中の時間帯
+                開始時刻を過ぎています
               </span>
             ) : status === "today" ? (
               <span className="rounded-full bg-sage px-2 py-0.5 text-xs font-semibold text-white">
@@ -77,7 +93,7 @@ export function TodayDashboard() {
           >
             ENTRY 734を応援する
           </ExternalLink>
-          {showroomUrl ? (
+          {showroomUrl && showShowroomCta ? (
             <ExternalLink
               href={showroomUrl}
               className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"

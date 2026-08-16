@@ -1,4 +1,5 @@
 import { About } from "./components/About";
+import { ActivityBanner } from "./components/ActivityBanner";
 import { Footer } from "./components/Footer";
 import { Gallery } from "./components/Gallery";
 import { Header } from "./components/Header";
@@ -20,6 +21,7 @@ export default function App() {
       >
         本文へスキップ
       </a>
+      <ActivityBanner />
       <Header />
       <main id="main">
         <Hero />

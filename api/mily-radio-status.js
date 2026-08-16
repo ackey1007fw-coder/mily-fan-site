@@ -12,81 +12,29 @@
 // （false=別番組/NOT ON AIR を読めた、null=unavailable を区別する）。
 // どの段階で失敗しても 200 と安全な JSON を返し、サイトは壊さない。
 
-const PROGRAM_NAME = "湘南シーサイドサークル";
-const SCHEDULED_WEEKDAY = 0;
-const SCHEDULED_START = "10:00";
-const SCHEDULED_END = "13:00";
-const LISTEN_URL = "https://fm-smw.jp/radio";
-const NOW_ON_AIR_SOURCE_URL = "https://fm-smw.jp/";
-const TIMEZONE = "Asia/Tokyo";
-const FETCH_TIMEOUT_MS = 8000;
+import {
+  isBroadcastDay,
+  isInScheduledWindow,
+  nextStartAtIso,
+  programNameMatches,
+  radioProgram,
+  schedulePhase,
+  tokyoClock,
+} from "../shared/radio-program.js";
 
-const USER_AGENT =
-  "Mozilla/5.0 (compatible; MilyFanSite/1.0; +https://mily-fan-site.vercel.app)";
-
-const WEEKDAY_INDEX = {
-  Sun: 0,
-  Mon: 1,
-  Tue: 2,
-  Wed: 3,
-  Thu: 4,
-  Fri: 5,
-  Sat: 6,
+// 番組名・曜日・時刻・URL は shared/radio-program.js が単一 source of truth。
+// ここでは再定義しない。
+export {
+  isBroadcastDay,
+  isInScheduledWindow,
+  programNameMatches,
+  schedulePhase,
+  tokyoClock,
 };
 
-const tokyoClockFmt = new Intl.DateTimeFormat("en-US", {
-  timeZone: TIMEZONE,
-  weekday: "short",
-  hour: "2-digit",
-  minute: "2-digit",
-  hourCycle: "h23",
-});
-
-function partValue(parts, type) {
-  return parts.find((part) => part.type === type)?.value ?? "";
-}
-
-export function tokyoClock(now = Date.now()) {
-  const parts = tokyoClockFmt.formatToParts(new Date(now));
-  const weekday = WEEKDAY_INDEX[partValue(parts, "weekday")];
-  const hour = Number(partValue(parts, "hour"));
-  const minute = Number(partValue(parts, "minute"));
-  if (
-    weekday === undefined ||
-    !Number.isInteger(hour) ||
-    !Number.isInteger(minute)
-  ) {
-    throw new Error("failed to read Asia/Tokyo clock");
-  }
-  return { weekday, hour, minute };
-}
-
-function parseHm(value) {
-  const match = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(value);
-  if (!match) throw new Error(`invalid HH:mm: ${value}`);
-  return Number(match[1]) * 60 + Number(match[2]);
-}
-
-export function isBroadcastDay(now = Date.now()) {
-  return tokyoClock(now).weekday === SCHEDULED_WEEKDAY;
-}
-
-export function isInScheduledWindow(now = Date.now()) {
-  const clock = tokyoClock(now);
-  if (clock.weekday !== SCHEDULED_WEEKDAY) return false;
-  const current = clock.hour * 60 + clock.minute;
-  return current >= parseHm(SCHEDULED_START) && current < parseHm(SCHEDULED_END);
-}
-
-export function programNameMatches(raw) {
-  if (typeof raw !== "string") return false;
-  const compact = raw
-    .normalize("NFKC")
-    .replace(/[『』「」【】\[\]]/g, "")
-    .replace(/[#＃]\s*SSC\b/gi, "")
-    .replace(/\s+/g, "");
-  return compact === PROGRAM_NAME;
-}
+const FETCH_TIMEOUT_MS = 8000;
+const USER_AGENT =
+  "Mozilla/5.0 (compatible; MilyFanSite/1.0; +https://mily-fan-site.vercel.app)";
 
 function decodeEntities(text) {
   return text
@@ -149,9 +97,12 @@ export function parseNowOnAir(html) {
   const h4 = after.match(/<h4[^>]*>([\s\S]*?)<\/h4>/);
   const link = after.match(/<a[^>]*>([\s\S]*?)<\/a>/);
   const title = visibleText(h4?.[1] ?? link?.[1] ?? "");
-  if (!title || /現在放送中の番組はありません/.test(title)) {
+  // 「番組はありません」と明示されたときだけ not-on-air。
+  // タイトルが空 / 解析不能 / HTML 構造変更は unavailable（false と確定しない）。
+  if (/現在放送中の番組はありません/.test(title)) {
     return { status: "not-on-air", title: null };
   }
+  if (!title) return { status: "unavailable", title: null };
   return { status: "now-on-air", title };
 }
 
@@ -182,30 +133,38 @@ export function buildRadioStatus({
 
   return {
     ok: clockOk,
-    programName: PROGRAM_NAME,
+    programName: radioProgram.programName,
     todayScheduled: clockOk ? isBroadcastDay(now) : false,
-    scheduledStart: SCHEDULED_START,
-    scheduledEnd: SCHEDULED_END,
+    scheduledStart: radioProgram.scheduledStart,
+    scheduledEnd: radioProgram.scheduledEnd,
     inScheduledWindow: clockOk ? isInScheduledWindow(now) : false,
-    onAirConfirmed: onAirConfirmed === true || onAirConfirmed === false
-      ? onAirConfirmed
-      : null,
+    schedulePhase: clockOk ? schedulePhase(now) : "idle",
+    nextStartAt: clockOk ? nextStartAtIso(now) : null,
+    onAirConfirmed:
+      onAirConfirmed === true || onAirConfirmed === false ? onAirConfirmed : null,
     milyAppearanceConfirmed: null,
-    listenUrl: LISTEN_URL,
-    sourceUrl: NOW_ON_AIR_SOURCE_URL,
+    listenUrl: radioProgram.listenUrl,
+    sourceUrl: radioProgram.nowOnAirSourceUrl,
+    lastVerifiedAt: radioProgram.lastVerifiedAt,
     updatedAt: new Date(now).toISOString(),
   };
 }
 
-async function fetchWithTimeout(url, init = {}) {
+/**
+ * body の読み取り完了まで timeout を効かせる。
+ * headers 受信時点で timer を解除すると、本文が届かないまま無限に待てる。
+ */
+export async function fetchTextWithTimeout(url, init = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
   try {
-    return await fetch(url, {
+    const res = await fetch(url, {
       ...init,
       signal: controller.signal,
       headers: { "User-Agent": USER_AGENT, ...init.headers },
     });
+    if (!res.ok) return null;
+    return await res.text();
   } finally {
     clearTimeout(timer);
   }
@@ -213,15 +172,14 @@ async function fetchWithTimeout(url, init = {}) {
 
 export async function fetchRadioStatus({
   now = Date.now(),
-  fetchPage = fetchWithTimeout,
+  fetchPage = fetchTextWithTimeout,
 } = {}) {
   let onAirConfirmed = null;
   try {
-    const page = await fetchPage(NOW_ON_AIR_SOURCE_URL, {
+    const html = await fetchPage(radioProgram.nowOnAirSourceUrl, {
       headers: { Accept: "text/html" },
     });
-    if (page && page.ok) {
-      const html = await page.text();
+    if (typeof html === "string" && html.length > 0) {
       onAirConfirmed = resolveOnAirConfirmed(parseNowOnAir(html));
     }
   } catch {
@@ -233,8 +191,13 @@ export async function fetchRadioStatus({
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Cache-Control", "s-maxage=60,stale-while-revalidate=300");
+  // リアルタイムバナーから使うので短め
+  res.setHeader("Cache-Control", "s-maxage=12,stale-while-revalidate=12");
+  res.setHeader("Allow", "GET, OPTIONS");
   if (req.method === "OPTIONS") return res.status(200).end();
+  if (req.method !== "GET") {
+    return res.status(405).json({ ok: false, error: "method not allowed" });
+  }
   try {
     return res.status(200).json(await fetchRadioStatus());
   } catch {

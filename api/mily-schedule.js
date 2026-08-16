@@ -1,120 +1,27 @@
 // api/mily-schedule.js
 // 配信予定の自動取得（Vercel Serverless Function）。
 //
-// この関数は毎回 ENTRY 734 の公開ページを起点に自動解決する:
-//   1. https://2026.misscircle.jp/entry/734 を取得し、本人ページであることを
-//      検証（"734" と みりぃ / 三橋 / Mily の表記を確認）
-//   2. ページ内（動的ページの埋め込みJSON含む）から SHOWROOM リンクを抽出
-//      （/r/<key> 形式と room/profile?room_id=<数値> 形式の両対応）
-//   3. SHOWROOM API（status / profile）で room を照会し、ルーム名の
-//      人物整合性を検証してから採用（複数一致は曖昧として不採用）
-//   4. https://marquez.age.co.jp/schedule/<room_id>.json を取得・正規化
+// room 解決は server/mily-showroom.js に集約し、api/mily-live.js と共有する。
+// **room ID をコードに直書きしない・推測しない。**
+// AGE / Marquez の schedule JSON は「予定」専用で、ライブ判定には使わない
+// （実ライブ判定は /api/mily-live）。
 //
-// room ID をコードに直書きしない。環境変数は「自動解決が失敗したときの
-// 任意フォールバック」であり、必須の手入力値ではない:
-//   MILY_SCHEDULE_URL     … 確認済み schedule JSON の完全URL（明示上書き）
-//   MILY_SHOWROOM_ROOM_ID … 自動解決不能時のみ使われる room ID
-//
+// MILY_SCHEDULE_URL を設定した場合のみ、確認済み URL で明示上書きできる。
 // どの段階で失敗しても ok:false / slots:[] を返すだけでサイトは壊れない。
-// フロント側は手入力リスト（src/data/streamSchedule.ts）にフォールバックする。
+import { fetchWithTimeout, resolveMilyRoom } from "../server/mily-showroom.js";
 
-const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
-const SHOWROOM_STATUS_API =
-  "https://www.showroom-live.com/api/room/status?room_url_key=";
-const SHOWROOM_PROFILE_API =
-  "https://www.showroom-live.com/api/room/profile?room_id=";
+// 既存の import 元（scripts/probe-schedule.mjs, scripts/watch-public-sources.mjs,
+// 既存テスト）を壊さないための再エクスポート。
+export {
+  extractShowroomKeys,
+  extractShowroomRoomIds,
+  extractSnsLinks,
+  filterMilyLinks,
+  looksLikeEntryPage,
+  roomNameMatchesMily,
+} from "../server/mily-showroom.js";
+
 const AGE_SCHEDULE_BASE = "https://marquez.age.co.jp/schedule/";
-const FETCH_TIMEOUT_MS = 8000;
-const RESOLVE_TTL_MS = 6 * 60 * 60 * 1000;
-
-const USER_AGENT =
-  "Mozilla/5.0 (compatible; MilyFanSite/1.0; +https://mily-fan-site.vercel.app)";
-
-// 直近の解決結果（room ID など）をプロセス内で保持し、上流への負荷を抑える。
-let resolvedCache = null;
-
-async function fetchWithTimeout(url, init = {}) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
-  try {
-    return await fetch(url, {
-      ...init,
-      signal: controller.signal,
-      headers: { "User-Agent": USER_AGENT, ...init.headers },
-    });
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
-/** JSON 埋め込みの \/ エスケープも戻して URL を拾えるようにする。 */
-function unescapeJsonSlashes(html) {
-  return html.replaceAll("\\/", "/");
-}
-
-/** ENTRY 734 のページ本文が本人のものかを軽く検証する。 */
-export function looksLikeEntryPage(html) {
-  if (typeof html !== "string" || html.length === 0) return false;
-  if (!html.includes("734")) return false;
-  return /みりぃ|三橋|mily/i.test(html);
-}
-
-/** SHOWROOM の room_url_key 候補をページから抽出する。 */
-export function extractShowroomKeys(html) {
-  const text = unescapeJsonSlashes(String(html ?? ""));
-  const keys = new Set();
-  for (const match of text.matchAll(
-    /showroom-live\.com\/r\/([A-Za-z0-9_-]+)/g,
-  )) {
-    if (match[1] !== "room") keys.add(match[1]);
-  }
-  for (const match of text.matchAll(/room_url_key=([A-Za-z0-9_-]+)/g)) {
-    keys.add(match[1]);
-  }
-  return [...keys];
-}
-
-/**
- * SHOWROOM の数値 room_id 候補をページから抽出する。
- * ENTRY ページのリンクは room/profile?room_id=<数値> 形式（実ページで確認済み）。
- * ページには関連エントラントの room_id も含まれ得るため、ここでは候補を
- * 集めるだけにして、本人かどうかは SHOWROOM プロフィール API のルーム名で
- * 検証してから採用する。
- */
-export function extractShowroomRoomIds(html) {
-  const text = unescapeJsonSlashes(String(html ?? ""));
-  const ids = new Set();
-  for (const match of text.matchAll(/room_id=(\d{1,12})/g)) {
-    ids.add(Number(match[1]));
-  }
-  return [...ids];
-}
-
-/**
- * ページに掲載されている SNS リンクを抽出する（報告・確認用）。
- * ENTRY ページには他エントラントの SNS も並ぶため、レスポンスに載せるのは
- * mily 名義のリンクだけに絞る（他人のアカウントを配信しない）。
- */
-export function extractSnsLinks(html) {
-  const text = unescapeJsonSlashes(String(html ?? ""));
-  const found = new Set();
-  const re =
-    /https:\/\/(?:x\.com|twitter\.com|(?:www\.)?instagram\.com|(?:www\.)?tiktok\.com|(?:www\.)?showroom-live\.com)\/[A-Za-z0-9_@.\/?=&%-]+/g;
-  for (const match of text.matchAll(re)) {
-    found.add(match[0].replace(/[.,)]+$/, ""));
-  }
-  return [...found];
-}
-
-/** 本人（mily 名義）のリンクだけに絞る。 */
-export function filterMilyLinks(links) {
-  return (Array.isArray(links) ? links : []).filter((url) => /mily/i.test(url));
-}
-
-/** SHOWROOM ルーム名が本人のものかを検証する。 */
-export function roomNameMatchesMily(roomName) {
-  return typeof roomName === "string" && /みりぃ|三橋|mily/i.test(roomName);
-}
 
 export function normalizeSlot(item) {
   const date = item && typeof item.start_date === "string" ? item.start_date : null;
@@ -145,94 +52,13 @@ export function normalizeSchedule(data) {
     .slice(0, 12);
 }
 
-/** ENTRY 734 ページから room を自動解決する。失敗時は null。 */
-async function resolveFromEntryPage() {
-  if (resolvedCache && Date.now() - resolvedCache.at < RESOLVE_TTL_MS) {
-    return resolvedCache.value;
-  }
-
-  const page = await fetchWithTimeout(ENTRY_URL, {
-    headers: { Accept: "text/html" },
-  });
-  if (!page.ok) return null;
-  const html = await page.text();
-  if (!looksLikeEntryPage(html)) return null;
-
-  const sns = filterMilyLinks(extractSnsLinks(html));
-
-  // (a) /r/<key> 形式のリンクがあれば status API で解決
-  for (const key of extractShowroomKeys(html)) {
-    const statusRes = await fetchWithTimeout(
-      `${SHOWROOM_STATUS_API}${encodeURIComponent(key)}`,
-      { headers: { Accept: "application/json" } },
-    );
-    if (!statusRes.ok) continue;
-    const status = await statusRes.json().catch(() => null);
-    const roomId = Number(status?.room_id);
-    if (!Number.isInteger(roomId) || roomId <= 0) continue;
-    if (!roomNameMatchesMily(status?.room_name)) continue;
-
-    const value = {
-      roomUrlKey: key,
-      roomUrl: `https://www.showroom-live.com/r/${key}`,
-      roomId,
-      roomName: status.room_name,
-      sns,
-    };
-    resolvedCache = { at: Date.now(), value };
-    return value;
-  }
-
-  // (b) room/profile?room_id=<数値> 形式（ENTRY ページの実形式）。
-  //     ページには関連エントラントの room_id も含まれ得るため、
-  //     プロフィール API のルーム名が本人のものだけを採用し、
-  //     複数一致した場合は曖昧として不採用にする（推測しない）。
-  const matches = [];
-  for (const candidateId of extractShowroomRoomIds(html).slice(0, 10)) {
-    const profileRes = await fetchWithTimeout(
-      `${SHOWROOM_PROFILE_API}${candidateId}`,
-      { headers: { Accept: "application/json" } },
-    );
-    if (!profileRes.ok) continue;
-    const roomProfile = await profileRes.json().catch(() => null);
-    if (!roomNameMatchesMily(roomProfile?.room_name)) continue;
-    matches.push({
-      roomId: candidateId,
-      roomName: roomProfile.room_name,
-      roomUrlKey:
-        typeof roomProfile.room_url_key === "string"
-          ? roomProfile.room_url_key
-          : null,
-    });
-  }
-
-  if (matches.length === 1) {
-    const match = matches[0];
-    const value = {
-      roomUrlKey: match.roomUrlKey,
-      roomUrl: match.roomUrlKey
-        ? `https://www.showroom-live.com/r/${match.roomUrlKey}`
-        : `https://www.showroom-live.com/room/profile?room_id=${match.roomId}`,
-      roomId: match.roomId,
-      roomName: match.roomName,
-      sns,
-    };
-    resolvedCache = { at: Date.now(), value };
-    return value;
-  }
-
-  // SNS だけでも報告できるよう、room 不明でも sns は返す
-  const value = { roomUrlKey: null, roomUrl: null, roomId: null, roomName: null, sns };
-  resolvedCache = { at: Date.now(), value };
-  return value;
-}
-
 async function fetchSlots(scheduleUrl) {
-  const r = await fetchWithTimeout(scheduleUrl, {
+  // body 読了まで timeout の対象（fetchWithTimeout が読み切って返す）
+  const data = await fetchWithTimeout(scheduleUrl, {
+    as: "json",
     headers: { Accept: "application/json" },
   });
-  if (!r.ok) return { ok: false, reason: `HTTP ${r.status}`, slots: [] };
-  const data = await r.json().catch(() => null);
+  if (data === null) return { ok: false, reason: "fetch failed", slots: [] };
   return { ok: true, slots: normalizeSchedule(data) };
 }
 
@@ -252,25 +78,16 @@ export async function resolveAndFetchSchedule(env = process.env) {
       };
     }
 
-    // 自動解決（ENTRY 734 ページ起点）
+    // 本人確認済みの room 解決（env fallback の本人確認も共有モジュール側で行う）
     let resolved = null;
     try {
-      resolved = await resolveFromEntryPage();
+      resolved = await resolveMilyRoom(env);
     } catch {
       resolved = null;
     }
 
-    let roomId = resolved?.roomId ?? null;
-    let mode = "entry-page";
-
-    // 自動解決不能時のみ optional fallback を使う
-    if (!roomId) {
-      const fallbackId = env.MILY_SHOWROOM_ROOM_ID;
-      if (fallbackId && /^\d+$/.test(fallbackId)) {
-        roomId = Number(fallbackId);
-        mode = "env-fallback";
-      }
-    }
+    const roomId = resolved?.roomId ?? null;
+    const mode = resolved?.source ?? "unresolved";
 
     if (!roomId) {
       return {
