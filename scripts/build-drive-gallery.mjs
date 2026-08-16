@@ -154,11 +154,147 @@ async function ffprobeExe() {
   return resolved.path ?? resolved;
 }
 
+
+/* ------------------------------------------------------------------ *
+ * Derivative contract
+ *
+ * The same two validators run in both directions: right after a fresh
+ * sanitize, and again before an already-built derivative set is reused on an
+ * incremental run. A file that was sanitized once is never trusted on that
+ * basis alone — if it is swapped out later, the reuse path rejects it exactly
+ * as the first pass would have.
+ * ------------------------------------------------------------------ */
+
+/**
+ * Validate a complete photo derivative set and read its real dimensions.
+ * @returns {Promise<{width: number, height: number}>}
+ */
+export async function validatePhotoDerivatives(entry, outputDir) {
+  const slug = outputSlug(entry.id);
+  const measured = new Map();
+
+  for (const width of PHOTO_WIDTHS) {
+    for (const format of ["jpg", "webp"]) {
+      const name = `${slug}-${width}.${format}`;
+      const file = path.join(outputDir, name);
+      if (!(await exists(file))) {
+        throw new Error(`${entry.id}: missing derivative ${name}`);
+      }
+
+      let meta;
+      try {
+        meta = await sharp(file).metadata();
+      } catch (error) {
+        throw new Error(`${entry.id}: ${name} does not decode (${error.message})`);
+      }
+      if (!meta.width || !meta.height) {
+        throw new Error(`${entry.id}: ${name} has no readable dimensions`);
+      }
+      if (meta.exif || meta.iptc || meta.xmp) {
+        throw new Error(`${entry.id}: ${name} carries EXIF/IPTC/XMP metadata`);
+      }
+      if (meta.width > width) {
+        throw new Error(
+          `${entry.id}: ${name} is ${meta.width}px wide, wider than its ${width}px slot`,
+        );
+      }
+      measured.set(name, { width: meta.width, height: meta.height });
+    }
+  }
+
+  // withoutEnlargement means every derivative is min(slot, original). Anything
+  // else is an upscaled or mismatched file that did not come from this pipeline.
+  const cap = Math.max(...[...measured.values()].map((m) => m.width));
+  for (const width of PHOTO_WIDTHS) {
+    const expected = Math.min(width, cap);
+    for (const format of ["jpg", "webp"]) {
+      const name = `${slug}-${width}.${format}`;
+      const actual = measured.get(name);
+      if (actual.width !== expected) {
+        throw new Error(
+          `${entry.id}: ${name} is ${actual.width}px wide, expected ${expected}px ` +
+            "(upscaled or inconsistent derivative)",
+        );
+      }
+    }
+    const jpg = measured.get(`${slug}-${width}.jpg`);
+    const webp = measured.get(`${slug}-${width}.webp`);
+    if (jpg.width !== webp.width || jpg.height !== webp.height) {
+      throw new Error(`${entry.id}: jpg and webp disagree at ${width}px`);
+    }
+  }
+
+  const largestName = `${slug}-${PHOTO_WIDTHS[PHOTO_WIDTHS.length - 1]}.jpg`;
+  return measured.get(largestName);
+}
+
+/**
+ * Validate a complete video derivative set and read its real dimensions.
+ * @returns {Promise<{width: number, height: number}>}
+ */
+export async function validateVideoDerivatives(entry, outputDir) {
+  const slug = outputSlug(entry.id);
+  const mp4 = path.join(outputDir, `${slug}.mp4`);
+  const poster = path.join(outputDir, `${slug}-poster.jpg`);
+
+  for (const [name, file] of [[`${slug}.mp4`, mp4], [`${slug}-poster.jpg`, poster]]) {
+    if (!(await exists(file))) {
+      throw new Error(`${entry.id}: missing derivative ${name}`);
+    }
+  }
+
+  const ffprobe = await ffprobeExe();
+  let info;
+  try {
+    const { stdout } = await run(ffprobe, [
+      "-hide_banner", "-loglevel", "error",
+      "-show_format", "-show_streams", "-print_format", "json", mp4,
+    ]);
+    info = JSON.parse(stdout);
+  } catch (error) {
+    throw new Error(`${entry.id}: ${slug}.mp4 does not probe (${error.message})`);
+  }
+
+  const video = info.streams?.find((s) => s.codec_type === "video");
+  const audio = info.streams?.find((s) => s.codec_type === "audio");
+  if (!video) throw new Error(`${entry.id}: no video stream in ${slug}.mp4`);
+  if (video.codec_name !== "h264") {
+    throw new Error(`${entry.id}: ${slug}.mp4 is ${video.codec_name}, not H.264`);
+  }
+  if (audio && audio.codec_name !== "aac") {
+    throw new Error(`${entry.id}: ${slug}.mp4 audio is ${audio.codec_name}, not AAC`);
+  }
+  const stray = leftoverTags(info.format?.tags);
+  if (stray.length > 0) {
+    throw new Error(`${entry.id}: ${slug}.mp4 carries metadata ${stray.join(", ")}`);
+  }
+  if (!video.width || video.width > VIDEO_MAX_WIDTH) {
+    throw new Error(
+      `${entry.id}: ${slug}.mp4 is ${video.width}px wide, over the ${VIDEO_MAX_WIDTH}px cap`,
+    );
+  }
+  if (!(await isFaststart(mp4))) {
+    throw new Error(`${entry.id}: ${slug}.mp4 is not faststart (moov after mdat)`);
+  }
+
+  let posterMeta;
+  try {
+    posterMeta = await sharp(poster).metadata();
+  } catch (error) {
+    throw new Error(`${entry.id}: poster does not decode (${error.message})`);
+  }
+  if (!posterMeta.width) throw new Error(`${entry.id}: poster has no readable dimensions`);
+  if (posterMeta.exif || posterMeta.iptc || posterMeta.xmp) {
+    throw new Error(`${entry.id}: poster carries EXIF/IPTC/XMP metadata`);
+  }
+
+  return { width: video.width, height: video.height };
+}
+
 /** Sharp drops EXIF / GPS / IPTC / XMP unless withMetadata() is called.
- *  This never calls it, and verifies the result. */
+ *  This never calls it, and validates the result against the shared contract. */
 export async function sanitizePhoto(entry, bytes, outputDir) {
   const slug = outputSlug(entry.id);
-  let largest = null;
 
   for (const width of PHOTO_WIDTHS) {
     for (const format of ["jpg", "webp"]) {
@@ -170,21 +306,12 @@ export async function sanitizePhoto(entry, bytes, outputDir) {
         format === "jpg"
           ? pipeline.jpeg({ quality: 82, mozjpeg: true })
           : pipeline.webp({ quality: 80 });
-      const info = await encoded.toFile(out);
-      if (format === "jpg" && (!largest || info.width > largest.width)) {
-        largest = { width: info.width, height: info.height };
-      }
+      await encoded.toFile(out);
     }
   }
 
-  for (const name of photoDerivatives(slug)) {
-    const meta = await sharp(path.join(outputDir, name)).metadata();
-    if (meta.exif || meta.iptc || meta.xmp) {
-      throw new Error(`${entry.id}: metadata survived sanitize in ${name}`);
-    }
-  }
-
-  return photoManifestEntry(entry, largest.width, largest.height);
+  const { width, height } = await validatePhotoDerivatives(entry, outputDir);
+  return photoManifestEntry(entry, width, height);
 }
 
 export async function sanitizeVideo(entry, inputPath, outputDir) {
@@ -192,7 +319,6 @@ export async function sanitizeVideo(entry, inputPath, outputDir) {
   const mp4 = path.join(outputDir, `${slug}.mp4`);
   const poster = path.join(outputDir, `${slug}-poster.jpg`);
   const ffmpeg = await ffmpegExe();
-  const ffprobe = await ffprobeExe();
 
   await run(
     ffmpeg,
@@ -219,25 +345,8 @@ export async function sanitizeVideo(entry, inputPath, outputDir) {
     "-i", mp4, "-frames:v", "1", "-q:v", "4", poster,
   ]);
 
-  const { stdout } = await run(ffprobe, [
-    "-hide_banner", "-loglevel", "error",
-    "-show_format", "-show_streams", "-print_format", "json", mp4,
-  ]);
-  const info = JSON.parse(stdout);
-  const video = info.streams.find((s) => s.codec_type === "video");
-  const audio = info.streams.find((s) => s.codec_type === "audio");
-  if (!video) throw new Error(`${entry.id}: no video stream in output`);
-  if (video.codec_name !== "h264") throw new Error(`${entry.id}: output is not H.264`);
-  if (audio && audio.codec_name !== "aac") throw new Error(`${entry.id}: audio is not AAC`);
-  if (leftoverTags(info.format.tags).length > 0) {
-    throw new Error(`${entry.id}: container metadata survived sanitize`);
-  }
-  const posterMeta = await sharp(poster).metadata();
-  if (posterMeta.exif || posterMeta.iptc || posterMeta.xmp) {
-    throw new Error(`${entry.id}: poster carries metadata`);
-  }
-
-  return videoManifestEntry(entry, video.width, video.height);
+  const { width, height } = await validateVideoDerivatives(entry, outputDir);
+  return videoManifestEntry(entry, width, height);
 }
 
 /** True when the MP4 moov atom precedes mdat, i.e. it can start streaming.
@@ -396,22 +505,15 @@ async function main() {
   console.log(`drive-gallery:build — wrote ${items.length} manifest entries.`);
 }
 
-async function manifestFromExisting(entry, outputDir) {
-  const slug = outputSlug(entry.id);
+/** Reuse an already-built derivative set — but only after it passes the same
+ *  contract a freshly sanitized set must pass. Being on disk is not evidence. */
+export async function manifestFromExisting(entry, outputDir) {
   if (entry.kind === "photo") {
-    const meta = await sharp(
-      path.join(outputDir, `${slug}-${PHOTO_WIDTHS[PHOTO_WIDTHS.length - 1]}.jpg`),
-    ).metadata();
-    return photoManifestEntry(entry, meta.width, meta.height);
+    const { width, height } = await validatePhotoDerivatives(entry, outputDir);
+    return photoManifestEntry(entry, width, height);
   }
-  const ffprobe = await ffprobeExe();
-  const { stdout } = await run(ffprobe, [
-    "-hide_banner", "-loglevel", "error",
-    "-show_streams", "-print_format", "json",
-    path.join(outputDir, `${slug}.mp4`),
-  ]);
-  const video = JSON.parse(stdout).streams.find((s) => s.codec_type === "video");
-  return videoManifestEntry(entry, video.width, video.height);
+  const { width, height } = await validateVideoDerivatives(entry, outputDir);
+  return videoManifestEntry(entry, width, height);
 }
 
 export async function exists(filePath) {

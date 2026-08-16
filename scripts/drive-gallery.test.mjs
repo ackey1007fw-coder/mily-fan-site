@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile, readdir, mkdtemp, writeFile, rm, stat } from "node:fs/promises";
+import { readFile, readdir, mkdir, mkdtemp, writeFile, rm, stat } from "node:fs/promises";
 import { describe, it, before, after } from "node:test";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
@@ -31,13 +31,17 @@ import {
   SOURCE_MAP_NAME,
   classifyOutputs,
   derivativesFor,
+  VIDEO_MAX_WIDTH,
   isFaststart,
   leftoverTags,
+  manifestFromExisting,
   photoDerivatives,
   photoManifestEntry,
   resolveInputName,
   sanitizePhoto,
   sanitizeVideo,
+  validatePhotoDerivatives,
+  validateVideoDerivatives,
   videoManifestEntry,
 } from "./build-drive-gallery.mjs";
 
@@ -559,6 +563,235 @@ describe("Sanitize pipeline (local fixtures)", () => {
     const broken = path.join(dir, "broken.mp4");
     await writeFile(broken, "not a video");
     await assert.rejects(() => sanitizeVideo(entry, broken, dir));
+  });
+});
+
+describe("Existing derivatives are re-validated before reuse", () => {
+  let dir;
+  let ffmpeg;
+  let ffprobe;
+
+  /** Build a clean, contract-passing photo set for `id` in its own directory. */
+  async function buildPhotoSet(id, { width = 2000, height = 1500 } = {}) {
+    const out = path.join(dir, id);
+    await mkdir(out, { recursive: true });
+    const bytes = await sharp({
+      create: { width, height, channels: 3, background: "#4a6" },
+    })
+      .jpeg()
+      .toBuffer();
+    await sanitizePhoto({ id, kind: "photo", alt: id }, bytes, out);
+    return out;
+  }
+
+  /** Build a clean, contract-passing video set for `id` in its own directory. */
+  async function buildVideoSet(id) {
+    const out = path.join(dir, id);
+    await mkdir(out, { recursive: true });
+    const source = path.join(out, "source-input.mp4");
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-f", "lavfi", "-i", "testsrc=size=360x640:rate=15:duration=1",
+      "-f", "lavfi", "-i", "sine=frequency=440:duration=1",
+      "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac",
+      source,
+    ]);
+    await sanitizeVideo({ id, kind: "video", alt: id }, source, out);
+    await rm(source, { force: true });
+    return out;
+  }
+
+  before(async () => {
+    dir = await mkdtemp(path.join(tmpdir(), "drive-reuse-"));
+    const ffmpegMod = await import("ffmpeg-static");
+    ffmpeg = ffmpegMod.default ?? ffmpegMod;
+    const ffprobeMod = await import("ffprobe-static");
+    const resolved = ffprobeMod.default ?? ffprobeMod;
+    ffprobe = resolved.path ?? resolved;
+  });
+
+  after(async () => {
+    await rm(dir, { recursive: true, force: true });
+  });
+
+  it("reuses a clean existing photo set and reads its real dimensions", async () => {
+    const id = "reuse-photo-ok";
+    const out = await buildPhotoSet(id, { width: 2000, height: 1500 });
+    const entry = { id, kind: "photo", alt: "reuse" };
+
+    // The whole set is present, so the ingest would classify it as "skip".
+    const names = new Set(await readdir(out));
+    assert.equal(classifyOutputs(entry, names), "skip");
+
+    const item = await manifestFromExisting(entry, out);
+    assert.equal(item.width, 1600);
+    assert.equal(item.height, 1200);
+    assert.equal(item.src, `${PUBLIC_PREFIX}/${id}-960.jpg`);
+  });
+
+  it("rejects a complete photo set when one derivative regained metadata", async () => {
+    const id = "reuse-photo-exif";
+    const out = await buildPhotoSet(id);
+    const entry = { id, kind: "photo", alt: "reuse" };
+    assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "skip");
+
+    // Swap the 960 jpg for a visually similar file that carries EXIF/GPS.
+    const swapped = await sharp({
+      create: { width: 960, height: 720, channels: 3, background: "#4a6" },
+    })
+      .withExifMerge({
+        IFD0: { ImageDescription: "SWAPPED-IN" },
+        GPS: { GPSLatitudeRef: "N" },
+      })
+      .withMetadata()
+      .jpeg()
+      .toBuffer();
+    await writeFile(path.join(out, `${id}-960.jpg`), swapped);
+
+    await assert.rejects(
+      () => validatePhotoDerivatives(entry, out),
+      /carries EXIF\/IPTC\/XMP metadata/,
+    );
+    await assert.rejects(() => manifestFromExisting(entry, out));
+  });
+
+  it("rejects a photo derivative that was upscaled past its slot", async () => {
+    const id = "reuse-photo-upscaled";
+    const out = await buildPhotoSet(id, { width: 800, height: 600 });
+    const entry = { id, kind: "photo", alt: "reuse" };
+
+    // The original was 800px, so every slot should cap at 800. Drop in a
+    // genuinely larger 1600 derivative: an upscale that must not be trusted.
+    const upscaled = await sharp({
+      create: { width: 1600, height: 1200, channels: 3, background: "#4a6" },
+    })
+      .jpeg()
+      .toBuffer();
+    await writeFile(path.join(out, `${id}-1600.jpg`), upscaled);
+
+    await assert.rejects(
+      () => validatePhotoDerivatives(entry, out),
+      /upscaled or inconsistent derivative/,
+    );
+  });
+
+  it("rejects a photo set with a corrupt or missing derivative", async () => {
+    const id = "reuse-photo-corrupt";
+    const out = await buildPhotoSet(id);
+    const entry = { id, kind: "photo", alt: "reuse" };
+
+    await writeFile(path.join(out, `${id}-480.webp`), "not an image");
+    await assert.rejects(() => validatePhotoDerivatives(entry, out), /does not decode/);
+
+    await rm(path.join(out, `${id}-480.webp`));
+    await assert.rejects(() => validatePhotoDerivatives(entry, out), /missing derivative/);
+  });
+
+  it("reuses a clean existing video set and reads its real dimensions", async () => {
+    const id = "reuse-video-ok";
+    const out = await buildVideoSet(id);
+    const entry = { id, kind: "video", alt: "reuse" };
+    assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "skip");
+
+    const item = await manifestFromExisting(entry, out);
+    assert.equal(item.width, 360);
+    assert.equal(item.height, 640);
+    assert.ok(item.width <= VIDEO_MAX_WIDTH);
+    assert.equal(item.poster, `${PUBLIC_PREFIX}/${id}-poster.jpg`);
+  });
+
+  it("rejects an existing MP4 that carries disallowed container metadata", async () => {
+    const id = "reuse-video-metadata";
+    const out = await buildVideoSet(id);
+    const entry = { id, kind: "video", alt: "reuse" };
+    assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "skip");
+
+    // Re-mux the sanitized MP4 with a geotag, as a careless swap would.
+    const tagged = path.join(dir, `${id}-tagged.mp4`);
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-i", path.join(out, `${id}.mp4`),
+      "-c", "copy",
+      "-metadata", "location=+35.6+139.7",
+      "-movflags", "+faststart",
+      tagged,
+    ]);
+    await writeFile(path.join(out, `${id}.mp4`), await readFile(tagged));
+
+    await assert.rejects(() => validateVideoDerivatives(entry, out), /carries metadata/);
+    await assert.rejects(() => manifestFromExisting(entry, out));
+  });
+
+  it("rejects an existing MP4 that is not faststart", async () => {
+    const id = "reuse-video-faststart";
+    const out = await buildVideoSet(id);
+    const entry = { id, kind: "video", alt: "reuse" };
+
+    // Same streams, but moov written at the end.
+    const slow = path.join(dir, `${id}-slow.mp4`);
+    await run(ffmpeg, [
+      "-hide_banner", "-loglevel", "error", "-y",
+      "-i", path.join(out, `${id}.mp4`),
+      "-c", "copy",
+      "-movflags", "-faststart",
+      slow,
+    ]);
+    assert.equal(await isFaststart(slow), false, "fixture must not be faststart");
+    await writeFile(path.join(out, `${id}.mp4`), await readFile(slow));
+
+    await assert.rejects(() => validateVideoDerivatives(entry, out), /not faststart/);
+  });
+
+  it("rejects an existing video set whose poster is broken", async () => {
+    const id = "reuse-video-poster";
+    const out = await buildVideoSet(id);
+    const entry = { id, kind: "video", alt: "reuse" };
+
+    await writeFile(path.join(out, `${id}-poster.jpg`), "not an image");
+    await assert.rejects(() => validateVideoDerivatives(entry, out), /poster does not decode/);
+
+    await rm(path.join(out, `${id}-poster.jpg`));
+    await assert.rejects(() => validateVideoDerivatives(entry, out), /missing derivative/);
+  });
+
+  it("rejects an existing poster that carries metadata", async () => {
+    const id = "reuse-video-poster-exif";
+    const out = await buildVideoSet(id);
+    const entry = { id, kind: "video", alt: "reuse" };
+
+    const tainted = await sharp({
+      create: { width: 360, height: 640, channels: 3, background: "#222" },
+    })
+      .withExifMerge({ IFD0: { ImageDescription: "SWAPPED-IN" } })
+      .withMetadata()
+      .jpeg()
+      .toBuffer();
+    await writeFile(path.join(out, `${id}-poster.jpg`), tainted);
+
+    await assert.rejects(
+      () => validateVideoDerivatives(entry, out),
+      /poster carries EXIF\/IPTC\/XMP metadata/,
+    );
+  });
+
+  it("still treats a half-written output set as partial, never as reusable", async () => {
+    const id = "reuse-partial";
+    const out = await buildVideoSet(id);
+    const entry = { id, kind: "video", alt: "reuse" };
+
+    await rm(path.join(out, `${id}-poster.jpg`));
+    assert.equal(classifyOutputs(entry, new Set(await readdir(out))), "partial");
+  });
+
+  it("runs the same contract after a fresh sanitize and on reuse", async () => {
+    // A freshly sanitized set must satisfy exactly what the reuse path checks.
+    const id = "reuse-same-contract";
+    const out = await buildPhotoSet(id);
+    const entry = { id, kind: "photo", alt: "reuse" };
+    const fresh = await validatePhotoDerivatives(entry, out);
+    const reused = await manifestFromExisting(entry, out);
+    assert.equal(reused.width, fresh.width);
+    assert.equal(reused.height, fresh.height);
   });
 });
 

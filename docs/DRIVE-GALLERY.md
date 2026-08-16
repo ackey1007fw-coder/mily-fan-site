@@ -134,6 +134,38 @@ publish commit の手順:
 派生ファイルは `public/media/gallery` と同じくコミットします。deploy を再現可能にし、
 Vercel 側に ffmpeg も原本も不要にするためで、`pnpm build` は取り込みを行いません。
 
+### 既存派生の再検証（増分運用）
+
+派生ファイルが既に揃っているエントリは再生成せず再利用しますが、
+**「一度 sanitize した」ことを信頼の根拠にしません。**
+
+`validatePhotoDerivatives()` / `validateVideoDerivatives()` を
+**初回 sanitize 直後と既存派生の再利用時の両方**で通します。安全ルールを
+二重実装せず、乖離しないようにするためです。
+
+写真（480 / 960 / 1600 の jpg・webp 計 6 ファイル）:
+
+- 全ファイルが存在する
+- sharp で正常に decode できる
+- EXIF / IPTC / XMP が無い
+- 幅が各要求サイズを超えない
+- 各派生の実幅が `min(要求幅, 原本幅)` と一致する（**アップスケールされた派生を許可しない**）
+- 同じ幅の jpg と webp の寸法が一致する
+- manifest の寸法は**実ファイルから**取得する
+
+動画（mp4 + poster jpg）:
+
+- 両ファイルが存在する
+- ffprobe が成功する
+- video codec が h264
+- audio があれば codec が aac
+- `leftoverTags()` が空（container metadata の残存なし）
+- faststart（moov が mdat より前）
+- 幅が `VIDEO_MAX_WIDTH` 以下
+- poster が sharp で decode でき、EXIF / IPTC / XMP を持たない
+
+1 つでも満たさなければ **fail closed**。manifest には載せません。
+
 ### fail closed
 
 取り込みは次のいずれかで停止し、非ゼロ終了します。
@@ -143,7 +175,7 @@ Vercel 側に ffmpeg も原本も不要にするためで、`pnpm build` は取�
 - 同じ slug に複数の入力が一致する
 - 画像・動画として読めない
 - 派生ファイルが一部しか揃っていない（partial）
-- sanitize 後に metadata が残っている
+- sanitize 後、**または既存派生の再利用時**に上記の契約を満たさない
 
 ## alt / タイトルの方針
 
@@ -235,6 +267,17 @@ fallback も廃止しています（原本へ到達させないため）。
 - `+faststart`（moov が mdat より前）
 - poster が実フレームであること
 - 読めない入力で fail closed すること
+
+既存派生の再利用についても実行テストがあります。
+
+- 正常な既存派生 → 再利用に成功し、寸法を実ファイルから読む
+- 1 ファイルだけ EXIF 付きへ差し替え → failure
+- 要求幅を超える（アップスケールされた）派生 → failure
+- 壊れた・欠けた派生 → failure
+- 不許可 metadata 付き MP4 → failure
+- faststart でない MP4 → failure
+- 壊れた poster / metadata 付き poster → failure
+- partial 出力 → 従来どおり failure
 
 ## プライバシー / Drive についての注意
 
