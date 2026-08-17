@@ -29,6 +29,10 @@ export function profileUrl(): string {
   return `${siteOrigin()}/profile/`;
 }
 
+export function storyUrl(slug: string): string {
+  return `${siteOrigin()}/stories/${slug}/`;
+}
+
 export function ogImageUrl(): string {
   const imagePath = site.ogImagePath.startsWith("/")
     ? site.ogImagePath
@@ -52,6 +56,11 @@ export function sitemapXml(): string {
     <loc>${profileUrl()}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${storyUrl("second-round-2026")}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
 `;

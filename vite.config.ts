@@ -1,6 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { canonicalUrl, ogImageUrl, profileUrl } from "./src/data/site";
+import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 
 function siteMetadataPlugin(): Plugin {
   return {
@@ -9,6 +9,10 @@ function siteMetadataPlugin(): Plugin {
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
         .replaceAll("__PROFILE_CANONICAL__", profileUrl())
+        .replaceAll(
+          "__STORY_SECOND_ROUND_CANONICAL__",
+          storyUrl("second-round-2026"),
+        )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -24,6 +28,7 @@ export default defineConfig({
       input: {
         home: "index.html",
         profile: "profile/index.html",
+        storySecondRound: "stories/second-round-2026/index.html",
       },
       output: {
         manualChunks: {

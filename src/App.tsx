@@ -9,6 +9,7 @@ import { MobileActionDock } from "./components/MobileActionDock";
 import { Schedule } from "./components/Schedule";
 import { Socials } from "./components/Socials";
 import { StreamSchedule } from "./components/StreamSchedule";
+import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
 import { TodayDashboard } from "./components/TodayDashboard";
 
@@ -30,6 +31,7 @@ export default function App() {
         <StreamSchedule />
         <Socials />
         <Latest />
+        <Stories />
         <About />
         <Gallery />
         <Schedule />
