@@ -298,6 +298,20 @@ describe("content verification invariants", () => {
     assert.ok(errors.some((error) => error.includes("this site is official")));
   });
 
+  it("accepts a non-link source label for an ephemeral post", () => {
+    const errors = verifyNews([
+      {
+        id: "ephemeral-story",
+        date: "2026-08-17",
+        title: "一時的な投稿",
+        body: "公開permalinkがない投稿。",
+        sourceLabel: "Instagram Story",
+      },
+    ]);
+
+    assert.deepEqual(errors, []);
+  });
+
   it("allows truthful references to external official sources", () => {
     const errors = verifyNews([
       {

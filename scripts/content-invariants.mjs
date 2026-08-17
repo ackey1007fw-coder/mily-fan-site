@@ -132,8 +132,36 @@ export function verifyNews(items) {
     if (!isValidDateOnly(item.date ?? "")) {
       errors.push(`news "${item.id ?? "?"}" date must be a real YYYY-MM-DD`);
     }
-    assertConfirmedUrl(item.source, "news", item.id ?? "?", errors);
+    if (item.source) {
+      assertConfirmedUrl(item.source, "news", item.id ?? "?", errors);
+    } else if (!item.sourceLabel?.trim()) {
+      errors.push(
+        `news "${item.id ?? "?"}" needs a confirmed http(s) URL or non-link sourceLabel`,
+      );
+    }
     if (item.url) assertConfirmedUrl(item.url, "news", item.id ?? "?", errors);
+    if (item.ctaLabel && !item.url && !item.source) {
+      errors.push(`news "${item.id ?? "?"}" ctaLabel needs a link target`);
+    }
+    if (item.message && !item.message.text?.trim()) {
+      errors.push(`news "${item.id ?? "?"}" message needs text`);
+    }
+    if (item.media) {
+      if (item.media.kind !== "video") {
+        errors.push(`news "${item.id ?? "?"}" has an unsupported media kind`);
+      }
+      for (const key of ["src", "poster"]) {
+        if (!item.media[key]?.startsWith("/media/")) {
+          errors.push(`news "${item.id ?? "?"}" media ${key} must be a local /media/ path`);
+        }
+      }
+      if (!item.media.alt?.trim()) {
+        errors.push(`news "${item.id ?? "?"}" media needs alt text`);
+      }
+      if (!Number.isInteger(item.media.width) || !Number.isInteger(item.media.height)) {
+        errors.push(`news "${item.id ?? "?"}" media needs intrinsic width/height`);
+      }
+    }
     assertNoPersonMixup(item, "news", errors);
     assertNoOfficialClaim(item, "news", errors);
   }
