@@ -1,4 +1,9 @@
-import { driveGallerySections, visibleDriveGallery } from "../data/driveGallery";
+import {
+  driveGallerySections,
+  driveVideoView,
+  visibleDriveGallery,
+} from "../data/driveGallery";
+import { visibleGalleryVideos } from "../data/galleryVideos";
 import { defaultSrc, media, srcSetFor, visibleMedia } from "../data/media";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
@@ -8,7 +13,11 @@ const SIZES = "(min-width: 640px) 350px, 100vw";
 export function Gallery() {
   const items = visibleMedia(media);
   const drive = driveGallerySections(visibleDriveGallery());
-  const hasAny = items.length > 0 || drive.hasAny;
+  const videos = [
+    ...visibleGalleryVideos().map(driveVideoView),
+    ...drive.videos,
+  ];
+  const hasAny = items.length > 0 || drive.photos.length > 0 || videos.length > 0;
 
   return (
     <section id="gallery" className="scroll-mt-24 px-4 py-10">
@@ -124,14 +133,14 @@ export function Gallery() {
           </div>
         ) : null}
 
-        {drive.videos.length > 0 ? (
+        {videos.length > 0 ? (
           <div className="mt-10">
             <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
             <p className="mt-1 text-sm text-ink-muted">
-              お預かりした動画、全{drive.videos.length}本（同一動画の重複1本を除く）。
+              お預かりした動画、全{videos.length}本。
             </p>
             <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
-              {drive.videos.map((video) => (
+              {videos.map((video) => (
                 <li
                   key={video.key}
                   className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card"

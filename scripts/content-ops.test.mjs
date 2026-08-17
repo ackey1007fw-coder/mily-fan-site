@@ -38,6 +38,11 @@ describe("daily content-ops guide", () => {
     assert.match(ops, /SHOWROOM/);
     assert.match(ops, /FM湘南マジックウェイブ/);
     assert.match(ops, /非公式/);
+    assert.match(ops, /公開permalinkがない一時的なInstagram Story/);
+    assert.match(ops, /sourceLabel: "Instagram Story"/);
+    assert.match(ops, /LatestとGallery/);
+    assert.match(mediaGuide, /一時的なInstagram Story動画/);
+    assert.match(mediaGuide, /MP4 1本とposter 1枚/);
 
     assert.match(ops, /id: "2026-08-20-showroom-thanks"/);
     assert.match(ops, /id: "2026-09-01-ssc-public"/);

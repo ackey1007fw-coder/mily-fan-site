@@ -15,7 +15,7 @@ Google Drive 原本 → 選定 → このディレクトリ → pnpm media:build
 ## 置いてよいもの
 
 - オーナーが Drive 原本から選んだ、無改変の jpg
-- ファイル名: `mily-bNN-NN-<slug>.jpg`（次バッチは b02 から）
+- ファイル名: `mily-bNN-NN-<slug>.jpg`（新しい独立素材は新しい batch 番号）
 
 ## 禁止
 

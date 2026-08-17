@@ -101,3 +101,30 @@ mily-b<batch 2桁>-<seq 2桁>-<slug>-<width>.<ext> … 派生
 - `controls` / `playsInline` 必須、`preload="none"`、autoplay は原則オフ
 - 短縮版を作る場合は元動画を残し、どの区間を切ったかをマニフェストに記録
 - 変換実行前にオーナーへ方針を報告する
+
+### 一時的なInstagram Story動画
+
+- 公開Story permalinkがない場合、素材受け渡し用のDrive URLを `sourceUrl`、caption、metadata、frontend dataへ残さない。表示は `Instagram Story` の非リンクlabelとする。
+- owner-providedのクリーンな元動画をgitignored領域へ無改変で保存し、H.264 / AAC / `+faststart`、metadata除去済みの公開MP4を作る。
+- posterは公開MP4の実フレーム候補を複数比較して選ぶ。AI生成・顔補正・塗り足しはしない。
+- LatestとGalleryへ同じ投稿を出す場合、公開MP4 1本とposter 1枚を共有する。用途別コピーは作らない。
+- Instagram UIを含む閲覧画面スクリーンショットはコメント確認資料に限り、公開assetやGalleryへ入れない。
+- 一時的な朝投稿はLatest + Galleryの対象であり、読み物の `/stories/` へ自動的に転記しない。
+
+## 素材台帳（batch b03 / 受領日 2026-08-17）
+
+Drive Gallery（b02）とは別の独立動画。Latest と Gallery が同じ公開派生を共有する。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b03-01 | mily-b03-01-morning-ohayo.mp4 | 2026-08-17 朝の Instagram Story。720×1280。owner-provided | ✅ |
+| b03-01 poster | mily-b03-01-morning-ohayo-poster.jpg | 公開MP4の約6.9秒実フレーム。720×1280 | ✅ |
+
+確認済み:
+
+- source date: 2026-08-17
+- provenance: owner-provided
+- Instagram Story（公開permalinkなし。表示は非リンクlabel）
+- posterは公開MP4の実フレーム。AI生成・顔補正なし
+- metadata除去済み
+- 元Drive URLは記録しない

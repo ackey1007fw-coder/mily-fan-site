@@ -13,9 +13,10 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 1件。21歳誕生日（2026-08-02） | Instagram `.../p/DbiY3PHk1c8/` | 本文は投稿の要約。未確認の推測なし |
+| `news.ts` | 2件。8月17日の朝Story、21歳誕生日（2026-08-02） | 朝Storyは非リンク表示、誕生日は Instagram `.../p/DbiY3PHk1c8/` | Story本文は見える範囲だけ。未確認の推測なし |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真6枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスは `owner-provided` | `sourceDate` / `credit` は未確認のため `null` |
+| `galleryVideos.ts` | 独立動画1本（b03 朝Story。`published: true`） | owner-provided / Instagram Story（非リンク） | Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM | ENTRY 734 実ページで確認済み | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳 | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける |
@@ -40,7 +41,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 未確認のまま残す（推測して埋めない）:
 
-- 全メディアの `sourceDate` / `credit`
+- `media.ts` の写真の `sourceDate` / `credit`（朝Story動画の `sourceDate` は確認済み）
 - `mily-b01-06`（ネックレス）の公開投稿 URL
 - 出演・イベント（`events.ts` は空で正しい）
 - 所属事務所、商業音源、現在順位、フォロワー数など不存在・変動を伴う情報
@@ -67,13 +68,21 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 2. 投稿を開き、日付・本文を一次ソースで確認する。スクショや転載記事だけを出典にしない。
 3. `id` は `YYYY-MM-DD-短い英語slug`。一度使った id は再利用しない。
 4. `date` は投稿日の `YYYY-MM-DD`（JST）。分からなければ追加しない。
-5. `source` は投稿 URL（必須。「出典を見る」に使われる）。
+5. `source` は恒久的な投稿 URL がある場合に設定し、「出典を見る」に使う。一時的なStoryで公開permalinkがない場合だけ、後述の例外手順で `source` を省略する。
 6. `url` は `source` と違う関連ページがあるときだけ。同じ URL は書かない。
 7. `ctaLabel` は任意。リンク先は `url ?? source`。
 8. 本文は投稿の言い換えに留める。本人が書いていない抱負・予定を足さない。
 9. 表示は日付降順。配列の先頭に足すとレビューしやすいが、並び順だけに頼らない。
 
 同じ投稿を何度も news にしない。写真を載せる話なら `media.ts`（オーナー確認必須）。
+
+### 公開permalinkがない一時的なInstagram Story
+
+- オーナー提供のクリーンな写真・動画があり、投稿日と表示文を確認できる場合だけ扱う。
+- `source` は省略し、`sourceLabel: "Instagram Story"` を非リンクで表示する。Driveの受け渡しURL、空文字、`#`、推測したStory URLを代用しない。
+- 閲覧画面スクリーンショットは文言確認資料に限り、Latest / Gallery / `public/` / gitへ入れない。省略記号より先を補完しない。
+- 同じローカル派生をLatestとGalleryの両方に出す場合、MP4とposterをそれぞれ1ファイルだけ作り、両方から同じpathを参照する。
+- 日常の朝投稿はLatest + Galleryで扱う。節目を文章で残すサイト機能の `/stories/` へは追加しない。
 
 ---
 
@@ -103,7 +112,7 @@ Google Drive 原本 → 選定 → media/original/ → pnpm media:build
 
 - 原本は Drive。SNS から画像を自動取得しない。
 - 顔の AI 生成・置換・補正・塗り足しは禁止。
-- 次のバッチは **b02**（b01 の連番は再利用しない）。
+- b02はDrive Galleryで使用済み。新しい独立素材は新しいbatch番号を使い、既存連番を再利用しない。
 - `published: true` にする前にオーナー確認。
 - 公開済みファイル名は変えない。差し替えは新しい id。
 
