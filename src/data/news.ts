@@ -8,7 +8,7 @@
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - ctaLabel: optional. href is url ?? source
  */
-import { morningStoryVideo } from "./morningStoryVideo";
+import { morningStoryVideo } from "./morningStoryVideo.ts";
 
 export type NewsMedia = {
   kind: "video";

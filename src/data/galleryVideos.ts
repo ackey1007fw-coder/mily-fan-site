@@ -1,4 +1,4 @@
-import { morningStoryVideo, type MorningStoryVideo } from "./morningStoryVideo";
+import { morningStoryVideo, type MorningStoryVideo } from "./morningStoryVideo.ts";
 
 export type GalleryVideoItem = MorningStoryVideo;
 export { morningStoryVideo };

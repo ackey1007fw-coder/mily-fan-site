@@ -216,8 +216,8 @@ describe("Gallery video contracts", () => {
       assert.equal(item.published, true);
       assert.match(item.src, /^\/media\//);
       assert.match(item.poster, /^\/media\//);
-      assert.equal(item.src.includes("drive.google.com"), false);
-      assert.equal(item.poster.includes("drive.google.com"), false);
+      assert.equal(DRIVE_HOST_PATTERN.test(item.src), false, item.id);
+      assert.equal(DRIVE_HOST_PATTERN.test(item.poster), false, item.id);
       assert.equal(typeof item.alt, "string");
       assert.ok(item.alt.length > 0);
       assert.ok(Number.isInteger(item.width) && item.width > 0);
