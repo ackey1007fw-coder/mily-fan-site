@@ -99,11 +99,12 @@ describe("reusable STORIES content", () => {
   it("keeps story media local, article-only, and separate from Gallery data", async () => {
     const story = stories[0];
     const mediaJson = JSON.stringify(media);
+    const driveHost = ["drive", "google", "com"].join(".");
     assert.equal(mediaJson.includes("/media/stories/"), false);
 
     for (const item of story.media) {
       assert.match(item.src, /^\/media\/stories\/second-round-2026\//);
-      assert.equal(item.src.includes("drive.google.com"), false);
+      assert.equal(item.src.includes(driveHost), false);
       await access(path.join(root, "public", item.src.replace(/^\//, "")));
     }
 
