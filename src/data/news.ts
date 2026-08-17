@@ -8,7 +8,7 @@
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - ctaLabel: optional. href is url ?? source
  */
-import morningStoryVideoManifest from "./morningStoryVideo.json" with { type: "json" };
+import { morningStoryVideo } from "./morningStoryVideo";
 
 export type NewsMedia = {
   kind: "video";
@@ -44,8 +44,8 @@ export const news: NewsItem[] = [
     date: "2026-08-17",
     title: "おはよう☀️ 朝のストーリー",
     body: "猫耳フィルターで「OHAYO!!」。みりぃから届いた朝のひとコマ。",
-    sourceLabel: morningStoryVideoManifest.sourceLabel,
-    media: morningStoryVideoManifest as NewsMedia,
+    sourceLabel: morningStoryVideo.sourceLabel,
+    media: morningStoryVideo,
     message: {
       label: "みりぃのメッセージ",
       text: "8/17（月）今日からお仕事が始まる皆さん応援して…",

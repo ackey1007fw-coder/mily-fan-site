@@ -4,7 +4,11 @@ import { readFile, readdir, stat } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { driveGallerySections, driveVideoView, visibleDriveGallery } from "../src/data/driveGallery.ts";
+import {
+  driveGallerySections,
+  driveVideoView,
+  visibleDriveGallery,
+} from "../src/data/driveGallery.ts";
 import {
   galleryVideos,
   morningStoryVideo,
@@ -22,11 +26,27 @@ import {
 } from "./scan-tracked-text.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const assetDirectory = path.join(root, "public/media/gallery");
+const galleryAssetDirectory = path.join(root, "public/media/gallery");
 const expectedMessage = "8/17（月）今日からお仕事が始まる皆さん応援して…";
+const expectedAlt =
+  "猫耳とひげのフィルターで「OHAYO!!」と表示された、8月17日朝のみりぃの動画";
 
 async function read(relative) {
   return readFile(path.join(root, relative), "utf8");
+}
+
+function publicAssetPath(publicPath) {
+  assert.match(publicPath, /^\/media\//, publicPath);
+  assert.equal(DRIVE_HOST_PATTERN.test(publicPath), false, publicPath);
+  return path.join(root, "public", publicPath);
+}
+
+function galleryVideoViews() {
+  const drive = driveGallerySections(visibleDriveGallery());
+  return [
+    ...visibleGalleryVideos().map(driveVideoView),
+    ...drive.videos,
+  ];
 }
 
 describe("2026-08-17 morning Instagram Story", () => {
@@ -53,9 +73,10 @@ describe("2026-08-17 morning Instagram Story", () => {
     assert.equal(item.source, undefined);
     assert.equal(item.sourceLabel, "Instagram Story");
     assert.deepEqual(verifyNews([item]), []);
-    assert.match(latest, /item\.source \? \(/);
-    assert.match(latest, /: item\.sourceLabel \? \(/);
-    assert.match(latest, /<span className=/);
+    assert.match(latest, /item\.source\s*\?/);
+    assert.match(latest, /item\.sourceLabel\s*\?/);
+    assert.match(latest, /<ExternalLink[\s\S]*?href=\{item\.source\}/);
+    assert.match(latest, /<span[\s\S]*?\{item\.sourceLabel\}/);
     assert.doesNotMatch(latest, /href=""|href="#"|href=\{item\.source \?\? ""\}/);
   });
 
@@ -69,15 +90,28 @@ describe("2026-08-17 morning Instagram Story", () => {
     assert.match(latest, /href=\{item\.source\}/);
     assert.match(latest, /href=\{ctaHref\}/);
   });
+
+  it("describes the video contents for Latest aria-label and Gallery caption", () => {
+    const item = news.find((entry) => entry.id === "2026-08-17-morning-story");
+    const view = driveVideoView(morningStoryVideo);
+
+    assert.ok(item?.media);
+    assert.equal(item.media.alt, expectedAlt);
+    assert.equal(morningStoryVideo.alt, expectedAlt);
+    assert.equal(view.video.label, expectedAlt);
+  });
 });
 
 describe("shared morning Story assets", () => {
   it("uses one MP4 and one poster object in both Latest and Gallery", () => {
     const item = news.find((entry) => entry.id === "2026-08-17-morning-story");
+    const galleryItem = galleryVideos.find(
+      (entry) => entry.id === morningStoryVideo.id,
+    );
 
     assert.ok(item?.media);
     assert.equal(item.media, morningStoryVideo);
-    assert.equal(galleryVideos[0], morningStoryVideo);
+    assert.equal(galleryItem, morningStoryVideo);
     assert.equal(item.media.src, morningStoryVideo.src);
     assert.equal(item.media.poster, morningStoryVideo.poster);
     assert.equal(item.media.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
@@ -88,8 +122,8 @@ describe("shared morning Story assets", () => {
   });
 
   it("ships the sanitized MP4 and real-frame poster", async () => {
-    const mp4 = path.join(root, "public", morningStoryVideo.src);
-    const poster = path.join(root, "public", morningStoryVideo.poster);
+    const mp4 = publicAssetPath(morningStoryVideo.src);
+    const poster = publicAssetPath(morningStoryVideo.poster);
 
     assert.equal(existsSync(mp4), true);
     assert.equal(existsSync(poster), true);
@@ -97,7 +131,7 @@ describe("shared morning Story assets", () => {
     assert.ok((await stat(mp4)).size < 5 * 1024 * 1024);
     assert.ok((await stat(poster)).size > 0);
     assert.deepEqual(
-      await validateVideoDerivatives(morningStoryVideo, assetDirectory),
+      await validateVideoDerivatives(morningStoryVideo, galleryAssetDirectory),
       { width: 720, height: 1280 },
     );
   });
@@ -122,6 +156,7 @@ describe("shared morning Story assets", () => {
     const frontendFiles = [
       "src/data/news.ts",
       "src/data/galleryVideos.ts",
+      "src/data/morningStoryVideo.ts",
       "src/data/morningStoryVideo.json",
       "src/components/Latest.tsx",
       "src/components/Gallery.tsx",
@@ -146,7 +181,7 @@ describe("shared morning Story assets", () => {
   });
 });
 
-describe("Latest and Gallery video contracts", () => {
+describe("Latest video playback contract", () => {
   it("renders the Latest video with controls and inline non-autoplay playback", async () => {
     const latest = await read("src/components/Latest.tsx");
 
@@ -158,22 +193,81 @@ describe("Latest and Gallery video contracts", () => {
     assert.doesNotMatch(latest, /autoPlay|autoplay|\bloop\b/);
     assert.match(latest, /aspect-\[9\/16\]/);
   });
+});
 
-  it("renders the new Gallery entry through the real local video contract", async () => {
+describe("Gallery video contracts", () => {
+  it("renders every published standalone Gallery video through the local contract", async () => {
     const gallery = await read("src/components/Gallery.tsx");
     const visible = visibleGalleryVideos();
-    const view = driveVideoView(visible[0]);
 
-    assert.equal(visible.length, 1);
-    assert.equal(view.video.label, "8月17日 朝の「OHAYO!!」ストーリー");
-    assert.equal(view.video.controls, true);
-    assert.equal(view.video.playsInline, true);
-    assert.equal(view.video.preload, "none");
-    assert.equal("autoPlay" in view.video, false);
-    assert.equal("loop" in view.video, false);
+    assert.ok(visible.length > 0);
     assert.match(gallery, /visibleGalleryVideos\(\)\.map\(driveVideoView\)/);
     assert.match(gallery, /videos\.map\(\(video\) =>/);
     assert.match(gallery, /src=\{video\.video\.src\}/);
+    assert.match(gallery, /お預かりした動画、全\{videos\.length\}本。/);
+    assert.doesNotMatch(gallery, /同一動画の重複/);
+
+    for (const item of visible) {
+      const view = driveVideoView(item);
+      const mp4 = publicAssetPath(item.src);
+      const poster = publicAssetPath(item.poster);
+
+      assert.equal(item.kind, "video");
+      assert.equal(item.published, true);
+      assert.match(item.src, /^\/media\//);
+      assert.match(item.poster, /^\/media\//);
+      assert.equal(item.src.includes("drive.google.com"), false);
+      assert.equal(item.poster.includes("drive.google.com"), false);
+      assert.equal(typeof item.alt, "string");
+      assert.ok(item.alt.length > 0);
+      assert.ok(Number.isInteger(item.width) && item.width > 0);
+      assert.ok(Number.isInteger(item.height) && item.height > 0);
+      assert.equal(existsSync(mp4), true, item.src);
+      assert.equal(existsSync(poster), true, item.poster);
+      assert.ok((await stat(mp4)).size > 0, item.src);
+      assert.ok((await stat(poster)).size > 0, item.poster);
+      assert.equal(view.video.controls, true, item.id);
+      assert.equal(view.video.playsInline, true, item.id);
+      assert.equal(view.video.preload, "none", item.id);
+      assert.equal("autoPlay" in view.video, false, item.id);
+      assert.equal("loop" in view.video, false, item.id);
+      assert.equal(view.video.label, item.alt);
+      assert.deepEqual(
+        await validateVideoDerivatives(
+          item,
+          path.join(root, "public", path.dirname(item.src).replace(/^\//, "")),
+        ),
+        { width: item.width, height: item.height },
+      );
+    }
+  });
+
+  it("applies the same playback contract to every Gallery-visible video", async () => {
+    const views = galleryVideoViews();
+
+    assert.ok(views.length > 0);
+    for (const view of views) {
+      const mp4 = publicAssetPath(view.video.src);
+      const poster = publicAssetPath(view.video.poster);
+
+      assert.match(view.video.src, /^\/media\//, view.key);
+      assert.match(view.video.poster, /^\/media\//, view.key);
+      assert.equal(DRIVE_HOST_PATTERN.test(view.video.src), false, view.key);
+      assert.equal(DRIVE_HOST_PATTERN.test(view.video.poster), false, view.key);
+      assert.deepEqual(findDriveIds(view.video.src), [], view.key);
+      assert.deepEqual(findDriveIds(view.video.poster), [], view.key);
+      assert.equal(typeof view.video.label, "string");
+      assert.ok(view.video.label.length > 0, view.key);
+      assert.ok(Number.isInteger(view.video.width) && view.video.width > 0, view.key);
+      assert.ok(Number.isInteger(view.video.height) && view.video.height > 0, view.key);
+      assert.equal(existsSync(mp4), true, view.video.src);
+      assert.equal(existsSync(poster), true, view.video.poster);
+      assert.equal(view.video.controls, true, view.key);
+      assert.equal(view.video.playsInline, true, view.key);
+      assert.equal(view.video.preload, "none", view.key);
+      assert.equal("autoPlay" in view.video, false, view.key);
+      assert.equal("loop" in view.video, false, view.key);
+    }
   });
 
   it("preserves the existing photo and Drive-video archives", () => {
@@ -183,6 +277,7 @@ describe("Latest and Gallery video contracts", () => {
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
     assert.equal(visibleGalleryVideos().length + drive.videos.length, 12);
+    assert.equal(galleryVideoViews().length, 12);
   });
 });
 

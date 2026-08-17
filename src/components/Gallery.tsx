@@ -137,7 +137,7 @@ export function Gallery() {
           <div className="mt-10">
             <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
             <p className="mt-1 text-sm text-ink-muted">
-              お預かりした動画、全{videos.length}本（同一動画の重複1本を除く）。
+              お預かりした動画、全{videos.length}本。
             </p>
             <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
               {videos.map((video) => (

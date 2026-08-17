@@ -16,6 +16,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `news.ts` | 2件。8月17日の朝Story、21歳誕生日（2026-08-02） | 朝Storyは非リンク表示、誕生日は Instagram `.../p/DbiY3PHk1c8/` | Story本文は見える範囲だけ。未確認の推測なし |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真6枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスは `owner-provided` | `sourceDate` / `credit` は未確認のため `null` |
+| `galleryVideos.ts` | 独立動画1本（b03 朝Story。`published: true`） | owner-provided / Instagram Story（非リンク） | Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM | ENTRY 734 実ページで確認済み | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳 | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける |
@@ -40,7 +41,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 未確認のまま残す（推測して埋めない）:
 
-- 全メディアの `sourceDate` / `credit`
+- `media.ts` の写真の `sourceDate` / `credit`（朝Story動画の `sourceDate` は確認済み）
 - `mily-b01-06`（ネックレス）の公開投稿 URL
 - 出演・イベント（`events.ts` は空で正しい）
 - 所属事務所、商業音源、現在順位、フォロワー数など不存在・変動を伴う情報

@@ -110,3 +110,21 @@ mily-b<batch 2桁>-<seq 2桁>-<slug>-<width>.<ext> … 派生
 - LatestとGalleryへ同じ投稿を出す場合、公開MP4 1本とposter 1枚を共有する。用途別コピーは作らない。
 - Instagram UIを含む閲覧画面スクリーンショットはコメント確認資料に限り、公開assetやGalleryへ入れない。
 - 一時的な朝投稿はLatest + Galleryの対象であり、読み物の `/stories/` へ自動的に転記しない。
+
+## 素材台帳（batch b03 / 受領日 2026-08-17）
+
+Drive Gallery（b02）とは別の独立動画。Latest と Gallery が同じ公開派生を共有する。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b03-01 | mily-b03-01-morning-ohayo.mp4 | 2026-08-17 朝の Instagram Story。720×1280。owner-provided | ✅ |
+| b03-01 poster | mily-b03-01-morning-ohayo-poster.jpg | 公開MP4の約6.9秒実フレーム。720×1280 | ✅ |
+
+確認済み:
+
+- source date: 2026-08-17
+- provenance: owner-provided
+- Instagram Story（公開permalinkなし。表示は非リンクlabel）
+- posterは公開MP4の実フレーム。AI生成・顔補正なし
+- metadata除去済み
+- 元Drive URLは記録しない

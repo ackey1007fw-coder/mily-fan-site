@@ -10,13 +10,13 @@
 ## いまの状態
 
 - 初期ページ: Hero / 応援する / 最新情報 / ギャラリー / スケジュール / プロフィール / リンク / Footer
-- 最新情報に、21歳誕生日の投稿要約を掲載しています
+- 最新情報に、21歳誕生日の投稿要約と朝のInstagram Storyを掲載しています
 - MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線（Hero / Support / モバイルドック）
 - 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。失敗時は手入力 fallback → 非表示）
 - FM「湘南シーサイドサークル」の放送状態を自動取得（`/api/mily-radio-status`。取得失敗でもサイトは壊れない）
 - Follow Mily: X / Instagram / TikTok / SHOWROOM（すべてENTRY 734実ページで確認済み）
 - FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）
-- ギャラリーに写真を掲載しています（最適化・出典管理の手順は `docs/MEDIA.md`）
+- ギャラリーに写真と動画を掲載しています（独立動画は Latest と同じ公開派生を共有できる。手順は `docs/MEDIA.md`）
 - `/profile/` に、ラジオ・音楽経験・配信・コンテスト・好きなものを一次情報の出典付きでまとめた詳細プロフィール
 - 予定は、確認できるまでセクションを非表示にします
 
@@ -37,7 +37,8 @@ pnpm build
 | `src/data/profile.ts` | 出典台帳・確認済みプロフィール・活動・嗜好 |
 | `src/data/events.ts` | 年をまたげる予定 |
 | `src/data/news.ts` | 最新情報 |
-| `src/data/media.ts` | 写真・動画（手順: `docs/MEDIA.md`） |
+| `src/data/media.ts` | 写真（手順: `docs/MEDIA.md`） |
+| `src/data/galleryVideos.ts` | Gallery の独立動画（Latest と asset 共有可） |
 | `src/data/socials.ts` | 本人 SNS |
 | `src/data/links.ts` | その他リンク |
 | `src/data/highlights.ts` | ハイライト |
@@ -46,7 +47,7 @@ pnpm build
 ## 運用
 
 - 日常更新（news / events / 写真 / SNS / FM）: `docs/CONTENT-OPS.md`
-- 写真の受け入れ: `docs/MEDIA.md`
+- 写真・動画の受け入れ: `docs/MEDIA.md`
 - `main` へ直接 push しない
 - 作業ブランチから PR
 - squash merge 前提
