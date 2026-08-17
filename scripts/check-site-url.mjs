@@ -9,6 +9,7 @@ import {
   site,
   siteOrigin,
   sitemapXml,
+  storyUrl,
 } from "../src/data/site.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -22,9 +23,11 @@ export function verifySiteUrlConsistency() {
   const origin = siteOrigin();
   const canonical = canonicalUrl();
   const profileCanonical = profileUrl();
+  const storyCanonical = storyUrl("second-round-2026");
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
+  const storyHtml = readRelative("stories/second-round-2026/index.html");
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
   const viteConfig = readRelative("vite.config.ts");
@@ -60,6 +63,18 @@ export function verifySiteUrlConsistency() {
   if (!profileHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("profile/index.html images must use __SITE_OG_IMAGE__");
   }
+  if (!storyHtml.includes('href="__STORY_SECOND_ROUND_CANONICAL__"')) {
+    errors.push("story canonical href must use __STORY_SECOND_ROUND_CANONICAL__");
+  }
+  if (
+    !storyHtml.includes('property="og:url"') ||
+    !storyHtml.includes('content="__STORY_SECOND_ROUND_CANONICAL__"')
+  ) {
+    errors.push("story og:url must use __STORY_SECOND_ROUND_CANONICAL__");
+  }
+  if (!storyHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("story images must use __SITE_OG_IMAGE__");
+  }
 
   if (robots !== robotsTxt()) {
     errors.push("public/robots.txt must be generated from site.siteUrl");
@@ -77,10 +92,14 @@ export function verifySiteUrlConsistency() {
   if (!sitemap.includes(`<loc>${profileCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the profile canonical URL");
   }
+  if (!sitemap.includes(`<loc>${storyCanonical}</loc>`)) {
+    errors.push("public/sitemap.xml must include the story canonical URL");
+  }
 
   if (
     !viteConfig.includes("canonicalUrl()") ||
     !viteConfig.includes("profileUrl()") ||
+    !viteConfig.includes('storyUrl("second-round-2026")') ||
     !viteConfig.includes("ogImageUrl()")
   ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
@@ -97,10 +116,16 @@ export function verifySiteUrlConsistency() {
       "profile/index.html must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  if (hardcodedOrigin.test(storyHtml)) {
+    errors.push(
+      "story HTML must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
 
   if (
     !canonical.startsWith(origin) ||
     !profileCanonical.startsWith(origin) ||
+    !storyCanonical.startsWith(origin) ||
     !ogImage.startsWith(origin)
   ) {
     errors.push("canonical and og image URLs must stay on site.siteUrl");

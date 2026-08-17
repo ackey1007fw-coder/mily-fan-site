@@ -5,6 +5,7 @@ export type NavItem = {
 
 const baseNavItems: NavItem[] = [
   { href: "#latest", label: "最新情報" },
+  { href: "#stories", label: "STORY" },
   { href: "#support", label: "応援する" },
   { href: "#gallery", label: "ギャラリー" },
   { href: "/profile/", label: "プロフィール" },
