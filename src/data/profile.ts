@@ -81,6 +81,13 @@ export const profileSources = {
     url: "https://x.com/Mily_chan36/status/2082484779224842354",
     verifiedAt: "2026-08-16",
   },
+  mixchannelProfile: {
+    id: "mixchannel-mily-profile",
+    title: "三橋莉子（みりぃ）MixChannelプロフィール",
+    publisher: "三橋莉子 本人MixChannel",
+    url: "https://mixch.tv/u/10114673",
+    verifiedAt: "2026-08-18",
+  },
 } satisfies Record<string, ProfileSource>;
 
 export type ProfileSourceId = keyof typeof profileSources;
@@ -147,7 +154,7 @@ export const profile: Profile = {
   aliases: ["Mily（ミリー）"],
   summary:
     "神奈川県出身、日本大学3年。ラジオ、SHOWROOM、大学生コンテストで活動。話すこと、歌うこと、挑戦することが好き。",
-  lastVerifiedAt: "2026-08-16",
+  lastVerifiedAt: "2026-08-18",
   facts: [
     {
       id: "public-name",
@@ -188,6 +195,15 @@ export const profile: Profile = {
       value: "神奈川県",
       sourceIds: ["missCircle", "showroom"],
       status: "confirmed",
+    },
+    {
+      id: "mbti",
+      section: "identity",
+      label: "MBTI",
+      value: "ENFP（運動家）",
+      sourceIds: ["mixchannelProfile"],
+      status: "time-sensitive",
+      asOf: "2026-08-18",
     },
     {
       id: "university",
