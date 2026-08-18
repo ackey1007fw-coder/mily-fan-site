@@ -14,7 +14,7 @@
 - MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線（Hero / Support / モバイルドック）
 - 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。失敗時は手入力 fallback → 非表示）
 - FM「湘南シーサイドサークル」の放送状態を自動取得（`/api/mily-radio-status`。取得失敗でもサイトは壊れない）
-- Follow Mily: X / Instagram / TikTok / SHOWROOM（すべてENTRY 734実ページで確認済み）
+- Follow Mily: X / Instagram / TikTok / SHOWROOM / MixChannel（X〜SHOWROOMはENTRY 734実ページ、MixChannelは本人プロフィールで確認済み）
 - FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）
 - ギャラリーに写真と動画を掲載しています（独立動画は Latest と同じ公開派生を共有できる。手順は `docs/MEDIA.md`）
 - `/profile/` に、ラジオ・音楽経験・配信・コンテスト・好きなものを一次情報の出典付きでまとめた詳細プロフィール

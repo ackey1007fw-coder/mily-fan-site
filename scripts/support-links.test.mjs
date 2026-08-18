@@ -65,6 +65,9 @@ describe("SNS registry stays verified-only", () => {
         (item) => item.url === "https://www.showroom-live.com/r/circle2026_0734",
       ),
     );
+    assert.ok(
+      socials.some((item) => item.url === "https://mixch.tv/u/10114673"),
+    );
     for (const item of socials) {
       assert.equal(item.confirmed, true);
       assert.match(item.url, /^https:\/\//);
@@ -235,6 +238,7 @@ describe("structured data", () => {
     assert.match(html, /https:\/\/x\.com\/Mily_chan36/);
     assert.match(html, /https:\/\/www\.tiktok\.com\/@mily_chan36/);
     assert.match(html, /https:\/\/www\.showroom-live\.com\/r\/circle2026_0734/);
+    assert.match(html, /https:\/\/mixch\.tv\/u\/10114673/);
     assert.match(html, /https:\/\/2026\.misscircle\.jp\/entry\/734/);
   });
 });

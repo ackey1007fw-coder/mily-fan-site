@@ -17,7 +17,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真6枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスは `owner-provided` | `sourceDate` / `credit` は未確認のため `null` |
 | `galleryVideos.ts` | 独立動画1本（b03 朝Story。`published: true`） | owner-provided / Instagram Story（非リンク） | Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
-| `socials.ts` | X / Instagram / TikTok / SHOWROOM | ENTRY 734 実ページで確認済み | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
+| `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳 | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける |
 | `highlights.ts` | MISS CIRCLE、CAMPUS GIRLS、SHOWROOM開始の確認済み3件 | 主催者・本人・SHOWROOM | 結果未確定の順位や掲載権は入れない |
@@ -26,7 +26,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 維持する公開情報（消さない）:
 
 - MISS CIRCLE CONTEST 2026 **ENTRY 734**
-- SHOWROOM / X / Instagram / TikTok
+- SHOWROOM / X / Instagram / TikTok / MixChannel
 - FM湘南マジックウェイブ（Mily / 湘南シーサイドサークル）
 - 本人写真（ギャラリー派生ファイル）
 - 配信予定の自動取得

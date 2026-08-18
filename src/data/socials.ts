@@ -8,6 +8,7 @@ export type SocialPlatform =
   | "youtube"
   | "tiktok"
   | "showroom"
+  | "mixchannel"
   | "other";
 
 export type SocialLink = {
@@ -47,6 +48,14 @@ export const socials: SocialLink[] = [
     platform: "showroom",
     label: "SHOWROOM #ミスサークル2026",
     url: "https://www.showroom-live.com/r/circle2026_0734",
+    confirmed: true,
+  },
+  {
+    // 本人 MixChannel プロフィール（表示名「三橋莉子（みりぃ）」・ID 10114673）
+    id: "mixchannel-mily",
+    platform: "mixchannel",
+    label: "三橋莉子（みりぃ）",
+    url: "https://mixch.tv/u/10114673",
     confirmed: true,
   },
 ];

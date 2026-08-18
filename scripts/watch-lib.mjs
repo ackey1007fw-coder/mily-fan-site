@@ -63,6 +63,7 @@ export function platformOf(url) {
   if (normalized.startsWith("instagram.com/")) return "instagram";
   if (normalized.startsWith("tiktok.com/")) return "tiktok";
   if (normalized.startsWith("showroom-live.com/")) return "showroom";
+  if (normalized.startsWith("mixch.tv/")) return "mixchannel";
   return null;
 }
 
@@ -81,8 +82,8 @@ export function diffSnsLinks(registered, observed) {
   }
 
   for (const entry of registered) {
-    // SHOWROOM は room 解決側で別途検証するのでここでは扱わない
-    if (entry.platform === "showroom") continue;
+    // SHOWROOM は room 解決側で別途検証する。MixChannel は ENTRY ページ掲載対象外。
+    if (entry.platform === "showroom" || entry.platform === "mixchannel") continue;
     const observedUrl = observedByPlatform.get(entry.platform);
     if (!observedUrl) {
       findings.push({
@@ -106,7 +107,7 @@ export function diffSnsLinks(registered, observed) {
   }
 
   for (const [platform, url] of observedByPlatform) {
-    if (platform === "showroom") continue;
+    if (platform === "showroom" || platform === "mixchannel") continue;
     const known = registered.some((entry) => entry.platform === platform);
     if (!known) {
       findings.push({

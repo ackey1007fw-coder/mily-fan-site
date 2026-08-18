@@ -70,7 +70,7 @@ describe("confirmed public identity", () => {
   });
 
   it("keeps only confirmed socials and contest/FM links separate", () => {
-    assert.equal(socials.length, 4);
+    assert.equal(socials.length, 5);
     const showroom = socials.find((item) => item.platform === "showroom");
     assert.equal(showroom?.url, "https://www.showroom-live.com/r/circle2026_0734");
     const instagram = socials.find((item) => item.platform === "instagram");
@@ -80,6 +80,10 @@ describe("confirmed public identity", () => {
     assert.equal(x?.url, "https://x.com/Mily_chan36");
     const tiktok = socials.find((item) => item.platform === "tiktok");
     assert.equal(tiktok?.url, "https://www.tiktok.com/@mily_chan36");
+    const mixchannel = socials.find((item) => item.platform === "mixchannel");
+    assert.equal(mixchannel?.id, "mixchannel-mily");
+    assert.equal(mixchannel?.label, "三橋莉子（みりぃ）");
+    assert.equal(mixchannel?.url, "https://mixch.tv/u/10114673");
     assert.ok(socials.every((item) => item.confirmed === true));
 
     assert.ok(
