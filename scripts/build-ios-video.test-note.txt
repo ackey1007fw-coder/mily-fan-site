@@ -1,0 +1,1 @@
+This file intentionally exists only to make the iOS compatibility build step easy to discover in repository search. The executable contract is covered by scripts/ios-video.test.mjs.
