@@ -47,6 +47,14 @@ export const news: NewsItem[] = [
     sourceLabel: "みりぃからの連絡💌",
     url: "https://www.showroom-live.com/r/circle2026_0734",
     ctaLabel: "SHOWROOMで応援する",
+    media: {
+      kind: "video",
+      src: "/media/gallery/mily-b04-01-morning-showroom.mp4",
+      poster: "/media/gallery/mily-b04-01-morning-showroom-poster.jpg",
+      width: 160,
+      height: 284,
+      alt: "朝の配信画面でピースをしながらウインクするみりぃの動画",
+    },
     message: {
       label: "みりぃのメッセージ",
       text: "昨日は高校の友達。今日は大学の友達と予定があるから、【10:50〜11:30】まで配信しようかと思ってるよ〜‼️ ビギナーイベントも参加してみたの！！！ 気軽に遊びに来てね🍀✨ ぜひキラ星から応援お願いいたします🥺🙌🏻",
