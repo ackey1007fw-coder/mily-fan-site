@@ -24,10 +24,12 @@ export function verifySiteUrlConsistency() {
   const canonical = canonicalUrl();
   const profileCanonical = profileUrl();
   const storyCanonical = storyUrl("second-round-2026");
+  const radioStoryCanonical = storyUrl("2026-08-18-radio");
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
   const storyHtml = readRelative("stories/second-round-2026/index.html");
+  const radioStoryHtml = readRelative("stories/2026-08-18-radio/index.html");
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
   const viteConfig = readRelative("vite.config.ts");
@@ -75,6 +77,18 @@ export function verifySiteUrlConsistency() {
   if (!storyHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("story images must use __SITE_OG_IMAGE__");
   }
+  if (!radioStoryHtml.includes('href="__STORY_2026_08_18_RADIO_CANONICAL__"')) {
+    errors.push("radio story canonical href must use __STORY_2026_08_18_RADIO_CANONICAL__");
+  }
+  if (
+    !radioStoryHtml.includes('property="og:url"') ||
+    !radioStoryHtml.includes('content="__STORY_2026_08_18_RADIO_CANONICAL__"')
+  ) {
+    errors.push("radio story og:url must use __STORY_2026_08_18_RADIO_CANONICAL__");
+  }
+  if (!radioStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("radio story images must use __SITE_OG_IMAGE__");
+  }
 
   if (robots !== robotsTxt()) {
     errors.push("public/robots.txt must be generated from site.siteUrl");
@@ -95,11 +109,15 @@ export function verifySiteUrlConsistency() {
   if (!sitemap.includes(`<loc>${storyCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the story canonical URL");
   }
+  if (!sitemap.includes(`<loc>${radioStoryCanonical}</loc>`)) {
+    errors.push("public/sitemap.xml must include the radio story canonical URL");
+  }
 
   if (
     !viteConfig.includes("canonicalUrl()") ||
     !viteConfig.includes("profileUrl()") ||
     !viteConfig.includes('storyUrl("second-round-2026")') ||
+    !viteConfig.includes('storyUrl("2026-08-18-radio")') ||
     !viteConfig.includes("ogImageUrl()")
   ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
@@ -121,11 +139,17 @@ export function verifySiteUrlConsistency() {
       "story HTML must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  if (hardcodedOrigin.test(radioStoryHtml)) {
+    errors.push(
+      "radio story HTML must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
 
   if (
     !canonical.startsWith(origin) ||
     !profileCanonical.startsWith(origin) ||
     !storyCanonical.startsWith(origin) ||
+    !radioStoryCanonical.startsWith(origin) ||
     !ogImage.startsWith(origin)
   ) {
     errors.push("canonical and og image URLs must stay on site.siteUrl");

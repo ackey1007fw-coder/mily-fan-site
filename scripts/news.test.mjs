@@ -66,6 +66,27 @@ describe("birthday news item", () => {
   });
 });
 
+describe("8/18 radio news item", () => {
+  it("points Latest to the radio story without replacing the morning update", async () => {
+    const { news } = await import("../src/data/news.ts");
+    const radio = news.find((item) => item.id === "2026-08-18-evening-radio");
+    const morning = news.find((item) => item.id === "2026-08-18-morning-update");
+
+    assert.ok(radio);
+    assert.ok(morning);
+    assert.equal(radio.date, "2026-08-18");
+    assert.equal(radio.source, "https://x.com/Mily_chan36/status/2089721650522820667");
+    assert.equal(radio.sourceLabel, "Xの投稿を見る");
+    assert.equal(radio.url, "/stories/2026-08-18-radio/");
+    assert.equal(radio.ctaLabel, "配信の記録を読む");
+    assert.match(radio.body, /体は本調子ではないなかでもラジオ配信/);
+    assert.match(radio.body, /夜になる予定/);
+    assert.equal(radio.body.includes("体調不良"), false);
+    assert.equal(radio.body.includes("病気"), false);
+    assert.equal(morning.title, "おはよう〜☀️ 10:50〜11:30配信予定");
+  });
+});
+
 describe("source and url are not mixed", () => {
   it("uses required source for 出典を見る in Latest and Schedule", async () => {
     const latest = await readFile(

@@ -30,6 +30,10 @@ describe("site.siteUrl metadata source of truth", () => {
       sitemapXml(),
       new RegExp(`<loc>${storyUrl("second-round-2026")}</loc>`),
     );
+    assert.match(
+      sitemapXml(),
+      new RegExp(`<loc>${storyUrl("2026-08-18-radio")}</loc>`),
+    );
   });
 
   it("fails when public metadata drifts from site.siteUrl", () => {

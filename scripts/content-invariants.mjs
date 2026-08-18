@@ -123,6 +123,15 @@ function assertConfirmedUrl(url, label, id, errors) {
   }
 }
 
+function isInternalStoryHref(url) {
+  return typeof url === "string" && /^\/stories\/[a-z0-9-]+\/$/.test(url);
+}
+
+function assertNewsRelatedHref(url, label, id, errors) {
+  if (isSafeHttpUrl(url) || isInternalStoryHref(url)) return;
+  errors.push(`${label} "${id}" needs a confirmed http(s) URL or a local /stories/ path`);
+}
+
 export function verifyNews(items) {
   const errors = [];
   assertUniqueIds(items, "news", errors);
@@ -140,7 +149,7 @@ export function verifyNews(items) {
         `news "${item.id ?? "?"}" needs a confirmed http(s) URL or non-link sourceLabel`,
       );
     }
-    if (item.url) assertConfirmedUrl(item.url, "news", item.id ?? "?", errors);
+    if (item.url) assertNewsRelatedHref(item.url, "news", item.id ?? "?", errors);
     if (item.ctaLabel && !item.url && !item.source) {
       errors.push(`news "${item.id ?? "?"}" ctaLabel needs a link target`);
     }

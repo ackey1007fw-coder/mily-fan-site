@@ -11,6 +11,11 @@ export const storySources = {
     id: "final-stream-video",
     label: "最終配信時に届けられた本人動画",
   },
+  "x-2026-08-18-radio": {
+    id: "x-2026-08-18-radio",
+    label: "本人X投稿（2026年8月18日）",
+    url: "https://x.com/Mily_chan36/status/2089721650522820667",
+  },
 } as const;
 
 export type StorySourceId = keyof typeof storySources;
@@ -71,6 +76,88 @@ export type Story = {
   leadMediaId: string | null;
   media: StoryMedia[];
   sections: StorySection[];
+};
+
+const radioStory: Story = {
+  slug: "2026-08-18-radio",
+  href: "/stories/2026-08-18-radio/",
+  title: "「元気なみりぃに会いにきてね」——8月18日のラジオ配信",
+  cardTitle: "「元気なみりぃに会いにきてね」——8月18日のラジオ配信",
+  eyebrow: "ラジオ配信の記録",
+  lead:
+    "8月18日、体は本調子ではないなかでもラジオ配信を届けてくれたみりぃ。見に来てくれた人へのお礼と、翌日の配信について、本人のXに投稿がありました。",
+  cardDescription:
+    "体は本調子ではないなかでもラジオ配信を届けてくれた夜。見に来てくれた人へのお礼と、「元気なみりぃに会いにきてね」という言葉。",
+  date: "2026-08-18",
+  dateLabel: "2026.08.18",
+  published: true,
+  sourceIds: ["x-2026-08-18-radio"],
+  leadMediaId: null,
+  media: [],
+  sections: [
+    {
+      id: "thanks",
+      title: "ラジオ配信、ありがとうございました",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "8月18日、みりぃはラジオ配信を届けてくれました。体は本調子ではないなかでも、見に来てくれた人へのお礼を本人の言葉で残しています。",
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "大元は元気なのに、体だけが追いつかない状況下のラジオ配信ありがとうございました🥲🙌🏻🩵",
+          ],
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+      ],
+    },
+    {
+      id: "self-care",
+      title: "体調管理は自分で",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "本人も、体調管理を意識していると書いています。",
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+        {
+          type: "quote",
+          paragraphs: ["体調管理はね？自分でしていかないと。"],
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+      ],
+    },
+    {
+      id: "next-stream",
+      title: "翌日の配信は夜になる予定",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "8月19日の配信は夜になる予定で、時間は当日改めて伝えるとしています。",
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "明日の配信時間はまた明日伝えるよ〜！\nちなみに夜になると思う🥺",
+          ],
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+        {
+          type: "paragraph",
+          text: "最後は、この言葉でした。",
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+        {
+          type: "quote",
+          paragraphs: ["元気なみりぃに会いにきてね~‼︎"],
+          sourceIds: ["x-2026-08-18-radio"],
+        },
+      ],
+    },
+  ],
 };
 
 const secondRoundStory: Story = {
@@ -287,7 +374,7 @@ const secondRoundStory: Story = {
   ],
 };
 
-export const stories: Story[] = [secondRoundStory];
+export const stories: Story[] = [radioStory, secondRoundStory];
 
 export function visibleStories(): Story[] {
   return stories.filter((story) => story.published);

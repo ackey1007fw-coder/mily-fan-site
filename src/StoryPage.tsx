@@ -1,4 +1,5 @@
 import { Footer } from "./components/Footer";
+import { ExternalLink } from "./components/ExternalLink";
 import {
   storySources,
   type Story,
@@ -88,6 +89,11 @@ function StoryBodyBlock({
   return media ? <MediaFigure media={media} /> : null;
 }
 
+function sourceHref(sourceId: keyof typeof storySources): string | undefined {
+  const source = storySources[sourceId];
+  return "url" in source ? source.url : undefined;
+}
+
 export default function StoryPage({ story }: { story: Story }) {
   const mediaById = new Map(story.media.map((media) => [media.id, media]));
   const leadMedia = story.leadMediaId ? mediaById.get(story.leadMediaId) : undefined;
@@ -160,11 +166,23 @@ export default function StoryPage({ story }: { story: Story }) {
                   出典
                 </h2>
                 <ul className="mt-5 space-y-3 text-sm leading-7 text-ink-muted">
-                  {story.sourceIds.map((sourceId) => (
-                    <li key={sourceId} className="rounded-2xl bg-sage-soft/45 px-4 py-3">
-                      {storySources[sourceId].label}
-                    </li>
-                  ))}
+                  {story.sourceIds.map((sourceId) => {
+                    const href = sourceHref(sourceId);
+                    return (
+                      <li key={sourceId} className="rounded-2xl bg-sage-soft/45 px-4 py-3">
+                        {href ? (
+                          <ExternalLink
+                            href={href}
+                            className="font-medium text-sage hover:underline"
+                          >
+                            {storySources[sourceId].label}
+                          </ExternalLink>
+                        ) : (
+                          storySources[sourceId].label
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </section>
 
