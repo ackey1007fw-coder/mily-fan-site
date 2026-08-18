@@ -21,3 +21,6 @@ media/original/*
 # the repository is public and these are the unsanitized files.
 media/drive-b02-original/*
 !media/drive-b02-original/README.md
+
+# Generated at build time from the committed 8/18 source derivative.
+public/media/gallery/mily-b04-01-morning-showroom-ios.mp4
