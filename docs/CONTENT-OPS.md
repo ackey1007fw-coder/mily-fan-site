@@ -90,12 +90,13 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 1. 本人が出演・登壇・公開収録するなど、確認できた予定だけ。
 2. `source` は主催者または本人の一次発表 URL。
-3. `startAt` は日付だけ `YYYY-MM-DD`、時刻まで分かるとき `YYYY-MM-DDTHH:mm:ss+09:00`。
-4. `timezone` は必ず `"Asia/Tokyo"`。
-5. `kind` は `appearance` / `stream` / `event` / `other` のみ。
-6. 終了時刻が確認できていなければ `endAt` を書かない。
-7. 年をまたいでも同じ配列へ追加する。年別ファイルを作らない。
-8. 通常の SHOWROOM 配信は `events.ts` に書かない（自動取得）。特別配信で主催発表がある場合のみ、出典付きで追加してよい。
+3. `listedAt` はサイトへ掲載した日を `YYYY-MM-DD` で書く。
+4. `startAt` は日付だけ `YYYY-MM-DD`、時刻まで分かるとき `YYYY-MM-DDTHH:mm:ss+09:00`。
+5. `timezone` は必ず `"Asia/Tokyo"`。
+6. `kind` は `appearance` / `stream` / `event` / `other` のみ。
+7. 終了時刻が確認できていなければ `endAt` を書かない。
+8. 年をまたいでも同じ配列へ追加する。年別ファイルを作らない。
+9. 通常の SHOWROOM 配信は `events.ts` に書かない（自動取得）。特別配信で主催発表がある場合のみ、出典付きで追加してよい。
 
 空のままでセクションは非表示。プレースホルダー行は作らない。
 
@@ -229,6 +230,7 @@ Google Drive 原本 → 選定 → media/original/ → pnpm media:build
 {
   id: "2026-09-01-ssc-public",
   title: "湘南シーサイドサークル 公開収録",
+  listedAt: "2026-08-19",
   startAt: "2026-09-01T19:00:00+09:00",
   timezone: "Asia/Tokyo",
   kind: "appearance",

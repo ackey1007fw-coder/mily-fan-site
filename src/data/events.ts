@@ -12,6 +12,8 @@ export type EventKind = "appearance" | "stream" | "event" | "other";
 export type FanEvent = {
   id: string;
   title: string;
+  /** Site listing date: `YYYY-MM-DD` or an offset datetime. */
+  listedAt: string;
   /**
    * Date-only: `YYYY-MM-DD`
    * Datetime: `YYYY-MM-DDTHH:mm:ss+09:00`

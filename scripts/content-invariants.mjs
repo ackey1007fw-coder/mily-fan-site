@@ -189,6 +189,9 @@ export function verifyEvents(items) {
     if (!EVENT_KINDS.has(item.kind)) {
       errors.push(`events "${item.id ?? "?"}" has an invalid kind`);
     }
+    if (!isValidEventTimestamp(item.listedAt ?? "")) {
+      errors.push(`events "${item.id ?? "?"}" listedAt must be a real date-only or datetime value`);
+    }
     if (!isValidEventTimestamp(item.startAt ?? "")) {
       errors.push(`events "${item.id ?? "?"}" startAt must be a real date-only or datetime value`);
     }

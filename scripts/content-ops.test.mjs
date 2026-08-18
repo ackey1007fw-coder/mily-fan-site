@@ -41,6 +41,7 @@ describe("daily content-ops guide", () => {
     assert.match(ops, /公開permalinkがない一時的なInstagram Story/);
     assert.match(ops, /sourceLabel: "Instagram Story"/);
     assert.match(ops, /LatestとGallery/);
+    assert.match(ops, /listedAt/);
     assert.match(mediaGuide, /一時的なInstagram Story動画/);
     assert.match(mediaGuide, /MP4 1本とposter 1枚/);
 

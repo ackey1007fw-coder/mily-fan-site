@@ -33,6 +33,7 @@ const validNews = {
 const validEvent = {
   id: "sample-event",
   title: "確認済みの出演",
+  listedAt: "2026-08-13",
   startAt: "2026-08-14T20:00:00+09:00",
   timezone: "Asia/Tokyo",
   kind: "appearance",
@@ -497,6 +498,11 @@ describe("content verification invariants", () => {
     assert.equal(
       verifyEvents([{ ...validEvent, startAt: "2026-08-14T20:00:00+09:00" }]).length,
       0,
+    );
+    assert.ok(
+      verifyEvents([{ ...validEvent, listedAt: "2026-08-14T20:00:00" }]).some(
+        (error) => error.includes("listedAt must be a real date-only or datetime"),
+      ),
     );
   });
 
