@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { createPortalFeed } from "./src/data/portalFeed.ts";
 import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 
 function siteMetadataPlugin(): Plugin {
@@ -22,8 +23,21 @@ function siteMetadataPlugin(): Plugin {
   };
 }
 
+function portalFeedPlugin(): Plugin {
+  return {
+    name: "portal-feed",
+    generateBundle() {
+      this.emitFile({
+        type: "asset",
+        fileName: "portal-feed.json",
+        source: `${JSON.stringify(createPortalFeed(), null, 2)}\n`,
+      });
+    },
+  };
+}
+
 export default defineConfig({
-  plugins: [react(), siteMetadataPlugin()],
+  plugins: [react(), siteMetadataPlugin(), portalFeedPlugin()],
   build: {
     target: "es2020",
     minify: "esbuild",
