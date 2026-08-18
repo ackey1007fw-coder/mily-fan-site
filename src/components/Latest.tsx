@@ -1,6 +1,31 @@
+import type { ReactNode } from "react";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
+
+function NewsLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: ReactNode;
+}) {
+  if (href.startsWith("/")) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <ExternalLink href={href} className={className}>
+      {children}
+    </ExternalLink>
+  );
+}
 
 export function Latest() {
   const latestNews = sortNewsByDateDesc(news);
@@ -72,23 +97,23 @@ export function Latest() {
                         </span>
                       ) : null}
                       {item.url && item.url !== item.source ? (
-                        <ExternalLink
+                        <NewsLink
                           href={item.url}
                           className="text-sm font-medium text-sage hover:underline"
                         >
                           関連リンク
-                        </ExternalLink>
+                        </NewsLink>
                       ) : null}
                     </p>
                   ) : null}
                   {item.ctaLabel && ctaHref ? (
                     <p className="mt-4">
-                      <ExternalLink
+                      <NewsLink
                         href={ctaHref}
                         className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
                       >
                         {item.ctaLabel}
-                      </ExternalLink>
+                      </NewsLink>
                     </p>
                   ) : null}
                 </li>

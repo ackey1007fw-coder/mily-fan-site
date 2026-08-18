@@ -40,6 +40,16 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-18-evening-radio",
+    date: "2026-08-18",
+    title: "ラジオ配信ありがとうございました",
+    body: "体は本調子ではないなかでもラジオ配信を届けてくれたみりぃから、見に来てくれた人へのお礼が届きました。翌日の配信は夜になる予定で、時間は当日改めて伝えるとのこと。",
+    source: "https://x.com/Mily_chan36/status/2089721650522820667",
+    sourceLabel: "Xの投稿を見る",
+    url: "/stories/2026-08-18-radio/",
+    ctaLabel: "配信の記録を読む",
+  },
+  {
     id: "2026-08-18-morning-update",
     date: "2026-08-18",
     title: "おはよう〜☀️ 10:50〜11:30配信予定",

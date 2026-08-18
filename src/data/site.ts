@@ -58,6 +58,11 @@ export function sitemapXml(): string {
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>${storyUrl("2026-08-18-radio")}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>${storyUrl("second-round-2026")}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

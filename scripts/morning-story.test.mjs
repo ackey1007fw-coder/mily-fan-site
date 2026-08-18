@@ -285,7 +285,6 @@ describe("STORIES boundary", () => {
   it("does not add the morning post to the article collection", async () => {
     const source = await read("src/data/stories.ts");
 
-    assert.equal(stories.length, 1);
     assert.equal(stories.some((story) => story.date === "2026-08-17"), false);
     assert.equal(stories.some((story) => /morning|ohayo/i.test(story.slug)), false);
     assert.doesNotMatch(source, /2026-08-17-morning-story|mily-b03-01-morning-ohayo/);

@@ -312,6 +312,33 @@ describe("content verification invariants", () => {
     assert.deepEqual(errors, []);
   });
 
+  it("accepts a local STORIES path as a news related link", () => {
+    const errors = verifyNews([
+      {
+        id: "story-link",
+        date: "2026-08-18",
+        title: "配信の記録",
+        body: "本人の投稿をもとにした記録。",
+        source: "https://x.com/Mily_chan36/status/2089721650522820667",
+        url: "/stories/2026-08-18-radio/",
+      },
+    ]);
+
+    assert.deepEqual(errors, []);
+    assert.ok(
+      verifyNews([
+        {
+          id: "bad-internal",
+          date: "2026-08-18",
+          title: "不正な内部リンク",
+          body: "許可していないpath。",
+          source: "https://example.com/source",
+          url: "/about/",
+        },
+      ]).some((error) => error.includes("local /stories/ path")),
+    );
+  });
+
   it("allows truthful references to external official sources", () => {
     const errors = verifyNews([
       {
