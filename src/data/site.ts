@@ -11,7 +11,7 @@ export const site = {
    * Public origin of the current Vercel deployment.
    */
   siteUrl: "https://mily-fan-site.vercel.app",
-  ogImagePath: "/og.png",
+  ogImagePath: "/og-mily-20260818.jpg",
   themeColor: "#f6f3ee",
 } as const;
 
