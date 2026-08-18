@@ -49,7 +49,7 @@ export const news: NewsItem[] = [
     ctaLabel: "SHOWROOMで応援する",
     media: {
       kind: "video",
-      src: "/media/gallery/mily-b04-01-morning-showroom.mp4",
+      src: "/media/gallery/mily-b04-01-morning-showroom-ios.mp4",
       poster: "/media/gallery/mily-b04-01-morning-showroom-poster.jpg",
       width: 160,
       height: 284,
