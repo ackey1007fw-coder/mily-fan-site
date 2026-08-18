@@ -49,6 +49,7 @@ describe("url normalization", () => {
     assert.equal(platformOf("https://x.com/a"), "x");
     assert.equal(platformOf("https://twitter.com/a"), "x");
     assert.equal(platformOf("https://www.tiktok.com/@a"), "tiktok");
+    assert.equal(platformOf("https://mixch.tv/u/10114673"), "mixchannel");
     assert.equal(platformOf("https://example.com/a"), null);
   });
 });
@@ -87,6 +88,17 @@ describe("sns diffing", () => {
       assert.equal(finding.severity, SEVERITY.unavailable);
     }
     assert.equal(hasChanges(findings), false);
+  });
+
+  it("does not flag MixChannel against the ENTRY page sns list", () => {
+    const findings = diffSnsLinks(
+      [
+        ...registered,
+        { platform: "mixchannel", url: "https://mixch.tv/u/10114673" },
+      ],
+      observedSame,
+    );
+    assert.deepEqual(findings, []);
   });
 });
 

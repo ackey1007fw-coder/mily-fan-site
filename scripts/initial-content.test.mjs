@@ -36,7 +36,22 @@ describe("confirmed public identity", () => {
     assert.match(factText, /ラジオ研究/);
     assert.match(factText, /篠笛/);
     assert.match(factText, /トマトの栄養素🍅/);
+    assert.match(factText, /MBTI/);
+    assert.match(factText, /ENFP（運動家）/);
     assert.doesNotMatch(factText, /フォロワー|現在順位|所属事務所|本名/);
+
+    const mbti = profile.facts.find((item) => item.id === "mbti");
+    assert.equal(mbti?.status, "time-sensitive");
+    assert.equal(mbti?.asOf, "2026-08-18");
+    assert.deepEqual(mbti?.sourceIds, ["mixchannelProfile"]);
+    assert.equal(
+      profileSources.mixchannelProfile.url,
+      "https://mixch.tv/u/10114673",
+    );
+    assert.equal(
+      profileSources.mixchannelProfile.publisher,
+      "三橋莉子 本人MixChannel",
+    );
 
     const sourceKeys = new Set(Object.keys(profileSources));
     assert.ok(
@@ -70,7 +85,7 @@ describe("confirmed public identity", () => {
   });
 
   it("keeps only confirmed socials and contest/FM links separate", () => {
-    assert.equal(socials.length, 4);
+    assert.equal(socials.length, 5);
     const showroom = socials.find((item) => item.platform === "showroom");
     assert.equal(showroom?.url, "https://www.showroom-live.com/r/circle2026_0734");
     const instagram = socials.find((item) => item.platform === "instagram");
@@ -80,6 +95,10 @@ describe("confirmed public identity", () => {
     assert.equal(x?.url, "https://x.com/Mily_chan36");
     const tiktok = socials.find((item) => item.platform === "tiktok");
     assert.equal(tiktok?.url, "https://www.tiktok.com/@mily_chan36");
+    const mixchannel = socials.find((item) => item.platform === "mixchannel");
+    assert.equal(mixchannel?.id, "mixchannel-mily");
+    assert.equal(mixchannel?.label, "三橋莉子（みりぃ）");
+    assert.equal(mixchannel?.url, "https://mixch.tv/u/10114673");
     assert.ok(socials.every((item) => item.confirmed === true));
 
     assert.ok(

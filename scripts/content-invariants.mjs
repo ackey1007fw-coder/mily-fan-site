@@ -20,6 +20,7 @@ const SOCIAL_PLATFORMS = new Set([
   "youtube",
   "tiktok",
   "showroom",
+  "mixchannel",
   "other",
 ]);
 

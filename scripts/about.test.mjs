@@ -12,6 +12,7 @@ describe("home profile preview", () => {
     const app = await readFile(path.join(root, "src/App.tsx"), "utf8");
 
     assert.match(source, /previewFactIds/);
+    assert.doesNotMatch(source, /mbti/);
     assert.match(source, /fact\.label/);
     assert.match(source, /fact\.value/);
     assert.match(source, /fact\.asOf/);

@@ -100,6 +100,7 @@ describe("daily content-ops guide", () => {
     assert.ok(socials.some((item) => item.platform === "instagram"));
     assert.ok(socials.some((item) => item.platform === "tiktok"));
     assert.ok(socials.some((item) => item.platform === "showroom"));
+    assert.ok(socials.some((item) => item.platform === "mixchannel"));
     assert.ok(links.some((item) => item.url.includes("fm-smw.jp")));
     assert.ok(media.filter((item) => item.published).length >= 6);
     assert.ok(
