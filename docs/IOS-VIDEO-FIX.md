@@ -1,7 +1,17 @@
 # iOS in-app video compatibility
 
-The 2026-08-18 Latest video originally used an ultra-small video-only derivative. Some iOS in-app browsers displayed a disabled playback icon instead of loading it.
+The 2026-08-18 Latest video originally shipped through a damaged binary handoff. Desktop rendering could still show the video element, but iOS/WebKit-based in-app browsers could reject the MP4 and display a disabled playback icon.
 
-The production build now derives a compatibility copy at a new URL so the immutable media cache cannot retain the old response. The compatibility copy uses H.264 Baseline, yuv420p, 30 fps, AAC-LC mono audio and `+faststart`.
+The replacement is encoded from the owner-provided original and uses a new URL so the immutable `/media/*` cache cannot retain the damaged file.
 
-The source asset remains unchanged. The generated `*-ios.mp4` is a build artifact and is not committed.
+Compatibility derivative:
+
+- H.264 Constrained Baseline
+- yuv420p
+- 160×284
+- 15 fps
+- video-only
+- `+faststart` (`moov` before `mdat`)
+- SHA-256 checked during every build
+
+The verified MP4 bytes are stored as short wrapped base64 chunks under `scripts/assets/mily-b04-ios/`. `scripts/build-ios-video.mjs` reconstructs the ignored public derivative before the Vite build. CI also runs ffprobe against the reconstructed file, so a truncated or malformed handoff fails before deployment.
