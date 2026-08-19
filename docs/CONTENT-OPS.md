@@ -16,7 +16,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `news.ts` | 2件。8月17日の朝Story、21歳誕生日（2026-08-02） | 朝Storyは非リンク表示、誕生日は Instagram `.../p/DbiY3PHk1c8/` | Story本文は見える範囲だけ。未確認の推測なし |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
-| `media.ts` | 写真6枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスは `owner-provided` | `sourceDate` / `credit` は未確認のため `null` |
+| `media.ts` | 写真7枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスと落ち葉（b05-01）は `owner-provided` | `sourceDate` / `credit` は未確認のため `null`。縦写真は `aspect` で切り抜きを避ける |
 | `galleryVideos.ts` | 独立動画1本（b03 朝Story。`published: true`） | owner-provided / Instagram Story（非リンク） | Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
@@ -142,6 +142,7 @@ Google Drive 原本 → 選定 → media/original/ → pnpm media:build
 - 原本は Drive。SNS から画像を自動取得しない。
 - 顔の AI 生成・置換・補正・塗り足しは禁止。
 - b02はDrive Galleryで使用済み。新しい独立素材は新しいbatch番号を使い、既存連番を再利用しない。
+- 縦写真は `aspect`（例 `"1152 / 2048"`）を指定する。Galleryタイル既定の4/3へ切り抜かない。
 - `published: true` にする前にオーナー確認。
 - 公開済みファイル名は変えない。差し替えは新しい id。
 
