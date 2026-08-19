@@ -16,6 +16,26 @@ export const storySources = {
     label: "本人X投稿（2026年8月18日）",
     url: "https://x.com/Mily_chan36/status/2089721650522820667",
   },
+  "x-2026-08-19-second-round-result": {
+    id: "x-2026-08-19-second-round-result",
+    label: "本人X投稿（2026年8月19日）",
+    url: "https://x.com/Mily_chan36/status/2089996508691390948",
+  },
+  "misscircle-2026-third-round-post": {
+    id: "misscircle-2026-third-round-post",
+    label: "MISS CIRCLE CONTEST 公式発表（2026年8月19日）",
+    url: "https://x.com/circle_contest/status/2089986551346573523",
+  },
+  "misscircle-2026-third-round-list": {
+    id: "misscircle-2026-third-round-list",
+    label: "MISS CIRCLE CONTEST 2026 三次審査進出者一覧",
+    url: "https://2026.misscircle.jp/list/3",
+  },
+  "misscircle-2026-entry-734": {
+    id: "misscircle-2026-entry-734",
+    label: "MISS CIRCLE CONTEST 2026 ENTRY 734 プロフィール",
+    url: "https://2026.misscircle.jp/entry/734",
+  },
 } as const;
 
 export type StorySourceId = keyof typeof storySources;
@@ -27,6 +47,9 @@ export type StoryMedia =
       src: string;
       alt: string;
       caption: string;
+      /** Intrinsic size, when known. Reserves space so tall photos do not shift the layout. */
+      width?: number;
+      height?: number;
     }
   | {
       id: string;
@@ -71,6 +94,8 @@ export type Story = {
   cardDescription: string;
   date: string;
   dateLabel: string;
+  /** Optional short label shown on the card, e.g. a confirmed milestone. */
+  badge?: string;
   published: boolean;
   sourceIds: StorySourceId[];
   leadMediaId: string | null;
@@ -374,7 +399,130 @@ const secondRoundStory: Story = {
   ],
 };
 
-export const stories: Story[] = [radioStory, secondRoundStory];
+const secondRoundResultStory: Story = {
+  slug: "second-round-result-2026",
+  href: "/stories/second-round-result-2026/",
+  title: "MISS CIRCLE CONTEST 2026 2次審査通過！三次審査進出へ",
+  cardTitle: "2次審査通過！三次審査進出へ",
+  eyebrow: "MISS CIRCLE CONTEST 2026｜2次審査通過",
+  badge: "2次審査通過",
+  lead:
+    "三橋莉子さんが「MISS CIRCLE CONTEST 2026」の2次審査を通過し、三次審査への進出を報告しました。8月8日から16日まで行われた2次審査を、WEB投票やSHOWROOMでの応援とともに完走。「一緒に絶景観に行きましょう」という言葉で、次の挑戦へ向かいます。",
+  cardDescription:
+    "2次審査を通過し、三次審査へ。毎日の投票とSHOWROOMでの応援に感謝を伝えた、8月19日の報告です。",
+  date: "2026-08-19",
+  dateLabel: "2026.08.19",
+  published: true,
+  sourceIds: [
+    "x-2026-08-19-second-round-result",
+    "misscircle-2026-third-round-post",
+    "misscircle-2026-third-round-list",
+    "misscircle-2026-entry-734",
+  ],
+  leadMediaId: "second-round-result-photo",
+  media: [
+    {
+      id: "second-round-result-photo",
+      kind: "image",
+      src: "/media/stories/second-round-result-2026/mily-second-round-result-autumn-leaf.jpg",
+      width: 1152,
+      height: 2048,
+      alt: "MISS CIRCLE CONTEST 2026の2次審査通過を報告した三橋莉子さん",
+      caption: "夜の並木道で、大きな落ち葉を手にした一枚。",
+    },
+  ],
+  sections: [
+    {
+      id: "second-round-result",
+      title: "2次審査を通過し、三次審査へ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "三橋莉子さんが「MISS CIRCLE CONTEST 2026」の2次審査を通過し、三次審査への進出を報告しました。",
+          sourceIds: [
+            "x-2026-08-19-second-round-result",
+            "misscircle-2026-third-round-post",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "ENTRY 734として挑戦していた2次審査は、8月8日から16日まで。WEB投票やSHOWROOMを通じて多くの応援を受けながら、審査期間を完走しました。",
+          sourceIds: [
+            "misscircle-2026-entry-734",
+            "x-2026-08-19-second-round-result",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "主催者が公開している三次審査進出者の一覧にも、名前が掲載されています。",
+          sourceIds: [
+            "misscircle-2026-third-round-list",
+            "misscircle-2026-third-round-post",
+          ],
+        },
+      ],
+    },
+    {
+      id: "thanks",
+      title: "毎日の投票とSHOWROOMでの応援に",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "投稿では、毎日の投票やSHOWROOMで応援してくれた皆さんへの感謝が、まっすぐな言葉で伝えられています。",
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "2次審査通過✨\n毎日投票してくださったり、SRで応援してくださったおかげです🌈",
+          ],
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+      ],
+    },
+    {
+      id: "next-stage",
+      title: "一歩ずつ、次のステージへ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "これから続いていく挑戦についても、本人の言葉が残されています。",
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "これからも乗り越えるべき壁はたくさんあります。皆さんと一緒に一歩ずつ乗り越えていきたいです。",
+          ],
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+        {
+          type: "paragraph",
+          text: "最後は、この言葉でした。",
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "皆さんが「応援してよかった」と思える人間に\nなってみせます。一緒に絶景観に行きましょう✊🏻🔥",
+          ],
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+        {
+          type: "paragraph",
+          text: "またひとつ次のステージへ進んだ、みりぃさん。これから続いていく挑戦も、一歩ずつ一緒に応援していきましょう。",
+          sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+      ],
+    },
+  ],
+};
+
+export const stories: Story[] = [
+  secondRoundResultStory,
+  radioStory,
+  secondRoundStory,
+];
 
 export function visibleStories(): Story[] {
   return stories.filter((story) => story.published);

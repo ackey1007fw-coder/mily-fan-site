@@ -25,11 +25,15 @@ export function verifySiteUrlConsistency() {
   const profileCanonical = profileUrl();
   const storyCanonical = storyUrl("second-round-2026");
   const radioStoryCanonical = storyUrl("2026-08-18-radio");
+  const resultStoryCanonical = storyUrl("second-round-result-2026");
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
   const storyHtml = readRelative("stories/second-round-2026/index.html");
   const radioStoryHtml = readRelative("stories/2026-08-18-radio/index.html");
+  const resultStoryHtml = readRelative(
+    "stories/second-round-result-2026/index.html",
+  );
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
   const viteConfig = readRelative("vite.config.ts");
@@ -89,6 +93,22 @@ export function verifySiteUrlConsistency() {
   if (!radioStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("radio story images must use __SITE_OG_IMAGE__");
   }
+  if (!resultStoryHtml.includes('href="__STORY_SECOND_ROUND_RESULT_CANONICAL__"')) {
+    errors.push(
+      "second-round result story canonical href must use __STORY_SECOND_ROUND_RESULT_CANONICAL__",
+    );
+  }
+  if (
+    !resultStoryHtml.includes('property="og:url"') ||
+    !resultStoryHtml.includes('content="__STORY_SECOND_ROUND_RESULT_CANONICAL__"')
+  ) {
+    errors.push(
+      "second-round result story og:url must use __STORY_SECOND_ROUND_RESULT_CANONICAL__",
+    );
+  }
+  if (!resultStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("second-round result story images must use __SITE_OG_IMAGE__");
+  }
 
   if (robots !== robotsTxt()) {
     errors.push("public/robots.txt must be generated from site.siteUrl");
@@ -112,12 +132,18 @@ export function verifySiteUrlConsistency() {
   if (!sitemap.includes(`<loc>${radioStoryCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the radio story canonical URL");
   }
+  if (!sitemap.includes(`<loc>${resultStoryCanonical}</loc>`)) {
+    errors.push(
+      "public/sitemap.xml must include the second-round result story canonical URL",
+    );
+  }
 
   if (
     !viteConfig.includes("canonicalUrl()") ||
     !viteConfig.includes("profileUrl()") ||
     !viteConfig.includes('storyUrl("second-round-2026")') ||
     !viteConfig.includes('storyUrl("2026-08-18-radio")') ||
+    !viteConfig.includes('storyUrl("second-round-result-2026")') ||
     !viteConfig.includes("ogImageUrl()")
   ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
@@ -144,12 +170,18 @@ export function verifySiteUrlConsistency() {
       "radio story HTML must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  if (hardcodedOrigin.test(resultStoryHtml)) {
+    errors.push(
+      "second-round result story HTML must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
 
   if (
     !canonical.startsWith(origin) ||
     !profileCanonical.startsWith(origin) ||
     !storyCanonical.startsWith(origin) ||
     !radioStoryCanonical.startsWith(origin) ||
+    !resultStoryCanonical.startsWith(origin) ||
     !ogImage.startsWith(origin)
   ) {
     errors.push("canonical and og image URLs must stay on site.siteUrl");

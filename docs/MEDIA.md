@@ -128,3 +128,22 @@ Drive Gallery（b02）とは別の独立動画。Latest と Gallery が同じ公
 - posterは公開MP4の実フレーム。AI生成・顔補正なし
 - metadata除去済み
 - 元Drive URLは記録しない
+
+## 素材台帳（batch b05 / 受領日 2026-08-19）
+
+STORY `/stories/second-round-result-2026/` 専用の記事写真。Drive Gallery（b02）にも
+`public/media/gallery/`（Gallery 掲載枠）にも含めない。記事内で1ファイルだけ自己ホストする。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b05-01 | stories/second-round-result-2026/mily-second-round-result-autumn-leaf.jpg | 夜の並木道で落ち葉を持つ本人写真。1152×2048。owner-provided | ✅ |
+
+確認済み:
+
+- provenance: owner-provided（オーナーが依頼時に直接提供）
+- 元素材は `media/original/mily-b05-01-autumn-leaf.jpg`（gitignore 済み・無改変）
+  sha256 先頭12桁: `6d615b2b7354`
+- 公開派生は sharp で再エンコードのみ（品質82 / progressive）。**トリミング・回転・拡縮なし**
+- EXIF / GPS / IPTC / XMP は派生に残っていない（生成後に確認）
+- AI 生成・AI 加工・顔加工なし。縦構図をそのまま使用
+- 撮影日・撮影者・公開投稿URLは未確認のため記録しない（推測しない）

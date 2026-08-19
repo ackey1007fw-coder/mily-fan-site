@@ -67,6 +67,11 @@ export function sitemapXml(): string {
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>${storyUrl("second-round-result-2026")}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
 `;
 }

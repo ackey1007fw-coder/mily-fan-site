@@ -14,13 +14,14 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
 | `news.ts` | 2件。8月17日の朝Story、21歳誕生日（2026-08-02） | 朝Storyは非リンク表示、誕生日は Instagram `.../p/DbiY3PHk1c8/` | Story本文は見える範囲だけ。未確認の推測なし |
+| `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真6枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスは `owner-provided` | `sourceDate` / `credit` は未確認のため `null` |
 | `galleryVideos.ts` | 独立動画1本（b03 朝Story。`published: true`） | owner-provided / Instagram Story（非リンク） | Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |
-| `highlights.ts` | MISS CIRCLE、CAMPUS GIRLS、SHOWROOM開始の確認済み3件 | 主催者・本人・SHOWROOM | 結果未確定の順位や掲載権は入れない |
+| `highlights.ts` | MISS CIRCLE（挑戦 / 2次審査通過・三次審査進出）、CAMPUS GIRLS、SHOWROOM開始の確認済み4件 | 主催者・本人・SHOWROOM | 結果未確定の順位や掲載権は入れない |
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
 維持する公開情報（消さない）:
@@ -83,6 +84,21 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 - 閲覧画面スクリーンショットは文言確認資料に限り、Latest / Gallery / `public/` / gitへ入れない。省略記号より先を補完しない。
 - 同じローカル派生をLatestとGalleryの両方に出す場合、MP4とposterをそれぞれ1ファイルだけ作り、両方から同じpathを参照する。
 - 日常の朝投稿はLatest + Galleryで扱う。節目を文章で残すサイト機能の `/stories/` へは追加しない。
+
+### コンテスト結果など「節目」を扱うとき
+
+通常のSNS紹介と分けて、次の3か所を同じ根拠で更新する。同じ本文を二重に持たない。
+
+1. `src/data/stories.ts` に記事を追加し、`stories/<slug>/index.html` と
+   `vite.config.ts` / `src/data/site.ts`（sitemap）/ `scripts/check-site-url.mjs` に
+   ルートを登録する。本文・写真・出典はここだけに置く。
+2. `src/data/news.ts` に要約1件を足し、`url` を `/stories/<slug>/` に向ける。
+   本文はLatest用の短い要約に留め、記事本文を貼り直さない。
+3. 確認済みの節目なら `src/data/highlights.ts` に1件、審査フェーズが動いたら
+   `src/data/contest.ts` の `currentPhase` を一次ソース付きで更新する。
+
+`Story` の `badge` は「2次審査通過」のような確認済みラベルだけに使う。未確認の
+日程・審査方法・順位・得票数・ファイナル進出・グランプリは、どの場所にも書かない。
 
 ---
 
