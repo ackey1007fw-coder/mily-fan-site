@@ -66,7 +66,14 @@ export function Gallery() {
                         decoding="async"
                         alt={item.alt}
                         className="aspect-[4/3] w-full object-cover"
-                        style={item.focal ? { objectPosition: item.focal } : undefined}
+                        style={
+                          item.focal || item.aspect
+                            ? {
+                                ...(item.focal ? { objectPosition: item.focal } : {}),
+                                ...(item.aspect ? { aspectRatio: item.aspect } : {}),
+                              }
+                            : undefined
+                        }
                       />
                     </picture>
                   </a>

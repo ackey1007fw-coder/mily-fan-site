@@ -64,6 +64,33 @@ describe("media collection", () => {
     }
   });
 
+  it("publishes the 8/19 autumn-leaf photo without cropping the portrait", () => {
+    const item = media.find((entry) => entry.id === "mily-b05-01");
+    assert.ok(item);
+    assert.equal(item.published, true);
+    assert.equal(item.kind, "photo");
+    assert.equal(item.basePath, "/media/gallery/mily-b05-01-autumn-leaf");
+    assert.equal(item.provenance, "owner-provided");
+    // 撮影日・撮影者・公開投稿URLは未確認。推測して埋めない。
+    assert.equal(item.sourceUrl, null);
+    assert.equal(item.sourceDate, null);
+    assert.equal(item.credit, null);
+    // Hero の featured を奪わない
+    assert.notEqual(item.featured, true);
+    assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
+    // 元素材 1152px 幅。`-1600` は拡大されないので実寸を記録する。
+    assert.equal(item.width, 1152);
+    assert.equal(item.height, 2048);
+    assert.equal(item.aspect, "1152 / 2048");
+  });
+
+  it("keeps landscape tiles on the default 4/3 aspect", () => {
+    for (const item of media) {
+      if (item.id === "mily-b05-01") continue;
+      assert.equal(item.aspect, undefined, item.id);
+    }
+  });
+
   it("only surfaces published items", () => {
     const items = visibleMedia([
       { ...validItem, id: "on" },
@@ -91,6 +118,9 @@ describe("gallery provenance", () => {
     assert.match(source, /item\.sourceUrl \?/);
     assert.match(source, /href=\{item\.sourceUrl\}/);
     assert.match(source, /出典を見る/);
+    // 縦写真は aspect でタイル比率を上書きし、4/3 へ切り抜かない
+    assert.match(source, /aspect-\[4\/3\]/);
+    assert.match(source, /item\.aspect \? \{ aspectRatio: item\.aspect \} : \{\}/);
   });
 });
 

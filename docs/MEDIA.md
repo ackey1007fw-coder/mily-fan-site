@@ -131,12 +131,23 @@ Drive Gallery（b02）とは別の独立動画。Latest と Gallery が同じ公
 
 ## 素材台帳（batch b05 / 受領日 2026-08-19）
 
-STORY `/stories/second-round-result-2026/` 専用の記事写真。Drive Gallery（b02）にも
-`public/media/gallery/`（Gallery 掲載枠）にも含めない。記事内で1ファイルだけ自己ホストする。
+同じ元素材から、記事用の1枚と Gallery 用の派生セットを作っている。
+記事側は STORY `/stories/second-round-result-2026/` 専用のフルサイズ1枚、
+Gallery 側は `pnpm media:build` の通常フロー（480 / 960 / 1600 × jpg / webp）。
+Drive Gallery（b02）には含めない。
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b05-01 | stories/second-round-result-2026/mily-second-round-result-autumn-leaf.jpg | 夜の並木道で落ち葉を持つ本人写真。1152×2048。owner-provided | ✅ |
+| b05-01（記事） | stories/second-round-result-2026/mily-second-round-result-autumn-leaf.jpg | 夜の並木道で落ち葉を持つ本人写真。1152×2048。owner-provided | ✅ |
+| b05-01（Gallery） | gallery/mily-b05-01-autumn-leaf-{480,960,1600}.{jpg,webp} | 上と同じ元素材の通常派生 | ✅ |
+
+Gallery 派生のメモ:
+
+- 元素材が 1152px 幅のため、`-1600` は拡大されず **1152×2048** のまま出力される
+  （`build-media.mjs` の `withoutEnlargement`）。`media.ts` の `width` / `height` は
+  実寸の 1152×2048 を記録する。
+- 縦写真なので `media.ts` の `aspect: "1152 / 2048"` を指定し、Gallery タイル既定の
+  4/3 へ切り抜かない。既存の横写真は `aspect` を持たないため表示は従来どおり。
 
 確認済み:
 

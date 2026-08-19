@@ -42,6 +42,12 @@ export type MediaItem = {
   credit: string | null;
   /** CSS object-position keeping the subject in frame when cropped. */
   focal?: string;
+  /**
+   * CSS aspect-ratio for the gallery tile, e.g. "1152 / 2048".
+   * Omit for the default 4/3 tile. Set it on portrait photos so the
+   * composition is kept instead of being cropped to landscape.
+   */
+  aspect?: string;
   featured?: boolean;
   published: boolean;
 };
@@ -49,6 +55,23 @@ export type MediaItem = {
 const BIRTHDAY_POST = "https://www.instagram.com/p/DbiY3PHk1c8/";
 
 export const media: MediaItem[] = [
+  {
+    id: "mily-b05-01",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b05-01-autumn-leaf",
+    // 元素材が 1152px 幅のため、`-1600` の派生は拡大せず 1152x2048 のまま。
+    // （`pnpm media:build` は withoutEnlargement で元素材幅を上限にする）
+    widths: [480, 960, 1600],
+    width: 1152,
+    height: 2048,
+    alt: "夜の並木道で、大きな落ち葉を手に持つみりぃさん",
+    provenance: "owner-provided",
+    sourceUrl: null,
+    sourceDate: null,
+    credit: null,
+    aspect: "1152 / 2048",
+    published: true,
+  },
   {
     id: "mily-b01-03",
     kind: "photo",
