@@ -120,6 +120,110 @@ describe("8/19 second-round result news item", () => {
   });
 });
 
+describe("8/19 well-rested morning news item", () => {
+  it("archives the morning X post with its self-hosted photo", async () => {
+    const { news, sortNewsByDateDesc } = await import("../src/data/news.ts");
+    const item = news.find((entry) => entry.id === "2026-08-19-well-rested-morning");
+
+    assert.ok(item);
+    assert.equal(item.date, "2026-08-19");
+    assert.equal(
+      item.source,
+      "https://x.com/Mily_chan36/status/2089841199280742669",
+    );
+    assert.equal(item.sourceLabel, "Xの投稿を見る");
+    assert.equal(item.url, undefined);
+    assert.match(item.title, /体調回復/);
+    assert.match(item.body, /体調が回復/);
+    assert.match(item.body, /今日もみんなと一緒に頑張るぞぃ/);
+
+    // 投稿本文は原文のまま、改行込みで残す
+    assert.ok(item.message);
+    assert.match(item.message.text, /^おはよう〜☀️\n体調回復/);
+    assert.match(item.message.text, /しっかり寝ました！！！/);
+    assert.match(item.message.text, /みんな心配ありがとう/);
+    assert.match(item.message.text, /#ミスサー #ミスサークル/);
+    assert.match(item.message.text, /#ミスコン$/);
+
+    // 本人が書いていない心理状態を足さない
+    for (const phrase of ["安堵", "確信", "自信満々", "順位", "得票", "いいね", "リポスト", "閲覧"]) {
+      assert.equal(item.body.includes(phrase), false, phrase);
+      assert.equal(item.title.includes(phrase), false, phrase);
+      assert.equal(item.message.text.includes(phrase), false, phrase);
+    }
+
+    // 8/19 は結果報告（あと）→ 朝の投稿（さき）の順で並ぶ
+    const order = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.deepEqual(order.slice(0, 3), [
+      "2026-08-19-second-round-result",
+      "2026-08-19-well-rested-morning",
+      "2026-08-18-evening-radio",
+    ]);
+
+    // 既存のお知らせを置き換えていない
+    for (const id of [
+      "2026-08-18-morning-update",
+      "2026-08-17-morning-story",
+      "2026-08-02-21st-birthday",
+    ]) {
+      assert.ok(news.some((entry) => entry.id === id), id);
+    }
+  });
+
+  it("ships the photo locally at its untouched 1162x2048 size", async () => {
+    const { news } = await import("../src/data/news.ts");
+    const item = news.find((entry) => entry.id === "2026-08-19-well-rested-morning");
+    const media = item?.media;
+
+    assert.ok(media);
+    assert.equal(media.kind, "image");
+    assert.equal(media.src, "/media/news/mily-b06-01-recovery-morning.jpg");
+    assert.equal(media.width, 1162);
+    assert.equal(media.height, 2048);
+    assert.match(media.alt, /ウインク/);
+    assert.match(media.alt, /ピース/);
+
+    const file = path.join(root, "public", media.src.slice(1));
+    const bytes = await readFile(file);
+    assert.ok(bytes.length > 0);
+    // JPEG SOI marker + real intrinsic size recorded above
+    assert.equal(bytes[0], 0xff);
+    assert.equal(bytes[1], 0xd8);
+  });
+
+  it("keeps the post out of Gallery and the article collection", async () => {
+    const { media } = await import("../src/data/media.ts");
+    const { stories } = await import("../src/data/stories.ts");
+    const storiesSource = await readFile(
+      path.join(root, "src/data/stories.ts"),
+      "utf8",
+    );
+
+    assert.equal(
+      media.some((entry) => entry.basePath.includes("recovery-morning")),
+      false,
+    );
+    assert.equal(
+      stories.some((story) => story.slug.includes("recovery")),
+      false,
+    );
+    assert.doesNotMatch(storiesSource, /mily-b06-01-recovery-morning/);
+  });
+
+  it("renders a news photo without cropping it", async () => {
+    const latest = await readFile(
+      path.join(root, "src/components/Latest.tsx"),
+      "utf8",
+    );
+
+    assert.match(latest, /item\.media\?\.kind === "image"/);
+    assert.match(latest, /<img/);
+    assert.match(latest, /object-contain/);
+    assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);
+    assert.match(latest, /whitespace-pre-line/);
+  });
+});
+
 describe("source and url are not mixed", () => {
   it("uses required source for 出典を見る in Latest and Schedule", async () => {
     const latest = await readFile(

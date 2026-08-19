@@ -147,3 +147,23 @@ STORY `/stories/second-round-result-2026/` 専用の記事写真。Drive Gallery
 - EXIF / GPS / IPTC / XMP は派生に残っていない（生成後に確認）
 - AI 生成・AI 加工・顔加工なし。縦構図をそのまま使用
 - 撮影日・撮影者・公開投稿URLは未確認のため記録しない（推測しない）
+
+## 素材台帳（batch b06 / 受領日 2026-08-19）
+
+Latest の 2026-08-19「体調回復」朝の投稿専用の記事写真。Drive Gallery（b02）にも
+`public/media/gallery/`（Gallery 掲載枠）にも含めない。Latest のカード内で1ファイルだけ自己ホストする。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b06-01 | media/news/mily-b06-01-recovery-morning.jpg | ウインクしてピースする朝の自撮り。1162×2048。owner-provided | ✅ |
+
+確認済み:
+
+- provenance: owner-provided（オーナーが依頼時に直接提供）
+- 元素材は `media/original/mily-b06-01-recovery-morning.jpg`（gitignore 済み・無改変）
+  sha256 先頭12桁: `1a0fec17a8da`
+- 公開ファイルは元素材の**バイト単位で同一のコピー**。再エンコード・トリミング・回転・拡縮なし
+  （元素材に EXIF / GPS / IPTC / XMP が無いことを確認済みのため、再圧縮せずそのまま置く）
+- 残っているのは JFIF ヘッダと ICC カラープロファイルのみ（個人情報なし）
+- AI 生成・AI 加工・顔加工なし。1162:2048 の縦構図をそのまま表示（`object-contain` 相当・トリミングなし）
+- 出典は本人X投稿（2026-08-19）。撮影者は未確認のため記録しない

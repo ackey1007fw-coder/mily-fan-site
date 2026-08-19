@@ -10,7 +10,7 @@
  */
 import { morningStoryVideo } from "./morningStoryVideo.ts";
 
-export type NewsMedia = {
+export type NewsVideoMedia = {
   kind: "video";
   src: string;
   poster: string;
@@ -18,6 +18,17 @@ export type NewsMedia = {
   height: number;
   alt: string;
 };
+
+/** Self-hosted still image that belongs to the post itself, not the Gallery. */
+export type NewsImageMedia = {
+  kind: "image";
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+export type NewsMedia = NewsVideoMedia | NewsImageMedia;
 
 export type NewsMessage = {
   label?: string;
@@ -48,6 +59,25 @@ export const news: NewsItem[] = [
     sourceLabel: "Xの投稿を見る",
     url: "/stories/second-round-result-2026/",
     ctaLabel: "2次審査通過の記録を読む",
+  },
+  {
+    id: "2026-08-19-well-rested-morning",
+    date: "2026-08-19",
+    title: "体調回復❤️‍🩹 元気に朝のごあいさつ☀️",
+    body: "しっかり眠れて体調が回復したことを、みりぃが朝のX投稿で報告しました。心配してくれたみんなへのお礼と、「今日もみんなと一緒に頑張るぞぃ〜〜🍀」という言葉が届いています。",
+    source: "https://x.com/Mily_chan36/status/2089841199280742669",
+    sourceLabel: "Xの投稿を見る",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b06-01-recovery-morning.jpg",
+      width: 1162,
+      height: 2048,
+      alt: "ウインクしてピースするみりぃの自撮り。動物フィルターと朝のあいさつ文字入り",
+    },
+    message: {
+      label: "みりぃの投稿",
+      text: "おはよう〜☀️\n体調回復❤️‍🩹\nしっかり寝ました！！！\n\nみんな心配ありがとう🥹❣️\n今日もみんなと一緒に頑張るぞぃ〜〜🍀\n\n#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークルコンテスト2026 #ミスコン",
+    },
   },
   {
     id: "2026-08-18-evening-radio",

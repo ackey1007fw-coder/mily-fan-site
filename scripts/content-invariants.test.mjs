@@ -313,6 +313,40 @@ describe("content verification invariants", () => {
     assert.deepEqual(errors, []);
   });
 
+  it("accepts a self-hosted news photo and rejects a remote one", () => {
+    const photo = {
+      kind: "image",
+      src: "/media/news/mily-b06-01-recovery-morning.jpg",
+      width: 1162,
+      height: 2048,
+      alt: "ウインクしてピースする自撮り",
+    };
+
+    assert.deepEqual(
+      verifyNews([{ ...validNews, id: "news-photo", media: photo }]),
+      [],
+    );
+
+    const remote = verifyNews([
+      {
+        ...validNews,
+        id: "remote-photo",
+        media: { ...photo, src: "https://pbs.twimg.com/media/example.jpg" },
+      },
+    ]);
+    assert.ok(remote.some((error) => error.includes("local /media/ path")));
+
+    const noAlt = verifyNews([
+      { ...validNews, id: "no-alt", media: { ...photo, alt: "" } },
+    ]);
+    assert.ok(noAlt.some((error) => error.includes("alt text")));
+
+    const badKind = verifyNews([
+      { ...validNews, id: "bad-kind", media: { ...photo, kind: "gif" } },
+    ]);
+    assert.ok(badKind.some((error) => error.includes("unsupported media kind")));
+  });
+
   it("accepts a local STORIES path as a news related link", () => {
     const errors = verifyNews([
       {

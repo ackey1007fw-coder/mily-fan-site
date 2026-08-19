@@ -64,7 +64,7 @@ export function Latest() {
                           {item.message.label}
                         </p>
                       ) : null}
-                      <p className="mt-1 text-sm leading-relaxed text-ink">
+                      <p className="mt-1 whitespace-pre-line break-words text-sm leading-relaxed text-ink">
                         {item.message.text}
                       </p>
                     </div>
@@ -80,6 +80,17 @@ export function Latest() {
                       preload="none"
                       aria-label={item.media.alt}
                       className="mx-auto mt-4 aspect-[9/16] w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+                    />
+                  ) : null}
+                  {item.media?.kind === "image" ? (
+                    <img
+                      src={item.media.src}
+                      width={item.media.width}
+                      height={item.media.height}
+                      loading="lazy"
+                      decoding="async"
+                      alt={item.media.alt}
+                      className="mx-auto mt-4 h-auto w-full max-w-sm rounded-xl bg-sage-soft object-contain"
                     />
                   ) : null}
                   {item.source || item.sourceLabel || item.url ? (
