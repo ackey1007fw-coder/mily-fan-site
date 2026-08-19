@@ -157,10 +157,16 @@ export function verifyNews(items) {
       errors.push(`news "${item.id ?? "?"}" message needs text`);
     }
     if (item.media) {
-      if (item.media.kind !== "video") {
+      const mediaKeys =
+        item.media.kind === "video"
+          ? ["src", "poster"]
+          : item.media.kind === "image"
+            ? ["src"]
+            : null;
+      if (!mediaKeys) {
         errors.push(`news "${item.id ?? "?"}" has an unsupported media kind`);
       }
-      for (const key of ["src", "poster"]) {
+      for (const key of mediaKeys ?? ["src"]) {
         if (!item.media[key]?.startsWith("/media/")) {
           errors.push(`news "${item.id ?? "?"}" media ${key} must be a local /media/ path`);
         }

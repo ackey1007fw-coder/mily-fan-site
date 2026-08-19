@@ -136,6 +136,11 @@ function newsToPortalItem(item: NewsItem): PortalFeedItem {
           ),
         }
       : {}),
+    ...(item.media?.kind === "image"
+      ? {
+          image: sameOriginImageUrl(item.media.src, `news "${item.id}" image`),
+        }
+      : {}),
   };
 }
 

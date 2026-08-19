@@ -85,6 +85,18 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 - 同じローカル派生をLatestとGalleryの両方に出す場合、MP4とposterをそれぞれ1ファイルだけ作り、両方から同じpathを参照する。
 - 日常の朝投稿はLatest + Galleryで扱う。節目を文章で残すサイト機能の `/stories/` へは追加しない。
 
+### 投稿に写真が付いているとき
+
+X / Instagram の通常投稿に写真が付いていて、オーナーから元ファイルを直接受け取った場合だけ、
+Latest のカード内に1枚だけ自己ホストで出してよい。
+
+- 公開ファイルは `public/media/news/mily-bNN-NN-<slug>.jpg`。台帳は `docs/MEDIA.md`（バッチ単位）。
+- `news.ts` の `media` に `kind: "image"` として `src` / `width` / `height` / `alt` を書く。
+  `width` / `height` は実寸。表示は縦横比を保った `object-contain` 相当で、トリミングしない。
+- `alt` は状況の説明（外見の評価は書かない）。
+- Gallery（`media.ts`）へは足さない。Gallery の枠は 4:3 でトリミングされるため、縦長の投稿写真には使わない。
+- 外部の X / Instagram 画像 URL を直接参照しない。SNS から自動取得もしない。
+
 ### コンテスト結果など「節目」を扱うとき
 
 通常のSNS紹介と分けて、次の3か所を同じ根拠で更新する。同じ本文を二重に持たない。
