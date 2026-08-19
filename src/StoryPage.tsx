@@ -51,6 +51,8 @@ function MediaFigure({ media, priority = false }: { media: StoryMedia; priority?
       <img
         src={media.src}
         alt={media.alt}
+        width={media.width}
+        height={media.height}
         loading={priority ? "eager" : "lazy"}
         decoding="async"
         className="max-h-[72rem] w-full rounded-2xl bg-sage-soft/30 object-contain"
@@ -125,9 +127,16 @@ export default function StoryPage({ story }: { story: Story }) {
               <p className="mt-7 text-xs font-semibold tracking-[0.12em] text-sage-deep">
                 {story.eyebrow}
               </p>
-              <time dateTime={story.date} className="mt-3 block text-xs text-ink-muted">
-                {story.dateLabel}
-              </time>
+              <p className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+                <time dateTime={story.date} className="text-xs text-ink-muted">
+                  {story.dateLabel}
+                </time>
+                {story.badge ? (
+                  <span className="rounded-full bg-sage px-3 py-1 text-xs font-semibold text-white">
+                    {story.badge}
+                  </span>
+                ) : null}
+              </p>
               <h1
                 id="story-title"
                 className="mt-4 text-3xl font-bold leading-[1.45] tracking-tight text-ink sm:text-5xl sm:leading-[1.35]"

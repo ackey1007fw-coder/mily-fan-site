@@ -40,8 +40,12 @@ describe("reusable STORIES content", () => {
   it("publishes the source-backed second-round story with the approved copy", () => {
     const story = storyBySlug("second-round-2026");
     assert.ok(story);
-    assert.equal(stories.length, 2);
-    assert.deepEqual(visibleStories(), [storyBySlug("2026-08-18-radio"), story]);
+    assert.equal(stories.length, 3);
+    assert.deepEqual(visibleStories(), [
+      storyBySlug("second-round-result-2026"),
+      storyBySlug("2026-08-18-radio"),
+      story,
+    ]);
     assert.equal(story.href, "/stories/second-round-2026/");
     assert.equal(
       story.title,
@@ -109,11 +113,16 @@ describe("reusable STORIES content", () => {
   });
 
   it("keeps result claims and added character judgments out of the story", () => {
-    const disallowed = [
+    // 2026-08-19 に主催者と本人が公表するまで、審査結果は書かない方針だった。
+    // 公表後も、結果を扱ってよいのは出典付きの専用記事だけに限る。
+    const resultStorySlugs = new Set(["second-round-result-2026"]);
+    const resultClaims = [
       ["2次", "突破"].join(""),
       ["2次審査", "通過"].join(""),
       ["3次", "進出"].join(""),
       ["次審査", "進出"].join(""),
+    ];
+    const disallowed = [
       ["成長を", "遂げた"].join(""),
       ["ファンとの", "絆"].join(""),
       ["胸を", "打つ"].join(""),
@@ -123,8 +132,73 @@ describe("reusable STORIES content", () => {
     for (const story of stories) {
       const text = storyText(story);
       for (const phrase of disallowed) assert.equal(text.includes(phrase), false, `${story.slug}: ${phrase}`);
+      if (!resultStorySlugs.has(story.slug)) {
+        for (const phrase of resultClaims) {
+          assert.equal(text.includes(phrase), false, `${story.slug}: ${phrase}`);
+        }
+      }
       assert.equal(text.includes(["みりぃ", "らしい"].join("")), false);
       assert.equal(text.includes(["Mi", "lly"].join("")), false);
+    }
+  });
+
+  it("publishes the 2次審査通過 report from the confirmed public sources", () => {
+    const story = storyBySlug("second-round-result-2026");
+    assert.ok(story);
+    assert.equal(story.href, "/stories/second-round-result-2026/");
+    assert.equal(story.date, "2026-08-19");
+    assert.equal(story.badge, "2次審査通過");
+    assert.equal(
+      story.title,
+      "MISS CIRCLE CONTEST 2026 2次審査通過！三次審査進出へ",
+    );
+    assert.deepEqual(story.sourceIds, [
+      "x-2026-08-19-second-round-result",
+      "misscircle-2026-third-round-post",
+      "misscircle-2026-third-round-list",
+      "misscircle-2026-entry-734",
+    ]);
+    assert.equal(
+      storySources["x-2026-08-19-second-round-result"].url,
+      "https://x.com/Mily_chan36/status/2089996508691390948",
+    );
+    assert.equal(
+      storySources["misscircle-2026-third-round-post"].url,
+      "https://x.com/circle_contest/status/2089986551346573523",
+    );
+    assert.equal(
+      storySources["misscircle-2026-third-round-list"].url,
+      "https://2026.misscircle.jp/list/3",
+    );
+
+    const lead = story.media.find((item) => item.id === story.leadMediaId);
+    assert.equal(lead?.kind, "image");
+    assert.equal(
+      lead?.src,
+      "/media/stories/second-round-result-2026/mily-second-round-result-autumn-leaf.jpg",
+    );
+    assert.equal(
+      lead?.alt,
+      "MISS CIRCLE CONTEST 2026の2次審査通過を報告した三橋莉子さん",
+    );
+    assert.equal(lead?.width, 1152);
+    assert.equal(lead?.height, 2048);
+  });
+
+  it("keeps unannounced third-round details out of the result story", () => {
+    const story = storyBySlug("second-round-result-2026");
+    assert.ok(story);
+    const text = `${storyText(story)}\n${story.media.map((item) => item.caption).join("\n")}`;
+    for (const phrase of [
+      "ファイナル",
+      "グランプリ",
+      "順位",
+      "得票",
+      "票数",
+      "1位",
+      ["三次審査", "は"].join("") + "月",
+    ]) {
+      assert.equal(text.includes(phrase), false, phrase);
     }
   });
 
@@ -165,6 +239,10 @@ describe("STORIES pages and discovery", () => {
     const vite = await read("vite.config.ts");
     assert.match(vite, /storySecondRound: "stories\/second-round-2026\/index\.html"/);
     assert.match(vite, /storyRadio20260818: "stories\/2026-08-18-radio\/index\.html"/);
+    assert.match(
+      vite,
+      /storySecondRoundResult: "stories\/second-round-result-2026\/index\.html"/,
+    );
     assert.match(html, /src="\/src\/story-main\.tsx"/);
     assert.match(html, /rel="canonical" href="__STORY_SECOND_ROUND_CANONICAL__"/);
     assert.match(html, /property="og:type" content="article"/);
@@ -178,6 +256,19 @@ describe("STORIES pages and discovery", () => {
     assert.match(radioHtml, /"@type": "Article"/);
     assert.match(radioHtml, /ファンサイト（非公式）/);
     assert.match(radioHtml, /x\.com\/Mily_chan36\/status\/2089721650522820667|ラジオ配信/);
+
+    const resultHtml = await read("stories/second-round-result-2026/index.html");
+    assert.match(resultHtml, /src="\/src\/story-main\.tsx"/);
+    assert.match(
+      resultHtml,
+      /rel="canonical" href="__STORY_SECOND_ROUND_RESULT_CANONICAL__"/,
+    );
+    assert.match(resultHtml, /property="og:type" content="article"/);
+    assert.match(resultHtml, /name="twitter:card" content="summary_large_image"/);
+    assert.match(resultHtml, /"@type": "Article"/);
+    assert.match(resultHtml, /"@type": "BreadcrumbList"/);
+    assert.match(resultHtml, /ファンサイト（非公式）/);
+    assert.match(resultHtml, /2次審査通過/);
   });
 
   it("renders the approved video behavior without autoplay or loop", async () => {

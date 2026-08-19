@@ -87,6 +87,39 @@ describe("8/18 radio news item", () => {
   });
 });
 
+describe("8/19 second-round result news item", () => {
+  it("leads Latest with the confirmed 2次審査通過 report", async () => {
+    const { news, sortNewsByDateDesc } = await import("../src/data/news.ts");
+    const result = news.find(
+      (item) => item.id === "2026-08-19-second-round-result",
+    );
+
+    assert.ok(result);
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-19-second-round-result");
+    assert.equal(result.date, "2026-08-19");
+    assert.equal(
+      result.source,
+      "https://x.com/Mily_chan36/status/2089996508691390948",
+    );
+    assert.equal(result.sourceLabel, "Xの投稿を見る");
+    assert.equal(result.url, "/stories/second-round-result-2026/");
+    assert.match(result.title, /2次審査通過/);
+    assert.match(result.body, /三次審査/);
+
+    // 未公表の内容を推測して書かない
+    for (const phrase of ["順位", "得票", "票数", "ファイナル", "グランプリ"]) {
+      assert.equal(result.body.includes(phrase), false, phrase);
+      assert.equal(result.title.includes(phrase), false, phrase);
+    }
+
+    // 既存のお知らせを置き換えていない
+    assert.ok(news.some((item) => item.id === "2026-08-18-evening-radio"));
+    assert.ok(news.some((item) => item.id === "2026-08-18-morning-update"));
+    assert.ok(news.some((item) => item.id === "2026-08-17-morning-story"));
+    assert.ok(news.some((item) => item.id === "2026-08-02-21st-birthday"));
+  });
+});
+
 describe("source and url are not mixed", () => {
   it("uses required source for 出典を見る in Latest and Schedule", async () => {
     const latest = await readFile(

@@ -18,6 +18,10 @@ function siteMetadataPlugin(): Plugin {
           "__STORY_2026_08_18_RADIO_CANONICAL__",
           storyUrl("2026-08-18-radio"),
         )
+        .replaceAll(
+          "__STORY_SECOND_ROUND_RESULT_CANONICAL__",
+          storyUrl("second-round-result-2026"),
+        )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -48,6 +52,7 @@ export default defineConfig({
         profile: "profile/index.html",
         storyRadio20260818: "stories/2026-08-18-radio/index.html",
         storySecondRound: "stories/second-round-2026/index.html",
+        storySecondRoundResult: "stories/second-round-result-2026/index.html",
       },
       output: {
         manualChunks: {

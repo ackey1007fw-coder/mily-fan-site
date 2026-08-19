@@ -34,13 +34,16 @@ export const contest: Contest = {
   //   2026-08-15: 「🔥2次審査🩵三橋莉子🍅✨ #ミスサークル2026」→「2次審査」
   //   2026-08-16: 「🔥2次最終日🩵三橋莉子🍅✨ #ミスサークル2026」→「2次最終日」
   //     （Watch public sources が検知。Issue #9）
+  //   2026-08-19: 主催者の三次審査進出者一覧（list/3）と本人Xの報告で
+  //     2次審査通過・三次審査進出が確定 →「3次審査進出」
   // 「最終日」表記から締切日を推定して end に入れることはしない。
+  // 三次審査の日程・審査方法は未公表のため start / end は null のまま。
   // 期間が一次ソースで公表されたら start / end を埋める。
   currentPhase: {
-    name: "2次最終日",
+    name: "3次審査進出",
     start: null,
     end: null,
-    source: "https://www.showroom-live.com/r/circle2026_0734",
+    source: "https://2026.misscircle.jp/list/3",
   },
-  lastVerifiedAt: "2026-08-16",
+  lastVerifiedAt: "2026-08-19",
 };

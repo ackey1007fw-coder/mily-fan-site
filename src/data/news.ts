@@ -40,6 +40,16 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-19-second-round-result",
+    date: "2026-08-19",
+    title: "MISS CIRCLE CONTEST 2026 2次審査通過！三次審査進出へ✨",
+    body: "みりぃが「MISS CIRCLE CONTEST 2026」の2次審査通過と、三次審査への進出を報告しました。毎日の投票やSHOWROOMでの応援への感謝とともに、「一緒に絶景観に行きましょう」とこれからの挑戦への言葉を届けています。",
+    source: "https://x.com/Mily_chan36/status/2089996508691390948",
+    sourceLabel: "Xの投稿を見る",
+    url: "/stories/second-round-result-2026/",
+    ctaLabel: "2次審査通過の記録を読む",
+  },
+  {
     id: "2026-08-18-evening-radio",
     date: "2026-08-18",
     title: "ラジオ配信ありがとうございました",

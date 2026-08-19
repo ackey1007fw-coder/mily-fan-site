@@ -35,4 +35,12 @@ export const highlights: Highlight[] = [
     body: "ENTRY 734・三橋莉子としてBブロックに出場し、二次審査へ進出しました。",
     source: "https://2026.misscircle.jp/list/2",
   },
+  {
+    id: "miss-circle-2026-third-round",
+    year: 2026,
+    dateLabel: "2026年8月19日",
+    title: "MISS CIRCLE CONTEST 2026 2次審査通過・三次審査進出",
+    body: "2次審査を通過し、主催者が公開する三次審査進出者の一覧に掲載されました。",
+    source: "https://2026.misscircle.jp/list/3",
+  },
 ];
