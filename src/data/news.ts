@@ -54,6 +54,21 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-20-mango-kakigori",
+    date: "2026-08-20",
+    title: "今年初のマンゴーかき氷🍧🥭",
+    body: "今年初のかき氷を楽しんだことを、みりぃがInstagramで紹介しました。マンゴーのかき氷にヨーグルトとはちみつがかかり、コムハニーもトッピングされています。",
+    source: "https://www.instagram.com/p/DcQqmIwk1_l/",
+    sourceLabel: "Instagramの投稿を見る",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b10-05-mango-kakigori-front.jpg",
+      width: 960,
+      height: 1280,
+      alt: "マンゴーかき氷を前にスプーンを持ってカメラを見るみりぃ",
+    },
+  },
+  {
     id: "2026-08-20-morning-message",
     date: "2026-08-20",
     title: "おはよう‼︎🌞 無理せず、今日も一緒に",

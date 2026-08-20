@@ -426,3 +426,35 @@ ffmpeg -i media/original/mily-b09-01-second-round-story.mp4 \
 ffmpeg -i public/media/gallery/mily-b09-01-second-round-story.mp4 -ss 5.0 -frames:v 1 -q:v 4 \
   public/media/gallery/mily-b09-01-second-round-story-poster.jpg
 ```
+
+## 素材台帳（batch b10 / 受領日・source date 2026-08-20）
+
+本人Instagramのマンゴーかき氷投稿に使われた、オーナー直接提供の写真5枚。
+Latest は b10-05 のメタデータ除去済み派生1枚、Gallery は5枚すべてを掲載する。
+Drive Gallery（b02）・Gallery動画・`/stories/` には含めない。
+
+一次出典: https://www.instagram.com/p/DcQqmIwk1_l/
+
+| ID | 元ファイル | sha256（先頭12桁） | 内容 | 掲載 |
+| --- | --- | --- | --- | --- |
+| b10-01 | `mily-b10-01-mango-kakigori-closeup.jpg` | `7735df750fda` | マンゴーをのせたかき氷のクローズアップ | ✅ Gallery |
+| b10-02 | `mily-b10-02-mango-kakigori-spoon.jpg` | `d622140bcd7d` | スプーンを手にかき氷を見つめるみりぃ | ✅ Gallery |
+| b10-03 | `mily-b10-03-mango-kakigori-looking-down.jpg` | `1e4ccc97a839` | かき氷を前に目を閉じるみりぃ | ✅ Gallery |
+| b10-04 | `mily-b10-04-mango-kakigori-expression.jpg` | `bc3f6e5bb8a5` | かき氷を前にスプーンを持つみりぃ | ✅ Gallery |
+| b10-05 | `mily-b10-05-mango-kakigori-front.jpg` | `acb2fed12861` | かき氷とともにカメラを見るみりぃ | ✅ Latest / Gallery |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが掲載用素材として直接提供。SNSから取得していない）
+- 5枚とも元素材は `media/original/` に無改変で保管（gitignore済み・コミットしない）
+- 元素材はすべて 960×1280 JPEG。EXIF / IPTC を含むため、公開用は既存の
+  `pnpm media:build` で再エンコードしてメタデータを除去した
+- Gallery は各写真につき 480 / 960 / 1600 × JPG / WebP。元素材幅が960pxのため
+  `-1600` は `withoutEnlargement` により 960×1280 のまま（アップスケールなし）
+- Latest 代表画像は b10-05 の `-1600.jpg` と同一内容の公開派生を
+  `public/media/news/mily-b10-05-mango-kakigori-front.jpg` で使用。実寸 960×1280
+- 公開画像に EXIF / GPS / IPTC / XMP / ICC は残っていない
+- トリミング・引き伸ばし・生成塗り足し・AI生成・顔加工・顔置換なし
+- `sourceDate`: `2026-08-20`（オーナー確認済み）。撮影者は未確認のため `credit: null`
+- 全5枚に `aspect: "960 / 1280"` を設定し、Galleryの4:3既定枠へ切り抜かない
+- 公開ファイル名は新規batch b10を使用し、既存batch・連番と衝突しない
