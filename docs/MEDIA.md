@@ -243,9 +243,13 @@ Latest の 2026-08-20「おはよう‼︎🌞 無理せず、今日も一緒に
 b06 と同じ扱いで、Drive Gallery（b02）にも `public/media/gallery/`（Gallery 掲載枠）にも
 含めない。Latest のカード内で1ファイルだけ自己ホストする。
 
-| ID | 公開ファイル | 内容 | 掲載 |
-| --- | --- | --- | --- |
-| b08-01 | media/news/mily-b08-01-do-what-you-can-morning.jpg | 室内の鏡の前でスマートフォンを持つミラーセルフィー。1538×2048。owner-provided | ✅ |
+同じ元素材を **Latest と Gallery の2用途で掲載**している（意図的。別素材として扱わない）。
+Latest は単体ファイル1枚、Gallery は既存フロー `pnpm media:build` の派生セット。
+
+| ID | 公開ファイル | 用途 | 内容 | 掲載 |
+| --- | --- | --- | --- | --- |
+| b08-01（Latest） | media/news/mily-b08-01-do-what-you-can-morning.jpg | Latest カード内 | 室内の鏡の前でスマートフォンを持つミラーセルフィー。1538×2048。owner-provided | ✅ |
+| b08-01（Gallery） | gallery/mily-b08-01-do-what-you-can-morning-{480,960,1600}.{jpg,webp} | Gallery タイル | 上と同じ元素材の通常派生 | ✅ |
 
 確認済み:
 
@@ -266,5 +270,40 @@ b06 と同じ扱いで、Drive Gallery（b02）にも `public/media/gallery/`（
   1538:2048 の縦構図をそのまま表示（`object-contain` 相当・トリミングなし）
 - 出典は本人X投稿 `https://x.com/mily_chan36/status/2090242507586322892`（2026-08-20 / 約10:00 JST）
 - 撮影者（credit）は未確認のため記録しない
-- Gallery（`src/data/media.ts`）・動画アーカイブ（`galleryVideos.ts`）・`/stories/` へは複製しない
+- 動画アーカイブ（`galleryVideos.ts`）・`/stories/` へは複製しない
 - 元 Drive URL / 受け渡し URL は記録しない
+
+### Gallery 掲載の追記（2026-08-20）
+
+Latest 掲載（上記）に加えて、**同じ owner-provided 元素材から Gallery 用派生を追加**した。
+SNS から再取得しておらず、X の画像 URL も hotlink していない。新しい batch は作らず、
+同一素材として `src/data/media.ts` の `mily-b08-01` で表現する。
+
+| 項目 | 値 |
+| --- | --- |
+| batch | b08（新規 batch を作らず既存 b08 を Gallery にも展開） |
+| provenance | owner-provided |
+| 元素材 | `media/original/mily-b08-01-do-what-you-can-morning.jpg`（gitignore 済み・無改変・コミットしない） |
+| Latest 用公開パス | `public/media/news/mily-b08-01-do-what-you-can-morning.jpg`（**変更なし・維持**） |
+| Gallery 用公開パス | `public/media/gallery/mily-b08-01-do-what-you-can-morning-{480,960,1600}.{jpg,webp}` |
+| 元画像実測 | **1538×2048**（JPEG progressive / sRGB / 191,281 bytes） |
+| 一次出典 | 本人X投稿 `https://x.com/mily_chan36/status/2090242507586322892` |
+| `sourceDate` | `2026-08-20`（一次出典で確認済み） |
+| `credit` | `null`（撮影者は未確認。推測して埋めない） |
+
+Gallery 派生のメモ:
+
+- 生成は既存フローの `pnpm media:build` のみ。独自手順・独自ルールは追加していない
+- 元素材が 1538px 幅のため、`-1600` は拡大されず **1538×2048** のまま出力される
+  （`build-media.mjs` の `withoutEnlargement`）。`media.ts` の `width` / `height` は
+  実寸の 1538×2048 を記録する
+- 実測した派生: 480×639 / 960×1278 / 1538×2048（jpg・webp とも）。
+  高さはいずれも縦横比どおりの値で、**トリミング・引き伸ばし・アップスケールなし**
+- 縦写真なので `media.ts` に `aspect: "1538 / 2048"` を指定し、Gallery タイル既定の
+  4/3 へ切り抜かない。既存の横写真は `aspect` を持たないため表示は従来どおり
+- sharp が既定でメタデータを落とすため、派生に **EXIF / GPS / IPTC / XMP / ICC は残っていない**
+  （生成後に全6ファイルで確認済み）
+- **AI 生成・AI 補正・顔加工・generative fill・outpainting なし。** 派生は元素材の単純な縮小で、
+  回帰テストが元素材からの再縮小と画素比較して検証する
+  （`scripts/gallery-20260820-morning-photo.test.mjs`）
+- Latest 用の公開ファイルは Gallery 追加後も**元素材とバイト単位で同一のまま**（差し替えていない）

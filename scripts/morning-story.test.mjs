@@ -274,8 +274,9 @@ describe("Gallery video contracts", () => {
   it("preserves the existing photo and Drive-video archives", () => {
     const drive = driveGallerySections(visibleDriveGallery());
 
-    // b01の6枚（誕生日5枚 + ネックレス）は残したまま、2026-08-19 に b05-01 を追加した。
-    assert.equal(media.filter((item) => item.kind === "photo").length, 7);
+    // b01の6枚（誕生日5枚 + ネックレス）は残したまま、2026-08-19 に b05-01、
+    // 2026-08-20 に b08-01 を追加した。
+    assert.equal(media.filter((item) => item.kind === "photo").length, 8);
     for (const id of [
       "mily-b01-01",
       "mily-b01-02",

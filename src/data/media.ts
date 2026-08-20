@@ -56,6 +56,23 @@ const BIRTHDAY_POST = "https://www.instagram.com/p/DbiY3PHk1c8/";
 
 export const media: MediaItem[] = [
   {
+    id: "mily-b08-01",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b08-01-do-what-you-can-morning",
+    // 元素材が 1538px 幅のため、`-1600` の派生は拡大せず 1538x2048 のまま。
+    // （`pnpm media:build` は withoutEnlargement で元素材幅を上限にする）
+    widths: [480, 960, 1600],
+    width: 1538,
+    height: 2048,
+    alt: "室内の鏡の前でスマートフォンを持って撮影するみりぃ",
+    provenance: "owner-provided",
+    sourceUrl: "https://x.com/mily_chan36/status/2090242507586322892",
+    sourceDate: "2026-08-20",
+    credit: null,
+    aspect: "1538 / 2048",
+    published: true,
+  },
+  {
     id: "mily-b05-01",
     kind: "photo",
     basePath: "/media/gallery/mily-b05-01-autumn-leaf",
