@@ -236,3 +236,35 @@ ffmpeg -i media/original/mily-b07-01-morning-story.mp4 \
 ffmpeg -i public/media/gallery/mily-b07-01-morning-story.mp4 -ss 4.5 -frames:v 1 -q:v 4 \
   public/media/gallery/mily-b07-01-morning-story-poster.jpg
 ```
+
+## 素材台帳（batch b08 / 受領日 2026-08-20）
+
+Latest の 2026-08-20「おはよう‼︎🌞 無理せず、今日も一緒に」X投稿専用の記事写真。
+b06 と同じ扱いで、Drive Gallery（b02）にも `public/media/gallery/`（Gallery 掲載枠）にも
+含めない。Latest のカード内で1ファイルだけ自己ホストする。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b08-01 | media/news/mily-b08-01-do-what-you-can-morning.jpg | 室内の鏡の前でスマートフォンを持つミラーセルフィー。1538×2048。owner-provided | ✅ |
+
+確認済み:
+
+- provenance: owner-provided（オーナーが依頼時に直接提供。SNSから取得していない）
+- 元素材は `media/original/mily-b08-01-do-what-you-can-morning.jpg`（gitignore 済み・無改変・コミットしない）
+  sha256: `c080c0d782b1c786d26570ef1961033ea8e5f7c9812a7fddbcbc958ff7993ddb`
+- 実測値（作業環境に届いたファイルを `file` と sharp で再確認したもの。オーナー申告の
+  1538×2048 と一致）: 191,281 bytes / **1538×2048** / JPEG progressive / 8bit / 3ch / sRGB
+- **公開ファイルは元素材のバイト単位で同一のコピー**（sha256 一致）。再エンコード・
+  トリミング・回転・拡縮・アップスケールなし。b06 と同じ判断で、画質劣化を避けるため
+  派生を作らずそのまま置いた
+- メタデータ判断の根拠: JPEG のマーカーを走査した結果、含まれるセグメントは
+  `APP0(JFIF)` / `DQT` / `SOF2` / `DHT` / `SOS` のみ。**EXIF / GPS / IPTC / XMP / ICC /
+  COM はいずれも無い**（sharp の `metadata()` でも `exif` / `iptc` / `xmp` / `icc` が
+  すべて undefined、`orientation` も undefined）。除去すべきプライバシーメタデータが
+  無いため、安全な派生を作る必要はなかった
+- AI 生成・AI 補正・顔加工・generative fill・outpainting なし。
+  1538:2048 の縦構図をそのまま表示（`object-contain` 相当・トリミングなし）
+- 出典は本人X投稿 `https://x.com/mily_chan36/status/2090242507586322892`（2026-08-20 / 約10:00 JST）
+- 撮影者（credit）は未確認のため記録しない
+- Gallery（`src/data/media.ts`）・動画アーカイブ（`galleryVideos.ts`）・`/stories/` へは複製しない
+- 元 Drive URL / 受け渡し URL は記録しない
