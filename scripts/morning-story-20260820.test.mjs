@@ -34,11 +34,6 @@ const NEWS_ID = "2026-08-20-morning-story";
 const MESSAGE = "8/20 (木) 今日も自分ができることを〜♪";
 /** The frame the published poster was taken from. */
 const POSTER_SECONDS = "4.5";
-/** Owner-reported source geometry. The received original is the same 9:16
- *  framing at 720x1280, so the published MP4 keeps that ratio without any
- *  upscale, crop or stretch. */
-const REPORTED_WIDTH = 512;
-const REPORTED_HEIGHT = 910;
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -144,14 +139,22 @@ describe("2026-08-20 morning Story — shared Latest / Gallery asset", () => {
       "media/gallery/mily-b07-01-morning-story.mp4",
     ]);
 
-    // Instagram閲覧画面のスクリーンショットは public にも git にも入れない
+    // Instagram閲覧画面のスクリーンショットは public にも git にも入れない。
+    // 検査対象はスクリーンショットらしい名前だけで、正規の公開MP4と poster
+    // （allowlist）は通す。b07 の jpg を一律で弾くと poster 自身が落ちる。
     const screenshotish = /screenshot|screen-shot|story-screen|ca01aecf|13480fbc5113|写真\d/i;
+    const allowedB07Assets = new Set([
+      "public/media/gallery/mily-b07-01-morning-story.mp4",
+      "public/media/gallery/mily-b07-01-morning-story-poster.jpg",
+    ]);
+
     for (const file of publicFiles) {
       assert.equal(screenshotish.test(file), false, file);
     }
     for (const file of await trackedFiles()) {
       assert.equal(screenshotish.test(file), false, file);
-      assert.equal(/\.jpe?g$/i.test(file) && file.includes("b07"), false, file);
+      if (!file.includes("b07")) continue;
+      assert.equal(allowedB07Assets.has(file), true, file);
     }
   });
 });
@@ -200,25 +203,29 @@ describe("2026-08-20 morning Story — iOS-compatible encode", () => {
     );
   });
 
-  it("keeps the source framing: no upscale, no crop, same 9:16 ratio", async () => {
+  it("keeps the source framing: no upscale, no downscale, no crop", async () => {
     const info = await probe(mp4);
     const video = info.streams.find((stream) => stream.codec_type === "video");
     const original = path.join(root, "media/original/mily-b07-01-morning-story.mp4");
 
-    // 公開MP4は元素材と同じ画素数（拡大も縮小もしていない）
+    // 公開MP4はマニフェストの実寸と一致する
     assert.equal(video.width, morningStory20260820.width);
     assert.equal(video.height, morningStory20260820.height);
+
+    // 元素材がある環境（gitignore 済みなので CI にはない）では、
+    // 公開MP4が元素材と同じ画素数であること＝拡大も縮小もトリミングもしていないこと
+    // を実測で確認する。縦横比は申告値ではなく元素材から取る。
     if (existsSync(original)) {
       const source = await probe(original);
       const sourceVideo = source.streams.find((stream) => stream.codec_type === "video");
       assert.equal(video.width, sourceVideo.width);
       assert.equal(video.height, sourceVideo.height);
+      assert.equal(
+        video.width / video.height,
+        sourceVideo.width / sourceVideo.height,
+      );
     }
 
-    // オーナー申告の 512x910 と同じ縦横比を保っている（トリミング・引き伸ばしなし）
-    const published = video.width / video.height;
-    const reported = REPORTED_WIDTH / REPORTED_HEIGHT;
-    assert.ok(Math.abs(published - reported) < 0.005, `${published} vs ${reported}`);
     assert.ok((await stat(mp4)).size < 5 * 1024 * 1024);
   });
 
