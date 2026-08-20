@@ -8,7 +8,10 @@
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - ctaLabel: optional. href is url ?? source
  */
-import { morningStoryVideo } from "./morningStoryVideo.ts";
+import {
+  morningStoryVideo,
+  morningStory20260820,
+} from "./morningStoryVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -50,6 +53,18 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-20-morning-story",
+    date: "2026-08-20",
+    title: "おはよう☀️ 今日も自分ができることを〜♪",
+    body: "8月20日の朝、みりぃからInstagram Storyが届きました。「今日も自分ができることを〜♪」という言葉とともに、「おはよう」のひとコマです。",
+    sourceLabel: morningStory20260820.sourceLabel,
+    media: morningStory20260820,
+    message: {
+      label: "みりぃのメッセージ",
+      text: "8/20 (木) 今日も自分ができることを〜♪",
+    },
+  },
   {
     id: "2026-08-19-second-round-result",
     date: "2026-08-19",

@@ -178,3 +178,61 @@ Latest の 2026-08-19「体調回復」朝の投稿専用の記事写真。Drive
 - 残っているのは JFIF ヘッダと ICC カラープロファイルのみ（個人情報なし）
 - AI 生成・AI 加工・顔加工なし。1162:2048 の縦構図をそのまま表示（`object-contain` 相当・トリミングなし）
 - 出典は本人X投稿（2026-08-19）。撮影者は未確認のため記録しない
+
+## 素材台帳（batch b07 / 受領日 2026-08-20）
+
+2026-08-20 朝の Instagram Story 動画。b03 と同じく Latest と Gallery（動画アーカイブ）が
+同じ公開派生を共有する独立動画で、Drive Gallery（b02）には含めない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b07-01 | gallery/mily-b07-01-morning-story.mp4 | 2026-08-20 朝の Instagram Story。512×910。owner-provided | ✅ |
+| b07-01 poster | gallery/mily-b07-01-morning-story-poster.jpg | 公開MP4の 4.5 秒地点の実フレーム。512×910 | ✅ |
+
+確認済み:
+
+- 受領日 / source date: 2026-08-20（owner-provided。オーナーが依頼時に直接提供）
+- Instagram Story（恒久的な公開 permalink なし。表示は非リンクの `Instagram Story` label）
+- 元素材は `media/original/mily-b07-01-morning-story.mp4`（gitignore 済み・無改変・コミットしない）
+  sha256: `31ffbec448dd275cc2f2a09fd033c204532acef11a1686e197327ab3ba2a2a5b`
+  （オーナー提供の handoff zip に添付された SHA256 と照合して一致を確認してから使用）
+- 元素材の実測: 3,174,143 bytes / 512×910 / 5.100 秒 / 30fps / H.264 High / yuv420p /
+  音声なし / creation_time 2026-08-19T23:43:39Z
+- 公開MP4の実測: 1,005,126 bytes / **512×910** / 5.100 秒 / 30fps /
+  H.264 **Constrained Baseline** / level 3.1 / yuv420p / 音声ストリームなし
+- faststart 確認済み（`moov` offset 36 < `mdat` offset 1467）
+- metadata 除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` / `-map_chapters -1`。
+  `creation_time` と `handler_name: "Core Media Video"` は残っていない。
+  残るのは muxer 既定の `major_brand` / `minor_version` / `compatible_brands` / `encoder` /
+  `language` / `handler_name: "VideoHandler"` のみ）
+- **アップスケール・ダウンスケール・トリミング・引き伸ばしなし。** 元素材の 512×910 をそのまま維持
+  （`-vf scale` を使っていない）。音声は元素材に無いため新規生成していない
+- poster は公開MP4の実フレーム（4.5 秒）。AI 生成・顔加工・generative fill・outpainting なし。
+  Instagram 閲覧画面のスクリーンショットからは作っていない
+- AI 生成素材ではない。AI による加工も一切行っていない
+- 文言・日付の確認に使った Instagram 閲覧画面のスクリーンショットは**確認資料のみ**。
+  `public/` にも git にもコミットしていない（`scripts/morning-story-20260820.test.mjs` で検査）
+- 元 Drive URL / 受け渡し URL は記録しない
+
+### 素材差し替えの経緯
+
+最初の受け渡しで作業環境に届いたファイルは 720×1280 / sha256 `4841b24b7428…` /
+creation_time 2026-08-19T23:39:05Z で、オーナーが一次資料として指定した実測値と一致しなかった。
+**両者が同じ動画かどうかは確認していない**（推測を記録しない）。
+その後 zip 経由で sha256 `31ffbec448dd275c…` の元素材を受領し、照合が一致したため、
+公開MP4と poster をこの元素材から作り直して差し替えた。
+一致しなかったファイルからの派生は公開していない。
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b07-01-morning-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b07-01-morning-story.mp4
+
+ffmpeg -i public/media/gallery/mily-b07-01-morning-story.mp4 -ss 4.5 -frames:v 1 -q:v 4 \
+  public/media/gallery/mily-b07-01-morning-story-poster.jpg
+```
