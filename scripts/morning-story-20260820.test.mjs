@@ -65,9 +65,12 @@ async function trackedFiles() {
 }
 
 describe("2026-08-20 morning Instagram Story — Latest entry", () => {
-  it("exists and leads Latest as the newest item", () => {
+  it("exists and stays in Latest directly under the same-day 10:00 X post", () => {
     assert.ok(item());
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    // 同じ 2026-08-20 でも、10:00 頃の本人X投稿が上、朝Storyがその次に並ぶ
+    const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.equal(ordered[0], "2026-08-20-morning-message");
+    assert.equal(ordered[1], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -297,6 +300,7 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
 
   it("keeps the 8/17, 8/18 and 8/19 Latest entries", () => {
     for (const id of [
+      "2026-08-20-morning-message",
       "2026-08-19-second-round-result",
       "2026-08-19-well-rested-morning",
       "2026-08-18-evening-radio",
@@ -326,7 +330,8 @@ describe("2026-08-20 morning Story — Portal Feed", () => {
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, undefined);
-    assert.equal(feed.items[0].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-20-morning-message");
+    assert.equal(feed.items[1].id, entry.id);
     assert.ok(entry.image?.endsWith(morningStory20260820.poster));
   });
 });

@@ -54,6 +54,25 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-20-morning-message",
+    date: "2026-08-20",
+    title: "おはよう‼︎🌞 無理せず、今日も一緒に",
+    body: "8月20日の朝、みりぃがXに投稿しました。「今日も自分のできることを無理せず」と伝え、「私もみんなと一緒に頑張るね」という言葉を届けています。",
+    source: "https://x.com/mily_chan36/status/2090242507586322892",
+    sourceLabel: "Xの投稿を見る",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b08-01-do-what-you-can-morning.jpg",
+      width: 1538,
+      height: 2048,
+      alt: "室内の鏡の前でスマートフォンを持って撮影するみりぃ",
+    },
+    message: {
+      label: "みりぃの投稿",
+      text: "おはよう‼︎🌞\n今日も自分のできることを無理せず。\n私もみんなと一緒に頑張るね🙂‍↕️\n#ミスサー #ミスサークルコンテスト #ミスサー2026 #ミスサークルコンテスト2026 #ミスサークル2026",
+    },
+  },
+  {
     id: "2026-08-20-morning-story",
     date: "2026-08-20",
     title: "おはよう☀️ 今日も自分ができることを〜♪",
