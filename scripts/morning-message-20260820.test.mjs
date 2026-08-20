@@ -141,34 +141,54 @@ describe("2026-08-20 morning X post — self-hosted photo", () => {
     }
   });
 
-  it("publishes exactly one b08 file and keeps the original out of git", async () => {
+  it("publishes the Latest file plus the Gallery derivative set, and keeps the original out of git", async () => {
     const publicFiles = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"));
 
+    // Latest は単体ファイル1枚、Gallery は既存フロー（pnpm media:build）の
+    // 480 / 960 / 1600 × jpg / webp。これ以外の b08 公開ファイルは作らない。
+    const expected = [
+      "media/gallery/mily-b08-01-do-what-you-can-morning-1600.jpg",
+      "media/gallery/mily-b08-01-do-what-you-can-morning-1600.webp",
+      "media/gallery/mily-b08-01-do-what-you-can-morning-480.jpg",
+      "media/gallery/mily-b08-01-do-what-you-can-morning-480.webp",
+      "media/gallery/mily-b08-01-do-what-you-can-morning-960.jpg",
+      "media/gallery/mily-b08-01-do-what-you-can-morning-960.webp",
+      "media/news/mily-b08-01-do-what-you-can-morning.jpg",
+    ];
     assert.deepEqual(
       publicFiles.filter((file) => file.includes("mily-b08")).sort(),
-      ["media/news/mily-b08-01-do-what-you-can-morning.jpg"],
+      expected,
     );
 
+    // 元素材は gitignore 配下のまま。公開ファイルだけが git に入る。
+    const trackedB08 = [];
     for (const file of await trackedFiles()) {
       assert.equal(file.startsWith("media/original/mily-b08"), false, file);
-      if (!file.includes("mily-b08")) continue;
-      assert.equal(file, "public/media/news/mily-b08-01-do-what-you-can-morning.jpg");
+      if (file.includes("mily-b08")) trackedB08.push(file);
     }
+    assert.deepEqual(
+      trackedB08.sort(),
+      expected.map((file) => `public/${file}`).sort(),
+    );
   });
 });
 
 describe("2026-08-20 morning X post — stays Latest-only", () => {
-  it("is not added to Gallery, the video archive, or /stories/", async () => {
-    const storiesSource = await readFile(path.join(root, "src/data/stories.ts"), "utf8");
-    const mediaSource = await readFile(path.join(root, "src/data/media.ts"), "utf8");
+  it("keeps the Latest photo on its own /media/news/ file even though Gallery now shows the same shot", () => {
+    // Gallery 追加（同じ元素材の別用途）で Latest 側のパスを差し替えない。
+    assert.equal(item().media.src, PHOTO);
+    assert.match(item().media.src, /^\/media\/news\//);
 
-    assert.equal(media.some((entry) => entry.basePath.includes("mily-b08")), false);
-    assert.equal(
-      media.some((entry) => entry.basePath.includes("do-what-you-can-morning")),
-      false,
-    );
-    assert.doesNotMatch(mediaSource, /mily-b08|do-what-you-can-morning/);
+    const gallery = media.find((entry) => entry.id === "mily-b08-01");
+    assert.ok(gallery, "same original is published to Gallery as mily-b08-01");
+    assert.notEqual(gallery.basePath, PHOTO);
+    assert.match(gallery.basePath, /^\/media\/gallery\//);
+  });
+
+  it("is not added to the video archive or /stories/", async () => {
+    const storiesSource = await readFile(path.join(root, "src/data/stories.ts"), "utf8");
+
     assert.equal(galleryVideos.some((entry) => entry.src.includes("mily-b08")), false);
     assert.equal(stories.some((story) => story.slug.includes("do-what-you-can")), false);
     assert.doesNotMatch(storiesSource, /mily-b08|do-what-you-can-morning|2026-08-20-morning-message/);

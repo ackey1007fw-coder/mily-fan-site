@@ -16,7 +16,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `news.ts` | 8件。最新は 8月20日の朝のX投稿（同日の朝Storyの上）。ほかに 8/20 の朝Story、8/19 の2次審査通過・体調回復、8/18 のラジオ配信・朝の配信予告、8/17 の朝Story、21歳誕生日（2026-08-02） | 朝Story（8/17・8/20）は非リンク表示、X投稿・誕生日は各投稿URL | Story本文は見える範囲だけ。未確認の推測なし。同日は既存の id 昇順で並ぶ |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
-| `media.ts` | 写真7枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレスと落ち葉（b05-01）は `owner-provided` | `sourceDate` / `credit` は未確認のため `null`。縦写真は `aspect` で切り抜きを避ける |
+| `media.ts` | 写真8枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b08-01 は一次出典の本人X投稿と `sourceDate: 2026-08-20` を記録。ほかの `sourceDate` / `credit` は未確認のため `null`。縦写真（b05-01 / b08-01）は `aspect` で切り抜きを避ける |
 | `galleryVideos.ts` | 独立動画2本（b03 = 8/17 朝Story、b07 = 8/20 朝Story。ともに `published: true`。新しい順） | owner-provided / Instagram Story（非リンク） | それぞれ Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |

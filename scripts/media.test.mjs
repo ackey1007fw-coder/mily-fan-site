@@ -85,10 +85,40 @@ describe("media collection", () => {
   });
 
   it("keeps landscape tiles on the default 4/3 aspect", () => {
+    // 縦写真だけが aspect を持つ。横写真は既定の 4/3 のまま。
+    const portraits = new Set(["mily-b05-01", "mily-b08-01"]);
     for (const item of media) {
-      if (item.id === "mily-b05-01") continue;
+      if (portraits.has(item.id)) {
+        assert.ok(item.aspect, item.id);
+        continue;
+      }
       assert.equal(item.aspect, undefined, item.id);
     }
+  });
+
+  it("publishes the 8/20 morning photo as a portrait Gallery tile", () => {
+    const item = media.find((entry) => entry.id === "mily-b08-01");
+
+    assert.ok(item);
+    assert.equal(item.published, true);
+    assert.equal(item.kind, "photo");
+    assert.equal(item.basePath, "/media/gallery/mily-b08-01-do-what-you-can-morning");
+    assert.equal(item.provenance, "owner-provided");
+    // 一次出典は本人X投稿。投稿日は確認済み。撮影者は未確認なので推測しない。
+    assert.equal(
+      item.sourceUrl,
+      "https://x.com/mily_chan36/status/2090242507586322892",
+    );
+    assert.equal(item.sourceDate, "2026-08-20");
+    assert.equal(item.credit, null);
+    // Hero の featured を奪わない
+    assert.notEqual(item.featured, true);
+    assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
+    // 元素材 1538px 幅。`-1600` は拡大されないので実寸を記録する。
+    assert.equal(item.width, 1538);
+    assert.equal(item.height, 2048);
+    assert.equal(item.aspect, "1538 / 2048");
+    assert.deepEqual(item.widths, [480, 960, 1600]);
   });
 
   it("only surfaces published items", () => {
