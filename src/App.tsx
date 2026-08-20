@@ -7,6 +7,7 @@ import { Hero } from "./components/Hero";
 import { Latest } from "./components/Latest";
 import { MobileActionDock } from "./components/MobileActionDock";
 import { Schedule } from "./components/Schedule";
+import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { Socials } from "./components/Socials";
 import { StreamSchedule } from "./components/StreamSchedule";
 import { Stories } from "./components/Stories";
@@ -38,6 +39,7 @@ export default function App() {
       </main>
       <Footer />
       <MobileActionDock />
+      <ScrollToTopButton />
     </div>
   );
 }
