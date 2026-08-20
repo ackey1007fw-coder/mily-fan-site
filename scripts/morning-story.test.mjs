@@ -158,6 +158,7 @@ describe("shared morning Story assets", () => {
       "src/data/galleryVideos.ts",
       "src/data/morningStoryVideo.ts",
       "src/data/morningStoryVideo.json",
+      "src/data/morningStory20260820.json",
       "src/components/Latest.tsx",
       "src/components/Gallery.tsx",
     ];
@@ -287,8 +288,10 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 12);
-    assert.equal(galleryVideoViews().length, 12);
+    // 2026-08-20 の朝Storyで独立動画が b03 の1本から2本になった（b03は残す）
+    assert.equal(visibleGalleryVideos().length, 2);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 13);
+    assert.equal(galleryVideoViews().length, 13);
   });
 });
 

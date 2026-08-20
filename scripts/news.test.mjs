@@ -95,7 +95,10 @@ describe("8/19 second-round result news item", () => {
     );
 
     assert.ok(result);
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-19-second-round-result");
+    // 8/20 の朝Storyが最新になったあとも、8/19 の中では結果報告が先頭に立つ
+    const ordered = sortNewsByDateDesc(news).map((item) => item.id);
+    assert.equal(ordered[0], "2026-08-20-morning-story");
+    assert.equal(ordered[1], "2026-08-19-second-round-result");
     assert.equal(result.date, "2026-08-19");
     assert.equal(
       result.source,
@@ -152,9 +155,10 @@ describe("8/19 well-rested morning news item", () => {
       assert.equal(item.message.text.includes(phrase), false, phrase);
     }
 
-    // 8/19 は結果報告（あと）→ 朝の投稿（さき）の順で並ぶ
+    // 8/20 の朝Storyが最新。8/19 は結果報告（あと）→ 朝の投稿（さき）の順で並ぶ
     const order = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(order.slice(0, 3), [
+    assert.deepEqual(order.slice(0, 4), [
+      "2026-08-20-morning-story",
       "2026-08-19-second-round-result",
       "2026-08-19-well-rested-morning",
       "2026-08-18-evening-radio",
