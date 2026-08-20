@@ -31,6 +31,7 @@ function MediaFigure({ media, priority = false }: { media: StoryMedia; priority?
       <figure className="mx-auto mt-8 max-w-sm overflow-hidden rounded-3xl border border-sage/15 bg-paper-card p-2 shadow-card">
         <video
           src={media.src}
+          poster={media.poster}
           width={media.width}
           height={media.height}
           controls

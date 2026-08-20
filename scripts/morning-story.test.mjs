@@ -289,10 +289,11 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    // 2026-08-20 の朝Storyで独立動画が b03 の1本から2本になった（b03は残す）
-    assert.equal(visibleGalleryVideos().length, 2);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 13);
-    assert.equal(galleryVideoViews().length, 13);
+    // 2026-08-20 の朝Storyで独立動画が b03 の1本から2本になり、
+    // 2026-08-19 の2次審査通過Story（b09）で3本になった（b03・b07は残す）
+    assert.equal(visibleGalleryVideos().length, 3);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 14);
+    assert.equal(galleryVideoViews().length, 14);
   });
 });
 

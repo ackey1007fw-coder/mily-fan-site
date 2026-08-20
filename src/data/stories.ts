@@ -1,3 +1,5 @@
+import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
+
 export const storySources = {
   "pre-final-message": {
     id: "pre-final-message",
@@ -20,6 +22,11 @@ export const storySources = {
     id: "x-2026-08-19-second-round-result",
     label: "本人X投稿（2026年8月19日）",
     url: "https://x.com/Mily_chan36/status/2089996508691390948",
+  },
+  // 恒久的な公開permalinkがないStory。URLは持たせず、非リンクのlabelとして出す。
+  "instagram-story-2026-08-19-second-round-result": {
+    id: "instagram-story-2026-08-19-second-round-result",
+    label: "本人Instagram Story（2026年8月19日）",
   },
   "misscircle-2026-third-round-post": {
     id: "misscircle-2026-third-round-post",
@@ -55,6 +62,8 @@ export type StoryMedia =
       id: string;
       kind: "video";
       src: string;
+      /** Poster taken from a real frame of that MP4, when one exists. */
+      poster?: string;
       width: number;
       height: number;
       label: string;
@@ -415,6 +424,7 @@ const secondRoundResultStory: Story = {
   published: true,
   sourceIds: [
     "x-2026-08-19-second-round-result",
+    "instagram-story-2026-08-19-second-round-result",
     "misscircle-2026-third-round-post",
     "misscircle-2026-third-round-list",
     "misscircle-2026-entry-734",
@@ -429,6 +439,19 @@ const secondRoundResultStory: Story = {
       height: 2048,
       alt: "MISS CIRCLE CONTEST 2026の2次審査通過を報告した三橋莉子さん",
       caption: "夜の並木道で、大きな落ち葉を手にした一枚。",
+    },
+    {
+      // Gallery の動画アーカイブと同じマニフェストを参照するので、記事側に
+      // 用途別の MP4 / poster コピーができない。
+      id: "second-round-result-story-video",
+      kind: "video",
+      src: secondRoundStoryVideo.src,
+      poster: secondRoundStoryVideo.poster,
+      width: secondRoundStoryVideo.width,
+      height: secondRoundStoryVideo.height,
+      label: "2次審査の通過を報告した本人のInstagram Story動画",
+      caption:
+        "2026年8月19日のInstagram Story。背景は上の一枚と同じ写真で、応援へのお礼とこれからについてのメッセージが重ねられている。",
     },
   ],
   sections: [
@@ -477,6 +500,32 @@ const secondRoundResultStory: Story = {
             "2次審査通過✨\n毎日投票してくださったり、SRで応援してくださったおかげです🌈",
           ],
           sourceIds: ["x-2026-08-19-second-round-result"],
+        },
+      ],
+    },
+    {
+      id: "instagram-story",
+      title: "Instagram Storyでも通過を報告",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "同じ日、本人のInstagram Storyでも2次審査の通過が報告されました。毎日の投票やSHOWROOMでの応援へのお礼と、これから越えていく壁について、本人の言葉がそのまま残されています。",
+          sourceIds: ["instagram-story-2026-08-19-second-round-result"],
+        },
+        {
+          type: "media",
+          mediaId: "second-round-result-story-video",
+          sourceIds: ["instagram-story-2026-08-19-second-round-result"],
+        },
+        {
+          type: "paragraph",
+          text: "Storyの終盤には、この言葉がありました。",
+          sourceIds: ["instagram-story-2026-08-19-second-round-result"],
+        },
+        {
+          type: "quote",
+          paragraphs: ["私と一緒に美しい景色を観に行きましょう。絶対に。"],
+          sourceIds: ["instagram-story-2026-08-19-second-round-result"],
         },
       ],
     },
