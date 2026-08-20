@@ -3,6 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { media } from "../src/data/media.ts";
 import {
   stories,
@@ -154,10 +155,16 @@ describe("reusable STORIES content", () => {
     );
     assert.deepEqual(story.sourceIds, [
       "x-2026-08-19-second-round-result",
+      "instagram-story-2026-08-19-second-round-result",
       "misscircle-2026-third-round-post",
       "misscircle-2026-third-round-list",
       "misscircle-2026-entry-734",
     ]);
+    // 一時的なStoryなので恒久URLを持たせず、非リンクlabelとして出典に並べる
+    assert.equal(
+      "url" in storySources["instagram-story-2026-08-19-second-round-result"],
+      false,
+    );
     assert.equal(
       storySources["x-2026-08-19-second-round-result"].url,
       "https://x.com/Mily_chan36/status/2089996508691390948",
@@ -207,9 +214,26 @@ describe("reusable STORIES content", () => {
     const driveHost = ["drive", "google", "com"].join(".");
     assert.equal(mediaJson.includes("/media/stories/"), false);
 
+    // 記事専用の写真は `/media/stories/<slug>/` に置く。唯一の例外が
+    // 2026-08-19 のStory動画（b09）で、Gallery の動画アーカイブと公開MP4 /
+    // poster を 1 本ずつ共有する（docs/MEDIA.md）。用途別コピーを作らないための
+    // 意図的な共有なので、path が Gallery のマニフェストと一致することまで見る。
+    const sharedGalleryVideos = new Map(
+      galleryVideos.map((video) => [video.src, video]),
+    );
+
     for (const story of stories) {
       for (const item of story.media) {
-        assert.match(item.src, new RegExp(`^/media/stories/${story.slug}/`));
+        const shared = sharedGalleryVideos.get(item.src);
+        if (shared) {
+          assert.equal(item.kind, "video");
+          assert.equal(item.poster, shared.poster);
+          assert.equal(item.width, shared.width);
+          assert.equal(item.height, shared.height);
+          await access(path.join(root, "public", shared.poster.replace(/^\//, "")));
+        } else {
+          assert.match(item.src, new RegExp(`^/media/stories/${story.slug}/`));
+        }
         assert.equal(item.src.includes(driveHost), false);
         await access(path.join(root, "public", item.src.replace(/^\//, "")));
       }

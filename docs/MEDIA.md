@@ -307,3 +307,122 @@ Gallery 派生のメモ:
   回帰テストが元素材からの再縮小と画素比較して検証する
   （`scripts/gallery-20260820-morning-photo.test.mjs`）
 - Latest 用の公開ファイルは Gallery 追加後も**元素材とバイト単位で同一のまま**（差し替えていない）
+
+## 素材台帳（batch b09 / 受領日 2026-08-20 / source date 2026-08-19）
+
+2026-08-19 の「2次審査通過」を報告した Instagram Story 動画。b03 / b07 と同じく
+Drive Gallery（b02）には含めない独立動画で、**STORY 記事
+`/stories/second-round-result-2026/` と Gallery の動画アーカイブが同じ公開MP4と
+poster を共有する**（用途別コピーを作らない）。
+
+この Story は既存の記事・X投稿・写真を**補強する一次資料**として足したもので、
+news item の新規追加も、既存X投稿の複製も、b05-01 写真の再追加もしていない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b09-01 | gallery/mily-b09-01-second-round-story.mp4 | 2026-08-19 の2次審査通過報告 Instagram Story。512×910。owner-provided | ✅ |
+| b09-01 poster | gallery/mily-b09-01-second-round-story-poster.jpg | 公開MP4の **5.0 秒地点**の実フレーム。512×910 | ✅ |
+
+確認済み:
+
+- provenance: **owner-provided**（オーナーが依頼時に直接提供。SNSから取得していない）
+- 表示は非リンクの `Instagram Story` label。**source date: 2026-08-19**
+- 元素材は `media/original/mily-b09-01-second-round-story.mp4`
+  （gitignore 済み・無改変・コミットしない）
+  sha256: `f426810ca76b2c8a9a6d10212853e67a4e20de172565bbf60285fc8ffa3f63f1`
+
+### 元素材の実測値
+
+オーナー提供の handoff zip 同梱 `SHA256SUMS.txt` / `METADATA.txt` と照合し、
+**一致を確認してから**使用した。
+
+| 項目 | 実測値 |
+| --- | --- |
+| size | 6,835,350 bytes |
+| video | H.264 **High** / level 3.1 / **512×910** / **30fps** / yuv420p / `has_b_frames` 2 / 571 frames |
+| video duration | 19.033333 秒 |
+| audio | **HE-AAC** / 48,000 Hz / stereo / 53,395 bps / 19.921667 秒 |
+| container duration | 19.921667 秒 |
+| 元 metadata | `creation_time` 2026-08-20T03:15:15Z / `handler_name: "Core Media Video" / "Core Media Audio"` |
+
+### 素材受け渡しの経緯
+
+最初の受け渡しで作業環境に届いたファイルは sha256 `d37cbfb2827fad6e…` /
+912,910 bytes / **720×1280** / **1fps** で、オーナーが一次資料として指定した実測値と
+一致しなかった。**元素材に対する拡大（512→720）にあたるため、このファイルからの
+派生は作らず公開もしていない**（b07 と同じ判断）。
+その後 zip 経由で sha256 `f426810c…` の元素材を受領し、`sha256sum -c` と ffprobe の
+両方で一致を確認したうえで、公開MP4と poster をこの元素材だけから作った。
+
+### 公開MP4の実測値
+
+| 項目 | 実測値 |
+| --- | --- |
+| path | `public/media/gallery/mily-b09-01-second-round-story.mp4` |
+| sha256 | `d90d27a077daf396b3367bf938758c0e73d3767d373f13f5537849f201a47dae` |
+| size | 487,137 bytes |
+| video | H.264 **Constrained Baseline** / level 3.1 / **512×910** / **30fps** / yuv420p / `has_b_frames` 0 / 571 frames |
+| duration | 19.034 秒 |
+| audio | **ストリームなし**（下記「音声の扱い」） |
+| faststart | ✅ `moov` offset 36 < `mdat` offset 3147 |
+
+- **アップスケール・ダウンスケール・トリミング・引き伸ばしなし。** 元素材の
+  512×910 / 30fps をそのまま維持している（`-vf scale` を使っていない）
+- AI 生成・AI 加工・顔補正・generative fill・outpainting は一切なし
+- metadata 除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` / `-map_chapters -1`。
+  `creation_time` と `handler_name: "Core Media Video"` は残っていない。残るのは muxer 既定の
+  `major_brand` / `minor_version` / `compatible_brands` / `encoder` / `language` /
+  `handler_name: "VideoHandler"` のみ）
+
+### 音声の扱い — 削除した
+
+元素材には HE-AAC / 48kHz / stereo の音声がある。公開前に確認したところ、
+**19.9 秒間を通して連続した音声**が入っていた（実測: mean_volume −17.3 dB /
+max_volume −4.6 dB、−50dB を 1 秒以上下回る無音区間なし）。
+
+**この音源の権利関係・再配信権を確認できないため、公開派生は video-only（無音）にした。**
+視覚内容（本人のメッセージ文・表情・画面表示）の保存を目的として音声を除去している。
+
+音源の由来・種類・権利者・楽曲名は確認できていないため、**推測して記録しない**。
+
+### poster
+
+- 公開MP4の **5.0 秒地点の実フレーム**から抽出（AI 生成 poster 禁止）
+- 抽出候補として 0.3 / 1.0 / 2.5 / 5.0 / 8.0 / 12.0 / 16.0 / 18.8 秒を実際に書き出して比較し、
+  本文テキスト・本人の表情・画面下部のリンクステッカー表示がいずれも自然に読める
+  5.0 秒を採用した（ほぼ静止Storyのため各時点の差は小さい）
+- sha256: `48ced4349af7151e42fb32b60612a296f4a85d8b228676572571d578a6a77a2c` / 57,559 bytes / 512×910
+- EXIF / IPTC / XMP / ICC なし（生成後に sharp で確認）
+- Instagram 閲覧画面のスクリーンショットからは作っていない
+
+### Story共有URLの扱い
+
+確認時に参照した Instagram Story の共有 URL は**一時的なもの**であり、
+`sourceUrl` / frontend data / caption / metadata / コード / docs の
+**どこにも恒久 source として保存していない**。表示は非リンクの `Instagram Story` label のみ。
+回帰テスト `scripts/second-round-story-video.test.mjs` が、commit 対象の全ファイルを
+走査して Story 共有 URL が残っていないことを検査する。
+
+### 既存素材との関係
+
+- Story の**背景写真は既存の b05-01 と同じ落ち葉の写真**（元素材 sha256 先頭12桁
+  `6d615b2b7354`）。すでに STORY と Gallery に掲載済みのため、
+  **今回あらためて写真を追加・複製・再生成していない**
+- STORY 記事と Gallery は `src/data/secondRoundStoryVideo.json` の 1 オブジェクトを共有し、
+  **公開MP4 1本 / poster 1枚**だけを参照する
+- Drive Gallery（b02）には混ぜていない
+- 元 Drive URL / 受け渡し URL は記録しない
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b09-01-second-round-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b09-01-second-round-story.mp4
+
+ffmpeg -i public/media/gallery/mily-b09-01-second-round-story.mp4 -ss 5.0 -frames:v 1 -q:v 4 \
+  public/media/gallery/mily-b09-01-second-round-story-poster.jpg
+```

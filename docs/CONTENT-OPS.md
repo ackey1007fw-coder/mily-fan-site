@@ -17,7 +17,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真8枚（すべて `published: true`） | 誕生日5枚は上記 Instagram。ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b08-01 は一次出典の本人X投稿と `sourceDate: 2026-08-20` を記録。ほかの `sourceDate` / `credit` は未確認のため `null`。縦写真（b05-01 / b08-01）は `aspect` で切り抜きを避ける |
-| `galleryVideos.ts` | 独立動画2本（b03 = 8/17 朝Story、b07 = 8/20 朝Story。ともに `published: true`。新しい順） | owner-provided / Instagram Story（非リンク） | それぞれ Latest と同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
+| `galleryVideos.ts` | 独立動画3本（b03 = 8/17 朝Story、b09 = 8/19 2次審査通過Story、b07 = 8/20 朝Story。すべて `published: true`。新しい順） | owner-provided / Instagram Story（非リンク） | b03 / b07 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |

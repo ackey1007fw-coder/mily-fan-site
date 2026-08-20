@@ -286,7 +286,8 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const drive = driveGallerySections(visibleDriveGallery());
     const visible = visibleGalleryVideos();
 
-    assert.equal(visible.length, 2);
+    // 2026-08-19 の2次審査通過Story（b09）が加わって3本。b07 が最新のまま先頭。
+    assert.equal(visible.length, 3);
     assert.equal(visible[0], morningStory20260820);
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
