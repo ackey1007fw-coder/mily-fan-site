@@ -86,7 +86,15 @@ describe("media collection", () => {
 
   it("keeps landscape tiles on the default 4/3 aspect", () => {
     // 縦写真だけが aspect を持つ。横写真は既定の 4/3 のまま。
-    const portraits = new Set(["mily-b05-01", "mily-b08-01"]);
+    const portraits = new Set([
+      "mily-b05-01",
+      "mily-b08-01",
+      "mily-b10-01",
+      "mily-b10-02",
+      "mily-b10-03",
+      "mily-b10-04",
+      "mily-b10-05",
+    ]);
     for (const item of media) {
       if (portraits.has(item.id)) {
         assert.ok(item.aspect, item.id);

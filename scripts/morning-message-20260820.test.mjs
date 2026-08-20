@@ -195,12 +195,13 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     assert.equal(existsSync(path.join(root, "stories/2026-08-20-morning-message")), false);
   });
 
-  it("leads the same day above the 8/20 morning Story without deleting it", () => {
+  it("stays above the 8/20 morning Story without deleting it", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    // 10:00頃の本人X投稿 → 朝のInstagram Story の順（同日ソートは既存の id 昇順仕様のまま）
-    assert.equal(ordered[0], NEWS_ID);
-    assert.equal(ordered[1], "2026-08-20-morning-story");
+    // 同日ソートは既存の id 昇順仕様のまま。かき氷投稿の次にX投稿、朝Storyが並ぶ。
+    assert.equal(ordered[0], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[1], NEWS_ID);
+    assert.equal(ordered[2], "2026-08-20-morning-story");
     assert.ok(news.some((entry) => entry.id === "2026-08-20-morning-story"));
   });
 
@@ -215,7 +216,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 8);
+    assert.equal(news.length, 9);
   });
 });
 
@@ -228,7 +229,8 @@ describe("2026-08-20 morning X post — Portal Feed", () => {
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.equal(feed.items[0].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[1].id, entry.id);
 
     // image は自己ホスト画像。サイト origin 上で PHOTO を指す
     assert.ok(entry.image);
