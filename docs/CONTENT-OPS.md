@@ -94,7 +94,8 @@ Latest のカード内に1枚だけ自己ホストで出してよい。
 - `news.ts` の `media` に `kind: "image"` として `src` / `width` / `height` / `alt` を書く。
   `width` / `height` は実寸。表示は縦横比を保った `object-contain` 相当で、トリミングしない。
 - `alt` は状況の説明（外見の評価は書かない）。
-- Gallery（`media.ts`）へは足さない。Gallery の枠は 4:3 でトリミングされるため、縦長の投稿写真には使わない。
+- 通常のSNS投稿写真は Gallery（`media.ts`）へ自動的・無条件には追加しない。本人写真をオーナー確認済みでGallery掲載する場合は追加してよい。
+- 縦写真をGalleryへ追加するときは、実画像の縦横比に対応する `MediaItem.aspect` を設定し、既定4:3への不自然なクロップを避ける。
 - 外部の X / Instagram 画像 URL を直接参照しない。SNS から自動取得もしない。
 
 ### コンテスト結果など「節目」を扱うとき
