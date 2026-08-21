@@ -64,7 +64,9 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.equal(item.source, SOURCE);
     assert.equal(item.sourceLabel, "Instagramの投稿を見る");
     assert.equal(item.url, undefined);
-    assert.equal(sortNewsByDateDesc(news)[0].id, NEWS_ID);
+    const ordered = sortNewsByDateDesc(news);
+    assert.equal(ordered[0].id, "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[1].id, NEWS_ID);
   });
 
   it("summarizes only details stated in the supplied post", () => {
@@ -124,7 +126,8 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.ok(item);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
-    assert.equal(feed.items[0].id, item.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[1].id, item.id);
   });
 });
 

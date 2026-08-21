@@ -12,6 +12,7 @@ import {
   morningStoryVideo,
   morningStory20260820,
 } from "./morningStoryVideo.ts";
+import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -53,6 +54,19 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-21-morning-showroom-runway",
+    date: "2026-08-21",
+    title: "朝7:00からSHOWROOM配信📡❤️‍🔥",
+    body: "8月21日の朝、みりぃが7:00からのSHOWROOM配信を案内しました。投稿では、26日までランウェイをかけたイベントに参加していることを伝え、応援を呼びかけています。",
+    source: morningShowroomRunwayVideo.sourceUrl,
+    sourceLabel: "Xの投稿を見る",
+    media: morningShowroomRunwayVideo,
+    message: {
+      label: "みりぃの投稿",
+      text: "おはよ〜🔅\n今日も一緒に頑張ろうねん\n\n7:00〜SHOWROOMにて配信しますよっ！\n26日までガチイベ中で、ランウェイかけて配信しております🛜❤️‍🔥\n待ってる〜！\n\n応援よろしくお願いいたします🥺\n\n⬇️昨日の動画🎥\n#ミスサー #ミスサークルコンテスト2026 #ミスサークル #ミスサークルコンテスト",
+    },
+  },
   {
     id: "2026-08-20-mango-kakigori",
     date: "2026-08-20",
