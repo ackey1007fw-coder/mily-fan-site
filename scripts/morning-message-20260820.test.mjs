@@ -199,10 +199,11 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     // 8/21の新着の後も、8/20同日ソートは既存の id 昇順仕様を維持する。
-    assert.equal(ordered[0], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[1], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[2], NEWS_ID);
-    assert.equal(ordered[3], "2026-08-20-morning-story");
+    assert.equal(ordered[0], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[1], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[2], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[3], NEWS_ID);
+    assert.equal(ordered[4], "2026-08-20-morning-story");
     assert.ok(news.some((entry) => entry.id === "2026-08-20-morning-story"));
   });
 
@@ -217,7 +218,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 10);
+    assert.equal(news.length, 11);
   });
 });
 
@@ -230,9 +231,10 @@ describe("2026-08-20 morning X post — Portal Feed", () => {
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[2].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[2].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[3].id, entry.id);
 
     // image は自己ホスト画像。サイト origin 上で PHOTO を指す
     assert.ok(entry.image);

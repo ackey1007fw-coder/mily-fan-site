@@ -13,11 +13,11 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 10件。最新は 8月21日朝のSHOWROOM配信案内X投稿。ほかに8/20のマンゴーかき氷Instagram投稿・朝のX投稿・朝Story、8/19 の2次審査通過・体調回復、8/18 のラジオ配信・朝の配信予告、8/17 の朝Story、21歳誕生日（2026-08-02） | マンゴーかき氷・誕生日は各Instagram投稿URL、朝Story（8/17・8/20）は非リンク表示、X投稿は各投稿URL | 投稿内容の言い換えだけ。未確認の推測なし。同日は既存の id 昇順で並ぶ |
+| `news.ts` | 11件。最新は 8月21日朝の「OHAYO!」Instagram Story。ほかに同日朝のSHOWROOM配信案内X投稿、8/20のマンゴーかき氷Instagram投稿・朝のX投稿・朝Story、8/19 の2次審査通過・体調回復、8/18 のラジオ配信・朝の配信予告、8/17 の朝Story、21歳誕生日（2026-08-02） | マンゴーかき氷・誕生日は各Instagram投稿URL、朝Story（8/17・8/20・8/21）は非リンク表示、X投稿は各投稿URL。8/21 StoryのInstagramプロフィールは出典ではなく関連リンク | 投稿内容の言い換えだけ。未確認の推測なし。同日は既存の id 昇順で並ぶ |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真13枚（すべて `published: true`） | 誕生日5枚とマンゴーかき氷5枚（b10）は各Instagram投稿。ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。縦写真は `aspect` で切り抜きを避ける |
-| `galleryVideos.ts` | 独立動画4本（b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story。すべて `published: true`。新しい順） | owner-provided。b11は本人X投稿URL、StoryはInstagram Story（非リンク） | b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
+| `galleryVideos.ts` | 独立動画5本（b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story。すべて `published: true`。新しい順） | owner-provided。b11は本人X投稿URL、StoryはInstagram Story（非リンク） | b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。Drive Gallery（b02）には含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |

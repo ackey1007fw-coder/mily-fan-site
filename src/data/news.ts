@@ -9,6 +9,7 @@
  * - ctaLabel: optional. href is url ?? source
  */
 import {
+  morningOhayo20260821,
   morningStoryVideo,
   morningStory20260820,
 } from "./morningStoryVideo.ts";
@@ -54,6 +55,20 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-21-morning-ohayo-story",
+    date: "2026-08-21",
+    title: "OHAYO! 👓 8/21朝のInstagram Story",
+    body: "8月21日の朝、みりぃから「OHAYO!」のひとコマが届きました。メガネのフェイスフィルターとともに届けられた、朝の短い動画です。",
+    sourceLabel: morningOhayo20260821.sourceLabel,
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: morningOhayo20260821,
+    message: {
+      label: "みりぃのメッセージ",
+      text: "OHAYO!",
+    },
+  },
   {
     id: "2026-08-21-morning-showroom-runway",
     date: "2026-08-21",
