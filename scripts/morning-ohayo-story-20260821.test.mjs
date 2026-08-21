@@ -121,7 +121,8 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
   it("keeps the established same-day id ordering", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 7), [
+    assert.deepEqual(ordered.slice(0, 8), [
+      "2026-08-21-after-afternoon-ganda",
       "2026-08-21-afternoon-showroom-fanroom",
       "2026-08-21-event-story-next-slot",
       NEWS_ID,
@@ -130,7 +131,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 13);
+    assert.equal(news.length, 14);
   });
 });
 

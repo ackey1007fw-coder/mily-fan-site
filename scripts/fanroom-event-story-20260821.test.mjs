@@ -353,13 +353,14 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 4), [
+    assert.deepEqual(ordered.slice(0, 5), [
+      "2026-08-21-after-afternoon-ganda",
       FANROOM_NEWS_ID,
       STORY_NEWS_ID,
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 13);
+    assert.equal(news.length, 14);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {
@@ -398,13 +399,14 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
     const feed = createPortalFeed();
 
-    assert.equal(feed.items[0].id, `mily:news:${FANROOM_NEWS_ID}`);
-    assert.equal(feed.items[1].id, `mily:news:${STORY_NEWS_ID}`);
-    assert.ok(feed.items[0].image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
-    assert.ok(feed.items[1].image?.endsWith(eventStory20260821.poster));
-    assert.equal(feed.items[0].sourceUrl, undefined);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-after-afternoon-ganda");
+    assert.equal(feed.items[1].id, `mily:news:${FANROOM_NEWS_ID}`);
+    assert.equal(feed.items[2].id, `mily:news:${STORY_NEWS_ID}`);
+    assert.ok(feed.items[1].image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
+    assert.ok(feed.items[2].image?.endsWith(eventStory20260821.poster));
+    assert.equal(feed.items[1].sourceUrl, undefined);
     // Portal Feedは既存仕様でNewsのrelated `url`を外部導線として直マップする。
-    assert.equal(feed.items[1].sourceUrl, INSTAGRAM_PROFILE);
+    assert.equal(feed.items[2].sourceUrl, INSTAGRAM_PROFILE);
     assert.doesNotMatch(eventStory20260821.src, /instagram|google|twitter|x\.com/i);
     assert.doesNotMatch(eventStory20260821.poster, /instagram|google|twitter|x\.com/i);
   });

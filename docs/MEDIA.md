@@ -720,3 +720,36 @@ ffmpeg -ss 10.0 -i public/media/gallery/mily-b13-02-event-story.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b13-02-event-story-poster.jpg
 ```
+
+## 素材台帳（batch b14 / 受領日・source date 2026-08-21）
+
+本人Xの2026-08-21「急遽なガンダ」投稿に添付された、オーナー直接提供の縦写真。
+Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery動画・`/stories/`には追加しない。
+
+一次出典: https://x.com/mily_chan36/status/2090722156162478273
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b14-01 | `news/mily-b14-01-ganda-before-night-stream.jpg` | 黒いキャップとマスク姿で青空と太陽を背にした縦写真。写真内に昼枠配信と23:00からの配信についての文字を表示。720×1280。owner-provided | ✅ Latestのみ / Galleryには追加しない |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが依頼時に直接提供。SNSから取得していない）
+- 元素材は `media/original/mily-b14-01-ganda-before-night-stream.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **130,379 bytes / JPEG / 720×1280 / sRGB / sha256
+  `c41bb38ed42cbdf1133583f904c78475c1d683cef6ac3d1727327fde080c9a3e`**
+- 依頼時の参考値（272,462 bytes / 864×1536 / sha256 `db8d7b463bbb…`）とは一致しない。
+  同一ファイルとは推測せず、作業環境で実際に受領した720×1280ファイルを基準にした
+- 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。orientationは1で、GPSタグ・
+  XMP・ICCは検出されていない。公開前にsharpでJPEG再エンコードし、metadataを除去した
+- 公開ファイルの実測: **92,816 bytes / JPEG progressive / 720×1280 / sRGB / sha256
+  `3d821f2bdee3b1c0d46ed834d31a168c03199285012d87bb53f308ff0cbcb5dc`**
+- 公開ファイルはEXIF / GPS / IPTC / XMP / ICC / orientation / commentなし
+- 再エンコードはsharpのJPEG quality 82 / progressiveのみ。**crop・scale・rotate・
+  アップスケール・縦横比変更・写真内文字の改変なし**。720:1280の縦構図をそのまま使用
+- 元画像と公開画像の同位置画素を比較した平均絶対差は1.0313（8bit / channel）。
+  metadata除去以外の構図変更がないことを確認した
+- AI生成・AI補正・顔加工・顔置換・generative fill・outpaintingなし
+- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`には追加していない
+- 撮影者は未確認のため記録しない。X画像URL・受け渡しURLは公開情報へ残さない

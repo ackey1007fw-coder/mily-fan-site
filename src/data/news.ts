@@ -57,6 +57,25 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-21-after-afternoon-ganda",
+    date: "2026-08-21",
+    title: "急遽のガンダで絶望！？23:00〜配信で心境トーク🤭",
+    body: "8月21日のXで、みりぃが昼枠配信を見ていた方には通じるという写真を投稿。「急遽なガンダで絶望している」と笑いまじりに伝え、投稿では23:00〜の配信でこの時の心境を話すと案内しました。",
+    source: "https://x.com/mily_chan36/status/2090722156162478273",
+    sourceLabel: "Xの投稿を見る",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b14-01-ganda-before-night-stream.jpg",
+      width: 720,
+      height: 1280,
+      alt: "黒いキャップとマスク姿で、青空と太陽を背に見上げる構図のみりぃ。写真内に昼枠配信と23:00からの配信についての文字が表示されている",
+    },
+    message: {
+      label: "みりぃの投稿",
+      text: "昼枠配信見てくれた方には通じる写真。\n\n急遽なガンダで絶望しているみりぃ。笑笑笑\n\nどういうこと？？\nという方は23:00〜の配信でお待ちしております🛜\nこの時の心境お話ししますね🤭笑\n\n#ミスサー #ミスサークルコンテスト2026 #ミスサークル #ミスサークル2026 #ミスサー2026 #ミスコン",
+    },
+  },
+  {
     id: "2026-08-21-afternoon-showroom-fanroom",
     date: "2026-08-21",
     title: "朝枠ありがとう！次枠は14:00〜📡✨",
