@@ -1,4 +1,5 @@
 import {
+  morningOhayo20260821,
   morningStoryVideo,
   morningStory20260820,
   type MorningStoryVideo,
@@ -11,6 +12,7 @@ import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 
 export type GalleryVideoItem = MorningStoryVideo | MorningShowroomRunwayVideo;
 export {
+  morningOhayo20260821,
   morningShowroomRunwayVideo,
   morningStoryVideo,
   morningStory20260820,
@@ -23,6 +25,7 @@ export {
  * MP4 and poster paths remain single-source. Newest first.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  morningOhayo20260821,
   morningShowroomRunwayVideo,
   morningStory20260820,
   secondRoundStoryVideo,

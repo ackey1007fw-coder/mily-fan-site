@@ -528,3 +528,84 @@ ffmpeg -ss 2.0 -i public/media/gallery/mily-b11-01-morning-showroom-runway.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b11-01-morning-showroom-runway-poster.jpg
 ```
+
+## 素材台帳（batch b12 / 受領日・source date 2026-08-21）
+
+本人Instagramの2026-08-21朝の「OHAYO!」Storyに使われた、オーナー直接提供の
+短尺動画。Storyには恒久的な公開permalinkがないため、表示は非リンクの
+`Instagram Story` labelとする。Instagramプロフィールへの導線は関連リンクであり、
+Storyの出典として扱わない。
+
+Latest と Gallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`highlights.ts`・`contest.ts`・`events.ts`には含めない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b12-01 | `gallery/mily-b12-01-morning-ohayo-story.mp4` | 黒縁メガネのフェイスフィルターと「OHAYO!」の文字が表示された短い縦型自撮り動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b12-01 poster | `gallery/mily-b12-01-morning-ohayo-story-poster.jpg` | 公開MP4の3.4秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/5A997264-4F9F-4656-A3D9-65AABAFFDCB0.mp4` に受領時の名前のまま
+  無改変で保管（gitignore済み・コミットしない）
+- sha256: `a098302330a074fea5ca3aaf3a5bda826353d4bcb90be1ad357339626b770abf`
+- 5,448,933 bytes / H.264 **High** / level 3.1 / **720×1280** / 30fps /
+  123 frames / 4.100000秒 / yuv420p
+- 音声: **HE-AAC** / 44,100 Hz / stereo / 52,972 bps / 4.014127秒
+- 元metadata: format・video・audioの`creation_time: 2026-08-20T21:45:55Z`、
+  `handler_name: "Core Media Video" / "Core Media Audio"`
+- 依頼時の参考値（size・sha256・映像・音声仕様）と作業環境で受領したファイルの実測値は一致
+- 元Drive URL / 受け渡しURL / Drive file IDは公開情報・tracked textとして記録しない
+
+### 音声の扱い — 削除した
+
+元素材にはHE-AAC / 44.1kHz / stereoの音声ストリームが含まれるが、再配信権を
+確認できないため、公開派生はvideo-only（無音）とした。
+
+音声の内容・由来・種類・権利者・楽曲名は確認できていないため、推測して記録しない。
+
+### 公開MP4
+
+- sha256: `21879d25f68724dc03fd44f2759049c01b76be24227dd0507f9c5c5fcf23a80d`
+- 1,427,878 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 123 frames / 4.100000秒 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の縦横比・画素数・fpsを維持。アップスケール・ダウンスケール・トリミング・
+  引き伸ばしなし（`-vf scale`を使っていない）
+- `+faststart` 確認済み（`moov` offset 36 < `mdat` offset 1362）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と`Core Media Video / Audio`は残っていない。
+  残るのはmuxer既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/5A997264-4F9F-4656-A3D9-65AABAFFDCB0.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b12-01-morning-ohayo-story.mp4
+```
+
+### poster
+
+- 公開MP4の0.6 / 1.5 / 2.5 / 3.4秒地点から候補を抽出して比較し、正面に近く、
+  瞬きや強いモーションブラーがなく、「OHAYO!」と縦構図が安定した3.4秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- sha256: `3a89a6cca53464d6653df7e22d51cfbe775328162a55ed208cb619ba12205bcd`
+- 67,192 bytes / 720×1280 JPEG / EXIF・IPTC・XMP・ICCなし
+- Instagram UIを含む確認用スクリーンショットからは作っておらず、確認資料も
+  `public/`・Gallery・gitへ含めない
+- `src/data/morningOhayo20260821.json` の1オブジェクトをLatest / Galleryで共有し、
+  用途別のMP4・posterコピーは作っていない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 3.4 -i public/media/gallery/mily-b12-01-morning-ohayo-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b12-01-morning-ohayo-story-poster.jpg
+```
