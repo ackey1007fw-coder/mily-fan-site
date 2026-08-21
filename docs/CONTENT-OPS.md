@@ -13,7 +13,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 13件。最新は 8月21日のSHOWROOMファンルーム更新と、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story。ほかに同日朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | FanRoomと公開permalinkのないStoryは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。通常投稿は各投稿URL | 投稿内容の言い換えだけ。時間依存の順位は投稿時点の記録。同日は既存の id 昇順で並ぶ |
+| `news.ts` | 14件。最新は 8月21日17:46頃の「急遽なガンダ」X投稿。ほかに同日のSHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常X投稿は本人の投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は既存の id 昇順で並ぶ |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真13枚（すべて `published: true`） | 誕生日5枚とマンゴーかき氷5枚（b10）は各Instagram投稿。ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。縦写真は `aspect` で切り抜きを避ける |

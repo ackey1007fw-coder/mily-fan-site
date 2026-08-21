@@ -115,16 +115,17 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[1], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[2], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[3], NEWS_ID);
-    assert.deepEqual(ordered.slice(4, 7), [
+    assert.equal(ordered[0], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[1], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[2], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[3], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[4], NEWS_ID);
+    assert.deepEqual(ordered.slice(5, 8), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 13);
+    assert.equal(news.length, 14);
   });
 });
 
@@ -317,9 +318,10 @@ describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", ()
     assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.ok(entry.image?.endsWith(morningShowroomRunwayVideo.poster));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[2].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[3].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-after-afternoon-ganda");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[2].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[3].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[4].id, entry.id);
   });
 });
