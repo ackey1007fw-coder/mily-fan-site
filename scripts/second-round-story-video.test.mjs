@@ -11,6 +11,7 @@ import { contest } from "../src/data/contest.ts";
 import { driveGallerySections, driveVideoView, visibleDriveGallery } from "../src/data/driveGallery.ts";
 import {
   galleryVideos,
+  morningShowroomRunwayVideo,
   morningStory20260820,
   morningStoryVideo,
   secondRoundStoryVideo,
@@ -178,14 +179,16 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
   it("adds the video to the Gallery archive, newest first, keeping b03 and b07", () => {
     const visible = visibleGalleryVideos();
 
-    assert.equal(visible.length, 3);
-    // 8/20 (b07) → 8/19 (b09) → 8/17 (b03)
+    assert.equal(visible.length, 4);
+    // 8/21 (b11) → 8/20 (b07) → 8/19 (b09) → 8/17 (b03)
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
+      "2026-08-21",
       "2026-08-20",
       "2026-08-19",
       "2026-08-17",
     ]);
-    assert.equal(visible[1], secondRoundStoryVideo);
+    assert.equal(visible[0], morningShowroomRunwayVideo);
+    assert.equal(visible[2], secondRoundStoryVideo);
     assert.ok(visible.includes(morningStory20260820));
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
@@ -193,7 +196,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       morningStory20260820.src,
       "/media/gallery/mily-b07-01-morning-story.mp4",
     );
-    assert.equal(galleryVideos.length, 3);
+    assert.equal(galleryVideos.length, 4);
   });
 
   it("shares one MP4 and one poster between the STORY article and Gallery", () => {

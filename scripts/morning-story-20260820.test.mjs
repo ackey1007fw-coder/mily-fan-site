@@ -14,6 +14,7 @@ import {
 } from "../src/data/driveGallery.ts";
 import {
   galleryVideos,
+  morningShowroomRunwayVideo,
   morningStory20260820,
   morningStoryVideo,
   visibleGalleryVideos,
@@ -67,11 +68,12 @@ async function trackedFiles() {
 describe("2026-08-20 morning Instagram Story — Latest entry", () => {
   it("exists and stays in Latest under the same-day posts", () => {
     assert.ok(item());
-    // 同日ソートは既存の id 昇順。かき氷投稿、朝のX投稿、朝Storyの順に並ぶ。
+    // 8/21の新着の後も、8/20同日は既存の id 昇順を維持する。
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[1], "2026-08-20-morning-message");
-    assert.equal(ordered[2], NEWS_ID);
+    assert.equal(ordered[0], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[1], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[2], "2026-08-20-morning-message");
+    assert.equal(ordered[3], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -287,9 +289,10 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const drive = driveGallerySections(visibleDriveGallery());
     const visible = visibleGalleryVideos();
 
-    // 2026-08-19 の2次審査通過Story（b09）が加わって3本。b07 が最新のまま先頭。
-    assert.equal(visible.length, 3);
-    assert.equal(visible[0], morningStory20260820);
+    // 2026-08-21 のX投稿動画（b11）が加わって4本。b07 は既存の2番目を維持。
+    assert.equal(visible.length, 4);
+    assert.equal(visible[0], morningShowroomRunwayVideo);
+    assert.equal(visible[1], morningStory20260820);
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
     assert.equal(drive.videos.length, 11);
@@ -333,9 +336,10 @@ describe("2026-08-20 morning Story — Portal Feed", () => {
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, undefined);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-20-morning-message");
-    assert.equal(feed.items[2].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[2].id, "mily:news:2026-08-20-morning-message");
+    assert.equal(feed.items[3].id, entry.id);
     assert.ok(entry.image?.endsWith(morningStory20260820.poster));
   });
 });

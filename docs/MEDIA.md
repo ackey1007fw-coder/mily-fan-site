@@ -458,3 +458,73 @@ Drive Gallery（b02）・Gallery動画・`/stories/` には含めない。
 - `sourceDate`: `2026-08-20`（オーナー確認済み）。撮影者は未確認のため `credit: null`
 - 全5枚に `aspect: "960 / 1280"` を設定し、Galleryの4:3既定枠へ切り抜かない
 - 公開ファイル名は新規batch b10を使用し、既存batch・連番と衝突しない
+
+## 素材台帳（batch b11 / 受領日・source date 2026-08-21）
+
+本人Xの2026-08-21朝のSHOWROOM配信案内に添付された、オーナー直接提供の短尺動画。
+Latest と Gallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`highlights.ts`・`contest.ts`・`events.ts`には含めない。
+
+一次出典: https://x.com/Mily_chan36/status/2090557839492460779
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b11-01 | `gallery/mily-b11-01-morning-showroom-runway.mp4` | 金色のハート型フィルターを使った短い縦型自撮り動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b11-01 poster | `gallery/mily-b11-01-morning-showroom-runway-poster.jpg` | 公開MP4の2.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/0a502bbfb722d82ea97313483c8a377dd97c9e38.mp4` に受領時の名前のまま無改変で保管
+  （gitignore済み・コミットしない）
+- sha256: `cf893d157551cfbee6db08665c7ad1ec17f9e08f5810c0a6bf730cdddeca68d3`
+- 515,287 bytes / **720×1280** / 4.266667秒 / 30fps / 128 frames /
+  H.264 High / level 3.1 / yuv420p / 音声ストリームなし
+- 元metadata: format `creation_time: 2026-08-20T21:53:30Z`、video
+  `handler_name: Twitter-vork muxer`。公開派生では除去した
+- 事前の参考値（512×910）とは解像度が異なる。両者を同一コピーとは推測せず、
+  Driveから実際に受領した720×1280のファイルを公開派生の基準にした
+- 元Drive URL / 受け渡しURLは記録しない
+
+### 公開MP4
+
+- sha256: `93e83d049891da39cba505eff6c34a52c61b1ea84c67d7af145b472b1a62c8c7`
+- 887,714 bytes / **720×1280** / 4.267秒 / 30fps / 128 frames /
+  H.264 **Constrained Baseline** / level 3.1 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の縦横比と画素数を維持。アップスケール・ダウンスケール・トリミング・
+  引き伸ばしなし（`-vf scale`を使っていない）。音声は新規生成していない
+- `+faststart` 確認済み（`moov` offset 36 < `mdat` offset 1362）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と`Twitter-vork muxer`は残っていない。
+  残るのはmuxer既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/0a502bbfb722d82ea97313483c8a377dd97c9e38.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b11-01-morning-showroom-runway.mp4
+```
+
+### poster
+
+- 公開MP4の0.8 / 2.0 / 3.2秒地点から候補を抽出して比較し、カメラに正面から近い
+  自然な構図の2.0秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- sha256: `8557df5f6ff909034fbcbde2ead6be75633fe165754b0cbe6eb9c42398703278`
+- 20,575 bytes / 720×1280 JPEG / EXIF・IPTC・XMP・ICCなし
+- `src/data/morningShowroomRunwayVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  用途別のMP4・posterコピーは作っていない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 2.0 -i public/media/gallery/mily-b11-01-morning-showroom-runway.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b11-01-morning-showroom-runway-poster.jpg
+```

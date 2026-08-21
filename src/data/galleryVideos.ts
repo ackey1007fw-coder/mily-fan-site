@@ -3,10 +3,19 @@ import {
   morningStory20260820,
   type MorningStoryVideo,
 } from "./morningStoryVideo.ts";
+import {
+  morningShowroomRunwayVideo,
+  type MorningShowroomRunwayVideo,
+} from "./morningShowroomRunwayVideo.ts";
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 
-export type GalleryVideoItem = MorningStoryVideo;
-export { morningStoryVideo, morningStory20260820, secondRoundStoryVideo };
+export type GalleryVideoItem = MorningStoryVideo | MorningShowroomRunwayVideo;
+export {
+  morningShowroomRunwayVideo,
+  morningStoryVideo,
+  morningStory20260820,
+  secondRoundStoryVideo,
+};
 
 /**
  * Standalone local videos that belong in Gallery without being folded into
@@ -14,6 +23,7 @@ export { morningStoryVideo, morningStory20260820, secondRoundStoryVideo };
  * MP4 and poster paths remain single-source. Newest first.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  morningShowroomRunwayVideo,
   morningStory20260820,
   secondRoundStoryVideo,
   morningStoryVideo,

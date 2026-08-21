@@ -294,8 +294,9 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
     // Portal Feed は news / stories / events だけを見る。Gallery 追加で image は変わらない。
     assert.ok(entry.image?.endsWith(LATEST_PHOTO));
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[1].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[2].id, entry.id);
     assert.equal(feed.items.some((candidate) => candidate.image?.includes("/media/gallery/mily-b08")), false);
   });
 });
