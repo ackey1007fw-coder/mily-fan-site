@@ -36,7 +36,7 @@ const PUBLIC_SHA256 =
 const MESSAGE = [
   "昼枠配信見てくれた方には通じる写真。",
   "",
-  "急遽なガンダで絶望しているみりぃ。笑笑笑",
+  "急遽なガンダで絶望してるみりぃ。笑笑笑",
   "",
   "どういうこと？？",
   "という方は23:00〜の配信でお待ちしております🛜",
@@ -74,7 +74,7 @@ describe("2026-08-21 ganda X post — Latest entry", () => {
     assert.equal(entry.message?.text, MESSAGE);
     assert.equal(entry.message.text.split("\n").length, 9);
     assert.match(entry.message.text, /^昼枠配信見てくれた方には通じる写真。\n\n/);
-    assert.match(entry.message.text, /絶望しているみりぃ。笑笑笑\n\n/);
+    assert.match(entry.message.text, /絶望してるみりぃ。笑笑笑\n\n/);
     assert.match(entry.message.text, /23:00〜の配信でお待ちしております🛜/);
     assert.match(entry.message.text, /#ミスコン$/);
   });
