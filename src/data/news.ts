@@ -9,6 +9,7 @@
  * - ctaLabel: optional. href is url ?? source
  */
 import {
+  eventStory20260821,
   morningOhayo20260821,
   morningStoryVideo,
   morningStory20260820,
@@ -55,6 +56,38 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-21-afternoon-showroom-fanroom",
+    date: "2026-08-21",
+    title: "朝枠ありがとう！次枠は14:00〜📡✨",
+    body: "8月21日のSHOWROOMファンルームで、みりぃが朝の配信へのお礼と次枠14:00〜を案内しました。初めて来てくれた方やフォローしてくれた方への感謝とともに、これからもいろいろな一面を見つけてほしいと呼びかけています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b13-01-fanroom-next-slot.jpg",
+      width: 443,
+      height: 313,
+      alt: "SHOWROOMファンルームで朝枠へのお礼と次枠14:00を案内した、みりぃからの連絡",
+    },
+    message: {
+      label: "みりぃからの連絡💌",
+      text: "みなさーん！朝枠ありがとう😭❣️\n【次枠】\n14:00〜\n跨ぎ配信するぜーっ！\n皆様、一緒に楽しもう？！✨",
+    },
+  },
+  {
+    id: "2026-08-21-event-story-next-slot",
+    date: "2026-08-21",
+    title: "寝起き配信ありがとう！次枠14:00〜❤️‍🔥",
+    body: "8月21日のInstagram Storyで、みりぃが寝起き配信へのお礼を伝え、次枠14:00〜を案内しました。Story投稿時点では「現在5位」と報告し、ランウェイをかけたイベントに挑戦する理由についても伝えています。",
+    sourceLabel: eventStory20260821.sourceLabel,
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: eventStory20260821,
+    message: {
+      label: "みりぃのメッセージ",
+      text: "寝起き配信ありがとうございました〜❣️\nまさかの現在5位🥹💙\n【次枠】\n14:00〜",
+    },
+  },
   {
     id: "2026-08-21-morning-ohayo-story",
     date: "2026-08-21",
