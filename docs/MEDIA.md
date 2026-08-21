@@ -753,3 +753,81 @@ Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery�
 - AI生成・AI補正・顔加工・顔置換・generative fill・outpaintingなし
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`には追加していない
 - 撮影者は未確認のため記録しない。X画像URL・受け渡しURLは公開情報へ残さない
+
+## 素材台帳（batch b15 / 受領日・source date 2026-08-21）
+
+2026-08-21のTikTok通常投稿に使われた、オーナー直接提供の短尺動画。
+LatestとGallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`events.ts`・`profile.ts`・`highlights.ts`には含めない。
+
+一次出典: https://www.tiktok.com/@seasidecircle/video/7676407054466174229
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b15-01 | `gallery/mily-b15-01-tiktok-radio-misscircle.mp4` | 室内でカメラに向かい、手でポーズを取りながら表情を変える短い縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b15-01 poster | `gallery/mily-b15-01-tiktok-radio-misscircle-poster.jpg` | 公開MP4の5.5秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/` に受領時の名前のまま無改変で保管
+  （gitignore済み・コミットしない。ランダムな受領時名はtracked textへ記録しない）
+- sha256: `40af17f54b7d254d7e337a41cf86d6ec7309985725a928ae0fc0929620b3d50f`
+- 1,339,785 bytes / H.264 **High** / level 3.1 / **720×1280** / 30fps /
+  337 frames / video 11.233984秒 / container 11.238000秒 / yuv420p
+- 音声: **HE-AACv2** / 44,100 Hz / stereo / 64,146 bps / 11.237007秒
+- chapterなし。元metadataにはTikTok由来の`aigc_info` / `comment` / `vid_md5`と
+  muxer既定のbrand / encoder / language / handlerが存在
+- 依頼時の参考値512×910とは解像度が異なる。実際に受領した720×1280のファイルを
+  公開派生の基準とし、参考値へ合わせる縮小や別ファイルとの同一視はしていない
+- 素材受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
+### 音声の扱い — 削除した
+
+元素材にはHE-AACv2 / 44.1kHz / stereoの音声ストリームがあるが、音声の内容・由来・
+権利者と再配信権を確認できないため、公開派生はvideo-only（無音）とした。
+楽曲・BGM・本人音声のいずれかは推測して記録しない。
+
+### 公開MP4
+
+- sha256: `c88244c0ea987840c5525d4a00fee6739d3eac5ba6b5a66389b56e05b2b52266`
+- 2,564,584 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 337 frames / 11.233984秒（container 11.234000秒）/ yuv420p /
+  `has_b_frames` 0 / 音声ストリームなし
+- 元素材の画素数・9:16の縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 2255）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`aigc_info` / `comment` / `vid_md5`は残っていない。
+  残るのはmuxer / encoder既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/<受領時ファイル名>.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b15-01-tiktok-radio-misscircle.mp4
+```
+
+### poster / 共有範囲
+
+- 2.0 / 5.5 / 9.5秒地点を比較。2.0秒は視線が下向き、9.5秒は動きが大きいため、
+  正面に近く表情と手元が安定している5.5秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 41,483 bytes / 720×1280 JPEG / sha256
+  `d212e6675cbbf52c133086372569a500c9b54ea2b25e2c13f754a708a255805a`
+- EXIF / IPTC / XMP / ICCなし。TikTok閲覧画面のスクリーンショットからは作っていない
+- `src/data/tiktokRadioVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 5.5 -i public/media/gallery/mily-b15-01-tiktok-radio-misscircle.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b15-01-tiktok-radio-misscircle-poster.jpg
+```

@@ -18,6 +18,7 @@ import {
   galleryVideos,
   morningOhayo20260821,
   morningShowroomRunwayVideo,
+  tiktokRadioVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -121,17 +122,18 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
   it("keeps the established same-day id ordering", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 8), [
+    assert.deepEqual(ordered.slice(0, 9), [
       "2026-08-21-after-afternoon-ganda",
       "2026-08-21-afternoon-showroom-fanroom",
       "2026-08-21-event-story-next-slot",
       NEWS_ID,
       "2026-08-21-morning-showroom-runway",
+      "2026-08-21-tiktok-radio-misscircle",
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 14);
+    assert.equal(news.length, 15);
   });
 });
 
@@ -144,10 +146,12 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(item().media, morningOhayo20260821);
     assert.equal(galleryItem, morningOhayo20260821);
-    assert.equal(visible[0], eventStory20260821);
-    assert.equal(visible[1], morningOhayo20260821);
-    assert.equal(visible[2], morningShowroomRunwayVideo);
+    assert.equal(visible[0], tiktokRadioVideo);
+    assert.equal(visible[1], eventStory20260821);
+    assert.equal(visible[2], morningOhayo20260821);
+    assert.equal(visible[3], morningShowroomRunwayVideo);
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
+      "2026-08-21",
       "2026-08-21",
       "2026-08-21",
       "2026-08-21",
@@ -155,7 +159,7 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
       "2026-08-19",
       "2026-08-17",
     ]);
-    assert.equal(visible.length, 6);
+    assert.equal(visible.length, 7);
     assert.equal(morningOhayo20260821.sourceDate, "2026-08-21");
     assert.equal(morningOhayo20260821.alt, ALT);
   });
@@ -182,8 +186,8 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 6);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 17);
+    assert.equal(galleryVideos.length, 7);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 18);
   });
 });
 

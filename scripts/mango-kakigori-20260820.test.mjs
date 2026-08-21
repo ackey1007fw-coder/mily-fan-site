@@ -70,7 +70,8 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.equal(ordered[2].id, "2026-08-21-event-story-next-slot");
     assert.equal(ordered[3].id, "2026-08-21-morning-ohayo-story");
     assert.equal(ordered[4].id, "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[5].id, NEWS_ID);
+    assert.equal(ordered[5].id, "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[6].id, NEWS_ID);
   });
 
   it("summarizes only details stated in the supplied post", () => {
@@ -135,7 +136,8 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.equal(feed.items[2].id, "mily:news:2026-08-21-event-story-next-slot");
     assert.equal(feed.items[3].id, "mily:news:2026-08-21-morning-ohayo-story");
     assert.equal(feed.items[4].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[5].id, item.id);
+    assert.equal(feed.items[5].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
+    assert.equal(feed.items[6].id, item.id);
   });
 });
 

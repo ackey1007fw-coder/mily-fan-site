@@ -15,6 +15,7 @@ import {
   morningStory20260820,
 } from "./morningStoryVideo.ts";
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
+import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -56,6 +57,19 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-21-tiktok-radio-misscircle",
+    date: "2026-08-21",
+    title: "ラジオDJもミスコンも頑張るよ📻✨ TikTok更新",
+    body: "8月21日、みりぃがTikTokを更新。ラジオDJとミスコンの両方を頑張っていく気持ちを、短い縦型動画で届けています。",
+    source: tiktokRadioVideo.sourceUrl,
+    sourceLabel: "TikTokの投稿を見る",
+    media: tiktokRadioVideo,
+    message: {
+      label: "みりぃの投稿",
+      text: "ラジオDJもミスコンも頑張らせていただくよ✌みりぃです^^",
+    },
+  },
   {
     id: "2026-08-21-after-afternoon-ganda",
     date: "2026-08-21",
