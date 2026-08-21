@@ -609,3 +609,114 @@ ffmpeg -ss 3.4 -i public/media/gallery/mily-b12-01-morning-ohayo-story.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b12-01-morning-ohayo-story-poster.jpg
 ```
+
+## 素材台帳（batch b13 / 受領日・source date 2026-08-21）
+
+同じ受領セットの2素材を用途別に管理する。b13-01はSHOWROOMファンルームの
+Latest専用crop画像で、Galleryには掲載しない。b13-02はInstagram Storyの
+Latest / Gallery共有動画。どちらもowner-providedで、AI生成・AI加工は行っていない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b13-01 | `news/mily-b13-01-fanroom-next-slot.jpg` | 09:17「みりぃからの連絡💌」カードだけを切り出した画像。443×313 | ✅ Latestのみ / Gallery禁止 |
+| b13-02 | `gallery/mily-b13-02-event-story.mp4` | 配信へのお礼・次枠14:00・投稿時点順位・イベント参加理由を表示したInstagram Story。720×1280 | ✅ Latest / Gallery |
+| b13-02 poster | `gallery/mily-b13-02-event-story-poster.jpg` | 公開MP4の10.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### b13-01 SHOWROOMファンルーム画像
+
+- provenance: `owner-provided`（オーナー提供スクリーンショット。SNSから取得していない）
+- 生スクリーンショットは
+  `media/original/8C35FA05-8AB0-427B-8238-F097183EA5F2.jpeg` に受領バイトを
+  変えず保管（gitignore済み・コミットしない）
+- 元画像実測: **109,264 bytes / 588×1280 JPEG / sRGB**
+- 元画像sha256: `eca2478248f7465137f0224ec25d225c4a2bba84344c85fcbe62825fb03ccbf6`
+- 事前に示された706×1536とは実寸が異なる。両者を同一解像度とは扱わず、
+  実際に受領した588×1280を公開派生の基準にした
+- 元画像にはEXIF / IPTCが含まれていたため、生スクリーンショットは非公開とし、
+  公開cropをsharpで再エンコードしてmetadataを除去した
+- crop: `left: 73 / top: 808 / width: 443 / height: 313`。706×1536用の確認済み候補を
+  受領画像の実寸へ正規化し、09:17「みりぃからの連絡💌」カードだけが残ることを目視確認
+- cropに残るのはカードのlabel・09:17・みりぃ本人の投稿本文だけ。他ファン名・
+  他ファンコメント・オーナー自身のコメント・入力UI・前後の投稿カードは含めない
+- 公開画像: 22,606 bytes / 443×313 JPEG / sha256
+  `b23050a7714939a00c5d1f80b8a60f875d31d9d4a2969e9909527c76b2c8a9ff`
+- 公開画像はEXIF / IPTC / XMP / ICCなし。決定的cropとJPEG再エンコードのみで、
+  文字改変・AI生成・生成塗り足し・顔加工なし
+- Latest / NEWS専用。`media.ts`・Gallery写真・`galleryVideos.ts`・Drive Gallery・
+  `/stories/`には追加しない
+
+cropコマンド相当（再現用）:
+
+```
+sharp(source)
+  .extract({ left: 73, top: 808, width: 443, height: 313 })
+  .jpeg({ quality: 82, progressive: true })
+```
+
+### b13-02 Instagram Story 元素材の実測
+
+- provenance: `owner-provided`（指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-21` / 恒久permalinkなし
+- 元素材は `media/original/51A32589-0C2D-443A-BAD1-A3076FA3C98C.mp4` に
+  受領時の名前のまま無改変で保管（gitignore済み・コミットしない）
+- sha256: `0f56cfb7d68a248f1a109a7a09aa1a5ae2ded95f9d8b62c5d7a95dcb1e8504ba`
+- 613,963 bytes / H.264 **High** / level 3.1 / **720×1280** / **1fps** /
+  20 frames / 20.000000秒 / yuv420p
+- 音声: **HE-AAC** / 44,100 Hz / stereo / 56,636 bps / 19.919796秒
+- 元metadata: format・video・audioの`creation_time: 2026-08-21T02:04:08Z`、
+  `handler_name: "Core Media Video" / "Core Media Audio"`
+- 依頼時の参考値（size・sha256・映像・音声仕様）と実ファイルの実測値は一致
+- 受け渡し用Drive URL / file IDは公開情報・tracked textとして保持しない
+
+### b13-02 音声の扱い — 削除した
+
+元素材には音声ストリームが含まれるが、再配信権を確認できないため、
+公開派生はvideo-only（無音）とした。音声の内容・由来・種類・権利者・楽曲名は
+確認できていないため、推測して記録しない。
+
+### b13-02 公開MP4
+
+- sha256: `33b87f9c7f27761861cbc8e5689290b0f140e19c8e20274abca54e2ea5a50d61`
+- 378,608 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  **1fps** / 20 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の画素数・縦横比・1fps・20秒を維持。crop・scale・引き伸ばし・
+  アップスケール・fps水増しなし
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 935）
+- metadata除去確認済み。元の`creation_time`と`Core Media Video / Audio`は残っていない。
+  残るのはmuxer既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/51A32589-0C2D-443A-BAD1-A3076FA3C98C.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b13-02-event-story.mp4
+```
+
+### b13-02 poster / 共有範囲
+
+- 公開MP4の5.0 / 10.0 / 15.0秒地点を比較。ほぼ静止したStoryカードで差がないため、
+  10.0秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・文字改変・塗り足しなし
+- 137,554 bytes / 720×1280 JPEG / sha256
+  `3011127663a1b30d73f0b09063d3a66fe6234d8a9686305b2fa576978b33d099`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/eventStory20260821.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+- StoryのInstagramプロフィール導線はNewsの関連リンクであり、manifestの
+  `sourceUrl`やStoryの出典ではない
+- `events.ts`・`streamSchedule.ts`・配信予定API・`contest.ts`・`highlights.ts`・
+  `/stories/`・Drive Galleryには追加しない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 10.0 -i public/media/gallery/mily-b13-02-event-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b13-02-event-story-poster.jpg
+```

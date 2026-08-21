@@ -65,9 +65,11 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.equal(item.sourceLabel, "Instagramの投稿を見る");
     assert.equal(item.url, undefined);
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0].id, "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[1].id, "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[2].id, NEWS_ID);
+    assert.equal(ordered[0].id, "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[1].id, "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[2].id, "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[3].id, "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[4].id, NEWS_ID);
   });
 
   it("summarizes only details stated in the supplied post", () => {
@@ -127,9 +129,11 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.ok(item);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[2].id, item.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[2].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[3].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[4].id, item.id);
   });
 });
 

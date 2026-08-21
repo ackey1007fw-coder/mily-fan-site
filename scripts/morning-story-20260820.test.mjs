@@ -13,6 +13,7 @@ import {
   visibleDriveGallery,
 } from "../src/data/driveGallery.ts";
 import {
+  eventStory20260821,
   galleryVideos,
   morningOhayo20260821,
   morningShowroomRunwayVideo,
@@ -71,11 +72,13 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     assert.ok(item());
     // 8/21の新着の後も、8/20同日は既存の id 昇順を維持する。
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[1], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[2], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[3], "2026-08-20-morning-message");
-    assert.equal(ordered[4], NEWS_ID);
+    assert.equal(ordered[0], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[1], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[2], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[3], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[4], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[5], "2026-08-20-morning-message");
+    assert.equal(ordered[6], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -291,11 +294,12 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const drive = driveGallerySections(visibleDriveGallery());
     const visible = visibleGalleryVideos();
 
-    // 2026-08-21 のStory（b12）が加わって5本。b11 / b07 の相対順は維持。
-    assert.equal(visible.length, 5);
-    assert.equal(visible[0], morningOhayo20260821);
-    assert.equal(visible[1], morningShowroomRunwayVideo);
-    assert.equal(visible[2], morningStory20260820);
+    // 2026-08-21 のStory（b13）が加わって6本。b12 / b11 / b07 の相対順は維持。
+    assert.equal(visible.length, 6);
+    assert.equal(visible[0], eventStory20260821);
+    assert.equal(visible[1], morningOhayo20260821);
+    assert.equal(visible[2], morningShowroomRunwayVideo);
+    assert.equal(visible[3], morningStory20260820);
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
     assert.equal(drive.videos.length, 11);
@@ -339,11 +343,13 @@ describe("2026-08-20 morning Story — Portal Feed", () => {
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, undefined);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[2].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[3].id, "mily:news:2026-08-20-morning-message");
-    assert.equal(feed.items[4].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[2].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[3].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[4].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[5].id, "mily:news:2026-08-20-morning-message");
+    assert.equal(feed.items[6].id, entry.id);
     assert.ok(entry.image?.endsWith(morningStory20260820.poster));
   });
 });

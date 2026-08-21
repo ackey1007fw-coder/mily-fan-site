@@ -14,6 +14,7 @@ import {
   visibleDriveGallery,
 } from "../src/data/driveGallery.ts";
 import {
+  eventStory20260821,
   galleryVideos,
   morningOhayo20260821,
   morningShowroomRunwayVideo,
@@ -114,14 +115,16 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[1], NEWS_ID);
-    assert.deepEqual(ordered.slice(2, 5), [
+    assert.equal(ordered[0], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[1], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[2], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[3], NEWS_ID);
+    assert.deepEqual(ordered.slice(4, 7), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 11);
+    assert.equal(news.length, 13);
   });
 });
 
@@ -133,9 +136,10 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(item().media, morningShowroomRunwayVideo);
     assert.equal(galleryItem, morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos()[0], morningOhayo20260821);
-    assert.equal(visibleGalleryVideos()[1], morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos().length, 5);
+    assert.equal(visibleGalleryVideos()[0], eventStory20260821);
+    assert.equal(visibleGalleryVideos()[1], morningOhayo20260821);
+    assert.equal(visibleGalleryVideos()[2], morningShowroomRunwayVideo);
+    assert.equal(visibleGalleryVideos().length, 6);
     assert.equal(morningShowroomRunwayVideo.sourceUrl, SOURCE);
     assert.equal(morningShowroomRunwayVideo.sourceDate, "2026-08-21");
     assert.equal(morningShowroomRunwayVideo.alt, ALT);
@@ -163,8 +167,8 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 5);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 16);
+    assert.equal(galleryVideos.length, 6);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 17);
   });
 });
 
@@ -313,7 +317,9 @@ describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", ()
     assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.ok(entry.image?.endsWith(morningShowroomRunwayVideo.poster));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[1].id, entry.id);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[2].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[3].id, entry.id);
   });
 });

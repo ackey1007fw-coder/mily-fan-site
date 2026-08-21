@@ -289,10 +289,10 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    // 2026-08-21 の朝Story動画（b12）を加えて5本（b03・b07・b09・b11は残す）。
-    assert.equal(visibleGalleryVideos().length, 5);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 16);
-    assert.equal(galleryVideoViews().length, 16);
+    // 2026-08-21 のイベントStory動画（b13）を加えて6本（b03・b07・b09・b11・b12は残す）。
+    assert.equal(visibleGalleryVideos().length, 6);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 17);
+    assert.equal(galleryVideoViews().length, 17);
   });
 });
 
