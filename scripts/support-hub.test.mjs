@@ -92,6 +92,7 @@ describe("Support MPA route and metadata", () => {
     assert.match(page, /useMilyRealtimeStatus\(\)/);
     assert.match(page, /useStreamSchedule\(\)/);
     assert.doesNotMatch(page, /fetch\(|setInterval\(|createPollStore/);
+    assert.match(page, /role="status" aria-live="polite" aria-atomic="true"/);
   });
 });
 
@@ -183,6 +184,13 @@ describe("Support NOW selector", () => {
     assert.equal(select([], now, { radio: stale }).length, 0);
     assert.equal(select([], now, { radio: radioFixture(new Date(now).toISOString(), null) }).length, 0);
     assert.equal(select([], now, { radio: null }).length, 0);
+    const afterWindow = Date.parse("2026-08-23T13:00:00+09:00");
+    assert.equal(
+      select([], afterWindow, {
+        radio: radioFixture(new Date(afterWindow).toISOString()),
+      }).length,
+      0,
+    );
     assert.doesNotMatch(JSON.stringify(confirmed), /みりぃ出演中|みりぃ放送中|みりぃが現在出演/);
   });
 });
@@ -195,6 +203,7 @@ describe("Support Today and pending separation", () => {
       streamRoomUrl: null,
       liveRoomUrl: null,
       radioPhase: "idle",
+      now: Date.parse("2026-08-22T12:00:00+09:00"),
     });
     assert.ok(today.some(({ activityId }) => activityId === "miss-circle"));
     assert.equal(today.some(({ activityId }) => activityId === "live-stream"), false);
@@ -212,11 +221,39 @@ describe("Support Today and pending separation", () => {
         streamRoomUrl: null,
         liveRoomUrl: null,
         radioPhase,
+        now: Date.parse("2026-08-23T09:00:00+09:00"),
       });
     assert.equal(build("upcoming").some(({ activityId }) => activityId === "radio"), true);
     assert.equal(build("window").some(({ activityId }) => activityId === "radio"), true);
     assert.equal(build("ended").some(({ activityId }) => activityId === "radio"), false);
     assert.equal(build("idle").some(({ activityId }) => activityId === "radio"), false);
+  });
+
+  it("shows only a JST-today stream slot in Today", () => {
+    const now = Date.parse("2026-08-22T12:00:00+09:00");
+    const build = (streamSlots) =>
+      selectSupportToday({
+        contest: { ...contest, currentPhase: null },
+        streamSlots,
+        streamRoomUrl: null,
+        liveRoomUrl: null,
+        radioPhase: "idle",
+        now,
+      });
+
+    assert.deepEqual(
+      build([
+        { date: "2026-08-22", time: "20:00" },
+        { date: "2026-08-23", time: "10:00" },
+      ]).map(({ key }) => key),
+      ["today:showroom:2026-08-22T20:00"],
+    );
+    assert.equal(
+      build([{ date: "2026-08-23", time: "10:00" }]).some(
+        ({ activityId }) => activityId === "live-stream",
+      ),
+      false,
+    );
   });
 
   it("puts null contest dates and date-pending SupportEvents only in pending", () => {

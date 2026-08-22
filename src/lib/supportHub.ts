@@ -4,7 +4,11 @@ import type { Contest } from "../data/contest.ts";
 import type { RadioStatus, SchedulePhase } from "../data/radio.ts";
 import type { StreamSlot } from "../data/streamSchedule.ts";
 import type { SupportEvent } from "../data/supportEvents.ts";
-import { onAirConfirmedFresh } from "./bannerState.ts";
+import {
+  onAirConfirmedFresh,
+  programState,
+  tokyoToday,
+} from "./bannerState.ts";
 import type { LiveView } from "./realtimeStore.ts";
 import {
   adaptContestSchedule,
@@ -53,7 +57,12 @@ export function selectSupportToday(input: {
   streamRoomUrl: string | null;
   liveRoomUrl: string | null;
   radioPhase: SchedulePhase;
+  now: number;
 }): SupportTodayItem[] {
+  if (!Number.isFinite(input.now)) {
+    throw new Error("now must be a finite timestamp");
+  }
+
   const items: SupportTodayItem[] = [];
   const phase = input.contest.currentPhase;
 
@@ -72,7 +81,8 @@ export function selectSupportToday(input: {
     });
   }
 
-  const slot = input.streamSlots[0];
+  const today = tokyoToday(input.now);
+  const slot = input.streamSlots.find(({ date }) => date === today);
   if (slot) {
     const roomUrl = input.liveRoomUrl ?? input.streamRoomUrl;
     items.push({
@@ -145,7 +155,10 @@ export function selectSupportNow(input: {
     });
   }
 
-  if (onAirConfirmedFresh(input.radio, input.now)) {
+  if (
+    programState(input.radio, input.now) === "PROGRAM_WINDOW" &&
+    onAirConfirmedFresh(input.radio, input.now)
+  ) {
     items.push({
       key: "now:radio-program",
       origin: "radio-program",

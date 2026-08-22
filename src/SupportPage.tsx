@@ -114,6 +114,7 @@ export default function SupportPage() {
     streamRoomUrl: roomUrl,
     liveRoomUrl: live.roomUrl,
     radioPhase: schedulePhase,
+    now,
   });
   const nowItems = selectSupportNow({ supportEvents, live, radio, now });
   const pendingItems = selectSupportPending({ contest, supportEvents });
@@ -155,30 +156,32 @@ export default function SupportPage() {
           </SectionShell>
         ) : null}
 
-        {nowItems.length > 0 ? (
-          <SectionShell eyebrow="Now" title="NOW — 応援中">
-            <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {nowItems.map((item) => (
-                <li key={item.key} className="rounded-3xl border border-apricot/50 bg-apricot-soft/40 p-5 shadow-card sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">現在進行中を確認</p>
-                  <p className="mt-2 text-xl font-bold leading-relaxed text-ink">{item.title}</p>
-                  {item.note ? <p className="mt-2 text-xs leading-6 text-ink-muted">{item.note}</p> : null}
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {item.cta ? <ActionLink action={item.cta} /> : null}
-                    <ActivityLink activityId={item.activityId} />
-                  </div>
-                  {item.source ? (
-                    <p className="mt-4 text-xs">
-                      <ExternalLink href={item.source} className="font-semibold text-sage hover:underline">
-                        出典を見る
-                      </ExternalLink>
-                    </p>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          </SectionShell>
-        ) : null}
+        <div role="status" aria-live="polite" aria-atomic="true">
+          {nowItems.length > 0 ? (
+            <SectionShell eyebrow="Now" title="NOW — 応援中">
+              <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {nowItems.map((item) => (
+                  <li key={item.key} className="rounded-3xl border border-apricot/50 bg-apricot-soft/40 p-5 shadow-card sm:p-6">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">現在進行中を確認</p>
+                    <p className="mt-2 text-xl font-bold leading-relaxed text-ink">{item.title}</p>
+                    {item.note ? <p className="mt-2 text-xs leading-6 text-ink-muted">{item.note}</p> : null}
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {item.cta ? <ActionLink action={item.cta} /> : null}
+                      <ActivityLink activityId={item.activityId} />
+                    </div>
+                    {item.source ? (
+                      <p className="mt-4 text-xs">
+                        <ExternalLink href={item.source} className="font-semibold text-sage hover:underline">
+                          出典を見る
+                        </ExternalLink>
+                      </p>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            </SectionShell>
+          ) : null}
+        </div>
 
         {pendingItems.length > 0 ? (
           <SectionShell eyebrow="Date pending" title="日程発表待ち">
