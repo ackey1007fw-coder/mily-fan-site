@@ -3,7 +3,8 @@ import {
   streamSchedule,
   upcomingSlots,
   type StreamSlot,
-} from "../data/streamSchedule";
+} from "../data/streamSchedule.ts";
+import type { ScheduleAvailability } from "./supportCalendar.ts";
 
 /**
  * /api/mily-schedule の取得を1か所に集約するフック。
@@ -19,58 +20,97 @@ type ScheduleResponse = {
   source?: { roomUrl?: string | null };
 };
 
-type FetchedSchedule = {
+export type StreamScheduleSnapshot = {
   slots: StreamSlot[];
   roomUrl: string | null;
+  availability: ScheduleAvailability;
 };
 
+type ScheduleFetchResponse = {
+  ok: boolean;
+  status: number;
+  json(): Promise<unknown>;
+};
+
+type ScheduleFetcher = (input: string) => Promise<ScheduleFetchResponse>;
+
+type FetchedSchedule = Omit<StreamScheduleSnapshot, "availability">;
+
 const EMPTY: FetchedSchedule = { slots: [], roomUrl: null };
+export const INITIAL_STREAM_SCHEDULE_STATE: StreamScheduleSnapshot = {
+  ...EMPTY,
+  availability: "loading",
+};
 const SCHEDULE_TTL_MS = 5 * 60 * 1000;
 
-let cached: { at: number; value: FetchedSchedule } | null = null;
-let inFlight: Promise<FetchedSchedule> | null = null;
-
-function fetchSchedule(): Promise<FetchedSchedule> {
-  if (cached && Date.now() - cached.at < SCHEDULE_TTL_MS) {
-    return Promise.resolve(cached.value);
+function parseScheduleResponse(data: unknown): FetchedSchedule {
+  if (typeof data !== "object" || data === null) {
+    throw new Error("Invalid schedule response");
   }
-  if (inFlight) return inFlight;
-
-  inFlight = fetch("/api/mily-schedule")
-    .then((res) => {
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return res.json();
-    })
-    .then((data: ScheduleResponse | null) => {
-      const slots = Array.isArray(data?.slots) ? data.slots : [];
-      const url = data?.source?.roomUrl;
-      const roomUrl =
-        typeof url === "string" &&
-        url.startsWith("https://www.showroom-live.com/")
-          ? url
-          : null;
-      const value = { slots, roomUrl };
-      // 成功だけキャッシュする
-      cached = { at: Date.now(), value };
-      return value;
-    })
-    .catch(() => EMPTY)
-    .finally(() => {
-      inFlight = null;
-    });
-
-  return inFlight;
+  const response = data as ScheduleResponse;
+  if (!Array.isArray(response.slots)) {
+    throw new Error("Invalid schedule slots");
+  }
+  const url = response.source?.roomUrl;
+  return {
+    slots: response.slots,
+    roomUrl:
+      typeof url === "string" &&
+      url.startsWith("https://www.showroom-live.com/")
+        ? url
+        : null,
+  };
 }
+
+export function createStreamScheduleLoader(options?: {
+  fetcher?: ScheduleFetcher;
+  now?: () => number;
+}): () => Promise<StreamScheduleSnapshot> {
+  const fetcher = options?.fetcher ?? fetch;
+  const now = options?.now ?? Date.now;
+  let cached: { at: number; value: FetchedSchedule } | null = null;
+  let inFlight: Promise<StreamScheduleSnapshot> | null = null;
+
+  return function loadSchedule(): Promise<StreamScheduleSnapshot> {
+    if (cached && now() - cached.at < SCHEDULE_TTL_MS) {
+      return Promise.resolve({ ...cached.value, availability: "ok" });
+    }
+    if (inFlight) return inFlight;
+
+    inFlight = fetcher("/api/mily-schedule")
+      .then((res) => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then((data) => {
+        const value = parseScheduleResponse(data);
+        // 成功だけキャッシュする
+        cached = { at: now(), value };
+        return { ...value, availability: "ok" as const };
+      })
+      .catch(() => ({ ...EMPTY, availability: "unavailable" as const }))
+      .finally(() => {
+        inFlight = null;
+      });
+
+    return inFlight;
+  };
+}
+
+const loadStreamSchedule = createStreamScheduleLoader();
 
 export function useStreamSchedule(): {
   slots: StreamSlot[];
   roomUrl: string | null;
+  availability: ScheduleAvailability;
 } {
-  const [fetched, setFetched] = useState<FetchedSchedule>(EMPTY);
+  const [fetched, setFetched] = useState<StreamScheduleSnapshot>(
+    INITIAL_STREAM_SCHEDULE_STATE,
+  );
 
   useEffect(() => {
     let active = true;
-    fetchSchedule().then((result) => {
+    loadStreamSchedule().then((result) => {
       if (active) setFetched(result);
     });
     return () => {
@@ -81,6 +121,7 @@ export function useStreamSchedule(): {
   return {
     slots: upcomingSlots(streamSchedule, fetched.slots),
     roomUrl: fetched.roomUrl,
+    availability: fetched.availability,
   };
 }
 

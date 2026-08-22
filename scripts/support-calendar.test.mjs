@@ -143,6 +143,76 @@ describe("Support Calendar derivation", () => {
     );
   });
 
+  it("keeps static items during loading and omits unconfirmed SHOWROOM rows", () => {
+    const result = build({
+      streamSlots: [{ date: "2026-08-24", time: "20:00" }],
+      streamAvailability: "loading",
+    });
+    assert.equal(result.availability.showroomSchedule, "loading");
+    assert.ok(
+      result.days
+        .flatMap(({ items }) => items)
+        .some(({ origin }) => origin === "contest"),
+    );
+    assert.equal(
+      result.days
+        .flatMap(({ items }) => items)
+        .some(({ origin }) => origin === "showroom-schedule"),
+      false,
+    );
+  });
+
+  it("connects the five domain sources without copying their schedules", () => {
+    const result = build({
+      supportEvents: [
+        {
+          id: "period-fixture",
+          activityId: "live-stream",
+          kind: "support-campaign",
+          title: "support fixture",
+          schedule: {
+            state: "confirmed-period",
+            start: "2026-08-24",
+            end: "2026-08-24",
+            allDay: true,
+            timezone: "Asia/Tokyo",
+          },
+          source: "https://example.com/support",
+          verifiedAt: "2026-08-22",
+        },
+      ],
+      fanEvents: [
+        {
+          id: "fan-fixture",
+          title: "fan event fixture",
+          listedAt: "2026-08-22",
+          startAt: "2026-08-25T19:00:00+09:00",
+          timezone: "Asia/Tokyo",
+          kind: "appearance",
+          source: "https://example.com/fan-event",
+        },
+      ],
+      streamSlots: [{ date: "2026-08-26", time: "20:00" }],
+      includeRadio: true,
+      daysAhead: 8,
+    });
+    const items = result.days.flatMap(({ items }) => items);
+    assert.deepEqual(
+      new Set(items.map(({ origin }) => origin)),
+      new Set([
+        "contest",
+        "support-event",
+        "fan-event",
+        "showroom-schedule",
+        "radio-program",
+      ]),
+    );
+    assert.equal(
+      items.find(({ origin }) => origin === "fan-event")?.activityId,
+      null,
+    );
+  });
+
   it("keeps SHOWROOM endTime null instead of inventing a duration", () => {
     const [slot] = adaptStreamSlots([
       { date: "2026-08-24", time: "20:00", note: "fixture" },
