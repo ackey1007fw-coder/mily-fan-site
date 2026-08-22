@@ -21,6 +21,9 @@ export type ScheduleOrigin =
   | "showroom-schedule"
   | "radio-program";
 
+/** UIが必要とする最小の時間的意味。保存せず各domain adapterで導出する。 */
+export type ScheduleTiming = "period" | "instant" | "start";
+
 export type ScheduleItem = {
   key: string;
   /** 開始日（Asia/Tokyo、YYYY-MM-DD） */
@@ -29,12 +32,13 @@ export type ScheduleItem = {
   endTime: string | null;
   /**
    * 終了日（Asia/Tokyo、YYYY-MM-DD）。
-   * 確認済みの終了日時がある項目だけに入る。終了が未確認なら `null` のままにし、
+   * 確認済みの終了日または終了日時がある項目だけに入る。終了が未確認なら `null` のままにし、
    * 開始時刻から終了日時を推測しない（SHOWROOM個別枠は常に `null`）。
    */
   endDate: string | null;
   allDay: boolean;
   span: { start: string; end: string } | null;
+  timing: ScheduleTiming;
   activityId: ActivityId | null;
   title: string;
   note?: string;
@@ -184,6 +188,7 @@ export function adaptContestSchedule(contest: Contest): {
         endDate: phase.end,
         allDay: true,
         span: { start: phase.start, end: phase.end },
+        timing: "period",
         activityId: "miss-circle",
         title: phase.name,
         origin: "contest",
@@ -239,6 +244,8 @@ export function adaptSupportEvents(items: SupportEvent[]): {
         item.schedule.state === "confirmed-period"
           ? { start: item.schedule.start, end: item.schedule.end }
           : null,
+      timing:
+        item.schedule.state === "confirmed-instant" ? "instant" : "period",
       activityId: item.activityId,
       title: item.title,
       ...(item.note ? { note: item.note } : {}),
@@ -273,6 +280,7 @@ export function adaptFanEvents(items: FanEvent[]): ScheduleItem[] {
         endDate: end?.date ?? null,
         allDay: startAllDay,
         span: item.endAt ? { start: item.startAt, end: item.endAt } : null,
+        timing: item.endAt ? "period" : "start",
         activityId: null,
         title: item.title,
         ...(item.notes || item.venue
@@ -295,6 +303,7 @@ export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
     endDate: null,
     allDay: false,
     span: null,
+    timing: "start",
     activityId: "live-stream",
     title: "SHOWROOM配信予定",
     ...(slot.note ? { note: slot.note } : {}),
@@ -322,6 +331,7 @@ export function adaptRadioProgram(
       endDate: date,
       allDay: false,
       span: null,
+      timing: "period",
       activityId: "radio",
       title: radioProgram.programName,
       note: "番組枠です。みりぃ本人の出演時間とは限りません。",
@@ -346,13 +356,12 @@ export function formatShortTokyoDate(date: string): string {
 
 /**
  * 開始日と終了日が異なる（日をまたぐ）時刻付き項目か。
- * 終了が未確認（`endTime` / `endDate` が `null`）の項目は false。
- * 終了日時を推測しないので、SHOWROOM個別枠は常に false になる。
+ * 終了日が確認済みなら、終了時刻が未確認でも日跨ぎとして扱う。
+ * 終了日自体が未確認のSHOWROOM個別枠は常に false になる。
  */
 export function isCrossDayTimedItem(item: ScheduleItem): boolean {
   return (
     !item.allDay &&
-    item.endTime !== null &&
     item.endDate !== null &&
     item.endDate !== item.date
   );
@@ -363,12 +372,17 @@ export function isCrossDayTimedItem(item: ScheduleItem): boolean {
  * 日跨ぎは日付headingだけでは終了日が分からないため、終了側に日付を添える。
  */
 export function scheduleTimeLabel(item: ScheduleItem): string {
-  if (item.allDay) return "終日";
+  if (item.allDay) return item.timing === "instant" ? "日付指定" : "終日";
   if (item.startTime === null) return "時刻未確認";
+  // 締切・結果発表等の「時点」をinterval開始へ読み替えない。
+  if (item.timing === "instant") return item.startTime;
+  if (isCrossDayTimedItem(item) && item.endDate !== null) {
+    return item.endTime === null
+      ? `${item.startTime}〜${formatShortTokyoDate(item.endDate)}`
+      : `${item.startTime}〜${formatShortTokyoDate(item.endDate)} ${item.endTime}`;
+  }
   if (item.endTime === null) return `${item.startTime} 開始`;
-  return isCrossDayTimedItem(item) && item.endDate !== null
-    ? `${item.startTime}〜${formatShortTokyoDate(item.endDate)} ${item.endTime}`
-    : `${item.startTime}〜${item.endTime}`;
+  return `${item.startTime}〜${item.endTime}`;
 }
 
 function compareScheduleItems(a: ScheduleItem, b: ScheduleItem): number {

@@ -15,6 +15,7 @@ import {
   adaptFanEvents,
   adaptRadioProgram,
   adaptStreamSlots,
+  adaptSupportEvents,
   buildSupportCalendar,
   displayStatus,
   formatShortTokyoDate,
@@ -372,6 +373,7 @@ describe("Support Calendar derivation", () => {
       endDate: "2026-08-25",
       allDay: false,
       span: null,
+      timing: "period",
       activityId: null,
       title: "fixture",
       origin: "fan-event",
@@ -387,6 +389,15 @@ describe("Support Calendar derivation", () => {
     const crossDay = timed();
     assert.equal(isCrossDayTimedItem(crossDay), true);
     assert.equal(scheduleTimeLabel(crossDay), "23:00〜8/25 01:00");
+
+    // 終了時刻は未確認でも、確認済みの終了日は失わない。
+    const dateOnlyEnd = timed({
+      startTime: "19:00",
+      endTime: null,
+      endDate: "2026-08-25",
+    });
+    assert.equal(isCrossDayTimedItem(dateOnlyEnd), true);
+    assert.equal(scheduleTimeLabel(dateOnlyEnd), "19:00〜8/25");
 
     // 終了未確認（SHOWROOM個別枠）は終了日時を生成しない。
     const openEnded = timed({ endTime: null, endDate: null });
@@ -407,6 +418,96 @@ describe("Support Calendar derivation", () => {
     assert.equal(scheduleTimeLabel(timed({ startTime: null })), "時刻未確認");
     assert.equal(formatShortTokyoDate("2026-08-25"), "8/25");
     assert.equal(formatShortTokyoDate("2027-01-01"), "1/1");
+  });
+
+  it("renders a timed start with a date-only cross-day end without inventing a time", () => {
+    const [item] = adaptFanEvents([
+      {
+        id: "date-only-end",
+        title: "date-only end fixture",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24T19:00:00+09:00",
+        endAt: "2026-08-25",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/fan-event",
+      },
+    ]);
+    assert.equal(item.startTime, "19:00");
+    assert.equal(item.endDate, "2026-08-25");
+    assert.equal(item.endTime, null);
+    assert.equal(item.timing, "period");
+    assert.equal(scheduleTimeLabel(item), "19:00〜8/25");
+    assert.doesNotMatch(scheduleTimeLabel(item), /00:00|23:59|終日/);
+  });
+
+  it("keeps point-in-time SupportEvents distinct from interval starts", () => {
+    const events = [
+      { id: "deadline", kind: "deadline", title: "締切 fixture", at: "20:00" },
+      { id: "result", kind: "result", title: "結果発表 fixture", at: "18:00" },
+      {
+        id: "generic",
+        kind: "support-campaign",
+        title: "時点 fixture",
+        at: "19:00",
+      },
+    ].map(({ at, ...item }) => ({
+      ...item,
+      activityId: "miss-circle",
+      schedule: {
+        state: "confirmed-instant",
+        at: `2026-08-24T${at}:00+09:00`,
+        allDay: false,
+        timezone: "Asia/Tokyo",
+      },
+      source: `https://example.com/${item.id}`,
+      verifiedAt: "2026-08-22",
+    }));
+    const items = adaptSupportEvents(events).items;
+    assert.deepEqual(items.map(({ timing }) => timing), ["instant", "instant", "instant"]);
+    assert.deepEqual(items.map(scheduleTimeLabel), ["20:00", "18:00", "19:00"]);
+    for (const label of items.map(scheduleTimeLabel)) {
+      assert.doesNotMatch(label, /開始/);
+    }
+
+    const [period] = adaptSupportEvents([
+      {
+        id: "period-semantics",
+        activityId: "live-stream",
+        kind: "support-campaign",
+        title: "period fixture",
+        schedule: {
+          state: "confirmed-period",
+          start: "2026-08-24T19:00:00+09:00",
+          end: "2026-08-24T21:00:00+09:00",
+          allDay: false,
+          timezone: "Asia/Tokyo",
+        },
+        source: "https://example.com/period",
+        verifiedAt: "2026-08-22",
+      },
+    ]).items;
+    assert.equal(period.timing, "period");
+    assert.equal(scheduleTimeLabel(period), "19:00〜21:00");
+
+    const [fanStart] = adaptFanEvents([
+      {
+        id: "fan-start-semantics",
+        title: "fan start fixture",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24T19:00:00+09:00",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/fan-start",
+      },
+    ]);
+    const [showroomStart] = adaptStreamSlots([
+      { date: "2026-08-24", time: "20:00" },
+    ]);
+    assert.equal(fanStart.timing, "start");
+    assert.equal(scheduleTimeLabel(fanStart), "19:00 開始");
+    assert.equal(showroomStart.timing, "start");
+    assert.equal(scheduleTimeLabel(showroomStart), "20:00 開始");
   });
 
   it("labels a cross-day timed SupportEvent and FanEvent through the built calendar", () => {

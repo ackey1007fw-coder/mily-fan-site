@@ -145,7 +145,9 @@ describe("stream schedule safety", () => {
     const hook = await read("src/lib/useStreamSchedule.ts");
     assert.match(hook, /\.catch\(/);
     assert.match(hook, /Asia\/Tokyo/);
-    assert.match(hook, /startsWith\("https:\/\/www\.showroom-live\.com\/"\)/);
+    assert.match(hook, /url\.origin === "https:\/\/www\.showroom-live\.com"/);
+    assert.match(hook, /url\.username === ""/);
+    assert.match(hook, /url\.password === ""/);
 
     const component = await read("src/components/StreamSchedule.tsx");
     assert.match(component, /useStreamSchedule/);

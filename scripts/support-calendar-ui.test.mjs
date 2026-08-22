@@ -92,6 +92,7 @@ describe("Support Calendar agenda UI", () => {
     assert.match(page, /isCrossDayTimedItem\(item\) && item\.endDate !== null/);
     assert.match(page, /formatShortTokyoDate\(item\.date\)/);
     assert.match(page, /formatShortTokyoDate\(item\.endDate\)/);
+    assert.match(page, /item\.endTime !== null \? ` \$\{item\.endTime\}` : ""/);
     assert.match(page, /日をまたぎます/);
     // 既存の all-day 期間表示は維持する。
     assert.match(page, /item\.allDay && item\.span && item\.span\.start !== item\.span\.end/);
@@ -100,6 +101,7 @@ describe("Support Calendar agenda UI", () => {
   it("shows only confirmed times, safe links, and the radio disclaimer", () => {
     const page = source("src/SupportPage.tsx");
     const calendar = source("src/lib/supportCalendar.ts");
+    assert.match(calendar, /item\.timing === "instant"[\s\S]*?return item\.startTime/);
     assert.match(calendar, /item\.endTime === null[\s\S]*?`\$\{item\.startTime\} 開始`/);
     assert.match(page, /<ActionLink action=\{item\.cta\}/);
     assert.match(page, /<ExternalLink href=\{item\.source\}/);

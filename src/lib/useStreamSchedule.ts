@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  isValidSlot,
   streamSchedule,
   upcomingSlots,
   type StreamSlot,
@@ -39,7 +40,15 @@ type ScheduleFetchResponse = {
   json(): Promise<unknown>;
 };
 
-type ScheduleFetcher = (input: string) => Promise<ScheduleFetchResponse>;
+type ScheduleFetcher = (
+  input: string,
+  init?: { signal?: AbortSignal },
+) => Promise<ScheduleFetchResponse>;
+
+type ScheduleTimers = {
+  setTimeout: (handler: () => void, ms: number) => number;
+  clearTimeout: (id: number) => void;
+};
 
 type FetchedSchedule = Omit<StreamScheduleSnapshot, "availability">;
 
@@ -49,36 +58,70 @@ export const INITIAL_STREAM_SCHEDULE_STATE: StreamScheduleSnapshot = {
   availability: "loading",
 };
 const SCHEDULE_TTL_MS = 5 * 60 * 1000;
+/** `useMilyRealtimeStatus` と同じclient-side API timeout。 */
+export const STREAM_SCHEDULE_TIMEOUT_MS = 8000;
 
-function parseScheduleResponse(data: unknown): FetchedSchedule {
+const defaultTimers: ScheduleTimers = {
+  setTimeout: (handler, ms) =>
+    globalThis.setTimeout(handler, ms) as unknown as number,
+  clearTimeout: (id) => globalThis.clearTimeout(id),
+};
+
+function verifiedRoomUrl(data: unknown): string | null {
+  if (typeof data !== "object" || data === null) return null;
+  const response = data as ScheduleResponse;
+  const value = response.source?.roomUrl;
+  if (typeof value !== "string") return null;
+
+  try {
+    const url = new URL(value);
+    return url.origin === "https://www.showroom-live.com" &&
+      url.username === "" &&
+      url.password === ""
+      ? value
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+function parseScheduleResponse(data: unknown): {
+  value: FetchedSchedule;
+  success: boolean;
+} {
+  const roomUrl = verifiedRoomUrl(data);
   if (typeof data !== "object" || data === null) {
-    throw new Error("Invalid schedule response");
+    return { value: { slots: [], roomUrl }, success: false };
   }
   const response = data as ScheduleResponse;
   // HTTP 200 でも ok:true 以外は失敗。成功として扱わずキャッシュもしない。
   if (response.ok !== true) {
-    throw new Error("Schedule payload reported failure");
+    return { value: { slots: [], roomUrl }, success: false };
   }
-  if (!Array.isArray(response.slots)) {
-    throw new Error("Invalid schedule slots");
+  // 1件でもcontract違反ならresponse全体を利用不能にする。
+  // invalid entryを静かに捨てて「成功0件」へ変換しない。
+  if (
+    !Array.isArray(response.slots) ||
+    !response.slots.every((slot) => isValidSlot(slot))
+  ) {
+    return { value: { slots: [], roomUrl }, success: false };
   }
-  const url = response.source?.roomUrl;
   return {
-    slots: response.slots,
-    roomUrl:
-      typeof url === "string" &&
-      url.startsWith("https://www.showroom-live.com/")
-        ? url
-        : null,
+    value: { slots: response.slots, roomUrl },
+    success: true,
   };
 }
 
 export function createStreamScheduleLoader(options?: {
   fetcher?: ScheduleFetcher;
   now?: () => number;
+  timeoutMs?: number;
+  timers?: ScheduleTimers;
 }): () => Promise<StreamScheduleSnapshot> {
   const fetcher = options?.fetcher ?? fetch;
   const now = options?.now ?? Date.now;
+  const timeoutMs = options?.timeoutMs ?? STREAM_SCHEDULE_TIMEOUT_MS;
+  const timers = options?.timers ?? defaultTimers;
   let cached: { at: number; value: FetchedSchedule } | null = null;
   let inFlight: Promise<StreamScheduleSnapshot> | null = null;
 
@@ -88,19 +131,27 @@ export function createStreamScheduleLoader(options?: {
     }
     if (inFlight) return inFlight;
 
-    inFlight = fetcher("/api/mily-schedule")
-      .then((res) => {
+    const controller = new AbortController();
+    const timeoutId = timers.setTimeout(() => controller.abort(), timeoutMs);
+
+    inFlight = Promise.resolve()
+      .then(() =>
+        fetcher("/api/mily-schedule", { signal: controller.signal }),
+      )
+      .then(async (res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        const value = parseScheduleResponse(data);
-        // 成功だけキャッシュする
-        cached = { at: now(), value };
-        return { ...value, availability: "ok" as const };
+        // body読了までtimeoutの対象にする。
+        const parsed = parseScheduleResponse(await res.json());
+        if (!parsed.success) {
+          return { ...parsed.value, availability: "unavailable" as const };
+        }
+        // 成功だけキャッシュする。
+        cached = { at: now(), value: parsed.value };
+        return { ...parsed.value, availability: "ok" as const };
       })
       .catch(() => ({ ...EMPTY, availability: "unavailable" as const }))
       .finally(() => {
+        timers.clearTimeout(timeoutId);
         inFlight = null;
       });
 
@@ -122,6 +173,20 @@ export type StreamScheduleView = {
   availability: ScheduleAvailability;
 };
 
+/** API結果と確認済み手入力fallbackを既存caller向けshapeへまとめる。 */
+export function toStreamScheduleView(
+  fetched: StreamScheduleSnapshot,
+  manual: StreamSlot[],
+  now: number,
+): StreamScheduleView {
+  return {
+    slots: upcomingSlots(manual, fetched.slots, now),
+    manualSlots: upcomingSlots(manual, [], now),
+    roomUrl: fetched.roomUrl,
+    availability: fetched.availability,
+  };
+}
+
 export function useStreamSchedule(): StreamScheduleView {
   const [fetched, setFetched] = useState<StreamScheduleSnapshot>(
     INITIAL_STREAM_SCHEDULE_STATE,
@@ -137,12 +202,7 @@ export function useStreamSchedule(): StreamScheduleView {
     };
   }, []);
 
-  return {
-    slots: upcomingSlots(streamSchedule, fetched.slots),
-    manualSlots: upcomingSlots(streamSchedule, []),
-    roomUrl: fetched.roomUrl,
-    availability: fetched.availability,
-  };
+  return toStreamScheduleView(fetched, streamSchedule, Date.now());
 }
 
 const dateFmt = new Intl.DateTimeFormat("ja-JP", {

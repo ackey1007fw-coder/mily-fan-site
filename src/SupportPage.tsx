@@ -153,7 +153,8 @@ function CalendarItemCard({ item }: { item: ScheduleItem }) {
       {isCrossDayTimedItem(item) && item.endDate !== null ? (
         <p className="mt-2 text-xs leading-6 text-ink-muted">
           期間 {formatShortTokyoDate(item.date)} {item.startTime}〜
-          {formatShortTokyoDate(item.endDate)} {item.endTime}（日をまたぎます）
+          {formatShortTokyoDate(item.endDate)}
+          {item.endTime !== null ? ` ${item.endTime}` : ""}（日をまたぎます）
         </p>
       ) : null}
       {item.note ? (
