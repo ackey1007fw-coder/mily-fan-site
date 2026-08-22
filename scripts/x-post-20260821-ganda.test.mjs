@@ -239,7 +239,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
     }
   });
 
-  it("keeps every existing 8/21 item and puts the 17:46 post first", () => {
+  it("keeps every existing 8/21 item behind the newer TikTok entry", () => {
     const existing = [
       "2026-08-21-afternoon-showroom-fanroom",
       "2026-08-21-event-story-next-slot",
@@ -248,9 +248,16 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
     ];
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 5), [NEWS_ID, ...existing]);
+    assert.deepEqual(ordered.slice(0, 6), [
+      "2026-08-21-tiktok-radio-misscircle",
+      NEWS_ID,
+      ...existing,
+    ]);
+    assert.ok(
+      news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
+    );
     for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
-    assert.equal(news.length, 14);
+    assert.equal(news.length, 15);
   });
 });
 
