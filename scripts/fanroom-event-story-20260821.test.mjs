@@ -355,7 +355,8 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 6), [
+    assert.deepEqual(ordered.slice(0, 7), [
+      "2026-08-22-campus-girls-second-stage-jury-award",
       "2026-08-21-tiktok-radio-misscircle",
       "2026-08-21-after-afternoon-ganda",
       FANROOM_NEWS_ID,
@@ -363,7 +364,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 15);
+    assert.equal(news.length, 16);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {
@@ -402,14 +403,22 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
     const feed = createPortalFeed();
 
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[1].id, `mily:news:${FANROOM_NEWS_ID}`);
-    assert.equal(feed.items[2].id, `mily:news:${STORY_NEWS_ID}`);
-    assert.ok(feed.items[1].image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
-    assert.ok(feed.items[2].image?.endsWith(eventStory20260821.poster));
-    assert.equal(feed.items[1].sourceUrl, undefined);
+    assert.equal(
+      feed.items[0].id,
+      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
+    );
+    assert.equal(
+      feed.items[1].id,
+      "mily:story:campus-girls-2027-second-stage-jury-award",
+    );
+    assert.equal(feed.items[2].id, "mily:news:2026-08-21-after-afternoon-ganda");
+    assert.equal(feed.items[3].id, `mily:news:${FANROOM_NEWS_ID}`);
+    assert.equal(feed.items[4].id, `mily:news:${STORY_NEWS_ID}`);
+    assert.ok(feed.items[3].image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
+    assert.ok(feed.items[4].image?.endsWith(eventStory20260821.poster));
+    assert.equal(feed.items[3].sourceUrl, undefined);
     // Portal Feedは既存仕様でNewsのrelated `url`を外部導線として直マップする。
-    assert.equal(feed.items[2].sourceUrl, INSTAGRAM_PROFILE);
+    assert.equal(feed.items[4].sourceUrl, INSTAGRAM_PROFILE);
     assert.doesNotMatch(eventStory20260821.src, /instagram|google|twitter|x\.com/i);
     assert.doesNotMatch(eventStory20260821.poster, /instagram|google|twitter|x\.com/i);
   });

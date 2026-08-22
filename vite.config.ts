@@ -22,6 +22,10 @@ function siteMetadataPlugin(): Plugin {
           "__STORY_SECOND_ROUND_RESULT_CANONICAL__",
           storyUrl("second-round-result-2026"),
         )
+        .replaceAll(
+          "__STORY_CAMPUS_GIRLS_SECOND_STAGE_JURY_AWARD_CANONICAL__",
+          storyUrl("campus-girls-2027-second-stage-jury-award"),
+        )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -53,6 +57,8 @@ export default defineConfig({
         storyRadio20260818: "stories/2026-08-18-radio/index.html",
         storySecondRound: "stories/second-round-2026/index.html",
         storySecondRoundResult: "stories/second-round-result-2026/index.html",
+        storyCampusGirlsSecondStageJuryAward:
+          "stories/campus-girls-2027-second-stage-jury-award/index.html",
       },
       output: {
         manualChunks: {

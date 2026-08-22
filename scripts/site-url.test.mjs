@@ -34,6 +34,12 @@ describe("site.siteUrl metadata source of truth", () => {
       sitemapXml(),
       new RegExp(`<loc>${storyUrl("2026-08-18-radio")}</loc>`),
     );
+    assert.match(
+      sitemapXml(),
+      new RegExp(
+        `<loc>${storyUrl("campus-girls-2027-second-stage-jury-award")}</loc>`,
+      ),
+    );
   });
 
   it("fails when public metadata drifts from site.siteUrl", () => {

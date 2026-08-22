@@ -13,7 +13,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 15件。8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は既存の id 昇順で並ぶ |
+| `news.ts` | 16件。8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は既存の id 昇順で並ぶ |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真13枚（すべて `published: true`） | 誕生日5枚とマンゴーかき氷5枚（b10）は各Instagram投稿。ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。縦写真は `aspect` で切り抜きを避ける |
@@ -21,7 +21,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |
-| `highlights.ts` | MISS CIRCLE（挑戦 / 2次審査通過・三次審査進出）、CAMPUS GIRLS、SHOWROOM開始の確認済み4件 | 主催者・本人・SHOWROOM | 結果未確定の順位や掲載権は入れない |
+| `highlights.ts` | MISS CIRCLE（挑戦 / 2次審査通過・三次審査進出）、CAMPUS GIRLS（1st / 2nd STAGE審査員賞）、SHOWROOM開始の確認済み5件 | 主催者・本人・SHOWROOM | 結果未確定の順位や掲載権は入れない |
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
 維持する公開情報（消さない）:
@@ -63,6 +63,19 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 ---
 
+## メディア掲載の上位方針
+
+- オーナーから提供された、または掲載を明示承認された確認済みの画像・動画は、`docs/MEDIA.md` の掲載ゲートを通過する限り、原則として掲載候補とする。
+- 非掲載を初期値にせず、Story / Latest / NEWS / Gallery のどこへ載せるのが文脈上適切かを先に判断する。
+- NEWSを文章だけで終わらせず、内容に合う確認済みメディアがあれば自己ホストの公開派生を利用する。節目Storyでも、確認済みの画像・動画を積極的に使用する。
+- Gallery向きでない結果グラフィックや記録資料でも、Story / NEWS向きならその掲載面で使う。Galleryへ無理に展開しない。
+- 非掲載は例外とし、掲載しない場合はプライバシー・第三者情報・出典 / 権利・重複・品質・掲載面・技術上の問題など、具体的な理由をPR本文または最終報告へ残す。
+- 原則掲載であっても、出典・権利・プライバシー・第三者情報・公開派生の品質確認は省略しない。
+
+Instagram Story閲覧スクリーンショットには、以下の固有の追加安全条件を適用する。一般メディアの掲載ゲートを通過しただけでは公開しない。
+
+---
+
 ## SNS投稿を news へ追加するとき
 
 1. 本人の確認済みアカウント（`socials.ts` にあるもの）の投稿であること。
@@ -79,9 +92,15 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 ### 公開permalinkがない一時的なInstagram Story
 
+- この項目は、上記の一般メディア掲載原則に対するStory閲覧スクリーンショット固有の追加条件である。
 - オーナー提供のクリーンな写真・動画があり、投稿日と表示文を確認できる場合だけ扱う。
 - `source` は省略し、`sourceLabel: "Instagram Story"` を非リンクで表示する。Driveの受け渡しURL、空文字、`#`、推測したStory URLを代用しない。
-- 閲覧画面スクリーンショットは文言確認資料に限り、Latest / Gallery / `public/` / gitへ入れない。省略記号より先を補完しない。
+- 閲覧画面スクリーンショットは原則として文言確認資料に限り、Latest / Gallery / `public/` / gitへ入れない。省略記号より先を補完しない。
+- 例外は、**当該画像について**オーナーが掲載を明示承認し、本人が公開したStoryで、
+  DM・非公開情報・通知・第三者コメント・端末情報を含まず、公開情報だけで構成され、
+  コンテスト結果など節目Storyの記録資料として必要な場合に限る。例外画像は
+  `/stories/` の当該記事内だけへ自己ホストし、Latest / Galleryへ自動展開しない。
+  承認は別のStory画像へ流用せず、素材ごとに確認する。
 - 同じローカル派生をLatestとGalleryの両方に出す場合、MP4とposterをそれぞれ1ファイルだけ作り、両方から同じpathを参照する。
 - 日常の朝投稿はLatest + Galleryで扱う。節目を文章で残すサイト機能の `/stories/` へは追加しない。
 - 本人Instagramプロフィールへの導線を付ける場合は、canonical URL

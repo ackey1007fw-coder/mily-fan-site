@@ -72,6 +72,11 @@ export function sitemapXml(): string {
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>${storyUrl("campus-girls-2027-second-stage-jury-award")}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
 `;
 }

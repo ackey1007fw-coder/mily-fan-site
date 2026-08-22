@@ -41,8 +41,9 @@ describe("reusable STORIES content", () => {
   it("publishes the source-backed second-round story with the approved copy", () => {
     const story = storyBySlug("second-round-2026");
     assert.ok(story);
-    assert.equal(stories.length, 3);
+    assert.equal(stories.length, 4);
     assert.deepEqual(visibleStories(), [
+      storyBySlug("campus-girls-2027-second-stage-jury-award"),
       storyBySlug("second-round-result-2026"),
       storyBySlug("2026-08-18-radio"),
       story,
@@ -267,6 +268,10 @@ describe("STORIES pages and discovery", () => {
       vite,
       /storySecondRoundResult: "stories\/second-round-result-2026\/index\.html"/,
     );
+    assert.match(
+      vite,
+      /storyCampusGirlsSecondStageJuryAward:[\s\S]*"stories\/campus-girls-2027-second-stage-jury-award\/index\.html"/,
+    );
     assert.match(html, /src="\/src\/story-main\.tsx"/);
     assert.match(html, /rel="canonical" href="__STORY_SECOND_ROUND_CANONICAL__"/);
     assert.match(html, /property="og:type" content="article"/);
@@ -293,6 +298,19 @@ describe("STORIES pages and discovery", () => {
     assert.match(resultHtml, /"@type": "BreadcrumbList"/);
     assert.match(resultHtml, /ファンサイト（非公式）/);
     assert.match(resultHtml, /2次審査通過/);
+
+    const campusGirlsHtml = await read(
+      "stories/campus-girls-2027-second-stage-jury-award/index.html",
+    );
+    assert.match(campusGirlsHtml, /src="\/src\/story-main\.tsx"/);
+    assert.match(
+      campusGirlsHtml,
+      /rel="canonical" href="__STORY_CAMPUS_GIRLS_SECOND_STAGE_JURY_AWARD_CANONICAL__"/,
+    );
+    assert.match(campusGirlsHtml, /property="og:type" content="article"/);
+    assert.match(campusGirlsHtml, /"@type": "Article"/);
+    assert.match(campusGirlsHtml, /ファンサイト（非公式）/);
+    assert.match(campusGirlsHtml, /予選ファイナル進出/);
   });
 
   it("renders the approved video behavior without autoplay or loop", async () => {
