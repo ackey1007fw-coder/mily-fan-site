@@ -102,11 +102,22 @@ describe("Support Calendar agenda UI", () => {
     const page = source("src/SupportPage.tsx");
     const calendar = source("src/lib/supportCalendar.ts");
     assert.match(calendar, /allDay: false,[\s\S]*?span: item\.endAt/);
-    assert.match(calendar, /if \(item\.startTime === null\) return "時刻未確認"/);
+    assert.match(calendar, /if \(item\.startTime === null\) \{/);
+    assert.match(calendar, /return "時刻未確認";/);
     assert.match(page, /isTimeUnconfirmedDateSpan\(item\) && item\.endDate !== null/);
     assert.match(
       page,
       /期間 \{formatShortTokyoDate\(item\.date\)\}〜\{formatShortTokyoDate\(item\.endDate\)\}/,
+    );
+  });
+
+  it("keeps a confirmed end time visible when the start time is unknown", () => {
+    const calendar = source("src/lib/supportCalendar.ts");
+    // 同日end-onlyは時刻だけ、日跨ぎend-onlyは終了日付き。開始時刻は生成しない。
+    assert.match(calendar, /時刻未確認 \/ \$\{item\.endTime\} 終了/);
+    assert.match(
+      calendar,
+      /時刻未確認 \/ \$\{formatShortTokyoDate\(item\.endDate\)\} \$\{item\.endTime\} 終了/,
     );
   });
 

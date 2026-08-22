@@ -369,7 +369,10 @@ export function isCrossDayTimedItem(item: ScheduleItem): boolean {
   );
 }
 
-/** 時刻を推測せず、確認済みの日付範囲だけを示す項目か。 */
+/**
+ * 開始時刻を推測せず、確認済みの日付範囲を示す項目か。
+ * 終了時刻だけ確認済みの場合も含む（その終了時刻は捨てずに併記する）。
+ */
 export function isTimeUnconfirmedDateSpan(item: ScheduleItem): boolean {
   return (
     !item.allDay &&
@@ -382,10 +385,19 @@ export function isTimeUnconfirmedDateSpan(item: ScheduleItem): boolean {
 /**
  * agenda cardの時刻表示。
  * 日跨ぎは日付headingだけでは終了日が分からないため、終了側に日付を添える。
+ * 開始時刻が未確認でも、確認済みの終了時刻は表示から落とさない。
  */
 export function scheduleTimeLabel(item: ScheduleItem): string {
   if (item.allDay) return item.timing === "instant" ? "日付指定" : "終日";
-  if (item.startTime === null) return "時刻未確認";
+  if (item.startTime === null) {
+    // 確認済みの終了時刻だけを示す。開始時刻（00:00等）は生成しない。
+    if (item.endTime !== null && item.endDate !== null) {
+      return item.endDate === item.date
+        ? `時刻未確認 / ${item.endTime} 終了`
+        : `時刻未確認 / ${formatShortTokyoDate(item.endDate)} ${item.endTime} 終了`;
+    }
+    return "時刻未確認";
+  }
   // 締切・結果発表等の「時点」をinterval開始へ読み替えない。
   if (item.timing === "instant") return item.startTime;
   if (isCrossDayTimedItem(item) && item.endDate !== null) {

@@ -416,7 +416,15 @@ describe("Support Calendar derivation", () => {
     assert.equal(isCrossDayTimedItem(allDay), false);
     assert.equal(scheduleTimeLabel(allDay), "終日");
 
-    assert.equal(scheduleTimeLabel(timed({ startTime: null })), "時刻未確認");
+    // 開始時刻未確認でも、fixture由来の確認済み終了（8/25 01:00）は落とさない。
+    assert.equal(
+      scheduleTimeLabel(timed({ startTime: null })),
+      "時刻未確認 / 8/25 01:00 終了",
+    );
+    assert.equal(
+      scheduleTimeLabel(timed({ startTime: null, endTime: null, endDate: null })),
+      "時刻未確認",
+    );
     assert.equal(formatShortTokyoDate("2026-08-25"), "8/25");
     assert.equal(formatShortTokyoDate("2027-01-01"), "1/1");
   });
@@ -483,6 +491,146 @@ describe("Support Calendar derivation", () => {
     assert.equal(isCrossDayTimedItem(dateSpan), false);
     assert.equal(isTimeUnconfirmedDateSpan(dateSpan), true);
     assert.doesNotMatch(scheduleTimeLabel(dateSpan), /終日|00:00|23:59/);
+  });
+
+  it("preserves confirmed end times when the start time is unknown", () => {
+    const [sameDayEnd, crossDayEnd] = adaptFanEvents([
+      {
+        id: "date-only-start-timed-end",
+        title: "same-day end-only fixture",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24",
+        endAt: "2026-08-24T21:00:00+09:00",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/end-only",
+      },
+      {
+        id: "date-only-start-cross-day-end",
+        title: "cross-day end-only fixture",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24",
+        endAt: "2026-08-25T01:00:00+09:00",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/end-only-cross",
+      },
+    ]);
+
+    // 開始時刻は推測しない。確認済みの終了時刻だけを残す。
+    assert.equal(sameDayEnd.startTime, null);
+    assert.equal(sameDayEnd.endTime, "21:00");
+    assert.equal(sameDayEnd.endDate, "2026-08-24");
+    assert.equal(sameDayEnd.allDay, false);
+    assert.equal(scheduleTimeLabel(sameDayEnd), "時刻未確認 / 21:00 終了");
+    assert.doesNotMatch(scheduleTimeLabel(sameDayEnd), /終日|00:00|23:59|開始/);
+    assert.equal(isCrossDayTimedItem(sameDayEnd), false);
+    assert.equal(isTimeUnconfirmedDateSpan(sameDayEnd), false);
+
+    assert.equal(crossDayEnd.startTime, null);
+    assert.equal(crossDayEnd.endTime, "01:00");
+    assert.equal(crossDayEnd.endDate, "2026-08-25");
+    assert.equal(scheduleTimeLabel(crossDayEnd), "時刻未確認 / 8/25 01:00 終了");
+    assert.doesNotMatch(scheduleTimeLabel(crossDayEnd), /終日|00:00|23:59|開始/);
+    // 日跨ぎのend-onlyはUIの期間行（8/24〜8/25 01:00）にも載る。
+    assert.equal(isCrossDayTimedItem(crossDayEnd), false);
+    assert.equal(isTimeUnconfirmedDateSpan(crossDayEnd), true);
+
+    // built calendar経由でも確認済み終了が失われない。
+    const built = build({
+      fanEvents: [
+        {
+          id: "built-end-only",
+          title: "built end-only fixture",
+          listedAt: "2026-08-22",
+          startAt: "2026-08-24",
+          endAt: "2026-08-24T21:00:00+09:00",
+          timezone: "Asia/Tokyo",
+          kind: "appearance",
+          source: "https://example.com/built-end-only",
+        },
+      ],
+    });
+    const item = built.days
+      .flatMap(({ items }) => items)
+      .find(({ origin }) => origin === "fan-event");
+    assert.equal(scheduleTimeLabel(item), "時刻未確認 / 21:00 終了");
+  });
+
+  it("keeps the FanEvent time-precision matrix free of guessed times", () => {
+    const fan = (id, startAt, endAt) => ({
+      id,
+      title: id,
+      listedAt: "2026-08-22",
+      startAt,
+      ...(endAt ? { endAt } : {}),
+      timezone: "Asia/Tokyo",
+      kind: "appearance",
+      source: "https://example.com/matrix",
+    });
+    const labels = adaptFanEvents([
+      fan("a-date-only-start", "2026-08-24"),
+      fan("b-date-only-span", "2026-08-24", "2026-08-25"),
+      fan("c-same-day-timed-end", "2026-08-24", "2026-08-24T21:00:00+09:00"),
+      fan("d-cross-day-timed-end", "2026-08-24", "2026-08-25T01:00:00+09:00"),
+      fan("e-timed-start-only", "2026-08-24T20:00:00+09:00"),
+      fan("f-timed-start-date-only-end", "2026-08-24T19:00:00+09:00", "2026-08-25"),
+      fan("g-same-day-timed", "2026-08-24T19:00:00+09:00", "2026-08-24T21:00:00+09:00"),
+      fan("h-cross-day-timed", "2026-08-24T23:00:00+09:00", "2026-08-25T01:00:00+09:00"),
+    ]).map(scheduleTimeLabel);
+    assert.deepEqual(labels, [
+      "時刻未確認",
+      "時刻未確認",
+      "時刻未確認 / 21:00 終了",
+      "時刻未確認 / 8/25 01:00 終了",
+      "20:00 開始",
+      "19:00〜8/25",
+      "19:00〜21:00",
+      "23:00〜8/25 01:00",
+    ]);
+    // date-only FanEventはどのprecisionでも「終日」や生成時刻にならない。
+    for (const label of labels) {
+      assert.doesNotMatch(label, /終日|00:00 開始|23:59/);
+    }
+
+    // 本当に確認済みのall-dayは引き続き「終日」「日付指定」（FanEventのdate-onlyと混同しない）。
+    const [contestItem] = adaptContestSchedule(contestFixture).items;
+    assert.equal(scheduleTimeLabel(contestItem), "終日");
+    const supportBase = {
+      activityId: "live-stream",
+      kind: "support-campaign",
+      source: "https://example.com/all-day",
+      verifiedAt: "2026-08-22",
+    };
+    const [allDayPeriod] = adaptSupportEvents([
+      {
+        ...supportBase,
+        id: "all-day-period",
+        title: "all-day period fixture",
+        schedule: {
+          state: "confirmed-period",
+          start: "2026-08-24",
+          end: "2026-08-25",
+          allDay: true,
+          timezone: "Asia/Tokyo",
+        },
+      },
+    ]).items;
+    assert.equal(scheduleTimeLabel(allDayPeriod), "終日");
+    const [allDayInstant] = adaptSupportEvents([
+      {
+        ...supportBase,
+        id: "all-day-instant",
+        title: "all-day instant fixture",
+        schedule: {
+          state: "confirmed-instant",
+          at: "2026-08-24",
+          allDay: true,
+          timezone: "Asia/Tokyo",
+        },
+      },
+    ]).items;
+    assert.equal(scheduleTimeLabel(allDayInstant), "日付指定");
   });
 
   it("keeps point-in-time SupportEvents distinct from interval starts", () => {
