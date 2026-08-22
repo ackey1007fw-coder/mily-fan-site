@@ -15,7 +15,14 @@ import type { ScheduleAvailability } from "./supportCalendar.ts";
  * - 予定は毎分 poll する必要がないため、ライブ状態
  *   （useMilyRealtimeStatus）とは別系統にしている
  */
+
+/**
+ * `/api/mily-schedule` のresponse contract。
+ * room解決や上流取得に失敗しても endpoint は HTTP 200 のまま
+ * `{ ok: false, slots: [] }` を返す仕様なので、payloadの `ok` を契約に含める。
+ */
 type ScheduleResponse = {
+  ok?: boolean;
   slots?: StreamSlot[];
   source?: { roomUrl?: string | null };
 };
@@ -48,6 +55,10 @@ function parseScheduleResponse(data: unknown): FetchedSchedule {
     throw new Error("Invalid schedule response");
   }
   const response = data as ScheduleResponse;
+  // HTTP 200 でも ok:true 以外は失敗。成功として扱わずキャッシュもしない。
+  if (response.ok !== true) {
+    throw new Error("Schedule payload reported failure");
+  }
   if (!Array.isArray(response.slots)) {
     throw new Error("Invalid schedule slots");
   }
@@ -99,11 +110,19 @@ export function createStreamScheduleLoader(options?: {
 
 const loadStreamSchedule = createStreamScheduleLoader();
 
-export function useStreamSchedule(): {
+export type StreamScheduleView = {
+  /** 手入力fallback＋API由来のmerge済み配信枠（既存呼び出し側の契約） */
   slots: StreamSlot[];
+  /**
+   * `src/data/streamSchedule.ts` の確認済み手入力fallbackだけ。
+   * API取得の成否と無関係に確認済みなので、失敗時も表示側で残せる。
+   */
+  manualSlots: StreamSlot[];
   roomUrl: string | null;
   availability: ScheduleAvailability;
-} {
+};
+
+export function useStreamSchedule(): StreamScheduleView {
   const [fetched, setFetched] = useState<StreamScheduleSnapshot>(
     INITIAL_STREAM_SCHEDULE_STATE,
   );
@@ -120,6 +139,7 @@ export function useStreamSchedule(): {
 
   return {
     slots: upcomingSlots(streamSchedule, fetched.slots),
+    manualSlots: upcomingSlots(streamSchedule, []),
     roomUrl: fetched.roomUrl,
     availability: fetched.availability,
   };

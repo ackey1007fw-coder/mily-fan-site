@@ -17,7 +17,10 @@ import {
   adaptStreamSlots,
   buildSupportCalendar,
   displayStatus,
+  formatShortTokyoDate,
+  isCrossDayTimedItem,
   liveSupportEvents,
+  scheduleTimeLabel,
 } from "../src/lib/supportCalendar.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -143,6 +146,153 @@ describe("Support Calendar derivation", () => {
     );
   });
 
+  it("keeps the confirmed manual fallback while gating only fetched rows", () => {
+    // 手入力fallbackは確認済み。APIが loading / unavailable でもCalendarから消さない。
+    const manual = [{ date: "2026-08-24", time: "19:00", note: "手入力fallback" }];
+    const fetched = { date: "2026-08-25", time: "20:00" };
+    const showroom = (result) =>
+      result.days
+        .flatMap(({ items }) => items)
+        .filter(({ origin }) => origin === "showroom-schedule");
+
+    const ok = build({
+      streamSlots: [...manual, fetched],
+      manualStreamSlots: manual,
+      streamAvailability: "ok",
+    });
+    assert.deepEqual(
+      showroom(ok).map(({ date, startTime }) => `${date}T${startTime}`),
+      ["2026-08-24T19:00", "2026-08-25T20:00"],
+    );
+
+    for (const availability of ["loading", "unavailable"]) {
+      const degraded = build({
+        streamSlots: [...manual, fetched],
+        manualStreamSlots: manual,
+        streamAvailability: availability,
+      });
+      assert.deepEqual(
+        showroom(degraded).map(({ date, startTime }) => `${date}T${startTime}`),
+        ["2026-08-24T19:00"],
+        `manual fallback must survive ${availability}`,
+      );
+      // API失敗を成功へ偽装しない。warningのためのavailabilityはそのまま。
+      assert.equal(degraded.availability.showroomSchedule, availability);
+      assert.ok(
+        degraded.days
+          .flatMap(({ items }) => items)
+          .some(({ origin }) => origin === "contest"),
+      );
+    }
+  });
+
+  it("shows no SHOWROOM row when the API is unavailable and no fallback exists", () => {
+    const result = build({
+      streamSlots: [{ date: "2026-08-24", time: "20:00" }],
+      manualStreamSlots: [],
+      streamAvailability: "unavailable",
+    });
+    assert.equal(
+      result.days
+        .flatMap(({ items }) => items)
+        .filter(({ origin }) => origin === "showroom-schedule").length,
+      0,
+    );
+    assert.equal(result.availability.showroomSchedule, "unavailable");
+  });
+
+  it("derives endDate only from confirmed ends, keeping SHOWROOM null", () => {
+    const crossDayEvent = adaptFanEvents([
+      {
+        id: "cross-day-fan",
+        title: "cross day fan event",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24T23:00:00+09:00",
+        endAt: "2026-08-25T01:00:00+09:00",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/fan-event",
+      },
+    ])[0];
+    assert.equal(crossDayEvent.date, "2026-08-24");
+    assert.equal(crossDayEvent.startTime, "23:00");
+    assert.equal(crossDayEvent.endTime, "01:00");
+    assert.equal(crossDayEvent.endDate, "2026-08-25");
+    assert.equal(crossDayEvent.allDay, false);
+
+    const sameDayEvent = adaptFanEvents([
+      {
+        id: "same-day-fan",
+        title: "same day fan event",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24T19:00:00+09:00",
+        endAt: "2026-08-24T21:00:00+09:00",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/fan-event",
+      },
+    ])[0];
+    assert.equal(sameDayEvent.endDate, "2026-08-24");
+    assert.equal(sameDayEvent.date, sameDayEvent.endDate);
+
+    const openEndedEvent = adaptFanEvents([
+      {
+        id: "open-ended-fan",
+        title: "open ended fan event",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24T19:00:00+09:00",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/fan-event",
+      },
+    ])[0];
+    assert.equal(openEndedEvent.endTime, null);
+    assert.equal(openEndedEvent.endDate, null);
+
+    const [slot] = adaptStreamSlots([{ date: "2026-08-24", time: "23:30" }]);
+    assert.equal(slot.endTime, null);
+    assert.equal(slot.endDate, null);
+  });
+
+  it("keeps the cross-day end date for a timed SupportEvent", () => {
+    const result = build({
+      supportEvents: [
+        {
+          id: "cross-day-support",
+          activityId: "live-stream",
+          kind: "support-campaign",
+          title: "cross day support fixture",
+          schedule: {
+            state: "confirmed-period",
+            start: "2026-08-24T23:00:00+09:00",
+            end: "2026-08-25T01:00:00+09:00",
+            allDay: false,
+            timezone: "Asia/Tokyo",
+          },
+          source: "https://example.com/support",
+          verifiedAt: "2026-08-22",
+        },
+      ],
+    });
+    const item = result.days
+      .flatMap(({ items }) => items)
+      .find(({ origin }) => origin === "support-event");
+    assert.equal(item.date, "2026-08-24");
+    assert.equal(item.startTime, "23:00");
+    assert.equal(item.endTime, "01:00");
+    assert.equal(item.endDate, "2026-08-25");
+    assert.equal(item.allDay, false);
+  });
+
+  it("keeps the all-day span shape unchanged alongside endDate", () => {
+    const [item] = adaptContestSchedule(contestFixture).items;
+    assert.equal(item.allDay, true);
+    assert.deepEqual(item.span, { start: "2026-08-23", end: "2026-08-25" });
+    assert.equal(item.endDate, "2026-08-25");
+    assert.equal(item.startTime, null);
+    assert.equal(item.endTime, null);
+  });
+
   it("keeps static items during loading and omits unconfirmed SHOWROOM rows", () => {
     const result = build({
       streamSlots: [{ date: "2026-08-24", time: "20:00" }],
@@ -211,6 +361,94 @@ describe("Support Calendar derivation", () => {
       items.find(({ origin }) => origin === "fan-event")?.activityId,
       null,
     );
+  });
+
+  it("labels cross-day timed items with the confirmed end date", () => {
+    const timed = (overrides) => ({
+      key: "fixture",
+      date: "2026-08-24",
+      startTime: "23:00",
+      endTime: "01:00",
+      endDate: "2026-08-25",
+      allDay: false,
+      span: null,
+      activityId: null,
+      title: "fixture",
+      origin: "fan-event",
+      ...overrides,
+    });
+
+    // 同日timedは従来どおり簡潔な時刻表示。
+    const sameDay = timed({ startTime: "19:00", endTime: "21:00", endDate: "2026-08-24" });
+    assert.equal(isCrossDayTimedItem(sameDay), false);
+    assert.equal(scheduleTimeLabel(sameDay), "19:00〜21:00");
+
+    // 日跨ぎは終了側に日付を添える。
+    const crossDay = timed();
+    assert.equal(isCrossDayTimedItem(crossDay), true);
+    assert.equal(scheduleTimeLabel(crossDay), "23:00〜8/25 01:00");
+
+    // 終了未確認（SHOWROOM個別枠）は終了日時を生成しない。
+    const openEnded = timed({ endTime: null, endDate: null });
+    assert.equal(isCrossDayTimedItem(openEnded), false);
+    assert.equal(scheduleTimeLabel(openEnded), "23:00 開始");
+
+    // all-day span の既存表示は変えない。
+    const allDay = timed({
+      allDay: true,
+      startTime: null,
+      endTime: null,
+      endDate: "2026-08-25",
+      span: { start: "2026-08-24", end: "2026-08-25" },
+    });
+    assert.equal(isCrossDayTimedItem(allDay), false);
+    assert.equal(scheduleTimeLabel(allDay), "終日");
+
+    assert.equal(scheduleTimeLabel(timed({ startTime: null })), "時刻未確認");
+    assert.equal(formatShortTokyoDate("2026-08-25"), "8/25");
+    assert.equal(formatShortTokyoDate("2027-01-01"), "1/1");
+  });
+
+  it("labels a cross-day timed SupportEvent and FanEvent through the built calendar", () => {
+    const result = build({
+      supportEvents: [
+        {
+          id: "cross-day-support-label",
+          activityId: "live-stream",
+          kind: "support-campaign",
+          title: "cross day support label",
+          schedule: {
+            state: "confirmed-period",
+            start: "2026-08-24T23:00:00+09:00",
+            end: "2026-08-25T01:00:00+09:00",
+            allDay: false,
+            timezone: "Asia/Tokyo",
+          },
+          source: "https://example.com/support",
+          verifiedAt: "2026-08-22",
+        },
+      ],
+      fanEvents: [
+        {
+          id: "cross-day-fan-label",
+          title: "cross day fan label",
+          listedAt: "2026-08-22",
+          startAt: "2026-08-26T22:30:00+09:00",
+          endAt: "2026-08-27T00:30:00+09:00",
+          timezone: "Asia/Tokyo",
+          kind: "appearance",
+          source: "https://example.com/fan-event",
+        },
+      ],
+      streamSlots: [{ date: "2026-08-24", time: "23:30" }],
+    });
+    const items = result.days.flatMap(({ items }) => items);
+    const label = (origin) =>
+      scheduleTimeLabel(items.find((item) => item.origin === origin));
+
+    assert.equal(label("support-event"), "23:00〜8/25 01:00");
+    assert.equal(label("fan-event"), "22:30〜8/27 00:30");
+    assert.equal(label("showroom-schedule"), "23:30 開始");
   });
 
   it("keeps SHOWROOM endTime null instead of inventing a duration", () => {

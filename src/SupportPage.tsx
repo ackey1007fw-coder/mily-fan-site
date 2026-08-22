@@ -13,6 +13,9 @@ import {
 } from "./lib/supportHub";
 import {
   buildSupportCalendar,
+  formatShortTokyoDate,
+  isCrossDayTimedItem,
+  scheduleTimeLabel,
   type ScheduleItem,
   type SupportCalendarResult,
 } from "./lib/supportCalendar";
@@ -35,14 +38,6 @@ const agendaDateFormatter = new Intl.DateTimeFormat("ja-JP", {
 
 function formatAgendaDate(date: string): string {
   return agendaDateFormatter.format(new Date(`${date}T00:00:00+09:00`));
-}
-
-function scheduleTimeLabel(item: ScheduleItem): string {
-  if (item.allDay) return "終日";
-  if (item.startTime === null) return "時刻未確認";
-  return item.endTime === null
-    ? `${item.startTime} 開始`
-    : `${item.startTime}〜${item.endTime}`;
 }
 
 function scheduleActivityLabel(item: ScheduleItem): string | null {
@@ -155,6 +150,12 @@ function CalendarItemCard({ item }: { item: ScheduleItem }) {
           期間 {item.span.start.replace(/-/g, ".")}〜{item.span.end.replace(/-/g, ".")}
         </p>
       ) : null}
+      {isCrossDayTimedItem(item) && item.endDate !== null ? (
+        <p className="mt-2 text-xs leading-6 text-ink-muted">
+          期間 {formatShortTokyoDate(item.date)} {item.startTime}〜
+          {formatShortTokyoDate(item.endDate)} {item.endTime}（日をまたぎます）
+        </p>
+      ) : null}
       {item.note ? (
         <p className="mt-2 break-words text-xs leading-6 text-ink-muted">{item.note}</p>
       ) : null}
@@ -179,16 +180,29 @@ function SupportCalendarAgenda({ calendar }: { calendar: SupportCalendarResult }
       <p className="mt-4 text-sm leading-7 text-ink-muted">
         確認済みの日程を、Asia/Tokyoの日付順でまとめています。
       </p>
-      {calendar.availability.showroomSchedule === "loading" ? (
-        <p className="mt-4 rounded-2xl bg-sage-soft/35 px-4 py-3 text-sm text-ink-muted">
-          SHOWROOMの配信予定を確認しています。
-        </p>
-      ) : null}
-      {calendar.availability.showroomSchedule === "unavailable" ? (
-        <p className="mt-4 rounded-2xl border border-apricot/40 bg-apricot-soft/35 px-4 py-3 text-sm leading-6 text-ink-muted">
-          SHOWROOMの配信予定を取得できませんでした。ほかの確認済み日程は引き続き表示しています。
-        </p>
-      ) : null}
+      {/*
+        loading → unavailable は非同期に変わるため、availability feedbackだけを
+        politeなstatus regionにする。agenda本体は含めない（Calendar全体をlive region化しない）。
+        `ok` では何も描画せず、成功のたびに読み上げを増やさない。
+      */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="min-w-0"
+        data-testid="schedule-availability-status"
+      >
+        {calendar.availability.showroomSchedule === "loading" ? (
+          <p className="mt-4 rounded-2xl bg-sage-soft/35 px-4 py-3 text-sm text-ink-muted">
+            SHOWROOMの配信予定を確認しています。
+          </p>
+        ) : null}
+        {calendar.availability.showroomSchedule === "unavailable" ? (
+          <p className="mt-4 rounded-2xl border border-apricot/40 bg-apricot-soft/35 px-4 py-3 text-sm leading-6 text-ink-muted">
+            SHOWROOMの配信予定を取得できませんでした。ほかの確認済み日程は引き続き表示しています。
+          </p>
+        ) : null}
+      </div>
       {calendar.days.length > 0 ? (
         <ol className="mt-6 space-y-8" aria-label="確認済み予定の日付別一覧">
           {calendar.days.map((day) => (
@@ -211,7 +225,7 @@ function SupportCalendarAgenda({ calendar }: { calendar: SupportCalendarResult }
 
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
-  const { slots, roomUrl, availability } = useStreamSchedule();
+  const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
   const now = Date.now();
   const todayItems = selectSupportToday({
     contest,
@@ -227,6 +241,7 @@ export default function SupportPage() {
     supportEvents,
     fanEvents: events,
     streamSlots: slots,
+    manualStreamSlots: manualSlots,
     streamAvailability: availability,
     includeRadio: true,
     now,

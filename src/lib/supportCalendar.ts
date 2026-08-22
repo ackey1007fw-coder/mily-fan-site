@@ -23,9 +23,16 @@ export type ScheduleOrigin =
 
 export type ScheduleItem = {
   key: string;
+  /** 開始日（Asia/Tokyo、YYYY-MM-DD） */
   date: string;
   startTime: string | null;
   endTime: string | null;
+  /**
+   * 終了日（Asia/Tokyo、YYYY-MM-DD）。
+   * 確認済みの終了日時がある項目だけに入る。終了が未確認なら `null` のままにし、
+   * 開始時刻から終了日時を推測しない（SHOWROOM個別枠は常に `null`）。
+   */
+  endDate: string | null;
   allDay: boolean;
   span: { start: string; end: string } | null;
   activityId: ActivityId | null;
@@ -174,6 +181,7 @@ export function adaptContestSchedule(contest: Contest): {
         date: phase.start,
         startTime: null,
         endTime: null,
+        endDate: phase.end,
         allDay: true,
         span: { start: phase.start, end: phase.end },
         activityId: "miss-circle",
@@ -225,6 +233,7 @@ export function adaptSupportEvents(items: SupportEvent[]): {
       date: start.date,
       startTime: start.time,
       endTime: end?.time ?? null,
+      endDate: end?.date ?? null,
       allDay: item.schedule.allDay,
       span:
         item.schedule.state === "confirmed-period"
@@ -261,6 +270,7 @@ export function adaptFanEvents(items: FanEvent[]): ScheduleItem[] {
         date: start.date,
         startTime: start.time,
         endTime: end?.time ?? null,
+        endDate: end?.date ?? null,
         allDay: startAllDay,
         span: item.endAt ? { start: item.startAt, end: item.endAt } : null,
         activityId: null,
@@ -282,6 +292,7 @@ export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
     date: slot.date,
     startTime: slot.time,
     endTime: null,
+    endDate: null,
     allDay: false,
     span: null,
     activityId: "live-stream",
@@ -308,6 +319,7 @@ export function adaptRadioProgram(
       date,
       startTime: radioProgram.scheduledStart,
       endTime: radioProgram.scheduledEnd,
+      endDate: date,
       allDay: false,
       span: null,
       activityId: "radio",
@@ -321,6 +333,44 @@ export function adaptRadioProgram(
   return items;
 }
 
+const tokyoShortDateFormatter = new Intl.DateTimeFormat("ja-JP", {
+  timeZone: "Asia/Tokyo",
+  month: "numeric",
+  day: "numeric",
+});
+
+/** JSTの `YYYY-MM-DD` を `8/25` 形式にする（表示用）。 */
+export function formatShortTokyoDate(date: string): string {
+  return tokyoShortDateFormatter.format(new Date(`${date}T00:00:00+09:00`));
+}
+
+/**
+ * 開始日と終了日が異なる（日をまたぐ）時刻付き項目か。
+ * 終了が未確認（`endTime` / `endDate` が `null`）の項目は false。
+ * 終了日時を推測しないので、SHOWROOM個別枠は常に false になる。
+ */
+export function isCrossDayTimedItem(item: ScheduleItem): boolean {
+  return (
+    !item.allDay &&
+    item.endTime !== null &&
+    item.endDate !== null &&
+    item.endDate !== item.date
+  );
+}
+
+/**
+ * agenda cardの時刻表示。
+ * 日跨ぎは日付headingだけでは終了日が分からないため、終了側に日付を添える。
+ */
+export function scheduleTimeLabel(item: ScheduleItem): string {
+  if (item.allDay) return "終日";
+  if (item.startTime === null) return "時刻未確認";
+  if (item.endTime === null) return `${item.startTime} 開始`;
+  return isCrossDayTimedItem(item) && item.endDate !== null
+    ? `${item.startTime}〜${formatShortTokyoDate(item.endDate)} ${item.endTime}`
+    : `${item.startTime}〜${item.endTime}`;
+}
+
 function compareScheduleItems(a: ScheduleItem, b: ScheduleItem): number {
   return (
     a.date.localeCompare(b.date) ||
@@ -329,11 +379,29 @@ function compareScheduleItems(a: ScheduleItem, b: ScheduleItem): number {
   );
 }
 
+/**
+ * SHOWROOM個別枠のownershipを分ける。
+ * - `manualStreamSlots`（`src/data/streamSchedule.ts` の確認済み手入力fallback）は
+ *   APIの成否と無関係に確認済みなので、`loading` / `unavailable` でも残す。
+ * - API由来の枠は取得に成功した（`ok`）ときだけ使う。
+ * `streamSlots` は手入力＋API由来のmerge済みなので、`ok` のときはそのまま採用する。
+ */
+function selectStreamSlots(
+  streamSlots: StreamSlot[],
+  manualStreamSlots: StreamSlot[],
+  availability: ScheduleAvailability,
+): StreamSlot[] {
+  return availability === "ok" ? streamSlots : manualStreamSlots;
+}
+
 export function buildSupportCalendar(input: {
   contest: Contest;
   supportEvents: SupportEvent[];
   fanEvents: FanEvent[];
+  /** 手入力fallback＋API由来のmerge済み配信枠 */
   streamSlots: StreamSlot[];
+  /** 確認済み手入力fallbackだけの配信枠。API失敗時もCalendarに残る */
+  manualStreamSlots?: StreamSlot[];
   streamAvailability?: ScheduleAvailability;
   includeRadio: boolean;
   now: number;
@@ -345,13 +413,18 @@ export function buildSupportCalendar(input: {
   }
 
   const streamAvailability = input.streamAvailability ?? "ok";
+  const streamSlots = selectStreamSlots(
+    input.streamSlots,
+    input.manualStreamSlots ?? [],
+    streamAvailability,
+  );
   const contestResult = adaptContestSchedule(input.contest);
   const supportResult = adaptSupportEvents(input.supportEvents);
   const scheduled = [
     ...contestResult.items,
     ...supportResult.items,
     ...adaptFanEvents(input.fanEvents),
-    ...(streamAvailability === "ok" ? adaptStreamSlots(input.streamSlots) : []),
+    ...adaptStreamSlots(streamSlots),
     ...(input.includeRadio ? adaptRadioProgram(input.now, input.daysAhead) : []),
   ].sort(compareScheduleItems);
 
