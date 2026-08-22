@@ -1,5 +1,6 @@
 import { isValidDateOnly, isValidDateTime } from "./events.ts";
 import { activities, type ActivityId } from "./activities.ts";
+import { links } from "./links.ts";
 
 export type SupportEventKind =
   | "vote"
@@ -48,6 +49,7 @@ const supportEventKinds = new Set<SupportEventKind>([
 ]);
 
 const activityIds = new Set<ActivityId>(activities.map(({ id }) => id));
+const linkIds = new Set(links.map(({ id }) => id));
 
 function hasOnlyKeys(candidate: Record<string, unknown>, allowed: string[]): boolean {
   const allowedKeys = new Set(allowed);
@@ -137,7 +139,8 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
     candidate.title.length > 0 &&
     (candidate.note === undefined || typeof candidate.note === "string") &&
     isValidSupportEventSchedule(candidate.schedule) &&
-    (candidate.ctaLinkId === undefined || typeof candidate.ctaLinkId === "string") &&
+    (candidate.ctaLinkId === undefined ||
+      (typeof candidate.ctaLinkId === "string" && linkIds.has(candidate.ctaLinkId))) &&
     typeof candidate.source === "string" &&
     /^https?:\/\//.test(candidate.source) &&
     typeof candidate.verifiedAt === "string" &&

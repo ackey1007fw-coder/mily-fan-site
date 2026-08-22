@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { contest } from "../src/data/contest.ts";
 import { events } from "../src/data/events.ts";
+import { links } from "../src/data/links.ts";
 import {
   isValidSupportEvent,
   isValidSupportEventSchedule,
@@ -31,6 +32,24 @@ describe("SupportEvent foundation", () => {
     assert.equal(isValidSupportEvent({ ...baseEvent, source: undefined }), false);
     assert.equal(isValidSupportEvent({ ...baseEvent, verifiedAt: "" }), false);
     assert.equal(isValidSupportEvent({ ...baseEvent, verifiedAt: "2026-02-30" }), false);
+  });
+
+  it("accepts only CTA link ids from the central links registry", () => {
+    const knownLinkId = links[0]?.id;
+    assert.ok(knownLinkId, "CTA registry fixture must exist");
+    assert.equal(isValidSupportEvent({ ...baseEvent, ctaLinkId: knownLinkId }), true);
+    assert.equal(
+      isValidSupportEvent({ ...baseEvent, ctaLinkId: `${knownLinkId}-typo` }),
+      false,
+    );
+    assert.equal(isValidSupportEvent({ ...baseEvent, ctaLinkId: "deleted-link" }), false);
+  });
+
+  it("keeps support event ids unique", () => {
+    assert.equal(
+      new Set(supportEvents.map(({ id }) => id)).size,
+      supportEvents.length,
+    );
   });
 
   it("validates confirmed periods and requires a real end at or after start", () => {
