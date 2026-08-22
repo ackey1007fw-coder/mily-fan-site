@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  activitiesUrl,
+  activityUrl,
   canonicalUrl,
   ogImageUrl,
   profileUrl,
@@ -11,6 +13,7 @@ import {
   sitemapXml,
   storyUrl,
 } from "../src/data/site.ts";
+import { activities } from "../src/data/activities.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -27,6 +30,20 @@ export function verifySiteUrlConsistency() {
   const origin = siteOrigin();
   const canonical = canonicalUrl();
   const profileCanonical = profileUrl();
+  const activityPages = [
+    {
+      canonical: activitiesUrl(),
+      html: readRelative("activities/index.html"),
+      input: 'activities: "activities/index.html"',
+      label: "Activities Hub",
+    },
+    ...activities.map((activity) => ({
+      canonical: activityUrl(activity.route),
+      html: readRelative(`${activity.route.slice(1)}index.html`),
+      input: `activities/${activity.route.split("/").filter(Boolean).at(-1)}/index.html`,
+      label: activity.label,
+    })),
+  ];
   const storyCanonical = storyUrl("second-round-2026");
   const radioStoryCanonical = storyUrl("2026-08-18-radio");
   const resultStoryCanonical = storyUrl("second-round-result-2026");
@@ -139,6 +156,26 @@ export function verifySiteUrlConsistency() {
   if (!campusGirlsStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("CAMPUS GIRLS story images must use __SITE_OG_IMAGE__");
   }
+  for (const activityPage of activityPages) {
+    if (!activityPage.html.includes('href="__ACTIVITY_CANONICAL__"')) {
+      errors.push(`${activityPage.label} canonical must use __ACTIVITY_CANONICAL__`);
+    }
+    if (
+      !activityPage.html.includes('property="og:url"') ||
+      !activityPage.html.includes('content="__ACTIVITY_CANONICAL__"')
+    ) {
+      errors.push(`${activityPage.label} og:url must use __ACTIVITY_CANONICAL__`);
+    }
+    if (!activityPage.html.includes('content="__SITE_OG_IMAGE__"')) {
+      errors.push(`${activityPage.label} images must use __SITE_OG_IMAGE__`);
+    }
+    if (!activityPage.html.includes("__ACTIVITY_JSON_LD__")) {
+      errors.push(`${activityPage.label} must include generated JSON-LD`);
+    }
+    if (!activityPage.html.includes("非公式")) {
+      errors.push(`${activityPage.label} metadata must state that the site is unofficial`);
+    }
+  }
 
   if (normalizeNewlines(robots) !== robotsTxt()) {
     errors.push("public/robots.txt must be generated from site.siteUrl");
@@ -172,6 +209,11 @@ export function verifySiteUrlConsistency() {
       "public/sitemap.xml must include the CAMPUS GIRLS story canonical URL",
     );
   }
+  for (const activityPage of activityPages) {
+    if (!sitemap.includes(`<loc>${activityPage.canonical}</loc>`)) {
+      errors.push(`public/sitemap.xml must include ${activityPage.label}`);
+    }
+  }
 
   if (
     !viteConfig.includes("canonicalUrl()") ||
@@ -182,9 +224,15 @@ export function verifySiteUrlConsistency() {
     !viteConfig.includes(
       'storyUrl("campus-girls-2027-second-stage-jury-award")',
     ) ||
-    !viteConfig.includes("ogImageUrl()")
+    !viteConfig.includes("ogImageUrl()") ||
+    !viteConfig.includes("activityPageMetadata(context.path)")
   ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
+  }
+  for (const activityPage of activityPages) {
+    if (!viteConfig.includes(activityPage.input)) {
+      errors.push(`vite.config.ts must include the physical input for ${activityPage.label}`);
+    }
   }
 
   const hardcodedOrigin = new RegExp(
@@ -218,6 +266,11 @@ export function verifySiteUrlConsistency() {
       "CAMPUS GIRLS story HTML must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  for (const activityPage of activityPages) {
+    if (hardcodedOrigin.test(activityPage.html)) {
+      errors.push(`${activityPage.label} HTML must not hardcode the public origin`);
+    }
+  }
 
   if (
     !canonical.startsWith(origin) ||
@@ -226,6 +279,7 @@ export function verifySiteUrlConsistency() {
     !radioStoryCanonical.startsWith(origin) ||
     !resultStoryCanonical.startsWith(origin) ||
     !campusGirlsStoryCanonical.startsWith(origin) ||
+    activityPages.some((activityPage) => !activityPage.canonical.startsWith(origin)) ||
     !ogImage.startsWith(origin)
   ) {
     errors.push("canonical and og image URLs must stay on site.siteUrl");

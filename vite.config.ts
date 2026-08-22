@@ -2,11 +2,19 @@ import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
 import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
+import {
+  activityPageMetadata,
+  activityPageStructuredData,
+} from "./src/lib/activityMetadata.ts";
 
 function siteMetadataPlugin(): Plugin {
   return {
     name: "site-metadata",
-    transformIndexHtml(html) {
+    transformIndexHtml(html, context) {
+      const activityMetadata = html.includes("__ACTIVITY_CANONICAL__")
+        ? activityPageMetadata(context.path)
+        : null;
+
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
         .replaceAll("__PROFILE_CANONICAL__", profileUrl())
@@ -25,6 +33,21 @@ function siteMetadataPlugin(): Plugin {
         .replaceAll(
           "__STORY_CAMPUS_GIRLS_SECOND_STAGE_JURY_AWARD_CANONICAL__",
           storyUrl("campus-girls-2027-second-stage-jury-award"),
+        )
+        .replaceAll("__ACTIVITY_PAGE_TITLE__", activityMetadata?.title ?? "")
+        .replaceAll(
+          "__ACTIVITY_PAGE_DESCRIPTION__",
+          activityMetadata?.description ?? "",
+        )
+        .replaceAll(
+          "__ACTIVITY_CANONICAL__",
+          activityMetadata?.canonical ?? "",
+        )
+        .replaceAll(
+          "__ACTIVITY_JSON_LD__",
+          activityMetadata
+            ? JSON.stringify(activityPageStructuredData(context.path), null, 2)
+            : "",
         )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
@@ -54,6 +77,11 @@ export default defineConfig({
       input: {
         home: "index.html",
         profile: "profile/index.html",
+        activities: "activities/index.html",
+        activityMissCircle: "activities/miss-circle/index.html",
+        activityRadio: "activities/radio/index.html",
+        activityLive: "activities/live/index.html",
+        activityCampusGirls: "activities/campus-girls/index.html",
         storyRadio20260818: "stories/2026-08-18-radio/index.html",
         storySecondRound: "stories/second-round-2026/index.html",
         storySecondRoundResult: "stories/second-round-result-2026/index.html",

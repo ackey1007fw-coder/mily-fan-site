@@ -9,6 +9,7 @@
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - ctaLabel: optional. href is url ?? source
  */
+import type { ActivityId } from "./activities.ts";
 import {
   eventStory20260821,
   morningOhayo20260821,
@@ -50,6 +51,8 @@ export type NewsItem = {
   date: string;
   /** Explicit editorial order within the same date. Higher values appear first. */
   sameDayOrder?: number;
+  /** Explicit Activity relations only. Absence means deliberately unclassified. */
+  activityIds?: ActivityId[];
   title: string;
   body: string;
   source?: string;
@@ -64,6 +67,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-22-campus-girls-second-stage-jury-award",
     date: "2026-08-22",
+    activityIds: ["campus-girls"],
     title: "CAMPUS GIRLS 2027 審査員賞！予選ファイナル進出✨",
     body: "8月22日、みりぃがCAMPUS GIRLS 2027 予選A 2nd STAGEで審査員賞を受賞し、予選ファイナルへ進出することを報告しました。コンテストとの両立に難しさを感じながらも、チャンスへの感謝と「可能性を信じて、自分のできることを」という思いを届けています。",
     source: "https://x.com/mily_chan36/status/2090988000813654232",
@@ -76,6 +80,7 @@ export const news: NewsItem[] = [
     id: "2026-08-21-tiktok-radio-misscircle",
     date: "2026-08-21",
     sameDayOrder: 1,
+    activityIds: ["radio", "miss-circle"],
     title: "湘南シーサイドサークルのTikTokにみりぃが登場📻✨",
     body: "8月21日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。番組TikTokに登場したみりぃが、ラジオDJとミスコンの両方を頑張る気持ちを伝えています。",
     source: tiktokRadioVideo.sourceUrl,
@@ -89,6 +94,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-21-after-afternoon-ganda",
     date: "2026-08-21",
+    activityIds: ["live-stream"],
     title: "急遽のガンダで絶望！？23:00〜配信で心境トーク🤭",
     body: "8月21日のXで、みりぃが昼枠配信を見ていた方には通じるという写真を投稿。「急遽なガンダで絶望している」と笑いまじりに伝え、投稿では23:00〜の配信でこの時の心境を話すと案内しました。",
     source: "https://x.com/mily_chan36/status/2090722156162478273",
@@ -108,6 +114,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-21-afternoon-showroom-fanroom",
     date: "2026-08-21",
+    activityIds: ["live-stream"],
     title: "朝枠ありがとう！次枠は14:00〜📡✨",
     body: "8月21日のSHOWROOMファンルームで、みりぃが朝の配信へのお礼と次枠14:00〜を案内しました。初めて来てくれた方やフォローしてくれた方への感謝とともに、これからもいろいろな一面を見つけてほしいと呼びかけています。",
     sourceLabel: "SHOWROOMファンルーム",
@@ -126,6 +133,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-21-event-story-next-slot",
     date: "2026-08-21",
+    activityIds: ["live-stream"],
     title: "寝起き配信ありがとう！次枠14:00〜❤️‍🔥",
     body: "8月21日のInstagram Storyで、みりぃが寝起き配信へのお礼を伝え、次枠14:00〜を案内しました。Story投稿時点では「現在5位」と報告し、ランウェイをかけたイベントに挑戦する理由についても伝えています。",
     sourceLabel: eventStory20260821.sourceLabel,
@@ -154,6 +162,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-21-morning-showroom-runway",
     date: "2026-08-21",
+    activityIds: ["live-stream"],
     title: "朝7:00からSHOWROOM配信📡❤️‍🔥",
     body: "8月21日の朝、みりぃが7:00からのSHOWROOM配信を案内しました。投稿では、26日までランウェイをかけたイベントに参加していることを伝え、応援を呼びかけています。",
     source: morningShowroomRunwayVideo.sourceUrl,
@@ -213,6 +222,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-19-second-round-result",
     date: "2026-08-19",
+    activityIds: ["miss-circle"],
     title: "MISS CIRCLE CONTEST 2026 2次審査通過！三次審査進出へ✨",
     body: "みりぃが「MISS CIRCLE CONTEST 2026」の2次審査通過と、三次審査への進出を報告しました。毎日の投票やSHOWROOMでの応援への感謝とともに、「一緒に絶景観に行きましょう」とこれからの挑戦への言葉を届けています。",
     source: "https://x.com/Mily_chan36/status/2089996508691390948",
@@ -242,6 +252,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-18-evening-radio",
     date: "2026-08-18",
+    activityIds: ["radio", "live-stream"],
     title: "ラジオ配信ありがとうございました",
     body: "体は本調子ではないなかでもラジオ配信を届けてくれたみりぃから、見に来てくれた人へのお礼が届きました。翌日の配信は夜になる予定で、時間は当日改めて伝えるとのこと。",
     source: "https://x.com/Mily_chan36/status/2089721650522820667",
@@ -252,6 +263,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-18-morning-update",
     date: "2026-08-18",
+    activityIds: ["live-stream"],
     title: "おはよう〜☀️ 10:50〜11:30配信予定",
     body: "「リビングで寝なかったよ😳（成長を感じるね）」から始まった朝の投稿。今日は大学の友達との予定の前に、10:50〜11:30まで配信予定。ビギナーイベントにも参加中です。",
     sourceLabel: "みりぃからの連絡💌",

@@ -92,7 +92,10 @@ export const activities: Activity[] = [
     sourceIds: ["campusGirlsAward", "campusGirlsSecond"],
     relatedSocialIds: [],
     relatedLinkIds: [],
-    relatedHighlightIds: ["campus-girls-2027-jury-award"],
-    relatedStorySlugs: [],
+    relatedHighlightIds: [
+      "campus-girls-2027-second-stage-jury-award",
+      "campus-girls-2027-jury-award",
+    ],
+    relatedStorySlugs: ["campus-girls-2027-second-stage-jury-award"],
   },
 ];
