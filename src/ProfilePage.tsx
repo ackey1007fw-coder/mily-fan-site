@@ -1,4 +1,5 @@
 import { defaultSrc, featuredPhoto, srcSetFor } from "./data/media";
+import { contest } from "./data/contest";
 import {
   profile,
   profileSources,
@@ -7,8 +8,6 @@ import {
 import { highlights } from "./data/highlights";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
-
-const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 
 const profileNav = [
   { href: "#basics", label: "基本情報" },
@@ -94,7 +93,7 @@ function ProfileHero() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <ExternalLink
-              href={ENTRY_URL}
+              href={contest.entryUrl}
               className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
             >
               ENTRY 734を見る
@@ -219,6 +218,23 @@ function ProfileActivities() {
                   </li>
                 ))}
               </ul>
+              {activity.id === "miss-circle" && contest.currentPhase ? (
+                <div className="mt-4 rounded-xl border border-sage/15 bg-sage-soft/45 p-4">
+                  <p className="text-xs font-semibold text-sage-deep">現在の審査段階</p>
+                  <p className="mt-1 font-bold leading-snug text-ink">
+                    {contest.currentPhase.name}
+                  </p>
+                  <p className="mt-2 text-xs text-ink-muted">
+                    {formatDate(contest.lastVerifiedAt)}時点
+                  </p>
+                  <ExternalLink
+                    href={contest.currentPhase.source}
+                    className="mt-3 inline-flex min-h-11 items-center rounded-full border border-sage/25 bg-paper px-3 py-2 text-xs font-medium leading-snug text-sage-deep hover:bg-sage-soft"
+                  >
+                    審査段階の出典を見る
+                  </ExternalLink>
+                </div>
+              ) : null}
               {activity.asOf ? (
                 <p className="mt-4 text-xs text-ink-muted">
                   {formatDate(activity.asOf)}時点
