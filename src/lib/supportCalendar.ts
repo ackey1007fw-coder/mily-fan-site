@@ -1,0 +1,370 @@
+import { type ActivityId } from "../data/activities.ts";
+import { type Contest } from "../data/contest.ts";
+import {
+  isDateOnly,
+  isValidEventTimestamp,
+  type FanEvent,
+} from "../data/events.ts";
+import { links } from "../data/links.ts";
+import { radioProgram } from "../data/radio.ts";
+import {
+  isValidSupportEventSchedule,
+  type SupportEvent,
+  type SupportEventSchedule,
+} from "../data/supportEvents.ts";
+import { isValidSlot, type StreamSlot } from "../data/streamSchedule.ts";
+
+export type ScheduleOrigin =
+  | "contest"
+  | "support-event"
+  | "fan-event"
+  | "showroom-schedule"
+  | "radio-program";
+
+export type ScheduleItem = {
+  key: string;
+  date: string;
+  startTime: string | null;
+  endTime: string | null;
+  allDay: boolean;
+  span: { start: string; end: string } | null;
+  activityId: ActivityId | null;
+  title: string;
+  note?: string;
+  origin: ScheduleOrigin;
+  source?: string;
+  cta?: { label: string; url: string };
+};
+
+export type PendingSupportItem = {
+  key: string;
+  activityId: ActivityId;
+  title: string;
+  reason: "date-pending";
+  source: string;
+  cta?: { label: string; url: string };
+};
+
+export type DisplayStatus =
+  | "live"
+  | "upcoming"
+  | "ended"
+  | "date-pending";
+
+export type ScheduleAvailability = "loading" | "ok" | "unavailable";
+
+export type SupportCalendarResult = {
+  days: { date: string; items: ScheduleItem[] }[];
+  pending: PendingSupportItem[];
+  availability: {
+    showroomSchedule: ScheduleAvailability;
+  };
+};
+
+const tokyoPartsFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Asia/Tokyo",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+function tokyoParts(value: number): {
+  date: string;
+  time: string;
+} {
+  const parts = tokyoPartsFormatter.formatToParts(new Date(value));
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((item) => item.type === type)?.value ?? "";
+  return {
+    date: `${part("year")}-${part("month")}-${part("day")}`,
+    time: `${part("hour")}:${part("minute")}`,
+  };
+}
+
+function startOfTokyoDay(date: string): number {
+  return Date.parse(`${date}T00:00:00+09:00`);
+}
+
+function addCalendarDays(date: string, days: number): string {
+  const year = Number(date.slice(0, 4));
+  const month = Number(date.slice(5, 7));
+  const day = Number(date.slice(8, 10));
+  const next = new Date(Date.UTC(year, month - 1, day + days));
+  return `${next.getUTCFullYear()}-${String(next.getUTCMonth() + 1).padStart(2, "0")}-${String(next.getUTCDate()).padStart(2, "0")}`;
+}
+
+function scheduledParts(value: string, allDay: boolean): {
+  date: string;
+  time: string | null;
+} {
+  if (allDay) return { date: value, time: null };
+  const parts = tokyoParts(Date.parse(value));
+  return { date: parts.date, time: parts.time };
+}
+
+export function displayStatus(
+  schedule: SupportEventSchedule,
+  now: number,
+): DisplayStatus {
+  if (schedule.state === "date-pending") return "date-pending";
+  if (!isValidSupportEventSchedule(schedule)) {
+    throw new Error("Invalid support event schedule");
+  }
+
+  if (schedule.state === "confirmed-period") {
+    const start = schedule.allDay
+      ? startOfTokyoDay(schedule.start)
+      : Date.parse(schedule.start);
+    const end = schedule.allDay
+      ? startOfTokyoDay(addCalendarDays(schedule.end, 1)) - 1
+      : Date.parse(schedule.end);
+    if (now < start) return "upcoming";
+    if (now <= end) return "live";
+    return "ended";
+  }
+
+  if (schedule.allDay) {
+    const start = startOfTokyoDay(schedule.at);
+    if (now < start) return "upcoming";
+    return now < startOfTokyoDay(addCalendarDays(schedule.at, 1))
+      ? "live"
+      : "ended";
+  }
+
+  return now < Date.parse(schedule.at) ? "upcoming" : "ended";
+}
+
+export function liveSupportEvents(
+  items: SupportEvent[],
+  now: number,
+): SupportEvent[] {
+  return items.filter((item) => displayStatus(item.schedule, now) === "live");
+}
+
+export function adaptContestSchedule(contest: Contest): {
+  items: ScheduleItem[];
+  pending: PendingSupportItem[];
+} {
+  const phase = contest.currentPhase;
+  if (!phase) return { items: [], pending: [] };
+  const cta = { label: contest.entryNumber, url: contest.entryUrl };
+  if (phase.start === null || phase.end === null) {
+    return {
+      items: [],
+      pending: [
+        {
+          key: "contest:current-phase",
+          activityId: "miss-circle",
+          title: phase.name,
+          reason: "date-pending",
+          source: phase.source,
+          cta,
+        },
+      ],
+    };
+  }
+
+  return {
+    items: [
+      {
+        key: "contest:current-phase",
+        date: phase.start,
+        startTime: null,
+        endTime: null,
+        allDay: true,
+        span: { start: phase.start, end: phase.end },
+        activityId: "miss-circle",
+        title: phase.name,
+        origin: "contest",
+        source: phase.source,
+        cta,
+      },
+    ],
+    pending: [],
+  };
+}
+
+export function adaptSupportEvents(items: SupportEvent[]): {
+  items: ScheduleItem[];
+  pending: PendingSupportItem[];
+} {
+  const scheduled: ScheduleItem[] = [];
+  const pending: PendingSupportItem[] = [];
+
+  for (const item of items) {
+    const link = item.ctaLinkId
+      ? links.find(({ id }) => id === item.ctaLinkId)
+      : undefined;
+    const cta = link ? { label: link.label, url: link.url } : undefined;
+    if (item.schedule.state === "date-pending") {
+      pending.push({
+        key: `support-event:${item.id}`,
+        activityId: item.activityId,
+        title: item.title,
+        reason: "date-pending",
+        source: item.source,
+        ...(cta ? { cta } : {}),
+      });
+      continue;
+    }
+
+    const rawStart =
+      item.schedule.state === "confirmed-period"
+        ? item.schedule.start
+        : item.schedule.at;
+    const start = scheduledParts(rawStart, item.schedule.allDay);
+    const end =
+      item.schedule.state === "confirmed-period"
+        ? scheduledParts(item.schedule.end, item.schedule.allDay)
+        : null;
+    scheduled.push({
+      key: `support-event:${item.id}`,
+      date: start.date,
+      startTime: start.time,
+      endTime: end?.time ?? null,
+      allDay: item.schedule.allDay,
+      span:
+        item.schedule.state === "confirmed-period"
+          ? { start: item.schedule.start, end: item.schedule.end }
+          : null,
+      activityId: item.activityId,
+      title: item.title,
+      ...(item.note ? { note: item.note } : {}),
+      origin: "support-event",
+      source: item.source,
+      ...(cta ? { cta } : {}),
+    });
+  }
+  return { items: scheduled, pending };
+}
+
+export function adaptFanEvents(items: FanEvent[]): ScheduleItem[] {
+  return items.flatMap((item) => {
+    if (
+      !isValidEventTimestamp(item.startAt) ||
+      (item.endAt !== undefined && !isValidEventTimestamp(item.endAt))
+    ) {
+      return [];
+    }
+    const startAllDay = isDateOnly(item.startAt);
+    const start = scheduledParts(item.startAt, startAllDay);
+    const endAllDay = item.endAt !== undefined && isDateOnly(item.endAt);
+    const end = item.endAt
+      ? scheduledParts(item.endAt, endAllDay)
+      : null;
+    return [
+      {
+        key: `fan-event:${item.id}`,
+        date: start.date,
+        startTime: start.time,
+        endTime: end?.time ?? null,
+        allDay: startAllDay,
+        span: item.endAt ? { start: item.startAt, end: item.endAt } : null,
+        activityId: null,
+        title: item.title,
+        ...(item.notes || item.venue
+          ? { note: [item.venue, item.notes].filter(Boolean).join(" / ") }
+          : {}),
+        origin: "fan-event" as const,
+        source: item.source,
+        ...(item.url ? { cta: { label: "詳細", url: item.url } } : {}),
+      },
+    ];
+  });
+}
+
+export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
+  return slots.filter(isValidSlot).map((slot) => ({
+    key: `showroom-schedule:${slot.date}T${slot.time}`,
+    date: slot.date,
+    startTime: slot.time,
+    endTime: null,
+    allDay: false,
+    span: null,
+    activityId: "live-stream",
+    title: "SHOWROOM配信予定",
+    ...(slot.note ? { note: slot.note } : {}),
+    origin: "showroom-schedule",
+  }));
+}
+
+export function adaptRadioProgram(
+  now: number,
+  daysAhead: number,
+): ScheduleItem[] {
+  const today = tokyoParts(now).date;
+  const items: ScheduleItem[] = [];
+  for (let offset = 0; offset <= daysAhead; offset += 1) {
+    const date = addCalendarDays(today, offset);
+    const [year, month, day] = date.split("-").map(Number);
+    if (new Date(Date.UTC(year, month - 1, day)).getUTCDay() !== radioProgram.weekday) {
+      continue;
+    }
+    items.push({
+      key: `radio-program:${date}`,
+      date,
+      startTime: radioProgram.scheduledStart,
+      endTime: radioProgram.scheduledEnd,
+      allDay: false,
+      span: null,
+      activityId: "radio",
+      title: radioProgram.programName,
+      note: "番組枠です。みりぃ本人の出演時間とは限りません。",
+      origin: "radio-program",
+      source: radioProgram.programUrl,
+      cta: { label: "ラジオを聴く", url: radioProgram.listenUrl },
+    });
+  }
+  return items;
+}
+
+function compareScheduleItems(a: ScheduleItem, b: ScheduleItem): number {
+  return (
+    a.date.localeCompare(b.date) ||
+    (a.startTime ?? "").localeCompare(b.startTime ?? "") ||
+    a.key.localeCompare(b.key)
+  );
+}
+
+export function buildSupportCalendar(input: {
+  contest: Contest;
+  supportEvents: SupportEvent[];
+  fanEvents: FanEvent[];
+  streamSlots: StreamSlot[];
+  streamAvailability?: ScheduleAvailability;
+  includeRadio: boolean;
+  now: number;
+  daysAhead: number;
+}): SupportCalendarResult {
+  if (!Number.isFinite(input.now)) throw new Error("now must be a finite timestamp");
+  if (!Number.isInteger(input.daysAhead) || input.daysAhead < 0) {
+    throw new Error("daysAhead must be a non-negative integer");
+  }
+
+  const streamAvailability = input.streamAvailability ?? "ok";
+  const contestResult = adaptContestSchedule(input.contest);
+  const supportResult = adaptSupportEvents(input.supportEvents);
+  const scheduled = [
+    ...contestResult.items,
+    ...supportResult.items,
+    ...adaptFanEvents(input.fanEvents),
+    ...(streamAvailability === "ok" ? adaptStreamSlots(input.streamSlots) : []),
+    ...(input.includeRadio ? adaptRadioProgram(input.now, input.daysAhead) : []),
+  ].sort(compareScheduleItems);
+
+  const dayMap = new Map<string, ScheduleItem[]>();
+  for (const item of scheduled) {
+    const bucket = dayMap.get(item.date);
+    if (bucket) bucket.push(item);
+    else dayMap.set(item.date, [item]);
+  }
+
+  return {
+    days: [...dayMap.entries()].map(([date, items]) => ({ date, items })),
+    pending: [...contestResult.pending, ...supportResult.pending],
+    availability: { showroomSchedule: streamAvailability },
+  };
+}
