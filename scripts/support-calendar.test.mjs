@@ -19,6 +19,7 @@ import {
   buildSupportCalendar,
   displayStatus,
   formatShortTokyoDate,
+  formatShortTokyoEndDate,
   isCrossDayTimedItem,
   isTimeUnconfirmedDateSpan,
   liveSupportEvents,
@@ -631,6 +632,71 @@ describe("Support Calendar derivation", () => {
       },
     ]).items;
     assert.equal(scheduleTimeLabel(allDayInstant), "日付指定");
+  });
+
+  it("preserves the confirmed end year in cross-year labels", () => {
+    const fan = (id, startAt, endAt) => ({
+      id,
+      title: id,
+      listedAt: "2026-08-22",
+      startAt,
+      ...(endAt ? { endAt } : {}),
+      timezone: "Asia/Tokyo",
+      kind: "appearance",
+      source: "https://example.com/cross-year",
+    });
+    const labels = adaptFanEvents([
+      fan("a-same-year-cross-day", "2026-08-24T23:00:00+09:00", "2026-08-25T01:00:00+09:00"),
+      fan("b-next-year-cross-day", "2026-12-31T23:00:00+09:00", "2027-01-01T01:00:00+09:00"),
+      fan("c-multi-year", "2026-12-31T23:00:00+09:00", "2028-01-01T01:00:00+09:00"),
+      fan("d-cross-year-date-only-end", "2026-12-31T19:00:00+09:00", "2027-01-01"),
+      fan("e-end-only-cross-year", "2026-12-31", "2027-01-01T01:00:00+09:00"),
+      fan("f-date-only-cross-year-span", "2026-12-31", "2027-01-02"),
+      fan("g-same-year-span", "2026-08-24", "2026-08-25"),
+    ]).map(scheduleTimeLabel);
+    assert.deepEqual(labels, [
+      "23:00〜8/25 01:00",
+      "23:00〜2027/1/1 01:00",
+      "23:00〜2028/1/1 01:00",
+      "19:00〜2027/1/1",
+      "時刻未確認 / 2027/1/1 01:00 終了",
+      "時刻未確認",
+      "時刻未確認",
+    ]);
+    // 同一年では不要な年を出さず、開始年と異なる終了年は必ず表示する。
+    assert.doesNotMatch(labels[0], /202\d/);
+    for (const label of [labels[1], labels[3], labels[4]]) {
+      assert.match(label, /2027\/1\/1/);
+    }
+    // date-only endに終了時刻を生成しない。
+    assert.doesNotMatch(labels[3], /00:00|23:59/);
+
+    // 期間行が使う終了日formatも、cross-yearだけ年を付ける。
+    assert.equal(formatShortTokyoEndDate("2026-08-24", "2026-08-25"), "8/25");
+    assert.equal(formatShortTokyoEndDate("2026-12-31", "2027-01-02"), "2027/1/2");
+    assert.equal(formatShortTokyoEndDate("2026-12-31", "2028-01-01"), "2028/1/1");
+    // leap yearでも同一年は短い表示のまま。
+    assert.equal(formatShortTokyoEndDate("2028-02-28", "2028-02-29"), "2/29");
+
+    // JST年境界: UTC 2026-12-31T15:30ZはJSTで2027-01-01 00:30。年比較はJST基準。
+    const [jstBoundary] = adaptFanEvents([
+      fan("jst-year-boundary", "2026-12-31T23:00:00+09:00", "2026-12-31T15:30:00Z"),
+    ]);
+    assert.equal(jstBoundary.endDate, "2027-01-01");
+    assert.equal(scheduleTimeLabel(jstBoundary), "23:00〜2027/1/1 00:30");
+
+    // 表示format変更でsort/groupingを壊さない（dateはYYYY-MM-DDのまま）。
+    const built = build({
+      fanEvents: [
+        fan("built-cross-year", "2026-12-31T23:00:00+09:00", "2027-01-01T01:00:00+09:00"),
+      ],
+      contest: { ...contestFixture, currentPhase: null },
+    });
+    assert.deepEqual(built.days.map(({ date }) => date), ["2026-12-31"]);
+    assert.equal(
+      scheduleTimeLabel(built.days[0].items[0]),
+      "23:00〜2027/1/1 01:00",
+    );
   });
 
   it("keeps point-in-time SupportEvents distinct from interval starts", () => {

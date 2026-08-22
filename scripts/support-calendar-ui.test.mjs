@@ -91,7 +91,9 @@ describe("Support Calendar agenda UI", () => {
     assert.match(page, /scheduleTimeLabel\(item\)/);
     assert.match(page, /isCrossDayTimedItem\(item\) && item\.endDate !== null/);
     assert.match(page, /formatShortTokyoDate\(item\.date\)/);
-    assert.match(page, /formatShortTokyoDate\(item\.endDate\)/);
+    // 終了側は開始年と異なる年だけを付けるend date formatを使う。
+    assert.match(page, /formatShortTokyoEndDate\(item\.date, item\.endDate\)/);
+    assert.doesNotMatch(page, /formatShortTokyoDate\(item\.endDate\)/);
     assert.match(page, /item\.endTime !== null \? ` \$\{item\.endTime\}` : ""/);
     assert.match(page, /日をまたぎます/);
     // 既存の all-day 期間表示は維持する。
@@ -107,7 +109,7 @@ describe("Support Calendar agenda UI", () => {
     assert.match(page, /isTimeUnconfirmedDateSpan\(item\) && item\.endDate !== null/);
     assert.match(
       page,
-      /期間 \{formatShortTokyoDate\(item\.date\)\}〜\{formatShortTokyoDate\(item\.endDate\)\}/,
+      /期間 \{formatShortTokyoDate\(item\.date\)\}〜\s*\{formatShortTokyoEndDate\(item\.date, item\.endDate\)\}/,
     );
   });
 
@@ -117,7 +119,7 @@ describe("Support Calendar agenda UI", () => {
     assert.match(calendar, /時刻未確認 \/ \$\{item\.endTime\} 終了/);
     assert.match(
       calendar,
-      /時刻未確認 \/ \$\{formatShortTokyoDate\(item\.endDate\)\} \$\{item\.endTime\} 終了/,
+      /時刻未確認 \/ \$\{formatShortTokyoEndDate\(item\.date, item\.endDate\)\} \$\{item\.endTime\} 終了/,
     );
   });
 

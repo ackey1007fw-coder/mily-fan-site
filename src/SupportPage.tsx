@@ -14,6 +14,7 @@ import {
 import {
   buildSupportCalendar,
   formatShortTokyoDate,
+  formatShortTokyoEndDate,
   isCrossDayTimedItem,
   isTimeUnconfirmedDateSpan,
   scheduleTimeLabel,
@@ -154,13 +155,14 @@ function CalendarItemCard({ item }: { item: ScheduleItem }) {
       {isCrossDayTimedItem(item) && item.endDate !== null ? (
         <p className="mt-2 text-xs leading-6 text-ink-muted">
           期間 {formatShortTokyoDate(item.date)} {item.startTime}〜
-          {formatShortTokyoDate(item.endDate)}
+          {formatShortTokyoEndDate(item.date, item.endDate)}
           {item.endTime !== null ? ` ${item.endTime}` : ""}（日をまたぎます）
         </p>
       ) : null}
       {isTimeUnconfirmedDateSpan(item) && item.endDate !== null ? (
         <p className="mt-2 text-xs leading-6 text-ink-muted">
-          期間 {formatShortTokyoDate(item.date)}〜{formatShortTokyoDate(item.endDate)}
+          期間 {formatShortTokyoDate(item.date)}〜
+          {formatShortTokyoEndDate(item.date, item.endDate)}
           {item.endTime !== null ? ` ${item.endTime}` : ""}
         </p>
       ) : null}

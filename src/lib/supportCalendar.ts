@@ -356,6 +356,22 @@ export function formatShortTokyoDate(date: string): string {
 }
 
 /**
+ * 終了日の表示用format。開始日とJST年が異なるときだけ `2027/1/1` のように年を付け、
+ * 同一年は従来どおり `8/25` の短い表示を維持する。
+ * 引数はどちらもJST civil dateの `YYYY-MM-DD`（`ScheduleItem.date` / `endDate`）なので、
+ * 年の比較はUTCを経由せずJST基準になる。
+ */
+export function formatShortTokyoEndDate(
+  startDate: string,
+  endDate: string,
+): string {
+  const short = formatShortTokyoDate(endDate);
+  return startDate.slice(0, 4) === endDate.slice(0, 4)
+    ? short
+    : `${endDate.slice(0, 4)}/${short}`;
+}
+
+/**
  * 開始日と終了日が異なる（日をまたぐ）時刻付き項目か。
  * 終了日が確認済みなら、終了時刻が未確認でも日跨ぎとして扱う。
  * 終了日自体が未確認のSHOWROOM個別枠は常に false になる。
@@ -394,7 +410,7 @@ export function scheduleTimeLabel(item: ScheduleItem): string {
     if (item.endTime !== null && item.endDate !== null) {
       return item.endDate === item.date
         ? `時刻未確認 / ${item.endTime} 終了`
-        : `時刻未確認 / ${formatShortTokyoDate(item.endDate)} ${item.endTime} 終了`;
+        : `時刻未確認 / ${formatShortTokyoEndDate(item.date, item.endDate)} ${item.endTime} 終了`;
     }
     return "時刻未確認";
   }
@@ -402,8 +418,8 @@ export function scheduleTimeLabel(item: ScheduleItem): string {
   if (item.timing === "instant") return item.startTime;
   if (isCrossDayTimedItem(item) && item.endDate !== null) {
     return item.endTime === null
-      ? `${item.startTime}〜${formatShortTokyoDate(item.endDate)}`
-      : `${item.startTime}〜${formatShortTokyoDate(item.endDate)} ${item.endTime}`;
+      ? `${item.startTime}〜${formatShortTokyoEndDate(item.date, item.endDate)}`
+      : `${item.startTime}〜${formatShortTokyoEndDate(item.date, item.endDate)} ${item.endTime}`;
   }
   if (item.endTime === null) return `${item.startTime} 開始`;
   return `${item.startTime}〜${item.endTime}`;
