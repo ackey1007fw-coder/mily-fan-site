@@ -217,11 +217,39 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
   });
 
   it("documents a narrow owner-approved milestone exception without broad Gallery reuse", async () => {
+    const agents = await readFile(path.join(root, "AGENTS.md"), "utf8");
     const contentOps = await readFile(
       path.join(root, "docs/CONTENT-OPS.md"),
       "utf8",
     );
     const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
+
+    assert.match(agents, /原則としてサイトへ掲載する/);
+    assert.match(agents, /非掲載は例外とする/);
+    assert.match(agents, /具体的な理由をPR本文または最終報告に残す/);
+    assert.match(agents, /出典確認・プライバシー確認・第三者情報確認を省略しない/);
+    assert.match(agents, /Story閲覧スクリーンショットには一般メディアより追加の安全条件がある/);
+    assert.match(agents, /AI 生成・置換・補正・加工、生成塗り足し、SNS からの自動取得は禁止/);
+
+    assert.match(contentOps, /メディア掲載の上位方針/);
+    assert.match(contentOps, /NEWSを文章だけで終わらせず/);
+    assert.match(contentOps, /節目Storyでも、確認済みの画像・動画を積極的に使用する/);
+    assert.match(contentOps, /Gallery向きでない結果グラフィックや記録資料でも、Story \/ NEWS向きなら/);
+    assert.match(contentOps, /一般メディアの掲載ゲートを通過しただけでは公開しない/);
+
+    assert.match(mediaGuide, /掲載ゲートを通過したオーナー提供・掲載承認済み素材は、原則としてサイトへ掲載する/);
+    assert.match(mediaGuide, /「安全なので載せない」を理由にせず/);
+    for (const reason of [
+      "プライバシー上の問題",
+      "識別可能な第三者情報",
+      "出典 / 権利が未確認",
+      "既存公開素材との重複",
+      "公開用として不足する品質",
+      "文脈に合う掲載面がない",
+      "技術的問題",
+    ]) {
+      assert.match(mediaGuide, new RegExp(reason.replace("/", "\\/")), reason);
+    }
 
     for (const phrase of [
       "当該画像について",
