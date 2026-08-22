@@ -8,13 +8,17 @@ import { activities } from "../src/data/activities.ts";
 import { contest } from "../src/data/contest.ts";
 import { supportEvents } from "../src/data/supportEvents.ts";
 import { deriveBannerState } from "../src/lib/bannerState.ts";
-import { selectHomeToday } from "../src/lib/homeToday.ts";
+import {
+  HOME_NOW_LIMIT,
+  rankHomeNowItems,
+  selectHomeToday,
+} from "../src/lib/homeToday.ts";
 import {
   hubNavigation,
   sectionNavigation,
   visibleNavItems,
 } from "../src/lib/navigation.ts";
-import { SUPPORT_HUB_ROUTE } from "../src/lib/supportHub.ts";
+import { selectSupportNow, SUPPORT_HUB_ROUTE } from "../src/lib/supportHub.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = (relative) => readFileSync(path.join(root, relative), "utf8");
@@ -39,6 +43,25 @@ const unknownLive = {
   roomUrl: null,
   next: { state: "unknown", at: null },
 };
+
+/** 確認済み期間のSupportEvent（`/support/` のfixtureと同じshape）。 */
+function periodSupportEvent(id, start, end) {
+  return {
+    id,
+    activityId: "miss-circle",
+    kind: "support-campaign",
+    title: `support ${id}`,
+    schedule: {
+      state: "confirmed-period",
+      start,
+      end,
+      allDay: false,
+      timezone: "Asia/Tokyo",
+    },
+    source: `https://example.com/${id}`,
+    verifiedAt: "2026-08-22",
+  };
+}
 
 function homeToday(overrides = {}) {
   const input = {
@@ -348,5 +371,138 @@ describe("P6 home Today semantics", () => {
     assert.doesNotMatch(homeSources, /\b\d{1,2}:\d{2}\b/);
     assert.doesNotMatch(homeSources, /showroom-live\.com|misscircle\.jp|fm-smw\.jp/);
     assert.doesNotMatch(homeSources, /\d{6}/);
+  });
+});
+
+describe("P6 home NOW stays compact", () => {
+  // design 9.5「トップに巨大なCalendarを置かず、NOW最大2件と /support/ 導線に留める」
+  const now = Date.parse("2026-08-23T10:30:00+09:00"); // 日曜・放送枠の中
+  const liveRoomUrl = "https://www.showroom-live.com/r/example";
+  const live = { ...unknownLive, state: "live", roomUrl: liveRoomUrl };
+
+  function radioOnAir() {
+    return {
+      ok: true,
+      programName: radioProgram.programName,
+      todayScheduled: true,
+      scheduledStart: radioProgram.scheduledStart,
+      scheduledEnd: radioProgram.scheduledEnd,
+      inScheduledWindow: true,
+      schedulePhase: "window",
+      nextStartAt: null,
+      onAirConfirmed: true,
+      milyAppearanceConfirmed: null,
+      listenUrl: radioProgram.listenUrl,
+      sourceUrl: radioProgram.nowOnAirSourceUrl,
+      lastVerifiedAt: radioProgram.lastVerifiedAt,
+      updatedAt: new Date(now).toISOString(),
+    };
+  }
+
+  const events = [
+    periodSupportEvent("alpha", "2026-08-23T09:00:00+09:00", "2026-08-23T12:00:00+09:00"),
+    periodSupportEvent("bravo", "2026-08-23T10:00:00+09:00", "2026-08-23T11:00:00+09:00"),
+  ];
+
+  const crowded = {
+    supportEvents: events,
+    live,
+    radio: radioOnAir(),
+    now,
+    banner: NONE_BANNER,
+  };
+
+  it("caps the home NOW projection at two items", () => {
+    // 素の selector は4件返す（期間2件 + SHOWROOM live + radio）
+    const all = selectSupportNow({
+      supportEvents: events,
+      live,
+      radio: radioOnAir(),
+      now,
+    });
+    assert.equal(all.length, 4);
+
+    const { nowItems } = homeToday(crowded);
+    assert.equal(HOME_NOW_LIMIT, 2);
+    assert.equal(nowItems.length, HOME_NOW_LIMIT);
+  });
+
+  it("picks the two by a deterministic priority", () => {
+    const { nowItems } = homeToday(crowded);
+    assert.deepEqual(
+      nowItems.map(({ origin }) => origin),
+      ["showroom-live", "radio-program"],
+    );
+    // 同じ入力からは常に同じ2件（順序も含めて）
+    assert.deepEqual(nowItems, homeToday(crowded).nowItems);
+  });
+
+  it("keeps the selector order inside one origin", () => {
+    const { nowItems } = homeToday({
+      supportEvents: events,
+      live: unknownLive,
+      radio: null,
+      now,
+      banner: NONE_BANNER,
+    });
+    assert.deepEqual(
+      nowItems.map(({ key }) => key),
+      ["now:support-event:alpha", "now:support-event:bravo"],
+    );
+  });
+
+  it("applies the cap after banner suppression, not before", () => {
+    // バナーがSHOWROOM LIVEを出しているので live項目は落ち、
+    // 空いた枠を radio と最初の応援期間が使う
+    const { nowItems } = homeToday({
+      ...crowded,
+      banner: { kind: "SHOWROOM_LIVE", stateLabel: "配信中", title: "ただいまSHOWROOMで配信中！" },
+    });
+    assert.deepEqual(
+      nowItems.map(({ origin }) => origin),
+      ["radio-program", "support-event"],
+    );
+    assert.equal(nowItems.some(({ origin }) => origin === "showroom-live"), false);
+  });
+
+  it("never invents or reorders items beyond the cap", () => {
+    const source = selectSupportNow({
+      supportEvents: events,
+      live,
+      radio: radioOnAir(),
+      now,
+    });
+    const ranked = rankHomeNowItems(source);
+    // 並べ替えるだけ。項目の中身も件数も変えない。
+    assert.equal(ranked.length, source.length);
+    assert.deepEqual(
+      [...ranked].map(({ key }) => key).sort(),
+      [...source].map(({ key }) => key).sort(),
+    );
+    // 入力配列を破壊しない
+    assert.deepEqual(source, selectSupportNow({
+      supportEvents: events,
+      live,
+      radio: radioOnAir(),
+      now,
+    }));
+  });
+
+  it("leaves /support/ showing every NOW item", () => {
+    const page = source("src/SupportPage.tsx");
+    // Support Hub は selector を直接使う。ホームの上限を持ち込まない。
+    assert.match(page, /selectSupportNow\(\{/);
+    assert.doesNotMatch(page, /HOME_NOW_LIMIT|rankHomeNowItems|homeToday/);
+    assert.doesNotMatch(page, /nowItems\.slice\(/);
+    // 4件入力でも Support 側は4件のまま
+    assert.equal(
+      selectSupportNow({
+        supportEvents: events,
+        live,
+        radio: radioOnAir(),
+        now,
+      }).length,
+      4,
+    );
   });
 });
