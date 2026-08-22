@@ -203,9 +203,17 @@ export type SupportEventKind =
 
 export type SupportEventSchedule =
   | {
-      state: "confirmed";
+      // 期間もの。終了が確認できたものだけがこの形を名乗れる。
+      state: "confirmed-period";
       start: string;
-      end?: string;
+      end: string;
+      allDay: boolean;
+      timezone: "Asia/Tokyo";
+    }
+  | {
+      // 締切・結果発表など、長さを持たない時点。endを作らない。
+      state: "confirmed-instant";
+      at: string;
       allDay: boolean;
       timezone: "Asia/Tokyo";
     }
@@ -239,6 +247,13 @@ SupportEventに含めないもの:
 `date-pending` はイベントの存在自体が一次ソースで確認済みの場合だけ使う。
 単なる予想や「例年ある」はrecordを作らない。
 
+**`end` を optional にしない理由。** `end?` を許すと、`deadline` や `result` のように
+長さを持たない項目が「開始済みで終了時刻なし」となり、`displayStatus()` から
+「終了した」と判定できず、過ぎた締切がNOWに残り続ける。かといって既定の長さを
+補うのは確認していない期間の捏造になる。そこで **期間ものは `end` 必須、時点ものは
+`at` のみ** に型で分け、どちらでもないもの（終了が未公表の期間）は
+`confirmed-period` を名乗れないので `date-pending` として扱う。
+
 ### 4.3 既存 `events.ts` との境界
 
 公開出演、登壇、公開収録などは引き続き `events.ts` が正本である。
@@ -248,6 +263,19 @@ Support Calendarは `FanEvent` を直接 `ScheduleItem` へ変換する。
 将来、1つの出演に応援CTAだけを補足したくなった場合は、日程を写さず
 `FanEvent.id`を参照する小さなrelationを検討する。参照先の必要が実証される前に
 フィールドを追加しない。
+
+**ただし `FanEvent` はActivityを示せない。** 現在の `FanEvent` に活動を指す項目はなく、
+`EventKind` も `appearance` / `stream` / `event` / `other` の4値で、MISS CIRCLE・radio・
+live stream・CAMPUS GIRLSのどれかを識別できない。したがってadapterは
+`ScheduleItem.activityId` を埋められない。**titleやvenueからActivityを推測しない。**
+
+- `ScheduleItem.activityId` は `ActivityId | null` とし、fan event由来は既定で `null`。
+  `null` の行はactivity iconやbadgeを出さず、`events.ts` の情報だけで描く。
+- 特定の出演を明示的に活動へ結び付けたくなった時点で、`FanEvent` へ
+  optionalな `activityId?: ActivityId` を足す。`events.ts` は `AGENTS.md` が挙げる
+  データファイルなので、この追加はオーナー確認のうえ別PRで行う。
+- P5でこのsourceを接続する時点で `events` が空なら、adapterとtestだけ用意して
+  実データでの分類判断は保留する。
 
 ### 4.4 ScheduleItem — 導出型、保存禁止
 
@@ -323,7 +351,20 @@ function displayStatus(
 ): DisplayStatus;
 ```
 
-- `live/upcoming/ended` はstart/endとJSTの `now` から導出する。
+境界の定義（テストで固定する）:
+
+| schedule | `upcoming` | `live` | `ended` |
+| --- | --- | --- | --- |
+| `confirmed-period` | `now < start` | `start <= now <= end` | `end < now` |
+| `confirmed-instant`（時刻あり） | `now < at` | なし | `at <= now` |
+| `confirmed-instant`（`allDay`） | その日の開始前 | JSTのその日の間 | 翌日0:00以降 |
+| `date-pending` | — | — | — （常に `date-pending`） |
+
+`schedule` だけで判定できるのが要点で、`SupportEventKind` を渡す必要はない。
+時点ものに長さを与えないので、過ぎた締切は必ず `ended` になりNOWから外れる。
+日付のみ（`allDay`）の境界はJSTの暦日で判定し、`Intl` 経由で求める。
+
+- `live/upcoming/ended` は上表とJSTの `now` から導出する。
 - SHOWROOMの「配信中」は `/api/mily-live` が `live` を返したときだけ。
 - radioの「放送中」は既存のfreshness判定と `onAirConfirmed === true` を満たすときだけ。
 - 番組枠だけで本人出演中と断定しない。
@@ -354,10 +395,24 @@ const relatedNews = sortNewsByDateDesc(news)
 `sameDayOrder` の正本は `news.ts`。Latest、Hero、Activitiesのすべてが
 `sortNewsByDateDesc()` を使う。
 
-### 5.2 GalleryはNEWSのmediaから導出
+### 5.2 GalleryはNEWSとSTORYのmediaから導出
 
-Activityに関連する動画は、明示的に紐づいたNewsItemの `media` から導出する。
+Activityに関連する動画は、次の2経路から導出する。
 media manifestや `galleryVideos.ts` にactivity分類を重複保存しない。
+
+1. 明示的に紐づいたNewsItemの `media`
+2. `Activity.relatedStorySlugs` が指すSTORYが参照しているmedia
+
+**NEWS経路だけでは既存の動画を取りこぼす。** 例えば
+`secondRoundStoryVideo`（b09）は `galleryVideos.ts` が公開し `stories.ts` が使うが、
+対応する `2026-08-19-second-round-result` のNewsItemは `media` を持たず、
+`url` で `/stories/second-round-result-2026/` を指しているだけである。
+NEWSの `media` だけを見ると、このMISS CIRCLE動画がActivityページから静かに消える。
+
+そこで導出は上記2経路の和とし、**同じmanifest objectは1件に畳む**（`id` で重複排除）。
+`Activity.relatedStorySlugs` は既にある項目なので、新しいフィールドは足さない。
+NewsItemへ後から `media` を足して辻褄を合わせることはしない
+（既存の掲載単位とmanifest共有関係を変えてしまうため）。
 
 PR #49のTikTok動画は次のobject identityを維持する。
 
@@ -519,6 +574,29 @@ React entry、`vite.config.ts` input、canonical、sitemap、breadcrumb、URL gu
 - current rankや投稿時点rankをNOWへ持ち上げない。
 - API取得失敗を「予定なし」「終了」に変換しない。
 
+**現在の `useStreamSchedule()` は失敗と空を区別できない。** `fetchSchedule()` は
+`.catch(() => EMPTY)` ですべての失敗を空へ畳み、hookは `slots` と `roomUrl` しか
+返さない。手入力fallback（`streamSchedule.ts`）は空であることが正常なので、
+呼び出し側からは「取得に失敗した」と「予定が無い」が同じに見える。このままでは
+上の「取得失敗を『予定なし』に変換しない」を実装で満たせない。
+
+P5で、既存の呼び出し側の戻り値を壊さずに availability を足す。
+
+```ts
+type ScheduleAvailability = "loading" | "ok" | "unavailable";
+
+// 既存の slots / roomUrl はそのまま。availability を追加するだけ。
+useStreamSchedule(): { slots: StreamSlot[]; roomUrl: string | null; availability: ScheduleAvailability };
+```
+
+- 成功のみキャッシュする既存の規約は変えない（失敗はキャッシュしない）。
+- `unavailable` のときは配信枠の行を出さず、**セクションを消さずに**
+  「配信予定を取得できませんでした」と出す。`ok` かつ0件のときだけ従来どおり非表示。
+- 静的な確認済み項目（contest / supportEvents / events / radio枠）は
+  `unavailable` でもそのまま残す。
+- `/api/mily-radio-status` 側は既存の `onAirConfirmed: null`（unavailable）が
+  同じ役割を果たしているので変更しない。
+
 ### 9.4 Support Calendar
 
 入力は次の5系統。
@@ -573,8 +651,10 @@ P2をP1と分けることで、Profile事実変更のオーナー確認と、dat
 | test | 保証する内容 |
 | --- | --- |
 | `scripts/activities.test.mjs` | id/route一意、relation id実在、Activityに状態・順位・日程fieldがない |
-| `scripts/support-events.test.mjs` | source/verifiedAt必須、日付validator、Activity/current phase field禁止、既存domain日程の複製禁止 |
-| `scripts/support-calendar.test.mjs` | ScheduleItemが導出のみ、contest日程はcontestから読む、null日付をCalendarに置かない、JST境界、API空でも安全 |
+| `scripts/support-events.test.mjs` | source/verifiedAt必須、日付validator、Activity/current phase field禁止、既存domain日程の複製禁止、`confirmed-period` は `end` 必須・`end >= start`、`confirmed-instant` は `end` を持たない |
+| `scripts/support-calendar.test.mjs` | ScheduleItemが導出のみ、contest日程はcontestから読む、null日付をCalendarに置かない、JST境界、API空でも安全、fan event由来の `activityId` が `null`（推測しない）、STORY経路を含めたmedia導出が同一manifestを重複させない |
+| `displayStatus` の境界（上記test内） | 過ぎた `confirmed-instant` が `ended` になりNOWへ残らない。`allDay` の時点はJST暦日で切り替わる |
+| schedule availability（上記test内） | `unavailable` と「`ok` かつ0件」を取り違えない。`unavailable` で静的項目が消えない |
 
 ### 後続Phaseで維持・拡張するtest
 
@@ -613,6 +693,10 @@ git diff --check
 | PR #49 mediaの複製 | `tiktokRadioVideo` object、MP4、posterをそのまま共有 |
 | API障害時の誤断定 | unknownをnone/offlineへ変換しない。静的な確認済み項目だけ残す |
 | 未公表日程の捏造 | null/date-pendingを日付軸へ入れない。新しい外部事実を推測しない |
+| 過ぎた締切がNOWに残る | 時点ものは `confirmed-instant`。期間ものは `end` 必須。既定の長さを補わない |
+| API失敗を「予定なし」と誤表示 | `useStreamSchedule()` に availability を足し、`unavailable` と0件を区別する |
+| Activity動画の取りこぼし | NEWSの `media` と `relatedStorySlugs` 経由のSTORY mediaの和で導出する |
+| fan eventのActivity誤推定 | `FanEvent` にactivityは無い。`activityId` は `null` のままにし、title/venueから推測しない |
 | 巨大PR | P1〜P6を責務とUI境界で分割 |
 
 PR #50では `docs/ACTIVITIES-SUPPORT-DESIGN.md` 以外を変更しない。
