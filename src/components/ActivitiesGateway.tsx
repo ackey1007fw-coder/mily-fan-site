@@ -1,5 +1,6 @@
 import { activities } from "../data/activities";
 import { ACTIVITIES_HUB_ROUTE } from "../lib/activityRoute";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 
 /**
  * ホームの compact Activities gateway。
@@ -10,7 +11,7 @@ import { ACTIVITIES_HUB_ROUTE } from "../lib/activityRoute";
  */
 export function ActivitiesGateway() {
   return (
-    <section id="activities" className="scroll-mt-24 px-4 pb-6">
+    <section id="activities" className={`${SECTION_ANCHOR_OFFSET} px-4 pb-6`}>
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/15 bg-paper-card p-5 shadow-card sm:p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Activities

@@ -1,3 +1,16 @@
+/**
+ * ホーム内anchorのスクロールオフセット。
+ *
+ * ヘッダーは `md` 未満でnav pillが複数段になり、実測で
+ * 320px=203px / 390〜640px=151px / 640〜767px=99px / 768px以上=57px の高さになる。
+ * `scroll-mt-24`（96px）のままだと、`md` 未満で #latest や #stories へ移動したとき
+ * 見出しがヘッダーの下へ隠れる。段数に合わせて各breakpointでオフセットを取る。
+ *
+ * 値を変えるときは `scripts/top-integration.test.mjs` の実測前提も合わせて見直す。
+ */
+export const SECTION_ANCHOR_OFFSET =
+  "scroll-mt-52 sm:scroll-mt-40 md:scroll-mt-24";
+
 export type NavItem = {
   href: string;
   label: string;

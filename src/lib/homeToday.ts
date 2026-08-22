@@ -7,6 +7,9 @@
  * 1. 重複抑制: ホーム最上部の `ActivityBanner` が既に同じSHOWROOM LIVE /
  *    ラジオ番組枠を出しているとき、そのすぐ下の TodayDashboard で
  *    同じ内容・同じCTAを繰り返さない。
+ *    ただし抑制するのは **バナーと同じ行き先** の導線だけ。バナーが
+ *    `#stream`（ページ内anchor）へ退避しているのに項目側が直接のSHOWROOM URLを
+ *    持っている場合、そのCTAはバナーが提供していない導線なので残す。
  * 2. NOWの件数制限: `docs/ACTIVITIES-SUPPORT-DESIGN.md` 9.5 の
  *    「トップに巨大なCalendarを置かず、NOW最大2件と `/support/` 導線に留める」に従い、
  *    ホームのNOWは決定的な優先順位で最大2件へ絞る。
@@ -24,6 +27,7 @@ import type { LiveView } from "./realtimeStore.ts";
 import {
   selectSupportNow,
   selectSupportToday,
+  type SupportAction,
   type SupportNowItem,
   type SupportTodayItem,
 } from "./supportHub.ts";
@@ -31,6 +35,12 @@ import {
 export type HomeTodayView = {
   todayItems: SupportTodayItem[];
   nowItems: SupportNowItem[];
+  /**
+   * バナーに抑制された項目が持っていた導線のうち、
+   * **バナーが提供していない行き先**だけを残したもの。
+   * 行そのものは重複するので出さず、CTAだけを拾う。
+   */
+  retainedActions: SupportAction[];
 };
 
 /** compactなホームNOWの上限（design 9.5「NOW最大2件」）。 */
@@ -100,6 +110,37 @@ function todayShowroomKey(slot: StreamSlot): string {
   return `today:showroom:${slot.date}T${slot.time}`;
 }
 
+/**
+ * 抑制された「今日」の項目から、バナーが提供していない導線だけを拾う。
+ *
+ * `SHOWROOM_TODAY` バナーは `live.roomUrl` が未取得だと `#stream`
+ * （ページ内anchor）へ退避する。一方 `selectSupportToday()` は
+ * schedule API が解決した room URL を使うので、同じ枠を指していても
+ * **行き先が違う**ことがある。この場合に直接のSHOWROOM導線まで消さない。
+ *
+ * ラジオはバナー側が即時に聴けるプレイヤーへ送る役割を持っており、
+ * 番組枠の項目CTAと役割が重なるので、ここでは拾わない
+ * （同じ「ラジオを聴く」を2つ並べない）。
+ */
+export function retainedTodayActions(
+  banner: BannerState,
+  suppressed: SupportTodayItem[],
+): SupportAction[] {
+  const seen = new Set<string>();
+  const actions: SupportAction[] = [];
+
+  for (const item of suppressed) {
+    // SHOWROOM導線だけが対象。行き先が同じならバナーとの完全な重複なので出さない。
+    if (item.activityId !== "live-stream") continue;
+    if (!item.cta || item.cta.url === banner.href) continue;
+    if (seen.has(item.cta.url)) continue;
+    seen.add(item.cta.url);
+    actions.push(item.cta);
+  }
+
+  return actions;
+}
+
 export function selectHomeToday(input: {
   contest: Contest;
   supportEvents: SupportEvent[];
@@ -111,14 +152,21 @@ export function selectHomeToday(input: {
   banner: BannerState;
   now: number;
 }): HomeTodayView {
-  const todayItems = selectSupportToday({
+  const allTodayItems = selectSupportToday({
     contest: input.contest,
     streamSlots: input.streamSlots,
     streamRoomUrl: input.streamRoomUrl,
     liveRoomUrl: input.live.roomUrl,
     radioPhase: input.radioPhase,
     now: input.now,
-  }).filter((item) => !bannerCoversTodayItem(input.banner, item));
+  });
+  const covered = (item: SupportTodayItem) =>
+    bannerCoversTodayItem(input.banner, item);
+  const todayItems = allTodayItems.filter((item) => !covered(item));
+  const retainedActions = retainedTodayActions(
+    input.banner,
+    allTodayItems.filter(covered),
+  );
 
   // バナーで抑制したあとに上限を適用する。抑制で消えた枠は残りの項目が使う。
   const nowItems = rankHomeNowItems(
@@ -130,5 +178,5 @@ export function selectHomeToday(input: {
     }).filter((item) => !bannerCoversNowItem(input.banner, item)),
   ).slice(0, HOME_NOW_LIMIT);
 
-  return { todayItems, nowItems };
+  return { todayItems, nowItems, retainedActions };
 }

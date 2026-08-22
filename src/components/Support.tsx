@@ -1,4 +1,5 @@
 import { contest } from "../data/contest";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { ExternalLink } from "./ExternalLink";
 
@@ -12,7 +13,7 @@ import { ExternalLink } from "./ExternalLink";
  */
 export function Support() {
   return (
-    <section id="support" className="scroll-mt-24 px-4 py-6">
+    <section id="support" className={`${SECTION_ANCHOR_OFFSET} px-4 py-6`}>
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/15 bg-paper-card p-5 shadow-card sm:p-6">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Support

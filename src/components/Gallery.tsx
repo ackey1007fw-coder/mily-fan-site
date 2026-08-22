@@ -5,6 +5,7 @@ import {
 } from "../data/driveGallery";
 import { visibleGalleryVideos } from "../data/galleryVideos";
 import { defaultSrc, media, srcSetFor, visibleMedia } from "../data/media";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
@@ -20,7 +21,7 @@ export function Gallery() {
   const hasAny = items.length > 0 || drive.photos.length > 0 || videos.length > 0;
 
   return (
-    <section id="gallery" className="scroll-mt-24 px-4 py-10">
+    <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">ギャラリー</h2>
         <p className="mt-2 text-sm text-ink-muted">

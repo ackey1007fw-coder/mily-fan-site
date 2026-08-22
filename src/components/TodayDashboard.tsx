@@ -3,6 +3,7 @@ import { socials } from "../data/socials";
 import { supportEvents } from "../data/supportEvents";
 import { deriveBannerState } from "../lib/bannerState";
 import { selectHomeToday } from "../lib/homeToday";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { useMilyRealtimeStatus } from "../lib/useMilyRealtimeStatus";
 import { useStreamSchedule } from "../lib/useStreamSchedule";
 import { ExternalLink } from "./ExternalLink";
@@ -35,7 +36,7 @@ export function TodayDashboard() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
 
   const banner = deriveBannerState({ live, radio, slots });
-  const { todayItems, nowItems } = selectHomeToday({
+  const { todayItems, nowItems, retainedActions } = selectHomeToday({
     contest,
     supportEvents,
     streamSlots: slots,
@@ -56,7 +57,7 @@ export function TodayDashboard() {
   ).filter((item) => item !== undefined);
 
   return (
-    <section id="today" className="scroll-mt-24 px-4 pb-4 pt-2">
+    <section id="today" className={`${SECTION_ANCHOR_OFFSET} px-4 pb-4 pt-2`}>
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-bold text-ink">今日のみりぃ</h2>
@@ -139,15 +140,28 @@ export function TodayDashboard() {
         {/*
           `/support/` への導線は、すぐ下の compact Support gateway が担当する。
           同じCTAを上下で繰り返さない。
+
+          retainedActions は、バナーが同じ枠を出していて行だけ抑制した項目のうち、
+          バナーが提供していない行き先（例: バナーが `#stream` に退避している間の
+          直接のSHOWROOM URL）。行き先が同じ導線はここには来ない。
         */}
-        <p className="mt-4">
+        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <ExternalLink
             href={contest.entryUrl}
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep sm:w-auto"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
           >
             {contest.entryNumber}を応援する
           </ExternalLink>
-        </p>
+          {retainedActions.map((action) => (
+            <ExternalLink
+              key={action.url}
+              href={action.url}
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+            >
+              {action.label}
+            </ExternalLink>
+          ))}
+        </div>
 
         {snsLinks.length > 0 ? (
           <p className="mt-3 flex flex-wrap gap-2">

@@ -11,10 +11,12 @@ import { deriveBannerState } from "../src/lib/bannerState.ts";
 import {
   HOME_NOW_LIMIT,
   rankHomeNowItems,
+  retainedTodayActions,
   selectHomeToday,
 } from "../src/lib/homeToday.ts";
 import {
   hubNavigation,
+  SECTION_ANCHOR_OFFSET,
   sectionNavigation,
   visibleNavItems,
 } from "../src/lib/navigation.ts";
@@ -504,5 +506,173 @@ describe("P6 home NOW stays compact", () => {
       }).length,
       4,
     );
+  });
+});
+
+describe("P6 anchor targets clear the wrapped mobile header", () => {
+  /**
+   * Chromiumでの実測ヘッダー高さ（`md` 未満はnav pillが折り返す）:
+   *   320px = 203px / 390-640px = 151px / 640-767px = 99px / 768px以上 = 57px
+   * オフセットはこれを上回る必要がある。
+   */
+  const OFFSET_PX = { base: 208, sm: 160, md: 96 }; // scroll-mt-52 / 40 / 24
+  const HEADER_PX = { base: 203, sm: 151, md: 57 };
+
+  it("offsets each breakpoint past the header height it can reach", () => {
+    assert.equal(SECTION_ANCHOR_OFFSET, "scroll-mt-52 sm:scroll-mt-40 md:scroll-mt-24");
+    for (const key of ["base", "sm", "md"]) {
+      assert.ok(
+        OFFSET_PX[key] >= HEADER_PX[key],
+        `${key}: offset ${OFFSET_PX[key]}px must clear the ${HEADER_PX[key]}px header`,
+      );
+    }
+    // `md` 未満は 96px では足りない（この修正の理由）
+    assert.ok(HEADER_PX.base > OFFSET_PX.md);
+    assert.ok(HEADER_PX.sm > OFFSET_PX.md);
+  });
+
+  it("uses the shared offset on every home anchor target", () => {
+    const sections = [
+      ["src/components/TodayDashboard.tsx", "today"],
+      ["src/components/Support.tsx", "support"],
+      ["src/components/ActivitiesGateway.tsx", "activities"],
+      ["src/components/StreamSchedule.tsx", "stream"],
+      ["src/components/Socials.tsx", "links"],
+      ["src/components/Latest.tsx", "latest"],
+      ["src/components/Stories.tsx", "stories"],
+      ["src/components/About.tsx", "about"],
+      ["src/components/Gallery.tsx", "gallery"],
+      ["src/components/Schedule.tsx", "schedule"],
+    ];
+    for (const [file, id] of sections) {
+      const text = source(file);
+      assert.match(text, new RegExp(`id="${id}"`), `${file} keeps id="${id}"`);
+      assert.match(
+        text,
+        /\$\{SECTION_ANCHOR_OFFSET\}/,
+        `${file} must use the shared anchor offset`,
+      );
+      assert.doesNotMatch(
+        text,
+        /"scroll-mt-24 /,
+        `${file} must not keep the bare 96px offset`,
+      );
+    }
+    // ナビが指すanchorはすべて対象に含まれている
+    for (const item of sectionNavigation(1)) {
+      const id = item.href.replace("#", "");
+      assert.ok(
+        sections.some(([, sectionId]) => sectionId === id),
+        `nav anchor #${id} needs an offset section`,
+      );
+    }
+  });
+
+  it("keeps the compact header nav wrapping, tappable, and overflow-free", () => {
+    const header = source("src/components/Header.tsx");
+    // 折り返しで逃がす（横スクロールを作らない）
+    assert.match(header, /flex-wrap/);
+    assert.doesNotMatch(header, /overflow-x-auto|whitespace-nowrap/);
+    // 44px タッチターゲットを維持
+    assert.match(header, /const compactHubLink =\n\s+"inline-flex min-h-11/);
+    assert.match(header, /const compactSectionLink =\n\s+"inline-flex min-h-11/);
+    assert.doesNotMatch(header, /min-h-10\b/);
+  });
+});
+
+describe("P6 keeps a SHOWROOM CTA the banner does not offer", () => {
+  const now = Date.parse("2026-08-22T12:00:00+09:00");
+  const slots = [{ date: "2026-08-22", time: "20:00" }];
+  const roomUrl = "https://www.showroom-live.com/r/circle2026_0734";
+
+  function view(live, streamRoomUrl) {
+    const banner = deriveBannerState({ live, radio: null, slots }, now);
+    return {
+      banner,
+      ...selectHomeToday({
+        contest,
+        supportEvents: [],
+        streamSlots: slots,
+        streamRoomUrl,
+        live,
+        radio: null,
+        radioPhase: "idle",
+        banner,
+        now,
+      }),
+    };
+  }
+
+  it("retains the direct SHOWROOM CTA while the banner falls back to #stream", () => {
+    const { banner, todayItems, retainedActions } = view(unknownLive, roomUrl);
+    assert.equal(banner.kind, "SHOWROOM_TODAY");
+    assert.equal(banner.href, "#stream"); // バナーはページ内anchorしか出せていない
+    // 行そのものの重複抑制は維持する
+    assert.equal(
+      todayItems.some(({ activityId }) => activityId === "live-stream"),
+      false,
+    );
+    // 行き先の違うCTAは残す
+    assert.deepEqual(retainedActions, [
+      { label: "SHOWROOMで見る", url: roomUrl },
+    ]);
+  });
+
+  it("suppresses the CTA when the banner already links to the same URL", () => {
+    const live = { ...unknownLive, roomUrl };
+    const { banner, retainedActions } = view(live, roomUrl);
+    assert.equal(banner.href, roomUrl);
+    assert.deepEqual(retainedActions, []);
+  });
+
+  it("retains nothing when the item has no CTA at all", () => {
+    const { retainedActions } = view(unknownLive, null);
+    assert.deepEqual(retainedActions, []);
+  });
+
+  it("does not duplicate a SHOWROOM live CTA the banner already shows", () => {
+    const live = { ...unknownLive, state: "live", roomUrl };
+    const { banner, todayItems, retainedActions } = view(live, roomUrl);
+    assert.equal(banner.kind, "SHOWROOM_LIVE");
+    assert.equal(banner.href, roomUrl);
+    assert.equal(
+      todayItems.some(({ activityId }) => activityId === "live-stream"),
+      false,
+    );
+    assert.deepEqual(retainedActions, []);
+  });
+
+  it("only picks up SHOWROOM actions and never repeats a destination", () => {
+    const banner = { kind: "SHOWROOM_TODAY", stateLabel: "予定", title: "今日の配信", href: "#stream" };
+    const showroom = {
+      key: "today:showroom:2026-08-22T20:00",
+      activityId: "live-stream",
+      label: "確認済みの配信枠",
+      value: "2026.08.22 20:00〜",
+      cta: { label: "SHOWROOMで見る", url: roomUrl },
+    };
+    const radio = {
+      key: "today:radio-program",
+      activityId: "radio",
+      label: "本日の番組枠",
+      value: "番組",
+      cta: { label: "ラジオを聴く", url: radioProgram.listenUrl },
+    };
+    // 同じ行き先が2件来ても1件に畳む
+    assert.deepEqual(
+      retainedTodayActions(banner, [showroom, { ...showroom, key: "dup" }, radio]),
+      [{ label: "SHOWROOMで見る", url: roomUrl }],
+    );
+    // ラジオはバナー側が聴取導線を担当するので拾わない
+    assert.deepEqual(retainedTodayActions(banner, [radio]), []);
+  });
+
+  it("renders the retained actions in the dashboard CTA row", () => {
+    const dashboard = source("src/components/TodayDashboard.tsx");
+    assert.match(dashboard, /retainedActions/);
+    assert.match(dashboard, /retainedActions\.map\(\(action\) =>/);
+    assert.match(dashboard, /href=\{action\.url\}/);
+    assert.match(dashboard, /\{action\.label\}/);
+    assert.match(dashboard, /key=\{action\.url\}/);
   });
 });

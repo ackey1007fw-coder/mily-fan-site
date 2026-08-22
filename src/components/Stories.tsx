@@ -1,4 +1,5 @@
 import { visibleStories } from "../data/stories";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { StoryCard } from "./StoryCard";
 
 export function Stories() {
@@ -7,7 +8,7 @@ export function Stories() {
   if (items.length === 0) return null;
 
   return (
-    <section id="stories" className="scroll-mt-24 border-y border-sage/15 bg-sage-soft/30 px-4 py-12">
+    <section id="stories" className={`${SECTION_ANCHOR_OFFSET} border-y border-sage/15 bg-sage-soft/30 px-4 py-12`}>
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           読み物 / STORY

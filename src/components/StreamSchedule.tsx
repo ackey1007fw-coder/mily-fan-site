@@ -1,4 +1,5 @@
 import { contest } from "../data/contest";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import {
   formatSlotDate,
   slotStatus,
@@ -14,7 +15,7 @@ export function StreamSchedule() {
   }
 
   return (
-    <section id="stream" className="scroll-mt-24 px-4 py-10">
+    <section id="stream" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">配信予定</h2>
         <p className="mt-2 text-sm text-ink-muted">みりぃさんの次の配信。</p>
