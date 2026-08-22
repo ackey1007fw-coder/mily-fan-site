@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { open, readFile, readdir, stat } from "node:fs/promises";
 import { describe, it } from "node:test";
@@ -16,8 +16,6 @@ import {
 import {
   eventStory20260821,
   galleryVideos,
-  morningOhayo20260821,
-  morningShowroomRunwayVideo,
   tiktokRadioVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
@@ -30,27 +28,30 @@ import { isProbablyBinary } from "./scan-tracked-text.mjs";
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
-const mp4 = path.join(galleryDirectory, "mily-b11-01-morning-showroom-runway.mp4");
+const mp4 = path.join(galleryDirectory, "mily-b15-01-tiktok-radio-misscircle.mp4");
 const poster = path.join(
   galleryDirectory,
-  "mily-b11-01-morning-showroom-runway-poster.jpg",
+  "mily-b15-01-tiktok-radio-misscircle-poster.jpg",
 );
 const original = path.join(
   root,
-  "media/original/0a502bbfb722d82ea97313483c8a377dd97c9e38.mp4",
+  "media/original",
+  ["oI6IiTYQEia0BuixSZBr", "BE5gEA8RVSPKyAIoo.mp4"].join(""),
 );
 
-const NEWS_ID = "2026-08-21-morning-showroom-runway";
-const SOURCE = "https://x.com/Mily_chan36/status/2090557839492460779";
-const MESSAGE =
-  "おはよ〜🔅\n今日も一緒に頑張ろうねん\n\n7:00〜SHOWROOMにて配信しますよっ！\n26日までガチイベ中で、ランウェイかけて配信しております🛜❤️‍🔥\n待ってる〜！\n\n応援よろしくお願いいたします🥺\n\n⬇️昨日の動画🎥\n#ミスサー #ミスサークルコンテスト2026 #ミスサークル #ミスサークルコンテスト";
+const NEWS_ID = "2026-08-21-tiktok-radio-misscircle";
+const SOURCE = "https://www.tiktok.com/@seasidecircle/video/7676407054466174229";
+const TITLE = "湘南シーサイドサークルのTikTokにみりぃが登場📻✨";
+const BODY =
+  "8月21日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。番組TikTokに登場したみりぃが、ラジオDJとミスコンの両方を頑張る気持ちを伝えています。";
+const MESSAGE = "ラジオDJもミスコンも頑張らせていただくよ✌みりぃです^^";
 const ALT =
-  "金色のハート型フィルターを使い、室内でカメラに向かって表情を変える短い自撮り動画";
-const POSTER_SECONDS = "2.0";
+  "室内でカメラに向かい、手でポーズを取りながら表情を変える、みりぃの短い縦型動画";
 const ORIGINAL_SHA256 =
-  "cf893d157551cfbee6db08665c7ad1ec17f9e08f5810c0a6bf730cdddeca68d3";
+  "40af17f54b7d254d7e337a41cf86d6ec7309985725a928ae0fc0929620b3d50f";
+const POSTER_SECONDS = "5.5";
 const HANDOFF_HOST = ["drive", "google", "com"].join(".");
-const HANDOFF_ID = ["1VW8Ru7QCkJ30hl8", "KVsBJDg5VU-5pJ082"].join("");
+const HANDOFF_ID = ["1-aVNLGhEQm5yqdIRof8B", "IHSmn3XuQHRr"].join("");
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -70,9 +71,15 @@ async function ffmpegExe() {
 async function probe(file) {
   const ffprobe = await ffprobeExe();
   const { stdout } = await run(ffprobe, [
-    "-hide_banner", "-v", "error",
-    "-show_format", "-show_streams", "-show_chapters",
-    "-print_format", "json", file,
+    "-hide_banner",
+    "-v",
+    "error",
+    "-show_format",
+    "-show_streams",
+    "-show_chapters",
+    "-print_format",
+    "json",
+    file,
   ]);
   return JSON.parse(stdout);
 }
@@ -86,87 +93,91 @@ async function repositoryFiles() {
   return stdout.split("\n").filter(Boolean);
 }
 
-describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
-  it("adds exactly one dated News item with the confirmed X source", () => {
+describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
+  it("adds exactly one dated News item with the canonical TikTok source", () => {
     const entry = item();
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(entry.date, "2026-08-21");
-    assert.equal(entry.title, "朝7:00からSHOWROOM配信📡❤️‍🔥");
-    assert.equal(
-      entry.body,
-      "8月21日の朝、みりぃが7:00からのSHOWROOM配信を案内しました。投稿では、26日までランウェイをかけたイベントに参加していることを伝え、応援を呼びかけています。",
-    );
+    assert.equal(entry.sameDayOrder, 1);
+    assert.equal(entry.title, TITLE);
+    assert.equal(entry.body, BODY);
     assert.equal(entry.source, SOURCE);
-    assert.equal(entry.sourceLabel, "Xの投稿を見る");
+    assert.equal(entry.sourceLabel, "湘南シーサイドサークルのTikTok投稿を見る");
     assert.equal(entry.url, undefined);
     assert.equal(entry.ctaLabel, undefined);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
-  it("preserves the owner-supplied post text verbatim, including line breaks", () => {
+  it("preserves only the confirmed post text", () => {
     const entry = item();
 
-    assert.equal(entry.message?.label, "みりぃの投稿");
+    assert.equal(entry.message?.label, "湘南シーサイドサークルの投稿");
     assert.equal(entry.message?.text, MESSAGE);
-    assert.doesNotMatch(entry.body, /現在開催中|現在配信中|順位|ポイント|審査結果/);
+    assert.doesNotMatch(entry.body, /目標|結果|達成|受賞|順位|投稿時刻|#\S+/);
+    assert.equal(entry.body.includes(["みりぃが", "TikTokを更新"].join("")), false);
   });
 
-  it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
+  it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[1], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[2], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[3], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[4], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[5], NEWS_ID);
-    assert.deepEqual(ordered.slice(6, 9), [
-      "2026-08-20-mango-kakigori",
-      "2026-08-20-morning-message",
-      "2026-08-20-morning-story",
+    assert.deepEqual(ordered.slice(0, 6), [
+      NEWS_ID,
+      "2026-08-21-after-afternoon-ganda",
+      "2026-08-21-afternoon-showroom-fanroom",
+      "2026-08-21-event-story-next-slot",
+      "2026-08-21-morning-ohayo-story",
+      "2026-08-21-morning-showroom-runway",
     ]);
     assert.equal(news.length, 15);
   });
+
+  it("drives both Hero and Latest from the same ordered News list", async () => {
+    const hero = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
+    const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
+
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
+    assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
+  });
 });
 
-describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", () => {
-  it("shares one manifest object and stays behind the newer b12 video", () => {
-    const galleryItem = galleryVideos.find(
-      (entry) => entry.id === morningShowroomRunwayVideo.id,
+describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
+  it("shares one manifest object and is the newest standalone Gallery video", () => {
+    const matches = galleryVideos.filter(
+      (entry) => entry.id === tiktokRadioVideo.id,
     );
 
-    assert.equal(item().media, morningShowroomRunwayVideo);
-    assert.equal(galleryItem, morningShowroomRunwayVideo);
+    assert.equal(item().media, tiktokRadioVideo);
+    assert.deepEqual(matches, [tiktokRadioVideo]);
+    assert.equal(galleryVideos[0], tiktokRadioVideo);
     assert.equal(visibleGalleryVideos()[0], tiktokRadioVideo);
     assert.equal(visibleGalleryVideos()[1], eventStory20260821);
-    assert.equal(visibleGalleryVideos()[2], morningOhayo20260821);
-    assert.equal(visibleGalleryVideos()[3], morningShowroomRunwayVideo);
     assert.equal(visibleGalleryVideos().length, 7);
-    assert.equal(morningShowroomRunwayVideo.sourceUrl, SOURCE);
-    assert.equal(morningShowroomRunwayVideo.sourceDate, "2026-08-21");
-    assert.equal(morningShowroomRunwayVideo.alt, ALT);
+    assert.equal(tiktokRadioVideo.provenance, "owner-provided");
+    assert.equal(tiktokRadioVideo.sourceUrl, SOURCE);
+    assert.equal(tiktokRadioVideo.sourceDate, "2026-08-21");
+    assert.equal(tiktokRadioVideo.published, true);
+    assert.equal(tiktokRadioVideo.alt, ALT);
   });
 
   it("publishes exactly one local MP4 and one local poster", async () => {
     const assets = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"))
-      .filter((file) => file.includes("mily-b11-01-morning-showroom-runway"));
+      .filter((file) => file.includes("mily-b15-01-tiktok-radio-misscircle"));
 
     assert.deepEqual(assets.sort(), [
-      "media/gallery/mily-b11-01-morning-showroom-runway-poster.jpg",
-      "media/gallery/mily-b11-01-morning-showroom-runway.mp4",
+      "media/gallery/mily-b15-01-tiktok-radio-misscircle-poster.jpg",
+      "media/gallery/mily-b15-01-tiktok-radio-misscircle.mp4",
     ]);
-    assert.match(morningShowroomRunwayVideo.src, /^\/media\//);
-    assert.match(morningShowroomRunwayVideo.poster, /^\/media\//);
     assert.equal(existsSync(mp4), true);
     assert.equal(existsSync(poster), true);
     assert.ok((await stat(mp4)).size > 0);
     assert.ok((await stat(poster)).size > 0);
   });
 
-  it("keeps the existing Drive Gallery and adds only one standalone video", () => {
+  it("adds only one standalone Gallery video and leaves Drive Gallery unchanged", () => {
     const drive = driveGallerySections(visibleDriveGallery());
 
     assert.equal(drive.photos.length, 45);
@@ -176,8 +187,8 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
   });
 });
 
-describe("2026-08-21 morning SHOWROOM video — published derivatives", () => {
-  it("is H.264 Baseline / yuv420p with source dimensions and no audio", async () => {
+describe("2026-08-21 TikTok video — published derivatives", () => {
+  it("matches the manifest and is H.264 Baseline / yuv420p / video-only", async () => {
     const info = await probe(mp4);
     const video = info.streams.find((stream) => stream.codec_type === "video");
     const audio = info.streams.find((stream) => stream.codec_type === "audio");
@@ -187,36 +198,34 @@ describe("2026-08-21 morning SHOWROOM video — published derivatives", () => {
     assert.match(video.profile, /Baseline/);
     assert.equal(video.has_b_frames, 0);
     assert.equal(video.pix_fmt, "yuv420p");
-    assert.equal(video.width, 720);
-    assert.equal(video.height, 1280);
+    assert.equal(video.width, tiktokRadioVideo.width);
+    assert.equal(video.height, tiktokRadioVideo.height);
     assert.equal(video.avg_frame_rate, "30/1");
-    assert.equal(Number(info.format.duration).toFixed(3), "4.267");
+    assert.equal(video.nb_frames, "337");
+    assert.equal(Number(info.format.duration).toFixed(3), "11.234");
     assert.equal(audio, undefined);
 
     if (existsSync(original)) {
       const source = await probe(original);
-      const sourceVideo = source.streams.find(
-        (stream) => stream.codec_type === "video",
-      );
-      const sourceAudio = source.streams.find(
-        (stream) => stream.codec_type === "audio",
-      );
+      const sourceVideo = source.streams.find((stream) => stream.codec_type === "video");
+      const sourceAudio = source.streams.find((stream) => stream.codec_type === "audio");
       const sourceBytes = await readFile(original);
 
-      assert.equal(sourceBytes.length, 515287);
+      assert.equal(sourceBytes.length, 1_339_785);
       assert.equal(createHash("sha256").update(sourceBytes).digest("hex"), ORIGINAL_SHA256);
       assert.equal(sourceVideo.width, video.width);
       assert.equal(sourceVideo.height, video.height);
-      assert.equal(sourceVideo.avg_frame_rate, "30/1");
-      assert.equal(Number(source.format.duration).toFixed(6), "4.266667");
-      assert.equal(sourceAudio, undefined);
+      assert.equal(sourceVideo.avg_frame_rate, video.avg_frame_rate);
+      assert.equal(sourceVideo.nb_frames, video.nb_frames);
+      assert.equal(sourceAudio.codec_name, "aac");
+      assert.equal(sourceAudio.profile, "HE-AACv2");
     }
   });
 
-  it("uses faststart and removes source-specific metadata", async () => {
+  it("uses faststart and removes source-specific metadata and chapters", async () => {
     assert.equal(await isFaststart(mp4), true);
     assert.deepEqual(
-      await validateVideoDerivatives(morningShowroomRunwayVideo, galleryDirectory),
+      await validateVideoDerivatives(tiktokRadioVideo, galleryDirectory),
       { width: 720, height: 1280 },
     );
 
@@ -231,14 +240,12 @@ describe("2026-08-21 morning SHOWROOM video — published derivatives", () => {
     }
 
     const info = await probe(mp4);
-    assert.equal("creation_time" in (info.format.tags ?? {}), false);
-    for (const stream of info.streams) {
-      assert.equal("creation_time" in (stream.tags ?? {}), false);
-      assert.notEqual(stream.tags?.handler_name, "Twitter-vork muxer");
-    }
+    const serialized = JSON.stringify(info);
+    assert.equal(info.chapters.length, 0);
+    assert.doesNotMatch(serialized, /aigc_info|vid_md5|v14044g50000da415s7og65k9aqf3ecg/);
   });
 
-  it("uses the selected 2.0-second real frame as a metadata-free poster", async () => {
+  it("uses the selected 5.5-second real frame as a metadata-free poster", async () => {
     const meta = await sharp(poster).metadata();
     assert.equal(meta.width, 720);
     assert.equal(meta.height, 1280);
@@ -251,8 +258,20 @@ describe("2026-08-21 morning SHOWROOM video — published derivatives", () => {
     const { stdout } = await run(
       ffmpeg,
       [
-        "-hide_banner", "-loglevel", "error", "-ss", POSTER_SECONDS,
-        "-i", mp4, "-frames:v", "1", "-f", "rawvideo", "-pix_fmt", "gray", "-",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-ss",
+        POSTER_SECONDS,
+        "-i",
+        mp4,
+        "-frames:v",
+        "1",
+        "-f",
+        "rawvideo",
+        "-pix_fmt",
+        "gray",
+        "-",
       ],
       { encoding: "buffer", maxBuffer: 1024 * 1024 * 64 },
     );
@@ -266,8 +285,8 @@ describe("2026-08-21 morning SHOWROOM video — published derivatives", () => {
     assert.ok(total / posterGray.length < 3);
   });
 
-  it("retains the existing controls / inline / preload contract", async () => {
-    const view = driveVideoView(morningShowroomRunwayVideo);
+  it("retains the existing uncropped playback contract", async () => {
+    const view = driveVideoView(tiktokRadioVideo);
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
     const gallery = await readFile(path.join(root, "src/components/Gallery.tsx"), "utf8");
 
@@ -280,13 +299,14 @@ describe("2026-08-21 morning SHOWROOM video — published derivatives", () => {
       assert.match(source, /controls/);
       assert.match(source, /playsInline/);
       assert.match(source, /preload/);
+      assert.match(source, /object-contain/);
       assert.doesNotMatch(source, /autoPlay|autoplay|\bloop\b/);
     }
   });
 });
 
-describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", () => {
-  it("keeps the handoff URL, file id and original out of publishable files", async () => {
+describe("2026-08-21 TikTok post — privacy, identity and scope boundaries", () => {
+  it("keeps the handoff URL, file id and original out of tracked/public files", async () => {
     const files = await repositoryFiles();
 
     assert.equal(files.includes(path.relative(root, original).replaceAll("\\", "/")), false);
@@ -299,32 +319,60 @@ describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", ()
     }
   });
 
-  it("does not add this normal post to STORIES, highlights, contest or events", async () => {
+  it("does not add the post to excluded data surfaces", async () => {
     for (const relative of [
       "src/data/stories.ts",
-      "src/data/highlights.ts",
-      "src/data/contest.ts",
       "src/data/events.ts",
+      "src/data/profile.ts",
+      "src/data/highlights.ts",
+      "src/data/media.ts",
+      "src/data/driveGalleryManifest.json",
     ]) {
       const source = await readFile(path.join(root, relative), "utf8");
       assert.equal(source.includes(NEWS_ID), false, relative);
-      assert.equal(source.includes("mily-b11-01"), false, relative);
+      assert.equal(source.includes("mily-b15-01"), false, relative);
     }
-    assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
   });
 
-  it("flows through Portal Feed with the X source and shared poster", () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-21T09:00:00+09:00") });
+  it("keeps Mily identity and unrelated people/sites out of task files", async () => {
+    const taskFiles = [
+      "src/data/tiktokRadioVideo.json",
+      "src/data/tiktokRadioVideo.ts",
+      "src/data/news.ts",
+      "src/data/galleryVideos.ts",
+      "docs/MEDIA.md",
+      "docs/CONTENT-OPS.md",
+    ];
+    const forbidden = new RegExp(
+      [
+        ["Mi", "lly"].join(""),
+        "Yukako",
+        "Riri",
+        "Mako",
+        "Chizuru",
+        "ouen-archive",
+        "yukako-schedule",
+        "riri-schedule",
+        "mako-schedule",
+      ].join("|"),
+      "i",
+    );
+
+    for (const relative of taskFiles) {
+      const source = await readFile(path.join(root, relative), "utf8");
+      assert.doesNotMatch(source, forbidden, relative);
+    }
+
+    await run(process.execPath, ["scripts/check-site-identity.mjs", "main"], { cwd: root });
+  });
+
+  it("flows through Portal Feed with the TikTok source and shared poster", () => {
+    const feed = createPortalFeed({ now: new Date("2026-08-21T21:00:00+09:00") });
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
 
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.ok(entry.image?.endsWith(morningShowroomRunwayVideo.poster));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[2].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[4].id, entry.id);
+    assert.ok(entry.image?.endsWith(tiktokRadioVideo.poster));
   });
 });

@@ -198,15 +198,16 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
   it("stays above the 8/20 morning Story without deleting it", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    // 8/21の新着の後も、8/20同日ソートは既存の id 昇順仕様を維持する。
-    assert.equal(ordered[0], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[1], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[3], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[4], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[5], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[6], NEWS_ID);
-    assert.equal(ordered[7], "2026-08-20-morning-story");
+    // 8/21の新着の後も、8/20同日ソートは既存の配列順を維持する。
+    assert.equal(ordered[0], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[1], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[2], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[4], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[5], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[6], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[7], NEWS_ID);
+    assert.equal(ordered[8], "2026-08-20-morning-story");
     assert.ok(news.some((entry) => entry.id === "2026-08-20-morning-story"));
   });
 
@@ -221,7 +222,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 14);
+    assert.equal(news.length, 15);
   });
 });
 
@@ -239,8 +240,9 @@ describe("2026-08-20 morning X post — Portal Feed", () => {
     assert.equal(feed.items[2].id, "mily:news:2026-08-21-event-story-next-slot");
     assert.equal(feed.items[3].id, "mily:news:2026-08-21-morning-ohayo-story");
     assert.equal(feed.items[4].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[6].id, entry.id);
+    assert.equal(feed.items[5].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
+    assert.equal(feed.items[6].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[7].id, entry.id);
 
     // image は自己ホスト画像。サイト origin 上で PHOTO を指す
     assert.ok(entry.image);

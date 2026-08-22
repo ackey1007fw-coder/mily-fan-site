@@ -1,6 +1,7 @@
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
- * The UI sorts a copy by date; do not rely on array order alone.
+ * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
+ * items keep their source-array order without inventing publication times.
  * How to add an item: docs/CONTENT-OPS.md
  *
  * - source: optional confirmed 出典 URL（「出典を見る」）
@@ -15,6 +16,7 @@ import {
   morningStory20260820,
 } from "./morningStoryVideo.ts";
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
+import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -45,6 +47,8 @@ export type NewsItem = {
   id: string;
   /** Display date, ISO `YYYY-MM-DD`. */
   date: string;
+  /** Explicit editorial order within the same date. Higher values appear first. */
+  sameDayOrder?: number;
   title: string;
   body: string;
   source?: string;
@@ -56,6 +60,20 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-21-tiktok-radio-misscircle",
+    date: "2026-08-21",
+    sameDayOrder: 1,
+    title: "湘南シーサイドサークルのTikTokにみりぃが登場📻✨",
+    body: "8月21日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。番組TikTokに登場したみりぃが、ラジオDJとミスコンの両方を頑張る気持ちを伝えています。",
+    source: tiktokRadioVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+    media: tiktokRadioVideo,
+    message: {
+      label: "湘南シーサイドサークルの投稿",
+      text: "ラジオDJもミスコンも頑張らせていただくよ✌みりぃです^^",
+    },
+  },
   {
     id: "2026-08-21-after-afternoon-ganda",
     date: "2026-08-21",
@@ -263,9 +281,17 @@ export const news: NewsItem[] = [
 ];
 
 export function sortNewsByDateDesc(items: NewsItem[]): NewsItem[] {
-  return [...items].sort((a, b) => {
-    const byDate = b.date.localeCompare(a.date);
-    if (byDate !== 0) return byDate;
-    return a.id.localeCompare(b.id);
-  });
+  return items
+    .map((item, sourceIndex) => ({ item, sourceIndex }))
+    .sort((a, b) => {
+      const byDate = b.item.date.localeCompare(a.item.date);
+      if (byDate !== 0) return byDate;
+
+      const bySameDayOrder =
+        (b.item.sameDayOrder ?? 0) - (a.item.sameDayOrder ?? 0);
+      if (bySameDayOrder !== 0) return bySameDayOrder;
+
+      return a.sourceIndex - b.sourceIndex;
+    })
+    .map(({ item }) => item);
 }
