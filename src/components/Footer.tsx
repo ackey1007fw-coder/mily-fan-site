@@ -16,6 +16,7 @@ export function Footer() {
         <div className="mt-8 border-t border-sage/15 pt-6">
           <a
             href={OUEN_ARCHIVE_URL}
+            rel="noopener noreferrer"
             className="inline-flex min-h-[44px] items-center gap-1.5 text-sm text-ink-muted underline decoration-sage/50 underline-offset-4 transition hover:text-sage"
           >
             <span aria-hidden="true">←</span>

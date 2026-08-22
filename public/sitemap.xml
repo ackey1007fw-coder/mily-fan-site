@@ -11,6 +11,31 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://mily-fan-site.vercel.app/activities/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://mily-fan-site.vercel.app/activities/miss-circle/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mily-fan-site.vercel.app/activities/radio/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mily-fan-site.vercel.app/activities/live/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mily-fan-site.vercel.app/activities/campus-girls/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://mily-fan-site.vercel.app/stories/2026-08-18-radio/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

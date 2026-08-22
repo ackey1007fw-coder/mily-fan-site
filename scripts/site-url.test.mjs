@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  activitiesUrl,
+  activityUrl,
   canonicalUrl,
   ogImageUrl,
   profileUrl,
@@ -10,6 +12,7 @@ import {
   sitemapXml,
   storyUrl,
 } from "../src/data/site.ts";
+import { activities } from "../src/data/activities.ts";
 import { verifySiteUrlConsistency } from "./check-site-url.mjs";
 
 describe("site.siteUrl metadata source of truth", () => {
@@ -18,6 +21,10 @@ describe("site.siteUrl metadata source of truth", () => {
     assert.equal(origin, "https://mily-fan-site.vercel.app");
     assert.equal(canonicalUrl(), `${origin}/`);
     assert.equal(profileUrl(), `${origin}/profile/`);
+    assert.equal(activitiesUrl(), `${origin}/activities/`);
+    for (const activity of activities) {
+      assert.equal(activityUrl(activity.route), `${origin}${activity.route}`);
+    }
     assert.equal(
       storyUrl("second-round-2026"),
       `${origin}/stories/second-round-2026/`,
@@ -26,6 +33,13 @@ describe("site.siteUrl metadata source of truth", () => {
     assert.match(robotsTxt(), new RegExp(`Sitemap: ${origin}/sitemap.xml`));
     assert.match(sitemapXml(), new RegExp(`<loc>${canonicalUrl()}</loc>`));
     assert.match(sitemapXml(), new RegExp(`<loc>${profileUrl()}</loc>`));
+    assert.match(sitemapXml(), new RegExp(`<loc>${activitiesUrl()}</loc>`));
+    for (const activity of activities) {
+      assert.match(
+        sitemapXml(),
+        new RegExp(`<loc>${activityUrl(activity.route)}</loc>`),
+      );
+    }
     assert.match(
       sitemapXml(),
       new RegExp(`<loc>${storyUrl("second-round-2026")}</loc>`),

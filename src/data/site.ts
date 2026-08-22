@@ -1,3 +1,5 @@
+import { activities, type ActivityRoute } from "./activities.ts";
+
 export const site = {
   repoName: "mily-fan-site",
   repoFullName: "ackey1007fw-coder/mily-fan-site",
@@ -29,6 +31,14 @@ export function profileUrl(): string {
   return `${siteOrigin()}/profile/`;
 }
 
+export function activitiesUrl(): string {
+  return `${siteOrigin()}/activities/`;
+}
+
+export function activityUrl(route: ActivityRoute): string {
+  return `${siteOrigin()}${route}`;
+}
+
 export function storyUrl(slug: string): string {
   return `${siteOrigin()}/stories/${slug}/`;
 }
@@ -58,6 +68,20 @@ export function sitemapXml(): string {
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>${activitiesUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+${activities
+  .map(
+    (activity) => `  <url>
+    <loc>${activityUrl(activity.route)}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+`,
+  )
+  .join("")}  <url>
     <loc>${storyUrl("2026-08-18-radio")}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

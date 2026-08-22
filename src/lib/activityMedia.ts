@@ -15,16 +15,11 @@ import {
 } from "../data/galleryVideos.ts";
 import { stories, type Story, type StoryMedia } from "../data/stories.ts";
 
-export type ActivityTaggedNewsItem = NewsItem & {
-  /** Introduced gradually in P3; absent means deliberately unclassified. */
-  activityIds?: ActivityId[];
-};
-
 export type ActivityMediaItem = NewsMedia | StoryMedia | GalleryVideoItem;
 
 export type ActivityMediaSources = {
   activityRecords?: Activity[];
-  newsItems?: ActivityTaggedNewsItem[];
+  newsItems?: NewsItem[];
   storyItems?: Story[];
   galleryItems?: GalleryVideoItem[];
 };
@@ -55,15 +50,13 @@ export function selectActivityMedia(
   sources: ActivityMediaSources = {},
 ): ActivityMediaItem[] {
   const activityRecords = sources.activityRecords ?? activities;
-  const newsItems: ActivityTaggedNewsItem[] = sources.newsItems ?? news;
+  const newsItems = sources.newsItems ?? news;
   const storyItems = sources.storyItems ?? stories;
   const galleryItems = sources.galleryItems ?? galleryVideos;
   const activity = activityRecords.find(({ id }) => id === activityId);
   if (!activity) return [];
 
-  const relatedNewsMedia = (
-    sortNewsByDateDesc(newsItems) as ActivityTaggedNewsItem[]
-  )
+  const relatedNewsMedia = sortNewsByDateDesc(newsItems)
     .filter((item) => item.activityIds?.includes(activityId))
     .flatMap((item) => (item.media ? [item.media] : []));
 
