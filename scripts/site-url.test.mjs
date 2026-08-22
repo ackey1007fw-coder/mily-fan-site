@@ -11,6 +11,7 @@ import {
   siteOrigin,
   sitemapXml,
   storyUrl,
+  supportUrl,
 } from "../src/data/site.ts";
 import { activities } from "../src/data/activities.ts";
 import { verifySiteUrlConsistency } from "./check-site-url.mjs";
@@ -22,6 +23,7 @@ describe("site.siteUrl metadata source of truth", () => {
     assert.equal(canonicalUrl(), `${origin}/`);
     assert.equal(profileUrl(), `${origin}/profile/`);
     assert.equal(activitiesUrl(), `${origin}/activities/`);
+    assert.equal(supportUrl(), `${origin}/support/`);
     for (const activity of activities) {
       assert.equal(activityUrl(activity.route), `${origin}${activity.route}`);
     }
@@ -34,6 +36,7 @@ describe("site.siteUrl metadata source of truth", () => {
     assert.match(sitemapXml(), new RegExp(`<loc>${canonicalUrl()}</loc>`));
     assert.match(sitemapXml(), new RegExp(`<loc>${profileUrl()}</loc>`));
     assert.match(sitemapXml(), new RegExp(`<loc>${activitiesUrl()}</loc>`));
+    assert.match(sitemapXml(), new RegExp(`<loc>${supportUrl()}</loc>`));
     for (const activity of activities) {
       assert.match(
         sitemapXml(),

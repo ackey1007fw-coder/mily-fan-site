@@ -6,6 +6,10 @@ import {
   activityPageMetadata,
   activityPageStructuredData,
 } from "./src/lib/activityMetadata.ts";
+import {
+  supportPageMetadata,
+  supportPageStructuredData,
+} from "./src/lib/supportMetadata.ts";
 
 function siteMetadataPlugin(): Plugin {
   return {
@@ -49,6 +53,16 @@ function siteMetadataPlugin(): Plugin {
             ? JSON.stringify(activityPageStructuredData(context.path), null, 2)
             : "",
         )
+        .replaceAll("__SUPPORT_PAGE_TITLE__", supportPageMetadata.title)
+        .replaceAll(
+          "__SUPPORT_PAGE_DESCRIPTION__",
+          supportPageMetadata.description,
+        )
+        .replaceAll("__SUPPORT_CANONICAL__", supportPageMetadata.canonical)
+        .replaceAll(
+          "__SUPPORT_JSON_LD__",
+          JSON.stringify(supportPageStructuredData(), null, 2),
+        )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -78,6 +92,7 @@ export default defineConfig({
         home: "index.html",
         profile: "profile/index.html",
         activities: "activities/index.html",
+        support: "support/index.html",
         activityMissCircle: "activities/miss-circle/index.html",
         activityRadio: "activities/radio/index.html",
         activityLive: "activities/live/index.html",

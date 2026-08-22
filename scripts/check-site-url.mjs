@@ -12,6 +12,7 @@ import {
   siteOrigin,
   sitemapXml,
   storyUrl,
+  supportUrl,
 } from "../src/data/site.ts";
 import { activities } from "../src/data/activities.ts";
 
@@ -30,6 +31,7 @@ export function verifySiteUrlConsistency() {
   const origin = siteOrigin();
   const canonical = canonicalUrl();
   const profileCanonical = profileUrl();
+  const supportCanonical = supportUrl();
   const activityPages = [
     {
       canonical: activitiesUrl(),
@@ -53,6 +55,7 @@ export function verifySiteUrlConsistency() {
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
+  const supportHtml = readRelative("support/index.html");
   const storyHtml = readRelative("stories/second-round-2026/index.html");
   const radioStoryHtml = readRelative("stories/2026-08-18-radio/index.html");
   const resultStoryHtml = readRelative(
@@ -95,6 +98,24 @@ export function verifySiteUrlConsistency() {
   }
   if (!profileHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("profile/index.html images must use __SITE_OG_IMAGE__");
+  }
+  if (!supportHtml.includes('href="__SUPPORT_CANONICAL__"')) {
+    errors.push("support/index.html canonical href must use __SUPPORT_CANONICAL__");
+  }
+  if (
+    !supportHtml.includes('property="og:url"') ||
+    !supportHtml.includes('content="__SUPPORT_CANONICAL__"')
+  ) {
+    errors.push("support/index.html og:url must use __SUPPORT_CANONICAL__");
+  }
+  if (!supportHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("support/index.html images must use __SITE_OG_IMAGE__");
+  }
+  if (!supportHtml.includes("__SUPPORT_JSON_LD__")) {
+    errors.push("support/index.html must include generated JSON-LD");
+  }
+  if (!supportHtml.includes("非公式")) {
+    errors.push("Support metadata must state that the site is unofficial");
   }
   if (!storyHtml.includes('href="__STORY_SECOND_ROUND_CANONICAL__"')) {
     errors.push("story canonical href must use __STORY_SECOND_ROUND_CANONICAL__");
@@ -193,6 +214,9 @@ export function verifySiteUrlConsistency() {
   if (!sitemap.includes(`<loc>${profileCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the profile canonical URL");
   }
+  if (!sitemap.includes(`<loc>${supportCanonical}</loc>`)) {
+    errors.push("public/sitemap.xml must include the Support canonical URL");
+  }
   if (!sitemap.includes(`<loc>${storyCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the story canonical URL");
   }
@@ -229,6 +253,13 @@ export function verifySiteUrlConsistency() {
   ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
   }
+  if (
+    !viteConfig.includes("supportPageMetadata.canonical") ||
+    !viteConfig.includes("supportPageStructuredData()") ||
+    !viteConfig.includes('support: "support/index.html"')
+  ) {
+    errors.push("vite.config.ts must include Support metadata and its physical input");
+  }
   for (const activityPage of activityPages) {
     if (!viteConfig.includes(activityPage.input)) {
       errors.push(`vite.config.ts must include the physical input for ${activityPage.label}`);
@@ -244,6 +275,11 @@ export function verifySiteUrlConsistency() {
   if (hardcodedOrigin.test(profileHtml)) {
     errors.push(
       "profile/index.html must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
+  if (hardcodedOrigin.test(supportHtml)) {
+    errors.push(
+      "support/index.html must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
   if (hardcodedOrigin.test(storyHtml)) {
@@ -275,6 +311,7 @@ export function verifySiteUrlConsistency() {
   if (
     !canonical.startsWith(origin) ||
     !profileCanonical.startsWith(origin) ||
+    !supportCanonical.startsWith(origin) ||
     !storyCanonical.startsWith(origin) ||
     !radioStoryCanonical.startsWith(origin) ||
     !resultStoryCanonical.startsWith(origin) ||
