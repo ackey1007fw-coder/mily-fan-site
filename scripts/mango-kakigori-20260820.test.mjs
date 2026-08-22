@@ -136,25 +136,14 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.ok(item);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
-    assert.equal(
-      feed.items[2].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
+    const latestIds = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const feedNewsIds = feed.items
+      .filter((entry) => entry.type === "news")
+      .map((entry) => entry.id.replace(/^mily:news:/, ""));
+    assert.deepEqual(
+      feedNewsIds,
+      latestIds.filter((id) => feedNewsIds.includes(id)),
     );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-22-evening-showroom-fanroom");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-22-night-showroom-fanroom");
-    assert.equal(
-      feed.items[5].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[7].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[8].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[9].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[10].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[11].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
-    assert.equal(feed.items[12].id, item.id);
   });
 });
 

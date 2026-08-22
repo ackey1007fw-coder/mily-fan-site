@@ -253,6 +253,36 @@ describe("Portal Feed generation", () => {
     assert.ok(feed.items.some((item) => item.id === "mily:event:started-today"));
   });
 
+  it("preserves Latest same-day news chronology without inventing publication times", () => {
+    const feed = createFixtureFeed({
+      newsItems: [
+        newsFixture({ id: "later-unranked", date: "2026-08-21" }),
+        newsFixture({
+          id: "earlier-ranked",
+          date: "2026-08-21",
+          sameDayOrder: 2,
+        }),
+        newsFixture({
+          id: "middle-ranked",
+          date: "2026-08-21",
+          sameDayOrder: 1,
+        }),
+      ],
+    });
+
+    assert.deepEqual(
+      feed.items.map((item) => item.id),
+      [
+        "mily:news:earlier-ranked",
+        "mily:news:middle-ranked",
+        "mily:news:later-unranked",
+      ],
+    );
+    assert.ok(
+      feed.items.every((item) => item.publishedAt === "2026-08-21T00:00:00+09:00"),
+    );
+  });
+
   it("keeps stable IDs and deterministic tie ordering across generations", () => {
     const input = {
       newsItems: [
@@ -262,7 +292,7 @@ describe("Portal Feed generation", () => {
     };
     const first = createFixtureFeed(input);
     const second = createFixtureFeed(input);
-    const expected = ["mily:news:a-update", "mily:news:z-update"];
+    const expected = ["mily:news:z-update", "mily:news:a-update"];
 
     assert.deepEqual(first.items.map((item) => item.id), expected);
     assert.deepEqual(

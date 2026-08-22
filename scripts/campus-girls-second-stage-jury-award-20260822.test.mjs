@@ -309,9 +309,13 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(newsEntry.image, image);
     assert.equal(storyEntry.url, `${siteOrigin()}/stories/${slug}/`);
     assert.equal(storyEntry.image, image);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
-    assert.equal(feed.items[2].id, `mily:news:${newsId}`);
-    assert.equal(feed.items[5].id, `mily:story:${slug}`);
+    const ids = feed.items.map((item) => item.id);
+    assert.ok(ids.includes(`mily:news:${newsId}`));
+    assert.ok(ids.includes(`mily:story:${slug}`));
+    assert.ok(
+      ids.indexOf(`mily:news:${newsId}`) >
+        ids.indexOf("mily:news:2026-08-22-evening-showroom-fanroom"),
+    );
+    assert.ok(ids.indexOf(`mily:story:${slug}`) > ids.indexOf(`mily:news:${newsId}`));
   });
 });

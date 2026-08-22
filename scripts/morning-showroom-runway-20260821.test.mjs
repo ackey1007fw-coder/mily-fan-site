@@ -326,22 +326,13 @@ describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", ()
     assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.ok(entry.image?.endsWith(morningShowroomRunwayVideo.poster));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
-    assert.equal(
-      feed.items[2].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
+    const latestIds = sortNewsByDateDesc(news).map((item) => item.id);
+    const feedNewsIds = feed.items
+      .filter((item) => item.type === "news")
+      .map((item) => item.id.replace(/^mily:news:/, ""));
+    assert.deepEqual(
+      feedNewsIds,
+      latestIds.filter((id) => feedNewsIds.includes(id)),
     );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-22-evening-showroom-fanroom");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-22-night-showroom-fanroom");
-    assert.equal(
-      feed.items[5].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[7].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[8].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[9].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[10].id, entry.id);
   });
 });

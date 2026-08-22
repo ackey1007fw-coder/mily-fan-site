@@ -4,7 +4,7 @@ import {
   isValidDateTime,
   type FanEvent,
 } from "./events.ts";
-import { news, type NewsItem } from "./news.ts";
+import { news, sortNewsByDateDesc, type NewsItem } from "./news.ts";
 import { canonicalUrl, site, siteOrigin, storyUrl } from "./site.ts";
 import { stories, type Story } from "./stories.ts";
 
@@ -214,12 +214,52 @@ function compareStableId(a: PortalFeedItem, b: PortalFeedItem): number {
   return 0;
 }
 
+const NEWS_EDITORIAL_RANKS = Symbol("newsEditorialRanks");
+
+type PortalFeedWithEditorialRanks = PortalFeed & {
+  [NEWS_EDITORIAL_RANKS]?: ReadonlyMap<string, number>;
+};
+
+function newsEditorialRanks(newsItems: NewsItem[]): ReadonlyMap<string, number> {
+  return new Map(
+    sortNewsByDateDesc(newsItems).map((item, index) => [
+      `${PORTAL_PERSON_ID}:news:${item.id}`,
+      index,
+    ]),
+  );
+}
+
+function comparePortalItems(
+  a: PortalFeedItem,
+  b: PortalFeedItem,
+  editorialRanks?: ReadonlyMap<string, number>,
+): number {
+  const byPublishedAt = Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
+  if (byPublishedAt !== 0) return byPublishedAt;
+
+  if (editorialRanks) {
+    const rankA = editorialRanks.get(a.id);
+    const rankB = editorialRanks.get(b.id);
+    if (rankA !== undefined && rankB !== undefined && rankA !== rankB) {
+      return rankA - rankB;
+    }
+  }
+
+  return compareStableId(a, b);
+}
+
 export function comparePortalItemsByPublishedAt(
   a: PortalFeedItem,
   b: PortalFeedItem,
 ): number {
-  const byPublishedAt = Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
-  return byPublishedAt !== 0 ? byPublishedAt : compareStableId(a, b);
+  return comparePortalItems(a, b);
+}
+
+function byPublishedAtThenNewsEditorialOrder(
+  editorialRanks?: ReadonlyMap<string, number>,
+) {
+  return (a: PortalFeedItem, b: PortalFeedItem) =>
+    comparePortalItems(a, b, editorialRanks);
 }
 
 function tokyoDayNumber(value: Date): number {
@@ -242,11 +282,13 @@ export function selectPortalFeedItems(
   items: PortalFeedItem[],
   now = new Date(),
   limit = PORTAL_FEED_LIMIT,
+  editorialRanks?: ReadonlyMap<string, number>,
 ): PortalFeedItem[] {
   if (!Number.isInteger(limit) || limit < 0) {
     throw new Error(`Portal Feed limit must be a non-negative integer (got ${limit})`);
   }
 
+  const compare = byPublishedAtThenNewsEditorialOrder(editorialRanks);
   const today = tokyoDayNumber(now);
   const priorityEvents = items
     .filter(
@@ -264,10 +306,10 @@ export function selectPortalFeedItems(
   const selectedIds = new Set(priorityEvents.map((item) => item.id));
   const remaining = items
     .filter((item) => !selectedIds.has(item.id))
-    .sort(comparePortalItemsByPublishedAt)
+    .sort(compare)
     .slice(0, Math.max(0, limit - priorityEvents.length));
 
-  return [...priorityEvents, ...remaining].sort(comparePortalItemsByPublishedAt);
+  return [...priorityEvents, ...remaining].sort(compare);
 }
 
 export function assertPortalFeedContract(feed: PortalFeed): void {
@@ -306,7 +348,8 @@ export function assertPortalFeedContract(feed: PortalFeed): void {
     if (item.sourceUrl) requireHttpUrl(item.sourceUrl, `item "${item.id}" sourceUrl`);
   }
 
-  const sorted = [...feed.items].sort(comparePortalItemsByPublishedAt);
+  const ranks = (feed as PortalFeedWithEditorialRanks)[NEWS_EDITORIAL_RANKS];
+  const sorted = [...feed.items].sort(byPublishedAtThenNewsEditorialOrder(ranks));
   if (sorted.some((item, index) => item.id !== feed.items[index]?.id)) {
     throw new Error("Portal Feed items must be sorted by publishedAt newest first");
   }
@@ -315,22 +358,25 @@ export function assertPortalFeedContract(feed: PortalFeed): void {
 export function createPortalFeed(input: CreatePortalFeedInput = {}): PortalFeed {
   const now = input.now ?? new Date();
   const generatedAt = input.generatedAt ?? now.toISOString();
+  const newsItems = input.newsItems ?? news;
+  const editorialRanks = newsEditorialRanks(newsItems);
   const candidates = [
-    ...(input.newsItems ?? news).map(newsToPortalItem),
+    ...newsItems.map(newsToPortalItem),
     ...(input.storyItems ?? stories)
       .filter((story) => story.published)
       .map(storyToPortalItem),
     ...(input.eventItems ?? events).map(eventToPortalItem),
   ];
 
-  const feed: PortalFeed = {
+  const feed: PortalFeedWithEditorialRanks = {
     version: PORTAL_FEED_VERSION,
     personId: PORTAL_PERSON_ID,
     siteName: site.displayTitle,
     siteUrl: canonicalUrl(),
     generatedAt,
-    items: selectPortalFeedItems(candidates, now),
+    items: selectPortalFeedItems(candidates, now, PORTAL_FEED_LIMIT, editorialRanks),
   };
+  feed[NEWS_EDITORIAL_RANKS] = editorialRanks;
 
   assertPortalFeedContract(feed);
   return feed;

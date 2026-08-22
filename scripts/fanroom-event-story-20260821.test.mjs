@@ -406,27 +406,24 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
 
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
     const feed = createPortalFeed();
+    const fanroom = feed.items.find((item) => item.id === `mily:news:${FANROOM_NEWS_ID}`);
+    const story = feed.items.find((item) => item.id === `mily:news:${STORY_NEWS_ID}`);
+    const latestIds = sortNewsByDateDesc(news).map((item) => item.id);
+    const feedNewsIds = feed.items
+      .filter((item) => item.type === "news")
+      .map((item) => item.id.replace(/^mily:news:/, ""));
 
-    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
-    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
-    assert.equal(
-      feed.items[2].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
+    assert.deepEqual(
+      feedNewsIds,
+      latestIds.filter((id) => feedNewsIds.includes(id)),
     );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-22-evening-showroom-fanroom");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-22-night-showroom-fanroom");
-    assert.equal(
-      feed.items[5].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[7].id, `mily:news:${FANROOM_NEWS_ID}`);
-    assert.equal(feed.items[8].id, `mily:news:${STORY_NEWS_ID}`);
-    assert.ok(feed.items[7].image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
-    assert.ok(feed.items[8].image?.endsWith(eventStory20260821.poster));
-    assert.equal(feed.items[7].sourceUrl, undefined);
+    assert.ok(fanroom);
+    assert.ok(story);
+    assert.ok(fanroom.image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
+    assert.ok(story.image?.endsWith(eventStory20260821.poster));
+    assert.equal(fanroom.sourceUrl, undefined);
     // Portal Feedは既存仕様でNewsのrelated `url`を外部導線として直マップする。
-    assert.equal(feed.items[8].sourceUrl, INSTAGRAM_PROFILE);
+    assert.equal(story.sourceUrl, INSTAGRAM_PROFILE);
     assert.doesNotMatch(eventStory20260821.src, /instagram|google|twitter|x\.com/i);
     assert.doesNotMatch(eventStory20260821.poster, /instagram|google|twitter|x\.com/i);
   });

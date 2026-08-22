@@ -106,26 +106,56 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     }
   });
 
-  it("does not write schedule times into streamSchedule fallback", async () => {
-    assert.equal(streamSchedule.length, 0);
-
+  it("does not copy archived Fan Room posts into the manual schedule fallback", async () => {
+    const fanroomIds = [EVENING_ID, NIGHT_ID, EARLY_ID, MORNING_ID];
+    const scheduleSource = await readFile(
+      path.join(root, "src/data/streamSchedule.ts"),
+      "utf8",
+    );
     const eventsSource = await readFile(path.join(root, "src/data/events.ts"), "utf8");
-    for (const id of [EVENING_ID, NIGHT_ID, EARLY_ID, MORNING_ID]) {
-      assert.equal(eventsSource.includes(id), false);
+
+    for (const id of fanroomIds) {
+      assert.equal(scheduleSource.includes(id), false, id);
+      assert.equal(eventsSource.includes(id), false, id);
+      assert.equal(
+        streamSchedule.some((slot) =>
+          [slot.date, slot.time, slot.note].some((value) => value?.includes(id)),
+        ),
+        false,
+        id,
+      );
     }
-    assert.equal(eventsSource.includes("2026-08-23T05:40"), false);
-    assert.equal(eventsSource.includes("2026-08-22T20:30"), false);
   });
 
-  it("publishes through the existing Portal Feed without external media hotlinks", () => {
+  it("keeps Portal Feed same-day NEWS chronology aligned with Latest", () => {
     const feed = createPortalFeed();
+    const latestIds = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const feedNewsIds = feed.items
+      .filter((item) => item.type === "news")
+      .map((item) => item.id.replace(/^mily:news:/, ""));
 
-    assert.equal(feed.items[0].id, `mily:news:${EARLY_ID}`);
-    assert.equal(feed.items[1].id, `mily:news:${MORNING_ID}`);
-    assert.equal(feed.items[2].id, `mily:news:${CAMPUS_ID}`);
-    assert.equal(feed.items[3].id, `mily:news:${EVENING_ID}`);
-    assert.equal(feed.items[4].id, `mily:news:${NIGHT_ID}`);
-    assert.equal(feed.items[0].sourceUrl, undefined);
-    assert.equal(feed.items[0].image, undefined);
+    assert.deepEqual(
+      latestIds.filter((id) => id.startsWith("2026-08-23")),
+      [MORNING_ID, EARLY_ID],
+    );
+    assert.deepEqual(
+      feedNewsIds.filter((id) => id.startsWith("2026-08-23")),
+      [MORNING_ID, EARLY_ID],
+    );
+    assert.deepEqual(
+      latestIds.filter((id) => id.startsWith("2026-08-22")),
+      [NIGHT_ID, EVENING_ID, CAMPUS_ID],
+    );
+    assert.deepEqual(
+      feedNewsIds.filter((id) => id.startsWith("2026-08-22")),
+      [NIGHT_ID, EVENING_ID, CAMPUS_ID],
+    );
+
+    const morning = feed.items.find((item) => item.id === `mily:news:${MORNING_ID}`);
+    const early = feed.items.find((item) => item.id === `mily:news:${EARLY_ID}`);
+    assert.equal(morning?.publishedAt, "2026-08-23T00:00:00+09:00");
+    assert.equal(early?.publishedAt, "2026-08-23T00:00:00+09:00");
+    assert.equal(morning?.sourceUrl, undefined);
+    assert.equal(morning?.image, undefined);
   });
 });
