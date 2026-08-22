@@ -65,6 +65,7 @@ export const activities: Activity[] = [
       "fm-smw-mily-profile",
       "fm-smw-ssc-program",
       "fm-smw-ssc-instagram",
+      "fm-smw-ssc-tiktok",
     ],
     relatedHighlightIds: [],
     relatedStorySlugs: ["2026-08-18-radio"],
