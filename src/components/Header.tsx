@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { events } from "../data/events";
 import { profile } from "../data/profile";
 import { hubNavigation, sectionNavigation } from "../lib/navigation";
@@ -17,12 +18,63 @@ const compactHubLink =
 const compactSectionLink =
   "inline-flex min-h-11 shrink-0 items-center rounded-full bg-sage-soft px-3 py-2 text-sm text-sage-deep";
 
+/** 見出しがヘッダーに接しないための余白。 */
+const HEADER_OFFSET_GAP_PX = 8;
+
+/**
+ * ヘッダーの実測高さを `--header-offset` として公開する。
+ *
+ * ヘッダーはnav pillの折り返しで高さが変わり、段数は幅と項目数
+ * （`events.length` で「スケジュール」が増減する）に依存する。
+ * breakpointごとの固定オフセットでは将来の項目追加で必ず破綻するので、
+ * 実測値をそのまま各sectionの `scroll-margin-top` に渡す。
+ */
+function useHeaderOffset(ref: React.RefObject<HTMLElement>) {
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const root = document.documentElement;
+    const apply = () => {
+      const height = Math.ceil(element.getBoundingClientRect().height);
+      root.style.setProperty(
+        "--header-offset",
+        `${height + HEADER_OFFSET_GAP_PX}px`,
+      );
+    };
+
+    apply();
+
+    // ResizeObserver が無い環境では resize だけで追従する（値は必ず入る）。
+    if (typeof ResizeObserver === "undefined") {
+      window.addEventListener("resize", apply);
+      return () => {
+        window.removeEventListener("resize", apply);
+        root.style.removeProperty("--header-offset");
+      };
+    }
+
+    const observer = new ResizeObserver(apply);
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--header-offset");
+    };
+  }, [ref]);
+}
+
 export function Header() {
   const hubItems = hubNavigation();
   const sectionItems = sectionNavigation(events.length);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useHeaderOffset(headerRef);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur"
+    >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2.5">
         <a href="#top" className="min-w-0 font-semibold tracking-wide text-sage-deep">
           {profile.displayName}

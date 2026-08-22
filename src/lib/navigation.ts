@@ -1,15 +1,18 @@
 /**
  * ホーム内anchorのスクロールオフセット。
  *
- * ヘッダーは `md` 未満でnav pillが複数段になり、実測で
- * 320px=203px / 390〜640px=151px / 640〜767px=99px / 768px以上=57px の高さになる。
- * `scroll-mt-24`（96px）のままだと、`md` 未満で #latest や #stories へ移動したとき
- * 見出しがヘッダーの下へ隠れる。段数に合わせて各breakpointでオフセットを取る。
+ * ヘッダーの高さは幅とnav項目数で変わる。項目数は `events.length` に依存し
+ * （`events` が非空になると「スケジュール」pillが増える）、実測では
+ * 8項目のとき 320〜390px=203px / 430〜767px=151px / **768px以上=97px** になる。
+ * breakpointごとの固定値では 768px以上の 97px を `scroll-mt-24`（96px）で
+ * 賄えず、将来項目が増えるたびに見直しが必要になる。
  *
- * 値を変えるときは `scripts/top-integration.test.mjs` の実測前提も合わせて見直す。
+ * そこで固定値をやめ、`Header` が描画後の実測高さを CSS custom property
+ * `--header-offset` へ書き込み、各sectionはそれを参照する。
+ * 幅・項目数・フォントが変わっても常に実際のヘッダーより下へ着地する。
+ * 既定値は `src/index.css` の `:root`（JS実行前のフォールバック）。
  */
-export const SECTION_ANCHOR_OFFSET =
-  "scroll-mt-52 sm:scroll-mt-40 md:scroll-mt-24";
+export const SECTION_ANCHOR_OFFSET = "[scroll-margin-top:var(--header-offset)]";
 
 export type NavItem = {
   href: string;

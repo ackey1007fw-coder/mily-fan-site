@@ -512,26 +512,75 @@ describe("P6 home NOW stays compact", () => {
   });
 });
 
-describe("P6 anchor targets clear the wrapped mobile header", () => {
+describe("P6 anchor targets clear the wrapped header", () => {
   /**
-   * Chromiumでの実測ヘッダー高さ（`md` 未満はnav pillが折り返す）:
-   *   320px = 203px / 390-640px = 151px / 640-767px = 99px / 768px以上 = 57px
-   * オフセットはこれを上回る必要がある。
+   * Chromiumでの実測ヘッダー高さ。段数は幅とnav項目数で変わり、
+   * 項目数は `events.length`（非空なら「スケジュール」pillが増える）に依存する。
+   *
+   *   events 空 (7項目): 320-360=203 / 390-640=151 / 700-767=99 / 768+=57
+   *   events 非空(8項目): 320-390=203 / 430-767=151 / 768+=97
    */
-  const OFFSET_PX = { base: 208, sm: 160, md: 96 }; // scroll-mt-52 / 40 / 24
-  const HEADER_PX = { base: 203, sm: 151, md: 57 };
+  const HEADER_PX = {
+    withoutSchedule: { 320: 203, 390: 151, 640: 151, 700: 99, 768: 57, 1280: 57 },
+    withSchedule: { 320: 203, 390: 203, 640: 151, 700: 151, 768: 97, 1280: 97 },
+  };
+  const WORST_HEADER_PX = Math.max(
+    ...Object.values(HEADER_PX).flatMap((byWidth) => Object.values(byWidth)),
+  );
+  const CSS_FALLBACK_PX = 13 * 16; // index.css の `--header-offset: 13rem`
 
-  it("offsets each breakpoint past the header height it can reach", () => {
-    assert.equal(SECTION_ANCHOR_OFFSET, "scroll-mt-52 sm:scroll-mt-40 md:scroll-mt-24");
-    for (const key of ["base", "sm", "md"]) {
+  it("derives the offset from the measured header instead of fixed breakpoints", () => {
+    // 固定値をやめたので、項目が増えてもオフセット側の見直しが要らない
+    assert.equal(SECTION_ANCHOR_OFFSET, "[scroll-margin-top:var(--header-offset)]");
+    assert.doesNotMatch(SECTION_ANCHOR_OFFSET, /scroll-mt-/);
+
+    // 旧実装（`md:scroll-mt-24` = 96px）は events 非空の 768px 以上で足りなかった
+    assert.ok(HEADER_PX.withSchedule[768] > 96);
+    // 旧実装の base（`scroll-mt-52` = 208px）は最悪ケースをかろうじて超えるだけ
+    assert.ok(208 - WORST_HEADER_PX < 8);
+  });
+
+  it("keeps a CSS fallback that clears the tallest measured header", () => {
+    const css = source("src/index.css");
+    assert.match(css, /--header-offset:\s*13rem;/);
+    assert.ok(
+      CSS_FALLBACK_PX >= WORST_HEADER_PX,
+      `fallback ${CSS_FALLBACK_PX}px must clear the ${WORST_HEADER_PX}px header`,
+    );
+  });
+
+  it("publishes the measured height from the Header, with cleanup", () => {
+    const header = source("src/components/Header.tsx");
+    assert.match(header, /const HEADER_OFFSET_GAP_PX = 8;/);
+    assert.match(header, /ResizeObserver/);
+    assert.match(header, /setProperty\(\s*"--header-offset",/);
+    assert.match(header, /\$\{height \+ HEADER_OFFSET_GAP_PX\}px/);
+    assert.match(header, /getBoundingClientRect\(\)\.height/);
+    assert.match(header, /Math\.ceil/);
+    // unmount と非対応環境の後始末
+    assert.match(header, /observer\.disconnect\(\)/);
+    assert.match(header, /removeProperty\("--header-offset"\)/);
+    assert.match(header, /typeof ResizeObserver === "undefined"/);
+    assert.match(header, /ref=\{headerRef\}/);
+  });
+
+  it("stays correct when the optional スケジュール pill appears", () => {
+    // `events` が非空になると項目が1つ増える
+    const withoutSchedule = sectionNavigation(0);
+    const withSchedule = sectionNavigation(1);
+    assert.equal(withSchedule.length, withoutSchedule.length + 1);
+    assert.ok(withSchedule.some(({ href }) => href === "#schedule"));
+    assert.equal(withoutSchedule.some(({ href }) => href === "#schedule"), false);
+
+    // 追加後もヘッダーは実測で fallback 以下に収まる
+    for (const [width, height] of Object.entries(HEADER_PX.withSchedule)) {
       assert.ok(
-        OFFSET_PX[key] >= HEADER_PX[key],
-        `${key}: offset ${OFFSET_PX[key]}px must clear the ${HEADER_PX[key]}px header`,
+        height <= CSS_FALLBACK_PX,
+        `${width}px: header ${height}px must stay within the ${CSS_FALLBACK_PX}px fallback`,
       );
     }
-    // `md` 未満は 96px では足りない（この修正の理由）
-    assert.ok(HEADER_PX.base > OFFSET_PX.md);
-    assert.ok(HEADER_PX.sm > OFFSET_PX.md);
+    // 項目が増えても参照するオフセットは同じ1つだけ（breakpoint分岐が無い）
+    assert.equal(SECTION_ANCHOR_OFFSET.split(" ").length, 1);
   });
 
   it("uses the shared offset on every home anchor target", () => {
@@ -557,8 +606,8 @@ describe("P6 anchor targets clear the wrapped mobile header", () => {
       );
       assert.doesNotMatch(
         text,
-        /"scroll-mt-24 /,
-        `${file} must not keep the bare 96px offset`,
+        /scroll-mt-\d/,
+        `${file} must not keep a fixed breakpoint offset`,
       );
     }
     // ナビが指すanchorはすべて対象に含まれている
