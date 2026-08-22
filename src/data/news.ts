@@ -69,8 +69,8 @@ export const news: NewsItem[] = [
     date: "2026-08-23",
     sameDayOrder: 2,
     activityIds: ["live-stream", "radio"],
-    title: "朝枠ありがとう！次は22:30〜のメイク配信💄",
-    body: "8月23日のSHOWROOMファンルームで、みりぃが朝配信へのお礼と新規フォロワーへの感謝を伝え、改めて自己紹介しました。次枠22:30〜のメイク配信を案内し、FMラジオへ向かう直前の投稿です。",
+    title: "朝枠ありがとう！次枠は22:30〜💄",
+    body: "8月23日のSHOWROOMファンルームで、みりぃが朝配信へのお礼と新規フォロワーへの感謝を伝え、改めて自己紹介しました。次枠22:30〜を案内し、次はメイクした姿で配信すると伝えています。FMラジオへ向かう直前の投稿です。",
     sourceLabel: "SHOWROOMファンルーム",
     message: {
       label: "みりぃからの連絡💌 · 06:25",
@@ -83,7 +83,7 @@ export const news: NewsItem[] = [
     sameDayOrder: 1,
     activityIds: ["live-stream", "radio"],
     title: "FMラジオ前のFan Room投稿📻",
-    body: "8月23日のSHOWROOMファンルームで、FMラジオ出演前にラジオ配信について軽く書きかけています。",
+    body: "8月23日のSHOWROOMファンルームで、みりぃがFMラジオ前にラジオ配信をしてから行こうかと、ファンルームで問いかけました。",
     sourceLabel: "SHOWROOMファンルーム",
     message: {
       label: "みりぃからの連絡💌 · 05:53",
@@ -108,8 +108,8 @@ export const news: NewsItem[] = [
     date: "2026-08-22",
     sameDayOrder: 1,
     activityIds: ["live-stream"],
-    title: "帰宅報告と夜配信20:30〜の案内☀️",
-    body: "8月22日のSHOWROOMファンルームで、みりぃが帰宅報告とゲリラ豪雨への気遣いを伝え、20:30〜の配信予定を案内しました。翌朝が早いため早めに休む予定も伝えています。",
+    title: "帰宅報告！20:30〜を目標に夜配信☔",
+    body: "8月22日のSHOWROOMファンルームで、みりぃが帰宅報告とゲリラ豪雨への気遣いを伝え、食事とお風呂のあと、20:30〜に配信できるよう頑張りたいと伝えました。翌朝が早いため早めに休む予定も伝えています。",
     sourceLabel: "SHOWROOMファンルーム",
     message: {
       label: "みりぃからの連絡💌 · 18:17",
