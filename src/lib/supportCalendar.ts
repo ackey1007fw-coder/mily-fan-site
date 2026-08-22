@@ -265,11 +265,11 @@ export function adaptFanEvents(items: FanEvent[]): ScheduleItem[] {
     ) {
       return [];
     }
-    const startAllDay = isDateOnly(item.startAt);
-    const start = scheduledParts(item.startAt, startAllDay);
-    const endAllDay = item.endAt !== undefined && isDateOnly(item.endAt);
+    const startDateOnly = isDateOnly(item.startAt);
+    const start = scheduledParts(item.startAt, startDateOnly);
+    const endDateOnly = item.endAt !== undefined && isDateOnly(item.endAt);
     const end = item.endAt
-      ? scheduledParts(item.endAt, endAllDay)
+      ? scheduledParts(item.endAt, endDateOnly)
       : null;
     return [
       {
@@ -278,7 +278,8 @@ export function adaptFanEvents(items: FanEvent[]): ScheduleItem[] {
         startTime: start.time,
         endTime: end?.time ?? null,
         endDate: end?.date ?? null,
-        allDay: startAllDay,
+        // FanEventの日付だけが確認済みでも、終日開催が確認されたことにはしない。
+        allDay: false,
         span: item.endAt ? { start: item.startAt, end: item.endAt } : null,
         timing: item.endAt ? "period" : "start",
         activityId: null,
@@ -362,6 +363,17 @@ export function formatShortTokyoDate(date: string): string {
 export function isCrossDayTimedItem(item: ScheduleItem): boolean {
   return (
     !item.allDay &&
+    item.startTime !== null &&
+    item.endDate !== null &&
+    item.endDate !== item.date
+  );
+}
+
+/** 時刻を推測せず、確認済みの日付範囲だけを示す項目か。 */
+export function isTimeUnconfirmedDateSpan(item: ScheduleItem): boolean {
+  return (
+    !item.allDay &&
+    item.startTime === null &&
     item.endDate !== null &&
     item.endDate !== item.date
   );

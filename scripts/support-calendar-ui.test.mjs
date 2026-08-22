@@ -98,6 +98,18 @@ describe("Support Calendar agenda UI", () => {
     assert.match(page, /item\.allDay && item\.span && item\.span\.start !== item\.span\.end/);
   });
 
+  it("renders date-only FanEvent spans as time-unconfirmed without inventing all-day timing", () => {
+    const page = source("src/SupportPage.tsx");
+    const calendar = source("src/lib/supportCalendar.ts");
+    assert.match(calendar, /allDay: false,[\s\S]*?span: item\.endAt/);
+    assert.match(calendar, /if \(item\.startTime === null\) return "時刻未確認"/);
+    assert.match(page, /isTimeUnconfirmedDateSpan\(item\) && item\.endDate !== null/);
+    assert.match(
+      page,
+      /期間 \{formatShortTokyoDate\(item\.date\)\}〜\{formatShortTokyoDate\(item\.endDate\)\}/,
+    );
+  });
+
   it("shows only confirmed times, safe links, and the radio disclaimer", () => {
     const page = source("src/SupportPage.tsx");
     const calendar = source("src/lib/supportCalendar.ts");

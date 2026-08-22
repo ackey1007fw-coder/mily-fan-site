@@ -20,6 +20,7 @@ import {
   displayStatus,
   formatShortTokyoDate,
   isCrossDayTimedItem,
+  isTimeUnconfirmedDateSpan,
   liveSupportEvents,
   scheduleTimeLabel,
 } from "../src/lib/supportCalendar.ts";
@@ -439,6 +440,49 @@ describe("Support Calendar derivation", () => {
     assert.equal(item.timing, "period");
     assert.equal(scheduleTimeLabel(item), "19:00〜8/25");
     assert.doesNotMatch(scheduleTimeLabel(item), /00:00|23:59|終日/);
+  });
+
+  it("treats date-only FanEvents as time-unconfirmed, not all-day", () => {
+    const [singleDay, dateSpan] = adaptFanEvents([
+      {
+        id: "date-only-fan-event",
+        title: "date-only fixture",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/date-only",
+      },
+      {
+        id: "date-only-span-fan-event",
+        title: "date-only span fixture",
+        listedAt: "2026-08-22",
+        startAt: "2026-08-24",
+        endAt: "2026-08-25",
+        timezone: "Asia/Tokyo",
+        kind: "appearance",
+        source: "https://example.com/date-only-span",
+      },
+    ]);
+
+    assert.equal(singleDay.allDay, false);
+    assert.equal(singleDay.startTime, null);
+    assert.equal(singleDay.endDate, null);
+    assert.equal(scheduleTimeLabel(singleDay), "時刻未確認");
+    assert.doesNotMatch(scheduleTimeLabel(singleDay), /終日|00:00|23:59/);
+
+    assert.equal(dateSpan.allDay, false);
+    assert.equal(dateSpan.startTime, null);
+    assert.equal(dateSpan.endTime, null);
+    assert.equal(dateSpan.endDate, "2026-08-25");
+    assert.deepEqual(dateSpan.span, {
+      start: "2026-08-24",
+      end: "2026-08-25",
+    });
+    assert.equal(scheduleTimeLabel(dateSpan), "時刻未確認");
+    assert.equal(isCrossDayTimedItem(dateSpan), false);
+    assert.equal(isTimeUnconfirmedDateSpan(dateSpan), true);
+    assert.doesNotMatch(scheduleTimeLabel(dateSpan), /終日|00:00|23:59/);
   });
 
   it("keeps point-in-time SupportEvents distinct from interval starts", () => {
