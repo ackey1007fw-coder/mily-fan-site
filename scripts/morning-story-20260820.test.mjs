@@ -73,16 +73,20 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     assert.ok(item());
     // 8/21の新着の後も、8/20同日は既存の配列順を維持する。
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[1], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[2], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[3], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[5], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[6], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[7], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[8], "2026-08-20-morning-message");
-    assert.equal(ordered[9], NEWS_ID);
+    assert.equal(ordered[0], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[1], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[2], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[4], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[5], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[6], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[7], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[8], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[9], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[10], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[11], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[12], "2026-08-20-morning-message");
+    assert.equal(ordered[13], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -348,23 +352,27 @@ describe("2026-08-20 morning Story — Portal Feed", () => {
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, undefined);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
     assert.equal(
-      feed.items[0].id,
+      feed.items[2].id,
       "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
     );
+    assert.equal(feed.items[3].id, "mily:news:2026-08-22-evening-showroom-fanroom");
+    assert.equal(feed.items[4].id, "mily:news:2026-08-22-night-showroom-fanroom");
     assert.equal(
-      feed.items[1].id,
+      feed.items[5].id,
       "mily:story:campus-girls-2027-second-stage-jury-award",
     );
-    assert.equal(feed.items[2].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[7].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
-    assert.equal(feed.items[8].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[9].id, "mily:news:2026-08-20-morning-message");
-    assert.equal(feed.items[10].id, entry.id);
+    assert.equal(feed.items[6].id, "mily:news:2026-08-21-after-afternoon-ganda");
+    assert.equal(feed.items[7].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[8].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[9].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[10].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[11].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
+    assert.equal(feed.items[12].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[13].id, "mily:news:2026-08-20-morning-message");
+    assert.equal(feed.items[14].id, entry.id);
     assert.ok(entry.image?.endsWith(morningStory20260820.poster));
   });
 });

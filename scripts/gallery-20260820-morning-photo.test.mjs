@@ -294,22 +294,26 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
     // Portal Feed は news / stories / events だけを見る。Gallery 追加で image は変わらない。
     assert.ok(entry.image?.endsWith(LATEST_PHOTO));
     assert.equal(entry.sourceUrl, SOURCE);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
     assert.equal(
-      feed.items[0].id,
+      feed.items[2].id,
       "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
     );
+    assert.equal(feed.items[3].id, "mily:news:2026-08-22-evening-showroom-fanroom");
+    assert.equal(feed.items[4].id, "mily:news:2026-08-22-night-showroom-fanroom");
     assert.equal(
-      feed.items[1].id,
+      feed.items[5].id,
       "mily:story:campus-girls-2027-second-stage-jury-award",
     );
-    assert.equal(feed.items[2].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[7].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
-    assert.equal(feed.items[8].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[9].id, entry.id);
+    assert.equal(feed.items[6].id, "mily:news:2026-08-21-after-afternoon-ganda");
+    assert.equal(feed.items[7].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[8].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[9].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[10].id, "mily:news:2026-08-21-morning-showroom-runway");
+    assert.equal(feed.items[11].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
+    assert.equal(feed.items[12].id, "mily:news:2026-08-20-mango-kakigori");
+    assert.equal(feed.items[13].id, entry.id);
     assert.equal(feed.items.some((candidate) => candidate.image?.includes("/media/gallery/mily-b08")), false);
   });
 });

@@ -65,6 +65,58 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-23-morning-showroom-fanroom",
+    date: "2026-08-23",
+    sameDayOrder: 2,
+    activityIds: ["live-stream", "radio"],
+    title: "朝枠ありがとう！次は22:30〜のメイク配信💄",
+    body: "8月23日のSHOWROOMファンルームで、みりぃが朝配信へのお礼と新規フォロワーへの感謝を伝え、改めて自己紹介しました。次枠22:30〜のメイク配信を案内し、FMラジオへ向かう直前の投稿です。",
+    sourceLabel: "SHOWROOMファンルーム",
+    message: {
+      label: "みりぃからの連絡💌 · 06:25",
+      text: "朝配信遅れてごめんなさいー！！！\n\nきてくれたみんなありがとう😌🙏🏻✨\nそして、フォローしてくださった皆様もありがとう🤭✨\n\n改めて、みりぃです！\n\nまた次も来てくれたら嬉しいよ〜♪\n\n次は22:30〜ねー！絶対にメイクしてます😊いつもきてくれている方からすると久しぶりのメイクみりぃ💄だね！\n\n始めてくる方も大歓迎〜！\n\nでは、ラジオ行ってきますー！",
+    },
+  },
+  {
+    id: "2026-08-23-early-showroom-fanroom",
+    date: "2026-08-23",
+    sameDayOrder: 1,
+    activityIds: ["live-stream", "radio"],
+    title: "FMラジオ前のFan Room投稿📻",
+    body: "8月23日のSHOWROOMファンルームで、FMラジオ出演前にラジオ配信について軽く書きかけています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    message: {
+      label: "みりぃからの連絡💌 · 05:53",
+      text: "FMラジオ前にラジオ配信して行っていいかしらね？笑",
+    },
+  },
+  {
+    id: "2026-08-22-night-showroom-fanroom",
+    date: "2026-08-22",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "夜枠ありがとう！明日は朝5:40〜・夜22:30〜🌙",
+    body: "8月22日のSHOWROOMファンルームで、みりぃが夜枠配信へのお礼を伝え、ルームの温かい空間への感謝と、これからも一緒にいろんな景色を見ていきたいという言葉を届けました。翌日の配信予定として朝5:40〜と夜22:30〜を案内しています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    message: {
+      label: "みりぃからの連絡💌 · 22:57",
+      text: "夜枠ありがとうございました！！\n\n等身大の自分でいることができるのは、ルームにいる皆様全員が暖かく、リラックスできる空間を作ってくれているからです😭✨\n\nこれからもみんなと一緒にいろんな景色を見ていきたいよ🥺✊🏻🩵\n\n明日⬇️\n朝☀️5:40〜\n夜🌙22:30〜\n\nよろしくお願いします！",
+    },
+  },
+  {
+    id: "2026-08-22-evening-showroom-fanroom",
+    date: "2026-08-22",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "帰宅報告と夜配信20:30〜の案内☀️",
+    body: "8月22日のSHOWROOMファンルームで、みりぃが帰宅報告とゲリラ豪雨への気遣いを伝え、20:30〜の配信予定を案内しました。翌朝が早いため早めに休む予定も伝えています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    message: {
+      label: "みりぃからの連絡💌 · 18:17",
+      text: "ただいま〜✨\n皆さんゲリラ豪雨大丈夫？？私はポツポツ降ってきたなぁぁぁくらいで家に着いてギリギリセーフだったよ🏠帰宅時間の皆さんお気をつけて〜😭🙌🏻\n\n今からご飯作って食べて、お風呂に入ってその後配信したいからぁ、、、🤔💭\n\n20:30〜\nできるように頑張ろうかなっ！\n\n明日の朝はめちゃくちゃ早いから、流石に早めに寝るように努める🥱",
+    },
+  },
+  {
     id: "2026-08-22-campus-girls-second-stage-jury-award",
     date: "2026-08-22",
     activityIds: ["campus-girls"],

@@ -86,13 +86,15 @@ describe("Portal Feed generation", () => {
     assert.equal(feed.version, 1);
     assert.equal(feed.personId, "mily");
     assert.equal(feed.siteUrl, "https://mily-fan-site.vercel.app/");
+    assert.equal(feed.items.length, PORTAL_FEED_LIMIT);
     assert.equal(
       feed.items.filter((item) => item.type === "news").length,
-      news.length,
+      PORTAL_FEED_LIMIT - feed.items.filter((item) => item.type === "story").length,
     );
-    assert.equal(
-      feed.items.filter((item) => item.type === "story").length,
-      stories.filter((story) => story.published).length,
+    const storiesInFeed = feed.items.filter((item) => item.type === "story").length;
+    assert.ok(storiesInFeed > 0);
+    assert.ok(
+      storiesInFeed <= stories.filter((story) => story.published).length,
     );
     assert.equal(
       feed.items.filter((item) => item.type === "event" || item.type === "schedule")

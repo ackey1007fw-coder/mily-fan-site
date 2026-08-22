@@ -278,14 +278,21 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(JSON.stringify(contest).includes("CAMPUS GIRLS"), false);
   });
 
-  it("leads Latest on 8/22 without inventing a publication-time order", () => {
+  it("keeps the campus milestone on 8/22 after same-day Fan Room updates", () => {
     const item = news.find((entry) => entry.id === newsId);
     assert.ok(item);
     assert.equal(item.date, "2026-08-22");
     assert.equal(item.sameDayOrder, undefined);
     assert.equal(item.source, xSource);
     assert.equal(item.url, `/stories/${slug}/`);
-    assert.equal(sortNewsByDateDesc(news)[0], item);
+    const aug22 = sortNewsByDateDesc(news)
+      .filter((entry) => entry.date === "2026-08-22")
+      .map((entry) => entry.id);
+    assert.deepEqual(aug22, [
+      "2026-08-22-night-showroom-fanroom",
+      "2026-08-22-evening-showroom-fanroom",
+      newsId,
+    ]);
   });
 
   it("flows through the existing Portal Feed as separate NEWS and STORY items", () => {
@@ -293,12 +300,18 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
       now: new Date("2026-08-22T12:00:00+09:00"),
     });
     const image = new URL(campusGirlsSecondStageResultImage.src, siteOrigin()).href;
+    const newsEntry = feed.items.find((entry) => entry.id === `mily:news:${newsId}`);
+    const storyEntry = feed.items.find((entry) => entry.id === `mily:story:${slug}`);
 
-    assert.equal(feed.items[0].id, `mily:news:${newsId}`);
-    assert.equal(feed.items[0].sourceUrl, xSource);
-    assert.equal(feed.items[0].image, image);
-    assert.equal(feed.items[1].id, `mily:story:${slug}`);
-    assert.equal(feed.items[1].url, `${siteOrigin()}/stories/${slug}/`);
-    assert.equal(feed.items[1].image, image);
+    assert.ok(newsEntry);
+    assert.ok(storyEntry);
+    assert.equal(newsEntry.sourceUrl, xSource);
+    assert.equal(newsEntry.image, image);
+    assert.equal(storyEntry.url, `${siteOrigin()}/stories/${slug}/`);
+    assert.equal(storyEntry.image, image);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-23-early-showroom-fanroom");
+    assert.equal(feed.items[1].id, "mily:news:2026-08-23-morning-showroom-fanroom");
+    assert.equal(feed.items[2].id, `mily:news:${newsId}`);
+    assert.equal(feed.items[5].id, `mily:story:${slug}`);
   });
 });
