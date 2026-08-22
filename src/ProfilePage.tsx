@@ -1,5 +1,6 @@
 import { defaultSrc, featuredPhoto, srcSetFor } from "./data/media";
 import { contest } from "./data/contest";
+import { links } from "./data/links";
 import {
   profile,
   profileSources,
@@ -16,6 +17,10 @@ const profileNav = [
   { href: "#timeline", label: "歩み" },
   { href: "#sources", label: "出典" },
 ];
+
+const radioProgramTikTok = links.find(
+  (link) => link.id === "fm-smw-ssc-tiktok",
+);
 
 function formatDate(date: string) {
   const [year, month, day] = date.split("-").map(Number);
@@ -232,6 +237,19 @@ function ProfileActivities() {
                     className="mt-3 inline-flex min-h-11 items-center rounded-full border border-sage/25 bg-paper px-3 py-2 text-xs font-medium leading-snug text-sage-deep hover:bg-sage-soft"
                   >
                     審査段階の出典を見る
+                  </ExternalLink>
+                </div>
+              ) : null}
+              {activity.id === "radio" && radioProgramTikTok ? (
+                <div className="mt-4 rounded-xl border border-sage/15 bg-sage-soft/45 p-4">
+                  <p className="text-xs font-semibold text-sage-deep">
+                    番組側TikTok
+                  </p>
+                  <ExternalLink
+                    href={radioProgramTikTok.url}
+                    className="mt-2 inline-flex min-h-11 items-center rounded-full border border-sage/25 bg-paper px-3 py-2 text-xs font-medium leading-snug text-sage-deep hover:bg-sage-soft"
+                  >
+                    {radioProgramTikTok.label}
                   </ExternalLink>
                 </div>
               ) : null}

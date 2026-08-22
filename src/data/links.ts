@@ -40,4 +40,10 @@ export const links: SiteLink[] = [
     url: "https://www.instagram.com/seasidecircle",
     note: "湘南シーサイドサークル @seasidecircle",
   },
+  {
+    id: "fm-smw-ssc-tiktok",
+    label: "湘南シーサイドサークル TikTok",
+    url: "https://www.tiktok.com/@seasidecircle",
+    note: "湘南シーサイドサークル @seasidecircle",
+  },
 ];

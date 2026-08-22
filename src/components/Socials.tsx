@@ -8,6 +8,7 @@ const FM_LINK_IDS = new Set([
   "fm-smw-mily-profile",
   "fm-smw-ssc-program",
   "fm-smw-ssc-instagram",
+  "fm-smw-ssc-tiktok",
   "fm-smw-staff",
 ]);
 
