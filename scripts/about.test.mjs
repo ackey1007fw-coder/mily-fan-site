@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { profile } from "../src/data/profile.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -46,6 +47,34 @@ describe("detailed profile provenance", () => {
     assert.match(source, /ファン制作・非公式プロフィール/);
     assert.match(source, /<Footer \/>/);
     assert.match(footer, /公式・公認・本人運営ではありません/);
+  });
+
+  it("derives the MISS CIRCLE current phase from the contest source of truth", async () => {
+    const activity = profile.activities.find(({ id }) => id === "miss-circle");
+    const source = await readFile(path.join(root, "src/ProfilePage.tsx"), "utf8");
+
+    assert.ok(activity);
+    assert.equal(
+      activity.body,
+      "MISS CIRCLE CONTEST 2026に三橋莉子としてENTRY 734で出場。",
+    );
+    assert.deepEqual(activity.points, ["ENTRY 734"]);
+    assert.deepEqual(activity.sourceIds, ["missCircle"]);
+    assert.equal(activity.status, "confirmed");
+    assert.equal(activity.asOf, undefined);
+    assert.doesNotMatch(
+      [activity.body, ...activity.points].join("\n"),
+      /[一二三四五六七八九十\d]+次審査|進出|通過|現在/,
+    );
+
+    assert.match(source, /import \{ contest \} from "\.\/data\/contest"/);
+    assert.match(source, /activity\.id === "miss-circle" && contest\.currentPhase/);
+    assert.match(source, /contest\.currentPhase\.name/);
+    assert.match(source, /contest\.lastVerifiedAt/);
+    assert.match(source, /contest\.currentPhase\.source/);
+    assert.match(source, /href=\{contest\.entryUrl\}/);
+    assert.doesNotMatch(source, /const ENTRY_URL/);
+    assert.doesNotMatch(source, /"3次審査進出"/);
   });
 
   it("ships a standalone, indexable profile document", async () => {

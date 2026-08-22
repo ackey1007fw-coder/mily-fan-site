@@ -297,12 +297,10 @@ export const profile: Profile = {
       id: "miss-circle",
       eyebrow: "MISS CIRCLE",
       title: "ENTRY 734として新しい一歩へ",
-      body:
-        "MISS CIRCLE CONTEST 2026に三橋莉子として出場。Bブロックから二次審査へ進出。",
-      points: ["ENTRY 734", "Bブロック", "二次審査進出"],
-      sourceIds: ["missCircle", "missCircleSecond"],
-      status: "time-sensitive",
-      asOf: "2026-08-16",
+      body: "MISS CIRCLE CONTEST 2026に三橋莉子としてENTRY 734で出場。",
+      points: ["ENTRY 734"],
+      sourceIds: ["missCircle"],
+      status: "confirmed",
     },
     {
       id: "campus-girls",
