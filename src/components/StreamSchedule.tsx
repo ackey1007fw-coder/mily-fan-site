@@ -1,11 +1,10 @@
+import { contest } from "../data/contest";
 import {
   formatSlotDate,
   slotStatus,
   useStreamSchedule,
 } from "../lib/useStreamSchedule";
 import { ExternalLink } from "./ExternalLink";
-
-const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 
 export function StreamSchedule() {
   const { slots, roomUrl } = useStreamSchedule();
@@ -66,7 +65,7 @@ export function StreamSchedule() {
             </ExternalLink>
           ) : null}
           <ExternalLink
-            href={ENTRY_URL}
+            href={contest.entryUrl}
             className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
           >
             エントリーページで応援する

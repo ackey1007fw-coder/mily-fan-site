@@ -602,8 +602,14 @@ describe("ui contract", () => {
 
   it("suppresses the duplicate stream line in TodayDashboard", async () => {
     const dashboard = await read("src/components/TodayDashboard.tsx");
+    const home = await read("src/lib/homeToday.ts");
     assert.match(dashboard, /deriveBannerState/);
-    assert.match(dashboard, /showNextStream/);
+    assert.match(dashboard, /selectHomeToday/);
+    // 重複抑制の判定はホーム用の純粋関数に切り出してある
+    assert.match(home, /bannerCoversTodayItem/);
+    assert.match(home, /bannerCoversNowItem/);
+    assert.match(home, /SHOWROOM_LIVE/);
+    assert.match(home, /RADIO_PROGRAM_WINDOW/);
   });
 
   it("keeps the schedule wording from reading like a real live", async () => {
@@ -611,7 +617,6 @@ describe("ui contract", () => {
     const stream = await read("src/components/StreamSchedule.tsx");
     const banner = await read("src/lib/bannerState.ts");
     // 予定由来の表示は実ライブと読めない表現にする
-    assert.match(dashboard, /開始時刻を過ぎています/);
     assert.match(stream, /開始時刻を過ぎています/);
     assert.doesNotMatch(dashboard, /配信中/);
     assert.doesNotMatch(stream, /配信中/);

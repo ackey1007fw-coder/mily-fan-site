@@ -169,7 +169,8 @@ describe("hero media wiring", () => {
     assert.match(source, /featuredPhoto/);
     assert.match(source, /ファン制作・非公式サイト/);
     assert.match(source, /href="#latest"/);
-    assert.match(source, /href="#support"/);
+    // 応援導線は Support Hub（/support/）へ送る
+    assert.match(source, /SUPPORT_HUB_ROUTE/);
   });
 
   it("keeps the unofficial disclaimer in the footer", async () => {

@@ -1,4 +1,5 @@
 import { About } from "./components/About";
+import { ActivitiesGateway } from "./components/ActivitiesGateway";
 import { ActivityBanner } from "./components/ActivityBanner";
 import { Footer } from "./components/Footer";
 import { Gallery } from "./components/Gallery";
@@ -29,6 +30,7 @@ export default function App() {
         <Hero />
         <TodayDashboard />
         <Support />
+        <ActivitiesGateway />
         <StreamSchedule />
         <Socials />
         <Latest />

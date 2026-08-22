@@ -84,7 +84,7 @@ describe("Support MPA route and metadata", () => {
     assert.match(serialized, /非公式/);
   });
 
-  it("adds the P5 agenda without leaking Support integration into the top page", () => {
+  it("adds the P5 agenda and keeps the Hub itself off the top page", () => {
     const page = source("src/SupportPage.tsx");
     assert.match(page, /Support Calendar/);
     assert.match(page, /buildSupportCalendar\(/);
@@ -92,7 +92,9 @@ describe("Support MPA route and metadata", () => {
     assert.match(page, /streamAvailability: availability/);
     assert.match(page, /includeRadio: true/);
     assert.doesNotMatch(page, /月間|Coming soon/i);
-    assert.doesNotMatch(source("src/App.tsx"), /SupportPage|\/support\//);
+    // ホームは compact gateway から `/support/` へ送るだけ。Hub本体は複製しない。
+    assert.doesNotMatch(source("src/App.tsx"), /SupportPage|buildSupportCalendar/);
+    assert.match(source("src/components/Support.tsx"), /SUPPORT_HUB_ROUTE/);
     assert.match(source("src/lib/useStreamSchedule.ts"), /availability/);
     assert.match(page, /useMilyRealtimeStatus\(\)/);
     assert.match(page, /useStreamSchedule\(\)/);
