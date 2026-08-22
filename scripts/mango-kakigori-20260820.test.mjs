@@ -65,12 +65,12 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.equal(item.sourceLabel, "Instagramの投稿を見る");
     assert.equal(item.url, undefined);
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0].id, "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[1].id, "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[2].id, "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[3].id, "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[4].id, "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[5].id, "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[0].id, "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[1].id, "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[2].id, "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[3].id, "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[4].id, "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[5].id, "2026-08-21-morning-showroom-runway");
     assert.equal(ordered[6].id, NEWS_ID);
   });
 

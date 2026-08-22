@@ -71,14 +71,14 @@ async function trackedFiles() {
 describe("2026-08-20 morning Instagram Story — Latest entry", () => {
   it("exists and stays in Latest under the same-day posts", () => {
     assert.ok(item());
-    // 8/21の新着の後も、8/20同日は既存の id 昇順を維持する。
+    // 8/21の新着の後も、8/20同日は既存の配列順を維持する。
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[1], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[3], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[4], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[5], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[0], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[1], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[2], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[4], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[5], "2026-08-21-morning-showroom-runway");
     assert.equal(ordered[6], "2026-08-20-mango-kakigori");
     assert.equal(ordered[7], "2026-08-20-morning-message");
     assert.equal(ordered[8], NEWS_ID);

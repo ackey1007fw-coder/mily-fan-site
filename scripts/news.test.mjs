@@ -46,6 +46,25 @@ describe("latest news ordering", () => {
     );
     assert.notEqual(sorted, input);
   });
+
+  it("uses explicit same-day order and never falls back to id ordering", () => {
+    const input = [
+      { id: "z-unranked-first", date: "2026-08-21", title: "A", body: "A" },
+      { id: "a-unranked-second", date: "2026-08-21", title: "B", body: "B" },
+      {
+        id: "m-explicit-latest",
+        date: "2026-08-21",
+        sameDayOrder: 1,
+        title: "C",
+        body: "C",
+      },
+    ];
+
+    assert.deepEqual(
+      sortNewsByDateDesc(input).map((item) => item.id),
+      ["m-explicit-latest", "z-unranked-first", "a-unranked-second"],
+    );
+  });
 });
 
 describe("birthday news item", () => {
@@ -97,12 +116,12 @@ describe("8/19 second-round result news item", () => {
     assert.ok(result);
     // 8/21の新着と8/20の3件のあとも、8/19の中では結果報告が先頭に立つ。
     const ordered = sortNewsByDateDesc(news).map((item) => item.id);
-    assert.equal(ordered[0], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[1], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[3], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[4], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[5], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[0], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[1], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[2], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[4], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[5], "2026-08-21-morning-showroom-runway");
     assert.equal(ordered[6], "2026-08-20-mango-kakigori");
     assert.equal(ordered[7], "2026-08-20-morning-message");
     assert.equal(ordered[8], "2026-08-20-morning-story");
@@ -167,12 +186,12 @@ describe("8/19 well-rested morning news item", () => {
     // 8/19 は結果報告（あと）→ 朝の投稿（さき）の順で並ぶ。
     const order = sortNewsByDateDesc(news).map((entry) => entry.id);
     assert.deepEqual(order.slice(0, 12), [
+      "2026-08-21-tiktok-radio-misscircle",
       "2026-08-21-after-afternoon-ganda",
       "2026-08-21-afternoon-showroom-fanroom",
       "2026-08-21-event-story-next-slot",
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
-      "2026-08-21-tiktok-radio-misscircle",
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",

@@ -116,12 +116,12 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[1], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[3], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[4], NEWS_ID);
-    assert.equal(ordered[5], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[0], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[1], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[2], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[4], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[5], NEWS_ID);
     assert.deepEqual(ordered.slice(6, 9), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",

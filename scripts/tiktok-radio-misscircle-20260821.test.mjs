@@ -41,9 +41,9 @@ const original = path.join(
 
 const NEWS_ID = "2026-08-21-tiktok-radio-misscircle";
 const SOURCE = "https://www.tiktok.com/@seasidecircle/video/7676407054466174229";
-const TITLE = "ラジオDJもミスコンも頑張るよ📻✨ TikTok更新";
+const TITLE = "湘南シーサイドサークルのTikTokにみりぃが登場📻✨";
 const BODY =
-  "8月21日、みりぃがTikTokを更新。ラジオDJとミスコンの両方を頑張っていく気持ちを、短い縦型動画で届けています。";
+  "8月21日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。番組TikTokに登場したみりぃが、ラジオDJとミスコンの両方を頑張る気持ちを伝えています。";
 const MESSAGE = "ラジオDJもミスコンも頑張らせていただくよ✌みりぃです^^";
 const ALT =
   "室内でカメラに向かい、手でポーズを取りながら表情を変える、みりぃの短い縦型動画";
@@ -100,10 +100,11 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(entry.date, "2026-08-21");
+    assert.equal(entry.sameDayOrder, 1);
     assert.equal(entry.title, TITLE);
     assert.equal(entry.body, BODY);
     assert.equal(entry.source, SOURCE);
-    assert.equal(entry.sourceLabel, "TikTokの投稿を見る");
+    assert.equal(entry.sourceLabel, "湘南シーサイドサークルのTikTok投稿を見る");
     assert.equal(entry.url, undefined);
     assert.equal(entry.ctaLabel, undefined);
     assert.deepEqual(verifyNews([entry]), []);
@@ -112,23 +113,33 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
   it("preserves only the confirmed post text", () => {
     const entry = item();
 
-    assert.equal(entry.message?.label, "みりぃの投稿");
+    assert.equal(entry.message?.label, "湘南シーサイドサークルの投稿");
     assert.equal(entry.message?.text, MESSAGE);
     assert.doesNotMatch(entry.body, /目標|結果|達成|受賞|順位|投稿時刻|#\S+/);
+    assert.equal(entry.body.includes(["みりぃが", "TikTokを更新"].join("")), false);
   });
 
-  it("keeps deterministic same-day ordering", () => {
+  it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     assert.deepEqual(ordered.slice(0, 6), [
+      NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
       "2026-08-21-afternoon-showroom-fanroom",
       "2026-08-21-event-story-next-slot",
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
-      NEWS_ID,
     ]);
     assert.equal(news.length, 15);
+  });
+
+  it("drives both Hero and Latest from the same ordered News list", async () => {
+    const hero = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
+    const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
+
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
+    assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
   });
 });
 

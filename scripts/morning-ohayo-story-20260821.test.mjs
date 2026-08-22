@@ -119,16 +119,16 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
     assert.doesNotMatch(entry.body, /気分|感情|かわいい|美しい|公式|公認/);
   });
 
-  it("keeps the established same-day id ordering", () => {
+  it("keeps the established same-day editorial ordering", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     assert.deepEqual(ordered.slice(0, 9), [
+      "2026-08-21-tiktok-radio-misscircle",
       "2026-08-21-after-afternoon-ganda",
       "2026-08-21-afternoon-showroom-fanroom",
       "2026-08-21-event-story-next-slot",
       NEWS_ID,
       "2026-08-21-morning-showroom-runway",
-      "2026-08-21-tiktok-radio-misscircle",
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",

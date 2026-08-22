@@ -356,12 +356,12 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     assert.deepEqual(ordered.slice(0, 6), [
+      "2026-08-21-tiktok-radio-misscircle",
       "2026-08-21-after-afternoon-ganda",
       FANROOM_NEWS_ID,
       STORY_NEWS_ID,
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
-      "2026-08-21-tiktok-radio-misscircle",
     ]);
     assert.equal(news.length, 15);
   });

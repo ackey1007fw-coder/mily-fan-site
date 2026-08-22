@@ -198,13 +198,13 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
   it("stays above the 8/20 morning Story without deleting it", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    // 8/21の新着の後も、8/20同日ソートは既存の id 昇順仕様を維持する。
-    assert.equal(ordered[0], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[1], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[3], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[4], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[5], "2026-08-21-tiktok-radio-misscircle");
+    // 8/21の新着の後も、8/20同日ソートは既存の配列順を維持する。
+    assert.equal(ordered[0], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[1], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[2], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[4], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[5], "2026-08-21-morning-showroom-runway");
     assert.equal(ordered[6], "2026-08-20-mango-kakigori");
     assert.equal(ordered[7], NEWS_ID);
     assert.equal(ordered[8], "2026-08-20-morning-story");
