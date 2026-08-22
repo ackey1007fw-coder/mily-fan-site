@@ -116,19 +116,20 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[1], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[2], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[3], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[5], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[6], NEWS_ID);
-    assert.deepEqual(ordered.slice(7, 10), [
+    assert.equal(ordered[0], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[1], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[2], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[3], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[4], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[6], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[7], NEWS_ID);
+    assert.deepEqual(ordered.slice(8, 11), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 16);
+    assert.equal(news.length, 17);
   });
 });
 
@@ -326,14 +327,15 @@ describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", ()
       feed.items[0].id,
       "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
     );
+    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
-      feed.items[1].id,
+      feed.items[2].id,
       "mily:story:campus-girls-2027-second-stage-jury-award",
     );
-    assert.equal(feed.items[2].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[6].id, entry.id);
+    assert.equal(feed.items[3].id, "mily:news:2026-08-21-after-afternoon-ganda");
+    assert.equal(feed.items[4].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(feed.items[5].id, "mily:news:2026-08-21-event-story-next-slot");
+    assert.equal(feed.items[6].id, "mily:news:2026-08-21-morning-ohayo-story");
+    assert.equal(feed.items[7].id, entry.id);
   });
 });

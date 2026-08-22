@@ -285,7 +285,8 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(item.sameDayOrder, undefined);
     assert.equal(item.source, xSource);
     assert.equal(item.url, `/stories/${slug}/`);
-    assert.equal(sortNewsByDateDesc(news)[0], item);
+    assert.equal(sortNewsByDateDesc(news)[0].id, "2026-08-22-night-showroom-thanks");
+    assert.equal(sortNewsByDateDesc(news)[1], item);
   });
 
   it("flows through the existing Portal Feed as separate NEWS and STORY items", () => {
@@ -297,8 +298,9 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(feed.items[0].id, `mily:news:${newsId}`);
     assert.equal(feed.items[0].sourceUrl, xSource);
     assert.equal(feed.items[0].image, image);
-    assert.equal(feed.items[1].id, `mily:story:${slug}`);
-    assert.equal(feed.items[1].url, `${siteOrigin()}/stories/${slug}/`);
-    assert.equal(feed.items[1].image, image);
+    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
+    assert.equal(feed.items[2].id, `mily:story:${slug}`);
+    assert.equal(feed.items[2].url, `${siteOrigin()}/stories/${slug}/`);
+    assert.equal(feed.items[2].image, image);
   });
 });

@@ -86,9 +86,20 @@ describe("Portal Feed generation", () => {
     assert.equal(feed.version, 1);
     assert.equal(feed.personId, "mily");
     assert.equal(feed.siteUrl, "https://mily-fan-site.vercel.app/");
+    const publishedStoryCount = stories.filter((story) => story.published).length;
+    const eventCount = events.length;
+    const maxNewsInFeed = Math.max(
+      0,
+      PORTAL_FEED_LIMIT - publishedStoryCount - eventCount,
+    );
     assert.equal(
       feed.items.filter((item) => item.type === "news").length,
-      news.length,
+      Math.min(news.length, maxNewsInFeed),
+    );
+    assert.ok(
+      feed.items.some(
+        (item) => item.id === "mily:news:2026-08-22-night-showroom-thanks",
+      ),
     );
     assert.equal(
       feed.items.filter((item) => item.type === "story").length,

@@ -65,6 +65,36 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-22-night-showroom-thanks",
+    date: "2026-08-22",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "夜枠ありがとう！8/23の配信予定もお知らせ📡✨",
+    body: "8月22日の夜、みりぃがSHOWROOM配信へのお礼をXに投稿しました。あわせて、投稿時点で翌23日は朝5:40〜と夜22:30〜の2枠を予定していることを案内し、「おやすみりぃ」と締めくくっています。",
+    source: "https://x.com/mily_chan36/status/2091166455224299641",
+    sourceLabel: "Xの投稿を見る",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b17-01-night-showroom-fireworks.jpg",
+      width: 1206,
+      height: 555,
+      alt: "花火大会仕様のSHOWROOM配信画面で、中央にみりぃが映り、画面下部に視聴者のアバターが並んでいる様子",
+    },
+    message: {
+      label: "みりぃの投稿",
+      text: `夜枠ありがとうございました！！
+
+明日は
+朝☀️5:40〜
+夜🌙22:30〜
+の予定だよ🙇🏻‍♀️🙇🏻‍♀️🙇🏻‍♀️
+
+おやすみりぃ
+
+#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026`,
+    },
+  },
+  {
     id: "2026-08-22-campus-girls-second-stage-jury-award",
     date: "2026-08-22",
     activityIds: ["campus-girls"],
