@@ -831,3 +831,50 @@ ffmpeg -ss 5.5 -i public/media/gallery/mily-b15-01-tiktok-radio-misscircle.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b15-01-tiktok-radio-misscircle-poster.jpg
 ```
+
+## 素材台帳（batch b16 / 受領日・source date 2026-08-22）
+
+CAMPUS GIRLS 2027 予選A 2nd STAGE審査員賞の結果グラフィックと、
+同日に本人が投稿したInstagram Storyの内容確認用スクリーンショット。
+結果グラフィックだけをStory / Latestの共有画像として公開し、Instagram Storyの
+スクリーンショットは本文と出典の確認資料に限定する。Galleryには追加しない。
+
+本人X一次出典: https://x.com/mily_chan36/status/2090988000813654232
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b16-01 | `stories/campus-girls-2027-second-stage-jury-award/mily-b16-01-campus-girls-second-stage-jury-award.jpg` | CAMPUS GIRLS 2027 予選A 2nd STAGE審査員賞の結果グラフィック。受賞者5名の一人として三橋莉子を掲載。1280×862 | ✅ Story / Latest（1ファイルを共有） |
+
+### b16-01 結果グラフィック
+
+- provenance: `sns-post`
+- source: 本人X投稿
+  `https://x.com/mily_chan36/status/2090988000813654232`
+- 公式CAMPUS BOYS / GIRLSの結果投稿URLは確実に確認できなかったため、推測で追加していない
+- 元素材は
+  `media/original/mily-b16-01-campus-girls-second-stage-jury-award.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **150,012 bytes / JPEG / 1280×862 / sha256
+  `a3006e79dce6178f7f2bd5fa9da0c4b12f75a7c0742d0dd4f27373cc6666f8b8`**
+- 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
+  JPEG再エンコードし、metadataを除去した
+- 公開ファイルの実測: **216,425 bytes / JPEG progressive / 1280×862 / sha256
+  `73bc8e576e2da1bb265c67e759cbfd0764c9c8c8619792851edfbb1a8c656819`**
+- 公開ファイルはEXIF / IPTC / XMP / ICCなし
+- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。
+  **crop・scale・rotate・アップスケール・縦横比変更なし**。1280:862の横構図を維持した
+- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- `src/data/campusGirlsSecondStageResultImage.ts` の1オブジェクトをStory / Latestで共有し、
+  公開画像1枚だけを参照する
+- `src/data/media.ts`・`src/data/galleryVideos.ts`には追加していない
+
+### Instagram Storyスクリーンショット
+
+- 受領資料の実測: **127,916 bytes / JPEG / 720×1280 / sha256
+  `2324ae36cb81107c2cb05ab717bbd859e7b72702e371f0008f1faacdcd84d768`**
+- 本人の追加メッセージと投稿日を確認するためだけに使用した
+- Story閲覧スクリーンショットを公開assetにしない既存方針に従い、`public/`・Gallery・
+  Latest画像・Story本文画像・git管理領域へコピーしていない
+- 出典はURLを持たない `Instagram Story（2026年8月22日）` として登録し、
+  InstagramプロフィールURLを代用していない
+- 依頼者の訂正により今回は動画素材なし。公開MP4・poster・動画manifestは作成していない

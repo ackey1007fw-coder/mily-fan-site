@@ -18,6 +18,10 @@ function readRelative(relative) {
   return readFileSync(path.join(root, relative), "utf8");
 }
 
+function normalizeNewlines(value) {
+  return value.replaceAll("\r\n", "\n");
+}
+
 export function verifySiteUrlConsistency() {
   const errors = [];
   const origin = siteOrigin();
@@ -26,6 +30,9 @@ export function verifySiteUrlConsistency() {
   const storyCanonical = storyUrl("second-round-2026");
   const radioStoryCanonical = storyUrl("2026-08-18-radio");
   const resultStoryCanonical = storyUrl("second-round-result-2026");
+  const campusGirlsStoryCanonical = storyUrl(
+    "campus-girls-2027-second-stage-jury-award",
+  );
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
@@ -33,6 +40,9 @@ export function verifySiteUrlConsistency() {
   const radioStoryHtml = readRelative("stories/2026-08-18-radio/index.html");
   const resultStoryHtml = readRelative(
     "stories/second-round-result-2026/index.html",
+  );
+  const campusGirlsStoryHtml = readRelative(
+    "stories/campus-girls-2027-second-stage-jury-award/index.html",
   );
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
@@ -109,15 +119,35 @@ export function verifySiteUrlConsistency() {
   if (!resultStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("second-round result story images must use __SITE_OG_IMAGE__");
   }
+  if (
+    !campusGirlsStoryHtml.includes(
+      'href="__STORY_CAMPUS_GIRLS_SECOND_STAGE_JURY_AWARD_CANONICAL__"',
+    )
+  ) {
+    errors.push(
+      "CAMPUS GIRLS story canonical href must use its siteUrl placeholder",
+    );
+  }
+  if (
+    !campusGirlsStoryHtml.includes('property="og:url"') ||
+    !campusGirlsStoryHtml.includes(
+      'content="__STORY_CAMPUS_GIRLS_SECOND_STAGE_JURY_AWARD_CANONICAL__"',
+    )
+  ) {
+    errors.push("CAMPUS GIRLS story og:url must use its siteUrl placeholder");
+  }
+  if (!campusGirlsStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("CAMPUS GIRLS story images must use __SITE_OG_IMAGE__");
+  }
 
-  if (robots !== robotsTxt()) {
+  if (normalizeNewlines(robots) !== robotsTxt()) {
     errors.push("public/robots.txt must be generated from site.siteUrl");
   }
   if (!robots.includes(`Sitemap: ${origin}/sitemap.xml`)) {
     errors.push("public/robots.txt sitemap URL must follow site.siteUrl");
   }
 
-  if (sitemap !== sitemapXml()) {
+  if (normalizeNewlines(sitemap) !== sitemapXml()) {
     errors.push("public/sitemap.xml must be generated from site.siteUrl");
   }
   if (!sitemap.includes(`<loc>${canonical}</loc>`)) {
@@ -137,6 +167,11 @@ export function verifySiteUrlConsistency() {
       "public/sitemap.xml must include the second-round result story canonical URL",
     );
   }
+  if (!sitemap.includes(`<loc>${campusGirlsStoryCanonical}</loc>`)) {
+    errors.push(
+      "public/sitemap.xml must include the CAMPUS GIRLS story canonical URL",
+    );
+  }
 
   if (
     !viteConfig.includes("canonicalUrl()") ||
@@ -144,6 +179,9 @@ export function verifySiteUrlConsistency() {
     !viteConfig.includes('storyUrl("second-round-2026")') ||
     !viteConfig.includes('storyUrl("2026-08-18-radio")') ||
     !viteConfig.includes('storyUrl("second-round-result-2026")') ||
+    !viteConfig.includes(
+      'storyUrl("campus-girls-2027-second-stage-jury-award")',
+    ) ||
     !viteConfig.includes("ogImageUrl()")
   ) {
     errors.push("vite.config.ts must replace metadata placeholders from site.siteUrl helpers");
@@ -175,6 +213,11 @@ export function verifySiteUrlConsistency() {
       "second-round result story HTML must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  if (hardcodedOrigin.test(campusGirlsStoryHtml)) {
+    errors.push(
+      "CAMPUS GIRLS story HTML must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
 
   if (
     !canonical.startsWith(origin) ||
@@ -182,6 +225,7 @@ export function verifySiteUrlConsistency() {
     !storyCanonical.startsWith(origin) ||
     !radioStoryCanonical.startsWith(origin) ||
     !resultStoryCanonical.startsWith(origin) ||
+    !campusGirlsStoryCanonical.startsWith(origin) ||
     !ogImage.startsWith(origin)
   ) {
     errors.push("canonical and og image URLs must stay on site.siteUrl");

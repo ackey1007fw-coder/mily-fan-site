@@ -1,4 +1,5 @@
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
+import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 
 export const storySources = {
   "pre-final-message": {
@@ -22,6 +23,16 @@ export const storySources = {
     id: "x-2026-08-19-second-round-result",
     label: "本人X投稿（2026年8月19日）",
     url: "https://x.com/Mily_chan36/status/2089996508691390948",
+  },
+  "x-2026-08-22-campus-girls-second-stage-result": {
+    id: "x-2026-08-22-campus-girls-second-stage-result",
+    label: "本人X投稿（2026年8月22日）",
+    url: "https://x.com/mily_chan36/status/2090988000813654232",
+  },
+  // 恒久的な公開permalinkがないStory。プロフィールURLで代用しない。
+  "instagram-story-2026-08-22-campus-girls-second-stage-result": {
+    id: "instagram-story-2026-08-22-campus-girls-second-stage-result",
+    label: "Instagram Story（2026年8月22日）",
   },
   // 恒久的な公開permalinkがないStory。URLは持たせず、非リンクのlabelとして出す。
   "instagram-story-2026-08-19-second-round-result": {
@@ -567,7 +578,142 @@ const secondRoundResultStory: Story = {
   ],
 };
 
+const campusGirlsSecondStageJuryAwardStory: Story = {
+  slug: "campus-girls-2027-second-stage-jury-award",
+  href: "/stories/campus-girls-2027-second-stage-jury-award/",
+  title:
+    "CAMPUS GIRLS 2027 予選A 2nd STAGE 審査員賞——予選ファイナル進出へ",
+  cardTitle: "審査員賞を受賞——CAMPUS GIRLS 2027 予選ファイナルへ",
+  eyebrow: "CAMPUS GIRLS 2027｜予選A 2nd STAGE",
+  badge: "予選ファイナル進出",
+  lead:
+    "8月22日、みりぃ（三橋莉子）がCAMPUS GIRLS 2027 予選A 2nd STAGEで審査員賞を受賞し、予選ファイナルへの進出を報告しました。コンテストとの両立に難しさを感じながらも、「可能性を信じて、自分のできることを」と挑戦を続ける思いを届けています。",
+  cardDescription:
+    "予選A 2nd STAGEで審査員賞を受賞し、予選ファイナルへ。両立の難しさ、可能性を信じて進む思い、誰かの挑戦を後押ししたいという言葉を残した8月22日の記録です。",
+  date: "2026-08-22",
+  dateLabel: "2026.08.22",
+  published: true,
+  sourceIds: [
+    "x-2026-08-22-campus-girls-second-stage-result",
+    "instagram-story-2026-08-22-campus-girls-second-stage-result",
+  ],
+  leadMediaId: campusGirlsSecondStageResultImage.id,
+  media: [campusGirlsSecondStageResultImage],
+  sections: [
+    {
+      id: "jury-award",
+      title: "審査員賞を受賞、予選ファイナルへ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "8月22日、みりぃがCAMPUS GIRLS 2027 予選A 2nd STAGEで審査員賞を受賞し、予選ファイナルへ進出することを本人Xで報告しました。",
+          sourceIds: ["x-2026-08-22-campus-girls-second-stage-result"],
+        },
+        {
+          type: "paragraph",
+          text: "結果グラフィックには、審査員賞の受賞者5名の一人として三橋莉子の名前と写真が掲載されています。",
+          sourceIds: ["x-2026-08-22-campus-girls-second-stage-result"],
+        },
+      ],
+    },
+    {
+      id: "balance",
+      title: "両立の難しさの中で届いたチャンス",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "本人はXで、両立に難しさを感じる中で得たチャンスへの感謝を伝えています。",
+          sourceIds: ["x-2026-08-22-campus-girls-second-stage-result"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "両立が難しいと感じている中、このようなチャンスをいただけたこと、とてもありがたく思います。",
+          ],
+          sourceIds: ["x-2026-08-22-campus-girls-second-stage-result"],
+        },
+        {
+          type: "paragraph",
+          text: "Instagram Storyでも、コンテストとの両立は難しく、思い通りにいかないこともあるという率直な思いを綴っています。何と何を両立しているかについては、投稿やStoryの中で具体名は示されていません。",
+          sourceIds: [
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+      ],
+    },
+    {
+      id: "believe",
+      title: "「可能性を信じて」",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "難しさについて記したあと、Instagram Storyでは次の言葉を続けています。",
+          sourceIds: [
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "可能性を信じて、自分のできることをやれるだけやってみせます‼️",
+          ],
+          sourceIds: [
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+      ],
+    },
+    {
+      id: "encourage",
+      title: "誰かが挑戦するきっかけに",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "同じStoryには、自身の挑戦を見た誰かへ向けた言葉も残されています。",
+          sourceIds: [
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "皆さんが何かに挑戦するきっかけの後押しになりますように。",
+          ],
+          sourceIds: [
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+      ],
+    },
+    {
+      id: "preliminary-final",
+      title: "予選ファイナルへ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "予選ファイナルへの進出を報告したX投稿を、次のステージへ向けた言葉で締めくくっています。",
+          sourceIds: ["x-2026-08-22-campus-girls-second-stage-result"],
+        },
+        {
+          type: "quote",
+          paragraphs: ["もっとギア入れて頑張らせてください❣️✨"],
+          sourceIds: ["x-2026-08-22-campus-girls-second-stage-result"],
+        },
+        {
+          type: "paragraph",
+          text: "またひとつ、みりぃの挑戦の記録が増えました。次のステージへ向かう本人の言葉を、この日の節目として残します。",
+          sourceIds: [
+            "x-2026-08-22-campus-girls-second-stage-result",
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const stories: Story[] = [
+  campusGirlsSecondStageJuryAwardStory,
   secondRoundResultStory,
   radioStory,
   secondRoundStory,

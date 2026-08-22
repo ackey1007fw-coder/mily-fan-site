@@ -248,7 +248,8 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
     ];
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 6), [
+    assert.deepEqual(ordered.slice(0, 7), [
+      "2026-08-22-campus-girls-second-stage-jury-award",
       "2026-08-21-tiktok-radio-misscircle",
       NEWS_ID,
       ...existing,
@@ -257,7 +258,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
     );
     for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
-    assert.equal(news.length, 15);
+    assert.equal(news.length, 16);
   });
 });
 
@@ -267,7 +268,15 @@ describe("2026-08-21 ganda X post — Portal Feed and responsive contract", () =
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
 
     assert.ok(entry);
-    assert.equal(feed.items[0].id, entry.id);
+    assert.equal(
+      feed.items[0].id,
+      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
+    );
+    assert.equal(
+      feed.items[1].id,
+      "mily:story:campus-girls-2027-second-stage-jury-award",
+    );
+    assert.equal(feed.items[2].id, entry.id);
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);

@@ -17,6 +17,7 @@ import {
 } from "./morningStoryVideo.ts";
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
+import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -60,6 +61,17 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-22-campus-girls-second-stage-jury-award",
+    date: "2026-08-22",
+    title: "CAMPUS GIRLS 2027 審査員賞！予選ファイナル進出✨",
+    body: "8月22日、みりぃがCAMPUS GIRLS 2027 予選A 2nd STAGEで審査員賞を受賞し、予選ファイナルへ進出することを報告しました。コンテストとの両立に難しさを感じながらも、チャンスへの感謝と「可能性を信じて、自分のできることを」という思いを届けています。",
+    source: "https://x.com/mily_chan36/status/2090988000813654232",
+    sourceLabel: "Xの投稿を見る",
+    url: "/stories/campus-girls-2027-second-stage-jury-award/",
+    ctaLabel: "審査員賞・予選ファイナル進出の記録を読む",
+    media: campusGirlsSecondStageResultImage,
+  },
   {
     id: "2026-08-21-tiktok-radio-misscircle",
     date: "2026-08-21",
