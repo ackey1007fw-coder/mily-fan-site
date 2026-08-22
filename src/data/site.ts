@@ -35,6 +35,10 @@ export function activitiesUrl(): string {
   return `${siteOrigin()}/activities/`;
 }
 
+export function supportUrl(): string {
+  return `${siteOrigin()}/support/`;
+}
+
 export function activityUrl(route: ActivityRoute): string {
   return `${siteOrigin()}${route}`;
 }
@@ -69,6 +73,11 @@ export function sitemapXml(): string {
   </url>
   <url>
     <loc>${activitiesUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${supportUrl()}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
