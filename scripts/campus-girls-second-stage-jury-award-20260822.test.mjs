@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { campusGirlsSecondStageInstagramStoryImage } from "../src/data/campusGirlsSecondStageInstagramStoryImage.ts";
 import { campusGirlsSecondStageResultImage } from "../src/data/campusGirlsSecondStageResultImage.ts";
 import { contest } from "../src/data/contest.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
@@ -131,20 +132,67 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(metadata.icc, undefined);
 
     const files = await readdir(path.dirname(publicFile));
-    assert.deepEqual(files, [path.basename(publicFile)]);
+    assert.deepEqual(
+      files.filter((file) => file.includes(campusGirlsSecondStageResultImage.id)),
+      [path.basename(publicFile)],
+    );
   });
 
-  it("keeps the Story screenshot and this milestone out of Gallery and video data", async () => {
+  it("publishes the owner-approved Instagram Story image only inside this STORY", async () => {
     const story = newStory();
     assert.ok(story);
+    assert.deepEqual(story.media, [
+      campusGirlsSecondStageResultImage,
+      campusGirlsSecondStageInstagramStoryImage,
+    ]);
     assert.equal(story.media.every((item) => item.kind === "image"), true);
     assert.equal(
-      media.some((item) => item.id === campusGirlsSecondStageResultImage.id),
+      campusGirlsSecondStageInstagramStoryImage.provenance,
+      "owner-provided",
+    );
+    assert.equal(campusGirlsSecondStageInstagramStoryImage.sourceDate, "2026-08-22");
+    assert.equal(
+      "sourceUrl" in campusGirlsSecondStageInstagramStoryImage,
+      false,
+    );
+
+    const storyImageBlocks = story.sections
+      .flatMap((section) => section.blocks)
+      .filter(
+        (block) =>
+          block.type === "media" &&
+          block.mediaId === campusGirlsSecondStageInstagramStoryImage.id,
+      );
+    assert.equal(storyImageBlocks.length, 1);
+    assert.deepEqual(storyImageBlocks[0].sourceIds, [instagramSourceId]);
+
+    const publicFile = path.join(
+      root,
+      "public",
+      campusGirlsSecondStageInstagramStoryImage.src.replace(/^\//, ""),
+    );
+    await access(publicFile);
+    const metadata = await sharp(publicFile).metadata();
+    assert.equal(metadata.width, 720);
+    assert.equal(metadata.height, 1280);
+    assert.equal(metadata.exif, undefined);
+    assert.equal(metadata.iptc, undefined);
+    assert.equal(metadata.xmp, undefined);
+    assert.equal(metadata.icc, undefined);
+
+    const item = news.find((entry) => entry.id === newsId);
+    assert.ok(item);
+    assert.equal(item.media, campusGirlsSecondStageResultImage);
+    assert.notEqual(item.media, campusGirlsSecondStageInstagramStoryImage);
+    assert.equal(
+      media.some(
+        (item) => item.id === campusGirlsSecondStageInstagramStoryImage.id,
+      ),
       false,
     );
     assert.equal(
       galleryVideos.some(
-        (item) => item.id === campusGirlsSecondStageResultImage.id,
+        (item) => item.id === campusGirlsSecondStageInstagramStoryImage.id,
       ),
       false,
     );
@@ -155,10 +203,38 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
         path.join(root, "src/data/campusGirlsSecondStageResultImage.ts"),
         "utf8",
       ),
+      await readFile(
+        path.join(
+          root,
+          "src/data/campusGirlsSecondStageInstagramStoryImage.ts",
+        ),
+        "utf8",
+      ),
     ].join("\n");
     assert.doesNotMatch(trackedText, /instagram\.com\/stories\//);
     assert.doesNotMatch(trackedText, /drive\.google\.com/);
     assert.doesNotMatch(trackedText, /ScreenRecording_/);
+  });
+
+  it("documents a narrow owner-approved milestone exception without broad Gallery reuse", async () => {
+    const contentOps = await readFile(
+      path.join(root, "docs/CONTENT-OPS.md"),
+      "utf8",
+    );
+    const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
+
+    for (const phrase of [
+      "当該画像について",
+      "オーナーが掲載を明示承認",
+      "DM・非公開情報・通知・第三者コメント・端末情報を含まず",
+      "節目Story",
+      "Latest / Galleryへ自動展開しない",
+      "素材ごとに確認する",
+    ]) {
+      assert.match(contentOps, new RegExp(phrase.replace("/", "\\/")), phrase);
+    }
+    assert.match(mediaGuide, /当該Story記事のみ \/ Latest・Gallery禁止/);
+    assert.match(mediaGuide, /crop・scale・rotate・アップスケール・縦横比変更・内容削除なし/);
   });
 
   it("adds a separate 2nd STAGE highlight and leaves CAMPUS GIRLS out of contest.ts", () => {

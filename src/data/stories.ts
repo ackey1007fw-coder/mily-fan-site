@@ -1,5 +1,6 @@
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
+import { campusGirlsSecondStageInstagramStoryImage } from "./campusGirlsSecondStageInstagramStoryImage.ts";
 
 export const storySources = {
   "pre-final-message": {
@@ -598,7 +599,10 @@ const campusGirlsSecondStageJuryAwardStory: Story = {
     "instagram-story-2026-08-22-campus-girls-second-stage-result",
   ],
   leadMediaId: campusGirlsSecondStageResultImage.id,
-  media: [campusGirlsSecondStageResultImage],
+  media: [
+    campusGirlsSecondStageResultImage,
+    campusGirlsSecondStageInstagramStoryImage,
+  ],
   sections: [
     {
       id: "jury-award",
@@ -657,6 +661,13 @@ const campusGirlsSecondStageJuryAwardStory: Story = {
           paragraphs: [
             "可能性を信じて、自分のできることをやれるだけやってみせます‼️",
           ],
+          sourceIds: [
+            "instagram-story-2026-08-22-campus-girls-second-stage-result",
+          ],
+        },
+        {
+          type: "media",
+          mediaId: campusGirlsSecondStageInstagramStoryImage.id,
           sourceIds: [
             "instagram-story-2026-08-22-campus-girls-second-stage-result",
           ],

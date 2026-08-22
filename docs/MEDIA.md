@@ -108,7 +108,9 @@ mily-b<batch 2桁>-<seq 2桁>-<slug>-<width>.<ext> … 派生
 - owner-providedのクリーンな元動画をgitignored領域へ無改変で保存し、H.264 / AAC / `+faststart`、metadata除去済みの公開MP4を作る。
 - posterは公開MP4の実フレーム候補を複数比較して選ぶ。AI生成・顔補正・塗り足しはしない。
 - LatestとGalleryへ同じ投稿を出す場合、公開MP4 1本とposter 1枚を共有する。用途別コピーは作らない。
-- Instagram UIを含む閲覧画面スクリーンショットはコメント確認資料に限り、公開assetやGalleryへ入れない。
+- Instagram UIを含む閲覧画面スクリーンショットは原則としてコメント確認資料に限り、
+  公開assetやGalleryへ入れない。`docs/CONTENT-OPS.md` の限定例外をすべて満たし、
+  当該画像のオーナー承認がある節目Storyだけは、記事内限定で公開できる。
 - 一時的な朝投稿はLatest + Galleryの対象であり、読み物の `/stories/` へ自動的に転記しない。
 
 ## 素材台帳（batch b03 / 受領日 2026-08-17）
@@ -835,15 +837,16 @@ ffmpeg -ss 5.5 -i public/media/gallery/mily-b15-01-tiktok-radio-misscircle.mp4 \
 ## 素材台帳（batch b16 / 受領日・source date 2026-08-22）
 
 CAMPUS GIRLS 2027 予選A 2nd STAGE審査員賞の結果グラフィックと、
-同日に本人が投稿したInstagram Storyの内容確認用スクリーンショット。
-結果グラフィックだけをStory / Latestの共有画像として公開し、Instagram Storyの
-スクリーンショットは本文と出典の確認資料に限定する。Galleryには追加しない。
+同日に本人が投稿したInstagram Story画像。結果グラフィックはStory / Latestで共有し、
+Instagram Story画像はオーナーの当該画像に対する明示承認に基づき、節目Storyの記事内だけで
+公開する。どちらもGalleryには追加しない。
 
 本人X一次出典: https://x.com/mily_chan36/status/2090988000813654232
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
 | b16-01 | `stories/campus-girls-2027-second-stage-jury-award/mily-b16-01-campus-girls-second-stage-jury-award.jpg` | CAMPUS GIRLS 2027 予選A 2nd STAGE審査員賞の結果グラフィック。受賞者5名の一人として三橋莉子を掲載。1280×862 | ✅ Story / Latest（1ファイルを共有） |
+| b16-02 | `stories/campus-girls-2027-second-stage-jury-award/mily-b16-02-campus-girls-second-stage-instagram-story.jpg` | 審査員賞・予選ファイナル進出、挑戦への思い、公開結果投稿を表示した本人Instagram Story。720×1280 | ✅ 当該Story記事のみ / Latest・Gallery禁止 |
 
 ### b16-01 結果グラフィック
 
@@ -856,6 +859,9 @@ CAMPUS GIRLS 2027 予選A 2nd STAGE審査員賞の結果グラフィックと、
   （gitignore済み・受領バイトを変えず保管・コミットしない）
 - 元素材の実測: **150,012 bytes / JPEG / 1280×862 / sha256
   `a3006e79dce6178f7f2bd5fa9da0c4b12f75a7c0742d0dd4f27373cc6666f8b8`**
+- 追加依頼時に「約2048×1380」と案内された再提供画像も、実際には前回と同じ
+  **150,012 bytes / 1280×862 / 同一sha256**だった。高解像度版とは扱わず、
+  現在の原本と公開派生を維持した
 - 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
   JPEG再エンコードし、metadataを除去した
 - 公開ファイルの実測: **216,425 bytes / JPEG progressive / 1280×862 / sha256
@@ -870,11 +876,26 @@ CAMPUS GIRLS 2027 予選A 2nd STAGE審査員賞の結果グラフィックと、
 
 ### Instagram Storyスクリーンショット
 
-- 受領資料の実測: **127,916 bytes / JPEG / 720×1280 / sha256
+- provenance: `owner-provided`（当該画像のStory記事掲載をオーナーが明示承認）
+- source: `Instagram Story（2026年8月22日）` / 恒久permalinkなし・非リンク表示
+- 元素材は
+  `media/original/mily-b16-02-campus-girls-second-stage-instagram-story.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **127,916 bytes / JPEG / 720×1280 / sha256
   `2324ae36cb81107c2cb05ab717bbd859e7b72702e371f0008f1faacdcd84d768`**
-- 本人の追加メッセージと投稿日を確認するためだけに使用した
-- Story閲覧スクリーンショットを公開assetにしない既存方針に従い、`public/`・Gallery・
-  Latest画像・Story本文画像・git管理領域へコピーしていない
-- 出典はURLを持たない `Instagram Story（2026年8月22日）` として登録し、
-  InstagramプロフィールURLを代用していない
+- 追加依頼時に「864×1536目安」と案内された再提供画像も、実際には前回と同じ
+  **127,916 bytes / 720×1280 / 同一sha256**だった。実際の受領ファイルを原本とした
+- 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
+  JPEG再エンコードし、metadataを除去した
+- 公開ファイルの実測: **153,111 bytes / JPEG progressive / 720×1280 / sha256
+  `4cf8b0fce3e1ac242c4d3c542701c6bbd8f6e62b6810b6bb0c910854ba07658f`**
+- 公開ファイルはEXIF / IPTC / XMP / ICCなし
+- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。
+  **crop・scale・rotate・アップスケール・縦横比変更・内容削除なし**
+- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- DM・非公開情報・通知・第三者コメント・端末情報は含まれない。Story内に表示される
+  受賞者名・公開アカウント名は、本人が共有した公開結果投稿の表示内容である
+- `src/data/campusGirlsSecondStageInstagramStoryImage.ts` を当該Story本文だけから参照し、
+  lead image・NEWS / Latest・Portal Feed・`media.ts`・`galleryVideos.ts`へ展開しない
+- InstagramプロフィールURLを出典として代用していない
 - 依頼者の訂正により今回は動画素材なし。公開MP4・poster・動画manifestは作成していない
