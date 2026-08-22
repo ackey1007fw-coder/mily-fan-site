@@ -21,7 +21,7 @@
 - `main` から作業ブランチを切り、PR にする。
 - マージ方式の指定がなければ **squash merge**。
 - Vercel で本番公開済み（https://mily-fan-site.vercel.app/）。`main` への merge は本番に反映されるため、CI とオーナー確認を経てから merge する。
-- `@codex review` はオーナーが投稿する。エージェントは投稿しない。
+- `@codex review` はオーナーが投稿する。エージェント / automation は「### Codexレビュー依頼の委任」の条件を全て満たす場合のみ代理投稿してよい。
 - 接続エラーをレビュー成功として扱わない。
 
 ### マージしてよい条件
@@ -38,6 +38,67 @@
 - SNS / 外部リンクの追加
 - 本人写真の追加・差し替え
 - 本番公開・ドメイン設定
+- `AGENTS.md` そのものの変更
+- リポジトリ運用ルールの変更
+- レビュー委任ポリシー（「### Codexレビュー依頼の委任」）の変更
+
+エージェントが自分の判断だけで委任条件を緩和・削除・拡張しない。
+
+### Codexレビュー依頼の委任
+
+`@codex review` の代理投稿は、オーナーが使う **GitHub 接続済みの AI エージェント / automation** に限って委任する。この節が `main` へ merge されたことを、オーナーによる repo 単位の許可とみなす。不特定の bot や第三者へ権限を与えるものではない。委任するのは review 要求の投稿だけで、merge 権限・オーナー確認・本番操作はいっさい緩和しない。
+
+**このルールは `main` へ merge された後のみ有効。** 作業ブランチ上で `AGENTS.md` を書き換えただけでは有効にならない。委任ポリシーを変更する PR 自身には、その時点の `main` のルールが適用される。したがってそのPRへはエージェントが `@codex review` を投稿せず、オーナーが投稿する。
+
+投稿してよいのは **PR Conversation の top-level comment** に本文 `@codex review` の1件だけ。review reply / inline comment / PR 本文 / commit message をレビュー要求の代用にしない。
+
+#### 投稿前に全て確認する
+
+1. repository が `ackey1007fw-coder/mily-fan-site`
+2. base が `main`、head が `main` ではない作業ブランチ
+3. PR が OPEN で、Draft ではない
+4. 競合がなく mergeable
+5. current head SHA を取得済み
+6. current head で GitHub Actions の CI が SUCCESS
+7. Vercel の status / check がある場合、current head で SUCCESS
+8. 既知の blocking feedback が修正済みで、未解決の blocking review thread が 0
+9. current head について Codex review が未完了・review request 未送信・Codex が review 中でない
+
+1つでも確認できない場合は投稿しない。状態が曖昧な場合も投稿しない。
+
+#### exactly-once per head
+
+同一 head SHA へ `@codex review` を重複投稿しない。投稿前に、少なくとも current head SHA / PR Conversation / Codex の review submission / review thread / Codex の reaction・review 結果を確認する。
+
+次のいずれかなら投稿しない。
+
+- current head を Reviewed commit とする Codex review が既に存在する
+- current head に対する review 開始を示す Codex の 👀 がある
+- current head への review request が既に存在すると合理的に確認できる
+- 同一 head への request 有無を安全に判定できない
+
+判定が曖昧なときは、重複投稿せずオーナーへ確認を求める。
+
+#### Codex の状態の読み方
+
+- **👀（eyes）は review 開始 / review 中を意味する。review 完了ではない。** 👀 が確認できる間は同じ head へ review request を再投稿しない。
+- **👍 / +1** が Codex による review completion として確認でき、review 開始後に head が変わっておらず、新規の未解決 thread も blocking feedback も無い場合は、no-suggestion review completion として扱ってよい。
+- Codex が "Didn't find any major issues" 等の明示的な clean result を返し、Reviewed commit が current head と一致する場合も、no-suggestion completion として扱ってよい。
+- formal review submission がある場合は、Reviewed commit が current head と一致するか確認する。新規 review thread があれば、その feedback を処理してから次へ進む。
+
+#### head が変わったとき
+
+review request 後に commit が push されて head SHA が変わったら、**旧 review を current head の review として扱わない。** 新しい head について CI / Vercel / 未解決 thread / blocking feedback / mergeability を確認し直し、すべて成立した場合のみ、新 head へ `@codex review` を1回だけ投稿してよい。
+
+#### 投稿が失敗したとき
+
+`@codex review` 投稿時に API error / connector error / timeout / permission error / 不明な応答が発生した場合、「たぶん投稿できた」と推測しない。PR Conversation を取得し直し、comment が実際に存在するか確認する。存在しない場合は自動で連打・再投稿せず、失敗をオーナーへ報告する。
+
+`@codex review` comment が GitHub 上に存在するのに一定時間たっても Codex の反応を確認できない場合も、同じ head へ自動再投稿しない。「review request は存在するが、Codex の反応を確認できない」とオーナーへ報告する。
+
+#### review request は merge 許可ではない
+
+エージェントが `@codex review` を投稿できることは、PR を自動的に merge してよいという意味ではない。「### マージしてよい条件」とオーナー確認が必要な項目はすべてそのまま適用する。current head に対する review 完了を確認できない PR は merge しない。
 
 ## セットアップ
 
