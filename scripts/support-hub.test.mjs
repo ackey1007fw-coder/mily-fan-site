@@ -84,11 +84,16 @@ describe("Support MPA route and metadata", () => {
     assert.match(serialized, /非公式/);
   });
 
-  it("keeps Calendar, top integration, and availability changes outside P4", () => {
+  it("adds the P5 agenda without leaking Support integration into the top page", () => {
     const page = source("src/SupportPage.tsx");
-    assert.doesNotMatch(page, /Support Calendar|月間|agenda|Coming soon/i);
+    assert.match(page, /Support Calendar/);
+    assert.match(page, /buildSupportCalendar\(/);
+    assert.match(page, /fanEvents: events/);
+    assert.match(page, /streamAvailability: availability/);
+    assert.match(page, /includeRadio: true/);
+    assert.doesNotMatch(page, /月間|Coming soon/i);
     assert.doesNotMatch(source("src/App.tsx"), /SupportPage|\/support\//);
-    assert.doesNotMatch(source("src/lib/useStreamSchedule.ts"), /availability/);
+    assert.match(source("src/lib/useStreamSchedule.ts"), /availability/);
     assert.match(page, /useMilyRealtimeStatus\(\)/);
     assert.match(page, /useStreamSchedule\(\)/);
     assert.doesNotMatch(page, /fetch\(|setInterval\(|createPollStore/);
