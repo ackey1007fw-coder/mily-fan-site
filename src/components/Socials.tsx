@@ -1,5 +1,6 @@
 import { links } from "../data/links";
 import { socials } from "../data/socials";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
@@ -21,7 +22,7 @@ export function Socials() {
   const hasAny = socials.length > 0 || links.length > 0;
 
   return (
-    <section id="links" className="scroll-mt-24 px-4 py-10">
+    <section id="links" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">Follow Mily</h2>
         <p className="mt-2 text-sm text-ink-muted">みりぃさんのSNSと関連リンク。</p>

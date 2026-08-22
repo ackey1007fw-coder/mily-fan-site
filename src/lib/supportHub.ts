@@ -17,6 +17,9 @@ import {
   type PendingSupportItem,
 } from "./supportCalendar.ts";
 
+/** Support Hub（`/support/`）の正規route。ホーム側の導線もここを参照する。 */
+export const SUPPORT_HUB_ROUTE = "/support/" as const;
+
 export const RADIO_APPEARANCE_NOTE =
   "番組枠は、みりぃ本人の出演時間を示すものではありません。";
 

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { news, sortNewsByDateDesc } from "../data/news";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
@@ -31,7 +32,7 @@ export function Latest() {
   const latestNews = sortNewsByDateDesc(news);
 
   return (
-    <section id="latest" className="scroll-mt-24 px-4 py-10">
+    <section id="latest" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">最新情報</h2>
         <p className="mt-2 text-sm text-ink-muted">みりぃさんの近況とお知らせ。</p>

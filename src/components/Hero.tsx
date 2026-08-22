@@ -1,10 +1,10 @@
+import { contest } from "../data/contest";
 import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
+import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { ExternalLink } from "./ExternalLink";
-
-const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 
 export function Hero() {
   const photo = featuredPhoto();
@@ -40,10 +40,10 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <ExternalLink
-              href={ENTRY_URL}
+              href={contest.entryUrl}
               className="inline-flex min-h-11 items-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white hover:bg-sage-deep"
             >
-              ENTRY 734を応援する
+              {contest.entryNumber}を応援する
             </ExternalLink>
             <a
               href="#latest"
@@ -53,7 +53,7 @@ export function Hero() {
             </a>
           </div>
           <p className="mt-3 text-xs text-ink-muted">
-            MISS CIRCLE CONTEST 2026 / <a href="#support" className="underline hover:text-sage-deep">応援について</a>
+            {contest.contestName} / <a href={SUPPORT_HUB_ROUTE} className="underline hover:text-sage-deep">応援・予定について</a>
           </p>
         </div>
 

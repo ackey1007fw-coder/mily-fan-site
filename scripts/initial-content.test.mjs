@@ -117,18 +117,19 @@ describe("confirmed public identity", () => {
 });
 
 describe("support and empty schedule", () => {
-  it("introduces a MISS CIRCLE support section without guessing contest rules", async () => {
+  it("keeps the home support section a compact gateway to the Support Hub", async () => {
     const support = await read("src/components/Support.tsx");
     const footer = await read("src/components/Footer.tsx");
     const app = await read("src/App.tsx");
 
     assert.match(app, /<Support \/>/);
     assert.match(support, /id="support"/);
-    assert.match(support, /MISS CIRCLE CONTEST 2026/);
-    assert.match(support, /ENTRY 734/);
-    assert.match(support, /投票ページを見る/);
-    assert.match(support, /https:\/\/2026\.misscircle\.jp\/entry\/734/);
-    assert.match(support, /投票方法・最新情報はENTRY 734ページへ/);
+    assert.match(support, /SUPPORT_HUB_ROUTE/);
+    assert.match(support, /Support Hubを見る/);
+    // ENTRY 番号 / URL は contest.ts が正本。同じ事実を文字列で再保存しない。
+    assert.match(support, /contest\.entryUrl/);
+    assert.match(support, /contest\.entryNumber/);
+    assert.doesNotMatch(support, /2026\.misscircle\.jp/);
     assert.doesNotMatch(support, /順位|締切|投票期間/);
     assert.doesNotMatch(support, /このサイトは公式|公認|本人運営/);
     assert.match(footer, /ファン制作の非公式サイト/);

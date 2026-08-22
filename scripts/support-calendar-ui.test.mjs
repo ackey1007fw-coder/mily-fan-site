@@ -134,10 +134,15 @@ describe("Support Calendar agenda UI", () => {
     assert.doesNotMatch(page, /みりぃ出演中|みりぃの出演時間/);
   });
 
-  it("keeps P4 NOW accessibility and P6 top integration out of scope", () => {
+  it("keeps P4 NOW accessibility and leaves the Calendar on /support/", () => {
     const page = source("src/SupportPage.tsx");
     assert.match(page, /role="status" aria-live="polite" aria-atomic="true"/);
-    assert.doesNotMatch(source("src/App.tsx"), /SupportPage|\/support\//);
+    // P6でホームからの導線は追加したが、Calendar本体は複製していない
+    assert.doesNotMatch(source("src/App.tsx"), /SupportPage|buildSupportCalendar/);
     assert.doesNotMatch(source("src/components/TodayDashboard.tsx"), /Support Calendar/);
+    assert.doesNotMatch(
+      source("src/components/TodayDashboard.tsx"),
+      /buildSupportCalendar|calendar\.days/,
+    );
   });
 });

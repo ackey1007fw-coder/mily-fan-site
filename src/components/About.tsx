@@ -1,4 +1,5 @@
 import { profile } from "../data/profile";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 
 const previewFactIds = new Set(["hometown", "university", "special-skill", "fan-name"]);
 
@@ -11,7 +12,7 @@ export function About() {
   const previewFacts = profile.facts.filter((fact) => previewFactIds.has(fact.id));
 
   return (
-    <section id="about" className="scroll-mt-24 px-4 py-10">
+    <section id="about" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
         <div className="overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card">
           <div className="bg-sage-soft/70 px-5 py-6 sm:px-8">
