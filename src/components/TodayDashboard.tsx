@@ -36,17 +36,20 @@ export function TodayDashboard() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
 
   const banner = deriveBannerState({ live, radio, slots });
-  const { todayItems, nowItems, retainedActions } = selectHomeToday({
-    contest,
-    supportEvents,
-    streamSlots: slots,
-    streamRoomUrl: roomUrl,
-    live,
-    radio,
-    radioPhase: schedulePhase,
-    banner,
-    now: Date.now(),
-  });
+  const { todayItems, nowItems, retainedActions, fallbackActions } =
+    selectHomeToday({
+      contest,
+      supportEvents,
+      streamSlots: slots,
+      streamRoomUrl: roomUrl,
+      live,
+      radio,
+      radioPhase: schedulePhase,
+      banner,
+      now: Date.now(),
+    });
+  // バナー抑制で残したCTAと、どこもSHOWROOMへ送っていないときの確認済みfallback。
+  const secondaryActions = [...retainedActions, ...fallbackActions];
 
   const contestToday = todayItems.find((item) => item.key === "today:contest");
   const scheduleItems = todayItems.filter(
@@ -141,9 +144,10 @@ export function TodayDashboard() {
           `/support/` への導線は、すぐ下の compact Support gateway が担当する。
           同じCTAを上下で繰り返さない。
 
-          retainedActions は、バナーが同じ枠を出していて行だけ抑制した項目のうち、
+          secondaryActions は、バナーが同じ枠を出していて行だけ抑制した項目のうち
           バナーが提供していない行き先（例: バナーが `#stream` に退避している間の
-          直接のSHOWROOM URL）。行き先が同じ導線はここには来ない。
+          直接のSHOWROOM URL）と、どこもSHOWROOMへ送っていないときに足す
+          `socials.ts` の確認済みfallback。行き先が同じ導線はここには来ない。
         */}
         <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <ExternalLink
@@ -152,7 +156,7 @@ export function TodayDashboard() {
           >
             {contest.entryNumber}を応援する
           </ExternalLink>
-          {retainedActions.map((action) => (
+          {secondaryActions.map((action) => (
             <ExternalLink
               key={action.url}
               href={action.url}

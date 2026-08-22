@@ -6,9 +6,12 @@ import { fileURLToPath } from "node:url";
 import { radioProgram } from "../shared/radio-program.js";
 import { activities } from "../src/data/activities.ts";
 import { contest } from "../src/data/contest.ts";
+import { socials } from "../src/data/socials.ts";
 import { supportEvents } from "../src/data/supportEvents.ts";
 import { deriveBannerState } from "../src/lib/bannerState.ts";
 import {
+  confirmedShowroomAction,
+  fallbackShowroomActions,
   HOME_NOW_LIMIT,
   rankHomeNowItems,
   retainedTodayActions,
@@ -670,9 +673,166 @@ describe("P6 keeps a SHOWROOM CTA the banner does not offer", () => {
   it("renders the retained actions in the dashboard CTA row", () => {
     const dashboard = source("src/components/TodayDashboard.tsx");
     assert.match(dashboard, /retainedActions/);
-    assert.match(dashboard, /retainedActions\.map\(\(action\) =>/);
+    assert.match(dashboard, /secondaryActions\.map\(\(action\) =>/);
     assert.match(dashboard, /href=\{action\.url\}/);
     assert.match(dashboard, /\{action\.label\}/);
     assert.match(dashboard, /key=\{action\.url\}/);
+  });
+});
+
+describe("P6 keeps the confirmed SHOWROOM fallback CTA", () => {
+  const now = Date.parse("2026-08-22T12:00:00+09:00"); // 土曜・放送枠の外
+  const confirmed = socials.find(({ platform }) => platform === "showroom");
+  const NONE = { kind: "NONE", stateLabel: "", title: "" };
+
+  function view({ live = unknownLive, streamRoomUrl = null, streamSlots = [] } = {}) {
+    const banner = deriveBannerState({ live, radio: null, slots: streamSlots }, now);
+    return {
+      banner,
+      ...selectHomeToday({
+        contest,
+        supportEvents: [],
+        streamSlots,
+        streamRoomUrl,
+        live,
+        radio: null,
+        radioPhase: "idle",
+        banner,
+        now,
+      }),
+    };
+  }
+
+  it("takes the fallback URL from socials.ts and hardcodes nothing", () => {
+    assert.ok(confirmed, "socials.ts must hold a confirmed SHOWROOM entry");
+    assert.equal(confirmedShowroomAction().url, confirmed.url);
+    assert.equal(confirmed.confirmed, true);
+    // URLの正本は socials.ts だけ。projection側に文字列で持たない。
+    assert.doesNotMatch(code("src/lib/homeToday.ts"), /showroom-live\.com/);
+    assert.match(code("src/lib/homeToday.ts"), /socials\.find/);
+  });
+
+  it("keeps the SHOWROOM CTA when both endpoints give nothing", () => {
+    // schedule も live も unavailable。枠が無いことと取得できないことを混ぜない。
+    const { banner, todayItems, retainedActions, fallbackActions } = view();
+    assert.equal(banner.kind, "NONE");
+    assert.deepEqual(retainedActions, []);
+    assert.deepEqual(fallbackActions, [
+      { label: "SHOWROOMで見る", url: confirmed.url },
+    ]);
+    // 取得できないことを「予定なし」と書かない
+    assert.equal(todayItems.some(({ activityId }) => activityId === "live-stream"), false);
+    assert.doesNotMatch(
+      [code("src/components/TodayDashboard.tsx"), code("src/lib/homeToday.ts")].join("\n"),
+      /予定なし|配信なし/,
+    );
+  });
+
+  it("still offers it when a slot exists but no room URL was resolved", () => {
+    const { banner, fallbackActions } = view({
+      streamSlots: [{ date: "2026-08-22", time: "20:00" }],
+    });
+    // `#stream` はページ内anchorなのでSHOWROOM導線とは見なさない
+    assert.equal(banner.href, "#stream");
+    assert.deepEqual(fallbackActions.map(({ url }) => url), [confirmed.url]);
+  });
+
+  it("never doubles up when something already points at SHOWROOM", () => {
+    const slots = [{ date: "2026-08-22", time: "20:00" }];
+    // バナーが直接のSHOWROOM URLを出している
+    const withLiveUrl = view({
+      live: { ...unknownLive, roomUrl: confirmed.url },
+      streamRoomUrl: confirmed.url,
+      streamSlots: slots,
+    });
+    assert.deepEqual(withLiveUrl.fallbackActions, []);
+
+    // retainedActions が既にSHOWROOMへ送っている
+    const retained = view({ streamRoomUrl: confirmed.url, streamSlots: slots });
+    assert.equal(retained.retainedActions.length, 1);
+    assert.deepEqual(retained.fallbackActions, []);
+
+    // 実ライブ中
+    const live = view({
+      live: { ...unknownLive, state: "live", roomUrl: confirmed.url },
+      streamRoomUrl: confirmed.url,
+    });
+    assert.deepEqual(live.fallbackActions, []);
+
+    // どのケースでもSHOWROOM導線は多くても1本
+    for (const v of [withLiveUrl, retained, live, view()]) {
+      const showroomCtas = [
+        ...v.todayItems.map(({ cta }) => cta?.url),
+        ...v.retainedActions.map(({ url }) => url),
+        ...v.fallbackActions.map(({ url }) => url),
+      ].filter((url) => typeof url === "string" && url.includes("showroom-live.com"));
+      assert.ok(showroomCtas.length <= 1, JSON.stringify(showroomCtas));
+    }
+  });
+
+  it("compares by origin so another room path does not add a second button", () => {
+    const otherRoom = "https://www.showroom-live.com/r/another_room";
+    const todayItem = {
+      key: "today:showroom:2026-08-22T20:00",
+      activityId: "live-stream",
+      label: "確認済みの配信枠",
+      value: "2026.08.22 20:00〜",
+      cta: { label: "SHOWROOMで見る", url: otherRoom },
+    };
+    assert.deepEqual(
+      fallbackShowroomActions({
+        banner: NONE,
+        todayItems: [todayItem],
+        nowItems: [],
+        retainedActions: [],
+      }),
+      [],
+    );
+    // NOW側の導線でも同じ判定になる
+    assert.deepEqual(
+      fallbackShowroomActions({
+        banner: NONE,
+        todayItems: [],
+        nowItems: [
+          {
+            key: "now:showroom-live",
+            origin: "showroom-live",
+            activityId: "live-stream",
+            title: "SHOWROOMで配信中",
+            cta: { label: "いますぐ見る", url: otherRoom },
+          },
+        ],
+        retainedActions: [],
+      }),
+      [],
+    );
+    // 別ドメインの導線は関係ない
+    assert.deepEqual(
+      fallbackShowroomActions({
+        banner: { ...NONE, href: radioProgram.listenUrl },
+        todayItems: [],
+        nowItems: [],
+        retainedActions: [],
+      }).map(({ url }) => url),
+      [confirmed.url],
+    );
+  });
+
+  it("renders retained and fallback actions in one CTA row", () => {
+    const dashboard = source("src/components/TodayDashboard.tsx");
+    assert.match(dashboard, /fallbackActions/);
+    assert.match(
+      dashboard,
+      /const secondaryActions = \[\.\.\.retainedActions, \.\.\.fallbackActions\];/,
+    );
+    assert.match(dashboard, /secondaryActions\.map\(\(action\) =>/);
+    // SNS chip の構成は変えない（showroom は従来どおり chip に入れない）
+    assert.match(dashboard, /const SNS_PLATFORMS = \["x", "instagram", "tiktok"\] as const;/);
+  });
+
+  it("leaves /support/ untouched by the home fallback", () => {
+    const page = source("src/SupportPage.tsx");
+    assert.doesNotMatch(page, /fallbackShowroomActions|confirmedShowroomAction|homeToday/);
+    assert.match(page, /buildSupportCalendar\(/);
   });
 });

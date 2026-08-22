@@ -14,12 +14,17 @@
  *    「トップに巨大なCalendarを置かず、NOW最大2件と `/support/` 導線に留める」に従い、
  *    ホームのNOWは決定的な優先順位で最大2件へ絞る。
  *    `/support/` は `selectSupportNow()` を直接使い続けるので全件のまま。
+ * 3. 確認済みSHOWROOM導線のfallback: schedule / live APIが取得できない、または
+ *    今日の枠が無いときでも、`socials.ts` の確認済みSHOWROOM URLへは行けるようにする。
+ *    どこか（バナー / today / now / retainedActions）が既にSHOWROOMへ送っている
+ *    ときは足さない。取得できないことを「予定なし」とは書かない。
  *
  * ここで新しい事実・新しい日程・新しい状態ラベルを作らない。
  * Support側のsemanticsを変えず、表示するかどうかだけを決める純粋関数。
  */
 import type { Contest } from "../data/contest.ts";
 import type { RadioStatus, SchedulePhase } from "../data/radio.ts";
+import { socials } from "../data/socials.ts";
 import type { StreamSlot } from "../data/streamSchedule.ts";
 import type { SupportEvent } from "../data/supportEvents.ts";
 import type { BannerState } from "./bannerState.ts";
@@ -41,6 +46,11 @@ export type HomeTodayView = {
    * 行そのものは重複するので出さず、CTAだけを拾う。
    */
   retainedActions: SupportAction[];
+  /**
+   * どこもSHOWROOMへ送っていないときだけ足す、確認済みのfallback導線。
+   * URLは `socials.ts` が正本。ここで新しいURLを持たない。
+   */
+  fallbackActions: SupportAction[];
 };
 
 /** compactなホームNOWの上限（design 9.5「NOW最大2件」）。 */
@@ -141,6 +151,56 @@ export function retainedTodayActions(
   return actions;
 }
 
+/**
+ * `socials.ts` の確認済みSHOWROOM導線。URLの正本は `socials.ts` だけで、
+ * ここには持たない。未登録なら null（推測して作らない）。
+ */
+export function confirmedShowroomAction(): SupportAction | null {
+  const entry = socials.find(({ platform }) => platform === "showroom");
+  return entry ? { label: "SHOWROOMで見る", url: entry.url } : null;
+}
+
+function sameOrigin(a: string, b: string): boolean {
+  try {
+    return new URL(a).origin === new URL(b).origin;
+  } catch {
+    // `#stream` のようなページ内anchorはURLとして解決できない = 別の行き先。
+    return false;
+  }
+}
+
+/**
+ * 確認済みSHOWROOM導線をfallbackとして足すか決める。
+ *
+ * バナー・today・now・retainedActions のどれかが既にSHOWROOMへ送っているなら
+ * 足さない（同じ場所へのボタンを2つ並べない）。判定はURL完全一致ではなく
+ * originで見る。API解決のroom URLと確認済みURLはpathが違うことがあり、
+ * どちらもSHOWROOMへ送る以上、並べる意味がないため。
+ *
+ * schedule / live APIが取得できない、または今日の枠が無いというだけでは
+ * SHOWROOM導線を消さない。取得できないことは「予定なし」ではない。
+ */
+export function fallbackShowroomActions(input: {
+  banner: BannerState;
+  todayItems: SupportTodayItem[];
+  nowItems: SupportNowItem[];
+  retainedActions: SupportAction[];
+}): SupportAction[] {
+  const confirmed = confirmedShowroomAction();
+  if (!confirmed) return [];
+
+  const offered = [
+    input.banner.href,
+    ...input.todayItems.map((item) => item.cta?.url),
+    ...input.nowItems.map((item) => item.cta?.url),
+    ...input.retainedActions.map((action) => action.url),
+  ].filter((url): url is string => typeof url === "string");
+
+  return offered.some((url) => sameOrigin(url, confirmed.url))
+    ? []
+    : [confirmed];
+}
+
 export function selectHomeToday(input: {
   contest: Contest;
   supportEvents: SupportEvent[];
@@ -178,5 +238,12 @@ export function selectHomeToday(input: {
     }).filter((item) => !bannerCoversNowItem(input.banner, item)),
   ).slice(0, HOME_NOW_LIMIT);
 
-  return { todayItems, nowItems, retainedActions };
+  const fallbackActions = fallbackShowroomActions({
+    banner: input.banner,
+    todayItems,
+    nowItems,
+    retainedActions,
+  });
+
+  return { todayItems, nowItems, retainedActions, fallbackActions };
 }
