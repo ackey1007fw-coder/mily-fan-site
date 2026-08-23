@@ -291,10 +291,10 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    // 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）を加えて10本（既存b03・b07・b09・b11・b12・b13・b15は残す）。
-    assert.equal(visibleGalleryVideos().length, 10);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 21);
-    assert.equal(galleryVideoViews().length, 21);
+    // 2026-08-24 の夜枠お礼Story（b23）と 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）を加えて11本（既存b03・b07・b09・b11・b12・b13・b15は残す）。
+    assert.equal(visibleGalleryVideos().length, 11);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 22);
+    assert.equal(galleryVideoViews().length, 22);
   });
 });
 

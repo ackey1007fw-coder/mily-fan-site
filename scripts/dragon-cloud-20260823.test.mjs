@@ -84,14 +84,15 @@ describe("2026-08-23 dragon-cloud Instagram post — NEWS", () => {
     assert.equal(item.url, undefined);
     assert.equal(item.message, undefined);
     assert.equal(item.ctaLabel, undefined);
-    assert.equal(news.length, 24);
+    assert.equal(news.length, 25);
 
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0].id, NEWS_ID);
-    assert.equal(ordered[1].id, "2026-08-23-seaside-circle-musical-special");
-    assert.equal(ordered[2].id, "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[3].id, "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[4].id, "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[0].id, "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[1].id, NEWS_ID);
+    assert.equal(ordered[2].id, "2026-08-23-seaside-circle-musical-special");
+    assert.equal(ordered[3].id, "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[4].id, "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[5].id, "2026-08-23-earthquake-showroom-fanroom");
   });
 
   it("summarizes only details stated in the supplied post", () => {

@@ -136,6 +136,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     assert.deepEqual(ordered.slice(0, 10), [
+      "2026-08-24-night-thanks-morning-stream",
       "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",
       MORNING_ID,
@@ -145,9 +146,8 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       NIGHT_ID,
       EVENING_ID,
       CAMPUS_ID,
-      "2026-08-21-tiktok-radio-misscircle",
     ]);
-    assert.equal(news.length, 24);
+    assert.equal(news.length, 25);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {
