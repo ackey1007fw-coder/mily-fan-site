@@ -9,6 +9,7 @@ import {
   morningShowroomRunwayVideo,
   type MorningShowroomRunwayVideo,
 } from "./morningShowroomRunwayVideo.ts";
+import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { tiktokRadioVideo, type TikTokRadioVideo } from "./tiktokRadioVideo.ts";
 
@@ -17,6 +18,7 @@ export type GalleryVideoItem =
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo;
 export {
+  earthquakeSafetyStoryVideo,
   eventStory20260821,
   morningOhayo20260821,
   morningShowroomRunwayVideo,
@@ -32,6 +34,7 @@ export {
  * MP4 and poster paths remain single-source. Newest first.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  earthquakeSafetyStoryVideo,
   tiktokRadioVideo,
   eventStory20260821,
   morningOhayo20260821,

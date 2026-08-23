@@ -965,3 +965,82 @@ Latest / NEWSのテキスト記録のみ。公開cropは作っていない。
 - フルスクリーンショットを `public/` や git に入れない
 - Gallery / `media.ts` / `galleryVideos.ts` / Drive Gallery / `/stories/` へ展開しない
 - 新しいbatch番号は未使用のまま残す（決め打ちしない）
+
+## 素材台帳（batch b18 / 受領日・source date 2026-08-23）
+
+2026-08-23の地震後に投稿されたInstagram Story動画。owner-providedの縦型動画で、
+既存の地震NEWS（id `2026-08-23-earthquake-showroom-fanroom`）と Gallery が
+同じ公開MP4・poster・manifest objectを共有する。Fan Roomスクリーンショット
+（上記の非公開判断）とは別素材。Drive Gallery（b02）・`/stories/`・
+`events.ts`・`streamSchedule.ts`には含めない。新しい地震NEWSは作っていない。
+
+恒久的な公開permalinkがないため、表示は非リンクの `Instagram Story` label。
+受け渡し用URL / file IDは公開情報・tracked textとして記録しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b18-01 | `gallery/mily-b18-01-earthquake-safety-story.mp4` | 地震後、関東圏の人たちの無事を気遣い、落ち着いて身の安全を確保するよう呼びかける縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b18-01 poster | `gallery/mily-b18-01-earthquake-safety-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-23` / 恒久permalinkなし
+- 元素材は `media/original/mily-b18-01-earthquake-safety-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `29a6202b7c646e230797ddcb75d75eec865ccd3fa9e838c1d08043884a03de18`
+- 19,976,089 bytes / H.264 **High** / level 3.1 / **720×1280** / 30fps /
+  819 frames / **27.300000秒** / yuv420p / `has_b_frames` 2
+- 音声ストリームなし。chapterなし
+- 元metadata: format・videoの`creation_time: 2026-08-22T23:20:49.000000Z`、
+  `handler_name: "Core Media Video"`
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+
+### 公開MP4
+
+- sha256: `c80e2d99cce5e5c9e5cfd0ec8e565938fbb5bec81d78900010c69ef4ead0d130`
+- 1,524,443 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 819 frames / 27.300000秒 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- 音声トラックは元素材に無いため追加・生成していない
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 4158）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と`Core Media Video`は残っていない。
+  残るのはmuxer既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b18-01-earthquake-safety-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b18-01-earthquake-safety-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の4.0 / 5.0 / 6.0 / 8.0 / 13.6 / 16.0 / 20.0 / 24.0秒地点を比較。
+  4〜6秒と中盤・20秒前後は手元のノートに視線が落ちているため、
+  顔が安定して見え、テロップが読める8.0秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 46,811 bytes / 720×1280 JPEG / sha256
+  `8051dc985cf9e19a5f61476530dd8d3d210ba06368212d31c08bbdd00571edfa`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/earthquakeSafetyStoryVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+- InstagramプロフィールURLをStoryの出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 8.0 -i public/media/gallery/mily-b18-01-earthquake-safety-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b18-01-earthquake-safety-story-poster.jpg
+```
+

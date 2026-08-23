@@ -153,11 +153,12 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(item().media, morningOhayo20260821);
     assert.equal(galleryItem, morningOhayo20260821);
-    assert.equal(visible[0], tiktokRadioVideo);
-    assert.equal(visible[1], eventStory20260821);
-    assert.equal(visible[2], morningOhayo20260821);
-    assert.equal(visible[3], morningShowroomRunwayVideo);
+    assert.equal(visible[1], tiktokRadioVideo);
+    assert.equal(visible[2], eventStory20260821);
+    assert.equal(visible[3], morningOhayo20260821);
+    assert.equal(visible[4], morningShowroomRunwayVideo);
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
+      "2026-08-23",
       "2026-08-21",
       "2026-08-21",
       "2026-08-21",
@@ -166,7 +167,7 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
       "2026-08-19",
       "2026-08-17",
     ]);
-    assert.equal(visible.length, 7);
+    assert.equal(visible.length, 8);
     assert.equal(morningOhayo20260821.sourceDate, "2026-08-21");
     assert.equal(morningOhayo20260821.alt, ALT);
   });
@@ -193,8 +194,8 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 7);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 18);
+    assert.equal(galleryVideos.length, 8);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 19);
   });
 });
 

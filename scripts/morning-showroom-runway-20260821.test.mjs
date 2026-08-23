@@ -151,11 +151,11 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(item().media, morningShowroomRunwayVideo);
     assert.equal(galleryItem, morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos()[0], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[1], eventStory20260821);
-    assert.equal(visibleGalleryVideos()[2], morningOhayo20260821);
-    assert.equal(visibleGalleryVideos()[3], morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos().length, 7);
+    assert.equal(visibleGalleryVideos()[1], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[2], eventStory20260821);
+    assert.equal(visibleGalleryVideos()[3], morningOhayo20260821);
+    assert.equal(visibleGalleryVideos()[4], morningShowroomRunwayVideo);
+    assert.equal(visibleGalleryVideos().length, 8);
     assert.equal(morningShowroomRunwayVideo.sourceUrl, SOURCE);
     assert.equal(morningShowroomRunwayVideo.sourceDate, "2026-08-21");
     assert.equal(morningShowroomRunwayVideo.alt, ALT);
@@ -183,8 +183,8 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 7);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 18);
+    assert.equal(galleryVideos.length, 8);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 19);
   });
 });
 
