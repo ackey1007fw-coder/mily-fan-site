@@ -14,12 +14,17 @@ import {
   ACTIVITIES_HUB_ROUTE,
   GALLERY_ARCHIVE_INITIAL,
   GALLERY_ARCHIVE_ROUTE,
+  HOME_FOLLOW_HEADING,
+  HOME_FOLLOW_LEAD,
   HOME_GALLERY_ARCHIVE_CTA,
   HOME_GALLERY_LIMIT,
   HOME_NEWS_ARCHIVE_CTA,
   HOME_NEWS_LIMIT,
+  HOME_RADIO_CTA,
+  HOME_RADIO_LEAD,
   HOME_STORY_ARCHIVE_CTA,
   HOME_STORY_LIMIT,
+  HOME_VOTE_CTA,
   NEWS_ARCHIVE_INITIAL,
   NEWS_ARCHIVE_ROUTE,
   STORIES_ARCHIVE_ROUTE,
@@ -76,6 +81,33 @@ describe("home portal information architecture", () => {
     assert.match(socials, /aria-label="ラジオ"/);
     assert.match(socials, /radioActivity\.route/);
     assert.doesNotMatch(source("src/App.tsx"), /<Socials/);
+    const snsList = socials.indexOf('aria-label="本人SNS"');
+    const snsListEnd = socials.indexOf("</ul>", snsList);
+    const radioCta = socials.indexOf("HOME_RADIO_CTA");
+    assert.ok(snsList >= 0 && snsListEnd > snsList);
+    assert.ok(radioCta > snsListEnd, "Radio CTA must sit outside the SNS pill list");
+  });
+
+  it("makes vote the strongest home CTA without claiming an unverified voting window", () => {
+    const hero = source("src/components/Hero.tsx");
+    const dock = source("src/components/MobileActionDock.tsx");
+    assert.equal(HOME_VOTE_CTA, "みりぃに投票する");
+    assert.match(hero, /HOME_VOTE_CTA/);
+    assert.match(hero, /contest\.entryUrl/);
+    assert.match(hero, /min-h-12/);
+    assert.match(hero, /w-full/);
+    assert.match(hero, /最新情報を見る/);
+    assert.match(hero, /応援・予定/);
+    assert.match(dock, /HOME_VOTE_CTA/);
+    assert.match(dock, /contest\.entryUrl/);
+    assert.match(dock, /応援・予定/);
+    assert.doesNotMatch(hero, /投票受付中|投票期間|投票回数|開始時刻|終了時刻/);
+    assert.doesNotMatch(dock, /投票受付中|投票期間|投票回数|開始時刻|終了時刻/);
+    assert.doesNotMatch(code("src/components/Hero.tsx"), /2026\.misscircle\.jp/);
+    assert.doesNotMatch(
+      code("src/components/MobileActionDock.tsx"),
+      /2026\.misscircle\.jp/,
+    );
   });
 
   it("limits home Latest / STORY / Gallery and leaves archive routes as the full lists", () => {
@@ -200,13 +232,19 @@ describe("home portal data safety", () => {
 
   it("keeps Follow compact to personal socials and the radio activity route", () => {
     const socials = source("src/components/Socials.tsx");
-    assert.match(socials, /Follow Mily/);
+    assert.equal(HOME_FOLLOW_HEADING, "みりぃをフォロー");
+    assert.equal(HOME_FOLLOW_LEAD, "SNS・配信をフォローして最新情報をチェック");
+    assert.equal(HOME_RADIO_CTA, "ラジオを聴く");
+    assert.equal(HOME_RADIO_LEAD, "湘南シーサイドサークル");
+    assert.match(socials, /HOME_FOLLOW_HEADING/);
+    assert.match(socials, /HOME_RADIO_CTA/);
     assert.match(socials, /socials\.find/);
     assert.match(socials, /activities\.find/);
     assert.match(socials, /activity\.id === "radio"/);
     assert.match(socials, /radioActivity\.route/);
     assert.doesNotMatch(code("src/components/Socials.tsx"), /from "\.\.\/data\/links"/);
     assert.doesNotMatch(code("src/components/Socials.tsx"), /from "\.\.\/data\/radio"/);
+    assert.doesNotMatch(code("src/lib/homePortal.ts"), /from "\.\.\/data\/radio"/);
     assert.doesNotMatch(socials, /FM湘南マジックウェイブ|エントリーページへ|seasidecircle/);
     assert.doesNotMatch(code("src/components/Socials.tsx"), /fm-smw\.jp/);
   });
