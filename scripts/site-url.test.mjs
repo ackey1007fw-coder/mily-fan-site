@@ -12,6 +12,9 @@ import {
   sitemapXml,
   storyUrl,
   supportUrl,
+  newsUrl,
+  storiesIndexUrl,
+  galleryUrl,
 } from "../src/data/site.ts";
 import { activities } from "../src/data/activities.ts";
 import { verifySiteUrlConsistency } from "./check-site-url.mjs";
@@ -24,6 +27,9 @@ describe("site.siteUrl metadata source of truth", () => {
     assert.equal(profileUrl(), `${origin}/profile/`);
     assert.equal(activitiesUrl(), `${origin}/activities/`);
     assert.equal(supportUrl(), `${origin}/support/`);
+    assert.equal(newsUrl(), `${origin}/news/`);
+    assert.equal(storiesIndexUrl(), `${origin}/stories/`);
+    assert.equal(galleryUrl(), `${origin}/gallery/`);
     for (const activity of activities) {
       assert.equal(activityUrl(activity.route), `${origin}${activity.route}`);
     }
@@ -37,6 +43,9 @@ describe("site.siteUrl metadata source of truth", () => {
     assert.match(sitemapXml(), new RegExp(`<loc>${profileUrl()}</loc>`));
     assert.match(sitemapXml(), new RegExp(`<loc>${activitiesUrl()}</loc>`));
     assert.match(sitemapXml(), new RegExp(`<loc>${supportUrl()}</loc>`));
+    assert.match(sitemapXml(), new RegExp(`<loc>${newsUrl()}</loc>`));
+    assert.match(sitemapXml(), new RegExp(`<loc>${storiesIndexUrl()}</loc>`));
+    assert.match(sitemapXml(), new RegExp(`<loc>${galleryUrl()}</loc>`));
     for (const activity of activities) {
       assert.match(
         sitemapXml(),

@@ -1,32 +1,32 @@
-import { links } from "../data/links";
 import { socials } from "../data/socials";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 
-const ENTRY_LINK_ID = "miss-circle-2026-734";
-const FM_LINK_IDS = new Set([
-  "fm-smw-mily-profile",
-  "fm-smw-ssc-program",
-  "fm-smw-ssc-instagram",
-  "fm-smw-ssc-tiktok",
-  "fm-smw-staff",
-]);
+const HOME_FOLLOW_PLATFORMS = ["x", "instagram", "tiktok", "showroom"] as const;
 
+const platformLabel: Record<(typeof HOME_FOLLOW_PLATFORMS)[number], string> = {
+  x: "X",
+  instagram: "Instagram",
+  tiktok: "TikTok",
+  showroom: "SHOWROOM",
+};
+
+/**
+ * ホームの compact Follow。本人SNS（socials.ts）だけを出す。
+ * 番組・主催者リンク（links.ts）は混ぜない。
+ */
 export function Socials() {
-  const entryLink = links.find((item) => item.id === ENTRY_LINK_ID);
-  const fmLinks = links.filter((item) => FM_LINK_IDS.has(item.id));
-  const otherLinks = links.filter(
-    (item) => item.id !== ENTRY_LINK_ID && !FM_LINK_IDS.has(item.id),
-  );
-  const hasAny = socials.length > 0 || links.length > 0;
+  const items = HOME_FOLLOW_PLATFORMS.map((platform) =>
+    socials.find((item) => item.platform === platform),
+  ).filter((item) => item !== undefined);
 
   return (
-    <section id="links" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
+    <section id="links" className={`${SECTION_ANCHOR_OFFSET} px-4 py-8`}>
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-ink">Follow Mily</h2>
-        <p className="mt-2 text-sm text-ink-muted">みりぃさんのSNSと関連リンク。</p>
-        {!hasAny ? (
+        <h2 className="text-xl font-bold text-ink">Follow Mily</h2>
+        <p className="mt-2 text-sm text-ink-muted">みりぃさんの本人SNS。</p>
+        {items.length === 0 ? (
           <div className="mt-6">
             <EmptyState
               title="リンクはまだありません"
@@ -34,91 +34,19 @@ export function Socials() {
             />
           </div>
         ) : (
-          <div className="mt-6 space-y-6">
-            {socials.length > 0 ? (
-              <ul className="grid gap-3 sm:grid-cols-2">
-                {socials.map((item) => (
-                  <li key={item.id}>
-                    <ExternalLink
-                      href={item.url}
-                      className="block rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card hover:border-sage/40"
-                    >
-                      <span className="text-xs uppercase tracking-wide text-ink-muted">
-                        {item.platform}
-                      </span>
-                      <span className="mt-1 block font-semibold text-ink">
-                        {item.label}
-                      </span>
-                    </ExternalLink>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-
-            {entryLink ? (
-              <div className="rounded-2xl border-2 border-sage/40 bg-sage-soft/60 p-5 shadow-card">
-                <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
-                  MISS CIRCLE CONTEST 2026
-                </p>
-                <p className="mt-1 font-semibold text-ink">{entryLink.label}</p>
-                {entryLink.note ? (
-                  <p className="mt-2 text-sm text-ink-muted">{entryLink.note}</p>
-                ) : null}
-                <p className="mt-4">
-                  <ExternalLink
-                    href={entryLink.url}
-                    className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
-                  >
-                    エントリーページへ
-                  </ExternalLink>
-                </p>
-              </div>
-            ) : null}
-
-            {fmLinks.length > 0 ? (
-              <div className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
-                <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
-                  FM湘南マジックウェイブ
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  Mily（ミリー） / 湘南シーサイドサークル
-                </p>
-                <p className="mt-4 flex flex-wrap gap-3">
-                  {fmLinks
-                    .filter((item) => item.id !== "fm-smw-staff")
-                    .map((item) => (
-                      <ExternalLink
-                        key={item.id}
-                        href={item.url}
-                        className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
-                      >
-                        {item.label}
-                      </ExternalLink>
-                    ))}
-                </p>
-              </div>
-            ) : null}
-
-            {otherLinks.length > 0 ? (
-              <ul className="space-y-3">
-                {otherLinks.map((item) => (
-                  <li key={item.id}>
-                    <ExternalLink
-                      href={item.url}
-                      className="block rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
-                    >
-                      <span className="font-semibold text-ink">{item.label}</span>
-                      {item.note ? (
-                        <span className="mt-1 block text-sm text-ink-muted">
-                          {item.note}
-                        </span>
-                      ) : null}
-                    </ExternalLink>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
+          <ul className="mt-4 flex flex-wrap gap-2">
+            {items.map((item) => (
+              <li key={item.id}>
+                <ExternalLink
+                  href={item.url}
+                  className="inline-flex min-h-11 items-center rounded-full border border-sage/25 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+                >
+                  {platformLabel[item.platform as (typeof HOME_FOLLOW_PLATFORMS)[number]] ??
+                    item.platform}
+                </ExternalLink>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
     </section>

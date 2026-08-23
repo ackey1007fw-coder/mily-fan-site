@@ -151,14 +151,18 @@ describe("gallery provenance", () => {
       "utf8",
     );
 
+    const selector = await readFile(
+      path.join(root, "src/lib/galleryItems.ts"),
+      "utf8",
+    );
     assert.match(source, /from "\.\/ExternalLink"/);
-    assert.match(source, /visibleMedia\(media\)/);
+    assert.match(selector, /visibleMedia\(media\)/);
     assert.match(source, /item\.sourceUrl \?/);
     assert.match(source, /href=\{item\.sourceUrl\}/);
     assert.match(source, /出典を見る/);
     // 縦写真は aspect でタイル比率を上書きし、4/3 へ切り抜かない
     assert.match(source, /aspect-\[4\/3\]/);
-    assert.match(source, /item\.aspect \? \{ aspectRatio: item\.aspect \} : \{\}/);
+    assert.match(source, /item\.aspect \? \{ aspectRatio: item\.aspect \}/);
   });
 });
 

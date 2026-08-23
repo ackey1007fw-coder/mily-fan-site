@@ -8,7 +8,7 @@
  *    ラジオ番組枠を出しているとき、そのすぐ下の TodayDashboard で
  *    同じ内容・同じCTAを繰り返さない。
  *    ただし抑制するのは **バナーと同じ行き先** の導線だけ。バナーが
- *    `#stream`（ページ内anchor）へ退避しているのに項目側が直接のSHOWROOM URLを
+ *    `/support/` へ退避しているのに項目側が直接のSHOWROOM URLを
  *    持っている場合、そのCTAはバナーが提供していない導線なので残す。
  * 2. NOWの件数制限: `docs/ACTIVITIES-SUPPORT-DESIGN.md` 9.5 の
  *    「トップに巨大なCalendarを置かず、NOW最大2件と `/support/` 導線に留める」に従い、
@@ -123,8 +123,8 @@ function todayShowroomKey(slot: StreamSlot): string {
 /**
  * 抑制された「今日」の項目から、バナーが提供していない導線だけを拾う。
  *
- * `SHOWROOM_TODAY` バナーは `live.roomUrl` が未取得だと `#stream`
- * （ページ内anchor）へ退避する。一方 `selectSupportToday()` は
+ * `SHOWROOM_TODAY` バナーは `live.roomUrl` が未取得だと `/support/`
+ * （Support Hub）へ退避する。一方 `selectSupportToday()` は
  * schedule API が解決した room URL を使うので、同じ枠を指していても
  * **行き先が違う**ことがある。この場合に直接のSHOWROOM導線まで消さない。
  *
@@ -164,7 +164,7 @@ function sameOrigin(a: string, b: string): boolean {
   try {
     return new URL(a).origin === new URL(b).origin;
   } catch {
-    // `#stream` のようなページ内anchorはURLとして解決できない = 別の行き先。
+    // `/support/` のような相対pathやページ内anchorはSHOWROOM originではない。
     return false;
   }
 }

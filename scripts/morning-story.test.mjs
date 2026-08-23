@@ -161,6 +161,7 @@ describe("shared morning Story assets", () => {
       "src/data/morningStory20260820.json",
       "src/components/Latest.tsx",
       "src/components/Gallery.tsx",
+      "src/lib/galleryItems.ts",
     ];
 
     for (const relative of frontendFiles) {
@@ -199,13 +200,14 @@ describe("Latest video playback contract", () => {
 describe("Gallery video contracts", () => {
   it("renders every published standalone Gallery video through the local contract", async () => {
     const gallery = await read("src/components/Gallery.tsx");
+    const selector = await read("src/lib/galleryItems.ts");
     const visible = visibleGalleryVideos();
 
     assert.ok(visible.length > 0);
-    assert.match(gallery, /visibleGalleryVideos\(\)\.map\(driveVideoView\)/);
-    assert.match(gallery, /videos\.map\(\(video\) =>/);
+    assert.match(selector, /visibleGalleryVideos\(\)\.map\(driveVideoView\)/);
+    assert.match(gallery, /selectGalleryEntries\(\)/);
     assert.match(gallery, /src=\{video\.video\.src\}/);
-    assert.match(gallery, /お預かりした動画、全\{videos\.length\}本。/);
+    assert.match(gallery, /お預かりした動画/);
     assert.doesNotMatch(gallery, /同一動画の重複/);
 
     for (const item of visible) {

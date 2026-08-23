@@ -7,10 +7,10 @@
     /*
      * ホーム内anchorのスクロールオフセット。実際の値は Header が
      * 描画後の実測高さで上書きする（`--header-offset`）。
-     * ここは JS 実行前・Header 不在時のフォールバックで、
-     * `md` 未満で nav pill が3段になったときの実測 203px を上回る値にしてある。
+     * ここは JS 実行前・Header 不在時のフォールバック。
+     * compact header（メニュー閉）は約 57px。メニュー開時も実測で上書きする。
      */
-    --header-offset: 13rem;
+    --header-offset: 5rem;
   }
 
   html {

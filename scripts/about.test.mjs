@@ -8,22 +8,17 @@ import { profile } from "../src/data/profile.ts";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 describe("home profile preview", () => {
-  it("keeps the home concise and links to the detailed profile page", async () => {
+  it("moves the long About block off the home page to /profile/", async () => {
     const source = await readFile(path.join(root, "src/components/About.tsx"), "utf8");
     const app = await readFile(path.join(root, "src/App.tsx"), "utf8");
+    const navigation = await readFile(path.join(root, "src/lib/navigation.ts"), "utf8");
 
-    assert.match(source, /previewFactIds/);
-    assert.doesNotMatch(source, /mbti/);
-    assert.match(source, /fact\.label/);
-    assert.match(source, /fact\.value/);
-    assert.match(source, /fact\.asOf/);
-    assert.match(source, /時点/);
-    assert.doesNotMatch(source, /確認時点が分かる公開情報|まとめました|掲載しています/);
+    assert.doesNotMatch(app, /<About/);
+    assert.match(navigation, /PROFILE_ROUTE|"\/profile\/"/);
     assert.match(source, /href="\/profile\/"/);
     assert.match(source, /詳しいプロフィールを見る/);
     assert.doesNotMatch(source, /profile\.activities\.map/);
     assert.doesNotMatch(source, /profile\.collections\.map/);
-    assert.ok(app.indexOf("<About />") < app.indexOf("<Gallery />"));
   });
 });
 

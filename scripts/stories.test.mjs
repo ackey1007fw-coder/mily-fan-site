@@ -247,15 +247,15 @@ describe("reusable STORIES content", () => {
 });
 
 describe("STORIES pages and discovery", () => {
-  it("places the STORIES section between Latest and About", async () => {
+  it("places the STORIES preview after Latest on the home portal", async () => {
     const app = await read("src/App.tsx");
-    const latest = app.indexOf("<Latest />");
-    const story = app.indexOf("<Stories />");
-    const about = app.indexOf("<About />");
-    assert.ok(latest >= 0 && story > latest && about > story);
+    const latest = app.indexOf("<Latest");
+    const story = app.indexOf("<Stories");
+    assert.ok(latest >= 0 && story > latest);
+    assert.doesNotMatch(app, /<About/);
 
     const navigation = await read("src/lib/navigation.ts");
-    assert.match(navigation, /href: "#stories", label: "STORY"/);
+    assert.match(navigation, /STORIES_ARCHIVE_ROUTE/);
   });
 
   it("uses the Vite multi-page entry and complete article metadata", async () => {

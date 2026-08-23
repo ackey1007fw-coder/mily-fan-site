@@ -195,7 +195,7 @@ function eventToPortalItem(event: FanEvent): PortalFeedItem {
     type,
     title: event.title,
     summary: optionalSummary(event.notes),
-    url: sameOriginPageUrl("#schedule"),
+    url: sameOriginPageUrl("/support/"),
     sourceUrl: requireHttpUrl(event.source, `event "${event.id}" sourceUrl`),
     publishedAt: canonicalizeListedAt(
       event.listedAt,

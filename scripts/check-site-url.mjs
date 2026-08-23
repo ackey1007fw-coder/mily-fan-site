@@ -13,6 +13,9 @@ import {
   sitemapXml,
   storyUrl,
   supportUrl,
+  newsUrl,
+  storiesIndexUrl,
+  galleryUrl,
 } from "../src/data/site.ts";
 import { activities } from "../src/data/activities.ts";
 
@@ -32,6 +35,32 @@ export function verifySiteUrlConsistency() {
   const canonical = canonicalUrl();
   const profileCanonical = profileUrl();
   const supportCanonical = supportUrl();
+  const newsCanonical = newsUrl();
+  const storiesIndexCanonical = storiesIndexUrl();
+  const galleryCanonical = galleryUrl();
+  const archivePages = [
+    {
+      canonical: newsCanonical,
+      html: readRelative("news/index.html"),
+      input: 'news: "news/index.html"',
+      label: "NEWS archive",
+      placeholder: "NEWS",
+    },
+    {
+      canonical: storiesIndexCanonical,
+      html: readRelative("stories/index.html"),
+      input: 'storiesIndex: "stories/index.html"',
+      label: "STORY archive",
+      placeholder: "STORIES",
+    },
+    {
+      canonical: galleryCanonical,
+      html: readRelative("gallery/index.html"),
+      input: 'gallery: "gallery/index.html"',
+      label: "Gallery archive",
+      placeholder: "GALLERY",
+    },
+  ];
   const activityPages = [
     {
       canonical: activitiesUrl(),
@@ -116,6 +145,27 @@ export function verifySiteUrlConsistency() {
   }
   if (!supportHtml.includes("非公式")) {
     errors.push("Support metadata must state that the site is unofficial");
+  }
+  for (const archivePage of archivePages) {
+    const key = archivePage.placeholder;
+    if (!archivePage.html.includes(`href="__${key}_CANONICAL__"`)) {
+      errors.push(`${archivePage.label} canonical must use __${key}_CANONICAL__`);
+    }
+    if (
+      !archivePage.html.includes('property="og:url"') ||
+      !archivePage.html.includes(`content="__${key}_CANONICAL__"`)
+    ) {
+      errors.push(`${archivePage.label} og:url must use __${key}_CANONICAL__`);
+    }
+    if (!archivePage.html.includes('content="__SITE_OG_IMAGE__"')) {
+      errors.push(`${archivePage.label} images must use __SITE_OG_IMAGE__`);
+    }
+    if (!archivePage.html.includes(`__${key}_JSON_LD__`)) {
+      errors.push(`${archivePage.label} must include generated JSON-LD`);
+    }
+    if (!archivePage.html.includes("非公式")) {
+      errors.push(`${archivePage.label} metadata must state that the site is unofficial`);
+    }
   }
   if (!storyHtml.includes('href="__STORY_SECOND_ROUND_CANONICAL__"')) {
     errors.push("story canonical href must use __STORY_SECOND_ROUND_CANONICAL__");
@@ -217,6 +267,11 @@ export function verifySiteUrlConsistency() {
   if (!sitemap.includes(`<loc>${supportCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the Support canonical URL");
   }
+  for (const archivePage of archivePages) {
+    if (!sitemap.includes(`<loc>${archivePage.canonical}</loc>`)) {
+      errors.push(`public/sitemap.xml must include ${archivePage.label}`);
+    }
+  }
   if (!sitemap.includes(`<loc>${storyCanonical}</loc>`)) {
     errors.push("public/sitemap.xml must include the story canonical URL");
   }
@@ -260,9 +315,22 @@ export function verifySiteUrlConsistency() {
   ) {
     errors.push("vite.config.ts must include Support metadata and its physical input");
   }
+  if (
+    !viteConfig.includes("archivePageMetadata") ||
+    !viteConfig.includes('news: "news/index.html"') ||
+    !viteConfig.includes('storiesIndex: "stories/index.html"') ||
+    !viteConfig.includes('gallery: "gallery/index.html"')
+  ) {
+    errors.push("vite.config.ts must include NEWS / STORY / Gallery archive inputs");
+  }
   for (const activityPage of activityPages) {
     if (!viteConfig.includes(activityPage.input)) {
       errors.push(`vite.config.ts must include the physical input for ${activityPage.label}`);
+    }
+  }
+  for (const archivePage of archivePages) {
+    if (!viteConfig.includes(archivePage.input)) {
+      errors.push(`vite.config.ts must include the physical input for ${archivePage.label}`);
     }
   }
 
@@ -281,6 +349,11 @@ export function verifySiteUrlConsistency() {
     errors.push(
       "support/index.html must not hardcode the public origin; use site.siteUrl placeholders",
     );
+  }
+  for (const archivePage of archivePages) {
+    if (hardcodedOrigin.test(archivePage.html)) {
+      errors.push(`${archivePage.label} HTML must not hardcode the public origin`);
+    }
   }
   if (hardcodedOrigin.test(storyHtml)) {
     errors.push(
@@ -312,6 +385,9 @@ export function verifySiteUrlConsistency() {
     !canonical.startsWith(origin) ||
     !profileCanonical.startsWith(origin) ||
     !supportCanonical.startsWith(origin) ||
+    !newsCanonical.startsWith(origin) ||
+    !storiesIndexCanonical.startsWith(origin) ||
+    !galleryCanonical.startsWith(origin) ||
     !storyCanonical.startsWith(origin) ||
     !radioStoryCanonical.startsWith(origin) ||
     !resultStoryCanonical.startsWith(origin) ||

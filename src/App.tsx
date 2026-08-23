@@ -1,4 +1,3 @@
-import { About } from "./components/About";
 import { ActivitiesGateway } from "./components/ActivitiesGateway";
 import { ActivityBanner } from "./components/ActivityBanner";
 import { Footer } from "./components/Footer";
@@ -7,13 +6,16 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Latest } from "./components/Latest";
 import { MobileActionDock } from "./components/MobileActionDock";
-import { Schedule } from "./components/Schedule";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { Socials } from "./components/Socials";
-import { StreamSchedule } from "./components/StreamSchedule";
 import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
 import { TodayDashboard } from "./components/TodayDashboard";
+import {
+  HOME_GALLERY_LIMIT,
+  HOME_NEWS_LIMIT,
+  HOME_STORY_LIMIT,
+} from "./lib/homePortal";
 
 export default function App() {
   return (
@@ -31,13 +33,10 @@ export default function App() {
         <TodayDashboard />
         <Support />
         <ActivitiesGateway />
-        <StreamSchedule />
+        <Latest limit={HOME_NEWS_LIMIT} />
+        <Stories limit={HOME_STORY_LIMIT} />
+        <Gallery limit={HOME_GALLERY_LIMIT} />
         <Socials />
-        <Latest />
-        <Stories />
-        <About />
-        <Gallery />
-        <Schedule />
       </main>
       <Footer />
       <MobileActionDock />

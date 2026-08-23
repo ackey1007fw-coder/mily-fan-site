@@ -201,7 +201,7 @@ function showroomTodayBanner(
     stateLabel: "予定",
     title: "今日の配信",
     detail: `${slot.time}〜 予定`,
-    href: live.roomUrl ?? "#stream",
+    href: live.roomUrl ?? "/support/",
     linkLabel: live.roomUrl ? "SHOWROOMを見る" : "配信予定を見る",
     slot,
   };

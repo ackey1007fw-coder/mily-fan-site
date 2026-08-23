@@ -29,18 +29,16 @@ describe("ページ上部へ戻るボタン", () => {
       "<Hero />",
       "<TodayDashboard />",
       "<Support />",
-      "<StreamSchedule />",
       "<Socials />",
-      "<Latest />",
-      "<Stories />",
-      "<About />",
-      "<Gallery />",
-      "<Schedule />",
       "<Footer />",
       "<MobileActionDock />",
     ]) {
       assert.ok(app.includes(tag), `${tag} must stay in App`);
     }
+    assert.match(app, /<Latest/);
+    assert.match(app, /<Stories/);
+    assert.match(app, /<Gallery/);
+    assert.doesNotMatch(app, /<StreamSchedule|<About|<Schedule/);
   });
 
   it("is an accessible button with a 44px+ tap target", async () => {

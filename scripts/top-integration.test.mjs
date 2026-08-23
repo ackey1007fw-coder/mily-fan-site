@@ -100,23 +100,22 @@ describe("P6 home information architecture", () => {
       "<TodayDashboard />",
       "<Support />",
       "<ActivitiesGateway />",
-      "<StreamSchedule />",
-      "<Latest />",
+      "<Latest",
     ]) {
       assert.ok(at(tag) >= 0, `${tag} must render on the home page`);
     }
     assert.ok(at("<Hero />") < at("<TodayDashboard />"));
     assert.ok(at("<TodayDashboard />") < at("<Support />"));
     assert.ok(at("<Support />") < at("<ActivitiesGateway />"));
-    assert.ok(at("<ActivitiesGateway />") < at("<StreamSchedule />"));
-    assert.ok(at("<StreamSchedule />") < at("<Latest />"));
+    assert.ok(at("<ActivitiesGateway />") < at("<Latest"));
+    assert.doesNotMatch(app, /<StreamSchedule/);
   });
 
   it("puts a /support/ CTA on the home page", () => {
     const support = source("src/components/Support.tsx");
     assert.equal(SUPPORT_HUB_ROUTE, "/support/");
     assert.match(support, /SUPPORT_HUB_ROUTE/);
-    assert.match(support, /Support Hubを見る/);
+    assert.match(support, /応援・予定を見る/);
     // ルート文字列はSupport domainの正本から読む（ホームで再保存しない）
     assert.doesNotMatch(support, /href="\/support\/"/);
   });
@@ -134,44 +133,51 @@ describe("P6 navigation", () => {
     const hubs = hubNavigation();
     assert.deepEqual(
       hubs.map(({ href }) => href),
-      [ACTIVITIES_HUB_ROUTE, SUPPORT_HUB_ROUTE, "/profile/"],
+      [
+        ACTIVITIES_HUB_ROUTE,
+        SUPPORT_HUB_ROUTE,
+        "/news/",
+        "/stories/",
+        "/gallery/",
+        "/profile/",
+      ],
     );
     for (const item of hubs) assert.equal(item.kind, "route");
 
     const items = visibleNavItems(0);
-    assert.deepEqual(items.slice(0, 3), hubs);
+    assert.equal(items[0].href, "/");
     assert.equal(
       items.findIndex(({ href }) => href === ACTIVITIES_HUB_ROUTE),
-      0,
+      1,
     );
   });
 
-  it("keeps the existing home anchors reachable and the header uncrowded", () => {
-    const anchors = sectionNavigation(0).map(({ href }) => href);
-    assert.deepEqual(anchors, ["#latest", "#stories", "#gallery", "#links"]);
-    assert.ok(
-      sectionNavigation(1).some(({ href }) => href === "#schedule"),
-      "the schedule anchor comes back once events exist",
-    );
-    // Hub route を足しても desktop header を 8〜9 項目にしない
+  it("uses archive routes instead of a wrapping home-anchor pill list", () => {
+    assert.deepEqual(sectionNavigation(0), []);
+    assert.deepEqual(sectionNavigation(1), []);
+    const hrefs = visibleNavItems(0).map(({ href }) => href);
+    assert.deepEqual(hrefs, [
+      "/",
+      "/activities/",
+      "/support/",
+      "/news/",
+      "/stories/",
+      "/gallery/",
+      "/profile/",
+    ]);
     assert.ok(visibleNavItems(0).length <= 7);
-    assert.ok(visibleNavItems(1).length <= 8);
-    for (const item of sectionNavigation(1)) assert.equal(item.kind, "anchor");
+    assert.ok(visibleNavItems(1).length <= 7);
   });
 
-  it("renders both nav groups with labelled navs and 44px touch targets", () => {
+  it("renders a compact disclosure menu with labelled navs and 44px touch targets", () => {
     const header = source("src/components/Header.tsx");
-    assert.match(header, /hubNavigation\(\)/);
-    assert.match(header, /sectionNavigation\(events\.length\)/);
+    assert.match(header, /visibleNavItems\(\)/);
     assert.match(header, /aria-label="サイトナビ"/);
-    assert.match(header, /aria-label="サイトナビ（小さい画面用）"/);
-    assert.match(header, /flex-wrap/);
+    assert.match(header, /aria-label="サイトメニュー"/);
+    assert.match(header, /aria-expanded=\{open\}/);
+    assert.match(header, /min-h-11/);
     assert.doesNotMatch(header, /overflow-x-auto/);
     assert.doesNotMatch(header, /min-h-10\b/);
-    // 小さい画面のpillは44px以上のtouch targetを保つ
-    assert.match(header, /const compactHubLink =\n\s+"inline-flex min-h-11/);
-    assert.match(header, /const compactSectionLink =\n\s+"inline-flex min-h-11/);
-    // 1行に詰め込みすぎないよう、狭い幅では2段目のpill列へ送る
     assert.match(header, /hidden [^"]*md:flex/);
     assert.match(header, /md:hidden/);
   });
@@ -512,41 +518,18 @@ describe("P6 home NOW stays compact", () => {
   });
 });
 
-describe("P6 anchor targets clear the wrapped header", () => {
-  /**
-   * Chromiumでの実測ヘッダー高さ。段数は幅とnav項目数で変わり、
-   * 項目数は `events.length`（非空なら「スケジュール」pillが増える）に依存する。
-   *
-   *   events 空 (7項目): 320-360=203 / 390-640=151 / 700-767=99 / 768+=57
-   *   events 非空(8項目): 320-390=203 / 430-767=151 / 768+=97
-   */
-  const HEADER_PX = {
-    withoutSchedule: { 320: 203, 390: 151, 640: 151, 700: 99, 768: 57, 1280: 57 },
-    withSchedule: { 320: 203, 390: 203, 640: 151, 700: 151, 768: 97, 1280: 97 },
-  };
-  const WORST_HEADER_PX = Math.max(
-    ...Object.values(HEADER_PX).flatMap((byWidth) => Object.values(byWidth)),
-  );
-  const CSS_FALLBACK_PX = 13 * 16; // index.css の `--header-offset: 13rem`
+describe("P6 anchor targets clear the compact header", () => {
+  const CSS_FALLBACK_PX = 5 * 16; // index.css の `--header-offset: 5rem`
 
   it("derives the offset from the measured header instead of fixed breakpoints", () => {
-    // 固定値をやめたので、項目が増えてもオフセット側の見直しが要らない
     assert.equal(SECTION_ANCHOR_OFFSET, "[scroll-margin-top:var(--header-offset)]");
     assert.doesNotMatch(SECTION_ANCHOR_OFFSET, /scroll-mt-/);
-
-    // 旧実装（`md:scroll-mt-24` = 96px）は events 非空の 768px 以上で足りなかった
-    assert.ok(HEADER_PX.withSchedule[768] > 96);
-    // 旧実装の base（`scroll-mt-52` = 208px）は最悪ケースをかろうじて超えるだけ
-    assert.ok(208 - WORST_HEADER_PX < 8);
   });
 
-  it("keeps a CSS fallback that clears the tallest measured header", () => {
+  it("keeps a CSS fallback that clears the compact closed header", () => {
     const css = source("src/index.css");
-    assert.match(css, /--header-offset:\s*13rem;/);
-    assert.ok(
-      CSS_FALLBACK_PX >= WORST_HEADER_PX,
-      `fallback ${CSS_FALLBACK_PX}px must clear the ${WORST_HEADER_PX}px header`,
-    );
+    assert.match(css, /--header-offset:\s*5rem;/);
+    assert.ok(CSS_FALLBACK_PX >= 57);
   });
 
   it("publishes the measured height from the Header, with cleanup", () => {
@@ -564,37 +547,21 @@ describe("P6 anchor targets clear the wrapped header", () => {
     assert.match(header, /ref=\{headerRef\}/);
   });
 
-  it("stays correct when the optional スケジュール pill appears", () => {
-    // `events` が非空になると項目が1つ増える
-    const withoutSchedule = sectionNavigation(0);
-    const withSchedule = sectionNavigation(1);
-    assert.equal(withSchedule.length, withoutSchedule.length + 1);
-    assert.ok(withSchedule.some(({ href }) => href === "#schedule"));
-    assert.equal(withoutSchedule.some(({ href }) => href === "#schedule"), false);
-
-    // 追加後もヘッダーは実測で fallback 以下に収まる
-    for (const [width, height] of Object.entries(HEADER_PX.withSchedule)) {
-      assert.ok(
-        height <= CSS_FALLBACK_PX,
-        `${width}px: header ${height}px must stay within the ${CSS_FALLBACK_PX}px fallback`,
-      );
-    }
-    // 項目が増えても参照するオフセットは同じ1つだけ（breakpoint分岐が無い）
+  it("does not grow the header when events appear", () => {
+    assert.deepEqual(sectionNavigation(0), sectionNavigation(1));
+    assert.equal(visibleNavItems(0).length, visibleNavItems(1).length);
     assert.equal(SECTION_ANCHOR_OFFSET.split(" ").length, 1);
   });
 
-  it("uses the shared offset on every home anchor target", () => {
+  it("uses the shared offset on every remaining home section", () => {
     const sections = [
       ["src/components/TodayDashboard.tsx", "today"],
       ["src/components/Support.tsx", "support"],
       ["src/components/ActivitiesGateway.tsx", "activities"],
-      ["src/components/StreamSchedule.tsx", "stream"],
       ["src/components/Socials.tsx", "links"],
       ["src/components/Latest.tsx", "latest"],
       ["src/components/Stories.tsx", "stories"],
-      ["src/components/About.tsx", "about"],
       ["src/components/Gallery.tsx", "gallery"],
-      ["src/components/Schedule.tsx", "schedule"],
     ];
     for (const [file, id] of sections) {
       const text = source(file);
@@ -610,25 +577,14 @@ describe("P6 anchor targets clear the wrapped header", () => {
         `${file} must not keep a fixed breakpoint offset`,
       );
     }
-    // ナビが指すanchorはすべて対象に含まれている
-    for (const item of sectionNavigation(1)) {
-      const id = item.href.replace("#", "");
-      assert.ok(
-        sections.some(([, sectionId]) => sectionId === id),
-        `nav anchor #${id} needs an offset section`,
-      );
-    }
   });
 
-  it("keeps the compact header nav wrapping, tappable, and overflow-free", () => {
+  it("keeps the compact header nav tappable and overflow-free", () => {
     const header = source("src/components/Header.tsx");
-    // 折り返しで逃がす（横スクロールを作らない）
-    assert.match(header, /flex-wrap/);
     assert.doesNotMatch(header, /overflow-x-auto|whitespace-nowrap/);
-    // 44px タッチターゲットを維持
-    assert.match(header, /const compactHubLink =\n\s+"inline-flex min-h-11/);
-    assert.match(header, /const compactSectionLink =\n\s+"inline-flex min-h-11/);
+    assert.match(header, /min-h-11/);
     assert.doesNotMatch(header, /min-h-10\b/);
+    assert.match(header, /aria-expanded=\{open\}/);
   });
 });
 
@@ -655,10 +611,10 @@ describe("P6 keeps a SHOWROOM CTA the banner does not offer", () => {
     };
   }
 
-  it("retains the direct SHOWROOM CTA while the banner falls back to #stream", () => {
+  it("retains the direct SHOWROOM CTA while the banner falls back to /support/", () => {
     const { banner, todayItems, retainedActions } = view(unknownLive, roomUrl);
     assert.equal(banner.kind, "SHOWROOM_TODAY");
-    assert.equal(banner.href, "#stream"); // バナーはページ内anchorしか出せていない
+    assert.equal(banner.href, "/support/"); // バナーはSupport Hubへ退避する
     // 行そのものの重複抑制は維持する
     assert.equal(
       todayItems.some(({ activityId }) => activityId === "live-stream"),
@@ -695,7 +651,7 @@ describe("P6 keeps a SHOWROOM CTA the banner does not offer", () => {
   });
 
   it("only picks up SHOWROOM actions and never repeats a destination", () => {
-    const banner = { kind: "SHOWROOM_TODAY", stateLabel: "予定", title: "今日の配信", href: "#stream" };
+    const banner = { kind: "SHOWROOM_TODAY", stateLabel: "予定", title: "今日の配信", href: "/support/" };
     const showroom = {
       key: "today:showroom:2026-08-22T20:00",
       activityId: "live-stream",
@@ -781,8 +737,8 @@ describe("P6 keeps the confirmed SHOWROOM fallback CTA", () => {
     const { banner, fallbackActions } = view({
       streamSlots: [{ date: "2026-08-22", time: "20:00" }],
     });
-    // `#stream` はページ内anchorなのでSHOWROOM導線とは見なさない
-    assert.equal(banner.href, "#stream");
+    // `/support/` はSHOWROOM導線ではないので fallback を残す
+    assert.equal(banner.href, "/support/");
     assert.deepEqual(fallbackActions.map(({ url }) => url), [confirmed.url]);
   });
 

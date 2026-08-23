@@ -225,12 +225,15 @@ describe("stream schedule safety", () => {
 });
 
 describe("follow section", () => {
-  it("renders socials as cards and highlights the entry page separately", async () => {
+  it("renders compact personal socials without mixing program links", async () => {
     const source = await read("src/components/Socials.tsx");
     assert.match(source, /Follow Mily/);
-    assert.match(source, /miss-circle-2026-734/);
-    assert.match(source, /エントリーページへ/);
-    assert.match(source, /FM湘南マジックウェイブ/);
+    assert.match(source, /HOME_FOLLOW_PLATFORMS/);
+    assert.match(source, /socials\.find/);
+    assert.doesNotMatch(source, /miss-circle-2026-734/);
+    assert.doesNotMatch(source, /エントリーページへ/);
+    assert.doesNotMatch(source, /FM湘南マジックウェイブ/);
+    assert.doesNotMatch(source, /from "\.\.\/data\/links"/);
   });
 });
 

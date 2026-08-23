@@ -20,14 +20,14 @@ export function Support() {
         </p>
         <h2 className="mt-2 text-2xl font-bold text-ink">応援・予定</h2>
         <p className="mt-3 text-sm leading-7 text-ink-muted">
-          今できる応援、確認済みの予定、日程発表待ちはSupport Hubにまとめています。
+          今できる応援、今日・今週の予定、日程発表待ちはSupport Hubへ。
         </p>
         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <a
             href={SUPPORT_HUB_ROUTE}
             className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
           >
-            Support Hubを見る
+            応援・予定を見る
           </a>
           <ExternalLink
             href={contest.entryUrl}

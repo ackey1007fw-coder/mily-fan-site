@@ -7,6 +7,15 @@ import {
   activityPageStructuredData,
 } from "./src/lib/activityMetadata.ts";
 import {
+  archivePageMetadata,
+  archivePageStructuredData,
+} from "./src/lib/archiveMetadata.ts";
+import {
+  GALLERY_ARCHIVE_ROUTE,
+  NEWS_ARCHIVE_ROUTE,
+  STORIES_ARCHIVE_ROUTE,
+} from "./src/lib/homePortal.ts";
+import {
   supportPageMetadata,
   supportPageStructuredData,
 } from "./src/lib/supportMetadata.ts";
@@ -18,6 +27,9 @@ function siteMetadataPlugin(): Plugin {
       const activityMetadata = html.includes("__ACTIVITY_CANONICAL__")
         ? activityPageMetadata(context.path)
         : null;
+      const newsMetadata = archivePageMetadata(NEWS_ARCHIVE_ROUTE);
+      const storiesMetadata = archivePageMetadata(STORIES_ARCHIVE_ROUTE);
+      const galleryMetadata = archivePageMetadata(GALLERY_ARCHIVE_ROUTE);
 
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
@@ -63,6 +75,44 @@ function siteMetadataPlugin(): Plugin {
           "__SUPPORT_JSON_LD__",
           JSON.stringify(supportPageStructuredData(), null, 2),
         )
+        .replaceAll("__NEWS_PAGE_TITLE__", newsMetadata?.title ?? "")
+        .replaceAll(
+          "__NEWS_PAGE_DESCRIPTION__",
+          newsMetadata?.description ?? "",
+        )
+        .replaceAll("__NEWS_CANONICAL__", newsMetadata?.canonical ?? "")
+        .replaceAll(
+          "__NEWS_JSON_LD__",
+          JSON.stringify(archivePageStructuredData(NEWS_ARCHIVE_ROUTE), null, 2),
+        )
+        .replaceAll("__STORIES_PAGE_TITLE__", storiesMetadata?.title ?? "")
+        .replaceAll(
+          "__STORIES_PAGE_DESCRIPTION__",
+          storiesMetadata?.description ?? "",
+        )
+        .replaceAll("__STORIES_CANONICAL__", storiesMetadata?.canonical ?? "")
+        .replaceAll(
+          "__STORIES_JSON_LD__",
+          JSON.stringify(
+            archivePageStructuredData(STORIES_ARCHIVE_ROUTE),
+            null,
+            2,
+          ),
+        )
+        .replaceAll("__GALLERY_PAGE_TITLE__", galleryMetadata?.title ?? "")
+        .replaceAll(
+          "__GALLERY_PAGE_DESCRIPTION__",
+          galleryMetadata?.description ?? "",
+        )
+        .replaceAll("__GALLERY_CANONICAL__", galleryMetadata?.canonical ?? "")
+        .replaceAll(
+          "__GALLERY_JSON_LD__",
+          JSON.stringify(
+            archivePageStructuredData(GALLERY_ARCHIVE_ROUTE),
+            null,
+            2,
+          ),
+        )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -93,6 +143,9 @@ export default defineConfig({
         profile: "profile/index.html",
         activities: "activities/index.html",
         support: "support/index.html",
+        news: "news/index.html",
+        storiesIndex: "stories/index.html",
+        gallery: "gallery/index.html",
         activityMissCircle: "activities/miss-circle/index.html",
         activityRadio: "activities/radio/index.html",
         activityLive: "activities/live/index.html",

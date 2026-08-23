@@ -1,15 +1,18 @@
+import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
+import {
+  GALLERY_ARCHIVE_ROUTE,
+  HOME_ROUTE,
+  NEWS_ARCHIVE_ROUTE,
+  PROFILE_ROUTE,
+  STORIES_ARCHIVE_ROUTE,
+} from "./homePortal.ts";
+import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
+
 /**
  * ホーム内anchorのスクロールオフセット。
  *
- * ヘッダーの高さは幅とnav項目数で変わる。項目数は `events.length` に依存し
- * （`events` が非空になると「スケジュール」pillが増える）、実測では
- * 8項目のとき 320〜390px=203px / 430〜767px=151px / **768px以上=97px** になる。
- * breakpointごとの固定値では 768px以上の 97px を `scroll-mt-24`（96px）で
- * 賄えず、将来項目が増えるたびに見直しが必要になる。
- *
- * そこで固定値をやめ、`Header` が描画後の実測高さを CSS custom property
- * `--header-offset` へ書き込み、各sectionはそれを参照する。
- * 幅・項目数・フォントが変わっても常に実際のヘッダーより下へ着地する。
+ * ヘッダー高さはメニュー開閉で変わるので、固定breakpoint値は使わない。
+ * `Header` が描画後の実測高さを `--header-offset` へ書き込む。
  * 既定値は `src/index.css` の `:root`（JS実行前のフォールバック）。
  */
 export const SECTION_ANCHOR_OFFSET = "[scroll-margin-top:var(--header-offset)]";
@@ -17,49 +20,32 @@ export const SECTION_ANCHOR_OFFSET = "[scroll-margin-top:var(--header-offset)]";
 export type NavItem = {
   href: string;
   label: string;
-  /** 独立ページへのroute（Hub）か、ホーム内のanchorか */
-  kind: "route" | "anchor";
+  kind: "route";
 };
 
 /**
- * Hub route。Activities / Support / Profile をヘッダーの先頭に置き、
- * ホーム内anchorに埋もれないようにする。
+ * Hub / archive への route navigation。
+ * ホーム内anchor中心だった旧ナビは、コンテンツ量が増えても
+ * ヘッダーが高さ方向へ伸びない route 一覧へ移した。
  */
-const hubNavItems: NavItem[] = [
-  { href: "/activities/", label: "Activities", kind: "route" },
-  { href: "/support/", label: "応援・予定", kind: "route" },
-  { href: "/profile/", label: "プロフィール", kind: "route" },
-];
-
-/**
- * ホーム内anchor。`#support` はHub route（`/support/`）へ移したので持たない。
- * Latest / STORY / ギャラリー / リンク / スケジュールは到達手段として残す。
- */
-const sectionNavItems: NavItem[] = [
-  { href: "#latest", label: "最新情報", kind: "anchor" },
-  { href: "#stories", label: "STORY", kind: "anchor" },
-  { href: "#gallery", label: "ギャラリー", kind: "anchor" },
-  { href: "#links", label: "リンク", kind: "anchor" },
+const siteNavItems: NavItem[] = [
+  { href: HOME_ROUTE, label: "ホーム", kind: "route" },
+  { href: ACTIVITIES_HUB_ROUTE, label: "活動", kind: "route" },
+  { href: SUPPORT_HUB_ROUTE, label: "応援・予定", kind: "route" },
+  { href: NEWS_ARCHIVE_ROUTE, label: "最新情報", kind: "route" },
+  { href: STORIES_ARCHIVE_ROUTE, label: "STORY", kind: "route" },
+  { href: GALLERY_ARCHIVE_ROUTE, label: "ギャラリー", kind: "route" },
+  { href: PROFILE_ROUTE, label: "プロフィール", kind: "route" },
 ];
 
 export function hubNavigation(): NavItem[] {
-  return [...hubNavItems];
+  return siteNavItems.filter((item) => item.href !== HOME_ROUTE);
 }
 
-export function sectionNavigation(eventCount: number): NavItem[] {
-  const items = [...sectionNavItems];
-
-  if (eventCount > 0) {
-    items.splice(2, 0, {
-      href: "#schedule",
-      label: "スケジュール",
-      kind: "anchor",
-    });
-  }
-
-  return items;
+export function sectionNavigation(_eventCount = 0): NavItem[] {
+  return [];
 }
 
-export function visibleNavItems(eventCount: number): NavItem[] {
-  return [...hubNavigation(), ...sectionNavigation(eventCount)];
+export function visibleNavItems(_eventCount = 0): NavItem[] {
+  return [...siteNavItems];
 }

@@ -1,35 +1,18 @@
-import { useEffect, useRef } from "react";
-import { events } from "../data/events";
+import { useEffect, useId, useRef, useState, type RefObject } from "react";
 import { profile } from "../data/profile";
-import { hubNavigation, sectionNavigation } from "../lib/navigation";
+import { HOME_ROUTE } from "../lib/homePortal";
+import { visibleNavItems } from "../lib/navigation";
 
-/**
- * Hub route（Activities / Support / Profile）を先に、ホーム内anchorを後に置く。
- *
- * 1行に7項目を並べると max-w-3xl では窮屈になるため、`md` 未満では
- * 2段目のコンパクトなpill列へ全項目を送る。どの幅でも横スクロールを作らない。
- */
-const desktopHubLink =
-  "inline-flex min-h-9 shrink-0 items-center rounded-full bg-sage-soft px-2.5 py-1 text-sm font-semibold text-sage-deep hover:bg-sage hover:text-white";
-const desktopSectionLink =
-  "inline-flex min-h-9 shrink-0 items-center rounded-full px-1.5 py-1 text-sm text-ink-muted hover:bg-sage-soft hover:text-sage-deep";
-const compactHubLink =
-  "inline-flex min-h-11 shrink-0 items-center rounded-full bg-sage px-3 py-2 text-sm font-semibold text-white";
-const compactSectionLink =
-  "inline-flex min-h-11 shrink-0 items-center rounded-full bg-sage-soft px-3 py-2 text-sm text-sage-deep";
+const desktopLink =
+  "inline-flex min-h-9 shrink-0 items-center rounded-full px-2 py-1 text-sm font-medium text-ink-muted hover:bg-sage-soft hover:text-sage-deep";
+const menuLink =
+  "inline-flex min-h-11 w-full items-center rounded-xl px-3 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
+const menuButton =
+  "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 text-sm font-semibold text-sage-deep hover:bg-sage-soft md:hidden";
 
-/** 見出しがヘッダーに接しないための余白。 */
 const HEADER_OFFSET_GAP_PX = 8;
 
-/**
- * ヘッダーの実測高さを `--header-offset` として公開する。
- *
- * ヘッダーはnav pillの折り返しで高さが変わり、段数は幅と項目数
- * （`events.length` で「スケジュール」が増減する）に依存する。
- * breakpointごとの固定オフセットでは将来の項目追加で必ず破綻するので、
- * 実測値をそのまま各sectionの `scroll-margin-top` に渡す。
- */
-function useHeaderOffset(ref: React.RefObject<HTMLElement>) {
+function useHeaderOffset(ref: RefObject<HTMLElement>) {
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
@@ -45,7 +28,6 @@ function useHeaderOffset(ref: React.RefObject<HTMLElement>) {
 
     apply();
 
-    // ResizeObserver が無い環境では resize だけで追従する（値は必ず入る）。
     if (typeof ResizeObserver === "undefined") {
       window.addEventListener("resize", apply);
       return () => {
@@ -64,11 +46,22 @@ function useHeaderOffset(ref: React.RefObject<HTMLElement>) {
 }
 
 export function Header() {
-  const hubItems = hubNavigation();
-  const sectionItems = sectionNavigation(events.length);
+  const items = visibleNavItems();
   const headerRef = useRef<HTMLElement>(null);
+  const [open, setOpen] = useState(false);
+  const menuId = useId();
 
   useHeaderOffset(headerRef);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <header
@@ -76,40 +69,50 @@ export function Header() {
       className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur"
     >
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2.5">
-        <a href="#top" className="min-w-0 font-semibold tracking-wide text-sage-deep">
+        <a
+          href={HOME_ROUTE}
+          className="min-w-0 font-semibold tracking-wide text-sage-deep"
+        >
           {profile.displayName}
-          <span className="ml-2 text-xs font-medium text-ink-muted">ファンサイト</span>
+          <span className="ml-2 text-xs font-medium text-ink-muted">
+            ファンサイト
+          </span>
         </a>
         <nav
           aria-label="サイトナビ"
-          className="hidden flex-wrap items-center justify-end gap-x-1 gap-y-1 md:flex"
+          className="hidden min-w-0 flex-wrap items-center justify-end gap-x-0.5 gap-y-1 md:flex"
         >
-          {hubItems.map((item) => (
-            <a key={item.href} href={item.href} className={desktopHubLink}>
-              {item.label}
-            </a>
-          ))}
-          {sectionItems.map((item) => (
-            <a key={item.href} href={item.href} className={desktopSectionLink}>
+          {items.map((item) => (
+            <a key={item.href} href={item.href} className={desktopLink}>
               {item.label}
             </a>
           ))}
         </nav>
+        <button
+          type="button"
+          className={menuButton}
+          aria-expanded={open}
+          aria-controls={menuId}
+          onClick={() => setOpen((current) => !current)}
+        >
+          メニュー
+        </button>
       </div>
       <nav
-        aria-label="サイトナビ（小さい画面用）"
-        className="flex flex-wrap gap-2 px-4 pb-2.5 md:hidden"
+        id={menuId}
+        hidden={!open}
+        aria-label="サイトメニュー"
+        className="border-t border-sage/15 px-4 py-2 md:hidden"
       >
-        {hubItems.map((item) => (
-          <a key={item.href} href={item.href} className={compactHubLink}>
-            {item.label}
-          </a>
-        ))}
-        {sectionItems.map((item) => (
-          <a key={item.href} href={item.href} className={compactSectionLink}>
-            {item.label}
-          </a>
-        ))}
+        <ul className="mx-auto max-w-3xl space-y-1">
+          {items.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} className={menuLink}>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
     </header>
   );

@@ -125,7 +125,7 @@ describe("support and empty schedule", () => {
     assert.match(app, /<Support \/>/);
     assert.match(support, /id="support"/);
     assert.match(support, /SUPPORT_HUB_ROUTE/);
-    assert.match(support, /Support Hubを見る/);
+    assert.match(support, /応援・予定を見る/);
     // ENTRY 番号 / URL は contest.ts が正本。同じ事実を文字列で再保存しない。
     assert.match(support, /contest\.entryUrl/);
     assert.match(support, /contest\.entryNumber/);
@@ -144,7 +144,7 @@ describe("support and empty schedule", () => {
     assert.match(schedule, /if \(events\.length === 0\)/);
     assert.match(schedule, /return null/);
     assert.doesNotMatch(schedule, /いま掲載できる予定はありません/);
-    assert.match(header, /flex-wrap/);
     assert.doesNotMatch(header, /overflow-x-auto/);
+    assert.match(header, /aria-expanded/);
   });
 });
