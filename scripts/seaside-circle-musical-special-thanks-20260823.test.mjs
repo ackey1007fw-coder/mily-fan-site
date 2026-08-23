@@ -131,7 +131,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
     const radioNews = news.filter((entry) => entry.id === NEWS_ID);
     const extraThanksNews = news.filter(
       (entry) =>
-        entry.id.includes("thanks") ||
+        entry.id === "2026-08-23-seaside-circle-musical-special-thanks" ||
         entry.id.includes("musical-special-thanks"),
     );
     const entry = item();
