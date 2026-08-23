@@ -32,7 +32,8 @@ describe("ENTRY 734 funnel", () => {
   it("keeps the entry CTA in the hero, sourced from contest.ts", async () => {
     const hero = await read("src/components/Hero.tsx");
     assert.match(hero, /contest\.entryUrl/);
-    assert.match(hero, /contest\.entryNumber\}を応援する/);
+    assert.match(hero, /HOME_VOTE_CTA/);
+    assert.match(hero, /contest\.entryNumber/);
   });
 
   it("keeps an entry CTA in the compact support gateway", async () => {
@@ -227,7 +228,7 @@ describe("stream schedule safety", () => {
 describe("follow section", () => {
   it("renders compact personal socials without mixing program links", async () => {
     const source = await read("src/components/Socials.tsx");
-    assert.match(source, /Follow Mily/);
+    assert.match(source, /HOME_FOLLOW_HEADING/);
     assert.match(source, /HOME_FOLLOW_PLATFORMS/);
     assert.match(source, /socials\.find/);
     assert.match(source, /activities\.find/);

@@ -3,6 +3,7 @@ import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
+import { HOME_VOTE_CTA } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { ExternalLink } from "./ExternalLink";
 import { Socials } from "./Socials";
@@ -39,22 +40,32 @@ export function Hero() {
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink">
             ラジオ、配信、コンテスト。みりぃの今をひとつに。
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-col gap-3">
             <ExternalLink
               href={contest.entryUrl}
-              className="inline-flex min-h-11 items-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white hover:bg-sage-deep"
+              className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white shadow-card hover:bg-sage-deep sm:w-auto sm:min-w-[18rem]"
             >
-              {contest.entryNumber}を応援する
+              {HOME_VOTE_CTA}
+              <span className="sr-only">{contest.entryNumber}</span>
             </ExternalLink>
-            <a
-              href="#latest"
-              className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
-            >
-              最新情報を見る
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#latest"
+                className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+              >
+                最新情報を見る
+              </a>
+              <a
+                href={SUPPORT_HUB_ROUTE}
+                className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+              >
+                応援・予定
+              </a>
+            </div>
           </div>
           <p className="mt-3 text-xs text-ink-muted">
-            {contest.contestName} / <a href={SUPPORT_HUB_ROUTE} className="underline hover:text-sage-deep">応援・予定について</a>
+            {contest.contestName} / {contest.entryNumber}
+            {contest.currentPhase ? ` / ${contest.currentPhase.name}` : null}
           </p>
           <Socials />
         </div>

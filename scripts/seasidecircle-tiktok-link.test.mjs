@@ -57,7 +57,7 @@ describe("Seaside Circle TikTok surfaces", () => {
   it("keeps the program profile off the compact home Follow section", async () => {
     const source = await read("src/components/Socials.tsx");
 
-    assert.match(source, /Follow Mily/);
+    assert.match(source, /HOME_FOLLOW_HEADING/);
     assert.doesNotMatch(source, /FM_LINK_IDS/);
     assert.doesNotMatch(source, /fm-smw-ssc-tiktok/);
     assert.doesNotMatch(source, /seasidecircle/);

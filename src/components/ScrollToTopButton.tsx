@@ -12,7 +12,7 @@ function prefersReducedMotion() {
 
 /**
  * ページ最上部へ戻るフローティングボタン。
- * スマホでは MobileActionDock（ENTRY 734 / SNS）の上に置き、ドックを隠さない。
+ * スマホでは MobileActionDock（投票 / 応援・予定）の上に置き、ドックを隠さない。
  */
 export function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);

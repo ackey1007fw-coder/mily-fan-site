@@ -23,6 +23,13 @@ export const ARCHIVE_LOAD_MORE_LABEL = "もっと見る";
 export const SUPPORT_GATEWAY_CTA = "応援・予定を見る";
 export const ACTIVITIES_GATEWAY_CTA = "Activities Hubを見る";
 
+/** ホーム最上部と MobileActionDock の投票CTA。期間・回数は断定しない。 */
+export const HOME_VOTE_CTA = "みりぃに投票する";
+export const HOME_FOLLOW_HEADING = "みりぃをフォロー";
+export const HOME_FOLLOW_LEAD = "SNS・配信をフォローして最新情報をチェック";
+export const HOME_RADIO_CTA = "ラジオを聴く";
+export const HOME_RADIO_LEAD = "湘南シーサイドサークル";
+
 export {
   ACTIVITIES_HUB_ROUTE,
   SUPPORT_HUB_ROUTE,
