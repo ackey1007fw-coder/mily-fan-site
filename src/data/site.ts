@@ -47,6 +47,18 @@ export function storyUrl(slug: string): string {
   return `${siteOrigin()}/stories/${slug}/`;
 }
 
+export function newsUrl(): string {
+  return `${siteOrigin()}/news/`;
+}
+
+export function storiesIndexUrl(): string {
+  return `${siteOrigin()}/stories/`;
+}
+
+export function galleryUrl(): string {
+  return `${siteOrigin()}/gallery/`;
+}
+
 export function ogImageUrl(): string {
   const imagePath = site.ogImagePath.startsWith("/")
     ? site.ogImagePath
@@ -80,6 +92,21 @@ export function sitemapXml(): string {
     <loc>${supportUrl()}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>${newsUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${storiesIndexUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${galleryUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 ${activities
   .map(

@@ -1,4 +1,5 @@
 import { events, groupEventsByYear, isUpcomingEvent } from "../data/events";
+import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { ExternalLink } from "./ExternalLink";
 
 const kindLabel = {
@@ -17,7 +18,7 @@ export function Schedule() {
   const upcoming = events.filter((item) => isUpcomingEvent(item));
 
   return (
-    <section id="schedule" className="scroll-mt-24 px-4 py-10">
+    <section id="schedule" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
         <h2 className="text-2xl font-bold text-ink">スケジュール</h2>
         <p className="mt-2 text-sm text-ink-muted">

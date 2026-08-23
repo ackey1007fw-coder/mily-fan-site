@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { contest } from "../src/data/contest.ts";
 import { links } from "../src/data/links.ts";
 import { socials } from "../src/data/socials.ts";
 import {
@@ -28,21 +29,22 @@ async function read(relative) {
 }
 
 describe("ENTRY 734 funnel", () => {
-  it("keeps the entry URL in the hero primary CTA", async () => {
+  it("keeps the entry CTA in the hero, sourced from contest.ts", async () => {
     const hero = await read("src/components/Hero.tsx");
-    assert.match(hero, /2026\.misscircle\.jp\/entry\/734/);
-    assert.match(hero, /ENTRY 734を応援する/);
+    assert.match(hero, /contest\.entryUrl/);
+    assert.match(hero, /contest\.entryNumber\}を応援する/);
   });
 
-  it("keeps the entry URL in the support section", async () => {
+  it("keeps an entry CTA in the compact support gateway", async () => {
     const support = await read("src/components/Support.tsx");
-    assert.match(support, /2026\.misscircle\.jp\/entry\/734/);
+    assert.match(support, /contest\.entryUrl/);
+    assert.match(support, /SUPPORT_HUB_ROUTE/);
   });
 
-  it("keeps the entry URL in the mobile action dock", async () => {
+  it("keeps the entry CTA in the mobile action dock", async () => {
     const dock = await read("src/components/MobileActionDock.tsx");
     const app = await read("src/App.tsx");
-    assert.match(dock, /2026\.misscircle\.jp\/entry\/734/);
+    assert.match(dock, /contest\.entryUrl/);
     assert.match(dock, /noopener noreferrer/);
     assert.match(dock, /sm:hidden/);
     assert.match(app, /<MobileActionDock \/>/);
@@ -218,17 +220,20 @@ describe("stream schedule safety", () => {
 
   it("links the stream section to the entry page", async () => {
     const component = await read("src/components/StreamSchedule.tsx");
-    assert.match(component, /2026\.misscircle\.jp\/entry\/734/);
+    assert.match(component, /contest\.entryUrl/);
   });
 });
 
 describe("follow section", () => {
-  it("renders socials as cards and highlights the entry page separately", async () => {
+  it("renders compact personal socials without mixing program links", async () => {
     const source = await read("src/components/Socials.tsx");
     assert.match(source, /Follow Mily/);
-    assert.match(source, /miss-circle-2026-734/);
-    assert.match(source, /エントリーページへ/);
-    assert.match(source, /FM湘南マジックウェイブ/);
+    assert.match(source, /HOME_FOLLOW_PLATFORMS/);
+    assert.match(source, /socials\.find/);
+    assert.doesNotMatch(source, /miss-circle-2026-734/);
+    assert.doesNotMatch(source, /エントリーページへ/);
+    assert.doesNotMatch(source, /FM湘南マジックウェイブ/);
+    assert.doesNotMatch(source, /from "\.\.\/data\/links"/);
   });
 });
 
@@ -246,20 +251,34 @@ describe("structured data", () => {
 });
 
 describe("entry url consistency", () => {
-  it("uses the same entry URL everywhere it appears", async () => {
+  it("keeps contest.ts as the only place that stores the entry URL", async () => {
+    const contestSource = await read("src/data/contest.ts");
+    const contestUrls =
+      contestSource.match(/https:\/\/2026\.misscircle\.jp\/entry\/\d+/g) ?? [];
+    assert.ok(contestUrls.length > 0, "contest.ts should store the entry URL");
+    for (const url of contestUrls) {
+      assert.equal(url, ENTRY_URL, `src/data/contest.ts links ${url}`);
+    }
+    assert.equal(contest.entryUrl, ENTRY_URL);
+
     for (const relative of [
       "src/components/Hero.tsx",
       "src/components/Support.tsx",
       "src/components/MobileActionDock.tsx",
       "src/components/StreamSchedule.tsx",
-      "src/data/contest.ts",
+      "src/components/TodayDashboard.tsx",
     ]) {
       const source = await read(relative);
-      const urls = source.match(/https:\/\/2026\.misscircle\.jp\/entry\/\d+/g) ?? [];
-      assert.ok(urls.length > 0, `${relative} should link the entry page`);
-      for (const url of urls) {
-        assert.equal(url, ENTRY_URL, `${relative} links ${url}`);
-      }
+      assert.match(
+        source,
+        /contest\.entryUrl/,
+        `${relative} should read the entry URL from contest.ts`,
+      );
+      assert.deepEqual(
+        source.match(/https:\/\/2026\.misscircle\.jp\/entry\/\d+/g) ?? [],
+        [],
+        `${relative} should not repeat the entry URL literal`,
+      );
     }
   });
 });

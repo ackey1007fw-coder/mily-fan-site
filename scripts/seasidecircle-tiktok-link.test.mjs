@@ -54,12 +54,14 @@ describe("Seaside Circle TikTok profile ownership", () => {
 });
 
 describe("Seaside Circle TikTok surfaces", () => {
-  it("surfaces it in the existing FM-related links section", async () => {
+  it("keeps the program profile off the compact home Follow section", async () => {
     const source = await read("src/components/Socials.tsx");
 
-    assert.match(source, /FM_LINK_IDS/);
-    assert.match(source, /"fm-smw-ssc-tiktok"/);
-    assert.match(source, /FM湘南マジックウェイブ/);
+    assert.match(source, /Follow Mily/);
+    assert.doesNotMatch(source, /FM_LINK_IDS/);
+    assert.doesNotMatch(source, /fm-smw-ssc-tiktok/);
+    assert.doesNotMatch(source, /seasidecircle/);
+    assert.doesNotMatch(source, /from "\.\.\/data\/links"/);
   });
 
   it("resolves it from links.ts only inside the Profile RADIO card", async () => {

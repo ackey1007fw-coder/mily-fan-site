@@ -358,6 +358,7 @@ describe("Drive gallery client payload", () => {
   it("keeps Drive hosts out of every client-facing module", async () => {
     for (const relative of [
       "src/components/Gallery.tsx",
+      "src/lib/galleryItems.ts",
       "src/data/driveGallery.ts",
       "src/data/driveGalleryManifest.json",
     ]) {
@@ -1274,6 +1275,7 @@ describe("Gallery UI contract", () => {
 
   it("drops to a single photo column on 320px screens", async () => {
     const gallery = await read("src/components/Gallery.tsx");
-    assert.match(gallery, /grid-cols-1 gap-3 min-\[360px\]:grid-cols-2 sm:grid-cols-3/);
+    assert.match(gallery, /grid-cols-1/);
+    assert.match(gallery, /min-\[360px\]:grid-cols-2/);
   });
 });

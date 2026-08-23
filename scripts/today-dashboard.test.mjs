@@ -28,7 +28,7 @@ describe("today dashboard", () => {
     const source = await read("src/components/TodayDashboard.tsx");
     assert.match(source, /今日のみりぃ/);
     assert.match(source, /contest\.entryUrl/);
-    assert.match(source, /ENTRY 734を応援する/);
+    assert.match(source, /contest\.entryNumber\}を応援する/);
     assert.equal(contest.entryUrl, "https://2026.misscircle.jp/entry/734");
   });
 
@@ -41,10 +41,12 @@ describe("today dashboard", () => {
 
   it("shows stream and phase info only when it exists", async () => {
     const source = await read("src/components/TodayDashboard.tsx");
-    assert.match(source, /next && showNextStream \?/);
-    assert.match(source, /contest\.currentPhase \?/);
-    assert.match(source, /showroomUrl && showShowroomCta \?/);
-    assert.match(source, /開始時刻を過ぎています/);
+    // 「今日」「今」の意味は /support/ と同じ Support domain selector 由来
+    assert.match(source, /selectHomeToday/);
+    assert.match(source, /contestToday \?/);
+    assert.match(source, /scheduleItems\.length > 0 \?/);
+    assert.match(source, /nowItems\.length > 0 \?/);
+    assert.match(source, /item\.cta \?/);
     // 予定由来の表示に「LIVE」と書かない（実ライブは ActivityBanner の担当）
     assert.doesNotMatch(source, />\s*LIVE/);
     assert.doesNotMatch(source, /ただいま[^"]*配信中/);

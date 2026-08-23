@@ -620,6 +620,10 @@ useStreamSchedule(): { slots: StreamSlot[]; roomUrl: string | null; availability
 - ラジオ番組枠と本人出演時間を同一視しない。
 - 空sectionは非表示。確認できない情報をplaceholderで埋めない。
 - トップに巨大なCalendarを置かず、NOW最大2件と `/support/` 導線に留める。
+- トップはポータル。NEWS / STORY / Gallery / 配信詳細 / 長いAbout / 公開Scheduleの本体は
+  Hub または archive（`/news/` `/stories/` `/gallery/` `/support/` `/profile/`）へ移す。
+  ホームには preview と入口だけを置き、コンテンツ量が増えてもホームの高さがほぼ増えない
+  構造にする。
 
 ---
 
@@ -634,7 +638,7 @@ useStreamSchedule(): { slots: StreamSlot[]; roomUrl: string | null; availability
 | **P3** | Activities Hub | `/activities/` + 4詳細route、Activity selector、optional `NewsItem.activityIds`、既存NEWS sorter利用 | 新route |
 | **P4** | Support Hub + NOW | `/support/`、今日のみりぃ、NOW、pending。Calendar本体はまだ接続しない | 新route |
 | **P5** | Support Calendar | 5系統adapterを接続、mobile agenda、pending分離 | `/support/`のみ |
-| **P6** | Top integration | compact Support、Activities導線、TodayDashboard、navigation、mobile action | トップ変更・オーナー確認 |
+| **P6** | Compact fan portal | ホームをポータル化。Today / Support / Activities の入口、Latest / STORY / Gallery の preview、route中心navigation。詳細は Hub / archive へ | トップ短縮・オーナー確認 |
 
 順序は **P1 → P2 → P3 → P4 → P5 → P6**。
 P2をP1と分けることで、Profile事実変更のオーナー確認と、data foundationのreviewを
