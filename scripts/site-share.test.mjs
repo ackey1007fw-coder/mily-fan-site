@@ -212,6 +212,25 @@ describe("URL copy", () => {
     assert.equal(failed, false);
   });
 
+  it("restores the previously focused control after execCommand fallback", async () => {
+    const lib = await read("src/lib/siteShare.ts");
+    const start = lib.indexOf("export function copyWithExecCommand");
+    const end = lib.indexOf("export async function copyUrlToClipboard");
+    const fn = lib.slice(start, end);
+
+    assert.match(fn, /const previous =\s*document\.activeElement instanceof HTMLElement/);
+    assert.ok(
+      fn.indexOf("const previous") < fn.indexOf("textarea.focus()"),
+      "the active element must be captured before the temporary textarea is focused",
+    );
+    assert.ok(
+      fn.indexOf("textarea.remove()") < fn.indexOf("previous.focus"),
+      "focus must be restored after the temporary textarea is removed",
+    );
+    assert.match(fn, /previous\.isConnected/);
+    assert.match(fn, /previous\.focus\(\{ preventScroll: true \}\)/);
+  });
+
   it("exposes an accessible copy control and live status", async () => {
     const ui = await read("src/components/SiteShare.tsx");
 

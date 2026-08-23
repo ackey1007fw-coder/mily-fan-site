@@ -103,10 +103,14 @@ export function copyWithExecCommand(text: string): boolean {
     return false;
   }
 
+  const previous =
+    document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
   const textarea = document.createElement("textarea");
   textarea.value = text;
   textarea.setAttribute("readonly", "");
   textarea.setAttribute("aria-hidden", "true");
+  textarea.tabIndex = -1;
   textarea.style.position = "fixed";
   textarea.style.top = "0";
   textarea.style.left = "0";
@@ -122,6 +126,9 @@ export function copyWithExecCommand(text: string): boolean {
     return false;
   } finally {
     textarea.remove();
+    if (previous && previous.isConnected) {
+      previous.focus({ preventScroll: true });
+    }
   }
 }
 
