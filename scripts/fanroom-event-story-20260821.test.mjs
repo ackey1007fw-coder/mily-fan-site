@@ -404,11 +404,11 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
     const feed = createPortalFeed();
 
+    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
-      feed.items[0].id,
+      feed.items[1].id,
       "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
     );
-    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
       feed.items[2].id,
       "mily:story:campus-girls-2027-second-stage-jury-award",
