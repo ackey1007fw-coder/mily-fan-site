@@ -373,6 +373,7 @@ news item の新規追加も、既存X投稿の複製も、b05-01 写真の再�
 派生は作らず公開もしていない**（b07 と同じ判断）。
 その後 zip 経由で sha256 `f426810c…` の元素材を受領し、`sha256sum -c` と ffprobe の
 両方で一致を確認したうえで、公開MP4と poster をこの元素材だけから作った。
+一致しなかったファイルからの派生は公開していない。
 
 ### 公開MP4の実測値
 
@@ -917,3 +918,37 @@ Instagram Story画像はオーナーの当該画像に対する明示承認に�
   lead image・NEWS / Latest・Portal Feed・`media.ts`・`galleryVideos.ts`へ展開しない
 - InstagramプロフィールURLを出典として代用していない
 - 依頼者の訂正により今回は動画素材なし。公開MP4・poster・動画manifestは作成していない
+
+## 素材台帳（batch b17 / 受領日・source date 2026-08-22）
+
+本人Xの2026-08-22夜のSHOWROOM配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面スクリーンショット。
+Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。
+
+一次出典: https://x.com/mily_chan36/status/2091166455224299641
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b17-01 | `news/mily-b17-01-night-showroom-fireworks.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃ、画面下部に視聴者アバター・表示名が並ぶ横長画像。1206×555。owner-provided | ✅ Latestのみ / Galleryには追加しない |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが依頼時に直接提供。SNSから自動取得していない）
+- source date: `2026-08-22` / 一次出典は上記本人X投稿
+- 元素材は `media/original/mily-b17-01-night-showroom-fireworks.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **132,220 bytes / JPEG progressive / 1206×555 / sRGB / sha256
+  `3409acb7c306f579561b77d96f3ee9f6df8be71cd5166b9e22340e6b1adde903`**
+- 公開ファイル `public/media/news/mily-b17-01-night-showroom-fireworks.jpg` は元素材と
+  **バイト単位で同一**（132,220 bytes / 同一sha256）。EXIF / GPS / IPTC / XMP / ICC /
+  orientation / comment が存在しないことを確認済みのため、不要な再エンコードはしていない
+- **crop・resize・rotate・アップスケール・縦横比変更・AI生成・AI補正・顔加工・
+  generative fill・outpaintingなし**。1206:555の横構図をそのまま使用
+- プライバシー・第三者表示の確認: DM・非公開メッセージ・電話番号・メール・住所・
+  端末固有情報は含まれない。画面下部の視聴者アバター・表示名は、みりぃ本人がX投稿に
+  添付して公開したSHOWROOM画面の表示内容であり、オーナーの掲載指示に基づき無改変で記録する。
+  新しい第三者情報は付加していない
+- 画像内の「現在48位」は公開画面の表示として画像に残すが、NEWS本文・`contest.ts`・
+  `highlights.ts`・配信予定データへは転記しない
+- Xの外部画像URLはhotlinkせず、自己ホスト画像だけを参照する
+- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
+  `src/data/highlights.ts`には追加していない。Latest / NEWS専用
