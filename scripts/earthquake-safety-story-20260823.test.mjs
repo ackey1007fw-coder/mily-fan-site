@@ -178,9 +178,9 @@ describe("2026-08-23 earthquake safety Story — shared Latest / Gallery asset",
 
     assert.equal(item().media, earthquakeSafetyStoryVideo);
     assert.deepEqual(matches, [earthquakeSafetyStoryVideo]);
-    assert.equal(galleryVideos[1], earthquakeSafetyStoryVideo);
-    assert.equal(visible[1], earthquakeSafetyStoryVideo);
-    assert.equal(visible.length, 9);
+    assert.equal(galleryVideos[2], earthquakeSafetyStoryVideo);
+    assert.equal(visible[2], earthquakeSafetyStoryVideo);
+    assert.equal(visible.length, 10);
     assert.equal(earthquakeSafetyStoryVideo.kind, "video");
     assert.equal(earthquakeSafetyStoryVideo.provenance, "owner-provided");
     assert.equal(earthquakeSafetyStoryVideo.sourceLabel, "Instagram Story");
@@ -343,7 +343,7 @@ describe("2026-08-23 earthquake safety Story — live-stream activity media", ()
 
     assert.equal(news.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(item().media, earthquakeSafetyStoryVideo);
-    assert.equal(galleryVideos[1], earthquakeSafetyStoryVideo);
+    assert.equal(galleryVideos[2], earthquakeSafetyStoryVideo);
     assert.equal(item().activityIds, undefined);
     assert.equal(
       liveNews.some((entry) => entry.id === NEWS_ID),

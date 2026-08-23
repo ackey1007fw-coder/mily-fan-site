@@ -311,13 +311,13 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const drive = driveGallerySections(visibleDriveGallery());
     const visible = visibleGalleryVideos();
 
-    // 2026-08-23 の番組Story（b19）と地震後Story（b18）で9本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
-    assert.equal(visible.length, 9);
-    assert.equal(visible[2], tiktokRadioVideo);
-    assert.equal(visible[3], eventStory20260821);
-    assert.equal(visible[4], morningOhayo20260821);
-    assert.equal(visible[5], morningShowroomRunwayVideo);
-    assert.equal(visible[6], morningStory20260820);
+    // 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）で10本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
+    assert.equal(visible.length, 10);
+    assert.equal(visible[3], tiktokRadioVideo);
+    assert.equal(visible[4], eventStory20260821);
+    assert.equal(visible[5], morningOhayo20260821);
+    assert.equal(visible[6], morningShowroomRunwayVideo);
+    assert.equal(visible[7], morningStory20260820);
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
     assert.equal(drive.videos.length, 11);
