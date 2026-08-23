@@ -147,10 +147,10 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.sourceLabel, "湘南シーサイドサークル / 2026.08.23 生放送");
     assert.equal(entry?.url, STORY_HREF);
     assert.equal(entry?.ctaLabel, "真夏のミュージカル特集の放送記録を読む");
-    assert.equal(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.equal(entry?.media?.kind, "video");
-    assert.equal(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(entry?.media?.poster, seasideCircleMusicalSpecialVideo.poster);
+    assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
+    assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
+    assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
     assert.equal(news.length, 24);
     assert.deepEqual(verifyNews([entry]), []);
   });
@@ -199,6 +199,7 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
     assert.deepEqual(entry.sourceIds, [
       "broadcast-transcript-2026-08-23",
       "program-instagram-story-2026-08-23",
+      "program-instagram-story-thanks-2026-08-23",
     ]);
     assert.equal(
       storySources["broadcast-transcript-2026-08-23"].label,
@@ -208,14 +209,19 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
       storySources["program-instagram-story-2026-08-23"].label,
       "湘南シーサイドサークル Instagram Story（2026年8月23日）",
     );
+    assert.equal(
+      storySources["program-instagram-story-thanks-2026-08-23"].label,
+      "湘南シーサイドサークル Instagram Story（清水美依紗さん出演お礼 / 2026年8月23日）",
+    );
     assert.equal("url" in storySources["broadcast-transcript-2026-08-23"], false);
     assert.equal("url" in storySources["program-instagram-story-2026-08-23"], false);
+    assert.equal("url" in storySources["program-instagram-story-thanks-2026-08-23"], false);
     assert.equal(stories[0], entry);
     assert.equal(storyBySlug("2026-08-18-radio")?.published, true);
     assert.equal(storyBySlug("second-round-result-2026")?.published, true);
   });
 
-  it("uses the same MP4 and poster as NEWS / Gallery for the lead video", () => {
+  it("uses the same MP4 and poster as Gallery for the lead video", () => {
     const entry = story();
     const lead = entry?.media.find(
       (media) => media.id === "seaside-circle-musical-special-story",
@@ -227,13 +233,14 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
     assert.equal(lead?.width, 720);
     assert.equal(lead?.height, 1280);
     assert.equal(lead?.label, ALT);
+    assert.equal(entry?.leadMediaId, "seaside-circle-musical-special-story");
     assert.equal(
       galleryVideos.filter((video) => video.src === lead?.src).length,
       1,
     );
     assert.equal(
       news.filter((entry) => entry.media?.src === lead?.src).length,
-      1,
+      0,
     );
   });
 
@@ -261,8 +268,8 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
 
 describe("2026-08-23 seaside circle musical special — Gallery and assets", () => {
   it("shares one published Gallery video object", () => {
-    assert.equal(galleryVideos[0], seasideCircleMusicalSpecialVideo);
-    assert.equal(visibleGalleryVideos()[0], seasideCircleMusicalSpecialVideo);
+    assert.equal(galleryVideos[1], seasideCircleMusicalSpecialVideo);
+    assert.equal(visibleGalleryVideos()[1], seasideCircleMusicalSpecialVideo);
     assert.equal(seasideCircleMusicalSpecialVideo.published, true);
     assert.equal(seasideCircleMusicalSpecialVideo.provenance, "owner-provided");
     assert.equal(
@@ -272,7 +279,7 @@ describe("2026-08-23 seaside circle musical special — Gallery and assets", () 
     assert.equal(seasideCircleMusicalSpecialVideo.sourceDate, "2026-08-23");
     assert.equal(seasideCircleMusicalSpecialVideo.alt, ALT);
     assert.equal("sourceUrl" in seasideCircleMusicalSpecialVideo, false);
-    assert.equal(galleryVideos.length, 9);
+    assert.equal(galleryVideos.length, 10);
     assert.equal(events.length, 0);
     assert.deepEqual(streamSchedule, []);
   });

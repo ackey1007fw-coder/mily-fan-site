@@ -1047,10 +1047,10 @@ ffmpeg -ss 8.0 -i public/media/gallery/mily-b18-01-earthquake-safety-story.mp4 \
 ## 素材台帳（batch b19 / 受領日・source date 2026-08-23）
 
 2026-08-23の湘南シーサイドサークル公式Instagram（番組アカウント）Story動画。
-owner-providedの縦型動画で、Latest NEWS（id
-`2026-08-23-seaside-circle-musical-special`）・Gallery・STORY記事
-`/stories/2026-08-23-musical-special/` が同じ公開MP4・poster・manifest
-objectを共有する。みりぃ個人のInstagram Storyではない。Drive Gallery（b02）
+owner-providedの縦型動画で、Gallery と STORY記事
+`/stories/2026-08-23-musical-special/` の lead が同じ公開MP4・poster・manifest
+objectを共有する。Latest / NEWS の代表動画は後から届いた放送後お礼 Story
+（b21）側。みりぃ個人のInstagram Storyではない。Drive Gallery（b02）
 には含めない。`events.ts`・`streamSchedule.ts`・radio weekly schedule は
 変更していない。
 
@@ -1060,8 +1060,8 @@ objectを共有する。みりぃ個人のInstagram Storyではない。Drive Ga
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b19-01 | `gallery/mily-b19-01-seaside-circle-musical-special.mp4` | スタジオでヘッドホンをつけた3人が映る、湘南シーサイドサークルのInstagram Story動画。真夏のミュージカル特集と生放送案内。720×1280。owner-provided | ✅ Latest / Gallery / STORY |
-| b19-01 poster | `gallery/mily-b19-01-seaside-circle-musical-special-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery / STORY |
+| b19-01 | `gallery/mily-b19-01-seaside-circle-musical-special.mp4` | スタジオでヘッドホンをつけた3人が映る、湘南シーサイドサークルのInstagram Story動画。真夏のミュージカル特集と生放送案内。720×1280。owner-provided | ✅ Gallery / STORY lead |
+| b19-01 poster | `gallery/mily-b19-01-seaside-circle-musical-special-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Gallery / STORY lead |
 
 ### 元素材の実測
 
@@ -1118,7 +1118,8 @@ ffmpeg -i media/original/mily-b19-01-seaside-circle-musical-special.mp4 \
   `1f3516f15c70ff802231ccae56716400bd1d543c1bc998e6daf9e2413e26b0b5`
 - EXIF / IPTC / XMP / ICCなし
 - `src/data/seasideCircleMusicalSpecialVideo.json` の1オブジェクトを
-  Latest / Gallery / STORY で共有し、公開MP4 1本・poster 1枚だけを参照する
+  Gallery / STORY lead で共有し、公開MP4 1本・poster 1枚だけを参照する。
+  Latest / NEWS の代表は b21 側
 - みりぃ個人のInstagram Storyとして分類していない
 - InstagramプロフィールURLや番組Storyの推測permalinkを出典として代用していない
 - 受け渡し用URL / file IDは公開情報へ残さない
@@ -1162,4 +1163,99 @@ Drive Gallery（b02）・Gallery動画・`/stories/`・`events.ts`・`highlights
 - 3枚とも横位置のため Gallery の既定 4/3 タイルを使う（`aspect` は付けない）
 - 公開ファイル名は新規batch b20を使用し、既存batch・連番と衝突しない
 - 受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
+## 素材台帳（batch b21 / 受領日・source date 2026-08-23）
+
+2026-08-23の湘南シーサイドサークル公式Instagram（@seasidecircle）
+放送後Story動画。owner-providedの縦型動画で、Latest / NEWS（既存 id
+`2026-08-23-seaside-circle-musical-special`）・Gallery・STORY記事
+`/stories/2026-08-23-musical-special/` の closing が同じ公開MP4・poster・
+manifest objectを共有する。新しいNEWSは作っていない。既存b19は削除せず、
+Gallery と STORY lead として残す。みりぃ個人のInstagram Storyではない。
+Drive Gallery（b02）には含めない。`events.ts`・`streamSchedule.ts`・
+radio weekly schedule は変更していない。
+
+恒久的な公開permalinkがないため、表示は非リンクの
+`湘南シーサイドサークル Instagram Story` label。推測URLは作らない。
+InstagramプロフィールURLをStory permalinkの代用にしない。
+受け渡し用URL / file IDは公開情報・tracked textとして記録しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b21-01 | `gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4` | スタジオで3人が並び、真夏のミュージカル特集へのお礼と清水美依紗さんへの出演感謝メッセージが表示されたInstagram Story動画。720×1280。owner-provided | ✅ Latest / NEWS + Gallery + STORY closing |
+| b21-01 poster | `gallery/mily-b21-01-seaside-circle-musical-special-thanks-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery + STORY closing |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- source account: 湘南シーサイドサークル @seasidecircle
+- 番組Instagram Story / source date: `2026-08-23` / 恒久permalinkなし
+- 元素材は `media/original/mily-b21-01-seaside-circle-musical-special-thanks.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `d143ecbd7976453470145be6079107a0e7820c13798098f3e155f5dfda5a917d`
+- 824,316 bytes / H.264 **High** / **720×1280** / **1fps** /
+  20 frames / **20.000000秒** / yuv420p
+- 音声: HE-AAC / 44.1kHz / stereo。元素材には音声ストリームがある
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+
+### 音声の扱い — 削除した
+
+元素材には HE-AAC / 44.1kHz / stereo の音声がある。再配信権を確認できないため、
+公開派生は video-only（無音）にした。番組公式 Instagram Story であることや
+既存 b19 の判断だけでは、音声の再配信許可にはならない。
+
+音声の内容・由来・種類・権利者・楽曲名は確認できていないため、推測して記録しない。
+b19 の公開MP4は変更していない。
+
+### 公開MP4
+
+- sha256: `95c338f696557042c37c9cb95afbfe689763c7a7d8d0a38acc99b23933dfcf8f`
+- 511,902 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  **1fps** / 20 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の画素数・縦横比・1fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増し・短縮なし（`-vf scale`を使っていない）
+- 既存の公開映像ストリームを `-c:v copy` で remux し、`-an` で音声だけを外した。
+  画素数・fps・フレーム数を変える再エンコードはしていない
+- `+faststart`確認済み（`moov` offset 32 < `mdat` offset 931）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+公開派生の音声除去（再現用。既存の Baseline 公開映像を copy し、音声だけ外す）。
+入力と出力を同じMP4にすると ffmpeg が拒否するため、隣の一時ファイルへ書いてから置き換える:
+
+```
+ffmpeg -i public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v copy \
+  -movflags +faststart \
+  public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.tmp.mp4 \
+&& mv public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.tmp.mp4 \
+  public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の0 / 4 / 8 / 12 / 16秒地点を比較。ほぼ静止したStoryのため差は小さく、
+  8.0秒前後は3人が自然に見え、お礼と出演感謝の本文が読みやすいため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 115,111 bytes / 720×1280 JPEG / sha256
+  `fbf5cc8650932c617787f68053f02137f12586f4709492bd68fe6b021cc4b67b`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/seasideCircleMusicalSpecialThanksVideo.json` の1オブジェクトを
+  Latest / NEWS + Gallery + STORY closing で共有し、公開MP4 1本・poster 1枚だけを参照する
+- みりぃ個人のInstagram Storyとして分類していない
+- InstagramプロフィールURLや番組Storyの推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 8.0 -i public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks-poster.jpg
+```
 

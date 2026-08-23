@@ -217,12 +217,12 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
       .filter((file) => file.includes("mily-b13-02-event-story"));
 
     assert.equal(entry.media, eventStory20260821);
-    assert.equal(galleryVideos[2], tiktokRadioVideo);
-    assert.equal(visible[2], tiktokRadioVideo);
-    assert.equal(visible[3], eventStory20260821);
-    assert.equal(visible[4], morningOhayo20260821);
-    assert.equal(visible[5], morningShowroomRunwayVideo);
-    assert.equal(visible.length, 9);
+    assert.equal(galleryVideos[3], tiktokRadioVideo);
+    assert.equal(visible[3], tiktokRadioVideo);
+    assert.equal(visible[4], eventStory20260821);
+    assert.equal(visible[5], morningOhayo20260821);
+    assert.equal(visible[6], morningShowroomRunwayVideo);
+    assert.equal(visible.length, 10);
     assert.equal(galleryVideos.filter((item) => item === eventStory20260821).length, 1);
     assert.equal("sourceUrl" in eventStory20260821, false);
     assert.equal(eventStory20260821.sourceLabel, "Instagram Story");
@@ -243,8 +243,8 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 9);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 20);
+    assert.equal(galleryVideos.length, 10);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 21);
   });
 
   it("publishes 720x1280 H.264 Baseline at the original 1fps without audio", async () => {

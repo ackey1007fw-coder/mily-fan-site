@@ -2,6 +2,7 @@ import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { campusGirlsSecondStageInstagramStoryImage } from "./campusGirlsSecondStageInstagramStoryImage.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
+import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 
 export const storySources = {
   "pre-final-message": {
@@ -31,6 +32,12 @@ export const storySources = {
   "program-instagram-story-2026-08-23": {
     id: "program-instagram-story-2026-08-23",
     label: "湘南シーサイドサークル Instagram Story（2026年8月23日）",
+  },
+  // 放送後のお礼Story。恒久permalinkがないためURLは持たせない。
+  "program-instagram-story-thanks-2026-08-23": {
+    id: "program-instagram-story-thanks-2026-08-23",
+    label:
+      "湘南シーサイドサークル Instagram Story（清水美依紗さん出演お礼 / 2026年8月23日）",
   },
   "x-2026-08-19-second-round-result": {
     id: "x-2026-08-19-second-round-result",
@@ -752,6 +759,7 @@ const seasideCircleMusicalSpecialStory: Story = {
   sourceIds: [
     "broadcast-transcript-2026-08-23",
     "program-instagram-story-2026-08-23",
+    "program-instagram-story-thanks-2026-08-23",
   ],
   leadMediaId: "seaside-circle-musical-special-story",
   media: [
@@ -765,6 +773,18 @@ const seasideCircleMusicalSpecialStory: Story = {
       label: "スタジオでヘッドホンをつけた3人が映る、湘南シーサイドサークルのInstagram Story動画",
       caption:
         "湘南シーサイドサークルのInstagram Story。真夏のミュージカル特集と、ゲストの清水美依紗さんを案内する縦型動画です。",
+    },
+    {
+      id: "seaside-circle-musical-special-thanks-story",
+      kind: "video",
+      src: seasideCircleMusicalSpecialThanksVideo.src,
+      poster: seasideCircleMusicalSpecialThanksVideo.poster,
+      width: seasideCircleMusicalSpecialThanksVideo.width,
+      height: seasideCircleMusicalSpecialThanksVideo.height,
+      label:
+        "真夏のミュージカル特集へのお礼と、清水美依紗さんへの出演感謝を伝える湘南シーサイドサークルのInstagram Story動画",
+      caption:
+        "放送後の湘南シーサイドサークル Instagram Story。番組を聴いてくれた人へのお礼と、清水美依紗さんのゲスト出演への感謝が届けられました。",
     },
   ],
   sections: [
@@ -990,6 +1010,16 @@ const seasideCircleMusicalSpecialStory: Story = {
             "broadcast-transcript-2026-08-23",
             "program-instagram-story-2026-08-23",
           ],
+        },
+        {
+          type: "paragraph",
+          text: "放送後、湘南シーサイドサークルのInstagram Storyでは、番組を聴いてくれた人へのお礼と、清水美依紗さんの出演への感謝が届けられました。",
+          sourceIds: ["program-instagram-story-thanks-2026-08-23"],
+        },
+        {
+          type: "media",
+          mediaId: "seaside-circle-musical-special-thanks-story",
+          sourceIds: ["program-instagram-story-thanks-2026-08-23"],
         },
       ],
     },

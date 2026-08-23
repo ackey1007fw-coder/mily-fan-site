@@ -20,7 +20,7 @@ import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
-import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
+import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -88,11 +88,11 @@ export const news: NewsItem[] = [
     sameDayOrder: 4,
     activityIds: ["radio"],
     title: "真夏のミュージカル特集🎭 清水美依紗さんを迎えた生放送",
-    body: "8月23日の「湘南シーサイドサークル」は真夏のミュージカル特集。前半約2時間には清水美依紗さんをゲストに迎え、ミュージカルとの出会い、『レ・ミゼラブル』『ミス・サイゴン』、表現や夢への向き合い方までじっくりトークしました。12時台には、みりぃ自身が高校時代に『グレイテスト・ショーマン』と「This Is Me」から勇気をもらった思い出も語りました。",
+    body: "8月23日の「湘南シーサイドサークル」は真夏のミュージカル特集。前半約2時間には清水美依紗さんをゲストに迎え、ミュージカルとの出会い、『レ・ミゼラブル』『ミス・サイゴン』、表現や夢への向き合い方までじっくりトークしました。12時台には、みりぃ自身が高校時代に『グレイテスト・ショーマン』と「This Is Me」から勇気をもらった思い出も語りました。放送後、番組公式Instagram Storyでは、リスナーへのお礼と清水美依紗さんへの出演への感謝も届けられました。",
     sourceLabel: "湘南シーサイドサークル / 2026.08.23 生放送",
     url: "/stories/2026-08-23-musical-special/",
     ctaLabel: "真夏のミュージカル特集の放送記録を読む",
-    media: seasideCircleMusicalSpecialVideo,
+    media: seasideCircleMusicalSpecialThanksVideo,
   },
   {
     id: "2026-08-23-morning-showroom-fanroom",
