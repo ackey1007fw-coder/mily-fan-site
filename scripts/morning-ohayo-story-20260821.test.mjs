@@ -122,7 +122,8 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
   it("keeps the established same-day editorial ordering", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 16), [
+    assert.deepEqual(ordered.slice(0, 17), [
+      "2026-08-23-seaside-circle-musical-special",
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",
       "2026-08-23-earthquake-showroom-fanroom",
@@ -140,7 +141,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 22);
+    assert.equal(news.length, 23);
   });
 });
 
@@ -153,11 +154,12 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(item().media, morningOhayo20260821);
     assert.equal(galleryItem, morningOhayo20260821);
-    assert.equal(visible[1], tiktokRadioVideo);
-    assert.equal(visible[2], eventStory20260821);
-    assert.equal(visible[3], morningOhayo20260821);
-    assert.equal(visible[4], morningShowroomRunwayVideo);
+    assert.equal(visible[2], tiktokRadioVideo);
+    assert.equal(visible[3], eventStory20260821);
+    assert.equal(visible[4], morningOhayo20260821);
+    assert.equal(visible[5], morningShowroomRunwayVideo);
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
+      "2026-08-23",
       "2026-08-23",
       "2026-08-21",
       "2026-08-21",
@@ -167,7 +169,7 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
       "2026-08-19",
       "2026-08-17",
     ]);
-    assert.equal(visible.length, 8);
+    assert.equal(visible.length, 9);
     assert.equal(morningOhayo20260821.sourceDate, "2026-08-21");
     assert.equal(morningOhayo20260821.alt, ALT);
   });
@@ -194,8 +196,8 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 8);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 19);
+    assert.equal(galleryVideos.length, 9);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 20);
   });
 });
 

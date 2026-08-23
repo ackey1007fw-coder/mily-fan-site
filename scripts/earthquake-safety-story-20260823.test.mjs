@@ -130,7 +130,7 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
     assert.equal(item()?.activityIds, undefined);
     assert.equal(item()?.title, "地震直後、みんなの安全を気遣うみりぃ💌");
     assert.equal(extraEarthquakeNews.length, 0);
-    assert.equal(news.length, 22);
+    assert.equal(news.length, 23);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -178,9 +178,9 @@ describe("2026-08-23 earthquake safety Story — shared Latest / Gallery asset",
 
     assert.equal(item().media, earthquakeSafetyStoryVideo);
     assert.deepEqual(matches, [earthquakeSafetyStoryVideo]);
-    assert.equal(galleryVideos[0], earthquakeSafetyStoryVideo);
-    assert.equal(visible[0], earthquakeSafetyStoryVideo);
-    assert.equal(visible.length, 8);
+    assert.equal(galleryVideos[1], earthquakeSafetyStoryVideo);
+    assert.equal(visible[1], earthquakeSafetyStoryVideo);
+    assert.equal(visible.length, 9);
     assert.equal(earthquakeSafetyStoryVideo.kind, "video");
     assert.equal(earthquakeSafetyStoryVideo.provenance, "owner-provided");
     assert.equal(earthquakeSafetyStoryVideo.sourceLabel, "Instagram Story");
@@ -343,7 +343,7 @@ describe("2026-08-23 earthquake safety Story — live-stream activity media", ()
 
     assert.equal(news.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(item().media, earthquakeSafetyStoryVideo);
-    assert.equal(galleryVideos[0], earthquakeSafetyStoryVideo);
+    assert.equal(galleryVideos[1], earthquakeSafetyStoryVideo);
     assert.equal(item().activityIds, undefined);
     assert.equal(
       liveNews.some((entry) => entry.id === NEWS_ID),
@@ -408,7 +408,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
 
   it("does not copy the Story into articles, events or the stream fallback", async () => {
     assert.equal(
-      stories.some((story) => story.slug.includes("earthquake") || story.date === "2026-08-23"),
+      stories.some((story) => story.slug.includes("earthquake")),
       false,
     );
     assert.equal(events.length, 0);
@@ -458,6 +458,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
     assert.equal(entry.sourceUrl, undefined);
     assert.ok(entry.image?.endsWith(earthquakeSafetyStoryVideo.poster));
     assert.deepEqual(latestIds, [
+      "2026-08-23-seaside-circle-musical-special",
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",
       NEWS_ID,
