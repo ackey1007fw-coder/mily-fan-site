@@ -104,7 +104,7 @@ export function SiteShare() {
       </div>
       {canNativeShare ? (
         <p className="mt-2 max-w-full text-xs leading-relaxed text-ink-muted">
-          InstagramストーリーズやDMで共有したい場合は、対応端末の「共有する」から選べます。表示される共有先は端末・OS・インストール済みアプリによって異なります。
+          InstagramストーリーズやDMで共有したい場合は、対応端末の「共有する」から選べる場合があります。表示される共有先は端末・OS・インストール済みアプリによって異なります。
         </p>
       ) : null}
       <p

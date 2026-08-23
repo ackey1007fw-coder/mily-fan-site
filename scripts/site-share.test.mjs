@@ -119,7 +119,7 @@ describe("Instagram Stories / DM hint", () => {
 
     assert.match(
       ui,
-      /InstagramストーリーズやDMで共有したい場合は、対応端末の「共有する」から選べます/,
+      /InstagramストーリーズやDMで共有したい場合は、対応端末の「共有する」から選べる場合があります/,
     );
     assert.match(
       ui,
@@ -127,6 +127,7 @@ describe("Instagram Stories / DM hint", () => {
     );
     assert.doesNotMatch(ui, /必ずInstagram/);
     assert.doesNotMatch(ui, /直接共有できます/);
+    assert.doesNotMatch(ui, /から選べます。/);
   });
 
   it("shows the hint only with the native share button", async () => {
