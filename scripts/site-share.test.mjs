@@ -107,6 +107,51 @@ describe("SNS share URLs", () => {
 
     assert.doesNotMatch(lib, /instagram\.com\/(?:share|sharer)/i);
     assert.doesNotMatch(ui, /instagram\.com\/(?:share|sharer)/i);
+    assert.doesNotMatch(lib, /instagram:\/\//i);
+    assert.doesNotMatch(ui, /instagram:\/\//i);
+    assert.doesNotMatch(ui, /href=\{[^}]*instagram/i);
+  });
+});
+
+describe("Instagram Stories / DM hint", () => {
+  it("explains Stories and DM as an OS share-sheet option", async () => {
+    const ui = await read("src/components/SiteShare.tsx");
+
+    assert.match(
+      ui,
+      /InstagramストーリーズやDMで共有したい場合は、対応端末の「共有する」から選べる場合があります/,
+    );
+    assert.match(
+      ui,
+      /表示される共有先は端末・OS・インストール済みアプリによって異なります/,
+    );
+    assert.doesNotMatch(ui, /必ずInstagram/);
+    assert.doesNotMatch(ui, /直接共有できます/);
+    assert.doesNotMatch(ui, /から選べます。/);
+  });
+
+  it("shows the hint only with the native share button", async () => {
+    const ui = await read("src/components/SiteShare.tsx");
+    const nativeBlocks = [
+      ...ui.matchAll(/\{canNativeShare \? \(([\s\S]*?)\) : null\}/g),
+    ].map((match) => match[1]);
+
+    assert.ok(nativeBlocks.length >= 2, "native share and its hint must share canNativeShare");
+    assert.ok(
+      nativeBlocks.some((block) => block.includes("共有メニューを開く")),
+      "the share button stays behind canNativeShare",
+    );
+    assert.ok(
+      nativeBlocks.some((block) => block.includes("InstagramストーリーズやDM")),
+      "the hint must render only when Web Share is available",
+    );
+
+    const withoutNativeShare = ui.replace(
+      /\{canNativeShare \? \([\s\S]*?\) : null\}/g,
+      "",
+    );
+    assert.doesNotMatch(withoutNativeShare, /InstagramストーリーズやDM/);
+    assert.match(withoutNativeShare, /このサイトのURLをコピー/);
   });
 });
 
