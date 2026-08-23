@@ -1,5 +1,6 @@
 import { profile } from "../data/profile";
 import { site } from "../data/site";
+import { SiteShare } from "./SiteShare";
 
 const OUEN_ARCHIVE_URL = "https://ouen-archive-564c.vercel.app/";
 
@@ -7,6 +8,7 @@ export function Footer() {
   return (
     <footer className="border-t border-sage/15 px-4 py-10">
       <div className="mx-auto max-w-3xl text-sm leading-relaxed text-ink-muted">
+        <SiteShare />
         <p className="font-semibold text-ink">
           {site.displayTitle}はファン制作の非公式サイトです。
         </p>
