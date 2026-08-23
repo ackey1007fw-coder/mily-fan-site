@@ -29,12 +29,13 @@ describe("ページ上部へ戻るボタン", () => {
       "<Hero />",
       "<TodayDashboard />",
       "<Support />",
-      "<Socials />",
       "<Footer />",
       "<MobileActionDock />",
     ]) {
       assert.ok(app.includes(tag), `${tag} must stay in App`);
     }
+    const hero = await read("src/components/Hero.tsx");
+    assert.match(hero, /<Socials \/>/);
     assert.match(app, /<Latest/);
     assert.match(app, /<Stories/);
     assert.match(app, /<Gallery/);

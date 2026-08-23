@@ -5,6 +5,7 @@ import { profile } from "../data/profile";
 import { site } from "../data/site";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { ExternalLink } from "./ExternalLink";
+import { Socials } from "./Socials";
 
 export function Hero() {
   const photo = featuredPhoto();
@@ -13,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden px-4 pb-12 pt-10 sm:pb-16 sm:pt-14"
+      className="relative overflow-hidden px-4 pb-10 pt-10 sm:pb-14 sm:pt-14"
     >
       <div
         aria-hidden="true"
@@ -55,6 +56,7 @@ export function Hero() {
           <p className="mt-3 text-xs text-ink-muted">
             {contest.contestName} / <a href={SUPPORT_HUB_ROUTE} className="underline hover:text-sage-deep">応援・予定について</a>
           </p>
+          <Socials />
         </div>
 
         {photo ? (

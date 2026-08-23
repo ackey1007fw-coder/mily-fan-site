@@ -230,6 +230,7 @@ describe("follow section", () => {
     assert.match(source, /Follow Mily/);
     assert.match(source, /HOME_FOLLOW_PLATFORMS/);
     assert.match(source, /socials\.find/);
+    assert.match(source, /activities\.find/);
     assert.doesNotMatch(source, /miss-circle-2026-734/);
     assert.doesNotMatch(source, /エントリーページへ/);
     assert.doesNotMatch(source, /FM湘南マジックウェイブ/);

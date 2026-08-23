@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
+import { activities } from "../src/data/activities.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { visibleStories } from "../src/data/stories.ts";
 import {
@@ -35,8 +36,9 @@ const code = (relative) =>
     .replace(/^\s*\/\/.*$/gm, "");
 
 describe("home portal information architecture", () => {
-  it("keeps home as a compact portal: now → support → activities → latest → archives", () => {
+  it("keeps home as a compact portal: hero follow → now → support → activities → latest → archives", () => {
     const app = source("src/App.tsx");
+    const hero = source("src/components/Hero.tsx");
     const at = (tag) => app.indexOf(tag);
     for (const tag of [
       "<Hero />",
@@ -46,20 +48,34 @@ describe("home portal information architecture", () => {
       "<Latest",
       "<Stories",
       "<Gallery",
-      "<Socials />",
     ]) {
       assert.ok(at(tag) >= 0, `${tag} must render on the home page`);
     }
+    assert.match(hero, /<Socials \/>/);
+    assert.doesNotMatch(app, /<Socials/);
     assert.ok(at("<Hero />") < at("<TodayDashboard />"));
     assert.ok(at("<TodayDashboard />") < at("<Support />"));
     assert.ok(at("<Support />") < at("<ActivitiesGateway />"));
     assert.ok(at("<ActivitiesGateway />") < at("<Latest"));
     assert.ok(at("<Latest") < at("<Stories"));
     assert.ok(at("<Stories") < at("<Gallery"));
-    assert.ok(at("<Gallery") < at("<Socials />"));
     assert.doesNotMatch(app, /<StreamSchedule/);
     assert.doesNotMatch(app, /<About/);
     assert.doesNotMatch(app, /<Schedule/);
+  });
+
+  it("keeps Follow chips in the hero copy, before the featured photo", () => {
+    const hero = source("src/components/Hero.tsx");
+    const socials = source("src/components/Socials.tsx");
+    const radio = activities.find((activity) => activity.id === "radio");
+    assert.ok(radio);
+    assert.equal(radio.route, "/activities/radio/");
+    assert.ok(hero.indexOf("<Socials />") > hero.indexOf("{profile.displayName}"));
+    assert.ok(hero.indexOf("<Socials />") < hero.indexOf("<figure"));
+    assert.match(socials, /aria-label="本人SNS"/);
+    assert.match(socials, /aria-label="ラジオ"/);
+    assert.match(socials, /radioActivity\.route/);
+    assert.doesNotMatch(source("src/App.tsx"), /<Socials/);
   });
 
   it("limits home Latest / STORY / Gallery and leaves archive routes as the full lists", () => {
@@ -182,11 +198,16 @@ describe("home portal data safety", () => {
     }
   });
 
-  it("keeps Follow compact to personal socials from socials.ts", () => {
+  it("keeps Follow compact to personal socials and the radio activity route", () => {
     const socials = source("src/components/Socials.tsx");
     assert.match(socials, /Follow Mily/);
     assert.match(socials, /socials\.find/);
+    assert.match(socials, /activities\.find/);
+    assert.match(socials, /activity\.id === "radio"/);
+    assert.match(socials, /radioActivity\.route/);
     assert.doesNotMatch(code("src/components/Socials.tsx"), /from "\.\.\/data\/links"/);
-    assert.doesNotMatch(socials, /FM湘南マジックウェイブ|エントリーページへ/);
+    assert.doesNotMatch(code("src/components/Socials.tsx"), /from "\.\.\/data\/radio"/);
+    assert.doesNotMatch(socials, /FM湘南マジックウェイブ|エントリーページへ|seasidecircle/);
+    assert.doesNotMatch(code("src/components/Socials.tsx"), /fm-smw\.jp/);
   });
 });

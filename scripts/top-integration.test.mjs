@@ -94,6 +94,7 @@ function homeToday(overrides = {}) {
 describe("P6 home information architecture", () => {
   it("orders the home as Hero → TodayDashboard → Support → Activities gateway", () => {
     const app = source("src/App.tsx");
+    const hero = source("src/components/Hero.tsx");
     const at = (tag) => app.indexOf(tag);
     for (const tag of [
       "<Hero />",
@@ -104,6 +105,7 @@ describe("P6 home information architecture", () => {
     ]) {
       assert.ok(at(tag) >= 0, `${tag} must render on the home page`);
     }
+    assert.match(hero, /<Socials \/>/);
     assert.ok(at("<Hero />") < at("<TodayDashboard />"));
     assert.ok(at("<TodayDashboard />") < at("<Support />"));
     assert.ok(at("<Support />") < at("<ActivitiesGateway />"));
