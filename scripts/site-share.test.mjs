@@ -40,8 +40,8 @@ describe("site share payload", () => {
     assert.equal(payload.title, site.displayTitle);
     assert.equal(payload.text, site.description);
     assert.match(payload.text, /みりぃ（三橋莉子 \/ Mily）/);
-    assert.match(payload.text, /ファン制作の非公式サイト/);
-    assert.doesNotMatch(payload.text, /公式サイト|公認サイト|本人運営のサイト/);
+    assert.match(payload.text, /ファン制作の非公式サイトです/);
+    assert.match(payload.text, /公式・公認・本人運営ではありません/);
   });
 
   it("does not hardcode the public origin in the share helpers or UI", async () => {
@@ -158,7 +158,14 @@ describe("Web Share API", () => {
       ui.indexOf("const openShareMenu") < ui.indexOf("shareWithWebShare(SHARE)"),
       "native share must run from the user-triggered handler",
     );
-    assert.doesNotMatch(ui, /useEffect\([\s\S]*shareWithWebShare/);
+    assert.equal(
+      ui.split("shareWithWebShare(").length - 1,
+      1,
+      "native share must have exactly one call site",
+    );
+    for (const effect of ui.matchAll(/useEffect\(([\s\S]*?)\), \[[^\]]*\]\);/g)) {
+      assert.doesNotMatch(effect[1], /shareWithWebShare/);
+    }
     assert.match(ui, /canNativeShare \? \(/);
   });
 });
