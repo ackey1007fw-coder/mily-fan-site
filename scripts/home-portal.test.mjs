@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
+import { activities } from "../src/data/activities.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { visibleStories } from "../src/data/stories.ts";
 import {
@@ -61,6 +62,20 @@ describe("home portal information architecture", () => {
     assert.doesNotMatch(app, /<StreamSchedule/);
     assert.doesNotMatch(app, /<About/);
     assert.doesNotMatch(app, /<Schedule/);
+  });
+
+  it("keeps Follow chips in the hero copy, before the featured photo", () => {
+    const hero = source("src/components/Hero.tsx");
+    const socials = source("src/components/Socials.tsx");
+    const radio = activities.find((activity) => activity.id === "radio");
+    assert.ok(radio);
+    assert.equal(radio.route, "/activities/radio/");
+    assert.ok(hero.indexOf("<Socials />") > hero.indexOf("{profile.displayName}"));
+    assert.ok(hero.indexOf("<Socials />") < hero.indexOf("<figure"));
+    assert.match(socials, /aria-label="本人SNS"/);
+    assert.match(socials, /aria-label="ラジオ"/);
+    assert.match(socials, /radioActivity\.route/);
+    assert.doesNotMatch(source("src/App.tsx"), /<Socials/);
   });
 
   it("limits home Latest / STORY / Gallery and leaves archive routes as the full lists", () => {
