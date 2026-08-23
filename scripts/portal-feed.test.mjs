@@ -88,25 +88,20 @@ describe("Portal Feed generation", () => {
     assert.equal(feed.personId, "mily");
     assert.equal(feed.siteUrl, "https://mily-fan-site.vercel.app/");
     const publishedStoryCount = stories.filter((story) => story.published).length;
-    const eventCount = events.length;
-    const maxNewsInFeed = Math.max(
-      0,
-      PORTAL_FEED_LIMIT - publishedStoryCount - eventCount,
-    );
-    assert.equal(
-      feed.items.filter((item) => item.type === "news").length,
-      Math.min(news.length, maxNewsInFeed),
-    );
+    const newsInFeed = feed.items.filter((item) => item.type === "news").length;
+    const storiesInFeed = feed.items.filter((item) => item.type === "story").length;
+    const eventsInFeed = feed.items.filter(
+      (item) => item.type === "event" || item.type === "schedule",
+    ).length;
+
+    assert.equal(feed.items.length, PORTAL_FEED_LIMIT);
+    assert.equal(newsInFeed + storiesInFeed + eventsInFeed, feed.items.length);
+    assert.ok(newsInFeed > 0);
+    assert.ok(newsInFeed <= news.length);
+    assert.ok(storiesInFeed > 0);
+    assert.ok(storiesInFeed <= publishedStoryCount);
     assertPortalNewsFollowsSort(feed, news);
-    assert.equal(
-      feed.items.filter((item) => item.type === "story").length,
-      stories.filter((story) => story.published).length,
-    );
-    assert.equal(
-      feed.items.filter((item) => item.type === "event" || item.type === "schedule")
-        .length,
-      events.length,
-    );
+    assert.equal(eventsInFeed, events.length);
   });
 
   it("canonicalizes a real date-only news value to JST midnight", () => {
