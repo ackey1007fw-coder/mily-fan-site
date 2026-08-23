@@ -294,11 +294,11 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
     // Portal Feed は news / stories / events だけを見る。Gallery 追加で image は変わらない。
     assert.ok(entry.image?.endsWith(LATEST_PHOTO));
     assert.equal(entry.sourceUrl, SOURCE);
+    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
-      feed.items[0].id,
+      feed.items[1].id,
       "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
     );
-    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
       feed.items[2].id,
       "mily:story:campus-girls-2027-second-stage-jury-award",
