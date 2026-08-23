@@ -19,6 +19,11 @@ import {
 } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 
@@ -128,27 +133,11 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
 
   it("flows into Portal Feed with the local NEWS image and Instagram source", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-20T18:00:00+09:00") });
-    const item = feed.items.find((entry) => entry.id === `mily:news:${NEWS_ID}`);
+    const item = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(item);
+    assertPortalNewsFollowsSort(feed, news);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
-    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
-    assert.equal(
-      feed.items[1].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
-    );
-    assert.equal(
-      feed.items[2].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[7].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[8].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
-    assert.equal(feed.items[9].id, item.id);
   });
 });
 

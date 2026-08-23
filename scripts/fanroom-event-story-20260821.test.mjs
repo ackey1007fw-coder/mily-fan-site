@@ -24,6 +24,11 @@ import {
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { isProbablyBinary } from "./scan-tracked-text.mjs";
@@ -403,24 +408,15 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
 
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
     const feed = createPortalFeed();
+    const fanroom = findFeedItem(feed, portalNewsId(FANROOM_NEWS_ID));
+    const storyNews = findFeedItem(feed, portalNewsId(STORY_NEWS_ID));
 
-    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
-    assert.equal(
-      feed.items[1].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
-    );
-    assert.equal(
-      feed.items[2].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[4].id, `mily:news:${FANROOM_NEWS_ID}`);
-    assert.equal(feed.items[5].id, `mily:news:${STORY_NEWS_ID}`);
-    assert.ok(feed.items[4].image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
-    assert.ok(feed.items[5].image?.endsWith(eventStory20260821.poster));
-    assert.equal(feed.items[4].sourceUrl, undefined);
+    assertPortalNewsFollowsSort(feed, news);
+    assert.ok(fanroom.image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
+    assert.ok(storyNews.image?.endsWith(eventStory20260821.poster));
+    assert.equal(fanroom.sourceUrl, undefined);
     // Portal Feedは既存仕様でNewsのrelated `url`を外部導線として直マップする。
-    assert.equal(feed.items[5].sourceUrl, INSTAGRAM_PROFILE);
+    assert.equal(storyNews.sourceUrl, INSTAGRAM_PROFILE);
     assert.doesNotMatch(eventStory20260821.src, /instagram|google|twitter|x\.com/i);
     assert.doesNotMatch(eventStory20260821.poster, /instagram|google|twitter|x\.com/i);
   });

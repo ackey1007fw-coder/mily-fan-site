@@ -23,6 +23,11 @@ import {
 } from "../src/data/galleryVideos.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { isProbablyBinary } from "./scan-tracked-text.mjs";
@@ -317,25 +322,11 @@ describe("2026-08-21 morning SHOWROOM post — privacy and scope boundaries", ()
 
   it("flows through Portal Feed with the X source and shared poster", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-21T09:00:00+09:00") });
-    const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
+    const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(entry);
+    assertPortalNewsFollowsSort(feed, news);
     assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.ok(entry.image?.endsWith(morningShowroomRunwayVideo.poster));
-    assert.equal(
-      feed.items[0].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
-    );
-    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
-    assert.equal(
-      feed.items[2].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[7].id, entry.id);
   });
 });

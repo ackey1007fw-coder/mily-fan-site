@@ -15,6 +15,11 @@ import {
 } from "../src/data/media.ts";
 import { news } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
 import { verifyMedia } from "./content-invariants.mjs";
 
@@ -288,29 +293,12 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
 
   it("does not change the existing Portal Feed behaviour", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-20T12:00:00+09:00") });
-    const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
+    const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(entry);
     // Portal Feed は news / stories / events だけを見る。Gallery 追加で image は変わらない。
+    assertPortalNewsFollowsSort(feed, news);
     assert.ok(entry.image?.endsWith(LATEST_PHOTO));
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
-    assert.equal(
-      feed.items[1].id,
-      "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
-    );
-    assert.equal(
-      feed.items[2].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
-    assert.equal(feed.items[3].id, "mily:news:2026-08-21-after-afternoon-ganda");
-    assert.equal(feed.items[4].id, "mily:news:2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(feed.items[5].id, "mily:news:2026-08-21-event-story-next-slot");
-    assert.equal(feed.items[6].id, "mily:news:2026-08-21-morning-ohayo-story");
-    assert.equal(feed.items[7].id, "mily:news:2026-08-21-morning-showroom-runway");
-    assert.equal(feed.items[8].id, "mily:news:2026-08-21-tiktok-radio-misscircle");
-    assert.equal(feed.items[9].id, "mily:news:2026-08-20-mango-kakigori");
-    assert.equal(feed.items[10].id, entry.id);
     assert.equal(feed.items.some((candidate) => candidate.image?.includes("/media/gallery/mily-b08")), false);
   });
 });

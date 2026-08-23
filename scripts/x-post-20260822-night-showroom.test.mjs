@@ -13,6 +13,11 @@ import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
@@ -273,15 +278,9 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 describe("2026-08-22 night SHOWROOM thanks X post — Portal Feed and responsive contract", () => {
   it("flows through Portal Feed with its self-hosted site-origin image", async () => {
     const feed = createPortalFeed({ now: new Date("2026-08-22T23:30:00+09:00") });
-    const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
+    const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(entry);
-    assert.equal(feed.items[0].id, "mily:news:2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(feed.items[1].id, `mily:news:${NEWS_ID}`);
-    assert.equal(
-      feed.items[2].id,
-      "mily:story:campus-girls-2027-second-stage-jury-award",
-    );
+    assertPortalNewsFollowsSort(feed, news);
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-22T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);

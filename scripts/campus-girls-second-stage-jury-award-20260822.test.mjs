@@ -12,6 +12,12 @@ import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertFeedItemBefore,
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { storyBySlug, storySources } from "../src/data/stories.ts";
 
@@ -294,13 +300,14 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
       now: new Date("2026-08-22T12:00:00+09:00"),
     });
     const image = new URL(campusGirlsSecondStageResultImage.src, siteOrigin()).href;
+    const newsItem = findFeedItem(feed, portalNewsId(newsId));
+    const storyItem = findFeedItem(feed, `mily:story:${slug}`);
 
-    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
-    assert.equal(feed.items[1].id, `mily:news:${newsId}`);
-    assert.equal(feed.items[1].sourceUrl, xSource);
-    assert.equal(feed.items[1].image, image);
-    assert.equal(feed.items[2].id, `mily:story:${slug}`);
-    assert.equal(feed.items[2].url, `${siteOrigin()}/stories/${slug}/`);
-    assert.equal(feed.items[2].image, image);
+    assertPortalNewsFollowsSort(feed, news);
+    assertFeedItemBefore(feed, newsItem.id, storyItem.id);
+    assert.equal(newsItem.sourceUrl, xSource);
+    assert.equal(newsItem.image, image);
+    assert.equal(storyItem.url, `${siteOrigin()}/stories/${slug}/`);
+    assert.equal(storyItem.image, image);
   });
 });
