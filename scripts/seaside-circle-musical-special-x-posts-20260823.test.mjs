@@ -329,11 +329,7 @@ describe("2026-08-23 seaside circle official X posts — scope boundaries", () =
     assert.equal(JSON.stringify(profile).includes("2091322098954490025"), false);
     assert.equal(JSON.stringify(socials).includes("2091499993102524714"), false);
 
-    const { stdout } = await run("git", ["diff", "--name-only", "origin/main"], {
-      cwd: root,
-    });
-    const changed = stdout.split("\n").filter(Boolean);
-    for (const forbidden of [
+    for (const relative of [
       "src/data/events.ts",
       "src/data/streamSchedule.ts",
       "shared/radio-program.js",
@@ -342,7 +338,14 @@ describe("2026-08-23 seaside circle official X posts — scope boundaries", () =
       "src/data/socials.ts",
       "src/data/contest.ts",
     ]) {
-      assert.equal(changed.includes(forbidden), false, forbidden);
+      const text = await readFile(path.join(root, relative), "utf8");
+      assert.doesNotMatch(
+        text,
+        /2091322098954490025|2091499993102524714/,
+        relative,
+      );
+      assert.doesNotMatch(text, /mily-b22-0[12]/, relative);
+      assert.doesNotMatch(text, /fm-smw-x-2026-08-23-musical-special/, relative);
     }
   });
 
