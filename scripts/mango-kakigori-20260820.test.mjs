@@ -133,11 +133,11 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.ok(item);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
+    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
-      feed.items[0].id,
+      feed.items[1].id,
       "mily:news:2026-08-22-campus-girls-second-stage-jury-award",
     );
-    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
     assert.equal(
       feed.items[2].id,
       "mily:story:campus-girls-2027-second-stage-jury-award",
