@@ -27,7 +27,6 @@ describe("ページ上部へ戻るボタン", () => {
 
     for (const tag of [
       "<Hero />",
-      "<Socials />",
       "<TodayDashboard />",
       "<Support />",
       "<Footer />",
@@ -35,6 +34,8 @@ describe("ページ上部へ戻るボタン", () => {
     ]) {
       assert.ok(app.includes(tag), `${tag} must stay in App`);
     }
+    const hero = await read("src/components/Hero.tsx");
+    assert.match(hero, /<Socials \/>/);
     assert.match(app, /<Latest/);
     assert.match(app, /<Stories/);
     assert.match(app, /<Gallery/);

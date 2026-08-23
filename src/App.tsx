@@ -7,7 +7,6 @@ import { Hero } from "./components/Hero";
 import { Latest } from "./components/Latest";
 import { MobileActionDock } from "./components/MobileActionDock";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
-import { Socials } from "./components/Socials";
 import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
 import { TodayDashboard } from "./components/TodayDashboard";
@@ -30,7 +29,6 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
-        <Socials />
         <TodayDashboard />
         <Support />
         <ActivitiesGateway />

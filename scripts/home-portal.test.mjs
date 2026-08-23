@@ -35,12 +35,12 @@ const code = (relative) =>
     .replace(/^\s*\/\/.*$/gm, "");
 
 describe("home portal information architecture", () => {
-  it("keeps home as a compact portal: follow → now → support → activities → latest → archives", () => {
+  it("keeps home as a compact portal: hero follow → now → support → activities → latest → archives", () => {
     const app = source("src/App.tsx");
+    const hero = source("src/components/Hero.tsx");
     const at = (tag) => app.indexOf(tag);
     for (const tag of [
       "<Hero />",
-      "<Socials />",
       "<TodayDashboard />",
       "<Support />",
       "<ActivitiesGateway />",
@@ -50,14 +50,14 @@ describe("home portal information architecture", () => {
     ]) {
       assert.ok(at(tag) >= 0, `${tag} must render on the home page`);
     }
-    assert.ok(at("<Hero />") < at("<Socials />"));
-    assert.ok(at("<Socials />") < at("<TodayDashboard />"));
+    assert.match(hero, /<Socials \/>/);
+    assert.doesNotMatch(app, /<Socials/);
+    assert.ok(at("<Hero />") < at("<TodayDashboard />"));
     assert.ok(at("<TodayDashboard />") < at("<Support />"));
     assert.ok(at("<Support />") < at("<ActivitiesGateway />"));
     assert.ok(at("<ActivitiesGateway />") < at("<Latest"));
     assert.ok(at("<Latest") < at("<Stories"));
     assert.ok(at("<Stories") < at("<Gallery"));
-    assert.equal(app.split("<Socials />").length - 1, 1);
     assert.doesNotMatch(app, /<StreamSchedule/);
     assert.doesNotMatch(app, /<About/);
     assert.doesNotMatch(app, /<Schedule/);

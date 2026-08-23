@@ -19,7 +19,7 @@ const radioChipClass =
   "inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-sage-soft/70 px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
 
 /**
- * ホーム上部の compact Follow。
+ * Hero内の compact Follow。
  * 本人SNSは socials.ts、ラジオ導線は activities.ts の radio identity / route。
  * 番組・主催者リンク（links.ts）は混ぜない。
  */
@@ -30,46 +30,42 @@ export function Socials() {
   const radioActivity = activities.find((activity) => activity.id === "radio");
 
   return (
-    <section id="links" className={`${SECTION_ANCHOR_OFFSET} px-4 pb-6 pt-1`}>
-      <div className="mx-auto max-w-3xl rounded-3xl border border-sage/15 bg-paper-card px-5 py-4 shadow-card sm:px-6">
-        <h2 className="text-lg font-bold text-ink">Follow Mily</h2>
-        <p className="mt-1 text-sm text-ink-muted">
-          本人SNSと、ラジオのページ。
-        </p>
-        {items.length === 0 && !radioActivity ? (
-          <div className="mt-4">
-            <EmptyState
-              title="リンクはまだありません"
-              body="今はリンクがありません。"
-            />
-          </div>
-        ) : (
-          <div className="mt-4 flex flex-wrap items-center gap-2">
-            {items.length > 0 ? (
-              <ul aria-label="本人SNS" className="flex flex-wrap gap-2">
-                {items.map((item) => (
-                  <li key={item.id}>
-                    <ExternalLink href={item.url} className={chipClass}>
-                      {platformLabel[
-                        item.platform as (typeof HOME_FOLLOW_PLATFORMS)[number]
-                      ] ?? item.platform}
-                    </ExternalLink>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            {radioActivity ? (
-              <ul aria-label="ラジオ" className="flex flex-wrap gap-2">
-                <li>
-                  <a href={radioActivity.route} className={radioChipClass}>
-                    {radioActivity.label}
-                  </a>
+    <div id="links" className={`${SECTION_ANCHOR_OFFSET} mt-6`}>
+      <h2 className="text-sm font-semibold text-ink">Follow Mily</h2>
+      <p className="mt-1 text-sm text-ink-muted">本人SNSと、ラジオのページ。</p>
+      {items.length === 0 && !radioActivity ? (
+        <div className="mt-3">
+          <EmptyState
+            title="リンクはまだありません"
+            body="今はリンクがありません。"
+          />
+        </div>
+      ) : (
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          {items.length > 0 ? (
+            <ul aria-label="本人SNS" className="flex flex-wrap gap-2">
+              {items.map((item) => (
+                <li key={item.id}>
+                  <ExternalLink href={item.url} className={chipClass}>
+                    {platformLabel[
+                      item.platform as (typeof HOME_FOLLOW_PLATFORMS)[number]
+                    ] ?? item.platform}
+                  </ExternalLink>
                 </li>
-              </ul>
-            ) : null}
-          </div>
-        )}
-      </div>
-    </section>
+              ))}
+            </ul>
+          ) : null}
+          {radioActivity ? (
+            <ul aria-label="ラジオ" className="flex flex-wrap gap-2">
+              <li>
+                <a href={radioActivity.route} className={radioChipClass}>
+                  {radioActivity.label}
+                </a>
+              </li>
+            </ul>
+          ) : null}
+        </div>
+      )}
+    </div>
   );
 }
