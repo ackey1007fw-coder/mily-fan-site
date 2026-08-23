@@ -24,6 +24,11 @@ import {
 } from "../src/data/galleryVideos.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
@@ -75,18 +80,19 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-23-morning-showroom-fanroom");
     assert.equal(ordered[1], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[3], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[5], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[6], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[7], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[8], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[9], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[10], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[11], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[12], "2026-08-20-morning-message");
-    assert.equal(ordered[13], NEWS_ID);
+    assert.equal(ordered[2], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[3], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[4], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[6], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[7], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[8], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[9], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[10], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[11], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[12], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[13], "2026-08-20-morning-message");
+    assert.equal(ordered[14], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -346,20 +352,12 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
 describe("2026-08-20 morning Story — Portal Feed", () => {
   it("flows through the existing Portal Feed logic with the poster as image", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-20T09:00:00+09:00") });
-    const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
+    const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(entry);
+    assertPortalNewsFollowsSort(feed, news);
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, undefined);
-    const latestIds = sortNewsByDateDesc(news).map((item) => item.id);
-    const feedNewsIds = feed.items
-      .filter((item) => item.type === "news")
-      .map((item) => item.id.replace(/^mily:news:/, ""));
-    assert.deepEqual(
-      feedNewsIds,
-      latestIds.filter((id) => feedNewsIds.includes(id)),
-    );
     assert.ok(entry.image?.endsWith(morningStory20260820.poster));
   });
 });

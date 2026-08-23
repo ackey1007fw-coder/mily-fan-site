@@ -24,6 +24,11 @@ import {
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { isProbablyBinary } from "./scan-tracked-text.mjs";
@@ -355,9 +360,10 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 11), [
+    assert.deepEqual(ordered.slice(0, 12), [
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",
+      "2026-08-22-night-showroom-thanks",
       "2026-08-22-night-showroom-fanroom",
       "2026-08-22-evening-showroom-fanroom",
       "2026-08-22-campus-girls-second-stage-jury-award",
@@ -368,7 +374,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 20);
+    assert.equal(news.length, 21);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {
@@ -406,24 +412,15 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
 
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
     const feed = createPortalFeed();
-    const fanroom = feed.items.find((item) => item.id === `mily:news:${FANROOM_NEWS_ID}`);
-    const story = feed.items.find((item) => item.id === `mily:news:${STORY_NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news).map((item) => item.id);
-    const feedNewsIds = feed.items
-      .filter((item) => item.type === "news")
-      .map((item) => item.id.replace(/^mily:news:/, ""));
+    const fanroom = findFeedItem(feed, portalNewsId(FANROOM_NEWS_ID));
+    const storyNews = findFeedItem(feed, portalNewsId(STORY_NEWS_ID));
 
-    assert.deepEqual(
-      feedNewsIds,
-      latestIds.filter((id) => feedNewsIds.includes(id)),
-    );
-    assert.ok(fanroom);
-    assert.ok(story);
+    assertPortalNewsFollowsSort(feed, news);
     assert.ok(fanroom.image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
-    assert.ok(story.image?.endsWith(eventStory20260821.poster));
+    assert.ok(storyNews.image?.endsWith(eventStory20260821.poster));
     assert.equal(fanroom.sourceUrl, undefined);
     // Portal Feedは既存仕様でNewsのrelated `url`を外部導線として直マップする。
-    assert.equal(story.sourceUrl, INSTAGRAM_PROFILE);
+    assert.equal(storyNews.sourceUrl, INSTAGRAM_PROFILE);
     assert.doesNotMatch(eventStory20260821.src, /instagram|google|twitter|x\.com/i);
     assert.doesNotMatch(eventStory20260821.poster, /instagram|google|twitter|x\.com/i);
   });

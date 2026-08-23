@@ -12,6 +12,12 @@ import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertFeedItemBefore,
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { storyBySlug, storySources } from "../src/data/stories.ts";
 
@@ -289,10 +295,12 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
       .filter((entry) => entry.date === "2026-08-22")
       .map((entry) => entry.id);
     assert.deepEqual(aug22, [
+      "2026-08-22-night-showroom-thanks",
       "2026-08-22-night-showroom-fanroom",
       "2026-08-22-evening-showroom-fanroom",
       newsId,
     ]);
+    assert.equal(aug22[3], item.id);
   });
 
   it("flows through the existing Portal Feed as separate NEWS and STORY items", () => {
@@ -300,22 +308,19 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
       now: new Date("2026-08-22T12:00:00+09:00"),
     });
     const image = new URL(campusGirlsSecondStageResultImage.src, siteOrigin()).href;
-    const newsEntry = feed.items.find((entry) => entry.id === `mily:news:${newsId}`);
-    const storyEntry = feed.items.find((entry) => entry.id === `mily:story:${slug}`);
+    const newsItem = findFeedItem(feed, portalNewsId(newsId));
+    const storyItem = findFeedItem(feed, `mily:story:${slug}`);
 
-    assert.ok(newsEntry);
-    assert.ok(storyEntry);
-    assert.equal(newsEntry.sourceUrl, xSource);
-    assert.equal(newsEntry.image, image);
-    assert.equal(storyEntry.url, `${siteOrigin()}/stories/${slug}/`);
-    assert.equal(storyEntry.image, image);
-    const ids = feed.items.map((item) => item.id);
-    assert.ok(ids.includes(`mily:news:${newsId}`));
-    assert.ok(ids.includes(`mily:story:${slug}`));
+    assertPortalNewsFollowsSort(feed, news);
+    assertFeedItemBefore(feed, newsItem.id, storyItem.id);
+    assert.equal(newsItem.sourceUrl, xSource);
+    assert.equal(newsItem.image, image);
+    assert.equal(storyItem.url, `${siteOrigin()}/stories/${slug}/`);
+    assert.equal(storyItem.image, image);
+    const ids = feed.items.map((entry) => entry.id);
     assert.ok(
       ids.indexOf(`mily:news:${newsId}`) >
         ids.indexOf("mily:news:2026-08-22-evening-showroom-fanroom"),
     );
-    assert.ok(ids.indexOf(`mily:story:${slug}`) > ids.indexOf(`mily:news:${newsId}`));
   });
 });

@@ -19,6 +19,11 @@ import {
 } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 
@@ -67,16 +72,17 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     const ordered = sortNewsByDateDesc(news);
     assert.equal(ordered[0].id, "2026-08-23-morning-showroom-fanroom");
     assert.equal(ordered[1].id, "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[2].id, "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[3].id, "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[4].id, "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[5].id, "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[6].id, "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[7].id, "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[8].id, "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[9].id, "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[10].id, "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[11].id, NEWS_ID);
+    assert.equal(ordered[2].id, "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[3].id, "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[4].id, "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[5].id, "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[6].id, "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[7].id, "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[8].id, "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[9].id, "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[10].id, "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[11].id, "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[12].id, NEWS_ID);
   });
 
   it("summarizes only details stated in the supplied post", () => {
@@ -131,19 +137,11 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
 
   it("flows into Portal Feed with the local NEWS image and Instagram source", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-20T18:00:00+09:00") });
-    const item = feed.items.find((entry) => entry.id === `mily:news:${NEWS_ID}`);
+    const item = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(item);
+    assertPortalNewsFollowsSort(feed, news);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
-    const latestIds = sortNewsByDateDesc(news).map((entry) => entry.id);
-    const feedNewsIds = feed.items
-      .filter((entry) => entry.type === "news")
-      .map((entry) => entry.id.replace(/^mily:news:/, ""));
-    assert.deepEqual(
-      feedNewsIds,
-      latestIds.filter((id) => feedNewsIds.includes(id)),
-    );
   });
 });
 

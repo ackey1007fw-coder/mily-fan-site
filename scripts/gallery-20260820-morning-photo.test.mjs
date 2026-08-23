@@ -15,6 +15,11 @@ import {
 } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
 import { verifyMedia } from "./content-invariants.mjs";
 
@@ -288,20 +293,12 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
 
   it("does not change the existing Portal Feed behaviour", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-20T12:00:00+09:00") });
-    const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
+    const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assert.ok(entry);
     // Portal Feed は news / stories / events だけを見る。Gallery 追加で image は変わらない。
+    assertPortalNewsFollowsSort(feed, news);
     assert.ok(entry.image?.endsWith(LATEST_PHOTO));
     assert.equal(entry.sourceUrl, SOURCE);
-    const latestIds = sortNewsByDateDesc(news).map((item) => item.id);
-    const feedNewsIds = feed.items
-      .filter((item) => item.type === "news")
-      .map((item) => item.id.replace(/^mily:news:/, ""));
-    assert.deepEqual(
-      feedNewsIds,
-      latestIds.filter((id) => feedNewsIds.includes(id)),
-    );
     assert.equal(feed.items.some((candidate) => candidate.image?.includes("/media/gallery/mily-b08")), false);
   });
 });
