@@ -135,7 +135,8 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
   it("keeps chronological same-day order in the Latest sort", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 9), [
+    assert.deepEqual(ordered.slice(0, 10), [
+      "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",
       MORNING_ID,
       EARLY_ID,
@@ -146,7 +147,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       CAMPUS_ID,
       "2026-08-21-tiktok-radio-misscircle",
     ]);
-    assert.equal(news.length, 23);
+    assert.equal(news.length, 24);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {
@@ -256,11 +257,11 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
 
     assert.deepEqual(
       latestIds.filter((id) => id.startsWith("2026-08-23")),
-      ["2026-08-23-seaside-circle-musical-special", MORNING_ID, EARLY_ID, EARTHQUAKE_ID],
+      ["2026-08-23-dragon-cloud", "2026-08-23-seaside-circle-musical-special", MORNING_ID, EARLY_ID, EARTHQUAKE_ID],
     );
     assert.deepEqual(
       feedNewsIds.filter((id) => id.startsWith("2026-08-23")),
-      ["2026-08-23-seaside-circle-musical-special", MORNING_ID, EARLY_ID, EARTHQUAKE_ID],
+      ["2026-08-23-dragon-cloud", "2026-08-23-seaside-circle-musical-special", MORNING_ID, EARLY_ID, EARTHQUAKE_ID],
     );
     assert.deepEqual(
       latestIds.filter((id) => id.startsWith("2026-08-22")),

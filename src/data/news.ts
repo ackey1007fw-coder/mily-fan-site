@@ -67,6 +67,22 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-23-dragon-cloud",
+    date: "2026-08-23",
+    sameDayOrder: 5,
+    title: "龍みたいな雲に出会った日🐉",
+    body: "友達と将来について語っていたとき、みりぃが空に龍のように見える雲を見つけて撮影しました。龍の形をした雲には「次のステージに進む準備が整った」「運気が大きく上がる」といった意味があるらしいと紹介。普段はこうしたことをあまり気にしないものの、悩むことも多かったタイミングで見られたことを嬉しく感じ、「いいことはちょっと信じてみる」と投稿しています。",
+    source: "https://www.instagram.com/p/DcYbkvOk4Te/",
+    sourceLabel: "Instagramの投稿を見る",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b20-02-dragon-cloud-close.jpg",
+      width: 1600,
+      height: 1200,
+      alt: "青空に龍のようにも見える白い雲が広がる様子",
+    },
+  },
+  {
     id: "2026-08-23-seaside-circle-musical-special",
     date: "2026-08-23",
     sameDayOrder: 4,
