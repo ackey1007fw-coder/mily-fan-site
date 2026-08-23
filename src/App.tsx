@@ -19,7 +19,7 @@ import {
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-paper pb-20 text-ink sm:pb-0">
+    <div className="min-h-screen overflow-x-clip bg-paper pb-20 text-ink sm:pb-0">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-sage focus:px-4 focus:py-2 focus:text-white"
