@@ -1072,6 +1072,11 @@ objectを共有する。みりぃ個人のInstagram Storyではない。Drive Ga
 - sha256: `0595d245226140b6d2981d8ce4f4a9c3c0c5d8503136bf2ca5b99861f63d9b69`
 - 7,286,091 bytes / H.264 **High** / **720×1280** / 30fps /
   571 frames / **19.033333秒** / yuv420p
+- 依頼時の確認用動画の実測（512×910 / H.264 / 30fps）とは解像度が異なる。
+  同一ファイルとは推測せず、今回使用した原本
+  `media/original/mily-b19-01-seaside-circle-musical-special.mp4` を
+  ffprobe で再確認した値を記録する。公開派生もこの720×1280原本を基準にしており、
+  512×910へ合わせて再エンコード・ダウンスケールしていない
 - 音声: HE-AAC / 48kHz / stereo。依頼が H.264 / AAC 指定のため、公開派生でも
   音声を保持する（権利が不明な個人Storyで無音化した過去案件とは別判断）
 - chapterなし

@@ -138,7 +138,8 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
-    assert.equal(entry?.title, "真夏のミュージカル特集🎭 清水美依紗さんを迎えた3時間");
+    assert.equal(entry?.title, "真夏のミュージカル特集🎭 清水美依紗さんを迎えた生放送");
+    assert.doesNotMatch(entry?.title ?? "", /迎えた3時間|語った3時間/);
     assert.match(entry?.body ?? "", /清水美依紗さん/);
     assert.match(entry?.body ?? "", /グレイテスト・ショーマン/);
     assert.match(entry?.body ?? "", /This Is Me/);
@@ -190,8 +191,9 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
     );
     assert.equal(
       entry.cardTitle,
-      "真夏のミュージカル特集｜清水美依紗さんと語った3時間",
+      "真夏のミュージカル特集｜清水美依紗さんを迎えた特別回",
     );
+    assert.doesNotMatch(entry.cardTitle, /迎えた3時間|語った3時間/);
     assert.equal(entry.leadMediaId, "seaside-circle-musical-special-story");
     assert.deepEqual(entry.sourceIds, [
       "broadcast-transcript-2026-08-23",

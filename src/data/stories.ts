@@ -739,7 +739,7 @@ const seasideCircleMusicalSpecialStory: Story = {
   slug: "2026-08-23-musical-special",
   href: "/stories/2026-08-23-musical-special/",
   title: "2026.08.23 湘南シーサイドサークル｜真夏のミュージカル特集 放送記録",
-  cardTitle: "真夏のミュージカル特集｜清水美依紗さんと語った3時間",
+  cardTitle: "真夏のミュージカル特集｜清水美依紗さんを迎えた特別回",
   eyebrow: "湘南シーサイドサークル｜放送記録",
   badge: "RADIO",
   lead:
