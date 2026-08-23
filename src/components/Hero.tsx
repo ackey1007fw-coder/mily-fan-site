@@ -1,4 +1,5 @@
 import { contest } from "../data/contest";
+import { links } from "../data/links";
 import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
@@ -11,6 +12,9 @@ import { Socials } from "./Socials";
 export function Hero() {
   const photo = featuredPhoto();
   const latest = sortNewsByDateDesc(news)[0];
+  const seasideCircleTikTok = links.find(
+    (link) => link.id === "fm-smw-ssc-tiktok",
+  );
 
   return (
     <section
@@ -68,6 +72,25 @@ export function Hero() {
             {contest.currentPhase ? ` / ${contest.currentPhase.name}` : null}
           </p>
           <Socials />
+          {seasideCircleTikTok ? (
+            <div
+              className="mt-3 flex flex-wrap items-center gap-2"
+              role="group"
+              aria-label="湘南シーサイドサークル 番組SNS"
+            >
+              <ExternalLink
+                href={seasideCircleTikTok.url}
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
+              >
+                {seasideCircleTikTok.label}
+              </ExternalLink>
+              {seasideCircleTikTok.note ? (
+                <span className="text-xs text-ink-muted">
+                  {seasideCircleTikTok.note}
+                </span>
+              ) : null}
+            </div>
+          ) : null}
         </div>
 
         {photo ? (
