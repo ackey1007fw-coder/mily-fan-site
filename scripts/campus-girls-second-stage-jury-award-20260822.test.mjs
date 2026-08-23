@@ -295,10 +295,10 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     });
     const image = new URL(campusGirlsSecondStageResultImage.src, siteOrigin()).href;
 
-    assert.equal(feed.items[0].id, `mily:news:${newsId}`);
-    assert.equal(feed.items[0].sourceUrl, xSource);
-    assert.equal(feed.items[0].image, image);
-    assert.equal(feed.items[1].id, "mily:news:2026-08-22-night-showroom-thanks");
+    assert.equal(feed.items[0].id, "mily:news:2026-08-22-night-showroom-thanks");
+    assert.equal(feed.items[1].id, `mily:news:${newsId}`);
+    assert.equal(feed.items[1].sourceUrl, xSource);
+    assert.equal(feed.items[1].image, image);
     assert.equal(feed.items[2].id, `mily:story:${slug}`);
     assert.equal(feed.items[2].url, `${siteOrigin()}/stories/${slug}/`);
     assert.equal(feed.items[2].image, image);
