@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 import { media } from "../src/data/media.ts";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { earthquakeSafetyStoryVideo, galleryVideos } from "../src/data/galleryVideos.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
@@ -44,7 +44,7 @@ const EARTHQUAKE_MESSAGE = [
 ].join("\n");
 
 const EARTHQUAKE_BODY =
-  "8月23日未明の地震直後、SHOWROOMファンルームでみりぃが「まずは身の安全を確保」と呼びかけました。その後も「皆さん無事かな？？」とファンを気遣い、自身も無事だと報告しています。";
+  "8月23日未明の地震直後、SHOWROOMファンルームでみりぃが「まずは身の安全を確保」と呼びかけました。その後も「皆さん無事かな？？」とファンを気遣い、自身も無事だと報告しています。Instagram Storyでも関東圏の皆さんの無事を気遣い、「まずは落ち着いて」「自分の身の安全の確保‼」と呼びかけています。";
 
 const FANROOM_SPEAKER_LINE = /^(.+?) · \d{1,2}:\d{2}$/u;
 
@@ -52,11 +52,12 @@ const THIRD_PARTY_LEAKS = [
   "キサラギ",
   "震度4",
   "津波",
-  "関東",
 ];
 
 function fanRoomNews() {
-  return news.filter((entry) => entry.sourceLabel === "SHOWROOMファンルーム");
+  return news.filter((entry) =>
+    (entry.sourceLabel ?? "").includes("SHOWROOMファンルーム"),
+  );
 }
 
 function conversationSpeakers(text) {
@@ -104,14 +105,14 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
 
     assert.equal(earthquake.date, "2026-08-23");
     assert.equal(earthquake.sameDayOrder, 1);
-    assert.deepEqual(earthquake.activityIds, ["live-stream"]);
+    assert.equal(earthquake.activityIds, undefined);
     assert.equal(earthquake.source, undefined);
     assert.equal(earthquake.url, undefined);
     assert.equal(earthquake.ctaLabel, undefined);
-    assert.equal(earthquake.sourceLabel, "SHOWROOMファンルーム");
+    assert.equal(earthquake.sourceLabel, "SHOWROOMファンルーム / Instagram Story");
     assert.equal(earthquake.message?.label, "みりぃからの連絡💌 · 02:02〜02:19");
     assert.equal(earthquake.message?.text, EARTHQUAKE_MESSAGE);
-    assert.equal(earthquake.media, undefined);
+    assert.equal(earthquake.media, earthquakeSafetyStoryVideo);
     assert.match(earthquake.title, /地震直後、みんなの安全を気遣うみりぃ/);
     assert.equal(earthquake.body, EARTHQUAKE_BODY);
     assert.match(earthquake.body, /まずは身の安全を確保/);
@@ -278,6 +279,6 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     assert.equal(morning?.sourceUrl, undefined);
     assert.equal(morning?.image, undefined);
     assert.equal(earthquake?.sourceUrl, undefined);
-    assert.equal(earthquake?.image, undefined);
+    assert.ok(earthquake?.image?.endsWith(earthquakeSafetyStoryVideo.poster));
   });
 });

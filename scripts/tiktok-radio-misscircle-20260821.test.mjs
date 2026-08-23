@@ -157,10 +157,10 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(item().media, tiktokRadioVideo);
     assert.deepEqual(matches, [tiktokRadioVideo]);
-    assert.equal(galleryVideos[0], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[0], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[1], eventStory20260821);
-    assert.equal(visibleGalleryVideos().length, 7);
+    assert.equal(galleryVideos[1], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[1], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[2], eventStory20260821);
+    assert.equal(visibleGalleryVideos().length, 8);
     assert.equal(tiktokRadioVideo.provenance, "owner-provided");
     assert.equal(tiktokRadioVideo.sourceUrl, SOURCE);
     assert.equal(tiktokRadioVideo.sourceDate, "2026-08-21");
@@ -188,8 +188,8 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 7);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 18);
+    assert.equal(galleryVideos.length, 8);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 19);
   });
 });
 

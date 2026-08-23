@@ -19,6 +19,7 @@ import {
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
+import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -94,10 +95,10 @@ export const news: NewsItem[] = [
     id: "2026-08-23-earthquake-showroom-fanroom",
     date: "2026-08-23",
     sameDayOrder: 1,
-    activityIds: ["live-stream"],
     title: "地震直後、みんなの安全を気遣うみりぃ💌",
-    body: "8月23日未明の地震直後、SHOWROOMファンルームでみりぃが「まずは身の安全を確保」と呼びかけました。その後も「皆さん無事かな？？」とファンを気遣い、自身も無事だと報告しています。",
-    sourceLabel: "SHOWROOMファンルーム",
+    body: "8月23日未明の地震直後、SHOWROOMファンルームでみりぃが「まずは身の安全を確保」と呼びかけました。その後も「皆さん無事かな？？」とファンを気遣い、自身も無事だと報告しています。Instagram Storyでも関東圏の皆さんの無事を気遣い、「まずは落ち着いて」「自分の身の安全の確保‼」と呼びかけています。",
+    sourceLabel: "SHOWROOMファンルーム / Instagram Story",
+    media: earthquakeSafetyStoryVideo,
     message: {
       label: "みりぃからの連絡💌 · 02:02〜02:19",
       text: `みりぃ · 02:02
