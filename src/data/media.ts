@@ -54,8 +54,51 @@ export type MediaItem = {
 
 const BIRTHDAY_POST = "https://www.instagram.com/p/DbiY3PHk1c8/";
 const MANGO_KAKIGORI_POST = "https://www.instagram.com/p/DcQqmIwk1_l/";
+const DRAGON_CLOUD_POST = "https://www.instagram.com/p/DcYbkvOk4Te/";
 
 export const media: MediaItem[] = [
+  {
+    id: "mily-b20-01",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b20-01-skytree-upward",
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1206,
+    alt: "青空を背景に足元付近から見上げた東京スカイツリー",
+    provenance: "owner-provided",
+    sourceUrl: DRAGON_CLOUD_POST,
+    sourceDate: "2026-08-23",
+    credit: null,
+    published: true,
+  },
+  {
+    id: "mily-b20-02",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b20-02-dragon-cloud-close",
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1200,
+    alt: "青空に龍のようにも見える白い雲が広がる様子",
+    provenance: "owner-provided",
+    sourceUrl: DRAGON_CLOUD_POST,
+    sourceDate: "2026-08-23",
+    credit: null,
+    published: true,
+  },
+  {
+    id: "mily-b20-03",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b20-03-dragon-cloud-city",
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1200,
+    alt: "街並みの上に広がる青空と、龍のようにも見える白い雲",
+    provenance: "owner-provided",
+    sourceUrl: DRAGON_CLOUD_POST,
+    sourceDate: "2026-08-23",
+    credit: null,
+    published: true,
+  },
   {
     id: "mily-b10-01",
     kind: "photo",

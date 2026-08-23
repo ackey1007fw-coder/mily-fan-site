@@ -130,7 +130,7 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
     assert.equal(item()?.activityIds, undefined);
     assert.equal(item()?.title, "地震直後、みんなの安全を気遣うみりぃ💌");
     assert.equal(extraEarthquakeNews.length, 0);
-    assert.equal(news.length, 23);
+    assert.equal(news.length, 24);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -458,6 +458,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
     assert.equal(entry.sourceUrl, undefined);
     assert.ok(entry.image?.endsWith(earthquakeSafetyStoryVideo.poster));
     assert.deepEqual(latestIds, [
+      "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",

@@ -1131,3 +1131,35 @@ ffmpeg -ss 8.0 -i public/media/gallery/mily-b19-01-seaside-circle-musical-specia
   public/media/gallery/mily-b19-01-seaside-circle-musical-special-poster.jpg
 ```
 
+## 素材台帳（batch b20 / 受領日・source date 2026-08-23）
+
+本人Instagramの「龍みたいな雲」投稿に使われた、オーナー直接提供の写真3枚。
+Latest は b20-02 のメタデータ除去済み派生1枚、Gallery は3枚すべてを掲載する。
+Drive Gallery（b02）・Gallery動画・`/stories/`・`events.ts`・`highlights.ts`・
+`contest.ts` には含めない。
+
+一次出典: https://www.instagram.com/p/DcYbkvOk4Te/
+
+| ID | 元ファイル | sha256（先頭12桁） | 内容 | 掲載 |
+| --- | --- | --- | --- | --- |
+| b20-01 | `mily-b20-01-skytree-upward.jpg` | `11126f6be7bc` | 足元付近から見上げた東京スカイツリー | ✅ Gallery |
+| b20-02 | `mily-b20-02-dragon-cloud-close.jpg` | `68c332526e0e` | 青空に龍のようにも見える白い雲 | ✅ Latest / Gallery |
+| b20-03 | `mily-b20-03-dragon-cloud-city.jpg` | `f16dbb4349c3` | 街並みの上に広がる青空と龍のようにも見える雲 | ✅ Gallery |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが掲載用素材として直接提供。SNSから取得していない）
+- 3枚とも元素材は `media/original/` に無改変で保管（gitignore済み・コミットしない）
+- 元素材は横位置 JPEG（b20-01 は 3240×2442、b20-02 / b20-03 は 3240×2430）。
+  EXIF を含むため、公開用は既存の `pnpm media:build` で再エンコードしてメタデータを除去した
+- Gallery は各写真につき 480 / 960 / 1600 × JPG / WebP。元素材幅が3240pxのため
+  `-1600` は 1600px 幅（アップスケールなし）
+- Latest 代表画像は b20-02 の `-1600.jpg` と同一内容の公開派生を
+  `public/media/news/mily-b20-02-dragon-cloud-close.jpg` で使用。実寸 1600×1200
+- 公開画像に EXIF / GPS / IPTC / XMP / ICC は残っていない
+- トリミング・引き伸ばし・生成塗り足し・AI生成・顔加工・顔置換なし
+- `sourceDate`: `2026-08-23`（公開permalinkの投稿日）。撮影者は未確認のため `credit: null`
+- 3枚とも横位置のため Gallery の既定 4/3 タイルを使う（`aspect` は付けない）
+- 公開ファイル名は新規batch b20を使用し、既存batch・連番と衝突しない
+- 受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
