@@ -214,12 +214,6 @@ function compareStableId(a: PortalFeedItem, b: PortalFeedItem): number {
   return 0;
 }
 
-const NEWS_EDITORIAL_RANKS = Symbol("newsEditorialRanks");
-
-type PortalFeedWithEditorialRanks = PortalFeed & {
-  [NEWS_EDITORIAL_RANKS]?: ReadonlyMap<string, number>;
-};
-
 function newsEditorialRanks(newsItems: NewsItem[]): ReadonlyMap<string, number> {
   return new Map(
     sortNewsByDateDesc(newsItems).map((item, index) => [
@@ -348,10 +342,12 @@ export function assertPortalFeedContract(feed: PortalFeed): void {
     if (item.sourceUrl) requireHttpUrl(item.sourceUrl, `item "${item.id}" sourceUrl`);
   }
 
-  const ranks = (feed as PortalFeedWithEditorialRanks)[NEWS_EDITORIAL_RANKS];
-  const sorted = [...feed.items].sort(byPublishedAtThenNewsEditorialOrder(ranks));
-  if (sorted.some((item, index) => item.id !== feed.items[index]?.id)) {
-    throw new Error("Portal Feed items must be sorted by publishedAt newest first");
+  for (let index = 1; index < feed.items.length; index += 1) {
+    const previous = Date.parse(feed.items[index - 1]?.publishedAt ?? "");
+    const current = Date.parse(feed.items[index]?.publishedAt ?? "");
+    if (previous < current) {
+      throw new Error("Portal Feed items must be sorted by publishedAt newest first");
+    }
   }
 }
 
@@ -368,7 +364,7 @@ export function createPortalFeed(input: CreatePortalFeedInput = {}): PortalFeed 
     ...(input.eventItems ?? events).map(eventToPortalItem),
   ];
 
-  const feed: PortalFeedWithEditorialRanks = {
+  const feed: PortalFeed = {
     version: PORTAL_FEED_VERSION,
     personId: PORTAL_PERSON_ID,
     siteName: site.displayTitle,
@@ -376,7 +372,6 @@ export function createPortalFeed(input: CreatePortalFeedInput = {}): PortalFeed 
     generatedAt,
     items: selectPortalFeedItems(candidates, now, PORTAL_FEED_LIMIT, editorialRanks),
   };
-  feed[NEWS_EDITORIAL_RANKS] = editorialRanks;
 
   assertPortalFeedContract(feed);
   return feed;
