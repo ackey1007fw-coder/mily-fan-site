@@ -26,7 +26,7 @@ export function Hero() {
         className="pointer-events-none absolute -left-10 bottom-4 h-32 w-32 rounded-full bg-apricot-soft"
       />
       <div className="relative mx-auto grid max-w-3xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-center">
-        <div>
+        <div className="order-2 lg:order-1">
           <p className="inline-flex rounded-full bg-sage-soft px-3 py-1 text-xs font-medium text-sage-deep">
             ファン制作・非公式サイト
           </p>
@@ -71,7 +71,7 @@ export function Hero() {
         </div>
 
         {photo ? (
-          <figure className="overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card">
+          <figure className="order-1 overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card lg:order-2">
             <picture>
               <source
                 type="image/webp"
@@ -97,7 +97,7 @@ export function Hero() {
             ) : null}
           </figure>
         ) : (
-          <div className="rounded-3xl border border-sage/15 bg-paper-card p-6 shadow-card">
+          <div className="order-1 rounded-3xl border border-sage/15 bg-paper-card p-6 shadow-card lg:order-2">
             <p className="text-xs font-medium uppercase tracking-wide text-sage-deep">
               Mily Fan Site
             </p>
