@@ -6,7 +6,6 @@ import manifest from "./nightThanksMorningStreamStoryVideo.json" with { type: "j
  *
  * Latest / NEWS と Gallery がこの 1 オブジェクトを共有するので、
  * 公開MP4とposterが用途別に複製されない。
- * 公開派生は視聴者アバター・表示名・コメント帯を覆った noviewers ファイルだけを指す。
  * 恒久的な公開permalinkがないため `sourceLabel` は非リンクの label に留め、
  * `sourceUrl` は持たない。
  */

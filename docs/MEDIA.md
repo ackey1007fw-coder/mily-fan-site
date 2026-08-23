@@ -1306,8 +1306,8 @@ schedule には含めない。新しい `/stories/` 記事は作っていない�
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b23-01 | `gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers.mp4` | 夜枠とラジオへの感謝、8月24日朝6:20〜6:50の配信予定を伝える縦型動画。視聴者レイヤー（アバター・表示名・コメント）はStory背景色で覆い、みりぃ本人と本文だけを残した。720×1280。owner-provided | ✅ Latest / Gallery |
-| b23-01 poster | `gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers-poster.jpg` | 公開MP4の4.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b23-01 | `gallery/mily-b23-01-night-thanks-morning-stream-story.mp4` | 夜枠とラジオへの感謝、8月24日朝6:20〜6:50の配信予定を伝える縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b23-01 poster | `gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg` | 公開MP4の4.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
 
 ### 元素材の実測
 
@@ -1330,31 +1330,17 @@ schedule には含めない。新しい `/stories/` 記事は作っていない�
 音声の内容・由来・種類・権利者・楽曲名は確認できていないため、推測して記録しない。
 元素材そのものから音声は削除していない。
 
-### 視聴者レイヤー — 公開派生でのみ覆った
-
-元素材のSHOWROOM画面下段には、視聴者アバター・表示名・コメント帯がある。
-本人がStoryに載せた公開画面でも、ファンサイト側で第三者の識別情報を
-再掲しない。privacy-safeな公開派生では、Story背景色 `#A7E2CC`
-（実測 167,226,204）の決定的な `drawbox` で
-`x=0 / y=328 / w=720 / h=184` を覆い、みりぃ本人と本文だけを残した。
-
-- 覆ったのは視聴者レイヤーだけ。顔のAI加工・generative fill・塗り足しはしていない
-- 元素材そのものは無改変のまま残し、公開パスへは出していない
-- 視聴者レイヤーが残る旧公開ファイル名
-  `mily-b23-01-night-thanks-morning-stream-story.mp4` /
-  `mily-b23-01-night-thanks-morning-stream-story-poster.jpg`
-  は掲載しない。内容が変わるため新しいファイル名を使う
-
 ### 公開MP4
 
-- sha256: `6d3e1a13f45d1caabb712dd9c37ebced3ea76bb0c9517198b60f635959efb7c1`
-- 158,881 bytes / H.264 **Constrained Baseline** / **720×1280** /
-  **1fps** / 20 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 /
+- sha256: `6084ca92ebb4743065324055dc5706637978566d1f0f9d7b48e0feaffa2578ae`
+- 344,986 bytes / H.264 **High** / **720×1280** /
+  **1fps** / 20 frames / 20.000000秒 / yuv420p / `has_b_frames` 2 /
   音声ストリームなし
 - 元素材の画素数・縦横比・1fps・映像フレーム数を維持。
   crop・scale・引き伸ばし・アップスケール・fps水増し・短縮なし（`-vf scale`を使っていない）
-- 視聴者レイヤーを覆うため再エンコードした。`-c:v copy` では画素を変えられない
-- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 935）
+- 既存の公開映像ストリームを `-c:v copy` で remux し、`-an` で音声だけを外した。
+  画素数・fps・フレーム数を変える再エンコードはしていない
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 1102）
 - metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
   `-map_chapters -1`）。元の`creation_time`と `Core Media`は残っていない
 - AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
@@ -1363,13 +1349,10 @@ schedule には含めない。新しい `/stories/` 記事は作っていない�
 
 ```
 ffmpeg -i media/original/mily-b23-01-night-thanks-morning-stream-story.mp4 \
-  -map 0:v:0 -an \
-  -vf "drawbox=x=0:y=328:w=720:h=184:color=0xa7e2cc:t=fill" \
-  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
-  -pix_fmt yuv420p -r 1 \
+  -map 0:v:0 -c:v copy -an \
   -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
   -movflags +faststart \
-  public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers.mp4
+  public/media/gallery/mily-b23-01-night-thanks-morning-stream-story.mp4
 ```
 
 ### poster / 共有範囲
@@ -1377,8 +1360,8 @@ ffmpeg -i media/original/mily-b23-01-night-thanks-morning-stream-story.mp4 \
 - 公開MP4の0 / 4 / 8 / 12 / 16 / 19秒地点を比較。ほぼ静止したStoryのため差は小さく、
   本文とみりぃの配信画面が読める4.0秒地点を採用
 - 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
-- 59,651 bytes / 720×1280 JPEG / sha256
-  `ba6e5ad07db0bfd903b424bace1a19e84f99c600de0dd00bde52c1cc39aa3cd1`
+- 93,615 bytes / 720×1280 JPEG / sha256
+  `516e9a3e3b7541002e56d6c5c9fe2a6e7980df715ad01bb904d641fe4f53aa20`
 - EXIF / IPTC / XMP / ICCなし
 - `src/data/nightThanksMorningStreamStoryVideo.json` の1オブジェクトを
   Latest / NEWS + Gallery で共有し、公開MP4 1本・poster 1枚だけを参照する
@@ -1388,8 +1371,8 @@ ffmpeg -i media/original/mily-b23-01-night-thanks-morning-stream-story.mp4 \
 poster生成コマンド（再現用）:
 
 ```
-ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers.mp4 \
+ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-story.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
-  public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers-poster.jpg
+  public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg
 ```
 
