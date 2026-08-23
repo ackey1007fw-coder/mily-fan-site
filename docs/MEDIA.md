@@ -1044,3 +1044,85 @@ ffmpeg -ss 8.0 -i public/media/gallery/mily-b18-01-earthquake-safety-story.mp4 \
   public/media/gallery/mily-b18-01-earthquake-safety-story-poster.jpg
 ```
 
+## 素材台帳（batch b19 / 受領日・source date 2026-08-23）
+
+2026-08-23の湘南シーサイドサークル公式Instagram（番組アカウント）Story動画。
+owner-providedの縦型動画で、Latest NEWS（id
+`2026-08-23-seaside-circle-musical-special`）・Gallery・STORY記事
+`/stories/2026-08-23-musical-special/` が同じ公開MP4・poster・manifest
+objectを共有する。みりぃ個人のInstagram Storyではない。Drive Gallery（b02）
+には含めない。`events.ts`・`streamSchedule.ts`・radio weekly schedule は
+変更していない。
+
+恒久的な公開permalinkがないため、表示は非リンクの
+`湘南シーサイドサークル Instagram Story` label。推測URLは作らない。
+受け渡し用URL / file IDは公開情報・tracked textとして記録しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b19-01 | `gallery/mily-b19-01-seaside-circle-musical-special.mp4` | スタジオでヘッドホンをつけた3人が映る、湘南シーサイドサークルのInstagram Story動画。真夏のミュージカル特集と生放送案内。720×1280。owner-provided | ✅ Latest / Gallery / STORY |
+| b19-01 poster | `gallery/mily-b19-01-seaside-circle-musical-special-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery / STORY |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 番組Instagram Story / source date: `2026-08-23` / 恒久permalinkなし
+- 元素材は `media/original/mily-b19-01-seaside-circle-musical-special.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `0595d245226140b6d2981d8ce4f4a9c3c0c5d8503136bf2ca5b99861f63d9b69`
+- 7,286,091 bytes / H.264 **High** / **720×1280** / 30fps /
+  571 frames / **19.033333秒** / yuv420p
+- 音声: HE-AAC / 48kHz / stereo。依頼が H.264 / AAC 指定のため、公開派生でも
+  音声を保持する（権利が不明な個人Storyで無音化した過去案件とは別判断）
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+
+### 公開MP4
+
+- sha256: `a50be82df9620b5f246f6d84c6bd64d48de981e1b462219eaf216c71ec6ecf4c`
+- 861,587 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  30fps / 571 frames / 19.033333秒 / yuv420p / `has_b_frames` 0 /
+  AAC-LC 128k
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- `+faststart`確認済み（`moov` が `mdat` より前）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_metadata:s:a -1` / `-map_chapters -1`）。元の`creation_time`と
+  `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b19-01-seaside-circle-musical-special.mp4 \
+  -map 0:v:0 -map 0:a:0 \
+  -map_metadata -1 -map_metadata:s:v -1 -map_metadata:s:a -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p \
+  -c:a aac -b:a 128k \
+  -movflags +faststart \
+  public/media/gallery/mily-b19-01-seaside-circle-musical-special.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の複数地点を比較。8.0秒前後は3人が自然に見え、Story本文が読みやすく、
+  極端な瞬きやブレが少ないため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 105,053 bytes / 720×1280 JPEG / sha256
+  `1f3516f15c70ff802231ccae56716400bd1d543c1bc998e6daf9e2413e26b0b5`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/seasideCircleMusicalSpecialVideo.json` の1オブジェクトを
+  Latest / Gallery / STORY で共有し、公開MP4 1本・poster 1枚だけを参照する
+- みりぃ個人のInstagram Storyとして分類していない
+- InstagramプロフィールURLや番組Storyの推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 8.0 -i public/media/gallery/mily-b19-01-seaside-circle-musical-special.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b19-01-seaside-circle-musical-special-poster.jpg
+```
+

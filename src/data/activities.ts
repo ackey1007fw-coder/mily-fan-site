@@ -68,7 +68,7 @@ export const activities: Activity[] = [
       "fm-smw-ssc-tiktok",
     ],
     relatedHighlightIds: [],
-    relatedStorySlugs: ["2026-08-18-radio"],
+    relatedStorySlugs: ["2026-08-23-musical-special", "2026-08-18-radio"],
   },
   {
     id: "live-stream",

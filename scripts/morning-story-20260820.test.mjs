@@ -78,22 +78,23 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     assert.ok(item());
     // 8/21の新着の後も、8/20同日は既存の配列順を維持する。
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[1], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[3], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[4], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[6], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[7], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[8], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[9], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[10], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[11], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[12], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[13], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[14], "2026-08-20-morning-message");
-    assert.equal(ordered[15], NEWS_ID);
+    assert.equal(ordered[0], "2026-08-23-seaside-circle-musical-special");
+    assert.equal(ordered[1], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[2], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[4], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[5], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[7], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[8], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[9], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[10], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[11], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[12], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[13], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[14], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[15], "2026-08-20-morning-message");
+    assert.equal(ordered[16], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -309,13 +310,13 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const drive = driveGallerySections(visibleDriveGallery());
     const visible = visibleGalleryVideos();
 
-    // 2026-08-23 の地震後Story（b18）が加わって8本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
-    assert.equal(visible.length, 8);
-    assert.equal(visible[1], tiktokRadioVideo);
-    assert.equal(visible[2], eventStory20260821);
-    assert.equal(visible[3], morningOhayo20260821);
-    assert.equal(visible[4], morningShowroomRunwayVideo);
-    assert.equal(visible[5], morningStory20260820);
+    // 2026-08-23 の番組Story（b19）と地震後Story（b18）で9本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
+    assert.equal(visible.length, 9);
+    assert.equal(visible[2], tiktokRadioVideo);
+    assert.equal(visible[3], eventStory20260821);
+    assert.equal(visible[4], morningOhayo20260821);
+    assert.equal(visible[5], morningShowroomRunwayVideo);
+    assert.equal(visible[6], morningStory20260820);
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
     assert.equal(drive.videos.length, 11);

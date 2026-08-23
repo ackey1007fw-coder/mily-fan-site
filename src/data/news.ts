@@ -20,6 +20,7 @@ import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
+import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -65,6 +66,18 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-23-seaside-circle-musical-special",
+    date: "2026-08-23",
+    sameDayOrder: 4,
+    activityIds: ["radio"],
+    title: "真夏のミュージカル特集🎭 清水美依紗さんを迎えた3時間",
+    body: "8月23日の「湘南シーサイドサークル」は真夏のミュージカル特集。前半約2時間には清水美依紗さんをゲストに迎え、ミュージカルとの出会い、『レ・ミゼラブル』『ミス・サイゴン』、表現や夢への向き合い方までじっくりトークしました。12時台には、みりぃ自身が高校時代に『グレイテスト・ショーマン』と「This Is Me」から勇気をもらった思い出も語りました。",
+    sourceLabel: "湘南シーサイドサークル / 2026.08.23 生放送",
+    url: "/stories/2026-08-23-musical-special/",
+    ctaLabel: "真夏のミュージカル特集の放送記録を読む",
+    media: seasideCircleMusicalSpecialVideo,
+  },
   {
     id: "2026-08-23-morning-showroom-fanroom",
     date: "2026-08-23",

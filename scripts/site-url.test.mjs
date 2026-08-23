@@ -62,6 +62,10 @@ describe("site.siteUrl metadata source of truth", () => {
     );
     assert.match(
       sitemapXml(),
+      new RegExp(`<loc>${storyUrl("2026-08-23-musical-special")}</loc>`),
+    );
+    assert.match(
+      sitemapXml(),
       new RegExp(
         `<loc>${storyUrl("campus-girls-2027-second-stage-jury-award")}</loc>`,
       ),

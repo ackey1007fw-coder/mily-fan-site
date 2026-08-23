@@ -81,6 +81,7 @@ export function verifySiteUrlConsistency() {
   const campusGirlsStoryCanonical = storyUrl(
     "campus-girls-2027-second-stage-jury-award",
   );
+  const musicalSpecialStoryCanonical = storyUrl("2026-08-23-musical-special");
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
@@ -92,6 +93,9 @@ export function verifySiteUrlConsistency() {
   );
   const campusGirlsStoryHtml = readRelative(
     "stories/campus-girls-2027-second-stage-jury-award/index.html",
+  );
+  const musicalSpecialStoryHtml = readRelative(
+    "stories/2026-08-23-musical-special/index.html",
   );
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
@@ -227,6 +231,26 @@ export function verifySiteUrlConsistency() {
   if (!campusGirlsStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("CAMPUS GIRLS story images must use __SITE_OG_IMAGE__");
   }
+  if (
+    !musicalSpecialStoryHtml.includes(
+      'href="__STORY_2026_08_23_MUSICAL_SPECIAL_CANONICAL__"',
+    )
+  ) {
+    errors.push(
+      "musical special story canonical href must use its siteUrl placeholder",
+    );
+  }
+  if (
+    !musicalSpecialStoryHtml.includes('property="og:url"') ||
+    !musicalSpecialStoryHtml.includes(
+      'content="__STORY_2026_08_23_MUSICAL_SPECIAL_CANONICAL__"',
+    )
+  ) {
+    errors.push("musical special story og:url must use its siteUrl placeholder");
+  }
+  if (!musicalSpecialStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("musical special story images must use __SITE_OG_IMAGE__");
+  }
   for (const activityPage of activityPages) {
     if (!activityPage.html.includes('href="__ACTIVITY_CANONICAL__"')) {
       errors.push(`${activityPage.label} canonical must use __ACTIVITY_CANONICAL__`);
@@ -288,6 +312,11 @@ export function verifySiteUrlConsistency() {
       "public/sitemap.xml must include the CAMPUS GIRLS story canonical URL",
     );
   }
+  if (!sitemap.includes(`<loc>${musicalSpecialStoryCanonical}</loc>`)) {
+    errors.push(
+      "public/sitemap.xml must include the musical special story canonical URL",
+    );
+  }
   for (const activityPage of activityPages) {
     if (!sitemap.includes(`<loc>${activityPage.canonical}</loc>`)) {
       errors.push(`public/sitemap.xml must include ${activityPage.label}`);
@@ -303,6 +332,7 @@ export function verifySiteUrlConsistency() {
     !viteConfig.includes(
       'storyUrl("campus-girls-2027-second-stage-jury-award")',
     ) ||
+    !viteConfig.includes('storyUrl("2026-08-23-musical-special")') ||
     !viteConfig.includes("ogImageUrl()") ||
     !viteConfig.includes("activityPageMetadata(context.path)")
   ) {
@@ -375,6 +405,11 @@ export function verifySiteUrlConsistency() {
       "CAMPUS GIRLS story HTML must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  if (hardcodedOrigin.test(musicalSpecialStoryHtml)) {
+    errors.push(
+      "musical special story HTML must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
   for (const activityPage of activityPages) {
     if (hardcodedOrigin.test(activityPage.html)) {
       errors.push(`${activityPage.label} HTML must not hardcode the public origin`);
@@ -392,6 +427,7 @@ export function verifySiteUrlConsistency() {
     !radioStoryCanonical.startsWith(origin) ||
     !resultStoryCanonical.startsWith(origin) ||
     !campusGirlsStoryCanonical.startsWith(origin) ||
+    !musicalSpecialStoryCanonical.startsWith(origin) ||
     activityPages.some((activityPage) => !activityPage.canonical.startsWith(origin)) ||
     !ogImage.startsWith(origin)
   ) {

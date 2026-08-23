@@ -1,6 +1,7 @@
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { campusGirlsSecondStageInstagramStoryImage } from "./campusGirlsSecondStageInstagramStoryImage.ts";
+import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 
 export const storySources = {
   "pre-final-message": {
@@ -19,6 +20,17 @@ export const storySources = {
     id: "x-2026-08-18-radio",
     label: "本人X投稿（2026年8月18日）",
     url: "https://x.com/Mily_chan36/status/2089721650522820667",
+  },
+  // 受け渡し用のGoogle Docs URLは持たせず、非リンクのlabelとして出す。
+  "broadcast-transcript-2026-08-23": {
+    id: "broadcast-transcript-2026-08-23",
+    label:
+      "2026年8月23日 湘南シーサイドサークル 生放送アーカイブ文字起こし（オーナー提供）",
+  },
+  // 恒久的な公開permalinkがない番組Instagram Story。推測URLは持たせない。
+  "program-instagram-story-2026-08-23": {
+    id: "program-instagram-story-2026-08-23",
+    label: "湘南シーサイドサークル Instagram Story（2026年8月23日）",
   },
   "x-2026-08-19-second-round-result": {
     id: "x-2026-08-19-second-round-result",
@@ -723,7 +735,269 @@ const campusGirlsSecondStageJuryAwardStory: Story = {
   ],
 };
 
+const seasideCircleMusicalSpecialStory: Story = {
+  slug: "2026-08-23-musical-special",
+  href: "/stories/2026-08-23-musical-special/",
+  title: "2026.08.23 湘南シーサイドサークル｜真夏のミュージカル特集 放送記録",
+  cardTitle: "真夏のミュージカル特集｜清水美依紗さんと語った3時間",
+  eyebrow: "湘南シーサイドサークル｜放送記録",
+  badge: "RADIO",
+  lead:
+    "8月23日の「湘南シーサイドサークル」は、3時間にわたる「真夏のミュージカル特集」。前半には清水美依紗さんをスペシャルゲストに迎え、舞台、表現、夢への向き合い方までじっくり語りました。後半では、みりぃ自身のミュージカル映画との思い出も届けられました。",
+  cardDescription:
+    "清水美依紗さんを迎えた真夏のミュージカル特集。表現や夢の話と、みりぃが高校時代に『グレイテスト・ショーマン』から受け取った勇気を残した3時間です。",
+  date: "2026-08-23",
+  dateLabel: "2026.08.23",
+  published: true,
+  sourceIds: [
+    "broadcast-transcript-2026-08-23",
+    "program-instagram-story-2026-08-23",
+  ],
+  leadMediaId: "seaside-circle-musical-special-story",
+  media: [
+    {
+      id: "seaside-circle-musical-special-story",
+      kind: "video",
+      src: seasideCircleMusicalSpecialVideo.src,
+      poster: seasideCircleMusicalSpecialVideo.poster,
+      width: seasideCircleMusicalSpecialVideo.width,
+      height: seasideCircleMusicalSpecialVideo.height,
+      label: "スタジオでヘッドホンをつけた3人が映る、湘南シーサイドサークルのInstagram Story動画",
+      caption:
+        "湘南シーサイドサークルのInstagram Story。真夏のミュージカル特集と、ゲストの清水美依紗さんを案内する縦型動画です。",
+    },
+  ],
+  sections: [
+    {
+      id: "start",
+      title: "真夏のミュージカル特集、スタート",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "2026年8月23日 10:00〜13:00、FM湘南マジックウェイブの「湘南シーサイドサークル」は「真夏のミュージカル特集」をお届けしました。パーソナリティは師匠とMily（みりぃ）、ディレクターはカズボー。前半約2時間のスペシャルゲストは、歌手でミュージカル俳優の清水美依紗さんでした。",
+          sourceIds: [
+            "broadcast-transcript-2026-08-23",
+            "program-instagram-story-2026-08-23",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "劇場へまだ行ったことがない人にも楽しんでもらうことを意識した3時間で、名曲や楽しみ方、表現者としての歩みが語られました。多くのリスナーから質問や応援メッセージも届きました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "path-to-musical",
+      title: "清水美依紗さんがミュージカルへ進んだきっかけ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "もともと歌手を目指していた清水美依紗さんは、当時足りないと感じていた表現力を広げるために、高校卒業後にニューヨークでミュージカルを学びました。現地でミュージカルそのものに惹かれていき、いまの活動につながったと番組内で話しています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "留学中は、世界の才能や英語環境に圧倒された経験もあったといいます。厳しい時期を乗り越えながら学び続け、そのときのことを「根性」という言葉で短く振り返っていました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "miss-saigon",
+      title: "『ミス・サイゴン』と作品を背負う責任",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "転機のひとつとして語られたのが、留学中にワシントンD.C.で観た『ミス・サイゴン』です。音楽と物語、俳優の表現に強く心を動かされたと話していました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "今回、自身が作品に向き合うなかで歴史背景も学んでいること、ベトナム戦争を扱う作品として、単なる憧れの役ではなく責任を感じていることも、番組内で伝えられました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "first-musical",
+      title: "初めてのミュージカル、どう楽しむ？",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "初めて劇場へ行く人向けに、番組では楽しみ方のポイントも紹介されました。拍手のタイミングを細かく気にしすぎなくてよいこと、心が動いたときに自然に楽しむこと、周囲への最低限の配慮は大切であること。作品のカラーを取り入れた服装など、観劇前から楽しむ方法もあると話しています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "作品によっては学生料金やU25などの設定があること、初心者にはディズニー系作品や『サウンド・オブ・ミュージック』なども入りやすいことも、一般的な紹介として触れられました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "wicked",
+      title: "おすすめ映画『ウィキッド』",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "清水美依紗さんがおすすめのミュージカル映画として挙げたのは『ウィキッド』です。以前から作品自体が好きだったこと、音楽が大きな魅力であること、エルファバとグリンダの関係性も見どころだと話していました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "日本語版とオリジナル版、それぞれに魅力があるという紹介も、番組内で短く共有されました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "aim-actor",
+      title: "「目指せアクター」——“あのね”だけで表現",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "番組コーナー「目指せアクター」では、お題の一言「あのね」を、内緒話、自慢話、言い訳、説教、告白などの設定で、声とイントネーションだけを使って表現しました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "清水美依紗さんによる実演もあり、声の高さ、間、息遣いなどで印象が変わることにメンバーが驚いていました。スタジオには「先生が現れた」と喜ぶ空気も、短く残っています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "eponine",
+      title: "『レ・ミゼラブル』エポニーヌ役の裏側",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "清水美依紗さんが演じたエポニーヌについて、番組では役作りが深掘りされました。「悲しい役だから悲しく演じる」だけではない、という向き合い方が語られています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "悲しみに抗うこと、死に向かうのではなく生きようとすること、怒りや力強さも持っていること。有名な役だからこそ既存のイメージに縛られそうになった一方で、自分自身のルーツや個性を大切にすることを学んだ、と話していました。演じる人によってそれぞれのエポニーヌがある、という考えも紹介されました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "on-my-own",
+      title: "「On My Own」をどう捉えていたか",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "「On My Own」についても、単なる「報われない恋の悲しい曲」だけではない、という見方が語られました。曲の中でエポニーヌ自身が自分の感情に気づいていき、「自分はマリウスを愛している」と発見していく曲として捉えていた、と清水美依紗さんは話しています。曲中で感情が変化していく、という捉え方でした。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "dreams",
+      title: "夢を叶えるために大切なこと",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "番組内でも特に印象的だったのが、夢を叶えるために大切なことについての話です。清水美依紗さんが挙げたのは、「やりたいことを人に言ってみること」という考えでした。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "quote",
+          paragraphs: ["やりたいことを人に言ってみること"],
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "「こんなことをやってみたい」と人に話すと、それが人から人へ伝わることがある。思いがけない縁やチャンスにつながる場合もある、と話していました。必ず叶えなければならないと自分を追い込みすぎる必要はなく、挑戦が怖くなる経験をしながらも、挑戦は成長につながった、という趣旨でした。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "mily-reflection",
+      title: "ゲストトークを終えたみりぃの振り返り",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "清水美依紗さんが退出した12時台、メンバーが約2時間のゲストトークを振り返りました。みりぃは、自分も大学3年生で人生の岐路に立っていること、夢を追いながら活動し、実現してきた本人を目の前にして話を聞けたこと、今の自分に刺さる話がたくさんあったことを、番組内で語っています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "大学3年生としてこれからの道を考える時期にいるみりぃにとって、夢を追いながら挑戦を続けてきた本人から直接話を聞けたことは、強く心に残る時間になったようです。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "greatest-showman",
+      title: "みりぃと『グレイテスト・ショーマン』",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "12時台、みりぃが好きなミュージカル映画として紹介したのは『グレイテスト・ショーマン』でした。高校生の頃、吹奏楽で作品の楽曲を演奏する機会があり、「曲に出会ったのだから映画も見てみよう」と思って観た、と話しています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "当時のみりぃには、自分に自信を持てない時期があり、周りからどう見られるかを気にしていたこと、自分のやっていることに誇りを持てない気持ちもあったと振り返りました。作品を通して、周りの目よりも、もっと大切にするべきものがある、ということに気づかされた趣旨を語っています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "this-is-me",
+      title: "「This Is Me」にもらった勇気",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "劇中の「This Is Me」にも強く惹かれたと、みりぃは話しました。高校へ行くのが少しつらいと感じる朝にも、『グレイテスト・ショーマン』の楽曲を聴きながら登校し、前向きになる勇気をもらっていたといいます。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "みりぃ自身は、ただ強い人の歌というより、弱い部分を持ちながらも前を向こうとして自分に言い聞かせている面もあるのでは、と考えていた、と番組内で述べています。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "movies-and-next",
+      title: "ミュージカルから映画へ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "番組終盤では、『グリース』、『魔法にかけられて』、『ダンスウィズミー』など、ミュージカル映画の話題がさらに広がりました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "次回テーマは「映画」。今回と同じメンバーで放送予定であることが、番組内で案内されました。",
+          sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+      ],
+    },
+    {
+      id: "closing",
+      title: "真夏の3時間を閉じる",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "清水美依紗さんから聞いた「表現」「挑戦」「夢」の話と、みりぃ自身の高校時代や今の思いが重なった、真夏のミュージカル特集となりました。",
+          sourceIds: [
+            "broadcast-transcript-2026-08-23",
+            "program-instagram-story-2026-08-23",
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 export const stories: Story[] = [
+  seasideCircleMusicalSpecialStory,
   campusGirlsSecondStageJuryAwardStory,
   secondRoundResultStory,
   radioStory,

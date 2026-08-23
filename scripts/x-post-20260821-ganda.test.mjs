@@ -253,7 +253,8 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
     ];
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 9), [
+    assert.deepEqual(ordered.slice(0, 10), [
+      "2026-08-23-seaside-circle-musical-special",
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",
       "2026-08-23-earthquake-showroom-fanroom",
@@ -268,7 +269,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
     );
     for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
-    assert.equal(news.length, 22);
+    assert.equal(news.length, 23);
   });
 });
 

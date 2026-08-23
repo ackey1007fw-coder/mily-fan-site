@@ -41,8 +41,9 @@ describe("reusable STORIES content", () => {
   it("publishes the source-backed second-round story with the approved copy", () => {
     const story = storyBySlug("second-round-2026");
     assert.ok(story);
-    assert.equal(stories.length, 4);
+    assert.equal(stories.length, 5);
     assert.deepEqual(visibleStories(), [
+      storyBySlug("2026-08-23-musical-special"),
       storyBySlug("campus-girls-2027-second-stage-jury-award"),
       storyBySlug("second-round-result-2026"),
       storyBySlug("2026-08-18-radio"),
@@ -272,6 +273,10 @@ describe("STORIES pages and discovery", () => {
       vite,
       /storyCampusGirlsSecondStageJuryAward:[\s\S]*"stories\/campus-girls-2027-second-stage-jury-award\/index\.html"/,
     );
+    assert.match(
+      vite,
+      /storyMusicalSpecial20260823:[\s\S]*"stories\/2026-08-23-musical-special\/index\.html"/,
+    );
     assert.match(html, /src="\/src\/story-main\.tsx"/);
     assert.match(html, /rel="canonical" href="__STORY_SECOND_ROUND_CANONICAL__"/);
     assert.match(html, /property="og:type" content="article"/);
@@ -311,6 +316,17 @@ describe("STORIES pages and discovery", () => {
     assert.match(campusGirlsHtml, /"@type": "Article"/);
     assert.match(campusGirlsHtml, /ファンサイト（非公式）/);
     assert.match(campusGirlsHtml, /予選ファイナル進出/);
+
+    const musicalHtml = await read("stories/2026-08-23-musical-special/index.html");
+    assert.match(musicalHtml, /src="\/src\/story-main\.tsx"/);
+    assert.match(
+      musicalHtml,
+      /rel="canonical" href="__STORY_2026_08_23_MUSICAL_SPECIAL_CANONICAL__"/,
+    );
+    assert.match(musicalHtml, /property="og:type" content="article"/);
+    assert.match(musicalHtml, /"@type": "Article"/);
+    assert.match(musicalHtml, /ファンサイト（非公式）/);
+    assert.match(musicalHtml, /真夏のミュージカル特集/);
   });
 
   it("renders the approved video behavior without autoplay or loop", async () => {
