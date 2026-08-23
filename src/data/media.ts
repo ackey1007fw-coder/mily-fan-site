@@ -74,7 +74,7 @@ export const media: MediaItem[] = [
     sourceUrl: FM_SMW_X_BEFORE,
     sourceDate: "2026-08-23",
     credit: null,
-    aspect: "2048 / 2048",
+    aspect: "1600 / 1600",
     published: true,
   },
   {

@@ -216,23 +216,39 @@ describe("reusable STORIES content", () => {
     const driveHost = ["drive", "google", "com"].join(".");
     assert.equal(mediaJson.includes("/media/stories/"), false);
 
-    // 記事専用の写真は `/media/stories/<slug>/` に置く。唯一の例外が
-    // 2026-08-19 のStory動画（b09）で、Gallery の動画アーカイブと公開MP4 /
-    // poster を 1 本ずつ共有する（docs/MEDIA.md）。用途別コピーを作らないための
-    // 意図的な共有なので、path が Gallery のマニフェストと一致することまで見る。
+    // 記事専用の写真は `/media/stories/<slug>/` に置く。例外は
+    // Gallery と公開ファイルを 1 本だけ共有する場合（docs/MEDIA.md）。
+    // 用途別コピーを作らないための意図的な共有なので、path が
+    // Gallery のマニフェストと一致することまで見る。
     const sharedGalleryVideos = new Map(
       galleryVideos.map((video) => [video.src, video]),
+    );
+    const sharedGalleryPhotos = new Map(
+      media
+        .filter((item) => item.kind === "photo")
+        .flatMap((item) =>
+          item.widths.map((width) => [
+            `${item.basePath}-${width}.jpg`,
+            item,
+          ]),
+        ),
     );
 
     for (const story of stories) {
       for (const item of story.media) {
-        const shared = sharedGalleryVideos.get(item.src);
-        if (shared) {
+        const sharedVideo = sharedGalleryVideos.get(item.src);
+        const sharedPhoto = sharedGalleryPhotos.get(item.src);
+        if (sharedVideo) {
           assert.equal(item.kind, "video");
-          assert.equal(item.poster, shared.poster);
-          assert.equal(item.width, shared.width);
-          assert.equal(item.height, shared.height);
-          await access(path.join(root, "public", shared.poster.replace(/^\//, "")));
+          assert.equal(item.poster, sharedVideo.poster);
+          assert.equal(item.width, sharedVideo.width);
+          assert.equal(item.height, sharedVideo.height);
+          await access(path.join(root, "public", sharedVideo.poster.replace(/^\//, "")));
+        } else if (sharedPhoto) {
+          assert.equal(item.kind, "image");
+          assert.equal(item.width, sharedPhoto.width);
+          assert.equal(item.height, sharedPhoto.height);
+          assert.equal(item.src.startsWith(`${sharedPhoto.basePath}-`), true);
         } else {
           assert.match(item.src, new RegExp(`^/media/stories/${story.slug}/`));
         }

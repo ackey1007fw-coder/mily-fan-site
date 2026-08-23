@@ -251,7 +251,7 @@ describe("2026-08-23 seaside circle official X posts — Gallery photos", () => 
     assert.equal(items[1].sourceUrl, AFTER_X);
     assert.equal(items[0].width, 1600);
     assert.equal(items[0].height, 1600);
-    assert.equal(items[0].aspect, "2048 / 2048");
+    assert.equal(items[0].aspect, "1600 / 1600");
     assert.equal(items[1].width, 1600);
     assert.equal(items[1].height, 1200);
     assert.equal(items[1].aspect, undefined);
