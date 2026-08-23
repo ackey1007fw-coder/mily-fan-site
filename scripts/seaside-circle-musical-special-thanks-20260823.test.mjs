@@ -145,8 +145,8 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
     assert.deepEqual(entry?.activityIds, ["radio"]);
     assert.equal(entry?.url, STORY_HREF);
     assert.equal(entry?.ctaLabel, "真夏のミュージカル特集の放送記録を読む");
-    assert.equal(entry?.source, undefined);
-    assert.equal(entry?.sourceLabel, "湘南シーサイドサークル / 2026.08.23 生放送");
+    assert.equal(entry?.source, "https://x.com/fm_smw856/status/2091499993102524714");
+    assert.equal(entry?.sourceLabel, "FM湘南マジックウェイブの放送後投稿を見る");
     assert.match(entry?.body ?? "", /放送後、番組公式Instagram Storyでは、リスナーへのお礼と清水美依紗さんへの出演への感謝も届けられました。/);
     assert.deepEqual(verifyNews([entry]), []);
   });

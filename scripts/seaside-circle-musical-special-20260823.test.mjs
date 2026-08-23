@@ -143,8 +143,8 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.match(entry?.body ?? "", /清水美依紗さん/);
     assert.match(entry?.body ?? "", /グレイテスト・ショーマン/);
     assert.match(entry?.body ?? "", /This Is Me/);
-    assert.equal(entry?.source, undefined);
-    assert.equal(entry?.sourceLabel, "湘南シーサイドサークル / 2026.08.23 生放送");
+    assert.equal(entry?.source, "https://x.com/fm_smw856/status/2091499993102524714");
+    assert.equal(entry?.sourceLabel, "FM湘南マジックウェイブの放送後投稿を見る");
     assert.equal(entry?.url, STORY_HREF);
     assert.equal(entry?.ctaLabel, "真夏のミュージカル特集の放送記録を読む");
     assert.equal(entry?.media?.kind, "video");
@@ -200,6 +200,8 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
       "broadcast-transcript-2026-08-23",
       "program-instagram-story-2026-08-23",
       "program-instagram-story-thanks-2026-08-23",
+      "fm-smw-x-2026-08-23-musical-special-before",
+      "fm-smw-x-2026-08-23-musical-special-after",
     ]);
     assert.equal(
       storySources["broadcast-transcript-2026-08-23"].label,
