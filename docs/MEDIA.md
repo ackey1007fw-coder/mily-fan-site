@@ -1223,7 +1223,8 @@ b19 の公開MP4は変更していない。
   `-map_chapters -1`）。元の`creation_time`と `Core Media`は残っていない
 - AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
 
-公開派生の音声除去（再現用。既存の Baseline 公開映像を copy し、音声だけ外す）:
+公開派生の音声除去（再現用。既存の Baseline 公開映像を copy し、音声だけ外す）。
+入力と出力を同じMP4にすると ffmpeg が拒否するため、隣の一時ファイルへ書いてから置き換える:
 
 ```
 ffmpeg -i public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4 \
@@ -1231,6 +1232,8 @@ ffmpeg -i public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks
   -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
   -c:v copy \
   -movflags +faststart \
+  public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.tmp.mp4 \
+&& mv public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.tmp.mp4 \
   public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4
 ```
 
