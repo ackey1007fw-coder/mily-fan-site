@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers.mp4",
+      "destination": "/media/gallery/mily-b23-01-night-thanks-morning-stream-story.mp4",
+      "permanent": true
+    },
+    {
+      "source": "/media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers-poster.jpg",
+      "destination": "/media/gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/media/(.*)",
