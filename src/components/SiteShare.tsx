@@ -17,7 +17,7 @@ const LINE_SHARE_HREF = lineShareUrl(SHARE);
 const FACEBOOK_SHARE_HREF = facebookShareUrl(SHARE);
 
 const actionClassName =
-  "inline-flex min-h-11 max-w-full items-center justify-center gap-1.5 rounded-full border border-sage/30 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
+  "inline-flex min-h-11 min-w-11 max-w-full shrink-0 items-center justify-center gap-1.5 rounded-full border border-sage/30 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
 
 const COPY_SUCCESS = "URLをコピーしました";
 const COPY_FAILURE = "コピーできませんでした";
@@ -103,6 +103,7 @@ export function SiteShare() {
         </button>
       </div>
       <p
+        id="site-share-status"
         role="status"
         aria-live="polite"
         className="mt-2 min-h-5 text-xs text-sage-deep"

@@ -218,6 +218,7 @@ describe("URL copy", () => {
     assert.match(ui, /aria-label="このサイトのURLをコピー"/);
     assert.match(ui, /copyUrlToClipboard\(/);
     assert.match(ui, /URLをコピーしました/);
+    assert.match(ui, /id="site-share-status"/);
     assert.match(ui, /aria-live="polite"/);
     assert.match(ui, /role="status"/);
     assert.doesNotMatch(ui, /\balert\(/);
@@ -287,6 +288,7 @@ describe("footer placement and home isolation", () => {
 
     assert.match(ui, /flex-wrap/);
     assert.match(ui, /min-h-11/);
+    assert.match(ui, /min-w-11/);
     assert.match(ui, /max-w-full/);
     assert.doesNotMatch(ui, /overflow-x-auto/);
     assert.doesNotMatch(ui, /whitespace-nowrap/);
