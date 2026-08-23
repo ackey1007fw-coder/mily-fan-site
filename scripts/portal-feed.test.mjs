@@ -271,7 +271,7 @@ describe("Portal Feed generation", () => {
     };
     const first = createFixtureFeed(input);
     const second = createFixtureFeed(input);
-    const expected = ["mily:news:a-update", "mily:news:z-update"];
+    const expected = ["mily:news:z-update", "mily:news:a-update"];
 
     assert.deepEqual(first.items.map((item) => item.id), expected);
     assert.deepEqual(
