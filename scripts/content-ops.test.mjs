@@ -42,6 +42,8 @@ describe("daily content-ops guide", () => {
     assert.match(ops, /FM湘南マジックウェイブ/);
     assert.match(ops, /非公式/);
     assert.match(ops, /公開permalinkがない一時的なInstagram Story/);
+    assert.match(ops, /Fan Room公開時の原則/);
+    assert.match(ops, /原則としてみりぃ本人の発言だけ/);
     assert.match(ops, /sourceLabel: "Instagram Story"/);
     assert.match(ops, /LatestとGallery/);
     assert.match(ops, /listedAt/);

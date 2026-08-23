@@ -36,12 +36,6 @@ const EARTHQUAKE_MESSAGE = [
   "みりぃ · 02:02",
   "地震だね、落ち着いて！！まずは身の安全を確保✊🏻😌",
   "",
-  "あっきー · 02:04",
-  "びっくりしたー！みりぃ無事で良かった！",
-  "",
-  "あっきー · 02:06",
-  "寝坊したら地震のせいだなもうー！余震に気をつけましょう💦",
-  "",
   "みりぃ · 02:18",
   "皆さん無事かな？？",
   "",
@@ -49,12 +43,28 @@ const EARTHQUAKE_MESSAGE = [
   "みりぃは無事です、ありがとう🙌🏻🙌🏻",
 ].join("\n");
 
+const EARTHQUAKE_BODY =
+  "8月23日未明の地震直後、SHOWROOMファンルームでみりぃが「まずは身の安全を確保」と呼びかけました。その後も「皆さん無事かな？？」とファンを気遣い、自身も無事だと報告しています。";
+
+const FANROOM_SPEAKER_LINE = /^(.+?) · \d{1,2}:\d{2}$/u;
+
 const THIRD_PARTY_LEAKS = [
   "キサラギ",
   "震度4",
   "津波",
   "関東",
 ];
+
+function fanRoomNews() {
+  return news.filter((entry) => entry.sourceLabel === "SHOWROOMファンルーム");
+}
+
+function conversationSpeakers(text) {
+  return (text ?? "")
+    .split("\n")
+    .map((line) => line.trim().match(FANROOM_SPEAKER_LINE)?.[1])
+    .filter(Boolean);
+}
 
 function findNews(id) {
   return news.find((entry) => entry.id === id);
@@ -99,13 +109,14 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     assert.equal(earthquake.url, undefined);
     assert.equal(earthquake.ctaLabel, undefined);
     assert.equal(earthquake.sourceLabel, "SHOWROOMファンルーム");
-    assert.equal(earthquake.message?.label, "地震直後のやり取り · 02:02〜02:19");
+    assert.equal(earthquake.message?.label, "みりぃからの連絡💌 · 02:02〜02:19");
     assert.equal(earthquake.message?.text, EARTHQUAKE_MESSAGE);
     assert.equal(earthquake.media, undefined);
     assert.match(earthquake.title, /地震直後、みんなの安全を気遣うみりぃ/);
+    assert.equal(earthquake.body, EARTHQUAKE_BODY);
     assert.match(earthquake.body, /まずは身の安全を確保/);
     assert.match(earthquake.body, /皆さん無事かな？？/);
-    assert.match(earthquake.body, /あっきーもみりぃの無事を喜び/);
+    assert.doesNotMatch(earthquake.body, /あっきー/);
 
     assert.equal(early.date, "2026-08-23");
     assert.equal(early.sameDayOrder, 2);
@@ -161,6 +172,37 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     }
   });
 
+  it("keeps the earthquake Fan Room archive to Mily's three confirmed remarks", () => {
+    const earthquake = findNews(EARTHQUAKE_ID);
+    assert.ok(earthquake);
+    assert.equal(earthquake.id, EARTHQUAKE_ID);
+    assert.equal(earthquake.message?.text, EARTHQUAKE_MESSAGE);
+    assert.deepEqual(conversationSpeakers(earthquake.message?.text), [
+      "みりぃ",
+      "みりぃ",
+      "みりぃ",
+    ]);
+    assert.match(earthquake.message?.text ?? "", /地震だね、落ち着いて！！まずは身の安全を確保✊🏻😌/);
+    assert.match(earthquake.message?.text ?? "", /皆さん無事かな？？/);
+    assert.match(earthquake.message?.text ?? "", /みりぃは無事です、ありがとう🙌🏻🙌🏻/);
+    assert.equal(earthquake.body, EARTHQUAKE_BODY);
+    assert.doesNotMatch(earthquake.body, /あっきー|びっくりしたー|余震に気をつけましょう/);
+    assert.doesNotMatch(earthquake.body, /[^\s。、]+もみりぃの無事を喜び/);
+  });
+
+  it("publishes only Mily as a Fan Room conversation speaker", () => {
+    const entries = fanRoomNews();
+    assert.ok(entries.some((entry) => entry.id === EARTHQUAKE_ID));
+    assert.ok(entries.length >= 6);
+
+    for (const entry of entries) {
+      const speakers = conversationSpeakers(entry.message?.text);
+      for (const speaker of speakers) {
+        assert.equal(speaker, "みりぃ", `${entry.id} speaker ${speaker}`);
+      }
+    }
+  });
+
   it("keeps third-party Fan Room comments out of published NEWS text", () => {
     const earthquake = findNews(EARTHQUAKE_ID);
     const published = JSON.stringify(earthquake);
@@ -168,6 +210,18 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     for (const leak of THIRD_PARTY_LEAKS) {
       assert.equal(published.includes(leak), false, leak);
     }
+  });
+
+  it("documents the Mily-only Fan Room publication rule", async () => {
+    const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
+
+    assert.match(ops, /Fan Room公開時の原則/);
+    assert.match(ops, /原則としてみりぃ本人の発言だけ/);
+    assert.match(ops, /オーナー自身の発言についても同様に公開しない/);
+    assert.match(ops, /個人を特定しない一般表現/);
+    assert.match(ops, /privacy-safe cropを確定できない限り公開しない/);
+    assert.match(ops, /第三者の文章をテキストへ転記してよいことにはしない/);
+    assert.match(ops, /本人の言葉に存在しない内容を補完・創作しない/);
   });
 
   it("does not copy archived Fan Room posts into the manual schedule fallback", async () => {
