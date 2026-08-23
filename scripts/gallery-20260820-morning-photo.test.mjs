@@ -13,7 +13,7 @@ import {
   srcSetFor,
   visibleMedia,
 } from "../src/data/media.ts";
-import { news } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import {
   assertPortalNewsFollowsSort,

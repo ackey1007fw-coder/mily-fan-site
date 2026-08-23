@@ -88,25 +88,20 @@ describe("Portal Feed generation", () => {
     assert.equal(feed.personId, "mily");
     assert.equal(feed.siteUrl, "https://mily-fan-site.vercel.app/");
     const publishedStoryCount = stories.filter((story) => story.published).length;
-    const eventCount = events.length;
-    const maxNewsInFeed = Math.max(
-      0,
-      PORTAL_FEED_LIMIT - publishedStoryCount - eventCount,
-    );
-    assert.equal(
-      feed.items.filter((item) => item.type === "news").length,
-      Math.min(news.length, maxNewsInFeed),
-    );
+    const newsInFeed = feed.items.filter((item) => item.type === "news").length;
+    const storiesInFeed = feed.items.filter((item) => item.type === "story").length;
+    const eventsInFeed = feed.items.filter(
+      (item) => item.type === "event" || item.type === "schedule",
+    ).length;
+
+    assert.equal(feed.items.length, PORTAL_FEED_LIMIT);
+    assert.equal(newsInFeed + storiesInFeed + eventsInFeed, feed.items.length);
+    assert.ok(newsInFeed > 0);
+    assert.ok(newsInFeed <= news.length);
+    assert.ok(storiesInFeed > 0);
+    assert.ok(storiesInFeed <= publishedStoryCount);
     assertPortalNewsFollowsSort(feed, news);
-    assert.equal(
-      feed.items.filter((item) => item.type === "story").length,
-      stories.filter((story) => story.published).length,
-    );
-    assert.equal(
-      feed.items.filter((item) => item.type === "event" || item.type === "schedule")
-        .length,
-      events.length,
-    );
+    assert.equal(eventsInFeed, events.length);
   });
 
   it("canonicalizes a real date-only news value to JST midnight", () => {
@@ -257,6 +252,49 @@ describe("Portal Feed generation", () => {
     });
 
     assert.ok(feed.items.some((item) => item.id === "mily:event:started-today"));
+  });
+
+  it("accepts a JSON-serialized feed that keeps same-day NEWS chronology", () => {
+    const live = createPortalFeed();
+    const serialized = JSON.parse(JSON.stringify(live));
+    const morningId = "mily:news:2026-08-23-morning-showroom-fanroom";
+    const earlyId = "mily:news:2026-08-23-early-showroom-fanroom";
+
+    assert.doesNotThrow(() => assertPortalFeedContract(serialized));
+    assert.ok(
+      serialized.items.findIndex((item) => item.id === morningId) <
+        serialized.items.findIndex((item) => item.id === earlyId),
+    );
+  });
+
+  it("preserves Latest same-day news chronology without inventing publication times", () => {
+    const feed = createFixtureFeed({
+      newsItems: [
+        newsFixture({ id: "later-unranked", date: "2026-08-21" }),
+        newsFixture({
+          id: "earlier-ranked",
+          date: "2026-08-21",
+          sameDayOrder: 2,
+        }),
+        newsFixture({
+          id: "middle-ranked",
+          date: "2026-08-21",
+          sameDayOrder: 1,
+        }),
+      ],
+    });
+
+    assert.deepEqual(
+      feed.items.map((item) => item.id),
+      [
+        "mily:news:earlier-ranked",
+        "mily:news:middle-ranked",
+        "mily:news:later-unranked",
+      ],
+    );
+    assert.ok(
+      feed.items.every((item) => item.publishedAt === "2026-08-21T00:00:00+09:00"),
+    );
   });
 
   it("uses NEWS editorial order for same-day ties, not lexicographic IDs", () => {

@@ -36,7 +36,12 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-23-morning-showroom-fanroom": ["live-stream", "radio"],
+  "2026-08-23-early-showroom-fanroom": ["live-stream", "radio"],
+  "2026-08-23-earthquake-showroom-fanroom": ["live-stream"],
   "2026-08-22-night-showroom-thanks": ["live-stream"],
+  "2026-08-22-night-showroom-fanroom": ["live-stream"],
+  "2026-08-22-evening-showroom-fanroom": ["live-stream"],
   "2026-08-22-campus-girls-second-stage-jury-award": ["campus-girls"],
   "2026-08-21-tiktok-radio-misscircle": ["radio", "miss-circle"],
   "2026-08-21-after-afternoon-ganda": ["live-stream"],

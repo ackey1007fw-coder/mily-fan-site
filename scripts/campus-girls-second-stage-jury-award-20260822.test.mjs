@@ -284,15 +284,23 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(JSON.stringify(contest).includes("CAMPUS GIRLS"), false);
   });
 
-  it("leads Latest on 8/22 without inventing a publication-time order", () => {
+  it("keeps the campus milestone on 8/22 after same-day Fan Room updates", () => {
     const item = news.find((entry) => entry.id === newsId);
     assert.ok(item);
     assert.equal(item.date, "2026-08-22");
     assert.equal(item.sameDayOrder, undefined);
     assert.equal(item.source, xSource);
     assert.equal(item.url, `/stories/${slug}/`);
-    assert.equal(sortNewsByDateDesc(news)[0].id, "2026-08-22-night-showroom-thanks");
-    assert.equal(sortNewsByDateDesc(news)[1], item);
+    const aug22 = sortNewsByDateDesc(news)
+      .filter((entry) => entry.date === "2026-08-22")
+      .map((entry) => entry.id);
+    assert.deepEqual(aug22, [
+      "2026-08-22-night-showroom-thanks",
+      "2026-08-22-night-showroom-fanroom",
+      "2026-08-22-evening-showroom-fanroom",
+      newsId,
+    ]);
+    assert.equal(aug22[3], item.id);
   });
 
   it("flows through the existing Portal Feed as separate NEWS and STORY items", () => {
@@ -309,5 +317,10 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(newsItem.image, image);
     assert.equal(storyItem.url, `${siteOrigin()}/stories/${slug}/`);
     assert.equal(storyItem.image, image);
+    const ids = feed.items.map((entry) => entry.id);
+    assert.ok(
+      ids.indexOf(`mily:news:${newsId}`) >
+        ids.indexOf("mily:news:2026-08-22-evening-showroom-fanroom"),
+    );
   });
 });

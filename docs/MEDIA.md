@@ -952,3 +952,16 @@ Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery�
 - Xの外部画像URLはhotlinkせず、自己ホスト画像だけを参照する
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
   `src/data/highlights.ts`には追加していない。Latest / NEWS専用
+
+## 素材台帳（2026-08-23 未明のSHOWROOMファンルーム / 公開cropなし）
+
+地震直後のFan Roomやり取り（NEWS id `2026-08-23-earthquake-showroom-fanroom`）は
+Latest / NEWSのテキスト記録のみ。公開cropは作っていない。
+
+- 依頼時に示されたフルスクリーンショットには、みりぃとオーナー以外のファンの
+  表示名・アバター・コメントが含まれる
+- この作業環境では元素材の実バイトを再取得できず、第三者情報を目視で除外した
+  privacy-safe cropを確定できなかった
+- フルスクリーンショットを `public/` や git に入れない
+- Gallery / `media.ts` / `galleryVideos.ts` / Drive Gallery / `/stories/` へ展開しない
+- 新しいbatch番号は未使用のまま残す（決め打ちしない）

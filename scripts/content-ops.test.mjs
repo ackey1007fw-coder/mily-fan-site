@@ -25,6 +25,9 @@ describe("daily content-ops guide", () => {
     const gitignore = await read(".gitignore");
     const agents = await read("AGENTS.md");
 
+    assert.match(ops, /22件/);
+    assert.match(ops, /sameDayOrder/);
+    assert.match(ops, /id 昇順にはしない/);
     assert.match(ops, /SNS投稿を news/);
     assert.match(ops, /イベントを events/);
     assert.match(ops, /写真を追加/);
