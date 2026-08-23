@@ -10,6 +10,7 @@ import {
   type MorningShowroomRunwayVideo,
 } from "./morningShowroomRunwayVideo.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
+import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
@@ -26,6 +27,7 @@ export {
   morningShowroomRunwayVideo,
   morningStoryVideo,
   morningStory20260820,
+  nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,
   secondRoundStoryVideo,
@@ -38,6 +40,7 @@ export {
  * MP4 and poster paths remain single-source. Newest first.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,
   earthquakeSafetyStoryVideo,

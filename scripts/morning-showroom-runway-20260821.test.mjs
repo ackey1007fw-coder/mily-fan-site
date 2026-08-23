@@ -121,27 +121,28 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[1], "2026-08-23-seaside-circle-musical-special");
-    assert.equal(ordered[2], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[3], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[6], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[7], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[8], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[9], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[10], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[11], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[12], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[13], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[14], NEWS_ID);
-    assert.deepEqual(ordered.slice(15, 18), [
+    assert.equal(ordered[0], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[1], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[2], "2026-08-23-seaside-circle-musical-special");
+    assert.equal(ordered[3], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[4], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[7], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[8], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[9], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[10], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[11], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[12], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[13], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[14], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[15], NEWS_ID);
+    assert.deepEqual(ordered.slice(16, 19), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 24);
+    assert.equal(news.length, 25);
   });
 });
 
@@ -153,11 +154,11 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(item().media, morningShowroomRunwayVideo);
     assert.equal(galleryItem, morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos()[3], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[4], eventStory20260821);
-    assert.equal(visibleGalleryVideos()[5], morningOhayo20260821);
-    assert.equal(visibleGalleryVideos()[6], morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos().length, 10);
+    assert.equal(visibleGalleryVideos()[4], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[5], eventStory20260821);
+    assert.equal(visibleGalleryVideos()[6], morningOhayo20260821);
+    assert.equal(visibleGalleryVideos()[7], morningShowroomRunwayVideo);
+    assert.equal(visibleGalleryVideos().length, 11);
     assert.equal(morningShowroomRunwayVideo.sourceUrl, SOURCE);
     assert.equal(morningShowroomRunwayVideo.sourceDate, "2026-08-21");
     assert.equal(morningShowroomRunwayVideo.alt, ALT);
@@ -185,8 +186,8 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 10);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 21);
+    assert.equal(galleryVideos.length, 11);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 22);
   });
 });
 

@@ -217,12 +217,12 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
       .filter((file) => file.includes("mily-b13-02-event-story"));
 
     assert.equal(entry.media, eventStory20260821);
-    assert.equal(galleryVideos[3], tiktokRadioVideo);
-    assert.equal(visible[3], tiktokRadioVideo);
-    assert.equal(visible[4], eventStory20260821);
-    assert.equal(visible[5], morningOhayo20260821);
-    assert.equal(visible[6], morningShowroomRunwayVideo);
-    assert.equal(visible.length, 10);
+    assert.equal(galleryVideos[4], tiktokRadioVideo);
+    assert.equal(visible[4], tiktokRadioVideo);
+    assert.equal(visible[5], eventStory20260821);
+    assert.equal(visible[6], morningOhayo20260821);
+    assert.equal(visible[7], morningShowroomRunwayVideo);
+    assert.equal(visible.length, 11);
     assert.equal(galleryVideos.filter((item) => item === eventStory20260821).length, 1);
     assert.equal("sourceUrl" in eventStory20260821, false);
     assert.equal(eventStory20260821.sourceLabel, "Instagram Story");
@@ -243,8 +243,8 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 10);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 21);
+    assert.equal(galleryVideos.length, 11);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 22);
   });
 
   it("publishes 720x1280 H.264 Baseline at the original 1fps without audio", async () => {
@@ -360,7 +360,8 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 15), [
+    assert.deepEqual(ordered.slice(0, 16), [
+      "2026-08-24-night-thanks-morning-stream",
       "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",
       "2026-08-23-morning-showroom-fanroom",
@@ -377,7 +378,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 24);
+    assert.equal(news.length, 25);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

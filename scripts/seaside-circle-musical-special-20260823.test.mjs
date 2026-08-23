@@ -151,23 +151,24 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 24);
+    assert.equal(news.length, 25);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
   it("places the broadcast NEWS above the earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[1], NEWS_ID);
-    assert.equal(ordered[2], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[3], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[0], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[1], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[2], NEWS_ID);
+    assert.equal(ordered[3], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[4], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-22-night-showroom-thanks");
   });
 
   it("appears as related NEWS on the radio Activity without a copied body", () => {
     const radioNews = selectActivityNews("radio", news, news.length);
-    assert.equal(radioNews[0]?.id, NEWS_ID);
+    assert.equal(radioNews[1]?.id, NEWS_ID);
     assert.equal(radioNews.some((entry) => entry.id === NEWS_ID), true);
     assert.equal(
       radioNews.filter((entry) => entry.id === NEWS_ID).length,
@@ -270,8 +271,8 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
 
 describe("2026-08-23 seaside circle musical special — Gallery and assets", () => {
   it("shares one published Gallery video object", () => {
-    assert.equal(galleryVideos[1], seasideCircleMusicalSpecialVideo);
-    assert.equal(visibleGalleryVideos()[1], seasideCircleMusicalSpecialVideo);
+    assert.equal(galleryVideos[2], seasideCircleMusicalSpecialVideo);
+    assert.equal(visibleGalleryVideos()[2], seasideCircleMusicalSpecialVideo);
     assert.equal(seasideCircleMusicalSpecialVideo.published, true);
     assert.equal(seasideCircleMusicalSpecialVideo.provenance, "owner-provided");
     assert.equal(
@@ -281,7 +282,7 @@ describe("2026-08-23 seaside circle musical special — Gallery and assets", () 
     assert.equal(seasideCircleMusicalSpecialVideo.sourceDate, "2026-08-23");
     assert.equal(seasideCircleMusicalSpecialVideo.alt, ALT);
     assert.equal("sourceUrl" in seasideCircleMusicalSpecialVideo, false);
-    assert.equal(galleryVideos.length, 10);
+    assert.equal(galleryVideos.length, 11);
     assert.equal(events.length, 0);
     assert.deepEqual(streamSchedule, []);
   });

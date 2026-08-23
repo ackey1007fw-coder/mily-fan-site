@@ -36,6 +36,7 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-24-night-thanks-morning-stream": ["live-stream", "radio"],
   "2026-08-23-seaside-circle-musical-special": ["radio"],
   "2026-08-23-morning-showroom-fanroom": ["live-stream", "radio"],
   "2026-08-23-early-showroom-fanroom": ["live-stream", "radio"],

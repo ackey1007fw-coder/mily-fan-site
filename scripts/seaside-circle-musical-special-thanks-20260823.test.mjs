@@ -139,7 +139,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
     assert.equal(radioNews.length, 1);
     assert.equal(extraThanksNews.length, 0);
-    assert.equal(news.length, 24);
+    assert.equal(news.length, 25);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -165,17 +165,18 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
   it("stays below the dragon-cloud NEWS and above earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[1], NEWS_ID);
-    assert.equal(ordered[2], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[3], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[0], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[1], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[2], NEWS_ID);
+    assert.equal(ordered[3], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[4], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-23-earthquake-showroom-fanroom");
   });
 
   it("still appears once on the radio Activity", () => {
     const radioNews = selectActivityNews("radio", news, news.length);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 1);
-    assert.equal(radioNews[0]?.id, NEWS_ID);
+    assert.equal(radioNews[1]?.id, NEWS_ID);
   });
 });
 
@@ -183,13 +184,13 @@ describe("2026-08-23 seaside circle thanks Story — Gallery order", () => {
   it("places b21 first, keeps b19 next, and preserves the rest", () => {
     const visible = visibleGalleryVideos();
 
-    assert.equal(galleryVideos.length, 10);
-    assert.equal(visible.length, 10);
-    assert.equal(galleryVideos[0], seasideCircleMusicalSpecialThanksVideo);
-    assert.equal(visible[0], seasideCircleMusicalSpecialThanksVideo);
-    assert.equal(galleryVideos[1], seasideCircleMusicalSpecialVideo);
-    assert.equal(visible[1], seasideCircleMusicalSpecialVideo);
-    assert.deepEqual(visible.slice(2), [
+    assert.equal(galleryVideos.length, 11);
+    assert.equal(visible.length, 11);
+    assert.equal(galleryVideos[1], seasideCircleMusicalSpecialThanksVideo);
+    assert.equal(visible[1], seasideCircleMusicalSpecialThanksVideo);
+    assert.equal(galleryVideos[2], seasideCircleMusicalSpecialVideo);
+    assert.equal(visible[2], seasideCircleMusicalSpecialVideo);
+    assert.deepEqual(visible.slice(3), [
       earthquakeSafetyStoryVideo,
       tiktokRadioVideo,
       eventStory20260821,

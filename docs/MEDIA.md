@@ -1290,3 +1290,89 @@ NEWS 代表 media も b21 のまま維持する。Drive Gallery（b02）・
 - 公開ファイル名は新規batch b22を使用し、既存batch・連番と衝突しない
 - 受け渡し用URL / file IDは公開情報・tracked textとして記録しない
 
+## 素材台帳（batch b23 / 受領日・source date 2026-08-24）
+
+2026-08-24未明の本人Instagram Story動画。owner-providedの縦型動画で、
+Latest / NEWS（id `2026-08-24-night-thanks-morning-stream`）と Gallery が
+同じ公開MP4・poster・manifest objectを共有する。Fan Roomスクリーンショットは
+本文・時刻の確認資料のみで、`public/` / Gallery / `media.ts` /
+`galleryVideos.ts` / Drive Gallery / `/stories/` には含めない。
+Drive Gallery（b02）・`events.ts`・`streamSchedule.ts`・radio weekly
+schedule には含めない。新しい `/stories/` 記事は作っていない。
+
+恒久的な公開permalinkがないため、Story側の表示は非リンクの
+`Instagram Story` label。受け渡し用URL / file IDは公開情報・tracked text
+として記録しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b23-01 | `gallery/mily-b23-01-night-thanks-morning-stream-story.mp4` | 夜枠とラジオへの感謝、8月24日朝6:20〜6:50の配信予定を伝える縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b23-01 poster | `gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg` | 公開MP4の4.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-24` / 恒久permalinkなし
+- 元素材は `media/original/mily-b23-01-night-thanks-morning-stream-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `4ddbd6dbf609325f886f0b9968b0f6f498fd961c973d59425aa03a283e38895e`
+- 500,715 bytes / H.264 **High** / **720×1280** / **1fps** /
+  20 frames / **20.000000秒** / yuv420p / `has_b_frames` 2
+- 音声: HE-AAC / 44.1kHz / stereo。元素材にはAAC音声ストリームがある
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+
+### 音声の扱い — 削除した
+
+元素材には HE-AAC / 44.1kHz / stereo の音声がある。再配信権を確認できないため、
+公開派生は video-only（無音）にした。既存 b21 と同じ判断。
+
+音声の内容・由来・種類・権利者・楽曲名は確認できていないため、推測して記録しない。
+元素材そのものから音声は削除していない。
+
+### 公開MP4
+
+- sha256: `6084ca92ebb4743065324055dc5706637978566d1f0f9d7b48e0feaffa2578ae`
+- 344,986 bytes / H.264 **High** / **720×1280** /
+  **1fps** / 20 frames / 20.000000秒 / yuv420p / `has_b_frames` 2 /
+  音声ストリームなし
+- 元素材の画素数・縦横比・1fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増し・短縮なし（`-vf scale`を使っていない）
+- 既存の公開映像ストリームを `-c:v copy` で remux し、`-an` で音声だけを外した。
+  画素数・fps・フレーム数を変える再エンコードはしていない
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 1102）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b23-01-night-thanks-morning-stream-story.mp4 \
+  -map 0:v:0 -c:v copy -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -movflags +faststart \
+  public/media/gallery/mily-b23-01-night-thanks-morning-stream-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の0 / 4 / 8 / 12 / 16 / 19秒地点を比較。ほぼ静止したStoryのため差は小さく、
+  本文とみりぃの配信画面が読める4.0秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 93,615 bytes / 720×1280 JPEG / sha256
+  `516e9a3e3b7541002e56d6c5c9fe2a6e7980df715ad01bb904d641fe4f53aa20`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/nightThanksMorningStreamStoryVideo.json` の1オブジェクトを
+  Latest / NEWS + Gallery で共有し、公開MP4 1本・poster 1枚だけを参照する
+- InstagramプロフィールURLやStoryの推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg
+```
+

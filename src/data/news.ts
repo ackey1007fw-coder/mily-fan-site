@@ -20,6 +20,7 @@ import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
+import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 
 export type NewsVideoMedia = {
@@ -66,6 +67,29 @@ export type NewsItem = {
 };
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-24-night-thanks-morning-stream",
+    date: "2026-08-24",
+    sameDayOrder: 1,
+    activityIds: ["live-stream", "radio"],
+    title: "夜枠＆ラジオありがとう！朝は6:20〜☀️",
+    body: "8月24日未明、みりぃがSHOWROOMファンルームとInstagram Storyで、夜枠へのお礼とラジオをたくさんの方に聴いてもらえたことへの感謝を届けました。みんなと話すことが楽しいこと、誰でも参加しやすいルームにしていきたいという思いも伝えています。8月24日の朝枠は6:20〜6:50で、最近の1日のスケジュールについて話す予定です。夜については改めて連絡すると案内しています。",
+    source: "https://x.com/mily_chan36/status/2091561616307585262",
+    sourceLabel: "Xの投稿を見る",
+    media: nightThanksMorningStreamStoryVideo,
+    message: {
+      label: "みりぃからの連絡💌 · 00:57",
+      text: `今日もありがとうございました😌🙏🏻✨
+
+ラジオのことも知ってくれて、聴いてもらえて、嬉しいねぇ、愛されているねぇ、幸せだねぇ🥺🩵
+
+明日は6:20〜6:50で配信します！
+早く寝ないと私起きれないよ〜😭😭😭笑
+起きるの頑張ります🤭
+
+おやすみりぃ`,
+    },
+  },
   {
     id: "2026-08-23-dragon-cloud",
     date: "2026-08-23",
