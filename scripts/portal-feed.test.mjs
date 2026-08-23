@@ -9,7 +9,8 @@ import {
   PORTAL_FEED_LIMIT,
 } from "../src/data/portalFeed.ts";
 import { events } from "../src/data/events.ts";
-import { news } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { assertPortalNewsFollowsSort } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
 
@@ -86,19 +87,21 @@ describe("Portal Feed generation", () => {
     assert.equal(feed.version, 1);
     assert.equal(feed.personId, "mily");
     assert.equal(feed.siteUrl, "https://mily-fan-site.vercel.app/");
-    assert.equal(
-      feed.items.filter((item) => item.type === "news").length,
-      news.length,
-    );
-    assert.equal(
-      feed.items.filter((item) => item.type === "story").length,
-      stories.filter((story) => story.published).length,
-    );
-    assert.equal(
-      feed.items.filter((item) => item.type === "event" || item.type === "schedule")
-        .length,
-      events.length,
-    );
+    const publishedStoryCount = stories.filter((story) => story.published).length;
+    const newsInFeed = feed.items.filter((item) => item.type === "news").length;
+    const storiesInFeed = feed.items.filter((item) => item.type === "story").length;
+    const eventsInFeed = feed.items.filter(
+      (item) => item.type === "event" || item.type === "schedule",
+    ).length;
+
+    assert.equal(feed.items.length, PORTAL_FEED_LIMIT);
+    assert.equal(newsInFeed + storiesInFeed + eventsInFeed, feed.items.length);
+    assert.ok(newsInFeed > 0);
+    assert.ok(newsInFeed <= news.length);
+    assert.ok(storiesInFeed > 0);
+    assert.ok(storiesInFeed <= publishedStoryCount);
+    assertPortalNewsFollowsSort(feed, news);
+    assert.equal(eventsInFeed, events.length);
   });
 
   it("canonicalizes a real date-only news value to JST midnight", () => {
@@ -251,22 +254,79 @@ describe("Portal Feed generation", () => {
     assert.ok(feed.items.some((item) => item.id === "mily:event:started-today"));
   });
 
-  it("keeps stable IDs and deterministic tie ordering across generations", () => {
-    const input = {
-      newsItems: [
-        newsFixture({ id: "z-update" }),
-        newsFixture({ id: "a-update" }),
-      ],
-    };
-    const first = createFixtureFeed(input);
-    const second = createFixtureFeed(input);
-    const expected = ["mily:news:a-update", "mily:news:z-update"];
+  it("accepts a JSON-serialized feed that keeps same-day NEWS chronology", () => {
+    const live = createPortalFeed();
+    const serialized = JSON.parse(JSON.stringify(live));
+    const morningId = "mily:news:2026-08-23-morning-showroom-fanroom";
+    const earlyId = "mily:news:2026-08-23-early-showroom-fanroom";
 
-    assert.deepEqual(first.items.map((item) => item.id), expected);
-    assert.deepEqual(
-      second.items.map((item) => item.id),
-      expected,
+    assert.doesNotThrow(() => assertPortalFeedContract(serialized));
+    assert.ok(
+      serialized.items.findIndex((item) => item.id === morningId) <
+        serialized.items.findIndex((item) => item.id === earlyId),
     );
+  });
+
+  it("preserves Latest same-day news chronology without inventing publication times", () => {
+    const feed = createFixtureFeed({
+      newsItems: [
+        newsFixture({ id: "later-unranked", date: "2026-08-21" }),
+        newsFixture({
+          id: "earlier-ranked",
+          date: "2026-08-21",
+          sameDayOrder: 2,
+        }),
+        newsFixture({
+          id: "middle-ranked",
+          date: "2026-08-21",
+          sameDayOrder: 1,
+        }),
+      ],
+    });
+
+    assert.deepEqual(
+      feed.items.map((item) => item.id),
+      [
+        "mily:news:earlier-ranked",
+        "mily:news:middle-ranked",
+        "mily:news:later-unranked",
+      ],
+    );
+    assert.ok(
+      feed.items.every((item) => item.publishedAt === "2026-08-21T00:00:00+09:00"),
+    );
+  });
+
+  it("uses NEWS editorial order for same-day ties, not lexicographic IDs", () => {
+    const newsItems = [
+      newsFixture({ id: "z-update" }),
+      newsFixture({ id: "a-update" }),
+    ];
+    const expected = sortNewsByDateDesc(newsItems).map(
+      (item) => `mily:news:${item.id}`,
+    );
+    const first = createFixtureFeed({ newsItems });
+    const second = createFixtureFeed({ newsItems });
+
+    assert.deepEqual(expected, ["mily:news:z-update", "mily:news:a-update"]);
+    assertPortalNewsFollowsSort(first, newsItems);
+    assert.deepEqual(first.items.map((item) => item.id), expected);
+    assert.deepEqual(second.items.map((item) => item.id), expected);
+  });
+
+  it("honors sameDayOrder before source-array order on the same date", () => {
+    const newsItems = [
+      newsFixture({ id: "later-unranked" }),
+      newsFixture({ id: "ranked-first", sameDayOrder: 1 }),
+      newsFixture({ id: "aaa-unranked" }),
+    ];
+    const feed = createFixtureFeed({ newsItems });
+
+    assert.deepEqual(
+      sortNewsByDateDesc(newsItems).map((item) => item.id),
+      ["ranked-first", "later-unranked", "aaa-unranked"],
+    );
+    assertPortalNewsFollowsSort(feed, newsItems);
   });
 
   it("keeps emitted image and item URLs on the Mily site origin", () => {

@@ -7,17 +7,17 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 ---
 
-## いま載っているもの（2026-08-21 監査）
+## いま載っているもの（2026-08-23 監査）
 
 事実は書き換えず、現状の棚卸しです。空欄は未確認のため意図的に空です。
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 16件。8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は既存の id 昇順で並ぶ |
+| `news.ts` | 22件。8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真13枚（すべて `published: true`） | 誕生日5枚とマンゴーかき氷5枚（b10）は各Instagram投稿。ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。縦写真は `aspect` で切り抜きを避ける |
-| `galleryVideos.ts` | 独立動画7本（b15 = 8/21 TikTok、b13 = 8/21 イベントStory、b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story。すべて `published: true`。新しい順） | owner-provided。b15はTikTok公開投稿URL、b11は本人X投稿URL、StoryはInstagram Story（非リンク） | b15 / b13 / b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。FanRoom画像とDrive Gallery（b02）は含めない |
+| `galleryVideos.ts` | 独立動画8本（b18 = 8/23 地震後Story、b15 = 8/21 TikTok、b13 = 8/21 イベントStory、b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story。すべて `published: true`。新しい順） | owner-provided。b15はTikTok公開投稿URL、b11は本人X投稿URL、StoryはInstagram Story（非リンク） | b18 は既存地震NEWSと、b15 / b13 / b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。FanRoom画像とDrive Gallery（b02）は含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |
@@ -86,7 +86,7 @@ Instagram Story閲覧スクリーンショットには、以下の固有の追�
 6. `url` は `source` と違う関連ページがあるときだけ。同じ URL は書かない。
 7. `ctaLabel` は任意。リンク先は `url ?? source`。
 8. 本文は投稿の言い換えに留める。本人が書いていない抱負・予定を足さない。
-9. 表示は日付降順。配列の先頭に足すとレビューしやすいが、並び順だけに頼らない。
+9. 表示は日付降順。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。投稿時刻が確認できない項目を id で時刻順に見立てない。id 昇順にはしない。配列の先頭に足すとレビューしやすいが、並び順だけに頼らない。
 
 同じ投稿を何度も news にしない。写真を載せる話なら `media.ts`（オーナー確認必須）。
 
@@ -118,6 +118,17 @@ Instagram Story閲覧スクリーンショットには、以下の固有の追�
 - オーナー提供画像から、みりぃ本人の公開投稿カードだけを決定的な非AI cropで
   切り出して使える。ほかのファンの表示名・コメント・オーナー自身のコメントは、
   公開assetへ持ち込まない。
+
+#### Fan Room公開時の原則
+
+公開する本文・引用は、原則としてみりぃ本人の発言だけにする。ファンサイトの主役はみりぃであり、他のファンやオーナーを公開コンテンツへ載せない。
+
+- 他のファンの表示名、ハンドル、コメント、アバター、個人を特定できる情報は公開しない。
+- オーナー自身の発言についても同様に公開しない。
+- 会話の背景説明が必要な場合は、「ファンへの返信」「皆さんを気遣った」など、個人を特定しない一般表現にする。
+- スクリーンショットに第三者情報が含まれる場合、privacy-safe cropを確定できない限り公開しない。
+- 元スクリーンショットに第三者が写っていることを理由に、その第三者の文章をテキストへ転記してよいことにはしない。
+- 本人の言葉に存在しない内容を補完・創作しない。
 
 ### 投稿に写真が付いているとき
 

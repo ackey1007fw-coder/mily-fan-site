@@ -373,6 +373,7 @@ news item の新規追加も、既存X投稿の複製も、b05-01 写真の再�
 派生は作らず公開もしていない**（b07 と同じ判断）。
 その後 zip 経由で sha256 `f426810c…` の元素材を受領し、`sha256sum -c` と ffprobe の
 両方で一致を確認したうえで、公開MP4と poster をこの元素材だけから作った。
+一致しなかったファイルからの派生は公開していない。
 
 ### 公開MP4の実測値
 
@@ -917,3 +918,129 @@ Instagram Story画像はオーナーの当該画像に対する明示承認に�
   lead image・NEWS / Latest・Portal Feed・`media.ts`・`galleryVideos.ts`へ展開しない
 - InstagramプロフィールURLを出典として代用していない
 - 依頼者の訂正により今回は動画素材なし。公開MP4・poster・動画manifestは作成していない
+
+## 素材台帳（batch b17 / 受領日・source date 2026-08-22）
+
+本人Xの2026-08-22夜のSHOWROOM配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面スクリーンショット。
+Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。
+
+一次出典: https://x.com/mily_chan36/status/2091166455224299641
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b17-01 | `news/mily-b17-01-night-showroom-fireworks.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃ、画面下部に視聴者アバター・表示名が並ぶ横長画像。1206×555。owner-provided | ✅ Latestのみ / Galleryには追加しない |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが依頼時に直接提供。SNSから自動取得していない）
+- source date: `2026-08-22` / 一次出典は上記本人X投稿
+- 元素材は `media/original/mily-b17-01-night-showroom-fireworks.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **132,220 bytes / JPEG progressive / 1206×555 / sRGB / sha256
+  `3409acb7c306f579561b77d96f3ee9f6df8be71cd5166b9e22340e6b1adde903`**
+- 公開ファイル `public/media/news/mily-b17-01-night-showroom-fireworks.jpg` は元素材と
+  **バイト単位で同一**（132,220 bytes / 同一sha256）。EXIF / GPS / IPTC / XMP / ICC /
+  orientation / comment が存在しないことを確認済みのため、不要な再エンコードはしていない
+- **crop・resize・rotate・アップスケール・縦横比変更・AI生成・AI補正・顔加工・
+  generative fill・outpaintingなし**。1206:555の横構図をそのまま使用
+- プライバシー・第三者表示の確認: DM・非公開メッセージ・電話番号・メール・住所・
+  端末固有情報は含まれない。画面下部の視聴者アバター・表示名は、みりぃ本人がX投稿に
+  添付して公開したSHOWROOM画面の表示内容であり、オーナーの掲載指示に基づき無改変で記録する。
+  新しい第三者情報は付加していない
+- 画像内の「現在48位」は公開画面の表示として画像に残すが、NEWS本文・`contest.ts`・
+  `highlights.ts`・配信予定データへは転記しない
+- Xの外部画像URLはhotlinkせず、自己ホスト画像だけを参照する
+- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
+  `src/data/highlights.ts`には追加していない。Latest / NEWS専用
+
+## 素材台帳（2026-08-23 未明のSHOWROOMファンルーム / 公開cropなし）
+
+地震直後のFan Roomやり取り（NEWS id `2026-08-23-earthquake-showroom-fanroom`）は
+Latest / NEWSのテキスト記録のみ。公開cropは作っていない。
+
+- 依頼時に示されたフルスクリーンショットには、みりぃとオーナー以外のファンの
+  表示名・アバター・コメントが含まれる
+- この作業環境では元素材の実バイトを再取得できず、第三者情報を目視で除外した
+  privacy-safe cropを確定できなかった
+- フルスクリーンショットを `public/` や git に入れない
+- Gallery / `media.ts` / `galleryVideos.ts` / Drive Gallery / `/stories/` へ展開しない
+- 新しいbatch番号は未使用のまま残す（決め打ちしない）
+
+## 素材台帳（batch b18 / 受領日・source date 2026-08-23）
+
+2026-08-23の地震後に投稿されたInstagram Story動画。owner-providedの縦型動画で、
+既存の地震NEWS（id `2026-08-23-earthquake-showroom-fanroom`）と Gallery が
+同じ公開MP4・poster・manifest objectを共有する。Fan Roomスクリーンショット
+（上記の非公開判断）とは別素材。Drive Gallery（b02）・`/stories/`・
+`events.ts`・`streamSchedule.ts`には含めない。新しい地震NEWSは作っていない。
+
+恒久的な公開permalinkがないため、表示は非リンクの `Instagram Story` label。
+受け渡し用URL / file IDは公開情報・tracked textとして記録しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b18-01 | `gallery/mily-b18-01-earthquake-safety-story.mp4` | 地震後、関東圏の人たちの無事を気遣い、落ち着いて身の安全を確保するよう呼びかける縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b18-01 poster | `gallery/mily-b18-01-earthquake-safety-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-23` / 恒久permalinkなし
+- 元素材は `media/original/mily-b18-01-earthquake-safety-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `29a6202b7c646e230797ddcb75d75eec865ccd3fa9e838c1d08043884a03de18`
+- 19,976,089 bytes / H.264 **High** / level 3.1 / **720×1280** / 30fps /
+  819 frames / **27.300000秒** / yuv420p / `has_b_frames` 2
+- 音声ストリームなし。chapterなし
+- 元metadata: format・videoの`creation_time: 2026-08-22T23:20:49.000000Z`、
+  `handler_name: "Core Media Video"`
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+
+### 公開MP4
+
+- sha256: `c80e2d99cce5e5c9e5cfd0ec8e565938fbb5bec81d78900010c69ef4ead0d130`
+- 1,524,443 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 819 frames / 27.300000秒 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- 音声トラックは元素材に無いため追加・生成していない
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 4158）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と`Core Media Video`は残っていない。
+  残るのはmuxer既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b18-01-earthquake-safety-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b18-01-earthquake-safety-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の4.0 / 5.0 / 6.0 / 8.0 / 13.6 / 16.0 / 20.0 / 24.0秒地点を比較。
+  4〜6秒と中盤・20秒前後は手元のノートに視線が落ちているため、
+  顔が安定して見え、テロップが読める8.0秒地点を採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 46,811 bytes / 720×1280 JPEG / sha256
+  `8051dc985cf9e19a5f61476530dd8d3d210ba06368212d31c08bbdd00571edfa`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/earthquakeSafetyStoryVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+- InstagramプロフィールURLをStoryの出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 8.0 -i public/media/gallery/mily-b18-01-earthquake-safety-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b18-01-earthquake-safety-story-poster.jpg
+```
+

@@ -122,16 +122,18 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
   it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 7), [
+    assert.deepEqual(ordered.slice(0, 9), [
+      "2026-08-23-morning-showroom-fanroom",
+      "2026-08-23-early-showroom-fanroom",
+      "2026-08-23-earthquake-showroom-fanroom",
+      "2026-08-22-night-showroom-thanks",
+      "2026-08-22-night-showroom-fanroom",
+      "2026-08-22-evening-showroom-fanroom",
       "2026-08-22-campus-girls-second-stage-jury-award",
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
-      "2026-08-21-afternoon-showroom-fanroom",
-      "2026-08-21-event-story-next-slot",
-      "2026-08-21-morning-ohayo-story",
-      "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 16);
+    assert.equal(news.length, 22);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
@@ -140,7 +142,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
 
     assert.equal(
       sortNewsByDateDesc(news)[0]?.id,
-      "2026-08-22-campus-girls-second-stage-jury-award",
+      "2026-08-23-morning-showroom-fanroom",
     );
     assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
@@ -155,10 +157,10 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(item().media, tiktokRadioVideo);
     assert.deepEqual(matches, [tiktokRadioVideo]);
-    assert.equal(galleryVideos[0], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[0], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[1], eventStory20260821);
-    assert.equal(visibleGalleryVideos().length, 7);
+    assert.equal(galleryVideos[1], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[1], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[2], eventStory20260821);
+    assert.equal(visibleGalleryVideos().length, 8);
     assert.equal(tiktokRadioVideo.provenance, "owner-provided");
     assert.equal(tiktokRadioVideo.sourceUrl, SOURCE);
     assert.equal(tiktokRadioVideo.sourceDate, "2026-08-21");
@@ -186,8 +188,8 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 7);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 18);
+    assert.equal(galleryVideos.length, 8);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 19);
   });
 });
 

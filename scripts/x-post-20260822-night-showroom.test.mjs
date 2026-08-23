@@ -9,6 +9,7 @@ import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
@@ -19,35 +20,36 @@ import {
 } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
+import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-const NEWS_ID = "2026-08-21-after-afternoon-ganda";
-const SOURCE = "https://x.com/mily_chan36/status/2090722156162478273";
-const PHOTO = "/media/news/mily-b14-01-ganda-before-night-stream.jpg";
+const NEWS_ID = "2026-08-22-night-showroom-thanks";
+const SOURCE = "https://x.com/mily_chan36/status/2091166455224299641";
+const PHOTO = "/media/news/mily-b17-01-night-showroom-fireworks.jpg";
 const PHOTO_FILE = path.join(root, "public", PHOTO.slice(1));
 const ORIGINAL = path.join(
   root,
-  "media/original/mily-b14-01-ganda-before-night-stream.jpg",
+  "media/original/mily-b17-01-night-showroom-fireworks.jpg",
 );
-const ORIGINAL_SIZE = 130_379;
+const ORIGINAL_SIZE = 132_220;
 const ORIGINAL_SHA256 =
-  "c41bb38ed42cbdf1133583f904c78475c1d683cef6ac3d1727327fde080c9a3e";
-const PUBLIC_SIZE = 92_816;
-const PUBLIC_SHA256 =
-  "3d821f2bdee3b1c0d46ed834d31a168c03199285012d87bb53f308ff0cbcb5dc";
+  "3409acb7c306f579561b77d96f3ee9f6df8be71cd5166b9e22340e6b1adde903";
+const PUBLIC_SIZE = 132_220;
+const PUBLIC_SHA256 = ORIGINAL_SHA256;
 const MESSAGE = [
-  "昼枠配信見てくれた方には通じる写真。",
+  "夜枠ありがとうございました！！",
   "",
-  "急遽なガンダで絶望してるみりぃ。笑笑笑",
+  "明日は",
+  "朝☀️5:40〜",
+  "夜🌙22:30〜",
+  "の予定だよ🙇🏻‍♀️🙇🏻‍♀️🙇🏻‍♀️",
   "",
-  "どういうこと？？",
-  "という方は23:00〜の配信でお待ちしております🛜",
-  "この時の心境お話ししますね🤭笑",
+  "おやすみりぃ",
   "",
-  "#ミスサー #ミスサークルコンテスト2026 #ミスサークル #ミスサークル2026 #ミスサー2026 #ミスコン",
+  "#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026",
 ].join("\n");
 
 function item() {
@@ -58,13 +60,15 @@ async function sha256(file) {
   return createHash("sha256").update(await readFile(file)).digest("hex");
 }
 
-describe("2026-08-21 ganda X post — Latest entry", () => {
+describe("2026-08-22 night SHOWROOM thanks X post — Latest entry", () => {
   it("adds exactly one source-backed News item with the confirmed date", () => {
     const entry = item();
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(entry.date, "2026-08-21");
+    assert.equal(entry.date, "2026-08-22");
+    assert.equal(entry.sameDayOrder, 3);
+    assert.deepEqual(entry.activityIds, ["live-stream"]);
     assert.equal(entry.source, SOURCE);
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, undefined);
@@ -77,33 +81,28 @@ describe("2026-08-21 ganda X post — Latest entry", () => {
 
     assert.equal(entry.message?.label, "みりぃの投稿");
     assert.equal(entry.message?.text, MESSAGE);
-    assert.equal(entry.message.text.split("\n").length, 9);
-    assert.match(entry.message.text, /^昼枠配信見てくれた方には通じる写真。\n\n/);
-    assert.match(entry.message.text, /絶望してるみりぃ。笑笑笑\n\n/);
-    assert.match(entry.message.text, /23:00〜の配信でお待ちしております🛜/);
-    assert.match(entry.message.text, /#ミスコン$/);
+    assert.equal(entry.message.text.split("\n").length, 10);
+    assert.match(entry.message.text, /^夜枠ありがとうございました！！\n\n/);
+    assert.match(entry.message.text, /朝☀️5:40〜\n夜🌙22:30〜/);
+    assert.match(entry.message.text, /おやすみりぃ\n\n#ミスサー/);
+    assert.match(entry.message.text, /#ミスサークルコンテスト2026$/);
   });
 
-  it("uses archive wording and adds no cause or event not stated in the post", () => {
+  it("uses archive wording for the announced 8/23 slots", () => {
     const entry = item();
-    const copy = `${entry.title}\n${entry.body}\n${entry.media?.alt ?? ""}`;
+    const copy = `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}`;
 
-    assert.match(entry.body, /昼枠配信を見ていた方には通じる/);
-    assert.match(entry.body, /「急遽なガンダで絶望している」/);
-    assert.match(entry.body, /投稿では23:00〜の配信でこの時の心境を話すと案内しました/);
-    assert.doesNotMatch(entry.body, /23:00〜配信があります|23:00〜配信します/);
+    assert.match(entry.body, /8月22日の夜、みりぃがSHOWROOM配信へのお礼をXに投稿しました/);
+    assert.match(entry.body, /投稿時点で翌23日は朝5:40〜と夜22:30〜の2枠を予定していることを案内/);
+    assert.match(entry.body, /「おやすみりぃ」と締めくくっています/);
 
     for (const phrase of [
-      "急な用事が発生",
-      "急用",
-      "移動のため",
-      "全力疾走",
-      "昼配信中にトラブル",
-      "トラブルが起き",
-      "目的地",
-      "遅刻",
-      "事故",
-      "体調不良",
+      "次の配信は5:40",
+      "本日22:30",
+      "今夜の配信",
+      "現在予定されている配信",
+      "明日配信します",
+      "配信します",
     ]) {
       assert.equal(copy.includes(phrase), false, phrase);
     }
@@ -114,6 +113,8 @@ describe("2026-08-21 ganda X post — Latest entry", () => {
     const copy = `${entry.title}\n${entry.body}\n${entry.message.text}\n${entry.media.alt}`;
 
     for (const phrase of [
+      "現在48位",
+      "48位",
       "現在順位",
       "順位",
       "得票",
@@ -123,17 +124,15 @@ describe("2026-08-21 ganda X post — Latest entry", () => {
       "RP数",
       "閲覧数",
       "フォロワー数",
-      "26日までガチイベ中",
       "CAMPUS GIRLS",
-      "三次審査",
-      "ランウェイを目指して",
+      "審査員賞",
     ]) {
       assert.equal(copy.includes(phrase), false, phrase);
     }
   });
 });
 
-describe("2026-08-21 ganda X post — self-hosted photo", () => {
+describe("2026-08-22 night SHOWROOM thanks X post — self-hosted photo", () => {
   it("uses one local /media/news/ JPEG and never hotlinks SNS media", async () => {
     const photo = item().media;
 
@@ -154,20 +153,20 @@ describe("2026-08-21 ganda X post — self-hosted photo", () => {
       assert.equal(photo.src.includes(host), false, host);
     }
 
-    const b14Files = (await readdir(path.join(root, "public/media/news")))
-      .filter((file) => file.includes("mily-b14"));
-    assert.deepEqual(b14Files, [path.basename(PHOTO_FILE)]);
+    const b17Files = (await readdir(path.join(root, "public/media/news")))
+      .filter((file) => file.includes("mily-b17"));
+    assert.deepEqual(b17Files, [path.basename(PHOTO_FILE)]);
   });
 
-  it("records the measured 720x1280 dimensions and sanitized public bytes", async () => {
+  it("records the measured 1206x555 dimensions and byte-identical public copy", async () => {
     const photo = item().media;
     const metadata = await sharp(PHOTO_FILE).metadata();
 
     assert.equal(metadata.format, "jpeg");
     assert.equal(photo.width, metadata.width);
     assert.equal(photo.height, metadata.height);
-    assert.equal(metadata.width, 720);
-    assert.equal(metadata.height, 1280);
+    assert.equal(metadata.width, 1206);
+    assert.equal(metadata.height, 555);
     assert.equal((await stat(PHOTO_FILE)).size, PUBLIC_SIZE);
     assert.equal(await sha256(PHOTO_FILE), PUBLIC_SHA256);
 
@@ -185,24 +184,17 @@ describe("2026-08-21 ganda X post — self-hosted photo", () => {
     assert.equal((await stat(ORIGINAL)).size, ORIGINAL_SIZE);
     assert.equal(await sha256(ORIGINAL), ORIGINAL_SHA256);
     const originalMetadata = await sharp(ORIGINAL).metadata();
-    assert.equal(originalMetadata.width, 720);
-    assert.equal(originalMetadata.height, 1280);
-    assert.ok(originalMetadata.exif);
-    assert.ok(originalMetadata.iptc);
+    assert.equal(originalMetadata.width, 1206);
+    assert.equal(originalMetadata.height, 555);
 
     const original = await sharp(ORIGINAL).removeAlpha().raw().toBuffer();
     const published = await sharp(PHOTO_FILE).removeAlpha().raw().toBuffer();
     assert.equal(published.length, original.length);
-
-    let totalDifference = 0;
-    for (let index = 0; index < original.length; index += 1) {
-      totalDifference += Math.abs(original[index] - published[index]);
-    }
-    assert.ok(totalDifference / original.length < 2);
+    assert.equal(await sha256(ORIGINAL), await sha256(PHOTO_FILE));
   });
 
   it("keeps the owner-provided original ignored and out of git", async () => {
-    const relative = "media/original/mily-b14-01-ganda-before-night-stream.jpg";
+    const relative = "media/original/mily-b17-01-night-showroom-fireworks.jpg";
     const { stdout: ignored } = await run("git", ["check-ignore", "-v", "--", relative], {
       cwd: root,
     });
@@ -215,71 +207,87 @@ describe("2026-08-21 ganda X post — self-hosted photo", () => {
   });
 });
 
-describe("2026-08-21 ganda X post — scope and ordering", () => {
-  it("stays out of Gallery, Gallery videos, and /stories/", async () => {
-    assert.equal(media.some((entry) => entry.id.includes("b14")), false);
-    assert.equal(media.some((entry) => entry.basePath.includes("ganda")), false);
-    assert.equal(galleryVideos.some((entry) => entry.id.includes("b14")), false);
-    assert.equal(galleryVideos.some((entry) => entry.src.includes("ganda")), false);
-    assert.equal(stories.some((entry) => entry.slug.includes("ganda")), false);
+describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () => {
+  it("stays out of Gallery, Gallery videos, Stories, and highlights", async () => {
+    assert.equal(media.some((entry) => entry.id.includes("b17")), false);
+    assert.equal(media.some((entry) => entry.basePath.includes("night-showroom-fireworks")), false);
+    assert.equal(galleryVideos.some((entry) => entry.id.includes("b17")), false);
+    assert.equal(galleryVideos.some((entry) => entry.src.includes("night-showroom-fireworks")), false);
+    assert.equal(stories.some((entry) => entry.slug.includes("night-showroom-thanks")), false);
+    assert.equal(highlights.some((entry) => entry.id.includes("night-showroom")), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
 
     for (const relative of [
       "src/data/media.ts",
       "src/data/galleryVideos.ts",
       "src/data/stories.ts",
+      "src/data/highlights.ts",
     ]) {
       const source = await readFile(path.join(root, relative), "utf8");
-      assert.equal(source.includes("mily-b14"), false, relative);
+      assert.equal(source.includes("mily-b17"), false, relative);
       assert.equal(source.includes(NEWS_ID), false, relative);
     }
   });
 
-  it("does not hand-enter the 23:00 notice into schedule data", async () => {
+  it("does not hand-enter the 8/23 slots into schedule data", async () => {
+    const { events } = await import("../src/data/events.ts");
+    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { supportEvents } = await import("../src/data/supportEvents.ts");
+
+    assert.deepEqual(events, []);
+    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      supportEvents.some(
+        (entry) =>
+          JSON.stringify(entry).includes("5:40") ||
+          JSON.stringify(entry).includes("22:30"),
+      ),
+      false,
+    );
+
     for (const relative of ["src/data/events.ts", "src/data/streamSchedule.ts"]) {
       const source = await readFile(path.join(root, relative), "utf8");
-      assert.equal(source.includes("23:00"), false, relative);
       assert.equal(source.includes(NEWS_ID), false, relative);
-      assert.equal(source.includes("mily-b14"), false, relative);
+      assert.equal(source.includes("mily-b17"), false, relative);
     }
   });
 
-  it("keeps every existing 8/21 item behind the newer TikTok entry", () => {
-    const existing = [
-      "2026-08-21-afternoon-showroom-fanroom",
-      "2026-08-21-event-story-next-slot",
-      "2026-08-21-morning-ohayo-story",
-      "2026-08-21-morning-showroom-runway",
-    ];
+  it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 9), [
+    assert.deepEqual(ordered.slice(0, 13), [
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",
       "2026-08-23-earthquake-showroom-fanroom",
-      "2026-08-22-night-showroom-thanks",
+      NEWS_ID,
       "2026-08-22-night-showroom-fanroom",
       "2026-08-22-evening-showroom-fanroom",
       "2026-08-22-campus-girls-second-stage-jury-award",
       "2026-08-21-tiktok-radio-misscircle",
-      NEWS_ID,
+      "2026-08-21-after-afternoon-ganda",
+      "2026-08-21-afternoon-showroom-fanroom",
+      "2026-08-21-event-story-next-slot",
+      "2026-08-21-morning-ohayo-story",
+      "2026-08-21-morning-showroom-runway",
     ]);
-    assert.ok(
-      news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
-    );
-    for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
     assert.equal(news.length, 22);
+  });
+
+  it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
+    const selected = selectActivityNews("live-stream", news, news.length);
+    assert.ok(selected.some((entry) => entry.id === NEWS_ID));
+    assert.ok(selected.every(({ activityIds }) => activityIds?.includes("live-stream")));
   });
 });
 
-describe("2026-08-21 ganda X post — Portal Feed and responsive contract", () => {
+describe("2026-08-22 night SHOWROOM thanks X post — Portal Feed and responsive contract", () => {
   it("flows through Portal Feed with its self-hosted site-origin image", async () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-21T18:00:00+09:00") });
+    const feed = createPortalFeed({ now: new Date("2026-08-22T23:30:00+09:00") });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
     assertPortalNewsFollowsSort(feed, news);
     assert.equal(entry.type, "news");
-    assert.equal(entry.publishedAt, "2026-08-21T00:00:00+09:00");
+    assert.equal(entry.publishedAt, "2026-08-22T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.equal(entry.image, new URL(PHOTO, siteOrigin()).href);
     assert.equal(new URL(entry.image).origin, siteOrigin());
@@ -287,7 +295,7 @@ describe("2026-08-21 ganda X post — Portal Feed and responsive contract", () =
 
     const portalSource = await readFile(path.join(root, "src/data/portalFeed.ts"), "utf8");
     assert.equal(portalSource.includes(NEWS_ID), false);
-    assert.equal(portalSource.includes("mily-b14"), false);
+    assert.equal(portalSource.includes("mily-b17"), false);
   });
 
   it("uses the existing uncropped, overflow-safe Latest rendering", async () => {
