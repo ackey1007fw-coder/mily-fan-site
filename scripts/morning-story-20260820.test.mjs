@@ -80,19 +80,20 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-23-morning-showroom-fanroom");
     assert.equal(ordered[1], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[3], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[6], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[7], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[8], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[9], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[10], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[11], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[12], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[13], "2026-08-20-morning-message");
-    assert.equal(ordered[14], NEWS_ID);
+    assert.equal(ordered[2], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[4], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[7], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[8], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[9], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[10], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[11], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[12], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[13], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[14], "2026-08-20-morning-message");
+    assert.equal(ordered[15], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {

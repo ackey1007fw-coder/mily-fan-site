@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
@@ -14,9 +15,11 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const EVENING_ID = "2026-08-22-evening-showroom-fanroom";
 const NIGHT_ID = "2026-08-22-night-showroom-fanroom";
+const EARTHQUAKE_ID = "2026-08-23-earthquake-showroom-fanroom";
 const EARLY_ID = "2026-08-23-early-showroom-fanroom";
 const MORNING_ID = "2026-08-23-morning-showroom-fanroom";
 const CAMPUS_ID = "2026-08-22-campus-girls-second-stage-jury-award";
+const X_NIGHT_ID = "2026-08-22-night-showroom-thanks";
 
 const EVENING_MESSAGE =
   "ただいま〜✨\n皆さんゲリラ豪雨大丈夫？？私はポツポツ降ってきたなぁぁぁくらいで家に着いてギリギリセーフだったよ🏠帰宅時間の皆さんお気をつけて〜😭🙌🏻\n\n今からご飯作って食べて、お風呂に入ってその後配信したいからぁ、、、🤔💭\n\n20:30〜\nできるように頑張ろうかなっ！\n\n明日の朝はめちゃくちゃ早いから、流石に早めに寝るように努める🥱";
@@ -29,23 +32,49 @@ const EARLY_MESSAGE = "FMラジオ前にラジオ配信して行っていいか�
 const MORNING_MESSAGE =
   "朝配信遅れてごめんなさいー！！！\n\nきてくれたみんなありがとう😌🙏🏻✨\nそして、フォローしてくださった皆様もありがとう🤭✨\n\n改めて、みりぃです！\n\nまた次も来てくれたら嬉しいよ〜♪\n\n次は22:30〜ねー！絶対にメイクしてます😊いつもきてくれている方からすると久しぶりのメイクみりぃ💄だね！\n\n始めてくる方も大歓迎〜！\n\nでは、ラジオ行ってきますー！";
 
+const EARTHQUAKE_MESSAGE = [
+  "みりぃ · 02:02",
+  "地震だね、落ち着いて！！まずは身の安全を確保✊🏻😌",
+  "",
+  "あっきー · 02:04",
+  "びっくりしたー！みりぃ無事で良かった！",
+  "",
+  "あっきー · 02:06",
+  "寝坊したら地震のせいだなもうー！余震に気をつけましょう💦",
+  "",
+  "みりぃ · 02:18",
+  "皆さん無事かな？？",
+  "",
+  "みりぃ · 02:19",
+  "みりぃは無事です、ありがとう🙌🏻🙌🏻",
+].join("\n");
+
+const THIRD_PARTY_LEAKS = [
+  "キサラギ",
+  "震度4",
+  "津波",
+  "関東",
+];
+
 function findNews(id) {
   return news.find((entry) => entry.id === id);
 }
 
 describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
-  it("adds four non-link FanRoom News items with confirmed archive wording", () => {
+  it("adds five non-link FanRoom News items with confirmed archive wording", () => {
     const evening = findNews(EVENING_ID);
     const night = findNews(NIGHT_ID);
+    const earthquake = findNews(EARTHQUAKE_ID);
     const early = findNews(EARLY_ID);
     const morning = findNews(MORNING_ID);
 
     assert.ok(evening);
     assert.ok(night);
+    assert.ok(earthquake);
     assert.ok(early);
     assert.ok(morning);
 
-    for (const id of [EVENING_ID, NIGHT_ID, EARLY_ID, MORNING_ID]) {
+    for (const id of [EVENING_ID, NIGHT_ID, EARTHQUAKE_ID, EARLY_ID, MORNING_ID]) {
       assert.equal(news.filter((entry) => entry.id === id).length, 1);
     }
 
@@ -63,36 +92,60 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     assert.equal(night.message?.text, NIGHT_MESSAGE);
     assert.equal(night.media, undefined);
 
+    assert.equal(earthquake.date, "2026-08-23");
+    assert.equal(earthquake.sameDayOrder, 1);
+    assert.deepEqual(earthquake.activityIds, ["live-stream"]);
+    assert.equal(earthquake.source, undefined);
+    assert.equal(earthquake.url, undefined);
+    assert.equal(earthquake.ctaLabel, undefined);
+    assert.equal(earthquake.sourceLabel, "SHOWROOMファンルーム");
+    assert.equal(earthquake.message?.label, "地震直後のやり取り · 02:02〜02:19");
+    assert.equal(earthquake.message?.text, EARTHQUAKE_MESSAGE);
+    assert.equal(earthquake.media, undefined);
+    assert.match(earthquake.title, /地震直後、みんなの安全を気遣うみりぃ/);
+    assert.match(earthquake.body, /まずは身の安全を確保/);
+    assert.match(earthquake.body, /皆さん無事かな？？/);
+    assert.match(earthquake.body, /あっきーもみりぃの無事を喜び/);
+
     assert.equal(early.date, "2026-08-23");
+    assert.equal(early.sameDayOrder, 2);
     assert.equal(early.message?.label, "みりぃからの連絡💌 · 05:53");
     assert.equal(early.message?.text, EARLY_MESSAGE);
 
     assert.equal(morning.date, "2026-08-23");
-    assert.equal(morning.sameDayOrder, 2);
+    assert.equal(morning.sameDayOrder, 3);
     assert.equal(morning.message?.label, "みりぃからの連絡💌 · 06:25");
     assert.equal(morning.message?.text, MORNING_MESSAGE);
 
-    assert.deepEqual(verifyNews([evening, night, early, morning]), []);
+    assert.deepEqual(verifyNews([evening, night, earthquake, early, morning]), []);
   });
 
   it("keeps chronological same-day order in the Latest sort", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 7), [
+    assert.deepEqual(ordered.slice(0, 8), [
       MORNING_ID,
       EARLY_ID,
-      "2026-08-22-night-showroom-thanks",
+      EARTHQUAKE_ID,
+      X_NIGHT_ID,
       NIGHT_ID,
       EVENING_ID,
       CAMPUS_ID,
       "2026-08-21-tiktok-radio-misscircle",
     ]);
-    assert.equal(news.length, 21);
+    assert.equal(news.length, 22);
   });
 
-  it("does not add FanRoom screenshots to Gallery surfaces", async () => {
+  it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {
     assert.equal(media.some((entry) => entry.id.includes("b17")), false);
     assert.equal(galleryVideos.some((entry) => entry.id.includes("b17")), false);
+    assert.equal(existsSync(path.join(root, "public/media/news/mily-b18-01-earthquake-showroom-fanroom.jpg")), false);
+
+    const publicNews = await readdir(path.join(root, "public/media/news"));
+    assert.equal(
+      publicNews.some((file) => file.includes("earthquake") || file.includes("fanroom-earth")),
+      false,
+    );
 
     for (const relative of [
       "src/data/media.ts",
@@ -101,14 +154,24 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       "src/data/stories.ts",
     ]) {
       const source = await readFile(path.join(root, relative), "utf8");
-      for (const id of [EVENING_ID, NIGHT_ID, EARLY_ID, MORNING_ID]) {
+      for (const id of [EVENING_ID, NIGHT_ID, EARTHQUAKE_ID, EARLY_ID, MORNING_ID]) {
         assert.equal(source.includes(id), false, relative);
       }
+      assert.equal(source.includes("earthquake-showroom-fanroom"), false, relative);
+    }
+  });
+
+  it("keeps third-party Fan Room comments out of published NEWS text", () => {
+    const earthquake = findNews(EARTHQUAKE_ID);
+    const published = JSON.stringify(earthquake);
+
+    for (const leak of THIRD_PARTY_LEAKS) {
+      assert.equal(published.includes(leak), false, leak);
     }
   });
 
   it("does not copy archived Fan Room posts into the manual schedule fallback", async () => {
-    const fanroomIds = [EVENING_ID, NIGHT_ID, EARLY_ID, MORNING_ID];
+    const fanroomIds = [EVENING_ID, NIGHT_ID, EARTHQUAKE_ID, EARLY_ID, MORNING_ID];
     const scheduleSource = await readFile(
       path.join(root, "src/data/streamSchedule.ts"),
       "utf8",
@@ -137,26 +200,30 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
 
     assert.deepEqual(
       latestIds.filter((id) => id.startsWith("2026-08-23")),
-      [MORNING_ID, EARLY_ID],
+      [MORNING_ID, EARLY_ID, EARTHQUAKE_ID],
     );
     assert.deepEqual(
       feedNewsIds.filter((id) => id.startsWith("2026-08-23")),
-      [MORNING_ID, EARLY_ID],
+      [MORNING_ID, EARLY_ID, EARTHQUAKE_ID],
     );
     assert.deepEqual(
       latestIds.filter((id) => id.startsWith("2026-08-22")),
-      ["2026-08-22-night-showroom-thanks", NIGHT_ID, EVENING_ID, CAMPUS_ID],
+      [X_NIGHT_ID, NIGHT_ID, EVENING_ID, CAMPUS_ID],
     );
     assert.deepEqual(
       feedNewsIds.filter((id) => id.startsWith("2026-08-22")),
-      ["2026-08-22-night-showroom-thanks", NIGHT_ID, EVENING_ID, CAMPUS_ID],
+      [X_NIGHT_ID, NIGHT_ID, EVENING_ID, CAMPUS_ID],
     );
 
     const morning = feed.items.find((item) => item.id === `mily:news:${MORNING_ID}`);
     const early = feed.items.find((item) => item.id === `mily:news:${EARLY_ID}`);
+    const earthquake = feed.items.find((item) => item.id === `mily:news:${EARTHQUAKE_ID}`);
     assert.equal(morning?.publishedAt, "2026-08-23T00:00:00+09:00");
     assert.equal(early?.publishedAt, "2026-08-23T00:00:00+09:00");
+    assert.equal(earthquake?.publishedAt, "2026-08-23T00:00:00+09:00");
     assert.equal(morning?.sourceUrl, undefined);
     assert.equal(morning?.image, undefined);
+    assert.equal(earthquake?.sourceUrl, undefined);
+    assert.equal(earthquake?.image, undefined);
   });
 });

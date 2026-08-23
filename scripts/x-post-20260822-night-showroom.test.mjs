@@ -255,9 +255,10 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
   it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 12), [
+    assert.deepEqual(ordered.slice(0, 13), [
       "2026-08-23-morning-showroom-fanroom",
       "2026-08-23-early-showroom-fanroom",
+      "2026-08-23-earthquake-showroom-fanroom",
       NEWS_ID,
       "2026-08-22-night-showroom-fanroom",
       "2026-08-22-evening-showroom-fanroom",
@@ -269,7 +270,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 21);
+    assert.equal(news.length, 22);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {

@@ -67,7 +67,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-23-morning-showroom-fanroom",
     date: "2026-08-23",
-    sameDayOrder: 2,
+    sameDayOrder: 3,
     activityIds: ["live-stream", "radio"],
     title: "朝枠ありがとう！次枠は22:30〜💄",
     body: "8月23日のSHOWROOMファンルームで、みりぃが朝配信へのお礼と新規フォロワーへの感謝を伝え、改めて自己紹介しました。次枠22:30〜を案内し、次はメイクした姿で配信すると伝えています。FMラジオへ向かう直前の投稿です。",
@@ -80,7 +80,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-23-early-showroom-fanroom",
     date: "2026-08-23",
-    sameDayOrder: 1,
+    sameDayOrder: 2,
     activityIds: ["live-stream", "radio"],
     title: "FMラジオ前のFan Room投稿📻",
     body: "8月23日のSHOWROOMファンルームで、みりぃがFMラジオ前にラジオ配信をしてから行こうかと、ファンルームで問いかけました。",
@@ -88,6 +88,32 @@ export const news: NewsItem[] = [
     message: {
       label: "みりぃからの連絡💌 · 05:53",
       text: "FMラジオ前にラジオ配信して行っていいかしらね？笑",
+    },
+  },
+  {
+    id: "2026-08-23-earthquake-showroom-fanroom",
+    date: "2026-08-23",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "地震直後、みんなの安全を気遣うみりぃ💌",
+    body: "8月23日未明の地震直後、SHOWROOMファンルームでみりぃが「まずは身の安全を確保」と呼びかけました。その後も「皆さん無事かな？？」とファンを気遣い、自身も無事だと報告。あっきーもみりぃの無事を喜び、余震への注意を呼びかけています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    message: {
+      label: "地震直後のやり取り · 02:02〜02:19",
+      text: `みりぃ · 02:02
+地震だね、落ち着いて！！まずは身の安全を確保✊🏻😌
+
+あっきー · 02:04
+びっくりしたー！みりぃ無事で良かった！
+
+あっきー · 02:06
+寝坊したら地震のせいだなもうー！余震に気をつけましょう💦
+
+みりぃ · 02:18
+皆さん無事かな？？
+
+みりぃ · 02:19
+みりぃは無事です、ありがとう🙌🏻🙌🏻`,
     },
   },
   {

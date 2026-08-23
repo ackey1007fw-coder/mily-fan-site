@@ -206,19 +206,20 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     // 8/21の新着の後も、8/20同日ソートは既存の配列順を維持する。
     assert.equal(ordered[0], "2026-08-23-morning-showroom-fanroom");
     assert.equal(ordered[1], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[2], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[3], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[6], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[7], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[8], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[9], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[10], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[11], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[12], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[13], NEWS_ID);
-    assert.equal(ordered[14], "2026-08-20-morning-story");
+    assert.equal(ordered[2], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[3], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[4], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[7], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[8], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[9], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[10], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[11], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[12], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[13], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[14], NEWS_ID);
+    assert.equal(ordered[15], "2026-08-20-morning-story");
     assert.ok(news.some((entry) => entry.id === "2026-08-20-morning-story"));
   });
 
@@ -233,7 +234,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 21);
+    assert.equal(news.length, 22);
   });
 });
 
