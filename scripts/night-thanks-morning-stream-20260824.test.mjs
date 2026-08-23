@@ -36,15 +36,23 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
 const mp4 = path.join(
   galleryDirectory,
-  "mily-b23-01-night-thanks-morning-stream-story.mp4",
+  "mily-b23-01-night-thanks-morning-stream-story-noviewers.mp4",
 );
 const poster = path.join(
   galleryDirectory,
-  "mily-b23-01-night-thanks-morning-stream-story-poster.jpg",
+  "mily-b23-01-night-thanks-morning-stream-story-noviewers-poster.jpg",
 );
 const original = path.join(
   root,
   "media/original/mily-b23-01-night-thanks-morning-stream-story.mp4",
+);
+const leakingMp4 = path.join(
+  galleryDirectory,
+  "mily-b23-01-night-thanks-morning-stream-story.mp4",
+);
+const leakingPoster = path.join(
+  galleryDirectory,
+  "mily-b23-01-night-thanks-morning-stream-story-poster.jpg",
 );
 
 const NEWS_ID = "2026-08-24-night-thanks-morning-stream";
@@ -55,10 +63,11 @@ const POSTER_SECONDS = "4.0";
 const ORIGINAL_SHA256 =
   "4ddbd6dbf609325f886f0b9968b0f6f498fd961c973d59425aa03a283e38895e";
 const PUBLIC_MP4_SHA256 =
-  "6084ca92ebb4743065324055dc5706637978566d1f0f9d7b48e0feaffa2578ae";
-const PUBLIC_MP4_SIZE = 344986;
+  "6d3e1a13f45d1caabb712dd9c37ebced3ea76bb0c9517198b60f635959efb7c1";
+const PUBLIC_MP4_SIZE = 158881;
 const POSTER_SHA256 =
-  "516e9a3e3b7541002e56d6c5c9fe2a6e7980df715ad01bb904d641fe4f53aa20";
+  "ba6e5ad07db0bfd903b424bace1a19e84f99c600de0dd00bde52c1cc39aa3cd1";
+const VIEWER_COVER = { x: 0, y: 328, w: 720, h: 184, rgb: [167, 226, 204] };
 const DOCS_HOST_PATTERN = /docs\.google\.com/i;
 const DRIVE_SHARE_QUERY_PATTERN = /usp=drivesdk/i;
 const DRIVE_FILE_PATH_PATTERN = /\/file\/d\//i;
@@ -215,13 +224,17 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
       .filter((file) => file.includes("mily-b23-01-night-thanks-morning-stream-story"));
 
     assert.deepEqual(assets.sort(), [
-      "media/gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg",
-      "media/gallery/mily-b23-01-night-thanks-morning-stream-story.mp4",
+      "media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers-poster.jpg",
+      "media/gallery/mily-b23-01-night-thanks-morning-stream-story-noviewers.mp4",
     ]);
     assert.match(nightThanksMorningStreamStoryVideo.src, /^\/media\/gallery\//);
     assert.match(nightThanksMorningStreamStoryVideo.poster, /^\/media\/gallery\//);
+    assert.match(nightThanksMorningStreamStoryVideo.src, /noviewers\.mp4$/);
+    assert.match(nightThanksMorningStreamStoryVideo.poster, /noviewers-poster\.jpg$/);
     assert.equal(existsSync(mp4), true);
     assert.equal(existsSync(poster), true);
+    assert.equal(existsSync(leakingMp4), false);
+    assert.equal(existsSync(leakingPoster), false);
     assert.ok((await stat(mp4)).size > 0);
     assert.ok((await stat(poster)).size > 0);
     assert.equal(
@@ -352,9 +365,35 @@ describe("2026-08-24 night thanks morning stream — published derivatives", () 
     for (let index = 0; index < posterGray.length; index += 1) {
       total += Math.abs(posterGray[index] - stdout[index]);
     }
-    // High / tv-range source is remuxed without re-encode, so JPEG poster vs
-    // raw gray sits around 6.4. Same-frame identity still holds well below 8.
+    // JPEG poster vs raw gray sits around 7.2 on this tv-range encode.
+    // Same-frame identity still holds well below 8.
     assert.ok(total / posterGray.length < 8);
+  });
+
+  it("covers the SHOWROOM viewer layer with the Story background color", async () => {
+    const { data, info } = await sharp(poster).raw().toBuffer({ resolveWithObject: true });
+    const samples = [
+      [40, 340],
+      [360, 340],
+      [680, 340],
+      [40, 420],
+      [360, 420],
+      [680, 420],
+      [40, 500],
+      [360, 500],
+      [680, 500],
+    ];
+
+    for (const [x, y] of samples) {
+      const index = (y * info.width + x) * info.channels;
+      const rgb = [data[index], data[index + 1], data[index + 2]];
+      for (const [channel, expected] of rgb.map((value, i) => [value, VIEWER_COVER.rgb[i]])) {
+        assert.ok(
+          Math.abs(channel - expected) <= 4,
+          `cover ${x},${y} ${rgb.join(",")} vs ${VIEWER_COVER.rgb.join(",")}`,
+        );
+      }
+    }
   });
 
   it("retains the existing controls / inline / preload contract", async () => {
@@ -494,6 +533,13 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
+    assert.match(docs, /視聴者レイヤー/);
+    assert.match(docs, /drawbox=x=0:y=328:w=720:h=184:color=0xa7e2cc:t=fill/);
+    assert.match(docs, /noviewers\.mp4/);
+    assert.doesNotMatch(
+      docs,
+      /gallery\/mily-b23-01-night-thanks-morning-stream-story\.mp4/,
+    );
     assert.match(ops, /25件/);
     assert.match(ops, /独立動画11本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
