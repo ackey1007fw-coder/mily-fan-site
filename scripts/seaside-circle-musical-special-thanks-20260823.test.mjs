@@ -78,7 +78,8 @@ const POSTER_SECONDS = "8.0";
 const ORIGINAL_SHA256 =
   "d143ecbd7976453470145be6079107a0e7820c13798098f3e155f5dfda5a917d";
 const PUBLIC_MP4_SHA256 =
-  "60e7c674f61438e574b53e25c9f825e98e73f415be638b9e820dff38b2ec91a8";
+  "95c338f696557042c37c9cb95afbfe689763c7a7d8d0a38acc99b23933dfcf8f";
+const PUBLIC_MP4_SIZE = 511902;
 const POSTER_SHA256 =
   "fbf5cc8650932c617787f68053f02137f12586f4709492bd68fe6b021cc4b67b";
 const DOCS_HOST_PATTERN = /docs\.google\.com/i;
@@ -286,14 +287,14 @@ describe("2026-08-23 seaside circle thanks Story — published assets", () => {
     );
   });
 
-  it("keeps H.264 / AAC, 720x1280, 1fps, 20 frames, faststart, and stripped metadata", async () => {
+  it("keeps H.264 video-only, 720x1280, 1fps, 20 frames, faststart, and stripped metadata", async () => {
     const info = await probe(mp4);
     const video = info.streams.find((stream) => stream.codec_type === "video");
     const audio = info.streams.find((stream) => stream.codec_type === "audio");
     const mp4Bytes = await readFile(mp4);
 
     assert.ok(video);
-    assert.ok(audio);
+    assert.equal(audio, undefined);
     assert.equal(video.codec_name, "h264");
     assert.match(video.profile, /Baseline/);
     assert.equal(video.has_b_frames, 0);
@@ -306,7 +307,7 @@ describe("2026-08-23 seaside circle thanks Story — published assets", () => {
       Math.abs(Number(video.duration) - 20) < 0.05,
       `duration ${video.duration}`,
     );
-    assert.equal(audio.codec_name, "aac");
+    assert.equal(mp4Bytes.length, PUBLIC_MP4_SIZE);
     assert.equal(info.chapters?.length ?? 0, 0);
     assert.equal(createHash("sha256").update(mp4Bytes).digest("hex"), PUBLIC_MP4_SHA256);
     assert.equal(await isFaststart(mp4), true);

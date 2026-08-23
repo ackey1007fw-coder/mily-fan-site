@@ -1195,34 +1195,41 @@ InstagramプロフィールURLをStory permalinkの代用にしない。
 - sha256: `d143ecbd7976453470145be6079107a0e7820c13798098f3e155f5dfda5a917d`
 - 824,316 bytes / H.264 **High** / **720×1280** / **1fps** /
   20 frames / **20.000000秒** / yuv420p
-- 音声: HE-AAC / 44.1kHz / stereo。既存b19と同じ番組公式Story方針で
-  公開派生でも音声を保持する（権利が不明な個人Storyで無音化した過去案件とは別判断）
+- 音声: HE-AAC / 44.1kHz / stereo。元素材には音声ストリームがある
 - chapterなし
 - 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
 
+### 音声の扱い — 削除した
+
+元素材には HE-AAC / 44.1kHz / stereo の音声がある。再配信権を確認できないため、
+公開派生は video-only（無音）にした。番組公式 Instagram Story であることや
+既存 b19 の判断だけでは、音声の再配信許可にはならない。
+
+音声の内容・由来・種類・権利者・楽曲名は確認できていないため、推測して記録しない。
+b19 の公開MP4は変更していない。
+
 ### 公開MP4
 
-- sha256: `60e7c674f61438e574b53e25c9f825e98e73f415be638b9e820dff38b2ec91a8`
-- 835,600 bytes / H.264 **Constrained Baseline** / **720×1280** /
+- sha256: `95c338f696557042c37c9cb95afbfe689763c7a7d8d0a38acc99b23933dfcf8f`
+- 511,902 bytes / H.264 **Constrained Baseline** / **720×1280** /
   **1fps** / 20 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 /
-  AAC-LC 128k
+  音声ストリームなし
 - 元素材の画素数・縦横比・1fps・映像フレーム数を維持。
   crop・scale・引き伸ばし・アップスケール・fps水増し・短縮なし（`-vf scale`を使っていない）
-- `+faststart`確認済み（`moov` offset 32 < `mdat` offset 5100）
+- 既存の公開映像ストリームを `-c:v copy` で remux し、`-an` で音声だけを外した。
+  画素数・fps・フレーム数を変える再エンコードはしていない
+- `+faststart`確認済み（`moov` offset 32 < `mdat` offset 931）
 - metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
-  `-map_metadata:s:a -1` / `-map_chapters -1`）。元の`creation_time`と
-  `Core Media`は残っていない
+  `-map_chapters -1`）。元の`creation_time`と `Core Media`は残っていない
 - AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
 
-エンコードコマンド（再現用）:
+公開派生の音声除去（再現用。既存の Baseline 公開映像を copy し、音声だけ外す）:
 
 ```
-ffmpeg -i media/original/mily-b21-01-seaside-circle-musical-special-thanks.mp4 \
-  -map 0:v:0 -map 0:a:0 \
-  -map_metadata -1 -map_metadata:s:v -1 -map_metadata:s:a -1 -map_chapters -1 \
-  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
-  -pix_fmt yuv420p \
-  -c:a aac -b:a 128k \
+ffmpeg -i public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v copy \
   -movflags +faststart \
   public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks.mp4
 ```
