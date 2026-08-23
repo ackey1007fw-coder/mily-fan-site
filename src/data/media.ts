@@ -55,8 +55,43 @@ export type MediaItem = {
 const BIRTHDAY_POST = "https://www.instagram.com/p/DbiY3PHk1c8/";
 const MANGO_KAKIGORI_POST = "https://www.instagram.com/p/DcQqmIwk1_l/";
 const DRAGON_CLOUD_POST = "https://www.instagram.com/p/DcYbkvOk4Te/";
+const FM_SMW_X_BEFORE =
+  "https://x.com/fm_smw856/status/2091322098954490025";
+const FM_SMW_X_AFTER =
+  "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  {
+    id: "mily-b22-01",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b22-01-seaside-circle-musical-special-before",
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1600,
+    alt: "ラジオスタジオでヘッドホンをつけた3人が並ぶ、『真夏のミュージカル特集』放送前のショット",
+    caption: "『真夏のミュージカル特集』放送前のスタジオショット。",
+    provenance: "owner-provided",
+    sourceUrl: FM_SMW_X_BEFORE,
+    sourceDate: "2026-08-23",
+    credit: null,
+    aspect: "1600 / 1600",
+    published: true,
+  },
+  {
+    id: "mily-b22-02",
+    kind: "photo",
+    basePath: "/media/gallery/mily-b22-02-seaside-circle-musical-special-after",
+    widths: [480, 960, 1600],
+    width: 1600,
+    height: 1200,
+    alt: "ラジオスタジオでヘッドホンをつけた3人が並ぶ、放送後のスタジオショット",
+    caption: "放送を終えたあとのスタジオショット。",
+    provenance: "owner-provided",
+    sourceUrl: FM_SMW_X_AFTER,
+    sourceDate: "2026-08-23",
+    credit: null,
+    published: true,
+  },
   {
     id: "mily-b20-01",
     kind: "photo",

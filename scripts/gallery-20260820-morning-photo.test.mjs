@@ -241,8 +241,8 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
     ]) {
       assert.ok(media.some((entry) => entry.id === id), id);
     }
-    // b08 公開後に、別の owner-confirmed batch b10 が5枚、b20 が3枚追加されている。
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 16);
+    // b08 公開後に、別の owner-confirmed batch b10 が5枚、b20 が3枚、b22 が2枚追加されている。
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 18);
     // Hero の featured を奪っていない
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
     assert.equal(

@@ -1259,3 +1259,34 @@ ffmpeg -ss 8.0 -i public/media/gallery/mily-b21-01-seaside-circle-musical-specia
   public/media/gallery/mily-b21-01-seaside-circle-musical-special-thanks-poster.jpg
 ```
 
+## 素材台帳（batch b22 / 受領日・source date 2026-08-23）
+
+2026-08-23のFM湘南マジックウェイブ公式X（@fm_smw856）に付いていた、
+オーナー直接提供のスタジオ写真2枚。既存NEWS
+`2026-08-23-seaside-circle-musical-special` と STORY
+`/stories/2026-08-23-musical-special/` へ統合し、新しいNEWSは作っていない。
+Gallery は放送前→放送後の順で連続掲載する。既存 b19 / b21 動画は削除せず、
+NEWS 代表 media も b21 のまま維持する。Drive Gallery（b02）・
+`events.ts`・`streamSchedule.ts`・radio weekly schedule には含めない。
+
+| ID | 元ファイル | sha256（先頭12桁） | 内容 | 掲載 |
+| --- | --- | --- | --- | --- |
+| b22-01 | `mily-b22-01-seaside-circle-musical-special-before.jpg` | `3a0184e5ebe7` | ラジオスタジオでヘッドホンをつけた3人が並ぶ放送前ショット。2048×2048 | ✅ Gallery / STORY start |
+| b22-02 | `mily-b22-02-seaside-circle-musical-special-after.jpg` | `0f0313399166` | ラジオスタジオでヘッドホンをつけた3人が並ぶ放送後ショット。2048×1536 | ✅ Gallery / STORY closing |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが掲載用素材として直接提供。SNSから取得していない）
+- 2枚とも元素材は `media/original/` に無改変で保管（gitignore済み・コミットしない）
+- 元素材は JPEG。b22-01 は正方形 2048×2048、b22-02 は横位置 2048×1536
+- 公開用は既存の `pnpm media:build` で再エンコードしてメタデータを除去した
+- Gallery は各写真につき 480 / 960 / 1600 × JPG / WebP。元素材幅が2048pxのため
+  `-1600` は 1600px 幅（アップスケールなし）
+- STORY は Gallery の `-1600.jpg` を再利用し、用途別に複製していない
+- 公開画像に EXIF / GPS / IPTC / XMP / ICC は残っていない
+- トリミング・引き伸ばし・生成塗り足し・AI生成・顔加工・顔置換なし
+- `sourceDate`: `2026-08-23`（公式X投稿日）。撮影者は未確認のため `credit: null`
+- b22-01 は正方形のため `aspect: "1600 / 1600"`。b22-02 は 4/3 のため既定タイル
+- 公開ファイル名は新規batch b22を使用し、既存batch・連番と衝突しない
+- 受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+

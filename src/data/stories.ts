@@ -39,6 +39,16 @@ export const storySources = {
     label:
       "湘南シーサイドサークル Instagram Story（清水美依紗さん出演お礼 / 2026年8月23日）",
   },
+  "fm-smw-x-2026-08-23-musical-special-before": {
+    id: "fm-smw-x-2026-08-23-musical-special-before",
+    label: "FM湘南マジックウェイブ X投稿（放送前 / 2026年8月23日）",
+    url: "https://x.com/fm_smw856/status/2091322098954490025",
+  },
+  "fm-smw-x-2026-08-23-musical-special-after": {
+    id: "fm-smw-x-2026-08-23-musical-special-after",
+    label: "FM湘南マジックウェイブ X投稿（放送後 / 2026年8月23日）",
+    url: "https://x.com/fm_smw856/status/2091499993102524714",
+  },
   "x-2026-08-19-second-round-result": {
     id: "x-2026-08-19-second-round-result",
     label: "本人X投稿（2026年8月19日）",
@@ -760,6 +770,8 @@ const seasideCircleMusicalSpecialStory: Story = {
     "broadcast-transcript-2026-08-23",
     "program-instagram-story-2026-08-23",
     "program-instagram-story-thanks-2026-08-23",
+    "fm-smw-x-2026-08-23-musical-special-before",
+    "fm-smw-x-2026-08-23-musical-special-after",
   ],
   leadMediaId: "seaside-circle-musical-special-story",
   media: [
@@ -773,6 +785,24 @@ const seasideCircleMusicalSpecialStory: Story = {
       label: "スタジオでヘッドホンをつけた3人が映る、湘南シーサイドサークルのInstagram Story動画",
       caption:
         "湘南シーサイドサークルのInstagram Story。真夏のミュージカル特集と、ゲストの清水美依紗さんを案内する縦型動画です。",
+    },
+    {
+      id: "seaside-circle-musical-special-before-photo",
+      kind: "image",
+      src: "/media/gallery/mily-b22-01-seaside-circle-musical-special-before-1600.jpg",
+      alt: "ラジオスタジオでヘッドホンをつけた3人が並ぶ、『真夏のミュージカル特集』放送前のショット",
+      caption: "『真夏のミュージカル特集』放送前のスタジオショット。",
+      width: 1600,
+      height: 1600,
+    },
+    {
+      id: "seaside-circle-musical-special-after-photo",
+      kind: "image",
+      src: "/media/gallery/mily-b22-02-seaside-circle-musical-special-after-1600.jpg",
+      alt: "ラジオスタジオでヘッドホンをつけた3人が並ぶ、放送後のスタジオショット",
+      caption: "放送を終えたあとのスタジオショット。",
+      width: 1600,
+      height: 1200,
     },
     {
       id: "seaside-circle-musical-special-thanks-story",
@@ -804,6 +834,16 @@ const seasideCircleMusicalSpecialStory: Story = {
           type: "paragraph",
           text: "劇場へまだ行ったことがない人にも楽しんでもらうことを意識した3時間で、名曲や楽しみ方、表現者としての歩みが語られました。多くのリスナーから質問や応援メッセージも届きました。",
           sourceIds: ["broadcast-transcript-2026-08-23"],
+        },
+        {
+          type: "paragraph",
+          text: "放送開始前には、FM湘南マジックウェイブのXでも『真夏の！ミュージカル特集！』と、清水美依紗さんを迎える特別回が告知されました。",
+          sourceIds: ["fm-smw-x-2026-08-23-musical-special-before"],
+        },
+        {
+          type: "media",
+          mediaId: "seaside-circle-musical-special-before-photo",
+          sourceIds: ["fm-smw-x-2026-08-23-musical-special-before"],
         },
       ],
     },
@@ -1010,6 +1050,16 @@ const seasideCircleMusicalSpecialStory: Story = {
             "broadcast-transcript-2026-08-23",
             "program-instagram-story-2026-08-23",
           ],
+        },
+        {
+          type: "paragraph",
+          text: "放送後には、FM湘南マジックウェイブのXでも番組を振り返り、清水美依紗さんが作品や楽曲について届けた話への感謝が投稿されました。",
+          sourceIds: ["fm-smw-x-2026-08-23-musical-special-after"],
+        },
+        {
+          type: "media",
+          mediaId: "seaside-circle-musical-special-after-photo",
+          sourceIds: ["fm-smw-x-2026-08-23-musical-special-after"],
         },
         {
           type: "paragraph",
