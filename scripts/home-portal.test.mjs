@@ -83,9 +83,12 @@ describe("home portal information architecture", () => {
     assert.doesNotMatch(source("src/App.tsx"), /<Socials/);
     const snsList = socials.indexOf('aria-label="本人SNS"');
     const snsListEnd = socials.indexOf("</ul>", snsList);
-    const radioCta = socials.indexOf("HOME_RADIO_CTA");
+    const radioGroup = socials.indexOf('aria-label="ラジオ"');
     assert.ok(snsList >= 0 && snsListEnd > snsList);
-    assert.ok(radioCta > snsListEnd, "Radio CTA must sit outside the SNS pill list");
+    assert.ok(
+      radioGroup > snsListEnd,
+      "Radio CTA must sit outside the SNS pill list",
+    );
   });
 
   it("makes vote the strongest home CTA without claiming an unverified voting window", () => {
@@ -101,8 +104,14 @@ describe("home portal information architecture", () => {
     assert.match(dock, /HOME_VOTE_CTA/);
     assert.match(dock, /contest\.entryUrl/);
     assert.match(dock, /応援・予定/);
-    assert.doesNotMatch(hero, /投票受付中|投票期間|投票回数|開始時刻|終了時刻/);
-    assert.doesNotMatch(dock, /投票受付中|投票期間|投票回数|開始時刻|終了時刻/);
+    assert.doesNotMatch(
+      code("src/components/Hero.tsx"),
+      /投票受付中|投票期間|投票回数|開始時刻|終了時刻/,
+    );
+    assert.doesNotMatch(
+      code("src/components/MobileActionDock.tsx"),
+      /投票受付中|投票期間|投票回数|開始時刻|終了時刻/,
+    );
     assert.doesNotMatch(code("src/components/Hero.tsx"), /2026\.misscircle\.jp/);
     assert.doesNotMatch(
       code("src/components/MobileActionDock.tsx"),
