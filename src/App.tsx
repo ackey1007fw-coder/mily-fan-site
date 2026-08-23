@@ -30,13 +30,13 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <Socials />
         <TodayDashboard />
         <Support />
         <ActivitiesGateway />
         <Latest limit={HOME_NEWS_LIMIT} />
         <Stories limit={HOME_STORY_LIMIT} />
         <Gallery limit={HOME_GALLERY_LIMIT} />
-        <Socials />
       </main>
       <Footer />
       <MobileActionDock />

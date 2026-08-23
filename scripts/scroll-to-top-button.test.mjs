@@ -27,9 +27,9 @@ describe("ページ上部へ戻るボタン", () => {
 
     for (const tag of [
       "<Hero />",
+      "<Socials />",
       "<TodayDashboard />",
       "<Support />",
-      "<Socials />",
       "<Footer />",
       "<MobileActionDock />",
     ]) {

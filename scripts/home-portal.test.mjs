@@ -35,28 +35,29 @@ const code = (relative) =>
     .replace(/^\s*\/\/.*$/gm, "");
 
 describe("home portal information architecture", () => {
-  it("keeps home as a compact portal: now → support → activities → latest → archives", () => {
+  it("keeps home as a compact portal: follow → now → support → activities → latest → archives", () => {
     const app = source("src/App.tsx");
     const at = (tag) => app.indexOf(tag);
     for (const tag of [
       "<Hero />",
+      "<Socials />",
       "<TodayDashboard />",
       "<Support />",
       "<ActivitiesGateway />",
       "<Latest",
       "<Stories",
       "<Gallery",
-      "<Socials />",
     ]) {
       assert.ok(at(tag) >= 0, `${tag} must render on the home page`);
     }
-    assert.ok(at("<Hero />") < at("<TodayDashboard />"));
+    assert.ok(at("<Hero />") < at("<Socials />"));
+    assert.ok(at("<Socials />") < at("<TodayDashboard />"));
     assert.ok(at("<TodayDashboard />") < at("<Support />"));
     assert.ok(at("<Support />") < at("<ActivitiesGateway />"));
     assert.ok(at("<ActivitiesGateway />") < at("<Latest"));
     assert.ok(at("<Latest") < at("<Stories"));
     assert.ok(at("<Stories") < at("<Gallery"));
-    assert.ok(at("<Gallery") < at("<Socials />"));
+    assert.equal(app.split("<Socials />").length - 1, 1);
     assert.doesNotMatch(app, /<StreamSchedule/);
     assert.doesNotMatch(app, /<About/);
     assert.doesNotMatch(app, /<Schedule/);
@@ -182,11 +183,16 @@ describe("home portal data safety", () => {
     }
   });
 
-  it("keeps Follow compact to personal socials from socials.ts", () => {
+  it("keeps Follow compact to personal socials and the radio activity route", () => {
     const socials = source("src/components/Socials.tsx");
     assert.match(socials, /Follow Mily/);
     assert.match(socials, /socials\.find/);
+    assert.match(socials, /activities\.find/);
+    assert.match(socials, /activity\.id === "radio"/);
+    assert.match(socials, /radioActivity\.route/);
     assert.doesNotMatch(code("src/components/Socials.tsx"), /from "\.\.\/data\/links"/);
-    assert.doesNotMatch(socials, /FM湘南マジックウェイブ|エントリーページへ/);
+    assert.doesNotMatch(code("src/components/Socials.tsx"), /from "\.\.\/data\/radio"/);
+    assert.doesNotMatch(socials, /FM湘南マジックウェイブ|エントリーページへ|seasidecircle/);
+    assert.doesNotMatch(code("src/components/Socials.tsx"), /fm-smw\.jp/);
   });
 });
