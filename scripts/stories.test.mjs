@@ -275,7 +275,7 @@ describe("STORIES pages and discovery", () => {
     );
     assert.match(
       vite,
-      /storyMusicalSpecial20260823:[\s\S]*"stories\/2026-08-23-musical-special\/index\.html"/,
+      /storySeasideMusical:[\s\S]*"stories\/2026-08-23-musical-special\/index\.html"/,
     );
     assert.match(html, /src="\/src\/story-main\.tsx"/);
     assert.match(html, /rel="canonical" href="__STORY_SECOND_ROUND_CANONICAL__"/);

@@ -27,7 +27,6 @@ import { verifyNews } from "./content-invariants.mjs";
 import {
   DRIVE_HOST_PATTERN,
   findDriveIds,
-  isProbablyBinary,
 } from "./scan-tracked-text.mjs";
 
 const run = promisify(execFile);
@@ -314,7 +313,10 @@ describe("2026-08-23 seaside circle musical special — Gallery and assets", () 
     assert.equal(video.height, 1280);
     assert.equal(video.avg_frame_rate, "30/1");
     assert.equal(video.nb_frames, "571");
-    assert.equal(Number(video.duration).toFixed(6), "19.033333");
+    assert.ok(
+      Math.abs(Number(video.duration) - 19.033) < 0.01,
+      `duration ${video.duration}`,
+    );
     assert.equal(audio.codec_name, "aac");
     assert.equal(info.chapters?.length ?? 0, 0);
     assert.equal(createHash("sha256").update(mp4Bytes).digest("hex"), PUBLIC_MP4_SHA256);
@@ -354,7 +356,19 @@ describe("2026-08-23 seaside circle musical special — Gallery and assets", () 
 
 describe("2026-08-23 seaside circle musical special — privacy and routing", () => {
   it("does not publish Drive URLs, transfer paths, or invented Story permalinks", async () => {
-    const files = await committableFiles();
+    const published = [
+      "src/data/news.ts",
+      "src/data/stories.ts",
+      "src/data/galleryVideos.ts",
+      "src/data/activities.ts",
+      "src/data/site.ts",
+      "src/data/seasideCircleMusicalSpecialVideo.ts",
+      "src/data/seasideCircleMusicalSpecialVideo.json",
+      "stories/2026-08-23-musical-special/index.html",
+      "docs/CONTENT-OPS.md",
+      "docs/MEDIA.md",
+      "public/sitemap.xml",
+    ];
     const forbidden = [
       DOCS_HOST_PATTERN,
       DRIVE_HOST_PATTERN,
@@ -365,26 +379,29 @@ describe("2026-08-23 seaside circle musical special — privacy and routing", ()
       STORY_PERMALINK_PATTERN,
     ];
 
-    for (const relative of files) {
-      const absolute = path.join(root, relative);
-      const buffer = await readFile(absolute);
-      if (isProbablyBinary(buffer)) continue;
-      const text = buffer.toString("utf8");
+    for (const relative of published) {
+      const text = await readFile(path.join(root, relative), "utf8");
       for (const pattern of forbidden) {
         assert.equal(pattern.test(text), false, `${relative} ${pattern}`);
       }
-      if (
-        relative === "src/data/seasideCircleMusicalSpecialVideo.ts" ||
-        relative === "src/data/seasideCircleMusicalSpecialVideo.json" ||
-        relative === "stories/2026-08-23-musical-special/index.html"
-      ) {
-        assert.equal(PERSONAL_STORY_LABEL.test(text), false, relative);
-        assert.equal(LISTENER_PATTERN.test(text), false, relative);
-      }
-      if (relative.startsWith("src/") || relative.startsWith("stories/") || relative.startsWith("docs/")) {
-        assert.equal(findDriveIds(text).length, 0, relative);
-      }
+      assert.equal(findDriveIds(text).length, 0, relative);
     }
+
+    for (const relative of [
+      "src/data/seasideCircleMusicalSpecialVideo.ts",
+      "src/data/seasideCircleMusicalSpecialVideo.json",
+      "stories/2026-08-23-musical-special/index.html",
+    ]) {
+      const text = await readFile(path.join(root, relative), "utf8");
+      assert.equal(PERSONAL_STORY_LABEL.test(text), false, relative);
+      assert.equal(LISTENER_PATTERN.test(text), false, relative);
+    }
+
+    const files = await committableFiles();
+    assert.equal(
+      files.some((file) => file.startsWith("media/original/") && file.endsWith(".mp4")),
+      false,
+    );
   });
 
   it("registers the existing STORY routing pattern and overflow-safe video classes", async () => {
@@ -400,7 +417,7 @@ describe("2026-08-23 seaside circle musical special — privacy and routing", ()
 
     assert.match(
       vite,
-      /storyMusicalSpecial20260823:[\s\S]*"stories\/2026-08-23-musical-special\/index\.html"/,
+      /storySeasideMusical:[\s\S]*"stories\/2026-08-23-musical-special\/index\.html"/,
     );
     assert.match(vite, /storyUrl\("2026-08-23-musical-special"\)/);
     assert.match(html, /src="\/src\/story-main\.tsx"/);

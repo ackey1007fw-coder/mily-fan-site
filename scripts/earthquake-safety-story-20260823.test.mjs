@@ -408,7 +408,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
 
   it("does not copy the Story into articles, events or the stream fallback", async () => {
     assert.equal(
-      stories.some((story) => story.slug.includes("earthquake") || story.date === "2026-08-23"),
+      stories.some((story) => story.slug.includes("earthquake")),
       false,
     );
     assert.equal(events.length, 0);

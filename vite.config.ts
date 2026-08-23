@@ -159,7 +159,7 @@ export default defineConfig({
         storySecondRoundResult: "stories/second-round-result-2026/index.html",
         storyCampusGirlsSecondStageJuryAward:
           "stories/campus-girls-2027-second-stage-jury-award/index.html",
-        storyMusicalSpecial20260823:
+        storySeasideMusical:
           "stories/2026-08-23-musical-special/index.html",
       },
       output: {
