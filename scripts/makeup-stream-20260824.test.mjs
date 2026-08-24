@@ -36,12 +36,13 @@ const X_SOURCE = "https://x.com/mily_chan36/status/2091668215919444138";
 const INSTAGRAM_PROFILE = "https://www.instagram.com/mily_chan36";
 const PHOTO = "/media/news/mily-b24-01-morning-makeup-showroom.jpg";
 const PHOTO_FILE = path.join(root, "public", PHOTO.slice(1));
-const STORY_PHOTO = "/media/news/mily-b24-02-morning-makeup-instagram-story-text.jpg";
+const STORY_PHOTO =
+  "/media/news/mily-b24-02-morning-makeup-instagram-story-text-only.jpg";
 const STORY_PHOTO_FILE = path.join(root, "public", STORY_PHOTO.slice(1));
-const STORY_UNREDACTED_PUBLIC = path.join(
-  root,
+const STORY_WITHHELD_PUBLIC = [
   "public/media/news/mily-b24-02-morning-makeup-instagram-story.jpg",
-);
+  "public/media/news/mily-b24-02-morning-makeup-instagram-story-text.jpg",
+];
 const ORIGINAL = path.join(
   root,
   "media/original/mily-b24-01-morning-makeup-showroom.jpg",
@@ -57,10 +58,18 @@ const STORY_ORIGINAL_SHA256 =
 const PUBLIC_SIZE = 381_783;
 const PUBLIC_SHA256 =
   "f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca";
-const STORY_PUBLIC_SIZE = 481_232;
+const STORY_PUBLIC_SIZE = 132_080;
 const STORY_PUBLIC_SHA256 =
-  "a43d661e28fcb8daf276fe280138ded0c13a04a6ab24684b739b053b06b55a68";
-const STORY_CROP = { left: 0, top: 220, width: 1500, height: 1450 };
+  "786d2a9b0d279e4fa83e38f167a4f780b4eb47d0cb0823452eef47680bf3851b";
+/** Text-only crop measured against the received original (1500x2667). */
+const STORY_CROP = { left: 0, top: 220, width: 1500, height: 480 };
+const STORY_BACKGROUND = [255, 249, 233];
+/**
+ * The embedded SHOWROOM stills span a contiguous ~1000px non-background band on
+ * every one of their rows. Story text never exceeds ~80px of contiguous ink, so
+ * a long run is the signal that screenshot pixels came back.
+ */
+const STORY_MAX_CONTIGUOUS_RUN = 200;
 const MESSAGE = [
   "おはよう！朝配信ありがとう🥹✊🏻✨",
   "ついにメイク配信してしまったｾﾞ🤦🏻‍♀️",
@@ -225,10 +234,10 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
     assert.equal(morningMakeupInstagramStoryImage.kind, "image");
     assert.equal(morningMakeupInstagramStoryImage.src, STORY_PHOTO);
     assert.equal(morningMakeupInstagramStoryImage.width, 1500);
-    assert.equal(morningMakeupInstagramStoryImage.height, 1450);
+    assert.equal(morningMakeupInstagramStoryImage.height, 480);
     assert.equal(
       morningMakeupInstagramStoryImage.alt,
-      "初メイク配信について理由と朝配信への感謝を伝える三橋莉子さんのInstagram Story",
+      "初メイク配信について理由と朝配信への感謝を伝える三橋莉子さんのInstagram Story本文",
     );
     assert.equal("sourceUrl" in morningMakeupInstagramStoryImage, false);
     assert.doesNotMatch(JSON.stringify(morningMakeupInstagramStoryImage), /instagram\.com/);
@@ -238,7 +247,7 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
 
     const metadata = await sharp(STORY_PHOTO_FILE).metadata();
     assert.equal(metadata.width, 1500);
-    assert.equal(metadata.height, 1450);
+    assert.equal(metadata.height, 480);
     assert.equal(metadata.exif, undefined);
     assert.equal(metadata.iptc, undefined);
     assert.equal(metadata.xmp, undefined);
@@ -265,29 +274,85 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
     }
   });
 
-  it("publishes a privacy-safe text crop and withholds the unredacted still", async () => {
-    assert.equal(existsSync(STORY_UNREDACTED_PUBLIC), false);
-    const { stdout: trackedUnredacted } = await run(
-      "git",
-      ["ls-files", "--", "public/media/news/mily-b24-02-morning-makeup-instagram-story.jpg"],
-      { cwd: root },
-    );
-    assert.equal(trackedUnredacted.trim(), "");
+  it("withholds the unredacted still and the superseded 1450px crop", async () => {
+    for (const relative of STORY_WITHHELD_PUBLIC) {
+      assert.equal(existsSync(path.join(root, relative)), false);
+      const { stdout: tracked } = await run("git", ["ls-files", "--", relative], {
+        cwd: root,
+      });
+      assert.equal(tracked.trim(), "");
+    }
+  });
 
+  it("keeps every SHOWROOM viewer pixel out of the published crop", async () => {
+    const { data, info } = await sharp(STORY_PHOTO_FILE)
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    const [bgR, bgG, bgB] = STORY_BACKGROUND;
+    let longestRun = 0;
+    let lastInkRow = -1;
+
+    for (let y = 0; y < info.height; y += 1) {
+      let run = 0;
+      for (let x = 0; x < info.width; x += 1) {
+        const i = (y * info.width + x) * info.channels;
+        const distance =
+          Math.abs(data[i] - bgR) +
+          Math.abs(data[i + 1] - bgG) +
+          Math.abs(data[i + 2] - bgB);
+        if (distance > 30) {
+          run += 1;
+          if (run > longestRun) longestRun = run;
+          lastInkRow = y;
+        } else {
+          run = 0;
+        }
+      }
+    }
+
+    // Story text only: no wide contiguous band, and the crop ends on clean
+    // background well below the last line of the person's own message.
+    assert.ok(
+      longestRun < STORY_MAX_CONTIGUOUS_RUN,
+      `contiguous non-background run ${longestRun} suggests a screenshot band`,
+    );
+    assert.ok(lastInkRow > 0 && lastInkRow < info.height - 20);
+  });
+
+  it("matches a deterministic non-AI crop of the received original", async () => {
     if (!existsSync(STORY_ORIGINAL)) return;
 
     const source = await readFile(STORY_ORIGINAL);
-    const published = await readFile(STORY_PHOTO_FILE);
-    const expected = await sharp(source)
-      .extract(STORY_CROP)
-      .jpeg({ quality: 95, progressive: true, chromaSubsampling: "4:4:4" })
-      .toBuffer();
-
     assert.equal(await sha256(STORY_ORIGINAL), STORY_ORIGINAL_SHA256);
-    assert.deepEqual(published, expected);
+
     const sourceMeta = await sharp(source).metadata();
     assert.equal(sourceMeta.width, 1500);
     assert.equal(sourceMeta.height, 2667);
+
+    // The published file is re-encoded from the earlier b24-02 derivative, so
+    // compare pixels rather than bytes: the crop geometry must still be exactly
+    // STORY_CROP of the untouched original, with no scaling, rotation or fill.
+    const expected = await sharp(source)
+      .extract(STORY_CROP)
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    const published = await sharp(STORY_PHOTO_FILE)
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    assert.equal(published.info.width, expected.info.width);
+    assert.equal(published.info.height, expected.info.height);
+    assert.equal(published.info.channels, expected.info.channels);
+
+    let total = 0;
+    for (let i = 0; i < expected.data.length; i += 1) {
+      total += Math.abs(published.data[i] - expected.data[i]);
+    }
+    const meanAbsoluteError = total / expected.data.length;
+    assert.ok(
+      meanAbsoluteError < 2,
+      `mean absolute error ${meanAbsoluteError} is too high for a plain re-encode`,
+    );
   });
 });
 
@@ -375,10 +440,16 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     const b24 = docs.split("## 素材台帳（batch b24")[1] ?? "";
     assert.doesNotMatch(b24, /確認資料のみ/);
     assert.doesNotMatch(b24, /視聴者表示は元画像のまま残し/);
-    assert.match(b24, /left: 0 \/ top: 220 \/ width: 1500 \/ height: 1450/);
+    assert.match(b24, /left: 0 \/ top: 220 \/ width: 1500 \/ height: 480/);
+    assert.doesNotMatch(b24, /height: 1450/);
+    assert.match(b24, /text-only/);
     assert.match(ops, /27件/);
     assert.match(ops, /初メイク配信/);
-    assert.match(ops, /SHOWROOM横長画面と本人Instagram Story本文のprivacy-safe cropをLatestのみに掲載/);
+    assert.match(
+      ops,
+      /SHOWROOM横長画面と本人Instagram Story本文だけのtext-only cropをLatestのみに掲載/,
+    );
+    assert.match(ops, /公開派生に1ピクセルも含めない/);
     assert.match(ops, /`\/stories\/` には公開していない|新しい \/stories\/ 記事は作っていない/);
     assert.doesNotMatch(docs, /16:50/);
     assert.doesNotMatch(ops, /16:50/);

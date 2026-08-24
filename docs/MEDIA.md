@@ -1379,14 +1379,15 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
 ## 素材台帳（batch b24 / 受領日・source date 2026-08-24）
 
 本人Xの2026-08-24朝メイク配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面と、
-同じ朝の本人Instagram Story本文の privacy-safe crop。どちらも Latest / NEWS 専用の自己ホスト画像として扱い、
+同じ朝の本人Instagram Story本文だけの privacy-safe な text-only crop。どちらも Latest / NEWS 専用の自己ホスト画像として扱い、
 Gallery・Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。b24-02 は
 Activity の関連メディア（`/activities/live/`）にも出さない。
 
 b24-02 は一時的な朝Storyだが、**当該画像について**オーナーがNEWS掲載を明示承認したため、
 一般のStory閲覧スクリーンショット規則は変えず、この1枚だけ NEWS 専用の公開画像とする。
-公開派生は本文領域の決定的な非AI cropに限り、埋め込みSHOWROOM画面の視聴者名・アバター・
-コメントと Instagram 操作UIは含めない。新しい `/stories/` 記事は作らない。
+公開派生は本文領域だけの決定的な非AI **text-only crop** に限り、埋め込みSHOWROOM画面は
+1ピクセルも含めない（視聴者名・アバター・コメント・視聴者数・その他第三者を特定できるUIを含む）。
+Instagram 操作UIも含めない。新しい `/stories/` 記事は作らない。
 InstagramプロフィールURLを出典として代用しない。
 
 一次出典（SHOWROOM画面）: https://x.com/mily_chan36/status/2091668215919444138
@@ -1395,7 +1396,7 @@ Story側の恒久permalinkは確認できていない。
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
 | b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ Latestのみ / Gallery・`/stories/` には追加しない。Portal Feedの代表画像 |
-| b24-02 | `news/mily-b24-02-morning-makeup-instagram-story-text.jpg` | 本人Instagram Story本文のprivacy-safe crop。1500×1450。owner-provided | ✅ Latest / NEWS 専用。当該画像のオーナー掲載承認。SHOWROOM視聴者表示・Instagram UIは除外。Gallery・`/stories/`・`/activities/live/` には追加しない |
+| b24-02 | `news/mily-b24-02-morning-makeup-instagram-story-text-only.jpg` | 本人Instagram Story本文だけの text-only crop。1500×480。owner-provided | ✅ Latest / NEWS 専用。当該画像のオーナー掲載承認。SHOWROOM画面は1ピクセルも含まない。Instagram UIも除外。Gallery・`/stories/`・`/activities/live/` には追加しない |
 
 ### b24-01 SHOWROOM画面
 
@@ -1423,7 +1424,7 @@ Story側の恒久permalinkは確認できていない。
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
   `src/data/highlights.ts`には追加していない
 
-### b24-02 Instagram Story（NEWS専用・privacy-safe crop）
+### b24-02 Instagram Story（NEWS専用・text-only crop）
 
 - provenance: `owner-provided`（オーナーが当該画像のNEWS掲載を明示承認。SNSから自動取得していない）
 - source date: `2026-08-24` / 恒久permalinkなし。Instagramプロフィールは出典ではない
@@ -1434,21 +1435,34 @@ Story側の恒久permalinkは確認できていない。
   `81666f343b37dae7696079c0b278496411c1943114a2c81da2d459261161d5fa`**
 - 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
   決定的cropとJPEG再エンコードし、metadataを除去した
-- 公開ファイルは `news/mily-b24-02-morning-makeup-instagram-story-text.jpg`
-- 公開ファイルの実測: **481,232 bytes / JPEG progressive / 1500×1450 / 4:4:4 / sha256
-  `a43d661e28fcb8daf276fe280138ded0c13a04a6ab24684b739b053b06b55a68`**
+- 公開ファイルは `news/mily-b24-02-morning-makeup-instagram-story-text-only.jpg`
+- 公開ファイルの実測: **132,080 bytes / JPEG progressive / 1500×480 / 4:4:4 / sha256
+  `786d2a9b0d279e4fa83e38f167a4f780b4eb47d0cb0823452eef47680bf3851b`**
 - 公開ファイルはEXIF / IPTC / XMP / ICCなし
-- crop: `left: 0 / top: 220 / width: 1500 / height: 1450`。
-  初メイク配信の本文と「おはよ!6:50まで!」の本人配信オーバーレイだけが残ることを目視確認
+- crop: `left: 0 / top: 220 / width: 1500 / height: 480`（元素材基準）。
+  本人が書いた本文4ブロック（初メイク配信 / 断念の理由 / 朝配信へのお礼 / 夜枠は
+  また連絡）だけが残ることを、公開ファイルそのものを目視して確認
+- **SHOWROOM画面は1ピクセルも含まない。** 元素材で埋め込みSHOWROOM画面が始まるのは
+  crop基準 y=493（JPEGのにじみを含めても y=487）で、本文の最終行は y=450 で終わる。
+  crop 下端 y=480 は本文とSHOWROOM画面の間の完全な背景帯の内側にある
 - cropに残さないもの: Instagram操作UI（時刻・ユーザー名・閉じるボタン・返信欄）、
-  下部に埋め込まれたSHOWROOM画面3枚、視聴者アバター・表示名・コメント・視聴者数
+  下部に埋め込まれたSHOWROOM画面3枚、視聴者アバター・表示名・コメント・視聴者数、
+  「おはよ!6:50まで!」の配信オーバーレイ
+- 旧 1500×1450 派生 `mily-b24-02-morning-makeup-instagram-story-text.jpg` は
+  SHOWROOM画面と視聴者表示が残っていたため撤回した。`public/` にも git にも残さない
 - 無改変の全画面派生 `mily-b24-02-morning-makeup-instagram-story.jpg` は `public/` に置かない
+- 生成経路: 旧 1500×1450 派生から `extract({ left: 0, top: 0, width: 1500, height: 480 })`
+  で切り出して再エンコードした（元素材は `media/original/` にあり gitignore 済みで、
+  この作業環境からは参照できなかったため）。旧派生は元素材の `top: 220` cropなので、
+  幾何的には元素材の `top: 220 / height: 480` と同一領域。JPEG世代が1つ増えるだけで、
+  **scale・rotate・アップスケール・座標のずれはない**
 - 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4。
-  **scale・rotate・アップスケールなし**。AI生成・AI補正・顔加工・人物削除・
-  generative fill・outpaintingなし
+  AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
 - プライバシー: DM・非公開メッセージ・電話番号・メール・住所・端末固有情報は含まれない。
-  第三者の視聴者名・アバター・コメントは公開派生へ持ち込まない
-- 画面内の時刻表示は画像の表示として残すが、NEWS本文へは転記していない
+  第三者の視聴者名・アバター・コメント・視聴者数は公開派生へ持ち込まない
+- 回帰検知: `scripts/makeup-stream-20260824.test.mjs` が公開ファイルの画素を走査し、
+  背景以外が連続する最長ランが 200px 未満であることを確認する。埋め込みSHOWROOM画面は
+  各行で約1000pxの連続帯になるため、再混入すれば必ず失敗する
 - `src/data/morningMakeupInstagramStoryImage.ts` を NEWS の `additionalMedia` から参照する
 - `sourceUrl` は持たない（恒久permalinkなし。プロフィールURLを出典にしない）
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
@@ -1459,8 +1473,14 @@ Story側の恒久permalinkは確認できていない。
 cropコマンド相当（再現用）:
 
 ```
-sharp(source)
-  .extract({ left: 0, top: 220, width: 1500, height: 1450 })
+// 元素材から作る場合（正）
+sharp("media/original/mily-b24-02-morning-makeup-instagram-story.jpg")
+  .extract({ left: 0, top: 220, width: 1500, height: 480 })
+  .jpeg({ quality: 95, progressive: true, chromaSubsampling: "4:4:4" })
+
+// 今回実際に使った経路（旧1500×1450派生からの再crop。同一領域）
+sharp("<旧 mily-b24-02-...-text.jpg>")
+  .extract({ left: 0, top: 0, width: 1500, height: 480 })
   .jpeg({ quality: 95, progressive: true, chromaSubsampling: "4:4:4" })
 ```
 
