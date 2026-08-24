@@ -5,6 +5,7 @@ import {
 } from "../data/activities.ts";
 import {
   news,
+  newsDisplayMedia,
   sortNewsByDateDesc,
   type NewsItem,
   type NewsMedia,
@@ -58,7 +59,7 @@ export function selectActivityMedia(
 
   const relatedNewsMedia = sortNewsByDateDesc(newsItems)
     .filter((item) => item.activityIds?.includes(activityId))
-    .flatMap((item) => (item.media ? [item.media] : []));
+    .flatMap((item) => newsDisplayMedia(item));
 
   const relatedStoryMedia = activity.relatedStorySlugs.flatMap((slug) => {
     const story = storyItems.find((item) => item.slug === slug && item.published);
