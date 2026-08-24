@@ -27,7 +27,7 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(entry.date, "2026-08-24");
-    assert.equal(entry.sameDayOrder, 2);
+    assert.equal(entry.sameDayOrder, 3);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
     assert.equal(entry.source, SOURCE);
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
@@ -66,7 +66,8 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     assert.equal(ordered[0], NEWS_ID);
-    assert.equal(ordered[1], EXISTING_8_24);
+    assert.equal(ordered[1], "2026-08-24-makeup-stream");
+    assert.equal(ordered[2], EXISTING_8_24);
     assert.ok(news.some((entry) => entry.id === EXISTING_8_24));
     assert.ok(news.some((entry) => entry.id === CAMPUS_RESULT_ID));
   });
@@ -103,10 +104,10 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /26件/);
+    assert.match(ops, /27件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /投票先URLは未公開のため未掲載/);
     assert.equal(newsSource.includes("paton.jp"), false);
-    assert.equal(news.length, 26);
+    assert.equal(news.length, 27);
   });
 });

@@ -22,6 +22,7 @@ import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResul
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
+import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -70,12 +71,34 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-24-campus-girls-final-stage-guide",
     date: "2026-08-24",
-    sameDayOrder: 2,
+    sameDayOrder: 3,
     activityIds: ["campus-girls"],
     title: "CAMPUS GIRLS 2027 予選A Final STAGEへ📣✨",
     body: "8月24日、みりぃがCAMPUS GIRLS 2027 予選A Final STAGEの応援方法を案内しました。SNS審査は8月24日12:00〜8月30日12:00、Paton投票審査は8月26日18:00〜9月1日23:59。投票先の詳細は追って案内するとしています。また、CAMPUS GIRLSでは配信を行わないことも伝えています。画像ではFinal STAGE期間を8月24日12:00〜8月30日23:59と案内しています。",
     source: "https://x.com/mily_chan36/status/2091669951946121636",
     sourceLabel: "Xの投稿を見る",
+  },
+  {
+    id: "2026-08-24-makeup-stream",
+    date: "2026-08-24",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "初メイク配信！朝からの応援ありがとう💄",
+    body: "8月24日の朝、みりぃがSHOWROOMでメイク配信を行いました。Instagram Storyでは自身で「初メイク配信」と紹介しています。これまでは「完璧な状態でみんなの前に出たい」と思っていたものの、それでは皆と過ごせる時間が限られてしまい、皆の言う「無理する」ことにつながるのも嫌だったので断念し、今回の配信に至ったと伝えています。配信後のXでは、朝早くから来てくれた皆さんへの感謝とともに、コメントやキラ星、ギフトなどさまざまな形の応援を感じて「楽しかったよ〜」と振り返りました。次回は夜配信になる可能性があり、詳細は改めて案内するとのことです。",
+    source: "https://x.com/mily_chan36/status/2091668215919444138",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: morningMakeupShowroomImage,
+    message: {
+      label: "みりぃの投稿",
+      text: `おはよう！朝配信ありがとう🥹✊🏻✨
+ついにメイク配信してしまったｾﾞ🤦🏻‍♀️
+朝早くだったのに来てもらえて、コメント、キラ星、ギフトいろんな形で応援してくれているのを感じて楽しかったよ〜🫶🏻❣️
+次の配信は夜になるかと！また連絡しますねん♪
+今日も暑い。溶けないように水分補給だね🫠
+#ミスサー`,
+    },
   },
   {
     id: "2026-08-24-night-thanks-morning-stream",

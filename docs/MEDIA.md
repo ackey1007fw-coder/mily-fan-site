@@ -1376,3 +1376,58 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
   public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg
 ```
 
+## 素材台帳（batch b24 / 受領日・source date 2026-08-24）
+
+本人Xの2026-08-24朝メイク配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面。
+Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。
+
+同じ朝の本人Instagram Storyスクリーンショット（`mily-b24-02`）は、一時的な朝投稿の文言確認資料のみ。
+日常の朝Storyのため新しい `/stories/` 記事は作らず、Story閲覧スクリーンショットの節目例外も使わない。
+Latest / Gallery / `public/` / git には入れない。
+
+一次出典: https://x.com/mily_chan36/status/2091668215919444138
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ Latestのみ / Gallery・`/stories/` には追加しない |
+| b24-02 | （公開ファイルなし） | 本人Instagram Storyの閲覧スクリーンショット。「初メイク配信」の本文確認資料 | ❌ 確認資料のみ |
+
+### b24-01 SHOWROOM画面
+
+- provenance: `owner-provided`（オーナーが依頼時に直接提供。SNSから自動取得していない）
+- source date: `2026-08-24` / 一次出典は上記本人X投稿
+- 元素材は `media/original/mily-b24-01-morning-makeup-showroom.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **268,250 bytes / JPEG / 1500×691 / sha256
+  `fc5df1efce0007b642876855b9fb1699acad14d03115dc5b28d470410ec407a1`**
+- 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
+  JPEG再エンコードし、metadataを除去した
+- 公開ファイルの実測: **381,783 bytes / JPEG progressive / 1500×691 / 4:4:4 / sha256
+  `f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca`**
+- 公開ファイルはEXIF / IPTC / XMP / ICCなし
+- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。
+  **crop・scale・rotate・アップスケール・縦横比変更なし**。1500:691の横構図を維持した
+- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- プライバシー・第三者表示の確認: DM・非公開メッセージ・電話番号・メール・住所・
+  端末固有情報は含まれない。画面下部の視聴者アバター・表示名は、みりぃ本人がX投稿に
+  添付して公開したSHOWROOM画面の表示内容であり、オーナーの掲載指示に基づき無改変で記録する。
+  新しい第三者情報は付加していない
+- 画面上部の「おはよ!6:50まで!」は公開画面の表示として画像に残すが、NEWS本文へは転記していない
+- Xの外部画像URLはhotlinkせず、自己ホスト画像だけを参照する
+- `src/data/morningMakeupShowroomImage.ts` の1オブジェクトを Latest / NEWS だけから参照する
+- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
+  `src/data/highlights.ts`には追加していない
+
+### b24-02 Instagram Storyスクリーンショット（非公開）
+
+- provenance: `owner-provided`（文言確認用。当該画像のサイト掲載は、日常の朝Storyとして
+  `/stories/` 例外の対象にしない）
+- source: `Instagram Story（2026年8月24日）` / 恒久permalinkなし
+- 元素材は `media/original/mily-b24-02-morning-makeup-instagram-story.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **545,168 bytes / JPEG / 1500×2667 / sha256
+  `81666f343b37dae7696079c0b278496411c1943114a2c81da2d459261161d5fa`**
+- `public/` / Latest / Gallery / `/stories/` / git に公開派生を置いていない
+- InstagramプロフィールURLを出典として代用していない。NEWSの関連リンクとして
+  `https://www.instagram.com/mily_chan36` だけを使っている
+

@@ -131,6 +131,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       (entry) =>
         entry.id !== NEWS_ID &&
         entry.id !== "2026-08-24-campus-girls-final-stage-guide" &&
+        entry.id !== "2026-08-24-makeup-stream" &&
         (entry.id.includes("night-thanks-morning-stream") ||
           entry.id.includes("2026-08-24")),
     );
@@ -145,7 +146,8 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
     assert.ok(
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
-    assert.equal(news.length, 26);
+    assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
+    assert.equal(news.length, 27);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -389,9 +391,14 @@ describe("2026-08-24 night thanks morning stream — activity and scope", () => 
 
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 1);
-    assert.equal(liveNews[0]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-08-24-makeup-stream");
+    assert.equal(liveNews[1]?.id, NEWS_ID);
     assert.equal(radioNews[0]?.id, NEWS_ID);
-    assert.equal(liveMedia[0], nightThanksMorningStreamStoryVideo);
+    assert.equal(
+      liveMedia[0]?.src,
+      "/media/news/mily-b24-01-morning-makeup-showroom.jpg",
+    );
+    assert.equal(liveMedia[1], nightThanksMorningStreamStoryVideo);
     assert.equal(radioMedia[0], nightThanksMorningStreamStoryVideo);
   });
 
@@ -498,7 +505,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /26件/);
+    assert.match(ops, /27件/);
     assert.match(ops, /独立動画11本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
@@ -516,7 +523,8 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.equal(entry.sourceUrl, X_SOURCE);
     assert.ok(entry.image?.endsWith(nightThanksMorningStreamStoryVideo.poster));
     assert.equal(latestIds[0], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(latestIds[1], NEWS_ID);
-    assert.equal(latestIds[2], "2026-08-23-dragon-cloud");
+    assert.equal(latestIds[1], "2026-08-24-makeup-stream");
+    assert.equal(latestIds[2], NEWS_ID);
+    assert.equal(latestIds[3], "2026-08-23-dragon-cloud");
   });
 });

@@ -117,32 +117,33 @@ describe("8/19 second-round result news item", () => {
     // 8/21の新着と8/20の3件のあとも、8/19の中では結果報告が先頭に立つ。
     const ordered = sortNewsByDateDesc(news).map((item) => item.id);
     assert.equal(ordered[0], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[1], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[2], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[1], "2026-08-24-makeup-stream");
+    assert.equal(ordered[2], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[3], "2026-08-23-dragon-cloud");
     assert.equal(
-      ordered[3],
+      ordered[4],
       "2026-08-23-seaside-circle-musical-special",
     );
-    assert.equal(ordered[4], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[6], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[7], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[8], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[9], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[7], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[8], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[9], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[10], "2026-08-22-evening-showroom-fanroom");
     assert.equal(
-      ordered[10],
+      ordered[11],
       "2026-08-22-campus-girls-second-stage-jury-award",
     );
-    assert.equal(ordered[11], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[12], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[13], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[14], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[15], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[16], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[17], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[18], "2026-08-20-morning-message");
-    assert.equal(ordered[19], "2026-08-20-morning-story");
-    assert.equal(ordered[20], "2026-08-19-second-round-result");
+    assert.equal(ordered[12], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[13], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[14], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[15], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[16], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[17], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[18], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[19], "2026-08-20-morning-message");
+    assert.equal(ordered[20], "2026-08-20-morning-story");
+    assert.equal(ordered[21], "2026-08-19-second-round-result");
     assert.equal(result.date, "2026-08-19");
     assert.equal(
       result.source,
@@ -202,8 +203,9 @@ describe("8/19 well-rested morning news item", () => {
     // 8/21の新着の後、8/20はマンゴーかき氷投稿 → X投稿 → 朝Story の順。
     // 8/19 は結果報告（あと）→ 朝の投稿（さき）の順で並ぶ。
     const order = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(order.slice(0, 23), [
+    assert.deepEqual(order.slice(0, 24), [
       "2026-08-24-campus-girls-final-stage-guide",
+      "2026-08-24-makeup-stream",
       "2026-08-24-night-thanks-morning-stream",
       "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",

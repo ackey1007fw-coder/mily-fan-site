@@ -122,8 +122,9 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
   it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 13), [
+    assert.deepEqual(ordered.slice(0, 14), [
       "2026-08-24-campus-girls-final-stage-guide",
+      "2026-08-24-makeup-stream",
       "2026-08-24-night-thanks-morning-stream",
       "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",
@@ -137,7 +138,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
     ]);
-    assert.equal(news.length, 26);
+    assert.equal(news.length, 27);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
