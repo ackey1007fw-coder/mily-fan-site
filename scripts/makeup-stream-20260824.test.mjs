@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
-import { readFile, stat } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,10 +12,9 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { morningMakeupShowroomImage } from "../src/data/morningMakeupShowroomImage.ts";
-import { morningMakeupInstagramStoryImage } from "../src/data/morningMakeupInstagramStoryImage.ts";
 import { contest } from "../src/data/contest.ts";
 import { events } from "../src/data/events.ts";
-import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import {
   assertPortalNewsFollowsSort,
@@ -36,12 +35,15 @@ const X_SOURCE = "https://x.com/mily_chan36/status/2091668215919444138";
 const INSTAGRAM_PROFILE = "https://www.instagram.com/mily_chan36";
 const PHOTO = "/media/news/mily-b24-01-morning-makeup-showroom.jpg";
 const PHOTO_FILE = path.join(root, "public", PHOTO.slice(1));
-const STORY_PHOTO =
-  "/media/news/mily-b24-02-morning-makeup-instagram-story-text-only.jpg";
-const STORY_PHOTO_FILE = path.join(root, "public", STORY_PHOTO.slice(1));
+/**
+ * b24-02 is withheld entirely: the standing Story-view screenshot exception in
+ * docs/CONTENT-OPS.md limits an owner-approved still to its own /stories/
+ * article and excludes Latest, so no derivative may be published on NEWS.
+ */
 const STORY_WITHHELD_PUBLIC = [
   "public/media/news/mily-b24-02-morning-makeup-instagram-story.jpg",
   "public/media/news/mily-b24-02-morning-makeup-instagram-story-text.jpg",
+  "public/media/news/mily-b24-02-morning-makeup-instagram-story-text-only.jpg",
 ];
 const ORIGINAL = path.join(
   root,
@@ -58,18 +60,6 @@ const STORY_ORIGINAL_SHA256 =
 const PUBLIC_SIZE = 381_783;
 const PUBLIC_SHA256 =
   "f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca";
-const STORY_PUBLIC_SIZE = 132_080;
-const STORY_PUBLIC_SHA256 =
-  "786d2a9b0d279e4fa83e38f167a4f780b4eb47d0cb0823452eef47680bf3851b";
-/** Text-only crop measured against the received original (1500x2667). */
-const STORY_CROP = { left: 0, top: 220, width: 1500, height: 480 };
-const STORY_BACKGROUND = [255, 249, 233];
-/**
- * The embedded SHOWROOM stills span a contiguous ~1000px non-background band on
- * every one of their rows. Story text never exceeds ~80px of contiguous ink, so
- * a long run is the signal that screenshot pixels came back.
- */
-const STORY_MAX_CONTIGUOUS_RUN = 200;
 const MESSAGE = [
   "おはよう！朝配信ありがとう🥹✊🏻✨",
   "ついにメイク配信してしまったｾﾞ🤦🏻‍♀️",
@@ -100,8 +90,7 @@ function item() {
 }
 
 function copyText(entry) {
-  const extraAlts = (entry.additionalMedia ?? []).map((media) => media.alt ?? "").join("\n");
-  return `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}\n${entry.media?.alt ?? ""}\n${extraAlts}`;
+  return `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}\n${entry.media?.alt ?? ""}`;
 }
 
 async function sha256(file) {
@@ -220,40 +209,37 @@ describe("2026-08-24 first makeup stream — Latest-only SHOWROOM still", () => 
   });
 });
 
-describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", () => {
-  it("adds the owner-approved Story image as additionalMedia after SHOWROOM", async () => {
+describe("2026-08-24 first makeup stream — Instagram Story still withheld", () => {
+  it("publishes no Story derivative on any NEWS surface", () => {
     const entry = item();
-    const displayed = newsDisplayMedia(entry);
 
+    // The standing Story-view screenshot exception (docs/CONTENT-OPS.md) allows
+    // an owner-approved still only inside its own /stories/ article and excludes
+    // Latest, so this NEWS carries the SHOWROOM lead image and nothing else.
     assert.equal(entry.media, morningMakeupShowroomImage);
-    assert.deepEqual(entry.additionalMedia, [morningMakeupInstagramStoryImage]);
-    assert.deepEqual(displayed, [
-      morningMakeupShowroomImage,
-      morningMakeupInstagramStoryImage,
-    ]);
-    assert.equal(morningMakeupInstagramStoryImage.kind, "image");
-    assert.equal(morningMakeupInstagramStoryImage.src, STORY_PHOTO);
-    assert.equal(morningMakeupInstagramStoryImage.width, 1500);
-    assert.equal(morningMakeupInstagramStoryImage.height, 480);
+    assert.equal("additionalMedia" in entry, false);
+    assert.equal(JSON.stringify(entry).includes("b24-02"), false);
+    assert.equal(JSON.stringify(entry).includes("instagram-story"), false);
     assert.equal(
-      morningMakeupInstagramStoryImage.alt,
-      "初メイク配信について理由と朝配信への感謝を伝える三橋莉子さんのInstagram Story本文",
+      existsSync(path.join(root, "src/data/morningMakeupInstagramStoryImage.ts")),
+      false,
     );
-    assert.equal("sourceUrl" in morningMakeupInstagramStoryImage, false);
-    assert.doesNotMatch(JSON.stringify(morningMakeupInstagramStoryImage), /instagram\.com/);
-    assert.equal(existsSync(STORY_PHOTO_FILE), true);
-    assert.equal((await stat(STORY_PHOTO_FILE)).size, STORY_PUBLIC_SIZE);
-    assert.equal(await sha256(STORY_PHOTO_FILE), STORY_PUBLIC_SHA256);
+  });
 
-    const metadata = await sharp(STORY_PHOTO_FILE).metadata();
-    assert.equal(metadata.width, 1500);
-    assert.equal(metadata.height, 480);
-    assert.equal(metadata.exif, undefined);
-    assert.equal(metadata.iptc, undefined);
-    assert.equal(metadata.xmp, undefined);
-    assert.equal(metadata.icc, undefined);
-    assert.equal(metadata.chromaSubsampling, "4:4:4");
-    assert.equal(metadata.isProgressive, true);
+  it("keeps every b24-02 derivative out of public/ and git", async () => {
+    for (const relative of STORY_WITHHELD_PUBLIC) {
+      assert.equal(existsSync(path.join(root, relative)), false);
+      const { stdout: tracked } = await run("git", ["ls-files", "--", relative], {
+        cwd: root,
+      });
+      assert.equal(tracked.trim(), "");
+    }
+
+    const publicNews = await readdir(path.join(root, "public/media/news"));
+    assert.equal(
+      publicNews.some((name) => name.includes("b24-02")),
+      false,
+    );
   });
 
   it("keeps the Story original ignored and out of git", async () => {
@@ -274,85 +260,15 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
     }
   });
 
-  it("withholds the unredacted still and the superseded 1450px crop", async () => {
-    for (const relative of STORY_WITHHELD_PUBLIC) {
-      assert.equal(existsSync(path.join(root, relative)), false);
-      const { stdout: tracked } = await run("git", ["ls-files", "--", relative], {
-        cwd: root,
-      });
-      assert.equal(tracked.trim(), "");
-    }
-  });
+  it("leaves the general Story policy and the NEWS body untouched", async () => {
+    const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
+    const entry = item();
 
-  it("keeps every SHOWROOM viewer pixel out of the published crop", async () => {
-    const { data, info } = await sharp(STORY_PHOTO_FILE)
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    const [bgR, bgG, bgB] = STORY_BACKGROUND;
-    let longestRun = 0;
-    let lastInkRow = -1;
-
-    for (let y = 0; y < info.height; y += 1) {
-      let run = 0;
-      for (let x = 0; x < info.width; x += 1) {
-        const i = (y * info.width + x) * info.channels;
-        const distance =
-          Math.abs(data[i] - bgR) +
-          Math.abs(data[i + 1] - bgG) +
-          Math.abs(data[i + 2] - bgB);
-        if (distance > 30) {
-          run += 1;
-          if (run > longestRun) longestRun = run;
-          lastInkRow = y;
-        } else {
-          run = 0;
-        }
-      }
-    }
-
-    // Story text only: no wide contiguous band, and the crop ends on clean
-    // background well below the last line of the person's own message.
-    assert.ok(
-      longestRun < STORY_MAX_CONTIGUOUS_RUN,
-      `contiguous non-background run ${longestRun} suggests a screenshot band`,
-    );
-    assert.ok(lastInkRow > 0 && lastInkRow < info.height - 20);
-  });
-
-  it("matches a deterministic non-AI crop of the received original", async () => {
-    if (!existsSync(STORY_ORIGINAL)) return;
-
-    const source = await readFile(STORY_ORIGINAL);
-    assert.equal(await sha256(STORY_ORIGINAL), STORY_ORIGINAL_SHA256);
-
-    const sourceMeta = await sharp(source).metadata();
-    assert.equal(sourceMeta.width, 1500);
-    assert.equal(sourceMeta.height, 2667);
-
-    // The published file is re-encoded from the earlier b24-02 derivative, so
-    // compare pixels rather than bytes: the crop geometry must still be exactly
-    // STORY_CROP of the untouched original, with no scaling, rotation or fill.
-    const expected = await sharp(source)
-      .extract(STORY_CROP)
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-    const published = await sharp(STORY_PHOTO_FILE)
-      .raw()
-      .toBuffer({ resolveWithObject: true });
-
-    assert.equal(published.info.width, expected.info.width);
-    assert.equal(published.info.height, expected.info.height);
-    assert.equal(published.info.channels, expected.info.channels);
-
-    let total = 0;
-    for (let i = 0; i < expected.data.length; i += 1) {
-      total += Math.abs(published.data[i] - expected.data[i]);
-    }
-    const meanAbsoluteError = total / expected.data.length;
-    assert.ok(
-      meanAbsoluteError < 2,
-      `mean absolute error ${meanAbsoluteError} is too high for a plain re-encode`,
-    );
+    assert.match(ops, /例外画像は\n\s*`\/stories\/` の当該記事内だけへ自己ホストし、Latest \/ Galleryへ自動展開しない。/);
+    assert.equal(entry.source, X_SOURCE);
+    assert.equal(entry.url, INSTAGRAM_PROFILE);
+    assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
+    assert.deepEqual(entry.activityIds, ["live-stream"]);
   });
 });
 
@@ -375,7 +291,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     const storiesSource = await readFile(path.join(root, "src/data/stories.ts"), "utf8");
     assert.equal(storiesSource.includes(NEWS_ID), false);
     assert.equal(storiesSource.includes("mily-b24"), false);
-    assert.equal(existsSync(path.join(root, "src/data/morningMakeupInstagramStoryImage.ts")), true);
+    assert.equal(existsSync(path.join(root, "src/data/morningMakeupInstagramStoryImage.ts")), false);
 
     const { stdout: trackedStoryOriginal } = await run(
       "git",
@@ -421,36 +337,27 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     );
   });
 
-  it("renders both stills with object-contain and documents NEWS-only publication", async () => {
+  it("renders the SHOWROOM lead uncropped and documents the withheld Story still", async () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
-    const activityMedia = await readFile(path.join(root, "src/lib/activityMedia.ts"), "utf8");
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
 
-    assert.match(latest, /newsDisplayMedia\(item\)/);
     assert.match(latest, /h-auto w-full max-w-sm/);
     assert.match(latest, /object-contain/);
     assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);
-    assert.doesNotMatch(activityMedia, /newsDisplayMedia/);
+    assert.doesNotMatch(latest, /newsDisplayMedia/);
     assert.match(docs, /batch b24/);
     assert.match(docs, /Latestのみ/);
-    assert.match(docs, /NEWS専用/);
-    assert.match(docs, /当該画像のオーナー掲載承認/);
-    assert.match(docs, /privacy-safe crop/);
     const b24 = docs.split("## 素材台帳（batch b24")[1] ?? "";
     assert.doesNotMatch(b24, /確認資料のみ/);
     assert.doesNotMatch(b24, /視聴者表示は元画像のまま残し/);
-    assert.match(b24, /left: 0 \/ top: 220 \/ width: 1500 \/ height: 480/);
-    assert.doesNotMatch(b24, /height: 1450/);
-    assert.match(b24, /text-only/);
+    // b24-02 is withheld: no published path, no crop recipe, no checksum.
+    assert.match(b24, /非公開/);
+    assert.doesNotMatch(b24, /public\/media\/news\/mily-b24-02/);
+    assert.doesNotMatch(b24, /news\/mily-b24-02/);
     assert.match(ops, /27件/);
     assert.match(ops, /初メイク配信/);
-    assert.match(
-      ops,
-      /SHOWROOM横長画面と本人Instagram Story本文だけのtext-only cropをLatestのみに掲載/,
-    );
-    assert.match(ops, /公開派生に1ピクセルも含めない/);
-    assert.match(ops, /`\/stories\/` には公開していない|新しい \/stories\/ 記事は作っていない/);
+    assert.match(ops, /b24-02.*(非公開|掲載しない)|Story画像は掲載していない/);
     assert.doesNotMatch(docs, /16:50/);
     assert.doesNotMatch(ops, /16:50/);
   });

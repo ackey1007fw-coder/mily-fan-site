@@ -289,7 +289,7 @@ describe("8/19 well-rested morning news item", () => {
       "utf8",
     );
 
-    assert.match(latest, /media\.kind === "image"/);
+    assert.match(latest, /item\.media\?\.kind === "image"/);
     assert.match(latest, /<img/);
     assert.match(latest, /object-contain/);
     assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);

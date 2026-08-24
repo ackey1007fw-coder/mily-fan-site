@@ -8,8 +8,6 @@
  * - sourceLabel: optional label. Without source, it renders as non-link text.
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - media: optional self-hosted still or video for the card
- * - additionalMedia: optional extra stills/videos on the same NEWS card. Lead stays `media`.
- *   HOME Latest / /news/ only. Activity related-media uses the lead `media`.
  * - ctaLabel: optional. href is url ?? source
  */
 import type { ActivityId } from "./activities.ts";
@@ -26,7 +24,6 @@ import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
-import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -68,15 +65,8 @@ export type NewsItem = {
   url?: string;
   ctaLabel?: string;
   media?: NewsMedia;
-  /** Extra stills/videos on the same NEWS card. Lead stays `media`. NEWS surfaces only. */
-  additionalMedia?: NewsMedia[];
   message?: NewsMessage;
 };
-
-export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
-  if (!item.media) return [];
-  return [item.media, ...(item.additionalMedia ?? [])];
-}
 
 export const news: NewsItem[] = [
   {
@@ -101,7 +91,6 @@ export const news: NewsItem[] = [
     url: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
     media: morningMakeupShowroomImage,
-    additionalMedia: [morningMakeupInstagramStoryImage],
     message: {
       label: "みりぃの投稿",
       text: `おはよう！朝配信ありがとう🥹✊🏻✨

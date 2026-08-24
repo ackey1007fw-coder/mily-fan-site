@@ -41,8 +41,7 @@ function canonicalGalleryItem(
 }
 
 /**
- * Selects explicitly related NEWS lead media plus media from related STORY slugs.
- * NEWS `additionalMedia` stays on HOME Latest / /news/ cards.
+ * Selects explicitly related NEWS media plus media from related STORY slugs.
  * Story view objects that point at a Gallery manifest are resolved back to that
  * existing manifest object. Results are then deduplicated by manifest id.
  */

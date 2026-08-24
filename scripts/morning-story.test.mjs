@@ -188,7 +188,7 @@ describe("Latest video playback contract", () => {
     const latest = await read("src/components/Latest.tsx");
 
     assert.match(latest, /<video/);
-    assert.match(latest, /poster=\{media\.poster\}/);
+    assert.match(latest, /poster=\{item\.media\.poster\}/);
     assert.match(latest, /controls/);
     assert.match(latest, /playsInline/);
     assert.match(latest, /preload="none"/);
