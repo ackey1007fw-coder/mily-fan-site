@@ -12,7 +12,10 @@ import {
   selectSupportToday,
   type SupportAction,
 } from "./lib/supportHub";
-import { tokyoDateKey } from "./lib/monthCalendar";
+import {
+  daysUntilEndOfNextTokyoMonth,
+  tokyoDateKey,
+} from "./lib/monthCalendar";
 import {
   buildSupportCalendar,
   type SupportCalendarResult,
@@ -24,7 +27,6 @@ const primaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
 const secondaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full border border-sage/25 bg-paper px-4 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
-const RADIO_OCCURRENCE_DAYS_AHEAD = 30;
 
 const agendaDateFormatter = new Intl.DateTimeFormat("ja-JP", {
   timeZone: "Asia/Tokyo",
@@ -191,6 +193,7 @@ export default function SupportPage() {
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
   const now = Date.now();
   const today = tokyoDateKey(now);
+  const radioOccurrenceDaysAhead = daysUntilEndOfNextTokyoMonth(now);
   const todayItems = selectSupportToday({
     contest,
     streamSlots: slots,
@@ -209,7 +212,7 @@ export default function SupportPage() {
     streamAvailability: availability,
     includeRadio: true,
     now,
-    daysAhead: RADIO_OCCURRENCE_DAYS_AHEAD,
+    daysAhead: radioOccurrenceDaysAhead,
   });
   const pendingItems = calendar.pending;
 

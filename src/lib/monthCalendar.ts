@@ -46,6 +46,14 @@ function addCivilDays(date: string, days: number): string {
   return `${next.getUTCFullYear()}-${pad2(next.getUTCMonth() + 1)}-${pad2(next.getUTCDate())}`;
 }
 
+function civilDayNumber(date: string): number {
+  if (!isValidDateOnly(date)) throw new Error(`Invalid civil date: ${date}`);
+  const year = Number(date.slice(0, 4));
+  const month = Number(date.slice(5, 7));
+  const day = Number(date.slice(8, 10));
+  return Date.UTC(year, month - 1, day) / 86_400_000;
+}
+
 /** `now` をAsia/Tokyoのcivil dateへ変換する。ブラウザのlocal timezoneは使わない。 */
 export function tokyoDateKey(now: number): string {
   if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
@@ -57,6 +65,15 @@ export function tokyoDateKey(now: number): string {
 
 export function tokyoMonthKey(now: number): string {
   return tokyoDateKey(now).slice(0, 7);
+}
+
+/** 現在のJST civil dateから、次のJST月の末日までの日数を返す。 */
+export function daysUntilEndOfNextTokyoMonth(now: number): number {
+  const today = tokyoDateKey(now);
+  const { year, month } = parseMonthKey(shiftMonthKey(today.slice(0, 7), 1));
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  const endOfNextMonth = `${year}-${pad2(month)}-${pad2(lastDay)}`;
+  return civilDayNumber(endOfNextMonth) - civilDayNumber(today);
 }
 
 /** 年跨ぎを含め、JST civil monthのkeyを前後へ移動する。 */

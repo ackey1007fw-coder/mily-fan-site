@@ -5,6 +5,7 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   buildMonthGrid,
+  daysUntilEndOfNextTokyoMonth,
   expandScheduleItemsByDate,
   scheduleCategory,
   shiftMonthKey,
@@ -64,6 +65,37 @@ describe("monthly Support Calendar grid", () => {
     const dates = buildMonthGrid("2028-02").map(({ date }) => date);
     assert.ok(dates.includes("2028-02-29"));
     assert.equal(dates.includes("2028-02-30"), false);
+  });
+
+  it("covers radio occurrences through the end of the next JST month", () => {
+    const now = Date.parse("2026-08-24T12:00:00+09:00");
+    const daysAhead = daysUntilEndOfNextTokyoMonth(now);
+    const radioItems = adaptRadioProgram(now, daysAhead);
+    const radioDates = radioItems.map(({ date }) => date);
+    const grouped = expandScheduleItemsByDate(
+      radioItems.map((item) => ({ date: item.date, items: [item] })),
+    );
+
+    assert.equal(daysAhead, 37);
+    assert.deepEqual(radioDates, [
+      "2026-08-30",
+      "2026-09-06",
+      "2026-09-13",
+      "2026-09-20",
+      "2026-09-27",
+    ]);
+    assert.equal(radioDates.some((date) => date > "2026-09-30"), false);
+    assert.equal(scheduleCategory(grouped.get("2026-09-27")?.[0]).label, "RADIO");
+  });
+
+  it("covers the next JST month across the December to January boundary", () => {
+    const now = Date.parse("2026-12-24T12:00:00+09:00");
+    const daysAhead = daysUntilEndOfNextTokyoMonth(now);
+    const radioDates = adaptRadioProgram(now, daysAhead).map(({ date }) => date);
+
+    assert.equal(daysAhead, 38);
+    assert.equal(radioDates.at(-1), "2027-01-31");
+    assert.equal(radioDates.some((date) => date > "2027-01-31"), false);
   });
 });
 
@@ -237,6 +269,8 @@ describe("monthly Support Calendar UI source", () => {
     const calendar = source("src/components/MonthlyScheduleCalendar.tsx");
     assert.match(page, /title="みりぃスケジュール"/);
     assert.match(page, /<MonthlyScheduleCalendar calendar=\{calendar\} today=\{today\}/);
+    assert.match(page, /daysUntilEndOfNextTokyoMonth\(now\)/);
+    assert.doesNotMatch(page, /RADIO_OCCURRENCE_DAYS_AHEAD/);
     assert.match(calendar, /grid-cols-7/);
     assert.match(calendar, /aria-label="前月を表示"/);
     assert.match(calendar, /aria-label="次月を表示"/);
