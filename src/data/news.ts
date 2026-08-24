@@ -24,6 +24,7 @@ import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResul
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
+import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 
@@ -78,6 +79,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-24-seasidecircle-yes-tokyo",
+    date: "2026-08-24",
+    sameDayOrder: 4,
+    activityIds: ["radio", "miss-circle"],
+    title: "「Yes!東京」踊ってみた💃",
+    body: "8月24日、湘南シーサイドサークルのInstagramに、みりぃの「Yes!東京」踊ってみた動画が投稿されました。ハッシュタグではダンス・ミスコン・ラジオが添えられています。",
+    sourceLabel: "湘南シーサイドサークル Instagram",
+    url: "https://www.instagram.com/seasidecircle",
+    ctaLabel: "湘南シーサイドサークル Instagramを見る",
+    media: seasideCircleYesTokyoVideo,
+    message: {
+      label: "湘南シーサイドサークルの投稿",
+      text: `Yes!東京
+#踊ってみた #ダンス #ミスコン #ラジオ`,
+    },
+  },
   {
     id: "2026-08-24-campus-girls-final-stage-guide",
     date: "2026-08-24",

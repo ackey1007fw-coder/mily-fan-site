@@ -13,6 +13,7 @@ import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
+import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { tiktokRadioVideo, type TikTokRadioVideo } from "./tiktokRadioVideo.ts";
 
@@ -30,6 +31,7 @@ export {
   nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,
+  seasideCircleYesTokyoVideo,
   secondRoundStoryVideo,
   tiktokRadioVideo,
 };
@@ -40,6 +42,7 @@ export {
  * MP4 and poster paths remain single-source. Newest first.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  seasideCircleYesTokyoVideo,
   nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,

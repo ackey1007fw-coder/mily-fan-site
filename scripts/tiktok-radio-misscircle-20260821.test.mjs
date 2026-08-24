@@ -122,7 +122,8 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
   it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 14), [
+    assert.deepEqual(ordered.slice(0, 15), [
+      "2026-08-24-seasidecircle-yes-tokyo",
       "2026-08-24-campus-girls-final-stage-guide",
       "2026-08-24-makeup-stream",
       "2026-08-24-night-thanks-morning-stream",
@@ -138,7 +139,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
     ]);
-    assert.equal(news.length, 27);
+    assert.equal(news.length, 28);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
@@ -147,7 +148,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
 
     assert.equal(
       sortNewsByDateDesc(news)[0]?.id,
-      "2026-08-24-campus-girls-final-stage-guide",
+      "2026-08-24-seasidecircle-yes-tokyo",
     );
     assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
@@ -155,17 +156,16 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
 });
 
 describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
-  it("shares one manifest object and is the newest standalone Gallery video", () => {
+  it("shares one manifest object among the standalone Gallery videos", () => {
     const matches = galleryVideos.filter(
       (entry) => entry.id === tiktokRadioVideo.id,
     );
 
     assert.equal(item().media, tiktokRadioVideo);
     assert.deepEqual(matches, [tiktokRadioVideo]);
-    assert.equal(galleryVideos[4], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[4], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[5], eventStory20260821);
-    assert.equal(visibleGalleryVideos().length, 11);
+    assert.equal(galleryVideos[5], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[5], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos().length, 12);
     assert.equal(tiktokRadioVideo.provenance, "owner-provided");
     assert.equal(tiktokRadioVideo.sourceUrl, SOURCE);
     assert.equal(tiktokRadioVideo.sourceDate, "2026-08-21");
@@ -193,8 +193,8 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 11);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 22);
+    assert.equal(galleryVideos.length, 12);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 23);
   });
 });
 
