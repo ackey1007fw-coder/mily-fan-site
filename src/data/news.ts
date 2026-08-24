@@ -83,7 +83,7 @@ export const news: NewsItem[] = [
     id: "2026-08-24-seasidecircle-yes-tokyo",
     date: "2026-08-24",
     sameDayOrder: 4,
-    activityIds: ["radio", "miss-circle"],
+    activityIds: ["radio"],
     title: "「Yes!東京」踊ってみた💃",
     body: "8月24日、湘南シーサイドサークルのInstagramに、みりぃの「Yes!東京」踊ってみた動画が投稿されました。ハッシュタグではダンス・ミスコン・ラジオが添えられています。",
     sourceLabel: "湘南シーサイドサークル Instagram",
