@@ -84,6 +84,14 @@ export function shiftMonthKey(monthKey: string, offset: number): string {
   return `${shifted.getUTCFullYear()}-${pad2(shifted.getUTCMonth() + 1)}`;
 }
 
+/** 同じ日付は選択解除し、別の日付は新しい選択へ切り替える。 */
+export function toggleSelectedDate(
+  current: string | null,
+  next: string,
+): string | null {
+  return current === next ? null : next;
+}
+
 /** 月曜始まりの7列grid。月外はselectableな日付を作らずnull cellにする。 */
 export function buildMonthGrid(monthKey: string): MonthGridCell[] {
   const { year, month } = parseMonthKey(monthKey);

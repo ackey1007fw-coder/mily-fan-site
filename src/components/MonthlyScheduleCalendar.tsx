@@ -4,6 +4,7 @@ import {
   expandScheduleItemsByDate,
   scheduleCategory,
   shiftMonthKey,
+  toggleSelectedDate,
 } from "../lib/monthCalendar";
 import type { ScheduleItem, SupportCalendarResult } from "../lib/supportCalendar";
 import { SupportScheduleItemCard } from "./SupportScheduleItemCard";
@@ -160,6 +161,7 @@ export function MonthlyScheduleCalendar({
               );
             }
 
+            const selectableDate = cell.date;
             const items = itemsByDate.get(cell.date) ?? [];
             const isToday = cell.date === today;
             const isSelected = cell.date === selectedDate;
@@ -173,7 +175,11 @@ export function MonthlyScheduleCalendar({
                 aria-label={dateButtonLabel(cell.date, items)}
                 aria-pressed={isSelected}
                 aria-current={isToday ? "date" : undefined}
-                onClick={() => setSelectedDate(cell.date)}
+                onClick={() =>
+                  setSelectedDate((current) =>
+                    toggleSelectedDate(current, selectableDate),
+                  )
+                }
                 className={`min-h-20 min-w-0 rounded-xl border p-0.5 text-left transition sm:min-h-24 sm:p-1.5 ${
                   isSelected
                     ? "border-sage bg-sage-soft/55 shadow-sm"

@@ -11,6 +11,7 @@ import {
   shiftMonthKey,
   tokyoDateKey,
   tokyoMonthKey,
+  toggleSelectedDate,
 } from "../src/lib/monthCalendar.ts";
 import {
   adaptRadioProgram,
@@ -264,6 +265,24 @@ describe("monthly schedule categories and safety", () => {
 });
 
 describe("monthly Support Calendar UI source", () => {
+  it("toggles the selected date while keeping today and month navigation behavior", () => {
+    const calendar = source("src/components/MonthlyScheduleCalendar.tsx");
+
+    assert.equal(toggleSelectedDate(null, "2026-08-24"), "2026-08-24");
+    assert.equal(toggleSelectedDate("2026-08-24", "2026-08-24"), null);
+    assert.equal(
+      toggleSelectedDate("2026-08-24", "2026-08-25"),
+      "2026-08-25",
+    );
+    assert.match(
+      calendar,
+      /setSelectedDate\(\(current\) =>[\s\S]*?toggleSelectedDate\(current, selectableDate\)/,
+    );
+    assert.match(calendar, /aria-pressed=\{isSelected\}/);
+    assert.match(calendar, /setSelectedDate\(today\)/);
+    assert.match(calendar, /setSelectedDate\(nextMonth === todayMonth \? today : null\)/);
+  });
+
   it("keeps the monthly overview, selected-day details, and Agenda together", () => {
     const page = source("src/SupportPage.tsx");
     const calendar = source("src/components/MonthlyScheduleCalendar.tsx");
