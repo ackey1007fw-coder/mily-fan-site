@@ -1,6 +1,9 @@
 /**
  * 2026-08-24 朝のSHOWROOMメイク配信画面。本人X投稿のビジュアル。
- * Latest / NEWS 専用。Gallery と /stories/ には展開しない。
+ * NEWS の代表画像（lead media）として Latest / /news/ / Portal Feed に出る。
+ * NEWS が live-stream に関連付いているため、他のNEWS代表画像と同じく
+ * /activities/live/ の「関連するメディア」にも自動で出る（selectActivityMedia）。
+ * Gallery・galleryVideos・/stories/・highlights には追加しない。
  */
 export const morningMakeupShowroomImage = {
   id: "mily-b24-01-morning-makeup-showroom",

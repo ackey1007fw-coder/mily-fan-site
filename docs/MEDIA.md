@@ -1379,8 +1379,14 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
 ## 素材台帳（batch b24 / 受領日・source date 2026-08-24）
 
 本人Xの2026-08-24朝メイク配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面。
-Latest / NEWS 専用の自己ホスト画像として扱い、Gallery・Gallery動画・Drive Gallery・
+NEWS の代表画像（lead media）として自己ホストし、Gallery・Gallery動画・Drive Gallery・
 `/stories/`・`highlights.ts`には追加しない。
+
+ここでの「Latestのみ」は Gallery 系へ追加しないという意味で、Activity ページを除外する
+指定ではない。NEWS が `activityIds: ["live-stream"]` を持つため、他のNEWS代表画像
+（b17-01 / b14-01 / b13-01 など）と同じく `selectActivityMedia()` 経由で
+`/activities/live/` の「関連するメディア」にも自動で出る。これはこのbatch固有の例外では
+なく、NEWS代表画像の標準動作である。
 
 同じ朝の本人Instagram Story画像（b24-02）も受領しているが、**公開していない**。
 オーナーは当該画像のNEWS掲載を明示承認していたものの、`docs/CONTENT-OPS.md` の
@@ -1395,7 +1401,7 @@ privacy / 掲載面ゲートの両方を満たすには非公開が唯一の選�
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ Latestのみ / Gallery・`/stories/` には追加しない。Portal Feedの代表画像 |
+| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ NEWS代表画像。Latestのみ（Gallery・`/stories/`・highlights には追加しない）。Portal Feedの代表画像。`activityIds` 経由で `/activities/live/` の関連メディアにも出る |
 | b24-02 | **非公開（公開ファイルなし）** | 本人Instagram Story閲覧画面。owner-provided | ❌ どの掲載面にも出さない。`/stories/` 記事内限定という限定例外の条件を満たさないため非公開 |
 
 ### b24-01 SHOWROOM画面
@@ -1420,7 +1426,10 @@ privacy / 掲載面ゲートの両方を満たすには非公開が唯一の選�
   新しい第三者情報は付加していない
 - 画面上部の「おはよ!6:50まで!」は公開画面の表示として画像に残すが、NEWS本文へは転記していない
 - Xの外部画像URLはhotlinkせず、自己ホスト画像だけを参照する
-- `src/data/morningMakeupShowroomImage.ts` の1オブジェクトを Latest / NEWS の代表画像として参照する
+- `src/data/morningMakeupShowroomImage.ts` の1オブジェクトを NEWS の代表画像として参照する
+- 掲載面: HOME Latest / `/news/` / Portal Feed の代表画像。NEWS の
+  `activityIds: ["live-stream"]` により `/activities/live/` の「関連するメディア」にも
+  自動で出る（`selectActivityMedia()` の標準動作。個別のフィルタは入れていない）
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
   `src/data/highlights.ts`には追加していない
 

@@ -307,7 +307,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.equal(JSON.stringify(contest).includes("makeup"), false);
   });
 
-  it("appears once on the LIVE STREAM Activity page without NEWS-only media", () => {
+  it("appears once on the LIVE STREAM Activity page with only the b24-01 lead", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
     const radioNews = selectActivityNews("radio", news, news.length);
     const liveMedia = selectActivityMedia("live-stream");
@@ -315,7 +315,16 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 0);
     assert.equal(liveNews[0]?.id, NEWS_ID);
+    // b24-01 is the NEWS lead media, so selectActivityMedia surfaces it here the
+    // same way it surfaces every other live-stream NEWS lead (b17-01, b14-01,
+    // b13-01). No per-image filter is added; docs/MEDIA.md records this.
     assert.equal(liveMedia[0]?.src, PHOTO);
+    assert.ok(
+      ["b17-01", "b14-01", "b13-01"].every((id) =>
+        liveMedia.some((entry) => String(entry.src).includes(id)),
+      ),
+      "other NEWS leads should surface the same way",
+    );
     assert.equal(
       liveMedia.some((entry) => String(entry.src).includes("b24-02")),
       false,
@@ -348,6 +357,9 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.doesNotMatch(latest, /newsDisplayMedia/);
     assert.match(docs, /batch b24/);
     assert.match(docs, /Latestのみ/);
+    // The batch note must not read as an Activity-page restriction the code breaks.
+    assert.match(docs, /Activity ページを除外する\n\s*指定ではない/);
+    assert.match(docs, /NEWS代表画像の標準動作である/);
     const b24 = docs.split("## 素材台帳（batch b24")[1] ?? "";
     assert.doesNotMatch(b24, /確認資料のみ/);
     assert.doesNotMatch(b24, /視聴者表示は元画像のまま残し/);
