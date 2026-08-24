@@ -151,19 +151,20 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 25);
+    assert.equal(news.length, 26);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
   it("places the broadcast NEWS above the earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[1], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[2], NEWS_ID);
-    assert.equal(ordered[3], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[6], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[0], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[1], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[2], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[3], NEWS_ID);
+    assert.equal(ordered[4], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[7], "2026-08-22-night-showroom-thanks");
   });
 
   it("appears as related NEWS on the radio Activity without a copied body", () => {

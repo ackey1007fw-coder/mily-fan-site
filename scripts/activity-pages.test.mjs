@@ -36,6 +36,7 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-24-campus-girls-final-stage-guide": ["campus-girls"],
   "2026-08-24-night-thanks-morning-stream": ["live-stream", "radio"],
   "2026-08-23-seaside-circle-musical-special": ["radio"],
   "2026-08-23-morning-showroom-fanroom": ["live-stream", "radio"],

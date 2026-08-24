@@ -121,28 +121,29 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[1], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[2], "2026-08-23-seaside-circle-musical-special");
-    assert.equal(ordered[3], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[4], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[5], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[6], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[7], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[8], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[9], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[10], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[11], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[12], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[13], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[14], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[15], NEWS_ID);
-    assert.deepEqual(ordered.slice(16, 19), [
+    assert.equal(ordered[0], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[1], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[2], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[3], "2026-08-23-seaside-circle-musical-special");
+    assert.equal(ordered[4], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[5], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[6], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[7], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[8], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[9], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[10], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[11], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[12], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[13], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[14], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[15], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[16], NEWS_ID);
+    assert.deepEqual(ordered.slice(17, 20), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 25);
+    assert.equal(news.length, 26);
   });
 });
 
