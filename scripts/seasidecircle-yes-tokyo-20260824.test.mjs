@@ -114,7 +114,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.equal(item()?.id, NEWS_ID);
     assert.equal(item()?.date, "2026-08-24");
     assert.equal(item()?.sameDayOrder, 4);
-    assert.deepEqual(item()?.activityIds, ["radio", "miss-circle"]);
+    assert.deepEqual(item()?.activityIds, ["radio"]);
     assert.equal(item()?.title, "「Yes!東京」踊ってみた💃");
     assert.equal(extra.length, 0);
     assert.equal(news.length, 28);
@@ -304,19 +304,19 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — published derivatives", 
 });
 
 describe("2026-08-24 seasidecircle Yes! Tokyo dance — activity and scope", () => {
-  it("appears once on radio and miss-circle Activities", () => {
+  it("appears once on the radio Activity only", () => {
     const radioNews = selectActivityNews("radio", news, news.length);
     const missNews = selectActivityNews("miss-circle", news, news.length);
     const radioMedia = selectActivityMedia("radio");
     const missMedia = selectActivityMedia("miss-circle");
 
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 1);
-    assert.equal(missNews.filter((entry) => entry.id === NEWS_ID).length, 1);
+    assert.equal(missNews.filter((entry) => entry.id === NEWS_ID).length, 0);
     assert.equal(radioNews[0]?.id, NEWS_ID);
     assert.equal(radioMedia[0], seasideCircleYesTokyoVideo);
     assert.equal(
       missMedia.filter((entry) => entry === seasideCircleYesTokyoVideo).length,
-      1,
+      0,
     );
   });
 
