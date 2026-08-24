@@ -130,6 +130,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
     const extra = news.filter(
       (entry) =>
         entry.id !== NEWS_ID &&
+        entry.id !== "2026-08-24-seasidecircle-yes-tokyo" &&
         entry.id !== "2026-08-24-campus-girls-final-stage-guide" &&
         entry.id !== "2026-08-24-makeup-stream" &&
         (entry.id.includes("night-thanks-morning-stream") ||
@@ -147,7 +148,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
     assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
-    assert.equal(news.length, 27);
+    assert.equal(news.length, 28);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -196,11 +197,11 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
 
     assert.equal(item().media, nightThanksMorningStreamStoryVideo);
     assert.deepEqual(matches, [nightThanksMorningStreamStoryVideo]);
-    assert.equal(galleryVideos[0], nightThanksMorningStreamStoryVideo);
-    assert.equal(visible[0], nightThanksMorningStreamStoryVideo);
-    assert.equal(galleryVideos[1], seasideCircleMusicalSpecialThanksVideo);
-    assert.equal(galleryVideos.length, 11);
-    assert.equal(visible.length, 11);
+    assert.equal(galleryVideos[1], nightThanksMorningStreamStoryVideo);
+    assert.equal(visible[1], nightThanksMorningStreamStoryVideo);
+    assert.equal(galleryVideos[2], seasideCircleMusicalSpecialThanksVideo);
+    assert.equal(galleryVideos.length, 12);
+    assert.equal(visible.length, 12);
     assert.equal(nightThanksMorningStreamStoryVideo.kind, "video");
     assert.equal(nightThanksMorningStreamStoryVideo.provenance, "owner-provided");
     assert.equal(nightThanksMorningStreamStoryVideo.sourceLabel, "Instagram Story");
@@ -240,6 +241,7 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
     assert.deepEqual(
       visibleGalleryVideos().map((entry) => entry.sourceDate),
       [
+        "2026-08-24",
         "2026-08-24",
         "2026-08-23",
         "2026-08-23",
@@ -393,7 +395,8 @@ describe("2026-08-24 night thanks morning stream — activity and scope", () => 
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(liveNews[0]?.id, "2026-08-24-makeup-stream");
     assert.equal(liveNews[1]?.id, NEWS_ID);
-    assert.equal(radioNews[0]?.id, NEWS_ID);
+    assert.equal(radioNews[0]?.id, "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(radioNews[1]?.id, NEWS_ID);
     assert.equal(
       liveMedia[0]?.src,
       "/media/news/mily-b24-01-morning-makeup-showroom.jpg",
@@ -403,7 +406,7 @@ describe("2026-08-24 night thanks morning stream — activity and scope", () => 
       liveMedia.some((entry) => String(entry.src).includes("b24-02")),
       false,
     );
-    assert.equal(radioMedia[0], nightThanksMorningStreamStoryVideo);
+    assert.equal(radioMedia[1], nightThanksMorningStreamStoryVideo);
   });
 
   it("does not add 6:20-6:50 to events or the stream fallback", async () => {
@@ -509,8 +512,8 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /27件/);
-    assert.match(ops, /独立動画11本/);
+    assert.match(ops, /28件/);
+    assert.match(ops, /独立動画12本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
     assert.doesNotMatch(docs, DRIVE_SHARE_QUERY_PATTERN);
@@ -526,9 +529,10 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, X_SOURCE);
     assert.ok(entry.image?.endsWith(nightThanksMorningStreamStoryVideo.poster));
-    assert.equal(latestIds[0], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(latestIds[1], "2026-08-24-makeup-stream");
-    assert.equal(latestIds[2], NEWS_ID);
-    assert.equal(latestIds[3], "2026-08-23-dragon-cloud");
+    assert.equal(latestIds[0], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(latestIds[1], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(latestIds[2], "2026-08-24-makeup-stream");
+    assert.equal(latestIds[3], NEWS_ID);
+    assert.equal(latestIds[4], "2026-08-23-dragon-cloud");
   });
 });

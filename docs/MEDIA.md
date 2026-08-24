@@ -1464,3 +1464,98 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
 - InstagramプロフィールURLはNEWSの関連リンクとして
   `https://www.instagram.com/mily_chan36` だけを使っている
 
+
+## 素材台帳（batch b25 / 受領日・source date 2026-08-24）
+
+2026-08-24の湘南シーサイドサークル公式Instagram（@seasidecircle）
+「Yes!東京」踊ってみた動画。owner-providedの縦型動画で、Latest / NEWS
+（id `2026-08-24-seasidecircle-yes-tokyo`）と Gallery が同じ公開MP4・poster・
+manifest objectを共有する。新しい `/stories/` 記事は作っていない。
+Drive Gallery（b02）・`events.ts`・`streamSchedule.ts`・radio weekly
+schedule・`profile.ts`・`links.ts` には含めない。
+
+恒久的な公開permalinkが未確認のため、表示は非リンクの
+`湘南シーサイドサークル Instagram` label。推測URLは作らない。
+InstagramプロフィールURLは関連リンクであり、投稿permalinkの代用ではない。
+受け渡し用URL / file IDは公開情報・tracked textとして記録しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b25-01 | `gallery/mily-b25-01-seasidecircle-yes-tokyo.mp4` | ラジオスタジオで両手を挙げて踊る、みりぃの縦型動画。720×1280。owner-provided | ✅ Latest / NEWS + Gallery |
+| b25-01 poster | `gallery/mily-b25-01-seasidecircle-yes-tokyo-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- source account: 湘南シーサイドサークル @seasidecircle
+- source date: `2026-08-24` / 恒久permalink未確認
+- 元素材は `media/original/mily-b25-01-seasidecircle-yes-tokyo.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `7badb86e34988df04d96486b14f4283309f08fd4bb847197dad3ebeb196dfe27`
+- 37,468,526 bytes / H.264 **High** / **720×1280** / **30fps** /
+  855 frames / **28.500000秒** / yuv420p
+- 依頼時の参考実測（512×910 / 17,433,587 bytes /
+  sha256 `cbc76d55d6dfd5da…`）とは解像度・サイズ・ハッシュが異なる。
+  同一ファイルとは推測せず、今回使用した原本
+  `media/original/mily-b25-01-seasidecircle-yes-tokyo.mp4` を
+  ffprobe で再確認した値を記録する。公開派生もこの720×1280原本を基準にしており、
+  512×910へ合わせて再エンコード・ダウンスケールしていない
+- 音声: HE-AAC / 44.1kHz / stereo。元素材には音声ストリームがある
+- chapterなし
+- 公開派生ではmetadataを除去した。MP4内の `creation_time` は投稿日確認に使っていない
+
+### 音声の扱い — 削除した
+
+元素材には HE-AAC / 44.1kHz / stereo の音声がある。再配信権を確認できないため、
+公開派生は video-only（無音）にした。踊ってみた動画の音源権利は、番組アカウント投稿である
+ことだけでは再配信許可にならない。
+
+音声の内容・由来・種類・権利者・楽曲名は確認できていないため、推測して記録しない。
+元素材そのものから音声は削除していない。
+
+### 公開MP4
+
+- sha256: `8ebc63ccaae09efe3e7d33a7112fa31c005a25128693a932f220c0a9fd03b6ca`
+- 8,557,057 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  **30fps** / 855 frames / 28.500000秒 / yuv420p / `has_b_frames` 0 /
+  音声ストリームなし
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増し・短縮なし（`-vf scale`を使っていない）
+- `+faststart`確認済み（`moov` offset 32 < `mdat` offset 4409）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b25-01-seasidecircle-yes-tokyo.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p \
+  -movflags +faststart \
+  public/media/gallery/mily-b25-01-seasidecircle-yes-tokyo.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の0 / 4 / 8 / 12 / 16 / 20 / 24 / 27秒地点を比較。8.0秒前後は
+  両手を挙げたダンスの動きがはっきり見え、極端なブレが少ないため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 88,577 bytes / 720×1280 JPEG / sha256
+  `afeb34bb44910c71d2c39cd086218f972cc917863f3446f00a1adc625141e1e6`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/seasideCircleYesTokyoVideo.json` の1オブジェクトを
+  Latest / NEWS + Gallery で共有し、公開MP4 1本・poster 1枚だけを参照する
+- みりぃ個人のInstagram投稿として分類していない
+- InstagramプロフィールURLや投稿の推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 8.0 -i public/media/gallery/mily-b25-01-seasidecircle-yes-tokyo.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b25-01-seasidecircle-yes-tokyo-poster.jpg
+```
