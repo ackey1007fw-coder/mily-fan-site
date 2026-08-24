@@ -271,7 +271,8 @@ describe("P6 SSOT reuse and duplication", () => {
 
   it("keeps the Support Hub and Activities routes intact", () => {
     assert.match(source("src/SupportPage.tsx"), /buildSupportCalendar\(/);
-    assert.match(source("src/SupportPage.tsx"), /Support Calendar/);
+    assert.match(source("src/SupportPage.tsx"), /みりぃスケジュール/);
+    assert.match(source("src/SupportPage.tsx"), /MonthlyScheduleCalendar/);
     assert.match(source("src/ActivitiesPage.tsx"), /isActivitiesHubRoute/);
     for (const activity of activities) {
       assert.match(source("src/data/activities.ts"), new RegExp(activity.route));
