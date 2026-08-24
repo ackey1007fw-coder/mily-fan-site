@@ -126,9 +126,13 @@ Gallery向きでない素材でも、Story / NEWS向きならその掲載面で�
 - owner-providedのクリーンな元動画をgitignored領域へ無改変で保存し、H.264 / AAC / `+faststart`、metadata除去済みの公開MP4を作る。
 - posterは公開MP4の実フレーム候補を複数比較して選ぶ。AI生成・顔補正・塗り足しはしない。
 - LatestとGalleryへ同じ投稿を出す場合、公開MP4 1本とposter 1枚を共有する。用途別コピーは作らない。
-- Instagram UIを含む閲覧画面スクリーンショットは原則としてコメント確認資料に限り、
-  公開assetやGalleryへ入れない。`docs/CONTENT-OPS.md` の限定例外をすべて満たし、
-  当該画像のオーナー承認がある節目Storyだけは、記事内限定で公開できる。
+- Instagram UIを含むStory閲覧スクリーンショットはデフォルトでは非掲載とし、
+  原則として文言確認資料だけに使う。ただし、その素材と掲載面についてオーナーが
+  明示承認した場合は、Latest / NEWS / Gallery / `/stories/` 等のうち承認された面だけへ
+  自己ホストできる。`/stories/` 記事の作成やcrop / maskを一律の必須条件にせず、
+  素材ごとの承認と安全確認を台帳へ記録する。
+- 承認を別素材・別掲載面へ自動流用しない。公開permalinkがない一時Storyでは、
+  推測URLやDrive受け渡しURLを公開データへ残さない。
 - 一時的な朝投稿はLatest + Galleryの対象であり、読み物の `/stories/` へ自動的に転記しない。
 
 ## 素材台帳（batch b03 / 受領日 2026-08-17）
@@ -1375,4 +1379,88 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b23-01-night-thanks-morning-stream-story-poster.jpg
 ```
+
+## 素材台帳（batch b24 / 受領日・source date 2026-08-24）
+
+本人Xの2026-08-24朝メイク配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面と、
+同じ朝の本人Instagram Story縦長ビジュアル。b24-01をNEWSの代表画像、b24-02を同じNEWSカードの
+2枚目として自己ホストし、HOME Latestと`/news/`に掲載する。Gallery・Gallery動画・Drive Gallery・
+`/stories/`・`highlights.ts`には追加しない。
+
+b24-01はNEWSの代表画像としてHOME Latestと`/news/`に表示し、Portal Feedの代表画像にも使う。
+NEWS が `activityIds: ["live-stream"]` を持つため、他のNEWS代表画像
+（b17-01 / b14-01 / b13-01 など）と同じく `selectActivityMedia()` 経由で
+`/activities/live/` の「関連するメディア」にも自動で出る。これはこのbatch固有の例外では
+なく、NEWS代表画像の標準動作である。
+
+b24-02はStory閲覧スクリーンショットのためデフォルトは非掲載だが、オーナーが当該素材と
+HOME Latest / `/news/` の掲載面、無加工構図を明示承認した。`/stories/` 記事は必須とせず、
+この2面だけの限定承認として扱う。承認は別素材・Gallery・`/stories/`へ流用しない。
+
+一次出典（SHOWROOM画面）: https://x.com/mily_chan36/status/2091668215919444138
+Story側の恒久permalinkは確認できていない。Instagramプロフィールは出典ではなく関連リンク。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ NEWS代表画像。HOME Latest / `/news/` / Portal Feed。`activityIds` 経由で `/activities/live/` の関連メディアにも出る。Gallery・`/stories/`・highlights には追加しない |
+| b24-02 | `news/mily-b24-02-morning-makeup-instagram-story.jpg` | 本人Instagram Storyの縦長ビジュアル。「初メイク配信」の本文とSHOWROOM画面3枚。1500×2667。owner-provided | ✅ HOME Latest / `/news/` の同じNEWSカードの2枚目。当該素材・当該掲載面のオーナー承認。Gallery・`/stories/` には追加しない |
+
+### b24-01 SHOWROOM画面
+
+- provenance: `owner-provided`（オーナーが依頼時に直接提供。SNSから自動取得していない）
+- source date: `2026-08-24` / 一次出典は上記本人X投稿
+- 元素材は `media/original/mily-b24-01-morning-makeup-showroom.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **268,250 bytes / JPEG / 1500×691 / sha256
+  `fc5df1efce0007b642876855b9fb1699acad14d03115dc5b28d470410ec407a1`**
+- 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
+  JPEG再エンコードし、metadataを除去した
+- 公開ファイルの実測: **381,783 bytes / JPEG progressive / 1500×691 / 4:4:4 / sha256
+  `f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca`**
+- 公開ファイルはEXIF / IPTC / XMP / ICCなし
+- 公開用のmetadata除去以外は無改変。再エンコードはsharpのJPEG quality 95 /
+  progressive / 4:4:4のみで、**crop・mask・scale・rotate・アップスケール・縦横比変更なし**。
+  元画像の見た目と1500:691の横構図を維持した
+- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- プライバシー・第三者表示の確認: DM・非公開メッセージ・電話番号・メール・住所・
+  端末固有情報は含まれない。画面下部の視聴者アバター・表示名は、みりぃ本人がX投稿に
+  添付して公開したSHOWROOM画面の表示内容であり、オーナーの掲載指示に基づき無改変で記録する。
+  新しい第三者情報は付加していない
+- 画面上部の「おはよ!6:50まで!」は公開画面の表示として画像に残すが、NEWS本文へは転記していない
+- Xの外部画像URLはhotlinkせず、自己ホスト画像だけを参照する
+- `src/data/morningMakeupShowroomImage.ts` の1オブジェクトを NEWS の代表画像として参照する
+- 掲載面: HOME Latest / `/news/` / Portal Feed の代表画像。NEWS の
+  `activityIds: ["live-stream"]` により `/activities/live/` の「関連するメディア」にも
+  自動で出る（`selectActivityMedia()` の標準動作。個別のフィルタは入れていない）
+- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
+  `src/data/highlights.ts`には追加していない
+
+### b24-02 Instagram Story（HOME Latest / NEWS専用）
+
+- provenance: `owner-provided`（オーナーが当該画像のHOME Latest / `/news/` 掲載を明示承認。SNSから自動取得していない）
+- source date: `2026-08-24` / 恒久permalinkなし。Instagramプロフィールは出典ではない
+- 元素材は `media/original/mily-b24-02-morning-makeup-instagram-story.jpg`
+  （gitignore済み・受領バイトを変えず保管・コミットしない）
+- 元素材の実測: **545,168 bytes / JPEG / 1500×2667 / sha256
+  `81666f343b37dae7696079c0b278496411c1943114a2c81da2d459261161d5fa`**
+- 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
+  JPEG再エンコードし、metadataを除去した
+- 公開ファイルの実測: **757,164 bytes / JPEG progressive / 1500×2667 / 4:4:4 / sha256
+  `9951d602cc4028c252fea7c26339481618cfdddeb35c469a050918001d78d4c7`**
+- 公開ファイルはEXIF / IPTC / XMP / ICCなし
+- 公開用のmetadata除去以外は無改変。再エンコードはsharpのJPEG quality 95 /
+  progressive / 4:4:4のみで、**crop・mask・scale・rotate・アップスケール・縦横比変更なし**。
+  元画像の見た目と1500:2667の縦構図を維持した
+- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- Story内に埋め込まれたSHOWROOM画面の視聴者アバター・表示名・コメントは元構図のまま残る。
+  オーナーが当該素材を無加工でHOME Latest / `/news/`へ掲載することを明示承認しており、
+  本文・caption・altへ第三者情報を転記せず、新しい第三者情報も付加しない
+- 画面内の時刻表示は画像の表示として残すが、NEWS本文へは転記していない
+- `src/data/morningMakeupInstagramStoryImage.ts` をNEWSの `additionalMedia` から参照し、
+  b24-01の後に同じカードの2枚目として表示する
+- `sourceUrl` は持たない。推測したStory URLやDrive受け渡しURLを公開データへ残さない
+- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
+  `src/data/highlights.ts`には追加していない
+- InstagramプロフィールURLはNEWSの関連リンクとして
+  `https://www.instagram.com/mily_chan36` だけを使っている
 

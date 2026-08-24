@@ -345,6 +345,34 @@ describe("content verification invariants", () => {
       { ...validNews, id: "bad-kind", media: { ...photo, kind: "gif" } },
     ]);
     assert.ok(badKind.some((error) => error.includes("unsupported media kind")));
+
+    assert.deepEqual(
+      verifyNews([
+        {
+          ...validNews,
+          id: "news-additional",
+          media: photo,
+          additionalMedia: [
+            { ...photo, src: "/media/news/mily-b06-01-recovery-morning.jpg" },
+          ],
+        },
+      ]),
+      [],
+    );
+    const remoteExtra = verifyNews([
+      {
+        ...validNews,
+        id: "remote-additional",
+        media: photo,
+        additionalMedia: [{ ...photo, src: "https://pbs.twimg.com/media/example.jpg" }],
+      },
+    ]);
+    assert.ok(remoteExtra.some((error) => error.includes("additionalMedia[0]")));
+    assert.ok(
+      verifyNews([
+        { ...validNews, id: "extra-without-lead", additionalMedia: [photo] },
+      ]).some((error) => error.includes("additionalMedia needs a lead media")),
+    );
   });
 
   it("accepts a local STORIES path as a news related link", () => {
