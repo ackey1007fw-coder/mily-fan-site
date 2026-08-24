@@ -1,6 +1,7 @@
 /**
  * 2026-08-24 朝の本人Instagram Story。オーナーが当該画像のNEWS掲載面を明示承認。
  * HOME Latest / /news/ 専用。Gallery と /stories/ には展開しない。
+ * 公開用metadata除去以外はcrop・mask・scaleなしで元画像の見た目を維持。
  * 恒久permalinkはないため sourceUrl は持たない。
  */
 export const morningMakeupInstagramStoryImage = {

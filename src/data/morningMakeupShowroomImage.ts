@@ -3,6 +3,7 @@
  * NEWS の代表画像（lead media）として Latest / /news/ / Portal Feed に出る。
  * NEWS が live-stream に関連付いているため、他のNEWS代表画像と同じく
  * /activities/live/ の「関連するメディア」にも自動で出る（selectActivityMedia）。
+ * 公開用metadata除去以外はcrop・mask・scaleなしで元画像の見た目を維持。
  * Gallery・galleryVideos・/stories/・highlights には追加しない。
  */
 export const morningMakeupShowroomImage = {

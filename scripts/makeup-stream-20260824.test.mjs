@@ -271,7 +271,8 @@ describe("2026-08-24 first makeup stream — owner-approved Story still", () => 
     const entry = item();
 
     assert.match(ops, /デフォルトでは非掲載/);
-    assert.match(ops, /オーナーが掲載面を明示承認/);
+    assert.match(ops, /その素材と掲載面についてオーナーが明示承認/);
+    assert.match(ops, /Latest \/ NEWS \/ Gallery \/ `\/stories\/` 等/);
     assert.match(ops, /`\/stories\/` 記事の作成を必須条件にしない/);
     assert.match(ops, /承認を別素材・別掲載面へ自動流用しない/);
     assert.doesNotMatch(ops, /`\/stories\/` の当該記事内だけへ自己ホスト/);
@@ -366,16 +367,19 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);
     assert.match(latest, /newsDisplayMedia\(item\)/);
     assert.match(docs, /batch b24/);
-    assert.match(docs, /Latestのみ/);
-    // The batch note must not read as an Activity-page restriction the code breaks.
-    assert.match(docs, /Activity ページを除外する\r?\n\s*指定ではない/);
+    assert.match(docs, /その素材と掲載面についてオーナーが\r?\n\s*明示承認/);
+    assert.match(docs, /Latest \/ NEWS \/ Gallery \/ `\/stories\/` 等/);
     assert.match(docs, /NEWS代表画像の標準動作である/);
     const b24 = docs.split("## 素材台帳（batch b24")[1] ?? "";
     assert.doesNotMatch(b24, /確認資料のみ/);
     assert.doesNotMatch(b24, /視聴者表示は元画像のまま残し/);
     assert.match(b24, /b24-02/);
     assert.match(b24, /NEWSカードの2枚目/);
-    assert.match(b24, /crop・scale・rotate・アップスケール・縦横比変更なし/);
+    assert.doesNotMatch(b24, /Latestのみ/);
+    assert.match(b24, /HOME Latest \/ `\/news\/` \/ Portal Feed/);
+    assert.match(b24, /`\/activities\/live\/` の「関連するメディア」/);
+    assert.match(b24, /公開用のmetadata除去以外は無改変/);
+    assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
     assert.match(ops, /27件/);
     assert.match(ops, /初メイク配信/);

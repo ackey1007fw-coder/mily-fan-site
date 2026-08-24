@@ -127,9 +127,10 @@ Gallery向きでない素材でも、Story / NEWS向きならその掲載面で�
 - posterは公開MP4の実フレーム候補を複数比較して選ぶ。AI生成・顔補正・塗り足しはしない。
 - LatestとGalleryへ同じ投稿を出す場合、公開MP4 1本とposter 1枚を共有する。用途別コピーは作らない。
 - Instagram UIを含むStory閲覧スクリーンショットはデフォルトでは非掲載とし、
-  原則として文言確認資料だけに使う。ただし、当該素材についてオーナーが掲載面を
-  明示承認した場合は、その承認された面だけへ自己ホストできる。`/stories/` 記事の
-  作成やcrop / maskを一律の必須条件にせず、素材ごとの承認と安全確認を台帳へ記録する。
+  原則として文言確認資料だけに使う。ただし、その素材と掲載面についてオーナーが
+  明示承認した場合は、Latest / NEWS / Gallery / `/stories/` 等のうち承認された面だけへ
+  自己ホストできる。`/stories/` 記事の作成やcrop / maskを一律の必須条件にせず、
+  素材ごとの承認と安全確認を台帳へ記録する。
 - 承認を別素材・別掲載面へ自動流用しない。公開permalinkがない一時Storyでは、
   推測URLやDrive受け渡しURLを公開データへ残さない。
 - 一時的な朝投稿はLatest + Galleryの対象であり、読み物の `/stories/` へ自動的に転記しない。
@@ -1386,14 +1387,14 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
 2枚目として自己ホストし、HOME Latestと`/news/`に掲載する。Gallery・Gallery動画・Drive Gallery・
 `/stories/`・`highlights.ts`には追加しない。
 
-ここでの「Latestのみ」は Gallery 系へ追加しないという意味で、Activity ページを除外する
-指定ではない。NEWS が `activityIds: ["live-stream"]` を持つため、他のNEWS代表画像
+b24-01はNEWSの代表画像としてHOME Latestと`/news/`に表示し、Portal Feedの代表画像にも使う。
+NEWS が `activityIds: ["live-stream"]` を持つため、他のNEWS代表画像
 （b17-01 / b14-01 / b13-01 など）と同じく `selectActivityMedia()` 経由で
 `/activities/live/` の「関連するメディア」にも自動で出る。これはこのbatch固有の例外では
 なく、NEWS代表画像の標準動作である。
 
-b24-02はStory閲覧スクリーンショットのためデフォルトは非掲載だが、オーナーが当該素材の
-HOME Latest / `/news/` 掲載と無加工構図を明示承認した。`/stories/` 記事は必須とせず、
+b24-02はStory閲覧スクリーンショットのためデフォルトは非掲載だが、オーナーが当該素材と
+HOME Latest / `/news/` の掲載面、無加工構図を明示承認した。`/stories/` 記事は必須とせず、
 この2面だけの限定承認として扱う。承認は別素材・Gallery・`/stories/`へ流用しない。
 
 一次出典（SHOWROOM画面）: https://x.com/mily_chan36/status/2091668215919444138
@@ -1401,7 +1402,7 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ NEWS代表画像。Latestのみ（Gallery・`/stories/`・highlights には追加しない）。Portal Feedの代表画像。`activityIds` 経由で `/activities/live/` の関連メディアにも出る |
+| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ NEWS代表画像。HOME Latest / `/news/` / Portal Feed。`activityIds` 経由で `/activities/live/` の関連メディアにも出る。Gallery・`/stories/`・highlights には追加しない |
 | b24-02 | `news/mily-b24-02-morning-makeup-instagram-story.jpg` | 本人Instagram Storyの縦長ビジュアル。「初メイク配信」の本文とSHOWROOM画面3枚。1500×2667。owner-provided | ✅ HOME Latest / `/news/` の同じNEWSカードの2枚目。当該素材・当該掲載面のオーナー承認。Gallery・`/stories/` には追加しない |
 
 ### b24-01 SHOWROOM画面
@@ -1417,8 +1418,9 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
 - 公開ファイルの実測: **381,783 bytes / JPEG progressive / 1500×691 / 4:4:4 / sha256
   `f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca`**
 - 公開ファイルはEXIF / IPTC / XMP / ICCなし
-- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。
-  **crop・scale・rotate・アップスケール・縦横比変更なし**。1500:691の横構図を維持した
+- 公開用のmetadata除去以外は無改変。再エンコードはsharpのJPEG quality 95 /
+  progressive / 4:4:4のみで、**crop・mask・scale・rotate・アップスケール・縦横比変更なし**。
+  元画像の見た目と1500:691の横構図を維持した
 - AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
 - プライバシー・第三者表示の確認: DM・非公開メッセージ・電話番号・メール・住所・
   端末固有情報は含まれない。画面下部の視聴者アバター・表示名は、みりぃ本人がX投稿に
@@ -1446,8 +1448,9 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
 - 公開ファイルの実測: **757,164 bytes / JPEG progressive / 1500×2667 / 4:4:4 / sha256
   `9951d602cc4028c252fea7c26339481618cfdddeb35c469a050918001d78d4c7`**
 - 公開ファイルはEXIF / IPTC / XMP / ICCなし
-- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。
-  **crop・scale・rotate・アップスケール・縦横比変更なし**。1500:2667の縦構図を維持した
+- 公開用のmetadata除去以外は無改変。再エンコードはsharpのJPEG quality 95 /
+  progressive / 4:4:4のみで、**crop・mask・scale・rotate・アップスケール・縦横比変更なし**。
+  元画像の見た目と1500:2667の縦構図を維持した
 - AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
 - Story内に埋め込まれたSHOWROOM画面の視聴者アバター・表示名・コメントは元構図のまま残る。
   オーナーが当該素材を無加工でHOME Latest / `/news/`へ掲載することを明示承認しており、
