@@ -360,7 +360,8 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 16), [
+    assert.deepEqual(ordered.slice(0, 17), [
+      "2026-08-24-campus-girls-final-stage-guide",
       "2026-08-24-night-thanks-morning-stream",
       "2026-08-23-dragon-cloud",
       "2026-08-23-seaside-circle-musical-special",
@@ -378,7 +379,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 25);
+    assert.equal(news.length, 26);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

@@ -68,6 +68,16 @@ export type NewsItem = {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-24-campus-girls-final-stage-guide",
+    date: "2026-08-24",
+    sameDayOrder: 2,
+    activityIds: ["campus-girls"],
+    title: "CAMPUS GIRLS 2027 予選A Final STAGEへ📣✨",
+    body: "8月24日、みりぃがCAMPUS GIRLS 2027 予選A Final STAGEの応援方法を案内しました。SNS審査は8月24日12:00〜8月30日12:00、Paton投票審査は8月26日18:00〜9月1日23:59。投票先の詳細は追って案内するとしています。また、CAMPUS GIRLSでは配信を行わないことも伝えています。画像ではFinal STAGE期間を8月24日12:00〜8月30日23:59と案内しています。",
+    source: "https://x.com/mily_chan36/status/2091669951946121636",
+    sourceLabel: "Xの投稿を見る",
+  },
+  {
     id: "2026-08-24-night-thanks-morning-stream",
     date: "2026-08-24",
     sameDayOrder: 1,
