@@ -292,11 +292,16 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
   });
 
   it("does not change the existing Portal Feed behaviour", () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-20T12:00:00+09:00") });
+    const scopedNews = news.filter((entry) => entry.date <= "2026-08-20");
+    const feed = createPortalFeed({
+      now: new Date("2026-08-20T12:00:00+09:00"),
+      newsItems: scopedNews,
+      storyItems: [],
+    });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
     // Portal Feed は news / stories / events だけを見る。Gallery 追加で image は変わらない。
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, scopedNews);
     assert.ok(entry.image?.endsWith(LATEST_PHOTO));
     assert.equal(entry.sourceUrl, SOURCE);
     assert.equal(feed.items.some((candidate) => candidate.image?.includes("/media/gallery/mily-b08")), false);

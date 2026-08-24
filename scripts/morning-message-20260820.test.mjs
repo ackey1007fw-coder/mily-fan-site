@@ -244,10 +244,15 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
 
 describe("2026-08-20 morning X post — Portal Feed", () => {
   it("flows through the existing Portal Feed logic with the self-hosted photo", () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-20T12:00:00+09:00") });
+    const scopedNews = news.filter((entry) => entry.date <= "2026-08-20");
+    const feed = createPortalFeed({
+      now: new Date("2026-08-20T12:00:00+09:00"),
+      newsItems: scopedNews,
+      storyItems: [],
+    });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, scopedNews);
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-20T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);

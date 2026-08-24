@@ -130,6 +130,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
     const extra = news.filter(
       (entry) =>
         entry.id !== NEWS_ID &&
+        entry.id !== "2026-08-24-campus-girls-final-stage-guide" &&
         (entry.id.includes("night-thanks-morning-stream") ||
           entry.id.includes("2026-08-24")),
     );
@@ -141,6 +142,9 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
     assert.deepEqual(item()?.activityIds, ["live-stream", "radio"]);
     assert.equal(item()?.title, "夜枠＆ラジオありがとう！朝は6:20〜☀️");
     assert.equal(extra.length, 0);
+    assert.ok(
+      news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
+    );
     assert.equal(news.length, 26);
     assert.deepEqual(verifyNews([item()]), []);
   });
