@@ -8,7 +8,8 @@
  * - sourceLabel: optional label. Without source, it renders as non-link text.
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - media: optional self-hosted still or video for the card
- * - additionalMedia: optional extra stills/videos on the same card. Lead stays `media`.
+ * - additionalMedia: optional extra stills/videos on the same NEWS card. Lead stays `media`.
+ *   HOME Latest / /news/ only. Activity related-media uses the lead `media`.
  * - ctaLabel: optional. href is url ?? source
  */
 import type { ActivityId } from "./activities.ts";
@@ -67,7 +68,7 @@ export type NewsItem = {
   url?: string;
   ctaLabel?: string;
   media?: NewsMedia;
-  /** Extra stills/videos on the same NEWS card. Lead image stays `media`. */
+  /** Extra stills/videos on the same NEWS card. Lead stays `media`. NEWS surfaces only. */
   additionalMedia?: NewsMedia[];
   message?: NewsMessage;
 };

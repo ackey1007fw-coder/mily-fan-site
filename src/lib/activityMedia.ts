@@ -5,7 +5,6 @@ import {
 } from "../data/activities.ts";
 import {
   news,
-  newsDisplayMedia,
   sortNewsByDateDesc,
   type NewsItem,
   type NewsMedia,
@@ -42,7 +41,8 @@ function canonicalGalleryItem(
 }
 
 /**
- * Selects explicitly related NEWS media plus media from related STORY slugs.
+ * Selects explicitly related NEWS lead media plus media from related STORY slugs.
+ * NEWS `additionalMedia` stays on HOME Latest / /news/ cards.
  * Story view objects that point at a Gallery manifest are resolved back to that
  * existing manifest object. Results are then deduplicated by manifest id.
  */
@@ -59,7 +59,7 @@ export function selectActivityMedia(
 
   const relatedNewsMedia = sortNewsByDateDesc(newsItems)
     .filter((item) => item.activityIds?.includes(activityId))
-    .flatMap((item) => newsDisplayMedia(item));
+    .flatMap((item) => (item.media ? [item.media] : []));
 
   const relatedStoryMedia = activity.relatedStorySlugs.flatMap((slug) => {
     const story = storyItems.find((item) => item.slug === slug && item.published);

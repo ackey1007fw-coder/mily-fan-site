@@ -398,11 +398,11 @@ describe("2026-08-24 night thanks morning stream — activity and scope", () => 
       liveMedia[0]?.src,
       "/media/news/mily-b24-01-morning-makeup-showroom.jpg",
     );
+    assert.equal(liveMedia[1], nightThanksMorningStreamStoryVideo);
     assert.equal(
-      liveMedia[1]?.src,
-      "/media/news/mily-b24-02-morning-makeup-instagram-story.jpg",
+      liveMedia.some((entry) => String(entry.src).includes("b24-02")),
+      false,
     );
-    assert.equal(liveMedia[2], nightThanksMorningStreamStoryVideo);
     assert.equal(radioMedia[0], nightThanksMorningStreamStoryVideo);
   });
 

@@ -1379,12 +1379,15 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
 ## 素材台帳（batch b24 / 受領日・source date 2026-08-24）
 
 本人Xの2026-08-24朝メイク配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面と、
-同じ朝の本人Instagram Story縦長ビジュアル。どちらも Latest / NEWS 専用の自己ホスト画像として扱い、
-Gallery・Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。
+同じ朝の本人Instagram Story本文の privacy-safe crop。どちらも Latest / NEWS 専用の自己ホスト画像として扱い、
+Gallery・Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。b24-02 は
+Activity の関連メディア（`/activities/live/`）にも出さない。
 
 b24-02 は一時的な朝Storyだが、**当該画像について**オーナーがNEWS掲載を明示承認したため、
 一般のStory閲覧スクリーンショット規則は変えず、この1枚だけ NEWS 専用の公開画像とする。
-新しい `/stories/` 記事は作らない。InstagramプロフィールURLを出典として代用しない。
+公開派生は本文領域の決定的な非AI cropに限り、埋め込みSHOWROOM画面の視聴者名・アバター・
+コメントと Instagram 操作UIは含めない。新しい `/stories/` 記事は作らない。
+InstagramプロフィールURLを出典として代用しない。
 
 一次出典（SHOWROOM画面）: https://x.com/mily_chan36/status/2091668215919444138
 Story側の恒久permalinkは確認できていない。
@@ -1392,7 +1395,7 @@ Story側の恒久permalinkは確認できていない。
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
 | b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ Latestのみ / Gallery・`/stories/` には追加しない。Portal Feedの代表画像 |
-| b24-02 | `news/mily-b24-02-morning-makeup-instagram-story.jpg` | 本人Instagram Storyの縦長ビジュアル。「初メイク配信」の本文とSHOWROOM画面3枚。1500×2667。owner-provided | ✅ Latest / NEWS 専用。当該画像のオーナー掲載承認。Gallery・`/stories/` には追加しない |
+| b24-02 | `news/mily-b24-02-morning-makeup-instagram-story-text.jpg` | 本人Instagram Story本文のprivacy-safe crop。1500×1450。owner-provided | ✅ Latest / NEWS 専用。当該画像のオーナー掲載承認。SHOWROOM視聴者表示・Instagram UIは除外。Gallery・`/stories/`・`/activities/live/` には追加しない |
 
 ### b24-01 SHOWROOM画面
 
@@ -1420,7 +1423,7 @@ Story側の恒久permalinkは確認できていない。
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
   `src/data/highlights.ts`には追加していない
 
-### b24-02 Instagram Story（NEWS専用）
+### b24-02 Instagram Story（NEWS専用・privacy-safe crop）
 
 - provenance: `owner-provided`（オーナーが当該画像のNEWS掲載を明示承認。SNSから自動取得していない）
 - source date: `2026-08-24` / 恒久permalinkなし。Instagramプロフィールは出典ではない
@@ -1430,21 +1433,34 @@ Story側の恒久permalinkは確認できていない。
 - 元素材の実測: **545,168 bytes / JPEG / 1500×2667 / sha256
   `81666f343b37dae7696079c0b278496411c1943114a2c81da2d459261161d5fa`**
 - 元素材にはEXIF（138 bytes）とIPTC（54 bytes）が存在。公開前にsharpで
-  JPEG再エンコードし、metadataを除去した
-- 公開ファイルの実測: **757,164 bytes / JPEG progressive / 1500×2667 / 4:4:4 / sha256
-  `9951d602cc4028c252fea7c26339481618cfdddeb35c469a050918001d78d4c7`**
+  決定的cropとJPEG再エンコードし、metadataを除去した
+- 公開ファイルは `news/mily-b24-02-morning-makeup-instagram-story-text.jpg`
+- 公開ファイルの実測: **481,232 bytes / JPEG progressive / 1500×1450 / 4:4:4 / sha256
+  `a43d661e28fcb8daf276fe280138ded0c13a04a6ab24684b739b053b06b55a68`**
 - 公開ファイルはEXIF / IPTC / XMP / ICCなし
-- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。
-  **crop・scale・rotate・アップスケール・縦横比変更なし**。1500:2667の縦構図を維持した
-- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- crop: `left: 0 / top: 220 / width: 1500 / height: 1450`。
+  初メイク配信の本文と「おはよ!6:50まで!」の本人配信オーバーレイだけが残ることを目視確認
+- cropに残さないもの: Instagram操作UI（時刻・ユーザー名・閉じるボタン・返信欄）、
+  下部に埋め込まれたSHOWROOM画面3枚、視聴者アバター・表示名・コメント・視聴者数
+- 無改変の全画面派生 `mily-b24-02-morning-makeup-instagram-story.jpg` は `public/` に置かない
+- 再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4。
+  **scale・rotate・アップスケールなし**。AI生成・AI補正・顔加工・人物削除・
+  generative fill・outpaintingなし
 - プライバシー: DM・非公開メッセージ・電話番号・メール・住所・端末固有情報は含まれない。
-  Instagram操作UIを切り出したものではなく、Story本体の縦長ビジュアル。
-  埋め込まれたSHOWROOM画面の視聴者表示は元画像のまま残し、本文・altへ転記しない
+  第三者の視聴者名・アバター・コメントは公開派生へ持ち込まない
 - 画面内の時刻表示は画像の表示として残すが、NEWS本文へは転記していない
 - `src/data/morningMakeupInstagramStoryImage.ts` を NEWS の `additionalMedia` から参照する
 - `sourceUrl` は持たない（恒久permalinkなし。プロフィールURLを出典にしない）
 - `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
-  `src/data/highlights.ts`には追加していない
+  `src/data/highlights.ts`には追加していない。Activity 関連メディアにも出さない
 - InstagramプロフィールURLはNEWSの関連リンクとして
   `https://www.instagram.com/mily_chan36` だけを使っている
+
+cropコマンド相当（再現用）:
+
+```
+sharp(source)
+  .extract({ left: 0, top: 220, width: 1500, height: 1450 })
+  .jpeg({ quality: 95, progressive: true, chromaSubsampling: "4:4:4" })
+```
 

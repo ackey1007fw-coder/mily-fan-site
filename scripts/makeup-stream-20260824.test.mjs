@@ -25,6 +25,7 @@ import {
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityMedia } from "../src/lib/activityMedia.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const run = promisify(execFile);
@@ -35,8 +36,12 @@ const X_SOURCE = "https://x.com/mily_chan36/status/2091668215919444138";
 const INSTAGRAM_PROFILE = "https://www.instagram.com/mily_chan36";
 const PHOTO = "/media/news/mily-b24-01-morning-makeup-showroom.jpg";
 const PHOTO_FILE = path.join(root, "public", PHOTO.slice(1));
-const STORY_PHOTO = "/media/news/mily-b24-02-morning-makeup-instagram-story.jpg";
+const STORY_PHOTO = "/media/news/mily-b24-02-morning-makeup-instagram-story-text.jpg";
 const STORY_PHOTO_FILE = path.join(root, "public", STORY_PHOTO.slice(1));
+const STORY_UNREDACTED_PUBLIC = path.join(
+  root,
+  "public/media/news/mily-b24-02-morning-makeup-instagram-story.jpg",
+);
 const ORIGINAL = path.join(
   root,
   "media/original/mily-b24-01-morning-makeup-showroom.jpg",
@@ -52,9 +57,10 @@ const STORY_ORIGINAL_SHA256 =
 const PUBLIC_SIZE = 381_783;
 const PUBLIC_SHA256 =
   "f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca";
-const STORY_PUBLIC_SIZE = 757_164;
+const STORY_PUBLIC_SIZE = 481_232;
 const STORY_PUBLIC_SHA256 =
-  "9951d602cc4028c252fea7c26339481618cfdddeb35c469a050918001d78d4c7";
+  "a43d661e28fcb8daf276fe280138ded0c13a04a6ab24684b739b053b06b55a68";
+const STORY_CROP = { left: 0, top: 220, width: 1500, height: 1450 };
 const MESSAGE = [
   "おはよう！朝配信ありがとう🥹✊🏻✨",
   "ついにメイク配信してしまったｾﾞ🤦🏻‍♀️",
@@ -219,7 +225,7 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
     assert.equal(morningMakeupInstagramStoryImage.kind, "image");
     assert.equal(morningMakeupInstagramStoryImage.src, STORY_PHOTO);
     assert.equal(morningMakeupInstagramStoryImage.width, 1500);
-    assert.equal(morningMakeupInstagramStoryImage.height, 2667);
+    assert.equal(morningMakeupInstagramStoryImage.height, 1450);
     assert.equal(
       morningMakeupInstagramStoryImage.alt,
       "初メイク配信について理由と朝配信への感謝を伝える三橋莉子さんのInstagram Story",
@@ -232,7 +238,7 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
 
     const metadata = await sharp(STORY_PHOTO_FILE).metadata();
     assert.equal(metadata.width, 1500);
-    assert.equal(metadata.height, 2667);
+    assert.equal(metadata.height, 1450);
     assert.equal(metadata.exif, undefined);
     assert.equal(metadata.iptc, undefined);
     assert.equal(metadata.xmp, undefined);
@@ -257,6 +263,31 @@ describe("2026-08-24 first makeup stream — NEWS-only Instagram Story still", (
     if (existsSync(STORY_ORIGINAL)) {
       assert.equal(await sha256(STORY_ORIGINAL), STORY_ORIGINAL_SHA256);
     }
+  });
+
+  it("publishes a privacy-safe text crop and withholds the unredacted still", async () => {
+    assert.equal(existsSync(STORY_UNREDACTED_PUBLIC), false);
+    const { stdout: trackedUnredacted } = await run(
+      "git",
+      ["ls-files", "--", "public/media/news/mily-b24-02-morning-makeup-instagram-story.jpg"],
+      { cwd: root },
+    );
+    assert.equal(trackedUnredacted.trim(), "");
+
+    if (!existsSync(STORY_ORIGINAL)) return;
+
+    const source = await readFile(STORY_ORIGINAL);
+    const published = await readFile(STORY_PHOTO_FILE);
+    const expected = await sharp(source)
+      .extract(STORY_CROP)
+      .jpeg({ quality: 95, progressive: true, chromaSubsampling: "4:4:4" })
+      .toBuffer();
+
+    assert.equal(await sha256(STORY_ORIGINAL), STORY_ORIGINAL_SHA256);
+    assert.deepEqual(published, expected);
+    const sourceMeta = await sharp(source).metadata();
+    assert.equal(sourceMeta.width, 1500);
+    assert.equal(sourceMeta.height, 2667);
   });
 });
 
@@ -295,13 +326,19 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.equal(JSON.stringify(contest).includes("makeup"), false);
   });
 
-  it("appears once on the LIVE STREAM Activity page", () => {
+  it("appears once on the LIVE STREAM Activity page without NEWS-only media", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
     const radioNews = selectActivityNews("radio", news, news.length);
+    const liveMedia = selectActivityMedia("live-stream");
 
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 0);
     assert.equal(liveNews[0]?.id, NEWS_ID);
+    assert.equal(liveMedia[0]?.src, PHOTO);
+    assert.equal(
+      liveMedia.some((entry) => String(entry.src).includes("b24-02")),
+      false,
+    );
   });
 
   it("keeps Portal Feed on the SHOWROOM lead image", () => {
@@ -319,8 +356,9 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     );
   });
 
-  it("renders both stills uncropped in Latest and documents NEWS-only publication", async () => {
+  it("renders both stills with object-contain and documents NEWS-only publication", async () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
+    const activityMedia = await readFile(path.join(root, "src/lib/activityMedia.ts"), "utf8");
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
 
@@ -328,15 +366,19 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(latest, /h-auto w-full max-w-sm/);
     assert.match(latest, /object-contain/);
     assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);
+    assert.doesNotMatch(activityMedia, /newsDisplayMedia/);
     assert.match(docs, /batch b24/);
     assert.match(docs, /Latestのみ/);
     assert.match(docs, /NEWS専用/);
     assert.match(docs, /当該画像のオーナー掲載承認/);
+    assert.match(docs, /privacy-safe crop/);
     const b24 = docs.split("## 素材台帳（batch b24")[1] ?? "";
     assert.doesNotMatch(b24, /確認資料のみ/);
+    assert.doesNotMatch(b24, /視聴者表示は元画像のまま残し/);
+    assert.match(b24, /left: 0 \/ top: 220 \/ width: 1500 \/ height: 1450/);
     assert.match(ops, /27件/);
     assert.match(ops, /初メイク配信/);
-    assert.match(ops, /SHOWROOM横長画面と本人Instagram Story縦長画像をLatestのみに掲載/);
+    assert.match(ops, /SHOWROOM横長画面と本人Instagram Story本文のprivacy-safe cropをLatestのみに掲載/);
     assert.match(ops, /`\/stories\/` には公開していない|新しい \/stories\/ 記事は作っていない/);
     assert.doesNotMatch(docs, /16:50/);
     assert.doesNotMatch(ops, /16:50/);
