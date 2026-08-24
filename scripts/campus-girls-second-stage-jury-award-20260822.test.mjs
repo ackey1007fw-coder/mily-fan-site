@@ -258,15 +258,15 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     }
 
     for (const phrase of [
-      "当該画像について",
-      "オーナーが掲載を明示承認",
-      "DM・非公開情報・通知・第三者コメント・端末情報を含まず",
-      "節目Story",
-      "Latest / Galleryへ自動展開しない",
-      "素材ごとに確認する",
+      "デフォルトでは非掲載",
+      "当該素材についてオーナーが掲載面を明示承認",
+      "`/stories/` 記事の作成を必須条件にしない",
+      "承認を別素材・別掲載面へ自動流用しない",
+      "掲載面の承認範囲",
     ]) {
       assert.match(contentOps, new RegExp(phrase.replace("/", "\\/")), phrase);
     }
+    assert.doesNotMatch(contentOps, /`\/stories\/` の当該記事内だけへ自己ホスト/);
     assert.match(mediaGuide, /当該Story記事のみ \/ Latest・Gallery禁止/);
     assert.match(mediaGuide, /crop・scale・rotate・アップスケール・縦横比変更・内容削除なし/);
   });

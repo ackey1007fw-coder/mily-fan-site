@@ -156,26 +156,42 @@ export function verifyNews(items) {
     if (item.message && !item.message.text?.trim()) {
       errors.push(`news "${item.id ?? "?"}" message needs text`);
     }
-    if (item.media) {
+    const mediaSlots = [
+      ...(item.media ? [{ media: item.media, slot: "media" }] : []),
+      ...(Array.isArray(item.additionalMedia)
+        ? item.additionalMedia.map((media, index) => ({
+            media,
+            slot: `additionalMedia[${index}]`,
+          }))
+        : []),
+    ];
+    if (item.additionalMedia && !Array.isArray(item.additionalMedia)) {
+      errors.push(`news "${item.id ?? "?"}" additionalMedia must be an array`);
+    }
+    if ((item.additionalMedia?.length ?? 0) > 0 && !item.media) {
+      errors.push(`news "${item.id ?? "?"}" additionalMedia needs a lead media`);
+    }
+    for (const { media, slot } of mediaSlots) {
       const mediaKeys =
-        item.media.kind === "video"
+        media?.kind === "video"
           ? ["src", "poster"]
-          : item.media.kind === "image"
+          : media?.kind === "image"
             ? ["src"]
             : null;
       if (!mediaKeys) {
-        errors.push(`news "${item.id ?? "?"}" has an unsupported media kind`);
+        errors.push(`news "${item.id ?? "?"}" has an unsupported ${slot} kind`);
+        continue;
       }
-      for (const key of mediaKeys ?? ["src"]) {
-        if (!item.media[key]?.startsWith("/media/")) {
-          errors.push(`news "${item.id ?? "?"}" media ${key} must be a local /media/ path`);
+      for (const key of mediaKeys) {
+        if (!media[key]?.startsWith("/media/")) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} ${key} must be a local /media/ path`);
         }
       }
-      if (!item.media.alt?.trim()) {
-        errors.push(`news "${item.id ?? "?"}" media needs alt text`);
+      if (!media.alt?.trim()) {
+        errors.push(`news "${item.id ?? "?"}" ${slot} needs alt text`);
       }
-      if (!Number.isInteger(item.media.width) || !Number.isInteger(item.media.height)) {
-        errors.push(`news "${item.id ?? "?"}" media needs intrinsic width/height`);
+      if (!Number.isInteger(media.width) || !Number.isInteger(media.height)) {
+        errors.push(`news "${item.id ?? "?"}" ${slot} needs intrinsic width/height`);
       }
     }
     assertNoPersonMixup(item, "news", errors);

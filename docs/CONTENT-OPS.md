@@ -13,7 +13,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 27件。8月24日のCAMPUS GIRLS 2027 予選A Final STAGE案内（本人X。投票先URLは未公開のため未掲載。テキストNEWS＋出典リンクのみ）、8月24日朝の初メイク配信（同じNEWSに本人X投稿とInstagram Storyの内容を統合。画像はSHOWROOM横長画面b24-01の1枚のみをLatestに掲載。b24-02のStory閲覧画像は非公開 — Story閲覧スクリーンショットの限定例外は`/stories/`記事内限定でLatestを除外しているため、このNEWSでは掲載しない。Gallery / `/stories/` にも公開していない。恒久permalinkのないStory URLは作っていない）、8月24日未明の夜枠・ラジオお礼と朝配信案内（同じNEWSにSHOWROOMファンルーム本文、Instagram Story動画、本人X投稿を統合。Fan Roomスクリーンショットは非公開）、8月23日の本人Instagram「龍みたいな雲」投稿、8月23日の湘南シーサイドサークル「真夏のミュージカル特集」放送記録（同じNEWSに放送後お礼の番組Instagram Story動画、STORY記事CTA、FM湘南マジックウェイブの放送後X投稿を同居。新しいNEWSは作っていない）、8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。番組Instagram Storyと生放送アーカイブ文字起こしは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。8/23ラジオNEWSの外部sourceは局公式の放送後X投稿。8/24朝メイクNEWS・8/24未明NEWS・Final STAGE案内NEWSの外部sourceは本人X投稿 | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
+| `news.ts` | 27件。8月24日のCAMPUS GIRLS 2027 予選A Final STAGE案内（本人X。投票先URLは未公開のため未掲載。テキストNEWS＋出典リンクのみ）、8月24日朝の初メイク配信（同じNEWSに本人X投稿とInstagram Storyの内容を統合。b24-01 SHOWROOM横長画面を代表画像、オーナーが当該掲載面を明示承認した無加工b24-02 Story画像をHOME Latestと`/news/`の同じカードの2枚目に掲載。Gallery / `/stories/` には公開していない。恒久permalinkのないStory URLは作っていない）、8月24日未明の夜枠・ラジオお礼と朝配信案内（同じNEWSにSHOWROOMファンルーム本文、Instagram Story動画、本人X投稿を統合。Fan Roomスクリーンショットは非公開）、8月23日の本人Instagram「龍みたいな雲」投稿、8月23日の湘南シーサイドサークル「真夏のミュージカル特集」放送記録（同じNEWSに放送後お礼の番組Instagram Story動画、STORY記事CTA、FM湘南マジックウェイブの放送後X投稿を同居。新しいNEWSは作っていない）、8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。番組Instagram Storyと生放送アーカイブ文字起こしは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。8/23ラジオNEWSの外部sourceは局公式の放送後X投稿。8/24朝メイクNEWS・8/24未明NEWS・Final STAGE案内NEWSの外部sourceは本人X投稿 | 投稿内容の言い換えだけ。配信案内はアーカイブ表現。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真18枚（すべて `published: true`） | 誕生日5枚、マンゴーかき氷5枚（b10）、龍みたいな雲3枚（b20）は各Instagram投稿。8/23 湘南シーサイドサークル公式X写真2枚（b22）・ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b22 / b20 は一次出典と `sourceDate: 2026-08-23` を記録。b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。正方形・縦写真は `aspect` で切り抜きを避ける |
@@ -93,14 +93,11 @@ Instagram Story閲覧スクリーンショットには、以下の固有の追�
 ### 公開permalinkがない一時的なInstagram Story
 
 - この項目は、上記の一般メディア掲載原則に対するStory閲覧スクリーンショット固有の追加条件である。
-- オーナー提供のクリーンな写真・動画があり、投稿日と表示文を確認できる場合だけ扱う。
-- `source` は省略し、`sourceLabel: "Instagram Story"` を非リンクで表示する。Driveの受け渡しURL、空文字、`#`、推測したStory URLを代用しない。
-- 閲覧画面スクリーンショットは原則として文言確認資料に限り、Latest / Gallery / `public/` / gitへ入れない。省略記号より先を補完しない。
-- 例外は、**当該画像について**オーナーが掲載を明示承認し、本人が公開したStoryで、
-  DM・非公開情報・通知・第三者コメント・端末情報を含まず、公開情報だけで構成され、
-  コンテスト結果など節目Storyの記録資料として必要な場合に限る。例外画像は
-  `/stories/` の当該記事内だけへ自己ホストし、Latest / Galleryへ自動展開しない。
-  承認は別のStory画像へ流用せず、素材ごとに確認する。
+- Story閲覧スクリーンショットはデフォルトでは非掲載とし、文言確認資料だけに使う。省略記号より先を補完しない。
+- 例外として、**当該素材についてオーナーが掲載面を明示承認した場合**は、その承認された面だけへ自己ホストできる。`/stories/` 記事の作成を必須条件にしない。crop / mask の要否も素材ごとの承認と安全確認に基づき、固定条件にしない。
+- 承認を別素材・別掲載面へ自動流用しない。別Storyも別素材として扱い、Latest / NEWS / Gallery / `/stories/` の各面を明示的に区別する。
+- 公開permalinkがない一時Storyでは、推測したStory URLやDriveの受け渡しURLを `source`、manifest、caption、metadataへ残さない。Story自体をNEWSの出典として示す場合は、`source` を省略し `sourceLabel: "Instagram Story"` を非リンクで表示する。プロフィールURLは出典として代用しない。
+- 公開前に、本人が公開したStoryであること、投稿日・表示文・掲載面の承認範囲、DM・非公開情報・通知・第三者情報・端末情報の有無を素材ごとに確認し、判断を台帳へ記録する。
 - 同じローカル派生をLatestとGalleryの両方に出す場合、MP4とposterをそれぞれ1ファイルだけ作り、両方から同じpathを参照する。
 - 日常の朝投稿はLatest + Galleryで扱う。節目を文章で残すサイト機能の `/stories/` へは追加しない。
 - 本人Instagramプロフィールへの導線を付ける場合は、canonical URL

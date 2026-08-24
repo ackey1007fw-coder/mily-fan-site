@@ -1,5 +1,11 @@
 import { useState, type ReactNode } from "react";
-import { news, sortNewsByDateDesc, type NewsItem } from "../data/news";
+import {
+  news,
+  newsDisplayMedia,
+  sortNewsByDateDesc,
+  type NewsItem,
+  type NewsMedia,
+} from "../data/news";
 import {
   ARCHIVE_LOAD_MORE_LABEL,
   ARCHIVE_PAGE_SIZE,
@@ -34,6 +40,40 @@ function NewsLink({
   );
 }
 
+function NewsMediaBlock({ media }: { media: NewsMedia }) {
+  if (media.kind === "video") {
+    return (
+      <video
+        src={media.src}
+        poster={media.poster}
+        width={media.width}
+        height={media.height}
+        controls
+        playsInline
+        preload="none"
+        aria-label={media.alt}
+        className="mx-auto mt-4 aspect-[9/16] w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+      />
+    );
+  }
+
+  if (media.kind === "image") {
+    return (
+      <img
+        src={media.src}
+        width={media.width}
+        height={media.height}
+        loading="lazy"
+        decoding="async"
+        alt={media.alt}
+        className="mx-auto mt-4 h-auto w-full max-w-sm rounded-xl bg-sage-soft object-contain"
+      />
+    );
+  }
+
+  return null;
+}
+
 export function NewsArticle({ item }: { item: NewsItem }) {
   const ctaHref = item.url ?? item.source;
 
@@ -54,30 +94,9 @@ export function NewsArticle({ item }: { item: NewsItem }) {
           </p>
         </div>
       ) : null}
-      {item.media?.kind === "video" ? (
-        <video
-          src={item.media.src}
-          poster={item.media.poster}
-          width={item.media.width}
-          height={item.media.height}
-          controls
-          playsInline
-          preload="none"
-          aria-label={item.media.alt}
-          className="mx-auto mt-4 aspect-[9/16] w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
-        />
-      ) : null}
-      {item.media?.kind === "image" ? (
-        <img
-          src={item.media.src}
-          width={item.media.width}
-          height={item.media.height}
-          loading="lazy"
-          decoding="async"
-          alt={item.media.alt}
-          className="mx-auto mt-4 h-auto w-full max-w-sm rounded-xl bg-sage-soft object-contain"
-        />
-      ) : null}
+      {newsDisplayMedia(item).map((media) => (
+        <NewsMediaBlock key={`${media.kind}:${media.src}`} media={media} />
+      ))}
       {item.source || item.sourceLabel || item.url ? (
         <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
           {item.source ? (

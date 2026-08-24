@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
-import { readdir, readFile, stat } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,9 +12,10 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { morningMakeupShowroomImage } from "../src/data/morningMakeupShowroomImage.ts";
+import { morningMakeupInstagramStoryImage } from "../src/data/morningMakeupInstagramStoryImage.ts";
 import { contest } from "../src/data/contest.ts";
 import { events } from "../src/data/events.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import {
   assertPortalNewsFollowsSort,
@@ -35,16 +36,8 @@ const X_SOURCE = "https://x.com/mily_chan36/status/2091668215919444138";
 const INSTAGRAM_PROFILE = "https://www.instagram.com/mily_chan36";
 const PHOTO = "/media/news/mily-b24-01-morning-makeup-showroom.jpg";
 const PHOTO_FILE = path.join(root, "public", PHOTO.slice(1));
-/**
- * b24-02 is withheld entirely: the standing Story-view screenshot exception in
- * docs/CONTENT-OPS.md limits an owner-approved still to its own /stories/
- * article and excludes Latest, so no derivative may be published on NEWS.
- */
-const STORY_WITHHELD_PUBLIC = [
-  "public/media/news/mily-b24-02-morning-makeup-instagram-story.jpg",
-  "public/media/news/mily-b24-02-morning-makeup-instagram-story-text.jpg",
-  "public/media/news/mily-b24-02-morning-makeup-instagram-story-text-only.jpg",
-];
+const STORY_PHOTO = "/media/news/mily-b24-02-morning-makeup-instagram-story.jpg";
+const STORY_PHOTO_FILE = path.join(root, "public", STORY_PHOTO.slice(1));
 const ORIGINAL = path.join(
   root,
   "media/original/mily-b24-01-morning-makeup-showroom.jpg",
@@ -60,6 +53,9 @@ const STORY_ORIGINAL_SHA256 =
 const PUBLIC_SIZE = 381_783;
 const PUBLIC_SHA256 =
   "f6b9841b1194ccca157f78139ef49c3b0fda1e12501f06dd679231a8f07b27ca";
+const STORY_PUBLIC_SIZE = 757_164;
+const STORY_PUBLIC_SHA256 =
+  "9951d602cc4028c252fea7c26339481618cfdddeb35c469a050918001d78d4c7";
 const MESSAGE = [
   "おはよう！朝配信ありがとう🥹✊🏻✨",
   "ついにメイク配信してしまったｾﾞ🤦🏻‍♀️",
@@ -90,7 +86,10 @@ function item() {
 }
 
 function copyText(entry) {
-  return `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}\n${entry.media?.alt ?? ""}`;
+  const extraAlts = (entry.additionalMedia ?? [])
+    .map((media) => media.alt ?? "")
+    .join("\n");
+  return `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}\n${entry.media?.alt ?? ""}\n${extraAlts}`;
 }
 
 async function sha256(file) {
@@ -209,37 +208,44 @@ describe("2026-08-24 first makeup stream — Latest-only SHOWROOM still", () => 
   });
 });
 
-describe("2026-08-24 first makeup stream — Instagram Story still withheld", () => {
-  it("publishes no Story derivative on any NEWS surface", () => {
+describe("2026-08-24 first makeup stream — owner-approved Story still", () => {
+  it("adds the unmodified Story composition as the NEWS card's second image", async () => {
     const entry = item();
+    const displayed = newsDisplayMedia(entry);
 
-    // The standing Story-view screenshot exception (docs/CONTENT-OPS.md) allows
-    // an owner-approved still only inside its own /stories/ article and excludes
-    // Latest, so this NEWS carries the SHOWROOM lead image and nothing else.
     assert.equal(entry.media, morningMakeupShowroomImage);
-    assert.equal("additionalMedia" in entry, false);
-    assert.equal(JSON.stringify(entry).includes("b24-02"), false);
-    assert.equal(JSON.stringify(entry).includes("instagram-story"), false);
+    assert.deepEqual(entry.additionalMedia, [morningMakeupInstagramStoryImage]);
+    assert.deepEqual(displayed, [
+      morningMakeupShowroomImage,
+      morningMakeupInstagramStoryImage,
+    ]);
+    assert.equal(morningMakeupInstagramStoryImage.kind, "image");
+    assert.equal(morningMakeupInstagramStoryImage.src, STORY_PHOTO);
+    assert.equal(morningMakeupInstagramStoryImage.width, 1500);
+    assert.equal(morningMakeupInstagramStoryImage.height, 2667);
+    assert.equal(
+      morningMakeupInstagramStoryImage.alt,
+      "初メイク配信について理由と朝配信への感謝を伝える三橋莉子さんのInstagram Story",
+    );
+    assert.equal("sourceUrl" in morningMakeupInstagramStoryImage, false);
+    assert.doesNotMatch(JSON.stringify(morningMakeupInstagramStoryImage), /instagram\.com/);
     assert.equal(
       existsSync(path.join(root, "src/data/morningMakeupInstagramStoryImage.ts")),
-      false,
+      true,
     );
-  });
+    assert.equal(existsSync(STORY_PHOTO_FILE), true);
+    assert.equal((await stat(STORY_PHOTO_FILE)).size, STORY_PUBLIC_SIZE);
+    assert.equal(await sha256(STORY_PHOTO_FILE), STORY_PUBLIC_SHA256);
 
-  it("keeps every b24-02 derivative out of public/ and git", async () => {
-    for (const relative of STORY_WITHHELD_PUBLIC) {
-      assert.equal(existsSync(path.join(root, relative)), false);
-      const { stdout: tracked } = await run("git", ["ls-files", "--", relative], {
-        cwd: root,
-      });
-      assert.equal(tracked.trim(), "");
-    }
-
-    const publicNews = await readdir(path.join(root, "public/media/news"));
-    assert.equal(
-      publicNews.some((name) => name.includes("b24-02")),
-      false,
-    );
+    const metadata = await sharp(STORY_PHOTO_FILE).metadata();
+    assert.equal(metadata.width, 1500);
+    assert.equal(metadata.height, 2667);
+    assert.equal(metadata.exif, undefined);
+    assert.equal(metadata.iptc, undefined);
+    assert.equal(metadata.xmp, undefined);
+    assert.equal(metadata.icc, undefined);
+    assert.equal(metadata.chromaSubsampling, "4:4:4");
+    assert.equal(metadata.isProgressive, true);
   });
 
   it("keeps the Story original ignored and out of git", async () => {
@@ -260,11 +266,15 @@ describe("2026-08-24 first makeup stream — Instagram Story still withheld", ()
     }
   });
 
-  it("leaves the general Story policy and the NEWS body untouched", async () => {
+  it("records the owner-approved surface exception without inventing a source URL", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const entry = item();
 
-    assert.match(ops, /例外画像は\n\s*`\/stories\/` の当該記事内だけへ自己ホストし、Latest \/ Galleryへ自動展開しない。/);
+    assert.match(ops, /デフォルトでは非掲載/);
+    assert.match(ops, /オーナーが掲載面を明示承認/);
+    assert.match(ops, /`\/stories\/` 記事の作成を必須条件にしない/);
+    assert.match(ops, /承認を別素材・別掲載面へ自動流用しない/);
+    assert.doesNotMatch(ops, /`\/stories\/` の当該記事内だけへ自己ホスト/);
     assert.equal(entry.source, X_SOURCE);
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
@@ -291,7 +301,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     const storiesSource = await readFile(path.join(root, "src/data/stories.ts"), "utf8");
     assert.equal(storiesSource.includes(NEWS_ID), false);
     assert.equal(storiesSource.includes("mily-b24"), false);
-    assert.equal(existsSync(path.join(root, "src/data/morningMakeupInstagramStoryImage.ts")), false);
+    assert.equal(existsSync(path.join(root, "src/data/morningMakeupInstagramStoryImage.ts")), true);
 
     const { stdout: trackedStoryOriginal } = await run(
       "git",
@@ -346,7 +356,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     );
   });
 
-  it("renders the SHOWROOM lead uncropped and documents the withheld Story still", async () => {
+  it("renders both stills uncropped and documents the approved NEWS-only surface", async () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
@@ -354,22 +364,22 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(latest, /h-auto w-full max-w-sm/);
     assert.match(latest, /object-contain/);
     assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);
-    assert.doesNotMatch(latest, /newsDisplayMedia/);
+    assert.match(latest, /newsDisplayMedia\(item\)/);
     assert.match(docs, /batch b24/);
     assert.match(docs, /Latestのみ/);
     // The batch note must not read as an Activity-page restriction the code breaks.
-    assert.match(docs, /Activity ページを除外する\n\s*指定ではない/);
+    assert.match(docs, /Activity ページを除外する\r?\n\s*指定ではない/);
     assert.match(docs, /NEWS代表画像の標準動作である/);
     const b24 = docs.split("## 素材台帳（batch b24")[1] ?? "";
     assert.doesNotMatch(b24, /確認資料のみ/);
     assert.doesNotMatch(b24, /視聴者表示は元画像のまま残し/);
-    // b24-02 is withheld: no published path, no crop recipe, no checksum.
-    assert.match(b24, /非公開/);
-    assert.doesNotMatch(b24, /public\/media\/news\/mily-b24-02/);
-    assert.doesNotMatch(b24, /news\/mily-b24-02/);
+    assert.match(b24, /b24-02/);
+    assert.match(b24, /NEWSカードの2枚目/);
+    assert.match(b24, /crop・scale・rotate・アップスケール・縦横比変更なし/);
+    assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
     assert.match(ops, /27件/);
     assert.match(ops, /初メイク配信/);
-    assert.match(ops, /b24-02.*(非公開|掲載しない)|Story画像は掲載していない/);
+    assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);
     assert.doesNotMatch(ops, /16:50/);
   });
