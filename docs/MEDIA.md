@@ -1460,8 +1460,4 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
   `src/data/highlights.ts`には追加していない
 - InstagramプロフィールURLはNEWSの関連リンクとして
   `https://www.instagram.com/mily_chan36` だけを使っている
-- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
-  `src/data/highlights.ts`・`src/data/news.ts` のいずれからも参照しない
-- InstagramプロフィールURLはNEWSの関連リンクとして
-  `https://www.instagram.com/mily_chan36` だけを使っている
 
