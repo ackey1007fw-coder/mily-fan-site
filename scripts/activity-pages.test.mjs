@@ -36,6 +36,7 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-25-mixch-confidence-message": ["campus-girls"],
   "2026-08-25-motivation": ["miss-circle", "live-stream"],
   "2026-08-24-seasidecircle-yes-tokyo": ["radio"],
   "2026-08-24-campus-girls-final-stage-guide": ["campus-girls"],

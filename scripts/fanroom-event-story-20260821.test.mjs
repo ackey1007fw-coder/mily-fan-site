@@ -359,6 +359,7 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
 
     assert.deepEqual(ordered.slice(0, 20), [
       "2026-08-25-motivation",
@@ -382,7 +383,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

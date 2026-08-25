@@ -120,6 +120,7 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
 
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
 
         assert.equal(ordered[0], "2026-08-25-motivation");
     assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
@@ -146,7 +147,7 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
   });
 });
 

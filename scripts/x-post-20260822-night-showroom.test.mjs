@@ -254,6 +254,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
   it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
 
     assert.deepEqual(ordered.slice(0, 20), [
       "2026-08-25-motivation",
@@ -277,7 +278,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {

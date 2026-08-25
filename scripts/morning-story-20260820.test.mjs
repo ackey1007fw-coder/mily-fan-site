@@ -78,7 +78,8 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     assert.ok(item());
     // 8/21の新着の後も、8/20同日は既存の配列順を維持する。
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-        assert.equal(ordered[0], "2026-08-25-motivation");
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[0], "2026-08-25-motivation");
     assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
     assert.equal(ordered[2], "2026-08-24-campus-girls-final-stage-guide");
     assert.equal(ordered[3], "2026-08-24-makeup-stream");

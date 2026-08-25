@@ -202,6 +202,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
 
   it("stays above the 8/20 morning Story without deleting it", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
 
     // 8/21の新着の後も、8/20同日ソートは既存の配列順を維持する。
         assert.equal(ordered[0], "2026-08-25-motivation");
@@ -241,7 +242,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
   });
 });
 

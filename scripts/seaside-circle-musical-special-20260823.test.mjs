@@ -151,13 +151,14 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
   it("places the broadcast NEWS above the earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-        assert.equal(ordered[0], "2026-08-25-motivation");
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[0], "2026-08-25-motivation");
     assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
     assert.equal(ordered[2], "2026-08-24-campus-girls-final-stage-guide");
     assert.equal(ordered[3], "2026-08-24-makeup-stream");

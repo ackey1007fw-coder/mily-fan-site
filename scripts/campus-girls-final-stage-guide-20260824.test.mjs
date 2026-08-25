@@ -64,6 +64,7 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
 
   it("ranks ahead of the earlier 8/24 night-thanks item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
 
     assert.equal(ordered[0], "2026-08-25-motivation");
     assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
@@ -106,10 +107,10 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /29件/);
+    assert.match(ops, /30件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /投票先URLは未公開のため未掲載/);
     assert.equal(newsSource.includes("paton.jp"), false);
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
   });
 });

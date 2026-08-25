@@ -139,7 +139,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
     assert.equal(radioNews.length, 1);
     assert.equal(extraThanksNews.length, 0);
-    assert.equal(news.length, 29);
+    assert.equal(news.length, 30);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -165,7 +165,8 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
   it("stays below the dragon-cloud NEWS and above earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-        assert.equal(ordered[0], "2026-08-25-motivation");
+    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[0], "2026-08-25-motivation");
     assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
     assert.equal(ordered[2], "2026-08-24-campus-girls-final-stage-guide");
     assert.equal(ordered[3], "2026-08-24-makeup-stream");
