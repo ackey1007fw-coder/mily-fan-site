@@ -22,16 +22,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const NEWS_ID = "2026-08-26-stream-1000";
 const SOURCE = "https://x.com/Mily_chan36/status/2092303118142939171";
-const MESSAGE = [
-  "皆さん今日もお疲れ様🥲🍀",
-  "",
-  "26日の配信は10:00〜11:00🤛️✨",
-  "",
-  "夜できるといいなぁ🥲",
-  "おやすみなさい💤",
-  "",
-  "#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026",
-].join("\n");
+const MESSAGE =
+  "皆さん今日もお疲れ様\u{1F642}\u200D\u2195\uFE0F\u{1F340}\n\n26日の配信は10:00\u301C11:00\u270A\u{1F3FB}\u2728\n\n夜できるといいなぁ\u{1F972}\nおやすみなさい\u{1F4A4}\n\n#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026";
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -65,9 +57,9 @@ describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
     assert.equal(entry.message?.label, "みりぃの投稿");
     assert.equal(entry.message?.text, MESSAGE);
     assert.equal(entry.message.text.split("\n").length, 8);
-    assert.match(entry.message.text, /^皆さん今日もお疲れ様🥲🍀\n\n/);
-    assert.match(entry.message.text, /26日の配信は10:00〜11:00🤛️✨\n\n/);
-    assert.match(entry.message.text, /夜できるといいなぁ🥲\nおやすみなさい💤\n\n#ミスサー/);
+    assert.match(entry.message.text, /^皆さん今日もお疲れ様\u{1F642}\u200D\u2195\uFE0F\u{1F340}\n\n/u);
+    assert.match(entry.message.text, /26日の配信は10:00\u301C11:00\u270A\u{1F3FB}\u2728\n\n/u);
+    assert.match(entry.message.text, /夜できるといいなぁ\u{1F972}\nおやすみなさい\u{1F4A4}\n\n#ミスサー/u);
     assert.match(entry.message.text, /#ミスサークルコンテスト2026$/);
   });
 
