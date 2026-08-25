@@ -252,9 +252,9 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       "2026-08-21-morning-showroom-runway",
     ];
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered.shift(), "2026-08-25-mixch-confidence-message");
-
-    assert.deepEqual(ordered.slice(0, 16), [
+    assert.deepEqual(ordered.slice(0, 18), [
+      "2026-08-26-stream-1000",
+      "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
       "2026-08-24-seasidecircle-yes-tokyo",
       "2026-08-24-campus-girls-final-stage-guide",
@@ -276,7 +276,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
     );
     for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
-    assert.equal(news.length, 30);
+    assert.equal(news.length, 31);
   });
 });
 
