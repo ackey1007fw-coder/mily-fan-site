@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 28);
+    assert.equal(news.length, 29);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -153,7 +153,8 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
   it("sits between Final STAGE guide and night-thanks on 8/24", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 5), [
+    assert.deepEqual(ordered.slice(0, 6), [
+      "2026-08-25-motivation",
       "2026-08-24-seasidecircle-yes-tokyo",
       "2026-08-24-campus-girls-final-stage-guide",
       NEWS_ID,
@@ -326,7 +327,8 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
 
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 0);
-    assert.equal(liveNews[0]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-08-25-motivation");
+    assert.equal(liveNews[1]?.id, NEWS_ID);
     // b24-01 is the NEWS lead media, so selectActivityMedia surfaces it here the
     // same way it surfaces every other live-stream NEWS lead (b17-01, b14-01,
     // b13-01). No per-image filter is added; docs/MEDIA.md records this.
@@ -382,7 +384,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(b24, /公開用のmetadata除去以外は無改変/);
     assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
-    assert.match(ops, /28件/);
+    assert.match(ops, /29件/);
     assert.match(ops, /初メイク配信/);
     assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);
