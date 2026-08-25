@@ -54,6 +54,10 @@ function siteMetadataPlugin(): Plugin {
           "__STORY_2026_08_23_MUSICAL_SPECIAL_CANONICAL__",
           storyUrl("2026-08-23-musical-special"),
         )
+        .replaceAll(
+          "__STORY_2026_08_25_MOTIVATION_CANONICAL__",
+          storyUrl("2026-08-25-motivation"),
+        )
         .replaceAll("__ACTIVITY_PAGE_TITLE__", activityMetadata?.title ?? "")
         .replaceAll(
           "__ACTIVITY_PAGE_DESCRIPTION__",
@@ -161,6 +165,7 @@ export default defineConfig({
           "stories/campus-girls-2027-second-stage-jury-award/index.html",
         storySeasideMusical:
           "stories/2026-08-23-musical-special/index.html",
+        storyMotivation20260825: "stories/2026-08-25-motivation/index.html",
       },
       output: {
         manualChunks: {

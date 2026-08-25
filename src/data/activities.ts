@@ -47,6 +47,7 @@ export const activities: Activity[] = [
       "miss-circle-2026-third-round",
     ],
     relatedStorySlugs: [
+      "2026-08-25-motivation",
       "second-round-2026",
       "second-round-result-2026",
     ],
@@ -81,7 +82,11 @@ export const activities: Activity[] = [
     relatedSocialIds: ["showroom-circle2026-0734", "mixchannel-mily"],
     relatedLinkIds: [],
     relatedHighlightIds: ["showroom-first-stream-2026-08-01"],
-    relatedStorySlugs: ["second-round-2026", "2026-08-18-radio"],
+    relatedStorySlugs: [
+      "2026-08-25-motivation",
+      "second-round-2026",
+      "2026-08-18-radio",
+    ],
   },
   {
     id: "campus-girls",

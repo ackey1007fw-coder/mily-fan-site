@@ -80,6 +80,17 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-25-motivation",
+    date: "2026-08-25",
+    activityIds: ["miss-circle", "live-stream"],
+    title: "「やる気、元気、勇気でたぞ」——8月25日の朝",
+    body: "久しぶりに長く眠れた朝、みりぃが「やる気、元気、勇気でたぞ」と伝えました。当日の配信予定と、のちに1発目を11:40〜へ変更した追記、残り2日のイベントについての言葉、応援への感謝も残されています。",
+    source: "https://x.com/Mily_chan36/status/2092030938306039904",
+    sourceLabel: "Xの投稿を見る",
+    url: "/stories/2026-08-25-motivation/",
+    ctaLabel: "朝の言葉の記録を読む",
+  },
+  {
     id: "2026-08-24-seasidecircle-yes-tokyo",
     date: "2026-08-24",
     sameDayOrder: 4,

@@ -22,6 +22,16 @@ export const storySources = {
     label: "本人X投稿（2026年8月18日）",
     url: "https://x.com/Mily_chan36/status/2089721650522820667",
   },
+  "x-2026-08-25-motivation": {
+    id: "x-2026-08-25-motivation",
+    label: "本人X投稿（2026年8月25日朝）",
+    url: "https://x.com/Mily_chan36/status/2092030938306039904",
+  },
+  "x-2026-08-25-motivation-schedule-change": {
+    id: "x-2026-08-25-motivation-schedule-change",
+    label: "本人X投稿・追記（1発目 11:40〜への変更）",
+    url: "https://x.com/Mily_chan36/status/2092063248615133398",
+  },
   // 受け渡し用のGoogle Docs URLは持たせず、非リンクのlabelとして出す。
   "broadcast-transcript-2026-08-23": {
     id: "broadcast-transcript-2026-08-23",
@@ -151,6 +161,139 @@ export type Story = {
   leadMediaId: string | null;
   media: StoryMedia[];
   sections: StorySection[];
+};
+
+const motivationMorningStory: Story = {
+  slug: "2026-08-25-motivation",
+  href: "/stories/2026-08-25-motivation/",
+  title: "「やる気、元気、勇気でたぞ」——8月25日の朝",
+  cardTitle: "「やる気、元気、勇気でたぞ」——8月25日の朝",
+  eyebrow: "朝の言葉",
+  lead:
+    "8月25日の朝、みりぃから本人のXに投稿がありました。久しぶりに長く眠れたあと、「やる気、元気、勇気」が出たと伝える朝の言葉です。残すところ2日となったイベントのあいだで、「悔しい位置」にいる自分を認めつつ、応援を受け取る姿勢も残されています。",
+  cardDescription:
+    "長く眠ったあとに届いた「やる気、元気、勇気」。残り2日のイベント前、悔しい位置にいながらも応援を受け取る姿勢を残した、8月25日朝の言葉。",
+  date: "2026-08-25",
+  dateLabel: "2026.08.25",
+  published: true,
+  sourceIds: [
+    "x-2026-08-25-motivation",
+    "x-2026-08-25-motivation-schedule-change",
+  ],
+  leadMediaId: null,
+  media: [],
+  sections: [
+    {
+      id: "morning-word",
+      title: "朝のひとこと",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "久しぶりに長く眠れた朝。そのあと、みりぃはこう書きました。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "おはよう〜！\n久しぶりにこんなに長く寝まして、やる気、元気、勇気でたぞ✨",
+          ],
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "paragraph",
+          text: "静かな朝のあとに届いた、前向きなひと言です。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+      ],
+    },
+    {
+      id: "schedule",
+      title: "本日のスケジュール",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "同じ投稿で、当日の配信予定も伝えられています。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "【本日のスケジュール🗓️】\n☀️11:00〜12:00\n🍪14:40〜15:40\n🌙22:30〜23:30",
+          ],
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "paragraph",
+          text: "その後、1発目の開始時刻について、本人から追記がありました。",
+          sourceIds: ["x-2026-08-25-motivation-schedule-change"],
+        },
+        {
+          type: "quote",
+          paragraphs: ["1発目、11:40〜に変更させてください🥲🥲🥲🙏🏻"],
+          sourceIds: ["x-2026-08-25-motivation-schedule-change"],
+        },
+        {
+          type: "paragraph",
+          text: "朝の枠は、投稿時点の案内から 11:40〜 に変更されています。",
+          sourceIds: [
+            "x-2026-08-25-motivation",
+            "x-2026-08-25-motivation-schedule-change",
+          ],
+        },
+      ],
+    },
+    {
+      id: "remaining-days",
+      title: "残り2日と、「悔しい位置」",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "イベントも、残すところ2日。本人は、いまの立ち位置についてこう書いています。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "イベントも残すところ2日。\nなんとも悔しい位置にいるね、私。",
+          ],
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "paragraph",
+          text: "「悔しい」という言葉は、いまの気持ちをそのまま置いたひと言です。ドラマチックに膨らませる必要はなく、本人が感じている位置感として、そっと受け止めておきたいところです。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+      ],
+    },
+    {
+      id: "support",
+      title: "応援は、無碍にしない",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "そのあとに続いたのは、応援を受け取る姿勢でした。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "quote",
+          paragraphs: [
+            "大丈夫！！皆からの応援は絶対に無碍にしないよ。いつもありがとう😊\n#ミスサー",
+          ],
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "paragraph",
+          text: "悔しさを認めつつも、「大丈夫」と言い、届いた応援を大切にすると約束した朝の言葉です。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+        {
+          type: "paragraph",
+          text: "ファンとしてできることは、その言葉を受け止めながら、それぞれの形で応援を届け続けることなのかもしれません。",
+          sourceIds: ["x-2026-08-25-motivation"],
+        },
+      ],
+    },
+  ],
 };
 
 const radioStory: Story = {
@@ -1077,6 +1220,7 @@ const seasideCircleMusicalSpecialStory: Story = {
 };
 
 export const stories: Story[] = [
+  motivationMorningStory,
   seasideCircleMusicalSpecialStory,
   campusGirlsSecondStageJuryAwardStory,
   secondRoundResultStory,

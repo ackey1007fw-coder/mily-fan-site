@@ -82,6 +82,7 @@ export function verifySiteUrlConsistency() {
     "campus-girls-2027-second-stage-jury-award",
   );
   const musicalSpecialStoryCanonical = storyUrl("2026-08-23-musical-special");
+  const motivationStoryCanonical = storyUrl("2026-08-25-motivation");
   const ogImage = ogImageUrl();
   const html = readRelative("index.html");
   const profileHtml = readRelative("profile/index.html");
@@ -96,6 +97,9 @@ export function verifySiteUrlConsistency() {
   );
   const musicalSpecialStoryHtml = readRelative(
     "stories/2026-08-23-musical-special/index.html",
+  );
+  const motivationStoryHtml = readRelative(
+    "stories/2026-08-25-motivation/index.html",
   );
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
@@ -251,6 +255,28 @@ export function verifySiteUrlConsistency() {
   if (!musicalSpecialStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("musical special story images must use __SITE_OG_IMAGE__");
   }
+  if (
+    !motivationStoryHtml.includes(
+      'href="__STORY_2026_08_25_MOTIVATION_CANONICAL__"',
+    )
+  ) {
+    errors.push(
+      "motivation morning story canonical href must use its siteUrl placeholder",
+    );
+  }
+  if (
+    !motivationStoryHtml.includes('property="og:url"') ||
+    !motivationStoryHtml.includes(
+      'content="__STORY_2026_08_25_MOTIVATION_CANONICAL__"',
+    )
+  ) {
+    errors.push(
+      "motivation morning story og:url must use its siteUrl placeholder",
+    );
+  }
+  if (!motivationStoryHtml.includes('content="__SITE_OG_IMAGE__"')) {
+    errors.push("motivation morning story images must use __SITE_OG_IMAGE__");
+  }
   for (const activityPage of activityPages) {
     if (!activityPage.html.includes('href="__ACTIVITY_CANONICAL__"')) {
       errors.push(`${activityPage.label} canonical must use __ACTIVITY_CANONICAL__`);
@@ -317,6 +343,11 @@ export function verifySiteUrlConsistency() {
       "public/sitemap.xml must include the musical special story canonical URL",
     );
   }
+  if (!sitemap.includes(`<loc>${motivationStoryCanonical}</loc>`)) {
+    errors.push(
+      "public/sitemap.xml must include the motivation morning story canonical URL",
+    );
+  }
   for (const activityPage of activityPages) {
     if (!sitemap.includes(`<loc>${activityPage.canonical}</loc>`)) {
       errors.push(`public/sitemap.xml must include ${activityPage.label}`);
@@ -333,6 +364,7 @@ export function verifySiteUrlConsistency() {
       'storyUrl("campus-girls-2027-second-stage-jury-award")',
     ) ||
     !viteConfig.includes('storyUrl("2026-08-23-musical-special")') ||
+    !viteConfig.includes('storyUrl("2026-08-25-motivation")') ||
     !viteConfig.includes("ogImageUrl()") ||
     !viteConfig.includes("activityPageMetadata(context.path)")
   ) {
@@ -410,6 +442,11 @@ export function verifySiteUrlConsistency() {
       "musical special story HTML must not hardcode the public origin; use site.siteUrl placeholders",
     );
   }
+  if (hardcodedOrigin.test(motivationStoryHtml)) {
+    errors.push(
+      "motivation morning story HTML must not hardcode the public origin; use site.siteUrl placeholders",
+    );
+  }
   for (const activityPage of activityPages) {
     if (hardcodedOrigin.test(activityPage.html)) {
       errors.push(`${activityPage.label} HTML must not hardcode the public origin`);
@@ -428,6 +465,7 @@ export function verifySiteUrlConsistency() {
     !resultStoryCanonical.startsWith(origin) ||
     !campusGirlsStoryCanonical.startsWith(origin) ||
     !musicalSpecialStoryCanonical.startsWith(origin) ||
+    !motivationStoryCanonical.startsWith(origin) ||
     activityPages.some((activityPage) => !activityPage.canonical.startsWith(origin)) ||
     !ogImage.startsWith(origin)
   ) {
