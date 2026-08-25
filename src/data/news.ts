@@ -80,6 +80,26 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-26-stream-1000",
+    date: "2026-08-26",
+    activityIds: ["live-stream"],
+    title: "おやすみなさい💤 26日の配信は10:00〜11:00",
+    body: "8月26日未明、みりぃがXに「皆さん今日もお疲れ様」と投稿し、26日の配信は10:00〜11:00と伝えました。夜できるといいなぁという言葉と「おやすみなさい」も残されています。",
+    source: "https://x.com/Mily_chan36/status/2092303118142939171",
+    sourceLabel: "Xの投稿を見る",
+    message: {
+      label: "みりぃの投稿",
+      text: `皆さん今日もお疲れ様🥲🍀
+
+26日の配信は10:00〜11:00🤛️✨
+
+夜できるといいなぁ🥲
+おやすみなさい💤
+
+#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026`,
+    },
+  },
+  {
     id: "2026-08-25-motivation",
     date: "2026-08-25",
     activityIds: ["miss-circle", "live-stream"],
