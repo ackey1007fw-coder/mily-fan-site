@@ -360,7 +360,8 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 19), [
+    assert.deepEqual(ordered.slice(0, 20), [
+      "2026-08-25-motivation",
       "2026-08-24-seasidecircle-yes-tokyo",
       "2026-08-24-campus-girls-final-stage-guide",
       "2026-08-24-makeup-stream",
@@ -381,7 +382,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 28);
+    assert.equal(news.length, 29);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {
@@ -418,14 +419,24 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   });
 
   it("publishes through the existing Portal Feed without external media hotlinks", () => {
-    const feed = createPortalFeed();
+    const scopedNews = news.filter((entry) =>
+      [FANROOM_NEWS_ID, STORY_NEWS_ID].includes(entry.id),
+    );
+    const feed = createPortalFeed({
+      newsItems: scopedNews,
+      storyItems: [],
+      eventItems: [],
+    });
     const fanroom = findFeedItem(feed, portalNewsId(FANROOM_NEWS_ID));
     const storyNews = findFeedItem(feed, portalNewsId(STORY_NEWS_ID));
 
-    assertPortalNewsFollowsSort(feed, news);
-    assert.ok(fanroom.image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"));
-    assert.ok(storyNews.image?.endsWith(eventStory20260821.poster));
+    assert.equal(scopedNews.length, 2);
+    assertPortalNewsFollowsSort(feed, scopedNews);
+    assert.ok(
+      fanroom.image?.endsWith("/media/news/mily-b13-01-fanroom-next-slot.jpg"),
+    );
     assert.equal(fanroom.sourceUrl, undefined);
+    assert.ok(storyNews.image?.endsWith(eventStory20260821.poster));
     // Portal Feedは既存仕様でNewsのrelated `url`を外部導線として直マップする。
     assert.equal(storyNews.sourceUrl, INSTAGRAM_PROFILE);
     assert.doesNotMatch(eventStory20260821.src, /instagram|google|twitter|x\.com/i);

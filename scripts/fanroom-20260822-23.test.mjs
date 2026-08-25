@@ -135,7 +135,8 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
   it("keeps chronological same-day order in the Latest sort", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.deepEqual(ordered.slice(0, 13), [
+    assert.deepEqual(ordered.slice(0, 14), [
+      "2026-08-25-motivation",
       "2026-08-24-seasidecircle-yes-tokyo",
       "2026-08-24-campus-girls-final-stage-guide",
       "2026-08-24-makeup-stream",
@@ -150,7 +151,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       EVENING_ID,
       CAMPUS_ID,
     ]);
-    assert.equal(news.length, 28);
+    assert.equal(news.length, 29);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {

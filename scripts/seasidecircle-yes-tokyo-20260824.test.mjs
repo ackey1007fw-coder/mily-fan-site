@@ -117,7 +117,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.deepEqual(item()?.activityIds, ["radio"]);
     assert.equal(item()?.title, "「Yes!東京」踊ってみた💃");
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 28);
+    assert.equal(news.length, 29);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -137,13 +137,14 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.doesNotMatch(JSON.stringify(entry), /instagram\.com\/(p|reel|stories)\//);
   });
 
-  it("leads Latest on 8/24 via sameDayOrder", () => {
+  it("ranks as the top 8/24 Latest item after the newer 8/25 morning STORY CTA", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], NEWS_ID);
-    assert.equal(ordered[1], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[2], "2026-08-24-makeup-stream");
-    assert.equal(ordered[3], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[0], "2026-08-25-motivation");
+    assert.equal(ordered[1], NEWS_ID);
+    assert.equal(ordered[2], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[3], "2026-08-24-makeup-stream");
+    assert.equal(ordered[4], "2026-08-24-night-thanks-morning-stream");
   });
 });
 
@@ -418,7 +419,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.match(docs, /512×910/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /28件/);
+    assert.match(ops, /29件/);
     assert.match(ops, /独立動画12本/);
     assert.match(ops, /Yes!東京/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
@@ -436,6 +437,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, INSTAGRAM_PROFILE);
     assert.ok(entry.image?.endsWith(seasideCircleYesTokyoVideo.poster));
-    assert.equal(latestIds[0], NEWS_ID);
+    assert.equal(latestIds[0], "2026-08-25-motivation");
+    assert.equal(latestIds[1], NEWS_ID);
   });
 });

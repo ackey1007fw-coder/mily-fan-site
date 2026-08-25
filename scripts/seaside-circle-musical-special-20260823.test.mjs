@@ -151,22 +151,23 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 28);
+    assert.equal(news.length, 29);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
   it("places the broadcast NEWS above the earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(ordered[1], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[2], "2026-08-24-makeup-stream");
-    assert.equal(ordered[3], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[4], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[5], NEWS_ID);
-    assert.equal(ordered[6], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[7], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[8], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[9], "2026-08-22-night-showroom-thanks");
+        assert.equal(ordered[0], "2026-08-25-motivation");
+    assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(ordered[2], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[3], "2026-08-24-makeup-stream");
+    assert.equal(ordered[4], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[5], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[6], NEWS_ID);
+    assert.equal(ordered[7], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[8], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[9], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[10], "2026-08-22-night-showroom-thanks");
   });
 
   it("appears as related NEWS on the radio Activity without a copied body", () => {
@@ -222,7 +223,8 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
     assert.equal("url" in storySources["broadcast-transcript-2026-08-23"], false);
     assert.equal("url" in storySources["program-instagram-story-2026-08-23"], false);
     assert.equal("url" in storySources["program-instagram-story-thanks-2026-08-23"], false);
-    assert.equal(stories[0], entry);
+    assert.equal(stories[1], entry);
+    assert.equal(stories[0]?.slug, "2026-08-25-motivation");
     assert.equal(storyBySlug("2026-08-18-radio")?.published, true);
     assert.equal(storyBySlug("second-round-result-2026")?.published, true);
   });

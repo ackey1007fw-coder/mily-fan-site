@@ -41,8 +41,9 @@ describe("reusable STORIES content", () => {
   it("publishes the source-backed second-round story with the approved copy", () => {
     const story = storyBySlug("second-round-2026");
     assert.ok(story);
-    assert.equal(stories.length, 5);
+    assert.equal(stories.length, 6);
     assert.deepEqual(visibleStories(), [
+      storyBySlug("2026-08-25-motivation"),
       storyBySlug("2026-08-23-musical-special"),
       storyBySlug("campus-girls-2027-second-stage-jury-award"),
       storyBySlug("second-round-result-2026"),
@@ -98,6 +99,58 @@ describe("reusable STORIES content", () => {
       type: "quote",
       paragraphs: ["元気なみりぃに会いにきてね~‼︎"],
       sourceIds: ["x-2026-08-18-radio"],
+    });
+  });
+
+  it("publishes the 8/25 motivation morning story from the confirmed X posts", () => {
+    const story = storyBySlug("2026-08-25-motivation");
+    assert.ok(story);
+    assert.equal(story.href, "/stories/2026-08-25-motivation/");
+    assert.equal(story.date, "2026-08-25");
+    assert.equal(story.eyebrow, "朝の言葉");
+    assert.equal(story.leadMediaId, null);
+    assert.deepEqual(story.media, []);
+    assert.deepEqual(story.sourceIds, [
+      "x-2026-08-25-motivation",
+      "x-2026-08-25-motivation-schedule-change",
+    ]);
+    assert.equal(
+      storySources["x-2026-08-25-motivation"].url,
+      "https://x.com/Mily_chan36/status/2092030938306039904",
+    );
+    assert.equal(
+      storySources["x-2026-08-25-motivation-schedule-change"].url,
+      "https://x.com/Mily_chan36/status/2092063248615133398",
+    );
+    assert.equal(story.title, "「やる気、元気、勇気でたぞ」——8月25日の朝");
+    assert.match(story.lead, /やる気、元気、勇気/);
+    assert.match(story.lead, /悔しい位置/);
+    assert.match(story.cardDescription, /11:40|応援を受け取る|やる気、元気、勇気/);
+
+    const scheduleSection = story.sections.find(
+      (section) => section.id === "schedule",
+    );
+    assert.ok(scheduleSection);
+    assert.deepEqual(scheduleSection.blocks.at(-2), {
+      type: "quote",
+      paragraphs: ["1発目、11:40〜に変更させてください🥲🥲🥲🙏🏻"],
+      sourceIds: ["x-2026-08-25-motivation-schedule-change"],
+    });
+    assert.match(
+      scheduleSection.blocks.at(-1)?.type === "paragraph"
+        ? scheduleSection.blocks.at(-1).text
+        : "",
+      /11:40〜/,
+    );
+
+    const supportSection = story.sections.at(-1);
+    assert.equal(supportSection?.title, "応援は、無碍にしない");
+    assert.deepEqual(supportSection?.blocks.at(1), {
+      type: "quote",
+      paragraphs: [
+        "大丈夫！！皆からの応援は絶対に無碍にしないよ。いつもありがとう😊\n#ミスサー",
+      ],
+      sourceIds: ["x-2026-08-25-motivation"],
     });
   });
 
@@ -293,6 +346,10 @@ describe("STORIES pages and discovery", () => {
       vite,
       /storySeasideMusical:[\s\S]*"stories\/2026-08-23-musical-special\/index\.html"/,
     );
+    assert.match(
+      vite,
+      /storyMotivation20260825: "stories\/2026-08-25-motivation\/index\.html"/,
+    );
     assert.match(html, /src="\/src\/story-main\.tsx"/);
     assert.match(html, /rel="canonical" href="__STORY_SECOND_ROUND_CANONICAL__"/);
     assert.match(html, /property="og:type" content="article"/);
@@ -343,6 +400,18 @@ describe("STORIES pages and discovery", () => {
     assert.match(musicalHtml, /"@type": "Article"/);
     assert.match(musicalHtml, /ファンサイト（非公式）/);
     assert.match(musicalHtml, /真夏のミュージカル特集/);
+
+    const motivationHtml = await read("stories/2026-08-25-motivation/index.html");
+    assert.match(motivationHtml, /src="\/src\/story-main\.tsx"/);
+    assert.match(
+      motivationHtml,
+      /rel="canonical" href="__STORY_2026_08_25_MOTIVATION_CANONICAL__"/,
+    );
+    assert.match(motivationHtml, /property="og:type" content="article"/);
+    assert.match(motivationHtml, /"@type": "Article"/);
+    assert.match(motivationHtml, /ファンサイト（非公式）/);
+    assert.match(motivationHtml, /やる気、元気、勇気でたぞ/);
+    assert.match(motivationHtml, /"articleSection": "朝の言葉"/);
   });
 
   it("renders the approved video behavior without autoplay or loop", async () => {

@@ -139,7 +139,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
     assert.equal(radioNews.length, 1);
     assert.equal(extraThanksNews.length, 0);
-    assert.equal(news.length, 28);
+    assert.equal(news.length, 29);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -165,15 +165,16 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
   it("stays below the dragon-cloud NEWS and above earlier 8/23 Fan Room items", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(ordered[1], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[2], "2026-08-24-makeup-stream");
-    assert.equal(ordered[3], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[4], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[5], NEWS_ID);
-    assert.equal(ordered[6], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[7], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[8], "2026-08-23-earthquake-showroom-fanroom");
+        assert.equal(ordered[0], "2026-08-25-motivation");
+    assert.equal(ordered[1], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(ordered[2], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[3], "2026-08-24-makeup-stream");
+    assert.equal(ordered[4], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[5], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[6], NEWS_ID);
+    assert.equal(ordered[7], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[8], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[9], "2026-08-23-earthquake-showroom-fanroom");
   });
 
   it("still appears once on the radio Activity", () => {
