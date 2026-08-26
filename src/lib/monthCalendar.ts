@@ -67,6 +67,14 @@ export function tokyoMonthKey(now: number): string {
   return tokyoDateKey(now).slice(0, 7);
 }
 
+/** 次の Asia/Tokyo 0:00 までのミリ秒。カレンダーの日付境界用。 */
+export function msUntilNextTokyoMidnight(now: number): number {
+  if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
+  const today = tokyoDateKey(now);
+  const nextMidnight = Date.parse(`${addCivilDays(today, 1)}T00:00:00+09:00`);
+  return Math.max(nextMidnight - now, 0);
+}
+
 /** 現在のJST civil dateから、次のJST月の末日までの日数を返す。 */
 export function daysUntilEndOfNextTokyoMonth(now: number): number {
   const today = tokyoDateKey(now);
@@ -85,18 +93,29 @@ export function shiftMonthKey(monthKey: string, offset: number): string {
 }
 
 /**
+ * 月間ナビと radio 展開の安全上限。確認済み予定が年 9999 など遠隔でも、
+ * 暦日ループやナビ範囲がそこまで伸びないようにする。新しい事実は追加しない。
+ */
+export const MAX_SUPPORT_CALENDAR_MONTHS_AHEAD = 12;
+export const MAX_SUPPORT_CALENDAR_MONTHS_BACK = 12;
+
+/**
  * 月間ナビの範囲。radio は当月頭〜翌月末まで生成するので、少なくともその2ヶ月は開く。
  * ほかの確認済み予定が更に前後へ伸びていれば、その月まで広げる。
+ * 遠隔の破損日付でナビ範囲が年単位に広がらないよう、前後12ヶ月で打ち切る。
  */
 export function navigableMonthBounds(
   todayMonth: string,
   itemMonths: Iterable<string>,
 ): { minMonth: string; maxMonth: string } {
   parseMonthKey(todayMonth);
+  const floor = shiftMonthKey(todayMonth, -MAX_SUPPORT_CALENDAR_MONTHS_BACK);
+  const ceiling = shiftMonthKey(todayMonth, MAX_SUPPORT_CALENDAR_MONTHS_AHEAD);
   let minMonth = todayMonth;
   let maxMonth = shiftMonthKey(todayMonth, 1);
   for (const month of itemMonths) {
     parseMonthKey(month);
+    if (month < floor || month > ceiling) continue;
     if (month < minMonth) minMonth = month;
     if (month > maxMonth) maxMonth = month;
   }

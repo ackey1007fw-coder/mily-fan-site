@@ -7,6 +7,9 @@ import {
   buildMonthGrid,
   daysUntilEndOfNextTokyoMonth,
   expandScheduleItemsByDate,
+  MAX_SUPPORT_CALENDAR_MONTHS_AHEAD,
+  MAX_SUPPORT_CALENDAR_MONTHS_BACK,
+  msUntilNextTokyoMidnight,
   navigableMonthBounds,
   scheduleCategory,
   shiftMonthKey,
@@ -18,6 +21,7 @@ import {
   adaptRadioProgram,
   buildSupportCalendar,
 } from "../src/lib/supportCalendar.ts";
+import { createTokyoNowStore } from "../src/lib/tokyoNowStore.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = (relative) => readFileSync(path.join(root, relative), "utf8");
@@ -122,6 +126,34 @@ describe("monthly Support Calendar grid", () => {
     });
   });
 
+  it("caps month navigation at a 12-month safety horizon", () => {
+    assert.equal(MAX_SUPPORT_CALENDAR_MONTHS_AHEAD, 12);
+    assert.equal(MAX_SUPPORT_CALENDAR_MONTHS_BACK, 12);
+    assert.deepEqual(
+      navigableMonthBounds("2026-08", ["2025-07", "2025-08", "2027-08", "2027-09", "9999-12"]),
+      { minMonth: "2025-08", maxMonth: "2027-08" },
+    );
+    assert.deepEqual(navigableMonthBounds("2026-08", ["9999-12"]), {
+      minMonth: "2026-08",
+      maxMonth: "2026-09",
+    });
+  });
+
+  it("counts milliseconds until the next Asia/Tokyo midnight", () => {
+    assert.equal(
+      msUntilNextTokyoMidnight(Date.parse("2026-08-24T15:00:00+09:00")),
+      9 * 60 * 60 * 1000,
+    );
+    assert.equal(
+      msUntilNextTokyoMidnight(Date.parse("2026-08-24T00:00:00+09:00")),
+      24 * 60 * 60 * 1000,
+    );
+    assert.equal(
+      msUntilNextTokyoMidnight(Date.parse("2026-08-24T23:59:59.500+09:00")),
+      500,
+    );
+  });
+
   it("extends radio slots through every month that other confirmed items make navigable", () => {
     const now = Date.parse("2026-08-24T12:00:00+09:00");
     const result = buildSupportCalendar({
@@ -181,6 +213,112 @@ describe("monthly Support Calendar grid", () => {
       minMonth: "2026-08",
       maxMonth: "2026-10",
     });
+  });
+
+  it("does not expand radio or month navigation to a far-future SHOWROOM date", () => {
+    const now = Date.parse("2026-08-24T12:00:00+09:00");
+    const started = Date.now();
+    const result = buildSupportCalendar({
+      contest: {
+        contestName: "fixture",
+        entryNumber: "ENTRY fixture",
+        entryUrl: "https://example.com/entry",
+        currentPhase: {
+          name: "pending phase",
+          start: null,
+          end: null,
+          source: "https://example.com/phase",
+        },
+        lastVerifiedAt: "2026-08-24",
+      },
+      supportEvents: [],
+      fanEvents: [],
+      streamSlots: [{ date: "9999-12-31", time: "20:00" }],
+      streamAvailability: "ok",
+      includeRadio: true,
+      now,
+      daysAhead: daysUntilEndOfNextTokyoMonth(now),
+    });
+    const elapsed = Date.now() - started;
+    const radioDates = result.days
+      .flatMap(({ items }) => items)
+      .filter(({ origin }) => origin === "radio-program")
+      .map(({ date }) => date);
+    const itemMonths = result.days.flatMap((day) => [
+      day.date.slice(0, 7),
+      ...day.items
+        .map((item) => item.endDate?.slice(0, 7))
+        .filter((month) => Boolean(month)),
+    ]);
+
+    assert.ok(elapsed < 1_000, `radio expansion took ${elapsed}ms`);
+    assert.equal(radioDates.includes("2026-08-02"), true);
+    assert.equal(radioDates.includes("2026-09-27"), true);
+    assert.equal(radioDates.some((date) => date > "2026-09-30"), false);
+    assert.equal(radioDates.some((date) => date.startsWith("9999")), false);
+    assert.equal(
+      result.days.some((day) => day.date === "9999-12-31"),
+      true,
+      "Agenda still lists the remote SHOWROOM row",
+    );
+    assert.deepEqual(navigableMonthBounds("2026-08", itemMonths), {
+      minMonth: "2026-08",
+      maxMonth: "2026-09",
+    });
+  });
+});
+
+describe("Tokyo now store", () => {
+  function fakeClock(start) {
+    let now = start;
+    let seq = 0;
+    const queue = new Map();
+    const timers = {
+      setTimeout: (handler, ms) => {
+        const id = ++seq;
+        queue.set(id, { handler, at: now + ms });
+        return id;
+      },
+      clearTimeout: (id) => queue.delete(id),
+      now: () => now,
+    };
+    return {
+      timers,
+      advance(ms) {
+        const target = now + ms;
+        for (;;) {
+          const due = [...queue.entries()]
+            .filter(([, timer]) => timer.at <= target)
+            .sort((a, b) => a[1].at - b[1].at)[0];
+          if (!due) break;
+          const [id, timer] = due;
+          queue.delete(id);
+          now = timer.at;
+          timer.handler();
+        }
+        now = target;
+      },
+    };
+  }
+
+  it("notifies subscribers at the next Asia/Tokyo midnight", () => {
+    const start = Date.parse("2026-08-24T23:59:30+09:00");
+    const clock = fakeClock(start);
+    const store = createTokyoNowStore(clock.timers);
+    let notifications = 0;
+    store.subscribe(() => {
+      notifications += 1;
+    });
+
+    assert.equal(tokyoDateKey(store.getSnapshot()), "2026-08-24");
+
+    clock.advance(29_000);
+    assert.equal(tokyoDateKey(store.getSnapshot()), "2026-08-24");
+    assert.equal(notifications, 0);
+
+    clock.advance(1_000);
+    assert.equal(tokyoDateKey(store.getSnapshot()), "2026-08-25");
+    assert.equal(notifications, 1);
   });
 });
 
@@ -380,6 +518,8 @@ describe("monthly Support Calendar UI source", () => {
     const calendar = source("src/components/MonthlyScheduleCalendar.tsx");
     assert.match(page, /title="みりぃスケジュール"/);
     assert.match(page, /<MonthlyScheduleCalendar calendar=\{calendar\} today=\{today\}/);
+    assert.match(page, /useTokyoNow\(\)/);
+    assert.doesNotMatch(page, /const now = Date\.now\(\)/);
     assert.match(page, /daysUntilEndOfNextTokyoMonth\(now\)/);
     assert.doesNotMatch(page, /RADIO_OCCURRENCE_DAYS_AHEAD/);
     assert.match(calendar, /grid-cols-7/);

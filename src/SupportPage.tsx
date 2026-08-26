@@ -22,6 +22,7 @@ import {
 } from "./lib/supportCalendar";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useStreamSchedule } from "./lib/useStreamSchedule";
+import { useTokyoNow } from "./lib/useTokyoNow";
 
 const primaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
@@ -191,7 +192,7 @@ function SupportCalendarAgenda({
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
-  const now = Date.now();
+  const now = useTokyoNow();
   const today = tokyoDateKey(now);
   // radio adapter は now のJST当月1日から、この daysAhead 先まで番組枠を展開する。
   const radioOccurrenceDaysAhead = daysUntilEndOfNextTokyoMonth(now);

@@ -99,6 +99,7 @@ describe("Support MPA route and metadata", () => {
     assert.match(source("src/lib/useStreamSchedule.ts"), /availability/);
     assert.match(page, /useMilyRealtimeStatus\(\)/);
     assert.match(page, /useStreamSchedule\(\)/);
+    assert.match(page, /useTokyoNow\(\)/);
     assert.doesNotMatch(page, /fetch\(|setInterval\(|createPollStore/);
     assert.match(page, /role="status" aria-live="polite" aria-atomic="true"/);
   });

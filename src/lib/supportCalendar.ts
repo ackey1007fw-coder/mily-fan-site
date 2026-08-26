@@ -13,6 +13,11 @@ import {
   type SupportEventSchedule,
 } from "../data/supportEvents.ts";
 import { isValidSlot, type StreamSlot } from "../data/streamSchedule.ts";
+import {
+  MAX_SUPPORT_CALENDAR_MONTHS_AHEAD,
+  MAX_SUPPORT_CALENDAR_MONTHS_BACK,
+  shiftMonthKey,
+} from "./monthCalendar.ts";
 
 export type ScheduleOrigin =
   | "contest"
@@ -323,6 +328,27 @@ function monthEndDate(date: string): string {
   return `${date.slice(0, 7)}-${String(lastDay).padStart(2, "0")}`;
 }
 
+function supportCalendarHorizon(now: number): { startDate: string; endDate: string } {
+  const todayMonth = tokyoParts(now).date.slice(0, 7);
+  return {
+    startDate: `${shiftMonthKey(todayMonth, -MAX_SUPPORT_CALENDAR_MONTHS_BACK)}-01`,
+    endDate: monthEndDate(
+      `${shiftMonthKey(todayMonth, MAX_SUPPORT_CALENDAR_MONTHS_AHEAD)}-01`,
+    ),
+  };
+}
+
+function clampToHorizon(
+  startDate: string,
+  endDate: string,
+  horizon: { startDate: string; endDate: string },
+): { startDate: string; endDate: string } | null {
+  const clampedStart = startDate < horizon.startDate ? horizon.startDate : startDate;
+  const clampedEnd = endDate > horizon.endDate ? horizon.endDate : endDate;
+  if (clampedStart > clampedEnd) return null;
+  return { startDate: clampedStart, endDate: clampedEnd };
+}
+
 function radioSlotsBetween(startDate: string, endDate: string): ScheduleItem[] {
   const items: ScheduleItem[] = [];
   for (let date = startDate; date <= endDate; date = addCalendarDays(date, 1)) {
@@ -353,6 +379,7 @@ function radioSlotsBetween(startDate: string, endDate: string): ScheduleItem[] {
 /**
  * ナビ可能な月（当月頭〜翌月末、および他の確認済み予定が伸びる月）に
  * 同じ番組枠を展開する。新しい外部事実は追加しない。
+ * 遠隔日付は前後12ヶ月の安全上限を超えて展開しない。
  */
 function adaptRadioProgramForCalendar(
   now: number,
@@ -360,15 +387,22 @@ function adaptRadioProgramForCalendar(
   otherItems: ScheduleItem[],
 ): ScheduleItem[] {
   const today = tokyoParts(now).date;
+  const horizon = supportCalendarHorizon(now);
   let startDate = monthStartDate(today);
   let endDate = addCalendarDays(today, daysAhead);
   for (const item of otherItems) {
     const itemStart = monthStartDate(item.date);
     const itemEnd = monthEndDate(item.endDate ?? item.date);
-    if (itemStart < startDate) startDate = itemStart;
-    if (itemEnd > endDate) endDate = itemEnd;
+    if (itemStart >= horizon.startDate && itemStart < startDate) {
+      startDate = itemStart;
+    }
+    if (itemEnd <= horizon.endDate && itemEnd > endDate) {
+      endDate = itemEnd;
+    }
   }
-  return radioSlotsBetween(startDate, endDate);
+  const clamped = clampToHorizon(startDate, endDate, horizon);
+  if (!clamped) return [];
+  return radioSlotsBetween(clamped.startDate, clamped.endDate);
 }
 
 export function adaptRadioProgram(
@@ -376,10 +410,13 @@ export function adaptRadioProgram(
   daysAhead: number,
 ): ScheduleItem[] {
   const today = tokyoParts(now).date;
-  return radioSlotsBetween(
+  const clamped = clampToHorizon(
     monthStartDate(today),
     addCalendarDays(today, daysAhead),
+    supportCalendarHorizon(now),
   );
+  if (!clamped) return [];
+  return radioSlotsBetween(clamped.startDate, clamped.endDate);
 }
 
 const tokyoShortDateFormatter = new Intl.DateTimeFormat("ja-JP", {
