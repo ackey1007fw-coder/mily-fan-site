@@ -27,25 +27,30 @@ import { readFile } from "node:fs/promises";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const NEWS_ID = "2026-08-26-mixch-15x-day";
 const MIXCH_URL = "https://mixch.tv/m/nxqYblH8";
-const CAPTION =
-  "今日は1.5倍デーだってよ？！😳🫶️❤️私はみんなと絶景見に行くよ。絶対にね。#キャンガル #キャンガル2027 #キャンパスガールズ #キャンパスガールズ2027 #campusgirls #campusgirls2027";
+const X_SOURCE = "https://x.com/mily_chan36/status/2092481552475460058";
+/** Mixch page / X caption cluster: flushed face + heart hands + Fitzpatrick 1-2 + heavy heart exclamation + VS16 */
+const MIXCH_PAGE_EMOJI = "\u{1F633}\u{1FAF6}\u{1F3FB}\u{2763}\u{FE0F}";
+const MESSAGE =
+  "おすすめの動画を見つけたよ！ #ミクチャ\n" +
+  `今日は1.5倍デーだってよ？！${MIXCH_PAGE_EMOJI}私はみんなと絶景見に行くよ。絶対にね。#キャンガル #キャンガル2027 #キャンパスガールズ #キャンパスガールズ2027 ${MIXCH_URL}`;
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
 }
 
 describe("2026-08-26 Mixch 1.5x day NEWS", () => {
-  it("adds one JST-dated Mixch-sourced NEWS item with shared outbound media", () => {
+  it("adds one JST-dated NEWS item with X source, Mixch CTA, and shared outbound media", () => {
     const entry = item();
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
+    assert.equal(news.filter((candidate) => candidate.source === X_SOURCE).length, 1);
     assert.equal(entry.date, "2026-08-26");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
-    assert.equal(entry.source, MIXCH_URL);
-    assert.equal(entry.sourceLabel, "Mixchの動画を見る");
-    assert.equal(entry.url, undefined);
+    assert.equal(entry.source, X_SOURCE);
+    assert.equal(entry.sourceLabel, "Xの投稿を見る");
+    assert.equal(entry.url, MIXCH_URL);
     assert.equal(entry.ctaLabel, "Mixchで見る");
     assert.equal(entry.media, mixch15xDayMovie);
     assert.equal(entry.media.kind, "mixch");
@@ -54,9 +59,9 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
     assert.deepEqual(verifyNews(news), []);
   });
 
-  it("summarizes the caption without inventing a trip, location, slot, or X URL", () => {
+  it("summarizes the caption without inventing a trip, location, or schedule slot", () => {
     const entry = item();
-    const copy = `${entry.title}\n${entry.body}\n${JSON.stringify(entry)}`;
+    const copy = `${entry.title}\n${entry.body}`;
 
     assert.match(entry.title, /1\.5倍デー/);
     assert.match(entry.body, /8月26日/);
@@ -64,7 +69,6 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
     assert.match(entry.body, /1\.5倍デー/);
     assert.match(entry.body, /絶景を見に行く/);
     assert.match(entry.body, /CAMPUS GIRLS/);
-    assert.equal(entry.message?.text, CAPTION);
 
     for (const phrase of [
       "行った",
@@ -74,17 +78,23 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
       "江の島",
       "10:00",
       "SHOWROOM",
-      "x.com/",
-      "twitter.com/",
     ]) {
       assert.equal(copy.includes(phrase), false, phrase);
     }
   });
 
-  it("does not invent an X URL and keeps Mixch as source and CTA", () => {
+  it("keeps the X announcement verbatim with Mixch-page emoji code points", () => {
     const entry = item();
-    assert.match(entry.source, /^https:\/\/mixch\.tv\/m\/nxqYblH8$/);
-    assert.equal(entry.source.includes("x.com"), false);
+
+    assert.equal(entry.message?.label, "みりぃのX投稿");
+    assert.equal(entry.message?.text, MESSAGE);
+    assert.match(
+      entry.message.text,
+      /今日は1\.5倍デーだってよ？！\u{1F633}\u{1FAF6}\u{1F3FB}\u{2763}\u{FE0F}私はみんなと絶景見に行くよ/u,
+    );
+    assert.equal(entry.message.text.includes("\u{2764}"), false);
+    assert.equal(entry.message.text.includes("\u{1FAF6}\u{FE0F}"), false);
+    assert.equal(entry.source.includes("?s="), false);
     assert.equal(entry.source.includes("instagram.com"), false);
   });
 
@@ -108,7 +118,7 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
     assert.equal(selected[0]?.id, NEWS_ID);
     assert.ok(feedItem);
     assert.equal(feedItem.publishedAt, "2026-08-26T00:00:00+09:00");
-    assert.equal(feedItem.sourceUrl, MIXCH_URL);
+    assert.equal(feedItem.sourceUrl, X_SOURCE);
     assert.equal(feedItem.image, undefined);
   });
 
@@ -147,13 +157,18 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     assert.equal(initial[1]?.item, mixchConfidenceMessageMovie);
     assert.equal(preview[0]?.item, mixch15xDayMovie);
     assert.equal(preview[1]?.item, mixchConfidenceMessageMovie);
+
+    const activityMedia = selectActivityMedia("campus-girls");
+    assert.equal(activityMedia.includes(mixch15xDayMovie), false);
+    assert.equal(activityMedia.includes(mixchConfidenceMessageMovie), false);
     assert.equal(
-      selectActivityMedia("campus-girls").includes(mixch15xDayMovie),
-      true,
+      activityMedia.some((media) => media.kind === "mixch"),
+      false,
     );
+    assert.equal(selectActivityNews("campus-girls")[0]?.id, NEWS_ID);
     assert.equal(
-      selectActivityMedia("campus-girls").includes(mixchConfidenceMessageMovie),
-      true,
+      selectActivityNews("campus-girls")[1]?.id,
+      "2026-08-25-mixch-confidence-message",
     );
   });
 
@@ -193,6 +208,10 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     const gallerySource = sources[2];
     assert.match(gallerySource, /capped\.filter\(\(entry\) => entry\.kind === "mixch"\)/);
     assert.match(card, /Mixchが新しいタブで開きます/);
+
+    const activitiesPage = sources[3];
+    assert.doesNotMatch(activitiesPage, /MixchOutboundCard/);
+    assert.doesNotMatch(activitiesPage, /kind === "mixch"/);
   });
 
   it("does not copy Mixch movie files into public/media or media/original", async () => {

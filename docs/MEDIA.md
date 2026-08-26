@@ -120,7 +120,7 @@ Mixch に公式 oEmbed / iframe embed はない。Mixch の movie ファイル�
 そのため **Mixch ファイルはコピーせず、outbound player card にする。**
 
 - 対象: オーナー指定の公開 Mixch 動画 `https://mixch.tv/m/{id}`。確認済み本人アカウントは `https://mixch.tv/u/10114673` のみ。
-- 掲載面: NEWS（Latest）と Gallery。同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。
+- 掲載面: NEWS（Latest）と Gallery。同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Activities の「関連するメディア」には出さない。
 - 見た目: poster + 中央の再生オーバーレイ + Mixch ラベル。`<video>` も iframe も使わない。
 - poster: その動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）だけを使ってよい。X / Instagram の CDN サムネイル例外は作らない。
 - Play / click / CTA: Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。このサイトで再生していると誤認させない。

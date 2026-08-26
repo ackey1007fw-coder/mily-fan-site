@@ -149,5 +149,7 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);
     assert.match(ops, /Mixchファイルは自己ホストしていない/);
+    assert.match(ops, /2092481552475460058/);
+    assert.match(ops, /関連メディアにはMixchカードを出さない/);
   });
 });

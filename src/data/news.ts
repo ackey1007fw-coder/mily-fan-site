@@ -97,13 +97,16 @@ export const news: NewsItem[] = [
     activityIds: ["campus-girls"],
     title: "「今日は1.5倍デーだってよ？！」——みんなと絶景を見に行くよ",
     body: "8月26日、みりぃがMixchに動画を公開しました。今日は1.5倍デーだと伝え、みんなと絶景を見に行くと話しています。CAMPUS GIRLS関連のハッシュタグが添えられています。",
-    source: "https://mixch.tv/m/nxqYblH8",
-    sourceLabel: "Mixchの動画を見る",
+    source: "https://x.com/mily_chan36/status/2092481552475460058",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://mixch.tv/m/nxqYblH8",
     ctaLabel: "Mixchで見る",
     media: mixch15xDayMovie,
     message: {
-      label: "みりぃのMixch",
-      text: "今日は1.5倍デーだってよ？！😳🫶️❤️私はみんなと絶景見に行くよ。絶対にね。#キャンガル #キャンガル2027 #キャンパスガールズ #キャンパスガールズ2027 #campusgirls #campusgirls2027",
+      label: "みりぃのX投稿",
+      text:
+        "おすすめの動画を見つけたよ！ #ミクチャ\n" +
+        "今日は1.5倍デーだってよ？！\u{1F633}\u{1FAF6}\u{1F3FB}\u{2763}\u{FE0F}私はみんなと絶景見に行くよ。絶対にね。#キャンガル #キャンガル2027 #キャンパスガールズ #キャンパスガールズ2027 https://mixch.tv/m/nxqYblH8",
     },
   },
   {

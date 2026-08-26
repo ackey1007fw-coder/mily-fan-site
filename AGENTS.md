@@ -164,7 +164,7 @@ pnpm dev
 - 掲載は `src/data/media.ts` の `published: true` のみ。出典 URL・投稿日・撮影者が未確認の項目は `null` のまま残す（推測して埋めない）。
 - 本人の顔の AI 生成・置換・補正・加工、生成塗り足しは禁止。
 - X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードしない。X / Instagram の画像 CDN URL をサイトメディアとして hotlink しない。Mixch の `_movie_mps` / MP4 をこのドメインで再生しない。Mixch タイムラインはクロールせず、オーナーが指定した movie URL だけを扱う。
-- **Mixch outbound の限定例外:** オーナー指定の公開 Mixch 動画（`https://mixch.tv/m/{id}`、確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。カードは動画らしく見せる（poster + play overlay）。poster はその動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）を使ってよい。これは唯一の SNS サムネイル例外で、X / Instagram は禁止のまま。Play / click / CTA は Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。NEWS と Gallery は動画ごとに同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Mixch ファイルを repo にコピーしない。オーナーが後から原ファイルを提供した場合は既存の自己ホストパイプラインを使う（別経路）。photo-forward は維持し、Mixch カードはビジュアルとして数えるので該当 NEWS をテキストだけにしない。
+- **Mixch outbound の限定例外:** オーナー指定の公開 Mixch 動画（`https://mixch.tv/m/{id}`、確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。Activities の「関連するメディア」には出さない（`activityIds` による関連 NEWS は残す）。カードは動画らしく見せる（poster + play overlay）。poster はその動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）を使ってよい。これは唯一の SNS サムネイル例外で、X / Instagram は禁止のまま。Play / click / CTA は Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。NEWS と Gallery は動画ごとに同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Mixch ファイルを repo にコピーしない。オーナーが後から原ファイルを提供した場合は既存の自己ホストパイプラインを使う（別経路）。photo-forward は維持し、Mixch カードはビジュアルとして数えるので該当 NEWS をテキストだけにしない。
 
 ## 配信予定の自動取得
 
@@ -193,7 +193,7 @@ pnpm dev
 - 実在する本人の顔を AI 生成しない。生成塗り足し（outpainting / generative fill）も禁止。
 - 他のファンサイトの人物情報・写真・ニュース・イベント・SNS・プロフィールをコピーしない。
 - 外部リンクは `https:` / `http:` のみ。`rel="noopener noreferrer"` を付ける。
-- **唯一の SNS サムネイル例外:** オーナー指定の公開 Mixch 動画（確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。poster はその動画の公式 Mixch サムネイルのみ。Play は Mixch で開く。ファイルは repo にコピーしない。X / Instagram のサムネイル例外は作らない。
+- **唯一の SNS サムネイル例外:** オーナー指定の公開 Mixch 動画（確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。Activities の「関連するメディア」には出さない。poster はその動画の公式 Mixch サムネイルのみ。Play は Mixch で開く。ファイルは repo にコピーしない。X / Instagram のサムネイル例外は作らない。
 
 ## 品質ゲート
 
