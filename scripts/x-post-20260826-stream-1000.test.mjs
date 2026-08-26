@@ -152,18 +152,19 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
   it("follows the newer Mixch 1.5x NEWS on 2026-08-26", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[1], NEWS_ID);
-    assert.equal(ordered[2], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[3], "2026-08-25-motivation");
-    assert.equal(news.length, 32);
-    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 2);
+    assert.equal(ordered[0], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[1], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[2], NEWS_ID);
+    assert.equal(ordered[3], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[4], "2026-08-25-motivation");
+    assert.equal(news.length, 33);
+    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 3);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
     const selected = selectActivityNews("live-stream", news, news.length);
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
-    assert.equal(selected[0]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-26-girl-award-event-fanroom");
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("live-stream")));
     assert.equal(
       selectActivityNews("miss-circle", news, news.length).some(

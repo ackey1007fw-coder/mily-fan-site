@@ -121,7 +121,8 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
 
   it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 19), [
+    assert.deepEqual(ordered.slice(0, 20), [
+      "2026-08-26-girl-award-event-fanroom",
       "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
@@ -142,14 +143,14 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
     ]);
-    assert.equal(news.length, 32);
+    assert.equal(news.length, 33);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
     const hero = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
 
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-26-girl-award-event-fanroom");
     assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
   });

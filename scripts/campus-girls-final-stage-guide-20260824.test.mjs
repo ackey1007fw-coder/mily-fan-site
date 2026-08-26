@@ -80,14 +80,15 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
 
   it("ranks ahead of the earlier 8/24 night-thanks item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[1], "2026-08-26-stream-1000");
-    assert.equal(ordered[2], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[3], "2026-08-25-motivation");
-    assert.equal(ordered[4], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(ordered[5], NEWS_ID);
-    assert.equal(ordered[6], "2026-08-24-makeup-stream");
-    assert.equal(ordered[7], EXISTING_8_24);
+    assert.equal(ordered[0], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[1], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[2], "2026-08-26-stream-1000");
+    assert.equal(ordered[3], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[4], "2026-08-25-motivation");
+    assert.equal(ordered[5], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(ordered[6], NEWS_ID);
+    assert.equal(ordered[7], "2026-08-24-makeup-stream");
+    assert.equal(ordered[8], EXISTING_8_24);
     assert.ok(news.some((entry) => entry.id === EXISTING_8_24));
     assert.ok(news.some((entry) => entry.id === CAMPUS_RESULT_ID));
   });
@@ -152,11 +153,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /32件/);
+    assert.match(ops, /33件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /8月26日の本人XによるPaton直接案内/);
     assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
     assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
-    assert.equal(news.length, 32);
+    assert.equal(news.length, 33);
   });
 });

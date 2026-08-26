@@ -1615,3 +1615,32 @@ Gallery・`/stories/`・`media.ts`・`galleryVideos.ts`・highlightsには追加
   Patonロゴ、写真、番号、SNSボタン、本人の名前・プロフィールだけを元構図のまま掲載する
 - b26-01とb26-02は同じ写真を含むが、前者は人物が主役の代表写真、後者は投票先の
   ページ文脈を示す記録画像として役割を分け、無意味な複製としては扱わない
+
+## 素材台帳（batch b27 / 受領日・source date 2026-08-26）
+
+2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。
+Gallery・`media.ts`・`galleryVideos.ts`・Drive Gallery・`/stories/` には含めない。
+Fan Roomの生スクリーンショット（前後ナビ・再生UI）は公開していない。
+
+オーナーが当該投稿のサイト内再生を明示依頼。SHOWROOMファンルームページは
+iframeできないため、公開ルームプロフィール API の `voice_list` から得た
+本人音声（id 88767403 / 2026-08-26T22:36:52+09:00）を自己ホストする。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b27-01 | `news/mily-b27-01-girl-award-event-voice.m4a` | ガルアワイベ最終日のお礼音声。約20.8秒 / AAC-LC / 12kHz / mono | ✅ Latest / NEWS のみ |
+
+確認済み:
+
+- provenance: owner-requested（オーナーが当該Fan Room音声のサイト内再生を依頼。SNSから取得していない）
+- 元素材は `media/original/mily-b27-01-girl-award-event-voice.m4a` に受領バイトを変えず保管（gitignore済み・コミットしない）
+  sha256: `33da6fc2a45f51d7df767e10286429313092d576e018f5c911167e19fb588fc1`
+- 元素材の実測: 72,203 bytes / M4A / AAC-LC / 12,000 Hz / mono / 20.82秒 / `creation_time` 2026-08-26T13:36:29Z
+- 公開派生: 89,084 bytes / M4A / AAC-LC / 12,000 Hz / mono / 20.82秒 / sha256
+  `22d00d249e252f3d8da76cbfe1017bd1717954a904c589829174263b94c94468`
+- metadata除去済み（`-map_metadata -1` / `-map_chapters -1`）。`creation_time` は残っていない
+- `+faststart` 確認済み（`moov` offset 28 < `mdat` offset 1770）
+- SHOWROOM CDN URL は公開データへ残さない。hotlinkしない
+- 音声はみりぃ本人のFan Roomボイスメモ。BGM権利が不明な動画音声の無音化ルールとは別判断
+- AI生成・加工なし
+

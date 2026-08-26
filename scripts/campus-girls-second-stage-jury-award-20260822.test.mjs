@@ -19,7 +19,7 @@ import {
   portalNewsId,
 } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
-import { storyBySlug, storySources } from "../src/data/stories.ts";
+import { stories, storyBySlug, storySources } from "../src/data/stories.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const slug = "campus-girls-2027-second-stage-jury-award";
@@ -307,14 +307,18 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
   });
 
   it("flows through the existing Portal Feed as separate NEWS and STORY items", () => {
+    const newsItems = news.filter((item) => item.date <= "2026-08-22");
+    const storyItems = stories.filter((story) => story.date <= "2026-08-22");
     const feed = createPortalFeed({
       now: new Date("2026-08-22T12:00:00+09:00"),
+      newsItems,
+      storyItems,
     });
     const image = new URL(campusGirlsSecondStageResultImage.src, siteOrigin()).href;
     const newsItem = findFeedItem(feed, portalNewsId(newsId));
     const storyItem = findFeedItem(feed, `mily:story:${slug}`);
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, newsItems);
     assertFeedItemBefore(feed, newsItem.id, storyItem.id);
     assert.equal(newsItem.sourceUrl, xSource);
     assert.equal(newsItem.image, image);

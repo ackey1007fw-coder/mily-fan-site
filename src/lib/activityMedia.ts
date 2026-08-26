@@ -4,8 +4,10 @@ import {
   type ActivityId,
 } from "../data/activities.ts";
 import {
+  isNewsAudio,
   news,
   sortNewsByDateDesc,
+  type NewsAudioMedia,
   type NewsItem,
   type NewsMedia,
 } from "../data/news.ts";
@@ -16,10 +18,13 @@ import {
 import { isMixchMovie, type MixchMovie } from "../data/mixchMovies.ts";
 import { stories, type Story, type StoryMedia } from "../data/stories.ts";
 
-/** Mixch outbound cards are NEWS + Gallery only, not Activity related media. */
+/**
+ * Mixch outbound cards and Fan Room audio are NEWS (+ Gallery for Mixch) only,
+ * not Activity related media.
+ */
 export type ActivityMediaItem = Exclude<
   NewsMedia | StoryMedia | GalleryVideoItem,
-  MixchMovie
+  MixchMovie | NewsAudioMedia
 >;
 
 export type ActivityMediaSources = {
@@ -59,11 +64,17 @@ function activityMediaKey(media: ActivityMediaItem): string {
   return `${media.kind}:${src ?? ""}`;
 }
 
+function isActivityNewsMedia(
+  media: NewsMedia,
+): media is Exclude<NewsMedia, MixchMovie | NewsAudioMedia> {
+  return !isMixchMovie(media) && !isNewsAudio(media);
+}
+
 /**
  * Selects explicitly related NEWS media plus media from related STORY slugs.
  * Story view objects that point at a Gallery manifest are resolved back to that
  * existing manifest object. Results are then deduplicated by manifest id.
- * Mixch outbound cards are NEWS + Gallery only and are not included here.
+ * Mixch outbound cards and Fan Room audio are NEWS-only and are not included here.
  */
 export function selectActivityMedia(
   activityId: ActivityId,
@@ -79,7 +90,7 @@ export function selectActivityMedia(
   const relatedNewsMedia = sortNewsByDateDesc(newsItems)
     .filter((item) => item.activityIds?.includes(activityId))
     .flatMap((item): ActivityMediaItem[] =>
-      item.media && !isMixchMovie(item.media) ? [item.media] : [],
+      item.media && isActivityNewsMedia(item.media) ? [item.media] : [],
     );
 
   const relatedStoryMedia = activity.relatedStorySlugs.flatMap((slug) => {
