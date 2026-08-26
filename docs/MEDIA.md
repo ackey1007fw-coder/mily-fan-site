@@ -1787,7 +1787,66 @@ Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
   `2c32f0e3fa6623dc2b315dd33d87ba2395a58ff4a00621d8cfd15cdce874a1e9`
 
 Gallery 写真は新しい順で b28-01 → b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+b29-01 追加後は b29-01 が先頭で、そのあとに b28-01 → b27-07 → b27-06。
 Latest の先頭は 6位お礼X投稿。投票案内Storyカードは同じ日の次点。
+
+## 素材台帳（batch b29 / 受領日・source date 2026-08-02）
+
+2026-08-02 07:20:06 JST の本人X投稿（created_at Sat Aug 01 22:20:06 UTC 2026）。
+公開permalinkあり。Story閲覧スクリーンショットではない。実写の室内セルフィー。
+`sns-post`。Driveの受け渡しURL / file IDは公開情報・tracked textへ残さない。
+この掲載作業では元素材の再エンコード・リネーム・差し替えをしていない。
+
+既存 NEWS `2026-08-02-21st-birthday` へ代表画像として添付する。新しい誕生日NEWSは作らない。
+NEWS の一次出典と CTA は従来どおり Instagram
+（https://www.instagram.com/p/DbiY3PHk1c8/）。写真の provenance / sourceUrl は
+当該X投稿。X permalink は additionalSources として同じカードへ出す。
+
+b01（花束・ケーキ・ネックレス）、b05（落ち葉）、b06（ウインク）、b08（鏡セルフィー）とは
+別カット。同一sha256の公開ファイルは無い。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b29-01 NEWS | `news/mily-b29-01-birthday-indoor-selfie.jpg` | クローゼットの前で、ピンストライプのノースリーブを着て横を向き微笑む室内セルフィー。1536×2048。sns-post | ✅ 既存 21歳誕生日 NEWS の `src` fallback。表示は Gallery の 480/960/1600 srcset。NEWS JPEG は上書きしない |
+| b29-01 Gallery | `gallery/mily-b29-01-birthday-indoor-selfie-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生。元素材 1536×2048 のため withoutEnlargement で 1600 は拡大しない | ✅ Gallery photo（`media.ts`）。NEWS JPEG のバイトは複製していない |
+
+出典: `https://x.com/Mily_chan36/status/2083679191892115846`
+NEWS 一次出典（維持）: `https://www.instagram.com/p/DbiY3PHk1c8/`
+
+### 公開ファイルの実測
+
+- provenance: `sns-post`（確認済みの本人X投稿。sourceUrl 必須）
+- source date: `2026-08-02`（snowflake + fxtwitter created_at Sat Aug 01 22:20:06 +0000 2026）
+- credit: 未確認のため `null`
+- 公開派生はEXIF / GPS / IPTC / XMP / ICCなし
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除なし
+- 受け渡し用URL / file IDは公開情報へ残さない
+- Hero の featured（b01-03）は動かさない
+- `/stories/` 記事と highlights には追加しない
+
+b29-01 NEWS JPEG: 321,357 bytes / 1536×2048 / sha256
+`5b887b86187288035de8843eb83770b853d8b0e3578162389e071f8382563632`
+
+NEWS カードの表示は既存 Gallery 派生を `srcSet` / `webpSrcSet` で使い、
+NEWS JPEG は fallback `src` のまま残す（上書き・再エンコードしない）。
+
+Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
+
+- 480.jpg 25,951 bytes / 480×640 / sha256
+  `d61ba3f34962289389a9b049500963f73c4c28a64644fe86f3d478489aafaf5a`
+- 480.webp 14,844 bytes / sha256
+  `50a1e611b77793d8af21f479e99313009cb4c92f0d6fffb5f56577c64037f351`
+- 960.jpg 88,400 bytes / 960×1280 / sha256
+  `e5fc835a7600303bef4eeb66fbb35e92c2d92bd47bcc91040db177b74f342a49`
+- 960.webp 54,852 bytes / sha256
+  `97ac532135e309a3d9bf87cebfd87811a10f12b5595bb90943279fbcc17399e3`
+- 1600.jpg 274,517 bytes / 1536×2048 / sha256
+  `f762ee2471258f5ae1ef7fc4bbcffeadde8063f86beff0081a653afa15d01b3e`
+- 1600.webp 139,944 bytes / sha256
+  `5fb4fe7ed3857bcc16b5aa09ef54b454410f1ecb290b098a18b68b5c9614aebb`
+
+Gallery 写真は新しい順で b29-01 → b28-01 → b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+NEWS 件数は 37 のまま。誕生日カードはテキストだけにしない。
 
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 

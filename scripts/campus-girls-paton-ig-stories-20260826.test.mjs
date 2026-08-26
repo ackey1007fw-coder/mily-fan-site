@@ -421,9 +421,9 @@ describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
 
     assert.equal(media.filter((entry) => entry.id === "mily-b27-07").length, 1);
     assert.equal(media.filter((entry) => entry.id === "mily-b27-06").length, 1);
-    assert.equal(visible[1], patonVoteMirrorStillPhoto);
-    assert.equal(visible[2], patonVoteCollageStillPhoto);
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 21);
+    assert.equal(visible[2], patonVoteMirrorStillPhoto);
+    assert.equal(visible[3], patonVoteCollageStillPhoto);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 22);
 
     for (const photo of [patonVoteMirrorStillPhoto, patonVoteCollageStillPhoto]) {
       assert.equal(photo.kind, "photo");

@@ -46,6 +46,10 @@ import {
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
 import { girlsawardShowroomSixthImage } from "./girlsawardShowroom6th.ts";
+import {
+  BIRTHDAY_INDOOR_SELFIE_X_URL,
+  birthdayIndoorSelfieImage,
+} from "./birthdayIndoorSelfie.ts";
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 
 export type NewsVideoMedia = {
@@ -751,7 +755,14 @@ https://mixch.tv/m/ZY4hSt3K`,
     title: "21歳の誕生日を迎えました",
     body: "21歳の誕生日。お祝いしてくれたみなさんへの感謝と、「考えていることを脳内に留めず行動に移す。」という21歳の抱負。",
     source: "https://www.instagram.com/p/DbiY3PHk1c8/",
+    additionalSources: [
+      {
+        label: "Xの投稿を見る",
+        url: BIRTHDAY_INDOOR_SELFIE_X_URL,
+      },
+    ],
     ctaLabel: "Instagramの投稿を見る",
+    media: birthdayIndoorSelfieImage,
   },
 ];
 
