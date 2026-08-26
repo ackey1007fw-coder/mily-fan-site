@@ -36,14 +36,16 @@ export const contest: Contest = {
   //     （Watch public sources が検知。Issue #9）
   //   2026-08-19: 主催者の三次審査進出者一覧（list/3）と本人Xの報告で
   //     2次審査通過・三次審査進出が確定 →「3次審査進出」
+  //   2026-08-26: 主催者公式 https://www.misscircle.jp/ の SCHEDULE で
+  //     三次審査の審査期間 9/3〜9/13 を確認。WEB投票審査は
+  //     09/03 12:00〜09/13 23:59。SHOWROOM審査は「後日発表予定」のまま
+  //     なので時刻は書かない。ContestPhase は日付のみ保持する。
   // 「最終日」表記から締切日を推定して end に入れることはしない。
-  // 三次審査の日程・審査方法は未公表のため start / end は null のまま。
-  // 期間が一次ソースで公表されたら start / end を埋める。
   currentPhase: {
     name: "3次審査進出",
-    start: null,
-    end: null,
-    source: "https://2026.misscircle.jp/list/3",
+    start: "2026-09-03",
+    end: "2026-09-13",
+    source: "https://www.misscircle.jp/",
   },
-  lastVerifiedAt: "2026-08-19",
+  lastVerifiedAt: "2026-08-26",
 };

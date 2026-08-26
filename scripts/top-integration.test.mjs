@@ -835,11 +835,9 @@ describe("P6 keeps the confirmed SHOWROOM fallback CTA", () => {
   it("renders retained and fallback actions in one CTA row", () => {
     const dashboard = source("src/components/TodayDashboard.tsx");
     assert.match(dashboard, /fallbackActions/);
-    assert.match(
-      dashboard,
-      /const secondaryActions = \[\.\.\.retainedActions, \.\.\.fallbackActions\];/,
-    );
+    assert.match(dashboard, /retainedActions, \.\.\.fallbackActions/);
     assert.match(dashboard, /secondaryActions\.map\(\(action\) =>/);
+    assert.match(dashboard, /offeredUrls/);
     // SNS chip の構成は変えない（showroom は従来どおり chip に入れない）
     assert.match(dashboard, /const SNS_PLATFORMS = \["x", "instagram", "tiktok"\] as const;/);
   });

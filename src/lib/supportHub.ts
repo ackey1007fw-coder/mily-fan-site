@@ -13,6 +13,8 @@ import type { LiveView } from "./realtimeStore.ts";
 import {
   adaptContestSchedule,
   adaptSupportEvents,
+  formatShortTokyoDate,
+  formatShortTokyoEndDate,
   liveSupportEvents,
   type PendingSupportItem,
 } from "./supportCalendar.ts";
@@ -70,12 +72,17 @@ export function selectSupportToday(input: {
   const phase = input.contest.currentPhase;
 
   if (phase) {
+    const verified = `${input.contest.lastVerifiedAt.replace(/-/g, ".")}確認`;
+    const period =
+      phase.start && phase.end
+        ? `${formatShortTokyoDate(phase.start)}〜${formatShortTokyoEndDate(phase.start, phase.end)}`
+        : null;
     items.push({
       key: "today:contest",
       activityId: "miss-circle",
       label: "現在の審査段階",
       value: phase.name,
-      note: `${input.contest.lastVerifiedAt.replace(/-/g, ".")}確認`,
+      note: period ? `${verified} / ${period}` : verified,
       source: phase.source,
       cta: {
         label: `${input.contest.entryNumber}を見る`,

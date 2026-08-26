@@ -20,6 +20,12 @@ const snsLabel: Record<string, string> = {
 const itemCta =
   "inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
 
+const primaryCta =
+  "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
+
+const secondaryCta =
+  "inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
+
 /**
  * 「今日のみりぃ」— サイトを開いた瞬間に状況を把握するcompact dashboard。
  *
@@ -38,7 +44,7 @@ export function TodayDashboard() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
 
   const banner = deriveBannerState({ live, radio, slots });
-  const { todayItems, nowItems, retainedActions, fallbackActions } =
+  const { todayItems, nowItems, voteActions, retainedActions, fallbackActions } =
     selectHomeToday({
       contest,
       supportEvents,
@@ -50,8 +56,20 @@ export function TodayDashboard() {
       banner,
       now,
     });
-  // バナー抑制で残したCTAと、どこもSHOWROOMへ送っていないときの確認済みfallback。
-  const secondaryActions = [...retainedActions, ...fallbackActions];
+  const nowCtaUrls = new Set(
+    nowItems.flatMap((item) => (item.cta ? [item.cta.url] : [])),
+  );
+  const [primaryVote, ...additionalVotes] = voteActions;
+  const liveVoteOnNow =
+    primaryVote.kind === "support-event" && nowCtaUrls.has(primaryVote.url);
+  const buttonActions = liveVoteOnNow ? additionalVotes : voteActions;
+  const offeredUrls = new Set([
+    ...nowCtaUrls,
+    ...buttonActions.map((action) => action.url),
+  ]);
+  const secondaryActions = [...retainedActions, ...fallbackActions].filter(
+    (action) => !offeredUrls.has(action.url),
+  );
 
   const contestToday = todayItems.find((item) => item.key === "today:contest");
   const scheduleItems = todayItems.filter(
@@ -114,31 +132,39 @@ export function TodayDashboard() {
 
         {nowItems.length > 0 ? (
           <ul className="mt-3 space-y-3 border-t border-sage/15 pt-3">
-            {nowItems.map((item) => (
-              <li
-                key={item.key}
-                className="min-w-0 rounded-2xl border border-apricot/50 bg-apricot-soft/40 p-3"
-              >
-                <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">
-                  現在進行中を確認
-                </p>
-                <p className="mt-1 text-base font-bold [overflow-wrap:anywhere] text-ink">
-                  {item.title}
-                </p>
-                {item.note ? (
-                  <p className="mt-1 text-xs leading-6 text-ink-muted">
-                    {item.note}
+            {nowItems.map((item) => {
+              const isLiveVote =
+                primaryVote.kind === "support-event" &&
+                item.cta?.url === primaryVote.url;
+              return (
+                <li
+                  key={item.key}
+                  className="min-w-0 rounded-2xl border border-apricot/50 bg-apricot-soft/40 p-3"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">
+                    現在進行中を確認
                   </p>
-                ) : null}
-                {item.cta ? (
-                  <p className="mt-2">
-                    <ExternalLink href={item.cta.url} className={itemCta}>
-                      {item.cta.label}
-                    </ExternalLink>
+                  <p className="mt-1 text-base font-bold [overflow-wrap:anywhere] text-ink">
+                    {item.title}
                   </p>
-                ) : null}
-              </li>
-            ))}
+                  {item.note ? (
+                    <p className="mt-1 text-xs leading-6 text-ink-muted">
+                      {item.note}
+                    </p>
+                  ) : null}
+                  {item.cta ? (
+                    <p className="mt-2">
+                      <ExternalLink
+                        href={item.cta.url}
+                        className={isLiveVote ? primaryCta : itemCta}
+                      >
+                        {item.cta.label}
+                      </ExternalLink>
+                    </p>
+                  ) : null}
+                </li>
+              );
+            })}
           </ul>
         ) : null}
 
@@ -146,28 +172,38 @@ export function TodayDashboard() {
           `/support/` への導線は、すぐ下の compact Support gateway が担当する。
           同じCTAを上下で繰り返さない。
 
+          期間中の投票は nowItems の主ボタンが担当する。同じURLを下の行へ重ねない。
+          投票期間が終わると nowItems から消え、下の行が MISS CIRCLE 応援になる。
+
           secondaryActions は、バナーが同じ枠を出していて行だけ抑制した項目のうち
           バナーが提供していない行き先（例: バナーが `#stream` に退避している間の
           直接のSHOWROOM URL）と、どこもSHOWROOMへ送っていないときに足す
           `socials.ts` の確認済みfallback。行き先が同じ導線はここには来ない。
         */}
-        <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-          <ExternalLink
-            href={contest.entryUrl}
-            className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
-          >
-            {contest.entryNumber}を応援する
-          </ExternalLink>
-          {secondaryActions.map((action) => (
-            <ExternalLink
-              key={action.url}
-              href={action.url}
-              className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
-            >
-              {action.label}
-            </ExternalLink>
-          ))}
-        </div>
+        {buttonActions.length > 0 || secondaryActions.length > 0 ? (
+          <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            {buttonActions.map((action, index) => (
+              <ExternalLink
+                key={action.url}
+                href={action.url}
+                className={
+                  !liveVoteOnNow && index === 0 ? primaryCta : secondaryCta
+                }
+              >
+                {action.label}
+              </ExternalLink>
+            ))}
+            {secondaryActions.map((action) => (
+              <ExternalLink
+                key={action.url}
+                href={action.url}
+                className={secondaryCta}
+              >
+                {action.label}
+              </ExternalLink>
+            ))}
+          </div>
+        ) : null}
 
         {snsLinks.length > 0 ? (
           <p className="mt-3 flex flex-wrap gap-2">
