@@ -148,7 +148,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
     assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
-    assert.equal(news.length, 30);
+    assert.equal(news.length, 31);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -514,7 +514,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /30件/);
+    assert.match(ops, /31件/);
     assert.match(ops, /独立動画12本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
@@ -526,17 +526,17 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     const feed = createPortalFeed();
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
     const latestIds = sortNewsByDateDesc(news).map((candidate) => candidate.id);
-
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, X_SOURCE);
     assert.ok(entry.image?.endsWith(nightThanksMorningStreamStoryVideo.poster));
     assert.equal(latestIds[0], "2026-08-26-stream-1000");
-    assert.equal(latestIds[1], "2026-08-25-motivation");
-    assert.equal(latestIds[2], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(latestIds[3], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(latestIds[4], "2026-08-24-makeup-stream");
-    assert.equal(latestIds[5], NEWS_ID);
-    assert.equal(latestIds[6], "2026-08-23-dragon-cloud");
+    assert.equal(latestIds[1], "2026-08-25-mixch-confidence-message");
+    assert.equal(latestIds[2], "2026-08-25-motivation");
+    assert.equal(latestIds[3], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(latestIds[4], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(latestIds[5], "2026-08-24-makeup-stream");
+    assert.equal(latestIds[6], NEWS_ID);
+    assert.equal(latestIds[7], "2026-08-23-dragon-cloud");
   });
 });

@@ -359,9 +359,9 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-
-    assert.deepEqual(ordered.slice(0, 21), [
+    assert.deepEqual(ordered.slice(0, 22), [
       "2026-08-26-stream-1000",
+      "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
       "2026-08-24-seasidecircle-yes-tokyo",
       "2026-08-24-campus-girls-final-stage-guide",
@@ -383,7 +383,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 30);
+    assert.equal(news.length, 31);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

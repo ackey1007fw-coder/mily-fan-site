@@ -153,8 +153,9 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
     assert.equal(ordered[0], NEWS_ID);
-    assert.equal(ordered[1], "2026-08-25-motivation");
-    assert.equal(news.length, 30);
+    assert.equal(ordered[1], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[2], "2026-08-25-motivation");
+    assert.equal(news.length, 31);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 1);
   });
 

@@ -93,6 +93,24 @@ export const news: NewsItem[] = [
     },
   },
   {
+    id: "2026-08-25-mixch-confidence-message",
+    date: "2026-08-25",
+    sameDayOrder: 1,
+    activityIds: ["campus-girls"],
+    title: "「自信のないあなたへ」——みりぃがMixchで届けた大切なメッセージ",
+    body: "8月25日の朝、みりぃがMixchに「自信のないあなたへ」を公開しました。自分よりも周りの人の良いところが目に入り、自分自身については足りないところを見つけてしまう——そんな「自信のなさ」に寄り添いながら、これまで歩いてきた道には一つひとつ足跡が残っていると語りかける動画です。みりぃ自身も、自分に自信がなく不安だからこそ、みんなと頑張りたいと伝えています。公開後のXのリプライでは、「キャンガルでも絶対に発信したいと思っていたこの大切な動画」と改めて紹介。CAMPUS GIRLSで届けたいと本人が語った思いと、応援してくれる皆さんと一緒に頑張りたいという言葉を残しています。",
+    source: "https://x.com/mily_chan36/status/2092031986810728533",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://mixch.tv/m/ZY4hSt3K",
+    ctaLabel: "Mixchで「自信のないあなたへ」を見る",
+    message: {
+      label: "みりぃのX投稿",
+      text: `#ミクチャ で動画を投稿したよ！見に来てね！
+【自信のないあなたへ】
+https://mixch.tv/m/ZY4hSt3K`,
+    },
+  },
+  {
     id: "2026-08-25-motivation",
     date: "2026-08-25",
     activityIds: ["miss-circle", "live-stream"],
