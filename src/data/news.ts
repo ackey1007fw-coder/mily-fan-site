@@ -59,7 +59,7 @@ import { pandaPastPicImage } from "./pandaPastPic.ts";
 import { eveningRadioShowroomImage } from "./eveningRadioShowroom.ts";
 import { campusGirlsFinalStageFlyerImage } from "./campusGirlsFinalStageFlyer.ts";
 import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
-import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStreamImage.ts";
+import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
 import { autumnLeafNewsImage } from "./autumnLeafNewsImage.ts";
 
 export type NewsVideoMedia = {
