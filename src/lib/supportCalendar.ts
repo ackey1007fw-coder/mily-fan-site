@@ -312,15 +312,20 @@ export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
   }));
 }
 
-export function adaptRadioProgram(
-  now: number,
-  daysAhead: number,
-): ScheduleItem[] {
-  const today = tokyoParts(now).date;
-  const monthStart = `${today.slice(0, 7)}-01`;
-  const endDate = addCalendarDays(today, daysAhead);
+function monthStartDate(date: string): string {
+  return `${date.slice(0, 7)}-01`;
+}
+
+function monthEndDate(date: string): string {
+  const year = Number(date.slice(0, 4));
+  const month = Number(date.slice(5, 7));
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return `${date.slice(0, 7)}-${String(lastDay).padStart(2, "0")}`;
+}
+
+function radioSlotsBetween(startDate: string, endDate: string): ScheduleItem[] {
   const items: ScheduleItem[] = [];
-  for (let date = monthStart; date <= endDate; date = addCalendarDays(date, 1)) {
+  for (let date = startDate; date <= endDate; date = addCalendarDays(date, 1)) {
     const [year, month, day] = date.split("-").map(Number);
     if (new Date(Date.UTC(year, month - 1, day)).getUTCDay() !== radioProgram.weekday) {
       continue;
@@ -343,6 +348,38 @@ export function adaptRadioProgram(
     });
   }
   return items;
+}
+
+/**
+ * ナビ可能な月（当月頭〜翌月末、および他の確認済み予定が伸びる月）に
+ * 同じ番組枠を展開する。新しい外部事実は追加しない。
+ */
+function adaptRadioProgramForCalendar(
+  now: number,
+  daysAhead: number,
+  otherItems: ScheduleItem[],
+): ScheduleItem[] {
+  const today = tokyoParts(now).date;
+  let startDate = monthStartDate(today);
+  let endDate = addCalendarDays(today, daysAhead);
+  for (const item of otherItems) {
+    const itemStart = monthStartDate(item.date);
+    const itemEnd = monthEndDate(item.endDate ?? item.date);
+    if (itemStart < startDate) startDate = itemStart;
+    if (itemEnd > endDate) endDate = itemEnd;
+  }
+  return radioSlotsBetween(startDate, endDate);
+}
+
+export function adaptRadioProgram(
+  now: number,
+  daysAhead: number,
+): ScheduleItem[] {
+  const today = tokyoParts(now).date;
+  return radioSlotsBetween(
+    monthStartDate(today),
+    addCalendarDays(today, daysAhead),
+  );
 }
 
 const tokyoShortDateFormatter = new Intl.DateTimeFormat("ja-JP", {
@@ -475,12 +512,17 @@ export function buildSupportCalendar(input: {
   );
   const contestResult = adaptContestSchedule(input.contest);
   const supportResult = adaptSupportEvents(input.supportEvents);
-  const scheduled = [
+  const datedItems = [
     ...contestResult.items,
     ...supportResult.items,
     ...adaptFanEvents(input.fanEvents),
     ...adaptStreamSlots(streamSlots),
-    ...(input.includeRadio ? adaptRadioProgram(input.now, input.daysAhead) : []),
+  ];
+  const scheduled = [
+    ...datedItems,
+    ...(input.includeRadio
+      ? adaptRadioProgramForCalendar(input.now, input.daysAhead, datedItems)
+      : []),
   ].sort(compareScheduleItems);
 
   const dayMap = new Map<string, ScheduleItem[]>();

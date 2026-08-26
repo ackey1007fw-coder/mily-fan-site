@@ -121,6 +121,67 @@ describe("monthly Support Calendar grid", () => {
       maxMonth: "2027-01",
     });
   });
+
+  it("extends radio slots through every month that other confirmed items make navigable", () => {
+    const now = Date.parse("2026-08-24T12:00:00+09:00");
+    const result = buildSupportCalendar({
+      contest: {
+        contestName: "fixture",
+        entryNumber: "ENTRY fixture",
+        entryUrl: "https://example.com/entry",
+        currentPhase: {
+          name: "pending phase",
+          start: null,
+          end: null,
+          source: "https://example.com/phase",
+        },
+        lastVerifiedAt: "2026-08-24",
+      },
+      supportEvents: [
+        {
+          id: "later",
+          activityId: "campus-girls",
+          kind: "support-campaign",
+          title: "later fixture",
+          schedule: {
+            state: "confirmed-period",
+            start: "2026-10-05",
+            end: "2026-10-06",
+            allDay: true,
+            timezone: "Asia/Tokyo",
+          },
+          source: "https://example.com/later",
+          verifiedAt: "2026-08-24",
+        },
+      ],
+      fanEvents: [],
+      streamSlots: [],
+      streamAvailability: "unavailable",
+      includeRadio: true,
+      now,
+      daysAhead: daysUntilEndOfNextTokyoMonth(now),
+    });
+    const radioDates = result.days
+      .flatMap(({ items }) => items)
+      .filter(({ origin }) => origin === "radio-program")
+      .map(({ date }) => date);
+    const itemMonths = result.days.flatMap((day) => [
+      day.date.slice(0, 7),
+      ...day.items
+        .map((item) => item.endDate?.slice(0, 7))
+        .filter((month) => Boolean(month)),
+    ]);
+
+    assert.equal(radioDates.includes("2026-08-02"), true);
+    assert.equal(radioDates.includes("2026-09-27"), true);
+    assert.equal(radioDates.includes("2026-10-04"), true);
+    assert.equal(radioDates.includes("2026-10-25"), true);
+    assert.equal(radioDates.some((date) => date > "2026-10-31"), false);
+    assert.deepEqual(navigableMonthBounds("2026-08", itemMonths), {
+      minMonth: "2026-08",
+      maxMonth: "2026-10",
+    });
+  });
 });
 
 describe("monthly ScheduleItem expansion", () => {
