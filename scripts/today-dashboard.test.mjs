@@ -30,6 +30,9 @@ describe("today dashboard", () => {
     assert.match(source, /selectHomeToday/);
     assert.match(source, /voteActions/);
     assert.match(source, /liveVoteOnNow/);
+    assert.match(source, /dashboardVoteButtons/);
+    assert.match(source, /投票受付中/);
+    assert.doesNotMatch(source, /additionalVotes/);
     assert.doesNotMatch(source, /contest\.entryUrl/);
     assert.doesNotMatch(source, /paton\.jp|2026\.misscircle\.jp/);
     assert.equal(contest.entryUrl, "https://2026.misscircle.jp/entry/734");

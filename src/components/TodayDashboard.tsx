@@ -44,28 +44,31 @@ export function TodayDashboard() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
 
   const banner = deriveBannerState({ live, radio, slots });
-  const { todayItems, nowItems, voteActions, retainedActions, fallbackActions } =
-    selectHomeToday({
-      contest,
-      supportEvents,
-      streamSlots: slots,
-      streamRoomUrl: roomUrl,
-      live,
-      radio,
-      radioPhase: schedulePhase,
-      banner,
-      now,
-    });
-  const nowCtaUrls = new Set(
-    nowItems.flatMap((item) => (item.cta ? [item.cta.url] : [])),
-  );
-  const [primaryVote, ...additionalVotes] = voteActions;
+  const {
+    todayItems,
+    nowItems,
+    voteActions,
+    dashboardVoteButtons,
+    retainedActions,
+    fallbackActions,
+  } = selectHomeToday({
+    contest,
+    supportEvents,
+    streamSlots: slots,
+    streamRoomUrl: roomUrl,
+    live,
+    radio,
+    radioPhase: schedulePhase,
+    banner,
+    now,
+  });
+  const [primaryVote] = voteActions;
   const liveVoteOnNow =
-    primaryVote.kind === "support-event" && nowCtaUrls.has(primaryVote.url);
-  const buttonActions = liveVoteOnNow ? additionalVotes : voteActions;
+    primaryVote.kind === "support-event" &&
+    nowItems.some((item) => item.cta?.url === primaryVote.url);
   const offeredUrls = new Set([
-    ...nowCtaUrls,
-    ...buttonActions.map((action) => action.url),
+    ...nowItems.flatMap((item) => (item.cta ? [item.cta.url] : [])),
+    ...dashboardVoteButtons.map((action) => action.url),
   ]);
   const secondaryActions = [...retainedActions, ...fallbackActions].filter(
     (action) => !offeredUrls.has(action.url),
@@ -139,10 +142,14 @@ export function TodayDashboard() {
               return (
                 <li
                   key={item.key}
-                  className="min-w-0 rounded-2xl border border-apricot/50 bg-apricot-soft/40 p-3"
+                  className={
+                    isLiveVote
+                      ? "min-w-0 rounded-2xl border-2 border-apricot bg-apricot-soft p-4 shadow-card"
+                      : "min-w-0 rounded-2xl border border-apricot/50 bg-apricot-soft/40 p-3"
+                  }
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">
-                    現在進行中を確認
+                    {isLiveVote ? "投票受付中" : "現在進行中を確認"}
                   </p>
                   <p className="mt-1 text-base font-bold [overflow-wrap:anywhere] text-ink">
                     {item.title}
@@ -172,17 +179,18 @@ export function TodayDashboard() {
           `/support/` への導線は、すぐ下の compact Support gateway が担当する。
           同じCTAを上下で繰り返さない。
 
-          期間中の投票は nowItems の主ボタンが担当する。同じURLを下の行へ重ねない。
-          投票期間が終わると nowItems から消え、下の行が MISS CIRCLE 応援になる。
+          期間中の投票は nowItems の目立つカードが担当する。同じURLを下の行へ重ねない。
+          常設の MISS CIRCLE ENTRY は期間中もボタン行に残す。Paton が終わっても
+          ミスサー導線は消えず、期限切れの投票ボタンだけ外す。
 
           secondaryActions は、バナーが同じ枠を出していて行だけ抑制した項目のうち
           バナーが提供していない行き先（例: バナーが `#stream` に退避している間の
           直接のSHOWROOM URL）と、どこもSHOWROOMへ送っていないときに足す
           `socials.ts` の確認済みfallback。行き先が同じ導線はここには来ない。
         */}
-        {buttonActions.length > 0 || secondaryActions.length > 0 ? (
+        {dashboardVoteButtons.length > 0 || secondaryActions.length > 0 ? (
           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
-            {buttonActions.map((action, index) => (
+            {dashboardVoteButtons.map((action, index) => (
               <ExternalLink
                 key={action.url}
                 href={action.url}
