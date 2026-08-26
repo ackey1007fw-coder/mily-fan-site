@@ -308,11 +308,17 @@ describe("8/19 well-rested morning news item", () => {
       path.join(root, "src/components/Latest.tsx"),
       "utf8",
     );
+    const newsImage = await readFile(
+      path.join(root, "src/components/NewsImage.tsx"),
+      "utf8",
+    );
 
     assert.match(latest, /media\.kind === "image"/);
-    assert.match(latest, /<img/);
+    assert.match(latest, /<NewsImage/);
+    assert.match(newsImage, /<img/);
     assert.match(latest, /object-contain/);
-    assert.doesNotMatch(latest, /<img[\s\S]{0,400}object-cover/);
+    assert.doesNotMatch(latest, /<NewsImage[\s\S]{0,400}object-cover/);
+    assert.doesNotMatch(newsImage, /<img[\s\S]{0,400}object-cover/);
     assert.match(latest, /whitespace-pre-line/);
   });
 });

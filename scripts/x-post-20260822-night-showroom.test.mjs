@@ -319,15 +319,23 @@ describe("2026-08-22 night SHOWROOM thanks X post — Portal Feed and responsive
 
   it("uses the existing uncropped, overflow-safe Latest rendering", async () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
-    const image = latest.match(/<img[\s\S]*?\/>/);
+    const newsImage = await readFile(
+      path.join(root, "src/components/NewsImage.tsx"),
+      "utf8",
+    );
+    const image = newsImage.match(/<img[\s\S]*?\/>/);
+    const call = latest.match(/<NewsImage[\s\S]*?\/>/);
 
     assert.ok(image);
-    assert.match(image[0], /object-contain/);
+    assert.ok(call);
+    assert.match(image[0], /className=\{className\}/);
     assert.doesNotMatch(image[0], /object-cover/);
-    assert.match(image[0], /\bw-full\b/);
-    assert.match(image[0], /\bh-auto\b/);
-    assert.match(image[0], /max-w-sm/);
+    assert.match(call[0], /object-contain/);
+    assert.doesNotMatch(call[0], /object-cover/);
+    assert.match(call[0], /\bw-full\b/);
+    assert.match(call[0], /\bh-auto\b/);
+    assert.match(call[0], /max-w-sm/);
     assert.match(latest, /whitespace-pre-line break-words/);
-    assert.doesNotMatch(image[0], /className="[^"]*\bw-\[\d+px\]/);
+    assert.doesNotMatch(call[0], /className="[^"]*\bw-\[\d+px\]/);
   });
 });

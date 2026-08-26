@@ -283,11 +283,19 @@ describe("2026-08-20 morning X post — Portal Feed", () => {
 describe("2026-08-20 morning X post — responsive rendering", () => {
   it("renders the photo uncropped and cannot overflow horizontally", async () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
-    const image = latest.match(/<img[\s\S]*?\/>/);
+    const newsImage = await readFile(
+      path.join(root, "src/components/NewsImage.tsx"),
+      "utf8",
+    );
+    const image = newsImage.match(/<img[\s\S]*?\/>/);
+    const call = latest.match(/<NewsImage[\s\S]*?\/>/);
 
     assert.ok(image);
-    const tag = image[0];
+    assert.ok(call);
+    const tag = call[0];
     // 縦横比を保ったまま、幅は親に収まる。トリミングしない
+    assert.match(image[0], /className=\{className\}/);
+    assert.doesNotMatch(image[0], /object-cover/);
     assert.match(tag, /object-contain/);
     assert.doesNotMatch(tag, /object-cover/);
     assert.match(tag, /\bw-full\b/);
