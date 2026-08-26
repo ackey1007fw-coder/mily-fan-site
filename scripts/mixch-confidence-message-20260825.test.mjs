@@ -92,11 +92,15 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(ordered[0]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(ordered[1]?.id, "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[2]?.id, "2026-08-26-stream-1000");
-    assert.equal(ordered[3]?.id, NEWS_ID);
-    assert.equal(ordered[4]?.id, "2026-08-25-motivation");
+    assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(ordered[2]?.id, "2026-08-26-instagram-followers-400");
+    assert.equal(ordered[3]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(ordered[4]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[5]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[6]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[7]?.id, NEWS_ID);
+    assert.equal(ordered[8]?.id, "2026-08-25-motivation");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-25").map(({ id }) => id),
       [NEWS_ID, "2026-08-25-motivation"],
@@ -111,8 +115,9 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
   it("appears on the existing CAMPUS GIRLS Activity page after the newer Mixch NEWS", () => {
     const selected = selectActivityNews("campus-girls");
 
-    assert.equal(selected[0]?.id, "2026-08-26-mixch-15x-day");
-    assert.equal(selected[1]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selected[1]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(selected[2]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 
@@ -145,8 +150,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /ZY4hSt3K/);
       assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 33);
-    assert.match(ops, /33件/);
+    assert.equal(news.length, 37);
+    assert.match(ops, /37件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);
     assert.match(ops, /Mixchファイルは自己ホストしていない/);

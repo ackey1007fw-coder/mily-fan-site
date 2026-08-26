@@ -116,12 +116,24 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
 
   it("leads 2026-08-26 NEWS above the 10:00 stream item via source-array order", () => {
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(ordered[1]?.id, NEWS_ID);
-    assert.equal(ordered[2]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(ordered[2]?.id, "2026-08-26-instagram-followers-400");
+    assert.equal(ordered[3]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(ordered[4]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[5]?.id, NEWS_ID);
+    assert.equal(ordered[6]?.id, "2026-08-26-stream-1000");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-26").map(({ id }) => id),
-      ["2026-08-26-girl-award-event-fanroom", NEWS_ID, "2026-08-26-stream-1000"],
+      [
+        "2026-08-26-girlsaward-showroom-6th",
+        "2026-08-26-paton-vote-stories",
+        "2026-08-26-instagram-followers-400",
+        "2026-08-26-morning-stream-thanks",
+        "2026-08-26-girl-award-event-fanroom",
+        NEWS_ID,
+        "2026-08-26-stream-1000",
+      ],
     );
   });
 
@@ -132,7 +144,8 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(selected[0]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selected[1]?.id, NEWS_ID);
     assert.ok(feedItem);
     assert.equal(feedItem.publishedAt, "2026-08-26T00:00:00+09:00");
     assert.equal(feedItem.sourceUrl, X_SOURCE);
@@ -182,9 +195,10 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
       activityMedia.some((media) => media.kind === "mixch"),
       false,
     );
-    assert.equal(selectActivityNews("campus-girls")[0]?.id, NEWS_ID);
+    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selectActivityNews("campus-girls")[1]?.id, NEWS_ID);
     assert.equal(
-      selectActivityNews("campus-girls")[1]?.id,
+      selectActivityNews("campus-girls")[2]?.id,
       "2026-08-25-mixch-confidence-message",
     );
   });

@@ -130,7 +130,7 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
     assert.equal(item()?.activityIds, undefined);
     assert.equal(item()?.title, "地震直後、みんなの安全を気遣うみりぃ💌");
     assert.equal(extraEarthquakeNews.length, 0);
-    assert.equal(news.length, 33);
+    assert.equal(news.length, 37);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -180,7 +180,7 @@ describe("2026-08-23 earthquake safety Story — shared Latest / Gallery asset",
     assert.deepEqual(matches, [earthquakeSafetyStoryVideo]);
     assert.equal(galleryVideos[6], earthquakeSafetyStoryVideo);
     assert.equal(visible[6], earthquakeSafetyStoryVideo);
-    assert.equal(visible.length, 14);
+    assert.equal(visible.length, 16);
     assert.equal(earthquakeSafetyStoryVideo.kind, "video");
     assert.equal(earthquakeSafetyStoryVideo.provenance, "owner-provided");
     assert.equal(earthquakeSafetyStoryVideo.sourceLabel, "Instagram Story");

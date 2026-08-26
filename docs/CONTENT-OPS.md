@@ -7,18 +7,18 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 ---
 
-## いま載っているもの（2026-08-27 監査）
+## いま載っているもの（2026-08-26 監査）
 
 事実は書き換えず、現状の棚卸しです。空欄は未確認のため意図的に空です。
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 33件。8月26日夜のSHOWROOMファンルーム「ガルアワイベ最終日【6位】」（本人Fan Room本文＋同じ夜22:36の音声メッセージ。音声は自己ホストm4aをLatest / NEWSで再生。Fan Roomスクリーンショット・Gallery・`/stories/` には出していない。恒久permalinkなしのため非リンクlabel＋確認済みSHOWROOMルームへのCTA）、8月26日のMixch「今日は1.5倍デーだってよ？！」（本人X投稿で同じMixchを案内。出典はX `https://x.com/mily_chan36/status/2092481552475460058`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8月26日未明の26日10:00〜11:00配信案内（本人X。テキストNEWS＋出典リンクのみ。夜は希望の表現のため枠としては未掲載）、8月25日のMixch「自信のないあなたへ」（本人X投稿と直後のリプライ。Mixch本編CTAを主導線、X原投稿を出典導線として掲載。同じMixch outbound player cardをLatest / NEWS / Galleryで共有。CAMPUS GIRLS関連NEWSとして既存Activityから参照。Mixchファイルは自己ホストしていない）、8月25日朝の「やる気、元気、勇気でたぞ」STORY CTA（本人X。本投稿＋11:40変更追記を出典。アーカイブ本文は `/stories/2026-08-25-motivation/`）、8月24日の湘南シーサイドサークル「Yes!東京」踊ってみた（番組Instagram。恒久permalink未確認のため非リンクlabel＋プロフィール関連リンク。b25動画をLatest / NEWS / Galleryで共有）、8月24日のCAMPUS GIRLS 2027 予選A Final STAGE案内（本人X。8月26日にPatonの三橋莉子（みりぃ）ページへの投票導線と、8月26日の本人XによるPaton直接案内を同じNEWSへ追加。b26-01人物写真を代表画像、b26-02 Paton出場者ページ画像を同じカードの2枚目に掲載。8月24日の元投稿も出典リンクとして維持）、8月24日朝の初メイク配信（同じNEWSに本人X投稿とInstagram Storyの内容を統合。b24-01 SHOWROOM横長画面を代表画像、オーナーが当該掲載面を明示承認した無加工b24-02 Story画像をHOME Latestと`/news/`の同じカードの2枚目に掲載。Gallery / `/stories/` には公開していない。恒久permalinkのないStory URLは作っていない）、8月24日未明の夜枠・ラジオお礼と朝配信案内（同じNEWSにSHOWROOMファンルーム本文、Instagram Story動画、本人X投稿を統合。Fan Roomスクリーンショットは非公開）、8月23日の本人Instagram「龍みたいな雲」投稿、8月23日の湘南シーサイドサークル「真夏のミュージカル特集」放送記録（同じNEWSに放送後お礼の番組Instagram Story動画、STORY記事CTA、FM湘南マジックウェイブの放送後X投稿を同居。新しいNEWSは作っていない）、8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。番組Instagram Storyと生放送アーカイブ文字起こしは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。8/26 Mixch 1.5倍デーNEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/26配信案内NEWS・8/25 Mixch NEWS・8/25 motivation NEWS・8/24朝メイクNEWS・8/24未明NEWS・Final STAGE案内NEWSの外部sourceは本人X投稿。Final STAGE案内NEWSは8月24日の案内をprimary source、8月26日の直接案内をadditional sourceとして持ち、関連URLはPaton本人ページ。b26の2枚は当該NEWS専用でGallery / `/stories/` には追加しない。8/25 Mixch NEWSの関連URLはMixch本編。8/23ラジオNEWSの外部sourceは局公式の放送後X投稿。8/24踊ってみたNEWSの外部permalinkは未確認 | 投稿内容・動画説明文の確認済み範囲を要約。配信案内はアーカイブ表現。同じ内容の追記は既存NEWSへ統合し、`additionalSources` で複数の確認済みpermalinkを保持する。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
+| `news.ts` | 37件。8月26日のガルアワイベ最終日6位お礼X投稿（本人X。くま耳キラキラフィルター自撮りをNEWS代表＋Gallery。ミスサー／フレキャン出場者限定のSHOWROOMイベントで6位のためGirlsAwardランウェイ出演にはならない。投票CTAなし。このNEWSカード自体はMixch非混在。`/stories/` 非追加）、8月26日夜のSHOWROOMファンルーム「ガルアワイベ最終日【6位】」（本人Fan Room本文＋同じ夜22:36の音声メッセージ。音声は自己ホストm4aをLatest / NEWSで再生。Fan Roomスクリーンショット・Gallery・`/stories/` には出していない。恒久permalinkなしのため非リンクlabel＋確認済みSHOWROOMルームへのCTA）、8月26日のMixch「今日は1.5倍デーだってよ？！」（本人X投稿で同じMixchを案内。出典はX `https://x.com/mily_chan36/status/2092481552475460058`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8月26日のCAMPUS GIRLS 2027予選ファイナル毎日投票案内Instagram Story（本人Story。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。b27-07鏡静止画を代表、b27-06コラージュ静止画・b27-02鏡動画・b27-01コラージュ動画を同じカードへ。Latest / NEWS と Gallery が同じ公開派生を共有。Story閲覧スクリーンショットは非掲載で返信コメントのみNEWS messageへ。投票CTAは既存8/24カードのまま）、8月26日のInstagramフォロワー400人感謝Story（NEWS専用b27-04動画。Gallery / media.ts / `/stories/` / highlights 非掲載）、8月26日の朝配信お礼Story（NEWS専用b27-03画像。Gallery非掲載。配信時刻は既存10:00案内NEWSのまま、events / streamSchedule には足さない）、8月26日未明の26日10:00〜11:00配信案内（本人X。テキストNEWS＋出典リンクのみ。夜は希望の表現のため枠としては未掲載）、8月25日のMixch「自信のないあなたへ」（本人X投稿と直後のリプライ。Mixch本編CTAを主導線、X原投稿を出典導線として掲載。同じMixch outbound player cardをLatest / NEWS / Galleryで共有。CAMPUS GIRLS関連NEWSとして既存Activityから参照。Mixchファイルは自己ホストしていない）、8月25日朝の「やる気、元気、勇気でたぞ」STORY CTA（本人X。本投稿＋11:40変更追記を出典。アーカイブ本文は `/stories/2026-08-25-motivation/`）、8月24日の湘南シーサイドサークル「Yes!東京」踊ってみた（番組Instagram。恒久permalink未確認のため非リンクlabel＋プロフィール関連リンク。b25動画をLatest / NEWS / Galleryで共有）、8月24日のCAMPUS GIRLS 2027 予選A Final STAGE案内（本人X。8月26日にPatonの三橋莉子（みりぃ）ページへの投票導線と、8月26日の本人XによるPaton直接案内を同じNEWSへ追加。b26-01人物写真を代表画像、b26-02 Paton出場者ページ画像を同じカードの2枚目に掲載。8月24日の元投稿も出典リンクとして維持）、8月24日朝の初メイク配信（同じNEWSに本人X投稿とInstagram Storyの内容を統合。b24-01 SHOWROOM横長画面を代表画像、オーナーが当該掲載面を明示承認した無加工b24-02 Story画像をHOME Latestと`/news/`の同じカードの2枚目に掲載。Gallery / `/stories/` には公開していない。恒久permalinkのないStory URLは作っていない）、8月24日未明の夜枠・ラジオお礼と朝配信案内（同じNEWSにSHOWROOMファンルーム本文、Instagram Story動画、本人X投稿を統合。Fan Roomスクリーンショットは非公開）、8月23日の本人Instagram「龍みたいな雲」投稿、8月23日の湘南シーサイドサークル「真夏のミュージカル特集」放送記録（同じNEWSに放送後お礼の番組Instagram Story動画、STORY記事CTA、FM湘南マジックウェイブの放送後X投稿を同居。新しいNEWSは作っていない）、8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目 | 通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。番組Instagram Storyと生放送アーカイブ文字起こしは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。8/26ガルアワイベ6位お礼NEWSの外部sourceは本人X投稿、関連URLは本人SHOWROOM、additional sourceは当該SHOWROOMイベントページ。8/26 Mixch 1.5倍デーNEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/26投票案内・フォロワー400人・朝配信お礼の3件は非リンクのInstagram Story。8/26配信案内NEWS・8/25 Mixch NEWS・8/25 motivation NEWS・8/24朝メイクNEWS・8/24未明NEWS・Final STAGE案内NEWSの外部sourceは本人X投稿。Final STAGE案内NEWSは8月24日の案内をprimary source、8月26日の直接案内をadditional sourceとして持ち、関連URLはPaton本人ページ。b26の2枚は当該NEWS専用でGallery / `/stories/` には追加しない。8/25 Mixch NEWSの関連URLはMixch本編。8/23ラジオNEWSの外部sourceは局公式の放送後X投稿。8/24踊ってみたNEWSの外部permalinkは未確認 | 投稿内容・動画説明文の確認済み範囲を要約。配信案内はアーカイブ表現。同じ内容の追記は既存NEWSへ統合し、`additionalSources` で複数の確認済みpermalinkを保持する。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
 | `contest.ts` | `currentPhase` は 2026-08-19 時点で「3次審査進出」 | 三次審査進出者一覧 `https://2026.misscircle.jp/list/3` | 三次審査の日程・審査方法は未公表。`start` / `end` は null のまま |
 | `supportEvents.ts` | CAMPUS GIRLS 2027 予選A FinalSTAGEのPaton投票期間（2026-08-26 18:00〜2026-09-01 23:59 JST） | Patonイベント詳細・三橋莉子（みりぃ）出場者ページ | 投票CTAは期間中のみホーム、Support、Calendar、Activity、NEWSへ表示。境界時刻は開いている画面でも自動再評価し、終了後のホームはENTRY 734導線へ戻る。本文と一次出典は履歴として残す |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
-| `media.ts` | 写真18枚（すべて `published: true`） | 誕生日5枚、マンゴーかき氷5枚（b10）、龍みたいな雲3枚（b20）は各Instagram投稿。8/23 湘南シーサイドサークル公式X写真2枚（b22）・ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b22 / b20 は一次出典と `sourceDate: 2026-08-23` を記録。b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。正方形・縦写真は `aspect` で切り抜きを避ける |
-| `galleryVideos.ts` | 独立動画12本 + Mixch outbound player 2本（Mixch = 8/26 1.5倍デー `nxqYblH8`、8/25 自信のないあなたへ `ZY4hSt3K`。ファイルは自己ホストしていない。b25 = 8/24 湘南シーサイドサークル「Yes!東京」踊ってみた、b23 = 8/24 夜枠お礼・朝配信Story、b21 = 8/23 湘南シーサイドサークル放送後お礼Story、b19 = 8/23 湘南シーサイドサークル Instagram Story、b18 = 8/23 地震後Story、b15 = 8/21 TikTok、b13 = 8/21 イベントStory、b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story。すべて `published: true`。新しい順） | Mixchは本人Mixch公開ページ。その他はowner-provided。b15はTikTok公開投稿URL、b11は本人X投稿URL、b25 / b21 / b19は番組Instagram（b25はpermalink未確認の非リンク、b21 / b19はStory非リンク）、その他StoryはInstagram Story（非リンク） | Mixch 2本は Latest / NEWS + Gallery で同じオブジェクトを共有（`src/data/mixchMovies.ts`）。b25 は Latest / NEWS + Gallery、b23 は Latest / NEWS + Gallery、b21 は Latest / NEWS + Gallery + STORY closing、b19 は Gallery + STORY lead。b18 は既存地震NEWSと、b15 / b13 / b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。FanRoom画像とDrive Gallery（b02）は含めない |
+| `media.ts` | 写真21枚（すべて `published: true`） | 8/26 ガルアワイベ最終日6位お礼の本人X写真1枚（b28-01。`sns-post`、sourceUrlは当該X投稿）、8/26 投票案内Storyの静止画2枚（b27-07 鏡 / b27-06 コラージュ。Instagram Story・恒久permalinkなしのため `sourceUrl: null`）、誕生日5枚、マンゴーかき氷5枚（b10）、龍みたいな雲3枚（b20）は各Instagram投稿。8/23 湘南シーサイドサークル公式X写真2枚（b22）・ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b28 / b27 は `sourceDate: 2026-08-26`。b22 / b20 は一次出典と `sourceDate: 2026-08-23` を記録。b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。正方形・縦写真は `aspect` で切り抜きを避ける |
+| `galleryVideos.ts` | 独立動画14本 + Mixch outbound player 2本（Mixch = 8/26 1.5倍デー `nxqYblH8`、8/25 自信のないあなたへ `ZY4hSt3K`。ファイルは自己ホストしていない。b27-02 = 8/26 投票開始の鏡Story、b27-01 = 8/26 投票案内コラージュStory、b25 = 8/24 湘南シーサイドサークル「Yes!東京」踊ってみた、b23 = 8/24 夜枠お礼・朝配信Story、b21 = 8/23 湘南シーサイドサークル放送後お礼Story、b19 = 8/23 湘南シーサイドサークル Instagram Story、b18 = 8/23 地震後Story、b15 = 8/21 TikTok、b13 = 8/21 イベントStory、b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story。すべて `published: true`。新しい順） | Mixchは本人Mixch公開ページ。その他はowner-provided。b15はTikTok公開投稿URL、b11は本人X投稿URL、b25 / b21 / b19は番組Instagram（b25はpermalink未確認の非リンク、b21 / b19はStory非リンク）、その他StoryはInstagram Story（非リンク） | Mixch 2本は Latest / NEWS + Gallery で同じオブジェクトを共有（`src/data/mixchMovies.ts`）。b27-02 / b27-01 は Latest / NEWS + Gallery、b25 は Latest / NEWS + Gallery、b23 は Latest / NEWS + Gallery、b21 は Latest / NEWS + Gallery + STORY closing、b19 は Gallery + STORY lead。b18 は既存地震NEWSと、b15 / b13 / b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。FanRoom画像とDrive Gallery（b02）は含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、CAMPUS GIRLS Paton投票、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |
@@ -57,8 +57,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | SNS投稿の要約 | `src/data/news.ts` | `events.ts`（日時付きの出演でないなら） |
 | 出演・イベント・公開収録 | `src/data/events.ts` | 配信予定の自動取得を止めて手入力しない |
 | 通常の SHOWROOM 配信時刻 | 原則なにもしない（自動取得） | `events.ts` にも `streamSchedule.ts` にも推測で書かない |
-| 写真 | Drive → `media/original/` → `pnpm media:build` → `media.ts` | X / Instagram 画像を自動ダウンロードしない。Mixch movie ファイルもダウンロードしない |
-| Mixch 公開動画（オーナー指定） | `src/data/mixchMovies.ts` の outbound player。NEWS + Gallery で同じオブジェクトを共有 | Mixch `_movie_mps` / MP4 をこのドメインで再生しない。タイムラインをクロールしない |
+| 写真 | Drive → `media/original/` → `pnpm media:build` → `media.ts` | SNS から自動ダウンロードしない |
 | SNS URL の追加・変更 | オーナー確認後に `socials.ts` | 未確認アカウントを足さない |
 | FM の番組名・ページ変更 | オーナー確認後に `profile.ts` / `links.ts` | スタッフページを読んで推測で肩書を足さない |
 | プロフィール事実 | オーナー確認後に `profile.ts` と `profileSources` | 空欄を埋めるために検索結果だけを採用しない |
@@ -126,7 +125,6 @@ Instagram Story閲覧スクリーンショットには、以下の固有の追�
 - 音声の本文を聞き取れない場合は、音声の中身を推測してNEWS本文へ書かない。
   テキスト投稿に書かれている範囲と、「音声メッセージが届いた」事実だけを残す。
 
-
 #### Fan Room公開時の原則
 
 公開する本文・引用は、原則としてみりぃ本人の発言だけにする。ファンサイトの主役はみりぃであり、他のファンやオーナーを公開コンテンツへ載せない。
@@ -146,22 +144,14 @@ Latest のカード内に1枚だけ自己ホストで出してよい。
 - 公開ファイルは `public/media/news/mily-bNN-NN-<slug>.jpg`。台帳は `docs/MEDIA.md`（バッチ単位）。
 - `news.ts` の `media` に `kind: "image"` として `src` / `width` / `height` / `alt` を書く。
   `width` / `height` は実寸。表示は縦横比を保った `object-contain` 相当で、トリミングしない。
+- カード表示より明らかに大きい NEWS 専用静止画は、Gallery と同じ 480 / 960 / 1600 の
+  jpg+webp 派生を `srcSet` / `webpSrcSet` で出す。公開済みの元素材相当ファイルは上書きしない。
+  同じ写真がすでに Gallery にある場合は、NEWS 側で派生を増やさず既存 Gallery ファイルを
+  `srcSet` に載せてよい。NEWS JPEG は fallback `src` として残す。
 - `alt` は状況の説明（外見の評価は書かない）。
 - 通常のSNS投稿写真は Gallery（`media.ts`）へ自動的・無条件には追加しない。本人写真をオーナー確認済みでGallery掲載する場合は追加してよい。
 - 縦写真をGalleryへ追加するときは、実画像の縦横比に対応する `MediaItem.aspect` を設定し、既定4:3への不自然なクロップを避ける。
-- 外部の X / Instagram 画像 URL を直接参照しない。X / Instagram から自動取得もしない。
-- Mixch の公式サムネイルだけは outbound player の poster として例外的に参照してよい。詳細は次項。
-
-### Mixch outbound player card
-
-オーナー指定の公開 Mixch 動画（`https://mixch.tv/m/{id}`、確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出す。photo-forward のため、これらの投稿をテキストだけで終わらせない。Activities の「関連するメディア」には出さない。`activityIds` は関連 NEWS 用に残す。
-
-- データは `src/data/mixchMovies.ts`。NEWS の `media` と Gallery が同じオブジェクトを import する（TikTok `tiktokRadioVideo` と同じ）。
-- `kind: "mixch"`。`mixchUrl` / Mixch 公式サムネイル `poster` / `alt`。自己ホスト `kind: "video"` の mp4 `src` には Mixch URL を入れない。
-- カードは poster + 再生オーバーレイ。Play / click / CTA は Mixch ページを新しいタブで `rel="noopener noreferrer"` 付きで開く。`<video src=Mixch CDN>` も iframe も使わない。
-- Mixch ファイルを git、`media/original/`、`public/media/` にコピーしない。オーナーが原ファイルを提供した場合だけ、既存の自己ホストパイプラインを使う。
-- Mixch タイムラインはクロールしない。扱うのはオーナーが名前を出した movie URL だけ。
-- X / Instagram の画像 CDN を poster にしない。
+- 外部の X / Instagram 画像 URL を直接参照しない。SNS から自動取得もしない。
 
 ### コンテスト結果など「節目」を扱うとき
 
@@ -205,7 +195,7 @@ Google Drive 原本 → 選定 → media/original/ → pnpm media:build
 
 詳細は `docs/MEDIA.md`。要点:
 
-- 原本は Drive。X / Instagram から画像を自動取得しない。Mixch movie ファイルもダウンロードしない。
+- 原本は Drive。SNS から画像を自動取得しない。
 - 顔の AI 生成・置換・補正・塗り足しは禁止。
 - b02はDrive Galleryで使用済み。新しい独立素材は新しいbatch番号を使い、既存連番を再利用しない。
 - 縦写真は `aspect`（例 `"1152 / 2048"`）を指定する。Galleryタイル既定の4/3へ切り抜かない。

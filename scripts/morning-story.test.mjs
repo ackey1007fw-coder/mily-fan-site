@@ -280,8 +280,9 @@ describe("Gallery video contracts", () => {
     const drive = driveGallerySections(visibleDriveGallery());
 
     // b01の6枚（誕生日5枚 + ネックレス）は残したまま、2026-08-19 に b05-01、
-    // 2026-08-20 に b08-01 と b10 の5枚、2026-08-23 に b20 の3枚と b22 の2枚を追加した。
-    assert.equal(media.filter((item) => item.kind === "photo").length, 18);
+    // 2026-08-20 に b08-01 と b10 の5枚、2026-08-23 に b20 の3枚と b22 の2枚、
+    // 2026-08-26 に b28-01 と b27 の静止画2枚を追加した。
+    assert.equal(media.filter((item) => item.kind === "photo").length, 21);
     for (const id of [
       "mily-b01-01",
       "mily-b01-02",
@@ -294,13 +295,13 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    // 2026-08-26 Mixch outbound 2本と 2026-08-24 の夜枠お礼Story（b23）と 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）と Yes!東京（b25）を加えて14本（既存b03・b07・b09・b11・b12・b13・b15は残す）。
-    assert.equal(visibleGalleryVideos().length, 14);
+    // 自己ホスト14本 + Mixch outbound 2本。Drive Gallery の動画11本は別枠。
+    assert.equal(visibleGalleryVideos().length, 16);
     assert.equal(
       visibleGalleryVideos().filter(isSelfHostedGalleryVideo).length + drive.videos.length,
-      23,
+      25,
     );
-    assert.equal(galleryVideoViews().length, 23);
+    assert.equal(galleryVideoViews().length, 25);
   });
 });
 

@@ -254,7 +254,11 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
   it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 24), [
+    assert.deepEqual(ordered.slice(0, 28), [
+      "2026-08-26-girlsaward-showroom-6th",
+      "2026-08-26-paton-vote-stories",
+      "2026-08-26-instagram-followers-400",
+      "2026-08-26-morning-stream-thanks",
       "2026-08-26-girl-award-event-fanroom",
       "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
@@ -280,7 +284,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 33);
+    assert.equal(news.length, 37);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
@@ -292,10 +296,15 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
 describe("2026-08-22 night SHOWROOM thanks X post — Portal Feed and responsive contract", () => {
   it("flows through Portal Feed with its self-hosted site-origin image", async () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-22T23:30:00+09:00") });
+    const asOfNews = news.filter((entry) => entry.date <= "2026-08-22");
+    const feed = createPortalFeed({
+      now: new Date("2026-08-22T23:30:00+09:00"),
+      newsItems: asOfNews,
+      storyItems: stories.filter((story) => story.date <= "2026-08-22"),
+    });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, asOfNews);
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-22T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
@@ -310,15 +319,23 @@ describe("2026-08-22 night SHOWROOM thanks X post — Portal Feed and responsive
 
   it("uses the existing uncropped, overflow-safe Latest rendering", async () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
-    const image = latest.match(/<img[\s\S]*?\/>/);
+    const newsImage = await readFile(
+      path.join(root, "src/components/NewsImage.tsx"),
+      "utf8",
+    );
+    const image = newsImage.match(/<img[\s\S]*?\/>/);
+    const call = latest.match(/<NewsImage[\s\S]*?\/>/);
 
     assert.ok(image);
-    assert.match(image[0], /object-contain/);
+    assert.ok(call);
+    assert.match(image[0], /className=\{className\}/);
     assert.doesNotMatch(image[0], /object-cover/);
-    assert.match(image[0], /\bw-full\b/);
-    assert.match(image[0], /\bh-auto\b/);
-    assert.match(image[0], /max-w-sm/);
+    assert.match(call[0], /object-contain/);
+    assert.doesNotMatch(call[0], /object-cover/);
+    assert.match(call[0], /\bw-full\b/);
+    assert.match(call[0], /\bh-auto\b/);
+    assert.match(call[0], /max-w-sm/);
     assert.match(latest, /whitespace-pre-line break-words/);
-    assert.doesNotMatch(image[0], /className="[^"]*\bw-\[\d+px\]/);
+    assert.doesNotMatch(call[0], /className="[^"]*\bw-\[\d+px\]/);
   });
 });

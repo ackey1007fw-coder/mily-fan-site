@@ -94,7 +94,7 @@ describe("2026-08-23 seaside circle official X posts — NEWS stays one item", (
 
     assert.equal(matches.length, 1);
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 33);
+    assert.equal(news.length, 37);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -159,7 +159,7 @@ describe("2026-08-23 seaside circle official X posts — STORY sources and photo
     assert.equal(thanks?.poster, seasideCircleMusicalSpecialThanksVideo.poster);
     assert.equal(visibleGalleryVideos().includes(seasideCircleMusicalSpecialVideo), true);
     assert.equal(visibleGalleryVideos().includes(seasideCircleMusicalSpecialThanksVideo), true);
-    assert.equal(galleryVideos.length, 14);
+    assert.equal(galleryVideos.length, 16);
   });
 
   it("reuses Gallery derivatives for both STORY photos", () => {
@@ -231,9 +231,9 @@ describe("2026-08-23 seaside circle official X posts — Gallery photos", () => 
     assert.equal(items.length, 2);
     assert.equal(items[0]?.id, BEFORE_ID);
     assert.equal(items[1]?.id, AFTER_ID);
-    assert.equal(visible.indexOf(items[0]), 0);
-    assert.equal(visible.indexOf(items[1]), 1);
-    assert.equal(visible.filter((item) => item.kind === "photo").length, 18);
+    assert.equal(visible.indexOf(items[0]), 3);
+    assert.equal(visible.indexOf(items[1]), 4);
+    assert.equal(visible.filter((item) => item.kind === "photo").length, 21);
     assert.deepEqual(verifyMedia(media), []);
 
     for (const item of items) {

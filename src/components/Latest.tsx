@@ -20,6 +20,7 @@ import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
+import { NewsImage } from "./NewsImage";
 
 function NewsLink({
   href,
@@ -73,13 +74,8 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
 
   if (media.kind === "image") {
     return (
-      <img
-        src={media.src}
-        width={media.width}
-        height={media.height}
-        loading="lazy"
-        decoding="async"
-        alt={media.alt}
+      <NewsImage
+        media={media}
         className="mx-auto mt-4 h-auto w-full max-w-sm rounded-xl bg-sage-soft object-contain"
       />
     );

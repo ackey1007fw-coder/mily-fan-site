@@ -106,14 +106,26 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
   it("leads 2026-08-26 NEWS above Mixch 1.5x day via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news);
 
-    assert.equal(ordered[0]?.id, NEWS_ID);
-    assert.equal(ordered[1]?.id, "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[2]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(ordered[2]?.id, "2026-08-26-instagram-followers-400");
+    assert.equal(ordered[3]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(ordered[4]?.id, NEWS_ID);
+    assert.equal(ordered[5]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[6]?.id, "2026-08-26-stream-1000");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-26").map(({ id }) => id),
-      [NEWS_ID, "2026-08-26-mixch-15x-day", "2026-08-26-stream-1000"],
+      [
+        "2026-08-26-girlsaward-showroom-6th",
+        "2026-08-26-paton-vote-stories",
+        "2026-08-26-instagram-followers-400",
+        "2026-08-26-morning-stream-thanks",
+        NEWS_ID,
+        "2026-08-26-mixch-15x-day",
+        "2026-08-26-stream-1000",
+      ],
     );
-    assert.equal(news.length, 33);
+    assert.equal(news.length, 37);
   });
 
   it("keeps the voice memo on Latest / NEWS only", () => {
@@ -124,7 +136,9 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
     const liveNews = selectActivityNews("live-stream");
 
     assert.deepEqual(displayed, [girlAwardEventVoice]);
-    assert.equal(liveNews[0]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(liveNews[1]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(liveNews[2]?.id, NEWS_ID);
     assert.equal(liveMedia.includes(girlAwardEventVoice), false);
     assert.equal(
       liveMedia.some((candidate) => candidate.kind === "audio"),
@@ -139,11 +153,13 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
       false,
     );
     assert.equal(
-      media.some((candidate) => candidate.id.includes("b27")),
+      media.some((candidate) =>
+        String(candidate.basePath ?? candidate.id).includes("girl-award-event-voice"),
+      ),
       false,
     );
     assert.equal(
-      galleryVideos.some((candidate) => candidate.id.includes("b27")),
+      galleryVideos.some((candidate) => candidate.id.includes("girl-award-event-voice")),
       false,
     );
     assert.equal(
@@ -260,7 +276,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
       readFile(path.join(root, "docs/MEDIA.md"), "utf8"),
     ]);
 
-    assert.match(ops, /33件/);
+    assert.match(ops, /37件/);
     assert.match(ops, /ガルアワイベ最終日【6位】/);
     assert.match(ops, /kind: "audio"/);
     assert.match(ops, /自己ホストの `\.m4a`/);

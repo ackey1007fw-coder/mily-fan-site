@@ -106,6 +106,7 @@ Gallery向きでない素材でも、Story / NEWS向きならその掲載面で�
 ## 禁止事項（再掲）
 
 - 本人の顔の AI 生成・置換・補正、生成塗り足し（outpainting / generative fill）
+- 本人 SNS からの画像・動画の自動取得
 - X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードすること
 - X / Instagram の画像 CDN URL をサイトメディアとして hotlink すること
 - Mixch の `_movie_mps` / MP4 をこのドメインで再生すること（`<video src=Mixch CDN>` / 非公式 iframe 含む）
@@ -1618,6 +1619,178 @@ Gallery・`/stories/`・`media.ts`・`galleryVideos.ts`・highlightsには追加
 
 ## 素材台帳（batch b27 / 受領日・source date 2026-08-26）
 
+2026-08-26 の本人Instagram Story。owner-provided。公開派生は既存コミット済みで、
+この掲載作業では再エンコード・リネーム・差し替えをしていない。
+Driveの受け渡しURL / file IDは公開情報・tracked textへ残さない。
+
+Story閲覧スクリーンショット（IMG_7435 / IMG_7437）は確認用で、掲載しない。
+`public/` / Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` / highlights
+には含めない。返信コメントはNEWS `message` へ本文として残す。
+
+b27-05（Patonアプリの投票操作録画）は非掲載。他出場者・順位表示と、
+オーナー（あっきー）のサポーター名が見えるため。
+
+投票CTA（`Patonでみりぃに投票する`）は既存NEWS
+`2026-08-24-campus-girls-final-stage-guide` に残し、このbatchのNEWSへは付けない。
+`events.ts` / `streamSchedule.ts` / highlights / 新しい `/stories/`
+記事は追加していない。b27-06 / b27-07 の静止画だけ `media.ts` の Gallery
+photo set へ追加する。b27-01 / b27-02 の動画はこれまでどおり
+`galleryVideos.ts`。b27-03 / b27-04 は NEWS 専用のまま Gallery に載せない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b27-01 | `gallery/mily-b27-01-paton-vote-collage.mp4` | クマ耳フィルターの4枚コラージュ。予選ファイナルの毎日投票案内。720×1280 / 20.000秒。owner-provided | ✅ Latest / NEWS（同じカードの動画）+ Gallery。`patonVoteCollageStoryVideo.json` を共有 |
+| b27-01 poster | `gallery/mily-b27-01-paton-vote-collage-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b27-02 | `gallery/mily-b27-02-paton-vote-mirror.mp4` | 鏡自撮りと「18:00〜投票できるようになるぞ〜」案内。720×1280 / 5.000秒。owner-provided | ✅ Latest / NEWS（同じカードの動画）+ Gallery。`patonVoteMirrorStoryVideo.json` を共有 |
+| b27-02 poster | `gallery/mily-b27-02-paton-vote-mirror-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b27-03 | `news/mily-b27-03-morning-stream-thanks.jpg` | 配信への感謝を書いた白い縦長グラフィック。元素材相当 3870×6879。表示は 480 / 960 / 1600 の jpg+webp 派生。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
+| b27-04 | `news/mily-b27-04-instagram-followers-400.mp4` | フォロワー400人への感謝。720×1280 / 5.000秒。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
+| b27-04 poster | `news/mily-b27-04-instagram-followers-400-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ NEWS専用 |
+| b27-06 | `gallery/mily-b27-06-paton-vote-collage-still-{480,960,1600}.{jpg,webp}` | b27-01 の 2.0秒地点の実フレーム。720×1280。owner-provided。`pnpm media:build` の jpg q82 / webp q78、withoutEnlargement のため 960 と 1600 は同バイト | ✅ Gallery photo（`media.ts`）+ Latest / NEWS（投票カードの2枚目）。動画ファイルは複製していない |
+| b27-07 | `gallery/mily-b27-07-paton-vote-mirror-still-{480,960,1600}.{jpg,webp}` | b27-02 の 1.0秒地点の実フレーム。720×1280。owner-provided。960 と 1600 は同バイト | ✅ Gallery photo（`media.ts`）+ Latest / NEWS代表。動画ファイルは複製していない |
+| （非掲載） | IMG_7435 / IMG_7437 Story閲覧スクリーンショット | 返信コメント確認用 | 非掲載。本文はNEWS messageへ |
+| （非掲載） | b27-05 Patonアプリ操作録画 | 他出場者・順位・オーナーサポーター名 | 非掲載 |
+
+### 公開ファイルの実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-26` / 恒久permalinkなし。`sourceUrl` は持たない
+- 元素材は `media/original/` に受領バイトを変えず保管（gitignore済み・コミットしない）
+- 公開派生はEXIF / GPS / IPTC / XMP / ICCなし
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除なし
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+b27-01 公開MP4: 857,124 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+600 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+sha256 `2a7bacbb3efa14cc5c6d56caea9afa2bfb64753125dae8bcf132721824751109`
+
+b27-01 poster: 96,436 bytes / 720×1280 JPEG / sha256
+`c3fde8d9419c52330e6d3dfdaac4035c9f8ee78b66d13698a7488ee08c30f5eb`
+
+b27-02 公開MP4: 178,367 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+150 frames / 5.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+sha256 `484f06618bd30535ffdd6ca5e7c429446cce4374efd4da6899b0dd93a04997bc`
+
+b27-02 poster: 49,122 bytes / 720×1280 JPEG / sha256
+`c861d6487ee07a19390cf50bf0a1db316ddf05fdb81d8c79b2b049b8b665a740`
+
+b27-03 公開JPEG: 872,631 bytes / 3870×6879 / progressive / 4:4:4 / sha256
+`884428f7b233b753b216501097c56ce533f45aa713e49cf04536e042ba17d059`
+
+b27-03 表示派生は Gallery と同じ `jpg q82 mozjpeg` + `webp q78`。NEWS カードの
+`src` は `-1600.jpg`。元素材相当の公開JPEGは残し、上書きしない。
+
+- 480.jpg 20,741 bytes / 480×853 / sha256
+  `618954c90b839ca562d7b07397f2a88edb7e00a0006e3e2ced0d143377b4c6df`
+- 480.webp 15,404 bytes / sha256
+  `02cb8d80a48d93d8a94ed589753bca5d21a5213b5308a23a4289eb2620723d1b`
+- 960.jpg 51,086 bytes / 960×1706 / sha256
+  `158bd5ac83b72497d35c984ca44ca2fbba7ed92f250ef7d7026833a9116e7838`
+- 960.webp 33,950 bytes / sha256
+  `4cc66b0d8f2169f80c93c869aef12cf400e5443c31b32c1e500c55ee83eb84f8`
+- 1600.jpg 93,716 bytes / 1600×2844 / sha256
+  `cdb1f169f298688e628659878bcc6d2f757d47b6b972e11ffa5d0e967b56a90e`
+- 1600.webp 55,096 bytes / sha256
+  `df38a10e0ae92576f8e1168ae2ac305fe705850b95077dfbebec6250bf3c7952`
+
+b27-04 公開MP4: 131,735 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+150 frames / 5.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+sha256 `f8093200f0705ad347b3bbb768b8fe95d9d7c84e5b568c9b68c394dd1d123082`
+
+b27-04 poster: 77,106 bytes / 720×1280 JPEG / sha256
+`ff1b5d2f45863d08cf1ad1bdfe81f0d807dc3e37ee8aa8f8df94010eabecd4a8`
+
+b27-06 は b27-01 公開MP4の 2.0秒地点の実フレーム。`pnpm media:build` の
+jpg q82 mozjpeg + webp q78。元素材 720×1280 のため withoutEnlargement で
+960 と 1600 は同バイト。元素材は `media/original/`（gitignore・コミットしない）。
+
+- 480.jpg 56,897 bytes / 480×853 / sha256
+  `478594610776b628a6eee4f1517c2c43a3a2fb6c25f92c092e709c2157b144c8`
+- 480.webp 39,212 bytes / sha256
+  `0e19ed008af2bf5c489be03d05e586eb83a27613eafa6dcd1cbfa3e336e8546d`
+- 960.jpg 102,630 bytes / 720×1280 / sha256
+  `cff520e6afa06c3aeb97edbdf07dbe12011e16f27faf071b299c7298f1855b00`
+- 960.webp 64,956 bytes / sha256
+  `4ed0e213b9ee91f90302949b2054806b7e94098dd2207a00cf55391a1cfb1a45`
+- 1600.jpg / 1600.webp は 960 と同じバイト
+
+b27-07 は b27-02 公開MP4の 1.0秒地点の実フレーム。同じ media:build 設定。
+
+- 480.jpg 31,518 bytes / 480×853 / sha256
+  `4dcf3f04deeeae5319d1930e6803dab82b877eb35f33e387a38c3f772258c606`
+- 480.webp 18,166 bytes / sha256
+  `0692f7335c76b13b54e7fcd4c8a7c4cb7208348118f69ec17034839ad3562fbb`
+- 960.jpg 54,138 bytes / 720×1280 / sha256
+  `2581df60447825cb9cb7f016957e7020cec79f8abb5f90e7f9006623ea239795`
+- 960.webp 28,522 bytes / sha256
+  `c1de6832846477c7c1a6b0e01ffa52d0dd8a16419fe64eb1ccbef7bac0742301`
+- 1600.jpg / 1600.webp は 960 と同じバイト
+
+Gallery 写真は新しい順で b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+b28-01 追加後は b28-01 が先頭で、そのあとに b27-07 → b27-06。
+Gallery 動画は新しい順で b27-02（鏡）→ b27-01（コラージュ）のあと既存動画。
+Latest の投票カードは鏡静止画を代表にし、コラージュ静止画・鏡動画・コラージュ動画を同じカードへ続ける。
+b27-03 / b27-04 は `galleryVideos.ts` にも `media.ts` にも載せない。
+
+## 素材台帳（batch b28 / 受領日・source date 2026-08-26）
+
+2026-08-26 23:34 JST の本人X投稿。公開permalinkあり。Story閲覧スクリーンショットではない。
+`sns-post`。Driveの受け渡しURL / file IDは公開情報・tracked textへ残さない。
+この掲載作業では再エンコード・リネーム・差し替えをしていない。
+
+ガルアワ＝Rakuten GirlsAward。掲載対象はミスサー／フレキャン出場者限定の
+SHOWROOMイベント「【フレ/ミス枠】Rakuten GirlsAward 2026 A/W ランウェイ出演」
+（2026-08-20〜2026-08-26）。本選のミスサークルコンテスト本体でも
+CAMPUS GIRLS Patonでもない。1位の賞品は Rakuten GirlsAward 2026 A/W
+オープニングアクトのランウェイ出演（幕張メッセ、2026-09-26）。
+みりぃは6位で終えたためランウェイ出演にはなっていない。
+`https://girls-award.com` は背景事実のみで、NEWS CTA にはしない。
+`/stories/` 記事と highlights には追加しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b28-01 NEWS | `news/mily-b28-01-girlsaward-showroom-6th.jpg` | くま耳キラキラフィルターの自撮り。黄白ストライプのリボン／シュシュと紺（ネイビー）のポロ。6位お礼の文字重ね。1156×2048。sns-post | ✅ HOME Latest / `/news/` / Activities の `src` fallback。表示は Gallery の 480/960/1600 srcset。NEWS JPEG は上書きしない |
+| b28-01 Gallery | `gallery/mily-b28-01-girlsaward-showroom-6th-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生。元素材 1156×2048 のため withoutEnlargement で 1600 は拡大しない | ✅ Gallery photo（`media.ts`）。NEWS JPEG のバイトは複製していない |
+
+出典: `https://x.com/Mily_chan36/status/2092621770406896106`
+SHOWROOMイベント: `https://www.showroom-live.com/event/girlsaward2026aw_fm`
+本人SHOWROOM: `https://www.showroom-live.com/r/circle2026_0734`
+
+### 公開ファイルの実測
+
+- provenance: `sns-post`（確認済みの本人X投稿。sourceUrl 必須）
+- source date: `2026-08-26`（snowflake + fxtwitter created_at Wed Aug 26 14:34:43 +0000 2026）
+- credit: 未確認のため `null`
+- 公開派生はEXIF / GPS / IPTC / XMP / ICCなし
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除なし
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+b28-01 NEWS JPEG: 397,362 bytes / 1156×2048 / sha256
+`f5bb01a9dc8c9384fd8d9e7c40fb769b5bf6f8bc48e74b1a7612ae2a07f9cd26`
+
+NEWS カードの表示は既存 Gallery 派生を `srcSet` / `webpSrcSet` で使い、
+NEWS JPEG は fallback `src` のまま残す（上書き・再エンコードしない）。
+
+Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
+
+- 480.jpg 61,286 bytes / 480×850 / sha256
+  `40ca278f866bda2964df8c48a5188d5ebb02ec537cab931091bb6b0aba4403d7`
+- 480.webp 42,614 bytes / sha256
+  `48d9dd09db8aa4aedf573e923ab569873cbbbbb401246de01feb4d5251250d8c`
+- 960.jpg 161,064 bytes / 960×1701 / sha256
+  `acda33e4f404e6c0b903c547dfe9d94092fe3c329c923f4ff0e535324b45e4bb`
+- 960.webp 96,062 bytes / sha256
+  `ae86e064ba8f2bdf22265eb1d896c295549637c3efe363ae410d1e72da39c491`
+- 1600.jpg 210,796 bytes / 1156×2048 / sha256
+  `91bc5744b607206a30c4fc7326297c8be9a3401399842e5d5904b99e63ff8504`
+- 1600.webp 120,780 bytes / sha256
+  `2c32f0e3fa6623dc2b315dd33d87ba2395a58ff4a00621d8cfd15cdce874a1e9`
+
+Gallery 写真は新しい順で b28-01 → b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+Latest の先頭は 6位お礼X投稿。投票案内Storyカードは同じ日の次点。
+
+## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
+
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。
 Gallery・`media.ts`・`galleryVideos.ts`・Drive Gallery・`/stories/` には含めない。
 Fan Roomの生スクリーンショット（前後ナビ・再生UI）は公開していない。
@@ -1628,7 +1801,7 @@ iframeできないため、公開ルームプロフィール API の `voice_list
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b27-01 | `news/mily-b27-01-girl-award-event-voice.m4a` | ガルアワイベ最終日のお礼音声。約20.8秒 / AAC-LC / 12kHz / mono | ✅ Latest / NEWS のみ |
+| Fan Room voice | `news/mily-b27-01-girl-award-event-voice.m4a` | ガルアワイベ最終日のお礼音声。約20.8秒 / AAC-LC / 12kHz / mono | ✅ Latest / NEWS のみ |
 
 確認済み:
 
@@ -1643,4 +1816,3 @@ iframeできないため、公開ルームプロフィール API の `voice_list
 - SHOWROOM CDN URL は公開データへ残さない。hotlinkしない
 - 音声はみりぃ本人のFan Roomボイスメモ。BGM権利が不明な動画音声の無音化ルールとは別判断
 - AI生成・加工なし
-

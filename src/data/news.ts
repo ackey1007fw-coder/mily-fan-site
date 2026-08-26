@@ -37,6 +37,15 @@ import {
   campusGirlsPatonPageImage,
   campusGirlsPatonPortraitImage,
 } from "./campusGirlsPatonImages.ts";
+import { patonVoteCollageStoryVideo } from "./patonVoteCollageStoryVideo.ts";
+import { patonVoteMirrorStoryVideo } from "./patonVoteMirrorStoryVideo.ts";
+import {
+  patonVoteCollageStillImage,
+  patonVoteMirrorStillImage,
+} from "./patonVoteStoryStills.ts";
+import { followers400StoryVideo } from "./followers400StoryVideo.ts";
+import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
+import { girlsawardShowroomSixthImage } from "./girlsawardShowroom6th.ts";
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 
 export type NewsVideoMedia = {
@@ -55,6 +64,10 @@ export type NewsImageMedia = {
   width: number;
   height: number;
   alt: string;
+  /** Optional Gallery-style srcset. Absent images keep a single `src`. */
+  srcSet?: string;
+  webpSrcSet?: string;
+  sizes?: string;
 };
 
 /** Mixch outbound player. Distinct from self-hosted `kind: "video"` which has an mp4 `src`. */
@@ -122,6 +135,81 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-26-girlsaward-showroom-6th",
+    date: "2026-08-26",
+    sameDayOrder: 4,
+    activityIds: ["miss-circle", "live-stream"],
+    title: "「6位で終わることができました」ガルアワイベ最終日の感謝",
+    body: "8月26日、みりぃがXに、SHOWROOMイベント「【フレ/ミス枠】Rakuten GirlsAward 2026 A/W ランウェイ出演」（通称ガルアワイベ）最終日のお礼を投稿しました。ミスサー／フレキャン出場者限定の企画で、本選のミスサークルコンテスト本体とは別です。期間は8月20日から8月26日。写真には「ガルアワイベ最終日 応援に駆けつけてくれた皆様ありがとうございました\u{1F62D}\u{2763}\u{FE0F}」「なんと【6位】で終わることができました\u{1F979}\u{1F64C}\u{1F3FB}\u{1FA75}」「楽しかったなぁ。濃かったなぁ。素敵な時間だったなぁ。初めての景色、美しかったなぁ。」「これからも不器用なみりぃですがよろしくお願いします\u{1F64F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}」と重ねています。1位の賞品はRakuten GirlsAward 2026 A/Wオープニングアクトのランウェイ出演（幕張メッセ、2026年9月26日）でしたが、みりぃは6位だったためランウェイ出演にはなっていません。投稿では、初めは挑戦するのも怖かったけど勇気を出して一歩踏み出せて、みんなに出逢えて応援していただけてよかった、幸せじゃっ、これからもよろしくお願いしますと伝えています。",
+    source: "https://x.com/Mily_chan36/status/2092621770406896106",
+    sourceLabel: "Xの投稿を見る",
+    additionalSources: [
+      {
+        label: "SHOWROOMイベントページを見る",
+        url: "https://www.showroom-live.com/event/girlsaward2026aw_fm",
+      },
+    ],
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    media: girlsawardShowroomSixthImage,
+    message: {
+      label: "みりぃの投稿",
+      text: "はぁぁぁぁぁ、皆さんのおかげでとーーーっても楽しかった\u{1F979}\u{2764}\u{FE0F}\u{200D}\u{1F525}\nガルアワイベ、初めは挑戦するのも怖かったけど、勇気出して一歩踏み出せて、みんなに出逢えて、応援していただけてよかった。幸せじゃっ\u{2B50}\u{FE0F}\nこれからもどうぞよろしくお願いします\u{1F345}\u{2728}\n#ミスサー #ミスサークル #ミスサークルコンテスト",
+    },
+  },
+  {
+    id: "2026-08-26-paton-vote-stories",
+    date: "2026-08-26",
+    sameDayOrder: 3,
+    activityIds: ["campus-girls"],
+    title: "「絶対みんなと本戦行くんだ〜」投票は本日18:00から✨",
+    body: "8月26日、みりぃがInstagram StoryでCAMPUS GIRLS 2027予選ファイナルの毎日投票を案内しました。期間は本日18:00〜9月1日23:59。コラージュでは【キャンパスガールズ2027 予選ファイナル】、本日18:00〜9/1 23:59まで、毎日投票からの応援よろしくお願いします\u{1F972}\u{1FA75}\u{2728}、リンクステッカー「本日18:00〜投票開始\u{1F5F3}\u{FE0F}」と伝えています。鏡のStoryでは「18:00〜投票できるようになるぞ〜\u{203C}\u{FE0F}」と案内しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: patonVoteMirrorStillImage,
+    additionalMedia: [
+      patonVoteCollageStillImage,
+      patonVoteMirrorStoryVideo,
+      patonVoteCollageStoryVideo,
+    ],
+    message: {
+      label: "みりぃのStory",
+      text: "絶対みんなと本戦行くんだ〜！！！\n\n皆さん、やり方わかりますか？？大丈夫？？",
+    },
+  },
+  {
+    id: "2026-08-26-instagram-followers-400",
+    date: "2026-08-26",
+    sameDayOrder: 2,
+    title: "フォロワー様400人、ありがとうございます\u{1F972}",
+    body: "8月26日、みりぃがInstagram Storyで、三橋莉子（みりぃ）のフォロワーが400人になったことへの感謝を伝えました。変動もあるかもしれないとしつつ、これからも楽しくInstagramを続け、いろいろなことを発信していくと案内しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: followers400StoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "フォロワー様400人\u{203C}\u{FE0F}ありがとうございます\u{1F972}\u{270A}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}\n\n変動もあるかとは思いますが、これからも楽しくInstagramができればいいなぁと！\n\nこれからもいろーーんなこと発信していくね\u{1F4AB}",
+    },
+  },
+  {
+    id: "2026-08-26-morning-stream-thanks",
+    date: "2026-08-26",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "今日も来てくれてありがとう〜\u{1F972}",
+    body: "8月26日、みりぃがInstagram Storyで、その日の配信に来てくれたことへの感謝を届けました。環境や周りの方々に恵まれていると伝え、明日からも前向きに頑張れそうという言葉と、応援を絶対に無駄にしないという思いも残しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: morningStreamThanksInstagramStoryImage,
+    message: {
+      label: "みりぃのStory",
+      text: "今日も来てくれてありがとう〜\u{1F972}\u{1F64F}\u{2728}\nいやぁ、環境や周りの方々に恵まれているなぁと、心から感じます。\nなんだか明日からもまた、前向きに頑張れそう\u{1F60C}\n応援してくださる皆様に日々感謝です。\nそして、皆様の応援、絶対に無駄にしないよ\u{203C}\u{FE0F}",
+    },
+  },
   {
     id: "2026-08-26-girl-award-event-fanroom",
     date: "2026-08-26",
