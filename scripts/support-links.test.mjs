@@ -265,7 +265,7 @@ describe("entry url consistency", () => {
     }
     assert.equal(contest.entryUrl, ENTRY_URL);
 
-    for (const relative of ["src/components/StreamSchedule.tsx", "src/components/TodayDashboard.tsx"]) {
+    for (const relative of ["src/components/StreamSchedule.tsx"]) {
       const source = await read(relative);
       assert.match(
         source,
@@ -278,6 +278,16 @@ describe("entry url consistency", () => {
         `${relative} should not repeat the entry URL literal`,
       );
     }
+
+    const dashboard = await read("src/components/TodayDashboard.tsx");
+    assert.match(dashboard, /selectHomeToday/);
+    assert.match(dashboard, /voteActions/);
+    assert.doesNotMatch(dashboard, /contest\.entryUrl/);
+    assert.deepEqual(
+      dashboard.match(/https:\/\/2026\.misscircle\.jp\/entry\/\d+/g) ?? [],
+      [],
+      "TodayDashboard should not repeat the entry URL literal",
+    );
   });
 
   it("keeps the Paton vote destination in the central links registry", async () => {

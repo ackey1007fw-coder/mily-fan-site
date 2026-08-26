@@ -472,6 +472,21 @@ export function formatShortTokyoDate(date: string): string {
 }
 
 /**
+ * 確認済み期間の終了を JST で表示する。時刻は schedule から導出し、
+ * 未確認の終了時刻は作らない。
+ */
+export function formatScheduleEndLabel(
+  schedule: SupportEventSchedule,
+): string | null {
+  if (schedule.state !== "confirmed-period") return null;
+  const end = scheduledParts(schedule.end, schedule.allDay);
+  if (schedule.allDay || !end.time) {
+    return `${formatShortTokyoDate(end.date)}（JST）`;
+  }
+  return `${formatShortTokyoDate(end.date)} ${end.time}（JST）`;
+}
+
+/**
  * 終了日の表示用format。開始日とJST年が異なるときだけ `2027/1/1` のように年を付け、
  * 同一年は従来どおり `8/25` の短い表示を維持する。
  * 引数はどちらもJST civil dateの `YYYY-MM-DD`（`ScheduleItem.date` / `endDate`）なので、

@@ -1,9 +1,14 @@
-import type { Contest } from "../data/contest.ts";
+import type { Contest, ContestPhase } from "../data/contest.ts";
 import type { SiteLink } from "../data/links.ts";
 import type { SupportEvent } from "../data/supportEvents.ts";
 import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
 import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
-import { displayStatus } from "./supportCalendar.ts";
+import {
+  displayStatus,
+  formatScheduleEndLabel,
+  formatShortTokyoDate,
+  formatShortTokyoEndDate,
+} from "./supportCalendar.ts";
 
 export const HOME_ROUTE = "/" as const;
 export const NEWS_ARCHIVE_ROUTE = "/news/" as const;
@@ -38,15 +43,24 @@ export type HomeVoteAction = {
   url: string;
   title: string;
   note?: string;
+  /** 期間限定投票の確認済み終了。終了後の導線には付けない。 */
+  deadlineLabel?: string;
 };
+
+function contestPhaseNote(phase: ContestPhase): string {
+  if (phase.start && phase.end) {
+    return `${phase.name}（${formatShortTokyoDate(phase.start)}〜${formatShortTokyoEndDate(phase.start, phase.end)}）`;
+  }
+  return phase.name;
+}
 
 function contestVoteAction(contest: Contest): HomeVoteAction {
   return {
     kind: "contest",
-    label: `${contest.entryNumber}を見る`,
+    label: `${contest.entryNumber}を応援する`,
     url: contest.entryUrl,
     title: contest.contestName,
-    ...(contest.currentPhase ? { note: contest.currentPhase.name } : {}),
+    ...(contest.currentPhase ? { note: contestPhaseNote(contest.currentPhase) } : {}),
   };
 }
 
@@ -77,12 +91,14 @@ export function selectHomeVoteAction(input: {
     const link = input.links.find(({ id }) => id === event.ctaLinkId);
     if (!link) continue;
 
+    const deadline = formatScheduleEndLabel(event.schedule);
     return {
       kind: "support-event",
       label: link.label,
       url: link.url,
       title: event.title,
       ...(event.note ? { note: event.note } : {}),
+      ...(deadline ? { deadlineLabel: `投票締切 ${deadline}` } : {}),
     };
   }
 

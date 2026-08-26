@@ -181,12 +181,9 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
 
     const initial = selectGalleryEntries().slice(0, GALLERY_ARCHIVE_INITIAL);
     const preview = selectGalleryPreview(HOME_GALLERY_LIMIT);
-    assert.equal(initial.filter((entry) => entry.kind === "mixch").length, 2);
-    assert.equal(preview.filter((entry) => entry.kind === "mixch").length, 2);
-    assert.equal(initial[0]?.item, mixch15xDayMovie);
-    assert.equal(initial[1]?.item, mixchConfidenceMessageMovie);
-    assert.equal(preview[0]?.item, mixch15xDayMovie);
-    assert.equal(preview[1]?.item, mixchConfidenceMessageMovie);
+    assert.equal(initial.filter((entry) => entry.kind === "mixch").length, 0);
+    assert.equal(preview.filter((entry) => entry.kind === "mixch").length, 0);
+    assert.equal(preview.every((entry) => entry.kind !== "mixch"), true);
 
     const activityMedia = selectActivityMedia("campus-girls");
     assert.equal(activityMedia.includes(mixch15xDayMovie), false);
@@ -241,21 +238,12 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     const gallerySource = sources[2];
     assert.match(
       gallerySource,
-      /const mixchCards = visible\.filter\(\(entry\) => entry\.kind === "mixch"\)/,
-    );
-    assert.doesNotMatch(
-      gallerySource,
-      /const mixchCards = (capped|entries)\.filter/,
+      /typeof limit === "number" \? visible : capped/,
     );
     assert.ok(
-      gallerySource.indexOf("const visible = capped.slice") <
-        gallerySource.indexOf("const mixchCards = visible.filter"),
-      "Mixch cards must be taken from the visible window, not the whole archive",
-    );
-    assert.ok(
-      gallerySource.indexOf("mixchCards.length > 0") <
-        gallerySource.indexOf("photos.map"),
-      "Mixch block must render before the photo grid",
+      gallerySource.indexOf("photos.map") <
+        gallerySource.indexOf("mixchCards.map"),
+      "photo grid must render before the Mixch / video block",
     );
     assert.match(card, /Mixchが新しいタブで開きます/);
 
@@ -264,23 +252,23 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     assert.doesNotMatch(activitiesPage, /kind === "mixch"/);
   });
 
-  it("keeps Mixch posters inside the Gallery visible window, not the whole archive", () => {
+  it("keeps Mixch in Gallery after portraits, not in the HOME / initial photo window", () => {
     const extras = Array.from({ length: 15 }, (_, index) => ({
       kind: "mixch",
       key: `extra-mixch-${index}`,
       item: mixch15xDayMovie,
     }));
-    const archive = [...extras, ...selectGalleryEntries()];
+    const archive = [...selectGalleryEntries(), ...extras];
     const visible = archive.slice(0, GALLERY_ARCHIVE_INITIAL);
     const mixchInVisible = visible.filter((entry) => entry.kind === "mixch");
     const mixchInArchive = archive.filter((entry) => entry.kind === "mixch");
 
     assert.ok(mixchInArchive.length > GALLERY_ARCHIVE_INITIAL);
-    assert.equal(mixchInVisible.length, GALLERY_ARCHIVE_INITIAL);
+    assert.equal(mixchInVisible.length, 0);
     assert.equal(
       mixchInVisible.length < mixchInArchive.length,
       true,
-      "visible window must not include every Mixch card in the archive",
+      "initial photo window must not be Mixch-led",
     );
   });
 

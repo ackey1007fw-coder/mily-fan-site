@@ -23,11 +23,17 @@
  * Support側のsemanticsを変えず、表示するかどうかだけを決める純粋関数。
  */
 import type { Contest } from "../data/contest.ts";
+import { links } from "../data/links.ts";
 import type { RadioStatus, SchedulePhase } from "../data/radio.ts";
 import { socials } from "../data/socials.ts";
 import type { StreamSlot } from "../data/streamSchedule.ts";
 import type { SupportEvent } from "../data/supportEvents.ts";
 import type { BannerState } from "./bannerState.ts";
+import {
+  selectHomeVoteAction,
+  selectHomeVoteActions,
+  type HomeVoteAction,
+} from "./homePortal.ts";
 import type { LiveView } from "./realtimeStore.ts";
 import {
   selectSupportNow,
@@ -40,6 +46,11 @@ import {
 export type HomeTodayView = {
   todayItems: SupportTodayItem[];
   nowItems: SupportNowItem[];
+  /**
+   * 期間中の確認済み投票を先頭にしたホーム用CTA。
+   * 投票期間が終わると期間限定の投票先は消え、MISS CIRCLE ENTRYだけになる。
+   */
+  voteActions: [HomeVoteAction, ...HomeVoteAction[]];
   /**
    * バナーに抑制された項目が持っていた導線のうち、
    * **バナーが提供していない行き先**だけを残したもの。
@@ -73,11 +84,19 @@ const NOW_ORIGIN_PRIORITY: Record<SupportNowItem["origin"], number> = {
  * originの優先度で安定ソートする。
  * 同じorigin同士は `selectSupportNow()` が返した順序をそのまま保つ
  * （`Array.prototype.sort` はstableなので、並べ替えは決定的）。
+ * 期間中の確認済み投票があるときは、そのNOW項目を先頭に保つ
+ * （配信・ラジオがあっても投票導線を上限から落とさない）。
  */
-export function rankHomeNowItems(items: SupportNowItem[]): SupportNowItem[] {
-  return [...items].sort(
-    (a, b) => NOW_ORIGIN_PRIORITY[a.origin] - NOW_ORIGIN_PRIORITY[b.origin],
-  );
+export function rankHomeNowItems(
+  items: SupportNowItem[],
+  liveVoteUrl?: string,
+): SupportNowItem[] {
+  return [...items].sort((a, b) => {
+    const aVote = liveVoteUrl && a.cta?.url === liveVoteUrl ? 0 : 1;
+    const bVote = liveVoteUrl && b.cta?.url === liveVoteUrl ? 0 : 1;
+    if (aVote !== bVote) return aVote - bVote;
+    return NOW_ORIGIN_PRIORITY[a.origin] - NOW_ORIGIN_PRIORITY[b.origin];
+  });
 }
 
 /** バナーが既に出している「今日」の項目か。 */
@@ -212,6 +231,17 @@ export function selectHomeToday(input: {
   banner: BannerState;
   now: number;
 }): HomeTodayView {
+  const voteInput = {
+    contest: input.contest,
+    supportEvents: input.supportEvents,
+    links,
+    now: input.now,
+  };
+  const voteActions = selectHomeVoteActions(voteInput);
+  const liveVote = selectHomeVoteAction(voteInput);
+  const liveVoteUrl =
+    liveVote.kind === "support-event" ? liveVote.url : undefined;
+
   const allTodayItems = selectSupportToday({
     contest: input.contest,
     streamSlots: input.streamSlots,
@@ -229,6 +259,7 @@ export function selectHomeToday(input: {
   );
 
   // バナーで抑制したあとに上限を適用する。抑制で消えた枠は残りの項目が使う。
+  // 期間中の投票は先頭に残し、締切ラベルは selector が導出した値だけを足す。
   const nowItems = rankHomeNowItems(
     selectSupportNow({
       supportEvents: input.supportEvents,
@@ -236,7 +267,25 @@ export function selectHomeToday(input: {
       radio: input.radio,
       now: input.now,
     }).filter((item) => !bannerCoversNowItem(input.banner, item)),
-  ).slice(0, HOME_NOW_LIMIT);
+    liveVoteUrl,
+  )
+    .slice(0, HOME_NOW_LIMIT)
+    .map((item) => {
+      if (
+        !liveVoteUrl ||
+        item.cta?.url !== liveVoteUrl ||
+        !liveVote.deadlineLabel
+      ) {
+        return item;
+      }
+      if (item.note?.includes(liveVote.deadlineLabel)) return item;
+      return {
+        ...item,
+        note: item.note
+          ? `${item.note} / ${liveVote.deadlineLabel}`
+          : liveVote.deadlineLabel,
+      };
+    });
 
   const fallbackActions = fallbackShowroomActions({
     banner: input.banner,
@@ -245,5 +294,5 @@ export function selectHomeToday(input: {
     retainedActions,
   });
 
-  return { todayItems, nowItems, retainedActions, fallbackActions };
+  return { todayItems, nowItems, voteActions, retainedActions, fallbackActions };
 }

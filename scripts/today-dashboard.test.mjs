@@ -24,11 +24,14 @@ describe("today dashboard", () => {
     assert.ok(hero < dashboard && dashboard < support);
   });
 
-  it("links to ENTRY 734 via the contest data", async () => {
+  it("links to contest and live votes through the shared home selector", async () => {
     const source = await read("src/components/TodayDashboard.tsx");
     assert.match(source, /今日のみりぃ/);
-    assert.match(source, /contest\.entryUrl/);
-    assert.match(source, /contest\.entryNumber\}を応援する/);
+    assert.match(source, /selectHomeToday/);
+    assert.match(source, /voteActions/);
+    assert.match(source, /liveVoteOnNow/);
+    assert.doesNotMatch(source, /contest\.entryUrl/);
+    assert.doesNotMatch(source, /paton\.jp|2026\.misscircle\.jp/);
     assert.equal(contest.entryUrl, "https://2026.misscircle.jp/entry/734");
   });
 

@@ -80,7 +80,10 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
         { kind: "support-event", url: PATON_URL },
       ],
     );
+    assert.match(select(START).deadlineLabel ?? "", /投票締切/);
+    assert.match(select(START).deadlineLabel ?? "", /JST/);
     assert.equal(select(END + 1).url, contest.entryUrl);
+    assert.equal(select(END + 1).deadlineLabel, undefined);
   });
 
   it("keeps Paton and MISS CIRCLE available together during the confirmed period", () => {
@@ -196,6 +199,11 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       const component = await source(relative);
       assert.match(component, /useSupportEventClock/);
     }
+
+    const dashboard = await source("src/components/TodayDashboard.tsx");
+    assert.match(dashboard, /voteActions/);
+    assert.match(dashboard, /liveVoteOnNow/);
+    assert.doesNotMatch(dashboard, /paton\.jp/);
 
     const clock = await source("src/lib/useSupportEventClock.ts");
     assert.match(clock, /nextDisplayStatusBoundary/);

@@ -446,7 +446,8 @@ describe("2026-08-23 seaside circle thanks Story — privacy and scope", () => {
   it("does not expand into events, schedule, contest, profile, highlights, or socials", async () => {
     assert.equal(events.length, 0);
     assert.deepEqual(streamSchedule, []);
-    assert.equal(contest.lastVerifiedAt, "2026-08-19");
+    assert.doesNotMatch(JSON.stringify(contest), /mily-b21|musical-special/);
+    assert.match(contest.lastVerifiedAt, /^\d{4}-\d{2}-\d{2}$/);
     assert.equal(profile.displayName, "みりぃ");
     assert.equal(profile.publicName, "三橋莉子");
     assert.equal(

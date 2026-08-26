@@ -266,7 +266,15 @@ describe("Support Today and pending separation", () => {
   });
 
   it("puts null contest dates and date-pending SupportEvents only in pending", () => {
-    const contestPending = selectSupportPending({ contest, supportEvents: [] });
+    const contestPending = selectSupportPending({
+      contest: {
+        ...contest,
+        currentPhase: contest.currentPhase
+          ? { ...contest.currentPhase, start: null, end: null }
+          : null,
+      },
+      supportEvents: [],
+    });
     assert.deepEqual(contestPending.map(({ key }) => key), ["contest:current-phase"]);
     assert.equal("date" in contestPending[0], false);
 
@@ -281,6 +289,14 @@ describe("Support Today and pending separation", () => {
       selectSupportNow({ supportEvents: [event], live: unknownLive, radio: null, now: Date.now() }).length,
       0,
     );
+  });
+
+  it("keeps the live contest phase off pending once official dates are confirmed", () => {
+    assert.deepEqual(selectSupportPending({ contest, supportEvents: [] }), []);
+    assert.equal(contest.currentPhase?.start, "2026-09-03");
+    assert.equal(contest.currentPhase?.end, "2026-09-13");
+    assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
+    assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
   });
 
   it("does not create pending when the contest phase has confirmed dates", () => {
