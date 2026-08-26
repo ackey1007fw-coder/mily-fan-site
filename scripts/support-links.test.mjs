@@ -28,24 +28,26 @@ async function read(relative) {
   return readFile(path.join(root, relative), "utf8");
 }
 
-describe("ENTRY 734 funnel", () => {
-  it("keeps the entry CTA in the hero, sourced from contest.ts", async () => {
+describe("primary support funnel", () => {
+  it("keeps the time-aware primary vote CTA in the hero", async () => {
     const hero = await read("src/components/Hero.tsx");
-    assert.match(hero, /contest\.entryUrl/);
-    assert.match(hero, /HOME_VOTE_CTA/);
-    assert.match(hero, /contest\.entryNumber/);
+    assert.match(hero, /selectHomeVoteAction/);
+    assert.match(hero, /voteAction\.url/);
+    assert.match(hero, /voteAction\.label/);
   });
 
-  it("keeps an entry CTA in the compact support gateway", async () => {
+  it("keeps the time-aware vote CTA in the compact support gateway", async () => {
     const support = await read("src/components/Support.tsx");
-    assert.match(support, /contest\.entryUrl/);
+    assert.match(support, /selectHomeVoteAction/);
+    assert.match(support, /voteAction\.url/);
     assert.match(support, /SUPPORT_HUB_ROUTE/);
   });
 
-  it("keeps the entry CTA in the mobile action dock", async () => {
+  it("keeps the time-aware vote CTA in the mobile action dock", async () => {
     const dock = await read("src/components/MobileActionDock.tsx");
     const app = await read("src/App.tsx");
-    assert.match(dock, /contest\.entryUrl/);
+    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /voteAction\.url/);
     assert.match(dock, /noopener noreferrer/);
     assert.match(dock, /sm:hidden/);
     assert.match(app, /<MobileActionDock \/>/);
@@ -263,13 +265,7 @@ describe("entry url consistency", () => {
     }
     assert.equal(contest.entryUrl, ENTRY_URL);
 
-    for (const relative of [
-      "src/components/Hero.tsx",
-      "src/components/Support.tsx",
-      "src/components/MobileActionDock.tsx",
-      "src/components/StreamSchedule.tsx",
-      "src/components/TodayDashboard.tsx",
-    ]) {
+    for (const relative of ["src/components/StreamSchedule.tsx", "src/components/TodayDashboard.tsx"]) {
       const source = await read(relative);
       assert.match(
         source,
@@ -281,6 +277,23 @@ describe("entry url consistency", () => {
         [],
         `${relative} should not repeat the entry URL literal`,
       );
+    }
+  });
+
+  it("keeps the Paton vote destination in the central links registry", async () => {
+    const vote = links.find(({ id }) => id === "campus-girls-paton-11380");
+    assert.ok(vote);
+    assert.equal(vote.url, "https://paton.jp/event/entrant/11380");
+    assert.equal(vote.label, "Patonでみりぃに投票する");
+
+    for (const relative of [
+      "src/components/Hero.tsx",
+      "src/components/Support.tsx",
+      "src/components/MobileActionDock.tsx",
+    ]) {
+      const source = await read(relative);
+      assert.match(source, /selectHomeVoteAction/);
+      assert.doesNotMatch(source, /paton\.jp/);
     }
   });
 });

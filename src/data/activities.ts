@@ -97,7 +97,7 @@ export const activities: Activity[] = [
     route: "/activities/campus-girls/",
     sourceIds: ["campusGirlsAward", "campusGirlsSecond"],
     relatedSocialIds: [],
-    relatedLinkIds: [],
+    relatedLinkIds: ["campus-girls-paton-11380"],
     relatedHighlightIds: [
       "campus-girls-2027-second-stage-jury-award",
       "campus-girls-2027-jury-award",

@@ -200,20 +200,22 @@ describe("P6 mobile action dock", () => {
     assert.match(source("src/App.tsx"), /pb-20/);
   });
 
-  it("takes the ENTRY URL and number from contest.ts", () => {
+  it("takes the time-aware primary vote action from the shared selector", () => {
     const dock = source("src/components/MobileActionDock.tsx");
-    assert.match(dock, /contest\.entryUrl/);
-    assert.match(dock, /contest\.entryNumber/);
-    assert.doesNotMatch(dock, /2026\.misscircle\.jp/);
+    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /voteAction\.url/);
+    assert.match(dock, /voteAction\.label/);
+    assert.doesNotMatch(dock, /paton\.jp|2026\.misscircle\.jp/);
   });
 });
 
 describe("P6 SSOT reuse and duplication", () => {
-  it("drops the old hardcoded VOTE_URL from the Support component", () => {
+  it("uses the shared time-aware vote action in the Support component", () => {
     const support = source("src/components/Support.tsx");
     assert.doesNotMatch(support, /VOTE_URL/);
-    assert.doesNotMatch(support, /2026\.misscircle\.jp/);
-    assert.match(support, /contest\.entryUrl/);
+    assert.doesNotMatch(support, /paton\.jp|2026\.misscircle\.jp/);
+    assert.match(support, /selectHomeVoteAction/);
+    assert.match(support, /voteAction\.url/);
   });
 
   it("builds TodayDashboard from the Support domain selectors", () => {
@@ -371,8 +373,10 @@ describe("P6 home Today semantics", () => {
     );
   });
 
-  it("adds no new schedule data for the home page", () => {
-    assert.equal(supportEvents.length, 0);
+  it("keeps the confirmed vote schedule in SupportEvents instead of home UI", () => {
+    assert.equal(supportEvents.length, 1);
+    assert.equal(supportEvents[0].activityId, "campus-girls");
+    assert.equal(supportEvents[0].kind, "vote");
     const homeSources = [
       "src/components/TodayDashboard.tsx",
       "src/components/Support.tsx",
@@ -382,7 +386,7 @@ describe("P6 home Today semantics", () => {
     ].map(code).join("\n");
     assert.doesNotMatch(homeSources, /\d{4}-\d{2}-\d{2}/);
     assert.doesNotMatch(homeSources, /\b\d{1,2}:\d{2}\b/);
-    assert.doesNotMatch(homeSources, /showroom-live\.com|misscircle\.jp|fm-smw\.jp/);
+    assert.doesNotMatch(homeSources, /showroom-live\.com|misscircle\.jp|fm-smw\.jp|paton\.jp/);
     assert.doesNotMatch(homeSources, /\d{6}/);
   });
 });

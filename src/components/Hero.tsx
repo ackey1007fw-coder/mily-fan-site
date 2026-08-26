@@ -4,7 +4,8 @@ import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
-import { HOME_VOTE_CTA } from "../lib/homePortal";
+import { supportEvents } from "../data/supportEvents";
+import { selectHomeVoteAction } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { ExternalLink } from "./ExternalLink";
 import { Socials } from "./Socials";
@@ -12,6 +13,12 @@ import { Socials } from "./Socials";
 export function Hero() {
   const photo = featuredPhoto();
   const latest = sortNewsByDateDesc(news)[0];
+  const voteAction = selectHomeVoteAction({
+    contest,
+    supportEvents,
+    links,
+    now: Date.now(),
+  });
   const seasideCircleTikTok = links.find(
     (link) => link.id === "fm-smw-ssc-tiktok",
   );
@@ -46,11 +53,10 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-col gap-3">
             <ExternalLink
-              href={contest.entryUrl}
+              href={voteAction.url}
               className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white shadow-card hover:bg-sage-deep sm:w-auto sm:min-w-[18rem]"
             >
-              {HOME_VOTE_CTA}
-              <span className="sr-only">{contest.entryNumber}</span>
+              {voteAction.label}
             </ExternalLink>
             <div className="flex flex-wrap gap-3">
               <a
@@ -68,9 +74,13 @@ export function Hero() {
             </div>
           </div>
           <p className="mt-3 text-xs text-ink-muted">
-            {contest.contestName} / {contest.entryNumber}
-            {contest.currentPhase ? ` / ${contest.currentPhase.name}` : null}
+            {voteAction.title}
           </p>
+          {voteAction.note ? (
+            <p className="mt-1 text-xs leading-5 text-ink-muted">
+              {voteAction.note}
+            </p>
+          ) : null}
           <Socials />
           {seasideCircleTikTok ? (
             <div
@@ -107,7 +117,7 @@ export function Hero() {
                 sizes="(min-width: 1024px) 17rem, 100vw"
                 width={photo.width}
                 height={photo.height}
-                fetchPriority="high"
+                {...{ fetchpriority: "high" }}
                 alt={photo.alt}
                 className="aspect-[4/5] w-full object-cover"
                 style={photo.focal ? { objectPosition: photo.focal } : undefined}

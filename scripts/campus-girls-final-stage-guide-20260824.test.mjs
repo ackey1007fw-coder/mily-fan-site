@@ -31,13 +31,13 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
     assert.equal(entry.source, SOURCE);
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
-    assert.equal(entry.url, undefined);
-    assert.equal(entry.ctaLabel, undefined);
+    assert.equal(entry.url, "https://paton.jp/event/entrant/11380");
+    assert.equal(entry.ctaLabel, "Patonでみりぃに投票する");
     assert.equal(entry.media, undefined);
     assert.deepEqual(verifyNews(news), []);
   });
 
-  it("summarizes the confirmed Final STAGE guide without inventing vote URLs", () => {
+  it("preserves the original guide and adds the subsequently confirmed Paton destination", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}`;
 
@@ -46,14 +46,14 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.match(entry.body, /8月24日/);
     assert.match(entry.body, /SNS審査は8月24日12:00〜8月30日12:00/);
     assert.match(entry.body, /Paton投票審査は8月26日18:00〜9月1日23:59/);
-    assert.match(entry.body, /投票先の詳細は追って案内/);
+    assert.match(entry.body, /8月24日時点では投票先の詳細は追って案内/);
+    assert.match(entry.body, /8月26日にPatonの三橋莉子（みりぃ）ページの公開を確認/);
+    assert.match(entry.body, /投票にはPatonへのログインが必要/);
     assert.match(entry.body, /CAMPUS GIRLSでは配信を行わない/);
     assert.match(entry.body, /Final STAGE期間を8月24日12:00〜8月30日23:59/);
 
     for (const phrase of [
-      "paton.jp",
       "今すぐ投票",
-      "投票する",
       "MISS CIRCLEの規定",
       "規定により禁止",
       "配信が禁止",
@@ -103,14 +103,14 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.equal(entry.image, undefined);
   });
 
-  it("documents the inventory bump and leaves vote URLs out of tracked sources", async () => {
+  it("documents the now-confirmed Paton vote destination", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
     assert.match(ops, /31件/);
     assert.match(ops, /Final STAGE案内/);
-    assert.match(ops, /投票先URLは未公開のため未掲載/);
-    assert.equal(newsSource.includes("paton.jp"), false);
+    assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
+    assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
     assert.equal(news.length, 31);
   });
 });
