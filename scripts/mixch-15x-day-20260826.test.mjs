@@ -116,11 +116,12 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
 
   it("leads 2026-08-26 NEWS above the 10:00 stream item via source-array order", () => {
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0]?.id, NEWS_ID);
-    assert.equal(ordered[1]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[0]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[1]?.id, NEWS_ID);
+    assert.equal(ordered[2]?.id, "2026-08-26-stream-1000");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-26").map(({ id }) => id),
-      [NEWS_ID, "2026-08-26-stream-1000"],
+      ["2026-08-26-girl-award-event-fanroom", NEWS_ID, "2026-08-26-stream-1000"],
     );
   });
 

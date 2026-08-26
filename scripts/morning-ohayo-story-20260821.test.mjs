@@ -121,7 +121,8 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
 
   it("keeps the established same-day editorial ordering", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 26), [
+    assert.deepEqual(ordered.slice(0, 27), [
+      "2026-08-26-girl-award-event-fanroom",
       "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
@@ -149,7 +150,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 32);
+    assert.equal(news.length, 33);
   });
 });
 

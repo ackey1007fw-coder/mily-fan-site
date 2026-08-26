@@ -117,7 +117,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.deepEqual(item()?.activityIds, ["radio"]);
     assert.equal(item()?.title, "「Yes!東京」踊ってみた💃");
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 32);
+    assert.equal(news.length, 33);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -139,14 +139,15 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
 
   it("ranks as the top 8/24 Latest item after the newer 8/25 morning STORY CTA", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.equal(ordered[0], "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[1], "2026-08-26-stream-1000");
-    assert.equal(ordered[2], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[3], "2026-08-25-motivation");
-    assert.equal(ordered[4], NEWS_ID);
-    assert.equal(ordered[5], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[6], "2026-08-24-makeup-stream");
-    assert.equal(ordered[7], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[0], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[1], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[2], "2026-08-26-stream-1000");
+    assert.equal(ordered[3], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[4], "2026-08-25-motivation");
+    assert.equal(ordered[5], NEWS_ID);
+    assert.equal(ordered[6], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[7], "2026-08-24-makeup-stream");
+    assert.equal(ordered[8], "2026-08-24-night-thanks-morning-stream");
   });
 });
 
@@ -423,7 +424,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.match(docs, /512×910/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /32件/);
+    assert.match(ops, /33件/);
     assert.match(ops, /独立動画12本/);
     assert.match(ops, /Yes!東京/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
@@ -440,10 +441,11 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, INSTAGRAM_PROFILE);
     assert.ok(entry.image?.endsWith(seasideCircleYesTokyoVideo.poster));
-    assert.equal(latestIds[0], "2026-08-26-mixch-15x-day");
-    assert.equal(latestIds[1], "2026-08-26-stream-1000");
-    assert.equal(latestIds[2], "2026-08-25-mixch-confidence-message");
-    assert.equal(latestIds[3], "2026-08-25-motivation");
-    assert.equal(latestIds[4], NEWS_ID);
+    assert.equal(latestIds[0], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(latestIds[1], "2026-08-26-mixch-15x-day");
+    assert.equal(latestIds[2], "2026-08-26-stream-1000");
+    assert.equal(latestIds[3], "2026-08-25-mixch-confidence-message");
+    assert.equal(latestIds[4], "2026-08-25-motivation");
+    assert.equal(latestIds[5], NEWS_ID);
   });
 });

@@ -530,6 +530,68 @@ describe("content verification invariants", () => {
     assert.ok(xPoster.some((error) => error.includes("official Mixch thumbnail")));
   });
 
+  it("accepts self-hosted Fan Room audio and rejects SHOWROOM CDN hotlinks", () => {
+    const audio = {
+      kind: "audio",
+      src: "/media/news/mily-b27-01-girl-award-event-voice.m4a",
+      mimeType: "audio/mp4",
+      alt: "みりぃがファンルームに残した音声メッセージ",
+      label: "みりぃからの音声メッセージ · 22:36",
+    };
+
+    assert.deepEqual(
+      verifyNews([
+        {
+          ...validNews,
+          id: "audio-ok",
+          source: undefined,
+          sourceLabel: "SHOWROOMファンルーム",
+          media: audio,
+        },
+      ]),
+      [],
+    );
+
+    const hotlink = verifyNews([
+      {
+        ...validNews,
+        id: "audio-cdn",
+        media: {
+          ...audio,
+          src: "https://static.showroom-live.com/image/fan_talk/example.aac",
+        },
+      },
+    ]);
+    assert.ok(hotlink.some((error) => error.includes("local /media/ path") || error.includes("hotlink SHOWROOM CDN")));
+
+    const wrongExt = verifyNews([
+      {
+        ...validNews,
+        id: "audio-mp3",
+        media: { ...audio, src: "/media/news/example.mp3" },
+      },
+    ]);
+    assert.ok(wrongExt.some((error) => error.includes("self-hosted .m4a")));
+
+    const badMime = verifyNews([
+      {
+        ...validNews,
+        id: "audio-mime",
+        media: { ...audio, mimeType: "audio/mpeg" },
+      },
+    ]);
+    assert.ok(badMime.some((error) => error.includes("mimeType must be audio/mp4")));
+
+    const noAlt = verifyNews([
+      {
+        ...validNews,
+        id: "audio-alt",
+        media: { ...audio, alt: "" },
+      },
+    ]);
+    assert.ok(noAlt.some((error) => error.includes("alt text")));
+  });
+
   it("accepts a local STORIES path as a news related link", () => {
     const errors = verifyNews([
       {

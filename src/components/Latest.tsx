@@ -19,6 +19,7 @@ import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
+import { NewsAudioCard } from "./NewsAudioCard";
 
 function NewsLink({
   href,
@@ -48,6 +49,10 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
   if (media.kind === "mixch") {
     if (!media.published) return null;
     return <MixchOutboundCard movie={media} />;
+  }
+
+  if (media.kind === "audio") {
+    return <NewsAudioCard media={media} />;
   }
 
   if (media.kind === "video") {

@@ -8,7 +8,7 @@
  * - sourceLabel: optional label. Without source, it renders as non-link text.
  * - additionalSources: optional extra confirmed source links for the same NEWS item
  * - url: optional. Only when it differs from source（「関連リンク」）
- * - media: optional self-hosted still/video, or Mixch outbound player card
+ * - media: optional self-hosted still/video/audio, or Mixch outbound player card
  * - additionalMedia: optional extra stills/videos on the same card. Lead stays `media`.
  * - ctaLabel: optional. href is url ?? source
  */
@@ -37,6 +37,7 @@ import {
   campusGirlsPatonPageImage,
   campusGirlsPatonPortraitImage,
 } from "./campusGirlsPatonImages.ts";
+import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -59,7 +60,24 @@ export type NewsImageMedia = {
 /** Mixch outbound player. Distinct from self-hosted `kind: "video"` which has an mp4 `src`. */
 export type NewsMixchMedia = MixchMovie;
 
-export type NewsMedia = NewsVideoMedia | NewsImageMedia | NewsMixchMedia;
+/** Self-hosted Fan Room voice memo. Latest / NEWS only — not Gallery. */
+export type NewsAudioMedia = {
+  kind: "audio";
+  src: string;
+  mimeType: "audio/mp4";
+  alt: string;
+  label?: string;
+};
+
+export type NewsMedia =
+  | NewsVideoMedia
+  | NewsImageMedia
+  | NewsMixchMedia
+  | NewsAudioMedia;
+
+export function isNewsAudio(media: NewsMedia): media is NewsAudioMedia {
+  return media.kind === "audio";
+}
 
 export function newsMediaKey(media: NewsMedia): string {
   return media.kind === "mixch" ? `${media.kind}:${media.id}` : `${media.kind}:${media.src}`;
@@ -104,6 +122,36 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-26-girl-award-event-fanroom",
+    date: "2026-08-26",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "ガルアワイベ最終日、【6位】で走り切れました",
+    body: "8月26日のSHOWROOMファンルームで、みりぃがガルアワイベ最終日を【6位】で終われたこと、最後の逆転、みんなの応援の賜物であることへの感謝を伝えました。一緒に走り切ってくれたことへのお礼と、これからも不器用なみりぃをよろしく、という言葉も残されています。同じ夜、ファンルームに音声メッセージも届いています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMで応援する",
+    media: girlAwardEventVoice,
+    message: {
+      label: "みりぃからの連絡💌 · 22:32",
+      text:
+        "ガルアワイベ最終日、\n" +
+        "なんと【6位】で終わることができました😭\n" +
+        "🙏❤️✨\n" +
+        "\n" +
+        "まさか最後に逆転できるとは〜！！！！！\n" +
+        "これもみんなの応援の賜物すぎるよ😱❤️‍🔥\n" +
+        "\n" +
+        "一緒に走り切ってくれたみんな、本当にありがとう。\n" +
+        "心から感謝です🥺💙\n" +
+        "\n" +
+        "とってもとっても楽しかった！！\n" +
+        "\n" +
+        "これからもどうぞ、\n" +
+        "不器用なみりぃをよろしくお願いいたします‼️",
+    },
+  },
   {
     id: "2026-08-26-mixch-15x-day",
     date: "2026-08-26",

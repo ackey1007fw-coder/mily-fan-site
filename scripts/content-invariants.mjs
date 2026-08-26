@@ -285,6 +285,35 @@ export function verifyNews(items) {
         }
         continue;
       }
+      if (media?.kind === "audio") {
+        if (!media.src?.startsWith("/media/")) {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} src must be a local /media/ path`,
+          );
+        }
+        if (typeof media.src === "string" && !media.src.endsWith(".m4a")) {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} audio must be a self-hosted .m4a`,
+          );
+        }
+        if (media.mimeType !== "audio/mp4") {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} mimeType must be audio/mp4`,
+          );
+        }
+        if (!media.alt?.trim()) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs alt text`);
+        }
+        if (
+          typeof media.src === "string" &&
+          /showroom-live\.com|static\.showroom-live\.com/i.test(media.src)
+        ) {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} must not hotlink SHOWROOM CDN`,
+          );
+        }
+        continue;
+      }
       const mediaKeys =
         media?.kind === "video"
           ? ["src", "poster"]

@@ -92,10 +92,11 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(ordered[0]?.id, "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[1]?.id, "2026-08-26-stream-1000");
-    assert.equal(ordered[2]?.id, NEWS_ID);
-    assert.equal(ordered[3]?.id, "2026-08-25-motivation");
+    assert.equal(ordered[0]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[1]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[2]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[3]?.id, NEWS_ID);
+    assert.equal(ordered[4]?.id, "2026-08-25-motivation");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-25").map(({ id }) => id),
       [NEWS_ID, "2026-08-25-motivation"],
@@ -144,8 +145,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /ZY4hSt3K/);
       assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 32);
-    assert.match(ops, /32件/);
+    assert.equal(news.length, 33);
+    assert.match(ops, /33件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);
     assert.match(ops, /Mixchファイルは自己ホストしていない/);
