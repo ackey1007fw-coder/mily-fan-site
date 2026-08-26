@@ -13,7 +13,14 @@ import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { selectActivityMedia } from "../src/lib/activityMedia.ts";
-import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
+import {
+  selectGalleryEntries,
+  selectGalleryPreview,
+} from "../src/lib/galleryItems.ts";
+import {
+  GALLERY_ARCHIVE_INITIAL,
+  HOME_GALLERY_LIMIT,
+} from "../src/lib/homePortal.ts";
 import { verifyNews } from "./content-invariants.mjs";
 import { readFile } from "node:fs/promises";
 
@@ -131,6 +138,15 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     assert.equal(confidence.media, mixchConfidenceMessageMovie);
     assert.equal(gallery[0]?.item, mixch15xDayMovie);
     assert.equal(gallery[1]?.item, mixchConfidenceMessageMovie);
+
+    const initial = selectGalleryEntries().slice(0, GALLERY_ARCHIVE_INITIAL);
+    const preview = selectGalleryPreview(HOME_GALLERY_LIMIT);
+    assert.equal(initial.filter((entry) => entry.kind === "mixch").length, 2);
+    assert.equal(preview.filter((entry) => entry.kind === "mixch").length, 2);
+    assert.equal(initial[0]?.item, mixch15xDayMovie);
+    assert.equal(initial[1]?.item, mixchConfidenceMessageMovie);
+    assert.equal(preview[0]?.item, mixch15xDayMovie);
+    assert.equal(preview[1]?.item, mixchConfidenceMessageMovie);
     assert.equal(
       selectActivityMedia("campus-girls").includes(mixch15xDayMovie),
       true,
@@ -160,7 +176,7 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     const card = sources[0];
     assert.match(card, /href=\{movie\.mixchUrl\}/);
     assert.match(card, /from "\.\/ExternalLink"/);
-    assert.doesNotMatch(card, /<video/);
+    assert.doesNotMatch(card, /<video[\s>/]/);
     assert.match(card, /Mixchで「\{movie\.title\}」を見る/);
 
     const external = await readFile(
@@ -173,6 +189,10 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     const latest = sources[1];
     assert.match(latest, /kind === "mixch"/);
     assert.match(latest, /MixchOutboundCard/);
+
+    const gallerySource = sources[2];
+    assert.match(gallerySource, /capped\.filter\(\(entry\) => entry\.kind === "mixch"\)/);
+    assert.match(card, /Mixchが新しいタブで開きます/);
   });
 
   it("does not copy Mixch movie files into public/media or media/original", async () => {

@@ -325,7 +325,7 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     assert.equal(visible[8], eventStory20260821);
     assert.equal(visible[9], morningOhayo20260821);
     assert.equal(visible[10], morningShowroomRunwayVideo);
-    assert.equal(visible[9], morningStory20260820);
+    assert.equal(visible[11], morningStory20260820);
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
     assert.equal(drive.videos.length, 11);

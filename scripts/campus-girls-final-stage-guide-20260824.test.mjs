@@ -80,7 +80,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const selected = selectActivityNews("campus-girls");
 
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
-    assert.ok(selected.some((entry) => entry.id === CAMPUS_RESULT_ID));
+    assert.ok(
+      selectActivityNews("campus-girls", news, news.length).some(
+        (entry) => entry.id === CAMPUS_RESULT_ID,
+      ),
+    );
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 

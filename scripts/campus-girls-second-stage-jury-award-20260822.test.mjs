@@ -235,7 +235,10 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.match(agents, /具体的な理由をPR本文または最終報告に残す/);
     assert.match(agents, /出典確認・プライバシー確認・第三者情報確認を省略しない/);
     assert.match(agents, /Story閲覧スクリーンショットには一般メディアより追加の安全条件がある/);
-    assert.match(agents, /AI 生成・置換・補正・加工、生成塗り足し、SNS からの自動取得は禁止/);
+    assert.match(agents, /AI 生成・置換・補正・加工/);
+    assert.match(agents, /生成塗り足しは禁止/);
+    assert.match(agents, /X \/ Instagram \/ Mixch の動画ファイルを git/);
+    assert.match(agents, /Mixch outbound/);
 
     assert.match(contentOps, /メディア掲載の上位方針/);
     assert.match(contentOps, /NEWSを文章だけで終わらせず/);

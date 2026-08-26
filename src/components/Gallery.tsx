@@ -173,9 +173,12 @@ export function Gallery({
   const photos = visible.filter(
     (entry) => entry.kind === "media" || entry.kind === "drive-photo",
   );
-  const videos = visible.filter(
-    (entry) => entry.kind === "video" || entry.kind === "mixch",
-  );
+  // Mixch cards must not wait behind photo pagination. Take them from the
+  // capped list so /gallery/ first paint always includes outbound players.
+  const videos = [
+    ...capped.filter((entry) => entry.kind === "mixch"),
+    ...visible.filter((entry) => entry.kind === "video"),
+  ];
 
   return (
     <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>

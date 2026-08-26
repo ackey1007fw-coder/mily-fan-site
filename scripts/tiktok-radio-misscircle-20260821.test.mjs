@@ -378,7 +378,11 @@ describe("2026-08-21 TikTok post — privacy, identity and scope boundaries", ()
   });
 
   it("flows through Portal Feed with the TikTok source and shared poster", () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-21T21:00:00+09:00") });
+    const feed = createPortalFeed({
+      newsItems: [item()],
+      storyItems: [],
+      now: new Date("2026-08-21T21:00:00+09:00"),
+    });
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
 
     assert.ok(entry);

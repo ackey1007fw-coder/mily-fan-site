@@ -4,7 +4,7 @@ import { ExternalLink } from "./ExternalLink";
 
 /**
  * Looks like a video player; watching opens Mixch in a new tab.
- * Do not use `<video>` or iframe Mixch — contest views belong on Mixch.
+ * Do not play Mixch files on this site or iframe Mixch — contest views belong on Mixch.
  */
 export function MixchOutboundCard({
   movie,
@@ -16,6 +16,7 @@ export function MixchOutboundCard({
   return (
     <ExternalLink
       href={movie.mixchUrl}
+      aria-label={`Mixchで「${movie.title}」を見る（Mixchが新しいタブで開きます）`}
       className={
         className ??
         "group relative mx-auto mt-4 block w-full max-w-sm rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"

@@ -31,7 +31,15 @@ export function selectGalleryEntries(): GalleryEntry[] {
   const mixch = standalone.filter(isMixchMovie);
   const selfHosted = standalone.filter(isSelfHostedGalleryVideo);
 
+  // Mixch outbound cards are newest owner-named visuals. Keep them at the
+  // front so Home preview and Gallery's initial window show them instead of
+  // burying them behind 60+ photos.
   return [
+    ...mixch.map((item) => ({
+      kind: "mixch" as const,
+      key: item.id,
+      item,
+    })),
     ...photos.map((item) => ({
       kind: "media" as const,
       key: item.id,
@@ -40,11 +48,6 @@ export function selectGalleryEntries(): GalleryEntry[] {
     ...drive.photos.map((item) => ({
       kind: "drive-photo" as const,
       key: item.key,
-      item,
-    })),
-    ...mixch.map((item) => ({
-      kind: "mixch" as const,
-      key: item.id,
       item,
     })),
     ...selfHosted.map(driveVideoView).map((item) => ({
