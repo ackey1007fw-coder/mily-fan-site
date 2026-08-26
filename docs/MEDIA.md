@@ -1691,6 +1691,61 @@ b27-07 は b27-02 公開MP4の 1.0秒地点の実フレーム。同じ media:bui
 - 1600.jpg / 1600.webp は 960 と同じバイト
 
 Gallery 写真は新しい順で b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+b28-01 追加後は b28-01 が先頭で、そのあとに b27-07 → b27-06。
 Gallery 動画は新しい順で b27-02（鏡）→ b27-01（コラージュ）のあと既存動画。
 Latest の投票カードは鏡静止画を代表にし、コラージュ静止画・鏡動画・コラージュ動画を同じカードへ続ける。
 b27-03 / b27-04 は `galleryVideos.ts` にも `media.ts` にも載せない。
+
+## 素材台帳（batch b28 / 受領日・source date 2026-08-26）
+
+2026-08-26 23:34 JST の本人X投稿。公開permalinkあり。Story閲覧スクリーンショットではない。
+`sns-post`。Driveの受け渡しURL / file IDは公開情報・tracked textへ残さない。
+この掲載作業では再エンコード・リネーム・差し替えをしていない。
+
+ガルアワ＝Rakuten GirlsAward。掲載対象はミスサー／フレキャン出場者限定の
+SHOWROOMイベント「【フレ/ミス枠】Rakuten GirlsAward 2026 A/W ランウェイ出演」
+（2026-08-20〜2026-08-26）。本選のミスサークルコンテスト本体でも
+CAMPUS GIRLS Patonでもない。1位の賞品は Rakuten GirlsAward 2026 A/W
+オープニングアクトのランウェイ出演（幕張メッセ、2026-09-26）。
+みりぃは6位で終えたためランウェイ出演にはなっていない。
+`https://girls-award.com` は背景事実のみで、NEWS CTA にはしない。
+`/stories/` 記事と highlights には追加しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b28-01 NEWS | `news/mily-b28-01-girlsaward-showroom-6th.jpg` | くま耳キラキラフィルターの自撮り。黄ストライプリボンと紫ポロ。6位お礼の文字重ね。1156×2048。sns-post | ✅ HOME Latest / `/news/` 代表。Gallery 派生とは別ファイル |
+| b28-01 Gallery | `gallery/mily-b28-01-girlsaward-showroom-6th-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生。元素材 1156×2048 のため withoutEnlargement で 1600 は拡大しない | ✅ Gallery photo（`media.ts`）。NEWS JPEG のバイトは複製していない |
+
+出典: `https://x.com/Mily_chan36/status/2092621770406896106`
+SHOWROOMイベント: `https://www.showroom-live.com/event/girlsaward2026aw_fm`
+本人SHOWROOM: `https://www.showroom-live.com/r/circle2026_0734`
+
+### 公開ファイルの実測
+
+- provenance: `sns-post`（確認済みの本人X投稿。sourceUrl 必須）
+- source date: `2026-08-26`（snowflake + fxtwitter created_at Wed Aug 26 14:34:43 +0000 2026）
+- credit: 未確認のため `null`
+- 公開派生はEXIF / GPS / IPTC / XMP / ICCなし
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除なし
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+b28-01 NEWS JPEG: 397,362 bytes / 1156×2048 / sha256
+`f5bb01a9dc8c9384fd8d9e7c40fb769b5bf6f8bc48e74b1a7612ae2a07f9cd26`
+
+Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
+
+- 480.jpg 61,286 bytes / 480×850 / sha256
+  `40ca278f866bda2964df8c48a5188d5ebb02ec537cab931091bb6b0aba4403d7`
+- 480.webp 42,614 bytes / sha256
+  `48d9dd09db8aa4aedf573e923ab569873cbbbbb401246de01feb4d5251250d8c`
+- 960.jpg 161,064 bytes / 960×1701 / sha256
+  `acda33e4f404e6c0b903c547dfe9d94092fe3c329c923f4ff0e535324b45e4bb`
+- 960.webp 96,062 bytes / sha256
+  `ae86e064ba8f2bdf22265eb1d896c295549637c3efe363ae410d1e72da39c491`
+- 1600.jpg 210,796 bytes / 1156×2048 / sha256
+  `91bc5744b607206a30c4fc7326297c8be9a3401399842e5d5904b99e63ff8504`
+- 1600.webp 120,780 bytes / sha256
+  `2c32f0e3fa6623dc2b315dd33d87ba2395a58ff4a00621d8cfd15cdce874a1e9`
+
+Gallery 写真は新しい順で b28-01 → b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+Latest の先頭は 6位お礼X投稿。投票案内Storyカードは同じ日の次点。

@@ -149,17 +149,18 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     }
   });
 
-  it("leads Latest as the first 2026-08-26 News item", () => {
+  it("stays among the 2026-08-26 News items after the GirlsAward post", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], "2026-08-26-paton-vote-stories");
-    assert.equal(ordered[1], "2026-08-26-instagram-followers-400");
-    assert.equal(ordered[2], "2026-08-26-morning-stream-thanks");
-    assert.equal(ordered[3], NEWS_ID);
-    assert.equal(ordered[4], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[5], "2026-08-25-motivation");
-    assert.equal(news.length, 34);
-    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 4);
+    assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
+    assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
+    assert.equal(ordered[3], "2026-08-26-morning-stream-thanks");
+    assert.equal(ordered[4], NEWS_ID);
+    assert.equal(ordered[5], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[6], "2026-08-25-motivation");
+    assert.equal(news.length, 35);
+    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 5);
     assert.equal(item().media, undefined);
     assert.equal(item().additionalMedia, undefined);
   });
@@ -167,8 +168,9 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
     const selected = selectActivityNews("live-stream", news, news.length);
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
-    assert.equal(selected[0]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(selected[1]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(selected[1]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(selected[2]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("live-stream")));
     assert.equal(
       selectActivityNews("miss-circle", news, news.length).some(

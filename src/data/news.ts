@@ -40,6 +40,7 @@ import {
 } from "./patonVoteStoryStills.ts";
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
+import { girlsawardShowroom6thImage } from "./girlsawardShowroom6th.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -98,6 +99,29 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-26-girlsaward-showroom-6th",
+    date: "2026-08-26",
+    sameDayOrder: 4,
+    activityIds: ["miss-circle", "live-stream"],
+    title: "「6位で終わることができました」ガルアワイベ最終日の感謝",
+    body: "8月26日、みりぃがXに、SHOWROOMイベント「【フレ/ミス枠】Rakuten GirlsAward 2026 A/W ランウェイ出演」（通称ガルアワイベ）最終日のお礼を投稿しました。ミスサー／フレキャン出場者限定の企画で、本選のミスサークルコンテスト本体とは別です。期間は8月20日から8月26日。写真には「ガルアワイベ最終日 応援に駆けつけてくれた皆様ありがとうございました\u{1F62D}\u{2763}\u{FE0F}」「なんと【6位】で終わることができました\u{1F972}\u{1F64C}\u{1F3FB}\u{1FA75}」「楽しかったなぁ。濃かったなぁ。素敵な時間だったなぁ。初めての景色、美しかったなぁ。」「これからも不器用なみりぃですがよろしくお願いします\u{1F64F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}」と重ねています。1位の賞品はRakuten GirlsAward 2026 A/Wオープニングアクトのランウェイ出演（幕張メッセ、2026年9月26日）でしたが、みりぃは6位だったためランウェイ出演にはなっていません。投稿では、初めは挑戦するのも怖かったけど勇気を出して一歩踏み出せて、みんなに出逢えて応援していただけてよかった、幸せじゃっ、これからもよろしくお願いしますと伝えています。",
+    source: "https://x.com/Mily_chan36/status/2092621770406896106",
+    sourceLabel: "Xの投稿を見る",
+    additionalSources: [
+      {
+        label: "SHOWROOMイベントページを見る",
+        url: "https://www.showroom-live.com/event/girlsaward2026aw_fm",
+      },
+    ],
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    media: girlsawardShowroom6thImage,
+    message: {
+      label: "みりぃの投稿",
+      text: "はぁぁぁぁぁ、皆さんのおかげでとーーーっても楽しかった\u{1F972}\u{2764}\u{FE0F}\u{200D}\u{1F525}\nガルアワイベ、初めは挑戦するのも怖かったけど、勇気出して一歩踏み出せて、みんなに出逢えて、応援していただけてよかった。幸せじゃっ\u{2B50}\u{FE0F}\nこれからもどうぞよろしくお願いします\u{1F345}\u{2728}\n#ミスサー #ミスサークル #ミスサークルコンテスト",
+    },
+  },
   {
     id: "2026-08-26-paton-vote-stories",
     date: "2026-08-26",
