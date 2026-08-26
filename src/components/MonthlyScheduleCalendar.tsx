@@ -80,6 +80,7 @@ export function MonthlyScheduleCalendar({
   const todayMonth = today.slice(0, 7);
   const [visibleMonth, setVisibleMonth] = useState(todayMonth);
   const [selectedDate, setSelectedDate] = useState<string | null>(today);
+  const previousToday = useRef(today);
   const previousTodayMonth = useRef(todayMonth);
   const cells = useMemo(() => buildMonthGrid(visibleMonth), [visibleMonth]);
   const itemsByDate = useMemo(
@@ -102,11 +103,22 @@ export function MonthlyScheduleCalendar({
   const heading = monthHeading(visibleMonth);
 
   useEffect(() => {
-    if (previousTodayMonth.current === todayMonth) return;
+    const previousDate = previousToday.current;
+    const monthChanged = previousTodayMonth.current !== todayMonth;
+    const dateChanged = previousDate !== today;
+    if (!dateChanged) return;
+
+    previousToday.current = today;
     previousTodayMonth.current = todayMonth;
-    setVisibleMonth(todayMonth);
-    setSelectedDate(today);
-  }, [todayMonth, today]);
+
+    if (monthChanged) {
+      setVisibleMonth(todayMonth);
+      setSelectedDate(today);
+      return;
+    }
+
+    setSelectedDate((current) => (current === previousDate ? today : current));
+  }, [today, todayMonth]);
 
   const moveMonth = (offset: number) => {
     const nextMonth = shiftMonthKey(visibleMonth, offset);

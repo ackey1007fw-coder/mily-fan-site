@@ -365,7 +365,11 @@ describe("monthly Support Calendar UI source", () => {
     assert.match(calendar, /aria-pressed=\{isSelected\}/);
     assert.match(calendar, /setSelectedDate\(today\)/);
     assert.match(calendar, /setSelectedDate\(nextMonth === todayMonth \? today : null\)/);
-    assert.match(calendar, /previousTodayMonth\.current === todayMonth/);
+    assert.match(calendar, /const dateChanged = previousDate !== today/);
+    assert.match(
+      calendar,
+      /setSelectedDate\(\(current\) => \(current === previousDate \? today : current\)\)/,
+    );
     assert.match(calendar, /navigableMonthBounds\(todayMonth, itemMonths\)/);
     assert.match(calendar, /disabled=\{!canGoPrev\}/);
     assert.match(calendar, /disabled=\{!canGoNext\}/);
