@@ -15,6 +15,8 @@ const NEWS_ID = "2026-08-24-campus-girls-final-stage-guide";
 const EXISTING_8_24 = "2026-08-24-night-thanks-morning-stream";
 const CAMPUS_RESULT_ID = "2026-08-22-campus-girls-second-stage-jury-award";
 const SOURCE = "https://x.com/mily_chan36/status/2091669951946121636";
+const VOTE_ANNOUNCEMENT_SOURCE =
+  "https://x.com/mily_chan36/status/2092456392343138339";
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -30,14 +32,27 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.equal(entry.sameDayOrder, 3);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
     assert.equal(entry.source, SOURCE);
-    assert.equal(entry.sourceLabel, "Xの投稿を見る");
-    assert.equal(entry.url, undefined);
-    assert.equal(entry.ctaLabel, undefined);
-    assert.equal(entry.media, undefined);
+    assert.equal(entry.sourceLabel, "8月24日のX投稿を見る");
+    assert.deepEqual(entry.additionalSources, [
+      {
+        label: "8月26日のX投稿を見る",
+        url: VOTE_ANNOUNCEMENT_SOURCE,
+      },
+    ]);
+    assert.equal(entry.url, "https://paton.jp/event/entrant/11380");
+    assert.equal(entry.ctaLabel, "Patonでみりぃに投票する");
+    assert.equal(
+      entry.media?.src,
+      "/media/news/mily-b26-01-campus-girls-paton-portrait.jpg",
+    );
+    assert.deepEqual(
+      entry.additionalMedia?.map(({ src }) => src),
+      ["/media/news/mily-b26-02-campus-girls-paton-page.jpg"],
+    );
     assert.deepEqual(verifyNews(news), []);
   });
 
-  it("summarizes the confirmed Final STAGE guide without inventing vote URLs", () => {
+  it("preserves the original guide and adds the subsequently confirmed Paton destination", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}`;
 
@@ -46,14 +61,15 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.match(entry.body, /8月24日/);
     assert.match(entry.body, /SNS審査は8月24日12:00〜8月30日12:00/);
     assert.match(entry.body, /Paton投票審査は8月26日18:00〜9月1日23:59/);
-    assert.match(entry.body, /投票先の詳細は追って案内/);
+    assert.match(entry.body, /8月24日時点では投票先の詳細は追って案内/);
+    assert.match(entry.body, /8月26日にPatonの三橋莉子（みりぃ）ページの公開を確認/);
+    assert.match(entry.body, /みりぃ自身もXでこの応援ページを直接案内/);
+    assert.match(entry.body, /投票にはPatonへのログインが必要/);
     assert.match(entry.body, /CAMPUS GIRLSでは配信を行わない/);
     assert.match(entry.body, /Final STAGE期間を8月24日12:00〜8月30日23:59/);
 
     for (const phrase of [
-      "paton.jp",
       "今すぐ投票",
-      "投票する",
       "MISS CIRCLEの規定",
       "規定により禁止",
       "配信が禁止",
@@ -83,6 +99,27 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 
+  it("integrates the overlapping 8/26 X post into the existing NEWS card", async () => {
+    const matches = news.filter((entry) =>
+      entry.additionalSources?.some(
+        ({ url }) => url === VOTE_ANNOUNCEMENT_SOURCE,
+      ),
+    );
+    const latest = await readFile(
+      path.join(root, "src/components/Latest.tsx"),
+      "utf8",
+    );
+    const activityPage = await readFile(
+      path.join(root, "src/ActivitiesPage.tsx"),
+      "utf8",
+    );
+
+    assert.equal(matches.length, 1);
+    assert.equal(matches[0]?.id, NEWS_ID);
+    assert.match(latest, /item\.additionalSources\?\.map/);
+    assert.match(activityPage, /item\.additionalSources\?\.map/);
+  });
+
   it("does not add a new Highlight for this guide-only post", () => {
     assert.equal(
       highlights.some((entry) => entry.id.includes("final-stage-guide")),
@@ -100,17 +137,21 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.equal(entry.image, undefined);
+    assert.equal(
+      entry.image,
+      "https://mily-fan-site.vercel.app/media/news/mily-b26-01-campus-girls-paton-portrait.jpg",
+    );
   });
 
-  it("documents the inventory bump and leaves vote URLs out of tracked sources", async () => {
+  it("documents the now-confirmed Paton vote destination", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
     assert.match(ops, /31件/);
     assert.match(ops, /Final STAGE案内/);
-    assert.match(ops, /投票先URLは未公開のため未掲載/);
-    assert.equal(newsSource.includes("paton.jp"), false);
+    assert.match(ops, /8月26日の本人XによるPaton直接案内/);
+    assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
+    assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
     assert.equal(news.length, 31);
   });
 });

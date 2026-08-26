@@ -298,7 +298,16 @@ describe("Support Today and pending separation", () => {
     );
   });
 
-  it("keeps current production SupportEvents empty instead of inventing facts", () => {
-    assert.equal(supportEvents.length, 0);
+  it("keeps the confirmed CAMPUS GIRLS Paton voting period in SupportEvents", () => {
+    assert.equal(supportEvents.length, 1);
+    assert.equal(supportEvents[0].activityId, "campus-girls");
+    assert.equal(supportEvents[0].kind, "vote");
+    assert.deepEqual(supportEvents[0].schedule, {
+      state: "confirmed-period",
+      start: "2026-08-26T18:00:00+09:00",
+      end: "2026-09-01T23:59:00+09:00",
+      allDay: false,
+      timezone: "Asia/Tokyo",
+    });
   });
 });

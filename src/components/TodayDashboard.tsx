@@ -6,6 +6,7 @@ import { selectHomeToday } from "../lib/homeToday";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { useMilyRealtimeStatus } from "../lib/useMilyRealtimeStatus";
 import { useStreamSchedule } from "../lib/useStreamSchedule";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
 
 const SNS_PLATFORMS = ["x", "instagram", "tiktok"] as const;
@@ -32,6 +33,7 @@ const itemCta =
  * ここでも読み上げさせないため、このカードは live region にしない。
  */
 export function TodayDashboard() {
+  const now = useSupportEventClock();
   const { slots, roomUrl } = useStreamSchedule();
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
 
@@ -46,7 +48,7 @@ export function TodayDashboard() {
       radio,
       radioPhase: schedulePhase,
       banner,
-      now: Date.now(),
+      now,
     });
   // バナー抑制で残したCTAと、どこもSHOWROOMへ送っていないときの確認済みfallback。
   const secondaryActions = [...retainedActions, ...fallbackActions];

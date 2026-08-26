@@ -9,6 +9,14 @@ export type SiteLink = {
   note?: string;
 };
 
+export const campusGirlsPatonVoteLink: SiteLink = {
+  id: "campus-girls-paton-11380",
+  label: "Patonでみりぃに投票する",
+  url: "https://paton.jp/event/entrant/11380",
+  note:
+    "CAMPUS GIRLS 2027 予選A FinalSTAGE。投票にはPatonへのログインが必要です。",
+};
+
 export const links: SiteLink[] = [
   {
     id: "miss-circle-2026-734",
@@ -16,6 +24,7 @@ export const links: SiteLink[] = [
     url: "https://2026.misscircle.jp/entry/734",
     note: "投票方法・最新情報はENTRY 734ページへ。",
   },
+  campusGirlsPatonVoteLink,
   {
     id: "fm-smw-staff",
     label: "FM湘南マジックウェイブ スタッフ",

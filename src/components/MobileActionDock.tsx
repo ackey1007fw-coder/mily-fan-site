@@ -1,26 +1,36 @@
 import { contest } from "../data/contest";
-import { HOME_VOTE_CTA } from "../lib/homePortal";
+import { links } from "../data/links";
+import { supportEvents } from "../data/supportEvents";
+import { selectHomeVoteAction } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
 
 /**
  * スマホ専用の画面下部固定ドック。
- * 投票（ENTRY URL）と Support Hub（`/support/`）を常に押しやすくする。
- * 画面を占有しすぎないよう、細い1段のみ。ENTRY URL / 番号は contest.ts が正本。
- * 未確認の受付状態を本文へ書かない。
+ * 期間中の確認済み投票と Support Hub（`/support/`）を常に押しやすくする。
+ * 画面を占有しすぎないよう、細い1段のみ。終了後はENTRY導線へ戻す。
  */
 export function MobileActionDock() {
+  const now = useSupportEventClock();
+  const voteAction = selectHomeVoteAction({
+    contest,
+    supportEvents,
+    links,
+    now,
+  });
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-30 border-t border-sage/20 bg-paper/95 px-4 pb-[max(env(safe-area-inset-bottom),0.5rem)] pt-2 backdrop-blur sm:hidden">
       <div className="mx-auto flex max-w-3xl items-center gap-2">
         <a
-          href={contest.entryUrl}
+          href={voteAction.url}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex min-h-11 flex-1 items-center justify-center rounded-full bg-sage px-4 text-sm font-semibold text-white hover:bg-sage-deep"
         >
-          {HOME_VOTE_CTA}
+          {voteAction.label}
           <span className="sr-only">
-            （{contest.entryNumber}・新しいタブで開きます）
+            （{voteAction.title}・新しいタブで開きます）
           </span>
         </a>
         <a

@@ -153,6 +153,43 @@ export function displayStatus(
   return now < Date.parse(schedule.at) ? "upcoming" : "ended";
 }
 
+/**
+ * 現在の表示状態が次に変わる最初の時刻。
+ * confirmed-period の終了は inclusive なので、終了時刻の1ms後を返す。
+ */
+export function nextDisplayStatusBoundary(
+  schedule: SupportEventSchedule,
+  now: number,
+): number | null {
+  if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
+  if (schedule.state === "date-pending") return null;
+  if (!isValidSupportEventSchedule(schedule)) {
+    throw new Error("Invalid support event schedule");
+  }
+
+  if (schedule.state === "confirmed-period") {
+    const start = schedule.allDay
+      ? startOfTokyoDay(schedule.start)
+      : Date.parse(schedule.start);
+    const end = schedule.allDay
+      ? startOfTokyoDay(addCalendarDays(schedule.end, 1)) - 1
+      : Date.parse(schedule.end);
+    if (now < start) return start;
+    if (now <= end) return end + 1;
+    return null;
+  }
+
+  const at = schedule.allDay
+    ? startOfTokyoDay(schedule.at)
+    : Date.parse(schedule.at);
+  if (now < at) return at;
+  if (schedule.allDay) {
+    const end = startOfTokyoDay(addCalendarDays(schedule.at, 1));
+    return now < end ? end : null;
+  }
+  return null;
+}
+
 export function liveSupportEvents(
   items: SupportEvent[],
   now: number,
@@ -205,7 +242,7 @@ export function adaptContestSchedule(contest: Contest): {
   };
 }
 
-export function adaptSupportEvents(items: SupportEvent[]): {
+export function adaptSupportEvents(items: SupportEvent[], now?: number): {
   items: ScheduleItem[];
   pending: PendingSupportItem[];
 } {
@@ -216,7 +253,11 @@ export function adaptSupportEvents(items: SupportEvent[]): {
     const link = item.ctaLinkId
       ? links.find(({ id }) => id === item.ctaLinkId)
       : undefined;
-    const cta = link ? { label: link.label, url: link.url } : undefined;
+    const cta =
+      link &&
+      (now === undefined || displayStatus(item.schedule, now) === "live")
+        ? { label: link.label, url: link.url }
+        : undefined;
     if (item.schedule.state === "date-pending") {
       pending.push({
         key: `support-event:${item.id}`,
@@ -548,7 +589,7 @@ export function buildSupportCalendar(input: {
     streamAvailability,
   );
   const contestResult = adaptContestSchedule(input.contest);
-  const supportResult = adaptSupportEvents(input.supportEvents);
+  const supportResult = adaptSupportEvents(input.supportEvents, input.now);
   const datedItems = [
     ...contestResult.items,
     ...supportResult.items,

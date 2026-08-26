@@ -126,11 +126,12 @@ describe("support and empty schedule", () => {
     assert.match(support, /id="support"/);
     assert.match(support, /SUPPORT_HUB_ROUTE/);
     assert.match(support, /応援・予定を見る/);
-    // ENTRY 番号 / URL は contest.ts が正本。同じ事実を文字列で再保存しない。
-    assert.match(support, /contest\.entryUrl/);
-    assert.match(support, /contest\.entryNumber/);
-    assert.doesNotMatch(support, /2026\.misscircle\.jp/);
-    assert.doesNotMatch(support, /順位|締切|投票期間/);
+    // 期間中の投票は共有selectorから読み、終了後のENTRY fallbackも同じ場所で決める。
+    assert.match(support, /selectHomeVoteAction/);
+    assert.match(support, /voteAction\.url/);
+    assert.match(support, /voteAction\.label/);
+    assert.doesNotMatch(support, /paton\.jp|2026\.misscircle\.jp/);
+    assert.doesNotMatch(support, /順位/);
     assert.doesNotMatch(support, /このサイトは公式|公認|本人運営/);
     assert.match(footer, /ファン制作の非公式サイト/);
     assert.match(footer, /公式・公認・本人運営ではありません/);

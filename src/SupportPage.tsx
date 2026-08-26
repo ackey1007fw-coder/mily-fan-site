@@ -21,6 +21,7 @@ import {
   type SupportCalendarResult,
 } from "./lib/supportCalendar";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
+import { useSupportEventClock } from "./lib/useSupportEventClock";
 import { useStreamSchedule } from "./lib/useStreamSchedule";
 import { useTokyoNow } from "./lib/useTokyoNow";
 
@@ -192,6 +193,8 @@ function SupportCalendarAgenda({
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
+  // Paton CTAなどの開始・終了境界で再renderし、そのrender時点の現在時刻を使う。
+  useSupportEventClock();
   const calendarClock = useTokyoNow();
   const today = tokyoDateKey(calendarClock);
   const now = Date.now();

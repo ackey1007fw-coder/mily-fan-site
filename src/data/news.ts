@@ -6,6 +6,7 @@
  *
  * - source: optional confirmed 出典 URL（「出典を見る」）
  * - sourceLabel: optional label. Without source, it renders as non-link text.
+ * - additionalSources: optional extra confirmed source links for the same NEWS item
  * - url: optional. Only when it differs from source（「関連リンク」）
  * - media: optional self-hosted still or video for the card
  * - additionalMedia: optional extra stills/videos on the same card. Lead stays `media`.
@@ -27,6 +28,10 @@ import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSp
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
+import {
+  campusGirlsPatonPageImage,
+  campusGirlsPatonPortraitImage,
+} from "./campusGirlsPatonImages.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -53,6 +58,11 @@ export type NewsMessage = {
   text: string;
 };
 
+export type NewsSourceLink = {
+  label: string;
+  url: string;
+};
+
 export type NewsItem = {
   id: string;
   /** Display date, ISO `YYYY-MM-DD`. */
@@ -65,6 +75,7 @@ export type NewsItem = {
   body: string;
   source?: string;
   sourceLabel?: string;
+  additionalSources?: NewsSourceLink[];
   url?: string;
   ctaLabel?: string;
   media?: NewsMedia;
@@ -144,9 +155,19 @@ https://mixch.tv/m/ZY4hSt3K`,
     sameDayOrder: 3,
     activityIds: ["campus-girls"],
     title: "CAMPUS GIRLS 2027 予選A Final STAGEへ📣✨",
-    body: "8月24日、みりぃがCAMPUS GIRLS 2027 予選A Final STAGEの応援方法を案内しました。SNS審査は8月24日12:00〜8月30日12:00、Paton投票審査は8月26日18:00〜9月1日23:59。投票先の詳細は追って案内するとしています。また、CAMPUS GIRLSでは配信を行わないことも伝えています。画像ではFinal STAGE期間を8月24日12:00〜8月30日23:59と案内しています。",
+    body: "8月24日、みりぃがCAMPUS GIRLS 2027 予選A Final STAGEの応援方法を案内しました。SNS審査は8月24日12:00〜8月30日12:00、Paton投票審査は8月26日18:00〜9月1日23:59。8月24日時点では投票先の詳細は追って案内としており、8月26日にPatonの三橋莉子（みりぃ）ページの公開を確認しました。同日、みりぃ自身もXでこの応援ページを直接案内しています。投票にはPatonへのログインが必要です。また、CAMPUS GIRLSでは配信を行わないことも伝えています。画像ではFinal STAGE期間を8月24日12:00〜8月30日23:59と案内しています。",
     source: "https://x.com/mily_chan36/status/2091669951946121636",
-    sourceLabel: "Xの投稿を見る",
+    sourceLabel: "8月24日のX投稿を見る",
+    additionalSources: [
+      {
+        label: "8月26日のX投稿を見る",
+        url: "https://x.com/mily_chan36/status/2092456392343138339",
+      },
+    ],
+    url: "https://paton.jp/event/entrant/11380",
+    ctaLabel: "Patonでみりぃに投票する",
+    media: campusGirlsPatonPortraitImage,
+    additionalMedia: [campusGirlsPatonPageImage],
   },
   {
     id: "2026-08-24-makeup-stream",
