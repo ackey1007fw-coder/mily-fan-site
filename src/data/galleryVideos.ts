@@ -11,6 +11,8 @@ import {
 } from "./morningShowroomRunwayVideo.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
+import { patonVoteCollageStoryVideo } from "./patonVoteCollageStoryVideo.ts";
+import { patonVoteMirrorStoryVideo } from "./patonVoteMirrorStoryVideo.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
@@ -29,6 +31,8 @@ export {
   morningStoryVideo,
   morningStory20260820,
   nightThanksMorningStreamStoryVideo,
+  patonVoteCollageStoryVideo,
+  patonVoteMirrorStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,
   seasideCircleYesTokyoVideo,
@@ -42,6 +46,8 @@ export {
  * MP4 and poster paths remain single-source. Newest first.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  patonVoteMirrorStoryVideo,
+  patonVoteCollageStoryVideo,
   seasideCircleYesTokyoVideo,
   nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,

@@ -121,7 +121,10 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
 
   it("leads Latest on 8/21 without changing the remaining same-day order", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 18), [
+    assert.deepEqual(ordered.slice(0, 21), [
+      "2026-08-26-paton-vote-stories",
+      "2026-08-26-instagram-followers-400",
+      "2026-08-26-morning-stream-thanks",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -141,7 +144,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
     ]);
-    assert.equal(news.length, 31);
+    assert.equal(news.length, 34);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
@@ -150,7 +153,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
 
     assert.equal(
       sortNewsByDateDesc(news)[0]?.id,
-      "2026-08-26-stream-1000",
+      "2026-08-26-paton-vote-stories",
     );
     assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
@@ -165,9 +168,9 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(item().media, tiktokRadioVideo);
     assert.deepEqual(matches, [tiktokRadioVideo]);
-    assert.equal(galleryVideos[5], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos()[5], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos().length, 12);
+    assert.equal(galleryVideos[7], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos()[7], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos().length, 14);
     assert.equal(tiktokRadioVideo.provenance, "owner-provided");
     assert.equal(tiktokRadioVideo.sourceUrl, SOURCE);
     assert.equal(tiktokRadioVideo.sourceDate, "2026-08-21");
@@ -195,8 +198,8 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 12);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 23);
+    assert.equal(galleryVideos.length, 14);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 25);
   });
 });
 
@@ -380,7 +383,13 @@ describe("2026-08-21 TikTok post — privacy, identity and scope boundaries", ()
   });
 
   it("flows through Portal Feed with the TikTok source and shared poster", () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-21T21:00:00+09:00") });
+    const scopedNews = news.filter((entry) => entry.id === NEWS_ID);
+    const feed = createPortalFeed({
+      now: new Date("2026-08-21T21:00:00+09:00"),
+      newsItems: scopedNews,
+      storyItems: [],
+      eventItems: [],
+    });
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
 
     assert.ok(entry);

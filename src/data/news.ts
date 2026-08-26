@@ -32,6 +32,10 @@ import {
   campusGirlsPatonPageImage,
   campusGirlsPatonPortraitImage,
 } from "./campusGirlsPatonImages.ts";
+import { patonVoteCollageStoryVideo } from "./patonVoteCollageStoryVideo.ts";
+import { patonVoteMirrorStoryVideo } from "./patonVoteMirrorStoryVideo.ts";
+import { followers400StoryVideo } from "./followers400StoryVideo.ts";
+import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -90,6 +94,54 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-26-paton-vote-stories",
+    date: "2026-08-26",
+    sameDayOrder: 3,
+    activityIds: ["campus-girls"],
+    title: "「絶対みんなと本戦行くんだ〜」投票は本日18:00から✨",
+    body: "8月26日、みりぃがInstagram StoryでCAMPUS GIRLS 2027予選ファイナルの毎日投票を案内しました。期間は本日18:00〜9月1日23:59。コラージュでは【キャンパスガールズ2027 予選ファイナル】、本日18:00〜9/1 23:59まで、毎日投票からの応援よろしくお願いします\u{1F972}\u{1FA75}\u{2728}、リンクステッカー「本日18:00〜投票開始\u{1F5F3}\u{FE0F}」と伝えています。鏡のStoryでは「18:00〜投票できるようになるぞ〜\u{203C}\u{FE0F}」と案内しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: patonVoteMirrorStoryVideo,
+    additionalMedia: [patonVoteCollageStoryVideo],
+    message: {
+      label: "みりぃのStory",
+      text: "絶対みんなと本戦行くんだ〜！！！\n\n皆さん、やり方わかりますか？？大丈夫？？",
+    },
+  },
+  {
+    id: "2026-08-26-instagram-followers-400",
+    date: "2026-08-26",
+    sameDayOrder: 2,
+    title: "フォロワー様400人、ありがとうございます\u{1F972}",
+    body: "8月26日、みりぃがInstagram Storyで、三橋莉子（みりぃ）のフォロワーが400人になったことへの感謝を伝えました。変動もあるかもしれないとしつつ、これからも楽しくInstagramを続け、いろいろなことを発信していくと案内しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: followers400StoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "フォロワー様400人\u{203C}\u{FE0F}ありがとうございます\u{1F972}\u{270A}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}\n\n変動もあるかとは思いますが、これからも楽しくInstagramができればいいなぁと！\n\nこれからもいろーーんなこと発信していくね\u{1F4AB}",
+    },
+  },
+  {
+    id: "2026-08-26-morning-stream-thanks",
+    date: "2026-08-26",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "今日も来てくれてありがとう〜\u{1F972}",
+    body: "8月26日、みりぃがInstagram Storyで、その日の配信に来てくれたことへの感謝を届けました。環境や周りの方々に恵まれていると伝え、明日からも前向きに頑張れそうという言葉と、応援を絶対に無駄にしないという思いも残しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: morningStreamThanksInstagramStoryImage,
+    message: {
+      label: "みりぃのStory",
+      text: "今日も来てくれてありがとう〜\u{1F972}\u{1F64F}\u{2728}\nいやぁ、環境や周りの方々に恵まれているなぁと、心から感じます。\nなんだか明日からもまた、前向きに頑張れそう\u{1F60C}\n応援してくださる皆様に日々感謝です。\nそして、皆様の応援、絶対に無駄にしないよ\u{203C}\u{FE0F}",
+    },
+  },
   {
     id: "2026-08-26-stream-1000",
     date: "2026-08-26",

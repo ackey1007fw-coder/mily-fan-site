@@ -88,9 +88,12 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(ordered[0]?.id, "2026-08-26-stream-1000");
-    assert.equal(ordered[1]?.id, NEWS_ID);
-    assert.equal(ordered[2]?.id, "2026-08-25-motivation");
+    assert.equal(ordered[0]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(ordered[1]?.id, "2026-08-26-instagram-followers-400");
+    assert.equal(ordered[2]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(ordered[3]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[4]?.id, NEWS_ID);
+    assert.equal(ordered[5]?.id, "2026-08-25-motivation");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-25").map(({ id }) => id),
       [NEWS_ID, "2026-08-25-motivation"],
@@ -105,7 +108,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
   it("appears on the existing CAMPUS GIRLS Activity page", () => {
     const selected = selectActivityNews("campus-girls");
 
-    assert.equal(selected[0]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selected[1]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 
@@ -140,8 +144,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /ZY4hSt3K/);
       assert.doesNotMatch(source, /mixch-confidence-message/);
     }
-    assert.equal(news.length, 31);
-    assert.match(ops, /31件/);
+    assert.equal(news.length, 34);
+    assert.match(ops, /34件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /画像・動画は自己ホストしていない/);
   });

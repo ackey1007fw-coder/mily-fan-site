@@ -1596,3 +1596,69 @@ Gallery・`/stories/`・`media.ts`・`galleryVideos.ts`・highlightsには追加
   Patonロゴ、写真、番号、SNSボタン、本人の名前・プロフィールだけを元構図のまま掲載する
 - b26-01とb26-02は同じ写真を含むが、前者は人物が主役の代表写真、後者は投票先の
   ページ文脈を示す記録画像として役割を分け、無意味な複製としては扱わない
+
+## 素材台帳（batch b27 / 受領日・source date 2026-08-26）
+
+2026-08-26 の本人Instagram Story。owner-provided。公開派生は既存コミット済みで、
+この掲載作業では再エンコード・リネーム・差し替えをしていない。
+Driveの受け渡しURL / file IDは公開情報・tracked textへ残さない。
+
+Story閲覧スクリーンショット（IMG_7435 / IMG_7437）は確認用で、掲載しない。
+`public/` / Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` / highlights
+には含めない。返信コメントはNEWS `message` へ本文として残す。
+
+b27-05（Patonアプリの投票操作録画）は非掲載。他出場者・順位表示と、
+オーナー（あっきー）のサポーター名が見えるため。
+
+投票CTA（`Patonでみりぃに投票する`）は既存NEWS
+`2026-08-24-campus-girls-final-stage-guide` に残し、このbatchのNEWSへは付けない。
+`events.ts` / `streamSchedule.ts` / `media.ts` / highlights / 新しい `/stories/`
+記事は追加していない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b27-01 | `gallery/mily-b27-01-paton-vote-collage.mp4` | クマ耳フィルターの4枚コラージュ。予選ファイナルの毎日投票案内。720×1280 / 20.000秒。owner-provided | ✅ Latest / NEWS（同じカードの2枚目）+ Gallery。`patonVoteCollageStoryVideo.json` を共有 |
+| b27-01 poster | `gallery/mily-b27-01-paton-vote-collage-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b27-02 | `gallery/mily-b27-02-paton-vote-mirror.mp4` | 鏡自撮りと「18:00〜投票できるようになるぞ〜」案内。720×1280 / 5.000秒。owner-provided | ✅ Latest / NEWS代表 + Gallery。`patonVoteMirrorStoryVideo.json` を共有 |
+| b27-02 poster | `gallery/mily-b27-02-paton-vote-mirror-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b27-03 | `news/mily-b27-03-morning-stream-thanks.jpg` | 配信への感謝を書いた白い縦長グラフィック。3870×6879。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
+| b27-04 | `news/mily-b27-04-instagram-followers-400.mp4` | フォロワー400人への感謝。720×1280 / 5.000秒。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
+| b27-04 poster | `news/mily-b27-04-instagram-followers-400-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ NEWS専用 |
+| （非掲載） | IMG_7435 / IMG_7437 Story閲覧スクリーンショット | 返信コメント確認用 | 非掲載。本文はNEWS messageへ |
+| （非掲載） | b27-05 Patonアプリ操作録画 | 他出場者・順位・オーナーサポーター名 | 非掲載 |
+
+### 公開ファイルの実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-26` / 恒久permalinkなし。`sourceUrl` は持たない
+- 元素材は `media/original/` に受領バイトを変えず保管（gitignore済み・コミットしない）
+- 公開派生はEXIF / GPS / IPTC / XMP / ICCなし
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除なし
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+b27-01 公開MP4: 857,124 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+600 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+sha256 `2a7bacbb3efa14cc5c6d56caea9afa2bfb64753125dae8bcf132721824751109`
+
+b27-01 poster: 96,436 bytes / 720×1280 JPEG / sha256
+`c3fde8d9419c52330e6d3dfdaac4035c9f8ee78b66d13698a7488ee08c30f5eb`
+
+b27-02 公開MP4: 178,367 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+150 frames / 5.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+sha256 `484f06618bd30535ffdd6ca5e7c429446cce4374efd4da6899b0dd93a04997bc`
+
+b27-02 poster: 49,122 bytes / 720×1280 JPEG / sha256
+`c861d6487ee07a19390cf50bf0a1db316ddf05fdb81d8c79b2b049b8b665a740`
+
+b27-03 公開JPEG: 872,631 bytes / 3870×6879 / progressive / 4:4:4 / sha256
+`884428f7b233b753b216501097c56ce533f45aa713e49cf04536e042ba17d059`
+
+b27-04 公開MP4: 131,735 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+150 frames / 5.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+sha256 `f8093200f0705ad347b3bbb768b8fe95d9d7c84e5b568c9b68c394dd1d123082`
+
+b27-04 poster: 77,106 bytes / 720×1280 JPEG / sha256
+`ff1b5d2f45863d08cf1ad1bdfe81f0d807dc3e37ee8aa8f8df94010eabecd4a8`
+
+Gallery は新しい順で b27-02（鏡）→ b27-01（コラージュ）のあと既存動画。
+b27-03 / b27-04 は `galleryVideos.ts` に載せない。
