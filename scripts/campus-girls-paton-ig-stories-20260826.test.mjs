@@ -270,7 +270,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.doesNotMatch(thanks.message.text, /10:00/);
   });
 
-  it("paraphrases only what the Stories say", () => {
+  it("keeps archive copy concise and source-faithful", () => {
     const vote = voteItem();
     const followers = followersItem();
     const thanks = thanksItem();
@@ -278,23 +278,21 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.match(vote.title, /本戦|投票/);
     assert.doesNotMatch(vote.title, /Paton|paton/);
     assert.match(vote.body, /予選ファイナルの毎日投票/);
-    assert.match(vote.body, /本日18:00〜9月1日23:59/);
-    assert.match(vote.body, /【キャンパスガールズ2027 予選ファイナル】/);
-    assert.match(vote.body, /本日18:00〜9\/1 23:59まで/);
-    assert.match(
-      vote.body,
-      new RegExp(`毎日投票からの応援よろしくお願いします\u{1F972}\u{1FA75}\u{2728}`),
-    );
-    assert.match(vote.body, new RegExp(`本日18:00〜投票開始\u{1F5F3}\u{FE0F}`));
-    assert.match(
-      vote.body,
-      new RegExp(`18:00〜投票できるようになるぞ〜\u{203C}\u{FE0F}`),
-    );
-    assert.doesNotMatch(vote.body, /\u{2764}(?!\u{FE0F}\u{200D})/u);
+    assert.match(vote.body, /8月26日18:00/);
+    assert.match(vote.body, /9月1日23:59/);
+    assert.match(vote.body, /絶対みんなと本戦行くんだ〜！！！/);
+    assert.match(vote.body, /皆さん、やり方わかりますか？？大丈夫？？/);
+    assert.match(vote.body, /Patonから毎日応援/);
+    assert.doesNotMatch(vote.body, /コラージュ|リンクステッカー|鏡のStory/);
     assert.doesNotMatch(vote.body, /順位|他の出場|あっきー/);
 
-    assert.match(followers.body, /三橋莉子（みりぃ）/);
+    assert.match(followers.body, /みりぃ/);
     assert.match(followers.body, /400人/);
+    assert.match(followers.body, /Instagramを楽しみながら/);
+    assert.doesNotMatch(
+      followers.body,
+      /三橋莉子（みりぃ）のフォロワー|変動もあるかもしれないとしつつ/,
+    );
     assert.doesNotMatch(followers.body, /みつぃ|1万/);
 
     assert.match(thanks.body, /感謝/);
