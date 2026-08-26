@@ -514,10 +514,10 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     assert.match(docs, /batch b27/);
-    assert.match(docs, COLLAGE_MP4_SHA256);
-    assert.match(docs, MIRROR_MP4_SHA256);
-    assert.match(docs, THANKS_SHA256);
-    assert.match(docs, FOLLOWERS_MP4_SHA256);
+    assert.equal(docs.includes(COLLAGE_MP4_SHA256), true);
+    assert.equal(docs.includes(MIRROR_MP4_SHA256), true);
+    assert.equal(docs.includes(THANKS_SHA256), true);
+    assert.equal(docs.includes(FOLLOWERS_MP4_SHA256), true);
     assert.match(docs, /IMG_7435 \/ IMG_7437/);
     assert.match(docs, /b27-05/);
     assert.match(docs, /他出場者・順位/);
