@@ -17,8 +17,8 @@ import {
 } from "../src/data/media.ts";
 import {
   GIRLSAWARD_SHOWROOM_6TH_X_URL,
-  girlsawardShowroom6thImage,
-  girlsawardShowroom6thPhoto,
+  girlsawardShowroomSixthImage,
+  girlsawardShowroomSixthPhoto,
 } from "../src/data/girlsawardShowroom6th.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
@@ -99,7 +99,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — Latest entry", () 
         url: EVENT_PAGE,
       },
     ]);
-    assert.equal(entry.media, girlsawardShowroom6thImage);
+    assert.equal(entry.media, girlsawardShowroomSixthImage);
     assert.equal(entry.additionalMedia, undefined);
     assert.deepEqual(verifyNews(news), []);
   });
@@ -131,10 +131,10 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — Latest entry", () 
     assert.match(entry.body, /【フレ\/ミス枠】Rakuten GirlsAward 2026 A\/W ランウェイ出演/);
     assert.match(entry.body, /ミスサー／フレキャン出場者限定/);
     assert.match(entry.body, /8月20日から8月26日/);
-    assert.match(entry.body, /ガルアワイベ最終日 応援に駆けつけてくれた皆様ありがとうございました\u{1F62D}\u{2763}\u{FE0F}/);
-    assert.match(entry.body, /なんと【6位】で終わることができました\u{1F972}\u{1F64C}\u{1F3FB}\u{1FA75}/);
+    assert.match(entry.body, /ガルアワイベ最終日 応援に駆けつけてくれた皆様ありがとうございました\u{1F62D}\u{2763}\u{FE0F}/u);
+    assert.match(entry.body, /なんと【6位】で終わることができました\u{1F972}\u{1F64C}\u{1F3FB}\u{1FA75}/u);
     assert.match(entry.body, /楽しかったなぁ。濃かったなぁ。素敵な時間だったなぁ。初めての景色、美しかったなぁ。/);
-    assert.match(entry.body, /これからも不器用なみりぃですがよろしくお願いします\u{1F64F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}/);
+    assert.match(entry.body, /これからも不器用なみりぃですがよろしくお願いします\u{1F64F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}/u);
     assert.match(entry.body, /6位だったためランウェイ出演にはなっていません/);
     assert.match(entry.body, /幕張メッセ、2026年9月26日/);
 
@@ -169,7 +169,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — self-hosted photo"
   it("uses one local /media/news/ JPEG and never hotlinks SNS media", async () => {
     const photo = item().media;
 
-    assert.equal(photo, girlsawardShowroom6thImage);
+    assert.equal(photo, girlsawardShowroomSixthImage);
     assert.equal(photo?.kind, "image");
     assert.equal(photo?.src, PHOTO);
     assert.match(photo.src, /^\/media\/news\//);
@@ -206,8 +206,8 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — self-hosted photo"
     const visible = visibleMedia(media);
     const gallery = media.find((entry) => entry.id === "mily-b28-01");
 
-    assert.equal(gallery, girlsawardShowroom6thPhoto);
-    assert.equal(visible[0], girlsawardShowroom6thPhoto);
+    assert.equal(gallery, girlsawardShowroomSixthPhoto);
+    assert.equal(visible[0], girlsawardShowroomSixthPhoto);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.published, true);
     assert.equal(gallery.provenance, "sns-post");
@@ -296,7 +296,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(liveNews[2]?.id, "2026-08-26-stream-1000");
     assert.equal(campusNews.some((entry) => entry.id === NEWS_ID), false);
     assert.equal(campusNews[0]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(liveMedia[0], girlsawardShowroom6thImage);
+    assert.equal(liveMedia[0], girlsawardShowroomSixthImage);
   });
 
   it("records hashes and the X URL in MEDIA.md without Drive ids or /stories/", async () => {

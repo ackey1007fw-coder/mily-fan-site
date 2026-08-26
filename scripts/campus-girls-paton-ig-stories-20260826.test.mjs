@@ -456,7 +456,6 @@ describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
       assert.equal(large.icc, undefined);
     }
   });
-});
 
   it("keeps thanks and followers out of Gallery, media.ts, stories, and highlights", () => {
     assert.equal(thanksItem().media, morningStreamThanksInstagramStoryImage);

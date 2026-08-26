@@ -146,7 +146,7 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
     assert.equal(ordered[23], "2026-08-21-event-story-next-slot");
     assert.equal(ordered[24], "2026-08-21-morning-ohayo-story");
     assert.equal(ordered[25], NEWS_ID);
-    assert.deepEqual(ordered.slice(25, 28), [
+    assert.deepEqual(ordered.slice(26, 29), [
       "2026-08-20-mango-kakigori",
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",

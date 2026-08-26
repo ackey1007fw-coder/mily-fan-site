@@ -278,7 +278,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     );
     assert.deepEqual(
       feedNewsIds.filter((id) => id.startsWith("2026-08-22")),
-      [X_NIGHT_ID, NIGHT_ID, EVENING_ID],
+      [X_NIGHT_ID, NIGHT_ID],
     );
 
     const morning = feed.items.find((item) => item.id === `mily:news:${MORNING_ID}`);

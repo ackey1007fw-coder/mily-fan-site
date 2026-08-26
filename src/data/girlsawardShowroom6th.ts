@@ -8,7 +8,7 @@
 export const GIRLSAWARD_SHOWROOM_6TH_X_URL =
   "https://x.com/Mily_chan36/status/2092621770406896106";
 
-export const girlsawardShowroom6thPhoto = {
+export const girlsawardShowroomSixthPhoto = {
   id: "mily-b28-01",
   kind: "photo" as const,
   basePath: "/media/gallery/mily-b28-01-girlsaward-showroom-6th",
@@ -27,7 +27,7 @@ export const girlsawardShowroom6thPhoto = {
 };
 
 /** Latest / NEWS 代表。Gallery 派生とは別ファイル（再エンコードしない）。 */
-export const girlsawardShowroom6thImage = {
+export const girlsawardShowroomSixthImage = {
   id: "mily-b28-01-girlsaward-showroom-6th",
   kind: "image" as const,
   src: "/media/news/mily-b28-01-girlsaward-showroom-6th.jpg",

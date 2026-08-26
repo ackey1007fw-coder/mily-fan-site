@@ -40,7 +40,7 @@ import {
 } from "./patonVoteStoryStills.ts";
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
-import { girlsawardShowroom6thImage } from "./girlsawardShowroom6th.ts";
+import { girlsawardShowroomSixthImage } from "./girlsawardShowroom6th.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -116,7 +116,7 @@ export const news: NewsItem[] = [
     ],
     url: "https://www.showroom-live.com/r/circle2026_0734",
     ctaLabel: "SHOWROOMを見る",
-    media: girlsawardShowroom6thImage,
+    media: girlsawardShowroomSixthImage,
     message: {
       label: "みりぃの投稿",
       text: "はぁぁぁぁぁ、皆さんのおかげでとーーーっても楽しかった\u{1F972}\u{2764}\u{FE0F}\u{200D}\u{1F525}\nガルアワイベ、初めは挑戦するのも怖かったけど、勇気出して一歩踏み出せて、みんなに出逢えて、応援していただけてよかった。幸せじゃっ\u{2B50}\u{FE0F}\nこれからもどうぞよろしくお願いします\u{1F345}\u{2728}\n#ミスサー #ミスサークル #ミスサークルコンテスト",

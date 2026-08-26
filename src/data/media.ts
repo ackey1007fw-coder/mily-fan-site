@@ -12,7 +12,7 @@
  *   Keep them null rather than guessing; docs/MEDIA.md tracks what is
  *   still unconfirmed.
  */
-import { girlsawardShowroom6thPhoto } from "./girlsawardShowroom6th.ts";
+import { girlsawardShowroomSixthPhoto } from "./girlsawardShowroom6th.ts";
 import {
   patonVoteCollageStillPhoto,
   patonVoteMirrorStillPhoto,
@@ -67,7 +67,7 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
-  girlsawardShowroom6thPhoto,
+  girlsawardShowroomSixthPhoto,
   patonVoteMirrorStillPhoto,
   patonVoteCollageStillPhoto,
   {
