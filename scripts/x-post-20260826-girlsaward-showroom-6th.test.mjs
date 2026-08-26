@@ -138,7 +138,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — Latest entry", () 
     assert.match(entry.body, /とーーーっても楽しかった/);
     assert.match(entry.body, /一歩踏み出せた/);
     assert.match(entry.body, /幸せじゃっ/);
-    assert.match(entry.body, /これからもよろしくお願いします/);
+    assert.match(entry.body, /これからもどうぞよろしくお願いします/);
     assert.doesNotMatch(
       entry.body,
       /【フレ\/ミス枠】|ミスサー／フレキャン出場者限定|ガルアワイベ最終日 応援に駆けつけて|幕張メッセ、2026年9月26日|6位だったためランウェイ出演にはなっていません/,
