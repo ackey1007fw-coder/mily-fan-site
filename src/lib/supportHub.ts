@@ -134,7 +134,7 @@ export function selectSupportNow(input: {
     input.supportEvents,
     input.now,
   ).map((event) => {
-    const adapted = adaptSupportEvents([event]).items[0];
+    const adapted = adaptSupportEvents([event], input.now).items[0];
     return {
       key: `now:support-event:${event.id}`,
       origin: "support-event" as const,

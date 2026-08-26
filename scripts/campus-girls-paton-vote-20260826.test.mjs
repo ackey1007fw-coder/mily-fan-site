@@ -16,7 +16,14 @@ import {
   supportEvents,
 } from "../src/data/supportEvents.ts";
 import { selectHomeVoteAction } from "../src/lib/homePortal.ts";
+import { selectActivityResources } from "../src/lib/activityContent.ts";
+import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
+import {
+  adaptSupportEvents,
+  nextDisplayStatusBoundary,
+} from "../src/lib/supportCalendar.ts";
 import { selectSupportNow } from "../src/lib/supportHub.ts";
+import { nextSupportEventBoundary } from "../src/lib/useSupportEventClock.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PATON_URL = "https://paton.jp/event/entrant/11380";
@@ -73,6 +80,21 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
     assert.equal(select(END + 1).url, contest.entryUrl);
   });
 
+  it("schedules a render refresh at both voting boundaries", () => {
+    assert.equal(
+      nextDisplayStatusBoundary(campusGirlsFinalStagePatonVote.schedule, START - 1),
+      START,
+    );
+    assert.equal(
+      nextDisplayStatusBoundary(campusGirlsFinalStagePatonVote.schedule, START),
+      END + 1,
+    );
+    assert.equal(nextSupportEventBoundary(START - 1), START);
+    assert.equal(nextSupportEventBoundary(START), END + 1);
+    assert.equal(nextSupportEventBoundary(END), END + 1);
+    assert.equal(nextSupportEventBoundary(END + 1), null);
+  });
+
   it("surfaces the same CTA in Support NOW while voting is live", () => {
     const items = selectSupportNow({
       supportEvents,
@@ -88,20 +110,49 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
     assert.match(items[0].note ?? "", /Patonへのログインが必要/);
   });
 
-  it("links the CAMPUS GIRLS activity and existing NEWS card to Paton", () => {
+  it("gates Calendar, Activity, and NEWS actions to the confirmed period", () => {
     const activity = activities.find(({ id }) => id === "campus-girls");
     const item = news.find(
       ({ id }) => id === "2026-08-24-campus-girls-final-stage-guide",
     );
 
-    assert.ok(activity?.relatedLinkIds.includes(campusGirlsPatonVoteLink.id));
+    assert.equal(
+      activity?.relatedLinkIds.includes(campusGirlsPatonVoteLink.id),
+      false,
+    );
+    const resourceAt = (now) =>
+      selectActivityResources("campus-girls", now).find(
+        ({ id }) => id === campusGirlsPatonVoteLink.id,
+      );
+    assert.equal(resourceAt(START - 1), undefined);
+    assert.equal(resourceAt(START)?.url, PATON_URL);
+    assert.equal(resourceAt(END)?.url, PATON_URL);
+    assert.equal(resourceAt(END + 1), undefined);
+
+    const calendarCtaAt = (now) =>
+      adaptSupportEvents([campusGirlsFinalStagePatonVote], now).items[0]?.cta;
+    assert.equal(calendarCtaAt(START - 1), undefined);
+    assert.equal(calendarCtaAt(START)?.url, PATON_URL);
+    assert.equal(calendarCtaAt(END)?.url, PATON_URL);
+    assert.equal(calendarCtaAt(END + 1), undefined);
+
+    assert.ok(item);
     assert.equal(item?.url, PATON_URL);
     assert.equal(item?.ctaLabel, "Patonでみりぃに投票する");
+    assert.deepEqual(resolveNewsLinks(item, START - 1), {});
+    assert.deepEqual(resolveNewsLinks(item, START), {
+      relatedUrl: PATON_URL,
+      cta: {
+        label: "Patonでみりぃに投票する",
+        url: PATON_URL,
+      },
+    });
+    assert.deepEqual(resolveNewsLinks(item, END + 1), {});
     assert.match(item?.body ?? "", /8月26日にPatonの三橋莉子（みりぃ）ページの公開を確認/);
     assert.match(item?.body ?? "", /投票にはPatonへのログインが必要/);
   });
 
-  it("wires the home CTAs through one selector without duplicating the URL", async () => {
+  it("re-renders every time-bound surface without duplicating the URL", async () => {
     for (const relative of [
       "src/components/Hero.tsx",
       "src/components/Support.tsx",
@@ -109,9 +160,25 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
     ]) {
       const component = await source(relative);
       assert.match(component, /selectHomeVoteAction/);
+      assert.match(component, /useSupportEventClock/);
       assert.match(component, /voteAction\.url/);
       assert.doesNotMatch(component, /paton\.jp/);
     }
+
+    for (const relative of [
+      "src/SupportPage.tsx",
+      "src/ActivitiesPage.tsx",
+      "src/components/Latest.tsx",
+    ]) {
+      const component = await source(relative);
+      assert.match(component, /useSupportEventClock/);
+    }
+
+    const clock = await source("src/lib/useSupportEventClock.ts");
+    assert.match(clock, /nextDisplayStatusBoundary/);
+    assert.match(clock, /setTimeout/);
+    assert.match(clock, /visibilitychange/);
+    assert.match(clock, /addEventListener\("focus"/);
 
     const dock = await source("src/components/MobileActionDock.tsx");
     assert.match(dock, /target="_blank"/);

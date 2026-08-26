@@ -22,6 +22,7 @@ import {
   type SupportCalendarResult,
 } from "./lib/supportCalendar";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
+import { useSupportEventClock } from "./lib/useSupportEventClock";
 import { useStreamSchedule } from "./lib/useStreamSchedule";
 
 const primaryCta =
@@ -236,7 +237,7 @@ function SupportCalendarAgenda({ calendar }: { calendar: SupportCalendarResult }
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
-  const now = Date.now();
+  const now = useSupportEventClock();
   const todayItems = selectSupportToday({
     contest,
     streamSlots: slots,

@@ -3,6 +3,7 @@ import { links } from "../data/links";
 import { supportEvents } from "../data/supportEvents";
 import { selectHomeVoteAction } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
 
 /**
  * スマホ専用の画面下部固定ドック。
@@ -10,11 +11,12 @@ import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
  * 画面を占有しすぎないよう、細い1段のみ。終了後はENTRY導線へ戻す。
  */
 export function MobileActionDock() {
+  const now = useSupportEventClock();
   const voteAction = selectHomeVoteAction({
     contest,
     supportEvents,
     links,
-    now: Date.now(),
+    now,
   });
 
   return (

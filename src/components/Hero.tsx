@@ -7,17 +7,19 @@ import { site } from "../data/site";
 import { supportEvents } from "../data/supportEvents";
 import { selectHomeVoteAction } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
 import { Socials } from "./Socials";
 
 export function Hero() {
   const photo = featuredPhoto();
   const latest = sortNewsByDateDesc(news)[0];
+  const now = useSupportEventClock();
   const voteAction = selectHomeVoteAction({
     contest,
     supportEvents,
     links,
-    now: Date.now(),
+    now,
   });
   const seasideCircleTikTok = links.find(
     (link) => link.id === "fm-smw-ssc-tiktok",

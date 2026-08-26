@@ -9,10 +9,13 @@ import { news, sortNewsByDateDesc, type NewsItem } from "../data/news.ts";
 import { profileSources } from "../data/profile.ts";
 import { socials } from "../data/socials.ts";
 import { stories, type Story } from "../data/stories.ts";
+import { supportEvents } from "../data/supportEvents.ts";
 import {
   selectActivityMedia,
   type ActivityMediaItem,
 } from "./activityMedia.ts";
+import { isSupportEventLinkActive } from "./supportEventLinks.ts";
+import { displayStatus } from "./supportCalendar.ts";
 
 export type ActivityResourceKind =
   | "personal-social"
@@ -68,7 +71,11 @@ export function selectActivityStories(activityId: ActivityId): Story[] {
   });
 }
 
-export function selectActivityResources(activityId: ActivityId): ActivityResource[] {
+export function selectActivityResources(
+  activityId: ActivityId,
+  now: number = Date.now(),
+): ActivityResource[] {
+  if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
   const activity = activityById(activityId);
   const candidates: ActivityResource[] = [
     ...activity.relatedSocialIds.map((id) => {
@@ -81,16 +88,39 @@ export function selectActivityResources(activityId: ActivityId): ActivityResourc
         note: "本人の確認済みSNS・配信プロフィール",
       };
     }),
-    ...activity.relatedLinkIds.map((id) => {
-      const link = requiredById(links, id, "related link");
-      return {
-        id: link.id,
-        kind: "related-link" as const,
-        label: link.label,
-        url: link.url,
-        note: link.note,
-      };
-    }),
+    ...activity.relatedLinkIds
+      .filter((id) =>
+        isSupportEventLinkActive({ linkId: id, supportEvents, now }),
+      )
+      .map((id) => {
+        const link = requiredById(links, id, "related link");
+        return {
+          id: link.id,
+          kind: "related-link" as const,
+          label: link.label,
+          url: link.url,
+          note: link.note,
+        };
+      }),
+    ...supportEvents
+      .filter(
+        (event) =>
+          event.activityId === activityId &&
+          event.ctaLinkId !== undefined &&
+          displayStatus(event.schedule, now) === "live",
+      )
+      .map((event) => {
+        const linkId = event.ctaLinkId;
+        if (!linkId) throw new Error(`Missing support event link: ${event.id}`);
+        const link = requiredById(links, linkId, "support event link");
+        return {
+          id: link.id,
+          kind: "related-link" as const,
+          label: link.label,
+          url: link.url,
+          note: link.note,
+        };
+      }),
     ...activity.sourceIds.map((id) => {
       const source = profileSources[id];
       if (!source) throw new Error(`Missing source relation: ${id}`);
@@ -123,6 +153,7 @@ export type ActivityPageContent = {
 
 export function selectActivityPageContent(
   activityId: ActivityId,
+  now: number = Date.now(),
 ): ActivityPageContent {
   return {
     activity: activityById(activityId),
@@ -130,6 +161,6 @@ export function selectActivityPageContent(
     highlights: selectActivityHighlights(activityId),
     stories: selectActivityStories(activityId),
     media: selectActivityMedia(activityId),
-    resources: selectActivityResources(activityId),
+    resources: selectActivityResources(activityId, now),
   };
 }

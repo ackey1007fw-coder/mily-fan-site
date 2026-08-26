@@ -88,7 +88,7 @@ describe("2026-08-17 morning Instagram Story", () => {
     assert.equal(birthday.source, "https://www.instagram.com/p/DbiY3PHk1c8/");
     assert.equal(birthday.ctaLabel, "Instagramの投稿を見る");
     assert.match(latest, /href=\{item\.source\}/);
-    assert.match(latest, /href=\{ctaHref\}/);
+    assert.match(latest, /href=\{resolvedLinks\.cta\.url\}/);
   });
 
   it("describes the video contents for Latest aria-label and Gallery caption", () => {

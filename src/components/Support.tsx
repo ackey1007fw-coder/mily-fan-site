@@ -4,6 +4,7 @@ import { supportEvents } from "../data/supportEvents";
 import { selectHomeVoteAction } from "../lib/homePortal";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
 
 /**
@@ -15,11 +16,12 @@ import { ExternalLink } from "./ExternalLink";
  * 投票先は supportEvents / links の確認済み期間を参照し、終了後はENTRYへ戻す。
  */
 export function Support() {
+  const now = useSupportEventClock();
   const voteAction = selectHomeVoteAction({
     contest,
     supportEvents,
     links,
-    now: Date.now(),
+    now,
   });
 
   return (
