@@ -125,23 +125,24 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — Latest entry", () 
     assert.doesNotMatch(entry.message.text, /https:\/\//);
   });
 
-  it("paraphrases the tweet and overlays without claiming a runway slot", () => {
+  it("keeps the archive summary concise without claiming a runway slot", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}`;
 
     assert.match(entry.title, /6位/);
     assert.doesNotMatch(entry.title, /ランウェイ決定/);
-    assert.match(entry.body, /8月26日/);
-    assert.match(entry.body, /【フレ\/ミス枠】Rakuten GirlsAward 2026 A\/W ランウェイ出演/);
-    assert.match(entry.body, /ミスサー／フレキャン出場者限定/);
-    assert.match(entry.body, /8月20日から8月26日/);
-    assert.match(entry.body, /ガルアワイベ最終日 応援に駆けつけてくれた皆様ありがとうございました\u{1F62D}\u{2763}\u{FE0F}/u);
-    assert.match(entry.body, /なんと【6位】で終わることができました\u{1F979}\u{1F64C}\u{1F3FB}\u{1FA75}/u);
-    assert.doesNotMatch(entry.body, /なんと【6位】で終わることができました\u{1F972}/u);
-    assert.match(entry.body, /楽しかったなぁ。濃かったなぁ。素敵な時間だったなぁ。初めての景色、美しかったなぁ。/);
-    assert.match(entry.body, /これからも不器用なみりぃですがよろしくお願いします\u{1F64F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}/u);
-    assert.match(entry.body, /6位だったためランウェイ出演にはなっていません/);
-    assert.match(entry.body, /幕張メッセ、2026年9月26日/);
+    assert.match(entry.body, /8月20日から26日まで/);
+    assert.match(entry.body, /Rakuten GirlsAward 2026 A\/W/);
+    assert.match(entry.body, /SHOWROOMイベント/);
+    assert.match(entry.body, /6位でフィニッシュ/);
+    assert.match(entry.body, /とーーーっても楽しかった/);
+    assert.match(entry.body, /一歩踏み出せた/);
+    assert.match(entry.body, /幸せじゃっ/);
+    assert.match(entry.body, /これからもどうぞよろしくお願いします/);
+    assert.doesNotMatch(
+      entry.body,
+      /【フレ\/ミス枠】|ミスサー／フレキャン出場者限定|ガルアワイベ最終日 応援に駆けつけて|幕張メッセ、2026年9月26日|6位だったためランウェイ出演にはなっていません/,
+    );
 
     for (const phrase of [
       "ランウェイ決定",
