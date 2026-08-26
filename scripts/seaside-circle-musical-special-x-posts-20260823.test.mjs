@@ -94,7 +94,7 @@ describe("2026-08-23 seaside circle official X posts — NEWS stays one item", (
 
     assert.equal(matches.length, 1);
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 31);
+    assert.equal(news.length, 32);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -159,7 +159,7 @@ describe("2026-08-23 seaside circle official X posts — STORY sources and photo
     assert.equal(thanks?.poster, seasideCircleMusicalSpecialThanksVideo.poster);
     assert.equal(visibleGalleryVideos().includes(seasideCircleMusicalSpecialVideo), true);
     assert.equal(visibleGalleryVideos().includes(seasideCircleMusicalSpecialThanksVideo), true);
-    assert.equal(galleryVideos.length, 12);
+    assert.equal(galleryVideos.length, 14);
   });
 
   it("reuses Gallery derivatives for both STORY photos", () => {

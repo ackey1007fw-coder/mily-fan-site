@@ -11,6 +11,7 @@ import {
 } from "../src/data/driveGallery.ts";
 import {
   galleryVideos,
+  isSelfHostedGalleryVideo,
   morningStoryVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
@@ -44,7 +45,7 @@ function publicAssetPath(publicPath) {
 function galleryVideoViews() {
   const drive = driveGallerySections(visibleDriveGallery());
   return [
-    ...visibleGalleryVideos().map(driveVideoView),
+    ...visibleGalleryVideos().filter(isSelfHostedGalleryVideo).map(driveVideoView),
     ...drive.videos,
   ];
 }
@@ -204,13 +205,15 @@ describe("Gallery video contracts", () => {
     const visible = visibleGalleryVideos();
 
     assert.ok(visible.length > 0);
-    assert.match(selector, /visibleGalleryVideos\(\)\.map\(driveVideoView\)/);
+    assert.match(selector, /isSelfHostedGalleryVideo/);
+    assert.match(selector, /driveVideoView/);
     assert.match(gallery, /selectGalleryEntries\(\)/);
     assert.match(gallery, /src=\{video\.video\.src\}/);
     assert.match(gallery, /お預かりした動画/);
+    assert.match(gallery, /mixchCards/);
     assert.doesNotMatch(gallery, /同一動画の重複/);
 
-    for (const item of visible) {
+    for (const item of visible.filter(isSelfHostedGalleryVideo)) {
       const view = driveVideoView(item);
       const mp4 = publicAssetPath(item.src);
       const poster = publicAssetPath(item.poster);
@@ -291,9 +294,12 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    // 2026-08-24 の夜枠お礼Story（b23）と 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）と Yes!東京（b25）を加えて12本（既存b03・b07・b09・b11・b12・b13・b15は残す）。
-    assert.equal(visibleGalleryVideos().length, 12);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 23);
+    // 2026-08-26 Mixch outbound 2本と 2026-08-24 の夜枠お礼Story（b23）と 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）と Yes!東京（b25）を加えて14本（既存b03・b07・b09・b11・b12・b13・b15は残す）。
+    assert.equal(visibleGalleryVideos().length, 14);
+    assert.equal(
+      visibleGalleryVideos().filter(isSelfHostedGalleryVideo).length + drive.videos.length,
+      23,
+    );
     assert.equal(galleryVideoViews().length, 23);
   });
 });

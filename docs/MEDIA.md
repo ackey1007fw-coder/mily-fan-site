@@ -106,9 +106,28 @@ Gallery向きでない素材でも、Story / NEWS向きならその掲載面で�
 ## 禁止事項（再掲）
 
 - 本人の顔の AI 生成・置換・補正、生成塗り足し（outpainting / generative fill）
-- 本人 SNS からの画像・動画の自動取得
+- X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードすること
+- X / Instagram の画像 CDN URL をサイトメディアとして hotlink すること
+- Mixch の `_movie_mps` / MP4 をこのドメインで再生すること（`<video src=Mixch CDN>` / 非公式 iframe 含む）
+- Mixch タイムラインのクロール。扱うのはオーナー指定の `https://mixch.tv/m/{id}` だけ
 - 顔・体を不自然に切るトリミング（見せ方の調整は `focal` = object-position で行う）
 - 元素材・公開済み派生の上書き
+
+### Mixch outbound player card（唯一の SNS サムネイル例外）
+
+Mixch に公式 oEmbed / iframe embed はない。Mixch の movie ファイルは CloudFront `_movie_mps` URL であり、このサイトで再生すると (1) Mixch CDN の hotlink、(2) CAMPUS GIRLS コンテストの視聴・ポイントを Mixch から奪う、(3) SNS ファイルを repo に取り込まない旧ルール違反、になる。
+
+そのため **Mixch ファイルはコピーせず、outbound player card にする。**
+
+- 対象: オーナー指定の公開 Mixch 動画 `https://mixch.tv/m/{id}`。確認済み本人アカウントは `https://mixch.tv/u/10114673` のみ。
+- 掲載面: NEWS（Latest）と Gallery。同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Activities の「関連するメディア」には出さない。
+- 見た目: poster + 中央の再生オーバーレイ + Mixch ラベル。`<video>` も iframe も使わない。
+- poster: その動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）だけを使ってよい。X / Instagram の CDN サムネイル例外は作らない。
+- Play / click / CTA: Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。このサイトで再生していると誤認させない。
+- Mixch ファイルを `media/original/` や `public/media/` に置かない。オーナーが後から原ファイルを提供した場合だけ、既存の自己ホストパイプラインを使う（別経路）。
+- photo-forward: Mixch カードはビジュアルとして数える。該当 NEWS をテキストだけにしない。
+
+データは `src/data/mixchMovies.ts`。UI は `src/components/MixchOutboundCard.tsx`。
 
 ## 動画を受領したら（先行ルール）
 

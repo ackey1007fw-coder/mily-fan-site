@@ -13,6 +13,7 @@ import {
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
+import { MixchOutboundCard } from "./MixchOutboundCard";
 
 const SIZES = "(min-width: 640px) 350px, 100vw";
 
@@ -136,9 +137,18 @@ function VideoCard({ entry }: { entry: Extract<GalleryEntry, { kind: "video" }> 
   );
 }
 
+function MixchCard({ entry }: { entry: Extract<GalleryEntry, { kind: "mixch" }> }) {
+  return (
+    <li className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">
+      <MixchOutboundCard movie={entry.item} className="group relative block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-sage" />
+    </li>
+  );
+}
+
 function GalleryCard({ entry }: { entry: GalleryEntry }) {
   if (entry.kind === "media") return <MediaPhotoCard entry={entry} />;
   if (entry.kind === "drive-photo") return <DrivePhotoCard entry={entry} />;
+  if (entry.kind === "mixch") return <MixchCard entry={entry} />;
   return <VideoCard entry={entry} />;
 }
 
@@ -160,8 +170,14 @@ export function Gallery({
   );
   const visible = capped.slice(0, visibleCount);
   const canLoadMore = visibleCount < capped.length;
-  const photos = visible.filter((entry) => entry.kind !== "video");
-  const videos = visible.filter((entry) => entry.kind === "video");
+  // Mixch still renders above the photo grid, but only items inside `visible`
+  // (initialVisible / 「もっと見る」). Filtering `capped` would load every
+  // Mixch poster on first paint once more than 12 Mixch movies exist.
+  const mixchCards = visible.filter((entry) => entry.kind === "mixch");
+  const photos = visible.filter(
+    (entry) => entry.kind === "media" || entry.kind === "drive-photo",
+  );
+  const selfHostedVideos = visible.filter((entry) => entry.kind === "video");
 
   return (
     <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
@@ -179,16 +195,30 @@ export function Gallery({
           </div>
         ) : null}
 
+        {mixchCards.length > 0 ? (
+          <ul className="mt-6 grid items-start gap-4 sm:grid-cols-2">
+            {mixchCards.map((entry) => (
+              <GalleryCard key={entry.key} entry={entry} />
+            ))}
+          </ul>
+        ) : null}
+
         {photos.length > 0 ? (
-          <ul className="mt-6 grid grid-cols-1 items-start gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 sm:gap-4">
+          <ul
+            className={`${mixchCards.length > 0 ? "mt-10" : "mt-6"} grid grid-cols-1 items-start gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 sm:gap-4`}
+          >
             {photos.map((entry) => (
               <GalleryCard key={entry.key} entry={entry} />
             ))}
           </ul>
         ) : null}
 
-        {videos.length > 0 ? (
-          <div className={photos.length > 0 ? "mt-10" : "mt-6"}>
+        {selfHostedVideos.length > 0 ? (
+          <div
+            className={
+              mixchCards.length > 0 || photos.length > 0 ? "mt-10" : "mt-6"
+            }
+          >
             {limit ? null : (
               <>
                 <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
@@ -198,7 +228,7 @@ export function Gallery({
               </>
             )}
             <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
-              {videos.map((entry) => (
+              {selfHostedVideos.map((entry) => (
                 <GalleryCard key={entry.key} entry={entry} />
               ))}
             </ul>
