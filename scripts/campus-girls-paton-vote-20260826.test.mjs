@@ -19,6 +19,7 @@ import {
   selectHomeVoteAction,
   selectHomeVoteActions,
 } from "../src/lib/homePortal.ts";
+import { selectHomeToday } from "../src/lib/homeToday.ts";
 import { selectActivityResources } from "../src/lib/activityContent.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
@@ -84,6 +85,57 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
     assert.match(select(START).deadlineLabel ?? "", /JST/);
     assert.equal(select(END + 1).url, contest.entryUrl);
     assert.equal(select(END + 1).deadlineLabel, undefined);
+  });
+
+  it("shows Paton prominently and ENTRY 734 together on HOME during the window, then drops only Paton", () => {
+    const homeAt = (now) =>
+      selectHomeToday({
+        contest,
+        supportEvents,
+        streamSlots: [],
+        streamRoomUrl: null,
+        live: unknownLive,
+        radio: null,
+        radioPhase: "idle",
+        banner: { kind: "NONE", stateLabel: "", title: "" },
+        now,
+      });
+
+    const during = homeAt(START);
+    const nowVote = during.nowItems.find((item) => item.cta?.url === PATON_URL);
+    assert.ok(nowVote);
+    assert.equal(nowVote.cta?.label, "Patonでみりぃに投票する");
+    assert.equal(
+      during.dashboardVoteButtons.some((action) => action.url === PATON_URL),
+      false,
+    );
+    assert.equal(
+      during.dashboardVoteButtons.some(
+        (action) => action.url === contest.entryUrl && action.kind === "contest",
+      ),
+      true,
+    );
+    assert.equal(
+      during.dashboardVoteButtons.find((action) => action.kind === "contest")
+        ?.label,
+      "ENTRY 734を応援する",
+    );
+
+    const ended = homeAt(END + 1);
+    assert.equal(
+      ended.nowItems.some((item) => item.cta?.url === PATON_URL),
+      false,
+    );
+    assert.equal(
+      ended.voteActions.some((action) => action.url === PATON_URL),
+      false,
+    );
+    assert.equal(
+      ended.dashboardVoteButtons.some((action) => action.url === PATON_URL),
+      false,
+    );
+    assert.equal(ended.dashboardVoteButtons[0]?.url, contest.entryUrl);
+    assert.equal(ended.dashboardVoteButtons[0]?.label, "ENTRY 734を応援する");
   });
 
   it("keeps Paton and MISS CIRCLE available together during the confirmed period", () => {
@@ -203,6 +255,9 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
     const dashboard = await source("src/components/TodayDashboard.tsx");
     assert.match(dashboard, /voteActions/);
     assert.match(dashboard, /liveVoteOnNow/);
+    assert.match(dashboard, /dashboardVoteButtons/);
+    assert.match(dashboard, /投票受付中/);
+    assert.doesNotMatch(dashboard, /additionalVotes/);
     assert.doesNotMatch(dashboard, /paton\.jp/);
 
     const clock = await source("src/lib/useSupportEventClock.ts");

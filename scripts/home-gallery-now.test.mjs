@@ -135,35 +135,69 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
       view.nowItems.filter((item) => item.cta?.url === PATON_URL).length,
       1,
     );
+    assert.equal(
+      view.dashboardVoteButtons.some((action) => action.url === PATON_URL),
+      false,
+    );
+    assert.equal(
+      view.dashboardVoteButtons.some((action) => action.url === contest.entryUrl),
+      true,
+    );
   });
 
-  it("derives the dashboard primary from the same vote selector, without stacking the URL", async () => {
+  it("keeps both Paton (prominent NOW) and ENTRY 734 during the window, without stacking Paton", async () => {
     const dashboard = source("src/components/TodayDashboard.tsx");
     assert.match(dashboard, /voteActions/);
     assert.match(dashboard, /liveVoteOnNow/);
-    assert.match(dashboard, /buttonActions/);
+    assert.match(dashboard, /dashboardVoteButtons/);
+    assert.match(dashboard, /投票受付中/);
+    assert.doesNotMatch(dashboard, /additionalVotes/);
     assert.doesNotMatch(dashboard, /contest\.entryUrl/);
     assert.doesNotMatch(dashboard, /paton\.jp/);
 
     const during = homeToday(START);
-    const ended = homeToday(END + 1);
-    const duringNowUrls = during.nowItems.flatMap((item) =>
-      item.cta ? [item.cta.url] : [],
-    );
-    const duringButtons = during.voteActions.filter(
-      (action) => !duringNowUrls.includes(action.url),
-    );
-    assert.equal(duringNowUrls.includes(PATON_URL), true);
+    const nowVote = during.nowItems.find((item) => item.cta?.url === PATON_URL);
+    const buttons = during.dashboardVoteButtons;
+
+    assert.ok(nowVote);
+    assert.equal(nowVote.cta?.label, "Patonでみりぃに投票する");
+    assert.match(nowVote.note ?? "", /投票締切/);
     assert.equal(
-      duringButtons.some((action) => action.url === PATON_URL),
+      during.nowItems.filter((item) => item.cta?.url === PATON_URL).length,
+      1,
+    );
+    assert.equal(
+      buttons.some((action) => action.url === PATON_URL),
       false,
     );
-    assert.equal(duringButtons[0]?.url, contest.entryUrl);
-
-    const endedNowUrls = ended.nowItems.flatMap((item) =>
-      item.cta ? [item.cta.url] : [],
+    assert.equal(buttons.length >= 1, true);
+    assert.equal(buttons[0]?.kind, "contest");
+    assert.equal(buttons[0]?.url, contest.entryUrl);
+    assert.equal(buttons[0]?.label, "ENTRY 734を応援する");
+    assert.equal(
+      during.voteActions.some((action) => action.url === contest.entryUrl),
+      true,
     );
-    assert.equal(endedNowUrls.includes(PATON_URL), false);
+  });
+
+  it("removes the dead Paton button after the window and still shows ENTRY 734", () => {
+    const ended = homeToday(END + 1);
+    assert.equal(
+      ended.nowItems.some((item) => item.cta?.url === PATON_URL),
+      false,
+    );
+    assert.equal(
+      ended.voteActions.some((action) => action.url === PATON_URL),
+      false,
+    );
+    assert.equal(
+      ended.dashboardVoteButtons.some((action) => action.url === PATON_URL),
+      false,
+    );
+    assert.equal(ended.dashboardVoteButtons.length, 1);
+    assert.equal(ended.dashboardVoteButtons[0].kind, "contest");
+    assert.equal(ended.dashboardVoteButtons[0].url, contest.entryUrl);
+    assert.equal(ended.dashboardVoteButtons[0].label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
   });
 });

@@ -48,9 +48,15 @@ export type HomeTodayView = {
   nowItems: SupportNowItem[];
   /**
    * 期間中の確認済み投票を先頭にしたホーム用CTA。
-   * 投票期間が終わると期間限定の投票先は消え、MISS CIRCLE ENTRYだけになる。
+   * 期間限定の投票先は期間中だけ付き、常設の MISS CIRCLE ENTRY は期間中も残す。
+   * 期間後に消えるのは期限切れの投票先だけで、ミスサー導線へ切り替えるのではない。
    */
   voteActions: [HomeVoteAction, ...HomeVoteAction[]];
+  /**
+   * TodayDashboard のボタン行。NOW カードと同じ URL は重ねない。
+   * 常設の MISS CIRCLE ENTRY は NOW に出ないので、期間中も期間後も残る。
+   */
+  dashboardVoteButtons: HomeVoteAction[];
   /**
    * バナーに抑制された項目が持っていた導線のうち、
    * **バナーが提供していない行き先**だけを残したもの。
@@ -220,6 +226,23 @@ export function fallbackShowroomActions(input: {
     : [confirmed];
 }
 
+/**
+ * TodayDashboard のボタン行に出す投票導線。
+ *
+ * NOW カードで目立たせている期間限定投票と同じ URL は重ねない。
+ * 常設の MISS CIRCLE ENTRY は NOW に出ないので、期間中も期間後も残す。
+ * HOME は Paton とミスサーを切り替えない。
+ */
+export function selectHomeDashboardVoteButtons(
+  voteActions: readonly HomeVoteAction[],
+  nowItems: readonly SupportNowItem[],
+): HomeVoteAction[] {
+  const nowCtaUrls = new Set(
+    nowItems.flatMap((item) => (item.cta ? [item.cta.url] : [])),
+  );
+  return voteActions.filter((action) => !nowCtaUrls.has(action.url));
+}
+
 export function selectHomeToday(input: {
   contest: Contest;
   supportEvents: SupportEvent[];
@@ -293,6 +316,17 @@ export function selectHomeToday(input: {
     nowItems,
     retainedActions,
   });
+  const dashboardVoteButtons = selectHomeDashboardVoteButtons(
+    voteActions,
+    nowItems,
+  );
 
-  return { todayItems, nowItems, voteActions, retainedActions, fallbackActions };
+  return {
+    todayItems,
+    nowItems,
+    voteActions,
+    dashboardVoteButtons,
+    retainedActions,
+    fallbackActions,
+  };
 }
