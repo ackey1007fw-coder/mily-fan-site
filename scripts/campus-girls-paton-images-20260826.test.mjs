@@ -92,6 +92,15 @@ describe("2026-08-26 CAMPUS GIRLS Paton NEWS images", () => {
   });
 
   it("keeps both owner-provided originals unchanged, ignored, and out of git", async () => {
+    const localOriginals = assets.filter((asset) =>
+      existsSync(path.join(root, asset.original)),
+    );
+
+    assert.ok(
+      localOriginals.length === 0 || localOriginals.length === assets.length,
+      "local originals must be either wholly absent (CI) or wholly present",
+    );
+
     for (const asset of assets) {
       const originalFile = path.join(root, asset.original);
       const { stdout: ignored } = await run(
@@ -107,9 +116,11 @@ describe("2026-08-26 CAMPUS GIRLS Paton NEWS images", () => {
 
       assert.match(ignored, /media\/original\/\*/);
       assert.equal(tracked.trim(), "");
-      assert.equal(existsSync(originalFile), true);
-      assert.equal((await stat(originalFile)).size, asset.originalBytes);
-      assert.equal(await sha256(originalFile), asset.originalSha256);
+
+      if (existsSync(originalFile)) {
+        assert.equal((await stat(originalFile)).size, asset.originalBytes);
+        assert.equal(await sha256(originalFile), asset.originalSha256);
+      }
     }
   });
 
