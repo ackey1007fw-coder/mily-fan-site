@@ -13,6 +13,7 @@ import {
   galleryVideos,
   type GalleryVideoItem,
 } from "../data/galleryVideos.ts";
+import { isMixchMovie } from "../data/mixchMovies.ts";
 import { stories, type Story, type StoryMedia } from "../data/stories.ts";
 
 export type ActivityMediaItem = NewsMedia | StoryMedia | GalleryVideoItem;
@@ -28,16 +29,31 @@ function objectId(media: ActivityMediaItem): string | null {
   return "id" in media && typeof media.id === "string" ? media.id : null;
 }
 
+function mediaSrc(media: ActivityMediaItem): string | null {
+  return "src" in media && typeof media.src === "string" ? media.src : null;
+}
+
 function canonicalGalleryItem(
   media: ActivityMediaItem,
   galleryItems: GalleryVideoItem[],
 ): ActivityMediaItem {
   const id = objectId(media);
+  const src = mediaSrc(media);
   return (
     galleryItems.find(
-      (item) => (id !== null && item.id === id) || item.src === media.src,
+      (item) =>
+        (id !== null && item.id === id) ||
+        (src !== null && mediaSrc(item) === src),
     ) ?? media
   );
+}
+
+function activityMediaKey(media: ActivityMediaItem): string {
+  const id = objectId(media);
+  if (id) return id;
+  if (isMixchMovie(media)) return `${media.kind}:${media.mixchUrl}`;
+  const src = mediaSrc(media);
+  return `${media.kind}:${src ?? ""}`;
 }
 
 /**
@@ -69,7 +85,7 @@ export function selectActivityMedia(
   const seen = new Set<string>();
   for (const media of [...relatedNewsMedia, ...relatedStoryMedia]) {
     const canonical = canonicalGalleryItem(media, galleryItems);
-    const key = objectId(canonical) ?? `${canonical.kind}:${canonical.src}`;
+    const key = activityMediaKey(canonical);
     if (seen.has(key)) continue;
     seen.add(key);
     selected.push(canonical);

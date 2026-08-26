@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import {
   news,
   newsDisplayMedia,
+  newsMediaKey,
   sortNewsByDateDesc,
   type NewsItem,
   type NewsMedia,
@@ -15,6 +16,7 @@ import {
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
+import { MixchOutboundCard } from "./MixchOutboundCard";
 
 function NewsLink({
   href,
@@ -41,6 +43,10 @@ function NewsLink({
 }
 
 function NewsMediaBlock({ media }: { media: NewsMedia }) {
+  if (media.kind === "mixch") {
+    return <MixchOutboundCard movie={media} />;
+  }
+
   if (media.kind === "video") {
     return (
       <video
@@ -95,7 +101,7 @@ export function NewsArticle({ item }: { item: NewsItem }) {
         </div>
       ) : null}
       {newsDisplayMedia(item).map((media) => (
-        <NewsMediaBlock key={`${media.kind}:${media.src}`} media={media} />
+        <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
       {item.source || item.sourceLabel || item.url ? (
         <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">

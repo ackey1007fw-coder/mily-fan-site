@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { mixchConfidenceMessageMovie } from "../src/data/mixchMovies.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { verifyNews } from "./content-invariants.mjs";
@@ -19,7 +20,7 @@ function item() {
 }
 
 describe("2026-08-25 Mixch confidence message NEWS", () => {
-  it("adds one JST-dated, source-backed NEWS item without media", () => {
+  it("keeps the X source and Mixch CTA, and adds Mixch outbound media", () => {
     const entry = item();
 
     assert.ok(entry);
@@ -36,7 +37,10 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       entry.ctaLabel,
       "Mixchで「自信のないあなたへ」を見る",
     );
-    assert.equal(entry.media, undefined);
+    assert.equal(entry.media, mixchConfidenceMessageMovie);
+    assert.equal(entry.media.kind, "mixch");
+    assert.equal(entry.media.mixchUrl, MIXCH_URL);
+    assert.equal(typeof entry.media.src, "undefined");
     assert.equal(entry.additionalMedia, undefined);
     assert.deepEqual(verifyNews(news), []);
   });
@@ -81,16 +85,17 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     assert.notEqual(entry.message.text, entry.body);
   });
 
-  it("leads the 8/25 NEWS before motivation and is derived into the Portal Feed", () => {
+  it("follows the 8/26 Mixch NEWS and still leads 8/25 before motivation", () => {
     const ordered = sortNewsByDateDesc(news);
     const feed = createPortalFeed();
     const feedItem = feed.items.find(
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(ordered[0]?.id, "2026-08-26-stream-1000");
-    assert.equal(ordered[1]?.id, NEWS_ID);
-    assert.equal(ordered[2]?.id, "2026-08-25-motivation");
+    assert.equal(ordered[0]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[1]?.id, "2026-08-26-stream-1000");
+    assert.equal(ordered[2]?.id, NEWS_ID);
+    assert.equal(ordered[3]?.id, "2026-08-25-motivation");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-25").map(({ id }) => id),
       [NEWS_ID, "2026-08-25-motivation"],
@@ -102,10 +107,11 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     assert.equal(feedItem.image, undefined);
   });
 
-  it("appears on the existing CAMPUS GIRLS Activity page", () => {
+  it("appears on the existing CAMPUS GIRLS Activity page after the newer Mixch NEWS", () => {
     const selected = selectActivityNews("campus-girls");
 
-    assert.equal(selected[0]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(selected[1]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 
@@ -127,22 +133,21 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     assert.match(activities, /item\.ctaLabel/);
   });
 
-  it("does not add a downloaded Mixch asset, Story, Gallery entry, or duplicate source", async () => {
-    const [galleryVideosSource, mediaSource, storiesSource, ops] =
-      await Promise.all([
-        readFile(path.join(root, "src/data/galleryVideos.ts"), "utf8"),
-        readFile(path.join(root, "src/data/media.ts"), "utf8"),
-        readFile(path.join(root, "src/data/stories.ts"), "utf8"),
-        readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8"),
-      ]);
+  it("does not add a downloaded Mixch mp4 and documents Mixch outbound cards", async () => {
+    const [mediaSource, storiesSource, ops] = await Promise.all([
+      readFile(path.join(root, "src/data/media.ts"), "utf8"),
+      readFile(path.join(root, "src/data/stories.ts"), "utf8"),
+      readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8"),
+    ]);
 
-    for (const source of [galleryVideosSource, mediaSource, storiesSource]) {
+    for (const source of [mediaSource, storiesSource]) {
       assert.doesNotMatch(source, /ZY4hSt3K/);
-      assert.doesNotMatch(source, /mixch-confidence-message/);
+      assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 31);
-    assert.match(ops, /31件/);
+    assert.equal(news.length, 32);
+    assert.match(ops, /32件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
-    assert.match(ops, /画像・動画は自己ホストしていない/);
+    assert.match(ops, /Mixch outbound player card/);
+    assert.match(ops, /Mixchファイルは自己ホストしていない/);
   });
 });

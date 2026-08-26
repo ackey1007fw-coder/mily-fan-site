@@ -13,6 +13,7 @@ import {
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
+import { MixchOutboundCard } from "./MixchOutboundCard";
 
 const SIZES = "(min-width: 640px) 350px, 100vw";
 
@@ -136,9 +137,18 @@ function VideoCard({ entry }: { entry: Extract<GalleryEntry, { kind: "video" }> 
   );
 }
 
+function MixchCard({ entry }: { entry: Extract<GalleryEntry, { kind: "mixch" }> }) {
+  return (
+    <li className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">
+      <MixchOutboundCard movie={entry.item} className="group relative block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-sage" />
+    </li>
+  );
+}
+
 function GalleryCard({ entry }: { entry: GalleryEntry }) {
   if (entry.kind === "media") return <MediaPhotoCard entry={entry} />;
   if (entry.kind === "drive-photo") return <DrivePhotoCard entry={entry} />;
+  if (entry.kind === "mixch") return <MixchCard entry={entry} />;
   return <VideoCard entry={entry} />;
 }
 
@@ -160,8 +170,12 @@ export function Gallery({
   );
   const visible = capped.slice(0, visibleCount);
   const canLoadMore = visibleCount < capped.length;
-  const photos = visible.filter((entry) => entry.kind !== "video");
-  const videos = visible.filter((entry) => entry.kind === "video");
+  const photos = visible.filter(
+    (entry) => entry.kind === "media" || entry.kind === "drive-photo",
+  );
+  const videos = visible.filter(
+    (entry) => entry.kind === "video" || entry.kind === "mixch",
+  );
 
   return (
     <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
@@ -193,7 +207,7 @@ export function Gallery({
               <>
                 <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
                 <p className="mt-1 text-sm text-ink-muted">
-                  お預かりした動画。
+                  お預かりした動画と、Mixchで見る動画。
                 </p>
               </>
             )}

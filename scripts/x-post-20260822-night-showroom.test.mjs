@@ -212,7 +212,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
     assert.equal(media.some((entry) => entry.id.includes("b17")), false);
     assert.equal(media.some((entry) => entry.basePath.includes("night-showroom-fireworks")), false);
     assert.equal(galleryVideos.some((entry) => entry.id.includes("b17")), false);
-    assert.equal(galleryVideos.some((entry) => entry.src.includes("night-showroom-fireworks")), false);
+    assert.equal(galleryVideos.some((entry) => "src" in entry && entry.src.includes("night-showroom-fireworks")), false);
     assert.equal(stories.some((entry) => entry.slug.includes("night-showroom-thanks")), false);
     assert.equal(highlights.some((entry) => entry.id.includes("night-showroom")), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
@@ -254,7 +254,8 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
   it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 22), [
+    assert.deepEqual(ordered.slice(0, 23), [
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -278,7 +279,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 31);
+    assert.equal(news.length, 32);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {

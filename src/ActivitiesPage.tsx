@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
+import { MixchOutboundCard } from "./components/MixchOutboundCard";
 import { Footer } from "./components/Footer";
 import {
   activities,
@@ -467,6 +468,9 @@ function ActivityStories({ items }: { items: ReturnType<typeof selectActivityPag
 }
 
 function mediaLabel(media: ActivityMediaItem): string {
+  if (media.kind === "mixch") {
+    return `Mixchで「${media.title}」を見る`;
+  }
   if (media.kind === "video" && "label" in media) return media.label;
   return "alt" in media ? media.alt : "みりぃの関連動画";
 }
@@ -475,17 +479,28 @@ function mediaCaption(media: ActivityMediaItem): string | undefined {
   return "caption" in media ? media.caption : undefined;
 }
 
+function activityMediaKey(media: ActivityMediaItem): string {
+  if ("id" in media && typeof media.id === "string") return media.id;
+  if (media.kind === "mixch") return media.mixchUrl;
+  return media.src;
+}
+
 function ActivityMedia({ items }: { items: ActivityMediaItem[] }) {
   if (items.length === 0) return null;
   return (
     <SectionShell eyebrow="Media" title="関連するメディア">
       <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {items.map((media) => {
-          const key = "id" in media ? media.id : media.src;
+          const key = activityMediaKey(media);
           const caption = mediaCaption(media);
           return (
             <li key={key} className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">
-              {media.kind === "video" ? (
+              {media.kind === "mixch" ? (
+                <MixchOutboundCard
+                  movie={media}
+                  className="group relative block w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+                />
+              ) : media.kind === "video" ? (
                 <video
                   src={media.src}
                   poster={media.poster}

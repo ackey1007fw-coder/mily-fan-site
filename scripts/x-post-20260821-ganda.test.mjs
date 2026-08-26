@@ -220,7 +220,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
     assert.equal(media.some((entry) => entry.id.includes("b14")), false);
     assert.equal(media.some((entry) => entry.basePath.includes("ganda")), false);
     assert.equal(galleryVideos.some((entry) => entry.id.includes("b14")), false);
-    assert.equal(galleryVideos.some((entry) => entry.src.includes("ganda")), false);
+    assert.equal(galleryVideos.some((entry) => "src" in entry && entry.src.includes("ganda")), false);
     assert.equal(stories.some((entry) => entry.slug.includes("ganda")), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
 
@@ -252,7 +252,8 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       "2026-08-21-morning-showroom-runway",
     ];
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 18), [
+    assert.deepEqual(ordered.slice(0, 19), [
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -276,7 +277,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
     );
     for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
-    assert.equal(news.length, 31);
+    assert.equal(news.length, 32);
   });
 });
 

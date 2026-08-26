@@ -182,9 +182,11 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
   it("adds the video to the Gallery archive, newest first, keeping b03 and b07", () => {
     const visible = visibleGalleryVideos();
 
-    assert.equal(visible.length, 12);
-    // 8/24 (b25 → b23) → 8/23 (b21 → b19 → b18) → 8/21 (b15 → b13 → b12 → b11) → 8/20 (b07) → 8/19 (b09) → 8/17 (b03)
+    assert.equal(visible.length, 14);
+    // Mixch outbound (8/26 → 8/25) → 8/24 (b25 → b23) → 8/23 (b21 → b19 → b18) → 8/21 (b15 → b13 → b12 → b11) → 8/20 (b07) → 8/19 (b09) → 8/17 (b03)
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
+      "2026-08-26",
+      "2026-08-25",
       "2026-08-24",
       "2026-08-24",
       "2026-08-23",
@@ -198,11 +200,11 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       "2026-08-19",
       "2026-08-17",
     ]);
-    assert.equal(visible[5], tiktokRadioVideo);
-    assert.equal(visible[6], eventStory20260821);
-    assert.equal(visible[7], morningOhayo20260821);
-    assert.equal(visible[8], morningShowroomRunwayVideo);
-    assert.equal(visible[10], secondRoundStoryVideo);
+    assert.equal(visible[7], tiktokRadioVideo);
+    assert.equal(visible[8], eventStory20260821);
+    assert.equal(visible[9], morningOhayo20260821);
+    assert.equal(visible[10], morningShowroomRunwayVideo);
+    assert.equal(visible[12], secondRoundStoryVideo);
     assert.ok(visible.includes(morningStory20260820));
     assert.ok(visible.includes(morningStoryVideo));
     assert.equal(morningStoryVideo.src, "/media/gallery/mily-b03-01-morning-ohayo.mp4");
@@ -210,7 +212,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       morningStory20260820.src,
       "/media/gallery/mily-b07-01-morning-story.mp4",
     );
-    assert.equal(galleryVideos.length, 12);
+    assert.equal(galleryVideos.length, 14);
   });
 
   it("shares one MP4 and one poster between the STORY article and Gallery", () => {

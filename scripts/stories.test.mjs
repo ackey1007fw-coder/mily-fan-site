@@ -274,7 +274,9 @@ describe("reusable STORIES content", () => {
     // 用途別コピーを作らないための意図的な共有なので、path が
     // Gallery のマニフェストと一致することまで見る。
     const sharedGalleryVideos = new Map(
-      galleryVideos.map((video) => [video.src, video]),
+      galleryVideos
+        .filter((video) => video.kind === "video")
+        .map((video) => [video.src, video]),
     );
     const sharedGalleryPhotos = new Map(
       media

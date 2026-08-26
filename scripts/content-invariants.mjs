@@ -33,6 +33,50 @@ export function isSafeHttpUrl(url) {
   }
 }
 
+export function isMixchMoviePageUrl(url) {
+  try {
+    const parsed = new URL(url);
+    return (
+      parsed.protocol === "https:" &&
+      parsed.hostname === "mixch.tv" &&
+      /^\/m\/[A-Za-z0-9_-]+$/.test(parsed.pathname) &&
+      parsed.search === "" &&
+      parsed.hash === ""
+    );
+  } catch {
+    return false;
+  }
+}
+
+export function isMixchThumbnailUrl(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "https:") return false;
+    if (parsed.pathname.includes("_movie_mps") || parsed.pathname.endsWith(".mp4")) {
+      return false;
+    }
+    if (parsed.hostname === "mixch.tv") return true;
+    if (
+      parsed.hostname === "d2jtsb989t238a.cloudfront.net" &&
+      parsed.pathname.includes("/thumb")
+    ) {
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+function containsMixchMovieFileUrl(media) {
+  const values = collectStrings(media);
+  return values.some(
+    (value) =>
+      value.includes("_movie_mps") ||
+      /cloudfront\.net\/.*\.mp4(?:$|\?)/i.test(value),
+  );
+}
+
 function collectStrings(value) {
   if (typeof value === "string") return [value];
   if (Array.isArray(value)) return value.flatMap(collectStrings);
@@ -172,6 +216,35 @@ export function verifyNews(items) {
       errors.push(`news "${item.id ?? "?"}" additionalMedia needs a lead media`);
     }
     for (const { media, slot } of mediaSlots) {
+      if (media?.kind === "mixch") {
+        if (!isMixchMoviePageUrl(media.mixchUrl)) {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} mixchUrl must be a mixch.tv/m/{id} page`,
+          );
+        }
+        if (!isMixchThumbnailUrl(media.poster)) {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} poster must be an official Mixch thumbnail`,
+          );
+        }
+        if (typeof media.src === "string") {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} must not use src; Mixch files are not self-hosted`,
+          );
+        }
+        if (containsMixchMovieFileUrl(media)) {
+          errors.push(
+            `news "${item.id ?? "?"}" ${slot} must not play Mixch _movie_mps / MP4 files`,
+          );
+        }
+        if (!media.alt?.trim()) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs alt text`);
+        }
+        if (!Number.isInteger(media.width) || !Number.isInteger(media.height)) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs intrinsic width/height`);
+        }
+        continue;
+      }
       const mediaKeys =
         media?.kind === "video"
           ? ["src", "poster"]

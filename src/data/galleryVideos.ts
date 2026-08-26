@@ -16,14 +16,23 @@ import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSp
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { tiktokRadioVideo, type TikTokRadioVideo } from "./tiktokRadioVideo.ts";
+import {
+  mixch15xDayMovie,
+  mixchConfidenceMessageMovie,
+  type MixchMovie,
+} from "./mixchMovies.ts";
 
-export type GalleryVideoItem =
+export type SelfHostedGalleryVideo =
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo;
+
+export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
   earthquakeSafetyStoryVideo,
   eventStory20260821,
+  mixch15xDayMovie,
+  mixchConfidenceMessageMovie,
   morningOhayo20260821,
   morningShowroomRunwayVideo,
   morningStoryVideo,
@@ -36,12 +45,20 @@ export {
   tiktokRadioVideo,
 };
 
+export function isSelfHostedGalleryVideo(
+  item: GalleryVideoItem,
+): item is SelfHostedGalleryVideo {
+  return item.kind === "video";
+}
+
 /**
- * Standalone local videos that belong in Gallery without being folded into
- * the older Drive batch b02 registry. Latest may reuse the same object so the
- * MP4 and poster paths remain single-source. Newest first.
+ * Standalone Gallery videos: owner-provided self-hosted MP4s plus Mixch
+ * outbound player cards. Latest may reuse the same object so paths (or Mixch
+ * URLs) remain single-source. Newest first. Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  mixch15xDayMovie,
+  mixchConfidenceMessageMovie,
   seasideCircleYesTokyoVideo,
   nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,

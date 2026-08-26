@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 31);
+    assert.equal(news.length, 32);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -152,7 +152,8 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
 
   it("sits between Final STAGE guide and night-thanks on 8/24", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 8), [
+    assert.deepEqual(ordered.slice(0, 9), [
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -386,7 +387,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(b24, /公開用のmetadata除去以外は無改変/);
     assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
-    assert.match(ops, /31件/);
+    assert.match(ops, /32件/);
     assert.match(ops, /初メイク配信/);
     assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);

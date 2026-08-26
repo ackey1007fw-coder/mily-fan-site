@@ -375,6 +375,66 @@ describe("content verification invariants", () => {
     );
   });
 
+  it("accepts Mixch outbound media and rejects Mixch files or X/IG posters", () => {
+    const mixch = {
+      id: "mixch-m-example",
+      kind: "mixch",
+      mixchUrl: "https://mixch.tv/m/ZY4hSt3K",
+      poster:
+        "https://d2jtsb989t238a.cloudfront.net/m/example/thumb_normal",
+      width: 480,
+      height: 853,
+      alt: "Mixch動画のサムネイル。再生するとMixchで開きます",
+      title: "自信のないあなたへ",
+      published: true,
+      sourceDate: "2026-08-25",
+      accountUrl: "https://mixch.tv/u/10114673",
+    };
+
+    assert.deepEqual(
+      verifyNews([{ ...validNews, id: "mixch-ok", media: mixch }]),
+      [],
+    );
+
+    const stuffed = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-as-video",
+        media: {
+          kind: "video",
+          src: "https://mixch.tv/m/ZY4hSt3K",
+          poster: mixch.poster,
+          width: 480,
+          height: 853,
+          alt: mixch.alt,
+        },
+      },
+    ]);
+    assert.ok(stuffed.some((error) => error.includes("local /media/ path")));
+
+    const movieFile = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-mps",
+        media: {
+          ...mixch,
+          poster:
+            "https://d2jtsb989t238a.cloudfront.net/example/_movie_mps/clip.mp4",
+        },
+      },
+    ]);
+    assert.ok(movieFile.some((error) => error.includes("_movie_mps") || error.includes("official Mixch thumbnail")));
+
+    const xPoster = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-x-poster",
+        media: { ...mixch, poster: "https://pbs.twimg.com/media/example.jpg" },
+      },
+    ]);
+    assert.ok(xPoster.some((error) => error.includes("official Mixch thumbnail")));
+  });
+
   it("accepts a local STORIES path as a news related link", () => {
     const errors = verifyNews([
       {
