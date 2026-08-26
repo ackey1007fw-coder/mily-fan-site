@@ -23,7 +23,9 @@ import {
   selectLiveActivityStatus,
   selectRadioActivityStatus,
 } from "./lib/activityStatus";
+import { resolveNewsLinks } from "./lib/newsLinks";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
+import { useSupportEventClock } from "./lib/useSupportEventClock";
 import {
   formatSlotDate,
   useStreamSchedule,
@@ -374,13 +376,13 @@ function SectionShell({
   );
 }
 
-function ActivityNews({ items }: { items: NewsItem[] }) {
+function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
   if (items.length === 0) return null;
   return (
     <SectionShell eyebrow="Latest" title="関連する最新情報">
       <ul className="mt-6 space-y-4">
         {items.map((item) => {
-          const ctaHref = item.url ?? item.source;
+          const resolvedLinks = resolveNewsLinks(item, now);
           return (
             <li key={item.id} className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
               <time dateTime={item.date} className="text-xs text-ink-muted">
@@ -396,16 +398,25 @@ function ActivityNews({ items }: { items: NewsItem[] }) {
                 ) : item.sourceLabel ? (
                   <span className="text-sm font-medium text-ink-muted">{item.sourceLabel}</span>
                 ) : null}
-                {item.url && item.url !== item.source ? (
-                  <SmartLink href={item.url} className="text-sm font-semibold text-sage hover:underline">
+                {item.additionalSources?.map((source) => (
+                  <ExternalLink
+                    key={source.url}
+                    href={source.url}
+                    className="text-sm font-semibold text-sage hover:underline"
+                  >
+                    {source.label}
+                  </ExternalLink>
+                ))}
+                {resolvedLinks.relatedUrl && resolvedLinks.relatedUrl !== item.source ? (
+                  <SmartLink href={resolvedLinks.relatedUrl} className="text-sm font-semibold text-sage hover:underline">
                     関連ページを見る
                   </SmartLink>
                 ) : null}
               </div>
-              {item.ctaLabel && ctaHref ? (
+              {resolvedLinks.cta ? (
                 <p className="mt-4">
-                  <SmartLink href={ctaHref} className={secondaryCta}>
-                    {item.ctaLabel}
+                  <SmartLink href={resolvedLinks.cta.url} className={secondaryCta}>
+                    {resolvedLinks.cta.label}
                   </SmartLink>
                 </p>
               ) : null}
@@ -552,7 +563,8 @@ function ActivityResources({ items }: { items: ActivityResource[] }) {
 }
 
 function ActivityDetail({ activity }: { activity: Activity }) {
-  const content = selectActivityPageContent(activity.id);
+  const now = useSupportEventClock();
+  const content = selectActivityPageContent(activity.id, now);
   return (
     <div className="min-h-screen overflow-x-hidden bg-paper text-ink">
       <a
@@ -565,7 +577,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
-        <ActivityNews items={content.news} />
+        <ActivityNews items={content.news} now={now} />
         <ActivityHighlights items={content.highlights} />
         <ActivityStories items={content.stories} />
         <ActivityMedia items={content.media} />

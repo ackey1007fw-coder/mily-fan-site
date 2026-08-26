@@ -87,8 +87,9 @@ describe("ページ上部へ戻るボタン", () => {
     const dock = await read("src/components/MobileActionDock.tsx");
     const css = await read("src/index.css");
 
-    assert.match(dock, /HOME_VOTE_CTA/);
-    assert.match(dock, /contest\.entryNumber/);
+    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /voteAction\.url/);
+    assert.match(dock, /voteAction\.label/);
     assert.match(dock, /href=\{SUPPORT_HUB_ROUTE\}/);
     assert.match(dock, /fixed inset-x-0 bottom-0 z-30/);
     assert.match(css, /scroll-behavior: smooth;/);

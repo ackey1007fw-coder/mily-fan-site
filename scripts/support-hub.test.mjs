@@ -84,20 +84,22 @@ describe("Support MPA route and metadata", () => {
     assert.match(serialized, /非公式/);
   });
 
-  it("adds the P5 agenda and keeps the Hub itself off the top page", () => {
+  it("keeps the monthly schedule and Agenda on the Hub itself, off the top page", () => {
     const page = source("src/SupportPage.tsx");
-    assert.match(page, /Support Calendar/);
+    assert.match(page, /みりぃスケジュール/);
+    assert.match(page, /MonthlyScheduleCalendar/);
     assert.match(page, /buildSupportCalendar\(/);
     assert.match(page, /fanEvents: events/);
     assert.match(page, /streamAvailability: availability/);
     assert.match(page, /includeRadio: true/);
-    assert.doesNotMatch(page, /月間|Coming soon/i);
+    assert.doesNotMatch(page, /Coming soon/i);
     // ホームは compact gateway から `/support/` へ送るだけ。Hub本体は複製しない。
     assert.doesNotMatch(source("src/App.tsx"), /SupportPage|buildSupportCalendar/);
     assert.match(source("src/components/Support.tsx"), /SUPPORT_HUB_ROUTE/);
     assert.match(source("src/lib/useStreamSchedule.ts"), /availability/);
     assert.match(page, /useMilyRealtimeStatus\(\)/);
     assert.match(page, /useStreamSchedule\(\)/);
+    assert.match(page, /useTokyoNow\(\)/);
     assert.doesNotMatch(page, /fetch\(|setInterval\(|createPollStore/);
     assert.match(page, /role="status" aria-live="polite" aria-atomic="true"/);
   });
@@ -296,7 +298,16 @@ describe("Support Today and pending separation", () => {
     );
   });
 
-  it("keeps current production SupportEvents empty instead of inventing facts", () => {
-    assert.equal(supportEvents.length, 0);
+  it("keeps the confirmed CAMPUS GIRLS Paton voting period in SupportEvents", () => {
+    assert.equal(supportEvents.length, 1);
+    assert.equal(supportEvents[0].activityId, "campus-girls");
+    assert.equal(supportEvents[0].kind, "vote");
+    assert.deepEqual(supportEvents[0].schedule, {
+      state: "confirmed-period",
+      start: "2026-08-26T18:00:00+09:00",
+      end: "2026-09-01T23:59:00+09:00",
+      allDay: false,
+      timezone: "Asia/Tokyo",
+    });
   });
 });

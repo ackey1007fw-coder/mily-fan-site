@@ -149,9 +149,24 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
   );
 }
 
-/**
- * No independent support period is confirmed in current main.
- * Contest phases, public appearances, SHOWROOM slots, and radio slots remain in
- * their existing domain sources and are adapted by supportCalendar.ts.
- */
-export const supportEvents: SupportEvent[] = [];
+export const campusGirlsFinalStagePatonVote: SupportEvent = {
+  id: "campus-girls-final-stage-paton-2026",
+  activityId: "campus-girls",
+  kind: "vote",
+  title: "CAMPUS GIRLS 2027 予選A FinalSTAGE Paton投票",
+  note:
+    "Patonの三橋莉子（みりぃ）ページから応援できます。投票にはPatonへのログインが必要です。",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-08-26T18:00:00+09:00",
+    end: "2026-09-01T23:59:00+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  ctaLinkId: "campus-girls-paton-11380",
+  source: "https://paton.jp/event/detail/499",
+  verifiedAt: "2026-08-26",
+  priority: 100,
+};
+
+export const supportEvents: SupportEvent[] = [campusGirlsFinalStagePatonVote];

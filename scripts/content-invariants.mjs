@@ -194,6 +194,30 @@ export function verifyNews(items) {
         `news "${item.id ?? "?"}" needs a confirmed http(s) URL or non-link sourceLabel`,
       );
     }
+    if (item.additionalSources && !Array.isArray(item.additionalSources)) {
+      errors.push(`news "${item.id ?? "?"}" additionalSources must be an array`);
+    }
+    if (Array.isArray(item.additionalSources)) {
+      const seenSources = new Set(item.source ? [item.source] : []);
+      for (const [index, source] of item.additionalSources.entries()) {
+        if (!source?.label?.trim()) {
+          errors.push(
+            `news "${item.id ?? "?"}" additionalSources[${index}] needs a label`,
+          );
+        }
+        if (!source?.url || !isSafeHttpUrl(source.url)) {
+          errors.push(
+            `news "${item.id ?? "?"}" additionalSources[${index}] needs a confirmed http(s) URL`,
+          );
+        } else if (seenSources.has(source.url)) {
+          errors.push(
+            `news "${item.id ?? "?"}" additionalSources[${index}] duplicates a source URL`,
+          );
+        } else {
+          seenSources.add(source.url);
+        }
+      }
+    }
     if (item.url) assertNewsRelatedHref(item.url, "news", item.id ?? "?", errors);
     if (item.ctaLabel && !item.url && !item.source) {
       errors.push(`news "${item.id ?? "?"}" ctaLabel needs a link target`);

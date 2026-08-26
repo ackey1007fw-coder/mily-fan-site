@@ -126,11 +126,11 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     );
 
     assert.match(latest, /href=\{item\.source\}/);
-    assert.match(latest, /const ctaHref = item\.url \?\? item\.source/);
-    assert.match(latest, /href=\{ctaHref\}/);
-    assert.match(latest, /item\.ctaLabel/);
-    assert.match(activities, /const ctaHref = item\.url \?\? item\.source/);
-    assert.match(activities, /item\.ctaLabel/);
+    assert.match(latest, /resolveNewsLinks\(item, now\)/);
+    assert.match(latest, /href=\{resolvedLinks\.cta\.url\}/);
+    assert.match(latest, /resolvedLinks\.cta\.label/);
+    assert.match(activities, /resolveNewsLinks\(item, now\)/);
+    assert.match(activities, /resolvedLinks\.cta\.label/);
   });
 
   it("does not add a downloaded Mixch mp4 and documents Mixch outbound cards", async () => {

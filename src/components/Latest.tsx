@@ -14,6 +14,8 @@ import {
   NEWS_ARCHIVE_ROUTE,
 } from "../lib/homePortal";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
+import { resolveNewsLinks } from "../lib/newsLinks";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
@@ -81,8 +83,8 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
   return null;
 }
 
-export function NewsArticle({ item }: { item: NewsItem }) {
-  const ctaHref = item.url ?? item.source;
+export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
+  const resolvedLinks = resolveNewsLinks(item, now);
 
   return (
     <li className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
@@ -104,7 +106,10 @@ export function NewsArticle({ item }: { item: NewsItem }) {
       {newsDisplayMedia(item).map((media) => (
         <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
-      {item.source || item.sourceLabel || item.url ? (
+      {item.source ||
+      item.sourceLabel ||
+      item.additionalSources?.length ||
+      resolvedLinks.relatedUrl ? (
         <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
           {item.source ? (
             <ExternalLink
@@ -118,9 +123,18 @@ export function NewsArticle({ item }: { item: NewsItem }) {
               {item.sourceLabel}
             </span>
           ) : null}
-          {item.url && item.url !== item.source ? (
+          {item.additionalSources?.map((source) => (
+            <ExternalLink
+              key={source.url}
+              href={source.url}
+              className="text-sm font-medium text-sage hover:underline"
+            >
+              {source.label}
+            </ExternalLink>
+          ))}
+          {resolvedLinks.relatedUrl && resolvedLinks.relatedUrl !== item.source ? (
             <NewsLink
-              href={item.url}
+              href={resolvedLinks.relatedUrl}
               className="text-sm font-medium text-sage hover:underline"
             >
               関連リンク
@@ -128,13 +142,13 @@ export function NewsArticle({ item }: { item: NewsItem }) {
           ) : null}
         </p>
       ) : null}
-      {item.ctaLabel && ctaHref ? (
+      {resolvedLinks.cta ? (
         <p className="mt-4">
           <NewsLink
-            href={ctaHref}
+            href={resolvedLinks.cta.url}
             className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
           >
-            {item.ctaLabel}
+            {resolvedLinks.cta.label}
           </NewsLink>
         </p>
       ) : null}
@@ -153,6 +167,7 @@ export function Latest({
   archiveHref?: string;
   showArchiveCta?: boolean;
 }) {
+  const now = useSupportEventClock();
   const latestNews = sortNewsByDateDesc(news);
   const capped = typeof limit === "number" ? latestNews.slice(0, limit) : latestNews;
   const [visibleCount, setVisibleCount] = useState(
@@ -176,7 +191,7 @@ export function Latest({
         ) : (
           <ul className="mt-6 space-y-3">
             {visibleNews.map((item) => (
-              <NewsArticle key={item.id} item={item} />
+              <NewsArticle key={item.id} item={item} now={now} />
             ))}
           </ul>
         )}

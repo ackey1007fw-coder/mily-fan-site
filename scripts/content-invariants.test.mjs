@@ -314,6 +314,38 @@ describe("content verification invariants", () => {
     assert.deepEqual(errors, []);
   });
 
+  it("validates additional NEWS source links", () => {
+    assert.deepEqual(
+      verifyNews([
+        {
+          ...validNews,
+          id: "additional-news-source",
+          additionalSources: [
+            {
+              label: "追加のX投稿を見る",
+              url: "https://x.com/mily_chan36/status/2092456392343138339",
+            },
+          ],
+        },
+      ]),
+      [],
+    );
+
+    const invalid = verifyNews([
+      {
+        ...validNews,
+        id: "invalid-additional-news-source",
+        additionalSources: [
+          { label: "", url: "javascript:alert(1)" },
+          { label: "重複", url: validNews.source },
+        ],
+      },
+    ]);
+    assert.ok(invalid.some((error) => error.includes("needs a label")));
+    assert.ok(invalid.some((error) => error.includes("confirmed http(s) URL")));
+    assert.ok(invalid.some((error) => error.includes("duplicates a source URL")));
+  });
+
   it("accepts a self-hosted news photo and rejects a remote one", () => {
     const photo = {
       kind: "image",

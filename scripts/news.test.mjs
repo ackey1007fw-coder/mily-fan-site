@@ -322,8 +322,8 @@ describe("source and url are not mixed", () => {
     assert.match(latest, /href=\{item\.source\}/);
     assert.match(latest, /出典を見る/);
     assert.match(latest, /関連リンク/);
-    assert.match(latest, /item\.ctaLabel/);
-    assert.match(latest, /Instagramの投稿を見る|ctaLabel/);
+    assert.match(latest, /resolveNewsLinks\(item, now\)/);
+    assert.match(latest, /resolvedLinks\.cta\.label/);
     assert.doesNotMatch(latest, /href=\{item\.url\}[\s\S]{0,80}出典を見る/);
 
     assert.match(schedule, /href=\{item\.source\}/);

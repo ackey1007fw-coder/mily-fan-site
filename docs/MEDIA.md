@@ -1578,3 +1578,40 @@ ffmpeg -ss 8.0 -i public/media/gallery/mily-b25-01-seasidecircle-yes-tokyo.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b25-01-seasidecircle-yes-tokyo-poster.jpg
 ```
+
+## 素材台帳（batch b26 / 受領日 2026-08-26）
+
+CAMPUS GIRLS 2027 予選A Final STAGEのPaton案内NEWS専用の画像2枚。
+同じNEWS（`2026-08-24-campus-girls-final-stage-guide`）で、b26-01を代表画像、
+b26-02をPaton出場者ページの文脈が分かる2枚目として表示する。
+Gallery・`/stories/`・`media.ts`・`galleryVideos.ts`・highlightsには追加しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b26-01 | `news/mily-b26-01-campus-girls-paton-portrait.jpg` | 青・黄・白の花束を持ち、カメラを見るみりぃの正方形写真。1090×1090。owner-provided | ✅ NEWS代表画像 / Portal Feed |
+| b26-02 | `news/mily-b26-02-campus-girls-paton-page.jpg` | Patonの三橋莉子（みりぃ）出場者ページ。写真・名前・プロフィール表示を含む縦長画像。928×1280。owner-provided | ✅ 同じNEWSカードの2枚目 |
+
+確認済み:
+
+- provenance: `owner-provided`（オーナーが依頼時に2枚を直接提供し、当該NEWSへの掲載を明示承認。SNSから取得していない）
+- 出典ページ: `https://paton.jp/event/entrant/11380`。撮影日・撮影者・写真の投稿日は未確認のため推測しない
+- b26-01原本: 169,620 bytes / JPEG / 1090×1090 / sha256
+  `f4de1375ec64a14ee588f6c318db7f29595b9a05828b8b44b1e918d215293e68`
+- b26-02原本: 161,230 bytes / JPEG / 928×1280 / sha256
+  `cea4996ed01d7f9a8ee8f4b75aa0748f990c0234bb0fcaced4ee08ec24cfc8f5`
+- 元素材は `media/original/mily-b26-01-campus-girls-paton-portrait.jpg` と
+  `media/original/mily-b26-02-campus-girls-paton-page.jpg` に受領バイトを変えず保管
+  （gitignore済み・コミットしない）
+- 両原本にEXIF / IPTCがあり、b26-01にはICCもあったため、公開用はsharpの
+  JPEG quality 95 / progressive / 4:4:4で再エンコードし、metadataを除去した
+- b26-01公開派生: 252,786 bytes / 1090×1090 / sha256
+  `41c126c6ed3c9813f980f3412235a74c72f83d1fba2ebb14e290180eac8820d9`
+- b26-02公開派生: 227,538 bytes / 928×1280 / sha256
+  `07347b7e45576de3da564178c5f97cbd98f36e2021f2cf9673b8bc85559af4cd`
+- 公開派生はEXIF / GPS / IPTC / XMP / ICCなし。metadata除去以外は
+  crop・mask・scale・rotate・アップスケール・縦横比変更なし
+- AI生成・AI補正・顔加工・人物削除・generative fill・outpaintingなし
+- b26-02にDM・通知・閲覧者名・コメント・端末情報は見当たらない。ページ上の
+  Patonロゴ、写真、番号、SNSボタン、本人の名前・プロフィールだけを元構図のまま掲載する
+- b26-01とb26-02は同じ写真を含むが、前者は人物が主役の代表写真、後者は投票先の
+  ページ文脈を示す記録画像として役割を分け、無意味な複製としては扱わない

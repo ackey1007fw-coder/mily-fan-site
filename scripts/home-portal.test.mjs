@@ -4,8 +4,11 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import { activities } from "../src/data/activities.ts";
+import { contest } from "../src/data/contest.ts";
+import { links } from "../src/data/links.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { visibleStories } from "../src/data/stories.ts";
+import { supportEvents } from "../src/data/supportEvents.ts";
 import {
   selectGalleryEntries,
   selectGalleryPreview,
@@ -24,9 +27,9 @@ import {
   HOME_RADIO_LEAD,
   HOME_STORY_ARCHIVE_CTA,
   HOME_STORY_LIMIT,
-  HOME_VOTE_CTA,
   NEWS_ARCHIVE_INITIAL,
   NEWS_ARCHIVE_ROUTE,
+  selectHomeVoteAction,
   STORIES_ARCHIVE_ROUTE,
   SUPPORT_GATEWAY_CTA,
   SUPPORT_HUB_ROUTE,
@@ -91,32 +94,37 @@ describe("home portal information architecture", () => {
     );
   });
 
-  it("makes vote the strongest home CTA without claiming an unverified voting window", () => {
+  it("makes the confirmed live vote the strongest home CTA and expires it safely", () => {
     const hero = source("src/components/Hero.tsx");
     const dock = source("src/components/MobileActionDock.tsx");
-    assert.equal(HOME_VOTE_CTA, "みりぃに投票する");
-    assert.match(hero, /HOME_VOTE_CTA/);
-    assert.match(hero, /contest\.entryUrl/);
+    const active = selectHomeVoteAction({
+      contest,
+      supportEvents,
+      links,
+      now: Date.parse("2026-08-26T18:00:00+09:00"),
+    });
+    const ended = selectHomeVoteAction({
+      contest,
+      supportEvents,
+      links,
+      now: Date.parse("2026-09-01T23:59:00+09:00") + 1,
+    });
+    assert.equal(active.label, "Patonでみりぃに投票する");
+    assert.equal(active.url, "https://paton.jp/event/entrant/11380");
+    assert.equal(ended.url, contest.entryUrl);
+    assert.match(hero, /selectHomeVoteAction/);
+    assert.match(hero, /voteAction\.url/);
+    assert.match(hero, /voteAction\.label/);
     assert.match(hero, /min-h-12/);
     assert.match(hero, /w-full/);
     assert.match(hero, /最新情報を見る/);
     assert.match(hero, /応援・予定/);
-    assert.match(dock, /HOME_VOTE_CTA/);
-    assert.match(dock, /contest\.entryUrl/);
+    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /voteAction\.url/);
+    assert.match(dock, /voteAction\.label/);
     assert.match(dock, /応援・予定/);
-    assert.doesNotMatch(
-      code("src/components/Hero.tsx"),
-      /投票受付中|投票期間|投票回数|開始時刻|終了時刻/,
-    );
-    assert.doesNotMatch(
-      code("src/components/MobileActionDock.tsx"),
-      /投票受付中|投票期間|投票回数|開始時刻|終了時刻/,
-    );
-    assert.doesNotMatch(code("src/components/Hero.tsx"), /2026\.misscircle\.jp/);
-    assert.doesNotMatch(
-      code("src/components/MobileActionDock.tsx"),
-      /2026\.misscircle\.jp/,
-    );
+    assert.doesNotMatch(code("src/components/Hero.tsx"), /paton\.jp|2026\.misscircle\.jp/);
+    assert.doesNotMatch(code("src/components/MobileActionDock.tsx"), /paton\.jp|2026\.misscircle\.jp/);
   });
 
   it("limits home Latest / STORY / Gallery and leaves archive routes as the full lists", () => {
