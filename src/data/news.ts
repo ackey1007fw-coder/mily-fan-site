@@ -28,6 +28,10 @@ import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSp
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
+import {
+  campusGirlsPatonPageImage,
+  campusGirlsPatonPortraitImage,
+} from "./campusGirlsPatonImages.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -162,6 +166,8 @@ https://mixch.tv/m/ZY4hSt3K`,
     ],
     url: "https://paton.jp/event/entrant/11380",
     ctaLabel: "Patonでみりぃに投票する",
+    media: campusGirlsPatonPortraitImage,
+    additionalMedia: [campusGirlsPatonPageImage],
   },
   {
     id: "2026-08-24-makeup-stream",

@@ -41,7 +41,14 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     ]);
     assert.equal(entry.url, "https://paton.jp/event/entrant/11380");
     assert.equal(entry.ctaLabel, "Patonでみりぃに投票する");
-    assert.equal(entry.media, undefined);
+    assert.equal(
+      entry.media?.src,
+      "/media/news/mily-b26-01-campus-girls-paton-portrait.jpg",
+    );
+    assert.deepEqual(
+      entry.additionalMedia?.map(({ src }) => src),
+      ["/media/news/mily-b26-02-campus-girls-paton-page.jpg"],
+    );
     assert.deepEqual(verifyNews(news), []);
   });
 
@@ -130,7 +137,10 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
-    assert.equal(entry.image, undefined);
+    assert.equal(
+      entry.image,
+      "https://mily-fan-site.vercel.app/media/news/mily-b26-01-campus-girls-paton-portrait.jpg",
+    );
   });
 
   it("documents the now-confirmed Paton vote destination", async () => {
