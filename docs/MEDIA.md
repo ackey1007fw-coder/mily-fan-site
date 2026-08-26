@@ -1643,7 +1643,7 @@ photo set へ追加する。b27-01 / b27-02 の動画はこれまでどおり
 | b27-01 poster | `gallery/mily-b27-01-paton-vote-collage-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
 | b27-02 | `gallery/mily-b27-02-paton-vote-mirror.mp4` | 鏡自撮りと「18:00〜投票できるようになるぞ〜」案内。720×1280 / 5.000秒。owner-provided | ✅ Latest / NEWS（同じカードの動画）+ Gallery。`patonVoteMirrorStoryVideo.json` を共有 |
 | b27-02 poster | `gallery/mily-b27-02-paton-vote-mirror-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
-| b27-03 | `news/mily-b27-03-morning-stream-thanks.jpg` | 配信への感謝を書いた白い縦長グラフィック。3870×6879。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
+| b27-03 | `news/mily-b27-03-morning-stream-thanks.jpg` | 配信への感謝を書いた白い縦長グラフィック。元素材相当 3870×6879。表示は 480 / 960 / 1600 の jpg+webp 派生。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
 | b27-04 | `news/mily-b27-04-instagram-followers-400.mp4` | フォロワー400人への感謝。720×1280 / 5.000秒。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
 | b27-04 poster | `news/mily-b27-04-instagram-followers-400-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ NEWS専用 |
 | b27-06 | `gallery/mily-b27-06-paton-vote-collage-still-{480,960,1600}.{jpg,webp}` | b27-01 の 2.0秒地点の実フレーム。720×1280。owner-provided。`pnpm media:build` の jpg q82 / webp q78、withoutEnlargement のため 960 と 1600 は同バイト | ✅ Gallery photo（`media.ts`）+ Latest / NEWS（投票カードの2枚目）。動画ファイルは複製していない |
@@ -1676,6 +1676,22 @@ b27-02 poster: 49,122 bytes / 720×1280 JPEG / sha256
 
 b27-03 公開JPEG: 872,631 bytes / 3870×6879 / progressive / 4:4:4 / sha256
 `884428f7b233b753b216501097c56ce533f45aa713e49cf04536e042ba17d059`
+
+b27-03 表示派生は Gallery と同じ `jpg q82 mozjpeg` + `webp q78`。NEWS カードの
+`src` は `-1600.jpg`。元素材相当の公開JPEGは残し、上書きしない。
+
+- 480.jpg 20,741 bytes / 480×853 / sha256
+  `618954c90b839ca562d7b07397f2a88edb7e00a0006e3e2ced0d143377b4c6df`
+- 480.webp 15,404 bytes / sha256
+  `02cb8d80a48d93d8a94ed589753bca5d21a5213b5308a23a4289eb2620723d1b`
+- 960.jpg 51,086 bytes / 960×1706 / sha256
+  `158bd5ac83b72497d35c984ca44ca2fbba7ed92f250ef7d7026833a9116e7838`
+- 960.webp 33,950 bytes / sha256
+  `4cc66b0d8f2169f80c93c869aef12cf400e5443c31b32c1e500c55ee83eb84f8`
+- 1600.jpg 93,716 bytes / 1600×2844 / sha256
+  `cdb1f169f298688e628659878bcc6d2f757d47b6b972e11ffa5d0e967b56a90e`
+- 1600.webp 55,096 bytes / sha256
+  `df38a10e0ae92576f8e1168ae2ac305fe705850b95077dfbebec6250bf3c7952`
 
 b27-04 公開MP4: 131,735 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
 150 frames / 5.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /

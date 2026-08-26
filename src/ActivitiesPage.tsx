@@ -2,13 +2,14 @@ import type { ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
+import { NewsImage } from "./components/NewsImage";
 import {
   activities,
   type Activity,
   type ActivityId,
 } from "./data/activities";
 import { contest } from "./data/contest";
-import type { NewsItem } from "./data/news";
+import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
   selectActivityHighlights,
   selectActivityPageContent,
@@ -491,6 +492,10 @@ function activityMediaKey(media: ActivityMediaItem): string {
   return media.src;
 }
 
+function isNewsImageMedia(media: ActivityMediaItem): media is NewsImageMedia {
+  return media.kind === "image" && "srcSet" in media;
+}
+
 function ActivityMedia({ items }: { items: ActivityMediaItem[] }) {
   if (items.length === 0) return null;
   return (
@@ -512,6 +517,11 @@ function ActivityMedia({ items }: { items: ActivityMediaItem[] }) {
                   preload="none"
                   aria-label={mediaLabel(media)}
                   className="mx-auto aspect-[9/16] max-h-[70vh] w-full rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+                />
+              ) : isNewsImageMedia(media) ? (
+                <NewsImage
+                  media={media}
+                  className="max-h-[42rem] w-full rounded-xl bg-sage-soft/30 object-contain"
                 />
               ) : (
                 <img

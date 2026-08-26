@@ -64,6 +64,10 @@ export type NewsImageMedia = {
   width: number;
   height: number;
   alt: string;
+  /** Optional Gallery-style srcset. Absent images keep a single `src`. */
+  srcSet?: string;
+  webpSrcSet?: string;
+  sizes?: string;
 };
 
 /** Mixch outbound player. Distinct from self-hosted `kind: "video"` which has an mp4 `src`. */

@@ -65,6 +65,7 @@ const COLLAGE_POSTER = "/media/gallery/mily-b27-01-paton-vote-collage-poster.jpg
 const MIRROR_MP4 = "/media/gallery/mily-b27-02-paton-vote-mirror.mp4";
 const MIRROR_POSTER = "/media/gallery/mily-b27-02-paton-vote-mirror-poster.jpg";
 const THANKS_JPG = "/media/news/mily-b27-03-morning-stream-thanks.jpg";
+const THANKS_DISPLAY_JPG = "/media/news/mily-b27-03-morning-stream-thanks-1600.jpg";
 const FOLLOWERS_MP4 = "/media/news/mily-b27-04-instagram-followers-400.mp4";
 const FOLLOWERS_POSTER = "/media/news/mily-b27-04-instagram-followers-400-poster.jpg";
 const COLLAGE_STILL_BASE = "/media/gallery/mily-b27-06-paton-vote-collage-still";
@@ -82,6 +83,18 @@ const MIRROR_POSTER_SHA256 =
   "c861d6487ee07a19390cf50bf0a1db316ddf05fdb81d8c79b2b049b8b665a740";
 const THANKS_SHA256 =
   "884428f7b233b753b216501097c56ce533f45aa713e49cf04536e042ba17d059";
+const THANKS_480_JPG_SHA256 =
+  "618954c90b839ca562d7b07397f2a88edb7e00a0006e3e2ced0d143377b4c6df";
+const THANKS_960_JPG_SHA256 =
+  "158bd5ac83b72497d35c984ca44ca2fbba7ed92f250ef7d7026833a9116e7838";
+const THANKS_1600_JPG_SHA256 =
+  "cdb1f169f298688e628659878bcc6d2f757d47b6b972e11ffa5d0e967b56a90e";
+const THANKS_480_WEBP_SHA256 =
+  "02cb8d80a48d93d8a94ed589753bca5d21a5213b5308a23a4289eb2620723d1b";
+const THANKS_960_WEBP_SHA256 =
+  "4cc66b0d8f2169f80c93c869aef12cf400e5443c31b32c1e500c55ee83eb84f8";
+const THANKS_1600_WEBP_SHA256 =
+  "df38a10e0ae92576f8e1168ae2ac305fe705850b95077dfbebec6250bf3c7952";
 const FOLLOWERS_MP4_SHA256 =
   "f8093200f0705ad347b3bbb768b8fe95d9d7c84e5b568c9b68c394dd1d123082";
 const FOLLOWERS_POSTER_SHA256 =
@@ -472,9 +485,17 @@ describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
     assert.equal(followersItem().additionalMedia, undefined);
 
     assert.equal(morningStreamThanksInstagramStoryImage.kind, "image");
-    assert.equal(morningStreamThanksInstagramStoryImage.src, THANKS_JPG);
-    assert.equal(morningStreamThanksInstagramStoryImage.width, 3870);
-    assert.equal(morningStreamThanksInstagramStoryImage.height, 6879);
+    assert.equal(morningStreamThanksInstagramStoryImage.src, THANKS_DISPLAY_JPG);
+    assert.equal(morningStreamThanksInstagramStoryImage.width, 1600);
+    assert.equal(morningStreamThanksInstagramStoryImage.height, 2844);
+    assert.equal(
+      morningStreamThanksInstagramStoryImage.srcSet,
+      "/media/news/mily-b27-03-morning-stream-thanks-480.jpg 480w, /media/news/mily-b27-03-morning-stream-thanks-960.jpg 960w, /media/news/mily-b27-03-morning-stream-thanks-1600.jpg 1600w",
+    );
+    assert.equal(
+      morningStreamThanksInstagramStoryImage.webpSrcSet,
+      "/media/news/mily-b27-03-morning-stream-thanks-480.webp 480w, /media/news/mily-b27-03-morning-stream-thanks-960.webp 960w, /media/news/mily-b27-03-morning-stream-thanks-1600.webp 1600w",
+    );
     assert.equal("sourceUrl" in morningStreamThanksInstagramStoryImage, false);
 
     assert.equal(followers400StoryVideo.kind, "video");
@@ -530,6 +551,29 @@ describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
     assert.equal(thanksMeta.icc, undefined);
     assert.equal(thanksMeta.chromaSubsampling, "4:4:4");
     assert.equal(thanksMeta.isProgressive, true);
+
+    for (const [relative, width, height, digest] of [
+      ["mily-b27-03-morning-stream-thanks-480.jpg", 480, 853, THANKS_480_JPG_SHA256],
+      ["mily-b27-03-morning-stream-thanks-960.jpg", 960, 1706, THANKS_960_JPG_SHA256],
+      ["mily-b27-03-morning-stream-thanks-1600.jpg", 1600, 2844, THANKS_1600_JPG_SHA256],
+      ["mily-b27-03-morning-stream-thanks-480.webp", 480, 853, THANKS_480_WEBP_SHA256],
+      ["mily-b27-03-morning-stream-thanks-960.webp", 960, 1706, THANKS_960_WEBP_SHA256],
+      ["mily-b27-03-morning-stream-thanks-1600.webp", 1600, 2844, THANKS_1600_WEBP_SHA256],
+    ]) {
+      const file = path.join(root, "public/media/news", relative);
+      const meta = await sharp(file).metadata();
+      assert.equal(existsSync(file), true, relative);
+      assert.equal(meta.width, width, relative);
+      assert.equal(meta.height, height, relative);
+      assert.equal(meta.exif, undefined, relative);
+      assert.equal(await sha256(file), digest, relative);
+    }
+
+    const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
+    const newsImage = await readFile(path.join(root, "src/components/NewsImage.tsx"), "utf8");
+    assert.match(latest, /NewsImage/);
+    assert.match(newsImage, /webpSrcSet/);
+    assert.match(newsImage, /srcSet=\{media\.srcSet\}/);
 
     const followersInfo = await probe(followersFile);
     assert.equal(followersInfo.format.duration, "5.000000");
@@ -615,6 +659,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.equal(docs.includes(COLLAGE_MP4_SHA256), true);
     assert.equal(docs.includes(MIRROR_MP4_SHA256), true);
     assert.equal(docs.includes(THANKS_SHA256), true);
+    assert.equal(docs.includes(THANKS_1600_JPG_SHA256), true);
     assert.equal(docs.includes(FOLLOWERS_MP4_SHA256), true);
     assert.equal(docs.includes(COLLAGE_STILL_960_SHA256), true);
     assert.equal(docs.includes(MIRROR_STILL_960_SHA256), true);
@@ -670,7 +715,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     );
     assert.equal(
       thanksFeed.image,
-      new URL(THANKS_JPG, siteOrigin()).href,
+      new URL(THANKS_DISPLAY_JPG, siteOrigin()).href,
     );
     assert.equal(
       followersFeed.image,

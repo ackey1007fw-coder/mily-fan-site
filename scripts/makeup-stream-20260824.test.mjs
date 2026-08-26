@@ -349,7 +349,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     );
     assert.equal(
       liveMedia[1]?.src,
-      "/media/news/mily-b27-03-morning-stream-thanks.jpg",
+      "/media/news/mily-b27-03-morning-stream-thanks-1600.jpg",
     );
     assert.equal(liveMedia[2]?.src, PHOTO);
     assert.ok(

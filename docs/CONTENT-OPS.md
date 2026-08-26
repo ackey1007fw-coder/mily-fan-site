@@ -144,6 +144,8 @@ Latest のカード内に1枚だけ自己ホストで出してよい。
 - 公開ファイルは `public/media/news/mily-bNN-NN-<slug>.jpg`。台帳は `docs/MEDIA.md`（バッチ単位）。
 - `news.ts` の `media` に `kind: "image"` として `src` / `width` / `height` / `alt` を書く。
   `width` / `height` は実寸。表示は縦横比を保った `object-contain` 相当で、トリミングしない。
+- カード表示より明らかに大きい NEWS 専用静止画は、Gallery と同じ 480 / 960 / 1600 の
+  jpg+webp 派生を `srcSet` / `webpSrcSet` で出す。公開済みの元素材相当ファイルは上書きしない。
 - `alt` は状況の説明（外見の評価は書かない）。
 - 通常のSNS投稿写真は Gallery（`media.ts`）へ自動的・無条件には追加しない。本人写真をオーナー確認済みでGallery掲載する場合は追加してよい。
 - 縦写真をGalleryへ追加するときは、実画像の縦横比に対応する `MediaItem.aspect` を設定し、既定4:3への不自然なクロップを避ける。
