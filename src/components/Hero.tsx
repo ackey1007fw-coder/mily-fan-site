@@ -5,7 +5,7 @@ import { news, sortNewsByDateDesc } from "../data/news";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
 import { supportEvents } from "../data/supportEvents";
-import { selectHomeVoteAction } from "../lib/homePortal";
+import { selectHomeVoteActions } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
@@ -15,12 +15,13 @@ export function Hero() {
   const photo = featuredPhoto();
   const latest = sortNewsByDateDesc(news)[0];
   const now = useSupportEventClock();
-  const voteAction = selectHomeVoteAction({
+  const voteActions = selectHomeVoteActions({
     contest,
     supportEvents,
     links,
     now,
   });
+  const [voteAction, ...additionalVoteActions] = voteActions;
   const seasideCircleTikTok = links.find(
     (link) => link.id === "fm-smw-ssc-tiktok",
   );
@@ -54,12 +55,23 @@ export function Hero() {
             ラジオ、配信、コンテスト。みりぃの今をひとつに。
           </p>
           <div className="mt-8 flex flex-col gap-3">
-            <ExternalLink
-              href={voteAction.url}
-              className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white shadow-card hover:bg-sage-deep sm:w-auto sm:min-w-[18rem]"
-            >
-              {voteAction.label}
-            </ExternalLink>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <ExternalLink
+                href={voteAction.url}
+                className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white shadow-card hover:bg-sage-deep sm:w-auto sm:min-w-[18rem]"
+              >
+                {voteAction.label}
+              </ExternalLink>
+              {additionalVoteActions.map((action) => (
+                <ExternalLink
+                  key={action.url}
+                  href={action.url}
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-6 py-3 text-base font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
+                >
+                  {action.label}
+                </ExternalLink>
+              ))}
+            </div>
             <div className="flex flex-wrap gap-3">
               <a
                 href="#latest"
@@ -75,14 +87,18 @@ export function Hero() {
               </a>
             </div>
           </div>
-          <p className="mt-3 text-xs text-ink-muted">
-            {voteAction.title}
-          </p>
-          {voteAction.note ? (
-            <p className="mt-1 text-xs leading-5 text-ink-muted">
-              {voteAction.note}
-            </p>
-          ) : null}
+          <div className="mt-3 space-y-2">
+            {voteActions.map((action) => (
+              <div key={action.url}>
+                <p className="text-xs text-ink-muted">{action.title}</p>
+                {action.note ? (
+                  <p className="mt-1 text-xs leading-5 text-ink-muted">
+                    {action.note}
+                  </p>
+                ) : null}
+              </div>
+            ))}
+          </div>
           <Socials />
           {seasideCircleTikTok ? (
             <div

@@ -31,14 +31,14 @@ async function read(relative) {
 describe("primary support funnel", () => {
   it("keeps the time-aware primary vote CTA in the hero", async () => {
     const hero = await read("src/components/Hero.tsx");
-    assert.match(hero, /selectHomeVoteAction/);
+    assert.match(hero, /selectHomeVoteActions/);
     assert.match(hero, /voteAction\.url/);
     assert.match(hero, /voteAction\.label/);
   });
 
   it("keeps the time-aware vote CTA in the compact support gateway", async () => {
     const support = await read("src/components/Support.tsx");
-    assert.match(support, /selectHomeVoteAction/);
+    assert.match(support, /selectHomeVoteActions/);
     assert.match(support, /voteAction\.url/);
     assert.match(support, /SUPPORT_HUB_ROUTE/);
   });
@@ -46,7 +46,7 @@ describe("primary support funnel", () => {
   it("keeps the time-aware vote CTA in the mobile action dock", async () => {
     const dock = await read("src/components/MobileActionDock.tsx");
     const app = await read("src/App.tsx");
-    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /selectHomeVoteActions/);
     assert.match(dock, /voteAction\.url/);
     assert.match(dock, /noopener noreferrer/);
     assert.match(dock, /sm:hidden/);
@@ -292,7 +292,7 @@ describe("entry url consistency", () => {
       "src/components/MobileActionDock.tsx",
     ]) {
       const source = await read(relative);
-      assert.match(source, /selectHomeVoteAction/);
+      assert.match(source, /selectHomeVoteActions/);
       assert.doesNotMatch(source, /paton\.jp/);
     }
   });

@@ -194,15 +194,17 @@ describe("P6 mobile action dock", () => {
     assert.match(dock, /safe-area-inset-bottom/);
     assert.match(dock, /sm:hidden/);
     assert.match(dock, /min-h-11/);
-    // 2ボタン1段を維持する（3つに増やさない）
-    assert.equal((dock.match(/<a\b/g) ?? []).length, 2);
+    // Paton・MISS CIRCLE・Supportを両立しても1段に収める
+    assert.equal((dock.match(/<a\b/g) ?? []).length, 3);
+    assert.match(dock, /min-w-0 flex-1/);
+    assert.doesNotMatch(dock, /flex-wrap/);
     // 固定ドックの分だけ本文の下に余白を残す
     assert.match(source("src/App.tsx"), /pb-20/);
   });
 
   it("takes the time-aware primary vote action from the shared selector", () => {
     const dock = source("src/components/MobileActionDock.tsx");
-    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /selectHomeVoteActions/);
     assert.match(dock, /voteAction\.url/);
     assert.match(dock, /voteAction\.label/);
     assert.doesNotMatch(dock, /paton\.jp|2026\.misscircle\.jp/);
@@ -214,7 +216,7 @@ describe("P6 SSOT reuse and duplication", () => {
     const support = source("src/components/Support.tsx");
     assert.doesNotMatch(support, /VOTE_URL/);
     assert.doesNotMatch(support, /paton\.jp|2026\.misscircle\.jp/);
-    assert.match(support, /selectHomeVoteAction/);
+    assert.match(support, /selectHomeVoteActions/);
     assert.match(support, /voteAction\.url/);
   });
 

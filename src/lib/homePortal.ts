@@ -40,6 +40,16 @@ export type HomeVoteAction = {
   note?: string;
 };
 
+function contestVoteAction(contest: Contest): HomeVoteAction {
+  return {
+    kind: "contest",
+    label: `${contest.entryNumber}を見る`,
+    url: contest.entryUrl,
+    title: contest.contestName,
+    ...(contest.currentPhase ? { note: contest.currentPhase.name } : {}),
+  };
+}
+
 /**
  * 期間中の確認済み投票をホームの最優先CTAにする。
  * 終了後は古い投票を案内せず、常設のMISS CIRCLE ENTRY導線へ戻す。
@@ -76,15 +86,22 @@ export function selectHomeVoteAction(input: {
     };
   }
 
-  return {
-    kind: "contest",
-    label: `${input.contest.entryNumber}を見る`,
-    url: input.contest.entryUrl,
-    title: input.contest.contestName,
-    ...(input.contest.currentPhase
-      ? { note: input.contest.currentPhase.name }
-      : {}),
-  };
+  return contestVoteAction(input.contest);
+}
+
+/**
+ * 期間限定の投票がある間も、常設のMISS CIRCLE ENTRY導線を消さない。
+ * 同じURLは重ねず、期間限定投票を先頭にして両方の応援先を返す。
+ */
+export function selectHomeVoteActions(
+  input: Parameters<typeof selectHomeVoteAction>[0],
+): [HomeVoteAction, ...HomeVoteAction[]] {
+  const primary = selectHomeVoteAction(input);
+  const contestAction = contestVoteAction(input.contest);
+
+  return primary.url === contestAction.url
+    ? [primary]
+    : [primary, contestAction];
 }
 
 export {
