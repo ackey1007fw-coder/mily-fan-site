@@ -15,7 +15,10 @@ import {
   isValidSupportEvent,
   supportEvents,
 } from "../src/data/supportEvents.ts";
-import { selectHomeVoteAction } from "../src/lib/homePortal.ts";
+import {
+  selectHomeVoteAction,
+  selectHomeVoteActions,
+} from "../src/lib/homePortal.ts";
 import { selectActivityResources } from "../src/lib/activityContent.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
@@ -78,6 +81,24 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       ],
     );
     assert.equal(select(END + 1).url, contest.entryUrl);
+  });
+
+  it("keeps Paton and MISS CIRCLE available together during the confirmed period", () => {
+    const select = (now) =>
+      selectHomeVoteActions({ contest, supportEvents, links, now }).map(
+        ({ kind, url }) => ({ kind, url }),
+      );
+
+    const contestOnly = [{ kind: "contest", url: contest.entryUrl }];
+    const both = [
+      { kind: "support-event", url: PATON_URL },
+      { kind: "contest", url: contest.entryUrl },
+    ];
+
+    assert.deepEqual(select(START - 1), contestOnly);
+    assert.deepEqual(select(START), both);
+    assert.deepEqual(select(END), both);
+    assert.deepEqual(select(END + 1), contestOnly);
   });
 
   it("schedules a render refresh at both voting boundaries", () => {
@@ -159,9 +180,10 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       "src/components/MobileActionDock.tsx",
     ]) {
       const component = await source(relative);
-      assert.match(component, /selectHomeVoteAction/);
+      assert.match(component, /selectHomeVoteActions/);
       assert.match(component, /useSupportEventClock/);
       assert.match(component, /voteAction\.url/);
+      assert.match(component, /additionalVoteActions/);
       assert.doesNotMatch(component, /paton\.jp/);
     }
 

@@ -112,14 +112,14 @@ describe("home portal information architecture", () => {
     assert.equal(active.label, "Patonでみりぃに投票する");
     assert.equal(active.url, "https://paton.jp/event/entrant/11380");
     assert.equal(ended.url, contest.entryUrl);
-    assert.match(hero, /selectHomeVoteAction/);
+    assert.match(hero, /selectHomeVoteActions/);
     assert.match(hero, /voteAction\.url/);
     assert.match(hero, /voteAction\.label/);
     assert.match(hero, /min-h-12/);
     assert.match(hero, /w-full/);
     assert.match(hero, /最新情報を見る/);
     assert.match(hero, /応援・予定/);
-    assert.match(dock, /selectHomeVoteAction/);
+    assert.match(dock, /selectHomeVoteActions/);
     assert.match(dock, /voteAction\.url/);
     assert.match(dock, /voteAction\.label/);
     assert.match(dock, /応援・予定/);

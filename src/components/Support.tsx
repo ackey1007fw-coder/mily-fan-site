@@ -1,7 +1,7 @@
 import { contest } from "../data/contest";
 import { links } from "../data/links";
 import { supportEvents } from "../data/supportEvents";
-import { selectHomeVoteAction } from "../lib/homePortal";
+import { selectHomeVoteActions } from "../lib/homePortal";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
@@ -13,16 +13,17 @@ import { ExternalLink } from "./ExternalLink";
  * Support全体の正規Hubは `/support/`。ホームでは Support Hub を複製せず、
  * 「今できる応援 / 確認済みの予定 / 日程発表待ち」への入口だけを置く。
  * Support Calendar の中身はここへ複製しない。
- * 投票先は supportEvents / links の確認済み期間を参照し、終了後はENTRYへ戻す。
+ * 投票先は supportEvents / links の確認済み期間を参照し、期間中もENTRYを併記する。
  */
 export function Support() {
   const now = useSupportEventClock();
-  const voteAction = selectHomeVoteAction({
+  const voteActions = selectHomeVoteActions({
     contest,
     supportEvents,
     links,
     now,
   });
+  const [voteAction, ...additionalVoteActions] = voteActions;
 
   return (
     <section id="support" className={`${SECTION_ANCHOR_OFFSET} px-4 py-6`}>
@@ -47,11 +48,27 @@ export function Support() {
           >
             {voteAction.label}
           </ExternalLink>
+          {additionalVoteActions.map((action) => (
+            <ExternalLink
+              key={action.url}
+              href={action.url}
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+            >
+              {action.label}
+            </ExternalLink>
+          ))}
         </div>
-        {voteAction.kind === "support-event" && voteAction.note ? (
-          <p className="mt-3 text-xs leading-5 text-ink-muted">
-            {voteAction.note}
-          </p>
+        {voteActions.some(({ note }) => note) ? (
+          <div className="mt-3 space-y-1">
+            {voteActions.map((action) =>
+              action.note ? (
+                <p key={action.url} className="text-xs leading-5 text-ink-muted">
+                  <span className="font-medium">{action.label}:</span>{" "}
+                  {action.note}
+                </p>
+              ) : null,
+            )}
+          </div>
         ) : null}
       </div>
     </section>

@@ -127,7 +127,7 @@ describe("support and empty schedule", () => {
     assert.match(support, /SUPPORT_HUB_ROUTE/);
     assert.match(support, /応援・予定を見る/);
     // 期間中の投票は共有selectorから読み、終了後のENTRY fallbackも同じ場所で決める。
-    assert.match(support, /selectHomeVoteAction/);
+    assert.match(support, /selectHomeVoteActions/);
     assert.match(support, /voteAction\.url/);
     assert.match(support, /voteAction\.label/);
     assert.doesNotMatch(support, /paton\.jp|2026\.misscircle\.jp/);
