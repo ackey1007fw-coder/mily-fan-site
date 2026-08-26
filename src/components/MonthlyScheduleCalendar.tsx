@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildMonthGrid,
   expandScheduleItemsByDate,
+  monthDateBounds,
   navigableMonthBounds,
   scheduleCategory,
   shiftMonthKey,
@@ -83,9 +84,10 @@ export function MonthlyScheduleCalendar({
   const previousToday = useRef(today);
   const previousTodayMonth = useRef(todayMonth);
   const cells = useMemo(() => buildMonthGrid(visibleMonth), [visibleMonth]);
+  const visibleRange = useMemo(() => monthDateBounds(visibleMonth), [visibleMonth]);
   const itemsByDate = useMemo(
-    () => expandScheduleItemsByDate(calendar.days),
-    [calendar.days],
+    () => expandScheduleItemsByDate(calendar.days, visibleRange),
+    [calendar.days, visibleRange],
   );
   const { minMonth, maxMonth } = useMemo(() => {
     const itemMonths = calendar.days.flatMap((day) => [

@@ -391,14 +391,14 @@ function adaptRadioProgramForCalendar(
   let startDate = monthStartDate(today);
   let endDate = addCalendarDays(today, daysAhead);
   for (const item of otherItems) {
-    const itemStart = monthStartDate(item.date);
-    const itemEnd = monthEndDate(item.endDate ?? item.date);
-    if (itemStart >= horizon.startDate && itemStart < startDate) {
-      startDate = itemStart;
-    }
-    if (itemEnd <= horizon.endDate && itemEnd > endDate) {
-      endDate = itemEnd;
-    }
+    const overlapping = clampToHorizon(
+      monthStartDate(item.date),
+      monthEndDate(item.endDate ?? item.date),
+      horizon,
+    );
+    if (!overlapping) continue;
+    if (overlapping.startDate < startDate) startDate = overlapping.startDate;
+    if (overlapping.endDate > endDate) endDate = overlapping.endDate;
   }
   const clamped = clampToHorizon(startDate, endDate, horizon);
   if (!clamped) return [];

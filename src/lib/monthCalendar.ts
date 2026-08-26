@@ -148,14 +148,34 @@ export function buildMonthGrid(monthKey: string): MonthGridCell[] {
   });
 }
 
+/** 指定したJST年月の初日と末日。月gridの展開範囲に使う。 */
+export function monthDateBounds(monthKey: string): { start: string; end: string } {
+  const { year, month } = parseMonthKey(monthKey);
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return {
+    start: `${year}-${pad2(month)}-01`,
+    end: `${year}-${pad2(month)}-${pad2(lastDay)}`,
+  };
+}
+
 /**
  * AgendaのScheduleItemを、月間表示のためだけに各civil dateへ索引化する。
  * 元itemはcloneもmutationもせず、期間中の各bucketから同じobjectを参照する。
+ * `range` があるときはその期間だけ展開し、遠隔の endDate で全日ループしない。
  */
 export function expandScheduleItemsByDate(
   days: SupportCalendarResult["days"],
+  range?: { start: string; end: string },
 ): Map<string, ScheduleItem[]> {
+  if (range) {
+    if (!isValidDateOnly(range.start) || !isValidDateOnly(range.end)) {
+      throw new Error("range dates must be YYYY-MM-DD");
+    }
+  }
+
   const result = new Map<string, ScheduleItem[]>();
+  const safetyDays =
+    (MAX_SUPPORT_CALENDAR_MONTHS_AHEAD + MAX_SUPPORT_CALENDAR_MONTHS_BACK) * 31;
 
   for (const day of days) {
     for (const item of day.items) {
@@ -167,11 +187,18 @@ export function expandScheduleItemsByDate(
           ? item.endDate
           : item.date;
 
-      for (
-        let date = item.date;
-        date <= endDate;
-        date = addCivilDays(date, 1)
-      ) {
+      let start = item.date;
+      let end = endDate;
+      if (range) {
+        if (start < range.start) start = range.start;
+        if (end > range.end) end = range.end;
+      } else {
+        const safetyEnd = addCivilDays(item.date, safetyDays);
+        if (end > safetyEnd) end = safetyEnd;
+      }
+      if (start > end) continue;
+
+      for (let date = start; date <= end; date = addCivilDays(date, 1)) {
         const bucket = result.get(date);
         if (bucket) bucket.push(item);
         else result.set(date, [item]);

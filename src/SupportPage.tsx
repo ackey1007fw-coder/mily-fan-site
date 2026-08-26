@@ -192,8 +192,9 @@ function SupportCalendarAgenda({
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
-  const now = useTokyoNow();
-  const today = tokyoDateKey(now);
+  const calendarClock = useTokyoNow();
+  const today = tokyoDateKey(calendarClock);
+  const now = Date.now();
   // radio adapter は now のJST当月1日から、この daysAhead 先まで番組枠を展開する。
   const radioOccurrenceDaysAhead = daysUntilEndOfNextTokyoMonth(now);
   const todayItems = selectSupportToday({

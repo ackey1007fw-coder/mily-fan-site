@@ -266,6 +266,64 @@ describe("monthly Support Calendar grid", () => {
       maxMonth: "2026-09",
     });
   });
+
+  it("clamps a period that crosses the horizon so radio still fills the last navigable month", () => {
+    const now = Date.parse("2026-08-24T12:00:00+09:00");
+    const result = buildSupportCalendar({
+      contest: {
+        contestName: "fixture",
+        entryNumber: "ENTRY fixture",
+        entryUrl: "https://example.com/entry",
+        currentPhase: {
+          name: "pending phase",
+          start: null,
+          end: null,
+          source: "https://example.com/phase",
+        },
+        lastVerifiedAt: "2026-08-24",
+      },
+      supportEvents: [
+        {
+          id: "cross-horizon",
+          activityId: "campus-girls",
+          kind: "support-campaign",
+          title: "cross horizon fixture",
+          schedule: {
+            state: "confirmed-period",
+            start: "2027-08-10",
+            end: "2027-09-20",
+            allDay: true,
+            timezone: "Asia/Tokyo",
+          },
+          source: "https://example.com/cross-horizon",
+          verifiedAt: "2026-08-24",
+        },
+      ],
+      fanEvents: [],
+      streamSlots: [],
+      streamAvailability: "unavailable",
+      includeRadio: true,
+      now,
+      daysAhead: daysUntilEndOfNextTokyoMonth(now),
+    });
+    const radioDates = result.days
+      .flatMap(({ items }) => items)
+      .filter(({ origin }) => origin === "radio-program")
+      .map(({ date }) => date);
+    const itemMonths = result.days.flatMap((day) => [
+      day.date.slice(0, 7),
+      ...day.items
+        .map((item) => item.endDate?.slice(0, 7))
+        .filter((month) => Boolean(month)),
+    ]);
+
+    assert.equal(radioDates.includes("2027-08-29"), true);
+    assert.equal(radioDates.some((date) => date > "2027-08-31"), false);
+    assert.deepEqual(navigableMonthBounds("2026-08", itemMonths), {
+      minMonth: "2026-08",
+      maxMonth: "2027-08",
+    });
+  });
 });
 
 describe("Tokyo now store", () => {
@@ -369,6 +427,33 @@ describe("monthly ScheduleItem expansion", () => {
     assert.equal(grouped.get("2027-01-01")?.includes(crossYear), true);
     assert.equal(grouped.get("2027-01-02")?.includes(crossYear), true);
     assert.equal(grouped.get("2026-08-23"), undefined);
+  });
+
+  it("clamps far-future end dates to the requested month instead of walking every civil day", () => {
+    const far = scheduleItem({
+      key: "far",
+      date: "2026-08-24",
+      endDate: "9999-12-31",
+      span: { start: "2026-08-24", end: "9999-12-31" },
+      timing: "period",
+    });
+    const started = Date.now();
+    const grouped = expandScheduleItemsByDate(
+      [{ date: "2026-08-24", items: [far] }],
+      { start: "2026-08-01", end: "2026-08-31" },
+    );
+    const elapsed = Date.now() - started;
+    const unclamped = expandScheduleItemsByDate([{ date: "2026-08-24", items: [far] }]);
+
+    assert.ok(elapsed < 1_000, `month expansion took ${elapsed}ms`);
+    assert.equal(grouped.has("2026-08-23"), false);
+    assert.equal(grouped.has("2026-08-24"), true);
+    assert.equal(grouped.has("2026-08-31"), true);
+    assert.equal(grouped.has("2026-09-01"), false);
+    assert.equal(grouped.has("9999-12-31"), false);
+    assert.equal(grouped.size, 8);
+    assert.equal(unclamped.has("9999-12-31"), false);
+    assert.ok(unclamped.size < 800);
   });
 
   it("keeps the original ScheduleItem immutable and shared by reference", () => {
@@ -509,6 +594,7 @@ describe("monthly Support Calendar UI source", () => {
       /setSelectedDate\(\(current\) => \(current === previousDate \? today : current\)\)/,
     );
     assert.match(calendar, /navigableMonthBounds\(todayMonth, itemMonths\)/);
+    assert.match(calendar, /expandScheduleItemsByDate\(calendar\.days, visibleRange\)/);
     assert.match(calendar, /disabled=\{!canGoPrev\}/);
     assert.match(calendar, /disabled=\{!canGoNext\}/);
   });
@@ -519,7 +605,9 @@ describe("monthly Support Calendar UI source", () => {
     assert.match(page, /title="みりぃスケジュール"/);
     assert.match(page, /<MonthlyScheduleCalendar calendar=\{calendar\} today=\{today\}/);
     assert.match(page, /useTokyoNow\(\)/);
-    assert.doesNotMatch(page, /const now = Date\.now\(\)/);
+    assert.match(page, /const today = tokyoDateKey\(calendarClock\)/);
+    assert.match(page, /const now = Date\.now\(\)/);
+    assert.match(page, /selectSupportNow\(\{ supportEvents, live, radio, now \}\)/);
     assert.match(page, /daysUntilEndOfNextTokyoMonth\(now\)/);
     assert.doesNotMatch(page, /RADIO_OCCURRENCE_DAYS_AHEAD/);
     assert.match(calendar, /grid-cols-7/);
