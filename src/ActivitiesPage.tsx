@@ -398,6 +398,15 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
                 ) : item.sourceLabel ? (
                   <span className="text-sm font-medium text-ink-muted">{item.sourceLabel}</span>
                 ) : null}
+                {item.additionalSources?.map((source) => (
+                  <ExternalLink
+                    key={source.url}
+                    href={source.url}
+                    className="text-sm font-semibold text-sage hover:underline"
+                  >
+                    {source.label}
+                  </ExternalLink>
+                ))}
                 {resolvedLinks.relatedUrl && resolvedLinks.relatedUrl !== item.source ? (
                   <SmartLink href={resolvedLinks.relatedUrl} className="text-sm font-semibold text-sage hover:underline">
                     関連ページを見る

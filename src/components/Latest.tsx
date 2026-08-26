@@ -99,7 +99,10 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
       {newsDisplayMedia(item).map((media) => (
         <NewsMediaBlock key={`${media.kind}:${media.src}`} media={media} />
       ))}
-      {item.source || item.sourceLabel || resolvedLinks.relatedUrl ? (
+      {item.source ||
+      item.sourceLabel ||
+      item.additionalSources?.length ||
+      resolvedLinks.relatedUrl ? (
         <p className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
           {item.source ? (
             <ExternalLink
@@ -113,6 +116,15 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
               {item.sourceLabel}
             </span>
           ) : null}
+          {item.additionalSources?.map((source) => (
+            <ExternalLink
+              key={source.url}
+              href={source.url}
+              className="text-sm font-medium text-sage hover:underline"
+            >
+              {source.label}
+            </ExternalLink>
+          ))}
           {resolvedLinks.relatedUrl && resolvedLinks.relatedUrl !== item.source ? (
             <NewsLink
               href={resolvedLinks.relatedUrl}
