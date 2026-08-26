@@ -34,6 +34,10 @@ import {
 } from "./campusGirlsPatonImages.ts";
 import { patonVoteCollageStoryVideo } from "./patonVoteCollageStoryVideo.ts";
 import { patonVoteMirrorStoryVideo } from "./patonVoteMirrorStoryVideo.ts";
+import {
+  patonVoteCollageStillImage,
+  patonVoteMirrorStillImage,
+} from "./patonVoteStoryStills.ts";
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
 
@@ -104,8 +108,12 @@ export const news: NewsItem[] = [
     sourceLabel: "Instagram Story",
     url: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
-    media: patonVoteMirrorStoryVideo,
-    additionalMedia: [patonVoteCollageStoryVideo],
+    media: patonVoteMirrorStillImage,
+    additionalMedia: [
+      patonVoteCollageStillImage,
+      patonVoteMirrorStoryVideo,
+      patonVoteCollageStoryVideo,
+    ],
     message: {
       label: "みりぃのStory",
       text: "絶対みんなと本戦行くんだ〜！！！\n\n皆さん、やり方わかりますか？？大丈夫？？",

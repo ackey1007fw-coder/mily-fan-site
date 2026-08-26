@@ -15,9 +15,15 @@ import {
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media } from "../src/data/media.ts";
+import { media, visibleMedia } from "../src/data/media.ts";
 import { followers400StoryVideo } from "../src/data/followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "../src/data/morningStreamThanksInstagramStoryImage.ts";
+import {
+  patonVoteCollageStillImage,
+  patonVoteCollageStillPhoto,
+  patonVoteMirrorStillImage,
+  patonVoteMirrorStillPhoto,
+} from "../src/data/patonVoteStoryStills.ts";
 import { contest } from "../src/data/contest.ts";
 import { events } from "../src/data/events.ts";
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -59,6 +65,10 @@ const MIRROR_POSTER = "/media/gallery/mily-b27-02-paton-vote-mirror-poster.jpg";
 const THANKS_JPG = "/media/news/mily-b27-03-morning-stream-thanks.jpg";
 const FOLLOWERS_MP4 = "/media/news/mily-b27-04-instagram-followers-400.mp4";
 const FOLLOWERS_POSTER = "/media/news/mily-b27-04-instagram-followers-400-poster.jpg";
+const COLLAGE_STILL_BASE = "/media/gallery/mily-b27-06-paton-vote-collage-still";
+const MIRROR_STILL_BASE = "/media/gallery/mily-b27-07-paton-vote-mirror-still";
+const COLLAGE_STILL_JPG = `${COLLAGE_STILL_BASE}-1600.jpg`;
+const MIRROR_STILL_JPG = `${MIRROR_STILL_BASE}-1600.jpg`;
 
 const COLLAGE_MP4_SHA256 =
   "2a7bacbb3efa14cc5c6d56caea9afa2bfb64753125dae8bcf132721824751109";
@@ -74,6 +84,14 @@ const FOLLOWERS_MP4_SHA256 =
   "f8093200f0705ad347b3bbb768b8fe95d9d7c84e5b568c9b68c394dd1d123082";
 const FOLLOWERS_POSTER_SHA256 =
   "ff1b5d2f45863d08cf1ad1bdfe81f0d807dc3e37ee8aa8f8df94010eabecd4a8";
+const COLLAGE_STILL_480_SHA256 =
+  "478594610776b628a6eee4f1517c2c43a3a2fb6c25f92c092e709c2157b144c8";
+const COLLAGE_STILL_960_SHA256 =
+  "cff520e6afa06c3aeb97edbdf07dbe12011e16f27faf071b299c7298f1855b00";
+const MIRROR_STILL_480_SHA256 =
+  "4dcf3f04deeeae5319d1930e6803dab82b877eb35f33e387a38c3f772258c606";
+const MIRROR_STILL_960_SHA256 =
+  "2581df60447825cb9cb7f016957e7020cec79f8abb5f90e7f9006623ea239795";
 
 const VOTE_MESSAGE =
   "絶対みんなと本戦行くんだ〜！！！\n\n皆さん、やり方わかりますか？？大丈夫？？";
@@ -110,6 +128,8 @@ const ORIGINALS = [
   "media/original/mily-b27-02-paton-vote-mirror.mp4",
   "media/original/mily-b27-03-morning-stream-thanks.jpg",
   "media/original/mily-b27-04-instagram-followers-400.mp4",
+  "media/original/mily-b27-06-paton-vote-collage-still.jpg",
+  "media/original/mily-b27-07-paton-vote-mirror-still.jpg",
 ];
 
 function voteItem() {
@@ -294,9 +314,15 @@ describe("2026-08-26 Instagram Stories — shared collage and mirror Gallery vid
     const vote = voteItem();
     const visible = visibleGalleryVideos();
 
-    assert.equal(vote.media, patonVoteMirrorStoryVideo);
-    assert.deepEqual(vote.additionalMedia, [patonVoteCollageStoryVideo]);
+    assert.equal(vote.media, patonVoteMirrorStillImage);
+    assert.deepEqual(vote.additionalMedia, [
+      patonVoteCollageStillImage,
+      patonVoteMirrorStoryVideo,
+      patonVoteCollageStoryVideo,
+    ]);
     assert.deepEqual(newsDisplayMedia(vote), [
+      patonVoteMirrorStillImage,
+      patonVoteCollageStillImage,
       patonVoteMirrorStoryVideo,
       patonVoteCollageStoryVideo,
     ]);
@@ -367,7 +393,70 @@ describe("2026-08-26 Instagram Stories — shared collage and mirror Gallery vid
   });
 });
 
-describe("2026-08-26 Instagram Stories — NEWS-only thanks image and followers video", () => {
+describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
+  it("publishes the mirror and collage stills in media.ts without cropping portraits", () => {
+    const visible = visibleMedia(media);
+
+    assert.equal(media.filter((entry) => entry.id === "mily-b27-07").length, 1);
+    assert.equal(media.filter((entry) => entry.id === "mily-b27-06").length, 1);
+    assert.equal(visible[0], patonVoteMirrorStillPhoto);
+    assert.equal(visible[1], patonVoteCollageStillPhoto);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 20);
+
+    for (const photo of [patonVoteMirrorStillPhoto, patonVoteCollageStillPhoto]) {
+      assert.equal(photo.kind, "photo");
+      assert.equal(photo.published, true);
+      assert.equal(photo.provenance, "owner-provided");
+      assert.equal(photo.sourceUrl, null);
+      assert.equal(photo.sourceDate, "2026-08-26");
+      assert.equal(photo.credit, null);
+      assert.deepEqual(photo.widths, [480, 960, 1600]);
+      assert.equal(photo.width, 720);
+      assert.equal(photo.height, 1280);
+      assert.equal(photo.aspect, "720 / 1280");
+      assert.notEqual(photo.featured, true);
+    }
+    assert.equal(patonVoteMirrorStillPhoto.basePath, MIRROR_STILL_BASE);
+    assert.equal(patonVoteCollageStillPhoto.basePath, COLLAGE_STILL_BASE);
+    assert.equal(patonVoteMirrorStillImage.src, MIRROR_STILL_JPG);
+    assert.equal(patonVoteCollageStillImage.src, COLLAGE_STILL_JPG);
+    assert.equal(patonVoteMirrorStillImage.kind, "image");
+    assert.equal(patonVoteCollageStillImage.kind, "image");
+  });
+
+  it("keeps the committed still derivatives and matches sha256 for 480 and 960 jpg", async () => {
+    for (const [base, w480, w960] of [
+      [COLLAGE_STILL_BASE, COLLAGE_STILL_480_SHA256, COLLAGE_STILL_960_SHA256],
+      [MIRROR_STILL_BASE, MIRROR_STILL_480_SHA256, MIRROR_STILL_960_SHA256],
+    ]) {
+      const jpg480 = publicFile(`${base}-480.jpg`);
+      const jpg960 = publicFile(`${base}-960.jpg`);
+      const jpg1600 = publicFile(`${base}-1600.jpg`);
+      const webp960 = publicFile(`${base}-960.webp`);
+      const webp1600 = publicFile(`${base}-1600.webp`);
+
+      assert.equal(existsSync(jpg480), true, jpg480);
+      assert.equal(existsSync(jpg960), true, jpg960);
+      assert.equal(existsSync(jpg1600), true, jpg1600);
+      assert.equal(await sha256(jpg480), w480);
+      assert.equal(await sha256(jpg960), w960);
+      assert.equal(await sha256(jpg1600), w960);
+      assert.equal(await sha256(webp960), await sha256(webp1600));
+
+      const small = await sharp(jpg480).metadata();
+      const large = await sharp(jpg960).metadata();
+      assert.equal(small.width, 480);
+      assert.equal(small.height, 853);
+      assert.equal(large.width, 720);
+      assert.equal(large.height, 1280);
+      assert.equal(large.exif, undefined);
+      assert.equal(large.iptc, undefined);
+      assert.equal(large.xmp, undefined);
+      assert.equal(large.icc, undefined);
+    }
+  });
+});
+
   it("keeps thanks and followers out of Gallery, media.ts, stories, and highlights", () => {
     assert.equal(thanksItem().media, morningStreamThanksInstagramStoryImage);
     assert.equal(followersItem().media, followers400StoryVideo);
@@ -497,6 +586,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
       "src/data/patonVoteMirrorStoryVideo.json",
       "src/data/followers400StoryVideo.json",
       "src/data/morningStreamThanksInstagramStoryImage.ts",
+      "src/data/patonVoteStoryStills.ts",
       "docs/MEDIA.md",
       "docs/CONTENT-OPS.md",
     ];
@@ -518,6 +608,12 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.equal(docs.includes(MIRROR_MP4_SHA256), true);
     assert.equal(docs.includes(THANKS_SHA256), true);
     assert.equal(docs.includes(FOLLOWERS_MP4_SHA256), true);
+    assert.equal(docs.includes(COLLAGE_STILL_960_SHA256), true);
+    assert.equal(docs.includes(MIRROR_STILL_960_SHA256), true);
+    assert.equal(docs.includes(COLLAGE_STILL_480_SHA256), true);
+    assert.equal(docs.includes(MIRROR_STILL_480_SHA256), true);
+    assert.match(docs, /b27-06/);
+    assert.match(docs, /b27-07/);
     assert.match(docs, /IMG_7435 \/ IMG_7437/);
     assert.match(docs, /b27-05/);
     assert.match(docs, /他出場者・順位/);
@@ -538,7 +634,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.equal(liveNews[0]?.id, THANKS_NEWS_ID);
     assert.ok(liveNews.some((entry) => entry.id === STREAM_NEWS_ID));
     assert.equal(campusNews.some((entry) => entry.id === FOLLOWERS_NEWS_ID), false);
-    assert.equal(campusMedia[0], patonVoteMirrorStoryVideo);
+    assert.equal(campusMedia[0], patonVoteMirrorStillImage);
     assert.equal(liveMedia[0], morningStreamThanksInstagramStoryImage);
     assert.equal(
       liveMedia.some((entry) => String(entry.src).includes("b27-04")),
@@ -556,7 +652,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.equal(voteFeed.sourceUrl, INSTAGRAM_PROFILE);
     assert.equal(
       voteFeed.image,
-      new URL(MIRROR_POSTER, siteOrigin()).href,
+      new URL(MIRROR_STILL_JPG, siteOrigin()).href,
     );
     assert.equal(
       thanksFeed.image,

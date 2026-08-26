@@ -12,6 +12,11 @@
  *   Keep them null rather than guessing; docs/MEDIA.md tracks what is
  *   still unconfirmed.
  */
+import {
+  patonVoteCollageStillPhoto,
+  patonVoteMirrorStillPhoto,
+} from "./patonVoteStoryStills.ts";
+
 export type MediaKind = "photo" | "video";
 
 export type MediaProvenance =
@@ -61,6 +66,8 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  patonVoteMirrorStillPhoto,
+  patonVoteCollageStillPhoto,
   {
     id: "mily-b22-01",
     kind: "photo",

@@ -1612,18 +1612,22 @@ b27-05（Patonアプリの投票操作録画）は非掲載。他出場者・順
 
 投票CTA（`Patonでみりぃに投票する`）は既存NEWS
 `2026-08-24-campus-girls-final-stage-guide` に残し、このbatchのNEWSへは付けない。
-`events.ts` / `streamSchedule.ts` / `media.ts` / highlights / 新しい `/stories/`
-記事は追加していない。
+`events.ts` / `streamSchedule.ts` / highlights / 新しい `/stories/`
+記事は追加していない。b27-06 / b27-07 の静止画だけ `media.ts` の Gallery
+photo set へ追加する。b27-01 / b27-02 の動画はこれまでどおり
+`galleryVideos.ts`。b27-03 / b27-04 は NEWS 専用のまま Gallery に載せない。
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b27-01 | `gallery/mily-b27-01-paton-vote-collage.mp4` | クマ耳フィルターの4枚コラージュ。予選ファイナルの毎日投票案内。720×1280 / 20.000秒。owner-provided | ✅ Latest / NEWS（同じカードの2枚目）+ Gallery。`patonVoteCollageStoryVideo.json` を共有 |
+| b27-01 | `gallery/mily-b27-01-paton-vote-collage.mp4` | クマ耳フィルターの4枚コラージュ。予選ファイナルの毎日投票案内。720×1280 / 20.000秒。owner-provided | ✅ Latest / NEWS（同じカードの動画）+ Gallery。`patonVoteCollageStoryVideo.json` を共有 |
 | b27-01 poster | `gallery/mily-b27-01-paton-vote-collage-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
-| b27-02 | `gallery/mily-b27-02-paton-vote-mirror.mp4` | 鏡自撮りと「18:00〜投票できるようになるぞ〜」案内。720×1280 / 5.000秒。owner-provided | ✅ Latest / NEWS代表 + Gallery。`patonVoteMirrorStoryVideo.json` を共有 |
+| b27-02 | `gallery/mily-b27-02-paton-vote-mirror.mp4` | 鏡自撮りと「18:00〜投票できるようになるぞ〜」案内。720×1280 / 5.000秒。owner-provided | ✅ Latest / NEWS（同じカードの動画）+ Gallery。`patonVoteMirrorStoryVideo.json` を共有 |
 | b27-02 poster | `gallery/mily-b27-02-paton-vote-mirror-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / Gallery |
 | b27-03 | `news/mily-b27-03-morning-stream-thanks.jpg` | 配信への感謝を書いた白い縦長グラフィック。3870×6879。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
 | b27-04 | `news/mily-b27-04-instagram-followers-400.mp4` | フォロワー400人への感謝。720×1280 / 5.000秒。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
 | b27-04 poster | `news/mily-b27-04-instagram-followers-400-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ NEWS専用 |
+| b27-06 | `gallery/mily-b27-06-paton-vote-collage-still-{480,960,1600}.{jpg,webp}` | b27-01 の 2.0秒地点の実フレーム。720×1280。owner-provided。`pnpm media:build` の jpg q82 / webp q78、withoutEnlargement のため 960 と 1600 は同バイト | ✅ Gallery photo（`media.ts`）+ Latest / NEWS（投票カードの2枚目）。動画ファイルは複製していない |
+| b27-07 | `gallery/mily-b27-07-paton-vote-mirror-still-{480,960,1600}.{jpg,webp}` | b27-02 の 1.0秒地点の実フレーム。720×1280。owner-provided。960 と 1600 は同バイト | ✅ Gallery photo（`media.ts`）+ Latest / NEWS代表。動画ファイルは複製していない |
 | （非掲載） | IMG_7435 / IMG_7437 Story閲覧スクリーンショット | 返信コメント確認用 | 非掲載。本文はNEWS messageへ |
 | （非掲載） | b27-05 Patonアプリ操作録画 | 他出場者・順位・オーナーサポーター名 | 非掲載 |
 
@@ -1660,5 +1664,33 @@ sha256 `f8093200f0705ad347b3bbb768b8fe95d9d7c84e5b568c9b68c394dd1d123082`
 b27-04 poster: 77,106 bytes / 720×1280 JPEG / sha256
 `ff1b5d2f45863d08cf1ad1bdfe81f0d807dc3e37ee8aa8f8df94010eabecd4a8`
 
-Gallery は新しい順で b27-02（鏡）→ b27-01（コラージュ）のあと既存動画。
-b27-03 / b27-04 は `galleryVideos.ts` に載せない。
+b27-06 は b27-01 公開MP4の 2.0秒地点の実フレーム。`pnpm media:build` の
+jpg q82 mozjpeg + webp q78。元素材 720×1280 のため withoutEnlargement で
+960 と 1600 は同バイト。元素材は `media/original/`（gitignore・コミットしない）。
+
+- 480.jpg 56,897 bytes / 480×853 / sha256
+  `478594610776b628a6eee4f1517c2c43a3a2fb6c25f92c092e709c2157b144c8`
+- 480.webp 39,212 bytes / sha256
+  `0e19ed008af2bf5c489be03d05e586eb83a27613eafa6dcd1cbfa3e336e8546d`
+- 960.jpg 102,630 bytes / 720×1280 / sha256
+  `cff520e6afa06c3aeb97edbdf07dbe12011e16f27faf071b299c7298f1855b00`
+- 960.webp 64,956 bytes / sha256
+  `4ed0e213b9ee91f90302949b2054806b7e94098dd2207a00cf55391a1cfb1a45`
+- 1600.jpg / 1600.webp は 960 と同じバイト
+
+b27-07 は b27-02 公開MP4の 1.0秒地点の実フレーム。同じ media:build 設定。
+
+- 480.jpg 31,518 bytes / 480×853 / sha256
+  `4dcf3f04deeeae5319d1930e6803dab82b877eb35f33e387a38c3f772258c606`
+- 480.webp 18,166 bytes / sha256
+  `0692f7335c76b13b54e7fcd4c8a7c4cb7208348118f69ec17034839ad3562fbb`
+- 960.jpg 54,138 bytes / 720×1280 / sha256
+  `2581df60447825cb9cb7f016957e7020cec79f8abb5f90e7f9006623ea239795`
+- 960.webp 28,522 bytes / sha256
+  `c1de6832846477c7c1a6b0e01ffa52d0dd8a16419fe64eb1ccbef7bac0742301`
+- 1600.jpg / 1600.webp は 960 と同じバイト
+
+Gallery 写真は新しい順で b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
+Gallery 動画は新しい順で b27-02（鏡）→ b27-01（コラージュ）のあと既存動画。
+Latest の投票カードは鏡静止画を代表にし、コラージュ静止画・鏡動画・コラージュ動画を同じカードへ続ける。
+b27-03 / b27-04 は `galleryVideos.ts` にも `media.ts` にも載せない。
