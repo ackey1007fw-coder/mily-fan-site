@@ -19,6 +19,7 @@ import {
   verifySocials,
   verifyVision,
   claimsThisSiteIsOfficial,
+  isMixchThumbnailUrl,
 } from "./content-invariants.mjs";
 
 const validNews = {
@@ -391,8 +392,19 @@ describe("content verification invariants", () => {
       accountUrl: "https://mixch.tv/u/10114673",
     };
 
+    assert.equal(isMixchThumbnailUrl(mixch.poster), true);
+    assert.equal(isMixchThumbnailUrl("https://mixch.tv/m/ZY4hSt3K"), false);
+    assert.equal(isMixchThumbnailUrl("https://mixch.tv/u/10114673"), false);
+
     assert.deepEqual(
-      verifyNews([{ ...validNews, id: "mixch-ok", media: mixch }]),
+      verifyNews([
+        {
+          ...validNews,
+          id: "mixch-ok",
+          url: mixch.mixchUrl,
+          media: mixch,
+        },
+      ]),
       [],
     );
 
@@ -416,6 +428,7 @@ describe("content verification invariants", () => {
       {
         ...validNews,
         id: "mixch-mps",
+        url: mixch.mixchUrl,
         media: {
           ...mixch,
           poster:
@@ -424,6 +437,41 @@ describe("content verification invariants", () => {
       },
     ]);
     assert.ok(movieFile.some((error) => error.includes("_movie_mps") || error.includes("official Mixch thumbnail")));
+
+    const pageAsPoster = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-page-poster",
+        url: mixch.mixchUrl,
+        media: { ...mixch, poster: "https://mixch.tv/m/ZY4hSt3K" },
+      },
+    ]);
+    assert.ok(pageAsPoster.some((error) => error.includes("official Mixch thumbnail")));
+
+    const profileAsPoster = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-profile-poster",
+        url: mixch.mixchUrl,
+        media: { ...mixch, poster: "https://mixch.tv/u/10114673" },
+      },
+    ]);
+    assert.ok(profileAsPoster.some((error) => error.includes("official Mixch thumbnail")));
+
+    const fileCta = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-cta-file",
+        url: "https://d2jtsb989t238a.cloudfront.net/m/example/_movie_mps/clip.mp4",
+        media: mixch,
+      },
+    ]);
+    assert.ok(
+      fileCta.some(
+        (error) =>
+          error.includes("Mixch CTA") || error.includes("_movie_mps"),
+      ),
+    );
 
     const xPoster = verifyNews([
       {

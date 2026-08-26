@@ -209,7 +209,8 @@ describe("Gallery video contracts", () => {
     assert.match(selector, /driveVideoView/);
     assert.match(gallery, /selectGalleryEntries\(\)/);
     assert.match(gallery, /src=\{video\.video\.src\}/);
-    assert.match(gallery, /お預かりした動画と、Mixchで見る動画/);
+    assert.match(gallery, /お預かりした動画/);
+    assert.match(gallery, /mixchCards/);
     assert.doesNotMatch(gallery, /同一動画の重複/);
 
     for (const item of visible.filter(isSelfHostedGalleryVideo)) {

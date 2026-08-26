@@ -87,7 +87,9 @@ export type NewsItem = {
 
 export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
   if (!item.media) return [];
-  return [item.media, ...(item.additionalMedia ?? [])];
+  return [item.media, ...(item.additionalMedia ?? [])].filter(
+    (media) => media.kind !== "mixch" || media.published,
+  );
 }
 
 export const news: NewsItem[] = [

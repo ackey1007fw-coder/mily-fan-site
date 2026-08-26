@@ -3,11 +3,12 @@ import { readdir } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
 import {
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
 } from "../src/data/mixchMovies.ts";
+import { visibleGalleryVideos } from "../src/data/galleryVideos.ts";
 import { events } from "../src/data/events.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
@@ -219,9 +220,16 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     const latest = sources[1];
     assert.match(latest, /kind === "mixch"/);
     assert.match(latest, /MixchOutboundCard/);
+    assert.match(latest, /media\.published/);
+    assert.match(latest, /newsDisplayMedia\(item\)/);
 
     const gallerySource = sources[2];
-    assert.match(gallerySource, /capped\.filter\(\(entry\) => entry\.kind === "mixch"\)/);
+    assert.match(gallerySource, /const mixchCards = capped\.filter/);
+    assert.ok(
+      gallerySource.indexOf("mixchCards.length > 0") <
+        gallerySource.indexOf("photos.map"),
+      "Mixch block must render before the photo grid",
+    );
     assert.match(card, /Mixchが新しいタブで開きます/);
 
     const activitiesPage = sources[3];
@@ -247,5 +255,28 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     assert.equal(mixchConfidenceMessageMovie.poster.startsWith("/media/"), false);
     assert.match(mixch15xDayMovie.poster, /thumb_normal/);
     assert.match(mixchConfidenceMessageMovie.poster, /thumb_normal/);
+  });
+
+  it("does not render unpublished Mixch cards on NEWS or Gallery", () => {
+    const unpublished = { ...mixch15xDayMovie, published: false };
+    const newsItem = item();
+
+    assert.deepEqual(newsDisplayMedia({ ...newsItem, media: unpublished }), []);
+    assert.deepEqual(
+      newsDisplayMedia({
+        ...newsItem,
+        media: unpublished,
+        additionalMedia: [unpublished],
+      }),
+      [],
+    );
+    assert.equal(newsDisplayMedia(newsItem).includes(mixch15xDayMovie), true);
+    assert.deepEqual(visibleGalleryVideos([unpublished]), []);
+    assert.equal(
+      selectGalleryEntries().some(
+        (entry) => entry.kind === "mixch" && entry.item.published === false,
+      ),
+      false,
+    );
   });
 });

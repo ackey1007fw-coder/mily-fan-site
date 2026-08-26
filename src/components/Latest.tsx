@@ -44,6 +44,7 @@ function NewsLink({
 
 function NewsMediaBlock({ media }: { media: NewsMedia }) {
   if (media.kind === "mixch") {
+    if (!media.published) return null;
     return <MixchOutboundCard movie={media} />;
   }
 

@@ -52,17 +52,18 @@ export function isMixchThumbnailUrl(url) {
   try {
     const parsed = new URL(url);
     if (parsed.protocol !== "https:") return false;
-    if (parsed.pathname.includes("_movie_mps") || parsed.pathname.endsWith(".mp4")) {
+    if (
+      parsed.pathname.includes("_movie_mps") ||
+      parsed.pathname.endsWith(".mp4")
+    ) {
       return false;
     }
-    if (parsed.hostname === "mixch.tv") return true;
-    if (
+    // Official thumbnailUrl / og:image is Mixch CloudFront thumb_normal.
+    // mixch.tv movie and profile pages are not posters.
+    return (
       parsed.hostname === "d2jtsb989t238a.cloudfront.net" &&
-      parsed.pathname.includes("/thumb")
-    ) {
-      return true;
-    }
-    return false;
+      /\/m\/[^/]+\/thumb(?:_normal)?$/.test(parsed.pathname)
+    );
   } catch {
     return false;
   }
@@ -236,6 +237,14 @@ export function verifyNews(items) {
           errors.push(
             `news "${item.id ?? "?"}" ${slot} must not play Mixch _movie_mps / MP4 files`,
           );
+        }
+        if (slot === "media") {
+          const ctaHref = item.url ?? item.source;
+          if (!isMixchMoviePageUrl(ctaHref)) {
+            errors.push(
+              `news "${item.id ?? "?"}" Mixch CTA must be a mixch.tv/m/{id} page, not a Mixch file URL`,
+            );
+          }
         }
         if (!media.alt?.trim()) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs alt text`);
