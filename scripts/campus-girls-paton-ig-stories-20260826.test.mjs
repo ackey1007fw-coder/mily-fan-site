@@ -10,6 +10,8 @@ import { promisify } from "node:util";
 import sharp from "sharp";
 import {
   galleryVideos,
+  mixch15xDayMovie,
+  mixchConfidenceMessageMovie,
   patonVoteCollageStoryVideo,
   patonVoteMirrorStoryVideo,
   visibleGalleryVideos,
@@ -189,8 +191,8 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.equal(news.filter((entry) => entry.id === VOTE_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === FOLLOWERS_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === THANKS_NEWS_ID).length, 1);
-    assert.equal(news.length, 35);
-    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 5);
+    assert.equal(news.length, 37);
+    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(vote.date, "2026-08-26");
     assert.equal(vote.sameDayOrder, 3);
     assert.deepEqual(vote.activityIds, ["campus-girls"]);
@@ -295,13 +297,15 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     }
   });
 
-  it("orders the five 8/26 items with the GirlsAward X post first", () => {
+  it("orders the 8/26 items with the GirlsAward X post first", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 7), [
+    assert.deepEqual(ordered.slice(0, 9), [
       "2026-08-26-girlsaward-showroom-6th",
       VOTE_NEWS_ID,
       FOLLOWERS_NEWS_ID,
       THANKS_NEWS_ID,
+      "2026-08-26-girl-award-event-fanroom",
+      "2026-08-26-mixch-15x-day",
       STREAM_NEWS_ID,
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -329,10 +333,14 @@ describe("2026-08-26 Instagram Stories — shared collage and mirror Gallery vid
     ]);
     assert.equal(galleryVideos[0], patonVoteMirrorStoryVideo);
     assert.equal(galleryVideos[1], patonVoteCollageStoryVideo);
+    assert.equal(galleryVideos[14], mixch15xDayMovie);
+    assert.equal(galleryVideos[15], mixchConfidenceMessageMovie);
     assert.equal(visible[0], patonVoteMirrorStoryVideo);
     assert.equal(visible[1], patonVoteCollageStoryVideo);
-    assert.equal(galleryVideos.length, 14);
-    assert.equal(visible.length, 14);
+    assert.equal(visible[14], mixch15xDayMovie);
+    assert.equal(visible[15], mixchConfidenceMessageMovie);
+    assert.equal(galleryVideos.length, 16);
+    assert.equal(visible.length, 16);
 
     for (const video of [patonVoteMirrorStoryVideo, patonVoteCollageStoryVideo]) {
       assert.equal(video.kind, "video");
@@ -619,7 +627,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /他出場者・順位/);
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
-    assert.match(ops, /35件/);
+    assert.match(ops, /37件/);
     assert.match(ops, /独立動画14本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });
@@ -633,6 +641,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.equal(campusNews[0]?.id, VOTE_NEWS_ID);
     assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(liveNews[1]?.id, THANKS_NEWS_ID);
+    assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
     assert.ok(liveNews.some((entry) => entry.id === STREAM_NEWS_ID));
     assert.equal(campusNews.some((entry) => entry.id === FOLLOWERS_NEWS_ID), false);
     assert.equal(campusMedia[0], patonVoteMirrorStillImage);

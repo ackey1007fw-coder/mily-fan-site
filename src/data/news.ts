@@ -8,7 +8,7 @@
  * - sourceLabel: optional label. Without source, it renders as non-link text.
  * - additionalSources: optional extra confirmed source links for the same NEWS item
  * - url: optional. Only when it differs from source（「関連リンク」）
- * - media: optional self-hosted still or video for the card
+ * - media: optional self-hosted still/video/audio, or Mixch outbound player card
  * - additionalMedia: optional extra stills/videos on the same card. Lead stays `media`.
  * - ctaLabel: optional. href is url ?? source
  */
@@ -29,6 +29,11 @@ import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
+  mixch15xDayMovie,
+  mixchConfidenceMessageMovie,
+  type MixchMovie,
+} from "./mixchMovies.ts";
+import {
   campusGirlsPatonPageImage,
   campusGirlsPatonPortraitImage,
 } from "./campusGirlsPatonImages.ts";
@@ -41,6 +46,7 @@ import {
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
 import { girlsawardShowroomSixthImage } from "./girlsawardShowroom6th.ts";
+import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -60,7 +66,31 @@ export type NewsImageMedia = {
   alt: string;
 };
 
-export type NewsMedia = NewsVideoMedia | NewsImageMedia;
+/** Mixch outbound player. Distinct from self-hosted `kind: "video"` which has an mp4 `src`. */
+export type NewsMixchMedia = MixchMovie;
+
+/** Self-hosted Fan Room voice memo. Latest / NEWS only — not Gallery. */
+export type NewsAudioMedia = {
+  kind: "audio";
+  src: string;
+  mimeType: "audio/mp4";
+  alt: string;
+  label?: string;
+};
+
+export type NewsMedia =
+  | NewsVideoMedia
+  | NewsImageMedia
+  | NewsMixchMedia
+  | NewsAudioMedia;
+
+export function isNewsAudio(media: NewsMedia): media is NewsAudioMedia {
+  return media.kind === "audio";
+}
+
+export function newsMediaKey(media: NewsMedia): string {
+  return media.kind === "mixch" ? `${media.kind}:${media.id}` : `${media.kind}:${media.src}`;
+}
 
 export type NewsMessage = {
   label?: string;
@@ -95,7 +125,9 @@ export type NewsItem = {
 
 export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
   if (!item.media) return [];
-  return [item.media, ...(item.additionalMedia ?? [])];
+  return [item.media, ...(item.additionalMedia ?? [])].filter(
+    (media) => media.kind !== "mixch" || media.published,
+  );
 }
 
 export const news: NewsItem[] = [
@@ -175,6 +207,54 @@ export const news: NewsItem[] = [
     },
   },
   {
+    id: "2026-08-26-girl-award-event-fanroom",
+    date: "2026-08-26",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "ガルアワイベ最終日、【6位】で走り切れました",
+    body: "8月26日のSHOWROOMファンルームで、みりぃがガルアワイベ最終日を【6位】で終われたこと、最後の逆転、みんなの応援の賜物であることへの感謝を伝えました。一緒に走り切ってくれたことへのお礼と、これからも不器用なみりぃをよろしく、という言葉も残されています。同じ夜、ファンルームに音声メッセージも届いています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMで応援する",
+    media: girlAwardEventVoice,
+    message: {
+      label: "みりぃからの連絡💌 · 22:32",
+      text:
+        "ガルアワイベ最終日、\n" +
+        "なんと【6位】で終わることができました😭\n" +
+        "🙏❤️✨\n" +
+        "\n" +
+        "まさか最後に逆転できるとは〜！！！！！\n" +
+        "これもみんなの応援の賜物すぎるよ😱❤️‍🔥\n" +
+        "\n" +
+        "一緒に走り切ってくれたみんな、本当にありがとう。\n" +
+        "心から感謝です🥺💙\n" +
+        "\n" +
+        "とってもとっても楽しかった！！\n" +
+        "\n" +
+        "これからもどうぞ、\n" +
+        "不器用なみりぃをよろしくお願いいたします‼️",
+    },
+  },
+  {
+    id: "2026-08-26-mixch-15x-day",
+    date: "2026-08-26",
+    activityIds: ["campus-girls"],
+    title: "「今日は1.5倍デーだってよ？！」——みんなと絶景を見に行くよ",
+    body: "8月26日、みりぃがMixchに動画を公開しました。今日は1.5倍デーだと伝え、みんなと絶景を見に行くと話しています。CAMPUS GIRLS関連のハッシュタグが添えられています。",
+    source: "https://x.com/mily_chan36/status/2092481552475460058",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://mixch.tv/m/nxqYblH8",
+    ctaLabel: "Mixchで見る",
+    media: mixch15xDayMovie,
+    message: {
+      label: "みりぃのX投稿",
+      text:
+        "おすすめの動画を見つけたよ！ #ミクチャ\n" +
+        "今日は1.5倍デーだってよ？！\u{1F633}\u{1FAF6}\u{1F3FB}\u{2763}\u{FE0F}私はみんなと絶景見に行くよ。絶対にね。#キャンガル #キャンガル2027 #キャンパスガールズ #キャンパスガールズ2027 https://mixch.tv/m/nxqYblH8",
+    },
+  },
+  {
     id: "2026-08-26-stream-1000",
     date: "2026-08-26",
     activityIds: ["live-stream"],
@@ -198,6 +278,7 @@ export const news: NewsItem[] = [
     sourceLabel: "Xの投稿を見る",
     url: "https://mixch.tv/m/ZY4hSt3K",
     ctaLabel: "Mixchで「自信のないあなたへ」を見る",
+    media: mixchConfidenceMessageMovie,
     message: {
       label: "みりぃのX投稿",
       text: `#ミクチャ で動画を投稿したよ！見に来てね！

@@ -182,8 +182,8 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
   it("adds the video to the Gallery archive, newest first, keeping b03 and b07", () => {
     const visible = visibleGalleryVideos();
 
-    assert.equal(visible.length, 14);
-    // 8/26 (b27-02 → b27-01) → 8/24 (b25 → b23) → 8/23 (b21 → b19 → b18) → 8/21 (b15 → b13 → b12 → b11) → 8/20 (b07) → 8/19 (b09) → 8/17 (b03)
+    assert.equal(visible.length, 16);
+    // Self-hosted newest first, then Mixch outbound (8/26 1.5x → 8/25 自信のないあなたへ)
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
       "2026-08-26",
       "2026-08-26",
@@ -199,6 +199,8 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       "2026-08-20",
       "2026-08-19",
       "2026-08-17",
+      "2026-08-26",
+      "2026-08-25",
     ]);
     assert.equal(visible[7], tiktokRadioVideo);
     assert.equal(visible[8], eventStory20260821);
@@ -212,7 +214,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       morningStory20260820.src,
       "/media/gallery/mily-b07-01-morning-story.mp4",
     );
-    assert.equal(galleryVideos.length, 14);
+    assert.equal(galleryVideos.length, 16);
   });
 
   it("shares one MP4 and one poster between the STORY article and Gallery", () => {

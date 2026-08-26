@@ -19,7 +19,7 @@ import {
   portalNewsId,
 } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
-import { storyBySlug, storySources } from "../src/data/stories.ts";
+import { stories, storyBySlug, storySources } from "../src/data/stories.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const slug = "campus-girls-2027-second-stage-jury-award";
@@ -235,7 +235,10 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.match(agents, /具体的な理由をPR本文または最終報告に残す/);
     assert.match(agents, /出典確認・プライバシー確認・第三者情報確認を省略しない/);
     assert.match(agents, /Story閲覧スクリーンショットには一般メディアより追加の安全条件がある/);
-    assert.match(agents, /AI 生成・置換・補正・加工、生成塗り足し、SNS からの自動取得は禁止/);
+    assert.match(agents, /AI 生成・置換・補正・加工/);
+    assert.match(agents, /生成塗り足しは禁止/);
+    assert.match(agents, /X \/ Instagram \/ Mixch の動画ファイルを git/);
+    assert.match(agents, /Mixch outbound/);
 
     assert.match(contentOps, /メディア掲載の上位方針/);
     assert.match(contentOps, /NEWSを文章だけで終わらせず/);
@@ -304,18 +307,18 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
   });
 
   it("flows through the existing Portal Feed as separate NEWS and STORY items", () => {
-    const scopedNews = news.filter((entry) => entry.date === "2026-08-22");
+    const newsItems = news.filter((item) => item.date <= "2026-08-22");
+    const storyItems = stories.filter((story) => story.date <= "2026-08-22");
     const feed = createPortalFeed({
       now: new Date("2026-08-22T12:00:00+09:00"),
-      newsItems: scopedNews,
-      storyItems: [newStory()].filter(Boolean),
-      eventItems: [],
+      newsItems,
+      storyItems,
     });
     const image = new URL(campusGirlsSecondStageResultImage.src, siteOrigin()).href;
     const newsItem = findFeedItem(feed, portalNewsId(newsId));
     const storyItem = findFeedItem(feed, `mily:story:${slug}`);
 
-    assertPortalNewsFollowsSort(feed, scopedNews);
+    assertPortalNewsFollowsSort(feed, newsItems);
     assertFeedItemBefore(feed, newsItem.id, storyItem.id);
     assert.equal(newsItem.sourceUrl, xSource);
     assert.equal(newsItem.image, image);

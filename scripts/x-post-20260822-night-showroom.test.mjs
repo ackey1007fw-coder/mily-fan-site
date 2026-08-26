@@ -212,7 +212,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
     assert.equal(media.some((entry) => entry.id.includes("b17")), false);
     assert.equal(media.some((entry) => entry.basePath.includes("night-showroom-fireworks")), false);
     assert.equal(galleryVideos.some((entry) => entry.id.includes("b17")), false);
-    assert.equal(galleryVideos.some((entry) => entry.src.includes("night-showroom-fireworks")), false);
+    assert.equal(galleryVideos.some((entry) => "src" in entry && entry.src.includes("night-showroom-fireworks")), false);
     assert.equal(stories.some((entry) => entry.slug.includes("night-showroom-thanks")), false);
     assert.equal(highlights.some((entry) => entry.id.includes("night-showroom")), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
@@ -254,11 +254,13 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
   it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 26), [
+    assert.deepEqual(ordered.slice(0, 28), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
       "2026-08-26-instagram-followers-400",
       "2026-08-26-morning-stream-thanks",
+      "2026-08-26-girl-award-event-fanroom",
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -282,7 +284,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 35);
+    assert.equal(news.length, 37);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
@@ -294,10 +296,15 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
 describe("2026-08-22 night SHOWROOM thanks X post — Portal Feed and responsive contract", () => {
   it("flows through Portal Feed with its self-hosted site-origin image", async () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-22T23:30:00+09:00") });
+    const asOfNews = news.filter((entry) => entry.date <= "2026-08-22");
+    const feed = createPortalFeed({
+      now: new Date("2026-08-22T23:30:00+09:00"),
+      newsItems: asOfNews,
+      storyItems: stories.filter((story) => story.date <= "2026-08-22"),
+    });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, asOfNews);
     assert.equal(entry.type, "news");
     assert.equal(entry.publishedAt, "2026-08-22T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);

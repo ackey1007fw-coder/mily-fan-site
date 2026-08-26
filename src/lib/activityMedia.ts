@@ -4,8 +4,10 @@ import {
   type ActivityId,
 } from "../data/activities.ts";
 import {
+  isNewsAudio,
   news,
   sortNewsByDateDesc,
+  type NewsAudioMedia,
   type NewsItem,
   type NewsMedia,
 } from "../data/news.ts";
@@ -13,9 +15,17 @@ import {
   galleryVideos,
   type GalleryVideoItem,
 } from "../data/galleryVideos.ts";
+import { isMixchMovie, type MixchMovie } from "../data/mixchMovies.ts";
 import { stories, type Story, type StoryMedia } from "../data/stories.ts";
 
-export type ActivityMediaItem = NewsMedia | StoryMedia | GalleryVideoItem;
+/**
+ * Mixch outbound cards and Fan Room audio are NEWS (+ Gallery for Mixch) only,
+ * not Activity related media.
+ */
+export type ActivityMediaItem = Exclude<
+  NewsMedia | StoryMedia | GalleryVideoItem,
+  MixchMovie | NewsAudioMedia
+>;
 
 export type ActivityMediaSources = {
   activityRecords?: Activity[];
@@ -24,8 +34,12 @@ export type ActivityMediaSources = {
   galleryItems?: GalleryVideoItem[];
 };
 
-function objectId(media: ActivityMediaItem): string | null {
+function objectId(media: object): string | null {
   return "id" in media && typeof media.id === "string" ? media.id : null;
+}
+
+function mediaSrc(media: object): string | null {
+  return "src" in media && typeof media.src === "string" ? media.src : null;
 }
 
 function canonicalGalleryItem(
@@ -33,17 +47,34 @@ function canonicalGalleryItem(
   galleryItems: GalleryVideoItem[],
 ): ActivityMediaItem {
   const id = objectId(media);
-  return (
-    galleryItems.find(
-      (item) => (id !== null && item.id === id) || item.src === media.src,
-    ) ?? media
+  const src = mediaSrc(media);
+  const match = galleryItems.find(
+    (item) =>
+      (id !== null && item.id === id) ||
+      (src !== null && mediaSrc(item) === src),
   );
+  if (!match || isMixchMovie(match)) return media;
+  return match;
+}
+
+function activityMediaKey(media: ActivityMediaItem): string {
+  const id = objectId(media);
+  if (id) return id;
+  const src = mediaSrc(media);
+  return `${media.kind}:${src ?? ""}`;
+}
+
+function isActivityNewsMedia(
+  media: NewsMedia,
+): media is Exclude<NewsMedia, MixchMovie | NewsAudioMedia> {
+  return !isMixchMovie(media) && !isNewsAudio(media);
 }
 
 /**
  * Selects explicitly related NEWS media plus media from related STORY slugs.
  * Story view objects that point at a Gallery manifest are resolved back to that
  * existing manifest object. Results are then deduplicated by manifest id.
+ * Mixch outbound cards and Fan Room audio are NEWS-only and are not included here.
  */
 export function selectActivityMedia(
   activityId: ActivityId,
@@ -58,7 +89,9 @@ export function selectActivityMedia(
 
   const relatedNewsMedia = sortNewsByDateDesc(newsItems)
     .filter((item) => item.activityIds?.includes(activityId))
-    .flatMap((item) => (item.media ? [item.media] : []));
+    .flatMap((item): ActivityMediaItem[] =>
+      item.media && isActivityNewsMedia(item.media) ? [item.media] : [],
+    );
 
   const relatedStoryMedia = activity.relatedStorySlugs.flatMap((slug) => {
     const story = storyItems.find((item) => item.slug === slug && item.published);
@@ -69,7 +102,7 @@ export function selectActivityMedia(
   const seen = new Set<string>();
   for (const media of [...relatedNewsMedia, ...relatedStoryMedia]) {
     const canonical = canonicalGalleryItem(media, galleryItems);
-    const key = objectId(canonical) ?? `${canonical.kind}:${canonical.src}`;
+    const key = activityMediaKey(canonical);
     if (seen.has(key)) continue;
     seen.add(key);
     selected.push(canonical);

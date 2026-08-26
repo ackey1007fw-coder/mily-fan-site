@@ -156,11 +156,13 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
     assert.equal(ordered[3], "2026-08-26-morning-stream-thanks");
-    assert.equal(ordered[4], NEWS_ID);
-    assert.equal(ordered[5], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[6], "2026-08-25-motivation");
-    assert.equal(news.length, 35);
-    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 5);
+    assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[6], NEWS_ID);
+    assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[8], "2026-08-25-motivation");
+    assert.equal(news.length, 37);
+    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(item().media, undefined);
     assert.equal(item().additionalMedia, undefined);
   });
@@ -170,7 +172,8 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
     assert.equal(selected[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(selected[1]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(selected[2]?.id, NEWS_ID);
+    assert.equal(selected[2]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(selected[3]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("live-stream")));
     assert.equal(
       selectActivityNews("miss-circle", news, news.length).some(

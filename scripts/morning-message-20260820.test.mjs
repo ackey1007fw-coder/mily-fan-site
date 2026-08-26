@@ -194,7 +194,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
   it("is not added to the video archive or /stories/", async () => {
     const storiesSource = await readFile(path.join(root, "src/data/stories.ts"), "utf8");
 
-    assert.equal(galleryVideos.some((entry) => entry.src.includes("mily-b08")), false);
+    assert.equal(galleryVideos.some((entry) => "src" in entry && entry.src.includes("mily-b08")), false);
     assert.equal(stories.some((story) => story.slug.includes("do-what-you-can")), false);
     assert.doesNotMatch(storiesSource, /mily-b08|do-what-you-can-morning|2026-08-20-morning-message/);
     assert.equal(existsSync(path.join(root, "stories/2026-08-20-morning-message")), false);
@@ -207,31 +207,33 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
     assert.equal(ordered[3], "2026-08-26-morning-stream-thanks");
-    assert.equal(ordered[4], "2026-08-26-stream-1000");
-    assert.equal(ordered[5], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[6], "2026-08-25-motivation");
-    assert.equal(ordered[7], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(ordered[8], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[9], "2026-08-24-makeup-stream");
-    assert.equal(ordered[10], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[11], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[12], "2026-08-23-seaside-circle-musical-special");
-    assert.equal(ordered[13], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[14], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[15], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[16], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[17], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[18], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[19], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[20], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[21], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[22], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[23], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[24], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[25], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[26], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[27], NEWS_ID);
-    assert.equal(ordered[28], "2026-08-20-morning-story");
+    assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[6], "2026-08-26-stream-1000");
+    assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[8], "2026-08-25-motivation");
+    assert.equal(ordered[9], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(ordered[10], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[11], "2026-08-24-makeup-stream");
+    assert.equal(ordered[12], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[13], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[14], "2026-08-23-seaside-circle-musical-special");
+    assert.equal(ordered[15], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[16], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[17], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[18], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[19], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[20], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[21], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[22], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[23], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[24], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[25], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[26], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[27], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[28], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[29], NEWS_ID);
+    assert.equal(ordered[30], "2026-08-20-morning-story");
     assert.ok(news.some((entry) => entry.id === "2026-08-20-morning-story"));
   });
 
@@ -246,7 +248,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 35);
+    assert.equal(news.length, 37);
   });
 });
 

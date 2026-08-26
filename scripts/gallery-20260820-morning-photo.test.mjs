@@ -269,7 +269,7 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
   it("adds nothing to Gallery Videos or /stories/", async () => {
     const storiesSource = await readFile(path.join(root, "src/data/stories.ts"), "utf8");
 
-    assert.equal(galleryVideos.some((entry) => entry.src.includes("mily-b08")), false);
+    assert.equal(galleryVideos.some((entry) => "src" in entry && entry.src.includes("mily-b08")), false);
     assert.equal(stories.some((story) => story.slug.includes("do-what-you-can")), false);
     assert.doesNotMatch(storiesSource, /mily-b08|do-what-you-can-morning/);
   });

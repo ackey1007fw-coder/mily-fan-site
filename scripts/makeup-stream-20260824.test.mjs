@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 35);
+    assert.equal(news.length, 37);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -152,11 +152,13 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
 
   it("sits between Final STAGE guide and night-thanks on 8/24", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 12), [
+    assert.deepEqual(ordered.slice(0, 14), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
       "2026-08-26-instagram-followers-400",
       "2026-08-26-morning-stream-thanks",
+      "2026-08-26-girl-award-event-fanroom",
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -334,9 +336,10 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 0);
     assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(liveNews[1]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(liveNews[2]?.id, "2026-08-26-stream-1000");
-    assert.equal(liveNews[3]?.id, "2026-08-25-motivation");
-    assert.equal(liveNews[4]?.id, NEWS_ID);
+    assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(liveNews[3]?.id, "2026-08-26-stream-1000");
+    assert.equal(liveNews[4]?.id, "2026-08-25-motivation");
+    assert.equal(liveNews[5]?.id, NEWS_ID);
     // b24-01 is the NEWS lead media, so selectActivityMedia surfaces it here the
     // same way it surfaces every other live-stream NEWS lead (b17-01, b14-01,
     // b13-01). No per-image filter is added; docs/MEDIA.md records this.
@@ -400,7 +403,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(b24, /公開用のmetadata除去以外は無改変/);
     assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
-    assert.match(ops, /35件/);
+    assert.match(ops, /37件/);
     assert.match(ops, /初メイク配信/);
     assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);

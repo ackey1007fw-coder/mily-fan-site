@@ -84,13 +84,15 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
     assert.equal(ordered[3], "2026-08-26-morning-stream-thanks");
-    assert.equal(ordered[4], "2026-08-26-stream-1000");
-    assert.equal(ordered[5], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[6], "2026-08-25-motivation");
-    assert.equal(ordered[7], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(ordered[8], NEWS_ID);
-    assert.equal(ordered[9], "2026-08-24-makeup-stream");
-    assert.equal(ordered[10], EXISTING_8_24);
+    assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[6], "2026-08-26-stream-1000");
+    assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[8], "2026-08-25-motivation");
+    assert.equal(ordered[9], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(ordered[10], NEWS_ID);
+    assert.equal(ordered[11], "2026-08-24-makeup-stream");
+    assert.equal(ordered[12], EXISTING_8_24);
     assert.ok(news.some((entry) => entry.id === EXISTING_8_24));
     assert.ok(news.some((entry) => entry.id === CAMPUS_RESULT_ID));
   });
@@ -101,7 +103,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
 
     assert.equal(preview[0]?.id, "2026-08-26-paton-vote-stories");
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
-    assert.ok(selected.some((entry) => entry.id === CAMPUS_RESULT_ID));
+    assert.ok(
+      selectActivityNews("campus-girls", news, news.length).some(
+        (entry) => entry.id === CAMPUS_RESULT_ID,
+      ),
+    );
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 
@@ -153,11 +159,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /35件/);
+    assert.match(ops, /37件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /8月26日の本人XによるPaton直接案内/);
     assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
     assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
-    assert.equal(news.length, 35);
+    assert.equal(news.length, 37);
   });
 });

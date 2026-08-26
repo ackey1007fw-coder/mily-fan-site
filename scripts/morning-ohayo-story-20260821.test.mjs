@@ -121,11 +121,13 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
 
   it("keeps the established same-day editorial ordering", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 29), [
+    assert.deepEqual(ordered.slice(0, 31), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
       "2026-08-26-instagram-followers-400",
       "2026-08-26-morning-stream-thanks",
+      "2026-08-26-girl-award-event-fanroom",
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -152,7 +154,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 35);
+    assert.equal(news.length, 37);
   });
 });
 
@@ -184,8 +186,10 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
       "2026-08-20",
       "2026-08-19",
       "2026-08-17",
+      "2026-08-26",
+      "2026-08-25",
     ]);
-    assert.equal(visible.length, 14);
+    assert.equal(visible.length, 16);
     assert.equal(morningOhayo20260821.sourceDate, "2026-08-21");
     assert.equal(morningOhayo20260821.alt, ALT);
   });
@@ -212,8 +216,8 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 14);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 25);
+    assert.equal(galleryVideos.length, 16);
+    assert.equal(visibleGalleryVideos().length + drive.videos.length, 27);
   });
 });
 

@@ -2,6 +2,7 @@ import { useState, type ReactNode } from "react";
 import {
   news,
   newsDisplayMedia,
+  newsMediaKey,
   sortNewsByDateDesc,
   type NewsItem,
   type NewsMedia,
@@ -17,6 +18,8 @@ import { resolveNewsLinks } from "../lib/newsLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { EmptyState } from "./EmptyState";
 import { ExternalLink } from "./ExternalLink";
+import { MixchOutboundCard } from "./MixchOutboundCard";
+import { NewsAudioCard } from "./NewsAudioCard";
 
 function NewsLink({
   href,
@@ -43,6 +46,15 @@ function NewsLink({
 }
 
 function NewsMediaBlock({ media }: { media: NewsMedia }) {
+  if (media.kind === "mixch") {
+    if (!media.published) return null;
+    return <MixchOutboundCard movie={media} />;
+  }
+
+  if (media.kind === "audio") {
+    return <NewsAudioCard media={media} />;
+  }
+
   if (media.kind === "video") {
     return (
       <video
@@ -97,7 +109,7 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
         </div>
       ) : null}
       {newsDisplayMedia(item).map((media) => (
-        <NewsMediaBlock key={`${media.kind}:${media.src}`} media={media} />
+        <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
       {item.source ||
       item.sourceLabel ||

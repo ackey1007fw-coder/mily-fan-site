@@ -176,7 +176,7 @@ pnpm dev
 - 華やかさは**安全に使える実素材の豊かさ**で作る。同一素材を意味なく何度も並べる、素材がないのに複製して水増しする、未承認素材を補う、AI生成や生成塗り足しで写真を増やす、といった方法は使わない。
 - 写真の顔・身体・重要な被写体を、カード比率を揃えるためだけに不自然に切らない。縦長・横長・正方形など元の構図を尊重し、必要なら `object-contain` 等で全体を見せる。本人の魅力が最も自然に伝わる表示を優先する。
 - 複数メディアを使う場合も、モバイルでの横overflow、巨大な初期転送量、レイアウト崩れを避ける。既存のresponsive画像・poster・lazy loading・サイズ最適化の仕組みがある場合は再利用し、視覚的な豊かさと表示性能を両立する。
-- このphoto-forward方針は、プライバシー、第三者情報、出典、権利、Story閲覧スクリーンショットの追加条件、本人写真のオーナー確認、SNS自動取得禁止を一切緩和しない。掲載ゲートを満たす素材の中で、より華やかで魅力が伝わる見せ方を選ぶ。
+- このphoto-forward方針は、プライバシー、第三者情報、出典、権利、Story閲覧スクリーンショットの追加条件、本人写真のオーナー確認、X / Instagram の SNS 自動取得禁止を一切緩和しない。Mixch outbound player card は後述の限定例外であり、Mixch ファイルの自己ホストや X/IG サムネイル hotlink を許可するものではない。掲載ゲートを満たす素材の中で、より華やかで魅力が伝わる見せ方を選ぶ。
 - 承認済み素材が1点だけ、または安全に使える素材がない場合は、存在しない写真を作らず、その時点の確認済み素材だけで構成する。素材不足を理由に本文や予定の掲載自体を止める必要はない。
 
 - 元素材は `media/original/`（gitignore 済み・コミットしない）。**元ファイルを上書き・リネーム・再エンコードしない。**
@@ -184,7 +184,9 @@ pnpm dev
 - 生成スクリプトは既存ファイルを**上書きせず停止**する。内容を変えるときは新しいファイル名にする（公開済みファイル名は不変）。
 - ファイル名は `mily-bNN-NN-<slug>` 形式。日付が未確認のうちはファイル名に日付を入れない（捏造しない）。
 - 掲載は `src/data/media.ts` の `published: true` のみ。出典 URL・投稿日・撮影者が未確認の項目は `null` のまま残す（推測して埋めない）。
-- 本人の顔の AI 生成・置換・補正・加工、生成塗り足し、SNS からの自動取得は禁止。
+- 本人の顔の AI 生成・置換・補正・加工、生成塗り足しは禁止。
+- X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードしない。X / Instagram の画像 CDN URL をサイトメディアとして hotlink しない。Mixch の `_movie_mps` / MP4 をこのドメインで再生しない。Mixch タイムラインはクロールせず、オーナーが指定した movie URL だけを扱う。
+- **Mixch outbound の限定例外:** オーナー指定の公開 Mixch 動画（`https://mixch.tv/m/{id}`、確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。Activities の「関連するメディア」には出さない（`activityIds` による関連 NEWS は残す）。カードは動画らしく見せる（poster + play overlay）。poster はその動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）を使ってよい。これは唯一の SNS サムネイル例外で、X / Instagram は禁止のまま。Play / click / CTA は Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。NEWS と Gallery は動画ごとに同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Mixch ファイルを repo にコピーしない。オーナーが後から原ファイルを提供した場合は既存の自己ホストパイプラインを使う（別経路）。photo-forward は維持し、Mixch カードはビジュアルとして数えるので該当 NEWS をテキストだけにしない。
 
 ## 配信予定の自動取得
 
@@ -206,10 +208,14 @@ pnpm dev
 
 - 「公式」「公認」「本人運営」と誤認させる表現を使わない。
 - 未確認情報を推測して書かない。
-- 本人 SNS から画像を自動取得しない。
-- 実在する本人の顔を AI 生成しない。
-- 他サイトの画像を流用しない。
+- X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードしない。
+- X / Instagram の画像 CDN URL をサイトメディアとして hotlink しない。
+- Mixch の `_movie_mps` / MP4 をこのドメインで再生しない。`<video src=Mixch CDN>` や非公式 iframe も使わない。
+- Mixch タイムラインをクロールしない。オーナーが指定した `https://mixch.tv/m/{id}` だけを扱う。
+- 実在する本人の顔を AI 生成しない。生成塗り足し（outpainting / generative fill）も禁止。
+- 他のファンサイトの人物情報・写真・ニュース・イベント・SNS・プロフィールをコピーしない。
 - 外部リンクは `https:` / `http:` のみ。`rel="noopener noreferrer"` を付ける。
+- **唯一の SNS サムネイル例外:** オーナー指定の公開 Mixch 動画（確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。Activities の「関連するメディア」には出さない。poster はその動画の公式 Mixch サムネイルのみ。Play は Mixch で開く。ファイルは repo にコピーしない。X / Instagram のサムネイル例外は作らない。
 
 ## 品質ゲート
 

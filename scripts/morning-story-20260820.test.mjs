@@ -82,31 +82,33 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
     assert.equal(ordered[3], "2026-08-26-morning-stream-thanks");
-    assert.equal(ordered[4], "2026-08-26-stream-1000");
-    assert.equal(ordered[5], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[6], "2026-08-25-motivation");
-    assert.equal(ordered[7], "2026-08-24-seasidecircle-yes-tokyo");
-    assert.equal(ordered[8], "2026-08-24-campus-girls-final-stage-guide");
-    assert.equal(ordered[9], "2026-08-24-makeup-stream");
-    assert.equal(ordered[10], "2026-08-24-night-thanks-morning-stream");
-    assert.equal(ordered[11], "2026-08-23-dragon-cloud");
-    assert.equal(ordered[12], "2026-08-23-seaside-circle-musical-special");
-    assert.equal(ordered[13], "2026-08-23-morning-showroom-fanroom");
-    assert.equal(ordered[14], "2026-08-23-early-showroom-fanroom");
-    assert.equal(ordered[15], "2026-08-23-earthquake-showroom-fanroom");
-    assert.equal(ordered[16], "2026-08-22-night-showroom-thanks");
-    assert.equal(ordered[17], "2026-08-22-night-showroom-fanroom");
-    assert.equal(ordered[18], "2026-08-22-evening-showroom-fanroom");
-    assert.equal(ordered[19], "2026-08-22-campus-girls-second-stage-jury-award");
-    assert.equal(ordered[20], "2026-08-21-tiktok-radio-misscircle");
-    assert.equal(ordered[21], "2026-08-21-after-afternoon-ganda");
-    assert.equal(ordered[22], "2026-08-21-afternoon-showroom-fanroom");
-    assert.equal(ordered[23], "2026-08-21-event-story-next-slot");
-    assert.equal(ordered[24], "2026-08-21-morning-ohayo-story");
-    assert.equal(ordered[25], "2026-08-21-morning-showroom-runway");
-    assert.equal(ordered[26], "2026-08-20-mango-kakigori");
-    assert.equal(ordered[27], "2026-08-20-morning-message");
-    assert.equal(ordered[28], NEWS_ID);
+    assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
+    assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
+    assert.equal(ordered[6], "2026-08-26-stream-1000");
+    assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
+    assert.equal(ordered[8], "2026-08-25-motivation");
+    assert.equal(ordered[9], "2026-08-24-seasidecircle-yes-tokyo");
+    assert.equal(ordered[10], "2026-08-24-campus-girls-final-stage-guide");
+    assert.equal(ordered[11], "2026-08-24-makeup-stream");
+    assert.equal(ordered[12], "2026-08-24-night-thanks-morning-stream");
+    assert.equal(ordered[13], "2026-08-23-dragon-cloud");
+    assert.equal(ordered[14], "2026-08-23-seaside-circle-musical-special");
+    assert.equal(ordered[15], "2026-08-23-morning-showroom-fanroom");
+    assert.equal(ordered[16], "2026-08-23-early-showroom-fanroom");
+    assert.equal(ordered[17], "2026-08-23-earthquake-showroom-fanroom");
+    assert.equal(ordered[18], "2026-08-22-night-showroom-thanks");
+    assert.equal(ordered[19], "2026-08-22-night-showroom-fanroom");
+    assert.equal(ordered[20], "2026-08-22-evening-showroom-fanroom");
+    assert.equal(ordered[21], "2026-08-22-campus-girls-second-stage-jury-award");
+    assert.equal(ordered[22], "2026-08-21-tiktok-radio-misscircle");
+    assert.equal(ordered[23], "2026-08-21-after-afternoon-ganda");
+    assert.equal(ordered[24], "2026-08-21-afternoon-showroom-fanroom");
+    assert.equal(ordered[25], "2026-08-21-event-story-next-slot");
+    assert.equal(ordered[26], "2026-08-21-morning-ohayo-story");
+    assert.equal(ordered[27], "2026-08-21-morning-showroom-runway");
+    assert.equal(ordered[28], "2026-08-20-mango-kakigori");
+    assert.equal(ordered[29], "2026-08-20-morning-message");
+    assert.equal(ordered[30], NEWS_ID);
   });
 
   it("records the confirmed date only", () => {
@@ -323,7 +325,7 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const visible = visibleGalleryVideos();
 
     // 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）で10本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
-    assert.equal(visible.length, 14);
+    assert.equal(visible.length, 16);
     assert.equal(visible[7], tiktokRadioVideo);
     assert.equal(visible[8], eventStory20260821);
     assert.equal(visible[9], morningOhayo20260821);

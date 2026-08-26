@@ -39,6 +39,8 @@ const expectedNewsRelations = {
   "2026-08-26-girlsaward-showroom-6th": ["miss-circle", "live-stream"],
   "2026-08-26-paton-vote-stories": ["campus-girls"],
   "2026-08-26-morning-stream-thanks": ["live-stream"],
+  "2026-08-26-girl-award-event-fanroom": ["live-stream"],
+  "2026-08-26-mixch-15x-day": ["campus-girls"],
   "2026-08-26-stream-1000": ["live-stream"],
   "2026-08-25-mixch-confidence-message": ["campus-girls"],
   "2026-08-25-motivation": ["miss-circle", "live-stream"],

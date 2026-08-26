@@ -19,6 +19,7 @@ import {
   verifySocials,
   verifyVision,
   claimsThisSiteIsOfficial,
+  isMixchThumbnailUrl,
 } from "./content-invariants.mjs";
 
 const validNews = {
@@ -405,6 +406,190 @@ describe("content verification invariants", () => {
         { ...validNews, id: "extra-without-lead", additionalMedia: [photo] },
       ]).some((error) => error.includes("additionalMedia needs a lead media")),
     );
+  });
+
+  it("accepts Mixch outbound media and rejects Mixch files or X/IG posters", () => {
+    const mixch = {
+      id: "mixch-m-example",
+      kind: "mixch",
+      mixchUrl: "https://mixch.tv/m/ZY4hSt3K",
+      poster:
+        "https://d2jtsb989t238a.cloudfront.net/m/example/thumb_normal",
+      width: 480,
+      height: 853,
+      alt: "Mixch動画のサムネイル。再生するとMixchで開きます",
+      title: "自信のないあなたへ",
+      published: true,
+      sourceDate: "2026-08-25",
+      accountUrl: "https://mixch.tv/u/10114673",
+    };
+
+    assert.equal(isMixchThumbnailUrl(mixch.poster), true);
+    assert.equal(isMixchThumbnailUrl("https://mixch.tv/m/ZY4hSt3K"), false);
+    assert.equal(isMixchThumbnailUrl("https://mixch.tv/u/10114673"), false);
+
+    assert.deepEqual(
+      verifyNews([
+        {
+          ...validNews,
+          id: "mixch-ok",
+          url: mixch.mixchUrl,
+          media: mixch,
+        },
+      ]),
+      [],
+    );
+
+    const stuffed = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-as-video",
+        media: {
+          kind: "video",
+          src: "https://mixch.tv/m/ZY4hSt3K",
+          poster: mixch.poster,
+          width: 480,
+          height: 853,
+          alt: mixch.alt,
+        },
+      },
+    ]);
+    assert.ok(stuffed.some((error) => error.includes("local /media/ path")));
+
+    const movieFile = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-mps",
+        url: mixch.mixchUrl,
+        media: {
+          ...mixch,
+          poster:
+            "https://d2jtsb989t238a.cloudfront.net/example/_movie_mps/clip.mp4",
+        },
+      },
+    ]);
+    assert.ok(movieFile.some((error) => error.includes("_movie_mps") || error.includes("official Mixch thumbnail")));
+
+    const pageAsPoster = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-page-poster",
+        url: mixch.mixchUrl,
+        media: { ...mixch, poster: "https://mixch.tv/m/ZY4hSt3K" },
+      },
+    ]);
+    assert.ok(pageAsPoster.some((error) => error.includes("official Mixch thumbnail")));
+
+    const profileAsPoster = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-profile-poster",
+        url: mixch.mixchUrl,
+        media: { ...mixch, poster: "https://mixch.tv/u/10114673" },
+      },
+    ]);
+    assert.ok(profileAsPoster.some((error) => error.includes("official Mixch thumbnail")));
+
+    const fileCta = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-cta-file",
+        url: "https://d2jtsb989t238a.cloudfront.net/m/example/_movie_mps/clip.mp4",
+        media: mixch,
+      },
+    ]);
+    assert.ok(
+      fileCta.some(
+        (error) =>
+          error.includes("Mixch CTA") || error.includes("_movie_mps"),
+      ),
+    );
+
+    const mismatchedCta = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-cta-mismatch",
+        url: "https://mixch.tv/m/nxqYblH8",
+        media: mixch,
+      },
+    ]);
+    assert.ok(
+      mismatchedCta.some((error) =>
+        error.includes("Mixch CTA must equal media.mixchUrl"),
+      ),
+      "two different mixch.tv/m/{id} pages must not pass just because both are movie pages",
+    );
+
+    const xPoster = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-x-poster",
+        media: { ...mixch, poster: "https://pbs.twimg.com/media/example.jpg" },
+      },
+    ]);
+    assert.ok(xPoster.some((error) => error.includes("official Mixch thumbnail")));
+  });
+
+  it("accepts self-hosted Fan Room audio and rejects SHOWROOM CDN hotlinks", () => {
+    const audio = {
+      kind: "audio",
+      src: "/media/news/mily-b27-01-girl-award-event-voice.m4a",
+      mimeType: "audio/mp4",
+      alt: "みりぃがファンルームに残した音声メッセージ",
+      label: "みりぃからの音声メッセージ · 22:36",
+    };
+
+    assert.deepEqual(
+      verifyNews([
+        {
+          ...validNews,
+          id: "audio-ok",
+          source: undefined,
+          sourceLabel: "SHOWROOMファンルーム",
+          media: audio,
+        },
+      ]),
+      [],
+    );
+
+    const hotlink = verifyNews([
+      {
+        ...validNews,
+        id: "audio-cdn",
+        media: {
+          ...audio,
+          src: "https://static.showroom-live.com/image/fan_talk/example.aac",
+        },
+      },
+    ]);
+    assert.ok(hotlink.some((error) => error.includes("local /media/ path") || error.includes("hotlink SHOWROOM CDN")));
+
+    const wrongExt = verifyNews([
+      {
+        ...validNews,
+        id: "audio-mp3",
+        media: { ...audio, src: "/media/news/example.mp3" },
+      },
+    ]);
+    assert.ok(wrongExt.some((error) => error.includes("self-hosted .m4a")));
+
+    const badMime = verifyNews([
+      {
+        ...validNews,
+        id: "audio-mime",
+        media: { ...audio, mimeType: "audio/mpeg" },
+      },
+    ]);
+    assert.ok(badMime.some((error) => error.includes("mimeType must be audio/mp4")));
+
+    const noAlt = verifyNews([
+      {
+        ...validNews,
+        id: "audio-alt",
+        media: { ...audio, alt: "" },
+      },
+    ]);
+    assert.ok(noAlt.some((error) => error.includes("alt text")));
   });
 
   it("accepts a local STORIES path as a news related link", () => {

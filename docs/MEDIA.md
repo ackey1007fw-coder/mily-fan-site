@@ -107,8 +107,28 @@ Gallery向きでない素材でも、Story / NEWS向きならその掲載面で�
 
 - 本人の顔の AI 生成・置換・補正、生成塗り足し（outpainting / generative fill）
 - 本人 SNS からの画像・動画の自動取得
+- X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードすること
+- X / Instagram の画像 CDN URL をサイトメディアとして hotlink すること
+- Mixch の `_movie_mps` / MP4 をこのドメインで再生すること（`<video src=Mixch CDN>` / 非公式 iframe 含む）
+- Mixch タイムラインのクロール。扱うのはオーナー指定の `https://mixch.tv/m/{id}` だけ
 - 顔・体を不自然に切るトリミング（見せ方の調整は `focal` = object-position で行う）
 - 元素材・公開済み派生の上書き
+
+### Mixch outbound player card（唯一の SNS サムネイル例外）
+
+Mixch に公式 oEmbed / iframe embed はない。Mixch の movie ファイルは CloudFront `_movie_mps` URL であり、このサイトで再生すると (1) Mixch CDN の hotlink、(2) CAMPUS GIRLS コンテストの視聴・ポイントを Mixch から奪う、(3) SNS ファイルを repo に取り込まない旧ルール違反、になる。
+
+そのため **Mixch ファイルはコピーせず、outbound player card にする。**
+
+- 対象: オーナー指定の公開 Mixch 動画 `https://mixch.tv/m/{id}`。確認済み本人アカウントは `https://mixch.tv/u/10114673` のみ。
+- 掲載面: NEWS（Latest）と Gallery。同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Activities の「関連するメディア」には出さない。
+- 見た目: poster + 中央の再生オーバーレイ + Mixch ラベル。`<video>` も iframe も使わない。
+- poster: その動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）だけを使ってよい。X / Instagram の CDN サムネイル例外は作らない。
+- Play / click / CTA: Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。このサイトで再生していると誤認させない。
+- Mixch ファイルを `media/original/` や `public/media/` に置かない。オーナーが後から原ファイルを提供した場合だけ、既存の自己ホストパイプラインを使う（別経路）。
+- photo-forward: Mixch カードはビジュアルとして数える。該当 NEWS をテキストだけにしない。
+
+データは `src/data/mixchMovies.ts`。UI は `src/components/MixchOutboundCard.tsx`。
 
 ## 動画を受領したら（先行ルール）
 
@@ -1749,3 +1769,31 @@ Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
 
 Gallery 写真は新しい順で b28-01 → b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
 Latest の先頭は 6位お礼X投稿。投票案内Storyカードは同じ日の次点。
+
+## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
+
+2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。
+Gallery・`media.ts`・`galleryVideos.ts`・Drive Gallery・`/stories/` には含めない。
+Fan Roomの生スクリーンショット（前後ナビ・再生UI）は公開していない。
+
+オーナーが当該投稿のサイト内再生を明示依頼。SHOWROOMファンルームページは
+iframeできないため、公開ルームプロフィール API の `voice_list` から得た
+本人音声（id 88767403 / 2026-08-26T22:36:52+09:00）を自己ホストする。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| Fan Room voice | `news/mily-b27-01-girl-award-event-voice.m4a` | ガルアワイベ最終日のお礼音声。約20.8秒 / AAC-LC / 12kHz / mono | ✅ Latest / NEWS のみ |
+
+確認済み:
+
+- provenance: owner-requested（オーナーが当該Fan Room音声のサイト内再生を依頼。SNSから取得していない）
+- 元素材は `media/original/mily-b27-01-girl-award-event-voice.m4a` に受領バイトを変えず保管（gitignore済み・コミットしない）
+  sha256: `33da6fc2a45f51d7df767e10286429313092d576e018f5c911167e19fb588fc1`
+- 元素材の実測: 72,203 bytes / M4A / AAC-LC / 12,000 Hz / mono / 20.82秒 / `creation_time` 2026-08-26T13:36:29Z
+- 公開派生: 89,084 bytes / M4A / AAC-LC / 12,000 Hz / mono / 20.82秒 / sha256
+  `22d00d249e252f3d8da76cbfe1017bd1717954a904c589829174263b94c94468`
+- metadata除去済み（`-map_metadata -1` / `-map_chapters -1`）。`creation_time` は残っていない
+- `+faststart` 確認済み（`moov` offset 28 < `mdat` offset 1770）
+- SHOWROOM CDN URL は公開データへ残さない。hotlinkしない
+- 音声はみりぃ本人のFan Roomボイスメモ。BGM権利が不明な動画音声の無音化ルールとは別判断
+- AI生成・加工なし

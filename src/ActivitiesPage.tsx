@@ -486,13 +486,18 @@ function mediaCaption(media: ActivityMediaItem): string | undefined {
   return "caption" in media ? media.caption : undefined;
 }
 
+function activityMediaKey(media: ActivityMediaItem): string {
+  if ("id" in media && typeof media.id === "string") return media.id;
+  return media.src;
+}
+
 function ActivityMedia({ items }: { items: ActivityMediaItem[] }) {
   if (items.length === 0) return null;
   return (
     <SectionShell eyebrow="Media" title="関連するメディア">
       <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {items.map((media) => {
-          const key = "id" in media ? media.id : media.src;
+          const key = activityMediaKey(media);
           const caption = mediaCaption(media);
           return (
             <li key={key} className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">

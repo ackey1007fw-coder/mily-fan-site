@@ -5,9 +5,15 @@ type ExternalLinkProps = {
   href: string;
   children: ReactNode;
   className?: string;
+  "aria-label"?: string;
 };
 
-export function ExternalLink({ href, children, className }: ExternalLinkProps) {
+export function ExternalLink({
+  href,
+  children,
+  className,
+  "aria-label": ariaLabel,
+}: ExternalLinkProps) {
   const safeHref = toSafeHref(href);
 
   if (!safeHref) {
@@ -20,6 +26,7 @@ export function ExternalLink({ href, children, className }: ExternalLinkProps) {
       className={className}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={ariaLabel}
     >
       {children}
       <span className="sr-only">（新しいタブで開きます）</span>

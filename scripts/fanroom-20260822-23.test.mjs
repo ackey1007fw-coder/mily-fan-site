@@ -134,11 +134,13 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
 
   it("keeps chronological same-day order in the Latest sort", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
-    assert.deepEqual(ordered.slice(0, 20), [
+    assert.deepEqual(ordered.slice(0, 22), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
       "2026-08-26-instagram-followers-400",
       "2026-08-26-morning-stream-thanks",
+      "2026-08-26-girl-award-event-fanroom",
+      "2026-08-26-mixch-15x-day",
       "2026-08-26-stream-1000",
       "2026-08-25-mixch-confidence-message",
       "2026-08-25-motivation",
@@ -156,7 +158,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       EVENING_ID,
       CAMPUS_ID,
     ]);
-    assert.equal(news.length, 35);
+    assert.equal(news.length, 37);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {
@@ -278,7 +280,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
     );
     assert.deepEqual(
       feedNewsIds.filter((id) => id.startsWith("2026-08-22")),
-      [X_NIGHT_ID, NIGHT_ID],
+      [],
     );
 
     const morning = feed.items.find((item) => item.id === `mily:news:${MORNING_ID}`);
