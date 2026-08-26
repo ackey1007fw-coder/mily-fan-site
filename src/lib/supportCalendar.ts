@@ -317,9 +317,10 @@ export function adaptRadioProgram(
   daysAhead: number,
 ): ScheduleItem[] {
   const today = tokyoParts(now).date;
+  const monthStart = `${today.slice(0, 7)}-01`;
+  const endDate = addCalendarDays(today, daysAhead);
   const items: ScheduleItem[] = [];
-  for (let offset = 0; offset <= daysAhead; offset += 1) {
-    const date = addCalendarDays(today, offset);
+  for (let date = monthStart; date <= endDate; date = addCalendarDays(date, 1)) {
     const [year, month, day] = date.split("-").map(Number);
     if (new Date(Date.UTC(year, month - 1, day)).getUTCDay() !== radioProgram.weekday) {
       continue;

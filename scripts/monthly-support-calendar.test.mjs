@@ -7,6 +7,7 @@ import {
   buildMonthGrid,
   daysUntilEndOfNextTokyoMonth,
   expandScheduleItemsByDate,
+  navigableMonthBounds,
   scheduleCategory,
   shiftMonthKey,
   tokyoDateKey,
@@ -79,13 +80,19 @@ describe("monthly Support Calendar grid", () => {
 
     assert.equal(daysAhead, 37);
     assert.deepEqual(radioDates, [
+      "2026-08-02",
+      "2026-08-09",
+      "2026-08-16",
+      "2026-08-23",
       "2026-08-30",
       "2026-09-06",
       "2026-09-13",
       "2026-09-20",
       "2026-09-27",
     ]);
+    assert.equal(radioDates.some((date) => date < "2026-08-01"), false);
     assert.equal(radioDates.some((date) => date > "2026-09-30"), false);
+    assert.equal(scheduleCategory(grouped.get("2026-08-02")?.[0]).label, "RADIO");
     assert.equal(scheduleCategory(grouped.get("2026-09-27")?.[0]).label, "RADIO");
   });
 
@@ -95,8 +102,24 @@ describe("monthly Support Calendar grid", () => {
     const radioDates = adaptRadioProgram(now, daysAhead).map(({ date }) => date);
 
     assert.equal(daysAhead, 38);
+    assert.equal(radioDates[0], "2026-12-06");
     assert.equal(radioDates.at(-1), "2027-01-31");
     assert.equal(radioDates.some((date) => date > "2027-01-31"), false);
+  });
+
+  it("bounds month navigation to the generated range and later confirmed items", () => {
+    assert.deepEqual(navigableMonthBounds("2026-08", []), {
+      minMonth: "2026-08",
+      maxMonth: "2026-09",
+    });
+    assert.deepEqual(
+      navigableMonthBounds("2026-08", ["2026-08", "2026-09", "2026-10"]),
+      { minMonth: "2026-08", maxMonth: "2026-10" },
+    );
+    assert.deepEqual(navigableMonthBounds("2026-12", ["2027-01"]), {
+      minMonth: "2026-12",
+      maxMonth: "2027-01",
+    });
   });
 });
 
@@ -281,6 +304,10 @@ describe("monthly Support Calendar UI source", () => {
     assert.match(calendar, /aria-pressed=\{isSelected\}/);
     assert.match(calendar, /setSelectedDate\(today\)/);
     assert.match(calendar, /setSelectedDate\(nextMonth === todayMonth \? today : null\)/);
+    assert.match(calendar, /previousTodayMonth\.current === todayMonth/);
+    assert.match(calendar, /navigableMonthBounds\(todayMonth, itemMonths\)/);
+    assert.match(calendar, /disabled=\{!canGoPrev\}/);
+    assert.match(calendar, /disabled=\{!canGoNext\}/);
   });
 
   it("keeps the monthly overview, selected-day details, and Agenda together", () => {
@@ -294,6 +321,8 @@ describe("monthly Support Calendar UI source", () => {
     assert.match(calendar, /aria-label="前月を表示"/);
     assert.match(calendar, /aria-label="次月を表示"/);
     assert.match(calendar, /aria-label="今日を表示"/);
+    assert.match(calendar, /disabled=\{!canGoPrev\}/);
+    assert.match(calendar, /disabled=\{!canGoNext\}/);
     assert.match(calendar, /aria-pressed=\{isSelected\}/);
     assert.match(calendar, /<time[\s\S]*?dateTime=\{cell\.date\}/);
     assert.match(calendar, /この日の確認済み予定はありません/);

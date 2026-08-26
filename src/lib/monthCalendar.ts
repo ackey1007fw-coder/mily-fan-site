@@ -84,6 +84,25 @@ export function shiftMonthKey(monthKey: string, offset: number): string {
   return `${shifted.getUTCFullYear()}-${pad2(shifted.getUTCMonth() + 1)}`;
 }
 
+/**
+ * 月間ナビの範囲。radio は当月頭〜翌月末まで生成するので、少なくともその2ヶ月は開く。
+ * ほかの確認済み予定が更に前後へ伸びていれば、その月まで広げる。
+ */
+export function navigableMonthBounds(
+  todayMonth: string,
+  itemMonths: Iterable<string>,
+): { minMonth: string; maxMonth: string } {
+  parseMonthKey(todayMonth);
+  let minMonth = todayMonth;
+  let maxMonth = shiftMonthKey(todayMonth, 1);
+  for (const month of itemMonths) {
+    parseMonthKey(month);
+    if (month < minMonth) minMonth = month;
+    if (month > maxMonth) maxMonth = month;
+  }
+  return { minMonth, maxMonth };
+}
+
 /** 同じ日付は選択解除し、別の日付は新しい選択へ切り替える。 */
 export function toggleSelectedDate(
   current: string | null,

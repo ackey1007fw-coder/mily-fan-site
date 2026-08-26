@@ -193,6 +193,7 @@ export default function SupportPage() {
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
   const now = Date.now();
   const today = tokyoDateKey(now);
+  // radio adapter は now のJST当月1日から、この daysAhead 先まで番組枠を展開する。
   const radioOccurrenceDaysAhead = daysUntilEndOfNextTokyoMonth(now);
   const todayItems = selectSupportToday({
     contest,

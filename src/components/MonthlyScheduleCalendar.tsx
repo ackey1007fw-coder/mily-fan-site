@@ -1,7 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   buildMonthGrid,
   expandScheduleItemsByDate,
+  navigableMonthBounds,
   scheduleCategory,
   shiftMonthKey,
   toggleSelectedDate,
@@ -79,17 +80,37 @@ export function MonthlyScheduleCalendar({
   const todayMonth = today.slice(0, 7);
   const [visibleMonth, setVisibleMonth] = useState(todayMonth);
   const [selectedDate, setSelectedDate] = useState<string | null>(today);
+  const previousTodayMonth = useRef(todayMonth);
   const cells = useMemo(() => buildMonthGrid(visibleMonth), [visibleMonth]);
   const itemsByDate = useMemo(
     () => expandScheduleItemsByDate(calendar.days),
     [calendar.days],
   );
+  const { minMonth, maxMonth } = useMemo(() => {
+    const itemMonths = calendar.days.flatMap((day) => [
+      day.date.slice(0, 7),
+      ...day.items
+        .map((item) => item.endDate?.slice(0, 7))
+        .filter((month): month is string => Boolean(month)),
+    ]);
+    return navigableMonthBounds(todayMonth, itemMonths);
+  }, [calendar.days, todayMonth]);
+  const canGoPrev = visibleMonth > minMonth;
+  const canGoNext = visibleMonth < maxMonth;
   const selectedItems =
     selectedDate === null ? [] : (itemsByDate.get(selectedDate) ?? []);
   const heading = monthHeading(visibleMonth);
 
+  useEffect(() => {
+    if (previousTodayMonth.current === todayMonth) return;
+    previousTodayMonth.current = todayMonth;
+    setVisibleMonth(todayMonth);
+    setSelectedDate(today);
+  }, [todayMonth, today]);
+
   const moveMonth = (offset: number) => {
     const nextMonth = shiftMonthKey(visibleMonth, offset);
+    if (nextMonth < minMonth || nextMonth > maxMonth) return;
     setVisibleMonth(nextMonth);
     setSelectedDate(nextMonth === todayMonth ? today : null);
   };
@@ -105,8 +126,9 @@ export function MonthlyScheduleCalendar({
         <button
           type="button"
           aria-label="前月を表示"
+          disabled={!canGoPrev}
           onClick={() => moveMonth(-1)}
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/25 bg-paper text-xl font-bold text-sage-deep hover:bg-sage-soft"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/25 bg-paper text-xl font-bold text-sage-deep hover:bg-sage-soft disabled:cursor-not-allowed disabled:opacity-40"
         >
           <span aria-hidden="true">‹</span>
         </button>
@@ -126,8 +148,9 @@ export function MonthlyScheduleCalendar({
         <button
           type="button"
           aria-label="次月を表示"
+          disabled={!canGoNext}
           onClick={() => moveMonth(1)}
-          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/25 bg-paper text-xl font-bold text-sage-deep hover:bg-sage-soft"
+          className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/25 bg-paper text-xl font-bold text-sage-deep hover:bg-sage-soft disabled:cursor-not-allowed disabled:opacity-40"
         >
           <span aria-hidden="true">›</span>
         </button>
