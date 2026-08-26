@@ -204,7 +204,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.equal(news.filter((entry) => entry.id === VOTE_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === FOLLOWERS_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === THANKS_NEWS_ID).length, 1);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(vote.date, "2026-08-26");
     assert.equal(vote.sameDayOrder, 3);
@@ -421,9 +421,9 @@ describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
 
     assert.equal(media.filter((entry) => entry.id === "mily-b27-07").length, 1);
     assert.equal(media.filter((entry) => entry.id === "mily-b27-06").length, 1);
-    assert.equal(visible[2], patonVoteMirrorStillPhoto);
-    assert.equal(visible[3], patonVoteCollageStillPhoto);
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 22);
+    assert.equal(visible[5], patonVoteMirrorStillPhoto);
+    assert.equal(visible[6], patonVoteCollageStillPhoto);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 27);
 
     for (const photo of [patonVoteMirrorStillPhoto, patonVoteCollageStillPhoto]) {
       assert.equal(photo.kind, "photo");
@@ -672,7 +672,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /他出場者・順位/);
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
-    assert.match(ops, /37件/);
+    assert.match(ops, /40件/);
     assert.match(ops, /独立動画14本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });

@@ -85,7 +85,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(entry.media, birthdayIndoorSelfieImage);
     assert.equal(entry.additionalMedia, undefined);
     assert.equal(entry.activityIds, undefined);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.deepEqual(verifyNews(news), []);
     assert.ok(sortNewsByDateDesc(news).some((candidate) => candidate.id === NEWS_ID));
   });
@@ -147,7 +147,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     const gallery = media.find((entry) => entry.id === "mily-b29-01");
 
     assert.equal(gallery, birthdayIndoorSelfiePhoto);
-    assert.equal(visible[0], birthdayIndoorSelfiePhoto);
+    assert.equal(visible[3], birthdayIndoorSelfiePhoto);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.published, true);
     assert.equal(gallery.provenance, "sns-post");
@@ -160,7 +160,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(gallery.aspect, "1536 / 2048");
     assert.notEqual(gallery.featured, true);
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 22);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 27);
     assert.deepEqual(verifyMedia(media), []);
 
     const jpg480 = publicFile(`${GALLERY_BASE}-480.jpg`);
@@ -251,8 +251,8 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(findDriveIds(b29).length, 0);
     assert.doesNotMatch(b29, /Millie|millie/);
     assert.doesNotMatch(ops, /Millie|millie/);
-    assert.match(ops, /37件/);
-    assert.match(ops, /写真22枚/);
+    assert.match(ops, /40件/);
+    assert.match(ops, /写真27枚/);
     assert.match(ops, /b29-01/);
 
     const { stdout: trackedOriginal } = await run(

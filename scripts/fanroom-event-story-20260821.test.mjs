@@ -389,7 +389,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

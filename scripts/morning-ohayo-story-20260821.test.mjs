@@ -154,7 +154,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 });
 

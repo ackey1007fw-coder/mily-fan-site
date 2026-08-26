@@ -225,7 +225,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — self-hosted photo"
     const gallery = media.find((entry) => entry.id === "mily-b28-01");
 
     assert.equal(gallery, girlsawardShowroomSixthPhoto);
-    assert.equal(visible[1], girlsawardShowroomSixthPhoto);
+    assert.equal(visible[4], girlsawardShowroomSixthPhoto);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.published, true);
     assert.equal(gallery.provenance, "sns-post");
@@ -238,7 +238,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — self-hosted photo"
     assert.equal(gallery.aspect, "1156 / 2048");
     assert.notEqual(gallery.featured, true);
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 22);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 27);
     assert.deepEqual(verifyMedia(media), []);
 
     const jpg480 = publicFile(`${GALLERY_BASE}-480.jpg`);
@@ -299,7 +299,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
     assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
     assert.equal(ordered[6], "2026-08-26-stream-1000");
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.ok(news.some((entry) => entry.id === "2026-08-26-stream-1000"));
   });
@@ -337,8 +337,8 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(b28.includes("紫ポロ"), false);
     assert.match(b28, /`\/stories\/` 記事と highlights には追加しない/);
     assert.equal(findDriveIds(b28).length, 0);
-    assert.match(ops, /37件/);
-    assert.match(ops, /写真22枚/);
+    assert.match(ops, /40件/);
+    assert.match(ops, /写真27枚/);
 
     const { stdout: trackedOriginal } = await run(
       "git",

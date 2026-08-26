@@ -84,7 +84,7 @@ describe("2026-08-23 dragon-cloud Instagram post — NEWS", () => {
     assert.equal(item.url, undefined);
     assert.equal(item.message, undefined);
     assert.equal(item.ctaLabel, undefined);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
 
     const ordered = sortNewsByDateDesc(news);
     assert.equal(ordered[0].id, "2026-08-26-girlsaward-showroom-6th");

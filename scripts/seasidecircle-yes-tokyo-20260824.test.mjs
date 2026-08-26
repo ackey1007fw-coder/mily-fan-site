@@ -117,7 +117,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.deepEqual(item()?.activityIds, ["radio"]);
     assert.equal(item()?.title, "「Yes!東京」踊ってみた💃");
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -430,7 +430,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.match(docs, /512×910/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /37件/);
+    assert.match(ops, /40件/);
     assert.match(ops, /独立動画14本/);
     assert.match(ops, /Yes!東京/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);

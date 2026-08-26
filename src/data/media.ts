@@ -12,12 +12,17 @@
  *   Keep them null rather than guessing; docs/MEDIA.md tracks what is
  *   still unconfirmed.
  */
+import { eveningRadioShowroomPhoto } from "./eveningRadioShowroom.ts";
+import { pandaPastPicPhoto } from "./pandaPastPic.ts";
+import { ohayoWhitePoloPeacePhoto } from "./ohayoWhitePoloPeace.ts";
 import { birthdayIndoorSelfiePhoto } from "./birthdayIndoorSelfie.ts";
 import { girlsawardShowroomSixthPhoto } from "./girlsawardShowroom6th.ts";
 import {
   patonVoteCollageStillPhoto,
   patonVoteMirrorStillPhoto,
 } from "./patonVoteStoryStills.ts";
+import { morningMakeupShowroomPhoto } from "./morningMakeupShowroomImage.ts";
+import { gandaBeforeNightStreamPhoto } from "./gandaBeforeNightStream.ts";
 
 export type MediaKind = "photo" | "video";
 
@@ -68,10 +73,14 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  eveningRadioShowroomPhoto,
+  pandaPastPicPhoto,
+  ohayoWhitePoloPeacePhoto,
   birthdayIndoorSelfiePhoto,
   girlsawardShowroomSixthPhoto,
   patonVoteMirrorStillPhoto,
   patonVoteCollageStillPhoto,
+  morningMakeupShowroomPhoto,
   {
     id: "mily-b22-01",
     kind: "photo",
@@ -145,6 +154,7 @@ export const media: MediaItem[] = [
     credit: null,
     published: true,
   },
+  gandaBeforeNightStreamPhoto,
   {
     id: "mily-b10-01",
     kind: "photo",

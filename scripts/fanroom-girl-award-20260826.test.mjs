@@ -125,7 +125,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
         "2026-08-26-stream-1000",
       ],
     );
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 
   it("keeps the voice memo on Latest / NEWS only", () => {
@@ -276,7 +276,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
       readFile(path.join(root, "docs/MEDIA.md"), "utf8"),
     ]);
 
-    assert.match(ops, /37件/);
+    assert.match(ops, /40件/);
     assert.match(ops, /ガルアワイベ最終日【6位】/);
     assert.match(ops, /kind: "audio"/);
     assert.match(ops, /自己ホストの `\.m4a`/);

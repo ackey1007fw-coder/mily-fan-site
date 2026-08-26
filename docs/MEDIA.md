@@ -768,14 +768,16 @@ ffmpeg -ss 10.0 -i public/media/gallery/mily-b13-02-event-story.mp4 \
 
 ## 素材台帳（batch b14 / 受領日・source date 2026-08-21）
 
-本人Xの2026-08-21「急遽なガンダ」投稿に添付された、オーナー直接提供の縦写真。
-Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery動画・`/stories/`には追加しない。
+本人Xの2026-08-21「急遽なガンダ」投稿に添付された縦写真。
+Latest / NEWS の自己ホスト JPEG（720×1280）は既存のまま上書きしない。
+Gallery は同じツイート写真のより大きい orig（1162×2048）から `pnpm media:build` した派生。
 
 一次出典: https://x.com/mily_chan36/status/2090722156162478273
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b14-01 | `news/mily-b14-01-ganda-before-night-stream.jpg` | 黒いキャップとマスク姿で青空と太陽を背にした縦写真。写真内に昼枠配信と23:00からの配信についての文字を表示。720×1280。owner-provided | ✅ Latestのみ / Galleryには追加しない |
+| b14-01 NEWS | `news/mily-b14-01-ganda-before-night-stream.jpg` | 黒いキャップとマスク姿で青空と太陽を背にした縦写真。写真内に昼枠配信と23:00からの配信についての文字を表示。720×1280。既存NEWS JPEGを維持 | ✅ Latest / NEWS の fallback `src`。上書きしない |
+| b14-01 Gallery | `gallery/mily-b14-01-ganda-before-night-stream-{480,960,1600}.{jpg,webp}` | 同じツイート写真の 1162×2048 orig から生成。withoutEnlargement で 1600 は 1162 のまま | ✅ Gallery photo（`media.ts`）。NEWS JPEG のバイトは複製していない |
 
 確認済み:
 
@@ -796,8 +798,12 @@ Latest / NEWS専用の自己ホスト画像として扱い、Gallery・Gallery�
 - 元画像と公開画像の同位置画素を比較した平均絶対差は1.0313（8bit / channel）。
   metadata除去以外の構図変更がないことを確認した
 - AI生成・AI補正・顔加工・顔置換・generative fill・outpaintingなし
-- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`には追加していない
+- `src/data/media.ts` に Gallery 項目 `mily-b14-01` を追加。`/stories/` には追加しない
 - 撮影者は未確認のため記録しない。X画像URL・受け渡しURLは公開情報へ残さない
+
+Gallery 派生は X orig 1162×2048（sha256
+`fe7503713af5e0e04f853c6af240f102458fbef08fd48bc5afe3a0196a4182a0` / 263,581 bytes）から生成。
+既存 NEWS JPEG とは別バイト。同じツイート写真の高解像度版。
 
 ## 素材台帳（batch b15 / 受領日・source date 2026-08-21）
 
@@ -1404,8 +1410,8 @@ ffmpeg -ss 4.0 -i public/media/gallery/mily-b23-01-night-thanks-morning-stream-s
 
 本人Xの2026-08-24朝メイク配信お礼投稿に添付された、オーナー直接提供の横長SHOWROOM公開配信画面と、
 同じ朝の本人Instagram Story縦長ビジュアル。b24-01をNEWSの代表画像、b24-02を同じNEWSカードの
-2枚目として自己ホストし、HOME Latestと`/news/`に掲載する。Gallery・Gallery動画・Drive Gallery・
-`/stories/`・`highlights.ts`には追加しない。
+2枚目として自己ホストし、HOME Latestと`/news/`に掲載する。b24-01 は Gallery にも出す。
+b24-02 と Gallery動画・Drive Gallery・`/stories/`・`highlights.ts`には追加しない。
 
 b24-01はNEWSの代表画像としてHOME Latestと`/news/`に表示し、Portal Feedの代表画像にも使う。
 NEWS が `activityIds: ["live-stream"]` を持つため、他のNEWS代表画像
@@ -1422,7 +1428,7 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ NEWS代表画像。HOME Latest / `/news/` / Portal Feed。`activityIds` 経由で `/activities/live/` の関連メディアにも出る。Gallery・`/stories/`・highlights には追加しない |
+| b24-01 | `news/mily-b24-01-morning-makeup-showroom.jpg` | 花火大会仕様のSHOWROOM公開配信画面。中央にみりぃが両手を振っている横長画像。1500×691。owner-provided | ✅ NEWS代表画像。HOME Latest / `/news/` / Portal Feed / Gallery。`activityIds` 経由で `/activities/live/` の関連メディアにも出る。NEWS JPEG は上書きしない。`/stories/`・highlights には追加しない |
 | b24-02 | `news/mily-b24-02-morning-makeup-instagram-story.jpg` | 本人Instagram Storyの縦長ビジュアル。「初メイク配信」の本文とSHOWROOM画面3枚。1500×2667。owner-provided | ✅ HOME Latest / `/news/` の同じNEWSカードの2枚目。当該素材・当該掲載面のオーナー承認。Gallery・`/stories/` には追加しない |
 
 ### b24-01 SHOWROOM画面
@@ -1452,7 +1458,9 @@ Story側の恒久permalinkは確認できていない。Instagramプロフィー
 - 掲載面: HOME Latest / `/news/` / Portal Feed の代表画像。NEWS の
   `activityIds: ["live-stream"]` により `/activities/live/` の「関連するメディア」にも
   自動で出る（`selectActivityMedia()` の標準動作。個別のフィルタは入れていない）
-- `src/data/media.ts`・`src/data/galleryVideos.ts`・`src/data/stories.ts`・
+- Gallery は既存 NEWS JPEG（1500×691）から `pnpm media:build` した派生。ツイート orig
+  （1206×555）は同じショットの別解像度のため再インポートしない
+- `src/data/galleryVideos.ts`・`src/data/stories.ts`・
   `src/data/highlights.ts`には追加していない
 
 ### b24-02 Instagram Story（HOME Latest / NEWS専用）
@@ -1845,8 +1853,118 @@ Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
 - 1600.webp 139,944 bytes / sha256
   `5fb4fe7ed3857bcc16b5aa09ef54b454410f1ecb290b098a18b68b5c9614aebb`
 
-Gallery 写真は新しい順で b29-01 → b28-01 → b27-07（鏡）→ b27-06（コラージュ）のあと既存写真。
-NEWS 件数は 37 のまま。誕生日カードはテキストだけにしない。
+Gallery 写真は新しい順で b32-01 → b31-01 → b30-01 → b29-01 → b28-01 → b27-07（鏡）→ b27-06（コラージュ）→ b24-01 のあと既存写真。
+NEWS 件数は 40。誕生日カードはテキストだけにしない。
+
+## 素材台帳（batch b30 / 受領日・source date 2026-08-06）
+
+2026-08-06 06:32:32 JST の本人X投稿（created_at Wed Aug 05 21:32:32 UTC 2026）。
+公開permalinkあり。白いポロシャツでピース、星ステッカーと「OHAYO」。
+`sns-post`。b06 ウインク自撮り・b08 鏡とは別カット。
+
+新しい NEWS `2026-08-06-ohayo-morning-stream`。Gallery にも出す。
+配信時刻は投稿の案内として本文に残し、`events.ts` / `streamSchedule.ts` には転記しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b30-01 NEWS | `news/mily-b30-01-ohayo-white-polo-peace.jpg` | 白いポロ・ピース・星ステッカー・OHAYO。1153×2048。sns-post | ✅ 新NEWS の fallback `src` |
+| b30-01 Gallery | `gallery/mily-b30-01-ohayo-white-polo-peace-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生。元素材 1153×2048 | ✅ Gallery photo |
+
+出典: `https://x.com/Mily_chan36/status/2085116769161896098`
+
+NEWS JPEG: 190,333 bytes / 1153×2048 / sha256
+`0c4c65eaeba1b9557ab55899220847065a381f0c7ce2824f64b9e8076d934a95`
+（元素材と同一バイト。EXIF / ICC なし）
+
+Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
+
+- 480.jpg 43,217 bytes / 480×853 / sha256
+  `fc90fc930c7973bfd96907a2fb0d179bd965c422096cc8ea6ef3b662ce447e93`
+- 960.jpg 117,580 bytes / 960×1705 / sha256
+  `b86ed081e57332aef197f9e1e16e49d384bd3ca65ae31acc6aca76a7692872fc`
+
+## 素材台帳（batch b31 / 受領日・source date 2026-08-05）
+
+2026-08-05 06:24:52 JST の本人X投稿（created_at Tue Aug 04 21:24:52 UTC 2026）。
+公開permalinkあり。パンダ耳・鼻フィルター、グリッター、「おはよう」「※過去pic」。
+投稿時点の新撮ではないことを本文と caption に残す。`sns-post`。b06 とは別カット。
+
+新しい NEWS `2026-08-05-panda-past-pic`。Gallery にも出す。
+配信枠は投稿の案内として本文に残し、`events.ts` / `streamSchedule.ts` には転記しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b31-01 NEWS | `news/mily-b31-01-panda-past-pic.jpg` | パンダ耳過去pic。1153×2048。sns-post | ✅ 新NEWS の fallback `src` |
+| b31-01 Gallery | `gallery/mily-b31-01-panda-past-pic-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生 | ✅ Gallery photo |
+
+出典: `https://x.com/Mily_chan36/status/2084752452373680152`
+
+NEWS JPEG: 145,320 bytes / 1153×2048 / sha256
+`0152f1bef64795b054e9267d40335fa77df8f83776fa68a4f187abfd90f4127a`
+
+Gallery 480.jpg sha256
+`e465173a4d7e364664a288d18951508d45481fff0fd1256671135781631bee1c`
+Gallery 960.jpg sha256
+`6a4ac8dec908a700d332e6037ce38bb4229285830564126c77aeeef649fd2d95`
+
+## 素材台帳（batch b32 / 受領日・source date 2026-08-18）
+
+2026-08-18 23:30:41 JST の本人X投稿（created_at Tue Aug 18 14:30:41 UTC 2026）。
+ラジオ配信SHOWROOM画面。ゴディバのカップを持ち目を閉じて微笑むみりぃ。
+既存 NEWS `2026-08-18-evening-radio` へ添付（新しいNEWSは作らない）。Gallery にも出す。
+出典 / CTA（X と `/stories/2026-08-18-radio/`）は維持。本文の体調表現は変えていない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b32-01 NEWS | `news/mily-b32-01-evening-radio-showroom.jpg` | SHOWROOM画面。1216×2048。sns-post | ✅ 既存ラジオNEWS の fallback `src`（ICC除去のため q95 再エンコード。Gallery 1600 とは別バイト） |
+| b32-01 Gallery | `gallery/mily-b32-01-evening-radio-showroom-{480,960,1600}.{jpg,webp}` | 元素材 1216×2048 から `pnpm media:build` | ✅ Gallery photo |
+
+出典: `https://x.com/Mily_chan36/status/2089721650522820667`
+
+元素材（gitignore）: 538,086 bytes / 1216×2048 / sha256
+`9a6888ce2b1dacc82dc3aaf147de4ca64a16640ceac80cd6a8fd13397229d918`
+
+NEWS JPEG: 699,791 bytes / 1216×2048 / sha256
+`734ae7ac7fe01b1f74828b8488767f60da6119f9c06141ea3f6f0c15bf456e7f`
+
+Gallery 480.jpg sha256
+`e73fcfee3d195e1e06171cd8952103e0e83004ff51dba28f24c5c6473fb8cd71`
+Gallery 960.jpg sha256
+`03d6834723027607e71d0126378be763cfb0dcd29e3e61388d01fde6ee1b5144`
+
+## 素材台帳（batch b33 / 受領日・source date 2026-08-24）
+
+2026-08-24 の本人X投稿に添えられた CAMPUS GIRLS 2027 予選A Final STAGE 案内グラフィック。
+実写ポートレートではない。既存 NEWS `2026-08-24-campus-girls-final-stage-guide` の
+additionalMedia（b26-02 の次）として掲載。Gallery には出さない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b33-01 NEWS | `news/mily-b33-01-campus-girls-final-stage-flyer.jpg` | Final STAGE 案内グラフィック。1024×1536。sns-post | ✅ 既存CAMPUS GIRLS NEWS の additionalMedia。Gallery 非掲載 |
+
+出典: `https://x.com/mily_chan36/status/2091669951946121636`
+
+NEWS JPEG: 256,839 bytes / 1024×1536 / sha256
+`93232254cd165349814262aceb7a98c1961480140aea140dcf2a58d46feac6a3`
+
+## 素材台帳（batch b34 / 受領日・source date 2026-08-08）
+
+2026-08-08 23:09:48 JST の本人X投稿（created_at Sat Aug 08 14:09:48 UTC 2026）。
+2次審査期間の配信スケジュール案内グラフィック。実写ポートレートではない。
+新しい NEWS `2026-08-08-second-round-timetable`。Gallery には出さない。
+画像内の枠は投稿の案内であり、`events.ts` / `streamSchedule.ts` には転記しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b34-01 NEWS | `news/mily-b34-01-second-round-timetable.jpg` | 2次審査期間の配信スケジュール案内。1149×1369。sns-post | ✅ 新NEWS のみ。Gallery 非掲載 |
+
+出典: `https://x.com/Mily_chan36/status/2086092518719140028`
+
+NEWS JPEG: 272,873 bytes / 1149×1369 / sha256
+`7835466343a655224b4aeff52e3074db8eb5e2ec92343795df1f86433d59c692`
+
+b05-01 は既存 Gallery のまま。NEWS `2026-08-19-second-round-result` へ srcset で配線した。
+新しいファイルは作っていない。`media.ts` の `sourceUrl` は未確認のため null のまま。
 
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 

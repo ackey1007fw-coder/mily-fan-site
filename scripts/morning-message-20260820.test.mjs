@@ -248,7 +248,7 @@ describe("2026-08-20 morning X post — stays Latest-only", () => {
     ]) {
       assert.ok(news.some((entry) => entry.id === id), id);
     }
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 });
 

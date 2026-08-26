@@ -47,7 +47,7 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     );
     assert.deepEqual(
       entry.additionalMedia?.map(({ src }) => src),
-      ["/media/news/mily-b26-02-campus-girls-paton-page.jpg"],
+      ["/media/news/mily-b26-02-campus-girls-paton-page.jpg", "/media/news/mily-b33-01-campus-girls-final-stage-flyer.jpg"],
     );
     assert.deepEqual(verifyNews(news), []);
   });
@@ -159,11 +159,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /37件/);
+    assert.match(ops, /40件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /8月26日の本人XによるPaton直接案内/);
     assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
     assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 });
