@@ -83,19 +83,34 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
     }
   });
 
-  it("keeps the X announcement verbatim with Mixch-page emoji code points", () => {
+  it("keeps the X announcement verbatim with Mixch-page emoji code points", async () => {
     const entry = item();
 
     assert.equal(entry.message?.label, "みりぃのX投稿");
     assert.equal(entry.message?.text, MESSAGE);
+    assert.equal(entry.message.text.split("\n").length, 2);
+    assert.match(entry.message.text, /^おすすめの動画を見つけたよ！ #ミクチャ\n/u);
     assert.match(
       entry.message.text,
-      /今日は1\.5倍デーだってよ？！\u{1F633}\u{1FAF6}\u{1F3FB}\u{2763}\u{FE0F}私はみんなと絶景見に行くよ/u,
+      /\n今日は1\.5倍デーだってよ？！\u{1F633}\u{1FAF6}\u{1F3FB}\u{2763}\u{FE0F}私はみんなと絶景見に行くよ。絶対にね。/u,
+    );
+
+    const line2 = entry.message.text.split("\n")[1];
+    const clusterStart = line2.indexOf("？！") + "？！".length;
+    assert.deepEqual(
+      [...line2.slice(clusterStart)].slice(0, 5).map((char) => char.codePointAt(0)),
+      [0x1f633, 0x1faf6, 0x1f3fb, 0x2763, 0xfe0f],
     );
     assert.equal(entry.message.text.includes("\u{2764}"), false);
     assert.equal(entry.message.text.includes("\u{1FAF6}\u{FE0F}"), false);
     assert.equal(entry.source.includes("?s="), false);
     assert.equal(entry.source.includes("instagram.com"), false);
+
+    const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
+    assert.match(
+      newsSource,
+      /\\u\{1F633\}\\u\{1FAF6\}\\u\{1F3FB\}\\u\{2763\}\\u\{FE0F\}/,
+    );
   });
 
   it("leads 2026-08-26 NEWS above the 10:00 stream item via source-array order", () => {
