@@ -224,7 +224,19 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     assert.match(latest, /newsDisplayMedia\(item\)/);
 
     const gallerySource = sources[2];
-    assert.match(gallerySource, /const mixchCards = capped\.filter/);
+    assert.match(
+      gallerySource,
+      /const mixchCards = visible\.filter\(\(entry\) => entry\.kind === "mixch"\)/,
+    );
+    assert.doesNotMatch(
+      gallerySource,
+      /const mixchCards = (capped|entries)\.filter/,
+    );
+    assert.ok(
+      gallerySource.indexOf("const visible = capped.slice") <
+        gallerySource.indexOf("const mixchCards = visible.filter"),
+      "Mixch cards must be taken from the visible window, not the whole archive",
+    );
     assert.ok(
       gallerySource.indexOf("mixchCards.length > 0") <
         gallerySource.indexOf("photos.map"),
@@ -235,6 +247,26 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     const activitiesPage = sources[3];
     assert.doesNotMatch(activitiesPage, /MixchOutboundCard/);
     assert.doesNotMatch(activitiesPage, /kind === "mixch"/);
+  });
+
+  it("keeps Mixch posters inside the Gallery visible window, not the whole archive", () => {
+    const extras = Array.from({ length: 15 }, (_, index) => ({
+      kind: "mixch",
+      key: `extra-mixch-${index}`,
+      item: mixch15xDayMovie,
+    }));
+    const archive = [...extras, ...selectGalleryEntries()];
+    const visible = archive.slice(0, GALLERY_ARCHIVE_INITIAL);
+    const mixchInVisible = visible.filter((entry) => entry.kind === "mixch");
+    const mixchInArchive = archive.filter((entry) => entry.kind === "mixch");
+
+    assert.ok(mixchInArchive.length > GALLERY_ARCHIVE_INITIAL);
+    assert.equal(mixchInVisible.length, GALLERY_ARCHIVE_INITIAL);
+    assert.equal(
+      mixchInVisible.length < mixchInArchive.length,
+      true,
+      "visible window must not include every Mixch card in the archive",
+    );
   });
 
   it("does not copy Mixch movie files into public/media or media/original", async () => {

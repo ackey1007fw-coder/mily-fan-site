@@ -170,7 +170,10 @@ export function Gallery({
   );
   const visible = capped.slice(0, visibleCount);
   const canLoadMore = visibleCount < capped.length;
-  const mixchCards = capped.filter((entry) => entry.kind === "mixch");
+  // Mixch still renders above the photo grid, but only items inside `visible`
+  // (initialVisible / 「もっと見る」). Filtering `capped` would load every
+  // Mixch poster on first paint once more than 12 Mixch movies exist.
+  const mixchCards = visible.filter((entry) => entry.kind === "mixch");
   const photos = visible.filter(
     (entry) => entry.kind === "media" || entry.kind === "drive-photo",
   );
