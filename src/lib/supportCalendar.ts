@@ -13,6 +13,11 @@ import {
   type SupportEventSchedule,
 } from "../data/supportEvents.ts";
 import { isValidSlot, type StreamSlot } from "../data/streamSchedule.ts";
+import {
+  MAX_SUPPORT_CALENDAR_MONTHS_AHEAD,
+  MAX_SUPPORT_CALENDAR_MONTHS_BACK,
+  shiftMonthKey,
+} from "./monthCalendar.ts";
 
 export type ScheduleOrigin =
   | "contest"
@@ -312,14 +317,41 @@ export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
   }));
 }
 
-export function adaptRadioProgram(
-  now: number,
-  daysAhead: number,
-): ScheduleItem[] {
-  const today = tokyoParts(now).date;
+function monthStartDate(date: string): string {
+  return `${date.slice(0, 7)}-01`;
+}
+
+function monthEndDate(date: string): string {
+  const year = Number(date.slice(0, 4));
+  const month = Number(date.slice(5, 7));
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return `${date.slice(0, 7)}-${String(lastDay).padStart(2, "0")}`;
+}
+
+function supportCalendarHorizon(now: number): { startDate: string; endDate: string } {
+  const todayMonth = tokyoParts(now).date.slice(0, 7);
+  return {
+    startDate: `${shiftMonthKey(todayMonth, -MAX_SUPPORT_CALENDAR_MONTHS_BACK)}-01`,
+    endDate: monthEndDate(
+      `${shiftMonthKey(todayMonth, MAX_SUPPORT_CALENDAR_MONTHS_AHEAD)}-01`,
+    ),
+  };
+}
+
+function clampToHorizon(
+  startDate: string,
+  endDate: string,
+  horizon: { startDate: string; endDate: string },
+): { startDate: string; endDate: string } | null {
+  const clampedStart = startDate < horizon.startDate ? horizon.startDate : startDate;
+  const clampedEnd = endDate > horizon.endDate ? horizon.endDate : endDate;
+  if (clampedStart > clampedEnd) return null;
+  return { startDate: clampedStart, endDate: clampedEnd };
+}
+
+function radioSlotsBetween(startDate: string, endDate: string): ScheduleItem[] {
   const items: ScheduleItem[] = [];
-  for (let offset = 0; offset <= daysAhead; offset += 1) {
-    const date = addCalendarDays(today, offset);
+  for (let date = startDate; date <= endDate; date = addCalendarDays(date, 1)) {
     const [year, month, day] = date.split("-").map(Number);
     if (new Date(Date.UTC(year, month - 1, day)).getUTCDay() !== radioProgram.weekday) {
       continue;
@@ -342,6 +374,49 @@ export function adaptRadioProgram(
     });
   }
   return items;
+}
+
+/**
+ * ナビ可能な月（当月頭〜翌月末、および他の確認済み予定が伸びる月）に
+ * 同じ番組枠を展開する。新しい外部事実は追加しない。
+ * 遠隔日付は前後12ヶ月の安全上限を超えて展開しない。
+ */
+function adaptRadioProgramForCalendar(
+  now: number,
+  daysAhead: number,
+  otherItems: ScheduleItem[],
+): ScheduleItem[] {
+  const today = tokyoParts(now).date;
+  const horizon = supportCalendarHorizon(now);
+  let startDate = monthStartDate(today);
+  let endDate = addCalendarDays(today, daysAhead);
+  for (const item of otherItems) {
+    const overlapping = clampToHorizon(
+      monthStartDate(item.date),
+      monthEndDate(item.endDate ?? item.date),
+      horizon,
+    );
+    if (!overlapping) continue;
+    if (overlapping.startDate < startDate) startDate = overlapping.startDate;
+    if (overlapping.endDate > endDate) endDate = overlapping.endDate;
+  }
+  const clamped = clampToHorizon(startDate, endDate, horizon);
+  if (!clamped) return [];
+  return radioSlotsBetween(clamped.startDate, clamped.endDate);
+}
+
+export function adaptRadioProgram(
+  now: number,
+  daysAhead: number,
+): ScheduleItem[] {
+  const today = tokyoParts(now).date;
+  const clamped = clampToHorizon(
+    monthStartDate(today),
+    addCalendarDays(today, daysAhead),
+    supportCalendarHorizon(now),
+  );
+  if (!clamped) return [];
+  return radioSlotsBetween(clamped.startDate, clamped.endDate);
 }
 
 const tokyoShortDateFormatter = new Intl.DateTimeFormat("ja-JP", {
@@ -474,12 +549,17 @@ export function buildSupportCalendar(input: {
   );
   const contestResult = adaptContestSchedule(input.contest);
   const supportResult = adaptSupportEvents(input.supportEvents);
-  const scheduled = [
+  const datedItems = [
     ...contestResult.items,
     ...supportResult.items,
     ...adaptFanEvents(input.fanEvents),
     ...adaptStreamSlots(streamSlots),
-    ...(input.includeRadio ? adaptRadioProgram(input.now, input.daysAhead) : []),
+  ];
+  const scheduled = [
+    ...datedItems,
+    ...(input.includeRadio
+      ? adaptRadioProgramForCalendar(input.now, input.daysAhead, datedItems)
+      : []),
   ].sort(compareScheduleItems);
 
   const dayMap = new Map<string, ScheduleItem[]>();

@@ -7,18 +7,21 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = (relative) => readFileSync(path.join(root, relative), "utf8");
 
-describe("Support Calendar agenda UI", () => {
-  it("renders one semantic vertical agenda grouped by JST date", () => {
+describe("Support Calendar monthly and agenda UI", () => {
+  it("renders the monthly overview and keeps the semantic Agenda grouped by JST date", () => {
     const page = source("src/SupportPage.tsx");
+    const month = source("src/components/MonthlyScheduleCalendar.tsx");
     assert.match(page, /function SupportCalendarAgenda/);
-    assert.match(page, /title="Support Calendar"/);
+    assert.match(page, /title="みりぃスケジュール"/);
     assert.match(page, /timeZone: "Asia\/Tokyo"/);
+    assert.match(page, /<MonthlyScheduleCalendar calendar=\{calendar\} today=\{today\}/);
+    assert.match(month, /grid-cols-7/);
+    assert.match(month, /月", "火", "水", "木", "金", "土", "日/);
     assert.match(page, /<ol[^>]+aria-label="確認済み予定の日付別一覧"/);
     assert.match(page, /<h3[\s\S]*?<time dateTime=\{day\.date\}>/);
     assert.match(page, /day\.items\.map/);
     assert.match(page, /min-w-0/);
-    assert.match(page, /break-words/);
-    assert.doesNotMatch(page, /grid-cols-7|月間Calendar|monthly/i);
+    assert.match(source("src/components/SupportScheduleItemCard.tsx"), /break-words/);
   });
 
   it("uses the derived calendar result for all five sources and pending", () => {
@@ -87,28 +90,28 @@ describe("Support Calendar agenda UI", () => {
   });
 
   it("shows the end date for cross-day timed items only when the end is confirmed", () => {
-    const page = source("src/SupportPage.tsx");
-    assert.match(page, /scheduleTimeLabel\(item\)/);
-    assert.match(page, /isCrossDayTimedItem\(item\) && item\.endDate !== null/);
-    assert.match(page, /formatShortTokyoDate\(item\.date\)/);
+    const card = source("src/components/SupportScheduleItemCard.tsx");
+    assert.match(card, /scheduleTimeLabel\(item\)/);
+    assert.match(card, /isCrossDayTimedItem\(item\) && item\.endDate !== null/);
+    assert.match(card, /formatShortTokyoDate\(item\.date\)/);
     // 終了側は開始年と異なる年だけを付けるend date formatを使う。
-    assert.match(page, /formatShortTokyoEndDate\(item\.date, item\.endDate\)/);
-    assert.doesNotMatch(page, /formatShortTokyoDate\(item\.endDate\)/);
-    assert.match(page, /item\.endTime !== null \? ` \$\{item\.endTime\}` : ""/);
-    assert.match(page, /日をまたぎます/);
+    assert.match(card, /formatShortTokyoEndDate\(item\.date, item\.endDate\)/);
+    assert.doesNotMatch(card, /formatShortTokyoDate\(item\.endDate\)/);
+    assert.match(card, /item\.endTime !== null \? ` \$\{item\.endTime\}` : ""/);
+    assert.match(card, /日をまたぎます/);
     // 既存の all-day 期間表示は維持する。
-    assert.match(page, /item\.allDay && item\.span && item\.span\.start !== item\.span\.end/);
+    assert.match(card, /item\.allDay && item\.span && item\.span\.start !== item\.span\.end/);
   });
 
   it("renders date-only FanEvent spans as time-unconfirmed without inventing all-day timing", () => {
-    const page = source("src/SupportPage.tsx");
+    const card = source("src/components/SupportScheduleItemCard.tsx");
     const calendar = source("src/lib/supportCalendar.ts");
     assert.match(calendar, /allDay: false,[\s\S]*?span: item\.endAt/);
     assert.match(calendar, /if \(item\.startTime === null\) \{/);
     assert.match(calendar, /return "時刻未確認";/);
-    assert.match(page, /isTimeUnconfirmedDateSpan\(item\) && item\.endDate !== null/);
+    assert.match(card, /isTimeUnconfirmedDateSpan\(item\) && item\.endDate !== null/);
     assert.match(
-      page,
+      card,
       /期間 \{formatShortTokyoDate\(item\.date\)\}〜\s*\{formatShortTokyoEndDate\(item\.date, item\.endDate\)\}/,
     );
   });
@@ -124,14 +127,14 @@ describe("Support Calendar agenda UI", () => {
   });
 
   it("shows only confirmed times, safe links, and the radio disclaimer", () => {
-    const page = source("src/SupportPage.tsx");
+    const card = source("src/components/SupportScheduleItemCard.tsx");
     const calendar = source("src/lib/supportCalendar.ts");
     assert.match(calendar, /item\.timing === "instant"[\s\S]*?return item\.startTime/);
     assert.match(calendar, /item\.endTime === null[\s\S]*?`\$\{item\.startTime\} 開始`/);
-    assert.match(page, /<ActionLink action=\{item\.cta\}/);
-    assert.match(page, /<ExternalLink href=\{item\.source\}/);
+    assert.match(card, /<ExternalLink href=\{item\.cta\.url\}/);
+    assert.match(card, /<ExternalLink href=\{item\.source\}/);
     assert.match(calendar, /番組枠です。みりぃ本人の出演時間とは限りません。/);
-    assert.doesNotMatch(page, /みりぃ出演中|みりぃの出演時間/);
+    assert.doesNotMatch(card, /みりぃ出演中|みりぃの出演時間/);
   });
 
   it("keeps P4 NOW accessibility and leaves the Calendar on /support/", () => {

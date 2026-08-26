@@ -1,0 +1,234 @@
+import { isValidDateOnly } from "../data/events.ts";
+import type {
+  ScheduleItem,
+  SupportCalendarResult,
+} from "./supportCalendar.ts";
+
+export type MonthGridCell = {
+  date: string | null;
+  day: number | null;
+};
+
+export type ScheduleCategory = {
+  id: "miss-circle" | "campus-girls" | "showroom" | "live" | "radio" | "event";
+  label: string;
+  compactLabel: string;
+};
+
+const tokyoDatePartsFormatter = new Intl.DateTimeFormat("en-US", {
+  timeZone: "Asia/Tokyo",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+function pad2(value: number): string {
+  return String(value).padStart(2, "0");
+}
+
+function parseMonthKey(monthKey: string): { year: number; month: number } {
+  const match = /^(\d{4})-(\d{2})$/.exec(monthKey);
+  if (!match) throw new Error(`Invalid month key: ${monthKey}`);
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  if (month < 1 || month > 12) {
+    throw new Error(`Invalid month key: ${monthKey}`);
+  }
+  return { year, month };
+}
+
+function addCivilDays(date: string, days: number): string {
+  const year = Number(date.slice(0, 4));
+  const month = Number(date.slice(5, 7));
+  const day = Number(date.slice(8, 10));
+  const next = new Date(Date.UTC(year, month - 1, day + days));
+  return `${next.getUTCFullYear()}-${pad2(next.getUTCMonth() + 1)}-${pad2(next.getUTCDate())}`;
+}
+
+function civilDayNumber(date: string): number {
+  if (!isValidDateOnly(date)) throw new Error(`Invalid civil date: ${date}`);
+  const year = Number(date.slice(0, 4));
+  const month = Number(date.slice(5, 7));
+  const day = Number(date.slice(8, 10));
+  return Date.UTC(year, month - 1, day) / 86_400_000;
+}
+
+/** `now` をAsia/Tokyoのcivil dateへ変換する。ブラウザのlocal timezoneは使わない。 */
+export function tokyoDateKey(now: number): string {
+  if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
+  const parts = tokyoDatePartsFormatter.formatToParts(new Date(now));
+  const part = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((item) => item.type === type)?.value ?? "";
+  return `${part("year")}-${part("month")}-${part("day")}`;
+}
+
+export function tokyoMonthKey(now: number): string {
+  return tokyoDateKey(now).slice(0, 7);
+}
+
+/** 次の Asia/Tokyo 0:00 までのミリ秒。カレンダーの日付境界用。 */
+export function msUntilNextTokyoMidnight(now: number): number {
+  if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
+  const today = tokyoDateKey(now);
+  const nextMidnight = Date.parse(`${addCivilDays(today, 1)}T00:00:00+09:00`);
+  return Math.max(nextMidnight - now, 0);
+}
+
+/** 現在のJST civil dateから、次のJST月の末日までの日数を返す。 */
+export function daysUntilEndOfNextTokyoMonth(now: number): number {
+  const today = tokyoDateKey(now);
+  const { year, month } = parseMonthKey(shiftMonthKey(today.slice(0, 7), 1));
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  const endOfNextMonth = `${year}-${pad2(month)}-${pad2(lastDay)}`;
+  return civilDayNumber(endOfNextMonth) - civilDayNumber(today);
+}
+
+/** 年跨ぎを含め、JST civil monthのkeyを前後へ移動する。 */
+export function shiftMonthKey(monthKey: string, offset: number): string {
+  if (!Number.isInteger(offset)) throw new Error("offset must be an integer");
+  const { year, month } = parseMonthKey(monthKey);
+  const shifted = new Date(Date.UTC(year, month - 1 + offset, 1));
+  return `${shifted.getUTCFullYear()}-${pad2(shifted.getUTCMonth() + 1)}`;
+}
+
+/**
+ * 月間ナビと radio 展開の安全上限。確認済み予定が年 9999 など遠隔でも、
+ * 暦日ループやナビ範囲がそこまで伸びないようにする。新しい事実は追加しない。
+ */
+export const MAX_SUPPORT_CALENDAR_MONTHS_AHEAD = 12;
+export const MAX_SUPPORT_CALENDAR_MONTHS_BACK = 12;
+
+/**
+ * 月間ナビの範囲。radio は当月頭〜翌月末まで生成するので、少なくともその2ヶ月は開く。
+ * ほかの確認済み予定が更に前後へ伸びていれば、その月まで広げる。
+ * 遠隔の破損日付でナビ範囲が年単位に広がらないよう、前後12ヶ月で打ち切る。
+ */
+export function navigableMonthBounds(
+  todayMonth: string,
+  itemMonths: Iterable<string>,
+): { minMonth: string; maxMonth: string } {
+  parseMonthKey(todayMonth);
+  const floor = shiftMonthKey(todayMonth, -MAX_SUPPORT_CALENDAR_MONTHS_BACK);
+  const ceiling = shiftMonthKey(todayMonth, MAX_SUPPORT_CALENDAR_MONTHS_AHEAD);
+  let minMonth = todayMonth;
+  let maxMonth = shiftMonthKey(todayMonth, 1);
+  for (const month of itemMonths) {
+    parseMonthKey(month);
+    if (month < floor || month > ceiling) continue;
+    if (month < minMonth) minMonth = month;
+    if (month > maxMonth) maxMonth = month;
+  }
+  return { minMonth, maxMonth };
+}
+
+/** 同じ日付は選択解除し、別の日付は新しい選択へ切り替える。 */
+export function toggleSelectedDate(
+  current: string | null,
+  next: string,
+): string | null {
+  return current === next ? null : next;
+}
+
+/** 月曜始まりの7列grid。月外はselectableな日付を作らずnull cellにする。 */
+export function buildMonthGrid(monthKey: string): MonthGridCell[] {
+  const { year, month } = parseMonthKey(monthKey);
+  const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  const firstWeekday = new Date(Date.UTC(year, month - 1, 1)).getUTCDay();
+  const leadingCells = (firstWeekday + 6) % 7;
+  const cellCount = Math.ceil((leadingCells + daysInMonth) / 7) * 7;
+
+  return Array.from({ length: cellCount }, (_, index) => {
+    const day = index - leadingCells + 1;
+    if (day < 1 || day > daysInMonth) return { date: null, day: null };
+    return {
+      date: `${year}-${pad2(month)}-${pad2(day)}`,
+      day,
+    };
+  });
+}
+
+/** 指定したJST年月の初日と末日。月gridの展開範囲に使う。 */
+export function monthDateBounds(monthKey: string): { start: string; end: string } {
+  const { year, month } = parseMonthKey(monthKey);
+  const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return {
+    start: `${year}-${pad2(month)}-01`,
+    end: `${year}-${pad2(month)}-${pad2(lastDay)}`,
+  };
+}
+
+/**
+ * AgendaのScheduleItemを、月間表示のためだけに各civil dateへ索引化する。
+ * 元itemはcloneもmutationもせず、期間中の各bucketから同じobjectを参照する。
+ * `range` があるときはその期間だけ展開し、遠隔の endDate で全日ループしない。
+ */
+export function expandScheduleItemsByDate(
+  days: SupportCalendarResult["days"],
+  range?: { start: string; end: string },
+): Map<string, ScheduleItem[]> {
+  if (range) {
+    if (!isValidDateOnly(range.start) || !isValidDateOnly(range.end)) {
+      throw new Error("range dates must be YYYY-MM-DD");
+    }
+  }
+
+  const result = new Map<string, ScheduleItem[]>();
+  const safetyDays =
+    (MAX_SUPPORT_CALENDAR_MONTHS_AHEAD + MAX_SUPPORT_CALENDAR_MONTHS_BACK) * 31;
+
+  for (const day of days) {
+    for (const item of day.items) {
+      if (!isValidDateOnly(item.date)) continue;
+      const endDate =
+        item.endDate !== null &&
+        isValidDateOnly(item.endDate) &&
+        item.endDate >= item.date
+          ? item.endDate
+          : item.date;
+
+      let start = item.date;
+      let end = endDate;
+      if (range) {
+        if (start < range.start) start = range.start;
+        if (end > range.end) end = range.end;
+      } else {
+        const safetyEnd = addCivilDays(item.date, safetyDays);
+        if (end > safetyEnd) end = safetyEnd;
+      }
+      if (start > end) continue;
+
+      for (let date = start; date <= end; date = addCivilDays(date, 1)) {
+        const bucket = result.get(date);
+        if (bucket) bucket.push(item);
+        else result.set(date, [item]);
+      }
+    }
+  }
+
+  return result;
+}
+
+/** activity identityとoriginだけから、月セル用の文字labelを導出する。 */
+export function scheduleCategory(item: ScheduleItem): ScheduleCategory {
+  if (item.activityId === "miss-circle") {
+    return { id: "miss-circle", label: "MISS CIRCLE", compactLabel: "MISS" };
+  }
+  if (item.activityId === "campus-girls") {
+    return {
+      id: "campus-girls",
+      label: "CAMPUS GIRLS",
+      compactLabel: "CAMPUS",
+    };
+  }
+  if (item.origin === "showroom-schedule") {
+    return { id: "showroom", label: "SHOWROOM", compactLabel: "SHOW" };
+  }
+  if (item.activityId === "live-stream") {
+    return { id: "live", label: "LIVE", compactLabel: "LIVE" };
+  }
+  if (item.activityId === "radio") {
+    return { id: "radio", label: "RADIO", compactLabel: "RADIO" };
+  }
+  return { id: "event", label: "EVENT", compactLabel: "EVENT" };
+}

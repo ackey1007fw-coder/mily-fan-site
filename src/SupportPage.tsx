@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
-import { activities } from "./data/activities";
+import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
+import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
 import { supportEvents } from "./data/supportEvents";
@@ -12,23 +13,21 @@ import {
   type SupportAction,
 } from "./lib/supportHub";
 import {
+  daysUntilEndOfNextTokyoMonth,
+  tokyoDateKey,
+} from "./lib/monthCalendar";
+import {
   buildSupportCalendar,
-  formatShortTokyoDate,
-  formatShortTokyoEndDate,
-  isCrossDayTimedItem,
-  isTimeUnconfirmedDateSpan,
-  scheduleTimeLabel,
-  type ScheduleItem,
   type SupportCalendarResult,
 } from "./lib/supportCalendar";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useStreamSchedule } from "./lib/useStreamSchedule";
+import { useTokyoNow } from "./lib/useTokyoNow";
 
 const primaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
 const secondaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full border border-sage/25 bg-paper px-4 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
-const RADIO_OCCURRENCE_DAYS_AHEAD = 30;
 
 const agendaDateFormatter = new Intl.DateTimeFormat("ja-JP", {
   timeZone: "Asia/Tokyo",
@@ -40,11 +39,6 @@ const agendaDateFormatter = new Intl.DateTimeFormat("ja-JP", {
 
 function formatAgendaDate(date: string): string {
   return agendaDateFormatter.format(new Date(`${date}T00:00:00+09:00`));
-}
-
-function scheduleActivityLabel(item: ScheduleItem): string | null {
-  if (item.activityId === null) return null;
-  return activities.find(({ id }) => id === item.activityId)?.label ?? null;
 }
 
 function SupportHeader() {
@@ -133,62 +127,17 @@ function ActivityLink({ activityId }: { activityId: Parameters<typeof activityRo
   );
 }
 
-function CalendarItemCard({ item }: { item: ScheduleItem }) {
-  const activityLabel = scheduleActivityLabel(item);
-
+function SupportCalendarAgenda({
+  calendar,
+  today,
+}: {
+  calendar: SupportCalendarResult;
+  today: string;
+}) {
   return (
-    <li className="min-w-0 rounded-3xl border border-sage/15 bg-paper-card p-5 shadow-card sm:p-6">
-      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
-        <span className="rounded-full bg-sage-soft px-3 py-1 text-sage-deep">
-          {scheduleTimeLabel(item)}
-        </span>
-        {activityLabel ? <span className="text-ink-muted">{activityLabel}</span> : null}
-      </div>
-      <p className="mt-3 break-words text-lg font-bold leading-relaxed text-ink">
-        {item.title}
-      </p>
-      {item.allDay && item.span && item.span.start !== item.span.end ? (
-        <p className="mt-2 text-xs leading-6 text-ink-muted">
-          期間 {item.span.start.replace(/-/g, ".")}〜{item.span.end.replace(/-/g, ".")}
-        </p>
-      ) : null}
-      {isCrossDayTimedItem(item) && item.endDate !== null ? (
-        <p className="mt-2 text-xs leading-6 text-ink-muted">
-          期間 {formatShortTokyoDate(item.date)} {item.startTime}〜
-          {formatShortTokyoEndDate(item.date, item.endDate)}
-          {item.endTime !== null ? ` ${item.endTime}` : ""}（日をまたぎます）
-        </p>
-      ) : null}
-      {isTimeUnconfirmedDateSpan(item) && item.endDate !== null ? (
-        <p className="mt-2 text-xs leading-6 text-ink-muted">
-          期間 {formatShortTokyoDate(item.date)}〜
-          {formatShortTokyoEndDate(item.date, item.endDate)}
-          {item.endTime !== null ? ` ${item.endTime}` : ""}
-        </p>
-      ) : null}
-      {item.note ? (
-        <p className="mt-2 break-words text-xs leading-6 text-ink-muted">{item.note}</p>
-      ) : null}
-      <div className="mt-5 flex flex-wrap gap-2">
-        {item.cta ? <ActionLink action={item.cta} /> : null}
-        {item.activityId !== null ? <ActivityLink activityId={item.activityId} /> : null}
-      </div>
-      {item.source ? (
-        <p className="mt-4 break-words text-xs">
-          <ExternalLink href={item.source} className="font-semibold text-sage hover:underline">
-            予定の出典を見る
-          </ExternalLink>
-        </p>
-      ) : null}
-    </li>
-  );
-}
-
-function SupportCalendarAgenda({ calendar }: { calendar: SupportCalendarResult }) {
-  return (
-    <SectionShell eyebrow="Calendar" title="Support Calendar">
+    <SectionShell eyebrow="Calendar" title="みりぃスケジュール">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        確認済みの日程を、Asia/Tokyoの日付順でまとめています。
+        配信・ラジオ・コンテスト・出演など、確認済みの予定をまとめています。
       </p>
       {/*
         loading → unavailable は非同期に変わるため、availability feedbackだけを
@@ -213,22 +162,29 @@ function SupportCalendarAgenda({ calendar }: { calendar: SupportCalendarResult }
           </p>
         ) : null}
       </div>
-      {calendar.days.length > 0 ? (
-        <ol className="mt-6 space-y-8" aria-label="確認済み予定の日付別一覧">
-          {calendar.days.map((day) => (
-            <li key={day.date} className="min-w-0">
-              <h3 className="border-b border-sage/20 pb-3 text-lg font-bold text-sage-deep sm:text-xl">
-                <time dateTime={day.date}>{formatAgendaDate(day.date)}</time>
-              </h3>
-              <ul className="mt-4 space-y-4">
-                {day.items.map((item) => (
-                  <CalendarItemCard key={item.key} item={item} />
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ol>
-      ) : null}
+      <MonthlyScheduleCalendar calendar={calendar} today={today} />
+      <div className="mt-10 border-t border-sage/15 pt-8">
+        <h3 className="text-xl font-bold text-ink sm:text-2xl">確認済み予定一覧</h3>
+        <p className="mt-3 text-sm leading-7 text-ink-muted">
+          Asia/Tokyoの日付順で、予定の詳細を確認できます。
+        </p>
+        {calendar.days.length > 0 ? (
+          <ol className="mt-6 space-y-8" aria-label="確認済み予定の日付別一覧">
+            {calendar.days.map((day) => (
+              <li key={day.date} className="min-w-0">
+                <h3 className="border-b border-sage/20 pb-3 text-lg font-bold text-sage-deep sm:text-xl">
+                  <time dateTime={day.date}>{formatAgendaDate(day.date)}</time>
+                </h3>
+                <ul className="mt-4 space-y-4">
+                  {day.items.map((item) => (
+                    <SupportScheduleItemCard key={item.key} item={item} />
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        ) : null}
+      </div>
     </SectionShell>
   );
 }
@@ -236,7 +192,11 @@ function SupportCalendarAgenda({ calendar }: { calendar: SupportCalendarResult }
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
+  const calendarClock = useTokyoNow();
+  const today = tokyoDateKey(calendarClock);
   const now = Date.now();
+  // radio adapter は now のJST当月1日から、この daysAhead 先まで番組枠を展開する。
+  const radioOccurrenceDaysAhead = daysUntilEndOfNextTokyoMonth(now);
   const todayItems = selectSupportToday({
     contest,
     streamSlots: slots,
@@ -255,7 +215,7 @@ export default function SupportPage() {
     streamAvailability: availability,
     includeRadio: true,
     now,
-    daysAhead: RADIO_OCCURRENCE_DAYS_AHEAD,
+    daysAhead: radioOccurrenceDaysAhead,
   });
   const pendingItems = calendar.pending;
 
@@ -323,7 +283,7 @@ export default function SupportPage() {
           ) : null}
         </div>
 
-        <SupportCalendarAgenda calendar={calendar} />
+        <SupportCalendarAgenda calendar={calendar} today={today} />
 
         {pendingItems.length > 0 ? (
           <SectionShell eyebrow="Date pending" title="日程発表待ち">
