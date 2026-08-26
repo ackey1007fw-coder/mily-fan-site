@@ -12,6 +12,7 @@ import {
   campusGirlsPatonPageImage,
   campusGirlsPatonPortraitImage,
 } from "../src/data/campusGirlsPatonImages.ts";
+import { campusGirlsFinalStageFlyerImage } from "../src/data/campusGirlsFinalStageFlyer.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
@@ -55,10 +56,14 @@ describe("2026-08-26 CAMPUS GIRLS Paton NEWS images", () => {
 
     assert.ok(item);
     assert.equal(item.media, campusGirlsPatonPortraitImage);
-    assert.deepEqual(item.additionalMedia, [campusGirlsPatonPageImage]);
+    assert.deepEqual(item.additionalMedia, [
+      campusGirlsPatonPageImage,
+      campusGirlsFinalStageFlyerImage,
+    ]);
     assert.deepEqual(newsDisplayMedia(item), [
       campusGirlsPatonPortraitImage,
       campusGirlsPatonPageImage,
+      campusGirlsFinalStageFlyerImage,
     ]);
     assert.equal(campusGirlsPatonPortraitImage.width, 1090);
     assert.equal(campusGirlsPatonPortraitImage.height, 1090);
