@@ -178,6 +178,15 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — self-hosted photo"
     assert.equal(photo?.kind, "image");
     assert.equal(photo?.src, PHOTO);
     assert.match(photo.src, /^\/media\/news\//);
+    assert.equal(
+      girlsawardShowroomSixthImage.srcSet,
+      `${GALLERY_BASE}-480.jpg 480w, ${GALLERY_BASE}-960.jpg 960w, ${GALLERY_BASE}-1600.jpg 1600w`,
+    );
+    assert.equal(
+      girlsawardShowroomSixthImage.webpSrcSet,
+      `${GALLERY_BASE}-480.webp 480w, ${GALLERY_BASE}-960.webp 960w, ${GALLERY_BASE}-1600.webp 1600w`,
+    );
+    assert.equal(girlsawardShowroomSixthImage.sizes, "(min-width: 640px) 24rem, 100vw");
     assert.equal(photo.width, 1156);
     assert.equal(photo.height, 2048);
     assert.equal(photo.provenance, "sns-post");

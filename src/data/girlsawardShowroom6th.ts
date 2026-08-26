@@ -26,11 +26,21 @@ export const girlsawardShowroomSixthPhoto = {
   published: true,
 };
 
-/** Latest / NEWS 代表。Gallery 派生とは別ファイル（再エンコードしない）。 */
+function gallerySrcSet(format: "jpg" | "webp"): string {
+  return girlsawardShowroomSixthPhoto.widths
+    .map((width) => `${girlsawardShowroomSixthPhoto.basePath}-${width}.${format} ${width}w`)
+    .join(", ");
+}
+
+/** Latest / NEWS 代表。Gallery 派生とは別ファイル（再エンコードしない）。
+ *  表示は既存 Gallery 480/960/1600 を srcset で出し、NEWS JPEG は fallback `src`。 */
 export const girlsawardShowroomSixthImage = {
   id: "mily-b28-01-girlsaward-showroom-6th",
   kind: "image" as const,
   src: "/media/news/mily-b28-01-girlsaward-showroom-6th.jpg",
+  srcSet: gallerySrcSet("jpg"),
+  webpSrcSet: gallerySrcSet("webp"),
+  sizes: "(min-width: 640px) 24rem, 100vw",
   width: 1156,
   height: 2048,
   alt: "くま耳キラキラフィルターの自撮り、黄白ストライプのリボン／シュシュと紺（ネイビー）のポロ。",

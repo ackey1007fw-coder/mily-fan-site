@@ -1749,7 +1749,7 @@ CAMPUS GIRLS Patonでもない。1位の賞品は Rakuten GirlsAward 2026 A/W
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b28-01 NEWS | `news/mily-b28-01-girlsaward-showroom-6th.jpg` | くま耳キラキラフィルターの自撮り。黄白ストライプのリボン／シュシュと紺（ネイビー）のポロ。6位お礼の文字重ね。1156×2048。sns-post | ✅ HOME Latest / `/news/` 代表。Gallery 派生とは別ファイル |
+| b28-01 NEWS | `news/mily-b28-01-girlsaward-showroom-6th.jpg` | くま耳キラキラフィルターの自撮り。黄白ストライプのリボン／シュシュと紺（ネイビー）のポロ。6位お礼の文字重ね。1156×2048。sns-post | ✅ HOME Latest / `/news/` / Activities の `src` fallback。表示は Gallery の 480/960/1600 srcset。NEWS JPEG は上書きしない |
 | b28-01 Gallery | `gallery/mily-b28-01-girlsaward-showroom-6th-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生。元素材 1156×2048 のため withoutEnlargement で 1600 は拡大しない | ✅ Gallery photo（`media.ts`）。NEWS JPEG のバイトは複製していない |
 
 出典: `https://x.com/Mily_chan36/status/2092621770406896106`
@@ -1767,6 +1767,9 @@ SHOWROOMイベント: `https://www.showroom-live.com/event/girlsaward2026aw_fm`
 
 b28-01 NEWS JPEG: 397,362 bytes / 1156×2048 / sha256
 `f5bb01a9dc8c9384fd8d9e7c40fb769b5bf6f8bc48e74b1a7612ae2a07f9cd26`
+
+NEWS カードの表示は既存 Gallery 派生を `srcSet` / `webpSrcSet` で使い、
+NEWS JPEG は fallback `src` のまま残す（上書き・再エンコードしない）。
 
 Gallery 派生（jpg q82 mozjpeg + webp q78。withoutEnlargement）。
 
