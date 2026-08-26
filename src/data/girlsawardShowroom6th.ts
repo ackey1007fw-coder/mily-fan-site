@@ -15,7 +15,7 @@ export const girlsawardShowroomSixthPhoto = {
   widths: [480, 960, 1600] as const,
   width: 1156,
   height: 2048,
-  alt: "くま耳キラキラフィルターの自撮り、黄ストライプリボンと紫ポロ。",
+  alt: "くま耳キラキラフィルターの自撮り、黄白ストライプのリボン／シュシュと紺（ネイビー）のポロ。",
   caption:
     "2026年8月26日の本人X投稿。ガルアワイベ最終日に6位で終われたことへのお礼。",
   provenance: "sns-post" as const,
@@ -33,7 +33,7 @@ export const girlsawardShowroomSixthImage = {
   src: "/media/news/mily-b28-01-girlsaward-showroom-6th.jpg",
   width: 1156,
   height: 2048,
-  alt: "くま耳キラキラフィルターの自撮り、黄ストライプリボンと紫ポロ。",
+  alt: "くま耳キラキラフィルターの自撮り、黄白ストライプのリボン／シュシュと紺（ネイビー）のポロ。",
   caption:
     "2026年8月26日の本人X投稿。ガルアワイベ最終日に6位で終われたことへのお礼。",
   provenance: "sns-post" as const,

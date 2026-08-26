@@ -56,8 +56,11 @@ const PATON_CTA = "Patonでみりぃに投票する";
 const PATON_URL = "https://paton.jp/event/entrant/11380";
 const GIRLSAWARD_OFFICIAL = "https://girls-award.com";
 
+// Live fxtwitter (created_at Wed Aug 26 14:34:43 +0000 2026).
+// First-line face is U+1F979 🥹 FACE HOLDING BACK TEARS — not U+1F972 🥲
+// (SMILING FACE WITH TEAR, a lookalike) and not U+1F62D 😭.
 const MESSAGE = [
-  "はぁぁぁぁぁ、皆さんのおかげでとーーーっても楽しかった\u{1F972}\u{2764}\u{FE0F}\u{200D}\u{1F525}",
+  "はぁぁぁぁぁ、皆さんのおかげでとーーーっても楽しかった\u{1F979}\u{2764}\u{FE0F}\u{200D}\u{1F525}",
   "ガルアワイベ、初めは挑戦するのも怖かったけど、勇気出して一歩踏み出せて、みんなに出逢えて、応援していただけてよかった。幸せじゃっ\u{2B50}\u{FE0F}",
   "これからもどうぞよろしくお願いします\u{1F345}\u{2728}",
   "#ミスサー #ミスサークル #ミスサークルコンテスト",
@@ -111,11 +114,12 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — Latest entry", () 
     assert.equal(entry.message?.text, MESSAGE);
     assert.match(entry.message.text, /^はぁぁぁぁぁ、皆さんのおかげで/u);
     assert.equal([...entry.message.text.matchAll(/ぁ/gu)].length, 5);
-    assert.match(entry.message.text, /\u{1F972}/u);
+    assert.match(entry.message.text, /\u{1F979}/u);
+    assert.doesNotMatch(entry.message.text, /\u{1F972}/u);
+    assert.doesNotMatch(entry.message.text, /\u{1F62D}/u);
     assert.match(entry.message.text, /\u{2764}\u{FE0F}\u{200D}\u{1F525}/u);
     assert.match(entry.message.text, /\u{1F345}/u);
     assert.match(entry.message.text, /\u{2B50}\u{FE0F}/u);
-    assert.doesNotMatch(entry.message.text, /\u{1F62D}/u);
     assert.doesNotMatch(entry.message.text, /t\.co/);
     assert.doesNotMatch(entry.message.text, /pic\.twitter/);
     assert.doesNotMatch(entry.message.text, /https:\/\//);
@@ -132,7 +136,8 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — Latest entry", () 
     assert.match(entry.body, /ミスサー／フレキャン出場者限定/);
     assert.match(entry.body, /8月20日から8月26日/);
     assert.match(entry.body, /ガルアワイベ最終日 応援に駆けつけてくれた皆様ありがとうございました\u{1F62D}\u{2763}\u{FE0F}/u);
-    assert.match(entry.body, /なんと【6位】で終わることができました\u{1F972}\u{1F64C}\u{1F3FB}\u{1FA75}/u);
+    assert.match(entry.body, /なんと【6位】で終わることができました\u{1F979}\u{1F64C}\u{1F3FB}\u{1FA75}/u);
+    assert.doesNotMatch(entry.body, /なんと【6位】で終わることができました\u{1F972}/u);
     assert.match(entry.body, /楽しかったなぁ。濃かったなぁ。素敵な時間だったなぁ。初めての景色、美しかったなぁ。/);
     assert.match(entry.body, /これからも不器用なみりぃですがよろしくお願いします\u{1F64F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}/u);
     assert.match(entry.body, /6位だったためランウェイ出演にはなっていません/);
@@ -177,6 +182,10 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — self-hosted photo"
     assert.equal(photo.height, 2048);
     assert.equal(photo.provenance, "sns-post");
     assert.equal(photo.sourceUrl, SOURCE);
+    assert.match(photo.alt, /紺（ネイビー）のポロ/);
+    assert.match(photo.alt, /黄白ストライプのリボン／シュシュ/);
+    assert.doesNotMatch(photo.alt, /紫/);
+    assert.equal(girlsawardShowroomSixthPhoto.alt, photo.alt);
     assert.equal(existsSync(PHOTO_FILE), true);
     assert.equal((await stat(PHOTO_FILE)).size, 397_362);
     assert.equal(await sha256(PHOTO_FILE), NEWS_SHA256);
@@ -311,6 +320,9 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(docs.includes(SOURCE), true);
     assert.match(b28, /6位/);
     assert.match(b28, /ランウェイ出演にはなっていない/);
+    assert.match(b28, /紺（ネイビー）のポロ/);
+    assert.match(b28, /黄白ストライプのリボン／シュシュ/);
+    assert.equal(b28.includes("紫ポロ"), false);
     assert.match(b28, /`\/stories\/` 記事と highlights には追加しない/);
     assert.equal(findDriveIds(b28).length, 0);
     assert.match(ops, /35件/);
