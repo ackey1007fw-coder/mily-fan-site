@@ -264,6 +264,13 @@ export function verifyNews(items) {
         }
         if (slot === "media") {
           const ctaHref = item.url ?? item.source;
+          // MixchOutboundCard opens media.mixchUrl; Latest CTA uses url ?? source.
+          // Both must be the same mixch.tv/m/{id} page — not merely "some" Mixch movie.
+          if (ctaHref !== media.mixchUrl) {
+            errors.push(
+              `news "${item.id ?? "?"}" Mixch CTA must equal media.mixchUrl`,
+            );
+          }
           if (!isMixchMoviePageUrl(ctaHref)) {
             errors.push(
               `news "${item.id ?? "?"}" Mixch CTA must be a mixch.tv/m/{id} page, not a Mixch file URL`,

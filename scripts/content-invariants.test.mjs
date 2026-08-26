@@ -505,6 +505,21 @@ describe("content verification invariants", () => {
       ),
     );
 
+    const mismatchedCta = verifyNews([
+      {
+        ...validNews,
+        id: "mixch-cta-mismatch",
+        url: "https://mixch.tv/m/nxqYblH8",
+        media: mixch,
+      },
+    ]);
+    assert.ok(
+      mismatchedCta.some((error) =>
+        error.includes("Mixch CTA must equal media.mixchUrl"),
+      ),
+      "two different mixch.tv/m/{id} pages must not pass just because both are movie pages",
+    );
+
     const xPoster = verifyNews([
       {
         ...validNews,
