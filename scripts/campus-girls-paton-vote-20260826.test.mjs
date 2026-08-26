@@ -169,6 +169,7 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       "src/SupportPage.tsx",
       "src/ActivitiesPage.tsx",
       "src/components/Latest.tsx",
+      "src/components/TodayDashboard.tsx",
     ]) {
       const component = await source(relative);
       assert.match(component, /useSupportEventClock/);
