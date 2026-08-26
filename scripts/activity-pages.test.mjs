@@ -63,6 +63,9 @@ const expectedNewsRelations = {
   "2026-08-19-second-round-result": ["miss-circle"],
   "2026-08-18-evening-radio": ["radio", "live-stream"],
   "2026-08-18-morning-update": ["live-stream"],
+  "2026-08-08-second-round-timetable": ["miss-circle"],
+  "2026-08-06-ohayo-morning-stream": ["live-stream"],
+  "2026-08-05-panda-past-pic": ["live-stream"],
 };
 
 describe("Activities MPA routes and metadata", () => {

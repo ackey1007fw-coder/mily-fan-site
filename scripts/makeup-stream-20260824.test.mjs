@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -293,14 +293,18 @@ describe("2026-08-24 first makeup stream — owner-approved Story still", () => 
 });
 
 describe("2026-08-24 first makeup stream — no /stories/ article", () => {
-  it("does not create a /stories/ article or Gallery entry for b24", async () => {
+  it("does not create a /stories/ article; Gallery gets b24-01 only", async () => {
     assert.equal(existsSync(path.join(root, "stories", "2026-08-24-first-makeup-stream")), false);
     assert.equal(
       stories.some((story) => story.slug.includes("makeup")),
       false,
     );
     assert.equal(
-      media.some((entry) => entry.id.includes("b24")),
+      media.some((entry) => entry.id === "mily-b24-01"),
+      true,
+    );
+    assert.equal(
+      media.some((entry) => entry.id.includes("b24-02")),
       false,
     );
     assert.equal(
@@ -321,7 +325,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.equal(trackedStoryOriginal.trim(), "");
   });
 
-  it("stays out of Gallery, highlights, events, and contest data", () => {
+  it("stays out of highlights, events, and contest data", () => {
     assert.equal(highlights.some((entry) => entry.id.includes("makeup")), false);
     assert.equal(events.length, 0);
     assert.equal(JSON.stringify(contest).includes("makeup"), false);
@@ -403,7 +407,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(b24, /公開用のmetadata除去以外は無改変/);
     assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
-    assert.match(ops, /37件/);
+    assert.match(ops, /40件/);
     assert.match(ops, /初メイク配信/);
     assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);

@@ -150,8 +150,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /ZY4hSt3K/);
       assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 37);
-    assert.match(ops, /37件/);
+    assert.equal(news.length, 40);
+    assert.match(ops, /40件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);
     assert.match(ops, /Mixchファイルは自己ホストしていない/);

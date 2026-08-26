@@ -151,7 +151,7 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.deepEqual(verifyNews([entry]), []);
   });
 

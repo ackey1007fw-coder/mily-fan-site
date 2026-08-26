@@ -158,7 +158,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       EVENING_ID,
       CAMPUS_ID,
     ]);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {

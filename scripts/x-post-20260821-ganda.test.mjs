@@ -140,6 +140,7 @@ describe("2026-08-21 ganda X post — self-hosted photo", () => {
     assert.equal(photo?.kind, "image");
     assert.equal(photo?.src, PHOTO);
     assert.match(photo.src, /^\/media\/news\//);
+    assert.match(photo.srcSet ?? "", /mily-b14-01-ganda-before-night-stream-480\.jpg/);
     assert.equal(existsSync(PHOTO_FILE), true);
 
     for (const host of [
@@ -216,19 +217,16 @@ describe("2026-08-21 ganda X post — self-hosted photo", () => {
 });
 
 describe("2026-08-21 ganda X post — scope and ordering", () => {
-  it("stays out of Gallery, Gallery videos, and /stories/", async () => {
-    assert.equal(media.some((entry) => entry.id.includes("b14")), false);
-    assert.equal(media.some((entry) => entry.basePath.includes("ganda")), false);
+  it("publishes the cap+mask photo in Gallery without duplicating the NEWS JPEG", async () => {
+    assert.equal(media.some((entry) => entry.id === "mily-b14-01"), true);
     assert.equal(galleryVideos.some((entry) => entry.id.includes("b14")), false);
     assert.equal(galleryVideos.some((entry) => "src" in entry && entry.src.includes("ganda")), false);
     assert.equal(stories.some((entry) => entry.slug.includes("ganda")), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
 
-    for (const relative of [
-      "src/data/media.ts",
-      "src/data/galleryVideos.ts",
-      "src/data/stories.ts",
-    ]) {
+    const mediaSource = await readFile(path.join(root, "src/data/media.ts"), "utf8");
+    assert.equal(mediaSource.includes("gandaBeforeNightStreamPhoto"), true);
+    for (const relative of ["src/data/galleryVideos.ts", "src/data/stories.ts"]) {
       const source = await readFile(path.join(root, relative), "utf8");
       assert.equal(source.includes("mily-b14"), false, relative);
       assert.equal(source.includes(NEWS_ID), false, relative);
@@ -282,7 +280,7 @@ describe("2026-08-21 ganda X post — scope and ordering", () => {
       news.some((entry) => entry.id === "2026-08-21-tiktok-radio-misscircle"),
     );
     for (const id of existing) assert.ok(news.some((entry) => entry.id === id), id);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 });
 

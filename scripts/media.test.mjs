@@ -98,6 +98,12 @@ describe("media collection", () => {
       "mily-b27-06",
       "mily-b27-07",
       "mily-b28-01",
+      "mily-b29-01",
+      "mily-b30-01",
+      "mily-b31-01",
+      "mily-b32-01",
+      "mily-b14-01",
+      "mily-b24-01",
     ]);
     for (const item of media) {
       if (portraits.has(item.id)) {

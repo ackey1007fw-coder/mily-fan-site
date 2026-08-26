@@ -148,7 +148,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
     assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -529,7 +529,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /37件/);
+    assert.match(ops, /40件/);
     assert.match(ops, /独立動画14本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);

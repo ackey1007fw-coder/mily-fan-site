@@ -147,7 +147,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
     ]);
-    assert.equal(news.length, 37);
+    assert.equal(news.length, 40);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {

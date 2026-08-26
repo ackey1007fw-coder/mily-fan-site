@@ -46,7 +46,21 @@ import {
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
 import { girlsawardShowroomSixthImage } from "./girlsawardShowroom6th.ts";
+import {
+  BIRTHDAY_INDOOR_SELFIE_X_URL,
+  birthdayIndoorSelfieImage,
+} from "./birthdayIndoorSelfie.ts";
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
+import {
+  OHAYO_WHITE_POLO_X_URL,
+  ohayoWhitePoloPeaceImage,
+} from "./ohayoWhitePoloPeace.ts";
+import { pandaPastPicImage } from "./pandaPastPic.ts";
+import { eveningRadioShowroomImage } from "./eveningRadioShowroom.ts";
+import { campusGirlsFinalStageFlyerImage } from "./campusGirlsFinalStageFlyer.ts";
+import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
+import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
+import { autumnLeafNewsImage } from "./autumnLeafNewsImage.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -336,7 +350,7 @@ https://mixch.tv/m/ZY4hSt3K`,
     url: "https://paton.jp/event/entrant/11380",
     ctaLabel: "Patonでみりぃに投票する",
     media: campusGirlsPatonPortraitImage,
-    additionalMedia: [campusGirlsPatonPageImage],
+    additionalMedia: [campusGirlsPatonPageImage, campusGirlsFinalStageFlyerImage],
   },
   {
     id: "2026-08-24-makeup-stream",
@@ -550,13 +564,7 @@ https://mixch.tv/m/ZY4hSt3K`,
     body: "8月21日のXで、みりぃが昼枠配信を見ていた方には通じるという写真を投稿。「急遽なガンダで絶望している」と笑いまじりに伝え、投稿では23:00〜の配信でこの時の心境を話すと案内しました。",
     source: "https://x.com/mily_chan36/status/2090722156162478273",
     sourceLabel: "Xの投稿を見る",
-    media: {
-      kind: "image",
-      src: "/media/news/mily-b14-01-ganda-before-night-stream.jpg",
-      width: 720,
-      height: 1280,
-      alt: "黒いキャップとマスク姿で、青空と太陽を背に見上げる構図のみりぃ。写真内に昼枠配信と23:00からの配信についての文字が表示されている",
-    },
+    media: gandaBeforeNightStreamImage,
     message: {
       label: "みりぃの投稿",
       text: "昼枠配信見てくれた方には通じる写真。\n\n急遽なガンダで絶望してるみりぃ。笑笑笑\n\nどういうこと？？\nという方は23:00〜の配信でお待ちしております🛜\nこの時の心境お話ししますね🤭笑\n\n#ミスサー #ミスサークルコンテスト2026 #ミスサークル #ミスサークル2026 #ミスサー2026 #ミスコン",
@@ -680,6 +688,7 @@ https://mixch.tv/m/ZY4hSt3K`,
     sourceLabel: "Xの投稿を見る",
     url: "/stories/second-round-result-2026/",
     ctaLabel: "2次審査通過の記録を読む",
+    media: autumnLeafNewsImage,
   },
   {
     id: "2026-08-19-well-rested-morning",
@@ -710,6 +719,19 @@ https://mixch.tv/m/ZY4hSt3K`,
     sourceLabel: "Xの投稿を見る",
     url: "/stories/2026-08-18-radio/",
     ctaLabel: "配信の記録を読む",
+    media: eveningRadioShowroomImage,
+    message: {
+      label: "みりぃの投稿",
+      text: `大元は元気なのに、体だけが追いつかない状況下のラジオ配信ありがとうございました🥲🙌🏻🩵
+
+体調管理はね？自分でしていかないと。
+
+明日の配信時間はまた明日伝えるよ〜！
+ちなみに夜になると思う🥺
+元気なみりぃに会いにきてね~‼︎
+
+#ミスサー #ミスサークルコンテスト2026 #ミスサークル2026`,
+    },
   },
   {
     id: "2026-08-18-morning-update",
@@ -746,12 +768,61 @@ https://mixch.tv/m/ZY4hSt3K`,
     },
   },
   {
+    id: "2026-08-08-second-round-timetable",
+    date: "2026-08-08",
+    activityIds: ["miss-circle"],
+    title: "2次審査期間の配信スケジュール📣",
+    body: "8月8日、みりぃがXで「私は皆と絶景見に行くよ」と伝え、MISS CIRCLE CONTEST 2026の2次審査期間の配信スケジュールを画像で案内しました。配信時刻は画像の案内であり、このサイトの配信予定一覧へは転記していません。",
+    source: "https://x.com/Mily_chan36/status/2086092518719140028",
+    sourceLabel: "Xの投稿を見る",
+    media: secondRoundTimetableImage,
+    message: {
+      label: "みりぃの投稿",
+      text: "私は皆と絶景見に行くよ🙂‍↕️🩷\n#ミスサークルコンテスト2026 #ミスサー2026 #ミスサー #ミスコン #SHOWROOM",
+    },
+  },
+  {
+    id: "2026-08-06-ohayo-morning-stream",
+    date: "2026-08-06",
+    activityIds: ["live-stream"],
+    title: "おはよ🔅 今日AM 10:00〜",
+    body: "8月6日の朝、みりぃがXで「おはよ」とあいさつし、当日AM 10:00〜の配信への応援を呼びかけました。添えた写真は白いポロシャツでピースをした自撮りに、星のステッカーと「OHAYO」の文字が重ねられています。",
+    source: OHAYO_WHITE_POLO_X_URL,
+    sourceLabel: "Xの投稿を見る",
+    media: ohayoWhitePoloPeaceImage,
+    message: {
+      label: "みりぃの投稿",
+      text: "おはよ🔅\n今日AM 10:00〜\nよろしくお願いします😽🙌🏻❤️‍🔥",
+    },
+  },
+  {
+    id: "2026-08-05-panda-past-pic",
+    date: "2026-08-05",
+    activityIds: ["live-stream"],
+    title: "おはよう（過去pic）12:30〜と14:30〜の配信案内",
+    body: "8月5日の朝、みりぃがXで当日12:30〜13:30と14:30〜15:30に1時間ずつの配信を案内しました。添えた写真には「おはよう」「※過去pic」とあり、投稿時点の新しい撮影ではなく過去の写真であることを示しています。パンダ耳と鼻のフィルター、顔のグリッターが入った自撮りです。",
+    source: "https://x.com/Mily_chan36/status/2084752452373680152",
+    sourceLabel: "Xの投稿を見る",
+    media: pandaPastPicImage,
+    message: {
+      label: "みりぃの投稿",
+      text: "今日は\n12:30〜13:30\n14:30〜15:30\n1時間ずつ配信よろしくね🫣❤️‍🔥",
+    },
+  },
+  {
     id: "2026-08-02-21st-birthday",
     date: "2026-08-02",
     title: "21歳の誕生日を迎えました",
     body: "21歳の誕生日。お祝いしてくれたみなさんへの感謝と、「考えていることを脳内に留めず行動に移す。」という21歳の抱負。",
     source: "https://www.instagram.com/p/DbiY3PHk1c8/",
+    additionalSources: [
+      {
+        label: "Xの投稿を見る",
+        url: BIRTHDAY_INDOOR_SELFIE_X_URL,
+      },
+    ],
     ctaLabel: "Instagramの投稿を見る",
+    media: birthdayIndoorSelfieImage,
   },
 ];
 
