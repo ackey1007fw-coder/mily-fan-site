@@ -2081,6 +2081,78 @@ Portal Feedへは既存契約どおり派生する。
 - crop・scale・引き伸ばし・アップスケール・fps水増し・短縮・テロップ削除なし
 - AI生成・AI加工・顔補正・generative fill・outpaintingなし
 
+## 素材台帳（batch b37 / 受領日・source date 2026-04-23）
+
+2026-04-23のTikTok通常投稿に使われた、オーナー直接提供の短尺動画。
+LatestとGallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`events.ts`・`profile.ts`・`highlights.ts`・
+`media.ts` には含めない。ラジオ／ミスコン／CAMPUS GIRLS の `activityIds` も付けない
+（踊る動画であり、番組アカウント投稿という理由だけではラジオ出演記録にしない）。
+
+一次出典: https://www.tiktok.com/@seasidecircle/video/7631929037195185429
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b37-01 | `gallery/mily-b37-01-tiktok-sayonara-ichigo.mp4` | 室内でカメラに向かい、「さよならいちごちゃん」に合わせて表情豊かに踊る縦型動画。576×1024。owner-provided | ✅ Latest / Gallery |
+| b37-01 poster | `gallery/mily-b37-01-tiktok-sayonara-ichigo-poster.jpg` | 公開MP4の2.4秒地点の実フレーム。576×1024 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/` に受領時の名前のまま無改変で保管
+  （gitignore済み・コミットしない。ランダムな受領時名はtracked textへ記録しない）
+- sha256: `d8ceee63da463ea94a6e953e611bcfcf9a08672cb390113484067f77ee48a988`
+- 1,675,842 bytes / H.264 **High** / **576×1024** / 473 frames / 約17.56秒
+- 受領ファイルは、AAC LC / 44.1kHz / stereo / 約128kbps の音声ストリームがあった
+  ファイルから video-only に再エンコードされたもの
+- 素材受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
+### 音声の扱い — 公開派生は無音
+
+楽曲の権利とこのサイトでの再配信権が未確認のため、公開MP4はvideo-only（無音）とした。
+元素材側で既に音声が外れていても、公開面では同じ判断を維持する。
+楽曲名・権利者・本人音声の別は推測して記録しない。
+
+### 公開MP4
+
+- sha256: `eabb223c5ed5bb7e89b1b72c1787f873e06e4d1c7de64c3c8bb0161da4c8c5f8`
+- 2,038,963 bytes / H.264 **Constrained Baseline** / level 3.1 / **576×1024** /
+  473 frames / 17.555556秒 / yuv420p / 音声ストリームなし
+- 元素材の画素数・9:16の縦横比・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 2802）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`aigc_info` / `comment` / `vid_md5`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/<受領時ファイル名>.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b37-01-tiktok-sayonara-ichigo.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の2.4秒地点の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 32,108 bytes / 576×1024 JPEG / sha256
+  `42afb6e3ffc507ac3c03d4d81ba4699e25b0d090ccf14a7ca2011edd3b40a35c`
+- EXIF / IPTC / XMP なし。TikTok閲覧画面のスクリーンショットからは作っていない
+- `src/data/tiktokSayonaraIchigoVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 2.4 -i public/media/gallery/mily-b37-01-tiktok-sayonara-ichigo.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b37-01-tiktok-sayonara-ichigo-poster.jpg
+```
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

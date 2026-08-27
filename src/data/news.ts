@@ -22,6 +22,7 @@ import {
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { morningMissCircleShowroomStoryVideo } from "./morningMissCircleShowroomStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
+import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
@@ -917,6 +918,23 @@ https://mixch.tv/m/ZY4hSt3K`,
     ],
     ctaLabel: "Instagramの投稿を見る",
     media: birthdayIndoorSelfieImage,
+  },
+  {
+    id: "2026-04-23-tiktok-sayonara-ichigo",
+    date: "2026-04-23",
+    title: "「さよならいちごちゃん」で踊ってみた🍓",
+    body: "4月23日、湘南シーサイドサークルのTikTokに、みりぃが「さよならいちごちゃん」に合わせて踊る動画が投稿されました。フルで聴くと考えさせられることが多く、好きな曲だと綴っています。",
+    source: tiktokSayonaraIchigoVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+    media: tiktokSayonaraIchigoVideo,
+    message: {
+      label: "湘南シーサイドサークルの投稿",
+      text:
+        "この曲のフル、考えさせられること多くて\n" +
+        "好きなんだよね^_^\n" +
+        "『君の頭がいちごでできてるってこと🍓』\n" +
+        "💞♬ #さよならいちごちゃん #fyp #踊ってみた",
+    },
   },
 ];
 

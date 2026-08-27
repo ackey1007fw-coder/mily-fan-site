@@ -284,7 +284,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {

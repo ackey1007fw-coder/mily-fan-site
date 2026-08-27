@@ -148,7 +148,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
     assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -200,8 +200,8 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
     assert.equal(galleryVideos[5], nightThanksMorningStreamStoryVideo);
     assert.equal(visible[3], nightThanksMorningStreamStoryVideo);
     assert.equal(galleryVideos[6], seasideCircleMusicalSpecialThanksVideo);
-    assert.equal(galleryVideos.length, 19);
-    assert.equal(visible.length, 16);
+    assert.equal(galleryVideos.length, 20);
+    assert.equal(visible.length, 17);
     assert.equal(nightThanksMorningStreamStoryVideo.kind, "video");
     assert.equal(nightThanksMorningStreamStoryVideo.provenance, "owner-provided");
     assert.equal(nightThanksMorningStreamStoryVideo.sourceLabel, "Instagram Story");
@@ -255,6 +255,7 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
         "2026-08-20",
         "2026-08-19",
         "2026-08-17",
+        "2026-04-23",
         "2026-08-26",
         "2026-08-25",
       ],
@@ -532,8 +533,8 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /45件/);
-    assert.match(ops, /独立動画16本/);
+    assert.match(ops, /46件/);
+    assert.match(ops, /独立動画17本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
     assert.doesNotMatch(docs, DRIVE_SHARE_QUERY_PATTERN);

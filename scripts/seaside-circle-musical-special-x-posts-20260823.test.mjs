@@ -95,7 +95,7 @@ describe("2026-08-23 seaside circle official X posts — NEWS stays one item", (
 
     assert.equal(matches.length, 1);
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -160,7 +160,7 @@ describe("2026-08-23 seaside circle official X posts — STORY sources and photo
     assert.equal(thanks?.poster, seasideCircleMusicalSpecialThanksVideo.poster);
     assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").includes(seasideCircleMusicalSpecialVideo), true);
     assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").includes(seasideCircleMusicalSpecialThanksVideo), true);
-    assert.equal(galleryVideos.length, 19);
+    assert.equal(galleryVideos.length, 20);
   });
 
   it("reuses Gallery derivatives for both STORY photos", () => {

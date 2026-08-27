@@ -21,6 +21,10 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { tiktokRadioVideo, type TikTokRadioVideo } from "./tiktokRadioVideo.ts";
 import {
+  tiktokSayonaraIchigoVideo,
+  type TikTokSayonaraIchigoVideo,
+} from "./tiktokSayonaraIchigoVideo.ts";
+import {
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
@@ -30,7 +34,8 @@ import {
 export type SelfHostedGalleryVideo =
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
-  | TikTokRadioVideo;
+  | TikTokRadioVideo
+  | TikTokSayonaraIchigoVideo;
 
 export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
@@ -53,6 +58,7 @@ export {
   seasideCircleYesTokyoVideo,
   secondRoundStoryVideo,
   tiktokRadioVideo,
+  tiktokSayonaraIchigoVideo,
 };
 
 export function isSelfHostedGalleryVideo(
@@ -65,8 +71,9 @@ export function isSelfHostedGalleryVideo(
  * Standalone Gallery videos: owner-provided self-hosted MP4s plus Mixch
  * outbound player cards. Latest may reuse the same object so paths (or Mixch
  * URLs) remain single-source. Self-hosted items stay newest first so older
- * Stay newest first so older index pins remain stable; Mixch outbound cards
- * follow in this array. Gallery UI leads with みりぃ portraits via
+ * index pins remain stable; older-than-August self-hosted items sit just
+ * before Mixch. Mixch outbound cards follow in this array. Gallery UI leads
+ * with みりぃ portraits via
  * selectGalleryEntries, then later photos, then Mixch in the video block.
  * Mixch is not a DriveGalleryVideo.
  */
@@ -87,6 +94,7 @@ export const galleryVideos: GalleryVideoItem[] = [
   morningStory20260820,
   secondRoundStoryVideo,
   morningStoryVideo,
+  tiktokSayonaraIchigoVideo,
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,

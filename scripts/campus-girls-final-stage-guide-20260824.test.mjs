@@ -161,11 +161,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /45件/);
+    assert.match(ops, /46件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /8月26日の本人XによるPaton直接案内/);
     assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
     assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
   });
 });

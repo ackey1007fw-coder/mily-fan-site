@@ -206,7 +206,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.equal(news.filter((entry) => entry.id === VOTE_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === FOLLOWERS_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === THANKS_NEWS_ID).length, 1);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(vote.date, "2026-08-26");
     assert.equal(vote.sameDayOrder, 3);
@@ -346,15 +346,15 @@ describe("2026-08-26 Instagram Stories — shared collage and mirror Gallery vid
     ]);
     assert.equal(galleryVideos[2], patonVoteMirrorStoryVideo);
     assert.equal(galleryVideos[3], patonVoteCollageStoryVideo);
-    assert.equal(galleryVideos[16], mixchExpressiveMovie);
-    assert.equal(galleryVideos[17], mixch15xDayMovie);
-    assert.equal(galleryVideos[18], mixchConfidenceMessageMovie);
+    assert.equal(galleryVideos[17], mixchExpressiveMovie);
+    assert.equal(galleryVideos[18], mixch15xDayMovie);
+    assert.equal(galleryVideos[19], mixchConfidenceMessageMovie);
     assert.equal(visible[0], patonVoteMirrorStoryVideo);
     assert.equal(visible[1], patonVoteCollageStoryVideo);
-    assert.equal(visible[14], mixch15xDayMovie);
-    assert.equal(visible[15], mixchConfidenceMessageMovie);
-    assert.equal(galleryVideos.length, 19);
-    assert.equal(visible.length, 16);
+    assert.equal(visible[15], mixch15xDayMovie);
+    assert.equal(visible[16], mixchConfidenceMessageMovie);
+    assert.equal(galleryVideos.length, 20);
+    assert.equal(visible.length, 17);
 
     for (const video of [patonVoteMirrorStoryVideo, patonVoteCollageStoryVideo]) {
       assert.equal(video.kind, "video");
@@ -673,8 +673,8 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /他出場者・順位/);
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
-    assert.match(ops, /45件/);
-    assert.match(ops, /独立動画16本/);
+    assert.match(ops, /46件/);
+    assert.match(ops, /独立動画17本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });
 

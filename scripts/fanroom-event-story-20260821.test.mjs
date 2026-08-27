@@ -222,7 +222,7 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
     assert.equal(visible[8], eventStory20260821);
     assert.equal(visible[9], morningOhayo20260821);
     assert.equal(visible[10], morningShowroomRunwayVideo);
-    assert.equal(visible.length, 16);
+    assert.equal(visible.length, 17);
     assert.equal(galleryVideos.filter((item) => item === eventStory20260821).length, 1);
     assert.equal("sourceUrl" in eventStory20260821, false);
     assert.equal(eventStory20260821.sourceLabel, "Instagram Story");
@@ -243,8 +243,8 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 19);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length + drive.videos.length, 27);
+    assert.equal(galleryVideos.length, 20);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length + drive.videos.length, 28);
   });
 
   it("publishes 720x1280 H.264 Baseline at the original 1fps without audio", async () => {
@@ -389,7 +389,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

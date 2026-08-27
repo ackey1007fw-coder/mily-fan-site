@@ -295,13 +295,13 @@ describe("Gallery video contracts", () => {
     }
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    // 自己ホスト14本 + Mixch outbound 2本。Drive Gallery の動画11本は別枠。
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length, 16);
+    // 自己ホスト15本 + Mixch outbound 2本。Drive Gallery の動画11本は別枠。
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length, 17);
     assert.equal(
       visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").filter(isSelfHostedGalleryVideo).length + drive.videos.length,
-      25,
+      26,
     );
-    assert.equal(galleryVideoViews().length, 25);
+    assert.equal(galleryVideoViews().length, 26);
   });
 });
 
