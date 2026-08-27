@@ -6,6 +6,7 @@ import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Latest } from "./components/Latest";
 import { MobileActionDock } from "./components/MobileActionDock";
+import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
@@ -29,6 +30,7 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <PatonVoteGuide />
         <TodayDashboard />
         <Support />
         <ActivitiesGateway />

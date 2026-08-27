@@ -22,7 +22,7 @@ describe("Seaside Circle TikTok home route", () => {
   it("surfaces the program TikTok directly from the home hero", async () => {
     const hero = await read("src/components/Hero.tsx");
 
-    assert.match(hero, /import \{ links \} from "\.\.\/data\/links"/);
+    assert.match(hero, /import \{ campusGirlsPatonVoteLink, links \} from "\.\.\/data\/links"/);
     assert.match(hero, /link\.id === "fm-smw-ssc-tiktok"/);
     assert.match(hero, /href=\{seasideCircleTikTok\.url\}/);
     assert.match(hero, /\{seasideCircleTikTok\.label\}/);

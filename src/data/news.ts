@@ -64,6 +64,15 @@ import { campusGirlsFinalStageFlyerImage } from "./campusGirlsFinalStageFlyer.ts
 import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
 import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
 import { autumnLeafNewsImage } from "./autumnLeafNewsImage.ts";
+import {
+  PATON_VOTE_HOW_TO_CTA_LABEL,
+  PATON_VOTE_HOW_TO_CTA_URL,
+  PATON_VOTE_HOW_TO_NEWS_ID,
+  PATON_VOTE_HOW_TO_SOURCE_LABEL,
+  PATON_VOTE_HOW_TO_TITLE,
+  PATON_VOTE_HOW_TO_X_URL,
+  patonVoteHowToSpokenMessage,
+} from "./patonVoteHowTo.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -152,6 +161,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: PATON_VOTE_HOW_TO_NEWS_ID,
+    date: "2026-08-27",
+    sameDayOrder: 2,
+    activityIds: ["campus-girls"],
+    title: PATON_VOTE_HOW_TO_TITLE,
+    body: "8月27日、みりぃがXでCAMPUS GIRLS 2027のPaton投票方法を案内しました。Patonでキャンパスガールズ2027を選び、三橋莉子（みりぃ）のページからギフトを開いて1日1回無料拍手を送ると投票できます。応援コメントも募集しています。投票は9月1日までです。",
+    source: PATON_VOTE_HOW_TO_X_URL,
+    sourceLabel: PATON_VOTE_HOW_TO_SOURCE_LABEL,
+    url: PATON_VOTE_HOW_TO_CTA_URL,
+    ctaLabel: PATON_VOTE_HOW_TO_CTA_LABEL,
+    media: campusGirlsPatonPortraitImage,
+    message: {
+      label: "みりぃの案内",
+      text: patonVoteHowToSpokenMessage,
+    },
+  },
   {
     id: "2026-08-27-x-followers-100",
     date: "2026-08-27",

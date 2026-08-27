@@ -1,12 +1,14 @@
 import { contest } from "../data/contest";
-import { links } from "../data/links";
+import { campusGirlsPatonVoteLink, links } from "../data/links";
 import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
 import { news, sortNewsByDateDesc } from "../data/news";
+import { PATON_VOTE_HOW_TO_ANCHOR_ID } from "../data/patonVoteHowTo";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
 import { supportEvents } from "../data/supportEvents";
 import { selectHomeVoteActions } from "../lib/homePortal";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
+import { isSupportEventUrlActive } from "../lib/supportEventLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
 import { Socials } from "./Socials";
@@ -25,6 +27,12 @@ export function Hero() {
   const seasideCircleTikTok = links.find(
     (link) => link.id === "fm-smw-ssc-tiktok",
   );
+  const showPatonHowTo = isSupportEventUrlActive({
+    url: campusGirlsPatonVoteLink.url,
+    links,
+    supportEvents,
+    now,
+  });
 
   return (
     <section
@@ -73,6 +81,14 @@ export function Hero() {
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
+              {showPatonHowTo ? (
+                <a
+                  href={`#${PATON_VOTE_HOW_TO_ANCHOR_ID}`}
+                  className="inline-flex min-h-11 items-center rounded-full border border-apricot/50 bg-apricot-soft/60 px-5 py-2.5 text-sm font-semibold text-apricot-ink hover:bg-apricot-soft"
+                >
+                  投票のやり方を見る
+                </a>
+              ) : null}
               <a
                 href="#latest"
                 className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
