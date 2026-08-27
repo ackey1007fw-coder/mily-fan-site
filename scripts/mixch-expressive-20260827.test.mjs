@@ -95,14 +95,16 @@ describe("2026-08-27 Mixch expressive NEWS", () => {
     assert.match(newsSource, /\\u\{203C\}\\u\{FE0F\}/);
   });
 
-  it("leads 2026-08-27 NEWS above the morning Story items via source-array order", () => {
+  it("follows the same-day X followers NEWS and leads the morning Story items", () => {
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0]?.id, NEWS_ID);
-    assert.equal(ordered[1]?.id, "2026-08-27-seaside-circle-movie-theme-story");
-    assert.equal(ordered[2]?.id, "2026-08-27-miss-circle-showroom-story");
+    assert.equal(ordered[0]?.id, "2026-08-27-x-followers-100");
+    assert.equal(ordered[1]?.id, NEWS_ID);
+    assert.equal(ordered[2]?.id, "2026-08-27-seaside-circle-movie-theme-story");
+    assert.equal(ordered[3]?.id, "2026-08-27-miss-circle-showroom-story");
     assert.deepEqual(
       ordered.filter(({ date }) => date === "2026-08-27").map(({ id }) => id),
       [
+        "2026-08-27-x-followers-100",
         NEWS_ID,
         "2026-08-27-seaside-circle-movie-theme-story",
         "2026-08-27-miss-circle-showroom-story",

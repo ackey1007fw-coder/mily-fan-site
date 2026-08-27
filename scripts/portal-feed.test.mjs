@@ -257,14 +257,18 @@ describe("Portal Feed generation", () => {
   it("accepts a JSON-serialized feed that keeps same-day NEWS chronology", () => {
     const live = createPortalFeed();
     const serialized = JSON.parse(JSON.stringify(live));
+    const leadId = "mily:news:2026-08-27-x-followers-100";
     const mixchId = "mily:news:2026-08-27-mixch-expressive";
     const radioId = "mily:news:2026-08-27-seaside-circle-movie-theme-story";
 
     assert.doesNotThrow(() => assertPortalFeedContract(serialized));
+    assert.ok(serialized.items.some((item) => item.id === leadId));
     assert.ok(serialized.items.some((item) => item.id === mixchId));
     assert.ok(serialized.items.some((item) => item.id === radioId));
     assert.ok(
-      serialized.items.findIndex((item) => item.id === mixchId) <
+      serialized.items.findIndex((item) => item.id === leadId) <
+        serialized.items.findIndex((item) => item.id === mixchId) &&
+        serialized.items.findIndex((item) => item.id === mixchId) <
         serialized.items.findIndex((item) => item.id === radioId),
     );
   });

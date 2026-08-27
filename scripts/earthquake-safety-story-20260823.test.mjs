@@ -130,7 +130,7 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
     assert.equal(item()?.activityIds, undefined);
     assert.equal(item()?.title, "地震直後、みんなの安全を気遣うみりぃ💌");
     assert.equal(extraEarthquakeNews.length, 0);
-    assert.equal(news.length, 43);
+    assert.equal(news.length, 44);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -452,7 +452,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
       candidate.id.includes("earthquake"),
     );
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))
       .filter((candidate) => candidate.date === "2026-08-23")
       .map((candidate) => candidate.id);
 
