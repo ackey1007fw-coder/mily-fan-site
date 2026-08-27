@@ -5,11 +5,11 @@
   "type": "module",
   "packageManager": "pnpm@10.33.3",
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "node scripts/build-paton-day3-story-media.mjs && vite --host 127.0.0.1",
     "typecheck": "tsc -b",
-    "build": "node scripts/build-ios-video.mjs && tsc -b && vite build",
+    "build": "node scripts/build-paton-day3-story-media.mjs && node scripts/build-ios-video.mjs && tsc -b && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test scripts/*.test.mjs",
+    "test": "node scripts/build-paton-day3-story-media.mjs && node --disable-warning=ExperimentalWarning --experimental-strip-types --test scripts/*.test.mjs",
     "media:build": "node scripts/build-media.mjs",
     "drive-gallery:build": "node scripts/build-drive-gallery.mjs",
     "guard": "node scripts/check-site-identity.mjs main && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-site-url.mjs"
