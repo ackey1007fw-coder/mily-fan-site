@@ -210,6 +210,9 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
     assert.match(guide, /campusGirlsPatonVoteLink/);
     assert.match(guide, /id=\{PATON_VOTE_HOW_TO_ANCHOR_ID\}/);
     assert.match(guide, /isSupportEventUrlActive/);
+    assert.match(guide, /window\.location\.hash/);
+    assert.match(guide, /addEventListener\("hashchange", scrollToGuide\)/);
+    assert.match(guide, /scrollIntoView\(/);
     assert.equal(guide.includes("campusGirlsPatonPortraitImage"), false);
     assert.equal(guide.includes("NewsImage"), false);
   });
