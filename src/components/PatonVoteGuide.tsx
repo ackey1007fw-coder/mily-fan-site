@@ -17,8 +17,8 @@ import { ExternalLink } from "./ExternalLink";
 /**
  * CAMPUS GIRLS 2027 予選A FinalSTAGE の投票手順。
  * 期間中だけホームと Support に出し、終了後は NEWS 履歴へ残す。
- * 本人写真は NEWS 掲載面に残し、この導線カードへは流用しない。
- * 8/28の本人Instagram Storyは、リンクステッカーの代わりに下の確認済みCTAへつなぐ。
+ * 既存の本人写真は流用せず、オーナー提供の8/28 Instagram Storyだけを表示する。
+ * Storyのリンクステッカーの代わりに、下の確認済みPaton CTAへつなぐ。
  */
 export function PatonVoteGuide() {
   const now = useSupportEventClock();
