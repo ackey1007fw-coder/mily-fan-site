@@ -20,6 +20,7 @@ import {
   morningStory20260820,
 } from "./morningStoryVideo.ts";
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
+import { morningMissCircleShowroomStoryVideo } from "./morningMissCircleShowroomStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
@@ -149,6 +150,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-27-miss-circle-showroom-story",
+    date: "2026-08-27",
+    title: "おはよう☀️ 8/27は14:00〜ミスサーSR配信",
+    body: "8月27日、みりぃがInstagram Storyで、14:00からのミスサーSHOWROOM配信を案内しました。「おはよう」のメッセージを添えた短い動画です。",
+    sourceLabel: morningMissCircleShowroomStoryVideo.sourceLabel,
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: morningMissCircleShowroomStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "おはよう\n\n【8/27（木）】\nミスサーSR配信📶\n14:00〜",
+    },
+  },
   {
     id: "2026-08-26-girlsaward-showroom-6th",
     date: "2026-08-26",

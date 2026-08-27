@@ -1966,6 +1966,58 @@ NEWS JPEG: 272,873 bytes / 1149×1369 / sha256
 b05-01 は既存 Gallery のまま。NEWS `2026-08-19-second-round-result` へ srcset で配線した。
 新しいファイルは作っていない。`media.ts` の `sourceUrl` は未確認のため null のまま。
 
+## 素材台帳（batch b35 / 受領日・source date 2026-08-27）
+
+2026-08-27 の本人Instagram Story。owner-providedの縦型動画で、画面には
+「おはよう」「【8/27（木）】ミスサーSR配信 14:00〜」と表示されている。
+HOME Latest / `/news/` と Gallery が同じ公開MP4・poster・manifest objectを共有する。
+恒久的なStory permalinkはないため、表示は非リンクの `Instagram Story` labelとし、
+Instagramプロフィールは関連リンクだけに使う。受け渡し用URL / file IDは公開情報・
+tracked textへ残さない。
+
+日常の朝Storyとして `/stories/` 記事、highlights、`events.ts`、`streamSchedule.ts`、
+`media.ts`、Activitiesの関連NEWS / 関連メディアには追加しない。NEWS正本から
+Portal Feedへは既存契約どおり派生する。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b35-01 | `gallery/mily-b35-01-miss-circle-showroom-story.mp4` | 室内で資料を手にしたみりぃと、8月27日14:00からのミスサーSHOWROOM配信案内が表示された縦型動画。720×1280 / 17.567秒。owner-provided | ✅ Latest / NEWS + Gallery |
+| b35-01 poster | `gallery/mily-b35-01-miss-circle-showroom-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定のDrive受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-27` / 恒久permalinkなし
+- 元素材は `media/original/mily-b35-01-miss-circle-showroom-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- 19,956,962 bytes / sha256
+  `230c7088081f5fd72c427d545e427ecc0380717f8ad767cb620e33ce7549b9c3`
+- H.264 High / 720×1280 / 30fps / 527 frames / 17.566667秒 / yuv420p
+- 音声: HE-AAC / 44.1kHz / stereo / 17.481701秒
+- 元metadata: format・video・audioに `creation_time: 2026-08-27T02:33:43Z`、
+  streamに `Core Media Video / Audio`
+- 画面内と背景を通して、DM・通知・第三者・端末UI・識別可能な個人情報は見当たらない。
+  手元の印刷物は本人が公開した動画内に映る範囲で、第三者名や連絡先は確認できない
+
+### 音声の扱い — 削除した
+
+元素材にはHE-AAC / 44.1kHz / stereoの音声ストリームがあるが、音声の内容・由来・
+権利者と再配信権を確認できないため、公開派生はvideo-only（無音）とした。
+本人の声・BGM・その他の音声のいずれかは推測して記録しない。元素材は変更していない。
+
+### 公開MP4 / poster
+
+- MP4: 1,012,519 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+  527 frames / 17.567秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+  sha256 `e54b6f15bd77cdb0820a403eabb83552188e891856d5d6f2566be15685cd1e49`
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 2970）
+- metadata除去済み。元の`creation_time`と`Core Media Video / Audio`、chapterは残っていない
+- poster: 70,173 bytes / 720×1280 JPEG / 8.0秒地点の実フレーム /
+  sha256 `9810d3a4b420ba624ac229d58d778ccc52c0621f89eb440c82614dce96b2cc27`
+- posterはEXIF / IPTC / XMP / ICCなし
+- crop・scale・引き伸ばし・アップスケール・fps水増し・短縮・テロップ削除なし
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。
