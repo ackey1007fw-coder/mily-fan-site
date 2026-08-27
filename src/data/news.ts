@@ -74,6 +74,11 @@ import {
   PATON_VOTE_HOW_TO_X_URL,
   patonVoteHowToSpokenMessage,
 } from "./patonVoteHowTo.ts";
+import {
+  MOVIE_NIGHT_INSTAGRAM_PROFILE_URL,
+  MOVIE_NIGHT_INSTAGRAM_URL,
+  movieNightNewsImages,
+} from "./movieNightPhotos.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -162,6 +167,33 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-27-movie-night",
+    date: "2026-08-27",
+    sameDayOrder: 3,
+    title: "『あの星が降る丘で、君とまた出会いたい。』を鑑賞🎞️❣️",
+    body: "8月27日、みりぃが『あの花が咲く丘で、君とまた出会えたら。』の続編『あの星が降る丘で、君とまた出会いたい。』を観たことをInstagramで紹介しました。開始5分からエンドロールまで泣いたこと、涙を流せる映画が好きなことを綴り、現代と絡めながら戦争の知識を伝えてくれる素敵な映画だと紹介。皆さんのおすすめ映画も募集しています。",
+    source: MOVIE_NIGHT_INSTAGRAM_URL,
+    sourceLabel: "Instagramの投稿を見る",
+    url: MOVIE_NIGHT_INSTAGRAM_PROFILE_URL,
+    ctaLabel: "みりぃのInstagramを見る",
+    media: movieNightNewsImages[0],
+    additionalMedia: movieNightNewsImages.slice(1),
+    message: {
+      label: "みりぃの投稿",
+      text: `映画見てきたよん🎞️❣️
+
+『あの花が咲く丘で、君とまた出会えたら。』の続編、
+『あの星が降る丘で、君とまた出会いたい。』を見てきたんだけどさ、開始5分からエンドロールまで号泣して、泣き疲れた‼️笑
+涙流せる映画好きなんだよなぁ🥹🥹🥹
+
+現代と絡めながら戦争の知識を教えてくれる、素敵な映画です🙂‍↕️❤️‍🔥
+
+皆さんのおすすめの映画教えてっ😳👂🏻
+
+#映画 #あの花が咲く丘で君とまた出会えたら #あの星が降る丘で君とまた出会いたい #ミスサークルコンテスト #キャンパスガールズ`,
+    },
+  },
   {
     id: PATON_VOTE_HOW_TO_NEWS_ID,
     date: "2026-08-27",

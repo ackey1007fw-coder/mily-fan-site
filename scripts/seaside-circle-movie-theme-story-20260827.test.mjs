@@ -110,7 +110,7 @@ describe("2026-08-27 湘南シーサイドサークル映画テーマ Story — 
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(sortNewsByDateDesc(news)[3]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-movie-night"))[3]?.id, NEWS_ID);
     assert.equal(entry.date, "2026-08-27");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["radio"]);
@@ -393,7 +393,7 @@ describe("2026-08-27 湘南シーサイドサークル映画テーマ Story — 
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /DM・通知・端末情報・第三者コメント/);
     assert.match(docs, /8\.0秒地点の実フレーム/);
-    assert.match(ops, /46件/);
+    assert.match(ops, /47件/);
     assert.match(ops, /独立動画17本/);
     assert.match(ops, /ラジオ「映画」テーマ/);
   });

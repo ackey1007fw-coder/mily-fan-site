@@ -85,9 +85,9 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(entry.media, birthdayIndoorSelfieImage);
     assert.equal(entry.additionalMedia, undefined);
     assert.equal(entry.activityIds, undefined);
-    assert.equal(news.length, 46);
+    assert.equal(news.length, 47);
     assert.deepEqual(verifyNews(news), []);
-    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).some((candidate) => candidate.id === NEWS_ID));
+    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((candidate) => candidate.id === NEWS_ID));
   });
 
   it("uses one local /media/news/ JPEG with Gallery srcset and never hotlinks SNS media", async () => {
@@ -147,7 +147,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     const gallery = media.find((entry) => entry.id === "mily-b29-01");
 
     assert.equal(gallery, birthdayIndoorSelfiePhoto);
-    assert.equal(visible[3], birthdayIndoorSelfiePhoto);
+    assert.equal(visible[8], birthdayIndoorSelfiePhoto);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.published, true);
     assert.equal(gallery.provenance, "sns-post");
@@ -160,7 +160,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(gallery.aspect, "1536 / 2048");
     assert.notEqual(gallery.featured, true);
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 27);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 32);
     assert.deepEqual(verifyMedia(media), []);
 
     const jpg480 = publicFile(`${GALLERY_BASE}-480.jpg`);
@@ -251,8 +251,8 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(findDriveIds(b29).length, 0);
     assert.doesNotMatch(b29, /Millie|millie/);
     assert.doesNotMatch(ops, /Millie|millie/);
-    assert.match(ops, /46件/);
-    assert.match(ops, /写真27枚/);
+    assert.match(ops, /47件/);
+    assert.match(ops, /写真32枚/);
     assert.match(ops, /b29-01/);
 
     const { stdout: trackedOriginal } = await run(

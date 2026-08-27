@@ -58,8 +58,8 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
         .length,
       1,
     );
-    assert.equal(news.length, 46);
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, PATON_VOTE_HOW_TO_NEWS_ID);
+    assert.equal(news.length, 47);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-movie-night"))[0]?.id, PATON_VOTE_HOW_TO_NEWS_ID);
     assert.equal(entry.date, "2026-08-27");
     assert.equal(entry.sameDayOrder, 2);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
@@ -210,6 +210,9 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
     assert.match(guide, /campusGirlsPatonVoteLink/);
     assert.match(guide, /id=\{PATON_VOTE_HOW_TO_ANCHOR_ID\}/);
     assert.match(guide, /isSupportEventUrlActive/);
+    assert.match(guide, /window\.location\.hash/);
+    assert.match(guide, /addEventListener\("hashchange", scrollToGuide\)/);
+    assert.match(guide, /scrollIntoView\(/);
     assert.equal(guide.includes("campusGirlsPatonPortraitImage"), false);
     assert.equal(guide.includes("NewsImage"), false);
   });
@@ -233,7 +236,7 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
     const ops = await source("docs/CONTENT-OPS.md");
     const media = await source("docs/MEDIA.md");
 
-    assert.match(ops, /46件/);
+    assert.match(ops, /47件/);
     assert.match(ops, /キャンガル2027 パトン投票方法/);
     assert.match(ops, /X動画は自己ホストせず/);
     assert.match(ops, /既存b26-01/);

@@ -206,7 +206,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.equal(news.filter((entry) => entry.id === VOTE_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === FOLLOWERS_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === THANKS_NEWS_ID).length, 1);
-    assert.equal(news.length, 46);
+    assert.equal(news.length, 47);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(vote.date, "2026-08-26");
     assert.equal(vote.sameDayOrder, 3);
@@ -311,7 +311,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
   });
 
   it("orders the 8/26 items with the GirlsAward X post first", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 9), [
       "2026-08-26-girlsaward-showroom-6th",
       VOTE_NEWS_ID,
@@ -422,9 +422,9 @@ describe("2026-08-26 Instagram Stories — Gallery still photos", () => {
 
     assert.equal(media.filter((entry) => entry.id === "mily-b27-07").length, 1);
     assert.equal(media.filter((entry) => entry.id === "mily-b27-06").length, 1);
-    assert.equal(visible[5], patonVoteMirrorStillPhoto);
-    assert.equal(visible[6], patonVoteCollageStillPhoto);
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 27);
+    assert.equal(visible[10], patonVoteMirrorStillPhoto);
+    assert.equal(visible[11], patonVoteCollageStillPhoto);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 32);
 
     for (const photo of [patonVoteMirrorStillPhoto, patonVoteCollageStillPhoto]) {
       assert.equal(photo.kind, "photo");
@@ -673,7 +673,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /他出場者・順位/);
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
-    assert.match(ops, /46件/);
+    assert.match(ops, /47件/);
     assert.match(ops, /独立動画17本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });
