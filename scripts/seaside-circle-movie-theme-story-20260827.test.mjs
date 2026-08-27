@@ -110,7 +110,7 @@ describe("2026-08-27 湘南シーサイドサークル映画テーマ Story — 
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(sortNewsByDateDesc(news)[1]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news)[2]?.id, NEWS_ID);
     assert.equal(entry.date, "2026-08-27");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["radio"]);
