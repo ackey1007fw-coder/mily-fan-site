@@ -211,7 +211,7 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
   it("shares exactly one manifest object, MP4 and poster with Gallery", async () => {
     const entry = storyNews();
-    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
     const assets = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"))
       .filter((file) => file.includes("mily-b13-02-event-story"));
@@ -243,8 +243,8 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 18);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length + drive.videos.length, 27);
+    assert.equal(galleryVideos.length, 19);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length + drive.videos.length, 27);
   });
 
   it("publishes 720x1280 H.264 Baseline at the original 1fps without audio", async () => {
@@ -358,7 +358,7 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
 describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-x-followers-100")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 28), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -389,7 +389,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 43);
+    assert.equal(news.length, 44);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

@@ -262,7 +262,7 @@ describe("Gallery portrait-first order", () => {
     assert.ok(firstMixch >= firstPortraitEnd);
 
     const mixch = entries.filter((entry) => entry.kind === "mixch");
-    assert.equal(mixch.length, 2);
+    assert.equal(mixch.length, 3);
     assert.equal(
       entries.some(
         (entry) =>
@@ -287,7 +287,7 @@ describe("Gallery portrait-first order", () => {
     assert.doesNotMatch(selector, /const photos = \[/);
     assert.equal(
       selectGalleryEntries().filter((entry) => entry.kind === "mixch").length,
-      2,
+      3,
     );
   });
 });

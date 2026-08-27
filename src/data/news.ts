@@ -31,6 +31,7 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
+  mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
   type MixchMovie,
@@ -167,6 +168,24 @@ export const news: NewsItem[] = [
         "変動はあるだろうけど、これからも楽しく発信していきますね\u{266A}\n" +
         "これからもよろしくです\u{FF01}\u{FF01}\n" +
         "#ミスサー #キャンガル #ミスサー2026 #キャンガル2027 #ミスコン",
+    },
+  },
+  {
+    id: "2026-08-27-mixch-expressive",
+    date: "2026-08-27",
+    activityIds: ["campus-girls"],
+    title: "「表情豊かなみりぃと魅力的でしょう？？？？」——絶対に本戦に行こう",
+    body: "8月27日、みりぃがMixchに動画を公開しました。表情豊かなみりぃと魅力的でしょう？と呼びかけ、絶対に本戦に行こう、勝ち進もうと伝えています。CAMPUS GIRLS関連のハッシュタグが添えられています。",
+    source: "https://x.com/mily_chan36/status/2092838411602407646",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://mixch.tv/m/VDojsMY5",
+    ctaLabel: "Mixchで見る",
+    media: mixchExpressiveMovie,
+    message: {
+      label: "みりぃのX投稿",
+      text:
+        "#ミクチャ で動画を投稿したよ！見に来てね！\n" +
+        "表情豊かなみりぃと魅力的でしょう？？？？(^з^)-☆ 絶対に本戦に行こう\u{203C}\u{FE0F}勝ち進もう\u{203C}\u{FE0F}#キャンガル #キャンパスガールズ2027 #キャンパスガールズ #キャ https://mixch.tv/m/VDojsMY5",
     },
   },
   {
