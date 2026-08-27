@@ -2018,6 +2018,62 @@ Portal Feedへは既存契約どおり派生する。
 - crop・scale・引き伸ばし・アップスケール・fps水増し・短縮・テロップ削除なし
 - AI生成・AI加工・顔補正・generative fill・outpaintingなし
 
+## 素材台帳（batch b36 / 受領日・source date 2026-08-27）
+
+2026-08-27 の本人Instagram Story。湘南シーサイドサークルの番組Storyを
+再共有したowner-providedの縦型動画で、8月30日（日）10:00〜13:00の生放送と、
+トークテーマ「映画」のメッセージ募集を案内している。HOME Latest / `/news/` と
+Gallery が同じ公開MP4・poster・manifest objectを共有する。
+
+恒久的なStory permalinkはないため、表示は非リンクの `Instagram Story` labelとし、
+本人Instagramプロフィールは関連リンクだけに使う。受け渡し用URL / file IDは
+公開情報・tracked textへ残さない。Radio Activityでは関連NEWS・関連メディアとして
+既存の明示的な `activityIds` 経路から表示する。
+
+通常の番組告知Storyとして `/stories/` 記事、highlights、`events.ts`、
+`streamSchedule.ts`、`media.ts`、週次ラジオ正本には追加しない。NEWS正本から
+Portal Feedへは既存契約どおり派生する。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b36-01 | `gallery/mily-b36-01-seaside-circle-movie-theme-story.mp4` | 湘南シーサイドサークルの8月30日生放送と、トークテーマ「映画」のメッセージ募集を案内するInstagram Story動画。720×1280 / 20.000秒。owner-provided | ✅ Latest / NEWS + Gallery + Radio Activity |
+| b36-01 poster | `gallery/mily-b36-01-seaside-circle-movie-theme-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery + Radio Activity |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定のDrive受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-27` / 恒久permalinkなし
+- 元素材は `media/original/mily-b36-01-seaside-circle-movie-theme-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- 11,478,979 bytes / sha256
+  `f091af15ffa5b905c37c917ed9285f3fce33c7ec340dae60cfa7316221c54d40`
+- H.264 High / 720×1280 / 30fps / 600 frames / 20.000000秒 / yuv420p
+- 音声: HE-AAC / 44.1kHz / stereo / 19.919796秒
+- 元metadata: format・video・audioに `creation_time: 2026-08-27T04:57:02Z`、
+  streamに `Core Media Video / Audio`。投稿時刻の根拠には使っていない
+- 画面には番組の公開案内、出演者3人の公開プロフィール画像・番組内呼称、
+  番組アカウントと本人の再共有表示が含まれる。DM・通知・端末情報・第三者コメント、
+  電話番号・メールアドレス・住所は見当たらない。本文・altには第三者名を転記していない
+
+### 音声の扱い — 削除した
+
+元素材にはHE-AAC / 44.1kHz / stereoの音声ストリームがあるが、音声の内容・由来・
+権利者と再配信権を確認できないため、公開派生はvideo-only（無音）とした。
+本人の声・BGM・その他の音声のいずれかは推測して記録しない。元素材は変更していない。
+
+### 公開MP4 / poster
+
+- MP4: 1,197,138 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+  600 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 / 音声ストリームなし /
+  sha256 `8972bcfa3dac0d08757a15275b1542ffdc706f9b8d96fa90d02f30d3dcd4da45`
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 3278）
+- metadata除去済み。元の`creation_time`と`Core Media Video / Audio`、chapterは残っていない
+- poster: 88,947 bytes / 720×1280 JPEG / 8.0秒地点の実フレーム /
+  sha256 `1c7da24c2c36562dcf0312d54acfc4df859e4b089a1d4470fc736c084523a6da`
+- posterはEXIF / IPTC / XMP / ICCなし
+- crop・scale・引き伸ばし・アップスケール・fps水増し・短縮・テロップ削除なし
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

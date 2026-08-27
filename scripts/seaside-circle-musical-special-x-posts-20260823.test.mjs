@@ -87,6 +87,7 @@ describe("2026-08-23 seaside circle official X posts — NEWS stays one item", (
     const matches = news.filter((entry) => entry.id === NEWS_ID);
     const extra = news.filter(
       (entry) =>
+        entry.date === "2026-08-23" &&
         entry.id !== NEWS_ID &&
         /seaside-circle|musical-special|fm-smw|fm_smw/.test(entry.id),
     );
@@ -94,7 +95,7 @@ describe("2026-08-23 seaside circle official X posts — NEWS stays one item", (
 
     assert.equal(matches.length, 1);
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 41);
+    assert.equal(news.length, 42);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -157,9 +158,9 @@ describe("2026-08-23 seaside circle official X posts — STORY sources and photo
     assert.equal(lead?.poster, seasideCircleMusicalSpecialVideo.poster);
     assert.equal(thanks?.src, seasideCircleMusicalSpecialThanksVideo.src);
     assert.equal(thanks?.poster, seasideCircleMusicalSpecialThanksVideo.poster);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").includes(seasideCircleMusicalSpecialVideo), true);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").includes(seasideCircleMusicalSpecialThanksVideo), true);
-    assert.equal(galleryVideos.length, 17);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").includes(seasideCircleMusicalSpecialVideo), true);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").includes(seasideCircleMusicalSpecialThanksVideo), true);
+    assert.equal(galleryVideos.length, 18);
   });
 
   it("reuses Gallery derivatives for both STORY photos", () => {

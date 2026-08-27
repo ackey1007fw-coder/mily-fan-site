@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 41);
+    assert.equal(news.length, 42);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -151,7 +151,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
   });
 
   it("sits between Final STAGE guide and night-thanks on 8/24", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 14), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -407,7 +407,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(b24, /公開用のmetadata除去以外は無改変/);
     assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
-    assert.match(ops, /41件/);
+    assert.match(ops, /42件/);
     assert.match(ops, /初メイク配信/);
     assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);

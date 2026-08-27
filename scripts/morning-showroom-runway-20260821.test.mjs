@@ -119,7 +119,7 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
   });
 
   it("keeps newest-first ordering without disturbing the existing 8/20 order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -153,7 +153,7 @@ describe("2026-08-21 morning SHOWROOM X post — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 41);
+    assert.equal(news.length, 42);
   });
 });
 
@@ -165,11 +165,11 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(item().media, morningShowroomRunwayVideo);
     assert.equal(galleryItem, morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[7], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[8], eventStory20260821);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[9], morningOhayo20260821);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[10], morningShowroomRunwayVideo);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length, 16);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[7], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[8], eventStory20260821);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[9], morningOhayo20260821);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[10], morningShowroomRunwayVideo);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length, 16);
     assert.equal(morningShowroomRunwayVideo.sourceUrl, SOURCE);
     assert.equal(morningShowroomRunwayVideo.sourceDate, "2026-08-21");
     assert.equal(morningShowroomRunwayVideo.alt, ALT);
@@ -197,8 +197,8 @@ describe("2026-08-21 morning SHOWROOM video — shared Latest / Gallery asset", 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 17);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length + drive.videos.length, 27);
+    assert.equal(galleryVideos.length, 18);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length + drive.videos.length, 27);
   });
 });
 

@@ -151,12 +151,12 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 41);
+    assert.equal(news.length, 42);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
   it("places the broadcast NEWS above the earlier 8/23 Fan Room items", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -179,7 +179,10 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
   });
 
   it("appears as related NEWS on the radio Activity without a copied body", () => {
-    const radioNews = selectActivityNews("radio", news, news.length);
+    const priorRadioNews = news.filter(
+      (entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story",
+    );
+    const radioNews = selectActivityNews("radio", priorRadioNews, priorRadioNews.length);
     assert.equal(radioNews[2]?.id, NEWS_ID);
     assert.equal(radioNews.some((entry) => entry.id === NEWS_ID), true);
     assert.equal(
@@ -284,8 +287,8 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
 
 describe("2026-08-23 seaside circle musical special — Gallery and assets", () => {
   it("shares one published Gallery video object", () => {
-    assert.equal(galleryVideos[6], seasideCircleMusicalSpecialVideo);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[5], seasideCircleMusicalSpecialVideo);
+    assert.equal(galleryVideos[7], seasideCircleMusicalSpecialVideo);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[5], seasideCircleMusicalSpecialVideo);
     assert.equal(seasideCircleMusicalSpecialVideo.published, true);
     assert.equal(seasideCircleMusicalSpecialVideo.provenance, "owner-provided");
     assert.equal(
@@ -295,7 +298,7 @@ describe("2026-08-23 seaside circle musical special — Gallery and assets", () 
     assert.equal(seasideCircleMusicalSpecialVideo.sourceDate, "2026-08-23");
     assert.equal(seasideCircleMusicalSpecialVideo.alt, ALT);
     assert.equal("sourceUrl" in seasideCircleMusicalSpecialVideo, false);
-    assert.equal(galleryVideos.length, 17);
+    assert.equal(galleryVideos.length, 18);
     assert.equal(events.length, 0);
     assert.deepEqual(streamSchedule, []);
   });

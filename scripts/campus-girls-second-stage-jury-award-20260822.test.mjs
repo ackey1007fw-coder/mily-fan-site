@@ -294,7 +294,7 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(item.sameDayOrder, undefined);
     assert.equal(item.source, xSource);
     assert.equal(item.url, `/stories/${slug}/`);
-    const aug22 = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))
+    const aug22 = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))
       .filter((entry) => entry.date === "2026-08-22")
       .map((entry) => entry.id);
     assert.deepEqual(aug22, [

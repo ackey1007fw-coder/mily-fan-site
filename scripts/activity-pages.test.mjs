@@ -36,6 +36,7 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-27-seaside-circle-movie-theme-story": ["radio"],
   "2026-08-26-girlsaward-showroom-6th": ["miss-circle", "live-stream"],
   "2026-08-26-paton-vote-stories": ["campus-girls"],
   "2026-08-26-morning-stream-thanks": ["live-stream"],
