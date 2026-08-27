@@ -141,7 +141,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
     assert.equal(radioNews.length, 1);
     assert.equal(extraThanksNews.length, 0);
-    assert.equal(news.length, 41);
+    assert.equal(news.length, 42);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -166,7 +166,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
   });
 
   it("stays below the dragon-cloud NEWS and above earlier 8/23 Fan Room items", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -188,7 +188,10 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
   });
 
   it("still appears once on the radio Activity", () => {
-    const radioNews = selectActivityNews("radio", news, news.length);
+    const priorRadioNews = news.filter(
+      (entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story",
+    );
+    const radioNews = selectActivityNews("radio", priorRadioNews, priorRadioNews.length);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews[2]?.id, NEWS_ID);
   });
@@ -196,13 +199,13 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
 describe("2026-08-23 seaside circle thanks Story — Gallery order", () => {
   it("places b21 after newer 8/24 videos, keeps b19 next, and preserves the rest", () => {
-    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
 
-    assert.equal(galleryVideos.length, 17);
+    assert.equal(galleryVideos.length, 18);
     assert.equal(visible.length, 16);
-    assert.equal(galleryVideos[5], seasideCircleMusicalSpecialThanksVideo);
+    assert.equal(galleryVideos[6], seasideCircleMusicalSpecialThanksVideo);
     assert.equal(visible[4], seasideCircleMusicalSpecialThanksVideo);
-    assert.equal(galleryVideos[6], seasideCircleMusicalSpecialVideo);
+    assert.equal(galleryVideos[7], seasideCircleMusicalSpecialVideo);
     assert.equal(visible[5], seasideCircleMusicalSpecialVideo);
     assert.deepEqual(visible.slice(6), [
       earthquakeSafetyStoryVideo,

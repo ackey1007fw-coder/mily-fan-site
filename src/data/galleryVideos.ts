@@ -17,6 +17,7 @@ import { patonVoteMirrorStoryVideo } from "./patonVoteMirrorStoryVideo.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
+import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStoryVideo.ts";
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { tiktokRadioVideo, type TikTokRadioVideo } from "./tiktokRadioVideo.ts";
 import {
@@ -46,6 +47,7 @@ export {
   patonVoteMirrorStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,
+  seasideCircleMovieThemeStoryVideo,
   seasideCircleYesTokyoVideo,
   secondRoundStoryVideo,
   tiktokRadioVideo,
@@ -67,6 +69,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  seasideCircleMovieThemeStoryVideo,
   morningMissCircleShowroomStoryVideo,
   patonVoteMirrorStoryVideo,
   patonVoteCollageStoryVideo,

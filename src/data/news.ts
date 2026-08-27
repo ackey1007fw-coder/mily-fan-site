@@ -27,6 +27,7 @@ import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
+import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStoryVideo.ts";
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
@@ -150,6 +151,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-27-seaside-circle-movie-theme-story",
+    date: "2026-08-27",
+    activityIds: ["radio"],
+    title: "8/30のラジオは「映画」がトークテーマ🎬",
+    body: "8月27日、みりぃがInstagram Storyで、湘南シーサイドサークルの8月30日（日）10:00〜13:00生放送の案内をシェアしました。トークテーマは「映画」で、メッセージを募集しています。",
+    sourceLabel: seasideCircleMovieThemeStoryVideo.sourceLabel,
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: seasideCircleMovieThemeStoryVideo,
+    message: {
+      label: "みりぃがシェアした番組案内",
+      text: "湘南シーサイドサークル\n8月30日（日）10:00〜13:00生放送！\nトークテーマは【映画】\nメッセージ募集中💌",
+    },
+  },
   {
     id: "2026-08-27-miss-circle-showroom-story",
     date: "2026-08-27",
