@@ -78,9 +78,11 @@ export function PatonVoteGuide() {
             aria-label={patonVoteDay3StoryVideo.alt}
             className="mx-auto block max-h-[36rem] w-full bg-black object-contain"
             controls
+            height={patonVoteDay3StoryVideo.height}
             playsInline
             preload="none"
             poster={patonVoteDay3StoryVideo.poster}
+            width={patonVoteDay3StoryVideo.width}
           >
             <source src={patonVoteDay3StoryVideo.src} type="video/mp4" />
           </video>
