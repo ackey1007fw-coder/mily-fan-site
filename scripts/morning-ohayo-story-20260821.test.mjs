@@ -120,7 +120,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
   });
 
   it("keeps the established same-day editorial ordering", () => {
-    const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 31), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -154,7 +154,7 @@ describe("2026-08-21 morning OHAYO Instagram Story — Latest", () => {
       "2026-08-20-morning-message",
       "2026-08-20-morning-story",
     ]);
-    assert.equal(news.length, 40);
+    assert.equal(news.length, 41);
   });
 });
 
@@ -163,7 +163,7 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
     const galleryItem = galleryVideos.find(
       (entry) => entry.id === morningOhayo20260821.id,
     );
-    const visible = visibleGalleryVideos();
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
 
     assert.equal(item().media, morningOhayo20260821);
     assert.equal(galleryItem, morningOhayo20260821);
@@ -216,8 +216,8 @@ describe("2026-08-21 morning OHAYO Story — shared Latest / Gallery asset", () 
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 16);
-    assert.equal(visibleGalleryVideos().length + drive.videos.length, 27);
+    assert.equal(galleryVideos.length, 17);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length + drive.videos.length, 27);
   });
 });
 

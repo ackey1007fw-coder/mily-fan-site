@@ -10,6 +10,7 @@ import {
   type MorningShowroomRunwayVideo,
 } from "./morningShowroomRunwayVideo.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
+import { morningMissCircleShowroomStoryVideo } from "./morningMissCircleShowroomStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { patonVoteCollageStoryVideo } from "./patonVoteCollageStoryVideo.ts";
 import { patonVoteMirrorStoryVideo } from "./patonVoteMirrorStoryVideo.ts";
@@ -36,6 +37,7 @@ export {
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
   morningOhayo20260821,
+  morningMissCircleShowroomStoryVideo,
   morningShowroomRunwayVideo,
   morningStoryVideo,
   morningStory20260820,
@@ -65,6 +67,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  morningMissCircleShowroomStoryVideo,
   patonVoteMirrorStoryVideo,
   patonVoteCollageStoryVideo,
   seasideCircleYesTokyoVideo,

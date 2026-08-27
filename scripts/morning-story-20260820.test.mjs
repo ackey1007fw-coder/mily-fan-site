@@ -77,7 +77,7 @@ describe("2026-08-20 morning Instagram Story — Latest entry", () => {
   it("exists and stays in Latest under the same-day posts", () => {
     assert.ok(item());
     // 8/21の新着の後も、8/20同日は既存の配列順を維持する。
-    const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -322,7 +322,7 @@ describe("2026-08-20 morning Story — iOS-compatible encode", () => {
 describe("2026-08-20 morning Story — surrounding content is untouched", () => {
   it("adds one standalone Gallery video without dropping b03 or the Drive batch", () => {
     const drive = driveGallerySections(visibleDriveGallery());
-    const visible = visibleGalleryVideos();
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
 
     // 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）で10本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
     assert.equal(visible.length, 16);

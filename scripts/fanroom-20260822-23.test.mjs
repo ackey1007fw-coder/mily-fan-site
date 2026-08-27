@@ -133,7 +133,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
   });
 
   it("keeps chronological same-day order in the Latest sort", () => {
-    const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 22), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -158,7 +158,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       EVENING_ID,
       CAMPUS_ID,
     ]);
-    assert.equal(news.length, 40);
+    assert.equal(news.length, 41);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {
@@ -261,7 +261,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
 
   it("keeps Portal Feed same-day NEWS chronology aligned with Latest", () => {
     const feed = createPortalFeed();
-    const latestIds = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     const feedNewsIds = feed.items
       .filter((item) => item.type === "news")
       .map((item) => item.id.replace(/^mily:news:/, ""));

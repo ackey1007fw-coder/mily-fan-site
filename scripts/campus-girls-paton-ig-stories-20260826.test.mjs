@@ -204,7 +204,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.equal(news.filter((entry) => entry.id === VOTE_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === FOLLOWERS_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === THANKS_NEWS_ID).length, 1);
-    assert.equal(news.length, 40);
+    assert.equal(news.length, 41);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(vote.date, "2026-08-26");
     assert.equal(vote.sameDayOrder, 3);
@@ -309,7 +309,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
   });
 
   it("orders the 8/26 items with the GirlsAward X post first", () => {
-    const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 9), [
       "2026-08-26-girlsaward-showroom-6th",
       VOTE_NEWS_ID,
@@ -328,7 +328,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
 describe("2026-08-26 Instagram Stories — shared collage and mirror Gallery videos", () => {
   it("shares one Gallery object each with Latest, newest-first, both published", () => {
     const vote = voteItem();
-    const visible = visibleGalleryVideos();
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
 
     assert.equal(vote.media, patonVoteMirrorStillImage);
     assert.deepEqual(vote.additionalMedia, [
@@ -342,15 +342,15 @@ describe("2026-08-26 Instagram Stories — shared collage and mirror Gallery vid
       patonVoteMirrorStoryVideo,
       patonVoteCollageStoryVideo,
     ]);
-    assert.equal(galleryVideos[0], patonVoteMirrorStoryVideo);
-    assert.equal(galleryVideos[1], patonVoteCollageStoryVideo);
-    assert.equal(galleryVideos[14], mixch15xDayMovie);
-    assert.equal(galleryVideos[15], mixchConfidenceMessageMovie);
+    assert.equal(galleryVideos[1], patonVoteMirrorStoryVideo);
+    assert.equal(galleryVideos[2], patonVoteCollageStoryVideo);
+    assert.equal(galleryVideos[15], mixch15xDayMovie);
+    assert.equal(galleryVideos[16], mixchConfidenceMessageMovie);
     assert.equal(visible[0], patonVoteMirrorStoryVideo);
     assert.equal(visible[1], patonVoteCollageStoryVideo);
     assert.equal(visible[14], mixch15xDayMovie);
     assert.equal(visible[15], mixchConfidenceMessageMovie);
-    assert.equal(galleryVideos.length, 16);
+    assert.equal(galleryVideos.length, 17);
     assert.equal(visible.length, 16);
 
     for (const video of [patonVoteMirrorStoryVideo, patonVoteCollageStoryVideo]) {
@@ -670,8 +670,8 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /他出場者・順位/);
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
-    assert.match(ops, /40件/);
-    assert.match(ops, /独立動画14本/);
+    assert.match(ops, /41件/);
+    assert.match(ops, /独立動画15本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });
 

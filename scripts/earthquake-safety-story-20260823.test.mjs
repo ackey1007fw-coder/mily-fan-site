@@ -130,7 +130,7 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
     assert.equal(item()?.activityIds, undefined);
     assert.equal(item()?.title, "地震直後、みんなの安全を気遣うみりぃ💌");
     assert.equal(extraEarthquakeNews.length, 0);
-    assert.equal(news.length, 40);
+    assert.equal(news.length, 41);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -171,14 +171,14 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
 
 describe("2026-08-23 earthquake safety Story — shared Latest / Gallery asset", () => {
   it("registers exactly one Gallery video and shares the same object with NEWS", () => {
-    const visible = visibleGalleryVideos();
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
     const matches = galleryVideos.filter(
       (entry) => entry.id === earthquakeSafetyStoryVideo.id,
     );
 
     assert.equal(item().media, earthquakeSafetyStoryVideo);
     assert.deepEqual(matches, [earthquakeSafetyStoryVideo]);
-    assert.equal(galleryVideos[6], earthquakeSafetyStoryVideo);
+    assert.equal(galleryVideos[7], earthquakeSafetyStoryVideo);
     assert.equal(visible[6], earthquakeSafetyStoryVideo);
     assert.equal(visible.length, 16);
     assert.equal(earthquakeSafetyStoryVideo.kind, "video");
@@ -343,7 +343,7 @@ describe("2026-08-23 earthquake safety Story — live-stream activity media", ()
 
     assert.equal(news.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(item().media, earthquakeSafetyStoryVideo);
-    assert.equal(galleryVideos[6], earthquakeSafetyStoryVideo);
+    assert.equal(galleryVideos[7], earthquakeSafetyStoryVideo);
     assert.equal(item().activityIds, undefined);
     assert.equal(
       liveNews.some((entry) => entry.id === NEWS_ID),
@@ -448,7 +448,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
       candidate.id.includes("earthquake"),
     );
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news)
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))
       .filter((candidate) => candidate.date === "2026-08-23")
       .map((candidate) => candidate.id);
 

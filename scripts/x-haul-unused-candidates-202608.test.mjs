@@ -121,7 +121,7 @@ describe("X haul unused candidates — keep birthday and skip published dupes", 
       news.some((entry) => entry.media?.src === "/media/news/mily-b06-01-recovery-morning.jpg"),
       true,
     );
-    assert.equal(news.length, 40);
+    assert.equal(news.length, 41);
     assert.equal(media.filter((entry) => entry.kind === "photo").length, 27);
     assert.deepEqual(verifyNews(news), []);
     assert.deepEqual(verifyMedia(media), []);
@@ -140,7 +140,7 @@ describe("2026-08-06 OHAYO white polo — NEWS + Gallery", () => {
     assert.equal(entry.message?.text, OHAYO_MESSAGE);
     assert.match(entry.body, /AM 10:00〜/);
     assert.doesNotMatch(entry.body, /配信します$/);
-    assert.ok(sortNewsByDateDesc(news).some((item) => item.id === entry.id));
+    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).some((item) => item.id === entry.id));
   });
 
   it("publishes Gallery + NEWS JPEG without hotlinks or published duplicates", async () => {

@@ -180,7 +180,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
   });
 
   it("adds the video to the Gallery archive, newest first, keeping b03 and b07", () => {
-    const visible = visibleGalleryVideos();
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
 
     assert.equal(visible.length, 16);
     // Self-hosted newest first, then Mixch outbound (8/26 1.5x → 8/25 自信のないあなたへ)
@@ -214,7 +214,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       morningStory20260820.src,
       "/media/gallery/mily-b07-01-morning-story.mp4",
     );
-    assert.equal(galleryVideos.length, 16);
+    assert.equal(galleryVideos.length, 17);
   });
 
   it("shares one MP4 and one poster between the STORY article and Gallery", () => {

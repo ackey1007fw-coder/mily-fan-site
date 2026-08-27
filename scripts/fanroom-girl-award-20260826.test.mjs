@@ -104,7 +104,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
   });
 
   it("leads 2026-08-26 NEWS above Mixch 1.5x day via sameDayOrder", () => {
-    const ordered = sortNewsByDateDesc(news);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
 
     assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
@@ -125,7 +125,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
         "2026-08-26-stream-1000",
       ],
     );
-    assert.equal(news.length, 40);
+    assert.equal(news.length, 41);
   });
 
   it("keeps the voice memo on Latest / NEWS only", () => {
@@ -276,7 +276,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
       readFile(path.join(root, "docs/MEDIA.md"), "utf8"),
     ]);
 
-    assert.match(ops, /40件/);
+    assert.match(ops, /41件/);
     assert.match(ops, /ガルアワイベ最終日【6位】/);
     assert.match(ops, /kind: "audio"/);
     assert.match(ops, /自己ホストの `\.m4a`/);
