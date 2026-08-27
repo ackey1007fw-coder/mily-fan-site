@@ -16,6 +16,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const componentPath = path.join(root, "src/components/PatonVoteGuide.tsx");
 const mp4 = path.join(root, "public", patonVoteDay3StoryVideo.src.slice(1));
 const poster = path.join(root, "public", patonVoteDay3StoryVideo.poster.slice(1));
+const original = path.join(
+  root,
+  "media/original/mily-b39-01-paton-vote-day-3-story.mp4",
+);
 
 const VIDEO_BYTES = 86_843;
 const VIDEO_SHA256 =
@@ -23,6 +27,9 @@ const VIDEO_SHA256 =
 const POSTER_BYTES = 31_464;
 const POSTER_SHA256 =
   "f6771c8ec93470d4c3036b77e66472d01151a91f421f9816642c159fa1802e38";
+const ORIGINAL_BYTES = 4_487_450;
+const ORIGINAL_SHA256 =
+  "dd4cb4e5c70c6e822ead2f742a72c218c5a70442873b27fe1560747692094f32";
 const PATON_URL = "https://paton.jp/event/entrant/11380";
 
 async function sha256(file) {
@@ -163,16 +170,10 @@ describe("2026-08-28 Paton投票3日目 Instagram Story — scope and cleanup", 
     }
   });
 
-  it("leaves no transfer chunks, temporary workflow, or tracked original", async () => {
+  it("leaves no transfer chunks or temporary workflow and never tracks the source original", async () => {
     assert.equal(existsSync(path.join(root, ".tmp/b39")), false);
     assert.equal(
       existsSync(path.join(root, ".github/workflows/materialize-b39-media.yml")),
-      false,
-    );
-    assert.equal(
-      existsSync(
-        path.join(root, "media/original/mily-b39-01-paton-vote-day-3-story.mp4"),
-      ),
       false,
     );
 
@@ -180,5 +181,10 @@ describe("2026-08-28 Paton投票3日目 Instagram Story — scope and cleanup", 
     assert.equal(stdout.includes(".tmp/b39"), false);
     assert.equal(stdout.includes("materialize-b39-media.yml"), false);
     assert.equal(stdout.includes("media/original/mily-b39"), false);
+
+    if (existsSync(original)) {
+      assert.equal((await stat(original)).size, ORIGINAL_BYTES);
+      assert.equal(await sha256(original), ORIGINAL_SHA256);
+    }
   });
 });
