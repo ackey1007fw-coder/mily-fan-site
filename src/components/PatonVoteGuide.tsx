@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { campusGirlsPatonVoteLink, links } from "../data/links";
 import {
   PATON_VOTE_HOW_TO_ANCHOR_ID,
@@ -25,6 +26,33 @@ export function PatonVoteGuide() {
     supportEvents,
     now,
   });
+
+  useEffect(() => {
+    if (!active) return;
+
+    let frame = 0;
+    const scrollToGuide = () => {
+      if (window.location.hash !== `#${PATON_VOTE_HOW_TO_ANCHOR_ID}`) return;
+
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        document.getElementById(PATON_VOTE_HOW_TO_ANCHOR_ID)?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "start",
+        });
+      });
+    };
+
+    scrollToGuide();
+    window.addEventListener("hashchange", scrollToGuide);
+    return () => {
+      window.removeEventListener("hashchange", scrollToGuide);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+    };
+  }, [active]);
 
   if (!active) return null;
 
