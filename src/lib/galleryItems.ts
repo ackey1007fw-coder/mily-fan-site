@@ -55,7 +55,7 @@ export function isSkyOrLandscapePhoto(item: MediaItem): boolean {
 /** みりぃ本人が写っていない物撮り。 */
 export function isObjectWithoutPerson(item: MediaItem): boolean {
   if (mentionsMily(item.alt) || mentionsMily(item.caption ?? "")) return false;
-  return /necklace|birthday-cake|kakigori-closeup/.test(item.basePath);
+  return /necklace|birthday-cake|kakigori-closeup|cinema-poster/.test(item.basePath);
 }
 
 /** みりぃの顔・姿が主役の写真。 */

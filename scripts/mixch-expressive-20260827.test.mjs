@@ -96,7 +96,7 @@ describe("2026-08-27 Mixch expressive NEWS", () => {
   });
 
   it("follows the Paton guide and X followers NEWS, then leads the morning Stories", () => {
-    const ordered = sortNewsByDateDesc(news);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-movie-night"));
     assert.equal(ordered[0]?.id, "2026-08-27-paton-vote-how-to");
     assert.equal(ordered[1]?.id, "2026-08-27-x-followers-100");
     assert.equal(ordered[2]?.id, NEWS_ID);

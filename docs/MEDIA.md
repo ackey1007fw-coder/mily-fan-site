@@ -2081,6 +2081,43 @@ Portal Feedへは既存契約どおり派生する。
 - crop・scale・引き伸ばし・アップスケール・fps水増し・短縮・テロップ削除なし
 - AI生成・AI加工・顔補正・generative fill・outpaintingなし
 
+## 素材台帳（batch b38 / 受領日・source date 2026-08-27）
+
+本人Instagram通常投稿で使われた、映画館での写真5枚。オーナーが当該5枚を
+掲載用ファイルとして直接提供し、記事と写真、みりぃへの導線をサイトへ載せるよう依頼した。
+SNSから取得していない。一次出典は
+`https://www.instagram.com/p/Dci0CvNE29X/`。
+
+Galleryへ5枚すべてを掲載し、同じ公開派生をLatest / NEWSの代表1枚＋追加4枚でも
+投稿順に共有する。`/stories/`、highlights、events、Gallery動画、Activitiesには追加しない。
+b37は同時点のopen Draft PRで使用中のため、衝突を避けて新規batch b38を使用する。
+
+| ID | 元ファイル | 実寸 | sha256（先頭12桁） | 内容 | 掲載 |
+| --- | --- | --- | --- | --- | --- |
+| b38-01 | `mily-b38-01-cinema-churro-selfie.jpg` | 960×1280 | `8ef15ee00591` | 映画館でチュロスを手にした自撮り | ✅ Latest / NEWS + Gallery |
+| b38-02 | `mily-b38-02-cinema-poster.jpg` | 959×1280 | `cd84beb101b9` | 鑑賞した作品の上映案内 | ✅ Latest / NEWS + Gallery |
+| b38-03 | `mily-b38-03-cinema-snacks-churro-raised.jpg` | 960×1280 | `10c65e3ffa85` | ポップコーン・ドリンクを持ちチュロスを掲げる | ✅ Latest / NEWS + Gallery |
+| b38-04 | `mily-b38-04-cinema-snacks-side-glance.jpg` | 960×1280 | `8f4a0362d664` | チュロスを肩に添え横を見る | ✅ Latest / NEWS + Gallery |
+| b38-05 | `mily-b38-05-cinema-snacks-front.jpg` | 960×1280 | `6687aa97de9d` | チュロスを肩に添えカメラを見る | ✅ Latest / NEWS + Gallery |
+
+### 元素材・公開派生の確認
+
+- provenance: `owner-provided`。5枚とも `media/original/` に受領バイトを変えず保管
+  （gitignore済み・コミットしない）
+- source date: `2026-08-27`。撮影者は未確認のため `credit: null`
+- 元JPEGは5枚ともEXIF / IPTCを含む。公開派生は既存 `pnpm media:build` 相当の
+  `scripts/build-media.mjs` で生成し、EXIF / GPS / IPTC / XMP / ICCを除去した
+- 公開派生は各写真につき480 / 960 / 1600 × JPG / WebPの30ファイル。
+  `withoutEnlargement`により、1600派生はb38-02が959×1280、ほか4枚が960×1280
+- 1600.jpg sha256: b38-01 `d1a8af4cb658`、b38-02 `296097169ec3`、
+  b38-03 `75caa24300bd`、b38-04 `7aef7e5fd162`、b38-05 `31c2700ab215`
+- トリミング・引き伸ばし・アップスケール・AI生成・顔補正・生成塗り足しなし
+- b38-01 / 03 / 04 / 05に第三者、通知、端末UI、チケット、座席番号、レシート、
+  連絡先は見当たらない。b38-02は映画館の公開上映案内で、劇場名や座席情報は写っていない。
+  作品ポスターはInstagram投稿の映画鑑賞記録という文脈と、当該5枚への掲載指示に限定して扱う
+- 本人Instagramプロフィール `https://www.instagram.com/mily_chan36` は
+  NEWSの関連CTAであり、投稿の一次出典は個別permalinkのまま維持する
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。
