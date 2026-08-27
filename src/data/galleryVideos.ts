@@ -21,6 +21,7 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { secondRoundStoryVideo } from "./secondRoundStoryVideo.ts";
 import { tiktokRadioVideo, type TikTokRadioVideo } from "./tiktokRadioVideo.ts";
 import {
+  mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
   type MixchMovie,
@@ -35,6 +36,7 @@ export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
   earthquakeSafetyStoryVideo,
   eventStory20260821,
+  mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
   morningOhayo20260821,
@@ -85,6 +87,7 @@ export const galleryVideos: GalleryVideoItem[] = [
   morningStory20260820,
   secondRoundStoryVideo,
   morningStoryVideo,
+  mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
 ];

@@ -29,6 +29,22 @@ export function isMixchMovie(item: { kind: string }): item is MixchMovie {
   return item.kind === "mixch";
 }
 
+/** 2026-08-27 Mixch「表情豊かなみりぃと魅力的でしょう？？？？」 https://mixch.tv/m/VDojsMY5 */
+export const mixchExpressiveMovie: MixchMovie = {
+  id: "mixch-m-VDojsMY5",
+  kind: "mixch",
+  mixchUrl: "https://mixch.tv/m/VDojsMY5",
+  poster:
+    "https://d2jtsb989t238a.cloudfront.net/m/awxtu96sp9bu1i86qdz9omxpx5ne7lc33cnefgmqdigpcv4r809xepkxwuqojmnilaodl3kjmse2v36ng92np919914kfcrrxwxuvzg1qfklclepvmhyw5xrt85fh2zn/thumb_normal",
+  width: 480,
+  height: 853,
+  alt: "Mixch動画「表情豊かなみりぃと魅力的でしょう？？？？」のサムネイル。再生するとMixchで開きます",
+  title: "表情豊かなみりぃと魅力的でしょう？？？？",
+  published: true,
+  sourceDate: "2026-08-27",
+  accountUrl: CONFIRMED_MIXCH_ACCOUNT_URL,
+};
+
 /** 2026-08-26 Mixch「今日は1.5倍デーだってよ？！」 https://mixch.tv/m/nxqYblH8 */
 export const mixch15xDayMovie: MixchMovie = {
   id: "mixch-m-nxqYblH8",
@@ -63,6 +79,7 @@ export const mixchConfidenceMessageMovie: MixchMovie = {
 
 /** Newest first. NEWS and Gallery import these objects; do not copy Mixch files. */
 export const mixchMovies: MixchMovie[] = [
+  mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
 ];

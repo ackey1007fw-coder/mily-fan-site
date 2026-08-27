@@ -117,7 +117,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.deepEqual(item()?.activityIds, ["radio"]);
     assert.equal(item()?.title, "「Yes!東京」踊ってみた💃");
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 42);
+    assert.equal(news.length, 43);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -138,7 +138,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
   });
 
   it("ranks as the top 8/24 Latest item after the newer 8/25 morning STORY CTA", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -157,7 +157,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
 
 describe("2026-08-24 seasidecircle Yes! Tokyo dance — shared Latest / Gallery asset", () => {
   it("registers exactly one Gallery video and shares the same object with NEWS", () => {
-    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
     const matches = galleryVideos.filter(
       (entry) => entry.id === seasideCircleYesTokyoVideo.id,
     );
@@ -167,7 +167,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — shared Latest / Gallery 
     assert.equal(galleryVideos[4], seasideCircleYesTokyoVideo);
     assert.equal(visible[2], seasideCircleYesTokyoVideo);
     assert.equal(galleryVideos[5], nightThanksMorningStreamStoryVideo);
-    assert.equal(galleryVideos.length, 18);
+    assert.equal(galleryVideos.length, 19);
     assert.equal(visible.length, 16);
     assert.equal(seasideCircleYesTokyoVideo.kind, "video");
     assert.equal(seasideCircleYesTokyoVideo.provenance, "owner-provided");
@@ -209,7 +209,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — shared Latest / Gallery 
 
   it("keeps Gallery newest-first after inserting b25", () => {
     assert.deepEqual(
-      visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").map((entry) => entry.sourceDate),
+      visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").map((entry) => entry.sourceDate),
       [
         "2026-08-26",
         "2026-08-26",
@@ -433,7 +433,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.match(docs, /512×910/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /42件/);
+    assert.match(ops, /43件/);
     assert.match(ops, /独立動画16本/);
     assert.match(ops, /Yes!東京/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
@@ -445,7 +445,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
   it("keeps Portal Feed aligned with the new Latest lead", () => {
     const feed = createPortalFeed();
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((candidate) => candidate.id);
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((candidate) => candidate.id);
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, INSTAGRAM_PROFILE);

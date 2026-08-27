@@ -120,7 +120,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
   });
 
   it("leads Latest on 8/21 without changing the remaining same-day order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 24), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -147,7 +147,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       NEWS_ID,
       "2026-08-21-after-afternoon-ganda",
     ]);
-    assert.equal(news.length, 42);
+    assert.equal(news.length, 43);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
@@ -155,7 +155,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
 
     assert.equal(
-      sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))[0]?.id,
+      sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"))[0]?.id,
       "2026-08-26-girlsaward-showroom-6th",
     );
     assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
@@ -172,8 +172,8 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
     assert.equal(item().media, tiktokRadioVideo);
     assert.deepEqual(matches, [tiktokRadioVideo]);
     assert.equal(galleryVideos[9], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story")[7], tiktokRadioVideo);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length, 16);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5")[7], tiktokRadioVideo);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length, 16);
     assert.equal(tiktokRadioVideo.provenance, "owner-provided");
     assert.equal(tiktokRadioVideo.sourceUrl, SOURCE);
     assert.equal(tiktokRadioVideo.sourceDate, "2026-08-21");
@@ -201,8 +201,8 @@ describe("2026-08-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 18);
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length + drive.videos.length, 27);
+    assert.equal(galleryVideos.length, 19);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length + drive.videos.length, 27);
   });
 });
 

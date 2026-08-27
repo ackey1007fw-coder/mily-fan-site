@@ -45,7 +45,7 @@ function publicAssetPath(publicPath) {
 function galleryVideoViews() {
   const drive = driveGallerySections(visibleDriveGallery());
   return [
-    ...visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter(isSelfHostedGalleryVideo).map(driveVideoView),
+    ...visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").filter(isSelfHostedGalleryVideo).map(driveVideoView),
     ...drive.videos,
   ];
 }
@@ -202,7 +202,7 @@ describe("Gallery video contracts", () => {
   it("renders every published standalone Gallery video through the local contract", async () => {
     const gallery = await read("src/components/Gallery.tsx");
     const selector = await read("src/lib/galleryItems.ts");
-    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
 
     assert.ok(visible.length > 0);
     assert.match(selector, /isSelfHostedGalleryVideo/);
@@ -296,9 +296,9 @@ describe("Gallery video contracts", () => {
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
     // 自己ホスト14本 + Mixch outbound 2本。Drive Gallery の動画11本は別枠。
-    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").length, 16);
+    assert.equal(visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").length, 16);
     assert.equal(
-      visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter(isSelfHostedGalleryVideo).length + drive.videos.length,
+      visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").filter(isSelfHostedGalleryVideo).length + drive.videos.length,
       25,
     );
     assert.equal(galleryVideoViews().length, 25);

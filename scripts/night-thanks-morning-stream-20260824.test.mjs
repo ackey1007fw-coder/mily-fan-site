@@ -148,7 +148,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
     assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
-    assert.equal(news.length, 42);
+    assert.equal(news.length, 43);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -190,7 +190,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
 
 describe("2026-08-24 night thanks morning stream — shared Latest / Gallery asset", () => {
   it("registers exactly one Gallery video and shares the same object with NEWS", () => {
-    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story");
+    const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
     const matches = galleryVideos.filter(
       (entry) => entry.id === nightThanksMorningStreamStoryVideo.id,
     );
@@ -200,7 +200,7 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
     assert.equal(galleryVideos[5], nightThanksMorningStreamStoryVideo);
     assert.equal(visible[3], nightThanksMorningStreamStoryVideo);
     assert.equal(galleryVideos[6], seasideCircleMusicalSpecialThanksVideo);
-    assert.equal(galleryVideos.length, 18);
+    assert.equal(galleryVideos.length, 19);
     assert.equal(visible.length, 16);
     assert.equal(nightThanksMorningStreamStoryVideo.kind, "video");
     assert.equal(nightThanksMorningStreamStoryVideo.provenance, "owner-provided");
@@ -239,7 +239,7 @@ describe("2026-08-24 night thanks morning stream — shared Latest / Gallery ass
 
   it("keeps Gallery newest-first after inserting b23", () => {
     assert.deepEqual(
-      visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").map((entry) => entry.sourceDate),
+      visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5").map((entry) => entry.sourceDate),
       [
         "2026-08-26",
         "2026-08-26",
@@ -532,7 +532,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /再配信権を確認できないため/);
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
-    assert.match(ops, /42件/);
+    assert.match(ops, /43件/);
     assert.match(ops, /独立動画16本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
@@ -543,7 +543,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
   it("keeps Portal Feed aligned with the new Latest lead", () => {
     const feed = createPortalFeed();
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((candidate) => candidate.id);
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((candidate) => candidate.id);
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, X_SOURCE);

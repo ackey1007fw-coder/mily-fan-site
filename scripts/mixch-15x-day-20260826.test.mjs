@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
 import {
+  mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
 } from "../src/data/mixchMovies.ts";
@@ -115,7 +116,7 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
   });
 
   it("leads 2026-08-26 NEWS above the 10:00 stream item via source-array order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
     assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2]?.id, "2026-08-26-instagram-followers-400");
@@ -144,8 +145,9 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(selected[0]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selected[1]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selected[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selected[2]?.id, NEWS_ID);
     assert.ok(feedItem);
     assert.equal(feedItem.publishedAt, "2026-08-26T00:00:00+09:00");
     assert.equal(feedItem.sourceUrl, X_SOURCE);
@@ -176,8 +178,9 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
 
     assert.equal(day15x.media, mixch15xDayMovie);
     assert.equal(confidence.media, mixchConfidenceMessageMovie);
-    assert.equal(gallery[0]?.item, mixch15xDayMovie);
-    assert.equal(gallery[1]?.item, mixchConfidenceMessageMovie);
+    assert.equal(gallery[0]?.item, mixchExpressiveMovie);
+    assert.equal(gallery[1]?.item, mixch15xDayMovie);
+    assert.equal(gallery[2]?.item, mixchConfidenceMessageMovie);
 
     const initial = selectGalleryEntries().slice(0, GALLERY_ARCHIVE_INITIAL);
     const preview = selectGalleryPreview(HOME_GALLERY_LIMIT);
@@ -186,16 +189,18 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
     assert.equal(preview.every((entry) => entry.kind !== "mixch"), true);
 
     const activityMedia = selectActivityMedia("campus-girls");
+    assert.equal(activityMedia.includes(mixchExpressiveMovie), false);
     assert.equal(activityMedia.includes(mixch15xDayMovie), false);
     assert.equal(activityMedia.includes(mixchConfidenceMessageMovie), false);
     assert.equal(
       activityMedia.some((media) => media.kind === "mixch"),
       false,
     );
-    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selectActivityNews("campus-girls")[1]?.id, NEWS_ID);
+    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selectActivityNews("campus-girls")[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selectActivityNews("campus-girls")[2]?.id, NEWS_ID);
     assert.equal(
-      selectActivityNews("campus-girls")[2]?.id,
+      selectActivityNews("campus-girls", news, news.length)[3]?.id,
       "2026-08-25-mixch-confidence-message",
     );
   });
@@ -282,12 +287,16 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
       assert.equal(file.includes("_movie_mps"), false, file);
       assert.equal(file.includes("ZY4hSt3K"), false, file);
       assert.equal(file.includes("nxqYblH8"), false, file);
+      assert.equal(file.includes("VDojsMY5"), false, file);
       assert.equal(file.includes("mixch-15x"), false, file);
       assert.equal(file.includes("mixch-confidence"), false, file);
+      assert.equal(file.includes("mixch-expressive"), false, file);
     }
 
+    assert.equal(mixchExpressiveMovie.poster.startsWith("/media/"), false);
     assert.equal(mixch15xDayMovie.poster.startsWith("/media/"), false);
     assert.equal(mixchConfidenceMessageMovie.poster.startsWith("/media/"), false);
+    assert.match(mixchExpressiveMovie.poster, /thumb_normal/);
     assert.match(mixch15xDayMovie.poster, /thumb_normal/);
     assert.match(mixchConfidenceMessageMovie.poster, /thumb_normal/);
   });
