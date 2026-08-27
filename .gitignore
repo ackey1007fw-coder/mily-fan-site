@@ -22,5 +22,7 @@ media/original/*
 media/drive-b02-original/*
 !media/drive-b02-original/README.md
 
-# Generated at build time from the committed 8/18 source derivative.
+# Generated at build time from committed, text-safe payload chunks.
 public/media/gallery/mily-b04-01-morning-showroom-ios.mp4
+public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4
+public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg
