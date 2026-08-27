@@ -1,0 +1,51 @@
+name: Materialize b39 media
+
+on:
+  push:
+    branches:
+      - feat/paton-vote-day-3-story-20260828
+    paths:
+      - ".github/workflows/materialize-b39-media.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/paton-vote-day-3-story-20260828
+
+      - name: Materialize and verify media
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/media/gallery
+
+          cat .tmp/b39/video.part.* | base64 --decode > /tmp/video.mp4.xz
+          xz --decompress --stdout /tmp/video.mp4.xz > public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4
+
+          cat .tmp/b39/poster.part.* | base64 --decode > /tmp/poster.jpg.xz
+          xz --decompress --stdout /tmp/poster.jpg.xz > public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg
+
+          test "$(stat -c%s public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4)" = "86843"
+          test "$(sha256sum public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4 | cut -d' ' -f1)" = "d808b91f9b59a2cab14beae1d797a0bb99ec6a84c82a09ec6f7b4fadc5102e19"
+
+          test "$(stat -c%s public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg)" = "31531"
+          test "$(sha256sum public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg | cut -d' ' -f1)" = "bf182e028c3205f78675751970f65c686fc3281012fc2cac0d857cdc01349304"
+
+          rm -rf .tmp/b39
+          rm -f .github/workflows/materialize-b39-media.yml
+
+      - name: Commit materialized media
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: add Paton day 3 Story media"
+          git push origin HEAD:feat/paton-vote-day-3-story-20260828
