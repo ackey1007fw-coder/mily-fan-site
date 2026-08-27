@@ -257,13 +257,13 @@ describe("Portal Feed generation", () => {
   it("accepts a JSON-serialized feed that keeps same-day NEWS chronology", () => {
     const live = createPortalFeed();
     const serialized = JSON.parse(JSON.stringify(live));
-    const morningId = "mily:news:2026-08-23-morning-showroom-fanroom";
-    const earlyId = "mily:news:2026-08-23-early-showroom-fanroom";
+    const leadId = "mily:news:2026-08-27-x-followers-100";
+    const nextId = "mily:news:2026-08-27-seaside-circle-movie-theme-story";
 
     assert.doesNotThrow(() => assertPortalFeedContract(serialized));
     assert.ok(
-      serialized.items.findIndex((item) => item.id === morningId) <
-        serialized.items.findIndex((item) => item.id === earlyId),
+      serialized.items.findIndex((item) => item.id === leadId) <
+        serialized.items.findIndex((item) => item.id === nextId),
     );
   });
 

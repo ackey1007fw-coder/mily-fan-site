@@ -86,7 +86,7 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
   });
 
   it("follows the 8/26 Mixch NEWS and still leads 8/25 before motivation", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-x-followers-100"));
     const feed = createPortalFeed();
     const feedItem = feed.items.find(
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
@@ -150,8 +150,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /ZY4hSt3K/);
       assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 42);
-    assert.match(ops, /42件/);
+    assert.equal(news.length, 43);
+    assert.match(ops, /43件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);
     assert.match(ops, /Mixchファイルは自己ホストしていない/);

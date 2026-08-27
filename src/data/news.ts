@@ -152,6 +152,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-27-x-followers-100",
+    date: "2026-08-27",
+    sameDayOrder: 1,
+    title: "Xフォロワー100人！ありがとうございます\u{1F972}",
+    body: "8月27日、みりぃがXのフォロワー100人を報告しました。X初心者で上手く使いこなせないなかでの節目だと伝え、「ありがとうございます」と感謝を綴っています。変動はあるとしつつ、これからも楽しく発信していくこと、「これからもよろしくです」という言葉も残されています。",
+    source: "https://x.com/Mily_chan36/status/2092884427605266708",
+    sourceLabel: "Xの投稿を見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "X初心者\u{1F530}で上手く使いこなせない中、なんとフォロワー様100人になりました〜\u{1F979}\u{1F44F}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}\n" +
+        "ありがとうございます\u{1F972}\u{2728}\n" +
+        "変動はあるだろうけど、これからも楽しく発信していきますね\u{266A}\n" +
+        "これからもよろしくです\u{FF01}\u{FF01}\n" +
+        "#ミスサー #キャンガル #ミスサー2026 #キャンガル2027 #ミスコン",
+    },
+  },
+  {
     id: "2026-08-27-seaside-circle-movie-theme-story",
     date: "2026-08-27",
     activityIds: ["radio"],
