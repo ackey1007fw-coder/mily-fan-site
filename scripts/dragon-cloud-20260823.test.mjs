@@ -84,9 +84,9 @@ describe("2026-08-23 dragon-cloud Instagram post — NEWS", () => {
     assert.equal(item.url, undefined);
     assert.equal(item.message, undefined);
     assert.equal(item.ctaLabel, undefined);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
 
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
     assert.equal(ordered[0].id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1].id, "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2].id, "2026-08-26-instagram-followers-400");
@@ -171,10 +171,16 @@ describe("2026-08-23 dragon-cloud Instagram post — NEWS", () => {
   });
 
   it("flows into Portal Feed with the local NEWS image and Instagram source", () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-23T13:00:00+09:00") });
+    const scopedNews = news.filter((entry) => entry.date <= "2026-08-23");
+    const feed = createPortalFeed({
+      now: new Date("2026-08-23T13:00:00+09:00"),
+      newsItems: scopedNews,
+      storyItems: [],
+      eventItems: [],
+    });
     const item = findFeedItem(feed, portalNewsId(NEWS_ID));
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, scopedNews);
     assert.equal(item.sourceUrl, SOURCE);
     assert.ok(item.image?.endsWith(NEWS_PHOTO));
   });

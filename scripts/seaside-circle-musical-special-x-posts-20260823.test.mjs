@@ -95,7 +95,7 @@ describe("2026-08-23 seaside circle official X posts — NEWS stays one item", (
 
     assert.equal(matches.length, 1);
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -232,9 +232,9 @@ describe("2026-08-23 seaside circle official X posts — Gallery photos", () => 
     assert.equal(items.length, 2);
     assert.equal(items[0]?.id, BEFORE_ID);
     assert.equal(items[1]?.id, AFTER_ID);
-    assert.equal(visible.indexOf(items[0]), 8);
-    assert.equal(visible.indexOf(items[1]), 9);
-    assert.equal(visible.filter((item) => item.kind === "photo").length, 27);
+    assert.equal(visible.indexOf(items[0]), 13);
+    assert.equal(visible.indexOf(items[1]), 14);
+    assert.equal(visible.filter((item) => item.kind === "photo").length, 32);
     assert.deepEqual(verifyMedia(media), []);
 
     for (const item of items) {

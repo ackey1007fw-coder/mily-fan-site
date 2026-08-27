@@ -79,7 +79,7 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
   });
 
   it("ranks ahead of the earlier 8/24 night-thanks item via sameDayOrder", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -161,11 +161,11 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
 
-    assert.match(ops, /45件/);
+    assert.match(ops, /46件/);
     assert.match(ops, /Final STAGE案内/);
     assert.match(ops, /8月26日の本人XによるPaton直接案内/);
     assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
     assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
-    assert.equal(news.length, 45);
+    assert.equal(news.length, 46);
   });
 });
