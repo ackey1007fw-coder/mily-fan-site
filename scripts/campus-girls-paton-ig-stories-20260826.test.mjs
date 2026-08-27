@@ -28,6 +28,7 @@ import {
   patonVoteMirrorStillPhoto,
 } from "../src/data/patonVoteStoryStills.ts";
 import { contest } from "../src/data/contest.ts";
+import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { events } from "../src/data/events.ts";
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
@@ -205,7 +206,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
     assert.equal(news.filter((entry) => entry.id === VOTE_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === FOLLOWERS_NEWS_ID).length, 1);
     assert.equal(news.filter((entry) => entry.id === THANKS_NEWS_ID).length, 1);
-    assert.equal(news.length, 44);
+    assert.equal(news.length, 45);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(vote.date, "2026-08-26");
     assert.equal(vote.sameDayOrder, 3);
@@ -310,7 +311,7 @@ describe("2026-08-26 Instagram Stories — NEWS trio", () => {
   });
 
   it("orders the 8/26 items with the GirlsAward X post first", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 9), [
       "2026-08-26-girlsaward-showroom-6th",
       VOTE_NEWS_ID,
@@ -672,7 +673,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /他出場者・順位/);
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
-    assert.match(ops, /44件/);
+    assert.match(ops, /45件/);
     assert.match(ops, /独立動画16本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });
@@ -683,14 +684,16 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     const campusMedia = selectActivityMedia("campus-girls");
     const liveMedia = selectActivityMedia("live-stream");
 
-    assert.equal(campusNews[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(campusNews[1]?.id, VOTE_NEWS_ID);
+    assert.equal(campusNews[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(campusNews[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(campusNews[2]?.id, VOTE_NEWS_ID);
     assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(liveNews[1]?.id, THANKS_NEWS_ID);
     assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
     assert.ok(liveNews.some((entry) => entry.id === STREAM_NEWS_ID));
     assert.equal(campusNews.some((entry) => entry.id === FOLLOWERS_NEWS_ID), false);
-    assert.equal(campusMedia[0], patonVoteMirrorStillImage);
+    assert.equal(campusMedia[0], campusGirlsPatonPortraitImage);
+    assert.equal(campusMedia[1], patonVoteMirrorStillImage);
     assert.equal(
       liveMedia[0]?.src,
       "/media/news/mily-b28-01-girlsaward-showroom-6th.jpg",

@@ -116,7 +116,7 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
   });
 
   it("leads 2026-08-26 NEWS above the 10:00 stream item via source-array order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story"));
     assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2]?.id, "2026-08-26-instagram-followers-400");
@@ -145,9 +145,13 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(selected[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(selected[1]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selected[2]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selected[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selected[2]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(
+      selectActivityNews("campus-girls", news, news.length)[3]?.id,
+      NEWS_ID,
+    );
     assert.ok(feedItem);
     assert.equal(feedItem.publishedAt, "2026-08-26T00:00:00+09:00");
     assert.equal(feedItem.sourceUrl, X_SOURCE);
@@ -196,11 +200,15 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
       activityMedia.some((media) => media.kind === "mixch"),
       false,
     );
-    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(selectActivityNews("campus-girls")[1]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selectActivityNews("campus-girls")[2]?.id, NEWS_ID);
+    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selectActivityNews("campus-girls")[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selectActivityNews("campus-girls")[2]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(
       selectActivityNews("campus-girls", news, news.length)[3]?.id,
+      NEWS_ID,
+    );
+    assert.equal(
+      selectActivityNews("campus-girls", news, news.length)[4]?.id,
       "2026-08-25-mixch-confidence-message",
     );
   });

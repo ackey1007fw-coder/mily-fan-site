@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
+import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
@@ -233,6 +234,7 @@ export default function SupportPage() {
       <SupportHeader />
       <main id="support-main">
         <SupportHero />
+        <PatonVoteGuide />
 
         {todayItems.length > 0 ? (
           <SectionShell eyebrow="Today" title="今日のみりぃ">

@@ -1638,6 +1638,13 @@ Story閲覧スクリーンショット（IMG_7435 / IMG_7437）は確認用で�
 b27-05（Patonアプリの投票操作録画）は非掲載。他出場者・順位表示と、
 オーナー（あっきー）のサポーター名が見えるため。
 
+2026-08-27 の本人X「キャンガル2027 パトン投票方法」
+（`https://x.com/mily_chan36/status/2092793734232748228`）も自己ホストしない。
+X / Instagram 動画の自動ダウンロード禁止に加え、画面内に他出場者・順位・
+オーナーサポーター名が映る。サイトではX投稿へのoutboundと確認済み手順の
+テキストで案内する。NEWS代表画像は既存b26-01人物写真（NEWS掲載面のみ。
+HOME / Support の導線カードへは流用しない）。新しいメディアバッチは作っていない。
+
 投票CTA（`Patonでみりぃに投票する`）は既存NEWS
 `2026-08-24-campus-girls-final-stage-guide` に残し、このbatchのNEWSへは付けない。
 `events.ts` / `streamSchedule.ts` / highlights / 新しい `/stories/`

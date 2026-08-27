@@ -161,16 +161,17 @@ describe("2026-08-27 X followers 100 — scope and ordering", () => {
     }
   });
 
-  it("leads Latest on 2026-08-27 and keeps the two Story items behind it", () => {
+  it("follows the Paton guide and keeps Mixch plus the two Story items behind it", () => {
     const ordered = sortNewsByDateDesc(news).map((entry) => entry.id);
 
-    assert.equal(ordered[0], NEWS_ID);
-    assert.equal(ordered[1], "2026-08-27-mixch-expressive");
-    assert.equal(ordered[2], "2026-08-27-seaside-circle-movie-theme-story");
-    assert.equal(ordered[3], "2026-08-27-miss-circle-showroom-story");
-    assert.equal(ordered[4], "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(news.length, 44);
-    assert.equal(news.filter((entry) => entry.date === "2026-08-27").length, 4);
+    assert.equal(ordered[0], "2026-08-27-paton-vote-how-to");
+    assert.equal(ordered[1], NEWS_ID);
+    assert.equal(ordered[2], "2026-08-27-mixch-expressive");
+    assert.equal(ordered[3], "2026-08-27-seaside-circle-movie-theme-story");
+    assert.equal(ordered[4], "2026-08-27-miss-circle-showroom-story");
+    assert.equal(ordered[5], "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(news.length, 45);
+    assert.equal(news.filter((entry) => entry.date === "2026-08-27").length, 5);
     assert.equal(item().media, undefined);
     assert.equal(item().additionalMedia, undefined);
   });
