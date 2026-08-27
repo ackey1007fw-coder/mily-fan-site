@@ -101,8 +101,9 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     const selected = selectActivityNews("campus-girls", news, news.length);
     const preview = selectActivityNews("campus-girls");
 
-    assert.equal(preview[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(preview[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(preview[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(preview[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(preview[2]?.id, "2026-08-26-paton-vote-stories");
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
     assert.ok(
       selectActivityNews("campus-girls", news, news.length).some(

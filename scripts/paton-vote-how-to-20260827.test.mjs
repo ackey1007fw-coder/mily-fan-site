@@ -32,17 +32,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const START = Date.parse("2026-08-26T18:00:00+09:00");
 const END = Date.parse("2026-09-01T23:59:00+09:00");
 const FORBIDDEN = [
-  "黒咲",
-  "suzu",
-  "ほの",
-  "雛美",
-  "ひなみん",
-  "あっきー",
   "900 pt",
   "900pt",
   "5位",
   "Millie",
   "millie",
+  "TOP個人サポーター",
 ];
 
 function item() {
@@ -215,6 +210,8 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
     assert.match(guide, /campusGirlsPatonVoteLink/);
     assert.match(guide, /id=\{PATON_VOTE_HOW_TO_ANCHOR_ID\}/);
     assert.match(guide, /isSupportEventUrlActive/);
+    assert.equal(guide.includes("campusGirlsPatonPortraitImage"), false);
+    assert.equal(guide.includes("NewsImage"), false);
   });
 
   it("keeps Portal Feed aligned with the new Latest lead", () => {
@@ -244,5 +241,6 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
     assert.match(media, /2092793734232748228/);
     assert.match(media, /自己ホストしない/);
     assert.match(media, /他出場者・順位/);
+    assert.match(media, /導線カードへは流用しない/);
   });
 });

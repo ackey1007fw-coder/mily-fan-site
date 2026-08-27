@@ -317,8 +317,9 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
     assert.equal(liveNews[3]?.id, "2026-08-26-stream-1000");
     assert.equal(campusNews.some((entry) => entry.id === NEWS_ID), false);
-    assert.equal(campusNews[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(campusNews[1]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(campusNews[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(campusNews[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(campusNews[2]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(liveMedia[0], girlsawardShowroomSixthImage);
   });
 

@@ -145,9 +145,13 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(selected[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(selected[1]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selected[2]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selected[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selected[2]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(
+      selectActivityNews("campus-girls", news, news.length)[3]?.id,
+      NEWS_ID,
+    );
     assert.ok(feedItem);
     assert.equal(feedItem.publishedAt, "2026-08-26T00:00:00+09:00");
     assert.equal(feedItem.sourceUrl, X_SOURCE);
@@ -196,11 +200,15 @@ describe("Mixch outbound player cards — shared objects and markup", () => {
       activityMedia.some((media) => media.kind === "mixch"),
       false,
     );
-    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(selectActivityNews("campus-girls")[1]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selectActivityNews("campus-girls")[2]?.id, NEWS_ID);
+    assert.equal(selectActivityNews("campus-girls")[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selectActivityNews("campus-girls")[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selectActivityNews("campus-girls")[2]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(
       selectActivityNews("campus-girls", news, news.length)[3]?.id,
+      NEWS_ID,
+    );
+    assert.equal(
+      selectActivityNews("campus-girls", news, news.length)[4]?.id,
       "2026-08-25-mixch-confidence-message",
     );
   });

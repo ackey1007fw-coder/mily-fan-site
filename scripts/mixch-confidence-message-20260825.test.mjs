@@ -116,10 +116,11 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     const selected = selectActivityNews("campus-girls");
 
     const selectedAll = selectActivityNews("campus-girls", news, news.length);
-    assert.equal(selected[0]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(selected[1]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selected[2]?.id, "2026-08-26-mixch-15x-day");
-    assert.equal(selectedAll[3]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selected[1]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selected[2]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selectedAll[3]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(selectedAll[4]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 

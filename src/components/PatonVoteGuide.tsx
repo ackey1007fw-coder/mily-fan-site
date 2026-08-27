@@ -1,4 +1,3 @@
-import { campusGirlsPatonPortraitImage } from "../data/campusGirlsPatonImages";
 import { campusGirlsPatonVoteLink, links } from "../data/links";
 import {
   PATON_VOTE_HOW_TO_ANCHOR_ID,
@@ -12,11 +11,11 @@ import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { isSupportEventUrlActive } from "../lib/supportEventLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
-import { NewsImage } from "./NewsImage";
 
 /**
  * CAMPUS GIRLS 2027 予選A FinalSTAGE の投票手順。
  * 期間中だけホームと Support に出し、終了後は NEWS 履歴へ残す。
+ * 本人写真は NEWS 掲載面に残し、この導線カードへは流用しない。
  */
 export function PatonVoteGuide() {
   const now = useSupportEventClock();
@@ -44,27 +43,21 @@ export function PatonVoteGuide() {
           投票期間は9月1日23:59まで。投票にはPatonへのログインが必要です。
         </p>
 
-        <div className="mt-5 grid gap-5 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)] sm:items-start">
-          <NewsImage
-            media={campusGirlsPatonPortraitImage}
-            className="mx-auto h-auto w-full max-w-[11rem] rounded-2xl bg-paper-card object-contain"
-          />
-          <ol className="space-y-3">
-            {patonVoteHowToSteps.map((item) => (
-              <li key={item.step} className="flex gap-3">
-                <span
-                  aria-hidden="true"
-                  className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-apricot text-sm font-bold text-white"
-                >
-                  {item.step}
-                </span>
-                <p className="pt-0.5 text-sm font-semibold leading-6 text-ink">
-                  {item.text}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
+        <ol className="mt-5 space-y-3">
+          {patonVoteHowToSteps.map((item) => (
+            <li key={item.step} className="flex gap-3">
+              <span
+                aria-hidden="true"
+                className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-apricot text-sm font-bold text-white"
+              >
+                {item.step}
+              </span>
+              <p className="pt-0.5 text-sm font-semibold leading-6 text-ink">
+                {item.text}
+              </p>
+            </li>
+          ))}
+        </ol>
 
         <p className="mt-4 text-sm leading-6 text-ink-muted">
           下の投票ボタンから三橋莉子（みりぃ）のページが直接開きます。あとは右下のギフトから、1日1回無料拍手を送ると投票完了です。
