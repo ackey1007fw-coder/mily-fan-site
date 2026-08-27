@@ -25,17 +25,35 @@ jobs:
           set -euo pipefail
           mkdir -p public/media/gallery
 
-          cat .tmp/b39/video.part.* | base64 --decode > /tmp/video.mp4.xz
+          cat \
+            .tmp/b39/video.part.00 \
+            .tmp/b39/video.part.01 \
+            .tmp/b39/video.part.01b \
+            .tmp/b39/video.part.02 \
+            .tmp/b39/video.part.03 \
+            .tmp/b39/video.part.04 \
+            | base64 --decode > /tmp/video.mp4.xz
           xz --decompress --stdout /tmp/video.mp4.xz > public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4
 
-          cat .tmp/b39/poster.part.* | base64 --decode > /tmp/poster.jpg.xz
+          cat \
+            .tmp/b39/poster.part.00 \
+            .tmp/b39/poster.part.01 \
+            .tmp/b39/poster.part.02 \
+            | base64 --decode > /tmp/poster.jpg.xz
           xz --decompress --stdout /tmp/poster.jpg.xz > public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg
 
-          test "$(stat -c%s public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4)" = "86843"
-          test "$(sha256sum public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4 | cut -d' ' -f1)" = "d808b91f9b59a2cab14beae1d797a0bb99ec6a84c82a09ec6f7b4fadc5102e19"
+          video_size="$(stat -c%s public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4)"
+          video_sha="$(sha256sum public/media/gallery/mily-b39-01-paton-vote-day-3-story.mp4 | cut -d' ' -f1)"
+          poster_size="$(stat -c%s public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg)"
+          poster_sha="$(sha256sum public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg | cut -d' ' -f1)"
 
-          test "$(stat -c%s public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg)" = "31531"
-          test "$(sha256sum public/media/gallery/mily-b39-01-paton-vote-day-3-story-poster.jpg | cut -d' ' -f1)" = "bf182e028c3205f78675751970f65c686fc3281012fc2cac0d857cdc01349304"
+          printf 'video bytes=%s sha256=%s\n' "$video_size" "$video_sha"
+          printf 'poster bytes=%s sha256=%s\n' "$poster_size" "$poster_sha"
+
+          test "$video_size" = "86843"
+          test "$video_sha" = "d808b91f9b59a2cab14beae1d797a0bb99ec6a84c82a09ec6f7b4fadc5102e19"
+          test "$poster_size" = "31531"
+          test "$poster_sha" = "bf182e028c3205f78675751970f65c686fc3281012fc2cac0d857cdc01349304"
 
           rm -rf .tmp/b39
           rm -f .github/workflows/materialize-b39-media.yml
