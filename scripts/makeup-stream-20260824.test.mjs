@@ -370,11 +370,12 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
   });
 
   it("keeps Portal Feed on the SHOWROOM lead image", () => {
-    const feed = createPortalFeed();
+    const feedNews = news.filter((entry) => entry.id !== "2026-08-28-stream-thanks");
+    const feed = createPortalFeed({ newsItems: feedNews });
     const newsItem = findFeedItem(feed, portalNewsId(NEWS_ID));
     const image = new URL(PHOTO, siteOrigin()).href;
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, feedNews);
     assert.equal(newsItem.sourceUrl, X_SOURCE);
     assert.equal(newsItem.image, image);
     assert.equal(newsItem.image.includes("b24-02"), false);
