@@ -30,15 +30,15 @@
 | 音源構成の確定 | Claude | Done | `BRIEF.md` |
 | STORYBOARD v2.1.1 48カット反映・機械検算 | Claude | Done | `STORYBOARD.md` |
 | 制作室の旧35/12/CapCut前提を同期 | ChatGPT | Done | `README.md` / `BRIEF.md` / `DECISIONS.md` / `STATUS.md` / PR本文 |
-| GrokBot GitHub write preflight | GrokBot | **Next** | PRコメント |
-| G1〜G6の6本仕様へ同期 | GrokBot | Blocked by write preflight | `GROK_SHOTS.md` |
+| GrokBot GitHub write preflight | GrokBot | Done | PR #108 Conversation |
+| G1〜G6の6本仕様へ同期 | GrokBot | Done | `GROK_SHOTS.md` |
 | G1〜G6の0円生成候補 | Grok / SuperGrok | Pending | 加入プラン内 / Unlimitedのみ |
 | 写真候補の役割分類 | ChatGPT + Owner | In progress | local/private asset manifest |
 | S14 / S33 / S42専用Hero選定 | ChatGPT + Owner | In progress | local/private asset manifest |
 | 0:26.7 S8 ラジオ実写真 | ChatGPT + Owner | Available | 公開mediaの実写候補から選定 |
 | 0:29.7 S9 篠笛実写真 | Owner / AI | Pending | 見つからなければ別の本人実写真 |
 | FFmpeg編集パイプライン | ChatGPT / Codex / Cursor | Prototype ready | local/private。public repoへ置かない |
-| 48カット＋G1〜G6統合レビュー | ChatGPT | Pending | Grok同期後にPRコメント / `DECISIONS.md` |
+| 48カット＋G1〜G6統合レビュー | ChatGPT | Done | `STORYBOARD.md` / `GROK_SHOTS.md` / PRコメント |
 | ローカル仮編集 | Owner + AI | Pending | FFmpeg系パイプライン |
 | 完成前レビュー | Claude + ChatGPT | Pending | PRコメント |
 
@@ -51,43 +51,27 @@
 
 ## 次のAIチェックイン
 
-### GrokBot — write preflight
+GrokBotのwrite preflight、`GROK_SHOTS.md`のG1〜G6同期、ChatGPTの統合レビューは完了済み。preflightや6本仕様への同期を繰り返さない。
 
-最初に以下を読む。
+### ChatGPT + Owner — 本人実写真の割当
 
-1. `AGENTS.md`
-2. `docs/mv/minnano-no-taiyo/README.md`
-3. `BRIEF.md`
-4. `DECISIONS.md`
-5. `STORYBOARD.md`
-6. Draft PR #108 最新コメント
+本人写真のS1〜S42割当をlocal/privateで進める。
 
-まだ制作ファイルを編集せず、GitHubへのwrite権限を確認する。
+- S14 / S33 / S42の専用Heroを先に決める
+- S8は公開・利用確認済みのラジオ実写真を最優先する
+- S9に篠笛実写真が無ければ、別の公開・利用確認済み本人実写真を使う
+- S8 / S9を情景B-rollへ置き換えず、G1〜G6を増やさない
+- 本人素材のファイル本体や私的URLをpublic repoへ置かない
 
-write可能ならPR Conversationへ、次のような短いコメントだけを投稿する。
+### Grok / SuperGrok — G1〜G6の0円生成候補
 
-```text
-[Grok] preflight: write access confirmed
-```
+生成を行う場合は、同期済みのG1〜G6だけを使う。
 
-write不可ならファイルを変更せず、その理由だけ報告する。
-
-### Grok / GrokBot — preflight成功後
-
-`STORYBOARD.md` v2.1.1の **G1〜G6だけ**を正本として `GROK_SHOTS.md` を更新する。
-
-- 6本から増やさない
-- 旧12本案を混ぜない
-- 本人、人物、人体、顔、手、シルエットを生成しない
+- `STORYBOARD.md` / `GROK_SHOTS.md`の安全negative一式を省略しない
+- 旧12本案を混ぜず、6本から増やさない
 - 本人写真を生成AIへ入力しない
-- 追加課金しない
-- ひまわりを使わない
-- 作業後に `[Grok]` チェックインを残す
-
-### ChatGPT
-
-Grok更新後に `STORYBOARD.md` / `GROK_SHOTS.md` / PR最新コメントを読み、意味の一致・単調さ・距離感・コスト方針の4点で統合レビューする。
-並行して本人写真のS1〜S42割当をlocal/privateで進める。
+- 実行前に0円 / 加入プラン内 / Unlimited枠を確認し、有料なら止める
+- 生成後は人物・人体・顔・手・シルエット・ひまわりの混入を確認する
 
 ### Owner
 
