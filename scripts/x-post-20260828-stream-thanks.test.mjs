@@ -20,16 +20,21 @@ import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-const NEWS_ID = "2026-08-26-stream-1000";
-const SOURCE = "https://x.com/Mily_chan36/status/2092303118142939171";
+const NEWS_ID = "2026-08-28-stream-thanks";
+const SOURCE = "https://x.com/Mily_chan36/status/2093347548388110372";
 const MESSAGE =
-  "皆さん今日もお疲れ様\u{1F642}\u200D\u2195\uFE0F\u{1F340}\n\n26日の配信は10:00\u301C11:00\u270A\u{1F3FB}\u2728\n\n夜できるといいなぁ\u{1F972}\nおやすみなさい\u{1F4A4}\n\n#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026";
+  "みんなー！今日の配信も来てくれてありがとうね😊🫶🏻❤️‍🔥\n" +
+  "パトン投票もとても助かっております🗳️✨\n" +
+  "\n" +
+  "明日の配信時間はまだ確定していないので、また連絡するねー！\n" +
+  "おつみりぃ💤💤💤\n" +
+  "#ミスサークル #ミスサー #ミスサークルコンテスト #ミスサークルコンテスト2026";
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
 }
 
-describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
+describe("2026-08-28 stream thanks X post — Latest entry", () => {
   it("adds exactly one source-backed News item with the confirmed JST date", () => {
     const entry = item();
 
@@ -39,8 +44,11 @@ describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
       news.filter((candidate) => candidate.source === SOURCE).length,
       1,
     );
-    assert.equal(entry.date, "2026-08-26");
-    assert.equal(entry.sameDayOrder, undefined);
+    assert.equal(news.length, 48);
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news)[1]?.id, "2026-08-28-paton-vote-day-3");
+    assert.equal(entry.date, "2026-08-28");
+    assert.equal(entry.sameDayOrder, 2);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
     assert.equal(entry.source, SOURCE);
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
@@ -48,6 +56,8 @@ describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
     assert.equal(entry.ctaLabel, undefined);
     assert.equal(entry.media, undefined);
     assert.equal(entry.additionalMedia, undefined);
+    assert.equal(entry.source.includes("?s="), false);
+    assert.deepEqual(verifyNews([entry]), []);
     assert.deepEqual(verifyNews(news), []);
   });
 
@@ -56,21 +66,33 @@ describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
 
     assert.equal(entry.message?.label, "みりぃの投稿");
     assert.equal(entry.message?.text, MESSAGE);
-    assert.equal(entry.message.text.split("\n").length, 8);
-    assert.match(entry.message.text, /^皆さん今日もお疲れ様\u{1F642}\u200D\u2195\uFE0F\u{1F340}\n\n/u);
-    assert.match(entry.message.text, /26日の配信は10:00\u301C11:00\u270A\u{1F3FB}\u2728\n\n/u);
-    assert.match(entry.message.text, /夜できるといいなぁ\u{1F972}\nおやすみなさい\u{1F4A4}\n\n#ミスサー/u);
-    assert.match(entry.message.text, /#ミスサークルコンテスト2026$/);
+    assert.equal(entry.message.text.split("\n").length, 6);
+    assert.match(
+      entry.message.text,
+      /^みんなー！今日の配信も来てくれてありがとうね😊🫶🏻❤️‍🔥\n/,
+    );
+    assert.match(entry.message.text, /パトン投票もとても助かっております🗳️✨\n\n/);
+    assert.match(
+      entry.message.text,
+      /明日の配信時間はまだ確定していないので、また連絡するねー！\n/,
+    );
+    assert.match(
+      entry.message.text,
+      /おつみりぃ💤💤💤\n#ミスサークル #ミスサー #ミスサークルコンテスト #ミスサークルコンテスト2026$/,
+    );
   });
 
-  it("uses archive wording and does not treat the night hope as a slot", () => {
+  it("uses archive wording and does not treat tomorrow as a slot", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}`;
 
-    assert.match(entry.body, /8月26日未明/);
-    assert.match(entry.body, /26日の配信は10:00〜11:00と伝えました/);
-    assert.match(entry.body, /夜できるといいなぁという言葉/);
-    assert.match(entry.body, /「おやすみなさい」も残されています/);
+    assert.match(entry.title, /今日の配信ありがとう/);
+    assert.match(entry.title, /おつみりぃ/);
+    assert.match(entry.body, /8月28日夜/);
+    assert.match(entry.body, /配信へのお礼/);
+    assert.match(entry.body, /パトン投票/);
+    assert.match(entry.body, /翌日の配信時間はまだ確定していない/);
+    assert.match(entry.body, /おつみりぃ/);
     assert.equal(copy.includes("SHOWROOM"), false);
     assert.equal(copy.includes("ミスサークル"), false);
 
@@ -83,6 +105,7 @@ describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
       "夜の配信",
       "22:00",
       "22:30",
+      "8月29日の配信は",
     ]) {
       assert.equal(copy.includes(phrase), false, phrase);
     }
@@ -110,12 +133,21 @@ describe("2026-08-26 10:00 stream X announcement — Latest entry", () => {
   });
 });
 
-describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => {
+describe("2026-08-28 stream thanks X post — scope and ordering", () => {
   it("stays out of Gallery, Gallery videos, Stories, and highlights", async () => {
     assert.equal(media.some((entry) => entry.id.includes(NEWS_ID)), false);
-    assert.equal(galleryVideos.some((entry) => entry.id.includes(NEWS_ID)), false);
-    assert.equal(stories.some((entry) => entry.slug.includes("stream-1000")), false);
-    assert.equal(highlights.some((entry) => entry.id.includes("stream-1000")), false);
+    assert.equal(
+      galleryVideos.some((entry) => entry.id.includes("stream-thanks")),
+      false,
+    );
+    assert.equal(
+      stories.some((entry) => entry.slug.includes("stream-thanks")),
+      false,
+    );
+    assert.equal(
+      highlights.some((entry) => entry.id.includes("stream-thanks")),
+      false,
+    );
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
 
     for (const relative of [
@@ -123,14 +155,15 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
       "src/data/galleryVideos.ts",
       "src/data/stories.ts",
       "src/data/highlights.ts",
+      "src/data/profile.ts",
     ]) {
       const source = await readFile(path.join(root, relative), "utf8");
       assert.equal(source.includes(NEWS_ID), false, relative);
-      assert.equal(source.includes("2092303118142939171"), false, relative);
+      assert.equal(source.includes("2093347548388110372"), false, relative);
     }
   });
 
-  it("does not hand-enter the 10:00 slot into schedule data", async () => {
+  it("does not hand-enter a new slot into schedule data", async () => {
     const { events } = await import("../src/data/events.ts");
     const { streamSchedule } = await import("../src/data/streamSchedule.ts");
     const { supportEvents } = await import("../src/data/supportEvents.ts");
@@ -145,39 +178,29 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     for (const relative of ["src/data/events.ts", "src/data/streamSchedule.ts"]) {
       const source = await readFile(path.join(root, relative), "utf8");
       assert.equal(source.includes(NEWS_ID), false, relative);
-      assert.equal(source.includes("2092303118142939171"), false, relative);
+      assert.equal(source.includes("2093347548388110372"), false, relative);
     }
   });
 
-  it("stays among the 2026-08-26 News items after the GirlsAward post", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
-
-    assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
-    assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
-    assert.equal(ordered[3], "2026-08-26-morning-stream-thanks");
-    assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
-    assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
-    assert.equal(ordered[6], NEWS_ID);
-    assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
-    assert.equal(ordered[8], "2026-08-25-motivation");
-    assert.equal(news.length, 48);
-    assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
-    assert.equal(item().media, undefined);
-    assert.equal(item().additionalMedia, undefined);
-  });
-
-  it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
+  it("leads Latest and LIVE STREAM without joining CAMPUS GIRLS", () => {
     const selected = selectActivityNews("live-stream", news, news.length);
-    assert.ok(selected.some((entry) => entry.id === NEWS_ID));
-    assert.equal(selected[0]?.id, "2026-08-28-stream-thanks");
-    assert.equal(selected[1]?.id, "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(selected[2]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(selected[3]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(selected[4]?.id, NEWS_ID);
+
+    assert.equal(selected[0]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("live-stream")));
     assert.equal(
+      selectActivityNews("campus-girls", news, news.length).some(
+        (entry) => entry.id === NEWS_ID,
+      ),
+      false,
+    );
+    assert.equal(
       selectActivityNews("miss-circle", news, news.length).some(
+        (entry) => entry.id === NEWS_ID,
+      ),
+      false,
+    );
+    assert.equal(
+      selectActivityNews("radio", news, news.length).some(
         (entry) => entry.id === NEWS_ID,
       ),
       false,
@@ -185,24 +208,31 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
   });
 });
 
-describe("2026-08-26 10:00 stream X announcement — Portal Feed", () => {
+describe("2026-08-28 stream thanks X post — Portal Feed", () => {
   it("flows through Portal Feed without a hardcoded news id or image", async () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-26T02:30:00+09:00") });
+    const feed = createPortalFeed({ now: new Date("2026-08-28T23:45:00+09:00") });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
     assertPortalNewsFollowsSort(feed, news);
     assert.equal(entry.type, "news");
-    assert.equal(entry.publishedAt, "2026-08-26T00:00:00+09:00");
+    assert.equal(entry.publishedAt, "2026-08-28T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.equal(entry.image, undefined);
 
-    const portalSource = await readFile(path.join(root, "src/data/portalFeed.ts"), "utf8");
+    const portalSource = await readFile(
+      path.join(root, "src/data/portalFeed.ts"),
+      "utf8",
+    );
     assert.equal(portalSource.includes(NEWS_ID), false);
-    assert.equal(portalSource.includes("2092303118142939171"), false);
+    assert.equal(portalSource.includes("2093347548388110372"), false);
   });
 
-  it("keeps the existing message rendering contract for quoted posts", async () => {
-    const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
-    assert.match(latest, /whitespace-pre-line break-words/);
+  it("documents the 8/28 stream-thanks NEWS in CONTENT-OPS", async () => {
+    const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
+    assert.match(ops, /48件/);
+    assert.match(ops, /8\/28夜の本人X/);
+    assert.match(ops, /おつみりぃ/);
+    assert.match(ops, /2093347548388110372/);
+    assert.match(ops, /翌日の配信時刻は未確定/);
   });
 });

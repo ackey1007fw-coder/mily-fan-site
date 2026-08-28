@@ -67,8 +67,9 @@ describe("2026-08-28 CAMPUS GIRLS Paton vote day 3 — Latest entry", () => {
       news.filter((candidate) => candidate.source === SOURCE).length,
       1,
     );
-    assert.equal(news.length, 47);
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    assert.equal(news.length, 48);
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-28-stream-thanks");
+    assert.equal(sortNewsByDateDesc(news)[1]?.id, NEWS_ID);
     assert.equal(entry.date, "2026-08-28");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
@@ -227,7 +228,7 @@ describe("2026-08-28 CAMPUS GIRLS Paton vote day 3 — Portal Feed", () => {
 
   it("documents the 8/28 X vote-day NEWS in CONTENT-OPS", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    assert.match(ops, /47件/);
+    assert.match(ops, /48件/);
     assert.match(ops, /8\/28の本人X/);
     assert.match(ops, /予選A FinalSTAGE 3日目/);
     assert.match(ops, /2093262992289026404/);

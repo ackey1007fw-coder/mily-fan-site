@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 47);
+    assert.equal(news.length, 48);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -151,7 +151,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
   });
 
   it("sits between Final STAGE guide and night-thanks on 8/24", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 14), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -338,12 +338,13 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
 
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 0);
-    assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(liveNews[1]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(liveNews[3]?.id, "2026-08-26-stream-1000");
-    assert.equal(liveNews[4]?.id, "2026-08-25-motivation");
-    assert.equal(liveNews[5]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-08-28-stream-thanks");
+    assert.equal(liveNews[1]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(liveNews[2]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(liveNews[3]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(liveNews[4]?.id, "2026-08-26-stream-1000");
+    assert.equal(liveNews[5]?.id, "2026-08-25-motivation");
+    assert.equal(liveNews[6]?.id, NEWS_ID);
     // b24-01 is the NEWS lead media, so selectActivityMedia surfaces it here the
     // same way it surfaces every other live-stream NEWS lead (b17-01, b14-01,
     // b13-01). No per-image filter is added; docs/MEDIA.md records this.
@@ -407,7 +408,7 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
     assert.match(b24, /公開用のmetadata除去以外は無改変/);
     assert.match(b24, /crop・mask・scale・rotate・アップスケール・縦横比変更なし/);
     assert.match(b24, /Gallery・`\/stories\/` には追加しない/);
-    assert.match(ops, /47件/);
+    assert.match(ops, /48件/);
     assert.match(ops, /初メイク配信/);
     assert.match(ops, /b24-02.*2枚目/);
     assert.doesNotMatch(docs, /16:50/);

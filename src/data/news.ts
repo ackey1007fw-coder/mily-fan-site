@@ -168,6 +168,25 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-28-stream-thanks",
+    date: "2026-08-28",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "今日の配信ありがとう！おつみりぃ💤",
+    body: "8月28日夜、みりぃがXでその日の配信へのお礼を伝えました。パトン投票もとても助かっていること、翌日の配信時間はまだ確定していないのでまた連絡することを案内し、「おつみりぃ」と締めくくっています。",
+    source: "https://x.com/Mily_chan36/status/2093347548388110372",
+    sourceLabel: "Xの投稿を見る",
+    message: {
+      label: "みりぃの投稿",
+      text: `みんなー！今日の配信も来てくれてありがとうね😊🫶🏻❤️‍🔥
+パトン投票もとても助かっております🗳️✨
+
+明日の配信時間はまだ確定していないので、また連絡するねー！
+おつみりぃ💤💤💤
+#ミスサークル #ミスサー #ミスサークルコンテスト #ミスサークルコンテスト2026`,
+    },
+  },
+  {
     id: "2026-08-28-paton-vote-day-3",
     date: "2026-08-28",
     activityIds: ["campus-girls"],
