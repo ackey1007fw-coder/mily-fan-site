@@ -85,9 +85,9 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(entry.media, birthdayIndoorSelfieImage);
     assert.equal(entry.additionalMedia, undefined);
     assert.equal(entry.activityIds, undefined);
-    assert.equal(news.length, 47);
+    assert.equal(news.length, 48);
     assert.deepEqual(verifyNews(news), []);
-    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((candidate) => candidate.id === NEWS_ID));
+    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((candidate) => candidate.id === NEWS_ID));
   });
 
   it("uses one local /media/news/ JPEG with Gallery srcset and never hotlinks SNS media", async () => {
@@ -251,7 +251,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(findDriveIds(b29).length, 0);
     assert.doesNotMatch(b29, /Millie|millie/);
     assert.doesNotMatch(ops, /Millie|millie/);
-    assert.match(ops, /47件/);
+    assert.match(ops, /48件/);
     assert.match(ops, /写真32枚/);
     assert.match(ops, /b29-01/);
 

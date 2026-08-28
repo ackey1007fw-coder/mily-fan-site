@@ -142,17 +142,17 @@ describe("2026-04-23 TikTok sayonara-ichigo post — Latest", () => {
   it("does not change the current August Latest ranking", () => {
     const ordered = sortNewsByDateDesc(news);
 
-    assert.equal(ordered[0]?.id, "2026-08-27-movie-night");
+    assert.equal(ordered[0]?.id, "2026-08-28-paton-vote-day-3");
     assert.equal(ordered.at(-1)?.id, NEWS_ID);
     assert.equal(ordered.at(-2)?.id, "2026-08-02-21st-birthday");
-    assert.equal(news.length, 47);
+    assert.equal(news.length, 48);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
     const hero = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
 
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-27-movie-night");
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-28-paton-vote-day-3");
     assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
   });

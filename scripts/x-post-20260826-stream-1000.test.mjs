@@ -150,7 +150,7 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
   });
 
   it("stays among the 2026-08-26 News items after the GirlsAward post", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
 
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
@@ -161,7 +161,7 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     assert.equal(ordered[6], NEWS_ID);
     assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
     assert.equal(ordered[8], "2026-08-25-motivation");
-    assert.equal(news.length, 47);
+    assert.equal(news.length, 48);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(item().media, undefined);
     assert.equal(item().additionalMedia, undefined);

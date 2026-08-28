@@ -49,7 +49,7 @@ describe("2026-08-27 movie-night Instagram post — NEWS", () => {
     assert.deepEqual(verifyNews(news), []);
     assert.equal(item.date, "2026-08-27");
     assert.equal(item.sameDayOrder, 3);
-    assert.equal(sortNewsByDateDesc(news)[0], item);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3"))[0], item);
     assert.equal(item.source, MOVIE_NIGHT_INSTAGRAM_URL);
     assert.equal(item.sourceLabel, "Instagramの投稿を見る");
     assert.equal(item.url, MOVIE_NIGHT_INSTAGRAM_PROFILE_URL);
@@ -180,7 +180,7 @@ describe("2026-08-27 movie-night Instagram post — scope and docs", () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
 
-    assert.match(ops, /47件/);
+    assert.match(ops, /48件/);
     assert.match(ops, /写真32枚/);
     assert.match(ops, /Dci0CvNE29X/);
     assert.match(mediaGuide, /batch b38/);

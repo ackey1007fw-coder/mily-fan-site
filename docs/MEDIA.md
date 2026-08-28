@@ -2224,6 +2224,63 @@ NEWS、Gallery動画一覧、`/stories/`、highlights、events、streamSchedule�
 - AI生成・AI加工・顔補正・generative fill・outpaintingなし
 - 元素材、受け渡しURL、file ID、受領時ファイル名はtracked/public filesへ含めない
 
+## 素材台帳（batch b40 / 受領日・source date 2026-08-28）
+
+本人Instagram Storyで共有された、CAMPUS GIRLS 2027 予選A Final STAGEの
+審査詳細画像、Paton投票3日目の投稿時点2位記録、ムービー審査1位・総合7位記録の3点。
+HOME / Support が共有する既存 `PatonVoteGuide` の同じシリーズへ追加し、
+既存b39の投票ページ案内Storyも同じガイド内で維持する。
+
+Storyの恒久permalinkはないため、3点の出典表示は非リンクの `Instagram Story`。
+本人Instagramプロフィールは出典ではなく、同じガイドの確認済み関連CTA
+`Instagramプロフィールを見る` として分けて表示する。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b40-01 | `news/mily-b40-01-campus-girls-final-stage-details.jpg` | 配信・SNS・Paton投票・面接の各審査と特典をまとめたStory画像。1080×1919。owner-provided | ✅ HOME + Support のPatonVoteGuide |
+| b40-02 | `news/mily-b40-02-paton-vote-day3-second-record.mp4` | Paton投票3日目、みりぃが投稿時点2位と表示されたStory動画。720×1280 / 20.000秒 / video-only。owner-provided | ✅ HOME + Support のPatonVoteGuide |
+| b40-02 poster | `news/mily-b40-02-paton-vote-day3-second-record-poster.jpg` | 公開MP4の0.2秒地点の実フレーム。720×1280 | ✅ HOME + Support のPatonVoteGuide |
+| b40-03 | `news/mily-b40-03-movie-exam-first-overall-seventh-record.mp4` | ムービー審査1位・総合7位と表示されたStory動画。720×1280 / 5.000秒 / video-only。owner-provided | ✅ HOME + Support のPatonVoteGuide |
+| b40-03 poster | `news/mily-b40-03-movie-exam-first-overall-seventh-record-poster.jpg` | 公開MP4の2.5秒地点の実フレーム。720×1280 | ✅ HOME + Support のPatonVoteGuide |
+
+### 元素材の実測と安全確認
+
+- provenance: `owner-provided`。3点とも受領バイトを変えず `media/original/` の
+  gitignored領域へ保管。受け渡しURL、file ID、受領時ファイル名はtracked/public filesへ含めない
+- b40-01元JPEG: 11,255,441 bytes / 3870×6879 / EXIF・IPTCあり / sha256
+  `5d2dfde4ce7d31bca555d8968379e981cec3f4028b0df0b4b397751d401b77d0`
+- b40-02元素材: 6,389,314 bytes / H.264 High / 720×1280 / 30fps /
+  600 frames / 20.000000秒 / yuv420p / HE-AAC音声あり / sha256
+  `64b7ae1740d8edae479cd97e91d9074c59f934ed24f1fd316651b80572c1271a`
+- b40-03元素材: 1,421,885 bytes / H.264 High / 720×1280 / 30fps /
+  150 frames / 5.000000秒 / yuv420p / 音声ストリームなし / sha256
+  `a931bed58e549a347e9d56ed4c2ff9e10ce15a1f503004adad0675ad89fa1e38`
+- 元動画の `creation_time` と `Core Media Video / Audio` は受領検査だけに使い、
+  投稿日時の根拠にはしていない。DM・通知・端末固有情報・連絡先は見当たらない
+- b40-02のランキング1位・3位カード、b40-03のみりぃ以外のランキング行と
+  公式バナー内の第三者2名の顔は、顔・名前が判別できない画素化モザイクを
+  公開MP4とposterの両方へ適用した。みりぃ本人の行と順位表示は維持する
+
+### 公開派生
+
+- b40-01 JPEG: 293,064 bytes / 1080×1919 / EXIF・IPTC・XMP・ICCなし /
+  sha256 `0f909feb705b49d1f9122ff4e9009307a95f330615f87b354292a293341f2508`
+- b40-02 MP4: 325,698 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+  600 frames / 20.000000秒 / yuv420p / `has_b_frames` 0 / 音声なし /
+  sha256 `794852a84298d62b8d998a9340aa9969f2ea0c799a1076676c99a2b2d7d6626a`
+- b40-02 poster: 75,714 bytes / 720×1280 / metadataなし / sha256
+  `ddab5d8e2299f14824a0e5316b40674d3d0a91cb64c4bb80178c7f2116918652`
+- b40-03 MP4: 185,326 bytes / H.264 Constrained Baseline / 720×1280 / 30fps /
+  150 frames / 5.000000秒 / yuv420p / `has_b_frames` 0 / 音声なし /
+  sha256 `850eda64913e36442013d42bcabb2d5db909f54988a466a64100d076ae6fdbc4`
+- b40-03 poster: 67,132 bytes / 720×1280 / metadataなし / sha256
+  `17bf991a39e5ee19f38ad54f8a8e230b487d3baa601b51e24725edf0de08d56b`
+- 両MP4とも `+faststart`、metadata・chapter・元handler名なし。全体のトリミング・
+  リサイズ・短縮なし（privacy-safeなモザイク領域だけを画素化）。posterは公開MP4の実フレーム
+- 順位カードには `投稿時点の記録` と、現在順位ではない旨を表示する。
+  NEWS、Gallery、`/stories/`、highlights、events、streamSchedule、Activities、
+  Portal Feedには重複追加しない
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

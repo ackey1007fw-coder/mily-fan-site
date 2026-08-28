@@ -86,7 +86,7 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
   });
 
   it("follows the 8/26 Mixch NEWS and still leads 8/25 before motivation", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
     const feed = createPortalFeed();
     const feedItem = feed.items.find(
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
@@ -116,11 +116,12 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
     const selected = selectActivityNews("campus-girls");
 
     const selectedAll = selectActivityNews("campus-girls", news, news.length);
-    assert.equal(selected[0]?.id, "2026-08-27-paton-vote-how-to");
-    assert.equal(selected[1]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(selected[2]?.id, "2026-08-26-paton-vote-stories");
-    assert.equal(selectedAll[3]?.id, "2026-08-26-mixch-15x-day");
-    assert.equal(selectedAll[4]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-28-paton-vote-day-3");
+    assert.equal(selected[1]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selected[2]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(selectedAll[3]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selectedAll[4]?.id, "2026-08-26-mixch-15x-day");
+    assert.equal(selectedAll[5]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("campus-girls")));
   });
 
@@ -154,8 +155,8 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /VDojsMY5/);
       assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 47);
-    assert.match(ops, /47件/);
+    assert.equal(news.length, 48);
+    assert.match(ops, /48件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);
     assert.match(ops, /Mixchファイルは自己ホストしていない/);
