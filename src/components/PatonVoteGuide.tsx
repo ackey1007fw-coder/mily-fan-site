@@ -1,4 +1,10 @@
 import { useEffect } from "react";
+import {
+  CAMPUS_GIRLS_FINAL_STAGE_INSTAGRAM_CTA_LABEL,
+  CAMPUS_GIRLS_FINAL_STAGE_INSTAGRAM_PROFILE_URL,
+  campusGirlsFinalStageDetailsStoryImage,
+  campusGirlsFinalStageRankingStoryVideos,
+} from "../data/campusGirlsFinalStageStorySeries";
 import { campusGirlsPatonVoteLink, links } from "../data/links";
 import {
   PATON_VOTE_HOW_TO_ANCHOR_ID,
@@ -88,7 +94,7 @@ export function PatonVoteGuide() {
           </video>
           <figcaption className="px-4 py-3">
             <p className="text-xs font-medium text-apricot-ink">
-              8/28のInstagram Story
+              {patonVoteDay3StoryVideo.sourceLabel} · 8/28のInstagram Story
             </p>
             <p className="mt-1 text-sm font-semibold leading-6 text-ink">
               パトン投票3日目はここから❣️
@@ -98,6 +104,72 @@ export function PatonVoteGuide() {
             </p>
           </figcaption>
         </figure>
+
+        <div className="mt-6 rounded-2xl border border-apricot/40 bg-paper-card/80 p-4 sm:p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-apricot-ink">
+            CAMPUS GIRLS 2027 予選Final STAGEのStory
+          </p>
+          <h3 className="mt-2 text-xl font-bold text-ink">
+            審査の詳細と投稿時点の記録
+          </h3>
+          <p className="mt-2 text-sm leading-6 text-ink-muted">
+            順位は2026年8月28日のStory投稿時点の記録です。現在の順位を示すものではありません。
+          </p>
+
+          <figure className="mt-4 overflow-hidden rounded-2xl border border-apricot/30 bg-paper">
+            <img
+              alt={campusGirlsFinalStageDetailsStoryImage.alt}
+              className="mx-auto block h-auto w-full object-contain"
+              decoding="async"
+              height={campusGirlsFinalStageDetailsStoryImage.height}
+              loading="lazy"
+              src={campusGirlsFinalStageDetailsStoryImage.src}
+              width={campusGirlsFinalStageDetailsStoryImage.width}
+            />
+            <figcaption className="px-4 py-3">
+              <p className="text-sm font-semibold leading-6 text-ink">
+                {campusGirlsFinalStageDetailsStoryImage.title}
+              </p>
+              <p className="mt-1 text-xs text-ink-muted">
+                {campusGirlsFinalStageDetailsStoryImage.sourceLabel} ·
+                2026年8月28日
+              </p>
+            </figcaption>
+          </figure>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            {campusGirlsFinalStageRankingStoryVideos.map((item) => (
+              <figure
+                key={item.id}
+                className="overflow-hidden rounded-2xl border border-apricot/30 bg-paper"
+              >
+                <video
+                  aria-label={item.alt}
+                  className="block h-auto w-full bg-black object-contain"
+                  controls
+                  height={item.height}
+                  playsInline
+                  poster={item.poster}
+                  preload="none"
+                  width={item.width}
+                >
+                  <source src={item.src} type="video/mp4" />
+                </video>
+                <figcaption className="px-4 py-3">
+                  <span className="inline-flex rounded-full bg-apricot-soft px-2.5 py-1 text-xs font-semibold text-apricot-ink">
+                    {item.recordLabel}
+                  </span>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-ink">
+                    {item.title}
+                  </p>
+                  <p className="mt-1 text-xs text-ink-muted">
+                    {item.sourceLabel} · 2026年8月28日
+                  </p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
 
         <ol className="mt-5 space-y-3">
           {patonVoteHowToSteps.map((item) => (
@@ -127,6 +199,12 @@ export function PatonVoteGuide() {
         </blockquote>
 
         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <ExternalLink
+            href={CAMPUS_GIRLS_FINAL_STAGE_INSTAGRAM_PROFILE_URL}
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-apricot px-5 py-2.5 text-sm font-semibold text-white hover:bg-apricot-ink"
+          >
+            {CAMPUS_GIRLS_FINAL_STAGE_INSTAGRAM_CTA_LABEL}
+          </ExternalLink>
           <ExternalLink
             href={campusGirlsPatonVoteLink.url}
             className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
