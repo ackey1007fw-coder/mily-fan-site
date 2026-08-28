@@ -291,7 +291,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
   });
 
   it("leads Latest ahead of the 8/26 Story cards and keeps stream-1000", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
 
     assert.equal(ordered[0], NEWS_ID);
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
@@ -300,7 +300,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
     assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
     assert.equal(ordered[6], "2026-08-26-stream-1000");
-    assert.equal(news.length, 46);
+    assert.equal(news.length, 47);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.ok(news.some((entry) => entry.id === "2026-08-26-stream-1000"));
   });
@@ -317,9 +317,10 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
     assert.equal(liveNews[3]?.id, "2026-08-26-stream-1000");
     assert.equal(campusNews.some((entry) => entry.id === NEWS_ID), false);
-    assert.equal(campusNews[0]?.id, "2026-08-27-paton-vote-how-to");
-    assert.equal(campusNews[1]?.id, "2026-08-27-mixch-expressive");
-    assert.equal(campusNews[2]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(campusNews[0]?.id, "2026-08-28-paton-vote-day-3");
+    assert.equal(campusNews[1]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(campusNews[2]?.id, "2026-08-27-mixch-expressive");
+    assert.equal(campusNews[3]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(liveMedia[0], girlsawardShowroomSixthImage);
   });
 
@@ -340,7 +341,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(b28.includes("紫ポロ"), false);
     assert.match(b28, /`\/stories\/` 記事と highlights には追加しない/);
     assert.equal(findDriveIds(b28).length, 0);
-    assert.match(ops, /46件/);
+    assert.match(ops, /47件/);
     assert.match(ops, /写真32枚/);
 
     const { stdout: trackedOriginal } = await run(

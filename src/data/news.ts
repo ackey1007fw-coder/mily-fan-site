@@ -13,6 +13,7 @@
  * - ctaLabel: optional. href is url ?? source
  */
 import type { ActivityId } from "./activities.ts";
+import { campusGirlsPatonVoteLink } from "./links.ts";
 import {
   eventStory20260821,
   morningOhayo20260821,
@@ -166,6 +167,29 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-28-paton-vote-day-3",
+    date: "2026-08-28",
+    activityIds: ["campus-girls"],
+    title: "予選A FinalSTAGE 3日目、応援よろしく🍅✨",
+    body: "8月28日、みりぃがXでCAMPUS GIRLS 2027 予選A FinalSTAGEの3日目を伝え、Patonで応援するよう呼びかけました。",
+    source: "https://x.com/Mily_chan36/status/2093262992289026404",
+    sourceLabel: "Xの投稿を見る",
+    url: campusGirlsPatonVoteLink.url,
+    ctaLabel: campusGirlsPatonVoteLink.label,
+    media: campusGirlsPatonPortraitImage,
+    message: {
+      label: "みりぃの投稿",
+      text: `CAMPUS GIRLS 2027 予選A FinalSTAGEに三橋莉子（みりぃ）🍅✨さんが出場中！
+
+【3日目！！！！】
+
+みんなで三橋莉子（みりぃ）🍅✨さんを応援しよう✨
+応援はこちらから👇
+https://paton.jp/event/entrant/11380
+#CAMPUS GIRLS 2027 予選A FinalSTAGE #paton`,
+    },
+  },
   {
     id: "2026-08-27-movie-night",
     date: "2026-08-27",

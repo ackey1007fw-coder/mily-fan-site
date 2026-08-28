@@ -102,7 +102,7 @@ describe("2026-08-27 ミスサーSHOWROOM Instagram Story — Latest / NEWS", ()
   it("adds only the confirmed date, display text and related Instagram profile", () => {
     const entry = item();
 
-    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-movie-night"))[4]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[4]?.id, NEWS_ID);
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(entry.date, "2026-08-27");

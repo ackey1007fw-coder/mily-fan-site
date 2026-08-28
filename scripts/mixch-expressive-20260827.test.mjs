@@ -96,7 +96,7 @@ describe("2026-08-27 Mixch expressive NEWS", () => {
   });
 
   it("follows the Paton guide and X followers NEWS, then leads the morning Stories", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-27-movie-night"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"));
     assert.equal(ordered[0]?.id, "2026-08-27-paton-vote-how-to");
     assert.equal(ordered[1]?.id, "2026-08-27-x-followers-100");
     assert.equal(ordered[2]?.id, NEWS_ID);
@@ -121,9 +121,13 @@ describe("2026-08-27 Mixch expressive NEWS", () => {
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );
 
-    assert.equal(selected[0]?.id, "2026-08-27-paton-vote-how-to");
-    assert.equal(selected[1]?.id, NEWS_ID);
-    assert.equal(selected[2]?.id, "2026-08-26-paton-vote-stories");
+    assert.equal(selected[0]?.id, "2026-08-28-paton-vote-day-3");
+    assert.equal(selected[1]?.id, "2026-08-27-paton-vote-how-to");
+    assert.equal(selected[2]?.id, NEWS_ID);
+    assert.equal(
+      selectActivityNews("campus-girls", news, news.length)[3]?.id,
+      "2026-08-26-paton-vote-stories",
+    );
     assert.ok(feedItem);
     assert.equal(feedItem.publishedAt, "2026-08-27T00:00:00+09:00");
     assert.equal(feedItem.sourceUrl, X_SOURCE);

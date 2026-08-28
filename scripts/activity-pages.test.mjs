@@ -36,6 +36,7 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-28-paton-vote-day-3": ["campus-girls"],
   "2026-08-27-paton-vote-how-to": ["campus-girls"],
   "2026-08-27-mixch-expressive": ["campus-girls"],
   "2026-08-27-seaside-circle-movie-theme-story": ["radio"],
