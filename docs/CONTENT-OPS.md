@@ -26,6 +26,22 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
+### 2026-08-28 CAMPUS GIRLS 2027 予選Final STAGE Storyの追記
+
+- HOME と Support が共有する既存 `PatonVoteGuide` に、batch b40 の審査詳細画像、
+  Paton投票3日目2位の動画、ムービー審査1位・総合7位の動画を同じシリーズとして追加する。
+  既存b39の投票ページ案内Storyは維持し、別のNEWSやStory記事を増やさない。
+- 順位は2026年8月28日のStory投稿時点の記録であり、画面にも
+  `投稿時点の記録` と「現在の順位を示すものではない」を明示する。
+- 3点とも恒久permalinkのない本人Instagram Storyなので、出典表示は非リンクの
+  `Instagram Story`。本人Instagramプロフィールは出典とは分けた関連CTA
+  `Instagramプロフィールを見る` として表示する。
+- ランキング画面は、みりぃ本人の行を残し、ほかの出場者の顔・名前と
+  公式バナー内の第三者の顔を公開派生でモザイク処理する。20秒動画の
+  未確認音声は削除し、5秒動画は元素材から無音。
+- `news.ts`、`galleryVideos.ts`、`media.ts`、`stories.ts`、`highlights.ts`、
+  `events.ts`、`streamSchedule.ts`、Activities、Portal Feedには追加しない。
+
 ### 2026-08-27 映画鑑賞Instagram投稿の追記
 
 - `news.ts` は46件。本人Instagram通常投稿
