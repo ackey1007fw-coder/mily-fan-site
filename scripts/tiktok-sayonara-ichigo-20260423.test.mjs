@@ -29,7 +29,11 @@ import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
-import { isProbablyBinary } from "./scan-tracked-text.mjs";
+import {
+  DRIVE_HOST_PATTERN,
+  findDriveIds,
+  isProbablyBinary,
+} from "./scan-tracked-text.mjs";
 
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -42,7 +46,7 @@ const poster = path.join(
 const original = path.join(
   root,
   "media/original",
-  ["v14044g50000d7l0", "tlfog65le6s7daj0", ".mp4"].join(""),
+  "mily-b37-01-tiktok-sayonara-ichigo.mp4",
 );
 
 const NEWS_ID = "2026-04-23-tiktok-sayonara-ichigo";
@@ -64,9 +68,10 @@ const PUBLIC_MP4_SHA256 =
 const POSTER_SHA256 =
   "42afb6e3ffc507ac3c03d4d81ba4699e25b0d090ccf14a7ca2011edd3b40a35c";
 const POSTER_SECONDS = "2.4";
-const HANDOFF_HOST = ["drive", "google", "com"].join(".");
-const HANDOFF_ID = ["1oFQRTx8jArdsUEMxGa", "_63JA24URZC6OJ"].join("");
-const ORIGINAL_STEM = ["v14044g50000d7l0", "tlfog65le6s7daj0"].join("");
+const PRIVATE_HANDOFF_KEY_PATTERN =
+  /^(?:handoff(?:Url|Id)?|driveFileId|original(?:File)?Name|sourceFileName)$/i;
+const SOURCE_METADATA_FILE_PATTERN =
+  /(?:https?:\/\/|drive\.(?:google|usercontent\.google)\.com|media[\\/]original[\\/]|\.(?:mp4|mov|m4v|zip)\b)/i;
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -288,7 +293,31 @@ describe("2026-04-23 TikTok video — published derivatives", () => {
     const serialized = JSON.stringify(info);
     assert.equal(info.chapters.length, 0);
     assert.doesNotMatch(serialized, /aigc_info|vid_md5/);
-    assert.equal(serialized.includes(ORIGINAL_STEM), false);
+    const metadata = [
+      info.format.tags ?? {},
+      ...info.streams.map((stream) => stream.tags ?? {}),
+    ];
+    assert.deepEqual(Object.keys(metadata[0]).sort(), [
+      "compatible_brands",
+      "encoder",
+      "major_brand",
+      "minor_version",
+    ]);
+    const streamMetadataKeys = Object.keys(metadata[1]).sort();
+    const allowedStreamMetadataKeys = new Set([
+      "encoder",
+      "handler_name",
+      "language",
+      "vendor_id",
+    ]);
+    assert.deepEqual(
+      streamMetadataKeys.filter((key) => !allowedStreamMetadataKeys.has(key)),
+      [],
+    );
+    for (const key of ["encoder", "handler_name", "language"]) {
+      assert.equal(streamMetadataKeys.includes(key), true, key);
+    }
+    assert.doesNotMatch(JSON.stringify(metadata), SOURCE_METADATA_FILE_PATTERN);
   });
 
   it("uses the selected 2.4-second real frame as a metadata-free poster", async () => {
@@ -354,18 +383,46 @@ describe("2026-04-23 TikTok video — published derivatives", () => {
 });
 
 describe("2026-04-23 TikTok post — privacy, identity and scope boundaries", () => {
-  it("keeps the handoff URL, file id and original out of tracked/public files", async () => {
+  it("keeps private handoff fields, Drive ids and raw originals out of tracked/public files", async () => {
     const files = await repositoryFiles();
+    const taskFiles = [
+      "src/data/tiktokSayonaraIchigoVideo.json",
+      "src/data/tiktokSayonaraIchigoVideo.ts",
+      "src/data/news.ts",
+      "src/data/galleryVideos.ts",
+      "docs/MEDIA.md",
+      "docs/CONTENT-OPS.md",
+    ];
 
     assert.equal(files.includes(path.relative(root, original).replaceAll("\\", "/")), false);
-    for (const relative of files) {
+    assert.equal(
+      files.some(
+        (relative) =>
+          relative.startsWith("media/original/") &&
+          relative.includes("mily-b37-01"),
+      ),
+      false,
+    );
+
+    for (const relative of taskFiles) {
       const bytes = await readFile(path.join(root, relative));
       if (isProbablyBinary(bytes)) continue;
       const source = bytes.toString("utf8");
-      assert.equal(source.includes(HANDOFF_HOST), false, relative);
-      assert.equal(source.includes(HANDOFF_ID), false, relative);
-      assert.equal(source.includes(ORIGINAL_STEM), false, relative);
+      assert.equal(DRIVE_HOST_PATTERN.test(source), false, relative);
+      assert.deepEqual(findDriveIds(source), [], relative);
     }
+
+    const manifest = JSON.parse(
+      await readFile(
+        path.join(root, "src/data/tiktokSayonaraIchigoVideo.json"),
+        "utf8",
+      ),
+    );
+    assert.deepEqual(
+      Object.keys(manifest).filter((key) => PRIVATE_HANDOFF_KEY_PATTERN.test(key)),
+      [],
+    );
+    assert.equal(JSON.stringify(manifest).includes("media/original"), false);
   });
 
   it("does not add the post to excluded data surfaces", async () => {
