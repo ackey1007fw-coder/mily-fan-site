@@ -135,7 +135,7 @@ describe("home portal information architecture", () => {
     assert.equal(HOME_NEWS_LIMIT, 3);
     assert.equal(HOME_STORY_LIMIT, 3);
     assert.equal(HOME_GALLERY_LIMIT, 6);
-    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).length > HOME_NEWS_LIMIT);
+    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).length > HOME_NEWS_LIMIT);
     assert.ok(visibleStories().length > HOME_STORY_LIMIT);
     assert.ok(selectGalleryEntries().length > HOME_GALLERY_LIMIT);
     assert.equal(selectGalleryPreview(HOME_GALLERY_LIMIT).length, HOME_GALLERY_LIMIT);
