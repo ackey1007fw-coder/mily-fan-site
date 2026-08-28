@@ -47,6 +47,14 @@ export function facebookShareUrl(
   return `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(payload.url)}`;
 }
 
+export function threadsShareUrl(
+  payload: SiteSharePayload = siteSharePayload(),
+): string {
+  const text = encodeURIComponent(payload.text);
+  const url = encodeURIComponent(payload.url);
+  return `https://www.threads.com/intent/post?text=${text}&url=${url}`;
+}
+
 export function canUseWebShare(
   payload: SiteSharePayload = siteSharePayload(),
   shareApi: WebShareApi | undefined = globalThis.navigator,
