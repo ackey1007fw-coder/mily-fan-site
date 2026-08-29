@@ -26,6 +26,24 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
+### 2026-08-29 SHOWROOMラジオ配信・3次審査案内のX投稿2件
+
+- `news.ts` は52件。本人X
+  `https://x.com/Mily_chan36/status/2093572006457557333`（14:40〜ラジオ配信案内）と
+  `https://x.com/Mily_chan36/status/2093575115913224580`（配信中／9/3〜3次審査）を、
+  それぞれ独立したテキストNEWSとして追加する。
+- 写真がないためテキストNEWS＋出典リンク。CTAは確認済みSHOWROOMルーム
+  `https://www.showroom-live.com/r/circle2026_0734`（`t=` トラッキングは付けない）。
+- Gallery / media.ts / galleryVideos / `/stories/` / highlights / events /
+  streamSchedule / contest.ts には追加しない。通常のSHOWROOM枠は自動取得のまま。
+  3次審査の期間は既存の `contest.ts`（9/3〜9/13）と矛盾しない案内であり、
+  フェーズ名は「3次審査進出」のまま。
+- 14:40案内は LIVE STREAM のみ。配信中／3次審査案内は MISS CIRCLE と
+  LIVE STREAM に関連付ける。CAMPUS GIRLS・Paton CTA・radio Activity は付けない
+  （FM「湘南シーサイドサークル」ではなくSHOWROOMのラジオ配信）。
+- 同日は `sameDayOrder: 3`（配信中）→ `2`（14:40案内）→ Paton投票4日目Story。
+- 本文はアーカイブ表現。投稿に無い順位・得点・終了時刻は書かない。
+
 ### 2026-08-28〜29 Instagram Story動画2本の追記
 
 - `news.ts` は50件。b41-01（8月28日22:00〜SHOWROOM夜配信案内）と
