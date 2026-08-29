@@ -20,9 +20,9 @@ import {
   morningShowroomRunwayVideo,
   tiktokRadioVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,

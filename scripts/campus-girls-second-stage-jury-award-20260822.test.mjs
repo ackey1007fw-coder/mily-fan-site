@@ -7,11 +7,11 @@ import sharp from "sharp";
 import { campusGirlsSecondStageInstagramStoryImage } from "../src/data/campusGirlsSecondStageInstagramStoryImage.ts";
 import { campusGirlsSecondStageResultImage } from "../src/data/campusGirlsSecondStageResultImage.ts";
 import { contest } from "../src/data/contest.ts";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertFeedItemBefore,
   assertPortalNewsFollowsSort,

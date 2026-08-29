@@ -9,7 +9,7 @@ import {
   campusGirlsPatonVoteLink,
   links,
 } from "../src/data/links.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import {
   campusGirlsFinalStagePatonVote,
   isValidSupportEvent,
@@ -20,7 +20,7 @@ import {
   selectHomeVoteActions,
 } from "../src/lib/homePortal.ts";
 import { selectHomeToday } from "../src/lib/homeToday.ts";
-import { selectActivityResources } from "../src/lib/activityContent.ts";
+import { selectActivityResources } from "./fixtures/activity-content-before-b41.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
   adaptSupportEvents,

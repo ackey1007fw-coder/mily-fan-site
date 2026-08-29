@@ -218,8 +218,39 @@ export function verifyNews(items) {
         }
       }
     }
+    if (item.additionalCtas && !Array.isArray(item.additionalCtas)) {
+      errors.push(`news "${item.id ?? "?"}" additionalCtas must be an array`);
+    }
+    if (Array.isArray(item.additionalCtas)) {
+      const primaryCtaUrl = item.relatedUrl ?? item.url;
+      const seenCtas = new Set(primaryCtaUrl ? [primaryCtaUrl] : []);
+      for (const [index, cta] of item.additionalCtas.entries()) {
+        if (!cta?.label?.trim()) {
+          errors.push(
+            `news "${item.id ?? "?"}" additionalCtas[${index}] needs a label`,
+          );
+        }
+        if (!cta?.url || !isSafeHttpUrl(cta.url)) {
+          errors.push(
+            `news "${item.id ?? "?"}" additionalCtas[${index}] needs a confirmed http(s) URL`,
+          );
+        } else if (seenCtas.has(cta.url)) {
+          errors.push(
+            `news "${item.id ?? "?"}" additionalCtas[${index}] duplicates a CTA URL`,
+          );
+        } else {
+          seenCtas.add(cta.url);
+        }
+      }
+    }
     if (item.url) assertNewsRelatedHref(item.url, "news", item.id ?? "?", errors);
-    if (item.ctaLabel && !item.url && !item.source) {
+    if (item.relatedUrl) {
+      assertNewsRelatedHref(item.relatedUrl, "news", item.id ?? "?", errors);
+    }
+    if (item.url && item.relatedUrl) {
+      errors.push(`news "${item.id ?? "?"}" must not define both url and relatedUrl`);
+    }
+    if (item.ctaLabel && !item.relatedUrl && !item.url && !item.source) {
       errors.push(`news "${item.id ?? "?"}" ctaLabel needs a link target`);
     }
     if (item.message && !item.message.text?.trim()) {

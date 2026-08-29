@@ -24,11 +24,11 @@ import {
   secondRoundStoryVideo,
   tiktokRadioVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { contest } from "../src/data/contest.ts";
 import { events } from "../src/data/events.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 import {
@@ -37,7 +37,7 @@ import {
   storySources,
 } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import {

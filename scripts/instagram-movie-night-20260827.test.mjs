@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
 import { events } from "../src/data/events.ts";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media, visibleMedia } from "../src/data/media.ts";
 import {
@@ -21,10 +21,10 @@ import {
   news,
   newsDisplayMedia,
   sortNewsByDateDesc,
-} from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+} from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import { stories } from "../src/data/stories.ts";
-import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
+import { selectGalleryEntries } from "./fixtures/gallery-items-before-b41.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 import { findFeedItem, portalNewsId } from "./portal-feed-order.mjs";

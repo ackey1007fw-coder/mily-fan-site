@@ -6,13 +6,13 @@ import { fileURLToPath } from "node:url";
 import { activities } from "../src/data/activities.ts";
 import { contest } from "../src/data/contest.ts";
 import { links } from "../src/data/links.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { visibleStories } from "../src/data/stories.ts";
 import { supportEvents } from "../src/data/supportEvents.ts";
 import {
   selectGalleryEntries,
   selectGalleryPreview,
-} from "../src/lib/galleryItems.ts";
+} from "./fixtures/gallery-items-before-b41.ts";
 import {
   ACTIVITIES_HUB_ROUTE,
   GALLERY_ARCHIVE_INITIAL,

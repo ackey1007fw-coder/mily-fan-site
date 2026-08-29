@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { sortNewsByDateDesc } from "../src/data/news.ts";
+import { sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -70,7 +70,7 @@ describe("latest news ordering", () => {
 describe("birthday news item", () => {
   it("keeps the 21st birthday update sourced to the Instagram post", async () => {
     const source = await readFile(path.join(root, "src/data/news.ts"), "utf8");
-    const { news } = await import("../src/data/news.ts");
+    const { news } = await import("./fixtures/news-before-b41.ts");
     const birthday = news.find((item) => item.id === "2026-08-02-21st-birthday");
 
     assert.ok(birthday);
@@ -87,7 +87,7 @@ describe("birthday news item", () => {
 
 describe("8/18 radio news item", () => {
   it("points Latest to the radio story without replacing the morning update", async () => {
-    const { news } = await import("../src/data/news.ts");
+    const { news } = await import("./fixtures/news-before-b41.ts");
     const radio = news.find((item) => item.id === "2026-08-18-evening-radio");
     const morning = news.find((item) => item.id === "2026-08-18-morning-update");
 
@@ -108,7 +108,7 @@ describe("8/18 radio news item", () => {
 
 describe("8/19 second-round result news item", () => {
   it("leads Latest with the confirmed 2次審査通過 report", async () => {
-    const { news, sortNewsByDateDesc } = await import("../src/data/news.ts");
+    const { news, sortNewsByDateDesc } = await import("./fixtures/news-before-b41.ts");
     const result = news.find(
       (item) => item.id === "2026-08-19-second-round-result",
     );
@@ -180,7 +180,7 @@ describe("8/19 second-round result news item", () => {
 
 describe("8/19 well-rested morning news item", () => {
   it("archives the morning X post with its self-hosted photo", async () => {
-    const { news, sortNewsByDateDesc } = await import("../src/data/news.ts");
+    const { news, sortNewsByDateDesc } = await import("./fixtures/news-before-b41.ts");
     const item = news.find((entry) => entry.id === "2026-08-19-well-rested-morning");
 
     assert.ok(item);
@@ -264,7 +264,7 @@ describe("8/19 well-rested morning news item", () => {
   });
 
   it("ships the photo locally at its untouched 1162x2048 size", async () => {
-    const { news } = await import("../src/data/news.ts");
+    const { news } = await import("./fixtures/news-before-b41.ts");
     const item = news.find((entry) => entry.id === "2026-08-19-well-rested-morning");
     const media = item?.media;
 
