@@ -148,12 +148,13 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
     const night = newsItem(fixtures[0].newsId);
     const paton = newsItem(fixtures[1].newsId);
 
-    assert.equal(ordered[0]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(ordered[1]?.id, "2026-08-29-showroom-radio-1440");
-    assert.equal(ordered[2], paton);
-    assert.equal(ordered[3]?.id, "2026-08-28-stream-thanks");
-    assert.equal(ordered[4], night);
-    assert.equal(ordered[5]?.id, "2026-08-28-paton-vote-day-3");
+    assert.equal(ordered[0]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[1]?.id, "2026-08-29-showroom-live-third-round");
+    assert.equal(ordered[2]?.id, "2026-08-29-showroom-radio-1440");
+    assert.equal(ordered[3], paton);
+    assert.equal(ordered[4]?.id, "2026-08-28-stream-thanks");
+    assert.equal(ordered[5], night);
+    assert.equal(ordered[6]?.id, "2026-08-28-paton-vote-day-3");
     assert.equal(night?.sameDayOrder, 1);
     assert.deepEqual(night?.activityIds, ["live-stream"]);
     assert.deepEqual(paton?.activityIds, ["campus-girls"]);
@@ -231,7 +232,8 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
   it("surfaces the new records and canonical videos on their explicit Activities", () => {
     const campusNews = selectActivityNews("campus-girls", news, news.length);
     const liveNews = selectActivityNews("live-stream", news, news.length);
-    assert.equal(campusNews[0]?.id, fixtures[1].newsId);
+    assert.equal(campusNews[0]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(campusNews[1]?.id, fixtures[1].newsId);
     assert.equal(liveNews[0]?.id, "2026-08-29-showroom-live-third-round");
     assert.equal(liveNews[1]?.id, "2026-08-29-showroom-radio-1440");
     assert.equal(liveNews[2]?.id, "2026-08-28-stream-thanks");

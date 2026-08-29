@@ -4,14 +4,15 @@ import {
   type GalleryVideoItem,
 } from "../../src/data/galleryVideos.ts";
 
-const batch41VideoIds = new Set([
+const laterVideoIds = new Set([
   "mily-b41-01-night-showroom-story",
   "mily-b41-02-paton-vote-day4-story",
+  "mixch-m-UBHJplv4",
 ]);
 
 /** Historical view used by pre-b41 regression tests. */
 export const galleryVideos: GalleryVideoItem[] = currentGalleryVideos.filter(
-  ({ id }) => !batch41VideoIds.has(id),
+  ({ id }) => !laterVideoIds.has(id),
 );
 
 export function visibleGalleryVideos(

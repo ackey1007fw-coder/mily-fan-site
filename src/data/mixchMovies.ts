@@ -29,6 +29,22 @@ export function isMixchMovie(item: { kind: string }): item is MixchMovie {
   return item.kind === "mixch";
 }
 
+/** 2026-08-30 Mixch「配信＆ムービーは今日が最終日」 https://mixch.tv/m/UBHJplv4 */
+export const mixchFinalDayMovie: MixchMovie = {
+  id: "mixch-m-UBHJplv4",
+  kind: "mixch",
+  mixchUrl: "https://mixch.tv/m/UBHJplv4",
+  poster:
+    "https://d2jtsb989t238a.cloudfront.net/m/2tsdxnj2piovgatx1rzg53hk4oge2mmuh9l30bkc2gmbho284ipo3ami68wmx006hlrt840aprzz3rt2zxjan20k22i1g2km8861m6ap727oqgz12w3sos03j6prf4nt/thumb_normal",
+  width: 480,
+  height: 853,
+  alt: "Mixch動画「配信＆ムービーは今日が最終日」のサムネイル。再生するとMixchで開きます",
+  title: "配信＆ムービーは今日が最終日",
+  published: true,
+  sourceDate: "2026-08-30",
+  accountUrl: CONFIRMED_MIXCH_ACCOUNT_URL,
+};
+
 /** 2026-08-27 Mixch「表情豊かなみりぃと魅力的でしょう？？？？」 https://mixch.tv/m/VDojsMY5 */
 export const mixchExpressiveMovie: MixchMovie = {
   id: "mixch-m-VDojsMY5",
@@ -79,6 +95,7 @@ export const mixchConfidenceMessageMovie: MixchMovie = {
 
 /** Newest first. NEWS and Gallery import these objects; do not copy Mixch files. */
 export const mixchMovies: MixchMovie[] = [
+  mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,

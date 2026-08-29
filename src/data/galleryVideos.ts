@@ -27,6 +27,7 @@ import {
   type TikTokSayonaraIchigoVideo,
 } from "./tiktokSayonaraIchigoVideo.ts";
 import {
+  mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
@@ -43,6 +44,7 @@ export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
   earthquakeSafetyStoryVideo,
   eventStory20260821,
+  mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
@@ -101,6 +103,7 @@ export const galleryVideos: GalleryVideoItem[] = [
   secondRoundStoryVideo,
   morningStoryVideo,
   tiktokSayonaraIchigoVideo,
+  mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
