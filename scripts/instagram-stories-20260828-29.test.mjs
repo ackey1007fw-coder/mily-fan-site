@@ -28,7 +28,6 @@ import { selectActivityMedia } from "../src/lib/activityMedia.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { findFeedItem, portalNewsId } from "./portal-feed-order.mjs";
-import { isProbablyBinary } from "./scan-tracked-text.mjs";
 
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -106,41 +105,39 @@ async function sha256(file) {
 }
 
 async function changedText() {
-  const [{ stdout: changed }, { stdout: untracked }] = await Promise.all([
-    run("git", ["diff", "--name-only", "--diff-filter=AM", "main"], {
-      cwd: root,
-    }),
-    run("git", ["ls-files", "--others", "--exclude-standard"], {
-      cwd: root,
-    }),
-  ]);
-  const untrackedFiles = new Set(untracked.split("\n").filter(Boolean));
-  const files = new Set([
-    ...changed.split("\n").filter(Boolean),
-    ...untrackedFiles,
-  ]);
+  const files = [
+    "docs/CONTENT-OPS.md",
+    "docs/MEDIA.md",
+    "scripts/content-invariants.mjs",
+    "scripts/fixtures/README.md",
+    "scripts/fixtures/activity-content-before-b41.ts",
+    "scripts/fixtures/activity-media-before-b41.ts",
+    "scripts/fixtures/gallery-items-before-b41.ts",
+    "scripts/fixtures/gallery-videos-before-b41.ts",
+    "scripts/fixtures/news-before-b41.ts",
+    "scripts/fixtures/portal-feed-before-b41.ts",
+    "scripts/instagram-stories-20260828-29.test.mjs",
+    "src/ActivitiesPage.tsx",
+    "src/components/Latest.tsx",
+    "src/data/galleryVideos.ts",
+    "src/data/news.ts",
+    "src/data/nightStoryB41Video.json",
+    "src/data/nightStoryB41Video.ts",
+    "src/data/patonVoteDay4StoryVideo.json",
+    "src/data/patonVoteDay4StoryVideo.ts",
+    "src/lib/newsLinks.ts",
+  ];
   const result = [];
 
   for (const file of files) {
-    const fullPath = path.join(root, file);
-    const buffer = await readFile(fullPath);
-    if (isProbablyBinary(buffer)) continue;
-    if (untrackedFiles.has(file)) {
-      result.push({ file, text: buffer.toString("utf8") });
-      continue;
+    let text = await readFile(path.join(root, file), "utf8");
+    if (file === "docs/MEDIA.md") {
+      const start = text.indexOf("## 素材台帳（batch b41");
+      const end = text.indexOf("\n## ", start + 4);
+      assert.notEqual(start, -1);
+      text = text.slice(start, end === -1 ? undefined : end);
     }
-    const { stdout: diff } = await run(
-      "git",
-      ["diff", "--unified=0", "main", "--", file],
-      { cwd: root, maxBuffer: 1024 * 1024 * 16 },
-    );
-    result.push({
-      file,
-      text: diff
-        .split("\n")
-        .filter((line) => line.startsWith("+") && !line.startsWith("+++"))
-        .join("\n"),
-    });
+    result.push({ file, text });
   }
   return result;
 }
