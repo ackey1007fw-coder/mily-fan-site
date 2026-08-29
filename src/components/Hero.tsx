@@ -24,8 +24,10 @@ export function Hero() {
     now,
   });
   const [voteAction, ...additionalVoteActions] = voteActions;
-  const seasideCircleTikTok = links.find(
-    (link) => link.id === "fm-smw-ssc-tiktok",
+  const seasideCircleLinks = links.filter(
+    (link) =>
+      link.id === "fm-smw-ssc-program" ||
+      link.id === "fm-smw-ssc-tiktok",
   );
   const showPatonHowTo = isSupportEventUrlActive({
     url: campusGirlsPatonVoteLink.url,
@@ -116,23 +118,21 @@ export function Hero() {
             ))}
           </div>
           <Socials />
-          {seasideCircleTikTok ? (
+          {seasideCircleLinks.length > 0 ? (
             <div
-              className="mt-3 flex flex-wrap items-center gap-2"
+              className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap"
               role="group"
-              aria-label="湘南シーサイドサークル 番組SNS"
+              aria-label="湘南シーサイドサークル 番組リンク"
             >
-              <ExternalLink
-                href={seasideCircleTikTok.url}
-                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
-              >
-                {seasideCircleTikTok.label}
-              </ExternalLink>
-              {seasideCircleTikTok.note ? (
-                <span className="text-xs text-ink-muted">
-                  {seasideCircleTikTok.note}
-                </span>
-              ) : null}
+              {seasideCircleLinks.map((link) => (
+                <ExternalLink
+                  key={link.id}
+                  href={link.url}
+                  className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
+                >
+                  {link.label}
+                </ExternalLink>
+              ))}
             </div>
           ) : null}
         </div>
