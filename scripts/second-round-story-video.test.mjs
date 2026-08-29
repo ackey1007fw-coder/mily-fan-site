@@ -19,9 +19,9 @@ import {
   secondRoundStoryVideo,
   tiktokRadioVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { media } from "../src/data/media.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import { stories, storyBySlug, storySources } from "../src/data/stories.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 

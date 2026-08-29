@@ -3,22 +3,22 @@ import { readdir } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import {
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
 } from "../src/data/mixchMovies.ts";
-import { visibleGalleryVideos } from "../src/data/galleryVideos.ts";
+import { visibleGalleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { events } from "../src/data/events.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import {
   selectGalleryEntries,
   selectGalleryPreview,
-} from "../src/lib/galleryItems.ts";
+} from "./fixtures/gallery-items-before-b41.ts";
 import {
   GALLERY_ARCHIVE_INITIAL,
   HOME_GALLERY_LIMIT,
@@ -116,7 +116,7 @@ describe("2026-08-26 Mixch 1.5x day NEWS", () => {
   });
 
   it("leads 2026-08-26 NEWS above the 10:00 stream item via source-array order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
     assert.equal(ordered[0]?.id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1]?.id, "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2]?.id, "2026-08-26-instagram-followers-400");

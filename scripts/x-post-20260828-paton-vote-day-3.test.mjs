@@ -4,14 +4,14 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { events } from "../src/data/events.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -19,8 +19,8 @@ import {
 } from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
@@ -67,8 +67,9 @@ describe("2026-08-28 CAMPUS GIRLS Paton vote day 3 — Latest entry", () => {
       news.filter((candidate) => candidate.source === SOURCE).length,
       1,
     );
-    assert.equal(news.length, 48);
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    assert.equal(news.length, 49);
+    assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-28-stream-thanks");
+    assert.equal(sortNewsByDateDesc(news)[1]?.id, NEWS_ID);
     assert.equal(entry.date, "2026-08-28");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);

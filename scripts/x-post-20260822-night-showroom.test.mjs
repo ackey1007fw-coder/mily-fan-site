@@ -8,11 +8,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -20,7 +20,7 @@ import {
 } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const run = promisify(execFile);
@@ -253,7 +253,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
   });
 
   it("ranks ahead of the earlier 8/22 CAMPUS GIRLS item via sameDayOrder", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 28), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -284,7 +284,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
   });
 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {

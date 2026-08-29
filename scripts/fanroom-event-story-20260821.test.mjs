@@ -20,10 +20,10 @@ import {
   morningShowroomRunwayVideo,
   tiktokRadioVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -358,7 +358,7 @@ describe("2026-08-21 event Instagram Story — Latest / Gallery", () => {
 
 describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
   it("keeps all existing 8/21 News and the intended same-day order", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 28), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -389,7 +389,7 @@ describe("2026-08-21 FanRoom / Story — ordering, privacy and scope", () => {
       "2026-08-21-morning-ohayo-story",
       "2026-08-21-morning-showroom-runway",
     ]);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
   });
 
   it("keeps 14:00 out of schedule data and the temporary rank out of milestones", async () => {

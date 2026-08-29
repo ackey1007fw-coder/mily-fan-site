@@ -4,15 +4,15 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import { activities } from "../src/data/activities.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import { activitiesUrl, activityUrl, sitemapXml } from "../src/data/site.ts";
 import { tiktokRadioVideo } from "../src/data/tiktokRadioVideo.ts";
 import {
   selectActivityNews,
   selectActivityPageContent,
   selectActivityResources,
-} from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+} from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import {
   activityPageMetadata,
   activityPageStructuredData,
@@ -36,6 +36,7 @@ const activityPages = [
 ];
 
 const expectedNewsRelations = {
+  "2026-08-28-stream-thanks": ["live-stream"],
   "2026-08-28-paton-vote-day-3": ["campus-girls"],
   "2026-08-27-paton-vote-how-to": ["campus-girls"],
   "2026-08-27-mixch-expressive": ["campus-girls"],

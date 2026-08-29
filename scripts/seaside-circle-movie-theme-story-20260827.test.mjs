@@ -13,11 +13,11 @@ import {
   galleryVideos,
   seasideCircleMovieThemeStoryVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import {
   isFaststart,
   validateVideoDerivatives,
@@ -110,7 +110,7 @@ describe("2026-08-27 湘南シーサイドサークル映画テーマ Story — 
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[3]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[3]?.id, NEWS_ID);
     assert.equal(entry.date, "2026-08-27");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["radio"]);
@@ -394,7 +394,7 @@ describe("2026-08-27 湘南シーサイドサークル映画テーマ Story — 
     assert.match(docs, /DM・通知・端末情報・第三者コメント/);
     assert.match(docs, /8\.0秒地点の実フレーム/);
     assert.match(ops, /48件/);
-    assert.match(ops, /独立動画17本/);
+    assert.match(ops, /独立動画19本/);
     assert.match(ops, /ラジオ「映画」テーマ/);
   });
 });

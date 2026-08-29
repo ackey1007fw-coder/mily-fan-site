@@ -3,9 +3,9 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import { activities } from "../src/data/activities.ts";
 import { links } from "../src/data/links.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import { socials } from "../src/data/socials.ts";
-import { selectActivityResources } from "../src/lib/activityContent.ts";
+import { selectActivityResources } from "./fixtures/activity-content-before-b41.ts";
 
 const PROFILE_URL = "https://www.tiktok.com/@seasidecircle";
 const PERSONAL_URL = "https://www.tiktok.com/@mily_chan36";

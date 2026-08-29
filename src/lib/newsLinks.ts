@@ -6,6 +6,7 @@ import { isSupportEventUrlActive } from "./supportEventLinks.ts";
 export type ResolvedNewsLinks = {
   relatedUrl?: string;
   cta?: { label: string; url: string };
+  additionalCtas?: { label: string; url: string }[];
 };
 
 /**
@@ -20,22 +21,34 @@ export function resolveNewsLinks(
     throw new Error("now must be a finite timestamp");
   }
 
+  const relatedTarget = item.relatedUrl ?? item.url;
   const relatedUrl =
-    item.url &&
+    relatedTarget &&
     isSupportEventUrlActive({
-      url: item.url,
+      url: relatedTarget,
       links,
       supportEvents,
       now,
     })
-      ? item.url
+      ? relatedTarget
       : undefined;
-  const ctaUrl = item.url ? relatedUrl : item.source;
+  const ctaUrl = relatedTarget ? relatedUrl : item.source;
+  const additionalCtas = (item.additionalCtas ?? []).filter(
+    ({ url }) =>
+      url !== ctaUrl &&
+      isSupportEventUrlActive({
+        url,
+        links,
+        supportEvents,
+        now,
+      }),
+  );
 
   return {
     ...(relatedUrl ? { relatedUrl } : {}),
     ...(item.ctaLabel && ctaUrl
       ? { cta: { label: item.ctaLabel, url: ctaUrl } }
       : {}),
+    ...(additionalCtas.length > 0 ? { additionalCtas } : {}),
   };
 }

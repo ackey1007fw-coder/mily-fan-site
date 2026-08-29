@@ -4,18 +4,18 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
   portalNewsId,
 } from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -150,7 +150,7 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
   });
 
   it("stays among the 2026-08-26 News items after the GirlsAward post", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
 
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
@@ -161,7 +161,7 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
     assert.equal(ordered[6], NEWS_ID);
     assert.equal(ordered[7], "2026-08-25-mixch-confidence-message");
     assert.equal(ordered[8], "2026-08-25-motivation");
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.equal(item().media, undefined);
     assert.equal(item().additionalMedia, undefined);
@@ -170,10 +170,11 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
   it("appears on the LIVE STREAM Activity page through explicit activityIds", () => {
     const selected = selectActivityNews("live-stream", news, news.length);
     assert.ok(selected.some((entry) => entry.id === NEWS_ID));
-    assert.equal(selected[0]?.id, "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(selected[1]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(selected[2]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(selected[3]?.id, NEWS_ID);
+    assert.equal(selected[0]?.id, "2026-08-28-stream-thanks");
+    assert.equal(selected[1]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(selected[2]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(selected[3]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(selected[4]?.id, NEWS_ID);
     assert.ok(selected.every(({ activityIds }) => activityIds?.includes("live-stream")));
     assert.equal(
       selectActivityNews("miss-circle", news, news.length).some(

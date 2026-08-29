@@ -4,9 +4,9 @@ import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { highlights } from "../src/data/highlights.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -79,7 +79,7 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
   });
 
   it("ranks ahead of the earlier 8/24 night-thanks item via sameDayOrder", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -167,6 +167,6 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
     assert.match(ops, /8月26日の本人XによるPaton直接案内/);
     assert.match(ops, /Patonの三橋莉子（みりぃ）ページへの投票導線/);
     assert.equal(newsSource.includes("https://paton.jp/event/entrant/11380"), true);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
   });
 });

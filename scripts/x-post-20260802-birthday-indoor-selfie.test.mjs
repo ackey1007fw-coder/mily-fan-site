@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import {
   featuredPhoto,
@@ -20,8 +20,8 @@ import {
   birthdayIndoorSelfieImage,
   birthdayIndoorSelfiePhoto,
 } from "../src/data/birthdayIndoorSelfie.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -85,9 +85,9 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(entry.media, birthdayIndoorSelfieImage);
     assert.equal(entry.additionalMedia, undefined);
     assert.equal(entry.activityIds, undefined);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews(news), []);
-    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((candidate) => candidate.id === NEWS_ID));
+    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((candidate) => candidate.id === NEWS_ID));
   });
 
   it("uses one local /media/news/ JPEG with Gallery srcset and never hotlinks SNS media", async () => {

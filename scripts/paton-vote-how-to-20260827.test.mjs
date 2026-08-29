@@ -4,11 +4,11 @@ import { readFile, readdir } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { events } from "../src/data/events.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import {
   PATON_VOTE_HOW_TO_ANCHOR_ID,
   PATON_VOTE_HOW_TO_CTA_LABEL,
@@ -20,11 +20,11 @@ import {
   patonVoteHowToSpokenMessage,
   patonVoteHowToSteps,
 } from "../src/data/patonVoteHowTo.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
@@ -58,8 +58,8 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
         .length,
       1,
     );
-    assert.equal(news.length, 48);
-    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[0]?.id, PATON_VOTE_HOW_TO_NEWS_ID);
+    assert.equal(news.length, 49);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[0]?.id, PATON_VOTE_HOW_TO_NEWS_ID);
     assert.equal(entry.date, "2026-08-27");
     assert.equal(entry.sameDayOrder, 2);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);

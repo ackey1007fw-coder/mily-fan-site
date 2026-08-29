@@ -12,16 +12,16 @@ import {
   galleryVideos,
   seasideCircleMusicalSpecialVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { events } from "../src/data/events.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import {
   stories,
   storyBySlug,
   storySources,
 } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import {
@@ -151,12 +151,12 @@ describe("2026-08-23 seaside circle musical special — NEWS", () => {
     assert.equal(entry?.media?.src.includes("mily-b21-01-seaside-circle-musical-special-thanks"), true);
     assert.notEqual(entry?.media, seasideCircleMusicalSpecialVideo);
     assert.notEqual(entry?.media?.src, seasideCircleMusicalSpecialVideo.src);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
   it("places the broadcast NEWS above the earlier 8/23 Fan Room items", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");

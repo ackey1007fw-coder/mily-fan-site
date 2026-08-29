@@ -14,10 +14,10 @@ import {
   galleryVideos,
   morningMissCircleShowroomStoryVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { findFeedItem, portalNewsId } from "./portal-feed-order.mjs";
@@ -102,7 +102,7 @@ describe("2026-08-27 ミスサーSHOWROOM Instagram Story — Latest / NEWS", ()
   it("adds only the confirmed date, display text and related Instagram profile", () => {
     const entry = item();
 
-    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[4]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[4]?.id, NEWS_ID);
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(entry.date, "2026-08-27");

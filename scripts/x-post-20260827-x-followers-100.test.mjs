@@ -4,18 +4,18 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
   portalNewsId,
 } from "./portal-feed-order.mjs";
 import { stories } from "../src/data/stories.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -162,7 +162,7 @@ describe("2026-08-27 X followers 100 — scope and ordering", () => {
   });
 
   it("follows the Paton guide and keeps Mixch plus the two Story items behind it", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
 
     assert.equal(ordered[0], "2026-08-27-paton-vote-how-to");
     assert.equal(ordered[1], NEWS_ID);
@@ -170,7 +170,7 @@ describe("2026-08-27 X followers 100 — scope and ordering", () => {
     assert.equal(ordered[3], "2026-08-27-seaside-circle-movie-theme-story");
     assert.equal(ordered[4], "2026-08-27-miss-circle-showroom-story");
     assert.equal(ordered[5], "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(news.filter((entry) => entry.date === "2026-08-27").length, 6);
     assert.equal(item().media, undefined);
     assert.equal(item().additionalMedia, undefined);

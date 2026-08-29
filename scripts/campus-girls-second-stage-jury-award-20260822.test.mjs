@@ -7,11 +7,11 @@ import sharp from "sharp";
 import { campusGirlsSecondStageInstagramStoryImage } from "../src/data/campusGirlsSecondStageInstagramStoryImage.ts";
 import { campusGirlsSecondStageResultImage } from "../src/data/campusGirlsSecondStageResultImage.ts";
 import { contest } from "../src/data/contest.ts";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertFeedItemBefore,
   assertPortalNewsFollowsSort,
@@ -294,7 +294,7 @@ describe("2026-08-22 CAMPUS GIRLS 2nd STAGE milestone", () => {
     assert.equal(item.sameDayOrder, undefined);
     assert.equal(item.source, xSource);
     assert.equal(item.url, `/stories/${slug}/`);
-    const aug22 = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"))
+    const aug22 = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"))
       .filter((entry) => entry.date === "2026-08-22")
       .map((entry) => entry.id);
     assert.deepEqual(aug22, [

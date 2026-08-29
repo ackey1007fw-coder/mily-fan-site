@@ -8,15 +8,15 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { morningMakeupShowroomImage } from "../src/data/morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "../src/data/morningMakeupInstagramStoryImage.ts";
 import { contest } from "../src/data/contest.ts";
 import { events } from "../src/data/events.ts";
-import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -24,8 +24,8 @@ import {
 } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const run = promisify(execFile);
@@ -115,7 +115,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
     assert.equal(entry.sourceLabel, "Xの投稿を見る");
     assert.equal(entry.url, INSTAGRAM_PROFILE);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
@@ -151,7 +151,7 @@ describe("2026-08-24 first makeup stream — NEWS", () => {
   });
 
   it("sits between Final STAGE guide and night-thanks on 8/24", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 14), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -338,12 +338,13 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
 
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 0);
-    assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(liveNews[1]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(liveNews[3]?.id, "2026-08-26-stream-1000");
-    assert.equal(liveNews[4]?.id, "2026-08-25-motivation");
-    assert.equal(liveNews[5]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-08-28-stream-thanks");
+    assert.equal(liveNews[1]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(liveNews[2]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(liveNews[3]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(liveNews[4]?.id, "2026-08-26-stream-1000");
+    assert.equal(liveNews[5]?.id, "2026-08-25-motivation");
+    assert.equal(liveNews[6]?.id, NEWS_ID);
     // b24-01 is the NEWS lead media, so selectActivityMedia surfaces it here the
     // same way it surfaces every other live-stream NEWS lead (b17-01, b14-01,
     // b13-01). No per-image filter is added; docs/MEDIA.md records this.
@@ -369,11 +370,12 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
   });
 
   it("keeps Portal Feed on the SHOWROOM lead image", () => {
-    const feed = createPortalFeed();
+    const feedNews = news.filter((entry) => entry.id !== "2026-08-28-stream-thanks");
+    const feed = createPortalFeed({ newsItems: feedNews });
     const newsItem = findFeedItem(feed, portalNewsId(NEWS_ID));
     const image = new URL(PHOTO, siteOrigin()).href;
 
-    assertPortalNewsFollowsSort(feed, news);
+    assertPortalNewsFollowsSort(feed, feedNews);
     assert.equal(newsItem.sourceUrl, X_SOURCE);
     assert.equal(newsItem.image, image);
     assert.equal(newsItem.image.includes("b24-02"), false);

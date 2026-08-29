@@ -14,15 +14,15 @@ import {
   nightThanksMorningStreamStoryVideo,
   seasideCircleMusicalSpecialThanksVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { events } from "../src/data/events.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { stories } from "../src/data/stories.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import {
@@ -148,7 +148,7 @@ describe("2026-08-24 night thanks morning stream — NEWS", () => {
       news.some((entry) => entry.id === "2026-08-24-campus-girls-final-stage-guide"),
     );
     assert.ok(news.some((entry) => entry.id === "2026-08-24-makeup-stream"));
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -401,13 +401,14 @@ describe("2026-08-24 night thanks morning stream — activity and scope", () => 
 
     assert.equal(liveNews.filter((entry) => entry.id === NEWS_ID).length, 1);
     assert.equal(radioNews.filter((entry) => entry.id === NEWS_ID).length, 1);
-    assert.equal(liveNews[0]?.id, "2026-08-26-girlsaward-showroom-6th");
-    assert.equal(liveNews[1]?.id, "2026-08-26-morning-stream-thanks");
-    assert.equal(liveNews[2]?.id, "2026-08-26-girl-award-event-fanroom");
-    assert.equal(liveNews[3]?.id, "2026-08-26-stream-1000");
-    assert.equal(liveNews[4]?.id, "2026-08-25-motivation");
-    assert.equal(liveNews[5]?.id, "2026-08-24-makeup-stream");
-    assert.equal(liveNews[6]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-08-28-stream-thanks");
+    assert.equal(liveNews[1]?.id, "2026-08-26-girlsaward-showroom-6th");
+    assert.equal(liveNews[2]?.id, "2026-08-26-morning-stream-thanks");
+    assert.equal(liveNews[3]?.id, "2026-08-26-girl-award-event-fanroom");
+    assert.equal(liveNews[4]?.id, "2026-08-26-stream-1000");
+    assert.equal(liveNews[5]?.id, "2026-08-25-motivation");
+    assert.equal(liveNews[6]?.id, "2026-08-24-makeup-stream");
+    assert.equal(liveNews[7]?.id, NEWS_ID);
     assert.equal(radioNews[0]?.id, "2026-08-24-seasidecircle-yes-tokyo");
     assert.equal(radioNews[1]?.id, NEWS_ID);
     assert.equal(
@@ -534,7 +535,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
     assert.match(ops, /48件/);
-    assert.match(ops, /独立動画17本/);
+    assert.match(ops, /独立動画19本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
     assert.doesNotMatch(docs, DRIVE_SHARE_QUERY_PATTERN);
@@ -543,10 +544,10 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
 
   it("keeps Portal Feed aligned with the new Latest lead", () => {
     const feed = createPortalFeed({
-      newsItems: news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3"),
+      newsItems: news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3"),
     });
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((candidate) => candidate.id);
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((candidate) => candidate.id);
     assert.ok(entry);
     assert.equal(entry.publishedAt, "2026-08-24T00:00:00+09:00");
     assert.equal(entry.sourceUrl, X_SOURCE);

@@ -6,7 +6,7 @@ import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");

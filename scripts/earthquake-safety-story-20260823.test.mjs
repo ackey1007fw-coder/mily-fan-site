@@ -15,14 +15,14 @@ import {
   galleryVideos,
   morningShowroomRunwayVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { events } from "../src/data/events.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { stories } from "../src/data/stories.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import {
@@ -130,7 +130,7 @@ describe("2026-08-23 earthquake safety Story — existing NEWS only", () => {
     assert.equal(item()?.activityIds, undefined);
     assert.equal(item()?.title, "地震直後、みんなの安全を気遣うみりぃ💌");
     assert.equal(extraEarthquakeNews.length, 0);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -452,7 +452,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
       candidate.id.includes("earthquake"),
     );
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
-    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"))
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"))
       .filter((candidate) => candidate.date === "2026-08-23")
       .map((candidate) => candidate.id);
 

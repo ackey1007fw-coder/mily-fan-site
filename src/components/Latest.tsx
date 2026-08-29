@@ -143,15 +143,26 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
           ) : null}
         </p>
       ) : null}
-      {resolvedLinks.cta ? (
-        <p className="mt-4">
-          <NewsLink
-            href={resolvedLinks.cta.url}
-            className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
-          >
-            {resolvedLinks.cta.label}
-          </NewsLink>
-        </p>
+      {resolvedLinks.cta || resolvedLinks.additionalCtas?.length ? (
+        <div className="mt-4 flex flex-wrap gap-2">
+          {resolvedLinks.cta ? (
+            <NewsLink
+              href={resolvedLinks.cta.url}
+              className="inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
+            >
+              {resolvedLinks.cta.label}
+            </NewsLink>
+          ) : null}
+          {resolvedLinks.additionalCtas?.map((cta) => (
+            <NewsLink
+              key={cta.url}
+              href={cta.url}
+              className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+            >
+              {cta.label}
+            </NewsLink>
+          ))}
+        </div>
       ) : null}
     </li>
   );

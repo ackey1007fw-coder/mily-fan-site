@@ -22,6 +22,8 @@ import {
 } from "./morningStoryVideo.ts";
 import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { morningMissCircleShowroomStoryVideo } from "./morningMissCircleShowroomStoryVideo.ts";
+import { nightStoryB41Video } from "./nightStoryB41Video.ts";
+import { patonVoteDay4StoryVideo } from "./patonVoteDay4StoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -152,8 +154,12 @@ export type NewsItem = {
   source?: string;
   sourceLabel?: string;
   additionalSources?: NewsSourceLink[];
+  /** Related destination or CTA that is not evidence for this NEWS record. */
+  relatedUrl?: string;
   url?: string;
   ctaLabel?: string;
+  /** Extra action buttons. Support-event URLs are shown only in their confirmed window. */
+  additionalCtas?: NewsSourceLink[];
   media?: NewsMedia;
   /** Extra stills/videos on the same NEWS card. Lead image stays `media`. */
   additionalMedia?: NewsMedia[];
@@ -168,6 +174,100 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-29-showroom-live-third-round",
+    date: "2026-08-29",
+    sameDayOrder: 3,
+    activityIds: ["miss-circle", "live-stream"],
+    title: "配信中！9/3〜3次審査、素敵な景色を一緒に見に行きたい",
+    body: "8月29日、みりぃがXでSHOWROOM配信中であることを伝えました。9月3日から3次審査が始まることと、「素敵な景色を皆さんと一緒に見に行きたい」という言葉も残されています。",
+    source: "https://x.com/Mily_chan36/status/2093575115913224580",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text: "🔥2次審査🩵三橋莉子🍅 #ミスサークル2026 配信中‼︎\n📌9/3〜3次審査‼️\n素敵な景色を皆さんと一緒に見に行きたい😤✊🏻✨\nhttps://www.showroom-live.com/r/circle2026_0734?t=1787982168",
+    },
+  },
+  {
+    id: "2026-08-29-showroom-radio-1440",
+    date: "2026-08-29",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "SR配信（ラジオ）14:40〜始めるね⭐️",
+    body: "8月29日、みりぃがXで14:40からのSHOWROOMラジオ配信を案内しました。配信前の記録です。",
+    source: "https://x.com/Mily_chan36/status/2093572006457557333",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text: "SR配信（ラジオ📻🗣️）\n14:40〜始めるね⭐️\n\n#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026",
+    },
+  },
+  {
+    id: "2026-08-29-paton-vote-day-4-story",
+    date: "2026-08-29",
+    activityIds: ["campus-girls"],
+    title: "日付変わりました！4日目のPaton投票もお願いします🗳️🍅",
+    body: "8月29日、みりぃがInstagram Storyで、CAMPUS GIRLS 2027予選ファイナルのPaton投票4日目を案内しました。「私もみんなと一緒に頑張るよ」と伝え、応援を呼びかけています。",
+    sourceLabel: patonVoteDay4StoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: patonVoteDay4StoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "日付変わりました!!\n4日目のパトンもお願いします🥹✊🏻✨\n私もみんなと一緒に頑張るよ",
+    },
+  },
+  {
+    id: "2026-08-28-stream-thanks",
+    date: "2026-08-28",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "今日の配信ありがとう！おつみりぃ💤",
+    body: "8月28日夜、みりぃがXでその日の配信へのお礼を伝えました。パトン投票もとても助かっていること、翌日の配信時間はまだ確定していないのでまた連絡することを案内し、「おつみりぃ」と締めくくっています。",
+    source: "https://x.com/Mily_chan36/status/2093347548388110372",
+    sourceLabel: "Xの投稿を見る",
+    message: {
+      label: "みりぃの投稿",
+      text: `みんなー！今日の配信も来てくれてありがとうね😊🫶🏻❤️‍🔥
+パトン投票もとても助かっております🗳️✨
+
+明日の配信時間はまだ確定していないので、また連絡するねー！
+おつみりぃ💤💤💤
+#ミスサークル #ミスサー #ミスサークルコンテスト #ミスサークルコンテスト2026`,
+    },
+  },
+  {
+    id: "2026-08-28-night-showroom-story",
+    date: "2026-08-28",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "8/28 22:00〜SHOWROOM配信！夜枠も待ってるね💘",
+    body: "8月28日のInstagram Storyで、みりぃが22:00からのSHOWROOM配信を案内しました。「夜枠も楽しもう〜 待ってるぞ〜」と呼びかけた、配信前の記録です。",
+    sourceLabel: nightStoryB41Video.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: nightStoryB41Video,
+    message: {
+      label: "みりぃのStory",
+      text: "夜枠も楽しもう〜\n待ってるぞ〜💘✨\n\n【8/28（金）】\nSR配信\n22:00〜",
+    },
+  },
   {
     id: "2026-08-28-paton-vote-day-3",
     date: "2026-08-28",

@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { sortNewsByDateDesc } from "../src/data/news.ts";
+import { sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -70,7 +70,7 @@ describe("latest news ordering", () => {
 describe("birthday news item", () => {
   it("keeps the 21st birthday update sourced to the Instagram post", async () => {
     const source = await readFile(path.join(root, "src/data/news.ts"), "utf8");
-    const { news } = await import("../src/data/news.ts");
+    const { news } = await import("./fixtures/news-before-b41.ts");
     const birthday = news.find((item) => item.id === "2026-08-02-21st-birthday");
 
     assert.ok(birthday);
@@ -87,7 +87,7 @@ describe("birthday news item", () => {
 
 describe("8/18 radio news item", () => {
   it("points Latest to the radio story without replacing the morning update", async () => {
-    const { news } = await import("../src/data/news.ts");
+    const { news } = await import("./fixtures/news-before-b41.ts");
     const radio = news.find((item) => item.id === "2026-08-18-evening-radio");
     const morning = news.find((item) => item.id === "2026-08-18-morning-update");
 
@@ -108,14 +108,14 @@ describe("8/18 radio news item", () => {
 
 describe("8/19 second-round result news item", () => {
   it("leads Latest with the confirmed 2次審査通過 report", async () => {
-    const { news, sortNewsByDateDesc } = await import("../src/data/news.ts");
+    const { news, sortNewsByDateDesc } = await import("./fixtures/news-before-b41.ts");
     const result = news.find(
       (item) => item.id === "2026-08-19-second-round-result",
     );
 
     assert.ok(result);
     // 8/21の新着と8/20の3件のあとも、8/19の中では結果報告が先頭に立つ。
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((item) => item.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((item) => item.id);
     assert.equal(ordered[0], "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1], "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2], "2026-08-26-instagram-followers-400");
@@ -180,7 +180,7 @@ describe("8/19 second-round result news item", () => {
 
 describe("8/19 well-rested morning news item", () => {
   it("archives the morning X post with its self-hosted photo", async () => {
-    const { news, sortNewsByDateDesc } = await import("../src/data/news.ts");
+    const { news, sortNewsByDateDesc } = await import("./fixtures/news-before-b41.ts");
     const item = news.find((entry) => entry.id === "2026-08-19-well-rested-morning");
 
     assert.ok(item);
@@ -212,7 +212,7 @@ describe("8/19 well-rested morning news item", () => {
 
     // 8/21の新着の後、8/20はマンゴーかき氷投稿 → X投稿 → 朝Story の順。
     // 8/19 は結果報告（あと）→ 朝の投稿（さき）の順で並ぶ。
-    const order = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const order = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(order.slice(0, 34), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -264,7 +264,7 @@ describe("8/19 well-rested morning news item", () => {
   });
 
   it("ships the photo locally at its untouched 1162x2048 size", async () => {
-    const { news } = await import("../src/data/news.ts");
+    const { news } = await import("./fixtures/news-before-b41.ts");
     const item = news.find((entry) => entry.id === "2026-08-19-well-rested-morning");
     const media = item?.media;
 

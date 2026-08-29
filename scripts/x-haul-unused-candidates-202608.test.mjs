@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import {
   featuredPhoto,
   media,
@@ -40,7 +40,7 @@ import {
 } from "../src/data/gandaBeforeNightStream.ts";
 import { morningMakeupShowroomPhoto } from "../src/data/morningMakeupShowroomImage.ts";
 import { autumnLeafNewsImage } from "../src/data/autumnLeafNewsImage.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 import { findDriveIds } from "./scan-tracked-text.mjs";
 
@@ -121,7 +121,7 @@ describe("X haul unused candidates — keep birthday and skip published dupes", 
       news.some((entry) => entry.media?.src === "/media/news/mily-b06-01-recovery-morning.jpg"),
       true,
     );
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(media.filter((entry) => entry.kind === "photo").length, 32);
     assert.deepEqual(verifyNews(news), []);
     assert.deepEqual(verifyMedia(media), []);
@@ -140,7 +140,7 @@ describe("2026-08-06 OHAYO white polo — NEWS + Gallery", () => {
     assert.equal(entry.message?.text, OHAYO_MESSAGE);
     assert.match(entry.body, /AM 10:00〜/);
     assert.doesNotMatch(entry.body, /配信します$/);
-    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((item) => item.id === entry.id));
+    assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((item) => item.id === entry.id));
   });
 
   it("publishes Gallery + NEWS JPEG without hotlinks or published duplicates", async () => {

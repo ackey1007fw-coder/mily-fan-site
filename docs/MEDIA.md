@@ -2281,6 +2281,62 @@ Storyの恒久permalinkはないため、3点の出典表示は非リンクの `
   NEWS、Gallery、`/stories/`、highlights、events、streamSchedule、Activities、
   Portal Feedには重複追加しない
 
+## 素材台帳（batch b41 / 受領日 2026-08-29 / source date 2026-08-28〜29）
+
+オーナーが直接提供した本人Instagram Story動画2本。b41-01は8月28日22:00からの
+SHOWROOM夜配信案内、b41-02は日付が変わった8月29日のPaton投票4日目案内。
+HOME Latest / `/news/` と Gallery が、各動画の公開MP4・poster・manifest objectを
+共有する。恒久的なStory permalinkはないため、表示は非リンクの
+`Instagram Story` labelとする。
+
+両NEWSには本人Instagramプロフィールと、確認済みPaton本人ページへの2 CTAを置く。
+InstagramプロフィールはStoryの出典ではなく関連リンク。Paton CTAは既存の
+SupportEvent期間（2026-09-01 23:59 JSTまで）に従い、終了後に自動で非表示になる。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b41-01 | `gallery/mily-b41-01-night-showroom-story.mp4` | 屋外で青いキャップに手を添えるみりぃと、8月28日22:00〜のSHOWROOM配信案内を表示したStory。512×910 / 19.033秒 / video-only | ✅ Latest / NEWS + Gallery + LIVE STREAM Activity |
+| b41-01 poster | `gallery/mily-b41-01-night-showroom-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。512×910 | ✅ Latest / NEWS + Gallery |
+| b41-02 | `gallery/mily-b41-02-paton-vote-day4-story.mp4` | 拳を上げるみりぃとPaton投票4日目の応援呼びかけを表示したStory。512×910 / 19.033秒 / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b41-02 poster | `gallery/mily-b41-02-paton-vote-day4-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。512×910 | ✅ Latest / NEWS + Gallery |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない。受領バイトを変えず
+  `media/original/` のgitignored領域へ保存し、元の受け渡し名・URL・file IDは
+  tracked/public filesへ残さない
+- b41-01元動画: 7,478,914 bytes / sha256
+  `f095d39ae88d7614c67a2927d10fe0821b77e085d5d1fb39cff2f2d1917ca9b2` /
+  H.264 High / 512×910 / 30fps / 571 frames / video 19.033秒 /
+  HE-AAC 44.1kHz stereo音声あり
+- b41-02元動画: 5,981,295 bytes / sha256
+  `dc3b57843912a3cdafa7cf0d42b842aec62160632839a82e724bae011958598a` /
+  H.264 High / 512×910 / 30fps / 571 frames / video 19.033秒 /
+  HE-AAC 48kHz stereo音声あり
+- 元動画の`creation_time`とCore Media handler名は受領検査だけに使い、投稿日・
+  投稿時刻の根拠にはしていない
+- 2本ともInstagram UI、DM、通知、端末固有情報、連絡先、第三者コメントは含まれない。
+  b41-01の背景にいる人物は小さく、顔・名前を識別できない。b41-02に第三者は見当たらない
+
+### 音声と公開派生
+
+元素材の音声は内容・由来・権利者と再配信権を確認できないため、公開派生では削除した。
+映像は512×910、30fps、571フレームを維持し、crop・scale・引き伸ばし・
+アップスケール・短縮・テロップ変更はしていない。AI生成・顔補正・生成塗り足しもない。
+
+- b41-01 MP4: 506,089 bytes / H.264 Constrained Baseline / 19.033秒 /
+  音声なし / metadata・chapterなし / `+faststart` / sha256
+  `f7527648bb7c4704a3a8b3ce41a11255802dacde75dfed3711d7b1fe659812ad`
+- b41-01 poster: 73,023 bytes / metadataなし / sha256
+  `4508a702d3530cf88c7c75b0828ac37be02a5e75fde49088ae85b3386380669f`
+- b41-02 MP4: 384,811 bytes / H.264 Constrained Baseline / 19.033秒 /
+  音声なし / metadata・chapterなし / `+faststart` / sha256
+  `b2859681d00ba5d086d2834bc98b12acb6fa9e465e173ab6b5437ff31bff14eb`
+- b41-02 poster: 46,509 bytes / metadataなし / sha256
+  `4ca98d51878757eb775b92ac3c3edbb40535c1c3b2c57b6440473ca1aff1cdaf`
+
+
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

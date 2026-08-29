@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
 import { events } from "../src/data/events.ts";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import {
   defaultSrc,
@@ -17,8 +17,8 @@ import {
   srcSetFor,
   visibleMedia,
 } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -69,7 +69,7 @@ describe("2026-08-20 mango kakigori Instagram post — NEWS", () => {
     assert.equal(item.source, SOURCE);
     assert.equal(item.sourceLabel, "Instagramの投稿を見る");
     assert.equal(item.url, undefined);
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"));
     assert.equal(ordered[0].id, "2026-08-26-girlsaward-showroom-6th");
     assert.equal(ordered[1].id, "2026-08-26-paton-vote-stories");
     assert.equal(ordered[2].id, "2026-08-26-instagram-followers-400");

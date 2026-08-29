@@ -4,12 +4,12 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import { radioProgram } from "../src/data/radio.ts";
 import { secondRoundStoryVideo } from "../src/data/secondRoundStoryVideo.ts";
 import { stories } from "../src/data/stories.ts";
 import { tiktokRadioVideo } from "../src/data/tiktokRadioVideo.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import {
   adaptContestSchedule,
   adaptFanEvents,

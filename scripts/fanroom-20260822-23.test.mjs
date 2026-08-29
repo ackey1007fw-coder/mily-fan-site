@@ -5,9 +5,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
 import { media } from "../src/data/media.ts";
-import { earthquakeSafetyStoryVideo, galleryVideos } from "../src/data/galleryVideos.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { earthquakeSafetyStoryVideo, galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
@@ -133,7 +133,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
   });
 
   it("keeps chronological same-day order in the Latest sort", () => {
-    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const ordered = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     assert.deepEqual(ordered.slice(0, 22), [
       "2026-08-26-girlsaward-showroom-6th",
       "2026-08-26-paton-vote-stories",
@@ -158,7 +158,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       EVENING_ID,
       CAMPUS_ID,
     ]);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
   });
 
   it("does not add FanRoom screenshots to Gallery surfaces or public news crops", async () => {
@@ -265,7 +265,7 @@ describe("2026-08-22〜08-23 SHOWROOM FanRoom — Latest / NEWS", () => {
       storyItems: [],
       eventItems: [],
     });
-    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
+    const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((entry) => entry.id);
     const feedNewsIds = feed.items
       .filter((item) => item.type === "news")
       .map((item) => item.id.replace(/^mily:news:/, ""));

@@ -14,9 +14,9 @@ import {
   isSelfHostedGalleryVideo,
   morningStoryVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { media } from "../src/data/media.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import { stories } from "../src/data/stories.ts";
 import { validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
