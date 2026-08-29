@@ -35,6 +35,7 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
+  mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
@@ -174,6 +175,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-30-mixch-final-day",
+    date: "2026-08-30",
+    activityIds: ["campus-girls"],
+    title: "「配信＆ムービーは今日が最終日」——絶対に本戦行くんだ",
+    body: "8月30日、みりぃがMixchに動画を公開しました。配信＆ムービーは今日が最終日と伝え、絶対に本戦行くんだ、皆様の力を貸してくださいと呼びかけています。CAMPUS GIRLS関連のハッシュタグが添えられています。",
+    source: "https://x.com/Mily_chan36/status/2093799709219704887",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://mixch.tv/m/UBHJplv4",
+    ctaLabel: "Mixchで見る",
+    media: mixchFinalDayMovie,
+    message: {
+      label: "みりぃのX投稿",
+      text:
+        "#ミクチャ で動画を投稿したよ！見に来てね！\n" +
+        "『配信＆ムービーは今日が最終日\u{270A}\u{1F3FB}\u{2763}\u{FE0F}絶対に本戦行くんだ\u{FF01}\u{FF01}\u{FF01}\u{FF01}\u{FF01}\u{FF01}皆様の力を貸してください\u{1F979}\u{1F64F}\u{1F3FB}\u{2728}』\u{3000}https://mixch.tv/m/UBHJplv4",
+    },
+  },
   {
     id: "2026-08-29-showroom-live-third-round",
     date: "2026-08-29",
