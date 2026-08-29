@@ -166,7 +166,8 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
       assert.ok(entry);
       assert.equal(entry.source, undefined);
       assert.equal(entry.sourceLabel, "Instagram Story");
-      assert.equal(entry.url, instagramProfile);
+      assert.equal(entry.url, undefined);
+      assert.equal(entry.relatedUrl, instagramProfile);
       assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
       assert.deepEqual(entry.additionalCtas, [
         {
@@ -220,7 +221,7 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
         eventItems: [],
       });
       const feedItem = findFeedItem(feed, portalNewsId(fixture.newsId));
-      assert.equal(feedItem.sourceUrl, instagramProfile);
+      assert.equal(feedItem.sourceUrl, undefined);
       assert.ok(feedItem.image?.endsWith(fixture.item.poster));
     }
   });

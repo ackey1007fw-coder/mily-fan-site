@@ -21,17 +21,18 @@ export function resolveNewsLinks(
     throw new Error("now must be a finite timestamp");
   }
 
+  const relatedTarget = item.relatedUrl ?? item.url;
   const relatedUrl =
-    item.url &&
+    relatedTarget &&
     isSupportEventUrlActive({
-      url: item.url,
+      url: relatedTarget,
       links,
       supportEvents,
       now,
     })
-      ? item.url
+      ? relatedTarget
       : undefined;
-  const ctaUrl = item.url ? relatedUrl : item.source;
+  const ctaUrl = relatedTarget ? relatedUrl : item.source;
   const additionalCtas = (item.additionalCtas ?? []).filter(
     ({ url }) =>
       url !== ctaUrl &&

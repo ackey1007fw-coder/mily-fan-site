@@ -153,6 +153,8 @@ export type NewsItem = {
   source?: string;
   sourceLabel?: string;
   additionalSources?: NewsSourceLink[];
+  /** Related destination or CTA that is not evidence for this NEWS record. */
+  relatedUrl?: string;
   url?: string;
   ctaLabel?: string;
   /** Extra action buttons. Support-event URLs are shown only in their confirmed window. */
@@ -178,7 +180,7 @@ export const news: NewsItem[] = [
     title: "日付変わりました！4日目のPaton投票もお願いします🗳️🍅",
     body: "8月29日、みりぃがInstagram Storyで、CAMPUS GIRLS 2027予選ファイナルのPaton投票4日目を案内しました。「私もみんなと一緒に頑張るよ」と伝え、応援を呼びかけています。",
     sourceLabel: patonVoteDay4StoryVideo.sourceLabel,
-    url: "https://www.instagram.com/mily_chan36",
+    relatedUrl: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
     additionalCtas: [
       {
@@ -219,7 +221,7 @@ export const news: NewsItem[] = [
     title: "8/28 22:00〜SHOWROOM配信！夜枠も待ってるね💘",
     body: "8月28日のInstagram Storyで、みりぃが22:00からのSHOWROOM配信を案内しました。「夜枠も楽しもう〜 待ってるぞ〜」と呼びかけた、配信前の記録です。",
     sourceLabel: nightStoryB41Video.sourceLabel,
-    url: "https://www.instagram.com/mily_chan36",
+    relatedUrl: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
     additionalCtas: [
       {
