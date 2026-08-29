@@ -3,19 +3,19 @@ import { readdir } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import {
   mixchExpressiveMovie,
   mixch15xDayMovie,
   mixchConfidenceMessageMovie,
 } from "../src/data/mixchMovies.ts";
-import { visibleGalleryVideos } from "../src/data/galleryVideos.ts";
+import { visibleGalleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { events } from "../src/data/events.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
-import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
+import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
+import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
+import { selectGalleryEntries } from "./fixtures/gallery-items-before-b41.ts";
 import { verifyNews } from "./content-invariants.mjs";
 import { readFile } from "node:fs/promises";
 

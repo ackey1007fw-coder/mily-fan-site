@@ -6,6 +6,7 @@ import { isSupportEventUrlActive } from "./supportEventLinks.ts";
 export type ResolvedNewsLinks = {
   relatedUrl?: string;
   cta?: { label: string; url: string };
+  additionalCtas?: { label: string; url: string }[];
 };
 
 /**
@@ -31,11 +32,22 @@ export function resolveNewsLinks(
       ? item.url
       : undefined;
   const ctaUrl = item.url ? relatedUrl : item.source;
+  const additionalCtas = (item.additionalCtas ?? []).filter(
+    ({ url }) =>
+      url !== ctaUrl &&
+      isSupportEventUrlActive({
+        url,
+        links,
+        supportEvents,
+        now,
+      }),
+  );
 
   return {
     ...(relatedUrl ? { relatedUrl } : {}),
     ...(item.ctaLabel && ctaUrl
       ? { cta: { label: item.ctaLabel, url: ctaUrl } }
       : {}),
+    ...(additionalCtas.length > 0 ? { additionalCtas } : {}),
   };
 }

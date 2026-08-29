@@ -26,6 +26,24 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
+### 2026-08-28〜29 Instagram Story動画2本の追記
+
+- `news.ts` は50件。b41-01（8月28日22:00〜SHOWROOM夜配信案内）と
+  b41-02（8月29日Paton投票4日目案内）を、それぞれ独立したNEWSとして追加する。
+- HOME Latest / `/news/` と Gallery は、各Storyにつき公開MP4 1本・poster 1枚・
+  manifest object 1件を共有する。`galleryVideos.ts` は独立動画18本＋Mixch
+  outbound player 3本。`/stories/`、highlights、events、streamSchedule、
+  `media.ts`には追加しない。
+- 恒久permalinkがないため、出典は非リンクの `Instagram Story` labelとする。
+  本人Instagramプロフィールは関連CTAであり、Storyの出典URLとして扱わない。
+- 両NEWSに `Instagramプロフィールを見る` と `Patonでみりぃに投票する` の
+  2 CTAを表示する。Paton CTAだけは既存SupportEventの確認済み期間
+  （2026-09-01 23:59 JSTまで）に従い、終了後に自動で外す。
+- 元動画の未確認音声は公開派生から削除する。512×910、30fps、571フレームを維持し、
+  crop・scale・短縮・テロップ変更・AI加工はしない。
+- b41-01の画面内時刻は終了済みの記録としてのみ掲載し、`events.ts`や
+  `streamSchedule.ts`へ過去枠を転記しない。
+
 ### 2026-08-28 配信お礼・翌日未確定のX投稿の追記
 
 - `news.ts` は48件。本人X

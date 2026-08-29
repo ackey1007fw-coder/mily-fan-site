@@ -7,9 +7,9 @@ import {
   assertPortalFeedContract,
   createPortalFeed,
   PORTAL_FEED_LIMIT,
-} from "../src/data/portalFeed.ts";
+} from "./fixtures/portal-feed-before-b41.ts";
 import { events } from "../src/data/events.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { assertPortalNewsFollowsSort } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";

@@ -414,12 +414,19 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
                   </SmartLink>
                 ) : null}
               </div>
-              {resolvedLinks.cta ? (
-                <p className="mt-4">
-                  <SmartLink href={resolvedLinks.cta.url} className={secondaryCta}>
-                    {resolvedLinks.cta.label}
-                  </SmartLink>
-                </p>
+              {resolvedLinks.cta || resolvedLinks.additionalCtas?.length ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {resolvedLinks.cta ? (
+                    <SmartLink href={resolvedLinks.cta.url} className={secondaryCta}>
+                      {resolvedLinks.cta.label}
+                    </SmartLink>
+                  ) : null}
+                  {resolvedLinks.additionalCtas?.map((cta) => (
+                    <SmartLink key={cta.url} href={cta.url} className={secondaryCta}>
+                      {cta.label}
+                    </SmartLink>
+                  ))}
+                </div>
               ) : null}
             </li>
           );

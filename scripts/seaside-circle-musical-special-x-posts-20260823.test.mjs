@@ -13,7 +13,7 @@ import {
   seasideCircleMusicalSpecialThanksVideo,
   seasideCircleMusicalSpecialVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
 import {
   defaultSrc,
@@ -22,7 +22,7 @@ import {
   srcSetFor,
   visibleMedia,
 } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 import {

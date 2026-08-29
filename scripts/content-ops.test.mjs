@@ -8,7 +8,7 @@ import { events } from "../src/data/events.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { links } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
 

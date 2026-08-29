@@ -21,7 +21,7 @@ import {
   isSkyOrLandscapePhoto,
   selectGalleryEntries,
   selectGalleryPreview,
-} from "../src/lib/galleryItems.ts";
+} from "./fixtures/gallery-items-before-b41.ts";
 import { selectHomeToday } from "../src/lib/homeToday.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");

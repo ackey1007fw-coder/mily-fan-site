@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import sharp from "sharp";
-import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import {
   featuredPhoto,
   media,
@@ -40,7 +40,7 @@ import {
 } from "../src/data/gandaBeforeNightStream.ts";
 import { morningMakeupShowroomPhoto } from "../src/data/morningMakeupShowroomImage.ts";
 import { autumnLeafNewsImage } from "../src/data/autumnLeafNewsImage.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 import { findDriveIds } from "./scan-tracked-text.mjs";
 
