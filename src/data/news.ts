@@ -174,6 +174,38 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-29-showroom-live-third-round",
+    date: "2026-08-29",
+    sameDayOrder: 3,
+    activityIds: ["miss-circle", "live-stream"],
+    title: "配信中！9/3〜3次審査、素敵な景色を一緒に見に行きたい",
+    body: "8月29日、みりぃがXでSHOWROOM配信中であることを伝えました。9月3日から3次審査が始まることと、「素敵な景色を皆さんと一緒に見に行きたい」という言葉も残されています。",
+    source: "https://x.com/Mily_chan36/status/2093575115913224580",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text: "🔥2次審査🩵三橋莉子🍅 #ミスサークル2026 配信中‼︎\n📌9/3〜3次審査‼️\n素敵な景色を皆さんと一緒に見に行きたい😤✊🏻✨\nhttps://www.showroom-live.com/r/circle2026_0734?t=1787982168",
+    },
+  },
+  {
+    id: "2026-08-29-showroom-radio-1440",
+    date: "2026-08-29",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "SR配信（ラジオ）14:40〜始めるね⭐️",
+    body: "8月29日、みりぃがXで14:40からのSHOWROOMラジオ配信を案内しました。配信前の記録です。",
+    source: "https://x.com/Mily_chan36/status/2093572006457557333",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text: "SR配信（ラジオ📻🗣️）\n14:40〜始めるね⭐️\n\n#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサークルコンテスト2026",
+    },
+  },
+  {
     id: "2026-08-29-paton-vote-day-4-story",
     date: "2026-08-29",
     activityIds: ["campus-girls"],
