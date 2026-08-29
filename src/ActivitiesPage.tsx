@@ -297,11 +297,14 @@ function RadioCurrent() {
         <p className="mt-3 text-xs leading-6 text-ink-muted">
           番組情報は{formatDate(radioProgram.lastVerifiedAt)}確認。
         </p>
-        <p className="mt-5">
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <ExternalLink href={radioProgram.programUrl} className={primaryCta}>
+            湘南シーサイドサークル 番組ページを見る
+          </ExternalLink>
           <ExternalLink href={status.href} className={secondaryCta}>
             番組のNOW ON AIRを確認
           </ExternalLink>
-        </p>
+        </div>
       </div>
     </section>
   );
