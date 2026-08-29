@@ -67,7 +67,7 @@ describe("2026-08-28 CAMPUS GIRLS Paton vote day 3 — Latest entry", () => {
       news.filter((candidate) => candidate.source === SOURCE).length,
       1,
     );
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-08-28-stream-thanks");
     assert.equal(sortNewsByDateDesc(news)[1]?.id, NEWS_ID);
     assert.equal(entry.date, "2026-08-28");

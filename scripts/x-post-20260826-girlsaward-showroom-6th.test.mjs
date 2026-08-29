@@ -300,7 +300,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(ordered[4], "2026-08-26-girl-award-event-fanroom");
     assert.equal(ordered[5], "2026-08-26-mixch-15x-day");
     assert.equal(ordered[6], "2026-08-26-stream-1000");
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(news.filter((entry) => entry.date === "2026-08-26").length, 7);
     assert.ok(news.some((entry) => entry.id === "2026-08-26-stream-1000"));
   });

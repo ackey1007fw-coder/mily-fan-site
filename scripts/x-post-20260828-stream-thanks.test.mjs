@@ -44,7 +44,7 @@ describe("2026-08-28 stream thanks X post — Latest entry", () => {
       news.filter((candidate) => candidate.source === SOURCE).length,
       1,
     );
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
     assert.equal(sortNewsByDateDesc(news)[1]?.id, "2026-08-28-paton-vote-day-3");
     assert.equal(entry.date, "2026-08-28");

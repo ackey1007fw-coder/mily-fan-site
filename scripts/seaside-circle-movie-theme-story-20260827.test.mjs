@@ -394,7 +394,7 @@ describe("2026-08-27 湘南シーサイドサークル映画テーマ Story — 
     assert.match(docs, /DM・通知・端末情報・第三者コメント/);
     assert.match(docs, /8\.0秒地点の実フレーム/);
     assert.match(ops, /48件/);
-    assert.match(ops, /独立動画16本/);
+    assert.match(ops, /独立動画19本/);
     assert.match(ops, /ラジオ「映画」テーマ/);
   });
 });

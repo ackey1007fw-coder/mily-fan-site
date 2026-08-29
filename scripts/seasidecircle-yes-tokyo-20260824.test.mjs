@@ -117,7 +117,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — NEWS", () => {
     assert.deepEqual(item()?.activityIds, ["radio"]);
     assert.equal(item()?.title, "「Yes!東京」踊ってみた💃");
     assert.equal(extra.length, 0);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews([item()]), []);
   });
 
@@ -167,8 +167,8 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — shared Latest / Gallery 
     assert.equal(galleryVideos[4], seasideCircleYesTokyoVideo);
     assert.equal(visible[2], seasideCircleYesTokyoVideo);
     assert.equal(galleryVideos[5], nightThanksMorningStreamStoryVideo);
-    assert.equal(galleryVideos.length, 19);
-    assert.equal(visible.length, 16);
+    assert.equal(galleryVideos.length, 20);
+    assert.equal(visible.length, 17);
     assert.equal(seasideCircleYesTokyoVideo.kind, "video");
     assert.equal(seasideCircleYesTokyoVideo.provenance, "owner-provided");
     assert.equal(
@@ -225,6 +225,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — shared Latest / Gallery 
         "2026-08-20",
         "2026-08-19",
         "2026-08-17",
+        "2026-04-23",
         "2026-08-26",
         "2026-08-25",
       ],
@@ -434,7 +435,7 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — privacy", () => {
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
     assert.match(ops, /48件/);
-    assert.match(ops, /独立動画16本/);
+    assert.match(ops, /独立動画19本/);
     assert.match(ops, /Yes!東京/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);

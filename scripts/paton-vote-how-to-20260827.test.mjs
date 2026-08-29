@@ -58,7 +58,7 @@ describe("2026-08-27 CAMPUS GIRLS Paton vote how-to — 導線", () => {
         .length,
       1,
     );
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-movie-night"))[0]?.id, PATON_VOTE_HOW_TO_NEWS_ID);
     assert.equal(entry.date, "2026-08-27");
     assert.equal(entry.sameDayOrder, 2);

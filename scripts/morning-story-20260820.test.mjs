@@ -325,7 +325,7 @@ describe("2026-08-20 morning Story — surrounding content is untouched", () => 
     const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
 
     // 2026-08-23 の放送後お礼Story（b21）・番組Story（b19）・地震後Story（b18）で10本。b15 / b13 / b12 / b11 / b07 の相対順は維持。
-    assert.equal(visible.length, 16);
+    assert.equal(visible.length, 17);
     assert.equal(visible[7], tiktokRadioVideo);
     assert.equal(visible[8], eventStory20260821);
     assert.equal(visible[9], morningOhayo20260821);

@@ -23,6 +23,7 @@ import {
   seasideCircleMusicalSpecialVideo,
   secondRoundStoryVideo,
   tiktokRadioVideo,
+  tiktokSayonaraIchigoVideo,
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
 import { contest } from "../src/data/contest.ts";
@@ -141,7 +142,7 @@ describe("2026-08-23 seaside circle thanks Story — NEWS stays one item", () =>
 
     assert.equal(radioNews.length, 1);
     assert.equal(extraThanksNews.length, 0);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.equal(entry?.date, "2026-08-23");
     assert.equal(entry?.sameDayOrder, 4);
     assert.deepEqual(entry?.activityIds, ["radio"]);
@@ -201,8 +202,8 @@ describe("2026-08-23 seaside circle thanks Story — Gallery order", () => {
   it("places b21 after newer 8/24 videos, keeps b19 next, and preserves the rest", () => {
     const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
 
-    assert.equal(galleryVideos.length, 19);
-    assert.equal(visible.length, 16);
+    assert.equal(galleryVideos.length, 20);
+    assert.equal(visible.length, 17);
     assert.equal(galleryVideos[6], seasideCircleMusicalSpecialThanksVideo);
     assert.equal(visible[4], seasideCircleMusicalSpecialThanksVideo);
     assert.equal(galleryVideos[7], seasideCircleMusicalSpecialVideo);
@@ -216,6 +217,7 @@ describe("2026-08-23 seaside circle thanks Story — Gallery order", () => {
       morningStory20260820,
       secondRoundStoryVideo,
       morningStoryVideo,
+      tiktokSayonaraIchigoVideo,
       mixch15xDayMovie,
       mixchConfidenceMessageMovie,
     ]);

@@ -182,7 +182,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
   it("adds the video to the Gallery archive, newest first, keeping b03 and b07", () => {
     const visible = visibleGalleryVideos().filter((entry) => entry.id !== "mily-b36-01-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "mily-b35-01-miss-circle-showroom-story").filter((entry) => entry.id !== "mixch-m-VDojsMY5");
 
-    assert.equal(visible.length, 16);
+    assert.equal(visible.length, 17);
     // Self-hosted newest first, then Mixch outbound (8/26 1.5x → 8/25 自信のないあなたへ)
     assert.deepEqual(visible.map((entry) => entry.sourceDate), [
       "2026-08-26",
@@ -199,6 +199,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       "2026-08-20",
       "2026-08-19",
       "2026-08-17",
+      "2026-04-23",
       "2026-08-26",
       "2026-08-25",
     ]);
@@ -214,7 +215,7 @@ describe("2026-08-19 second-round Story video — shared STORY / Gallery asset",
       morningStory20260820.src,
       "/media/gallery/mily-b07-01-morning-story.mp4",
     );
-    assert.equal(galleryVideos.length, 19);
+    assert.equal(galleryVideos.length, 20);
   });
 
   it("shares one MP4 and one poster between the STORY article and Gallery", () => {

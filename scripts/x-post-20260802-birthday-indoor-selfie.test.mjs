@@ -85,7 +85,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(entry.media, birthdayIndoorSelfieImage);
     assert.equal(entry.additionalMedia, undefined);
     assert.equal(entry.activityIds, undefined);
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.deepEqual(verifyNews(news), []);
     assert.ok(sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).some((candidate) => candidate.id === NEWS_ID));
   });

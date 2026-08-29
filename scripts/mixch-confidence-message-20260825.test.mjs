@@ -155,7 +155,7 @@ describe("2026-08-25 Mixch confidence message NEWS", () => {
       assert.doesNotMatch(source, /VDojsMY5/);
       assert.doesNotMatch(source, /_movie_mps/);
     }
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
     assert.match(ops, /48件/);
     assert.match(ops, /Mixch「自信のないあなたへ」/);
     assert.match(ops, /Mixch outbound player card/);

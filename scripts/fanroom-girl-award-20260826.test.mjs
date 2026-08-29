@@ -125,7 +125,7 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
         "2026-08-26-stream-1000",
       ],
     );
-    assert.equal(news.length, 48);
+    assert.equal(news.length, 49);
   });
 
   it("keeps the voice memo on Latest / NEWS only", () => {

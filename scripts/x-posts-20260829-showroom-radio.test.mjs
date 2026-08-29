@@ -55,7 +55,7 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Latest entry", () 
     assert.equal(news.filter((entry) => entry.id === RADIO_ID).length, 1);
     assert.equal(news.filter((entry) => entry.source === LIVE_SOURCE).length, 1);
     assert.equal(news.filter((entry) => entry.source === RADIO_SOURCE).length, 1);
-    assert.equal(news.length, 52);
+    assert.equal(news.length, 53);
     assert.equal(ordered[0]?.id, LIVE_ID);
     assert.equal(ordered[1]?.id, RADIO_ID);
     assert.equal(ordered[2]?.id, "2026-08-29-paton-vote-day-4-story");
@@ -252,7 +252,7 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Portal Feed", () =
 
   it("documents the 8/29 SHOWROOM X posts in CONTENT-OPS", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    assert.match(ops, /52件/);
+    assert.match(ops, /53件/);
     assert.match(ops, /2093572006457557333/);
     assert.match(ops, /2093575115913224580/);
     assert.match(ops, /14:40〜ラジオ配信案内/);
