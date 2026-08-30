@@ -197,7 +197,10 @@ function decodeCssText(value) {
     .replace(/\\(.)/g, "$1");
 }
 
-function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
+function renderedMarkupSegments(
+  content,
+  { includeTopLevel = false, staticBindings = new Map() } = {},
+) {
   const MAX_RENDERED_ALTERNATIVES = 128;
   const capAlternatives = (values) => {
     const unique = [...new Set(values)];
@@ -286,6 +289,10 @@ function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
       decodePublicText(alternative)
         .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
         .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
+        .replace(
+          /\{\s*([A-Za-z_$][\w$]*)\s*\}/g,
+          (_, name) => staticBindings.get(name) ?? "",
+        )
         .replace(/\{[^{}]*\}/g, ""),
     );
     if (stack.length === 0) {
@@ -420,23 +427,41 @@ function stripSourceComments(content) {
 export function publicTextSegments(content, relative) {
   const normalizedPath = relative.replaceAll("\\", "/");
   const extension = path.extname(normalizedPath);
-  const sourceContent = [
+  const sourceExtension = [
     ".ts",
     ".tsx",
     ".js",
     ".jsx",
     ".mjs",
     ".cjs",
-  ].includes(extension)
+  ].includes(extension);
+  const sourceContent = sourceExtension
     ? stripSourceComments(content)
-    : content;
+    : extension === ".css"
+      ? content.replace(/\/\*[\s\S]*?\*\//g, "")
+      : content;
   const segments = [];
   const publicContent = [".html", ".xml", ".svg"].includes(extension)
-    ? sourceContent.replace(
-        /<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,
-        "",
-      )
+    ? sourceContent
+        .replace(
+          /<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi,
+          (whole, attributes, body) =>
+            /\btype\s*=\s*(?:"application\/ld\+json"|'application\/ld\+json'|application\/ld\+json)/i.test(
+              attributes,
+            )
+              ? body
+              : "",
+        )
+        .replace(/<style\b[^>]*>[\s\S]*?<\/style\s*>/gi, "")
     : sourceContent;
+  const staticBindings = new Map();
+  if (sourceExtension) {
+    const staticString =
+      /\bconst\s+([A-Za-z_$][\w$]*)\s*=\s*(["'`])((?:\\.|(?!\2)[\s\S])*?)\2\s*;/g;
+    for (const match of sourceContent.matchAll(staticString)) {
+      staticBindings.set(match[1], decodePublicText(match[3]));
+    }
+  }
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const concatenatedQuoted =
     /(?:["'`](?:\\.|[^"'\\`])*["'`]\s*\+\s*)+["'`](?:\\.|[^"'\\`])*["'`]/g;
@@ -473,6 +498,7 @@ export function publicTextSegments(content, relative) {
   segments.push(
     ...renderedMarkupSegments(publicContent, {
       includeTopLevel: [".html", ".xml", ".svg"].includes(extension),
+      staticBindings,
     }),
   );
 

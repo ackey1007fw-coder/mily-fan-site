@@ -387,6 +387,14 @@ describe("mily site identity", () => {
     }
     assert.equal(
       publicTextSegments(
+        '<script type="application/ld+json">{"description":"当サイトは公認です"}</script>',
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      true,
+      "should preserve JSON-LD metadata",
+    );
+    assert.equal(
+      publicTextSegments(
         `const quote = /['"]/;\nconst view = <meta content="当サイトは公認です" />;`,
         "src/example.tsx",
       ).some(claimsApprovalStatus),
@@ -453,6 +461,14 @@ describe("mily site identity", () => {
     }
     assert.equal(
       publicTextSegments(
+        'const approval = "公認"; <p>当サイトは{approval}です</p>',
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should resolve local const string bindings in JSX",
+    );
+    assert.equal(
+      publicTextSegments(
         "<!doctype html>当サイトは公認です",
         "public/example.html",
       ).some(claimsApprovalStatus),
@@ -497,6 +513,14 @@ describe("mily site identity", () => {
     );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
+    assert.equal(
+      publicTextSegments(
+        '/* Never display "当サイトは公認です". */',
+        "src/example.css",
+      ).some(claimsApprovalStatus),
+      false,
+      "should ignore strings inside CSS comments",
+    );
     assert.equal(
       publicTextSegments(
         '.badge::before { content: "当サイトは" "公認です"; }',
