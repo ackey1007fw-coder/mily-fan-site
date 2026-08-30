@@ -47,7 +47,7 @@ describe("2026-08-30 湘南シーサイドサークル映画特集", () => {
     assert.match(page, /function RadioEpisodeRecap/);
     assert.match(page, /activityId !== "radio"/);
     assert.match(page, /みりぃの見どころ/);
-    assert.match(page, /番組で紹介された、あっきーのメッセージ/);
+    assert.match(page, /番組で紹介されたリスナーメッセージ/);
     assert.match(page, /主なコーナーとタイムスタンプを見る/);
     assert.match(page, /<RadioEpisodeRecap activityId=\{content\.activity\.id\} \/>/);
 

@@ -424,7 +424,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
           Listener Messages
         </p>
         <h3 id="radio-listener-messages" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
-          番組で紹介された、あっきーのメッセージ
+          番組で紹介されたリスナーメッセージ
         </h3>
         <ul className="mt-5 space-y-4">
           {episode.listenerMessages.map((message) => (
