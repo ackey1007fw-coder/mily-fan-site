@@ -164,10 +164,15 @@ export function decodePublicText(value) {
     .replace(/&#x([0-9a-f]+);/gi, (_, hex) => decodeCodePoint(hex, 16))
     .replace(/&#([0-9]+);/g, (_, decimal) => decodeCodePoint(decimal, 10))
     .replace(
-      /&(nbsp|amp|lt|gt|quot|apos);/gi,
+      /&(nbsp|ensp|emsp|thinsp|tab|newline|amp|lt|gt|quot|apos);/gi,
       (_, name) =>
         ({
           nbsp: " ",
+          ensp: " ",
+          emsp: " ",
+          thinsp: " ",
+          tab: "\t",
+          newline: "\n",
           amp: "&",
           lt: "<",
           gt: ">",
@@ -306,10 +311,31 @@ function stripSourceComments(content) {
   let result = "";
   let index = 0;
   let quote = null;
+  let regex = false;
+  let regexClass = false;
 
   while (index < content.length) {
     const char = content[index];
     const next = content[index + 1];
+    if (regex) {
+      if (char === "\\") {
+        result += "  ";
+        index += 2;
+        continue;
+      }
+      if (char === "[") regexClass = true;
+      if (char === "]") regexClass = false;
+      result += char === "\n" ? "\n" : " ";
+      index += 1;
+      if (char === "/" && !regexClass) {
+        regex = false;
+        while (/[a-z]/i.test(content[index] ?? "")) {
+          result += " ";
+          index += 1;
+        }
+      }
+      continue;
+    }
     if (quote) {
       result += char;
       if (char === "\\") {
@@ -326,6 +352,16 @@ function stripSourceComments(content) {
       result += char;
       index += 1;
       continue;
+    }
+    if (char === "/" && next !== "/" && next !== "*") {
+      const previous = result.match(/\S(?=\s*$)/)?.[0];
+      if (!previous || /[=([{,:;!?&|]/.test(previous)) {
+        regex = true;
+        regexClass = false;
+        result += " ";
+        index += 1;
+        continue;
+      }
     }
     if (char === "/" && next === "/" && content[index - 1] !== ":") {
       index += 2;

@@ -291,6 +291,7 @@ describe("mily site identity", () => {
     assert.equal(decodePublicText("&#x110000;"), "\uFFFD");
     assert.equal(decodePublicText("&#999999999999;"), "\uFFFD");
     assert.equal(decodePublicText("&nbsp;"), " ");
+    assert.equal(decodePublicText("&emsp;&ensp;&Tab;"), "  \t");
 
     for (const yamlClaim of [
       "description: 当サイトは公認です",
@@ -350,6 +351,14 @@ describe("mily site identity", () => {
       true,
       "should decode named HTML entities",
     );
+    assert.equal(
+      publicTextSegments(
+        "<p>当サイトは&emsp;公認です</p>",
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      true,
+      "should decode named HTML whitespace entities",
+    );
 
     assert.equal(
       publicTextSegments(
@@ -358,6 +367,14 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       false,
       "should ignore quoted examples in source comments",
+    );
+    assert.equal(
+      publicTextSegments(
+        `const quote = /['"]/;\nconst view = <meta content="当サイトは公認です" />;`,
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should ignore quote characters inside regex literals",
     );
 
     for (const attributeClaim of [
