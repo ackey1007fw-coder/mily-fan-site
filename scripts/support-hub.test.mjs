@@ -77,7 +77,7 @@ describe("Support MPA route and metadata", () => {
     const structured = supportPageStructuredData();
     const serialized = JSON.stringify(structured);
     assert.match(supportPageMetadata.title, /非公式/);
-    assert.match(supportPageMetadata.description, /ファン制作.*非公式/);
+    assert.match(supportPageMetadata.description, /ファン運営.*非公式/);
     assert.match(html, /みりぃ ファンサイト（非公式）/);
     assert.match(serialized, /BreadcrumbList/);
     assert.match(serialized, /Support/);

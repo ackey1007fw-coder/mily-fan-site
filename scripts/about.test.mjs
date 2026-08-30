@@ -39,7 +39,7 @@ describe("detailed profile provenance", () => {
     assert.match(source, /href=\{item\.source\}/);
     assert.match(source, /Object\.values\(profileSources\)\.map/);
     assert.match(source, /ExternalLink/);
-    assert.match(source, /ファン制作・非公式プロフィール/);
+    assert.match(source, /ファン運営・非公式プロフィール/);
     assert.match(source, /<Footer \/>/);
     assert.match(footer, /ファン運営の非公式サイト/);
     assert.match(footer, /本人の運営ではありません/);
