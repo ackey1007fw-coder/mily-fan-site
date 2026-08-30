@@ -176,6 +176,28 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-30-morning-showroom-0600",
+    date: "2026-08-30",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "おはよーーう！！！今日もみんなと乗り越えていく",
+    body: "8月30日朝、みりぃがXでおはようのあいさつを伝えました。今日もみんなと乗り越えていくという言葉と、6:00〜6:30のSHOWROOM配信案内が書かれています。配信前の記録です。",
+    source: "https://x.com/Mily_chan36/status/2093802690598064521",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "おはよーーう！！！\n" +
+        "今日もみんなと乗り越えていく\u{270A}\u{1F3FB}\u{2764}\u{FE0F}\u{200D}\u{1F525}\n" +
+        "\n" +
+        "SR 6:00\u{301C}6:30で配信するよん\u{266A}\n" +
+        "\n" +
+        "#ミスサー #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークル #ミスサークルコンテスト2026",
+    },
+  },
+  {
     id: "2026-08-30-mixch-final-day",
     date: "2026-08-30",
     activityIds: ["campus-girls"],
