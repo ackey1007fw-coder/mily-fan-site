@@ -431,6 +431,12 @@ export function publicTextSegments(content, relative) {
     ? stripSourceComments(content)
     : content;
   const segments = [];
+  const publicContent = [".html", ".xml", ".svg"].includes(extension)
+    ? sourceContent.replace(
+        /<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi,
+        "",
+      )
+    : sourceContent;
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const concatenatedQuoted =
     /(?:["'`](?:\\.|[^"'\\`])*["'`]\s*\+\s*)+["'`](?:\\.|[^"'\\`])*["'`]/g;
@@ -440,23 +446,23 @@ export function publicTextSegments(content, relative) {
   const cssAdjacentContent =
     /content\s*:\s*((?:(?:["'])(?:\\.|[^"'\\])*(?:["'])\s*)+)(?:;|}|$)/gi;
 
-  for (const chain of sourceContent.matchAll(concatenatedQuoted)) {
+  for (const chain of publicContent.matchAll(concatenatedQuoted)) {
     const joined = [...chain[0].matchAll(quoted)]
       .map((match) => decodePublicText(match[2]))
       .join("");
     segments.push(joined);
   }
-  for (const match of sourceContent.matchAll(quoted)) {
+  for (const match of publicContent.matchAll(quoted)) {
     segments.push(decodePublicText(match[2]));
   }
-  for (const match of sourceContent.matchAll(textNode)) {
+  for (const match of publicContent.matchAll(textNode)) {
     segments.push(decodePublicText(match[1]));
   }
-  for (const match of sourceContent.matchAll(unquotedAttribute)) {
+  for (const match of publicContent.matchAll(unquotedAttribute)) {
     segments.push(decodePublicText(match[1]));
   }
   if (extension === ".css") {
-    for (const declaration of sourceContent.matchAll(cssAdjacentContent)) {
+    for (const declaration of publicContent.matchAll(cssAdjacentContent)) {
       segments.push(
         [...declaration[1].matchAll(quoted)]
           .map((match) => decodeCssText(match[2]))
@@ -465,7 +471,7 @@ export function publicTextSegments(content, relative) {
     }
   }
   segments.push(
-    ...renderedMarkupSegments(sourceContent, {
+    ...renderedMarkupSegments(publicContent, {
       includeTopLevel: [".html", ".xml", ".svg"].includes(extension),
     }),
   );
