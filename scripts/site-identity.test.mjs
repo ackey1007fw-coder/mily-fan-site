@@ -156,6 +156,8 @@ describe("mily site identity", () => {
       "三橋莉子さん公認のファンサイトです",
       "本人公認ファンサイトです",
       "みりぃ公認ファンサイトです",
+      "当サイトは公認でございます",
+      "当サイトは公認ではございません",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -259,5 +261,18 @@ describe("mily site identity", () => {
     }
 
     assert.equal(decodePublicText("\\u516c\\u8a8d"), "公認");
+
+    for (const yamlClaim of [
+      "description: 当サイトは公認です",
+      "- 当サイトは公認ではありません",
+    ]) {
+      assert.equal(
+        publicTextSegments(yamlClaim, "public/site.yaml").some(
+          claimsApprovalStatus,
+        ),
+        true,
+        `should scan unquoted YAML: ${yamlClaim}`,
+      );
+    }
   });
 });

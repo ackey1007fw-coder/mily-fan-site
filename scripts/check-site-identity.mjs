@@ -105,7 +105,7 @@ export function claimsApprovalStatus(content) {
   const siteSubject =
     String.raw`(?:(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト)`;
   const approvalAssertion =
-    String.raw`(?:非公認(?:サイト)?(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|済み|では(?:ありません|ない)|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
+    String.raw`(?:非公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
   const approver =
     String.raw`(?:(?:本人|みりぃ(?:さん)?|三橋莉子(?:さん)?)(?:に|から|の)?)?`;
   const siteFirst = new RegExp(
@@ -212,6 +212,14 @@ export function publicTextSegments(content, relative) {
 
   if ([".md", ".txt"].includes(extension)) {
     segments.push(decodePublicText(content));
+  }
+  if ([".yml", ".yaml"].includes(extension)) {
+    for (const line of content.split(/\r?\n/)) {
+      const scalar =
+        line.match(/^\s*[^#\s][^:]*:\s*(?![>|]\s*$)(.*?)\s*(?:#.*)?$/)?.[1] ??
+        line.match(/^\s*-\s+(.*?)\s*(?:#.*)?$/)?.[1];
+      if (scalar) segments.push(decodePublicText(scalar));
+    }
   }
 
   return segments;
