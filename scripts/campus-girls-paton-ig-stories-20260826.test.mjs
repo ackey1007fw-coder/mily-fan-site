@@ -674,7 +674,7 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
     assert.match(docs, /あっきー/);
     assert.match(docs, /投票CTA/);
     assert.match(ops, /48件/);
-    assert.match(ops, /独立動画19本/);
+    assert.match(ops, /独立動画21本/);
     assert.doesNotMatch(ops, /独立動画12本/);
   });
 

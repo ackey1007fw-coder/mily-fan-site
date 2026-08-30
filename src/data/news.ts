@@ -24,6 +24,8 @@ import { morningShowroomRunwayVideo } from "./morningShowroomRunwayVideo.ts";
 import { morningMissCircleShowroomStoryVideo } from "./morningMissCircleShowroomStoryVideo.ts";
 import { nightStoryB41Video } from "./nightStoryB41Video.ts";
 import { patonVoteDay4StoryVideo } from "./patonVoteDay4StoryVideo.ts";
+import { patonVoteDay5StoryVideo } from "./patonVoteDay5StoryVideo.ts";
+import { campusGirlsHoldSecondStoryVideo } from "./campusGirlsHoldSecondStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -176,6 +178,32 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-30-campus-girls-hold-second-story",
+    date: "2026-08-30",
+    sameDayOrder: 3,
+    activityIds: ["campus-girls"],
+    title: "パトン投票は9/1まで、2位を守り抜きたい",
+    body: "8月30日、みりぃがInstagram Storyでキャンパスガールズ2027の情報を案内しました。Paton投票は9月1日（火）23:59まで、ムービーへの応援は当日30日（日）23:59までと伝え、「投票、2位を守り抜きたい」と呼びかけています。2位は投稿時点の記録です。",
+    sourceLabel: campusGirlsHoldSecondStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: campusGirlsHoldSecondStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "【キャンパスガールズ2027 情報ℹ️】\n" +
+        "パトン投票：9/1（火）23:59まで\n" +
+        "ムービーへの応援：本日30日（日）23:59まで\n" +
+        "投票、2位を守り抜きたい🥺✊🏻❤️‍🔥",
+    },
+  },
+  {
     id: "2026-08-30-morning-showroom-0600",
     date: "2026-08-30",
     sameDayOrder: 2,
@@ -213,6 +241,33 @@ export const news: NewsItem[] = [
       text:
         "#ミクチャ で動画を投稿したよ！見に来てね！\n" +
         "『配信＆ムービーは今日が最終日\u{270A}\u{1F3FB}\u{2763}\u{FE0F}絶対に本戦行くんだ\u{FF01}\u{FF01}\u{FF01}\u{FF01}\u{FF01}\u{FF01}皆様の力を貸してください\u{1F979}\u{1F64F}\u{1F3FB}\u{2728}』\u{3000}https://mixch.tv/m/UBHJplv4",
+    },
+  },
+  {
+    id: "2026-08-29-paton-vote-day-5-story",
+    date: "2026-08-29",
+    sameDayOrder: 4,
+    activityIds: ["campus-girls"],
+    title: "日付が変わる前に、5日目のPaton投票もお願いします",
+    body: "8月29日、みりぃがInstagram Storyで、日付が変わる前に5日目のPaton投票をお願いする案内を投稿しました。変面さんとの2ショットとともに、「日付が変わって30日になったら皆様お願いします」と呼びかけています。",
+    sourceLabel: patonVoteDay5StoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: patonVoteDay5StoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "日付が変わる前に寝ますね💤\n" +
+        "だから、少し早いですがパトンのお願い投稿しておく🙏🏻\n" +
+        "日付が変わって30日になったら皆様お願いします‼️\n" +
+        "5日目お願いします🥹🙏🏻❤️‍🔥\n" +
+        "変面さんとの2ショット✌️",
     },
   },
   {
