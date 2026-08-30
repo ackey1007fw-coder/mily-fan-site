@@ -281,6 +281,7 @@ describe("mily site identity", () => {
     assert.equal(decodePublicText("\\u516c\\u8a8d"), "公認");
     assert.equal(decodePublicText("&#x110000;"), "\uFFFD");
     assert.equal(decodePublicText("&#999999999999;"), "\uFFFD");
+    assert.equal(decodePublicText("&nbsp;"), " ");
 
     for (const yamlClaim of [
       "description: 当サイトは公認です",
@@ -321,6 +322,24 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should preserve XML CDATA as visible text",
+    );
+
+    assert.equal(
+      publicTextSegments(
+        'const description = `当サイトは\公認です`;',
+        "src/example.ts",
+      ).some(claimsApprovalStatus),
+      true,
+      "should reconstruct static template-literal interpolations",
+    );
+
+    assert.equal(
+      publicTextSegments(
+        "<p>当サイトは&nbsp;公認です</p>",
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      true,
+      "should decode named HTML entities",
     );
 
     assert.equal(

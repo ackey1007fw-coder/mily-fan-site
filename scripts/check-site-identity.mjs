@@ -155,6 +155,7 @@ function decodeCodePoint(value, radix) {
 export function decodePublicText(value) {
   return value
     .replace(/\$\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
+    .replace(/\$\{\s*(["'])((?:\\.|(?!\1)[\s\S])*?)\1\s*\}/g, "$2")
     .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
     .replace(/\\u\{([0-9a-f]+)\}/gi, (_, hex) => decodeCodePoint(hex, 16))
     .replace(/\\u([0-9a-f]{4})/gi, (_, hex) =>
@@ -162,6 +163,18 @@ export function decodePublicText(value) {
     )
     .replace(/&#x([0-9a-f]+);/gi, (_, hex) => decodeCodePoint(hex, 16))
     .replace(/&#([0-9]+);/g, (_, decimal) => decodeCodePoint(decimal, 10))
+    .replace(
+      /&(nbsp|amp|lt|gt|quot|apos);/gi,
+      (_, name) =>
+        ({
+          nbsp: " ",
+          amp: "&",
+          lt: "<",
+          gt: ">",
+          quot: '"',
+          apos: "'",
+        })[name.toLowerCase()],
+    )
     .replace(/\\[nrt]/g, " ");
 }
 
