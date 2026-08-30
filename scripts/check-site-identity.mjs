@@ -112,7 +112,7 @@ export function claimsApprovalStatus(content) {
     String.raw`${siteSubject}\s*(?:は|が|を|も|については|では)?\s*${approver}\s*${approvalAssertion}`,
   );
   const approvalFirst = new RegExp(
-    String.raw`${approver}\s*(?:${approvalAssertion}|(?:非)?公認の)\s*(?:非公式)?(?:ファン)?(?:サイト|ページ)`,
+    String.raw`${approver}\s*(?:(?:${approvalAssertion}|(?:非)?公認の)\s*(?:非公式)?(?:ファン)?(?:サイト|ページ)|(?:非)?公認\s*(?:非公式)?ファンサイト)`,
   );
 
   return content

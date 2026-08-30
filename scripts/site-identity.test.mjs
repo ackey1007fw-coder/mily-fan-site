@@ -154,6 +154,8 @@ describe("mily site identity", () => {
       "本人に公認されたファンサイトです",
       "公認のファンサイトです",
       "三橋莉子さん公認のファンサイトです",
+      "本人公認ファンサイトです",
+      "みりぃ公認ファンサイトです",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
