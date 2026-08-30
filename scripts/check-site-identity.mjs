@@ -74,7 +74,9 @@ export async function collectFiles(dir = root) {
       continue;
     }
     if (SKIP_FILES.has(entry.name)) continue;
-    if (SCAN_EXTENSIONS.has(path.extname(entry.name))) files.push(fullPath);
+    if (SCAN_EXTENSIONS.has(path.extname(entry.name).toLowerCase())) {
+      files.push(fullPath);
+    }
   }
   return files;
 }
@@ -419,7 +421,7 @@ function stripSourceComments(content) {
 
 export function publicTextSegments(content, relative) {
   const normalizedPath = relative.replaceAll("\\", "/");
-  const extension = path.extname(normalizedPath);
+  const extension = path.extname(normalizedPath).toLowerCase();
   const sourceExtension = [
     ".ts",
     ".tsx",
@@ -436,6 +438,7 @@ export function publicTextSegments(content, relative) {
   const segments = [];
   const publicContent = [".html", ".xml", ".svg"].includes(extension)
     ? sourceContent
+        .replace(/<!--[\s\S]*?-->/g, "")
         .replace(
           /<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi,
           (whole, attributes, body) =>

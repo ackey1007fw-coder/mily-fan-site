@@ -396,6 +396,14 @@ describe("mily site identity", () => {
     }
     assert.equal(
       publicTextSegments(
+        '<!-- title="当サイトは公認です" -->\n<p>ファン運営です</p>',
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      false,
+      "should ignore hidden HTML comments before string extraction",
+    );
+    assert.equal(
+      publicTextSegments(
         '<script type="application/ld+json">{"description":"当サイトは公認です"}</script>',
         "public/example.html",
       ).some(claimsApprovalStatus),
@@ -530,6 +538,13 @@ describe("mily site identity", () => {
     );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
+    assert.equal(
+      publicTextSegments("<p>当サイトは公認です</p>", "public/About.HTML").some(
+        claimsApprovalStatus,
+      ),
+      true,
+      "should normalize mixed-case public extensions",
+    );
     assert.equal(
       publicTextSegments(
         '/* Never display "当サイトは公認です". */',
