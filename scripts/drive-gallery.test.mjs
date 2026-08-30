@@ -1248,6 +1248,10 @@ describe("Repository scan is extension-independent", () => {
       path.join(publicForms, "blocked.txt"),
       `https://${driveHost}/file/d/${publicFormId}/view`,
     );
+    await writeFile(
+      path.join(publicForms, "blocked-query.txt"),
+      `${publicFormUrl}?source=${publicFormId}`,
+    );
     await git(["add", "-A"], dir);
 
     const { findings } = await scanForDriveIdentifiers(dir);
@@ -1262,6 +1266,13 @@ describe("Repository scan is extension-independent", () => {
     );
     assert.ok(blockedKinds.has("drive-host"));
     assert.ok(blockedKinds.has("id-shape"));
+    assert.ok(
+      findings.some(
+        (finding) =>
+          finding.file === "public-forms/blocked-query.txt" &&
+          finding.kind === "id-shape",
+      ),
+    );
   });
 
   it("finds Drive hosts and folder paths regardless of extension", async () => {

@@ -26,7 +26,7 @@ export const DRIVE_FOLDER_PATTERN = /drive\.google\.com\/drive\/folders|\/drive\
  *  constants, header names and hex digests are none of those. */
 const ID_CANDIDATE = /[A-Za-z0-9_-]{25,}/g;
 const PUBLIC_GOOGLE_FORM_URL =
-  /https:\/\/docs\.google\.com\/forms\/d\/e\/[A-Za-z0-9_-]+\/viewform(?:\?[^\s"'<>)]*)?/g;
+  /https:\/\/docs\.google\.com\/forms\/d\/e\/[A-Za-z0-9_-]+\/viewform(\?[^\s"'<>)]*)?/g;
 
 export function looksLikeDriveId(token) {
   return /[A-Z]/.test(token) && /[a-z]/.test(token) && /[0-9]/.test(token);
@@ -36,7 +36,10 @@ export function findDriveIds(text) {
   // Published Google Forms use an opaque public form id with the same shape as
   // a Drive id. Exempt only the canonical public /forms/d/e/.../viewform URL;
   // the same token anywhere else, and every Drive host/path, remains blocked.
-  const withoutPublicGoogleForms = text.replace(PUBLIC_GOOGLE_FORM_URL, "");
+  const withoutPublicGoogleForms = text.replace(
+    PUBLIC_GOOGLE_FORM_URL,
+    (_url, query = "") => query,
+  );
   return (withoutPublicGoogleForms.match(ID_CANDIDATE) ?? []).filter(
     looksLikeDriveId,
   );
