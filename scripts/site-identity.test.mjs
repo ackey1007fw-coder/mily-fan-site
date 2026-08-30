@@ -410,6 +410,20 @@ describe("mily site identity", () => {
       true,
       "should preserve top-level visible HTML text",
     );
+    assert.equal(
+      publicTextSegments(
+        "<p>当サイトは<ruby>公<rt>こう</rt>認<rt>にん</rt></ruby>です</p>",
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      true,
+      "should exclude ruby annotations from reconstructed base text",
+    );
+    assert.doesNotThrow(() =>
+      publicTextSegments(
+        `<p>${'{x ? "a" : "b"}'.repeat(18)}</p>`,
+        "src/example.tsx",
+      ),
+    );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
     assert.equal(

@@ -185,6 +185,7 @@ function decodeCssText(value) {
 }
 
 function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
+  const MAX_RENDERED_ALTERNATIVES = 128;
   const segments = [];
   const stack = [];
   const renderedContent = content.replace(
@@ -224,6 +225,9 @@ function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
   }
 
   const appendVisibleText = (value) => {
+    if (stack.some((frame) => frame.tag === "rt" || frame.tag === "rp")) {
+      return;
+    }
     const expandConditionalText = (input) => {
       const conditional =
         /\{[^{}?]*\?\s*(["'])((?:\\.|(?!\1)[\s\S])*?)\1\s*:\s*(["'])((?:\\.|(?!\3)[\s\S])*?)\3\s*\}/;
@@ -246,9 +250,13 @@ function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
       return;
     }
     for (const frame of stack) {
-      frame.texts = frame.texts.flatMap((existing) =>
-        visibleAlternatives.map((visible) => existing + visible),
-      );
+      frame.texts = [
+        ...new Set(
+          frame.texts.flatMap((existing) =>
+            visibleAlternatives.map((visible) => existing + visible),
+          ),
+        ),
+      ].slice(0, MAX_RENDERED_ALTERNATIVES);
     }
   };
 
