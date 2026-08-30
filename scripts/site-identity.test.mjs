@@ -199,6 +199,7 @@ describe("mily site identity", () => {
       "<p>{site.displayTitle}は<strong>公認</strong>です</p>",
       "<div>当サイトは<strong>公認</strong>です</div>",
       "<>当サイトは<strong>公認</strong>です</>",
+      "<span><span>当サイトは</span><strong>公認</strong>です</span>",
     ]) {
       assert.equal(
         publicTextSegments(renderedClaim, "src/example.tsx").some(

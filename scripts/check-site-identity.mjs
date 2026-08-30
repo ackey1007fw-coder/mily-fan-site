@@ -138,15 +138,59 @@ export function decodePublicText(value) {
     .replace(/\\[nrt]/g, " ");
 }
 
+function renderedMarkupSegments(content) {
+  const segments = [];
+  const stack = [];
+  const tokens = content.match(/<[^>]*>|[^<]+/g) ?? [];
+
+  const appendVisibleText = (value) => {
+    if (stack.length === 0) return;
+    const visible = decodePublicText(value)
+      .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
+      .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
+      .replace(/\{[^{}]*\}/g, "");
+    for (const frame of stack) frame.text += visible;
+  };
+
+  for (const token of tokens) {
+    if (!token.startsWith("<")) {
+      appendVisibleText(token);
+      continue;
+    }
+    if (/^<!--/.test(token) || /^<![^-]/.test(token)) continue;
+
+    if (token === "<>") {
+      stack.push({ tag: "#fragment", text: "" });
+      continue;
+    }
+
+    const closing = token.match(/^<\/([A-Za-z][\w:.-]*)\s*>$/);
+    const fragmentClosing = token === "</>";
+    if (closing || fragmentClosing) {
+      const tag = fragmentClosing ? "#fragment" : closing[1].toLowerCase();
+      const index = stack.findLastIndex((frame) => frame.tag === tag);
+      if (index >= 0) {
+        const [frame] = stack.splice(index, 1);
+        segments.push(frame.text);
+      }
+      continue;
+    }
+
+    const opening = token.match(/^<([A-Za-z][\w:.-]*)\b/);
+    if (opening && !/\/\s*>$/.test(token)) {
+      stack.push({ tag: opening[1].toLowerCase(), text: "" });
+    }
+  }
+
+  return segments;
+}
+
 export function publicTextSegments(content, relative) {
   const normalizedPath = relative.replaceAll("\\", "/");
   const extension = path.extname(normalizedPath);
   const segments = [];
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const textNode = />([^<>{}]+)</g;
-  const renderedContainer =
-    /<([a-z][\w:-]*)\b[^>]*>([\s\S]*?)<\/\1>/gi;
-  const renderedFragment = /<>([\s\S]*?)<\/>/g;
 
   for (const match of content.matchAll(quoted)) {
     segments.push(decodePublicText(match[2]));
@@ -154,20 +198,7 @@ export function publicTextSegments(content, relative) {
   for (const match of content.matchAll(textNode)) {
     segments.push(decodePublicText(match[1]));
   }
-  for (const match of [
-    ...content.matchAll(renderedContainer),
-    ...content.matchAll(renderedFragment),
-  ]) {
-    segments.push(
-      decodePublicText(
-        match.at(-1)
-          .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
-          .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
-          .replace(/<[^>]+>/g, "")
-          .replace(/\{[^{}]*\}/g, ""),
-      ),
-    );
-  }
+  segments.push(...renderedMarkupSegments(content));
 
   if ([".md", ".txt"].includes(extension)) {
     segments.push(decodePublicText(content));
