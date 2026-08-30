@@ -4,7 +4,12 @@ import { describe, it } from "node:test";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { collectFiles, SCAN_EXTENSIONS } from "./check-site-identity.mjs";
+import {
+  claimsApprovalStatus,
+  collectFiles,
+  isPublicSurface,
+  SCAN_EXTENSIONS,
+} from "./check-site-identity.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -114,5 +119,30 @@ describe("mily site identity", () => {
     ]) {
       assert.ok(rel.includes(expected), `should scan ${expected}`);
     }
+  });
+
+  it("rejects affirmative and negative approval claims across public surfaces", () => {
+    for (const relative of [
+      "index.html",
+      "public/site.webmanifest",
+      "src/components/Footer.tsx",
+      "support/index.html",
+    ]) {
+      assert.equal(isPublicSurface(relative), true, `should guard ${relative}`);
+    }
+
+    for (const claim of [
+      "当サイトは本人公認です",
+      "公認されています",
+      "公認ではありません",
+      "非公認です",
+    ]) {
+      assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
+    }
+
+    assert.equal(
+      claimsApprovalStatus("ファン運営の非公式サイトです。本人運営ではありません。"),
+      false,
+    );
   });
 });

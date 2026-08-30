@@ -80,6 +80,30 @@ function readRelative(relative) {
 // for it as a standalone token.
 const MISSPELLING_RE = /\bmilly\b/i;
 
+const PUBLIC_SURFACE_ROOTS = new Set([
+  "activities",
+  "gallery",
+  "news",
+  "profile",
+  "public",
+  "shared",
+  "src",
+  "stories",
+  "support",
+]);
+
+export function isPublicSurface(relative) {
+  const normalized = relative.replaceAll("\\", "/");
+  if (normalized === "index.html") return true;
+  return PUBLIC_SURFACE_ROOTS.has(normalized.split("/")[0]);
+}
+
+export function claimsApprovalStatus(content) {
+  // Public pages intentionally say neither approved nor unapproved. Reject the
+  // common marker itself so affirmative, negative, and rephrased claims all fail.
+  return content.includes("公認");
+}
+
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   if (branch && branch !== EXPECTED.branch) {
     console.log(
@@ -142,14 +166,15 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     errors.push("index.html must keep the unofficial disclaimer.");
   }
 
-  if (html.includes("公認ではありません")) {
-    errors.push("index.html must not make a public claim about approval status.");
-  }
-
   const files = await collectFiles(root);
   for (const filePath of files) {
     const content = await readFile(filePath, "utf8").catch(() => "");
     const relative = path.relative(root, filePath);
+    if (isPublicSurface(relative) && claimsApprovalStatus(content)) {
+      errors.push(
+        `Public surface ${relative} must not make a claim about approval status.`,
+      );
+    }
     for (const value of FORBIDDEN) {
       if (content.includes(value)) {
         errors.push(
