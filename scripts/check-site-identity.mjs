@@ -105,7 +105,7 @@ export function claimsApprovalStatus(content) {
   const siteSubject =
     /(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト/;
   const approvalAssertion =
-    /(?:非公認(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:です|である|済み|では(?:ありません|ない)|され(?:て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ております|ており)|得(?:た|ました|ています|ている)|いただ(?:いた|いています|いている|きました))))/;
+    /(?:非公認(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:です|である|済み|では(?:ありません|ない)|され(?:て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))/;
   const approvalSiteModifier =
     /(?:本人(?:の|から)?|みりぃ(?:さん)?(?:の|から)?)?(?:非)?公認(?:の)?(?:非公式)?(?:ファン)?サイト/;
 
@@ -117,6 +117,27 @@ export function claimsApprovalStatus(content) {
         approvalSiteModifier.test(sentence) ||
         (siteSubject.test(sentence) && approvalAssertion.test(sentence)),
     );
+}
+
+export function publicTextSegments(content, relative) {
+  const normalizedPath = relative.replaceAll("\\", "/");
+  const extension = path.extname(normalizedPath);
+  const segments = [];
+  const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
+  const textNode = />([^<>{}]+)</g;
+
+  for (const match of content.matchAll(quoted)) {
+    segments.push(match[2].replace(/\\[nrt]/g, " "));
+  }
+  for (const match of content.matchAll(textNode)) {
+    segments.push(match[1]);
+  }
+
+  if (segments.length === 0 && [".md", ".txt"].includes(extension)) {
+    segments.push(content);
+  }
+
+  return segments;
 }
 
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
@@ -185,7 +206,10 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
   for (const filePath of files) {
     const content = await readFile(filePath, "utf8").catch(() => "");
     const relative = path.relative(root, filePath);
-    if (isPublicSurface(relative) && claimsApprovalStatus(content)) {
+    if (
+      isPublicSurface(relative) &&
+      publicTextSegments(content, relative).some(claimsApprovalStatus)
+    ) {
       errors.push(
         `Public surface ${relative} must not make a claim about approval status.`,
       );

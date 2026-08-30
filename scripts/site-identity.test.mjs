@@ -8,6 +8,7 @@ import {
   claimsApprovalStatus,
   collectFiles,
   isPublicSurface,
+  publicTextSegments,
   SCAN_EXTENSIONS,
 } from "./check-site-identity.mjs";
 
@@ -143,6 +144,8 @@ describe("mily site identity", () => {
       "当サイトは公認されました",
       "当サイトは公認されていません",
       "当サイトは\n公認です",
+      "当サイトは公認を受けていません",
+      "当サイトは公認をいただいていません",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -167,5 +170,22 @@ describe("mily site identity", () => {
         `should allow unrelated wording: ${unrelated}`,
       );
     }
+
+    const separateLiterals =
+      'const intro = "このサイトを応援"; const event = "このイベントは大学公認です";';
+    assert.equal(
+      publicTextSegments(separateLiterals, "src/example.ts").some(
+        claimsApprovalStatus,
+      ),
+      false,
+    );
+
+    const renderedNewline = "<p>当サイトは\n公認です</p>";
+    assert.equal(
+      publicTextSegments(renderedNewline, "src/example.tsx").some(
+        claimsApprovalStatus,
+      ),
+      true,
+    );
   });
 });
