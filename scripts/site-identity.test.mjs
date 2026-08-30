@@ -166,6 +166,8 @@ describe("mily site identity", () => {
       "当サイトは公認でないです",
       "当サイトは未公認です",
       "未公認のファンサイトです",
+      "当サイトは本人の公認を取得しています",
+      "このファンサイトは公認を得ております",
       "This fan site is approved by Mily",
       "This is an unapproved fan site",
       "This fan site isn't approved by Mily",
@@ -277,6 +279,8 @@ describe("mily site identity", () => {
     }
 
     assert.equal(decodePublicText("\\u516c\\u8a8d"), "公認");
+    assert.equal(decodePublicText("&#x110000;"), "\uFFFD");
+    assert.equal(decodePublicText("&#999999999999;"), "\uFFFD");
 
     for (const yamlClaim of [
       "description: 当サイトは公認です",

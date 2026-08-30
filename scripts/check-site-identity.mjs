@@ -113,7 +113,7 @@ export function claimsApprovalStatus(content) {
   const siteSubject =
     String.raw`(?:(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?\s*(?:ファン)?サイト|ファンサイト)`;
   const approvalAssertion =
-    String.raw`(?:(?:非|未)公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
+    String.raw`(?:(?:非|未)公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない|ております|ており)|取得(?:した|しました|しています|している|していません|していない|しております|しており)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
   const approver =
     String.raw`(?:(?:本人|みりぃ(?:さん)?|三橋莉子(?:さん)?)(?:に|から|の)?)?`;
   const requiredApprover =
@@ -139,30 +139,35 @@ export function claimsApprovalStatus(content) {
   );
 }
 
+function decodeCodePoint(value, radix) {
+  const codePoint = Number.parseInt(value, radix);
+  if (
+    !Number.isInteger(codePoint) ||
+    codePoint < 0 ||
+    codePoint > 0x10ffff ||
+    (codePoint >= 0xd800 && codePoint <= 0xdfff)
+  ) {
+    return "\uFFFD";
+  }
+  return String.fromCodePoint(codePoint);
+}
+
 export function decodePublicText(value) {
   return value
     .replace(/\$\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
     .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
-    .replace(/\\u\{([0-9a-f]+)\}/gi, (_, hex) =>
-      String.fromCodePoint(Number.parseInt(hex, 16)),
-    )
+    .replace(/\\u\{([0-9a-f]+)\}/gi, (_, hex) => decodeCodePoint(hex, 16))
     .replace(/\\u([0-9a-f]{4})/gi, (_, hex) =>
       String.fromCharCode(Number.parseInt(hex, 16)),
     )
-    .replace(/&#x([0-9a-f]+);/gi, (_, hex) =>
-      String.fromCodePoint(Number.parseInt(hex, 16)),
-    )
-    .replace(/&#([0-9]+);/g, (_, decimal) =>
-      String.fromCodePoint(Number.parseInt(decimal, 10)),
-    )
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => decodeCodePoint(hex, 16))
+    .replace(/&#([0-9]+);/g, (_, decimal) => decodeCodePoint(decimal, 10))
     .replace(/\\[nrt]/g, " ");
 }
 
 function decodeCssText(value) {
   return decodePublicText(value)
-    .replace(/\\([0-9a-f]{1,6})\s?/gi, (_, hex) =>
-      String.fromCodePoint(Number.parseInt(hex, 16)),
-    )
+    .replace(/\\([0-9a-f]{1,6})\s?/gi, (_, hex) => decodeCodePoint(hex, 16))
     .replace(/\\(.)/g, "$1");
 }
 
