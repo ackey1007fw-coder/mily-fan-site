@@ -1,0 +1,299 @@
+import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { describe, it } from "node:test";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
+import { events } from "../src/data/events.ts";
+import { galleryVideos } from "../src/data/galleryVideos.ts";
+import { highlights } from "../src/data/highlights.ts";
+import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
+import { media } from "../src/data/media.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { stories } from "../src/data/stories.ts";
+import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { contest } from "../src/data/contest.ts";
+import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
+import { verifyNews } from "./content-invariants.mjs";
+import {
+  assertPortalNewsFollowsSort,
+  findFeedItem,
+  portalNewsId,
+} from "./portal-feed-order.mjs";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+const PATON_15X_ID = "2026-08-31-paton-15x-day";
+const WAKE_ID = "2026-08-31-showroom-wake-me";
+const CONSEC_ID = "2026-08-30-consecutive-stream-30";
+const RANK3_ID = "2026-08-30-paton-rank-3";
+const NEW_IDS = [PATON_15X_ID, WAKE_ID, CONSEC_ID, RANK3_ID];
+
+const PATON_15X_SOURCE = "https://x.com/Mily_chan36/status/2094102196447334713";
+const PATON_15X_FOLLOWUP = "https://x.com/Mily_chan36/status/2094191581951906187";
+const WAKE_SOURCE = "https://x.com/Mily_chan36/status/2094179970960744615";
+const CONSEC_SOURCE = "https://x.com/Mily_chan36/status/2094023746751463582";
+const RANK3_SOURCE = "https://x.com/Mily_chan36/status/2093802981921849728";
+const HELD_SCREENSHOT = "2094192106105659650";
+const SHOWROOM = "https://www.showroom-live.com/r/circle2026_0734";
+const PATON = "https://paton.jp/event/entrant/11380";
+const START = Date.parse("2026-08-26T18:00:00+09:00");
+const END = Date.parse("2026-09-01T23:59:00+09:00");
+
+const FORBIDDEN_PEOPLE_SITES = [
+  "Millie",
+  "millie",
+  "あっきー",
+  "Ackey",
+  "公式サイト",
+  "公認",
+  "本人運営",
+  "tiktok.com",
+  "instagram.com",
+  "pbs.twimg.com",
+  "video.twimg.com",
+  "amplify_video",
+  "_movie_mps",
+];
+
+function item(id) {
+  return news.find((entry) => entry.id === id);
+}
+
+describe("2026-08-30〜31 X posts — Latest entries", () => {
+  it("adds four source-backed News items with confirmed JST dates", () => {
+    const ordered = sortNewsByDateDesc(news);
+    const paton15x = item(PATON_15X_ID);
+    const wake = item(WAKE_ID);
+    const consec = item(CONSEC_ID);
+    const rank3 = item(RANK3_ID);
+
+    assert.ok(paton15x);
+    assert.ok(wake);
+    assert.ok(consec);
+    assert.ok(rank3);
+    for (const id of NEW_IDS) {
+      assert.equal(news.filter((entry) => entry.id === id).length, 1);
+    }
+    assert.equal(news.length, 61);
+    assert.equal(paton15x.date, "2026-08-31");
+    assert.equal(wake.date, "2026-08-31");
+    assert.equal(consec.date, "2026-08-30");
+    assert.equal(rank3.date, "2026-08-30");
+    assert.equal(paton15x.sameDayOrder, 2);
+    assert.equal(wake.sameDayOrder, 1);
+    assert.equal(consec.sameDayOrder, 4);
+    assert.equal(rank3.sameDayOrder, undefined);
+    assert.deepEqual(verifyNews(NEW_IDS.map(item)), []);
+    assert.deepEqual(verifyNews(news), []);
+    assert.equal(ordered[0]?.id, PATON_15X_ID);
+    assert.equal(ordered[1]?.id, WAKE_ID);
+    assert.equal(ordered[2]?.id, CONSEC_ID);
+    assert.equal(ordered[3]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[4]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[5]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[6]?.id, RANK3_ID);
+  });
+
+  it("combines the 8/31 Paton 1.5x posts and reuses the confirmed portrait CTA", () => {
+    const entry = item(PATON_15X_ID);
+
+    assert.equal(entry.source, PATON_15X_SOURCE);
+    assert.equal(entry.sourceLabel, "Xの投稿を見る");
+    assert.deepEqual(entry.additionalSources, [
+      {
+        label: "朝の無料拍手のX投稿を見る",
+        url: PATON_15X_FOLLOWUP,
+      },
+    ]);
+    assert.equal(entry.url, campusGirlsPatonVoteLink.url);
+    assert.equal(entry.ctaLabel, campusGirlsPatonVoteLink.label);
+    assert.equal(entry.url, PATON);
+    assert.equal(entry.media, campusGirlsPatonPortraitImage);
+    assert.equal(entry.additionalMedia, undefined);
+    assert.deepEqual(entry.activityIds, ["campus-girls"]);
+    assert.match(entry.body, /投稿時点で1位/);
+    assert.match(entry.body, /0:00〜23:59/);
+    assert.match(entry.body, /無料拍手/);
+    assert.match(entry.body, /1\.5倍/);
+    assert.match(entry.message.text, /緊急告知/);
+    assert.match(entry.message.text, /現在1位/);
+    assert.equal(entry.source.includes("?s="), false);
+    assert.equal(entry.additionalSources[0].url.includes("?s="), false);
+  });
+
+  it("keeps SHOWROOM CTAs without expired t= tracking", () => {
+    const wake = item(WAKE_ID);
+    const consec = item(CONSEC_ID);
+
+    assert.equal(wake.source, WAKE_SOURCE);
+    assert.equal(consec.source, CONSEC_SOURCE);
+    assert.equal(wake.url, SHOWROOM);
+    assert.equal(consec.url, SHOWROOM);
+    assert.equal(wake.ctaLabel, "SHOWROOMを見る");
+    assert.equal(consec.ctaLabel, "SHOWROOMを見る");
+    assert.equal(wake.url.includes("?t="), false);
+    assert.equal(consec.url.includes("?t="), false);
+    assert.equal(wake.source.includes("?t="), false);
+    assert.equal(consec.source.includes("?t="), false);
+    assert.match(wake.message.text, /\?t=1788126356/);
+    assert.match(consec.message.text, /\?t=1788089115/);
+    assert.match(wake.body, /配信中だった記録/);
+    assert.match(consec.body, /30日連続配信記念日/);
+    assert.deepEqual(wake.activityIds, ["live-stream"]);
+    assert.deepEqual(consec.activityIds, ["live-stream"]);
+    assert.equal(wake.media, undefined);
+    assert.equal(consec.media, undefined);
+  });
+
+  it("keeps the 8/30 Paton rank card as a morning snapshot only", () => {
+    const entry = item(RANK3_ID);
+    const during = resolveNewsLinks(entry, START);
+    const after = resolveNewsLinks(entry, END + 1);
+
+    assert.equal(entry.source, RANK3_SOURCE);
+    assert.equal(entry.url, campusGirlsPatonVoteLink.url);
+    assert.equal(entry.ctaLabel, campusGirlsPatonVoteLink.label);
+    assert.equal(entry.media, campusGirlsPatonPortraitImage);
+    assert.deepEqual(entry.activityIds, ["campus-girls"]);
+    assert.match(entry.body, /投稿時点で3位/);
+    assert.match(entry.body, /2位に上がりたい/);
+    assert.equal(entry.body.includes("1位"), false);
+    assert.equal(during.cta?.url, PATON);
+    assert.equal(after.cta, undefined);
+  });
+});
+
+describe("2026-08-30〜31 X posts — activity and identity", () => {
+  it("does not attach the wrong Activities or invent other people and sites", () => {
+    const campusNews = selectActivityNews("campus-girls", news, news.length);
+    const liveNews = selectActivityNews("live-stream", news, news.length);
+    const missNews = selectActivityNews("miss-circle", news, news.length);
+    const radioNews = selectActivityNews("radio", news, news.length);
+
+    assert.equal(campusNews[0]?.id, PATON_15X_ID);
+    assert.equal(campusNews[1]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(campusNews[2]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(campusNews[3]?.id, RANK3_ID);
+    assert.equal(liveNews[0]?.id, WAKE_ID);
+    assert.equal(liveNews[1]?.id, CONSEC_ID);
+    assert.equal(liveNews[2]?.id, "2026-08-30-morning-showroom-0600");
+
+    for (const id of [PATON_15X_ID, RANK3_ID]) {
+      assert.equal(liveNews.some((entry) => entry.id === id), false);
+      assert.equal(missNews.some((entry) => entry.id === id), false);
+      assert.equal(radioNews.some((entry) => entry.id === id), false);
+    }
+    for (const id of [WAKE_ID, CONSEC_ID]) {
+      assert.equal(campusNews.some((entry) => entry.id === id), false);
+      assert.equal(missNews.some((entry) => entry.id === id), false);
+      assert.equal(radioNews.some((entry) => entry.id === id), false);
+    }
+
+    for (const id of NEW_IDS) {
+      const entry = item(id);
+      const copy = `${entry.title}\n${entry.body}\n${entry.message?.text ?? ""}`;
+      for (const phrase of FORBIDDEN_PEOPLE_SITES) {
+        assert.equal(copy.includes(phrase), false, `${id}: ${phrase}`);
+      }
+      assert.equal(copy.toLowerCase().includes("millie"), false, id);
+    }
+  });
+
+  it("does not add the held 8/31 screenshot or scrape SNS files", async () => {
+    const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
+    assert.equal(newsSource.includes(HELD_SCREENSHOT), false);
+    assert.equal(newsSource.includes("pbs.twimg.com"), false);
+    assert.equal(newsSource.includes("video.twimg.com"), false);
+    assert.equal(news.some((entry) => entry.id.includes("2094192106105659650")), false);
+
+    for (const id of NEW_IDS) {
+      assert.equal(media.some((entry) => entry.id.includes(id)), false);
+      assert.equal(galleryVideos.some((entry) => entry.id.includes(id)), false);
+      assert.equal(stories.some((entry) => JSON.stringify(entry).includes(id)), false);
+      assert.equal(highlights.some((entry) => entry.id.includes(id)), false);
+      assert.equal(existsSync(path.join(root, "stories", id)), false);
+    }
+
+    assert.deepEqual(events, []);
+    assert.deepEqual(streamSchedule, []);
+    assert.equal(contest.currentPhase?.name, "3次審査進出");
+  });
+
+  it("stays out of profile, media, stories, and schedule files", async () => {
+    for (const relative of [
+      "src/data/media.ts",
+      "src/data/galleryVideos.ts",
+      "src/data/stories.ts",
+      "src/data/highlights.ts",
+      "src/data/profile.ts",
+      "src/data/events.ts",
+      "src/data/streamSchedule.ts",
+      "src/data/contest.ts",
+    ]) {
+      const source = await readFile(path.join(root, relative), "utf8");
+      for (const id of NEW_IDS) {
+        assert.equal(source.includes(id), false, `${relative} ${id}`);
+      }
+      assert.equal(source.includes("2094102196447334713"), false, relative);
+      assert.equal(source.includes("2094191581951906187"), false, relative);
+      assert.equal(source.includes("2094179970960744615"), false, relative);
+      assert.equal(source.includes("2094023746751463582"), false, relative);
+      assert.equal(source.includes("2093802981921849728"), false, relative);
+      assert.equal(source.includes(HELD_SCREENSHOT), false, relative);
+    }
+  });
+});
+
+describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
+  it("flows through Portal Feed without hardcoded news ids", async () => {
+    const feed = createPortalFeed({ now: new Date("2026-08-31T08:00:00+09:00") });
+    assertPortalNewsFollowsSort(feed, news);
+
+    const paton15x = findFeedItem(feed, portalNewsId(PATON_15X_ID));
+    const wake = findFeedItem(feed, portalNewsId(WAKE_ID));
+    const consec = findFeedItem(feed, portalNewsId(CONSEC_ID));
+    const rank3 = findFeedItem(feed, portalNewsId(RANK3_ID));
+
+    assert.equal(paton15x.type, "news");
+    assert.equal(wake.type, "news");
+    assert.equal(consec.type, "news");
+    assert.equal(rank3.type, "news");
+    assert.equal(paton15x.publishedAt, "2026-08-31T00:00:00+09:00");
+    assert.equal(wake.publishedAt, "2026-08-31T00:00:00+09:00");
+    assert.equal(consec.publishedAt, "2026-08-30T00:00:00+09:00");
+    assert.equal(rank3.publishedAt, "2026-08-30T00:00:00+09:00");
+    assert.equal(paton15x.sourceUrl, PATON_15X_SOURCE);
+    assert.equal(wake.sourceUrl, WAKE_SOURCE);
+    assert.equal(wake.image, undefined);
+    assert.equal(consec.image, undefined);
+
+    const portalSource = await readFile(
+      path.join(root, "src/data/portalFeed.ts"),
+      "utf8",
+    );
+    for (const id of NEW_IDS) {
+      assert.equal(portalSource.includes(id), false);
+    }
+  });
+
+  it("documents the four NEWS items and the held screenshot in CONTENT-OPS", async () => {
+    const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
+    assert.match(ops, /61件/);
+    assert.match(ops, /2094102196447334713/);
+    assert.match(ops, /2094191581951906187/);
+    assert.match(ops, /2094179970960744615/);
+    assert.match(ops, /2094023746751463582/);
+    assert.match(ops, /2093802981921849728/);
+    assert.match(ops, /2094192106105659650/);
+    assert.match(ops, /無料拍手/);
+    assert.match(ops, /投稿時点で1位/);
+    assert.match(ops, /投稿時点で3位/);
+    assert.match(ops, /30日連続配信記念/);
+    assert.match(ops, /配信中だった記録/);
+    assert.match(ops, /Drive原本がまだ無い/);
+  });
+});

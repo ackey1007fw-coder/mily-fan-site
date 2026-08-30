@@ -50,11 +50,15 @@ describe("2026-08-30 morning SHOWROOM 6:00 X post — Latest entry", () => {
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(news.filter((candidate) => candidate.source === SOURCE).length, 1);
-    assert.equal(news.length, 57);
-    assert.equal(ordered[0]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[1]?.id, NEWS_ID);
-    assert.equal(ordered[2]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[3]?.id, "2026-08-29-paton-vote-day-5-story");
+    assert.equal(news.length, 61);
+    assert.equal(ordered[0]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[1]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[2]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[3]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[4]?.id, NEWS_ID);
+    assert.equal(ordered[5]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[6]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[7]?.id, "2026-08-29-paton-vote-day-5-story");
     assert.equal(entry.date, "2026-08-30");
     assert.equal(entry.sameDayOrder, 2);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
@@ -186,10 +190,12 @@ describe("2026-08-30 morning SHOWROOM 6:00 X post — scope", () => {
     const campusNews = selectActivityNews("campus-girls", news, news.length);
     const radioNews = selectActivityNews("radio", news, news.length);
 
-    assert.equal(liveNews[0]?.id, NEWS_ID);
-    assert.equal(liveNews[1]?.id, "2026-08-29-showroom-live-third-round");
+    assert.equal(liveNews[0]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(liveNews[1]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(liveNews[2]?.id, NEWS_ID);
+    assert.equal(liveNews[3]?.id, "2026-08-29-showroom-live-third-round");
     assert.equal(missNews[0]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(campusNews[0]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(campusNews[0]?.id, "2026-08-31-paton-15x-day");
     assert.equal(
       campusNews.some((entry) => entry.id === NEWS_ID),
       false,
