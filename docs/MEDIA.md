@@ -2335,7 +2335,58 @@ SupportEvent期間（2026-09-01 23:59 JSTまで）に従い、終了後に自動
 - b41-02 poster: 46,509 bytes / metadataなし / sha256
   `4ca98d51878757eb775b92ac3c3edbb40535c1c3b2c57b6440473ca1aff1cdaf`
 
+## 素材台帳（batch b42 / 受領日・source date 2026-08-30）
 
+湘南シーサイドサークルの番組Instagram Story動画2本。b42-01はトークテーマ
+「映画」のエピソード募集とメッセージフォーム、b42-02は8月30日10:00〜13:00の
+生放送・聴取案内・トークテーマ「映画」を表示する。オーナーが直接提供し、
+Radio Activityへの掲載を依頼した。
+
+恒久的なStory permalinkはないため、表示は非リンクの
+`湘南シーサイドサークル Instagram Story` labelとする。2本とも
+`activityIds: ["radio"]` を持つ公開manifestからRadio Activityへ直接関連付け、
+動画直下には既存の公開メッセージフォームへのCTAを再掲する。HOME Latest / NEWS、
+Gallery、`/stories/`、highlights、events、streamSchedule、`media.ts`には追加しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b42-01 | `radio/mily-b42-01-seaside-circle-message-form-story.mp4` | ラジオスタジオの3人と、映画にまつわるエピソードをメッセージフォームで募集する案内。512×910 / 19.033秒 / video-only | ✅ Radio Activity |
+| b42-01 poster | `radio/mily-b42-01-seaside-circle-message-form-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。512×910 | ✅ Radio Activity |
+| b42-02 | `radio/mily-b42-02-seaside-circle-live-broadcast-story.mp4` | ラジオスタジオの3人と、8月30日10:00〜13:00の生放送・聴取・テーマ「映画」の案内。512×910 / 19.033秒 / video-only | ✅ Radio Activity |
+| b42-02 poster | `radio/mily-b42-02-seaside-circle-live-broadcast-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。512×910 | ✅ Radio Activity |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない。受領バイトを変えず
+  `media/original/` のgitignored領域へ保存し、受け渡し名・URL・file IDは
+  tracked/public filesへ残さない
+- b42-01元動画: 7,802,686 bytes / sha256
+  `4638b96f92be9681e6a6460285cf13ef20ee0110e64ccec9f50abef884ddd9fa`
+- b42-02元動画: 7,617,268 bytes / sha256
+  `52c60494708678dca0bf36b9e65c22f28d8251a885f01e72566fb9a796da8552`
+- 2本とも H.264 High / 512×910 / 30fps / 571 frames / video 19.033秒。
+  HE-AAC 44.1kHz stereo音声はformat上19.918秒
+- 元動画の`creation_time`とCore Media handler名は受領検査だけに使い、投稿日・
+  投稿時刻の根拠にはしていない
+- 画面は番組の公開案内と出演者3人を写したもの。DM・通知・端末固有情報・連絡先・
+  第三者コメントは含まれず、本文・altには第三者名を転記していない
+
+### 音声と公開派生
+
+元素材の音声は内容・由来・権利者と再配信権を確認できないため、公開派生では削除した。
+映像は512×910、30fps、571フレームを維持し、crop・scale・引き伸ばし・
+アップスケール・短縮・テロップ変更はしていない。AI生成・顔補正・生成塗り足しもない。
+
+- b42-01 MP4: 603,497 bytes / H.264 Constrained Baseline / 19.033秒 /
+  音声なし / metadata・chapterなし / `+faststart` / sha256
+  `0a2a6435060523a0f9a3e71d6fe68fcf16ad1939994465979dde4cdf98ef7d69`
+- b42-01 poster: 116,909 bytes / 8.0秒地点の実フレーム / metadataなし /
+  sha256 `f17b0d6c3504e05890f6d001f0dd02b4b099b540b43b51b46afac8a1b6cfe30f`
+- b42-02 MP4: 595,846 bytes / H.264 Constrained Baseline / 19.033秒 /
+  音声なし / metadata・chapterなし / `+faststart` / sha256
+  `1e2a37dc3ba83c51d6753af64e4459bb5ea42e96f60958f1e47457c7b0e7bb5b`
+- b42-02 poster: 123,293 bytes / 8.0秒地点の実フレーム / metadataなし /
+  sha256 `17ba92876d6ad790fd598f0ebf728feaface90f0b6aa98e0a3c6482dbd08bfab`
 
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 

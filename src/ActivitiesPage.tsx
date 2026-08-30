@@ -10,6 +10,7 @@ import {
 } from "./data/activities";
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
+import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
   selectActivityHighlights,
@@ -320,6 +321,57 @@ function RadioCurrent() {
   );
 }
 
+function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
+  const videos = visibleRadioStoryVideos();
+  if (activityId !== "radio" || videos.length === 0) return null;
+  return (
+    <SectionShell eyebrow="Program Videos" title="2026年8月30日の番組動画">
+      <p className="mt-4 text-sm leading-7 text-ink-muted">
+        当日のトークテーマは「映画」。番組へのメッセージ募集と、生放送の案内動画です。
+      </p>
+      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {videos.map((video) => (
+          <li
+            key={video.id}
+            className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card"
+          >
+            <video
+              src={video.src}
+              poster={video.poster}
+              width={video.width}
+              height={video.height}
+              controls
+              playsInline
+              preload="none"
+              aria-label={video.alt}
+              className="mx-auto aspect-[9/16] max-h-[70vh] w-full rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+            />
+            <p className="px-3 pb-2 pt-3 text-xs leading-6 text-ink-muted">
+              {video.caption}
+            </p>
+            <p className="px-3 pb-3 text-xs leading-6 text-ink-muted">
+              出典: {video.sourceLabel} · {formatDate(video.sourceDate)}
+            </p>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-6 rounded-2xl border border-apricot/30 bg-apricot-soft/55 p-5">
+        <p className="text-sm leading-7 text-ink-muted">
+          現在の番組へのメッセージはこちら。ラジオネームで送れます。
+        </p>
+        <p className="mt-4">
+          <ExternalLink
+            href={seasideCircleMessageFormLink.url}
+            className={primaryCta}
+          >
+            {seasideCircleMessageFormLink.label}
+          </ExternalLink>
+        </p>
+      </div>
+    </SectionShell>
+  );
+}
+
 function LiveCurrent() {
   const { live } = useMilyRealtimeStatus();
   const { slots, roomUrl } = useStreamSchedule();
@@ -607,6 +659,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
+        <RadioStorySpotlight activityId={content.activity.id} />
         <ActivityNews items={content.news} now={now} />
         <ActivityHighlights items={content.highlights} />
         <ActivityStories items={content.stories} />
