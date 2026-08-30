@@ -105,7 +105,7 @@ export function claimsApprovalStatus(content) {
   const siteSubject =
     String.raw`(?:(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?\s*(?:ファン)?サイト|ファンサイト)`;
   const approvalAssertion =
-    String.raw`(?:非公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
+    String.raw`(?:非公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
   const approver =
     String.raw`(?:(?:本人|みりぃ(?:さん)?|三橋莉子(?:さん)?)(?:に|から|の)?)?`;
   const siteFirst = new RegExp(
@@ -115,11 +115,18 @@ export function claimsApprovalStatus(content) {
     String.raw`${approver}\s*(?:(?:${approvalAssertion}|(?:非)?公認の)\s*(?:非公式)?(?:ファン)?(?:サイト|ページ)|(?:非)?公認\s*(?:非公式)?ファンサイト)`,
   );
 
-  return content
+  const normalized = content
     .replace(/[」』）】)]/g, "")
-    .replace(/\s+/g, " ")
+    .replace(/\s+/g, " ");
+  const englishClaim =
+    /(?:this|the)\s+(?:(?:fan\s+site\s+(?:is\s+)?(?:not\s+)?(?:approved|unapproved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily[- ]approved\s+fan\s+site/i;
+
+  return (
+    englishClaim.test(normalized) ||
+    normalized
     .split(/[。！？]/)
-    .some((sentence) => siteFirst.test(sentence) || approvalFirst.test(sentence));
+    .some((sentence) => siteFirst.test(sentence) || approvalFirst.test(sentence))
+  );
 }
 
 export function decodePublicText(value) {
@@ -144,7 +151,11 @@ export function decodePublicText(value) {
 function renderedMarkupSegments(content) {
   const segments = [];
   const stack = [];
-  const tokens = content.match(/<[^>]*>|[^<]+/g) ?? [];
+  const renderedContent = content.replace(
+    /<!\[CDATA\[([\s\S]*?)\]\]>/g,
+    "$1",
+  );
+  const tokens = renderedContent.match(/<[^>]*>|[^<]+/g) ?? [];
 
   const appendVisibleText = (value) => {
     if (stack.length === 0) return;
@@ -211,14 +222,24 @@ export function publicTextSegments(content, relative) {
   }
   segments.push(...renderedMarkupSegments(content));
 
-  if ([".md", ".txt"].includes(extension)) {
+  if (extension === ".md") {
+    segments.push(
+      decodePublicText(content)
+        .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
+        .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+        .replace(/[*_~`]/g, ""),
+    );
+  }
+  if (extension === ".txt") {
     segments.push(decodePublicText(content));
   }
   if ([".yml", ".yaml"].includes(extension)) {
     const lines = content.split(/\r?\n/);
     for (let index = 0; index < lines.length; index += 1) {
       const line = lines[index];
-      const block = line.match(/^(\s*)[^#\s][^:]*:\s*([>|])[+-]?\s*(?:#.*)?$/);
+      const block = line.match(
+        /^(\s*)[^#\s][^:]*:\s*([>|])(?:[1-9][+-]?|[+-][1-9]?|)\s*(?:#.*)?$/,
+      );
       if (block) {
         const baseIndent = block[1].length;
         const blockLines = [];

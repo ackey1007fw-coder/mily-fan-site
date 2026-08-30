@@ -160,6 +160,10 @@ describe("mily site identity", () => {
       "当サイトは公認ではございません",
       "「当サイト」は公認です",
       "『みりぃ ファンサイト』は本人公認です",
+      "当サイトは公認じゃありません",
+      "当サイトは公認でないです",
+      "This fan site is approved by Mily",
+      "This is an unapproved fan site",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -269,6 +273,8 @@ describe("mily site identity", () => {
       "- 当サイトは公認ではありません",
       "description: |\n  当サイトは公認です",
       "description: >\n  当サイトは\n  公認です",
+      "description: |2\n  当サイトは公認です",
+      "description: >2-\n  当サイトは\n  公認です",
     ]) {
       assert.equal(
         publicTextSegments(yamlClaim, "public/site.yaml").some(
@@ -278,5 +284,27 @@ describe("mily site identity", () => {
         `should scan unquoted YAML: ${yamlClaim}`,
       );
     }
+
+    for (const formattedClaim of [
+      "当サイトは**公認**です",
+      "当サイトは[公認](https://example.test/)です",
+    ]) {
+      assert.equal(
+        publicTextSegments(formattedClaim, "README.md").some(
+          claimsApprovalStatus,
+        ),
+        true,
+        `should normalize rendered Markdown: ${formattedClaim}`,
+      );
+    }
+
+    assert.equal(
+      publicTextSegments(
+        "<description><![CDATA[当サイトは公認です]]></description>",
+        "public/example.xml",
+      ).some(claimsApprovalStatus),
+      true,
+      "should preserve XML CDATA as visible text",
+    );
   });
 });
