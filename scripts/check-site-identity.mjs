@@ -197,10 +197,7 @@ function decodeCssText(value) {
     .replace(/\\(.)/g, "$1");
 }
 
-function renderedMarkupSegments(
-  content,
-  { includeTopLevel = false, staticBindings = new Map() } = {},
-) {
+function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
   const MAX_RENDERED_ALTERNATIVES = 128;
   const capAlternatives = (values) => {
     const unique = [...new Set(values)];
@@ -289,10 +286,6 @@ function renderedMarkupSegments(
       decodePublicText(alternative)
         .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
         .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
-        .replace(
-          /\{\s*([A-Za-z_$][\w$]*)\s*\}/g,
-          (_, name) => staticBindings.get(name) ?? "",
-        )
         .replace(/\{[^{}]*\}/g, ""),
     );
     if (stack.length === 0) {
@@ -459,9 +452,25 @@ export function publicTextSegments(content, relative) {
     const staticString =
       /\bconst\s+([A-Za-z_$][\w$]*)\s*=\s*(["'`])((?:\\.|(?!\2)[\s\S])*?)\2\s*;/g;
     for (const match of sourceContent.matchAll(staticString)) {
-      staticBindings.set(match[1], decodePublicText(match[3]));
+      const bindings = staticBindings.get(match[1]) ?? [];
+      bindings.push({
+        index: match.index,
+        value: decodePublicText(match[3]),
+      });
+      staticBindings.set(match[1], bindings);
     }
   }
+  const resolvedPublicContent = sourceExtension
+    ? publicContent.replace(
+        /\{\s*([A-Za-z_$][\w$]*)\s*\}/g,
+        (whole, name, offset) => {
+          const binding = (staticBindings.get(name) ?? [])
+            .filter((candidate) => candidate.index < offset)
+            .at(-1);
+          return binding?.value ?? whole;
+        },
+      )
+    : publicContent;
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const concatenatedQuoted =
     /(?:["'`](?:\\.|[^"'\\`])*["'`]\s*\+\s*)+["'`](?:\\.|[^"'\\`])*["'`]/g;
@@ -496,15 +505,14 @@ export function publicTextSegments(content, relative) {
     }
   }
   segments.push(
-    ...renderedMarkupSegments(publicContent, {
+    ...renderedMarkupSegments(resolvedPublicContent, {
       includeTopLevel: [".html", ".xml", ".svg"].includes(extension),
-      staticBindings,
     }),
   );
 
   if (extension === ".md") {
     segments.push(
-      decodePublicText(content)
+      decodePublicText(content.replace(/<!--[\s\S]*?-->/g, ""))
         .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
         .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
         .replace(/!\[([^\]]*)\]\[[^\]]*\]/g, "$1")

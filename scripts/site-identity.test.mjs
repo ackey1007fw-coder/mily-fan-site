@@ -316,6 +316,15 @@ describe("mily site identity", () => {
       );
     }
 
+    assert.equal(
+      publicTextSegments(
+        "<!-- 当サイトは公認です -->\nファン運営です",
+        "README.md",
+      ).some(claimsApprovalStatus),
+      false,
+      "should ignore hidden Markdown HTML comments",
+    );
+
     for (const formattedClaim of [
       "当サイトは**公認**です",
       "当サイトは[公認](https://example.test/)です",
@@ -466,6 +475,14 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should resolve local const string bindings in JSX",
+    );
+    assert.equal(
+      publicTextSegments(
+        'function A() { const label = "公認"; return <p>当サイトは{label}です</p>; } function B() { const label = "通常"; return <p>{label}</p>; }',
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should resolve repeated JSX bindings at each use site",
     );
     assert.equal(
       publicTextSegments(
