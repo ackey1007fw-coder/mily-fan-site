@@ -10,6 +10,7 @@ import {
 } from "./data/activities";
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
+import { radioEpisode20260830 } from "./data/radioEpisodes";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
@@ -372,6 +373,102 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
   );
 }
 
+function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
+  if (activityId !== "radio") return null;
+  const episode = radioEpisode20260830;
+
+  return (
+    <SectionShell eyebrow="On Air Archive" title={`${episode.dateLabel} ${episode.theme}`}>
+      <div className="mt-5 rounded-3xl border border-apricot/30 bg-apricot-soft/45 p-5 shadow-card sm:p-7">
+        <div className="flex flex-wrap gap-2 text-xs font-semibold text-apricot-ink">
+          <span className="rounded-full bg-paper px-3 py-1.5">{episode.broadcastLabel}</span>
+          <span className="rounded-full bg-paper px-3 py-1.5">
+            パーソナリティ：{episode.presenters.join("・")}
+          </span>
+        </div>
+        <p className="mt-5 text-sm leading-7 text-ink-muted sm:text-base sm:leading-8">
+          {episode.summary}
+        </p>
+      </div>
+
+      <section aria-labelledby="radio-mily-highlights" className="mt-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+          Mily Highlights
+        </p>
+        <h3 id="radio-mily-highlights" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+          みりぃの見どころ
+        </h3>
+        <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {episode.milyHighlights.map((highlight) => (
+            <li
+              key={highlight.timestamp}
+              className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
+            >
+              <p className="text-xs font-semibold text-sage-deep">{highlight.timestamp}</p>
+              <h4 className="mt-2 text-lg font-bold leading-relaxed text-ink">
+                {highlight.title}
+              </h4>
+              <p className="mt-2 text-sm leading-7 text-ink-muted">{highlight.body}</p>
+              {highlight.quote ? (
+                <blockquote className="mt-4 border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
+                  {highlight.quote}
+                </blockquote>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="radio-listener-messages" className="mt-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+          Listener Messages
+        </p>
+        <h3 id="radio-listener-messages" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+          番組で紹介されたリスナーメッセージ
+        </h3>
+        <ul className="mt-5 space-y-4">
+          {episode.listenerMessages.map((message) => (
+            <li
+              key={message.timestamp}
+              className="rounded-2xl border border-sage/15 bg-sage-soft/35 p-5"
+            >
+              <p className="text-xs font-semibold text-sage-deep">{message.timestamp}</p>
+              <h4 className="mt-2 text-lg font-bold leading-relaxed text-ink">
+                {message.title}
+              </h4>
+              <p className="mt-2 text-sm leading-7 text-ink-muted">{message.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <details className="mt-9 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
+        <summary className="cursor-pointer font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
+          主なコーナーとタイムスタンプを見る
+        </summary>
+        <ol className="mt-5 space-y-3">
+          {episode.timeline.map((item) => (
+            <li key={item.timestamp} className="flex gap-3 text-sm leading-7">
+              <span className="shrink-0 font-semibold tabular-nums text-sage-deep">
+                {item.timestamp}
+              </span>
+              <span className="text-ink-muted">{item.label}</span>
+            </li>
+          ))}
+        </ol>
+      </details>
+
+      <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
+        <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p>
+        <p className="mt-3 text-xs leading-6 text-ink-muted">
+          出典: {episode.sourceLabel} · {formatDate(episode.verifiedAt)}確認
+        </p>
+        <p className="mt-2 text-xs leading-6 text-ink-muted">{episode.transcriptionNote}</p>
+      </div>
+    </SectionShell>
+  );
+}
+
 function LiveCurrent() {
   const { live } = useMilyRealtimeStatus();
   const { slots, roomUrl } = useStreamSchedule();
@@ -659,6 +756,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
+        <RadioEpisodeRecap activityId={content.activity.id} />
         <RadioStorySpotlight activityId={content.activity.id} />
         <ActivityNews items={content.news} now={now} />
         <ActivityHighlights items={content.highlights} />
