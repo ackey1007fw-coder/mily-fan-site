@@ -99,15 +99,23 @@ export function isPublicSurface(relative) {
 }
 
 export function claimsApprovalStatus(content) {
-  // Public pages intentionally say neither approved nor unapproved. Match
-  // assertions about this site, while allowing unrelated terms such as
-  // 「公認会計士」や「公認アンバサダー」.
-  return [
-    /(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)(?:は|が|を)?[^。\n]{0,24}(?:非)?公認/,
-    /本人公認(?:の)?(?:非公式)?(?:ファン)?サイト/,
-    /(?:非公認|公認)(?:の)?(?:非公式)?(?:ファン)?サイト/,
-    /(?:非公認|公認)(?:です|である|では(?:ありません|ない)|されて(?:い|お)ます|済み)/,
-  ].some((pattern) => pattern.test(content));
+  // Public pages intentionally say neither approved nor unapproved. Require a
+  // site subject and an approval assertion in the same sentence so unrelated
+  // facts such as「このイベントは大学公認です」remain valid.
+  const siteSubject =
+    /(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト/;
+  const approvalAssertion =
+    /(?:非公認(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:です|である|済み|では(?:ありません|ない)|されて(?:います|いる|おります|おり)|を(?:受け|得|いただい)(?:た|ています|ている)))/;
+  const approvalSiteModifier =
+    /(?:本人(?:の|から)?|みりぃ(?:さん)?(?:の|から)?)?(?:非)?公認(?:の)?(?:非公式)?(?:ファン)?サイト/;
+
+  return content
+    .split(/[。\n]/)
+    .some(
+      (sentence) =>
+        approvalSiteModifier.test(sentence) ||
+        (siteSubject.test(sentence) && approvalAssertion.test(sentence)),
+    );
 }
 
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
