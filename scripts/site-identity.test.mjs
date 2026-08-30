@@ -140,6 +140,9 @@ describe("mily site identity", () => {
       "みりぃファンサイトは本人から公認を受けています",
       "当サイトは公認を受けました",
       "当サイトは公認をいただきました",
+      "当サイトは公認されました",
+      "当サイトは公認されていません",
+      "当サイトは\n公認です",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -156,6 +159,7 @@ describe("mily site identity", () => {
       "このルールは公認という単語自体を禁止しません",
       "このイベントは大学公認です",
       "この団体は非公認です",
+      "このサイトを応援！このイベントは大学公認です",
     ]) {
       assert.equal(
         claimsApprovalStatus(unrelated),
