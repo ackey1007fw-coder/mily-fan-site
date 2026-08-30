@@ -19,7 +19,7 @@
 
 ## D-002: 生成AIは人物・人体なしB-roll担当
 
-**Status:** Accepted
+**Status:** Superseded by D-014
 
 Grok等の動画生成AIは、本人だけでなく**人物・人体そのものが登場しない**情景・象徴素材に限定する。
 
@@ -41,7 +41,7 @@ Final Chorus開始の1:57.0を全編最大の見せ場とする。
 
 ## D-005: 「だれかに わたせたなら」は人物を出さない
 
-**Status:** Accepted
+**Status:** Superseded by D-014
 
 1:07.2 / 2:16.0の2箇所は本人写真を置かず、人物・人体なしの象徴映像で表現する。
 
@@ -122,7 +122,7 @@ FFmpeg編集キットは本人素材と同様、public fan-site repoへcommitせ
 
 ## D-013: B-rollはG1〜G6の6本だけを正本とする
 
-**Status:** Accepted
+**Status:** Superseded in final render by D-014
 
 Grok / GrokBotは `STORYBOARD.md` v2.1.1 のG1〜G6だけを `GROK_SHOTS.md` に同期する。
 旧12本案を混ぜたり、独自にB-roll本数を増やさない。
@@ -135,6 +135,23 @@ Grok / GrokBotは `STORYBOARD.md` v2.1.1 のG1〜G6だけを `GROK_SHOTS.md` に
 - G6 2:34.2 — 朝日
 
 ひまわりは使わない。
+
+## D-014: 完成版は全区間を本人の実写写真・動画で構成する
+
+**Status:** Accepted (Owner final direction)
+
+オーナーの完成レビューにより、G1〜G6の時刻枠から人物不在の情景B-rollを外し、公開・利用確認済みの三橋莉子本人の実写写真または動画へ差し替える。
+
+- G1〜G6のIN / OUTは維持し、カット設計の尺を変えない
+- 6枠は既存S1〜S42と重複しない別投稿の実写素材を使う
+- 同一写真・同一動画・同一投稿の使い回しをしない
+- 本人が映らないフレームを完成版へ残さない
+- AI生成、顔・身体変更、生成塗り足し、Reference-to-Videoを行わない
+- 元投稿の音声は使わず、Suno最終音源のみを維持する
+- 1:57.0は引き続きハードカットとする
+- 16:9完成版に加え、同内容の9:16縦版を制作する
+
+この決定は完成レンダーの内容についてD-002 / D-005 / D-013を上書きする。STORYBOARD v2.1.1の時刻設計とS1〜S42の役割設計は維持する。
 
 ## 未決定
 
