@@ -110,11 +110,12 @@ describe("2026-08-30 Mixch final-day NEWS", () => {
 
   it("leads Latest ahead of the 8/29 SHOWROOM posts", () => {
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0]?.id, NEWS_ID);
-    assert.equal(ordered[1]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(ordered[2]?.id, "2026-08-29-showroom-radio-1440");
-    assert.equal(ordered[3]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(news.length, 54);
+    assert.equal(ordered[0]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[1]?.id, NEWS_ID);
+    assert.equal(ordered[2]?.id, "2026-08-29-showroom-live-third-round");
+    assert.equal(ordered[3]?.id, "2026-08-29-showroom-radio-1440");
+    assert.equal(ordered[4]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(news.length, 55);
   });
 
   it("appears on CAMPUS GIRLS and is derived into the Portal Feed without a local image", () => {
