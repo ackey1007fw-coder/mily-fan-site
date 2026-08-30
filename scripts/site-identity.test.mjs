@@ -144,5 +144,18 @@ describe("mily site identity", () => {
       claimsApprovalStatus("ファン運営の非公式サイトです。本人運営ではありません。"),
       false,
     );
+
+    for (const unrelated of [
+      "公認会計士",
+      "公認アンバサダーを務めています",
+      "公認の有無は公開表記で扱いません",
+      "このルールは公認という単語自体を禁止しません",
+    ]) {
+      assert.equal(
+        claimsApprovalStatus(unrelated),
+        false,
+        `should allow unrelated wording: ${unrelated}`,
+      );
+    }
   });
 });

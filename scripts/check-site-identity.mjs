@@ -99,9 +99,15 @@ export function isPublicSurface(relative) {
 }
 
 export function claimsApprovalStatus(content) {
-  // Public pages intentionally say neither approved nor unapproved. Reject the
-  // common marker itself so affirmative, negative, and rephrased claims all fail.
-  return content.includes("公認");
+  // Public pages intentionally say neither approved nor unapproved. Match
+  // assertions about this site, while allowing unrelated terms such as
+  // 「公認会計士」や「公認アンバサダー」.
+  return [
+    /(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)(?:は|が|を)?[^。\n]{0,24}(?:非)?公認/,
+    /本人公認(?:の)?(?:非公式)?(?:ファン)?サイト/,
+    /(?:非公認|公認)(?:の)?(?:非公式)?(?:ファン)?サイト/,
+    /(?:非公認|公認)(?:です|である|では(?:ありません|ない)|されて(?:い|お)ます|済み)/,
+  ].some((pattern) => pattern.test(content));
 }
 
 export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
