@@ -178,6 +178,25 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-31-morning-stream-thanks",
+    date: "2026-08-31",
+    sameDayOrder: 3,
+    activityIds: ["live-stream"],
+    title: "朝から起こしに来てくれたみんな、ありがとう",
+    body: "8月31日朝、みりぃがXで、朝から起こしに来てくれたみんなへのお礼を伝えました。なんだか勇気ももらえて、朝から配信した甲斐があったこと、これからの頑張る糧になると綴っています。",
+    source: "https://x.com/Mily_chan36/status/2094192106105659650",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "朝から私を起こしに来てくれたみんな、ありがとう\u{1F979}\u{1F64F}\u{1F3FB}\u{2728}なんだか勇気ももらえて、朝から配信した甲斐があったなぁぁぁ\u{301C}\n" +
+        "これからの頑張る糧になるね、確実に\u{1F926}\u{1F3FB}\u{200D}\u{2640}\u{FE0F}\u{2763}\u{FE0F}\n" +
+        "#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークルコンテスト2026",
+    },
+  },
+  {
     id: "2026-08-31-paton-15x-day",
     date: "2026-08-31",
     sameDayOrder: 2,

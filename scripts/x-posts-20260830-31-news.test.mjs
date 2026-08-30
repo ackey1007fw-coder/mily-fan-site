@@ -18,6 +18,7 @@ import { contest } from "../src/data/contest.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { verifyNews } from "./content-invariants.mjs";
+import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
 import {
   assertPortalNewsFollowsSort,
   findFeedItem,
@@ -26,18 +27,19 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
+const THANKS_ID = "2026-08-31-morning-stream-thanks";
 const PATON_15X_ID = "2026-08-31-paton-15x-day";
 const WAKE_ID = "2026-08-31-showroom-wake-me";
 const CONSEC_ID = "2026-08-30-consecutive-stream-30";
 const RANK3_ID = "2026-08-30-paton-rank-3";
-const NEW_IDS = [PATON_15X_ID, WAKE_ID, CONSEC_ID, RANK3_ID];
+const NEW_IDS = [THANKS_ID, PATON_15X_ID, WAKE_ID, CONSEC_ID, RANK3_ID];
 
+const THANKS_SOURCE = "https://x.com/Mily_chan36/status/2094192106105659650";
 const PATON_15X_SOURCE = "https://x.com/Mily_chan36/status/2094102196447334713";
 const PATON_15X_FOLLOWUP = "https://x.com/Mily_chan36/status/2094191581951906187";
 const WAKE_SOURCE = "https://x.com/Mily_chan36/status/2094179970960744615";
 const CONSEC_SOURCE = "https://x.com/Mily_chan36/status/2094023746751463582";
 const RANK3_SOURCE = "https://x.com/Mily_chan36/status/2093802981921849728";
-const HELD_SCREENSHOT = "2094192106105659650";
 const SHOWROOM = "https://www.showroom-live.com/r/circle2026_0734";
 const PATON = "https://paton.jp/event/entrant/11380";
 const START = Date.parse("2026-08-26T18:00:00+09:00");
@@ -64,13 +66,15 @@ function item(id) {
 }
 
 describe("2026-08-30〜31 X posts — Latest entries", () => {
-  it("adds four source-backed News items with confirmed JST dates", () => {
+  it("adds five source-backed News items with confirmed JST dates", () => {
     const ordered = sortNewsByDateDesc(news);
+    const thanks = item(THANKS_ID);
     const paton15x = item(PATON_15X_ID);
     const wake = item(WAKE_ID);
     const consec = item(CONSEC_ID);
     const rank3 = item(RANK3_ID);
 
+    assert.ok(thanks);
     assert.ok(paton15x);
     assert.ok(wake);
     assert.ok(consec);
@@ -78,24 +82,48 @@ describe("2026-08-30〜31 X posts — Latest entries", () => {
     for (const id of NEW_IDS) {
       assert.equal(news.filter((entry) => entry.id === id).length, 1);
     }
-    assert.equal(news.length, 61);
+    assert.equal(news.length, 62);
+    assert.equal(thanks.date, "2026-08-31");
     assert.equal(paton15x.date, "2026-08-31");
     assert.equal(wake.date, "2026-08-31");
     assert.equal(consec.date, "2026-08-30");
     assert.equal(rank3.date, "2026-08-30");
+    assert.equal(thanks.sameDayOrder, 3);
     assert.equal(paton15x.sameDayOrder, 2);
     assert.equal(wake.sameDayOrder, 1);
     assert.equal(consec.sameDayOrder, 4);
     assert.equal(rank3.sameDayOrder, undefined);
     assert.deepEqual(verifyNews(NEW_IDS.map(item)), []);
     assert.deepEqual(verifyNews(news), []);
-    assert.equal(ordered[0]?.id, PATON_15X_ID);
-    assert.equal(ordered[1]?.id, WAKE_ID);
-    assert.equal(ordered[2]?.id, CONSEC_ID);
-    assert.equal(ordered[3]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[4]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[5]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[6]?.id, RANK3_ID);
+    assert.equal(ordered[0]?.id, THANKS_ID);
+    assert.equal(ordered[1]?.id, PATON_15X_ID);
+    assert.equal(ordered[2]?.id, WAKE_ID);
+    assert.equal(ordered[3]?.id, CONSEC_ID);
+    assert.equal(ordered[4]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[5]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[6]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[7]?.id, RANK3_ID);
+  });
+
+  it("adds the 8/31 morning thanks as text NEWS without a screenshot file", () => {
+    const entry = item(THANKS_ID);
+
+    assert.equal(entry.source, THANKS_SOURCE);
+    assert.equal(entry.sourceLabel, "Xの投稿を見る");
+    assert.equal(entry.url, SHOWROOM);
+    assert.equal(entry.ctaLabel, "SHOWROOMを見る");
+    assert.equal(entry.url.includes("?t="), false);
+    assert.equal(entry.source.includes("?t="), false);
+    assert.deepEqual(entry.activityIds, ["live-stream"]);
+    assert.equal(entry.media, undefined);
+    assert.equal(entry.additionalMedia, undefined);
+    assert.match(entry.body, /朝から起こしに来てくれたみんな/);
+    assert.match(entry.body, /勇気ももらえて/);
+    assert.match(entry.body, /朝から配信した甲斐があった/);
+    assert.match(entry.body, /頑張る糧/);
+    assert.match(entry.message.text, /朝から私を起こしに来てくれたみんな、ありがとう/);
+    assert.equal(entry.body.includes("1位"), false);
+    assert.equal(entry.body.includes("3位"), false);
   });
 
   it("combines the 8/31 Paton 1.5x posts and reuses the confirmed portrait CTA", () => {
@@ -178,16 +206,17 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
     assert.equal(campusNews[1]?.id, "2026-08-30-campus-girls-hold-second-story");
     assert.equal(campusNews[2]?.id, "2026-08-30-mixch-final-day");
     assert.equal(campusNews[3]?.id, RANK3_ID);
-    assert.equal(liveNews[0]?.id, WAKE_ID);
-    assert.equal(liveNews[1]?.id, CONSEC_ID);
-    assert.equal(liveNews[2]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(liveNews[0]?.id, THANKS_ID);
+    assert.equal(liveNews[1]?.id, WAKE_ID);
+    assert.equal(liveNews[2]?.id, CONSEC_ID);
+    assert.equal(liveNews[3]?.id, "2026-08-30-morning-showroom-0600");
 
     for (const id of [PATON_15X_ID, RANK3_ID]) {
       assert.equal(liveNews.some((entry) => entry.id === id), false);
       assert.equal(missNews.some((entry) => entry.id === id), false);
       assert.equal(radioNews.some((entry) => entry.id === id), false);
     }
-    for (const id of [WAKE_ID, CONSEC_ID]) {
+    for (const id of [THANKS_ID, WAKE_ID, CONSEC_ID]) {
       assert.equal(campusNews.some((entry) => entry.id === id), false);
       assert.equal(missNews.some((entry) => entry.id === id), false);
       assert.equal(radioNews.some((entry) => entry.id === id), false);
@@ -203,15 +232,17 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
     }
   });
 
-  it("does not add the held 8/31 screenshot or scrape SNS files", async () => {
+  it("does not scrape SNS files or name viewers, and keeps Gallery empty for the thanks card", async () => {
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
-    assert.equal(newsSource.includes(HELD_SCREENSHOT), false);
     assert.equal(newsSource.includes("pbs.twimg.com"), false);
     assert.equal(newsSource.includes("video.twimg.com"), false);
-    assert.equal(news.some((entry) => entry.id.includes("2094192106105659650")), false);
+    assert.equal(DRIVE_HOST_PATTERN.test(newsSource), false);
+    assert.equal(DRIVE_FOLDER_PATTERN.test(newsSource), false);
+    assert.equal(item(THANKS_ID).media, undefined);
+    assert.equal(media.some((entry) => entry.sourceUrl === THANKS_SOURCE), false);
+    assert.equal(media.some((entry) => entry.id.includes("b44")), false);
 
     for (const id of NEW_IDS) {
-      assert.equal(media.some((entry) => entry.id.includes(id)), false);
       assert.equal(galleryVideos.some((entry) => entry.id.includes(id)), false);
       assert.equal(stories.some((entry) => JSON.stringify(entry).includes(id)), false);
       assert.equal(highlights.some((entry) => entry.id.includes(id)), false);
@@ -243,7 +274,9 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
       assert.equal(source.includes("2094179970960744615"), false, relative);
       assert.equal(source.includes("2094023746751463582"), false, relative);
       assert.equal(source.includes("2093802981921849728"), false, relative);
-      assert.equal(source.includes(HELD_SCREENSHOT), false, relative);
+      assert.equal(source.includes("2094192106105659650"), false, relative);
+      assert.equal(DRIVE_HOST_PATTERN.test(source), false, relative);
+      assert.equal(DRIVE_FOLDER_PATTERN.test(source), false, relative);
     }
   });
 });
@@ -253,21 +286,26 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
     const feed = createPortalFeed({ now: new Date("2026-08-31T08:00:00+09:00") });
     assertPortalNewsFollowsSort(feed, news);
 
+    const thanks = findFeedItem(feed, portalNewsId(THANKS_ID));
     const paton15x = findFeedItem(feed, portalNewsId(PATON_15X_ID));
     const wake = findFeedItem(feed, portalNewsId(WAKE_ID));
     const consec = findFeedItem(feed, portalNewsId(CONSEC_ID));
     const rank3 = findFeedItem(feed, portalNewsId(RANK3_ID));
 
+    assert.equal(thanks.type, "news");
     assert.equal(paton15x.type, "news");
     assert.equal(wake.type, "news");
     assert.equal(consec.type, "news");
     assert.equal(rank3.type, "news");
+    assert.equal(thanks.publishedAt, "2026-08-31T00:00:00+09:00");
     assert.equal(paton15x.publishedAt, "2026-08-31T00:00:00+09:00");
     assert.equal(wake.publishedAt, "2026-08-31T00:00:00+09:00");
     assert.equal(consec.publishedAt, "2026-08-30T00:00:00+09:00");
     assert.equal(rank3.publishedAt, "2026-08-30T00:00:00+09:00");
+    assert.equal(thanks.sourceUrl, THANKS_SOURCE);
     assert.equal(paton15x.sourceUrl, PATON_15X_SOURCE);
     assert.equal(wake.sourceUrl, WAKE_SOURCE);
+    assert.equal(thanks.image, undefined);
     assert.equal(wake.image, undefined);
     assert.equal(consec.image, undefined);
 
@@ -280,9 +318,10 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
     }
   });
 
-  it("documents the four NEWS items and the held screenshot in CONTENT-OPS", async () => {
+  it("documents the five NEWS items and the blocked screenshot original in CONTENT-OPS", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    assert.match(ops, /61件/);
+    const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
+    assert.match(ops, /62件/);
     assert.match(ops, /2094102196447334713/);
     assert.match(ops, /2094191581951906187/);
     assert.match(ops, /2094179970960744615/);
@@ -294,6 +333,18 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
     assert.match(ops, /投稿時点で3位/);
     assert.match(ops, /30日連続配信記念/);
     assert.match(ops, /配信中だった記録/);
-    assert.match(ops, /Drive原本がまだ無い/);
+    assert.match(ops, /朝から起こしに来てくれたみんな、ありがとう/);
+    assert.match(ops, /原本バイトがこの作業環境に無/);
+    assert.match(mediaGuide, /batch b44 \/ 未使用/);
+    assert.equal(DRIVE_HOST_PATTERN.test(ops), false);
+    assert.equal(DRIVE_FOLDER_PATTERN.test(ops), false);
+    assert.equal(DRIVE_HOST_PATTERN.test(mediaGuide), false);
+    assert.equal(DRIVE_FOLDER_PATTERN.test(mediaGuide), false);
+  });
+
+  it("does not reconstruct Drive host or file id in the dedicated test", async () => {
+    const source = await readFile(new URL("./x-posts-20260830-31-news.test.mjs", import.meta.url), "utf8");
+    assert.equal(DRIVE_HOST_PATTERN.test(source), false);
+    assert.equal(DRIVE_FOLDER_PATTERN.test(source), false);
   });
 });

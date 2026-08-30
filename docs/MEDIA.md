@@ -2448,6 +2448,13 @@ Mixch URLは画面に無いため Mixch CTAは付けない。
 - b43-02 poster: 87,690 bytes / metadataなし / sha256
   `2c9413f1ddbca35565f348377d67dd22e22a81fa8c82454db955b8f6cd079b0e`
 
+## 素材台帳（batch b44 / 未使用）
+
+8/31 07:34 の本人Xお礼投稿は NEWS テキストとして掲載する。
+オーナー提供の元素材バイトがこの作業環境に無く、X / pbs.twimg からの取得はしない。
+Gallery / `media.ts` / 公開派生は作っていない。batch 番号 b44 は未使用のまま残す。
+受け渡し用のホスト名・file ID・元素材ファイル名は tracked text に残さない。
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

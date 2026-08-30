@@ -110,18 +110,19 @@ describe("2026-08-30 Mixch final-day NEWS", () => {
 
   it("leads Latest ahead of the 8/29 SHOWROOM posts", () => {
     const ordered = sortNewsByDateDesc(news);
-    assert.equal(ordered[0]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[1]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[2]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[3]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[4]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[5]?.id, NEWS_ID);
-    assert.equal(ordered[6]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[7]?.id, "2026-08-29-paton-vote-day-5-story");
-    assert.equal(ordered[8]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(ordered[9]?.id, "2026-08-29-showroom-radio-1440");
-    assert.equal(ordered[10]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(news.length, 61);
+    assert.equal(ordered[0]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[1]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[2]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[3]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[4]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[5]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[6]?.id, NEWS_ID);
+    assert.equal(ordered[7]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[8]?.id, "2026-08-29-paton-vote-day-5-story");
+    assert.equal(ordered[9]?.id, "2026-08-29-showroom-live-third-round");
+    assert.equal(ordered[10]?.id, "2026-08-29-showroom-radio-1440");
+    assert.equal(ordered[11]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(news.length, 62);
   });
 
   it("appears on CAMPUS GIRLS and is derived into the Portal Feed without a local image", () => {
