@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import {
   claimsApprovalStatus,
   collectFiles,
+  decodePublicText,
   isPublicSurface,
   publicTextSegments,
   SCAN_EXTENSIONS,
@@ -163,6 +164,8 @@ describe("mily site identity", () => {
       "このイベントは大学公認です",
       "この団体は非公認です",
       "このサイトを応援！このイベントは大学公認です",
+      "大学公認サイトを紹介します",
+      "このイベントの公認サイトです",
     ]) {
       assert.equal(
         claimsApprovalStatus(unrelated),
@@ -209,5 +212,21 @@ describe("mily site identity", () => {
       ),
       true,
     );
+
+    for (const escapedClaim of [
+      '"当サイトは\\u516c\\u8a8dです"',
+      "<p>当サイトは&#x516c;&#x8a8d;です</p>",
+      "<p>当サイトは&#20844;&#35469;です</p>",
+    ]) {
+      assert.equal(
+        publicTextSegments(escapedClaim, "public/example.html").some(
+          claimsApprovalStatus,
+        ),
+        true,
+        `should decode rendered public text: ${escapedClaim}`,
+      );
+    }
+
+    assert.equal(decodePublicText("\\u516c\\u8a8d"), "公認");
   });
 });

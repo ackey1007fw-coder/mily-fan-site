@@ -107,7 +107,7 @@ export function claimsApprovalStatus(content) {
   const approvalAssertion =
     /(?:非公認(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:です|である|済み|では(?:ありません|ない)|され(?:て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))/;
   const approvalSiteModifier =
-    /(?:本人(?:の|から)?|みりぃ(?:さん)?(?:の|から)?)?(?:非)?公認(?:の)?(?:非公式)?(?:ファン)?サイト/;
+    /(?:(?:本人(?:の|から)?|みりぃ(?:さん)?(?:の|から)?)(?:非)?公認(?:の)?(?:非公式)?(?:ファン)?サイト|(?:非)?公認(?:の)?みりぃ(?:の)?ファンサイト)/;
 
   return content
     .replace(/\s+/g, " ")
@@ -117,6 +117,23 @@ export function claimsApprovalStatus(content) {
         approvalSiteModifier.test(sentence) ||
         (siteSubject.test(sentence) && approvalAssertion.test(sentence)),
     );
+}
+
+export function decodePublicText(value) {
+  return value
+    .replace(/\\u\{([0-9a-f]+)\}/gi, (_, hex) =>
+      String.fromCodePoint(Number.parseInt(hex, 16)),
+    )
+    .replace(/\\u([0-9a-f]{4})/gi, (_, hex) =>
+      String.fromCharCode(Number.parseInt(hex, 16)),
+    )
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) =>
+      String.fromCodePoint(Number.parseInt(hex, 16)),
+    )
+    .replace(/&#([0-9]+);/g, (_, decimal) =>
+      String.fromCodePoint(Number.parseInt(decimal, 10)),
+    )
+    .replace(/\\[nrt]/g, " ");
 }
 
 export function publicTextSegments(content, relative) {
@@ -129,23 +146,25 @@ export function publicTextSegments(content, relative) {
     /<(p|h[1-6]|li|dt|dd|figcaption|blockquote|button|a|span)\b[^>]*>([\s\S]*?)<\/\1>/gi;
 
   for (const match of content.matchAll(quoted)) {
-    segments.push(match[2].replace(/\\[nrt]/g, " "));
+    segments.push(decodePublicText(match[2]));
   }
   for (const match of content.matchAll(textNode)) {
-    segments.push(match[1]);
+    segments.push(decodePublicText(match[1]));
   }
   for (const match of content.matchAll(renderedBlock)) {
     segments.push(
-      match[2]
-        .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
-        .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
-        .replace(/<[^>]+>/g, "")
-        .replace(/\{[^{}]*\}/g, ""),
+      decodePublicText(
+        match[2]
+          .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
+          .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
+          .replace(/<[^>]+>/g, "")
+          .replace(/\{[^{}]*\}/g, ""),
+      ),
     );
   }
 
   if ([".md", ".txt"].includes(extension)) {
-    segments.push(content);
+    segments.push(decodePublicText(content));
   }
 
   return segments;
