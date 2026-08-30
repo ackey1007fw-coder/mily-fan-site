@@ -2388,6 +2388,66 @@ Gallery、`/stories/`、highlights、events、streamSchedule、`media.ts`には�
 - b42-02 poster: 123,293 bytes / 8.0秒地点の実フレーム / metadataなし /
   sha256 `17ba92876d6ad790fd598f0ebf728feaface90f0b6aa98e0a3c6482dbd08bfab`
 
+## 素材台帳（batch b43 / 受領日 2026-08-30 / source date 2026-08-29〜30）
+
+オーナーが直接提供した本人Instagram Story動画2本。b43-01は日付が変わる前の
+Paton投票5日目案内と変面さんとの2ショット、b43-02はキャンパスガールズ2027の
+Paton投票期限・ムービー応援期限と「2位を守り抜きたい」という呼びかけ。
+HOME Latest / `/news/` と Gallery が、各動画の公開MP4・poster・manifest objectを
+共有する。恒久的なStory permalinkはないため、表示は非リンクの
+`Instagram Story` labelとする。CAMPUS GIRLS Activity の関連NEWS・関連メディア
+にも出す。`/stories/`、highlights、events、streamSchedule、`media.ts`、
+PatonVoteGuide のランキング系列には追加しない。
+
+両NEWSには本人Instagramプロフィールと、確認済みPaton本人ページへの2 CTAを置く。
+InstagramプロフィールはStoryの出典ではなく関連リンク。Paton CTAは既存の
+SupportEvent期間（2026-09-01 23:59 JSTまで）に従い、終了後に自動で非表示になる。
+Mixch URLは画面に無いため Mixch CTAは付けない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b43-01 | `gallery/mily-b43-01-paton-vote-day5-story.mp4` | 変面の演者と並ぶみりぃと、日付が変わる前のPaton投票5日目のお願い。720×1280 / 20.000秒 / 1fps / 20フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b43-01 poster | `gallery/mily-b43-01-paton-vote-day5-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b43-02 | `gallery/mily-b43-02-campus-girls-hold-second-story.mp4` | くまの顔フィルターとヘッドホンを付けたみりぃと、キャンパスガールズ2027の期限案内・2位を守り抜きたいという呼びかけ。720×1280 / 20.000秒 / 30fps / 600フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b43-02 poster | `gallery/mily-b43-02-campus-girls-hold-second-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない。受領バイトを変えず
+  `media/original/` のgitignored領域へ保存し、元の受け渡し名・URL・file IDは
+  tracked/public filesへ残さない
+- b43-01元動画: 961,498 bytes / sha256
+  `23f7d40ffdf30f6930cf0aa26087846da6f401840bd362666cb78900ed0bc194` /
+  H.264 High / 720×1280 / 1fps / 20 frames / video 20.000秒 /
+  HE-AAC 44.1kHz stereo音声あり
+- b43-02元動画: 9,441,731 bytes / sha256
+  `cfac3ee5b68b130e45997eb826c3784ccf7245371040d9525f7f08daaff744a5` /
+  H.264 High / 720×1280 / 30fps / 600 frames / video 20.000秒 /
+  音声ストリームなし
+- 元動画の`creation_time`とCore Media handler名は受領検査だけに使い、投稿日・
+  投稿時刻の根拠にはしていない
+- 2本ともInstagram UI、DM、通知、端末固有情報、連絡先、第三者コメントは含まれない。
+  b43-01の背景人物は元動画ですでに白いぼかしが入っているため、そのまま維持した。
+  変面の演者は公開パフォーマンスの出演者。レストラン名は確認できないため非掲載。
+  b43-02に識別可能な第三者は見当たらない。「2位」は投稿時点の記録として扱う
+
+### 音声と公開派生
+
+元素材の音声は内容・由来・権利者と再配信権を確認できないため、公開派生では削除した。
+映像は720×1280、元のfpsとフレーム数を維持し、crop・scale・引き伸ばし・
+アップスケール・短縮・テロップ変更はしていない。AI生成・顔補正・生成塗り足しもない。
+
+- b43-01 MP4: 634,313 bytes / H.264 Constrained Baseline / 20.000秒 /
+  1fps / 20フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
+  `09d5fbe72c42beb66af32d6376ef01e95cb1ad9a8ba22593c25c845996993a81`
+- b43-01 poster: 120,290 bytes / metadataなし / sha256
+  `65da2070ab0b25d54ce01e8cd4ed337a6a7fe0edc822849505811f27503bff0f`
+- b43-02 MP4: 798,016 bytes / H.264 Constrained Baseline / 20.000秒 /
+  30fps / 600フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
+  `81699137c90a914d798500dd55bc581f1490f51767a49c856fdf3dda8bac3406`
+- b43-02 poster: 87,690 bytes / metadataなし / sha256
+  `2c9413f1ddbca35565f348377d67dd22e22a81fa8c82454db955b8f6cd079b0e`
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

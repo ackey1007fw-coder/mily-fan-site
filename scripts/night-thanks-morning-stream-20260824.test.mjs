@@ -535,7 +535,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
     assert.match(docs, /実フレーム/);
     assert.match(docs, /AI生成・顔加工・塗り足しなし/);
     assert.match(ops, /48件/);
-    assert.match(ops, /独立動画19本/);
+    assert.match(ops, /独立動画21本/);
     assert.doesNotMatch(docs, DRIVE_HOST_PATTERN);
     assert.doesNotMatch(docs, DOCS_HOST_PATTERN);
     assert.doesNotMatch(docs, DRIVE_SHARE_QUERY_PATTERN);
