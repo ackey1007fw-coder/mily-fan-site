@@ -133,8 +133,8 @@ describe("support and empty schedule", () => {
     assert.doesNotMatch(support, /paton\.jp|2026\.misscircle\.jp/);
     assert.doesNotMatch(support, /順位/);
     assert.doesNotMatch(support, /このサイトは公式|公認|本人運営/);
-    assert.match(footer, /ファン制作の非公式サイト/);
-    assert.match(footer, /公式・公認・本人運営ではありません/);
+    assert.match(footer, /ファン運営の非公式サイト/);
+    assert.match(footer, /本人の運営ではありません/);
   });
 
   it("hides the empty schedule section and its nav link until events exist", async () => {
