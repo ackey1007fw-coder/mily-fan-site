@@ -14,7 +14,7 @@ describe("2026-08-30 湘南シーサイドサークル映画特集", () => {
     assert.equal(episode.date, "2026-08-30");
     assert.equal(episode.theme, "映画特集");
     assert.equal(episode.broadcastLabel, "10:00〜13:00 生放送");
-    assert.deepEqual(episode.presenters, ["師匠", "みりぃ", "カズボー"]);
+    assert.deepEqual(episode.presenters, ["師匠", "みりぃ", "かず坊"]);
     assert.equal(episode.verifiedAt, "2026-08-30");
     assert.match(episode.sourceLabel, /オーナー提供/);
     assert.match(episode.summary, /天女と五頭龍/);

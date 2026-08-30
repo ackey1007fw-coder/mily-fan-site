@@ -44,7 +44,7 @@ export const radioEpisode20260830: RadioEpisode = {
   dateLabel: "2026.08.30（日）",
   theme: "映画特集",
   broadcastLabel: "10:00〜13:00 生放送",
-  presenters: ["師匠", "みりぃ", "カズボー"],
+  presenters: ["師匠", "みりぃ", "かず坊"],
   summary:
     "もこの21歳の誕生日を祝うオープニングから始まり、映画をテーマに3時間。江の島に伝わる「天女と五頭龍」の朗読、夏に見た作品、即興演技やディベート、胸キュン選手権、新コーナー「今日の一句」まで、映画と湘南を行き来しながらにぎやかに届けた回です。",
   milyHighlights: [
@@ -119,7 +119,7 @@ export const radioEpisode20260830: RadioEpisode = {
     { timestamp: "2:56:36", label: "エンディング／『永遠の0』メッセージ" },
   ],
   nextEpisodeNote:
-    "番組内では、次回は師匠・カズボーと研修生3人で、テーマは「8月の思い出」と案内されました。",
+    "番組内では、次回は師匠・かず坊と研修生3人で、テーマは「8月の思い出」と案内されました。",
   sourceLabel: "2026年8月30日 生放送アーカイブ文字起こし（オーナー提供）",
   verifiedAt: "2026-08-30",
   transcriptionNote:
