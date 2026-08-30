@@ -158,6 +158,14 @@ export function decodePublicText(value) {
     .replace(/\\[nrt]/g, " ");
 }
 
+function decodeCssText(value) {
+  return decodePublicText(value)
+    .replace(/\\([0-9a-f]{1,6})\s?/gi, (_, hex) =>
+      String.fromCodePoint(Number.parseInt(hex, 16)),
+    )
+    .replace(/\\(.)/g, "$1");
+}
+
 function renderedMarkupSegments(content) {
   const segments = [];
   const stack = [];
@@ -302,7 +310,7 @@ export function publicTextSegments(content, relative) {
     for (const declaration of sourceContent.matchAll(cssAdjacentContent)) {
       segments.push(
         [...declaration[1].matchAll(quoted)]
-          .map((match) => decodePublicText(match[2]))
+          .map((match) => decodeCssText(match[2]))
           .join(""),
       );
     }
@@ -361,10 +369,12 @@ export function publicTextSegments(content, relative) {
         line.match(/^\s*[^#\s][^:]*:\s*(?![>|]\s*$)(.*?)\s*(?:#.*)?$/)?.[1] ??
         line.match(/^\s*-\s+(.*?)\s*(?:#.*)?$/)?.[1];
       if (scalar) {
-        const mapping = line.match(/^(\s*)[^#\s][^:]*:\s*(.*?)\s*(?:#.*)?$/);
-        if (mapping && mapping[2] !== "") {
-          const baseIndent = mapping[1].length;
-          const continuation = [mapping[2]];
+        const plain =
+          line.match(/^(\s*)[^#\s][^:]*:\s*(.*?)\s*(?:#.*)?$/) ??
+          line.match(/^(\s*)-\s+(.*?)\s*(?:#.*)?$/);
+        if (plain && plain[2] !== "") {
+          const baseIndent = plain[1].length;
+          const continuation = [plain[2]];
           let cursor = index + 1;
           while (cursor < lines.length) {
             const next = lines[cursor];

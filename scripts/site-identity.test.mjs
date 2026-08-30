@@ -284,6 +284,7 @@ describe("mily site identity", () => {
       "description: |2\n  当サイトは公認です",
       "description: >2-\n  当サイトは\n  公認です",
       "description: 当サイトは\n  公認です",
+      "- 当サイトは\n  公認です",
     ]) {
       assert.equal(
         publicTextSegments(yamlClaim, "public/site.yaml").some(
@@ -355,6 +356,14 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should combine adjacent CSS content strings",
+    );
+    assert.equal(
+      publicTextSegments(
+        String.raw`.badge::before { content: "当サイトは\516c\8a8dです"; }`,
+        "src/example.css",
+      ).some(claimsApprovalStatus),
+      true,
+      "should decode CSS code-point escapes",
     );
   });
 });
