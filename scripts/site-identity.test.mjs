@@ -129,6 +129,7 @@ describe("mily site identity", () => {
       "public/site.webmanifest",
       "src/components/Footer.tsx",
       "support/index.html",
+      "README.md",
     ]) {
       assert.equal(isPublicSurface(relative), true, `should guard ${relative}`);
     }
@@ -149,6 +150,8 @@ describe("mily site identity", () => {
       "当サイトは公認をいただいていません",
       "当サイトは公認サイトです",
       "当サイトは公認サイトではありません",
+      "公認されたファンサイトです",
+      "本人に公認されたファンサイトです",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
