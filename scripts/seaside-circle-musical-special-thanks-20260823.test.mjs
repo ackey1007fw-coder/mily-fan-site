@@ -85,7 +85,8 @@ const PUBLIC_MP4_SHA256 =
 const PUBLIC_MP4_SIZE = 511902;
 const POSTER_SHA256 =
   "fbf5cc8650932c617787f68053f02137f12586f4709492bd68fe6b021cc4b67b";
-const DOCS_HOST_PATTERN = /docs\.google\.com/i;
+const NON_PUBLIC_FORM_DOCS_PATTERN =
+  /docs\.google\.com\/(?!forms\/d\/e\/)/i;
 const DRIVE_SHARE_QUERY_PATTERN = new RegExp(["usp=", "drivesdk"].join(""), "i");
 const DRIVE_FILE_PATH_PATTERN = /\/file\/d\//i;
 const TRANSFER_PATH_PATTERN = /\/mnt\/data|\/exec-daemon\//i;
@@ -421,7 +422,7 @@ describe("2026-08-23 seaside circle thanks Story — privacy and scope", () => {
       "public/sitemap.xml",
     ];
     const forbidden = [
-      DOCS_HOST_PATTERN,
+      NON_PUBLIC_FORM_DOCS_PATTERN,
       DRIVE_HOST_PATTERN,
       DRIVE_SHARE_QUERY_PATTERN,
       DRIVE_FILE_PATH_PATTERN,

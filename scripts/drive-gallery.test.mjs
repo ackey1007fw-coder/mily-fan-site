@@ -1233,6 +1233,48 @@ describe("Repository scan is extension-independent", () => {
     assert.deepEqual(inClean, [], "ordinary identifiers must not be flagged");
   });
 
+  it("allows only canonical public Google Form URLs", async () => {
+    const publicForms = path.join(dir, "public-forms");
+    await mkdir(publicForms, { recursive: true });
+    const publicFormUrl =
+      "https://docs.google.com/forms/d/e/1FAIpQLSf3xWju0r3sR4nePYv7O0nDqfvy03Ik5DS0dFdD7FYhY_ib6A/viewform";
+    const publicFormId = new URL(publicFormUrl).pathname.split("/")[4];
+    const driveHost = ["drive", ".google", ".com"].join("");
+    await writeFile(
+      path.join(publicForms, "allowed.html"),
+      `<a href="${publicFormUrl}">form</a>`,
+    );
+    await writeFile(
+      path.join(publicForms, "blocked.txt"),
+      `https://${driveHost}/file/d/${publicFormId}/view`,
+    );
+    await writeFile(
+      path.join(publicForms, "blocked-query.txt"),
+      `${publicFormUrl}?source=${publicFormId}`,
+    );
+    await git(["add", "-A"], dir);
+
+    const { findings } = await scanForDriveIdentifiers(dir);
+    assert.deepEqual(
+      findings.filter((finding) => finding.file === "public-forms/allowed.html"),
+      [],
+    );
+    const blockedKinds = new Set(
+      findings
+        .filter((finding) => finding.file === "public-forms/blocked.txt")
+        .map((finding) => finding.kind),
+    );
+    assert.ok(blockedKinds.has("drive-host"));
+    assert.ok(blockedKinds.has("id-shape"));
+    assert.ok(
+      findings.some(
+        (finding) =>
+          finding.file === "public-forms/blocked-query.txt" &&
+          finding.kind === "id-shape",
+      ),
+    );
+  });
+
   it("finds Drive hosts and folder paths regardless of extension", async () => {
     const hosts = path.join(dir, "hosts");
     await mkdir(hosts, { recursive: true });

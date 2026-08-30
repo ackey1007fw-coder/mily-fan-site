@@ -207,6 +207,12 @@ describe("Activity domain adapters and relations", () => {
   it("keeps personal socials and program links as different resource kinds", () => {
     const radioResources = selectActivityResources("radio");
     assert.ok(radioResources.some(({ id, kind }) => id === "fm-smw-ssc-instagram" && kind === "related-link"));
+    assert.ok(
+      radioResources.some(
+        ({ id, kind }) =>
+          id === "fm-smw-ssc-message-form" && kind === "related-link",
+      ),
+    );
     assert.equal(radioResources.some(({ kind }) => kind === "personal-social"), false);
 
     const liveResources = selectActivityResources("live-stream");

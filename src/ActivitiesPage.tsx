@@ -9,6 +9,7 @@ import {
   type ActivityId,
 } from "./data/activities";
 import { contest } from "./data/contest";
+import { seasideCircleMessageFormLink } from "./data/links";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
   selectActivityHighlights,
@@ -297,8 +298,17 @@ function RadioCurrent() {
         <p className="mt-3 text-xs leading-6 text-ink-muted">
           番組情報は{formatDate(radioProgram.lastVerifiedAt)}確認。
         </p>
+        <p className="mt-3 text-sm leading-6 text-ink-muted">
+          {seasideCircleMessageFormLink.note}
+        </p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <ExternalLink href={radioProgram.programUrl} className={primaryCta}>
+          <ExternalLink
+            href={seasideCircleMessageFormLink.url}
+            className={primaryCta}
+          >
+            {seasideCircleMessageFormLink.label}
+          </ExternalLink>
+          <ExternalLink href={radioProgram.programUrl} className={secondaryCta}>
             湘南シーサイドサークル 番組ページを見る
           </ExternalLink>
           <ExternalLink href={status.href} className={secondaryCta}>

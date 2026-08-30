@@ -27,6 +27,7 @@ export function Hero() {
   const seasideCircleLinks = links.filter(
     (link) =>
       link.id === "fm-smw-ssc-program" ||
+      link.id === "fm-smw-ssc-message-form" ||
       link.id === "fm-smw-ssc-tiktok",
   );
   const showPatonHowTo = isSupportEventUrlActive({
