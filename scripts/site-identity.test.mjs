@@ -11,6 +11,7 @@ import {
   isPublicSurface,
   publicTextSegments,
   SCAN_EXTENSIONS,
+  shouldSkipDirectory,
 } from "./check-site-identity.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -180,6 +181,9 @@ describe("mily site identity", () => {
       "Mily approved this fan site",
       "Our fan site is approved by Mily",
       "My fan site is not approved by Mily",
+      "This website is approved by Mily",
+      "This site is not approved by Mily",
+      "Our website has not been approved by Mily",
       "当サイトは、本人公認です",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
@@ -450,6 +454,20 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should preserve branch coverage while capping JSX alternatives",
+    );
+    assert.equal(
+      publicTextSegments(
+        `<p>{x ? "ほか" : "当サイトは"}${'{y ? "" : "・"}'.repeat(6)}{z ? "ほか" : "公認です"}</p>`,
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should prioritize reachable approval branches under the cap",
+    );
+
+    assert.equal(shouldSkipDirectory(root, "dist"), true);
+    assert.equal(
+      shouldSkipDirectory(path.join(root, "public"), "dist"),
+      false,
     );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);

@@ -41,13 +41,21 @@ export const SCAN_EXTENSIONS = new Set([
   ".txt",
   ".svg",
 ]);
-const SKIP_DIRS = new Set(["node_modules", "dist", ".git", ".vercel"]);
+const SKIP_DIRS = new Set(["node_modules", ".git", ".vercel"]);
+const SKIP_ROOT_DIRS = new Set(["dist"]);
 const SKIP_FILES = new Set([
   "check-site-identity.mjs",
   "content-invariants.mjs",
   "content-invariants.test.mjs",
   "site-identity.test.mjs",
 ]);
+
+export function shouldSkipDirectory(dir, entryName) {
+  return (
+    SKIP_DIRS.has(entryName) ||
+    (path.resolve(dir) === root && SKIP_ROOT_DIRS.has(entryName))
+  );
+}
 
 export async function collectFiles(dir = root) {
   let entries;
@@ -59,7 +67,7 @@ export async function collectFiles(dir = root) {
 
   const files = [];
   for (const entry of entries) {
-    if (SKIP_DIRS.has(entry.name)) continue;
+    if (shouldSkipDirectory(dir, entry.name)) continue;
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await collectFiles(fullPath)));
@@ -129,7 +137,7 @@ export function claimsApprovalStatus(content) {
     .replace(/[」』）】)、)]/g, "")
     .replace(/\s+/g, " ");
   const englishClaim =
-    /(?:this|the|our|my)\s+(?:(?:fan\s+site\s+(?:(?:(?:is|was)\s+(?:not\s+)?|(?:isn't|wasn't)\s+)(?:approved|unapproved)|(?:(?:has|had)\s+(?:not\s+)?|(?:hasn't|hadn't)\s+)been\s+approved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily(?:[- ]approved\s+fan\s+site|\s+(?:has\s+)?approved\s+(?:this|the|our|my)\s+fan\s+site)/i;
+    /(?:this|the|our|my)\s+(?:(?:(?:fan\s+site|website|site)\s+(?:(?:(?:is|was)\s+(?:not\s+)?|(?:isn't|wasn't)\s+)(?:approved|unapproved)|(?:(?:has|had)\s+(?:not\s+)?|(?:hasn't|hadn't)\s+)been\s+approved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily(?:[- ]approved\s+fan\s+site|\s+(?:has\s+)?approved\s+(?:this|the|our|my)\s+(?:fan\s+site|website|site))/i;
 
   return (
     englishClaim.test(normalized) ||
@@ -194,12 +202,23 @@ function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
   const capAlternatives = (values) => {
     const unique = [...new Set(values)];
     if (unique.length <= MAX_RENDERED_ALTERNATIVES) return unique;
-    return Array.from({ length: MAX_RENDERED_ALTERNATIVES }, (_, index) => {
-      const sourceIndex = Math.round(
-        (index * (unique.length - 1)) / (MAX_RENDERED_ALTERNATIVES - 1),
-      );
-      return unique[sourceIndex];
-    });
+    const relevance = (value) => {
+      if (claimsApprovalStatus(value)) return 3;
+      const hasSite =
+        /(?:当|本|この|弊)(?:ウェブサイト|ホームページ|サイト|ページ)|ファンサイト|(?:this|the|our|my)\s+(?:fan\s+site|website|site)/i.test(
+          value,
+        );
+      const hasApproval = /(?:非|未)?公認|approved|unapproved/i.test(value);
+      return Number(hasSite) + Number(hasApproval);
+    };
+    return unique
+      .map((value, index) => ({ value, index, relevance: relevance(value) }))
+      .sort(
+        (left, right) =>
+          right.relevance - left.relevance || left.index - right.index,
+      )
+      .slice(0, MAX_RENDERED_ALTERNATIVES)
+      .map(({ value }) => value);
   };
   const segments = [];
   const stack = [];
