@@ -147,6 +147,8 @@ describe("mily site identity", () => {
       "当サイトは\n公認です",
       "当サイトは公認を受けていません",
       "当サイトは公認をいただいていません",
+      "当サイトは公認サイトです",
+      "当サイトは公認サイトではありません",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -195,6 +197,8 @@ describe("mily site identity", () => {
       "<p>当サイトは<strong>公認</strong>です</p>",
       '<p>当サイトは{"公認"}です</p>',
       "<p>{site.displayTitle}は<strong>公認</strong>です</p>",
+      "<div>当サイトは<strong>公認</strong>です</div>",
+      "<>当サイトは<strong>公認</strong>です</>",
     ]) {
       assert.equal(
         publicTextSegments(renderedClaim, "src/example.tsx").some(
@@ -204,6 +208,15 @@ describe("mily site identity", () => {
         `should combine rendered markup: ${renderedClaim}`,
       );
     }
+
+    assert.equal(
+      publicTextSegments(
+        "`${site.displayTitle}は公認です`",
+        "src/example.ts",
+      ).some(claimsApprovalStatus),
+      true,
+      "should resolve the site title in template-literal metadata",
+    );
 
     const markdownWithQuote = '当サイトは公認です。\n\n"note"';
     assert.equal(

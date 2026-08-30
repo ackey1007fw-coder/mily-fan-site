@@ -105,7 +105,7 @@ export function claimsApprovalStatus(content) {
   const siteSubject =
     /(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト/;
   const approvalAssertion =
-    /(?:非公認(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:です|である|済み|では(?:ありません|ない)|され(?:て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))/;
+    /(?:非公認(?:サイト)?(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|済み|では(?:ありません|ない)|され(?:て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))/;
   const approvalSiteModifier =
     /(?:(?:本人(?:の|から)?|みりぃ(?:さん)?(?:の|から)?)(?:非)?公認(?:の)?(?:非公式)?(?:ファン)?サイト|(?:非)?公認(?:の)?みりぃ(?:の)?ファンサイト)/;
 
@@ -121,6 +121,8 @@ export function claimsApprovalStatus(content) {
 
 export function decodePublicText(value) {
   return value
+    .replace(/\$\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
+    .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
     .replace(/\\u\{([0-9a-f]+)\}/gi, (_, hex) =>
       String.fromCodePoint(Number.parseInt(hex, 16)),
     )
@@ -142,8 +144,9 @@ export function publicTextSegments(content, relative) {
   const segments = [];
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const textNode = />([^<>{}]+)</g;
-  const renderedBlock =
-    /<(p|h[1-6]|li|dt|dd|figcaption|blockquote|button|a|span)\b[^>]*>([\s\S]*?)<\/\1>/gi;
+  const renderedContainer =
+    /<([a-z][\w:-]*)\b[^>]*>([\s\S]*?)<\/\1>/gi;
+  const renderedFragment = /<>([\s\S]*?)<\/>/g;
 
   for (const match of content.matchAll(quoted)) {
     segments.push(decodePublicText(match[2]));
@@ -151,10 +154,13 @@ export function publicTextSegments(content, relative) {
   for (const match of content.matchAll(textNode)) {
     segments.push(decodePublicText(match[1]));
   }
-  for (const match of content.matchAll(renderedBlock)) {
+  for (const match of [
+    ...content.matchAll(renderedContainer),
+    ...content.matchAll(renderedFragment),
+  ]) {
     segments.push(
       decodePublicText(
-        match[2]
+        match.at(-1)
           .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
           .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
           .replace(/<[^>]+>/g, "")
