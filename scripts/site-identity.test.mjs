@@ -188,6 +188,15 @@ describe("mily site identity", () => {
       false,
     );
 
+    assert.equal(
+      publicTextSegments(
+        'const description = "当サイトは" + "公認です";',
+        "src/example.ts",
+      ).some(claimsApprovalStatus),
+      true,
+      "should combine concatenated public strings",
+    );
+
     const renderedNewline = "<p>当サイトは\n公認です</p>";
     assert.equal(
       publicTextSegments(renderedNewline, "src/example.tsx").some(

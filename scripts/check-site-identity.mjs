@@ -190,8 +190,16 @@ export function publicTextSegments(content, relative) {
   const extension = path.extname(normalizedPath);
   const segments = [];
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
+  const concatenatedQuoted =
+    /(?:["'`](?:\\.|[^"'\\`])*["'`]\s*\+\s*)+["'`](?:\\.|[^"'\\`])*["'`]/g;
   const textNode = />([^<>{}]+)</g;
 
+  for (const chain of content.matchAll(concatenatedQuoted)) {
+    const joined = [...chain[0].matchAll(quoted)]
+      .map((match) => decodePublicText(match[2]))
+      .join("");
+    segments.push(joined);
+  }
   for (const match of content.matchAll(quoted)) {
     segments.push(decodePublicText(match[2]));
   }
