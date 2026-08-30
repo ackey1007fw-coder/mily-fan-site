@@ -386,6 +386,22 @@ describe("mily site identity", () => {
       true,
       "should flush visible markup with an omitted closing tag",
     );
+    assert.equal(
+      publicTextSegments(
+        '<p>当サイトは<span title="x > y">公認</span>です</p>',
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      true,
+      "should respect quoted > characters while tokenizing markup",
+    );
+    assert.equal(
+      publicTextSegments(
+        '<p>当サイトは{approved ? "公認" : "非公認"}です</p>',
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should preserve conditional JSX text branches",
+    );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
     assert.equal(

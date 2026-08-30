@@ -191,15 +191,62 @@ function renderedMarkupSegments(content) {
     /<!\[CDATA\[([\s\S]*?)\]\]>/g,
     "$1",
   );
-  const tokens = renderedContent.match(/<[^>]*>|[^<]+/g) ?? [];
+  const tokens = [];
+  let tokenStart = 0;
+  while (tokenStart < renderedContent.length) {
+    if (renderedContent[tokenStart] !== "<") {
+      const nextTag = renderedContent.indexOf("<", tokenStart);
+      const end = nextTag < 0 ? renderedContent.length : nextTag;
+      tokens.push(renderedContent.slice(tokenStart, end));
+      tokenStart = end;
+      continue;
+    }
+    let cursor = tokenStart + 1;
+    let quote = null;
+    while (cursor < renderedContent.length) {
+      const char = renderedContent[cursor];
+      if (quote) {
+        if (char === "\\") {
+          cursor += 2;
+          continue;
+        }
+        if (char === quote) quote = null;
+      } else if (char === '"' || char === "'") {
+        quote = char;
+      } else if (char === ">") {
+        cursor += 1;
+        break;
+      }
+      cursor += 1;
+    }
+    tokens.push(renderedContent.slice(tokenStart, cursor));
+    tokenStart = cursor;
+  }
 
   const appendVisibleText = (value) => {
     if (stack.length === 0) return;
-    const visible = decodePublicText(value)
-      .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
-      .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
-      .replace(/\{[^{}]*\}/g, "");
-    for (const frame of stack) frame.text += visible;
+    const expandConditionalText = (input) => {
+      const conditional =
+        /\{[^{}?]*\?\s*(["'])((?:\\.|(?!\1)[\s\S])*?)\1\s*:\s*(["'])((?:\\.|(?!\3)[\s\S])*?)\3\s*\}/;
+      const match = input.match(conditional);
+      if (!match) return [input];
+      const prefix = input.slice(0, match.index);
+      const suffix = input.slice(match.index + match[0].length);
+      return [match[2], match[4]].flatMap((branch) =>
+        expandConditionalText(prefix + branch + suffix),
+      );
+    };
+    const visibleAlternatives = expandConditionalText(value).map((alternative) =>
+      decodePublicText(alternative)
+        .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
+        .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
+        .replace(/\{[^{}]*\}/g, ""),
+    );
+    for (const frame of stack) {
+      frame.texts = frame.texts.flatMap((existing) =>
+        visibleAlternatives.map((visible) => existing + visible),
+      );
+    }
   };
 
   for (const token of tokens) {
@@ -210,7 +257,7 @@ function renderedMarkupSegments(content) {
     if (/^<!--/.test(token) || /^<![^-]/.test(token)) continue;
 
     if (token === "<>") {
-      stack.push({ tag: "#fragment", text: "" });
+      stack.push({ tag: "#fragment", texts: [""] });
       continue;
     }
 
@@ -221,18 +268,18 @@ function renderedMarkupSegments(content) {
       const index = stack.findLastIndex((frame) => frame.tag === tag);
       if (index >= 0) {
         const [frame] = stack.splice(index, 1);
-        segments.push(frame.text);
+        segments.push(...frame.texts);
       }
       continue;
     }
 
     const opening = token.match(/^<([A-Za-z][\w:.-]*)\b/);
     if (opening && !/\/\s*>$/.test(token)) {
-      stack.push({ tag: opening[1].toLowerCase(), text: "" });
+      stack.push({ tag: opening[1].toLowerCase(), texts: [""] });
     }
   }
 
-  segments.push(...stack.map((frame) => frame.text));
+  segments.push(...stack.flatMap((frame) => frame.texts));
   return segments;
 }
 
