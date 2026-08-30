@@ -138,6 +138,8 @@ describe("mily site identity", () => {
       "このサイトは非公認です",
       "本人の公認を受けたファンサイトです",
       "みりぃファンサイトは本人から公認を受けています",
+      "当サイトは公認を受けました",
+      "当サイトは公認をいただきました",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
