@@ -184,7 +184,7 @@ function decodeCssText(value) {
     .replace(/\\(.)/g, "$1");
 }
 
-function renderedMarkupSegments(content) {
+function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
   const segments = [];
   const stack = [];
   const renderedContent = content.replace(
@@ -224,7 +224,6 @@ function renderedMarkupSegments(content) {
   }
 
   const appendVisibleText = (value) => {
-    if (stack.length === 0) return;
     const expandConditionalText = (input) => {
       const conditional =
         /\{[^{}?]*\?\s*(["'])((?:\\.|(?!\1)[\s\S])*?)\1\s*:\s*(["'])((?:\\.|(?!\3)[\s\S])*?)\3\s*\}/;
@@ -242,6 +241,10 @@ function renderedMarkupSegments(content) {
         .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
         .replace(/\{[^{}]*\}/g, ""),
     );
+    if (stack.length === 0) {
+      if (includeTopLevel) segments.push(...visibleAlternatives);
+      return;
+    }
     for (const frame of stack) {
       frame.texts = frame.texts.flatMap((existing) =>
         visibleAlternatives.map((visible) => existing + visible),
@@ -381,7 +384,11 @@ export function publicTextSegments(content, relative) {
       );
     }
   }
-  segments.push(...renderedMarkupSegments(sourceContent));
+  segments.push(
+    ...renderedMarkupSegments(sourceContent, {
+      includeTopLevel: [".html", ".xml", ".svg"].includes(extension),
+    }),
+  );
 
   if (extension === ".md") {
     segments.push(

@@ -402,6 +402,14 @@ describe("mily site identity", () => {
       true,
       "should preserve conditional JSX text branches",
     );
+    assert.equal(
+      publicTextSegments(
+        "<!doctype html>当サイトは公認です",
+        "public/example.html",
+      ).some(claimsApprovalStatus),
+      true,
+      "should preserve top-level visible HTML text",
+    );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
     assert.equal(
