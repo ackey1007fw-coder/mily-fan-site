@@ -158,6 +158,8 @@ describe("mily site identity", () => {
       "みりぃ公認ファンサイトです",
       "当サイトは公認でございます",
       "当サイトは公認ではございません",
+      "「当サイト」は公認です",
+      "『みりぃ ファンサイト』は本人公認です",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -265,6 +267,8 @@ describe("mily site identity", () => {
     for (const yamlClaim of [
       "description: 当サイトは公認です",
       "- 当サイトは公認ではありません",
+      "description: |\n  当サイトは公認です",
+      "description: >\n  当サイトは\n  公認です",
     ]) {
       assert.equal(
         publicTextSegments(yamlClaim, "public/site.yaml").some(

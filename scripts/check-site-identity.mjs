@@ -103,7 +103,7 @@ export function claimsApprovalStatus(content) {
   // subject and assertion grammatically so an unrelated fact in the same
   // sentence (e.g. an approved event) remains valid.
   const siteSubject =
-    String.raw`(?:(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト)`;
+    String.raw`(?:(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?\s*(?:ファン)?サイト|ファンサイト)`;
   const approvalAssertion =
     String.raw`(?:非公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
   const approver =
@@ -116,6 +116,7 @@ export function claimsApprovalStatus(content) {
   );
 
   return content
+    .replace(/[」』）】)]/g, "")
     .replace(/\s+/g, " ")
     .split(/[。！？]/)
     .some((sentence) => siteFirst.test(sentence) || approvalFirst.test(sentence));
@@ -214,7 +215,40 @@ export function publicTextSegments(content, relative) {
     segments.push(decodePublicText(content));
   }
   if ([".yml", ".yaml"].includes(extension)) {
-    for (const line of content.split(/\r?\n/)) {
+    const lines = content.split(/\r?\n/);
+    for (let index = 0; index < lines.length; index += 1) {
+      const line = lines[index];
+      const block = line.match(/^(\s*)[^#\s][^:]*:\s*([>|])[+-]?\s*(?:#.*)?$/);
+      if (block) {
+        const baseIndent = block[1].length;
+        const blockLines = [];
+        let cursor = index + 1;
+        while (cursor < lines.length) {
+          const next = lines[cursor];
+          if (next.trim() === "") {
+            blockLines.push("");
+            cursor += 1;
+            continue;
+          }
+          const indent = next.match(/^\s*/)[0].length;
+          if (indent <= baseIndent) break;
+          blockLines.push(next);
+          cursor += 1;
+        }
+        const nonBlank = blockLines.filter((value) => value.trim() !== "");
+        const contentIndent =
+          nonBlank.length > 0
+            ? Math.min(...nonBlank.map((value) => value.match(/^\s*/)[0].length))
+            : baseIndent + 1;
+        const separator = block[2] === ">" ? " " : "\n";
+        segments.push(
+          decodePublicText(
+            blockLines.map((value) => value.slice(contentIndent)).join(separator),
+          ),
+        );
+        index = cursor - 1;
+        continue;
+      }
       const scalar =
         line.match(/^\s*[^#\s][^:]*:\s*(?![>|]\s*$)(.*?)\s*(?:#.*)?$/)?.[1] ??
         line.match(/^\s*-\s+(.*?)\s*(?:#.*)?$/)?.[1];
