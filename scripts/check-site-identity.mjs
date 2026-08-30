@@ -125,6 +125,8 @@ export function publicTextSegments(content, relative) {
   const segments = [];
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const textNode = />([^<>{}]+)</g;
+  const renderedBlock =
+    /<(p|h[1-6]|li|dt|dd|figcaption|blockquote|button|a|span)\b[^>]*>([\s\S]*?)<\/\1>/gi;
 
   for (const match of content.matchAll(quoted)) {
     segments.push(match[2].replace(/\\[nrt]/g, " "));
@@ -132,8 +134,17 @@ export function publicTextSegments(content, relative) {
   for (const match of content.matchAll(textNode)) {
     segments.push(match[1]);
   }
+  for (const match of content.matchAll(renderedBlock)) {
+    segments.push(
+      match[2]
+        .replace(/\{\s*site\.displayTitle\s*\}/g, "ファンサイト")
+        .replace(/\{\s*(["'`])([\s\S]*?)\1\s*\}/g, "$2")
+        .replace(/<[^>]+>/g, "")
+        .replace(/\{[^{}]*\}/g, ""),
+    );
+  }
 
-  if (segments.length === 0 && [".md", ".txt"].includes(extension)) {
+  if ([".md", ".txt"].includes(extension)) {
     segments.push(content);
   }
 

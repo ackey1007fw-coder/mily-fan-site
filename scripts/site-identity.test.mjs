@@ -187,5 +187,27 @@ describe("mily site identity", () => {
       ),
       true,
     );
+
+    for (const renderedClaim of [
+      "<p>当サイトは<strong>公認</strong>です</p>",
+      '<p>当サイトは{"公認"}です</p>',
+      "<p>{site.displayTitle}は<strong>公認</strong>です</p>",
+    ]) {
+      assert.equal(
+        publicTextSegments(renderedClaim, "src/example.tsx").some(
+          claimsApprovalStatus,
+        ),
+        true,
+        `should combine rendered markup: ${renderedClaim}`,
+      );
+    }
+
+    const markdownWithQuote = '当サイトは公認です。\n\n"note"';
+    assert.equal(
+      publicTextSegments(markdownWithQuote, "public/about.md").some(
+        claimsApprovalStatus,
+      ),
+      true,
+    );
   });
 });
