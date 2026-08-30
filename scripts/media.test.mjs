@@ -186,7 +186,7 @@ describe("hero media wiring", () => {
     const source = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
 
     assert.match(source, /featuredPhoto/);
-    assert.match(source, /ファン制作・非公式サイト/);
+    assert.match(source, /ファン運営・非公式サイト/);
     assert.match(source, /href="#latest"/);
     // 応援導線は Support Hub（/support/）へ送る
     assert.match(source, /SUPPORT_HUB_ROUTE/);
@@ -197,6 +197,7 @@ describe("hero media wiring", () => {
       path.join(root, "src/components/Footer.tsx"),
       "utf8",
     );
-    assert.match(source, /公式・公認・本人運営ではありません/);
+    assert.match(source, /ファン運営の非公式サイト/);
+    assert.match(source, /本人の運営ではありません/);
   });
 });

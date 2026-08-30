@@ -10,10 +10,10 @@ export function Footer() {
       <div className="mx-auto max-w-3xl text-sm leading-relaxed text-ink-muted">
         <SiteShare />
         <p className="font-semibold text-ink">
-          {site.displayTitle}はファン制作の非公式サイトです。
+          {site.displayTitle}はファン運営の非公式サイトです。
         </p>
         <p className="mt-2">
-          {profile.displayName}（{profile.publicName}）さんの公式・公認・本人運営ではありません。
+          {profile.displayName}（{profile.publicName}）さん本人の運営ではありません。
         </p>
         <div className="mt-8 border-t border-sage/15 pt-6">
           <a

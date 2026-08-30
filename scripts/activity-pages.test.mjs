@@ -107,7 +107,7 @@ describe("Activities MPA routes and metadata", () => {
       const metadata = activityPageMetadata(route);
       const structured = JSON.stringify(activityPageStructuredData(route));
       assert.match(metadata.title, /非公式/);
-      assert.match(metadata.description, /ファン制作.*非公式/);
+      assert.match(metadata.description, /ファン運営.*非公式/);
       assert.match(html, /みりぃ ファンサイト（非公式）/);
       assert.match(structured, /非公式/);
       assert.doesNotMatch(structured, /(?<!非)公式活動ページ|(?<!非)公式プロフィール/);

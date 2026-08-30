@@ -39,9 +39,10 @@ describe("detailed profile provenance", () => {
     assert.match(source, /href=\{item\.source\}/);
     assert.match(source, /Object\.values\(profileSources\)\.map/);
     assert.match(source, /ExternalLink/);
-    assert.match(source, /ファン制作・非公式プロフィール/);
+    assert.match(source, /ファン運営・非公式プロフィール/);
     assert.match(source, /<Footer \/>/);
-    assert.match(footer, /公式・公認・本人運営ではありません/);
+    assert.match(footer, /ファン運営の非公式サイト/);
+    assert.match(footer, /本人の運営ではありません/);
   });
 
   it("derives the MISS CIRCLE current phase from the contest source of truth", async () => {

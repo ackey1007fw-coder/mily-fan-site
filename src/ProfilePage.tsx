@@ -81,7 +81,7 @@ function ProfileHero() {
       <div className="relative mx-auto grid max-w-3xl gap-8 sm:grid-cols-[minmax(0,1fr)_15rem] sm:items-center">
         <div className="min-w-0">
           <p className="inline-flex rounded-full bg-sage-soft px-3 py-1 text-xs font-medium text-sage-deep">
-            ファン制作・非公式プロフィール
+            ファン運営・非公式プロフィール
           </p>
           <p className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-ink-muted">
             Mily Profile

@@ -20,23 +20,23 @@ export type ArchivePageMetadata = {
 
 const archives = {
   [NEWS_ARCHIVE_ROUTE]: {
-    title: "みりぃの最新情報｜NEWS｜ファン制作・非公式サイト",
+    title: "みりぃの最新情報｜NEWS｜ファン運営・非公式サイト",
     description:
-      "みりぃ（三橋莉子 / Mily）さんの確認済みの近況とお知らせをまとめる、ファン制作の非公式NEWSページです。",
+      "みりぃ（三橋莉子 / Mily）さんの確認済みの近況とお知らせをまとめる、ファン運営の非公式NEWSページです。",
     canonical: newsUrl(),
     breadcrumbLabel: "最新情報",
   },
   [STORIES_ARCHIVE_ROUTE]: {
-    title: "みりぃのSTORY｜読み物｜ファン制作・非公式サイト",
+    title: "みりぃのSTORY｜読み物｜ファン運営・非公式サイト",
     description:
-      "みりぃ（三橋莉子 / Mily）さんの本人の言葉と、その日の記録を読む、ファン制作の非公式STORY一覧です。",
+      "みりぃ（三橋莉子 / Mily）さんの本人の言葉と、その日の記録を読む、ファン運営の非公式STORY一覧です。",
     canonical: storiesIndexUrl(),
     breadcrumbLabel: "STORY",
   },
   [GALLERY_ARCHIVE_ROUTE]: {
-    title: "みりぃのギャラリー｜写真と動画｜ファン制作・非公式サイト",
+    title: "みりぃのギャラリー｜写真と動画｜ファン運営・非公式サイト",
     description:
-      "みりぃ（三橋莉子 / Mily）さんの確認済みの写真と動画をまとめる、ファン制作の非公式ギャラリーです。",
+      "みりぃ（三橋莉子 / Mily）さんの確認済みの写真と動画をまとめる、ファン運営の非公式ギャラリーです。",
     canonical: galleryUrl(),
     breadcrumbLabel: "ギャラリー",
   },

@@ -14,9 +14,9 @@ export type ActivityPageMetadata = {
 export function activityPageMetadata(pathname: string): ActivityPageMetadata {
   if (isActivitiesHubRoute(pathname)) {
     return {
-      title: "みりぃの活動｜Activities｜ファン制作・非公式サイト",
+      title: "みりぃの活動｜Activities｜ファン運営・非公式サイト",
       description:
-        "MISS CIRCLE、ラジオ、ライブ配信、CAMPUS GIRLSでのみりぃ（三橋莉子 / Mily）さんの活動を、確認済み情報からたどるファン制作の非公式ページです。",
+        "MISS CIRCLE、ラジオ、ライブ配信、CAMPUS GIRLSでのみりぃ（三橋莉子 / Mily）さんの活動を、確認済み情報からたどるファン運営の非公式ページです。",
       canonical: activitiesUrl(),
       breadcrumbLabel: "Activities",
     };
@@ -28,8 +28,8 @@ export function activityPageMetadata(pathname: string): ActivityPageMetadata {
   }
 
   return {
-    title: `${activity.label}｜みりぃの活動｜ファン制作・非公式サイト`,
-    description: `${activity.summary} みりぃ（三橋莉子 / Mily）さんを応援する、ファン制作の非公式活動ページです。`,
+    title: `${activity.label}｜みりぃの活動｜ファン運営・非公式サイト`,
+    description: `${activity.summary} みりぃ（三橋莉子 / Mily）さんを応援する、ファン運営の非公式活動ページです。`,
     canonical: activityUrl(activity.route),
     breadcrumbLabel: activity.label,
   };
