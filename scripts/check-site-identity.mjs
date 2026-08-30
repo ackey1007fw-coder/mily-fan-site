@@ -259,17 +259,26 @@ function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
   }
 
   const appendVisibleText = (value) => {
-    if (stack.some((frame) => frame.tag === "rt" || frame.tag === "rp")) {
+    if (
+      stack.some((frame) =>
+        ["rt", "rp", "script", "style"].includes(frame.tag),
+      )
+    ) {
       return;
     }
     const expandConditionalText = (input) => {
       const conditional =
         /\{[^{}?]*\?\s*(["'])((?:\\.|(?!\1)[\s\S])*?)\1\s*:\s*(["'])((?:\\.|(?!\3)[\s\S])*?)\3\s*\}/;
+      const logical =
+        /\{[^{}]*?(?:&&|\|\||\?\?)\s*(["'])((?:\\.|(?!\1)[\s\S])*?)\1\s*\}/;
       const match = input.match(conditional);
-      if (!match) return [input];
-      const prefix = input.slice(0, match.index);
-      const suffix = input.slice(match.index + match[0].length);
-      return [match[2], match[4]].flatMap((branch) =>
+      const logicalMatch = input.match(logical);
+      if (!match && !logicalMatch) return [input];
+      const selected = match ?? logicalMatch;
+      const prefix = input.slice(0, selected.index);
+      const suffix = input.slice(selected.index + selected[0].length);
+      const branches = match ? [match[2], match[4]] : ["", logicalMatch[2]];
+      return branches.flatMap((branch) =>
         expandConditionalText(prefix + branch + suffix),
       );
     };
@@ -466,6 +475,8 @@ export function publicTextSegments(content, relative) {
       decodePublicText(content)
         .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
         .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+        .replace(/!\[([^\]]*)\]\[[^\]]*\]/g, "$1")
+        .replace(/\[([^\]]+)\]\[[^\]]*\]/g, "$1")
         .replace(/[*_~`]/g, ""),
     );
   }

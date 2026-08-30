@@ -319,6 +319,7 @@ describe("mily site identity", () => {
     for (const formattedClaim of [
       "当サイトは**公認**です",
       "当サイトは[公認](https://example.test/)です",
+      "当サイトは[公認][status]です\n\n[status]: https://example.test/",
     ]) {
       assert.equal(
         publicTextSegments(formattedClaim, "README.md").some(
@@ -372,6 +373,18 @@ describe("mily site identity", () => {
       false,
       "should ignore quoted examples in source comments",
     );
+    for (const rawTextClaim of [
+      "<script>// 当サイトは公認です</script>",
+      "<style>/* 当サイトは公認です */</style>",
+    ]) {
+      assert.equal(
+        publicTextSegments(rawTextClaim, "public/example.html").some(
+          claimsApprovalStatus,
+        ),
+        false,
+        `should ignore non-visible raw text: ${rawTextClaim}`,
+      );
+    }
     assert.equal(
       publicTextSegments(
         `const quote = /['"]/;\nconst view = <meta content="当サイトは公認です" />;`,
@@ -425,6 +438,19 @@ describe("mily site identity", () => {
       true,
       "should preserve conditional JSX text branches",
     );
+    for (const logicalClaim of [
+      '<p>当サイトは{approved && "公認"}です</p>',
+      '<p>当サイトは{label || "公認"}です</p>',
+      '<p>当サイトは{label ?? "公認"}です</p>',
+    ]) {
+      assert.equal(
+        publicTextSegments(logicalClaim, "src/example.tsx").some(
+          claimsApprovalStatus,
+        ),
+        true,
+        `should preserve logical JSX text branches: ${logicalClaim}`,
+      );
+    }
     assert.equal(
       publicTextSegments(
         "<!doctype html>当サイトは公認です",
