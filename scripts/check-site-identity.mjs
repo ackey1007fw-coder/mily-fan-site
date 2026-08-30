@@ -27,6 +27,7 @@ export const SCAN_EXTENSIONS = new Set([
   ".ts",
   ".tsx",
   ".js",
+  ".jsx",
   ".mjs",
   ".cjs",
   ".json",
@@ -95,7 +96,13 @@ const PUBLIC_SURFACE_ROOTS = new Set([
 
 export function isPublicSurface(relative) {
   const normalized = relative.replaceAll("\\", "/");
-  if (normalized === "index.html" || normalized === "README.md") return true;
+  if (
+    normalized === "index.html" ||
+    normalized === "README.md" ||
+    normalized === "vite.config.ts"
+  ) {
+    return true;
+  }
   return PUBLIC_SURFACE_ROOTS.has(normalized.split("/")[0]);
 }
 
@@ -119,7 +126,7 @@ export function claimsApprovalStatus(content) {
   );
 
   const normalized = content
-    .replace(/[」』）】)]/g, "")
+    .replace(/[」』）】)、)]/g, "")
     .replace(/\s+/g, " ");
   const englishClaim =
     /(?:this|the)\s+(?:(?:fan\s+site\s+(?:(?:(?:is|was)\s+(?:not\s+)?|(?:isn't|wasn't)\s+)(?:approved|unapproved)|(?:(?:has|had)\s+(?:not\s+)?|(?:hasn't|hadn't)\s+)been\s+approved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily(?:[- ]approved\s+fan\s+site|\s+(?:has\s+)?approved\s+(?:this|the)\s+fan\s+site)/i;
@@ -260,6 +267,7 @@ export function publicTextSegments(content, relative) {
     ".ts",
     ".tsx",
     ".js",
+    ".jsx",
     ".mjs",
     ".cjs",
   ].includes(extension)
@@ -272,6 +280,8 @@ export function publicTextSegments(content, relative) {
   const textNode = />([^<>{}]+)</g;
   const unquotedAttribute =
     /\b(?:content|aria-label|title|alt|description)=([^\s"'=`<>]+)/gi;
+  const cssAdjacentContent =
+    /content\s*:\s*((?:(?:["'])(?:\\.|[^"'\\])*(?:["'])\s*)+);/gi;
 
   for (const chain of sourceContent.matchAll(concatenatedQuoted)) {
     const joined = [...chain[0].matchAll(quoted)]
@@ -287,6 +297,15 @@ export function publicTextSegments(content, relative) {
   }
   for (const match of sourceContent.matchAll(unquotedAttribute)) {
     segments.push(decodePublicText(match[1]));
+  }
+  if (extension === ".css") {
+    for (const declaration of sourceContent.matchAll(cssAdjacentContent)) {
+      segments.push(
+        [...declaration[1].matchAll(quoted)]
+          .map((match) => decodePublicText(match[2]))
+          .join(""),
+      );
+    }
   }
   segments.push(...renderedMarkupSegments(sourceContent));
 

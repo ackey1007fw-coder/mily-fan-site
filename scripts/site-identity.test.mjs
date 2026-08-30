@@ -131,6 +131,7 @@ describe("mily site identity", () => {
       "support/index.html",
       "README.md",
       "api/share.ts",
+      "vite.config.ts",
     ]) {
       assert.equal(isPublicSurface(relative), true, `should guard ${relative}`);
     }
@@ -168,6 +169,7 @@ describe("mily site identity", () => {
       "This fan site isn't approved by Mily",
       "This fan site has not been approved by Mily",
       "Mily approved this fan site",
+      "当サイトは、本人公認です",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -343,6 +345,16 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should preserve visible JSX text containing URL delimiters",
+    );
+
+    assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
+    assert.equal(
+      publicTextSegments(
+        '.badge::before { content: "当サイトは" "公認です"; }',
+        "src/example.css",
+      ).some(claimsApprovalStatus),
+      true,
+      "should combine adjacent CSS content strings",
     );
   });
 });
