@@ -322,14 +322,15 @@ function RadioCurrent() {
 }
 
 function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
-  if (activityId !== "radio") return null;
+  const videos = visibleRadioStoryVideos();
+  if (activityId !== "radio" || videos.length === 0) return null;
   return (
-    <SectionShell eyebrow="Program Videos" title="8/30の番組動画">
+    <SectionShell eyebrow="Program Videos" title="2026年8月30日の番組動画">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        トークテーマは「映画」。番組へのメッセージ募集と、生放送の案内動画です。
+        当日のトークテーマは「映画」。番組へのメッセージ募集と、生放送の案内動画です。
       </p>
       <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {visibleRadioStoryVideos().map((video) => (
+        {videos.map((video) => (
           <li
             key={video.id}
             className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card"
@@ -356,7 +357,7 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
       </ul>
       <div className="mt-6 rounded-2xl border border-apricot/30 bg-apricot-soft/55 p-5">
         <p className="text-sm leading-7 text-ink-muted">
-          動画で紹介しているメッセージフォームはこちら。ラジオネームで送れます。
+          現在の番組へのメッセージはこちら。ラジオネームで送れます。
         </p>
         <p className="mt-4">
           <ExternalLink

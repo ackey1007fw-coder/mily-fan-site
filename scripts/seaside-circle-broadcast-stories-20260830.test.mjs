@@ -108,10 +108,17 @@ describe("2026-08-30 湘南シーサイドサークル Story動画", () => {
   it("reuses the canonical public message form below Radio media", async () => {
     const page = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
     assert.match(page, /activityId === "radio"/);
-    assert.match(page, /visibleRadioStoryVideos\(\)\.map/);
+    assert.match(page, /const videos = visibleRadioStoryVideos\(\)/);
+    assert.match(page, /videos\.length === 0/);
+    assert.match(page, /videos\.map/);
     assert.match(page, /\{video\.sourceLabel\}/);
     assert.match(page, /formatDate\(video\.sourceDate\)/);
-    assert.match(page, /動画で紹介しているメッセージフォームはこちら/);
+    assert.match(page, /2026年8月30日の番組動画/);
+    assert.match(page, /現在の番組へのメッセージはこちら/);
+    assert.equal(
+      seasideCircleMessageFormStoryVideo.caption,
+      "2026年8月30日の番組では、「映画」にまつわるエピソードを募集しました。",
+    );
     assert.match(page, /href=\{seasideCircleMessageFormLink\.url\}/);
     assert.match(page, /\{seasideCircleMessageFormLink\.label\}/);
     assert.match(seasideCircleMessageFormLink.url, /^https:\/\/docs\.google\.com\/forms\/d\/e\//);
