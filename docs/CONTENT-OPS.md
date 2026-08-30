@@ -26,6 +26,20 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 | `radio.ts` | 湘南シーサイドサークル 日曜 10:00–13:00 | タイムテーブル / スタッフ / 番組ページ | 本人出演の断定はしない。NOW ON AIR は API が実行時取得 |
 
+### 2026-08-30 湘南シーサイドサークル番組Story動画2本
+
+- オーナー提供の番組Instagram Story動画2本を batch b42 として受け入れる。
+- b42-01 は「映画」のエピソード募集とメッセージフォーム、b42-02 は
+  10:00〜13:00の生放送・聴取案内・トークテーマ「映画」を表示する。
+- 2本とも Radio Activity専用の公開MP4・poster・manifest objectとして扱う。
+  HOME Latest / NEWS、Gallery、`/stories/`、highlights、events、streamSchedule、
+  `media.ts` には追加しない。
+- Radio Activity の動画直下に、既存の公開メッセージフォームへのCTAを再掲する。
+- 恒久的なStory permalinkはないため、出典は非リンクの
+  `湘南シーサイドサークル Instagram Story` labelとする。
+- 元動画の未確認音声は公開派生から削除する。512×910、30fps、571フレームを維持し、
+  crop・scale・短縮・テロップ変更・AI加工は行わない。
+
 ### 2026-08-30 朝のSHOWROOM 6:00〜6:30案内
 
 - `news.ts` は55件。本人X
