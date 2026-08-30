@@ -129,7 +129,7 @@ export function claimsApprovalStatus(content) {
     .replace(/[」』）】)、)]/g, "")
     .replace(/\s+/g, " ");
   const englishClaim =
-    /(?:this|the)\s+(?:(?:fan\s+site\s+(?:(?:(?:is|was)\s+(?:not\s+)?|(?:isn't|wasn't)\s+)(?:approved|unapproved)|(?:(?:has|had)\s+(?:not\s+)?|(?:hasn't|hadn't)\s+)been\s+approved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily(?:[- ]approved\s+fan\s+site|\s+(?:has\s+)?approved\s+(?:this|the)\s+fan\s+site)/i;
+    /(?:this|the|our|my)\s+(?:(?:fan\s+site\s+(?:(?:(?:is|was)\s+(?:not\s+)?|(?:isn't|wasn't)\s+)(?:approved|unapproved)|(?:(?:has|had)\s+(?:not\s+)?|(?:hasn't|hadn't)\s+)been\s+approved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily(?:[- ]approved\s+fan\s+site|\s+(?:has\s+)?approved\s+(?:this|the|our|my)\s+fan\s+site)/i;
 
   return (
     englishClaim.test(normalized) ||
@@ -374,7 +374,7 @@ export function publicTextSegments(content, relative) {
   const unquotedAttribute =
     /\b(?:content|aria-label|title|alt|description)=([^\s"'=`<>]+)/gi;
   const cssAdjacentContent =
-    /content\s*:\s*((?:(?:["'])(?:\\.|[^"'\\])*(?:["'])\s*)+);/gi;
+    /content\s*:\s*((?:(?:["'])(?:\\.|[^"'\\])*(?:["'])\s*)+)(?:;|}|$)/gi;
 
   for (const chain of sourceContent.matchAll(concatenatedQuoted)) {
     const joined = [...chain[0].matchAll(quoted)]

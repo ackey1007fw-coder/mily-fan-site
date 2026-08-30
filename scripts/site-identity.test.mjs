@@ -178,6 +178,8 @@ describe("mily site identity", () => {
       "This fan site isn't approved by Mily",
       "This fan site has not been approved by Mily",
       "Mily approved this fan site",
+      "Our fan site is approved by Mily",
+      "My fan site is not approved by Mily",
       "当サイトは、本人公認です",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
@@ -441,6 +443,14 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should combine adjacent CSS content strings",
+    );
+    assert.equal(
+      publicTextSegments(
+        '.badge::before { content: "当サイトは" "公認です" }',
+        "src/example.css",
+      ).some(claimsApprovalStatus),
+      true,
+      "should accept an omitted final CSS semicolon",
     );
     assert.equal(
       publicTextSegments(
