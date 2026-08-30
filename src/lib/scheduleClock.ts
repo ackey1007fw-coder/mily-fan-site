@@ -115,3 +115,6 @@ export function createSchedulePhaseStore(timers: Timers = defaultTimers): Schedu
     },
   };
 }
+
+/** API通信なしで放送枠の境界を共有する、クライアント共通の時計。 */
+export const schedulePhaseStore = createSchedulePhaseStore();

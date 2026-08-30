@@ -1,4 +1,16 @@
 import { canonicalUrl, site } from "../data/site.ts";
+import { contest } from "../data/contest.ts";
+import {
+  radioProgram,
+  schedulePhase,
+  type SchedulePhase,
+} from "../data/radio.ts";
+import { supportEvents, type SupportEvent } from "../data/supportEvents.ts";
+import {
+  displayStatus,
+  formatScheduleEndLabel,
+  formatShortTokyoDate,
+} from "./supportCalendar.ts";
 
 export type SiteSharePayload = {
   title: string;
@@ -7,6 +19,11 @@ export type SiteSharePayload = {
 };
 
 export type WebShareResult = "shared" | "cancelled" | "unsupported";
+
+export type SiteShareContext = {
+  now?: number;
+  radioPhase?: SchedulePhase;
+};
 
 type WebShareApi = {
   share?: (data: SiteSharePayload) => Promise<void>;
@@ -17,14 +34,121 @@ type ClipboardWriter = {
   writeText: (text: string) => Promise<void>;
 };
 
+type ShareTopic = {
+  id: string;
+  priority: number;
+  text: string;
+};
+
+const DAY_MS = 24 * 60 * 60 * 1000;
+const UPCOMING_CONTEST_DAYS = 7;
+const MAX_SHARE_TOPICS = 3;
+
+function safeRadioPhase(now: number): SchedulePhase {
+  try {
+    return schedulePhase(now);
+  } catch {
+    return "idle";
+  }
+}
+
+function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
+  if (phase === "upcoming") {
+    return {
+      id: "radio-upcoming",
+      priority: 400,
+      text: `今日${radioProgram.scheduledStart}〜は「${radioProgram.programName}」📻`,
+    };
+  }
+  if (phase === "window") {
+    return {
+      id: "radio-window",
+      priority: 400,
+      text: `ただいま「${radioProgram.programName}」の放送時間です📻`,
+    };
+  }
+  return null;
+}
+
+function compactEndLabel(event: SupportEvent): string | null {
+  return formatScheduleEndLabel(event.schedule)?.replace("（JST）", "") ?? null;
+}
+
+function supportEventShareTopics(now: number): ShareTopic[] {
+  return supportEvents
+    .filter(
+      (event) =>
+        event.shareText !== undefined &&
+        displayStatus(event.schedule, now) === "live",
+    )
+    .map((event) => {
+      const end = compactEndLabel(event);
+      return {
+        id: event.id,
+        priority: 200 + (event.priority ?? 0),
+        text: `${event.shareText}${end ? `（${end}まで）` : ""}`,
+      };
+    });
+}
+
+function contestPhaseShareTopic(now: number): ShareTopic | null {
+  const phase = contest.currentPhase;
+  if (!phase?.start || !phase.end) return null;
+
+  const start = Date.parse(`${phase.start}T00:00:00+09:00`);
+  const endExclusive = Date.parse(`${phase.end}T00:00:00+09:00`) + DAY_MS;
+  if (!Number.isFinite(start) || !Number.isFinite(endExclusive)) return null;
+
+  const phaseLabel = phase.name.replace(/進出$/, "");
+  if (now >= start && now < endExclusive) {
+    return {
+      id: "contest-active",
+      priority: 180,
+      text: `${contest.contestName}の${phaseLabel}を応援してください🔥（${formatShortTokyoDate(phase.end)}まで）`,
+    };
+  }
+
+  if (now < start && start - now <= UPCOMING_CONTEST_DAYS * DAY_MS) {
+    return {
+      id: "contest-upcoming",
+      priority: 160,
+      text: `${formatShortTokyoDate(phase.start)}から${contest.contestName}の${phaseLabel}が始まります🔥`,
+    };
+  }
+
+  return null;
+}
+
+export function siteShareText(context: SiteShareContext = {}): string {
+  const now = context.now ?? Date.now();
+  if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
+
+  const topics = [
+    radioShareTopic(context.radioPhase ?? safeRadioPhase(now)),
+    ...supportEventShareTopics(now),
+    contestPhaseShareTopic(now),
+  ]
+    .filter((topic): topic is ShareTopic => topic !== null)
+    .sort((a, b) => b.priority - a.priority)
+    .slice(0, MAX_SHARE_TOPICS);
+
+  if (topics.length === 0) return site.description;
+
+  return [
+    "みりぃ（三橋莉子 / Mily）さんを応援しています🍅✨",
+    ...topics.map(({ text }) => text),
+    "最新の活動・応援情報はこちら👇",
+  ].join("\n");
+}
+
 /**
  * Public share payload for the fan site itself.
- * Title / text / URL come from `site` + `canonicalUrl()` only.
+ * URL is canonical; text is selected from verified, date-aware site data.
  */
-export function siteSharePayload(): SiteSharePayload {
+export function siteSharePayload(context: SiteShareContext = {}): SiteSharePayload {
   return {
     title: site.displayTitle,
-    text: site.description,
+    text: siteShareText(context),
     url: canonicalUrl(),
   };
 }

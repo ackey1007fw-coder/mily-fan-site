@@ -33,6 +33,8 @@ export type SupportEvent = {
   kind: SupportEventKind;
   title: string;
   note?: string;
+  /** 期間中のサイト共有文へ載せる、確認済みの短い呼びかけ。 */
+  shareText?: string;
   schedule: SupportEventSchedule;
   ctaLinkId?: string;
   source: string;
@@ -118,6 +120,7 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
       "kind",
       "title",
       "note",
+      "shareText",
       "schedule",
       "ctaLinkId",
       "source",
@@ -138,6 +141,8 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
     typeof candidate.title === "string" &&
     candidate.title.length > 0 &&
     (candidate.note === undefined || typeof candidate.note === "string") &&
+    (candidate.shareText === undefined ||
+      (typeof candidate.shareText === "string" && candidate.shareText.length > 0)) &&
     isValidSupportEventSchedule(candidate.schedule) &&
     (candidate.ctaLinkId === undefined ||
       (typeof candidate.ctaLinkId === "string" && linkIds.has(candidate.ctaLinkId))) &&
@@ -156,6 +161,7 @@ export const campusGirlsFinalStagePatonVote: SupportEvent = {
   title: "CAMPUS GIRLS 2027 予選A FinalSTAGE Paton投票",
   note:
     "Patonの三橋莉子（みりぃ）ページから応援できます。投票にはPatonへのログインが必要です。",
+  shareText: "CAMPUS GIRLS 2027のPaton投票をお願いします🗳️",
   schedule: {
     state: "confirmed-period",
     start: "2026-08-26T18:00:00+09:00",

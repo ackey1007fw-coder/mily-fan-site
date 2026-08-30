@@ -34,8 +34,8 @@ describe("Threads site sharing", () => {
     const ui = await read("src/components/SiteShare.tsx");
 
     assert.match(ui, /threadsShareUrl/);
-    assert.match(ui, /const THREADS_SHARE_HREF = threadsShareUrl\(SHARE\)/);
-    assert.match(ui, /href=\{THREADS_SHARE_HREF\}/);
+    assert.match(ui, /const threadsShareHref = threadsShareUrl\(share\)/);
+    assert.match(ui, /href=\{threadsShareHref\}/);
     assert.match(ui, /Threadsでこのサイトをシェア/);
   });
 });

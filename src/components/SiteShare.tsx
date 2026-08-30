@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
 import { Copy, Share2 } from "lucide-react";
 import {
   canUseWebShare,
@@ -10,13 +10,10 @@ import {
   threadsShareUrl,
   xShareUrl,
 } from "../lib/siteShare";
+import { schedulePhaseStore } from "../lib/scheduleClock";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
+import { useTokyoNow } from "../lib/useTokyoNow";
 import { ExternalLink } from "./ExternalLink";
-
-const SHARE = siteSharePayload();
-const X_SHARE_HREF = xShareUrl(SHARE);
-const LINE_SHARE_HREF = lineShareUrl(SHARE);
-const FACEBOOK_SHARE_HREF = facebookShareUrl(SHARE);
-const THREADS_SHARE_HREF = threadsShareUrl(SHARE);
 
 const X_ICON_PATH =
   "M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z";
@@ -55,10 +52,29 @@ function BrandIcon({ path }: BrandIconProps) {
 export function SiteShare() {
   const [canNativeShare, setCanNativeShare] = useState(false);
   const [status, setStatus] = useState("");
+  const supportNow = useSupportEventClock();
+  const tokyoNow = useTokyoNow();
+  const radioPhase = useSyncExternalStore(
+    schedulePhaseStore.subscribe,
+    schedulePhaseStore.getSnapshot,
+    () => "idle" as const,
+  );
+  const share = useMemo(
+    () =>
+      siteSharePayload({
+        now: Math.max(supportNow, tokyoNow),
+        radioPhase,
+      }),
+    [radioPhase, supportNow, tokyoNow],
+  );
+  const xShareHref = xShareUrl(share);
+  const lineShareHref = lineShareUrl(share);
+  const facebookShareHref = facebookShareUrl(share);
+  const threadsShareHref = threadsShareUrl(share);
 
   useEffect(() => {
-    setCanNativeShare(canUseWebShare(SHARE));
-  }, []);
+    setCanNativeShare(canUseWebShare(share));
+  }, [share]);
 
   useEffect(() => {
     if (!status) {
@@ -71,7 +87,7 @@ export function SiteShare() {
 
   const copyCanonicalUrl = async () => {
     try {
-      const ok = await copyUrlToClipboard(SHARE.url);
+      const ok = await copyUrlToClipboard(share.url);
       setStatus(ok ? COPY_SUCCESS : COPY_FAILURE);
     } catch {
       setStatus(COPY_FAILURE);
@@ -79,7 +95,7 @@ export function SiteShare() {
   };
 
   const openShareMenu = async () => {
-    const result = await shareWithWebShare(SHARE);
+    const result = await shareWithWebShare(share);
     if (result === "unsupported") {
       await copyCanonicalUrl();
     }
@@ -92,25 +108,25 @@ export function SiteShare() {
       </h2>
       <ul className="mt-3 flex flex-wrap gap-2">
         <li>
-          <ExternalLink href={X_SHARE_HREF} className={socialActionClassName}>
+          <ExternalLink href={xShareHref} className={socialActionClassName}>
             <BrandIcon path={X_ICON_PATH} />
             <span className="sr-only">Xでこのサイトをシェア</span>
           </ExternalLink>
         </li>
         <li>
-          <ExternalLink href={LINE_SHARE_HREF} className={socialActionClassName}>
+          <ExternalLink href={lineShareHref} className={socialActionClassName}>
             <BrandIcon path={LINE_ICON_PATH} />
             <span className="sr-only">LINEでこのサイトをシェア</span>
           </ExternalLink>
         </li>
         <li>
-          <ExternalLink href={FACEBOOK_SHARE_HREF} className={socialActionClassName}>
+          <ExternalLink href={facebookShareHref} className={socialActionClassName}>
             <BrandIcon path={FACEBOOK_ICON_PATH} />
             <span className="sr-only">Facebookでこのサイトをシェア</span>
           </ExternalLink>
         </li>
         <li>
-          <ExternalLink href={THREADS_SHARE_HREF} className={socialActionClassName}>
+          <ExternalLink href={threadsShareHref} className={socialActionClassName}>
             <BrandIcon path={THREADS_ICON_PATH} />
             <span className="sr-only">Threadsでこのサイトをシェア</span>
           </ExternalLink>
