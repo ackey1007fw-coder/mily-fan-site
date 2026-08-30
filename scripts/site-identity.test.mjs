@@ -184,6 +184,8 @@ describe("mily site identity", () => {
       "大学公認サイトを紹介します",
       "このイベントの公認サイトです",
       "このファンサイトでは、このイベントは大学公認です",
+      "大学公認ファンサイトを紹介します",
+      "このイベントの公認ファンサイトへ移動します",
     ]) {
       assert.equal(
         claimsApprovalStatus(unrelated),
@@ -306,5 +308,27 @@ describe("mily site identity", () => {
       true,
       "should preserve XML CDATA as visible text",
     );
+
+    assert.equal(
+      publicTextSegments(
+        '// Avoid "当サイトは公認です"\nconst safe = "ファン運営です";',
+        "src/example.ts",
+      ).some(claimsApprovalStatus),
+      false,
+      "should ignore quoted examples in source comments",
+    );
+
+    for (const attributeClaim of [
+      "<meta content=当サイトは公認です>",
+      "<div aria-label=当サイトは公認です></div>",
+    ]) {
+      assert.equal(
+        publicTextSegments(attributeClaim, "public/example.html").some(
+          claimsApprovalStatus,
+        ),
+        true,
+        `should scan unquoted HTML attributes: ${attributeClaim}`,
+      );
+    }
   });
 });

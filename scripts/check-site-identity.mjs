@@ -108,11 +108,13 @@ export function claimsApprovalStatus(content) {
     String.raw`(?:非公認(?:サイト)?(?:です|である|でございます|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|でございます|済み|では(?:ありません|ない|ございません)|じゃ(?:ない|ありません)|でない(?:です)?|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
   const approver =
     String.raw`(?:(?:本人|みりぃ(?:さん)?|三橋莉子(?:さん)?)(?:に|から|の)?)?`;
+  const requiredApprover =
+    String.raw`(?:本人|みりぃ(?:さん)?|三橋莉子(?:さん)?)(?:に|から|の)?`;
   const siteFirst = new RegExp(
     String.raw`${siteSubject}\s*(?:は|が|を|も|については|では)?\s*${approver}\s*${approvalAssertion}`,
   );
   const approvalFirst = new RegExp(
-    String.raw`${approver}\s*(?:(?:${approvalAssertion}|(?:非)?公認の)\s*(?:非公式)?(?:ファン)?(?:サイト|ページ)|(?:非)?公認\s*(?:非公式)?ファンサイト)`,
+    String.raw`(?:${approver}\s*(?:${approvalAssertion}|(?:非)?公認の)\s*(?:非公式)?(?:ファン)?(?:サイト|ページ)|${requiredApprover}\s*(?:非)?公認\s*(?:非公式)?ファンサイト)`,
   );
 
   const normalized = content
@@ -199,28 +201,93 @@ function renderedMarkupSegments(content) {
   return segments;
 }
 
+function stripSourceComments(content) {
+  let result = "";
+  let index = 0;
+  let quote = null;
+
+  while (index < content.length) {
+    const char = content[index];
+    const next = content[index + 1];
+    if (quote) {
+      result += char;
+      if (char === "\\") {
+        result += next ?? "";
+        index += 2;
+        continue;
+      }
+      if (char === quote) quote = null;
+      index += 1;
+      continue;
+    }
+    if (char === '"' || char === "'" || char === "`") {
+      quote = char;
+      result += char;
+      index += 1;
+      continue;
+    }
+    if (char === "/" && next === "/") {
+      index += 2;
+      while (index < content.length && content[index] !== "\n") index += 1;
+      result += "\n";
+      index += 1;
+      continue;
+    }
+    if (char === "/" && next === "*") {
+      index += 2;
+      while (
+        index < content.length &&
+        !(content[index] === "*" && content[index + 1] === "/")
+      ) {
+        if (content[index] === "\n") result += "\n";
+        index += 1;
+      }
+      index += 2;
+      continue;
+    }
+    result += char;
+    index += 1;
+  }
+
+  return result;
+}
+
 export function publicTextSegments(content, relative) {
   const normalizedPath = relative.replaceAll("\\", "/");
   const extension = path.extname(normalizedPath);
+  const sourceContent = [
+    ".ts",
+    ".tsx",
+    ".js",
+    ".mjs",
+    ".cjs",
+  ].includes(extension)
+    ? stripSourceComments(content)
+    : content;
   const segments = [];
   const quoted = /(["'`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
   const concatenatedQuoted =
     /(?:["'`](?:\\.|[^"'\\`])*["'`]\s*\+\s*)+["'`](?:\\.|[^"'\\`])*["'`]/g;
   const textNode = />([^<>{}]+)</g;
+  const unquotedAttribute =
+    /\b(?:content|aria-label|title|alt|description)=([^\s"'=`<>]+)/gi;
 
-  for (const chain of content.matchAll(concatenatedQuoted)) {
+  for (const chain of sourceContent.matchAll(concatenatedQuoted)) {
     const joined = [...chain[0].matchAll(quoted)]
       .map((match) => decodePublicText(match[2]))
       .join("");
     segments.push(joined);
   }
-  for (const match of content.matchAll(quoted)) {
+  for (const match of sourceContent.matchAll(quoted)) {
     segments.push(decodePublicText(match[2]));
   }
-  for (const match of content.matchAll(textNode)) {
+  for (const match of sourceContent.matchAll(textNode)) {
     segments.push(decodePublicText(match[1]));
   }
-  segments.push(...renderedMarkupSegments(content));
+  for (const match of sourceContent.matchAll(unquotedAttribute)) {
+    segments.push(decodePublicText(match[1]));
+  }
+  segments.push(...renderedMarkupSegments(sourceContent));
 
   if (extension === ".md") {
     segments.push(
