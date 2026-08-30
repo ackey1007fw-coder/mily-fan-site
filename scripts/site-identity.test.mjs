@@ -164,6 +164,8 @@ describe("mily site identity", () => {
       "『みりぃ ファンサイト』は本人公認です",
       "当サイトは公認じゃありません",
       "当サイトは公認でないです",
+      "当サイトは未公認です",
+      "未公認のファンサイトです",
       "This fan site is approved by Mily",
       "This is an unapproved fan site",
       "This fan site isn't approved by Mily",
