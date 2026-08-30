@@ -84,7 +84,7 @@ function SupportHero() {
           今できる応援、今日の確認済み予定、日程発表待ちの活動をひとつに。
         </p>
         <p className="mt-3 text-xs leading-6 text-ink-muted">
-          このページはファン制作の非公式ページです。公式・公認・本人運営ではありません。
+          このページはファン運営の非公式ページです。本人運営ではありません。
         </p>
       </div>
     </section>

@@ -138,8 +138,12 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
     errors.push(`index.html title must include "非公式".`);
   }
 
-  if (!html.includes("公式・公認・本人運営ではありません")) {
+  if (!html.includes("ファン運営の非公式サイト") || !html.includes("本人運営ではありません")) {
     errors.push("index.html must keep the unofficial disclaimer.");
+  }
+
+  if (html.includes("公認ではありません")) {
+    errors.push("index.html must not make a public claim about approval status.");
   }
 
   const files = await collectFiles(root);

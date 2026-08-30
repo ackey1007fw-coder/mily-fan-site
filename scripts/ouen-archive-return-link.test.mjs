@@ -30,7 +30,7 @@ describe("応援アーカイブ return link", () => {
     const footer = await read("src/components/Footer.tsx");
 
     assert.ok(
-      footer.indexOf("公式・公認・本人運営ではありません") <
+      footer.indexOf("本人の運営ではありません") <
         footer.indexOf("応援アーカイブへ戻る"),
       "the portal link must come after the site disclaimer",
     );
@@ -43,8 +43,8 @@ describe("応援アーカイブ return link", () => {
   it("keeps the existing footer content untouched", async () => {
     const footer = await read("src/components/Footer.tsx");
 
-    assert.match(footer, /ファン制作の非公式サイト/);
-    assert.match(footer, /公式・公認・本人運営ではありません/);
+    assert.match(footer, /ファン運営の非公式サイト/);
+    assert.match(footer, /本人の運営ではありません/);
     assert.match(footer, /\{profile\.displayName\}/);
   });
 

@@ -6,7 +6,7 @@ export const site = {
   displayTitle: "みりぃ ファンサイト",
   shortTitle: "みりぃ",
   description:
-    "みりぃ（三橋莉子 / Mily）さんを応援する、ファン制作の非公式サイトです。公式・公認・本人運営ではありません。",
+    "みりぃ（三橋莉子 / Mily）さんを応援する、ファン運営の非公式サイトです。本人運営ではありません。",
   locale: "ja_JP",
   language: "ja",
   /**

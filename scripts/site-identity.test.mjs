@@ -54,7 +54,9 @@ describe("mily site identity", () => {
   it("keeps the unofficial disclaimer in the document title", async () => {
     const html = await read("index.html");
     assert.match(html, /<title>みりぃ ファンサイト（非公式）<\/title>/);
-    assert.match(html, /公式・公認・本人運営ではありません/);
+    assert.match(html, /ファン運営の非公式サイト/);
+    assert.match(html, /本人運営ではありません/);
+    assert.doesNotMatch(html, /公認ではありません/);
   });
 
   it("keeps standalone / home-screen names unofficial", async () => {
@@ -63,7 +65,9 @@ describe("mily site identity", () => {
     assert.match(manifest.short_name, /非公式|ファンサイト/);
     assert.doesNotMatch(manifest.short_name, /^みりぃ$/);
     assert.match(manifest.description, /非公式/);
-    assert.match(manifest.description, /公式・公認・本人運営ではありません/);
+    assert.match(manifest.description, /ファン運営/);
+    assert.match(manifest.description, /本人運営ではありません/);
+    assert.doesNotMatch(manifest.description, /公認ではありません/);
     assert.equal(manifest.display, "standalone");
   });
 

@@ -197,6 +197,7 @@ describe("hero media wiring", () => {
       path.join(root, "src/components/Footer.tsx"),
       "utf8",
     );
-    assert.match(source, /公式・公認・本人運営ではありません/);
+    assert.match(source, /ファン運営の非公式サイト/);
+    assert.match(source, /本人の運営ではありません/);
   });
 });

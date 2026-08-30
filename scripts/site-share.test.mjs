@@ -43,8 +43,9 @@ describe("site share payload", () => {
     assert.equal(payload.title, site.displayTitle);
     assert.equal(payload.text, site.description);
     assert.match(payload.text, /みりぃ（三橋莉子 \/ Mily）/);
-    assert.match(payload.text, /ファン制作の非公式サイトです/);
-    assert.match(payload.text, /公式・公認・本人運営ではありません/);
+    assert.match(payload.text, /ファン運営の非公式サイトです/);
+    assert.match(payload.text, /本人運営ではありません/);
+    assert.doesNotMatch(payload.text, /公認ではありません/);
   });
 
   it("does not hardcode the public origin in the share helpers or UI", async () => {
@@ -301,15 +302,16 @@ describe("footer placement and home isolation", () => {
     assert.match(footer, /<SiteShare \/>/);
     assert.ok(
       footer.indexOf("<SiteShare />") <
-        footer.indexOf("ファン制作の非公式サイト"),
+        footer.indexOf("ファン運営の非公式サイト"),
       "share controls belong above the unofficial disclaimer",
     );
-    assert.match(footer, /ファン制作の非公式サイト/);
-    assert.match(footer, /公式・公認・本人運営ではありません/);
+    assert.match(footer, /ファン運営の非公式サイト/);
+    assert.match(footer, /本人の運営ではありません/);
+    assert.doesNotMatch(footer, /公認ではありません/);
     assert.match(footer, /応援アーカイブへ戻る/);
     assert.match(footer, /\{profile\.displayName\}/);
     assert.ok(
-      footer.indexOf("公式・公認・本人運営ではありません") <
+      footer.indexOf("本人の運営ではありません") <
         footer.indexOf("応援アーカイブへ戻る"),
     );
     assert.doesNotMatch(app, /SiteShare|siteShare|このサイトをシェア|navigator\.share/);
