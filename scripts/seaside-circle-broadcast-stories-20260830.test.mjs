@@ -13,6 +13,7 @@ import {
   radioStoryVideos,
   seasideCircleLiveBroadcastStoryVideo,
   seasideCircleMessageFormStoryVideo,
+  visibleRadioStoryVideos,
 } from "../src/data/radioStoryB42.ts";
 import { seasideCircleMessageFormLink } from "../src/data/links.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
@@ -82,6 +83,14 @@ async function sha256(file) {
 describe("2026-08-30 湘南シーサイドサークル Story動画", () => {
   it("publishes both videos only in the Radio page collection", () => {
     assert.deepEqual(radioStoryVideos, fixtures.map(({ item }) => item));
+    assert.deepEqual(visibleRadioStoryVideos(), radioStoryVideos);
+    assert.deepEqual(
+      visibleRadioStoryVideos([
+        radioStoryVideos[0],
+        { ...radioStoryVideos[1], published: false },
+      ]),
+      [radioStoryVideos[0]],
+    );
 
     for (const { item } of fixtures) {
       assert.equal(item.published, true);
@@ -99,7 +108,9 @@ describe("2026-08-30 湘南シーサイドサークル Story動画", () => {
   it("reuses the canonical public message form below Radio media", async () => {
     const page = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
     assert.match(page, /activityId === "radio"/);
-    assert.match(page, /radioStoryVideos\.map/);
+    assert.match(page, /visibleRadioStoryVideos\(\)\.map/);
+    assert.match(page, /\{video\.sourceLabel\}/);
+    assert.match(page, /formatDate\(video\.sourceDate\)/);
     assert.match(page, /動画で紹介しているメッセージフォームはこちら/);
     assert.match(page, /href=\{seasideCircleMessageFormLink\.url\}/);
     assert.match(page, /\{seasideCircleMessageFormLink\.label\}/);

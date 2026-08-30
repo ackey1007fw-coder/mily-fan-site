@@ -10,7 +10,7 @@ import {
 } from "./data/activities";
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
-import { radioStoryVideos } from "./data/radioStoryB42";
+import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
   selectActivityHighlights,
@@ -329,7 +329,7 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
         トークテーマは「映画」。番組へのメッセージ募集と、生放送の案内動画です。
       </p>
       <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {radioStoryVideos.map((video) => (
+        {visibleRadioStoryVideos().map((video) => (
           <li
             key={video.id}
             className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card"
@@ -347,6 +347,9 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
             />
             <p className="px-3 pb-2 pt-3 text-xs leading-6 text-ink-muted">
               {video.caption}
+            </p>
+            <p className="px-3 pb-3 text-xs leading-6 text-ink-muted">
+              出典: {video.sourceLabel} · {formatDate(video.sourceDate)}
             </p>
           </li>
         ))}

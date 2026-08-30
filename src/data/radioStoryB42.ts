@@ -27,3 +27,9 @@ export const radioStoryVideos: RadioStoryVideo[] = [
   seasideCircleMessageFormStoryVideo,
   seasideCircleLiveBroadcastStoryVideo,
 ];
+
+export function visibleRadioStoryVideos(
+  items: RadioStoryVideo[] = radioStoryVideos,
+): RadioStoryVideo[] {
+  return items.filter((item) => item.published);
+}
