@@ -53,7 +53,7 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-3xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-center">
         <div className="order-2 lg:order-1">
           <p className="inline-flex rounded-full bg-sage-soft px-3 py-1 text-xs font-medium text-sage-deep">
-            ファン制作・非公式サイト
+            ファン運営・非公式サイト
           </p>
           <p className="mt-4 text-sm font-medium tracking-wide text-ink-muted">
             {site.displayTitle}

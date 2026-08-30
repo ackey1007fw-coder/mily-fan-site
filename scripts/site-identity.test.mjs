@@ -56,7 +56,7 @@ describe("mily site identity", () => {
     assert.match(html, /<title>みりぃ ファンサイト（非公式）<\/title>/);
     assert.match(html, /ファン運営の非公式サイト/);
     assert.match(html, /本人運営ではありません/);
-    assert.doesNotMatch(html, /公認ではありません/);
+    assert.doesNotMatch(html, /公式・公認・本人運営ではありません/);
   });
 
   it("keeps standalone / home-screen names unofficial", async () => {
@@ -67,7 +67,7 @@ describe("mily site identity", () => {
     assert.match(manifest.description, /非公式/);
     assert.match(manifest.description, /ファン運営/);
     assert.match(manifest.description, /本人運営ではありません/);
-    assert.doesNotMatch(manifest.description, /公認ではありません/);
+    assert.doesNotMatch(manifest.description, /公式・公認・本人運営ではありません/);
     assert.equal(manifest.display, "standalone");
   });
 

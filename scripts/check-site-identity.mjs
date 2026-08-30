@@ -140,7 +140,8 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
 
   if (
     !html.includes("ファン運営の非公式サイト") ||
-    !html.includes("本人運営ではありません")
+    !html.includes("本人運営ではありません") ||
+    html.includes("公式・公認・本人運営ではありません")
   ) {
     errors.push("index.html must keep the fan-operated, unofficial disclaimer.");
   }
