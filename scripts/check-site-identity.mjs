@@ -99,24 +99,26 @@ export function isPublicSurface(relative) {
 }
 
 export function claimsApprovalStatus(content) {
-  // Public pages intentionally say neither approved nor unapproved. Require a
-  // site subject and an approval assertion in the same sentence so unrelated
-  // facts such as「このイベントは大学公認です」remain valid.
+  // Public pages intentionally say neither approved nor unapproved. Bind the
+  // subject and assertion grammatically so an unrelated fact in the same
+  // sentence (e.g. an approved event) remains valid.
   const siteSubject =
-    /(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト/;
+    String.raw`(?:(?:当|本|この)(?:非公式)?(?:ファン)?(?:サイト|ページ)|みりぃ(?:の)?(?:ファン)?サイト|ファンサイト)`;
   const approvalAssertion =
-    /(?:非公認(?:サイト)?(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|済み|では(?:ありません|ない)|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))/;
-  const approvalSiteModifier =
-    /(?:(?:本人(?:の|から)?|みりぃ(?:さん)?(?:の|から)?)(?:非)?公認(?:の)?(?:非公式)?(?:ファン)?サイト|(?:非)?公認(?:の)?みりぃ(?:の)?ファンサイト)/;
+    String.raw`(?:非公認(?:サイト)?(?:です|である|では(?:ありません|ない)|とされて(?:います|いる))?|公認(?:サイト)?(?:です|である|済み|では(?:ありません|ない)|され(?:た|て(?:います|いる|いません|いない|おります|おり)|ました|ませんでした)|を(?:受け(?:た|ました|ています|ている|ていません|ていない|ております|ており)|得(?:た|ました|ています|ている|ていません|ていない)|いただ(?:いた|いています|いている|いていません|いていない|きました))))`;
+  const approver =
+    String.raw`(?:(?:本人|みりぃ(?:さん)?|三橋莉子(?:さん)?)(?:に|から|の)?)?`;
+  const siteFirst = new RegExp(
+    String.raw`${siteSubject}\s*(?:は|が|を|も|については|では)?\s*${approver}\s*${approvalAssertion}`,
+  );
+  const approvalFirst = new RegExp(
+    String.raw`${approver}\s*(?:${approvalAssertion}|(?:非)?公認の)\s*(?:非公式)?(?:ファン)?(?:サイト|ページ)`,
+  );
 
   return content
     .replace(/\s+/g, " ")
     .split(/[。！？]/)
-    .some(
-      (sentence) =>
-        approvalSiteModifier.test(sentence) ||
-        (siteSubject.test(sentence) && approvalAssertion.test(sentence)),
-    );
+    .some((sentence) => siteFirst.test(sentence) || approvalFirst.test(sentence));
 }
 
 export function decodePublicText(value) {
