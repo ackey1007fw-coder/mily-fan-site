@@ -17,6 +17,7 @@ import {
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
+import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -255,9 +256,10 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     assert.equal(campusNews[3]?.id, "2026-08-30-paton-rank-3");
     assert.equal(campusNews[4]?.id, fixtures[1].newsId);
     assert.equal(campusNews[5]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsHoldSecondStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[1], patonVoteDay5StoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[2], patonVoteDay4StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsPatonPortraitImage);
+    assert.equal(selectActivityMedia("campus-girls")[1], campusGirlsHoldSecondStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[2], patonVoteDay5StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[3], patonVoteDay4StoryVideo);
 
     for (const fixture of fixtures) {
       assert.equal(
