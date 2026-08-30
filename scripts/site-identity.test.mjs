@@ -424,6 +424,14 @@ describe("mily site identity", () => {
         "src/example.tsx",
       ),
     );
+    assert.equal(
+      publicTextSegments(
+        `<p>{x ? "ほか" : "当サイトは"}公認です${'{y ? "a" : "b"}'.repeat(7)}</p>`,
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should preserve branch coverage while capping JSX alternatives",
+    );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
     assert.equal(

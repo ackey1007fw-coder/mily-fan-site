@@ -186,6 +186,16 @@ function decodeCssText(value) {
 
 function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
   const MAX_RENDERED_ALTERNATIVES = 128;
+  const capAlternatives = (values) => {
+    const unique = [...new Set(values)];
+    if (unique.length <= MAX_RENDERED_ALTERNATIVES) return unique;
+    return Array.from({ length: MAX_RENDERED_ALTERNATIVES }, (_, index) => {
+      const sourceIndex = Math.round(
+        (index * (unique.length - 1)) / (MAX_RENDERED_ALTERNATIVES - 1),
+      );
+      return unique[sourceIndex];
+    });
+  };
   const segments = [];
   const stack = [];
   const renderedContent = content.replace(
@@ -250,13 +260,11 @@ function renderedMarkupSegments(content, { includeTopLevel = false } = {}) {
       return;
     }
     for (const frame of stack) {
-      frame.texts = [
-        ...new Set(
-          frame.texts.flatMap((existing) =>
-            visibleAlternatives.map((visible) => existing + visible),
-          ),
+      frame.texts = capAlternatives(
+        frame.texts.flatMap((existing) =>
+          visibleAlternatives.map((visible) => existing + visible),
         ),
-      ].slice(0, MAX_RENDERED_ALTERNATIVES);
+      );
     }
   };
 
