@@ -32,8 +32,11 @@ const UNTOUCHED_HOME_FILES = [
 ];
 
 describe("site share payload", () => {
-  it("uses the site.ts canonical URL and public site copy", () => {
-    const payload = siteSharePayload();
+  it("uses the site.ts canonical URL and fallback public site copy", () => {
+    const payload = siteSharePayload({
+      now: Date.parse("2026-08-20T12:00:00+09:00"),
+      radioPhase: "idle",
+    });
 
     assert.equal(payload.url, canonicalUrl());
     assert.equal(payload.url, "https://mily-fan-site.vercel.app/");
@@ -53,7 +56,7 @@ describe("site share payload", () => {
     assert.match(lib, /site\.description/);
     assert.doesNotMatch(lib, /https:\/\/mily-fan-site\.vercel\.app/);
     assert.doesNotMatch(ui, /https:\/\/mily-fan-site\.vercel\.app/);
-    assert.match(ui, /siteSharePayload\(\)/);
+    assert.match(ui, /siteSharePayload\(\{/);
     assert.match(ui, /xShareUrl\(/);
     assert.match(ui, /lineShareUrl\(/);
     assert.match(ui, /facebookShareUrl\(/);
@@ -200,7 +203,7 @@ describe("Web Share API", () => {
     assert.match(ui, /onClick=\{openShareMenu\}/);
     assert.match(ui, /aria-label="共有メニューを開く"/);
     assert.ok(
-      ui.indexOf("const openShareMenu") < ui.indexOf("shareWithWebShare(SHARE)"),
+      ui.indexOf("const openShareMenu") < ui.indexOf("shareWithWebShare(share)"),
       "native share must run from the user-triggered handler",
     );
     assert.equal(
@@ -367,5 +370,15 @@ describe("footer placement and home isolation", () => {
     assert.match(ui, /Facebookでこのサイトをシェア/);
     assert.match(ui, /共有メニューを開く/);
     assert.match(ui, /このサイトのURLをコピー/);
+  });
+
+  it("recomputes the share payload at support, JST date, and radio boundaries", async () => {
+    const ui = await read("src/components/SiteShare.tsx");
+
+    assert.match(ui, /useSupportEventClock\(\)/);
+    assert.match(ui, /useTokyoNow\(\)/);
+    assert.match(ui, /schedulePhaseStore\.subscribe/);
+    assert.match(ui, /siteSharePayload\(\{/);
+    assert.doesNotMatch(ui, /^const SHARE = siteSharePayload/m);
   });
 });

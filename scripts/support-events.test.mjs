@@ -34,6 +34,15 @@ describe("SupportEvent foundation", () => {
     assert.equal(isValidSupportEvent({ ...baseEvent, verifiedAt: "2026-02-30" }), false);
   });
 
+  it("accepts only a non-empty optional share callout", () => {
+    assert.equal(
+      isValidSupportEvent({ ...baseEvent, shareText: "応援をお願いします" }),
+      true,
+    );
+    assert.equal(isValidSupportEvent({ ...baseEvent, shareText: "" }), false);
+    assert.equal(isValidSupportEvent({ ...baseEvent, shareText: 1 }), false);
+  });
+
   it("accepts only CTA link ids from the central links registry", () => {
     const knownLinkId = links[0]?.id;
     assert.ok(knownLinkId, "CTA registry fixture must exist");

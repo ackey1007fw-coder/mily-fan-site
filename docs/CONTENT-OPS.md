@@ -176,10 +176,33 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 | SNS投稿の要約 | `src/data/news.ts` | `events.ts`（日時付きの出演でないなら） |
 | 出演・イベント・公開収録 | `src/data/events.ts` | 配信予定の自動取得を止めて手入力しない |
 | 通常の SHOWROOM 配信時刻 | 原則なにもしない（自動取得） | `events.ts` にも `streamSchedule.ts` にも推測で書かない |
+| 期間限定のサイト共有文 | `supportEvents.ts` の確認済み期間＋`shareText`、`contest.ts`、ラジオ正本 | `site.ts` の説明文へ日付つき告知を固定しない |
 | 写真 | Drive → `media/original/` → `pnpm media:build` → `media.ts` | SNS から自動ダウンロードしない |
 | SNS URL の追加・変更 | オーナー確認後に `socials.ts` | 未確認アカウントを足さない |
 | FM の番組名・ページ変更 | オーナー確認後に `profile.ts` / `links.ts` | スタッフページを読んで推測で肩書を足さない |
 | プロフィール事実 | オーナー確認後に `profile.ts` と `profileSources` | 空欄を埋めるために検索結果だけを採用しない |
+
+---
+
+## サイト共有文の自動切替
+
+フッターのX・Threads・端末共有メニューは、`src/lib/siteShare.ts` が確認済みデータから
+その時点の呼びかけを最大3件まで自動選択する。日付・時刻の正本を共有文専用に複製しない。
+
+- 日曜の放送開始前・放送枠中: `shared/radio-program.js` の番組名と放送枠から案内する。
+  放送枠だけを根拠にMily本人の出演中とは書かない。13:00以降は当日の案内を外す。
+- 期間限定の応援: `supportEvents.ts` で期間中かを判定し、`shareText` がある項目だけを載せる。
+  新しい投票等を共有文へ出す場合は、一次出典・確認済み期間・短い`shareText`を同じ
+  SupportEventへ追加する。終了境界で自動的に外れる。
+- MISS CIRCLE: `contest.ts` の`currentPhase.start/end`を使い、開始7日前から予告、
+  期間中は応援呼びかけへ切り替える。フェーズ名・日程を共有文側へ重複記載しない。
+- 該当項目がない期間は`site.description`へ戻す。
+
+XとThreadsは本文＋canonical URL、端末共有はWeb Share payloadを渡す。LINEとFacebookは
+各公式Web共有エンドポイントの仕様上、canonical URLのみを渡す。
+
+本人SNSを自動巡回して告知文を生成する仕組みではない。新しい活動は従来どおり一次情報を
+確認して正本データへ追加し、その後の開始・終了切替だけをサイトが自動で行う。
 
 ---
 

@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 import type { SchedulePhase } from "../../shared/radio-program.js";
 import type { RadioStatus } from "../data/radio";
-import { createSchedulePhaseStore } from "./scheduleClock";
+import { schedulePhaseStore } from "./scheduleClock";
 import {
   createPollStore,
   expireLivePayload,
@@ -67,10 +67,6 @@ const radioStore = createPollStore<RadioStatus>({
   expiresAt: (payload, now) => radioExpiresAt(payload, now),
   onExpire: expireRadioOnAir,
 });
-
-// 放送枠の境界（10:00 / 13:00 JST）で再レンダーを起こすための時計。
-// API の成否と無関係にフェーズを遷移させる。
-const schedulePhaseStore = createSchedulePhaseStore();
 
 export function useMilyRealtimeStatus(): {
   live: LiveView;
