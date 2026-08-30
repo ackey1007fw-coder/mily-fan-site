@@ -130,6 +130,7 @@ describe("mily site identity", () => {
       "src/components/Footer.tsx",
       "support/index.html",
       "README.md",
+      "api/share.ts",
     ]) {
       assert.equal(isPublicSurface(relative), true, `should guard ${relative}`);
     }
@@ -164,6 +165,9 @@ describe("mily site identity", () => {
       "当サイトは公認でないです",
       "This fan site is approved by Mily",
       "This is an unapproved fan site",
+      "This fan site isn't approved by Mily",
+      "This fan site has not been approved by Mily",
+      "Mily approved this fan site",
     ]) {
       assert.equal(claimsApprovalStatus(claim), true, `should reject: ${claim}`);
     }
@@ -277,6 +281,7 @@ describe("mily site identity", () => {
       "description: >\n  当サイトは\n  公認です",
       "description: |2\n  当サイトは公認です",
       "description: >2-\n  当サイトは\n  公認です",
+      "description: 当サイトは\n  公認です",
     ]) {
       assert.equal(
         publicTextSegments(yamlClaim, "public/site.yaml").some(
@@ -330,5 +335,14 @@ describe("mily site identity", () => {
         `should scan unquoted HTML attributes: ${attributeClaim}`,
       );
     }
+
+    assert.equal(
+      publicTextSegments(
+        "<p>https://example.test/ — 当サイトは公認です</p>",
+        "src/example.tsx",
+      ).some(claimsApprovalStatus),
+      true,
+      "should preserve visible JSX text containing URL delimiters",
+    );
   });
 });

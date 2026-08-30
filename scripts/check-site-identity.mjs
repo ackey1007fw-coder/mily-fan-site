@@ -82,6 +82,7 @@ const MISSPELLING_RE = /\bmilly\b/i;
 
 const PUBLIC_SURFACE_ROOTS = new Set([
   "activities",
+  "api",
   "gallery",
   "news",
   "profile",
@@ -121,7 +122,7 @@ export function claimsApprovalStatus(content) {
     .replace(/[」』）】)]/g, "")
     .replace(/\s+/g, " ");
   const englishClaim =
-    /(?:this|the)\s+(?:(?:fan\s+site\s+(?:is\s+)?(?:not\s+)?(?:approved|unapproved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily[- ]approved\s+fan\s+site/i;
+    /(?:this|the)\s+(?:(?:fan\s+site\s+(?:(?:(?:is|was)\s+(?:not\s+)?|(?:isn't|wasn't)\s+)(?:approved|unapproved)|(?:(?:has|had)\s+(?:not\s+)?|(?:hasn't|hadn't)\s+)been\s+approved))|(?:is\s+an?\s+)(?:(?:not\s+)?approved|unapproved)\s+fan\s+site)|mily(?:[- ]approved\s+fan\s+site|\s+(?:has\s+)?approved\s+(?:this|the)\s+fan\s+site)/i;
 
   return (
     englishClaim.test(normalized) ||
@@ -226,7 +227,7 @@ function stripSourceComments(content) {
       index += 1;
       continue;
     }
-    if (char === "/" && next === "/") {
+    if (char === "/" && next === "/" && content[index - 1] !== ":") {
       index += 2;
       while (index < content.length && content[index] !== "\n") index += 1;
       result += "\n";
@@ -340,7 +341,30 @@ export function publicTextSegments(content, relative) {
       const scalar =
         line.match(/^\s*[^#\s][^:]*:\s*(?![>|]\s*$)(.*?)\s*(?:#.*)?$/)?.[1] ??
         line.match(/^\s*-\s+(.*?)\s*(?:#.*)?$/)?.[1];
-      if (scalar) segments.push(decodePublicText(scalar));
+      if (scalar) {
+        const mapping = line.match(/^(\s*)[^#\s][^:]*:\s*(.*?)\s*(?:#.*)?$/);
+        if (mapping && mapping[2] !== "") {
+          const baseIndent = mapping[1].length;
+          const continuation = [mapping[2]];
+          let cursor = index + 1;
+          while (cursor < lines.length) {
+            const next = lines[cursor];
+            if (next.trim() === "") {
+              continuation.push("");
+              cursor += 1;
+              continue;
+            }
+            const indent = next.match(/^\s*/)[0].length;
+            if (indent <= baseIndent) break;
+            continuation.push(next.trim());
+            cursor += 1;
+          }
+          segments.push(decodePublicText(continuation.join(" ")));
+          index = cursor - 1;
+        } else {
+          segments.push(decodePublicText(scalar));
+        }
+      }
     }
   }
 
