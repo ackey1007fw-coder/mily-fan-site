@@ -47,3 +47,11 @@ const MESSAGE =
   `朝から私を起こしに来てくれたみんな、ありがとう${PLEADING}${FOLDED_HANDS}${SPARKLES}なんだか勇気ももらえて、朝から配信した甲斐があったなぁぁぁぁ〜\n` +
   `これからの頑張る糧になるね、確実に${FACEPALM}${HEART_EXCLAMATION}\n` +
   "#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークルコンテスト2026";
+
+function item() {
+  return news.find((entry) => entry.id === NEWS_ID);
+}
+
+async function sha256(file) {
+  return createHash("sha256").update(await readFile(file)).digest("hex");
+}
