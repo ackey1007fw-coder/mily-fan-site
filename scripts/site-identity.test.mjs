@@ -168,6 +168,11 @@ describe("mily site identity", () => {
       "未公認のファンサイトです",
       "当サイトは本人の公認を取得しています",
       "このファンサイトは公認を得ております",
+      "弊サイトは公認です",
+      "当ウェブサイトは公認です",
+      "当ホームページは公認です",
+      "当サイトは公認がありません",
+      "当サイトは公認なしです",
       "This fan site is approved by Mily",
       "This is an unapproved fan site",
       "This fan site isn't approved by Mily",
@@ -373,6 +378,13 @@ describe("mily site identity", () => {
       ).some(claimsApprovalStatus),
       true,
       "should preserve visible JSX text containing URL delimiters",
+    );
+    assert.equal(
+      publicTextSegments("<p>当サイトは公認です", "public/example.html").some(
+        claimsApprovalStatus,
+      ),
+      true,
+      "should flush visible markup with an omitted closing tag",
     );
 
     assert.equal(SCAN_EXTENSIONS.has(".jsx"), true);
