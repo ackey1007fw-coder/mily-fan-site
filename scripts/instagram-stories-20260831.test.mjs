@@ -377,6 +377,8 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.match(thirtyDay.body, /7:30/);
     assert.match(thirtyDay.body, /配信前の記録/);
     assert.equal(thirtyDay.body.includes("Paton"), false);
+    assert.match(showroomThirtyDayAnniversaryStoryVideo.alt, /SHOWROOM配信画面/);
+    assert.doesNotMatch(showroomThirtyDayAnniversaryStoryVideo.alt, /猫耳/);
   });
 });
 
