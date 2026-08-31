@@ -38,6 +38,7 @@ type ShareTopic = {
   id: string;
   priority: number;
   text: string;
+  hashtags: string[];
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -58,6 +59,7 @@ function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
       id: "radio-upcoming",
       priority: 400,
       text: `今日${radioProgram.scheduledStart}〜は「${radioProgram.programName}」📻`,
+      hashtags: ["湘南シーサイドサークル", "ssc"],
     };
   }
   if (phase === "window") {
@@ -65,6 +67,7 @@ function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
       id: "radio-window",
       priority: 400,
       text: `ただいま「${radioProgram.programName}」の放送時間です📻`,
+      hashtags: ["湘南シーサイドサークル", "ssc"],
     };
   }
   return null;
@@ -87,6 +90,7 @@ function supportEventShareTopics(now: number): ShareTopic[] {
         id: event.id,
         priority: 200 + (event.priority ?? 0),
         text: `${event.shareText}${end ? `（${end}まで）` : ""}`,
+        hashtags: event.shareHashtags ?? [],
       };
     });
 }
@@ -105,6 +109,7 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       id: "contest-active",
       priority: 180,
       text: `${contest.contestName}の${phaseLabel}を応援してください🔥（${formatShortTokyoDate(phase.end)}まで）`,
+      hashtags: phase.shareHashtags ?? [],
     };
   }
 
@@ -113,6 +118,7 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       id: "contest-upcoming",
       priority: 160,
       text: `${formatShortTokyoDate(phase.start)}から${contest.contestName}の${phaseLabel}が始まります🔥`,
+      hashtags: phase.shareHashtags ?? [],
     };
   }
 
@@ -134,10 +140,13 @@ export function siteShareText(context: SiteShareContext = {}): string {
 
   if (topics.length === 0) return site.description;
 
+  const hashtags = topics[0]?.hashtags.map((tag) => `#${tag}`).join(" ");
+
   return [
     "みりぃ（三橋莉子 / Mily）さんを応援しています🍅✨",
     ...topics.map(({ text }) => text),
     "最新の活動・応援情報はこちら👇",
+    ...(hashtags ? [hashtags] : []),
   ].join("\n");
 }
 
