@@ -2448,6 +2448,90 @@ Mixch URLは画面に無いため Mixch CTAは付けない。
 - b43-02 poster: 87,690 bytes / metadataなし / sha256
   `2c9413f1ddbca35565f348377d67dd22e22a81fa8c82454db955b8f6cd079b0e`
 
+## 素材台帳（batch b44 / 受領日 2026-08-31 / source date 2026-08-30〜31）
+
+オーナーが直接提供した本人Instagram Story動画4本。うち2本を公開する。
+くまフィルターの「2位を守り抜きたい」は既存b43-02と同一のためこのバッチでは扱わない。
+
+- b44-01: CAMPUS GIRLS公式のPaton投票1.5倍デー告知を写した緊急案内
+- b44-02: 投稿時点1位（102,700pt）と「31日は1.5倍DAY」の呼びかけ。他出場者は写っていない
+- b44-03: パトン投票のやり方。他出場者の顔・名前、オーナーサポーター名、投稿時点ではない
+  古い順位表示があるため**非掲載**（8/27のX投票方法案内と同じ判断。NEWSは既存人物写真で案内）
+- b44-04: SHOWROOM 30日連続配信記念日と、投稿時点の朝7:30配信予定。SHOWROOM配信画面に
+  視聴者の表示名・アイコン・コメントが写るため**非掲載**（NEWSはテキストのみ）
+
+HOME Latest / `/news/` と Gallery が、b44-01 / b44-02 の公開MP4・poster・
+manifest objectを共有する。恒久的なStory permalinkはないため、表示は非リンクの
+`Instagram Story` labelとする。b44-01 / b44-02 は CAMPUS GIRLS Activity の
+関連NEWS・関連メディアにも出す。b44-04 は LIVE STREAM の関連NEWS（テキスト）のみ。
+`/stories/`、highlights、events、streamSchedule、`media.ts`、
+PatonVoteGuide のランキング系列には追加しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b44-01 | `gallery/mily-b44-01-paton-vote-15x-emergency-story.mp4` | 公式X告知を写した1.5倍デー緊急案内。720×1280 / 5.000秒 / 30fps / 150フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b44-01 poster | `gallery/mily-b44-01-paton-vote-15x-emergency-story-poster.jpg` | 公開MP4の2.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b44-02 | `gallery/mily-b44-02-paton-vote-first-place-story.mp4` | 投稿時点1位・102,700ptと1.5倍DAYの呼びかけ。720×1280 / 20.000秒 / 30fps / 600フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b44-02 poster | `gallery/mily-b44-02-paton-vote-first-place-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b44-03 | — | 投票方法案内。他出場者・オーナーサポーター名・古い順位表示のため非掲載 | ❌ 自己ホストしない。NEWSは既存人物写真 |
+| b44-04 | — | SHOWROOM 30日連続配信記念日。配信画面に視聴者の表示名・アイコン・コメントがあるため非掲載 | ❌ 自己ホストしない。NEWSはテキストのみ |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない。受領バイトを変えず
+  `media/original/` のgitignored領域へ保存し、元の受け渡し名・URL・file IDは
+  tracked/public filesへ残さない
+- b44-01元動画: 853,891 bytes / sha256
+  `4039c74c2dcaa3c8218ef74fbb9381d84bcfcd7ba76264a4f1bf19c5a77150b7` /
+  H.264 High / 720×1280 / 30fps / 150 frames / video 5.000秒 /
+  音声ストリームなし
+- b44-02元動画: 4,162,416 bytes / sha256
+  `bd11cc6f148c20bd4b44657e4cd821ca0dba2e7a7667471ee7d38cb0b7da3a38` /
+  H.264 High / 720×1280 / 30fps / 600 frames / video 20.000秒 /
+  HE-AAC 44.1kHz stereo音声あり
+- b44-03元動画: 10,102,650 bytes / sha256
+  `d6a49ab85000654ff8b3a7ee6a173fd6caef45b1239616ef759d5b847d45278d` /
+  H.264 High / 720×1280 / 30fps / 810 frames / video 27.000秒 /
+  HE-AAC 44.1kHz stereo音声あり。公開派生は作っていない
+- b44-04元動画: 573,756 bytes / sha256
+  `891d55181bab9e5911bb32acede063ee07b304c5823dd4e5248d8513c62a3be3` /
+  H.264 High / 720×1280 / 1fps / 20 frames / video 20.000秒 /
+  HE-AAC 48kHz stereo音声あり。公開派生は作っていない
+- 元動画の`creation_time`とCore Media handler名は受領検査だけに使い、投稿日・
+  投稿時刻の根拠にはしていない
+- b44-01 / b44-02 に識別可能な第三者は見当たらない。Story下部の本人プロフィール
+  チップは作者自身の帰属表示のため維持し、cropしていない。b44-02の1位は投稿時点の記録
+- b44-03は他出場者の顔・名前、オーナーサポーター名、古い順位表示を含むため非掲載
+- b44-04はSHOWROOM配信画面の視聴者表示名・アイコン・コメントを含むため非掲載
+
+### 音声と公開派生
+
+元素材の音声は内容・由来・権利者と再配信権を確認できないため、公開派生では削除した。
+映像は720×1280、元のfpsとフレーム数を維持し、crop・scale・引き伸ばし・
+アップスケール・短縮・テロップ変更はしていない。AI生成・顔補正・生成塗り足しもない。
+
+- b44-01 MP4: 102,549 bytes / H.264 Constrained Baseline / 5.000秒 /
+  30fps / 150フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
+  `661cc821dcbe94dd76703648fa812101375c18941d0a062f0f767865a07efab9`
+- b44-01 poster: 54,762 bytes / metadataなし / sha256
+  `769fed399973b8bd8ef915d88d47254ccd792a9bf1c7c72628e1fad8e569c77b`
+- b44-02 MP4: 371,605 bytes / H.264 Constrained Baseline / 20.000秒 /
+  30fps / 600フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
+  `a59d8adec43f01139fdb6b11293eb2369f68776daf90af82b269618ab1777629`
+- b44-02 poster: 67,048 bytes / metadataなし / sha256
+  `398b653bdaada3949ef3ca01c1f0a6a099a5f8eb74d6f2553945a5bbc86ac403`
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b44-01-paton-vote-15x-emergency-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough -movflags +faststart \
+  public/media/gallery/mily-b44-01-paton-vote-15x-emergency-story.mp4
+```
+
 ## 素材台帳（batch b44 / source date 2026-08-31）
 
 8/31 07:34 の本人Xお礼投稿。受領したSHOWROOM画面には
