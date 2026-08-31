@@ -15,6 +15,8 @@ export type ContestPhase = {
   end: string | null;
   /** フェーズ名を確認した一次ソースURL */
   source: string;
+  /** このフェーズが最優先のときにサイト共有文へ載せるタグ。#は含めない。 */
+  shareHashtags?: string[];
 };
 
 export type Contest = {
@@ -46,6 +48,7 @@ export const contest: Contest = {
     start: "2026-09-03",
     end: "2026-09-13",
     source: "https://www.misscircle.jp/",
+    shareHashtags: ["ミスサー", "ミスサークル2026"],
   },
   lastVerifiedAt: "2026-08-26",
 };
