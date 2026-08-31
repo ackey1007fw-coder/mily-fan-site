@@ -145,7 +145,7 @@ describe("2026-04-23 TikTok sayonara-ichigo post — Latest", () => {
     assert.equal(ordered[0]?.id, "2026-08-31-paton-first-place-story");
     assert.equal(ordered.at(-1)?.id, NEWS_ID);
     assert.equal(ordered.at(-2)?.id, "2026-08-02-21st-birthday");
-    assert.equal(news.length, 61);
+    assert.equal(news.length, 66);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {

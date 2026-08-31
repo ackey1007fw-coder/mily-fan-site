@@ -182,7 +182,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-31-paton-first-place-story",
     date: "2026-08-31",
-    sameDayOrder: 3,
+    sameDayOrder: 6,
     activityIds: ["campus-girls"],
     title: "待ってー！現在1位だ。31日は1.5倍DAY",
     body: "8月31日、みりぃがInstagram Storyで、Paton投票の投稿時点1位（102,700pt）を伝え、「31日は1.5倍DAYだからねっ！！」と呼びかけました。1位と得点は投稿時点の記録であり、現在の順位を示すものではありません。",
@@ -206,7 +206,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-31-paton-15x-day-story",
     date: "2026-08-31",
-    sameDayOrder: 2,
+    sameDayOrder: 5,
     activityIds: ["campus-girls"],
     title: "緊急告知：8/31はPaton投票1.5倍デー",
     body: "8月31日、みりぃがInstagram Storyで、CAMPUS GIRLS公式が告知したPaton投票1.5倍デーを緊急案内しました。画面には、明日はPaton投票が1.5倍になることと、投票のお願いが書かれています。",
@@ -233,7 +233,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-08-31-paton-vote-how-to-story",
     date: "2026-08-31",
-    sameDayOrder: 1,
+    sameDayOrder: 4,
     activityIds: ["campus-girls"],
     title: "Instagram Storyでもパトン投票のやり方を案内",
     body: "8月31日、みりぃがInstagram StoryでCAMPUS GIRLS 2027のPaton投票方法を案内しました。Patonでキャンパスガールズ2027を選び、三橋莉子（みりぃ）のページからギフトを開いて1日1回無料拍手を送ると投票できます。応援コメントも募集しています。投票は9月1日までです。",
@@ -250,6 +250,92 @@ export const news: NewsItem[] = [
     message: {
       label: "みりぃの案内",
       text: patonVoteHowToSpokenMessage,
+    },
+  },
+  {
+    id: "2026-08-31-morning-stream-thanks",
+    date: "2026-08-31",
+    sameDayOrder: 3,
+    activityIds: ["live-stream"],
+    title: "朝から起こしに来てくれたみんな、ありがとう",
+    body: "8月31日朝、みりぃがXで、朝から起こしに来てくれたみんなへのお礼を伝えました。なんだか勇気ももらえて、朝から配信した甲斐があったこと、これからの頑張る糧になると綴っています。",
+    source: "https://x.com/Mily_chan36/status/2094192106105659650",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "朝から私を起こしに来てくれたみんな、ありがとう\u{1F979}\u{1F64F}\u{1F3FB}\u{2728}なんだか勇気ももらえて、朝から配信した甲斐があったなぁぁぁ\u{301C}\n" +
+        "これからの頑張る糧になるね、確実に\u{1F926}\u{1F3FB}\u{200D}\u{2640}\u{FE0F}\u{2763}\u{FE0F}\n" +
+        "#ミスサー #ミスサークル #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークルコンテスト2026",
+    },
+  },
+  {
+    id: "2026-08-31-paton-15x-day",
+    date: "2026-08-31",
+    sameDayOrder: 2,
+    activityIds: ["campus-girls"],
+    title: "本日はパトン1.5倍DAY、投稿時点で1位",
+    body: "8月31日未明、みりぃがXでPaton投票の緊急告知を投稿しました。本日（31日 0:00〜23:59）は1.5倍であることと、投稿時点で1位であること、この順位を一緒に維持したいという呼びかけが書かれています。同日朝の投稿では、1.5倍DAYであることと『無料拍手』からの応援も案内しています。",
+    source: "https://x.com/Mily_chan36/status/2094102196447334713",
+    sourceLabel: "Xの投稿を見る",
+    additionalSources: [
+      {
+        label: "朝の無料拍手のX投稿を見る",
+        url: "https://x.com/Mily_chan36/status/2094191581951906187",
+      },
+    ],
+    url: campusGirlsPatonVoteLink.url,
+    ctaLabel: campusGirlsPatonVoteLink.label,
+    media: campusGirlsPatonPortraitImage,
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "【緊急告知\u{2764}\u{FE0F}\u{200D}\u{1F525}\u{2764}\u{FE0F}\u{200D}\u{1F525}】\n" +
+        "本日（31日\u{3000}0:00\u{301C}23:59）1.5倍\u{203C}\u{FE0F}\n" +
+        "\n" +
+        "現在1位\u{1F947}この順位、一緒に維持しませんか？！？！投票お願いします\u{1F979}\u{270A}\u{1F3FB}\u{2728}\n" +
+        "https://paton.jp/event/entrant/11380",
+    },
+  },
+  {
+    id: "2026-08-31-showroom-wake-me",
+    date: "2026-08-31",
+    sameDayOrder: 1,
+    activityIds: ["live-stream"],
+    title: "配信中！眠いから私を起こして〜",
+    body: "8月31日朝、みりぃがXでSHOWROOM配信中であることを伝えました。「眠いから私を起こして〜」という言葉が残されています。配信中だった記録です。",
+    source: "https://x.com/Mily_chan36/status/2094179970960744615",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "\u{1F525}2次審査\u{1FA75}三橋莉子\u{1F345} #ミスサークル2026 配信中\u{203C}\u{FE0E}\n" +
+        "眠いから私を起こして\u{301C}\u{203C}\u{FE0F}\n" +
+        "https://www.showroom-live.com/r/circle2026_0734?t=1788126356",
+    },
+  },
+  {
+    id: "2026-08-30-consecutive-stream-30",
+    date: "2026-08-30",
+    sameDayOrder: 4,
+    activityIds: ["live-stream"],
+    title: "30日連続配信記念日、素敵な景色を一緒に見に行きたい",
+    body: "8月30日、みりぃがXでSHOWROOM配信中であることと、30日連続配信記念日であることを伝えました。「素敵な景色を皆さんと一緒に見に行きたい」という言葉も残されています。",
+    source: "https://x.com/Mily_chan36/status/2094023746751463582",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "\u{1F525}2次審査\u{1FA75}三橋莉子\u{1F345} #ミスサークル2026 配信中\u{203C}\u{FE0E}\n" +
+        "30日連続配信記念日\u{2728}\u{2728}\u{2728}\u{2728}\u{2728}\n" +
+        "素敵な景色を皆さんと一緒に見に行きたい\u{1F624}\u{270A}\u{1F3FB}\u{2728}\n" +
+        "https://www.showroom-live.com/r/circle2026_0734?t=1788089115",
     },
   },
   {
@@ -340,6 +426,25 @@ export const news: NewsItem[] = [
         "SHOWROOM\n" +
         "30日連続配信記念日\n" +
         "現在3:30。朝7:30配信予定",
+    },
+  },
+  {
+    id: "2026-08-30-paton-rank-3",
+    date: "2026-08-30",
+    activityIds: ["campus-girls"],
+    title: "今日のパトン投票もお忘れなく、投稿時点で3位",
+    body: "8月30日朝、みりぃがXでPaton投票を案内しました。投稿時点で3位であることと、2位に上がりたいという呼びかけが書かれています。",
+    source: "https://x.com/Mily_chan36/status/2093802981921849728",
+    sourceLabel: "Xの投稿を見る",
+    url: campusGirlsPatonVoteLink.url,
+    ctaLabel: campusGirlsPatonVoteLink.label,
+    media: campusGirlsPatonPortraitImage,
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "【今日のパトン投票もお忘れなく\u{2763}\u{FE0F}\u{2763}\u{FE0F}\n" +
+        "現時点で3位\u{1F949}。また2位\u{1F948}に上がりたいね\u{1FAEA}\u{1F64C}\u{1F3FB}皆さんの1票が力になります\u{203C}\u{FE0E}\n" +
+        "https://paton.jp/event/entrant/11380",
     },
   },
   {
