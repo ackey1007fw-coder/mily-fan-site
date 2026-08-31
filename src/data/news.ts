@@ -67,7 +67,6 @@ import {
 } from "./ohayoWhitePoloPeace.ts";
 import { pandaPastPicImage } from "./pandaPastPic.ts";
 import { eveningRadioShowroomImage } from "./eveningRadioShowroom.ts";
-import { morningStreamThanksImage } from "./morningStreamThanks.ts";
 import { campusGirlsFinalStageFlyerImage } from "./campusGirlsFinalStageFlyer.ts";
 import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
 import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
@@ -189,7 +188,6 @@ export const news: NewsItem[] = [
     sourceLabel: "Xの投稿を見る",
     url: "https://www.showroom-live.com/r/circle2026_0734",
     ctaLabel: "SHOWROOMを見る",
-    media: morningStreamThanksImage,
     message: {
       label: "みりぃの投稿",
       text:
