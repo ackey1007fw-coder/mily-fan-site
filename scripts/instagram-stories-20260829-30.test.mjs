@@ -217,10 +217,9 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
   it("shares one manifest object per Story with Gallery and Portal Feed", () => {
     assert.equal(visibleGalleryVideos()[0]?.id, "mily-b44-02-paton-vote-first-place-story");
     assert.equal(visibleGalleryVideos()[1]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b44-04-showroom-30-day-anniversary-story");
-    assert.equal(visibleGalleryVideos()[3], campusGirlsHoldSecondStoryVideo);
-    assert.equal(visibleGalleryVideos()[4], patonVoteDay5StoryVideo);
-    assert.equal(visibleGalleryVideos()[5], patonVoteDay4StoryVideo);
+    assert.equal(visibleGalleryVideos()[2], campusGirlsHoldSecondStoryVideo);
+    assert.equal(visibleGalleryVideos()[3], patonVoteDay5StoryVideo);
+    assert.equal(visibleGalleryVideos()[4], patonVoteDay4StoryVideo);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);

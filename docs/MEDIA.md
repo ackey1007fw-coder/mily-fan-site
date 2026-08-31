@@ -2450,19 +2450,20 @@ Mixch URLは画面に無いため Mixch CTAは付けない。
 
 ## 素材台帳（batch b44 / 受領日 2026-08-31 / source date 2026-08-30〜31）
 
-オーナーが直接提供した本人Instagram Story動画4本。うち3本を公開する。
+オーナーが直接提供した本人Instagram Story動画4本。うち2本を公開する。
 くまフィルターの「2位を守り抜きたい」は既存b43-02と同一のためこのバッチでは扱わない。
 
 - b44-01: CAMPUS GIRLS公式のPaton投票1.5倍デー告知を写した緊急案内
 - b44-02: 投稿時点1位（102,700pt）と「31日は1.5倍DAY」の呼びかけ。他出場者は写っていない
 - b44-03: パトン投票のやり方。他出場者の顔・名前、オーナーサポーター名、投稿時点ではない
   古い順位表示があるため**非掲載**（8/27のX投票方法案内と同じ判断。NEWSは既存人物写真で案内）
-- b44-04: SHOWROOM 30日連続配信記念日と、投稿時点の朝7:30配信予定
+- b44-04: SHOWROOM 30日連続配信記念日と、投稿時点の朝7:30配信予定。SHOWROOM配信画面に
+  視聴者の表示名・アイコン・コメントが写るため**非掲載**（NEWSはテキストのみ）
 
-HOME Latest / `/news/` と Gallery が、b44-01 / b44-02 / b44-04 の公開MP4・poster・
+HOME Latest / `/news/` と Gallery が、b44-01 / b44-02 の公開MP4・poster・
 manifest objectを共有する。恒久的なStory permalinkはないため、表示は非リンクの
-`Instagram Story` labelとする。b44-01 / b44-02 は CAMPUS GIRLS Activity、
-b44-04 は LIVE STREAM Activity の関連NEWS・関連メディアにも出す。
+`Instagram Story` labelとする。b44-01 / b44-02 は CAMPUS GIRLS Activity の
+関連NEWS・関連メディアにも出す。b44-04 は LIVE STREAM の関連NEWS（テキスト）のみ。
 `/stories/`、highlights、events、streamSchedule、`media.ts`、
 PatonVoteGuide のランキング系列には追加しない。
 
@@ -2473,8 +2474,7 @@ PatonVoteGuide のランキング系列には追加しない。
 | b44-02 | `gallery/mily-b44-02-paton-vote-first-place-story.mp4` | 投稿時点1位・102,700ptと1.5倍DAYの呼びかけ。720×1280 / 20.000秒 / 30fps / 600フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
 | b44-02 poster | `gallery/mily-b44-02-paton-vote-first-place-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
 | b44-03 | — | 投票方法案内。他出場者・オーナーサポーター名・古い順位表示のため非掲載 | ❌ 自己ホストしない。NEWSは既存人物写真 |
-| b44-04 | `gallery/mily-b44-04-showroom-30-day-anniversary-story.mp4` | SHOWROOM 30日連続配信記念日。720×1280 / 20.000秒 / 1fps / 20フレーム / video-only | ✅ Latest / NEWS + Gallery + LIVE STREAM Activity |
-| b44-04 poster | `gallery/mily-b44-04-showroom-30-day-anniversary-story-poster.jpg` | 公開MP4の8.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b44-04 | — | SHOWROOM 30日連続配信記念日。配信画面に視聴者の表示名・アイコン・コメントがあるため非掲載 | ❌ 自己ホストしない。NEWSはテキストのみ |
 
 ### 元素材と安全確認
 
@@ -2496,12 +2496,13 @@ PatonVoteGuide のランキング系列には追加しない。
 - b44-04元動画: 573,756 bytes / sha256
   `891d55181bab9e5911bb32acede063ee07b304c5823dd4e5248d8513c62a3be3` /
   H.264 High / 720×1280 / 1fps / 20 frames / video 20.000秒 /
-  HE-AAC 48kHz stereo音声あり
+  HE-AAC 48kHz stereo音声あり。公開派生は作っていない
 - 元動画の`creation_time`とCore Media handler名は受領検査だけに使い、投稿日・
   投稿時刻の根拠にはしていない
-- b44-01 / b44-02 / b44-04 に識別可能な第三者は見当たらない。Story下部の本人プロフィール
+- b44-01 / b44-02 に識別可能な第三者は見当たらない。Story下部の本人プロフィール
   チップは作者自身の帰属表示のため維持し、cropしていない。b44-02の1位は投稿時点の記録
 - b44-03は他出場者の顔・名前、オーナーサポーター名、古い順位表示を含むため非掲載
+- b44-04はSHOWROOM配信画面の視聴者表示名・アイコン・コメントを含むため非掲載
 
 ### 音声と公開派生
 
@@ -2519,11 +2520,6 @@ PatonVoteGuide のランキング系列には追加しない。
   `a59d8adec43f01139fdb6b11293eb2369f68776daf90af82b269618ab1777629`
 - b44-02 poster: 67,048 bytes / metadataなし / sha256
   `398b653bdaada3949ef3ca01c1f0a6a099a5f8eb74d6f2553945a5bbc86ac403`
-- b44-04 MP4: 317,121 bytes / H.264 Constrained Baseline / 20.000秒 /
-  1fps / 20フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
-  `407261ea96fc5233202ef70ae295b85ba62dd548618c342c35cf9c9e898a48b2`
-- b44-04 poster: 98,122 bytes / metadataなし / sha256
-  `55f0538a44496526dcae6b4de709715eae7465c20420c704edcce8e1d2282770`
 
 エンコードコマンド（再現用）:
 

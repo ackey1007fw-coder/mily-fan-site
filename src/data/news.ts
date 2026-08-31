@@ -28,7 +28,6 @@ import { patonVoteDay5StoryVideo } from "./patonVoteDay5StoryVideo.ts";
 import { campusGirlsHoldSecondStoryVideo } from "./campusGirlsHoldSecondStoryVideo.ts";
 import { patonVoteFifteenXStoryVideo } from "./patonVoteFifteenXStoryVideo.ts";
 import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.ts";
-import { showroomThirtyDayAnniversaryStoryVideo } from "./showroomThirtyDayAnniversaryStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -228,7 +227,7 @@ export const news: NewsItem[] = [
         "明日はpaton投票が\n" +
         "《1.5倍》になります\n" +
         "ぜひ投票お願いします\n" +
-        "#キャンパスガールズ2027",
+        "#CAMPUSBOYS2027 #CAMPUSGIRLS2027 #予選AFinal",
     },
   },
   {
@@ -325,7 +324,7 @@ export const news: NewsItem[] = [
     activityIds: ["live-stream"],
     title: "SHOWROOM 30日連続配信記念日",
     body: "8月30日、みりぃがInstagram StoryでSHOWROOM 30日連続配信記念日を案内しました。投稿時点では午前3:30で、朝7:30の配信予定が書かれています。配信前の記録です。",
-    sourceLabel: showroomThirtyDayAnniversaryStoryVideo.sourceLabel,
+    sourceLabel: "Instagram Story",
     relatedUrl: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
     additionalCtas: [
@@ -334,7 +333,6 @@ export const news: NewsItem[] = [
         url: "https://www.showroom-live.com/r/circle2026_0734",
       },
     ],
-    media: showroomThirtyDayAnniversaryStoryVideo,
     message: {
       label: "みりぃのStory",
       text:

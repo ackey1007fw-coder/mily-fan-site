@@ -15,7 +15,6 @@ import {
   galleryVideos,
   patonVoteFifteenXStoryVideo,
   patonVoteFirstPlaceStoryVideo,
-  showroomThirtyDayAnniversaryStoryVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
@@ -100,30 +99,6 @@ const fixtures = [
     duration: 5.0,
     activityIds: ["campus-girls"],
   },
-  {
-    newsId: THIRTY_DAY_NEWS_ID,
-    item: showroomThirtyDayAnniversaryStoryVideo,
-    original: "mily-b44-04-showroom-30-day-anniversary-story.mp4",
-    publicVideo: "mily-b44-04-showroom-30-day-anniversary-story.mp4",
-    poster: "mily-b44-04-showroom-30-day-anniversary-story-poster.jpg",
-    originalBytes: 573_756,
-    originalSha256:
-      "891d55181bab9e5911bb32acede063ee07b304c5823dd4e5248d8513c62a3be3",
-    publicBytes: 317_121,
-    publicSha256:
-      "407261ea96fc5233202ef70ae295b85ba62dd548618c342c35cf9c9e898a48b2",
-    posterBytes: 98_122,
-    posterSha256:
-      "55f0538a44496526dcae6b4de709715eae7465c20420c704edcce8e1d2282770",
-    sourceDate: "2026-08-30",
-    width: 720,
-    height: 1280,
-    avgFrameRate: "1/1",
-    nbFrames: "20",
-    duration: 20.0,
-    originalAudioRate: "48000",
-    activityIds: ["live-stream"],
-  },
 ];
 
 function newsItem(id) {
@@ -167,8 +142,6 @@ async function changedText() {
     "src/data/patonVoteFifteenXStoryVideo.ts",
     "src/data/patonVoteFirstPlaceStoryVideo.json",
     "src/data/patonVoteFirstPlaceStoryVideo.ts",
-    "src/data/showroomThirtyDayAnniversaryStoryVideo.json",
-    "src/data/showroomThirtyDayAnniversaryStoryVideo.ts",
   ];
   const result = [];
 
@@ -281,8 +254,7 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
   it("shares one manifest object per published Story with Gallery and Portal Feed", () => {
     assert.equal(visibleGalleryVideos()[0], patonVoteFirstPlaceStoryVideo);
     assert.equal(visibleGalleryVideos()[1], patonVoteFifteenXStoryVideo);
-    assert.equal(visibleGalleryVideos()[2], showroomThirtyDayAnniversaryStoryVideo);
-    assert.equal(visibleGalleryVideos()[3], campusGirlsHoldSecondStoryVideo);
+    assert.equal(visibleGalleryVideos()[2], campusGirlsHoldSecondStoryVideo);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
@@ -327,6 +299,33 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.equal(entry.additionalCtas[0].url, PATON_VOTE_HOW_TO_CTA_URL);
   });
 
+  it("does not self-host the 30-day anniversary Story because viewer identities are visible", () => {
+    const entry = newsItem(THIRTY_DAY_NEWS_ID);
+    assert.equal(entry?.media, undefined);
+    assert.equal(
+      galleryVideos.some((item) => item.id.includes("30-day")),
+      false,
+    );
+    assert.equal(
+      existsSync(
+        path.join(
+          galleryDirectory,
+          "mily-b44-04-showroom-30-day-anniversary-story.mp4",
+        ),
+      ),
+      false,
+    );
+    assert.equal(
+      existsSync(
+        path.join(
+          galleryDirectory,
+          "mily-b44-04-showroom-30-day-anniversary-story-poster.jpg",
+        ),
+      ),
+      false,
+    );
+  });
+
   it("surfaces campus Stories on CAMPUS GIRLS and the anniversary on LIVE STREAM only", () => {
     const campusNews = selectActivityNews("campus-girls", news, news.length);
     const liveNews = selectActivityNews("live-stream", news, news.length);
@@ -343,7 +342,16 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.equal(selectActivityMedia("campus-girls")[1], patonVoteFifteenXStoryVideo);
     assert.equal(selectActivityMedia("campus-girls")[2], campusGirlsPatonPortraitImage);
     assert.equal(selectActivityMedia("campus-girls")[3], campusGirlsHoldSecondStoryVideo);
-    assert.equal(selectActivityMedia("live-stream")[0], showroomThirtyDayAnniversaryStoryVideo);
+    assert.notEqual(
+      selectActivityMedia("live-stream")[0]?.id,
+      "mily-b44-04-showroom-30-day-anniversary-story",
+    );
+    assert.equal(
+      selectActivityMedia("live-stream").some((item) =>
+        item.id?.includes("30-day"),
+      ),
+      false,
+    );
 
     for (const newsId of [FIRST_PLACE_NEWS_ID, FIFTEEN_X_NEWS_ID, HOW_TO_NEWS_ID]) {
       assert.equal(liveNews.some((entry) => entry.id === newsId), false);
@@ -375,8 +383,10 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.match(fifteenX.message.text, /明日はpaton投票が/);
     assert.match(fifteenX.message.text, /《1\.5倍》になります/);
     assert.match(fifteenX.message.text, /ぜひ投票お願いします/);
-    assert.match(fifteenX.message.text, /#キャンパスガールズ2027$/);
-    assert.doesNotMatch(fifteenX.message.text, /なるよーん|00:00|23:59/);
+    assert.match(fifteenX.message.text, /#CAMPUSBOYS2027/);
+    assert.match(fifteenX.message.text, /#CAMPUSGIRLS2027/);
+    assert.match(fifteenX.message.text, /#予選AFinal/);
+    assert.doesNotMatch(fifteenX.message.text, /なるよーん|00:00|23:59|#キャンパスガールズ2027/);
     assert.doesNotMatch(patonVoteFifteenXStoryVideo.alt, /0:00|23:59/);
     assert.equal(fifteenX.body.includes("Mixch"), false);
 
@@ -387,14 +397,12 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.doesNotMatch(thirtyDay.message.text, /#ミスサー/);
     assert.match(thirtyDay.message.text, /【8\/30（日）】/);
     assert.match(thirtyDay.message.text, /現在3:30。朝7:30配信予定$/);
-    assert.match(showroomThirtyDayAnniversaryStoryVideo.alt, /SHOWROOM配信画面/);
-    assert.match(showroomThirtyDayAnniversaryStoryVideo.alt, /30日ありがとう/);
-    assert.doesNotMatch(showroomThirtyDayAnniversaryStoryVideo.alt, /猫耳|手を振り/);
+    assert.equal(thirtyDay.media, undefined);
   });
 });
 
 describe("2026-08-30〜31 Instagram Story — published media", () => {
-  it("publishes exactly three shared MP4s and three real-frame posters", async () => {
+  it("publishes exactly two shared MP4s and two real-frame posters", async () => {
     const assets = (await readdir(galleryDirectory))
       .filter((file) => file.includes("mily-b44-"))
       .sort();
@@ -520,11 +528,12 @@ describe("2026-08-30〜31 Instagram Story — privacy and scope", () => {
     assert.match(docs, /公開派生では削除/);
     assert.match(docs, /720×1280/);
     assert.match(docs, /非掲載/);
-    assert.match(ops, /独立動画24本/);
+    assert.match(ops, /独立動画23本/);
     assert.match(ops, /61件/);
     assert.match(ops, /Instagramプロフィールを見る/);
     assert.match(ops, /Patonでみりぃに投票する/);
     assert.match(ops, /投稿時点の記録/);
     assert.match(ops, /自己ホストしない/);
+    assert.match(ops, /視聴者の表示名/);
   });
 });

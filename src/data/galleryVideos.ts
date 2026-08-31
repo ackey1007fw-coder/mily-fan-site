@@ -20,7 +20,6 @@ import { patonVoteDay5StoryVideo } from "./patonVoteDay5StoryVideo.ts";
 import { campusGirlsHoldSecondStoryVideo } from "./campusGirlsHoldSecondStoryVideo.ts";
 import { patonVoteFifteenXStoryVideo } from "./patonVoteFifteenXStoryVideo.ts";
 import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.ts";
-import { showroomThirtyDayAnniversaryStoryVideo } from "./showroomThirtyDayAnniversaryStoryVideo.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
@@ -64,7 +63,6 @@ export {
   campusGirlsHoldSecondStoryVideo,
   patonVoteFifteenXStoryVideo,
   patonVoteFirstPlaceStoryVideo,
-  showroomThirtyDayAnniversaryStoryVideo,
   nightThanksMorningStreamStoryVideo,
   patonVoteCollageStoryVideo,
   patonVoteMirrorStoryVideo,
@@ -96,7 +94,6 @@ export function isSelfHostedGalleryVideo(
 export const galleryVideos: GalleryVideoItem[] = [
   patonVoteFirstPlaceStoryVideo,
   patonVoteFifteenXStoryVideo,
-  showroomThirtyDayAnniversaryStoryVideo,
   campusGirlsHoldSecondStoryVideo,
   patonVoteDay5StoryVideo,
   patonVoteDay4StoryVideo,

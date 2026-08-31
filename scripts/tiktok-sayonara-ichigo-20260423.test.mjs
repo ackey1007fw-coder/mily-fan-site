@@ -168,7 +168,7 @@ describe("2026-04-23 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(item().media, tiktokSayonaraIchigoVideo);
     assert.deepEqual(matches, [tiktokSayonaraIchigoVideo]);
-    assert.equal(galleryVideos[16], tiktokRadioVideo);
+    assert.equal(galleryVideos[15], tiktokRadioVideo);
     assert.equal(selfHosted.at(-1), tiktokSayonaraIchigoVideo);
     assert.equal(selfHosted.at(-2), morningStoryVideo);
     assert.equal(galleryVideos[mixchIndex - 1], tiktokSayonaraIchigoVideo);
@@ -190,7 +190,6 @@ describe("2026-04-23 TikTok video — shared Latest / Gallery asset", () => {
     assert.deepEqual(augustIds, [
       "mily-b44-02-paton-vote-first-place-story",
       "mily-b44-01-paton-vote-15x-emergency-story",
-      "mily-b44-04-showroom-30-day-anniversary-story",
       "mily-b43-02-campus-girls-hold-second-story",
       "mily-b43-01-paton-vote-day5-story",
       "mily-b41-02-paton-vote-day4-story",
@@ -236,9 +235,9 @@ describe("2026-04-23 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(drive.photos.length, 45);
     assert.equal(drive.videos.length, 11);
-    assert.equal(galleryVideos.length, 28);
-    assert.equal(galleryVideos.filter(isSelfHostedGalleryVideo).length, 24);
-    assert.equal(visibleGalleryVideos().filter(isSelfHostedGalleryVideo).length, 24);
+    assert.equal(galleryVideos.length, 27);
+    assert.equal(galleryVideos.filter(isSelfHostedGalleryVideo).length, 23);
+    assert.equal(visibleGalleryVideos().filter(isSelfHostedGalleryVideo).length, 23);
     assert.equal(galleryVideos.filter(isMixchMovie).length, 4);
   });
 });

@@ -211,11 +211,10 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
   it("shares one manifest object per Story with Gallery and Portal Feed", () => {
     assert.equal(visibleGalleryVideos()[0]?.id, "mily-b44-02-paton-vote-first-place-story");
     assert.equal(visibleGalleryVideos()[1]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b44-04-showroom-30-day-anniversary-story");
-    assert.equal(visibleGalleryVideos()[3]?.id, "mily-b43-02-campus-girls-hold-second-story");
-    assert.equal(visibleGalleryVideos()[4]?.id, "mily-b43-01-paton-vote-day5-story");
-    assert.equal(visibleGalleryVideos()[5], patonVoteDay4StoryVideo);
-    assert.equal(visibleGalleryVideos()[6], nightStoryB41Video);
+    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b43-02-campus-girls-hold-second-story");
+    assert.equal(visibleGalleryVideos()[3]?.id, "mily-b43-01-paton-vote-day5-story");
+    assert.equal(visibleGalleryVideos()[4], patonVoteDay4StoryVideo);
+    assert.equal(visibleGalleryVideos()[5], nightStoryB41Video);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
@@ -262,7 +261,7 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
     assert.equal(selectActivityMedia("campus-girls")[3]?.id, "mily-b43-02-campus-girls-hold-second-story");
     assert.equal(selectActivityMedia("campus-girls")[4]?.id, "mily-b43-01-paton-vote-day5-story");
     assert.equal(selectActivityMedia("campus-girls")[5], patonVoteDay4StoryVideo);
-    assert.equal(selectActivityMedia("live-stream")[0]?.id, "mily-b44-04-showroom-30-day-anniversary-story");
+    assert.equal(selectActivityMedia("live-stream")[0]?.id, "mily-b41-01-night-showroom-story");
   });
 });
 
