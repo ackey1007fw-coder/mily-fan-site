@@ -236,12 +236,12 @@ describe("Gallery portrait-first order", () => {
     assert.deepEqual(
       preview.map((entry) => entry.key),
       [
+        "mily-b44-01",
         "mily-b38-01",
         "mily-b38-03",
         "mily-b38-04",
         "mily-b38-05",
         "mily-b31-01",
-        "mily-b30-01",
       ],
     );
   });

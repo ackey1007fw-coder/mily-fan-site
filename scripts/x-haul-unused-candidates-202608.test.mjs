@@ -122,7 +122,7 @@ describe("X haul unused candidates — keep birthday and skip published dupes", 
       true,
     );
     assert.equal(news.length, 49);
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 32);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 33);
     assert.deepEqual(verifyNews(news), []);
     assert.deepEqual(verifyMedia(media), []);
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
@@ -241,7 +241,7 @@ describe("2026-08-18 evening radio SHOWROOM — attach to existing NEWS + Galler
     assert.equal(entry.body.includes("体調不良"), false);
     assert.equal(entry.body.includes("病気"), false);
     assert.ok(morning);
-    assert.equal(visibleMedia(media)[5], eveningRadioShowroomPhoto);
+    assert.equal(visibleMedia(media)[6], eveningRadioShowroomPhoto);
   });
 
   it("self-hosts a new screenshot, not a published duplicate", async () => {
@@ -334,6 +334,7 @@ describe("X haul — no Drive ids, no Millie spelling, no pbs hotlinks", () => {
       "src/data/ohayoWhitePoloPeace.ts",
       "src/data/pandaPastPic.ts",
       "src/data/eveningRadioShowroom.ts",
+      "src/data/morningStreamThanks.ts",
       "src/data/campusGirlsFinalStageFlyer.ts",
       "src/data/secondRoundTimetable.ts",
       "src/data/gandaBeforeNightStream.ts",

@@ -12,6 +12,7 @@
  *   Keep them null rather than guessing; docs/MEDIA.md tracks what is
  *   still unconfirmed.
  */
+import { morningStreamThanksPhoto } from "./morningStreamThanks.ts";
 import { eveningRadioShowroomPhoto } from "./eveningRadioShowroom.ts";
 import { pandaPastPicPhoto } from "./pandaPastPic.ts";
 import { ohayoWhitePoloPeacePhoto } from "./ohayoWhitePoloPeace.ts";
@@ -74,6 +75,7 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  morningStreamThanksPhoto,
   ...movieNightPhotos,
   eveningRadioShowroomPhoto,
   pandaPastPicPhoto,

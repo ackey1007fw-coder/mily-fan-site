@@ -260,7 +260,8 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
     assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b43-02-campus-girls-hold-second-story");
     assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b43-01-paton-vote-day5-story");
     assert.equal(selectActivityMedia("campus-girls")[3], patonVoteDay4StoryVideo);
-    assert.equal(selectActivityMedia("live-stream")[0], nightStoryB41Video);
+    assert.equal(selectActivityMedia("live-stream")[0]?.id, "mily-b44-01-morning-stream-thanks");
+    assert.equal(selectActivityMedia("live-stream")[1], nightStoryB41Video);
   });
 });
 

@@ -2448,12 +2448,18 @@ Mixch URLは画面に無いため Mixch CTAは付けない。
 - b43-02 poster: 87,690 bytes / metadataなし / sha256
   `2c9413f1ddbca35565f348377d67dd22e22a81fa8c82454db955b8f6cd079b0e`
 
-## 素材台帳（batch b44 / 未使用）
+## 素材台帳（batch b44 / source date 2026-08-31）
 
-8/31 07:34 の本人Xお礼投稿は NEWS テキストとして掲載する。
-オーナー提供の元素材バイトがこの作業環境に無く、X画像CDNからの取得はしない。
-Gallery / `media.ts` / 公開派生は作っていない。batch 番号 b44 は未使用のまま残す。
+8/31 07:34 の本人Xお礼投稿。オーナー提供原本から公開派生済み。
+NEWS と Gallery が同じマニフェストを共有する。X画像CDNは参照しない。
 受け渡し用のホスト名・file ID・元素材ファイル名は tracked text に残さない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b44-01 NEWS | `news/mily-b44-01-morning-stream-thanks.jpg` | SHOWROOM画面。花束を持つみりぃ。1262×2048。sns-post | ✅ Latest / NEWS の fallback `src` |
+| b44-01 Gallery | `gallery/mily-b44-01-morning-stream-thanks-{480,960,1600}.{jpg,webp}` | 480×779 / 960×1558 / 1262×2048（拡大なし） | ✅ Gallery 本人写真 |
+
+出典: `https://x.com/Mily_chan36/status/2094192106105659650`
 
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
