@@ -9,17 +9,9 @@ import { events } from "../src/data/events.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
-import { media, visibleMedia } from "../src/data/media.ts";
-import {
-  morningStreamThanksImage,
-  morningStreamThanksPhoto,
-} from "../src/data/morningStreamThanks.ts";
+import { media } from "../src/data/media.ts";
+import { morningStreamThanksImage } from "../src/data/morningStreamThanks.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import {
-  isMilyPortraitPhoto,
-  isShowroomUiScreenshot,
-  selectGalleryEntries,
-} from "../src/lib/galleryItems.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
@@ -246,28 +238,19 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
     }
   });
 
-  it("shares one published photo object between NEWS and Gallery", async () => {
+  it("keeps the SHOWROOM screenshot in NEWS and out of Gallery", async () => {
     const newsSource = await readFile(path.join(root, "src/data/news.ts"), "utf8");
     assert.equal(newsSource.includes("pbs.twimg.com"), false);
     assert.equal(newsSource.includes("video.twimg.com"), false);
     assert.equal(DRIVE_HOST_PATTERN.test(newsSource), false);
     assert.equal(DRIVE_FOLDER_PATTERN.test(newsSource), false);
     assert.equal(item(THANKS_ID).media, morningStreamThanksImage);
-    assert.equal(visibleMedia(media)[0], morningStreamThanksPhoto);
-    assert.equal(media.filter((entry) => entry.id === "mily-b44-01").length, 1);
-    assert.equal(morningStreamThanksPhoto.sourceUrl, THANKS_SOURCE);
-    assert.equal(morningStreamThanksPhoto.published, true);
-    assert.equal(isShowroomUiScreenshot(morningStreamThanksPhoto), false);
-    assert.equal(isMilyPortraitPhoto(morningStreamThanksPhoto), true);
-    assert.equal(
-      selectGalleryEntries().some((entry) => entry.key === "mily-b44-01"),
-      true,
-    );
+    assert.equal(media.some((entry) => entry.id === "mily-b44-01"), false);
     assert.equal(
       existsSync(path.join(root, "public/media/news/mily-b44-01-morning-stream-thanks.jpg")),
       true,
     );
-    for (const width of morningStreamThanksPhoto.widths) {
+    for (const width of [480, 960, 1600]) {
       for (const ext of ["jpg", "webp"]) {
         assert.equal(
           existsSync(
@@ -357,11 +340,11 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
     }
   });
 
-  it("documents the five NEWS items and the shared b44-01 photo in CONTENT-OPS", async () => {
+  it("documents the five NEWS items and the NEWS-only b44-01 image", async () => {
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     assert.match(ops, /62件/);
-    assert.match(ops, /写真33枚/);
+    assert.match(ops, /写真32枚/);
     assert.match(ops, /2094102196447334713/);
     assert.match(ops, /2094191581951906187/);
     assert.match(ops, /2094179970960744615/);
@@ -374,9 +357,10 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
     assert.match(ops, /30日連続配信記念/);
     assert.match(ops, /配信中だった記録/);
     assert.match(ops, /朝から起こしに来てくれたみんな、ありがとう/);
-    assert.match(ops, /b44-01本人写真を共有/);
+    assert.match(ops, /NEWS専用でb44-01 SHOWROOM画面を掲載/);
     assert.match(mediaGuide, /batch b44 \/ source date 2026-08-31/);
     assert.match(mediaGuide, /1262×2048/);
+    assert.match(mediaGuide, /Galleryには掲載しない/);
     assert.equal(DRIVE_HOST_PATTERN.test(ops), false);
     assert.equal(DRIVE_FOLDER_PATTERN.test(ops), false);
     assert.equal(DRIVE_HOST_PATTERN.test(mediaGuide), false);

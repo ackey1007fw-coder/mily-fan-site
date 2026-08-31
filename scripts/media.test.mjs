@@ -102,7 +102,6 @@ describe("media collection", () => {
       "mily-b30-01",
       "mily-b31-01",
       "mily-b32-01",
-      "mily-b44-01",
       "mily-b14-01",
       "mily-b24-01",
       "mily-b38-01",
