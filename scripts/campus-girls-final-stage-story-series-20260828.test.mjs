@@ -180,8 +180,9 @@ describe("2026-08-28 CAMPUS GIRLS Final STAGE Story series — contract", () => 
     const instagram = source.indexOf(
       "CAMPUS_GIRLS_FINAL_STAGE_INSTAGRAM_PROFILE_URL",
     );
-    const paton = source.indexOf("href={campusGirlsPatonVoteLink.url}");
-    assert.ok(instagram >= 0 && paton > instagram);
+    const patonHref = source.indexOf("href={campusGirlsPatonVoteLink.url}");
+    assert.ok(instagram >= 0);
+    assert.equal(patonHref, -1);
   });
 
   it("does not duplicate b40 into NEWS, Gallery, Story, schedules, or Portal Feed", async () => {

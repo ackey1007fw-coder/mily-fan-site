@@ -36,6 +36,10 @@ import {
 } from "./homePortal.ts";
 import type { LiveView } from "./realtimeStore.ts";
 import {
+  displayStatus,
+  nextDisplayStatusBoundary,
+} from "./supportCalendar.ts";
+import {
   selectSupportNow,
   selectSupportToday,
   type SupportAction,
@@ -54,7 +58,8 @@ export type HomeTodayView = {
   voteActions: [HomeVoteAction, ...HomeVoteAction[]];
   /**
    * TodayDashboard のボタン行。NOW カードと同じ URL は重ねない。
-   * 常設の MISS CIRCLE ENTRY は NOW に出ないので、期間中も期間後も残る。
+   * 期間中の Paton は NOW、常設 ENTRY はボタン行。Paton 終了後は
+   * 3次審査を NOW の「今これ」に出すので、同じ ENTRY をボタン行へ重ねない。
    */
   dashboardVoteButtons: HomeVoteAction[];
   /**
@@ -84,7 +89,10 @@ const NOW_ORIGIN_PRIORITY: Record<SupportNowItem["origin"], number> = {
   "showroom-live": 0,
   "radio-program": 1,
   "support-event": 2,
+  contest: 3,
 };
+
+const TOKYO_DAY_MS = 24 * 60 * 60 * 1000;
 
 /**
  * originの優先度で安定ソートする。
@@ -229,9 +237,9 @@ export function fallbackShowroomActions(input: {
 /**
  * TodayDashboard のボタン行に出す投票導線。
  *
- * NOW カードで目立たせている期間限定投票と同じ URL は重ねない。
- * 常設の MISS CIRCLE ENTRY は NOW に出ないので、期間中も期間後も残す。
- * HOME は Paton とミスサーを切り替えない。
+ * NOW カードで目立たせている投票と同じ URL は重ねない。
+ * 期間中の Paton は NOW、常設 ENTRY はボタン行に残す。
+ * Paton 終了後は 3次審査を NOW へ出し、同じ ENTRY をボタン行へ重ねない。
  */
 export function selectHomeDashboardVoteButtons(
   voteActions: readonly HomeVoteAction[],
@@ -241,6 +249,48 @@ export function selectHomeDashboardVoteButtons(
     nowItems.flatMap((item) => (item.cta ? [item.cta.url] : [])),
   );
   return voteActions.filter((action) => !nowCtaUrls.has(action.url));
+}
+
+/**
+ * Paton 終了後、3次審査の開始前日（phase.start の1日前）から終了日までを
+ * HOME の「今これ」にする。開始時刻や SHOWROOM 審査時間は作らない。
+ * 期間中の support-event 投票がある間は出さない。
+ */
+export function selectContestNowHero(input: {
+  contest: Contest;
+  liveVote: HomeVoteAction;
+  now: number;
+}): SupportNowItem | null {
+  if (input.liveVote.kind !== "contest") return null;
+  const phase = input.contest.currentPhase;
+  if (!phase?.start || !phase.end) return null;
+
+  const schedule = {
+    state: "confirmed-period" as const,
+    start: phase.start,
+    end: phase.end,
+    allDay: true as const,
+    timezone: "Asia/Tokyo" as const,
+  };
+  const status = displayStatus(schedule, input.now);
+  if (status === "ended" || status === "date-pending") return null;
+  if (status === "upcoming") {
+    const startAt = nextDisplayStatusBoundary(schedule, input.now);
+    if (startAt === null || startAt - input.now > TOKYO_DAY_MS) return null;
+  }
+
+  return {
+    key: "now:contest",
+    origin: "contest",
+    activityId: "miss-circle",
+    title: input.contest.contestName,
+    ...(input.liveVote.note ? { note: input.liveVote.note } : {}),
+    source: phase.source,
+    cta: {
+      label: input.liveVote.label,
+      url: input.liveVote.url,
+    },
+  };
 }
 
 export function selectHomeToday(input: {
@@ -262,8 +312,12 @@ export function selectHomeToday(input: {
   };
   const voteActions = selectHomeVoteActions(voteInput);
   const liveVote = selectHomeVoteAction(voteInput);
-  const liveVoteUrl =
-    liveVote.kind === "support-event" ? liveVote.url : undefined;
+  const contestHero = selectContestNowHero({
+    contest: input.contest,
+    liveVote,
+    now: input.now,
+  });
+  const liveVoteUrl = liveVote.url;
 
   const allTodayItems = selectSupportToday({
     contest: input.contest,
@@ -284,12 +338,15 @@ export function selectHomeToday(input: {
   // バナーで抑制したあとに上限を適用する。抑制で消えた枠は残りの項目が使う。
   // 期間中の投票は先頭に残し、締切ラベルは selector が導出した値だけを足す。
   const nowItems = rankHomeNowItems(
-    selectSupportNow({
-      supportEvents: input.supportEvents,
-      live: input.live,
-      radio: input.radio,
-      now: input.now,
-    }).filter((item) => !bannerCoversNowItem(input.banner, item)),
+    [
+      ...(contestHero ? [contestHero] : []),
+      ...selectSupportNow({
+        supportEvents: input.supportEvents,
+        live: input.live,
+        radio: input.radio,
+        now: input.now,
+      }).filter((item) => !bannerCoversNowItem(input.banner, item)),
+    ],
     liveVoteUrl,
   )
     .slice(0, HOME_NOW_LIMIT)

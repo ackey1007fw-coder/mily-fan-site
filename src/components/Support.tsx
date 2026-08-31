@@ -24,6 +24,8 @@ export function Support() {
     now,
   });
   const [voteAction, ...additionalVoteActions] = voteActions;
+  const gatewayVoteActions =
+    voteAction.kind === "support-event" ? additionalVoteActions : voteActions;
 
   return (
     <section id="support" className={`${SECTION_ANCHOR_OFFSET} px-4 py-6`}>
@@ -42,12 +44,14 @@ export function Support() {
           >
             応援・予定を見る
           </a>
-          <ExternalLink
-            href={voteAction.url}
-            className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
-          >
-            {voteAction.label}
-          </ExternalLink>
+          {voteAction.kind === "support-event" ? null : (
+            <ExternalLink
+              href={voteAction.url}
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
+            >
+              {voteAction.label}
+            </ExternalLink>
+          )}
           {additionalVoteActions.map((action) => (
             <ExternalLink
               key={action.url}
@@ -58,9 +62,9 @@ export function Support() {
             </ExternalLink>
           ))}
         </div>
-        {voteActions.some(({ note }) => note) ? (
+        {gatewayVoteActions.some(({ note }) => note) ? (
           <div className="mt-3 space-y-1">
-            {voteActions.map((action) =>
+            {gatewayVoteActions.map((action) =>
               action.note ? (
                 <p key={action.url} className="text-xs leading-5 text-ink-muted">
                   <span className="font-medium">{action.label}:</span>{" "}

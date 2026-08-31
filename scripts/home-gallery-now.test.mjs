@@ -13,14 +13,19 @@ import {
   selectHomeVoteAction,
 } from "../src/lib/homePortal.ts";
 import {
+  cinemaEventKey,
   isDrivePortraitPhoto,
   isMilyPortraitPhoto,
   isObjectWithoutPerson,
   isRadioTrioPhoto,
   isShowroomUiScreenshot,
   isSkyOrLandscapePhoto,
+  pickHomeGalleryPreview,
   selectGalleryEntries,
   selectGalleryPreview,
+} from "../src/lib/galleryItems.ts";
+import {
+  selectGalleryEntries as selectGalleryEntriesBeforeB41,
 } from "./fixtures/gallery-items-before-b41.ts";
 import { selectHomeToday } from "../src/lib/homeToday.ts";
 
@@ -101,6 +106,7 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
 
   it("does not leave a dead Paton button after 9/1 23:59 JST", () => {
     const ended = homeToday(END + 1);
+    const nowHero = ended.nowItems.find((item) => item.origin === "contest");
     assert.equal(
       ended.nowItems.some((item) => item.cta?.url === PATON_URL),
       false,
@@ -115,6 +121,11 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].deadlineLabel, undefined);
     assert.match(ended.voteActions[0].note ?? "", /3次審査進出/);
+    assert.ok(nowHero);
+    assert.equal(nowHero.cta?.url, contest.entryUrl);
+    assert.equal(nowHero.cta?.label, "ENTRY 734を応援する");
+    assert.match(nowHero.note ?? "", /3次審査進出/);
+    assert.doesNotMatch(nowHero.title, /CAMPUS GIRLS|FinalSTAGE|Paton/i);
   });
 
   it("keeps the live vote in the compact NOW cap even when SHOWROOM and radio are live", () => {
@@ -154,6 +165,7 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     assert.doesNotMatch(dashboard, /additionalVotes/);
     assert.doesNotMatch(dashboard, /contest\.entryUrl/);
     assert.doesNotMatch(dashboard, /paton\.jp/);
+    assert.match(dashboard, /今これ/);
 
     const during = homeToday(START);
     const nowVote = during.nowItems.find((item) => item.cta?.url === PATON_URL);
@@ -194,11 +206,24 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
       ended.dashboardVoteButtons.some((action) => action.url === PATON_URL),
       false,
     );
-    assert.equal(ended.dashboardVoteButtons.length, 1);
-    assert.equal(ended.dashboardVoteButtons[0].kind, "contest");
-    assert.equal(ended.dashboardVoteButtons[0].url, contest.entryUrl);
-    assert.equal(ended.dashboardVoteButtons[0].label, "ENTRY 734を応援する");
+    assert.equal(
+      ended.dashboardVoteButtons.some((action) => action.url === contest.entryUrl),
+      false,
+    );
+    assert.equal(ended.nowItems[0]?.origin, "contest");
+    assert.equal(ended.nowItems[0]?.cta?.url, contest.entryUrl);
+    assert.equal(ended.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
+  });
+
+  it("does not render a second Paton button from the vote guide", () => {
+    const guide = source("src/components/PatonVoteGuide.tsx");
+    const support = source("src/components/Support.tsx");
+    assert.match(guide, /isSupportEventUrlActive/);
+    assert.match(guide, /campusGirlsPatonVoteLink\.url/);
+    assert.doesNotMatch(guide, /href=\{campusGirlsPatonVoteLink\.url\}/);
+    assert.match(support, /voteAction\.kind === "support-event"/);
+    assert.match(support, /voteAction\.url/);
   });
 });
 
@@ -233,16 +258,48 @@ describe("Gallery portrait-first order", () => {
       }
     }
 
+    const cinemaKeys = preview
+      .map((entry) => cinemaEventKey(entry))
+      .filter((key) => key !== null);
+    assert.equal(new Set(cinemaKeys).size, cinemaKeys.length);
+    assert.ok(cinemaKeys.length <= 1);
+
     assert.deepEqual(
       preview.map((entry) => entry.key),
       [
         "mily-b38-01",
-        "mily-b38-03",
-        "mily-b38-04",
-        "mily-b38-05",
         "mily-b31-01",
         "mily-b30-01",
+        "mily-b29-01",
+        "mily-b28-01",
+        "mily-b27-07",
       ],
+    );
+  });
+
+  it("keeps one cinema cut and does not copy media arrays into the HOME picker", () => {
+    const preview = selectGalleryPreview(HOME_GALLERY_LIMIT);
+    const cinemaCount = preview.filter(
+      (entry) => cinemaEventKey(entry) === "mily-b38",
+    ).length;
+    assert.equal(cinemaCount, 1);
+    assert.equal(preview[0]?.key, "mily-b38-01");
+    assert.equal(
+      preview.filter((entry) => entry.key.startsWith("mily-b38-")).length,
+      1,
+    );
+
+    const selector = source("src/lib/galleryItems.ts");
+    assert.match(selector, /pickHomeGalleryPreview/);
+    assert.match(selector, /cinemaEventKey/);
+    assert.doesNotMatch(selector, /basePath: "\/media\//);
+    assert.doesNotMatch(selector, /const photos = \[/);
+    assert.match(source("src/components/Gallery.tsx"), /selectGalleryPreview\(limit\)/);
+    assert.equal(
+      pickHomeGalleryPreview(selectGalleryEntries(), HOME_GALLERY_LIMIT).map(
+        (entry) => entry.key,
+      ).join(),
+      preview.map((entry) => entry.key).join(),
     );
   });
 
@@ -261,7 +318,9 @@ describe("Gallery portrait-first order", () => {
     assert.ok(firstPortraitEnd > 0);
     assert.ok(firstMixch >= firstPortraitEnd);
 
-    const mixch = entries.filter((entry) => entry.kind === "mixch");
+    const mixch = selectGalleryEntriesBeforeB41().filter(
+      (entry) => entry.kind === "mixch",
+    );
     assert.equal(mixch.length, 3);
     assert.equal(
       entries.some(
@@ -286,8 +345,13 @@ describe("Gallery portrait-first order", () => {
     assert.doesNotMatch(selector, /basePath: "\/media\//);
     assert.doesNotMatch(selector, /const photos = \[/);
     assert.equal(
-      selectGalleryEntries().filter((entry) => entry.kind === "mixch").length,
+      selectGalleryEntriesBeforeB41().filter((entry) => entry.kind === "mixch")
+        .length,
       3,
+    );
+    assert.ok(
+      selectGalleryEntries().filter((entry) => entry.kind === "mixch").length >=
+        3,
     );
   });
 });
@@ -310,5 +374,35 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.equal(afterPaton.url, contest.entryUrl);
     assert.match(afterPaton.note ?? "", /9\/3/);
     assert.match(afterPaton.note ?? "", /9\/13/);
+  });
+
+  it("makes 3rd-round support the HOME now-path from 9/2 through 9/13", () => {
+    const approaching = homeToday(Date.parse("2026-09-02T00:00:00+09:00"));
+    const during = homeToday(Date.parse("2026-09-03T12:00:00+09:00"));
+    const lastDay = homeToday(Date.parse("2026-09-13T23:59:00+09:00"));
+    const after = homeToday(Date.parse("2026-09-14T00:00:00+09:00"));
+    const stillPaton = homeToday(END);
+
+    for (const view of [approaching, during, lastDay]) {
+      assert.equal(view.nowItems.some((item) => item.cta?.url === PATON_URL), false);
+      assert.equal(view.nowItems[0]?.origin, "contest");
+      assert.equal(view.nowItems[0]?.cta?.url, contest.entryUrl);
+      assert.equal(view.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
+      assert.match(view.nowItems[0]?.note ?? "", /3次審査進出/);
+      assert.match(view.nowItems[0]?.note ?? "", /9\/3/);
+      assert.match(view.nowItems[0]?.note ?? "", /9\/13/);
+      assert.doesNotMatch(
+        `${view.nowItems[0]?.title}\n${view.nowItems[0]?.note ?? ""}`,
+        /CAMPUS GIRLS|FinalSTAGE|Paton/,
+      );
+      assert.equal(view.voteActions[0].kind, "contest");
+      assert.doesNotMatch(JSON.stringify(view.nowItems), /12:00|05:00|21:59/);
+    }
+
+    assert.equal(stillPaton.nowItems[0]?.cta?.url, PATON_URL);
+    assert.equal(stillPaton.nowItems.some((item) => item.origin === "contest"), false);
+    assert.equal(after.nowItems.some((item) => item.origin === "contest"), false);
+    assert.equal(after.voteActions[0].url, contest.entryUrl);
+    assert.equal(after.dashboardVoteButtons[0]?.url, contest.entryUrl);
   });
 });

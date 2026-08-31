@@ -24,7 +24,8 @@ import { ExternalLink } from "./ExternalLink";
  * CAMPUS GIRLS 2027 予選A FinalSTAGE の投票手順。
  * 期間中だけホームと Support に出し、終了後は NEWS 履歴へ残す。
  * 既存の本人写真は流用せず、オーナー提供の8/28 Instagram Storyだけを表示する。
- * Storyのリンクステッカーの代わりに、下の確認済みPaton CTAへつなぐ。
+ * Storyのリンクステッカーの代わりに、HOME / Support の確認済み投票CTAへつなぐ。
+ * 期間中の Paton ボタン自体は NOW / Hero 側の1件に任せ、ここでは重ねない。
  */
 export function PatonVoteGuide() {
   const now = useSupportEventClock();
@@ -100,7 +101,8 @@ export function PatonVoteGuide() {
               パトン投票3日目はここから❣️
             </p>
             <p className="mt-1 text-xs leading-5 text-ink-muted">
-              Story内のリンクはサイト上では押せないため、下の投票ボタンから直接みりぃのページへ進めます。
+              Story内のリンクはサイト上では押せないため、下の「今日のみりぃ」または
+              Support の投票ボタンから直接みりぃのページへ進めます。
             </p>
           </figcaption>
         </figure>
@@ -188,7 +190,7 @@ export function PatonVoteGuide() {
         </ol>
 
         <p className="mt-4 text-sm leading-6 text-ink-muted">
-          下の投票ボタンから三橋莉子（みりぃ）のページが直接開きます。あとは右下のギフトから、1日1回無料拍手を送ると投票完了です。
+          投票ボタンから三橋莉子（みりぃ）のページが直接開きます。あとは右下のギフトから、1日1回無料拍手を送ると投票完了です。
         </p>
 
         <blockquote className="mt-4 rounded-2xl bg-paper-card/80 px-4 py-3">
@@ -204,12 +206,6 @@ export function PatonVoteGuide() {
             className="inline-flex min-h-11 items-center justify-center rounded-full bg-apricot px-5 py-2.5 text-sm font-semibold text-white hover:bg-apricot-ink"
           >
             {CAMPUS_GIRLS_FINAL_STAGE_INSTAGRAM_CTA_LABEL}
-          </ExternalLink>
-          <ExternalLink
-            href={campusGirlsPatonVoteLink.url}
-            className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep"
-          >
-            {campusGirlsPatonVoteLink.label}
           </ExternalLink>
           <ExternalLink
             href={PATON_VOTE_HOW_TO_X_URL}

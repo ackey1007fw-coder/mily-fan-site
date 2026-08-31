@@ -127,6 +127,59 @@ export function selectGalleryEntries(): GalleryEntry[] {
   ];
 }
 
+/**
+ * 同じイベントの映画館カット（basePath に cinema、同一 mily-bNN バッチ）。
+ * HOME preview で連続して並ぶと映画の夜だけに見えるため、イベント単位で識別する。
+ */
+export function cinemaEventKey(entry: GalleryEntry): string | null {
+  if (entry.kind !== "media") return null;
+  if (entry.item.kind !== "photo") return null;
+  if (!/cinema/.test(entry.item.basePath)) return null;
+  const match = entry.item.id.match(/^(mily-b\d+)/);
+  return match?.[1] ?? entry.item.id;
+}
+
+/**
+ * HOME の先頭窓。ポートレート優先の並びは維持したまま、同じ映画館イベントの
+ * 連続カットは1枚だけ先に出し、残りは他の本人カットの後ろへ送る。
+ * 正本配列はコピーせず、渡された entries を選ぶだけ。
+ */
+export function pickHomeGalleryPreview(
+  entries: readonly GalleryEntry[],
+  limit: number,
+): GalleryEntry[] {
+  const picked: GalleryEntry[] = [];
+  const seenCinemaEvents = new Set<string>();
+  const deferredCinema: GalleryEntry[] = [];
+
+  for (const entry of entries) {
+    if (picked.length >= limit) break;
+    const cinemaKey = cinemaEventKey(entry);
+    if (cinemaKey && seenCinemaEvents.has(cinemaKey)) {
+      deferredCinema.push(entry);
+      continue;
+    }
+    if (cinemaKey) seenCinemaEvents.add(cinemaKey);
+    picked.push(entry);
+  }
+
+  for (const entry of deferredCinema) {
+    if (picked.length >= limit) break;
+    picked.push(entry);
+  }
+
+  if (picked.length < limit) {
+    const used = new Set(picked.map((entry) => entry.key));
+    for (const entry of entries) {
+      if (picked.length >= limit) break;
+      if (used.has(entry.key)) continue;
+      picked.push(entry);
+    }
+  }
+
+  return picked;
+}
+
 export function selectGalleryPreview(limit: number): GalleryEntry[] {
-  return selectGalleryEntries().slice(0, limit);
+  return pickHomeGalleryPreview(selectGalleryEntries(), limit);
 }
