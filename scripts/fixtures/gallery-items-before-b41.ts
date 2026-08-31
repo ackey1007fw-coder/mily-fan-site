@@ -5,6 +5,7 @@ import {
 } from "../../src/lib/galleryItems.ts";
 
 const laterGalleryIds = new Set([
+  "mily-b44-01-paton-vote-15x-day-story",
   "mily-b43-02-campus-girls-hold-second-story",
   "mily-b43-01-paton-vote-day5-story",
   "mily-b41-01-night-showroom-story",
