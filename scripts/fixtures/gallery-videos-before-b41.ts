@@ -5,6 +5,9 @@ import {
 } from "../../src/data/galleryVideos.ts";
 
 const laterVideoIds = new Set([
+  "mily-b44-02-paton-vote-first-place-story",
+  "mily-b44-01-paton-vote-15x-emergency-story",
+  "mily-b44-04-showroom-30-day-anniversary-story",
   "mily-b43-02-campus-girls-hold-second-story",
   "mily-b43-01-paton-vote-day5-story",
   "mily-b41-01-night-showroom-story",

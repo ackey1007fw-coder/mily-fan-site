@@ -26,6 +26,9 @@ import { nightStoryB41Video } from "./nightStoryB41Video.ts";
 import { patonVoteDay4StoryVideo } from "./patonVoteDay4StoryVideo.ts";
 import { patonVoteDay5StoryVideo } from "./patonVoteDay5StoryVideo.ts";
 import { campusGirlsHoldSecondStoryVideo } from "./campusGirlsHoldSecondStoryVideo.ts";
+import { patonVoteFifteenXStoryVideo } from "./patonVoteFifteenXStoryVideo.ts";
+import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.ts";
+import { showroomThirtyDayAnniversaryStoryVideo } from "./showroomThirtyDayAnniversaryStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -178,6 +181,77 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-08-31-paton-first-place-story",
+    date: "2026-08-31",
+    sameDayOrder: 3,
+    activityIds: ["campus-girls"],
+    title: "待ってー！現在1位だ。31日は1.5倍DAY",
+    body: "8月31日、みりぃがInstagram Storyで、Paton投票の投稿時点1位（102,700pt）を伝え、「31日は1.5倍DAYだからねっ！！」と呼びかけました。1位と得点は投稿時点の記録であり、現在の順位を示すものではありません。",
+    sourceLabel: patonVoteFirstPlaceStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: patonVoteFirstPlaceStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "待ってー！現在1位だ\n" +
+        "31日は1.5倍DAYだからねっ！！",
+    },
+  },
+  {
+    id: "2026-08-31-paton-15x-day-story",
+    date: "2026-08-31",
+    sameDayOrder: 2,
+    activityIds: ["campus-girls"],
+    title: "緊急告知：8/31はPaton投票1.5倍デー",
+    body: "8月31日、みりぃがInstagram Storyで、CAMPUS GIRLS公式が告知したPaton投票1.5倍デーを緊急案内しました。公式発表では8月31日0:00〜23:59に投票したポイントが1.5倍になると伝えられています。",
+    sourceLabel: patonVoteFifteenXStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: patonVoteFifteenXStoryVideo,
+    message: {
+      label: "Storyに写っていた公式告知",
+      text:
+        "明日はpaton投票が1.5倍になるよーん！！！！\n" +
+        "8/31(月)00:00〜23:59の間に投票してくれたポイントが1.5倍になるからぜひ投票お願いします！！\n" +
+        "#キャンパスガールズ2027",
+    },
+  },
+  {
+    id: "2026-08-31-paton-vote-how-to-story",
+    date: "2026-08-31",
+    sameDayOrder: 1,
+    activityIds: ["campus-girls"],
+    title: "Instagram Storyでもパトン投票のやり方を案内",
+    body: "8月31日、みりぃがInstagram StoryでCAMPUS GIRLS 2027のPaton投票方法を案内しました。Patonでキャンパスガールズ2027を選び、三橋莉子（みりぃ）のページからギフトを開いて1日1回無料拍手を送ると投票できます。応援コメントも募集しています。投票は9月1日までです。",
+    sourceLabel: "Instagram Story",
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: PATON_VOTE_HOW_TO_CTA_LABEL,
+        url: PATON_VOTE_HOW_TO_CTA_URL,
+      },
+    ],
+    media: campusGirlsPatonPortraitImage,
+    message: {
+      label: "みりぃの案内",
+      text: patonVoteHowToSpokenMessage,
+    },
+  },
+  {
     id: "2026-08-30-campus-girls-hold-second-story",
     date: "2026-08-30",
     sameDayOrder: 3,
@@ -241,6 +315,32 @@ export const news: NewsItem[] = [
       text:
         "#ミクチャ で動画を投稿したよ！見に来てね！\n" +
         "『配信＆ムービーは今日が最終日\u{270A}\u{1F3FB}\u{2763}\u{FE0F}絶対に本戦行くんだ\u{FF01}\u{FF01}\u{FF01}\u{FF01}\u{FF01}\u{FF01}皆様の力を貸してください\u{1F979}\u{1F64F}\u{1F3FB}\u{2728}』\u{3000}https://mixch.tv/m/UBHJplv4",
+    },
+  },
+  {
+    id: "2026-08-30-showroom-30-day-story",
+    date: "2026-08-30",
+    activityIds: ["live-stream"],
+    title: "SHOWROOM 30日連続配信記念日",
+    body: "8月30日、みりぃがInstagram StoryでSHOWROOM 30日連続配信記念日を案内しました。投稿時点では午前3:30で、朝7:30の配信予定が書かれています。配信前の記録です。",
+    sourceLabel: showroomThirtyDayAnniversaryStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: "SHOWROOMを見る",
+        url: "https://www.showroom-live.com/r/circle2026_0734",
+      },
+    ],
+    media: showroomThirtyDayAnniversaryStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "【8/30（日）】\n" +
+        "SHOWROOM\n" +
+        "30日連続配信記念日\n" +
+        "現在3:30。朝7:30配信予定\n" +
+        "#ミスサー #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークル #ミスサークルコンテスト2026",
     },
   },
   {
