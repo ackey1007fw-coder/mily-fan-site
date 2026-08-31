@@ -28,6 +28,7 @@ import { patonVoteDay5StoryVideo } from "./patonVoteDay5StoryVideo.ts";
 import { campusGirlsHoldSecondStoryVideo } from "./campusGirlsHoldSecondStoryVideo.ts";
 import { patonVoteFifteenXStoryVideo } from "./patonVoteFifteenXStoryVideo.ts";
 import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.ts";
+import { patonVoteVoiceStoryVideo } from "./patonVoteVoiceStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -179,6 +180,37 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-08-31-paton-vote-voice-story",
+    date: "2026-08-31",
+    sameDayOrder: 7,
+    activityIds: ["campus-girls"],
+    title: "キャンパスガールズ2027に出場中です。投票は9月1日まで",
+    body: "8月31日、みりぃがInstagram Storyで、CAMPUS GIRLS 2027のPaton投票が9月1日までであることと、31日は応援の気持ちが1.5倍になって届くことを肉声で呼びかけました。画面上の「投票はこちらから」はPaton本人ページへの導線です。1.5倍は31日の投票枠の案内です。",
+    sourceLabel: patonVoteVoiceStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: patonVoteVoiceStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "キャンパスガールズ2027に出場中です\n" +
+        "パトン投票は明日の9月1日まで\n" +
+        "ぜひぜひ明日まで投票してね\n" +
+        "本日31日はなんと1.5倍で\n" +
+        "みんなの応援をする気持ちが1.5倍になって私に届きます\n" +
+        "ぜひぜひ本日中に、あと一時間ぐらいかな\n" +
+        "絶対に投票を済ませておいてね\n" +
+        "そして明日まで投票をお願いします\n" +
+        "頑張るぞ！",
+    },
+  },
   {
     id: "2026-08-31-paton-first-place-story",
     date: "2026-08-31",

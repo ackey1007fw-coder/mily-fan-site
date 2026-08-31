@@ -50,20 +50,21 @@ describe("2026-08-30 morning SHOWROOM 6:00 X post — Latest entry", () => {
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(news.filter((candidate) => candidate.source === SOURCE).length, 1);
-    assert.equal(news.length, 66);
-    assert.equal(ordered[0]?.id, "2026-08-31-paton-first-place-story");
-    assert.equal(ordered[1]?.id, "2026-08-31-paton-15x-day-story");
-    assert.equal(ordered[2]?.id, "2026-08-31-paton-vote-how-to-story");
-    assert.equal(ordered[3]?.id, "2026-08-31-morning-stream-thanks");
-    assert.equal(ordered[4]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[5]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[6]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[7]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[8]?.id, NEWS_ID);
-    assert.equal(ordered[9]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[10]?.id, "2026-08-30-showroom-30-day-story");
-    assert.equal(ordered[11]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[12]?.id, "2026-08-29-paton-vote-day-5-story");
+    assert.equal(news.length, 67);
+    assert.equal(ordered[0]?.id, "2026-08-31-paton-vote-voice-story");
+    assert.equal(ordered[1]?.id, "2026-08-31-paton-first-place-story");
+    assert.equal(ordered[2]?.id, "2026-08-31-paton-15x-day-story");
+    assert.equal(ordered[3]?.id, "2026-08-31-paton-vote-how-to-story");
+    assert.equal(ordered[4]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[5]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[6]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[7]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[8]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[9]?.id, NEWS_ID);
+    assert.equal(ordered[10]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[11]?.id, "2026-08-30-showroom-30-day-story");
+    assert.equal(ordered[12]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[13]?.id, "2026-08-29-paton-vote-day-5-story");
     assert.equal(entry.date, "2026-08-30");
     assert.equal(entry.sameDayOrder, 2);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
@@ -201,7 +202,7 @@ describe("2026-08-30 morning SHOWROOM 6:00 X post — scope", () => {
     assert.equal(liveNews[3]?.id, NEWS_ID);
     assert.equal(liveNews[4]?.id, "2026-08-30-showroom-30-day-story");
     assert.equal(missNews[0]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(campusNews[0]?.id, "2026-08-31-paton-first-place-story");
+    assert.equal(campusNews[0]?.id, "2026-08-31-paton-vote-voice-story");
     assert.equal(
       campusNews.some((entry) => entry.id === NEWS_ID),
       false,
