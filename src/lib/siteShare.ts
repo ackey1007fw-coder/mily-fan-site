@@ -5,7 +5,11 @@ import {
   schedulePhase,
   type SchedulePhase,
 } from "../data/radio.ts";
-import { campusGirlsFinalStagePatonVote, supportEvents, type SupportEvent } from "../data/supportEvents.ts";
+import {
+  campusGirlsFinalStagePatonVote,
+  supportEvents,
+  type SupportEvent,
+} from "../data/supportEvents.ts";
 import { patonVoteLiveShareText } from "./patonVoteLiveCopy.ts";
 import {
   displayStatus,
@@ -39,11 +43,13 @@ type ShareTopic = {
   id: string;
   priority: number;
   text: string;
+  campaignHashtag?: string;
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const UPCOMING_CONTEST_DAYS = 7;
 const MAX_SHARE_TOPICS = 3;
+const PERSON_HASHTAG = "#三橋莉子";
 
 function safeRadioPhase(now: number): SchedulePhase {
   try {
@@ -92,6 +98,9 @@ function supportEventShareTopics(now: number): ShareTopic[] {
         id: event.id,
         priority: 200 + (event.priority ?? 0),
         text: `${share}${end ? `（${end}まで）` : ""}`,
+        ...(event.shareHashtag
+          ? { campaignHashtag: event.shareHashtag }
+          : {}),
       };
     });
 }
@@ -110,6 +119,9 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       id: "contest-active",
       priority: 180,
       text: `${contest.contestName}の${phaseLabel}を応援してください🔥（${formatShortTokyoDate(phase.end)}まで）`,
+      ...(contest.shareHashtag
+        ? { campaignHashtag: contest.shareHashtag }
+        : {}),
     };
   }
 
@@ -118,6 +130,9 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       id: "contest-upcoming",
       priority: 160,
       text: `${formatShortTokyoDate(phase.start)}から${contest.contestName}の${phaseLabel}が始まります🔥`,
+      ...(contest.shareHashtag
+        ? { campaignHashtag: contest.shareHashtag }
+        : {}),
     };
   }
 
@@ -137,12 +152,20 @@ export function siteShareText(context: SiteShareContext = {}): string {
     .sort((a, b) => b.priority - a.priority)
     .slice(0, MAX_SHARE_TOPICS);
 
-  if (topics.length === 0) return site.description;
+  const campaignHashtag = topics.find(
+    (topic) => topic.campaignHashtag !== undefined,
+  )?.campaignHashtag;
+  const hashtagLine = [PERSON_HASHTAG, campaignHashtag]
+    .filter((hashtag): hashtag is string => hashtag !== undefined)
+    .join(" ");
+
+  if (topics.length === 0) return [site.description, hashtagLine].join("\n");
 
   return [
     "みりぃ（三橋莉子 / Mily）さんを応援しています🍅✨",
     ...topics.map(({ text }) => text),
     "最新の活動・応援情報はこちら👇",
+    hashtagLine,
   ].join("\n");
 }
 
