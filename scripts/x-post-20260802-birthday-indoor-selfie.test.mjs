@@ -147,7 +147,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     const gallery = media.find((entry) => entry.id === "mily-b29-01");
 
     assert.equal(gallery, birthdayIndoorSelfiePhoto);
-    assert.equal(visible[8], birthdayIndoorSelfiePhoto);
+    assert.equal(visible[9], birthdayIndoorSelfiePhoto);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.published, true);
     assert.equal(gallery.provenance, "sns-post");

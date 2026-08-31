@@ -145,7 +145,7 @@ describe("2026-08-06 OHAYO white polo — NEWS + Gallery", () => {
 
   it("publishes Gallery + NEWS JPEG without hotlinks or published duplicates", async () => {
     const visible = visibleMedia(media);
-    assert.equal(visible[7], ohayoWhitePoloPeacePhoto);
+    assert.equal(visible[8], ohayoWhitePoloPeacePhoto);
     const newsFile = publicFile(ohayoWhitePoloPeaceImage.src);
     assert.equal((await stat(newsFile)).size, 190_333);
     assert.equal(await sha256(newsFile), OHAYO_NEWS_SHA);
@@ -184,7 +184,7 @@ describe("2026-08-05 panda past pic — NEWS + Gallery", () => {
 
   it("publishes a new selfie, not b06 wink", async () => {
     const visible = visibleMedia(media);
-    assert.equal(visible[6], pandaPastPicPhoto);
+    assert.equal(visible[7], pandaPastPicPhoto);
     const newsFile = publicFile(pandaPastPicImage.src);
     assert.equal(await sha256(newsFile), PANDA_NEWS_SHA);
     await assertNotDuplicateOfPublished(PANDA_NEWS_SHA);
