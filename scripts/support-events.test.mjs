@@ -41,6 +41,19 @@ describe("SupportEvent foundation", () => {
     );
     assert.equal(isValidSupportEvent({ ...baseEvent, shareText: "" }), false);
     assert.equal(isValidSupportEvent({ ...baseEvent, shareText: 1 }), false);
+    assert.equal(
+      isValidSupportEvent({ ...baseEvent, shareHashtags: ["キャンガル"] }),
+      true,
+    );
+    assert.equal(isValidSupportEvent({ ...baseEvent, shareHashtags: [] }), false);
+    assert.equal(
+      isValidSupportEvent({ ...baseEvent, shareHashtags: ["#キャンガル"] }),
+      false,
+    );
+    assert.equal(
+      isValidSupportEvent({ ...baseEvent, shareHashtags: ["キャン ガル"] }),
+      false,
+    );
   });
 
   it("accepts only CTA link ids from the central links registry", () => {
