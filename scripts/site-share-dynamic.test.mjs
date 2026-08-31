@@ -79,4 +79,22 @@ describe("date-aware site share copy", () => {
 
     assert.ok(payload.text.length + 24 < 280);
   });
+
+  it("mentions Paton 1.5x only during the confirmed 8/31 bonus window", () => {
+    const during = siteShareText({
+      now: at("2026-08-31T12:00:00+09:00"),
+      radioPhase: "idle",
+    });
+    const after = siteShareText({
+      now: at("2026-08-31T23:59:00+09:00") + 1,
+      radioPhase: "idle",
+    });
+
+    assert.match(during, /Paton投票/);
+    assert.match(during, /1\.5倍DAY/);
+    assert.match(after, /Paton投票/);
+    assert.doesNotMatch(after, /1\.5x|1\.5倍/);
+    assert.ok(during.length + 24 < 280);
+    assert.ok(after.length + 24 < 280);
+  });
 });

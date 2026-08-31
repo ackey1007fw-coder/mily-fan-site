@@ -5,7 +5,8 @@ import {
   schedulePhase,
   type SchedulePhase,
 } from "../data/radio.ts";
-import { supportEvents, type SupportEvent } from "../data/supportEvents.ts";
+import { campusGirlsFinalStagePatonVote, supportEvents, type SupportEvent } from "../data/supportEvents.ts";
+import { patonVoteLiveShareText } from "./patonVoteLiveCopy.ts";
 import {
   displayStatus,
   formatScheduleEndLabel,
@@ -83,10 +84,14 @@ function supportEventShareTopics(now: number): ShareTopic[] {
     )
     .map((event) => {
       const end = compactEndLabel(event);
+      const share =
+        event.id === campusGirlsFinalStagePatonVote.id
+          ? patonVoteLiveShareText(event.shareText ?? "", now)
+          : event.shareText;
       return {
         id: event.id,
         priority: 200 + (event.priority ?? 0),
-        text: `${event.shareText}${end ? `（${end}まで）` : ""}`,
+        text: `${share}${end ? `（${end}まで）` : ""}`,
       };
     });
 }

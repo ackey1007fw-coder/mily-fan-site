@@ -360,19 +360,19 @@ export function selectHomeToday(input: {
   )
     .slice(0, HOME_NOW_LIMIT)
     .map((item) => {
-      if (
-        !liveVoteUrl ||
-        item.cta?.url !== liveVoteUrl ||
-        !liveVote.deadlineLabel
-      ) {
-        return item;
+      if (!liveVoteUrl || item.cta?.url !== liveVoteUrl) return item;
+      const note = liveVote.note ?? item.note;
+      const deadline = liveVote.deadlineLabel;
+      if (!deadline) {
+        if (note === item.note) return item;
+        return note ? { ...item, note } : item;
       }
-      if (item.note?.includes(liveVote.deadlineLabel)) return item;
+      if (note?.includes(deadline)) {
+        return note === item.note ? item : { ...item, note };
+      }
       return {
         ...item,
-        note: item.note
-          ? `${item.note} / ${liveVote.deadlineLabel}`
-          : liveVote.deadlineLabel,
+        note: note ? `${note} / ${deadline}` : deadline,
       };
     });
 

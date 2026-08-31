@@ -6,6 +6,12 @@ import { fileURLToPath } from "node:url";
 import { radioProgram } from "../shared/radio-program.js";
 import { contest } from "../src/data/contest.ts";
 import { links } from "../src/data/links.ts";
+import { mixchFinalDayMovie } from "../src/data/mixchMovies.ts";
+import { news } from "../src/data/news.ts";
+import {
+  MIXCH_FINAL_DAY_NEWS_ID,
+  PATON_FIFTEEN_X_NEWS_IDS,
+} from "../src/data/patonVoteBonus.ts";
 import { supportEvents } from "../src/data/supportEvents.ts";
 import {
   GALLERY_ARCHIVE_INITIAL,
@@ -26,12 +32,18 @@ import {
 } from "../src/lib/galleryItems.ts";
 import * as galleryBeforeLaterBatches from "./fixtures/gallery-items-before-b41.ts";
 import { selectHomeToday } from "../src/lib/homeToday.ts";
+import { selectHomeHeroNews } from "../src/lib/patonVoteLiveCopy.ts";
+import { siteShareText } from "../src/lib/siteShare.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = (relative) => readFileSync(path.join(root, relative), "utf8");
 const PATON_URL = "https://paton.jp/event/entrant/11380";
 const START = Date.parse("2026-08-26T18:00:00+09:00");
+const BONUS_START = Date.parse("2026-08-31T00:00:00+09:00");
+const BONUS_END = Date.parse("2026-08-31T23:59:00+09:00");
 const END = Date.parse("2026-09-01T23:59:00+09:00");
+const FIFTEEN_X = /1\.5x|1\.5倍/;
+const MIXCH_LIVE = /mixch\.tv|今日が最終日/;
 
 const unknownLive = {
   state: "unknown",
@@ -403,5 +415,118 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.equal(after.nowItems.some((item) => item.origin === "contest"), false);
     assert.equal(after.voteActions[0].url, contest.entryUrl);
     assert.equal(after.dashboardVoteButtons[0]?.url, contest.entryUrl);
+  });
+});
+
+function liveHomeCopy(now) {
+  const view = homeToday(now);
+  const hero = selectHomeHeroNews(news, now);
+  return {
+    view,
+    hero,
+    text: [
+      JSON.stringify(view.nowItems),
+      JSON.stringify(view.voteActions),
+      siteShareText({ now, radioPhase: "idle" }),
+      hero?.title ?? "",
+      hero?.body ?? "",
+    ].join("\n"),
+  };
+}
+
+describe("Paton 1.5x bonus ends at 8/31 23:59 JST", () => {
+  it("keeps exactly one live Paton CTA through 9/1 23:59 JST", () => {
+    for (const now of [START, BONUS_END, BONUS_END + 1, END]) {
+      const view = homeToday(now);
+      assert.equal(
+        view.nowItems.filter((item) => item.cta?.url === PATON_URL).length,
+        1,
+      );
+      assert.equal(
+        view.voteActions.filter((action) => action.url === PATON_URL).length,
+        1,
+      );
+      assert.equal(view.voteActions[0].url, PATON_URL);
+      assert.equal(view.voteActions[0].label, "Patonでみりぃに投票する");
+    }
+  });
+
+  it("allows 1.5x on 8/31 NEWS and live copy until 23:59 JST", () => {
+    for (const id of PATON_FIFTEEN_X_NEWS_IDS) {
+      const item = news.find((entry) => entry.id === id);
+      assert.ok(item, id);
+      assert.match(`${item.title}\n${item.body}`, FIFTEEN_X);
+    }
+
+    const during = liveHomeCopy(BONUS_END);
+    assert.match(during.text, FIFTEEN_X);
+    assert.equal(during.hero?.id, "2026-08-31-paton-first-place-story");
+    assert.match(during.view.nowItems[0]?.note ?? "", /1\.5倍/);
+    assert.match(during.view.voteActions[0].note ?? "", /1\.5倍/);
+    assert.doesNotMatch(during.view.voteActions[0].label, FIFTEEN_X);
+    assert.doesNotMatch(during.view.voteActions[0].deadlineLabel ?? "", FIFTEEN_X);
+  });
+
+  it("strips 1.5x from live HOME/now/vote/share/hero after 8/31 23:59 JST", () => {
+    const after = liveHomeCopy(BONUS_END + 1);
+    assert.equal(after.view.voteActions[0].url, PATON_URL);
+    assert.doesNotMatch(after.text, FIFTEEN_X);
+    assert.notEqual(after.hero?.id, "2026-08-31-paton-first-place-story");
+    assert.equal(
+      PATON_FIFTEEN_X_NEWS_IDS.includes(after.hero?.id ?? ""),
+      false,
+    );
+
+    for (const id of PATON_FIFTEEN_X_NEWS_IDS) {
+      const item = news.find((entry) => entry.id === id);
+      assert.ok(item, id);
+      assert.match(`${item.title}\n${item.body}`, FIFTEEN_X);
+    }
+  });
+});
+
+describe("Mixch final-day stays an 8/30 archive", () => {
+  it("does not present Mixch final-day as a live HOME/now deadline", () => {
+    const mixchNews = news.find((entry) => entry.id === MIXCH_FINAL_DAY_NEWS_ID);
+    assert.ok(mixchNews);
+    assert.equal(mixchFinalDayMovie.title, "配信＆ムービーは今日が最終日");
+    assert.equal(mixchNews.media, mixchFinalDayMovie);
+    assert.equal(
+      selectGalleryEntries().some(
+        (entry) => entry.kind === "mixch" && entry.item === mixchFinalDayMovie,
+      ),
+      true,
+    );
+
+    for (const now of [
+      Date.parse("2026-08-30T12:00:00+09:00"),
+      BONUS_START,
+      BONUS_END + 1,
+      END,
+    ]) {
+      const { view, hero, text } = liveHomeCopy(now);
+      assert.equal(
+        view.nowItems.some(
+          (item) =>
+            MIXCH_LIVE.test(`${item.title}\n${item.note ?? ""}\n${item.cta?.url ?? ""}`),
+        ),
+        false,
+      );
+      assert.notEqual(hero?.id, MIXCH_FINAL_DAY_NEWS_ID);
+      assert.doesNotMatch(
+        [
+          JSON.stringify(view.nowItems),
+          JSON.stringify(view.voteActions),
+          siteShareText({ now, radioPhase: "idle" }),
+        ].join("\n"),
+        MIXCH_LIVE,
+      );
+      assert.equal(text.includes(mixchFinalDayMovie.title), false);
+    }
+
+    assert.equal(
+      supportEvents.some((event) => /mixch|最終日/.test(`${event.id}\n${event.title}`)),
+      false,
+    );
   });
 });

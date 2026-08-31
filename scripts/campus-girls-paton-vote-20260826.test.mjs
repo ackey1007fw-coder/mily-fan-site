@@ -169,7 +169,15 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       END + 1,
     );
     assert.equal(nextSupportEventBoundary(START - 1), START);
-    assert.equal(nextSupportEventBoundary(START), END + 1);
+    assert.equal(nextSupportEventBoundary(START), Date.parse("2026-08-31T00:00:00+09:00"));
+    assert.equal(
+      nextSupportEventBoundary(Date.parse("2026-08-31T00:00:00+09:00")),
+      Date.parse("2026-08-31T23:59:00+09:00") + 1,
+    );
+    assert.equal(
+      nextSupportEventBoundary(Date.parse("2026-08-31T23:59:00+09:00") + 1),
+      END + 1,
+    );
     assert.equal(nextSupportEventBoundary(END), END + 1);
     assert.equal(nextSupportEventBoundary(END + 1), null);
   });
