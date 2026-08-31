@@ -210,7 +210,7 @@ export const news: NewsItem[] = [
     sameDayOrder: 2,
     activityIds: ["campus-girls"],
     title: "緊急告知：8/31はPaton投票1.5倍デー",
-    body: "8月31日、みりぃがInstagram Storyで、CAMPUS GIRLS公式が告知したPaton投票1.5倍デーを緊急案内しました。公式発表では8月31日0:00〜23:59に投票したポイントが1.5倍になると伝えられています。",
+    body: "8月31日、みりぃがInstagram Storyで、CAMPUS GIRLS公式が告知したPaton投票1.5倍デーを緊急案内しました。画面には、明日はPaton投票が1.5倍になることと、投票のお願いが書かれています。",
     sourceLabel: patonVoteFifteenXStoryVideo.sourceLabel,
     relatedUrl: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
@@ -224,8 +224,10 @@ export const news: NewsItem[] = [
     message: {
       label: "Storyに写っていた公式告知",
       text:
-        "明日はpaton投票が1.5倍になるよーん！！！！\n" +
-        "8/31(月)00:00〜23:59の間に投票してくれたポイントが1.5倍になるからぜひ投票お願いします！！\n" +
+        "緊急告知\n" +
+        "明日はpaton投票が\n" +
+        "《1.5倍》になります\n" +
+        "ぜひ投票お願いします\n" +
         "#キャンパスガールズ2027",
     },
   },
@@ -339,8 +341,7 @@ export const news: NewsItem[] = [
         "【8/30（日）】\n" +
         "SHOWROOM\n" +
         "30日連続配信記念日\n" +
-        "現在3:30。朝7:30配信予定\n" +
-        "#ミスサー #ミスサークルコンテスト #ミスサー2026 #ミスサークル2026 #ミスサークル #ミスサークルコンテスト2026",
+        "現在3:30。朝7:30配信予定",
     },
   },
   {

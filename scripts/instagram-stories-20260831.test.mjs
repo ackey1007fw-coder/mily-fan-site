@@ -369,16 +369,27 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.equal(firstPlace.body.includes("Mixch"), false);
 
     assert.match(fifteenX.body, /1\.5倍/);
-    assert.match(fifteenX.body, /8月31日0:00〜23:59/);
-    assert.match(fifteenX.message.text, /paton投票が1\.5倍/);
+    assert.match(fifteenX.body, /緊急案内/);
+    assert.doesNotMatch(fifteenX.body, /0:00|23:59|なるよーん/);
+    assert.match(fifteenX.message.text, /緊急告知/);
+    assert.match(fifteenX.message.text, /明日はpaton投票が/);
+    assert.match(fifteenX.message.text, /《1\.5倍》になります/);
+    assert.match(fifteenX.message.text, /ぜひ投票お願いします/);
+    assert.match(fifteenX.message.text, /#キャンパスガールズ2027$/);
+    assert.doesNotMatch(fifteenX.message.text, /なるよーん|00:00|23:59/);
+    assert.doesNotMatch(patonVoteFifteenXStoryVideo.alt, /0:00|23:59/);
     assert.equal(fifteenX.body.includes("Mixch"), false);
 
     assert.match(thirtyDay.body, /30日連続配信記念日/);
     assert.match(thirtyDay.body, /7:30/);
     assert.match(thirtyDay.body, /配信前の記録/);
     assert.equal(thirtyDay.body.includes("Paton"), false);
+    assert.doesNotMatch(thirtyDay.message.text, /#ミスサー/);
+    assert.match(thirtyDay.message.text, /【8\/30（日）】/);
+    assert.match(thirtyDay.message.text, /現在3:30。朝7:30配信予定$/);
     assert.match(showroomThirtyDayAnniversaryStoryVideo.alt, /SHOWROOM配信画面/);
-    assert.doesNotMatch(showroomThirtyDayAnniversaryStoryVideo.alt, /猫耳/);
+    assert.match(showroomThirtyDayAnniversaryStoryVideo.alt, /30日ありがとう/);
+    assert.doesNotMatch(showroomThirtyDayAnniversaryStoryVideo.alt, /猫耳|手を振り/);
   });
 });
 
