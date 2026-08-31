@@ -544,5 +544,7 @@ describe("2026-08-30〜31 Instagram Story — privacy and scope", () => {
     assert.match(ops, /投稿時点の記録/);
     assert.match(ops, /自己ホストしない/);
     assert.match(ops, /視聴者の表示名/);
+    assert.match(ops, /^\| `contest\.ts` \|/m);
+    assert.doesNotMatch(ops, /\|\| `contest\.ts`/);
   });
 });
