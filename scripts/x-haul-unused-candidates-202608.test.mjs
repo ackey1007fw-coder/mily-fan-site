@@ -334,6 +334,7 @@ describe("X haul — no Drive ids, no Millie spelling, no pbs hotlinks", () => {
       "src/data/ohayoWhitePoloPeace.ts",
       "src/data/pandaPastPic.ts",
       "src/data/eveningRadioShowroom.ts",
+      "src/data/morningStreamThanks.ts",
       "src/data/campusGirlsFinalStageFlyer.ts",
       "src/data/secondRoundTimetable.ts",
       "src/data/gandaBeforeNightStream.ts",

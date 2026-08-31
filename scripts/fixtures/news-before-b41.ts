@@ -2,6 +2,11 @@ export * from "../../src/data/news.ts";
 import { news as currentNews } from "../../src/data/news.ts";
 
 const laterNewsIds = new Set([
+  "2026-08-31-morning-stream-thanks",
+  "2026-08-31-paton-15x-day",
+  "2026-08-31-showroom-wake-me",
+  "2026-08-30-consecutive-stream-30",
+  "2026-08-30-paton-rank-3",
   "2026-08-30-campus-girls-hold-second-story",
   "2026-08-30-morning-showroom-0600",
   "2026-08-30-mixch-final-day",

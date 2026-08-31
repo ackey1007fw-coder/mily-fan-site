@@ -2448,6 +2448,17 @@ Mixch URLは画面に無いため Mixch CTAは付けない。
 - b43-02 poster: 87,690 bytes / metadataなし / sha256
   `2c9413f1ddbca35565f348377d67dd22e22a81fa8c82454db955b8f6cd079b0e`
 
+## 素材台帳（batch b44 / source date 2026-08-31）
+
+8/31 07:34 の本人Xお礼投稿。受領したSHOWROOM画面には
+視聴者名・アバターが多数写るため、NEWS・Galleryを含む公開面では使わない。
+NEWSはテキストと本人Xの恒久permalinkだけを掲載し、X画像CDNは参照しない。
+受け渡し用のホスト名・file ID・元素材ファイル名は tracked text に残さない。
+公開ファイルは置かない。プライバシー安全な加工済み画像が別途承認されるまで
+画像なしを維持する。
+
+出典: `https://x.com/Mily_chan36/status/2094192106105659650`
+
 ## 素材台帳（Fan Room voice / 受領日・source date 2026-08-26）
 
 2026-08-26夜のSHOWROOMファンルーム音声メッセージ。Latest / NEWS専用。

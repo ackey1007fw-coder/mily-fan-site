@@ -17,6 +17,7 @@ import {
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
+import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -155,20 +156,25 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     const holdSecond = newsItem(fixtures[0].newsId);
     const day5 = newsItem(fixtures[1].newsId);
 
-    assert.equal(ordered[0], holdSecond);
-    assert.equal(ordered[1]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[2]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[3], day5);
-    assert.equal(ordered[4]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(ordered[5]?.id, "2026-08-29-showroom-radio-1440");
-    assert.equal(ordered[6]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(ordered[0]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[1]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[2]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[3]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[4], holdSecond);
+    assert.equal(ordered[5]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[6]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[7]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[8], day5);
+    assert.equal(ordered[9]?.id, "2026-08-29-showroom-live-third-round");
+    assert.equal(ordered[10]?.id, "2026-08-29-showroom-radio-1440");
+    assert.equal(ordered[11]?.id, "2026-08-29-paton-vote-day-4-story");
     assert.equal(holdSecond?.sameDayOrder, 3);
     assert.equal(day5?.sameDayOrder, 4);
     assert.deepEqual(holdSecond?.activityIds, ["campus-girls"]);
     assert.deepEqual(day5?.activityIds, ["campus-girls"]);
     assert.equal(news.filter(({ id }) => id === holdSecond?.id).length, 1);
     assert.equal(news.filter(({ id }) => id === day5?.id).length, 1);
-    assert.equal(news.length, 57);
+    assert.equal(news.length, 62);
     assert.deepEqual(verifyNews([holdSecond, day5]), []);
   });
 
@@ -245,13 +251,16 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     const radioNews = selectActivityNews("radio", news, news.length);
     const missNews = selectActivityNews("miss-circle", news, news.length);
 
-    assert.equal(campusNews[0]?.id, fixtures[0].newsId);
-    assert.equal(campusNews[1]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(campusNews[2]?.id, fixtures[1].newsId);
-    assert.equal(campusNews[3]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsHoldSecondStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[1], patonVoteDay5StoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[2], patonVoteDay4StoryVideo);
+    assert.equal(campusNews[0]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(campusNews[1]?.id, fixtures[0].newsId);
+    assert.equal(campusNews[2]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(campusNews[3]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(campusNews[4]?.id, fixtures[1].newsId);
+    assert.equal(campusNews[5]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsPatonPortraitImage);
+    assert.equal(selectActivityMedia("campus-girls")[1], campusGirlsHoldSecondStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[2], patonVoteDay5StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[3], patonVoteDay4StoryVideo);
 
     for (const fixture of fixtures) {
       assert.equal(
