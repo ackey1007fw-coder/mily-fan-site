@@ -21,6 +21,8 @@ describe("date-aware site share copy", () => {
     assert.match(text, /9\/3からMISS CIRCLE CONTEST 2026の3次審査が始まります🔥/);
     assert.ok(text.indexOf("湘南シーサイドサークル") < text.indexOf("Paton投票"));
     assert.ok(text.indexOf("Paton投票") < text.indexOf("3次審査"));
+    assert.match(text, /#湘南シーサイドサークル #ssc$/);
+    assert.doesNotMatch(text, /#キャンガル|#ミスサー/);
   });
 
   it("describes the radio slot without claiming Mily's live appearance", () => {
@@ -42,6 +44,8 @@ describe("date-aware site share copy", () => {
     assert.doesNotMatch(text, /湘南シーサイドサークル/);
     assert.match(text, /Paton投票/);
     assert.match(text, /3次審査/);
+    assert.match(text, /#キャンガル #キャンガル2027$/);
+    assert.doesNotMatch(text, /#ミスサー|#ミスサークル2026/);
   });
 
   it("ends Paton automatically and switches to the third-round callout", () => {
@@ -51,6 +55,8 @@ describe("date-aware site share copy", () => {
     });
     assert.doesNotMatch(before, /Paton投票/);
     assert.match(before, /9\/3からMISS CIRCLE CONTEST 2026の3次審査/);
+    assert.match(before, /#ミスサー #ミスサークル2026$/);
+    assert.doesNotMatch(before, /#キャンガル/);
 
     const active = siteShareText({
       now: at("2026-09-03T00:00:00+09:00"),
@@ -59,6 +65,7 @@ describe("date-aware site share copy", () => {
     assert.match(active, /MISS CIRCLE CONTEST 2026の3次審査を応援してください🔥/);
     assert.match(active, /9\/13まで/);
     assert.doesNotMatch(active, /Paton投票/);
+    assert.match(active, /#ミスサー #ミスサークル2026$/);
   });
 
   it("returns the stable site description when no timely topic is active", () => {
