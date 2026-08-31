@@ -2,6 +2,7 @@ export * from "../../src/data/news.ts";
 import { news as currentNews } from "../../src/data/news.ts";
 
 const laterNewsIds = new Set([
+  "2026-08-31-paton-vote-voice-story",
   "2026-08-31-paton-first-place-story",
   "2026-08-31-paton-15x-day-story",
   "2026-08-31-paton-vote-how-to-story",

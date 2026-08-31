@@ -156,29 +156,30 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     const holdSecond = newsItem(fixtures[0].newsId);
     const day5 = newsItem(fixtures[1].newsId);
 
-    assert.equal(ordered[0]?.id, "2026-08-31-paton-first-place-story");
-    assert.equal(ordered[1]?.id, "2026-08-31-paton-15x-day-story");
-    assert.equal(ordered[2]?.id, "2026-08-31-paton-vote-how-to-story");
-    assert.equal(ordered[3]?.id, "2026-08-31-morning-stream-thanks");
-    assert.equal(ordered[4]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[5]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[6]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[7], holdSecond);
-    assert.equal(ordered[8]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[9]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[10]?.id, "2026-08-30-showroom-30-day-story");
-    assert.equal(ordered[11]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[12], day5);
-    assert.equal(ordered[13]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(ordered[14]?.id, "2026-08-29-showroom-radio-1440");
-    assert.equal(ordered[15]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(ordered[0]?.id, "2026-08-31-paton-vote-voice-story");
+    assert.equal(ordered[1]?.id, "2026-08-31-paton-first-place-story");
+    assert.equal(ordered[2]?.id, "2026-08-31-paton-15x-day-story");
+    assert.equal(ordered[3]?.id, "2026-08-31-paton-vote-how-to-story");
+    assert.equal(ordered[4]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[5]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[6]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[7]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[8], holdSecond);
+    assert.equal(ordered[9]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[10]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[11]?.id, "2026-08-30-showroom-30-day-story");
+    assert.equal(ordered[12]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[13], day5);
+    assert.equal(ordered[14]?.id, "2026-08-29-showroom-live-third-round");
+    assert.equal(ordered[15]?.id, "2026-08-29-showroom-radio-1440");
+    assert.equal(ordered[16]?.id, "2026-08-29-paton-vote-day-4-story");
     assert.equal(holdSecond?.sameDayOrder, 3);
     assert.equal(day5?.sameDayOrder, 4);
     assert.deepEqual(holdSecond?.activityIds, ["campus-girls"]);
     assert.deepEqual(day5?.activityIds, ["campus-girls"]);
     assert.equal(news.filter(({ id }) => id === holdSecond?.id).length, 1);
     assert.equal(news.filter(({ id }) => id === day5?.id).length, 1);
-    assert.equal(news.length, 66);
+    assert.equal(news.length, 67);
     assert.deepEqual(verifyNews([holdSecond, day5]), []);
   });
 
@@ -221,11 +222,12 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
   });
 
   it("shares one manifest object per Story with Gallery and Portal Feed", () => {
-    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b44-02-paton-vote-first-place-story");
-    assert.equal(visibleGalleryVideos()[1]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(visibleGalleryVideos()[2], campusGirlsHoldSecondStoryVideo);
-    assert.equal(visibleGalleryVideos()[3], patonVoteDay5StoryVideo);
-    assert.equal(visibleGalleryVideos()[4], patonVoteDay4StoryVideo);
+    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b45-01-paton-vote-voice-story");
+    assert.equal(visibleGalleryVideos()[1]?.id, "mily-b44-02-paton-vote-first-place-story");
+    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
+    assert.equal(visibleGalleryVideos()[3], campusGirlsHoldSecondStoryVideo);
+    assert.equal(visibleGalleryVideos()[4], patonVoteDay5StoryVideo);
+    assert.equal(visibleGalleryVideos()[5], patonVoteDay4StoryVideo);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
@@ -257,20 +259,22 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     const radioNews = selectActivityNews("radio", news, news.length);
     const missNews = selectActivityNews("miss-circle", news, news.length);
 
-    assert.equal(campusNews[0]?.id, "2026-08-31-paton-first-place-story");
-    assert.equal(campusNews[1]?.id, "2026-08-31-paton-15x-day-story");
-    assert.equal(campusNews[2]?.id, "2026-08-31-paton-vote-how-to-story");
-    assert.equal(campusNews[3]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(campusNews[4]?.id, fixtures[0].newsId);
-    assert.equal(campusNews[5]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(campusNews[6]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(campusNews[7]?.id, fixtures[1].newsId);
-    assert.equal(campusNews[8]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(selectActivityMedia("campus-girls")[0]?.id, "mily-b44-02-paton-vote-first-place-story");
-    assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(selectActivityMedia("campus-girls")[3], campusGirlsHoldSecondStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[4], patonVoteDay5StoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[5], patonVoteDay4StoryVideo);
+    assert.equal(campusNews[0]?.id, "2026-08-31-paton-vote-voice-story");
+    assert.equal(campusNews[1]?.id, "2026-08-31-paton-first-place-story");
+    assert.equal(campusNews[2]?.id, "2026-08-31-paton-15x-day-story");
+    assert.equal(campusNews[3]?.id, "2026-08-31-paton-vote-how-to-story");
+    assert.equal(campusNews[4]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(campusNews[5]?.id, fixtures[0].newsId);
+    assert.equal(campusNews[6]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(campusNews[7]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(campusNews[8]?.id, fixtures[1].newsId);
+    assert.equal(campusNews[9]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(selectActivityMedia("campus-girls")[0]?.id, "mily-b45-01-paton-vote-voice-story");
+    assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b44-02-paton-vote-first-place-story");
+    assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
+    assert.equal(selectActivityMedia("campus-girls")[4], campusGirlsHoldSecondStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[5], patonVoteDay5StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[6], patonVoteDay4StoryVideo);
 
     for (const fixture of fixtures) {
       assert.equal(

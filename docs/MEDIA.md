@@ -2570,3 +2570,88 @@ iframeできないため、公開ルームプロフィール API の `voice_list
 - SHOWROOM CDN URL は公開データへ残さない。hotlinkしない
 - 音声はみりぃ本人のFan Roomボイスメモ。BGM権利が不明な動画音声の無音化ルールとは別判断
 - AI生成・加工なし
+
+## 素材台帳（batch b45 / 受領日・source date 2026-08-31）
+
+オーナーが直接提供した本人Instagram Story動画1本。みりぃがCAMPUS GIRLS 2027の
+Paton投票（9月1日まで）と、31日は応援が1.5倍になって届くことを肉声で呼びかけている。
+画面上部に「投票はこちらから」のスタンプがある。owner-provided。SNSから再取得していない。
+
+HOME Latest / `/news/` と Gallery が、公開MP4・poster・manifest objectを共有する。
+CAMPUS GIRLS Activity の関連NEWS・関連メディアにも出す。恒久的なStory permalinkは
+ないため、表示は非リンクの `Instagram Story` labelとする。`/stories/`、highlights、
+events、streamSchedule、`media.ts`、PatonVoteGuide のランキング系列には追加しない。
+
+オーナーが本人肉声の保持を明示依頼したため、公開派生でも AAC 音声を残す。
+権利が不明な個人Storyで無音化した過去案件、および Fan Room 音声・b19 番組Story
+の保持判断とは別件であり、この依頼範囲に限る。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b45-01 | `gallery/mily-b45-01-paton-vote-voice-story.mp4` | 室内で眼鏡スタンプをつけたみりぃがPaton投票を呼びかける縦型動画。720×1280 / 32.400秒 / 30fps / 972フレーム / H.264 Baseline + AAC | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b45-01 poster | `gallery/mily-b45-01-paton-vote-voice-story-poster.jpg` | 公開MP4の3.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-31` / 恒久permalinkなし
+- 元素材は `media/original/mily-b45-01-paton-vote-voice-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `9fc67b064ea03b7fd4d3007d3be2a71ced0f1741586a404ceee4872bf714187c`
+- 40,314,111 bytes / H.264 **High** / **720×1280** / 30fps /
+  972 frames / **32.400秒** / yuv420p
+- 音声: HE-AAC / 44.1kHz / stereo。オーナーが本人肉声の保持を明示依頼したため、
+  公開派生でも音声を保持する
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+- 識別可能な第三者は見当たらない。Story上部の「投票はこちらから」スタンプと
+  眼鏡スタンプは元動画のまま維持し、cropしていない
+
+### 公開MP4
+
+- sha256: `c3d407c8be9e05cc0b28bbea86441fbd5795eaa79edd0747473a7ab3a25f0fd1`
+- 7,936,073 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  30fps / 972 frames / 32.400秒 / yuv420p / `has_b_frames` 0 /
+  AAC-LC 128k / 44.1kHz stereo
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- `+faststart`確認済み（`moov` が `mdat` より前）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_metadata:s:a -1` / `-map_chapters -1`）。元の`creation_time`と
+  `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b45-01-paton-vote-voice-story.mp4 \
+  -map 0:v:0 -map 0:a:0 \
+  -map_metadata -1 -map_metadata:s:v -1 -map_metadata:s:a -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough \
+  -c:a aac -b:a 128k \
+  -movflags +faststart \
+  public/media/gallery/mily-b45-01-paton-vote-voice-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の3.0秒地点。笑顔と組んだ手が自然に見え、Storyスタンプが読みやすく、
+  極端な瞬きやブレが少ないため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 46,458 bytes / 720×1280 JPEG / sha256
+  `59bfdef3ebab3fea1bfbf82cebae62fb8baa52255f6c632ab332b22529232572`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/patonVoteVoiceStoryVideo.json` の1オブジェクトを
+  Latest / NEWS / Gallery / CAMPUS GIRLS Activity で共有し、公開MP4 1本・poster 1枚
+  だけを参照する
+- InstagramプロフィールURLやStoryの推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 3.0 -i public/media/gallery/mily-b45-01-paton-vote-voice-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b45-01-paton-vote-voice-story-poster.jpg
+```
