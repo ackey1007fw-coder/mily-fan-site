@@ -24,9 +24,7 @@ import {
   selectGalleryEntries,
   selectGalleryPreview,
 } from "../src/lib/galleryItems.ts";
-import {
-  selectGalleryEntries as selectGalleryEntriesBeforeB41,
-} from "./fixtures/gallery-items-before-b41.ts";
+import * as galleryBeforeLaterBatches from "./fixtures/gallery-items-before-b41.ts";
 import { selectHomeToday } from "../src/lib/homeToday.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -318,7 +316,7 @@ describe("Gallery portrait-first order", () => {
     assert.ok(firstPortraitEnd > 0);
     assert.ok(firstMixch >= firstPortraitEnd);
 
-    const mixch = selectGalleryEntriesBeforeB41().filter(
+    const mixch = galleryBeforeLaterBatches.selectGalleryEntries().filter(
       (entry) => entry.kind === "mixch",
     );
     assert.equal(mixch.length, 3);
@@ -345,8 +343,9 @@ describe("Gallery portrait-first order", () => {
     assert.doesNotMatch(selector, /basePath: "\/media\//);
     assert.doesNotMatch(selector, /const photos = \[/);
     assert.equal(
-      selectGalleryEntriesBeforeB41().filter((entry) => entry.kind === "mixch")
-        .length,
+      galleryBeforeLaterBatches.selectGalleryEntries().filter(
+        (entry) => entry.kind === "mixch",
+      ).length,
       3,
     );
     assert.ok(
