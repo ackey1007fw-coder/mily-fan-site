@@ -41,17 +41,20 @@ describe("SupportEvent foundation", () => {
     );
     assert.equal(isValidSupportEvent({ ...baseEvent, shareText: "" }), false);
     assert.equal(isValidSupportEvent({ ...baseEvent, shareText: 1 }), false);
+  });
+
+  it("accepts only one compact optional campaign hashtag", () => {
     assert.equal(
-      isValidSupportEvent({ ...baseEvent, shareHashtags: ["キャンガル"] }),
+      isValidSupportEvent({ ...baseEvent, shareHashtag: "#キャンガル2027" }),
       true,
     );
-    assert.equal(isValidSupportEvent({ ...baseEvent, shareHashtags: [] }), false);
+    assert.equal(isValidSupportEvent({ ...baseEvent, shareHashtag: "" }), false);
     assert.equal(
-      isValidSupportEvent({ ...baseEvent, shareHashtags: ["#キャンガル"] }),
+      isValidSupportEvent({ ...baseEvent, shareHashtag: "キャンガル2027" }),
       false,
     );
     assert.equal(
-      isValidSupportEvent({ ...baseEvent, shareHashtags: ["キャン ガル"] }),
+      isValidSupportEvent({ ...baseEvent, shareHashtag: "#キャンガル #投票" }),
       false,
     );
   });

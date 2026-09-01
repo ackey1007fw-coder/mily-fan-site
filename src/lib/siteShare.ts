@@ -5,7 +5,12 @@ import {
   schedulePhase,
   type SchedulePhase,
 } from "../data/radio.ts";
-import { supportEvents, type SupportEvent } from "../data/supportEvents.ts";
+import {
+  campusGirlsFinalStagePatonVote,
+  supportEvents,
+  type SupportEvent,
+} from "../data/supportEvents.ts";
+import { patonVoteLiveShareText } from "./patonVoteLiveCopy.ts";
 import {
   displayStatus,
   formatScheduleEndLabel,
@@ -38,12 +43,14 @@ type ShareTopic = {
   id: string;
   priority: number;
   text: string;
-  hashtags: string[];
+  campaignHashtags?: readonly string[];
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const UPCOMING_CONTEST_DAYS = 7;
-const MAX_SHARE_TOPICS = 3;
+// X の weighted character 上限内で、priority が高い2件までを共有する。
+const MAX_SHARE_TOPICS = 2;
+const PERSON_HASHTAG = "#三橋莉子";
 
 function safeRadioPhase(now: number): SchedulePhase {
   try {
@@ -59,7 +66,7 @@ function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
       id: "radio-upcoming",
       priority: 400,
       text: `今日${radioProgram.scheduledStart}〜は「${radioProgram.programName}」📻`,
-      hashtags: ["湘南シーサイドサークル", "ssc"],
+      campaignHashtags: radioProgram.shareHashtags,
     };
   }
   if (phase === "window") {
@@ -67,7 +74,7 @@ function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
       id: "radio-window",
       priority: 400,
       text: `ただいま「${radioProgram.programName}」の放送時間です📻`,
-      hashtags: ["湘南シーサイドサークル", "ssc"],
+      campaignHashtags: radioProgram.shareHashtags,
     };
   }
   return null;
@@ -86,11 +93,17 @@ function supportEventShareTopics(now: number): ShareTopic[] {
     )
     .map((event) => {
       const end = compactEndLabel(event);
+      const share =
+        event.id === campusGirlsFinalStagePatonVote.id
+          ? patonVoteLiveShareText(event.shareText ?? "", now)
+          : event.shareText;
       return {
         id: event.id,
         priority: 200 + (event.priority ?? 0),
-        text: `${event.shareText}${end ? `（${end}まで）` : ""}`,
-        hashtags: event.shareHashtags ?? [],
+        text: `${share}${end ? `（${end}まで）` : ""}`,
+        ...(event.shareHashtag
+          ? { campaignHashtags: [event.shareHashtag] }
+          : {}),
       };
     });
 }
@@ -109,7 +122,9 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       id: "contest-active",
       priority: 180,
       text: `${contest.contestName}の${phaseLabel}を応援してください🔥（${formatShortTokyoDate(phase.end)}まで）`,
-      hashtags: phase.shareHashtags ?? [],
+      ...(contest.shareHashtag
+        ? { campaignHashtags: [contest.shareHashtag] }
+        : {}),
     };
   }
 
@@ -118,7 +133,9 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       id: "contest-upcoming",
       priority: 160,
       text: `${formatShortTokyoDate(phase.start)}から${contest.contestName}の${phaseLabel}が始まります🔥`,
-      hashtags: phase.shareHashtags ?? [],
+      ...(contest.shareHashtag
+        ? { campaignHashtags: [contest.shareHashtag] }
+        : {}),
     };
   }
 
@@ -138,15 +155,18 @@ export function siteShareText(context: SiteShareContext = {}): string {
     .sort((a, b) => b.priority - a.priority)
     .slice(0, MAX_SHARE_TOPICS);
 
-  if (topics.length === 0) return site.description;
+  const campaignHashtags =
+    topics.find((topic) => topic.campaignHashtags?.length)
+      ?.campaignHashtags ?? [];
+  const hashtagLine = [PERSON_HASHTAG, ...campaignHashtags].join(" ");
 
-  const hashtags = topics[0]?.hashtags.map((tag) => `#${tag}`).join(" ");
+  if (topics.length === 0) return [site.description, hashtagLine].join("\n");
 
   return [
     "みりぃ（三橋莉子 / Mily）さんを応援しています🍅✨",
     ...topics.map(({ text }) => text),
     "最新の活動・応援情報はこちら👇",
-    ...(hashtags ? [hashtags] : []),
+    hashtagLine,
   ].join("\n");
 }
 

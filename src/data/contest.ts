@@ -15,12 +15,12 @@ export type ContestPhase = {
   end: string | null;
   /** フェーズ名を確認した一次ソースURL */
   source: string;
-  /** このフェーズが最優先のときにサイト共有文へ載せるタグ。#は含めない。 */
-  shareHashtags?: string[];
 };
 
 export type Contest = {
   contestName: string;
+  /** 現在の審査を共有するときに使う、確認済みの企画ハッシュタグ。 */
+  shareHashtag?: string;
   entryNumber: string;
   entryUrl: string;
   currentPhase: ContestPhase | null;
@@ -30,6 +30,7 @@ export type Contest = {
 
 export const contest: Contest = {
   contestName: "MISS CIRCLE CONTEST 2026",
+  shareHashtag: "#ミスサークル2026",
   entryNumber: "ENTRY 734",
   entryUrl: "https://2026.misscircle.jp/entry/734",
   // ENTRY 734 ページから解決した本人SHOWROOMルーム名の公開表記をそのまま採用する。
@@ -48,7 +49,6 @@ export const contest: Contest = {
     start: "2026-09-03",
     end: "2026-09-13",
     source: "https://www.misscircle.jp/",
-    shareHashtags: ["ミスサー", "ミスサークル2026"],
   },
   lastVerifiedAt: "2026-08-26",
 };

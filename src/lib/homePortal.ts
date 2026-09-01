@@ -1,8 +1,12 @@
 import type { Contest, ContestPhase } from "../data/contest.ts";
 import type { SiteLink } from "../data/links.ts";
-import type { SupportEvent } from "../data/supportEvents.ts";
+import {
+  campusGirlsFinalStagePatonVote,
+  type SupportEvent,
+} from "../data/supportEvents.ts";
 import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
 import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
+import { patonVoteLiveNote } from "./patonVoteLiveCopy.ts";
 import {
   displayStatus,
   formatScheduleEndLabel,
@@ -92,12 +96,16 @@ export function selectHomeVoteAction(input: {
     if (!link) continue;
 
     const deadline = formatScheduleEndLabel(event.schedule);
+    const note =
+      event.id === campusGirlsFinalStagePatonVote.id
+        ? patonVoteLiveNote(event.note, input.now)
+        : event.note;
     return {
       kind: "support-event",
       label: link.label,
       url: link.url,
       title: event.title,
-      ...(event.note ? { note: event.note } : {}),
+      ...(note ? { note } : {}),
       ...(deadline ? { deadlineLabel: `投票締切 ${deadline}` } : {}),
     };
   }

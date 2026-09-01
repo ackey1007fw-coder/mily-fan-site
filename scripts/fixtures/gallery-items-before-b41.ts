@@ -1,5 +1,6 @@
 export * from "../../src/lib/galleryItems.ts";
 import {
+  pickHomeGalleryPreview,
   selectGalleryEntries as selectCurrentGalleryEntries,
   type GalleryEntry,
 } from "../../src/lib/galleryItems.ts";
@@ -23,5 +24,5 @@ export function selectGalleryEntries(): GalleryEntry[] {
 }
 
 export function selectGalleryPreview(limit: number): GalleryEntry[] {
-  return selectGalleryEntries().slice(0, limit);
+  return pickHomeGalleryPreview(selectGalleryEntries(), limit);
 }
