@@ -315,7 +315,7 @@ describe("Support Today and pending separation", () => {
   });
 
   it("keeps the confirmed CAMPUS GIRLS Paton voting period in SupportEvents", () => {
-    assert.equal(supportEvents.length, 1);
+    assert.equal(supportEvents.length, 3);
     assert.equal(supportEvents[0].activityId, "campus-girls");
     assert.equal(supportEvents[0].kind, "vote");
     assert.deepEqual(supportEvents[0].schedule, {

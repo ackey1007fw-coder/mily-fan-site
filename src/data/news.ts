@@ -186,6 +186,43 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-02-miss-circle-third-round",
+    date: "2026-09-02",
+    sameDayOrder: 10,
+    activityIds: ["miss-circle"],
+    title: "ミスサー三次審査、9/3から9/13",
+    body: "三橋莉子（ENTRY 734、Bブロック）。WEB投票は9月3日12:00から13日23:59。SHOWROOMの無料ギフト審査とイベント審査は9月3日5:00から12日21:59。",
+    source: "https://www.misscircle.jp/",
+    sourceLabel: "MISS CIRCLE CONTEST 2026",
+    additionalSources: [
+      {
+        label: "ENTRY 734",
+        url: "https://2026.misscircle.jp/entry/734",
+      },
+      {
+        label: "SHOWROOMイベント",
+        url: "https://www.showroom-live.com/event/circle2026_3rd",
+      },
+    ],
+    relatedUrl:
+      "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734",
+    ctaLabel: "WEB投票する",
+    additionalCtas: [
+      {
+        label: "ENTRY 734",
+        url: "https://2026.misscircle.jp/entry/734",
+      },
+      {
+        label: "SHOWROOMイベント",
+        url: "https://www.showroom-live.com/event/circle2026_3rd",
+      },
+      {
+        label: "SHOWROOM",
+        url: "https://www.showroom-live.com/r/circle2026_0734",
+      },
+    ],
+  },
+  {
     id: "2026-09-02-oyasumily-sr-story",
     date: "2026-09-02",
     sameDayOrder: 2,

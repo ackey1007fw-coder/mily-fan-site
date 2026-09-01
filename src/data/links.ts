@@ -17,6 +17,20 @@ export const campusGirlsPatonVoteLink: SiteLink = {
     "CAMPUS GIRLS 2027 予選A FinalSTAGE。投票にはPatonへのログインが必要です。",
 };
 
+export const missCircleWebVoteLink: SiteLink = {
+  id: "miss-circle-2026-web-vote-734",
+  label: "WEB投票する",
+  url: "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734",
+  note: "MISS CIRCLE CONTEST 2026 三次審査。ENTRY 734 三橋莉子。",
+};
+
+export const missCircleShowroomEventLink: SiteLink = {
+  id: "miss-circle-2026-3rd-showroom-event",
+  label: "SHOWROOMイベント",
+  url: "https://www.showroom-live.com/event/circle2026_3rd",
+  note: "MISS CIRCLE CONTEST 2026 三次審査のSHOWROOM審査。",
+};
+
 export const seasideCircleMessageFormLink: SiteLink = {
   id: "fm-smw-ssc-message-form",
   label: "番組へメッセージを送る",
@@ -32,6 +46,8 @@ export const links: SiteLink[] = [
     url: "https://2026.misscircle.jp/entry/734",
     note: "投票方法・最新情報はENTRY 734ページへ。",
   },
+  missCircleWebVoteLink,
+  missCircleShowroomEventLink,
   campusGirlsPatonVoteLink,
   {
     id: "fm-smw-staff",
