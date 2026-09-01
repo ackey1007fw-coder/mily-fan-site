@@ -1,6 +1,10 @@
 import { isValidDateOnly, isValidDateTime } from "./events.ts";
 import { activities, type ActivityId } from "./activities.ts";
-import { links } from "./links.ts";
+import {
+  links,
+  missCircleShowroomEventLink,
+  missCircleWebVoteLink,
+} from "./links.ts";
 
 export type SupportEventKind =
   | "vote"
@@ -160,6 +164,42 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
   );
 }
 
+export const missCircleThirdRoundWebVote: SupportEvent = {
+  id: "miss-circle-2026-3rd-web-vote",
+  activityId: "miss-circle",
+  kind: "vote",
+  title: "WEB投票",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-09-03T12:00:00+09:00",
+    end: "2026-09-13T23:59:00+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  ctaLinkId: missCircleWebVoteLink.id,
+  source: "https://www.misscircle.jp/",
+  verifiedAt: "2026-09-02",
+  priority: 90,
+};
+
+export const missCircleThirdRoundShowroomReview: SupportEvent = {
+  id: "miss-circle-2026-3rd-showroom-review",
+  activityId: "miss-circle",
+  kind: "stream-event",
+  title: "SHOWROOM無料ギフト審査・イベント審査",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-09-03T05:00:00+09:00",
+    end: "2026-09-12T21:59:00+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  ctaLinkId: missCircleShowroomEventLink.id,
+  source: "https://www.showroom-live.com/event/circle2026_3rd",
+  verifiedAt: "2026-09-02",
+  priority: 80,
+};
+
 export const campusGirlsFinalStagePatonVote: SupportEvent = {
   id: "campus-girls-final-stage-paton-2026",
   activityId: "campus-girls",
@@ -182,4 +222,8 @@ export const campusGirlsFinalStagePatonVote: SupportEvent = {
   priority: 100,
 };
 
-export const supportEvents: SupportEvent[] = [campusGirlsFinalStagePatonVote];
+export const supportEvents: SupportEvent[] = [
+  campusGirlsFinalStagePatonVote,
+  missCircleThirdRoundWebVote,
+  missCircleThirdRoundShowroomReview,
+];
