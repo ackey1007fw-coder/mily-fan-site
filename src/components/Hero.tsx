@@ -112,7 +112,7 @@ export function Hero() {
               <div key={action.url}>
                 <p className="text-xs text-ink-muted">{action.title}</p>
                 {action.note ? (
-                  <p className="mt-1 text-xs leading-5 text-ink-muted">
+                  <p className="mt-1 whitespace-pre-line text-xs leading-5 text-ink-muted">
                     {action.note}
                   </p>
                 ) : null}

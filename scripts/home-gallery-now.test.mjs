@@ -403,6 +403,10 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.match(approaching.nowItems[0]?.note ?? "", /3次審査進出/);
     assert.match(approaching.nowItems[0]?.note ?? "", /9\/3/);
     assert.match(approaching.nowItems[0]?.note ?? "", /9\/13/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /WEB投票 9\/3 12:00〜9\/13 23:59/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /SHOWROOM無料ギフト審査 9\/3 5:00〜9\/12 21:59/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /SHOWROOMイベント審査 9\/3 5:00〜9\/12 21:59/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /SHOWROOMは9\/12 21:59終了/);
     assert.equal(approaching.voteActions[0].kind, "contest");
 
     for (const view of [during, lastDay]) {

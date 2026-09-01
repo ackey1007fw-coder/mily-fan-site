@@ -101,10 +101,12 @@ export function TodayDashboard() {
               {contestToday.value}
             </span>
           ) : null}
-          {contestToday?.note ? (
-            <span className="text-xs text-ink-muted">{contestToday.note}</span>
-          ) : null}
         </div>
+        {contestToday?.note ? (
+          <p className="mt-2 whitespace-pre-line text-xs leading-6 text-ink-muted">
+            {contestToday.note}
+          </p>
+        ) : null}
 
         {scheduleItems.length > 0 ? (
           <ul className="mt-3 space-y-3 border-t border-sage/15 pt-3">
@@ -163,7 +165,7 @@ export function TodayDashboard() {
                     {item.title}
                   </p>
                   {item.note ? (
-                    <p className="mt-1 text-xs leading-6 text-ink-muted">
+                    <p className="mt-1 whitespace-pre-line text-xs leading-6 text-ink-muted">
                       {item.note}
                     </p>
                   ) : null}

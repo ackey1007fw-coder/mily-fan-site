@@ -19,6 +19,7 @@ import {
   supportEvents,
 } from "../src/data/supportEvents.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
+import { contestOfficialWindowLines, contestPhaseDisplayNote } from "../src/lib/contestPhaseDisplay.ts";
 import { selectHomeVoteAction, selectHomeVoteActions } from "../src/lib/homePortal.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
@@ -237,6 +238,14 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
     assert.equal(contest.lastVerifiedAt, "2026-09-02");
+    assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
+    assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
+      "WEB投票 9/3 12:00〜9/13 23:59",
+      "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59",
+      "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59",
+      "SHOWROOMは9/12 21:59終了",
+    ]);
+    assert.match(contestPhaseDisplayNote(contest.currentPhase), /3次審査進出（9\/3〜9\/13）/);
     assert.equal(streamSchedule.length, 0);
     assert.equal(events.length, 0);
 

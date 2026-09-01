@@ -10,6 +10,7 @@ import {
   tokyoToday,
 } from "./bannerState.ts";
 import type { LiveView } from "./realtimeStore.ts";
+import { appendContestOfficialWindows } from "./contestPhaseDisplay.ts";
 import {
   adaptContestSchedule,
   adaptSupportEvents,
@@ -82,7 +83,10 @@ export function selectSupportToday(input: {
       activityId: "miss-circle",
       label: "現在の審査段階",
       value: phase.name,
-      note: period ? `${verified} / ${period}` : verified,
+      note: appendContestOfficialWindows(
+        period ? `${verified} / ${period}` : verified,
+        phase,
+      ),
       source: phase.source,
       cta: {
         label: `${input.contest.entryNumber}を見る`,

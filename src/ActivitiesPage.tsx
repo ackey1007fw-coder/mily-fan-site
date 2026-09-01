@@ -27,6 +27,11 @@ import {
   selectLiveActivityStatus,
   selectRadioActivityStatus,
 } from "./lib/activityStatus";
+import {
+  appendContestOfficialWindows,
+  contestOfficialWindowLines,
+  contestPhaseDateRangeLabel,
+} from "./lib/contestPhaseDisplay";
 import { resolveNewsLinks } from "./lib/newsLinks";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useSupportEventClock } from "./lib/useSupportEventClock";
@@ -99,19 +104,29 @@ function StatusLine({
     <div className="rounded-2xl border border-sage/15 bg-sage-soft/45 px-4 py-3">
       <p className="text-xs font-semibold text-sage-deep">{label}</p>
       <p className="mt-1 font-bold leading-relaxed text-ink">{value}</p>
-      {note ? <p className="mt-1 text-xs leading-6 text-ink-muted">{note}</p> : null}
+      {note ? (
+        <p className="mt-1 whitespace-pre-line text-xs leading-6 text-ink-muted">
+          {note}
+        </p>
+      ) : null}
     </div>
   );
 }
 
 function HubMissCircleStatus() {
-  return contest.currentPhase ? (
+  if (!contest.currentPhase) return null;
+  const range = contestPhaseDateRangeLabel(contest.currentPhase);
+  const verified = `${formatDate(contest.lastVerifiedAt)}確認`;
+  return (
     <StatusLine
       label="現在の審査段階"
       value={contest.currentPhase.name}
-      note={`${formatDate(contest.lastVerifiedAt)}確認`}
+      note={appendContestOfficialWindows(
+        range ? `${range} / ${verified}` : verified,
+        contest.currentPhase,
+      )}
     />
-  ) : null;
+  );
 }
 
 function HubRadioStatus() {
@@ -256,6 +271,8 @@ function ActivityHero({ activity }: { activity: Activity }) {
 
 function MissCircleCurrent() {
   if (!contest.currentPhase) return null;
+  const range = contestPhaseDateRangeLabel(contest.currentPhase);
+  const windows = contestOfficialWindowLines(contest.currentPhase);
   return (
     <section aria-labelledby="contest-current" className="px-4 pb-10">
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/20 bg-sage-soft/45 p-5 shadow-card sm:p-7">
@@ -266,6 +283,16 @@ function MissCircleCurrent() {
           現在の審査段階
         </h2>
         <p className="mt-4 text-2xl font-bold text-ink">{contest.currentPhase.name}</p>
+        {range ? (
+          <p className="mt-2 text-sm font-semibold text-ink">{range}</p>
+        ) : null}
+        {windows.length > 0 ? (
+          <ul className="mt-3 space-y-1 text-sm leading-6 text-ink">
+            {windows.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        ) : null}
         <p className="mt-2 text-sm text-ink-muted">
           {formatDate(contest.lastVerifiedAt)}確認
         </p>
