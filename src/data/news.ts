@@ -31,6 +31,8 @@ import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.t
 import { patonVoteVoiceStoryVideo } from "./patonVoteVoiceStoryVideo.ts";
 import { patonVoteFinalDayStoryVideo } from "./patonVoteFinalDayStoryVideo.ts";
 import { septemberMilyStoryVideo } from "./septemberMilyStoryVideo.ts";
+import { oyasumilyStoryVideo } from "./oyasumilyStoryVideo.ts";
+import { patonSecondStoryVideo } from "./patonSecondStoryVideo.ts";
 import { ohayoSeptemberXVideo } from "./ohayoSeptemberXVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
@@ -183,6 +185,53 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-02-oyasumily-sr-story",
+    date: "2026-09-02",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "おやすみりぃ。明日は9:00〜SR配信",
+    body: "9月2日未明、みりぃがInstagram Storyでおやすみのあいさつをし、翌日9:00からのSHOWROOM配信を案内した。本人は「私にしては珍しい時間」と書いている。",
+    sourceLabel: oyasumilyStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: "SHOWROOM",
+        url: "https://www.showroom-live.com/r/circle2026_0734",
+      },
+    ],
+    media: oyasumilyStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "明日は\n" +
+        "9:00～SR配信‼️\n" +
+        "(私にしては珍しい時間🫣💭)\n" +
+        "待ってるね～♪\n" +
+        "おやすみりぃ",
+    },
+  },
+  {
+    id: "2026-09-02-paton-second-story",
+    date: "2026-09-02",
+    sameDayOrder: 1,
+    activityIds: ["campus-girls"],
+    title: "パトン投票、2位で締められました",
+    body: "9月2日未明、みりぃがInstagram StoryでPaton投票を2位（144,550pt）で締められたことへのお礼と、面接を頑張ると伝えた。点数は投稿時点の記録。投票は2026-09-01 23:59 JSTで終了済みなので live の投票ボタンは付けない。",
+    sourceLabel: patonSecondStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: patonSecondStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "パトン投票 🗳️\n" +
+        "皆さんが協力して下さったおかげで2位🥈で締めることができました！\n" +
+        "ありがとうございます😭🙏❣️\n" +
+        "面接頑張ってくるねっ^_^",
+    },
+  },
   {
     id: "2026-09-01-ohayo-september-x",
     date: "2026-09-01",
