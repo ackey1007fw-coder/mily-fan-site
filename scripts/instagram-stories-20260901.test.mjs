@@ -10,14 +10,13 @@ import { promisify } from "node:util";
 import sharp from "sharp";
 import { events } from "../src/data/events.ts";
 import {
-  campusGirlsHoldSecondStoryVideo,
   galleryVideos,
-  patonVoteDay4StoryVideo,
-  patonVoteDay5StoryVideo,
+  patonVoteFinalDayStoryVideo,
+  patonVoteVoiceStoryVideo,
+  septemberMilyStoryVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -25,6 +24,7 @@ import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { campusGirlsFinalStageRankingStoryVideos } from "../src/data/campusGirlsFinalStageStorySeries.ts";
+import { contest } from "../src/data/contest.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { selectActivityMedia } from "../src/lib/activityMedia.ts";
@@ -36,54 +36,60 @@ const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
 const instagramProfile = "https://www.instagram.com/mily_chan36";
-const duringVote = Date.parse("2026-08-30T12:00:00+09:00");
+const duringVote = Date.parse("2026-09-01T12:00:00+09:00");
 const afterVote = Date.parse("2026-09-02T00:00:00+09:00");
+
+const FINAL_DAY_NEWS_ID = "2026-09-01-paton-vote-final-day-story";
+const SEPTEMBER_NEWS_ID = "2026-09-01-september-mily-story";
 
 const fixtures = [
   {
-    newsId: "2026-08-30-campus-girls-hold-second-story",
-    item: campusGirlsHoldSecondStoryVideo,
-    original: "mily-b43-02-campus-girls-hold-second-story.mp4",
-    publicVideo: "mily-b43-02-campus-girls-hold-second-story.mp4",
-    poster: "mily-b43-02-campus-girls-hold-second-story-poster.jpg",
-    originalBytes: 9_441_731,
+    newsId: FINAL_DAY_NEWS_ID,
+    item: patonVoteFinalDayStoryVideo,
+    original: "mily-b46-01-paton-vote-final-day-story.mp4",
+    publicVideo: "mily-b46-01-paton-vote-final-day-story.mp4",
+    poster: "mily-b46-01-paton-vote-final-day-story-poster.jpg",
+    originalBytes: 7_222_368,
     originalSha256:
-      "cfac3ee5b68b130e45997eb826c3784ccf7245371040d9525f7f08daaff744a5",
-    publicBytes: 798_016,
+      "3d3efbef8cc81f7056d8c6a137734be8e7d56544dd337a087c025b7df10d6432",
+    publicBytes: 1_531_871,
     publicSha256:
-      "81699137c90a914d798500dd55bc581f1490f51767a49c856fdf3dda8bac3406",
-    posterBytes: 87_690,
+      "ddac08f2be2f5787e38d2f36f2594826205625da2c2dc43d0c3780b697eca455",
+    posterBytes: 68_288,
     posterSha256:
-      "2c9413f1ddbca35565f348377d67dd22e22a81fa8c82454db955b8f6cd079b0e",
-    sourceDate: "2026-08-30",
+      "c15c9ce5928a75b6aff52ed45f7b50fc24369db406fac5dba198a2e5e0bf2dae",
+    sourceDate: "2026-09-01",
     width: 720,
     height: 1280,
     avgFrameRate: "30/1",
-    nbFrames: "600",
-    duration: 20.0,
+    nbFrames: "167",
+    duration: 5.567,
+    activityIds: ["campus-girls"],
+    posterSeconds: 2.0,
   },
   {
-    newsId: "2026-08-29-paton-vote-day-5-story",
-    item: patonVoteDay5StoryVideo,
-    original: "mily-b43-01-paton-vote-day5-story.mp4",
-    publicVideo: "mily-b43-01-paton-vote-day5-story.mp4",
-    poster: "mily-b43-01-paton-vote-day5-story-poster.jpg",
-    originalBytes: 961_498,
+    newsId: SEPTEMBER_NEWS_ID,
+    item: septemberMilyStoryVideo,
+    original: "mily-b46-02-september-mily-story.mp4",
+    publicVideo: "mily-b46-02-september-mily-story.mp4",
+    poster: "mily-b46-02-september-mily-story-poster.jpg",
+    originalBytes: 4_112_409,
     originalSha256:
-      "23f7d40ffdf30f6930cf0aa26087846da6f401840bd362666cb78900ed0bc194",
-    publicBytes: 634_313,
+      "0e9d3e95ba08e2426e02ffe063884c5483c4f5834e2a7e912b0a8b8203868d2b",
+    publicBytes: 1_550_405,
     publicSha256:
-      "09d5fbe72c42beb66af32d6376ef01e95cb1ad9a8ba22593c25c845996993a81",
-    posterBytes: 120_290,
+      "d7ca9431c53ef2166333adcde051a2a33af411801d496fd55514e748e04621f4",
+    posterBytes: 75_904,
     posterSha256:
-      "65da2070ab0b25d54ce01e8cd4ed337a6a7fe0edc822849505811f27503bff0f",
-    sourceDate: "2026-08-29",
+      "f48a37896f24838ab850978312d2611ac19a86ee54de65c1bcd01d3ebc425105",
+    sourceDate: "2026-09-01",
     width: 720,
     height: 1280,
-    avgFrameRate: "1/1",
-    nbFrames: "20",
-    duration: 20.0,
-    originalAudioRate: "44100",
+    avgFrameRate: "30/1",
+    nbFrames: "92",
+    duration: 3.067,
+    activityIds: undefined,
+    posterSeconds: 1.0,
   },
 ];
 
@@ -121,26 +127,20 @@ async function changedText() {
     "docs/CONTENT-OPS.md",
     "docs/MEDIA.md",
     "scripts/fixtures/README.md",
-    "scripts/fixtures/activity-content-before-b41.ts",
-    "scripts/fixtures/activity-media-before-b41.ts",
-    "scripts/fixtures/gallery-items-before-b41.ts",
-    "scripts/fixtures/gallery-videos-before-b41.ts",
-    "scripts/fixtures/news-before-b41.ts",
-    "scripts/fixtures/portal-feed-before-b41.ts",
-    "scripts/instagram-stories-20260829-30.test.mjs",
-    "src/data/campusGirlsHoldSecondStoryVideo.json",
-    "src/data/campusGirlsHoldSecondStoryVideo.ts",
+    "scripts/instagram-stories-20260901.test.mjs",
     "src/data/galleryVideos.ts",
     "src/data/news.ts",
-    "src/data/patonVoteDay5StoryVideo.json",
-    "src/data/patonVoteDay5StoryVideo.ts",
+    "src/data/patonVoteFinalDayStoryVideo.json",
+    "src/data/patonVoteFinalDayStoryVideo.ts",
+    "src/data/septemberMilyStoryVideo.json",
+    "src/data/septemberMilyStoryVideo.ts",
   ];
   const result = [];
 
   for (const file of files) {
     let text = await readFile(path.join(root, file), "utf8");
     if (file === "docs/MEDIA.md") {
-      const start = text.indexOf("## 素材台帳（batch b43");
+      const start = text.indexOf("## 素材台帳（batch b46");
       const end = text.indexOf("\n## ", start + 4);
       assert.notEqual(start, -1);
       text = text.slice(start, end === -1 ? undefined : end);
@@ -150,44 +150,28 @@ async function changedText() {
   return result;
 }
 
-describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
-  it("adds two separately dated Story records in confirmed editorial order", () => {
+describe("2026-09-01 Instagram Story — Latest / NEWS", () => {
+  it("adds two records in confirmed editorial order at the front of Latest", () => {
     const ordered = sortNewsByDateDesc(news);
-    const holdSecond = newsItem(fixtures[0].newsId);
-    const day5 = newsItem(fixtures[1].newsId);
+    const finalDay = newsItem(FINAL_DAY_NEWS_ID);
+    const september = newsItem(SEPTEMBER_NEWS_ID);
 
-    assert.equal(ordered[0]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.equal(ordered[1]?.id, "2026-09-01-september-mily-story");
-    assert.equal(ordered[2]?.id, "2026-08-31-paton-vote-voice-story");
-    assert.equal(ordered[3]?.id, "2026-08-31-paton-first-place-story");
-    assert.equal(ordered[4]?.id, "2026-08-31-paton-15x-day-story");
-    assert.equal(ordered[5]?.id, "2026-08-31-paton-vote-how-to-story");
-    assert.equal(ordered[6]?.id, "2026-08-31-morning-stream-thanks");
-    assert.equal(ordered[7]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[8]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[9]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[10], holdSecond);
-    assert.equal(ordered[11]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[12]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[13]?.id, "2026-08-30-showroom-30-day-story");
-    assert.equal(ordered[14]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[15], day5);
-    assert.equal(ordered[16]?.id, "2026-08-29-showroom-live-third-round");
-    assert.equal(ordered[17]?.id, "2026-08-29-showroom-radio-1440");
-    assert.equal(ordered[18]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(holdSecond?.sameDayOrder, 3);
-    assert.equal(day5?.sameDayOrder, 4);
-    assert.deepEqual(holdSecond?.activityIds, ["campus-girls"]);
-    assert.deepEqual(day5?.activityIds, ["campus-girls"]);
-    assert.equal(news.filter(({ id }) => id === holdSecond?.id).length, 1);
-    assert.equal(news.filter(({ id }) => id === day5?.id).length, 1);
+    assert.equal(ordered[0], finalDay);
+    assert.equal(ordered[1], september);
+    assert.equal(ordered[2], newsItem("2026-08-31-paton-vote-voice-story"));
+    assert.equal(finalDay?.sameDayOrder, 2);
+    assert.equal(september?.sameDayOrder, 1);
+    assert.deepEqual(finalDay?.activityIds, ["campus-girls"]);
+    assert.equal(september?.activityIds, undefined);
+    assert.equal(news.filter(({ id }) => id === FINAL_DAY_NEWS_ID).length, 1);
+    assert.equal(news.filter(({ id }) => id === SEPTEMBER_NEWS_ID).length, 1);
     assert.equal(news.length, 69);
-    assert.deepEqual(verifyNews([holdSecond, day5]), []);
+    assert.deepEqual(verifyNews([finalDay, september]), []);
   });
 
-  it("keeps Story attribution non-link and provides Instagram plus active Paton CTAs", () => {
-    for (const fixture of fixtures) {
-      const entry = newsItem(fixture.newsId);
+  it("keeps Story attribution non-link and provides Instagram plus windowed Paton CTAs", () => {
+    for (const newsId of [FINAL_DAY_NEWS_ID, SEPTEMBER_NEWS_ID]) {
+      const entry = newsItem(newsId);
       assert.ok(entry);
       assert.equal(entry.source, undefined);
       assert.equal(entry.sourceLabel, "Instagram Story");
@@ -223,15 +207,10 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     }
   });
 
-  it("shares one manifest object per Story with Gallery and Portal Feed", () => {
-    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b46-01-paton-vote-final-day-story");
-    assert.equal(visibleGalleryVideos()[1]?.id, "mily-b46-02-september-mily-story");
-    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b45-01-paton-vote-voice-story");
-    assert.equal(visibleGalleryVideos()[3]?.id, "mily-b44-02-paton-vote-first-place-story");
-    assert.equal(visibleGalleryVideos()[4]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(visibleGalleryVideos()[5], campusGirlsHoldSecondStoryVideo);
-    assert.equal(visibleGalleryVideos()[6], patonVoteDay5StoryVideo);
-    assert.equal(visibleGalleryVideos()[7], patonVoteDay4StoryVideo);
+  it("shares one manifest object per published Story with Gallery and Portal Feed", () => {
+    assert.equal(visibleGalleryVideos()[0], patonVoteFinalDayStoryVideo);
+    assert.equal(visibleGalleryVideos()[1], septemberMilyStoryVideo);
+    assert.equal(visibleGalleryVideos()[2], patonVoteVoiceStoryVideo);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
@@ -257,71 +236,54 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     }
   });
 
-  it("surfaces the new records and canonical videos on CAMPUS GIRLS only", () => {
+  it("surfaces the final-day Story on CAMPUS GIRLS and keeps the greeting unscoped", () => {
     const campusNews = selectActivityNews("campus-girls", news, news.length);
     const liveNews = selectActivityNews("live-stream", news, news.length);
     const radioNews = selectActivityNews("radio", news, news.length);
     const missNews = selectActivityNews("miss-circle", news, news.length);
 
-    assert.equal(campusNews[0]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(campusNews[0]?.id, FINAL_DAY_NEWS_ID);
     assert.equal(campusNews[1]?.id, "2026-08-31-paton-vote-voice-story");
-    assert.equal(campusNews[2]?.id, "2026-08-31-paton-first-place-story");
-    assert.equal(campusNews[3]?.id, "2026-08-31-paton-15x-day-story");
-    assert.equal(campusNews[4]?.id, "2026-08-31-paton-vote-how-to-story");
-    assert.equal(campusNews[5]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(campusNews[6]?.id, fixtures[0].newsId);
-    assert.equal(campusNews[7]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(campusNews[8]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(campusNews[9]?.id, fixtures[1].newsId);
-    assert.equal(campusNews[10]?.id, "2026-08-29-paton-vote-day-4-story");
-    assert.equal(selectActivityMedia("campus-girls")[0]?.id, "mily-b46-01-paton-vote-final-day-story");
-    assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b45-01-paton-vote-voice-story");
-    assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b44-02-paton-vote-first-place-story");
-    assert.equal(selectActivityMedia("campus-girls")[3]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(selectActivityMedia("campus-girls")[5], campusGirlsHoldSecondStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[6], patonVoteDay5StoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[7], patonVoteDay4StoryVideo);
-
-    for (const fixture of fixtures) {
-      assert.equal(
-        liveNews.some((entry) => entry.id === fixture.newsId),
-        false,
-      );
-      assert.equal(
-        radioNews.some((entry) => entry.id === fixture.newsId),
-        false,
-      );
-      assert.equal(
-        missNews.some((entry) => entry.id === fixture.newsId),
-        false,
-      );
-    }
+    assert.equal(selectActivityMedia("campus-girls")[0], patonVoteFinalDayStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[1], patonVoteVoiceStoryVideo);
+    assert.equal(campusNews.some((entry) => entry.id === SEPTEMBER_NEWS_ID), false);
+    assert.equal(liveNews.some((entry) => entry.id === FINAL_DAY_NEWS_ID), false);
+    assert.equal(liveNews.some((entry) => entry.id === SEPTEMBER_NEWS_ID), false);
+    assert.equal(radioNews.some((entry) => entry.id === FINAL_DAY_NEWS_ID), false);
+    assert.equal(radioNews.some((entry) => entry.id === SEPTEMBER_NEWS_ID), false);
+    assert.equal(missNews.some((entry) => entry.id === FINAL_DAY_NEWS_ID), false);
+    assert.equal(missNews.some((entry) => entry.id === SEPTEMBER_NEWS_ID), false);
+    assert.equal(
+      selectActivityMedia("campus-girls").some(
+        (item) => item.id === septemberMilyStoryVideo.id,
+      ),
+      false,
+    );
   });
 
-  it("keeps the overlay ranking as a point-in-time record and omits Mixch or Tap chrome", () => {
-    const holdSecond = newsItem(fixtures[0].newsId);
-    const day5 = newsItem(fixtures[1].newsId);
+  it("keeps the overlay text and does not invent a schedule", () => {
+    const finalDay = newsItem(FINAL_DAY_NEWS_ID);
+    const september = newsItem(SEPTEMBER_NEWS_ID);
 
-    assert.match(holdSecond.body, /投稿時点の記録/);
-    assert.match(holdSecond.body, /2位/);
-    assert.match(holdSecond.message.text, /2位を守り抜きたい/);
-    assert.match(holdSecond.message.text, /パトン投票：9\/1（火）23:59まで/);
-    assert.match(holdSecond.message.text, /ムービーへの応援：本日30日（日）23:59まで/);
-    assert.equal(holdSecond.message.text.includes("Tap"), false);
-    assert.equal(holdSecond.body.includes("Mixch"), false);
-    assert.equal(holdSecond.url, undefined);
+    assert.match(finalDay.body, /最終日/);
+    assert.match(finalDay.body, /投票をお願いしました/);
+    assert.doesNotMatch(finalDay.body, /0:00|23:59|投稿時刻/);
+    assert.equal(finalDay.body.includes("Mixch"), false);
+    assert.match(finalDay.message.text, /おはよう〜☀️/);
+    assert.match(finalDay.message.text, /今日はパトン投票最終日‼️/);
+    assert.match(finalDay.message.text, /投票お願いします/);
 
-    assert.match(day5.message.text, /変面さんとの2ショット/);
-    assert.match(day5.message.text, /5日目お願いします/);
-    assert.equal(day5.message.text.includes("Tap"), false);
-    assert.equal(day5.body.includes("Mixch"), false);
+    assert.match(september.body, /9月もよろしくね/);
+    assert.doesNotMatch(september.body, /最終日|投票|Paton|パトン/);
+    assert.equal(september.body.includes("Mixch"), false);
+    assert.match(september.message.text, /9月のみりぃもよろしくね♡/);
   });
 });
 
-describe("2026-08-29〜30 Instagram Story動画 — published media", () => {
+describe("2026-09-01 Instagram Story — published media", () => {
   it("publishes exactly two shared MP4s and two real-frame posters", async () => {
     const assets = (await readdir(galleryDirectory))
-      .filter((file) => file.includes("mily-b43-"))
+      .filter((file) => file.includes("mily-b46-"))
       .sort();
     assert.deepEqual(
       assets,
@@ -346,7 +308,7 @@ describe("2026-08-29〜30 Instagram Story動画 — published media", () => {
     }
   });
 
-  it("keeps geometry and frames, strips unconfirmed audio, and uses faststart Baseline", async () => {
+  it("keeps geometry and frames, stays video-only, and uses faststart Baseline", async () => {
     for (const fixture of fixtures) {
       const mp4 = path.join(galleryDirectory, fixture.publicVideo);
       const info = await probe(mp4);
@@ -382,25 +344,22 @@ describe("2026-08-29〜30 Instagram Story動画 — published media", () => {
         assert.equal(await sha256(original), fixture.originalSha256);
         assert.equal(sourceVideo.width, video.width);
         assert.equal(sourceVideo.height, video.height);
-        assert.equal(sourceVideo.avg_frame_rate, video.avg_frame_rate);
+        assert.equal(sourceVideo.r_frame_rate, "30/1");
         assert.equal(sourceVideo.nb_frames, video.nb_frames);
-        if (fixture.originalAudioRate) {
-          assert.equal(sourceAudio.codec_name, "aac");
-          assert.equal(sourceAudio.profile, "HE-AAC");
-          assert.equal(sourceAudio.sample_rate, fixture.originalAudioRate);
-          assert.equal(sourceAudio.channels, 2);
-        } else {
-          assert.equal(sourceAudio, undefined);
-        }
+        assert.equal(sourceAudio, undefined);
       }
     }
   });
 });
 
-describe("2026-08-29〜30 Instagram Story動画 — privacy and scope", () => {
+describe("2026-09-01 Instagram Story — privacy and scope", () => {
   it("does not create articles, milestones, events, manual schedules, or photo records", () => {
-    const ids = new Set(fixtures.map(({ item }) => item.id));
-    assert.equal(stories.some((entry) => ids.has(entry.slug)), false);
+    const ids = new Set([
+      ...fixtures.map(({ item }) => item.id),
+      FINAL_DAY_NEWS_ID,
+      SEPTEMBER_NEWS_ID,
+    ]);
+    assert.equal(stories.some((entry) => ids.has(entry.slug) || ids.has(entry.id)), false);
     assert.equal(highlights.some((entry) => ids.has(entry.id)), false);
     assert.equal(events.some((entry) => ids.has(entry.id)), false);
     assert.equal(streamSchedule.some((entry) => ids.has(entry.id)), false);
@@ -409,6 +368,7 @@ describe("2026-08-29〜30 Instagram Story動画 — privacy and scope", () => {
       campusGirlsFinalStageRankingStoryVideos.some((entry) => ids.has(entry.id)),
       false,
     );
+    assert.equal(contest.currentPhase.name.includes("最終日"), false);
   });
 
   it("keeps handoff identifiers and raw originals out of tracked text", async () => {
@@ -431,18 +391,19 @@ describe("2026-08-29〜30 Instagram Story動画 — privacy and scope", () => {
     assert.equal(stdout.trim(), "media/original/README.md");
   });
 
-  it("documents the video-only policy, shared manifests, and both CTA paths", async () => {
+  it("documents the video-only public derivatives and both CTA paths", async () => {
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    assert.match(docs, /batch b43/);
-    assert.match(docs, /公開派生では削除/);
+    assert.match(docs, /batch b46/);
+    assert.match(docs, /音声ストリームはない/);
     assert.match(docs, /720×1280/);
-    assert.match(docs, /1fps/);
-    assert.match(ops, /独立動画21本/);
-    assert.match(ops, /57件/);
+    assert.match(docs, /167フレーム/);
+    assert.match(docs, /92フレーム/);
+    assert.match(ops, /独立動画26本/);
+    assert.match(ops, /69件/);
     assert.match(ops, /Instagramプロフィールを見る/);
     assert.match(ops, /Patonでみりぃに投票する/);
-    assert.match(ops, /投稿時点の記録/);
-    assert.match(ops, /PatonVoteGuide/);
+    assert.match(ops, /sameDayOrder: 2/);
+    assert.match(ops, /Activities には関連付けない/);
   });
 });
