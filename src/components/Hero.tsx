@@ -1,12 +1,13 @@
 import { contest } from "../data/contest";
 import { campusGirlsPatonVoteLink, links } from "../data/links";
 import { defaultSrc, featuredPhoto, srcSetFor } from "../data/media";
-import { news, sortNewsByDateDesc } from "../data/news";
+import { news } from "../data/news";
 import { PATON_VOTE_HOW_TO_ANCHOR_ID } from "../data/patonVoteHowTo";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
 import { supportEvents } from "../data/supportEvents";
 import { selectHomeVoteActions } from "../lib/homePortal";
+import { selectHomeHeroNews } from "../lib/patonVoteLiveCopy";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { isSupportEventUrlActive } from "../lib/supportEventLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
@@ -15,8 +16,8 @@ import { Socials } from "./Socials";
 
 export function Hero() {
   const photo = featuredPhoto();
-  const latest = sortNewsByDateDesc(news)[0];
   const now = useSupportEventClock();
+  const latest = selectHomeHeroNews(news, now);
   const voteActions = selectHomeVoteActions({
     contest,
     supportEvents,

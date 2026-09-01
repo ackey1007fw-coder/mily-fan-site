@@ -134,8 +134,11 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       ended.dashboardVoteButtons.some((action) => action.url === PATON_URL),
       false,
     );
-    assert.equal(ended.dashboardVoteButtons[0]?.url, contest.entryUrl);
-    assert.equal(ended.dashboardVoteButtons[0]?.label, "ENTRY 734を応援する");
+    assert.equal(ended.nowItems[0]?.origin, "contest");
+    assert.equal(ended.nowItems[0]?.cta?.url, contest.entryUrl);
+    assert.equal(ended.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
+    assert.equal(ended.voteActions[0].url, contest.entryUrl);
+    assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
   });
 
   it("keeps Paton and MISS CIRCLE available together during the confirmed period", () => {
@@ -166,7 +169,15 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       END + 1,
     );
     assert.equal(nextSupportEventBoundary(START - 1), START);
-    assert.equal(nextSupportEventBoundary(START), END + 1);
+    assert.equal(nextSupportEventBoundary(START), Date.parse("2026-08-31T00:00:00+09:00"));
+    assert.equal(
+      nextSupportEventBoundary(Date.parse("2026-08-31T00:00:00+09:00")),
+      Date.parse("2026-08-31T23:59:00+09:00") + 1,
+    );
+    assert.equal(
+      nextSupportEventBoundary(Date.parse("2026-08-31T23:59:00+09:00") + 1),
+      END + 1,
+    );
     assert.equal(nextSupportEventBoundary(END), END + 1);
     assert.equal(nextSupportEventBoundary(END + 1), null);
   });

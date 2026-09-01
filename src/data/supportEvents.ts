@@ -35,6 +35,8 @@ export type SupportEvent = {
   note?: string;
   /** 期間中のサイト共有文へ載せる、確認済みの短い呼びかけ。 */
   shareText?: string;
+  /** 共有文で、この企画が最優先の間だけ人物タグと並べるハッシュタグ。 */
+  shareHashtag?: string;
   schedule: SupportEventSchedule;
   ctaLinkId?: string;
   source: string;
@@ -121,6 +123,7 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
       "title",
       "note",
       "shareText",
+      "shareHashtag",
       "schedule",
       "ctaLinkId",
       "source",
@@ -143,6 +146,9 @@ export function isValidSupportEvent(event: unknown): event is SupportEvent {
     (candidate.note === undefined || typeof candidate.note === "string") &&
     (candidate.shareText === undefined ||
       (typeof candidate.shareText === "string" && candidate.shareText.length > 0)) &&
+    (candidate.shareHashtag === undefined ||
+      (typeof candidate.shareHashtag === "string" &&
+        /^#[^\s#]+$/u.test(candidate.shareHashtag))) &&
     isValidSupportEventSchedule(candidate.schedule) &&
     (candidate.ctaLinkId === undefined ||
       (typeof candidate.ctaLinkId === "string" && linkIds.has(candidate.ctaLinkId))) &&
@@ -162,6 +168,7 @@ export const campusGirlsFinalStagePatonVote: SupportEvent = {
   note:
     "Patonの三橋莉子（みりぃ）ページから応援できます。投票にはPatonへのログインが必要です。",
   shareText: "CAMPUS GIRLS 2027のPaton投票をお願いします🗳️",
+  shareHashtag: "#キャンガル2027",
   schedule: {
     state: "confirmed-period",
     start: "2026-08-26T18:00:00+09:00",

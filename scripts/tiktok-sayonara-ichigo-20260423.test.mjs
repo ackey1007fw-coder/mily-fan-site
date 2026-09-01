@@ -153,7 +153,7 @@ describe("2026-04-23 TikTok sayonara-ichigo post — Latest", () => {
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
 
     assert.equal(sortNewsByDateDesc(news)[0]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
+    assert.match(hero, /selectHomeHeroNews\(news, now\)/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
   });
 });

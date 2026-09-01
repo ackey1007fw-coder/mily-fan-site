@@ -1,4 +1,5 @@
 import { useSyncExternalStore } from "react";
+import { patonFifteenXBonusSchedule } from "../data/patonVoteBonus.ts";
 import { supportEvents } from "../data/supportEvents.ts";
 import { nextDisplayStatusBoundary } from "./supportCalendar.ts";
 
@@ -12,9 +13,12 @@ export function nextSupportEventBoundary(now: number): number | null {
     throw new Error("now must be a finite timestamp");
   }
 
-  const boundaries = supportEvents
-    .map(({ schedule }) => nextDisplayStatusBoundary(schedule, now))
-    .filter((value): value is number => value !== null && value > now);
+  const boundaries = [
+    ...supportEvents.map(({ schedule }) =>
+      nextDisplayStatusBoundary(schedule, now),
+    ),
+    nextDisplayStatusBoundary(patonFifteenXBonusSchedule, now),
+  ].filter((value): value is number => value !== null && value > now);
   return boundaries.length > 0 ? Math.min(...boundaries) : null;
 }
 

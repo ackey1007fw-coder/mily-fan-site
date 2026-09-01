@@ -42,7 +42,7 @@ export type SupportTodayItem = {
 
 export type SupportNowItem = {
   key: string;
-  origin: "support-event" | "showroom-live" | "radio-program";
+  origin: "support-event" | "showroom-live" | "radio-program" | "contest";
   activityId: ActivityId;
   title: string;
   note?: string;

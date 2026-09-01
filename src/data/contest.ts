@@ -19,6 +19,8 @@ export type ContestPhase = {
 
 export type Contest = {
   contestName: string;
+  /** 現在の審査を共有するときに使う、確認済みの企画ハッシュタグ。 */
+  shareHashtag?: string;
   entryNumber: string;
   entryUrl: string;
   currentPhase: ContestPhase | null;
@@ -28,6 +30,7 @@ export type Contest = {
 
 export const contest: Contest = {
   contestName: "MISS CIRCLE CONTEST 2026",
+  shareHashtag: "#ミスサークル2026",
   entryNumber: "ENTRY 734",
   entryUrl: "https://2026.misscircle.jp/entry/734",
   // ENTRY 734 ページから解決した本人SHOWROOMルーム名の公開表記をそのまま採用する。

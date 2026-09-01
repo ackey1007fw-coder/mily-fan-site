@@ -158,7 +158,7 @@ describe("2026-08-21 TikTok radio / misscircle post — Latest", () => {
       sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night"))[0]?.id,
       "2026-08-26-girlsaward-showroom-6th",
     );
-    assert.match(hero, /const latest = sortNewsByDateDesc\(news\)\[0\]/);
+    assert.match(hero, /selectHomeHeroNews\(news, now\)/);
     assert.match(latest, /const latestNews = sortNewsByDateDesc\(news\)/);
   });
 });

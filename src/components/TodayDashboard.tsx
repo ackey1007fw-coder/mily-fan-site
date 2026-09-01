@@ -63,9 +63,9 @@ export function TodayDashboard() {
     now,
   });
   const [primaryVote] = voteActions;
-  const liveVoteOnNow =
-    primaryVote.kind === "support-event" &&
-    nowItems.some((item) => item.cta?.url === primaryVote.url);
+  const liveVoteOnNow = nowItems.some(
+    (item) => item.cta?.url === primaryVote.url,
+  );
   const offeredUrls = new Set([
     ...nowItems.flatMap((item) => (item.cta ? [item.cta.url] : [])),
     ...dashboardVoteButtons.map((action) => action.url),
@@ -139,17 +139,25 @@ export function TodayDashboard() {
               const isLiveVote =
                 primaryVote.kind === "support-event" &&
                 item.cta?.url === primaryVote.url;
+              const isContestNowHero =
+                primaryVote.kind === "contest" &&
+                item.cta?.url === primaryVote.url;
+              const isNowHero = isLiveVote || isContestNowHero;
               return (
                 <li
                   key={item.key}
                   className={
-                    isLiveVote
+                    isNowHero
                       ? "min-w-0 rounded-2xl border-2 border-apricot bg-apricot-soft p-4 shadow-card"
                       : "min-w-0 rounded-2xl border border-apricot/50 bg-apricot-soft/40 p-3"
                   }
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">
-                    {isLiveVote ? "投票受付中" : "現在進行中を確認"}
+                    {isLiveVote
+                      ? "投票受付中"
+                      : isContestNowHero
+                        ? "今これ"
+                        : "現在進行中を確認"}
                   </p>
                   <p className="mt-1 text-base font-bold [overflow-wrap:anywhere] text-ink">
                     {item.title}
@@ -163,7 +171,7 @@ export function TodayDashboard() {
                     <p className="mt-2">
                       <ExternalLink
                         href={item.cta.url}
-                        className={isLiveVote ? primaryCta : itemCta}
+                        className={isNowHero ? primaryCta : itemCta}
                       >
                         {item.cta.label}
                       </ExternalLink>
@@ -180,8 +188,8 @@ export function TodayDashboard() {
           同じCTAを上下で繰り返さない。
 
           期間中の投票は nowItems の目立つカードが担当する。同じURLを下の行へ重ねない。
-          常設の MISS CIRCLE ENTRY は期間中もボタン行に残す。Paton が終わっても
-          ミスサー導線は消えず、期限切れの投票ボタンだけ外す。
+          常設の MISS CIRCLE ENTRY は期間中もボタン行に残す。Paton が終わったあとは
+          3次審査を NOW の「今これ」にし、同じ ENTRY をボタン行へ重ねない。
 
           secondaryActions は、バナーが同じ枠を出していて行だけ抑制した項目のうち
           バナーが提供していない行き先（例: バナーが `#stream` に退避している間の

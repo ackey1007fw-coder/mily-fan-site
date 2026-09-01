@@ -2,6 +2,7 @@ import { useState } from "react";
 import { defaultSrc, srcSetFor } from "../data/media";
 import {
   selectGalleryEntries,
+  selectGalleryPreview,
   type GalleryEntry,
 } from "../lib/galleryItems";
 import {
@@ -164,7 +165,8 @@ export function Gallery({
   showArchiveCta?: boolean;
 }) {
   const entries = selectGalleryEntries();
-  const capped = typeof limit === "number" ? entries.slice(0, limit) : entries;
+  const capped =
+    typeof limit === "number" ? selectGalleryPreview(limit) : entries;
   const [visibleCount, setVisibleCount] = useState(
     initialVisible ?? capped.length,
   );

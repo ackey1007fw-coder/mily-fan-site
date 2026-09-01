@@ -21,6 +21,8 @@ describe("date-aware site share copy", () => {
     assert.match(text, /9\/3からMISS CIRCLE CONTEST 2026の3次審査が始まります🔥/);
     assert.ok(text.indexOf("湘南シーサイドサークル") < text.indexOf("Paton投票"));
     assert.ok(text.indexOf("Paton投票") < text.indexOf("3次審査"));
+    assert.match(text, /#三橋莉子 #キャンガル2027$/);
+    assert.doesNotMatch(text, /#ミスサークル2026/);
   });
 
   it("describes the radio slot without claiming Mily's live appearance", () => {
@@ -51,6 +53,8 @@ describe("date-aware site share copy", () => {
     });
     assert.doesNotMatch(before, /Paton投票/);
     assert.match(before, /9\/3からMISS CIRCLE CONTEST 2026の3次審査/);
+    assert.match(before, /#三橋莉子 #ミスサークル2026$/);
+    assert.doesNotMatch(before, /#キャンガル2027/);
 
     const active = siteShareText({
       now: at("2026-09-03T00:00:00+09:00"),
@@ -59,16 +63,29 @@ describe("date-aware site share copy", () => {
     assert.match(active, /MISS CIRCLE CONTEST 2026の3次審査を応援してください🔥/);
     assert.match(active, /9\/13まで/);
     assert.doesNotMatch(active, /Paton投票/);
+    assert.match(active, /#三橋莉子 #ミスサークル2026$/);
+    assert.doesNotMatch(active, /#キャンガル2027/);
   });
 
-  it("returns the stable site description when no timely topic is active", () => {
+  it("returns the stable site description with the person tag when no timely topic is active", () => {
     assert.equal(
       siteShareText({
         now: at("2026-09-14T12:00:00+09:00"),
         radioPhase: "idle",
       }),
-      site.description,
+      `${site.description}\n#三橋莉子`,
     );
+  });
+
+  it("switches the campaign hashtag immediately after the Paton deadline", () => {
+    const deadline = at("2026-09-01T23:59:00+09:00");
+    const duringPaton = siteShareText({ now: deadline, radioPhase: "idle" });
+    const afterPaton = siteShareText({ now: deadline + 1, radioPhase: "idle" });
+
+    assert.match(duringPaton, /#三橋莉子 #キャンガル2027$/);
+    assert.doesNotMatch(duringPaton, /#ミスサークル2026/);
+    assert.match(afterPaton, /#三橋莉子 #ミスサークル2026$/);
+    assert.doesNotMatch(afterPaton, /#キャンガル2027/);
   });
 
   it("keeps the current X-ready payload comfortably below 280 characters", () => {
@@ -78,5 +95,23 @@ describe("date-aware site share copy", () => {
     });
 
     assert.ok(payload.text.length + 24 < 280);
+  });
+
+  it("mentions Paton 1.5x only during the confirmed 8/31 bonus window", () => {
+    const during = siteShareText({
+      now: at("2026-08-31T12:00:00+09:00"),
+      radioPhase: "idle",
+    });
+    const after = siteShareText({
+      now: at("2026-08-31T23:59:00+09:00") + 1,
+      radioPhase: "idle",
+    });
+
+    assert.match(during, /Paton投票/);
+    assert.match(during, /1\.5倍DAY/);
+    assert.match(after, /Paton投票/);
+    assert.doesNotMatch(after, /1\.5x|1\.5倍/);
+    assert.ok(during.length + 24 < 280);
+    assert.ok(after.length + 24 < 280);
   });
 });
