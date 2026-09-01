@@ -2570,3 +2570,197 @@ iframeできないため、公開ルームプロフィール API の `voice_list
 - SHOWROOM CDN URL は公開データへ残さない。hotlinkしない
 - 音声はみりぃ本人のFan Roomボイスメモ。BGM権利が不明な動画音声の無音化ルールとは別判断
 - AI生成・加工なし
+
+## 素材台帳（batch b45 / 受領日・source date 2026-08-31）
+
+オーナーが直接提供した本人Instagram Story動画1本。みりぃがCAMPUS GIRLS 2027の
+Paton投票（9月1日まで）と、31日は応援が1.5倍になって届くことを肉声で呼びかけている。
+画面上部に「投票はこちらから」のスタンプがある。owner-provided。SNSから再取得していない。
+
+HOME Latest / `/news/` と Gallery が、公開MP4・poster・manifest objectを共有する。
+CAMPUS GIRLS Activity の関連NEWS・関連メディアにも出す。恒久的なStory permalinkは
+ないため、表示は非リンクの `Instagram Story` labelとする。`/stories/`、highlights、
+events、streamSchedule、`media.ts`、PatonVoteGuide のランキング系列には追加しない。
+
+オーナーが本人肉声の保持を明示依頼したため、公開派生でも AAC 音声を残す。
+権利が不明な個人Storyで無音化した過去案件、および Fan Room 音声・b19 番組Story
+の保持判断とは別件であり、この依頼範囲に限る。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b45-01 | `gallery/mily-b45-01-paton-vote-voice-story.mp4` | 室内で眼鏡スタンプをつけたみりぃがPaton投票を呼びかける縦型動画。720×1280 / 32.400秒 / 30fps / 972フレーム / H.264 Baseline + AAC | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b45-01 poster | `gallery/mily-b45-01-paton-vote-voice-story-poster.jpg` | 公開MP4の3.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-08-31` / 恒久permalinkなし
+- 元素材は `media/original/mily-b45-01-paton-vote-voice-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `9fc67b064ea03b7fd4d3007d3be2a71ced0f1741586a404ceee4872bf714187c`
+- 40,314,111 bytes / H.264 **High** / **720×1280** / 30fps /
+  972 frames / **32.400秒** / yuv420p
+- 音声: HE-AAC / 44.1kHz / stereo。オーナーが本人肉声の保持を明示依頼したため、
+  公開派生でも音声を保持する
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+- 識別可能な第三者は見当たらない。Story上部の「投票はこちらから」スタンプと
+  眼鏡スタンプは元動画のまま維持し、cropしていない
+
+### 公開MP4
+
+- sha256: `c3d407c8be9e05cc0b28bbea86441fbd5795eaa79edd0747473a7ab3a25f0fd1`
+- 7,936,073 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  30fps / 972 frames / 32.400秒 / yuv420p / `has_b_frames` 0 /
+  AAC-LC 128k / 44.1kHz stereo
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- `+faststart`確認済み（`moov` が `mdat` より前）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_metadata:s:a -1` / `-map_chapters -1`）。元の`creation_time`と
+  `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b45-01-paton-vote-voice-story.mp4 \
+  -map 0:v:0 -map 0:a:0 \
+  -map_metadata -1 -map_metadata:s:v -1 -map_metadata:s:a -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough \
+  -c:a aac -b:a 128k \
+  -movflags +faststart \
+  public/media/gallery/mily-b45-01-paton-vote-voice-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の3.0秒地点。笑顔と組んだ手が自然に見え、Storyスタンプが読みやすく、
+  極端な瞬きやブレが少ないため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 46,458 bytes / 720×1280 JPEG / sha256
+  `59bfdef3ebab3fea1bfbf82cebae62fb8baa52255f6c632ab332b22529232572`
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/patonVoteVoiceStoryVideo.json` の1オブジェクトを
+  Latest / NEWS / Gallery / CAMPUS GIRLS Activity で共有し、公開MP4 1本・poster 1枚
+  だけを参照する
+- InstagramプロフィールURLやStoryの推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 3.0 -i public/media/gallery/mily-b45-01-paton-vote-voice-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b45-01-paton-vote-voice-story-poster.jpg
+```
+
+## 素材台帳（batch b46 / 受領日・source date 2026-09-01）
+
+オーナーが直接提供した本人Instagram Story動画2本。みりぃがPaton投票最終日を
+呼びかけている動画と、9月のあいさつ動画。owner-provided。SNSから再取得していない。
+
+HOME Latest / `/news/` と Gallery が、各Storyの公開MP4・poster・manifest objectを
+共有する。b46-01は CAMPUS GIRLS Activity の関連NEWS・関連メディアにも出す。
+b46-02は画面が9月のあいさつのため Activities には関連付けない。
+恒久的なStory permalinkはないため、表示は非リンクの `Instagram Story` labelとする。
+`/stories/`、highlights、events、streamSchedule、`media.ts`、
+PatonVoteGuide のランキング系列には追加しない。
+
+両NEWSには本人Instagramプロフィールと、確認済みPaton本人ページへの2 CTAを置く。
+InstagramプロフィールはStoryの出典ではなく関連リンク。Paton CTAは既存の
+SupportEvent期間（2026-09-01 23:59 JSTまで）に従い、終了後に自動で非表示になる。
+
+元動画に音声ストリームはない。公開派生も video-only。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b46-01 | `gallery/mily-b46-01-paton-vote-final-day-story.mp4` | パンダフィルターとコーンドッグでPaton投票最終日を呼びかける縦型動画。720×1280 / 5.567秒 / 30fps / 167フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b46-01 poster | `gallery/mily-b46-01-paton-vote-final-day-story-poster.jpg` | 公開MP4の2.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b46-02 | `gallery/mily-b46-02-september-mily-story.mp4` | くまフィルターとヘッドホンで9月のあいさつをする縦型動画。720×1280 / 3.067秒 / 30fps / 92フレーム / video-only | ✅ Latest / NEWS + Gallery |
+| b46-02 poster | `gallery/mily-b46-02-september-mily-story-poster.jpg` | 公開MP4の1.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない。受領バイトを変えず
+  `media/original/` のgitignored領域へ保存し、元の受け渡し名・URL・file IDは
+  tracked/public filesへ残さない
+- b46-01元動画: 7,222,368 bytes / sha256
+  `3d3efbef8cc81f7056d8c6a137734be8e7d56544dd337a087c025b7df10d6432` /
+  H.264 High / 720×1280 / r_frame_rate 30/1（avg_frame_rate はソースtimebase由来の
+  855040/28503） / 167 frames / video 5.567秒 /
+  音声ストリームなし
+- b46-02元動画: 4,112,409 bytes / sha256
+  `0e9d3e95ba08e2426e02ffe063884c5483c4f5834e2a7e912b0a8b8203868d2b` /
+  H.264 High / 720×1280 / 30fps / 92 frames / video 3.067秒 /
+  音声ストリームなし
+- 元動画の`creation_time`とCore Media handler名は受領検査だけに使い、投稿日・
+  投稿時刻の根拠にはしていない
+- 2本ともInstagram UI、DM、通知、端末固有情報、連絡先、第三者コメントは含まれない。
+  識別可能な第三者は見当たらない
+
+### 音声と公開派生
+
+元素材に音声ストリームがないため、公開派生も video-only。
+映像は720×1280、元のfpsとフレーム数を維持し、crop・scale・引き伸ばし・
+アップスケール・短縮・テロップ変更はしていない。AI生成・顔補正・生成塗り足しもない。
+
+- b46-01 MP4: 1,531,871 bytes / H.264 Constrained Baseline / 5.567秒 /
+  30fps / 167フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
+  `ddac08f2be2f5787e38d2f36f2594826205625da2c2dc43d0c3780b697eca455`
+- b46-01 poster: 68,288 bytes / metadataなし / sha256
+  `c15c9ce5928a75b6aff52ed45f7b50fc24369db406fac5dba198a2e5e0bf2dae`
+- b46-02 MP4: 1,550,405 bytes / H.264 Constrained Baseline / 3.067秒 /
+  30fps / 92フレーム / 音声なし / metadata・chapterなし / `+faststart` / sha256
+  `d7ca9431c53ef2166333adcde051a2a33af411801d496fd55514e748e04621f4`
+- b46-02 poster: 75,904 bytes / metadataなし / sha256
+  `f48a37896f24838ab850978312d2611ac19a86ee54de65c1bcd01d3ebc425105`
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b46-01-paton-vote-final-day-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough -movflags +faststart \
+  public/media/gallery/mily-b46-01-paton-vote-final-day-story.mp4
+```
+
+```
+ffmpeg -i media/original/mily-b46-02-september-mily-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough -movflags +faststart \
+  public/media/gallery/mily-b46-02-september-mily-story.mp4
+```
+
+### poster / 共有範囲
+
+- b46-01は公開MP4の2.0秒地点。目が開いており、コーンドッグとStoryスタンプが
+  読みやすく、極端な瞬きや口の開きが少ないため採用
+- b46-02は公開MP4の1.0秒地点。目が開いており、手書きのあいさつが読みやすいため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- EXIF / IPTC / XMP / ICCなし
+- `src/data/patonVoteFinalDayStoryVideo.json` と
+  `src/data/septemberMilyStoryVideo.json` の各1オブジェクトを
+  Latest / NEWS / Gallery で共有し、公開MP4 1本・poster 1枚だけを参照する。
+  b46-01は CAMPUS GIRLS Activity でも同じオブジェクトを使う
+- InstagramプロフィールURLやStoryの推測permalinkを出典として代用していない
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 2.0 -i public/media/gallery/mily-b46-01-paton-vote-final-day-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b46-01-paton-vote-final-day-story-poster.jpg
+```
+
+```
+ffmpeg -ss 1.0 -i public/media/gallery/mily-b46-02-september-mily-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b46-02-september-mily-story-poster.jpg
+```

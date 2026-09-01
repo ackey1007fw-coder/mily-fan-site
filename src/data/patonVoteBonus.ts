@@ -12,6 +12,7 @@ export const PATON_FIFTEEN_X_NEWS_IDS = [
   "2026-08-31-paton-first-place-story",
   "2026-08-31-paton-15x-day-story",
   "2026-08-31-paton-15x-day",
+  "2026-08-31-paton-vote-voice-story",
 ] as const;
 
 /** 8/30 Mixch「配信＆ムービーは今日が最終日」。dated NEWS + Gallery に残し、live now には出さない。 */
