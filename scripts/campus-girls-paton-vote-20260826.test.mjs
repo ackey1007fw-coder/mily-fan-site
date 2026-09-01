@@ -179,7 +179,10 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       END + 1,
     );
     assert.equal(nextSupportEventBoundary(END), END + 1);
-    assert.equal(nextSupportEventBoundary(END + 1), null);
+    const contestEnd = Date.parse("2026-09-14T00:00:00+09:00");
+    assert.equal(nextSupportEventBoundary(END + 1), contestEnd);
+    assert.equal(nextSupportEventBoundary(contestEnd - 1), contestEnd);
+    assert.equal(nextSupportEventBoundary(contestEnd), null);
   });
 
   it("surfaces the same CTA in Support NOW while voting is live", () => {
