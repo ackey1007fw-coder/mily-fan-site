@@ -2664,13 +2664,21 @@ ffmpeg -ss 3.0 -i public/media/gallery/mily-b45-01-paton-vote-voice-story.mp4 \
 HOME Latest / `/news/` と Gallery が、各Storyの公開MP4・poster・manifest objectを
 共有する。b46-01は CAMPUS GIRLS Activity の関連NEWS・関連メディアにも出す。
 b46-02は画面が9月のあいさつのため Activities には関連付けない。
-恒久的なStory permalinkはないため、表示は非リンクの `Instagram Story` labelとする。
+本人X `2026-09-01-ohayo-september-x` は同じb46-02公開MP4・posterを wrapper
+（`mily-b46-02-september-mily-x-post`）で Latest / NEWS に再利用する。
+新しい公開ファイルは作らない。SNS CDN は hotlink しない。
+Gallery tile は `septemberMilyStoryVideo` の1本のまま。Latest は X と Story の2カード。
+Xカードの `sourceLabel` は `Xの投稿を見る`。Instagram Story とは別カード。
+
+2件のInstagram Story NEWSは恒久的なStory permalinkがないため、表示は非リンクの
+`Instagram Story` labelとする。
 `/stories/`、highlights、events、streamSchedule、`media.ts`、
 PatonVoteGuide のランキング系列には追加しない。
 
-両NEWSには本人Instagramプロフィールと、確認済みPaton本人ページへの2 CTAを置く。
-InstagramプロフィールはStoryの出典ではなく関連リンク。Paton CTAは既存の
+2件のInstagram Story NEWSには本人Instagramプロフィールと、確認済みPaton本人ページへの
+2 CTAを置く。InstagramプロフィールはStoryの出典ではなく関連リンク。Paton CTAは既存の
 SupportEvent期間（2026-09-01 23:59 JSTまで）に従い、終了後に自動で非表示になる。
+XあいさつNEWSにはPaton CTAもInstagram CTAも付けない。
 
 元動画に音声ストリームはない。公開派生も video-only。
 
@@ -2678,8 +2686,8 @@ SupportEvent期間（2026-09-01 23:59 JSTまで）に従い、終了後に自動
 | --- | --- | --- | --- |
 | b46-01 | `gallery/mily-b46-01-paton-vote-final-day-story.mp4` | パンダフィルターとコーンドッグでPaton投票最終日を呼びかける縦型動画。720×1280 / 5.567秒 / 30fps / 167フレーム / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
 | b46-01 poster | `gallery/mily-b46-01-paton-vote-final-day-story-poster.jpg` | 公開MP4の2.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
-| b46-02 | `gallery/mily-b46-02-september-mily-story.mp4` | くまフィルターとヘッドホンで9月のあいさつをする縦型動画。720×1280 / 3.067秒 / 30fps / 92フレーム / video-only | ✅ Latest / NEWS + Gallery |
-| b46-02 poster | `gallery/mily-b46-02-september-mily-story-poster.jpg` | 公開MP4の1.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b46-02 | `gallery/mily-b46-02-september-mily-story.mp4` | くまフィルターとヘッドホンで9月のあいさつをする縦型動画。720×1280 / 3.067秒 / 30fps / 92フレーム / video-only | ✅ Latest / NEWS（Storyカード＋Xカードが同じ公開ファイル）+ Gallery（1本） |
+| b46-02 poster | `gallery/mily-b46-02-september-mily-story-poster.jpg` | 公開MP4の1.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS（Storyカード＋Xカードが同じ公開ファイル）+ Gallery（1本） |
 
 ### 元素材と安全確認
 

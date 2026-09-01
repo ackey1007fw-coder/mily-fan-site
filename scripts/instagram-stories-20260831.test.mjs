@@ -166,22 +166,23 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     const howTo = newsItem(HOW_TO_NEWS_ID);
     const thirtyDay = newsItem(THIRTY_DAY_NEWS_ID);
 
-    assert.equal(ordered[0]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.equal(ordered[1]?.id, "2026-09-01-september-mily-story");
-    assert.equal(ordered[2]?.id, "2026-08-31-paton-vote-voice-story");
-    assert.equal(ordered[3], firstPlace);
-    assert.equal(ordered[4], fifteenX);
-    assert.equal(ordered[5], howTo);
-    assert.equal(ordered[6]?.id, "2026-08-31-morning-stream-thanks");
-    assert.equal(ordered[7]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[8]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[9]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[10]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[11]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[12]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[13], thirtyDay);
-    assert.equal(ordered[14]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[15]?.id, "2026-08-29-paton-vote-day-5-story");
+    assert.equal(ordered[0]?.id, "2026-09-01-ohayo-september-x");
+    assert.equal(ordered[1]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(ordered[2]?.id, "2026-09-01-september-mily-story");
+    assert.equal(ordered[3]?.id, "2026-08-31-paton-vote-voice-story");
+    assert.equal(ordered[4], firstPlace);
+    assert.equal(ordered[5], fifteenX);
+    assert.equal(ordered[6], howTo);
+    assert.equal(ordered[7]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[8]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[9]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[10]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[11]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[12]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[13]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[14], thirtyDay);
+    assert.equal(ordered[15]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[16]?.id, "2026-08-29-paton-vote-day-5-story");
     assert.equal(firstPlace?.sameDayOrder, 6);
     assert.equal(fifteenX?.sameDayOrder, 5);
     assert.equal(howTo?.sameDayOrder, 4);
@@ -194,7 +195,7 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.equal(news.filter(({ id }) => id === FIFTEEN_X_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === HOW_TO_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === THIRTY_DAY_NEWS_ID).length, 1);
-    assert.equal(news.length, 69);
+    assert.equal(news.length, 70);
     assert.deepEqual(verifyNews([firstPlace, fifteenX, howTo, thirtyDay]), []);
   });
 
