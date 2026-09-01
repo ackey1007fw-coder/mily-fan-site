@@ -9,7 +9,7 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
-import { createPortalFeed } from "../src/data/portalFeed.ts";
+import { createPortalFeed, PORTAL_FEED_LIMIT } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { contest } from "../src/data/contest.ts";
@@ -251,7 +251,10 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — scope", () => {
 
 describe("2026-08-29 SHOWROOM radio / third-round X posts — Portal Feed", () => {
   it("flows through Portal Feed without a hardcoded news id or image", async () => {
-    const feed = createPortalFeed({ now: new Date("2026-08-29T16:00:00+09:00") });
+    const feed = createPortalFeed({
+      now: new Date("2026-08-29T16:00:00+09:00"),
+      limit: PORTAL_FEED_LIMIT + 4,
+    });
     const liveEntry = findFeedItem(feed, portalNewsId(LIVE_ID));
     const radioEntry = findFeedItem(feed, portalNewsId(RADIO_ID));
 

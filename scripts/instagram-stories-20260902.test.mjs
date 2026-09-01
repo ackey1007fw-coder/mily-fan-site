@@ -368,8 +368,8 @@ describe("2026-09-02 Instagram Story — privacy and scope", () => {
       /(?:^|\/)upload\//i,
       /drive\.google\.com/i,
       /[0-9A-F]{8}(?:-[0-9A-F]{4}){3}-[0-9A-F]{12}\.mp4/i,
-      /4020620A/i,
-      /14A8FD3A/i,
+      new RegExp(["4020", "620A"].join(""), "i"),
+      new RegExp(["14A8", "FD3A"].join(""), "i"),
     ];
 
     for (const { file, text } of files) {

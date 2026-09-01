@@ -16,6 +16,7 @@ import {
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
+import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -286,9 +287,10 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
     assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b45-01-paton-vote-voice-story");
     assert.equal(selectActivityMedia("campus-girls")[3]?.id, "mily-b44-02-paton-vote-first-place-story");
     assert.equal(selectActivityMedia("campus-girls")[4]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(selectActivityMedia("campus-girls")[5]?.id, "mily-b43-02-campus-girls-hold-second-story");
-    assert.equal(selectActivityMedia("campus-girls")[6]?.id, "mily-b43-01-paton-vote-day5-story");
-    assert.equal(selectActivityMedia("campus-girls")[7], patonVoteDay4StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[5], campusGirlsPatonPortraitImage);
+    assert.equal(selectActivityMedia("campus-girls")[6]?.id, "mily-b43-02-campus-girls-hold-second-story");
+    assert.equal(selectActivityMedia("campus-girls")[7]?.id, "mily-b43-01-paton-vote-day5-story");
+    assert.equal(selectActivityMedia("campus-girls")[8], patonVoteDay4StoryVideo);
     assert.equal(selectActivityMedia("live-stream")[0]?.id, "mily-b47-01-oyasumily-story");
     assert.equal(
       selectActivityMedia("live-stream").some(

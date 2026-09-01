@@ -285,9 +285,10 @@ describe("2026-08-29〜30 Instagram Story動画 — Latest / NEWS", () => {
     assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b45-01-paton-vote-voice-story");
     assert.equal(selectActivityMedia("campus-girls")[3]?.id, "mily-b44-02-paton-vote-first-place-story");
     assert.equal(selectActivityMedia("campus-girls")[4]?.id, "mily-b44-01-paton-vote-15x-emergency-story");
-    assert.equal(selectActivityMedia("campus-girls")[5], campusGirlsHoldSecondStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[6], patonVoteDay5StoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[7], patonVoteDay4StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[5], campusGirlsPatonPortraitImage);
+    assert.equal(selectActivityMedia("campus-girls")[6], campusGirlsHoldSecondStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[7], patonVoteDay5StoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[8], patonVoteDay4StoryVideo);
 
     for (const fixture of fixtures) {
       assert.equal(

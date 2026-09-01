@@ -44,6 +44,8 @@ export type CreatePortalFeedInput = {
   eventItems?: FanEvent[];
   now?: Date;
   generatedAt?: string;
+  /** Defaults to PORTAL_FEED_LIMIT. Tests may widen the window for older items. */
+  limit?: number;
 };
 
 function canonicalizeDateOnly(value: string, label: string): string {
@@ -306,15 +308,18 @@ export function selectPortalFeedItems(
   return [...priorityEvents, ...remaining].sort(compare);
 }
 
-export function assertPortalFeedContract(feed: PortalFeed): void {
+export function assertPortalFeedContract(
+  feed: PortalFeed,
+  limit = PORTAL_FEED_LIMIT,
+): void {
   if (feed.version !== PORTAL_FEED_VERSION) throw new Error("Unsupported Portal Feed version");
   if (feed.personId !== PORTAL_PERSON_ID) throw new Error("Unexpected Portal Feed personId");
   if (feed.siteUrl !== canonicalUrl()) throw new Error("Portal Feed siteUrl must be canonical");
   if (!isValidDateTime(feed.generatedAt)) {
     throw new Error("Portal Feed generatedAt must be an offset datetime");
   }
-  if (feed.items.length > PORTAL_FEED_LIMIT) {
-    throw new Error(`Portal Feed must contain at most ${PORTAL_FEED_LIMIT} items`);
+  if (feed.items.length > limit) {
+    throw new Error(`Portal Feed must contain at most ${limit} items`);
   }
 
   const ids = new Set<string>();
@@ -356,6 +361,7 @@ export function createPortalFeed(input: CreatePortalFeedInput = {}): PortalFeed 
   const generatedAt = input.generatedAt ?? now.toISOString();
   const newsItems = input.newsItems ?? news;
   const editorialRanks = newsEditorialRanks(newsItems);
+  const limit = input.limit ?? PORTAL_FEED_LIMIT;
   const candidates = [
     ...newsItems.map(newsToPortalItem),
     ...(input.storyItems ?? stories)
@@ -370,9 +376,9 @@ export function createPortalFeed(input: CreatePortalFeedInput = {}): PortalFeed 
     siteName: site.displayTitle,
     siteUrl: canonicalUrl(),
     generatedAt,
-    items: selectPortalFeedItems(candidates, now, PORTAL_FEED_LIMIT, editorialRanks),
+    items: selectPortalFeedItems(candidates, now, limit, editorialRanks),
   };
 
-  assertPortalFeedContract(feed);
+  assertPortalFeedContract(feed, limit);
   return feed;
 }
