@@ -29,6 +29,8 @@ import { campusGirlsHoldSecondStoryVideo } from "./campusGirlsHoldSecondStoryVid
 import { patonVoteFifteenXStoryVideo } from "./patonVoteFifteenXStoryVideo.ts";
 import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.ts";
 import { patonVoteVoiceStoryVideo } from "./patonVoteVoiceStoryVideo.ts";
+import { patonVoteFinalDayStoryVideo } from "./patonVoteFinalDayStoryVideo.ts";
+import { septemberMilyStoryVideo } from "./septemberMilyStoryVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -180,6 +182,52 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-01-paton-vote-final-day-story",
+    date: "2026-09-01",
+    sameDayOrder: 2,
+    activityIds: ["campus-girls"],
+    title: "おはよう。今日はパトン投票最終日",
+    body: "9月1日、みりぃがInstagram Storyで、CAMPUS GIRLS 2027のPaton投票が最終日であることを伝え、投票をお願いしました。画面上の「投票お願いします」はPaton本人ページへの導線です。",
+    sourceLabel: patonVoteFinalDayStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: patonVoteFinalDayStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "おはよう〜🌞\n" +
+        "今日はパトン投票最終日‼️\n" +
+        "投票お願いします 🙌❣️",
+    },
+  },
+  {
+    id: "2026-09-01-september-mily-story",
+    date: "2026-09-01",
+    sameDayOrder: 1,
+    title: "9月のみりぃもよろしくね",
+    body: "9月1日、みりぃがInstagram Storyで、9月もよろしくねとあいさつしました。",
+    sourceLabel: septemberMilyStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsPatonVoteLink.label,
+        url: campusGirlsPatonVoteLink.url,
+      },
+    ],
+    media: septemberMilyStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "9月のみりぃもよろしくね♡",
+    },
+  },
   {
     id: "2026-08-31-paton-vote-voice-story",
     date: "2026-08-31",
