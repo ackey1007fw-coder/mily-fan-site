@@ -1,18 +1,14 @@
-import type { Contest, ContestPhase } from "../data/contest.ts";
+import type { Contest } from "../data/contest.ts";
 import type { SiteLink } from "../data/links.ts";
 import {
   campusGirlsFinalStagePatonVote,
   type SupportEvent,
 } from "../data/supportEvents.ts";
 import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
+import { contestPhaseDisplayNote } from "./contestPhaseDisplay.ts";
 import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
 import { patonVoteLiveNote } from "./patonVoteLiveCopy.ts";
-import {
-  displayStatus,
-  formatScheduleEndLabel,
-  formatShortTokyoDate,
-  formatShortTokyoEndDate,
-} from "./supportCalendar.ts";
+import { displayStatus, formatScheduleEndLabel } from "./supportCalendar.ts";
 
 export const HOME_ROUTE = "/" as const;
 export const NEWS_ARCHIVE_ROUTE = "/news/" as const;
@@ -51,20 +47,15 @@ export type HomeVoteAction = {
   deadlineLabel?: string;
 };
 
-function contestPhaseNote(phase: ContestPhase): string {
-  if (phase.start && phase.end) {
-    return `${phase.name}（${formatShortTokyoDate(phase.start)}〜${formatShortTokyoEndDate(phase.start, phase.end)}）`;
-  }
-  return phase.name;
-}
-
 function contestVoteAction(contest: Contest): HomeVoteAction {
   return {
     kind: "contest",
     label: `${contest.entryNumber}を応援する`,
     url: contest.entryUrl,
     title: contest.contestName,
-    ...(contest.currentPhase ? { note: contestPhaseNote(contest.currentPhase) } : {}),
+    ...(contest.currentPhase
+      ? { note: contestPhaseDisplayNote(contest.currentPhase) }
+      : {}),
   };
 }
 

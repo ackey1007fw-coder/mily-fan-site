@@ -243,7 +243,11 @@ export default function SupportPage() {
                 <li key={item.key} className="rounded-3xl border border-sage/15 bg-paper-card p-5 shadow-card sm:p-6">
                   <p className="text-xs font-semibold text-sage-deep">{item.label}</p>
                   <p className="mt-2 text-xl font-bold leading-relaxed text-ink">{item.value}</p>
-                  {item.note ? <p className="mt-2 text-xs leading-6 text-ink-muted">{item.note}</p> : null}
+                  {item.note ? (
+                    <p className="mt-2 whitespace-pre-line text-xs leading-6 text-ink-muted">
+                      {item.note}
+                    </p>
+                  ) : null}
                   <div className="mt-5 flex flex-wrap gap-2">
                     {item.cta ? <ActionLink action={item.cta} /> : null}
                     <ActivityLink activityId={item.activityId} />
@@ -269,7 +273,11 @@ export default function SupportPage() {
                   <li key={item.key} className="rounded-3xl border border-apricot/50 bg-apricot-soft/40 p-5 shadow-card sm:p-6">
                     <p className="text-xs font-semibold uppercase tracking-wide text-apricot-ink">現在進行中を確認</p>
                     <p className="mt-2 text-xl font-bold leading-relaxed text-ink">{item.title}</p>
-                    {item.note ? <p className="mt-2 text-xs leading-6 text-ink-muted">{item.note}</p> : null}
+                    {item.note ? (
+                    <p className="mt-2 whitespace-pre-line text-xs leading-6 text-ink-muted">
+                      {item.note}
+                    </p>
+                  ) : null}
                     <div className="mt-5 flex flex-wrap gap-2">
                       {item.cta ? <ActionLink action={item.cta} /> : null}
                       <ActivityLink activityId={item.activityId} />

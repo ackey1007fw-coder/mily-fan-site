@@ -66,7 +66,10 @@ export function Support() {
           <div className="mt-3 space-y-1">
             {gatewayVoteActions.map((action) =>
               action.note ? (
-                <p key={action.url} className="text-xs leading-5 text-ink-muted">
+                <p
+                  key={action.url}
+                  className="whitespace-pre-line text-xs leading-5 text-ink-muted"
+                >
                   <span className="font-medium">{action.label}:</span>{" "}
                   {action.note}
                 </p>
