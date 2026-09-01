@@ -71,10 +71,12 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — Latest entry", () =>
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(news.length, 70);
-    assert.equal(ordered[0]?.id, NEWS_ID);
-    assert.equal(ordered[1]?.id, FINAL_DAY_STORY_ID);
-    assert.equal(ordered[2]?.id, SEPTEMBER_STORY_ID);
+    assert.equal(news.length, 72);
+    assert.equal(ordered[0]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[1]?.id, "2026-09-02-paton-second-story");
+    assert.equal(ordered[2]?.id, NEWS_ID);
+    assert.equal(ordered[3]?.id, FINAL_DAY_STORY_ID);
+    assert.equal(ordered[4]?.id, SEPTEMBER_STORY_ID);
     assert.equal(entry.date, "2026-09-01");
     assert.equal(entry.sameDayOrder, 3);
     assert.equal(news.find((candidate) => candidate.id === FINAL_DAY_STORY_ID)?.sameDayOrder, 2);
@@ -193,7 +195,7 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — Latest entry", () =>
     assert.equal(existsSync(path.join(galleryDirectory, publicFiles[0])), true);
     assert.equal(existsSync(path.join(galleryDirectory, publicFiles[1])), true);
 
-    assert.equal(galleryVideos.length, 30);
+    assert.equal(galleryVideos.length, 32);
     assert.equal(
       galleryVideos.some((video) => video.id === ohayoSeptemberXVideo.id),
       false,

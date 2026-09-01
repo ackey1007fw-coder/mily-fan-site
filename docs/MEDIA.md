@@ -2772,3 +2772,46 @@ ffmpeg -ss 1.0 -i public/media/gallery/mily-b46-02-september-mily-story.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b46-02-september-mily-story-poster.jpg
 ```
+
+## 素材台帳（batch b47 / 受領日・source date 2026-09-02）
+
+オーナーが直接提供した本人Instagram Story動画2本。みりぃが翌日9:00の
+SHOWROOMを案内するおやすみ動画と、Paton投票を2位で締められたお礼動画。
+owner-provided。SNSから再取得していない。公開ファイルは既にブランチへ
+コミット済みで、再エンコードしていない。
+
+HOME Latest / `/news/` と Gallery が、各Storyの公開MP4・poster・manifest
+objectを共有する。b47-01は LIVE STREAM Activity、b47-02は CAMPUS GIRLS
+Activity の関連NEWS・関連メディアにも出す。
+恒久的なStory permalinkはないため、表示は非リンクの `Instagram Story`
+labelとする。`/stories/`、highlights、events、streamSchedule、`media.ts`、
+PatonVoteGuide のランキング系列には追加しない。
+
+公開派生は video-only（音声ストリームなし）。映像は720×1280。posterは
+公開MP4の実フレーム。元素材は gitignored の `media/original/` に留め、
+台帳には公開ファイル名と公開ファイルの sha256 だけを書く。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b47-01 | `gallery/mily-b47-01-oyasumily.mp4` | パンダ耳フィルターでおやすみと翌日9:00 SHOWROOM案内をする縦型動画。720×1280 / 6.000秒 / 20fps / 120フレーム / H.264 / video-only | ✅ Latest / NEWS + Gallery + LIVE STREAM Activity |
+| b47-01 poster | `gallery/mily-b47-01-oyasumily-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b47-02 | `gallery/mily-b47-02-paton-second.mp4` | Paton順位画面で2位お礼と面接を頑張ると伝える縦型動画。720×1280 / 20.000秒 / 30fps / 600フレーム / H.264 / video-only | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b47-02 poster | `gallery/mily-b47-02-paton-second-poster.jpg` | 公開MP4の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 公開ファイル（sha256 は公開派生のみ）
+
+- provenance: `owner-provided`。SNSから再取得していない
+- Instagram Story。恒久permalinkなし。`sourceUrl` は持たない
+- 公開MP4は video-only、`+faststart`
+- posterは公開MP4の実フレーム。AI生成・顔補正・生成塗り足しなし
+- b47-01 MP4: 6,394,851 bytes / 720×1280 / 6.000秒 / sha256
+  `3650d5e6f11e7343e61478aa69c5ce015dd05301e1f5f4870c837e5570b1b059`
+- b47-01 poster: 65,079 bytes / 720×1280 / sha256
+  `f9c928a81261acd479f4ebd19d7b244b8bad8eb83bf8338e6631f90e859128b0`
+- b47-02 MP4: 9,573,726 bytes / 720×1280 / 20.000秒 / sha256
+  `492198f87ff18a8d35d5aa006f5cde13d67d73064477f3de6cd0f1e086e2ac8c`
+- b47-02 poster: 96,954 bytes / 720×1280 / sha256
+  `4d366982e976c7a321413255a127d6d59dcea8d42e0b8f8644a665afcfcd6810`
+- `src/data/oyasumilyStoryVideo.json` と
+  `src/data/patonSecondStoryVideo.json` の各1オブジェクトを
+  Latest / NEWS / Gallery で共有し、公開MP4 1本・poster 1枚だけを参照する
