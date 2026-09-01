@@ -310,10 +310,10 @@ describe("2026-08-19 second-round Story video — source URL handling", () => {
 
   it("adds no unconfirmed third-round schedule to the Story", async () => {
     // Storyに映った仮の日程は恒久ソースとして本文へ残さない。
-    // 公式 SCHEDULE の日付は contest.ts が正本。SHOWROOM審査は未発表。
+    // 主催者 SCHEDULE の日付は contest.ts が正本。ContestPhase は日付のみ。
     assert.equal(contest.currentPhase.start, "2026-09-03");
     assert.equal(contest.currentPhase.end, "2026-09-13");
-    assert.equal(contest.lastVerifiedAt, "2026-08-26");
+    assert.equal(contest.lastVerifiedAt, "2026-09-02");
     assert.equal(contest.currentPhase.source, "https://www.misscircle.jp/");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 

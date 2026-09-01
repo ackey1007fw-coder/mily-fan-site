@@ -250,7 +250,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.doesNotMatch(serialized, /2026-09-02T20:00:00\+09:00/);
     assert.doesNotMatch(serialized, /2026-09-12T12:59/);
     assert.doesNotMatch(serialized, /AGESTOCK|横浜アリーナ|通過発表|会場三次/);
-    assert.doesNotMatch(serialized, /9:00/);
+    assert.doesNotMatch(serialized, /09-02T20:00|12:59:00/);
 
     const calendarCtas = adaptSupportEvents(supportEvents, WEB_START).items;
     assert.equal(
@@ -268,7 +268,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     const section = ops.slice(start, end);
     assert.match(section, /sameDayOrder: 10/);
     assert.match(section, /supportEvents\.ts/);
-    assert.match(section, /events\.ts は空のまま/);
+    assert.match(section, /events\.ts[`\s]+は空のまま/);
     assert.match(section, /SHOWROOMヘッダー枠/);
     assert.doesNotMatch(section, /#133|copy-tweak|title\/body/);
   });

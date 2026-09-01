@@ -368,12 +368,12 @@ describe("Gallery portrait-first order", () => {
 });
 
 describe("confirmed Miss Circle third-round dates", () => {
-  it("records official SCHEDULE dates and leaves SHOWROOM times unpublished", () => {
+  it("records official SCHEDULE dates and keeps ContestPhase date-only", () => {
     assert.equal(contest.currentPhase?.name, "3次審査進出");
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-08-26");
+    assert.equal(contest.lastVerifiedAt, "2026-09-02");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 
     const afterPaton = selectHomeVoteAction({
@@ -393,21 +393,32 @@ describe("confirmed Miss Circle third-round dates", () => {
     const lastDay = homeToday(Date.parse("2026-09-13T23:59:00+09:00"));
     const after = homeToday(Date.parse("2026-09-14T00:00:00+09:00"));
     const stillPaton = homeToday(END);
+    const webVoteUrl =
+      "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734";
 
-    for (const view of [approaching, during, lastDay]) {
+    assert.equal(approaching.nowItems.some((item) => item.cta?.url === PATON_URL), false);
+    assert.equal(approaching.nowItems[0]?.origin, "contest");
+    assert.equal(approaching.nowItems[0]?.cta?.url, contest.entryUrl);
+    assert.equal(approaching.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
+    assert.match(approaching.nowItems[0]?.note ?? "", /3次審査進出/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /9\/3/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /9\/13/);
+    assert.equal(approaching.voteActions[0].kind, "contest");
+
+    for (const view of [during, lastDay]) {
       assert.equal(view.nowItems.some((item) => item.cta?.url === PATON_URL), false);
-      assert.equal(view.nowItems[0]?.origin, "contest");
-      assert.equal(view.nowItems[0]?.cta?.url, contest.entryUrl);
-      assert.equal(view.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
-      assert.match(view.nowItems[0]?.note ?? "", /3次審査進出/);
-      assert.match(view.nowItems[0]?.note ?? "", /9\/3/);
-      assert.match(view.nowItems[0]?.note ?? "", /9\/13/);
+      assert.equal(view.nowItems[0]?.origin, "support-event");
+      assert.equal(view.nowItems[0]?.cta?.url, webVoteUrl);
+      assert.equal(
+        view.voteActions.some(
+          (action) => action.kind === "contest" && action.url === contest.entryUrl,
+        ),
+        true,
+      );
       assert.doesNotMatch(
         `${view.nowItems[0]?.title}\n${view.nowItems[0]?.note ?? ""}`,
         /CAMPUS GIRLS|FinalSTAGE|Paton/,
       );
-      assert.equal(view.voteActions[0].kind, "contest");
-      assert.doesNotMatch(JSON.stringify(view.nowItems), /12:00|05:00|21:59/);
     }
 
     assert.equal(stillPaton.nowItems[0]?.cta?.url, PATON_URL);
