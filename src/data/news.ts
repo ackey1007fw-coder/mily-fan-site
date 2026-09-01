@@ -190,8 +190,9 @@ export const news: NewsItem[] = [
     date: "2026-09-02",
     sameDayOrder: 2,
     activityIds: ["live-stream"],
-    title: "おやすみりぃ。明日は9:00〜SR配信",
-    body: "おやすみのStory。明日9:00からSHOWROOMです。私にしては珍しい時間、だって。",
+    title: "「おやすみりぃ」翌日9:00からSHOWROOM配信",
+    body:
+      "9月2日未明、みりぃがInstagram Storyで、おやすみのあいさつとともに翌日9:00からのSHOWROOM配信を案内しました。「私にしては珍しい時間」と添えています。",
     sourceLabel: oyasumilyStoryVideo.sourceLabel,
     relatedUrl: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
@@ -217,8 +218,9 @@ export const news: NewsItem[] = [
     date: "2026-09-02",
     sameDayOrder: 1,
     activityIds: ["campus-girls"],
-    title: "パトン投票、2位でした",
-    body: "Story時点で144,550pt、2位。お礼と、面接頑張ってくるねっ、とありました。",
+    title: "パトン投票を2位で終え、応援に感謝",
+    body:
+      "みりぃがInstagram Storyで、Paton投票を2位で終えたことを報告し、応援への感謝を伝えました。投稿時点の表示は144,550pt。あわせて、面接に向けた意気込みもつづっています。",
     sourceLabel: patonSecondStoryVideo.sourceLabel,
     relatedUrl: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",

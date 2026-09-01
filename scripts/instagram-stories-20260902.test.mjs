@@ -265,18 +265,18 @@ describe("2026-09-02 Instagram Story — Latest / NEWS", () => {
     const oyasumily = newsItem(OYASUMILY_NEWS_ID);
     const patonSecond = newsItem(PATON_SECOND_NEWS_ID);
 
-    assert.equal(oyasumily.title, "おやすみりぃ。明日は9:00〜SR配信");
+    assert.equal(oyasumily.title, "「おやすみりぃ」翌日9:00からSHOWROOM配信");
     assert.equal(
       oyasumily.body,
-      "おやすみのStory。明日9:00からSHOWROOMです。私にしては珍しい時間、だって。",
+      "9月2日未明、みりぃがInstagram Storyで、おやすみのあいさつとともに翌日9:00からのSHOWROOM配信を案内しました。「私にしては珍しい時間」と添えています。",
     );
     assert.equal(oyasumily.message.label, "みりぃのStory");
     assert.equal(oyasumily.message.text, OYASUMILY_MESSAGE);
 
-    assert.equal(patonSecond.title, "パトン投票、2位でした");
+    assert.equal(patonSecond.title, "パトン投票を2位で終え、応援に感謝");
     assert.equal(
       patonSecond.body,
-      "Story時点で144,550pt、2位。お礼と、面接頑張ってくるねっ、とありました。",
+      "みりぃがInstagram Storyで、Paton投票を2位で終えたことを報告し、応援への感謝を伝えました。投稿時点の表示は144,550pt。あわせて、面接に向けた意気込みもつづっています。",
     );
     assert.equal(patonSecond.message.label, "みりぃのStory");
     assert.equal(patonSecond.message.text, PATON_SECOND_MESSAGE);
