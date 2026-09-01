@@ -31,6 +31,7 @@ import { patonVoteFirstPlaceStoryVideo } from "./patonVoteFirstPlaceStoryVideo.t
 import { patonVoteVoiceStoryVideo } from "./patonVoteVoiceStoryVideo.ts";
 import { patonVoteFinalDayStoryVideo } from "./patonVoteFinalDayStoryVideo.ts";
 import { septemberMilyStoryVideo } from "./septemberMilyStoryVideo.ts";
+import { ohayoSeptemberXVideo } from "./ohayoSeptemberXVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
@@ -190,6 +191,7 @@ export const news: NewsItem[] = [
     body: "9月1日朝、みりぃがXで「おはよ〜 今日から9月ー！！」とあいさつした。約3秒の動画付き。",
     source: "https://x.com/Mily_chan36/status/2094579904587382930",
     sourceLabel: "Xの投稿を見る",
+    media: ohayoSeptemberXVideo,
     message: {
       label: "みりぃの投稿",
       text:
