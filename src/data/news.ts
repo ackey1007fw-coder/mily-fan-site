@@ -80,7 +80,7 @@ import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
 import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
 import { autumnLeafNewsImage } from "./autumnLeafNewsImage.ts";
 import {
-  firstSeptemberFanmarkBoardImage,
+  firstSeptemberShowroomAdditionalMedia,
   firstSeptemberTomatoBoardImage,
 } from "./firstSeptemberShowroomImages.ts";
 import {
@@ -286,7 +286,7 @@ export const news: NewsItem[] = [
     relatedUrl: "https://www.showroom-live.com/r/circle2026_0734",
     ctaLabel: "SHOWROOM",
     media: firstSeptemberTomatoBoardImage,
-    additionalMedia: [firstSeptemberFanmarkBoardImage],
+    additionalMedia: [...firstSeptemberShowroomAdditionalMedia],
   },
   {
     id: "2026-09-01-ohayo-september-x",

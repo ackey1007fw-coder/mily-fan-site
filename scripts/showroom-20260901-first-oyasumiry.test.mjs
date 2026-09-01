@@ -12,7 +12,12 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import {
+  firstSeptemberAckeyCheekImage,
+  firstSeptemberAckeyHeadpointImage,
+  firstSeptemberAckeyPointImage,
+  firstSeptemberAckeyPreposeImage,
   firstSeptemberFanmarkBoardImage,
+  firstSeptemberShowroomAdditionalMedia,
   firstSeptemberTomatoBoardImage,
 } from "../src/data/firstSeptemberShowroomImages.ts";
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
@@ -40,11 +45,30 @@ const TITLE = "9月初配信、おやすみりー";
 const BODY =
   "9月1日22:31から翌0:19頃まで、約1時間48分。9月はじめての配信。すっぴんで、帽子で前髪が潰れた、うるうるカラコンで目が乾いた、と話していた。今月の目標は「ミリィの栄養素」70人。ボードの1人目はあっきーさん、2人目はやすぴさん。パトン投票はその夜が最終日で、当時2位。最後はおやすみなさい、おやすみりー、おみりー。山を一歩ずつ登って、肩を組んで這い上がろう、という話もあった。";
 const LEAD = "/media/news/mily-b48-01-tomato-nutrient-ackey.jpg";
-const EXTRA = "/media/news/mily-b48-02-fanmark-yasupi.jpg";
-const LEAD_FILE = path.join(root, "public", LEAD.slice(1));
-const EXTRA_FILE = path.join(root, "public", EXTRA.slice(1));
-const LEAD_ORIGINAL = "media/original/mily-b48-01-tomato-nutrient-ackey.jpg";
-const EXTRA_ORIGINAL = "media/original/mily-b48-02-fanmark-yasupi.jpg";
+const YASUPI = "/media/news/mily-b48-06-fanmark-yasupi.jpg";
+const STILL_SRCS = [
+  LEAD,
+  "/media/news/mily-b48-02-ackey-point.jpg",
+  "/media/news/mily-b48-03-ackey-prepose.jpg",
+  "/media/news/mily-b48-04-ackey-cheek.jpg",
+  "/media/news/mily-b48-05-ackey-headpoint.jpg",
+  YASUPI,
+];
+const STILL_FILES = STILL_SRCS.map((src) => path.join(root, "public", src.slice(1)));
+const STILL_ORIGINALS = [
+  "media/original/mily-b48-01-tomato-nutrient-ackey.jpg",
+  "media/original/mily-b48-02-ackey-point.jpg",
+  "media/original/mily-b48-03-ackey-prepose.jpg",
+  "media/original/mily-b48-04-ackey-cheek.jpg",
+  "media/original/mily-b48-05-ackey-headpoint.jpg",
+  "media/original/mily-b48-06-fanmark-yasupi.jpg",
+];
+const ACKEY_ADDITIONS = [
+  firstSeptemberAckeyPointImage,
+  firstSeptemberAckeyPreposeImage,
+  firstSeptemberAckeyCheekImage,
+  firstSeptemberAckeyHeadpointImage,
+];
 
 const FORBIDDEN = [
   "ミスサークル",
@@ -129,34 +153,47 @@ describe("2026-09-01 first SHOWROOM おやすみりー — NEWS", () => {
 });
 
 describe("2026-09-01 first SHOWROOM おやすみりー — self-hosted boards", () => {
-  it("uses two NEWS-only JPEGs and never hotlinks SNS media", async () => {
+  it("uses six NEWS-only JPEGs with あっきー as lead and やすぴ last", async () => {
     const entry = item();
     const displayed = newsDisplayMedia(entry);
 
     assert.equal(entry.media, firstSeptemberTomatoBoardImage);
     assert.notEqual(entry.media, firstSeptemberFanmarkBoardImage);
-    assert.deepEqual(entry.additionalMedia, [firstSeptemberFanmarkBoardImage]);
+    assert.deepEqual(
+      [...(entry.additionalMedia ?? [])],
+      [...firstSeptemberShowroomAdditionalMedia],
+    );
+    assert.deepEqual([...ACKEY_ADDITIONS, firstSeptemberFanmarkBoardImage], [
+      ...firstSeptemberShowroomAdditionalMedia,
+    ]);
     assert.equal(displayed[0], firstSeptemberTomatoBoardImage);
     assert.deepEqual(displayed, [
       firstSeptemberTomatoBoardImage,
+      ...ACKEY_ADDITIONS,
       firstSeptemberFanmarkBoardImage,
     ]);
+    assert.equal(displayed.at(-1), firstSeptemberFanmarkBoardImage);
     assert.equal(firstSeptemberTomatoBoardImage.published, true);
     assert.equal(firstSeptemberTomatoBoardImage.provenance, "owner-provided");
     assert.equal(firstSeptemberTomatoBoardImage.sourceDate, "2026-09-01");
     assert.equal(firstSeptemberTomatoBoardImage.sourceUrl, null);
     assert.equal(firstSeptemberFanmarkBoardImage.published, true);
-    assert.equal(firstSeptemberFanmarkBoardImage.provenance, "owner-provided");
-    assert.equal(firstSeptemberFanmarkBoardImage.sourceDate, "2026-09-01");
-    assert.equal(firstSeptemberFanmarkBoardImage.sourceUrl, null);
+    assert.equal(firstSeptemberFanmarkBoardImage.src, YASUPI);
     assert.equal(firstSeptemberTomatoBoardImage.src, LEAD);
-    assert.equal(firstSeptemberFanmarkBoardImage.src, EXTRA);
-    assert.equal(firstSeptemberTomatoBoardImage.width, 640);
-    assert.equal(firstSeptemberTomatoBoardImage.height, 360);
-    assert.equal(firstSeptemberFanmarkBoardImage.width, 640);
-    assert.equal(firstSeptemberFanmarkBoardImage.height, 360);
-    assert.equal(existsSync(LEAD_FILE), true);
-    assert.equal(existsSync(EXTRA_FILE), true);
+    for (const still of [
+      firstSeptemberTomatoBoardImage,
+      ...ACKEY_ADDITIONS,
+      firstSeptemberFanmarkBoardImage,
+    ]) {
+      assert.equal(still.width, 640);
+      assert.equal(still.height, 360);
+      assert.equal(still.published, true);
+      assert.equal(still.provenance, "owner-provided");
+      assert.equal(still.sourceUrl, null);
+    }
+    for (const file of STILL_FILES) {
+      assert.equal(existsSync(file), true, file);
+    }
 
     for (const host of ["pbs.twimg.com", "twimg", "cdninstagram", "http://"]) {
       assert.equal(firstSeptemberTomatoBoardImage.src.includes(host), false, host);
@@ -168,12 +205,16 @@ describe("2026-09-01 first SHOWROOM おやすみりー — self-hosted boards", 
       .sort();
     assert.deepEqual(newsFiles, [
       "mily-b48-01-tomato-nutrient-ackey.jpg",
-      "mily-b48-02-fanmark-yasupi.jpg",
+      "mily-b48-02-ackey-point.jpg",
+      "mily-b48-03-ackey-prepose.jpg",
+      "mily-b48-04-ackey-cheek.jpg",
+      "mily-b48-05-ackey-headpoint.jpg",
+      "mily-b48-06-fanmark-yasupi.jpg",
     ]);
   });
 
   it("strips metadata and keeps the 640x360 composition", async () => {
-    for (const file of [LEAD_FILE, EXTRA_FILE]) {
+    for (const file of STILL_FILES) {
       const metadata = await sharp(file).metadata();
       assert.equal(metadata.format, "jpeg");
       assert.equal(metadata.width, 640);
@@ -187,7 +228,7 @@ describe("2026-09-01 first SHOWROOM おやすみりー — self-hosted boards", 
   });
 
   it("keeps owner-provided originals ignored and out of git", async () => {
-    for (const relative of [LEAD_ORIGINAL, EXTRA_ORIGINAL]) {
+    for (const relative of STILL_ORIGINALS) {
       const { stdout: ignored } = await run(
         "git",
         ["check-ignore", "-v", "--", relative],
@@ -247,10 +288,12 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
     assert.match(section, /live-stream/);
     assert.match(section, /Paton投票CTAは付けない/);
     assert.match(section, /代表 `media` はあっきーさんボード/);
-    assert.match(section, /やすぴさんボードは `additionalMedia` のみ/);
+    assert.match(section, /やすぴさんボードを末尾に置く/);
     assert.match(mediaGuide, /## 素材台帳（batch b48/);
     assert.match(mediaGuide, /mily-b48-01-tomato-nutrient-ackey/);
-    assert.match(mediaGuide, /mily-b48-02-fanmark-yasupi/);
+    assert.match(mediaGuide, /mily-b48-02-ackey-point/);
+    assert.match(mediaGuide, /mily-b48-06-fanmark-yasupi/);
+    assert.doesNotMatch(mediaGuide, /mily-b48-02-fanmark-yasupi/);
     assert.doesNotMatch(section, /Drive ID|attachment hash|sha256/);
     assert.equal(DRIVE_HOST_PATTERN.test(ops), false);
     assert.equal(DRIVE_FOLDER_PATTERN.test(ops), false);

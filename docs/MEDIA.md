@@ -2818,7 +2818,7 @@ PatonVoteGuide のランキング系列には追加しない。
 
 ## 素材台帳（batch b48 / 受領日・source date 2026-09-01）
 
-オーナーが直接提供した 2026-09-01 SHOWROOM のボード画面2枚。
+オーナーが直接提供した 2026-09-01 SHOWROOM のボード画面。
 視聴者コメント画面ではない。SNSから再取得していない。
 HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 `/stories/` には出さない。
@@ -2828,8 +2828,12 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b48-01 | `news/mily-b48-01-tomato-nutrient-ackey.jpg` | みりぃがホワイトボードを持つ。ボードは「トマトの栄養素 ♡」「1人目」「あっきーさん！！」 | ✅ Latest / NEWS 代表（カードの顔）。Gallery 非掲載 |
-| b48-02 | `news/mily-b48-02-fanmark-yasupi.jpg` | みりぃがホワイトボードを持つ。ボードは「ファンマーク」とトマトの絵、「2人目」「やすぴ。さん♪」 | ✅ Latest / NEWS の additionalMedia のみ。Gallery 非掲載 |
+| b48-01 | `news/mily-b48-01-tomato-nutrient-ackey.jpg` | あっきーさんボード。ボード寄り。「トマトの栄養素 ♡」「1人目」「あっきーさん！！」 | ✅ Latest / NEWS 代表（カードの顔）。Gallery 非掲載 |
+| b48-02 | `news/mily-b48-02-ackey-point.jpg` | 同じボード。指差し | ✅ additionalMedia。Gallery 非掲載 |
+| b48-03 | `news/mily-b48-03-ackey-prepose.jpg` | 同じボード。ポーズ直前 | ✅ additionalMedia。Gallery 非掲載 |
+| b48-04 | `news/mily-b48-04-ackey-cheek.jpg` | 同じボード | ✅ additionalMedia。Gallery 非掲載 |
+| b48-05 | `news/mily-b48-05-ackey-headpoint.jpg` | 同じボード。頭を指さす | ✅ additionalMedia。Gallery 非掲載 |
+| b48-06 | `news/mily-b48-06-fanmark-yasupi.jpg` | やすぴさんボード。「ファンマーク」とトマトの絵、「2人目」「やすぴ。さん♪」 | ✅ additionalMedia 末尾のみ。Gallery 非掲載 |
 
 ### 公開ファイル
 
@@ -2838,4 +2842,4 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 - 公開JPEGは収録の実寸 640×360。拡大しない。EXIF / GPS / IPTC / XMP / ICC なし
 - crop・mask・AI加工・顔補正・生成塗り足しなし
 - NEWS カード表示より大きくないため、480 / 960 / 1600 の派生は作らない
-- 代表はあっきーさんボード。やすぴさんボードは additionalMedia のみ。後から切り出し静止画が来る想定で、いまは全画面のまま置く
+- 代表はあっきーさんボード（b48-01）。やすぴさんボードは additionalMedia の末尾のみ
