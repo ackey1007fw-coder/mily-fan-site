@@ -268,15 +268,15 @@ describe("2026-09-02 Instagram Story — Latest / NEWS", () => {
     assert.equal(oyasumily.title, "おやすみりぃ。明日は9:00〜SR配信");
     assert.equal(
       oyasumily.body,
-      "9月2日未明、みりぃがInstagram Storyでおやすみのあいさつをし、翌日9:00からのSHOWROOM配信を案内した。本人は「私にしては珍しい時間」と書いている。",
+      "おやすみのStory。明日9:00からSHOWROOMです。私にしては珍しい時間、だって。",
     );
     assert.equal(oyasumily.message.label, "みりぃのStory");
     assert.equal(oyasumily.message.text, OYASUMILY_MESSAGE);
 
-    assert.equal(patonSecond.title, "パトン投票、2位で締められました");
+    assert.equal(patonSecond.title, "パトン投票、2位でした");
     assert.equal(
       patonSecond.body,
-      "9月2日未明、みりぃがInstagram StoryでPaton投票を2位（144,550pt）で締められたことへのお礼と、面接を頑張ると伝えた。点数は投稿時点の記録。投票は2026-09-01 23:59 JSTで終了済みなので live の投票ボタンは付けない。",
+      "Story時点で144,550pt、2位。お礼と、面接頑張ってくるねっ、とありました。",
     );
     assert.equal(patonSecond.message.label, "みりぃのStory");
     assert.equal(patonSecond.message.text, PATON_SECOND_MESSAGE);
