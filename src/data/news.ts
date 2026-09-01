@@ -183,6 +183,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-01-ohayo-september-x",
+    date: "2026-09-01",
+    sameDayOrder: 3,
+    title: "おはよ〜 今日から9月ー",
+    body: "9月1日朝、みりぃがXで「おはよ〜 今日から9月ー！！」とあいさつした。約3秒の動画付き。",
+    source: "https://x.com/Mily_chan36/status/2094579904587382930",
+    sourceLabel: "Xの投稿を見る",
+    message: {
+      label: "みりぃの投稿",
+      text:
+        "おはよ\u{301C}\u{1F31E}\n" +
+        "今日から9月\u{30FC}\u{FF01}\u{FF01}",
+    },
+  },
+  {
     id: "2026-09-01-paton-vote-final-day-story",
     date: "2026-09-01",
     sameDayOrder: 2,
