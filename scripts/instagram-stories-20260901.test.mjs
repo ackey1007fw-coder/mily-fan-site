@@ -269,9 +269,9 @@ describe("2026-09-01 Instagram Story — Latest / NEWS", () => {
     assert.match(finalDay.body, /投票をお願いしました/);
     assert.doesNotMatch(finalDay.body, /0:00|23:59|投稿時刻/);
     assert.equal(finalDay.body.includes("Mixch"), false);
-    assert.match(finalDay.message.text, /おはよう〜☀️/);
+    assert.match(finalDay.message.text, /おはよう〜🌞/);
     assert.match(finalDay.message.text, /今日はパトン投票最終日‼️/);
-    assert.match(finalDay.message.text, /投票お願いします/);
+    assert.match(finalDay.message.text, /投票お願いします 🙌❣️/);
 
     assert.match(september.body, /9月もよろしくね/);
     assert.doesNotMatch(september.body, /最終日|投票|Paton|パトン/);

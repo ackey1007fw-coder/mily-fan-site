@@ -202,9 +202,9 @@ export const news: NewsItem[] = [
     message: {
       label: "みりぃのStory",
       text:
-        "おはよう〜☀️\n" +
+        "おはよう〜🌞\n" +
         "今日はパトン投票最終日‼️\n" +
-        "投票お願いします 👏❤️",
+        "投票お願いします 🙌❣️",
     },
   },
   {
