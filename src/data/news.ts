@@ -80,6 +80,10 @@ import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
 import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
 import { autumnLeafNewsImage } from "./autumnLeafNewsImage.ts";
 import {
+  firstSeptemberFanmarkBoardImage,
+  firstSeptemberTomatoBoardImage,
+} from "./firstSeptemberShowroomImages.ts";
+import {
   PATON_VOTE_HOW_TO_CTA_LABEL,
   PATON_VOTE_HOW_TO_CTA_URL,
   PATON_VOTE_HOW_TO_NEWS_ID,
@@ -270,6 +274,19 @@ export const news: NewsItem[] = [
         "ありがとうございます😭🙏❣️\n" +
         "面接頑張ってくるねっ^_^",
     },
+  },
+  {
+    id: "2026-09-01-first-showroom-oyasumiry",
+    date: "2026-09-01",
+    sameDayOrder: 20,
+    activityIds: ["live-stream"],
+    title: "9月初配信、おやすみりー",
+    body: "9月1日22:31から翌0:19頃まで、約1時間48分。9月はじめての配信。すっぴんで、帽子で前髪が潰れた、うるうるカラコンで目が乾いた、と話していた。今月の目標は「ミリィの栄養素」70人。ボードの1人目はあっきーさん、2人目はやすぴさん。パトン投票はその夜が最終日で、当時2位。最後はおやすみなさい、おやすみりー、おみりー。山を一歩ずつ登って、肩を組んで這い上がろう、という話もあった。",
+    sourceLabel: "SHOWROOM",
+    relatedUrl: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOM",
+    media: firstSeptemberTomatoBoardImage,
+    additionalMedia: [firstSeptemberFanmarkBoardImage],
   },
   {
     id: "2026-09-01-ohayo-september-x",
