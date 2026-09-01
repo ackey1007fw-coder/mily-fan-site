@@ -5,7 +5,9 @@
 
 ## 現在のPhase
 
-**Phase 5 — 完成書き出し・監査完了 / Owner公開判断待ち**
+**Phase 4 — 全48カット本人単独素材で再構築中**
+
+2026-09-01の独立実体監査により、旧完成判定を撤回した。現行Drive上の16:9 / 9:16は公開用完成版ではない。
 
 ## 共有リンク
 
@@ -13,53 +15,52 @@
 - Fan site: https://mily-fan-site.vercel.app/
 - Draft AI studio: PR #108
 
-## 正本と完成版方針
+## 正本と修正方針
 
-- `STORYBOARD.md` v2.1.1の時刻設計を維持
-- Owner最終指示D-014により、旧G1〜G6を含む全区間を公開・利用確認済みの本人実写へ変更
-- D-015 / D-017により、投稿元名ではなく採用フレームで本人確認
-- D-016により、9:16は主映像を全面表示
-- D-018により、16:9 / 9:16の2本を完成納品
+- `STORYBOARD.md` v2.1.1の48カット時刻設計を維持
+- D-020により、G1〜G6を含む全カットを三橋莉子本人単独の公開・利用確認済み実写へ再構築
+- 別人のみ / 本人不明 / 複数人 / 他人物の顔が残る素材は全除外
+- 同一写真の再利用0、同一長尺動画の別場面は非連続・非重複で使用
+- SNS元UI・元字幕・スタンプを除去できない素材は不採用
+- 16:9 / 9:16は同じ確定カット割を使用
+- 9:16は本人中心の全画面クロップ。小窓・ぼかし帯・黒帯なし
+- 漢字歌詞44行は映像確定後に正本SRTから一層だけ再焼き込み
+- 1:57.0ハードカットとS14 / S33 / S42専用Heroを維持
 
-旧35カット / B-roll 12本 / CapCut前提 / 人物不在B-roll完成案は破棄済み。
+## 独立監査で確認した旧版の不合格点
 
-## 完了状況
+- S24: 全区間が別人のみ
+- G1 / G2 / G6: 本人を主被写体として確定不能
+- 白黒パーカー2人素材10カット、ポムポムプリン系2人素材7カット
+- S8 / S9 / G4ほかに他人物が残存
+- SNS元UIとMV字幕の競合
+- 漢字字幕44行は存在するが、複数行で同期ずれ
+- 9:16の全面表示は改善済みだが、人物・字幕問題が横版と共通
+
+## 作業状況
 
 | Task | Owner | Status | Output |
 |---|---|---|---|
-| 音源構成・STORYBOARD v2.1.1 | Claude | Done | `BRIEF.md` / `STORYBOARD.md` |
-| G1〜G6仕様同期 | GrokBot | Done / Superseded in final render | `GROK_SHOTS.md` |
-| 写真・動画候補の収集 | Owner + AI | Done | Google Drive / local/private |
-| OwnerによるSNS動画カバー整理 | Owner | Done | 45候補を維持 / 24動画を除外 |
-| 本人フレーム監査・10カット差し替え | ChatGPT | Done | local/private manifest |
-| 漢字歌詞字幕の時刻統合 | ChatGPT | Done | 修正版SRT |
-| 16:9完成書き出し | ChatGPT | Done | 1920×1080 / 30fps / 164.367秒 |
-| 9:16完成書き出し | ChatGPT | Done | 1080×1920 / 30fps / 164.367秒 |
-| 横版の埋め込み横動画全面化 | ChatGPT | Done | S12 / S13 / S24 |
-| 縦版の小窓・黒帯解消 | ChatGPT | Done | 35カット拡大 / 全面13カット維持 / ぼかし帯0 |
-| 縦版の修正前カット瞬間表示解消 | ChatGPT | Done | 47境界再構成 / 重点10境界目視済み |
-| 音声一致・黒画面監査 | ChatGPT | Done | 音声MD5一致 / blackdetectなし |
-| 完成ファイル・監査記録のDrive反映 | ChatGPT | Done | `05_export` / `04_edit` |
-| 公開日時・説明文・カバー画像 | Owner | Pending | 投稿先別 |
-| 最終公開 | Owner | Pending | Reels / TikTok / YouTube / X |
+| STORYBOARD v2.1.1 | Claude | Done | `BRIEF.md` / `STORYBOARD.md` |
+| 現行16:9 / 9:16独立監査 | Grok + ChatGPT統合 | Done | 48カット / 44字幕行の実体監査 |
+| 旧完成判定の撤回 | ChatGPT | Done | D-020 |
+| 本人単独素材の追加監査・選定 | ChatGPT | In progress | local/private manifest v4 |
+| 48カット再構築 | ChatGPT | Pending | 16:9 / 9:16 clean master |
+| 漢字字幕44行再焼き込み | ChatGPT | Pending | horizontal / vertical ASS |
+| 全境界・全字幕行の再監査 | ChatGPT | Pending | final audit v4 |
+| Drive完成ファイル反映 | ChatGPT | Pending | `04_edit` / `05_export` |
+| 最終公開判断 | Owner | Pending | Reels / TikTok / YouTube / X |
 
-## 最終技術監査
+## 完成判定
 
-- 16:9: 1920×1080 / 30fps / 164.367秒 / 64,499,423 bytes
-- 9:16: 1080×1920 / 30fps / 164.367秒 / 4,931 frames / 84,012,596 bytes
-- 入力・16:9・9:16の音声ストリームMD5: `dfa03abe8865f99e65ed4764d79d0384`
-- 9:16 SHA-256: `7ef44eadda29198692607e0c182986210db10592837a348669678264f935742c`
-- blackdetect: 両版とも検出なし
-- 追加課金: なし
-- AI人物生成・Reference-to-Video・顔身体変更・生成塗り足し: なし
-- 本人素材、完成MP4、FFmpegキットはpublic repoへ置かない
+次をすべて満たすまで「完成」に戻さない。
 
-## Ownerの次の判断
-
-- 16:9 / 9:16完成版の最終視聴
-- 投稿先ごとのカバー画像と説明文
-- 公開日時
-- 実際の公開操作
+1. 48カットすべて本人確実、他人物のみ・不明フレーム0
+2. 他人物の顔0、SNS元UI0、同一写真再利用0
+3. 9:16で小窓・ぼかし帯・黒帯0
+4. 44字幕行が正本SRTと0.2秒以内、二重表示0
+5. 1:57.0ハードカット、音声MD5一致、blackdetect 0
+6. S14 / S33 / S42専用Heroの他カット流用0
 
 ## PR #108の扱い
 
