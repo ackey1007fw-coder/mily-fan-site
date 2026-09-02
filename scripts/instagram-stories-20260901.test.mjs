@@ -161,17 +161,18 @@ describe("2026-09-01 Instagram Story — Latest / NEWS", () => {
     assert.equal(ordered[0]?.id, "2026-09-02-miss-circle-third-round");
     assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
     assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[3], newsItem("2026-09-01-ohayo-september-x"));
-    assert.equal(ordered[4], finalDay);
-    assert.equal(ordered[5], september);
-    assert.equal(ordered[6], newsItem("2026-08-31-paton-vote-voice-story"));
+    assert.equal(ordered[3]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[4], newsItem("2026-09-01-ohayo-september-x"));
+    assert.equal(ordered[5], finalDay);
+    assert.equal(ordered[6], september);
+    assert.equal(ordered[7], newsItem("2026-08-31-paton-vote-voice-story"));
     assert.equal(finalDay?.sameDayOrder, 2);
     assert.equal(september?.sameDayOrder, 1);
     assert.deepEqual(finalDay?.activityIds, ["campus-girls"]);
     assert.equal(september?.activityIds, undefined);
     assert.equal(news.filter(({ id }) => id === FINAL_DAY_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === SEPTEMBER_NEWS_ID).length, 1);
-    assert.equal(news.length, 73);
+    assert.equal(news.length, 74);
     assert.deepEqual(verifyNews([finalDay, september]), []);
   });
 

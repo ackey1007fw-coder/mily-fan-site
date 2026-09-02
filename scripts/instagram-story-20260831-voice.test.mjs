@@ -128,15 +128,16 @@ describe("2026-08-31 Instagram Story voice vote call — Latest / NEWS", () => {
     assert.equal(ordered[0]?.id, "2026-09-02-miss-circle-third-round");
     assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
     assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[3]?.id, "2026-09-01-ohayo-september-x");
-    assert.equal(ordered[4]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.equal(ordered[5]?.id, "2026-09-01-september-mily-story");
-    assert.equal(ordered[6], entry);
-    assert.equal(ordered[7], newsItem("2026-08-31-paton-first-place-story"));
+    assert.equal(ordered[3]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[4]?.id, "2026-09-01-ohayo-september-x");
+    assert.equal(ordered[5]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(ordered[6]?.id, "2026-09-01-september-mily-story");
+    assert.equal(ordered[7], entry);
+    assert.equal(ordered[8], newsItem("2026-08-31-paton-first-place-story"));
     assert.equal(entry?.sameDayOrder, 7);
     assert.deepEqual(entry?.activityIds, ["campus-girls"]);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(news.length, 73);
+    assert.equal(news.length, 74);
     assert.deepEqual(verifyNews([entry]), []);
   });
 

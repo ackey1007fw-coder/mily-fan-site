@@ -5,6 +5,7 @@ const laterNewsIds = new Set([
   "2026-09-02-miss-circle-third-round",
   "2026-09-02-oyasumily-sr-story",
   "2026-09-02-paton-second-story",
+  "2026-09-01-first-showroom-oyasumiry",
   "2026-09-01-ohayo-september-x",
   "2026-09-01-paton-vote-final-day-story",
   "2026-09-01-september-mily-story",

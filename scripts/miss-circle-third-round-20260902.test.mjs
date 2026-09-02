@@ -64,7 +64,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(item.title, TITLE);
     assert.equal(item.body, BODY);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(news.length, 73);
+    assert.equal(news.length, 74);
     assert.equal(ordered[0], item);
     assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
     assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");

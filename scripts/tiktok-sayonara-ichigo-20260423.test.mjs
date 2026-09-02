@@ -145,11 +145,12 @@ describe("2026-04-23 TikTok sayonara-ichigo post — Latest", () => {
     assert.equal(ordered[0]?.id, "2026-09-02-miss-circle-third-round");
     assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
     assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[3]?.id, "2026-09-01-ohayo-september-x");
-    assert.equal(ordered[4]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(ordered[3]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[4]?.id, "2026-09-01-ohayo-september-x");
+    assert.equal(ordered[5]?.id, "2026-09-01-paton-vote-final-day-story");
     assert.equal(ordered.at(-1)?.id, NEWS_ID);
     assert.equal(ordered.at(-2)?.id, "2026-08-02-21st-birthday");
-    assert.equal(news.length, 73);
+    assert.equal(news.length, 74);
   });
 
   it("drives both Hero and Latest from the same ordered News list", async () => {
