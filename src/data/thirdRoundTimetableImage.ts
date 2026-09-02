@@ -1,11 +1,12 @@
 /**
  * 2026-09-02 三次審査 NEWS 用。オーナー提供の本人配布タイムテーブル。
- * 実写ポートレートではない。AI生成・再描画・再エンコードしていない。
+ * 実写ポートレートではない。AI生成・再描画はしていない。
+ * 公開JPEGはオーナー提供元素材からメタデータを除去した派生。
  * HOME Latest / `/news/` 専用。Gallery・media.ts・galleryVideos・`/stories/` には出さない。
- * 公開パスは元素材 JPEG の実寸 1206×950 のまま。
+ * 公開パスは元素材と同じ実寸 1206×950。
  */
 export const THIRD_ROUND_TIMETABLE_SRC =
-  "/media/news/mily-b49-01-third-round-timetable.jpg";
+  "/media/news/mily-b49-01-third-round-timetable-public.jpg";
 
 export const thirdRoundTimetableImage = {
   id: "mily-b49-01-third-round-timetable",

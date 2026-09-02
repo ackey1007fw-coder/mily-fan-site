@@ -17,7 +17,10 @@ import {
 import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import {
+  streamSchedule,
+  upcomingSlots,
+} from "../src/data/streamSchedule.ts";
 import {
   isValidSupportEvent,
   missCircleThirdRoundShowroomReview,
@@ -61,35 +64,36 @@ const CONTEST_END = Date.parse("2026-09-14T00:00:00+09:00");
 const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
 const TIMETABLE_FILE = path.join(root, "public", THIRD_ROUND_TIMETABLE_SRC.slice(1));
 const TIMETABLE_SHA256 =
-  "37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f";
+  "bf4d4c5f6396bebe9c4a74ae3a5143d226e2b5a537e46ea30d850fed1dc169f9";
 const EXPECTED_SLOTS = [
-  { date: "2026-09-03", time: "07:30", note: "7:30-8:00" },
-  { date: "2026-09-03", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-03", time: "21:00", note: "21:00-21:50" },
-  { date: "2026-09-04", time: "07:00", note: "7:00-7:40" },
-  { date: "2026-09-04", time: "14:50", note: "14:50-15:10" },
-  { date: "2026-09-04", time: "22:30", note: "22:30-23:30" },
-  { date: "2026-09-05", time: "09:00", note: "9:00-9:20" },
-  { date: "2026-09-05", time: "14:30", note: "14:30-15:20" },
-  { date: "2026-09-05", time: "21:00", note: "21:00-21:50" },
-  { date: "2026-09-06", time: "05:30", note: "5:30-6:30" },
-  { date: "2026-09-06", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-06", time: "22:30", note: "22:30-22:50" },
-  { date: "2026-09-08", time: "07:00", note: "7:00-8:00" },
+  { date: "2026-09-03", time: "07:30", endTime: "08:00" },
+  { date: "2026-09-03", time: "14:40", endTime: "15:20" },
+  { date: "2026-09-03", time: "21:00", endTime: "21:50" },
+  { date: "2026-09-04", time: "07:00", endTime: "07:40" },
+  { date: "2026-09-04", time: "14:50", endTime: "15:10" },
+  { date: "2026-09-04", time: "22:30", endTime: "23:30" },
+  { date: "2026-09-05", time: "09:00", endTime: "09:20" },
+  { date: "2026-09-05", time: "14:30", endTime: "15:20" },
+  { date: "2026-09-05", time: "21:00", endTime: "21:50" },
+  { date: "2026-09-06", time: "05:30", endTime: "06:30" },
+  { date: "2026-09-06", time: "14:40", endTime: "15:20" },
+  { date: "2026-09-06", time: "22:30", endTime: "22:50" },
+  { date: "2026-09-08", time: "07:00", endTime: "08:00" },
   {
     date: "2026-09-09",
     time: "00:00",
+    endTime: "01:00",
     note: "本人表記 24:00-25:00（9/9 0:00-1:00）",
   },
-  { date: "2026-09-09", time: "10:00", note: "10:00-11:00" },
-  { date: "2026-09-09", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-09", time: "21:30", note: "21:30-21:50" },
-  { date: "2026-09-11", time: "10:00", note: "10:00-10:30" },
-  { date: "2026-09-11", time: "14:50", note: "14:50-15:20" },
-  { date: "2026-09-11", time: "21:00", note: "21:00-22:00" },
-  { date: "2026-09-12", time: "08:00", note: "8:00-8:30" },
-  { date: "2026-09-12", time: "14:40", note: "14:40-15:10" },
-  { date: "2026-09-12", time: "21:00", note: "21:00-22:00" },
+  { date: "2026-09-09", time: "10:00", endTime: "11:00" },
+  { date: "2026-09-09", time: "14:40", endTime: "15:20" },
+  { date: "2026-09-09", time: "21:30", endTime: "21:50" },
+  { date: "2026-09-11", time: "10:00", endTime: "10:30" },
+  { date: "2026-09-11", time: "14:50", endTime: "15:20" },
+  { date: "2026-09-11", time: "21:00", endTime: "22:00" },
+  { date: "2026-09-12", time: "08:00", endTime: "08:30" },
+  { date: "2026-09-12", time: "14:40", endTime: "15:10" },
+  { date: "2026-09-12", time: "21:00", endTime: "22:00" },
 ];
 
 function entry() {
@@ -152,6 +156,15 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(thirdRoundTimetableImage.sourceUrl, null);
     assert.equal(existsSync(TIMETABLE_FILE), true, TIMETABLE_FILE);
     assert.equal(
+      existsSync(
+        path.join(
+          root,
+          "public/media/news/mily-b49-01-third-round-timetable.jpg",
+        ),
+      ),
+      false,
+    );
+    assert.equal(
       createHash("sha256").update(await readFile(TIMETABLE_FILE)).digest("hex"),
       TIMETABLE_SHA256,
     );
@@ -159,6 +172,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(metadata.format, "jpeg");
     assert.equal(metadata.width, 1206);
     assert.equal(metadata.height, 950);
+    assert.equal(metadata.exif, undefined);
+    assert.equal(metadata.iptc, undefined);
+    assert.equal(metadata.xmp, undefined);
+    assert.equal(metadata.icc, undefined);
     assert.ok((await stat(TIMETABLE_FILE)).size > 0);
     assert.equal(media.some((entry) => String(entry.id).includes("b49")), false);
     assert.equal(
@@ -280,7 +297,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       EXPECTED_SLOTS.map((slot) => ({
         date: slot.date,
         startTime: slot.time,
-        endTime: null,
+        endTime: slot.endTime,
         note: slot.note,
       })),
     );
@@ -374,8 +391,21 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
         (slot) =>
           slot.date === "2026-09-09" &&
           slot.time === "00:00" &&
+          slot.endTime === "01:00" &&
           slot.note === "本人表記 24:00-25:00（9/9 0:00-1:00）",
       ),
+    );
+    const afterFirstEnd = upcomingSlots(
+      streamSchedule,
+      [],
+      Date.parse("2026-09-03T08:15:00+09:00"),
+    );
+    assert.equal(afterFirstEnd[0]?.time, "14:40");
+    assert.equal(
+      afterFirstEnd.some(
+        (slot) => slot.date === "2026-09-03" && slot.time === "07:30",
+      ),
+      false,
     );
     assert.equal(events.length, 0);
 
@@ -413,7 +443,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       false,
     );
     const adapted = adaptStreamSlots(streamSchedule);
-    assert.equal(adapted.every((item) => item.endTime === null), true);
+    assert.deepEqual(
+      adapted.map((item) => item.endTime),
+      EXPECTED_SLOTS.map((slot) => slot.endTime),
+    );
     assert.equal(adapted.every((item) => item.origin === "showroom-schedule"), true);
 
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");

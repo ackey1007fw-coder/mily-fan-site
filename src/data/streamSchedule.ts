@@ -8,45 +8,49 @@
  *   実時刻の 9/9 0:00 として入れる（`time` は 00:00–23:59 のみ）。
  * - 自動取得（/api/mily-schedule）が有効な場合は、手入力とマージされます。
  *   重複（同じ date+time）は手入力を優先します。
- * - 日付・時刻は JST。開始から約3時間で自動的に非表示になります。
+ * - 日付・時刻は JST。確認済み終了時刻がある枠は終了時に非表示にし、
+ *   終了時刻が未確認の枠だけ開始から約3時間を表示上限にします。
  */
 export type StreamSlot = {
   /** JSTの日付 "2026-08-16" */
   date: string;
   /** 24時間表記 "22:30" */
   time: string;
+  /** 確認済みの終了時刻。日をまたぐ場合は開始時刻以下になる */
+  endTime?: string;
   /** 任意の補足（例:「特別配信」） */
   note?: string;
 };
 
 export const streamSchedule: StreamSlot[] = [
-  { date: "2026-09-03", time: "07:30", note: "7:30-8:00" },
-  { date: "2026-09-03", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-03", time: "21:00", note: "21:00-21:50" },
-  { date: "2026-09-04", time: "07:00", note: "7:00-7:40" },
-  { date: "2026-09-04", time: "14:50", note: "14:50-15:10" },
-  { date: "2026-09-04", time: "22:30", note: "22:30-23:30" },
-  { date: "2026-09-05", time: "09:00", note: "9:00-9:20" },
-  { date: "2026-09-05", time: "14:30", note: "14:30-15:20" },
-  { date: "2026-09-05", time: "21:00", note: "21:00-21:50" },
-  { date: "2026-09-06", time: "05:30", note: "5:30-6:30" },
-  { date: "2026-09-06", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-06", time: "22:30", note: "22:30-22:50" },
-  { date: "2026-09-08", time: "07:00", note: "7:00-8:00" },
+  { date: "2026-09-03", time: "07:30", endTime: "08:00" },
+  { date: "2026-09-03", time: "14:40", endTime: "15:20" },
+  { date: "2026-09-03", time: "21:00", endTime: "21:50" },
+  { date: "2026-09-04", time: "07:00", endTime: "07:40" },
+  { date: "2026-09-04", time: "14:50", endTime: "15:10" },
+  { date: "2026-09-04", time: "22:30", endTime: "23:30" },
+  { date: "2026-09-05", time: "09:00", endTime: "09:20" },
+  { date: "2026-09-05", time: "14:30", endTime: "15:20" },
+  { date: "2026-09-05", time: "21:00", endTime: "21:50" },
+  { date: "2026-09-06", time: "05:30", endTime: "06:30" },
+  { date: "2026-09-06", time: "14:40", endTime: "15:20" },
+  { date: "2026-09-06", time: "22:30", endTime: "22:50" },
+  { date: "2026-09-08", time: "07:00", endTime: "08:00" },
   {
     date: "2026-09-09",
     time: "00:00",
+    endTime: "01:00",
     note: "本人表記 24:00-25:00（9/9 0:00-1:00）",
   },
-  { date: "2026-09-09", time: "10:00", note: "10:00-11:00" },
-  { date: "2026-09-09", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-09", time: "21:30", note: "21:30-21:50" },
-  { date: "2026-09-11", time: "10:00", note: "10:00-10:30" },
-  { date: "2026-09-11", time: "14:50", note: "14:50-15:20" },
-  { date: "2026-09-11", time: "21:00", note: "21:00-22:00" },
-  { date: "2026-09-12", time: "08:00", note: "8:00-8:30" },
-  { date: "2026-09-12", time: "14:40", note: "14:40-15:10" },
-  { date: "2026-09-12", time: "21:00", note: "21:00-22:00" },
+  { date: "2026-09-09", time: "10:00", endTime: "11:00" },
+  { date: "2026-09-09", time: "14:40", endTime: "15:20" },
+  { date: "2026-09-09", time: "21:30", endTime: "21:50" },
+  { date: "2026-09-11", time: "10:00", endTime: "10:30" },
+  { date: "2026-09-11", time: "14:50", endTime: "15:20" },
+  { date: "2026-09-11", time: "21:00", endTime: "22:00" },
+  { date: "2026-09-12", time: "08:00", endTime: "08:30" },
+  { date: "2026-09-12", time: "14:40", endTime: "15:10" },
+  { date: "2026-09-12", time: "21:00", endTime: "22:00" },
 ];
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -74,16 +78,32 @@ export function isValidSlot(slot: unknown): slot is StreamSlot {
     return false;
   }
   if (!isRealCalendarDate(candidate.date)) return false;
-  return typeof candidate.time === "string" && TIME_RE.test(candidate.time);
+  if (typeof candidate.time !== "string" || !TIME_RE.test(candidate.time)) {
+    return false;
+  }
+  return (
+    (candidate.endTime === undefined ||
+      (typeof candidate.endTime === "string" && TIME_RE.test(candidate.endTime))) &&
+    (candidate.note === undefined || typeof candidate.note === "string")
+  );
 }
 
 export function slotStartMs(slot: StreamSlot): number {
   return new Date(`${slot.date}T${slot.time}:00+09:00`).getTime();
 }
 
+/** 確認済み終了時刻。開始時刻以下なら翌日として扱う。 */
+export function slotEndMs(slot: StreamSlot): number | null {
+  if (!slot.endTime) return null;
+  const start = slotStartMs(slot);
+  const sameDayEnd = new Date(`${slot.date}T${slot.endTime}:00+09:00`).getTime();
+  return sameDayEnd <= start ? sameDayEnd + 24 * 60 * 60 * 1000 : sameDayEnd;
+}
+
 /**
  * 手入力→自動取得の順でマージし、重複(date+time)は先勝ち（手入力優先）。
- * 不正な値は除外し、開始から約3時間を過ぎた予定は落とし、日時順に並べる。
+ * 不正な値は除外し、確認済み終了時刻（未確認なら開始から約3時間）を
+ * 過ぎた予定は落とし、日時順に並べる。
  */
 export function upcomingSlots(
   manual: StreamSlot[],
@@ -97,7 +117,10 @@ export function upcomingSlots(
     if (!merged.has(key)) merged.set(key, slot);
   }
   return [...merged.values()]
-    .filter((slot) => slotStartMs(slot) + VISIBLE_AFTER_START_MS > now)
+    .filter(
+      (slot) =>
+        (slotEndMs(slot) ?? slotStartMs(slot) + VISIBLE_AFTER_START_MS) > now,
+    )
     .sort((a, b) => slotStartMs(a) - slotStartMs(b))
     // 三次審査の本人枠は23件。12件だと後半がカレンダーから落ちる。
     .slice(0, 32);

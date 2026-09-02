@@ -820,6 +820,21 @@ describe("Support Calendar derivation", () => {
     assert.equal(slot.span, null);
   });
 
+  it("preserves a confirmed SHOWROOM end time", () => {
+    const [slot] = adaptStreamSlots([
+      {
+        date: "2026-08-24",
+        time: "20:00",
+        endTime: "20:40",
+        note: "fixture",
+      },
+    ]);
+    assert.equal(slot.endTime, "20:40");
+    assert.equal(slot.endDate, "2026-08-24");
+    assert.equal(slot.timing, "period");
+    assert.equal(scheduleTimeLabel(slot), "20:00〜20:40");
+  });
+
   it("derives radio occurrences from the shared program definition", () => {
     const slots = adaptRadioProgram(
       Date.parse("2026-08-22T12:00:00+09:00"),

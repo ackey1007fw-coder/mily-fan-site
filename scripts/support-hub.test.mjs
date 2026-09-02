@@ -265,6 +265,24 @@ describe("Support Today and pending separation", () => {
     );
   });
 
+  it("skips an ended confirmed slot and renders the next confirmed range", () => {
+    const today = selectSupportToday({
+      contest: { ...contest, currentPhase: null },
+      streamSlots: [
+        { date: "2026-08-22", time: "07:30", endTime: "08:00" },
+        { date: "2026-08-22", time: "14:40", endTime: "15:20" },
+      ],
+      streamRoomUrl: null,
+      liveRoomUrl: null,
+      radioPhase: "idle",
+      now: Date.parse("2026-08-22T08:15:00+09:00"),
+    });
+    const slot = today.find(({ activityId }) => activityId === "live-stream");
+    assert.equal(slot?.key, "today:showroom:2026-08-22T14:40");
+    assert.equal(slot?.value, "2026.08.22 14:40〜15:20");
+    assert.equal(slot?.note, undefined);
+  });
+
   it("puts null contest dates and date-pending SupportEvents only in pending", () => {
     const contestPending = selectSupportPending({
       contest: {

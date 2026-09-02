@@ -125,10 +125,14 @@ function HubLiveStatus() {
       label={status.label}
       value={
         status.slot
-          ? `${formatSlotDate(status.slot)} ${status.slot.time}〜`
+          ? `${formatSlotDate(status.slot)} ${status.slot.time}〜${status.slot.endTime ?? ""}`
           : status.value
       }
-      note={status.slot ? "終了時刻は確認できていません。" : undefined}
+      note={
+        status.slot && !status.slot.endTime
+          ? "終了時刻は確認できていません。"
+          : undefined
+      }
     />
   );
 }
@@ -482,7 +486,7 @@ function LiveCurrent() {
   if (!status) return null;
 
   const value = status.slot
-    ? `${formatSlotDate(status.slot)} ${status.slot.time}〜`
+    ? `${formatSlotDate(status.slot)} ${status.slot.time}〜${status.slot.endTime ?? ""}`
     : status.value;
   return (
     <section aria-labelledby="live-current" className="px-4 pb-10">
@@ -501,7 +505,11 @@ function LiveCurrent() {
           <StatusLine
             label={status.label}
             value={value}
-            note={status.slot ? "終了時刻は確認できていません。" : undefined}
+            note={
+              status.slot && !status.slot.endTime
+                ? "終了時刻は確認できていません。"
+                : undefined
+            }
           />
         </div>
         {status.href ? (

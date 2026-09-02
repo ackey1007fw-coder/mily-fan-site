@@ -46,7 +46,7 @@ export function StreamSchedule() {
                     </span>
                   ) : null}
                   <span className="text-sm font-semibold text-sage-deep">
-                    {slot.time}〜
+                    {slot.time}〜{slot.endTime ?? ""}
                   </span>
                 </p>
                 {slot.note ? (
