@@ -300,7 +300,10 @@ describe("2026-08-23 seaside circle musical special — Gallery and assets", () 
     assert.equal("sourceUrl" in seasideCircleMusicalSpecialVideo, false);
     assert.equal(galleryVideos.length, 20);
     assert.equal(events.length, 0);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
   });
 
   it("publishes exactly one local MP4 and one local poster", async () => {

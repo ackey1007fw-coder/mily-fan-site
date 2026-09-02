@@ -171,7 +171,10 @@ describe("2026-08-26 Girl Award Fan Room — Latest / NEWS + audio", () => {
 
   it("does not promote the Fan Room 6th-place claim into highlights, contest, events, or schedule", () => {
     assert.deepEqual(events, []);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(JSON.stringify(highlights).includes("6位"), false);
     assert.equal(JSON.stringify(contest).includes("6位"), false);
     assert.equal(JSON.stringify(events).includes(NEWS_ID), false);

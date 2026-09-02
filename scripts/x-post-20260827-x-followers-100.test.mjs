@@ -148,7 +148,10 @@ describe("2026-08-27 X followers 100 — scope and ordering", () => {
     const { supportEvents } = await import("../src/data/supportEvents.ts");
 
     assert.deepEqual(events, []);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(
       supportEvents.some((entry) => JSON.stringify(entry).includes(NEWS_ID)),
       false,

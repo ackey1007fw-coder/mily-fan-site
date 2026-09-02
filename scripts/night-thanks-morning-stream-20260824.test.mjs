@@ -433,7 +433,10 @@ describe("2026-08-24 night thanks morning stream — activity and scope", () => 
 
   it("does not add 6:20-6:50 to events or the stream fallback", async () => {
     assert.equal(events.length, 0);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(profile.displayName, "みりぃ");
     assert.equal(profile.publicName, "三橋莉子");
     assert.equal(

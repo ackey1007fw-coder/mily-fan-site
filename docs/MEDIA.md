@@ -2843,3 +2843,22 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 - crop・mask・AI加工・顔補正・生成塗り足しなし
 - NEWS カード表示より大きくないため、480 / 960 / 1600 の派生は作らない
 - 代表はあっきーさんボード（b48-01）。やすぴさんボードは additionalMedia の末尾のみ
+
+## 素材台帳（batch b49 / 受領日・source date 2026-09-02）
+
+オーナーが直接提供した、本人配布の三次審査配信タイムテーブル。
+実写ポートレートではない。AI生成・再描画・再エンコードしていない。
+既存 NEWS `2026-09-02-miss-circle-third-round` の代表画像。
+HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
+`/stories/` には出さない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b49-01 | `news/mily-b49-01-third-round-timetable.jpg` | みりぃの配信タイムテーブル（ミスサークルコンテスト2026 3次審査）。1206×950。owner-provided | ✅ 既存三次審査 NEWS の代表。Gallery 非掲載 |
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-02`。再生permalinkなし。`sourceUrl` は null
+- 公開JPEGは実寸 1206×950。拡大しない。crop・mask・AI加工・顔補正・生成塗り足しなし
+- NEWS 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
+- sha256 `37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f`
+

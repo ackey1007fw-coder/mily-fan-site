@@ -324,7 +324,10 @@ describe("2026-08-23 seaside circle official X posts — Gallery photos", () => 
 describe("2026-08-23 seaside circle official X posts — scope boundaries", () => {
   it("does not add the X posts to events, schedule, profile, or socials", async () => {
     assert.equal(events.length, 0);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(JSON.stringify(events).includes("fm_smw856"), false);
     assert.equal(JSON.stringify(highlights).includes("fm_smw856"), false);
     assert.equal(JSON.stringify(profile).includes("2091322098954490025"), false);

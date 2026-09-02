@@ -241,7 +241,10 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — scope and identity",
     assert.equal(highlights.some((entry) => entry.id.includes(NEWS_ID)), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
     assert.deepEqual(events, []);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(contest.currentPhase?.name, "3次審査進出");
 
     for (const relative of [

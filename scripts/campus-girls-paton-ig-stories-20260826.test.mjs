@@ -625,7 +625,10 @@ describe("2026-08-26 Instagram Stories — scope, gitignore, and docs", () => {
 
   it("does not add schedule rows, /stories/ articles, Mixch, or Drive ids", async () => {
     assert.deepEqual(events, []);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(JSON.stringify(contest).includes("b27"), false);
     assert.equal(existsSync(path.join(root, "stories", VOTE_NEWS_ID)), false);
     assert.equal(existsSync(path.join(root, "stories", FOLLOWERS_NEWS_ID)), false);
