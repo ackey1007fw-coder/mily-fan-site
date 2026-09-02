@@ -8,7 +8,7 @@ export default function StoriesIndexPage() {
       title="STORY"
       description="本人の言葉と、その日の記録を読むページです。"
     >
-      <Stories showArchiveCta={false} />
+      <Stories showArchiveCta={false} showIntro={false} />
     </ArchiveShell>
   );
 }

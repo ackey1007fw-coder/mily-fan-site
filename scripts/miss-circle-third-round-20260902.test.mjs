@@ -44,28 +44,27 @@ import { verifyNews } from "./content-invariants.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const NEWS_ID = "2026-09-02-miss-circle-third-round";
 const TITLE = "ミスサー三次審査、9/3から9/13";
-const BODY = `三橋莉子（ENTRY 734、Bブロック）の三次審査は、9月3日から13日です。
+const BODY = `三橋莉子（ENTRY 734、Bブロック）の三次審査は、9月3日から13日までです。
 
-WEB投票は3日12:00から13日23:59。フォロワーの多さではなく、発信への共感を一票で届ける審査です。
+WEB投票は9月3日12:00から13日23:59まで。WEB投票では、発信力と共感力が審査されます。
 
-SHOWROOMは「CanCamモデル発掘オーディション」。無料ギフト審査とイベント審査が、3日5:00から12日21:59。キラキラ星（無料）、指ハート、祝い花、パネルくまを贈れます。30万ptでオリジナルアバター制作権。配信は1日3回まで、合計2時間までで、3時に切り替わります。コラボ配信はできません。
+SHOWROOMの「CanCamモデル発掘オーディション」では、無料ギフト審査とイベント審査が9月3日5:00から12日21:59まで行われます。30万ポイント達成者は、オリジナルアバター制作権を獲得します。
 
-各ブロック1位はCanCam 2027年1月号（11月20日発売）。総合1位は竹田えみりさんMCのCanCam特別番組。CanCam賞3名は、誌面に載った人のなかから最終面接です。
+各ブロックのランキング1位は『CanCam』2027年1月号に掲載され、総合ランキング1位は竹田えみりさんがMCを務める「CanCam特別番組」に出演します。誌面掲載者6名のうち、CanCam賞に選ばれた3名には、CanCamモデルまたはit girlメンバーへの最終面接参加権が与えられます。
 
-ギフトランキング1位の特典に、9月20日横浜アリーナのAGESTOCK2026 MISCOLLEステージがあります。三次審査の会場ではありません。
+なお、9月20日に横浜アリーナで行われる「AGESTOCK2026 in 横浜アリーナ」のMISCOLLEステージ出演は、各ギフトランキング1位の特典です。三次審査の会場ではありません。
 
-配信時間は本人配布のタイムテーブルです。
-9/3 木 7:30-8:00 / 14:40-15:20 / 21:00-21:50
-9/4 金 7:00-7:40 / 14:50-15:10 / 22:30-23:30
-9/5 土 9:00-9:20 / 14:30-15:20 / 21:00-21:50
-9/6 日 5:30-6:30 / 14:40-15:20 / 22:30-22:50
-9/7 月 未定
-9/8 火 7:00-8:00 / 昼なし / 24:00-25:00（9/9 0:00-1:00）
-9/9 水 10:00-11:00 / 14:40-15:20 / 21:30-21:50
-9/10 木 未定
-9/11 金 10:00-10:30 / 14:50-15:20 / 21:00-22:00
-9/12 土 8:00-8:30 / 14:40-15:10 / 21:00-22:00
-時間は変更になる可能性があります！遊びに来てくれると嬉しいです♡ 応援よろしくお願いします！`;
+本人配布のタイムテーブルによる配信予定です。時間は変更になる可能性があります。
+9/3（木）7:30〜8:00 / 14:40〜15:20 / 21:00〜21:50
+9/4（金）7:00〜7:40 / 14:50〜15:10 / 22:30〜23:30
+9/5（土）9:00〜9:20 / 14:30〜15:20 / 21:00〜21:50
+9/6（日）5:30〜6:30 / 14:40〜15:20 / 22:30〜22:50
+9/7（月）未定
+9/8（火）7:00〜8:00 / 昼枠なし / 24:00〜25:00（9/9 0:00〜1:00）
+9/9（水）10:00〜11:00 / 14:40〜15:20 / 21:30〜21:50
+9/10（木）未定
+9/11（金）10:00〜10:30 / 14:50〜15:20 / 21:00〜22:00
+9/12（土）8:00〜8:30 / 14:40〜15:10 / 21:00〜22:00`;
 const WEB_VOTE_URL =
   "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734";
 const SHOWROOM_EVENT_URL = "https://www.showroom-live.com/event/circle2026_3rd";
@@ -133,9 +132,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
     assert.deepEqual(verifyNews([item]), []);
     assert.doesNotMatch(`${item.title}\n${item.body}`, /JST|live|作業メモ|公式|公認/i);
-    assert.match(item.body, /9\/7 月 未定/);
-    assert.match(item.body, /9\/10 木 未定/);
-    assert.match(item.body, /昼なし/);
+    assert.match(item.body, /9\/7（月）未定/);
+    assert.match(item.body, /9\/10（木）未定/);
+    assert.match(item.body, /昼枠なし/);
+    assert.doesNotMatch(item.body, /一票で届ける|贈れます|遊びに来て|応援よろしく/);
   });
 
   it("uses confirmed organizer links only and the owner-provided timetable still", async () => {
@@ -408,7 +408,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.doesNotMatch(serialized, /09-02T20:00|12:59:00/);
     assert.match(
       entry().body,
-      /AGESTOCK2026 MISCOLLEステージがあります。三次審査の会場ではありません。/,
+      /MISCOLLEステージ出演は、各ギフトランキング1位の特典です。三次審査の会場ではありません。/,
     );
 
     const calendarPayload = JSON.stringify({

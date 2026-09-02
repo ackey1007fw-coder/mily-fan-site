@@ -10,10 +10,12 @@ export function Stories({
   limit,
   archiveHref = STORIES_ARCHIVE_ROUTE,
   showArchiveCta = Boolean(limit),
+  showIntro = true,
 }: {
   limit?: number;
   archiveHref?: string;
   showArchiveCta?: boolean;
+  showIntro?: boolean;
 }) {
   const items = visibleStories();
   const visible = typeof limit === "number" ? items.slice(0, limit) : items;
@@ -26,13 +28,21 @@ export function Stories({
       className={`${SECTION_ANCHOR_OFFSET} border-y border-sage/15 bg-sage-soft/30 px-4 py-12`}
     >
       <div className="mx-auto max-w-3xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          読み物 / STORY
-        </p>
-        <h2 className="mt-2 text-2xl font-bold text-ink">その日の言葉を読む</h2>
-        <p className="mt-2 text-sm leading-7 text-ink-muted">
-          本人の言葉と、その日の記録を読むページです。
-        </p>
+        {showIntro ? (
+          <>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+              読み物 / STORY
+            </p>
+            <h2 className="mt-2 text-2xl font-bold text-ink">
+              その日の言葉を読む
+            </h2>
+            <p className="mt-2 text-sm leading-7 text-ink-muted">
+              本人の言葉と、その日の記録を読むページです。
+            </p>
+          </>
+        ) : (
+          <h2 className="sr-only">ストーリー一覧</h2>
+        )}
         <div className="mt-6 space-y-4">
           {visible.map((story) => (
             <StoryCard key={story.slug} story={story} />

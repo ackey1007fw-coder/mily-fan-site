@@ -183,6 +183,16 @@ describe("P6 navigation", () => {
     assert.match(header, /hidden [^"]*md:flex/);
     assert.match(header, /md:hidden/);
   });
+
+  it("uses the same site navigation on Activities and Support routes", () => {
+    for (const file of ["src/ActivitiesPage.tsx", "src/SupportPage.tsx"]) {
+      const page = source(file);
+      assert.match(page, /import \{ Header \} from "\.\/components\/Header"/);
+      assert.match(page, /<Header \/>/);
+      assert.doesNotMatch(page, /function (?:Activities|Support)Header/);
+      assert.doesNotMatch(page, /ホームへ戻る/);
+    }
+  });
 });
 
 describe("P6 mobile action dock", () => {
