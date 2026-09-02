@@ -1,6 +1,6 @@
 import { contest } from "../data/contest";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
-import { formatSlotTimeRange } from "../data/streamSchedule";
+import { formatSlotTimeRange } from "../data/streamSchedule.ts";
 import {
   formatSlotDate,
   slotStatus,

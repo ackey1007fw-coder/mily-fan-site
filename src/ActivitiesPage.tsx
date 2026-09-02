@@ -33,7 +33,7 @@ import {
   contestOfficialWindowLines,
   contestPhaseDateRangeLabel,
 } from "./lib/contestPhaseDisplay";
-import { formatSlotTimeRange } from "./data/streamSchedule";
+import { formatSlotTimeRange } from "./data/streamSchedule.ts";
 import { resolveNewsLinks } from "./lib/newsLinks";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useSupportEventClock } from "./lib/useSupportEventClock";

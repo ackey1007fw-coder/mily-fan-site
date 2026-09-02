@@ -198,7 +198,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     const ledgerStart = mediaDoc.indexOf("## 素材台帳（batch b49");
     const ledger = mediaDoc.slice(ledgerStart);
     assert.match(ledger, /lossless APP-strip/);
-    assert.match(ledger, TIMETABLE_SHA256);
+    assert.match(ledger, new RegExp(TIMETABLE_SHA256));
     assert.doesNotMatch(
       ledger,
       /37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f/,

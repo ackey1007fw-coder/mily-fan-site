@@ -23,7 +23,7 @@ import type { RadioStatus } from "../data/radio";
 import {
   formatSlotTimeRange,
   type StreamSlot,
-} from "../data/streamSchedule";
+} from "../data/streamSchedule.ts";
 
 export type LiveState = "live" | "offline" | "unknown";
 
