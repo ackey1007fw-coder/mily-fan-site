@@ -99,6 +99,18 @@ describe("stream schedule safety", () => {
     assert.equal(isValidSlot({ date: "2026-08-16", time: "24:10" }), false);
     assert.equal(isValidSlot({ date: "8/16", time: "22:00" }), false);
     assert.equal(isValidSlot({ date: "2026-08-16", time: "22:30" }), true);
+    assert.equal(
+      isValidSlot({ date: "2026-08-16", time: "07:30", endTime: "08:00" }),
+      true,
+    );
+    assert.equal(
+      isValidSlot({ date: "2026-08-16", time: "07:30", endTime: "24:00" }),
+      false,
+    );
+    assert.equal(
+      isValidSlot({ date: "2026-08-16", time: "07:30", endTime: "8:00" }),
+      false,
+    );
   });
 
   it("dedupes manual and auto slots, manual first", () => {
@@ -126,6 +138,56 @@ describe("stream schedule safety", () => {
     assert.equal(slots.length, 1);
     assert.equal(slots[0].time, "10:00");
     assert.ok(VISIBLE_AFTER_START_MS >= 3 * 60 * 60 * 1000);
+  });
+
+  it("hides a confirmed-end slot at that end instead of three hours after start", () => {
+    const justAfterEnd = Date.parse("2026-09-03T08:00:00+09:00");
+    const stillOn = upcomingSlots(
+      [{ date: "2026-09-03", time: "07:30", endTime: "08:00" }],
+      [],
+      Date.parse("2026-09-03T07:59:00+09:00"),
+    );
+    const gone = upcomingSlots(
+      [{ date: "2026-09-03", time: "07:30", endTime: "08:00" }],
+      [],
+      justAfterEnd,
+    );
+    assert.equal(stillOn.length, 1);
+    assert.equal(gone.length, 0);
+
+    const overnightGone = upcomingSlots(
+      [
+        {
+          date: "2026-09-09",
+          time: "00:00",
+          endTime: "01:00",
+          note: "本人表記 24:00-25:00（9/9 0:00-1:00）",
+        },
+      ],
+      [],
+      Date.parse("2026-09-09T01:00:00+09:00"),
+    );
+    const overnightStill = upcomingSlots(
+      [
+        {
+          date: "2026-09-09",
+          time: "00:00",
+          endTime: "01:00",
+        },
+      ],
+      [],
+      Date.parse("2026-09-09T00:30:00+09:00"),
+    );
+    assert.equal(overnightStill.length, 1);
+    assert.equal(overnightGone.length, 0);
+
+    const apiFallback = upcomingSlots(
+      [],
+      [{ date: "2026-09-03", time: "07:30" }],
+      Date.parse("2026-09-03T08:00:00+09:00"),
+    );
+    assert.equal(apiFallback.length, 1);
+    assert.equal(apiFallback[0].endTime, undefined);
   });
 
   it("sorts by start time and drops junk from the auto feed", () => {

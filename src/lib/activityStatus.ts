@@ -1,6 +1,9 @@
 import { radioProgram } from "../../shared/radio-program.js";
 import type { RadioStatus, SchedulePhase } from "../data/radio.ts";
-import type { StreamSlot } from "../data/streamSchedule.ts";
+import {
+  formatSlotTimeRange,
+  type StreamSlot,
+} from "../data/streamSchedule.ts";
 import { onAirConfirmedFresh } from "./bannerState.ts";
 import type { LiveView } from "./realtimeStore.ts";
 
@@ -86,7 +89,7 @@ export function selectLiveActivityStatus(
     return {
       state: "scheduled",
       label: start > now ? "次回の確認済み配信枠" : "確認済み配信枠",
-      value: `${slot.date} ${slot.time}〜`,
+      value: `${slot.date} ${formatSlotTimeRange(slot)}`,
       href: live.roomUrl ?? scheduleRoomUrl,
       slot,
     };

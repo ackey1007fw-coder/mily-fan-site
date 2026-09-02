@@ -323,6 +323,21 @@ describe("P6 home Today semantics", () => {
     assert.equal(slot.cta.url, "https://www.showroom-live.com/r/example");
   });
 
+  it("shows a confirmed SHOWROOM end instead of calling it unconfirmed", () => {
+    const { todayItems } = homeToday({
+      streamSlots: [
+        { date: "2026-08-22", time: "07:30", endTime: "08:00", note: "7:30-8:00" },
+      ],
+      streamRoomUrl: "https://www.showroom-live.com/r/example",
+      banner: NONE_BANNER,
+    });
+    const slot = todayItems.find(({ activityId }) => activityId === "live-stream");
+    assert.ok(slot);
+    assert.equal(slot.value, "2026.08.22 07:30〜08:00");
+    assert.equal(slot.note, "7:30-8:00");
+    assert.doesNotMatch(slot.note ?? "", /終了時刻は確認できていません/);
+  });
+
   it("keeps the radio disclaimer and never asserts a personal appearance", () => {
     const { todayItems } = homeToday({
       radioPhase: "window",

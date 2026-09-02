@@ -810,14 +810,37 @@ describe("Support Calendar derivation", () => {
     assert.equal(label("showroom-schedule"), "23:30 開始");
   });
 
-  it("keeps SHOWROOM endTime null instead of inventing a duration", () => {
+  it("keeps SHOWROOM endTime null when the slot has no confirmed end", () => {
     const [slot] = adaptStreamSlots([
       { date: "2026-08-24", time: "20:00", note: "fixture" },
     ]);
     assert.equal(slot.origin, "showroom-schedule");
     assert.equal(slot.activityId, "live-stream");
     assert.equal(slot.endTime, null);
+    assert.equal(slot.endDate, null);
     assert.equal(slot.span, null);
+    assert.equal(scheduleTimeLabel(slot), "20:00 開始");
+  });
+
+  it("puts a confirmed SHOWROOM end on the calendar instead of inventing 3 hours", () => {
+    const [morning] = adaptStreamSlots([
+      { date: "2026-09-03", time: "07:30", endTime: "08:00", note: "7:30-8:00" },
+    ]);
+    assert.equal(morning.endTime, "08:00");
+    assert.equal(morning.endDate, "2026-09-03");
+    assert.equal(scheduleTimeLabel(morning), "07:30〜08:00");
+
+    const [overnight] = adaptStreamSlots([
+      {
+        date: "2026-09-08",
+        time: "23:00",
+        endTime: "01:00",
+        note: "overnight fixture",
+      },
+    ]);
+    assert.equal(overnight.endTime, "01:00");
+    assert.equal(overnight.endDate, "2026-09-09");
+    assert.equal(scheduleTimeLabel(overnight), "23:00〜9/9 01:00");
   });
 
   it("derives radio occurrences from the shared program definition", () => {

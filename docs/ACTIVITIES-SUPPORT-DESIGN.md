@@ -332,6 +332,7 @@ export function buildSupportCalendar(input: {
 - MISS CIRCLEは `contest.currentPhase.start/end` からのみ生成する。
 - `start/end = null` のcontest phaseは日付軸へ入れず、pendingへ送る。
 - SHOWROOM API枠は確認できる終了時刻がないため `endTime = null`。推定しない。
+  手入力で確認済みの終了があれば `StreamSlot.endTime` を使い、無ければ null。
 - radioは `radioProgram.weekday/scheduledStart/scheduledEnd` から表示範囲内だけ展開する。
 - `events.ts` は既存日時validatorを再利用する。
 - `date-pending` は日付軸に入れない。

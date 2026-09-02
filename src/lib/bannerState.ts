@@ -20,7 +20,10 @@ import {
   schedulePhase,
 } from "../../shared/radio-program.js";
 import type { RadioStatus } from "../data/radio";
-import type { StreamSlot } from "../data/streamSchedule";
+import {
+  formatSlotTimeRange,
+  type StreamSlot,
+} from "../data/streamSchedule";
 
 export type LiveState = "live" | "offline" | "unknown";
 
@@ -200,7 +203,7 @@ function showroomTodayBanner(
     kind: "SHOWROOM_TODAY",
     stateLabel: "予定",
     title: "今日の配信",
-    detail: `${slot.time}〜 予定`,
+    detail: `${formatSlotTimeRange(slot)} 予定`,
     href: live.roomUrl ?? "/support/",
     linkLabel: live.roomUrl ? "SHOWROOMを見る" : "配信予定を見る",
     slot,

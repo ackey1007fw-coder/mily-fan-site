@@ -37,6 +37,7 @@ import {
   adaptSupportEvents,
   buildSupportCalendar,
   nextDisplayStatusBoundary,
+  scheduleTimeLabel,
 } from "../src/lib/supportCalendar.ts";
 import { nextSupportEventBoundary } from "../src/lib/useSupportEventClock.ts";
 import { verifyNews } from "./content-invariants.mjs";
@@ -61,36 +62,57 @@ const CONTEST_END = Date.parse("2026-09-14T00:00:00+09:00");
 const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
 const TIMETABLE_FILE = path.join(root, "public", THIRD_ROUND_TIMETABLE_SRC.slice(1));
 const TIMETABLE_SHA256 =
-  "37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f";
+  "bde0758ca275d437b41aa85853e7a12b94faf52f2a7f33afc1caf05e6e3b662d";
+const TIMETABLE_BYTES = 189618;
 const EXPECTED_SLOTS = [
-  { date: "2026-09-03", time: "07:30", note: "7:30-8:00" },
-  { date: "2026-09-03", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-03", time: "21:00", note: "21:00-21:50" },
-  { date: "2026-09-04", time: "07:00", note: "7:00-7:40" },
-  { date: "2026-09-04", time: "14:50", note: "14:50-15:10" },
-  { date: "2026-09-04", time: "22:30", note: "22:30-23:30" },
-  { date: "2026-09-05", time: "09:00", note: "9:00-9:20" },
-  { date: "2026-09-05", time: "14:30", note: "14:30-15:20" },
-  { date: "2026-09-05", time: "21:00", note: "21:00-21:50" },
-  { date: "2026-09-06", time: "05:30", note: "5:30-6:30" },
-  { date: "2026-09-06", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-06", time: "22:30", note: "22:30-22:50" },
-  { date: "2026-09-08", time: "07:00", note: "7:00-8:00" },
+  { date: "2026-09-03", time: "07:30", endTime: "08:00", note: "7:30-8:00" },
+  { date: "2026-09-03", time: "14:40", endTime: "15:20", note: "14:40-15:20" },
+  { date: "2026-09-03", time: "21:00", endTime: "21:50", note: "21:00-21:50" },
+  { date: "2026-09-04", time: "07:00", endTime: "07:40", note: "7:00-7:40" },
+  { date: "2026-09-04", time: "14:50", endTime: "15:10", note: "14:50-15:10" },
+  { date: "2026-09-04", time: "22:30", endTime: "23:30", note: "22:30-23:30" },
+  { date: "2026-09-05", time: "09:00", endTime: "09:20", note: "9:00-9:20" },
+  { date: "2026-09-05", time: "14:30", endTime: "15:20", note: "14:30-15:20" },
+  { date: "2026-09-05", time: "21:00", endTime: "21:50", note: "21:00-21:50" },
+  { date: "2026-09-06", time: "05:30", endTime: "06:30", note: "5:30-6:30" },
+  { date: "2026-09-06", time: "14:40", endTime: "15:20", note: "14:40-15:20" },
+  { date: "2026-09-06", time: "22:30", endTime: "22:50", note: "22:30-22:50" },
+  { date: "2026-09-08", time: "07:00", endTime: "08:00", note: "7:00-8:00" },
   {
     date: "2026-09-09",
     time: "00:00",
+    endTime: "01:00",
     note: "本人表記 24:00-25:00（9/9 0:00-1:00）",
   },
-  { date: "2026-09-09", time: "10:00", note: "10:00-11:00" },
-  { date: "2026-09-09", time: "14:40", note: "14:40-15:20" },
-  { date: "2026-09-09", time: "21:30", note: "21:30-21:50" },
-  { date: "2026-09-11", time: "10:00", note: "10:00-10:30" },
-  { date: "2026-09-11", time: "14:50", note: "14:50-15:20" },
-  { date: "2026-09-11", time: "21:00", note: "21:00-22:00" },
-  { date: "2026-09-12", time: "08:00", note: "8:00-8:30" },
-  { date: "2026-09-12", time: "14:40", note: "14:40-15:10" },
-  { date: "2026-09-12", time: "21:00", note: "21:00-22:00" },
+  { date: "2026-09-09", time: "10:00", endTime: "11:00", note: "10:00-11:00" },
+  { date: "2026-09-09", time: "14:40", endTime: "15:20", note: "14:40-15:20" },
+  { date: "2026-09-09", time: "21:30", endTime: "21:50", note: "21:30-21:50" },
+  { date: "2026-09-11", time: "10:00", endTime: "10:30", note: "10:00-10:30" },
+  { date: "2026-09-11", time: "14:50", endTime: "15:20", note: "14:50-15:20" },
+  { date: "2026-09-11", time: "21:00", endTime: "22:00", note: "21:00-22:00" },
+  { date: "2026-09-12", time: "08:00", endTime: "08:30", note: "8:00-8:30" },
+  { date: "2026-09-12", time: "14:40", endTime: "15:10", note: "14:40-15:10" },
+  { date: "2026-09-12", time: "21:00", endTime: "22:00", note: "21:00-22:00" },
 ];
+
+function jpegHasMarker(bytes, marker) {
+  let i = 2;
+  while (i < bytes.length - 1) {
+    if (bytes[i] !== 0xff) break;
+    while (i < bytes.length && bytes[i] === 0xff) i += 1;
+    if (i >= bytes.length) break;
+    const current = bytes[i];
+    i += 1;
+    if (current === 0xda) break;
+    if (current === marker) return true;
+    if (current === 0xd8 || current === 0xd9 || (current >= 0xd0 && current <= 0xd7)) {
+      continue;
+    }
+    if (i + 1 >= bytes.length) break;
+    i += bytes.readUInt16BE(i);
+  }
+  return false;
+}
 
 function entry() {
   return news.find((item) => item.id === NEWS_ID);
@@ -151,15 +173,36 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(thirdRoundTimetableImage.provenance, "owner-provided");
     assert.equal(thirdRoundTimetableImage.sourceUrl, null);
     assert.equal(existsSync(TIMETABLE_FILE), true, TIMETABLE_FILE);
+    const bytes = await readFile(TIMETABLE_FILE);
     assert.equal(
-      createHash("sha256").update(await readFile(TIMETABLE_FILE)).digest("hex"),
+      createHash("sha256").update(bytes).digest("hex"),
       TIMETABLE_SHA256,
     );
     const metadata = await sharp(TIMETABLE_FILE).metadata();
     assert.equal(metadata.format, "jpeg");
     assert.equal(metadata.width, 1206);
     assert.equal(metadata.height, 950);
-    assert.ok((await stat(TIMETABLE_FILE)).size > 0);
+    assert.equal((await stat(TIMETABLE_FILE)).size, TIMETABLE_BYTES);
+    assert.equal(metadata.exif, undefined);
+    assert.equal(metadata.icc, undefined);
+    assert.equal(metadata.iptc, undefined);
+    assert.equal(metadata.xmp, undefined);
+    assert.equal(jpegHasMarker(bytes, 0xfe), false);
+    const wrapper = await readFile(
+      path.join(root, "src/data/thirdRoundTimetableImage.ts"),
+      "utf8",
+    );
+    assert.doesNotMatch(wrapper, /公開パスは元素材/);
+    assert.match(wrapper, /APP-strip/);
+    const mediaDoc = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
+    const ledgerStart = mediaDoc.indexOf("## 素材台帳（batch b49");
+    const ledger = mediaDoc.slice(ledgerStart);
+    assert.match(ledger, /lossless APP-strip/);
+    assert.match(ledger, TIMETABLE_SHA256);
+    assert.doesNotMatch(
+      ledger,
+      /37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f/,
+    );
     assert.equal(media.some((entry) => String(entry.id).includes("b49")), false);
     assert.equal(
       galleryVideos.some((entry) => String(entry.id ?? "").includes("b49")),
@@ -275,15 +318,18 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
         date: item.date,
         startTime: item.startTime,
         endTime: item.endTime,
+        endDate: item.endDate,
         note: item.note,
       })),
       EXPECTED_SLOTS.map((slot) => ({
         date: slot.date,
         startTime: slot.time,
-        endTime: null,
+        endTime: slot.endTime,
+        endDate: slot.date,
         note: slot.note,
       })),
     );
+    assert.equal(scheduleTimeLabel(showroomSlots[0]), "07:30〜08:00");
     assert.equal(
       items.some((item) => /AGESTOCK|横浜アリーナ|通過発表|会場三次/.test(item.title)),
       false,
@@ -374,6 +420,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
         (slot) =>
           slot.date === "2026-09-09" &&
           slot.time === "00:00" &&
+          slot.endTime === "01:00" &&
           slot.note === "本人表記 24:00-25:00（9/9 0:00-1:00）",
       ),
     );
@@ -413,8 +460,13 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       false,
     );
     const adapted = adaptStreamSlots(streamSchedule);
-    assert.equal(adapted.every((item) => item.endTime === null), true);
+    assert.equal(adapted.every((item) => item.endTime !== null), true);
+    assert.equal(adapted.every((item) => item.endDate === item.date), true);
     assert.equal(adapted.every((item) => item.origin === "showroom-schedule"), true);
+    const [openEnded] = adaptStreamSlots([{ date: "2026-08-24", time: "20:00" }]);
+    assert.equal(openEnded.endTime, null);
+    assert.equal(openEnded.endDate, null);
+    assert.equal(scheduleTimeLabel(openEnded), "20:00 開始");
 
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
     assert.match(

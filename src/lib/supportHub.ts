@@ -2,7 +2,10 @@ import { radioProgram } from "../../shared/radio-program.js";
 import { activities, type ActivityId } from "../data/activities.ts";
 import type { Contest } from "../data/contest.ts";
 import type { RadioStatus, SchedulePhase } from "../data/radio.ts";
-import type { StreamSlot } from "../data/streamSchedule.ts";
+import {
+  formatSlotTimeRange,
+  type StreamSlot,
+} from "../data/streamSchedule.ts";
 import type { SupportEvent } from "../data/supportEvents.ts";
 import {
   onAirConfirmedFresh,
@@ -99,14 +102,17 @@ export function selectSupportToday(input: {
   const slot = input.streamSlots.find(({ date }) => date === today);
   if (slot) {
     const roomUrl = input.liveRoomUrl ?? input.streamRoomUrl;
+    const slotNote = slot.endTime
+      ? slot.note
+      : [slot.note, "終了時刻は確認できていません。"]
+          .filter(Boolean)
+          .join(" / ");
     items.push({
       key: `today:showroom:${slot.date}T${slot.time}`,
       activityId: "live-stream",
       label: "確認済みの配信枠",
-      value: `${slot.date.replace(/-/g, ".")} ${slot.time}〜`,
-      note: [slot.note, "終了時刻は確認できていません。"]
-        .filter(Boolean)
-        .join(" / "),
+      value: `${slot.date.replace(/-/g, ".")} ${formatSlotTimeRange(slot)}`,
+      ...(slotNote ? { note: slotNote } : {}),
       ...(roomUrl
         ? { cta: { label: "SHOWROOMで見る", url: roomUrl } }
         : {}),

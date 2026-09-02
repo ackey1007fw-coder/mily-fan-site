@@ -1,5 +1,6 @@
 import { contest } from "../data/contest";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
+import { formatSlotTimeRange } from "../data/streamSchedule";
 import {
   formatSlotDate,
   slotStatus,
@@ -46,7 +47,7 @@ export function StreamSchedule() {
                     </span>
                   ) : null}
                   <span className="text-sm font-semibold text-sage-deep">
-                    {slot.time}〜
+                    {formatSlotTimeRange(slot)}
                   </span>
                 </p>
                 {slot.note ? (

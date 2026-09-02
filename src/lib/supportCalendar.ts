@@ -12,7 +12,11 @@ import {
   type SupportEvent,
   type SupportEventSchedule,
 } from "../data/supportEvents.ts";
-import { isValidSlot, type StreamSlot } from "../data/streamSchedule.ts";
+import {
+  isValidSlot,
+  slotEndDate,
+  type StreamSlot,
+} from "../data/streamSchedule.ts";
 import {
   MAX_SUPPORT_CALENDAR_MONTHS_AHEAD,
   MAX_SUPPORT_CALENDAR_MONTHS_BACK,
@@ -38,7 +42,7 @@ export type ScheduleItem = {
   /**
    * 終了日（Asia/Tokyo、YYYY-MM-DD）。
    * 確認済みの終了日または終了日時がある項目だけに入る。終了が未確認なら `null` のままにし、
-   * 開始時刻から終了日時を推測しない（SHOWROOM個別枠は常に `null`）。
+   * 開始時刻から終了日時を推測しない。SHOWROOM個別枠は確認済み `endTime` があるときだけ入れる。
    */
   endDate: string | null;
   allDay: boolean;
@@ -346,8 +350,8 @@ export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
     key: `showroom-schedule:${slot.date}T${slot.time}`,
     date: slot.date,
     startTime: slot.time,
-    endTime: null,
-    endDate: null,
+    endTime: slot.endTime ?? null,
+    endDate: slotEndDate(slot),
     allDay: false,
     span: null,
     timing: "start",
@@ -505,7 +509,7 @@ export function formatShortTokyoEndDate(
 /**
  * 開始日と終了日が異なる（日をまたぐ）時刻付き項目か。
  * 終了日が確認済みなら、終了時刻が未確認でも日跨ぎとして扱う。
- * 終了日自体が未確認のSHOWROOM個別枠は常に false になる。
+ * 終了日自体が未確認のSHOWROOM個別枠（`endTime` なし）は常に false になる。
  */
 export function isCrossDayTimedItem(item: ScheduleItem): boolean {
   return (

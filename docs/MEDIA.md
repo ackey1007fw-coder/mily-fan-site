@@ -2851,6 +2851,7 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 既存 NEWS `2026-09-02-miss-circle-third-round` の代表画像。
 HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 `/stories/` には出さない。
+公開ファイルは元素材そのものではなく、lossless APP-strip の派生。
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
@@ -2858,7 +2859,8 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 
 - provenance: `owner-provided`。SNSから再取得していない
 - source date: `2026-09-02`。再生permalinkなし。`sourceUrl` は null
-- 公開JPEGは実寸 1206×950。拡大しない。crop・mask・AI加工・顔補正・生成塗り足しなし
+- 公開JPEGは lossless APP-strip。画素 1206×950。crop・mask・AI加工・顔補正・生成塗り足しなし
+- EXIF / IPTC / ICC / COM / 作成時刻メタデータなし
 - NEWS 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
-- sha256 `37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f`
+- sha256 `bde0758ca275d437b41aa85853e7a12b94faf52f2a7f33afc1caf05e6e3b662d`（189618 bytes）
 

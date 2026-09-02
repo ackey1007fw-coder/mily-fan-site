@@ -33,6 +33,7 @@ import {
   contestOfficialWindowLines,
   contestPhaseDateRangeLabel,
 } from "./lib/contestPhaseDisplay";
+import { formatSlotTimeRange } from "./data/streamSchedule";
 import { resolveNewsLinks } from "./lib/newsLinks";
 import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useSupportEventClock } from "./lib/useSupportEventClock";
@@ -125,10 +126,14 @@ function HubLiveStatus() {
       label={status.label}
       value={
         status.slot
-          ? `${formatSlotDate(status.slot)} ${status.slot.time}〜`
+          ? `${formatSlotDate(status.slot)} ${formatSlotTimeRange(status.slot)}`
           : status.value
       }
-      note={status.slot ? "終了時刻は確認できていません。" : undefined}
+      note={
+        status.slot && !status.slot.endTime
+          ? "終了時刻は確認できていません。"
+          : undefined
+      }
     />
   );
 }
@@ -482,7 +487,7 @@ function LiveCurrent() {
   if (!status) return null;
 
   const value = status.slot
-    ? `${formatSlotDate(status.slot)} ${status.slot.time}〜`
+    ? `${formatSlotDate(status.slot)} ${formatSlotTimeRange(status.slot)}`
     : status.value;
   return (
     <section aria-labelledby="live-current" className="px-4 pb-10">
@@ -501,7 +506,11 @@ function LiveCurrent() {
           <StatusLine
             label={status.label}
             value={value}
-            note={status.slot ? "終了時刻は確認できていません。" : undefined}
+            note={
+              status.slot && !status.slot.endTime
+                ? "終了時刻は確認できていません。"
+                : undefined
+            }
           />
         </div>
         {status.href ? (
