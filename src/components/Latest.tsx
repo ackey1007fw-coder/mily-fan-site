@@ -91,7 +91,7 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
     <li className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
       <p className="text-xs text-ink-muted">{item.date}</p>
       <p className="mt-1 font-semibold text-ink">{item.title}</p>
-      <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.body}</p>
+      <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-muted">{item.body}</p>
       {item.message ? (
         <div className="mt-3 rounded-xl bg-sage-soft/60 px-4 py-3">
           {item.message.label ? (

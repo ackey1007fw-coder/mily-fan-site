@@ -83,6 +83,7 @@ import {
   firstSeptemberShowroomAdditionalMedia,
   firstSeptemberTomatoBoardImage,
 } from "./firstSeptemberShowroomImages.ts";
+import { thirdRoundTimetableImage } from "./thirdRoundTimetableImage.ts";
 import {
   PATON_VOTE_HOW_TO_CTA_LABEL,
   PATON_VOTE_HOW_TO_CTA_URL,
@@ -195,7 +196,28 @@ export const news: NewsItem[] = [
     sameDayOrder: 10,
     activityIds: ["miss-circle"],
     title: "ミスサー三次審査、9/3から9/13",
-    body: "三橋莉子（ENTRY 734、Bブロック）。WEB投票は9月3日12:00から13日23:59。SHOWROOMの無料ギフト審査とイベント審査は9月3日5:00から12日21:59。",
+    body: `三橋莉子（ENTRY 734、Bブロック）の三次審査は、9月3日から13日です。
+
+WEB投票は3日12:00から13日23:59。フォロワーの多さではなく、発信への共感を一票で届ける審査です。
+
+SHOWROOMは「CanCamモデル発掘オーディション」。無料ギフト審査とイベント審査が、3日5:00から12日21:59。キラキラ星（無料）、指ハート、祝い花、パネルくまを贈れます。30万ptでオリジナルアバター制作権。配信は1日3回まで、合計2時間までで、3時に切り替わります。コラボ配信はできません。
+
+各ブロック1位はCanCam 2027年1月号（11月20日発売）。総合1位は竹田えみりさんMCのCanCam特別番組。CanCam賞3名は、誌面に載った人のなかから最終面接です。
+
+ギフトランキング1位の特典に、9月20日横浜アリーナのAGESTOCK2026 MISCOLLEステージがあります。三次審査の会場ではありません。
+
+配信時間は本人配布のタイムテーブルです。
+9/3 木 7:30-8:00 / 14:40-15:20 / 21:00-21:50
+9/4 金 7:00-7:40 / 14:50-15:10 / 22:30-23:30
+9/5 土 9:00-9:20 / 14:30-15:20 / 21:00-21:50
+9/6 日 5:30-6:30 / 14:40-15:20 / 22:30-22:50
+9/7 月 未定
+9/8 火 7:00-8:00 / 昼なし / 24:00-25:00（9/9 0:00-1:00）
+9/9 水 10:00-11:00 / 14:40-15:20 / 21:30-21:50
+9/10 木 未定
+9/11 金 10:00-10:30 / 14:50-15:20 / 21:00-22:00
+9/12 土 8:00-8:30 / 14:40-15:10 / 21:00-22:00
+時間は変更になる可能性があります！遊びに来てくれると嬉しいです♡ 応援よろしくお願いします！`,
     source: "https://www.misscircle.jp/",
     sourceLabel: "MISS CIRCLE CONTEST 2026",
     additionalSources: [
@@ -225,6 +247,7 @@ export const news: NewsItem[] = [
         url: "https://www.showroom-live.com/r/circle2026_0734",
       },
     ],
+    media: thirdRoundTimetableImage,
   },
   {
     id: "2026-09-02-oyasumily-sr-story",

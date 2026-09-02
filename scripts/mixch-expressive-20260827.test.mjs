@@ -154,7 +154,10 @@ describe("2026-08-27 Mixch expressive NEWS", () => {
 
   it("does not add Mixch movies to events or streamSchedule or copy files", async () => {
     assert.deepEqual(events, []);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(JSON.stringify(events).includes("VDojsMY5"), false);
     assert.equal(JSON.stringify(streamSchedule).includes("VDojsMY5"), false);
 

@@ -287,9 +287,8 @@ describe("2026-09-02 Instagram Story — Latest / NEWS", () => {
     assert.doesNotMatch(copy, /黒咲|くろえ|suzu/i);
     assert.doesNotMatch(copy, /面接.*(会場|場所|日時|日付)/);
     assert.equal(events.length, 0);
-    assert.equal(streamSchedule.length, 0);
     assert.equal(
-      streamSchedule.some((entry) => JSON.stringify(entry).includes("9:00")),
+      streamSchedule.some((entry) => entry.date === "2026-09-02"),
       false,
     );
   });

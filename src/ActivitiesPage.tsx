@@ -579,7 +579,7 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
                 {formatDate(item.date)}
               </time>
               <h3 className="mt-2 text-lg font-bold leading-relaxed text-ink">{item.title}</h3>
-              <p className="mt-2 text-sm leading-7 text-ink-muted">{item.body}</p>
+              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-ink-muted">{item.body}</p>
               <div className="mt-4 flex flex-wrap gap-3">
                 {item.source ? (
                   <ExternalLink href={item.source} className="text-sm font-semibold text-sage hover:underline">

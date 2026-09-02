@@ -188,7 +188,10 @@ describe("2026-08-30 morning SHOWROOM 6:00 X post — scope", () => {
 
   it("does not hand-enter a new slot into schedule data", async () => {
     assert.deepEqual(events, []);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
 
     for (const relative of ["src/data/events.ts", "src/data/streamSchedule.ts"]) {
       const sourceText = await readFile(path.join(root, relative), "utf8");

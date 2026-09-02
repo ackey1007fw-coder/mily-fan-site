@@ -338,7 +338,10 @@ describe("2026-08-24 seasidecircle Yes! Tokyo dance — activity and scope", () 
 
   it("does not expand into stories, events, schedule, profile, or links", async () => {
     assert.equal(events.length, 0);
-    assert.deepEqual(streamSchedule, []);
+    assert.equal(
+      streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
+      true,
+    );
     assert.equal(profile.displayName, "みりぃ");
     assert.equal(profile.publicName, "三橋莉子");
     assert.equal(

@@ -412,7 +412,7 @@ describe("2026-08-23 earthquake safety Story — privacy and scope boundaries", 
       false,
     );
     assert.equal(events.length, 0);
-    assert.equal(streamSchedule.length, 0);
+    assert.equal(JSON.stringify(streamSchedule).includes(NEWS_ID), false);
     for (const relative of [
       "src/data/stories.ts",
       "src/data/events.ts",
