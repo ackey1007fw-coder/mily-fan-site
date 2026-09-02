@@ -184,6 +184,32 @@ describe("Activity domain adapters and relations", () => {
     assert.equal(selectActivityPageContent("miss-circle").activity.id, "miss-circle");
   });
 
+  it("renders confirmed stream end times on both live Activity surfaces", () => {
+    const pageSource = source("src/ActivitiesPage.tsx");
+    const liveCurrent = pageSource.slice(
+      pageSource.indexOf("function LiveCurrent()"),
+      pageSource.indexOf("function ActivityCurrent("),
+    );
+    assert.match(
+      liveCurrent,
+      /status\.slot\.time}〜\$\{status\.slot\.endTime \?\? ""}/,
+    );
+    assert.equal(
+      selectLiveActivityStatus(
+        { state: "unknown", roomUrl: null },
+        [
+          {
+            date: "2026-09-03",
+            time: "07:30",
+            endTime: "08:00",
+          },
+        ],
+        null,
+      )?.value,
+      "2026-09-03 07:30〜08:00",
+    );
+  });
+
   it("resolves highlights and STORY records through Activity relations", () => {
     for (const activity of activities) {
       const content = selectActivityPageContent(activity.id);

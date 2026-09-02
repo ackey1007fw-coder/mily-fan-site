@@ -97,6 +97,10 @@ describe("stream schedule safety", () => {
   it("rejects invalid dates and times", () => {
     assert.equal(isValidSlot({ date: "2026-02-30", time: "22:00" }), false);
     assert.equal(isValidSlot({ date: "2026-08-16", time: "24:10" }), false);
+    assert.equal(
+      isValidSlot({ date: "2026-08-16", time: "22:30", endTime: "25:00" }),
+      false,
+    );
     assert.equal(isValidSlot({ date: "8/16", time: "22:00" }), false);
     assert.equal(isValidSlot({ date: "2026-08-16", time: "22:30" }), true);
   });
@@ -126,6 +130,18 @@ describe("stream schedule safety", () => {
     assert.equal(slots.length, 1);
     assert.equal(slots[0].time, "10:00");
     assert.ok(VISIBLE_AFTER_START_MS >= 3 * 60 * 60 * 1000);
+  });
+
+  it("hides a slot at its confirmed end time instead of the fallback limit", () => {
+    const slots = upcomingSlots(
+      [
+        { date: "2026-08-15", time: "10:00", endTime: "10:30" },
+        { date: "2026-08-15", time: "14:00", endTime: "15:00" },
+      ],
+      [],
+      Date.parse("2026-08-15T10:31:00+09:00"),
+    );
+    assert.deepEqual(slots.map(({ time }) => time), ["14:00"]);
   });
 
   it("sorts by start time and drops junk from the auto feed", () => {

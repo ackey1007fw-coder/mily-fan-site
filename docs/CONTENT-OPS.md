@@ -34,18 +34,20 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
   既存の 2026-09-02 Instagram Story 2件は残す。消さない。
 - `sameDayOrder: 10` で同日の Story 2件（2 / 1）より前。日付は `2026-09-02`。
 - 本文へ審査特典や日別時刻表を重複掲載しない。詳しい配信時刻は代表画像とCalendarへ分ける。
-  JST、live、作業メモ、公式、公認は書かない。投票回数は書かない。
+  JST、live、作業メモ、公式、公認は書かない。投票回数と本人以外の出場者名は書かない。
 - `activityIds: ["miss-circle"]`。出典は主催者サイト `https://www.misscircle.jp/`。
   additionalSources は ENTRY 734 と SHOWROOMイベントページ。
   関連CTAは WEB投票 LIFF、ENTRY 734、SHOWROOMイベント、SHOWROOMルーム。
   新しい投票ボタンは足さない。
 - 代表画像は本人配布のタイムテーブル b49-01。NEWS専用。
+  元JPEGは `media/original/`（gitignore）で保持し、公開用はメタデータ除去済み派生を使う。
 - Calendar の期間は `supportEvents.ts` を読む。`events.ts` は空のまま。
   1) WEB投票 2026-09-03T12:00:00+09:00〜2026-09-13T23:59:00+09:00
   2) SHOWROOM無料ギフト審査・イベント審査
      2026-09-03T05:00:00+09:00〜2026-09-12T21:59:00+09:00
 - 本人の確認済みSHOWROOM枠は `streamSchedule.ts`（origin `showroom-schedule`）。
   9/7・9/10・9/8昼は入れない。9/8夜の本人表記 24:00-25:00 は実時刻 9/9 0:00。
+  開始・終了を構造化し、確認済み終了時刻で表示終了とCalendarの時刻範囲を決める。
 - 載せない: 審査特典、日別時刻表、SHOWROOMヘッダー枠 9/2 20:00〜9/12 12:59、
   通過発表、票数、会場三次、AGESTOCK 9/20 横浜アリーナ。
   9:00おやすみ配信は streamSchedule に入れない。

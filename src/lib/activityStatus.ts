@@ -86,7 +86,7 @@ export function selectLiveActivityStatus(
     return {
       state: "scheduled",
       label: start > now ? "次回の確認済み配信枠" : "確認済み配信枠",
-      value: `${slot.date} ${slot.time}〜`,
+      value: `${slot.date} ${slot.time}〜${slot.endTime ?? ""}`,
       href: live.roomUrl ?? scheduleRoomUrl,
       slot,
     };

@@ -2847,18 +2847,19 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 ## 素材台帳（batch b49 / 受領日・source date 2026-09-02）
 
 オーナーが直接提供した、本人配布の三次審査配信タイムテーブル。
-実写ポートレートではない。AI生成・再描画・再エンコードしていない。
+実写ポートレートではない。AI生成・再描画はしていない。
+元素材は `media/original/`（gitignore）で保持し、公開用はメタデータを除去して再エンコードした。
 既存 NEWS `2026-09-02-miss-circle-third-round` の代表画像。
 HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 `/stories/` には出さない。
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b49-01 | `news/mily-b49-01-third-round-timetable.jpg` | みりぃの配信タイムテーブル（ミスサークルコンテスト2026 3次審査）。1206×950。owner-provided | ✅ 既存三次審査 NEWS の代表。Gallery 非掲載 |
+| b49-01 | `news/mily-b49-01-third-round-timetable-public.jpg` | みりぃの配信タイムテーブル（ミスサークルコンテスト2026 3次審査）。1206×950。owner-provided source の公開用派生 | ✅ 既存三次審査 NEWS の代表。Gallery 非掲載 |
 
 - provenance: `owner-provided`。SNSから再取得していない
 - source date: `2026-09-02`。再生permalinkなし。`sourceUrl` は null
-- 公開JPEGは実寸 1206×950。拡大しない。crop・mask・AI加工・顔補正・生成塗り足しなし
+- 公開JPEGは実寸 1206×950。拡大・crop・mask・AI加工・顔補正・生成塗り足しなし。EXIF / IPTC / XMP / ICC は除去済み
 - NEWS 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
-- sha256 `37658e9c6fd6eb4f74063414d940b29ecef13e0b4d3a7b1ed59438dea1af393f`
+- 公開派生 sha256 `bf4d4c5f6396bebe9c4a74ae3a5143d226e2b5a537e46ea30d850fed1dc169f9`
 

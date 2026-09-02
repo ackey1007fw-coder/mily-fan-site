@@ -38,7 +38,7 @@ export type ScheduleItem = {
   /**
    * 終了日（Asia/Tokyo、YYYY-MM-DD）。
    * 確認済みの終了日または終了日時がある項目だけに入る。終了が未確認なら `null` のままにし、
-   * 開始時刻から終了日時を推測しない（SHOWROOM個別枠は常に `null`）。
+   * 開始時刻から終了日時を推測しない（終了未確認のSHOWROOM個別枠は `null`）。
    */
   endDate: string | null;
   allDay: boolean;
@@ -346,11 +346,16 @@ export function adaptStreamSlots(slots: StreamSlot[]): ScheduleItem[] {
     key: `showroom-schedule:${slot.date}T${slot.time}`,
     date: slot.date,
     startTime: slot.time,
-    endTime: null,
-    endDate: null,
+    endTime: slot.endTime ?? null,
+    endDate:
+      slot.endTime === undefined
+        ? null
+        : slot.endTime <= slot.time
+          ? addCalendarDays(slot.date, 1)
+          : slot.date,
     allDay: false,
     span: null,
-    timing: "start",
+    timing: slot.endTime === undefined ? "start" : "period",
     activityId: "live-stream",
     title: "SHOWROOM配信予定",
     ...(slot.note ? { note: slot.note } : {}),
