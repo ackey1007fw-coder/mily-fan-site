@@ -63,7 +63,7 @@ export function contestPhaseHeading(phase: ContestPhase): string {
 
 /**
  * 三次審査の公式3本。時刻は supportEvents から読む。
- * ギフト審査とイベント審査は同じ窓でも行を分ける。
+ * ギフト審査と CanCamモデル発掘オーディションは同じ窓でも行を分ける。
  */
 export function contestOfficialWindowLines(
   phase: ContestPhase | null | undefined,
@@ -78,7 +78,7 @@ export function contestOfficialWindowLines(
   if (web) lines.push(`WEB投票 ${web}`);
   if (showroom) {
     lines.push(`SHOWROOM無料ギフト審査 ${showroom}`);
-    lines.push(`SHOWROOMイベント審査 ${showroom}`);
+    lines.push(`CanCamモデル発掘オーディション ${showroom}`);
     const end = confirmedPeriodBounds(missCircleThirdRoundShowroomReview.schedule)
       ?.end;
     if (end) {

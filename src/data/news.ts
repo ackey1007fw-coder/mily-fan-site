@@ -196,9 +196,9 @@ export const news: NewsItem[] = [
     sameDayOrder: 10,
     activityIds: ["miss-circle"],
     title: "ミスサー三次審査、9/3から9/13",
-    body: `MISS CIRCLE CONTEST 2026の三次審査が、9月3日から始まります。みりぃはENTRY 734、Bブロックです。
-
-WEB投票は9月3日12:00〜9月13日23:59、SHOWROOMの無料ギフト審査・イベント審査は9月3日5:00〜9月12日21:59です。配信予定は、本人配布のタイムテーブル画像と「応援・予定」で確認できます。予定は変更になる場合があります。`,
+    body: `三次審査は9月3日から13日。三橋莉子はENTRY 734、Bブロック。SHOWROOMの対象イベントは「CanCamモデル発掘オーディション」です。審査は3日5:00から12日21:59。WEB投票は3日12:00から13日23:59。
+Bブロック1位はCanCam 2027年1月号に載ります。
+SHOWROOMはSMS認証が必須で、複数アカウントは禁止です。`,
     source: "https://www.misscircle.jp/",
     sourceLabel: "MISS CIRCLE CONTEST 2026",
     additionalSources: [
@@ -207,20 +207,20 @@ WEB投票は9月3日12:00〜9月13日23:59、SHOWROOMの無料ギフト審査・
         url: "https://2026.misscircle.jp/entry/734",
       },
       {
-        label: "SHOWROOMイベント",
+        label: "CanCamモデル発掘オーディション",
         url: "https://www.showroom-live.com/event/circle2026_3rd",
       },
     ],
     relatedUrl:
       "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734",
-    ctaLabel: "WEB投票する",
+    ctaLabel: "WEB投票する（1日1回）",
     additionalCtas: [
       {
         label: "ENTRY 734",
         url: "https://2026.misscircle.jp/entry/734",
       },
       {
-        label: "SHOWROOMイベント",
+        label: "CanCamモデル発掘オーディション",
         url: "https://www.showroom-live.com/event/circle2026_3rd",
       },
       {

@@ -313,7 +313,7 @@ describe("2026-08-19 second-round Story video — source URL handling", () => {
     // 主催者 SCHEDULE の日付は contest.ts が正本。ContestPhase は日付のみ。
     assert.equal(contest.currentPhase.start, "2026-09-03");
     assert.equal(contest.currentPhase.end, "2026-09-13");
-    assert.equal(contest.lastVerifiedAt, "2026-09-02");
+    assert.equal(contest.lastVerifiedAt, "2026-09-03");
     assert.equal(contest.currentPhase.source, "https://www.misscircle.jp/");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 
