@@ -173,11 +173,13 @@ export function Latest({
   initialVisible,
   archiveHref = NEWS_ARCHIVE_ROUTE,
   showArchiveCta = Boolean(limit),
+  showIntro = true,
 }: {
   limit?: number;
   initialVisible?: number;
   archiveHref?: string;
   showArchiveCta?: boolean;
+  showIntro?: boolean;
 }) {
   const now = useSupportEventClock();
   const latestNews = sortNewsByDateDesc(news);
@@ -191,8 +193,14 @@ export function Latest({
   return (
     <section id="latest" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-ink">最新情報</h2>
-        <p className="mt-2 text-sm text-ink-muted">みりぃさんの近況とお知らせ。</p>
+        {showIntro ? (
+          <>
+            <h2 className="text-2xl font-bold text-ink">最新情報</h2>
+            <p className="mt-2 text-sm text-ink-muted">
+              みりぃさんの近況とお知らせ。
+            </p>
+          </>
+        ) : null}
         {latestNews.length === 0 ? (
           <div className="mt-6">
             <EmptyState

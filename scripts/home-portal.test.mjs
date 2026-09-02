@@ -174,8 +174,13 @@ describe("archive pages stay complete", () => {
     const galleryPage = source("src/GalleryPage.tsx");
     assert.match(newsPage, /NEWS_ARCHIVE_INITIAL/);
     assert.match(newsPage, /showArchiveCta=\{false\}/);
-    assert.match(storiesPage, /<Stories showArchiveCta=\{false\} \/>/);
+    assert.match(newsPage, /showIntro=\{false\}/);
+    assert.match(
+      storiesPage,
+      /<Stories showArchiveCta=\{false\} showIntro=\{false\} \/>/,
+    );
     assert.match(galleryPage, /GALLERY_ARCHIVE_INITIAL/);
+    assert.match(galleryPage, /showIntro=\{false\}/);
     assert.equal(NEWS_ARCHIVE_INITIAL, 10);
     assert.equal(GALLERY_ARCHIVE_INITIAL, 12);
     assert.match(source("src/components/Latest.tsx"), /sortNewsByDateDesc\(news\)/);

@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 import { NewsImage } from "./components/NewsImage";
 import {
   activities,
@@ -66,28 +67,6 @@ function SmartLink({
     <ExternalLink href={href} className={className}>
       {children}
     </ExternalLink>
-  );
-}
-
-function ActivitiesHeader({ detail = false }: { detail?: boolean }) {
-  return (
-    <header className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-2 px-4 py-3">
-        <a href="/" className="font-semibold tracking-wide text-sage-deep">
-          みりぃ ファンサイト
-        </a>
-        <nav aria-label="Activitiesページ内ナビゲーション" className="flex flex-wrap gap-2">
-          {detail ? (
-            <a href="/activities/" className={secondaryCta}>
-              Activitiesへ戻る
-            </a>
-          ) : null}
-          <a href="/" className={detail ? secondaryCta : primaryCta}>
-            ホームへ戻る
-          </a>
-        </nav>
-      </div>
-    </header>
   );
 }
 
@@ -204,7 +183,7 @@ function ActivitiesHub() {
       >
         本文へスキップ
       </a>
-      <ActivitiesHeader />
+      <Header />
       <main id="activities-main" className="px-4 pb-16 pt-10 sm:pt-14">
         <div className="mx-auto max-w-3xl">
           <nav aria-label="パンくず" className="text-xs text-ink-muted">
@@ -779,7 +758,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       >
         本文へスキップ
       </a>
-      <ActivitiesHeader detail />
+      <Header />
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />

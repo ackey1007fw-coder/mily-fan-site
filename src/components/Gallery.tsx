@@ -158,11 +158,13 @@ export function Gallery({
   initialVisible,
   archiveHref = GALLERY_ARCHIVE_ROUTE,
   showArchiveCta = Boolean(limit),
+  showIntro = true,
 }: {
   limit?: number;
   initialVisible?: number;
   archiveHref?: string;
   showArchiveCta?: boolean;
+  showIntro?: boolean;
 }) {
   const entries = selectGalleryEntries();
   const capped =
@@ -189,10 +191,14 @@ export function Gallery({
   return (
     <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-2xl font-bold text-ink">ギャラリー</h2>
-        <p className="mt-2 text-sm text-ink-muted">
-          みりぃの写真と動画を、ひとつのギャラリーに。
-        </p>
+        {showIntro ? (
+          <>
+            <h2 className="text-2xl font-bold text-ink">ギャラリー</h2>
+            <p className="mt-2 text-sm text-ink-muted">
+              みりぃの写真と動画を、ひとつのギャラリーに。
+            </p>
+          </>
+        ) : null}
         {entries.length === 0 ? (
           <div className="mt-6">
             <EmptyState
