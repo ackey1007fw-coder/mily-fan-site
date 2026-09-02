@@ -2820,20 +2820,25 @@ PatonVoteGuide のランキング系列には追加しない。
 
 オーナーが直接提供した 2026-09-01 SHOWROOM のボード画面。
 視聴者コメント画面ではない。SNSから再取得していない。
-HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
-`/stories/` には出さない。
+6枚とも Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` には出さない。
+カード全体（6枚）は `/news/`。HOME Latest は先頭3件だけなので、9/2の3件がある間は
+HOMEには出ない。Portal Feed の代表画像は b48-01。
+NEWS が `activityIds: ["live-stream"]` を持つため、代表 b48-01 だけが
+`selectActivityMedia()` 経由で `/activities/live/` の「関連するメディア」に出る。
+additionalMedia の5枚は Activity 関連メディアに出さない。
+これは NEWS代表画像の標準動作（b24-01 などと同じ）であり、Gallery掲載ではない。
 
 元素材は gitignored の `media/original/` に留め、台帳には公開ファイル名だけを書く。
 受け渡し用URL / file ID / 添付ハッシュは tracked text へ残さない。
 
 | ID | 公開ファイル | 内容 | 掲載 |
 | --- | --- | --- | --- |
-| b48-01 | `news/mily-b48-01-tomato-nutrient-ackey.jpg` | あっきーさんボード。ボード寄り。「トマトの栄養素 ♡」「1人目」「あっきーさん！！」 | ✅ Latest / NEWS 代表（カードの顔）。Gallery 非掲載 |
-| b48-02 | `news/mily-b48-02-ackey-point.jpg` | 同じボード。指差し | ✅ additionalMedia。Gallery 非掲載 |
-| b48-03 | `news/mily-b48-03-ackey-prepose.jpg` | 同じボード。ポーズ直前 | ✅ additionalMedia。Gallery 非掲載 |
-| b48-04 | `news/mily-b48-04-ackey-cheek.jpg` | 同じボード | ✅ additionalMedia。Gallery 非掲載 |
-| b48-05 | `news/mily-b48-05-ackey-headpoint.jpg` | 同じボード。頭を指さす | ✅ additionalMedia。Gallery 非掲載 |
-| b48-06 | `news/mily-b48-06-fanmark-yasupi.jpg` | やすぴさんボード。「ファンマーク」とトマトの絵、「2人目」「やすぴ。さん♪」 | ✅ additionalMedia 末尾のみ。Gallery 非掲載 |
+| b48-01 | `news/mily-b48-01-tomato-nutrient-ackey.jpg` | あっきーさんボード。ボード寄り。「トマトの栄養素 ♡」「1人目」「あっきーさん！！」 | ✅ `/news/` 代表（カードの顔）。Portal Feed。`activityIds` 経由で `/activities/live/` の関連メディア。Gallery 非掲載 |
+| b48-02 | `news/mily-b48-02-ackey-point.jpg` | 同じボード。指差し | ✅ additionalMedia（`/news/` のみ）。Gallery 非掲載 |
+| b48-03 | `news/mily-b48-03-ackey-prepose.jpg` | 同じボード。ポーズ直前 | ✅ additionalMedia（`/news/` のみ）。Gallery 非掲載 |
+| b48-04 | `news/mily-b48-04-ackey-cheek.jpg` | 同じボード | ✅ additionalMedia（`/news/` のみ）。Gallery 非掲載 |
+| b48-05 | `news/mily-b48-05-ackey-headpoint.jpg` | 同じボード。頭を指さす | ✅ additionalMedia（`/news/` のみ）。Gallery 非掲載 |
+| b48-06 | `news/mily-b48-06-fanmark-yasupi.jpg` | やすぴさんボード。「ファンマーク」とトマトの絵、「2人目」「やすぴ。さん♪」 | ✅ additionalMedia 末尾のみ（`/news/` のみ）。Gallery 非掲載 |
 
 ### 公開ファイル
 
@@ -2843,3 +2848,12 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 - crop・mask・AI加工・顔補正・生成塗り足しなし
 - NEWS カード表示より大きくないため、480 / 960 / 1600 の派生は作らない
 - 代表はあっきーさんボード（b48-01）。やすぴさんボードは additionalMedia の末尾のみ
+- ボードに書かれた「あっきーさん」「やすぴ。さん」は、みりぃ本人が配信中に
+  ホワイトボードへ書いた公開の呼びかけである。視聴者コメント欄・アバターの写り込みではない。
+  オーナーが NEWS 本文（「ボードの1人目はあっきーさん、2人目はやすぴさん」）と
+  当該静止画の掲載を明示指定した。名前を本文・alt・caption から落とさない。
+  crop / mask / AI でボード文字を消さない
+- 掲載面: `/news/` のカード（6枚）。HOME Latest は3件窓のため、9/2が3件ある間は
+  HOMEに出ない。Portal Feed の代表は b48-01。NEWS の
+  `activityIds: ["live-stream"]` により `/activities/live/` の「関連するメディア」にも
+  代表1枚だけが自動で出る（`selectActivityMedia()` の標準動作。個別のフィルタは入れていない）

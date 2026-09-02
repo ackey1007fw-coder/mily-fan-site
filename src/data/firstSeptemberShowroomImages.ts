@@ -1,8 +1,11 @@
 /**
  * 2026-09-01 9月はじめてのSHOWROOM。オーナー提供の配信画面
- * （視聴者コメント画面ではない）。HOME Latest / /news/ 専用。
- * Gallery・media.ts・galleryVideos・/stories/ には出さない。
+ * （視聴者コメント画面ではない）。
+ * 6枚は `/news/` の同じNEWSカード。Gallery・media.ts・galleryVideos・/stories/ には出さない。
+ * HOME Latest は先頭3件だけなので、9/2が3件ある間はこのカードはHOMEに出ない。
  * 代表（カードの顔）はあっきーさんボード。やすぴさんボードは additionalMedia の末尾のみ。
+ * NEWS が activityIds: live-stream を持つため、代表1枚だけが
+ * selectActivityMedia() 経由で /activities/live/ の関連メディアに出る（標準動作）。
  * 公開用metadata除去以外はcrop・mask・scaleなし。収録の実寸 640×360 のまま。
  * 再生permalinkはないため sourceUrl は null。
  */

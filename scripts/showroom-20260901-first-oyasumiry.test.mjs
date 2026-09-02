@@ -28,6 +28,7 @@ import { contest } from "../src/data/contest.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { HOME_NEWS_LIMIT } from "../src/lib/homePortal.ts";
 import { verifyNews } from "./content-invariants.mjs";
 import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
 import {
@@ -246,8 +247,14 @@ describe("2026-09-01 first SHOWROOM おやすみりー — self-hosted boards", 
 describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
   it("surfaces on LIVE STREAM only and stays out of Gallery", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
+    const liveMedia = selectActivityMedia("live-stream");
     assert.equal(liveNews[1]?.id, NEWS_ID);
-    assert.equal(selectActivityMedia("live-stream")[1], firstSeptemberTomatoBoardImage);
+    assert.equal(liveMedia[1], firstSeptemberTomatoBoardImage);
+    for (const extra of firstSeptemberShowroomAdditionalMedia) {
+      assert.equal(liveMedia.includes(extra), false, extra.id);
+    }
+    assert.equal(HOME_NEWS_LIMIT, 3);
+    assert.equal(sortNewsByDateDesc(news).slice(0, HOME_NEWS_LIMIT).some((entry) => entry.id === NEWS_ID), false);
     for (const activityId of ["miss-circle", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(
@@ -289,10 +296,16 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
     assert.match(section, /Paton投票CTAは付けない/);
     assert.match(section, /代表 `media` はあっきーさんボード/);
     assert.match(section, /やすぴさんボードを末尾に置く/);
+    assert.match(section, /HOME Latest は先頭3件だけ/);
+    assert.match(section, /関連するメディア/);
+    assert.match(section, /公開の呼びかけ/);
     assert.match(mediaGuide, /## 素材台帳（batch b48/);
     assert.match(mediaGuide, /mily-b48-01-tomato-nutrient-ackey/);
     assert.match(mediaGuide, /mily-b48-02-ackey-point/);
     assert.match(mediaGuide, /mily-b48-06-fanmark-yasupi/);
+    assert.match(mediaGuide, /NEWS代表画像の標準動作/);
+    assert.match(mediaGuide, /HOME Latest は先頭3件だけ/);
+    assert.match(mediaGuide, /公開の呼びかけ/);
     assert.doesNotMatch(mediaGuide, /mily-b48-02-fanmark-yasupi/);
     assert.doesNotMatch(section, /Drive ID|attachment hash|sha256/);
     assert.equal(DRIVE_HOST_PATTERN.test(ops), false);
