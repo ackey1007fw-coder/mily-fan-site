@@ -9,7 +9,11 @@ export default function NewsPage() {
       title="最新情報"
       description="みりぃさんの確認済みの近況とお知らせです。新しいものから順に並んでいます。"
     >
-      <Latest initialVisible={NEWS_ARCHIVE_INITIAL} showArchiveCta={false} />
+      <Latest
+        initialVisible={NEWS_ARCHIVE_INITIAL}
+        showArchiveCta={false}
+        showIntro={false}
+      />
     </ArchiveShell>
   );
 }

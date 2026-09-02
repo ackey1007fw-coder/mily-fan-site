@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
+import { Header } from "./components/Header";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
 import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
@@ -41,26 +42,6 @@ const agendaDateFormatter = new Intl.DateTimeFormat("ja-JP", {
 
 function formatAgendaDate(date: string): string {
   return agendaDateFormatter.format(new Date(`${date}T00:00:00+09:00`));
-}
-
-function SupportHeader() {
-  return (
-    <header className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur">
-      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-2 px-4 py-3">
-        <a href="/" className="font-semibold tracking-wide text-sage-deep">
-          みりぃ ファンサイト
-        </a>
-        <nav aria-label="Supportページ内ナビゲーション" className="flex flex-wrap gap-2">
-          <a href="/activities/" className={secondaryCta}>
-            Activities
-          </a>
-          <a href="/" className={primaryCta}>
-            ホームへ戻る
-          </a>
-        </nav>
-      </div>
-    </header>
-  );
 }
 
 function SupportHero() {
@@ -231,7 +212,7 @@ export default function SupportPage() {
       >
         本文へスキップ
       </a>
-      <SupportHeader />
+      <Header />
       <main id="support-main">
         <SupportHero />
         <PatonVoteGuide />

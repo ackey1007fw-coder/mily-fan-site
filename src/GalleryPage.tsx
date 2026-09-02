@@ -9,7 +9,11 @@ export default function GalleryPage() {
       title="ギャラリー"
       description="みりぃさんの確認済みの写真と動画です。"
     >
-      <Gallery initialVisible={GALLERY_ARCHIVE_INITIAL} showArchiveCta={false} />
+      <Gallery
+        initialVisible={GALLERY_ARCHIVE_INITIAL}
+        showArchiveCta={false}
+        showIntro={false}
+      />
     </ArchiveShell>
   );
 }
