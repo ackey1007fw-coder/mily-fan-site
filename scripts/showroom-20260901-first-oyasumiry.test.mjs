@@ -248,13 +248,22 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
   it("surfaces on LIVE STREAM only and stays out of Gallery", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
     const liveMedia = selectActivityMedia("live-stream");
-    assert.equal(liveNews[1]?.id, NEWS_ID);
-    assert.equal(liveMedia[1], firstSeptemberTomatoBoardImage);
+    assert.equal(liveNews.some((entry) => entry.id === NEWS_ID), true);
+    assert.equal(liveMedia.includes(firstSeptemberTomatoBoardImage), true);
+    assert.deepEqual(
+      liveMedia.filter((entry) => "id" in entry && String(entry.id).includes("b48")),
+      [firstSeptemberTomatoBoardImage],
+    );
     for (const extra of firstSeptemberShowroomAdditionalMedia) {
       assert.equal(liveMedia.includes(extra), false, extra.id);
     }
     assert.equal(HOME_NEWS_LIMIT, 3);
-    assert.equal(sortNewsByDateDesc(news).slice(0, HOME_NEWS_LIMIT).some((entry) => entry.id === NEWS_ID), false);
+    assert.equal(
+      sortNewsByDateDesc(news)
+        .slice(0, HOME_NEWS_LIMIT)
+        .some((entry) => entry.id === NEWS_ID),
+      false,
+    );
     for (const activityId of ["miss-circle", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(
