@@ -200,7 +200,9 @@ export function Latest({
               みりぃさんの近況とお知らせ。
             </p>
           </>
-        ) : null}
+        ) : (
+          <h2 className="sr-only">最新情報一覧</h2>
+        )}
         {latestNews.length === 0 ? (
           <div className="mt-6">
             <EmptyState

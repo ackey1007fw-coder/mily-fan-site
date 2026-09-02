@@ -40,7 +40,9 @@ export function Stories({
               本人の言葉と、その日の記録を読むページです。
             </p>
           </>
-        ) : null}
+        ) : (
+          <h2 className="sr-only">ストーリー一覧</h2>
+        )}
         <div className="mt-6 space-y-4">
           {visible.map((story) => (
             <StoryCard key={story.slug} story={story} />

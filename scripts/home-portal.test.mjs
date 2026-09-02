@@ -184,6 +184,13 @@ describe("archive pages stay complete", () => {
     assert.equal(NEWS_ARCHIVE_INITIAL, 10);
     assert.equal(GALLERY_ARCHIVE_INITIAL, 12);
     assert.match(source("src/components/Latest.tsx"), /sortNewsByDateDesc\(news\)/);
+    for (const file of [
+      "src/components/Latest.tsx",
+      "src/components/Stories.tsx",
+      "src/components/Gallery.tsx",
+    ]) {
+      assert.match(source(file), /<h2 className="sr-only">/);
+    }
     assert.match(source("src/components/Stories.tsx"), /visibleStories\(\)/);
     assert.match(source("src/components/Gallery.tsx"), /selectGalleryEntries\(\)/);
   });
