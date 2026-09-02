@@ -373,7 +373,7 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-09-02");
+    assert.equal(contest.lastVerifiedAt, "2026-09-03");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 
     const afterPaton = selectHomeVoteAction({
@@ -405,7 +405,7 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.match(approaching.nowItems[0]?.note ?? "", /9\/13/);
     assert.match(approaching.nowItems[0]?.note ?? "", /WEB投票 9\/3 12:00〜9\/13 23:59/);
     assert.match(approaching.nowItems[0]?.note ?? "", /SHOWROOM無料ギフト審査 9\/3 5:00〜9\/12 21:59/);
-    assert.match(approaching.nowItems[0]?.note ?? "", /SHOWROOMイベント審査 9\/3 5:00〜9\/12 21:59/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /CanCamモデル発掘オーディション 9\/3 5:00〜9\/12 21:59/);
     assert.match(approaching.nowItems[0]?.note ?? "", /SHOWROOMは9\/12 21:59終了/);
     assert.equal(approaching.voteActions[0].kind, "contest");
 

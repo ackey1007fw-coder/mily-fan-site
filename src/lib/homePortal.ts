@@ -1,9 +1,10 @@
 import type { Contest } from "../data/contest.ts";
-import type { SiteLink } from "../data/links.ts";
+import { missCircleWebVoteLink, type SiteLink } from "../data/links.ts";
 import {
   campusGirlsFinalStagePatonVote,
   type SupportEvent,
 } from "../data/supportEvents.ts";
+import { missCircleWebVoteCtaLabel } from "./missCircleWebVoteCta.ts";
 import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
 import { contestPhaseDisplayNote } from "./contestPhaseDisplay.ts";
 import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
@@ -91,9 +92,13 @@ export function selectHomeVoteAction(input: {
       event.id === campusGirlsFinalStagePatonVote.id
         ? patonVoteLiveNote(event.note, input.now)
         : event.note;
+    const label =
+      link.id === missCircleWebVoteLink.id
+        ? (missCircleWebVoteCtaLabel(input.now) ?? link.label)
+        : link.label;
     return {
       kind: "support-event",
-      label: link.label,
+      label,
       url: link.url,
       title: event.title,
       ...(note ? { note } : {}),

@@ -34,6 +34,11 @@ import {
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { contestOfficialWindowLines, contestPhaseDisplayNote } from "../src/lib/contestPhaseDisplay.ts";
 import { selectHomeVoteAction, selectHomeVoteActions } from "../src/lib/homePortal.ts";
+import {
+  MISS_CIRCLE_WEB_VOTE_LIVE_LABEL,
+  MISS_CIRCLE_WEB_VOTE_PRESTART_LABEL,
+  missCircleWebVoteCtaLabel,
+} from "../src/lib/missCircleWebVoteCta.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
   adaptStreamSlots,
@@ -47,9 +52,10 @@ import { verifyNews } from "./content-invariants.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const NEWS_ID = "2026-09-02-miss-circle-third-round";
 const TITLE = "ミスサー三次審査、9/3から9/13";
-const BODY = `MISS CIRCLE CONTEST 2026の三次審査が、9月3日から始まります。みりぃはENTRY 734、Bブロックです。
-
-WEB投票は9月3日12:00〜9月13日23:59、SHOWROOMの無料ギフト審査・イベント審査は9月3日5:00〜9月12日21:59です。配信予定は、本人配布のタイムテーブル画像と「応援・予定」で確認できます。予定は変更になる場合があります。`;
+const BODY = `三次審査は9月3日から13日。三橋莉子はENTRY 734、Bブロック。SHOWROOMの対象イベントは「CanCamモデル発掘オーディション」です。審査は3日5:00から12日21:59。WEB投票は3日12:00から13日23:59。
+Bブロック1位はCanCam 2027年1月号に載ります。
+SHOWROOMはSMS認証が必須で、複数アカウントは禁止です。`;
+const CANCAM_EVENT_LABEL = "CanCamモデル発掘オーディション";
 const WEB_VOTE_URL =
   "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734";
 const SHOWROOM_EVENT_URL = "https://www.showroom-live.com/event/circle2026_3rd";
@@ -118,12 +124,15 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
     assert.deepEqual(verifyNews([item]), []);
     assert.doesNotMatch(`${item.title}\n${item.body}`, /JST|live|作業メモ|公式|公認/i);
-    assert.ok(item.body.length <= 220);
+    assert.match(item.body, /CanCamモデル発掘オーディション/);
+    assert.match(item.body, /CanCam 2027年1月号/);
+    assert.match(item.body, /SMS認証が必須/);
+    assert.match(item.body, /複数アカウントは禁止/);
     assert.doesNotMatch(
       item.body,
-      /CanCamモデル発掘|オリジナルアバター|AGESTOCK|横浜アリーナ|9\/3（木）|未定|昼枠なし/,
+      /オリジナルアバター|AGESTOCK|横浜アリーナ|総合1位|9\/3（木）|未定|昼枠なし/,
     );
-    assert.doesNotMatch(item.body, /一票で届ける|贈れます|遊びに来て|応援よろしく/);
+    assert.doesNotMatch(item.body, /一票で届ける|贈れます|遊びに来て|応援よろしく|今すぐ|急いで|残り|まだ間に合う/);
   });
 
   it("uses confirmed organizer links only and the owner-provided timetable still", async () => {
@@ -132,13 +141,13 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(item.sourceLabel, "MISS CIRCLE CONTEST 2026");
     assert.deepEqual(item.additionalSources, [
       { label: "ENTRY 734", url: ENTRY_URL },
-      { label: "SHOWROOMイベント", url: SHOWROOM_EVENT_URL },
+      { label: CANCAM_EVENT_LABEL, url: SHOWROOM_EVENT_URL },
     ]);
     assert.equal(item.relatedUrl, WEB_VOTE_URL);
-    assert.equal(item.ctaLabel, "WEB投票する");
+    assert.equal(item.ctaLabel, MISS_CIRCLE_WEB_VOTE_LIVE_LABEL);
     assert.deepEqual(item.additionalCtas, [
       { label: "ENTRY 734", url: ENTRY_URL },
-      { label: "SHOWROOMイベント", url: SHOWROOM_EVENT_URL },
+      { label: CANCAM_EVENT_LABEL, url: SHOWROOM_EVENT_URL },
       { label: "SHOWROOM", url: SHOWROOM_ROOM_URL },
     ]);
     assert.equal(item.media, thirdRoundTimetableImage);
@@ -220,6 +229,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       timezone: "Asia/Tokyo",
     });
     assert.equal(missCircleThirdRoundWebVote.ctaLinkId, missCircleWebVoteLink.id);
+    assert.equal(missCircleThirdRoundWebVote.verifiedAt, "2026-09-03");
     assert.equal(missCircleWebVoteLink.url, WEB_VOTE_URL);
     assert.equal(missCircleThirdRoundShowroomReview.activityId, "miss-circle");
     assert.equal(missCircleThirdRoundShowroomReview.kind, "stream-event");
@@ -234,7 +244,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       missCircleThirdRoundShowroomReview.ctaLinkId,
       missCircleShowroomEventLink.id,
     );
+    assert.equal(missCircleShowroomEventLink.label, CANCAM_EVENT_LABEL);
     assert.equal(missCircleShowroomEventLink.url, SHOWROOM_EVENT_URL);
+    assert.equal(missCircleThirdRoundShowroomReview.verifiedAt, "2026-09-03");
+    assert.equal(missCircleWebVoteLink.label, MISS_CIRCLE_WEB_VOTE_LIVE_LABEL);
     assert.equal(
       supportEvents.filter((event) => event.id === missCircleThirdRoundWebVote.id)
         .length,
@@ -307,34 +320,89 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     );
   });
 
-  it("gates the WEB vote CTA to the confirmed window and keeps ENTRY 734", () => {
+  it("keeps the existing WEB vote CTA visible before 12:00 and hides it after the window", () => {
     const item = entry();
+    const beforeShowroom = resolveNewsLinks(item, SHOWROOM_START - 1);
     const before = resolveNewsLinks(item, WEB_START - 1);
     const during = resolveNewsLinks(item, WEB_START);
     const after = resolveNewsLinks(item, WEB_END + 1);
 
-    assert.equal(before.cta, undefined);
+    assert.equal(
+      missCircleWebVoteCtaLabel(WEB_START - 1),
+      MISS_CIRCLE_WEB_VOTE_PRESTART_LABEL,
+    );
+    assert.equal(missCircleWebVoteCtaLabel(WEB_START), MISS_CIRCLE_WEB_VOTE_LIVE_LABEL);
+    assert.equal(missCircleWebVoteCtaLabel(WEB_END), MISS_CIRCLE_WEB_VOTE_LIVE_LABEL);
+    assert.equal(missCircleWebVoteCtaLabel(WEB_END + 1), undefined);
+    assert.deepEqual(beforeShowroom.cta, {
+      label: MISS_CIRCLE_WEB_VOTE_PRESTART_LABEL,
+      url: WEB_VOTE_URL,
+    });
+    assert.equal(
+      (beforeShowroom.additionalCtas ?? []).some((cta) => cta.url === WEB_VOTE_URL),
+      false,
+    );
+
+    assert.deepEqual(before.cta, {
+      label: MISS_CIRCLE_WEB_VOTE_PRESTART_LABEL,
+      url: WEB_VOTE_URL,
+    });
+    assert.equal(before.relatedUrl, WEB_VOTE_URL);
     assert.equal(
       (before.additionalCtas ?? []).some((cta) => cta.url === WEB_VOTE_URL),
       false,
     );
-    assert.deepEqual(during.cta, { label: "WEB投票する", url: WEB_VOTE_URL });
+    assert.deepEqual(
+      (before.additionalCtas ?? []).map(({ label, url }) => ({ label, url })),
+      [
+        { label: "ENTRY 734", url: ENTRY_URL },
+        { label: CANCAM_EVENT_LABEL, url: SHOWROOM_EVENT_URL },
+        { label: "SHOWROOM", url: SHOWROOM_ROOM_URL },
+      ],
+    );
+    assert.doesNotMatch(
+      `${before.cta.label}${(before.additionalCtas ?? []).map(({ label }) => label).join("")}`,
+      /今すぐ|急いで|残り|まだ間に合う/,
+    );
+    assert.deepEqual(during.cta, {
+      label: MISS_CIRCLE_WEB_VOTE_LIVE_LABEL,
+      url: WEB_VOTE_URL,
+    });
+    assert.equal(during.relatedUrl, WEB_VOTE_URL);
+    assert.equal(
+      (during.additionalCtas ?? []).some((cta) => cta.url === WEB_VOTE_URL),
+      false,
+    );
     assert.equal(after.cta, undefined);
+    assert.equal(after.relatedUrl, undefined);
 
     const voteAt = (now) =>
       selectHomeVoteActions({ contest, supportEvents, links, now }).map(
-        ({ kind, url }) => ({ kind, url }),
+        ({ kind, url, label }) => ({ kind, url, label }),
       );
     assert.deepEqual(voteAt(WEB_START - 1), [
-      { kind: "contest", url: contest.entryUrl },
+      { kind: "contest", url: contest.entryUrl, label: "ENTRY 734を応援する" },
     ]);
     assert.deepEqual(voteAt(WEB_START), [
-      { kind: "support-event", url: WEB_VOTE_URL },
-      { kind: "contest", url: contest.entryUrl },
+      {
+        kind: "support-event",
+        url: WEB_VOTE_URL,
+        label: MISS_CIRCLE_WEB_VOTE_LIVE_LABEL,
+      },
+      { kind: "contest", url: contest.entryUrl, label: "ENTRY 734を応援する" },
     ]);
     assert.deepEqual(voteAt(WEB_END + 1), [
-      { kind: "contest", url: contest.entryUrl },
+      { kind: "contest", url: contest.entryUrl, label: "ENTRY 734を応援する" },
     ]);
+    assert.equal(
+      selectHomeVoteAction({
+        contest,
+        supportEvents,
+        links,
+        now: WEB_START,
+      }).label,
+      MISS_CIRCLE_WEB_VOTE_LIVE_LABEL,
+    );
     assert.equal(
       selectHomeVoteAction({
         contest,
@@ -361,12 +429,12 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(contest.currentPhase?.name, "3次審査進出");
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
-    assert.equal(contest.lastVerifiedAt, "2026-09-02");
+    assert.equal(contest.lastVerifiedAt, "2026-09-03");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
     assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
       "WEB投票 9/3 12:00〜9/13 23:59",
       "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59",
-      "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59",
+      "CanCamモデル発掘オーディション 9/3 5:00〜9/12 21:59",
       "SHOWROOMは9/12 21:59終了",
     ]);
     assert.match(contestPhaseDisplayNote(contest.currentPhase), /3次審査進出（9\/3〜9\/13）/);
@@ -422,7 +490,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.doesNotMatch(serialized, /09-02T20:00|12:59:00/);
     assert.doesNotMatch(
       entry().body,
-      /CanCamモデル発掘|オリジナルアバター|AGESTOCK|横浜アリーナ|MISCOLLEステージ/,
+      /オリジナルアバター|AGESTOCK|横浜アリーナ|MISCOLLEステージ|総合1位の特別番組/,
     );
 
     const calendarPayload = JSON.stringify({

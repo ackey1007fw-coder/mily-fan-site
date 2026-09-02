@@ -21,7 +21,7 @@ const source = (relative) => readFileSync(path.join(root, relative), "utf8");
 
 const WEB_LINE = "WEB投票 9/3 12:00〜9/13 23:59";
 const GIFT_LINE = "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59";
-const EVENT_LINE = "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59";
+const EVENT_LINE = "CanCamモデル発掘オーディション 9/3 5:00〜9/12 21:59";
 const SHOWROOM_END_LINE = "SHOWROOMは9/12 21:59終了";
 const OFFICIAL_LINES = [WEB_LINE, GIFT_LINE, EVENT_LINE, SHOWROOM_END_LINE];
 
@@ -50,7 +50,7 @@ describe("contest phase official window display", () => {
   });
 
   it("keeps gift and event as two labeled rows from one SHOWROOM window", () => {
-    assert.equal(GIFT_LINE.replace("SHOWROOM無料ギフト審査 ", ""), EVENT_LINE.replace("SHOWROOMイベント審査 ", ""));
+    assert.equal(GIFT_LINE.replace("SHOWROOM無料ギフト審査 ", ""), EVENT_LINE.replace("CanCamモデル発掘オーディション ", ""));
     assert.equal(contestOfficialWindowLines(phaseWithName("2次審査")).length, 0);
     assert.equal(contestOfficialWindowLines(null).length, 0);
     assert.equal(appendContestOfficialWindows("確認済み", phaseWithName("2次審査")), "確認済み");

@@ -46,6 +46,8 @@ export const contest: Contest = {
   //   2026-09-02: 同じ主催者 SCHEDULE で WEB投票 09/03 12:00〜09/13 23:59、
   //     SHOWROOM無料ギフト審査・イベント審査 09/03 05:00〜09/12 21:59 を再確認。
   //     ContestPhase は日付のみ。時刻は supportEvents 側。
+  //   2026-09-03: 推しサイト原稿で CanCamイベント名 / Bブロック雑誌1行 /
+  //     SMS認証必須・複数アカウント禁止 を確認。時刻窓は変更なし。
   // 「最終日」表記から締切日を推定して end に入れることはしない。
   currentPhase: {
     name: "3次審査進出",
@@ -53,5 +55,5 @@ export const contest: Contest = {
     end: "2026-09-13",
     source: "https://www.misscircle.jp/",
   },
-  lastVerifiedAt: "2026-09-02",
+  lastVerifiedAt: "2026-09-03",
 };

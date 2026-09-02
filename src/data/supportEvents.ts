@@ -178,7 +178,8 @@ export const missCircleThirdRoundWebVote: SupportEvent = {
   },
   ctaLinkId: missCircleWebVoteLink.id,
   source: "https://www.misscircle.jp/",
-  verifiedAt: "2026-09-02",
+  // 2026-09-03: CanCamイベント名 / Bブロック雑誌掲載 / SMS+複数アカウント禁止を確認。
+  verifiedAt: "2026-09-03",
   priority: 90,
 };
 
@@ -196,7 +197,8 @@ export const missCircleThirdRoundShowroomReview: SupportEvent = {
   },
   ctaLinkId: missCircleShowroomEventLink.id,
   source: "https://www.showroom-live.com/event/circle2026_3rd",
-  verifiedAt: "2026-09-02",
+  // 2026-09-03: CanCamイベント名 / Bブロック雑誌掲載 / SMS+複数アカウント禁止を確認。
+  verifiedAt: "2026-09-03",
   priority: 80,
 };
 
