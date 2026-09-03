@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
-import { streamRecap20260902 } from "../src/data/streamRecaps.ts";
+import { rankingByPlace, streamRecap20260902 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
 import { news } from "../src/data/news.ts";
 import { highlights } from "../src/data/highlights.ts";
@@ -26,21 +26,19 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
   });
 
-  it("captures highlights, September goals, ranking, and an ordered timeline", () => {
+  it("keeps a short recap and withholds ranking names", () => {
     const recap = streamRecap20260902;
 
-    assert.equal(recap.highlights.length, 7);
+    assert.equal(recap.highlights.length, 3);
     assert.equal(recap.goals.length, 4);
-    assert.equal(recap.ranking.length, 1);
+    assert.equal(recap.ranking.length, 0);
+    assert.equal(rankingByPlace(recap.ranking).length, 0);
     assert.equal(recap.timeline.length, 9);
     assert.ok(recap.highlights.some(({ title }) => /太陽/.test(title)));
-    assert.ok(recap.highlights.some(({ body }) => /未完成の作品/.test(body)));
+    assert.ok(recap.highlights.some(({ title }) => /未完成の作品/.test(title)));
     assert.ok(recap.highlights.some(({ body }) => /朝の通学は混雑/.test(body)));
     assert.ok(recap.goals.some(({ item }) => item === "フォロワー"));
-    assert.equal(
-      recap.ranking[0],
-      "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
-    );
+    assert.match(recap.rankingNote, /個人名は掲載していません/);
 
     const highlightSeconds = recap.highlights.map(({ timestamp }) => {
       const [hour, minute, second] = timestamp.split(":").map(Number);
@@ -67,7 +65,8 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
       recap.summary,
       ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
       ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
-      ...recap.ranking,
+      recap.rankingNote,
+      ...recap.ranking.flatMap(({ name, note }) => [name, note ?? ""]),
       ...recap.timeline.flatMap(({ timestamp, label }) => [timestamp, label]),
       recap.nextNote,
       recap.sourceLabel,
@@ -76,10 +75,10 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
 
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
-    assert.match(page, /みりぃの見どころ/);
-    assert.match(page, /9月の目標（配信時点）/);
-    assert.match(page, /読み上げたランキング/);
-    assert.match(page, /主なコーナーとタイムスタンプを見る/);
+    assert.match(page, /function StreamRankingList/);
+    assert.match(page, /この回の見どころ/);
+    assert.match(page, /この回の目標/);
+    assert.match(page, /タイムスタンプと次枠/);
     assert.match(page, /<StreamRecap activityId=\{content\.activity\.id\} \/>/);
 
     assert.match(recap.nextNote, /14:40/);
@@ -87,7 +86,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.doesNotMatch(morningText, /ハルルン|ヒロさん|まこちゃん|あっきーさん|ひげおやじさん/);
     assert.doesNotMatch(
       morningText,
-      /湘南新宿ライン|東海道線|横浜から東京方面|日大まで片道約2時間|仕事中に来てくれた人/,
+      /湘南新宿ライン|東海道線|横浜から東京方面|日大まで片道約2時間|仕事中に来てくれた人|通勤ラッシュ/,
     );
     assert.equal(
       streamSchedule.some((slot) => slot.date === "2026-09-02" && slot.time === "14:40"),
