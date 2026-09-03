@@ -159,18 +159,19 @@ describe("2026-09-02 Instagram Story — Latest / NEWS", () => {
     const oyasumily = newsItem(OYASUMILY_NEWS_ID);
     const patonSecond = newsItem(PATON_SECOND_NEWS_ID);
 
-    assert.equal(ordered[0]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(ordered[1], oyasumily);
-    assert.equal(ordered[2], patonSecond);
-    assert.equal(ordered[3]?.id, "2026-09-01-first-showroom-oyasumiry");
-    assert.equal(ordered[4], newsItem("2026-09-01-ohayo-september-x"));
+    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[1]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(ordered[2], oyasumily);
+    assert.equal(ordered[3], patonSecond);
+    assert.equal(ordered[4]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[5], newsItem("2026-09-01-ohayo-september-x"));
     assert.equal(oyasumily?.sameDayOrder, 2);
     assert.equal(patonSecond?.sameDayOrder, 1);
     assert.deepEqual(oyasumily?.activityIds, ["live-stream"]);
     assert.deepEqual(patonSecond?.activityIds, ["campus-girls"]);
     assert.equal(news.filter(({ id }) => id === OYASUMILY_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === PATON_SECOND_NEWS_ID).length, 1);
-    assert.equal(news.length, 74);
+    assert.equal(news.length, 75);
     assert.deepEqual(verifyNews([oyasumily, patonSecond]), []);
     assert.deepEqual(verifyNews(news), []);
   });

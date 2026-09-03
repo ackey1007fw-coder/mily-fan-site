@@ -150,10 +150,11 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(item.title, TITLE);
     assert.equal(item.body, BODY);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(news.length, 74);
-    assert.equal(ordered[0], item);
-    assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
+    assert.equal(news.length, 75);
+    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[1], item);
+    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
     assert.deepEqual(verifyNews([item]), []);
     assert.doesNotMatch(`${item.title}\n${item.body}`, /JST|live|作業メモ|公式|公認/i);
     assert.ok(item.body.length <= 220);
@@ -262,7 +263,8 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
 
   it("surfaces the item on the miss-circle Activity only", () => {
     const missNews = selectActivityNews("miss-circle", news, news.length);
-    assert.equal(missNews[0]?.id, NEWS_ID);
+    assert.equal(missNews[0]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(missNews[1]?.id, NEWS_ID);
     for (const activityId of ["live-stream", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(

@@ -475,7 +475,7 @@ describe("Paton 1.5x bonus ends at 8/31 23:59 JST", () => {
 
     const during = liveHomeCopy(BONUS_END);
     assert.match(during.text, FIFTEEN_X);
-    assert.equal(during.hero?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(during.hero?.id, "2026-09-03-miss-circle-goals-support");
     assert.match(during.view.nowItems[0]?.note ?? "", /1\.5倍/);
     assert.match(during.view.voteActions[0].note ?? "", /1\.5倍/);
     assert.doesNotMatch(during.view.voteActions[0].label, FIFTEEN_X);
