@@ -2963,9 +2963,9 @@ LIVE STREAM の三次初日朝配信メモ専用。NEWS / Gallery / `media.ts` /
 
 | ID | 公開ファイル | 内容 | 掲載・承認 |
 | --- | --- | --- | --- |
-| b52-01 | `live/mily-b52-01-peace-smile.jpg` | ピースと笑顔。400×228。サムネ | ✅ 2026-09-04 明示承認。LIVE STREAM。Gallery / NEWS 非掲載 |
-| b52-02 | `live/mily-b52-02-peace.jpg` | ピース | ✅ 同上 |
-| b52-03 | `live/mily-b52-03-peace-talk.jpg` | ピースしながら話す | ✅ 同上 |
+| b52-01 | `live/mily-b52-01-peace-smile.jpg` | ベストショット。400×228。サムネ | ✅ 2026-09-04 明示承認。LIVE STREAM。Gallery / NEWS 非掲載 |
+| b52-02 | `live/mily-b52-02-peace.jpg` | 手を振る | ✅ 同上 |
+| b52-03 | `live/mily-b52-03-peace-talk.jpg` | 顔を上げて話す | ✅ 同上 |
 | b52-04 | `live/mily-b52-04-smile.jpg` | 微笑み | ✅ 同上 |
 | b52-05 | `live/mily-b52-05-talk-smile.jpg` | 話す笑顔 | ✅ 同上 |
 | b52-06 | `live/mily-b52-06-talk.jpg` | 話す | ✅ 同上 |

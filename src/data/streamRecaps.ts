@@ -79,9 +79,9 @@ const gachiMorningStills: StreamRecapImage[] = [
     src: "/media/live/mily-b52-02-peace.jpg",
     width: GACHI_STILL_W,
     height: GACHI_STILL_H,
-    alt: "三次初日の朝配信で、ピースをしたままこちらを見ているみりぃ",
-    caption: "ピース",
-    downloadName: "みりぃ_三次初日朝_02_ピース.jpg",
+    alt: "三次初日の朝配信で、ベージュのトップスのみりぃが右手を開いて振っている",
+    caption: "手を振る",
+    downloadName: "みりぃ_三次初日朝_02_手を振る.jpg",
   },
   {
     src: "/media/live/mily-b52-03-peace-talk.jpg",
