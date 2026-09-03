@@ -327,6 +327,9 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
     assert.match(docs, new RegExp(PUBLIC_SHA256));
     assert.match(docs, new RegExp(POSTER_SHA256));
     assert.match(docs, /8\.5秒地点の実フレーム/);
+    // source date はオーナーの明示確認による投稿日。画面の「2日目」からの逆算ではない。
+    assert.match(docs, /オーナーが明示確認した投稿日/);
+    assert.match(section, /オーナーが「9\/4の投稿を直後に受け取った」と/);
     assert.match(ops, /76件/);
     assert.match(ops, /独立動画29本/);
     assert.match(section, /video-only/);

@@ -39,6 +39,9 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
   PatonVoteGuide のランキング系列には追加しない。
 - 恒久permalinkがないため、出典は非リンクの `Instagram Story` labelとする。
   本人Instagramプロフィールは関連CTAであり、Storyの出典URLとして扱わない。
+- source date / NEWS日付の `2026-09-04` は、オーナーが「9/4の投稿を直後に受け取った」と
+  明示確認した投稿日。受領日と一致する。画面の「2日目」表示、WEB投票期間からの逆算、
+  元動画の `creation_time` は日付の根拠にしない。投稿時刻は未確認のため書かない。
 - 追加CTAは確認済みの三次審査WEB投票リンク（`links.ts` の
   `miss-circle-2026-web-vote-734`）だけ。SupportEvent
   `miss-circle-2026-3rd-web-vote` の期間（2026-09-13 23:59 JST まで）に従い、

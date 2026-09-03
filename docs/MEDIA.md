@@ -3011,6 +3011,9 @@ PatonVoteGuide のランキング系列には追加しない。
 - approval date: `2026-09-04`
 - オーナー本人が本タスクで添付したb53-01について、
   `https://mily-fan-site.vercel.app` への掲載と、ギャラリーへの追加を明示依頼した。
+- **source date `2026-09-04` はオーナーが明示確認した投稿日**である。
+  オーナーは「9/4に投稿されたものを、その直後に受け取って渡した」と回答した。
+  受領日も同じ 2026-09-04。
 - 承認対象面は HOME Latest / `/news/`、Gallery の動画アーカイブ、
   MISS CIRCLE Activity の関連メディア。`/stories/` への複製は含まない。
 - b53-01 poster は承認済みb53-01動画の実フレームで、同動画のposter用途だけに使用する。
@@ -3023,7 +3026,9 @@ PatonVoteGuide のランキング系列には追加しない。
 ### 元素材と安全確認
 
 - provenance: `owner-provided`。SNSから再取得していない
-- source date: `2026-09-04`（Asia/Tokyo）。Instagram Storyの恒久permalinkはなく、
+- source date: `2026-09-04`（Asia/Tokyo）。**オーナーの明示確認による投稿日**で、
+  受領日と一致する。画面の「2日目」表示や、確認済みWEB投票期間からの逆算は
+  source date の根拠にしていない。Instagram Storyの恒久permalinkはなく、
   `sourceUrl` は持たない。推測permalinkも作らない
 - 受領バイトを変えず `media/original/mily-b53-01-third-round-vote-day2-story.mp4`
   （gitignore 済み・無改変・コミットしない）へ保存した。元の受け渡し名・URL・file IDは
@@ -3032,7 +3037,8 @@ PatonVoteGuide のランキング系列には追加しない。
   269 frames / video 8.966667秒 / yuv420p / `has_b_frames` 2 /
   HE-AAC 48kHz stereo 音声あり
 - 元動画の `creation_time` と Core Media handler 名は受領検査だけに使い、
-  投稿日・投稿時刻の根拠にはしていない
+  投稿日・投稿時刻の根拠にはしていない（投稿日はオーナーの明示確認による）
+- 投稿時刻は確認していないため、公開データへ書かない
 - Instagram UI、DM、通知、端末固有情報、連絡先、第三者コメントは含まれない。
   識別可能な第三者も見当たらない。背景は室内のクローゼット扉
 
