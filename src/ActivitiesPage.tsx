@@ -12,7 +12,7 @@ import {
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
 import { radioEpisode20260830 } from "./data/radioEpisodes";
-import { streamRecap20260902 } from "./data/streamRecaps";
+import { streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
@@ -482,7 +482,20 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 
 function StreamRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "live-stream") return null;
-  const recap = streamRecap20260902;
+
+  return (
+    <>
+      {streamRecaps.map((recap) => (
+        <StreamRecapArticle key={recap.id} recap={recap} />
+      ))}
+    </>
+  );
+}
+
+function StreamRecapArticle({ recap }: { recap: StreamRecapData }) {
+  const highlightsId = `${recap.id}-highlights`;
+  const goalsId = `${recap.id}-goals`;
+  const rankingId = `${recap.id}-ranking`;
 
   return (
     <SectionShell eyebrow="Stream Archive" title={`${recap.dateLabel} ${recap.theme}`}>
@@ -496,11 +509,11 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
         </p>
       </div>
 
-      <section aria-labelledby="stream-highlights" className="mt-9">
+      <section aria-labelledby={highlightsId} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Mily Highlights
         </p>
-        <h3 id="stream-highlights" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={highlightsId} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           みりぃの見どころ
         </h3>
         <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -524,11 +537,11 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
         </ul>
       </section>
 
-      <section aria-labelledby="stream-goals" className="mt-9">
+      <section aria-labelledby={goalsId} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           September Goals
         </p>
-        <h3 id="stream-goals" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={goalsId} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           9月の目標（配信時点）
         </h3>
         <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -545,11 +558,11 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
         </ul>
       </section>
 
-      <section aria-labelledby="stream-ranking" className="mt-9">
+      <section aria-labelledby={rankingId} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Ranking
         </p>
-        <h3 id="stream-ranking" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={rankingId} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           読み上げたランキング
         </h3>
         <p className="mt-3 text-sm leading-7 text-ink-muted">

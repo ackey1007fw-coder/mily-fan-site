@@ -45,6 +45,25 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 - NEWS / Gallery / media.ts / galleryVideos / `/stories/` / highlights / events /
   streamSchedule / contest.ts / profile は変更しない。
 
+### 2026-09-02 SHOWROOM 夜ラジオ配信メモ
+
+- オーナー提供の夜配信文字起こしを照合し、
+  `src/data/streamRecaps.ts` に配信回の要約を保存する。
+- LIVE STREAM Activityへ、配信全体の要約、みりぃの見どころ7件、
+  三次目標の当時の現状、読み上げたランキング、主なタイムスタンプを掲載する。
+- 新しい配信メモを配列の先頭へ置き、朝配信メモの下に続く。
+- 出典は非リンクの
+  `2026年9月2日 SHOWROOM夜配信 文字起こし（オーナー提供）` labelとし、
+  Driveのフォルダ・ファイルIDはtracked textへ保存しない。
+- 録音・画面録画・全文文字起こしは公開しない。視聴者のアイコン・コメント画面は出さない。
+- 配信中に案内した 9/3 の 7:30 / 14:40 / 21:00 枠は投稿時点の案内として本文に残す。
+  手入力 `streamSchedule` の 9/3 枠は本人配布タイムテーブル由来の既存値のまま。
+  この配信メモからは events へ転記しない。9/5 5:30 メイク配信は検討の話のため予定へ足さない。
+- 本人が出していない別コンテスト名、他出場者名はサイトへ載せない。
+- フォロワー数・アバ権・ファンマークの数字は配信時点の記録。profile へ固定しない。
+- NEWS / Gallery / media.ts / galleryVideos / `/stories/` / highlights / events /
+  streamSchedule / contest.ts / profile は変更しない。
+
 ### 2026-09-03 本人X 三次審査の目標と応援方法
 
 - `news.ts` は75件。9/3の本人Xを独立したNEWSとして先頭へ追加する。
