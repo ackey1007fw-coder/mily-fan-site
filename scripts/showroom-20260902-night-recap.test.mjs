@@ -71,17 +71,6 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     const page = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
     const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    const nightText = [
-      recap.summary,
-      ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
-      ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
-      recap.rankingNote,
-      ...recap.ranking.flatMap(({ name, note }) => [name, note ?? ""]),
-      ...recap.timeline.flatMap(({ timestamp, label }) => [timestamp, label]),
-      recap.nextNote,
-      recap.sourceLabel,
-      recap.transcriptionNote,
-    ].join("\n");
 
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
@@ -98,9 +87,10 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(recap.nextNote, /21:00/);
     assert.doesNotMatch(data, /いくちゃん|ゆめちゃん/);
     assert.doesNotMatch(recap.summary, /フレキャン/);
-    assert.doesNotMatch(
-      nightText,
-      /高速の神さん|キサラギさん|あっきーさん|おおたちどりさん|ヒロシくん|アロハタロウさん|ちゃんぎーさん|お疲れさん|あむちゃん|ロドリゲスさん|ヘッポコライダーさん|ヒロさん|ドゥル/,
+    assert.equal(recap.ranking.length, 0);
+    assert.equal(
+      streamRecaps.every((item) => item.ranking.length === 0),
+      true,
     );
     assert.equal(
       streamSchedule.some((slot) => slot.date === "2026-09-05" && slot.time === "05:30"),
