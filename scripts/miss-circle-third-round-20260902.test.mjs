@@ -278,6 +278,14 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(isValidSupportEvent(missCircleThirdRoundShowroomReview), true);
     assert.equal(missCircleThirdRoundWebVote.activityId, "miss-circle");
     assert.equal(missCircleThirdRoundWebVote.kind, "vote");
+    assert.equal(
+      missCircleThirdRoundWebVote.shareText,
+      "MISS CIRCLE CONTEST 2026 3次審査のWEB投票をお願いします🗳️",
+    );
+    assert.equal(
+      missCircleThirdRoundWebVote.shareHashtag,
+      "#ミスサークル2026",
+    );
     assert.deepEqual(missCircleThirdRoundWebVote.schedule, {
       state: "confirmed-period",
       start: "2026-09-03T12:00:00+09:00",
