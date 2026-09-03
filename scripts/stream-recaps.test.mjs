@@ -32,7 +32,7 @@ const LIMITS = {
   timeline: [8, 16],
   timelineLabel: [1, 32],
   nextNote: [40, 120],
-  gallery: [4, 12],
+  gallery: [2, 12],
 };
 
 const RANKING_NOTE_SHAPE =
