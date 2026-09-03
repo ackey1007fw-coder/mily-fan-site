@@ -12,6 +12,7 @@ import {
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
 import { radioEpisode20260830 } from "./data/radioEpisodes";
+import { streamRecap20260902Morning } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
@@ -479,6 +480,120 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
   );
 }
 
+function StreamRecap({ activityId }: { activityId: ActivityId }) {
+  if (activityId !== "live-stream") return null;
+  const recap = streamRecap20260902Morning;
+
+  return (
+    <SectionShell eyebrow="Stream Archive" title={`${recap.dateLabel} ${recap.theme}`}>
+      <div className="mt-5 rounded-3xl border border-sage/20 bg-sage-soft/45 p-5 shadow-card sm:p-7">
+        <div className="flex flex-wrap gap-2 text-xs font-semibold text-sage-deep">
+          <span className="rounded-full bg-paper px-3 py-1.5">{recap.platformLabel}</span>
+          <span className="rounded-full bg-paper px-3 py-1.5">{recap.broadcastLabel}</span>
+        </div>
+        <p className="mt-5 text-sm leading-7 text-ink-muted sm:text-base sm:leading-8">
+          {recap.summary}
+        </p>
+      </div>
+
+      <section aria-labelledby="stream-highlights" className="mt-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+          Mily Highlights
+        </p>
+        <h3 id="stream-highlights" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+          みりぃの見どころ
+        </h3>
+        <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {recap.highlights.map((highlight) => (
+            <li
+              key={highlight.timestamp + highlight.title}
+              className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
+            >
+              <p className="text-xs font-semibold text-sage-deep">{highlight.timestamp}</p>
+              <h4 className="mt-2 text-lg font-bold leading-relaxed text-ink">
+                {highlight.title}
+              </h4>
+              <p className="mt-2 text-sm leading-7 text-ink-muted">{highlight.body}</p>
+              {highlight.quote ? (
+                <blockquote className="mt-4 border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
+                  {highlight.quote}
+                </blockquote>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="stream-goals" className="mt-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+          September Goals
+        </p>
+        <h3 id="stream-goals" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+          9月の目標（配信時点）
+        </h3>
+        <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {recap.goals.map((goal) => (
+            <li
+              key={goal.item}
+              className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
+            >
+              <p className="text-sm font-bold text-ink">{goal.item}</p>
+              <p className="mt-1 text-xs font-semibold text-sage-deep">目標 {goal.target}</p>
+              <p className="mt-2 text-sm leading-7 text-ink-muted">{goal.statusThen}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section aria-labelledby="stream-ranking" className="mt-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
+          Ranking
+        </p>
+        <h3 id="stream-ranking" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+          読み上げたランキング
+        </h3>
+        <p className="mt-3 text-sm leading-7 text-ink-muted">
+          配信終了時に、下から読み上げた順です。
+        </p>
+        <ul className="mt-5 space-y-2">
+          {recap.ranking.map((entry) => (
+            <li
+              key={entry}
+              className="rounded-xl border border-sage/15 bg-sage-soft/35 px-4 py-2 text-sm leading-7 text-ink"
+            >
+              {entry}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <details className="mt-9 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
+        <summary className="cursor-pointer font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
+          主なコーナーとタイムスタンプを見る
+        </summary>
+        <ol className="mt-5 space-y-3">
+          {recap.timeline.map((item) => (
+            <li key={item.timestamp} className="flex gap-3 text-sm leading-7">
+              <span className="shrink-0 font-semibold tabular-nums text-sage-deep">
+                {item.timestamp}
+              </span>
+              <span className="text-ink-muted">{item.label}</span>
+            </li>
+          ))}
+        </ol>
+      </details>
+
+      <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
+        <p className="text-sm leading-7 text-ink-muted">{recap.nextNote}</p>
+        <p className="mt-3 text-xs leading-6 text-ink-muted">
+          出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
+        </p>
+        <p className="mt-2 text-xs leading-6 text-ink-muted">{recap.transcriptionNote}</p>
+      </div>
+    </SectionShell>
+  );
+}
+
 function LiveCurrent() {
   const { live } = useMilyRealtimeStatus();
   const { slots, roomUrl } = useStreamSchedule();
@@ -771,6 +886,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
         <RadioEpisodeRecap activityId={content.activity.id} />
+        <StreamRecap activityId={content.activity.id} />
         <RadioStorySpotlight activityId={content.activity.id} />
         <ActivityNews items={content.news} now={now} />
         <ActivityHighlights items={content.highlights} />
