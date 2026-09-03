@@ -534,6 +534,19 @@ function StreamRecapArticle({
         </div>
         <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
         <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
+        {recap.image ? (
+          <figure className="mt-4 overflow-hidden rounded-2xl bg-sage-soft/40">
+            <img
+              src={recap.image.src}
+              width={recap.image.width}
+              height={recap.image.height}
+              alt={recap.image.alt}
+              className="mx-auto h-auto w-full object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+        ) : null}
       </summary>
 
       <h4 className="mt-6 text-sm font-bold text-ink">この回の見どころ</h4>

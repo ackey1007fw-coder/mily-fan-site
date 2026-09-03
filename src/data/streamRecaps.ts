@@ -22,6 +22,13 @@ export type StreamRecapTimelineItem = {
   label: string;
 };
 
+export type StreamRecapImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
 export type StreamRecap = {
   id: string;
   date: string;
@@ -30,6 +37,7 @@ export type StreamRecap = {
   broadcastLabel: string;
   platformLabel: string;
   summary: string;
+  image?: StreamRecapImage;
   highlights: StreamRecapHighlight[];
   goals: StreamRecapGoal[];
   ranking: StreamRecapRank[];
@@ -51,6 +59,7 @@ const RANKING_NOTE =
 /**
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の文字起こしから
  * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
+ * 配信中の静止画は録画の実フレームを1枚だけ掲載する。
  */
 export const streamRecap20260902: StreamRecap = {
   id: "2026-09-02-morning-showroom",
@@ -61,6 +70,12 @@ export const streamRecap20260902: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "三次前日の朝ラジオ。布団で7時起きできたことを喜びつつ、初見向けに「みんなの太陽」と自己紹介した顔出しなし枠です。",
+  image: {
+    src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
+    width: 640,
+    height: 360,
+    alt: "SHOWROOM朝ラジオ配信で使われた静止画。室内の椅子に座り、白いトップスと黒いスカート、白い靴下で、手を口元に当ててこちらを見ているみりぃ",
+  },
   highlights: [
     {
       timestamp: "0:14:00",
@@ -104,7 +119,7 @@ export const streamRecap20260902: StreamRecap = {
   sourceLabel: "2026年9月2日 SHOWROOM朝配信 文字起こし（オーナー提供）",
   verifiedAt: "2026-09-02",
   transcriptionNote:
-    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。フォロワー数や目標の数字は配信時点の記録です。",
+    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。配信中の静止画は録画の実フレームを1枚だけ掲載しています。フォロワー数や目標の数字は配信時点の記録です。",
 };
 
 /**
@@ -172,3 +187,4 @@ export const streamRecaps: StreamRecap[] = [
   streamRecap20260902Night,
   streamRecap20260902,
 ];
+

@@ -2906,3 +2906,39 @@ Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` には出さない。
   `7e90c1ff29f88ade92a9cec6a30a285255f7fcaf9eacdda99b18f4fa37010930`
 - b50-03 poster: 公開MP4の2.5秒地点の実フレーム / metadataなし / sha256
   `3786b3ec766fd4de224bcd030590a583119ccc35122c6383d358686d9d7bf36e`
+
+## 素材台帳（batch b51 / 受領日・source date 2026-09-02）
+
+オーナー提供の 2026-09-02 SHOWROOM 朝ラジオ配信録画から切り出した、
+配信中に使われていた静止画の実フレーム1枚。顔出しなしラジオ枠の画面。
+視聴者のコメント・アイコン・表示名は写っていない。
+LIVE STREAM の朝配信メモ専用。NEWS / Gallery / `media.ts` /
+`galleryVideos.ts` / `/stories/` には出さない。
+
+### 掲載承認
+
+- approval date: `2026-09-03`
+- オーナーが当該朝ラジオ配信について、動画からスクショを取り配信コーナーへ
+  画像を載せることを明示依頼した。承認対象面は LIVE STREAM Activity の
+  朝配信メモだけ。Gallery / NEWS / 別カードへは流用しない。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b51-01 | `live/mily-b51-01-morning-radio-showroom.jpg` | 室内の椅子に座るみりぃの静止画。640×360。owner-provided 録画の実フレーム | ✅ 2026-09-03 明示承認。朝配信メモ専用。Gallery / NEWS 非掲載 |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-02`。再生permalinkなし。`sourceUrl` は null
+- 視聴者コメント・アイコン・表示名・端末情報・DMは見当たらない
+- 元素材は gitignored の `media/original/` へ保存。受け渡しURL / file ID /
+  録画ファイル名は tracked text へ残さない
+- crop・mask・AI加工・顔補正・生成塗り足しなし。収録の実寸 640×360 のまま拡大しない
+- 録音音声・画面録画・全文文字起こしは公開しない
+
+### 公開派生
+
+- 公開JPEG: 640×360 / EXIF・IPTC・XMP・ICCなし / 43,836 bytes / sha256
+  `a00eea08f642532348bc967ad3adeb130494a6828d1306f5fe23a0198490c4a8`
+- LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
+
