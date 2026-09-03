@@ -49,6 +49,9 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(recap.rankingNote, /個人名は掲載していません/);
     assert.equal(streamRecap20260902.ranking.length, 0);
     assert.match(streamRecap20260902.rankingNote, /個人名は掲載していません/);
+    assert.equal(recap.image, streamRecap20260902.image);
+    assert.equal(recap.image?.src, "/media/live/mily-b51-01-morning-radio-showroom.jpg");
+    assert.equal(recap.image?.caption, "配信中に使われていた静止画");
 
     const highlightSeconds = recap.highlights.map(({ timestamp }) => {
       const [hour, minute, second] = timestamp.split(":").map(Number);

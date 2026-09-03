@@ -2912,7 +2912,7 @@ Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` には出さない。
 オーナー提供の 2026-09-02 SHOWROOM 朝ラジオ配信録画から切り出した、
 配信中に使われていた静止画の実フレーム1枚。顔出しなしラジオ枠の画面。
 視聴者のコメント・アイコン・表示名は写っていない。
-LIVE STREAM の朝配信メモ専用。NEWS / Gallery / `media.ts` /
+LIVE STREAM の朝・夜配信メモで同じ1枚を共有する。NEWS / Gallery / `media.ts` /
 `galleryVideos.ts` / `/stories/` には出さない。
 `media.ts` は Gallery の掲載ゲートであり、配信カード専用の1枚は
 NEWS専用JPEGと同じくそこに入れない。
@@ -2920,13 +2920,13 @@ NEWS専用JPEGと同じくそこに入れない。
 ### 掲載承認
 
 - approval date: `2026-09-03`
-- オーナーが当該朝ラジオ配信について、動画からスクショを取り配信コーナーへ
+- オーナーが当該ラジオ配信について、動画からスクショを取り配信コーナーへ
   画像を載せることを明示依頼した。承認対象面は LIVE STREAM Activity の
-  朝配信メモだけ。Gallery / NEWS / 別カードへは流用しない。
+  朝・夜配信メモ。Gallery / NEWS へは流用しない。
 
 | ID | 公開ファイル | 内容 | 掲載・承認 |
 | --- | --- | --- | --- |
-| b51-01 | `live/mily-b51-01-morning-radio-showroom.jpg` | 室内の木の椅子に座るみりぃ。白いトップス、黒いスカート、白い靴下。640×360。画面にSHOWROOMとみりぃの文字。owner-provided 録画の実フレーム | ✅ 2026-09-03 明示承認。朝配信メモ専用。Gallery / NEWS 非掲載 |
+| b51-01 | `live/mily-b51-01-morning-radio-showroom.jpg` | 室内の木の椅子に座るみりぃ。白いトップス、黒いスカート、白い靴下。640×360。画面にSHOWROOMとみりぃの文字。owner-provided 録画の実フレーム | ✅ 2026-09-03 明示承認。朝・夜の配信メモ。Gallery / NEWS 非掲載 |
 
 ### 元素材と安全確認
 
