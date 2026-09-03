@@ -6,6 +6,7 @@ import {
 } from "../data/supportEvents.ts";
 import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
 import { contestPhaseDisplayNote } from "./contestPhaseDisplay.ts";
+import { tokyoDateKey } from "./monthCalendar.ts";
 import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
 import { patonVoteLiveNote } from "./patonVoteLiveCopy.ts";
 import { displayStatus, formatScheduleEndLabel } from "./supportCalendar.ts";
@@ -46,6 +47,99 @@ export type HomeVoteAction = {
   /** 期間限定投票の確認済み終了。終了後の導線には付けない。 */
   deadlineLabel?: string;
 };
+
+export type HomeVoteSpotlight = {
+  state: "upcoming" | "live";
+  eyebrow: string;
+  title: string;
+  note: string;
+  action: {
+    label: string;
+    mobileLabel: string;
+    url: string;
+  };
+};
+
+const tokyoClockFormatter = new Intl.DateTimeFormat("ja-JP", {
+  timeZone: "Asia/Tokyo",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+function contestPhaseLabel(contest: Contest): string {
+  return contest.currentPhase?.name.replace(/進出$/, "") ?? contest.contestName;
+}
+
+/**
+ * MISS CIRCLEの確認済みWEB投票を、開始日と期間中だけトップで強調する。
+ * 開始前は投票URLを出さずENTRYページへ案内し、開始時刻に直接投票へ切り替える。
+ */
+export function selectHomeVoteSpotlight(input: {
+  contest: Contest;
+  supportEvents: SupportEvent[];
+  links: SiteLink[];
+  now: number;
+}): HomeVoteSpotlight | null {
+  if (!Number.isFinite(input.now)) {
+    throw new Error("now must be a finite timestamp");
+  }
+
+  const candidates = input.supportEvents
+    .filter(
+      (event) =>
+        event.activityId === "miss-circle" &&
+        event.kind === "vote" &&
+        event.ctaLinkId !== undefined &&
+        event.schedule.state === "confirmed-period" &&
+        !event.schedule.allDay,
+    )
+    .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0));
+
+  for (const event of candidates) {
+    if (event.schedule.state !== "confirmed-period" || event.schedule.allDay) {
+      continue;
+    }
+    const link = input.links.find(({ id }) => id === event.ctaLinkId);
+    if (!link) continue;
+
+    const status = displayStatus(event.schedule, input.now);
+    const phase = contestPhaseLabel(input.contest);
+    if (status === "upcoming") {
+      const start = Date.parse(event.schedule.start);
+      if (tokyoDateKey(start) !== tokyoDateKey(input.now)) continue;
+      const startClock = tokyoClockFormatter.format(new Date(start));
+      return {
+        state: "upcoming",
+        eyebrow: `${phase}・本日スタート`,
+        title: `本日${startClock}からWEB投票`,
+        note: `${startClock}になると、この案内は${input.contest.entryNumber}への投票ボタンに切り替わります。`,
+        action: {
+          label: `開始前に${input.contest.entryNumber}を見る`,
+          mobileLabel: `${startClock} 投票開始`,
+          url: input.contest.entryUrl,
+        },
+      };
+    }
+
+    if (status === "live") {
+      const deadline = formatScheduleEndLabel(event.schedule);
+      return {
+        state: "live",
+        eyebrow: `${phase}・WEB投票`,
+        title: "WEB投票受付中",
+        note: `${input.contest.entryNumber} 三橋莉子の投票ページへ直接進めます。${deadline ? `\n投票締切 ${deadline}` : ""}`,
+        action: {
+          label: `${input.contest.entryNumber}に投票する`,
+          mobileLabel: "WEB投票する",
+          url: link.url,
+        },
+      };
+    }
+  }
+
+  return null;
+}
 
 function contestVoteAction(contest: Contest): HomeVoteAction {
   return {

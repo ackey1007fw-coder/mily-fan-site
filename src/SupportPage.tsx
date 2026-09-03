@@ -5,9 +5,12 @@ import { Header } from "./components/Header";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
 import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
+import { VoteSpotlight } from "./components/VoteSpotlight";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
+import { links } from "./data/links";
 import { supportEvents } from "./data/supportEvents";
+import { selectHomeVoteSpotlight } from "./lib/homePortal";
 import {
   activityRouteForSupport,
   selectSupportNow,
@@ -175,7 +178,7 @@ function SupportCalendarAgenda({
 export default function SupportPage() {
   const { live, radio, schedulePhase } = useMilyRealtimeStatus();
   const { slots, manualSlots, roomUrl, availability } = useStreamSchedule();
-  // Paton CTAなどの開始・終了境界で再renderし、そのrender時点の現在時刻を使う。
+  // 投票CTAなどの開始・終了境界で再renderし、そのrender時点の現在時刻を使う。
   useSupportEventClock();
   const calendarClock = useTokyoNow();
   const today = tokyoDateKey(calendarClock);
@@ -203,6 +206,12 @@ export default function SupportPage() {
     daysAhead: radioOccurrenceDaysAhead,
   });
   const pendingItems = calendar.pending;
+  const voteSpotlight = selectHomeVoteSpotlight({
+    contest,
+    supportEvents,
+    links,
+    now,
+  });
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-paper text-ink">
@@ -215,6 +224,14 @@ export default function SupportPage() {
       <Header />
       <main id="support-main">
         <SupportHero />
+        {voteSpotlight ? (
+          <div className="px-4 pb-4">
+            <VoteSpotlight
+              spotlight={voteSpotlight}
+              className="mx-auto max-w-3xl"
+            />
+          </div>
+        ) : null}
         <PatonVoteGuide />
 
         {todayItems.length > 0 ? (

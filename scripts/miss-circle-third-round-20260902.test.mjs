@@ -33,7 +33,11 @@ import {
 } from "../src/data/thirdRoundTimetableImage.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { contestOfficialWindowLines, contestPhaseDisplayNote } from "../src/lib/contestPhaseDisplay.ts";
-import { selectHomeVoteAction, selectHomeVoteActions } from "../src/lib/homePortal.ts";
+import {
+  selectHomeVoteAction,
+  selectHomeVoteActions,
+  selectHomeVoteSpotlight,
+} from "../src/lib/homePortal.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
   adaptStreamSlots,
@@ -344,6 +348,49 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       }).url,
       WEB_VOTE_URL,
     );
+  });
+
+  it("spotlights today's 12:00 launch, then switches to the direct WEB vote", async () => {
+    const spotlightAt = (now) =>
+      selectHomeVoteSpotlight({ contest, supportEvents, links, now });
+    const previousDay = spotlightAt(Date.parse("2026-09-02T23:59:59+09:00"));
+    const before = spotlightAt(Date.parse("2026-09-03T11:59:59+09:00"));
+    const during = spotlightAt(WEB_START);
+    const after = spotlightAt(WEB_END + 1);
+
+    assert.equal(previousDay, null);
+    assert.equal(before?.state, "upcoming");
+    assert.equal(before?.eyebrow, "3次審査・本日スタート");
+    assert.equal(before?.title, "本日12:00からWEB投票");
+    assert.equal(before?.action.label, "開始前にENTRY 734を見る");
+    assert.equal(before?.action.mobileLabel, "12:00 投票開始");
+    assert.equal(before?.action.url, ENTRY_URL);
+    assert.doesNotMatch(JSON.stringify(before), /liff\.line\.me/);
+
+    assert.equal(during?.state, "live");
+    assert.equal(during?.eyebrow, "3次審査・WEB投票");
+    assert.equal(during?.title, "WEB投票受付中");
+    assert.equal(during?.action.label, "ENTRY 734に投票する");
+    assert.equal(during?.action.mobileLabel, "WEB投票する");
+    assert.equal(during?.action.url, WEB_VOTE_URL);
+    assert.match(during?.note ?? "", /9\/13 23:59/);
+    assert.equal(after, null);
+
+    const spotlight = await readFile(
+      path.join(root, "src/components/VoteSpotlight.tsx"),
+      "utf8",
+    );
+    const hero = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
+    const dock = await readFile(
+      path.join(root, "src/components/MobileActionDock.tsx"),
+      "utf8",
+    );
+    const support = await readFile(path.join(root, "src/SupportPage.tsx"), "utf8");
+    assert.match(spotlight, /data-vote-state=\{spotlight\.state\}/);
+    assert.match(spotlight, /border-2 border-apricot/);
+    assert.match(hero, /<VoteSpotlight/);
+    assert.match(support, /<VoteSpotlight/);
+    assert.match(dock, /spotlight\?\.action\.mobileLabel/);
   });
 
   it("aligns the shared clock with #131 contest end and the new review bounds", () => {
