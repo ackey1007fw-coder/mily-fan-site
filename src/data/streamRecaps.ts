@@ -57,10 +57,18 @@ export function rankingByPlace(ranking: StreamRecapRank[]): StreamRecapRank[] {
 const RANKING_NOTE =
   "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
 
+const streamRecapRadioStill: StreamRecapImage = {
+  src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
+  width: 640,
+  height: 360,
+  alt: "SHOWROOMラジオ配信で使われた静止画。室内の木の椅子に座り、白いトップスと黒いスカート、白い靴下で、右手を口元に当てているみりぃ。画面左上にSHOWROOM、左下にみりぃの文字",
+  caption: "配信中に使われていた静止画",
+};
+
 /**
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の文字起こしから
  * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
- * 配信中の静止画は録画の実フレームを1枚だけ掲載する。
+ * 配信中の静止画は録画の実フレームを1枚だけ掲載する。朝と夜で同じ1枚を共有する。
  * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない
  * （NEWS専用JPEGと同じ。published Gallery 項目にしない）。
  */
@@ -73,13 +81,7 @@ export const streamRecap20260902: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "三次前日の朝ラジオ。布団で7時起きできたことを喜びつつ、初見向けに「みんなの太陽」と自己紹介した顔出しなし枠です。",
-  image: {
-    src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
-    width: 640,
-    height: 360,
-    alt: "SHOWROOM朝ラジオ配信で使われた静止画。室内の木の椅子に座り、白いトップスと黒いスカート、白い靴下で、右手を口元に当てているみりぃ。画面左上にSHOWROOM、左下にみりぃの文字",
-    caption: "配信中に使われていた静止画",
-  },
+  image: streamRecapRadioStill,
   highlights: [
     {
       timestamp: "0:14:00",
@@ -129,6 +131,7 @@ export const streamRecap20260902: StreamRecap = {
 /**
  * 2026年9月2日のSHOWROOM夜配信を、オーナー提供の文字起こしから
  * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
+ * 顔出しなしラジオの静止画は朝と同じ実フレーム1枚を載せる。
  */
 export const streamRecap20260902Night: StreamRecap = {
   id: "2026-09-02-night-showroom",
@@ -139,6 +142,7 @@ export const streamRecap20260902Night: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "三次前日の夜ラジオ。二次の無理を反省して翌朝からのタイムテーブルを発表。投票とキラ星が最優先で、ブロック1位は今は狙わない、と話しました。",
+  image: streamRecapRadioStill,
   highlights: [
     {
       timestamp: "0:10:00",
@@ -183,7 +187,7 @@ export const streamRecap20260902Night: StreamRecap = {
   sourceLabel: "2026年9月2日 SHOWROOM夜配信 文字起こし（オーナー提供）",
   verifiedAt: "2026-09-03",
   transcriptionNote:
-    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。フォロワー数や目標の数字は配信時点の記録です。",
+    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。配信中の静止画は録画の実フレームを1枚だけ掲載しています。フォロワー数や目標の数字は配信時点の記録です。",
 };
 
 /** 新しい配信メモを先頭へ。 */
