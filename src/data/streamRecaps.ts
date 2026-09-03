@@ -64,9 +64,17 @@ export type StreamRecap = {
   transcriptionNote: string;
 };
 
-/** ランキングは順位だけを事実として残し、個人名は回を問わず載せない。 */
-export const RANKING_NOTE =
-  "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
+/**
+ * ランキングは順位だけを事実として残し、個人名は回を問わず載せない。
+ * 読み上げた範囲は回ごとに違うので、確認できた範囲で組み立てる。
+ * 読み上げがなかった回は `ranking: []` にする（読み上げた事実を作らない）。
+ */
+export function buildRankingNote(fromPlace: number, toPlace: number): string {
+  return `配信終了時に、${fromPlace}位から${toPlace}位までランキングを読み上げました。個人名は掲載していません。`;
+}
+
+/** これまでに確認できた回はいずれも13位から1位まで。 */
+export const RANKING_NOTE = buildRankingNote(13, 1);
 
 /** 全カード共通の非掲載範囲。回ごとに言い換えない。 */
 export const RECAP_WITHHOLD_NOTE =

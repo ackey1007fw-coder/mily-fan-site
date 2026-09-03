@@ -8,6 +8,7 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   RANKING_NOTE,
+  buildRankingNote,
   RECAP_FIGURES_NOTE,
   RECAP_WITHHOLD_NOTE,
   buildTranscriptionNote,
@@ -34,6 +35,8 @@ const LIMITS = {
   gallery: [4, 12],
 };
 
+const RANKING_NOTE_SHAPE =
+  /^配信終了時に、\d{1,3}位から\d{1,3}位までランキングを読み上げました。個人名は掲載していません。$/;
 const THEME_PREFIXES = ["朝", "昼", "夕", "夜", "深夜"];
 const PLATFORMS = new Set(["SHOWROOM", "MixChannel"]);
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
@@ -90,7 +93,14 @@ describe("配信メモの統一ルール", () => {
         assert.ok(recap.id.startsWith(`${recap.date}-`));
 
         const [year, month, day] = recap.date.split("-");
-        const weekday = WEEKDAYS[new Date(`${recap.date}T12:00:00Z`).getUTCDay()];
+        const parsed = new Date(`${recap.date}T12:00:00Z`);
+        // new Date は 2026-02-31 のような日付を黙って繰り上げるので、往復で確かめる。
+        assert.equal(
+          parsed.toISOString().slice(0, 10),
+          recap.date,
+          `実在しない日付: ${recap.date}`,
+        );
+        const weekday = WEEKDAYS[parsed.getUTCDay()];
         assert.equal(recap.dateLabel, `${year}.${month}.${day}（${weekday}）`);
 
         assert.ok(
@@ -150,7 +160,11 @@ describe("配信メモの統一ルール", () => {
       });
 
       it("withholds ranking names and keeps the timeline as an index", () => {
-        assert.deepEqual(recap.ranking, [RANKING_NOTE]);
+        // 読み上げがなかった回は空。あった回は順位の範囲だけを定型文で書く。
+        assert.ok(recap.ranking.length <= 1, "ランキングは0件か1件");
+        for (const entry of recap.ranking) {
+          assert.match(entry, RANKING_NOTE_SHAPE, `ランキングは定型文だけ: ${entry}`);
+        }
 
         const { timeline } = recap;
         assert.ok(
@@ -216,6 +230,15 @@ describe("配信メモの統一ルール", () => {
     }
   });
 
+  it("keeps the ranking note free of names for any read-out range", () => {
+    assert.match(RANKING_NOTE, RANKING_NOTE_SHAPE);
+    assert.match(buildRankingNote(5, 1), RANKING_NOTE_SHAPE);
+    assert.equal(
+      buildRankingNote(5, 1),
+      "配信終了時に、5位から1位までランキングを読み上げました。個人名は掲載していません。",
+    );
+  });
+
   it("keeps the note builder deterministic", () => {
     assert.equal(
       buildTranscriptionNote({ material: "素材。", stills: "静止画。", extra: "補足。" }),
@@ -254,7 +277,7 @@ describe("配信メモの統一ルール", () => {
     });
     assert.deepEqual(positions, [...positions].sort((left, right) => left - right));
     assert.match(page, /目標 \{goal\.target\}/);
-    assert.match(page, /配信時点 \{goal\.statusThen\}/);
+    assert.match(page, /この回 \{goal\.statusThen\}/);
     assert.match(page, /aspect-\[16\/9\]/);
   });
 

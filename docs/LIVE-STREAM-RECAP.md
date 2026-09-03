@@ -3,7 +3,12 @@
 `src/data/streamRecaps.ts` に置く「配信メモ」カードの書き方を、担当したエージェント
 （Claude Code / Codex / Cursor など）に関係なく同じ品質へ揃えるためのルールです。
 
-- ルール本体の唯一の情報源は `AGENTS.md`。このファイルはその配下の運用ルールです。
+- ルール本体の唯一の情報源は `AGENTS.md`。このファイルは、`AGENTS.md` が
+  「配信メモは `docs/LIVE-STREAM-RECAP.md` に従う」と委任した配下の運用手順です
+  （`docs/MEDIA.md` / `docs/CONTENT-OPS.md` と同じ位置づけ）。
+- **矛盾したら `AGENTS.md` が勝ちます。** このファイルは `AGENTS.md` の禁止事項を
+  緩めることも、上書きすることもできません。掲載可否・privacy・権利の判断は `AGENTS.md` が最終。
+  ここが決めるのは、その範囲内での書式・長さ・並び・言い回しです。
 - 日常更新の記録は `docs/CONTENT-OPS.md`、写真の受け入れは `docs/MEDIA.md`。
 - ここに書いた数値・書式は **`scripts/stream-recaps.test.mjs` が全カードを機械的に検査**します。
   数値を変えるときは、このファイルとテストの両方を同じPRで直します。
@@ -30,7 +35,7 @@
 1. この回の見どころ（`highlights`）
 2. この回のスクショ（`gallery`。ある回だけ）
 3. この回の目標（`goals`）
-4. 読み上げたランキング（`ranking`）
+4. 読み上げたランキング（`ranking`。読み上げがなかった回はセクションごと出ない）
 5. タイムスタンプと次枠（`timeline` + `nextNote`。折りたたみ）
 6. 出典・確認日・注記（`sourceLabel` / `verifiedAt` / `transcriptionNote`）
 
@@ -56,8 +61,8 @@
 | `goals` | 3〜6件。`item` は重複させない | — |
 | `goals[].item` | 目標の名前 | 〜8 |
 | `goals[].target` | 目指す値・状態 | 〜10 |
-| `goals[].statusThen` | 配信時点の状態。**「配信時点」という語を入れない**（UIが表示する） | 〜12 |
-| `ranking` | `RANKING_NOTE` 1件のみ | — |
+| `goals[].statusThen` | その回でどうだったか（状態、または本人の呼びかけ）。UIが「この回」と表示するので語を重ねない | 〜12 |
+| `ranking` | 読み上げがあった回だけ1件。`RANKING_NOTE`、または範囲が違う回は `buildRankingNote(from, to)` | — |
 | `timeline` | 8〜16件。先頭は `0:00:00`。昇順 | — |
 | `timeline[].label` | 体言止め。話題だけ | 〜32 |
 | `nextNote` | 配信内で案内された次枠。確定予定として書かない | 40〜120 |
@@ -119,10 +124,14 @@ transcriptionNote: buildTranscriptionNote({
 - 録音音声・画面録画・全文文字起こし。
 - 視聴者・リスナーの名前、ファンネームで呼ばれた個人、他の出場者の名前。
 - 読み上げランキングの個人名（順位を読み上げた事実だけ残す）。
+  読み上げがなかった回に、あったことにしない。範囲が13位からでない回は `buildRankingNote()` で実際の範囲を書く。
 - Google Drive のフォルダ・ファイルID、原本ファイル名、音声ファイル名。
 - 未確定の予定（検討中の枠、時刻未定の枠）を `events.ts` / `streamSchedule.ts` へ転記すること。
   配信内で案内された枠は `nextNote` に「案内された」として残すだけ。
-- 体調・身体、面接や進路の具体、通学経路など、本人の安全・私生活に関わる細部。
+- 生活の細部のうち、本人が配信で話した範囲を超えて特定につながるもの。
+  住所・最寄り駅・通学経路・利用路線、面接や進路の相手先の名前、病名や症状の詳細など。
+  本人が配信で話した一般的な言及（「体調と相談しながら」「通学に約2時間」など）はそのまま書いてよい。
+  迷ったら粒度を一段あらくして書く。
 - フォロワー数・目標数は配信時点の記録。`profile.ts` へ固定しない。
 
 ## 7. 触るファイル / 触らないファイル
@@ -169,7 +178,7 @@ export const streamRecapYYYYMMDD: StreamRecap = {
     },
   ],
   goals: [{ item: "（〜8字）", target: "（〜10字）", statusThen: "（〜12字）" }],
-  ranking: [RANKING_NOTE],
+  ranking: [RANKING_NOTE], // 読み上げがなければ [] 。範囲が違えば buildRankingNote(from, to)
   timeline: [{ timestamp: "0:00:00", label: "（〜32字）" }],
   nextNote: "（配信内で案内された次枠。確定予定にしない）",
   sourceLabel: "YYYY年M月D日 SHOWROOM◯◯配信（動画確認・オーナー提供）",

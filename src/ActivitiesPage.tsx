@@ -666,7 +666,7 @@ function StreamRecapArticle({
               >
                 <span className="block font-semibold text-ink">{goal.item}</span>
                 <span className="mt-1 block text-ink-muted">目標 {goal.target}</span>
-                <span className="block text-ink-muted">配信時点 {goal.statusThen}</span>
+                <span className="block text-ink-muted">この回 {goal.statusThen}</span>
               </li>
             ))}
           </ul>
