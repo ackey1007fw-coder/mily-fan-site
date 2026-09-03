@@ -1,19 +1,13 @@
 import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
 import { gachiNightStill01 } from "./streamRecap20260903NightStill01.ts";
+import { gachiNightStill02 } from "./streamRecap20260903NightStill02.ts";
 
 const W = 400;
 const H = 228;
 
 const gachiNightStills: StreamRecapImage[] = [
   gachiNightStill01,
-  {
-    src: "/media/live/mily-b53-02-whiteboard.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、ホワイトボードとペンを持って驚いているみりぃ",
-    caption: "ホワイトボード",
-    downloadName: "みりぃ_三次初日夜_02_ホワイトボード.jpg",
-  },
+  gachiNightStill02,
   {
     src: "/media/live/mily-b53-03-look-down.jpg",
     width: W,
@@ -83,11 +77,6 @@ const gachiNightStills: StreamRecapImage[] = [
 const RANKING_NOTE =
   "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
 
-/**
- * 2026年9月3日のSHOWROOM夜配信を、オーナー提供の動画で確認した配信メモ。
- * 録音音声・全文文字起こし・画面録画は公開しない。
- * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない。
- */
 export const streamRecap20260903Night: StreamRecap = {
   id: "2026-09-03-night-gachi-showroom",
   date: "2026-09-03",
