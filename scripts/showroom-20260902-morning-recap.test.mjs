@@ -75,7 +75,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
 
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
-    assert.match(page, /function StreamRankingList/);
+    assert.match(page, /defaultOpen/);
     assert.match(page, /この回の見どころ/);
     assert.match(page, /この回の目標/);
     assert.match(page, /タイムスタンプと次枠/);

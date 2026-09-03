@@ -34,26 +34,21 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.equal(streamRecaps[1], streamRecap20260902);
   });
 
-  it("keeps a short recap with ranking from 1st place in the shared shape", () => {
+  it("keeps a short recap and withholds ranking names", () => {
     const recap = streamRecap20260902Night;
 
     assert.equal(recap.highlights.length, 3);
     assert.equal(recap.goals.length, 5);
-    assert.equal(recap.ranking.length, 13);
+    assert.equal(recap.ranking.length, 0);
+    assert.equal(rankingByPlace(recap.ranking).length, 0);
     assert.equal(recap.timeline.length, 10);
     assert.ok(recap.highlights.some(({ title }) => /通過/.test(title)));
     assert.ok(recap.highlights.some(({ body }) => /スーツ謝罪会見/.test(body)));
     assert.ok(recap.highlights.some(({ title }) => /海くん/.test(title)));
     assert.ok(recap.goals.some(({ item }) => item === "三次通過"));
-    assert.equal(rankingByPlace(recap.ranking)[0].name, "高速の神さん");
-    assert.equal(rankingByPlace(recap.ranking)[0].place, 1);
+    assert.match(recap.rankingNote, /個人名は掲載していません/);
     assert.equal(streamRecap20260902.ranking.length, 0);
     assert.match(streamRecap20260902.rankingNote, /個人名は掲載していません/);
-    assert.ok(recap.ranking.some((entry) => entry.name === "高速の神さん"));
-    assert.deepEqual(
-      recap.ranking.map(({ place }) => place).sort((left, right) => left - right),
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
-    );
 
     const highlightSeconds = recap.highlights.map(({ timestamp }) => {
       const [hour, minute, second] = timestamp.split(":").map(Number);
@@ -80,17 +75,23 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
     assert.match(page, /streamRecaps\.map/);
-    assert.match(page, /function StreamRankingList/);
+    assert.match(page, /defaultOpen/);
     assert.match(page, /この回の見どころ/);
     assert.match(page, /この回の目標/);
     assert.match(page, /タイムスタンプと次枠/);
     assert.match(page, /<StreamRecap activityId=\{content\.activity\.id\} \/>/);
+    assert.doesNotMatch(page, /function StreamRankingList/);
 
     assert.match(recap.nextNote, /7:30/);
     assert.match(recap.nextNote, /14:40/);
     assert.match(recap.nextNote, /21:00/);
     assert.doesNotMatch(data, /いくちゃん|ゆめちゃん/);
     assert.doesNotMatch(recap.summary, /フレキャン/);
+    assert.equal(recap.ranking.length, 0);
+    assert.equal(
+      streamRecaps.every((item) => item.ranking.length === 0),
+      true,
+    );
     assert.equal(
       streamSchedule.some((slot) => slot.date === "2026-09-05" && slot.time === "05:30"),
       false,
