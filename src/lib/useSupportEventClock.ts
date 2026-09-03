@@ -1,13 +1,28 @@
 import { useSyncExternalStore } from "react";
 import { contest } from "../data/contest.ts";
 import { patonFifteenXBonusSchedule } from "../data/patonVoteBonus.ts";
-import { supportEvents } from "../data/supportEvents.ts";
+import {
+  supportEvents,
+  type SupportEventSchedule,
+} from "../data/supportEvents.ts";
+import { tokyoDateKey } from "./monthCalendar.ts";
 import { nextDisplayStatusBoundary } from "./supportCalendar.ts";
 
 const MAX_TIMEOUT_MS = 2_147_483_647;
 const listeners = new Set<() => void>();
 let currentNow = Date.now();
 let timer: number | null = null;
+
+export function voteStartDayBoundary(
+  schedule: SupportEventSchedule,
+  now: number,
+): number | null {
+  if (schedule.state !== "confirmed-period" || schedule.allDay) return null;
+  const startDay = Date.parse(
+    `${tokyoDateKey(Date.parse(schedule.start))}T00:00:00+09:00`,
+  );
+  return startDay > now ? startDay : null;
+}
 
 export function nextSupportEventBoundary(now: number): number | null {
   if (!Number.isFinite(now)) {
@@ -16,15 +31,9 @@ export function nextSupportEventBoundary(now: number): number | null {
 
   const contestPhase = contest.currentPhase;
   const voteStartDayBoundaries = supportEvents.flatMap(({ kind, schedule }) => {
-    if (
-      kind !== "vote" ||
-      schedule.state !== "confirmed-period" ||
-      schedule.allDay
-    ) {
-      return [];
-    }
-    const startDay = Date.parse(`${schedule.start.slice(0, 10)}T00:00:00+09:00`);
-    return startDay > now ? [startDay] : [];
+    if (kind !== "vote") return [];
+    const startDay = voteStartDayBoundary(schedule, now);
+    return startDay === null ? [] : [startDay];
   });
   const contestEndBoundary =
     contestPhase?.start && contestPhase.end

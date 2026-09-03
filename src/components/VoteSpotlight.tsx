@@ -26,7 +26,7 @@ export function VoteSpotlight({
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
-          <p className="inline-flex rounded-full bg-apricot px-3 py-1 text-xs font-bold tracking-wide text-white">
+          <p className="inline-flex rounded-full bg-apricot-ink px-3 py-1 text-xs font-bold tracking-wide text-white">
             {spotlight.eyebrow}
           </p>
           {headingAs === "h2" ? (

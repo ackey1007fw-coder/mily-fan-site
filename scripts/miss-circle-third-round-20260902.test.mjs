@@ -45,7 +45,10 @@ import {
   buildSupportCalendar,
   nextDisplayStatusBoundary,
 } from "../src/lib/supportCalendar.ts";
-import { nextSupportEventBoundary } from "../src/lib/useSupportEventClock.ts";
+import {
+  nextSupportEventBoundary,
+  voteStartDayBoundary,
+} from "../src/lib/useSupportEventClock.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -389,6 +392,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     const support = await readFile(path.join(root, "src/SupportPage.tsx"), "utf8");
     assert.match(spotlight, /data-vote-state=\{spotlight\.state\}/);
     assert.match(spotlight, /border-2 border-apricot/);
+    assert.match(spotlight, /bg-apricot-ink[^\n]+text-white/);
     assert.match(hero, /<VoteSpotlight/);
     assert.match(hero, /headingAs="p"/);
     assert.match(support, /<VoteSpotlight/);
@@ -406,6 +410,23 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(nextSupportEventBoundary(WEB_END + 1), CONTEST_END);
     assert.equal(nextSupportEventBoundary(CONTEST_END - 1), CONTEST_END);
     assert.equal(nextSupportEventBoundary(CONTEST_END), null);
+  });
+
+  it("derives the vote start day from the Tokyo instant, not the timestamp text", () => {
+    const startDay = Date.parse("2026-09-04T00:00:00+09:00");
+    assert.equal(
+      voteStartDayBoundary(
+        {
+          state: "confirmed-period",
+          start: "2026-09-03T18:00:00Z",
+          end: "2026-09-04T20:00:00Z",
+          allDay: false,
+          timezone: "Asia/Tokyo",
+        },
+        startDay - 1,
+      ),
+      startDay,
+    );
   });
 
   it("keeps ContestPhase date-only and the confirmed personal SHOWROOM slots", async () => {
