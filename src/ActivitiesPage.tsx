@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
@@ -46,6 +46,8 @@ const primaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
 const secondaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full border border-sage/25 bg-paper px-4 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
+
+const STREAM_PREVIEW_HIGHLIGHTS = 3;
 
 function formatDate(value: string): string {
   return value.replace(/-/g, ".");
@@ -495,12 +497,12 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        新しい回を上に置いています。開くと見どころと目標が出ます。閉じても日付と一言は残り、画像がある回は静止画も残します。
+        どの回も同じカード構造で、代表カットと3つの見どころを先に表示します。カードを開くと、追加の見どころ・スクショ・目標・タイムスタンプを確認できます。
       </p>
       <ul className="mt-6 space-y-4">
-        {streamRecaps.map((recap, index) => (
+        {streamRecaps.map((recap) => (
           <li key={recap.id}>
-            <StreamRecapArticle recap={recap} defaultOpen={index === 0} />
+            <StreamRecapArticle recap={recap} />
           </li>
         ))}
       </ul>
@@ -508,196 +510,244 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
   );
 }
 
-function StreamRecapArticle({
-  recap,
-  defaultOpen,
+function StreamRecapHighlightItem({
+  highlight,
 }: {
-  recap: StreamRecapData;
-  defaultOpen: boolean;
+  highlight: StreamRecapData["highlights"][number];
 }) {
+  return (
+    <li className="rounded-2xl border border-sage/15 bg-paper px-4 py-3">
+      <div className="flex gap-3">
+        <span className="shrink-0 pt-0.5 text-xs font-semibold tabular-nums text-sage-deep">
+          {highlight.timestamp}
+        </span>
+        <div className="min-w-0">
+          <h4 className="text-sm font-bold leading-6 text-ink">{highlight.title}</h4>
+          <p className="mt-1 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+          {highlight.quote ? (
+            <blockquote className="mt-2 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
+              {highlight.quote}
+            </blockquote>
+          ) : null}
+        </div>
+      </div>
+    </li>
+  );
+}
+
+function StreamRecapArticle({ recap }: { recap: StreamRecapData }) {
   const rankingId = `${recap.id}-ranking`;
   const hasNamedRanking = recap.ranking.some((entry) => /^\d+\s/.test(entry));
-  const [open, setOpen] = useState(defaultOpen);
+  const previewHighlights = recap.highlights.slice(0, STREAM_PREVIEW_HIGHLIGHTS);
+  const detailHighlights = recap.highlights.slice(STREAM_PREVIEW_HIGHLIGHTS);
 
   return (
-    <details
-      className="group rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card open:shadow-card sm:p-6"
-      open={open}
-      onToggle={(event) => {
-        const next = event.currentTarget.open;
-        if (next !== open) setOpen(next);
-      }}
-    >
+    <details className="group overflow-hidden rounded-3xl border border-sage/20 bg-paper-card shadow-card">
       <summary className="cursor-pointer list-none focus:outline-none focus-visible:ring-2 focus-visible:ring-sage [&::-webkit-details-marker]:hidden">
-        <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-sage-deep">
-          <span>{recap.dateLabel}</span>
-          <span className="rounded-full bg-sage-soft px-3 py-1">{recap.platformLabel}</span>
-          <span className="rounded-full bg-sage-soft px-3 py-1">{recap.broadcastLabel}</span>
-          <span className="ml-auto text-[11px] font-semibold text-sage-deep">
-            <span className="group-open:hidden">開く</span>
-            <span className="hidden group-open:inline">閉じる</span>
-          </span>
+        <div className="grid gap-5 p-5 sm:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] sm:p-6">
+          {recap.image ? (
+            <figure className="min-w-0 overflow-hidden rounded-2xl">
+              <div className="flex aspect-video items-center justify-center overflow-hidden rounded-2xl bg-sage-soft/40 p-2">
+                <img
+                  src={recap.image.src}
+                  width={recap.image.width}
+                  height={recap.image.height}
+                  alt={recap.image.alt}
+                  className="max-h-full max-w-full object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              {recap.image.caption ? (
+                <figcaption className="px-1 pt-2 text-xs leading-5 text-ink-muted">
+                  {recap.image.caption}
+                </figcaption>
+              ) : null}
+            </figure>
+          ) : null}
+
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-sage-deep">
+              <span>{recap.dateLabel}</span>
+              <span className="rounded-full bg-sage-soft px-3 py-1">{recap.platformLabel}</span>
+              <span className="rounded-full bg-sage-soft px-3 py-1">{recap.broadcastLabel}</span>
+            </div>
+            <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
+            <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
+
+            <div className="mt-5">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-sage-deep">
+                この回の見どころ
+              </p>
+              <ol className="mt-3 space-y-2">
+                {previewHighlights.map((highlight) => (
+                  <StreamRecapHighlightItem
+                    key={highlight.timestamp + highlight.title}
+                    highlight={highlight}
+                  />
+                ))}
+              </ol>
+            </div>
+
+            <span className="mt-5 inline-flex min-h-10 items-center gap-2 rounded-full border border-sage/25 px-4 py-2 text-sm font-semibold text-sage-deep transition group-open:bg-sage-soft">
+              <span className="group-open:hidden">詳しく見る</span>
+              <span className="hidden group-open:inline">閉じる</span>
+              <span aria-hidden="true" className="text-base leading-none transition group-open:rotate-180">
+                ↓
+              </span>
+            </span>
+          </div>
         </div>
-        <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
-        <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
-        {recap.image ? (
-          <figure className="mx-auto mt-4 max-w-[640px] overflow-hidden rounded-2xl bg-sage-soft/40">
-            <img
-              src={recap.image.src}
-              width={recap.image.width}
-              height={recap.image.height}
-              alt={recap.image.alt}
-              className="mx-auto h-auto max-w-full object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-            {recap.image.caption ? (
-              <figcaption className="px-3 py-2 text-xs leading-5 text-ink-muted">
-                {recap.image.caption}
-              </figcaption>
-            ) : null}
-          </figure>
-        ) : null}
       </summary>
 
-      <h4 className="mt-6 text-sm font-bold text-ink">この回の見どころ</h4>
-      <ul className="mt-3 space-y-3">
-        {recap.highlights.map((highlight) => (
-          <li key={highlight.timestamp + highlight.title}>
-            <p className="text-sm font-bold leading-relaxed text-ink">
-              <span className="mr-2 font-semibold tabular-nums text-sage-deep">
-                {highlight.timestamp}
-              </span>
-              {highlight.title}
+      <div className="border-t border-sage/15 bg-sage-soft/10 p-5 sm:p-6">
+        {detailHighlights.length > 0 ? (
+          <section aria-labelledby={`${recap.id}-additional-highlights`}>
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h4 id={`${recap.id}-additional-highlights`} className="text-sm font-bold text-ink">
+                追加の見どころ
+              </h4>
+              <span className="text-xs text-ink-muted">全{recap.highlights.length}件</span>
+            </div>
+            <ol className="mt-3 space-y-2">
+              {detailHighlights.map((highlight) => (
+                <StreamRecapHighlightItem
+                  key={highlight.timestamp + highlight.title}
+                  highlight={highlight}
+                />
+              ))}
+            </ol>
+          </section>
+        ) : null}
+
+        {recap.gallery && recap.gallery.length > 0 ? (
+          <section className="mt-6" aria-labelledby={`${recap.id}-stills`}>
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h4 id={`${recap.id}-stills`} className="text-sm font-bold text-ink">
+                この回のスクショ
+              </h4>
+              <span className="text-xs text-ink-muted">保存用 {recap.gallery.length}枚</span>
+            </div>
+            <p className="mt-2 text-sm leading-6 text-ink-muted">
+              コメントや他の方の表示を外した実フレームです。各写真またはZIPで保存できます。
             </p>
-            <p className="mt-1 text-sm leading-6 text-ink-muted">{highlight.body}</p>
-            {highlight.quote ? (
-              <blockquote className="mt-2 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
-                {highlight.quote}
-              </blockquote>
-            ) : null}
-          </li>
-        ))}
-      </ul>
-
-      {recap.gallery && recap.gallery.length > 0 ? (
-        <section className="mt-6" aria-labelledby={`${recap.id}-stills`}>
-          <h4 id={`${recap.id}-stills`} className="text-sm font-bold text-ink">
-            この回のスクショ
-          </h4>
-          <p className="mt-2 text-sm leading-6 text-ink-muted">
-            かわいいカットを{recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。
-          </p>
-          <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {recap.gallery.map((still) => (
-              <li key={still.src}>
-                <figure className="overflow-hidden rounded-2xl bg-sage-soft/40">
-                  <img
-                    src={still.src}
-                    width={still.width}
-                    height={still.height}
-                    alt={still.alt}
-                    className="h-auto w-full object-contain"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <figcaption className="flex min-h-11 flex-col gap-1 px-2 py-2">
-                    <span className="text-[11px] leading-4 text-ink-muted">{still.caption}</span>
-                    <a
-                      href={still.src}
-                      download={still.downloadName ?? still.src.split("/").pop()}
-                      className="inline-flex min-h-11 items-center text-xs font-semibold text-sage-deep underline-offset-2 hover:underline"
-                    >
-                      保存
-                    </a>
-                  </figcaption>
-                </figure>
-              </li>
-            ))}
-          </ul>
-          {recap.galleryZip ? (
-            <p className="mt-4">
-              <a
-                href={recap.galleryZip.src}
-                download={recap.galleryZip.filename}
-                className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-deep"
-              >
-                {recap.galleryZip.label}
-              </a>
-            </p>
-          ) : null}
-        </section>
-      ) : null}
-
-      {recap.goals.length > 0 ? (
-        <div className="mt-6">
-          <h4 className="text-sm font-bold text-ink">この回の目標</h4>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {recap.goals.map((goal) => (
-              <li
-                key={goal.item}
-                className="rounded-full border border-sage/15 bg-sage-soft/50 px-3 py-1.5 text-xs leading-5 text-ink"
-              >
-                <span className="font-semibold">{goal.item}</span>
-                <span className="text-ink-muted">
-                  {" "}
-                  {goal.statusThen} / {goal.target}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
-      {recap.ranking.length > 0 ? (
-        <section aria-labelledby={rankingId} className="mt-6">
-          <h4 id={rankingId} className="text-sm font-bold text-ink">
-            読み上げたランキング
-          </h4>
-          {hasNamedRanking ? (
-            <>
-              <p className="mt-2 text-sm leading-6 text-ink-muted">
-                配信終了時に、下から読み上げた順です。
+            <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+              {recap.gallery.map((still) => (
+                <li key={still.src} className="overflow-hidden rounded-2xl border border-sage/15 bg-paper">
+                  <figure>
+                    <div className="flex aspect-[4/3] items-center justify-center bg-sage-soft/40 p-1">
+                      <img
+                        src={still.src}
+                        width={still.width}
+                        height={still.height}
+                        alt={still.alt}
+                        className="max-h-full max-w-full object-contain"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption className="flex min-h-11 flex-col gap-1 px-2 py-2">
+                      <span className="text-[11px] leading-4 text-ink-muted">{still.caption}</span>
+                      <a
+                        href={still.src}
+                        download={still.downloadName ?? still.src.split("/").pop()}
+                        className="inline-flex min-h-11 items-center text-xs font-semibold text-sage-deep underline-offset-2 hover:underline"
+                      >
+                        保存
+                      </a>
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+            {recap.galleryZip ? (
+              <p className="mt-4">
+                <a
+                  href={recap.galleryZip.src}
+                  download={recap.galleryZip.filename}
+                  className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-deep"
+                >
+                  {recap.galleryZip.label}
+                </a>
               </p>
-              <ul className="mt-4 space-y-2">
-                {recap.ranking.map((entry) => (
-                  <li
-                    key={entry}
-                    className="rounded-xl border border-sage/15 bg-sage-soft/35 px-4 py-2 text-sm leading-7 text-ink"
-                  >
-                    {entry}
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
-            <p className="mt-4 rounded-2xl border border-sage/15 bg-sage-soft/35 p-4 text-sm leading-7 text-ink-muted">
-              {recap.ranking[0]}
-            </p>
-          )}
-        </section>
-      ) : null}
+            ) : null}
+          </section>
+        ) : null}
 
-      <details className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
-        <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
-          タイムスタンプと次枠
-        </summary>
-        <ol className="mt-3 space-y-2">
-          {recap.timeline.map((item) => (
-            <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
-              <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
-                {item.timestamp}
-              </span>
-              <span className="text-ink-muted">{item.label}</span>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
-        <p className="mt-2 text-xs leading-5 text-ink-muted">
-          出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
-        </p>
-      </details>
-      <p className="mt-4 text-xs leading-5 text-ink-muted">{recap.transcriptionNote}</p>
+        {recap.goals.length > 0 ? (
+          <section className="mt-6" aria-labelledby={`${recap.id}-goals`}>
+            <h4 id={`${recap.id}-goals`} className="text-sm font-bold text-ink">
+              この回の目標
+            </h4>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {recap.goals.map((goal) => (
+                <li
+                  key={goal.item}
+                  className="rounded-full border border-sage/15 bg-paper px-3 py-1.5 text-xs leading-5 text-ink"
+                >
+                  <span className="font-semibold">{goal.item}</span>
+                  <span className="text-ink-muted">
+                    {" "}
+                    {goal.statusThen} / {goal.target}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {recap.ranking.length > 0 ? (
+          <section aria-labelledby={rankingId} className="mt-6">
+            <h4 id={rankingId} className="text-sm font-bold text-ink">
+              読み上げたランキング
+            </h4>
+            {hasNamedRanking ? (
+              <>
+                <p className="mt-2 text-sm leading-6 text-ink-muted">
+                  配信終了時に、下から読み上げた順です。
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {recap.ranking.map((entry) => (
+                    <li
+                      key={entry}
+                      className="rounded-xl border border-sage/15 bg-paper px-4 py-2 text-sm leading-7 text-ink"
+                    >
+                      {entry}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p className="mt-4 rounded-2xl border border-sage/15 bg-paper p-4 text-sm leading-7 text-ink-muted">
+                {recap.ranking[0]}
+              </p>
+            )}
+          </section>
+        ) : null}
+
+        <div className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
+          <details>
+            <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
+              タイムスタンプと次枠
+            </summary>
+            <ol className="mt-3 space-y-2">
+              {recap.timeline.map((item) => (
+                <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
+                  <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
+                    {item.timestamp}
+                  </span>
+                  <span className="text-ink-muted">{item.label}</span>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
+          </details>
+          <p className="mt-4 text-xs leading-5 text-ink-muted">
+            出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
+          </p>
+        </div>
+        <p className="mt-4 text-xs leading-5 text-ink-muted">{recap.transcriptionNote}</p>
+      </div>
     </details>
   );
 }
@@ -911,36 +961,43 @@ function ActivityMedia({ items }: { items: ActivityMediaItem[] }) {
           const key = activityMediaKey(media);
           const caption = mediaCaption(media);
           return (
-            <li key={key} className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">
-              {media.kind === "video" ? (
-                <video
-                  src={media.src}
-                  poster={media.poster}
-                  width={media.width}
-                  height={media.height}
-                  controls
-                  playsInline
-                  preload="none"
-                  aria-label={mediaLabel(media)}
-                  className="mx-auto aspect-[9/16] max-h-[70vh] w-full rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
-                />
-              ) : isNewsImageMedia(media) ? (
-                <NewsImage
-                  media={media}
-                  className="max-h-[42rem] w-full rounded-xl bg-sage-soft/30 object-contain"
-                />
-              ) : (
-                <img
-                  src={media.src}
-                  width={media.width}
-                  height={media.height}
-                  alt={media.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className="max-h-[42rem] w-full rounded-xl bg-sage-soft/30 object-contain"
-                />
-              )}
-              {caption ? <p className="px-3 pb-2 pt-3 text-xs leading-6 text-ink-muted">{caption}</p> : null}
+            <li key={key} className="overflow-hidden rounded-3xl border border-sage/15 bg-paper-card shadow-card">
+              <div className="flex aspect-[4/3] items-center justify-center overflow-hidden bg-sage-soft/35 p-2 sm:p-3">
+                {media.kind === "video" ? (
+                  <video
+                    src={media.src}
+                    poster={media.poster}
+                    width={media.width}
+                    height={media.height}
+                    controls
+                    playsInline
+                    preload="none"
+                    aria-label={mediaLabel(media)}
+                    className="max-h-full max-w-full rounded-2xl object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+                  />
+                ) : isNewsImageMedia(media) ? (
+                  <NewsImage
+                    media={media}
+                    className="max-h-full max-w-full rounded-2xl object-contain"
+                  />
+                ) : (
+                  <img
+                    src={media.src}
+                    width={media.width}
+                    height={media.height}
+                    alt={media.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-full max-w-full rounded-2xl object-contain"
+                  />
+                )}
+              </div>
+              <div className="border-t border-sage/10 px-4 py-3">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-sage-deep">
+                  {media.kind === "video" ? "Video" : "Photo"}
+                </p>
+                {caption ? <p className="mt-1 text-sm leading-6 text-ink-muted">{caption}</p> : null}
+              </div>
             </li>
           );
         })}
