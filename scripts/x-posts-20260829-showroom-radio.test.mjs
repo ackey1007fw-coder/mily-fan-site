@@ -135,7 +135,7 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Latest entry", () 
     assert.match(radio.body, /8月29日/);
     assert.match(radio.body, /14:40からのSHOWROOMラジオ配信を案内/);
     assert.match(radio.body, /配信前の記録/);
-    assert.equal(contest.currentPhase?.name, "3次審査進出");
+    assert.equal(contest.currentPhase?.name, "3次審査");
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
 

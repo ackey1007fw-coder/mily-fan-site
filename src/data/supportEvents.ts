@@ -175,7 +175,8 @@ export const missCircleThirdRoundWebVote: SupportEvent = {
   schedule: {
     state: "confirmed-period",
     start: "2026-09-03T12:00:00+09:00",
-    end: "2026-09-13T23:59:00+09:00",
+    // 公式の「23:59まで」を秒単位の終了境界へ正規化する。
+    end: "2026-09-13T23:59:59+09:00",
     allDay: false,
     timezone: "Asia/Tokyo",
   },
@@ -193,7 +194,8 @@ export const missCircleThirdRoundShowroomReview: SupportEvent = {
   schedule: {
     state: "confirmed-period",
     start: "2026-09-03T05:00:00+09:00",
-    end: "2026-09-12T21:59:00+09:00",
+    // 公式の「21:59まで」を秒単位の終了境界へ正規化する。
+    end: "2026-09-12T21:59:59+09:00",
     allDay: false,
     timezone: "Asia/Tokyo",
   },

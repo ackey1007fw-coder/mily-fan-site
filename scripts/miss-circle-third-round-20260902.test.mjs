@@ -70,9 +70,9 @@ const SHOWROOM_ROOM_URL = "https://www.showroom-live.com/r/circle2026_0734";
 const ENTRY_URL = "https://2026.misscircle.jp/entry/734";
 const SCHEDULE_URL = "https://www.misscircle.jp/";
 const WEB_START = Date.parse("2026-09-03T12:00:00+09:00");
-const WEB_END = Date.parse("2026-09-13T23:59:00+09:00");
+const WEB_END = Date.parse("2026-09-13T23:59:59+09:00");
 const SHOWROOM_START = Date.parse("2026-09-03T05:00:00+09:00");
-const SHOWROOM_END = Date.parse("2026-09-12T21:59:00+09:00");
+const SHOWROOM_END = Date.parse("2026-09-12T21:59:59+09:00");
 const SPOTLIGHT_DAY_START = Date.parse("2026-09-03T00:00:00+09:00");
 const CONTEST_END = Date.parse("2026-09-14T00:00:00+09:00");
 const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
@@ -291,7 +291,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.deepEqual(missCircleThirdRoundWebVote.schedule, {
       state: "confirmed-period",
       start: "2026-09-03T12:00:00+09:00",
-      end: "2026-09-13T23:59:00+09:00",
+      end: "2026-09-13T23:59:59+09:00",
       allDay: false,
       timezone: "Asia/Tokyo",
     });
@@ -302,7 +302,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.deepEqual(missCircleThirdRoundShowroomReview.schedule, {
       state: "confirmed-period",
       start: "2026-09-03T05:00:00+09:00",
-      end: "2026-09-12T21:59:00+09:00",
+      end: "2026-09-12T21:59:59+09:00",
       allDay: false,
       timezone: "Asia/Tokyo",
     });
@@ -386,6 +386,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
   it("gates the WEB vote CTA to the confirmed window and keeps ENTRY 734", () => {
     const item = entry();
     const before = resolveNewsLinks(item, WEB_START - 1);
+    const finalMinute = Date.parse("2026-09-13T23:59:30+09:00");
     const during = resolveNewsLinks(item, WEB_START);
     const after = resolveNewsLinks(item, WEB_END + 1);
 
@@ -395,6 +396,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       false,
     );
     assert.deepEqual(during.cta, { label: "WEB投票する", url: WEB_VOTE_URL });
+    assert.deepEqual(
+      resolveNewsLinks(item, finalMinute).cta,
+      { label: "WEB投票する", url: WEB_VOTE_URL },
+    );
     assert.equal(after.cta, undefined);
 
     const voteAt = (now) =>
@@ -409,6 +414,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       { kind: "contest", url: contest.entryUrl },
     ]);
     assert.deepEqual(voteAt(WEB_END + 1), [
+      { kind: "contest", url: contest.entryUrl },
+    ]);
+    assert.deepEqual(voteAt(finalMinute), [
+      { kind: "support-event", url: WEB_VOTE_URL },
       { kind: "contest", url: contest.entryUrl },
     ]);
     assert.equal(
@@ -498,10 +507,10 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
   });
 
   it("keeps ContestPhase date-only and the confirmed personal SHOWROOM slots", async () => {
-    assert.equal(contest.currentPhase?.name, "3次審査進出");
+    assert.equal(contest.currentPhase?.name, "3次審査");
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
-    assert.equal(contest.lastVerifiedAt, "2026-09-02");
+    assert.equal(contest.lastVerifiedAt, "2026-09-03");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
     assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
       "WEB投票 9/3 12:00〜9/13 23:59",
@@ -509,7 +518,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59",
       "SHOWROOMは9/12 21:59終了",
     ]);
-    assert.match(contestPhaseDisplayNote(contest.currentPhase), /3次審査進出（9\/3〜9\/13）/);
+    assert.match(contestPhaseDisplayNote(contest.currentPhase), /3次審査（9\/3〜9\/13）/);
     assert.deepEqual(streamSchedule, EXPECTED_SLOTS);
     assert.equal(
       streamSchedule.some((slot) => slot.date === "2026-09-07"),

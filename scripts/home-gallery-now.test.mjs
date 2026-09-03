@@ -130,11 +130,11 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
     assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].deadlineLabel, undefined);
-    assert.match(ended.voteActions[0].note ?? "", /3次審査進出/);
+    assert.match(ended.voteActions[0].note ?? "", /3次審査/);
     assert.ok(nowHero);
     assert.equal(nowHero.cta?.url, contest.entryUrl);
     assert.equal(nowHero.cta?.label, "ENTRY 734を応援する");
-    assert.match(nowHero.note ?? "", /3次審査進出/);
+    assert.match(nowHero.note ?? "", /3次審査/);
     assert.doesNotMatch(nowHero.title, /CAMPUS GIRLS|FinalSTAGE|Paton/i);
   });
 
@@ -369,11 +369,11 @@ describe("Gallery portrait-first order", () => {
 
 describe("confirmed Miss Circle third-round dates", () => {
   it("records official SCHEDULE dates and keeps ContestPhase date-only", () => {
-    assert.equal(contest.currentPhase?.name, "3次審査進出");
+    assert.equal(contest.currentPhase?.name, "3次審査");
     assert.equal(contest.currentPhase?.start, "2026-09-03");
     assert.equal(contest.currentPhase?.end, "2026-09-13");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-09-02");
+    assert.equal(contest.lastVerifiedAt, "2026-09-03");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 
     const afterPaton = selectHomeVoteAction({
@@ -400,7 +400,7 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.equal(approaching.nowItems[0]?.origin, "contest");
     assert.equal(approaching.nowItems[0]?.cta?.url, contest.entryUrl);
     assert.equal(approaching.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
-    assert.match(approaching.nowItems[0]?.note ?? "", /3次審査進出/);
+    assert.match(approaching.nowItems[0]?.note ?? "", /3次審査/);
     assert.match(approaching.nowItems[0]?.note ?? "", /9\/3/);
     assert.match(approaching.nowItems[0]?.note ?? "", /9\/13/);
     assert.match(approaching.nowItems[0]?.note ?? "", /WEB投票 9\/3 12:00〜9\/13 23:59/);

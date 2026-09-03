@@ -48,8 +48,8 @@ PR #49の実装を現在のmainとして扱う。
 
 ### 1.3 解消する不整合
 
-`contest.ts` は `currentPhase.name = "3次審査進出"`、
-`lastVerifiedAt = "2026-08-19"` を保持している。一方、`profile.ts` の
+`contest.ts` は `currentPhase.name = "3次審査"`、
+`lastVerifiedAt = "2026-09-03"` を保持している。一方、`profile.ts` の
 `miss-circle` activityはbodyとpointsに「二次審査進出」を保存しており、
 `asOf = "2026-08-16"` のままである。
 
