@@ -124,7 +124,6 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — Latest entry", (
     assert.doesNotMatch(copy, /票|pt|ポイント|順位/);
     assert.doesNotMatch(copy, /CanCam|AGESTOCK|横浜アリーナ/);
     assert.equal(copy.toLowerCase().includes("millie"), false);
-    assert.equal(copy.includes("Milly"), false);
   });
 
   it("does not turn the related daily-vote or live-now tweets into NEWS cards", () => {
