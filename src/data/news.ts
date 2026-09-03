@@ -13,7 +13,10 @@
  * - ctaLabel: optional. href is url ?? source
  */
 import type { ActivityId } from "./activities.ts";
-import { campusGirlsPatonVoteLink } from "./links.ts";
+import {
+  campusGirlsPatonVoteLink,
+  missCircleWebVoteLink,
+} from "./links.ts";
 import {
   eventStory20260821,
   morningOhayo20260821,
@@ -85,6 +88,7 @@ import {
 } from "./firstSeptemberShowroomImages.ts";
 import { thirdRoundTimetableImage } from "./thirdRoundTimetableImage.ts";
 import { thirdRoundStoryAdditionalMedia } from "./thirdRoundStoryMedia.ts";
+import { webVoteDay2StoryVideo } from "./webVoteDay2StoryVideo.ts";
 import {
   PATON_VOTE_HOW_TO_CTA_LABEL,
   PATON_VOTE_HOW_TO_CTA_URL,
@@ -191,6 +195,31 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-04-third-round-vote-day2-story",
+    date: "2026-09-04",
+    sameDayOrder: 10,
+    activityIds: ["miss-circle"],
+    title: "「2日目ポチッとな〜」投票の呼びかけ",
+    body:
+      "みりぃがInstagram Storyで、リンクスタンプに「2日目ポチッとな〜」と書いて投票を呼びかけました。あわせて「毎日連続投票者の特典ちゃんもあるよっ」と添えています。リンク先と特典の内容はStoryの表示だけでは確認できないため、ここには書きません。くま耳とキラキラのフィルターをつけて、手を振ったりピースをしたりしている短い動画です。",
+    sourceLabel: webVoteDay2StoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: missCircleWebVoteLink.label,
+        url: missCircleWebVoteLink.url,
+      },
+    ],
+    media: webVoteDay2StoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "（毎日連続投票者の特典ちゃんもあるよっ\u{1FA75}\u30DC\u30BD\u30C3）\n" +
+        "2日目ポチッとな〜\u{1F5F3}\u{FE0F}\u2763\u{FE0F}\u2763\u{FE0F}",
+    },
+  },
   {
     id: "2026-09-03-miss-circle-goals-support",
     date: "2026-09-03",

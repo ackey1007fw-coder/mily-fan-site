@@ -72,11 +72,12 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — Latest entry", (
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(news.length, 75);
-    assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, THIRD_ROUND_ID);
-    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
+    assert.equal(news.length, 76);
+    assert.equal(ordered[0]?.id, "2026-09-04-third-round-vote-day2-story");
+    assert.equal(ordered[1], entry);
+    assert.equal(ordered[2]?.id, THIRD_ROUND_ID);
+    assert.equal(ordered[3]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[4]?.id, "2026-09-02-paton-second-story");
     assert.equal(entry.date, "2026-09-03");
     assert.equal(entry.sameDayOrder, 10);
     assert.deepEqual(entry.activityIds, ["miss-circle"]);
@@ -159,8 +160,9 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — Latest entry", (
 describe("2026-09-03 X 三次審査の目標と応援方法 — scope", () => {
   it("surfaces on the miss-circle Activity only", () => {
     const missNews = selectActivityNews("miss-circle", news, news.length);
-    assert.equal(missNews[0]?.id, NEWS_ID);
-    assert.equal(missNews[1]?.id, THIRD_ROUND_ID);
+    assert.equal(missNews[0]?.id, "2026-09-04-third-round-vote-day2-story");
+    assert.equal(missNews[1]?.id, NEWS_ID);
+    assert.equal(missNews[2]?.id, THIRD_ROUND_ID);
     for (const activityId of ["live-stream", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(

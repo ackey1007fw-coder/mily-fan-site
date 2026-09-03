@@ -158,22 +158,23 @@ describe("2026-09-01 Instagram Story — Latest / NEWS", () => {
     const finalDay = newsItem(FINAL_DAY_NEWS_ID);
     const september = newsItem(SEPTEMBER_NEWS_ID);
 
-    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
-    assert.equal(ordered[1]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[4]?.id, "2026-09-01-first-showroom-oyasumiry");
-    assert.equal(ordered[5], newsItem("2026-09-01-ohayo-september-x"));
-    assert.equal(ordered[6], finalDay);
-    assert.equal(ordered[7], september);
-    assert.equal(ordered[8], newsItem("2026-08-31-paton-vote-voice-story"));
+    assert.equal(ordered[0]?.id, "2026-09-04-third-round-vote-day2-story");
+    assert.equal(ordered[1]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[2]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(ordered[3]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[4]?.id, "2026-09-02-paton-second-story");
+    assert.equal(ordered[5]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[6], newsItem("2026-09-01-ohayo-september-x"));
+    assert.equal(ordered[7], finalDay);
+    assert.equal(ordered[8], september);
+    assert.equal(ordered[9], newsItem("2026-08-31-paton-vote-voice-story"));
     assert.equal(finalDay?.sameDayOrder, 2);
     assert.equal(september?.sameDayOrder, 1);
     assert.deepEqual(finalDay?.activityIds, ["campus-girls"]);
     assert.equal(september?.activityIds, undefined);
     assert.equal(news.filter(({ id }) => id === FINAL_DAY_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === SEPTEMBER_NEWS_ID).length, 1);
-    assert.equal(news.length, 75);
+    assert.equal(news.length, 76);
     assert.deepEqual(verifyNews([finalDay, september]), []);
   });
 
@@ -216,11 +217,12 @@ describe("2026-09-01 Instagram Story — Latest / NEWS", () => {
   });
 
   it("shares one manifest object per published Story with Gallery and Portal Feed", () => {
-    assert.equal(visibleGalleryVideos()[0], oyasumilyStoryVideo);
-    assert.equal(visibleGalleryVideos()[1], patonSecondStoryVideo);
-    assert.equal(visibleGalleryVideos()[2], patonVoteFinalDayStoryVideo);
-    assert.equal(visibleGalleryVideos()[3], septemberMilyStoryVideo);
-    assert.equal(visibleGalleryVideos()[4], patonVoteVoiceStoryVideo);
+    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b52-01-third-round-vote-day2-story");
+    assert.equal(visibleGalleryVideos()[1], oyasumilyStoryVideo);
+    assert.equal(visibleGalleryVideos()[2], patonSecondStoryVideo);
+    assert.equal(visibleGalleryVideos()[3], patonVoteFinalDayStoryVideo);
+    assert.equal(visibleGalleryVideos()[4], septemberMilyStoryVideo);
+    assert.equal(visibleGalleryVideos()[5], patonVoteVoiceStoryVideo);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);

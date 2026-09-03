@@ -2944,3 +2944,88 @@ NEWS専用JPEGと同じくそこに入れない。
   `a00eea08f642532348bc967ad3adeb130494a6828d1306f5fe23a0198490c4a8`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 
+
+## 素材台帳（batch b52 / 受領日・source date 2026-09-04）
+
+オーナーが直接提供した本人Instagram Story動画1本。くま耳とキラキラの
+フェイスフィルターで、リンクスタンプ「2日目ポチッとな〜」とともに投票を
+呼びかけている縦型動画。owner-provided。SNSから再取得していない。
+
+HOME Latest / `/news/` と Gallery が、公開MP4・poster・manifest objectを共有する。
+MISS CIRCLE Activity の関連NEWS・関連メディアにも出す。
+恒久的なStory permalinkはないため、表示は非リンクの `Instagram Story` label とする。
+`/stories/`、highlights、events、streamSchedule、`media.ts`、
+PatonVoteGuide のランキング系列には追加しない。
+
+### 掲載承認
+
+- approval date: `2026-09-04`
+- オーナー本人が本タスクで添付したb52-01について、
+  `https://mily-fan-site.vercel.app` への掲載と、ギャラリーへの追加を明示依頼した。
+- 承認対象面は HOME Latest / `/news/`、Gallery の動画アーカイブ、
+  MISS CIRCLE Activity の関連メディア。`/stories/` への複製は含まない。
+- b52-01 poster は承認済みb52-01動画の実フレームで、同動画のposter用途だけに使用する。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b52-01 | `gallery/mily-b52-01-third-round-vote-day2-story.mp4` | 白黒のくま耳とキラキラのフェイスフィルター、黒い水玉のトップスで手を振り、ピースをする縦型動画。画面に「（毎日連続投票者の特典ちゃんもあるよっ🩵ボソッ）」とリンクスタンプ「2日目ポチッとな〜🗳️❣️❣️」。720×1280 / 8.967秒 / 30fps / 269フレーム / video-only | ✅ 2026-09-04 明示承認。Latest / NEWS + Gallery + MISS CIRCLE Activity |
+| b52-01 poster | `gallery/mily-b52-01-third-round-vote-day2-story-poster.jpg` | 公開MP4の8.5秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-04`（Asia/Tokyo）。Instagram Storyの恒久permalinkはなく、
+  `sourceUrl` は持たない。推測permalinkも作らない
+- 受領バイトを変えず `media/original/mily-b52-01-third-round-vote-day2-story.mp4`
+  （gitignore 済み・無改変・コミットしない）へ保存した。元の受け渡し名・URL・file IDは
+  tracked / public files へ残さない
+- 元動画: 11,886,399 bytes / H.264 High / level 3.1 / 720×1280 / 30fps /
+  269 frames / video 8.966667秒 / yuv420p / `has_b_frames` 2 /
+  HE-AAC 48kHz stereo 音声あり
+- 元動画の `creation_time` と Core Media handler 名は受領検査だけに使い、
+  投稿日・投稿時刻の根拠にはしていない
+- Instagram UI、DM、通知、端末固有情報、連絡先、第三者コメントは含まれない。
+  識別可能な第三者も見当たらない。背景は室内のクローゼット扉
+
+### 音声と公開派生
+
+**元動画の音声の権利関係・再配信権を確認できないため、公開派生は video-only（無音）にした。**
+音声の内容・由来・種類・権利者・楽曲名は公開データへ書かない。
+映像は720×1280、元のfpsとフレーム数を維持し、crop・scale・引き伸ばし・
+アップスケール・短縮・テロップ変更はしていない。AI生成・顔補正・生成塗り足しもない。
+
+- 公開MP4: 3,459,344 bytes / H.264 Constrained Baseline / level 3.1 / 720×1280 /
+  8.967秒 / 30fps / 269フレーム / yuv420p / `has_b_frames` 0 / 音声なし /
+  元の `creation_time` と Core Media metadata・chapterなし / `+faststart` / sha256
+  `e6666874750b57d43c1573964340773c78fc130c604a972107c815d3a11da49e`
+- poster: 64,813 bytes / 720×1280 / EXIF・IPTC・XMP・ICCなし / sha256
+  `82a73892f10ac6e6ae562b1a46958747e2042290f0b05855787fd796c4640455`
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b52-01-third-round-vote-day2-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough -movflags +faststart \
+  public/media/gallery/mily-b52-01-third-round-vote-day2-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の **8.5秒地点の実フレーム**。目が開いており、ピースと表情が自然で、
+  画面の2行のテキストが読みやすいため採用した（AI生成poster禁止）
+- `src/data/webVoteDay2StoryVideo.json` の1オブジェクトを
+  Latest / NEWS / Gallery / MISS CIRCLE Activity で共有し、
+  公開MP4 1本・poster 1枚だけを参照する。用途別コピーは作らない
+- InstagramプロフィールURLやStoryの推測permalinkを出典として代用していない
+- 受け渡し用URL / file ID は公開情報へ残さない
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 8.5 -i public/media/gallery/mily-b52-01-third-round-vote-day2-story.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b52-01-third-round-vote-day2-story-poster.jpg
+```
