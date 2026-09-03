@@ -64,6 +64,7 @@ const WEB_START = Date.parse("2026-09-03T12:00:00+09:00");
 const WEB_END = Date.parse("2026-09-13T23:59:00+09:00");
 const SHOWROOM_START = Date.parse("2026-09-03T05:00:00+09:00");
 const SHOWROOM_END = Date.parse("2026-09-12T21:59:00+09:00");
+const SPOTLIGHT_DAY_START = Date.parse("2026-09-03T00:00:00+09:00");
 const CONTEST_END = Date.parse("2026-09-14T00:00:00+09:00");
 const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
 const TIMETABLE_FILE = path.join(root, "public", THIRD_ROUND_TIMETABLE_SRC.slice(1));
@@ -389,12 +390,15 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.match(spotlight, /data-vote-state=\{spotlight\.state\}/);
     assert.match(spotlight, /border-2 border-apricot/);
     assert.match(hero, /<VoteSpotlight/);
+    assert.match(hero, /headingAs="p"/);
     assert.match(support, /<VoteSpotlight/);
     assert.match(dock, /spotlight\?\.action\.mobileLabel/);
+    assert.match(dock, /const additionalVoteActions = voteActions\.filter/);
   });
 
   it("aligns the shared clock with #131 contest end and the new review bounds", () => {
-    assert.equal(nextSupportEventBoundary(PATON_END + 1), SHOWROOM_START);
+    assert.equal(nextSupportEventBoundary(PATON_END + 1), SPOTLIGHT_DAY_START);
+    assert.equal(nextSupportEventBoundary(SPOTLIGHT_DAY_START), SHOWROOM_START);
     assert.equal(nextDisplayStatusBoundary(missCircleThirdRoundShowroomReview.schedule, SHOWROOM_START - 1), SHOWROOM_START);
     assert.equal(nextSupportEventBoundary(SHOWROOM_START), WEB_START);
     assert.equal(nextSupportEventBoundary(WEB_START), SHOWROOM_END + 1);

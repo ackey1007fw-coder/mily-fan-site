@@ -27,9 +27,9 @@ export function MobileActionDock() {
     links,
     now,
   });
-  const [selectedVoteAction, ...additionalVoteActions] = voteActions;
+  const [selectedVoteAction] = voteActions;
   const voteAction = spotlight?.action ?? selectedVoteAction;
-  const dockAdditionalVoteActions = additionalVoteActions.filter(
+  const additionalVoteActions = voteActions.filter(
     (action) => action.url !== voteAction.url,
   );
 
@@ -53,7 +53,7 @@ export function MobileActionDock() {
             （{spotlight?.title ?? selectedVoteAction.title}・新しいタブで開きます）
           </span>
         </a>
-        {dockAdditionalVoteActions.map((action) => (
+        {additionalVoteActions.map((action) => (
           <a
             key={action.url}
             href={action.url}

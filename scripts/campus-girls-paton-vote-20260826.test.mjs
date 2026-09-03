@@ -179,9 +179,11 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       END + 1,
     );
     assert.equal(nextSupportEventBoundary(END), END + 1);
+    const thirdRoundVoteStartDay = Date.parse("2026-09-03T00:00:00+09:00");
     const showroomStart = Date.parse("2026-09-03T05:00:00+09:00");
     const contestEnd = Date.parse("2026-09-14T00:00:00+09:00");
-    assert.equal(nextSupportEventBoundary(END + 1), showroomStart);
+    assert.equal(nextSupportEventBoundary(END + 1), thirdRoundVoteStartDay);
+    assert.equal(nextSupportEventBoundary(thirdRoundVoteStartDay), showroomStart);
     assert.equal(nextSupportEventBoundary(contestEnd - 1), contestEnd);
     assert.equal(nextSupportEventBoundary(contestEnd), null);
   });

@@ -67,6 +67,7 @@ export function Hero() {
       <VoteSpotlight
         spotlight={spotlight}
         className="relative mx-auto mb-7 max-w-3xl"
+        headingAs="p"
       />
       <div className="relative mx-auto grid max-w-3xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-center">
         <div className="order-2 lg:order-1">

@@ -4,13 +4,17 @@ import { ExternalLink } from "./ExternalLink";
 export function VoteSpotlight({
   spotlight,
   className = "",
+  headingAs = "h2",
 }: {
   spotlight: HomeVoteSpotlight | null;
   className?: string;
+  headingAs?: "h2" | "p";
 }) {
   if (!spotlight) return null;
 
   const isLive = spotlight.state === "live";
+  const headingClassName =
+    "mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl";
 
   return (
     <aside
@@ -25,9 +29,11 @@ export function VoteSpotlight({
           <p className="inline-flex rounded-full bg-apricot px-3 py-1 text-xs font-bold tracking-wide text-white">
             {spotlight.eyebrow}
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-            {spotlight.title}
-          </h2>
+          {headingAs === "h2" ? (
+            <h2 className={headingClassName}>{spotlight.title}</h2>
+          ) : (
+            <p className={headingClassName}>{spotlight.title}</p>
+          )}
           <p className="mt-2 max-w-2xl whitespace-pre-line text-sm leading-7 text-ink-muted">
             {spotlight.note}
           </p>

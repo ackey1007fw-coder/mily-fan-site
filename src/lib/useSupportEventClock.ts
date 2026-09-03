@@ -15,6 +15,17 @@ export function nextSupportEventBoundary(now: number): number | null {
   }
 
   const contestPhase = contest.currentPhase;
+  const voteStartDayBoundaries = supportEvents.flatMap(({ kind, schedule }) => {
+    if (
+      kind !== "vote" ||
+      schedule.state !== "confirmed-period" ||
+      schedule.allDay
+    ) {
+      return [];
+    }
+    const startDay = Date.parse(`${schedule.start.slice(0, 10)}T00:00:00+09:00`);
+    return startDay > now ? [startDay] : [];
+  });
   const contestEndBoundary =
     contestPhase?.start && contestPhase.end
       ? nextDisplayStatusBoundary(
@@ -32,6 +43,7 @@ export function nextSupportEventBoundary(now: number): number | null {
         )
       : null;
   const boundaries = [
+    ...voteStartDayBoundaries,
     ...supportEvents.map(({ schedule }) =>
       nextDisplayStatusBoundary(schedule, now),
     ),
