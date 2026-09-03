@@ -96,7 +96,10 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.equal(still.height, 360);
     assert.match(still.alt, /静止画/);
     assert.match(still.alt, /みりぃ/);
-    assert.doesNotMatch(still.alt, /コメント|アイコン|視聴者/);
+    assert.match(still.alt, /SHOWROOM/);
+    assert.match(still.alt, /木の椅子/);
+    assert.doesNotMatch(still.alt, /花束|ブーケ|コメント|アイコン|視聴者/);
+    assert.equal(still.caption, "配信中に使われていた静止画");
     assert.equal(existsSync(STILL_FILE), true);
 
     const jpeg = await readFile(STILL_FILE);
@@ -108,6 +111,10 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
 
     assert.match(page, /recap\.image/);
     assert.match(page, /object-contain/);
+    assert.match(page, /recap\.image\.caption/);
+    assert.match(page, /<figcaption/);
+    assert.match(page, /recap\.transcriptionNote/);
+    assert.doesNotMatch(page, /streamRecaps\[0\]\?\.transcriptionNote/);
   });
 
   it("does not promote same-day slots, profile numbers, or private archive files", async () => {

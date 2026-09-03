@@ -482,7 +482,6 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 
 function StreamRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "live-stream") return null;
-  const footnote = streamRecaps[0]?.transcriptionNote;
 
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
@@ -496,9 +495,6 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
           </li>
         ))}
       </ul>
-      {footnote ? (
-        <p className="mt-6 text-xs leading-6 text-ink-muted">{footnote}</p>
-      ) : null}
     </SectionShell>
   );
 }
@@ -545,6 +541,11 @@ function StreamRecapArticle({
               loading="lazy"
               decoding="async"
             />
+            {recap.image.caption ? (
+              <figcaption className="px-3 py-2 text-xs leading-5 text-ink-muted">
+                {recap.image.caption}
+              </figcaption>
+            ) : null}
           </figure>
         ) : null}
       </summary>
@@ -615,6 +616,7 @@ function StreamRecapArticle({
           出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
         </p>
       </details>
+      <p className="mt-4 text-xs leading-5 text-ink-muted">{recap.transcriptionNote}</p>
     </details>
   );
 }

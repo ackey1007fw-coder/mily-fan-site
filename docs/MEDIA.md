@@ -2924,7 +2924,7 @@ LIVE STREAM の朝配信メモ専用。NEWS / Gallery / `media.ts` /
 
 | ID | 公開ファイル | 内容 | 掲載・承認 |
 | --- | --- | --- | --- |
-| b51-01 | `live/mily-b51-01-morning-radio-showroom.jpg` | 室内の椅子に座るみりぃの静止画。640×360。owner-provided 録画の実フレーム | ✅ 2026-09-03 明示承認。朝配信メモ専用。Gallery / NEWS 非掲載 |
+| b51-01 | `live/mily-b51-01-morning-radio-showroom.jpg` | 室内の木の椅子に座るみりぃ。白いトップス、黒いスカート、白い靴下。640×360。画面にSHOWROOMとみりぃの文字。owner-provided 録画の実フレーム | ✅ 2026-09-03 明示承認。朝配信メモ専用。Gallery / NEWS 非掲載 |
 
 ### 元素材と安全確認
 

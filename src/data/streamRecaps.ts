@@ -27,6 +27,7 @@ export type StreamRecapImage = {
   width: number;
   height: number;
   alt: string;
+  caption?: string;
 };
 
 export type StreamRecap = {
@@ -74,7 +75,8 @@ export const streamRecap20260902: StreamRecap = {
     src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
     width: 640,
     height: 360,
-    alt: "SHOWROOM朝ラジオ配信で使われた静止画。室内の椅子に座り、白いトップスと黒いスカート、白い靴下で、手を口元に当ててこちらを見ているみりぃ",
+    alt: "SHOWROOM朝ラジオ配信で使われた静止画。室内の木の椅子に座り、白いトップスと黒いスカート、白い靴下で、右手を口元に当てているみりぃ。画面左上にSHOWROOM、左下にみりぃの文字",
+    caption: "配信中に使われていた静止画",
   },
   highlights: [
     {
