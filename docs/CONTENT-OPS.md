@@ -42,6 +42,7 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
   streamSchedule / events には転記しない。
 - 9月のラジオ出演や友達の予定は未確定・他者情報のためサイト予定へ足さない。
 - フォロワー数・アバ権・ファンマークの数字は配信時点の記録。profile へ固定しない。
+- 読み上げたランキングは個人名を掲載せず、13位から1位まで読み上げた事実だけを残す。通学経路・学校までの具体的な移動情報も一般化する。
 - NEWS / Gallery / media.ts / galleryVideos / `/stories/` / highlights / events /
   streamSchedule / contest.ts / profile は変更しない。
 
