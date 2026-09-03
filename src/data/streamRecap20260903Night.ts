@@ -1,17 +1,11 @@
 import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
+import { gachiNightStill01 } from "./streamRecap20260903NightStill01.ts";
 
 const W = 400;
 const H = 228;
 
 const gachiNightStills: StreamRecapImage[] = [
-  {
-    src: "/media/live/mily-b53-01-surprise-choker.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、黒いドット柄のトップスと大きなリボンのみりぃが口を開けて驚いている",
-    caption: "ベストショット。びっくり",
-    downloadName: "みりぃ_三次初日夜_01_ベスト_びっくり.jpg",
-  },
+  gachiNightStill01,
   {
     src: "/media/live/mily-b53-02-whiteboard.jpg",
     width: W,
@@ -105,11 +99,6 @@ export const streamRecap20260903Night: StreamRecap = {
     "三次審査1日目の夜枠。告知の21時より遅く始まり、フルメイクで約49分話しました。投票とキラキラ100が最優先で、ブロック1位は狙わず、アバター権と仲間を集めてから上を目指す、という方針の回です。",
   image: gachiNightStills[0],
   gallery: gachiNightStills,
-  galleryZip: {
-    src: "/media/live/mily-b53-gachi-night-stills.zip",
-    filename: "みりぃ_三次初日夜_かわいいスクショ10枚.zip",
-    label: "10枚まとめて保存",
-  },
   highlights: [
     {
       timestamp: "0:00:15",
