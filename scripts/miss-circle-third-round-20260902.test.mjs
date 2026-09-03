@@ -31,6 +31,12 @@ import {
   THIRD_ROUND_TIMETABLE_SRC,
   thirdRoundTimetableImage,
 } from "../src/data/thirdRoundTimetableImage.ts";
+import {
+  thirdRoundGoalsStoryImage,
+  thirdRoundReviewScheduleStoryImage,
+  thirdRoundStoryAdditionalMedia,
+  thirdRoundSupportMethodStoryVideo,
+} from "../src/data/thirdRoundStoryMedia.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { contestOfficialWindowLines, contestPhaseDisplayNote } from "../src/lib/contestPhaseDisplay.ts";
 import { selectHomeVoteAction, selectHomeVoteActions } from "../src/lib/homePortal.ts";
@@ -65,6 +71,30 @@ const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
 const TIMETABLE_FILE = path.join(root, "public", THIRD_ROUND_TIMETABLE_SRC.slice(1));
 const TIMETABLE_SHA256 =
   "bf4d4c5f6396bebe9c4a74ae3a5143d226e2b5a537e46ea30d850fed1dc169f9";
+const STORY_MEDIA = [
+  {
+    file: "public/media/news/mily-b50-01-third-round-goals.jpg",
+    sha256: "7be4ce8f9a15d1a80ec2bb0175d8205851f2e9c93f93118cb4fa7b01061cbb48",
+    width: 864,
+    height: 1536,
+  },
+  {
+    file: "public/media/news/mily-b50-02-third-round-review-schedule.jpg",
+    sha256: "ca36e6663e7fc2c1464706d966109893972315b1d1a36a6d9dd76ec02fc904f4",
+    width: 864,
+    height: 1536,
+  },
+  {
+    file: "public/media/news/mily-b50-03-third-round-support-method-poster.jpg",
+    sha256: "3786b3ec766fd4de224bcd030590a583119ccc35122c6383d358686d9d7bf36e",
+    width: 512,
+    height: 910,
+  },
+  {
+    file: "public/media/news/mily-b50-03-third-round-support-method.mp4",
+    sha256: "7e90c1ff29f88ade92a9cec6a30a285255f7fcaf9eacdda99b18f4fa37010930",
+  },
+];
 const EXPECTED_SLOTS = [
   { date: "2026-09-03", time: "07:30", endTime: "08:00" },
   { date: "2026-09-03", time: "14:40", endTime: "15:20" },
@@ -142,7 +172,12 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       { label: "SHOWROOM", url: SHOWROOM_ROOM_URL },
     ]);
     assert.equal(item.media, thirdRoundTimetableImage);
-    assert.equal(item.additionalMedia, undefined);
+    assert.deepEqual(item.additionalMedia, [...thirdRoundStoryAdditionalMedia]);
+    assert.deepEqual(item.additionalMedia, [
+      thirdRoundGoalsStoryImage,
+      thirdRoundReviewScheduleStoryImage,
+      thirdRoundSupportMethodStoryVideo,
+    ]);
     assert.equal(item.message, undefined);
     assert.equal(thirdRoundTimetableImage.src, THIRD_ROUND_TIMETABLE_SRC);
     assert.equal(thirdRoundTimetableImage.width, 1206);
@@ -154,6 +189,12 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(thirdRoundTimetableImage.published, true);
     assert.equal(thirdRoundTimetableImage.provenance, "owner-provided");
     assert.equal(thirdRoundTimetableImage.sourceUrl, null);
+    for (const mediaItem of item.additionalMedia) {
+      assert.equal(mediaItem.published, true);
+      assert.equal(mediaItem.provenance, "owner-provided");
+      assert.equal(mediaItem.sourceDate, "2026-09-03");
+      assert.equal(mediaItem.sourceUrl, null);
+    }
     assert.equal(existsSync(TIMETABLE_FILE), true, TIMETABLE_FILE);
     assert.equal(
       existsSync(
@@ -177,6 +218,23 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(metadata.xmp, undefined);
     assert.equal(metadata.icc, undefined);
     assert.ok((await stat(TIMETABLE_FILE)).size > 0);
+    for (const expected of STORY_MEDIA) {
+      const file = path.join(root, expected.file);
+      assert.equal(existsSync(file), true, file);
+      assert.equal(
+        createHash("sha256").update(await readFile(file)).digest("hex"),
+        expected.sha256,
+      );
+      if (expected.width && expected.height) {
+        const metadata = await sharp(file).metadata();
+        assert.equal(metadata.width, expected.width);
+        assert.equal(metadata.height, expected.height);
+        assert.equal(metadata.exif, undefined);
+        assert.equal(metadata.iptc, undefined);
+        assert.equal(metadata.xmp, undefined);
+        assert.equal(metadata.icc, undefined);
+      }
+    }
     assert.equal(media.some((entry) => String(entry.id).includes("b49")), false);
     assert.equal(
       galleryVideos.some((entry) => String(entry.id ?? "").includes("b49")),

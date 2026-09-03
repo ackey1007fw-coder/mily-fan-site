@@ -2863,3 +2863,46 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 - NEWS 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 - 公開派生 sha256 `bf4d4c5f6396bebe9c4a74ae3a5143d226e2b5a537e46ea30d850fed1dc169f9`
 
+## 素材台帳（batch b50 / 受領日・source date 2026-09-03）
+
+オーナーが直接提供した、本人Instagram Storyで共有された三次審査案内2画像と
+応援方法の短尺動画。恒久的なStory permalinkはないため、推測URLや受け渡し情報を
+公開データへ残さない。既存NEWS `2026-09-02-miss-circle-third-round` の
+`additionalMedia` 専用とし、代表のb49-01に続けて目標、審査日程、応援方法動画の順で表示する。
+Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` には出さない。
+
+### 掲載承認
+
+- approval date: `2026-09-03`
+- オーナー本人が本タスクで添付したb50-01、b50-02、b50-03の3素材について、
+  `https://mily-fan-site.vercel.app` への掲載とマージを明示承認した。
+- 承認対象面は既存三次審査NEWSの `additionalMedia`（HOME Latestから同NEWSへ遷移する表示を含む）。
+  Gallery、`/stories/`、別NEWSへの掲載承認は含めず、複製しない。
+- b50-03 posterは承認済みb50-03動画の実フレームで、同動画のposter用途だけに使用する。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b50-01 | `news/mily-b50-01-third-round-goals.jpg` | アバター権獲得、投票と100キラでの応援、ファイナルまで応援したい仲間との出会いを掲げた目標画像。864×1536 | ✅ 2026-09-03 明示承認。既存三次審査NEWS additionalMedia。Gallery非掲載 |
+| b50-02 | `news/mily-b50-02-third-round-review-schedule.jpg` | WEB投票、SHOWROOM無料ギフト審査、SHOWROOMイベント審査の期間をまとめた画像。864×1536 | ✅ 2026-09-03 明示承認。既存三次審査NEWS additionalMedia。Gallery非掲載 |
+| b50-03 | `news/mily-b50-03-third-round-support-method.mp4` | 1日1回のWEB投票、1日100個までの無料キラキラ星、指定ギフトでの応援方法を案内する縦型動画。512×910 / 5.000秒 / 30fps / video-only | ✅ 2026-09-03 明示承認。既存三次審査NEWS additionalMedia。Gallery非掲載 |
+| b50-03 poster | `news/mily-b50-03-third-round-support-method-poster.jpg` | 公開MP4の2.5秒地点の実フレーム。512×910 | ✅ 承認済みb50-03動画のposter専用 |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-03`。Instagram Storyの恒久permalinkなし。`sourceUrl`はnull
+- 2画像と動画に、DM・通知・端末固有情報・連絡先・第三者コメント・識別可能な第三者は見当たらない
+- 元素材はgitignoredの`media/original/`へ無改変で保存。元の受け渡し名・URL・file IDはtracked/public filesへ残さない
+- crop・scale・テロップ変更・AI生成・顔補正・生成塗り足しなし
+
+### 公開派生
+
+- b50-01 JPEG: 864×1536 / EXIF・IPTC・XMP・ICCなし / sha256
+  `7be4ce8f9a15d1a80ec2bb0175d8205851f2e9c93f93118cb4fa7b01061cbb48`
+- b50-02 JPEG: 864×1536 / EXIF・IPTC・XMP・ICCなし / sha256
+  `ca36e6663e7fc2c1464706d966109893972315b1d1a36a6d9dd76ec02fc904f4`
+- b50-03 MP4: H.264 Constrained Baseline / 512×910 / 5.000秒 / 30fps / 150フレーム /
+  video-only / `+faststart` / 元のcreation_timeとCore Media metadataなし / sha256
+  `7e90c1ff29f88ade92a9cec6a30a285255f7fcaf9eacdda99b18f4fa37010930`
+- b50-03 poster: 公開MP4の2.5秒地点の実フレーム / metadataなし / sha256
+  `3786b3ec766fd4de224bcd030590a583119ccc35122c6383d358686d9d7bf36e`
