@@ -63,6 +63,16 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     const page = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
     const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
+    const morningText = [
+      recap.summary,
+      ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
+      ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
+      ...recap.ranking,
+      ...recap.timeline.flatMap(({ timestamp, label }) => [timestamp, label]),
+      recap.nextNote,
+      recap.sourceLabel,
+      recap.transcriptionNote,
+    ].join("\n");
 
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
@@ -74,12 +84,9 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
 
     assert.match(recap.nextNote, /14:40/);
     assert.doesNotMatch(data, /帰宅ラッシュ/);
+    assert.doesNotMatch(morningText, /ハルルン|ヒロさん|まこちゃん|あっきーさん|ひげおやじさん/);
     assert.doesNotMatch(
-      data,
-      /ハルルン|ヒロさん|まこちゃん|あっきーさん|ひげおやじさん/,
-    );
-    assert.doesNotMatch(
-      data,
+      morningText,
       /湘南新宿ライン|東海道線|横浜から東京方面|日大まで片道約2時間|仕事中に来てくれた人/,
     );
     assert.equal(
