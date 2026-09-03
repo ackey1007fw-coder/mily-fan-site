@@ -12,7 +12,7 @@ import {
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
 import { radioEpisode20260830 } from "./data/radioEpisodes";
-import { streamRecap20260902Morning } from "./data/streamRecaps";
+import { streamRecap20260902 } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
@@ -482,7 +482,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 
 function StreamRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "live-stream") return null;
-  const recap = streamRecap20260902Morning;
+  const recap = streamRecap20260902;
 
   return (
     <SectionShell eyebrow="Stream Archive" title={`${recap.dateLabel} ${recap.theme}`}>

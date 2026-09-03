@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
-import { streamRecap20260902Morning } from "../src/data/streamRecaps.ts";
+import { streamRecap20260902 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
 import { news } from "../src/data/news.ts";
 import { highlights } from "../src/data/highlights.ts";
@@ -12,7 +12,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
   it("stores the verified stream summary separately from schedule state", () => {
-    const recap = streamRecap20260902Morning;
+    const recap = streamRecap20260902;
 
     assert.equal(recap.date, "2026-09-02");
     assert.equal(recap.theme, "朝ラジオ配信");
@@ -25,7 +25,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
   });
 
   it("captures highlights, September goals, ranking, and an ordered timeline", () => {
-    const recap = streamRecap20260902Morning;
+    const recap = streamRecap20260902;
 
     assert.equal(recap.highlights.length, 7);
     assert.equal(recap.goals.length, 4);
@@ -44,7 +44,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
   });
 
   it("does not promote same-day slots, profile numbers, or private archive files", async () => {
-    const recap = streamRecap20260902Morning;
+    const recap = streamRecap20260902;
     const page = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
     const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");

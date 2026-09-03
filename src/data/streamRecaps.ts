@@ -38,7 +38,7 @@ export type StreamRecap = {
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の文字起こしから
  * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
  */
-export const streamRecap20260902Morning: StreamRecap = {
+export const streamRecap20260902: StreamRecap = {
   id: "2026-09-02-morning-showroom",
   date: "2026-09-02",
   dateLabel: "2026.09.02（火）",
