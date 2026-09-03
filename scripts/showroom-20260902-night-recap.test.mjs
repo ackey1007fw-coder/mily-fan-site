@@ -4,6 +4,7 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
+  rankingByPlace,
   streamRecap20260902,
   streamRecap20260902Night,
   streamRecaps,
@@ -27,24 +28,41 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.equal(recap.verifiedAt, "2026-09-03");
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.sourceLabel, /夜配信/);
-    assert.match(recap.summary, /三次審査前日/);
+    assert.match(recap.summary, /三次前日/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.equal(streamRecaps[0], recap);
     assert.equal(streamRecaps[1], streamRecap20260902);
   });
 
-  it("captures highlights, third-round goals, ranking, and an ordered timeline", () => {
+  it("keeps a short recap with ranking from 1st place in the shared shape", () => {
     const recap = streamRecap20260902Night;
 
-    assert.equal(recap.highlights.length, 7);
+    assert.equal(recap.highlights.length, 3);
     assert.equal(recap.goals.length, 5);
     assert.equal(recap.ranking.length, 13);
-    assert.equal(recap.timeline.length, 11);
+    assert.equal(recap.timeline.length, 10);
     assert.ok(recap.highlights.some(({ title }) => /通過/.test(title)));
     assert.ok(recap.highlights.some(({ body }) => /スーツ謝罪会見/.test(body)));
-    assert.ok(recap.highlights.some(({ body }) => /海くん/.test(body)));
+    assert.ok(recap.highlights.some(({ title }) => /海くん/.test(title)));
     assert.ok(recap.goals.some(({ item }) => item === "三次通過"));
-    assert.ok(recap.ranking.some((entry) => /高速の神さん/.test(entry)));
+    assert.equal(rankingByPlace(recap.ranking)[0].name, "高速の神さん");
+    assert.equal(rankingByPlace(recap.ranking)[0].place, 1);
+    assert.equal(streamRecap20260902.ranking.length, 0);
+    assert.match(streamRecap20260902.rankingNote, /個人名は掲載していません/);
+    assert.ok(recap.ranking.some((entry) => entry.name === "高速の神さん"));
+    assert.deepEqual(
+      recap.ranking.map(({ place }) => place).sort((left, right) => left - right),
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    );
+
+    const highlightSeconds = recap.highlights.map(({ timestamp }) => {
+      const [hour, minute, second] = timestamp.split(":").map(Number);
+      return hour * 3600 + minute * 60 + second;
+    });
+    assert.deepEqual(
+      highlightSeconds,
+      [...highlightSeconds].sort((left, right) => left - right),
+    );
 
     const seconds = recap.timeline.map(({ timestamp }) => {
       const [hour, minute, second] = timestamp.split(":").map(Number);
@@ -62,10 +80,10 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
     assert.match(page, /streamRecaps\.map/);
-    assert.match(page, /みりぃの見どころ/);
-    assert.match(page, /9月の目標（配信時点）/);
-    assert.match(page, /読み上げたランキング/);
-    assert.match(page, /主なコーナーとタイムスタンプを見る/);
+    assert.match(page, /function StreamRankingList/);
+    assert.match(page, /この回の見どころ/);
+    assert.match(page, /この回の目標/);
+    assert.match(page, /タイムスタンプと次枠/);
     assert.match(page, /<StreamRecap activityId=\{content\.activity\.id\} \/>/);
 
     assert.match(recap.nextNote, /7:30/);

@@ -12,7 +12,7 @@ import {
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
 import { radioEpisode20260830 } from "./data/radioEpisodes";
-import { streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
+import { rankingByPlace, streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
@@ -482,128 +482,170 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 
 function StreamRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "live-stream") return null;
+  const footnote = streamRecaps[0]?.transcriptionNote;
 
   return (
-    <>
-      {streamRecaps.map((recap) => (
-        <StreamRecapArticle key={recap.id} recap={recap} />
-      ))}
-    </>
+    <SectionShell eyebrow="Stream Archive" title="配信メモ">
+      <p className="mt-4 text-sm leading-7 text-ink-muted">
+        新しい回を上に置いています。朝の雑談も、夜の三次の作戦も、同じカードの形で残します。
+      </p>
+      <ul className="mt-6 space-y-6">
+        {streamRecaps.map((recap) => (
+          <li key={recap.id}>
+            <StreamRecapArticle recap={recap} />
+          </li>
+        ))}
+      </ul>
+      {footnote ? (
+        <p className="mt-6 text-xs leading-6 text-ink-muted">{footnote}</p>
+      ) : null}
+    </SectionShell>
   );
 }
 
 function StreamRecapArticle({ recap }: { recap: StreamRecapData }) {
-  const highlightsId = `${recap.id}-highlights`;
-  const goalsId = `${recap.id}-goals`;
   const rankingId = `${recap.id}-ranking`;
+  const ranking = rankingByPlace(recap.ranking);
+  const topThree = ranking.filter((entry) => entry.place <= 3);
+  const rest = ranking.filter((entry) => entry.place > 3);
 
   return (
-    <SectionShell eyebrow="Stream Archive" title={`${recap.dateLabel} ${recap.theme}`}>
-      <div className="mt-5 rounded-3xl border border-sage/20 bg-sage-soft/45 p-5 shadow-card sm:p-7">
-        <div className="flex flex-wrap gap-2 text-xs font-semibold text-sage-deep">
-          <span className="rounded-full bg-paper px-3 py-1.5">{recap.platformLabel}</span>
-          <span className="rounded-full bg-paper px-3 py-1.5">{recap.broadcastLabel}</span>
-        </div>
-        <p className="mt-5 text-sm leading-7 text-ink-muted sm:text-base sm:leading-8">
-          {recap.summary}
-        </p>
+    <article className="rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-6">
+      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-sage-deep">
+        <span>{recap.dateLabel}</span>
+        <span className="rounded-full bg-sage-soft px-3 py-1">{recap.platformLabel}</span>
+        <span className="rounded-full bg-sage-soft px-3 py-1">{recap.broadcastLabel}</span>
       </div>
+      <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
+      <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
 
-      <section aria-labelledby={highlightsId} className="mt-9">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          Mily Highlights
-        </p>
-        <h3 id={highlightsId} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
-          みりぃの見どころ
-        </h3>
-        <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-          {recap.highlights.map((highlight) => (
-            <li
-              key={highlight.timestamp + highlight.title}
-              className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
-            >
-              <p className="text-xs font-semibold text-sage-deep">{highlight.timestamp}</p>
-              <h4 className="mt-2 text-lg font-bold leading-relaxed text-ink">
-                {highlight.title}
-              </h4>
-              <p className="mt-2 text-sm leading-7 text-ink-muted">{highlight.body}</p>
-              {highlight.quote ? (
-                <blockquote className="mt-4 border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
-                  {highlight.quote}
-                </blockquote>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+      <h4 className="mt-6 text-sm font-bold text-ink">この回の見どころ</h4>
+      <ul className="mt-3 space-y-3">
+        {recap.highlights.map((highlight) => (
+          <li key={highlight.timestamp + highlight.title}>
+            <p className="text-sm font-bold leading-relaxed text-ink">
+              <span className="mr-2 font-semibold tabular-nums text-sage-deep">
+                {highlight.timestamp}
+              </span>
+              {highlight.title}
+            </p>
+            <p className="mt-1 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+            {highlight.quote ? (
+              <blockquote className="mt-2 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
+                {highlight.quote}
+              </blockquote>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
+      {recap.goals.length > 0 ? (
+        <div className="mt-6">
+          <h4 className="text-sm font-bold text-ink">この回の目標</h4>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {recap.goals.map((goal) => (
+              <li
+                key={goal.item}
+                className="rounded-full border border-sage/15 bg-sage-soft/50 px-3 py-1.5 text-xs leading-5 text-ink"
+              >
+                <span className="font-semibold">{goal.item}</span>
+                <span className="text-ink-muted">
+                  {" "}
+                  {goal.statusThen} / {goal.target}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      <section aria-labelledby={rankingId} className="mt-6">
+        <h4 id={rankingId} className="text-sm font-bold text-ink">
+          ランキング
+        </h4>
+        {recap.ranking.length > 0 ? (
+          <>
+            <p className="mt-1 text-xs leading-5 text-ink-muted">{recap.rankingNote}</p>
+            <StreamRankingList topThree={topThree} rest={rest} />
+          </>
+        ) : (
+          <p className="mt-2 text-sm leading-6 text-ink-muted">{recap.rankingNote}</p>
+        )}
       </section>
 
-      <section aria-labelledby={goalsId} className="mt-9">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          September Goals
-        </p>
-        <h3 id={goalsId} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
-          9月の目標（配信時点）
-        </h3>
-        <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {recap.goals.map((goal) => (
-            <li
-              key={goal.item}
-              className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card"
-            >
-              <p className="text-sm font-bold text-ink">{goal.item}</p>
-              <p className="mt-1 text-xs font-semibold text-sage-deep">目標 {goal.target}</p>
-              <p className="mt-2 text-sm leading-7 text-ink-muted">{goal.statusThen}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby={rankingId} className="mt-9">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          Ranking
-        </p>
-        <h3 id={rankingId} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
-          読み上げたランキング
-        </h3>
-        <p className="mt-3 text-sm leading-7 text-ink-muted">
-          配信終了時に、下から読み上げた順です。
-        </p>
-        <ul className="mt-5 space-y-2">
-          {recap.ranking.map((entry) => (
-            <li
-              key={entry}
-              className="rounded-xl border border-sage/15 bg-sage-soft/35 px-4 py-2 text-sm leading-7 text-ink"
-            >
-              {entry}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <details className="mt-9 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
-        <summary className="cursor-pointer font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
-          主なコーナーとタイムスタンプを見る
+      <details className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
+        <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
+          タイムスタンプと次枠
         </summary>
-        <ol className="mt-5 space-y-3">
+        <ol className="mt-3 space-y-2">
           {recap.timeline.map((item) => (
-            <li key={item.timestamp} className="flex gap-3 text-sm leading-7">
-              <span className="shrink-0 font-semibold tabular-nums text-sage-deep">
+            <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
+              <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
                 {item.timestamp}
               </span>
               <span className="text-ink-muted">{item.label}</span>
             </li>
           ))}
         </ol>
-      </details>
-
-      <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
-        <p className="text-sm leading-7 text-ink-muted">{recap.nextNote}</p>
-        <p className="mt-3 text-xs leading-6 text-ink-muted">
+        <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
+        <p className="mt-2 text-xs leading-5 text-ink-muted">
           出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
         </p>
-        <p className="mt-2 text-xs leading-6 text-ink-muted">{recap.transcriptionNote}</p>
-      </div>
-    </SectionShell>
+      </details>
+    </article>
+  );
+}
+
+function StreamRankingList({
+  topThree,
+  rest,
+}: {
+  topThree: StreamRecapData["ranking"];
+  rest: StreamRecapData["ranking"];
+}) {
+  return (
+    <div className="mt-3">
+      <ol className="grid grid-cols-3 gap-2">
+        {topThree.map((entry) => (
+          <li
+            key={`${entry.place}-${entry.name}-${entry.note ?? ""}`}
+            className={`rounded-2xl border border-sage/15 px-2 py-3 text-center ${
+              entry.place === 1
+                ? "bg-apricot-soft/60 sm:order-2"
+                : entry.place === 2
+                  ? "bg-sage-soft/40 sm:order-1"
+                  : "bg-sage-soft/40 sm:order-3"
+            }`}
+          >
+            <p className="text-[11px] font-semibold tabular-nums text-sage-deep">
+              {entry.place}位
+            </p>
+            <p className="mt-1 break-words text-sm font-bold leading-5 text-ink">{entry.name}</p>
+            {entry.note ? (
+              <p className="mt-1 break-words text-[11px] leading-4 text-ink-muted">{entry.note}</p>
+            ) : null}
+          </li>
+        ))}
+      </ol>
+      {rest.length > 0 ? (
+        <ol className="mt-3 grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2">
+          {rest.map((entry) => (
+            <li
+              key={`${entry.place}-${entry.name}-${entry.note ?? ""}`}
+              className="flex items-baseline gap-2 text-sm leading-6 text-ink"
+            >
+              <span className="w-7 shrink-0 tabular-nums text-sage-deep">{entry.place}</span>
+              <span>
+                {entry.name}
+                {entry.note ? (
+                  <span className="text-ink-muted">（{entry.note}）</span>
+                ) : null}
+              </span>
+            </li>
+          ))}
+        </ol>
+      ) : null}
+    </div>
   );
 }
 
