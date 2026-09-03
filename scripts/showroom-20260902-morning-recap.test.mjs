@@ -31,13 +31,25 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
 
     assert.equal(recap.highlights.length, 7);
     assert.equal(recap.goals.length, 4);
-    assert.equal(recap.ranking.length, 13);
+    assert.equal(recap.ranking.length, 1);
     assert.equal(recap.timeline.length, 9);
     assert.ok(recap.highlights.some(({ title }) => /太陽/.test(title)));
     assert.ok(recap.highlights.some(({ body }) => /未完成の作品/.test(body)));
-    assert.ok(recap.highlights.some(({ body }) => /通勤ラッシュ/.test(body)));
+    assert.ok(recap.highlights.some(({ body }) => /朝の通学は混雑/.test(body)));
     assert.ok(recap.goals.some(({ item }) => item === "フォロワー"));
-    assert.ok(recap.ranking.some((entry) => /あっきーさん/.test(entry)));
+    assert.equal(
+      recap.ranking[0],
+      "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
+    );
+
+    const highlightSeconds = recap.highlights.map(({ timestamp }) => {
+      const [hour, minute, second] = timestamp.split(":").map(Number);
+      return hour * 3600 + minute * 60 + second;
+    });
+    assert.deepEqual(
+      highlightSeconds,
+      [...highlightSeconds].sort((left, right) => left - right),
+    );
 
     const seconds = recap.timeline.map(({ timestamp }) => {
       const [hour, minute, second] = timestamp.split(":").map(Number);
@@ -62,6 +74,14 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
 
     assert.match(recap.nextNote, /14:40/);
     assert.doesNotMatch(data, /帰宅ラッシュ/);
+    assert.doesNotMatch(
+      data,
+      /ハルルン|ヒロさん|まこちゃん|あっきーさん|ひげおやじさん/,
+    );
+    assert.doesNotMatch(
+      data,
+      /湘南新宿ライン|東海道線|横浜から東京方面|日大まで片道約2時間|仕事中に来てくれた人/,
+    );
     assert.equal(
       streamSchedule.some((slot) => slot.date === "2026-09-02" && slot.time === "14:40"),
       false,
