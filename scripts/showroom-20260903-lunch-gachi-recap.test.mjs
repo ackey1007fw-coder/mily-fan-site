@@ -18,8 +18,8 @@ import { news } from "../src/data/news.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const COVER_SRC = "/media/live/mily-b53-01-close-smile.jpg";
-const BOARD_SRC = "/media/live/mily-b53-02-ouen-board.jpg";
+const COVER_SRC = "/media/live/mily-b54-01-close-smile.jpg";
+const BOARD_SRC = "/media/live/mily-b54-02-ouen-board.jpg";
 const COVER_SHA256 =
   "97aba78460d282201692a2a13522b100721d359f18de3559ec53a97e6a354a21";
 const BOARD_SHA256 =
@@ -129,9 +129,9 @@ describe("2026-09-03 SHOWROOM三次初日昼配信メモ", () => {
     assert.doesNotMatch(recapText, /フレキャン|ミスコン他/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com/);
 
-    assert.equal(JSON.stringify(media).includes("b53-"), false);
-    assert.equal(JSON.stringify(galleryVideos).includes("b53-"), false);
-    assert.equal(JSON.stringify(news).includes("b53-"), false);
+    assert.equal(JSON.stringify(media).includes("b54-"), false);
+    assert.equal(JSON.stringify(galleryVideos).includes("b54-"), false);
+    assert.equal(JSON.stringify(news).includes("b54-"), false);
     assert.equal(
       news.some((item) => item.id === "2026-09-03-lunch-gachi-showroom"),
       false,

@@ -205,7 +205,7 @@ const LUNCH_STILL_H = 720;
 
 const gachiLunchStills: StreamRecapImage[] = [
   {
-    src: "/media/live/mily-b53-01-close-smile.jpg",
+    src: "/media/live/mily-b54-01-close-smile.jpg",
     width: LUNCH_STILL_W,
     height: LUNCH_STILL_H,
     alt: "三次初日の昼配信で、黒のドット柄トップスとベージュのシュシュのみりぃが画面に寄って笑っている",
@@ -213,7 +213,7 @@ const gachiLunchStills: StreamRecapImage[] = [
     downloadName: "みりぃ_三次初日昼_01_寄りの笑顔.jpg",
   },
   {
-    src: "/media/live/mily-b53-02-ouen-board.jpg",
+    src: "/media/live/mily-b54-02-ouen-board.jpg",
     width: LUNCH_STILL_W,
     height: LUNCH_STILL_H,
     alt: "三次初日の昼配信で、応援方法の紙を持って笑っているみりぃ。紙には1日1回のWEB投票、キラキラ星100個、指定ギフトと書かれている",
