@@ -79,7 +79,7 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
     assert.match(page, /streamRecaps\.map/);
-    assert.match(page, /defaultOpen/);
+    assert.match(page, /STREAM_PREVIEW_HIGHLIGHTS/);
     assert.match(page, /この回の見どころ/);
     assert.match(page, /この回の目標/);
     assert.match(page, /タイムスタンプと次枠/);
