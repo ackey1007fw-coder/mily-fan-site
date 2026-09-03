@@ -2988,6 +2988,6 @@ LIVE STREAM の三次初日朝配信メモ専用。NEWS / Gallery / `media.ts` /
 ### 公開派生
 
 - 各JPEG: 400×228 / EXIF・IPTC・XMP・ICCなし
-- b52-01 sha256 `9fe6a5f8f63b94b1119892624b76829a64d4ecedde28c18e7f88945aa28e24a5`
+- b52-01 sha256 `4d5e1e779c243d11fca7dd72e7c0647bb098260ab3340a14dfe2269562e229f4`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 

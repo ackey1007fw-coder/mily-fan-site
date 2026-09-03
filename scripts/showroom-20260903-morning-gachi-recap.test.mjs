@@ -22,7 +22,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const THUMB_SRC = "/media/live/mily-b52-01-peace-smile.jpg";
 const THUMB_FILE = path.join(root, "public", THUMB_SRC.slice(1));
 const THUMB_SHA256 =
-  "9fe6a5f8f63b94b1119892624b76829a64d4ecedde28c18e7f88945aa28e24a5";
+  "4d5e1e779c243d11fca7dd72e7c0647bb098260ab3340a14dfe2269562e229f4";
 const ZIP_SRC = "/media/live/mily-b52-gachi-morning-stills.zip";
 const ZIP_FILE = path.join(root, "public", ZIP_SRC.slice(1));
 

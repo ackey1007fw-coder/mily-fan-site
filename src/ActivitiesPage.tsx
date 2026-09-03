@@ -547,7 +547,7 @@ function StreamRecapArticle({
               width={recap.image.width}
               height={recap.image.height}
               alt={recap.image.alt}
-              className="mx-auto h-auto w-full max-w-[640px] object-contain"
+              className="mx-auto h-auto max-w-full object-contain"
               loading="lazy"
               decoding="async"
             />
