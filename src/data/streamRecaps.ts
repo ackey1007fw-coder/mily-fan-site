@@ -45,6 +45,9 @@ export function rankingByPlace(ranking: StreamRecapRank[]): StreamRecapRank[] {
   return [...ranking].sort((left, right) => left.place - right.place);
 }
 
+const RANKING_NOTE =
+  "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
+
 /**
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の文字起こしから
  * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
@@ -84,7 +87,7 @@ export const streamRecap20260902: StreamRecap = {
     { item: "ファンマーク", target: "5人", statusThen: "2人" },
   ],
   ranking: [],
-  rankingNote: "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
+  rankingNote: RANKING_NOTE,
   timeline: [
     { timestamp: "0:00:00", label: "朝の挨拶。写真クイズ" },
     { timestamp: "0:01:00", label: "布団で寝た／かけ布団と長袖" },
@@ -142,22 +145,8 @@ export const streamRecap20260902Night: StreamRecap = {
     { item: "キラ星", target: "大事", statusThen: "無理しなくていい" },
     { item: "トマトの栄養素", target: "70人", statusThen: "今夜2人目" },
   ],
-  ranking: [
-    { place: 1, name: "高速の神さん" },
-    { place: 2, name: "キサラギさん", note: "トマトの栄養素2人目" },
-    { place: 3, name: "あっきーさん" },
-    { place: 4, name: "おおたちどりさん" },
-    { place: 5, name: "ヒロシくん" },
-    { place: 6, name: "アロハタロウさん" },
-    { place: 7, name: "ちゃんぎーさん" },
-    { place: 8, name: "お疲れさん" },
-    { place: 9, name: "あむちゃん" },
-    { place: 10, name: "ロドリゲスさん", note: "初見100キラ" },
-    { place: 11, name: "ヘッポコライダーさん" },
-    { place: 12, name: "ヒロさん" },
-    { place: 13, name: "ドゥル" },
-  ],
-  rankingNote: "配信終了時の順位です。",
+  ranking: [],
+  rankingNote: RANKING_NOTE,
   timeline: [
     { timestamp: "0:00:00", label: "挨拶。22:30から会議。SHOWROOMは3時切り替え" },
     { timestamp: "0:06:00", label: "トマト／鼻声。体調は鼻以外問題なし" },
@@ -175,7 +164,7 @@ export const streamRecap20260902Night: StreamRecap = {
   sourceLabel: "2026年9月2日 SHOWROOM夜配信 文字起こし（オーナー提供）",
   verifiedAt: "2026-09-03",
   transcriptionNote:
-    "自動文字起こしを元に整理しています。固有名詞や数字、ランキング下位の表記には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。フォロワー数や目標の数字は配信時点の記録です。",
+    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。フォロワー数や目標の数字は配信時点の記録です。",
 };
 
 /** 新しい配信メモを先頭へ。 */

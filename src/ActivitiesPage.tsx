@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
@@ -12,7 +12,7 @@ import {
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
 import { radioEpisode20260830 } from "./data/radioEpisodes";
-import { rankingByPlace, streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
+import { streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
 import {
@@ -487,12 +487,12 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        新しい回を上に置いています。朝の雑談も、夜の三次の作戦も、同じカードの形で残します。
+        新しい回を上に置いています。開くと見どころと目標、閉じると日付と一言だけ残します。
       </p>
-      <ul className="mt-6 space-y-6">
-        {streamRecaps.map((recap) => (
+      <ul className="mt-6 space-y-4">
+        {streamRecaps.map((recap, index) => (
           <li key={recap.id}>
-            <StreamRecapArticle recap={recap} />
+            <StreamRecapArticle recap={recap} defaultOpen={index === 0} />
           </li>
         ))}
       </ul>
@@ -503,21 +503,38 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
   );
 }
 
-function StreamRecapArticle({ recap }: { recap: StreamRecapData }) {
+function StreamRecapArticle({
+  recap,
+  defaultOpen,
+}: {
+  recap: StreamRecapData;
+  defaultOpen: boolean;
+}) {
   const rankingId = `${recap.id}-ranking`;
-  const ranking = rankingByPlace(recap.ranking);
-  const topThree = ranking.filter((entry) => entry.place <= 3);
-  const rest = ranking.filter((entry) => entry.place > 3);
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <article className="rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-6">
-      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-sage-deep">
-        <span>{recap.dateLabel}</span>
-        <span className="rounded-full bg-sage-soft px-3 py-1">{recap.platformLabel}</span>
-        <span className="rounded-full bg-sage-soft px-3 py-1">{recap.broadcastLabel}</span>
-      </div>
-      <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
-      <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
+    <details
+      className="group rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card open:shadow-card sm:p-6"
+      open={open}
+      onToggle={(event) => {
+        const next = event.currentTarget.open;
+        if (next !== open) setOpen(next);
+      }}
+    >
+      <summary className="cursor-pointer list-none focus:outline-none focus-visible:ring-2 focus-visible:ring-sage [&::-webkit-details-marker]:hidden">
+        <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-sage-deep">
+          <span>{recap.dateLabel}</span>
+          <span className="rounded-full bg-sage-soft px-3 py-1">{recap.platformLabel}</span>
+          <span className="rounded-full bg-sage-soft px-3 py-1">{recap.broadcastLabel}</span>
+          <span className="ml-auto text-[11px] font-semibold text-sage-deep">
+            <span className="group-open:hidden">開く</span>
+            <span className="hidden group-open:inline">閉じる</span>
+          </span>
+        </div>
+        <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
+        <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
+      </summary>
 
       <h4 className="mt-6 text-sm font-bold text-ink">この回の見どころ</h4>
       <ul className="mt-3 space-y-3">
@@ -563,14 +580,7 @@ function StreamRecapArticle({ recap }: { recap: StreamRecapData }) {
         <h4 id={rankingId} className="text-sm font-bold text-ink">
           ランキング
         </h4>
-        {recap.ranking.length > 0 ? (
-          <>
-            <p className="mt-1 text-xs leading-5 text-ink-muted">{recap.rankingNote}</p>
-            <StreamRankingList topThree={topThree} rest={rest} />
-          </>
-        ) : (
-          <p className="mt-2 text-sm leading-6 text-ink-muted">{recap.rankingNote}</p>
-        )}
+        <p className="mt-2 text-sm leading-6 text-ink-muted">{recap.rankingNote}</p>
       </section>
 
       <details className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
@@ -592,60 +602,7 @@ function StreamRecapArticle({ recap }: { recap: StreamRecapData }) {
           出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
         </p>
       </details>
-    </article>
-  );
-}
-
-function StreamRankingList({
-  topThree,
-  rest,
-}: {
-  topThree: StreamRecapData["ranking"];
-  rest: StreamRecapData["ranking"];
-}) {
-  return (
-    <div className="mt-3">
-      <ol className="grid grid-cols-3 gap-2">
-        {topThree.map((entry) => (
-          <li
-            key={`${entry.place}-${entry.name}-${entry.note ?? ""}`}
-            className={`rounded-2xl border border-sage/15 px-2 py-3 text-center ${
-              entry.place === 1
-                ? "bg-apricot-soft/60 sm:order-2"
-                : entry.place === 2
-                  ? "bg-sage-soft/40 sm:order-1"
-                  : "bg-sage-soft/40 sm:order-3"
-            }`}
-          >
-            <p className="text-[11px] font-semibold tabular-nums text-sage-deep">
-              {entry.place}位
-            </p>
-            <p className="mt-1 break-words text-sm font-bold leading-5 text-ink">{entry.name}</p>
-            {entry.note ? (
-              <p className="mt-1 break-words text-[11px] leading-4 text-ink-muted">{entry.note}</p>
-            ) : null}
-          </li>
-        ))}
-      </ol>
-      {rest.length > 0 ? (
-        <ol className="mt-3 grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2">
-          {rest.map((entry) => (
-            <li
-              key={`${entry.place}-${entry.name}-${entry.note ?? ""}`}
-              className="flex items-baseline gap-2 text-sm leading-6 text-ink"
-            >
-              <span className="w-7 shrink-0 tabular-nums text-sage-deep">{entry.place}</span>
-              <span>
-                {entry.name}
-                {entry.note ? (
-                  <span className="text-ink-muted">（{entry.note}）</span>
-                ) : null}
-              </span>
-            </li>
-          ))}
-        </ol>
-      ) : null}
-    </div>
+    </details>
   );
 }
 
