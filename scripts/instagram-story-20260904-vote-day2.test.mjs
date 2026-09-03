@@ -38,9 +38,9 @@ const galleryDirectory = path.join(root, "public/media/gallery");
 const instagramProfile = "https://www.instagram.com/mily_chan36";
 
 const NEWS_ID = "2026-09-04-third-round-vote-day2-story";
-const MEDIA_ID = "mily-b52-01-third-round-vote-day2-story";
-const PUBLIC_VIDEO = "mily-b52-01-third-round-vote-day2-story.mp4";
-const PUBLIC_POSTER = "mily-b52-01-third-round-vote-day2-story-poster.jpg";
+const MEDIA_ID = "mily-b53-01-third-round-vote-day2-story";
+const PUBLIC_VIDEO = "mily-b53-01-third-round-vote-day2-story.mp4";
+const PUBLIC_POSTER = "mily-b53-01-third-round-vote-day2-story-poster.jpg";
 const PUBLIC_BYTES = 3_459_344;
 const PUBLIC_SHA256 =
   "e6666874750b57d43c1573964340773c78fc130c604a972107c815d3a11da49e";
@@ -104,7 +104,7 @@ async function changedText() {
   for (const file of files) {
     let text = await readFile(path.join(root, file), "utf8");
     if (file === "docs/MEDIA.md") {
-      const start = text.indexOf("## 素材台帳（batch b52");
+      const start = text.indexOf("## 素材台帳（batch b53");
       assert.notEqual(start, -1);
       const end = text.indexOf("\n## ", start + 4);
       text = text.slice(start, end === -1 ? undefined : end);
@@ -224,7 +224,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
 describe("2026-09-04 Instagram Story 投票2日目 — published media", () => {
   it("publishes exactly one shared MP4 and one real-frame poster", async () => {
     const assets = (await readdir(galleryDirectory))
-      .filter((file) => file.includes("mily-b52-"))
+      .filter((file) => file.includes("mily-b53-"))
       .sort();
     assert.deepEqual(assets, [PUBLIC_POSTER, PUBLIC_VIDEO].sort());
 
@@ -283,7 +283,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
     assert.equal(media.some((entry) => ids.has(entry.id)), false);
     // 9/4 の配信枠は本人配布タイムテーブル由来の既存データ。このStoryは枠を足さない。
     assert.equal(
-      streamSchedule.some((entry) => JSON.stringify(entry).includes("b52")),
+      streamSchedule.some((entry) => JSON.stringify(entry).includes("b53")),
       false,
     );
   });
@@ -314,13 +314,13 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
   it("documents the batch ledger and the operational notes", async () => {
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    const start = ops.indexOf("### 2026-09-04 Instagram Story 投票2日目の呼びかけ（batch b52）");
-    const end = ops.indexOf("### 2026-09-02 SHOWROOM 朝ラジオ配信メモ");
+    const start = ops.indexOf("### 2026-09-04 Instagram Story 投票2日目の呼びかけ（batch b53）");
+    const end = ops.indexOf("### 2026-09-03 SHOWROOM 三次初日の朝配信メモ");
     assert.notEqual(start, -1);
     assert.notEqual(end, -1);
     const section = ops.slice(start, end);
 
-    assert.match(docs, /batch b52/);
+    assert.match(docs, /batch b53/);
     assert.match(docs, /video-only/);
     assert.match(docs, /720×1280/);
     assert.match(docs, new RegExp(PUBLIC_VIDEO.replace(/\./g, "\\.")));

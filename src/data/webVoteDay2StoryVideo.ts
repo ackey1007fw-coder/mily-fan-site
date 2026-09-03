@@ -3,7 +3,7 @@ import manifest from "./webVoteDay2StoryVideo.json" with { type: "json" };
 
 /**
  * 2026-09-04 の Instagram Story（三次審査WEB投票2日目の呼びかけ /
- * batch b52-01）。
+ * batch b53-01）。
  *
  * Latest / NEWS と Gallery がこの1オブジェクトを共有する。恒久的なStory
  * permalinkはないため、`sourceLabel`だけを持ち、`sourceUrl`は持たない。

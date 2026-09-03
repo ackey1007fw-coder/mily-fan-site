@@ -2944,12 +2944,61 @@ NEWS専用JPEGと同じくそこに入れない。
   `a00eea08f642532348bc967ad3adeb130494a6828d1306f5fe23a0198490c4a8`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 
+## 素材台帳（batch b52 / 受領日・source date 2026-09-03）
 
-## 素材台帳（batch b52 / 受領日・source date 2026-09-04）
+オーナー提供の 2026-09-03 SHOWROOM 三次初日朝配信録画から切り出した、
+かわいい実フレーム10枚。顔出し枠。コメント・視聴者アイコン・表示名・
+他出場者のランキングは写らないようカメラ付近だけを切り出している。
+LIVE STREAM の三次初日朝配信メモ専用。NEWS / Gallery / `media.ts` /
+`galleryVideos.ts` / `/stories/` には出さない。
+代表1枚（b52-01）をサムネにし、10枚を保存できるZIPも同じディレクトリに置く。
+
+### 掲載承認
+
+- approval date: `2026-09-04`
+- オーナーが当該朝配信について、かわいいところ・事故になっていないところを
+  約10枚スクショし、ベストショットをサムネにして配信コーナーへ載せ、
+  10枚を保存できるようにしてほしいと明示依頼した。
+  承認対象面は LIVE STREAM Activity の配信メモ。Gallery / NEWS へは流用しない。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b52-01 | `live/mily-b52-01-peace-smile.jpg` | ベストショット。400×228。サムネ | ✅ 2026-09-04 明示承認。LIVE STREAM。Gallery / NEWS 非掲載 |
+| b52-02 | `live/mily-b52-02-peace.jpg` | 手を振る | ✅ 同上 |
+| b52-03 | `live/mily-b52-03-peace-talk.jpg` | 顔を上げて話す | ✅ 同上 |
+| b52-04 | `live/mily-b52-04-smile.jpg` | 微笑み | ✅ 同上 |
+| b52-05 | `live/mily-b52-05-talk-smile.jpg` | 話す笑顔 | ✅ 同上 |
+| b52-06 | `live/mily-b52-06-talk.jpg` | 話す | ✅ 同上 |
+| b52-07 | `live/mily-b52-07-look.jpg` | こちらを見て話す | ✅ 同上 |
+| b52-08 | `live/mily-b52-08-soft-smile.jpg` | やわらかい笑顔 | ✅ 同上 |
+| b52-09 | `live/mily-b52-09-later.jpg` | 中盤 | ✅ 同上 |
+| b52-10 | `live/mily-b52-10-board.jpg` | ホワイトボードの話のころ | ✅ 同上 |
+| b52-zip | `live/mily-b52-gachi-morning-stills.zip` | 上記10枚の保存用ZIP | ✅ 同上 |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-03`。再生permalinkなし。`sourceUrl` は null
+- 視聴者コメント・アイコン・表示名・他出場者名・端末情報・DMは見当たらない
+- 元素材は gitignored の `media/original/` へ保存。受け渡しURL / file ID /
+  録画ファイル名は tracked text へ残さない
+- 顔補正・AI生成・生成塗り足しなし。収録 640×360 からカメラ付近を切り出しただけで拡大していない
+- 録音音声・画面録画・全文文字起こしは公開しない
+
+### 公開派生
+
+- 各JPEG: 400×228 / EXIF・IPTC・XMP・ICCなし
+- b52-01 sha256 `4d5e1e779c243d11fca7dd72e7c0647bb098260ab3340a14dfe2269562e229f4`
+- LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
+
+
+## 素材台帳（batch b53 / 受領日・source date 2026-09-04）
 
 オーナーが直接提供した本人Instagram Story動画1本。くま耳とキラキラの
 フェイスフィルターで、リンクスタンプ「2日目ポチッとな〜」とともに投票を
 呼びかけている縦型動画。owner-provided。SNSから再取得していない。
+batch b52 は 2026-09-03 朝配信の LIVE STREAM 用静止画で先に使われているため、
+この動画は b53 として採番した。
 
 HOME Latest / `/news/` と Gallery が、公開MP4・poster・manifest objectを共有する。
 MISS CIRCLE Activity の関連NEWS・関連メディアにも出す。
@@ -2960,23 +3009,23 @@ PatonVoteGuide のランキング系列には追加しない。
 ### 掲載承認
 
 - approval date: `2026-09-04`
-- オーナー本人が本タスクで添付したb52-01について、
+- オーナー本人が本タスクで添付したb53-01について、
   `https://mily-fan-site.vercel.app` への掲載と、ギャラリーへの追加を明示依頼した。
 - 承認対象面は HOME Latest / `/news/`、Gallery の動画アーカイブ、
   MISS CIRCLE Activity の関連メディア。`/stories/` への複製は含まない。
-- b52-01 poster は承認済みb52-01動画の実フレームで、同動画のposter用途だけに使用する。
+- b53-01 poster は承認済みb53-01動画の実フレームで、同動画のposter用途だけに使用する。
 
 | ID | 公開ファイル | 内容 | 掲載・承認 |
 | --- | --- | --- | --- |
-| b52-01 | `gallery/mily-b52-01-third-round-vote-day2-story.mp4` | 白黒のくま耳とキラキラのフェイスフィルター、黒い水玉のトップスで手を振り、ピースをする縦型動画。画面に「（毎日連続投票者の特典ちゃんもあるよっ🩵ボソッ）」とリンクスタンプ「2日目ポチッとな〜🗳️❣️❣️」。720×1280 / 8.967秒 / 30fps / 269フレーム / video-only | ✅ 2026-09-04 明示承認。Latest / NEWS + Gallery + MISS CIRCLE Activity |
-| b52-01 poster | `gallery/mily-b52-01-third-round-vote-day2-story-poster.jpg` | 公開MP4の8.5秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+| b53-01 | `gallery/mily-b53-01-third-round-vote-day2-story.mp4` | 白黒のくま耳とキラキラのフェイスフィルター、黒い水玉のトップスで手を振り、ピースをする縦型動画。画面に「（毎日連続投票者の特典ちゃんもあるよっ🩵ボソッ）」とリンクスタンプ「2日目ポチッとな〜🗳️❣️❣️」。720×1280 / 8.967秒 / 30fps / 269フレーム / video-only | ✅ 2026-09-04 明示承認。Latest / NEWS + Gallery + MISS CIRCLE Activity |
+| b53-01 poster | `gallery/mily-b53-01-third-round-vote-day2-story-poster.jpg` | 公開MP4の8.5秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
 
 ### 元素材と安全確認
 
 - provenance: `owner-provided`。SNSから再取得していない
 - source date: `2026-09-04`（Asia/Tokyo）。Instagram Storyの恒久permalinkはなく、
   `sourceUrl` は持たない。推測permalinkも作らない
-- 受領バイトを変えず `media/original/mily-b52-01-third-round-vote-day2-story.mp4`
+- 受領バイトを変えず `media/original/mily-b53-01-third-round-vote-day2-story.mp4`
   （gitignore 済み・無改変・コミットしない）へ保存した。元の受け渡し名・URL・file IDは
   tracked / public files へ残さない
 - 元動画: 11,886,399 bytes / H.264 High / level 3.1 / 720×1280 / 30fps /
@@ -3004,12 +3053,12 @@ PatonVoteGuide のランキング系列には追加しない。
 エンコードコマンド（再現用）:
 
 ```
-ffmpeg -i media/original/mily-b52-01-third-round-vote-day2-story.mp4 \
+ffmpeg -i media/original/mily-b53-01-third-round-vote-day2-story.mp4 \
   -map 0:v:0 -an \
   -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
   -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
   -pix_fmt yuv420p -fps_mode passthrough -movflags +faststart \
-  public/media/gallery/mily-b52-01-third-round-vote-day2-story.mp4
+  public/media/gallery/mily-b53-01-third-round-vote-day2-story.mp4
 ```
 
 ### poster / 共有範囲
@@ -3025,7 +3074,7 @@ ffmpeg -i media/original/mily-b52-01-third-round-vote-day2-story.mp4 \
 poster生成コマンド（再現用）:
 
 ```
-ffmpeg -ss 8.5 -i public/media/gallery/mily-b52-01-third-round-vote-day2-story.mp4 \
+ffmpeg -ss 8.5 -i public/media/gallery/mily-b53-01-third-round-vote-day2-story.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
-  public/media/gallery/mily-b52-01-third-round-vote-day2-story-poster.jpg
+  public/media/gallery/mily-b53-01-third-round-vote-day2-story-poster.jpg
 ```

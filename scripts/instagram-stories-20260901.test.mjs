@@ -217,7 +217,7 @@ describe("2026-09-01 Instagram Story — Latest / NEWS", () => {
   });
 
   it("shares one manifest object per published Story with Gallery and Portal Feed", () => {
-    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b52-01-third-round-vote-day2-story");
+    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b53-01-third-round-vote-day2-story");
     assert.equal(visibleGalleryVideos()[1], oyasumilyStoryVideo);
     assert.equal(visibleGalleryVideos()[2], patonSecondStoryVideo);
     assert.equal(visibleGalleryVideos()[3], patonVoteFinalDayStoryVideo);

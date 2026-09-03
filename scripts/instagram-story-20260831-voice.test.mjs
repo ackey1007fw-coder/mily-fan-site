@@ -181,7 +181,7 @@ describe("2026-08-31 Instagram Story voice vote call — Latest / NEWS", () => {
 
   it("shares one manifest object with Gallery and Portal Feed", () => {
     const entry = newsItem(NEWS_ID);
-    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b52-01-third-round-vote-day2-story");
+    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b53-01-third-round-vote-day2-story");
     assert.equal(visibleGalleryVideos()[1]?.id, "mily-b47-01-oyasumily-story");
     assert.equal(visibleGalleryVideos()[2]?.id, "mily-b47-02-paton-second-story");
     assert.equal(visibleGalleryVideos()[3]?.id, "mily-b46-01-paton-vote-final-day-story");

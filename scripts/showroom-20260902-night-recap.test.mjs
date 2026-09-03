@@ -29,8 +29,11 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(recap.sourceLabel, /夜配信/);
     assert.match(recap.summary, /三次前日/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
-    assert.equal(streamRecaps[0], recap);
-    assert.equal(streamRecaps[1], streamRecap20260902);
+    assert.ok(streamRecaps.includes(recap));
+    assert.ok(
+      streamRecaps.indexOf(streamRecap20260902Night) <
+        streamRecaps.indexOf(streamRecap20260902),
+    );
   });
 
   it("keeps a short recap and withholds ranking names", () => {

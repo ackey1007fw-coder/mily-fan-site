@@ -195,7 +195,7 @@ describe("2026-04-23 TikTok video — shared Latest / Gallery asset", () => {
       .map((entry) => entry.id);
 
     assert.deepEqual(augustIds, [
-      "mily-b52-01-third-round-vote-day2-story",
+      "mily-b53-01-third-round-vote-day2-story",
       "mily-b47-01-oyasumily-story",
       "mily-b47-02-paton-second-story",
       "mily-b46-01-paton-vote-final-day-story",
