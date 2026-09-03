@@ -28,6 +28,23 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
 
 
 
+### 2026-09-02 SHOWROOM 朝ラジオ配信メモ
+
+- オーナー提供の朝配信文字起こしを照合し、
+  `src/data/streamRecaps.ts` に配信回の要約を保存する。
+- LIVE STREAM Activityへ、配信全体の要約、みりぃの見どころ7件、
+  9月目標の当時の現状、読み上げたランキング、主なタイムスタンプを掲載する。
+- 出典は非リンクの
+  `2026年9月2日 SHOWROOM朝配信 文字起こし（オーナー提供）` labelとし、
+  Driveのフォルダ・ファイルIDはtracked textへ保存しない。
+- 録音・画面録画・全文文字起こしは公開しない。視聴者のアイコン・コメント画面は出さない。
+- 配信中に案内した同日14:40枠と夜枠は投稿時点の案内として本文に残し、
+  streamSchedule / events には転記しない。
+- 9月のラジオ出演や友達の予定は未確定・他者情報のためサイト予定へ足さない。
+- フォロワー数・アバ権・ファンマークの数字は配信時点の記録。profile へ固定しない。
+- NEWS / Gallery / media.ts / galleryVideos / `/stories/` / highlights / events /
+  streamSchedule / contest.ts / profile は変更しない。
+
 ### 2026-09-02 ミスサー三次審査 NEWS と Calendar
 
 - 既存 NEWS id `2026-09-02-miss-circle-third-round` の本文は、審査期間と配信予定の確認先が伝わる短い2段落にする。新しいNEWSは作らない。
