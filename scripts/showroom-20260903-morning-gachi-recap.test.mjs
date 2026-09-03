@@ -147,6 +147,11 @@ describe("2026-09-03 SHOWROOM三次初日朝配信メモ", () => {
     assert.match(page, /この回のスクショ/);
     assert.match(page, /download=\{still\.downloadName/);
     assert.match(page, /recap\.galleryZip\.label/);
+    assert.match(page, /max-w-full object-contain/);
+    assert.doesNotMatch(
+      page,
+      /className="mx-auto h-auto w-full max-w-\[640px\] object-contain"/,
+    );
     assert.equal(recap.galleryZip?.label, "10枚まとめて保存");
     assert.equal(
       recap.galleryZip?.filename,

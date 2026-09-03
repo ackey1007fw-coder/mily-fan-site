@@ -71,9 +71,9 @@ const gachiMorningStills: StreamRecapImage[] = [
     src: "/media/live/mily-b52-01-peace-smile.jpg",
     width: GACHI_STILL_W,
     height: GACHI_STILL_H,
-    alt: "三次初日の朝配信で、ベージュのトップスのみりぃがピースをして、こちらを見て微笑んでいる。画面左上にSHOWROOMの文字",
-    caption: "ベストショット。ピースと笑顔",
-    downloadName: "みりぃ_三次初日朝_01_ベスト_ピース笑顔.jpg",
+    alt: "三次初日の朝配信で、ベージュのトップスのみりぃが右手でピースをしている",
+    caption: "ベストショット。ピース",
+    downloadName: "みりぃ_三次初日朝_01_ベスト_ピース.jpg",
   },
   {
     src: "/media/live/mily-b52-02-peace.jpg",
@@ -164,7 +164,7 @@ export const streamRecap20260903: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "MISS CIRCLE CONTEST 三次審査1日目の最初の朝配信。すっぴんで起きて、キラキラと12時からのWEB投票をお願いした回です。ファンネーム「トマトの栄養素」の由来や、昼枠はメイクして会うことも話しました。",
-  image: gachiMorningStills[0],
+  image: gachiMorningStills[0], // 400px。カードでは元の幅のまま出し、640pxへ拡大しない
   gallery: gachiMorningStills,
   galleryZip: {
     src: "/media/live/mily-b52-gachi-morning-stills.zip",
