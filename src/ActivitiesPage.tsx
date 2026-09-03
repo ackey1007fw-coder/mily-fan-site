@@ -482,12 +482,11 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 
 function StreamRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "live-stream") return null;
-  const footnote = streamRecaps[0]?.transcriptionNote;
 
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        新しい回を上に置いています。開くと見どころと目標、閉じると日付と一言だけ残します。
+        新しい回を上に置いています。開くと見どころと目標が出ます。閉じても日付と一言は残り、画像がある回は静止画も残します。
       </p>
       <ul className="mt-6 space-y-4">
         {streamRecaps.map((recap, index) => (
@@ -496,9 +495,6 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
           </li>
         ))}
       </ul>
-      {footnote ? (
-        <p className="mt-6 text-xs leading-6 text-ink-muted">{footnote}</p>
-      ) : null}
     </SectionShell>
   );
 }
@@ -534,6 +530,24 @@ function StreamRecapArticle({
         </div>
         <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
         <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
+        {recap.image ? (
+          <figure className="mx-auto mt-4 max-w-[640px] overflow-hidden rounded-2xl bg-sage-soft/40">
+            <img
+              src={recap.image.src}
+              width={recap.image.width}
+              height={recap.image.height}
+              alt={recap.image.alt}
+              className="mx-auto h-auto w-full max-w-[640px] object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+            {recap.image.caption ? (
+              <figcaption className="px-3 py-2 text-xs leading-5 text-ink-muted">
+                {recap.image.caption}
+              </figcaption>
+            ) : null}
+          </figure>
+        ) : null}
       </summary>
 
       <h4 className="mt-6 text-sm font-bold text-ink">この回の見どころ</h4>
@@ -602,6 +616,7 @@ function StreamRecapArticle({
           出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
         </p>
       </details>
+      <p className="mt-4 text-xs leading-5 text-ink-muted">{recap.transcriptionNote}</p>
     </details>
   );
 }
