@@ -48,6 +48,7 @@ pnpm build
 
 - 日常更新（news / events / 写真 / SNS / FM）: `docs/CONTENT-OPS.md`
 - 写真・動画の受け入れ: `docs/MEDIA.md`
+- 配信メモ（LIVE STREAM）の統一ルール: `docs/LIVE-STREAM-RECAP.md`
 - `main` へ直接 push しない
 - 作業ブランチから PR
 - squash merge 前提

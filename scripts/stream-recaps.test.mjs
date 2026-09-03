@@ -1,0 +1,272 @@
+// LIVE STREAM の配信メモを、どのエージェントが書いても同じ形になるよう検査する。
+// ルール本文は docs/LIVE-STREAM-RECAP.md。数値を変えるときは両方を同じPRで直す。
+import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { describe, it } from "node:test";
+import { fileURLToPath } from "node:url";
+import {
+  RANKING_NOTE,
+  RECAP_FIGURES_NOTE,
+  RECAP_WITHHOLD_NOTE,
+  buildTranscriptionNote,
+  streamRecaps,
+} from "../src/data/streamRecaps.ts";
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const RULES_DOC = "docs/LIVE-STREAM-RECAP.md";
+
+const LIMITS = {
+  theme: [5, 16],
+  summary: [80, 140],
+  highlights: [3, 8],
+  highlightTitle: [5, 20],
+  highlightBody: [40, 100],
+  highlightQuote: [1, 40],
+  goals: [3, 6],
+  goalItem: [1, 8],
+  goalTarget: [1, 10],
+  goalStatusThen: [1, 12],
+  timeline: [8, 16],
+  timelineLabel: [1, 32],
+  nextNote: [40, 120],
+  gallery: [4, 12],
+};
+
+const THEME_PREFIXES = ["朝", "昼", "夕", "夜", "深夜"];
+const PLATFORMS = new Set(["SHOWROOM", "MixChannel"]);
+const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
+
+const size = (value) => Array.from(value).length;
+
+function inRange(value, [min, max], label) {
+  const length = size(value);
+  assert.ok(
+    length >= min && length <= max,
+    `${label}: ${length}字は範囲外（${min}〜${max}）: ${value}`,
+  );
+}
+
+function seconds(timestamp) {
+  assert.match(timestamp, /^\d:[0-5]\d:[0-5]\d$/, `timestamp形式: ${timestamp}`);
+  const [hour, minute, second] = timestamp.split(":").map(Number);
+  return hour * 3600 + minute * 60 + second;
+}
+
+function startMinutes(broadcastLabel) {
+  const match = broadcastLabel.match(/^(\d{1,2}):([0-5]\d)頃〜 約\d+分$/);
+  assert.ok(match, `broadcastLabel形式: ${broadcastLabel}`);
+  return Number(match[1]) * 60 + Number(match[2]);
+}
+
+describe("配信メモの統一ルール", () => {
+  it("keeps the archive newest-first, with the later slot first on the same day", () => {
+    assert.ok(streamRecaps.length > 0);
+    const ids = streamRecaps.map((recap) => recap.id);
+    assert.equal(new Set(ids).size, ids.length);
+
+    for (let index = 1; index < streamRecaps.length; index += 1) {
+      const previous = streamRecaps[index - 1];
+      const current = streamRecaps[index];
+      assert.ok(
+        previous.date >= current.date,
+        `新しい回を先頭へ: ${previous.id} が ${current.id} より後ろ`,
+      );
+      if (previous.date === current.date) {
+        assert.ok(
+          startMinutes(previous.broadcastLabel) > startMinutes(current.broadcastLabel),
+          `同じ日は遅い枠を先に: ${previous.id} / ${current.id}`,
+        );
+      }
+    }
+  });
+
+  for (const recap of streamRecaps) {
+    describe(recap.id, () => {
+      it("uses the agreed identifiers, labels, and lengths", () => {
+        assert.match(recap.id, /^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/);
+        assert.match(recap.date, /^\d{4}-\d{2}-\d{2}$/);
+        assert.ok(recap.id.startsWith(`${recap.date}-`));
+
+        const [year, month, day] = recap.date.split("-");
+        const weekday = WEEKDAYS[new Date(`${recap.date}T12:00:00Z`).getUTCDay()];
+        assert.equal(recap.dateLabel, `${year}.${month}.${day}（${weekday}）`);
+
+        assert.ok(
+          THEME_PREFIXES.some((prefix) => recap.theme.startsWith(prefix)),
+          `themeは時間帯で始める: ${recap.theme}`,
+        );
+        assert.doesNotMatch(recap.theme, /SHOWROOM|MixChannel/);
+        inRange(recap.theme, LIMITS.theme, `${recap.id} theme`);
+
+        assert.ok(PLATFORMS.has(recap.platformLabel));
+        startMinutes(recap.broadcastLabel);
+        inRange(recap.summary, LIMITS.summary, `${recap.id} summary`);
+        inRange(recap.nextNote, LIMITS.nextNote, `${recap.id} nextNote`);
+
+        assert.match(recap.sourceLabel, /^\d{4}年\d{1,2}月\d{1,2}日 .+（.*オーナー提供）$/);
+        assert.doesNotMatch(recap.sourceLabel, /https?:\/\//);
+        assert.match(recap.verifiedAt, /^\d{4}-\d{2}-\d{2}$/);
+        assert.ok(recap.verifiedAt >= recap.date, "verifiedAt は配信日以降");
+      });
+
+      it("keeps highlights readable and in order", () => {
+        const { highlights } = recap;
+        assert.ok(
+          highlights.length >= LIMITS.highlights[0] &&
+            highlights.length <= LIMITS.highlights[1],
+          `見どころ ${highlights.length}件は範囲外`,
+        );
+
+        const stamps = highlights.map(({ timestamp }) => seconds(timestamp));
+        assert.deepEqual(stamps, [...stamps].sort((left, right) => left - right));
+
+        for (const highlight of highlights) {
+          inRange(highlight.title, LIMITS.highlightTitle, `${recap.id} title`);
+          inRange(highlight.body, LIMITS.highlightBody, `${recap.id} body`);
+          if (highlight.quote !== undefined) {
+            inRange(highlight.quote, LIMITS.highlightQuote, `${recap.id} quote`);
+            assert.doesNotMatch(highlight.quote, /^[「『]|[」』]$/);
+          }
+        }
+      });
+
+      it("keeps goals labelled without repeating the UI wording", () => {
+        const { goals } = recap;
+        assert.ok(
+          goals.length >= LIMITS.goals[0] && goals.length <= LIMITS.goals[1],
+          `目標 ${goals.length}件は範囲外`,
+        );
+        assert.equal(new Set(goals.map(({ item }) => item)).size, goals.length);
+
+        for (const goal of goals) {
+          inRange(goal.item, LIMITS.goalItem, `${recap.id} goal.item`);
+          inRange(goal.target, LIMITS.goalTarget, `${recap.id} goal.target`);
+          inRange(goal.statusThen, LIMITS.goalStatusThen, `${recap.id} goal.statusThen`);
+          assert.doesNotMatch(goal.statusThen, /配信時点/);
+          assert.doesNotMatch(goal.item, /アバ権/);
+        }
+      });
+
+      it("withholds ranking names and keeps the timeline as an index", () => {
+        assert.deepEqual(recap.ranking, [RANKING_NOTE]);
+
+        const { timeline } = recap;
+        assert.ok(
+          timeline.length >= LIMITS.timeline[0] && timeline.length <= LIMITS.timeline[1],
+          `タイムライン ${timeline.length}件は範囲外`,
+        );
+        assert.equal(timeline[0].timestamp, "0:00:00");
+        const stamps = timeline.map(({ timestamp }) => seconds(timestamp));
+        assert.deepEqual(stamps, [...stamps].sort((left, right) => left - right));
+        for (const item of timeline) {
+          inRange(item.label, LIMITS.timelineLabel, `${recap.id} timeline.label`);
+        }
+      });
+
+      it("builds the note from the shared sentences", () => {
+        const note = recap.transcriptionNote;
+        assert.ok(note.includes(RECAP_WITHHOLD_NOTE), "共通の非掲載範囲の文がない");
+        assert.ok(note.endsWith(RECAP_FIGURES_NOTE), "数字の注記で終わっていない");
+        assert.ok(
+          note.indexOf(RECAP_WITHHOLD_NOTE) > 0,
+          "素材の説明が非掲載範囲より前にない",
+        );
+        assert.match(note, /静止画は/);
+      });
+
+      it("publishes only complete, non-duplicated stills", () => {
+        const stills = recap.gallery ?? [];
+        if (stills.length > 0) {
+          assert.ok(
+            stills.length >= LIMITS.gallery[0] && stills.length <= LIMITS.gallery[1],
+            `スクショ ${stills.length}枚は範囲外`,
+          );
+          assert.equal(recap.image, stills[0], "代表画像は gallery[0] と同じオブジェクト");
+          assert.equal(new Set(stills.map(({ src }) => src)).size, stills.length);
+        }
+
+        for (const image of [recap.image, ...stills].filter(Boolean)) {
+          assert.match(image.src, /^\/media\/live\/mily-b\d{2}-\d{2}-[a-z0-9-]+\.(jpg|png)$/);
+          assert.equal(existsSync(path.join(root, "public", image.src.slice(1))), true);
+          assert.ok(image.width > 0 && image.height > 0);
+          assert.match(image.alt, /みりぃ/);
+          assert.doesNotMatch(image.alt, /コメント|視聴者|アイコン|出場者/);
+          assert.ok(image.caption, "caption は必須");
+          if (stills.length > 0) assert.ok(image.downloadName, "downloadName は必須");
+        }
+
+        if (recap.galleryZip) {
+          assert.ok(stills.length > 0, "ZIPだけを置かない");
+          assert.equal(existsSync(path.join(root, "public", recap.galleryZip.src.slice(1))), true);
+        }
+      });
+    });
+  }
+
+  it("shares one object per still across recaps", () => {
+    const bySrc = new Map();
+    for (const recap of streamRecaps) {
+      for (const image of [recap.image, ...(recap.gallery ?? [])].filter(Boolean)) {
+        const known = bySrc.get(image.src);
+        if (known) assert.equal(known, image, `同じ静止画は同じオブジェクトを共有する: ${image.src}`);
+        else bySrc.set(image.src, image);
+      }
+    }
+  });
+
+  it("keeps the note builder deterministic", () => {
+    assert.equal(
+      buildTranscriptionNote({ material: "素材。", stills: "静止画。", extra: "補足。" }),
+      `素材。${RECAP_WITHHOLD_NOTE}静止画。補足。${RECAP_FIGURES_NOTE}`,
+    );
+    assert.equal(
+      buildTranscriptionNote({ material: "素材。", stills: "静止画。" }),
+      `素材。${RECAP_WITHHOLD_NOTE}静止画。${RECAP_FIGURES_NOTE}`,
+    );
+  });
+
+  it("keeps private sources and misleading wording out of the data file", async () => {
+    const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
+    assert.doesNotMatch(data, /公式|公認|本人運営/);
+    assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com/);
+    assert.doesNotMatch(data, /\.mp3|\.aac|stt_raw|ScreenRecording/);
+    assert.doesNotMatch(data, /https?:\/\//);
+  });
+
+  it("renders every card with the same sections in the same order", async () => {
+    const source = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
+    const page = source.slice(source.indexOf("function StreamRecapArticle"));
+    assert.ok(page.length > 0, "StreamRecapArticle がない");
+    const order = [
+      "この回の見どころ",
+      "この回のスクショ",
+      "この回の目標",
+      "読み上げたランキング",
+      "タイムスタンプと次枠",
+      "recap.transcriptionNote",
+    ];
+    const positions = order.map((needle) => {
+      const index = page.indexOf(needle);
+      assert.ok(index > 0, `${needle} が配信カードにない`);
+      return index;
+    });
+    assert.deepEqual(positions, [...positions].sort((left, right) => left - right));
+    assert.match(page, /目標 \{goal\.target\}/);
+    assert.match(page, /配信時点 \{goal\.statusThen\}/);
+    assert.match(page, /aspect-\[16\/9\]/);
+  });
+
+  it("keeps the written rules discoverable from AGENTS.md", async () => {
+    const [rules, agents] = await Promise.all([
+      readFile(path.join(root, RULES_DOC), "utf8"),
+      readFile(path.join(root, "AGENTS.md"), "utf8"),
+    ]);
+    assert.ok(agents.includes(RULES_DOC), "AGENTS.md から辿れない");
+    assert.match(rules, /buildTranscriptionNote/);
+    assert.match(rules, /scripts\/stream-recaps\.test\.mjs/);
+    assert.match(rules, /統一しない語/);
+    assert.doesNotMatch(rules, /drive\.google\.com|docs\.google\.com/);
+  });
+});

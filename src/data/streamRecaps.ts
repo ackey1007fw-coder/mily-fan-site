@@ -1,3 +1,12 @@
+/**
+ * LIVE STREAM（/activities/live/）の配信メモ。
+ *
+ * 書き方・掲載可否・文字数などの統一ルールは docs/LIVE-STREAM-RECAP.md。
+ * 数値と書式は scripts/stream-recaps.test.mjs が全カードを検査する。
+ * どのエージェントが追記しても同じ形になるよう、共通文は下の定数と
+ * buildTranscriptionNote() から組み立て、カードごとに書き下ろさない。
+ */
+
 export type StreamRecapHighlight = {
   timestamp: string;
   title: string;
@@ -7,7 +16,9 @@ export type StreamRecapHighlight = {
 
 export type StreamRecapGoal = {
   item: string;
+  /** 目指す値・状態。「配信時点」の状態は statusThen へ。 */
   target: string;
+  /** 配信時点の状態。UI側が「配信時点」と表示するので語を重ねない。 */
   statusThen: string;
 };
 
@@ -35,6 +46,7 @@ export type StreamRecap = {
   id: string;
   date: string;
   dateLabel: string;
+  /** 「朝／昼／夕／夜」で始める短い回タイトル。 */
   theme: string;
   broadcastLabel: string;
   platformLabel: string;
@@ -52,8 +64,39 @@ export type StreamRecap = {
   transcriptionNote: string;
 };
 
-const RANKING_NOTE =
+/** ランキングは順位だけを事実として残し、個人名は回を問わず載せない。 */
+export const RANKING_NOTE =
   "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
+
+/** 全カード共通の非掲載範囲。回ごとに言い換えない。 */
+export const RECAP_WITHHOLD_NOTE =
+  "録音音声・画面録画・全文文字起こしは掲載していません。視聴者の表示名・コメント画面も載せていません。";
+
+/** 全カード共通の数字の扱い。 */
+export const RECAP_FIGURES_NOTE = "フォロワー数や目標の数字は配信時点の記録です。";
+
+/**
+ * 注記は「素材 → 非掲載範囲 → 静止画 → 補足 → 数字」の順で必ず組み立てる。
+ * 回ごとに違うのは material / stills / extra だけ。
+ */
+export function buildTranscriptionNote({
+  material,
+  stills,
+  extra,
+}: {
+  material: string;
+  stills: string;
+  extra?: string;
+}): string {
+  return [material, RECAP_WITHHOLD_NOTE, stills, extra, RECAP_FIGURES_NOTE]
+    .filter(Boolean)
+    .join("");
+}
+
+export const VIDEO_MATERIAL_NOTE = "オーナー提供の動画の音声をもとに整文しています。";
+export const TRANSCRIPT_MATERIAL_NOTE =
+  "オーナー提供の自動文字起こしをもとに整理しています。固有名詞や数字には聞き取り誤りの可能性があります。";
+export const SINGLE_STILL_NOTE = "静止画は録画の実フレームを1枚だけ掲載しています。";
 
 const streamRecapRadioStill: StreamRecapImage = {
   src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
@@ -151,7 +194,6 @@ const gachiMorningStills: StreamRecapImage[] = [
 
 /**
  * 2026年9月3日のSHOWROOM朝配信を、オーナー提供の動画で確認した配信メモ。
- * 録音音声・全文文字起こし・画面録画は公開しない。
  * かわいい実フレームを10枚掲載する。コメント・視聴者表示・他出場者は写らないよう切り出している。
  * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない。
  */
@@ -159,7 +201,7 @@ export const streamRecap20260903: StreamRecap = {
   id: "2026-09-03-morning-gachi-showroom",
   date: "2026-09-03",
   dateLabel: "2026.09.03（木）",
-  theme: "三次初日の朝配信",
+  theme: "朝の配信・三次初日",
   broadcastLabel: "7:30頃〜 約30分",
   platformLabel: "SHOWROOM",
   summary:
@@ -232,14 +274,16 @@ export const streamRecap20260903: StreamRecap = {
     "同日 14:40〜 はメイクして会うと案内されました。夜枠も、来やすい時間として待っていると話しています。WEB投票は12時から。",
   sourceLabel: "2026年9月3日 SHOWROOM朝配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
-  transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを10枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: VIDEO_MATERIAL_NOTE,
+    stills:
+      "静止画は録画の実フレームを10枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。",
+  }),
 };
 
 /**
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の動画で確認した配信メモ。
- * 録音音声・全文文字起こし・画面録画は公開しない。
- * 配信中の静止画は録画の実フレームを1枚だけ掲載する。朝と夜で同じ1枚を共有する。
+ * 配信中の静止画は録画の実フレームを1枚だけ掲載し、朝と夜で同じ1枚を共有する。
  * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない
  * （NEWS専用JPEGと同じ。published Gallery 項目にしない）。
  */
@@ -247,87 +291,65 @@ export const streamRecap20260902: StreamRecap = {
   id: "2026-09-02-morning-showroom",
   date: "2026-09-02",
   dateLabel: "2026.09.02（水）",
-  theme: "朝ラジオ配信",
+  theme: "朝のラジオ配信",
   broadcastLabel: "9:02頃〜 約62分",
   platformLabel: "SHOWROOM",
   summary:
-    "三次審査を翌日に控えた朝のラジオ配信。初見向けに三橋莉子（みりぃ）として自己紹介し、配信を始めた理由や「みんなの太陽になりたい」という思いを語りました。花束、通学、将来のことなど身近な話題を交えながら、三次審査に向けて無理をしすぎず、自分の本音と向き合う時間を届けた回です。",
+    "三次審査を翌日に控えた朝のラジオ配信。初見向けに自己紹介し、「みんなの太陽になりたい」という思いを語りました。花束や通学の話も交えながら、無理をしすぎず自分の本音と向き合う時間を届けた回です。",
   image: streamRecapRadioStill,
   highlights: [
     {
       timestamp: "0:06:41",
       title: "花束とドライフラワー",
-      body:
-        "7月後半にもらった花束を部屋に飾っていたものの、枯らしてしまったと話しました。花をもらうことは別格にうれしい一方、贈るならドライフラワーにしてほしいと冗談を交えました。",
+      body: "7月後半にもらった花束を部屋に飾っていたものの、枯らしてしまったと話しました。贈るならドライフラワーにしてほしい、と冗談を交えました。",
       quote: "私にお花を渡したい時は全部ドライフラワーにしてから私にください",
     },
     {
       timestamp: "0:16:57",
       title: "初見向け自己紹介と「みんなの太陽」",
-      body:
-        "MISS CIRCLE CONTESTに出場中の三橋莉子と自己紹介。みんなには「みりぃ」と呼んでもらっていると案内し、翌日から三次審査が始まると話しました。配信を通じて自信をつけ、誰かに幸せや自信を届けられる存在になりたいという思いも語りました。",
+      body: "MISS CIRCLE CONTESTに出場中の三橋莉子と自己紹介。「みりぃ」と呼んでもらっていると案内し、翌日から三次審査が始まると話しました。誰かに自信を届けられる存在になりたいとも語りました。",
       quote: "みんなの太陽になりたい",
     },
     {
       timestamp: "0:27:09",
       title: "9月の目標",
-      body:
-        "アバター権の獲得、フォロワー300人、ファンマーク5人などを目標に設定。ファンマークを付けていなくても応援してくれる人がいることを分かっているので、無理に求めたくないという気持ちも話しました。",
+      body: "アバター権の獲得、フォロワー300人、ファンマーク5人などを目標に設定。ファンマークがなくても応援してくれる人がいると分かっているので、無理に求めたくないとも話しました。",
     },
     {
       timestamp: "0:30:59",
       title: "無理をしすぎず、体調と相談",
-      body:
-        "三次審査に向けて気合を入れつつも、無理が過ぎると上手くいかなくなるので、体調と相談して調整したいと話しました。通学に約2時間かかることや、電車で動画編集・読書・英単語の勉強をすることも紹介しました。",
+      body: "三次審査へ気合を入れつつ、無理が過ぎると上手くいかなくなるので体調と相談したいと話しました。通学に約2時間かかることや、電車で動画編集・読書・英単語の勉強をすることも紹介しました。",
     },
     {
       timestamp: "0:43:38",
       title: "将来と本音を見つめ直す",
-      body:
-        "アナウンサーの勉強をしながら、将来について一度立ち止まり、本当にやりたいことや覚悟を見つめ直していると語りました。配信は自分の本心を探る時間でもあると話しました。",
+      body: "アナウンサーの勉強をしながら、将来について一度立ち止まり、本当にやりたいことや覚悟を見つめ直していると語りました。配信は自分の本心を探る時間でもあると話しました。",
     },
     {
       timestamp: "0:50:18",
       title: "未完成の作品として",
-      body:
-        "自分の人生の歩みを一緒に追いかけてほしい、まだ未完成でこれから作り上がっていく作品として見てほしいと呼びかけました。",
+      body: "自分の人生の歩みを一緒に追いかけてほしい、まだ未完成でこれから作り上がっていく作品として見てほしいと呼びかけました。",
       quote: "一つの作品として私を見てほしい",
     },
     {
       timestamp: "0:52:20",
       title: "みんなと見に行きたい景色",
-      body:
-        "三次審査では楽しめる配信にし、もっと自分を知ってもらいたいと話した上で、みんなと一緒にいい景色を見に行きたいと語りました。",
+      body: "三次審査では楽しめる配信にし、もっと自分を知ってもらいたいと話した上で、みんなと一緒にいい景色を見に行きたいと語りました。",
       quote: "みんなと一緒にいい景色を見に行きます。絶景を。みんなが涙する景色を見に行きます",
     },
     {
       timestamp: "1:00:05",
       title: "初見リスナーを歓迎",
-      body:
-        "終盤に訪れた初見リスナーを歓迎。うれしさで泣きそうと話し、次回は顔出し配信でも会いたいと案内しました。",
+      body: "終盤に訪れた初見リスナーを歓迎。うれしさで泣きそうと話し、次回は顔出し配信でも会いたいと案内しました。",
       quote: "なんか今ね、うれしくて本当に泣きそう",
     },
   ],
   goals: [
-    {
-      item: "アバター権",
-      target: "獲得",
-      statusThen: "配信時点では未獲得",
-    },
-    {
-      item: "フォロワー",
-      target: "300人",
-      statusThen: "配信時点で251人",
-    },
-    {
-      item: "ファンマーク",
-      target: "5人",
-      statusThen: "配信時点で2人",
-    },
+    { item: "アバター権", target: "獲得", statusThen: "未獲得" },
+    { item: "フォロワー", target: "300人", statusThen: "251人" },
+    { item: "ファンマーク", target: "5人", statusThen: "2人" },
   ],
-  ranking: [
-    "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
-  ],
+  ranking: [RANKING_NOTE],
   timeline: [
     { timestamp: "0:00:00", label: "朝のラジオ配信。寝具や花束の話からスタート" },
     { timestamp: "0:06:41", label: "花束を枯らしてしまった話。ドライフラワー希望" },
@@ -348,30 +370,32 @@ export const streamRecap20260902: StreamRecap = {
     "配信内では、同日 14:40〜の短め枠（お昼またぎ・投げ逃げ歓迎）と、夜枠もやるつもり、と案内されました。夜枠の時刻は未確定のままです。",
   sourceLabel: "2026年9月2日 SHOWROOM朝配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-03",
-  transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞・コメント名・一部の目標数値は聞き取りが不明瞭なため掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。配信中の静止画は録画の実フレームを1枚だけ掲載しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: VIDEO_MATERIAL_NOTE,
+    stills: SINGLE_STILL_NOTE,
+    extra: "固有名詞・コメント名・一部の目標数値は聞き取りが不明瞭なため掲載していません。",
+  }),
 };
 
 /**
  * 2026年9月2日のSHOWROOM夜配信を、オーナー提供の文字起こしから
- * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
- * 顔出しなしラジオの静止画は朝と同じ実フレーム1枚を載せる。
+ * 照合した配信メモ。顔出しなしラジオの静止画は朝と同じ実フレーム1枚を載せる。
  */
 export const streamRecap20260902Night: StreamRecap = {
   id: "2026-09-02-night-showroom",
   date: "2026-09-02",
   dateLabel: "2026.09.02（水）",
-  theme: "夜ラジオ配信",
+  theme: "夜のラジオ配信・三次前日",
   broadcastLabel: "21:13頃〜 約74分",
   platformLabel: "SHOWROOM",
   summary:
-    "三次前日の夜ラジオ。二次の無理を反省して翌朝からのタイムテーブルを発表。投票とキラ星が最優先で、ブロック1位は今は狙わない、と話しました。",
+    "三次前日の夜ラジオ。二次審査での無理を反省し、翌9月3日の朝・昼・夜のタイムテーブルを発表しました。投票とキラ星が最優先で、ブロック1位は今回のタイミングではない、と話した回です。",
   image: streamRecapRadioStill,
   highlights: [
     {
       timestamp: "0:10:00",
       title: "三次通過が絶対。投票が何より大事",
-      body: "ブロック1位は今回のタイミングではない。通過と毎日の投票、アバ権を優先する回です。",
+      body: "ブロック1位は今回のタイミングではない。通過と毎日の投票、アバター権を優先すると話した回です。",
       quote: "三次は通過しなくてはいけない。絶対に",
     },
     {
@@ -382,12 +406,12 @@ export const streamRecap20260902Night: StreamRecap = {
     {
       timestamp: "0:59:00",
       title: "日本ザル・海くん",
-      body: "熊本の動物園のおじいちゃんザル。他の部屋では聞けない話、と紹介しました。",
+      body: "熊本の動物園にいるおじいちゃんザルの話。他の部屋では聞けない話、と紹介しました。",
     },
   ],
   goals: [
     { item: "三次通過", target: "絶対", statusThen: "最優先" },
-    { item: "アバ権", target: "獲得", statusThen: "未獲得" },
+    { item: "アバター権", target: "獲得", statusThen: "未獲得" },
     { item: "投票", target: "毎日", statusThen: "来れなくても投票を" },
     { item: "キラ星", target: "大事", statusThen: "無理しなくていい" },
     { item: "トマトの栄養素", target: "70人", statusThen: "今夜2人目" },
@@ -409,11 +433,13 @@ export const streamRecap20260902Night: StreamRecap = {
     "翌朝 7:30〜8:00 が三次最初の枠。14:40〜15:20、21:00〜21:50 も案内されました。",
   sourceLabel: "2026年9月2日 SHOWROOM夜配信 文字起こし（オーナー提供）",
   verifiedAt: "2026-09-03",
-  transcriptionNote:
-    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。配信中の静止画は録画の実フレームを1枚だけ掲載しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: TRANSCRIPT_MATERIAL_NOTE,
+    stills: SINGLE_STILL_NOTE,
+  }),
 };
 
-/** 新しい配信メモを先頭へ。 */
+/** 新しい配信メモを先頭へ。同じ日は開始時刻の遅い枠を先に置く。 */
 export const streamRecaps: StreamRecap[] = [
   streamRecap20260903,
   streamRecap20260902Night,

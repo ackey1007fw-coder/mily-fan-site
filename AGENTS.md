@@ -152,8 +152,11 @@ pnpm dev
 - `src/data/links.ts` … その他リンク
 - `src/data/highlights.ts` … 年をまたげるハイライト
 - `src/data/site.ts` … サイト名・説明・予定 origin
+- `src/data/streamRecaps.ts` … LIVE STREAM の配信メモ（書き方は `docs/LIVE-STREAM-RECAP.md`）
 
 日常更新の手順・テンプレートは `docs/CONTENT-OPS.md`。写真の受け入れフローは `docs/MEDIA.md`。
+配信メモ（`/activities/live/` の Stream Archive）は `docs/LIVE-STREAM-RECAP.md` の統一ルールに従う。
+担当したエージェントによって形が変わらないよう、構造・書式・長さは `scripts/stream-recaps.test.mjs` が検査する。
 
 未確認の項目は空のままにする。空より間違った値の方が悪い。
 

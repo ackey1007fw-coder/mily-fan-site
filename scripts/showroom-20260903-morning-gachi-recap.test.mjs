@@ -55,7 +55,7 @@ describe("2026-09-03 SHOWROOM三次初日朝配信メモ", () => {
 
     assert.equal(recap.date, "2026-09-03");
     assert.equal(recap.dateLabel, "2026.09.03（木）");
-    assert.equal(recap.theme, "三次初日の朝配信");
+    assert.equal(recap.theme, "朝の配信・三次初日");
     assert.equal(recap.broadcastLabel, "7:30頃〜 約30分");
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-04");
