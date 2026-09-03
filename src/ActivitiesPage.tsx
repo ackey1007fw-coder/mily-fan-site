@@ -486,7 +486,7 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        新しい回を上に置いています。開くと見どころと目標、閉じると日付と一言だけ残します。
+        新しい回を上に置いています。開くと見どころと目標が出ます。閉じても日付と一言は残り、画像がある回は静止画も残します。
       </p>
       <ul className="mt-6 space-y-4">
         {streamRecaps.map((recap, index) => (
@@ -531,13 +531,13 @@ function StreamRecapArticle({
         <h3 className="mt-3 text-xl font-bold text-ink sm:text-2xl">{recap.theme}</h3>
         <p className="mt-3 text-sm leading-7 text-ink-muted">{recap.summary}</p>
         {recap.image ? (
-          <figure className="mt-4 overflow-hidden rounded-2xl bg-sage-soft/40">
+          <figure className="mx-auto mt-4 max-w-[640px] overflow-hidden rounded-2xl bg-sage-soft/40">
             <img
               src={recap.image.src}
               width={recap.image.width}
               height={recap.image.height}
               alt={recap.image.alt}
-              className="mx-auto h-auto w-full object-contain"
+              className="mx-auto h-auto w-full max-w-[640px] object-contain"
               loading="lazy"
               decoding="async"
             />

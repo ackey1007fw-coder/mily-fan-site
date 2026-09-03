@@ -61,6 +61,8 @@ const RANKING_NOTE =
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の文字起こしから
  * 照合した配信メモ。録音音声・全文文字起こし・画面録画は公開しない。
  * 配信中の静止画は録画の実フレームを1枚だけ掲載する。
+ * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない
+ * （NEWS専用JPEGと同じ。published Gallery 項目にしない）。
  */
 export const streamRecap20260902: StreamRecap = {
   id: "2026-09-02-morning-showroom",

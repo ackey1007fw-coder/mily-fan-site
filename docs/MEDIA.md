@@ -2914,6 +2914,8 @@ Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` には出さない。
 視聴者のコメント・アイコン・表示名は写っていない。
 LIVE STREAM の朝配信メモ専用。NEWS / Gallery / `media.ts` /
 `galleryVideos.ts` / `/stories/` には出さない。
+`media.ts` は Gallery の掲載ゲートであり、配信カード専用の1枚は
+NEWS専用JPEGと同じくそこに入れない。
 
 ### 掲載承認
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -15,6 +16,8 @@ import { streamSchedule } from "../src/data/streamSchedule.ts";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const STILL_SRC = "/media/live/mily-b51-01-morning-radio-showroom.jpg";
 const STILL_FILE = path.join(root, "public", STILL_SRC.slice(1));
+const STILL_SHA256 =
+  "a00eea08f642532348bc967ad3adeb130494a6828d1306f5fe23a0198490c4a8";
 
 function jpegSize(buffer) {
   if (buffer[0] !== 0xff || buffer[1] !== 0xd8) {
@@ -108,12 +111,15 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.equal(size.height, 360);
     assert.equal(jpeg.subarray(0, 4).includes(0xff), true);
     assert.equal(jpeg.includes(Buffer.from("Exif")), false);
+    assert.equal(createHash("sha256").update(jpeg).digest("hex"), STILL_SHA256);
 
     assert.match(page, /recap\.image/);
     assert.match(page, /object-contain/);
+    assert.match(page, /max-w-\[640px\]/);
     assert.match(page, /recap\.image\.caption/);
     assert.match(page, /<figcaption/);
     assert.match(page, /recap\.transcriptionNote/);
+    assert.match(page, /画像がある回は静止画も残します/);
     assert.doesNotMatch(page, /streamRecaps\[0\]\?\.transcriptionNote/);
   });
 
