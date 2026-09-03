@@ -84,6 +84,7 @@ import {
   firstSeptemberTomatoBoardImage,
 } from "./firstSeptemberShowroomImages.ts";
 import { thirdRoundTimetableImage } from "./thirdRoundTimetableImage.ts";
+import { thirdRoundStoryAdditionalMedia } from "./thirdRoundStoryMedia.ts";
 import {
   PATON_VOTE_HOW_TO_CTA_LABEL,
   PATON_VOTE_HOW_TO_CTA_URL,
@@ -229,6 +230,7 @@ WEB投票は9月3日12:00〜9月13日23:59、SHOWROOMの無料ギフト審査・
       },
     ],
     media: thirdRoundTimetableImage,
+    additionalMedia: [...thirdRoundStoryAdditionalMedia],
   },
   {
     id: "2026-09-02-oyasumily-sr-story",

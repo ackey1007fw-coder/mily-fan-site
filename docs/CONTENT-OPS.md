@@ -58,6 +58,8 @@ Cursor Agent が、確認済みの公開情報だけをデータファイルへ�
   新しい投票ボタンは足さない。
 - 代表画像は本人配布のタイムテーブル b49-01。NEWS専用。
   元JPEGは `media/original/`（gitignore）で保持し、公開用はメタデータ除去済み派生を使う。
+  9/3の本人Instagram Storyで共有された目標・各審査日程の画像と応援方法動画（b50）は、
+  同じNEWSの `additionalMedia` にこの順で統合する。Galleryや別NEWSへは複製しない。
 - Calendar の期間は `supportEvents.ts` を読む。`events.ts` は空のまま。
   1) WEB投票 2026-09-03T12:00:00+09:00〜2026-09-13T23:59:00+09:00
   2) SHOWROOM無料ギフト審査・イベント審査
