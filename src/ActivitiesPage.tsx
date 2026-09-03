@@ -119,7 +119,16 @@ function HubLiveStatus() {
   const { live } = useMilyRealtimeStatus();
   const { slots, roomUrl } = useStreamSchedule();
   const status = selectLiveActivityStatus(live, slots, roomUrl);
-  if (!status || status.state === "offline") return null;
+  if (!status || status.state === "offline") {
+    const latestRecap = streamRecaps[0];
+    return latestRecap ? (
+      <StatusLine
+        label="最新の配信記録"
+        value={`${latestRecap.dateLabel} ${latestRecap.theme}`}
+        note={latestRecap.broadcastLabel}
+      />
+    ) : null;
+  }
 
   return (
     <StatusLine
@@ -507,6 +516,7 @@ function StreamRecapArticle({
   defaultOpen: boolean;
 }) {
   const rankingId = `${recap.id}-ranking`;
+  const hasNamedRanking = recap.ranking.some((entry) => /^\d+\s/.test(entry));
   const [open, setOpen] = useState(defaultOpen);
 
   return (
@@ -590,12 +600,34 @@ function StreamRecapArticle({
         </div>
       ) : null}
 
-      <section aria-labelledby={rankingId} className="mt-6">
-        <h4 id={rankingId} className="text-sm font-bold text-ink">
-          ランキング
-        </h4>
-        <p className="mt-2 text-sm leading-6 text-ink-muted">{recap.rankingNote}</p>
-      </section>
+      {recap.ranking.length > 0 ? (
+        <section aria-labelledby={rankingId} className="mt-6">
+          <h4 id={rankingId} className="text-sm font-bold text-ink">
+            読み上げたランキング
+          </h4>
+          {hasNamedRanking ? (
+            <>
+              <p className="mt-2 text-sm leading-6 text-ink-muted">
+                配信終了時に、下から読み上げた順です。
+              </p>
+              <ul className="mt-4 space-y-2">
+                {recap.ranking.map((entry) => (
+                  <li
+                    key={entry}
+                    className="rounded-xl border border-sage/15 bg-sage-soft/35 px-4 py-2 text-sm leading-7 text-ink"
+                  >
+                    {entry}
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p className="mt-4 rounded-2xl border border-sage/15 bg-sage-soft/35 p-4 text-sm leading-7 text-ink-muted">
+              {recap.ranking[0]}
+            </p>
+          )}
+        </section>
+      ) : null}
 
       <details className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
         <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
