@@ -56,15 +56,38 @@ describe("date-aware site share copy", () => {
     assert.match(before, /#三橋莉子 #ミスサークル2026$/);
     assert.doesNotMatch(before, /#キャンガル2027/);
 
-    const active = siteShareText({
-      now: at("2026-09-03T00:00:00+09:00"),
+    const beforeWebVote = siteShareText({
+      now: at("2026-09-03T11:59:59+09:00"),
       radioPhase: "idle",
     });
-    assert.match(active, /MISS CIRCLE CONTEST 2026の3次審査を応援してください🔥/);
-    assert.match(active, /9\/13まで/);
-    assert.doesNotMatch(active, /Paton投票/);
-    assert.match(active, /#三橋莉子 #ミスサークル2026$/);
-    assert.doesNotMatch(active, /#キャンガル2027/);
+    assert.match(
+      beforeWebVote,
+      /MISS CIRCLE CONTEST 2026の3次審査を応援してください🔥/,
+    );
+    assert.doesNotMatch(beforeWebVote, /WEB投票をお願いします/);
+
+    const duringWebVote = siteShareText({
+      now: at("2026-09-03T12:00:00+09:00"),
+      radioPhase: "idle",
+    });
+    assert.match(
+      duringWebVote,
+      /MISS CIRCLE CONTEST 2026 3次審査のWEB投票をお願いします🗳️/,
+    );
+    assert.match(duringWebVote, /9\/13 23:59まで/);
+    assert.doesNotMatch(duringWebVote, /3次審査を応援してください/);
+    assert.doesNotMatch(duringWebVote, /Paton投票/);
+    assert.match(duringWebVote, /#三橋莉子 #ミスサークル2026$/);
+    assert.doesNotMatch(duringWebVote, /#キャンガル2027/);
+  });
+
+  it("stops asking for the web vote immediately after its confirmed deadline", () => {
+    const deadline = at("2026-09-13T23:59:00+09:00");
+    const during = siteShareText({ now: deadline, radioPhase: "idle" });
+    const after = siteShareText({ now: deadline + 1, radioPhase: "idle" });
+
+    assert.match(during, /WEB投票をお願いします/);
+    assert.doesNotMatch(after, /WEB投票をお願いします/);
   });
 
   it("returns the stable site description with the person tag when no timely topic is active", () => {

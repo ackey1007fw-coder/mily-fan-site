@@ -41,6 +41,7 @@ type ClipboardWriter = {
 
 type ShareTopic = {
   id: string;
+  activityId?: SupportEvent["activityId"];
   priority: number;
   text: string;
   campaignHashtag?: string;
@@ -96,6 +97,7 @@ function supportEventShareTopics(now: number): ShareTopic[] {
           : event.shareText;
       return {
         id: event.id,
+        activityId: event.activityId,
         priority: 200 + (event.priority ?? 0),
         text: `${share}${end ? `（${end}まで）` : ""}`,
         ...(event.shareHashtag
@@ -143,10 +145,14 @@ export function siteShareText(context: SiteShareContext = {}): string {
   const now = context.now ?? Date.now();
   if (!Number.isFinite(now)) throw new Error("now must be a finite timestamp");
 
+  const supportTopics = supportEventShareTopics(now);
+  const hasContestSpecificSupport = supportTopics.some(
+    (topic) => topic.activityId === "miss-circle",
+  );
   const topics = [
     radioShareTopic(context.radioPhase ?? safeRadioPhase(now)),
-    ...supportEventShareTopics(now),
-    contestPhaseShareTopic(now),
+    ...supportTopics,
+    hasContestSpecificSupport ? null : contestPhaseShareTopic(now),
   ]
     .filter((topic): topic is ShareTopic => topic !== null)
     .sort((a, b) => b.priority - a.priority)

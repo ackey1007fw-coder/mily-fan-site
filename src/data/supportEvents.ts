@@ -169,6 +169,9 @@ export const missCircleThirdRoundWebVote: SupportEvent = {
   activityId: "miss-circle",
   kind: "vote",
   title: "WEB投票",
+  shareText:
+    "MISS CIRCLE CONTEST 2026 3次審査のWEB投票をお願いします🗳️",
+  shareHashtag: "#ミスサークル2026",
   schedule: {
     state: "confirmed-period",
     start: "2026-09-03T12:00:00+09:00",
