@@ -5,7 +5,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
-import { rankingByPlace, streamRecap20260902 } from "../src/data/streamRecaps.ts";
+import { streamRecap20260902 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
@@ -51,26 +51,26 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.equal(recap.theme, "朝ラジオ配信");
     assert.equal(recap.broadcastLabel, "9:02頃〜 約62分");
     assert.equal(recap.platformLabel, "SHOWROOM");
-    assert.equal(recap.verifiedAt, "2026-09-02");
+    assert.equal(recap.verifiedAt, "2026-09-03");
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.summary, /みんなの太陽/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /静止画は録画の実フレームを1枚だけ掲載/);
   });
 
-  it("keeps a short recap and withholds ranking names", () => {
+  it("keeps a concise, video-confirmed recap and withholds ranking names", () => {
     const recap = streamRecap20260902;
 
-    assert.equal(recap.highlights.length, 3);
-    assert.equal(recap.goals.length, 4);
-    assert.equal(recap.ranking.length, 0);
-    assert.equal(rankingByPlace(recap.ranking).length, 0);
-    assert.equal(recap.timeline.length, 9);
+    assert.equal(recap.highlights.length, 8);
+    assert.equal(recap.goals.length, 3);
+    assert.equal(recap.ranking.length, 1);
+    assert.equal(recap.timeline.length, 14);
+    assert.ok(recap.highlights.some(({ title }) => /花束/.test(title)));
+    assert.ok(recap.highlights.some(({ title, body }) => /未完成/.test(`${title} ${body}`)));
+    assert.ok(recap.highlights.some(({ body }) => /通学に約2時間/.test(body)));
     assert.ok(recap.highlights.some(({ title }) => /太陽/.test(title)));
-    assert.ok(recap.highlights.some(({ title }) => /未完成の作品/.test(title)));
-    assert.ok(recap.highlights.some(({ body }) => /朝の通学は混雑/.test(body)));
     assert.ok(recap.goals.some(({ item }) => item === "フォロワー"));
-    assert.match(recap.rankingNote, /個人名は掲載していません/);
+    assert.match(recap.ranking[0], /個人名は掲載していません/);
 
     const highlightSeconds = recap.highlights.map(({ timestamp }) => {
       const [hour, minute, second] = timestamp.split(":").map(Number);
@@ -134,8 +134,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
       recap.image?.src ?? "",
       ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
       ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
-      recap.rankingNote,
-      ...recap.ranking.flatMap(({ name, note }) => [name, note ?? ""]),
+      ...recap.ranking,
       ...recap.timeline.flatMap(({ timestamp, label }) => [timestamp, label]),
       recap.nextNote,
       recap.sourceLabel,
