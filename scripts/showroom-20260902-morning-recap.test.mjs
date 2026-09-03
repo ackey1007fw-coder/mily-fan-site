@@ -7,6 +7,7 @@ import { streamRecap20260902 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
 import { news } from "../src/data/news.ts";
 import { highlights } from "../src/data/highlights.ts";
+import { streamSchedule } from "../src/data/streamSchedule.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -15,6 +16,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     const recap = streamRecap20260902;
 
     assert.equal(recap.date, "2026-09-02");
+    assert.equal(recap.dateLabel, "2026.09.02（水）");
     assert.equal(recap.theme, "朝ラジオ配信");
     assert.equal(recap.broadcastLabel, "9:02頃〜 約62分");
     assert.equal(recap.platformLabel, "SHOWROOM");
@@ -33,6 +35,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.equal(recap.timeline.length, 9);
     assert.ok(recap.highlights.some(({ title }) => /太陽/.test(title)));
     assert.ok(recap.highlights.some(({ body }) => /未完成の作品/.test(body)));
+    assert.ok(recap.highlights.some(({ body }) => /通勤ラッシュ/.test(body)));
     assert.ok(recap.goals.some(({ item }) => item === "フォロワー"));
     assert.ok(recap.ranking.some((entry) => /あっきーさん/.test(entry)));
 
@@ -48,7 +51,6 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     const page = await readFile(path.join(root, "src/ActivitiesPage.tsx"), "utf8");
     const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    const schedule = await readFile(path.join(root, "src/data/streamSchedule.ts"), "utf8");
 
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
@@ -59,8 +61,19 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.match(page, /<StreamRecap activityId=\{content\.activity\.id\} \/>/);
 
     assert.match(recap.nextNote, /14:40/);
-    assert.doesNotMatch(schedule, /2026-09-02T14:40/);
-    assert.equal(events.length, 0);
+    assert.doesNotMatch(data, /帰宅ラッシュ/);
+    assert.equal(
+      streamSchedule.some((slot) => slot.date === "2026-09-02" && slot.time === "14:40"),
+      false,
+    );
+    assert.equal(
+      streamSchedule.some((slot) => slot.date === "2026-09-02"),
+      false,
+    );
+    assert.equal(
+      events.some((item) => item.id === "2026-09-02-morning-showroom"),
+      false,
+    );
     assert.equal(
       news.some((item) => item.id === "2026-09-02-morning-showroom"),
       false,

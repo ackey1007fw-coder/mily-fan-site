@@ -41,7 +41,7 @@ export type StreamRecap = {
 export const streamRecap20260902: StreamRecap = {
   id: "2026-09-02-morning-showroom",
   date: "2026-09-02",
-  dateLabel: "2026.09.02（火）",
+  dateLabel: "2026.09.02（水）",
   theme: "朝ラジオ配信",
   broadcastLabel: "9:02頃〜 約62分",
   platformLabel: "SHOWROOM",
@@ -77,7 +77,7 @@ export const streamRecap20260902: StreamRecap = {
       timestamp: "0:35:00",
       title: "日大まで片道約2時間",
       body:
-        "学部ごとにキャンパスが分かれているので近いキャンパスには変えられない、と通学の話。湘南新宿ライン／東海道線で横浜から東京方面。一限だと帰宅ラッシュと重なりほぼ座れない。立っているときは本、座れたら寝る。読書時間はここで確保できている、と話しました。",
+        "学部ごとにキャンパスが分かれているので近いキャンパスには変えられない、と通学の話。湘南新宿ライン／東海道線で横浜から東京方面。一限だと通勤ラッシュと重なりほぼ座れない。立っているときは本、座れたら寝る。読書時間はここで確保できている、と話しました。",
     },
     {
       timestamp: "0:45:00",
