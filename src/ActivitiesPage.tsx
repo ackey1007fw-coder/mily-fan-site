@@ -580,6 +580,55 @@ function StreamRecapArticle({
         ))}
       </ul>
 
+      {recap.gallery && recap.gallery.length > 0 ? (
+        <section className="mt-6" aria-labelledby={`${recap.id}-stills`}>
+          <h4 id={`${recap.id}-stills`} className="text-sm font-bold text-ink">
+            この回のスクショ
+          </h4>
+          <p className="mt-2 text-sm leading-6 text-ink-muted">
+            かわいいカットを{recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。
+          </p>
+          <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+            {recap.gallery.map((still) => (
+              <li key={still.src}>
+                <figure className="overflow-hidden rounded-2xl bg-sage-soft/40">
+                  <img
+                    src={still.src}
+                    width={still.width}
+                    height={still.height}
+                    alt={still.alt}
+                    className="h-auto w-full object-contain"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption className="flex min-h-11 flex-col gap-1 px-2 py-2">
+                    <span className="text-[11px] leading-4 text-ink-muted">{still.caption}</span>
+                    <a
+                      href={still.src}
+                      download={still.downloadName ?? still.src.split("/").pop()}
+                      className="inline-flex min-h-11 items-center text-xs font-semibold text-sage-deep underline-offset-2 hover:underline"
+                    >
+                      保存
+                    </a>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+          {recap.galleryZip ? (
+            <p className="mt-4">
+              <a
+                href={recap.galleryZip.src}
+                download={recap.galleryZip.filename}
+                className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white hover:bg-sage-deep"
+              >
+                {recap.galleryZip.label}
+              </a>
+            </p>
+          ) : null}
+        </section>
+      ) : null}
+
       {recap.goals.length > 0 ? (
         <div className="mt-6">
           <h4 className="text-sm font-bold text-ink">この回の目標</h4>
