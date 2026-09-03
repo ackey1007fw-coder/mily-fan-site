@@ -192,6 +192,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-03-miss-circle-goals-support",
+    date: "2026-09-03",
+    sameDayOrder: 10,
+    activityIds: ["miss-circle"],
+    title: "三次審査、目標と応援方法",
+    body: "みりぃがXに、三次審査の目標と応援方法を載せておきました、と投稿しました。",
+    source: "https://x.com/Mily_chan36/status/2095397884107849991",
+    sourceLabel: "みりぃのX",
+    message: {
+      label: "みりぃのX",
+      text:
+        "🔥ガチイベ🔥3次審査🩵\n" +
+        "○みりぃの目標\n" +
+        "○応援方法\n" +
+        "載せておきました🙂‍↕️チェックして、応援のほどよろしくお願いします〜！頑張るｿﾞ✨",
+    },
+  },
+  {
     id: "2026-09-02-miss-circle-third-round",
     date: "2026-09-02",
     sameDayOrder: 10,

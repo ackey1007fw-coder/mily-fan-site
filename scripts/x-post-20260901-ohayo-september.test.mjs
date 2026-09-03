@@ -71,14 +71,15 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — Latest entry", () =>
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(news.length, 74);
-    assert.equal(ordered[0]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[3]?.id, "2026-09-01-first-showroom-oyasumiry");
-    assert.equal(ordered[4]?.id, NEWS_ID);
-    assert.equal(ordered[5]?.id, FINAL_DAY_STORY_ID);
-    assert.equal(ordered[6]?.id, SEPTEMBER_STORY_ID);
+    assert.equal(news.length, 75);
+    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[1]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
+    assert.equal(ordered[4]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[5]?.id, NEWS_ID);
+    assert.equal(ordered[6]?.id, FINAL_DAY_STORY_ID);
+    assert.equal(ordered[7]?.id, SEPTEMBER_STORY_ID);
     assert.equal(entry.date, "2026-09-01");
     assert.equal(entry.sameDayOrder, 3);
     assert.equal(news.find((candidate) => candidate.id === FINAL_DAY_STORY_ID)?.sameDayOrder, 2);

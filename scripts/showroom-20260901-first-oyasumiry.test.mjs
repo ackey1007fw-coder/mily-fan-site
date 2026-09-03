@@ -98,19 +98,20 @@ describe("2026-09-01 first SHOWROOM おやすみりー — NEWS", () => {
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(news.length, 74);
+    assert.equal(news.length, 75);
     assert.equal(entry.date, "2026-09-01");
     assert.equal(entry.sameDayOrder, 20);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
     assert.equal(entry.title, TITLE);
     assert.equal(entry.body, BODY);
-    assert.equal(ordered[0]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(ordered[1]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[2]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[3], entry);
-    assert.equal(ordered[4]?.id, "2026-09-01-ohayo-september-x");
-    assert.equal(ordered[5]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.equal(ordered[6]?.id, "2026-09-01-september-mily-story");
+    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[1]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
+    assert.equal(ordered[4], entry);
+    assert.equal(ordered[5]?.id, "2026-09-01-ohayo-september-x");
+    assert.equal(ordered[6]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(ordered[7]?.id, "2026-09-01-september-mily-story");
     assert.deepEqual(verifyNews([entry]), []);
     assert.deepEqual(verifyNews(news), []);
   });
