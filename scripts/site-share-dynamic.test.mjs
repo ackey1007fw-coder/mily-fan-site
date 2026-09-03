@@ -81,10 +81,13 @@ describe("date-aware site share copy", () => {
     assert.doesNotMatch(duringWebVote, /#キャンガル2027/);
   });
 
-  it("stops asking for the web vote immediately after its confirmed deadline", () => {
-    const deadline = at("2026-09-13T23:59:00+09:00");
-    const during = siteShareText({ now: deadline, radioPhase: "idle" });
-    const after = siteShareText({ now: deadline + 1, radioPhase: "idle" });
+  it("keeps asking through the published 23:59 minute, then stops at midnight", () => {
+    const duringMinute = at("2026-09-13T23:59:30+09:00");
+    const during = siteShareText({ now: duringMinute, radioPhase: "idle" });
+    const after = siteShareText({
+      now: at("2026-09-14T00:00:00+09:00"),
+      radioPhase: "idle",
+    });
 
     assert.match(during, /WEB投票をお願いします/);
     assert.doesNotMatch(after, /WEB投票をお願いします/);

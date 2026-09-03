@@ -38,11 +38,11 @@ describe("contest phase official window display", () => {
     const phase = contest.currentPhase;
     assert.ok(phase);
     assert.equal(contestPhaseDateRangeLabel(phase), "9/3〜9/13");
-    assert.equal(contestPhaseHeading(phase), "3次審査進出（9/3〜9/13）");
+    assert.equal(contestPhaseHeading(phase), "3次審査（9/3〜9/13）");
     assert.deepEqual(contestOfficialWindowLines(phase), OFFICIAL_LINES);
     assert.equal(
       contestPhaseDisplayNote(phase),
-      ["3次審査進出（9/3〜9/13）", ...OFFICIAL_LINES].join("\n"),
+      ["3次審査（9/3〜9/13）", ...OFFICIAL_LINES].join("\n"),
     );
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59|5:00/);
     assert.match(source("src/data/contest.ts"), /ContestPhase は日付のみ/);
@@ -65,7 +65,7 @@ describe("contest phase official window display", () => {
     });
     assert.equal(afterPaton.kind, "contest");
     assertOfficialWindows(afterPaton.note ?? "");
-    assert.match(afterPaton.note ?? "", /3次審査進出（9\/3〜9\/13）/);
+    assert.match(afterPaton.note ?? "", /3次審査（9\/3〜9\/13）/);
 
     const today = selectSupportToday({
       contest,
@@ -76,7 +76,7 @@ describe("contest phase official window display", () => {
       now: Date.parse("2026-09-02T12:00:00+09:00"),
     }).find((item) => item.key === "today:contest");
     assert.ok(today);
-    assert.equal(today.value, "3次審査進出");
+    assert.equal(today.value, "3次審査");
     assert.match(today.note ?? "", /9\/3〜9\/13/);
     assertOfficialWindows(today.note ?? "");
     assert.equal(today.cta?.label, "ENTRY 734を見る");

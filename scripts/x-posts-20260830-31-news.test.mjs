@@ -290,7 +290,7 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "3次審査進出");
+    assert.equal(contest.currentPhase?.name, "3次審査");
   });
 
   it("stays out of profile, media, stories, and schedule files", async () => {

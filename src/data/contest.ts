@@ -46,12 +46,13 @@ export const contest: Contest = {
   //   2026-09-02: 同じ主催者 SCHEDULE で WEB投票 09/03 12:00〜09/13 23:59、
   //     SHOWROOM無料ギフト審査・イベント審査 09/03 05:00〜09/12 21:59 を再確認。
   //     ContestPhase は日付のみ。時刻は supportEvents 側。
+  //   2026-09-03: 三次審査の開始を確認。現在のフェーズ表示を「3次審査」へ更新。
   // 「最終日」表記から締切日を推定して end に入れることはしない。
   currentPhase: {
-    name: "3次審査進出",
+    name: "3次審査",
     start: "2026-09-03",
     end: "2026-09-13",
     source: "https://www.misscircle.jp/",
   },
-  lastVerifiedAt: "2026-09-02",
+  lastVerifiedAt: "2026-09-03",
 };

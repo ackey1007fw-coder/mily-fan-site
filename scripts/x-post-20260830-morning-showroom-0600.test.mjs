@@ -118,7 +118,7 @@ describe("2026-08-30 morning SHOWROOM 6:00 X post — Latest entry", () => {
     assert.match(entry.body, /今日もみんなと乗り越えていく/);
     assert.match(entry.body, /6:00〜6:30のSHOWROOM配信案内/);
     assert.match(entry.body, /配信前の記録/);
-    assert.equal(contest.currentPhase?.name, "3次審査進出");
+    assert.equal(contest.currentPhase?.name, "3次審査");
 
     for (const phrase of [
       "配信します",
