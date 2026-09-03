@@ -2871,12 +2871,21 @@ HOME Latest / `/news/` 専用。Gallery / `media.ts` / `galleryVideos.ts` /
 `additionalMedia` 専用とし、代表のb49-01に続けて目標、審査日程、応援方法動画の順で表示する。
 Gallery / `media.ts` / `galleryVideos.ts` / `/stories/` には出さない。
 
-| ID | 公開ファイル | 内容 | 掲載 |
+### 掲載承認
+
+- approval date: `2026-09-03`
+- オーナー本人が本タスクで添付したb50-01、b50-02、b50-03の3素材について、
+  `https://mily-fan-site.vercel.app` への掲載とマージを明示承認した。
+- 承認対象面は既存三次審査NEWSの `additionalMedia`（HOME Latestから同NEWSへ遷移する表示を含む）。
+  Gallery、`/stories/`、別NEWSへの掲載承認は含めず、複製しない。
+- b50-03 posterは承認済みb50-03動画の実フレームで、同動画のposter用途だけに使用する。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
 | --- | --- | --- | --- |
-| b50-01 | `news/mily-b50-01-third-round-goals.jpg` | アバター権獲得、投票と100キラでの応援、ファイナルまで応援したい仲間との出会いを掲げた目標画像。864×1536 | ✅ 既存三次審査NEWS additionalMedia。Gallery非掲載 |
-| b50-02 | `news/mily-b50-02-third-round-review-schedule.jpg` | WEB投票、SHOWROOM無料ギフト審査、SHOWROOMイベント審査の期間をまとめた画像。864×1536 | ✅ 既存三次審査NEWS additionalMedia。Gallery非掲載 |
-| b50-03 | `news/mily-b50-03-third-round-support-method.mp4` | 1日1回のWEB投票、1日100個までの無料キラキラ星、指定ギフトでの応援方法を案内する縦型動画。512×910 / 5.000秒 / 30fps / video-only | ✅ 既存三次審査NEWS additionalMedia。Gallery非掲載 |
-| b50-03 poster | `news/mily-b50-03-third-round-support-method-poster.jpg` | 公開MP4の2.5秒地点の実フレーム。512×910 | ✅ 同動画poster |
+| b50-01 | `news/mily-b50-01-third-round-goals.jpg` | アバター権獲得、投票と100キラでの応援、ファイナルまで応援したい仲間との出会いを掲げた目標画像。864×1536 | ✅ 2026-09-03 明示承認。既存三次審査NEWS additionalMedia。Gallery非掲載 |
+| b50-02 | `news/mily-b50-02-third-round-review-schedule.jpg` | WEB投票、SHOWROOM無料ギフト審査、SHOWROOMイベント審査の期間をまとめた画像。864×1536 | ✅ 2026-09-03 明示承認。既存三次審査NEWS additionalMedia。Gallery非掲載 |
+| b50-03 | `news/mily-b50-03-third-round-support-method.mp4` | 1日1回のWEB投票、1日100個までの無料キラキラ星、指定ギフトでの応援方法を案内する縦型動画。512×910 / 5.000秒 / 30fps / video-only | ✅ 2026-09-03 明示承認。既存三次審査NEWS additionalMedia。Gallery非掲載 |
+| b50-03 poster | `news/mily-b50-03-third-round-support-method-poster.jpg` | 公開MP4の2.5秒地点の実フレーム。512×910 | ✅ 承認済みb50-03動画のposter専用 |
 
 ### 元素材と安全確認
 
