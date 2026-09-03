@@ -39,7 +39,11 @@ import {
 } from "../src/data/thirdRoundStoryMedia.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { contestOfficialWindowLines, contestPhaseDisplayNote } from "../src/lib/contestPhaseDisplay.ts";
-import { selectHomeVoteAction, selectHomeVoteActions } from "../src/lib/homePortal.ts";
+import {
+  selectHomeVoteAction,
+  selectHomeVoteActions,
+  selectHomeVoteSpotlight,
+} from "../src/lib/homePortal.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import {
   adaptStreamSlots,
@@ -47,7 +51,10 @@ import {
   buildSupportCalendar,
   nextDisplayStatusBoundary,
 } from "../src/lib/supportCalendar.ts";
-import { nextSupportEventBoundary } from "../src/lib/useSupportEventClock.ts";
+import {
+  nextSupportEventBoundary,
+  voteStartDayBoundary,
+} from "../src/lib/useSupportEventClock.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -66,6 +73,7 @@ const WEB_START = Date.parse("2026-09-03T12:00:00+09:00");
 const WEB_END = Date.parse("2026-09-13T23:59:00+09:00");
 const SHOWROOM_START = Date.parse("2026-09-03T05:00:00+09:00");
 const SHOWROOM_END = Date.parse("2026-09-12T21:59:00+09:00");
+const SPOTLIGHT_DAY_START = Date.parse("2026-09-03T00:00:00+09:00");
 const CONTEST_END = Date.parse("2026-09-14T00:00:00+09:00");
 const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
 const TIMETABLE_FILE = path.join(root, "public", THIRD_ROUND_TIMETABLE_SRC.slice(1));
@@ -404,8 +412,55 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     );
   });
 
+  it("spotlights today's 12:00 launch, then switches to the direct WEB vote", async () => {
+    const spotlightAt = (now) =>
+      selectHomeVoteSpotlight({ contest, supportEvents, links, now });
+    const previousDay = spotlightAt(Date.parse("2026-09-02T23:59:59+09:00"));
+    const before = spotlightAt(Date.parse("2026-09-03T11:59:59+09:00"));
+    const during = spotlightAt(WEB_START);
+    const after = spotlightAt(WEB_END + 1);
+
+    assert.equal(previousDay, null);
+    assert.equal(before?.state, "upcoming");
+    assert.equal(before?.eyebrow, "3次審査・本日スタート");
+    assert.equal(before?.title, "本日12:00からWEB投票");
+    assert.equal(before?.action.label, "開始前にENTRY 734を見る");
+    assert.equal(before?.action.mobileLabel, "12:00 投票開始");
+    assert.equal(before?.action.url, ENTRY_URL);
+    assert.doesNotMatch(JSON.stringify(before), /liff\.line\.me/);
+
+    assert.equal(during?.state, "live");
+    assert.equal(during?.eyebrow, "3次審査・WEB投票");
+    assert.equal(during?.title, "WEB投票受付中");
+    assert.equal(during?.action.label, "ENTRY 734に投票する");
+    assert.equal(during?.action.mobileLabel, "WEB投票する");
+    assert.equal(during?.action.url, WEB_VOTE_URL);
+    assert.match(during?.note ?? "", /9\/13 23:59/);
+    assert.equal(after, null);
+
+    const spotlight = await readFile(
+      path.join(root, "src/components/VoteSpotlight.tsx"),
+      "utf8",
+    );
+    const hero = await readFile(path.join(root, "src/components/Hero.tsx"), "utf8");
+    const dock = await readFile(
+      path.join(root, "src/components/MobileActionDock.tsx"),
+      "utf8",
+    );
+    const support = await readFile(path.join(root, "src/SupportPage.tsx"), "utf8");
+    assert.match(spotlight, /data-vote-state=\{spotlight\.state\}/);
+    assert.match(spotlight, /border-2 border-apricot/);
+    assert.match(spotlight, /bg-apricot-ink[^\n]+text-white/);
+    assert.match(hero, /<VoteSpotlight/);
+    assert.match(hero, /headingAs="p"/);
+    assert.match(support, /<VoteSpotlight/);
+    assert.match(dock, /spotlight\?\.action\.mobileLabel/);
+    assert.match(dock, /const additionalVoteActions = voteActions\.filter/);
+  });
+
   it("aligns the shared clock with #131 contest end and the new review bounds", () => {
-    assert.equal(nextSupportEventBoundary(PATON_END + 1), SHOWROOM_START);
+    assert.equal(nextSupportEventBoundary(PATON_END + 1), SPOTLIGHT_DAY_START);
+    assert.equal(nextSupportEventBoundary(SPOTLIGHT_DAY_START), SHOWROOM_START);
     assert.equal(nextDisplayStatusBoundary(missCircleThirdRoundShowroomReview.schedule, SHOWROOM_START - 1), SHOWROOM_START);
     assert.equal(nextSupportEventBoundary(SHOWROOM_START), WEB_START);
     assert.equal(nextSupportEventBoundary(WEB_START), SHOWROOM_END + 1);
@@ -413,6 +468,23 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(nextSupportEventBoundary(WEB_END + 1), CONTEST_END);
     assert.equal(nextSupportEventBoundary(CONTEST_END - 1), CONTEST_END);
     assert.equal(nextSupportEventBoundary(CONTEST_END), null);
+  });
+
+  it("derives the vote start day from the Tokyo instant, not the timestamp text", () => {
+    const startDay = Date.parse("2026-09-04T00:00:00+09:00");
+    assert.equal(
+      voteStartDayBoundary(
+        {
+          state: "confirmed-period",
+          start: "2026-09-03T18:00:00Z",
+          end: "2026-09-04T20:00:00Z",
+          allDay: false,
+          timezone: "Asia/Tokyo",
+        },
+        startDay - 1,
+      ),
+      startDay,
+    );
   });
 
   it("keeps ContestPhase date-only and the confirmed personal SHOWROOM slots", async () => {

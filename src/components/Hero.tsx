@@ -6,13 +6,17 @@ import { PATON_VOTE_HOW_TO_ANCHOR_ID } from "../data/patonVoteHowTo";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
 import { supportEvents } from "../data/supportEvents";
-import { selectHomeVoteActions } from "../lib/homePortal";
+import {
+  selectHomeVoteActions,
+  selectHomeVoteSpotlight,
+} from "../lib/homePortal";
 import { selectHomeHeroNews } from "../lib/patonVoteLiveCopy";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { isSupportEventUrlActive } from "../lib/supportEventLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
 import { Socials } from "./Socials";
+import { VoteSpotlight } from "./VoteSpotlight";
 
 export function Hero() {
   const photo = featuredPhoto();
@@ -24,7 +28,16 @@ export function Hero() {
     links,
     now,
   });
-  const [voteAction, ...additionalVoteActions] = voteActions;
+  const spotlight = selectHomeVoteSpotlight({
+    contest,
+    supportEvents,
+    links,
+    now,
+  });
+  const inlineVoteActions = spotlight
+    ? voteActions.filter((action) => action.url !== spotlight.action.url)
+    : voteActions;
+  const [voteAction, ...additionalVoteActions] = inlineVoteActions;
   const seasideCircleLinks = links.filter(
     (link) =>
       link.id === "fm-smw-ssc-program" ||
@@ -51,6 +64,11 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute -left-10 bottom-4 h-32 w-32 rounded-full bg-apricot-soft"
       />
+      <VoteSpotlight
+        spotlight={spotlight}
+        className="relative mx-auto mb-7 max-w-3xl"
+        headingAs="p"
+      />
       <div className="relative mx-auto grid max-w-3xl gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,17rem)] lg:items-center">
         <div className="order-2 lg:order-1">
           <p className="inline-flex rounded-full bg-sage-soft px-3 py-1 text-xs font-medium text-sage-deep">
@@ -67,23 +85,25 @@ export function Hero() {
             ラジオ、配信、コンテスト。みりぃの今をひとつに。
           </p>
           <div className="mt-8 flex flex-col gap-3">
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ExternalLink
-                href={voteAction.url}
-                className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white shadow-card hover:bg-sage-deep sm:w-auto sm:min-w-[18rem]"
-              >
-                {voteAction.label}
-              </ExternalLink>
-              {additionalVoteActions.map((action) => (
+            {voteAction ? (
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <ExternalLink
-                  key={action.url}
-                  href={action.url}
-                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-6 py-3 text-base font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
+                  href={voteAction.url}
+                  className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-sage px-6 py-3 text-base font-semibold text-white shadow-card hover:bg-sage-deep sm:w-auto sm:min-w-[18rem]"
                 >
-                  {action.label}
+                  {voteAction.label}
                 </ExternalLink>
-              ))}
-            </div>
+                {additionalVoteActions.map((action) => (
+                  <ExternalLink
+                    key={action.url}
+                    href={action.url}
+                    className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-6 py-3 text-base font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
+                  >
+                    {action.label}
+                  </ExternalLink>
+                ))}
+              </div>
+            ) : null}
             <div className="flex flex-wrap gap-3">
               {showPatonHowTo ? (
                 <a
@@ -108,7 +128,7 @@ export function Hero() {
             </div>
           </div>
           <div className="mt-3 space-y-2">
-            {voteActions.map((action) => (
+            {inlineVoteActions.map((action) => (
               <div key={action.url}>
                 <p className="text-xs text-ink-muted">{action.title}</p>
                 {action.note ? (
