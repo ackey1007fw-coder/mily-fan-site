@@ -4,7 +4,6 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
-  rankingByPlace,
   streamRecap20260902,
   streamRecap20260902Night,
   streamRecaps,
@@ -39,16 +38,15 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
 
     assert.equal(recap.highlights.length, 3);
     assert.equal(recap.goals.length, 5);
-    assert.equal(recap.ranking.length, 0);
-    assert.equal(rankingByPlace(recap.ranking).length, 0);
+    assert.equal(recap.ranking.length, 1);
     assert.equal(recap.timeline.length, 10);
     assert.ok(recap.highlights.some(({ title }) => /通過/.test(title)));
     assert.ok(recap.highlights.some(({ body }) => /スーツ謝罪会見/.test(body)));
     assert.ok(recap.highlights.some(({ title }) => /海くん/.test(title)));
     assert.ok(recap.goals.some(({ item }) => item === "三次通過"));
-    assert.match(recap.rankingNote, /個人名は掲載していません/);
-    assert.equal(streamRecap20260902.ranking.length, 0);
-    assert.match(streamRecap20260902.rankingNote, /個人名は掲載していません/);
+    assert.match(recap.ranking[0], /個人名は掲載していません/);
+    assert.equal(streamRecap20260902.ranking.length, 1);
+    assert.match(streamRecap20260902.ranking[0], /個人名は掲載していません/);
     assert.equal(recap.image, streamRecap20260902.image);
     assert.equal(recap.image?.src, "/media/live/mily-b51-01-morning-radio-showroom.jpg");
     assert.equal(recap.image?.caption, "配信中に使われていた静止画");
@@ -90,9 +88,9 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(recap.nextNote, /21:00/);
     assert.doesNotMatch(data, /いくちゃん|ゆめちゃん/);
     assert.doesNotMatch(recap.summary, /フレキャン/);
-    assert.equal(recap.ranking.length, 0);
+    assert.equal(recap.ranking.length, 1);
     assert.equal(
-      streamRecaps.every((item) => item.ranking.length === 0),
+      streamRecaps.every((item) => item.ranking.length === 1),
       true,
     );
     assert.equal(
