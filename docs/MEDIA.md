@@ -2944,3 +2944,50 @@ NEWS専用JPEGと同じくそこに入れない。
   `a00eea08f642532348bc967ad3adeb130494a6828d1306f5fe23a0198490c4a8`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 
+## 素材台帳（batch b52 / 受領日・source date 2026-09-03）
+
+オーナー提供の 2026-09-03 SHOWROOM 三次初日朝配信録画から切り出した、
+かわいい実フレーム10枚。顔出し枠。コメント・視聴者アイコン・表示名・
+他出場者のランキングは写らないようカメラ付近だけを切り出している。
+LIVE STREAM の三次初日朝配信メモ専用。NEWS / Gallery / `media.ts` /
+`galleryVideos.ts` / `/stories/` には出さない。
+代表1枚（b52-01）をサムネにし、10枚を保存できるZIPも同じディレクトリに置く。
+
+### 掲載承認
+
+- approval date: `2026-09-04`
+- オーナーが当該朝配信について、かわいいところ・事故になっていないところを
+  約10枚スクショし、ベストショットをサムネにして配信コーナーへ載せ、
+  10枚を保存できるようにしてほしいと明示依頼した。
+  承認対象面は LIVE STREAM Activity の配信メモ。Gallery / NEWS へは流用しない。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b52-01 | `live/mily-b52-01-peace-smile.jpg` | ベストショット。400×228。サムネ | ✅ 2026-09-04 明示承認。LIVE STREAM。Gallery / NEWS 非掲載 |
+| b52-02 | `live/mily-b52-02-peace.jpg` | 手を振る | ✅ 同上 |
+| b52-03 | `live/mily-b52-03-peace-talk.jpg` | 顔を上げて話す | ✅ 同上 |
+| b52-04 | `live/mily-b52-04-smile.jpg` | 微笑み | ✅ 同上 |
+| b52-05 | `live/mily-b52-05-talk-smile.jpg` | 話す笑顔 | ✅ 同上 |
+| b52-06 | `live/mily-b52-06-talk.jpg` | 話す | ✅ 同上 |
+| b52-07 | `live/mily-b52-07-look.jpg` | こちらを見て話す | ✅ 同上 |
+| b52-08 | `live/mily-b52-08-soft-smile.jpg` | やわらかい笑顔 | ✅ 同上 |
+| b52-09 | `live/mily-b52-09-later.jpg` | 中盤 | ✅ 同上 |
+| b52-10 | `live/mily-b52-10-board.jpg` | ホワイトボードの話のころ | ✅ 同上 |
+| b52-zip | `live/mily-b52-gachi-morning-stills.zip` | 上記10枚の保存用ZIP | ✅ 同上 |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-03`。再生permalinkなし。`sourceUrl` は null
+- 視聴者コメント・アイコン・表示名・他出場者名・端末情報・DMは見当たらない
+- 元素材は gitignored の `media/original/` へ保存。受け渡しURL / file ID /
+  録画ファイル名は tracked text へ残さない
+- 顔補正・AI生成・生成塗り足しなし。収録 640×360 からカメラ付近を切り出しただけで拡大していない
+- 録音音声・画面録画・全文文字起こしは公開しない
+
+### 公開派生
+
+- 各JPEG: 400×228 / EXIF・IPTC・XMP・ICCなし
+- b52-01 sha256 `4d5e1e779c243d11fca7dd72e7c0647bb098260ab3340a14dfe2269562e229f4`
+- LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
+
