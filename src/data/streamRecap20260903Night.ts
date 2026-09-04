@@ -1,11 +1,29 @@
-import type { StreamRecap } from "./streamRecaps";
-import { gachiNightStill01 } from "./streamRecap20260903NightStill01.ts";
-import { gachiNightStill02 } from "./streamRecap20260903NightStill02.ts";
-
-const gachiNightStills = [gachiNightStill01, gachiNightStill02];
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
 
 const RANKING_NOTE =
   "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
+
+const STILL_W = 400;
+const STILL_H = 228;
+
+const nightStills: StreamRecapImage[] = [
+  {
+    src: "/media/live/mily-b53-01-surprise-choker.jpg",
+    width: STILL_W,
+    height: STILL_H,
+    alt: "三次初日の夜配信で、黒いドット柄のトップスと大きなリボンのみりぃが口を開けて驚いている",
+    caption: "ベストショット。びっくり",
+    downloadName: "みりぃ_三次初日夜_01_ベスト_びっくり.jpg",
+  },
+  {
+    src: "/media/live/mily-b53-02-whiteboard.jpg",
+    width: STILL_W,
+    height: STILL_H,
+    alt: "三次初日の夜配信で、ホワイトボードとペンを持って驚いているみりぃ",
+    caption: "ホワイトボード",
+    downloadName: "みりぃ_三次初日夜_02_ホワイトボード.jpg",
+  },
+];
 
 /**
  * 2026年9月3日のSHOWROOM夜配信を、オーナー提供の動画で確認した配信メモ。
@@ -21,8 +39,13 @@ export const streamRecap20260903Night: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "三次審査1日目の夜枠。告知の21時より遅く始まり、フルメイクで約49分話しました。投票とキラキラ100が最優先で、ブロック1位は狙わず、アバター権と仲間を集めてから上を目指す、という方針の回です。",
-  image: gachiNightStills[0],
-  gallery: gachiNightStills,
+  image: nightStills[0],
+  gallery: nightStills,
+  galleryZip: {
+    src: "/media/live/mily-b53-gachi-night-stills.zip",
+    filename: "みりぃ_三次初日夜_スクショ2枚.zip",
+    label: "2枚まとめて保存",
+  },
   highlights: [
     {
       timestamp: "0:00:15",
@@ -83,5 +106,5 @@ export const streamRecap20260903Night: StreamRecap = {
   sourceLabel: "2026年9月3日 SHOWROOM夜配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
   transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
+    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを2枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
 };
