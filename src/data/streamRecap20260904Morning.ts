@@ -8,7 +8,7 @@ const STILL_H = 228;
 
 const morningStills: StreamRecapImage[] = [
   {
-    src: "/media/live/mily-b53-01-cheek-tilt.svg",
+    src: "/media/live/mily-b53-01-cheek-tilt.jpg",
     width: STILL_W,
     height: STILL_H,
     alt: "三次2日目の朝配信で、みりぃが両手を頬に当てて首をかしげている。ヘアピン、灰色のトップス、ノーメイク",
@@ -16,7 +16,7 @@ const morningStills: StreamRecapImage[] = [
     downloadName: "みりぃ_三次2日目朝_01_ベスト_頬に手.jpg",
   },
   {
-    src: "/media/live/mily-b53-02-clasp-smile.svg",
+    src: "/media/live/mily-b53-02-clasp-smile.jpg",
     width: STILL_W,
     height: STILL_H,
     alt: "三次2日目の朝配信で、みりぃが両手を胸の前で組んで笑っている",
@@ -24,7 +24,7 @@ const morningStills: StreamRecapImage[] = [
     downloadName: "みりぃ_三次2日目朝_02_手組み笑顔.jpg",
   },
   {
-    src: "/media/live/mily-b53-03-close-smile.svg",
+    src: "/media/live/mily-b53-03-close-smile.jpg",
     width: STILL_W,
     height: STILL_H,
     alt: "三次2日目の朝配信で、カメラに寄って笑っているみりぃ",
@@ -32,7 +32,7 @@ const morningStills: StreamRecapImage[] = [
     downloadName: "みりぃ_三次2日目朝_03_寄りの笑顔.jpg",
   },
   {
-    src: "/media/live/mily-b53-04-suit-board.svg",
+    src: "/media/live/mily-b53-04-suit-board.jpg",
     width: STILL_W,
     height: STILL_H,
     alt: "みりぃがホワイトボードを持っている。ボードには「夜 スーツ配信」「22:30〜23:40」と書いてある",
@@ -40,7 +40,7 @@ const morningStills: StreamRecapImage[] = [
     downloadName: "みりぃ_三次2日目朝_04_スーツボード.jpg",
   },
   {
-    src: "/media/live/mily-b53-05-suit-board-pose.svg",
+    src: "/media/live/mily-b53-05-suit-board-pose.jpg",
     width: STILL_W,
     height: STILL_H,
     alt: "みりぃが夜のスーツ配信ボードを持ち、頬にペンを当てている",
@@ -49,12 +49,6 @@ const morningStills: StreamRecapImage[] = [
   },
 ];
 
-/**
- * 2026年9月4日のSHOWROOM朝配信を、オーナー提供の動画で確認した配信メモ。
- * 録音音声・全文文字起こし・画面録画は公開しない。
- * かわいい実フレームを5枚掲載する。コメント・視聴者表示は写っていない。
- * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない。
- */
 export const streamRecap20260904Morning: StreamRecap = {
   id: "2026-09-04-morning-gachi-showroom",
   date: "2026-09-04",
