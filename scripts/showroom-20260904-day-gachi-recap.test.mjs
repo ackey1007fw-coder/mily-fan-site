@@ -167,6 +167,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
       "utf8",
     );
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
+    const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const recapText = [
       recap.summary,
       recap.image?.alt ?? "",
@@ -191,6 +192,9 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com\/document/);
     assert.doesNotMatch(recapFile, /drive\.google\.com|docs\.google\.com\/document/);
     assert.doesNotMatch(ops, /drive\.google\.com|docs\.google\.com\/document/);
+    assert.match(mediaGuide, /batch b54/);
+    assert.equal(mediaGuide.includes(THUMB_SHA256), true);
+    assert.doesNotMatch(mediaGuide, /drive\.google\.com|docs\.google\.com\/document/);
     assert.doesNotMatch(data, /\.mp3|\.aac|stt_raw|ScreenRecording/);
     assert.doesNotMatch(recapFile, /\.mp3|\.aac|stt_raw|ScreenRecording/);
     assert.doesNotMatch(data, /公式|公認|本人運営/);
