@@ -3067,6 +3067,6 @@ LIVE STREAM の三次2日目昼配信メモ専用。NEWS / Gallery / `media.ts` 
 ### 公開派生
 
 - 各JPEG: 400×228 / EXIF・IPTC・XMP・ICCなし
-- b54-01 sha256 `f0240e3215e09e39b0351b70cdb0d862f71dfab59a71cb73bcd81d4f648ea71c`
+- b54-01 sha256 `f0056137f6757feab1de6147520ecca5cb418a48116642549b8d610dafdb22b9`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 

@@ -24,7 +24,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const THUMB_SRC = "/media/live/mily-b54-01-hoodie-look.jpg";
 const THUMB_FILE = path.join(root, "public", THUMB_SRC.slice(1));
 const THUMB_SHA256 =
-  "f0240e3215e09e39b0351b70cdb0d862f71dfab59a71cb73bcd81d4f648ea71c";
+  "f0056137f6757feab1de6147520ecca5cb418a48116642549b8d610dafdb22b9";
 const ZIP_SRC = "/media/live/mily-b54-gachi-day-stills.zip";
 const ZIP_FILE = path.join(root, "public", ZIP_SRC.slice(1));
 
