@@ -5,6 +5,8 @@ import {
   upcomingSlots,
   type StreamSlot,
 } from "../data/streamSchedule.ts";
+import { useShowroomLive } from "./useMilyRealtimeStatus.ts";
+import { withShowroomNext } from "./showroomSchedule.ts";
 import type { ScheduleAvailability } from "./supportCalendar.ts";
 
 /**
@@ -189,6 +191,7 @@ export function toStreamScheduleView(
 }
 
 export function useStreamSchedule(): StreamScheduleView {
+  const live = useShowroomLive();
   const [fetched, setFetched] = useState<StreamScheduleSnapshot>(
     INITIAL_STREAM_SCHEDULE_STATE,
   );
@@ -213,7 +216,8 @@ export function useStreamSchedule(): StreamScheduleView {
     };
   }, []);
 
-  return toStreamScheduleView(fetched, streamSchedule, Date.now());
+  const now = Date.now();
+  return withShowroomNext(toStreamScheduleView(fetched, streamSchedule, now), live, now);
 }
 
 const dateFmt = new Intl.DateTimeFormat("ja-JP", {
