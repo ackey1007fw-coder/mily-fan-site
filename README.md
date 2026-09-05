@@ -12,7 +12,7 @@
 - 初期ページ: Hero / 応援する / 最新情報 / ギャラリー / スケジュール / プロフィール / リンク / Footer
 - 最新情報に、21歳誕生日の投稿要約と朝のInstagram Storyを掲載しています
 - MISS CIRCLE CONTEST 2026 ENTRY 734 への応援導線（Hero / Support / モバイルドック）
-- 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。失敗時は手入力 fallback → 非表示）
+- 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。成功時は公式枠のみ、失敗時は手入力 fallback → 非表示。表示中は5分TTL経過後に再取得）
 - FM「湘南シーサイドサークル」の放送状態を自動取得（`/api/mily-radio-status`。取得失敗でもサイトは壊れない）
 - Follow Mily: X / Instagram / TikTok / SHOWROOM / MixChannel（X〜SHOWROOMはENTRY 734実ページ、MixChannelは本人プロフィールで確認済み）
 - FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）

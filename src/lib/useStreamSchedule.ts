@@ -13,8 +13,7 @@ import type { ScheduleAvailability } from "./supportCalendar.ts";
  * - 成功結果は 5 分 TTL でキャッシュ。**失敗はキャッシュしない**ので、
  *   初回失敗のあとも次の利用時に再試行できる
  * - roomUrl は SHOWROOM ドメインのURLだけを通す
- * - 予定は毎分 poll する必要がないため、ライブ状態
- *   （useMilyRealtimeStatus）とは別系統にしている
+ * - 表示中は1分ごと・タブ復帰時に確認し、5分TTL経過後に再取得する
  */
 
 /**
@@ -162,7 +161,7 @@ export function createStreamScheduleLoader(options?: {
 const loadStreamSchedule = createStreamScheduleLoader();
 
 export type StreamScheduleView = {
-  /** 手入力fallback＋API由来のmerge済み配信枠（既存呼び出し側の契約） */
+  /** 取得成功時は公式枠のみ。取得失敗時だけ手入力fallback。 */
   slots: StreamSlot[];
   /**
    * `src/data/streamSchedule.ts` の確認済み手入力fallbackだけ。
@@ -180,7 +179,9 @@ export function toStreamScheduleView(
   now: number,
 ): StreamScheduleView {
   return {
-    slots: upcomingSlots(manual, fetched.slots, now),
+    slots: fetched.availability === "ok"
+      ? upcomingSlots([], fetched.slots, now)
+      : upcomingSlots(manual, [], now),
     manualSlots: upcomingSlots(manual, [], now),
     roomUrl: fetched.roomUrl,
     availability: fetched.availability,
@@ -194,11 +195,21 @@ export function useStreamSchedule(): StreamScheduleView {
 
   useEffect(() => {
     let active = true;
-    loadStreamSchedule().then((result) => {
-      if (active) setFetched(result);
-    });
+    const refresh = () => {
+      if (document.visibilityState === "hidden") return;
+      void loadStreamSchedule().then((result) => {
+        if (active) setFetched(result);
+      });
+    };
+    refresh();
+    const interval = window.setInterval(refresh, 60_000);
+    document.addEventListener("visibilitychange", refresh);
+    window.addEventListener("focus", refresh);
     return () => {
       active = false;
+      window.clearInterval(interval);
+      document.removeEventListener("visibilitychange", refresh);
+      window.removeEventListener("focus", refresh);
     };
   }, []);
 

@@ -114,8 +114,7 @@ const EXPECTED_SLOTS = [
   { date: "2026-09-05", time: "14:30", endTime: "15:20" },
   { date: "2026-09-05", time: "21:00", endTime: "21:50" },
   { date: "2026-09-06", time: "05:30", endTime: "07:00" },
-  { date: "2026-09-06", time: "14:40", endTime: "15:20" },
-  { date: "2026-09-06", time: "22:30", endTime: "23:00" },
+  { date: "2026-09-06", time: "21:30" },
   { date: "2026-09-08", time: "07:00", endTime: "08:00" },
   {
     date: "2026-09-09",
@@ -373,7 +372,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       EXPECTED_SLOTS.map((slot) => ({
         date: slot.date,
         startTime: slot.time,
-        endTime: slot.endTime,
+        endTime: slot.endTime ?? null,
         note: slot.note,
       })),
     );
@@ -594,7 +593,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     const adapted = adaptStreamSlots(streamSchedule);
     assert.deepEqual(
       adapted.map((item) => item.endTime),
-      EXPECTED_SLOTS.map((slot) => slot.endTime),
+      EXPECTED_SLOTS.map((slot) => slot.endTime ?? null),
     );
     assert.equal(adapted.every((item) => item.origin === "showroom-schedule"), true);
 
