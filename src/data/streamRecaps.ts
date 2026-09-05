@@ -48,7 +48,7 @@ export type StreamRecapSong = {
   artist: string;
   /** 録画先頭からの歌唱開始位置の目安。 */
   timestamp: string;
-  /** 原曲の公式動画。みりぃの歌唱映像ではない。 */
+  /** 原曲へのリンク。みりぃの歌唱映像ではない。 */
   youtubeUrl: string;
 };
 

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { withoutApprovedSongLinks } from "./approved-song-links.mjs";
 import { readFile } from "node:fs/promises";
 import { it } from "node:test";
 import sharp from "sharp";
@@ -31,5 +32,5 @@ it("ships ten distinct nighttime images at source resolution without metadata an
   const zip = await readFile(new URL(`../public${recap.galleryZip.src}`, import.meta.url));
   assert.equal(zip.readUInt32LE(0), 0x04034b50);
   const source = await readFile(new URL("../src/data/streamRecap20260905Night.ts", import.meta.url), "utf8");
-  assert.doesNotMatch(source, /https?:\/\/|data:|\.mp4|\.mp3/);
+  assert.doesNotMatch(withoutApprovedSongLinks(source), /https?:\/\/|data:|\.mp4|\.mp3/);
 });

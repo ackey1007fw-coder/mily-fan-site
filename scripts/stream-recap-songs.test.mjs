@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { it } from "node:test";
+import { withoutApprovedSongLinks } from "./approved-song-links.mjs";
 import { streamRecaps, streamRecap20260905Day } from "../src/data/streamRecaps.ts";
 
 it("keeps song links on individual official YouTube videos with ordered recording positions", () => {
@@ -15,12 +16,21 @@ it("keeps song links on individual official YouTube videos with ordered recordin
       assert.ok(seconds >= previous);
       previous = seconds;
       const url = new URL(song.youtubeUrl);
+      assert.equal(withoutApprovedSongLinks(song.youtubeUrl), "[approved song link]");
       assert.equal(url.protocol, "https:");
       assert.equal(url.hostname, "www.youtube.com");
       assert.equal(url.pathname, "/watch");
       assert.match(url.searchParams.get("v"), /^[A-Za-z0-9_-]{11}$/);
     }
   }
+});
+
+it("continues detecting unapproved links and altered versions of approved URLs", () => {
+  for (const url of [
+    "https://www.youtube.com/watch?v=TEST_VIDEO1",
+    "https://www.youtube.com/watch?v=aRDURmIYBZ4&extra=1",
+    "https://example.com/recording",
+  ]) assert.equal(withoutApprovedSongLinks(url), url);
 });
 
 it("does not turn the September 5 afternoon discussion of the morning song into a performance", () => {

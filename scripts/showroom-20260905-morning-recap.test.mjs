@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { withoutApprovedSongLinks } from "./approved-song-links.mjs";
 import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import sharp from "sharp";
@@ -39,7 +40,7 @@ describe("September 5 morning public archive", () => {
     assert.match(recap.transcriptionNote, /実フレーム10枚は目視確認/);
     assert.ok(recap.highlights.every(h => !h.quote));
     const source = await readFile(new URL("../src/data/streamRecap20260905Asa.ts", import.meta.url), "utf8");
-    assert.doesNotMatch(source, /https?:\/\/|data:|\.mp4|\.ts["']|\.mp3/);
+    assert.doesNotMatch(withoutApprovedSongLinks(source), /https?:\/\/|data:|\.mp4|\.ts["']|\.mp3/);
     for (const items of [recap.highlights, recap.timeline]) {
       const times = items.map(({timestamp}) => timestamp.split(":").reduce((n,v) => n * 60 + Number(v), 0));
       assert.deepEqual(times, [...times].sort((a,b) => a-b));
