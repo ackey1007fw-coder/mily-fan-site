@@ -3203,3 +3203,25 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 - 640×360の元の構図と縦横比を保持。通常のJPEG圧縮のみ。EXIF / IPTC / XMPなし。顔のAI生成・補正・置換・生成塗り足しなし。
 - 別途作成した生成コラージュは顔の同一性を保証できないためサイト掲載対象外。
 - LIVE STREAM専用。全文文字起こし・歌詞・録音・録画は公開しない。
+
+
+### b61 — 2026-09-06 朝配信の実フレーム
+
+| 素材 | 公開ファイル | 場面 |
+| --- | --- | --- |
+| b61 | `/media/live/mily-b61-01-hello.jpg` | 00:59 笑顔でおはよう |
+| b61 | `/media/live/mily-b61-02-cheek.jpg` | 11:00 頬に手を添えて |
+| b61 | `/media/live/mily-b61-03-tilt.jpg` | 17:00 首をかしげてにっこり |
+| b61 | `/media/live/mily-b61-04-double-pose.jpg` | 36:31 両手でポーズ |
+| b61 | `/media/live/mily-b61-05-peace.jpg` | 46:02 カメラに向かってピース |
+| b61 | `/media/live/mily-b61-06-ribbon.jpg` | 52:01 リボンが映る横顔 |
+| b61 | `/media/live/mily-b61-07-relaxed.jpg` | 61:01 目を細めて笑顔 |
+| b61 | `/media/live/mily-b61-08-smile.jpg` | 70:03 カメラに向かって笑顔 |
+| b61 | `/media/live/mily-b61-09-playful.jpg` | 81:02 頬をふくらませてポーズ |
+| b61 | `/media/live/mily-b61-10-bye.jpg` | 87:03 両手を振ってまたね |
+| b61-zip | `live/mily-b61-asa-stills.zip` | 上記JPEG10枚 |
+
+- owner-provided。公開再生permalinkなし。受け渡しURL・IDは非公開。
+- 全10枚を実寸で目視確認。第三者・コメント・端末情報の写り込みなし。640×360の元の構図を保持し、通常のJPEG圧縮のみ。メタデータなし。
+- 元フレームはgitignoredの `media/original/b61/`。LIVE STREAM専用。顔のAI生成・補正・置換・生成塗り足しなし。
+- 別途作成した生成コラージュは顔の同一性を保証できないためサイト掲載対象外。全文文字起こし・録音・録画・歌詞は公開しない。
