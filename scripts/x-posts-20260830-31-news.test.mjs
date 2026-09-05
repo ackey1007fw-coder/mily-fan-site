@@ -322,7 +322,7 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
 
 describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
   it("flows through Portal Feed without hardcoded news ids", async () => {
-    const feed = createPortalFeed({
+    const feed = createPortalFeed({ newsItems: news,
       now: new Date("2026-08-31T08:00:00+09:00"),
       limit: PORTAL_FEED_LIMIT + 1,
     });

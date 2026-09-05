@@ -272,7 +272,7 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
   });
 
   it("keeps Portal Feed aligned with NEWS order and the lead still", () => {
-    const feed = createPortalFeed();
+    const feed = createPortalFeed({ newsItems: news });
     const feedItem = findFeedItem(feed, portalNewsId(NEWS_ID));
     assert.equal(feedItem.title, TITLE);
     assert.ok(feedItem.image?.endsWith(LEAD));

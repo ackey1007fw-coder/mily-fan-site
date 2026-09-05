@@ -260,7 +260,7 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — scope", () => {
 
 describe("2026-08-29 SHOWROOM radio / third-round X posts — Portal Feed", () => {
   it("flows through Portal Feed without a hardcoded news id or image", async () => {
-    const feed = createPortalFeed({
+    const feed = createPortalFeed({ newsItems: news,
       now: new Date("2026-08-29T16:00:00+09:00"),
       limit: PORTAL_FEED_LIMIT + 4,
     });

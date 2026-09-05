@@ -290,7 +290,7 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — scope and identity",
 
 describe("2026-09-01 X おはよ〜 今日から9月ー — Portal Feed and CONTENT-OPS", () => {
   it("flows through Portal Feed with the X source and shared poster", async () => {
-    const feed = createPortalFeed({ now: new Date("2026-09-01T09:20:00+09:00") });
+    const feed = createPortalFeed({ newsItems: news, now: new Date("2026-09-01T09:20:00+09:00") });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
     assertPortalNewsFollowsSort(feed, news);
