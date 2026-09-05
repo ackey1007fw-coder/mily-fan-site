@@ -3171,7 +3171,7 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 ## 素材台帳（batch b58 / 受領日 2026-09-05）
 
 - オーナーが直接提供し、サイト掲載を明示依頼したTikTok動画。出典として指定されたURL: https://vt.tiktok.com/ZSqNgRAvx/
-- 投稿ページの取得は環境制約で未完了。投稿日は未確認のため sourceDate は null。日付が必須のNEWSには追加せず、Galleryの動画アーカイブへ掲載。
+- 初回掲載では投稿日未確認のためGalleryのみ掲載。その後、オーナーがこの動画の投稿日を2026-09-05（土）と確認。sourceDateを更新し、同日NEWSへ共有メディアとして追加。投稿ページの再取得は未完了。本文はオーナー提供の投稿スクリーンショットの公開キャプションと実動画に基づく。
 - 紹介文は添付スクリーンショットの公開キャプションと動画の実フレームを参考にした。スクリーンショットは参考専用で、公開・コミットしない。
 - 公開MP4: `gallery/mily-b58-01-tiktok-radio-portrait.mp4`。512×910 / 約11.833秒 / H.264 Baseline / AAC / yuv420p / faststart。元の構図・尺を維持し、クロップ・拡大・AI加工なし。音声はAACへ変換して保持。
 - poster: `gallery/mily-b58-01-tiktok-radio-portrait-poster.jpg`。公開動画の0.5秒実フレーム。

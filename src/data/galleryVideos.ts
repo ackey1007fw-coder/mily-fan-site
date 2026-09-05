@@ -105,6 +105,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  tiktokPortraitVideo,
   oyasumilyStoryVideo,
   patonSecondStoryVideo,
   patonVoteFinalDayStoryVideo,
@@ -133,8 +134,6 @@ export const galleryVideos: GalleryVideoItem[] = [
   secondRoundStoryVideo,
   morningStoryVideo,
   tiktokSayonaraIchigoVideo,
-  // Undated owner-provided clip: do not infer its place in dated history.
-  tiktokPortraitVideo,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,

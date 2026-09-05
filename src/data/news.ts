@@ -1,3 +1,4 @@
+import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -191,6 +192,15 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-05-tiktok-radio-portrait",
+    date: "2026-09-05",
+    title: "「覚えて帰ってね〜」ラジオDJみりぃのTikTok",
+    body: "9月5日、みりぃのTikTok動画が投稿されました。手で作ったフレームの中に、さまざまな表情や装いの写真が次々に登場。投稿文では、3時間の生放送でおしゃべりするラジオDJとして自己紹介し、ミスサークルコンテスト2026への出場にも触れています。",
+    source: tiktokPortraitVideo.sourceUrl,
+    sourceLabel: "TikTokの投稿を見る",
+    media: tiktokPortraitVideo,
+  },
   {
     id: "2026-09-03-miss-circle-goals-support",
     date: "2026-09-03",
