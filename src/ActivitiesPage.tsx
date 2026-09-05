@@ -139,8 +139,8 @@ function HubLiveStatus() {
           : status.value
       }
       note={
-        status.slot && !status.slot.endTime
-          ? "終了時刻は確認できていません。"
+        status.slot
+          ? [status.slot.note, !status.slot.endTime ? "終了時刻は確認できていません。" : null].filter(Boolean).join(" / ") || undefined
           : undefined
       }
     />
@@ -729,8 +729,8 @@ function LiveCurrent() {
             label={status.label}
             value={value}
             note={
-              status.slot && !status.slot.endTime
-                ? "終了時刻は確認できていません。"
+              status.slot
+                ? [status.slot.note, !status.slot.endTime ? "終了時刻は確認できていません。" : null].filter(Boolean).join(" / ") || undefined
                 : undefined
             }
           />
