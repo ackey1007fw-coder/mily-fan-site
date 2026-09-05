@@ -193,6 +193,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-05-morning-stream-thanks",
+    date: "2026-09-05",
+    sameDayOrder: 20,
+    activityIds: ["live-stream"],
+    title: "朝配信ありがとう",
+    body: "みりぃがXで、朝配信へのお礼を伝えました。次は14:30〜、ともあります。",
+    source: "https://x.com/Mily_chan36/status/2096037739833737354",
+    sourceLabel: "みりぃのX",
+    message: {
+      label: "みりぃのX",
+      text:
+        "朝配信来てくれてありがとう✊🏻❤️‍🔥\n" +
+        "みんなにも元気届けられたかなー？少しづつ前向いてくよ🙂‍↕️\n" +
+        "次は14:30〜ね！投票も忘れずにっ‼️",
+    },
+  },
+  {
     id: "2026-09-05-tiktok-radio-portrait",
     date: "2026-09-05",
     title: "「覚えて帰ってね〜」ラジオDJみりぃのTikTok",

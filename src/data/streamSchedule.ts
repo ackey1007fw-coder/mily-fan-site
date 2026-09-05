@@ -34,7 +34,7 @@ export const streamSchedule: StreamSlot[] = [
   { date: "2026-09-05", time: "21:00", endTime: "21:50" },
   { date: "2026-09-06", time: "05:30", endTime: "06:30" },
   { date: "2026-09-06", time: "14:40", endTime: "15:20" },
-  { date: "2026-09-06", time: "22:30", endTime: "22:50" },
+  { date: "2026-09-06", time: "21:30", endTime: "22:00" },
   { date: "2026-09-08", time: "07:00", endTime: "08:00" },
   {
     date: "2026-09-09",
