@@ -8,7 +8,7 @@ import { events } from "../src/data/events.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
@@ -231,7 +231,7 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — scope", () => {
 
 describe("2026-09-03 X 三次審査の目標と応援方法 — Portal Feed and CONTENT-OPS", () => {
   it("flows through Portal Feed as text-only NEWS", () => {
-    const feed = createPortalFeed({ now: new Date("2026-09-03T16:00:00+09:00") });
+    const feed = createPortalFeed({ newsItems: news, now: new Date("2026-09-03T16:00:00+09:00") });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
     assertPortalNewsFollowsSort(feed, news);

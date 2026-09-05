@@ -3,17 +3,26 @@ import { readFile } from "node:fs/promises";
 import { it } from "node:test";
 import { galleryVideos, tiktokPortraitVideo, visibleGalleryVideos } from "../src/data/galleryVideos.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
-import { news } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news as previousNews } from "./fixtures/news-before-b58.ts";
 import { galleryVideos as previous } from "./fixtures/gallery-videos-before-b58.ts";
 
-it("publishes the undated TikTok once through the actual gallery without inventing dated news", async () => {
+it("shares the owner-dated TikTok between Latest and Gallery", async () => {
   const item = tiktokPortraitVideo;
-  assert.equal(item.sourceDate, null);
+  assert.equal(item.sourceDate, "2026-09-05");
   assert.equal(item.sourceUrl, "https://vt.tiktok.com/ZSqNgRAvx/");
   assert.deepEqual(visibleGalleryVideos().filter(({ id }) => id === item.id), [item]);
   assert.equal(galleryVideos.length, previous.length + 1);
   assert.deepEqual(galleryVideos.filter(({ id }) => id !== item.id), previous);
-  assert.equal(news.some((entry) => entry.media?.src === item.src), false);
+  const updates = news.filter((entry) => entry.media === item);
+  assert.equal(updates.length, 1);
+  assert.equal(updates[0].date, item.sourceDate);
+  assert.equal(updates[0].source, item.sourceUrl);
+  assert.equal(news[0], updates[0]);
+  assert.equal(sortNewsByDateDesc(news)[0], updates[0]);
+  assert.equal(news.length, previousNews.length + 1);
+  assert.deepEqual(news.filter((entry) => entry !== updates[0]), previousNews);
+  assert.equal(galleryVideos[0], item);
   const entries = selectGalleryEntries().filter(({ key }) => key === item.id);
   assert.equal(entries.length, 1);
   assert.equal(entries[0].kind, "video");

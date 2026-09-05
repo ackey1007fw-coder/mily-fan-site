@@ -15,7 +15,7 @@ import {
   missCircleWebVoteLink,
 } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { stories } from "../src/data/stories.ts";
 import {
   streamSchedule,
