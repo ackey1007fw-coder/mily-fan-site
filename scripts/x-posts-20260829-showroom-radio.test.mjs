@@ -55,32 +55,33 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Latest entry", () 
     assert.equal(news.filter((entry) => entry.id === RADIO_ID).length, 1);
     assert.equal(news.filter((entry) => entry.source === LIVE_SOURCE).length, 1);
     assert.equal(news.filter((entry) => entry.source === RADIO_SOURCE).length, 1);
-    assert.equal(news.length, 75);
-    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
-    assert.equal(ordered[1]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[4]?.id, "2026-09-01-first-showroom-oyasumiry");
-    assert.equal(ordered[5]?.id, "2026-09-01-ohayo-september-x");
-    assert.equal(ordered[6]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.equal(ordered[7]?.id, "2026-09-01-september-mily-story");
-    assert.equal(ordered[8]?.id, "2026-08-31-paton-vote-voice-story");
-    assert.equal(ordered[9]?.id, "2026-08-31-paton-first-place-story");
-    assert.equal(ordered[10]?.id, "2026-08-31-paton-15x-day-story");
-    assert.equal(ordered[11]?.id, "2026-08-31-paton-vote-how-to-story");
-    assert.equal(ordered[12]?.id, "2026-08-31-morning-stream-thanks");
-    assert.equal(ordered[13]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[14]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[15]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[16]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[17]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[18]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[19]?.id, "2026-08-30-showroom-30-day-story");
-    assert.equal(ordered[20]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[21]?.id, "2026-08-29-paton-vote-day-5-story");
-    assert.equal(ordered[22]?.id, LIVE_ID);
-    assert.equal(ordered[23]?.id, RADIO_ID);
-    assert.equal(ordered[24]?.id, "2026-08-29-paton-vote-day-4-story");
+    assert.equal(news.length, 76);
+    assert.equal(ordered[0]?.id, "2026-09-04-third-round-vote-day2-story");
+    assert.equal(ordered[1]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[2]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(ordered[3]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[4]?.id, "2026-09-02-paton-second-story");
+    assert.equal(ordered[5]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[6]?.id, "2026-09-01-ohayo-september-x");
+    assert.equal(ordered[7]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(ordered[8]?.id, "2026-09-01-september-mily-story");
+    assert.equal(ordered[9]?.id, "2026-08-31-paton-vote-voice-story");
+    assert.equal(ordered[10]?.id, "2026-08-31-paton-first-place-story");
+    assert.equal(ordered[11]?.id, "2026-08-31-paton-15x-day-story");
+    assert.equal(ordered[12]?.id, "2026-08-31-paton-vote-how-to-story");
+    assert.equal(ordered[13]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[14]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[15]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[16]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[17]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[18]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[19]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[20]?.id, "2026-08-30-showroom-30-day-story");
+    assert.equal(ordered[21]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[22]?.id, "2026-08-29-paton-vote-day-5-story");
+    assert.equal(ordered[23]?.id, LIVE_ID);
+    assert.equal(ordered[24]?.id, RADIO_ID);
+    assert.equal(ordered[25]?.id, "2026-08-29-paton-vote-day-4-story");
     assert.equal(live.date, "2026-08-29");
     assert.equal(radio.date, "2026-08-29");
     assert.equal(live.sameDayOrder, 3);
@@ -243,9 +244,10 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — scope", () => {
     assert.equal(liveNews[6]?.id, "2026-08-30-showroom-30-day-story");
     assert.equal(liveNews[7]?.id, LIVE_ID);
     assert.equal(liveNews[8]?.id, RADIO_ID);
-    assert.equal(missNews[0]?.id, "2026-09-03-miss-circle-goals-support");
-    assert.equal(missNews[1]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(missNews[2]?.id, LIVE_ID);
+    assert.equal(missNews[0]?.id, "2026-09-04-third-round-vote-day2-story");
+    assert.equal(missNews[1]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(missNews[2]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(missNews[3]?.id, LIVE_ID);
     assert.equal(
       campusNews.some((entry) => entry.id === LIVE_ID || entry.id === RADIO_ID),
       false,
@@ -262,7 +264,7 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Portal Feed", () =
   it("flows through Portal Feed without a hardcoded news id or image", async () => {
     const feed = createPortalFeed({ newsItems: news,
       now: new Date("2026-08-29T16:00:00+09:00"),
-      limit: PORTAL_FEED_LIMIT + 4,
+      limit: PORTAL_FEED_LIMIT + 5,
     });
     const liveEntry = findFeedItem(feed, portalNewsId(LIVE_ID));
     const radioEntry = findFeedItem(feed, portalNewsId(RADIO_ID));

@@ -3,6 +3,7 @@ import { news as currentNews } from "../../src/data/news.ts";
 
 const laterNewsIds = new Set([
   "2026-09-05-tiktok-radio-portrait",
+  "2026-09-04-third-round-vote-day2-story",
   "2026-09-03-miss-circle-goals-support",
   "2026-09-02-miss-circle-third-round",
   "2026-09-02-oyasumily-sr-story",

@@ -166,28 +166,29 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     const howTo = newsItem(HOW_TO_NEWS_ID);
     const thirtyDay = newsItem(THIRTY_DAY_NEWS_ID);
 
-    assert.equal(ordered[0]?.id, "2026-09-03-miss-circle-goals-support");
-    assert.equal(ordered[1]?.id, "2026-09-02-miss-circle-third-round");
-    assert.equal(ordered[2]?.id, "2026-09-02-oyasumily-sr-story");
-    assert.equal(ordered[3]?.id, "2026-09-02-paton-second-story");
-    assert.equal(ordered[4]?.id, "2026-09-01-first-showroom-oyasumiry");
-    assert.equal(ordered[5]?.id, "2026-09-01-ohayo-september-x");
-    assert.equal(ordered[6]?.id, "2026-09-01-paton-vote-final-day-story");
-    assert.equal(ordered[7]?.id, "2026-09-01-september-mily-story");
-    assert.equal(ordered[8]?.id, "2026-08-31-paton-vote-voice-story");
-    assert.equal(ordered[9], firstPlace);
-    assert.equal(ordered[10], fifteenX);
-    assert.equal(ordered[11], howTo);
-    assert.equal(ordered[12]?.id, "2026-08-31-morning-stream-thanks");
-    assert.equal(ordered[13]?.id, "2026-08-31-paton-15x-day");
-    assert.equal(ordered[14]?.id, "2026-08-31-showroom-wake-me");
-    assert.equal(ordered[15]?.id, "2026-08-30-consecutive-stream-30");
-    assert.equal(ordered[16]?.id, "2026-08-30-campus-girls-hold-second-story");
-    assert.equal(ordered[17]?.id, "2026-08-30-morning-showroom-0600");
-    assert.equal(ordered[18]?.id, "2026-08-30-mixch-final-day");
-    assert.equal(ordered[19], thirtyDay);
-    assert.equal(ordered[20]?.id, "2026-08-30-paton-rank-3");
-    assert.equal(ordered[21]?.id, "2026-08-29-paton-vote-day-5-story");
+    assert.equal(ordered[0]?.id, "2026-09-04-third-round-vote-day2-story");
+    assert.equal(ordered[1]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[2]?.id, "2026-09-02-miss-circle-third-round");
+    assert.equal(ordered[3]?.id, "2026-09-02-oyasumily-sr-story");
+    assert.equal(ordered[4]?.id, "2026-09-02-paton-second-story");
+    assert.equal(ordered[5]?.id, "2026-09-01-first-showroom-oyasumiry");
+    assert.equal(ordered[6]?.id, "2026-09-01-ohayo-september-x");
+    assert.equal(ordered[7]?.id, "2026-09-01-paton-vote-final-day-story");
+    assert.equal(ordered[8]?.id, "2026-09-01-september-mily-story");
+    assert.equal(ordered[9]?.id, "2026-08-31-paton-vote-voice-story");
+    assert.equal(ordered[10], firstPlace);
+    assert.equal(ordered[11], fifteenX);
+    assert.equal(ordered[12], howTo);
+    assert.equal(ordered[13]?.id, "2026-08-31-morning-stream-thanks");
+    assert.equal(ordered[14]?.id, "2026-08-31-paton-15x-day");
+    assert.equal(ordered[15]?.id, "2026-08-31-showroom-wake-me");
+    assert.equal(ordered[16]?.id, "2026-08-30-consecutive-stream-30");
+    assert.equal(ordered[17]?.id, "2026-08-30-campus-girls-hold-second-story");
+    assert.equal(ordered[18]?.id, "2026-08-30-morning-showroom-0600");
+    assert.equal(ordered[19]?.id, "2026-08-30-mixch-final-day");
+    assert.equal(ordered[20], thirtyDay);
+    assert.equal(ordered[21]?.id, "2026-08-30-paton-rank-3");
+    assert.equal(ordered[22]?.id, "2026-08-29-paton-vote-day-5-story");
     assert.equal(firstPlace?.sameDayOrder, 6);
     assert.equal(fifteenX?.sameDayOrder, 5);
     assert.equal(howTo?.sameDayOrder, 4);
@@ -200,7 +201,7 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.equal(news.filter(({ id }) => id === FIFTEEN_X_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === HOW_TO_NEWS_ID).length, 1);
     assert.equal(news.filter(({ id }) => id === THIRTY_DAY_NEWS_ID).length, 1);
-    assert.equal(news.length, 75);
+    assert.equal(news.length, 76);
     assert.deepEqual(verifyNews([firstPlace, fifteenX, howTo, thirtyDay]), []);
   });
 
@@ -266,14 +267,15 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
   });
 
   it("shares one manifest object per published Story with Gallery and Portal Feed", () => {
-    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b47-01-oyasumily-story");
-    assert.equal(visibleGalleryVideos()[1]?.id, "mily-b47-02-paton-second-story");
-    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b46-01-paton-vote-final-day-story");
-    assert.equal(visibleGalleryVideos()[3]?.id, "mily-b46-02-september-mily-story");
-    assert.equal(visibleGalleryVideos()[4]?.id, "mily-b45-01-paton-vote-voice-story");
-    assert.equal(visibleGalleryVideos()[5], patonVoteFirstPlaceStoryVideo);
-    assert.equal(visibleGalleryVideos()[6], patonVoteFifteenXStoryVideo);
-    assert.equal(visibleGalleryVideos()[7], campusGirlsHoldSecondStoryVideo);
+    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b59-01-third-round-vote-day2-story");
+    assert.equal(visibleGalleryVideos()[1]?.id, "mily-b47-01-oyasumily-story");
+    assert.equal(visibleGalleryVideos()[2]?.id, "mily-b47-02-paton-second-story");
+    assert.equal(visibleGalleryVideos()[3]?.id, "mily-b46-01-paton-vote-final-day-story");
+    assert.equal(visibleGalleryVideos()[4]?.id, "mily-b46-02-september-mily-story");
+    assert.equal(visibleGalleryVideos()[5]?.id, "mily-b45-01-paton-vote-voice-story");
+    assert.equal(visibleGalleryVideos()[6], patonVoteFirstPlaceStoryVideo);
+    assert.equal(visibleGalleryVideos()[7], patonVoteFifteenXStoryVideo);
+    assert.equal(visibleGalleryVideos()[8], campusGirlsHoldSecondStoryVideo);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
