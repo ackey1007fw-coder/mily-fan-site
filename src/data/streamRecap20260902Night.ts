@@ -65,7 +65,7 @@ export const streamRecap20260902Night: StreamRecap = {
     { timestamp: "1:09:00", label: "ランキング。おつみりん。明朝7:30〜" },
   ],
   nextNote:
-    "明朝 7:30〜8:00 が三次最初の枠。14:40〜15:20、21:00〜21:50 も案内されました。",
+    "配信時点では、翌9月3日 7:30〜8:00 が三次最初の枠と案内していました。同日 14:40〜15:20、21:00〜21:50 の案内もありました。",
   sourceLabel: "2026年9月2日 SHOWROOM夜配信 文字起こし（オーナー提供）",
   verifiedAt: "2026-09-03",
   transcriptionNote:
