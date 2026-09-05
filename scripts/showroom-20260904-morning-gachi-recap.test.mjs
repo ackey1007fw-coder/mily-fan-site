@@ -82,12 +82,16 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     assert.match(recap.summary, /スーツ/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /5枚/);
-    assert.equal(streamRecaps[0], streamRecap20260904Day);
-    assert.equal(streamRecaps[1], recap);
-    assert.equal(streamRecaps[2], streamRecap20260903Night);
-    assert.equal(streamRecaps[3], streamRecap20260903);
-    assert.equal(streamRecaps[4], streamRecap20260902Night);
-    assert.equal(streamRecaps[5], streamRecap20260902);
+    const dayIndex = streamRecaps.indexOf(streamRecap20260904Day);
+    assert.ok(dayIndex >= 0);
+    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 6), [
+      streamRecap20260904Day,
+      recap,
+      streamRecap20260903Night,
+      streamRecap20260903,
+      streamRecap20260902Night,
+      streamRecap20260902,
+    ]);
   });
 
   it("keeps a concise recap and withholds ranking names", () => {
