@@ -97,7 +97,7 @@ export const streamRecap20260905Asa: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "来てくれたみんなへの感謝から始まった朝配信。もらった元気を歌で届けたいと、練習中の「Mela!」を披露しました。歌のあとは、人と比べすぎず自分のペースを大切にしたいという思いを語り、笑顔で一日を送り出しました。",
-  image: morningStills[0],
+  image: morningStills[2],
   gallery: morningStills,
   galleryZip: {
     src: "/media/live/mily-b56-morning-stills.zip",

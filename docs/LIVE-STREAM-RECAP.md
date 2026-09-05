@@ -69,7 +69,7 @@
 | `timeline` | 16件まで。目安は8〜14件。昇順。録画が途中から始まる回は先頭が `0:00:00` でなくてよい | — |
 | `timeline[].label` | 体言止め。話題だけ | 〜32 |
 | `nextNote` | 配信内で案内された次枠。確定予定として書かない | 〜120 |
-| `sourceLabel` | `YYYY年M月D日 <枠の説明>（…オーナー提供）`。URLを書かない | — |
+| `sourceLabel` | `YYYY年M月D日 <枠の説明>（<入手経路>）`。入手経路は実際どおり（例: 動画確認・オーナー提供）。URLを書かない | — |
 | `verifiedAt` | `YYYY-MM-DD`。`date` 以降 | — |
 | `transcriptionNote` | `buildTranscriptionNote()` で組み立てる。手書きしない | — |
 
@@ -113,7 +113,9 @@ transcriptionNote: buildTranscriptionNote({
 - 掲載できるのは **オーナーが提供し、掲載面を明示承認した録画の実フレーム**だけ。
   AI生成・生成塗り足し・顔の加工はしない。
 - コメント欄、視聴者の表示名・アイコン、他の出場者が写らないよう切り出す。
-- 代表1枚だけの回は `image`。まとめて出す回は `gallery`（2〜12枚）＋ `image = gallery[0]`。提供素材が2枚だけの回も、確認済み素材を水増ししない。
+- 代表1枚だけの回は `image`。複数を出す回は `gallery`（12枚まで）と、その中から選んだ代表 `image`。
+  代表は「そのカードの顔」なので、時系列の先頭とは限らない（`gallery` 内と同じオブジェクトを指すこと）。
+  提供素材が2枚だけの回も、確認済み素材を水増ししない。
   `gallery` の各要素は `caption` と `downloadName` を必ず持つ。
 - `alt` は「誰が・何をしているか」を書く。「みりぃ」を必ず含める。
   コメント・視聴者・他出場者に触れない。
@@ -170,19 +172,19 @@ export const streamRecapYYYYMMDD: StreamRecap = {
   theme: "朝の配信",
   broadcastLabel: "0:00頃〜 約00分",
   platformLabel: "SHOWROOM",
-  summary: "（80〜140字。その回が何の回だったか）",
+  summary: "（140字まで。その回が何の回だったか）",
   image: /* 静止画があれば */ undefined,
   highlights: [
     {
       timestamp: "0:00:00",
-      title: "（5〜20字）",
-      body: "（40〜100字）",
+      title: "（20字まで）",
+      body: "（100字まで）",
       quote: "（任意。本人の言葉）",
     },
   ],
-  goals: [{ item: "（〜8字）", target: "（〜10字）", statusThen: "（〜12字）" }],
+  goals: [{ item: "（8字まで）", target: "（10字まで）", statusThen: "（12字まで）" }],
   ranking: [RANKING_NOTE], // 読み上げなしは []。範囲未確認は RANKING_NOTE_WITHOUT_RANGE
-  timeline: [{ timestamp: "0:00:00", label: "（〜32字）" }],
+  timeline: [{ timestamp: "0:00:00", label: "（32字まで）" }],
   nextNote: "（配信内で案内された次枠。確定予定にしない）",
   sourceLabel: "YYYY年M月D日 SHOWROOM◯◯配信（動画確認・オーナー提供）",
   verifiedAt: "YYYY-MM-DD",

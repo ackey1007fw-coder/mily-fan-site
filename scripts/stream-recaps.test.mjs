@@ -118,7 +118,8 @@ describe("配信メモの統一ルール", () => {
         atMost(recap.summary, MAX.summary, `${recap.id} summary`);
         atMost(recap.nextNote, MAX.nextNote, `${recap.id} nextNote`);
 
-        assert.match(recap.sourceLabel, /^\d{4}年\d{1,2}月\d{1,2}日 .+（.*オーナー提供）$/);
+        // 日付と素材の説明は必須。入手経路（オーナー提供など）は実際に応じて書く。
+        assert.match(recap.sourceLabel, /^\d{4}年\d{1,2}月\d{1,2}日 .+（.+）$/);
         assert.doesNotMatch(recap.sourceLabel, /https?:\/\//);
         assert.match(recap.verifiedAt, /^\d{4}-\d{2}-\d{2}$/);
         assertRealDate(recap.verifiedAt, `${recap.id} verifiedAt`);
@@ -202,7 +203,12 @@ describe("配信メモの統一ルール", () => {
             stills.length <= MAX.gallery,
             `スクショ ${stills.length}枚は多すぎ（上限${MAX.gallery}）`,
           );
-          assert.equal(recap.image, stills[0], "代表画像は gallery[0] と同じオブジェクト");
+          // 代表は「そのカードの顔」。時系列の先頭とは限らないので、
+          // ギャラリー内の同じオブジェクトであることだけを見る。
+          assert.ok(
+            stills.includes(recap.image),
+            "代表画像は gallery のいずれかと同じオブジェクト",
+          );
           assert.equal(new Set(stills.map(({ src }) => src)).size, stills.length);
         }
 

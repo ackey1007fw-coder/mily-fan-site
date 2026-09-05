@@ -96,7 +96,7 @@ export const streamRecap20260905Day: StreamRecap = {
   "broadcastLabel": "14:31頃〜 約47分",
   "platformLabel": "SHOWROOM",
   "summary": "ヨーグルトアイスを食べながら、コメントと笑顔を交わした昼配信。ライブ会場の周りに広がるわくわく感や、朝に披露した歌を振り返りました。後半はラジオのパーソナリティとしての話へ。配信を通じて出会ったみんなから知ることがたくさんある、と感謝も伝えていました。",
-  "image": dayStills[0],
+  "image": dayStills[4],
   "galleryZip": {
     "src": "/media/live/mily-b57-day-stills.zip",
     "filename": "みりぃ_20260905昼_スクショ10枚.zip",
