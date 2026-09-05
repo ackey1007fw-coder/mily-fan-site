@@ -19,37 +19,45 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const RULES_DOC = "docs/LIVE-STREAM-RECAP.md";
 
-const LIMITS = {
-  theme: [5, 16],
-  summary: [80, 140],
-  highlightsMax: 8,
-  highlightTitle: [5, 20],
-  highlightBody: [40, 100],
-  highlightQuote: [1, 40],
-  goalsMax: 6,
-  goalItem: [1, 8],
-  goalTarget: [1, 10],
-  goalStatusThen: [1, 12],
-  timelineMax: 16,
-  timelineLabel: [1, 32],
-  nextNote: [40, 120],
-  gallery: [2, 12],
+// 上限だけを決める。下限を作ると、検査を通すために本文を水増しさせてしまう。
+const MAX = {
+  theme: 16,
+  summary: 140,
+  highlights: 8,
+  highlightTitle: 20,
+  highlightBody: 100,
+  highlightQuote: 40,
+  goals: 6,
+  goalItem: 8,
+  goalTarget: 10,
+  goalStatusThen: 12,
+  timeline: 16,
+  timelineLabel: 32,
+  nextNote: 120,
+  gallery: 12,
 };
 
-const RANKING_NOTE_SHAPE =
-  /^配信終了時に(?:、\d{1,3}位から\d{1,3}位まで)?ランキングを読み上げました。個人名は掲載していません。$/;
+const RANKING_PLACE = "[1-9]\\d{0,2}";
+const RANKING_NOTE_SHAPE = new RegExp(
+  `^配信終了時に(?:、${RANKING_PLACE}位から${RANKING_PLACE}位まで)?ランキングを読み上げました。個人名は掲載していません。$`,
+);
 const THEME_PREFIXES = ["朝", "昼", "夕", "夜", "深夜"];
 const PLATFORMS = new Set(["SHOWROOM", "MixChannel"]);
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
 
 const size = (value) => Array.from(value).length;
 
-function inRange(value, [min, max], label) {
+function atMost(value, max, label) {
   const length = size(value);
-  assert.ok(
-    length >= min && length <= max,
-    `${label}: ${length}字は範囲外（${min}〜${max}）: ${value}`,
-  );
+  assert.ok(length > 0, `${label}: 空にしない`);
+  assert.ok(length <= max, `${label}: ${length}字は長すぎ（上限${max}）: ${value}`);
+}
+
+/** 実在する暦日か。new Date は 2026-02-31 を黙って繰り上げるので往復で確かめる。 */
+function assertRealDate(value, label) {
+  const parsed = new Date(`${value}T12:00:00Z`);
+  assert.equal(parsed.toISOString().slice(0, 10), value, `${label}: 実在しない日付 ${value}`);
+  return parsed;
 }
 
 function seconds(timestamp) {
@@ -94,13 +102,7 @@ describe("配信メモの統一ルール", () => {
         assert.ok(recap.id.startsWith(`${recap.date}-`));
 
         const [year, month, day] = recap.date.split("-");
-        const parsed = new Date(`${recap.date}T12:00:00Z`);
-        // new Date は 2026-02-31 のような日付を黙って繰り上げるので、往復で確かめる。
-        assert.equal(
-          parsed.toISOString().slice(0, 10),
-          recap.date,
-          `実在しない日付: ${recap.date}`,
-        );
+        const parsed = assertRealDate(recap.date, `${recap.id} date`);
         const weekday = WEEKDAYS[parsed.getUTCDay()];
         assert.equal(recap.dateLabel, `${year}.${month}.${day}（${weekday}）`);
 
@@ -109,16 +111,17 @@ describe("配信メモの統一ルール", () => {
           `themeは時間帯で始める: ${recap.theme}`,
         );
         assert.doesNotMatch(recap.theme, /SHOWROOM|MixChannel/);
-        inRange(recap.theme, LIMITS.theme, `${recap.id} theme`);
+        atMost(recap.theme, MAX.theme, `${recap.id} theme`);
 
         assert.ok(PLATFORMS.has(recap.platformLabel));
         startMinutes(recap.broadcastLabel);
-        inRange(recap.summary, LIMITS.summary, `${recap.id} summary`);
-        inRange(recap.nextNote, LIMITS.nextNote, `${recap.id} nextNote`);
+        atMost(recap.summary, MAX.summary, `${recap.id} summary`);
+        atMost(recap.nextNote, MAX.nextNote, `${recap.id} nextNote`);
 
         assert.match(recap.sourceLabel, /^\d{4}年\d{1,2}月\d{1,2}日 .+（.*オーナー提供）$/);
         assert.doesNotMatch(recap.sourceLabel, /https?:\/\//);
         assert.match(recap.verifiedAt, /^\d{4}-\d{2}-\d{2}$/);
+        assertRealDate(recap.verifiedAt, `${recap.id} verifiedAt`);
         assert.ok(recap.verifiedAt >= recap.date, "verifiedAt は配信日以降");
       });
 
@@ -126,18 +129,18 @@ describe("配信メモの統一ルール", () => {
         const { highlights } = recap;
         // 素材が薄い回は少ないままでよい。上限だけを見て、水増しを求めない。
         assert.ok(
-          highlights.length <= LIMITS.highlightsMax,
-          `見どころ ${highlights.length}件は多すぎ（上限${LIMITS.highlightsMax}）`,
+          highlights.length <= MAX.highlights,
+          `見どころ ${highlights.length}件は多すぎ（上限${MAX.highlights}）`,
         );
 
         const stamps = highlights.map(({ timestamp }) => seconds(timestamp));
         assert.deepEqual(stamps, [...stamps].sort((left, right) => left - right));
 
         for (const highlight of highlights) {
-          inRange(highlight.title, LIMITS.highlightTitle, `${recap.id} title`);
-          inRange(highlight.body, LIMITS.highlightBody, `${recap.id} body`);
+          atMost(highlight.title, MAX.highlightTitle, `${recap.id} title`);
+          atMost(highlight.body, MAX.highlightBody, `${recap.id} body`);
           if (highlight.quote !== undefined) {
-            inRange(highlight.quote, LIMITS.highlightQuote, `${recap.id} quote`);
+            atMost(highlight.quote, MAX.highlightQuote, `${recap.id} quote`);
             assert.doesNotMatch(highlight.quote, /^[「『]|[」』]$/);
           }
         }
@@ -147,15 +150,15 @@ describe("配信メモの統一ルール", () => {
         const { goals } = recap;
         // 目標を確認できなかった回は空配列。UIはセクションごと出さない。
         assert.ok(
-          goals.length <= LIMITS.goalsMax,
-          `目標 ${goals.length}件は多すぎ（上限${LIMITS.goalsMax}）`,
+          goals.length <= MAX.goals,
+          `目標 ${goals.length}件は多すぎ（上限${MAX.goals}）`,
         );
         assert.equal(new Set(goals.map(({ item }) => item)).size, goals.length);
 
         for (const goal of goals) {
-          inRange(goal.item, LIMITS.goalItem, `${recap.id} goal.item`);
-          inRange(goal.target, LIMITS.goalTarget, `${recap.id} goal.target`);
-          inRange(goal.statusThen, LIMITS.goalStatusThen, `${recap.id} goal.statusThen`);
+          atMost(goal.item, MAX.goalItem, `${recap.id} goal.item`);
+          atMost(goal.target, MAX.goalTarget, `${recap.id} goal.target`);
+          atMost(goal.statusThen, MAX.goalStatusThen, `${recap.id} goal.statusThen`);
           assert.doesNotMatch(goal.statusThen, /配信時点/);
           assert.doesNotMatch(goal.item, /アバ権/);
         }
@@ -170,14 +173,14 @@ describe("配信メモの統一ルール", () => {
 
         const { timeline } = recap;
         assert.ok(
-          timeline.length <= LIMITS.timelineMax,
-          `タイムライン ${timeline.length}件は多すぎ（上限${LIMITS.timelineMax}）`,
+          timeline.length <= MAX.timeline,
+          `タイムライン ${timeline.length}件は多すぎ（上限${MAX.timeline}）`,
         );
-        if (timeline.length > 0) assert.equal(timeline[0].timestamp, "0:00:00");
+        // 録画が途中から始まる回もあるため、先頭を 0:00:00 に強制しない。昇順だけ見る。
         const stamps = timeline.map(({ timestamp }) => seconds(timestamp));
         assert.deepEqual(stamps, [...stamps].sort((left, right) => left - right));
         for (const item of timeline) {
-          inRange(item.label, LIMITS.timelineLabel, `${recap.id} timeline.label`);
+          atMost(item.label, MAX.timelineLabel, `${recap.id} timeline.label`);
         }
       });
 
@@ -196,8 +199,8 @@ describe("配信メモの統一ルール", () => {
         const stills = recap.gallery ?? [];
         if (stills.length > 0) {
           assert.ok(
-            stills.length >= LIMITS.gallery[0] && stills.length <= LIMITS.gallery[1],
-            `スクショ ${stills.length}枚は範囲外`,
+            stills.length <= MAX.gallery,
+            `スクショ ${stills.length}枚は多すぎ（上限${MAX.gallery}）`,
           );
           assert.equal(recap.image, stills[0], "代表画像は gallery[0] と同じオブジェクト");
           assert.equal(new Set(stills.map(({ src }) => src)).size, stills.length);

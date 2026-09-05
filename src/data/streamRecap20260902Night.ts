@@ -37,7 +37,7 @@ export const streamRecap20260902Night: StreamRecap = {
     {
       timestamp: "0:59:00",
       title: "日本ザル・海くん",
-      body: "熊本の動物園にいるおじいちゃんザルの話を紹介しました。他の部屋では聞けない話だと伝えました。",
+      body: "熊本の動物園のおじいちゃんザル。他の部屋では聞けない話、と紹介しました。",
     },
   ],
   goals: [

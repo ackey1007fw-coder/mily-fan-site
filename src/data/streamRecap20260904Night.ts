@@ -30,7 +30,7 @@ export const streamRecap20260904Night: StreamRecap = {
     {
       timestamp: "0:37:00",
       title: "WEB投票とキラキラ",
-      body: "この夜枠でも、WEB投票とキラキラでの応援を呼びかけ、参加をお願いしていました。",
+      body: "この夜枠でも、WEB投票とキラキラでの応援を呼びかけていました。",
     },
     {
       timestamp: "0:48:00",

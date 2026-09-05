@@ -11,7 +11,7 @@ import {
 
 const RECAP_FILE = new URL("../src/data/streamRecap20260904Night.ts", import.meta.url);
 // Baseline of reviewed PUBLIC copy only. Do not store private names in fixtures.
-const APPROVED_RECAP_BLOB_SHA = "1ba68ab8c15612621d917de92eec493dc384e113";
+const APPROVED_RECAP_BLOB_SHA = "0a86fc7b7cd834d247cc96e4267a94d0ad2bd364";
 
 function gitBlobSha(source) {
   const bytes = Buffer.from(source.replace(/\r\n/g, "\n"), "utf8");

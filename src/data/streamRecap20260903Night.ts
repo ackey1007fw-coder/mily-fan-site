@@ -77,7 +77,7 @@ export const streamRecap20260903Night: StreamRecap = {
     {
       timestamp: "0:47:00",
       title: "明朝は7時から約30分",
-      body: "ランキングを読んで、翌朝7時から約30分と案内し、次の配信予定を伝えて配信を締めくくりました。",
+      body: "ランキングを読んで、翌朝7時から約30分と案内して締めました。",
     },
   ],
   goals: [

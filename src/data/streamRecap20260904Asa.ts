@@ -119,7 +119,6 @@ export const streamRecap20260904Asa: StreamRecap = {
   ],
   ranking: [RANKING_NOTE],
   timeline: [
-    { timestamp: "0:00:00", label: "朝配信の開始" },
     { timestamp: "0:00:03", label: "おはよう。謝罪は夜に" },
     { timestamp: "0:01:06", label: "夜スーツ" },
     { timestamp: "0:04:39", label: "ペンは夜に買う" },

@@ -164,10 +164,6 @@ export const streamRecap20260905Day: StreamRecap = {
   "ranking": [],
   "timeline": [
     {
-      "timestamp": "0:00:00",
-      "label": "昼配信の開始"
-    },
-    {
       "timestamp": "0:00:45",
       "label": "来てくれたみんなにありがとう"
     },

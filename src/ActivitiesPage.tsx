@@ -495,8 +495,8 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
-        新しい回を上に置いています。どの回も同じ並び（見どころ → 目標 → ランキング →
-        タイムスタンプと次枠 → 出典）で書いています。開くと見どころと目標が出ます。閉じても日付と一言は残り、画像がある回は静止画も残します。
+        新しい回を上に置いています。どの回も同じ並び（見どころ → スクショ → 目標 →
+        ランキング → タイムスタンプと次枠 → 出典）で書いています。スクショは写真のある回だけです。閉じても日付と一言は残り、画像がある回は静止画も残します。
       </p>
       <ul className="mt-6 space-y-4">
         {streamRecaps.map((recap, index) => (
