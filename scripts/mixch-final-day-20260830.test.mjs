@@ -140,7 +140,7 @@ describe("2026-08-30 Mixch final-day NEWS", () => {
 
   it("appears on CAMPUS GIRLS and is derived into the Portal Feed without a local image", () => {
     const selected = selectActivityNews("campus-girls", news, news.length);
-    const feed = createPortalFeed();
+    const feed = createPortalFeed({ newsItems: news });
     const feedItem = feed.items.find(
       (candidate) => candidate.id === `mily:news:${NEWS_ID}`,
     );

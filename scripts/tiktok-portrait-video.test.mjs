@@ -18,10 +18,21 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
   assert.equal(updates.length, 1);
   assert.equal(updates[0].date, item.sourceDate);
   assert.equal(updates[0].source, item.sourceUrl);
-  assert.equal(news[0], updates[0]);
-  assert.equal(sortNewsByDateDesc(news)[0], updates[0]);
-  assert.equal(news.length, previousNews.length + 1);
-  assert.deepEqual(news.filter((entry) => entry !== updates[0]), previousNews);
+  assert.equal(
+    news.find((entry) => entry.id === "2026-09-05-tiktok-radio-portrait"),
+    updates[0],
+  );
+  const ordered = sortNewsByDateDesc(news);
+  assert.equal(ordered[0]?.id, "2026-09-05-morning-stream-thanks");
+  assert.equal(ordered[1], updates[0]);
+  assert.equal(news.length, previousNews.length + 2);
+  assert.deepEqual(
+    news.filter(
+      (entry) =>
+        entry !== updates[0] && entry.id !== "2026-09-05-morning-stream-thanks",
+    ),
+    previousNews,
+  );
   assert.equal(galleryVideos[0], item);
   const entries = selectGalleryEntries().filter(({ key }) => key === item.id);
   assert.equal(entries.length, 1);
