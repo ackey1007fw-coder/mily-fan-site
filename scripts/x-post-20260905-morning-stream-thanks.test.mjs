@@ -173,18 +173,17 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
     }
 
     const night = streamSchedule.find(
-      (slot) => slot.date === "2026-09-06" && slot.time === "22:30",
+      (slot) => slot.date === "2026-09-06" && slot.time === "21:30",
     );
     assert.deepEqual(night, {
       date: "2026-09-06",
-      time: "22:30",
-      endTime: "23:00",
+      time: "21:30",
     });
     assert.equal(
       streamSchedule.some(
         (slot) =>
           slot.date === "2026-09-06" &&
-          (slot.time === "21:30" || slot.endTime === "22:00" || slot.endTime === "22:50"),
+          (slot.time === "22:30" || slot.endTime === "22:00" || slot.endTime === "22:50"),
       ),
       false,
     );
@@ -192,8 +191,7 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
       streamSchedule.filter((slot) => slot.date === "2026-09-06"),
       [
         { date: "2026-09-06", time: "05:30", endTime: "07:00" },
-        { date: "2026-09-06", time: "14:40", endTime: "15:20" },
-        { date: "2026-09-06", time: "22:30", endTime: "23:00" },
+        { date: "2026-09-06", time: "21:30" },
       ],
     );
   });

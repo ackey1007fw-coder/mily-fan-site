@@ -112,20 +112,19 @@ describe("2026-09-06 X 夜枠22:30変更 — scope", () => {
     }
   });
 
-  it("replaces the 9/6 night slot and leaves morning and afternoon alone", () => {
+  it("uses the subsequently verified official 9/6 schedule for the fallback", () => {
     assert.deepEqual(
       streamSchedule.filter((slot) => slot.date === "2026-09-06"),
       [
         { date: "2026-09-06", time: "05:30", endTime: "07:00" },
-        { date: "2026-09-06", time: "14:40", endTime: "15:20" },
-        { date: "2026-09-06", time: "22:30", endTime: "23:00" },
+        { date: "2026-09-06", time: "21:30" },
       ],
     );
     assert.equal(
       streamSchedule.some(
         (slot) =>
           slot.date === "2026-09-06" &&
-          (slot.time === "21:30" || slot.endTime === "22:00"),
+          (slot.time === "14:40" || slot.time === "22:30" || slot.endTime === "23:00"),
       ),
       false,
     );
