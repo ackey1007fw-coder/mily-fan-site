@@ -11,7 +11,7 @@ const morningStills: StreamRecapImage[] = [
     src: "/media/live/mily-b55-01-smile.jpg",
     width: STILL_W,
     height: STILL_H,
-    alt: "三次2日目の朝配信で、灰色パーカーのみりぃが微笑んでいる。ヘアピン、すっぴん",
+    alt: "三次2日目の朝配信で、灰色パーカーのみりぃが微笑んでいる。ヘアピンを着けている",
     caption: "ベストショット。笑顔",
     downloadName: "みりぃ_三次2日目朝_01_ベスト_笑顔.jpg",
   },
@@ -63,7 +63,7 @@ export const streamRecap20260904Asa: StreamRecap = {
   broadcastLabel: "07:12頃〜 約31分",
   platformLabel: "SHOWROOM",
   summary:
-    "MISS CIRCLE CONTEST 三次審査2日目の朝枠。寝坊で開始が遅れ、すっぴんと灰色パーカーで約31分でした。謝罪とホワイトボード用のペン買いは夜へ回すと話しています。夜はスーツ配信、22:30〜23:40。WEB投票とキラキラをお願いし、昼枠は少し短く夜枠を伸ばすと案内しました。",
+    "MISS CIRCLE CONTEST 三次審査2日目の朝枠。寝坊で開始が遅れ、灰色パーカーで約31分でした。謝罪とホワイトボード用のペン買いは夜へ回すと話しています。夜はスーツ配信、22:30〜23:40。WEB投票とキラキラをお願いし、昼枠は少し短く夜枠を伸ばすと案内しました。",
   image: morningStills[0],
   gallery: morningStills,
   galleryZip: {
@@ -130,7 +130,7 @@ export const streamRecap20260904Asa: StreamRecap = {
     { timestamp: "0:29:57", label: "おつみり。夜会おうね" },
   ],
   nextNote:
-    "同日 22:30〜23:40 がスーツ配信です。夜はメイクする予定。昼枠は少し短くすると話しています。WEB投票とキラキラは継続。",
+    "配信時点では、同日 22:30〜23:40 のスーツ配信を案内していました。夜はメイク予定で、昼枠は少し短くすると話しています。WEB投票とキラキラも継続して呼びかけていました。",
   sourceLabel: "2026年9月4日 SHOWROOM朝配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-05",
   transcriptionNote:
