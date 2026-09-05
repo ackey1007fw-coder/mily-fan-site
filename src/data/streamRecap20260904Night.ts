@@ -1,4 +1,9 @@
-import type { StreamRecap } from "./streamRecaps";
+import type { StreamRecap } from "./streamRecaps.ts";
+import {
+  buildTranscriptionNote,
+  RANKING_NOTE_WITHOUT_RANGE,
+  REPORT_MATERIAL_NOTE,
+} from "./streamRecapRules.ts";
 
 /**
  * オーナー提供の配信レポート・文字起こし抜粋をもとにした公開用要約。
@@ -10,7 +15,7 @@ export const streamRecap20260904Night: StreamRecap = {
   id: "2026-09-04-night-gachi-showroom",
   date: "2026-09-04",
   dateLabel: "2026.09.04（金）",
-  theme: "三次2日目の夜配信 — みんなの温かさとともに",
+  theme: "夜の配信・三次2日目",
   broadcastLabel: "22:32頃〜 約67分",
   platformLabel: "SHOWROOM",
   summary:
@@ -48,9 +53,7 @@ export const streamRecap20260904Night: StreamRecap = {
     { item: "WEB投票", target: "応援のお願い", statusThen: "配信内で呼びかけ" },
     { item: "キラキラ", target: "応援のお願い", statusThen: "配信内で呼びかけ" },
   ],
-  ranking: [
-    "配信の終わりにランキングを読み上げ、応援への感謝を伝えました。個人名は掲載していません。",
-  ],
+  ranking: [RANKING_NOTE_WITHOUT_RANGE],
   timeline: [
     { timestamp: "0:00:00", label: "来てくれたみんなへお礼" },
     { timestamp: "0:02:00", label: "配信で勇気づけられていること" },
@@ -64,6 +67,9 @@ export const streamRecap20260904Night: StreamRecap = {
     "配信時点では、翌9月5日の配信予定はファンルームで案内すると話していました。このメモでは次枠の時刻を確定情報として掲載していません。",
   sourceLabel: "2026年9月4日 SHOWROOM夜配信 配信レポート・文字起こし抜粋（オーナー提供）",
   verifiedAt: "2026-09-05",
-  transcriptionNote:
-    "提供された配信レポートと文字起こし抜粋をもとに要約しています。タイムスタンプは話題の位置を示す目安です。原音声・映像の再確認は行っていません。録音音声・画面録画・全文文字起こしは掲載していません。この夜枠の画像は掲載していません。",
+  transcriptionNote: buildTranscriptionNote({
+    material: REPORT_MATERIAL_NOTE,
+    stills: "静止画は掲載していません。",
+    extra: "タイムスタンプは話題の位置を示す目安です。",
+  }),
 };

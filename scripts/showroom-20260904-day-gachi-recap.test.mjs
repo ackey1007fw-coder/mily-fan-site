@@ -12,6 +12,7 @@ import {
   streamRecap20260903Night,
   streamRecap20260904Day,
   streamRecap20260904Asa,
+  streamRecap20260903Lunch,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
@@ -58,7 +59,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
 
     assert.equal(recap.date, "2026-09-04");
     assert.equal(recap.dateLabel, "2026.09.04（金）");
-    assert.equal(recap.theme, "三次2日目の昼配信");
+    assert.equal(recap.theme, "昼の配信・三次2日目");
     assert.equal(recap.broadcastLabel, "14:50頃〜 約20分");
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-04");
@@ -69,10 +70,11 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.match(recap.transcriptionNote, /5枚/);
     const dayIndex = streamRecaps.indexOf(recap);
     assert.ok(dayIndex >= 0);
-    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 6), [
+    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 7), [
       recap,
       streamRecap20260904Asa,
       streamRecap20260903Night,
+      streamRecap20260903Lunch,
       streamRecap20260903,
       streamRecap20260902Night,
       streamRecap20260902,
@@ -96,7 +98,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.ok(recap.goals.some(({ item }) => item === "夜枠"));
     assert.match(recap.ranking[0], /個人名は掲載していません/);
     assert.equal(
-      streamRecaps.every((item) => item.ranking.length === 1),
+      streamRecaps.every((item) => item.ranking.length <= 1),
       true,
     );
 

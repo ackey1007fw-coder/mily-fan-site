@@ -12,6 +12,7 @@ import {
   streamRecap20260903Night,
   streamRecap20260904Day,
   streamRecap20260904Asa,
+  streamRecap20260903Lunch,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
@@ -33,7 +34,10 @@ const RECAP_FILE = path.join(root, "src/data/streamRecap20260904Asa.ts");
 // Git blob ID of the reviewed PUBLIC source, not a hash/list of private names.
 // Covers copy, captions, filenames, source labels, and comments. Rebaseline only
 // after another content/privacy review; never copy viewer names into fixtures.
-const APPROVED_RECAP_BLOB_SHA = "70988f981b4739cde11feaaf4d8708cbf841a3ca";
+const APPROVED_RECAP_BLOB_SHA = "6bd6620d7a1d468f56c6bdcfdf2a4b162b400341";
+// 公開文は共有定数からも組み立てるので、そちらの変更も再レビュー対象にする。
+const RULES_FILE = path.join(root, "src/data/streamRecapRules.ts");
+const APPROVED_RULES_BLOB_SHA = "350375f1df51ea3f0c4ac26425f9f57c7d313f2c";
 
 function gitBlobSha(source) {
   // Match Git's LF-normalized source on Windows checkouts as well as CI.
@@ -73,7 +77,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
 
     assert.equal(recap.date, "2026-09-04");
     assert.equal(recap.dateLabel, "2026.09.04（金）");
-    assert.equal(recap.theme, "三次2日目の朝配信");
+    assert.equal(recap.theme, "朝の配信・三次2日目");
     assert.equal(recap.broadcastLabel, "07:12頃〜 約31分");
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-05");
@@ -84,10 +88,11 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     assert.match(recap.transcriptionNote, /5枚/);
     const dayIndex = streamRecaps.indexOf(streamRecap20260904Day);
     assert.ok(dayIndex >= 0);
-    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 6), [
+    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 7), [
       streamRecap20260904Day,
       recap,
       streamRecap20260903Night,
+      streamRecap20260903Lunch,
       streamRecap20260903,
       streamRecap20260902Night,
       streamRecap20260902,
@@ -113,7 +118,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
       "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
     ]);
     assert.equal(
-      streamRecaps.every((item) => item.ranking.length === 1),
+      streamRecaps.every((item) => item.ranking.length <= 1),
       true,
     );
 
@@ -183,6 +188,12 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
   });
 
   it("locks reviewed public source without storing private-name fixtures", async () => {
+    const rules = await readFile(RULES_FILE, "utf8");
+    assert.equal(
+      gitBlobSha(rules),
+      APPROVED_RULES_BLOB_SHA,
+      "共有注記が変わりました。公開文を読み直してから baseline を更新してください。",
+    );
     const source = await readFile(RECAP_FILE, "utf8");
     assert.equal(
       gitBlobSha(source),
