@@ -26,7 +26,7 @@ const LIMITS = {
   highlightTitle: [5, 20],
   highlightBody: [40, 100],
   highlightQuote: [1, 40],
-  goals: [2, 6],
+  goalsMax: 6,
   goalItem: [1, 8],
   goalTarget: [1, 10],
   goalStatusThen: [1, 12],
@@ -145,9 +145,10 @@ describe("配信メモの統一ルール", () => {
 
       it("keeps goals labelled without repeating the UI wording", () => {
         const { goals } = recap;
+        // 目標を確認できなかった回は空配列。UIはセクションごと出さない。
         assert.ok(
-          goals.length >= LIMITS.goals[0] && goals.length <= LIMITS.goals[1],
-          `目標 ${goals.length}件は範囲外`,
+          goals.length <= LIMITS.goalsMax,
+          `目標 ${goals.length}件は多すぎ（上限${LIMITS.goalsMax}）`,
         );
         assert.equal(new Set(goals.map(({ item }) => item)).size, goals.length);
 
