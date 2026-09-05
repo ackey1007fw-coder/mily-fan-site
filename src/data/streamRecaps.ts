@@ -8,6 +8,21 @@ import { streamRecap20260903 } from "./streamRecap20260903.ts";
 import { streamRecap20260902 } from "./streamRecap20260902.ts";
 import { streamRecap20260902Night } from "./streamRecap20260902Night.ts";
 
+export {
+  AUTO_TRANSCRIPT_MATERIAL_NOTE,
+  buildRankingNote,
+  buildTranscriptionNote,
+  RANKING_NOTE,
+  RANKING_NOTE_WITHOUT_RANGE,
+  RECAP_FIGURES_NOTE,
+  RECAP_WITHHOLD_NOTE,
+  REPORT_MATERIAL_NOTE,
+  SINGLE_STILL_NOTE,
+  TRANSCRIPT_MATERIAL_NOTE,
+  VIDEO_MATERIAL_NOTE,
+  streamRecapRadioStill,
+} from "./streamRecapRules.ts";
+
 export type StreamRecapHighlight = {
   timestamp: string;
   title: string;
@@ -17,7 +32,9 @@ export type StreamRecapHighlight = {
 
 export type StreamRecapGoal = {
   item: string;
+  /** 目指す値・状態。「この回」の状態は statusThen へ。 */
   target: string;
+  /** その回でどうだったか。状態だけでなく、本人の呼びかけも含む。 */
   statusThen: string;
 };
 

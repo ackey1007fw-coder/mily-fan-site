@@ -1,7 +1,9 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
-
-const RANKING_NOTE =
-  "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import {
+  buildTranscriptionNote,
+  RANKING_NOTE,
+  VIDEO_MATERIAL_NOTE,
+} from "./streamRecapRules.ts";
 
 const GACHI_STILL_W = 400;
 const GACHI_STILL_H = 228;
@@ -99,7 +101,7 @@ export const streamRecap20260903: StreamRecap = {
   id: "2026-09-03-morning-gachi-showroom",
   date: "2026-09-03",
   dateLabel: "2026.09.03（木）",
-  theme: "三次初日の朝配信",
+  theme: "朝の配信・三次初日",
   broadcastLabel: "7:30頃〜 約30分",
   platformLabel: "SHOWROOM",
   summary:
@@ -172,6 +174,9 @@ export const streamRecap20260903: StreamRecap = {
     "配信時点では、同日9月3日 14:40〜 はメイクして会うと案内していました。夜枠でも待っていると話し、WEB投票は同日12時からと案内していました。",
   sourceLabel: "2026年9月3日 SHOWROOM朝配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
-  transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを10枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: VIDEO_MATERIAL_NOTE,
+    stills:
+      "静止画は録画の実フレームを10枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。",
+  }),
 };

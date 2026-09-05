@@ -1,4 +1,8 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import {
+  AUTO_TRANSCRIPT_MATERIAL_NOTE,
+  buildTranscriptionNote,
+} from "./streamRecapRules.ts";
 
 const morningStills: StreamRecapImage[] = [
   {
@@ -88,7 +92,7 @@ export const streamRecap20260905Asa: StreamRecap = {
   id: "2026-09-05-morning-gachi-showroom",
   date: "2026-09-05",
   dateLabel: "2026.09.05（土）",
-  theme: "三次3日目の朝配信 — 歌で元気をおすそわけ",
+  theme: "朝の配信・三次3日目",
   broadcastLabel: "09:01頃〜 約23分",
   platformLabel: "SHOWROOM",
   summary:
@@ -132,7 +136,7 @@ export const streamRecap20260905Asa: StreamRecap = {
     { item: "キラキラ", target: "応援のお願い", statusThen: "朝も呼びかけ" },
     { item: "歌の練習", target: "また披露したい", statusThen: "Mela!を歌唱" },
   ],
-  ranking: ["順位・得点は確認できていないため掲載していません。個人名は掲載していません。"],
+  ranking: [],
   timeline: [
     { timestamp: "0:00:00", label: "朝のあいさつと応援のお願い" },
     { timestamp: "0:02:00", label: "来てくれたみんなへの感謝" },
@@ -145,8 +149,11 @@ export const streamRecap20260905Asa: StreamRecap = {
   ],
   nextNote:
     "配信時点では、同日9月5日の次の枠は14:30からと案内していました。実施結果や現在の配信予定を示すものではありません。",
-  sourceLabel: "2026年9月5日 SHOWROOM朝配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
+  sourceLabel: "2026年9月5日 SHOWROOM朝配信 録画から作成した配信レポート・自動文字起こし（オーナー提供）",
   verifiedAt: "2026-09-05",
-  transcriptionNote:
-    "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。掲載する実フレーム10枚は目視確認しています。歌詞・録音音声・画面録画・全文文字起こしは掲載していません。",
+  transcriptionNote: buildTranscriptionNote({
+    material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    stills: "静止画は録画の実フレーム10枚を掲載しています。実フレーム10枚は目視確認しています。",
+    extra: "時刻は録画先頭からの目安です。歌詞は掲載していません。",
+  }),
 };

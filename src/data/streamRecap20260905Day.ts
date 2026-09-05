@@ -1,4 +1,8 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import {
+  AUTO_TRANSCRIPT_MATERIAL_NOTE,
+  buildTranscriptionNote,
+} from "./streamRecapRules.ts";
 
 const dayStills: StreamRecapImage[] = [
   {
@@ -88,7 +92,7 @@ export const streamRecap20260905Day: StreamRecap = {
   "id": "2026-09-05-day-gachi-showroom",
   "date": "2026-09-05",
   "dateLabel": "2026.09.05（土）",
-  "theme": "三次3日目の昼配信 — アイス片手に、歌とラジオの話",
+  "theme": "昼の配信・三次3日目",
   "broadcastLabel": "14:31頃〜 約47分",
   "platformLabel": "SHOWROOM",
   "summary": "ヨーグルトアイスを食べながら、コメントと笑顔を交わした昼配信。ライブ会場の周りに広がるわくわく感や、朝に披露した歌を振り返りました。後半はラジオのパーソナリティとしての話へ。配信を通じて出会ったみんなから知ることがたくさんある、と感謝も伝えていました。",
@@ -149,7 +153,7 @@ export const streamRecap20260905Day: StreamRecap = {
     {
       "item": "キラキラ",
       "target": "応援のお願い",
-      "statusThen": "午前・午後の切り替わりにも案内"
+      "statusThen": "切り替え時にも案内"
     },
     {
       "item": "歌の練習",
@@ -157,9 +161,7 @@ export const streamRecap20260905Day: StreamRecap = {
       "statusThen": "朝の歌を振り返り"
     }
   ],
-  "ranking": [
-    "順位・得点は確認できていないため掲載していません。個人名は掲載していません。"
-  ],
+  "ranking": [],
   "timeline": [
     {
       "timestamp": "0:00:45",
@@ -199,8 +201,12 @@ export const streamRecap20260905Day: StreamRecap = {
     }
   ],
   "nextNote": "配信時点では、終盤に表示した予定表で、同日9月5日の夜枠を21:00〜21:50と案内していました。実施結果や現在の配信予定を示すものではありません。",
-  "sourceLabel": "2026年9月5日 SHOWROOM昼配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
+  "sourceLabel": "2026年9月5日 SHOWROOM昼配信 録画から作成した配信レポート・自動文字起こし（オーナー提供）",
   "verifiedAt": "2026-09-05",
-  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム10枚は目視確認しています。録音音声・画面録画・全文文字起こしは掲載していません。",
+  "transcriptionNote": buildTranscriptionNote({
+    material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    stills: "静止画は録画の実フレーム10枚を掲載しています。実フレーム10枚は目視確認しています。",
+    extra: "時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。",
+  }),
   "gallery": dayStills
 };

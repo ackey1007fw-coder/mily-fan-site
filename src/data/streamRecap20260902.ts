@@ -1,12 +1,11 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
-
-const streamRecapRadioStill: StreamRecapImage = {
-  src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
-  width: 640,
-  height: 360,
-  alt: "SHOWROOMラジオ配信で使われた静止画。室内の木の椅子に座り、白いトップスと黒いスカート、白い靴下で、右手を口元に当てているみりぃ。画面左上にSHOWROOM、左下にみりぃの文字",
-  caption: "配信中に使われていた静止画",
-};
+import type { StreamRecap } from "./streamRecaps.ts";
+import {
+  buildTranscriptionNote,
+  RANKING_NOTE,
+  SINGLE_STILL_NOTE,
+  streamRecapRadioStill,
+  VIDEO_MATERIAL_NOTE,
+} from "./streamRecapRules.ts";
 
 /**
  * 2026年9月2日のSHOWROOM朝配信を、オーナー提供の動画で確認した配信メモ。
@@ -18,7 +17,7 @@ export const streamRecap20260902: StreamRecap = {
   id: "2026-09-02-morning-showroom",
   date: "2026-09-02",
   dateLabel: "2026.09.02（水）",
-  theme: "朝ラジオ配信",
+  theme: "朝のラジオ配信",
   broadcastLabel: "9:02頃〜 約62分",
   platformLabel: "SHOWROOM",
   summary:
@@ -36,7 +35,7 @@ export const streamRecap20260902: StreamRecap = {
       timestamp: "0:16:57",
       title: "初見向け自己紹介と「みんなの太陽」",
       body:
-        "MISS CIRCLE CONTESTに出場中の三橋莉子と自己紹介。みんなには「みりぃ」と呼んでもらっていると案内し、翌日から三次審査が始まると話しました。配信を通じて自信をつけ、誰かに幸せや自信を届けられる存在になりたいという思いも語りました。",
+        "MISS CIRCLE CONTEST出場中の三橋莉子と自己紹介。みりぃと呼んでもらっていることや、翌日から三次審査が始まることを案内し、自信を届けられる存在になりたいと語りました。",
       quote: "みんなの太陽になりたい",
     },
     {
@@ -80,13 +79,11 @@ export const streamRecap20260902: StreamRecap = {
     },
   ],
   goals: [
-    { item: "アバター権", target: "獲得", statusThen: "配信時点では未獲得" },
-    { item: "フォロワー", target: "300人", statusThen: "配信時点で251人" },
-    { item: "ファンマーク", target: "5人", statusThen: "配信時点で2人" },
+    { item: "アバター権", target: "獲得", statusThen: "未獲得" },
+    { item: "フォロワー", target: "300人", statusThen: "251人" },
+    { item: "ファンマーク", target: "5人", statusThen: "2人" },
   ],
-  ranking: [
-    "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
-  ],
+  ranking: [RANKING_NOTE],
   timeline: [
     { timestamp: "0:00:00", label: "朝のラジオ配信。寝具や花束の話からスタート" },
     { timestamp: "0:06:41", label: "花束を枯らしてしまった話。ドライフラワー希望" },
@@ -107,6 +104,9 @@ export const streamRecap20260902: StreamRecap = {
     "配信時点では、同日9月2日 14:40〜の短め枠（お昼またぎ・投げ逃げ歓迎）と、夜枠もやるつもり、と案内していました。夜枠の時刻は、この配信では未確定でした。",
   sourceLabel: "2026年9月2日 SHOWROOM朝配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-03",
-  transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞・コメント名・一部の目標数値は聞き取りが不明瞭なため掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。配信中の静止画は録画の実フレームを1枚だけ掲載しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: VIDEO_MATERIAL_NOTE,
+    stills: SINGLE_STILL_NOTE,
+    extra: "固有名詞・コメント名・一部の目標数値は聞き取りが不明瞭なため掲載していません。",
+  }),
 };

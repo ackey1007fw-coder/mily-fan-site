@@ -58,7 +58,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
 
     assert.equal(recap.date, "2026-09-04");
     assert.equal(recap.dateLabel, "2026.09.04（金）");
-    assert.equal(recap.theme, "三次2日目の昼配信");
+    assert.equal(recap.theme, "昼の配信・三次2日目");
     assert.equal(recap.broadcastLabel, "14:50頃〜 約20分");
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-04");
@@ -96,7 +96,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.ok(recap.goals.some(({ item }) => item === "夜枠"));
     assert.match(recap.ranking[0], /個人名は掲載していません/);
     assert.equal(
-      streamRecaps.every((item) => item.ranking.length === 1),
+      streamRecaps.every((item) => item.ranking.length <= 1),
       true,
     );
 

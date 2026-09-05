@@ -1,15 +1,11 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
-
-const RANKING_NOTE =
-  "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
-
-const streamRecapRadioStill: StreamRecapImage = {
-  src: "/media/live/mily-b51-01-morning-radio-showroom.jpg",
-  width: 640,
-  height: 360,
-  alt: "SHOWROOMラジオ配信で使われた静止画。室内の木の椅子に座り、白いトップスと黒いスカート、白い靴下で、右手を口元に当てているみりぃ。画面左上にSHOWROOM、左下にみりぃの文字",
-  caption: "配信中に使われていた静止画",
-};
+import type { StreamRecap } from "./streamRecaps.ts";
+import {
+  buildTranscriptionNote,
+  RANKING_NOTE,
+  SINGLE_STILL_NOTE,
+  streamRecapRadioStill,
+  TRANSCRIPT_MATERIAL_NOTE,
+} from "./streamRecapRules.ts";
 
 /**
  * 2026年9月2日のSHOWROOM夜配信を、オーナー提供の文字起こしから
@@ -20,17 +16,17 @@ export const streamRecap20260902Night: StreamRecap = {
   id: "2026-09-02-night-showroom",
   date: "2026-09-02",
   dateLabel: "2026.09.02（水）",
-  theme: "夜ラジオ配信",
+  theme: "夜のラジオ配信・三次前日",
   broadcastLabel: "21:13頃〜 約74分",
   platformLabel: "SHOWROOM",
   summary:
-    "三次前日の夜ラジオ。二次の無理を反省して明朝からのタイムテーブルを発表。投票とキラ星が最優先で、ブロック1位は今は狙わない、と話しました。",
+    "三次前日の夜ラジオ。二次審査での無理を反省し、翌9月3日の朝・昼・夜のタイムテーブルを発表しました。投票とキラ星が最優先で、ブロック1位は今回のタイミングではない、と話した回です。",
   image: streamRecapRadioStill,
   highlights: [
     {
       timestamp: "0:10:00",
       title: "三次通過が絶対。投票が何より大事",
-      body: "ブロック1位は今回のタイミングではない。通過と毎日の投票、アバ権を優先する回です。",
+      body: "ブロック1位は今回のタイミングではない。通過と毎日の投票、アバター権を優先する回です。",
       quote: "三次は通過しなくてはいけない。絶対に",
     },
     {
@@ -46,7 +42,7 @@ export const streamRecap20260902Night: StreamRecap = {
   ],
   goals: [
     { item: "三次通過", target: "絶対", statusThen: "最優先" },
-    { item: "アバ権", target: "獲得", statusThen: "未獲得" },
+    { item: "アバター権", target: "獲得", statusThen: "未獲得" },
     { item: "投票", target: "毎日", statusThen: "来れなくても投票を" },
     { item: "キラ星", target: "大事", statusThen: "無理しなくていい" },
     { item: "トマトの栄養素", target: "70人", statusThen: "今夜2人目" },
@@ -68,6 +64,8 @@ export const streamRecap20260902Night: StreamRecap = {
     "配信時点では、翌9月3日 7:30〜8:00 が三次最初の枠と案内していました。同日 14:40〜15:20、21:00〜21:50 の案内もありました。",
   sourceLabel: "2026年9月2日 SHOWROOM夜配信 文字起こし（オーナー提供）",
   verifiedAt: "2026-09-03",
-  transcriptionNote:
-    "自動文字起こしを元に整理しています。固有名詞や数字には聞き取り誤りの可能性があります。録音音声・画面録画・全文文字起こしは掲載していません。配信中の静止画は録画の実フレームを1枚だけ掲載しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: TRANSCRIPT_MATERIAL_NOTE,
+    stills: SINGLE_STILL_NOTE,
+  }),
 };
