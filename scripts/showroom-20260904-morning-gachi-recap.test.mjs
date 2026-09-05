@@ -28,6 +28,21 @@ const THUMB_SHA256 =
   "501f2178cd3ccec5dc6423a5694e50898ba4d7b9835db2fb19ca15d25baa1e16";
 const ZIP_SRC = "/media/live/mily-b55-gachi-morning-stills.zip";
 const ZIP_FILE = path.join(root, "public", ZIP_SRC.slice(1));
+const RECAP_FILE = path.join(root, "src/data/streamRecap20260904Asa.ts");
+
+// Git blob ID of the reviewed PUBLIC source, not a hash/list of private names.
+// Covers copy, captions, filenames, source labels, and comments. Rebaseline only
+// after another content/privacy review; never copy viewer names into fixtures.
+const APPROVED_RECAP_BLOB_SHA = "9230a38fd6e359335c089df02ae0e80f6ced2da1";
+
+function gitBlobSha(source) {
+  // Match Git's LF-normalized source on Windows checkouts as well as CI.
+  const bytes = Buffer.from(source.replace(/\r\n/g, "\n"), "utf8");
+  return createHash("sha1")
+    .update(`blob ${bytes.length}\0`)
+    .update(bytes)
+    .digest("hex");
+}
 
 function jpegSize(buffer) {
   if (buffer[0] !== 0xff || buffer[1] !== 0xd8) {
@@ -90,7 +105,9 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     assert.ok(recap.highlights.some(({ title }) => /おつみり/.test(title)));
     assert.ok(recap.goals.some(({ item }) => item === "三次通過"));
     assert.ok(recap.goals.some(({ item }) => item === "夜枠"));
-    assert.match(recap.ranking[0], /個人名は掲載していません/);
+    assert.deepEqual(recap.ranking, [
+      "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
+    ]);
     assert.equal(
       streamRecaps.every((item) => item.ranking.length === 1),
       true,
@@ -144,7 +161,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
       assert.equal(stillSize.height, 228);
       assert.equal(bytes.includes(Buffer.from("Exif")), false);
       assert.match(still.alt, /みりぃ/);
-      assert.doesNotMatch(still.alt, /コメント|アイコン|視聴者|きょうか/);
+      assert.doesNotMatch(still.alt, /コメント|アイコン|視聴者/);
       assert.ok(still.downloadName);
     }
 
@@ -161,13 +178,26 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     );
   });
 
-  it("does not leak viewer names, other contestants, or private archive files", async () => {
+  it("locks reviewed public source without storing private-name fixtures", async () => {
+    const source = await readFile(RECAP_FILE, "utf8");
+    assert.equal(
+      gitBlobSha(source),
+      APPROVED_RECAP_BLOB_SHA,
+      "Public recap source changed: review all copy and metadata before updating the baseline.",
+    );
+    assert.equal(gitBlobSha(source.replace(/\r?\n/g, "\r\n")), APPROVED_RECAP_BLOB_SHA);
+
+    // A deliberately synthetic marker proves unreviewed additions are rejected.
+    const changed = source.replace("WEB投票", "TEST_VIEWER_001");
+    assert.notEqual(changed, source);
+    assert.notEqual(gitBlobSha(changed), APPROVED_RECAP_BLOB_SHA);
+    assert.notEqual(gitBlobSha(`${source}\n// TEST_VIEWER_001\n`), APPROVED_RECAP_BLOB_SHA);
+  });
+
+  it("does not expose private archive files or publish outside LIVE STREAM", async () => {
     const recap = streamRecap20260904Asa;
     const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
-    const recapFile = await readFile(
-      path.join(root, "src/data/streamRecap20260904Asa.ts"),
-      "utf8",
-    );
+    const recapFile = await readFile(RECAP_FILE, "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const mediaGuide = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const recapText = [
@@ -183,18 +213,6 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
       recap.transcriptionNote,
     ].join("\n");
 
-    assert.doesNotMatch(
-      recapText,
-      /きょうか|まこと|やすぴ|あっきー|ひげおやじ|ジュンちゃん|マーリー|ホワイトチョコ/,
-    );
-    assert.doesNotMatch(
-      recapText,
-      /アキさん|ヒロさん|きさらぎ|あみちゃん|でんだい|ちゃんぎー|大田千鳥|OIKAWA|フレキャン|天宮/,
-    );
-    assert.doesNotMatch(
-      recapText,
-      /タカちゃん|いくちゃん|かめちゃん|シーサーベット|ひよよ|ヤスピー|エポコライダー|イタリアン/,
-    );
     assert.doesNotMatch(recapText, /充血|くしゃみ/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com\/document/);
     assert.doesNotMatch(recapFile, /drive\.google\.com|docs\.google\.com\/document/);
