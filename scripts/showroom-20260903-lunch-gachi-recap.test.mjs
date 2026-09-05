@@ -16,6 +16,9 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { news } from "../src/data/news.ts";
+import { contest } from "../src/data/contest.ts";
+import { profile } from "../src/data/profile.ts";
+import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -132,9 +135,21 @@ describe("2026-09-03 SHOWROOM三次初日昼配信メモ", () => {
     assert.doesNotMatch(recapText, /フレキャン|ミスコン他/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com/);
 
-    assert.equal(JSON.stringify(media).includes("b54-"), false);
-    assert.equal(JSON.stringify(galleryVideos).includes("b54-"), false);
-    assert.equal(JSON.stringify(news).includes("b54-"), false);
+    // b54 は LIVE STREAM の配信カード専用。他の掲載面へ漏らさない。
+    for (const [label, collection] of [
+      ["media", media],
+      ["galleryVideos", galleryVideos],
+      ["news", news],
+      ["stories", stories],
+      ["contest", contest],
+      ["profile", profile],
+    ]) {
+      assert.equal(
+        JSON.stringify(collection).includes("b54-"),
+        false,
+        `${label} に b54 が漏れている`,
+      );
+    }
     assert.equal(
       news.some((item) => item.id === "2026-09-03-lunch-gachi-showroom"),
       false,
