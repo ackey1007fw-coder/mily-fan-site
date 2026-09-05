@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import { it } from "node:test";
+import sharp from "sharp";
 import { streamRecap20260906Asa as recap, streamRecap20260905Night, streamRecaps } from "../src/data/streamRecaps.ts";
 
 it("places the September 6 morning recording before the previous night with valid source-relative timestamps", () => {
@@ -17,9 +18,16 @@ it("places the September 6 morning recording before the previous night with vali
 });
 
 it("keeps withdrawn September 6 stills and ZIP out of public data and assets", async () => {
-  assert.equal(recap.image, undefined);
-  assert.equal(recap.gallery, undefined);
-  assert.equal(recap.galleryZip, undefined);
+  assert.equal(recap.gallery.length, 3);
+  assert.equal(recap.image, recap.gallery[1]);
+  assert.equal(recap.galleryZip.label, "3枚まとめて保存");
+  for (const still of recap.gallery) {
+    assert.match(still.src, /mily-b62-/);
+    const meta = await sharp(await readFile(new URL(`../public${still.src}`, import.meta.url))).metadata();
+    assert.equal(meta.width, 640);
+    assert.equal(meta.height, 360);
+    for (const field of ["exif", "xmp", "iptc"]) assert.equal(meta[field], undefined);
+  }
   const files = await readdir(new URL("../public/media/live/", import.meta.url));
   assert.equal(files.some(name => name.startsWith("mily-b61-")), false);
   assert.ok(recap.highlights.length > 0);
