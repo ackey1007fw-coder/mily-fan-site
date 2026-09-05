@@ -44,12 +44,13 @@ type ShareTopic = {
   activityId?: SupportEvent["activityId"];
   priority: number;
   text: string;
-  campaignHashtag?: string;
+  campaignHashtags?: readonly string[];
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const UPCOMING_CONTEST_DAYS = 7;
-const MAX_SHARE_TOPICS = 3;
+// X の weighted character 上限内で、priority が高い2件までを共有する。
+const MAX_SHARE_TOPICS = 2;
 const PERSON_HASHTAG = "#三橋莉子";
 
 function safeRadioPhase(now: number): SchedulePhase {
@@ -66,6 +67,7 @@ function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
       id: "radio-upcoming",
       priority: 400,
       text: `今日${radioProgram.scheduledStart}〜は「${radioProgram.programName}」📻`,
+      campaignHashtags: radioProgram.shareHashtags,
     };
   }
   if (phase === "window") {
@@ -73,6 +75,7 @@ function radioShareTopic(phase: SchedulePhase): ShareTopic | null {
       id: "radio-window",
       priority: 400,
       text: `ただいま「${radioProgram.programName}」の放送時間です📻`,
+      campaignHashtags: radioProgram.shareHashtags,
     };
   }
   return null;
@@ -101,7 +104,7 @@ function supportEventShareTopics(now: number): ShareTopic[] {
         priority: 200 + (event.priority ?? 0),
         text: `${share}${end ? `（${end}まで）` : ""}`,
         ...(event.shareHashtag
-          ? { campaignHashtag: event.shareHashtag }
+          ? { campaignHashtags: [event.shareHashtag] }
           : {}),
       };
     });
@@ -122,7 +125,7 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       priority: 180,
       text: `${contest.contestName}の${phaseLabel}を応援してください🔥（${formatShortTokyoDate(phase.end)}まで）`,
       ...(contest.shareHashtag
-        ? { campaignHashtag: contest.shareHashtag }
+        ? { campaignHashtags: [contest.shareHashtag] }
         : {}),
     };
   }
@@ -133,7 +136,7 @@ function contestPhaseShareTopic(now: number): ShareTopic | null {
       priority: 160,
       text: `${formatShortTokyoDate(phase.start)}から${contest.contestName}の${phaseLabel}が始まります🔥`,
       ...(contest.shareHashtag
-        ? { campaignHashtag: contest.shareHashtag }
+        ? { campaignHashtags: [contest.shareHashtag] }
         : {}),
     };
   }
@@ -158,12 +161,10 @@ export function siteShareText(context: SiteShareContext = {}): string {
     .sort((a, b) => b.priority - a.priority)
     .slice(0, MAX_SHARE_TOPICS);
 
-  const campaignHashtag = topics.find(
-    (topic) => topic.campaignHashtag !== undefined,
-  )?.campaignHashtag;
-  const hashtagLine = [PERSON_HASHTAG, campaignHashtag]
-    .filter((hashtag): hashtag is string => hashtag !== undefined)
-    .join(" ");
+  const campaignHashtags =
+    topics.find((topic) => topic.campaignHashtags?.length)
+      ?.campaignHashtags ?? [];
+  const hashtagLine = [PERSON_HASHTAG, ...campaignHashtags].join(" ");
 
   if (topics.length === 0) return [site.description, hashtagLine].join("\n");
 
