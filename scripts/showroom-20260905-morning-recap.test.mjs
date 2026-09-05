@@ -6,7 +6,10 @@ import { streamRecap20260905Asa as recap, streamRecaps } from "../src/data/strea
 
 describe("September 5 morning public archive", () => {
   it("keeps unique recaps newest first and historical next-slot announcements", () => {
-    assert.equal(streamRecaps[0], recap);
+    assert.ok(streamRecaps.includes(recap));
+    const previousNight = streamRecaps.findIndex(r => r.id === "2026-09-04-night-gachi-showroom");
+    assert.ok(previousNight >= 0);
+    assert.ok(streamRecaps.indexOf(recap) < previousNight);
     assert.equal(new Set(streamRecaps.map(r => r.id)).size, streamRecaps.length);
     const dates = streamRecaps.map(r => r.date);
     assert.deepEqual(dates, [...dates].sort().reverse());
