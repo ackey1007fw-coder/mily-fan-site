@@ -560,6 +560,27 @@ function StreamRecapArticle({
         ) : null}
       </summary>
 
+      {recap.songs && recap.songs.length > 0 ? (
+        <section aria-labelledby={`${recap.id}-songs`} className="mt-6 rounded-2xl border border-sage/30 bg-sage/10 p-4 sm:p-5">
+          <p className="text-xs font-semibold tracking-widest text-sage-deep">SONG LIST</p>
+          <h4 id={`${recap.id}-songs`} className="mt-1 text-base font-bold text-ink">この回に歌った曲</h4>
+          <p className="mt-2 text-xs leading-5 text-ink-muted">リンク先は原曲の公式動画です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。</p>
+          <ol className="mt-4 space-y-3">
+            {recap.songs.map((song, index) => (
+              <li key={`${song.timestamp}-${song.title}`} className="flex gap-3 rounded-xl bg-white/80 p-3 sm:p-4">
+                <span aria-hidden="true" className="pt-0.5 text-sm font-semibold tabular-nums text-sage-deep">{String(index + 1).padStart(2, "0")}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="break-words font-bold text-ink">{song.title}</p>
+                  <p className="mt-1 break-words text-sm text-ink-muted">{song.artist}</p>
+                  <p className="mt-1 text-xs tabular-nums text-ink-muted">{song.timestamp}頃〜</p>
+                  <a href={song.youtubeUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4" aria-label={`${song.title} — 原曲の公式動画をYouTubeで聴く（新しいタブ）`}>YouTubeで原曲を聴く ↗</a>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
+
       <h4 className="mt-6 text-sm font-bold text-ink">この回の見どころ</h4>
       <ul className="mt-3 space-y-3">
         {recap.highlights.map((highlight) => (

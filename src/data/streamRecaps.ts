@@ -43,6 +43,15 @@ export type StreamRecapGalleryZip = {
   label: string;
 };
 
+export type StreamRecapSong = {
+  title: string;
+  artist: string;
+  /** 録画先頭からの歌唱開始位置の目安。 */
+  timestamp: string;
+  /** 原曲の公式動画。みりぃの歌唱映像ではない。 */
+  youtubeUrl: string;
+};
+
 export type StreamRecap = {
   id: string;
   date: string;
@@ -54,6 +63,7 @@ export type StreamRecap = {
   image?: StreamRecapImage;
   gallery?: StreamRecapImage[];
   galleryZip?: StreamRecapGalleryZip;
+  songs?: StreamRecapSong[];
   highlights: StreamRecapHighlight[];
   goals: StreamRecapGoal[];
   ranking: string[];

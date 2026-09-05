@@ -29,6 +29,10 @@ const approvedStills: StreamRecapImage[] = [
 
 /** オーナーが画像を確認し掲載を承認した3枚。 */
 export const streamRecap20260906Asa: StreamRecap = {
+  songs: [
+    { title: "生まれてはじめて", artist: "神田沙也加・松たか子", timestamp: "0:50:15", youtubeUrl: "https://www.youtube.com/watch?v=MDZSdjLqiGA" },
+    { title: "愛をこめて花束を", artist: "Superfly", timestamp: "1:16:40", youtubeUrl: "https://www.youtube.com/watch?v=gU5oN0KVofU" },
+  ],
   image: approvedStills[1],
   gallery: approvedStills,
   galleryZip: { src: "/media/live/mily-b62-asa-stills.zip", filename: "みりぃ_20260906朝_厳選3枚.zip", label: "3枚まとめて保存" },
@@ -133,5 +137,5 @@ export const streamRecap20260906Asa: StreamRecap = {
   "nextNote": "配信時点では、当日夜は21時半を予定しつつ、開始が遅れる可能性があり改めて連絡すると案内していました。確定時刻や現在の予定・実施結果を示すものではありません。",
   "sourceLabel": "2026年9月6日 SHOWROOM朝配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
   "verifiedAt": "2026-09-06",
-  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム3枚は目視確認し、オーナーの掲載承認を得ています。曲名は確定していません。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
+  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム3枚は目視確認し、オーナーの掲載承認を得ています。歌唱区間の自動認識と公式楽曲情報を照合し、曲名を追記しています。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
 };

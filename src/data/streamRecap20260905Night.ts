@@ -85,6 +85,9 @@ const nightStills: StreamRecapImage[] = [
 
 /** オーナー提供録画の自動文字起こしを要約。実フレーム10枚は目視確認。 */
 export const streamRecap20260905Night: StreamRecap = {
+  songs: [
+    { title: "メメント・モリ", artist: "大森元貴", timestamp: "0:40:45", youtubeUrl: "https://www.youtube.com/watch?v=Rlk3i0sEQR8" },
+  ],
   image: nightStills[9],
   gallery: nightStills,
   "id": "2026-09-05-night-gachi-showroom",
@@ -189,5 +192,5 @@ export const streamRecap20260905Night: StreamRecap = {
   "nextNote": "配信時点では、翌朝は5時半からの早い時間の配信と案内し、無理をせず休んでほしいとも話していました。浴衣については着る予定がないと発言しており、浴衣配信の確定告知としては扱っていません。現在の予定や実施結果を示すものではありません。",
   "sourceLabel": "2026年9月5日 SHOWROOM夜配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
   "verifiedAt": "2026-09-05",
-  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム10枚は目視確認しています。曲名は確定していません。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
+  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム10枚は目視確認しています。歌唱区間の自動認識と公式楽曲情報を照合し、曲名を追記しています。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
 };
