@@ -1,7 +1,37 @@
-import type { StreamRecap } from "./streamRecaps";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
 
-/** オーナー提供録画の自動文字起こしを要約。 */
+const approvedStills: StreamRecapImage[] = [
+  {
+    "src": "/media/live/mily-b62-01-front-smile.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "9月6日朝配信、大きなリボンを付けたみりぃ。正面の笑顔",
+    "caption": "08:59 正面の笑顔",
+    "downloadName": "みりぃ_20260906朝_厳選_01.jpg"
+  },
+  {
+    "src": "/media/live/mily-b62-02-tilted-smile.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "9月6日朝配信、大きなリボンを付けたみりぃ。首をかしげた笑顔",
+    "caption": "48:01 首をかしげた笑顔",
+    "downloadName": "みりぃ_20260906朝_厳選_02.jpg"
+  },
+  {
+    "src": "/media/live/mily-b62-03-gentle-smile.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "9月6日朝配信、大きなリボンを付けたみりぃ。やわらかい笑顔",
+    "caption": "68:02 やわらかい笑顔",
+    "downloadName": "みりぃ_20260906朝_厳選_03.jpg"
+  }
+];
+
+/** オーナーが画像を確認し掲載を承認した3枚。 */
 export const streamRecap20260906Asa: StreamRecap = {
+  image: approvedStills[1],
+  gallery: approvedStills,
+  galleryZip: { src: "/media/live/mily-b62-asa-stills.zip", filename: "みりぃ_20260906朝_厳選3枚.zip", label: "3枚まとめて保存" },
   "id": "2026-09-06-asa-gachi-showroom",
   "date": "2026-09-06",
   "dateLabel": "2026.09.06（日）",
@@ -103,5 +133,5 @@ export const streamRecap20260906Asa: StreamRecap = {
   "nextNote": "配信時点では、当日夜は21時半を予定しつつ、開始が遅れる可能性があり改めて連絡すると案内していました。確定時刻や現在の予定・実施結果を示すものではありません。",
   "sourceLabel": "2026年9月6日 SHOWROOM朝配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
   "verifiedAt": "2026-09-06",
-  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。この回のスクリーンショットは掲載していません。曲名は確定していません。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
+  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム3枚は目視確認し、オーナーの掲載承認を得ています。曲名は確定していません。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
 };
