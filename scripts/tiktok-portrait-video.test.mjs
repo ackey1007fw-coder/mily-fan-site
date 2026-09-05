@@ -23,13 +23,16 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
     updates[0],
   );
   const ordered = sortNewsByDateDesc(news);
-  assert.equal(ordered[0]?.id, "2026-09-05-morning-stream-thanks");
-  assert.equal(ordered[1], updates[0]);
-  assert.equal(news.length, previousNews.length + 2);
+  assert.equal(ordered[0]?.id, "2026-09-06-night-slot-2230");
+  assert.equal(ordered[1]?.id, "2026-09-05-morning-stream-thanks");
+  assert.equal(ordered[2], updates[0]);
+  assert.equal(news.length, previousNews.length + 3);
   assert.deepEqual(
     news.filter(
       (entry) =>
-        entry !== updates[0] && entry.id !== "2026-09-05-morning-stream-thanks",
+        entry !== updates[0] &&
+        entry.id !== "2026-09-05-morning-stream-thanks" &&
+        entry.id !== "2026-09-06-night-slot-2230",
     ),
     previousNews,
   );

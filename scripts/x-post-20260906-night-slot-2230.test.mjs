@@ -24,25 +24,21 @@ import {
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-const NEWS_ID = "2026-09-05-morning-stream-thanks";
-const NIGHT_SLOT_ID = "2026-09-06-night-slot-2230";
-const TIKTOK_ID = "2026-09-05-tiktok-radio-portrait";
-const SOURCE = "https://x.com/Mily_chan36/status/2096037739833737354";
-const TWEET_ID = "2096037739833737354";
-const TITLE = "朝配信ありがとう";
+const NEWS_ID = "2026-09-06-night-slot-2230";
+const THANKS_ID = "2026-09-05-morning-stream-thanks";
+const SOURCE = "https://x.com/Mily_chan36/status/2096366715181691270";
+const TWEET_ID = "2096366715181691270";
+const TITLE = "今夜の配信、22:30から";
 const BODY =
-  "みりぃがXで、朝配信へのお礼を伝えました。次は14:30〜、ともあります。";
-const MESSAGE =
-  "朝配信来てくれてありがとう✊🏻❤️‍🔥\n" +
-  "みんなにも元気届けられたかなー？少しづつ前向いてくよ🙂‍↕️\n" +
-  "次は14:30〜ね！投票も忘れずにっ‼️";
+  "みりぃがXで、今夜の配信を22:30〜23:00に変更すると案内しました。";
+const MESSAGE = "⚠️夜の配信 22:30〜23:00 に変更⚠️";
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
 }
 
-describe("2026-09-05 X 朝配信お礼 — Latest entry", () => {
-  it("adds exactly one source-backed text NEWS card ahead of the same-day TikTok", () => {
+describe("2026-09-06 X 夜枠22:30変更 — Latest entry", () => {
+  it("adds exactly one source-backed text NEWS card ahead of the 9/5 thanks", () => {
     const entry = item();
     const ordered = sortNewsByDateDesc(news);
 
@@ -53,10 +49,9 @@ describe("2026-09-05 X 朝配信お礼 — Latest entry", () => {
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(ordered[0]?.id, NIGHT_SLOT_ID);
-    assert.equal(ordered[1], entry);
-    assert.equal(ordered[2]?.id, TIKTOK_ID);
-    assert.equal(entry.date, "2026-09-05");
+    assert.equal(ordered[0], entry);
+    assert.equal(ordered[1]?.id, THANKS_ID);
+    assert.equal(entry.date, "2026-09-06");
     assert.equal(entry.sameDayOrder, 20);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
     assert.equal(entry.title, TITLE);
@@ -76,60 +71,37 @@ describe("2026-09-05 X 朝配信お礼 — Latest entry", () => {
     assert.deepEqual(verifyNews(news), []);
   });
 
-  it("keeps the confirmed post text verbatim and a short fan NEWS body", () => {
+  it("keeps the confirmed change line and a short fan NEWS body", () => {
     const entry = item();
 
     assert.equal(entry.message?.label, "みりぃのX");
     assert.equal(entry.message?.text, MESSAGE);
-    assert.equal(entry.message.text.split("\n").length, 3);
-    assert.match(entry.message.text, /^朝配信来てくれてありがとう✊🏻❤️‍🔥\n/);
-    assert.match(entry.message.text, /次は14:30〜ね！投票も忘れずにっ‼️$/);
     assert.ok(entry.body.length <= 80);
   });
 
-  it("does not add vote buttons, hurry copy, or invented ranks", () => {
+  it("does not add vote buttons, hurry copy, ranks, or 盛り上がり度", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}`;
 
     assert.doesNotMatch(copy, /公式|公認|本人運営/);
     assert.doesNotMatch(copy, /JST|\blive\b|作業メモ/i);
     assert.doesNotMatch(copy, /急いで|今すぐ投票|残り/);
-    assert.doesNotMatch(copy, /票|pt|ポイント|順位|位/);
-    assert.doesNotMatch(copy, /CanCam|AGESTOCK|横浜アリーナ/);
+    assert.doesNotMatch(copy, /票|pt|ポイント|順位|位|盛り上がり度/);
+    assert.doesNotMatch(copy, /八月の思い出/);
     assert.equal(copy.toLowerCase().includes("millie"), false);
 
-    const now = Date.parse("2026-09-05T12:00:00+09:00");
+    const now = Date.parse("2026-09-06T12:00:00+09:00");
     const resolved = resolveNewsLinks(entry, now);
     assert.equal(resolved.cta, undefined);
     assert.equal(resolved.additionalCtas, undefined);
     assert.equal(resolved.relatedUrl, undefined);
   });
-
-  it("keeps the 9/5 thanks card separate from the 9/6 night-slot change", () => {
-    assert.equal(
-      news.filter((candidate) => candidate.id === NEWS_ID).length,
-      1,
-    );
-    assert.equal(
-      news.filter((candidate) => candidate.date === "2026-09-05").length,
-      2,
-    );
-    assert.equal(
-      news.filter((candidate) => candidate.id === NIGHT_SLOT_ID).length,
-      1,
-    );
-    assert.notEqual(
-      news.find((candidate) => candidate.id === NIGHT_SLOT_ID)?.source,
-      SOURCE,
-    );
-  });
 });
 
-describe("2026-09-05 X 朝配信お礼 — scope", () => {
+describe("2026-09-06 X 夜枠22:30変更 — scope", () => {
   it("surfaces on the live-stream Activity only", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
-    assert.equal(liveNews[0]?.id, NIGHT_SLOT_ID);
-    assert.equal(liveNews[1]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, NEWS_ID);
     for (const activityId of ["miss-circle", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(
@@ -140,7 +112,26 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
     }
   });
 
-  it("stays out of Gallery, Stories, highlights, and schedule data", async () => {
+  it("replaces the 9/6 night slot and leaves morning and afternoon alone", () => {
+    assert.deepEqual(
+      streamSchedule.filter((slot) => slot.date === "2026-09-06"),
+      [
+        { date: "2026-09-06", time: "05:30", endTime: "07:00" },
+        { date: "2026-09-06", time: "14:40", endTime: "15:20" },
+        { date: "2026-09-06", time: "22:30", endTime: "23:00" },
+      ],
+    );
+    assert.equal(
+      streamSchedule.some(
+        (slot) =>
+          slot.date === "2026-09-06" &&
+          (slot.time === "21:30" || slot.endTime === "22:00"),
+      ),
+      false,
+    );
+  });
+
+  it("stays out of Gallery, Stories, highlights, and does not start 八月の思い出", async () => {
     assert.equal(media.some((entry) => String(entry.id).includes(NEWS_ID)), false);
     assert.equal(
       galleryVideos.some((entry) => String(entry.id ?? "").includes(NEWS_ID)),
@@ -156,6 +147,10 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
     );
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
     assert.deepEqual(events, []);
+    assert.equal(
+      news.some((candidate) => `${candidate.title}\n${candidate.body}`.includes("八月の思い出")),
+      false,
+    );
 
     for (const relative of [
       "src/data/media.ts",
@@ -171,31 +166,6 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
       assert.equal(sourceText.includes(NEWS_ID), false, relative);
       assert.equal(sourceText.includes(TWEET_ID), false, relative);
     }
-
-    const night = streamSchedule.find(
-      (slot) => slot.date === "2026-09-06" && slot.time === "22:30",
-    );
-    assert.deepEqual(night, {
-      date: "2026-09-06",
-      time: "22:30",
-      endTime: "23:00",
-    });
-    assert.equal(
-      streamSchedule.some(
-        (slot) =>
-          slot.date === "2026-09-06" &&
-          (slot.time === "21:30" || slot.endTime === "22:00" || slot.endTime === "22:50"),
-      ),
-      false,
-    );
-    assert.deepEqual(
-      streamSchedule.filter((slot) => slot.date === "2026-09-06"),
-      [
-        { date: "2026-09-06", time: "05:30", endTime: "07:00" },
-        { date: "2026-09-06", time: "14:40", endTime: "15:20" },
-        { date: "2026-09-06", time: "22:30", endTime: "23:00" },
-      ],
-    );
   });
 
   it("does not invent other people, sites, or SNS media URLs", () => {
@@ -227,17 +197,17 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
   });
 });
 
-describe("2026-09-05 X 朝配信お礼 — Portal Feed", () => {
+describe("2026-09-06 X 夜枠22:30変更 — Portal Feed", () => {
   it("flows through Portal Feed as text-only NEWS", () => {
     const feed = createPortalFeed({
       newsItems: news,
-      now: new Date("2026-09-05T16:00:00+09:00"),
+      now: new Date("2026-09-06T16:00:00+09:00"),
     });
     const entry = findFeedItem(feed, portalNewsId(NEWS_ID));
 
     assertPortalNewsFollowsSort(feed, news);
     assert.equal(entry.type, "news");
-    assert.equal(entry.publishedAt, "2026-09-05T00:00:00+09:00");
+    assert.equal(entry.publishedAt, "2026-09-06T00:00:00+09:00");
     assert.equal(entry.sourceUrl, SOURCE);
     assert.equal(entry.image, undefined);
   });
