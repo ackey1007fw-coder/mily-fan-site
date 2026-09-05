@@ -50,7 +50,7 @@ function jpegSize(buffer) {
 }
 
 describe("2026-09-03 SHOWROOM三次初日朝配信メモ", () => {
-  it("stores the first gachi-event morning recap at the top of the archive", () => {
+  it("stores the first gachi-event morning recap before the September 2 recaps", () => {
     const recap = streamRecap20260903;
 
     assert.equal(recap.date, "2026-09-03");
@@ -64,9 +64,13 @@ describe("2026-09-03 SHOWROOM三次初日朝配信メモ", () => {
     assert.match(recap.summary, /WEB投票/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /10枚/);
-    assert.equal(streamRecaps[3], recap);
-    assert.equal(streamRecaps[4], streamRecap20260902Night);
-    assert.equal(streamRecaps[5], streamRecap20260902);
+    const recapIndex = streamRecaps.indexOf(recap);
+    assert.ok(recapIndex >= 0);
+    assert.deepEqual(streamRecaps.slice(recapIndex, recapIndex + 3), [
+      recap,
+      streamRecap20260902Night,
+      streamRecap20260902,
+    ]);
   });
 
   it("keeps a concise recap and withholds ranking names", () => {
