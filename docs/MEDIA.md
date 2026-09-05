@@ -3177,3 +3177,29 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 - poster: `gallery/mily-b58-01-tiktok-radio-portrait-poster.jpg`。公開動画の0.5秒実フレーム。
 - 動画全体から0.5秒間隔で抽出した実フレームを目視確認。端末UI、通知、コメント、識別可能な第三者の写り込みを確認した範囲では認めない。全編の手動聴取は未実施。
 - 元動画は無改変で保持。公開派生のソースメタデータとチャプターを除去。撮影日・投稿日時・撮影者は推測しない。
+
+
+## 素材台帳（batch b60 / 受領日・source date 2026-09-05）
+
+オーナー提供の9月5日SHOWROOM夜配信録画から選んだ実フレーム10枚。同素材への継続依頼に基づきLIVE STREAMへ掲載。代表はb60-10。b59は別の未マージPRで使用中のため避けた。
+
+| ID | 公開ファイル | 場面（録画内の目安） |
+| --- | --- | --- |
+| b60-01 | `live/mily-b60-01-bright-smile.jpg` | 01:50 頬に手を添えてにっこり |
+| b60-02 | `live/mily-b60-02-sunglasses.jpg` | 02:37 サングラスでポーズ |
+| b60-03 | `live/mily-b60-03-flute-smile.jpg` | 14:29 篠笛を手に笑顔 |
+| b60-04 | `live/mily-b60-04-flute-wave.jpg` | 22:49 篠笛を持って手を振って |
+| b60-05 | `live/mily-b60-05-flute-playing.jpg` | 24:40 篠笛を演奏中 |
+| b60-06 | `live/mily-b60-06-after-playing.jpg` | 25:51 演奏後の明るい笑顔 |
+| b60-07 | `live/mily-b60-07-hand-cheek.jpg` | 36:51 口元に手を添えて |
+| b60-08 | `live/mily-b60-08-hair-smile.jpg` | 41:00 サングラスに手を添えて |
+| b60-09 | `live/mily-b60-09-finger-pose.jpg` | 42:20 両手の指でポーズ |
+| b60-10 | `live/mily-b60-10-close-smile.jpg` | 45:10 カメラに向かってにっこり |
+| b60-zip | `live/mily-b60-night-stills.zip` | 上記JPEG10枚 |
+
+- provenance: `owner-provided`。公開再生permalinkはなく、sourceUrlはnull。
+- 全10枚を実寸で目視確認。視聴者コメント・表示名・他の人物・端末情報は写っていない。
+- 元フレームはgitignoredの `media/original/b60/` に保持。受け渡しURL・IDは公開しない。
+- 640×360の元の構図と縦横比を保持。通常のJPEG圧縮のみ。EXIF / IPTC / XMPなし。顔のAI生成・補正・置換・生成塗り足しなし。
+- 別途作成した生成コラージュは顔の同一性を保証できないためサイト掲載対象外。
+- LIVE STREAM専用。全文文字起こし・歌詞・録音・録画は公開しない。
