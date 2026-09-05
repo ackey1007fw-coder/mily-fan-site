@@ -1,0 +1,31 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { it } from "node:test";
+import { galleryVideos, tiktokPortraitVideo, visibleGalleryVideos } from "../src/data/galleryVideos.ts";
+import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
+import { news } from "../src/data/news.ts";
+import { galleryVideos as previous } from "./fixtures/gallery-videos-before-b58.ts";
+
+it("publishes the undated TikTok once through the actual gallery without inventing dated news", async () => {
+  const item = tiktokPortraitVideo;
+  assert.equal(item.sourceDate, null);
+  assert.equal(item.sourceUrl, "https://vt.tiktok.com/ZSqNgRAvx/");
+  assert.deepEqual(visibleGalleryVideos().filter(({ id }) => id === item.id), [item]);
+  assert.equal(galleryVideos.length, previous.length + 1);
+  assert.deepEqual(galleryVideos.filter(({ id }) => id !== item.id), previous);
+  assert.equal(news.some((entry) => entry.media?.src === item.src), false);
+  const entries = selectGalleryEntries().filter(({ key }) => key === item.id);
+  assert.equal(entries.length, 1);
+  assert.equal(entries[0].kind, "video");
+  const view = entries[0].item.video;
+  assert.equal(view.src, item.src);
+  assert.equal(view.poster, item.poster);
+  assert.equal(view.controls, true);
+  assert.equal(view.playsInline, true);
+  assert.equal(view.preload, "none");
+  const mp4 = await readFile(new URL("../public" + item.src, import.meta.url));
+  const poster = await readFile(new URL("../public" + item.poster, import.meta.url));
+  assert.ok(mp4.length > 0 && mp4.length < 2_000_000);
+  assert.ok(mp4.indexOf("moov") > 0 && mp4.indexOf("moov") < mp4.indexOf("mdat"));
+  assert.equal(poster.readUInt16BE(0), 0xffd8);
+});

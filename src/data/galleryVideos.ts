@@ -1,3 +1,4 @@
+import { tiktokPortraitVideo, type TikTokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import {
   eventStory20260821,
   morningOhayo20260821,
@@ -47,10 +48,12 @@ export type SelfHostedGalleryVideo =
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
+  | TikTokPortraitVideo
   | TikTokSayonaraIchigoVideo;
 
 export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
+  tiktokPortraitVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
   mixchFinalDayMovie,
@@ -130,6 +133,8 @@ export const galleryVideos: GalleryVideoItem[] = [
   secondRoundStoryVideo,
   morningStoryVideo,
   tiktokSayonaraIchigoVideo,
+  // Undated owner-provided clip: do not infer its place in dated history.
+  tiktokPortraitVideo,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
