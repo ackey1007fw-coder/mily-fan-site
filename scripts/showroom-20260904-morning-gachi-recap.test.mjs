@@ -12,6 +12,7 @@ import {
   streamRecap20260903Night,
   streamRecap20260904Day,
   streamRecap20260904Asa,
+  streamRecap20260903Lunch,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
@@ -87,10 +88,11 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     assert.match(recap.transcriptionNote, /5枚/);
     const dayIndex = streamRecaps.indexOf(streamRecap20260904Day);
     assert.ok(dayIndex >= 0);
-    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 6), [
+    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 7), [
       streamRecap20260904Day,
       recap,
       streamRecap20260903Night,
+      streamRecap20260903Lunch,
       streamRecap20260903,
       streamRecap20260902Night,
       streamRecap20260902,
