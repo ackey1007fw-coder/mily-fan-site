@@ -1,82 +1,35 @@
 import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
-import { gachiNightStill01 } from "./streamRecap20260903NightStill01.ts";
-import { gachiNightStill02 } from "./streamRecap20260903NightStill02.ts";
-
-const W = 400;
-const H = 228;
-
-const gachiNightStills: StreamRecapImage[] = [
-  gachiNightStill01,
-  gachiNightStill02,
-  {
-    src: "/media/live/mily-b53-03-look-down.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、大きなリボンをつけてうつむきながら話しているみりぃ",
-    caption: "うつむき",
-    downloadName: "みりぃ_三次初日夜_03_うつむき.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-04-nose-touch.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、人差し指を鼻に当てて話しているみりぃ",
-    caption: "鼻に指",
-    downloadName: "みりぃ_三次初日夜_04_鼻タッチ.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-05-wave-smile.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、右手を振って大きく笑っているみりぃ",
-    caption: "手を振る笑顔",
-    downloadName: "みりぃ_三次初日夜_05_手振り笑顔.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-06-front-talk.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、黒いドット柄のトップスで正面を見て話しているみりぃ",
-    caption: "正面トーク",
-    downloadName: "みりぃ_三次初日夜_06_正面.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-07-hair-smile.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、前髪に手を当てて笑っているみりぃ",
-    caption: "髪に手",
-    downloadName: "みりぃ_三次初日夜_07_髪に手.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-08-lean-smile.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、画面に寄って歯を見せて笑っているみりぃ",
-    caption: "寄って笑顔",
-    downloadName: "みりぃ_三次初日夜_08_寄り笑顔.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-09-choker-play.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信で、黒いチョーカーの紐に触れているみりぃ",
-    caption: "チョーカー",
-    downloadName: "みりぃ_三次初日夜_09_チョーカー.jpg",
-  },
-  {
-    src: "/media/live/mily-b53-10-ending-smile.jpg",
-    width: W,
-    height: H,
-    alt: "三次初日の夜配信の終盤、大きく笑っているみりぃ",
-    caption: "エンディングの笑顔",
-    downloadName: "みりぃ_三次初日夜_10_エンディング.jpg",
-  },
-];
 
 const RANKING_NOTE =
   "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
 
+const STILL_W = 400;
+const STILL_H = 228;
+
+const nightStills: StreamRecapImage[] = [
+  {
+    src: "/media/live/mily-b53-01-surprise-choker.jpg",
+    width: STILL_W,
+    height: STILL_H,
+    alt: "三次初日の夜配信で、黒いドット柄のトップスと大きなリボンのみりぃが口を開けて驚いている",
+    caption: "ベストショット。びっくり",
+    downloadName: "みりぃ_三次初日夜_01_ベスト_びっくり.jpg",
+  },
+  {
+    src: "/media/live/mily-b53-02-whiteboard.jpg",
+    width: STILL_W,
+    height: STILL_H,
+    alt: "三次初日の夜配信で、ホワイトボードとペンを持って驚いているみりぃ",
+    caption: "ホワイトボード",
+    downloadName: "みりぃ_三次初日夜_02_ホワイトボード.jpg",
+  },
+];
+
+/**
+ * 2026年9月3日のSHOWROOM夜配信を、オーナー提供の動画で確認した配信メモ。
+ * 録音音声・全文文字起こし・画面録画は公開しない。
+ * LIVE STREAM の配信カード専用で、Gallery の media.ts には載せない。
+ */
 export const streamRecap20260903Night: StreamRecap = {
   id: "2026-09-03-night-gachi-showroom",
   date: "2026-09-03",
@@ -86,8 +39,13 @@ export const streamRecap20260903Night: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "三次審査1日目の夜枠。告知の21時より遅く始まり、フルメイクで約49分話しました。投票とキラキラ100が最優先で、ブロック1位は狙わず、アバター権と仲間を集めてから上を目指す、という方針の回です。",
-  image: gachiNightStills[0],
-  gallery: gachiNightStills,
+  image: nightStills[0],
+  gallery: nightStills,
+  galleryZip: {
+    src: "/media/live/mily-b53-gachi-night-stills.zip",
+    filename: "みりぃ_三次初日夜_スクショ2枚.zip",
+    label: "2枚まとめて保存",
+  },
   highlights: [
     {
       timestamp: "0:00:15",
@@ -144,9 +102,9 @@ export const streamRecap20260903Night: StreamRecap = {
     { timestamp: "0:48:20", label: "明朝7時〜。おつみりん" },
   ],
   nextNote:
-    "明朝 7:00〜 約30分と案内されました。WEB投票は1日1回、キラキラ100も継続です。",
+    "配信時点では、翌9月4日 7:00〜 約30分と案内していました。WEB投票は1日1回、キラキラ100も継続して呼びかけていました。",
   sourceLabel: "2026年9月3日 SHOWROOM夜配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
   transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを10枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
+    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを2枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
 };

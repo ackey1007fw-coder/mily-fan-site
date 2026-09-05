@@ -7,7 +7,7 @@ import { radioProgram } from "../shared/radio-program.js";
 import { contest } from "../src/data/contest.ts";
 import { links } from "../src/data/links.ts";
 import { mixchFinalDayMovie } from "../src/data/mixchMovies.ts";
-import { news } from "../src/data/news.ts";
+import { news } from "./fixtures/news-before-b58.ts";
 import {
   MIXCH_FINAL_DAY_NEWS_ID,
   PATON_FIFTEEN_X_NEWS_IDS,

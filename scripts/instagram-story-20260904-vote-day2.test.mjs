@@ -38,9 +38,9 @@ const galleryDirectory = path.join(root, "public/media/gallery");
 const instagramProfile = "https://www.instagram.com/mily_chan36";
 
 const NEWS_ID = "2026-09-04-third-round-vote-day2-story";
-const MEDIA_ID = "mily-b53-01-third-round-vote-day2-story";
-const PUBLIC_VIDEO = "mily-b53-01-third-round-vote-day2-story.mp4";
-const PUBLIC_POSTER = "mily-b53-01-third-round-vote-day2-story-poster.jpg";
+const MEDIA_ID = "mily-b59-01-third-round-vote-day2-story";
+const PUBLIC_VIDEO = "mily-b59-01-third-round-vote-day2-story.mp4";
+const PUBLIC_POSTER = "mily-b59-01-third-round-vote-day2-story-poster.jpg";
 const PUBLIC_BYTES = 3_459_344;
 const PUBLIC_SHA256 =
   "e6666874750b57d43c1573964340773c78fc130c604a972107c815d3a11da49e";
@@ -104,7 +104,7 @@ async function changedText() {
   for (const file of files) {
     let text = await readFile(path.join(root, file), "utf8");
     if (file === "docs/MEDIA.md") {
-      const start = text.indexOf("## 素材台帳（batch b53");
+      const start = text.indexOf("## 素材台帳（batch b59");
       assert.notEqual(start, -1);
       const end = text.indexOf("\n## ", start + 4);
       text = text.slice(start, end === -1 ? undefined : end);
@@ -115,14 +115,15 @@ async function changedText() {
 }
 
 describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
-  it("adds exactly one record at the front of Latest", () => {
+  it("keeps exactly one record in date-sorted Latest after the newer TikTok", () => {
     const entry = item();
     const ordered = sortNewsByDateDesc(news);
 
     assert.ok(entry);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[0]?.id, "2026-09-05-tiktok-radio-portrait");
+    assert.equal(ordered[1], entry);
+    assert.equal(ordered[2]?.id, "2026-09-03-miss-circle-goals-support");
     assert.equal(entry.date, "2026-09-04");
     assert.equal(entry.sameDayOrder, 10);
     assert.deepEqual(entry.activityIds, ["miss-circle"]);
@@ -171,7 +172,10 @@ describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
       galleryVideos.filter(({ id }) => id === MEDIA_ID),
       [webVoteDay2StoryVideo],
     );
-    assert.equal(visibleGalleryVideos()[0], webVoteDay2StoryVideo);
+    assert.equal(
+      visibleGalleryVideos().find(({ id }) => id === MEDIA_ID),
+      webVoteDay2StoryVideo,
+    );
     assert.equal(webVoteDay2StoryVideo.kind, "video");
     assert.equal(webVoteDay2StoryVideo.provenance, "owner-provided");
     assert.equal(webVoteDay2StoryVideo.sourceLabel, "Instagram Story");
@@ -224,7 +228,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
 describe("2026-09-04 Instagram Story 投票2日目 — published media", () => {
   it("publishes exactly one shared MP4 and one real-frame poster", async () => {
     const assets = (await readdir(galleryDirectory))
-      .filter((file) => file.includes("mily-b53-"))
+      .filter((file) => file.includes("mily-b59-"))
       .sort();
     assert.deepEqual(assets, [PUBLIC_POSTER, PUBLIC_VIDEO].sort());
 
@@ -283,7 +287,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
     assert.equal(media.some((entry) => ids.has(entry.id)), false);
     // 9/4 の配信枠は本人配布タイムテーブル由来の既存データ。このStoryは枠を足さない。
     assert.equal(
-      streamSchedule.some((entry) => JSON.stringify(entry).includes("b53")),
+      streamSchedule.some((entry) => JSON.stringify(entry).includes("b59")),
       false,
     );
   });
@@ -314,13 +318,13 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
   it("documents the batch ledger and the operational notes", async () => {
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    const start = ops.indexOf("### 2026-09-04 Instagram Story 投票2日目の呼びかけ（batch b53）");
+    const start = ops.indexOf("### 2026-09-04 Instagram Story 投票2日目の呼びかけ（batch b59）");
     const end = ops.indexOf("### 2026-09-03 SHOWROOM 三次初日の朝配信メモ");
     assert.notEqual(start, -1);
     assert.notEqual(end, -1);
     const section = ops.slice(start, end);
 
-    assert.match(docs, /batch b53/);
+    assert.match(docs, /batch b59/);
     assert.match(docs, /video-only/);
     assert.match(docs, /720×1280/);
     assert.match(docs, new RegExp(PUBLIC_VIDEO.replace(/\./g, "\\.")));
@@ -330,8 +334,8 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
     // source date はオーナーの明示確認による投稿日。画面の「2日目」からの逆算ではない。
     assert.match(docs, /オーナーが明示確認した投稿日/);
     assert.match(section, /オーナーが「9\/4の投稿を直後に受け取った」と/);
-    assert.match(ops, /76件/);
-    assert.match(ops, /独立動画29本/);
+    assert.match(ops, /77件/);
+    assert.match(ops, /独立動画30本/);
     assert.match(section, /video-only/);
     assert.match(section, /特典の内容・条件・付与方法は補わない/);
     assert.match(section, /sameDayOrder: 10/);

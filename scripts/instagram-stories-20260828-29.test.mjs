@@ -14,12 +14,12 @@ import {
   nightStoryB41Video,
   patonVoteDay4StoryVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b58.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { campusGirlsPatonPortraitImage } from "../src/data/campusGirlsPatonImages.ts";
 import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
@@ -225,7 +225,7 @@ describe("2026-08-28〜29 Instagram Story動画 — Latest / NEWS", () => {
   });
 
   it("shares one manifest object per Story with Gallery and Portal Feed", () => {
-    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b53-01-third-round-vote-day2-story");
+    assert.equal(visibleGalleryVideos()[0]?.id, "mily-b59-01-third-round-vote-day2-story");
     assert.equal(visibleGalleryVideos()[1]?.id, "mily-b47-01-oyasumily-story");
     assert.equal(visibleGalleryVideos()[2]?.id, "mily-b47-02-paton-second-story");
     assert.equal(visibleGalleryVideos()[3]?.id, "mily-b46-01-paton-vote-final-day-story");

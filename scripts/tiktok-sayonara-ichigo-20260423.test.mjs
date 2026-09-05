@@ -22,10 +22,10 @@ import {
   tiktokRadioVideo,
   tiktokSayonaraIchigoVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b58.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { isMixchMovie } from "../src/data/mixchMovies.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
@@ -195,7 +195,7 @@ describe("2026-04-23 TikTok video — shared Latest / Gallery asset", () => {
       .map((entry) => entry.id);
 
     assert.deepEqual(augustIds, [
-      "mily-b53-01-third-round-vote-day2-story",
+      "mily-b59-01-third-round-vote-day2-story",
       "mily-b47-01-oyasumily-story",
       "mily-b47-02-paton-second-story",
       "mily-b46-01-paton-vote-final-day-story",

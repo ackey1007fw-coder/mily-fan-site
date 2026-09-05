@@ -1,3 +1,4 @@
+import { tiktokPortraitVideo, type TikTokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import {
   eventStory20260821,
   morningOhayo20260821,
@@ -48,10 +49,12 @@ export type SelfHostedGalleryVideo =
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
+  | TikTokPortraitVideo
   | TikTokSayonaraIchigoVideo;
 
 export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
+  tiktokPortraitVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
   mixchFinalDayMovie,
@@ -104,6 +107,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  tiktokPortraitVideo,
   webVoteDay2StoryVideo,
   oyasumilyStoryVideo,
   patonSecondStoryVideo,
