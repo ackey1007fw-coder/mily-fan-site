@@ -1,6 +1,6 @@
 # 配信メモ 統一ルール — LIVE STREAM（/activities/live/）
 
-`src/data/streamRecaps.ts` に置く「配信メモ」カードの書き方を、担当したエージェント
+`src/data/streamRecaps.ts` と各回の `src/data/streamRecap*.ts` に置く「配信メモ」カードの書き方を、担当したエージェント
 （Claude Code / Codex / Cursor など）に関係なく同じ品質へ揃えるためのルールです。
 
 - ルール本体の唯一の情報源は `AGENTS.md`。このファイルは、`AGENTS.md` が
@@ -58,12 +58,12 @@
 | `highlights[].title` | 体言止め可。記号で飾らない | 5〜20 |
 | `highlights[].body` | です・ます。1〜2文 | 40〜100 |
 | `highlights[].quote` | 任意。本人の言葉だけ。かぎ括弧を付けない | 〜40 |
-| `goals` | 3〜6件。`item` は重複させない | — |
+| `goals` | 2〜6件。`item` は重複させない。素材にない目標を補わない | — |
 | `goals[].item` | 目標の名前 | 〜8 |
 | `goals[].target` | 目指す値・状態 | 〜10 |
 | `goals[].statusThen` | その回でどうだったか（状態、または本人の呼びかけ）。UIが「この回」と表示するので語を重ねない | 〜12 |
-| `ranking` | 読み上げがあった回だけ1件。`RANKING_NOTE`、または範囲が違う回は `buildRankingNote(from, to)` | — |
-| `timeline` | 8〜16件。先頭は `0:00:00`。昇順 | — |
+| `ranking` | 読み上げがあった回だけ1件。範囲確認済みは `RANKING_NOTE` / `buildRankingNote(from, to)`、範囲未確認は `RANKING_NOTE_WITHOUT_RANGE`。読み上げなしは空配列 | — |
+| `timeline` | 7〜16件。先頭は `0:00:00`。昇順 | — |
 | `timeline[].label` | 体言止め。話題だけ | 〜32 |
 | `nextNote` | 配信内で案内された次枠。確定予定として書かない | 40〜120 |
 | `sourceLabel` | `YYYY年M月D日 <枠の説明>（…オーナー提供）`。URLを書かない | — |
@@ -110,7 +110,7 @@ transcriptionNote: buildTranscriptionNote({
 - 掲載できるのは **オーナーが提供し、掲載面を明示承認した録画の実フレーム**だけ。
   AI生成・生成塗り足し・顔の加工はしない。
 - コメント欄、視聴者の表示名・アイコン、他の出場者が写らないよう切り出す。
-- 代表1枚だけの回は `image`。まとめて出す回は `gallery`（4〜12枚）＋ `image = gallery[0]`。
+- 代表1枚だけの回は `image`。まとめて出す回は `gallery`（2〜12枚）＋ `image = gallery[0]`。提供素材が2枚だけの回も、確認済み素材を水増ししない。
   `gallery` の各要素は `caption` と `downloadName` を必ず持つ。
 - `alt` は「誰が・何をしているか」を書く。「みりぃ」を必ず含める。
   コメント・視聴者・他出場者に触れない。
@@ -124,7 +124,7 @@ transcriptionNote: buildTranscriptionNote({
 - 録音音声・画面録画・全文文字起こし。
 - 視聴者・リスナーの名前、ファンネームで呼ばれた個人、他の出場者の名前。
 - 読み上げランキングの個人名（順位を読み上げた事実だけ残す）。
-  読み上げがなかった回に、あったことにしない。範囲が13位からでない回は `buildRankingNote()` で実際の範囲を書く。
+  読み上げがなかった回に、あったことにしない。範囲が確認できない回は `RANKING_NOTE_WITHOUT_RANGE`、範囲が違う回は `buildRankingNote(from, to)` を使う。
 - Google Drive のフォルダ・ファイルID、原本ファイル名、音声ファイル名。
 - 未確定の予定（検討中の枠、時刻未定の枠）を `events.ts` / `streamSchedule.ts` へ転記すること。
   配信内で案内された枠は `nextNote` に「案内された」として残すだけ。
@@ -136,7 +136,7 @@ transcriptionNote: buildTranscriptionNote({
 
 ## 7. 触るファイル / 触らないファイル
 
-触る: `src/data/streamRecaps.ts`、（新しい静止画があれば）`public/media/live/`、
+触る: `src/data/streamRecaps.ts` と各回の `src/data/streamRecap*.ts`、（新しい静止画があれば）`public/media/live/`、
 `docs/CONTENT-OPS.md` の当日メモ、必要ならその回のテスト。
 
 触らない（オーナーが別途指示した場合のみ）: `news.ts` / `media.ts` / `galleryVideos.ts` /
@@ -178,7 +178,7 @@ export const streamRecapYYYYMMDD: StreamRecap = {
     },
   ],
   goals: [{ item: "（〜8字）", target: "（〜10字）", statusThen: "（〜12字）" }],
-  ranking: [RANKING_NOTE], // 読み上げがなければ [] 。範囲が違えば buildRankingNote(from, to)
+  ranking: [RANKING_NOTE], // 読み上げなしは []。範囲未確認は RANKING_NOTE_WITHOUT_RANGE
   timeline: [{ timestamp: "0:00:00", label: "（〜32字）" }],
   nextNote: "（配信内で案内された次枠。確定予定にしない）",
   sourceLabel: "YYYY年M月D日 SHOWROOM◯◯配信（動画確認・オーナー提供）",

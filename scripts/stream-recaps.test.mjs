@@ -2,12 +2,13 @@
 // ルール本文は docs/LIVE-STREAM-RECAP.md。数値を変えるときは両方を同じPRで直す。
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
   RANKING_NOTE,
+  RANKING_NOTE_WITHOUT_RANGE,
   buildRankingNote,
   RECAP_FIGURES_NOTE,
   RECAP_WITHHOLD_NOTE,
@@ -25,18 +26,18 @@ const LIMITS = {
   highlightTitle: [5, 20],
   highlightBody: [40, 100],
   highlightQuote: [1, 40],
-  goals: [3, 6],
+  goals: [2, 6],
   goalItem: [1, 8],
   goalTarget: [1, 10],
   goalStatusThen: [1, 12],
-  timeline: [8, 16],
+  timeline: [7, 16],
   timelineLabel: [1, 32],
   nextNote: [40, 120],
-  gallery: [4, 12],
+  gallery: [2, 12],
 };
 
 const RANKING_NOTE_SHAPE =
-  /^配信終了時に、\d{1,3}位から\d{1,3}位までランキングを読み上げました。個人名は掲載していません。$/;
+  /^配信終了時に(?:、\d{1,3}位から\d{1,3}位まで)?ランキングを読み上げました。個人名は掲載していません。$/;
 const THEME_PREFIXES = ["朝", "昼", "夕", "夜", "深夜"];
 const PLATFORMS = new Set(["SHOWROOM", "MixChannel"]);
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
@@ -232,6 +233,11 @@ describe("配信メモの統一ルール", () => {
 
   it("keeps the ranking note free of names for any read-out range", () => {
     assert.match(RANKING_NOTE, RANKING_NOTE_SHAPE);
+    assert.match(RANKING_NOTE_WITHOUT_RANGE, RANKING_NOTE_SHAPE);
+    assert.equal(
+      buildRankingNote(),
+      "配信終了時にランキングを読み上げました。個人名は掲載していません。",
+    );
     assert.match(buildRankingNote(5, 1), RANKING_NOTE_SHAPE);
     assert.equal(
       buildRankingNote(5, 1),
@@ -251,11 +257,22 @@ describe("配信メモの統一ルール", () => {
   });
 
   it("keeps private sources and misleading wording out of the data file", async () => {
-    const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
+    const recapDataFiles = (await readdir(path.join(root, "src/data")))
+      .filter((file) => /^streamRecap.*\.ts$/.test(file))
+      .sort();
+    const data = (
+      await Promise.all(
+        recapDataFiles.map((file) =>
+          readFile(path.join(root, "src/data", file), "utf8"),
+        ),
+      )
+    ).join("\n");
     assert.doesNotMatch(data, /公式|公認|本人運営/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com/);
     assert.doesNotMatch(data, /\.mp3|\.aac|stt_raw|ScreenRecording/);
     assert.doesNotMatch(data, /https?:\/\//);
+    assert.doesNotMatch(data, /transcriptionNote:\s*["`]/);
+    assert.match(data, /buildTranscriptionNote/);
   });
 
   it("renders every card with the same sections in the same order", async () => {
