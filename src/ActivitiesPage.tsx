@@ -703,7 +703,9 @@ function StreamRecapArticle({
             ))}
           </ol>
         ) : null}
-        <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
+        {recap.nextNote ? (
+          <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
+        ) : null}
       </details>
 
       <div className="mt-4 rounded-2xl border border-sage/15 bg-paper px-4 py-3">

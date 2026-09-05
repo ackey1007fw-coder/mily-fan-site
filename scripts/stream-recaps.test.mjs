@@ -67,7 +67,7 @@ function seconds(timestamp) {
 }
 
 function startMinutes(broadcastLabel) {
-  const match = broadcastLabel.match(/^(\d{1,2}):([0-5]\d)頃〜 約\d+分$/);
+  const match = broadcastLabel.match(/^([01]?\d|2[0-3]):([0-5]\d)頃〜 約\d+分$/);
   assert.ok(match, `broadcastLabel形式: ${broadcastLabel}`);
   return Number(match[1]) * 60 + Number(match[2]);
 }
@@ -116,10 +116,18 @@ describe("配信メモの統一ルール", () => {
         assert.ok(PLATFORMS.has(recap.platformLabel));
         startMinutes(recap.broadcastLabel);
         atMost(recap.summary, MAX.summary, `${recap.id} summary`);
-        atMost(recap.nextNote, MAX.nextNote, `${recap.id} nextNote`);
+        // 次枠を確認できない回は空にする。UIは空なら文を出さない。
+        if (recap.nextNote !== "") {
+          atMost(recap.nextNote, MAX.nextNote, `${recap.id} nextNote`);
+        }
 
         // 日付と素材の説明は必須。入手経路（オーナー提供など）は実際に応じて書く。
-        assert.match(recap.sourceLabel, /^\d{4}年\d{1,2}月\d{1,2}日 .+（.+）$/);
+        const labelDate = recap.sourceLabel.match(/^(\d{4})年(\d{1,2})月(\d{1,2})日 .+（.+）$/);
+        assert.ok(labelDate, `sourceLabel形式: ${recap.sourceLabel}`);
+        const [, labelYear, labelMonth, labelDay] = labelDate;
+        const labelIso = `${labelYear}-${labelMonth.padStart(2, "0")}-${labelDay.padStart(2, "0")}`;
+        assertRealDate(labelIso, `${recap.id} sourceLabel`);
+        assert.equal(labelIso, recap.date, "sourceLabel の日付は配信日と同じ");
         assert.doesNotMatch(recap.sourceLabel, /https?:\/\//);
         assert.match(recap.verifiedAt, /^\d{4}-\d{2}-\d{2}$/);
         assertRealDate(recap.verifiedAt, `${recap.id} verifiedAt`);
@@ -279,7 +287,30 @@ describe("配信メモの統一ルール", () => {
     ).join("\n");
     assert.doesNotMatch(data, /公式|公認|本人運営/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com/);
-    assert.doesNotMatch(data, /\.mp3|\.aac|stt_raw|ScreenRecording/);
+    assert.doesNotMatch(data, /stt_raw|ScreenRecording/);
+    // 録画・音声のファイル名は公開文へ出さない。TSのimport拡張子を誤検出しないよう、
+    // 掲載される文字列とメディアパスだけを見る。
+    const publishedText = streamRecaps
+      .flatMap((recap) => [
+        recap.theme,
+        recap.summary,
+        recap.broadcastLabel,
+        recap.platformLabel,
+        recap.sourceLabel,
+        recap.transcriptionNote,
+        recap.nextNote,
+        ...recap.ranking,
+        ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
+        ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
+        ...recap.timeline.map(({ label }) => label),
+        ...[recap.image, ...(recap.gallery ?? [])]
+          .filter(Boolean)
+          .flatMap((image) => [image.src, image.alt, image.caption ?? "", image.downloadName ?? ""]),
+        recap.galleryZip?.src ?? "",
+        recap.galleryZip?.filename ?? "",
+      ])
+      .join("\n");
+    assert.doesNotMatch(publishedText, /\.(mp3|aac|mp4|mov|ts|wav|m4a)\b/i);
     assert.doesNotMatch(data, /https?:\/\//);
     assert.doesNotMatch(data, /transcriptionNote:\s*["`]/);
     assert.match(data, /buildTranscriptionNote/);

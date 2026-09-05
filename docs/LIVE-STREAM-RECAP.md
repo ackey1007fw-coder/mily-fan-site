@@ -53,7 +53,7 @@
 | `date` | `YYYY-MM-DD`。`id` の先頭と一致 | — |
 | `dateLabel` | `YYYY.MM.DD（曜）`。`date` と一致する曜日 | — |
 | `theme` | **朝 / 昼 / 夕 / 夜 / 深夜 で始める**。プラットフォーム名を入れない | 〜16 |
-| `broadcastLabel` | `H:MM頃〜 約N分` | — |
+| `broadcastLabel` | `H:MM頃〜 約N分`（時は 0〜23） | — |
 | `platformLabel` | `SHOWROOM` または `MixChannel` | — |
 | `summary` | その回を1〜3文で。です・ます | 〜140 |
 | `highlights` | 8件まで。目安は5〜7件。素材が薄い回は少ないままでよい（水増ししない） | — |
@@ -68,8 +68,8 @@
 | `ranking` | 読み上げがあった回だけ1件。範囲確認済みは `RANKING_NOTE` / `buildRankingNote(from, to)`、範囲未確認は `RANKING_NOTE_WITHOUT_RANGE`。読み上げなしは空配列 | — |
 | `timeline` | 16件まで。目安は8〜14件。昇順。録画が途中から始まる回は先頭が `0:00:00` でなくてよい | — |
 | `timeline[].label` | 体言止め。話題だけ | 〜32 |
-| `nextNote` | 配信内で案内された次枠。確定予定として書かない | 〜120 |
-| `sourceLabel` | `YYYY年M月D日 <枠の説明>（<入手経路>）`。入手経路は実際どおり（例: 動画確認・オーナー提供）。URLを書かない | — |
+| `nextNote` | 配信内で案内された次枠。確定予定として書かない。案内がなかった回・確認できない回は `""` | 〜120 |
+| `sourceLabel` | `YYYY年M月D日 <枠の説明>（<入手経路>）`。日付は `date` と同じ。入手経路は実際どおり（例: 動画確認・オーナー提供）。URLを書かない | — |
 | `verifiedAt` | `YYYY-MM-DD`。`date` 以降 | — |
 | `transcriptionNote` | `buildTranscriptionNote()` で組み立てる。手書きしない | — |
 

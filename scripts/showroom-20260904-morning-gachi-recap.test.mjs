@@ -34,6 +34,9 @@ const RECAP_FILE = path.join(root, "src/data/streamRecap20260904Asa.ts");
 // Covers copy, captions, filenames, source labels, and comments. Rebaseline only
 // after another content/privacy review; never copy viewer names into fixtures.
 const APPROVED_RECAP_BLOB_SHA = "6bd6620d7a1d468f56c6bdcfdf2a4b162b400341";
+// 公開文は共有定数からも組み立てるので、そちらの変更も再レビュー対象にする。
+const RULES_FILE = path.join(root, "src/data/streamRecapRules.ts");
+const APPROVED_RULES_BLOB_SHA = "350375f1df51ea3f0c4ac26425f9f57c7d313f2c";
 
 function gitBlobSha(source) {
   // Match Git's LF-normalized source on Windows checkouts as well as CI.
@@ -183,6 +186,12 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
   });
 
   it("locks reviewed public source without storing private-name fixtures", async () => {
+    const rules = await readFile(RULES_FILE, "utf8");
+    assert.equal(
+      gitBlobSha(rules),
+      APPROVED_RULES_BLOB_SHA,
+      "共有注記が変わりました。公開文を読み直してから baseline を更新してください。",
+    );
     const source = await readFile(RECAP_FILE, "utf8");
     assert.equal(
       gitBlobSha(source),
