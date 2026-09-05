@@ -393,7 +393,7 @@ describe("SHOWROOM schedule availability", () => {
       new URL("../src/lib/useStreamSchedule.ts", import.meta.url),
       "utf8",
     );
-    assert.match(hook, /return toStreamScheduleView\(fetched, streamSchedule, Date\.now\(\)\)/);
+    assert.match(hook, /withShowroomNext\(toStreamScheduleView\(fetched, streamSchedule, now\), live, now\)/);
 
     assert.match(hook, /manualSlots: upcomingSlots\(manual, \[\], now\)/);
     assert.match(hook, /ok\?: boolean/);
