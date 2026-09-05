@@ -3070,3 +3070,43 @@ LIVE STREAM の三次2日目昼配信メモ専用。NEWS / Gallery / `media.ts` 
 - b54-01 sha256 `f0056137f6757feab1de6147520ecca5cb418a48116642549b8d610dafdb22b9`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 
+## 素材台帳（batch b55 / 受領日・source date 2026-09-04）
+
+オーナー提供の 2026-09-04 SHOWROOM 三次2日目朝配信録画から切り出した、
+実フレーム5枚。顔出し枠。コメント・視聴者アイコン・表示名・
+他出場者は写らないようカメラ付近だけを切り出している。
+LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` /
+`galleryVideos.ts` / `/stories/` には出さない。
+代表1枚（b55-01）をサムネにし、5枚を保存できるZIPも同じディレクトリに置く。
+
+### 掲載承認
+
+- approval date: `2026-09-05`
+- オーナーが当該朝配信を配信コーナーへ載せることを明示依頼した。
+  承認対象面は LIVE STREAM Activity の配信メモ。Gallery / NEWS へは流用しない。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b55-01 | `live/mily-b55-01-smile.jpg` | ベストショット。笑顔。400×228。サムネ | ✅ 2026-09-05 明示承認。LIVE STREAM。Gallery / NEWS 非掲載 |
+| b55-02 | `live/mily-b55-02-talk.jpg` | 話す | ✅ 同上 |
+| b55-03 | `live/mily-b55-03-look.jpg` | 見つめて | ✅ 同上 |
+| b55-04 | `live/mily-b55-04-board.jpg` | ボードに書く | ✅ 同上 |
+| b55-05 | `live/mily-b55-05-hoodie.jpg` | 灰色パーカー | ✅ 同上 |
+| b55-zip | `live/mily-b55-gachi-morning-stills.zip` | 上記5枚の保存用ZIP | ✅ 同上 |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。SNSから再取得していない
+- source date: `2026-09-04`。再生permalinkなし。`sourceUrl` は null
+- 視聴者コメント・アイコン・表示名・他出場者名・端末情報・DMは見当たらない
+- 元素材は gitignored の `media/original/` へ保存。受け渡しURL / file ID /
+  録画ファイル名は tracked text へ残さない
+- 顔補正・AI生成・生成塗り足しなし。収録 640×360 からカメラ付近を切り出しただけで拡大していない
+- 録音音声・画面録画・全文文字起こしは公開しない
+
+### 公開派生
+
+- 各JPEG: 400×228 / EXIF・IPTC・XMP・ICCなし
+- b55-01 sha256 `501f2178cd3ccec5dc6423a5694e50898ba4d7b9835db2fb19ca15d25baa1e16`
+- LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
+
