@@ -169,7 +169,7 @@ export const streamRecap20260903: StreamRecap = {
     { timestamp: "0:29:01", label: "アバター権を取りたい" },
   ],
   nextNote:
-    "同日 14:40〜 はメイクして会うと案内されました。夜枠も、来やすい時間として待っていると話しています。WEB投票は12時から。",
+    "配信時点では、同日9月3日 14:40〜 はメイクして会うと案内していました。夜枠でも待っていると話し、WEB投票は同日12時からと案内していました。",
   sourceLabel: "2026年9月3日 SHOWROOM朝配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
   transcriptionNote:

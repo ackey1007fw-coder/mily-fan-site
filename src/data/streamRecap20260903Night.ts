@@ -102,7 +102,7 @@ export const streamRecap20260903Night: StreamRecap = {
     { timestamp: "0:48:20", label: "明朝7時〜。おつみりん" },
   ],
   nextNote:
-    "明朝 7:00〜 約30分と案内されました。WEB投票は1日1回、キラキラ100も継続です。",
+    "配信時点では、翌9月4日 7:00〜 約30分と案内していました。WEB投票は1日1回、キラキラ100も継続して呼びかけていました。",
   sourceLabel: "2026年9月3日 SHOWROOM夜配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
   transcriptionNote:

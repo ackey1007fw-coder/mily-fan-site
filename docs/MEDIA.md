@@ -3110,3 +3110,32 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 - b55-01 sha256 `501f2178cd3ccec5dc6423a5694e50898ba4d7b9835db2fb19ca15d25baa1e16`
 - LIVE STREAM 専用のため、480 / 960 / 1600 の Gallery 派生は作らない
 
+
+
+## 素材台帳（batch b56 / 受領日・source date 2026-09-05）
+
+オーナー提供の9月5日SHOWROOM朝配信録画から厳選した実フレーム10枚。
+2026-09-05にオーナーがレポート・画像のLIVE STREAM掲載を明示依頼。
+代表画像はb56-03。各画像の保存リンクと10枚のZIPを配信カードに掲載する。
+
+| ID | 公開ファイル | 場面（録画内の目安） |
+| --- | --- | --- |
+| b56-01 | `live/mily-b56-01-chin-pose.jpg` | 00:30 あごの下に手 |
+| b56-02 | `live/mily-b56-02-soft-smile.jpg` | 04:05 微笑み |
+| b56-03 | `live/mily-b56-03-bright-smile.jpg` | 06:53 笑顔 |
+| b56-04 | `live/mily-b56-04-cheek-pose.jpg` | 07:53 頬に指 |
+| b56-05 | `live/mily-b56-05-singing-point.jpg` | 09:30 歌唱・指さし |
+| b56-06 | `live/mily-b56-06-calling-pose.jpg` | 13:30 呼びかけ |
+| b56-07 | `live/mily-b56-07-big-laugh.jpg` | 15:18 笑顔 |
+| b56-08 | `live/mily-b56-08-playful-glasses.jpg` | 20:17 指めがね |
+| b56-09 | `live/mily-b56-09-double-peace.jpg` | 21:05 ダブルピース |
+| b56-10 | `live/mily-b56-10-goodbye-smile.jpg` | 23:18 手を振る |
+| b56-zip | `live/mily-b56-morning-stills.zip` | 上記JPEG10枚 |
+
+- provenance: `owner-provided`。公開再生permalinkはなく、sourceUrlはnull。
+- 10枚を目視確認。視聴者コメント・表示名・他の人物・端末情報は写っていない。
+- 元素材はgitignoredの `media/original/b56/` に保持。受け渡しURL・IDは公開しない。
+- 各JPEGは元の640×360構図を保持。通常のJPEG圧縮のみ。EXIF / GPS / IPTC / XMPなし。
+- 顔のAI生成・補正・置換、生成塗り足しは行っていない。
+- 先に作成した生成コラージュは顔の同一性を保証できないため公開対象から除外し、実フレームを掲載。
+- LIVE STREAM専用の公開派生。全文文字起こし・録音・録画は公開しない。
