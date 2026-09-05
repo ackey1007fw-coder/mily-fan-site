@@ -53,7 +53,7 @@ function jpegSize(buffer) {
 }
 
 describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
-  it("stores the second-day lunch recap at the top of the archive", () => {
+  it("stores the second-day lunch recap before the morning and older recaps", () => {
     const recap = streamRecap20260904Day;
 
     assert.equal(recap.date, "2026-09-04");
@@ -67,12 +67,16 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.match(recap.summary, /スーツ/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /5枚/);
-    assert.equal(streamRecaps[0], recap);
-    assert.equal(streamRecaps[1], streamRecap20260904Asa);
-    assert.equal(streamRecaps[2], streamRecap20260903Night);
-    assert.equal(streamRecaps[3], streamRecap20260903);
-    assert.equal(streamRecaps[4], streamRecap20260902Night);
-    assert.equal(streamRecaps[5], streamRecap20260902);
+    const dayIndex = streamRecaps.indexOf(recap);
+    assert.ok(dayIndex >= 0);
+    assert.deepEqual(streamRecaps.slice(dayIndex, dayIndex + 6), [
+      recap,
+      streamRecap20260904Asa,
+      streamRecap20260903Night,
+      streamRecap20260903,
+      streamRecap20260902Night,
+      streamRecap20260902,
+    ]);
   });
 
   it("keeps a concise recap and withholds ranking names", () => {
