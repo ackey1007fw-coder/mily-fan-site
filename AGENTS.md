@@ -123,7 +123,9 @@ pnpm typecheck
 pnpm test
 pnpm build
 pnpm guard
-git diff --check
+git diff --check                      # 未ステージの変更
+git diff --cached --check             # ステージ済みの変更
+git diff --check origin/main...HEAD   # コミット済みのPR差分（最新のbaseを取得後）
 ```
 
 UI変更はモバイル・PCで対象画面、横overflow、画像・動画、リンクを確認する。文書変更でも参照先・コマンド・矛盾・公開範囲を確認する。未実行は成功と書かず、環境制約と代替のCI確認を報告する。テストやguardの無効化で通さない。
