@@ -3,7 +3,8 @@ import { readFile } from "node:fs/promises";
 import { it } from "node:test";
 import { galleryVideos, tiktokPortraitVideo, visibleGalleryVideos } from "../src/data/galleryVideos.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
-import { news } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news as previousNews } from "./fixtures/news-before-b58.ts";
 import { galleryVideos as previous } from "./fixtures/gallery-videos-before-b58.ts";
 
 it("shares the owner-dated TikTok between Latest and Gallery", async () => {
@@ -18,6 +19,9 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
   assert.equal(updates[0].date, item.sourceDate);
   assert.equal(updates[0].source, item.sourceUrl);
   assert.equal(news[0], updates[0]);
+  assert.equal(sortNewsByDateDesc(news)[0], updates[0]);
+  assert.equal(news.length, previousNews.length + 1);
+  assert.deepEqual(news.filter((entry) => entry !== updates[0]), previousNews);
   assert.equal(galleryVideos[0], item);
   const entries = selectGalleryEntries().filter(({ key }) => key === item.id);
   assert.equal(entries.length, 1);

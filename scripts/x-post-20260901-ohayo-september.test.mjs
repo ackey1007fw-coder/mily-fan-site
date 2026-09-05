@@ -9,7 +9,7 @@ import { galleryVideos } from "./fixtures/gallery-videos-before-b58.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { media } from "../src/data/media.ts";
 import { isMixchMovie } from "../src/data/mixchMovies.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { ohayoSeptemberXVideo } from "../src/data/ohayoSeptemberXVideo.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { septemberMilyStoryVideo } from "../src/data/septemberMilyStoryVideo.ts";

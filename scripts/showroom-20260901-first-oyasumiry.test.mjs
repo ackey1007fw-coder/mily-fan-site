@@ -20,7 +20,7 @@ import {
   firstSeptemberShowroomAdditionalMedia,
   firstSeptemberTomatoBoardImage,
 } from "../src/data/firstSeptemberShowroomImages.ts";
-import { news, newsDisplayMedia, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
