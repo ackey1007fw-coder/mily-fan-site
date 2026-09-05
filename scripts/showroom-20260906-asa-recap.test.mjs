@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { it } from "node:test";
-import sharp from "sharp";
 import { streamRecap20260906Asa as recap, streamRecap20260905Night, streamRecaps } from "../src/data/streamRecaps.ts";
 
 it("places the September 6 morning recording before the previous night with valid source-relative timestamps", () => {
@@ -17,19 +16,13 @@ it("places the September 6 morning recording before the previous night with vali
   assert.ok(recap.highlights.every(h => !h.quote));
 });
 
-it("ships ten distinct morning images at source resolution without metadata and a download ZIP", async () => {
-  assert.equal(recap.gallery.length, 10);
-  assert.equal(new Set(recap.gallery.map(i => i.src)).size, 10);
-  assert.ok(recap.gallery.includes(recap.image));
-  for (const still of recap.gallery) {
-    const meta = await sharp(await readFile(new URL(`../public${still.src}`, import.meta.url))).metadata();
-    assert.equal(meta.width, 640);
-    assert.equal(meta.height, 360);
-    for (const field of ["exif", "xmp", "iptc"]) assert.equal(meta[field], undefined);
-    assert.ok(still.alt && still.caption && still.downloadName);
-  }
-  const zip = await readFile(new URL(`../public${recap.galleryZip.src}`, import.meta.url));
-  assert.equal(zip.readUInt32LE(0), 0x04034b50);
+it("keeps withdrawn September 6 stills and ZIP out of public data and assets", async () => {
+  assert.equal(recap.image, undefined);
+  assert.equal(recap.gallery, undefined);
+  assert.equal(recap.galleryZip, undefined);
+  const files = await readdir(new URL("../public/media/live/", import.meta.url));
+  assert.equal(files.some(name => name.startsWith("mily-b61-")), false);
+  assert.ok(recap.highlights.length > 0);
   const source = await readFile(new URL("../src/data/streamRecap20260906Asa.ts", import.meta.url), "utf8");
-  assert.doesNotMatch(source, /https?:\/\/|data:|\.mp4|\.mp3/);
+  assert.doesNotMatch(source, /mily-b61-/);
 });

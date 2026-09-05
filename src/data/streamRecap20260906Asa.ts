@@ -1,92 +1,7 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
+import type { StreamRecap } from "./streamRecaps";
 
-const asaStills: StreamRecapImage[] = [
-  {
-    "src": "/media/live/mily-b61-01-hello.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。笑顔でおはよう",
-    "caption": "00:59 笑顔でおはよう",
-    "downloadName": "みりぃ_20260906朝_01.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-02-cheek.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。頬に手を添えて",
-    "caption": "11:00 頬に手を添えて",
-    "downloadName": "みりぃ_20260906朝_02.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-03-tilt.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。首をかしげてにっこり",
-    "caption": "17:00 首をかしげてにっこり",
-    "downloadName": "みりぃ_20260906朝_03.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-04-double-pose.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。両手でポーズ",
-    "caption": "36:31 両手でポーズ",
-    "downloadName": "みりぃ_20260906朝_04.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-05-peace.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。カメラに向かってピース",
-    "caption": "46:02 カメラに向かってピース",
-    "downloadName": "みりぃ_20260906朝_05.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-06-ribbon.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。リボンが映る横顔",
-    "caption": "52:01 リボンが映る横顔",
-    "downloadName": "みりぃ_20260906朝_06.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-07-relaxed.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。目を細めて笑顔",
-    "caption": "61:01 目を細めて笑顔",
-    "downloadName": "みりぃ_20260906朝_07.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-08-smile.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。カメラに向かって笑顔",
-    "caption": "70:03 カメラに向かって笑顔",
-    "downloadName": "みりぃ_20260906朝_08.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-09-playful.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。頬をふくらませてポーズ",
-    "caption": "81:02 頬をふくらませてポーズ",
-    "downloadName": "みりぃ_20260906朝_09.jpg"
-  },
-  {
-    "src": "/media/live/mily-b61-10-bye.jpg",
-    "width": 640,
-    "height": 360,
-    "alt": "9月6日の朝配信、大きなリボン姿のみりぃ。両手を振ってまたね",
-    "caption": "87:03 両手を振ってまたね",
-    "downloadName": "みりぃ_20260906朝_10.jpg"
-  }
-];
-
-/** オーナー提供録画の自動文字起こしを要約。実フレーム10枚は目視確認。 */
+/** オーナー提供録画の自動文字起こしを要約。 */
 export const streamRecap20260906Asa: StreamRecap = {
-  image: asaStills[2],
-  gallery: asaStills,
   "id": "2026-09-06-asa-gachi-showroom",
   "date": "2026-09-06",
   "dateLabel": "2026.09.06（日）",
@@ -94,11 +9,6 @@ export const streamRecap20260906Asa: StreamRecap = {
   "broadcastLabel": "05:32頃〜 約88分",
   "platformLabel": "SHOWROOM",
   "summary": "日曜の早朝、初めて来た人も再び訪れた人も歓迎した、にぎやかな朝配信。呼び名の由来やラジオ、アナウンスの授業について話し、たくさんの出会いへの感謝を歌でも届けました。コメントに応じる笑顔と、大きなリボンも印象に残る回です。",
-  "galleryZip": {
-    "src": "/media/live/mily-b61-asa-stills.zip",
-    "filename": "みりぃ_20260906朝_スクショ10枚.zip",
-    "label": "10枚まとめて保存"
-  },
   "highlights": [
     {
       "timestamp": "0:00:15",
@@ -193,5 +103,5 @@ export const streamRecap20260906Asa: StreamRecap = {
   "nextNote": "配信時点では、当日夜は21時半を予定しつつ、開始が遅れる可能性があり改めて連絡すると案内していました。確定時刻や現在の予定・実施結果を示すものではありません。",
   "sourceLabel": "2026年9月6日 SHOWROOM朝配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
   "verifiedAt": "2026-09-06",
-  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム10枚は目視確認しています。曲名は確定していません。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
+  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。この回のスクリーンショットは掲載していません。曲名は確定していません。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
 };
