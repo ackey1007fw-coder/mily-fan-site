@@ -585,29 +585,31 @@ function StreamRecapArticle({
         ) : null}
       </summary>
 
-      <StreamRecapSection title="この回の見どころ" id={`${recap.id}-highlights`}>
-        <ul className="mt-3 space-y-3">
-          {recap.highlights.map((highlight) => (
-            <li
-              key={highlight.timestamp + highlight.title}
-              className="rounded-2xl border border-sage/15 bg-sage-soft/30 p-4"
-            >
-              <p className="text-xs font-semibold tabular-nums text-sage-deep">
-                {highlight.timestamp}
-              </p>
-              <h5 className="mt-1 text-sm font-bold leading-relaxed text-ink">
-                {highlight.title}
-              </h5>
-              <p className="mt-2 text-sm leading-6 text-ink-muted">{highlight.body}</p>
-              {highlight.quote ? (
-                <blockquote className="mt-3 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
-                  {highlight.quote}
-                </blockquote>
-              ) : null}
-            </li>
-          ))}
-        </ul>
-      </StreamRecapSection>
+      {recap.highlights.length > 0 ? (
+        <StreamRecapSection title="この回の見どころ" id={`${recap.id}-highlights`}>
+          <ul className="mt-3 space-y-3">
+            {recap.highlights.map((highlight) => (
+              <li
+                key={highlight.timestamp + highlight.title}
+                className="rounded-2xl border border-sage/15 bg-sage-soft/30 p-4"
+              >
+                <p className="text-xs font-semibold tabular-nums text-sage-deep">
+                  {highlight.timestamp}
+                </p>
+                <h5 className="mt-1 text-sm font-bold leading-relaxed text-ink">
+                  {highlight.title}
+                </h5>
+                <p className="mt-2 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+                {highlight.quote ? (
+                  <blockquote className="mt-3 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
+                    {highlight.quote}
+                  </blockquote>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </StreamRecapSection>
+      ) : null}
 
       {recap.gallery && recap.gallery.length > 0 ? (
         <StreamRecapSection
@@ -689,16 +691,18 @@ function StreamRecapArticle({
         <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
           タイムスタンプと次枠
         </summary>
-        <ol className="mt-3 space-y-2">
-          {recap.timeline.map((item) => (
-            <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
-              <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
-                {item.timestamp}
-              </span>
-              <span className="text-ink-muted">{item.label}</span>
-            </li>
-          ))}
-        </ol>
+        {recap.timeline.length > 0 ? (
+          <ol className="mt-3 space-y-2">
+            {recap.timeline.map((item) => (
+              <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
+                <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
+                  {item.timestamp}
+                </span>
+                <span className="text-ink-muted">{item.label}</span>
+              </li>
+            ))}
+          </ol>
+        ) : null}
         <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
       </details>
 
