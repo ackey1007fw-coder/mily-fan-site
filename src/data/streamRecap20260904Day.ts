@@ -11,7 +11,7 @@ const dayStills: StreamRecapImage[] = [
     src: "/media/live/mily-b54-01-hoodie-look.jpg",
     width: STILL_W,
     height: STILL_H,
-    alt: "三次2日目の昼配信で、灰色パーカーのみりぃがカメラを見ている。ヘアピン、すっぴん",
+    alt: "三次2日目の昼配信で、灰色パーカーのみりぃがカメラを見ている。ヘアピンを着けている",
     caption: "ベストショット。灰色パーカー",
     downloadName: "みりぃ_三次2日目昼_01_ベスト_パーカー.jpg",
   },
@@ -63,7 +63,7 @@ export const streamRecap20260904Day: StreamRecap = {
   broadcastLabel: "14:50頃〜 約20分",
   platformLabel: "SHOWROOM",
   summary:
-    "MISS CIRCLE CONTEST 三次審査2日目の昼枠。朝と同じすっぴんと灰色パーカーで、約20分の短枠でした。夜は22:30からスーツ配信、メイクする予定。この枠ではメイク配信にはしませんでした。来てくれることが幸せだと話し、WEB投票とキラキラをお願いしています。",
+    "MISS CIRCLE CONTEST 三次審査2日目の昼枠。朝と同じ灰色パーカーで、約20分の短枠でした。夜は22:30からスーツ配信、メイクする予定。この枠ではメイク配信にはしませんでした。来てくれることへの感謝を伝え、WEB投票とキラキラをお願いしています。",
   image: dayStills[0],
   gallery: dayStills,
   galleryZip: {
@@ -91,7 +91,7 @@ export const streamRecap20260904Day: StreamRecap = {
     {
       timestamp: "0:05:00",
       title: "来てくれることが幸せ",
-      body: "個人的にしんどい日々だったと口にしたら、泣くつもりはなかったのに涙が出ました。配信していると忘れられる、来てくれることが幸せだ、と話しています。",
+      body: "配信に来てくれることへの感謝を伝え、来てくれることが幸せだと話しました。",
       quote: "来てくれる事がすごく幸せだよ",
     },
     {
@@ -118,17 +118,16 @@ export const streamRecap20260904Day: StreamRecap = {
     { timestamp: "0:00:00", label: "ありがとう。夜スーツは22:30〜" },
     { timestamp: "0:00:30", label: "キラキラのお願い" },
     { timestamp: "0:01:45", label: "朝の謝罪は夜。メイク配信は見送り" },
-    { timestamp: "0:03:30", label: "投票した？ 個人的にしんどい日々" },
-    { timestamp: "0:05:00", label: "涙。来てくれることが幸せ" },
+    { timestamp: "0:03:30", label: "投票した？" },
+    { timestamp: "0:05:00", label: "来てくれることが幸せ" },
     { timestamp: "0:07:50", label: "無理をしすぎない" },
-    { timestamp: "0:09:00", label: "ここ数日あまり眠れていない" },
     { timestamp: "0:12:40", label: "トマトの栄養素のペンは後で書く" },
     { timestamp: "0:14:20", label: "泣ける時に泣いた方がいい" },
     { timestamp: "0:18:30", label: "ランキング読み上げ" },
     { timestamp: "0:19:40", label: "お昼終わり。夜はスーツ。バイバイ" },
   ],
   nextNote:
-    "同日 22:30〜 がスーツ配信です。夜はメイクする予定。バイトのため遅れる可能性があり、遅れたら連絡すると話しています。WEB投票とキラキラは継続。",
+    "配信時点では、同日 22:30〜 のスーツ配信を案内していました。夜はメイク予定で、バイトのため遅れる可能性があり、遅れた場合は連絡すると話しています。WEB投票とキラキラも継続して呼びかけていました。",
   sourceLabel: "2026年9月4日 SHOWROOM昼配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
   transcriptionNote:

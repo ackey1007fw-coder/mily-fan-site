@@ -33,7 +33,7 @@ const RECAP_FILE = path.join(root, "src/data/streamRecap20260904Asa.ts");
 // Git blob ID of the reviewed PUBLIC source, not a hash/list of private names.
 // Covers copy, captions, filenames, source labels, and comments. Rebaseline only
 // after another content/privacy review; never copy viewer names into fixtures.
-const APPROVED_RECAP_BLOB_SHA = "9230a38fd6e359335c089df02ae0e80f6ced2da1";
+const APPROVED_RECAP_BLOB_SHA = "70988f981b4739cde11feaaf4d8708cbf841a3ca";
 
 function gitBlobSha(source) {
   // Match Git's LF-normalized source on Windows checkouts as well as CI.
@@ -78,7 +78,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-05");
     assert.match(recap.sourceLabel, /オーナー提供/);
-    assert.match(recap.summary, /すっぴん/);
+    assert.match(recap.summary, /灰色パーカー/);
     assert.match(recap.summary, /スーツ/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /5枚/);

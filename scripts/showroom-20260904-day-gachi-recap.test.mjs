@@ -63,7 +63,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-04");
     assert.match(recap.sourceLabel, /オーナー提供/);
-    assert.match(recap.summary, /すっぴん/);
+    assert.match(recap.summary, /灰色パーカー/);
     assert.match(recap.summary, /スーツ/);
     assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /5枚/);
@@ -81,7 +81,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.equal(recap.highlights.length, 6);
     assert.equal(recap.goals.length, 5);
     assert.equal(recap.ranking.length, 1);
-    assert.equal(recap.timeline.length, 11);
+    assert.equal(recap.timeline.length, 10);
     assert.ok(recap.highlights.some(({ title }) => /スーツ/.test(title)));
     assert.ok(recap.highlights.some(({ title }) => /キラキラ/.test(title)));
     assert.ok(recap.highlights.some(({ title }) => /メイク/.test(title)));
@@ -161,7 +161,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     );
   });
 
-  it("does not leak viewer names, other contestants, or private archive files", async () => {
+  it("does not leak viewer names, other contestants, private archive files, or sensitive personal details", async () => {
     const recap = streamRecap20260904Day;
     const data = await readFile(path.join(root, "src/data/streamRecaps.ts"), "utf8");
     const recapFile = await readFile(
@@ -191,6 +191,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
       recapText,
       /アキさん|ヒロさん|きさらぎ|あみちゃん|でんだい|ちゃんぎー|大田千鳥|OIKAWA|フレキャン|天宮/,
     );
+    assert.doesNotMatch(recapText, /ここ数日あまり眠れていない|個人的にしんどい日々/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com\/document/);
     assert.doesNotMatch(recapFile, /drive\.google\.com|docs\.google\.com\/document/);
     assert.doesNotMatch(ops, /drive\.google\.com|docs\.google\.com\/document/);
