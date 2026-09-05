@@ -21,17 +21,18 @@
 - `main` から作業ブランチを切り、PR にする。
 - マージ方式の指定がなければ **squash merge**。
 - Vercel で本番公開済み（https://mily-fan-site.vercel.app/）。`main` への merge は本番に反映されるため、CI とオーナー確認を経てから merge する。
-- `@codex review` はオーナーが投稿する。エージェント / automation は「### Codexレビュー依頼の委任」の条件を全て満たす場合のみ代理投稿してよい。
-- 接続エラーをレビュー成功として扱わない。
+- Codex review は**任意の追加レビュー**。オーナーがそのPRで明示的に必須指定した場合を除き、未実施・利用上限・接続障害だけを理由に merge を止めない。
+- `@codex review` を使う場合、オーナーが投稿する。エージェント / automation は「### 任意のCodexレビュー依頼の委任」の条件を全て満たす場合のみ代理投稿してよい。
+- Codex の接続エラーや利用上限をレビュー成功として扱わない。ただし、Codex review 自体が必須指定されていなければ merge blocker にもしない。
 
 ### マージしてよい条件
 
 1. 対象が `mily-fan-site`、base が `main`、head が作業ブランチ。
 2. PR が Draft ではなく、競合がなく、マージ可能。
 3. CI（install / typecheck / test / build / identity guard）が成功。
-4. 未解決のレビュー指摘がない。
+4. 未解決の blocking review 指摘がない。
 5. 追加した事実に出典がある。未確認情報は載せていない。
-6. current head に対する Codex review の完了を確認できる。
+6. オーナーがそのPRで特定の追加レビューを明示的に必須指定した場合のみ、そのレビューが current head で完了している。
 
 次の変更はオーナー確認が必要です。
 
@@ -41,7 +42,7 @@
 - 本番公開・ドメイン設定
 - `AGENTS.md` そのものの変更
 - リポジトリ運用ルールの変更
-- レビュー委任ポリシー（「### Codexレビュー依頼の委任」）の変更
+- レビュー委任ポリシー（「### 任意のCodexレビュー依頼の委任」）の変更
 
 エージェントが自分の判断だけで委任条件を緩和・削除・拡張しない。
 
@@ -58,19 +59,21 @@
 - オーナー確認が必要な変更は、依頼文またはその後の返信で当該事実・URL・素材・操作が
   明示された範囲だけを承認済みとして扱う。別素材・別URL・別掲載面・別PRへ流用しない。
 - 実装中に依頼範囲を超える変更、未確認情報、権利・プライバシー上の懸念、blocking feedback、
-  current headのCI / Vercel / review不成立、競合、状態の曖昧さが生じた場合は自動mergeしない。
-- review requestを送っただけ、👀が付いた状態、旧headのreview完了はmerge許可にしない。
+  current headのCI / Vercel / オーナーが必須指定したレビュー不成立、競合、状態の曖昧さが生じた場合は自動mergeしない。
+- 任意レビューの request を送っただけ、👀が付いた状態、旧headのreview完了は品質確認の代用にしない。
 - オーナーが停止条件を示した場合はそれを優先し、解除が明示されるまでmergeしない。
 
 **このルールは、この節がmainへmergeされた後の新しい依頼から有効。**
 このルールを追加・変更するPR自身は、追加前のmainの規定と、そのPRに対するオーナーの
 明示指示に従う。
 
-### Codexレビュー依頼の委任
+### 任意のCodexレビュー依頼の委任
+
+Codex review は**追加の品質確認であり、既定の merge 必須条件ではない**。オーナーがそのPRで明示的に「Codex review 完了を必須」と指定した場合のみ、完了まで merge を止める。利用上限・接続障害・サービス側エラーなどで Codex review を実行できない場合、必須指定がなければ CI / Vercel / 差分確認 / 他の blocking feedback を満たした時点で merge 判定を続行してよい。
 
 `@codex review` の代理投稿は、オーナーが使う **GitHub 接続済みの AI エージェント / automation** に限って委任する。この節が `main` へ merge されたことを、オーナーによる repo 単位の許可とみなす。不特定の bot や第三者へ権限を与えるものではない。委任するのは review 要求の投稿だけで、merge 権限・オーナー確認・本番操作はいっさい緩和しない。
 
-**このルールは `main` へ merge された後のみ有効。** 作業ブランチ上で `AGENTS.md` を書き換えただけでは有効にならない。委任ポリシーを変更する PR 自身には、その時点の `main` のルールが適用される。したがってそのPRへはエージェントが `@codex review` を投稿せず、オーナーが投稿する。
+**このルールは `main` へ merge された後のみ有効。** 作業ブランチ上で `AGENTS.md` を書き換えただけでは有効にならない。委任ポリシーを変更する PR 自身には、その時点の `main` のルールが適用される。したがってそのPRへはエージェントが `@codex review` を投稿せず、オーナーの明示指示に従う。
 
 投稿してよいのは **PR Conversation の top-level comment** に本文 `@codex review` の1件だけ。review reply / inline comment / PR 本文 / commit message をレビュー要求の代用にしない。
 
@@ -120,7 +123,7 @@ review request 後に commit が push されて head SHA が変わったら、**
 
 #### review request は merge 許可ではない
 
-エージェントが `@codex review` を投稿できることは、PR を自動的に merge してよいという意味ではない。「### マージしてよい条件」とオーナー確認が必要な項目はすべてそのまま適用する。current head に対する review 完了を確認できない PR は merge しない。
+エージェントが `@codex review` を投稿できることは、PR を自動的に merge してよいという意味ではない。「### マージしてよい条件」とオーナー確認が必要な項目はすべてそのまま適用する。Codex review が任意のPRでは、その未完了・利用上限・接続障害だけを merge blocker にしない。
 
 ## セットアップ
 
