@@ -22,7 +22,7 @@ import {
   tiktokRadioVideo,
   tiktokSayonaraIchigoVideo,
   visibleGalleryVideos,
-} from "../src/data/galleryVideos.ts";
+} from "./fixtures/gallery-videos-before-b58.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { isMixchMovie } from "../src/data/mixchMovies.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
