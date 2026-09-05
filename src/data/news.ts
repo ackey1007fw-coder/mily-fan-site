@@ -193,6 +193,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-06-night-slot-2230",
+    date: "2026-09-06",
+    sameDayOrder: 20,
+    activityIds: ["live-stream"],
+    title: "今夜の配信、22:30から",
+    body: "みりぃがXで、今夜の配信を22:30〜23:00に変更すると案内しました。",
+    source: "https://x.com/Mily_chan36/status/2096366715181691270",
+    sourceLabel: "みりぃのX",
+    message: {
+      label: "みりぃのX",
+      text: "⚠️夜の配信 22:30〜23:00 に変更⚠️",
+    },
+  },
+  {
     id: "2026-09-05-morning-stream-thanks",
     date: "2026-09-05",
     sameDayOrder: 20,
