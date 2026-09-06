@@ -115,6 +115,8 @@ const EXPECTED_SLOTS = [
   { date: "2026-09-05", time: "21:00", endTime: "21:50" },
   { date: "2026-09-06", time: "05:30", endTime: "07:00" },
   { date: "2026-09-06", time: "21:30" },
+  { date: "2026-09-07", time: "06:30", endTime: "07:30" },
+  { date: "2026-09-07", time: "22:00", endTime: "23:00" },
   { date: "2026-09-08", time: "07:00", endTime: "08:00" },
   {
     date: "2026-09-09",
@@ -519,9 +521,21 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     ]);
     assert.match(contestPhaseDisplayNote(contest.currentPhase), /3次審査（9\/3〜9\/13）/);
     assert.deepEqual(streamSchedule, EXPECTED_SLOTS);
-    assert.equal(
-      streamSchedule.some((slot) => slot.date === "2026-09-07"),
-      false,
+    assert.ok(
+      streamSchedule.some(
+        (slot) =>
+          slot.date === "2026-09-07" &&
+          slot.time === "06:30" &&
+          slot.endTime === "07:30",
+      ),
+    );
+    assert.ok(
+      streamSchedule.some(
+        (slot) =>
+          slot.date === "2026-09-07" &&
+          slot.time === "22:00" &&
+          slot.endTime === "23:00",
+      ),
     );
     assert.equal(
       streamSchedule.some((slot) => slot.date === "2026-09-10"),
