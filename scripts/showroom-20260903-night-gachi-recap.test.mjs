@@ -10,6 +10,7 @@ import {
   streamRecap20260902Night,
   streamRecap20260903,
   streamRecap20260903Night,
+  streamRecap20260903Lunch,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 import { events } from "../src/data/events.ts";
@@ -67,8 +68,9 @@ describe("2026-09-03 SHOWROOM三次初日夜配信メモ", () => {
     assert.match(recap.transcriptionNote, /実フレームを2枚掲載/);
     const recapIndex = streamRecaps.indexOf(recap);
     assert.ok(recapIndex >= 0);
-    assert.deepEqual(streamRecaps.slice(recapIndex, recapIndex + 4), [
+    assert.deepEqual(streamRecaps.slice(recapIndex, recapIndex + 5), [
       recap,
+      streamRecap20260903Lunch,
       streamRecap20260903,
       streamRecap20260902Night,
       streamRecap20260902,
