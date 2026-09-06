@@ -1,9 +1,10 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { NewsImage } from "./components/NewsImage";
+import { StreamSongCatalog } from "./components/StreamSongCatalog";
 import {
   activities,
   type Activity,
@@ -542,9 +543,19 @@ function StreamRecapArticle({
 }) {
   const [open, setOpen] = useState(defaultOpen);
 
+  useEffect(() => {
+    const openLinkedRecap = () => {
+      if (window.location.hash === `#recap-${recap.id}`) setOpen(true);
+    };
+    openLinkedRecap();
+    window.addEventListener("hashchange", openLinkedRecap);
+    return () => window.removeEventListener("hashchange", openLinkedRecap);
+  }, [recap.id]);
+
   return (
     <details
-      className="group rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card open:shadow-card sm:p-6"
+      id={`recap-${recap.id}`}
+      className="group scroll-mt-24 rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card open:shadow-card sm:p-6"
       open={open}
       onToggle={(event) => {
         const next = event.currentTarget.open;
@@ -1074,6 +1085,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
+        {content.activity.id === "live-stream" ? <StreamSongCatalog /> : null}
         <RadioEpisodeRecap activityId={content.activity.id} />
         <StreamRecap activityId={content.activity.id} />
         <RadioStorySpotlight activityId={content.activity.id} />
