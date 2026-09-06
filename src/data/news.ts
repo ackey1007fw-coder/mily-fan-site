@@ -193,6 +193,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-06-campus-girls-final-result",
+    date: "2026-09-06",
+    sameDayOrder: 30,
+    activityIds: ["campus-girls"],
+    title: "キャンガル予選final、本戦進出",
+    body: "みりぃがXで、CAMPUS GIRLS 2027（キャンガル2027）予選finalの結果を報告しました。総合は審査員賞、面接審査1位、Paton投票審査2位で、本戦進出が決まりました。",
+    source: "https://x.com/Mily_chan36/status/2096422676395114801",
+    sourceLabel: "みりぃのX",
+  },
+  {
     id: "2026-09-06-night-slot-2230",
     date: "2026-09-06",
     sameDayOrder: 20,
