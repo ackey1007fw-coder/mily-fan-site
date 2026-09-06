@@ -134,7 +134,7 @@ describe("2026-09-05 X 朝配信お礼 — scope", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
     assert.equal(liveNews[0]?.id, NEXT_SLOTS_ID);
     assert.equal(liveNews[1]?.id, NIGHT_SLOT_ID);
-    assert.equal(liveNews[1]?.id, NEWS_ID);
+    assert.equal(liveNews[2]?.id, NEWS_ID);
     for (const activityId of ["miss-circle", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(
