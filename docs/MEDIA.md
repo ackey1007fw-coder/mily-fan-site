@@ -3166,3 +3166,76 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 - 元の640×360構図と縦横比を保持。通常のJPEG圧縮のみ。EXIF / IPTC / XMPなし。
 - 顔のAI生成・補正・置換・生成塗り足しなし。
 - LIVE STREAM専用。全文文字起こし・録音・録画は公開しない。ZIP内容は単体JPEGと一致を確認。
+
+
+## 素材台帳（batch b58 / 受領日 2026-09-05）
+
+- オーナーが直接提供し、サイト掲載を明示依頼したTikTok動画。出典として指定されたURL: https://vt.tiktok.com/ZSqNgRAvx/
+- 初回掲載では投稿日未確認のためGalleryのみ掲載。その後、オーナーがこの動画の投稿日を2026-09-05（土）と確認。sourceDateを更新し、同日NEWSへ共有メディアとして追加。投稿ページの再取得は未完了。本文はオーナー提供の投稿スクリーンショットの公開キャプションと実動画に基づく。
+- 紹介文は添付スクリーンショットの公開キャプションと動画の実フレームを参考にした。スクリーンショットは参考専用で、公開・コミットしない。
+- 公開MP4: `gallery/mily-b58-01-tiktok-radio-portrait.mp4`。512×910 / 約11.833秒 / H.264 Baseline / AAC / yuv420p / faststart。元の構図・尺を維持し、クロップ・拡大・AI加工なし。音声はAACへ変換して保持。
+- poster: `gallery/mily-b58-01-tiktok-radio-portrait-poster.jpg`。公開動画の0.5秒実フレーム。
+- 動画全体から0.5秒間隔で抽出した実フレームを目視確認。端末UI、通知、コメント、識別可能な第三者の写り込みを確認した範囲では認めない。全編の手動聴取は未実施。
+- 元動画は無改変で保持。公開派生のソースメタデータとチャプターを除去。撮影日・投稿日時・撮影者は推測しない。
+
+
+## 素材台帳（batch b60 / 受領日・source date 2026-09-05）
+
+オーナー提供の9月5日SHOWROOM夜配信録画から選んだ実フレーム10枚。同素材への継続依頼に基づきLIVE STREAMへ掲載。代表はb60-10。b59は別の未マージPRで使用中のため避けた。
+
+| ID | 公開ファイル | 場面（録画内の目安） |
+| --- | --- | --- |
+| b60-01 | `live/mily-b60-01-bright-smile.jpg` | 01:50 頬に手を添えてにっこり |
+| b60-02 | `live/mily-b60-02-sunglasses.jpg` | 02:37 サングラスでポーズ |
+| b60-03 | `live/mily-b60-03-flute-smile.jpg` | 14:29 篠笛を手に笑顔 |
+| b60-04 | `live/mily-b60-04-flute-wave.jpg` | 22:49 篠笛を持って手を振って |
+| b60-05 | `live/mily-b60-05-flute-playing.jpg` | 24:40 篠笛を演奏中 |
+| b60-06 | `live/mily-b60-06-after-playing.jpg` | 25:51 演奏後の明るい笑顔 |
+| b60-07 | `live/mily-b60-07-hand-cheek.jpg` | 36:51 口元に手を添えて |
+| b60-08 | `live/mily-b60-08-hair-smile.jpg` | 41:00 サングラスに手を添えて |
+| b60-09 | `live/mily-b60-09-finger-pose.jpg` | 42:20 両手の指でポーズ |
+| b60-10 | `live/mily-b60-10-close-smile.jpg` | 45:10 カメラに向かってにっこり |
+| b60-zip | `live/mily-b60-night-stills.zip` | 上記JPEG10枚 |
+
+- provenance: `owner-provided`。公開再生permalinkはなく、sourceUrlはnull。
+- 全10枚を実寸で目視確認。視聴者コメント・表示名・他の人物・端末情報は写っていない。
+- 元フレームはgitignoredの `media/original/b60/` に保持。受け渡しURL・IDは公開しない。
+- 640×360の元の構図と縦横比を保持。通常のJPEG圧縮のみ。EXIF / IPTC / XMPなし。顔のAI生成・補正・置換・生成塗り足しなし。
+- 別途作成した生成コラージュは顔の同一性を保証できないためサイト掲載対象外。
+- LIVE STREAM専用。全文文字起こし・歌詞・録音・録画は公開しない。
+
+
+### b61 — 2026-09-06 朝配信の実フレーム
+
+| 素材 | 公開ファイル | 場面 |
+| --- | --- | --- |
+| b61 | `/media/live/mily-b61-01-hello.jpg` | 00:59 笑顔でおはよう |
+| b61 | `/media/live/mily-b61-02-cheek.jpg` | 11:00 頬に手を添えて |
+| b61 | `/media/live/mily-b61-03-tilt.jpg` | 17:00 首をかしげてにっこり |
+| b61 | `/media/live/mily-b61-04-double-pose.jpg` | 36:31 両手でポーズ |
+| b61 | `/media/live/mily-b61-05-peace.jpg` | 46:02 カメラに向かってピース |
+| b61 | `/media/live/mily-b61-06-ribbon.jpg` | 52:01 リボンが映る横顔 |
+| b61 | `/media/live/mily-b61-07-relaxed.jpg` | 61:01 目を細めて笑顔 |
+| b61 | `/media/live/mily-b61-08-smile.jpg` | 70:03 カメラに向かって笑顔 |
+| b61 | `/media/live/mily-b61-09-playful.jpg` | 81:02 頬をふくらませてポーズ |
+| b61 | `/media/live/mily-b61-10-bye.jpg` | 87:03 両手を振ってまたね |
+| b61-zip | `live/mily-b61-asa-stills.zip` | 上記JPEG10枚 |
+
+- owner-provided。公開再生permalinkなし。受け渡しURL・IDは非公開。
+- 全10枚を実寸で目視確認。第三者・コメント・端末情報の写り込みなし。640×360の元の構図を保持し、通常のJPEG圧縮のみ。メタデータなし。
+- 元フレームはgitignoredの `media/original/b61/`。LIVE STREAM専用。顔のAI生成・補正・置換・生成塗り足しなし。
+- 別途作成した生成コラージュは顔の同一性を保証できないためサイト掲載対象外。全文文字起こし・録音・録画・歌詞は公開しない。
+
+
+### 2026-09-06 朝配信スクリーンショットの掲載撤回
+
+- オーナーの再評価によりb61の10枚・代表画像・保存ZIPを公開対象から除外。公開ファイルも削除し、レポート本文は維持。
+- 上記b61の掲載記録は過去の履歴。現在は非掲載。新しい候補は再選定し、掲載する素材を確認するまで追加しない。
+
+
+### 2026-09-06 朝配信の承認済み3枚を掲載（b62）
+
+- オーナーが再選定候補の3枚すべてを確認し、掲載を明示承認。08:59 正面の笑顔、48:01 首をかしげた笑顔、68:02 やわらかい笑顔。代表は2枚目。
+- b62の実画像JPEG3枚と保存ZIPを既存の共通カードで掲載。元の640×360・全構図を保持し、JPEG圧縮とメタデータ除去のみ。顔加工なし。
+- 元PNGはgitignoredのmedia/original/b62。owner-providedで公開再生permalinkなし。受け渡し情報は非公開。
+- 取り下げ済みb61の10枚とZIPは復元しない。レポート本文は維持。

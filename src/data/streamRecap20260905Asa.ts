@@ -104,6 +104,9 @@ export const streamRecap20260905Asa: StreamRecap = {
     filename: "みりぃ_20260905朝_スクショ10枚.zip",
     label: "10枚まとめて保存",
   },
+  songs: [
+    { title: "Mela!", artist: "緑黄色社会", timestamp: "0:09:20", youtubeUrl: "https://www.youtube.com/watch?v=aRDURmIYBZ4" },
+  ],
   highlights: [
     {
       timestamp: "0:02:00",

@@ -139,8 +139,8 @@ function HubLiveStatus() {
           : status.value
       }
       note={
-        status.slot && !status.slot.endTime
-          ? "終了時刻は確認できていません。"
+        status.slot
+          ? [status.slot.note, !status.slot.endTime ? "終了時刻は確認できていません。" : null].filter(Boolean).join(" / ") || undefined
           : undefined
       }
     />
@@ -585,6 +585,50 @@ function StreamRecapArticle({
         ) : null}
       </summary>
 
+      {recap.songs && recap.songs.length > 0 ? (
+        <StreamRecapSection
+          title="この回に歌った曲"
+          id={`${recap.id}-songs`}
+          note="リンク先は原曲の公式動画です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
+        >
+          <ol className="mt-3 space-y-3">
+            {recap.songs.map((song, index) => (
+              <li
+                key={`${song.timestamp}-${song.title}`}
+                className="flex gap-3 rounded-2xl border border-sage/15 bg-sage-soft/30 p-4"
+              >
+                <span
+                  aria-hidden="true"
+                  className="pt-0.5 text-xs font-semibold tabular-nums text-sage-deep"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="break-words text-sm font-bold leading-relaxed text-ink">
+                    {song.title}
+                  </p>
+                  <p className="mt-1 break-words text-sm leading-6 text-ink-muted">
+                    {song.artist}
+                  </p>
+                  <p className="mt-1 text-xs tabular-nums text-ink-muted">
+                    {song.timestamp}頃〜
+                  </p>
+                  <a
+                    href={song.youtubeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4"
+                    aria-label={`${song.title} — 原曲の公式動画をYouTubeで聴く（新しいタブ）`}
+                  >
+                    YouTubeで原曲を聴く ↗
+                  </a>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </StreamRecapSection>
+      ) : null}
+
       {recap.highlights.length > 0 ? (
         <StreamRecapSection title="この回の見どころ" id={`${recap.id}-highlights`}>
           <ul className="mt-3 space-y-3">
@@ -745,8 +789,8 @@ function LiveCurrent() {
             label={status.label}
             value={value}
             note={
-              status.slot && !status.slot.endTime
-                ? "終了時刻は確認できていません。"
+              status.slot
+                ? [status.slot.note, !status.slot.endTime ? "終了時刻は確認できていません。" : null].filter(Boolean).join(" / ") || undefined
                 : undefined
             }
           />

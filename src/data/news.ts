@@ -1,3 +1,4 @@
+import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -191,6 +192,46 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-06-night-slot-2230",
+    date: "2026-09-06",
+    sameDayOrder: 20,
+    activityIds: ["live-stream"],
+    title: "今夜の配信、22:30から",
+    body: "みりぃがXで、今夜の配信を22:30〜23:00に変更すると案内しました。",
+    source: "https://x.com/Mily_chan36/status/2096366715181691270",
+    sourceLabel: "みりぃのX",
+    message: {
+      label: "みりぃのX",
+      text: "⚠️夜の配信 22:30〜23:00 に変更⚠️",
+    },
+  },
+  {
+    id: "2026-09-05-morning-stream-thanks",
+    date: "2026-09-05",
+    sameDayOrder: 20,
+    activityIds: ["live-stream"],
+    title: "朝配信ありがとう",
+    body: "みりぃがXで、朝配信へのお礼を伝えました。次は14:30〜、ともあります。",
+    source: "https://x.com/Mily_chan36/status/2096037739833737354",
+    sourceLabel: "みりぃのX",
+    message: {
+      label: "みりぃのX",
+      text:
+        "朝配信来てくれてありがとう✊🏻❤️‍🔥\n" +
+        "みんなにも元気届けられたかなー？少しづつ前向いてくよ🙂‍↕️\n" +
+        "次は14:30〜ね！投票も忘れずにっ‼️",
+    },
+  },
+  {
+    id: "2026-09-05-tiktok-radio-portrait",
+    date: "2026-09-05",
+    title: "「覚えて帰ってね〜」ラジオDJみりぃのTikTok",
+    body: "9月5日、みりぃのTikTok動画が投稿されました。手で作ったフレームの中に、さまざまな表情や装いの写真が次々に登場。投稿文では、3時間の生放送でおしゃべりするラジオDJとして自己紹介し、ミスサークルコンテスト2026への出場にも触れています。",
+    source: tiktokPortraitVideo.sourceUrl,
+    sourceLabel: "TikTokの投稿を見る",
+    media: tiktokPortraitVideo,
+  },
   {
     id: "2026-09-03-miss-circle-goals-support",
     date: "2026-09-03",

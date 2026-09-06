@@ -285,7 +285,15 @@ describe("配信メモの統一ルール", () => {
         ),
       )
     ).join("\n");
-    assert.doesNotMatch(data, /公式|公認|本人運営/);
+    // 「公式」は、このサイトや配信メモを公式・公認と誤認させる使い方だけを禁じる。
+    // 原曲そのものの出所（公式楽曲情報・原曲の公式動画）を指す言い回しは、
+    // 誤認の恐れがないので許可語として先に外してから検査する。
+    const OFFICIAL_ALLOWED = ["公式楽曲情報", "原曲の公式動画"];
+    const withoutAllowedOfficial = OFFICIAL_ALLOWED.reduce(
+      (text, phrase) => text.split(phrase).join("［許可語］"),
+      data,
+    );
+    assert.doesNotMatch(withoutAllowedOfficial, /公式|公認|本人運営/);
     assert.doesNotMatch(data, /drive\.google\.com|docs\.google\.com/);
     assert.doesNotMatch(data, /stt_raw|ScreenRecording/);
     // 録画・音声のファイル名は公開文へ出さない。TSのimport拡張子を誤検出しないよう、
@@ -321,6 +329,7 @@ describe("配信メモの統一ルール", () => {
     const page = source.slice(source.indexOf("function StreamRecapArticle"));
     assert.ok(page.length > 0, "StreamRecapArticle がない");
     const order = [
+      "この回に歌った曲",
       "この回の見どころ",
       "この回のスクショ",
       "この回の目標",

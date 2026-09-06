@@ -1,3 +1,5 @@
+import { streamRecap20260906Asa } from "./streamRecap20260906Asa.ts";
+import { streamRecap20260905Night } from "./streamRecap20260905Night.ts";
 import { streamRecap20260905Day } from "./streamRecap20260905Day.ts";
 import { streamRecap20260905Asa } from "./streamRecap20260905Asa.ts";
 import { streamRecap20260904Night } from "./streamRecap20260904Night.ts";
@@ -58,6 +60,15 @@ export type StreamRecapGalleryZip = {
   label: string;
 };
 
+export type StreamRecapSong = {
+  title: string;
+  artist: string;
+  /** 録画先頭からの歌唱開始位置の目安。 */
+  timestamp: string;
+  /** 原曲へのリンク。みりぃの歌唱映像ではない。 */
+  youtubeUrl: string;
+};
+
 export type StreamRecap = {
   id: string;
   date: string;
@@ -69,6 +80,7 @@ export type StreamRecap = {
   image?: StreamRecapImage;
   gallery?: StreamRecapImage[];
   galleryZip?: StreamRecapGalleryZip;
+  songs?: StreamRecapSong[];
   highlights: StreamRecapHighlight[];
   goals: StreamRecapGoal[];
   ranking: string[];
@@ -80,6 +92,8 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260906Asa,
+  streamRecap20260905Night,
   streamRecap20260905Day,
   streamRecap20260905Asa,
   streamRecap20260904Night,
@@ -93,6 +107,8 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260906Asa,
+  streamRecap20260905Night,
   streamRecap20260905Day,
   streamRecap20260905Asa,
   streamRecap20260904Night,
