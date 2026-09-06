@@ -3239,3 +3239,36 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 - b62の実画像JPEG3枚と保存ZIPを既存の共通カードで掲載。元の640×360・全構図を保持し、JPEG圧縮とメタデータ除去のみ。顔加工なし。
 - 元PNGはgitignoredのmedia/original/b62。owner-providedで公開再生permalinkなし。受け渡し情報は非公開。
 - 取り下げ済みb61の10枚とZIPは復元しない。レポート本文は維持。
+
+
+## 素材台帳（batch b63 / 受領日・source date 2026-09-06）
+
+2026-09-06 11:16:04 JST の本人X投稿（created_at Sun Sep 06 02:16:04 UTC 2026）。
+公開permalinkあり。キャンガル2027 予選finalの結果報告グラフィック。
+白い壁の前で腕を組んだみりぃの写真に、総合審査員賞・面接審査1位・Paton投票審査2位・本戦進出決定の文言が重ねられている。`sns-post`。
+オーナーが本タスクで画像を直接提供し、https://mily-fan-site.vercel.app への掲載を明示依頼した。X CDNからは取得していない。
+
+新しい NEWS `2026-09-06-campus-girls-prelim-final-result`。Gallery にも出す。
+CAMPUS GIRLS Activity と highlights に関連付ける。`/stories/`・events・streamSchedule・contest.ts・profile には足さない。Paton投票は 2026-09-01 23:59 JST 終了済みのため投票CTAなし。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b63-01 NEWS | `news/mily-b63-01-campus-girls-prelim-final-result.jpg` | 予選final結果報告。1500×2667。sns-post | ✅ 新NEWS の fallback `src` |
+| b63-01 Gallery | `gallery/mily-b63-01-campus-girls-prelim-final-result-{480,960,1600}.{jpg,webp}` | 同じ写真の `pnpm media:build` 派生。1600幅は拡大せず 1500×2667 | ✅ Gallery photo |
+
+出典: `https://x.com/mily_chan36/status/2096422147476627841`
+
+元素材（gitignore）: 293,774 bytes / JPEG / 1500×2667 / sha256
+`e8c612341631ce5ad969e326526c421423dde14520d0d78caa062a8afe48de5e`
+元素材にはEXIFとIPTCあり。公開前にsharpでJPEG再エンコードし、metadataを除去した。
+
+NEWS JPEG: 353,094 bytes / 1500×2667 / sha256
+`59679e7a880fbdf8659d10fcb5f88fe7928c232e1dfb418490ba8104e9ccb10f`
+公開ファイルはEXIF / IPTC / XMP / ICCなし。再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4のみ。crop・scale・rotate・アップスケール・縦横比変更なし。AI生成・顔補正・生成塗り足しなし。
+
+Gallery 480.jpg: 480×853 / sha256
+`ba88c3806920965806a9c4297cb4589a9209281ba8c00f2883da038a2b0555ae`
+Gallery 960.jpg: 960×1707 / sha256
+`84368c3dd9488bb4a4828efe3864056d84f5f9b1e98c429f97788a8398aedff8`
+Gallery 1600.jpg: 1500×2667 / sha256
+`6dd7a652200342d591297b3f7983810bc21f45659f681d9fb2792eff9fe7da9b`

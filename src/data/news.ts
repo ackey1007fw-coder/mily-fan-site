@@ -38,6 +38,7 @@ import { ohayoSeptemberXVideo } from "./ohayoSeptemberXVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
+import { campusGirlsPrelimFinalResultImage } from "./campusGirlsPrelimFinalResultImage.ts";
 import { earthquakeSafetyStoryVideo } from "./earthquakeSafetyStoryVideo.ts";
 import { nightThanksMorningStreamStoryVideo } from "./nightThanksMorningStreamStoryVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
@@ -192,6 +193,31 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-06-campus-girls-prelim-final-result",
+    date: "2026-09-06",
+    sameDayOrder: 30,
+    activityIds: ["campus-girls"],
+    title: "CAMPUS GIRLS 2027 予選final、本戦進出決定✨",
+    body: "9月6日、みりぃがCAMPUS GIRLS 2027 予選ファイナルの結果を報告しました。総合は審査員賞、面接審査は1位、Paton投票審査は2位で、本戦進出が決まりました。",
+    source: campusGirlsPrelimFinalResultImage.sourceUrl,
+    sourceLabel: "みりぃのX",
+    media: campusGirlsPrelimFinalResultImage,
+    message: {
+      label: "みりぃのX",
+      text:
+        "【キャンガル2027 予選final 結果報告✨】\n" +
+        "総合：審査員賞\n" +
+        "面接審査：1位 🥇\n" +
+        "Paton投票審査：2位 🥈\n" +
+        "\n" +
+        "よって、本戦進出決定‼️\n" +
+        "\n" +
+        "皆様の応援のおかげです🥺🙏💙\n" +
+        "本当にありがとーう！\n" +
+        "これからもみんなの前で喜怒哀楽を楽しみながら頑張らせてね♪",
+    },
+  },
   {
     id: "2026-09-06-night-slot-2230",
     date: "2026-09-06",
