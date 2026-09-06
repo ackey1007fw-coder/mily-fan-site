@@ -72,7 +72,16 @@ export function StreamSongCatalog() {
                   <ul className="mt-2 space-y-3">
                     {song.performances.map((performance) => (
                       <li key={`${performance.id}-${performance.timestamp}`} className="text-xs leading-6 text-ink-muted">
-                        <a href={`#recap-${performance.id}`} className={linkClass}>
+                        <a
+                          href={`#recap-${performance.id}`}
+                          className={linkClass}
+                          onClick={(event) => {
+                            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                            const target = document.getElementById(`recap-${performance.id}`);
+                            // onToggle keeps the existing recap state in sync, including repeated same-hash clicks.
+                            if (target instanceof HTMLDetailsElement) target.open = true;
+                          }}
+                        >
                           {performance.dateLabel} {performance.theme}
                         </a>
                         <p>{performance.broadcastLabel} · 歌唱は録画内 {performance.timestamp}頃〜</p>
