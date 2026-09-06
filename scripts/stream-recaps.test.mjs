@@ -1,9 +1,11 @@
 // LIVE STREAM の配信メモを、どのエージェントが書いても同じ形になるよう検査する。
 // ルール本文は docs/LIVE-STREAM-RECAP.md。数値を変えるときは両方を同じPRで直す。
 import assert from "node:assert/strict";
+import { withoutApprovedSongLinks } from "./approved-song-links.mjs";
 import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
+import sharp from "sharp";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import {
@@ -204,7 +206,7 @@ describe("配信メモの統一ルール", () => {
         assert.match(note, /静止画は/);
       });
 
-      it("publishes only complete, non-duplicated stills", () => {
+      it("publishes only complete, non-duplicated stills", async () => {
         const stills = recap.gallery ?? [];
         if (stills.length > 0) {
           assert.ok(
@@ -222,12 +224,19 @@ describe("配信メモの統一ルール", () => {
 
         for (const image of [recap.image, ...stills].filter(Boolean)) {
           assert.match(image.src, /^\/media\/live\/mily-b\d{2}-\d{2}-[a-z0-9-]+\.(jpg|png)$/);
-          assert.equal(existsSync(path.join(root, "public", image.src.slice(1))), true);
-          assert.ok(image.width > 0 && image.height > 0);
+          const file = path.join(root, "public", image.src.slice(1));
+          assert.equal(existsSync(file), true);
+          // 宣言した寸法は実ファイルと一致させる。ずれるとレイアウトが跳ねる。
+          const size = await sharp(file).metadata();
+          assert.equal(image.width, size.width, `${image.src} の width が実ファイルと違う`);
+          assert.equal(image.height, size.height, `${image.src} の height が実ファイルと違う`);
           assert.match(image.alt, /みりぃ/);
           assert.doesNotMatch(image.alt, /コメント|視聴者|アイコン|出場者/);
-          assert.ok(image.caption, "caption は必須");
-          if (stills.length > 0) assert.ok(image.downloadName, "downloadName は必須");
+          // 一覧に並ぶ写真は説明と保存名が要る。代表1枚だけの回は説明を必須にしない。
+          if (stills.length > 0) {
+            assert.ok(image.caption, "caption は必須");
+            assert.ok(image.downloadName, "downloadName は必須");
+          }
         }
 
         if (recap.galleryZip) {
@@ -319,7 +328,9 @@ describe("配信メモの統一ルール", () => {
       ])
       .join("\n");
     assert.doesNotMatch(publishedText, /\.(mp3|aac|mp4|mov|ts|wav|m4a)\b/i);
-    assert.doesNotMatch(data, /https?:\/\//);
+    // 原曲リンクはオーナー承認済みの公式動画だけ（scripts/approved-song-links.mjs）。
+    // それ以外のURLは、素材の出所が漏れるので配信メモへ書かない。
+    assert.doesNotMatch(withoutApprovedSongLinks(data), /https?:\/\//);
     assert.doesNotMatch(data, /transcriptionNote:\s*["`]/);
     assert.match(data, /buildTranscriptionNote/);
   });

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
+import { streamRecapRulesPublicCopy } from "./stream-recap-rules-copy.mjs";
 import {
   streamRecap20260904Night as recap,
   streamRecap20260904Day,
@@ -13,8 +14,9 @@ const RECAP_FILE = new URL("../src/data/streamRecap20260904Night.ts", import.met
 // Baseline of reviewed PUBLIC copy only. Do not store private names in fixtures.
 const APPROVED_RECAP_BLOB_SHA = "0a86fc7b7cd834d247cc96e4267a94d0ad2bd364";
 // 公開文は共有定数からも組み立てるので、そちらの変更も再レビュー対象にする。
-const RULES_FILE = new URL("../src/data/streamRecapRules.ts", import.meta.url);
-const APPROVED_RULES_BLOB_SHA = "350375f1df51ea3f0c4ac26425f9f57c7d313f2c";
+// ファイル全体ではなく、実際にページへ出る文だけを対象にする（コメントの手直しで
+// baseline が動くと、再レビューの意味が薄れるため）。
+const APPROVED_RULES_COPY_SHA = "aa8b785c6233d172a166212fd11df4db615d9720";
 
 function gitBlobSha(source) {
   const bytes = Buffer.from(source.replace(/\r\n/g, "\n"), "utf8");
@@ -73,11 +75,10 @@ describe("2026-09-04 SHOWROOM夜配信メモ", () => {
   });
 
   it("locks reviewed public copy without private-name or private-source fixtures", async () => {
-    const rules = await readFile(RULES_FILE, "utf8");
     assert.equal(
-      gitBlobSha(rules),
-      APPROVED_RULES_BLOB_SHA,
-      "共有注記が変わりました。公開文を読み直してから baseline を更新してください。",
+      gitBlobSha(streamRecapRulesPublicCopy),
+      APPROVED_RULES_COPY_SHA,
+      "共有注記の公開文が変わりました。読み直してから baseline を更新してください。",
     );
     const source = await readFile(RECAP_FILE, "utf8");
     assert.equal(gitBlobSha(source), APPROVED_RECAP_BLOB_SHA);

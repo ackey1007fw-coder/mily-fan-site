@@ -731,26 +731,28 @@ function StreamRecapArticle({
         </StreamRecapSection>
       ) : null}
 
-      <details className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
-        <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
-          タイムスタンプと次枠
-        </summary>
-        {recap.timeline.length > 0 ? (
-          <ol className="mt-3 space-y-2">
-            {recap.timeline.map((item) => (
-              <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
-                <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
-                  {item.timestamp}
-                </span>
-                <span className="text-ink-muted">{item.label}</span>
-              </li>
-            ))}
-          </ol>
-        ) : null}
-        {recap.nextNote ? (
-          <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
-        ) : null}
-      </details>
+      {recap.timeline.length > 0 || recap.nextNote ? (
+        <details className="mt-6 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
+          <summary className="cursor-pointer text-sm font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
+            タイムスタンプと次枠
+          </summary>
+          {recap.timeline.length > 0 ? (
+            <ol className="mt-3 space-y-2">
+              {recap.timeline.map((item) => (
+                <li key={item.timestamp} className="flex gap-3 text-sm leading-6">
+                  <span className="w-14 shrink-0 font-semibold tabular-nums text-sage-deep">
+                    {item.timestamp}
+                  </span>
+                  <span className="text-ink-muted">{item.label}</span>
+                </li>
+              ))}
+            </ol>
+          ) : null}
+          {recap.nextNote ? (
+            <p className="mt-3 text-sm leading-6 text-ink-muted">{recap.nextNote}</p>
+          ) : null}
+        </details>
+      ) : null}
 
       <div className="mt-4 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
         <p className="text-xs leading-5 text-ink-muted">

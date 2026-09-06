@@ -157,7 +157,7 @@ export const streamRecap20260905Night: StreamRecap = {
     {
       "item": "アバター制作権",
       "target": "獲得を目指す",
-      "statusThen": "まだ獲得したことがないと説明"
+      "statusThen": "まだ獲得したことがない"
     }
   ],
   "ranking": [],
