@@ -36,3 +36,14 @@ it("continues detecting unapproved links and altered versions of approved URLs",
 it("does not turn the September 5 afternoon discussion of the morning song into a performance", () => {
   assert.equal(streamRecap20260905Day.songs?.length ?? 0, 0);
 });
+
+it("keeps reference karaoke separate from original recordings and requires an identified creator", () => {
+  for (const recap of streamRecaps) {
+    for (const song of recap.songs ?? []) {
+      if (!song.karaoke) continue;
+      assert.ok(song.karaoke.channel.trim());
+      assert.notEqual(song.karaoke.youtubeUrl, song.youtubeUrl);
+      assert.equal(withoutApprovedSongLinks(song.karaoke.youtubeUrl), "[approved song link]");
+    }
+  }
+});

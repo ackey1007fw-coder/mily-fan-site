@@ -201,3 +201,9 @@ export const streamRecapYYYYMMDD: StreamRecap = {
 ```
 
 追加したら `streamRecaps` 配列の正しい位置（新しい順・同日は遅い枠が先）へ入れる。
+
+### カラオケの参考リンク
+
+依頼された場合は `songs[].karaoke` に `youtubeUrl` と伴奏制作者の `channel` を記載できる。
+原曲の `youtubeUrl` と区別し、ガイドメロディなしの参考伴奏を確認して採用する。
+「配信で使用した音源」とは断定しない。歌唱が確認できない回に曲リストを作らない。
