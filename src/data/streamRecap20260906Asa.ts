@@ -1,4 +1,9 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import {
+  AUTO_TRANSCRIPT_MATERIAL_NOTE,
+  buildTranscriptionNote,
+  RANKING_NOTE_WITHOUT_RANGE,
+} from "./streamRecapRules.ts";
 
 const approvedStills: StreamRecapImage[] = [
   {
@@ -87,9 +92,14 @@ export const streamRecap20260906Asa: StreamRecap = {
   ],
   "goals": [
     {
-      "item": "WEB投票・キラキラ",
-      "target": "一人ひとりの応援を積み重ねる",
-      "statusThen": "三次審査で着実に集めたいと呼びかけ"
+      "item": "WEB投票",
+      "target": "一人ひとりの積み重ね",
+      "statusThen": "初めての人にもお願い"
+    },
+    {
+      "item": "キラキラ",
+      "target": "着実に集める",
+      "statusThen": "三次審査へ向けて呼びかけ"
     },
     {
       "item": "アバター制作権",
@@ -97,9 +107,7 @@ export const streamRecap20260906Asa: StreamRecap = {
       "statusThen": "配信中に希望を紹介"
     }
   ],
-  "ranking": [
-    "終盤にランキングを読み上げて感謝。個人名・順位・得点は掲載していません。"
-  ],
+  ranking: [RANKING_NOTE_WITHOUT_RANGE],
   "timeline": [
     {
       "timestamp": "0:00:15",
@@ -137,5 +145,10 @@ export const streamRecap20260906Asa: StreamRecap = {
   "nextNote": "配信時点では、当日夜は21時半を予定しつつ、開始が遅れる可能性があり改めて連絡すると案内していました。確定時刻や現在の予定・実施結果を示すものではありません。",
   "sourceLabel": "2026年9月6日 SHOWROOM朝配信 録画から作成した配信レポート・自動文字起こし（オーナー提供素材）",
   "verifiedAt": "2026-09-06",
-  "transcriptionNote": "録画音声の自動文字起こしを照合して要約しています。全編の手動聴取は行っておらず、時刻は録画先頭からの目安です。開始時刻は素材名の記録時刻に基づく概数です。掲載する実フレーム3枚は目視確認し、オーナーの掲載承認を得ています。歌唱区間の自動認識と公式楽曲情報を照合し、曲名を追記しています。録音音声・画面録画・歌詞・全文文字起こしは掲載していません。"
+  transcriptionNote: buildTranscriptionNote({
+    material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    stills: "静止画は録画の実フレーム3枚を掲載しています。3枚とも目視確認し、オーナーの掲載承認を得ています。",
+    extra:
+      "時刻は録画先頭からの目安で、開始時刻は素材名の記録時刻に基づく概数です。歌唱区間の自動認識と公式楽曲情報を照合し、曲名を追記しています。歌詞は掲載していません。",
+  }),
 };

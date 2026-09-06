@@ -1,7 +1,9 @@
-import type { StreamRecap, StreamRecapImage } from "./streamRecaps";
-
-const RANKING_NOTE =
-  "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import {
+  buildTranscriptionNote,
+  RANKING_NOTE,
+  VIDEO_MATERIAL_NOTE,
+} from "./streamRecapRules.ts";
 
 const STILL_W = 400;
 const STILL_H = 228;
@@ -34,7 +36,7 @@ export const streamRecap20260903Night: StreamRecap = {
   id: "2026-09-03-night-gachi-showroom",
   date: "2026-09-03",
   dateLabel: "2026.09.03（木）",
-  theme: "三次初日の夜配信",
+  theme: "夜の配信・三次初日",
   broadcastLabel: "23:01頃〜 約49分",
   platformLabel: "SHOWROOM",
   summary:
@@ -60,7 +62,7 @@ export const streamRecap20260903Night: StreamRecap = {
     {
       timestamp: "0:21:20",
       title: "1位は狙わない。今の順位帯",
-      body: "キャンペーン1位は狙わない。ルームがまだ強くないので、今いてくれる人に失礼にならないよう、仲間を集めてから上を目指したい、と話しました。この時点の目安はキラキラ23位、指ハート20位、祝い花17位、本体21位前後です。",
+      body: "キャンペーン1位は狙わず、まずは仲間を集めてから上を目指したいと話しました。この時点の目安はキラキラ23位、指ハート20位、祝い花17位、本体21位前後です。",
     },
     {
       timestamp: "0:24:00",
@@ -75,7 +77,7 @@ export const streamRecap20260903Night: StreamRecap = {
     {
       timestamp: "0:47:00",
       title: "明朝は7時から約30分",
-      body: "ランキングを読んで、明日の朝7時から約30分と案内して締めました。",
+      body: "ランキングを読んで、翌朝7時から約30分と案内して締めました。",
     },
   ],
   goals: [
@@ -105,6 +107,9 @@ export const streamRecap20260903Night: StreamRecap = {
     "配信時点では、翌9月4日 7:00〜 約30分と案内していました。WEB投票は1日1回、キラキラ100も継続して呼びかけていました。",
   sourceLabel: "2026年9月3日 SHOWROOM夜配信（動画確認・オーナー提供）",
   verifiedAt: "2026-09-04",
-  transcriptionNote:
-    "動画の音声をもとに整文しています。固有名詞やコメント名は掲載していません。録音音声・画面録画・全文文字起こしは掲載していません。かわいい実フレームを2枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。フォロワー数や目標の数字は配信時点の記録です。",
+  transcriptionNote: buildTranscriptionNote({
+    material: VIDEO_MATERIAL_NOTE,
+    stills:
+      "静止画は録画の実フレームを2枚掲載しています。コメント・視聴者の表示名・他の出場者は写らないよう切り出しています。",
+  }),
 };

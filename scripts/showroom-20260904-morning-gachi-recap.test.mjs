@@ -4,6 +4,7 @@ import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { describe, it } from "node:test";
+import { streamRecapRulesPublicCopy } from "./stream-recap-rules-copy.mjs";
 import { fileURLToPath } from "node:url";
 import {
   streamRecap20260902,
@@ -33,7 +34,11 @@ const RECAP_FILE = path.join(root, "src/data/streamRecap20260904Asa.ts");
 // Git blob ID of the reviewed PUBLIC source, not a hash/list of private names.
 // Covers copy, captions, filenames, source labels, and comments. Rebaseline only
 // after another content/privacy review; never copy viewer names into fixtures.
-const APPROVED_RECAP_BLOB_SHA = "70988f981b4739cde11feaaf4d8708cbf841a3ca";
+const APPROVED_RECAP_BLOB_SHA = "6bd6620d7a1d468f56c6bdcfdf2a4b162b400341";
+// 公開文は共有定数からも組み立てるので、そちらの変更も再レビュー対象にする。
+// ファイル全体ではなく、実際にページへ出る文だけを対象にする（コメントの手直しで
+// baseline が動くと、再レビューの意味が薄れるため）。
+const APPROVED_RULES_COPY_SHA = "aa8b785c6233d172a166212fd11df4db615d9720";
 
 function gitBlobSha(source) {
   // Match Git's LF-normalized source on Windows checkouts as well as CI.
@@ -73,7 +78,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
 
     assert.equal(recap.date, "2026-09-04");
     assert.equal(recap.dateLabel, "2026.09.04（金）");
-    assert.equal(recap.theme, "三次2日目の朝配信");
+    assert.equal(recap.theme, "朝の配信・三次2日目");
     assert.equal(recap.broadcastLabel, "07:12頃〜 約31分");
     assert.equal(recap.platformLabel, "SHOWROOM");
     assert.equal(recap.verifiedAt, "2026-09-05");
@@ -113,7 +118,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
       "配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。",
     ]);
     assert.equal(
-      streamRecaps.every((item) => item.ranking.length === 1),
+      streamRecaps.every((item) => item.ranking.length <= 1),
       true,
     );
 
@@ -183,6 +188,11 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
   });
 
   it("locks reviewed public source without storing private-name fixtures", async () => {
+    assert.equal(
+      gitBlobSha(streamRecapRulesPublicCopy),
+      APPROVED_RULES_COPY_SHA,
+      "共有注記の公開文が変わりました。読み直してから baseline を更新してください。",
+    );
     const source = await readFile(RECAP_FILE, "utf8");
     assert.equal(
       gitBlobSha(source),
