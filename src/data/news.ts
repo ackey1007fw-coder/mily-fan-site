@@ -194,6 +194,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-06-stream-thanks-next-slots",
+    date: "2026-09-06",
+    sameDayOrder: 40,
+    activityIds: ["live-stream"],
+    title: "配信ありがとう、明日は6:30と22:00",
+    body: "みりぃがXで、配信へのお礼と、翌日の配信が6:30〜7:30と22:00〜23:00であることを伝えました。",
+    source: "https://x.com/Mily_chan36/status/2096604917893095494",
+    sourceLabel: "みりぃのX",
+  },
+  {
     id: "2026-09-06-campus-girls-prelim-final-result",
     date: "2026-09-06",
     sameDayOrder: 30,
