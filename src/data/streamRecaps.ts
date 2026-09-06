@@ -68,6 +68,8 @@ export type StreamRecapSong = {
   timestamp: string;
   /** 原曲へのリンク。みりぃの歌唱映像ではない。 */
   youtubeUrl: string;
+  /** 練習用の参考伴奏。配信での使用音源とは限らない。 */
+  karaoke?: { youtubeUrl: string; channel: string };
 };
 
 export type StreamRecap = {

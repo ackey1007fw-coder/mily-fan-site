@@ -589,7 +589,7 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回に歌った曲"
           id={`${recap.id}-songs`}
-          note="リンク先は原曲の公式動画です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
+          note="「原曲を聴く」は原曲の公式動画、「カラオケで歌う」は参考伴奏です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
         >
           <ol className="mt-3 space-y-3">
             {recap.songs.map((song, index) => (
@@ -622,6 +622,25 @@ function StreamRecapArticle({
                   >
                     YouTubeで原曲を聴く ↗
                   </a>
+                  {song.karaoke ? (
+                    <div className="mt-1">
+                      <a
+                        href={song.karaoke.youtubeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4"
+                        aria-label={`${song.title} — カラオケの参考動画をYouTubeで開く（新しいタブ）`}
+                      >
+                        カラオケで歌う ↗
+                      </a>
+                      <p className="break-words text-xs leading-5 text-ink-muted">
+                        {song.karaoke.channel}の参考伴奏（ガイドメロディなし）
+                      </p>
+                      <p className="text-xs leading-5 text-ink-muted">
+                        練習用の参考リンクです。配信での使用音源は未確認です。
+                      </p>
+                    </div>
+                  ) : null}
                 </div>
               </li>
             ))}

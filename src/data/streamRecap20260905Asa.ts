@@ -105,7 +105,7 @@ export const streamRecap20260905Asa: StreamRecap = {
     label: "10枚まとめて保存",
   },
   songs: [
-    { title: "Mela!", artist: "緑黄色社会", timestamp: "0:09:20", youtubeUrl: "https://www.youtube.com/watch?v=aRDURmIYBZ4" },
+    { title: "Mela!", artist: "緑黄色社会", timestamp: "0:09:20", youtubeUrl: "https://www.youtube.com/watch?v=aRDURmIYBZ4", karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=W5ykal8c4rY", channel: "カラオケ歌っちゃ王" } },
   ],
   highlights: [
     {

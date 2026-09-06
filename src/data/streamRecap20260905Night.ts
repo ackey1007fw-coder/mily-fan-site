@@ -90,7 +90,7 @@ const nightStills: StreamRecapImage[] = [
 /** オーナー提供録画の自動文字起こしを要約。実フレーム10枚は目視確認。 */
 export const streamRecap20260905Night: StreamRecap = {
   songs: [
-    { title: "メメント・モリ", artist: "大森元貴", timestamp: "0:40:45", youtubeUrl: "https://www.youtube.com/watch?v=Rlk3i0sEQR8" },
+    { title: "メメント・モリ", artist: "大森元貴", timestamp: "0:40:45", youtubeUrl: "https://www.youtube.com/watch?v=Rlk3i0sEQR8", karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=dD5Djc_HoGU", channel: "EdKara" } },
   ],
   image: nightStills[9],
   gallery: nightStills,

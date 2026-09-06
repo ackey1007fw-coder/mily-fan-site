@@ -992,3 +992,11 @@ PR 本文に、一次ソース URL と「推測していないこと」を書く
 - 新しい NEWS `2026-09-06-campus-girls-prelim-final-result`。総合審査員賞、面接審査1位、Paton投票審査2位、本戦進出。画像オーバーレイの文言を message に原文どおり掲載。
 - batch b63-01 を Latest / NEWS と Gallery で共有（NEWS JPEG と Gallery 派生は別バイト）。CAMPUS GIRLS Activity と highlights に追加。
 - Paton投票は終了済みのため CTA なし。`/stories/`・events・streamSchedule・contest.ts・profile 非追加。本戦の日程は未確認のため書いていない。
+
+### 2026-09-06 歌リストのカラオケ参考リンクと過去回点検
+
+- 既存の3回4曲に、原曲と区別した「カラオケで歌う」参考リンクを追加。みりぃが配信で使用した音源とは未確認であり、練習用の参考と明記。
+- 2026-09-06にYouTubeの個別動画タイトルとoEmbedの投稿者情報を照合。いずれもガイドメロディなし／オフボーカル。
+- Mela!: [カラオケ歌っちゃ王](https://www.youtube.com/watch?v=W5ykal8c4rY)。メメント・モリ: [EdKara](https://www.youtube.com/watch?v=dD5Djc_HoGU)。生まれてはじめて: [生音風カラオケ屋](https://www.youtube.com/watch?v=O3xpEoW_uao)。愛をこめて花束を: [生音風カラオケ屋](https://www.youtube.com/watch?v=_8TmGHhPjAw)。
+- 掲載済み12回のデータと入手済みの保存資料を点検。9月4日夜の曲名大喜利、9月2日夜の歌練習の話、9月5日昼の朝の振り返りは歌唱として追加しない。9月2〜4日の録画全編を今回再聴取したわけではなく、他回に歌唱がなかったと断定しない。
+- 保存済みの配信レポート・メモも同じ確認済み曲へ更新する。本人画像や録画の追加公開は行わない。

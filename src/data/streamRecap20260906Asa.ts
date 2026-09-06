@@ -35,8 +35,8 @@ const approvedStills: StreamRecapImage[] = [
 /** オーナーが画像を確認し掲載を承認した3枚。 */
 export const streamRecap20260906Asa: StreamRecap = {
   songs: [
-    { title: "生まれてはじめて", artist: "神田沙也加・松たか子", timestamp: "0:50:15", youtubeUrl: "https://www.youtube.com/watch?v=MDZSdjLqiGA" },
-    { title: "愛をこめて花束を", artist: "Superfly", timestamp: "1:16:40", youtubeUrl: "https://www.youtube.com/watch?v=gU5oN0KVofU" },
+    { title: "生まれてはじめて", artist: "神田沙也加・松たか子", timestamp: "0:50:15", youtubeUrl: "https://www.youtube.com/watch?v=MDZSdjLqiGA", karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=O3xpEoW_uao", channel: "生音風カラオケ屋" } },
+    { title: "愛をこめて花束を", artist: "Superfly", timestamp: "1:16:40", youtubeUrl: "https://www.youtube.com/watch?v=gU5oN0KVofU", karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=_8TmGHhPjAw", channel: "生音風カラオケ屋" } },
   ],
   image: approvedStills[1],
   gallery: approvedStills,
