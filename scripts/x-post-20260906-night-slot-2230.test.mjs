@@ -25,6 +25,7 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const NEWS_ID = "2026-09-06-night-slot-2230";
+const RESULT_ID = "2026-09-06-campus-girls-prelim-final-result";
 const THANKS_ID = "2026-09-05-morning-stream-thanks";
 const SOURCE = "https://x.com/Mily_chan36/status/2096366715181691270";
 const TWEET_ID = "2096366715181691270";
@@ -49,8 +50,9 @@ describe("2026-09-06 X 夜枠22:30変更 — Latest entry", () => {
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, THANKS_ID);
+    assert.equal(ordered[0]?.id, RESULT_ID);
+    assert.equal(ordered[1], entry);
+    assert.equal(ordered[2]?.id, THANKS_ID);
     assert.equal(entry.date, "2026-09-06");
     assert.equal(entry.sameDayOrder, 20);
     assert.deepEqual(entry.activityIds, ["live-stream"]);

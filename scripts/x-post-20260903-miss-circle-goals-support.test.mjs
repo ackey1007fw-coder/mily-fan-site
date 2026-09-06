@@ -249,7 +249,7 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — Portal Feed and 
     assert.notEqual(end, -1);
     const section = ops.slice(start, end);
 
-    assert.match(ops, /75件/);
+    assert.match(ops, /79件/);
     assert.match(section, /2095397884107849991/);
     assert.match(section, /sameDayOrder: 10/);
     assert.match(section, /テキストNEWS＋出典リンクのみ/);

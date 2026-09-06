@@ -2,6 +2,7 @@ export * from "../../src/data/news.ts";
 import { news as currentNews } from "../../src/data/news.ts";
 
 const laterNewsIds = new Set([
+  "2026-09-06-campus-girls-prelim-final-result",
   "2026-09-06-night-slot-2230",
   "2026-09-05-morning-stream-thanks",
   "2026-09-05-tiktok-radio-portrait",
