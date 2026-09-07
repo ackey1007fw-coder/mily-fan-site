@@ -28,12 +28,13 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
     updates[0],
   );
   const ordered = sortNewsByDateDesc(news);
-  assert.equal(ordered[0]?.id, "2026-09-06-stream-thanks-next-slots");
-  assert.equal(ordered[1]?.id, "2026-09-06-campus-girls-prelim-final-result");
-  assert.equal(ordered[2]?.id, "2026-09-06-night-slot-2230");
-  assert.equal(ordered[3]?.id, "2026-09-05-morning-stream-thanks");
-  assert.equal(ordered[4], updates[0]);
-  assert.equal(news.length, previousNews.length + 6);
+  assert.equal(ordered[0]?.id, "2026-09-07-campus-girls-final-ex-period");
+  assert.equal(ordered[1]?.id, "2026-09-06-stream-thanks-next-slots");
+  assert.equal(ordered[2]?.id, "2026-09-06-campus-girls-prelim-final-result");
+  assert.equal(ordered[3]?.id, "2026-09-06-night-slot-2230");
+  assert.equal(ordered[4]?.id, "2026-09-05-morning-stream-thanks");
+  assert.equal(ordered[5], updates[0]);
+  assert.equal(news.length, previousNews.length + 7);
   assert.deepEqual(
     news.filter(
       (entry) =>
@@ -42,7 +43,8 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
         entry.id !== "2026-09-06-night-slot-2230" &&
         entry.id !== "2026-09-06-campus-girls-prelim-final-result" &&
         entry.id !== "2026-09-06-stream-thanks-next-slots" &&
-        entry.id !== "2026-09-04-third-round-vote-day2-story",
+        entry.id !== "2026-09-04-third-round-vote-day2-story" &&
+        entry.id !== "2026-09-07-campus-girls-final-ex-period",
     ),
     previousNews,
   );

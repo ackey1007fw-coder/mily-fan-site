@@ -198,6 +198,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-07-campus-girls-final-ex-period",
+    date: "2026-09-07",
+    sameDayOrder: 10,
+    activityIds: ["campus-girls"],
+    title: "キャンガル本選EX期間、本人コメント",
+    body: "みりぃがXで、CAMPUS GIRLS 2027の本選EX期間について書いた。本選まで長いので読んでほしい、とのこと。本人の解釈として、自分を知ってもらい本選でも応援してくれる人に出逢う期間。キャンガルでの配信は行わない。授賞式登壇を目指す、とある。",
+    source: "https://x.com/Mily_chan36/status/2096754197362622971",
+    sourceLabel: "みりぃのX",
+    message: {
+      label: "みりぃのX",
+      text:
+        "【キャンガル2027 本選EX期間】\n" +
+        "本選まで長いので、是非目を通しておいてくださると嬉しいです😳🙏🏻🩵✨\n" +
+        "個人的解釈ですが、この期間は、『私を知ってもらって、本選でも応援してくださる方々に出逢うための期間』。\n" +
+        "キャンガルでの配信は行いませんが、私らしく授賞式登壇するぞ〜✊🏻❤️‍🔥",
+    },
+  },
+  {
     id: "2026-09-06-stream-thanks-next-slots",
     date: "2026-09-06",
     sameDayOrder: 40,

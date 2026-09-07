@@ -123,13 +123,14 @@ describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
 
     assert.ok(entry);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(ordered[0]?.id, "2026-09-06-stream-thanks-next-slots");
-    assert.equal(ordered[1]?.id, "2026-09-06-campus-girls-prelim-final-result");
-    assert.equal(ordered[2]?.id, "2026-09-06-night-slot-2230");
-    assert.equal(ordered[3]?.id, "2026-09-05-morning-stream-thanks");
-    assert.equal(ordered[4]?.id, "2026-09-05-tiktok-radio-portrait");
-    assert.equal(ordered[5], entry);
-    assert.equal(ordered[6]?.id, "2026-09-03-miss-circle-goals-support");
+    assert.equal(ordered[0]?.id, "2026-09-07-campus-girls-final-ex-period");
+    assert.equal(ordered[1]?.id, "2026-09-06-stream-thanks-next-slots");
+    assert.equal(ordered[2]?.id, "2026-09-06-campus-girls-prelim-final-result");
+    assert.equal(ordered[3]?.id, "2026-09-06-night-slot-2230");
+    assert.equal(ordered[4]?.id, "2026-09-05-morning-stream-thanks");
+    assert.equal(ordered[5]?.id, "2026-09-05-tiktok-radio-portrait");
+    assert.equal(ordered[6], entry);
+    assert.equal(ordered[7]?.id, "2026-09-03-miss-circle-goals-support");
     assert.equal(entry.date, "2026-09-04");
     assert.equal(entry.sameDayOrder, 10);
     assert.deepEqual(entry.activityIds, ["miss-circle"]);

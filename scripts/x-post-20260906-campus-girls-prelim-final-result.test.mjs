@@ -38,6 +38,7 @@ const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 const NEWS_ID = "2026-09-06-campus-girls-prelim-final-result";
+const EX_PERIOD_ID = "2026-09-07-campus-girls-final-ex-period";
 const NEXT_SLOTS_ID = "2026-09-06-stream-thanks-next-slots";
 const NIGHT_SLOT_ID = "2026-09-06-night-slot-2230";
 const HIGHLIGHT_ID = "campus-girls-2027-prelim-final-result";
@@ -91,9 +92,10 @@ describe("2026-09-06 CAMPUS GIRLS 予選final 結果報告 — Latest entry", ()
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(ordered[0]?.id, NEXT_SLOTS_ID);
-    assert.equal(ordered[1], entry);
-    assert.equal(ordered[2]?.id, NIGHT_SLOT_ID);
+    assert.equal(ordered[0]?.id, EX_PERIOD_ID);
+    assert.equal(ordered[1]?.id, NEXT_SLOTS_ID);
+    assert.equal(ordered[2], entry);
+    assert.equal(ordered[3]?.id, NIGHT_SLOT_ID);
     assert.equal(entry.date, "2026-09-06");
     assert.equal(entry.sameDayOrder, 30);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
@@ -262,7 +264,8 @@ describe("2026-09-06 CAMPUS GIRLS 予選final 結果報告 — media", () => {
 describe("2026-09-06 CAMPUS GIRLS 予選final 結果報告 — scope", () => {
   it("surfaces on the campus-girls Activity only", () => {
     const campusNews = selectActivityNews("campus-girls", news, news.length);
-    assert.equal(campusNews[0]?.id, NEWS_ID);
+    assert.equal(campusNews[0]?.id, EX_PERIOD_ID);
+    assert.equal(campusNews[1]?.id, NEWS_ID);
     assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsPrelimFinalResultImage);
     for (const activityId of ["miss-circle", "live-stream", "radio"]) {
       assert.equal(
