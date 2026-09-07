@@ -3179,6 +3179,57 @@ LIVE STREAM の三次2日目朝配信メモ専用。NEWS / Gallery / `media.ts` 
 - 元動画は無改変で保持。公開派生のソースメタデータとチャプターを除去。撮影日・投稿日時・撮影者は推測しない。
 
 
+## 素材台帳（batch b59 / 受領日・source date 2026-09-04）
+
+オーナーが直接提供した本人Instagram Story動画1本。くま耳とキラキラの
+フェイスフィルターで、リンクスタンプ「2日目ポチッとな〜」とともに投票を
+呼びかけている縦型動画。owner-provided。SNSから再取得していない。
+mainでbatch b53〜b58が先に使用されているため、このStoryはb59として採番した。
+
+HOME Latest / `/news/` と Gallery が、公開MP4・poster・manifest objectを共有する。
+MISS CIRCLE Activityの関連NEWS・関連メディアにも出す。恒久的なStory permalinkはないため、
+表示は非リンクの `Instagram Story` labelとする。`/stories/`、highlights、events、
+streamSchedule、`media.ts`、PatonVoteGuideのランキング系列には追加しない。
+
+### 掲載承認
+
+- approval date: `2026-09-04`
+- オーナー本人が本タスクで添付したb59-01について、`https://mily-fan-site.vercel.app`
+  への掲載とギャラリーへの追加を明示依頼した。
+- **source date `2026-09-04` はオーナーが明示確認した投稿日**である。
+  オーナーは「9/4に投稿されたものを、その直後に受け取って渡した」と回答した。
+  受領日も同じ2026-09-04。画面の「2日目」表示、WEB投票期間からの逆算、元動画の
+  `creation_time`は日付の根拠にしない。投稿時刻は未確認のため書かない。
+- 承認対象面はHOME Latest / `/news/`、Galleryの動画アーカイブ、MISS CIRCLE Activity。
+  `/stories/`への複製は含まない。
+
+| ID | 公開ファイル | 内容 | 掲載・承認 |
+| --- | --- | --- | --- |
+| b59-01 | `gallery/mily-b59-01-third-round-vote-day2-story.mp4` | 白黒のくま耳とキラキラのフェイスフィルター、黒い水玉のトップスで手を振り、ピースをする縦型動画。720×1280 / 8.967秒 / 30fps / 269フレーム / video-only | ✅ 2026-09-04 明示承認。Latest / NEWS + Gallery + MISS CIRCLE Activity |
+| b59-01 poster | `gallery/mily-b59-01-third-round-vote-day2-story-poster.jpg` | 公開MP4の8.5秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材と安全確認
+
+- provenance: `owner-provided`。Instagram Storyの恒久permalinkはなく、`sourceUrl`は持たない。
+- 元動画はgitignoredの `media/original/mily-b59-01-third-round-vote-day2-story.mp4` に
+  無改変で保持し、受け渡し名・URL・file IDはtracked / public filesへ残さない。
+- 元動画は720×1280 / 30fps / 269フレーム / 8.966667秒。元動画にはAAC音声があるが、
+  権利・再配信権を確認できないため、公開派生はvideo-only（無音）にした。
+- 公開派生はcrop・scale・短縮・テロップ変更・AI加工なし。顔補正・生成塗り足しもない。
+- 公開MP4はH.264 Constrained Baseline / 720×1280 / 8.967秒 / 30fps / 269フレーム /
+  video-only / `+faststart`。sha256 `e6666874750b57d43c1573964340773c78fc130c604a972107c815d3a11da49e`。
+- posterは公開MP4の8.5秒地点の実フレーム。EXIF / IPTC / XMP / ICCなし。sha256
+  `82a73892f10ac6e6ae562b1a46958747e2042290f0b05855787fd796c4640455`。
+
+### 共有範囲
+
+- `src/data/webVoteDay2StoryVideo.json`の1オブジェクトをLatest / NEWS / Gallery /
+  MISS CIRCLE Activityで共有し、公開MP4 1本・poster 1枚だけを参照する。
+- 追加CTAは確認済みの三次審査WEB投票リンクのみ。SupportEventの期間終了後は自動で非表示にする。
+- Storyのリンクスタンプの遷移先、連続投票者特典の内容・条件・付与方法は画面から確認できないため、
+  本文で断定しない。
+
+
 ## 素材台帳（batch b60 / 受領日・source date 2026-09-05）
 
 オーナー提供の9月5日SHOWROOM夜配信録画から選んだ実フレーム10枚。同素材への継続依頼に基づきLIVE STREAMへ掲載。代表はb60-10。b59は別の未マージPRで使用中のため避けた。
