@@ -81,6 +81,10 @@ import {
 import { pandaPastPicImage } from "./pandaPastPic.ts";
 import { eveningRadioShowroomImage } from "./eveningRadioShowroom.ts";
 import { campusGirlsFinalStageFlyerImage } from "./campusGirlsFinalStageFlyer.ts";
+import {
+  campusGirlsFinalsExScheduleImage,
+  campusGirlsFinalsExGuideImage,
+} from "./campusGirlsFinalsExImages.ts";
 import { secondRoundTimetableImage } from "./secondRoundTimetable.ts";
 import { gandaBeforeNightStreamImage } from "./gandaBeforeNightStream.ts";
 import { autumnLeafNewsImage } from "./autumnLeafNewsImage.ts";
@@ -197,6 +201,27 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-07-campus-girls-finals-ex-vol1",
+    date: "2026-09-07",
+    sameDayOrder: 10,
+    activityIds: ["campus-girls"],
+    title: "CAMPUS GIRLS 2027 本選EX期間のお知らせ",
+    body:
+      "9月7日、みりぃがCAMPUS GIRLS 2027 本選EX期間の案内をXに投稿しました。本選EX vol.1は9月7日から9月20日です。SNS審査は9月7日12:00〜9月20日12:00、Paton投票審査は9月16日18:00〜9月22日23:59です。みりぃはキャンガルでの配信は行わないと伝えています。",
+    source: campusGirlsFinalsExGuideImage.sourceUrl,
+    sourceLabel: "みりぃのX",
+    media: campusGirlsFinalsExGuideImage,
+    additionalMedia: [campusGirlsFinalsExScheduleImage],
+    message: {
+      label: "みりぃのX",
+      text:
+        "【キャンガル2027 本選EX期間】\n" +
+        "本選まで長いので、是非目を通しておいてくださると嬉しいです😳🙏🏻🩵✨\n" +
+        "個人的解釈ですが、この期間は、『私を知ってもらって、本選でも応援してくださる方々に出逢うための期間』。\n" +
+        "キャンガルでの配信は行いませんが、私らしく授賞式登壇するぞ〜✊🏻❤️‍🔥",
+    },
+  },
   {
     id: "2026-09-06-stream-thanks-next-slots",
     date: "2026-09-06",

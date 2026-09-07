@@ -479,15 +479,20 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
   });
 
   it("aligns the shared clock with #131 contest end and the new review bounds", () => {
+    const snsStart = Date.parse("2026-09-07T12:00:00+09:00");
+    const snsEnd = Date.parse("2026-09-20T12:00:00+09:00");
     assert.equal(nextSupportEventBoundary(PATON_END + 1), SPOTLIGHT_DAY_START);
     assert.equal(nextSupportEventBoundary(SPOTLIGHT_DAY_START), SHOWROOM_START);
     assert.equal(nextDisplayStatusBoundary(missCircleThirdRoundShowroomReview.schedule, SHOWROOM_START - 1), SHOWROOM_START);
     assert.equal(nextSupportEventBoundary(SHOWROOM_START), WEB_START);
-    assert.equal(nextSupportEventBoundary(WEB_START), SHOWROOM_END + 1);
+    assert.equal(nextSupportEventBoundary(WEB_START), snsStart);
+    assert.equal(nextSupportEventBoundary(snsStart), SHOWROOM_END + 1);
     assert.equal(nextSupportEventBoundary(SHOWROOM_END + 1), WEB_END + 1);
     assert.equal(nextSupportEventBoundary(WEB_END + 1), CONTEST_END);
     assert.equal(nextSupportEventBoundary(CONTEST_END - 1), CONTEST_END);
-    assert.equal(nextSupportEventBoundary(CONTEST_END), null);
+    assert.equal(nextSupportEventBoundary(CONTEST_END), snsEnd + 1);
+    assert.equal(nextSupportEventBoundary(snsEnd), snsEnd + 1);
+    assert.equal(nextSupportEventBoundary(snsEnd + 1), null);
   });
 
   it("derives the vote start day from the Tokyo instant, not the timestamp text", () => {
