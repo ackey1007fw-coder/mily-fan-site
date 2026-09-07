@@ -205,6 +205,28 @@ export const missCircleThirdRoundShowroomReview: SupportEvent = {
   priority: 80,
 };
 
+export const campusGirlsFinalsExSnsReview: SupportEvent = {
+  id: "campus-girls-finals-ex-sns-vol1-2026",
+  activityId: "campus-girls",
+  kind: "support-campaign",
+  title: "CAMPUS GIRLS 2027 本選EX vol.1 SNS審査",
+  note:
+    "本人Xで案内された本選EX vol.1のSNS審査期間です。みりぃはキャンガルでの配信は行わないと伝えています。",
+  shareText:
+    "CAMPUS GIRLS 2027 本選EX vol.1のSNS審査期間です。みりぃの投稿を応援してください",
+  shareHashtag: "#キャンガル",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-09-07T12:00:00+09:00",
+    end: "2026-09-20T12:00:00+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  source: "https://x.com/mily_chan36/status/2096754197362622971",
+  verifiedAt: "2026-09-07",
+  priority: 70,
+};
+
 export const campusGirlsFinalStagePatonVote: SupportEvent = {
   id: "campus-girls-final-stage-paton-2026",
   activityId: "campus-girls",
@@ -231,4 +253,5 @@ export const supportEvents: SupportEvent[] = [
   campusGirlsFinalStagePatonVote,
   missCircleThirdRoundWebVote,
   missCircleThirdRoundShowroomReview,
+  campusGirlsFinalsExSnsReview,
 ];

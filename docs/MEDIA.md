@@ -3323,3 +3323,33 @@ Gallery 960.jpg: 960×1707 / sha256
 `84368c3dd9488bb4a4828efe3864056d84f5f9b1e98c429f97788a8398aedff8`
 Gallery 1600.jpg: 1500×2667 / sha256
 `6dd7a652200342d591297b3f7983810bc21f45659f681d9fb2792eff9fe7da9b`
+
+## 素材台帳（batch b64 / 受領日・source date 2026-09-07）
+
+2026-09-07 09:15:31 JST の本人X投稿（created_at Mon Sep 07 00:15:31 GMT）。
+公開permalinkあり。キャンガル2027 本選EX vol.1の審査案内グラフィックと、本選EX期間のスケジュール表。実写ポートレートではない。`sns-post`。
+オーナーが本タスクで画像を直接提供し、https://mily-fan-site.vercel.app への掲載を明示依頼した。X CDNからは取得していない。
+
+新しい NEWS `2026-09-07-campus-girls-finals-ex-vol1`。Gallery には出さない。
+CAMPUS GIRLS Activity に関連付ける。`/stories/`・highlights・events・streamSchedule・contest.ts・profile・media.ts には足さない。
+本選EXのPaton投票先URLは未確認のため投票CTAなし。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b64-01 NEWS | `news/mily-b64-01-campus-girls-finals-ex-vol1.jpg` | 本選EX vol.1案内。1500×2250。sns-post | ✅ 新NEWS の代表 |
+| b64-02 NEWS | `news/mily-b64-02-campus-girls-finals-ex-schedule.jpg` | メッセージ＋本選EX vol.1〜6日程表。1500×1700。sns-post | ✅ 同じNEWS の additionalMedia |
+
+出典: `https://x.com/mily_chan36/status/2096754197362622971`
+
+元素材（gitignore）:
+- b64-01: 751,087 bytes / JPEG / 1500×2250 / sha256 `4f35c4d98528eeca597b23b795acd35cdca225499ccf348e74a429de154c774f`
+- b64-02: 329,602 bytes / JPEG / 1500×2667 / sha256 `f59f5d64323f484c8254943f4e9a2e77baa965c84524b25c4133db9f211b58d0`
+
+元素材にはEXIFとIPTCあり。公開前にsharpでJPEG再エンコードし、metadataを除去した。
+b64-02の公開派生は、下部のInstagram再投稿バーと空の余白だけを除く（top 0 / height 1700）。crop以外のscale・rotate・アップスケール・縦横比変更なし。AI生成・顔補正・生成塗り足しなし。
+
+NEWS JPEG:
+- b64-01: 1,097,825 bytes / 1500×2250 / sha256 `91c7020bad59effa9109f33be94df6c36eede56fdf9fea378a352657847251ad`
+- b64-02: 420,322 bytes / 1500×1700 / sha256 `94eb650e396717064978e981efad60c6b8d7b5642cc6c94c8e2ff534ab283443`
+
+公開ファイルはEXIF / IPTC / XMP / ICCなし。再エンコードはsharpのJPEG quality 95 / progressive / 4:4:4。

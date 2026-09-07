@@ -185,7 +185,14 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
     assert.equal(nextSupportEventBoundary(END + 1), thirdRoundVoteStartDay);
     assert.equal(nextSupportEventBoundary(thirdRoundVoteStartDay), showroomStart);
     assert.equal(nextSupportEventBoundary(contestEnd - 1), contestEnd);
-    assert.equal(nextSupportEventBoundary(contestEnd), null);
+    assert.equal(
+      nextSupportEventBoundary(contestEnd),
+      Date.parse("2026-09-20T12:00:00+09:00") + 1,
+    );
+    assert.equal(
+      nextSupportEventBoundary(Date.parse("2026-09-20T12:00:00+09:00") + 1),
+      null,
+    );
   });
 
   it("surfaces the same CTA in Support NOW while voting is live", () => {

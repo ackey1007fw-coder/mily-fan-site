@@ -51,10 +51,11 @@ describe("2026-09-06 X 夜枠22:30変更 — Latest entry", () => {
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(ordered[0]?.id, NEXT_SLOTS_ID);
-    assert.equal(ordered[1]?.id, RESULT_ID);
-    assert.equal(ordered[2], entry);
-    assert.equal(ordered[3]?.id, THANKS_ID);
+    assert.equal(ordered[0]?.id, "2026-09-07-campus-girls-finals-ex-vol1");
+    assert.equal(ordered[1]?.id, NEXT_SLOTS_ID);
+    assert.equal(ordered[2]?.id, RESULT_ID);
+    assert.equal(ordered[3], entry);
+    assert.equal(ordered[4]?.id, THANKS_ID);
     assert.equal(entry.date, "2026-09-06");
     assert.equal(entry.sameDayOrder, 20);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
