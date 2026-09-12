@@ -15,6 +15,7 @@ test("September 13 morning is the newest recap", () => {
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.deepEqual(recap.ranking, [RANKING_NOTE]);
   assert.equal(recap.songs, undefined);
+  assert.deepEqual(recap.goals, [{ item: "WEB投票", target: "最終日", statusThen: "投票を呼びかけ" }]);
   assert.match(recap.summary, /WEB投票最終日/);
   assert.match(recap.summary, /ラジオ/);
   assert.match(recap.nextNote, /夜にも配信できる可能性/);
@@ -47,6 +48,8 @@ test("September 13 morning ships eight real-frame stills", async () => {
   }
   const zip = await readFile(new URL(`../public${recap.galleryZip.src}`, import.meta.url));
   assert.equal(zip.readUInt32LE(0), 0x04034b50);
+  for (const still of recap.gallery) assert.ok(zip.includes(Buffer.from(still.src.split("/").pop())));
+  assert.doesNotMatch(zip.toString("latin1"), /mily-b(?:103|111)-/);
   assert.match(recap.transcriptionNote, /全1,139区間/);
   assert.match(recap.transcriptionNote, /40分44\.502秒/);
   assert.match(recap.transcriptionNote, /実フレーム8枚/);

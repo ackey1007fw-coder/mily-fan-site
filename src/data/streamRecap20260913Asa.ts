@@ -71,7 +71,6 @@ export const streamRecap20260913Asa: StreamRecap = {
   ],
   goals: [
     { item: "WEB投票", target: "最終日", statusThen: "投票を呼びかけ" },
-    { item: "アバター権", target: "獲得", statusThen: "祝福に感謝" },
   ],
   ranking: [RANKING_NOTE],
   timeline: [
