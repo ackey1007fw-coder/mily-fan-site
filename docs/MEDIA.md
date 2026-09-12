@@ -3676,6 +3676,16 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - batchが100を超えた現状に対応して、media:buildのbatch桁数検査を2桁以上へ拡張。連番2桁・slug・拡張子制限、既存派生の上書き禁止は維持。
 
 
+## 素材台帳（batch b111 / Story投稿日未確認）
+
+- オーナーが動画と適合記事のサイト掲載を明示依頼。HOME Latest / NEWSの番組告知として掲載。
+- owner-provided。番組アカウントseasidecircleの告知と、mily_chan36の再共有表記を確認。写る3人は番組告知の出演者写真で、私的な第三者・DM・通知・端末情報は含まれない。
+- 放送案内は9月13日（日）10:00–13:00、テーマ「一人〇〇」。Story投稿日・恒久permalink・撮影者は未確認。
+- 元動画はgitignored media/originalへ無改変コピー。公開派生はpublic/media/news/mily-b111-01-seaside-circle-solo-theme.mp4。512×910、19.033秒、元から音声なし。
+- H.264 Baseline / yuv420p / faststart、メタデータ除去。拡縮・crop・顔加工・AI生成なし。
+- posterは公開派生の5秒実フレーム。0/5/10/15秒の候補は同一告知の構成で、5秒を採用。
+- 番組告知としてNEWSに掲載し、Galleryには展開しない。公開動画とposterは各1ファイル。
+
 ## 素材台帳（batch b112 / source date・承認日 2026-09-13）
 
 9月13日06:00頃開始のSHOWROOM朝配信録画から選んだ実フレーム8枚。オーナーが配信終了直後に当該配信レポートとスクショのサイト掲載を明示依頼したため、LIVE STREAM掲載用として使用する。最新mainでb110まで使用済みで、Open PR #247 がb111を予約しているため衝突を避け、Open PRと並行中の9月12日夜配信作業にもb112の予約・使用がないことを確認して採番した。

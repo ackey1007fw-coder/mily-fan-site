@@ -23,7 +23,7 @@ export const streamRecap20260913Asa: StreamRecap = {
   theme: "朝のメイクとラジオ支度",
   broadcastLabel: "6:00頃〜 約41分",
   platformLabel: "SHOWROOM",
-  summary: "ラジオ本番へ向かう前、メイクをしながら朝のトーク。三次審査のWEB投票最終日を案内し、アバター権への祝福にはみんなのおかげと感謝。最後はランキングを読み上げ、元気にラジオへ向かいました。",
+  summary: "ラジオ本番前の支度をしながら、朝のトークを楽しみました。三次審査のWEB投票最終日を案内し、アバター権への祝福にも感謝を伝えました。最後はランキングを読み上げ、ラジオへ行ってきますと挨拶しました。",
   image: approvedStills[6],
   gallery: approvedStills,
   galleryZip: { src: "/media/live/mily-b112-morning-stills.zip", filename: "みりぃ_20260913朝_スクショ8枚.zip", label: "8枚まとめて保存" },
