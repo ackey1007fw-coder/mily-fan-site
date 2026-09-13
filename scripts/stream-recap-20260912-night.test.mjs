@@ -38,6 +38,7 @@ it('keeps avatar achievement separate from the not-yet-announced contest result'
 it('separates the still source date from its later approval date', async () => {
   const media = await readFile(new URL('../docs/MEDIA.md', import.meta.url), 'utf8');
   assert.ok(media.includes('## 素材台帳（batch b113 / source date 2026-09-12 / 承認日 2026-09-13）'));
+  assert.ok(media.includes('## 素材台帳（batch b115 / source date 2026-09-12 / 承認日 2026-09-13）'));
 });
 
 it('does not move the mid-stream ranking to the end of the recording', () => {
@@ -48,7 +49,7 @@ it('does not move the mid-stream ranking to the end of the recording', () => {
   assert.doesNotMatch(recap.ranking[0], /終了時/);
 });
 
-it('publishes ten owner-approved real-frame stills and keeps karaoke excerpts unpublished', async () => {
+it('publishes ten owner-approved stills and eight short singing clips', async () => {
   assert.equal(recap.gallery.length, 10);
   assert.equal(recap.image, recap.gallery[4]);
   assert.equal(recap.galleryZip.label, '10枚まとめて保存');
@@ -66,9 +67,12 @@ it('publishes ten owner-approved real-frame stills and keeps karaoke excerpts un
   const zip = await readFile(new URL(`../public${recap.galleryZip.src}`, import.meta.url));
   assert.equal(zip.readUInt32LE(0), 0x04034b50);
   for (const still of recap.gallery) assert.ok(zip.includes(Buffer.from(still.src.split('/').pop())));
-  assert.ok(recap.songs.every(s => s.clip === undefined));
-  assert.match(recap.transcriptionNote, /実フレーム10枚/);
-  assert.match(recap.transcriptionNote, /歌唱動画は利用条件確認/);
+  assert.deepEqual(recap.songs.map(s => s.clip?.sourceTimestamp), ['0:10:06','0:23:47','0:36:12','0:53:58','1:00:08','1:15:54','1:22:28','1:34:08']);
+  assert.ok(recap.songs.every(s => s.clip?.durationSeconds === 24 && s.clip.width === 640 && s.clip.height === 360));
+  assert.ok(recap.songs.every(s => /^\/media\/live-clips\/mily-b115-/.test(s.clip.src)));
+  assert.ok(recap.songs.every(s => s.clip.poster === s.clip.src.replace(/\.mp4$/, '-poster.jpg')));
+  assert.match(recap.transcriptionNote, /8曲の歌唱.*各24秒/);
+  assert.doesNotMatch(recap.transcriptionNote, /利用条件確認/);
 });
 
 it('distinguishes reconstructed recording positions, event deadline and historical next-slot notice', () => {
