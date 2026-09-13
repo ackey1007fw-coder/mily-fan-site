@@ -8,8 +8,8 @@ import { selectActivityNews } from "../src/lib/activityContent.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const ID = "2026-09-13-seaside-circle-after-radio-thanks";
-const VIDEO = "/media/news/mily-b113-01-seaside-circle-after-radio-thanks.mp4";
-const POSTER = "/media/news/mily-b113-01-seaside-circle-after-radio-thanks-poster.jpg";
+const VIDEO = "/media/news/mily-b114-01-seaside-circle-after-radio-thanks.mp4";
+const POSTER = "/media/news/mily-b114-01-seaside-circle-after-radio-thanks-poster.jpg";
 
 function item() {
   return news.find((entry) => entry.id === ID);

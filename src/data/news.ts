@@ -224,8 +224,8 @@ export const news: NewsItem[] = [
     sourceLabel: "放送後の動画",
     media: {
       kind: "video",
-      src: "/media/news/mily-b113-01-seaside-circle-after-radio-thanks.mp4",
-      poster: "/media/news/mily-b113-01-seaside-circle-after-radio-thanks-poster.jpg",
+      src: "/media/news/mily-b114-01-seaside-circle-after-radio-thanks.mp4",
+      poster: "/media/news/mily-b114-01-seaside-circle-after-radio-thanks-poster.jpg",
       width: 512,
       height: 910,
       alt: "ラジオ終了後、青いパーカー姿のみりぃが今週のメールへの感謝と3時間放送のお礼を伝える縦長動画",

@@ -7,13 +7,19 @@
  * ランキングは確認できた事実だけを残し、個人名は掲載しない。
  * 範囲まで確認できた回は、実際の範囲を引数にして組み立てる。
  * 範囲を確認できないが読み上げ自体は確認できた回は引数なしで使う。
+ * 配信途中の読み上げは timing="during"。既存の終了時表記は既定値で維持する。
  */
-export function buildRankingNote(fromPlace?: number, toPlace?: number): string {
+export function buildRankingNote(
+  fromPlace?: number,
+  toPlace?: number,
+  timing: "end" | "during" = "end",
+): string {
   const range =
     fromPlace === undefined || toPlace === undefined
       ? ""
       : `、${fromPlace}位から${toPlace}位まで`;
-  return `配信終了時に${range}ランキングを読み上げました。個人名は掲載していません。`;
+  const timingLabel = timing === "during" ? "配信中に" : "配信終了時に";
+  return `${timingLabel}${range}ランキングを読み上げました。個人名は掲載していません。`;
 }
 
 /** 既存の確認済みカードで、読み上げ範囲まで確認できている定型文。 */

@@ -8,9 +8,12 @@ import {
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 
-test("September 13 morning is the newest recap", () => {
-  assert.equal(streamRecaps[0], recap);
-  assert.equal(streamRecaps[1].id, "2026-09-12-asa-showroom");
+test("September 13 morning follows later entries and precedes the prior morning", () => {
+  const index = streamRecaps.indexOf(recap);
+  const previousMorning = streamRecaps.findIndex(r => r.id === "2026-09-12-asa-showroom");
+  assert.ok(index >= 0 && previousMorning > index);
+  assert.ok(streamRecaps.slice(0, index).every(r => r.date >= recap.date));
+  assert.ok(streamRecaps.slice(index + 1).every(r => r.date <= recap.date));
   assert.equal(recap.broadcastLabel, "6:00頃〜 約41分");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.deepEqual(recap.ranking, [RANKING_NOTE]);
