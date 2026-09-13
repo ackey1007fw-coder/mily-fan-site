@@ -36,6 +36,7 @@ export const streamRecap20260910Asa: StreamRecap = {
     {
       title: "かわいいだけじゃだめですか？", artist: "CUTIE STREET", timestamp: "0:20:15",
       youtubeUrl: "https://www.youtube.com/watch?v=jZqTz1G8G04",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=YYGsvfQcDIg", channel: "CUTIE STREET" },
       clip: {
         src: "/media/live-clips/mily-b102-03-kawaiidakeja-dame-desuka.mp4",
         poster: "/media/live-clips/mily-b102-03-kawaiidakeja-dame-desuka-poster.jpg",

@@ -34,6 +34,7 @@ export const streamRecap20260912Asa: StreamRecap = {
     },
     {
       title: "好きすぎて滅！", artist: "M!LK", timestamp: "0:23:13", youtubeUrl: "https://www.youtube.com/watch?v=ZVUxJsPfoX8",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=DUWVVQQmFe4", channel: "カラオケ歌っちゃ王" },
       clip: { src: "/media/live-clips/mily-b100-02-sukisugite-metsu.mp4", poster: "/media/live-clips/mily-b100-02-sukisugite-metsu-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "0:23:55" },
     },
     {
