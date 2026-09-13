@@ -215,6 +215,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-13-seaside-circle-after-radio-thanks",
+    date: "2026-09-13",
+    activityIds: ["radio"],
+    title: "3時間の生放送ありがとう。ラジオ終了後のみりぃからお礼",
+    body:
+      "9月13日の「湘南シーサイドサークル」放送後、みりぃが動画でリスナーへお礼を届けました。「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」と感謝を伝えています。放送前のテーマ告知に続いて、3時間の生放送を終えたあとの感謝を伝える短い動画です。",
+    sourceLabel: "放送後の動画",
+    media: {
+      kind: "video",
+      src: "/media/news/mily-b114-01-seaside-circle-after-radio-thanks.mp4",
+      poster: "/media/news/mily-b114-01-seaside-circle-after-radio-thanks-poster.jpg",
+      width: 512,
+      height: 910,
+      alt: "ラジオ終了後、青いパーカー姿のみりぃが今週のメールへの感謝と3時間放送のお礼を伝える縦長動画",
+    },
+  },
+  {
     id: "2026-09-13-seaside-circle-solo-theme",
     // 放送日の告知記事。Instagram Storyの投稿日を示す値ではない。
     date: "2026-09-13",
@@ -253,10 +270,21 @@ export const news: NewsItem[] = [
     title: "初めてのアバ権達成！3次審査を走り切った感謝を届けて",
     body:
       "みりぃがInstagram Storyで、3次審査を無事に走り切ったことを報告。「いつも応援ありがとうございます」と、応援してくれた皆さんへの感謝を伝えました。\n\n" +
-      "さらに、目標に掲げていた「アバ権」を初めて達成したことも報告。43日間、初期アバターで配信してきたみりぃは、「やーっと自分のアバター‼️」と喜びをつづり、「楽しみにしててねっ♪」「撮影会来てくれるかな？！」と呼びかけています。動画では、投票は13日までと案内しています。",
+      "さらに、目標に掲げていた「アバ権」を初めて達成したことも報告。43日間、初期アバターで配信してきたみりぃは、「やーっと自分のアバター‼️」と喜びをつづり、「楽しみにしててねっ♪」「撮影会来てくれるかな？！」と呼びかけています。動画では、投票は13日までと案内しています。\n\n" +
+      "Xでも、完走・アバ権とWEB投票期限（9/13まで）を案内しています。",
     sourceLabel: "Instagram Story",
     url: "https://www.instagram.com/mily_chan36",
     ctaLabel: "Instagramプロフィールを見る",
+    additionalSources: [
+      {
+        label: "みりぃのX",
+        url: "https://x.com/Mily_chan36/status/2098778956535407065",
+      },
+      {
+        label: "みりぃのX",
+        url: "https://x.com/Mily_chan36/status/2098779286245454075",
+      },
+    ],
     additionalCtas: [
       { label: missCircleWebVoteLink.label, url: missCircleWebVoteLink.url },
     ],
