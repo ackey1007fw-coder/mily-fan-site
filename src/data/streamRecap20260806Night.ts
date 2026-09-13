@@ -21,7 +21,8 @@ export const streamRecap20260806Night: StreamRecap = {
       title: "少しでも話したくて",
       body: "予定外の時間でしたが、少しでもみんなと話したくて配信を始めたと話しました。",
     },
-    {      timestamp: "0:05:03",
+    {
+      timestamp: "0:05:03",
       title: "ラジオ番組を紹介",
       body: "FM湘南マジックウェイブの「湘南シーサイドサークル」でパーソナリティをしていると紹介しました。",
     },
@@ -44,7 +45,8 @@ export const streamRecap20260806Night: StreamRecap = {
       timestamp: "1:17:31",
       title: "昼枠の歌を振り返る",
       body: "昼配信で「かわいいだけじゃだめですか？」を歌ったことを振り返り、次に歌いたい曲を相談しました。",
-    },    {
+    },
+    {
       timestamp: "1:22:04",
       title: "投票方法をあらためて",
       body: "8月8日12時からの投票について、1日1回参加できることを説明しました。",
@@ -67,7 +69,8 @@ export const streamRecap20260806Night: StreamRecap = {
     { timestamp: "1:17:31", label: "昼配信の歌唱を振り返る" },
     { timestamp: "1:21:29", label: "次に歌う候補を相談" },
     { timestamp: "1:22:04", label: "1日1回の投票方法を説明" },
-    { timestamp: "1:24:55", label: "リクエスト曲を次枠へ持ち越し" },    { timestamp: "1:27:30", label: "次の配信時刻を相談" },
+    { timestamp: "1:24:55", label: "リクエスト曲を次枠へ持ち越し" },
+    { timestamp: "1:27:30", label: "次の配信時刻を相談" },
     { timestamp: "1:29:28", label: "13位から1位までランキングを読み上げ" },
     { timestamp: "1:31:48", label: "次枠13:30頃と歌の予定を案内" },
   ],
