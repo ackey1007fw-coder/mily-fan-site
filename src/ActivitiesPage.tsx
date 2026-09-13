@@ -1,6 +1,8 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
+import { RadioSongList } from "./components/RadioSongList";
+import { radioMusicEpisodes } from "./data/radioMusic";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { NewsImage } from "./components/NewsImage";
@@ -415,6 +417,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 }
 
 function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
+  const musicEpisode = radioMusicEpisodes.find((music) => music.id === episode.id);
   return (
     <SectionShell eyebrow="On Air Archive" title={`${episode.dateLabel} ${episode.theme}`}>
       <div className="mt-5 rounded-3xl border border-apricot/30 bg-apricot-soft/45 p-5 shadow-card sm:p-7">
@@ -428,6 +431,13 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
           {episode.summary}
         </p>
       </div>
+
+      <section aria-labelledby={`${episode.id}-songs`} className="mt-9">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">On Air Music</p>
+        <h3 id={`${episode.id}-songs`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">この放送で流れた楽曲</h3>
+        {musicEpisode ? <RadioSongList episode={musicEpisode} /> : <p className="mt-3 text-sm leading-7 text-ink-muted">この回の曲目は確認中です。</p>}
+        <a href="/activities/radio/music/" className="mt-5 inline-flex min-h-11 items-center font-bold text-sage-deep underline underline-offset-4">過去の放送の楽曲一覧を見る →</a>
+      </section>
 
       {episode.milyHighlights.length > 0 ? <section aria-labelledby={`${episode.id}-mily-highlights`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
