@@ -39,6 +39,13 @@ export const seasideCircleMessageFormLink: SiteLink = {
     "『湘南シーサイドサークル』メッセージ募集。メールアドレスとGoogleアカウントは回答に含まれず、ラジオネームで送れます。",
 };
 
+export const radioMusicArchiveLink: SiteLink = {
+  id: "mily-radio-on-air-music",
+  label: "ラジオで流れた楽曲",
+  url: "https://mily-fan-site.vercel.app/activities/radio/music/",
+  note: "放送で確認できた曲名・アーティストとYouTubeへの導線をまとめる、このファンサイト内の非公式アーカイブ。",
+};
+
 export const links: SiteLink[] = [
   {
     id: "miss-circle-2026-734",
@@ -67,6 +74,7 @@ export const links: SiteLink[] = [
     url: "https://fm-smw.jp/program/%E3%80%8E-%E6%B9%98%E5%8D%97%E3%82%B7%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-%E3%80%8F%E3%80%80%EF%BC%83ssc",
     note: "FM湘南マジックウェイブ / 湘南シーサイドサークル",
   },
+  radioMusicArchiveLink,
   seasideCircleMessageFormLink,
   {
     id: "fm-smw-ssc-instagram",
