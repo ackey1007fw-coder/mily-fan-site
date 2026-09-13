@@ -31,59 +31,67 @@ export const streamRecap20260912Yoru: StreamRecap = {
       "artist": "高橋優",
       "timestamp": "0:09:01",
       "youtubeUrl": "https://www.youtube.com/watch?v=cpIa89_rZoA",
-      "youtubeVersionNote": "オモクリ監督エディットバージョン（Short size）です。"
+      "youtubeVersionNote": "オモクリ監督エディットバージョン（Short size）です。",
+      clip: { src: "/media/live-clips/mily-b115-01-ashita-wa-kit-to-ii-hi-ni-naru.mp4", poster: "/media/live-clips/mily-b115-01-ashita-wa-kit-to-ii-hi-ni-naru-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "0:10:06" }
     },
     {
       "title": "ちっぽけな勇気",
       "artist": "FUNKY MONKEY BABYS",
       "timestamp": "0:22:21",
-      "youtubeUrl": "https://www.youtube.com/watch?v=FKXBSuN-nQo"
+      "youtubeUrl": "https://www.youtube.com/watch?v=FKXBSuN-nQo",
+      clip: { src: "/media/live-clips/mily-b115-02-chippokena-yuuki.mp4", poster: "/media/live-clips/mily-b115-02-chippokena-yuuki-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "0:23:47" }
     },
     {
       "title": "かわいいだけじゃだめですか？",
       "artist": "CUTIE STREET",
       "timestamp": "0:32:56",
       "youtubeUrl": "https://www.youtube.com/watch?v=jZqTz1G8G04",
-      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=YYGsvfQcDIg", channel: "CUTIE STREET" }
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=YYGsvfQcDIg", channel: "CUTIE STREET" },
+      clip: { src: "/media/live-clips/mily-b115-03-kawaiidakeja-dame-desuka.mp4", poster: "/media/live-clips/mily-b115-03-kawaiidakeja-dame-desuka-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "0:36:12" }
     },
     {
       "title": "生まれてはじめて",
       "artist": "神田沙也加・松たか子",
       "timestamp": "0:52:22",
       "youtubeUrl": "https://www.youtube.com/watch?v=MDZSdjLqiGA",
-      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=O3xpEoW_uao", channel: "生音風カラオケ屋" }
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=O3xpEoW_uao", channel: "生音風カラオケ屋" },
+      clip: { src: "/media/live-clips/mily-b115-04-umarete-hajimete.mp4", poster: "/media/live-clips/mily-b115-04-umarete-hajimete-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "0:53:58" }
     },
     {
       "title": "ケセラセラ",
       "artist": "Mrs. GREEN APPLE",
       "timestamp": "0:59:01",
-      "youtubeUrl": "https://www.youtube.com/watch?v=Jy-QS27q7lA"
+      "youtubeUrl": "https://www.youtube.com/watch?v=Jy-QS27q7lA",
+      clip: { src: "/media/live-clips/mily-b115-05-keserasera.mp4", poster: "/media/live-clips/mily-b115-05-keserasera-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:00:08" }
     },
     {
       "title": "超最強",
       "artist": "超ときめき♡宣伝部",
       "timestamp": "1:15:53",
       "youtubeUrl": "https://www.youtube.com/watch?v=PwlB-rXk1gM",
-      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=Wuyx1pDlDvg", channel: "カラオケ歌っちゃ王" }
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=Wuyx1pDlDvg", channel: "カラオケ歌っちゃ王" },
+      clip: { src: "/media/live-clips/mily-b115-06-cho-saikyo.mp4", poster: "/media/live-clips/mily-b115-06-cho-saikyo-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:15:54" }
     },
     {
       "title": "明日も",
       "artist": "SHISHAMO",
       "timestamp": "1:22:13",
-      "youtubeUrl": "https://www.youtube.com/watch?v=zhCtzmDWsN0"
+      "youtubeUrl": "https://www.youtube.com/watch?v=zhCtzmDWsN0",
+      clip: { src: "/media/live-clips/mily-b115-07-ashitamo.mp4", poster: "/media/live-clips/mily-b115-07-ashitamo-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:22:28" }
     },
     {
       "title": "ありがとう",
       "artist": "いきものがかり",
       "timestamp": "1:34:08",
-      "youtubeUrl": "https://www.youtube.com/watch?v=VZBU8LvZ91Q"
+      "youtubeUrl": "https://www.youtube.com/watch?v=VZBU8LvZ91Q",
+      clip: { src: "/media/live-clips/mily-b115-08-arigatou.mp4", poster: "/media/live-clips/mily-b115-08-arigatou-poster.jpg", width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:34:08" }
     }
   ],
   "highlights": [
     {
       "timestamp": "0:01:23",
       "title": "最終枠の緊張と笑顔",
-      "body": "SHOWROOM審査の最終枠を迎え、緊張していると話しました。集まったみんなに感謝し、最後は明るく歌って過ごしたいと伝えました。"
+      "body": "SHOWROOM審査の最終枠を迎え、緊張していると話しました。集まったみんなに感謝し、最後は明るく歌って過ごしたいと伝えました。",
     },
     {
       "timestamp": "0:18:40",
@@ -211,6 +219,6 @@ export const streamRecap20260912Yoru: StreamRecap = {
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
     stills: "静止画は録画の実フレーム10枚を掲載しています。",
-    extra: "確認用音声約2時間13分の自動文字起こしを全文照合しました。複数録画の重複を照合した統合記録の先頭からの目安です。全編手動聴取と録画の完全性の検証は未実施です。21:59はSHOWROOM審査の締切で、配信終了時刻ではありません。歌唱動画は利用条件確認のため掲載していません。録画全体を概観し、第三者やコメント欄が写らない実フレーム10枚を選定し、オーナーの掲載承認を確認しています。",
+    extra: "確認用音声約2時間13分の自動文字起こしを全文照合しました。複数録画の重複を照合した統合記録の先頭からの目安です。全編手動聴取と録画の完全性の検証は未実施です。21:59はSHOWROOM審査の締切で、配信終了時刻ではありません。8曲の歌唱は、オーナーの掲載依頼に基づき、録画の実映像から各24秒の短い抜粋をLIVE SONG CLIPSへ掲載しています。録画全編や歌詞テロップは掲載していません。録画全体を概観し、第三者やコメント欄が写らない実フレーム10枚を選定し、オーナーの掲載承認を確認しています。",
   }),
 };
