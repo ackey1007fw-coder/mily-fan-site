@@ -31,7 +31,7 @@ test("September 13 night records verified themes without private handoff data", 
   assert.match(publicText, /ファイナル/);
   assert.match(recap.nextNote, /9:30/);
   assert.match(recap.nextNote, /ファンルーム/);
-  assert.doesNotMatch(publicText, /live23423409|573253|Mily_SHOWROOM_AutoRecord|ChatGPTWork/);
+  assert.doesNotMatch(publicText, /(?:^|[\\/])Users[\\/]|(?:^|[\\/])recordings[\\/]|room_id|live_id|\.mkv/i);
 });
 
 test("September 13 night ships ten approved real-frame stills", async () => {
