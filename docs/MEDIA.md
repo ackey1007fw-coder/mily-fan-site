@@ -3548,3 +3548,200 @@ ffmpeg -ss 8 -i public/media/gallery/mily-b92-01-showroom-avatar-rights-story.mp
   -frames:v 1 -q:v 2 -map_metadata -1 \
   public/media/gallery/mily-b92-01-showroom-avatar-rights-story-poster.jpg
 ```
+
+## 素材台帳（batch b93 / source date 2026-09-11）
+
+オーナーがサイト内再生を依頼した、9月11日06:41のSHOWROOMファンルーム本人公開音声。
+公開プロフィールの画像・ボイス一覧で投稿ID `88898855` と日時を照合した。
+Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わない。
+
+| 項目 | 確認値 |
+| --- | --- |
+| 公開ファイル | `news/mily-b93-01-fanroom-morning-voice.m4a` |
+| provenance | owner-requested |
+| sourcePublishedAt | 2026-09-11T06:41:34+09:00 |
+| 原本 | 198,311 bytes / M4A container / AAC-LC / 12kHz / mono |
+| 原本SHA256 | `0b7783f3c67410dfa3f508e971708c7727806c828e146808ae036709f3ed9239` |
+| 公開派生 | 181,947 bytes / M4A / AAC-LC / 12kHz / mono / 約70.827秒 |
+| 公開SHA256 | `53b2508fb6bdde59be4319fd97bc4f6b5e5b06e2d3ba0b829bfd03ed5cf08b83` |
+
+原本は非公開領域に無改変で保管。公開派生はstream copyで、AACパケット830個のハッシュが原本と一致。
+`creation_time`と出典メタデータは除去。`moov`を`mdat`より前へ配置。音声の切り取り・補正・生成なし。
+本文はローカルASR確認の範囲を要約。全文やスクリーンショットは公開しない。
+詳細は `docs/UPDATE-20260911-FANROOM-VOICE.md`。
+
+## 素材台帳（batch b94 / b95 / 承認日 2026-09-11）
+
+9月9日朝・9月10日朝のSHOWROOM配信メモ専用スクリーンショット。オーナーがチャット上で提示された16枚すべてをLIVE STREAM掲載用として承認。
+
+- b94: 2026-09-09朝。8枚。代表は `mily-b94-04-blue-flower.jpg`。保存ZIP `mily-b94-morning-stills.zip`。
+- b95: 2026-09-10朝。8枚。代表は `mily-b95-05-wave-smile.jpg`。保存ZIP `mily-b95-morning-stills.zip`。
+- provenance: owner-provided recording / owner-approved still selection。LIVE STREAM専用で、NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。
+- 全16枚は録画の実フレームから作成した640×360 JPEG。crop・scale・顔補正・AI生成・生成塗り足しなし。公開ファイルにEXIF / GPS / IPTC / XMPなし。
+- 第三者、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
+- 9/9のcaptionは録画開始記録と既存記事の開始表示を混同しないため、未照合の時刻を付けず場面説明だけにした。
+- b61の撤回済み画像など、過去に非掲載化した素材は再利用していない。
+
+## 素材台帳（batch b97 / source date 2026-09-11）
+
+9月11日夜のSHOWROOMファンルーム写真1枚とInstagram Story動画2本。オーナーが当該素材のサイト掲載を明示依頼した。b96は別作業branchで使用済みのため再利用せず、b97を採番。
+
+- b97-01: ファンルームに23:11ごろ添付された横長セルフィー。オーナー提供1206×651 JPEGから通常Gallery派生6ファイルを生成。`sourceUrl: null`（個別permalinkなし）、`sourceDate: 2026-09-11`。Galleryのみ。
+- b97-02: 夜配信のお礼と翌9/12の最終日案内Story。512×910。Story内の「8/12」は本人がその後「8月じゃなくて9月」と訂正し、オーナーも9/11投稿・9/12予定と確認。表示自体は改変しない。
+- b97-03: 「今日のみりぽち完了していますか!?」Story。512×910。リンクスタンプの遷移先は素材から確認できないためmanifestへURLを保存しない。
+- b97-02 / b97-03 は Latest / NEWS 内で再生し、Gallery動画一覧には追加しない。公開MP4・posterはcrop・scale・顔補正・AI生成・生成塗り足しなし。
+- b97-02の元動画には楽曲音声が含まれるため、再配信権未確認として公開派生はvideo-only。H.264映像はstream copy、faststart化、source metadata除去。
+- b97-03は元からvideo-only。H.264映像をstream copyし、faststart化、source metadata除去。
+- posterは公開MP4の実フレーム（b97-02 約10秒、b97-03 約2.5秒）。AI生成なし。
+- Story閲覧UIを含む確認スクリーンショットは、投稿日・訂正文の確認資料としてのみ使い、公開assetにはしない。
+- ファンルーム本文は本人投稿だけをLatest / NEWSへ転記し、第三者・オーナーの表示名やコメントは公開しない。
+
+## 素材台帳（batch b98 / source date 2026-09-11 / 承認日 2026-09-12）
+
+9月11日22:32頃開始のSHOWROOM夜配信録画から選んだ実フレーム8枚。オーナーが配信終了直後に、当該配信レポートとスクショのサイト実装を明示依頼したため、LIVE STREAM掲載用として承認済みの範囲で使用する。番号衝突を避けるためb98を採番した。
+
+- 公開ファイル: `live/mily-b98-01-opening-smile.jpg` 〜 `live/mily-b98-08-soft-smile.jpg`。全8枚640×360 JPEG。
+- 代表: `mily-b98-06-bright-smile.jpg`。保存ZIP: `live/mily-b98-night-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。公開再生permalinkなし。録画原本・受け渡しURL / ID / ローカルパスは公開しない。
+- 録画全体を25点で概観し、10候補を実寸確認して8枚を選定。本人以外の人物、コメント欄、視聴者名・アイコン、住所・連絡先など公開を避ける情報の写り込みなし。
+- 元の640×360・16:9を保持。crop・scaleなし。通常のJPEG圧縮のみで、EXIF / GPS / IPTC / XMPを持たない。顔のAI生成・補正・置換・生成塗り足しなし。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。全文文字起こし・録音・録画も公開しない。
+
+## 素材台帳（batch b99 / source date・承認日 2026-09-12）
+
+9月12日08:00頃開始のSHOWROOM朝配信録画から選んだ実フレーム8枚。オーナーが配信終了直後に当該配信の内容整理とサイト実装を依頼した範囲で、LIVE STREAM掲載用として使用する。mainでb98まで使用済みのためb99を採番した。
+
+- 公開ファイル: `live/mily-b99-01-board-smile.jpg` 〜 `live/mily-b99-08-gentle-smile.jpg`。全8枚640×360 JPEG。
+- 代表: `mily-b99-04-bright-smile.jpg`。保存ZIP: `live/mily-b99-morning-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。公開再生permalinkなし。録画原本・非公開URL / ID / ローカルパスは公開しない。
+- 録画全体を約80秒間隔で概観し、11候補を実寸確認して8枚を選定。本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
+- 元の640×360・16:9を保持。crop・scaleなし。ffmpegで録画の実フレームをJPEG化し、顔のAI生成・補正・置換・生成塗り足しなし。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。録音・録画・全文文字起こしも公開しない。
+
+## 素材台帳（batch b100 / source date 2026-09-12 / 承認日 2026-09-12）
+
+9月12日朝のSHOWROOM配信録画から作成した短い歌唱クリップ3本。オーナーが当該配信映像のサイト掲載を明示指定し、掲載許可を確認済みとして扱う。許可確認に使った私的なやり取り自体は公開repoへ持ち込まない。
+
+- `live-clips/mily-b100-01-haikei-shounenyo.mp4`: Hump Back「拝啓、少年よ」。録画内17:35頃から24秒。
+- `live-clips/mily-b100-02-sukisugite-metsu.mp4`: M!LK「好きすぎて滅！」。録画内23:55頃から24秒。
+- `live-clips/mily-b100-03-lovers.mp4`: sumika「Lovers」。録画内35:38頃から24秒。
+- 各MP4は640×360 / H.264 Main / yuv420p / AAC-LC / faststart。原録画の画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップは行わない。
+- 各posterは公開MP4の実フレーム。LIVE SONG CLIPS専用で、NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。
+- 録画原本、受け渡しURL / ID、全文文字起こし、視聴者名は公開しない。楽曲・伴奏等の権利は各権利者に帰属し、サイトでは短い配信記録抜粋として扱う。
+
+
+## 素材台帳（batch b101 / source date・承認日 2026-09-12）
+
+9月12日の本人X投稿。mainでbatch b100がLIVE SONG CLIPSに使用済みのため、次の未使用番号b101を採番する。オーナーが公開X URLと画像を同時に提示し、サイト掲載を明示依頼した。
+
+- b101-01: `mily-b101-01-ohayo-panda-selfie`。受領画像は1152×2048 JPEG / 183,092 bytes / sha256 `2325317d8a6adafe7956e55885cf78c2ad1fa02fe1f40fae194f505de9791368`。公開Xの同一メディアとサイズ・SHA-256一致を確認。
+- sourceUrl: `https://x.com/Mily_chan36/status/2098566313593680195`、sourceDate: `2026-09-12`。
+- Xで、朝枠への感謝、3次SHOWROOM審査最終日、20:40〜21:59の配信、投稿時点でアバター権まで残り36,599pt、投票報告の呼びかけを確認。画像内の文字は「おはよう♡」。
+- 公開派生は `news/mily-b101-01-ohayo-panda-selfie.jpg`。1152×2048を維持し、外部画像CDNへhotlinkしない。
+- crop・顔補正・AI生成・生成塗り足しなし。通常の再エンコードのみで、公開派生にEXIF / GPS / IPTC / XMP / ICCを持ち込まない。
+- 本人以外の人物、表示名・コメント・住所・連絡先など公開を避ける第三者情報は写っていない。
+- Latest / NEWS専用。通常SNS投稿写真のためGalleryへ自動昇格しない。Xへの導線は確認済みpermalinkのみ。
+
+## 素材台帳（batch b102 / source date 2026-09-10〜11 / 承認日 2026-09-12）
+
+オーナー提供のSHOWROOM録画から作成した追加歌唱クリップ3本。2026-09-12にオーナーが歌唱シーンのファンサイト・SNS展開を明示依頼した範囲で、LIVE SONG CLIPSへ追加する。許可確認に使った私的なやり取り、録画原本、非公開URL / ID / ローカルパスは公開repoへ持ち込まない。b100初回、b101本人X投稿の次の未使用番号としてb102を採番。
+
+- `live-clips/mily-b102-01-ashitamo.mp4`: SHISHAMO「明日も」。公開クリップは24秒 / 640×360 / H.264 Main / AAC-LC / faststart。2,203,239 bytes / sha256 `2923058705ef169bd8416cad869c5d9b0bd68abf7ddf800cff3423e51dc59252`。
+- `live-clips/mily-b102-02-keserasera.mp4`: Mrs. GREEN APPLE「ケセラセラ」。公開クリップは24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,997,967 bytes / sha256 `781a1d510f87618e085f278ae089b6dff51a7e88ddef6749f352df961b966363`。
+- `live-clips/mily-b102-03-kawaiidakeja-dame-desuka.mp4`: CUTIE STREET「かわいいだけじゃだめですか？」。公開クリップは24秒 / 640×360 / H.264 Main / AAC-LC / faststart。2,178,472 bytes / sha256 `86ae2007af9d53639d53ee14d9d6f2df0a3afda16b3f09a9f33731fbdae5d804`。
+- 各posterは公開MP4の12秒地点の実フレーム。順に13,000 / 13,311 / 13,599 bytes、sha256は `2cdbca50f167860f0bf8efbe46e88701fc41562b23c2e2ecdbe1b83f56a0308f` / `3e0617cc8b9d4fe71f45ecbde11fb80878afa775a109249aad83218d0e6fdd5d` / `82f7b4a0d889c9703d9510c2208586c0c2e23f8666c6453ace4ea8648d5715d1`。
+- 原録画の画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップは行わない。公開派生ではsource metadata / chapterを除去する。
+- 実フレーム確認の範囲で、本人以外の人物、コメント欄、視聴者名・アイコン、住所・連絡先など公開を避ける情報の写り込みなし。
+- 「明日も」は既存配信メモの歌唱開始表示と今回使用した録画の切出し位置が一致しないため、既存 `timestamp` を書き換えず、`clip.sourceTimestamp` に実際の切出し位置を独立して記録する。
+- LIVE SONG CLIPS専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。録画全編・全文文字起こしは公開しない。楽曲・伴奏等の権利は各権利者に帰属する。
+
+## 素材台帳（batch b103 / source date 2026-09-12）
+
+オーナーが直接提供し、動画と記事のサイト掲載を依頼したInstagram Story動画。最新mainとOpen PRを確認し、b103を採番。
+
+- 20秒 / 512×910 / H.264。画面の3次審査への感謝・初のアバ権達成・43日間の初期アバター・13日までの投票案内を確認。
+- 公開用派生: `gallery/mily-b103-01-avatar-achievement-story-web.mp4`、poster: 同名の `-poster.jpg`。
+- 静止画中心のStoryを1fpsへサンプリング（20秒・画角保持）、音源の再掲載権未確認のためvideo-only、metadata / chapter除去、faststart化。crop・scale・短縮・顔補正・AI生成なし。元素材内のフェイスフィルターはそのまま。
+- posterは10秒地点の実フレーム。確認範囲で第三者・コメント・通知・住所・連絡先などの写り込みなし。
+- 原本はgitignored領域へ無改変コピーし、公開repoへ受け渡し名・ID・私的URLを残さない。
+- オーナーが元投稿日を2026-09-12と明示確認。sourceDateは2026-09-12、sourceUrlはnull、publishedはtrue。Latest / NEWSへ配線し、Gallery / Storiesには追加しない。
+
+## 素材台帳（batch b110 / 受領日 2026-09-13）
+
+- b110-01: 青いパーカーでピースをする本人セルフィー。オーナー提供。Gallery・NEWSへの掲載を本依頼で明示承認。
+- 公開ファンルームの写真投稿時刻は2026-09-13 06:43:58 JST。個別permalink・撮影者は未確認のためnull。
+- 元1206×2119の縦構図を保持。media:buildで480 / 960 / 1600のJPEG・WebP派生を生成。最大幅は拡大せず1206px。NEWSとGalleryは同じ派生を共有。
+- 本人以外の人物・第三者コメント・私的情報なし。顔加工・AI生成・トリミングなし。原本は無改変・gitignore領域。
+- もう1枚の提供スクリーンショットは本文・投稿との対応の確認用。同じ自撮りの縮小版を重複公開せず、NEWS本文として要約。
+- batchが100を超えた現状に対応して、media:buildのbatch桁数検査を2桁以上へ拡張。連番2桁・slug・拡張子制限、既存派生の上書き禁止は維持。
+
+
+## 素材台帳（batch b111 / Story投稿日未確認）
+
+- オーナーが動画と適合記事のサイト掲載を明示依頼。HOME Latest / NEWSの番組告知として掲載。
+- owner-provided。番組アカウントseasidecircleの告知と、mily_chan36の再共有表記を確認。写る3人は番組告知の出演者写真で、私的な第三者・DM・通知・端末情報は含まれない。
+- 放送案内は9月13日（日）10:00–13:00、テーマ「一人〇〇」。Story投稿日・恒久permalink・撮影者は未確認。
+- 元動画はgitignored media/originalへ無改変コピー。公開派生はpublic/media/news/mily-b111-01-seaside-circle-solo-theme.mp4。512×910、19.033秒、元から音声なし。
+- H.264 Baseline / yuv420p / faststart、メタデータ除去。拡縮・crop・顔加工・AI生成なし。
+- posterは公開派生の5秒実フレーム。0/5/10/15秒の候補は同一告知の構成で、5秒を採用。
+- 番組告知としてNEWSに掲載し、Galleryには展開しない。公開動画とposterは各1ファイル。
+
+## 素材台帳（batch b112 / source date・承認日 2026-09-13）
+
+9月13日06:00頃開始のSHOWROOM朝配信録画から選んだ実フレーム8枚。オーナーが配信終了直後に当該配信レポートとスクショのサイト掲載を明示依頼したため、LIVE STREAM掲載用として使用する。最新mainでb110まで使用済みで、Open PR #247 がb111を予約しているため衝突を避け、Open PRと並行中の9月12日夜配信作業にもb112の予約・使用がないことを確認して採番した。
+
+- 公開ファイル: `live/mily-b112-01-makeup-start.jpg`、`mily-b112-02-makeup-talk.jpg`、`mily-b112-03-eye-tool-smile.jpg`、`mily-b112-04-eye-makeup.jpg`、`mily-b112-05-makeup-finished-smile.jpg`、`mily-b112-06-bright-close-smile.jpg`、`mily-b112-07-ready-for-radio.jpg`、`mily-b112-08-double-peace.jpg`。全8枚640×360 JPEG。
+- 代表: `mily-b112-07-ready-for-radio.jpg`。保存ZIP: `live/mily-b112-morning-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。公開再生permalinkなし。録画原本・受け渡しURL / ID / ローカルパスは公開しない。
+- 録画全体を約1分間隔で概観し、メイク開始からラジオへ向かう支度が整うまでの流れが伝わる8枚を選定。本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
+- 元の640×360・16:9を保持。crop・scaleなし。ffmpegで録画の実フレームをJPEG化し、source metadataを引き継がない。顔のAI生成・補正・置換・生成塗り足しなし。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。録音・録画・全文文字起こしも公開しない。
+
+## 素材台帳（batch b113 / source date 2026-09-12 / 承認日 2026-09-13）
+
+9月12日20:40頃開始のSHOWROOM夜配信録画から選んだ実フレーム10枚。オーナーが提示された10枚すべてのLIVE STREAM掲載を2026-09-13に明示承認。最新mainとOpen PRを照合し、b113の未使用を確認して採番した。
+
+- 公開ファイル: `live/mily-b113-01-hands-together-smile.jpg` 〜 `mily-b113-10-small-pose.jpg`。全10枚640×360 JPEG。
+- 代表: `mily-b113-05-bright-smile.jpg`。保存ZIP: `live/mily-b113-night-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。録画原本・受け渡しURL / ID・全文文字起こしは公開しない。
+- 録画全体の候補を比較し、実寸で本人の表情と写り込みを確認した10枚を採用。本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
+- 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。JPEGにEXIF / XMP / IPTCなしを確認。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。歌唱動画は別の権利確認ゲートを維持し、このbatchには含めない。
+
+## 素材台帳（batch b114 / source date・承認日 2026-09-13）
+
+- オーナーが放送終了後の動画と記事のサイト掲載を明示依頼。9月13日のラジオ終了後のお礼NEWSとして使用。
+- 画面内で「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」を確認。恒久SNS permalinkは未確認のため推測しない。
+- 公開派生は `news/mily-b114-01-seaside-circle-after-radio-thanks.mp4`。512×910、7.700秒、622,490 bytes、sha256 `e1da66c20b56e6c257626a6b4a61bc04f6d8d3eb4a3d9819472de5e64ccf2154`。H.264 Constrained Baseline / yuv420p / faststart、音声なし。
+- 元の縦構図・全尺を保持。crop・顔補正・AI生成・生成塗り足しなし。source metadata / chapterを除去。元素材内のフェイスフィルターはそのまま。
+- posterは公開MP4の3秒地点の実フレーム。56,571 bytes、sha256 `9a7a72dcc75da2d6d307c90c2d129d7921baab2a6ef0c6329416254325712a7f`。本人以外の人物、コメント、通知、住所・連絡先など公開を避ける情報の写り込みなし。
+- HOME Latest / NEWSとradio activityの関連NEWSに掲載。Gallery / Stories / profile / events / streamScheduleへ複製しない。受け渡し用ファイル名・ID・私的URLは公開repoへ残さない。
+
+## 素材台帳（batch b115 / source date 2026-09-12 / 承認日 2026-09-13）
+
+9月12日20:40頃開始のSHOWROOM夜配信から作成した歌唱クリップ8本。オーナーが当該配信の本人歌唱シーンをサイトへ実装するよう明示依頼した範囲で、既存 `songs[]` の各歌唱へ `clip` として紐づける。私的な許可確認、録画原本、非公開URL / ID / ローカルパスは公開repoへ持ち込まない。
+
+- `live-clips/mily-b115-01-ashita-wa-kit-to-ii-hi-ni-naru.mp4`: 明日はきっといい日になる。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。2,032,960 bytes / sha256 `e12e8ac6e7c7fab1c7b8093aa06cd79cc057403e67d57cb7d414b5b16c224410`。posterは動画内20秒の実フレーム、17,711 bytes / sha256 `df207642675df360305a5cd60f211ea16a1f9b7b1e553e0cf2931dcb173cc606`。
+- `live-clips/mily-b115-02-chippokena-yuuki.mp4`: ちっぽけな勇気。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,960,561 bytes / sha256 `fddef1569a2c8ac0231ff97bb8900f2d1141e6c6f417943fbb9efe3b76116d2b`。posterは動画内20秒の実フレーム、17,906 bytes / sha256 `afad240d6bdfdb9e19616f9c9c111e6512b10d6f2c14f8af5f3aa182193ff60a`。
+- `live-clips/mily-b115-03-kawaiidakeja-dame-desuka.mp4`: かわいいだけじゃだめですか？。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,932,085 bytes / sha256 `b0c08b25ea5a4d8c1d80873452535717f68001fcfd2c4f949a8b786d140b54df`。posterは動画内12秒の実フレーム、16,468 bytes / sha256 `e2c46d5c35b5567703aad5ac897e5e7778411e6d521a46fb14bedd4b8f26e3e9`。
+- `live-clips/mily-b115-04-umarete-hajimete.mp4`: 生まれてはじめて。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,660,412 bytes / sha256 `5be36256f5d2a284138844c937730650679fad6d8ec0c0daacd5c58f80c2954a`。posterは動画内16秒の実フレーム、16,308 bytes / sha256 `706d1fe83f32987bb826a92933ad3f3117d2dac58ba1528231ae87bd39612e5f`。
+- `live-clips/mily-b115-05-keserasera.mp4`: ケセラセラ。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,692,411 bytes / sha256 `3f6cd724509d3054a5866fc536b3512c0a89e9017d4ca0263d6c0cb5623ec545`。posterは動画内12秒の実フレーム、16,715 bytes / sha256 `9f19e026bbad5b4eccb6a53dc277279843b3556292bd05e2bbd5f8b7bae7d929`。
+- `live-clips/mily-b115-06-cho-saikyo.mp4`: 超最強。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,907,330 bytes / sha256 `70465f9153ccc49c1bc40272c0acab9389d30e1babb3b343902838c09f30c2be`。posterは動画内4秒の実フレーム、18,871 bytes / sha256 `86beb7f2006c26369cc75cd78be1377a17adea36abb7c57a7cba2d681e7e74fa`。
+- `live-clips/mily-b115-07-ashitamo.mp4`: 明日も。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,743,923 bytes / sha256 `2459ee54eaf7d958c2af5698f9794796fc8a29ce1b6156b6cbb3bb657b2d90e9`。posterは動画内20秒の実フレーム、16,062 bytes / sha256 `02a140b33a28e68f6ccfd18d4a4e251c6a3a44bba3669c0b4e2aa2ba9be37193`。
+- `live-clips/mily-b115-08-arigatou.mp4`: ありがとう。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,602,214 bytes / sha256 `b8d83dd4bc2ba2b3c7b913bf46292d14681f85baa3e8827b383482fa433c2d60`。posterは動画内16秒の実フレーム、17,223 bytes / sha256 `19ca7e7ff9763e7c853016a5a41d1dcab952325a46338f7c18308deff0f11d61`。
+- 8本とも原画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップなし。公開派生ではsource metadata / chapterを除去する。
+- 実フレーム候補を比較し、本人以外の人物、コメント欄、視聴者名・アイコン、住所・連絡先など公開を避ける情報の写り込みがない範囲を使用する。
+- `sourceTimestamp` は複数録画の重複を照合した確認用統合記録の先頭からの切出し目安で、配信開始時刻そのものではない。既存の歌唱開始 `timestamp` は変更しない。
+- LIVE SONG CLIPS専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。楽曲・伴奏等の権利は各権利者に帰属し、短尺であることだけを権利許諾の根拠にはしない。
+
+## 素材台帳（batch b116 / source date 2026-08-06 / 承認日 2026-09-13）
+
+8月6日10:02頃開始のSHOWROOM朝配信録画から選んだ実フレーム8枚。オーナーがチャットで提示済みの最終8枚すべてをLIVE STREAM掲載用として明示承認。最新mainでb115使用済み、関連Open PRにb116の使用がないことを確認して採番した。
+
+- 公開ファイル: `live/mily-b116-01-bangs-touch.jpg` 〜 `live/mily-b116-08-farewell.jpg`。全8枚640×360 JPEG。
+- 代表: `mily-b116-07-bright-smile.jpg`。保存ZIP: `live/mily-b116-morning-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。公開の生permalinkなし。録画原本・受け渡しURL / ID・全文文字起こし・ローカルパスは公開しない。
+- 最終候補8枚を実寸で確認し、本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の明確な写り込みなし。
+- 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。公開JPEGにEXIF / XMP / IPTCなしを回帰テストで確認する。
+- ZIPは8件で、承認済み単体JPEGとのSHA256一致を非公開制作台帳で確認済み。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。歌唱clipは別の権利ゲートとして扱う。

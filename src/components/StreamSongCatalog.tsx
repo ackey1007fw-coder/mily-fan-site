@@ -1,11 +1,28 @@
 import { useState } from "react";
 import { streamRecaps } from "../data/streamRecaps";
 import { buildStreamSongCatalog, catalogArtists, catalogBroadcastCount, selectCatalogSongs, type SongOrder } from "../lib/streamSongCatalog";
+import { catalogSongClipCount, songClipPerformanceAnchor } from "../lib/streamSongClips";
 
 const catalog = buildStreamSongCatalog(streamRecaps);
 const artists = catalogArtists(catalog);
+const clipCount = catalogSongClipCount(catalog);
+const INITIAL_SONG_COUNT = 6;
 const inputClass = "min-h-11 w-full min-w-0 rounded-xl border border-sage/30 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage";
 const linkClass = "inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage";
+
+export function StreamSongClipsEntry() {
+  if (clipCount === 0) return null;
+  return (
+    <a href="/activities/live/clips/" className="mt-4 flex min-w-0 items-center gap-4 rounded-3xl border-2 border-apricot/45 bg-apricot/10 p-5 shadow-card transition-colors hover:bg-apricot/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-apricot sm:p-6">
+      <span aria-hidden="true" className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-apricot text-2xl text-white">▶</span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-xl font-bold text-ink sm:text-2xl">LIVE SONG CLIPS</span>
+        <span className="mt-1 block text-sm leading-6 text-ink-muted">みりぃの歌唱シーンを短い動画で。現在{clipCount}本</span>
+        <span className="mt-3 inline-flex min-h-11 items-center rounded-full bg-apricot px-5 py-2 text-sm font-bold text-white">歌唱クリップを見る →</span>
+      </span>
+    </a>
+  );
+}
 
 export function StreamSongCatalogEntry() {
   if (catalog.length === 0) return null;
@@ -25,7 +42,10 @@ export function StreamSongCatalog() {
   const [query, setQuery] = useState("");
   const [artist, setArtist] = useState("");
   const [order, setOrder] = useState<SongOrder>("recent");
+  const [showAll, setShowAll] = useState(false);
   const songs = selectCatalogSongs(catalog, query, artist, order);
+  const hasActiveFilter = query.trim().length > 0 || artist.length > 0;
+  const visibleSongs = hasActiveFilter || showAll ? songs : songs.slice(0, INITIAL_SONG_COUNT);
   if (catalog.length === 0) return null;
 
   return (
@@ -60,53 +80,93 @@ export function StreamSongCatalog() {
             </select>
           </label>
         </div>
-        <p role="status" aria-live="polite" aria-atomic="true" className="mt-4 text-xs text-ink-muted">{catalog.length}曲中 {songs.length}曲を表示</p>
-        {songs.length === 0 ? (
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-ink-muted">
+          <p role="status" aria-live="polite" aria-atomic="true">{catalog.length}曲中 {visibleSongs.length}曲を表示</p>
+          <p>曲名をタップすると、原曲リンクと歌った配信を開けます。</p>
+        </div>
+        {visibleSongs.length === 0 ? (
           <div className="mt-4 rounded-2xl border border-sage/15 bg-paper-card p-5">
             <p className="text-sm text-ink-muted">条件に合う曲はありません。曲名の一部でも検索できます。</p>
             <button type="button" onClick={() => { setQuery(""); setArtist(""); }} className={`mt-2 ${linkClass}`}>検索条件をクリア</button>
           </div>
         ) : (
-          <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {songs.map((song) => (
-              <li key={song.key} className="min-w-0 rounded-2xl border border-sage/20 bg-paper-card p-5 shadow-card">
-                <h3 className="break-words text-lg font-bold leading-relaxed text-ink">{song.title}</h3>
-                <p className="mt-1 break-words text-sm leading-6 text-ink-muted">{song.artist}</p>
-                <p className="mt-3">
-                  <a href={song.youtubeUrl} target="_blank" rel="noopener noreferrer" className={linkClass} aria-label={`${song.title} — ${song.youtubeVersionNote ? "公式歌唱動画" : "原曲の公式動画"}をYouTubeで聴く（新しいタブ）`}>{song.youtubeVersionNote ? "YouTubeで公式歌唱を聴く ↗" : "YouTubeで原曲を聴く ↗"}</a>
-                </p>
-                {song.youtubeVersionNote ? <p className="break-words text-xs leading-5 text-ink-muted">{song.youtubeVersionNote}</p> : null}
-                {song.karaoke ? (
-                  <div className="mt-1">
-                    <a href={song.karaoke.youtubeUrl} target="_blank" rel="noopener noreferrer" className={linkClass} aria-label={`${song.title} — カラオケの参考動画をYouTubeで開く（新しいタブ）`}>カラオケで歌う ↗</a>
-                    <p className="break-words text-xs leading-5 text-ink-muted">{song.karaoke.channel}の参考伴奏</p>
-                  </div>
-                ) : null}
-                <details className="mt-4 rounded-xl bg-sage-soft/40 px-3 py-2">
-                  <summary className="min-h-11 cursor-pointer py-2 text-sm font-semibold text-sage-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">歌った配信を見る（{new Set(song.performances.map((p) => p.id)).size}回）</summary>
-                  <ul className="mt-2 space-y-3">
-                    {song.performances.map((performance) => (
-                      <li key={`${performance.id}-${performance.timestamp}`} className="text-xs leading-6 text-ink-muted">
-                        <a
-                          href={`#recap-${performance.id}`}
-                          className={linkClass}
-                          onClick={(event) => {
-                            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-                            const target = document.getElementById(`recap-${performance.id}`);
-                            // onToggle keeps the existing recap state in sync, including repeated same-hash clicks.
-                            if (target instanceof HTMLDetailsElement) target.open = true;
-                          }}
-                        >
-                          {performance.dateLabel} {performance.theme}
-                        </a>
-                        <p>{performance.broadcastLabel} · 歌唱は録画内 {performance.timestamp}頃〜</p>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              {visibleSongs.map((song) => {
+                const broadcastCount = new Set(song.performances.map((performance) => performance.id)).size;
+                const latestPerformance = song.performances[0];
+                return (
+                  <li key={song.key} className="min-w-0">
+                    <details className="group rounded-2xl border border-sage/20 bg-paper-card shadow-card">
+                      <summary className="cursor-pointer list-none p-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2 [&::-webkit-details-marker]:hidden sm:p-5">
+                        <div className="flex min-w-0 items-start gap-3">
+                          <div className="min-w-0 flex-1">
+                            <h3 className="break-words text-base font-bold leading-relaxed text-ink sm:text-lg">{song.title}</h3>
+                            <p className="mt-0.5 break-words text-sm leading-6 text-ink-muted">{song.artist}</p>
+                            {song.youtubeVersionNote ? <p className="mt-1 break-words text-xs leading-5 text-ink-muted">{song.youtubeVersionNote}</p> : null}
+                          </div>
+                          <span className="shrink-0 rounded-full bg-sage-soft px-2.5 py-1 text-[11px] font-semibold text-sage-deep">{broadcastCount}配信</span>
+                        </div>
+                        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-ink-muted">
+                          <span>{latestPerformance ? `最近: ${latestPerformance.dateLabel} ${latestPerformance.theme}` : ""}</span>
+                          <span className="font-semibold text-sage-deep">
+                            <span className="group-open:hidden">詳細を見る ↓</span>
+                            <span className="hidden group-open:inline">閉じる ↑</span>
+                          </span>
+                        </div>
+                      </summary>
+                      <div className="border-t border-sage/15 px-4 pb-4 pt-3 sm:px-5 sm:pb-5">
+                        <p>
+                          <a href={song.youtubeUrl} target="_blank" rel="noopener noreferrer" className={linkClass} aria-label={`${song.title} — ${song.youtubeVersionNote ? "公式歌唱動画" : "原曲の公式動画"}をYouTubeで聴く（新しいタブ）`}>{song.youtubeVersionNote ? "YouTubeで公式歌唱を聴く ↗" : "YouTubeで原曲を聴く ↗"}</a>
+                        </p>
+                        {song.karaoke ? (
+                          <div className="mt-1">
+                            <a href={song.karaoke.youtubeUrl} target="_blank" rel="noopener noreferrer" className={linkClass} aria-label={`${song.title} — カラオケの参考動画をYouTubeで開く（新しいタブ）`}>カラオケで歌う ↗</a>
+                            <p className="break-words text-xs leading-5 text-ink-muted">{song.karaoke.channel}の参考伴奏</p>
+                          </div>
+                        ) : null}
+                        <div className="mt-4 rounded-xl bg-sage-soft/40 px-3 py-3">
+                          <p className="text-sm font-semibold text-sage-deep">歌った配信（{broadcastCount}回）</p>
+                          <ul className="mt-2 space-y-3">
+                            {song.performances.map((performance) => (
+                              <li key={`${performance.id}-${performance.timestamp}`} className="text-xs leading-6 text-ink-muted">
+                                <a
+                                  href={`#recap-${performance.id}`}
+                                  className={linkClass}
+                                  onClick={(event) => {
+                                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                                    const target = document.getElementById(`recap-${performance.id}`);
+                                    if (target instanceof HTMLDetailsElement) target.open = true;
+                                  }}
+                                >
+                                  {performance.dateLabel} {performance.theme}
+                                </a>
+                                <p>{performance.broadcastLabel} · 歌唱は録画内 {performance.timestamp}頃〜</p>
+                                {performance.clip ? (
+                                  <a href={`/activities/live/clips/#${songClipPerformanceAnchor(performance as typeof performance & { clip: NonNullable<typeof performance.clip> })}`} className={linkClass}>歌唱クリップを見る ▶</a>
+                                ) : null}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </details>
+                  </li>
+                );
+              })}
+            </ul>
+            {!hasActiveFilter && songs.length > INITIAL_SONG_COUNT ? (
+              <div className="mt-5 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setShowAll((value) => !value)}
+                  className="min-h-11 rounded-full border border-sage/30 bg-paper-card px-5 py-2 text-sm font-bold text-sage-deep shadow-card transition-colors hover:bg-sage-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+                >
+                  {showAll ? `最近の${INITIAL_SONG_COUNT}曲だけに戻す ↑` : `全${songs.length}曲を見る ↓`}
+                </button>
+              </div>
+            ) : null}
+          </>
         )}
       </div>
     </section>

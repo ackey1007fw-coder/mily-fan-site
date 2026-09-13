@@ -1,3 +1,5 @@
+import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
+import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
@@ -75,11 +77,16 @@ import {
   birthdayIndoorSelfieImage,
 } from "./birthdayIndoorSelfie.ts";
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
+import { morningFanroomVoice } from "./morningFanroomVoice.ts";
 import {
   OHAYO_WHITE_POLO_X_URL,
   ohayoWhitePoloPeaceImage,
 } from "./ohayoWhitePoloPeace.ts";
 import { pandaPastPicImage } from "./pandaPastPic.ts";
+import {
+  OHAYO_PANDA_SELFIE_X_URL,
+  ohayoPandaSelfieImage,
+} from "./ohayoPandaSelfie.ts";
 import { eveningRadioShowroomImage } from "./eveningRadioShowroom.ts";
 import { campusGirlsFinalStageFlyerImage } from "./campusGirlsFinalStageFlyer.ts";
 import {
@@ -99,6 +106,8 @@ import { webVoteDay2StoryVideo } from "./webVoteDay2StoryVideo.ts";
 import { voteDayFiveSoonStoryVideo } from "./voteDayFiveSoonStoryVideo.ts";
 import { morningThanksVoteStoryVideo } from "./morningThanksVoteStoryVideo.ts";
 import { streamThanksMorningSlotStoryVideo } from "./streamThanksMorningSlotStoryVideo.ts";
+import { finalDayNightStoryVideo } from "./finalDayNightStoryVideo.ts";
+import { miripochiStoryVideo } from "./miripochiStoryVideo.ts";
 import {
   PATON_VOTE_HOW_TO_CTA_LABEL,
   PATON_VOTE_HOW_TO_CTA_URL,
@@ -205,6 +214,196 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-13-seaside-circle-after-radio-thanks",
+    date: "2026-09-13",
+    activityIds: ["radio"],
+    title: "3時間の生放送ありがとう。ラジオ終了後のみりぃからお礼",
+    body:
+      "9月13日の「湘南シーサイドサークル」放送後、みりぃが動画でリスナーへお礼を届けました。「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」と感謝を伝えています。放送前のテーマ告知に続いて、3時間の生放送を終えたあとの感謝を伝える短い動画です。",
+    sourceLabel: "放送後の動画",
+    media: {
+      kind: "video",
+      src: "/media/news/mily-b114-01-seaside-circle-after-radio-thanks.mp4",
+      poster: "/media/news/mily-b114-01-seaside-circle-after-radio-thanks-poster.jpg",
+      width: 512,
+      height: 910,
+      alt: "ラジオ終了後、青いパーカー姿のみりぃが今週のメールへの感謝と3時間放送のお礼を伝える縦長動画",
+    },
+  },
+  {
+    id: "2026-09-13-seaside-circle-solo-theme",
+    // 放送日の告知記事。Instagram Storyの投稿日を示す値ではない。
+    date: "2026-09-13",
+    activityIds: ["radio"],
+    title: "9/13の湘南シーサイドサークル、テーマは「一人〇〇」",
+    body:
+      "9月13日（日）10:00〜13:00、FM85.6MHz「湘南シーサイドサークル」の生放送が案内されています。今回のテーマは「一人〇〇」。みりぃがシェアした番組告知には、師匠・Mily・もこの名前と、メッセージフォームの案内が掲載されています。一人で楽しむことや、挑戦してみたいこと。テーマをきっかけに、自分ならどんな話を送るか考えながら楽しみたい放送です。こちらの動画で番組案内をご覧いただけます。",
+    sourceLabel: "Instagram Story（番組告知の再共有）",
+    media: {
+      kind: "video",
+      src: "/media/news/mily-b111-01-seaside-circle-solo-theme.mp4",
+      poster: "/media/news/mily-b111-01-seaside-circle-solo-theme-poster.jpg",
+      width: 512,
+      height: 910,
+      alt: "9月13日（日）10:00〜13:00の湘南シーサイドサークル生放送とテーマ「一人〇〇」、師匠・Mily・もこを案内する縦長動画",
+    },
+  },
+  {
+    id: "2026-09-13-morning-fanroom-radio-vote",
+    date: "2026-09-13",
+    title: "朝配信ありがとう。ラジオへ出発、WEB投票最終日のごあいさつ",
+    body:
+      "9月13日朝、みりぃがSHOWROOMファンルームで朝配信に来てくれた皆さんへ感謝を伝え、「ラジオ行ってきまーす‼️」と出発のごあいさつ。同じ6:43の投稿には、青いパーカー姿でピースをするセルフィーも添えられました。\n\nあわせて、この日がWEB投票最終日であることを案内し、MISS CIRCLE CONTEST 2026のENTRY 734へのリンクを届けています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    additionalCtas: [
+      { label: "ENTRY 734", url: "https://2026.misscircle.jp/entry/734" },
+      { label: missCircleWebVoteLink.label, url: missCircleWebVoteLink.url },
+    ],
+    media: morningFanroomSelfieImage,
+  },
+  {
+    id: "2026-09-12-avatar-achievement-story",
+    date: "2026-09-12",
+    title: "初めてのアバ権達成！3次審査を走り切った感謝を届けて",
+    body:
+      "みりぃがInstagram Storyで、3次審査を無事に走り切ったことを報告。「いつも応援ありがとうございます」と、応援してくれた皆さんへの感謝を伝えました。\n\n" +
+      "さらに、目標に掲げていた「アバ権」を初めて達成したことも報告。43日間、初期アバターで配信してきたみりぃは、「やーっと自分のアバター‼️」と喜びをつづり、「楽しみにしててねっ♪」「撮影会来てくれるかな？！」と呼びかけています。動画では、投票は13日までと案内しています。\n\n" +
+      "Xでも、完走・アバ権とWEB投票期限（9/13まで）を案内しています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalSources: [
+      {
+        label: "みりぃのX",
+        url: "https://x.com/Mily_chan36/status/2098778956535407065",
+      },
+      {
+        label: "みりぃのX",
+        url: "https://x.com/Mily_chan36/status/2098779286245454075",
+      },
+    ],
+    additionalCtas: [
+      { label: missCircleWebVoteLink.label, url: missCircleWebVoteLink.url },
+    ],
+    media: avatarAchievementStoryVideo,
+  },
+  {
+    id: "2026-09-12-ohayo-panda-selfie",
+    date: "2026-09-12",
+    title: "3次SHOWROOM審査最終日、20:40〜21:59へ",
+    body:
+      "9月12日朝、みりぃがXで朝枠への感謝と、3次SHOWROOM審査最終日の20:40〜21:59配信を案内しました。投稿時点でアバター権獲得まで残り36,599ptと伝え、投票報告も呼びかけています。添付セルフィーには「おはよう♡」の文字が入っています。",
+    source: OHAYO_PANDA_SELFIE_X_URL,
+    sourceLabel: "元のX投稿を見る",
+    additionalCtas: [
+      {
+        label: "SHOWROOM",
+        url: "https://www.showroom-live.com/r/circle2026_0734",
+      },
+      {
+        label: missCircleWebVoteLink.label,
+        url: missCircleWebVoteLink.url,
+      },
+    ],
+    media: ohayoPandaSelfieImage,
+    message: {
+      label: "画像内テキスト",
+      text: "おはよう♡",
+    },
+  },
+  {
+    id: "2026-09-11-miripochi-story",
+    date: "2026-09-11",
+    sameDayOrder: 50,
+    title: "「今日のみりぽち完了していますか!?」夜の投票呼びかけ",
+    body:
+      "9月11日夜、みりぃがInstagram Storyで「今日のみりぽち完了していますか!?」と投票を呼びかけました。リンクスタンプの遷移先は素材だけでは確認できないため、本文では断定していません。投票期間中のWEB投票先は、サイトで別途確認済みの情報を使用しています。",
+    sourceLabel: miripochiStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: missCircleWebVoteLink.label,
+        url: missCircleWebVoteLink.url,
+      },
+    ],
+    media: miripochiStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "今日のみりぽち完了していますか!? 🗳️✨",
+    },
+  },
+  {
+    id: "2026-09-11-night-stream-thanks-final-day-story",
+    date: "2026-09-11",
+    sameDayOrder: 40,
+    title: "夜配信ありがとう、9/12は配信審査の最終日へ",
+    body:
+      "9月11日夜、みりぃがInstagram Storyで夜配信への感謝を伝え、翌9月12日の配信を8:00〜8:40、20:40〜21:59（その後も配信）と案内しました。Story内の「8/12」は本人が直後に「8月じゃなくて9月じゃーん！！！間違えすみません🙏」と訂正。公開動画の表示はそのまま残し、サイト本文では9/12の予定として整理しています。",
+    sourceLabel: finalDayNightStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: "SHOWROOM",
+        url: "https://www.showroom-live.com/r/circle2026_0734",
+      },
+    ],
+    media: finalDayNightStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "夜配信盛り上げてくれてありがとうございました🥹🙌🏻🩵\n" +
+        "たくさんの配信者さんも来てくれて楽しかったね♪\n\n" +
+        "皆さんと最後まで駆け抜けたいからこそ、\n" +
+        "改めてちゃんと自分の管理もしていきます。\n" +
+        "これからも頑張らせてください🙏",
+    },
+  },
+  {
+    id: "2026-09-11-night-fanroom-final-day",
+    date: "2026-09-11",
+    sameDayOrder: 30,
+    title: "夜配信ありがとう、最終日へ「駆け抜けるぞー🔥🔥🔥」",
+    body:
+      "9月11日23:10、SHOWROOMファンルームで夜配信への感謝を伝え、翌9月12日の最初の枠を8:00〜8:40、ガチイベ最終枠を20:40〜21:59と案内しました。「その後も配信します」とし、3次審査突破とアバター権獲得へ向けて最後まで駆け抜ける思いを届けています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    additionalCtas: [
+      {
+        label: "ENTRY 734",
+        url: "https://2026.misscircle.jp/entry/734",
+      },
+      {
+        label: "SHOWROOM",
+        url: "https://www.showroom-live.com/r/circle2026_0734",
+      },
+    ],
+    message: {
+      label: "みりぃのファンルーム",
+      text:
+        "皆様、夜配信来てくれてありがとう〜😳💖\n" +
+        "また切り替えて頑張らせてください。\n\n" +
+        "明日の最初の枠は8:00〜8:40‼️\n" +
+        "そして、夜はガチイベ最終枠。20:40〜21:59‼️（その後も配信します🙂‍↕️）\n\n" +
+        "最終日。3次審査突破&アバ権獲得に向けて駆け抜けるぞー🔥🔥🔥",
+    },
+  },
+  {
+    id: "2026-09-11-morning-fanroom-voice",
+    date: "2026-09-11",
+    activityIds: ["live-stream"],
+    title: "朝の音声メッセージ、応援への感謝",
+    body: "9月11日06:41、SHOWROOMファンルームに音声メッセージを投稿。朝の配信へのお礼と、これからも頑張りたいという思いを伝えています。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: morningFanroomVoice,
+  },
   {
     id: "2026-09-09-morning-thanks-night-stream",
     date: "2026-09-09",
