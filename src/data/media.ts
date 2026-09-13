@@ -1,3 +1,4 @@
+import { morningFanroomSelfiePhoto } from "./morningFanroomSelfie.ts";
 /**
  * Photo / video manifest.
  *
@@ -25,6 +26,7 @@ import { morningMakeupShowroomPhoto } from "./morningMakeupShowroomImage.ts";
 import { gandaBeforeNightStreamPhoto } from "./gandaBeforeNightStream.ts";
 import { movieNightPhotos } from "./movieNightPhotos.ts";
 import { campusGirlsPrelimFinalResultPhoto } from "./campusGirlsPrelimFinalResultImage.ts";
+import { nightFanroomSelfiePhoto } from "./nightFanroomSelfie.ts";
 
 export type MediaKind = "photo" | "video";
 
@@ -361,6 +363,8 @@ export const media: MediaItem[] = [
     focal: "50% 70%",
     published: true,
   },
+  nightFanroomSelfiePhoto,
+  morningFanroomSelfiePhoto,
 ];
 
 export function srcSetFor(item: MediaItem, format: "jpg" | "webp"): string {

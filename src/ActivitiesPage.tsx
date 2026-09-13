@@ -1,9 +1,10 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { NewsImage } from "./components/NewsImage";
+import { StreamSongCatalog, StreamSongCatalogEntry, StreamSongClipsEntry } from "./components/StreamSongCatalog";
 import {
   activities,
   type Activity,
@@ -11,7 +12,7 @@ import {
 } from "./data/activities";
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
-import { radioEpisode20260830 } from "./data/radioEpisodes";
+import { radioEpisodes, type RadioEpisode } from "./data/radioEpisodes";
 import { streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
@@ -184,6 +185,11 @@ function ActivityHubCard({ activity }: { activity: Activity }) {
           詳細を見る
         </a>
       </p>
+      {activity.id === "live-stream" ? (
+        <a href={`${activity.route}#song-catalog`} className={`${secondaryCta} mt-3`}>
+          ♪ みりぃの歌リストを見る
+        </a>
+      ) : null}
     </article>
   );
 }
@@ -257,6 +263,10 @@ function ActivityHero({ activity }: { activity: Activity }) {
         <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">
           {activity.summary}
         </p>
+        {activity.id === "live-stream" ? <>
+          <StreamSongCatalogEntry />
+          <StreamSongClipsEntry />
+        </> : null}
       </div>
     </header>
   );
@@ -395,8 +405,16 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
 
 function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "radio") return null;
-  const episode = radioEpisode20260830;
+  return (
+    <>
+      {radioEpisodes.map((episode) => (
+        <RadioEpisodeRecapArticle key={episode.id} episode={episode} />
+      ))}
+    </>
+  );
+}
 
+function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
   return (
     <SectionShell eyebrow="On Air Archive" title={`${episode.dateLabel} ${episode.theme}`}>
       <div className="mt-5 rounded-3xl border border-apricot/30 bg-apricot-soft/45 p-5 shadow-card sm:p-7">
@@ -411,11 +429,11 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
         </p>
       </div>
 
-      <section aria-labelledby="radio-mily-highlights" className="mt-9">
+      {episode.milyHighlights.length > 0 ? <section aria-labelledby={`${episode.id}-mily-highlights`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Mily Highlights
         </p>
-        <h3 id="radio-mily-highlights" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={`${episode.id}-mily-highlights`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           みりぃの見どころ
         </h3>
         <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -437,13 +455,13 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
             </li>
           ))}
         </ul>
-      </section>
+      </section> : null}
 
-      <section aria-labelledby="radio-listener-messages" className="mt-9">
+      {episode.listenerMessages.length > 0 ? <section aria-labelledby={`${episode.id}-listener-messages`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Listener Messages
         </p>
-        <h3 id="radio-listener-messages" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={`${episode.id}-listener-messages`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           番組で紹介されたリスナーメッセージ
         </h3>
         <ul className="mt-5 space-y-4">
@@ -460,7 +478,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
             </li>
           ))}
         </ul>
-      </section>
+      </section> : null}
 
       <details className="mt-9 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
         <summary className="cursor-pointer font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
@@ -479,7 +497,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
       </details>
 
       <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
-        <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p>
+        {episode.nextEpisodeNote ? <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p> : null}
         <p className="mt-3 text-xs leading-6 text-ink-muted">
           出典: {episode.sourceLabel} · {formatDate(episode.verifiedAt)}確認
         </p>
@@ -542,9 +560,19 @@ function StreamRecapArticle({
 }) {
   const [open, setOpen] = useState(defaultOpen);
 
+  useEffect(() => {
+    const openLinkedRecap = () => {
+      if (window.location.hash === `#recap-${recap.id}`) setOpen(true);
+    };
+    openLinkedRecap();
+    window.addEventListener("hashchange", openLinkedRecap);
+    return () => window.removeEventListener("hashchange", openLinkedRecap);
+  }, [recap.id]);
+
   return (
     <details
-      className="group rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card open:shadow-card sm:p-6"
+      id={`recap-${recap.id}`}
+      className="group scroll-mt-24 rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card open:shadow-card sm:p-6"
       open={open}
       onToggle={(event) => {
         const next = event.currentTarget.open;
@@ -589,7 +617,7 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回に歌った曲"
           id={`${recap.id}-songs`}
-          note="「原曲を聴く」は原曲の公式動画、「カラオケで歌う」は参考伴奏です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
+          note="「原曲を聴く」は原曲の公式動画、「公式歌唱を聴く」は版を明記した公式動画、「カラオケで歌う」は参考伴奏です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
         >
           <ol className="mt-3 space-y-3">
             {recap.songs.map((song, index) => (
@@ -618,10 +646,11 @@ function StreamRecapArticle({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4"
-                    aria-label={`${song.title} — 原曲の公式動画をYouTubeで聴く（新しいタブ）`}
+                    aria-label={`${song.title} — ${song.youtubeVersionNote ? "公式歌唱動画" : "原曲の公式動画"}をYouTubeで聴く（新しいタブ）`}
                   >
-                    YouTubeで原曲を聴く ↗
+                    {song.youtubeVersionNote ? "YouTubeで公式歌唱を聴く ↗" : "YouTubeで原曲を聴く ↗"}
                   </a>
+                  {song.youtubeVersionNote ? <p className="break-words text-xs leading-5 text-ink-muted">{song.youtubeVersionNote}</p> : null}
                   {song.karaoke ? (
                     <div className="mt-1">
                       <a
@@ -1074,6 +1103,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
+        {content.activity.id === "live-stream" ? <StreamSongCatalog /> : null}
         <RadioEpisodeRecap activityId={content.activity.id} />
         <StreamRecap activityId={content.activity.id} />
         <RadioStorySpotlight activityId={content.activity.id} />

@@ -2,6 +2,18 @@ export * from "../../src/data/news.ts";
 import { news as currentNews } from "../../src/data/news.ts";
 
 const laterNewsIds = new Set([
+  "2026-09-13-seaside-circle-after-radio-thanks",
+  "2026-09-13-seaside-circle-solo-theme",
+  "2026-09-12-avatar-achievement-story",
+  "2026-09-13-morning-fanroom-radio-vote",
+  "2026-09-12-ohayo-panda-selfie",
+  "2026-09-11-miripochi-story",
+  "2026-09-11-night-stream-thanks-final-day-story",
+  "2026-09-11-night-fanroom-final-day",
+  "2026-09-11-morning-fanroom-voice",
+  "2026-09-09-morning-thanks-night-stream",
+  "2026-09-08-stream-thanks-morning-slot-story",
+  "2026-09-07-mixch-ex-period-day1",
   "2026-09-07-campus-girls-finals-ex-vol1",
   "2026-09-07-morning-thanks-vote-day5-story",
   "2026-09-06-third-round-vote-day5-soon-story",
