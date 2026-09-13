@@ -3707,3 +3707,12 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 録画全体の候補を比較し、実寸で本人の表情と写り込みを確認した10枚を採用。本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
 - 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。JPEGにEXIF / XMP / IPTCなしを確認。
 - LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。歌唱動画は別の権利確認ゲートを維持し、このbatchには含めない。
+
+## 素材台帳（batch b114 / source date・承認日 2026-09-13）
+
+- オーナーが放送終了後の動画と記事のサイト掲載を明示依頼。9月13日のラジオ終了後のお礼NEWSとして使用。
+- 画面内で「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」を確認。恒久SNS permalinkは未確認のため推測しない。
+- 公開派生は `news/mily-b114-01-seaside-circle-after-radio-thanks.mp4`。512×910、7.700秒、622,490 bytes、sha256 `e1da66c20b56e6c257626a6b4a61bc04f6d8d3eb4a3d9819472de5e64ccf2154`。H.264 Constrained Baseline / yuv420p / faststart、音声なし。
+- 元の縦構図・全尺を保持。crop・顔補正・AI生成・生成塗り足しなし。source metadata / chapterを除去。元素材内のフェイスフィルターはそのまま。
+- posterは公開MP4の3秒地点の実フレーム。56,571 bytes、sha256 `9a7a72dcc75da2d6d307c90c2d129d7921baab2a6ef0c6329416254325712a7f`。本人以外の人物、コメント、通知、住所・連絡先など公開を避ける情報の写り込みなし。
+- HOME Latest / NEWSとradio activityの関連NEWSに掲載。Gallery / Stories / profile / events / streamScheduleへ複製しない。受け渡し用ファイル名・ID・私的URLは公開repoへ残さない。

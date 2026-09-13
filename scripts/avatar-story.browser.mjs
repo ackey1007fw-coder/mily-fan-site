@@ -3,6 +3,8 @@ import { spawn } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { news, sortNewsByDateDesc } from '../src/data/news.ts';
+import { HOME_NEWS_LIMIT, HOME_NEWS_ARCHIVE_CTA, NEWS_ARCHIVE_INITIAL, ARCHIVE_PAGE_SIZE, ARCHIVE_LOAD_MORE_LABEL } from '../src/lib/homePortal.ts';
 const { chromium } = await import(pathToFileURL(join(process.env.PLAYWRIGHT_MODULE_ROOT, 'playwright/index.mjs')).href);
 const output = join(process.env.SONG_CATALOG_ARTIFACT_DIR, 'avatar-story');
 await mkdir(output, { recursive: true });
@@ -23,6 +25,11 @@ try {
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto('http://127.0.0.1:4175/news/', { waitUntil: 'networkidle' });
+    const archiveIndex = sortNewsByDateDesc(news).findIndex(item => item.id === '2026-09-12-avatar-achievement-story');
+    assert.ok(archiveIndex >= 0);
+    for (let count = NEWS_ARCHIVE_INITIAL; count <= archiveIndex; count += ARCHIVE_PAGE_SIZE) {
+      await page.locator('#latest').getByRole('button', { name: ARCHIVE_LOAD_MORE_LABEL, exact: true }).click();
+    }
     const card = page.locator('li').filter({ hasText: '初めてのアバ権達成！' });
     await card.waitFor();
     await card.scrollIntoViewIfNeeded();
@@ -40,7 +47,12 @@ try {
     assert.deepEqual(errors, []);
     await card.screenshot({ path: join(output, `${name}.png`) });
     await page.goto('http://127.0.0.1:4175/', { waitUntil: 'domcontentloaded' });
-    await page.locator('#latest').getByText('初めてのアバ権達成！3次審査を走り切った感謝を届けて', { exact: true }).waitFor();
+    // HOME is capped; archived items must not be expected in the latest slots forever.
+    const expectedTitles = sortNewsByDateDesc(news).slice(0, HOME_NEWS_LIMIT).map(item => item.title);
+    const titles = page.locator('#latest li > p.font-semibold');
+    await titles.first().waitFor();
+    assert.deepEqual(await titles.allTextContents(), expectedTitles);
+    assert.equal(await page.locator('#latest').getByRole('link', { name: HOME_NEWS_ARCHIVE_CTA, exact: true }).getAttribute('href'), '/news/');
     results.push({ name, state, errors, status: 'passed' });
     await page.close();
   }
