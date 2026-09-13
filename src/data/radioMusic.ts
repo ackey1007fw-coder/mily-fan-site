@@ -111,6 +111,38 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
     "note": "曲紹介の自動文字起こしを一部区間の再認識結果で再照合し、曲名・アーティストと公式公開先を確認した楽曲を掲載しています。手動での全編聴取は未実施です。時刻は録音開始から曲紹介箇所までの目安です。YouTubeは各公開元の映像へ案内します。"
   },
   {
+    "id": "2026-09-06-august-memories",
+    "date": "2026-09-06",
+    "dateLabel": "2026.09.06（日）",
+    "theme": "8月の思い出",
+    "broadcastLabel": "10:00〜13:00 生放送",
+    "songs": [
+      {
+        "timestamp": "0:06:13",
+        "title": "日曜日の恋人たち",
+        "artist": "サニーデイ・サービス",
+        "youtubeUrl": "https://www.youtube.com/watch?v=ZuegBbQzvG4"
+      },
+      {
+        "timestamp": "0:13:25",
+        "title": "It's Great To Be Here",
+        "artist": "Jackson 5",
+        "youtubeUrl": "https://www.youtube.com/watch?v=BnQnq5PiSaI",
+        "youtubeVersionNote": "リンク先は権利者配信のアルバム版。"
+      },
+      {
+        "timestamp": "0:38:50",
+        "title": "Help Me, Rhonda",
+        "artist": "The Beach Boys",
+        "youtubeUrl": "https://www.youtube.com/watch?v=j1THDLgL_bs",
+        "youtubeVersionNote": "リンク先は権利者配信のステレオ版。"
+      }
+    ],
+    "sourceLabel": "2026/09/06 放送内の曲紹介・各楽曲の公式公開情報",
+    "verifiedAt": "2026-09-14",
+    "note": "録音から曲紹介を確認できた楽曲を順次掲載しています。全曲の照合は進行中です。時刻は録音内の曲紹介の目安です。"
+  },
+  {
     "id": "2026-08-30-movie-special",
     "date": "2026-08-30",
     "dateLabel": "2026.08.30（日）",

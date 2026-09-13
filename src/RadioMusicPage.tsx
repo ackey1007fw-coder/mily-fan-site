@@ -31,7 +31,7 @@ export default function RadioMusicPage() {
             <nav aria-label="放送日から楽曲を探す" className="mt-5 flex flex-wrap gap-2">
               {episodes.map((episode) => <a key={episode.id} href={`#music-${episode.id}`} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-bold text-sage-deep">{episode.dateLabel} · {episode.songs.length}曲</a>)}
             </nav>
-            <p className="mt-4 text-sm leading-7 text-ink-muted">2026.09.06の放送は曲目を確認中です。掲載済みの回にも確認中の楽曲があり、全曲を網羅したリストではありません。</p>
+            <p className="mt-4 text-sm leading-7 text-ink-muted">各回に確認中の楽曲があります。確認できた曲から追加しており、全曲を網羅したリストではありません。</p>
             <div className="mt-5 rounded-2xl border border-apricot/30 bg-apricot-soft/45 p-4 text-sm leading-7 text-ink-muted">
               <p><strong className="text-ink">{songCount}曲掲載中。</strong> 曲名・アーティストを確認でき、公開YouTubeリンクも確認できた楽曲だけを掲載します。</p>
               <p className="mt-2">放送音源や歌詞は掲載しません。リンク先の楽曲・映像の権利は各権利者に帰属します。</p>
