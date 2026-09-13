@@ -65,6 +65,7 @@ export const activities: Activity[] = [
       "fm-smw-staff",
       "fm-smw-mily-profile",
       "fm-smw-ssc-program",
+      "mily-radio-on-air-music",
       "fm-smw-ssc-message-form",
       "fm-smw-ssc-instagram",
       "fm-smw-ssc-tiktok",
