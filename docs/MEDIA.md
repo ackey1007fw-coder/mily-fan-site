@@ -3696,3 +3696,14 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 録画全体を約1分間隔で概観し、メイク開始からラジオへ向かう支度が整うまでの流れが伝わる8枚を選定。本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
 - 元の640×360・16:9を保持。crop・scaleなし。ffmpegで録画の実フレームをJPEG化し、source metadataを引き継がない。顔のAI生成・補正・置換・生成塗り足しなし。
 - LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。録音・録画・全文文字起こしも公開しない。
+
+## 素材台帳（batch b113 / source date・承認日 2026-09-13）
+
+9月12日20:40頃開始のSHOWROOM夜配信録画から選んだ実フレーム10枚。オーナーが提示された10枚すべてのLIVE STREAM掲載を2026-09-13に明示承認。最新mainとOpen PRを照合し、b113の未使用を確認して採番した。
+
+- 公開ファイル: `live/mily-b113-01-hands-together-smile.jpg` 〜 `mily-b113-10-small-pose.jpg`。全10枚640×360 JPEG。
+- 代表: `mily-b113-05-bright-smile.jpg`。保存ZIP: `live/mily-b113-night-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。録画原本・受け渡しURL / ID・全文文字起こしは公開しない。
+- 録画全体の候補を比較し、実寸で本人の表情と写り込みを確認した10枚を採用。本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の写り込みなし。
+- 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。JPEGにEXIF / XMP / IPTCなしを確認。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。歌唱動画は別の権利確認ゲートを維持し、このbatchには含めない。

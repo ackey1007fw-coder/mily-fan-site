@@ -1,6 +1,9 @@
 // Owner-requested song links, verified against artist/label or accompaniment creator channels.
 // Removing only these exact URLs lets existing private-archive checks keep running.
 const approved = new Set([
+  "https://www.youtube.com/watch?v=cpIa89_rZoA",
+  "https://www.youtube.com/watch?v=FKXBSuN-nQo",
+  "https://www.youtube.com/watch?v=VZBU8LvZ91Q",
   "https://www.youtube.com/watch?v=d6i4AtCxrDo",
   "https://www.youtube.com/watch?v=FFITBgsyVr4",
   "https://www.youtube.com/watch?v=zhCtzmDWsN0",
