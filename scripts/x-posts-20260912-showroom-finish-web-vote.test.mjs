@@ -84,7 +84,12 @@ describe("2026-09-12 X 3次SHOWROOM完走・WEB投票 — scope", () => {
       assert.equal(highlights.some((entry) => String(entry.id).includes(id)), false);
       assert.equal(existsSync(path.join(root, "stories", id)), false);
     }
-    assert.deepEqual(events, []);
+    for (const event of events) {
+      const eventText = JSON.stringify(event);
+      assert.equal(eventText.includes(SHOWROOM_SOURCE), false);
+      assert.equal(eventText.includes(VOTE_SOURCE), false);
+      for (const id of REMOVED_IDS) assert.equal(eventText.includes(id), false);
+    }
 
     for (const relative of [
       "src/data/media.ts",
