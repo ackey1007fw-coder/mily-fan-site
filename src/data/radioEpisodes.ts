@@ -125,3 +125,41 @@ export const radioEpisode20260830: RadioEpisode = {
   transcriptionNote:
     "行ごとの自動文字起こし・段落校正版・統合版を照合して要約しています。固有名詞や細かな発言には聞き取り誤りの可能性があります。楽曲・交通情報はタイムラインから省略し、録音音声と全文文字起こしは掲載していません。",
 };
+
+
+export const radioEpisode20260913: RadioEpisode = {
+  "id": "2026-09-13-solo-theme",
+  "date": "2026-09-13",
+  "dateLabel": "2026.09.13（日）",
+  "theme": "一人○○",
+  "broadcastLabel": "10:00〜13:00 生放送",
+  "presenters": [
+    "師匠",
+    "みりぃ",
+    "もこ（ディレクター）"
+  ],
+  "summary": "「一人○○」をテーマに、ひとりで楽しむことについてトークした回。みりぃの一人カラオケの話題のほか、ガチンコディベートや謎解きゲームの紹介がありました。",
+  "milyHighlights": [
+    {
+      "timestamp": "0:38:10",
+      "title": "一人カラオケの話題",
+      "body": "テーマ「一人○○」にちなみ、みりぃのひとりカラオケの話題が紹介されました。"
+    }
+  ],
+  "listenerMessages": [],
+  "timeline": [
+    {
+      "timestamp": "0:02:46",
+      "label": "オープニング／出演者紹介"
+    },
+    { "timestamp": "0:38:10", "label": "みりぃの一人カラオケの話題" },
+    { "timestamp": "1:47:00", "label": "ガチンコディベート／師匠の勝利を発表" },
+    { "timestamp": "2:11:00", "label": "「これ好きこれ知って」／謎解きゲームの話題" }
+  ],
+  "nextEpisodeNote": "",
+  "sourceLabel": "2026年9月13日 放送録音・文字起こし（オーナー提供）",
+  "verifiedAt": "2026-09-13",
+  "transcriptionNote": "自動文字起こしと一部区間の再認識結果を照合し、確認できた話題に限って要約しています。全文の手動校正は未実施で、細かな発言や発言者が不確かな箇所は省略しています。タイムスタンプは番組前後を含む録音開始からの目安です。録音音声と全文文字起こしは掲載していません。"
+};
+
+export const radioEpisodes: RadioEpisode[] = [radioEpisode20260913, radioEpisode20260830];
