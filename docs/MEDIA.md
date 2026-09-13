@@ -3716,3 +3716,20 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 元の縦構図・全尺を保持。crop・顔補正・AI生成・生成塗り足しなし。source metadata / chapterを除去。元素材内のフェイスフィルターはそのまま。
 - posterは公開MP4の3秒地点の実フレーム。56,571 bytes、sha256 `9a7a72dcc75da2d6d307c90c2d129d7921baab2a6ef0c6329416254325712a7f`。本人以外の人物、コメント、通知、住所・連絡先など公開を避ける情報の写り込みなし。
 - HOME Latest / NEWSとradio activityの関連NEWSに掲載。Gallery / Stories / profile / events / streamScheduleへ複製しない。受け渡し用ファイル名・ID・私的URLは公開repoへ残さない。
+
+## 素材台帳（batch b115 / source date 2026-09-12 / 承認日 2026-09-13）
+
+9月12日20:40頃開始のSHOWROOM夜配信から作成した歌唱クリップ8本。オーナーが当該配信の本人歌唱シーンをサイトへ実装するよう明示依頼した範囲で、既存 `songs[]` の各歌唱へ `clip` として紐づける。私的な許可確認、録画原本、非公開URL / ID / ローカルパスは公開repoへ持ち込まない。
+
+- `live-clips/mily-b115-01-ashita-wa-kit-to-ii-hi-ni-naru.mp4`: 明日はきっといい日になる。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。2,032,960 bytes / sha256 `e12e8ac6e7c7fab1c7b8093aa06cd79cc057403e67d57cb7d414b5b16c224410`。posterは動画内20秒の実フレーム、17,711 bytes / sha256 `df207642675df360305a5cd60f211ea16a1f9b7b1e553e0cf2931dcb173cc606`。
+- `live-clips/mily-b115-02-chippokena-yuuki.mp4`: ちっぽけな勇気。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,960,561 bytes / sha256 `fddef1569a2c8ac0231ff97bb8900f2d1141e6c6f417943fbb9efe3b76116d2b`。posterは動画内20秒の実フレーム、17,906 bytes / sha256 `afad240d6bdfdb9e19616f9c9c111e6512b10d6f2c14f8af5f3aa182193ff60a`。
+- `live-clips/mily-b115-03-kawaiidakeja-dame-desuka.mp4`: かわいいだけじゃだめですか？。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,932,085 bytes / sha256 `b0c08b25ea5a4d8c1d80873452535717f68001fcfd2c4f949a8b786d140b54df`。posterは動画内12秒の実フレーム、16,468 bytes / sha256 `e2c46d5c35b5567703aad5ac897e5e7778411e6d521a46fb14bedd4b8f26e3e9`。
+- `live-clips/mily-b115-04-umarete-hajimete.mp4`: 生まれてはじめて。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,660,412 bytes / sha256 `5be36256f5d2a284138844c937730650679fad6d8ec0c0daacd5c58f80c2954a`。posterは動画内16秒の実フレーム、16,308 bytes / sha256 `706d1fe83f32987bb826a92933ad3f3117d2dac58ba1528231ae87bd39612e5f`。
+- `live-clips/mily-b115-05-keserasera.mp4`: ケセラセラ。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,692,411 bytes / sha256 `3f6cd724509d3054a5866fc536b3512c0a89e9017d4ca0263d6c0cb5623ec545`。posterは動画内12秒の実フレーム、16,715 bytes / sha256 `9f19e026bbad5b4eccb6a53dc277279843b3556292bd05e2bbd5f8b7bae7d929`。
+- `live-clips/mily-b115-06-cho-saikyo.mp4`: 超最強。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,907,330 bytes / sha256 `70465f9153ccc49c1bc40272c0acab9389d30e1babb3b343902838c09f30c2be`。posterは動画内4秒の実フレーム、18,871 bytes / sha256 `86beb7f2006c26369cc75cd78be1377a17adea36abb7c57a7cba2d681e7e74fa`。
+- `live-clips/mily-b115-07-ashitamo.mp4`: 明日も。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,743,923 bytes / sha256 `2459ee54eaf7d958c2af5698f9794796fc8a29ce1b6156b6cbb3bb657b2d90e9`。posterは動画内20秒の実フレーム、16,062 bytes / sha256 `02a140b33a28e68f6ccfd18d4a4e251c6a3a44bba3669c0b4e2aa2ba9be37193`。
+- `live-clips/mily-b115-08-arigatou.mp4`: ありがとう。24秒 / 640×360 / H.264 Main / AAC-LC / faststart。1,602,214 bytes / sha256 `b8d83dd4bc2ba2b3c7b913bf46292d14681f85baa3e8827b383482fa433c2d60`。posterは動画内16秒の実フレーム、17,223 bytes / sha256 `19ca7e7ff9763e7c853016a5a41d1dcab952325a46338f7c18308deff0f11d61`。
+- 8本とも原画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップなし。公開派生ではsource metadata / chapterを除去する。
+- 実フレーム候補を比較し、本人以外の人物、コメント欄、視聴者名・アイコン、住所・連絡先など公開を避ける情報の写り込みがない範囲を使用する。
+- `sourceTimestamp` は複数録画の重複を照合した確認用統合記録の先頭からの切出し目安で、配信開始時刻そのものではない。既存の歌唱開始 `timestamp` は変更しない。
+- LIVE SONG CLIPS専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。楽曲・伴奏等の権利は各権利者に帰属し、短尺であることだけを権利許諾の根拠にはしない。

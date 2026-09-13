@@ -15,6 +15,7 @@
 - 次回配信はSHOWROOMの本人ルーム登録予定を優先。新鮮な次回枠と同じ日・それ以前の旧枠は混ぜず、翌日以降はミスサークル公式で補完。登録予定には取得元と確認時刻を表示
 - 配信予定を ENTRY 734 ページ起点で自動取得（`/api/mily-schedule`。成功時は公式枠のみ、失敗時は手入力 fallback → 非表示。表示中は5分TTL経過後に再取得）
 - FM「湘南シーサイドサークル」の放送状態を自動取得（`/api/mily-radio-status`。取得失敗でもサイトは壊れない）
+- FM「湘南シーサイドサークル」で確認できたオンエア楽曲を `/activities/radio/music/` にまとめ、確認済みの公開YouTubeへ案内します
 - Follow Mily: X / Instagram / TikTok / SHOWROOM / MixChannel（X〜SHOWROOMはENTRY 734実ページ、MixChannelは本人プロフィールで確認済み）
 - FM湘南マジックウェイブへの導線（個別プロフィール・番組ページ）
 - ギャラリーに写真と動画を掲載しています（独立動画は Latest と同じ公開派生を共有できる。手順は `docs/MEDIA.md`）
@@ -44,6 +45,7 @@ pnpm build
 | `src/data/links.ts` | その他リンク |
 | `src/data/highlights.ts` | ハイライト |
 | `src/data/radio.ts` | FM湘南マジックウェイブの確認済み番組枠 |
+| `src/data/radioMusic.ts` | 確認済みのオンエア楽曲と公開YouTubeリンク |
 
 ## 運用
 
