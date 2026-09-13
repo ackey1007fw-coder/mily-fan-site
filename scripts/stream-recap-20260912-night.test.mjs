@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { it } from 'node:test';
 import sharp from 'sharp';
 import { streamRecaps, streamRecap20260912Yoru } from '../src/data/streamRecaps.ts';
-import { RANKING_NOTE } from '../src/data/streamRecapRules.ts';
+import { buildRankingNote } from '../src/data/streamRecapRules.ts';
 import { withoutApprovedSongLinks } from './approved-song-links.mjs';
 const recap = streamRecap20260912Yoru;
 const seconds = value => value.split(':').map(Number).reduce((n, v) => n * 60 + v, 0);
@@ -31,7 +31,21 @@ it('keeps avatar achievement separate from the not-yet-announced contest result'
   assert.deepEqual(recap.goals.find(g => g.item === 'アバター権'), { item:'アバター権',target:'獲得',statusThen:'達成を報告' });
   assert.equal(recap.goals.find(g => g.item === '三次審査').statusThen, '結果待ち');
   assert.match(recap.summary, /通過は結果待ち/);
-  assert.deepEqual(recap.ranking, [RANKING_NOTE]);
+  assert.deepEqual(recap.ranking, [buildRankingNote(13, 1, "during")]);
+  assert.equal(recap.ranking[0], "配信中に、13位から1位までランキングを読み上げました。個人名は掲載していません。");
+});
+
+it('separates the still source date from its later approval date', async () => {
+  const media = await readFile(new URL('../docs/MEDIA.md', import.meta.url), 'utf8');
+  assert.ok(media.includes('## 素材台帳（batch b113 / source date 2026-09-12 / 承認日 2026-09-13）'));
+});
+
+it('does not move the mid-stream ranking to the end of the recording', () => {
+  const readout = recap.timeline.find(t => t.label === '13位から1位の読み上げ');
+  assert.equal(readout.timestamp, '1:30:04');
+  assert.ok(seconds(recap.songs.at(-1).timestamp) > seconds(readout.timestamp));
+  assert.ok(seconds(recap.timeline.at(-1).timestamp) > seconds(readout.timestamp));
+  assert.doesNotMatch(recap.ranking[0], /終了時/);
 });
 
 it('publishes ten owner-approved real-frame stills and keeps karaoke excerpts unpublished', async () => {

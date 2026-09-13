@@ -1,5 +1,5 @@
 import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
-import { AUTO_TRANSCRIPT_MATERIAL_NOTE, RANKING_NOTE, buildTranscriptionNote } from "./streamRecapRules.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
 
 const approvedStills: StreamRecapImage[] = [
   { src: "/media/live/mily-b113-01-hands-together-smile.jpg", width: 640, height: 360, alt: "9月12日の夜配信、手を合わせて笑顔を見せるみりぃ", caption: "手を合わせた冒頭の笑顔", downloadName: "みりぃ_20260912夜_01.jpg" },
@@ -138,7 +138,7 @@ export const streamRecap20260912Yoru: StreamRecap = {
       "statusThen": "翌日も協力を依頼"
     }
   ],
-  "ranking": [RANKING_NOTE],
+  "ranking": [buildRankingNote(13, 1, "during")],
   "timeline": [
     {
       "timestamp": "0:09:01",

@@ -3697,7 +3697,7 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 元の640×360・16:9を保持。crop・scaleなし。ffmpegで録画の実フレームをJPEG化し、source metadataを引き継がない。顔のAI生成・補正・置換・生成塗り足しなし。
 - LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。録音・録画・全文文字起こしも公開しない。
 
-## 素材台帳（batch b113 / source date・承認日 2026-09-13）
+## 素材台帳（batch b113 / source date 2026-09-12 / 承認日 2026-09-13）
 
 9月12日20:40頃開始のSHOWROOM夜配信録画から選んだ実フレーム10枚。オーナーが提示された10枚すべてのLIVE STREAM掲載を2026-09-13に明示承認。最新mainとOpen PRを照合し、b113の未使用を確認して採番した。
 

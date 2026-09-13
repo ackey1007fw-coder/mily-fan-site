@@ -41,7 +41,7 @@ const MAX = {
 
 const RANKING_PLACE = "[1-9]\\d{0,2}";
 const RANKING_NOTE_SHAPE = new RegExp(
-  `^配信終了時に(?:、${RANKING_PLACE}位から${RANKING_PLACE}位まで)?ランキングを読み上げました。個人名は掲載していません。$`,
+  `^配信(?:終了時|中)に(?:、${RANKING_PLACE}位から${RANKING_PLACE}位まで)?ランキングを読み上げました。個人名は掲載していません。$`,
 );
 const THEME_PREFIXES = ["朝", "昼", "夕", "夜", "深夜"];
 const PLATFORMS = new Set(["SHOWROOM", "MixChannel"]);
@@ -270,6 +270,16 @@ describe("配信メモの統一ルール", () => {
       buildRankingNote(5, 1),
       "配信終了時に、5位から1位までランキングを読み上げました。個人名は掲載していません。",
     );
+  });
+
+  it("supports timing-neutral rankings without changing existing end-of-stream notes", () => {
+    assert.equal(buildRankingNote(13, 1), RANKING_NOTE);
+    assert.equal(buildRankingNote(13, 1, "during"), "配信中に、13位から1位までランキングを読み上げました。個人名は掲載していません。");
+    assert.equal(buildRankingNote(undefined, undefined, "during"), "配信中にランキングを読み上げました。個人名は掲載していません。");
+    assert.match(buildRankingNote(13, 1, "during"), RANKING_NOTE_SHAPE);
+    assert.match(buildRankingNote(undefined, undefined, "during"), RANKING_NOTE_SHAPE);
+    assert.doesNotMatch("配信中に、0位から1位までランキングを読み上げました。個人名は掲載していません。", RANKING_NOTE_SHAPE);
+    assert.doesNotMatch("配信中に、視聴者名のランキングを読み上げました。個人名は掲載していません。", RANKING_NOTE_SHAPE);
   });
 
   it("keeps the note builder deterministic", () => {
