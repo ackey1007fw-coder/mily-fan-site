@@ -30,10 +30,20 @@ describe("radio on-air music archive", () => {
   it("only stores explicit public YouTube destinations for confirmed songs", () => {
     for (const episode of radioMusicEpisodes) {
       assert.ok(episode.songs.length > 0, `${episode.id} has no songs`);
+      assert.equal(new Set(episode.songs.map(({ youtubeUrl }) => youtubeUrl)).size, episode.songs.length);
+      const times = episode.songs.filter(({ timestamp }) => timestamp).map(({ timestamp }) => {
+        assert.match(timestamp, /^\d+:[0-5]\d:[0-5]\d$/);
+        return timestamp.split(":").reduce((total, part) => total * 60 + Number(part), 0);
+      });
+      assert.deepEqual(times, [...times].sort((a, b) => a - b));
       for (const song of episode.songs) {
         assert.ok(song.title.trim(), `${episode.id}: missing title`);
         assert.ok(song.artist.trim(), `${episode.id}: missing artist`);
-        assert.match(song.youtubeUrl, /^https:\/\/(www\.)?youtube\.com\/watch\?/);
+        const destination = new URL(song.youtubeUrl);
+        assert.equal(destination.protocol, "https:");
+        assert.ok(["youtube.com", "www.youtube.com"].includes(destination.hostname));
+        assert.equal(destination.pathname, "/watch");
+        assert.match(destination.searchParams.get("v") ?? "", /^[A-Za-z0-9_-]{11}$/);
       }
     }
   });

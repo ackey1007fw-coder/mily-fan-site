@@ -12,7 +12,7 @@ import {
 } from "./data/activities";
 import { contest } from "./data/contest";
 import { seasideCircleMessageFormLink } from "./data/links";
-import { radioEpisode20260830 } from "./data/radioEpisodes";
+import { radioEpisodes, type RadioEpisode } from "./data/radioEpisodes";
 import { streamRecaps, type StreamRecap as StreamRecapData } from "./data/streamRecaps";
 import { visibleRadioStoryVideos } from "./data/radioStoryB42";
 import type { NewsImageMedia, NewsItem } from "./data/news";
@@ -405,8 +405,16 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
 
 function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "radio") return null;
-  const episode = radioEpisode20260830;
+  return (
+    <>
+      {radioEpisodes.map((episode) => (
+        <RadioEpisodeRecapArticle key={episode.id} episode={episode} />
+      ))}
+    </>
+  );
+}
 
+function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
   return (
     <SectionShell eyebrow="On Air Archive" title={`${episode.dateLabel} ${episode.theme}`}>
       <div className="mt-5 rounded-3xl border border-apricot/30 bg-apricot-soft/45 p-5 shadow-card sm:p-7">
@@ -421,11 +429,11 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
         </p>
       </div>
 
-      <section aria-labelledby="radio-mily-highlights" className="mt-9">
+      {episode.milyHighlights.length > 0 ? <section aria-labelledby={`${episode.id}-mily-highlights`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Mily Highlights
         </p>
-        <h3 id="radio-mily-highlights" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={`${episode.id}-mily-highlights`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           みりぃの見どころ
         </h3>
         <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -447,13 +455,13 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
             </li>
           ))}
         </ul>
-      </section>
+      </section> : null}
 
-      <section aria-labelledby="radio-listener-messages" className="mt-9">
+      {episode.listenerMessages.length > 0 ? <section aria-labelledby={`${episode.id}-listener-messages`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           Listener Messages
         </p>
-        <h3 id="radio-listener-messages" className="mt-2 text-xl font-bold text-ink sm:text-2xl">
+        <h3 id={`${episode.id}-listener-messages`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
           番組で紹介されたリスナーメッセージ
         </h3>
         <ul className="mt-5 space-y-4">
@@ -470,7 +478,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
             </li>
           ))}
         </ul>
-      </section>
+      </section> : null}
 
       <details className="mt-9 rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
         <summary className="cursor-pointer font-bold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage">
@@ -489,7 +497,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
       </details>
 
       <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
-        <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p>
+        {episode.nextEpisodeNote ? <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p> : null}
         <p className="mt-3 text-xs leading-6 text-ink-muted">
           出典: {episode.sourceLabel} · {formatDate(episode.verifiedAt)}確認
         </p>
