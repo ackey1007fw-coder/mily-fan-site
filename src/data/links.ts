@@ -1,3 +1,5 @@
+import { radioMusicUrl } from "./site.ts";
+
 /**
  * Extra fan-site links (not the person's own SNS).
  * Keep empty until a destination is confirmed and clearly unofficial.
@@ -42,7 +44,7 @@ export const seasideCircleMessageFormLink: SiteLink = {
 export const radioMusicArchiveLink: SiteLink = {
   id: "mily-radio-on-air-music",
   label: "ラジオで流れた楽曲",
-  url: "https://mily-fan-site.vercel.app/activities/radio/music/",
+  url: radioMusicUrl(),
   note: "放送で確認できた曲名・アーティストとYouTubeへの導線をまとめる、このファンサイト内の非公式アーカイブ。",
 };
 
