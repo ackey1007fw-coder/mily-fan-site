@@ -1,4 +1,38 @@
+import { streamRecap20260913Asa } from "./streamRecap20260913Asa.ts";
+import { streamRecap20260912Yoru } from "./streamRecap20260912Yoru.ts";
+import { streamRecap20260912Asa } from "./streamRecap20260912Asa.ts";
+import { streamRecap20260911Yoru } from "./streamRecap20260911Yoru.ts";
+import { streamRecap20260911Asa } from "./streamRecap20260911Asa.ts";
+import { streamRecap20260910Asa } from "./streamRecap20260910Asa.ts";
+import { streamRecap20260909Asa } from "./streamRecap20260909Asa.ts";
+import { streamRecap20260821Night } from "./streamRecap20260821Night.ts";
+import { streamRecap20260822Asa } from "./streamRecap20260822Asa.ts";
+import { streamRecap20260822Night } from "./streamRecap20260822Night.ts";
+import { streamRecap20260823Asa } from "./streamRecap20260823Asa.ts";
+import { streamRecap20260823Night } from "./streamRecap20260823Night.ts";
+import { streamRecap20260824Asa } from "./streamRecap20260824Asa.ts";
+import { streamRecap20260824Night } from "./streamRecap20260824Night.ts";
+import { streamRecap20260825Day } from "./streamRecap20260825Day.ts";
+import { streamRecap20260827Night } from "./streamRecap20260827Night.ts";
+import { streamRecap20260827Day } from "./streamRecap20260827Day.ts";
+import { streamRecap20260828Night } from "./streamRecap20260828Night.ts";
+import { streamRecap20260907Night } from "./streamRecap20260907Night.ts";
+import { streamRecap20260907Asa } from "./streamRecap20260907Asa.ts";
+import { streamRecap20260906Night } from "./streamRecap20260906Night.ts";
 import { streamRecap20260906Asa } from "./streamRecap20260906Asa.ts";
+import { streamRecap20260825Asa } from "./streamRecap20260825Asa.ts";
+import { streamRecap20260818Night } from "./streamRecap20260818Night.ts";
+import { streamRecap20260819Day } from "./streamRecap20260819Day.ts";
+import { streamRecap20260826Night } from "./streamRecap20260826Night.ts";
+import { streamRecap20260826Day } from "./streamRecap20260826Day.ts";
+import { streamRecap20260825Night } from "./streamRecap20260825Night.ts";
+import { streamRecap20260826Asa } from "./streamRecap20260826Asa.ts";
+import { streamRecap20260807Day } from "./streamRecap20260807Day.ts";
+import { streamRecap20260821Day } from "./streamRecap20260821Day.ts";
+import { streamRecap20260815Day } from "./streamRecap20260815Day.ts";
+import { streamRecap20260821Asa } from "./streamRecap20260821Asa.ts";
+import { streamRecap20260806Asa } from "./streamRecap20260806Asa.ts";
+import { streamRecap20260814Day } from "./streamRecap20260814Day.ts";
 import { streamRecap20260905Night } from "./streamRecap20260905Night.ts";
 import { streamRecap20260905Day } from "./streamRecap20260905Day.ts";
 import { streamRecap20260905Asa } from "./streamRecap20260905Asa.ts";
@@ -10,6 +44,13 @@ import { streamRecap20260903Lunch } from "./streamRecap20260903Lunch.ts";
 import { streamRecap20260903 } from "./streamRecap20260903.ts";
 import { streamRecap20260902 } from "./streamRecap20260902.ts";
 import { streamRecap20260902Night } from "./streamRecap20260902Night.ts";
+import { streamRecap20260901Night } from "./streamRecap20260901Night.ts";
+import { streamRecap20260831Night } from "./streamRecap20260831Night.ts";
+import { streamRecap20260831Asa } from "./streamRecap20260831Asa.ts";
+import { streamRecap20260830Night } from "./streamRecap20260830Night.ts";
+import { streamRecap20260828Asa } from "./streamRecap20260828Asa.ts";
+import { streamRecap20260829Day } from "./streamRecap20260829Day.ts";
+import { streamRecap20260830Asa } from "./streamRecap20260830Asa.ts";
 
 export {
   AUTO_TRANSCRIPT_MATERIAL_NOTE,
@@ -61,6 +102,17 @@ export type StreamRecapGalleryZip = {
   label: string;
 };
 
+export type StreamRecapSongClip = {
+  /** LIVE SONG CLIPS 用の短い歌唱抜粋。録画原本全編ではない。 */
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  durationSeconds: number;
+  /** 録画先頭からのクリップ開始位置の目安。 */
+  sourceTimestamp: string;
+};
+
 export type StreamRecapSong = {
   title: string;
   artist: string;
@@ -68,8 +120,12 @@ export type StreamRecapSong = {
   timestamp: string;
   /** 原曲へのリンク。みりぃの歌唱映像ではない。 */
   youtubeUrl: string;
+  /** 原盤以外の歌唱動画を案内する場合、その版を明示する。 */
+  youtubeVersionNote?: string;
   /** 練習用の参考伴奏。配信での使用音源とは限らない。 */
   karaoke?: { youtubeUrl: string; channel: string };
+  /** オーナー確認済み録画から作った短い歌唱クリップ。 */
+  clip?: StreamRecapSongClip;
 };
 
 export type StreamRecap = {
@@ -95,6 +151,16 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260913Asa,
+  streamRecap20260912Yoru,
+  streamRecap20260912Asa,
+  streamRecap20260911Yoru,
+  streamRecap20260911Asa,
+  streamRecap20260910Asa,
+  streamRecap20260909Asa,
+  streamRecap20260907Night,
+  streamRecap20260907Asa,
+  streamRecap20260906Night,
   streamRecap20260906Asa,
   streamRecap20260905Night,
   streamRecap20260905Day,
@@ -107,10 +173,21 @@ export {
   streamRecap20260903,
   streamRecap20260902Night,
   streamRecap20260902,
+  streamRecap20260901Night,
 };
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260913Asa,
+  streamRecap20260912Yoru,
+  streamRecap20260912Asa,
+  streamRecap20260911Yoru,
+  streamRecap20260911Asa,
+  streamRecap20260910Asa,
+  streamRecap20260909Asa,
+  streamRecap20260907Night,
+  streamRecap20260907Asa,
+  streamRecap20260906Night,
   streamRecap20260906Asa,
   streamRecap20260905Night,
   streamRecap20260905Day,
@@ -123,4 +200,35 @@ export const streamRecaps: StreamRecap[] = [
   streamRecap20260903,
   streamRecap20260902Night,
   streamRecap20260902,
+  streamRecap20260901Night,
+  streamRecap20260831Night,
+  streamRecap20260831Asa,
+  streamRecap20260830Night,
+  streamRecap20260830Asa,
+  streamRecap20260829Day,
+  streamRecap20260828Night,
+  streamRecap20260828Asa,
+  streamRecap20260827Night,
+  streamRecap20260827Day,
+  streamRecap20260826Night,
+  streamRecap20260826Day,
+  streamRecap20260826Asa,
+  streamRecap20260825Night,
+  streamRecap20260825Day,
+  streamRecap20260825Asa,
+  streamRecap20260824Night,
+  streamRecap20260824Asa,
+  streamRecap20260823Night,
+  streamRecap20260823Asa,
+  streamRecap20260822Night,
+  streamRecap20260822Asa,
+  streamRecap20260821Night,
+  streamRecap20260821Day,
+  streamRecap20260821Asa,
+  streamRecap20260819Day,
+  streamRecap20260818Night,
+  streamRecap20260815Day,
+  streamRecap20260814Day,
+  streamRecap20260807Day,
+  streamRecap20260806Asa,
 ];

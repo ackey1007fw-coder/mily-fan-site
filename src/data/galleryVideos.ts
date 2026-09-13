@@ -1,3 +1,4 @@
+import { showroomAvatarRightsStoryVideo, type ShowroomAvatarRightsStoryVideo } from "./showroomAvatarRightsStoryVideo.ts";
 import { tiktokPortraitVideo, type TikTokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import {
   eventStory20260821,
@@ -29,6 +30,7 @@ import { patonSecondStoryVideo } from "./patonSecondStoryVideo.ts";
 import { webVoteDay2StoryVideo } from "./webVoteDay2StoryVideo.ts";
 import { voteDayFiveSoonStoryVideo } from "./voteDayFiveSoonStoryVideo.ts";
 import { morningThanksVoteStoryVideo } from "./morningThanksVoteStoryVideo.ts";
+import { streamThanksMorningSlotStoryVideo } from "./streamThanksMorningSlotStoryVideo.ts";
 import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialVideo.ts";
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 import { seasideCircleYesTokyoVideo } from "./seasideCircleYesTokyoVideo.ts";
@@ -40,6 +42,7 @@ import {
   type TikTokSayonaraIchigoVideo,
 } from "./tiktokSayonaraIchigoVideo.ts";
 import {
+  mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
@@ -52,13 +55,16 @@ export type SelfHostedGalleryVideo =
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
   | TikTokPortraitVideo
+  | ShowroomAvatarRightsStoryVideo
   | TikTokSayonaraIchigoVideo;
 
 export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
   tiktokPortraitVideo,
+  showroomAvatarRightsStoryVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
+  mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,
@@ -82,6 +88,7 @@ export {
   webVoteDay2StoryVideo,
   voteDayFiveSoonStoryVideo,
   morningThanksVoteStoryVideo,
+  streamThanksMorningSlotStoryVideo,
   nightThanksMorningStreamStoryVideo,
   patonVoteCollageStoryVideo,
   patonVoteMirrorStoryVideo,
@@ -111,6 +118,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  streamThanksMorningSlotStoryVideo,
   morningThanksVoteStoryVideo,
   voteDayFiveSoonStoryVideo,
   tiktokPortraitVideo,
@@ -143,6 +151,9 @@ export const galleryVideos: GalleryVideoItem[] = [
   secondRoundStoryVideo,
   morningStoryVideo,
   tiktokSayonaraIchigoVideo,
+  // Undated owner-provided Story: keep it outside dated ordering until the source date is confirmed.
+  showroomAvatarRightsStoryVideo,
+  mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
   mixch15xDayMovie,

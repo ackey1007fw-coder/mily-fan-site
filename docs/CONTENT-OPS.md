@@ -15,12 +15,12 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 | ファイル | 掲載 | 出典 | メモ |
 | --- | --- | --- | --- |
-| `news.ts` | 83件。9/7のInstagram Story「朝配信ありがとう、次枠は22:00〜。「5日目ポチッはこちらから」」（batch b65-02動画をLatest / NEWSとGalleryで共有。無音公開派生（`-c:v copy` remux）。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは確認済みのWEB投票リンクとSHOWROOMルーム。WEB投票CTAはSupportEventの期間（2026-09-13 23:59 JST）終了後に自動で消える。リンクスタンプの遷移先は未確認のため本文へ書かない。activityIds: live-stream, miss-circle。sameDayOrder: 5で同日の本人X本選EX案内（09:15 JST）より後。idは `2026-09-07-morning-thanks-vote-day5-story`。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加）、9/6のInstagram Story「「30分後5日目の投票できるよ」4日目の投票も呼びかけ」（batch b65-01動画をLatest / NEWSとGalleryで共有。無音公開派生（`-c:v copy` remux）。非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは確認済みのWEB投票リンクのみで、期間終了後は自動で消える。リンクスタンプの遷移先・投票の仕組みは本文へ書かない。activityIds: miss-circle。sameDayOrder: 50で同日の本人X配信お礼（23:22 JST）より後。idは `2026-09-06-third-round-vote-day5-soon-story`。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加。source dateは画面表示と元動画のcontainer creation_timeからの判断でオーナーの明示確認待ち）、9/7の本人X「キャンガル2027 本選EX期間」（本人X `https://x.com/mily_chan36/status/2096754197362622971`。恒久permalink。b64-01本選EX vol.1案内グラフィックをNEWS代表、b64-02メッセージ＋日程表をadditionalMedia。実写ではないためGallery非掲載。sameDayOrder: 10。activityIds: campus-girls。SNS審査 SupportEvent 追加。Paton CTAなし（本選EXの投票先URL未確認）。`/stories/` / highlights / events / streamSchedule / contest.ts / profile / media.ts 非追加）、9/6の本人X「配信ありがとう、明日は6:30と22:00」（本人X `https://x.com/Mily_chan36/status/2096604917893095494`。恒久permalink。テキストNEWS＋出典リンクのみ。写真なし。投票CTAなし。メイク告知はNEWSにしない。sameDayOrder: 40で同日のキャンガル結果より前。activityIds: live-stream。Gallery / media.ts / `/stories/` / highlights / events / contest.ts / profile非追加。9/7枠は streamSchedule に 06:30–07:30 と 22:00–23:00）、9/6の本人X「キャンガル2027 予選final 結果報告」（本人X `https://x.com/mily_chan36/status/2096422147476627841`。恒久permalink。b63-01人物写真をNEWS代表＋Gallery。sameDayOrder: 30で同日の夜枠変更より前。activityIds: campus-girls。highlights追加。Paton CTAなし。`/stories/`・events・streamSchedule・contest.ts・profile非追加）、9/4のInstagram Story「「2日目ポチッとな〜」投票の呼びかけ」（batch b59-01動画をLatest / NEWSとGalleryで共有。無音公開派生。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは確認済みのWEB投票リンクのみで、SupportEventの期間（2026-09-13 23:59 JST）終了後は自動で消える。リンク先と特典の内容・条件は未確認のため本文へ書かない。WEB投票期間・三次日程は既存カードへ重複掲載しない。activityIds: miss-circle。sameDayOrder: 10。idは `2026-09-04-third-round-vote-day2-story`。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加）、9/3の本人X「三次審査、目標と応援方法」（本人X `https://x.com/Mily_chan36/status/2095397884107849991`。恒久permalink。テキストNEWS＋出典リンクのみ。写真なし。投票CTAなし。WEB投票期間・三次日程・配信中案内・毎日WEB投票は既存カードへ重複掲載しない。9/2三次審査NEWSとは別カード。activityIds: miss-circle。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、9/2のミスサー三次審査（既存 id `2026-09-02-miss-circle-third-round` の本文を2段落の要約へ整理した。sameDayOrder: 10で同日Story 2件より前。activityIds: miss-circle。出典は misscircle.jp、additionalSources は ENTRY 734 と SHOWROOMイベント。CTAはWEB投票／ENTRY 734／SHOWROOMイベント／SHOWROOMルーム。代表は本人配布タイムテーブル b49-01（NEWS専用）。確認済み本人SHOWROOM枠は streamSchedule。審査特典、日別時刻表、SHOWROOMヘッダー枠 9/2 20:00〜9/12 12:59、通過発表、票数、会場三次、AGESTOCK 9/20 横浜アリーナは本文へ重複掲載しない。`/stories/`・highlights・events・media.ts 非追加）、9/2のInstagram Story「おやすみりぃ／明日9:00 SR配信」（b47-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。SHOWROOM CTAあり。Paton CTAなし。9:00はNEWS引用のみで streamSchedule / events 非追加。LIVE STREAMに関連付け。`/stories/`・highlights・contest.ts非追加）、9/2のInstagram Story「パトン投票2位で締められました」（b47-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。投票終了済みのためPaton CTAなし。他出場者名は本文非掲載。144,550ptは投稿時点の記録。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、9/1のSHOWROOM「9月初配信、おやすみりー」（b48-01〜b48-06のボード静止画6枚をLatest / NEWS専用で自己ホスト。代表はあっきーさんボード寄り。やすぴさんはadditionalMedia末尾。Gallery非掲載。出典は非リンクのSHOWROOM label。再生permalinkは作らない。CTAは確認済みSHOWROOMルームのみ（`t=`なし）。Paton投票CTAなし。activityIdsは live-stream のみ。sameDayOrder: 20で同日の他3件より前。`/stories/`・highlights・events・streamSchedule・media・contest.ts非追加）、9/1の本人X「おはよ〜 今日から9月ー」（本人X `https://x.com/Mily_chan36/status/2094579904587382930`。恒久permalink。既存b46-02公開MP4・posterをwrapperでLatest / NEWSに再利用。新しいMP4は作らない。SNS CDNは参照しない。activityIdsなし。Paton CTAなし。SHOWROOM CTAなし。`t=`トラッキングは付けない。既存9/1 Instagram Story「9月のみりぃもよろしくね」とは別投稿。sameDayOrder: 3で既存Instagram Story 2件より前。Gallery / galleryVideos は既存b46-02の1本のまま。media.ts / `/stories/` / highlights / events / streamSchedule / contest.ts / profile非追加）、9/1のInstagram Story「おはよう／今日はパトン投票最終日」（b46-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、9/1のInstagram Story「9月のみりぃもよろしくね」（b46-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。画面は9月のあいさつのためActivities非関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「キャンパスガールズ2027出場中／パトン投票は9月1日まで／31日は1.5倍」（b45-01動画をLatest / NEWS＋Galleryで共有。本人肉声を保持した公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「現在1位／102,700pt／31日は1.5倍DAY」（b44-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。1位・102,700ptは投稿時点の記録。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「緊急告知／Paton投票1.5倍デー」（b44-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。公式X告知の画面を本人Storyとして案内。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「パトン投票のやり方」（8/27のX案内と同じ手順。他出場者の顔・名前、オーナーサポーター名、投稿時点ではない古い順位表示があるため動画は自己ホストせず、既存b26-01人物写真を代表画像に再利用。Latest / NEWSのみ。CAMPUS GIRLS Activityに関連付け。Gallery / media.ts / galleryVideos / `/stories/` / PatonVoteGuideランキング系列非追加。Paton投票CTAあり）、8/31の本人X「朝から起こしに来てくれたみんな、ありがとう」（本人X `https://x.com/Mily_chan36/status/2094192106105659650`。恒久permalink。テキストNEWS＋出典リンクのみ。視聴者名・アバターが多数写るSHOWROOM画面は公開しない。CTAは確認済みSHOWROOMルーム。`t=`トラッキングは付けない。LIVE STREAMに関連付け。sameDayOrder: 3でInstagram Story 4件の次。X画像CDNは参照しない）、8/31の本人X「パトン1.5倍DAY／投稿時点で1位」（01:37緊急告知を一次出典、07:32無料拍手投稿をadditionalSourcesに統合。恒久permalink。既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。1.5倍の投票枠は31日 0:00–23:59 JST。CAMPUS GIRLS Activityに関連付け。sameDayOrder: 2で朝お礼カードの次。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/31の本人X「配信中／眠いから私を起こして〜」（本人X `https://x.com/Mily_chan36/status/2094179970960744615`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。`t=`トラッキングは付けない。LIVE STREAMに関連付け。配信中だった記録。sameDayOrder: 1。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/30夜の本人X「30日連続配信記念日」（本人X `https://x.com/Mily_chan36/status/2094023746751463582`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。`t=`トラッキングは付けない。LIVE STREAMに関連付け。sameDayOrder: 4で同日の先頭。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/30朝の本人X「今日のパトン投票／投稿時点で3位」（本人X `https://x.com/Mily_chan36/status/2093802981921849728`。恒久permalink。既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。3位は8/30朝の投稿時点の記録であり、8/31の1位カードと矛盾しない。CAMPUS GIRLS Activityに関連付け。sameDayOrder未指定でMixch最終日のあと。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/30のInstagram Story「キャンパスガールズ2027情報／2位を守り抜きたい」（b43-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。2位は投稿時点の記録。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・PatonVoteGuideランキング系列非追加）、8/30朝の本人X「おはよーーう／SR 6:00〜6:30」（本人X `https://x.com/Mily_chan36/status/2093802690598064521`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。LIVE STREAMに関連付け。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加。写真なし）、8/30のMixch「配信＆ムービーは今日が最終日」（本人X投稿で同じMixchを案内。出典はX `https://x.com/Mily_chan36/status/2093799709219704887`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8/30のInstagram Story「SHOWROOM 30日連続配信記念日」（SHOWROOM配信画面に視聴者の表示名・アイコン・コメントが写るため動画は自己ホストせず、Latest / NEWSのテキストのみ。LIVE STREAMに関連付け。7:30配信予定は投稿時点の記録で streamSchedule / events 非追加。Paton CTAなし。Gallery / media.ts / galleryVideos / `/stories/` / highlights非追加）、8/29のInstagram Story「Paton投票5日目／変面さんとの2ショット」（b43-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。背景の第三者は元動画の白いぼかしを維持。レストラン名は非掲載。`/stories/`・events・streamSchedule・PatonVoteGuideランキング系列非追加）、8/29の本人X「配信中／9/3〜3次審査」（本人X `https://x.com/Mily_chan36/status/2093575115913224580`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。MISS CIRCLEとLIVE STREAMに関連付け。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加。順位・得点は非掲載）、8/29の本人X「14:40〜ラジオ配信案内」（本人X `https://x.com/Mily_chan36/status/2093572006457557333`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。LIVE STREAMに関連付け。FMラジオActivityは付けない。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule非追加）、8/29のInstagram Story「Paton投票4日目」（b41-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule非追加）、8/28夜の本人X「今日の配信ありがとう／おつみりぃ」（本人X `https://x.com/Mily_chan36/status/2093347548388110372`。恒久permalink。テキストNEWS＋出典リンクのみ。翌日の配信時刻は未確定のため streamSchedule / events 非追加。LIVE STREAM Activityに関連付け。Gallery / media.ts / `/stories/` / highlights非追加）、8/28夜のInstagram Story「22:00〜SHOWROOM夜配信案内」（b41-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。LIVE STREAM Activityに関連付け。`/stories/`・events・streamSchedule非追加）、8/28の本人X「予選A FinalSTAGE 3日目」応援呼びかけ（本人X `https://x.com/Mily_chan36/status/2093262992289026404`。恒久permalink。写真なしのため既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。CAMPUS GIRLS Activityに関連付け。Gallery / media.ts / `/stories/` / highlights非追加。順位は非掲載）、8/27の本人X「キャンガル2027 パトン投票方法」（恒久permalink。X動画は自己ホストせず、既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。CAMPUS GIRLS Activityに関連付け。Gallery / media.ts / `/stories/` / highlights非追加。他出場者・順位・オーナーサポーター名は非掲載）、8/27のXフォロワー100人報告（本人X `https://x.com/Mily_chan36/status/2092884427605266708`。テキストNEWS＋出典リンクのみ。Gallery・media.ts・galleryVideos・`/stories/`・highlights・events・streamSchedule・Activities非追加。フォロワー数はプロフィールへ固定しない）、8月27日のMixch「表情豊かなみりぃと魅力的でしょう？？？？」（本人X投稿で同じMixchを案内。出典はX `https://x.com/mily_chan36/status/2092838411602407646`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8/27のラジオ「映画」テーマ案内Story（b36-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。Radio Activityに関連付け、`/stories/`・events・streamSchedule非追加）、8/27の「おはよう」ミスサーSR 14:00配信案内Story（b35-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。`/stories/`・events・streamSchedule・Activities非追加）、8/8 2次審査期間の配信スケジュール案内グラフィック（新しいNEWS。実写ではないためGallery非掲載）、8/6 OHAYO白いポロピース自撮り（新しいNEWS＋Gallery b30-01）、8/5 パンダ耳過去pic（新しいNEWS＋Gallery b31-01。画像に※過去pic）、8/18ラジオSHOWROOM画面を既存NEWSへ添付（Gallery b32-01）、8/24 Final STAGE案内グラフィックを既存CAMPUS GIRLS NEWSのadditionalMediaへ（Gallery非掲載）、8/21ガンダ写真は既存NEWS JPEGを維持してGallery b14-01を追加、8/24メイクSHOWROOM画面は既存NEWS JPEGを維持してGallery b24-01を追加、8/19 2次審査通過NEWSに既存Gallery b05-01をsrcsetで配線（ファイル複製なし）、8/2 21歳誕生日NEWSにb29-01室内セルフィーを添付（新しいNEWSは作っていない。Instagram出典・CTAは維持。写真のsourceUrlは本人X `https://x.com/Mily_chan36/status/2083679191892115846`）、8月26日のガルアワイベ最終日6位お礼X投稿（本人X。くま耳キラキラフィルター自撮りをNEWS代表＋Gallery。ミスサー／フレキャン出場者限定のSHOWROOMイベントで6位のためGirlsAwardランウェイ出演にはならない。投票CTAなし。このNEWSカード自体はMixch非混在。`/stories/` 非追加）、8月26日夜のSHOWROOMファンルーム「ガルアワイベ最終日【6位】」（本人Fan Room本文＋同じ夜22:36の音声メッセージ。音声は自己ホストm4aをLatest / NEWSで再生。Fan Roomスクリーンショット・Gallery・`/stories/` には出していない。恒久permalinkなしのため非リンクlabel＋確認済みSHOWROOMルームへのCTA）、8月26日のMixch「今日は1.5倍デーだってよ？！」（本人X投稿で同じMixchを案内。出典はX `https://x.com/mily_chan36/status/2092481552475460058`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8月26日のCAMPUS GIRLS 2027予選ファイナル毎日投票案内Instagram Story（本人Story。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。b27-07鏡静止画を代表、b27-06コラージュ静止画・b27-02鏡動画・b27-01コラージュ動画を同じカードへ。Latest / NEWS と Gallery が同じ公開派生を共有。Story閲覧スクリーンショットは非掲載で返信コメントのみNEWS messageへ。投票CTAは既存8/24カードのまま）、8月26日のInstagramフォロワー400人感謝Story（NEWS専用b27-04動画。Gallery / media.ts / `/stories/` / highlights 非掲載）、8月26日の朝配信お礼Story（NEWS専用b27-03画像。Gallery非掲載。配信時刻は既存10:00案内NEWSのまま、events / streamSchedule には足さない）、8月26日未明の26日10:00〜11:00配信案内（本人X。テキストNEWS＋出典リンクのみ。夜は希望の表現のため枠としては未掲載）、8月25日のMixch「自信のないあなたへ」（本人X投稿と直後のリプライ。Mixch本編CTAを主導線、X原投稿を出典導線として掲載。同じMixch outbound player cardをLatest / NEWS / Galleryで共有。CAMPUS GIRLS関連NEWSとして既存Activityから参照。Mixchファイルは自己ホストしていない）、8月25日朝の「やる気、元気、勇気でたぞ」STORY CTA（本人X。本投稿＋11:40変更追記を出典。アーカイブ本文は `/stories/2026-08-25-motivation/`）、8月24日の湘南シーサイドサークル「Yes!東京」踊ってみた（番組Instagram。恒久permalink未確認のため非リンクlabel＋プロフィール関連リンク。b25動画をLatest / NEWS / Galleryで共有）、8月24日のCAMPUS GIRLS 2027 予選A Final STAGE案内（本人X。8月26日にPatonの三橋莉子（みりぃ）ページへの投票導線と、8月26日の本人XによるPaton直接案内を同じNEWSへ追加。b26-01人物写真を代表画像、b26-02 Paton出場者ページ画像とb33-01 Final STAGE案内グラフィックを同じカードのadditionalMediaに掲載。8月24日の元投稿も出典リンクとして維持）、8月24日朝の初メイク配信（同じNEWSに本人X投稿とInstagram Storyの内容を統合。b24-01 SHOWROOM横長画面を代表画像、オーナーが当該掲載面を明示承認した無加工b24-02 Story画像をHOME Latestと`/news/`の同じカードの2枚目に掲載。b24-01はGalleryにも掲載。b24-02 Story画像はNEWS 2枚目のままGallery非掲載。恒久permalinkのないStory URLは作っていない）、8月24日未明の夜枠・ラジオお礼と朝配信案内（同じNEWSにSHOWROOMファンルーム本文、Instagram Story動画、本人X投稿を統合。Fan Roomスクリーンショットは非公開）、8月23日の本人Instagram「龍みたいな雲」投稿、8月23日の湘南シーサイドサークル「真夏のミュージカル特集」放送記録（同じNEWSに放送後お礼の番組Instagram Story動画、STORY記事CTA、FM湘南マジックウェイブの放送後X投稿を同居。新しいNEWSは作っていない）、8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目、4月23日の『さよならいちごちゃん』踊ってみたTikTok（b37。NEWSとGalleryが同じオブジェクトを共有。無音公開派生。activityIdsなし。HOME Latestの8月並びは変えない） | 9/2 おやすみりぃNEWSとPaton 2位NEWSは非リンクのInstagram Story。関連URLは本人Instagramプロフィール。おやすみりぃの追加CTAは確認済みSHOWROOMルーム（`t=`なし）。Paton投票CTAは付けない。9/1 朝あいさつNEWSの外部sourceは本人X投稿。9/1 パトン投票最終日NEWSと9月あいさつNEWS、8/31 肉声投票案内NEWS・現在1位NEWS・1.5倍デーNEWS・投票方法案内NEWSと8/30 30日連続配信記念日NEWSは非リンクのInstagram Story。8/31朝お礼NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/31 1.5倍NEWSの外部sourceは01:37の本人X投稿、additional sourceは07:32の本人X投稿。関連URLはPaton本人ページ。8/31配信中NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/30連続配信NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/30 Paton 3位NEWSの外部sourceは本人X投稿。関連URLはPaton本人ページ。8/30 キャンパスガールズ情報NEWSと8/29 Paton投票5日目NEWSは非リンクのInstagram Story。8/30朝SR案内NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/30 Mixch NEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/29配信中／3次審査NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/29 14:40ラジオ案内NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/29 Paton投票4日目NEWSと8/28夜配信案内NEWSは非リンクのInstagram Story。8/28配信お礼NEWSの外部sourceは本人X投稿。8/28 3日目NEWSの外部sourceは本人X投稿。関連URLはPaton本人ページ。8/27投票方法案内は本人X投稿。関連URLはPaton本人ページ。8/27 Xフォロワー100人NEWSの外部sourceは本人X投稿。8/27 Mixch NEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/27ラジオ案内は本人Instagram Storyによる湘南シーサイドサークル番組Storyの再共有で、本人プロフィールは関連リンク。8/27配信案内は非リンクのInstagram Storyで、プロフィールは関連リンク。通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。番組Instagram Storyと生放送アーカイブ文字起こしは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。8/26ガルアワイベ6位お礼NEWSの外部sourceは本人X投稿、関連URLは本人SHOWROOM、additional sourceは当該SHOWROOMイベントページ。8/26 Mixch 1.5倍デーNEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/26投票案内・フォロワー400人・朝配信お礼の3件は非リンクのInstagram Story。8/26配信案内NEWS・8/25 Mixch NEWS・8/25 motivation NEWS・8/24朝メイクNEWS・8/24未明NEWS・Final STAGE案内NEWSの外部sourceは本人X投稿。Final STAGE案内NEWSは8月24日の案内をprimary source、8月26日の直接案内をadditional sourceとして持ち、関連URLはPaton本人ページ。b26の2枚は当該NEWS専用でGallery / `/stories/` には追加しない。8/25 Mixch NEWSの関連URLはMixch本編。8/23ラジオNEWSの外部sourceは局公式の放送後X投稿。8/24踊ってみたNEWSの外部permalinkは未確認。8/2誕生日NEWSの一次出典はInstagram、additional sourceは本人X誕生日朝投稿。4/23踊ってみたNEWSの外部sourceは湘南シーサイドサークルのTikTok通常投稿 | 投稿内容・動画説明文の確認済み範囲を要約。配信案内はアーカイブ表現。同じ内容の追記は既存NEWSへ統合し、`additionalSources` で複数の確認済みpermalinkを保持する。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
+| `news.ts` | 85件。9/8のInstagram Story「配信ありがとう、「明日の朝枠は7:30〜8:20」」（batch b66-01動画をLatest / NEWSとGalleryで共有。無音公開派生（`-c:v copy` remux）。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは既存のSHOWROOMルームのみ。投票CTAなし。「明日の朝枠は7:30〜8:20」は本文引用のみで streamSchedule / events へ転記しない（既存の9/8 07:00–08:00枠は変えない）。activityIds: live-stream。sameDayOrder: 10。idは `2026-09-08-stream-thanks-morning-slot-story`。source date `2026-09-08` は、内容（9/7 22:00枠後の配信お礼）と元動画のcontainer creation_time（9/8 00:15 JST）、オーナーがその直後に提供したことによる。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加）、9/7のMixch「キャンガル2027Aブロック本選進出決定‼️」（本人X `https://x.com/Mily_chan36/status/2096935241034399948` が案内した Mixch `https://mixch.tv/m/Tfb8i9dy`。Mixch outbound player cardをLatest / NEWS / Galleryで共有。sameDayOrder: 20で同日の本選EX案内より先。activityIds: campus-girls。Paton CTAなし。ファイルは自己ホストしていない。`/stories/` / highlights / events / streamSchedule / contest.ts / profile / media.ts非追加）、9/7のInstagram Story「朝配信ありがとう、次枠は22:00〜。「5日目ポチッはこちらから」」（batch b65-02動画をLatest / NEWSとGalleryで共有。無音公開派生（`-c:v copy` remux）。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは確認済みのWEB投票リンクとSHOWROOMルーム。WEB投票CTAはSupportEventの期間（2026-09-13 23:59 JST）終了後に自動で消える。リンクスタンプの遷移先は未確認のため本文へ書かない。activityIds: live-stream, miss-circle。sameDayOrder: 5で同日の本人X本選EX案内（09:15 JST）より後。idは `2026-09-07-morning-thanks-vote-day5-story`。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加）、9/6のInstagram Story「「30分後5日目の投票できるよ」4日目の投票も呼びかけ」（batch b65-01動画をLatest / NEWSとGalleryで共有。無音公開派生（`-c:v copy` remux）。非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは確認済みのWEB投票リンクのみで、期間終了後は自動で消える。リンクスタンプの遷移先・投票の仕組みは本文へ書かない。activityIds: miss-circle。sameDayOrder: 50で同日の本人X配信お礼（23:22 JST）より後。idは `2026-09-06-third-round-vote-day5-soon-story`。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加。source dateは画面表示と元動画のcontainer creation_timeからの判断でオーナーの明示確認待ち）、9/7の本人X「キャンガル2027 本選EX期間」（本人X `https://x.com/mily_chan36/status/2096754197362622971`。恒久permalink。b64-01本選EX vol.1案内グラフィックをNEWS代表、b64-02メッセージ＋日程表をadditionalMedia。実写ではないためGallery非掲載。sameDayOrder: 10。activityIds: campus-girls。SNS審査 SupportEvent 追加。Paton CTAなし（本選EXの投票先URL未確認）。`/stories/` / highlights / events / streamSchedule / contest.ts / profile / media.ts 非追加）、9/6の本人X「配信ありがとう、明日は6:30と22:00」（本人X `https://x.com/Mily_chan36/status/2096604917893095494`。恒久permalink。テキストNEWS＋出典リンクのみ。写真なし。投票CTAなし。メイク告知はNEWSにしない。sameDayOrder: 40で同日のキャンガル結果より前。activityIds: live-stream。Gallery / media.ts / `/stories/` / highlights / events / contest.ts / profile非追加。9/7枠は streamSchedule に 06:30–07:30 と 22:00–23:00）、9/6の本人X「キャンガル2027 予選final 結果報告」（本人X `https://x.com/mily_chan36/status/2096422147476627841`。恒久permalink。b63-01人物写真をNEWS代表＋Gallery。sameDayOrder: 30で同日の夜枠変更より前。activityIds: campus-girls。highlights追加。Paton CTAなし。`/stories/`・events・streamSchedule・contest.ts・profile非追加）、9/4のInstagram Story「「2日目ポチッとな〜」投票の呼びかけ」（batch b59-01動画をLatest / NEWSとGalleryで共有。無音公開派生。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。追加CTAは確認済みのWEB投票リンクのみで、SupportEventの期間（2026-09-13 23:59 JST）終了後は自動で消える。リンク先と特典の内容・条件は未確認のため本文へ書かない。WEB投票期間・三次日程は既存カードへ重複掲載しない。activityIds: miss-circle。sameDayOrder: 10。idは `2026-09-04-third-round-vote-day2-story`。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts非追加）、9/3の本人X「三次審査、目標と応援方法」（本人X `https://x.com/Mily_chan36/status/2095397884107849991`。恒久permalink。テキストNEWS＋出典リンクのみ。写真なし。投票CTAなし。WEB投票期間・三次日程・配信中案内・毎日WEB投票は既存カードへ重複掲載しない。9/2三次審査NEWSとは別カード。activityIds: miss-circle。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、9/2のミスサー三次審査（既存 id `2026-09-02-miss-circle-third-round` の本文を2段落の要約へ整理した。sameDayOrder: 10で同日Story 2件より前。activityIds: miss-circle。出典は misscircle.jp、additionalSources は ENTRY 734 と SHOWROOMイベント。CTAはWEB投票／ENTRY 734／SHOWROOMイベント／SHOWROOMルーム。代表は本人配布タイムテーブル b49-01（NEWS専用）。確認済み本人SHOWROOM枠は streamSchedule。審査特典、日別時刻表、SHOWROOMヘッダー枠 9/2 20:00〜9/12 12:59、通過発表、票数、会場三次、AGESTOCK 9/20 横浜アリーナは本文へ重複掲載しない。`/stories/`・highlights・events・media.ts 非追加）、9/2のInstagram Story「おやすみりぃ／明日9:00 SR配信」（b47-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。SHOWROOM CTAあり。Paton CTAなし。9:00はNEWS引用のみで streamSchedule / events 非追加。LIVE STREAMに関連付け。`/stories/`・highlights・contest.ts非追加）、9/2のInstagram Story「パトン投票2位で締められました」（b47-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。投票終了済みのためPaton CTAなし。他出場者名は本文非掲載。144,550ptは投稿時点の記録。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、9/1のSHOWROOM「9月初配信、おやすみりー」（b48-01〜b48-06のボード静止画6枚をLatest / NEWS専用で自己ホスト。代表はあっきーさんボード寄り。やすぴさんはadditionalMedia末尾。Gallery非掲載。出典は非リンクのSHOWROOM label。再生permalinkは作らない。CTAは確認済みSHOWROOMルームのみ（`t=`なし）。Paton投票CTAなし。activityIdsは live-stream のみ。sameDayOrder: 20で同日の他3件より前。`/stories/`・highlights・events・streamSchedule・media・contest.ts非追加）、9/1の本人X「おはよ〜 今日から9月ー」（本人X `https://x.com/Mily_chan36/status/2094579904587382930`。恒久permalink。既存b46-02公開MP4・posterをwrapperでLatest / NEWSに再利用。新しいMP4は作らない。SNS CDNは参照しない。activityIdsなし。Paton CTAなし。SHOWROOM CTAなし。`t=`トラッキングは付けない。既存9/1 Instagram Story「9月のみりぃもよろしくね」とは別投稿。sameDayOrder: 3で既存Instagram Story 2件より前。Gallery / galleryVideos は既存b46-02の1本のまま。media.ts / `/stories/` / highlights / events / streamSchedule / contest.ts / profile非追加）、9/1のInstagram Story「おはよう／今日はパトン投票最終日」（b46-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、9/1のInstagram Story「9月のみりぃもよろしくね」（b46-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。画面は9月のあいさつのためActivities非関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「キャンパスガールズ2027出場中／パトン投票は9月1日まで／31日は1.5倍」（b45-01動画をLatest / NEWS＋Galleryで共有。本人肉声を保持した公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「現在1位／102,700pt／31日は1.5倍DAY」（b44-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。1位・102,700ptは投稿時点の記録。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・highlights・contest.ts・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「緊急告知／Paton投票1.5倍デー」（b44-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。公式X告知の画面を本人Storyとして案内。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・PatonVoteGuideランキング系列非追加）、8/31のInstagram Story「パトン投票のやり方」（8/27のX案内と同じ手順。他出場者の顔・名前、オーナーサポーター名、投稿時点ではない古い順位表示があるため動画は自己ホストせず、既存b26-01人物写真を代表画像に再利用。Latest / NEWSのみ。CAMPUS GIRLS Activityに関連付け。Gallery / media.ts / galleryVideos / `/stories/` / PatonVoteGuideランキング系列非追加。Paton投票CTAあり）、8/31の本人X「朝から起こしに来てくれたみんな、ありがとう」（本人X `https://x.com/Mily_chan36/status/2094192106105659650`。恒久permalink。テキストNEWS＋出典リンクのみ。視聴者名・アバターが多数写るSHOWROOM画面は公開しない。CTAは確認済みSHOWROOMルーム。`t=`トラッキングは付けない。LIVE STREAMに関連付け。sameDayOrder: 3でInstagram Story 4件の次。X画像CDNは参照しない）、8/31の本人X「パトン1.5倍DAY／投稿時点で1位」（01:37緊急告知を一次出典、07:32無料拍手投稿をadditionalSourcesに統合。恒久permalink。既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。1.5倍の投票枠は31日 0:00–23:59 JST。CAMPUS GIRLS Activityに関連付け。sameDayOrder: 2で朝お礼カードの次。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/31の本人X「配信中／眠いから私を起こして〜」（本人X `https://x.com/Mily_chan36/status/2094179970960744615`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。`t=`トラッキングは付けない。LIVE STREAMに関連付け。配信中だった記録。sameDayOrder: 1。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/30夜の本人X「30日連続配信記念日」（本人X `https://x.com/Mily_chan36/status/2094023746751463582`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。`t=`トラッキングは付けない。LIVE STREAMに関連付け。sameDayOrder: 4で同日の先頭。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/30朝の本人X「今日のパトン投票／投稿時点で3位」（本人X `https://x.com/Mily_chan36/status/2093802981921849728`。恒久permalink。既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。3位は8/30朝の投稿時点の記録であり、8/31の1位カードと矛盾しない。CAMPUS GIRLS Activityに関連付け。sameDayOrder未指定でMixch最終日のあと。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加）、8/30のInstagram Story「キャンパスガールズ2027情報／2位を守り抜きたい」（b43-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。2位は投稿時点の記録。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule・PatonVoteGuideランキング系列非追加）、8/30朝の本人X「おはよーーう／SR 6:00〜6:30」（本人X `https://x.com/Mily_chan36/status/2093802690598064521`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。LIVE STREAMに関連付け。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加。写真なし）、8/30のMixch「配信＆ムービーは今日が最終日」（本人X投稿で同じMixchを案内。出典はX `https://x.com/Mily_chan36/status/2093799709219704887`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8/30のInstagram Story「SHOWROOM 30日連続配信記念日」（SHOWROOM配信画面に視聴者の表示名・アイコン・コメントが写るため動画は自己ホストせず、Latest / NEWSのテキストのみ。LIVE STREAMに関連付け。7:30配信予定は投稿時点の記録で streamSchedule / events 非追加。Paton CTAなし。Gallery / media.ts / galleryVideos / `/stories/` / highlights非追加）、8/29のInstagram Story「Paton投票5日目／変面さんとの2ショット」（b43-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。背景の第三者は元動画の白いぼかしを維持。レストラン名は非掲載。`/stories/`・events・streamSchedule・PatonVoteGuideランキング系列非追加）、8/29の本人X「配信中／9/3〜3次審査」（本人X `https://x.com/Mily_chan36/status/2093575115913224580`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。MISS CIRCLEとLIVE STREAMに関連付け。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts非追加。順位・得点は非掲載）、8/29の本人X「14:40〜ラジオ配信案内」（本人X `https://x.com/Mily_chan36/status/2093572006457557333`。恒久permalink。テキストNEWS＋出典リンクのみ。CTAは確認済みSHOWROOMルーム。LIVE STREAMに関連付け。FMラジオActivityは付けない。Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule非追加）、8/29のInstagram Story「Paton投票4日目」（b41-02動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。CAMPUS GIRLS Activityに関連付け。`/stories/`・events・streamSchedule非追加）、8/28夜の本人X「今日の配信ありがとう／おつみりぃ」（本人X `https://x.com/Mily_chan36/status/2093347548388110372`。恒久permalink。テキストNEWS＋出典リンクのみ。翌日の配信時刻は未確定のため streamSchedule / events 非追加。LIVE STREAM Activityに関連付け。Gallery / media.ts / `/stories/` / highlights非追加）、8/28夜のInstagram Story「22:00〜SHOWROOM夜配信案内」（b41-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。Paton投票CTAあり。LIVE STREAM Activityに関連付け。`/stories/`・events・streamSchedule非追加）、8/28の本人X「予選A FinalSTAGE 3日目」応援呼びかけ（本人X `https://x.com/Mily_chan36/status/2093262992289026404`。恒久permalink。写真なしのため既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。CAMPUS GIRLS Activityに関連付け。Gallery / media.ts / `/stories/` / highlights非追加。順位は非掲載）、8/27の本人X「キャンガル2027 パトン投票方法」（恒久permalink。X動画は自己ホストせず、既存b26-01人物写真を代表画像に再利用。投票CTAはPaton本人ページ。CAMPUS GIRLS Activityに関連付け。Gallery / media.ts / `/stories/` / highlights非追加。他出場者・順位・オーナーサポーター名は非掲載）、8/27のXフォロワー100人報告（本人X `https://x.com/Mily_chan36/status/2092884427605266708`。テキストNEWS＋出典リンクのみ。Gallery・media.ts・galleryVideos・`/stories/`・highlights・events・streamSchedule・Activities非追加。フォロワー数はプロフィールへ固定しない）、8月27日のMixch「表情豊かなみりぃと魅力的でしょう？？？？」（本人X投稿で同じMixchを案内。出典はX `https://x.com/mily_chan36/status/2092838411602407646`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8/27のラジオ「映画」テーマ案内Story（b36-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。Radio Activityに関連付け、`/stories/`・events・streamSchedule非追加）、8/27の「おはよう」ミスサーSR 14:00配信案内Story（b35-01動画をLatest / NEWS＋Galleryで共有。無音公開派生。`/stories/`・events・streamSchedule・Activities非追加）、8/8 2次審査期間の配信スケジュール案内グラフィック（新しいNEWS。実写ではないためGallery非掲載）、8/6 OHAYO白いポロピース自撮り（新しいNEWS＋Gallery b30-01）、8/5 パンダ耳過去pic（新しいNEWS＋Gallery b31-01。画像に※過去pic）、8/18ラジオSHOWROOM画面を既存NEWSへ添付（Gallery b32-01）、8/24 Final STAGE案内グラフィックを既存CAMPUS GIRLS NEWSのadditionalMediaへ（Gallery非掲載）、8/21ガンダ写真は既存NEWS JPEGを維持してGallery b14-01を追加、8/24メイクSHOWROOM画面は既存NEWS JPEGを維持してGallery b24-01を追加、8/19 2次審査通過NEWSに既存Gallery b05-01をsrcsetで配線（ファイル複製なし）、8/2 21歳誕生日NEWSにb29-01室内セルフィーを添付（新しいNEWSは作っていない。Instagram出典・CTAは維持。写真のsourceUrlは本人X `https://x.com/Mily_chan36/status/2083679191892115846`）、8月26日のガルアワイベ最終日6位お礼X投稿（本人X。くま耳キラキラフィルター自撮りをNEWS代表＋Gallery。ミスサー／フレキャン出場者限定のSHOWROOMイベントで6位のためGirlsAwardランウェイ出演にはならない。投票CTAなし。このNEWSカード自体はMixch非混在。`/stories/` 非追加）、8月26日夜のSHOWROOMファンルーム「ガルアワイベ最終日【6位】」（本人Fan Room本文＋同じ夜22:36の音声メッセージ。音声は自己ホストm4aをLatest / NEWSで再生。Fan Roomスクリーンショット・Gallery・`/stories/` には出していない。恒久permalinkなしのため非リンクlabel＋確認済みSHOWROOMルームへのCTA）、8月26日のMixch「今日は1.5倍デーだってよ？！」（本人X投稿で同じMixchを案内。出典はX `https://x.com/mily_chan36/status/2092481552475460058`、CTAはMixch本編。Mixch outbound player cardをLatest / NEWS / Galleryで共有。Activitiesの関連NEWSとしては出すが関連メディアにはMixchカードを出さない。ファイルは自己ホストしていない）、8月26日のCAMPUS GIRLS 2027予選ファイナル毎日投票案内Instagram Story（本人Story。恒久permalinkなしのため非リンクのInstagram Story label＋プロフィール関連リンク。b27-07鏡静止画を代表、b27-06コラージュ静止画・b27-02鏡動画・b27-01コラージュ動画を同じカードへ。Latest / NEWS と Gallery が同じ公開派生を共有。Story閲覧スクリーンショットは非掲載で返信コメントのみNEWS messageへ。投票CTAは既存8/24カードのまま）、8月26日のInstagramフォロワー400人感謝Story（NEWS専用b27-04動画。Gallery / media.ts / `/stories/` / highlights 非掲載）、8月26日の朝配信お礼Story（NEWS専用b27-03画像。Gallery非掲載。配信時刻は既存10:00案内NEWSのまま、events / streamSchedule には足さない）、8月26日未明の26日10:00〜11:00配信案内（本人X。テキストNEWS＋出典リンクのみ。夜は希望の表現のため枠としては未掲載）、8月25日のMixch「自信のないあなたへ」（本人X投稿と直後のリプライ。Mixch本編CTAを主導線、X原投稿を出典導線として掲載。同じMixch outbound player cardをLatest / NEWS / Galleryで共有。CAMPUS GIRLS関連NEWSとして既存Activityから参照。Mixchファイルは自己ホストしていない）、8月25日朝の「やる気、元気、勇気でたぞ」STORY CTA（本人X。本投稿＋11:40変更追記を出典。アーカイブ本文は `/stories/2026-08-25-motivation/`）、8月24日の湘南シーサイドサークル「Yes!東京」踊ってみた（番組Instagram。恒久permalink未確認のため非リンクlabel＋プロフィール関連リンク。b25動画をLatest / NEWS / Galleryで共有）、8月24日のCAMPUS GIRLS 2027 予選A Final STAGE案内（本人X。8月26日にPatonの三橋莉子（みりぃ）ページへの投票導線と、8月26日の本人XによるPaton直接案内を同じNEWSへ追加。b26-01人物写真を代表画像、b26-02 Paton出場者ページ画像とb33-01 Final STAGE案内グラフィックを同じカードのadditionalMediaに掲載。8月24日の元投稿も出典リンクとして維持）、8月24日朝の初メイク配信（同じNEWSに本人X投稿とInstagram Storyの内容を統合。b24-01 SHOWROOM横長画面を代表画像、オーナーが当該掲載面を明示承認した無加工b24-02 Story画像をHOME Latestと`/news/`の同じカードの2枚目に掲載。b24-01はGalleryにも掲載。b24-02 Story画像はNEWS 2枚目のままGallery非掲載。恒久permalinkのないStory URLは作っていない）、8月24日未明の夜枠・ラジオお礼と朝配信案内（同じNEWSにSHOWROOMファンルーム本文、Instagram Story動画、本人X投稿を統合。Fan Roomスクリーンショットは非公開）、8月23日の本人Instagram「龍みたいな雲」投稿、8月23日の湘南シーサイドサークル「真夏のミュージカル特集」放送記録（同じNEWSに放送後お礼の番組Instagram Story動画、STORY記事CTA、FM湘南マジックウェイブの放送後X投稿を同居。新しいNEWSは作っていない）、8月23日朝のSHOWROOMファンルーム2件、8月23日未明の地震直後FanRoom（同じNEWSにInstagram Story動画をmediaとして統合）、8月22日の夜枠お礼・翌8月23日の配信予定を伝えたX投稿、8月22日夜・夕方のファンルーム2件、8月22日のCAMPUS GIRLS審査員賞・予選ファイナル進出、8月21日のラジオDJ・ミスコンについてのTikTok投稿、「急遽なガンダ」X投稿、SHOWROOMファンルーム更新、配信へのお礼・次枠・投稿時点順位を伝えたInstagram Story、朝の「OHAYO!」Story・SHOWROOM配信案内X投稿、8/20以前の既存項目、4月23日の『さよならいちごちゃん』踊ってみたTikTok（b37。NEWSとGalleryが同じオブジェクトを共有。無音公開派生。activityIdsなし。HOME Latestの8月並びは変えない） | 9/2 おやすみりぃNEWSとPaton 2位NEWSは非リンクのInstagram Story。関連URLは本人Instagramプロフィール。おやすみりぃの追加CTAは確認済みSHOWROOMルーム（`t=`なし）。Paton投票CTAは付けない。9/1 朝あいさつNEWSの外部sourceは本人X投稿。9/1 パトン投票最終日NEWSと9月あいさつNEWS、8/31 肉声投票案内NEWS・現在1位NEWS・1.5倍デーNEWS・投票方法案内NEWSと8/30 30日連続配信記念日NEWSは非リンクのInstagram Story。8/31朝お礼NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/31 1.5倍NEWSの外部sourceは01:37の本人X投稿、additional sourceは07:32の本人X投稿。関連URLはPaton本人ページ。8/31配信中NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/30連続配信NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/30 Paton 3位NEWSの外部sourceは本人X投稿。関連URLはPaton本人ページ。8/30 キャンパスガールズ情報NEWSと8/29 Paton投票5日目NEWSは非リンクのInstagram Story。8/30朝SR案内NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。9/7 Mixch NEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/30 Mixch NEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/29配信中／3次審査NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/29 14:40ラジオ案内NEWSの外部sourceは本人X投稿。関連URLは確認済みSHOWROOMルーム。8/29 Paton投票4日目NEWSと8/28夜配信案内NEWSは非リンクのInstagram Story。8/28配信お礼NEWSの外部sourceは本人X投稿。8/28 3日目NEWSの外部sourceは本人X投稿。関連URLはPaton本人ページ。8/27投票方法案内は本人X投稿。関連URLはPaton本人ページ。8/27 Xフォロワー100人NEWSの外部sourceは本人X投稿。8/27 Mixch NEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/27ラジオ案内は本人Instagram Storyによる湘南シーサイドサークル番組Storyの再共有で、本人プロフィールは関連リンク。8/27配信案内は非リンクのInstagram Storyで、プロフィールは関連リンク。通常のTikTok / X投稿は本人または本人が登場する公開投稿URL。FanRoomと公開permalinkのないStoryは非リンク表示。番組Instagram Storyと生放送アーカイブ文字起こしは非リンク表示。InstagramプロフィールはStoryの出典ではなく関連リンク。8/26ガルアワイベ6位お礼NEWSの外部sourceは本人X投稿、関連URLは本人SHOWROOM、additional sourceは当該SHOWROOMイベントページ。8/26 Mixch 1.5倍デーNEWSの外部sourceは本人X投稿。関連URLはMixch本編。8/26投票案内・フォロワー400人・朝配信お礼の3件は非リンクのInstagram Story。8/26配信案内NEWS・8/25 Mixch NEWS・8/25 motivation NEWS・8/24朝メイクNEWS・8/24未明NEWS・Final STAGE案内NEWSの外部sourceは本人X投稿。Final STAGE案内NEWSは8月24日の案内をprimary source、8月26日の直接案内をadditional sourceとして持ち、関連URLはPaton本人ページ。b26の2枚は当該NEWS専用でGallery / `/stories/` には追加しない。8/25 Mixch NEWSの関連URLはMixch本編。8/23ラジオNEWSの外部sourceは局公式の放送後X投稿。8/24踊ってみたNEWSの外部permalinkは未確認。8/2誕生日NEWSの一次出典はInstagram、additional sourceは本人X誕生日朝投稿。4/23踊ってみたNEWSの外部sourceは湘南シーサイドサークルのTikTok通常投稿 | 投稿内容・動画説明文の確認済み範囲を要約。配信案内はアーカイブ表現。同じ内容の追記は既存NEWSへ統合し、`additionalSources` で複数の確認済みpermalinkを保持する。時間依存の順位は投稿時点の記録。同日は `sameDayOrder` の大きい項目を先にし、未指定同士は source-array 順を維持する。id 昇順にはしない |
 | `contest.ts` | `currentPhase` は 2026-09-03 確認の「3次審査」。審査期間 `start`/`end` は主催者 SCHEDULE の 2026-09-03〜2026-09-13 | 進出は三次審査進出者一覧 `https://2026.misscircle.jp/list/3`。開始後のフェーズ表示と日程は主催者 `https://www.misscircle.jp/` SCHEDULE（WEB投票 09/03 12:00〜09/13 23:59。SHOWROOM無料ギフト審査・イベント審査 09/03 05:00〜09/12 21:59） | ContestPhase は日付のみ。時刻は `supportEvents.ts` 側。SHOWROOMヘッダー枠 9/2 20:00〜9/12 12:59は載さない |
 | `supportEvents.ts` | CAMPUS GIRLS 2027 本選EX vol.1 SNS審査（2026-09-07 12:00〜2026-09-20 12:00 JST）と vol.1 Paton投票審査（2026-09-16 18:00〜2026-09-22 23:59 JST、投票先URL未確認のためCTAなし）。同じ日程表の vol.2〜6（9/28〜10/11、10/19〜11/1、11/9〜11/22、11/30〜12/13、12/21〜2027-01-03。各12:00。審査内訳は未確認のため期間のみ）。CAMPUS GIRLS 2027 予選A FinalSTAGEのPaton投票期間（2026-08-26 18:00〜2026-09-01 23:59 JST、終了済み）。MISS CIRCLE 三次審査の WEB投票（2026-09-03 12:00〜2026-09-13 23:59 JST）と SHOWROOM無料ギフト審査・イベント審査（2026-09-03 05:00〜2026-09-12 21:59 JST） Patonイベント詳細・三橋莉子（みりぃ）出場者ページ。ミスサーは主催者 SCHEDULE と SHOWROOMイベントページ、WEB投票 LIFF | Paton投票CTAは期間中のみホーム、Support、Calendar、Activity、NEWSへ表示。三次審査のWEB投票CTAも同じ期間ゲート。本選EXのPatonは期間のみ（CTAなし）。常設のENTRY 734導線は期間中も期間後もHOMEに残す。本文と一次出典は履歴として残す。#131の共有clock終了境界はcontest date-onlyのまま。新しいSupportEventの開始・終了も同じclockが読む |
 | `events.ts` | **空** | — | 予定セクションは非表示。配信予定は別系統 |
 | `media.ts` | 写真33枚（すべて `published: true`） | 9/6キャンガル予選final結果報告1枚（b63-01。`sns-post`、sourceUrlは当該X投稿）、8/18ラジオSHOWROOM画面1枚（b32-01）、8/5パンダ耳過去pic1枚（b31-01）、8/6 OHAYO白いポロ1枚（b30-01）、8/2 21歳誕生日の本人X室内セルフィー1枚（b29-01。`sns-post`、sourceUrlは当該X投稿。花束・ケーキのb01、落ち葉b05、ウインクb06、鏡セルフィーb08とは別カット）、8/26 ガルアワイベ最終日6位お礼の本人X写真1枚（b28-01。`sns-post`、sourceUrlは当該X投稿）、8/26 投票案内Storyの静止画2枚（b27-07 鏡 / b27-06 コラージュ。Instagram Story・恒久permalinkなしのため `sourceUrl: null`）、8/24メイクSHOWROOM画面1枚（b24-01。既存NEWS JPEGは維持してGalleryへ）、誕生日5枚、マンゴーかき氷5枚（b10）、8/21ガンダ写真1枚（b14-01。既存NEWS JPEGは維持してGalleryへ）、龍みたいな雲3枚（b20）は各Instagram投稿。8/23 湘南シーサイドサークル公式X写真2枚（b22）・ネックレス・落ち葉（b05-01）・8/20 朝の写真（b08-01）は `owner-provided` | b63 は `sourceDate: 2026-09-06`。b32 は `sourceDate: 2026-08-18`。b31 は `sourceDate: 2026-08-05`。b30 は `sourceDate: 2026-08-06`。b29 は `sourceDate: 2026-08-02`。b28 / b27 は `sourceDate: 2026-08-26`。b24 は `sourceDate: 2026-08-24`。b14 は `sourceDate: 2026-08-21`。b22 / b20 は一次出典と `sourceDate: 2026-08-23` を記録。b08-01 と b10 は一次出典と `sourceDate: 2026-08-20` を記録。未確認の `sourceDate` / `credit` は `null`。正方形・縦写真は `aspect` で切り抜きを避ける |
-| `galleryVideos.ts` | 独立動画32本 + Mixch outbound player 4本（Mixch = 8/30 配信＆ムービー最終日 `UBHJplv4`、8/27 表情豊かなみりぃ `VDojsMY5`、8/26 1.5倍デー `nxqYblH8`、8/25 自信のないあなたへ `ZY4hSt3K`。ファイルは自己ホストしていない。b65-02 = 9/7 朝配信お礼・次枠22:00・「5日目ポチッはこちらから」Story、b65-01 = 9/6 「30分後5日目の投票できるよ」Story、b59-01 = 9/4 投票2日目の呼びかけStory、b58-01 = 9/5 TikTokラジオDJ、b47-01 = 9/2 おやすみりぃ／翌日9:00 SR案内Story、b47-02 = 9/2 Paton 2位お礼Story、b46-01 = 9/1 パトン投票最終日Story、b46-02 = 9/1 9月あいさつStory、b45-01 = 8/31 キャンパスガールズ2027肉声投票案内Story、b44-02 = 8/31 現在1位／1.5倍DAY Story、b44-01 = 8/31 Paton投票1.5倍デー緊急告知Story、b43-02 = 8/30 キャンパスガールズ情報／2位を守り抜きたいStory、b43-01 = 8/29 Paton投票5日目Story、b41-02 = 8/29 Paton投票4日目Story、b41-01 = 8/28夜SHOWROOM配信案内Story、b36-01 = 8/27 ラジオ「映画」テーマ案内Story、b35-01 = 8/27 ミスサーSR 14:00配信案内Story、b27-02 = 8/26 投票開始の鏡Story、b27-01 = 8/26 投票案内コラージュStory、b25 = 8/24 湘南シーサイドサークル「Yes!東京」踊ってみた、b23 = 8/24 夜枠お礼・朝配信Story、b21 = 8/23 湘南シーサイドサークル放送後お礼Story、b19 = 8/23 湘南シーサイドサークル Instagram Story、b18 = 8/23 地震後Story、b15 = 8/21 TikTok、b13 = 8/21 イベントStory、b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story、b37 = 4/23 さよならいちごちゃん TikTok。すべて `published: true`。新しい順のあと、8月より古い自己ホストを Mixch の直前へ置く） | Mixchは本人Mixch公開ページ。その他はowner-provided。b36-01は本人Instagram Storyでの番組Story再共有、b15 / b37はTikTok公開投稿URL、b11は本人X投稿URL、b25 / b21 / b19は番組Instagram（b25はpermalink未確認の非リンク、b21 / b19はStory非リンク）、その他StoryはInstagram Story（非リンク） | Mixch 4本は Latest / NEWS + Gallery で同じオブジェクトを共有（`src/data/mixchMovies.ts`）。b47-01 / b47-02 / b46-01 / b46-02 / b45-01 / b44-02 / b44-01 / b43-02 / b43-01 / b41-02 / b41-01 / b36-01 / b35-01 / b27-02 / b27-01 は Latest / NEWS + Gallery、b25 は Latest / NEWS + Gallery、b23 は Latest / NEWS + Gallery、b21 は Latest / NEWS + Gallery + STORY closing、b19 は Gallery + STORY lead。b18 は既存地震NEWSと、b37 / b15 / b13 / b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。FanRoom画像とDrive Gallery（b02）は含めない |
+| `galleryVideos.ts` | 独立動画34本 + Mixch outbound player 5本（Mixch = 9/7 本選EX初日 Aブロック本選進出決定 `Tfb8i9dy`、8/30 配信＆ムービー最終日 `UBHJplv4`、8/27 表情豊かなみりぃ `VDojsMY5`、8/26 1.5倍デー `nxqYblH8`、8/25 自信のないあなたへ `ZY4hSt3K`。ファイルは自己ホストしていない。b66-01 = 9/8 配信お礼・「明日の朝枠は7:30〜8:20」Story、b65-02 = 9/7 朝配信お礼・次枠22:00・「5日目ポチッはこちらから」Story、b65-01 = 9/6 「30分後5日目の投票できるよ」Story、b59-01 = 9/4 投票2日目の呼びかけStory、b58-01 = 9/5 TikTokラジオDJ、b47-01 = 9/2 おやすみりぃ／翌日9:00 SR案内Story、b47-02 = 9/2 Paton 2位お礼Story、b46-01 = 9/1 パトン投票最終日Story、b46-02 = 9/1 9月あいさつStory、b45-01 = 8/31 キャンパスガールズ2027肉声投票案内Story、b44-02 = 8/31 現在1位／1.5倍DAY Story、b44-01 = 8/31 Paton投票1.5倍デー緊急告知Story、b43-02 = 8/30 キャンパスガールズ情報／2位を守り抜きたいStory、b43-01 = 8/29 Paton投票5日目Story、b41-02 = 8/29 Paton投票4日目Story、b41-01 = 8/28夜SHOWROOM配信案内Story、b36-01 = 8/27 ラジオ「映画」テーマ案内Story、b35-01 = 8/27 ミスサーSR 14:00配信案内Story、b27-02 = 8/26 投票開始の鏡Story、b27-01 = 8/26 投票案内コラージュStory、b25 = 8/24 湘南シーサイドサークル「Yes!東京」踊ってみた、b23 = 8/24 夜枠お礼・朝配信Story、b21 = 8/23 湘南シーサイドサークル放送後お礼Story、b19 = 8/23 湘南シーサイドサークル Instagram Story、b18 = 8/23 地震後Story、b15 = 8/21 TikTok、b13 = 8/21 イベントStory、b12 = 8/21 朝Story、b11 = 8/21 朝のX投稿、b07 = 8/20 朝Story、b09 = 8/19 2次審査通過Story、b03 = 8/17 朝Story、b37 = 4/23 さよならいちごちゃん TikTok。すべて `published: true`。新しい順のあと、8月より古い自己ホストを Mixch の直前へ置く） | Mixchは本人Mixch公開ページ。その他はowner-provided。b36-01は本人Instagram Storyでの番組Story再共有、b15 / b37はTikTok公開投稿URL、b11は本人X投稿URL、b25 / b21 / b19は番組Instagram（b25はpermalink未確認の非リンク、b21 / b19はStory非リンク）、その他StoryはInstagram Story（非リンク） | Mixch 5本は Latest / NEWS + Gallery で同じオブジェクトを共有（`src/data/mixchMovies.ts`）。b47-01 / b47-02 / b46-01 / b46-02 / b45-01 / b44-02 / b44-01 / b43-02 / b43-01 / b41-02 / b41-01 / b36-01 / b35-01 / b27-02 / b27-01 は Latest / NEWS + Gallery、b25 は Latest / NEWS + Gallery、b23 は Latest / NEWS + Gallery、b21 は Latest / NEWS + Gallery + STORY closing、b19 は Gallery + STORY lead。b18 は既存地震NEWSと、b37 / b15 / b13 / b12 / b11 / b07 / b03 は Latest と、b09 は STORY 記事 `/stories/second-round-result-2026/` と、それぞれ同じ MP4・poster を共有。FanRoom画像とDrive Gallery（b02）は含めない |
 | `socials.ts` | X / Instagram / TikTok / SHOWROOM / MixChannel | X〜SHOWROOMは ENTRY 734 実ページ。MixChannelは本人プロフィール `https://mixch.tv/u/10114673` | SHOWROOM はコンテスト用ルーム。終了後に変わる可能性あり |
 | `links.ts` | ENTRY 734、CAMPUS GIRLS Paton投票、FMスタッフ、Mily個別ページ、湘南シーサイドサークル | 各 URL | SNS は `socials.ts` 側。重複して足さない |
 | `profile.ts` | 公表名、活動名、生年月日、出身、MBTI、大学・学年、サークル、趣味、特技、ファンネーム、活動・嗜好 | `profileSources` の一次情報台帳。MBTIは本人MixChannel | 変動項目には `asOf` を付け、各項目を `sourceIds` で出典へ結び付ける。MBTIから性格を推測しない |
@@ -1083,3 +1083,440 @@ PR 本文に、一次ソース URL と「推測していないこと」を書く
 - 9/7 の配信枠（06:30–07:30 / 22:00–23:00）は本人X（9/6）由来の既存 `streamSchedule`。
   このStoryで枠を足したり変えたりしない。
 - mainでbatch b60〜b64が先に使用されているため、この Story 動画2本は b65 として採番する。
+
+
+### 2026-09-07 Mixch「キャンガル2027Aブロック本選進出決定‼️」
+
+- `news.ts` は85件。本人X
+  `https://x.com/Mily_chan36/status/2096935241034399948` が案内した
+  Mixch `https://mixch.tv/m/Tfb8i9dy` を、Mixch outbound player card として
+  Latest / NEWS / Gallery で共有する。id は `2026-09-07-mixch-ex-period-day1`。
+- Mixch uploadDate は 2026-09-07T12:11:51.000Z（21:11 JST）。X投稿は 21:14 JST。
+  NEWS日付は `2026-09-07`。sameDayOrder: 20 で同日の本選EX案内（09:15 JST / 10）
+  と朝Story（5）より先。時刻はNEWS本文へ書かない。
+- 出典は本人X投稿。CTAはMixch本編。確認済み本人アカウント
+  `https://mixch.tv/u/10114673`。poster は Mixch 公式サムネイル
+  （`thumb_normal`、480×853）。ファイルは自己ホストしない。`_movie_mps` は再生しない。
+- CAMPUS GIRLS Activity の関連NEWSとしては出すが、関連メディアには
+  Mixchカードを出さない。Paton CTA / SHOWROOM CTA は付けない。
+  本選EXの投票先URLは未確認のまま。
+- Gallery / media.ts の自己ホスト、`/stories/` / highlights / events /
+  streamSchedule / contest.ts / profile には追加しない。
+- 本文はMixch説明文の確認済み範囲を要約する。投稿に無い順位・得点は書かない。
+  「本選進出」はMixchタイトルと9/6結果報告の確認済み事実。
+
+### 2026-09-08 Instagram Story 配信お礼・「明日の朝枠は7:30〜8:20」（batch b66）
+
+- オーナーがチャットで直接提供した本人Instagram Story動画1本。SNSから再取得していない。
+- `news.ts` は85件。b66-01 は id `2026-09-08-stream-thanks-morning-slot-story`、sameDayOrder: 10、
+  activityIds: live-stream。9/8 の先頭に置く。
+- HOME Latest / `/news/` と Gallery が公開MP4 1本・poster 1枚・manifest object 1件を共有する。
+  `galleryVideos.ts` は独立動画33本＋Mixch outbound player 5本で、b66-01 を先頭へ置く。
+  LIVE STREAM Activity の関連NEWS・関連メディアにも出る。`/stories/`、highlights、events、
+  streamSchedule、`media.ts`、contest.ts には追加しない。
+- source date / NEWS日付 `2026-09-08` は、内容（9/7 22:00〜23:00 枠後の配信お礼）と
+  元動画のcontainer creation_time（2026-09-08 00:15 JST。ファイルメタデータであり投稿時刻の
+  確定値ではない）が一致し、オーナーがその直後に提供したことによる。NEWS本文は
+  「9月8日未明」とし、時刻は書かない。
+- 「明日の朝枠は7:30〜8:20」は画面表示の引用に留める。「明日」が9/8か9/9かは画面から
+  確定できないため、b47（おやすみりぃ）と同じく streamSchedule / events へ転記しない。
+  既存の 9/8 07:00–08:00 枠（本人配布タイムテーブル由来）はこの更新で変えない。
+  変更が必要ならオーナーが別途確認する。
+- 恒久permalinkがないため、出典は非リンクの `Instagram Story` label。本人Instagram
+  プロフィールは関連CTAであり、Storyの出典URLとして扱わない。追加CTAは既存の
+  SHOWROOMルームのみ。投票CTA・Paton CTAは付けない。
+- 顔文字は画面の「( ˈ‿ˈ )」に近い文字で転記した（完全一致は保証しない）。
+- 画面下部にInstagramの再投稿表示（mily_chan36）が残る。動画はcropしない方針のため、
+  そのまま公開する。
+- 公開派生は video-only。元素材の音声ストリームはなく、映像は H.264 High / 720×1280 /
+  1fps / 20フレーム を `-c:v copy` で remux し、再エンコード・crop・scale・短縮・AI加工はしない。
+- mainでbatch b65 が先に使用されているため、この Story 動画は b66 として採番する。
+
+## 2026-09-08 過去配信の歌唱曲を追加（曲リスト調査）
+
+- 8/25朝の録画内0:39:54頃から「ロマンスの神様」。自動字幕の歌唱開始案内、複数節の歌声、終了後の曲名・歌手紹介を照合。全編の手動聴取ではない。
+- 原曲リンクは広瀬 香美 Official YouTube channel の「ロマンスの神様」。公式アーティスト表示と JVCKENWOOD Victor Entertainment 提供の説明を9/8にブラウザで確認: https://www.youtube.com/watch?v=l8-RA3B0YRc
+- 8/18夜の録画内0:38:07〜0:40:05頃に「ぼよよん行進曲」。自動字幕の歌唱相談、歌声区間、終了後のお礼を照合。全編の手動聴取ではない。
+- 原曲歌手表記はヤマハの曲情報 https://yamahamusicdata.jp/data/80026 と照合。YouTube導線は「よしお兄さんとあそぼう!」の公式企画動画 https://www.youtube.com/watch?v=nAjJluQCSGE 。動画説明で今井ゆうぞう・はいだしょうこの参加、制作協力を9/8に確認。原盤音源ではないため `youtubeVersionNote` と「公式歌唱を聴く」の表示を一覧・各回で共有する。
+- 新規の2回は歌唱区間だけの最小メモ。目標・ランキング・次回予告・写真を推測で埋めない。元録画URL/ID・字幕本文・歌詞は非掲載。新規2 URLのみ既存allowlistへ追加。
+- 調査件数・未確認部分は STREAM-SONG-CATALOG-QA.md を参照。Draft #191 を維持する。
+
+### 9/8 音声認識で追加：8/19昼「アイドル」
+
+- 字幕のない回について、手元の音声を区間検出し、選曲相談・歌唱・終了後の会話をローカル音声認識で照合した。1:36:25頃から1:39:45頃までの複数節を確認。開始時刻は目安で、全編手動聴取ではない。
+- YouTube公式ページのメタデータで曲名「YOASOBI『アイドル』 Official Music Video」、投稿元 YOASOBI / @YOASOBI_Official、public、長さ226秒を9/8に確認。公式アーティストのWeverse掲載とも照合: https://weverse.io/yoasobi/media/3-165642545?hl=ja
+- 掲載リンク: https://www.youtube.com/watch?v=ZRtdQ81jPUQ 。この1 URLをallowlistへ追加。元録画参照・歌詞・認識結果は非掲載。
+
+### 9/8 音声認識で追加：8/26夜「愛をこめて花束を」
+
+- 録画内0:11:52頃からの歌唱を、歌声の区間検出とローカル音声認識で照合。既存9/6朝と同じ曲の履歴として保存し、曲数を水増ししない。
+- 原曲は既存のSuperfly公式リンクを再利用。歌詞・元録画参照は非掲載。全編手動聴取ではない。
+
+### 9/8 音声認識で追加：8/7昼の2曲
+
+- 0:46:45頃から「可愛くてごめん」、1:08:46頃から「生まれてはじめて」。歌声の区間検出と、前後を含むローカル音声認識を照合。いずれも複数節の歌唱を確認。全編の手動聴取ではない。
+- 「可愛くてごめん」はHoneyWorks OFFICIAL / @HoneyWorksOFFICIALの個別動画メタデータ（曲名・ちゅーたん〈CV：早見沙織〉・public・221秒）と公式動画ページを9/8に照合: https://www.youtube.com/watch?v=K4xLi8IF1FM 。歌唱版を明記し、配信使用音源がこの版だったとは断定しない。
+- 「生まれてはじめて」は既存の原曲リンクを再利用し、9/6朝と同じ曲の別履歴として保存。新規allowlistは1 URLのみ。
+- 8/21昼にも1:32:03頃から同曲「愛をこめて花束を」を確認。歌声区間検出と前後を含むローカル音声認識を照合し、複数節と終了後のお礼を確認。原曲リンクは既存Superflyのものを再利用。
+
+### 9/8 音声認識で追加：8/15昼「SWEET MEMORIES」
+
+- 0:47:57頃からの歌唱と、終了後の曲名紹介をローカル音声認識で照合。全編の手動聴取ではない。
+- 原曲リンクは松田聖子オフィシャルYouTubeチャンネルの「Sweet Memories」: https://www.youtube.com/watch?v=2LVVH_D-mR4 。9/8に公式アーティスト表示、Sony Music Direct提供、アルバムTouch Me, Seiko、1983年の録音表記を照合。この1 URLをallowlistへ追加。
+
+### 9/8 音声認識で追加：8/21朝「元彼女のみなさまへ」
+
+- 歌唱の案内後、1:47:20頃〜1:51:00頃の複数節の歌唱を区間検出とローカル音声認識で照合。開始目安は20秒単位の検出区間で、厳密な秒位置の聴取確認ではないことを各回注記に残す。
+- コレサワの公式アーティストチャンネルにある「元彼女のみなさまへ」、Reco Records / NIPPON COLUMBIA提供の音源を9/8に照合: https://www.youtube.com/watch?v=UykGAa6AfbA 。この1 URLをallowlistへ追加。
+
+### 9/8 音声認識で追加：8/6朝「かわいいだけじゃだめですか？」
+
+- 2:22:56頃からの複数節の歌唱を、歌声区間検出と前後を含むローカル音声認識で照合。夜の振り返り発言だけから追加したものではない。直前の短い別曲の口ずさみはこの記録に混ぜない。
+- CUTIE STREETの公式アーティスト音源を9/8に照合: https://www.youtube.com/watch?v=d0rOHgzCe6s 。メタデータはThe Orchard Enterprises提供、2024 KAWAII LAB.、2024-09-09発売、長さ251秒。この1 URLをallowlistへ追加。
+
+### 9/8 音声認識で追加：8/14昼の2曲
+
+- 0:26:13頃「愛をこめて花束を」、0:49:47頃「生まれてはじめて」。歌声区間検出と前後を含むローカル音声認識で複数節と終了後の会話を照合。原曲リンクはいずれも既存データを再利用。全編手動聴取ではない。
+
+### 9/8 音声認識で追加：8/26夜の追加2曲
+
+- 0:30:28頃「超最強」、0:50:43頃「好きすぎて滅！」。初回の認識が不明瞭だったため、前後区間を広げ、別サイズのローカル音声認識モデルで選曲案内と複数節を再照合した。全編手動聴取ではない。
+- 「超最強」は超ときめき♡宣伝部の公式アーティストチャンネル、avex trax提供音源を9/8に確認: https://www.youtube.com/watch?v=PwlB-rXk1gM 。メタデータはpublic・200秒・2024-12-04リリース。
+- 「好きすぎて滅！」はM!LKの公式Music Video: https://www.youtube.com/watch?v=ZVUxJsPfoX8 。公式サイトのMV案内 https://sd-milk.com/contents/999489 と個別YouTubeページを9/8に照合。新規2 URLをallowlistへ追加。
+
+### 2026-09-08 9月6日夜・9月7日朝の配信記事
+
+- オーナーから3配信の記事化・LIVE STREAM掲載を依頼されたうち、取得できた9月6日夜（31分27秒）・9月7日朝（44分40秒）を、それぞれ既存の共通カードへ追加。9月7日夜は当時まだ素材取得が終わっておらず、後続の更新で追加した。
+- 録画から取り出した音声をWhisper smallで日本語自動認識し、全区間の結果を読み、話題と時刻を照合。全編の手動聴取は未実施。録画名の開始記録を概数として表示し、時刻は録画先頭からの目安。
+- 夜は本選進出へのお祝い、ラジオへのメール、おしゃべりの掛け合い、安全への呼びかけ、翌朝の変更予告を要約。防災放送のミュート区間あり。歌唱は録画内で確認されず。ランキングはファンルームへ載せるとの案内で、録画内での読み上げを創作しない。
+- 朝はメイクの工夫、Xのお知らせの出し方、初配信前の迷い、投票への感謝を要約。13位から1位の読み上げは個人名を除外。約6分15秒の短い口ずさみは曲名未確定のためsongsを追加せず。検索候補だけで曲名を確定していない。
+- 朝の同日22時案内と、夜の翌朝変更予告はその配信当時の発言。現在の予定データへ転記しない。
+- ユーザーの本人の写りを気遣う方針を踏まえ、新しく承認された静止画がない今回は記事のみ追加。既存画像・歌一覧の別PR・他ページのデータは変更しない。録画・音声・全文文字起こし・視聴者名・非公開素材の受け渡し情報は公開しない。
+
+### 2026-09-08 承認済み配信スクショ20枚を追加
+
+- 9月6日夜・9月7日朝の記事へ、それぞれ10枚の実フレームを追加。オーナーが全20枚を確認し「全部かわいい・おっけい」と掲載承認。
+- batch b67（夜）・b68（朝）。各回galleryから代表1枚を共有し、個別保存と10枚ZIPを追加。公開JPEGは確認済み画像と同じバイト列、640×360。顔加工・生成・拡大・追加cropなし。第三者や個人名の写り込みなし。朝はメイク後のポーズを選定。
+- 全画像の目視・寸法・EXIF不在、ZIP内10枚と単体画像のバイト一致を確認。LIVE専用とし、他ページや既存の別回画像には変更なし。
+
+### 2026-09-08 9月7日夜の配信記事
+
+- 残っていた9月7日夜（22:03頃〜約73分）を、既存の共通カードへ日時順に追加。同じ日は遅い枠が先なので、9月7日朝の前へ置く。
+- オーナー提供録画から取り出した音声をWhisper smallで日本語自動認識し、全区間の結果を読み、話題と時刻を照合。全編の手動聴取は未実施。録画名の開始記録を概数として表示し、時刻は録画先頭からの目安。
+- 本選EX期間の意味、三次審査の毎日投票とキラキラ、二つのコンテストへ勢いで挑戦した話、活動名Milyの由来、内面を褒めてもらえること、終盤の一曲を要約。ランキングは時間がないためファンルームで報告すると案内しており、録画内での読み上げを創作しない。
+- 歌唱は自動文字起こしと公開歌詞を照合し、HY「366日」を確認。原曲リンクはHY／レーベルのYouTube動画、参考カラオケはガイドメロディなしの伴奏。配信で使用した音源とは断定しない。歌詞は掲載しない。短い引用とみられる箇所は曲名未確定のため歌リストに含めない。
+- 翌朝7時半の案内はその配信当時の発言。現在の予定データへ転記しない。既存の9/8 07:00–08:00枠は変えない。
+- 本人の写りを気遣う方針と、今回新たに承認された静止画がないことから記事のみ追加。NEWS / Gallery / media.ts / galleryVideos / `/stories/` / highlights / events / streamSchedule / contest.ts / profile は変更しない。歌検索の別PRには触れていない。録画・音声・全文文字起こし・視聴者名・非公開素材の受け渡し情報は公開しない。
+
+
+### 2026-09-08 9月1日夜の記事と承認済み写真
+
+- 9月1日22:31頃〜約108分の夜配信を既存StreamRecapへ追加。自動字幕全文を読み、取得音声8区間計9分15秒の別ASRと要点を照合。全編手動聴取は未実施と明記。
+- 言葉の伝え方、二つの挑戦、一歩を踏み出す勇気、Paton締め切り後に2位と報告した場面を要約。次回案内は配信時点の記録。確定できない歌唱曲を追加しない。
+- 実フレームの全体概観、候補前後と0.2秒刻みの比較、全候補実寸確認を行い10枚を提示。オーナーの「おっけいー いいよ！」で提示した全10枚を掲載承認。b69としてLIVE専用galleryへ追加し、その中の1枚を代表に共有。
+- 640×360の承認画像を同じバイト列で保存。顔生成・加工・拡大なし。個人名・第三者の写り込みなし。撤回済み画像の復活なし。単体保存名とZIP内10枚の名前・ハッシュ一致を確認。
+
+## 2026-09-08: 8月31日 朝・夜の配信メモ
+
+- 朝はラジオ配信約31分。予定の前倒し、応援の言葉への感謝、目標を言えるようになった自信を、録画の自動字幕と音声の自動文字起こしから整理した。
+- 夜は21:28頃からの録画約65分を本文とタイムラインの対象にした。21:01頃からの約17分の録画も別途照合したが、間の内容と配信の連続性は未確定。録画開始時刻を実際の配信開始時刻と断定しない。
+- 数字と順位は本人がその配信中に述べた記録。現在の値、審査の確定結果や次回予定へ転記しない。
+- 篠笛を披露する場面とカラオケ曲検索の話題を、確定した歌唱とは分けた。確認できた歌唱曲の追加はない。
+- 写真候補は朝1枚・夜10枚を提示し、オーナーの「よし！続きてー！」で承認。朝1枚はb70、本文の対象となる21:28頃の録画の5枚はb71として掲載。21:01頃の録画の5枚は承認済みで保持し、配信の対応が未確認のため混在させない。朝は同じ静止画のラジオ配信のため枚数を増やさない。撤回済みの写真は復活させていない。
+- 元の640×360の構図を保持し、顔の加工や拡大はしない。各galleryの単体保存とZIPを同じ画像で用意し、内容の一致を確認した。
+- 全編手動聴取とは記録しない。視聴者名、録画原本・受け渡し先、全文文字起こしは公開しない。
+
+## 2026-09-08: 8月30日 夜の配信メモ
+
+- 20:11頃からの録画約88分を、既存StreamRecapに日時順で追加。全編の自動字幕を読み、録画音声の別ASRと要点を照合。全編手動聴取ではない。記録時刻と実際の配信開始時刻を区別する。
+- 「30日ありがとう」のボード、ラジオの即興俳句、初配信の再現、応援で得た自信、声と話し方を磨く思いを要約。配信日数の厳密な計算は断定しない。読み上げランキングは13位から1位の事実のみ残し、個人名を除く。
+- 短い口ずさみは歌唱・曲名の照合が十分でないためsongsへ未登録。会話に出た曲を歌唱とみなさない。翌朝の案内は過去の見込みとして記載し、現在の予定には転記しない。
+- 実フレームから候補10枚を前後比較・実寸目視して提示。本文を先行公開後、オーナーの「全部おっけい！」で全10枚の掲載承認を受け、b72として同じ回へ追加。撤回済み画像は復活させない。
+- LIVE専用の追加。録画原本・全文文字起こし・視聴者名・非公開素材のURLやIDは公開しない。
+
+## 2026-09-08: 8月30日 朝のメイク配信
+
+- 06:04頃からの録画約39分を既存StreamRecapへ追加。自動字幕の全文を読み、取得音声の別ASRで歌唱・完成の発言・ラジオ案内・締めなどを照合。全編手動聴取ではない。30日記念は本人の発言として記録し、録画の記録時刻を配信開始確定時刻とはしない。
+- ラジオ前のメイク、初めて来た方への挨拶、毎日続けたい思い、投票への呼びかけ、完成後の披露を要約。ランキングは13位から1位の事実のみ。ラジオと夜枠の案内は過去の発言として記録し、現行予定へ転記しない。
+- 24:15頃から「超最強」の一部を歌う区間を自動字幕・取得音声ASRと歌詞（https://www.uta-net.com/song/364571/）で照合。全文歌唱ではないことを本文に明記。原曲は既存の公式配信音源 https://www.youtube.com/watch?v=PwlB-rXk1gM の曲名・アーティストを再確認して再利用。
+- 参考カラオケはカラオケ歌っちゃ王の「ガイドなし」 https://www.youtube.com/watch?v=Wuyx1pDlDvg を個別確認。使用音源とは断定しない。検証済みのこのURLだけ既存の許可リストに追加し、非公開原本の検査は維持する。
+- メイク完成付近以降の候補を前後比較し、10枚を実寸確認して提示・保存。オーナーの「全部おっけい！」で全10枚の掲載承認を受け、b73として当該回へ追加。本人の顔の生成・加工は行わず、撤回済み画像も復活させない。
+
+- 朝夜とも元の640×360を保持し、各10枚のgalleryと代表画像・単体保存・ZIPを設定。ZIP内の名前・件数・SHA256が承認した単体画像と一致することを確認。
+## 2026-09-08: 8月29日 昼のラジオ配信
+
+- 14:43頃からの録画約59分を、自動字幕全文と録画音声の自動文字起こしから整理。全編手動聴取ではない。ファイナルへの意欲、毎日配信29日目、アバター、声への自信、原稿の下読みを要約。順位は本人が当時述べた記録で、翌日の案内は過去時制を維持。
+- 51:20頃の「ドライフラワー」（優里）、54:50頃の「とくべチュ、して」（＝LOVE）はいずれも短い部分歌唱。各区間の音声ASRと字幕、歌ネットの当該曲歌詞を照合。歌詞は転載しない。16:21頃の短い旋律は未確定のまま登録しない。
+- 原曲の個別動画・曲名・公式投稿元を確認: https://www.youtube.com/watch?v=kzZ6KXDM1RI （優里公式MVディレクターズカット版、Sony Music告知 https://www.sonymusic.co.jp/artist/yuri/info/527749 も照合）、https://www.youtube.com/watch?v=F3P8vcZkIh4 （＝LOVE公式MV）。照合先 https://www.uta-net.com/song/292676/ / https://www.uta-net.com/song/368288/ 。
+- 「ドライフラワー」の参考カラオケは https://www.youtube.com/watch?v=vtJEXV-ZZBw （カラオケ歌っちゃ王、ガイドなし）を個別確認。使用音源とは断定しない。「とくべチュ、して」は今回参考伴奏を確認できず原曲のみ。
+- 録画全体の30場面を比較し、同じ花束の写真が表示されるラジオ配信と確認。選んだ実フレームを640×360で目視し、第三者情報なし。1枚をb74としてLIVEだけへ掲載し、同じ写真で10枚に水増ししない。ユーザーの今後も掲載OKという明示承認に基づき提示・保存・掲載。顔加工なし、撤回済み画像の復活なし。ZIPと単体画像の一致確認済み。
+## 2026-09-08: 8月28日 朝のラジオ配信
+
+- 07:33頃からの録画約50分を既存StreamRecapへ追加。自動字幕を全文読み、録画音声の別ASRとラジオの案内・締め等を照合。全編手動聴取とは記録しない。記録時刻と実際の配信開始時刻を区別する。
+- 初めての方・二回目の訪問への感謝、朝から元気を届けたい思い、自己紹介、ラジオの聴き方、投票への応援を要約。視聴者名・私的なやり取り・生活の詳細は含めない。ランキングは13位から1位の事実のみ。次枠20時と日曜ラジオの映画テーマは配信時点の案内で、現行予定へ転記しない。確認できた歌唱曲の追加なし。
+- 録画全体25場面と候補前後を目視。チュロスを手にした写真が表示されるラジオ配信のため、当該録画の静止画1枚をb75としてLIVEへ追加。同じ写真で10枚に水増ししない。選定画像は640×360で個別目視、顔加工なし、第三者の写り込みなし。今後の選定写真もOKというオーナーの明示承認を引き継ぐ。単体画像・ZIPの件数、名前、SHA256一致を確認。撤回済み写真は復活させない。
+
+## 2026-09-08 8月28日夜の配信メモ
+
+- オーナー提供録画の自動字幕全編と別音声認識の主要箇所を照合し、挑戦・発信・MC・応援者への感謝を要約。全編手動聴取は未実施。
+- ロコローションの短い部分歌唱を記録。原曲MVはORANGE RANGE公式サイトの案内とYouTubeの公式アーティスト投稿を照合。未確定のフレーズは除外。
+- 承認範囲内の実フレーム10枚をb76としてLIVE専用に配置。概観後、候補前後77フレーム比較と選定全画像の実寸目視を実施。元640×360を保持し、単体とZIPのSHA256一致確認。第三者情報・全文文字起こし・原本参照は公開しない。
+
+## 2026-09-08 8月27日夜の配信メモ
+
+- 自動字幕全編と主要6区間の別音声認識を照合し、料理相談・二つの挑戦・自信・応援への感謝を要約。全編手動聴取は未実施。
+- 完璧主義で☆の短い部分歌唱を記録。FRUITS ZIPPER公式ディスコグラフィーと公式YouTube投稿で曲名・投稿元を照合し、Dance Practice版と明示。参考伴奏は未確認のため未掲載。
+- 全体概観後に77フレームを比較、選定全10枚を実寸目視。今後の選定写真もOKという承認範囲でb77をLIVE専用へ掲載。元640×360の構図を保持し顔加工なし。単体とZIPのバイト一致確認。
+
+## 2026-09-08 8月27日昼の配信メモ
+
+- 自動字幕全編と主要5区間の別音声認識を照合し、ラジオ形式の雑談、吹奏楽の経験、声や話し方への感想、フォローの目標を要約。全編手動聴取は未実施。
+- この回の歌唱は確定できず、前日の歌の振り返りや会話中の曲名は曲リストへ登録していない。
+- 全体40場面は同じ写真を表示。299/300/301秒を実寸比較し、重複を避け1枚をb78としてLIVE専用へ配置。元640×360と構図を保持、顔加工なし。単体とZIP一致確認、今後の選定画像もOKという承認範囲を適用。
+
+## 2026-09-08 8月26日夜の配信メモ
+
+- 録画全編の自動文字起こしと歌唱前後の音声認識を照合し、イベント最終日の緊張、応援への感謝、次の挑戦を既存記事へ追記。全編手動聴取は未実施。翌日の配信案内は配信時点の発言として記録。
+- 確認済みの3曲と原曲リンクを維持。参考伴奏は未確認のため追加しない。
+- 全体概観後、候補前後70フレームを比較し、選定画像を実寸目視。ブレや似た構図を除いた8枚をb79としてLIVE専用に掲載。元640×360を保持し、顔加工なし。単体とZIPの一致確認済み。今後の選定画像もOKという承認範囲を適用し、撤回済み画像は復活させない。
+
+## 2026-09-08 8月26日昼の配信メモ
+
+- 自動字幕を全編読み、メイク配信・呼び名・夜のイベント最終枠への呼びかけを既存StreamRecap形式へ追加。全編手動聴取は未実施。次枠は配信時点の案内として記録。
+- 曲名の話題や曲名を確定できない声出しは歌唱リストへ追加していない。
+- 全体34場面の概観後、メイク完成後の候補前後70フレームを比較し、全選定画像を実寸目視。8枚をb80としてLIVE専用へ掲載。顔加工なし、元640×360と構図を保持し、単体とZIPの一致確認済み。今後の選定画像もOKという承認範囲を適用し、撤回済み写真を復活させない。
+
+## 2026-09-08 8月26日朝の配信メモ
+
+- 約121分の録画の自動字幕を全編読取。声や話し方への思い、応援で前向きになれる配信、仲間とファイナルへ進みたい気持ちを要約。全編手動聴取は未実施。次枠14時40分は配信時点の案内として扱う。
+- 曲名の話題・BGMと本人の歌唱を区別し、確定できる歌唱曲は追加しない。ランキングは13位から1位の読み上げのみ記録し、個人名は含めない。
+- 全体60場面で同じ写真が表示されるラジオ形式を確認。実寸で確認した画像も目を閉じた写真で、指定の選定基準に合わないため、この回は画像を掲載しない。別回の画像流用・顔加工・撤回画像の復活なし。
+
+## 2026-09-08 8月21日夜の配信メモ
+
+- 約159分の録画の自動字幕を全編読取し、主要8区間の音声認識と照合。三つ編み、ファンネーム、初めての人を迎える配信への思い、締めの感謝を要約。全編手動聴取は未実施。次枠は配信時点の案内として扱う。
+- 誕生日曲の検索・相談は歌唱として登録しない。順位の数値・視聴者名・私的情報・原本参照・全文文字起こしを公開しない。
+- 全体53場面を概観後、候補前後70フレームを比較し、選定全画像を実寸目視。品質を優先した8枚と同内容のZIPをb90としてLIVE専用に掲載。元640×360と構図を保持し、顔加工なし。今後の選定画像もOKという承認範囲を適用し、撤回済み画像は復活させない。
+
+## 2026-09-09 天宮あみさんとの「韓国旅行の約束」導線
+
+- オーナー指定の公開X投稿 `https://x.com/amis2_mh/status/2097322336387297549` を一次ソースとして確認。投稿者はFRESH CAMPUS CONTEST 2026 No.837 天宮あみさん（公式ENTRY `https://2026.frecam.jp/entry/837`）。
+- 投稿には、みりぃと「ふたりでファイナリストになって笑顔で終われたら韓国旅行に行く」という約束が記載されている。みりぃ本人も `https://x.com/Mily_chan36/status/2097324863921041811` で「一緒に絶対叶えよう！！！」と返信している。
+- みりぃ本人SNSのNEWSではないため `news.ts` には追加せず、ホーム専用 `ChallengeConnection` として別枠掲載。みりぃ中心のサイト構造を保ちつつ、天宮あみさんのFRECAMPUS公式ENTRY・Xへの導線を明示する。
+- 「妹分」など関係性を推測する表現は公開文面に使わない。確認できる公開投稿上の約束だけを記載する。
+- 当該X投稿の画像はX側でAI生成メディア表示があり、みりぃの顔へのAI生成・加工を排除できないためサイトには掲載しない。代わりに人物写真を使わない装飾パネルで2人の挑戦を表現する。
+
+## 2026-09-09 朝の配信メモ
+
+- オーナー指定の9月9日朝の録画約22分を既存StreamRecapへ追加。全編309区間の自動文字起こしを読み、主要4区間計3分36秒を再認識して照合。全編手動聴取は未実施。録画開始記録を丸めた表示と、実際の配信開始時刻を区別する。
+- 朝のあいさつ、前夜の配信への感謝、WEB投票、初めての方への自己紹介、青色と花の話、締めの応援を要約。ランキングは13位から1位の読み上げだけ残し、個人名は含めない。曲名を確定できない短いフレーズは歌唱リストへ追加しない。
+- 夜21時半と後ろ倒しの可能性は、配信時点の案内としてnextNoteへ記録。現行の配信予定・イベント・プロフィールへ転記しない。
+- 実フレームの全体概観と候補前後比較を実施。新規選定画像は個別の掲載確認前のため非公開候補として保持し、本文を先行する。別回の画像流用・顔生成・加工・撤回画像の復活はしない。
+- LIVE STREAMのみの追加。NEWS / Gallery / media.ts / galleryVideos / stories / highlights / events / streamSchedule / contest.ts / profile は変更しない。原本・音声・全文文字起こし・視聴者名・健康や生活の詳細・非公開素材参照は公開しない。
+
+## 2026-09-10 登録済み全曲のカラオケ参考リンク監査
+
+- 起点は最新main `4400198`（#231）。全 `streamRecaps[].songs` を実行時に集計し、曲名＋アーティストで18曲・24歌唱記録、既存karaokeは7曲・7記録だった。以下はこの時点の監査結果であり、更新用の曲マスターではない。正本は引き続き各回の `songs`。
+- #190の4曲のURL・チャンネルは再調査・置換していない。既存7曲の値も維持。「生まれてはじめて」2件、「愛をこめて花束を」3件、「超最強」1件の未設定回には、同曲の既存確認済みリンクを補完した。既存URLのリンク切れを実確認した事実はない（既存動画の再生再検査は実施していない）。
+- 未整備11曲に11 URLを追加し、全18曲・24記録で参考リンクが整合。保留曲は0。歌唱履歴・原曲URL・原曲の版注記は変更しない。PR #233のUI・ブラウザ検証ファイルは編集しない。
+
+| 曲名 | アーティスト | 変更前のkaraoke設定済み記録/全記録 | 今回の処理 |
+| --- | --- | --- | --- |
+| 366日 | HY | 1/1 | 維持 |
+| 生まれてはじめて | 神田沙也加・松たか子 | 1/3 | 既存リンクを未設定回へ補完 |
+| 愛をこめて花束を | Superfly | 1/4 | 既存リンクを未設定回へ補完 |
+| メメント・モリ | 大森元貴 | 1/1 | 維持 |
+| Mela! | 緑黄色社会 | 1/1 | 維持 |
+| 超最強 | 超ときめき♡宣伝部 | 1/2 | 既存リンクを未設定回へ補完 |
+| ドライフラワー | 優里 | 1/1 | 維持 |
+| とくべチュ、して | ＝LOVE | 0/1 | 新規追加 |
+| ロコローション | ORANGE RANGE | 0/1 | 新規追加 |
+| 完璧主義で☆ | FRUITS ZIPPER | 0/1 | 新規追加 |
+| 好きすぎて滅！ | M!LK | 0/1 | 新規追加 |
+| ロマンスの神様 | 広瀬香美 | 0/1 | 新規追加 |
+| 元彼女のみなさまへ | コレサワ | 0/1 | 新規追加 |
+| アイドル | YOASOBI | 0/1 | 新規追加 |
+| ぼよよん行進曲 | 今井ゆうぞう・はいだしょうこ | 0/1 | 新規追加 |
+| SWEET MEMORIES | 松田聖子 | 0/1 | 新規追加 |
+| 可愛くてごめん | HoneyWorks | 0/1 | 新規追加 |
+| かわいいだけじゃだめですか？ | CUTIE STREET | 0/1 | 新規追加 |
+
+### 新規URLの照合根拠（全件2026-09-10確認）
+
+YouTubeの個別動画ページで曲名・アーティスト・投稿チャンネルと説明を照合した。ガイドなしは投稿者のタイトル表記、公式off vocal / Instrumentalはタイトル・説明・公式アーティスト表示を根拠とする。全編の音声聴取や、全地域・端末での再生検査を行ったという意味ではない。新規URLだけを `scripts/approved-song-links.mjs` に追加し、既存の厳密なURL照合を維持する。
+
+| 曲名 | 参考リンク | チャンネル | 照合内容 |
+| --- | --- | --- | --- |
+| 可愛くてごめん | [公式off vocal](https://www.youtube.com/watch?v=HqmTVF8eCmM) | HoneyWorks 2nd Channel | 公式セカンドチャンネルとの説明・原曲への導線・off vocal表記。説明ではマスタリング前のオリジナルミックスでCDのinstrumentと異なるとしている |
+| 完璧主義で☆ | [Instrumental](https://www.youtube.com/watch?v=kmFey5nPm6U) | FRUITS ZIPPER | 公式アーティスト表示、The Orchard Enterprises提供、℗ 2022 Kawaii Lab.、Instrumental表記 |
+| かわいいだけじゃだめですか？ | [Instrumental](https://www.youtube.com/watch?v=YYGsvfQcDIg) | CUTIE STREET | 公式アーティスト表示、The Orchard Enterprises提供、℗ 2024 KAWAII LAB.、Instrumental表記 |
+| とくべチュ、して | [ガイドなし](https://www.youtube.com/watch?v=r6dpqf5CRjA) | カラオケ歌っちゃ王 | 個別動画の曲名・＝LOVE表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| ロコローション | [ガイドなし](https://www.youtube.com/watch?v=0E1LWO-2vsw) | カラオケ歌っちゃ王 | 個別動画の曲名・ORANGE RANGE表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| 好きすぎて滅！ | [ガイドなし](https://www.youtube.com/watch?v=DUWVVQQmFe4) | カラオケ歌っちゃ王 | 個別動画の曲名・M!LK表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| ロマンスの神様 | [ガイドなし](https://www.youtube.com/watch?v=8WREmxKaJ0M) | カラオケ歌っちゃ王 | 個別動画の曲名・広瀬香美表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| 元彼女のみなさまへ | [ガイドなし](https://www.youtube.com/watch?v=qEyEBb96Zn8) | カラオケ歌っちゃ王 | 個別動画の曲名・コレサワ表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| アイドル | [ガイドなし](https://www.youtube.com/watch?v=xzEW-A8mEsE) | カラオケ歌っちゃ王 | 個別動画の曲名・YOASOBI表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| ぼよよん行進曲 | [ガイドなし](https://www.youtube.com/watch?v=8s8GcvwlhR8) | カラオケ歌っちゃ王 | 個別動画の曲名・今井ゆうぞう／はいだしょうこ表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+| SWEET MEMORIES | [ガイドなし](https://www.youtube.com/watch?v=QPZcivqqiXQ) | カラオケ歌っちゃ王 | 個別動画の曲名・松田聖子表記・ガイドなし・確認済みの制作者チャンネルを照合 |
+
+- カラオケ歌っちゃ王は同一の確認済みチャンネル `@uta-cha-oh`。動画説明で株式会社友ミュージックの原盤権保有と、耳コピー・MIDI打ち込み・シンセサイザーによる独自制作の説明を確認。歌唱動画や原曲に歌詞だけを付けた動画は採用していない。サイトには歌詞・映像・音源を転載しない。
+- 公式版を先に探索。「SWEET MEMORIES」の公式オリジナル・カラオケはSony Music Direct提供だが、個別ページでMusic Premium限定と表示されたため不採用（[公式の作品情報](https://www.110107.com/s/oto/discography/MHCL-2027)）。「アイドル」は[YOASOBI公式のpiapro](https://piapro.jp/yoasobi_staff)にinstがあるが、今回は既存 `youtubeUrl` 型のYouTube個別動画へ統一し、第三者による公式音源の転載は採用しない。「とくべチュ、して」は[公式CD収録情報](https://equal-love.jp/feature/specialsite_18thsingle)にInstrumentalがあるが、公式の公開YouTube伴奏は確認できず、制作者の参考伴奏を選択。ほかも、確認できた公式個別動画を優先し、確認できない場合のみ明確な制作者を採用した。
+- これらは練習用の参考リンクであり、各配信の使用音源を特定したものではない。再開時は最新mainの `streamRecaps` を再集計し、未設定の曲／同曲の回だけを点検する。この監査表の件数を次回の固定値にしない。
+## 2026-09-10 朝の配信メモ
+
+- 完了済み自動文字起こし814区間を全件読取。全文再認識は行わず、歌唱前後・短い口ずさみ・ランキング・次枠案内の7区間（計272秒）のみ局所再認識。全編手動聴取は未実施。録画の実フレーム4場面も照合した。
+- 録画開始07:09:16、確認範囲は約59分30秒。7時頃の配信検知との差から冒頭約9分が未収録の可能性を明記。開始・長さの表示は録画範囲の丸め値で、実配信全体の開始・尺と区別する。
+- 言葉選び、朝の歌、ラジオ制作、朝食、三次通過と無理のない応援、会話を通じた支え合いを要約。次枠23時予定・変更可能性は配信時点の案内に限定する。
+- 歌唱前後の発言と局所認識から2曲を記録。歌唱開始は録画内8:02頃と20:15頃（数秒の揺れあり）。短い口ずさみの曲名は未確定として非掲載。ランキング読み上げは確認したが、数字に認識揺れがあるため範囲・個人名を載せない。
+- 原曲リンクは2026-09-10にYouTube個別動画のoEmbedで曲名と投稿チャンネルを照合：ケセラセラはMrs. GREEN APPLE（動画ID: Jy-QS27q7lA）、かわいいだけじゃだめですか？はKAWAII LAB.（動画ID: jZqTz1G8G04）。今回の2 URLのみ既存の許可リストへ追加。参考伴奏は追加しない。
+- 本文を先行し、新規写真は掲載しない。別回画像を流用せず、原本・全文文字起こし・ローカルパス・視聴者名は公開しない。PR #234の未マージデータは使用せず、曲一覧UIは変更しない。
+
+
+## 2026-09-11 朝のラジオ配信メモ
+
+- オーナー指定の今朝のSHOWROOM録画から、既存のStreamRecap型でLIVE STREAMへ追加。日付順で9月10日朝の前に配置する。
+- 時刻と長さは別の根拠を持つ。録画開始記録は05:11:19、保存完了記録は06:37:22で、処理の経過時間は86分03秒。一方、ffprobeで確認したメディアの実測は5112.063秒（85分12.063秒）、解析用音声は5111.979秒。保存完了時刻を配信終了時刻として扱わない。表示「5:11頃〜 約85分」は録画開始記録とメディア実測の丸め値であり、実配信全体の開始・終了・尺を断定しない。処理時間との差から欠落や遅延の原因も推測しない。
+- 完了済みの自動文字起こし全1,821区間を読取。全文の再認識は行わず、19:45–20:07、50:28–51:22、80:14–81:40、82:35–84:33の4区間、計280秒だけ局所再認識して照合した。既存Whisper smallをCPU/int8・2スレッド、beam 5、直前テキストの引継ぎなしで使用。全編手動聴取は未実施。時刻は録画先頭からの目安で、認識結果には数秒の揺れがある。
+- 朝のあいさつ、前夜に配信できなかったことへのお詫び、投票とアバター権への呼びかけ、恩返ししたい気持ち、自分らしさを見つめる話、できることを全力で続けたい思いを要約。ランキングは13位から1位までの読み上げを確認した事実だけを残し、個人名は掲載しない。確認できた歌唱曲はなく、songsは追加しない。
+- 「残り2日」はアバター権の話題に続く発言だが、三次審査全体とSHOWROOM審査・WEB投票のどの期間を指すかを一括して断定できないため、公開本文の残り日数は省略。三次審査中の応援呼びかけのみを記録し、既存の期間データは変更しない。
+- 同日夜は早くて21時頃、短い枠になる可能性、詳細は後で案内という発言をnextNoteへ過去時制で記録。現在の配信予定やイベントへ転記しない。
+- 1分、10分、20分、40分、60分、80分の実フレーム6場面を確認。いずれも同じ目を閉じたラジオ用の写真で、選定基準に合う別の場面がないため画像は非掲載。「実フレームが存在しない」という意味ではない。同じ静止画で枚数を水増しせず、別回画像の流用・顔加工・生成補完・撤回済み画像の復活も行わない。
+- 公開はLIVE STREAMの要約と確認注記のみ。録画原本・音声・全文文字起こし・視聴者名・私生活や健康の詳細・非公開素材URL/ID/パスは公開しない。NEWS / Gallery / media.ts / galleryVideos.ts / stories / highlights / events / streamSchedule / contest / profile は変更しない。PR #234の未マージ内容や他作業ブランチも変更しない。
+- 専用回帰テストで登録の一意性、同日前後の順序、メディア実測と録画処理時間の区別、確認範囲、当時の次枠、未確認メディアの非掲載、当日台帳を検査する。
+
+## 2026-09-11 06:41 ファンルーム音声
+
+- NEWS ID: `2026-09-11-morning-fanroom-voice`。本人公開プロフィールのボイス一覧で投稿日を確認。
+- `morningFanroomVoice` を既存 `NewsAudioCard` で再生。約1分11秒の自己ホストM4A（b93）。
+- 出典は非リンクの `SHOWROOMファンルーム`、関連CTAはオーナー指定の元ファンルーム。
+- 本文は朝配信への感謝とこれからの思いを要約。全文・スクリーンショット・不確定の夜枠は転載しない。
+- Gallery / `/stories/` / events / streamSchedule / profile の追加・変更なし。
+- 素材・検証範囲は `docs/UPDATE-20260911-FANROOM-VOICE.md` と `docs/MEDIA.md` のb93を参照。
+
+### 2026-09-11 9月9日・10日朝の配信スクショ補完
+
+- オーナーがチャットに提示した候補16枚（9/9朝8枚・9/10朝8枚）を、その2回のLIVE STREAM配信メモへの掲載として明示承認。
+- 9/9朝はbatch b94。青い花の飾りを持つ実フレームを代表にし、計8枚と保存ZIPを追加。9/10朝はbatch b95。笑顔で手を振る実フレームを代表にし、計8枚と保存ZIPを追加。
+- すべてオーナー提供録画の実フレーム。640×360を保持し、crop・scale・顔補正・生成AI・生成塗り足しなし。EXIF / GPS / IPTC / XMPを持たないJPEGを使用。
+- コメント欄・視聴者名・アイコン・他出場者は写っていない。NEWS / Gallery / media.ts / galleryVideos.ts には展開せず、LIVE STREAM専用。
+- 9/9は記事作成時と今回のローカル録画開始記録に差があるため、写真captionへ未照合の絶対時刻を付けず、目視できる場面だけを説明する。
+- 9/11朝ラジオ回は既存判断どおり非掲載。別回の写真で穴埋めしない。
+
+## 2026-09-11 夜のSHOWROOM配信メモ
+
+- オーナー指定の同日夜SHOWROOM録画から、既存のStreamRecap型でLIVE STREAMへ追加。同日朝枠より前に配置する。
+- 録画開始記録は22:32:10。メディア実測は2025.674秒（33分45.674秒）で、表示は「22:32頃〜 約34分」。録画メタデータでは全編収録の確認が取れていないため、実際の配信全体の開始・終了・尺とは区別する。
+- 自動文字起こし全1,142区間を読取。三次審査説明、歌唱前、終盤のランキング・期間・次枠案内の3区間（計265秒）だけWhisper small / CPU int8 / beam 5 / 直前テキスト引継ぎなしで局所再認識した。全編手動聴取は未実施。
+- 前夜に予定していた配信ができなかったことへの謝罪、ラジオや配信での交流、応援への感謝、MISS CIRCLE CONTEST三次審査と翌日のSHOWROOM審査最終日への決意を要約。私生活の詳細や視聴者名は公開しない。
+- 歌唱はSHISHAMO「明日も」を確認。歌唱開始は録画内26:19頃。原曲リンクはSHISHAMO公式YouTube（動画ID `zhCtzmDWsN0`）を2026-09-12に確認し、許可リストへ追加した。
+- 終盤で13位から1位までランキングを読み上げたことを確認。個人名は非掲載。WEB投票は9月13日まで、SHOWROOM審査は翌9月12日が最終日と本人が説明したため、期間の違いを混同せず記録する。
+- 次枠は配信時点で翌9月12日朝8時開始と案内。過去時制のnextNoteだけに残し、現在のstreamScheduleへ自動転記しない。
+- 録画全体を25点の実フレームで概観し、10候補を実寸確認。第三者・コメント欄・表示名の写り込みがない8枚をbatch b98としてLIVE STREAM専用で掲載し、保存ZIPも用意する。crop・scale・顔補正・AI生成・生成塗り足しなし。
+- NEWS / Gallery / media.ts / galleryVideos.ts / stories / highlights / events / streamSchedule / contest / profile は変更しない。他作業branchの素材・データは流用しない。
+
+## 2026-09-12 朝のSHOWROOM配信メモ
+
+- オーナーが配信終了直後に当日の内容整理とサイト実装を依頼。8:00頃からの録画を既存StreamRecap形式でLIVE STREAMへ追加し、9月11日夜枠より前へ配置する。
+- 録画開始記録は08:00:34。ffprobeのメディア実測は2428.838秒（40分28.838秒）で、表示は「8:00頃〜 約40分」。録画処理の終了時刻を配信終了時刻として使用しない。
+- 自動文字起こし全988区間を読取。目標、3曲の歌唱、終盤案内を含む5区間をWhisper small / CPU int8 / beam 5 / 直前テキスト引継ぎなしで局所再認識して照合。全編手動聴取は未実施。
+- 三次審査のSHOWROOM最終日として、三次通過とアバター権獲得を目標に掲げ、WEB投票と配信での応援を呼びかけた内容を要約する。残りポイントは配信中に変化し、ASRにも揺れがあるため固定値を本文へ載せない。
+- 歌唱はHump Back「拝啓、少年よ」、M!LK「好きすぎて滅！」、sumika「Lovers」の3曲を確認。原曲は各アーティストのYouTube公式投稿を使用し、歌詞・歌唱映像は掲載しない。
+- 終盤で13位から1位までランキングを読み上げた事実だけを記録し、個人名は非掲載。夜は22時まで・約1時間20分の最終枠と案内したが、開始時刻の時の部分は録音から明瞭に確認できないためnextNoteでは断定しない。
+- 録画全体を約80秒間隔で概観し、11候補を実寸確認。本人以外の人物・視聴者名・コメント欄・連絡先が写らない8枚をb99としてLIVE STREAM専用に選定。元640×360を保持し、crop・scale・顔補正・AI生成・生成塗り足しなし。
+- NEWS / Gallery / media.ts / galleryVideos.ts / stories / highlights / events / streamSchedule / contest / profile は変更しない。録画原本・音声・全文文字起こし・ローカルパス・非公開IDは公開しない。
+
+## 2026-09-12 LIVE SONG CLIPS 初回公開
+
+- 既存の各 `StreamRecap.songs` を正本のまま使い、歌唱映像の第二マスターを作らず、任意の `songs[].clip` から歌唱クリップ一覧を自動生成する。
+- 専用導線 `/activities/live/clips/` を追加し、ライブ配信ページから「LIVE SONG CLIPS」へ進めるようにする。
+- 初回は9月12日朝配信の3曲「拝啓、少年よ」「好きすぎて滅！」「Lovers」。各24秒の短い抜粋と実フレームposterをb100として掲載する。
+- クリップの公開範囲は当該専用ページ。録画全編、歌詞、視聴者情報、私的な許可確認の内容は掲載しない。
+- 原曲への既存の公式YouTube導線と、元になった配信レポートへの導線を併記する。
+- 将来の過去配信補完は、曲名・歌唱・素材・掲載可否を確認できた回だけ同じ `songs[].clip` へ追加する。未確認回を推測で埋めない。
+- Reels / TikTok向け9:16マスターは公開repo外の制作素材として別管理し、SNS投稿そのものは別の公開判断とする。
+
+
+## 2026-09-12 X『おはよう♡』最終日案内
+
+- オーナー持込の公開X URL `https://x.com/Mily_chan36/status/2098566313593680195` と同時に受領した画像1枚を使用。公開Xの同一メディアとサイズ・SHA-256が一致することを確認し、別画像への差し替えは行わない。
+- Latest / NEWSへ1件追加。通常のSNS投稿写真はGalleryへ自動昇格させず、今回はNEWS専用とする。公開画像はbatch b101として自己ホストする。
+- 公開Xで朝枠への感謝、3次SHOWROOM審査最終日、20:40〜21:59、投稿時点のアバター権まで残り36,599pt、投票報告の呼びかけを確認。本文は事実を要約し、感情・意図は補完しない。
+- 画像内の「おはよう♡」だけを短く引用。SHOWROOMと確認済みWEB投票の導線を併記する。
+- 1152×2048の縦横比を維持したJPEGをNEWS専用で自己ホスト。crop・顔補正・AI生成・生成塗り足しなし。公開派生はEXIF / GPS / IPTC / XMP / ICCを持たない。
+
+## 2026-09-12 LIVE SONG CLIPS 追加公開
+
+- 既存の `StreamRecap.songs` を正本とする構成を維持し、確認済み3曲の `songs[].clip` だけを追加する。歌唱映像の第二マスターは作らない。
+- 追加対象は9月11日夜のSHISHAMO「明日も」、9月10日朝のMrs. GREEN APPLE「ケセラセラ」、CUTIE STREET「かわいいだけじゃだめですか？」。各24秒の短い抜粋と実フレームposterをbatch b102として掲載する。
+- 既存の曲名・アーティスト・原曲YouTubeリンクは変更しない。クリップから元配信レポートと原曲導線を引き続き利用する。
+- 公開範囲は `/activities/live/clips/` のLIVE SONG CLIPS。NEWS / Gallery / Storiesへの自動複製、録画全編、歌詞、視聴者情報、私的な許可確認の公開は行わない。
+- b102の映像は原画角を保持し、顔補正・AI生成・生成塗り足し・歌詞テロップなし。本人以外の人物・コメント欄・視聴者名が写らないことを確認した範囲だけ使用する。
+- SNS投稿はサイトの正本とは分離して扱う。サイト側の曲・配信記録はSNS投稿結果から逆流更新しない。
+
+### 2026-09-12 Instagram Story 初めてのアバ権達成（batch b103）
+
+- NEWS ID: `2026-09-12-avatar-achievement-story`。source dateはオーナーが2026-09-12と明示確認。container日時から推定していない。
+- 本人の3次審査完走への感謝・初のアバ権達成・43日間の初期アバター・投票は13日までの案内を要約。審査通過・順位・アバター配布開始・撮影会日程は追加しない。
+- Latest / NEWS内の動画カード。b103公開MP4とposterを再利用。Instagram Storyの非リンク出典表示、プロフィールは関連リンク。リンクスタンプの遷移先は推測しない。
+- 同日の本人X 2件は別NEWSにせず、同じカードの additionalSources に統合する。labelは「みりぃのX」。完走・アバ権 `https://x.com/Mily_chan36/status/2098778956535407065`、WEB投票は9/13まで `https://x.com/Mily_chan36/status/2098779286245454075`。本文は「Xでも完走・アバ権とWEB投票期限（9/13まで）を案内した」の1文だけ。規則・FAQ・「史上初」の検証は書かない。SNSスクレイプなし。新しい画像なし。代表メディアはStory動画のまま。
+- WEB投票CTAは既存missCircleWebVoteLinkを使用し、既存SupportEvent終了境界で非表示。Latest / NEWS専用のためactivityIdsは設定しない（Activitiesの関連動画へ自動展開させない）。時刻未確認のためsameDayOrderは追加しない。
+- Gallery / Stories / highlights / events / streamSchedule / profile非追加。公開動画は無音。
+
+## 2026-09-13 朝のファンルームとセルフィー
+
+- NEWS `2026-09-13-morning-fanroom-radio-vote` を追加。本人の朝配信への感謝、ラジオへの出発、WEB投票最終日の呼びかけを要約する。
+- 公開ファンルームのtalk listを直接照合。本人投稿は2026-09-13 06:43:48 JST、添付写真は06:43:58 JST。提供スクリーンショットの本文・時刻と一致。個別permalinkを推測せず、非リンクの出典labelと既存ファンルームへの関連リンクを使う。
+- オーナーが今回の自撮りのGallery・記事掲載を明示指定したため、b110-01を既存media公開ゲート経由でGalleryへ登録し、同じ派生をNEWSで共有する。別素材へ承認を流用しない。
+- スクリーンショットは文言・写真の対応確認用。自撮りと同じ写真の縮小版が含まれるため重複掲載せず、本文を読みやすいテキストにする。
+- ラジオの番組名・開始終了時刻・テーマはこの投稿にはないため加えない。進行中の別PRの番組告知を取り込まない。
+- WEB投票CTAは既存リンクと期間による表示制御を再利用。終了後も矛盾しない過去時制にする。
+
+
+## 9月13日 湘南シーサイドサークル「一人〇〇」番組告知
+
+- オーナー提供・掲載依頼済み動画 b111-01 を根拠に、HOME Latest / NEWSへ番組告知記事を追加。
+- NEWSのdateは確認済みの放送日2026-09-13。SNS投稿日を表す記事ではなく、番組告知として扱う。Storyの投稿日は不明のまま保持し、投稿した日を本文で断定しない。
+- 動画で9/13（日）10:00–13:00、FM85.6MHz、テーマ「一人〇〇」、師匠・Mily・もこ、メッセージフォームの表記を確認。放送完了や実際の出演時間は未確認。
+- 一人で楽しむこと・挑戦したいことはファン編集文であり、出演者の発言・番組の正式な募集例として引用しない。
+- 恒久Story URLとフォーム遷移先は不明。非リンクsourceLabelのみとし、推測URLや受け渡し情報を公開しない。
+- 番組告知グラフィックのため動画は当該NEWS内で再生。Gallery / stories / profile / radio正本 / events / streamScheduleは変更しない。
+
+## 2026-09-13 朝のSHOWROOM配信メモ
+
+- オーナーが配信終了直後に当日の配信レポートとスクショのサイト掲載を明示依頼。6:00頃からの録画を既存StreamRecap形式でLIVE STREAMへ追加し、9月12日朝枠より前へ配置する。
+- 録画開始記録は06:00:28。ffprobeのメディア実測は2444.502秒（40分44.502秒）で、表示は「6:00頃〜 約41分」。録画処理の終了時刻を配信終了時刻として使用しない。
+- オーナー提供録画から低負荷の自動文字起こし全1,139区間を作成して読取。メイク配信、ラジオの案内、WEB投票最終日、アバター権への祝福への感謝、終盤のランキングと次枠案内を確認。全編手動聴取は未実施し、細かな数字や認識が不安定な固有名詞は公開本文へ持ち込まない。
+- このあとラジオのスタジオへ向かうためメイクをしながら配信し、「湘南シーサイドサークル」とこの日のトークテーマ「ひとり○○」に触れた内容を要約する。ラジオへ向かう直前の身支度という流れは録画の実フレームでも確認した。
+- 三次審査のWEB投票が9月13日で最終日だと案内し、プロフィールやバナーからの投票方法を説明。アバター権への祝福には「みんなのおかげ」と感謝した。配信中の個別視聴者名や細かな数字は掲載しない。
+- 終盤で13位から1位までランキングを読み上げた事実だけを記録し、個人名は非掲載。確認できた歌唱曲はなく、songsは追加しない。
+- 同日夜の配信は「できる可能性はあるが状況を見て決めたい」という配信時点の案内だけをnextNoteへ過去時制で残し、現在のstreamScheduleへ自動転記しない。その後、このあとラジオへ向かうと伝えて締めた。
+- 録画全体を約1分間隔の実フレームで概観し、第三者・コメント欄・表示名の写り込みがない8枚をbatch b112としてLIVE STREAM専用で掲載。元640×360を保持し、crop・scale・顔補正・AI生成・生成塗り足しなし。保存ZIPも用意する。
+- NEWS / Gallery / media.ts / galleryVideos.ts / stories / events / streamSchedule / contest / profile は変更しない。録画原本・音声・全文文字起こし・非公開URL / ID / ローカルパスは公開しない。
+
+- 公開前レビュー対応: 獲得済みのアバター権は見どころの感謝だけに残し、当日の目標から除外。b112のZIPは8件の内部名と公開JPEGのバイト一致を再確認し、旧batch名の混入を回帰検査する。
+
+
+## 配信メモ：2026-09-12 夜（確認日 2026-09-13）
+
+20:40頃開始のSHOWROOM枠を、確認用記録約133分の自動文字起こし全区間から整理。新規 `streamRecap20260912Yoru` を9/13朝と9/12朝の間へ登録する。21:59は審査締切で、実際の配信終了とは区別する。アバター権は本人が達成を報告し、三次審査通過は結果待ちと表記。ランキングは13位から1位を読み上げた事実だけを掲載する。
+
+8曲を歌唱順に記録。原曲リンクは個別YouTubeのタイトル・投稿元を2026-09-13に照合。「明日はきっといい日になる」は高橋優公式のShort size（[原曲動画](https://www.youtube.com/watch?v=cpIa89_rZoA)）、「ちっぽけな勇気」はdreamusic（[原曲動画](https://www.youtube.com/watch?v=FKXBSuN-nQo)）、「ありがとう」はいきものがかり公式（[原曲動画](https://www.youtube.com/watch?v=VZBU8LvZ91Q)）。この3 URLのみexact allowlistへ追加し、既存5曲のURLは維持する。参考伴奏と原曲を混同せず、別のリクエスト曲や短い言及を8曲へ混ぜない。
+
+全文文字起こし・原本・非公開素材URL/ID・視聴者名は公開しない。複数録画を照合した相対時刻で、全編手動聴取・原録画の完全性確認は未実施。新規スクショ10枚は2026-09-13にオーナーが全10枚のLIVE STREAM掲載を明示承認し、実フレーム10枚とZIPを当該配信メモへ追加する。歌唱クリップは含めない。SHOWROOMカラオケ機能の二次利用条件（https://www.showroom-live.com/campaign/karaoke）を確認し、新規公開は保留する。短尺や本人の掲載許可だけで伴奏等の条件を満たしたとは扱わない。既存公開素材は変更しない。
+
+対象は配信メモ・歌の原曲リンク・回帰検証のみ。NEWS / Gallery / 現在の配信予定 / プロフィールは変更しない。merge済み#234の既存方針を維持し、他作業ブランチは更新せず、必要な共通ファイル差分はこのPRの新規リンク・末尾記録に限定する。
+
+## 2026-09-13 湘南シーサイドサークル放送後のお礼
+
+- NEWS ID `2026-09-13-seaside-circle-after-radio-thanks`。オーナー提供動画と「ラジオ終了後」の明示確認を根拠に、同日放送後の記事として追加する。
+- 動画内で確認できる「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」を短く要約。本人の感情や、個別メッセージ内容、未確認の出演時間は補完しない。
+- 同日の番組告知NEWSより新しい出来事なので、同日配列の先頭に置く。時刻を推測するsameDayOrderは追加しない。
+- b114の自己ホストMP4と実フレームposterをNEWS内で再生し、activityIdsはradio。恒久SNS URLが未確認のため、非リンクの `sourceLabel: 放送後の動画` とする。
+- Gallery / Stories / profile / events / streamSchedule / radio正本は変更しない。公開素材には受け渡し用ファイル名・ID・私的URLを持ち込まない。
+
+
+### 2026-09-13 — 9/12夜の歌唱クリップ8本
+
+- 2026-09-12夜配信の既存 `StreamRecap.songs` 8曲を正本として維持し、各歌唱へb115の24秒クリップを追加する。第二の曲・動画マスターは作らない。
+- 対象は「明日はきっといい日になる」「ちっぽけな勇気」「かわいいだけじゃだめですか？」「生まれてはじめて」「ケセラセラ」「超最強」「明日も」「ありがとう」。曲名・アーティスト・原曲YouTubeリンク・既存歌唱開始時刻は変更しない。
+- 実録画のみ、顔加工・生成処理・歌詞テロップなし。短い抜粋から元配信レポートと原曲導線へ戻れる既存LIVE SONG CLIPS構造を再利用する。SNS展開はサイトの正本と分離し、投稿結果から曲データを逆流更新しない。

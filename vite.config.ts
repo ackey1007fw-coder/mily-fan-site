@@ -2,6 +2,8 @@ import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
 import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
+import { radioMusicPageMetadata, radioMusicPageStructuredData } from "./src/lib/radioMusicMetadata.ts";
+import { songClipsPageMetadata, songClipsPageStructuredData } from "./src/lib/songClipsMetadata.ts";
 import {
   activityPageMetadata,
   activityPageStructuredData,
@@ -121,6 +123,20 @@ function siteMetadataPlugin(): Plugin {
             2,
           ),
         )
+        .replaceAll("__SONG_CLIPS_PAGE_TITLE__", songClipsPageMetadata.title)
+        .replaceAll("__SONG_CLIPS_PAGE_DESCRIPTION__", songClipsPageMetadata.description)
+        .replaceAll("__SONG_CLIPS_CANONICAL__", songClipsPageMetadata.canonical)
+        .replaceAll(
+          "__SONG_CLIPS_JSON_LD__",
+          JSON.stringify(songClipsPageStructuredData(), null, 2),
+        )
+        .replaceAll("__RADIO_MUSIC_PAGE_TITLE__", radioMusicPageMetadata.title)
+        .replaceAll("__RADIO_MUSIC_PAGE_DESCRIPTION__", radioMusicPageMetadata.description)
+        .replaceAll("__RADIO_MUSIC_CANONICAL__", radioMusicPageMetadata.canonical)
+        .replaceAll(
+          "__RADIO_MUSIC_JSON_LD__",
+          JSON.stringify(radioMusicPageStructuredData(), null, 2),
+        )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },
   };
@@ -156,7 +172,9 @@ export default defineConfig({
         gallery: "gallery/index.html",
         activityMissCircle: "activities/miss-circle/index.html",
         activityRadio: "activities/radio/index.html",
+        activityRadioMusic: "activities/radio/music/index.html",
         activityLive: "activities/live/index.html",
+        activityLiveClips: "activities/live/clips/index.html",
         activityCampusGirls: "activities/campus-girls/index.html",
         storyRadio20260818: "stories/2026-08-18-radio/index.html",
         storySecondRound: "stories/second-round-2026/index.html",
