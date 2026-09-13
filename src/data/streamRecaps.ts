@@ -1,3 +1,6 @@
+import { streamRecap20260913Asa } from "./streamRecap20260913Asa.ts";
+import { streamRecap20260912Yoru } from "./streamRecap20260912Yoru.ts";
+import { streamRecap20260912Asa } from "./streamRecap20260912Asa.ts";
 import { streamRecap20260911Yoru } from "./streamRecap20260911Yoru.ts";
 import { streamRecap20260911Asa } from "./streamRecap20260911Asa.ts";
 import { streamRecap20260910Asa } from "./streamRecap20260910Asa.ts";
@@ -99,6 +102,17 @@ export type StreamRecapGalleryZip = {
   label: string;
 };
 
+export type StreamRecapSongClip = {
+  /** LIVE SONG CLIPS 用の短い歌唱抜粋。録画原本全編ではない。 */
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  durationSeconds: number;
+  /** 録画先頭からのクリップ開始位置の目安。 */
+  sourceTimestamp: string;
+};
+
 export type StreamRecapSong = {
   title: string;
   artist: string;
@@ -110,6 +124,8 @@ export type StreamRecapSong = {
   youtubeVersionNote?: string;
   /** 練習用の参考伴奏。配信での使用音源とは限らない。 */
   karaoke?: { youtubeUrl: string; channel: string };
+  /** オーナー確認済み録画から作った短い歌唱クリップ。 */
+  clip?: StreamRecapSongClip;
 };
 
 export type StreamRecap = {
@@ -135,6 +151,9 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260913Asa,
+  streamRecap20260912Yoru,
+  streamRecap20260912Asa,
   streamRecap20260911Yoru,
   streamRecap20260911Asa,
   streamRecap20260910Asa,
@@ -159,6 +178,9 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260913Asa,
+  streamRecap20260912Yoru,
+  streamRecap20260912Asa,
   streamRecap20260911Yoru,
   streamRecap20260911Asa,
   streamRecap20260910Asa,

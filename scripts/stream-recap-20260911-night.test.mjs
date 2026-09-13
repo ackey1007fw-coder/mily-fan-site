@@ -8,9 +8,10 @@ import {
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 
-test("September 11 night is the newest same-day recap", () => {
-  assert.equal(streamRecaps[0], recap);
-  assert.equal(streamRecaps[1].id, "2026-09-11-asa-showroom");
+test("September 11 night stays ahead of the same-day morning recap", () => {
+  const nightIndex = streamRecaps.indexOf(recap);
+  assert.ok(nightIndex > 0);
+  assert.equal(streamRecaps[nightIndex + 1].id, "2026-09-11-asa-showroom");
   assert.equal(recap.broadcastLabel, "22:32頃〜 約34分");
   assert.deepEqual(recap.ranking, [RANKING_NOTE]);
   assert.match(recap.nextNote, /翌9月12日朝8時/);
@@ -23,9 +24,16 @@ test("September 11 night keeps the verified song link", () => {
     artist: "SHISHAMO",
     timestamp: "0:26:19",
     youtubeUrl: "https://www.youtube.com/watch?v=zhCtzmDWsN0",
+    clip: {
+      src: "/media/live-clips/mily-b102-01-ashitamo.mp4",
+      poster: "/media/live-clips/mily-b102-01-ashitamo-poster.jpg",
+      width: 640,
+      height: 360,
+      durationSeconds: 24,
+      sourceTimestamp: "0:27:26",
+    },
   });
 });
-
 test("September 11 night ships eight approved real-frame stills", async () => {
   assert.equal(recap.gallery.length, 8);
   assert.equal(recap.image, recap.gallery[5]);
