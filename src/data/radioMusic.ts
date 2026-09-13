@@ -218,11 +218,25 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeVersionNote": "『アベニューQ』オリジナル・ブロードウェイ・キャスト録音。"
       },
       {
+        "timestamp": "1:12:37",
+        "title": "Dead Mom",
+        "artist": "Sophia Anne Caruso",
+        "youtubeUrl": "https://www.youtube.com/watch?v=KEct4Nod2iU",
+        "youtubeVersionNote": "『ビートルジュース』オリジナル・ブロードウェイ・キャスト録音。"
+      },
+      {
         "timestamp": "1:26:12",
         "title": "On My Own",
         "artist": "Frances Ruffelle",
         "youtubeUrl": "https://www.youtube.com/watch?v=UwM0U3UcFtw",
         "youtubeVersionNote": "曲紹介で指定された1987年オリジナル・ブロードウェイ版。"
+      },
+      {
+        "timestamp": "1:33:33",
+        "title": "Move",
+        "artist": "Jennifer Hudson, Beyoncé Knowles & Anika Noni Rose",
+        "youtubeUrl": "https://www.youtube.com/watch?v=AoOqNuA1_Vw",
+        "youtubeVersionNote": "『ドリームガールズ』映画サウンドトラック。"
       },
       {
         "timestamp": "1:44:32",
@@ -243,6 +257,13 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeUrl": "https://www.youtube.com/watch?v=wYNS6jIhDpo"
       },
       {
+        "timestamp": "2:24:52",
+        "title": "Hail Holy Queen",
+        "artist": "Deloris & The Sisters",
+        "youtubeUrl": "https://www.youtube.com/watch?v=Yev14Ti8_jY",
+        "youtubeVersionNote": "『天使にラブ・ソングを…』映画サウンドトラック。"
+      },
+      {
         "timestamp": "2:37:03",
         "title": "We Go Together",
         "artist": "John Travolta & Olivia Newton-John",
@@ -259,7 +280,7 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
     ],
     "sourceLabel": "2026/08/23 放送内の曲紹介・各楽曲の公式公開情報",
     "verifiedAt": "2026-09-13",
-    "note": "ゲスト：清水美依紗。曲紹介の文字起こしと公開情報を照合しました。時刻は録音内の目安です。歌唱版・公式公開先の確認が残る5曲は未掲載です。"
+    "note": "ゲスト：清水美依紗。曲紹介の文字起こしと公開情報を照合しました。時刻は録音内の目安です。歌唱版・公式公開先の確認が残る2曲は未掲載です。"
   }
 ];
 
