@@ -3733,3 +3733,15 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 実フレーム候補を比較し、本人以外の人物、コメント欄、視聴者名・アイコン、住所・連絡先など公開を避ける情報の写り込みがない範囲を使用する。
 - `sourceTimestamp` は複数録画の重複を照合した確認用統合記録の先頭からの切出し目安で、配信開始時刻そのものではない。既存の歌唱開始 `timestamp` は変更しない。
 - LIVE SONG CLIPS専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。楽曲・伴奏等の権利は各権利者に帰属し、短尺であることだけを権利許諾の根拠にはしない。
+
+## 素材台帳（batch b116 / source date 2026-08-06 / 承認日 2026-09-13）
+
+8月6日10:02頃開始のSHOWROOM朝配信録画から選んだ実フレーム8枚。オーナーがチャットで提示済みの最終8枚すべてをLIVE STREAM掲載用として明示承認。最新mainでb115使用済み、関連Open PRにb116の使用がないことを確認して採番した。
+
+- 公開ファイル: `live/mily-b116-01-bangs-touch.jpg` 〜 `live/mily-b116-08-farewell.jpg`。全8枚640×360 JPEG。
+- 代表: `mily-b116-07-bright-smile.jpg`。保存ZIP: `live/mily-b116-morning-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。公開の生permalinkなし。録画原本・受け渡しURL / ID・全文文字起こし・ローカルパスは公開しない。
+- 最終候補8枚を実寸で確認し、本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の明確な写り込みなし。
+- 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。公開JPEGにEXIF / XMP / IPTCなしを回帰テストで確認する。
+- ZIPは8件で、承認済み単体JPEGとのSHA256一致を非公開制作台帳で確認済み。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。歌唱clipは別の権利ゲートとして扱う。
