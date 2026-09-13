@@ -70,6 +70,13 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeUrl": "https://www.youtube.com/watch?v=Jzg0oBf-47A"
       },
       {
+        "timestamp": "1:34:37",
+        "title": "The Villains' Halloween \"Into the Frenzy\"",
+        "artist": "東京ディズニーランド",
+        "youtubeUrl": "https://www.youtube.com/watch?v=48rO35UGlc8",
+        "youtubeVersionNote": "リンク先は権利者配信のショー音源全編（約27分）です。放送で流れた抜粋区間とは長さが異なります。"
+      },
+      {
         "timestamp": "1:47:27",
         "title": "Brand New",
         "artist": "Mrs. GREEN APPLE",
@@ -100,6 +107,13 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeUrl": "https://www.youtube.com/watch?v=74FIsXlS0EQ"
       },
       {
+        "timestamp": "2:42:30",
+        "title": "同担☆拒否",
+        "artist": "HoneyWorks",
+        "youtubeUrl": "https://www.youtube.com/watch?v=FbTtjs6OZ20",
+        "youtubeVersionNote": "リンク先は公式MVのちゅーたん（CV：早見沙織）歌唱版です。放送内の曲紹介では歌唱者を特定できていません。"
+      },
+      {
         "timestamp": "2:54:27",
         "title": "優しさに溢れた世界で",
         "artist": "Saucy Dog",
@@ -108,7 +122,7 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
     ],
     "sourceLabel": "2026年9月13日 放送内の曲紹介・各アーティスト／権利者の公式公開情報",
     "verifiedAt": "2026-09-13",
-    "note": "曲紹介の自動文字起こしを一部区間の再認識結果で再照合し、曲名・アーティストと公式公開先を確認した楽曲を掲載しています。手動での全編聴取は未実施です。時刻は録音開始から曲紹介箇所までの目安です。YouTubeは各公開元の映像へ案内します。"
+    "note": "曲紹介から確認した15曲を掲載しています。時刻は録音内の曲紹介の目安です。YouTubeの歌唱版・リマスター・ショー全編など、放送との違いや未確認事項は各曲に注記しています。手動での全編聴取は未実施です。"
   },
   {
     "id": "2026-09-06-august-memories",
@@ -136,11 +150,24 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "artist": "The Beach Boys",
         "youtubeUrl": "https://www.youtube.com/watch?v=j1THDLgL_bs",
         "youtubeVersionNote": "リンク先は権利者配信のステレオ版。"
+      },
+      {
+        "timestamp": "0:57:07",
+        "title": "勝手にシンドバッド",
+        "artist": "サザンオールスターズ",
+        "youtubeUrl": "https://www.youtube.com/watch?v=11XPLPc4ULE",
+        "youtubeVersionNote": "リンク先は2024年リマスター版。"
+      },
+      {
+        "timestamp": "1:11:24",
+        "title": "創聖のアクエリオン",
+        "artist": "AKINO",
+        "youtubeUrl": "https://www.youtube.com/watch?v=W6DOkcLlIgE"
       }
     ],
     "sourceLabel": "2026/09/06 放送内の曲紹介・各楽曲の公式公開情報",
     "verifiedAt": "2026-09-14",
-    "note": "録音から曲紹介を確認できた楽曲を順次掲載しています。全曲の照合は進行中です。時刻は録音内の曲紹介の目安です。"
+    "note": "この回はみりぃの出演がないため、曲紹介を確認できた5曲を簡単に記録しています。全曲リストではありません。時刻は録音内の目安です。"
   },
   {
     "id": "2026-08-30-movie-special",
@@ -243,6 +270,13 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeVersionNote": "『ミス・サイゴン』1989年オリジナル・ロンドン・キャスト録音。"
       },
       {
+        "timestamp": "0:34:46",
+        "title": "Edelweiss",
+        "artist": "Julie Andrews",
+        "youtubeUrl": "https://www.youtube.com/watch?v=0wXP6LYzVZE",
+        "youtubeVersionNote": "リンク先はジュリー・アンドリュースのソロ歌唱音源です。放送で使用された録音との同一性は未確認です。"
+      },
+      {
         "timestamp": "0:42:25",
         "title": "One Short Day",
         "artist": "Cynthia Erivo, Ariana Grande, Kristin Chenoweth & Idina Menzel",
@@ -319,7 +353,7 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
     ],
     "sourceLabel": "2026/08/23 放送内の曲紹介・各楽曲の公式公開情報",
     "verifiedAt": "2026-09-13",
-    "note": "ゲスト：清水美依紗。曲紹介の文字起こしと公開情報を照合しました。時刻は録音内の目安です。「Edelweiss」は放送で使用された歌唱版の確認が残るため未掲載です。"
+    "note": "ゲスト：清水美依紗。曲紹介の文字起こしから確認した14曲を掲載しています。時刻は録音内の目安です。リンク先の録音・映像の版は各曲の注記もご確認ください。"
   }
 ];
 
