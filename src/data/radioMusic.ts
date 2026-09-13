@@ -211,6 +211,13 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeVersionNote": "『ミス・サイゴン』1989年オリジナル・ロンドン・キャスト録音。"
       },
       {
+        "timestamp": "0:42:25",
+        "title": "One Short Day",
+        "artist": "Cynthia Erivo, Ariana Grande, Kristin Chenoweth & Idina Menzel",
+        "youtubeUrl": "https://www.youtube.com/watch?v=aCTmVliv4XM",
+        "youtubeVersionNote": "映画『ウィキッド ふたりの魔女』英語版サウンドトラック。"
+      },
+      {
         "timestamp": "0:58:14",
         "title": "There's a Fine, Fine Line",
         "artist": "Stephanie D'Abruzzo",
@@ -280,7 +287,7 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
     ],
     "sourceLabel": "2026/08/23 放送内の曲紹介・各楽曲の公式公開情報",
     "verifiedAt": "2026-09-13",
-    "note": "ゲスト：清水美依紗。曲紹介の文字起こしと公開情報を照合しました。時刻は録音内の目安です。歌唱版・公式公開先の確認が残る2曲は未掲載です。"
+    "note": "ゲスト：清水美依紗。曲紹介の文字起こしと公開情報を照合しました。時刻は録音内の目安です。「Edelweiss」は放送で使用された歌唱版の確認が残るため未掲載です。"
   }
 ];
 
