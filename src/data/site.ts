@@ -63,6 +63,10 @@ export function songClipsUrl(): string {
   return `${siteOrigin()}/activities/live/clips/`;
 }
 
+export function radioMusicUrl(): string {
+  return `${siteOrigin()}/activities/radio/music/`;
+}
+
 export function ogImageUrl(): string {
   const imagePath = site.ogImagePath.startsWith("/")
     ? site.ogImagePath
@@ -123,6 +127,11 @@ ${activities
   )
   .join("")}  <url>
     <loc>${songClipsUrl()}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${radioMusicUrl()}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
