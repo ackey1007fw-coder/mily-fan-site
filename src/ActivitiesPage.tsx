@@ -435,7 +435,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
       <section aria-labelledby={`${episode.id}-songs`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">On Air Music</p>
         <h3 id={`${episode.id}-songs`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">この放送で流れた楽曲</h3>
-        {musicEpisode ? <RadioSongList episode={musicEpisode} /> : <p className="mt-3 text-sm leading-7 text-ink-muted">この回の曲目は確認中です。</p>}
+        {musicEpisode ? <><RadioSongList episode={musicEpisode} headingLevel="h4" /><p className="mt-4 text-xs leading-6 text-ink-muted">{musicEpisode.note}</p></> : <p className="mt-3 text-sm leading-7 text-ink-muted">この回の曲目は確認中です。</p>}
         <a href="/activities/radio/music/" className="mt-5 inline-flex min-h-11 items-center font-bold text-sage-deep underline underline-offset-4">過去の放送の楽曲一覧を見る →</a>
       </section>
 
