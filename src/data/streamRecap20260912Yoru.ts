@@ -43,13 +43,15 @@ export const streamRecap20260912Yoru: StreamRecap = {
       "title": "かわいいだけじゃだめですか？",
       "artist": "CUTIE STREET",
       "timestamp": "0:32:56",
-      "youtubeUrl": "https://www.youtube.com/watch?v=jZqTz1G8G04"
+      "youtubeUrl": "https://www.youtube.com/watch?v=jZqTz1G8G04",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=YYGsvfQcDIg", channel: "CUTIE STREET" }
     },
     {
       "title": "生まれてはじめて",
       "artist": "神田沙也加・松たか子",
       "timestamp": "0:52:22",
-      "youtubeUrl": "https://www.youtube.com/watch?v=MDZSdjLqiGA"
+      "youtubeUrl": "https://www.youtube.com/watch?v=MDZSdjLqiGA",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=O3xpEoW_uao", channel: "生音風カラオケ屋" }
     },
     {
       "title": "ケセラセラ",
@@ -61,7 +63,8 @@ export const streamRecap20260912Yoru: StreamRecap = {
       "title": "超最強",
       "artist": "超ときめき♡宣伝部",
       "timestamp": "1:15:53",
-      "youtubeUrl": "https://www.youtube.com/watch?v=PwlB-rXk1gM"
+      "youtubeUrl": "https://www.youtube.com/watch?v=PwlB-rXk1gM",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=Wuyx1pDlDvg", channel: "カラオケ歌っちゃ王" }
     },
     {
       "title": "明日も",
