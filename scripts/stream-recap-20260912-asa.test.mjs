@@ -20,11 +20,13 @@ test("September 12 morning stays ahead of September 11 night", () => {
 });
 
 test("September 12 morning records the three verified songs", () => {
-  assert.deepEqual(recap.songs.map(({ clip: _clip, ...song }) => song), [
+  assert.deepEqual(recap.songs.map(({ clip: _clip, karaoke: _karaoke, ...song }) => song), [
     { title: "拝啓、少年よ", artist: "Hump Back", timestamp: "0:15:38", youtubeUrl: "https://www.youtube.com/watch?v=d6i4AtCxrDo" },
     { title: "好きすぎて滅！", artist: "M!LK", timestamp: "0:23:13", youtubeUrl: "https://www.youtube.com/watch?v=ZVUxJsPfoX8" },
     { title: "Lovers", artist: "sumika", timestamp: "0:33:21", youtubeUrl: "https://www.youtube.com/watch?v=FFITBgsyVr4" },
   ]);
+  assert.equal(recap.songs[1].karaoke?.youtubeUrl, "https://www.youtube.com/watch?v=DUWVVQQmFe4");
+  assert.ok(recap.songs[1].karaoke?.channel);
 });
 test("September 12 morning ships eight real-frame stills", async () => {
   assert.equal(recap.gallery.length, 8);
