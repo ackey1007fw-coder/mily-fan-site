@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { it } from 'node:test';
 import sharp from 'sharp';
 import { streamRecaps, streamRecap20260912Yoru } from '../src/data/streamRecaps.ts';
@@ -49,7 +49,7 @@ it('does not move the mid-stream ranking to the end of the recording', () => {
   assert.doesNotMatch(recap.ranking[0], /終了時/);
 });
 
-it('publishes ten owner-approved stills and eight short singing clips', async () => {
+it('preserves ten owner-approved stills while holding the eight singing clips', async () => {
   assert.equal(recap.gallery.length, 10);
   assert.equal(recap.image, recap.gallery[4]);
   assert.equal(recap.galleryZip.label, '10枚まとめて保存');
@@ -67,12 +67,10 @@ it('publishes ten owner-approved stills and eight short singing clips', async ()
   const zip = await readFile(new URL(`../public${recap.galleryZip.src}`, import.meta.url));
   assert.equal(zip.readUInt32LE(0), 0x04034b50);
   for (const still of recap.gallery) assert.ok(zip.includes(Buffer.from(still.src.split('/').pop())));
-  assert.deepEqual(recap.songs.map(s => s.clip?.sourceTimestamp), ['0:10:06','0:23:47','0:36:12','0:53:58','1:00:08','1:15:54','1:22:28','1:34:08']);
-  assert.ok(recap.songs.every(s => s.clip?.durationSeconds === 24 && s.clip.width === 640 && s.clip.height === 360));
-  assert.ok(recap.songs.every(s => /^\/media\/live-clips\/mily-b115-/.test(s.clip.src)));
-  assert.ok(recap.songs.every(s => s.clip.poster === s.clip.src.replace(/\.mp4$/, '-poster.jpg')));
-  assert.match(recap.transcriptionNote, /8曲の歌唱.*各24秒/);
-  assert.doesNotMatch(recap.transcriptionNote, /利用条件確認/);
+  assert.ok(recap.songs.every(s => s.clip === undefined));
+  assert.match(recap.transcriptionNote, /歌唱動画は利用条件確認のため掲載を保留/);
+  const files = await readdir(new URL('../public/media/live-clips/', import.meta.url));
+  assert.ok(files.every(name => !name.startsWith('mily-b115-')), 'held MP4s and posters must not remain directly accessible in public');
 });
 
 it('distinguishes reconstructed recording positions, event deadline and historical next-slot notice', () => {
