@@ -3745,3 +3745,14 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。公開JPEGにEXIF / XMP / IPTCなしを回帰テストで確認する。
 - ZIPは8件で、承認済み単体JPEGとのSHA256一致を非公開制作台帳で確認済み。
 - LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。歌唱clipは別の権利ゲートとして扱う。
+
+## 素材台帳（batch b117 / source date 2026-09-13 / 承認日 2026-09-14）
+
+9月13日22:31頃開始のSHOWROOM夜配信録画から選んだ実フレーム10枚。オーナーが配信終了後、この回の配信レポートをサイトへ掲載し、スクショも含めるよう明示依頼。最終10枚の提示後も作業継続を明示したため、LIVE STREAM掲載用として使用する。着手時の最新mainでb116まで使用済みで、関連Open PRにb117の使用がないことを確認して採番した。
+
+- 公開ファイル: `live/mily-b117-01-bright-opening-smile.jpg`、`mily-b117-02-soft-smile.jpg`、`mily-b117-03-cheek-pose.jpg`、`mily-b117-04-hands-open-pose.jpg`、`mily-b117-05-finger-smile-pose.jpg`、`mily-b117-06-bright-smile.jpg`、`mily-b117-07-gentle-smile.jpg`、`mily-b117-08-close-smile.jpg`、`mily-b117-09-late-smile.jpg`、`mily-b117-10-closing-smile.jpg`。全10枚640×360 JPEG。
+- 代表: `mily-b117-06-bright-smile.jpg`。保存ZIP: `live/mily-b117-night-stills.zip`。
+- provenance: owner-provided recording / owner-approved recap stills。公開の生permalinkなし。録画原本・受け渡しURL / ID・全文文字起こし・ローカルパスは公開しない。
+- 録画全体を概観して候補を抽出し、前後フレームも比較したうえで最終10枚を実寸確認。ホワイトボードに視聴者名が見える候補を除外し、本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の明確な写り込みがない実フレームだけを採用した。
+- 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。公開JPEGのEXIF / XMP / IPTCは回帰テストで確認し、ZIP内10件と公開JPEGのバイト一致は非公開制作確認で検証済み。
+- LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。録画・全文文字起こしは公開しない。
