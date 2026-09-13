@@ -215,6 +215,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-13-seaside-circle-after-radio-thanks",
+    date: "2026-09-13",
+    activityIds: ["radio"],
+    title: "3時間の生放送ありがとう。ラジオ終了後のみりぃからお礼",
+    body:
+      "9月13日の「湘南シーサイドサークル」放送後、みりぃが動画でリスナーへお礼を届けました。「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」と感謝を伝えています。放送前のテーマ告知に続いて、3時間の生放送を終えたあとの感謝を伝える短い動画です。",
+    sourceLabel: "放送後の動画",
+    media: {
+      kind: "video",
+      src: "/media/news/mily-b113-01-seaside-circle-after-radio-thanks.mp4",
+      poster: "/media/news/mily-b113-01-seaside-circle-after-radio-thanks-poster.jpg",
+      width: 512,
+      height: 910,
+      alt: "ラジオ終了後、青いパーカー姿のみりぃが今週のメールへの感謝と3時間放送のお礼を伝える縦長動画",
+    },
+  },
+  {
     id: "2026-09-13-seaside-circle-solo-theme",
     // 放送日の告知記事。Instagram Storyの投稿日を示す値ではない。
     date: "2026-09-13",

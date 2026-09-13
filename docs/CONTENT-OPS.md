@@ -1494,3 +1494,11 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - NEWS / Gallery / media.ts / galleryVideos.ts / stories / events / streamSchedule / contest / profile は変更しない。録画原本・音声・全文文字起こし・非公開URL / ID / ローカルパスは公開しない。
 
 - 公開前レビュー対応: 獲得済みのアバター権は見どころの感謝だけに残し、当日の目標から除外。b112のZIPは8件の内部名と公開JPEGのバイト一致を再確認し、旧batch名の混入を回帰検査する。
+
+## 2026-09-13 湘南シーサイドサークル放送後のお礼
+
+- NEWS ID `2026-09-13-seaside-circle-after-radio-thanks`。オーナー提供動画と「ラジオ終了後」の明示確認を根拠に、同日放送後の記事として追加する。
+- 動画内で確認できる「今週もたくさんのメールをありがとう」「おかげさまで楽しく3時間放送できました」を短く要約。本人の感情や、個別メッセージ内容、未確認の出演時間は補完しない。
+- 同日の番組告知NEWSより新しい出来事なので、同日配列の先頭に置く。時刻を推測するsameDayOrderは追加しない。
+- b113の自己ホストMP4と実フレームposterをNEWS内で再生し、activityIdsはradio。恒久SNS URLが未確認のため、非リンクの `sourceLabel: 放送後の動画` とする。
+- Gallery / Stories / profile / events / streamSchedule / radio正本は変更しない。公開素材には受け渡し用ファイル名・ID・私的URLを持ち込まない。
