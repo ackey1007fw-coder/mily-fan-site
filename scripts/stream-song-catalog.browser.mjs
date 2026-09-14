@@ -168,7 +168,11 @@ try {
           assert.equal(await card.getByRole("link", { name: `${song.title} — 公式歌唱動画をYouTubeで聴く（新しいタブ）`, exact: true }).getAttribute("href"), song.youtubeUrl);
           await songDetails.locator(":scope > summary").click();
           const details = page.locator(`#recap-${song.performances[0].id}`);
-          await details.locator(":scope > summary").click();
+          // The latest recap starts open; clicking it unconditionally would hide its content.
+          if (!(await details.evaluate((node) => node.open))) {
+            await details.locator(":scope > summary").click();
+          }
+          assert.equal(await details.evaluate((node) => node.open), true);
           assert.ok((await details.innerText()).includes(song.youtubeVersionNote));
           assert.equal(await details.getByRole("link", { name: `${song.title} — 公式歌唱動画をYouTubeで聴く（新しいタブ）`, exact: true }).getAttribute("href"), song.youtubeUrl);
           await details.locator(":scope > summary").click();
@@ -208,7 +212,12 @@ try {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
         }
-        await recap.locator("details > summary").click();
+        const timeline = recap.locator(":scope > details");
+        await timeline.locator(":scope > summary").click();
+        await page.waitForFunction(({ hash, note }) => {
+          const recap = document.querySelector(hash);
+          return recap.querySelector(":scope > details")?.open === true && recap.innerText.includes(note);
+        }, { hash, note: latest.nextNote });
         assert.ok((await recap.innerText()).includes(latest.nextNote));
         await overflow();
         await recap.screenshot({ path: join(output, `${scenario.name}-latest-recap.png`) });
