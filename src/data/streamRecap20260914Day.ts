@@ -31,7 +31,7 @@ export const streamRecap20260914Day: StreamRecap = {
       artist: "沖縄民謡（夏川りみ）",
       timestamp: "1:45:33",
       youtubeUrl: "https://www.youtube.com/watch?v=IJ6B4t-hxxY",
-      youtubeVersionNote: "夏川りみのアーティストチャンネル掲載音源です。",
+      youtubeVersionNote: "夏川りみの配信音源（Topic）です。",
     },
     {
       title: "島人ぬ宝",
