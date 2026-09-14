@@ -1,6 +1,6 @@
 import type { StreamRecap } from "./streamRecaps.ts";
 
-export type SongPostLink = { platform: "youtube" | "tiktok" | "instagram"; url: string };
+export type SongPostLink = { platform: "youtube" | "tiktok" | "instagram" | "x"; url: string };
 export type SongPost = { recapId: string; songTitle: string; links: SongPostLink[] };
 // Published posts matched to existing song records. No remote media is loaded.
 export const streamSongPosts: SongPost[] = [
@@ -17,6 +17,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdRFwm1gihj/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099468632833052887"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -35,6 +39,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdQ0WVLDBkY/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099430567146070098"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -53,6 +61,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdQLJzngOOY/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099339948193120634"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -71,6 +83,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdPzLoXiXJS/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099287143801565646"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -89,6 +105,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdOkMDwkTmh/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099113472566899133"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -107,6 +127,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdOWdFWDTWE/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099083267253096936"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -125,6 +149,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "instagram",
         "url": "https://www.instagram.com/reel/DdOFY4ijSrI/"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2099045803121631432"
       }
     ],
     "recapId": "2026-09-12-yoru-showroom",
@@ -155,6 +183,10 @@ export const streamSongPosts: SongPost[] = [
       {
         "platform": "youtube",
         "url": "https://www.youtube.com/watch?v=ouGTY0uWrsI"
+      },
+      {
+        "platform": "x",
+        "url": "https://x.com/ackey_RiRi_supp/status/2098700360231661923"
       }
     ],
     "recapId": "2026-09-11-yoru-showroom",

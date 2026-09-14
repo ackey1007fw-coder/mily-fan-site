@@ -5,7 +5,7 @@ import { streamSongPosts, songPostGroups } from '../src/data/streamSongPosts.ts'
 
 test('published song posts resolve to exact performances and separate original links', () => {
   assert.equal(songPostGroups(streamRecaps).flatMap(g => g.songs).length, 13);
-  assert.equal(streamSongPosts.reduce((n, p) => n + p.links.length, 0), 30);
+  assert.equal(streamSongPosts.reduce((n, p) => n + p.links.length, 0), 38);
   const seen = new Set();
   for (const post of streamSongPosts) {
     const key = post.recapId + '|' + post.songTitle;
@@ -21,8 +21,11 @@ test('published song posts resolve to exact performances and separate original l
         assert.match(u.searchParams.get('v'), /^[\w-]{11}$/);
       } else if (link.platform === 'tiktok') {
         assert.equal(u.hostname, 'www.tiktok.com'); assert.match(u.pathname, /^\/@ackeytan_\/video\/\d+$/);
-      } else {
+      } else if (link.platform === 'instagram') {
         assert.equal(u.hostname, 'www.instagram.com'); assert.match(u.pathname, /^\/reel\/[\w-]+\/$/);
+      } else {
+        assert.equal(link.platform, 'x'); assert.equal(u.hostname, 'x.com');
+        assert.match(u.pathname, /^\/ackey_RiRi_supp\/status\/\d+$/);
       }
     }
   }
