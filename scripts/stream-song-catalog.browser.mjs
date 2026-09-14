@@ -212,7 +212,12 @@ try {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
         }
-        await recap.locator("details > summary").click();
+        const timeline = recap.locator(":scope > details");
+        await timeline.locator(":scope > summary").click();
+        await page.waitForFunction(({ hash, note }) => {
+          const recap = document.querySelector(hash);
+          return recap.querySelector(":scope > details")?.open === true && recap.innerText.includes(note);
+        }, { hash, note: latest.nextNote });
         assert.ok((await recap.innerText()).includes(latest.nextNote));
         await overflow();
         await recap.screenshot({ path: join(output, `${scenario.name}-latest-recap.png`) });
