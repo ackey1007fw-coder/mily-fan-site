@@ -57,6 +57,10 @@ const approved = new Set([
   "https://www.youtube.com/watch?v=_8TmGHhPjAw",
   "https://www.youtube.com/watch?v=glsH4Mgxz-g",
   "https://www.youtube.com/watch?v=OwV-IccMBZs",
+  // 2026-09-15: ハナミズキ / 一青窈 — 一青窈 Official YouTube の公式MV。
+  "https://www.youtube.com/watch?v=Lv9pOboKtjg",
+  // 2026-09-15: 高嶺の花子さん / back number — back number Official Artist Channel の公式MV。
+  "https://www.youtube.com/watch?v=SII-S-zCg-c",
   // 2026-09-14: てぃんさぐぬ花 / 沖縄民謡 — 夏川りみ Topic の正規配信音源。See CONTENT-OPS audit.
   "https://www.youtube.com/watch?v=IJ6B4t-hxxY",
   // 2026-09-14: 島人ぬ宝 / BEGIN — BEGIN Official Artist Channel の公式ライブ映像。See CONTENT-OPS audit.
