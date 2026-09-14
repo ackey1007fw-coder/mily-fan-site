@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920" role="img" aria-labelledby="title desc">
+  <title id="title">2026年9月14日 昼配信 みりぃ歌唱記録</title>
+  <desc id="desc">みりぃが昼配信で歌った、てぃんさぐぬ花と島人ぬ宝の2曲を案内する非公式ファンカード</desc>
+  <rect width="1080" height="1920" fill="#faf7f1"/>
+  <rect x="70" y="80" width="940" height="150" rx="44" fill="#eee2d5"/>
+  <text x="120" y="175" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="62" font-weight="700" fill="#2b363b">2026.09.14　昼配信</text>
+  <text x="75" y="355" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="94" font-weight="800" fill="#2b363b">みりぃ　歌唱記録</text>
+  <text x="80" y="440" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="48" fill="#626262">この枠で歌った2曲</text>
+  <rect x="70" y="560" width="940" height="300" rx="54" fill="#ffffff" stroke="#e0d9cf" stroke-width="4"/>
+  <circle cx="175" cy="680" r="60" fill="#eee2d5"/>
+  <text x="140" y="700" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="44" font-weight="800" fill="#b7573a">01</text>
+  <text x="285" y="665" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="70" font-weight="800" fill="#2b363b">てぃんさぐぬ花</text>
+  <text x="285" y="760" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="42" fill="#666666">沖縄の歌を、やさしく。</text>
+  <rect x="70" y="940" width="940" height="300" rx="54" fill="#ffffff" stroke="#e0d9cf" stroke-width="4"/>
+  <circle cx="175" cy="1060" r="60" fill="#eee2d5"/>
+  <text x="140" y="1080" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="44" font-weight="800" fill="#b7573a">02</text>
+  <text x="285" y="1045" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="70" font-weight="800" fill="#2b363b">島人ぬ宝</text>
+  <text x="285" y="1140" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="42" fill="#666666">昼配信の後半を彩った一曲。</text>
+  <text x="80" y="1430" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="46" font-weight="800" fill="#415b49">配信レポートはファンサイトで公開中</text>
+  <rect x="70" y="1510" width="940" height="140" rx="38" fill="#2b363b"/>
+  <text x="120" y="1598" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="39" fill="#ffffff">mily-fan-site.vercel.app/activities/live/</text>
+  <text x="80" y="1760" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="34" fill="#777777">非公式ファンアーカイブ</text>
+  <text x="80" y="1820" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" font-size="34" fill="#777777">録画・音声の再配布なし</text>
+</svg>
