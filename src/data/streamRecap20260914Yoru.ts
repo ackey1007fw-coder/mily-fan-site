@@ -1,0 +1,121 @@
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
+
+const approvedStills: StreamRecapImage[] = [
+  { src: "/media/live/mily-b119-01-opening-smile.jpg", width: 640, height: 360, alt: "9月14日の夜配信、髪を下ろして笑顔を見せるみりぃ", caption: "笑顔で夜枠スタート", downloadName: "みりぃ_20260914夜_01.jpg" },
+  { src: "/media/live/mily-b119-02-close-smile.jpg", width: 640, height: 360, alt: "9月14日の夜配信、カメラに近づいて笑顔を見せるみりぃ", caption: "昼枠の反響を振り返りながら", downloadName: "みりぃ_20260914夜_02.jpg" },
+  { src: "/media/live/mily-b119-03-wave.jpg", width: 640, height: 360, alt: "9月14日の夜配信、手を振って笑顔を見せるみりぃ", caption: "笑顔で手を振るひとコマ", downloadName: "みりぃ_20260914夜_03.jpg" },
+  { src: "/media/live/mily-b119-04-seated-smile.jpg", width: 640, height: 360, alt: "9月14日の夜配信、座って笑顔で話すみりぃ", caption: "ロングトークの合間の笑顔", downloadName: "みりぃ_20260914夜_04.jpg" },
+  { src: "/media/live/mily-b119-05-heart-envelope-board.jpg", width: 640, height: 360, alt: "9月14日の夜配信、ハート付きの封筒を描いたホワイトボードを見せるみりぃ", caption: "ギフトをイメージしたラブレターをお絵描き", downloadName: "みりぃ_20260914夜_05_ラブレター.jpg" },
+  { src: "/media/live/mily-b119-06-thumbs-up.jpg", width: 640, height: 360, alt: "9月14日の夜配信、親指を立てて笑顔を見せるみりぃ", caption: "親指を立ててリアクション", downloadName: "みりぃ_20260914夜_06.jpg" },
+  { src: "/media/live/mily-b119-07-board-talk.jpg", width: 640, height: 360, alt: "9月14日の夜配信、ホワイトボードとペンを手に話すみりぃ", caption: "ホワイトボードを手にトーク", downloadName: "みりぃ_20260914夜_07.jpg" },
+  { src: "/media/live/mily-b119-08-red-mic.jpg", width: 640, height: 360, alt: "9月14日の夜配信、赤いマイクを手に話すみりぃ", caption: "赤いマイクを手に次の曲を相談", downloadName: "みりぃ_20260914夜_08_赤いマイク.jpg" },
+  { src: "/media/live/mily-b119-09-peace-sign.jpg", width: 640, height: 360, alt: "9月14日の夜配信、カメラに向かってピースをするみりぃ", caption: "楽器トークの合間にピース", downloadName: "みりぃ_20260914夜_09.jpg" },
+  { src: "/media/live/mily-b119-10-closing-smile.jpg", width: 640, height: 360, alt: "9月14日の夜配信、終盤に笑顔を見せるみりぃ", caption: "終盤も笑顔で", downloadName: "みりぃ_20260914夜_10.jpg" },
+];
+export const streamRecap20260914Yoru: StreamRecap = {
+  id: "2026-09-14-yoru-showroom",
+  date: "2026-09-14",
+  dateLabel: "2026.09.14（月）",
+  theme: "夜のロングトークと2曲",
+  broadcastLabel: "20:31頃〜 約122分",
+  platformLabel: "SHOWROOM",
+  summary: "昼枠1791人への感謝や三次審査の結果を待つ思い、配信45日目と初アバター権を振り返りました。終盤は「ハナミズキ」「高嶺の花子さん」を歌い、ランキングを読み上げて締めました。",
+  image: approvedStills[0],
+  gallery: approvedStills,
+  galleryZip: { src: "/media/live/mily-b119-night-stills.zip", filename: "みりぃ_20260914夜_スクショ10枚.zip", label: "10枚まとめて保存" },
+  songs: [
+    {
+      title: "ハナミズキ",
+      artist: "一青窈",
+      timestamp: "1:25:57",
+      youtubeUrl: "https://www.youtube.com/watch?v=Lv9pOboKtjg",
+      clip: {
+        src: "/media/live-clips/mily-b120-01-hanamizuki.mp4",
+        poster: "/media/live-clips/mily-b120-01-hanamizuki-poster.jpg",
+        width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:25:59",
+      },
+    },    {
+      title: "高嶺の花子さん",
+      artist: "back number",
+      timestamp: "1:35:50",
+      youtubeUrl: "https://www.youtube.com/watch?v=SII-S-zCg-c",
+      clip: {
+        src: "/media/live-clips/mily-b120-02-takane-no-hanakosan.mp4",
+        poster: "/media/live-clips/mily-b120-02-takane-no-hanakosan-poster.jpg",
+        width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:35:50",
+      },
+    },
+  ],
+  highlights: [
+    {
+      timestamp: "0:11:55",
+      title: "昼枠1791人にありがとう",
+      body: "昼の配信に1791人が来てくれたと振り返り、たくさん見てもらえたことへの喜びと感謝を伝えました。",
+    },
+    {
+      timestamp: "0:15:25",
+      title: "三次審査の結果を待ちながら",
+      body: "三次審査の結果を待つ中、応援してくれる言葉が心強いと話し、これからも頑張ると伝えました。",
+    },    {
+      timestamp: "0:31:25",
+      title: "配信45日目を振り返る",
+      body: "7月末に配信を始め、8月1日から本格的に続けてきたことを振り返り、この日で45日目だと感謝を伝えました。",
+    },
+    {
+      timestamp: "0:50:08",
+      title: "ホワイトボードでお絵描き",
+      body: "ギフトをきっかけにホワイトボードへハート付きの封筒を描き、ラブレターに見立てながら楽しくトークしました。",
+    },
+    {
+      timestamp: "1:04:44",
+      title: "初アバター権をあらためて報告",
+      body: "三次審査で45日間配信して初めてアバター権を獲得できたと話し、今後のアバター配布を楽しみにしました。",
+    },
+    {
+      timestamp: "1:25:38",
+      title: "「ハナミズキ」を歌唱",
+      body: "歌いたくなってきたと話し、一青窈「ハナミズキ」へ。夜枠で初めて歌う曲として届けました。",
+    },
+    {
+      timestamp: "1:35:02",
+      title: "2曲目は「高嶺の花子さん」",
+      body: "本日2曲目と紹介し、back number「高嶺の花子さん」を歌唱。疲れた夜も明るくしたいと話してから歌い始めました。",
+    },    {
+      timestamp: "1:58:53",
+      title: "ランキングから翌日の案内へ",
+      body: "終盤は13位から1位までライブランキングを読み上げて感謝。翌日は日中が難しく、朝と夜の可能性があると案内しました。",
+    },
+  ],
+  goals: [
+    { item: "三次審査", target: "次の審査へ", statusThen: "結果待ちで前向き" },
+    { item: "アバター", target: "初アバター配布", statusThen: "権利獲得を報告" },
+    { item: "配信", target: "継続", statusThen: "45日目" },
+  ],
+  ranking: [buildRankingNote(13, 1, "during")],
+  timeline: [
+    { timestamp: "0:00:12", label: "夜枠スタート、再び集まったみんなへ挨拶" },
+    { timestamp: "0:11:55", label: "昼枠1791人の反響に感謝" },
+    { timestamp: "0:15:25", label: "三次審査の結果を待つ気持ち" },
+    { timestamp: "0:22:09", label: "毎週日曜10〜13時のラジオを紹介" },
+    { timestamp: "0:31:25", label: "配信開始から45日目を振り返る" },
+    { timestamp: "0:50:08", label: "ホワイトボードにラブレターをお絵描き" },
+    { timestamp: "1:04:44", label: "三次審査で初アバター権を獲得した話" },
+    { timestamp: "1:24:55", label: "歌いたくなって選曲タイムへ" },    { timestamp: "1:25:57", label: "一青窈「ハナミズキ」を歌唱" },
+    { timestamp: "1:31:54", label: "もう1曲歌うことを相談" },
+    { timestamp: "1:35:02", label: "本日2曲目を紹介" },
+    { timestamp: "1:35:50", label: "back number「高嶺の花子さん」を歌唱" },
+    { timestamp: "1:45:46", label: "ピアノやトロンボーンなど楽器の話" },
+    { timestamp: "1:58:53", label: "13位から1位のライブランキング読み上げ" },
+    { timestamp: "2:00:31", label: "翌日の朝・夜配信の可能性を案内" },
+    { timestamp: "2:01:15", label: "感謝を伝えて「おやすみり」で終了" },
+  ],
+  nextNote: "配信時点では、翌日は日中の配信が難しく、朝と夜の可能性があると案内していました。時間はファンルームで知らせるとしていました。",
+  sourceLabel: "2026年9月14日 SHOWROOM夜配信（オーナー提供録画を確認）",
+  verifiedAt: "2026-09-15",
+  transcriptionNote: buildTranscriptionNote({
+    material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    stills: "静止画は録画の実フレーム10枚を掲載しています。歌唱クリップのposterも録画の実フレームです。",
+    extra: "録画開始記録20:31:02、メディア実測7313.203秒から表示は20:31頃・約122分に丸めています。これは確認できた録画範囲で、配信全体の開始・尺を保証しません。時刻は録画先頭からの目安です。自動文字起こし2,132区間を全文確認し、歌唱2曲は前後の発言と歌唱内容から照合しました。全編手動聴取は実施していません。録画全体を概観し、第三者やコメント欄が写らない実フレーム10枚を実寸確認しました。",
+  }),
+};

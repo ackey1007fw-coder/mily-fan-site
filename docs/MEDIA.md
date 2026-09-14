@@ -3758,3 +3758,25 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 録画全体を概観して候補を抽出し、前後フレームも比較したうえで最終10枚を実寸確認。ホワイトボードに視聴者名が見える候補を除外し、本人以外の人物、視聴者名・アイコン、コメント欄、住所・連絡先など公開を避ける情報の明確な写り込みがない実フレームだけを採用した。
 - 元の640×360・16:9を保持。crop・scale・顔のAI生成・補正・置換・生成塗り足しなし。公開JPEGのEXIF / XMP / IPTCは回帰テストで確認し、ZIP内10件と公開JPEGのバイト一致は非公開制作確認で検証済み。
 - LIVE STREAM専用。NEWS / Gallery / `media.ts` / `galleryVideos.ts` へ複製しない。録画・全文文字起こしは公開しない。
+
+## 素材台帳（batch b119 / source date 2026-09-14 / 承認日 2026-09-14）
+
+9月14日夜のSHOWROOM配信録画から選定したLIVE STREAM専用の実フレーム10枚。オーナーが当該夜枠のスクショ作成とサイト掲載を明示依頼した範囲で掲載する。
+
+- `live/mily-b119-01-opening-smile.jpg` から `live/mily-b119-10-closing-smile.jpg` まで10枚。すべて640×360 JPEG。
+- 録画全体の候補を比較し、最終10枚を実寸目視。本人以外の人物、コメント欄、視聴者名・アイコン、住所・連絡先など公開を避ける情報の写り込みなし。
+- 元の実フレームをバイト単位でコピーし、crop・scale・顔補正・AI生成・生成塗り足しなし。単体10枚とZIP内の各ファイルは一致確認済み。
+- ZIP: `live/mily-b119-night-stills.zip` / 184,635 bytes / sha256 `a5d82fcb899c727544d5660236b7f8d63c7212d0b7cd370f2d24e025d86534cc`。
+- LIVE STREAM専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。
+- 録画原本、全文文字起こし、非公開の受け渡し情報、視聴者情報は公開しない。
+
+## 素材台帳（batch b120 / source date 2026-09-14 / 承認日 2026-09-14）
+
+同じ9月14日夜配信から作成したLIVE SONG CLIPS用の短い歌唱抜粋2本。オーナーが今回の歌唱シーンの動画化・ファンサイト掲載・SNS展開を明示依頼した範囲で扱う。
+
+- `live-clips/mily-b120-01-hanamizuki.mp4`: 一青窈「ハナミズキ」。録画内1:25:59頃から24秒。1,812,949 bytes / sha256 `dd98e41f03ecffab37d73e441e8fdf40ae739946acbef5f7b1b1d060e858abf8`。
+- `live-clips/mily-b120-02-takane-no-hanakosan.mp4`: back number「高嶺の花子さん」。録画内1:35:50頃から24秒。2,083,269 bytes / sha256 `8a119d198743c005cb47d19cf9f7a527b7476fa1f37f6b75e07d4c82164c7781`。
+- 各MP4は640×360 / H.264 Main / yuv420p / AAC-LC / faststart。原録画の画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップなし。
+- posterは各公開MP4の12秒地点の実フレーム。ハナミズキ17,743 bytes / sha256 `9b68722fdc86b74a6d2dfb83acd4998d98b6e2a6af99f58c9a15fa5f11cb4a05`、高嶺の花子さん17,882 bytes / sha256 `178f186f9140d668218ac3a4b7564b46d165cb11d80264ce47595f44bee8a54a`。
+- 実フレーム確認で第三者・コメント欄・視聴者情報の写り込みなし。公開範囲はLIVE SONG CLIPS。NEWS / Gallery / Storiesへ自動複製しない。
+- 原曲への公式YouTube導線を併記し、録画全編・歌詞・私的な許可確認情報は公開しない。楽曲・伴奏等の権利は各権利者に帰属する。

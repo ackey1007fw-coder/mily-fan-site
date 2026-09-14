@@ -13,7 +13,7 @@ import { buildStreamSongCatalog } from "../src/lib/streamSongCatalog.ts";
 const run = promisify(execFile);
 const root = new URL("../", import.meta.url);
 const clips = buildStreamSongClips(streamRecaps);
-const expectedTitles = ["拝啓、少年よ", "好きすぎて滅！", "Lovers", "明日も", "ケセラセラ", "かわいいだけじゃだめですか？"];
+const expectedTitles = ["ハナミズキ", "高嶺の花子さん", "拝啓、少年よ", "好きすぎて滅！", "Lovers", "明日も", "ケセラセラ", "かわいいだけじゃだめですか？"];
 
 async function probe(path) {
   const { stdout } = await run(ffprobe.path, [
@@ -23,9 +23,10 @@ async function probe(path) {
 }
 
 test("song clips derive from the existing song records only", () => {
-  assert.equal(clips.length, 6);
+  assert.equal(clips.length, 8);
   assert.deepEqual(clips.map((item) => item.title), expectedTitles);
   assert.deepEqual(clips.map((item) => item.performance.id), [
+    "2026-09-14-yoru-showroom", "2026-09-14-yoru-showroom",
     "2026-09-12-asa-showroom", "2026-09-12-asa-showroom", "2026-09-12-asa-showroom",
     "2026-09-11-yoru-showroom", "2026-09-10-asa-showroom", "2026-09-10-asa-showroom",
   ]);
@@ -37,7 +38,7 @@ test("site clips are short playable MP4s with real-frame posters", async () => {
     assert.equal(clip.durationSeconds, 24);
     assert.equal(clip.width, 640);
     assert.equal(clip.height, 360);
-    assert.match(clip.src, /^\/media\/live-clips\/mily-b(?:100|102)-/);
+    assert.match(clip.src, /^\/media\/live-clips\/mily-b(?:100|102|120)-/);
     const videoUrl = new URL(`../public${clip.src}`, import.meta.url);
     const posterUrl = new URL(`../public${clip.poster}`, import.meta.url);
     assert.ok((await stat(videoUrl)).size > 100_000);

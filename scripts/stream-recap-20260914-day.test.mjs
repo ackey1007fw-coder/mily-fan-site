@@ -8,8 +8,8 @@ import {
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 
-test("September 14 day is the newest recap with the captured duration", () => {
-  assert.equal(streamRecaps[0], recap);
+test("September 14 day stays behind the later same-day night recap", () => {
+  assert.equal(streamRecaps[1], recap);
   assert.equal(recap.broadcastLabel, "14:32頃〜 約137分");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.deepEqual(recap.ranking, [buildRankingNote(13, 1, "during")]);
