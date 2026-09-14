@@ -1,3 +1,5 @@
+import SongPostCollection from "./components/SongPostCollection";
+import { streamSongPosts } from "./data/streamSongPosts";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { streamRecaps } from "./data/streamRecaps";
@@ -21,17 +23,18 @@ export default function SongClipsPage() {
             </nav>
             <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-sage-deep">Live Song Clips</p>
             <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">みりぃの歌唱クリップ</h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">配信で歌った場面から、公開できる短い抜粋だけをまとめています。歌った回の記録と一緒に、みりぃの表情や歌声を楽しめるアーカイブです。</p>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">みりぃの歌声と表情を、TikTok・YouTube・リールで。歌った回のレポートと一緒に、お気に入りの場面を探せるアーカイブです。</p>
             <div className="mt-5 rounded-2xl border border-sage/20 bg-sage-soft/45 p-4 text-sm leading-7 text-ink-muted">
-              <p><strong className="text-ink">{clips.length}本公開中。</strong> オーナー確認済みの録画から作った短い抜粋で、録画全編や歌詞は掲載していません。</p>
+              <p><strong className="text-ink">SNSで{streamSongPosts.length}場面・このページで{clips.length}本。</strong> SNSのボタンは各投稿へ、このページのプレーヤーは短い歌唱抜粋へつながります。</p>
               <p className="mt-2">楽曲・伴奏などの権利は各権利者に帰属します。原曲は各カードの公式YouTubeリンクから確認できます。</p>
             </div>
           </div>
         </header>
 
+        <SongPostCollection />
         <section aria-labelledby="clips-title" className="px-4 pb-14">
           <div className="mx-auto max-w-3xl">
-            <h2 id="clips-title" className="sr-only">歌唱クリップ一覧</h2>
+            <h2 id="clips-title" className="mb-6 text-2xl font-bold">このページで再生する</h2>
             {clips.length === 0 ? (
               <div className="rounded-3xl border border-sage/20 bg-paper-card p-6 shadow-card">
                 <p className="text-sm leading-7 text-ink-muted">公開できる歌唱クリップを準備中です。</p>

@@ -3,7 +3,7 @@ import { canonicalUrl, site, songClipsUrl } from "../data/site.ts";
 export const songClipsPageMetadata = {
   title: "みりぃの歌唱クリップ | みりぃ ファンサイト（非公式）",
   description:
-    "みりぃ（三橋莉子 / Mily）さんのSHOWROOM配信から、確認済みの短い歌唱クリップをまとめたファン制作・非公式アーカイブ。",
+    "みりぃ（三橋莉子 / Mily）さんのSHOWROOM配信から、歌唱クリップとTikTok・YouTube・リールの投稿をまとめたファン制作・非公式アーカイブ。",
   canonical: songClipsUrl(),
 } as const;
 
