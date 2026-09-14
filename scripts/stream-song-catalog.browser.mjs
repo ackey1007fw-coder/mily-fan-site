@@ -214,11 +214,9 @@ try {
         }
         const timeline = recap.locator(":scope > details");
         await timeline.locator(":scope > summary").click();
-        await page.waitForFunction(({ hash, note }) => {
-          const recap = document.querySelector(hash);
-          return recap.querySelector(":scope > details")?.open === true && recap.innerText.includes(note);
-        }, { hash, note: latest.nextNote });
-        assert.ok((await recap.innerText()).includes(latest.nextNote));
+        await page.waitForFunction((hash) => document.querySelector(hash)?.querySelector(":scope > details")?.open === true, hash);
+        assert.equal(await timeline.evaluate((node) => node.open), true);
+        assert.ok((await timeline.textContent()).includes(latest.nextNote));
         await overflow();
         await recap.screenshot({ path: join(output, `${scenario.name}-latest-recap.png`) });
       });
