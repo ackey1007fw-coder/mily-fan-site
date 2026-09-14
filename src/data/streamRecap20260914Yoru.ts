@@ -30,21 +30,12 @@ export const streamRecap20260914Yoru: StreamRecap = {
       artist: "一青窈",
       timestamp: "1:25:57",
       youtubeUrl: "https://www.youtube.com/watch?v=Lv9pOboKtjg",
-      clip: {
-        src: "/media/live-clips/mily-b120-01-hanamizuki.mp4",
-        poster: "/media/live-clips/mily-b120-01-hanamizuki-poster.jpg",
-        width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:25:59",
-      },
-    },    {
+    },
+    {
       title: "高嶺の花子さん",
       artist: "back number",
       timestamp: "1:35:50",
       youtubeUrl: "https://www.youtube.com/watch?v=SII-S-zCg-c",
-      clip: {
-        src: "/media/live-clips/mily-b120-02-takane-no-hanakosan.mp4",
-        poster: "/media/live-clips/mily-b120-02-takane-no-hanakosan-poster.jpg",
-        width: 640, height: 360, durationSeconds: 24, sourceTimestamp: "1:35:50",
-      },
     },
   ],
   highlights: [
@@ -57,7 +48,8 @@ export const streamRecap20260914Yoru: StreamRecap = {
       timestamp: "0:15:25",
       title: "三次審査の結果を待ちながら",
       body: "三次審査の結果を待つ中、応援してくれる言葉が心強いと話し、これからも頑張ると伝えました。",
-    },    {
+    },
+    {
       timestamp: "0:31:25",
       title: "配信45日目を振り返る",
       body: "7月末に配信を始め、8月1日から本格的に続けてきたことを振り返り、この日で45日目だと感謝を伝えました。",
@@ -81,7 +73,8 @@ export const streamRecap20260914Yoru: StreamRecap = {
       timestamp: "1:35:02",
       title: "2曲目は「高嶺の花子さん」",
       body: "本日2曲目と紹介し、back number「高嶺の花子さん」を歌唱。疲れた夜も明るくしたいと話してから歌い始めました。",
-    },    {
+    },
+    {
       timestamp: "1:58:53",
       title: "ランキングから翌日の案内へ",
       body: "終盤は13位から1位までライブランキングを読み上げて感謝。翌日は日中が難しく、朝と夜の可能性があると案内しました。",
@@ -101,7 +94,8 @@ export const streamRecap20260914Yoru: StreamRecap = {
     { timestamp: "0:31:25", label: "配信開始から45日目を振り返る" },
     { timestamp: "0:50:08", label: "ホワイトボードにラブレターをお絵描き" },
     { timestamp: "1:04:44", label: "三次審査で初アバター権を獲得した話" },
-    { timestamp: "1:24:55", label: "歌いたくなって選曲タイムへ" },    { timestamp: "1:25:57", label: "一青窈「ハナミズキ」を歌唱" },
+    { timestamp: "1:24:55", label: "歌いたくなって選曲タイムへ" },
+    { timestamp: "1:25:57", label: "一青窈「ハナミズキ」を歌唱" },
     { timestamp: "1:31:54", label: "もう1曲歌うことを相談" },
     { timestamp: "1:35:02", label: "本日2曲目を紹介" },
     { timestamp: "1:35:50", label: "back number「高嶺の花子さん」を歌唱" },

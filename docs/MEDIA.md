@@ -3770,13 +3770,12 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - LIVE STREAM専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。
 - 録画原本、全文文字起こし、非公開の受け渡し情報、視聴者情報は公開しない。
 
-## 素材台帳（batch b120 / source date 2026-09-14 / 承認日 2026-09-14）
+## 素材台帳（batch b120 / source date 2026-09-14 / オーナー依頼確認日 2026-09-14）
 
-同じ9月14日夜配信から作成したLIVE SONG CLIPS用の短い歌唱抜粋2本。オーナーが今回の歌唱シーンの動画化・ファンサイト掲載・SNS展開を明示依頼した範囲で扱う。
+**公開保留（PR #267のP1対応）**: 9月14日夜配信の「ハナミズキ」「高嶺の花子さん」は、各24秒の歌唱抜粋を非公開制作領域で準備済み。ただし、オーナーのサイト・SNS掲載依頼は、楽曲・伴奏を含む二次利用条件の確認完了を意味しないため、`songs[].clip` と公開MP4・posterは掲載しない。
 
-- `live-clips/mily-b120-01-hanamizuki.mp4`: 一青窈「ハナミズキ」。録画内1:25:59頃から24秒。1,812,949 bytes / sha256 `dd98e41f03ecffab37d73e441e8fdf40ae739946acbef5f7b1b1d060e858abf8`。
-- `live-clips/mily-b120-02-takane-no-hanakosan.mp4`: back number「高嶺の花子さん」。録画内1:35:50頃から24秒。2,083,269 bytes / sha256 `8a119d198743c005cb47d19cf9f7a527b7476fa1f37f6b75e07d4c82164c7781`。
-- 各MP4は640×360 / H.264 Main / yuv420p / AAC-LC / faststart。原録画の画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップなし。
-- posterは各公開MP4の12秒地点の実フレーム。ハナミズキ17,743 bytes / sha256 `9b68722fdc86b74a6d2dfb83acd4998d98b6e2a6af99f58c9a15fa5f11cb4a05`、高嶺の花子さん17,882 bytes / sha256 `178f186f9140d668218ac3a4b7564b46d165cb11d80264ce47595f44bee8a54a`。
-- 実フレーム確認で第三者・コメント欄・視聴者情報の写り込みなし。公開範囲はLIVE SONG CLIPS。NEWS / Gallery / Storiesへ自動複製しない。
-- 原曲への公式YouTube導線を併記し、録画全編・歌詞・私的な許可確認情報は公開しない。楽曲・伴奏等の権利は各権利者に帰属する。
+- 対象: 一青窈「ハナミズキ」録画内1:25:59頃、back number「高嶺の花子さん」録画内1:35:50頃。
+- 非公開制作版は24秒 / 640×360 / H.264 Main / AAC-LC / faststart。原画角を保持し、crop・scale・顔補正・AI生成・生成塗り足し・歌詞テロップなし。
+- 再掲載には、当該録画音声をサイトまたはSNSで再配信できる根拠、対象範囲、確認日の記録が必要。短尺であることやオーナー依頼だけを権利許諾の根拠にしない。
+- 配信メモには曲名・歌唱開始時刻・原曲の公式YouTube導線だけを残す。録画原本、非公開クリップ、私的な許可確認情報はpublic repoへ置かない。
+- 権利ゲートが確認できるまで、当該2本のSNS投稿も行わない。

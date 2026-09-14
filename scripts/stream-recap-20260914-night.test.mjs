@@ -21,7 +21,7 @@ test("September 14 night records the two verified songs and next-stream note", (
   assert.deepEqual(recap.songs.map(({ title }) => title), ["ハナミズキ", "高嶺の花子さん"]);
   assert.equal(recap.songs[0].youtubeUrl, "https://www.youtube.com/watch?v=Lv9pOboKtjg");
   assert.equal(recap.songs[1].youtubeUrl, "https://www.youtube.com/watch?v=SII-S-zCg-c");
-  assert.deepEqual(recap.songs.map(({ clip }) => clip.durationSeconds), [24, 24]);
+  assert.ok(recap.songs.every(({ clip }) => clip === undefined));
   assert.match(recap.nextNote, /朝と夜/);
   assert.match(recap.nextNote, /ファンルーム/);
 });
