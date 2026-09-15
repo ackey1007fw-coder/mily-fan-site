@@ -36,6 +36,7 @@ import { recap20260808Shinya } from "./streamRecap0808Shinya.ts";
 import { streamRecap20260807Day } from "./streamRecap20260807Day.ts";
 import { streamRecap20260806Night } from "./streamRecap20260806Night.ts";
 import { streamRecap20260821Day } from "./streamRecap20260821Day.ts";
+import { streamRecap20260817Night } from "./streamRecap20260817Night.ts";
 import { streamRecap20260816Asa } from "./streamRecap20260816Asa.ts";
 import { streamRecap20260815Night } from "./streamRecap20260815Night.ts";
 import { streamRecap20260815Day } from "./streamRecap20260815Day.ts";
@@ -253,6 +254,7 @@ export const streamRecaps: StreamRecap[] = [
   streamRecap20260821Asa,
   streamRecap20260819Day,
   streamRecap20260818Night,
+  streamRecap20260817Night,
   streamRecap20260816Asa,
   streamRecap20260815Night,
   streamRecap20260815Day,
