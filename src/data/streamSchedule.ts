@@ -15,6 +15,8 @@
  * - 9/13 22:30 は三次審査 SHOWROOM 審査期間（〜9/12 21:59）の後の別枠。
  *   SHOWROOM next_live epoch 1789306200
  *   （https://www.showroom-live.com/r/circle2026_0734）。終了時刻は未確認。
+ * - 9/15 22:00〜23:30 は SHOWROOM next_live の 09/15 22:00 と本人X
+ *   （https://x.com/Mily_chan36/status/2099820335755636743）で確認。
  * - 日付・時刻は JST。確認済み終了時刻がある枠は終了時に非表示にし、
  *   終了時刻が未確認の枠だけ開始から約3時間を表示上限にします。
  */
@@ -60,6 +62,7 @@ export const streamSchedule: StreamSlot[] = [
   { date: "2026-09-12", time: "14:40", endTime: "15:10" },
   { date: "2026-09-12", time: "21:00", endTime: "22:00" },
   { date: "2026-09-13", time: "22:30" },
+  { date: "2026-09-15", time: "22:00", endTime: "23:30" },
 ];
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;

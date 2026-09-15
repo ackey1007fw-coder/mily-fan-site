@@ -134,6 +134,7 @@ const EXPECTED_SLOTS = [
   { date: "2026-09-12", time: "14:40", endTime: "15:10" },
   { date: "2026-09-12", time: "21:00", endTime: "22:00" },
   { date: "2026-09-13", time: "22:30" },
+  { date: "2026-09-15", time: "22:00", endTime: "23:30" },
 ];
 
 function entry() {
