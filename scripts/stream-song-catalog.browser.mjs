@@ -251,7 +251,12 @@ try {
           await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
           const photo = page.locator('img[src*="mily-b123-01-night-ribbon-fanroom-selfie"]').first();
           await photo.scrollIntoViewIfNeeded();
-          await photo.evaluate((node) => node.decode());
+          // Scrolling can switch a responsive source while decode() is pending.
+          // Require the browser's selected source to finish loading successfully.
+          await page.waitForFunction(() => {
+            const img = document.querySelector('img[src*="mily-b123-01-night-ribbon-fanroom-selfie"]');
+            return img?.complete && img.naturalWidth > 0;
+          });
           assert.ok(await photo.evaluate((node) => node.naturalWidth > 0));
           assert.equal(await photo.getAttribute("width"), "1206");
           assert.equal(await photo.getAttribute("height"), "666");

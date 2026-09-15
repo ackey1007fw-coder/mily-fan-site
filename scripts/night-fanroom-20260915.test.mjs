@@ -26,7 +26,10 @@ test("Fan Room responsive descriptors match decoded derivatives and strip metada
     for (const entry of gallerySet.split(", ")) {
       const [src, descriptor] = entry.split(" ");
       const meta = await sharp(`public${src}`).metadata();
+      const { info } = await sharp(`public${src}`).raw().toBuffer({ resolveWithObject: true });
       assert.equal(meta.width, Number.parseInt(descriptor));
+      assert.equal(info.width, meta.width);
+      assert.equal(info.height, meta.height);
       assert.ok(meta.width <= photo.width);
       assert.equal(meta.exif, undefined);
       assert.equal(meta.iptc, undefined);
