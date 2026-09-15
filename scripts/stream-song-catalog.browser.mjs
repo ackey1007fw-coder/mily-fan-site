@@ -212,6 +212,21 @@ try {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
         }
+        for (const still of latest.gallery ?? []) {
+          const photo = recap.locator(`img[src="${still.src}"]`).last();
+          await photo.scrollIntoViewIfNeeded();
+          await photo.evaluate((node) => node.decode());
+          assert.deepEqual(await photo.evaluate((node) => [node.naturalWidth, node.naturalHeight]), [still.width, still.height]);
+          assert.equal(await recap.locator(`a[href="${still.src}"]`).getAttribute("download"), still.downloadName);
+        }
+        if (latest.galleryZip) {
+          const zipLink = recap.getByRole("link", { name: latest.galleryZip.label, exact: true });
+          assert.equal(await zipLink.getAttribute("href"), latest.galleryZip.src);
+          assert.equal(await zipLink.getAttribute("download"), latest.galleryZip.filename);
+          const zip = await page.request.get(`${base}${latest.galleryZip.src}`);
+          assert.equal(zip.status(), 200);
+          assert.equal((await zip.body()).readUInt32LE(0), 0x04034b50);
+        }
         const timeline = recap.locator(":scope > details");
         const timelineSummary = timeline.locator(":scope > summary");
         await timelineSummary.click();
