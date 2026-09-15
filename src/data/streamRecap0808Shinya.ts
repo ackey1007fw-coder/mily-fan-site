@@ -66,7 +66,7 @@ export const recap20260808Shinya: StreamRecap = {
     { timestamp: "0:30:27", label: "タイマーで配信時間を管理する案" },
     { timestamp: "0:32:18", label: "時間通り終了する方針を確認" },
   ],
-  nextNote: "配信時点では、この録画内で次の具体的な配信時刻は確定していません。",
+  nextNote: "",
   sourceLabel: "2026年8月8日 SHOWROOM深夜ラジオ配信（YouTube自動字幕確認）",
   verifiedAt: "2026-09-14",
   transcriptionNote: buildTranscriptionNote({
