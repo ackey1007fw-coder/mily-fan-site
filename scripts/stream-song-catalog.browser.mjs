@@ -213,7 +213,9 @@ try {
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
         }
         const timeline = recap.locator(":scope > details");
-        await timeline.locator(":scope > summary").click();
+        const timelineSummary = timeline.locator(":scope > summary");
+        await timelineSummary.click();
+        if (!(await timeline.evaluate((node) => node.open))) await timelineSummary.click();
         await page.waitForFunction((hash) => document.querySelector(hash)?.querySelector(":scope > details")?.open === true, hash);
         assert.equal(await timeline.evaluate((node) => node.open), true);
         assert.ok((await timeline.textContent()).includes(latest.nextNote));
