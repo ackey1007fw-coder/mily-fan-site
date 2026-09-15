@@ -5,11 +5,14 @@ import sharp from "sharp";
 import {
   buildRankingNote,
   streamRecap20260914Day as recap,
+  streamRecap20260914Yoru,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 
 test("September 14 day stays behind the later same-day night recap", () => {
-  assert.equal(streamRecaps[1], recap);
+  const dayIndex = streamRecaps.indexOf(recap);
+  assert.ok(dayIndex > 0);
+  assert.equal(streamRecaps[dayIndex - 1], streamRecap20260914Yoru);
   assert.equal(recap.broadcastLabel, "14:32頃〜 約137分");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.deepEqual(recap.ranking, [buildRankingNote(13, 1, "during")]);
