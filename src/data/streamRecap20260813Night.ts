@@ -22,7 +22,8 @@ export const streamRecap20260813Night: StreamRecap = {
     { timestamp: "1:01:53", title: "みんなの力になれる配信へ", body: "応援への感謝を伝え、自分もみんなの力になれるよう頑張りたいと話しました。" },
     { timestamp: "1:21:51", title: "翌朝は久しぶりに歌いたい", body: "喉の調子が戻ってきたため、翌日の配信で歌える曲を少し歌いたいと予告しました。" },
     { timestamp: "1:28:00", title: "元気をもらった夜", body: "話せて元気になったと感謝し、ランキングを読み上げて配信を締めました。" },
-  ],  goals: [],
+  ],
+  goals: [],
   ranking: [buildRankingNote(13, 1, "end")],
   timeline: [
     { timestamp: "0:00:08", label: "髪型とアバターの話でスタート" },
