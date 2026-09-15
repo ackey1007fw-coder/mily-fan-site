@@ -3779,3 +3779,14 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 再掲載には、当該録画音声をサイトまたはSNSで再配信できる根拠、対象範囲、確認日の記録が必要。短尺であることやオーナー依頼だけを権利許諾の根拠にしない。
 - 配信メモには曲名・歌唱開始時刻・原曲の公式YouTube導線だけを残す。録画原本、非公開クリップ、私的な許可確認情報はpublic repoへ置かない。
 - 権利ゲートが確認できるまで、当該2本のSNS投稿も行わない。
+
+## 素材台帳（batch b121 / source date 2026-09-15 / 承認日 2026-09-15）
+
+9月15日10:02頃開始のSHOWROOM朝配信録画から選定したLIVE STREAM専用の実フレーム10枚。オーナーが当該配信のレポートをサイトへ実装し、スクショも含めるよう明示依頼した範囲で掲載する。着手時の最新mainと既存worktreeを確認し、b121の使用がないことを確認して採番した。
+
+- 公開ファイル: `live/mily-b121-01-opening-smile.jpg`、`mily-b121-02-hair-arrange.jpg`、`mily-b121-03-eye-makeup.jpg`、`mily-b121-04-compact-makeup.jpg`、`mily-b121-05-big-smile.jpg`、`mily-b121-06-lip-makeup.jpg`、`mily-b121-07-eye-detail.jpg`、`mily-b121-08-mascara.jpg`、`mily-b121-09-finished-smile.jpg`、`mily-b121-10-closing-wave.jpg`。全10枚640×360 JPEG。
+- 録画全体から18候補を時系列で比較し、本人だけが写る10枚を選定。コメント欄、視聴者名・アイコン、他の出場者、住所・連絡先など公開を避ける情報の明確な写り込みなし。
+- 元映像の640×360・16:9を保持し、crop・scale・顔補正・AI生成・生成塗り足しなし。実録画フレームをJPEGとして切り出したもの。
+- ZIP: `live/mily-b121-morning-stills.zip` / 196,675 bytes / sha256 `a2918bf95bd36b99860c2bf2ddfc03af23014cc6430d6b6c65334c87d60d7299`。
+- LIVE STREAM専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。
+- 録画原本、全文文字起こし、非公開の受け渡し情報、視聴者情報は公開しない。
