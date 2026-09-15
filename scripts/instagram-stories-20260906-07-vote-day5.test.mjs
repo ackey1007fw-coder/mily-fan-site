@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { news as currentNewsForMedia } from "../src/data/news.ts";
+const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -289,9 +291,9 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
     assert.equal(selectActivityMedia("miss-circle")[0], morning.item);
     assert.equal(selectActivityMedia("miss-circle")[1], night.item);
     assert.equal(selectActivityMedia("miss-circle")[2], webVoteDay2StoryVideo);
-    assert.equal(selectActivityMedia("live-stream")[1], morning.item);
+    assert.equal(selectActivityMedia("live-stream", priorMediaSources)[1], morning.item);
     assert.equal(
-      selectActivityMedia("live-stream").some((candidate) => candidate.id === night.mediaId),
+      selectActivityMedia("live-stream", priorMediaSources).some((candidate) => candidate.id === night.mediaId),
       false,
     );
     for (const activityId of ["campus-girls", "radio"]) {

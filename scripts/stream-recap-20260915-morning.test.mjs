@@ -8,8 +8,10 @@ import {
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
 
-test("September 15 morning is the newest verified recap", () => {
-  assert.equal(streamRecaps[0], recap);
+test("September 15 morning stays ahead of the previous night's recap", () => {
+  const index = streamRecaps.indexOf(recap);
+  assert.ok(index >= 0);
+  assert.equal(streamRecaps[index + 1].id, "2026-09-14-yoru-showroom");
   assert.equal(recap.broadcastLabel, "10:02頃〜 約45分");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.deepEqual(recap.ranking, [RANKING_NOTE_WITHOUT_RANGE]);

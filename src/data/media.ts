@@ -1,3 +1,4 @@
+import { nightRibbonFanroomPhoto } from "./nightRibbonFanroomSelfie.ts";
 import { morningFanroomSelfiePhoto } from "./morningFanroomSelfie.ts";
 /**
  * Photo / video manifest.
@@ -365,11 +366,13 @@ export const media: MediaItem[] = [
   },
   nightFanroomSelfiePhoto,
   morningFanroomSelfiePhoto,
+  nightRibbonFanroomPhoto,
 ];
 
 export function srcSetFor(item: MediaItem, format: "jpg" | "webp"): string {
   return item.widths
-    .map((width) => `${item.basePath}-${width}.${format} ${width}w`)
+    .filter((width, index) => index === 0 || Math.min(width, item.width) > Math.min(item.widths[index - 1], item.width))
+    .map((width) => `${item.basePath}-${width}.${format} ${Math.min(width, item.width)}w`)
     .join(", ");
 }
 

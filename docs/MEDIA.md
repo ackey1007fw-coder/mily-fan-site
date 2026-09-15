@@ -3804,3 +3804,25 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - stream copyでAACパケット69個すべてのSHA256が原本と一致。再エンコード・切り取り・補正・生成なし。出典のcreation_timeとmetadataを除去し、moovをmdatより前に配置。
 - 既存NewsAudioCardのcontrols / preload=noneを再利用。自動再生・CDN hotlink・iframeなし。スクリーンショット・第三者の表示名と発言は公開しない。
 - 本文はテキスト投稿の案内と音声投稿の事実だけ。音声内容の文字起こし・推測要約は掲載しない。Gallery / storiesへ追加しない。
+
+## 素材台帳（batch b123 / source date 2026-09-15 / 確認日 2026-09-16）
+
+夜配信終了後のファンルーム投稿と一緒にオーナーが提供した本人写真1枚。23:43の添付写真と別添の横長セルフィーが一致することを確認。配信レポートと添付素材のサイト実装依頼の範囲で、Latest / NEWS・LIVE STREAMの関連NEWS・Galleryへ掲載する。
+
+- b123-01: グレーのトップスと黒い水玉リボンのセルフィー。原本1206×666 JPEGをgitignored領域へ無改変保存。
+- 公開派生: `gallery/mily-b123-01-night-ribbon-fanroom-selfie-{480,960,1600}.{jpg,webp}`。`pnpm media:build`で生成。480×265 / 960×530 / 1206×666の6ファイル。拡大・切り抜き・顔加工なし。EXIF / IPTC / XMPなしを検査。
+- `nightRibbonFanroomPhoto` をGalleryに、同じ派生を参照する `nightRibbonFanroomImage` をNEWSに使用。横長比率を保持。
+- provenance: owner-provided。sourceDate: 2026-09-15。個別permalink・撮影者は未確認のためsourceUrl / creditはnull。
+- ファンルーム閲覧画面2枚は文言・日付・投稿時刻の照合用。視聴者名・コメントと端末UIを含むため公開しない。
+- 掲載写真は配信後の投稿写真であり、配信中のスクリーンショットとは呼ばない。写真を複製して枚数を増やさない。
+
+
+### b124: 2026年9月15日 SHOWROOM夜配信の実フレーム10枚
+
+- 掲載面: LIVE STREAM の当該夜配信メモのみ。NEWS / Gallery へ録画静止画を自動転用しない。
+- オーナー依頼の夜配信録画から、全体32候補と前後40候補、追加の商品紹介6候補の計78候補を比較して10枚を選定。10枚を実寸で個別確認し、本人以外・視聴者名・コメントUIがないことを確認。
+- 640×360 の元画角・実画素を維持。顔生成・補正・切り抜き・拡大なし。ファンルームの写真（b123）とは別素材。
+- 録画先頭からの位置: 0:04:00 / 0:06:10 / 0:16:00 / 0:27:58 / 0:39:58 / 0:49:00 / 0:58:02 / 1:06:59 / 1:22:00 / 1:33:59。
+- 公開派生: `public/media/live/mily-b124-01-peace-sign.jpg` 〜 `mily-b124-10-closing-smile.jpg` の10枚。代表は06のリボンに触れた笑顔。同じオブジェクトを代表画像とスクショ欄で共有。
+- 一括保存: `public/media/live/mily-b124-night-stills.zip`。ZIP内容は掲載JPEG10枚と同一バイト。
+- 録画・音声派生・全文文字起こし・非公開受け渡し先はコミットしない。
