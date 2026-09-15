@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { news as currentNewsForMedia } from "../src/data/news.ts";
+const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";
@@ -248,7 +250,7 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
   it("surfaces on LIVE STREAM only and stays out of Gallery", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
     assert.equal(liveNews[1]?.id, NEWS_ID);
-    assert.equal(selectActivityMedia("live-stream")[3], firstSeptemberTomatoBoardImage);
+    assert.equal(selectActivityMedia("live-stream", priorMediaSources)[3], firstSeptemberTomatoBoardImage);
     for (const activityId of ["miss-circle", "campus-girls", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(

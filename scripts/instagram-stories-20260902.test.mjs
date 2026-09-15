@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { news as currentNewsForMedia } from "../src/data/news.ts";
+const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { readFile, readdir, stat } from "node:fs/promises";
@@ -254,9 +256,9 @@ describe("2026-09-02 Instagram Story — Latest / NEWS", () => {
 
     assert.equal(liveNews[0]?.id, OYASUMILY_NEWS_ID);
     assert.equal(campusNews[0]?.id, PATON_SECOND_NEWS_ID);
-    assert.equal(selectActivityMedia("live-stream")[0]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
-    assert.equal(selectActivityMedia("live-stream")[1]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
-    assert.equal(selectActivityMedia("live-stream")[2], oyasumilyStoryVideo);
+    assert.equal(selectActivityMedia("live-stream", priorMediaSources)[0]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
+    assert.equal(selectActivityMedia("live-stream", priorMediaSources)[1]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
+    assert.equal(selectActivityMedia("live-stream", priorMediaSources)[2], oyasumilyStoryVideo);
     assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b63-01-campus-girls-prelim-final-result");
     assert.equal(selectActivityMedia("campus-girls")[2], patonSecondStoryVideo);
     assert.equal(campusNews.some((entry) => entry.id === OYASUMILY_NEWS_ID), false);

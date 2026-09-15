@@ -1,3 +1,4 @@
+import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
@@ -215,6 +216,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-15-night-fanroom-thanks",
+    date: "2026-09-15",
+    sameDayOrder: 10,
+    activityIds: ["live-stream"],
+    title: "夜配信ありがとう。リボン姿の「今日のみりぃ」",
+    body: "9月15日の夜配信後、23:41のSHOWROOMファンルームで、一緒に楽しい時間を過ごしたみんなへお礼を届けました。23:43には「今日のみりぃ」として、黒い水玉リボンをつけた写真も投稿。投稿時点では、翌9月16日7:30から配信すると案内していました。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: nightRibbonFanroomImage,
+  },
   {
     id: "2026-09-15-fanroom-incoming-call-voice",
     date: "2026-09-15",

@@ -246,6 +246,21 @@ try {
         assert.deepEqual(errors, []);
         await posts.screenshot({ path: join(output, `${scenario.name}-social-song-posts.png`) });
       });
+      await check("night Fan Room photo renders on NEWS and LIVE with historical wording", async () => {
+        for (const route of ["/news/", "/activities/live/"]) {
+          await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
+          const photo = page.locator('img[src*="mily-b123-01-night-ribbon-fanroom-selfie"]').first();
+          await photo.scrollIntoViewIfNeeded();
+          await photo.evaluate((node) => node.decode());
+          assert.ok(await photo.evaluate((node) => node.naturalWidth > 0));
+          assert.equal(await photo.getAttribute("width"), "1206");
+          assert.equal(await photo.getAttribute("height"), "666");
+          assert.ok((await page.locator("body").innerText()).includes("投稿時点では、翌9月16日7:30"));
+          await overflow();
+          await photo.screenshot({ path: join(output, `${scenario.name}-night-fanroom-${route.includes("activities") ? "live" : "news"}.png`) });
+        }
+        assert.deepEqual(errors, []);
+      });
       result.status = "passed";
     } catch (error) {
       result.status = "failed";
