@@ -218,8 +218,8 @@ export const news: NewsItem[] = [
     id: "2026-09-15-tonight-showroom-2200",
     date: "2026-09-15",
     activityIds: ["live-stream"],
-    title: "今夜SHOWROOM 22:00〜23:30",
-    body: "みりぃがXで、今夜のSHOWROOM配信を22:00〜23:30と案内しました。",
+    title: "9/15 SHOWROOM 22:00〜23:30",
+    body: "みりぃがXで、9/15のSHOWROOM配信を22:00〜23:30と案内しました。",
     source: "https://x.com/Mily_chan36/status/2099820335755636743",
     sourceLabel: "みりぃのX",
     additionalCtas: [
