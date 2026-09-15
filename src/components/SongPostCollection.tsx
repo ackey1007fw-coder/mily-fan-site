@@ -2,8 +2,8 @@ import { streamRecaps } from "../data/streamRecaps";
 import { songPostGroups } from "../data/streamSongPosts";
 
 const groups = songPostGroups(streamRecaps);
-const labels = { youtube: "YouTubeで見る", tiktok: "TikTokで見る", instagram: "リールで見る" };
-const colors = { youtube: "bg-red-700 text-white", tiktok: "bg-ink text-white", instagram: "bg-purple-700 text-white" };
+const labels = { youtube: "YouTubeで見る", tiktok: "TikTokで見る", instagram: "リールで見る", x: "Xで見る" };
+const colors = { youtube: "bg-red-700 text-white", tiktok: "bg-ink text-white", instagram: "bg-purple-700 text-white", x: "bg-ink text-white" };
 
 export default function SongPostCollection() {
   return (

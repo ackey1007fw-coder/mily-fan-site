@@ -23,7 +23,7 @@ export default function SongClipsPage() {
             </nav>
             <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-sage-deep">Live Song Clips</p>
             <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">みりぃの歌唱クリップ</h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">みりぃの歌声と表情を、TikTok・YouTube・リールで。歌った回のレポートと一緒に、お気に入りの場面を探せるアーカイブです。</p>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">みりぃの歌声と表情を、TikTok・YouTube・リール・Xで。歌った回のレポートと一緒に、お気に入りの場面を探せるアーカイブです。</p>
             <div className="mt-5 rounded-2xl border border-sage/20 bg-sage-soft/45 p-4 text-sm leading-7 text-ink-muted">
               <p><strong className="text-ink">SNSで{streamSongPosts.length}場面・このページで{clips.length}本。</strong> SNSのボタンは各投稿へ、このページのプレーヤーは短い歌唱抜粋へつながります。</p>
               <p className="mt-2">楽曲・伴奏などの権利は各権利者に帰属します。原曲は各カードの公式YouTubeリンクから確認できます。</p>

@@ -227,13 +227,13 @@ try {
         assert.equal(await page.locator("#song-catalog").count(), 0);
         assert.deepEqual(errors, []);
       });
-      await check("social song posts offer 13 performances and 30 safe outbound links", async () => {
+      await check("social song posts offer 13 performances and 38 safe outbound links", async () => {
         await page.goto(`${live}clips/`, { waitUntil: "networkidle" });
         const posts = page.locator("#social-song-posts");
         assert.equal(await posts.locator("article").count(), 4);
         assert.equal(await posts.locator("h4").count(), 13);
         const links = await posts.locator('a[target="_blank"]').evaluateAll((nodes) => nodes.map((node) => ({ rel: node.rel, label: node.getAttribute("aria-label") })));
-        assert.equal(links.length, 30);
+        assert.equal(links.length, 38);
         assert.ok(links.every((link) => link.rel.includes("noopener") && link.rel.includes("noreferrer") && link.label.includes("新しいタブ")));
         for (const photo of await posts.locator("img").all()) {
           await photo.scrollIntoViewIfNeeded();
