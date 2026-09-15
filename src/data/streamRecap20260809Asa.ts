@@ -77,8 +77,8 @@ export const streamRecap20260809Asa: StreamRecap = {
   verifiedAt: "2026-09-15",
   transcriptionNote: buildTranscriptionNote({
     material: captionMaterialNote,
-    stills: "静止画は8枚を掲載確認用に準備済みですが、未承認のためまだ掲載していません。",
+    stills: "静止画は掲載していません。",
     extra:
-      "自動字幕662行を全文テキスト確認し、実フレーム候補も確認しています。歌唱は確認できませんでした。開始時刻と各タイムスタンプは保存済み記録に基づく目安です。",
+      "自動字幕662行を全文テキスト確認しています。歌唱は確認できませんでした。開始時刻と各タイムスタンプは保存済み記録に基づく目安です。",
   }),
 };

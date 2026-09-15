@@ -36,7 +36,8 @@ describe("2026-08-09 morning caption-audit recap", () => {
     assert.equal(recap.galleryZip, undefined);
     assert.match(recap.transcriptionNote, /662行/);
     assert.match(recap.transcriptionNote, /全編の手動聴取は行っておらず/);
-    assert.match(recap.transcriptionNote, /未承認/);
+    assert.match(recap.transcriptionNote, /静止画は掲載していません。/);
+    assert.doesNotMatch(recap.transcriptionNote, /未承認|承認待ち|準備済み|掲載確認用|実フレーム候補/);
   });
 
   it("does not expose private file references or local paths", () => {
