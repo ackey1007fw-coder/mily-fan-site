@@ -22,7 +22,7 @@ describe("2026-08-08 00:25 private-caption audit recap", () => {
     assert.deepEqual(recap.ranking, []);
     assert.equal(recap.songs, undefined);
     assert.match(recap.summary, /WEB投票/);
-    assert.match(recap.nextNote, /確定していません/);
+    assert.equal(recap.nextNote, "");
   });
   it("keeps the timeline ordered and the unapproved still unpublished", () => {
     const stamps = recap.timeline.map(({ timestamp }) => seconds(timestamp));
