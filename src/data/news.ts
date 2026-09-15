@@ -78,6 +78,7 @@ import {
 } from "./birthdayIndoorSelfie.ts";
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 import { morningFanroomVoice } from "./morningFanroomVoice.ts";
+import { incomingCallFanroomVoice } from "./incomingCallFanroomVoice.ts";
 import {
   OHAYO_WHITE_POLO_X_URL,
   ohayoWhitePoloPeaceImage,
@@ -214,6 +215,17 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-15-fanroom-incoming-call-voice",
+    date: "2026-09-15",
+    activityIds: ["live-stream"],
+    title: "みりぃからの着信📞🩷",
+    body: "9月15日20:25、SHOWROOMファンルームで「みりぃからの着信📞🩷」とお知らせ。その後20:27に届いた、約6秒の音声メッセージを聴けます。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: incomingCallFanroomVoice,
+  },
   {
     id: "2026-09-13-seaside-circle-after-radio-thanks",
     date: "2026-09-13",

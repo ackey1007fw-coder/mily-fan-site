@@ -3790,3 +3790,17 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - ZIP: `live/mily-b121-morning-stills.zip` / 196,675 bytes / sha256 `a2918bf95bd36b99860c2bf2ddfc03af23014cc6430d6b6c65334c87d60d7299`。
 - LIVE STREAM専用。NEWS / Gallery / Stories / `media.ts` / `galleryVideos.ts` へ複製しない。
 - 録画原本、全文文字起こし、非公開の受け渡し情報、視聴者情報は公開しない。
+
+
+## 素材台帳（batch b122 / source date 2026-09-15）
+
+オーナー指定の公開ファンルーム音声「みりぃからの着信」。本人投稿は20:27 JST、直前の案内は20:25 JST。公開プロフィールのボイス一覧で投稿ID `88937558` と同じ音声を照合した。日時はファンルームの分単位表示を採用し、container creation_timeを投稿秒の根拠にはしない。
+
+- provenance: owner-requested。対象ボイスのサイト内再生依頼に基づく、Latest / NEWS専用。
+- 元ファイル: 35,466 bytes / M4A container / AAC-LC / 12kHz / mono / 5.888秒。受領バイトをgitignored領域に無改変保存。
+- 原本SHA256: `3347c30334105c35cfb975a4e436baec4bdd830a474c6ac81f1faa2fdb1bbefe`。
+- 公開ファイル: `news/mily-b122-01-fanroom-incoming-call-voice.m4a`。16,058 bytes / AAC-LC / 12kHz / mono / 5.888秒。
+- 公開SHA256: `27f49d4a8215b9c703b46bd4d7262dfdb2455a03eb558a89b9950dc59da4c187`。
+- stream copyでAACパケット69個すべてのSHA256が原本と一致。再エンコード・切り取り・補正・生成なし。出典のcreation_timeとmetadataを除去し、moovをmdatより前に配置。
+- 既存NewsAudioCardのcontrols / preload=noneを再利用。自動再生・CDN hotlink・iframeなし。スクリーンショット・第三者の表示名と発言は公開しない。
+- 本文はテキスト投稿の案内と音声投稿の事実だけ。音声内容の文字起こし・推測要約は掲載しない。Gallery / storiesへ追加しない。

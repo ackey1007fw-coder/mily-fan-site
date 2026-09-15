@@ -9,6 +9,16 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-15 20:27 ファンルーム「みりぃからの着信」
+
+- NEWS ID: `2026-09-15-fanroom-incoming-call-voice`。Latest / NEWSへ1件追加。
+- 本人の公開ファンルームで同日20:25の案内文と20:27の音声投稿を照合。公開プロフィールのボイス一覧でも同じ音声（投稿ID `88937558`）を確認。
+- 出典表示は非リンクの `SHOWROOMファンルーム`。関連CTAはオーナー指定の元ファンルーム（URLは `news.ts` の当該項目）。個別投稿permalinkとは扱わない。
+- `incomingCallFanroomVoice`（b122）の自己ホストM4Aを既存の `NewsAudioCard` で再生。実測5.888秒。本文は公開テキストの案内と音声投稿の事実だけとし、発話内容は推測しない。
+- 投稿日時はページ表示に合わせ分単位。現在のmainに同日NEWSはなく、日付降順で表示する。別Draft PRの配信予定NEWSは取り込まない。
+- オーナーが指定した本人公開ボイスのサイト内再生依頼に基づく掲載。スクリーンショット・第三者コメントは公開しない。Gallery / stories / events / streamSchedule / profileは変更しない。
+- 元の音声と公開派生の仕様は `docs/MEDIA.md` のb122節。既存の過去NEWS fixturesは新項目を除外し、当時の検証範囲を維持する。
+
 ## いま載っているもの（2026-08-27 監査）
 
 事実は書き換えず、現状の棚卸しです。空欄は未確認のため意図的に空です。
