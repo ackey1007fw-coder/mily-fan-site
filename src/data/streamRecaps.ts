@@ -1,3 +1,4 @@
+import { streamRecap20260916Asa } from "./streamRecap20260916Asa.ts";
 import { streamRecap20260915Yoru } from "./streamRecap20260915Yoru.ts";
 import { streamRecap20260915Asa } from "./streamRecap20260915Asa.ts";
 import { streamRecap20260914Yoru } from "./streamRecap20260914Yoru.ts";
@@ -172,6 +173,7 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260916Asa,
   streamRecap20260915Yoru,
   streamRecap20260915Asa,
   streamRecap20260914Yoru,
@@ -204,6 +206,7 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260916Asa,
   streamRecap20260915Yoru,
   streamRecap20260915Asa,
   streamRecap20260914Yoru,
