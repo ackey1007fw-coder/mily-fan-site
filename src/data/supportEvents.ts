@@ -3,6 +3,7 @@ import { activities, type ActivityId } from "./activities.ts";
 import { CAMPUS_GIRLS_FINALS_EX_VOL1_X_URL } from "./campusGirlsFinalsExImages.ts";
 import {
   links,
+  campusGirlsFinalsExPatonVoteLink,
   missCircleShowroomEventLink,
   missCircleWebVoteLink,
 } from "./links.ts";
@@ -231,19 +232,25 @@ export const campusGirlsFinalsExSnsReview: SupportEvent = {
 export const campusGirlsFinalsExPatonReview: SupportEvent = {
   id: "campus-girls-finals-ex-paton-vol1-2026",
   activityId: "campus-girls",
-  kind: "support-campaign",
+  kind: "vote",
   title: "CAMPUS GIRLS 2027 本選EX vol.1 Paton投票審査",
   note:
-    "本人Xの案内グラフィックに書かれた期間です。投票先URLは未確認のため、ここでは期間のみ載せています。",
+    "CAMPUS BOYS/GIRLS 2027 本選EX1。Patonの三橋莉子（みりぃ）ページから応援できます。投票にはPatonへのログインが必要です。",
+  shareText: "CAMPUS BOYS/GIRLS 2027 本選EX1のPaton投票をお願いします🗳️",
+  shareHashtag: "#キャンガル2027",
   schedule: {
     state: "confirmed-period",
     start: "2026-09-16T18:00:00+09:00",
-    end: "2026-09-22T23:59:00+09:00",
+    // 日程表の「23:59まで」は最終分を含む。
+    end: "2026-09-22T23:59:59+09:00",
     allDay: false,
     timezone: "Asia/Tokyo",
   },
+  ctaLinkId: campusGirlsFinalsExPatonVoteLink.id,
+  // 期間は本人Xの日程表、投票先とイベント名は9/16のPaton本人ページで確認。
   source: CAMPUS_GIRLS_FINALS_EX_VOL1_X_URL,
-  verifiedAt: "2026-09-07",
+  verifiedAt: "2026-09-16",
+  priority: 100,
 };
 
 const FINALS_EX_LATER_NOTE =

@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { contest } from "../src/data/contest.ts";
+import { links, campusGirlsPatonVoteLink, campusGirlsFinalsExPatonVoteLink } from "../src/data/links.ts";
+import { selectHomeVoteAction } from "../src/lib/homePortal.ts";
+import { selectHomeToday } from "../src/lib/homeToday.ts";
 import { events } from "../src/data/events.ts";
 import {
   CAMPUS_GIRLS_FINALS_EX_VOL1_X_URL,
@@ -29,7 +32,7 @@ const SOURCE = CAMPUS_GIRLS_FINALS_EX_VOL1_X_URL;
 const SNS_START = Date.parse("2026-09-07T12:00:00+09:00");
 const SNS_END = Date.parse("2026-09-20T12:00:00+09:00");
 const PATON_START = Date.parse("2026-09-16T18:00:00+09:00");
-const PATON_END = Date.parse("2026-09-22T23:59:00+09:00");
+const PATON_END = Date.parse("2026-09-22T23:59:59+09:00");
 const VOL2_START = Date.parse("2026-09-28T12:00:00+09:00");
 const VOL2_END = Date.parse("2026-10-11T12:00:00+09:00");
 const VOL6_END = Date.parse("2027-01-03T12:00:00+09:00");
@@ -71,13 +74,13 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     }
 
     assert.equal(campusGirlsFinalsExSnsReview.ctaLinkId, undefined);
-    assert.equal(campusGirlsFinalsExPatonReview.ctaLinkId, undefined);
-    assert.equal(campusGirlsFinalsExPatonReview.kind, "support-campaign");
-    assert.equal(campusGirlsFinalsExPatonReview.shareText, undefined);
+    assert.equal(campusGirlsFinalsExPatonReview.ctaLinkId, "campus-girls-finals-ex-paton-11866");
+    assert.equal(campusGirlsFinalsExPatonReview.kind, "vote");
+    assert.match(campusGirlsFinalsExPatonReview.shareText, /本選EX1のPaton投票/);
     assert.deepEqual(campusGirlsFinalsExPatonReview.schedule, {
       state: "confirmed-period",
       start: "2026-09-16T18:00:00+09:00",
-      end: "2026-09-22T23:59:00+09:00",
+      end: "2026-09-22T23:59:59+09:00",
       allDay: false,
       timezone: "Asia/Tokyo",
     });
@@ -123,7 +126,7 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
       ],
     );
 
-    for (const event of [campusGirlsFinalsExPatonReview, ...laterVolumes]) {
+    for (const event of laterVolumes) {
       assert.equal(event.source, SOURCE);
       assert.equal(event.verifiedAt, "2026-09-07");
       assert.equal(event.activityId, "campus-girls");
@@ -135,7 +138,7 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     }
 
     assert.equal(supportEvents.length, 10);
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 2);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 3);
     assert.deepEqual(events, []);
   });
 
@@ -185,7 +188,7 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     }
   });
 
-  it("does not invent a Paton vote button or take over the share hashtag", () => {
+  it("uses the confirmed EX1 vote in sharing only during its window", () => {
     assert.equal(displayStatus(campusGirlsFinalsExPatonReview.schedule, PATON_START - 1), "upcoming");
     assert.equal(displayStatus(campusGirlsFinalsExPatonReview.schedule, PATON_START), "live");
     assert.equal(displayStatus(campusGirlsFinalsExPatonReview.schedule, PATON_END), "live");
@@ -203,13 +206,14 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
       now: Date.parse("2026-09-17T12:00:00+09:00"),
       radioPhase: "idle",
     });
-    assert.match(afterWebVote, /本選EX vol\.1のSNS審査期間/);
-    assert.doesNotMatch(afterWebVote, /Paton投票審査/);
-    assert.match(afterWebVote, /#三橋莉子 #キャンガル$/);
+    assert.match(afterWebVote, /本選EX1のPaton投票/);
+    assert.doesNotMatch(afterWebVote, /1\.5倍/);
+    assert.match(afterWebVote, /#三橋莉子 #キャンガル2027$/);
   });
 
-  it("extends the shared clock through Paton and vol.2 without a vote CTA", () => {
-    assert.equal(nextSupportEventBoundary(CONTEST_END), PATON_START);
+  it("extends the shared clock through the EX1 voting deadline and vol.2", () => {
+    assert.equal(nextSupportEventBoundary(CONTEST_END), Date.parse("2026-09-16T00:00:00+09:00"));
+    assert.equal(nextSupportEventBoundary(Date.parse("2026-09-16T00:00:00+09:00")), PATON_START);
     assert.equal(nextSupportEventBoundary(PATON_START), SNS_END + 1);
     assert.equal(nextSupportEventBoundary(SNS_END), SNS_END + 1);
     assert.equal(nextSupportEventBoundary(SNS_END + 1), PATON_END + 1);
@@ -217,5 +221,41 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     assert.equal(nextSupportEventBoundary(VOL2_START), VOL2_END + 1);
     assert.equal(nextSupportEventBoundary(VOL6_END), VOL6_END + 1);
     assert.equal(nextSupportEventBoundary(VOL6_END + 1), null);
+  });
+});
+
+
+describe("本選EX1の投票導線", () => {
+  it("opens only the new entrant during the full confirmed window", () => {
+    const url = "https://paton.jp/event/entrant/11866";
+    assert.equal(campusGirlsFinalsExPatonVoteLink.url, url);
+    assert.equal(campusGirlsPatonVoteLink.url, "https://paton.jp/event/entrant/11380");
+    for (const now of [PATON_START - 1, PATON_START, PATON_END - 59000, PATON_END, PATON_END + 1]) {
+      const live = now >= PATON_START && now <= PATON_END;
+      const action = selectHomeVoteAction({ contest, links, supportEvents, now });
+      assert.equal(action.url === url, live);
+      const calendar = adaptSupportEvents(supportEvents, now).items.find(
+        (item) => item.key === `support-event:${campusGirlsFinalsExPatonReview.id}`,
+      );
+      assert.equal(calendar.cta?.url === url, live);
+      if (live) {
+        assert.match(action.deadlineLabel, /9\/22/);
+        assert.match(action.deadlineLabel, /23:59/);
+        assert.doesNotMatch(action.note, /1\.5倍|11380|順位|pt/);
+      }
+    }
+  });
+
+  it("shows EX1 in HOME NOW without a duplicate dashboard vote button", () => {
+    const view = selectHomeToday({
+      contest, supportEvents, streamSlots: [], streamRoomUrl: null,
+      live: { state: "unknown", startedAt: null, observedAt: null, roomUrl: null, next: { state: "unknown", at: null } },
+      radio: null, radioPhase: "idle",
+      banner: { kind: "NONE", stateLabel: "", title: "" }, now: PATON_START,
+    });
+    const url = campusGirlsFinalsExPatonVoteLink.url;
+    assert.equal(view.nowItems.filter((item) => item.cta?.url === url).length, 1);
+    assert.equal(view.voteActions[0].url, url);
+    assert.equal(view.dashboardVoteButtons.some((action) => action.url === url), false);
   });
 });
