@@ -148,7 +148,7 @@ describe("date-aware site share copy", () => {
   it("returns the stable site description with the person tag when no timely topic is active", () => {
     assert.equal(
       siteShareText({
-        now: at("2026-09-20T12:00:01+09:00"),
+        now: at("2026-09-23T00:00:00+09:00"),
         radioPhase: "idle",
       }),
       `${site.description}\n#三橋莉子`,

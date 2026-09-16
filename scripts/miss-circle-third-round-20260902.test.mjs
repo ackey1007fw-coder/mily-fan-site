@@ -324,7 +324,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       ).length,
       1,
     );
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 2);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 3);
     assert.equal(events.length, 0);
   });
 
@@ -483,7 +483,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     const snsStart = Date.parse("2026-09-07T12:00:00+09:00");
     const snsEnd = Date.parse("2026-09-20T12:00:00+09:00");
     const patonExStart = Date.parse("2026-09-16T18:00:00+09:00");
-    const patonExEnd = Date.parse("2026-09-22T23:59:00+09:00");
+    const patonExEnd = Date.parse("2026-09-22T23:59:59+09:00");
     const vol2Start = Date.parse("2026-09-28T12:00:00+09:00");
     assert.equal(nextSupportEventBoundary(PATON_END + 1), SPOTLIGHT_DAY_START);
     assert.equal(nextSupportEventBoundary(SPOTLIGHT_DAY_START), SHOWROOM_START);
@@ -494,7 +494,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(nextSupportEventBoundary(SHOWROOM_END + 1), WEB_END + 1);
     assert.equal(nextSupportEventBoundary(WEB_END + 1), CONTEST_END);
     assert.equal(nextSupportEventBoundary(CONTEST_END - 1), CONTEST_END);
-    assert.equal(nextSupportEventBoundary(CONTEST_END), patonExStart);
+    assert.equal(nextSupportEventBoundary(CONTEST_END), Date.parse("2026-09-16T00:00:00+09:00"));
     assert.equal(nextSupportEventBoundary(patonExStart), snsEnd + 1);
     assert.equal(nextSupportEventBoundary(snsEnd), snsEnd + 1);
     assert.equal(nextSupportEventBoundary(snsEnd + 1), patonExEnd + 1);
