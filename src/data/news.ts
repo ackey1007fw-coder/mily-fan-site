@@ -217,6 +217,19 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-16-miss-circle-fourth-round",
+    date: "2026-09-16",
+    activityIds: ["miss-circle"],
+    title: "MISS CIRCLE CONTEST 2026 四次審査に進出",
+    body: "三橋莉子（みりぃ）がMISS CIRCLE CONTEST 2026の四次審査に進出しました。主催者の四次審査進出者一覧に、ENTRY 734として掲載されています。9月16日に公式サイトの更新を確認しました。正確な公開時刻は記載されていません。",
+    source: "https://2026.misscircle.jp/list/4",
+    sourceLabel: "MISS CIRCLE CONTEST 2026 四次審査進出者一覧",
+    additionalSources: [
+      { label: "三橋莉子 ENTRY 734", url: "https://2026.misscircle.jp/entry/734" },
+    ],
+    ctaLabel: "公式の進出者一覧を見る",
+  },
+  {
     id: "2026-09-15-night-fanroom-thanks",
     date: "2026-09-15",
     sameDayOrder: 10,
