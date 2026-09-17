@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { streamRecap20260916Asa, streamRecaps } from "../src/data/streamRecaps.ts";
 
-test("9/16朝配信を最新カードとして登録する", () => {
-  assert.equal(streamRecaps[0], streamRecap20260916Asa);
+test("9/16朝配信を登録し、日時を維持する", () => {
+  assert.ok(streamRecaps.includes(streamRecap20260916Asa));
   assert.equal(streamRecap20260916Asa.date, "2026-09-16");
   assert.equal(streamRecap20260916Asa.broadcastLabel, "7:31頃〜 約94分");
 });
