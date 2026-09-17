@@ -38,6 +38,6 @@ test("保存録画全体の確認と自動文字起こしの限界を区別す�
 
 test("今回の配信メモに非公開情報や制作途中の表示を混ぜない", () => {
   assert.doesNotMatch(JSON.stringify(recap), /drive\.google|docs\.google|room_id|live_id|\.mkv|\.flac|[\\/]Users[\\/]|https?:\/\/|承認待ち|準備中|前半のみ/i);
-  assert.doesNotMatch(JSON.stringify(recap), /週1回、3時間|存在を大切に思って|うれしそうに/i);
+  assert.doesNotMatch(JSON.stringify(recap), /週1回、3時間|存在を大切に思って|うれしそうに|コメントとの会話を楽しみ/i);
   assert.ok(recap.verifiedAt >= recap.date);
 });
