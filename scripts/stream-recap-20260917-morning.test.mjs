@@ -27,29 +27,27 @@ test("承認済みの実フレーム10枚と代表10番を共有する", async (
   assert.equal(new Set(hashes).size, 10);
 });
 
-test("録画尺と発言を確認した前半50分を区別する", () => {
-  assert.match(recap.summary, /確認できた前半50分/);
+test("録画範囲全体の自動文字起こし確認を明示する", () => {
+  assert.doesNotMatch(recap.summary, /前半50分/);
   assert.match(recap.transcriptionNote, /4434\.404秒/);
-  assert.match(recap.transcriptionNote, /録画先頭から0:50:00まで/);
-  assert.match(recap.transcriptionNote, /794区間/);
-  assert.match(recap.transcriptionNote, /50分以降は静止画の目視確認のみ/);
+  assert.match(recap.transcriptionNote, /37チャンク・1221区間/);
+  assert.match(recap.transcriptionNote, /録画範囲全体/);
   assert.match(recap.transcriptionNote, /全編の手動聴取は行っておらず/);
   assert.match(recap.transcriptionNote, /静止画は録画の実フレーム10枚/);
   assert.equal(recap.highlights.length, 8);
-  assert.ok(recap.highlights.every(({ timestamp }) => seconds(timestamp) < 3000));
-  for (const item of recap.timeline) {
-    assert.ok(seconds(item.timestamp) <= 4434.404);
-    if (seconds(item.timestamp) >= 3000) assert.match(item.label, /静止画確認/);
-  }
+  assert.ok(recap.highlights.some(({ timestamp }) => seconds(timestamp) >= 3000));
+  assert.ok(recap.timeline.some(({ timestamp }) => seconds(timestamp) >= 3000));
+  assert.ok(recap.timeline.every(({ timestamp }) => seconds(timestamp) <= 4434.404));
 });
 
-test("未確認の終盤情報を補わず、私的情報を公開しない", () => {
+test("終盤のランキングと夜枠案内を確認済み情報として記録する", () => {
   assert.equal(recap.songs, undefined);
   assert.deepEqual(recap.goals, []);
-  assert.deepEqual(recap.ranking, []);
-  assert.equal(recap.nextNote, "");
+  assert.deepEqual(recap.ranking, ["配信終了時に、13位から1位までランキングを読み上げました。個人名は掲載していません。"]);
+  assert.match(recap.nextNote, /同日夜/);
+  assert.match(recap.nextNote, /時間は未定/);
   assert.match(recap.highlights[1].quote, /^私自身が太陽だから$/);
-  assert.match(recap.highlights[6].body, /四次審査/);
-  assert.match(recap.highlights[7].body, /吹奏楽部のキャプテン/);
+  assert.ok(recap.highlights.some(({ title }) => title === "担当はトロンボーン"));
+  assert.ok(recap.highlights.some(({ title }) => title === "ラジオとおしゃべり"));
   assert.doesNotMatch(JSON.stringify(recap), /drive\.google|docs\.google|room_id|live_id|\.mkv|\.flac|[\\/]Users[\\/]|https?:\/\//i);
 });
