@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { RANKING_NOTE, streamRecap20260916Yoru as recap, streamRecap20260916Asa, streamRecaps } from "../src/data/streamRecaps.ts";
+import { streamRecap20260916Yoru as recap, streamRecap20260916Asa, streamRecaps } from "../src/data/streamRecaps.ts";
 
 test("September 16 night is registered once immediately before its morning", () => {
   assert.equal(streamRecaps.filter(({ id }) => id === recap.id).length, 1);
@@ -18,7 +18,7 @@ test("September 16 night discloses the recorded range and automatic transcriptio
   assert.ok(recap.timeline.every(({ timestamp }) => timestamp.split(":").reduce((a, b) => a * 60 + Number(b), 0) <= 6144.746));
 });
 test("September 16 night retains only confirmed figures and historical scheduling", () => {
-  assert.deepEqual(recap.ranking, [RANKING_NOTE]);
+  assert.deepEqual(recap.ranking, ["配信中に、13位から1位までランキングを読み上げました。個人名は掲載していません。"]);
   assert.deepEqual(recap.goals, [{ item: "フォロワー", target: "300人", statusThen: "270人を喜ぶ" }]);
   assert.match(recap.nextNote, /配信時点では、翌9月17日/);
   assert.match(recap.nextNote, /時刻は未定/);
