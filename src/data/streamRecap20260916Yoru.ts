@@ -1,5 +1,5 @@
 import type { StreamRecap } from "./streamRecaps.ts";
-import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote, RANKING_NOTE } from "./streamRecapRules.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote, buildRankingNote } from "./streamRecapRules.ts";
 
 export const streamRecap20260916Yoru: StreamRecap = {
   id: "2026-09-16-yoru-showroom",
@@ -13,21 +13,21 @@ export const streamRecap20260916Yoru: StreamRecap = {
     { timestamp: "0:03:38", title: "投票と日々の応援をお願い", body: "この日から始まったPatonの投票を案内。終盤にも、SNSに載せたリンクからの投票や、ミクチャの無料分での応援がうれしいと伝えました。" },
     { timestamp: "0:05:50", title: "褒め言葉の日本語講座", body: "髪留めを褒めるコメントをきっかけに、助詞の「は」と「も」をめぐる日本語講座へ。言葉の選び方にツッコミを入れながら、笑顔でやり取りを楽しみました。" },
     { timestamp: "0:11:35", title: "四次進出とフォローに感謝", body: "三次審査通過へのお祝いに感謝し、四次審査も頑張ると話しました。フォロワーが270人になったことを喜び、300人を目指したいと呼びかけました。" },
-    { timestamp: "0:28:00", title: "ラジオと話すことへの思い", body: "ラジオで3時間の生放送を担当していることを紹介。番組名やあいさつを言ってみる場面もあり、配信やラジオの経験を将来に生かしたいと話しました。" },
+    { timestamp: "0:28:00", title: "ラジオと話すことへの思い", body: "日曜10時〜13時の番組でパーソナリティをしていることを紹介。番組名やあいさつを言ってみる場面もあり、配信やラジオの経験を将来に生かしたいと話しました。" },
     { timestamp: "0:50:32", title: "コメントを大切に", body: "コメントの表示順が前後することについて説明。どのコメントも大切に読んでいることや、皆さんとのやり取りがうれしいことを伝えました。" },
     { timestamp: "1:00:10", title: "髪を寄付した思い出", body: "髪形の話から、以前ヘアドネーションに挑戦した思い出へ。髪を寄付することをやってみたくて、長く伸ばした髪を切ったと振り返りました。" },
     { timestamp: "1:16:40", title: "ここからも一緒に", body: "応援のおかげで四次審査に進めたことに感謝。ここからは自分の実力もつけていきたいと話し、皆さんと一緒にさらに上を目指す意気込みを伝えました。" },
     { timestamp: "1:37:21", title: "ランキングと翌日の案内", body: "13位から1位までライブランキングを読み上げて感謝。翌9月17日は昼枠を行わず、朝と夜を考えていると話し、時刻はファンルームで知らせると案内しました。" },
   ],
   goals: [{ item: "フォロワー", target: "300人", statusThen: "270人を喜ぶ" }],
-  ranking: [RANKING_NOTE],
+  ranking: [buildRankingNote(13, 1, "during")],
   timeline: [
     { timestamp: "0:02:05", label: "カメラに切り替えて夜のあいさつ" },
     { timestamp: "0:03:38", label: "Patonの投票開始を案内" },
     { timestamp: "0:05:50", label: "褒め言葉の日本語講座" },
     { timestamp: "0:11:35", label: "三次審査通過へのお祝いに感謝" },
     { timestamp: "0:13:02", label: "フォロワー270人と300人の目標" },
-    { timestamp: "0:28:00", label: "3時間の生放送ラジオを紹介" },
+    { timestamp: "0:28:00", label: "日曜のラジオ番組を紹介" },
     { timestamp: "0:34:49", label: "今の経験を将来に生かしたい" },
     { timestamp: "0:50:32", label: "コメントを大切に読む思い" },
     { timestamp: "1:00:10", label: "ヘアドネーションの思い出" },
