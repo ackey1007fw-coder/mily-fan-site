@@ -9,6 +9,17 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-18確認: Instagram Story「Paton投票本日1.5倍DAY」
+
+- NEWS ID: `2026-09-18-campus-girls-paton-15x-story`。Latest / NEWS と CAMPUS GIRLS の関連NEWS・Galleryへ掲載。
+- オーナーが当該Instagram Story動画の掲載を依頼。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。
+- batch b128-01 動画を Latest / NEWS と Gallery で共有。本人肉声を保持した公開派生（H.264 Constrained Baseline + AAC、`+faststart`、metadata除去）。
+- 画面上部の「キャンガール」とリンクスタンプ「Paton投票本日1.5倍DAY」を本文と message に引用。発話の全文は聞き取りが確定しないため引用しない。
+- 追加CTAは本選EX vol.1 の確認済み Paton本人ページ（`https://paton.jp/event/entrant/11866`）。SupportEventの期間（2026-09-16 18:00〜2026-09-22 23:59 JST）終了後に自動で消える。予選の 11380 は使わない。
+- 1.5倍の 0:00–23:59 の枠は作らない。画面から確認できないため、新しい SupportEvent / live note は足さない。
+- activityIds: campus-girls。sameDayOrder なし。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加。
+- 過去NEWS fixturesは新項目を除外して当時の検証範囲を維持する。
+
 ## 2026-09-17確認: 9月16日夜配信の進出報告とおしゃべり
 
 - `streamRecap20260916Yoru.ts` を既存の配信メモへ追加し、同日の朝配信より前に配置。
