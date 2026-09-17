@@ -4,6 +4,7 @@ import { galleryVideos as current, type GalleryVideoItem } from "../../src/data/
 /** Preserve the gallery snapshot used by the pre-b58 content regressions. */
 export const galleryVideos = current.filter(
   ({ id }) =>
+    id !== "mily-b128-01-campus-girls-paton-15x-story" &&
     id !== "mily-b92-01-showroom-avatar-rights-story" &&
     id !== "mily-b66-01-stream-thanks-morning-slot-story" &&
     id !== "mixch-m-Tfb8i9dy" &&

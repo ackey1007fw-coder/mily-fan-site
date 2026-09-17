@@ -12,11 +12,12 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
   assert.equal(item.sourceDate, "2026-09-05");
   assert.equal(item.sourceUrl, "https://vt.tiktok.com/ZSqNgRAvx/");
   assert.deepEqual(visibleGalleryVideos().filter(({ id }) => id === item.id), [item]);
-  assert.equal(galleryVideos.length, previous.length + 7);
+  assert.equal(galleryVideos.length, previous.length + 8);
   assert.deepEqual(
     galleryVideos.filter(
       ({ id }) =>
         id !== item.id &&
+        id !== "mily-b128-01-campus-girls-paton-15x-story" &&
         id !== "mily-b92-01-showroom-avatar-rights-story" &&
         id !== "mily-b59-01-third-round-vote-day2-story" &&
         id !== "mily-b66-01-stream-thanks-morning-slot-story" &&
@@ -63,11 +64,12 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
     ),
     previousNews,
   );
-  // 9/7・9/6 の Instagram Story（batch b65）が新しい順で先頭に並ぶ。
-  assert.equal(galleryVideos[0]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
-  assert.equal(galleryVideos[1]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
-  assert.equal(galleryVideos[2]?.id, "mily-b65-01-web-vote-day5-soon-story");
-  assert.equal(galleryVideos[3], item);
+  // 9/18 のキャンガル Paton 1.5倍DAY Story が新しい順で先頭に並ぶ。
+  assert.equal(galleryVideos[0]?.id, "mily-b128-01-campus-girls-paton-15x-story");
+  assert.equal(galleryVideos[1]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
+  assert.equal(galleryVideos[2]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
+  assert.equal(galleryVideos[3]?.id, "mily-b65-01-web-vote-day5-soon-story");
+  assert.equal(galleryVideos[4], item);
   const entries = selectGalleryEntries().filter(({ key }) => key === item.id);
   assert.equal(entries.length, 1);
   assert.equal(entries[0].kind, "video");

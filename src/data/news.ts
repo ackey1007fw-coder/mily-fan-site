@@ -18,6 +18,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
  */
 import type { ActivityId } from "./activities.ts";
 import {
+  campusGirlsFinalsExPatonVoteLink,
   campusGirlsPatonVoteLink,
   missCircleWebVoteLink,
 } from "./links.ts";
@@ -107,6 +108,7 @@ import { thirdRoundStoryAdditionalMedia } from "./thirdRoundStoryMedia.ts";
 import { webVoteDay2StoryVideo } from "./webVoteDay2StoryVideo.ts";
 import { voteDayFiveSoonStoryVideo } from "./voteDayFiveSoonStoryVideo.ts";
 import { morningThanksVoteStoryVideo } from "./morningThanksVoteStoryVideo.ts";
+import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXStoryVideo.ts";
 import { streamThanksMorningSlotStoryVideo } from "./streamThanksMorningSlotStoryVideo.ts";
 import { finalDayNightStoryVideo } from "./finalDayNightStoryVideo.ts";
 import { miripochiStoryVideo } from "./miripochiStoryVideo.ts";
@@ -216,6 +218,27 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-18-campus-girls-paton-15x-story",
+    date: "2026-09-18",
+    activityIds: ["campus-girls"],
+    title: "Paton投票本日1.5倍DAY",
+    body: "9月18日朝、みりぃがInstagram Storyで、CAMPUS GIRLS 2027のPaton投票が本日1.5倍DAYであることを案内しました。画面上部に「キャンガール」、リンクスタンプに「Paton投票本日1.5倍DAY」と出ています。紺の花柄トップスに水色のストライプリボンをつけ、前髪に触れながらカメラを見ている短い動画です。",
+    sourceLabel: campusGirlsPatonFifteenXStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsFinalsExPatonVoteLink.label,
+        url: campusGirlsFinalsExPatonVoteLink.url,
+      },
+    ],
+    media: campusGirlsPatonFifteenXStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "キャンガール\nPaton投票本日1.5倍DAY\u{1F64F}\u{1F499}\u2728",
+    },
+  },
   {
     id: "2026-09-16-miss-circle-fourth-round",
     date: "2026-09-16",

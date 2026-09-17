@@ -242,9 +242,9 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
   it("shares one manifest object per Story with Gallery, Activities, and Portal Feed", () => {
     const [night, morning] = fixtures;
 
-    // 9/8 の b66 Story が先頭。b65 は 2〜3番目。
-    assert.equal(galleryVideos[1], morning.item);
-    assert.equal(galleryVideos[2], night.item);
+    // 9/18 の b128 Story が先頭。9/8 の b66 は 2番目。b65 は 3〜4番目。
+    assert.equal(galleryVideos[2], morning.item);
+    assert.equal(galleryVideos[3], night.item);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);

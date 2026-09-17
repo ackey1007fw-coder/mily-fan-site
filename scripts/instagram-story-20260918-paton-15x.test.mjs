@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import { news as currentNewsForMedia } from "../src/data/news.ts";
-const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
+const priorMediaSources = {
+  newsItems: currentNewsForMedia.filter(
+    ({ id }) => id !== "2026-09-18-campus-girls-paton-15x-story",
+  ),
+};
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -12,17 +16,18 @@ import { promisify } from "node:util";
 import sharp from "sharp";
 import { events } from "../src/data/events.ts";
 import {
+  campusGirlsPatonFifteenXStoryVideo,
   galleryVideos,
-  streamThanksMorningSlotStoryVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
 import {
+  campusGirlsFinalsExPatonVoteLink,
   campusGirlsPatonVoteLink,
   missCircleWebVoteLink,
 } from "../src/data/links.ts";
 import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "./fixtures/news-before-20260909.ts";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";
@@ -43,31 +48,27 @@ const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
 const instagramProfile = "https://www.instagram.com/mily_chan36";
-const showroomRoom = "https://www.showroom-live.com/r/circle2026_0734";
 
-const NEWS_ID = "2026-09-08-stream-thanks-morning-slot-story";
-const MEDIA_ID = "mily-b66-01-stream-thanks-morning-slot-story";
-const PUBLIC_VIDEO = "mily-b66-01-stream-thanks-morning-slot-story.mp4";
-const PUBLIC_POSTER = "mily-b66-01-stream-thanks-morning-slot-story-poster.jpg";
-const PUBLIC_BYTES = 698_475;
+const NEWS_ID = "2026-09-18-campus-girls-paton-15x-story";
+const MEDIA_ID = "mily-b128-01-campus-girls-paton-15x-story";
+const PUBLIC_VIDEO = "mily-b128-01-campus-girls-paton-15x-story.mp4";
+const PUBLIC_POSTER = "mily-b128-01-campus-girls-paton-15x-story-poster.jpg";
+const PUBLIC_BYTES = 1_521_893;
 const PUBLIC_SHA256 =
-  "dc922357bb1eca90447dca156a3dbc8cc730efc889fe17c846adda961078a486";
-const POSTER_BYTES = 95_887;
+  "df6bf59556904d686111a8dee909339011d03c1093c9654251e8df0c08a82863";
+const POSTER_BYTES = 57_485;
 const POSTER_SHA256 =
-  "5ba627ce46eba9a0b204ff90742dbf724af2604034b0a1c14a3f06f1e11827f0";
+  "3818258c20a2095d209470b8c8d47ea59cac8083d9a38142368711227363623e";
+const ORIGINAL_SHA256 =
+  "2f565bd3f4990df004f266d7c55cea5d7cf6cb4a188cc82377f3dae2e4b7ff15";
 
-const TITLE = "配信ありがとう、「明日の朝枠は7:30〜8:20」";
+const TITLE = "Paton投票本日1.5倍DAY";
 const BODY =
-  "9月8日未明、みりぃがInstagram Storyで、配信へのお礼と「明日の朝枠は7:30〜8:20」を伝えました。配信中は「目がぁぁ乾くぅぅ見えないぃぃ」と言っていたけれど、配信を切った瞬間に平気になった、とも添えています。くま耳とキラキラのフィルターをつけて、白いふわふわの毛布のそばでカメラを見ている短い動画です。";
-const MESSAGE =
-  "配信ありがとう\u{1F4AB}\n" +
-  "配信中あんなに\n" +
-  "「目がぁぁ乾くぅぅ見えないぃぃ」\n" +
-  "とか言ってたけど、\n" +
-  "配信切った瞬間平気になった、、、( ˈ‿ˈ )\n" +
-  "明日の朝枠は7:30〜8:20‼\u{FE0F}";
+  "9月18日朝、みりぃがInstagram Storyで、CAMPUS GIRLS 2027のPaton投票が本日1.5倍DAYであることを案内しました。画面上部に「キャンガール」、リンクスタンプに「Paton投票本日1.5倍DAY」と出ています。紺の花柄トップスに水色のストライプリボンをつけ、前髪に触れながらカメラを見ている短い動画です。";
+const MESSAGE = "キャンガール\nPaton投票本日1.5倍DAY\u{1F64F}\u{1F499}\u2728";
 
-const now = Date.parse("2026-09-08T09:00:00+09:00");
+const duringVote = Date.parse("2026-09-18T12:00:00+09:00");
+const afterVote = Date.parse("2026-09-23T00:00:00+09:00");
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -106,18 +107,19 @@ async function changedText() {
     "scripts/fixtures/gallery-videos-before-b58.ts",
     "scripts/fixtures/news-before-b41.ts",
     "scripts/fixtures/news-before-b58.ts",
-    "scripts/instagram-story-20260908-stream-thanks.test.mjs",
+    "scripts/fixtures/news-before-20260909.ts",
+    "scripts/instagram-story-20260918-paton-15x.test.mjs",
     "src/data/galleryVideos.ts",
     "src/data/news.ts",
-    "src/data/streamThanksMorningSlotStoryVideo.json",
-    "src/data/streamThanksMorningSlotStoryVideo.ts",
+    "src/data/campusGirlsPatonFifteenXStoryVideo.json",
+    "src/data/campusGirlsPatonFifteenXStoryVideo.ts",
   ];
   const result = [];
 
   for (const file of files) {
     let text = await readFile(path.join(root, file), "utf8");
     if (file === "docs/MEDIA.md") {
-      const start = text.indexOf("## 素材台帳（batch b66");
+      const start = text.indexOf("## 素材台帳（batch b128");
       assert.notEqual(start, -1);
       const end = text.indexOf("\n## ", start + 4);
       text = text.slice(start, end === -1 ? undefined : end);
@@ -127,8 +129,8 @@ async function changedText() {
   return result;
 }
 
-describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS", () => {
-  it("leads Latest as the only 9/8 record", () => {
+describe("2026-09-18 Instagram Story Paton 1.5倍DAY — Latest / NEWS", () => {
+  it("leads Latest as the only 9/18 record", () => {
     const entry = item();
     const ordered = sortNewsByDateDesc(news);
 
@@ -136,12 +138,10 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
     assert.equal(news[0], entry);
     assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, "2026-09-07-mixch-ex-period-day1");
-    assert.equal(ordered[2]?.id, "2026-09-07-campus-girls-finals-ex-vol1");
-    assert.equal(ordered[3]?.id, "2026-09-07-morning-thanks-vote-day5-story");
-    assert.equal(entry.date, "2026-09-08");
-    assert.equal(entry.sameDayOrder, 10);
-    assert.deepEqual(entry.activityIds, ["live-stream"]);
+    assert.equal(ordered[1]?.id, "2026-09-16-miss-circle-fourth-round");
+    assert.equal(entry.date, "2026-09-18");
+    assert.equal(entry.sameDayOrder, undefined);
+    assert.deepEqual(entry.activityIds, ["campus-girls"]);
     assert.equal(entry.title, TITLE);
     assert.equal(entry.body, BODY);
     assert.equal(entry.message?.label, "みりぃのStory");
@@ -152,7 +152,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     assert.deepEqual(verifyNews(news), []);
   });
 
-  it("keeps Story attribution non-link with Instagram and SHOWROOM links only", () => {
+  it("keeps Story attribution non-link with Instagram and windowed Paton CTAs", () => {
     const entry = item();
 
     assert.equal(entry.source, undefined);
@@ -160,40 +160,58 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     assert.equal(entry.url, undefined);
     assert.equal(entry.relatedUrl, instagramProfile);
     assert.equal(entry.ctaLabel, "Instagramプロフィールを見る");
-    assert.deepEqual(entry.additionalCtas, [{ label: "SHOWROOM", url: showroomRoom }]);
+    assert.deepEqual(entry.additionalCtas, [
+      {
+        label: campusGirlsFinalsExPatonVoteLink.label,
+        url: campusGirlsFinalsExPatonVoteLink.url,
+      },
+    ]);
     const serialized = JSON.stringify(entry);
     assert.equal(serialized.includes(campusGirlsPatonVoteLink.url), false);
     assert.equal(serialized.includes(missCircleWebVoteLink.url), false);
-    assert.deepEqual(resolveNewsLinks(entry, now), {
+    assert.equal(serialized.includes("entrant/11380"), false);
+    assert.deepEqual(resolveNewsLinks(entry, duringVote), {
       relatedUrl: instagramProfile,
       cta: { label: "Instagramプロフィールを見る", url: instagramProfile },
-      additionalCtas: [{ label: "SHOWROOM", url: showroomRoom }],
+      additionalCtas: [
+        {
+          label: campusGirlsFinalsExPatonVoteLink.label,
+          url: campusGirlsFinalsExPatonVoteLink.url,
+        },
+      ],
+    });
+    assert.deepEqual(resolveNewsLinks(entry, afterVote), {
+      relatedUrl: instagramProfile,
+      cta: { label: "Instagramプロフィールを見る", url: instagramProfile },
     });
   });
 
-  it("shares one manifest object with Gallery, LIVE STREAM, and Portal Feed", () => {
+  it("shares one manifest object with Gallery, CAMPUS GIRLS, and Portal Feed", () => {
     const entry = item();
 
-    assert.equal(entry.media, streamThanksMorningSlotStoryVideo);
-    assert.equal(galleryVideos[1], streamThanksMorningSlotStoryVideo);
+    assert.equal(entry.media, campusGirlsPatonFifteenXStoryVideo);
+    assert.equal(galleryVideos[0], campusGirlsPatonFifteenXStoryVideo);
     assert.deepEqual(
       galleryVideos.filter(({ id }) => id === MEDIA_ID),
-      [streamThanksMorningSlotStoryVideo],
+      [campusGirlsPatonFifteenXStoryVideo],
     );
     assert.equal(
       visibleGalleryVideos().find(({ id }) => id === MEDIA_ID),
-      streamThanksMorningSlotStoryVideo,
+      campusGirlsPatonFifteenXStoryVideo,
     );
-    assert.equal(streamThanksMorningSlotStoryVideo.kind, "video");
-    assert.equal(streamThanksMorningSlotStoryVideo.provenance, "owner-provided");
-    assert.equal(streamThanksMorningSlotStoryVideo.sourceLabel, "Instagram Story");
-    assert.equal(streamThanksMorningSlotStoryVideo.sourceDate, "2026-09-08");
-    assert.equal("sourceUrl" in streamThanksMorningSlotStoryVideo, false);
-    assert.equal(streamThanksMorningSlotStoryVideo.published, true);
-    assert.equal(streamThanksMorningSlotStoryVideo.width, 720);
-    assert.equal(streamThanksMorningSlotStoryVideo.height, 1280);
-    assert.equal(streamThanksMorningSlotStoryVideo.src, `/media/gallery/${PUBLIC_VIDEO}`);
-    assert.equal(streamThanksMorningSlotStoryVideo.poster, `/media/gallery/${PUBLIC_POSTER}`);
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.kind, "video");
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.provenance, "owner-provided");
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.sourceLabel, "Instagram Story");
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.sourceDate, "2026-09-18");
+    assert.equal("sourceUrl" in campusGirlsPatonFifteenXStoryVideo, false);
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.published, true);
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.width, 720);
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.height, 1280);
+    assert.equal(campusGirlsPatonFifteenXStoryVideo.src, `/media/gallery/${PUBLIC_VIDEO}`);
+    assert.equal(
+      campusGirlsPatonFifteenXStoryVideo.poster,
+      `/media/gallery/${PUBLIC_POSTER}`,
+    );
 
     const entries = selectGalleryEntries().filter(({ key }) => key === MEDIA_ID);
     assert.equal(entries.length, 1);
@@ -202,9 +220,14 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     assert.equal(entries[0].item.video.playsInline, true);
     assert.equal(entries[0].item.video.preload, "none");
 
-    assert.equal(selectActivityNews("live-stream", news, news.length)[0]?.id, NEWS_ID);
-    assert.equal(selectActivityMedia("live-stream", priorMediaSources)[0], streamThanksMorningSlotStoryVideo);
-    for (const activityId of ["miss-circle", "campus-girls", "radio"]) {
+    assert.equal(selectActivityNews("campus-girls", news, news.length)[0]?.id, NEWS_ID);
+    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsPatonFifteenXStoryVideo);
+    assert.equal(
+      selectActivityMedia("campus-girls", priorMediaSources)[0] ===
+        campusGirlsPatonFifteenXStoryVideo,
+      false,
+    );
+    for (const activityId of ["miss-circle", "live-stream", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(
           (candidate) => candidate.id === NEWS_ID,
@@ -218,7 +241,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     }
 
     const feed = createPortalFeed({
-      now: new Date("2026-09-08T09:00:00+09:00"),
+      now: new Date("2026-09-18T12:00:00+09:00"),
       newsItems: news,
       storyItems: [],
       eventItems: [],
@@ -230,29 +253,21 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     assert.ok(feedItem.image?.endsWith(PUBLIC_POSTER));
   });
 
-  it("quotes the morning slot without rewriting the schedule or inventing a date", () => {
+  it("quotes the 1.5x overlay without inventing a voting window", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}\n${entry.message.text}`;
 
-    assert.doesNotMatch(copy, /9月9日|9\/9|9月8日の朝|9\/8の朝/);
-    assert.doesNotMatch(copy, /liff\.line\.me|misscircle\.jp|instagram\.com|showroom-live\.com/);
-    assert.match(entry.body, /「明日の朝枠は7:30〜8:20」/);
-    // 9/8 の枠は本人配布タイムテーブル由来の既存データのまま。Story から転記しない。
-    assert.deepEqual(
-      streamSchedule.filter((slot) => slot.date === "2026-09-08"),
-      [{ date: "2026-09-08", time: "07:00", endTime: "08:00" }],
-    );
-    assert.equal(
-      streamSchedule.some((slot) => slot.date >= "2026-09-08" && slot.time === "07:30"),
-      false,
-    );
+    assert.match(copy, /本日1\.5倍DAY/);
+    assert.doesNotMatch(copy, /0:00|23:59|0時|23時/);
+    assert.doesNotMatch(copy, /liff\.line\.me|misscircle\.jp|instagram\.com|paton\.jp/);
+    assert.doesNotMatch(copy, /11380/);
   });
 });
 
-describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — published media", () => {
+describe("2026-09-18 Instagram Story Paton 1.5倍DAY — published media", () => {
   it("publishes exactly one shared MP4 and one real-frame poster", async () => {
     const assets = (await readdir(galleryDirectory))
-      .filter((file) => file.includes("mily-b66-"))
+      .filter((file) => file.includes("mily-b128-"))
       .sort();
     assert.deepEqual(assets, [PUBLIC_POSTER, PUBLIC_VIDEO].sort());
 
@@ -272,23 +287,28 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — published medi
     assert.equal(metadata.icc, undefined);
   });
 
-  it("remuxes the 1fps H.264 stream unchanged, video-only, with faststart", async () => {
+  it("keeps spoken audio, 30fps H.264, and faststart without source metadata", async () => {
     const mp4 = path.join(galleryDirectory, PUBLIC_VIDEO);
     const info = await probe(mp4);
     const video = info.streams.find((stream) => stream.codec_type === "video");
     const audio = info.streams.find((stream) => stream.codec_type === "audio");
 
     assert.ok(video);
+    assert.ok(audio);
     assert.equal(video.codec_name, "h264");
-    assert.equal(video.profile, "High");
+    assert.equal(video.profile, "Constrained Baseline");
     assert.equal(video.pix_fmt, "yuv420p");
     assert.equal(video.width, 720);
     assert.equal(video.height, 1280);
-    assert.equal(video.avg_frame_rate, "1/1");
-    assert.equal(video.nb_frames, "20");
-    assert.equal(Number(info.format.duration), 20);
-    assert.equal(audio, undefined);
-    assert.equal(info.format.nb_streams, 1);
+    assert.equal(video.avg_frame_rate, "30/1");
+    assert.equal(video.nb_frames, "351");
+    assert.equal(Number(info.format.duration), 11.7);
+    assert.equal(video.has_b_frames, 0);
+    assert.equal(audio.codec_name, "aac");
+    assert.equal(audio.profile, "LC");
+    assert.equal(audio.sample_rate, "44100");
+    assert.equal(audio.channels, 2);
+    assert.equal(info.format.nb_streams, 2);
     assert.equal(await isFaststart(mp4), true);
     assert.deepEqual(info.chapters, []);
     assert.equal(video.tags?.creation_time, undefined);
@@ -297,7 +317,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — published medi
   });
 });
 
-describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — privacy and scope", () => {
+describe("2026-09-18 Instagram Story Paton 1.5倍DAY — privacy and scope", () => {
   it("does not create articles, milestones, events, schedules, or photo records", () => {
     const ids = new Set([NEWS_ID, MEDIA_ID]);
 
@@ -310,7 +330,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — privacy and sc
     assert.equal(media.some((entry) => ids.has(entry.id)), false);
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
     assert.equal(
-      streamSchedule.some((entry) => JSON.stringify(entry).includes("b66")),
+      streamSchedule.some((entry) => JSON.stringify(entry).includes("b128")),
       false,
     );
   });
@@ -342,24 +362,24 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — privacy and sc
   it("documents the batch ledger and the operational notes", async () => {
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
-    const start = ops.indexOf("### 2026-09-08 Instagram Story 配信お礼・「明日の朝枠は7:30〜8:20」（batch b66）");
+    const start = ops.indexOf(
+      "## 2026-09-18確認: Instagram Story「Paton投票本日1.5倍DAY」",
+    );
     assert.notEqual(start, -1);
     const section = ops.slice(start);
 
-    assert.match(docs, /batch b66/);
-    assert.match(docs, /video-only/);
+    assert.match(docs, /batch b128/);
     assert.match(docs, /720×1280/);
-    assert.match(docs, /-c:v copy/);
+    assert.match(docs, /本人肉声/);
     assert.match(docs, new RegExp(PUBLIC_VIDEO.replace(/\./g, "\\.")));
     assert.match(docs, new RegExp(PUBLIC_SHA256));
     assert.match(docs, new RegExp(POSTER_SHA256));
-    assert.match(docs, /4\.0秒地点の実フレーム/);
+    assert.match(docs, new RegExp(ORIGINAL_SHA256));
+    assert.match(docs, /3\.0秒地点の実フレーム/);
     assert.match(docs, /再投稿表示/);
-    assert.match(ops, /85件/);
-    assert.match(ops, /独立動画33本/);
-    assert.match(section, /video-only/);
-    assert.match(section, /sameDayOrder: 10/);
-    assert.match(section, /streamSchedule \/ events へ転記しない/);
+    assert.match(section, /sameDayOrder なし/);
+    assert.match(section, /0:00–23:59 の枠は作らない/);
+    assert.match(section, /entrant\/11866/);
     assert.doesNotMatch(docs, /drive\.google\.com/);
     assert.doesNotMatch(section, /drive\.google\.com/);
   });

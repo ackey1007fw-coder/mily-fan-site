@@ -271,8 +271,8 @@ describe("2026-09-06 CAMPUS GIRLS 予選final 結果報告 — scope", () => {
     assert.equal(campusNews[0]?.id, "2026-09-07-mixch-ex-period-day1");
     assert.equal(campusNews[1]?.id, "2026-09-07-campus-girls-finals-ex-vol1");
     assert.equal(campusNews[2]?.id, NEWS_ID);
-    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsFinalsExGuideImage);
-    assert.equal(selectActivityMedia("campus-girls")[1], campusGirlsPrelimFinalResultImage);
+    assert.equal(selectActivityMedia("campus-girls")[1], campusGirlsFinalsExGuideImage);
+    assert.equal(selectActivityMedia("campus-girls")[2], campusGirlsPrelimFinalResultImage);
     for (const activityId of ["miss-circle", "live-stream", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(
