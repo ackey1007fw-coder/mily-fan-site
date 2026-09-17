@@ -3843,3 +3843,11 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 公開派生: `public/media/live/mily-b127-01-night.jpg` 〜 `mily-b127-10-night.jpg`。代表は05。
 - 一括保存: `public/media/live/mily-b127-night-stills.zip`。ZIPは掲載JPEG10枚のみ。
 - 顔加工・生成・拡大なし。録画原本、音声、全文文字起こし、非公開受け渡し情報は公開しない。
+
+### b128: 2026年9月17日 SHOWROOM夜ラジオ配信の静止画1枚
+
+- オーナーが当該ラジオ配信で表示された画像1枚の掲載を明示依頼。LIVE STREAMの当該夜配信メモに限って使用し、NEWS / Galleryへ複製しない。
+- 保存録画の0:00:30の実フレームを採用。0:10:00、0:20:00、0:30:00、0:40:00でも同じ写真が表示されていることを比較確認。映像中の動く本人の姿ではなく、ラジオ配信の表示画像として説明する。
+- 公開ファイル: `public/media/live/mily-b128-01-night-radio.jpg`。640×360 JPEG。顔加工・生成・拡大・切り抜きなし。視聴者名やコメントUI、第三者の写り込みなし。EXIF / GPS / IPTC / XMPなし。
+- SHA256: `b227e0c20a20c3fac6e3656e88a0fb2e80a1b89c3ebc9640243a7dbf4249ca6a`。抽出した実フレームと同一バイト列を確認。
+- 代表画像1枚のみとし、同じ画像のgalleryやZIPで水増ししない。録画原本・音声・全文文字起こし・非公開の受け渡し情報は公開しない。
