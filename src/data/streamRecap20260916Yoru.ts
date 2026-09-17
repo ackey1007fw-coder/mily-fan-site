@@ -1,5 +1,19 @@
-import type { StreamRecap } from "./streamRecaps.ts";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote, buildRankingNote } from "./streamRecapRules.ts";
+
+const nightStillDescriptions = [
+  ["0:09:39", "笑顔のアップ", "カメラに近づいて明るく笑うみりぃ"],
+  ["0:23:00", "あごに手を添えて", "あごに手を添えてカメラを見るみりぃ"],
+  ["0:33:38", "頬に指を添えた笑顔", "頬に指を添えて笑顔を見せるみりぃ"],
+  ["0:44:20", "首をかしげて", "首をかしげてカメラを見るみりぃ"],
+  ["1:01:41", "両手を頬に添えて", "両手を頬に添えて笑うみりぃ"],
+  ["1:13:58", "髪に手を添えた笑顔", "髪に片手を添えて笑顔を見せるみりぃ"],
+  ["1:29:40", "両手でポーズ", "両手を上げてポーズをとるみりぃ"],
+  ["1:33:40", "口元に手を添えて笑顔", "口元に手を添えて笑うみりぃ"],
+  ["1:37:40", "指で数字を作って", "両手の指で数字のポーズを作るみりぃ"],
+  ["1:42:08", "最後の手振り", "配信の最後にカメラへ手を振るみりぃ"],
+] as const;
+const nightStills: StreamRecapImage[] = nightStillDescriptions.map(([timestamp,label,alt],index)=>({src:`/media/live/mily-b127-${String(index+1).padStart(2,"0")}-night.jpg`,width:640,height:360,alt,caption:`${timestamp} ${label}`,downloadName:`みりぃ_20260916夜_${String(index+1).padStart(2,"0")}.jpg`}));
 
 export const streamRecap20260916Yoru: StreamRecap = {
   id: "2026-09-16-yoru-showroom",
@@ -8,6 +22,9 @@ export const streamRecap20260916Yoru: StreamRecap = {
   theme: "夜の四次進出とおしゃべり",
   broadcastLabel: "22:01頃〜 約102分",
   platformLabel: "SHOWROOM",
+  image: nightStills[4],
+  gallery: nightStills,
+  galleryZip: { src: "/media/live/mily-b127-night-stills.zip", filename: "みりぃ_20260916夜_スクショ10枚.zip", label: "10枚まとめて保存" },
   summary: "四次審査進出へのお祝いに感謝し、Patonの投票やフォローでの応援を呼びかけた夜配信。褒め言葉の日本語講座、ラジオの話、ヘアドネーションの思い出など、コメントとのやり取りが続きました。終盤には、これからの挑戦への意気込みも話しました。",
   highlights: [
     { timestamp: "0:03:38", title: "投票と日々の応援をお願い", body: "この日から始まったPatonの投票を案内。終盤にも、SNSに載せたリンクからの投票や、ミクチャの無料分での応援がうれしいと伝えました。" },
@@ -43,7 +60,7 @@ export const streamRecap20260916Yoru: StreamRecap = {
   verifiedAt: "2026-09-17",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    stills: "静止画は掲載していません。",
+    stills: "静止画は録画の実フレーム10枚を掲載しています。",
     extra: "録画開始記録22:00:44、メディア実測6144.746秒から表示を22:01頃・約102分に丸めています。これは保存録画の範囲で、配信全編の完全収録を保証しません。録画範囲全体の自動文字起こし329区間を確認し、確定できない固有名詞・数値・歌唱曲は掲載していません。タイムスタンプは録画内の目安です。",
   }),
 };
