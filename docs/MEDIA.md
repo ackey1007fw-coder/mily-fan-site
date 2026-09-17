@@ -3826,3 +3826,11 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 公開派生: `public/media/live/mily-b124-01-peace-sign.jpg` 〜 `mily-b124-10-closing-smile.jpg` の10枚。代表は06のリボンに触れた笑顔。同じオブジェクトを代表画像とスクショ欄で共有。
 - 一括保存: `public/media/live/mily-b124-night-stills.zip`。ZIP内容は掲載JPEG10枚と同一バイト。
 - 録画・音声派生・全文文字起こし・非公開受け渡し先はコミットしない。
+
+## 素材台帳（batch b126 / source date 2026-09-17）
+
+- 当該朝配信の実フレーム10枚。提示した10枚すべての掲載承認を取得。LIVE STREAMの当該回のみへ追加する。
+- 公開画像は `live/mily-b126-01-morning.jpg` から `mily-b126-10-morning.jpg`。全10枚640×360 JPEG。元画角を保持し、顔加工・crop・scale・AI生成なし。第三者、視聴者名、コメントUIの写り込みなしを実寸確認。
+- 録画先頭からの位置は0:25:00、0:31:04、0:39:58、0:43:04、0:46:02、0:51:56、0:54:58、1:04:00、1:12:02、1:13:28。代表は10番、galleryと同じオブジェクト。
+- ZIP `live/mily-b126-morning-stills.zip` は公開JPEG10枚と同じバイト列。全エントリーのハッシュとCRCを照合。EXIFなし。
+- NEWS / Galleryへ複製せず、録画原本・音声・全文文字起こしは含めない。

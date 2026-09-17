@@ -1,0 +1,75 @@
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote } from "./streamRecapRules.ts";
+
+const stillDescriptions = [
+  ["0:25:00", "鏡を手にした笑顔", "鏡を手に持ち、カメラに向かって笑顔を見せるみりぃ"],
+  ["0:31:04", "メイク中の笑顔", "髪を横でまとめ、メイク中に笑顔を見せるみりぃ"],
+  ["0:39:58", "髪をほどく場面", "両手を上げ、髪をほどきながら笑うみりぃ"],
+  ["0:43:04", "髪を下ろした姿", "髪を下ろし、カメラに近づいて笑顔を見せるみりぃ"],
+  ["0:46:02", "顔の横で指を広げたポーズ", "顔の横で指を広げ、カメラを見つめるみりぃ"],
+  ["0:51:56", "両手を添えた笑顔", "頭の両側に手を添え、笑顔を見せるみりぃ"],
+  ["0:54:58", "首をかしげた笑顔", "首をかしげ、歯を見せて笑うみりぃ"],
+  ["1:04:00", "片手を振る場面", "髪を横でまとめ、カメラへ片手を振るみりぃ"],
+  ["1:12:02", "手を合わせた笑顔", "顔の前で手を合わせ、笑顔を見せるみりぃ"],
+  ["1:13:28", "両手を広げたポーズ", "顔の横に両手を広げ、笑顔でポーズをとるみりぃ"],
+] as const;
+
+const approvedStills: StreamRecapImage[] = stillDescriptions.map(([timestamp, label, alt], index) => ({
+  src: `/media/live/mily-b126-${String(index + 1).padStart(2, "0")}-morning.jpg`,
+  width: 640,
+  height: 360,
+  alt,
+  caption: `${timestamp} ${label}`,
+  downloadName: `みりぃ_20260917朝_${String(index + 1).padStart(2, "0")}.jpg`,
+}));
+
+export const streamRecap20260917Asa: StreamRecap = {
+  id: "2026-09-17-asa-showroom",
+  date: "2026-09-17",
+  dateLabel: "2026.09.17（木）",
+  theme: "朝のメイクと太陽トーク",
+  broadcastLabel: "8:32頃〜 約74分",
+  platformLabel: "SHOWROOM",
+  summary: "お出かけ前のメイク配信。チークやアイラインの工夫を見せながら、みんなとおしゃべり。四次審査への意気込みや吹奏楽部のキャプテン時代の話も、確認できた前半50分から振り返ります。",
+  image: approvedStills[9],
+  gallery: approvedStills,
+  galleryZip: { src: "/media/live/mily-b126-morning-stills.zip", filename: "みりぃ_20260917朝_スクショ10枚.zip", label: "10枚まとめて保存" },
+  highlights: [
+    { timestamp: "0:03:14", title: "かわいすぎるとスマホが？", body: "褒め言葉に、かわいくなりすぎると光ってスマホが壊れてしまう、と冗談で応じました。新しいスマホの準備はできているかと問いかけ、朝からやり取りが弾みました。" },
+    { timestamp: "0:08:31", title: "私自身が太陽", body: "太陽に負けないというやり取りでは、自分自身が太陽だとひと言。メイクをしてもしなくても負けない、と明るく返しました。", quote: "私自身が太陽だから" },
+    { timestamp: "0:15:31", title: "眉毛と目元の印象づくり", body: "眉毛の色で印象が変わると話し、眉毛の大切さを強調。まぶたには薄い色から濃い色を重ね、目元のメイクを一つずつ見せました。" },
+    { timestamp: "0:22:48", title: "指でなじませるチーク", body: "最近購入したチークを使いながら、クリームタイプは指で溶かしてつけると説明。薄い色をベースに重ねていく、メイクの工夫を紹介しました。" },
+    { timestamp: "0:23:55", title: "一緒にメイクする朝", body: "一人で先にメイクするより、みんなと話しながらの方が楽しいと思って配信にした、と説明。アイラインの工程では、一旦静かになると言って真剣に集中しました。" },
+    { timestamp: "0:42:45", title: "メイク完成と元気のおすそ分け", body: "メイクが完成したことを報告し、カメラへ笑顔を見せました。朝から元気なトークについても、みんなに元気を与えたい気持ちで配信している、と話しました。" },
+    { timestamp: "0:45:58", title: "四次審査に向けて", body: "初めて訪れた人へ、MISS CIRCLE CONTESTに出場中と自己紹介。四次審査に向けて頑張るので、これからも見てほしいと呼びかけました。" },
+    { timestamp: "0:47:32", title: "吹奏楽部のキャプテン時代", body: "高校時代は吹奏楽部のキャプテンを務め、誰よりも頑張らなければと思っていたと振り返りました。やると決めたらとことんやる、という姿勢も語りました。" },
+  ],
+  goals: [],
+  ranking: [],
+  timeline: [
+    { timestamp: "0:00:43", label: "お出かけ前のメイク配信" },
+    { timestamp: "0:03:14", label: "かわいさとスマホの冗談" },
+    { timestamp: "0:08:31", label: "私自身が太陽というひと言" },
+    { timestamp: "0:09:42", label: "大学再開と配信時間の話" },
+    { timestamp: "0:15:31", label: "眉毛の色とアイメイク" },
+    { timestamp: "0:19:20", label: "最近購入したチーク" },
+    { timestamp: "0:22:48", label: "クリームチークの使い方" },
+    { timestamp: "0:23:55", label: "一緒にメイク配信をする理由" },
+    { timestamp: "0:24:25", label: "アイラインに集中" },
+    { timestamp: "0:26:47", label: "唇の輪郭を整える工程" },
+    { timestamp: "0:35:00", label: "モチベーションと来訪への感謝" },
+    { timestamp: "0:42:45", label: "メイク完成の報告" },
+    { timestamp: "0:44:14", label: "みんなに元気を届けたい気持ち" },
+    { timestamp: "0:45:58", label: "四次審査への意気込み" },
+    { timestamp: "0:48:00", label: "吹奏楽部のキャプテン時代" },
+    { timestamp: "1:13:28", label: "両手を広げたポーズ（静止画確認）" },
+  ],
+  nextNote: "",
+  sourceLabel: "2026年9月17日 SHOWROOM朝配信（オーナー提供録画・前半50分の自動文字起こし確認）",
+  verifiedAt: "2026-09-17",
+  transcriptionNote: buildTranscriptionNote({
+    material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    stills: "静止画は録画の実フレーム10枚を掲載しています。",
+    extra: "発言の確認範囲は録画先頭から0:50:00までの自動文字起こし794区間です。50分以降は静止画の目視確認のみで、終盤の発言・歌唱・ランキング・次枠案内は掲載していません。開始表示は録画開始記録8:32:47、長さはメディア実測4434.404秒から約74分に丸めています。タイムスタンプは録画先頭からの目安です。配信全編の完全収録は保証しません。聞き取りが不確かな固有名詞や数値は省いています。",
+  }),
+};
