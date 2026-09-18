@@ -9,6 +9,18 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-18確認: X「初！きっかけ配信」と通常配信の案内
+
+- NEWS ID: `2026-09-18-kikkake-and-regular-stream`。Latest / NEWS と LIVE STREAM の関連NEWSへ掲載。
+- 本人X `https://x.com/Mily_chan36/status/2100806349680713766`（2026-09-18 13:37 JST）。恒久permalink。
+- 案内内容: 13:40〜14:40「初！きっかけ配信」、その後の通常配信を15:30まで。
+- SHOWROOMルームは本人案内の `https://www.showroom-live.com/r/circle2026_0734`（room_id=573253）。追跡パラメータ `?t=` は出典・CTAに使わない。
+- 16:07 JST時点のルーム状態は is_onlive=false、next_live=TBD。配信は終了済み。本文は終了と次回未定だけを書き、APIフィールド名は公開文へ出さない。
+- テキストNEWS＋出典リンク＋SHOWROOM CTA。X投稿に添付画像なし。SNS / SHOWROOM画像は自動保存しない。メディアは依頼者提供待ち。
+- 配信中の発言、順位、ギフト、切り抜きは未確認のため追加しない。streamRecap / streamSchedule / Gallery / media.ts / events / highlights / `/stories/` / contest.ts / profile 非追加。現在予定へ転記しない。
+- activityIds: live-stream。sameDayOrder: 10（同日朝のPaton 1.5倍DAY Storyより前）。
+- 過去NEWS fixturesは新項目を除外して当時の検証範囲を維持する。
+
 ## 2026-09-18確認: Instagram Story「Paton投票本日1.5倍DAY」
 
 - NEWS ID: `2026-09-18-campus-girls-paton-15x-story`。Latest / NEWS と CAMPUS GIRLS の関連NEWS・Galleryへ掲載。

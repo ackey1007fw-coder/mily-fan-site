@@ -219,6 +219,25 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-18-kikkake-and-regular-stream",
+    date: "2026-09-18",
+    sameDayOrder: 10,
+    activityIds: ["live-stream"],
+    title: "13:40〜「初！きっかけ配信」、通常配信は15:30まで",
+    body: "9月18日13:37、みりぃがXで、13:40〜14:40の「初！きっかけ配信」と、その後の通常配信を15:30まで行うと案内しました。16:07時点では配信は終了しており、次回配信は未定でした。",
+    source: "https://x.com/Mily_chan36/status/2100806349680713766",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃのX",
+      text:
+        "13:40〜14:40初！きっかけ配信🛜\n" +
+        "終わったら通常配信を15:30までやります💖\n" +
+        "見にきてくれたら喜びます‼︎",
+    },
+  },
+  {
     id: "2026-09-18-campus-girls-paton-15x-story",
     date: "2026-09-18",
     activityIds: ["campus-girls"],

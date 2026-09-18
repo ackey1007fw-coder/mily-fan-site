@@ -130,15 +130,16 @@ async function changedText() {
 }
 
 describe("2026-09-18 Instagram Story Paton 1.5倍DAY — Latest / NEWS", () => {
-  it("leads Latest as the only 9/18 record", () => {
+  it("is the earlier 9/18 record after the afternoon SHOWROOM X announcement", () => {
     const entry = item();
     const ordered = sortNewsByDateDesc(news);
 
     assert.ok(entry);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(news[0], entry);
-    assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, "2026-09-16-miss-circle-fourth-round");
+    assert.equal(news[1], entry);
+    assert.equal(ordered[0]?.id, "2026-09-18-kikkake-and-regular-stream");
+    assert.equal(ordered[1], entry);
+    assert.equal(ordered[2]?.id, "2026-09-16-miss-circle-fourth-round");
     assert.equal(entry.date, "2026-09-18");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
