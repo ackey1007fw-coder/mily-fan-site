@@ -19,11 +19,16 @@ import { selectSupportToday } from "../src/lib/supportHub.ts";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const source = (relative) => readFileSync(path.join(root, relative), "utf8");
 
-const WEB_LINE = "WEB投票 9/3 12:00〜9/13 23:59";
-const GIFT_LINE = "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59";
-const EVENT_LINE = "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59";
-const SHOWROOM_END_LINE = "SHOWROOMは9/12 21:59終了";
-const OFFICIAL_LINES = [WEB_LINE, GIFT_LINE, EVENT_LINE, SHOWROOM_END_LINE];
+const WEB_LINE = "WEB投票 10/2 12:00〜10/12 23:59";
+const SHOWROOM_LINE = "SHOWROOM審査 10/3 5:00〜10/12 21:59";
+const SHOWROOM_END_LINE = "SHOWROOMは10/12 21:59終了";
+const OFFICIAL_LINES = [WEB_LINE, SHOWROOM_LINE, SHOWROOM_END_LINE];
+const THIRD_ROUND_LINES = [
+  "WEB投票 9/3 12:00〜9/13 23:59",
+  "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59",
+  "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59",
+  "SHOWROOMは9/12 21:59終了",
+];
 
 function assertOfficialWindows(text) {
   for (const line of OFFICIAL_LINES) {
@@ -37,20 +42,23 @@ describe("contest phase official window display", () => {
   it("reads the three official times from supportEvents, not ContestPhase", () => {
     const phase = contest.currentPhase;
     assert.ok(phase);
-    assert.equal(contestPhaseDateRangeLabel(phase), "9/3〜9/13");
-    assert.equal(contestPhaseHeading(phase), "3次審査（9/3〜9/13）");
+    assert.equal(contestPhaseDateRangeLabel(phase), "10/2〜10/12");
+    assert.equal(contestPhaseHeading(phase), "4次審査（10/2〜10/12）");
     assert.deepEqual(contestOfficialWindowLines(phase), OFFICIAL_LINES);
     assert.equal(
       contestPhaseDisplayNote(phase),
-      ["3次審査（9/3〜9/13）", ...OFFICIAL_LINES].join("\n"),
+      ["4次審査（10/2〜10/12）", ...OFFICIAL_LINES].join("\n"),
     );
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59|5:00/);
     assert.match(source("src/data/contest.ts"), /ContestPhase は日付のみ/);
     assert.doesNotMatch(source("src/lib/contestPhaseDisplay.ts"), /2026-09-03T12:00|2026-09-03T05:00/);
   });
 
-  it("keeps gift and event as two labeled rows from one SHOWROOM window", () => {
-    assert.equal(GIFT_LINE.replace("SHOWROOM無料ギフト審査 ", ""), EVENT_LINE.replace("SHOWROOMイベント審査 ", ""));
+  it("keeps the historical third-round rows and ignores unknown phases", () => {
+    assert.deepEqual(
+      contestOfficialWindowLines(phaseWithName("3次審査")),
+      THIRD_ROUND_LINES,
+    );
     assert.equal(contestOfficialWindowLines(phaseWithName("2次審査")).length, 0);
     assert.equal(contestOfficialWindowLines(null).length, 0);
     assert.equal(appendContestOfficialWindows("確認済み", phaseWithName("2次審査")), "確認済み");
@@ -65,7 +73,7 @@ describe("contest phase official window display", () => {
     });
     assert.equal(afterPaton.kind, "contest");
     assertOfficialWindows(afterPaton.note ?? "");
-    assert.match(afterPaton.note ?? "", /3次審査（9\/3〜9\/13）/);
+    assert.match(afterPaton.note ?? "", /4次審査（10\/2〜10\/12）/);
 
     const today = selectSupportToday({
       contest,
@@ -76,8 +84,8 @@ describe("contest phase official window display", () => {
       now: Date.parse("2026-09-02T12:00:00+09:00"),
     }).find((item) => item.key === "today:contest");
     assert.ok(today);
-    assert.equal(today.value, "3次審査");
-    assert.match(today.note ?? "", /9\/3〜9\/13/);
+    assert.equal(today.value, "4次審査");
+    assert.match(today.note ?? "", /10\/2〜10\/12/);
     assertOfficialWindows(today.note ?? "");
     assert.equal(today.cta?.label, "ENTRY 734を見る");
     assert.equal(today.cta?.url, contest.entryUrl);

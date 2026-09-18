@@ -311,8 +311,8 @@ describe("Support Today and pending separation", () => {
 
   it("keeps the live contest phase off pending once official dates are confirmed", () => {
     assert.deepEqual(selectSupportPending({ contest, supportEvents: [] }), []);
-    assert.equal(contest.currentPhase?.start, "2026-09-03");
-    assert.equal(contest.currentPhase?.end, "2026-09-13");
+    assert.equal(contest.currentPhase?.start, "2026-10-02");
+    assert.equal(contest.currentPhase?.end, "2026-10-12");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
   });
@@ -333,7 +333,7 @@ describe("Support Today and pending separation", () => {
   });
 
   it("keeps the confirmed CAMPUS GIRLS Paton voting period in SupportEvents", () => {
-    assert.equal(supportEvents.length, 10);
+    assert.equal(supportEvents.length, 12);
     assert.equal(supportEvents[0].activityId, "campus-girls");
     assert.equal(supportEvents[0].kind, "vote");
     assert.deepEqual(supportEvents[0].schedule, {

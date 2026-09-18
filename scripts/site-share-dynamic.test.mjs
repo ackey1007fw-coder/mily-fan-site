@@ -81,29 +81,25 @@ describe("date-aware site share copy", () => {
 
     assert.doesNotMatch(text, /湘南シーサイドサークル/);
     assert.match(text, /Paton投票/);
-    assert.match(text, /3次審査/);
+    assert.doesNotMatch(text, /3次審査|4次審査/);
     assert.match(text, /#三橋莉子 #キャンガル2027$/);
     assert.doesNotMatch(text, /#ミスサークル2026/);
   });
 
-  it("ends Paton automatically and switches to the third-round callout", () => {
+  it("ends Paton automatically and activates the third-round vote only in its confirmed window", () => {
     const before = siteShareText({
       now: at("2026-09-02T12:00:00+09:00"),
       radioPhase: "idle",
     });
     assert.doesNotMatch(before, /Paton投票/);
-    assert.match(before, /9\/3からMISS CIRCLE CONTEST 2026の3次審査/);
-    assert.match(before, /#三橋莉子 #ミスサークル2026$/);
+    assert.equal(before, `${site.description}\n#三橋莉子`);
     assert.doesNotMatch(before, /#キャンガル2027/);
 
     const beforeWebVote = siteShareText({
       now: at("2026-09-03T11:59:59+09:00"),
       radioPhase: "idle",
     });
-    assert.match(
-      beforeWebVote,
-      /MISS CIRCLE CONTEST 2026の3次審査を応援してください🔥/,
-    );
+    assert.equal(beforeWebVote, `${site.description}\n#三橋莉子`);
     assert.doesNotMatch(beforeWebVote, /WEB投票をお願いします/);
 
     const duringWebVote = siteShareText({
@@ -173,7 +169,7 @@ describe("date-aware site share copy", () => {
 
     assert.match(duringPaton, /#三橋莉子 #キャンガル2027$/);
     assert.doesNotMatch(duringPaton, /#ミスサークル2026/);
-    assert.match(afterPaton, /#三橋莉子 #ミスサークル2026$/);
+    assert.match(afterPaton, /#三橋莉子$/);
     assert.doesNotMatch(afterPaton, /#キャンガル2027/);
   });
 

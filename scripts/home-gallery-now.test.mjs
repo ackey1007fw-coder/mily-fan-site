@@ -54,6 +54,15 @@ const unknownLive = {
 };
 
 const NONE_BANNER = { kind: "NONE", stateLabel: "", title: "" };
+const THIRD_ROUND_CONTEST = {
+  ...contest,
+  currentPhase: {
+    name: "3次審査",
+    start: "2026-09-03",
+    end: "2026-09-13",
+    source: "https://www.misscircle.jp/",
+  },
+};
 
 function homeToday(now, overrides = {}) {
   return selectHomeToday({
@@ -130,11 +139,11 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
     assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].deadlineLabel, undefined);
-    assert.match(ended.voteActions[0].note ?? "", /3次審査/);
+    assert.match(ended.voteActions[0].note ?? "", /4次審査/);
     assert.ok(nowHero);
     assert.equal(nowHero.cta?.url, contest.entryUrl);
     assert.equal(nowHero.cta?.label, "ENTRY 734を応援する");
-    assert.match(nowHero.note ?? "", /3次審査/);
+    assert.match(nowHero.note ?? "", /4次審査/);
     assert.doesNotMatch(nowHero.title, /CAMPUS GIRLS|FinalSTAGE|Paton/i);
   });
 
@@ -369,11 +378,11 @@ describe("Gallery portrait-first order", () => {
 
 describe("confirmed Miss Circle third-round dates", () => {
   it("records official SCHEDULE dates and keeps ContestPhase date-only", () => {
-    assert.equal(contest.currentPhase?.name, "3次審査");
-    assert.equal(contest.currentPhase?.start, "2026-09-03");
-    assert.equal(contest.currentPhase?.end, "2026-09-13");
+    assert.equal(contest.currentPhase?.name, "4次審査");
+    assert.equal(contest.currentPhase?.start, "2026-10-02");
+    assert.equal(contest.currentPhase?.end, "2026-10-12");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-09-03");
+    assert.equal(contest.lastVerifiedAt, "2026-09-18");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 
     const afterPaton = selectHomeVoteAction({
@@ -383,16 +392,17 @@ describe("confirmed Miss Circle third-round dates", () => {
       now: END + 1,
     });
     assert.equal(afterPaton.url, contest.entryUrl);
-    assert.match(afterPaton.note ?? "", /9\/3/);
-    assert.match(afterPaton.note ?? "", /9\/13/);
+    assert.match(afterPaton.note ?? "", /10\/2/);
+    assert.match(afterPaton.note ?? "", /10\/12/);
   });
 
   it("makes 3rd-round support the HOME now-path from 9/2 through 9/13", () => {
-    const approaching = homeToday(Date.parse("2026-09-02T00:00:00+09:00"));
-    const during = homeToday(Date.parse("2026-09-03T12:00:00+09:00"));
-    const lastDay = homeToday(Date.parse("2026-09-13T23:59:00+09:00"));
-    const after = homeToday(Date.parse("2026-09-14T00:00:00+09:00"));
-    const stillPaton = homeToday(END);
+    const history = { contest: THIRD_ROUND_CONTEST };
+    const approaching = homeToday(Date.parse("2026-09-02T00:00:00+09:00"), history);
+    const during = homeToday(Date.parse("2026-09-03T12:00:00+09:00"), history);
+    const lastDay = homeToday(Date.parse("2026-09-13T23:59:00+09:00"), history);
+    const after = homeToday(Date.parse("2026-09-14T00:00:00+09:00"), history);
+    const stillPaton = homeToday(END, history);
     const webVoteUrl =
       "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734";
 
