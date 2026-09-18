@@ -12,7 +12,7 @@
 //     スタッフページ / 番組ページ（PR #11 で確認）
 //   - 放送枠 日曜 10:00–13:00: 同上
 //   - lastVerifiedAt: 番組情報を一次ソースで再確認した日付。
-//     2026-09-12 (JST) に番組表・番組ページ・スタッフ情報・トップを再確認。
+//     2026-09-19 (JST) に番組表・番組ページ・スタッフ情報・トップを再確認。
 //     放送枠そのものが変わった可能性がある場合は timetableUrl を見て更新する。
 //
 // 「毎週必ず本人が3時間出演している」とは断定しない。
@@ -34,7 +34,7 @@ export const radioProgram = {
     "https://fm-smw.jp/program/%E3%80%8E-%E6%B9%98%E5%8D%97%E3%82%B7%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%82%B5%E3%83%BC%E3%82%AF%E3%83%AB-%E3%80%8F%E3%80%80%EF%BC%83ssc",
   staffUrl: "https://fm-smw.jp/staff",
   timetableUrl: "https://fm-smw.jp/time-table",
-  lastVerifiedAt: "2026-09-12",
+  lastVerifiedAt: "2026-09-19",
 };
 
 const WEEKDAY_INDEX = {
