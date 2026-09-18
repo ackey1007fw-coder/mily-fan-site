@@ -134,9 +134,16 @@ describe("2026-08-26 CAMPUS GIRLS Paton vote", () => {
       ended.dashboardVoteButtons.some((action) => action.url === PATON_URL),
       false,
     );
-    assert.equal(ended.nowItems[0]?.origin, "contest");
-    assert.equal(ended.nowItems[0]?.cta?.url, contest.entryUrl);
-    assert.equal(ended.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
+    assert.equal(
+      ended.nowItems.some((item) => item.origin === "contest"),
+      false,
+    );
+    assert.equal(
+      ended.dashboardVoteButtons.some(
+        (action) => action.kind === "contest" && action.url === contest.entryUrl,
+      ),
+      true,
+    );
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
     assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
   });

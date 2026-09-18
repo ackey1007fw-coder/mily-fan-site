@@ -49,11 +49,19 @@ function formatConfirmedWindow(schedule: SupportEventSchedule): string | null {
 }
 
 function isThirdRoundPhase(phase: ContestPhase): boolean {
-  return phase.name.includes("3次審査");
+  return (
+    phase.name.includes("3次審査") &&
+    phase.start === "2026-09-03" &&
+    phase.end === "2026-09-13"
+  );
 }
 
 function isFourthRoundPhase(phase: ContestPhase): boolean {
-  return phase.name.includes("4次審査") || phase.name.includes("四次審査");
+  return (
+    (phase.name.includes("4次審査") || phase.name.includes("四次審査")) &&
+    phase.start === "2026-10-02" &&
+    phase.end === "2026-10-12"
+  );
 }
 
 /** ContestPhase の日付だけから `9/3〜9/13` を作る。時刻は入れない。 */

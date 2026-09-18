@@ -140,11 +140,13 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].deadlineLabel, undefined);
     assert.match(ended.voteActions[0].note ?? "", /4次審査/);
-    assert.ok(nowHero);
-    assert.equal(nowHero.cta?.url, contest.entryUrl);
-    assert.equal(nowHero.cta?.label, "ENTRY 734を応援する");
-    assert.match(nowHero.note ?? "", /4次審査/);
-    assert.doesNotMatch(nowHero.title, /CAMPUS GIRLS|FinalSTAGE|Paton/i);
+    assert.equal(nowHero, undefined);
+    assert.equal(
+      ended.dashboardVoteButtons.some(
+        (action) => action.url === contest.entryUrl,
+      ),
+      true,
+    );
   });
 
   it("keeps the live vote in the compact NOW cap even when SHOWROOM and radio are live", () => {
@@ -227,11 +229,12 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     );
     assert.equal(
       ended.dashboardVoteButtons.some((action) => action.url === contest.entryUrl),
+      true,
+    );
+    assert.equal(
+      ended.nowItems.some((item) => item.origin === "contest"),
       false,
     );
-    assert.equal(ended.nowItems[0]?.origin, "contest");
-    assert.equal(ended.nowItems[0]?.cta?.url, contest.entryUrl);
-    assert.equal(ended.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
   });
 

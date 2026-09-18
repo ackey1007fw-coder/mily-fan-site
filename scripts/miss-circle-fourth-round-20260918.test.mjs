@@ -8,6 +8,9 @@ import {
   supportEvents,
 } from "../src/data/supportEvents.ts";
 import { contestOfficialWindowLines } from "../src/lib/contestPhaseDisplay.ts";
+import { selectHomeVoteAction } from "../src/lib/homePortal.ts";
+import { selectContestNowHero } from "../src/lib/homeToday.ts";
+import { links } from "../src/data/links.ts";
 import { displayStatus } from "../src/lib/supportCalendar.ts";
 import { selectSupportNow } from "../src/lib/supportHub.ts";
 
@@ -46,6 +49,30 @@ describe("MISS CIRCLE 2026 fourth round", () => {
       "SHOWROOM審査 10/3 5:00〜10/12 21:59",
       "SHOWROOMは10/12 21:59終了",
     ]);
+    assert.deepEqual(
+      contestOfficialWindowLines({
+        ...contest.currentPhase,
+        start: "2027-10-02",
+        end: "2027-10-12",
+      }),
+      [],
+    );
+  });
+
+  it("keeps the fourth round out of HOME NOW until one day before it starts", () => {
+    const heroAt = (now) =>
+      selectContestNowHero({
+        contest,
+        liveVote: selectHomeVoteAction({ contest, supportEvents, links, now }),
+        now,
+      });
+
+    assert.equal(heroAt(Date.parse("2026-09-23T00:00:00+09:00")), null);
+    assert.equal(heroAt(Date.parse("2026-09-30T23:59:59+09:00")), null);
+    assert.equal(
+      heroAt(Date.parse("2026-10-01T00:00:00+09:00"))?.key,
+      "now:contest",
+    );
   });
 
   it("registers official windows without guessing fourth-round CTA URLs", () => {
