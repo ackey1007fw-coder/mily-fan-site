@@ -3905,3 +3905,11 @@ ffmpeg -i media/original/mily-b128-01-campus-girls-paton-15x-story.mp4 \
 - Latest / NEWS と Gallery が同じ公開MP4・posterを共有する。用途別コピーは作らない
 - `/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加
 - 1.5倍の 0:00–23:59 枠は画面から確認できないため作らない
+
+### b129: 2026年9月17日 SHOWROOM夜ラジオ配信の静止画1枚
+
+- オーナーが当該ラジオ配信で表示された画像1枚の掲載を明示依頼。LIVE STREAMの当該夜配信メモに限って使用し、NEWS / Galleryへ複製しない。
+- 保存録画の0:00:30の実フレームを採用。0:10:00、0:20:00、0:30:00、0:40:00でも同じ写真が表示されていることを比較確認。映像中の動く本人の姿ではなく、ラジオ配信の表示画像として説明する。
+- 公開ファイル: `public/media/live/mily-b129-01-night-radio.jpg`。640×360 JPEG。顔加工・生成・拡大・切り抜きなし。視聴者名やコメントUI、第三者の写り込みなし。EXIF / GPS / IPTC / XMPなし。
+- SHA256: `b227e0c20a20c3fac6e3656e88a0fb2e80a1b89c3ebc9640243a7dbf4249ca6a`。抽出した実フレームと同一バイト列を確認。
+- 代表画像1枚のみとし、同じ画像のgalleryやZIPで水増ししない。録画原本・音声・全文文字起こし・非公開の受け渡し情報は公開しない。
