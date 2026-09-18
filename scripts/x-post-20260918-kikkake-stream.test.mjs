@@ -240,7 +240,7 @@ describe("2026-09-18 X きっかけ配信案内 — Portal Feed and ops notes", 
     assert.match(section, /13:37 JST/);
     assert.match(section, /13:40〜14:40/);
     assert.match(section, /circle2026_0734/);
-    assert.match(section, /room_id=573253/);
+    assert.match(section, /ルームID 573253/);
     assert.match(section, /is_onlive=false/);
     assert.match(section, /next_live=TBD/);
     assert.match(section, /sameDayOrder: 10/);
