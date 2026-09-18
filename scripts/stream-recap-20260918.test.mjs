@@ -58,12 +58,12 @@ test("ランキングの確定範囲と配信時点の次枠を保持する", ()
   assert.doesNotMatch(day.nextNote, /23:00|22:00|必ず/);
 });
 
-test("未承認写真・生成コラージュ・非公開素材を公開データへ混ぜない", () => {
+test("実スクショのみを追加し、生成コラージュ・非公開素材を混ぜない", () => {
   for (const recap of [morning, day]) {
-    assert.equal(recap.image, undefined);
-    assert.equal(recap.gallery, undefined);
-    assert.equal(recap.galleryZip, undefined);
-    assert.match(recap.transcriptionNote, /静止画は掲載していません/);
+    assert.ok(recap.image);
+    assert.equal(recap.gallery?.length, 12);
+    assert.ok(recap.galleryZip);
+    assert.match(recap.transcriptionNote, /静止画は録画の実フレーム12枚/);
     assert.doesNotMatch(withoutApprovedSongLinks(JSON.stringify(recap)), /https?:\/\/|drive\.google|docs\.google|room_id|live_id|\.mkv|\.flac|[\\/]Users[\\/]|承認待ち|準備中|各SNSでも公開中|あっきー|アッキー/i);
   }
 });

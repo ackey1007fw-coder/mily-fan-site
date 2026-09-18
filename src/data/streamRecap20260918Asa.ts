@@ -1,5 +1,104 @@
-import type { StreamRecap } from "./streamRecaps.ts";
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
+
+const stills: StreamRecapImage[] = [
+  {
+    "src": "/media/live/mily-b130-01-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "手のひらを広げた笑顔のみりぃ",
+    "caption": "0:01:45 手のひらを広げた笑顔",
+    "downloadName": "みりぃ_20260918朝_01.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-02-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "両手を振る笑顔のみりぃ",
+    "caption": "0:07:45 両手を振る笑顔",
+    "downloadName": "みりぃ_20260918朝_02.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-03-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "顔の前で手を合わせる場面のみりぃ",
+    "caption": "0:10:46 顔の前で手を合わせる場面",
+    "downloadName": "みりぃ_20260918朝_03.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-04-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "髪に手を添えた笑顔のみりぃ",
+    "caption": "0:21:15 髪に手を添えた笑顔",
+    "downloadName": "みりぃ_20260918朝_04.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-05-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "カメラに近づいた笑顔のみりぃ",
+    "caption": "0:31:44 カメラに近づいた笑顔",
+    "downloadName": "みりぃ_20260918朝_05.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-06-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "ペンとボードを手にした場面のみりぃ",
+    "caption": "0:43:42 ペンとボードを手にした場面",
+    "downloadName": "みりぃ_20260918朝_06.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-07-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "あごに手を添えた表情のみりぃ",
+    "caption": "0:52:45 あごに手を添えた表情",
+    "downloadName": "みりぃ_20260918朝_07.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-08-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "手書きボードを見せる笑顔のみりぃ",
+    "caption": "1:18:15 手書きボードを見せる笑顔",
+    "downloadName": "みりぃ_20260918朝_08.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-09-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "ボードに顔を寄せた笑顔のみりぃ",
+    "caption": "1:22:43 ボードに顔を寄せた笑顔",
+    "downloadName": "みりぃ_20260918朝_09.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-10-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "胸元で手を組む笑顔のみりぃ",
+    "caption": "1:30:15 胸元で手を組む笑顔",
+    "downloadName": "みりぃ_20260918朝_10.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-11-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "片手を振る笑顔のみりぃ",
+    "caption": "1:43:45 片手を振る笑顔",
+    "downloadName": "みりぃ_20260918朝_11.jpg"
+  },
+  {
+    "src": "/media/live/mily-b130-12-morning.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "終盤の笑顔のみりぃ",
+    "caption": "1:46:45 終盤の笑顔",
+    "downloadName": "みりぃ_20260918朝_12.jpg"
+  }
+];
 
 export const streamRecap20260918Asa: StreamRecap = {
   id: "2026-09-18-asa-showroom",
@@ -17,6 +116,9 @@ export const streamRecap20260918Asa: StreamRecap = {
     youtubeUrl: "https://www.youtube.com/watch?v=nAjJluQCSGE",
     youtubeVersionNote: "原曲歌手も参加する「よしお兄さんとあそぼう!」の企画動画です。原盤音源とは異なります。",
   }],
+  image: stills[3],
+  gallery: stills,
+  galleryZip: { src: "/media/live/mily-b130-morning-stills.zip", filename: "みりぃ_20260918朝_スクショ12枚.zip", label: "12枚まとめて保存" },
   highlights: [
     { timestamp: "0:01:38", title: "新しい出会いを求めて朝5時に", body: "初めての人に会いたいと思い、早朝の配信に挑戦しました。いつもの人も集まってくれたことを喜び、初訪問や再訪問の人へ繰り返しあいさつしました。" },
     { timestamp: "0:12:03", title: "初めてのアバターを楽しみに", body: "初めて獲得したアバター権に触れ、デザインを再提出したと説明しました。配布後にみんなでアバター撮影会をしたいと話し、完成を楽しみにしていました。" },
@@ -51,7 +153,7 @@ export const streamRecap20260918Asa: StreamRecap = {
   verifiedAt: "2026-09-18",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    stills: "静止画は掲載していません。",
+    stills: "静止画は録画の実フレーム12枚を掲載しています。",
     extra: "録画開始記録5:01:12、実測6467.158秒から表示を5:01頃・約108分に丸めています。保存録画範囲全体を54チャンク・2401区間の自動文字起こしで確認しました。配信全編の完全収録は保証しません。タイムスタンプは録画先頭からの目安です。歌詞全文や歌唱動画は掲載していません。",
   }),
 };
