@@ -15,7 +15,7 @@ test("9/17夜は同日の朝より前へ一度だけ登録する", () => {
 });
 
 test("指定されたラジオ配信画像1枚のみを掲載し水増ししない", async () => {
-  assert.equal(recap.image?.src, "/media/live/mily-b128-01-night-radio.jpg");
+  assert.equal(recap.image?.src, "/media/live/mily-b129-01-night-radio.jpg");
   assert.equal(recap.image?.width, 640);
   assert.equal(recap.image?.height, 360);
   assert.match(recap.image?.caption ?? "", /ラジオ配信.*表示/);

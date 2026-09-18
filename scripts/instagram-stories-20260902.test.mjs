@@ -259,8 +259,8 @@ describe("2026-09-02 Instagram Story — Latest / NEWS", () => {
     assert.equal(selectActivityMedia("live-stream", priorMediaSources)[0]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
     assert.equal(selectActivityMedia("live-stream", priorMediaSources)[1]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
     assert.equal(selectActivityMedia("live-stream", priorMediaSources)[2], oyasumilyStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b63-01-campus-girls-prelim-final-result");
-    assert.equal(selectActivityMedia("campus-girls")[2], patonSecondStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b63-01-campus-girls-prelim-final-result");
+    assert.equal(selectActivityMedia("campus-girls")[3], patonSecondStoryVideo);
     assert.equal(campusNews.some((entry) => entry.id === OYASUMILY_NEWS_ID), false);
     assert.equal(liveNews.some((entry) => entry.id === PATON_SECOND_NEWS_ID), false);
     assert.equal(radioNews.some((entry) => entry.id === OYASUMILY_NEWS_ID), false);

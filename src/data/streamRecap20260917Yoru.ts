@@ -2,7 +2,7 @@ import type { StreamRecap } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
 
 const radioStill = {
-  src: "/media/live/mily-b128-01-night-radio.jpg",
+  src: "/media/live/mily-b129-01-night-radio.jpg",
   width: 640,
   height: 360,
   alt: "ラジオ配信中に表示されていた、カメラを見つめるみりぃの画像",

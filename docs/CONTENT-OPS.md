@@ -9,14 +9,26 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-18確認: Instagram Story「Paton投票本日1.5倍DAY」
+
+- NEWS ID: `2026-09-18-campus-girls-paton-15x-story`。Latest / NEWS と CAMPUS GIRLS の関連NEWS・Galleryへ掲載。
+- オーナーが当該Instagram Story動画の掲載を依頼。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。
+- batch b128-01 動画を Latest / NEWS と Gallery で共有。本人肉声を保持した公開派生（H.264 Constrained Baseline + AAC、`+faststart`、metadata除去）。
+- 画面上部の「キャンガール」とリンクスタンプ「Paton投票本日1.5倍DAY」を本文と message に引用。発話の全文は聞き取りが確定しないため引用しない。
+- 追加CTAは本選EX vol.1 の確認済み Paton本人ページ（`https://paton.jp/event/entrant/11866`）。SupportEventの期間（2026-09-16 18:00〜2026-09-22 23:59 JST）終了後に自動で消える。予選の 11380 は使わない。
+- 1.5倍の 0:00–23:59 の枠は作らない。画面から確認できないため、新しい SupportEvent / live note は足さない。
+- activityIds: campus-girls。sameDayOrder なし。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加。
+- 過去NEWS fixturesは新項目を除外して当時の検証範囲を維持する。
+
 ## 2026-09-18確認: 9月17日夜ラジオ配信
 
 - `streamRecap20260917Yoru.ts` をLIVE STREAMへ追加し、同日の朝配信より前に配置。
 - 保存録画は22:09:50開始、メディア実測2480.991秒。表示は22:10頃〜約41分とし、録画範囲全体の自動文字起こし681区間を確認。全編の手動聴取は実施していない。
 - 久しぶりのラジオ形式、四次審査前のルーム強化、まかない、お化け屋敷、ラジオパーソナリティの経験を要約。
 - 終盤に13位から1位までランキングを読み上げたことを確認し、個人名は掲載しない。配信時点では翌9月18日午前5時の配信を案内しており、現在予定へは自動転記しない。
-- ラジオ配信中に表示されていたb128の画像1枚のみを掲載。同一画像のgalleryやZIPは作らない。NEWS / Galleryへ複製しない。
+- ラジオ配信中に表示されていたb129の画像1枚のみを掲載。同一画像のgalleryやZIPは作らない。NEWS / Galleryへ複製しない。
 - 視聴者名、制作者の職業、健康・家族・ペットの細部、他者の私的な事情、全文文字起こし、録画原本、非公開受け渡し情報は掲載しない。歌唱曲は確定できず追加しない。
+
 
 ## 2026-09-17確認: 9月16日夜配信の進出報告とおしゃべり
 

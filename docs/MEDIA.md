@@ -3844,10 +3844,72 @@ Latest / NEWSのみ。公開CDNのhotlink、iframe、Gallery追加は行わな�
 - 一括保存: `public/media/live/mily-b127-night-stills.zip`。ZIPは掲載JPEG10枚のみ。
 - 顔加工・生成・拡大なし。録画原本、音声、全文文字起こし、非公開受け渡し情報は公開しない。
 
-### b128: 2026年9月17日 SHOWROOM夜ラジオ配信の静止画1枚
+## 素材台帳（batch b128 / 受領日 2026-09-18）
+
+2026-09-18 朝の Instagram Story。CAMPUS GIRLS 2027 本選EX vol.1 の Paton投票が本日1.5倍DAYであることの案内。Latest / NEWS と Gallery が同じ公開派生を共有する独立動画。Drive Gallery（b02）には含めない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b128-01 | `gallery/mily-b128-01-campus-girls-paton-15x-story.mp4` | キャンガール／Paton投票本日1.5倍DAYの案内。720×1280 / 11.700秒 / 30fps / 351フレーム / H.264 Constrained Baseline + AAC | ✅ Latest / NEWS + Gallery + CAMPUS GIRLS Activity |
+| b128-01 poster | `gallery/mily-b128-01-campus-girls-paton-15x-story-poster.jpg` | 公開MP4の3.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナーが当該Story動画の掲載を依頼。SNSから取得していない）
+- Instagram Story / source date: `2026-09-18` / 恒久permalinkなし
+- 元素材は `media/original/mily-b128-01-campus-girls-paton-15x-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `2f565bd3f4990df004f266d7c55cea5d7cf6cb4a188cc82377f3dae2e4b7ff15`
+- 1,557,879 bytes / HEVC **Main** / **720×1280** / 30fps /
+  351 frames / **11.700秒** / yuv420p
+- 音声: HE-AAC / 44.1kHz / stereo。本人肉声があるため公開派生でも AAC を保持する
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+- 画面上の「キャンガール」「Paton投票本日1.5倍DAY」スタンプと下部の再投稿表示は元動画のまま維持し、cropしていない
+- 識別可能な第三者は見当たらない
+
+source date `2026-09-18` は、画面の「本日」、金曜の提供タイミング、元動画 container の creation_time（2026-09-17T23:02:08Z = 2026-09-18 08:02 JST）と、オーナーがその直後に提供したことによる。
+
+### 公開MP4
+
+- sha256: `df6bf59556904d686111a8dee909339011d03c1093c9654251e8df0c08a82863`
+- 1,521,893 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  30fps / 351 frames / 11.700秒 / yuv420p / `has_b_frames` 0 /
+  AAC-LC 128k / 44.1kHz stereo
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- `+faststart`確認済み（`moov` が `mdat` より前）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_metadata:s:a -1` / `-map_chapters -1`）。元の`creation_time`と
+  `Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b128-01-campus-girls-paton-15x-story.mp4 \
+  -map 0:v:0 -map 0:a:0 \
+  -map_metadata -1 -map_metadata:s:v -1 -map_metadata:s:a -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough \
+  -c:a aac -b:a 128k \
+  -movflags +faststart \
+  public/media/gallery/mily-b128-01-campus-girls-paton-15x-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の3.0秒地点の実フレーム。前髪に触れるポーズと画面上の案内が読みやすい
+- sha256: `3818258c20a2095d209470b8c8d47ea59cac8083d9a38142368711227363623e`
+- 57,485 bytes / 720×1280 JPEG。EXIF / IPTC / XMP / ICC なし
+- Latest / NEWS と Gallery が同じ公開MP4・posterを共有する。用途別コピーは作らない
+- `/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加
+- 1.5倍の 0:00–23:59 枠は画面から確認できないため作らない
+
+### b129: 2026年9月17日 SHOWROOM夜ラジオ配信の静止画1枚
 
 - オーナーが当該ラジオ配信で表示された画像1枚の掲載を明示依頼。LIVE STREAMの当該夜配信メモに限って使用し、NEWS / Galleryへ複製しない。
 - 保存録画の0:00:30の実フレームを採用。0:10:00、0:20:00、0:30:00、0:40:00でも同じ写真が表示されていることを比較確認。映像中の動く本人の姿ではなく、ラジオ配信の表示画像として説明する。
-- 公開ファイル: `public/media/live/mily-b128-01-night-radio.jpg`。640×360 JPEG。顔加工・生成・拡大・切り抜きなし。視聴者名やコメントUI、第三者の写り込みなし。EXIF / GPS / IPTC / XMPなし。
+- 公開ファイル: `public/media/live/mily-b129-01-night-radio.jpg`。640×360 JPEG。顔加工・生成・拡大・切り抜きなし。視聴者名やコメントUI、第三者の写り込みなし。EXIF / GPS / IPTC / XMPなし。
 - SHA256: `b227e0c20a20c3fac6e3656e88a0fb2e80a1b89c3ebc9640243a7dbf4249ca6a`。抽出した実フレームと同一バイト列を確認。
 - 代表画像1枚のみとし、同じ画像のgalleryやZIPで水増ししない。録画原本・音声・全文文字起こし・非公開の受け渡し情報は公開しない。
