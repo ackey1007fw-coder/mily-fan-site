@@ -17,7 +17,7 @@ test("9/18は昼、朝、9/17夜の順で各回を一度だけ登録する", () 
 });
 
 test("保存録画の範囲全体と手動聴取・完全収録を区別する", () => {
-  for (const [recap, duration, count, label] of [[morning, 6467.158, 2401, "5:01頃〜 約108分"], [day, 8108.622, 282, "13:39頃〜 約135分"]]) {
+  for (const [recap, duration, count, label] of [[morning, 6467.158, 2401, "5:01頃〜 約108分"], [day, 8108.622, 282, "13:40頃〜 約135分"]]) {
     assert.equal(recap.broadcastLabel, label);
     assert.ok(recap.transcriptionNote.includes(`${duration}秒`));
     assert.ok(recap.transcriptionNote.includes(`${count}区間`));
