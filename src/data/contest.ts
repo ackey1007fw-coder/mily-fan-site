@@ -47,12 +47,17 @@ export const contest: Contest = {
   //     SHOWROOM無料ギフト審査・イベント審査 09/03 05:00〜09/12 21:59 を再確認。
   //     ContestPhase は日付のみ。時刻は supportEvents 側。
   //   2026-09-03: 三次審査の開始を確認。現在のフェーズ表示を「3次審査」へ更新。
+  //   2026-09-16: 主催者の四次審査進出者一覧と ENTRY 734 ページで進出を確認。
+  //   2026-09-18: 主催者公式 SCHEDULE で四次審査 10/2〜10/12、
+  //     WEB投票 10/2 12:00〜10/12 23:59、SHOWROOM審査
+  //     10/3 05:00〜10/12 21:59 を再確認。ContestPhase は日付のみ、
+  //     時刻は supportEvents 側で保持する。
   // 「最終日」表記から締切日を推定して end に入れることはしない。
   currentPhase: {
-    name: "3次審査",
-    start: "2026-09-03",
-    end: "2026-09-13",
+    name: "4次審査",
+    start: "2026-10-02",
+    end: "2026-10-12",
     source: "https://www.misscircle.jp/",
   },
-  lastVerifiedAt: "2026-09-03",
+  lastVerifiedAt: "2026-09-18",
 };

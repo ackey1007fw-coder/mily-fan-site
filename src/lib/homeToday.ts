@@ -252,13 +252,13 @@ export function selectHomeDashboardVoteButtons(
 }
 
 /**
- * Paton 終了後（確認済み投票が ended）、または開始前日以内から終了日までを
- * HOME の「今これ」にする。開始時刻や SHOWROOM 審査時間は作らない。
+ * 開始前日以内から終了日までを HOME の「今これ」にする。
+ * 過去の投票終了だけを理由に、遠い将来の審査を NOW 扱いしない。
+ * 開始時刻や SHOWROOM 審査時間は作らない。
  * 期間中の support-event 投票がある間は出さない。
  */
 export function selectContestNowHero(input: {
   contest: Contest;
-  supportEvents: SupportEvent[];
   liveVote: HomeVoteAction;
   now: number;
 }): SupportNowItem | null {
@@ -276,15 +276,8 @@ export function selectContestNowHero(input: {
   const status = displayStatus(schedule, input.now);
   if (status === "ended" || status === "date-pending") return null;
   if (status === "upcoming") {
-    const voteAlreadyEnded = input.supportEvents.some(
-      (event) =>
-        event.kind === "vote" &&
-        displayStatus(event.schedule, input.now) === "ended",
-    );
-    if (!voteAlreadyEnded) {
-      const startAt = nextDisplayStatusBoundary(schedule, input.now);
-      if (startAt === null || startAt - input.now > TOKYO_DAY_MS) return null;
-    }
+    const startAt = nextDisplayStatusBoundary(schedule, input.now);
+    if (startAt === null || startAt - input.now > TOKYO_DAY_MS) return null;
   }
 
   return {
@@ -322,7 +315,6 @@ export function selectHomeToday(input: {
   const liveVote = selectHomeVoteAction(voteInput);
   const contestHero = selectContestNowHero({
     contest: input.contest,
-    supportEvents: input.supportEvents,
     liveVote,
     now: input.now,
   });

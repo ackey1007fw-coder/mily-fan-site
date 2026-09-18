@@ -137,8 +137,8 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
       assert.equal(event.note.toLowerCase().includes("millie"), false);
     }
 
-    assert.equal(supportEvents.length, 10);
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 3);
+    assert.equal(supportEvents.length, 12);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 4);
     assert.deepEqual(events, []);
   });
 
@@ -218,7 +218,13 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     assert.equal(nextSupportEventBoundary(SNS_END), SNS_END + 1);
     assert.equal(nextSupportEventBoundary(SNS_END + 1), PATON_END + 1);
     assert.equal(nextSupportEventBoundary(PATON_END + 1), VOL2_START);
-    assert.equal(nextSupportEventBoundary(VOL2_START), VOL2_END + 1);
+    const fourthVoteDay = Date.parse("2026-10-02T00:00:00+09:00");
+    const fourthWebStart = Date.parse("2026-10-02T12:00:00+09:00");
+    const fourthShowroomStart = Date.parse("2026-10-03T05:00:00+09:00");
+    assert.equal(nextSupportEventBoundary(VOL2_START), fourthVoteDay);
+    assert.equal(nextSupportEventBoundary(fourthVoteDay), fourthWebStart);
+    assert.equal(nextSupportEventBoundary(fourthWebStart), fourthShowroomStart);
+    assert.equal(nextSupportEventBoundary(fourthShowroomStart), VOL2_END + 1);
     assert.equal(nextSupportEventBoundary(VOL6_END), VOL6_END + 1);
     assert.equal(nextSupportEventBoundary(VOL6_END + 1), null);
   });

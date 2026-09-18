@@ -1,5 +1,7 @@
 import type { ContestPhase } from "../data/contest.ts";
 import {
+  missCircleFourthRoundShowroomReview,
+  missCircleFourthRoundWebVote,
   missCircleThirdRoundShowroomReview,
   missCircleThirdRoundWebVote,
   type SupportEventSchedule,
@@ -47,7 +49,19 @@ function formatConfirmedWindow(schedule: SupportEventSchedule): string | null {
 }
 
 function isThirdRoundPhase(phase: ContestPhase): boolean {
-  return phase.name.includes("3次審査");
+  return (
+    phase.name.includes("3次審査") &&
+    phase.start === "2026-09-03" &&
+    phase.end === "2026-09-13"
+  );
+}
+
+function isFourthRoundPhase(phase: ContestPhase): boolean {
+  return (
+    (phase.name.includes("4次審査") || phase.name.includes("四次審査")) &&
+    phase.start === "2026-10-02" &&
+    phase.end === "2026-10-12"
+  );
 }
 
 /** ContestPhase の日付だけから `9/3〜9/13` を作る。時刻は入れない。 */
@@ -62,13 +76,34 @@ export function contestPhaseHeading(phase: ContestPhase): string {
 }
 
 /**
- * 三次審査の公式3本。時刻は supportEvents から読む。
- * ギフト審査とイベント審査は同じ窓でも行を分ける。
+ * 現在フェーズの公式審査時間。時刻は supportEvents から読む。
+ * 三次審査はギフト審査とイベント審査を同じ窓でも行を分ける。
  */
 export function contestOfficialWindowLines(
   phase: ContestPhase | null | undefined,
 ): string[] {
-  if (!phase || !isThirdRoundPhase(phase)) return [];
+  if (!phase) return [];
+
+  if (isFourthRoundPhase(phase)) {
+    const web = formatConfirmedWindow(missCircleFourthRoundWebVote.schedule);
+    const showroom = formatConfirmedWindow(
+      missCircleFourthRoundShowroomReview.schedule,
+    );
+    const lines: string[] = [];
+    if (web) lines.push(`WEB投票 ${web}`);
+    if (showroom) {
+      lines.push(`SHOWROOM審査 ${showroom}`);
+      const end = confirmedPeriodBounds(
+        missCircleFourthRoundShowroomReview.schedule,
+      )?.end;
+      if (end) {
+        lines.push(`SHOWROOMは${formatShortTokyoDate(end.date)} ${formatClock(end)}終了`);
+      }
+    }
+    return lines;
+  }
+
+  if (!isThirdRoundPhase(phase)) return [];
 
   const web = formatConfirmedWindow(missCircleThirdRoundWebVote.schedule);
   const showroom = formatConfirmedWindow(

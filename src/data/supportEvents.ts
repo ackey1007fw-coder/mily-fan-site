@@ -207,6 +207,47 @@ export const missCircleThirdRoundShowroomReview: SupportEvent = {
   priority: 80,
 };
 
+export const missCircleFourthRoundWebVote: SupportEvent = {
+  id: "miss-circle-2026-4th-web-vote",
+  activityId: "miss-circle",
+  kind: "vote",
+  title: "WEB投票",
+  shareText:
+    "MISS CIRCLE CONTEST 2026 4次審査のWEB投票をお願いします🗳️",
+  shareHashtag: "#ミスサークル2026",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-10-02T12:00:00+09:00",
+    // 公式の「23:59まで」を秒単位の終了境界へ正規化する。
+    end: "2026-10-12T23:59:59+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  // 四次審査の投票先は未発表。ENTRY 734以外のCTAを推測しない。
+  source: "https://www.misscircle.jp/",
+  verifiedAt: "2026-09-18",
+  priority: 90,
+};
+
+export const missCircleFourthRoundShowroomReview: SupportEvent = {
+  id: "miss-circle-2026-4th-showroom-review",
+  activityId: "miss-circle",
+  kind: "stream-event",
+  title: "SHOWROOM審査",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-10-03T05:00:00+09:00",
+    // 公式の「21:59まで」を秒単位の終了境界へ正規化する。
+    end: "2026-10-12T21:59:59+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  // 四次審査のイベントページは未発表。三次審査URLを流用しない。
+  source: "https://www.misscircle.jp/",
+  verifiedAt: "2026-09-18",
+  priority: 80,
+};
+
 export const campusGirlsFinalsExSnsReview: SupportEvent = {
   id: "campus-girls-finals-ex-sns-vol1-2026",
   activityId: "campus-girls",
@@ -341,6 +382,8 @@ export const supportEvents: SupportEvent[] = [
   campusGirlsFinalStagePatonVote,
   missCircleThirdRoundWebVote,
   missCircleThirdRoundShowroomReview,
+  missCircleFourthRoundWebVote,
+  missCircleFourthRoundShowroomReview,
   campusGirlsFinalsExSnsReview,
   campusGirlsFinalsExPatonReview,
   campusGirlsFinalsExTwo,
