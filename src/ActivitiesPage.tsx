@@ -702,6 +702,26 @@ function StreamRecapArticle({
                   {highlight.title}
                 </h5>
                 <p className="mt-2 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+                {highlight.clip ? (
+                  <figure className="mt-3 overflow-hidden rounded-xl bg-paper-card">
+                    <video
+                      className="h-auto w-full bg-black object-contain"
+                      width={highlight.clip.width}
+                      height={highlight.clip.height}
+                      controls
+                      playsInline
+                      preload="none"
+                      poster={highlight.clip.poster}
+                      aria-label={`みりぃの${highlight.title}の短い動画`}
+                    >
+                      <source src={highlight.clip.src} type="video/mp4" />
+                      動画を再生できない環境です。
+                    </video>
+                    <figcaption className="px-3 py-2 text-xs leading-5 text-ink-muted">
+                      録画内 {highlight.clip.sourceTimestamp}頃から・約{Math.round(highlight.clip.durationSeconds)}秒
+                    </figcaption>
+                  </figure>
+                ) : null}
                 {highlight.quote ? (
                   <blockquote className="mt-3 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
                     {highlight.quote}

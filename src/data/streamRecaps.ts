@@ -1,3 +1,4 @@
+import { streamRecap20260919Asa } from "./streamRecap20260919Asa.ts";
 import { streamRecap20260918Day } from "./streamRecap20260918Day.ts";
 import { streamRecap20260918Asa } from "./streamRecap20260918Asa.ts";
 import { streamRecap20260917Yoru } from "./streamRecap20260917Yoru.ts";
@@ -99,6 +100,8 @@ export type StreamRecapHighlight = {
   title: string;
   body: string;
   quote?: string;
+  /** 本人の自己紹介・トークなど、確認済みの短い実録画抜粋。 */
+  clip?: StreamRecapClip;
 };
 
 export type StreamRecapGoal = {
@@ -129,8 +132,8 @@ export type StreamRecapGalleryZip = {
   label: string;
 };
 
-export type StreamRecapSongClip = {
-  /** LIVE SONG CLIPS 用の短い歌唱抜粋。録画原本全編ではない。 */
+export type StreamRecapClip = {
+  /** 確認済みの短い抜粋。録画原本全編ではない。 */
   src: string;
   poster: string;
   width: number;
@@ -139,6 +142,9 @@ export type StreamRecapSongClip = {
   /** 録画先頭からのクリップ開始位置の目安。 */
   sourceTimestamp: string;
 };
+
+/** LIVE SONG CLIPS 用の短い歌唱抜粋。 */
+export type StreamRecapSongClip = StreamRecapClip;
 
 export type StreamRecapSong = {
   title: string;
@@ -178,6 +184,7 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260919Asa,
   streamRecap20260918Day,
   streamRecap20260918Asa,
   streamRecap20260917Yoru,
@@ -216,6 +223,7 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260919Asa,
   streamRecap20260918Day,
   streamRecap20260918Asa,
   streamRecap20260917Yoru,

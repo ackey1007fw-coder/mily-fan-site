@@ -212,6 +212,24 @@ try {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
         }
+        for (const highlight of latest.highlights.filter((item) => item.clip)) {
+          const clip = highlight.clip;
+          const video = recap.getByLabel(`みりぃの${highlight.title}の短い動画`, { exact: true });
+          await video.scrollIntoViewIfNeeded();
+          assert.equal(await video.getAttribute("poster"), clip.poster);
+          assert.equal(await video.getAttribute("preload"), "none");
+          assert.equal(await video.getAttribute("autoplay"), null);
+          assert.equal(await video.locator("source").getAttribute("src"), clip.src);
+          // Muting applies only to this browser test. The published clip retains its audio.
+          await video.evaluate(async (node) => { node.muted = true; await node.play(); });
+          await page.waitForFunction((src) => [...document.querySelectorAll("video")].some(
+            (node) => node.querySelector("source")?.getAttribute("src") === src && node.currentTime > 0.1,
+          ), clip.src);
+          assert.deepEqual(await video.evaluate((node) => [node.videoWidth, node.videoHeight]), [clip.width, clip.height]);
+          assert.ok(await video.evaluate((node) => !node.error && node.controls && node.playsInline));
+          await video.evaluate((node) => node.pause());
+          await overflow();
+        }
         for (const still of latest.gallery ?? []) {
           const photo = recap.locator(`img[src="${still.src}"]`).last();
           await photo.scrollIntoViewIfNeeded();
