@@ -56,10 +56,11 @@ describe("2026-09-18 X きっかけ配信案内 — Latest entry", () => {
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(news[0], entry);
-    assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, SAME_DAY_STORY_ID);
-    assert.equal(ordered[2]?.id, "2026-09-16-miss-circle-fourth-round");
+    assert.equal(news[1], entry);
+    assert.equal(ordered[1], entry);
+    assert.equal(ordered[0]?.id, "2026-09-19-showroom-room-name-fourth");
+    assert.equal(ordered[2]?.id, SAME_DAY_STORY_ID);
+    assert.equal(ordered[3]?.id, "2026-09-16-miss-circle-fourth-round");
     assert.equal(entry.date, "2026-09-18");
     assert.equal(entry.sameDayOrder, 10);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
@@ -116,7 +117,8 @@ describe("2026-09-18 X きっかけ配信案内 — Latest entry", () => {
 describe("2026-09-18 X きっかけ配信案内 — scope", () => {
   it("surfaces on the live-stream Activity only", () => {
     const liveNews = selectActivityNews("live-stream", news, news.length);
-    assert.equal(liveNews[0]?.id, NEWS_ID);
+    assert.equal(liveNews[0]?.id, "2026-09-19-showroom-room-name-fourth");
+    assert.equal(liveNews[1]?.id, NEWS_ID);
     assert.equal(
       selectActivityNews("campus-girls", news, news.length)[0]?.id,
       SAME_DAY_STORY_ID,

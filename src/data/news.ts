@@ -219,6 +219,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-19-showroom-room-name-fourth",
+    date: "2026-09-19",
+    activityIds: ["miss-circle", "live-stream"],
+    title: "SHOWROOMのルーム名が「10/2〜4次」に",
+    body: "9月19日、みりぃのSHOWROOMルーム表示名が「10/2〜4次🩵三橋莉子🍅✨(みりぃ)#ミスサークル2026」になっていることを確認しました。表示名には4次と、開始のめやすとして10/2〜と出ています。",
+    source: "https://www.showroom-live.com/r/circle2026_0734",
+    sourceLabel: "SHOWROOMルームを見る",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "SHOWROOMルーム名",
+      text: "10/2〜4次🩵三橋莉子🍅✨(みりぃ)#ミスサークル2026",
+    },
+  },
+  {
     id: "2026-09-18-kikkake-and-regular-stream",
     date: "2026-09-18",
     sameDayOrder: 10,
