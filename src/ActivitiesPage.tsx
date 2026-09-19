@@ -1,3 +1,4 @@
+import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
 import { useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
@@ -702,6 +703,7 @@ function StreamRecapArticle({
                   {highlight.title}
                 </h5>
                 <p className="mt-2 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+                {highlight.socialClip ? <StreamSocialClipLinks clip={highlight.socialClip} id={`social-${recap.id}-${highlight.timestamp.replace(/:/g, "")}`} /> : null}
                 {highlight.clip ? (
                   <figure className="mt-3 overflow-hidden rounded-xl bg-paper-card">
                     <video

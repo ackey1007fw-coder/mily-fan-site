@@ -95,6 +95,14 @@ export {
   streamRecapRadioStill,
 } from "./streamRecapRules.ts";
 
+export type StreamRecapSocialClip = {
+  title: string;
+  /** 見どころ全体の時刻ではなく、SNSに公開した抜粋の開始位置。 */
+  sourceTimestamp: string;
+  durationSeconds: number;
+  links: { platform: "youtube" | "tiktok" | "instagram" | "x"; url: string }[];
+};
+
 export type StreamRecapHighlight = {
   timestamp: string;
   title: string;
@@ -102,6 +110,8 @@ export type StreamRecapHighlight = {
   quote?: string;
   /** 本人の自己紹介・トークなど、確認済みの短い実録画抜粋。 */
   clip?: StreamRecapClip;
+  /** 公開結果を確認した本人トーク投稿への導線。歌唱・原曲リンクとは別。 */
+  socialClip?: StreamRecapSocialClip;
 };
 
 export type StreamRecapGoal = {

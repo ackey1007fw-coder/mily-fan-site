@@ -1,3 +1,4 @@
+import { withoutApprovedTalkLinks } from "./approved-talk-links.mjs";
 import assert from "node:assert/strict";
 import test from "node:test";
 import { streamRecaps, streamRecap20260918Asa as morning, streamRecap20260918Day as day, streamRecap20260917Yoru } from "../src/data/streamRecaps.ts";
@@ -64,6 +65,6 @@ test("実スクショのみを追加し、生成コラージュ・非公開素�
     assert.equal(recap.gallery?.length, 12);
     assert.ok(recap.galleryZip);
     assert.match(recap.transcriptionNote, /静止画は録画の実フレーム12枚/);
-    assert.doesNotMatch(withoutApprovedSongLinks(JSON.stringify(recap)), /https?:\/\/|drive\.google|docs\.google|room_id|live_id|\.mkv|\.flac|[\\/]Users[\\/]|承認待ち|準備中|各SNSでも公開中|あっきー|アッキー/i);
+    assert.doesNotMatch(withoutApprovedTalkLinks(withoutApprovedSongLinks(JSON.stringify(recap))), /https?:\/\/|drive\.google|docs\.google|room_id|live_id|\.mkv|\.flac|[\\/]Users[\\/]|承認待ち|準備中|各SNSでも公開中|あっきー|アッキー/i);
   }
 });

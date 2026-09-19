@@ -112,7 +112,29 @@ export const streamRecap20260918Day: StreamRecap = {
   gallery: stills,
   galleryZip: { src: "/media/live/mily-b131-day-stills.zip", filename: "みりぃ_20260918昼_スクショ12枚.zip", label: "12枚まとめて保存" },
   highlights: [
-    { timestamp: "0:00:25", title: "初めてのきっかけ配信", body: "配信49日目に、初めての「きっかけ配信」に挑戦しました。操作に戸惑いながらも、初訪問の人へ自己紹介し、コメントで話しかけてほしいと呼びかけました。" },
+    { timestamp: "0:00:25", title: "初めてのきっかけ配信", body: "配信49日目に、初めての「きっかけ配信」に挑戦しました。操作に戸惑いながらも、初訪問の人へ自己紹介し、コメントで話しかけてほしいと呼びかけました。", socialClip: {
+    "title": "はじめまして！みりぃです。",
+    "sourceTimestamp": "0:01:11",
+    "durationSeconds": 27.85,
+    "links": [
+        {
+            "platform": "youtube",
+            "url": "https://www.youtube.com/watch?v=wMWy1Dmaq9E"
+        },
+        {
+            "platform": "tiktok",
+            "url": "https://www.tiktok.com/@ackeytan_/video/7687035549944646929"
+        },
+        {
+            "platform": "instagram",
+            "url": "https://www.instagram.com/reel/Ddct1s_lHEK/"
+        },
+        {
+            "platform": "x",
+            "url": "https://x.com/ackey_RiRi_supp/status/2101106012770181423"
+        }
+    ]
+} },
     { timestamp: "0:08:28", title: "ラジオで培った力を試す", body: "ラジオパーソナリティの経験を生かしたいと話しました。今回はナビゲーターを設定せず、自分のトークで新しい人と交流する腕試しにしたと説明しました。" },
     { timestamp: "0:11:50", title: "フォローのお礼はカードに", body: "配信中にフォローしてくれた人へ、メッセージカードでお礼を伝える企画を紹介しました。ファンルームにも載せる予定だと案内し、次も遊びに来てほしいと呼びかけました。" },
     { timestamp: "0:45:29", title: "二度、三度と知ってほしい", body: "一度の訪問だけでは人柄を知りきれないので、二度、三度と来てほしいと話しました。きっかけを入り口に、自分のことを知ってもらいたいと伝えました。" },
