@@ -1,3 +1,4 @@
+import { withoutApprovedTalkLinks } from "./approved-talk-links.mjs";
 // LIVE STREAM の配信メモを、どのエージェントが書いても同じ形になるよう検査する。
 // ルール本文は docs/LIVE-STREAM-RECAP.md。数値を変えるときは両方を同じPRで直す。
 import assert from "node:assert/strict";
@@ -327,7 +328,7 @@ describe("配信メモの統一ルール", () => {
         recap.transcriptionNote,
         recap.nextNote,
         ...recap.ranking,
-        ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
+        ...recap.highlights.flatMap(({ title, body, quote, socialClip }) => [title, body, quote ?? "", socialClip?.title ?? "", socialClip?.sourceTimestamp ?? ""]),
         ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
         ...recap.timeline.map(({ label }) => label),
         ...[recap.image, ...(recap.gallery ?? [])]
@@ -339,8 +340,8 @@ describe("配信メモの統一ルール", () => {
       .join("\n");
     assert.doesNotMatch(publishedText, /\.(mp3|aac|mp4|mov|ts|wav|m4a)\b/i);
     // 原曲リンクはオーナー承認済みの公式動画だけ（scripts/approved-song-links.mjs）。
-    // それ以外のURLは、素材の出所が漏れるので配信メモへ書かない。
-    assert.doesNotMatch(withoutApprovedSongLinks(data), /https?:\/\//);
+    // 本人トークの公開投稿も exact allowlist のみ。それ以外の素材URLは許可しない。
+    assert.doesNotMatch(withoutApprovedTalkLinks(withoutApprovedSongLinks(data)), /https?:\/\//);
     assert.doesNotMatch(data, /transcriptionNote:\s*["`]/);
     assert.match(data, /buildTranscriptionNote/);
   });
