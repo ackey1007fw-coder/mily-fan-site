@@ -1,3 +1,4 @@
+import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
 import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXStoryVideo.ts";
 import { showroomAvatarRightsStoryVideo, type ShowroomAvatarRightsStoryVideo } from "./showroomAvatarRightsStoryVideo.ts";
 import { tiktokPortraitVideo, type TikTokPortraitVideo } from "./tiktokPortraitVideo.ts";
@@ -91,6 +92,7 @@ export {
   morningThanksVoteStoryVideo,
   streamThanksMorningSlotStoryVideo,
   campusGirlsPatonFifteenXStoryVideo,
+  coldUmbrellaStoryVideo,
   nightThanksMorningStreamStoryVideo,
   patonVoteCollageStoryVideo,
   patonVoteMirrorStoryVideo,
@@ -120,6 +122,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  coldUmbrellaStoryVideo,
   campusGirlsPatonFifteenXStoryVideo,
   streamThanksMorningSlotStoryVideo,
   morningThanksVoteStoryVideo,

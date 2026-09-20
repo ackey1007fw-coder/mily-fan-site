@@ -9,6 +9,18 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-20確認: Instagram Story「寒がりのみりいには耐え難い気温かも」
+
+- NEWS ID: `2026-09-20-cold-umbrella-story`。Latest / NEWS と Gallery へ掲載。Activities 非関連付け。
+- オーナーが当該縦型動画の掲載を依頼。恒久permalinkなしのため非リンクの `Instagram Story` label＋Instagramプロフィール関連リンク。
+- batch b135-01 動画を Latest / NEWS と Gallery で共有。元素材に音声ストリームはなく、公開派生も video-only（H.264 Constrained Baseline、`+faststart`、metadata除去）。
+- 画面下部の「みんな〜 寒がりのみりいには耐え難い気温かも」「行ってきまーす」を本文と message に引用。発話はない。
+- 同じ日の本人X `https://x.com/Mily_chan36/status/2101590482250088823`（2026-09-20 17:33 JST）を additionalSources に置く。寒がりと体調管理の呼びかけ。この動画の出典URLではない。
+- source date `2026-09-20` は、オーナーがその日に素材を渡して掲載を依頼したこと、画面の「行ってきまーす」、同じ日の公開X投稿による。投稿時刻は推測して書かない。
+- 投票CTAなし。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加。
+- 過去NEWS fixturesは新項目を除外して当時の検証範囲を維持する。
+
+
 ## 2026-09-19確認: SHOWROOM朝配信のレポート・写真・トーク抜粋
 
 - オーナー依頼により、当該保存録画の約103分を全52区間・2561発話区間の自動文字起こしで整理。全文手動聴取・完全収録の保証とは区別する。
