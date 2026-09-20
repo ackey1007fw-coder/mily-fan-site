@@ -62,10 +62,11 @@ const ORIGINAL_SHA256 =
 const TITLE = "寒がりのみりいには耐え難い気温かも";
 const BODY =
   "9月20日、みりぃがInstagram Storyで、銀の傘の下からくまの耳と鼻のフィルターを付けた縦型動画を届けました。画面には「みんな〜 寒がりのみりいには耐え難い気温かも」「行ってきまーす」とあり、出かける直前の様子です。同じ日のXでも、寒がりであることと体調管理を呼びかけています。";
+// Transcribed from the committed b135 video at 3.0s and its poster.
 const MESSAGE =
   "みんな〜\n" +
-  "寒がりのみりいには耐え難い気温かも🥶🥶🥶\n" +
-  "行ってきまーす٩(ˊᗜˋ*)و♪";
+  "寒がりのみりいには耐え難い気温かも🤭🤭🤭\n" +
+  "行ってきまーす٩(^‿^)۶♪";
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
