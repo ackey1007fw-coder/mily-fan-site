@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { streamRecaps, streamRecap20260920Day } from '../src/data/streamRecaps.ts';
+import { streamRecaps, streamRecap20260920Night, streamRecap20260920Day } from '../src/data/streamRecaps.ts';
 
-test('9/20昼レポートを最新枠として1件だけ掲載する', () => {
+test('9/20昼レポートを同日の昼枠として1件だけ掲載する', () => {
   const recap = streamRecap20260920Day;
   assert.equal(streamRecaps.filter((r) => r.id === recap.id).length, 1);
-  assert.equal(streamRecaps[0], recap);
+  assert.equal(streamRecaps[0], streamRecap20260920Night);
+  assert.equal(streamRecaps[1], recap);
   assert.equal(recap.date, '2026-09-20');
   assert.equal(recap.broadcastLabel, '14:41頃〜 約64分');
 });
