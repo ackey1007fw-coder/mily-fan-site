@@ -119,7 +119,7 @@ export const streamRecap20260920Asa: StreamRecap = {
     { timestamp: "1:51:01", label: "同日昼枠の可能性を案内" },
     { timestamp: "1:52:21", label: "朝配信のお礼と挨拶" },
   ],
-  nextNote: "配信時点では、同日14〜15時頃に外出前まで配信できる可能性があり、友人の体調にもよるため改めて連絡すると案内していました。",
+  nextNote: "配信時点では、同日14〜15時頃に配信できる可能性があり、改めて連絡すると案内していました。",
   sourceLabel: "2026年9月20日 SHOWROOM朝配信（オーナー提供録画・対応動画の自動字幕確認）",
   verifiedAt: "2026-09-20",
   transcriptionNote: buildTranscriptionNote({
