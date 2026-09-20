@@ -4005,3 +4005,11 @@ ffmpeg -i media/original/mily-b135-01-cold-umbrella-story.mp4 \
 - Latest / NEWS と Gallery が同じ公開MP4・posterを共有する。用途別コピーは作らない
 - `/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加
 - 同じ日のX投稿は NEWS の additionalSources のみ。この動画の sourceUrl にはしない
+
+## b136: 2026年9月20日 SHOWROOM昼配信の実スクショ10枚
+
+- オーナーが当該昼配信の文字起こし・レポート・スクショ・短尺展開を依頼。LIVE STREAMの当該回に使用する。
+- 保存録画から実フレーム10枚を選定。公開ファイルは `live/mily-b136-01-afternoon.jpg` から `live/mily-b136-10-afternoon.jpg`。全10枚640×360で、元画角を保持し、crop・scale・顔補正・AI生成なし。
+- 録画先頭からの位置は 0:00:35 / 0:01:35 / 0:07:50 / 0:15:13 / 0:30:23 / 0:35:47 / 0:41:50 / 0:50:03 / 0:56:30 / 1:03:10。代表は08。
+- 一括保存は `live/mily-b136-afternoon-stills.zip`。公開JPEG10枚のみを収録し、件数を検査済み。
+- 録画原本、音声、全文文字起こし、非公開動画ID、ローカルパスは公開しない。NEWS / Galleryへ自動転用しない。

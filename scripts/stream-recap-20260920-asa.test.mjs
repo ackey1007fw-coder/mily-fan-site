@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { streamRecap20260920Asa as recap, streamRecaps } from "../src/data/streamRecaps.ts";
 
-test("9/20朝配信を最新のStreamRecapとして実素材つきで掲載する", () => {
-  assert.equal(streamRecaps[0], recap);
+test("9/20朝配信を実素材つきで掲載する", () => {
+  assert.equal(streamRecaps.find((item) => item.id === recap.id), recap);
   assert.equal(recap.date, "2026-09-20");
   assert.equal(recap.broadcastLabel, "5:30頃〜 約113分");
   assert.equal(recap.gallery.length, 10);
