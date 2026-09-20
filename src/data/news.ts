@@ -109,6 +109,7 @@ import { webVoteDay2StoryVideo } from "./webVoteDay2StoryVideo.ts";
 import { voteDayFiveSoonStoryVideo } from "./voteDayFiveSoonStoryVideo.ts";
 import { morningThanksVoteStoryVideo } from "./morningThanksVoteStoryVideo.ts";
 import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXStoryVideo.ts";
+import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
 import { streamThanksMorningSlotStoryVideo } from "./streamThanksMorningSlotStoryVideo.ts";
 import { finalDayNightStoryVideo } from "./finalDayNightStoryVideo.ts";
 import { miripochiStoryVideo } from "./miripochiStoryVideo.ts";
@@ -218,6 +219,29 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-20-cold-umbrella-story",
+    date: "2026-09-20",
+    title: "寒がりのみりいには耐え難い気温かも",
+    body: "9月20日、みりぃがInstagram Storyで、銀の傘の下からくまの耳と鼻のフィルターを付けた縦型動画を届けました。画面には「みんな〜 寒がりのみりいには耐え難い気温かも」「行ってきまーす」とあり、出かける直前の様子です。同じ日のXでも、寒がりであることと体調管理を呼びかけています。",
+    sourceLabel: coldUmbrellaStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalSources: [
+      {
+        label: "みりぃのX",
+        url: "https://x.com/Mily_chan36/status/2101590482250088823",
+      },
+    ],
+    media: coldUmbrellaStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "みんな〜\n" +
+        "寒がりのみりいには耐え難い気温かも🥶🥶🥶\n" +
+        "行ってきまーす٩(ˊᗜˋ*)و♪",
+    },
+  },
   {
     id: "2026-09-18-kikkake-and-regular-stream",
     date: "2026-09-18",

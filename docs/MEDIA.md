@@ -3946,3 +3946,62 @@ ffmpeg -i media/original/mily-b128-01-campus-girls-paton-15x-story.mp4 \
 - NEWS / Galleryへの複製なし。録画原本・全文文字起こし・非公開の受け渡し情報は公開しない。
 
 - 出会いへの思いを話すトーク抜粋: `live-clips/mily-b132-12-meeting-viewers.mp4` と同名の `-poster.jpg`。録画内0:48:09頃から15.65秒、640×360・H.264/AAC・原音。前後の原音声の自動文字起こしと単語時刻で境界を照合し、直後の視聴者名を除外。全デコードと実フレーム5点を確認。
+
+## 素材台帳（batch b135 / 受領日 2026-09-20）
+
+2026-09-20 の Instagram Story。銀の傘の下でくまフィルターを付け、「寒がりのみりいには耐え難い気温かも」「行ってきまーす」と画面に出した縦型動画。Latest / NEWS と Gallery が同じ公開派生を共有する独立動画。Drive Gallery（b02）には含めない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b135-01 | `gallery/mily-b135-01-cold-umbrella-story.mp4` | 銀の傘・くまフィルターの出かける直前。720×1280 / 8.400秒 / 30fps / 252フレーム / H.264 Constrained Baseline / video-only | ✅ Latest / NEWS + Gallery |
+| b135-01 poster | `gallery/mily-b135-01-cold-umbrella-story-poster.jpg` | 公開MP4の3.0秒地点の実フレーム。720×1280 | ✅ Latest / NEWS + Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナーが当該動画の掲載を依頼。SNSから取得していない）
+- Instagram Story / source date: `2026-09-20` / 恒久permalinkなし
+- 元素材は `media/original/mily-b135-01-cold-umbrella-story.mp4` に
+  受領バイトを変えず保管（gitignore済み・コミットしない）
+- sha256: `428ee17e3c64c7e134ba8a59a2c92a0b3cf5fa521f1fe6a8f8ba2fee177e2201`
+- 1,381,365 bytes / HEVC **Main** / **720×1280** / 30fps /
+  252 frames / **8.400秒** / yuv420p
+- 音声ストリームなし。公開派生も video-only
+- chapterなし
+- 公開派生ではmetadataを除去した。投稿時刻は推測して記録しない
+- 画面上の「みんな〜 寒がりのみりいには耐え難い気温かも」「行ってきまーす」は元動画のまま維持し、cropしていない
+- 識別可能な第三者は見当たらない
+
+source date `2026-09-20` は、オーナーがその日に素材を渡して掲載を依頼したこと、画面の「行ってきまーす」、同じ日 17:33 JST の本人X投稿による。元動画 container の creation_time（2026-09-20T13:12:59Z = 2026-09-20 22:12 JST）は受け渡しファイルの時刻であり、Story投稿時刻の根拠にはしていない。
+
+### 公開MP4
+
+- sha256: `4bbb543d49232779aa541395882ac38c78646d955c4fd39048c10ed6f76127f7`
+- 5,713,571 bytes / H.264 **Constrained Baseline** / **720×1280** /
+  30fps / 252 frames / 8.400秒 / yuv420p / `has_b_frames` 0 / video-only
+- 元素材の画素数・縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし（`-vf scale`を使っていない）
+- `+faststart`確認済み（`moov` が `mdat` より前）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`creation_time`と`Core Media`は残っていない
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除・短縮なし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/mily-b135-01-cold-umbrella-story.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -fps_mode passthrough \
+  -movflags +faststart \
+  public/media/gallery/mily-b135-01-cold-umbrella-story.mp4
+```
+
+### poster / 共有範囲
+
+- 公開MP4の3.0秒地点の実フレーム。カメラを見る表情と画面上の案内が読みやすい
+- sha256: `46c2bee7c7500ae5f5a5637aca733e83b9d6704e742b189dfb32bb81e73541f1`
+- 84,195 bytes / 720×1280 JPEG。EXIF / IPTC / XMP / ICC なし
+- Latest / NEWS と Gallery が同じ公開MP4・posterを共有する。用途別コピーは作らない
+- `/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加
+- 同じ日のX投稿は NEWS の additionalSources のみ。この動画の sourceUrl にはしない
