@@ -1,6 +1,8 @@
 // Owner-requested song links, verified against artist/label or accompaniment creator channels.
 // Removing only these exact URLs lets existing private-archive checks keep running.
 const approved = new Set([
+  // 2026-09-20: weeeek / NEWS — にゅうちゅうぶ | NEWS official の公式MV。
+  "https://www.youtube.com/watch?v=bYAvL803fAE",
   // 2026-09-16: 嵐の公式MV。9/15夜の短い口ずさみ2曲として記録。
   "https://www.youtube.com/watch?v=evCrxxtslVU",
   "https://www.youtube.com/watch?v=EAgACSowE5k",

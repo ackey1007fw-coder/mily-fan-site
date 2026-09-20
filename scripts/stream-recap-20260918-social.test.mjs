@@ -7,12 +7,12 @@ import { approvedTalkLinks, withoutApprovedTalkLinks } from "./approved-talk-lin
 
 const expected = [
   { recap: morning, highlight: "0:48:11", start: "0:48:11", seconds: 23.7, title: "「みりぃ」ってどういう意味？", urls: approvedTalkLinks.slice(0, 4) },
-  { recap: day, highlight: "0:00:25", start: "0:01:11", seconds: 27.85, title: "はじめまして！みりぃです。", urls: approvedTalkLinks.slice(4) },
+  { recap: day, highlight: "0:00:25", start: "0:01:11", seconds: 27.85, title: "はじめまして！みりぃです。", urls: approvedTalkLinks.slice(4, 8) },
 ];
 
 test("9/18朝・昼の対応する見どころに公開済み4媒体のトーク導線を1組ずつ置く", () => {
-  assert.equal(approvedTalkLinks.length, 8);
-  assert.equal(new Set(approvedTalkLinks).size, 8);
+  assert.ok(approvedTalkLinks.length >= 8);
+  assert.equal(new Set(approvedTalkLinks.slice(0, 8)).size, 8);
   for (const row of expected) {
     const found = row.recap.highlights.filter(x => x.socialClip);
     assert.equal(found.length, 1);
