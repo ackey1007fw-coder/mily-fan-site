@@ -127,16 +127,17 @@ async function changedText() {
 }
 
 describe("2026-09-20 Instagram Story 寒がり傘 — Latest / NEWS", () => {
-  it("is the newest Latest record ahead of the 9/18 SHOWROOM X announcement", () => {
+  it("follows the 9/21 AGESTOCK item and stays ahead of the 9/18 SHOWROOM X announcement", () => {
     const entry = item();
     const ordered = sortNewsByDateDesc(news);
 
     assert.ok(entry);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(news[0], entry);
-    assert.equal(ordered[0], entry);
-    assert.equal(ordered[1]?.id, "2026-09-18-kikkake-and-regular-stream");
-    assert.equal(ordered[2]?.id, "2026-09-18-campus-girls-paton-15x-story");
+    assert.equal(news[1], entry);
+    assert.equal(ordered[0]?.id, "2026-09-21-agestock-yokohama");
+    assert.equal(ordered[1], entry);
+    assert.equal(ordered[2]?.id, "2026-09-18-kikkake-and-regular-stream");
+    assert.equal(ordered[3]?.id, "2026-09-18-campus-girls-paton-15x-story");
     assert.equal(entry.date, "2026-09-20");
     assert.equal(entry.sameDayOrder, undefined);
     assert.equal(entry.activityIds, undefined);
