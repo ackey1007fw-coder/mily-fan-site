@@ -222,7 +222,6 @@ export const news: NewsItem[] = [
   {
     id: "2026-09-21-agestock-yokohama",
     date: "2026-09-21",
-    activityIds: ["miss-circle"],
     title: "AGESTOCK2026 in横アリに参戦🎀",
     body: "9月21日、みりぃがXで「AGESTOCK2026 in横アリ 参戦🎀」と報告。同じくミスサー出場者のきらりちゃん（@circle2026_1612）と参戦したことを伝えています。",
     source: "https://x.com/Mily_chan36/status/2101944527695057190",
