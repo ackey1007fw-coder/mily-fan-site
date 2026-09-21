@@ -15,7 +15,7 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 - オーナーが当該縦型動画と出典 URL `https://vt.tiktok.com/ZSqwEXWtD/` を渡し、サイト掲載と天宮あみさんへの導線を依頼。恒久permalinkは `https://www.tiktok.com/@amis2_m.h/video/7687906623515364615`（天宮あみさん `@amis2_m.h`）。みりぃ本人アカウントの投稿ではない。
 - 同日の AGESTOCK NEWS より後に置き、Latest 先頭は AGESTOCK のままにする（`sameDayOrder` は付けない）。
 - batch b140-01 動画を Latest / NEWS と Gallery で共有。楽曲の権利とこのサイトでの再配信権が未確認のため、公開派生は video-only（H.264 Constrained Baseline、`+faststart`、metadata除去）。
-- 投稿文は oembed title を引用。不可視の LRE（U+202A）は対になる PDF がなくページ方向を壊すため、公開 message からは除く。楽曲名・歌詞は書かない。AGESTOCK への同行は投稿にないため書かない。「妹分」など関係性の推測もしない。
+- 投稿文はオーナー提供のTikTok閲覧画面で確認した原文。🩷 を含む。oembed title は 💕 と variation selector に崩れていたため使わない。閲覧画面そのもの（端末UI・いいね数・位置スタンプ・楽曲名）は公開しない。
 - source date `2026-09-21` は TikTok video ID の snowflake（2026-09-21 08:44:07 UTC / 17:44 JST）。受領日は 2026-09-22。
 - あみちゃん導線: NEWS `additionalCtas` と HOME `ChallengeConnection` が、FRECAMPUS ENTRY・X・TikTok プロフィールを `challengeConnection.ts` の SSOT として共有する。`socials.ts` には追加しない。
 - 投票CTAなし。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加。

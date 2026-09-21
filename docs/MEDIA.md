@@ -4187,6 +4187,7 @@ ffmpeg -i media/original/<受領時ファイル名>.mp4 \
 - 45,937 bytes / 720×1280 JPEG / sha256
   `75aeeee7af1f3edab3418b09f18fa92b23444558402a55267fc16dbc5b09e575`
 - EXIF / IPTC / XMP / ICCなし。TikTok閲覧画面のスクリーンショットからは作っていない
+- オーナー提供の閲覧画面スクショは投稿文照合のみ。公開派生・NEWS画像・Galleryには使わない
 - `src/data/tiktokAmiTokyoVideo.json` の1オブジェクトをLatest / Galleryで共有し、
   公開MP4 1本・poster 1枚だけを参照する
 

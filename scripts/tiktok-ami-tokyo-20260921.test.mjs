@@ -61,7 +61,7 @@ const TITLE = "「東京で遊んでいただきました」TikTok";
 const BODY =
   "9月21日、天宮あみさんのTikTokに、みりぃと東京で遊んだときの動画が投稿されました。屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、ミスサーの三橋莉子さんに東京で遊んでいただいたことと、ファイナリストになって韓国へ行く約束に触れています。";
 const MESSAGE =
-  "ミスサーの三橋莉子@ラジオDJネキみりぃ🛜 さんに東京で遊んでいただきましたぁ🫶🏻︎💕︎︎ りこさんとの約束🤞ファイナリストになって韓国だ🇰🇷 #フレキャン2026 #ミスサー2026 #EBiDAN #ミスコン #大学生";
+  "ミスサーの三橋莉子@ラジオDJネキみりぃ🛜 さんに東京で遊んでいただきましたぁ\n🫶🏻🩷\nりこさんとの約束🤞ファイナリストになって韓国だ🇰🇷\n#フレキャン2026 #ミスサー2026\n#EBiDAN #ミスコン #大学生";
 const ALT =
   "屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画";
 const ORIGINAL_SHA256 =
@@ -158,8 +158,9 @@ describe("2026-09-21 TikTok ami tokyo post — Latest", () => {
 
     assert.equal(entry.message?.label, "天宮あみさんの投稿");
     assert.equal(entry.message?.text, MESSAGE);
-    assert.doesNotMatch(entry.body, /妹分|AGESTOCK|横アリ|歌詞|GACHI/);
-    assert.doesNotMatch(entry.message.text, /\u202a/);
+    assert.match(entry.message.text, /\u{1FA77}/u);
+    assert.doesNotMatch(entry.message.text, /\u{1F495}|\uFE0E|\u202A/u);
+    assert.doesNotMatch(entry.body, /妹分|AGESTOCK|横アリ|歌詞|GACHI|ガチ夢中|berry makeup|東京駅|表示を減らす/);
     assert.deepEqual(resolveNewsLinks(entry, now), {
       additionalCtas: [
         {
@@ -429,6 +430,10 @@ describe("2026-09-21 TikTok post — privacy, identity and scope boundaries", ()
     ];
 
     assert.equal(files.includes(path.relative(root, original).replaceAll("\\", "/")), false);
+    assert.equal(
+      files.some((relative) => /IMG_7888|表示を減らす|この動画をシェアしました/.test(relative)),
+      false,
+    );
     assert.equal(
       files.some(
         (relative) =>
