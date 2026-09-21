@@ -14,11 +14,13 @@ import {
   visibleDriveGallery,
 } from "../src/data/driveGallery.ts";
 import { events } from "../src/data/events.ts";
+import { amiMilyKoreaPromise } from "../src/data/challengeConnection.ts";
 import {
   campusGirlsPatonFifteenXStoryVideo,
   coldUmbrellaStoryVideo,
   galleryVideos,
   streamThanksMorningSlotStoryVideo,
+  tiktokAmiTokyoVideo,
   tiktokKossoriVideo,
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
@@ -30,6 +32,7 @@ import { streamSchedule } from "../src/data/streamSchedule.ts";
 import { selectActivityMedia } from "../src/lib/activityMedia.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
+import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import {
@@ -41,36 +44,39 @@ import {
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
-const PUBLIC_VIDEO = "mily-b139-01-tiktok-kossori.mp4";
-const PUBLIC_POSTER = "mily-b139-01-tiktok-kossori-poster.jpg";
+const PUBLIC_VIDEO = "mily-b140-01-tiktok-ami-tokyo.mp4";
+const PUBLIC_POSTER = "mily-b140-01-tiktok-ami-tokyo-poster.jpg";
 const mp4 = path.join(galleryDirectory, PUBLIC_VIDEO);
 const poster = path.join(galleryDirectory, PUBLIC_POSTER);
 const original = path.join(
   root,
   "media/original",
-  ["o8fzioNUqBBFpT5IQ", "EgdeDATwzlgXqn2DERqEK.mp4"].join(""),
+  ["oUBYA7YsoFKBbEOQI", "qEDfnf1EYHLg4q9BcwjqR.mp4"].join(""),
 );
 
-const NEWS_ID = "2026-09-16-tiktok-kossori";
-const MEDIA_ID = "mily-b139-01-tiktok-kossori";
-const SOURCE = "https://www.tiktok.com/@seasidecircle/video/7686106779897498901";
-const TITLE = "「君だけにこっそり教えてあげるっ」TikTok";
+const NEWS_ID = "2026-09-21-tiktok-ami-tokyo";
+const MEDIA_ID = "mily-b140-01-tiktok-ami-tokyo";
+const SOURCE = "https://www.tiktok.com/@amis2_m.h/video/7687906623515364615";
+const TITLE = "「東京で遊んでいただきました」TikTok";
 const BODY =
-  "9月16日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。猫耳フィルターをつけ、ハートやヒョウ柄のメガネなどのスタンプを変えながら、指を立てたりハートを作ったりしている短い縦型動画です。";
-const MESSAGE = "君だけにこっそり教えてあげるっ🩷";
+  "9月21日、天宮あみさんのTikTokに、みりぃと東京で遊んだときの動画が投稿されました。屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、ミスサーの三橋莉子さんに東京で遊んでいただいたことと、ファイナリストになって韓国へ行く約束に触れています。";
+const MESSAGE =
+  "ミスサーの三橋莉子@ラジオDJネキみりぃ🛜 さんに東京で遊んでいただきましたぁ🫶🏻︎💕︎︎ りこさんとの約束🤞ファイナリストになって韓国だ🇰🇷 #フレキャン2026 #ミスサー2026 #EBiDAN #ミスコン #大学生";
 const ALT =
-  "室内で猫耳フィルターをつけ、ハートやメガネなどのスタンプを変えながらカメラに向かう、みりぃの短い縦型動画";
+  "屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画";
 const ORIGINAL_SHA256 =
-  "6b889b74bf7d157661154dee1e9fa49509dba82ab436c09b5caecf63e3e9134a";
+  "11e8a9eaf9c56b7c9b125c98df8a915dd58db980e2c244804cb9edbe54c7370c";
 const PUBLIC_MP4_SHA256 =
-  "8001670ccb4ff61da451643c523d3d205176d7e5a111bab6394b147f887a01c5";
+  "0b6b0e65d103ce7c27455b0fe85228651211f36bc475f971a7a9424bb06e7233";
 const POSTER_SHA256 =
-  "1ad6619dd195fa64ff69b53d00f5224062fd34a9e29ca6bf3f43399ba01f4931";
-const PUBLIC_BYTES = 7_652_239;
-const POSTER_BYTES = 73_873;
-const POSTER_SECONDS = "0.5";
+  "75aeeee7af1f3edab3418b09f18fa92b23444558402a55267fc16dbc5b09e575";
+const PUBLIC_BYTES = 3_178_227;
+const POSTER_BYTES = 45_937;
+const POSTER_SECONDS = "11.0";
 const SOURCE_METADATA_FILE_PATTERN =
   /(?:https?:\/\/|drive\.(?:google|usercontent\.google)\.com|media[\\/]original[\\/]|\.(?:mp4|mov|m4v|zip)\b)/i;
+const PRIVATE_HANDOFF_KEY_PATTERN =
+  /^(?:handoff(?:Url|Id)?|driveFileId|original(?:File)?Name|sourceFileName)$/i;
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -112,66 +118,96 @@ async function repositoryFiles() {
   return stdout.split("\n").filter(Boolean);
 }
 
-describe("2026-09-16 TikTok kossori post — Latest", () => {
+describe("2026-09-21 TikTok ami tokyo post — Latest", () => {
   it("adds exactly one dated News item with the canonical TikTok source", () => {
     const entry = item();
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(entry.date, "2026-09-16");
+    assert.equal(news[1], entry);
+    assert.equal(entry.date, "2026-09-21");
     assert.equal(entry.sameDayOrder, undefined);
     assert.equal(entry.activityIds, undefined);
     assert.equal(entry.title, TITLE);
     assert.equal(entry.body, BODY);
     assert.equal(entry.source, SOURCE);
-    assert.equal(entry.sourceLabel, "湘南シーサイドサークルのTikTok投稿を見る");
+    assert.equal(entry.sourceLabel, "天宮あみさんのTikTok投稿を見る");
     assert.equal(entry.url, undefined);
     assert.equal(entry.relatedUrl, undefined);
     assert.equal(entry.ctaLabel, undefined);
-    assert.equal(entry.additionalCtas, undefined);
+    assert.deepEqual(entry.additionalCtas, [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ]);
     assert.deepEqual(verifyNews([entry]), []);
   });
 
-  it("preserves only the confirmed post text", () => {
+  it("preserves only the confirmed post text and Ami 導線", () => {
     const entry = item();
+    const now = Date.parse("2026-09-22T07:00:00+09:00");
 
-    assert.equal(entry.message?.label, "湘南シーサイドサークルの投稿");
+    assert.equal(entry.message?.label, "天宮あみさんの投稿");
     assert.equal(entry.message?.text, MESSAGE);
-    assert.doesNotMatch(entry.body, /目標|結果|達成|受賞|順位|投稿時刻|再生|コンテスト/);
+    assert.doesNotMatch(entry.body, /妹分|AGESTOCK|横アリ|歌詞|GACHI/);
+    assert.doesNotMatch(entry.message.text, /\u202a/);
+    assert.deepEqual(resolveNewsLinks(entry, now), {
+      additionalCtas: [
+        {
+          label: amiMilyKoreaPromise.amiEntry.label,
+          url: amiMilyKoreaPromise.amiEntry.url,
+        },
+        {
+          label: amiMilyKoreaPromise.amiX.label,
+          url: amiMilyKoreaPromise.amiX.url,
+        },
+        {
+          label: amiMilyKoreaPromise.amiTikTok.label,
+          url: amiMilyKoreaPromise.amiTikTok.url,
+        },
+      ],
+    });
   });
 
-  it("keeps 9/16 behind later NEWS and after the fourth-round record", () => {
+  it("keeps AGESTOCK as the 9/21 Latest lead", () => {
     const ordered = sortNewsByDateDesc(news);
-    const ids = ordered.map((entry) => entry.id);
 
     assert.equal(ordered[0]?.id, "2026-09-21-agestock-yokohama");
-    assert.equal(
-      ids.indexOf(NEWS_ID),
-      ids.indexOf("2026-09-16-miss-circle-fourth-round") + 1,
-    );
+    assert.equal(ordered[1]?.id, NEWS_ID);
+    assert.equal(ordered[2]?.id, "2026-09-20-cold-umbrella-story");
   });
 });
 
-describe("2026-09-16 TikTok video — shared Latest / Gallery asset", () => {
+describe("2026-09-21 TikTok video — shared Latest / Gallery asset", () => {
   it("shares one manifest object among the standalone Gallery videos", () => {
     const matches = galleryVideos.filter((entry) => entry.id === MEDIA_ID);
     const entries = selectGalleryEntries().filter(({ key }) => key === MEDIA_ID);
 
-    assert.equal(item().media, tiktokKossoriVideo);
-    assert.deepEqual(matches, [tiktokKossoriVideo]);
+    assert.equal(item().media, tiktokAmiTokyoVideo);
+    assert.deepEqual(matches, [tiktokAmiTokyoVideo]);
+    assert.equal(galleryVideos[0], tiktokAmiTokyoVideo);
     assert.equal(galleryVideos[1], coldUmbrellaStoryVideo);
     assert.equal(galleryVideos[2], campusGirlsPatonFifteenXStoryVideo);
     assert.equal(galleryVideos[3], tiktokKossoriVideo);
     assert.equal(galleryVideos[4], streamThanksMorningSlotStoryVideo);
     assert.equal(
       visibleGalleryVideos().find(({ id }) => id === MEDIA_ID),
-      tiktokKossoriVideo,
+      tiktokAmiTokyoVideo,
     );
-    assert.equal(tiktokKossoriVideo.provenance, "owner-provided");
-    assert.equal(tiktokKossoriVideo.sourceUrl, SOURCE);
-    assert.equal(tiktokKossoriVideo.sourceDate, "2026-09-16");
-    assert.equal(tiktokKossoriVideo.published, true);
-    assert.equal(tiktokKossoriVideo.alt, ALT);
+    assert.equal(tiktokAmiTokyoVideo.provenance, "owner-provided");
+    assert.equal(tiktokAmiTokyoVideo.sourceUrl, SOURCE);
+    assert.equal(tiktokAmiTokyoVideo.sourceDate, "2026-09-21");
+    assert.equal(tiktokAmiTokyoVideo.published, true);
+    assert.equal(tiktokAmiTokyoVideo.alt, ALT);
     assert.equal(entries.length, 1);
     assert.equal(entries[0].kind, "video");
     assert.equal(entries[0].item.video.controls, true);
@@ -182,14 +218,14 @@ describe("2026-09-16 TikTok video — shared Latest / Gallery asset", () => {
   it("publishes exactly one local MP4 and one local poster", async () => {
     const assets = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"))
-      .filter((file) => file.includes("mily-b139-01-tiktok-kossori"));
+      .filter((file) => file.includes("mily-b140-01-tiktok-ami-tokyo"));
 
     assert.deepEqual(assets.sort(), [
-      "media/gallery/mily-b139-01-tiktok-kossori-poster.jpg",
-      "media/gallery/mily-b139-01-tiktok-kossori.mp4",
+      "media/gallery/mily-b140-01-tiktok-ami-tokyo-poster.jpg",
+      "media/gallery/mily-b140-01-tiktok-ami-tokyo.mp4",
     ]);
-    assert.match(tiktokKossoriVideo.src, /^\/media\/gallery\//);
-    assert.match(tiktokKossoriVideo.poster, /^\/media\/gallery\//);
+    assert.match(tiktokAmiTokyoVideo.src, /^\/media\/gallery\//);
+    assert.match(tiktokAmiTokyoVideo.poster, /^\/media\/gallery\//);
     assert.equal(existsSync(mp4), true);
     assert.equal(existsSync(poster), true);
     assert.ok((await stat(mp4)).size > 0);
@@ -200,15 +236,15 @@ describe("2026-09-16 TikTok video — shared Latest / Gallery asset", () => {
     const drive = driveGallerySections(visibleDriveGallery());
 
     assert.equal(
-      drive.videos.some((entry) => String(entry.id ?? "").includes("b139")),
+      drive.videos.some((entry) => String(entry.id ?? "").includes("b140")),
       false,
     );
     assert.equal(
-      media.some((entry) => String(entry.id ?? "").includes("b139")),
+      media.some((entry) => String(entry.id ?? "").includes("b140")),
       false,
     );
     assert.equal(
-      stories.some((entry) => JSON.stringify(entry).includes("b139")),
+      stories.some((entry) => JSON.stringify(entry).includes("b140")),
       false,
     );
     assert.equal(events.length, 0);
@@ -232,7 +268,7 @@ describe("2026-09-16 TikTok video — shared Latest / Gallery asset", () => {
   });
 });
 
-describe("2026-09-16 TikTok video — published derivatives", () => {
+describe("2026-09-21 TikTok video — published derivatives", () => {
   it("matches the manifest and is H.264 Baseline / yuv420p / video-only", async () => {
     const info = await probe(mp4);
     const video = info.streams.find((stream) => stream.codec_type === "video");
@@ -244,12 +280,12 @@ describe("2026-09-16 TikTok video — published derivatives", () => {
     assert.match(video.profile, /Baseline/);
     assert.equal(video.has_b_frames, 0);
     assert.equal(video.pix_fmt, "yuv420p");
-    assert.equal(video.width, tiktokKossoriVideo.width);
-    assert.equal(video.height, tiktokKossoriVideo.height);
+    assert.equal(video.width, tiktokAmiTokyoVideo.width);
+    assert.equal(video.height, tiktokAmiTokyoVideo.height);
     assert.equal(video.width, 720);
     assert.equal(video.height, 1280);
-    assert.equal(video.nb_frames, "451");
-    assert.equal(Number(info.format.duration).toFixed(3), "15.034");
+    assert.equal(video.nb_frames, "361");
+    assert.equal(Number(info.format.duration).toFixed(3), "12.034");
     assert.equal(audioStreams.length, 0);
     assert.equal(createHash("sha256").update(bytes).digest("hex"), PUBLIC_MP4_SHA256);
     assert.equal(bytes.length, PUBLIC_BYTES);
@@ -259,7 +295,7 @@ describe("2026-09-16 TikTok video — published derivatives", () => {
       const sourceVideo = source.streams.find((stream) => stream.codec_type === "video");
       const sourceBytes = await readFile(original);
 
-      assert.equal(sourceBytes.length, 3_623_181);
+      assert.equal(sourceBytes.length, 1_444_697);
       assert.equal(createHash("sha256").update(sourceBytes).digest("hex"), ORIGINAL_SHA256);
       assert.equal(sourceVideo.width, video.width);
       assert.equal(sourceVideo.height, video.height);
@@ -271,7 +307,7 @@ describe("2026-09-16 TikTok video — published derivatives", () => {
   it("uses faststart and removes source-specific metadata and chapters", async () => {
     assert.equal(await isFaststart(mp4), true);
     assert.deepEqual(
-      await validateVideoDerivatives(tiktokKossoriVideo, galleryDirectory),
+      await validateVideoDerivatives(tiktokAmiTokyoVideo, galleryDirectory),
       { width: 720, height: 1280 },
     );
 
@@ -316,7 +352,7 @@ describe("2026-09-16 TikTok video — published derivatives", () => {
     assert.doesNotMatch(JSON.stringify(metadata), SOURCE_METADATA_FILE_PATTERN);
   });
 
-  it("uses the selected 0.5-second real frame as a metadata-free poster", async () => {
+  it("uses the selected 11.0-second real frame as a metadata-free poster", async () => {
     const meta = await sharp(poster).metadata();
     const posterBytes = await readFile(poster);
     assert.equal(meta.width, 720);
@@ -359,7 +395,7 @@ describe("2026-09-16 TikTok video — published derivatives", () => {
   });
 
   it("retains the existing uncropped playback contract", async () => {
-    const view = driveVideoView(tiktokKossoriVideo);
+    const view = driveVideoView(tiktokAmiTokyoVideo);
     const latest = await readFile(path.join(root, "src/components/Latest.tsx"), "utf8");
     const gallery = await readFile(path.join(root, "src/components/Gallery.tsx"), "utf8");
 
@@ -378,14 +414,16 @@ describe("2026-09-16 TikTok video — published derivatives", () => {
   });
 });
 
-describe("2026-09-16 TikTok post — privacy, identity and scope boundaries", () => {
+describe("2026-09-21 TikTok post — privacy, identity and scope boundaries", () => {
   it("keeps private handoff fields, Drive ids and raw originals out of tracked/public files", async () => {
     const files = await repositoryFiles();
     const taskFiles = [
-      "src/data/tiktokKossoriVideo.json",
-      "src/data/tiktokKossoriVideo.ts",
+      "src/data/tiktokAmiTokyoVideo.json",
+      "src/data/tiktokAmiTokyoVideo.ts",
       "src/data/news.ts",
       "src/data/galleryVideos.ts",
+      "src/data/challengeConnection.ts",
+      "src/components/ChallengeConnection.tsx",
       "docs/MEDIA.md",
       "docs/CONTENT-OPS.md",
     ];
@@ -395,7 +433,7 @@ describe("2026-09-16 TikTok post — privacy, identity and scope boundaries", ()
       files.some(
         (relative) =>
           relative.startsWith("media/original/") &&
-          relative.includes("mily-b139-01"),
+          relative.includes("mily-b140-01"),
       ),
       false,
     );
@@ -408,8 +446,16 @@ describe("2026-09-16 TikTok post — privacy, identity and scope boundaries", ()
       assert.deepEqual(findDriveIds(source), [], relative);
       assert.doesNotMatch(source, PRIVATE_HANDOFF_KEY_PATTERN);
     }
+    for (const relative of [
+      "src/data/tiktokAmiTokyoVideo.json",
+      "src/data/tiktokAmiTokyoVideo.ts",
+      "src/data/news.ts",
+      "src/data/galleryVideos.ts",
+      "src/data/challengeConnection.ts",
+      "src/components/ChallengeConnection.tsx",
+    ]) {
+      const source = await readFile(path.join(root, relative), "utf8");
+      assert.doesNotMatch(source, /妹分/);
+    }
   });
 });
-
-const PRIVATE_HANDOFF_KEY_PATTERN =
-  /^(?:handoff(?:Url|Id)?|driveFileId|original(?:File)?Name|sourceFileName)$/i;

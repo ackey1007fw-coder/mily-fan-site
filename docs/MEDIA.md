@@ -4116,9 +4116,84 @@ ffmpeg -ss 0.5 -i public/media/gallery/mily-b139-01-tiktok-kossori.mp4 \
   public/media/gallery/mily-b139-01-tiktok-kossori-poster.jpg
 ```
 
-
 ## 2026-09-21 夜ラジオ配信：写真非掲載・SNS短尺
 
 - 当該ラジオ配信の表示画像には第三者や会場の人も写っていたため、写真としての公開派生は作らず、別回の写真も流用しない。素材を確認せずに「写真なし」と判断したものではない。
 - オーナー承認済みの非歌唱トーク2本は、原音に文字のタイトルカード・波形・要約字幕を合わせてSNSへ投稿した。本人の顔・声の生成や写真加工は行わない。タイトル・カバー2種類、寸法、時間、確認済みの公開URLは [当該回の短尺記録](LIVE-TALK-POSTS-20260921.md) を参照。
 - サイトへの画像・動画ファイル追加、新しいbatch番号の発行、Gallery / NEWSへの転用はない。LIVE STREAMの該当する見どころだけに公開SNS導線を追加する。
+
+## 素材台帳（batch b140 / 受領日 2026-09-22 / source date 2026-09-21）
+
+2026-09-21の天宮あみさんTikTok通常投稿に使われた、オーナー直接提供の短尺動画。
+LatestとGallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`events.ts`・`profile.ts`・`highlights.ts`・
+`media.ts` には含めない。ラジオ／ミスコン／CAMPUS GIRLS の `activityIds` も付けない。
+HOME `ChallengeConnection` には人物写真を足さず、天宮あみさんのTikTokプロフィール導線だけを追加する。
+
+一次出典: https://www.tiktok.com/@amis2_m.h/video/7687906623515364615
+オーナー指定の短縮URL: https://vt.tiktok.com/ZSqwEXWtD/
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b140-01 | `gallery/mily-b140-01-tiktok-ami-tokyo.mp4` | 屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b140-01 poster | `gallery/mily-b140-01-tiktok-ami-tokyo-poster.jpg` | 公開MP4の11.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/` に受領時の名前のまま無改変で保管
+  （gitignore済み・コミットしない。ランダムな受領時名はtracked textへ記録しない）
+- sha256: `11e8a9eaf9c56b7c9b125c98df8a915dd58db980e2c244804cb9edbe54c7370c`
+- 1,444,697 bytes / H.264 **High** / **720×1280** / 30fps /
+  361 frames / video 約12.03秒 / container 12.034秒 / yuv420p
+- 音声: **HE-AACv2** / 44,100 Hz / stereo / 約64 kb/s / 約12.03秒
+- chapterなし。元metadataにはTikTok由来の`aigc_info` / `comment` / `vid_md5`と
+  muxer既定のbrand / encoder / language / handlerが存在
+- 素材受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
+### 音声の扱い — 公開派生は無音
+
+楽曲の権利とこのサイトでの再配信権が未確認のため、公開MP4はvideo-only（無音）とした。
+楽曲名・権利者・本人音声の別は推測して記録しない。
+
+### 公開MP4
+
+- sha256: `0b6b0e65d103ce7c27455b0fe85228651211f36bc475f971a7a9424bb06e7233`
+- 3,178,227 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 361 frames / 12.034秒 / yuv420p / 音声ストリームなし
+- 元素材の画素数・9:16の縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 2366）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`aigc_info` / `comment` / `vid_md5`は残っていない。
+  残るのはmuxer / encoder既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/<受領時ファイル名>.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b140-01-tiktok-ami-tokyo.mp4
+```
+
+### poster / 共有範囲
+
+- 0.5 / 3.0 / 7.0 / 11.0秒地点を比較。11.0秒は二人の顔が正面に近く、みりぃの笑顔と天宮あみさんのポーズが安定して見えるため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 45,937 bytes / 720×1280 JPEG / sha256
+  `75aeeee7af1f3edab3418b09f18fa92b23444558402a55267fc16dbc5b09e575`
+- EXIF / IPTC / XMP / ICCなし。TikTok閲覧画面のスクリーンショットからは作っていない
+- `src/data/tiktokAmiTokyoVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 11.0 -i public/media/gallery/mily-b140-01-tiktok-ami-tokyo.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b140-01-tiktok-ami-tokyo-poster.jpg
+```
