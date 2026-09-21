@@ -2,6 +2,7 @@ import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
+import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -305,6 +306,19 @@ export const news: NewsItem[] = [
       { label: "三橋莉子 ENTRY 734", url: "https://2026.misscircle.jp/entry/734" },
     ],
     ctaLabel: "公式の進出者一覧を見る",
+  },
+  {
+    id: "2026-09-16-tiktok-kossori",
+    date: "2026-09-16",
+    title: "「君だけにこっそり教えてあげるっ」TikTok",
+    body: "9月16日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。猫耳フィルターをつけ、ハートやヒョウ柄のメガネなどのスタンプを変えながら、指を立てたりハートを作ったりしている短い縦型動画です。",
+    source: tiktokKossoriVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+    media: tiktokKossoriVideo,
+    message: {
+      label: "湘南シーサイドサークルの投稿",
+      text: "君だけにこっそり教えてあげるっ🩷",
+    },
   },
   {
     id: "2026-09-15-night-fanroom-thanks",

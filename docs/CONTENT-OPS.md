@@ -9,6 +9,16 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-22確認: TikTok「君だけにこっそり教えてあげるっ」
+
+- NEWS ID: `2026-09-16-tiktok-kossori`。Latest / NEWS と Gallery へ掲載。Activities 非関連付け（番組アカウント投稿という理由だけではラジオ出演記録にしない。b37 と同じ）。
+- オーナーが当該縦型動画と出典 URL `https://vt.tiktok.com/ZSqwwjqAk/` を渡し、サイト掲載を依頼。恒久permalinkは `https://www.tiktok.com/@seasidecircle/video/7686106779897498901`（湘南シーサイドサークル `@seasidecircle`）。
+- batch b139-01 動画を Latest / NEWS と Gallery で共有。楽曲の権利とこのサイトでの再配信権が未確認のため、公開派生は video-only（H.264 Constrained Baseline、`+faststart`、metadata除去）。
+- 投稿文「君だけにこっそり教えてあげるっ🩷」を message に引用。画面の猫耳フィルターとスタンプの見え方は実フレームに基づく。
+- source date `2026-09-16` は TikTok 投稿ページの createTime（2026-09-16 12:19:53 GMT / 21:19 JST）による。受領日は 2026-09-22。
+- 投票CTAなし。`/stories/` / highlights / events / streamSchedule / media.ts / contest.ts 非追加。
+- 過去NEWS fixturesは新項目を除外して当時の検証範囲を維持する。
+
 ## 2026-09-20確認: Instagram Story「寒がりのみりいには耐え難い気温かも」
 
 - NEWS ID: `2026-09-20-cold-umbrella-story`。Latest / NEWS と Gallery へ掲載。Activities 非関連付け。

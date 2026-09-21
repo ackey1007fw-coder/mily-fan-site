@@ -175,7 +175,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     const entry = item();
 
     assert.equal(entry.media, streamThanksMorningSlotStoryVideo);
-    assert.equal(galleryVideos[2], streamThanksMorningSlotStoryVideo);
+    assert.equal(galleryVideos[3], streamThanksMorningSlotStoryVideo);
     assert.deepEqual(
       galleryVideos.filter(({ id }) => id === MEDIA_ID),
       [streamThanksMorningSlotStoryVideo],

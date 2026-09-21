@@ -6,6 +6,7 @@ import {
 } from "../../src/lib/galleryItems.ts";
 
 const laterGalleryIds = new Set([
+  "mily-b139-01-tiktok-kossori",
   "mily-b45-01-paton-vote-voice-story",
   "mily-b44-02-paton-vote-first-place-story",
   "mily-b44-01-paton-vote-15x-emergency-story",

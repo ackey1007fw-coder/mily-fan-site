@@ -9,6 +9,7 @@ export const news = currentNews.filter(
     id !== "2026-09-18-kikkake-and-regular-stream" &&
     id !== "2026-09-18-campus-girls-paton-15x-story" &&
     id !== "2026-09-16-miss-circle-fourth-round" &&
+    id !== "2026-09-16-tiktok-kossori" &&
     id !== "2026-09-15-night-fanroom-thanks" &&
     id !== "2026-09-15-fanroom-incoming-call-voice" &&
     id !== "2026-09-12-avatar-achievement-story" &&

@@ -4040,3 +4040,79 @@ ffmpeg -i media/original/mily-b135-01-cold-umbrella-story.mp4 \
 - crop・生成塗り足し・顔補正・AI生成なし。X / Instagram CDNへのhotlink・自動取得なし
 - NEWS / Latest の既存 `2026-09-21-agestock-yokohama` にだけ追加し、Gallery / Activity分類 / events / streamSchedule / Stories へは広げない
 
+## 素材台帳（batch b139 / 受領日 2026-09-22 / source date 2026-09-16）
+
+2026-09-16のTikTok通常投稿に使われた、オーナー直接提供の短尺動画。
+LatestとGallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`events.ts`・`profile.ts`・`highlights.ts`・
+`media.ts` には含めない。ラジオ／ミスコン／CAMPUS GIRLS の `activityIds` も付けない
+（猫耳フィルターの短尺であり、番組アカウント投稿という理由だけではラジオ出演記録にしない）。
+
+一次出典: https://www.tiktok.com/@seasidecircle/video/7686106779897498901
+オーナー指定の短縮URL: https://vt.tiktok.com/ZSqwwjqAk/
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b139-01 | `gallery/mily-b139-01-tiktok-kossori.mp4` | 室内で猫耳フィルターをつけ、ハートやメガネなどのスタンプを変えながらカメラに向かう短い縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b139-01 poster | `gallery/mily-b139-01-tiktok-kossori-poster.jpg` | 公開MP4の0.5秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/` に受領時の名前のまま無改変で保管
+  （gitignore済み・コミットしない。ランダムな受領時名はtracked textへ記録しない）
+- sha256: `6b889b74bf7d157661154dee1e9fa49509dba82ab436c09b5caecf63e3e9134a`
+- 3,623,181 bytes / H.264 **High** / level — / **720×1280** / 30fps /
+  451 frames / video 約15.03秒 / container 15.05秒 / yuv420p
+- 音声: **HE-AACv2** / 44,100 Hz / stereo / 約64 kb/s / 約15.05秒
+- chapterなし。元metadataにはTikTok由来の`aigc_info` / `comment` / `vid_md5`と
+  muxer既定のbrand / encoder / language / handlerが存在
+- 素材受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
+### 音声の扱い — 公開派生は無音
+
+楽曲の権利とこのサイトでの再配信権が未確認のため、公開MP4はvideo-only（無音）とした。
+楽曲名・権利者・本人音声の別は推測して記録しない。
+
+### 公開MP4
+
+- sha256: `8001670ccb4ff61da451643c523d3d205176d7e5a111bab6394b147f887a01c5`
+- 7,652,239 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 451 frames / 15.034秒 / yuv420p / 音声ストリームなし
+- 元素材の画素数・9:16の縦横比・30fps・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし
+- `+faststart`確認済み（`moov` offset 36 < `mdat` offset 2802）
+- metadata除去確認済み（`-map_metadata -1` / `-map_metadata:s:v -1` /
+  `-map_chapters -1`）。元の`aigc_info` / `comment` / `vid_md5`は残っていない。
+  残るのはmuxer / encoder既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/<受領時ファイル名>.mp4 \
+  -map 0:v:0 -an \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b139-01-tiktok-kossori.mp4
+```
+
+### poster / 共有範囲
+
+- 0.5 / 4.0 / 6.2 / 11.0 / 14.0秒地点を比較。0.5秒は正面に近く、猫耳とピンクのハートが安定して見えるため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- 73,873 bytes / 720×1280 JPEG / sha256
+  `1ad6619dd195fa64ff69b53d00f5224062fd34a9e29ca6bf3f43399ba01f4931`
+- EXIF / IPTC / XMP / ICCなし。TikTok閲覧画面のスクリーンショットからは作っていない
+- `src/data/tiktokKossoriVideo.json` の1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 0.5 -i public/media/gallery/mily-b139-01-tiktok-kossori.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b139-01-tiktok-kossori-poster.jpg
+```
+
