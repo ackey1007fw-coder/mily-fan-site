@@ -242,9 +242,9 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
   it("shares one manifest object per Story with Gallery, Activities, and Portal Feed", () => {
     const [night, morning] = fixtures;
 
-    // 9/20 の b135 Story が先頭。9/18 の b128 は 2番目。9/16 の b139 TikTok は 3番目。9/8 の b66 は 4番目。b65 は 5〜6番目。
-    assert.equal(galleryVideos[4], morning.item);
-    assert.equal(galleryVideos[5], night.item);
+    // 9/21 の b140 TikTok が先頭。9/20 の b135 Story が2番目。9/18 の b128 は 3番目。9/16 の b139 TikTok は 4番目。9/8 の b66 は 5番目。b65 は 6〜7番目。
+    assert.equal(galleryVideos[5], morning.item);
+    assert.equal(galleryVideos[6], night.item);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);

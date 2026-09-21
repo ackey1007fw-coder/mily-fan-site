@@ -21,4 +21,8 @@ export const amiMilyKoreaPromise = {
     label: "天宮あみさんのX",
     url: "https://x.com/amis2_mh",
   },
+  amiTikTok: {
+    label: "天宮あみさんのTikTok",
+    url: "https://www.tiktok.com/@amis2_m.h",
+  },
 } as const;

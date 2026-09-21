@@ -3,6 +3,8 @@ import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
+import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
+import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -230,6 +232,33 @@ export const news: NewsItem[] = [
     sourceLabel: "Xの投稿を見る",
     media: agestockYokohamaNewsImages.twoShot,
     additionalMedia: [agestockYokohamaNewsImages.group],
+  },
+  {
+    id: "2026-09-21-tiktok-ami-tokyo",
+    date: "2026-09-21",
+    title: "「東京で遊んでいただきました」TikTok",
+    body: "9月21日、天宮あみさんのTikTokに、みりぃと東京で遊んだときの動画が投稿されました。屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、ミスサーの三橋莉子さんに東京で遊んでいただいたことと、ファイナリストになって韓国へ行く約束に触れています。",
+    source: tiktokAmiTokyoVideo.sourceUrl,
+    sourceLabel: "天宮あみさんのTikTok投稿を見る",
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiTokyoVideo,
+    message: {
+      label: "天宮あみさんの投稿",
+      text: "ミスサーの三橋莉子@ラジオDJネキみりぃ🛜 さんに東京で遊んでいただきましたぁ🫶🏻︎💕︎︎ りこさんとの約束🤞ファイナリストになって韓国だ🇰🇷 #フレキャン2026 #ミスサー2026 #EBiDAN #ミスコン #大学生",
+    },
   },
   {
     id: "2026-09-20-cold-umbrella-story",
