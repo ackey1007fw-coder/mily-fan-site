@@ -5,8 +5,9 @@ import { streamRecaps, streamRecap20260920Night, streamRecap20260920Day } from '
 test('9/20昼レポートを同日の昼枠として1件だけ掲載する', () => {
   const recap = streamRecap20260920Day;
   assert.equal(streamRecaps.filter((r) => r.id === recap.id).length, 1);
-  assert.equal(streamRecaps[0], streamRecap20260920Night);
-  assert.equal(streamRecaps[1], recap);
+  const sameDay = streamRecaps.filter((r) => r.date === recap.date);
+  assert.equal(sameDay[0], streamRecap20260920Night);
+  assert.equal(sameDay[1], recap);
   assert.equal(recap.date, '2026-09-20');
   assert.equal(recap.broadcastLabel, '14:41頃〜 約64分');
 });
