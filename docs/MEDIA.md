@@ -4021,3 +4021,22 @@ ffmpeg -i media/original/mily-b135-01-cold-umbrella-story.mp4 \
 - 録画先頭からの位置は 0:01:10 / 0:15:00 / 0:20:35 / 0:40:08 / 0:44:50 / 0:48:18 / 0:54:12 / 1:00:00 / 1:16:42 / 1:22:02。代表は04。
 - JPEG10枚はEXIF / IPTC / XMP / ICCを持たないこと、ZIPは同10枚のみを収録し、各エントリーが公開JPEGと同一バイト列であることを確認した。
 - 一括保存は `live/mily-b137-night-stills.zip`。NEWS / Gallery / media.ts / galleryVideos.ts へ複製せず、録画原本・音声・全文文字起こし・非公開動画ID・ローカルパスは公開しない。
+
+## 素材台帳（batch b138 / 再受領日 2026-09-22）
+
+2026-09-21 の本人X「AGESTOCK2026 in横アリ」投稿に対応する写真2枚。オーナーがチャットで掲載用ファイルを再提供したため、SNSから画像を取得せず、NEWSで自己ホストする。
+
+| ID | 公開ファイル | 実寸 | 掲載 |
+| --- | --- | --- | --- |
+| b138-01 | `news/mily-b138-01-agestock-yokohama-group.jpg` | 1179×884 | ✅ NEWS追加画像 |
+| b138-02 | `news/mily-b138-02-agestock-yokohama-two-shot.jpg` | 1179×884 | ✅ NEWSメイン画像 |
+
+公開境界:
+
+- provenance: `owner-provided`。一次出典は https://x.com/Mily_chan36/status/2101944527695057190、source date は `2026-09-21`
+- 2枚ともオーナー提供ファイルから公開JPEGを作成し、EXIF / GPS / IPTC / XMP を残さない
+- 2枚目をNEWSのメイン、1枚目を追加画像として表示する
+- 1枚目の右側人物は提供時点で白く伏せられている。その状態を維持し、解除・復元・AI補完をしない
+- crop・生成塗り足し・顔補正・AI生成なし。X / Instagram CDNへのhotlink・自動取得なし
+- NEWS / Latest の既存 `2026-09-21-agestock-yokohama` にだけ追加し、Gallery / Activity分類 / events / streamSchedule / Stories へは広げない
+
