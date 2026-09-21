@@ -3,6 +3,10 @@ import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXSt
 import { showroomAvatarRightsStoryVideo, type ShowroomAvatarRightsStoryVideo } from "./showroomAvatarRightsStoryVideo.ts";
 import { tiktokPortraitVideo, type TikTokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import {
+  tiktokKossoriVideo,
+  type TikTokKossoriVideo,
+} from "./tiktokKossoriVideo.ts";
+import {
   eventStory20260821,
   morningOhayo20260821,
   morningStoryVideo,
@@ -57,12 +61,14 @@ export type SelfHostedGalleryVideo =
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
   | TikTokPortraitVideo
+  | TikTokKossoriVideo
   | ShowroomAvatarRightsStoryVideo
   | TikTokSayonaraIchigoVideo;
 
 export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
   tiktokPortraitVideo,
+  tiktokKossoriVideo,
   showroomAvatarRightsStoryVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
@@ -124,6 +130,7 @@ export function isSelfHostedGalleryVideo(
 export const galleryVideos: GalleryVideoItem[] = [
   coldUmbrellaStoryVideo,
   campusGirlsPatonFifteenXStoryVideo,
+  tiktokKossoriVideo,
   streamThanksMorningSlotStoryVideo,
   morningThanksVoteStoryVideo,
   voteDayFiveSoonStoryVideo,
