@@ -220,6 +220,15 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-21-agestock-yokohama",
+    date: "2026-09-21",
+    activityIds: ["miss-circle"],
+    title: "AGESTOCK2026 in横アリに参戦🎀",
+    body: "9月21日、みりぃがXで「AGESTOCK2026 in横アリ 参戦🎀」と報告。同じくミスサー出場者のきらりちゃん（@circle2026_1612）と参戦したことを伝えています。",
+    source: "https://x.com/Mily_chan36/status/2101944527695057190",
+    sourceLabel: "Xの投稿を見る",
+  },
+  {
     id: "2026-09-20-cold-umbrella-story",
     date: "2026-09-20",
     title: "寒がりのみりいには耐え難い気温かも",
