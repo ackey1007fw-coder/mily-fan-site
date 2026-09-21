@@ -11,7 +11,7 @@ export function StreamSocialClipLinks({ clip, id }: { clip: StreamRecapSocialCli
         録画内 {clip.sourceTimestamp}頃から・約{Math.round(clip.durationSeconds)}秒
       </p>
       <p className="mt-2 text-xs leading-6 text-ink-muted">
-        みりぃ本人の声と表情を、応援アカウントの投稿で。各SNSを新しいタブで開きます。
+        配信のひとコマを、応援アカウントの投稿で。各SNSを新しいタブで開きます。
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         {clip.links.map((link) => (

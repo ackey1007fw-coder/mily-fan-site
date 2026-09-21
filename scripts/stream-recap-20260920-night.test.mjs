@@ -9,8 +9,9 @@ import {
 test("9/20深夜レポートを同日の最新枠として1件だけ掲載する", () => {
   const recap = streamRecap20260920Night;
   assert.equal(streamRecaps.filter((r) => r.id === recap.id).length, 1);
-  assert.equal(streamRecaps[0], recap);
-  assert.equal(streamRecaps[1], streamRecap20260920Day);
+  const sameDay = streamRecaps.filter((r) => r.date === recap.date);
+  assert.equal(sameDay[0], recap);
+  assert.equal(sameDay[1], streamRecap20260920Day);
   assert.equal(recap.date, "2026-09-20");
   assert.equal(recap.broadcastLabel, "23:51頃〜 約83分");
 });
