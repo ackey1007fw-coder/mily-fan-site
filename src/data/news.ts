@@ -127,6 +127,7 @@ import {
   MOVIE_NIGHT_INSTAGRAM_URL,
   movieNightNewsImages,
 } from "./movieNightPhotos.ts";
+import { agestockYokohamaNewsImages } from "./agestockYokohamaNewsImages.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -226,6 +227,8 @@ export const news: NewsItem[] = [
     body: "9月21日、みりぃがXで「AGESTOCK2026 in横アリ 参戦🎀」と報告。同じくミスサー出場者のきらりちゃん（@circle2026_1612）と参戦したことを伝えています。",
     source: "https://x.com/Mily_chan36/status/2101944527695057190",
     sourceLabel: "Xの投稿を見る",
+    media: agestockYokohamaNewsImages.twoShot,
+    additionalMedia: [agestockYokohamaNewsImages.group],
   },
   {
     id: "2026-09-20-cold-umbrella-story",
