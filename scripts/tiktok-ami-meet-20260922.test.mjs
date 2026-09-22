@@ -51,6 +51,8 @@ const galleryDirectory = path.join(root, "public/media/gallery");
 const SEASIDE = "https://www.tiktok.com/@seasidecircle";
 const MEET_SOURCE = "https://www.tiktok.com/@seasidecircle/video/7688281091748220180";
 const TWIN_SOURCE = "https://www.tiktok.com/@amis2_m.h/video/7688279563113073938";
+const MEET_X_SOURCE = "https://x.com/Mily_chan36/status/2102326348996137262";
+const TWIN_X_SOURCE = "https://x.com/Mily_chan36/status/2102327155162267936";
 const AMI_CTAS = [
   {
     label: amiMilyKoreaPromise.amiEntry.label,
@@ -196,6 +198,9 @@ describe("2026-09-22 TikTok ami meet posts — Latest", () => {
     );
     assert.equal(entry.source, MEET_SOURCE);
     assert.equal(entry.sourceLabel, "ラジオDJネキみりぃのTikTok投稿を見る");
+    assert.deepEqual(entry.additionalSources, [
+      { label: "みりぃのX投稿を見る", url: MEET_X_SOURCE },
+    ]);
     assert.equal(entry.url, undefined);
     assert.equal(entry.relatedUrl, undefined);
     assert.equal(entry.ctaLabel, undefined);
@@ -243,6 +248,9 @@ describe("2026-09-22 TikTok ami meet posts — Latest", () => {
     assert.equal(entry.title, "「水玉で双子コーデにしたんだよぉ」TikTok");
     assert.equal(entry.source, TWIN_SOURCE);
     assert.equal(entry.sourceLabel, "天宮あみさんのTikTok投稿を見る");
+    assert.deepEqual(entry.additionalSources, [
+      { label: "みりぃのX投稿を見る", url: TWIN_X_SOURCE },
+    ]);
     assert.equal(entry.url, undefined);
     assert.equal(entry.relatedUrl, undefined);
     assert.equal(entry.ctaLabel, undefined);
