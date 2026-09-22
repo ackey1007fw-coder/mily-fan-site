@@ -4301,3 +4301,10 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b141-01-tiktok-ami-meet-poster.jpg
 ```
+
+## b142 — 2026-09-22夜のLIVE STREAM実フレームと短尺
+
+- オーナー提供のSHOWROOM保存録画（2026-09-22 21:59:34開始、実測5660.458秒）からフレームを抽出。実映像640×360、元の画角、EXIFなし。AI生成・顔補正・合成なし。
+- `public/media/live/mily-b142-01-night.jpg` 0:03:00、02 0:15:00、03 0:27:00、04 0:35:00、05 0:47:00、06 0:55:00、07 1:00:00、08 1:03:00、09 1:28:00、10 1:31:00。ZIP `mily-b142-night-stills.zip` はこの10枚。
+- `public/media/live-clips/mily-b142-hairband.mp4` は0:17:00から23秒、`mily-b142-cute.mp4` は0:20:53から15秒。ともに非歌唱トークの元音声を含むH.264/AAC、640×360。
+- 同名の `-vertical.mp4` は各720×1280のSNS版。実映像を中央に元の比率で置き、題字・短い要約・非公式ファン編集表示を追加。音声は原音。歌唱・第三者映像のクリップは含まない。
