@@ -230,6 +230,20 @@ export const news: NewsItem[] = [
     body: "9月21日、みりぃがXで「AGESTOCK2026 in横アリ 参戦🎀」と報告。同じくミスサー出場者のきらりちゃん（@circle2026_1612）と参戦したことを伝えています。",
     source: "https://x.com/Mily_chan36/status/2101944527695057190",
     sourceLabel: "Xの投稿を見る",
+    additionalCtas: [
+      {
+        label: "きらりちゃんの公式紹介（ENTRY 1612）を見る",
+        url: "https://2026.misscircle.jp/entry/1612",
+      },
+      {
+        label: "きらりちゃんのSHOWROOMを見る",
+        url: "https://www.showroom-live.com/r/circle2026_1612",
+      },
+      {
+        label: "きらりちゃんのXを見る",
+        url: "https://x.com/circle2026_1612",
+      },
+    ],
     media: agestockYokohamaNewsImages.twoShot,
     additionalMedia: [agestockYokohamaNewsImages.group],
   },
