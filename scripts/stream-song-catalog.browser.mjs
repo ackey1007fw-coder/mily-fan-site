@@ -154,7 +154,11 @@ try {
       });
       await check("original / karaoke links preserve approved URLs and safe new tabs", async () => {
         const links = await section.locator('a[target="_blank"]').evaluateAll((nodes) => nodes.map((node) => ({ href: node.getAttribute("href"), rel: node.rel, label: node.getAttribute("aria-label") })));
-        const approved = new Set(catalog.flatMap((song) => [song.youtubeUrl, ...(song.karaoke ? [song.karaoke.youtubeUrl] : [])]));
+        const approved = new Set([
+          "https://music.youtube.com/playlist?list=PLIr0jsL1PyBQ",
+          "https://www.youtube.com/playlist?list=PLIr0jsL1PyBQ",
+          ...catalog.flatMap((song) => [song.youtubeUrl, ...(song.karaoke ? [song.karaoke.youtubeUrl] : [])]),
+        ]);
         assert.deepEqual(new Set(links.map((link) => link.href)), approved);
         for (const link of links) {
           assert.ok(link.rel.split(/\s+/).includes("noopener") && link.rel.split(/\s+/).includes("noreferrer"));
