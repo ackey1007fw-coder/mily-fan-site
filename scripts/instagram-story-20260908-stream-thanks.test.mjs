@@ -175,7 +175,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     const entry = item();
 
     assert.equal(entry.media, streamThanksMorningSlotStoryVideo);
-    assert.equal(galleryVideos[4], streamThanksMorningSlotStoryVideo);
+    assert.equal(galleryVideos[7], streamThanksMorningSlotStoryVideo);
     assert.deepEqual(
       galleryVideos.filter(({ id }) => id === MEDIA_ID),
       [streamThanksMorningSlotStoryVideo],
@@ -355,7 +355,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — privacy and sc
     assert.match(docs, new RegExp(POSTER_SHA256));
     assert.match(docs, /4\.0秒地点の実フレーム/);
     assert.match(docs, /再投稿表示/);
-    assert.match(ops, /85件/);
+    assert.match(ops, /88件/);
     assert.match(ops, /独立動画33本/);
     assert.match(section, /video-only/);
     assert.match(section, /sameDayOrder: 10/);

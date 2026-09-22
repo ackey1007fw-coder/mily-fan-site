@@ -22,7 +22,7 @@ describe("2026-09-21 AGESTOCK2026 in横アリ owner-provided photos", () => {
     assert.equal(item.activityIds, undefined);
     assert.equal(item.media, agestockYokohamaNewsImages.twoShot);
     assert.deepEqual(item.additionalMedia, [agestockYokohamaNewsImages.group]);
-    assert.equal(sortNewsByDateDesc(news)[0]?.id, NEWS_ID);
+    assert.equal(sortNewsByDateDesc(news)[3]?.id, NEWS_ID);
   });
 
   it("ships both self-hosted 1179x884 JPEGs without privacy metadata", async () => {

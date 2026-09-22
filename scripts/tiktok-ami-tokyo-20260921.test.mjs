@@ -124,7 +124,7 @@ describe("2026-09-21 TikTok ami tokyo post — Latest", () => {
 
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
-    assert.equal(news[1], entry);
+    assert.equal(news[4], entry);
     assert.equal(entry.date, "2026-09-21");
     assert.equal(entry.sameDayOrder, undefined);
     assert.equal(entry.activityIds, undefined);
@@ -178,12 +178,15 @@ describe("2026-09-21 TikTok ami tokyo post — Latest", () => {
     });
   });
 
-  it("keeps AGESTOCK as the 9/21 Latest lead", () => {
+  it("keeps AGESTOCK behind the 9/22 Ami meet TikToks", () => {
     const ordered = sortNewsByDateDesc(news);
 
-    assert.equal(ordered[0]?.id, "2026-09-21-agestock-yokohama");
-    assert.equal(ordered[1]?.id, NEWS_ID);
-    assert.equal(ordered[2]?.id, "2026-09-20-cold-umbrella-story");
+    assert.equal(ordered[0]?.id, "2026-09-22-tiktok-ami-meet");
+    assert.equal(ordered[1]?.id, "2026-09-22-tiktok-ami-meet-story");
+    assert.equal(ordered[2]?.id, "2026-09-22-tiktok-ami-twin-coord");
+    assert.equal(ordered[3]?.id, "2026-09-21-agestock-yokohama");
+    assert.equal(ordered[4]?.id, NEWS_ID);
+    assert.equal(ordered[5]?.id, "2026-09-20-cold-umbrella-story");
   });
 });
 
@@ -194,11 +197,11 @@ describe("2026-09-21 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(item().media, tiktokAmiTokyoVideo);
     assert.deepEqual(matches, [tiktokAmiTokyoVideo]);
-    assert.equal(galleryVideos[0], tiktokAmiTokyoVideo);
-    assert.equal(galleryVideos[1], coldUmbrellaStoryVideo);
-    assert.equal(galleryVideos[2], campusGirlsPatonFifteenXStoryVideo);
-    assert.equal(galleryVideos[3], tiktokKossoriVideo);
-    assert.equal(galleryVideos[4], streamThanksMorningSlotStoryVideo);
+    assert.equal(galleryVideos[3], tiktokAmiTokyoVideo);
+    assert.equal(galleryVideos[4], coldUmbrellaStoryVideo);
+    assert.equal(galleryVideos[5], campusGirlsPatonFifteenXStoryVideo);
+    assert.equal(galleryVideos[6], tiktokKossoriVideo);
+    assert.equal(galleryVideos[7], streamThanksMorningSlotStoryVideo);
     assert.equal(
       visibleGalleryVideos().find(({ id }) => id === MEDIA_ID),
       tiktokAmiTokyoVideo,

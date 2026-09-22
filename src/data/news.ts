@@ -4,6 +4,9 @@ import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
+import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
+import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
+import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
@@ -223,6 +226,88 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-22-tiktok-ami-meet",
+    date: "2026-09-22",
+    title: "「あみちゃんに会ってきたの〜」TikTok",
+    body: "9月22日、ラジオDJネキみりぃのTikTokに、フレキャン2026出場中のあみちゃんに会ったときの動画が投稿されました。屋内の階段前で、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが並び、ピンクのハートのフィルターを付けて手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、終始お話ししすぎて音楽を聞くお店だったのに語りまくったことと、今度はお話しし放題のところで会おうと伝えています。",
+    source: tiktokAmiMeetVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiMeetVideo,
+    message: {
+      label: "ラジオDJネキみりぃの投稿",
+      text: "フレキャン2026出場中のあみちゃん@Ami に会ってきたの〜🫦🩵✨終始お話ししすぎて、音楽聞くお店だったのに語りまくるという。今度はお話しし放題のところで会おうねっ✌🏻🎀#ミスサー #フレキャン #ミスコン",
+    },
+  },
+  {
+    id: "2026-09-22-tiktok-ami-meet-story",
+    date: "2026-09-22",
+    title: "「あみちゃんに会ってきたのよ〜」TikTok",
+    body: "9月22日、ラジオDJネキみりぃのTikTokに、フレキャン出場中のあみちゃんに会ったときの縦型動画が投稿されました。画面には「フレキャン出場中のあみちゃんに会ってきたのよ〜」とあり、格子の床に並んで寝そべるみりぃと天宮あみさんのクリップが上下に重なっています。恒久的な投稿URLは確認できていません。",
+    sourceLabel: tiktokAmiMeetStoryVideo.sourceLabel,
+    relatedUrl: "https://www.tiktok.com/@seasidecircle",
+    ctaLabel: "ラジオDJネキみりぃのTikTokを見る",
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiMeetStoryVideo,
+    message: {
+      label: "画面の文字",
+      text: "フレキャン出場中のあみちゃんに会ってきたのよ〜💋🩵✨",
+    },
+  },
+  {
+    id: "2026-09-22-tiktok-ami-twin-coord",
+    date: "2026-09-22",
+    title: "「水玉で双子コーデにしたんだよぉ」TikTok",
+    body: "9月22日、天宮あみさんのTikTokに、みりぃと水玉の双子コーデをしたときの動画が投稿されました。格子の床に並んで寝そべり、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが手を動かしたりポーズを取ったりしている短い縦型動画です。",
+    source: tiktokAmiTwinCoordVideo.sourceUrl,
+    sourceLabel: "天宮あみさんのTikTok投稿を見る",
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiTwinCoordVideo,
+    message: {
+      label: "天宮あみさんの投稿",
+      text: "水玉で双子コーデにしたんだよぉ@ラジオDJネキみりぃ🛜  #フレキャン2026 #ミスサー2026 #ミスコン  #大学生 #双子コーデ",
+    },
+  },
   {
     id: "2026-09-21-agestock-yokohama",
     date: "2026-09-21",

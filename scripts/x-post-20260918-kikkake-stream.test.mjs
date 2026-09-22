@@ -56,13 +56,16 @@ describe("2026-09-18 X きっかけ配信案内 — Latest entry", () => {
       news.filter((candidate) => (candidate.source ?? "").includes(TWEET_ID)).length,
       1,
     );
-    assert.equal(news[3], entry);
-    assert.equal(ordered[0]?.id, "2026-09-21-agestock-yokohama");
-    assert.equal(ordered[1]?.id, "2026-09-21-tiktok-ami-tokyo");
-    assert.equal(ordered[2]?.id, "2026-09-20-cold-umbrella-story");
-    assert.equal(ordered[3], entry);
-    assert.equal(ordered[4]?.id, SAME_DAY_STORY_ID);
-    assert.equal(ordered[5]?.id, "2026-09-16-miss-circle-fourth-round");
+    assert.equal(news[6], entry);
+    assert.equal(ordered[0]?.id, "2026-09-22-tiktok-ami-meet");
+    assert.equal(ordered[1]?.id, "2026-09-22-tiktok-ami-meet-story");
+    assert.equal(ordered[2]?.id, "2026-09-22-tiktok-ami-twin-coord");
+    assert.equal(ordered[3]?.id, "2026-09-21-agestock-yokohama");
+    assert.equal(ordered[4]?.id, "2026-09-21-tiktok-ami-tokyo");
+    assert.equal(ordered[5]?.id, "2026-09-20-cold-umbrella-story");
+    assert.equal(ordered[6], entry);
+    assert.equal(ordered[7]?.id, SAME_DAY_STORY_ID);
+    assert.equal(ordered[8]?.id, "2026-09-16-miss-circle-fourth-round");
     assert.equal(entry.date, "2026-09-18");
     assert.equal(entry.sameDayOrder, 10);
     assert.deepEqual(entry.activityIds, ["live-stream"]);
