@@ -34,12 +34,30 @@ export const streamRecap20260922Night: StreamRecap = {
       title: "耳つきヘアバンドと前髪の話",
       body: "この日のヘアバンドを紹介しながら、いつもと違う前髪に少し照れた様子。自然体の笑顔が続きました。",
       clip: { src: "/media/live-clips/mily-b142-hairband.mp4", poster: stills[1].src, width: 640, height: 360, durationSeconds: 23, sourceTimestamp: "0:17:00" },
+      socialClip: {
+        title: "耳つきヘアバンドの夜", sourceTimestamp: "0:17:00", durationSeconds: 23,
+        links: [
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=QtndjoBPU3w" },
+          { platform: "tiktok", url: "https://www.tiktok.com/@ackeytan_/video/7688477399456943381" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdmuG2Kkpob/" },
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2102513106379313250" },
+        ],
+      },
     },
     {
       timestamp: "0:20:53",
       title: "「今日までかわいい？」の笑い",
       body: "「今日までかわいい」という言い方から、明日以降はどうなるのかと冗談に。これからもかわいい、と笑いながら話しました。",
       clip: { src: "/media/live-clips/mily-b142-cute.mp4", poster: stills[1].src, width: 640, height: 360, durationSeconds: 15, sourceTimestamp: "0:20:53" },
+      socialClip: {
+        title: "かわいさに期限なし", sourceTimestamp: "0:20:53", durationSeconds: 15,
+        links: [
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=gup32N0p6Tc" },
+          { platform: "tiktok", url: "https://www.tiktok.com/@ackeytan_/video/7688477428724878613" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdmuHmPj-id/" },
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2102513136666382699" },
+        ],
+      },
     },
     {
       timestamp: "0:26:40",
