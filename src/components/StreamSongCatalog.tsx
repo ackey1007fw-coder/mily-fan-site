@@ -8,6 +8,8 @@ const catalog = buildStreamSongCatalog(streamRecaps);
 const artists = catalogArtists(catalog);
 const clipCount = catalogSongClipCount(catalog);
 const INITIAL_SONG_COUNT = 6;
+const originalSongsPlaylistUrl = "https://www.youtube.com/playlist?list=PLIr0jsL1PyBQ";
+const originalSongsMusicUrl = "https://music.youtube.com/playlist?list=PLIr0jsL1PyBQ";
 const inputClass = "min-h-11 w-full min-w-0 rounded-xl border border-sage/30 bg-paper px-3 py-2 text-sm text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-sage";
 const linkClass = "inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage";
 
@@ -61,6 +63,26 @@ export function StreamSongCatalog() {
         <p className="mt-2 text-xs leading-6 text-ink-muted">
           リンク先は原曲の公式音源、または版を明記した公式歌唱動画です。みりぃの歌唱映像ではありません。カラオケは練習用の参考伴奏で、配信での使用音源は未確認です。
         </p>
+        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <a
+            href={originalSongsMusicUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="みりぃが歌った曲の原曲プレイリストをYouTube Musicでまとめて聴く（新しいタブ）"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-sage-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
+          >
+            🎧 YouTube Musicでまとめて聴く ↗
+          </a>
+          <a
+            href={originalSongsPlaylistUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="みりぃが歌った曲の原曲プレイリストをYouTubeで開く（新しいタブ）"
+            className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-bold text-sage-deep shadow-sm transition-colors hover:bg-sage-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
+          >
+            YouTubeでプレイリストを開く ↗
+          </a>
+        </div>
         <div className="mt-5 grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
           <label className="block min-w-0 text-xs font-semibold text-ink sm:col-span-2">
             曲名・アーティストで検索
