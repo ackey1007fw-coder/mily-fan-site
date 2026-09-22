@@ -108,6 +108,10 @@ it("catalog integration: live-only UI has safe links, honest coverage and workin
   assert.match(ui, /過去の全配信を網羅した一覧ではありません/);
   assert.match(ui, /みりぃの歌唱映像ではありません/);
   assert.match(ui, /配信での使用音源は未確認/);
+  assert.match(ui, /https:\/\/music\.youtube\.com\/playlist\?list=PLIr0jsL1PyBQ/);
+  assert.match(ui, /https:\/\/www\.youtube\.com\/playlist\?list=PLIr0jsL1PyBQ/);
+  assert.match(ui, /YouTube Musicでまとめて聴く/);
+  assert.match(ui, /YouTubeでプレイリストを開く/);
   assert.match(ui, /type="search"/);
   assert.match(ui, /role="status"/);
   assert.equal((ui.match(/target="_blank"/g) ?? []).length, (ui.match(/rel="noopener noreferrer"/g) ?? []).length);
