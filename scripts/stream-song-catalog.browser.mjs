@@ -4,7 +4,9 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
+import { ARCHIVE_LOAD_MORE_LABEL, ARCHIVE_PAGE_SIZE, NEWS_ARCHIVE_INITIAL } from "../src/lib/homePortal.ts";
 import { buildStreamSongCatalog, selectCatalogSongs } from "../src/lib/streamSongCatalog.ts";
 
 // CI installs the pinned browser tooling outside the application/lockfile.
@@ -280,8 +282,16 @@ try {
         await posts.screenshot({ path: join(output, `${scenario.name}-social-song-posts.png`) });
       });
       await check("night Fan Room photo renders on NEWS and LIVE with historical wording", async () => {
+        const nightFanroomId = "2026-09-15-night-fanroom-thanks";
+        const archiveIndex = sortNewsByDateDesc(news).findIndex((item) => item.id === nightFanroomId);
+        assert.ok(archiveIndex >= 0);
         for (const route of ["/news/", "/activities/live/"]) {
           await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
+          if (route === "/news/") {
+            for (let count = NEWS_ARCHIVE_INITIAL; count <= archiveIndex; count += ARCHIVE_PAGE_SIZE) {
+              await page.locator("#latest").getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true }).click();
+            }
+          }
           const photo = page.locator('img[src*="mily-b123-01-night-ribbon-fanroom-selfie"]').first();
           await photo.scrollIntoViewIfNeeded();
           // Scrolling can switch a responsive source while decode() is pending.
