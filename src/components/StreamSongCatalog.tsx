@@ -68,6 +68,7 @@ export function StreamSongCatalog() {
             href={originalSongsMusicUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="みりぃが歌った曲の原曲プレイリストをYouTube Musicでまとめて聴く（新しいタブ）"
             className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-sage-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
           >
             🎧 YouTube Musicでまとめて聴く ↗
@@ -76,6 +77,7 @@ export function StreamSongCatalog() {
             href={originalSongsPlaylistUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="みりぃが歌った曲の原曲プレイリストをYouTubeで開く（新しいタブ）"
             className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-bold text-sage-deep shadow-sm transition-colors hover:bg-sage-soft focus:outline-none focus-visible:ring-2 focus-visible:ring-sage focus-visible:ring-offset-2"
           >
             YouTubeでプレイリストを開く ↗
