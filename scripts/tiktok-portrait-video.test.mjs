@@ -12,11 +12,14 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
   assert.equal(item.sourceDate, "2026-09-05");
   assert.equal(item.sourceUrl, "https://vt.tiktok.com/ZSqNgRAvx/");
   assert.deepEqual(visibleGalleryVideos().filter(({ id }) => id === item.id), [item]);
-  assert.equal(galleryVideos.length, previous.length + 11);
+  assert.equal(galleryVideos.length, previous.length + 14);
   assert.deepEqual(
     galleryVideos.filter(
       ({ id }) =>
         id !== item.id &&
+        id !== "mily-b141-01-tiktok-ami-meet" &&
+        id !== "mily-b141-02-tiktok-ami-meet-story" &&
+        id !== "mily-b141-03-tiktok-ami-twin-coord" &&
         id !== "mily-b140-01-tiktok-ami-tokyo" &&
         id !== "mily-b139-01-tiktok-kossori" &&
         id !== "mily-b135-01-cold-umbrella-story" &&
@@ -67,15 +70,18 @@ it("shares the owner-dated TikTok between Latest and Gallery", async () => {
     ),
     previousNews,
   );
-  // 9/21 の天宮あみさん TikTok が新しい順で先頭に並ぶ。
-  assert.equal(galleryVideos[0]?.id, "mily-b140-01-tiktok-ami-tokyo");
-  assert.equal(galleryVideos[1]?.id, "mily-b135-01-cold-umbrella-story");
-  assert.equal(galleryVideos[2]?.id, "mily-b128-01-campus-girls-paton-15x-story");
-  assert.equal(galleryVideos[3]?.id, "mily-b139-01-tiktok-kossori");
-  assert.equal(galleryVideos[4]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
-  assert.equal(galleryVideos[5]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
-  assert.equal(galleryVideos[6]?.id, "mily-b65-01-web-vote-day5-soon-story");
-  assert.equal(galleryVideos[7], item);
+  // 9/22 のあみちゃん会った TikTok 3本が新しい順で先頭に並ぶ。
+  assert.equal(galleryVideos[0]?.id, "mily-b141-01-tiktok-ami-meet");
+  assert.equal(galleryVideos[1]?.id, "mily-b141-02-tiktok-ami-meet-story");
+  assert.equal(galleryVideos[2]?.id, "mily-b141-03-tiktok-ami-twin-coord");
+  assert.equal(galleryVideos[3]?.id, "mily-b140-01-tiktok-ami-tokyo");
+  assert.equal(galleryVideos[4]?.id, "mily-b135-01-cold-umbrella-story");
+  assert.equal(galleryVideos[5]?.id, "mily-b128-01-campus-girls-paton-15x-story");
+  assert.equal(galleryVideos[6]?.id, "mily-b139-01-tiktok-kossori");
+  assert.equal(galleryVideos[7]?.id, "mily-b66-01-stream-thanks-morning-slot-story");
+  assert.equal(galleryVideos[8]?.id, "mily-b65-02-morning-thanks-vote-day5-story");
+  assert.equal(galleryVideos[9]?.id, "mily-b65-01-web-vote-day5-soon-story");
+  assert.equal(galleryVideos[10], item);
   const entries = selectGalleryEntries().filter(({ key }) => key === item.id);
   assert.equal(entries.length, 1);
   assert.equal(entries[0].kind, "video");

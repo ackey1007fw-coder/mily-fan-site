@@ -144,7 +144,7 @@ describe("2026-09-16 TikTok kossori post — Latest", () => {
     const ordered = sortNewsByDateDesc(news);
     const ids = ordered.map((entry) => entry.id);
 
-    assert.equal(ordered[0]?.id, "2026-09-21-agestock-yokohama");
+    assert.equal(ordered[0]?.id, "2026-09-22-tiktok-ami-meet");
     assert.equal(
       ids.indexOf(NEWS_ID),
       ids.indexOf("2026-09-16-miss-circle-fourth-round") + 1,
@@ -159,10 +159,10 @@ describe("2026-09-16 TikTok video — shared Latest / Gallery asset", () => {
 
     assert.equal(item().media, tiktokKossoriVideo);
     assert.deepEqual(matches, [tiktokKossoriVideo]);
-    assert.equal(galleryVideos[1], coldUmbrellaStoryVideo);
-    assert.equal(galleryVideos[2], campusGirlsPatonFifteenXStoryVideo);
-    assert.equal(galleryVideos[3], tiktokKossoriVideo);
-    assert.equal(galleryVideos[4], streamThanksMorningSlotStoryVideo);
+    assert.equal(galleryVideos[4], coldUmbrellaStoryVideo);
+    assert.equal(galleryVideos[5], campusGirlsPatonFifteenXStoryVideo);
+    assert.equal(galleryVideos[6], tiktokKossoriVideo);
+    assert.equal(galleryVideos[7], streamThanksMorningSlotStoryVideo);
     assert.equal(
       visibleGalleryVideos().find(({ id }) => id === MEDIA_ID),
       tiktokKossoriVideo,

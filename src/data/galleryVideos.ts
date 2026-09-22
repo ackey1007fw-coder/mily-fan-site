@@ -11,6 +11,15 @@ import {
   type TikTokAmiTokyoVideo,
 } from "./tiktokAmiTokyoVideo.ts";
 import {
+  tiktokAmiMeetVideo,
+  type TikTokAmiMeetVideo,
+} from "./tiktokAmiMeetVideo.ts";
+import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
+import {
+  tiktokAmiTwinCoordVideo,
+  type TikTokAmiTwinCoordVideo,
+} from "./tiktokAmiTwinCoordVideo.ts";
+import {
   eventStory20260821,
   morningOhayo20260821,
   morningStoryVideo,
@@ -67,6 +76,8 @@ export type SelfHostedGalleryVideo =
   | TikTokPortraitVideo
   | TikTokKossoriVideo
   | TikTokAmiTokyoVideo
+  | TikTokAmiMeetVideo
+  | TikTokAmiTwinCoordVideo
   | ShowroomAvatarRightsStoryVideo
   | TikTokSayonaraIchigoVideo;
 
@@ -75,6 +86,9 @@ export {
   tiktokPortraitVideo,
   tiktokKossoriVideo,
   tiktokAmiTokyoVideo,
+  tiktokAmiMeetVideo,
+  tiktokAmiMeetStoryVideo,
+  tiktokAmiTwinCoordVideo,
   showroomAvatarRightsStoryVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
@@ -134,6 +148,9 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  tiktokAmiMeetVideo,
+  tiktokAmiMeetStoryVideo,
+  tiktokAmiTwinCoordVideo,
   tiktokAmiTokyoVideo,
   coldUmbrellaStoryVideo,
   campusGirlsPatonFifteenXStoryVideo,

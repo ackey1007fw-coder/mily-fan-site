@@ -136,13 +136,16 @@ describe("2026-09-18 Instagram Story Paton 1.5倍DAY — Latest / NEWS", () => {
 
     assert.ok(entry);
     assert.equal(news.filter(({ id }) => id === NEWS_ID).length, 1);
-    assert.equal(news[4], entry);
-    assert.equal(ordered[0]?.id, "2026-09-21-agestock-yokohama");
-    assert.equal(ordered[1]?.id, "2026-09-21-tiktok-ami-tokyo");
-    assert.equal(ordered[2]?.id, "2026-09-20-cold-umbrella-story");
-    assert.equal(ordered[3]?.id, "2026-09-18-kikkake-and-regular-stream");
-    assert.equal(ordered[4], entry);
-    assert.equal(ordered[5]?.id, "2026-09-16-miss-circle-fourth-round");
+    assert.equal(news[7], entry);
+    assert.equal(ordered[0]?.id, "2026-09-22-tiktok-ami-meet");
+    assert.equal(ordered[1]?.id, "2026-09-22-tiktok-ami-meet-story");
+    assert.equal(ordered[2]?.id, "2026-09-22-tiktok-ami-twin-coord");
+    assert.equal(ordered[3]?.id, "2026-09-21-agestock-yokohama");
+    assert.equal(ordered[4]?.id, "2026-09-21-tiktok-ami-tokyo");
+    assert.equal(ordered[5]?.id, "2026-09-20-cold-umbrella-story");
+    assert.equal(ordered[6]?.id, "2026-09-18-kikkake-and-regular-stream");
+    assert.equal(ordered[7], entry);
+    assert.equal(ordered[8]?.id, "2026-09-16-miss-circle-fourth-round");
     assert.equal(entry.date, "2026-09-18");
     assert.equal(entry.sameDayOrder, undefined);
     assert.deepEqual(entry.activityIds, ["campus-girls"]);
@@ -194,7 +197,7 @@ describe("2026-09-18 Instagram Story Paton 1.5倍DAY — Latest / NEWS", () => {
     const entry = item();
 
     assert.equal(entry.media, campusGirlsPatonFifteenXStoryVideo);
-    assert.equal(galleryVideos[2], campusGirlsPatonFifteenXStoryVideo);
+    assert.equal(galleryVideos[5], campusGirlsPatonFifteenXStoryVideo);
     assert.deepEqual(
       galleryVideos.filter(({ id }) => id === MEDIA_ID),
       [campusGirlsPatonFifteenXStoryVideo],

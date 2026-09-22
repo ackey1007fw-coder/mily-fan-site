@@ -242,9 +242,9 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
   it("shares one manifest object per Story with Gallery, Activities, and Portal Feed", () => {
     const [night, morning] = fixtures;
 
-    // 9/21 の b140 TikTok が先頭。9/20 の b135 Story が2番目。9/18 の b128 は 3番目。9/16 の b139 TikTok は 4番目。9/8 の b66 は 5番目。b65 は 6〜7番目。
-    assert.equal(galleryVideos[5], morning.item);
-    assert.equal(galleryVideos[6], night.item);
+    // 9/22 の b141 TikTok 3本が先頭。9/21 の b140 は 4番目。9/20 の b135 Story が5番目。9/18 の b128 は 6番目。9/16 の b139 TikTok は 7番目。9/8 の b66 は 8番目。b65 は 9〜10番目。
+    assert.equal(galleryVideos[8], morning.item);
+    assert.equal(galleryVideos[9], night.item);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
@@ -469,7 +469,7 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — privacy and scope", 
     // source date は画面表示と元動画の container creation_time からの判断。オーナー確認待ちを明記する。
     assert.match(docs, /オーナーの明示確認/);
     assert.match(section, /オーナーの明示確認/);
-    assert.match(ops, /85件/);
+    assert.match(ops, /88件/);
     assert.match(ops, /独立動画33本/);
     assert.match(section, /video-only/);
     assert.match(section, /sameDayOrder: 50/);

@@ -4197,3 +4197,107 @@ ffmpeg -ss 11.0 -i public/media/gallery/mily-b140-01-tiktok-ami-tokyo.mp4 \
   -frames:v 1 -q:v 4 -map_metadata -1 \
   public/media/gallery/mily-b140-01-tiktok-ami-tokyo-poster.jpg
 ```
+
+## 素材台帳（batch b141 / 受領日 2026-09-22 / source date 2026-09-22）
+
+2026-09-22のラジオDJネキみりぃTikTokと天宮あみさんTikTokに使われた、オーナー直接提供の短尺動画3本。
+LatestとGallery（動画アーカイブ）が同じ公開MP4・poster・manifest objectを共有する。
+Drive Gallery（b02）・`/stories/`・`events.ts`・`profile.ts`・`highlights.ts`・
+`media.ts` には含めない。ラジオ／ミスコン／CAMPUS GIRLS の `activityIds` も付けない。
+HOME `ChallengeConnection` には人物写真を足さず、既存の天宮あみさん導線（ENTRY / X / TikTok）を
+NEWS `additionalCtas` から参照する。閲覧スクリーンショットは投稿文の参考のみで公開しない。
+
+一次出典:
+- b141-01 `https://www.tiktok.com/@seasidecircle/video/7688281091748220180`
+  （オーナー指定の短縮URL: `https://vt.tiktok.com/ZSqEh4PMm/`）
+- b141-02 恒久permalink未確認（非リンクの TikTok label）
+- b141-03 `https://www.tiktok.com/@amis2_m.h/video/7688279563113073938`
+  （オーナー指定の短縮URL: `https://vt.tiktok.com/ZSqEkBsgf/`）
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b141-01 | `gallery/mily-b141-01-tiktok-ami-meet.mp4` | 屋内の階段前で、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが並び、ピンクのハートのフィルターを付けて手を動かしたりポーズを取ったりしている短い縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b141-01 poster | `gallery/mily-b141-01-tiktok-ami-meet-poster.jpg` | 公開MP4の14.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b141-02 | `gallery/mily-b141-02-tiktok-ami-meet-story.mp4` | 茶色い背景に「フレキャン出場中のあみちゃんに会ってきたのよ〜」の文字と、格子の床に寝そべる二人のクリップが上下に重なった短い縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b141-02 poster | `gallery/mily-b141-02-tiktok-ami-meet-story-poster.jpg` | 公開MP4の2.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+| b141-03 | `gallery/mily-b141-03-tiktok-ami-twin-coord.mp4` | 格子の床に並んで寝そべり、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが手を動かしたりポーズを取ったりしている短い縦型動画。720×1280。owner-provided | ✅ Latest / Gallery |
+| b141-03 poster | `gallery/mily-b141-03-tiktok-ami-twin-coord-poster.jpg` | 公開MP4の9.0秒地点の実フレーム。720×1280 | ✅ Latest / Gallery |
+
+### 元素材の実測
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- 元素材は `media/original/` に受領時の名前のまま無改変で保管
+  （gitignore済み・コミットしない。ランダムな受領時名はtracked textへ記録しない）
+- b141-01: sha256 `f0719ac66356de0d4dee7eb9d162973bdd7758e9459da70cdb6b5e75fdb64663` /
+  1,366,319 bytes / H.264 **High** / **720×1280** / 30fps /
+  451 frames / container 15.046秒 / yuv420p
+- b141-02: sha256 `af9bc62dc94e057bf05afc229b809ab1e11d275e34e7ae78a1d1d54898184c05` /
+  1,229,820 bytes / H.264 **High** / **720×1280** / 約26.08fps（VFR） /
+  350 frames / container 13.467秒 / yuv420p
+- b141-03: sha256 `203490a7c4bbf758a92bce18c2e200c2247525d67ab79637b132b6de00028733` /
+  2,411,775 bytes / H.264 **High** / **720×1280** / 約21.98fps（VFR） /
+  295 frames / container 13.467秒 / yuv420p
+- 音声は3本とも **HE-AACv2** / 44,100 Hz / stereo / 約64 kb/s
+- chapterなし。元metadataにはTikTok由来の`aigc_info` / `comment` / `vid_md5`と
+  muxer既定のbrand / encoder / language / handlerが存在
+- 素材受け渡し用URL / file IDは公開情報・tracked textとして記録しない
+
+### 音声の扱い — 公開派生は無音
+
+楽曲の権利とこのサイトでの再配信権が未確認のため、公開MP4はvideo-only（無音）とした。
+楽曲名・権利者・本人音声の別は推測して記録しない。
+
+### 公開MP4
+
+- b141-01: sha256 `9dd8d5dde66ecce46054b7e4320fb2bc442f9668f3703506e2e14dfbd6097cf9` /
+  2,217,117 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  30fps / 451 frames / 15.034秒 / yuv420p / 音声ストリームなし
+- b141-02: sha256 `8c38bfda05efa9d33c7c798acece84b07d88893a3afbfec845b440c06f565965` /
+  1,938,036 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  約26.08fps（VFR維持） / 350 frames / 13.458秒 / yuv420p / 音声ストリームなし
+- b141-03: sha256 `032a96bec71fcabdb5e833e9aace343bbabea39921bbf7b7521959d60ce6bcf3` /
+  4,594,349 bytes / H.264 **Constrained Baseline** / level 3.1 / **720×1280** /
+  約21.98fps（VFR維持） / 295 frames / 13.424秒 / yuv420p / 音声ストリームなし
+- 元素材の画素数・9:16の縦横比・映像フレーム数を維持。
+  crop・scale・引き伸ばし・アップスケール・fps水増しなし。VFRの2本は
+  `-fps_mode passthrough` でフレーム数を維持した
+- `+faststart`確認済み（`moov` offset 36）
+- metadata除去確認済み（`-map_metadata -1`）。元の`aigc_info` / `comment` / `vid_md5`は残っていない。
+  残るのはmuxer / encoder既定のbrand / encoder / language / `VideoHandler`のみ
+- AI生成・AI加工・顔補正・generative fill・outpaintingなし
+
+エンコードコマンド（再現用）:
+
+```
+ffmpeg -i media/original/<受領時ファイル名>.mp4 \
+  -map 0:v:0 -an -fps_mode passthrough \
+  -map_metadata -1 -map_metadata:s:v -1 -map_chapters -1 \
+  -c:v libx264 -profile:v baseline -level 3.1 -bf 0 -crf 23 -preset slow \
+  -pix_fmt yuv420p -movflags +faststart \
+  public/media/gallery/mily-b141-0N-<slug>.mp4
+```
+
+### poster / 共有範囲
+
+- b141-01: 0.5 / 4.0 / 8.0 / 14.0秒地点を比較。14.0秒は二人の顔が正面に近く、ピースのポーズと笑顔が安定して見えるため採用
+- b141-02: 0.5 / 2.0 / 6.0 / 10.0秒地点を比較。2.0秒は上下クリップとも顔が見えるため採用
+- b141-03: 0.5 / 4.0 / 9.0 / 11.0秒地点を比較。9.0秒は二人の笑顔が安定して見えるため採用
+- 公開MP4の実フレームから生成。AI生成・顔加工・塗り足しなし
+- b141-01 poster: 39,399 bytes / 720×1280 JPEG / sha256
+  `ee03d37be36cea61b323bddda1ca72e5d87568b1627d0c76acc3dae016316779`
+- b141-02 poster: 65,138 bytes / 720×1280 JPEG / sha256
+  `17677cae3d16b7f97568fc8786f035210d9d59ed9983cb1db5316af4e51d94a4`
+- b141-03 poster: 60,249 bytes / 720×1280 JPEG / sha256
+  `947e61ef4d5c2797d1f9329cb72d75eaeaf57ee0a5485bca65d80bf848dc2af4`
+- EXIF / IPTC / XMP / ICCなし。TikTok閲覧画面のスクリーンショットからは作っていない
+- `src/data/tiktokAmiMeetVideo.json` / `tiktokAmiMeetStoryVideo.json` /
+  `tiktokAmiTwinCoordVideo.json` の各1オブジェクトをLatest / Galleryで共有し、
+  公開MP4 1本・poster 1枚だけを参照する
+
+poster生成コマンド（再現用）:
+
+```
+ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
+  -frames:v 1 -q:v 4 -map_metadata -1 \
+  public/media/gallery/mily-b141-01-tiktok-ami-meet-poster.jpg
+```
