@@ -233,6 +233,12 @@ export const news: NewsItem[] = [
     body: "9月22日、ラジオDJネキみりぃのTikTokに、フレキャン2026出場中のあみちゃんに会ったときの動画が投稿されました。屋内の階段前で、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが並び、ピンクのハートのフィルターを付けて手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、終始お話ししすぎて音楽を聞くお店だったのに語りまくったことと、今度はお話しし放題のところで会おうと伝えています。",
     source: tiktokAmiMeetVideo.sourceUrl,
     sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    additionalSources: [
+      {
+        label: "みりぃのX投稿を見る",
+        url: "https://x.com/Mily_chan36/status/2102326348996137262",
+      },
+    ],
     additionalCtas: [
       {
         label: amiMilyKoreaPromise.amiEntry.label,
@@ -288,6 +294,12 @@ export const news: NewsItem[] = [
     body: "9月22日、天宮あみさんのTikTokに、みりぃと水玉の双子コーデをしたときの動画が投稿されました。格子の床に並んで寝そべり、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが手を動かしたりポーズを取ったりしている短い縦型動画です。",
     source: tiktokAmiTwinCoordVideo.sourceUrl,
     sourceLabel: "天宮あみさんのTikTok投稿を見る",
+    additionalSources: [
+      {
+        label: "みりぃのX投稿を見る",
+        url: "https://x.com/Mily_chan36/status/2102327155162267936",
+      },
+    ],
     additionalCtas: [
       {
         label: amiMilyKoreaPromise.amiEntry.label,
