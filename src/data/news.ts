@@ -224,6 +224,15 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-22-showroom-next-2200",
+    date: "2026-09-22",
+    activityIds: ["live-stream"],
+    title: "9/22 SHOWROOMは22:00〜予定",
+    body: "9月22日17:36 JSTに、SHOWROOMルームで次回配信予定として22:00〜の表示を確認しました。確認時点では配信開始前でした。終了時刻は未確認です。",
+    source: "https://www.showroom-live.com/r/circle2026_0734",
+    sourceLabel: "SHOWROOMを見る",
+  },
+  {
     id: "2026-09-21-agestock-yokohama",
     date: "2026-09-21",
     title: "AGESTOCK2026 in横アリに参戦🎀",
