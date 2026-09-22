@@ -11,6 +11,7 @@ import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
+import { SupportMusicVideo } from "./components/SupportMusicVideo";
 import { TodayDashboard } from "./components/TodayDashboard";
 import {
   HOME_GALLERY_LIMIT,
@@ -36,6 +37,7 @@ export default function App() {
         <Support />
         <ActivitiesGateway />
         <ChallengeConnection />
+        <SupportMusicVideo />
         <Latest limit={HOME_NEWS_LIMIT} />
         <Stories limit={HOME_STORY_LIMIT} />
         <Gallery limit={HOME_GALLERY_LIMIT} />

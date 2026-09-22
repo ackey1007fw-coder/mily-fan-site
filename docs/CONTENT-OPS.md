@@ -9,6 +9,15 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 
 ---
 
+## 2026-09-22確認: 非公式応援MV「みんなの太陽」＋MANABI LAB連携
+
+- オーナー指定の公開YouTube `https://youtu.be/8Npuc_epHUU` を、HOMEの専用「応援 × 学び」セクションへ掲載する。
+- 表示名は「みんなの太陽｜三橋莉子（みりぃ）非公式応援MV【フル版】」。公式・公認とは表現しない。
+- 動画ファイルはrepoへ複製せず、YouTube privacy-enhanced embed（`youtube-nocookie.com`）と公開YouTubeへの外部導線だけを使う。
+- `https://manabi-ai-lab.github.io/` への導線を併設し、MANABI LAB側からも当該MVと本ファンサイトへ相互リンクする。
+- 連携の説明は「応援」と「AI × 音楽 × 映像」の制作をつなぐ範囲に限定する。本人との私的関係、公式コラボ、所属先の関与は示唆しない。
+- NEWS / Gallery / Activities / profile / events / streamSchedule には重複追加しない。
+
 ## 2026-09-22確認: 天宮あみさんTikTok「東京で遊んでいただきました」
 
 - NEWS ID: `2026-09-21-tiktok-ami-tokyo`。Latest / NEWS と Gallery へ掲載。Activities 非関連付け（東京で遊んだ短尺であり、ラジオ／ミスコン／CAMPUS GIRLS の出演記録にはしない）。
