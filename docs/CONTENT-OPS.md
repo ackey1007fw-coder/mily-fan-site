@@ -16,6 +16,7 @@ LIVE STREAM の配信メモ（`src/data/streamRecaps.ts`）は `docs/LIVE-STREAM
 - 先頭はラジオDJネキみりぃ `@seasidecircle` の通常投稿。恒久permalinkは `https://www.tiktok.com/@seasidecircle/video/7688281091748220180`。投稿文は閲覧画面のキャプションを引用。
 - 2本目は同じ受け渡しの重ね合わせテンプレート動画。TikTok由来の `vid_md5` は通常投稿2本と別だが、恒久permalinkは確認できていない。非リンクの `TikTok` label＋ラジオDJネキみりぃTikTokプロフィール関連リンク。画面上部の「フレキャン出場中のあみちゃんに会ってきたのよ〜」だけを引用する。テンプレートの「いいね必須」文言は本人の投稿文として扱わない。
 - 3本目は天宮あみさん `@amis2_m.h` の通常投稿。恒久permalinkは `https://www.tiktok.com/@amis2_m.h/video/7688279563113073938`。投稿文は閲覧画面のキャプションを引用。みりぃ本人アカウントの投稿ではない。
+- 同日、みりぃ本人XからTikTokへの案内が2件追加された。18:17 JSTの `https://x.com/Mily_chan36/status/2102326348996137262` は先頭の「あみちゃんに会ってきたの〜」TikTok、18:20 JSTの `https://x.com/Mily_chan36/status/2102327155162267936` は天宮あみさんアカウントで撮った双子コーデTikTokへの案内。既存動画・NEWSカードを重複追加せず、それぞれの既存NEWSの `additionalSources` に本人Xへの導線だけを追加する。X画像CDNの取得・hotlinkはしない。
 - 3件とも `sameDayOrder` は付けず、source-array 順で Latest 先頭にする。
 - batch b141-01 / b141-02 / b141-03 動画を Latest / NEWS と Gallery で共有。楽曲の権利とこのサイトでの再配信権が未確認のため、公開派生は video-only（H.264 Constrained Baseline、`+faststart`、metadata除去）。VFRの2本は `-fps_mode passthrough` でフレーム数を維持する。
 - 楽曲名・歌詞は書かない。「妹分」など関係性の推測もしない。
