@@ -1,4 +1,9 @@
 import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
+import {
+  september23FanroomImage,
+  fanroomVoice1027,
+  fanroomVoice1032,
+} from "./september23Fanroom.ts";
 import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
@@ -227,6 +232,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-23-fanroom-selfie-voices",
+    date: "2026-09-23",
+    sameDayOrder: 30,
+    title: "みりぃからの連絡💌 音声と自撮りをお届け",
+    body: "9月23日10:27、SHOWROOMファンルームに音声と青いリボン姿の自撮りを投稿。10:28には風で髪がボサボサになったことを伝え、10:31には『やらかしみりぃでーす』とひとこと。10:32の音声も合わせて聴けます。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: september23FanroomImage,
+    additionalMedia: [fanroomVoice1027, fanroomVoice1032],
+  },
   {
     id: "2026-09-23-morning-commute-x",
     date: "2026-09-23",

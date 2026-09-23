@@ -5,11 +5,15 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 
 const xUrl = "https://x.com/Mily_chan36/status/2102557553435836694";
-const [x, morningStory, patonStory] = sortNewsByDateDesc(news).slice(0, 3);
+const [x, morningStory, patonStory] = [
+  "2026-09-23-morning-commute-x",
+  "2026-09-23-morning-commute-story",
+  "2026-09-23-paton-thanks-story",
+].map((id) => news.find((item) => item.id === id));
 
 it("archives the X post and both Stories without turning the evening plan into a current schedule", () => {
   assert.deepEqual(
-    [x.id, morningStory.id, patonStory.id],
+    sortNewsByDateDesc(news).filter((item) => [x, morningStory, patonStory].includes(item)).map((item) => item.id),
     [
       "2026-09-23-morning-commute-x",
       "2026-09-23-morning-commute-story",
