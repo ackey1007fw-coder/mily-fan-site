@@ -1,5 +1,12 @@
 # メディア運用ガイド — mily-fan-site
 
+## b144 — 2026-09-23 朝のStoryとX動画
+
+- オーナーが2本の縦型MP4とPatonの順位画像を直接提供し、Storyと本人X投稿の掲載を指定。朝StoryとX動画をLatest / NEWS・Galleryにそれぞれ同じ派生ファイルで掲載する。
+- `mily-b144-01-morning-commute-story.mp4` は朝枠のお礼・通学中の本人。出典は本人Instagram Story（公開permalinkなし）。`mily-b144-02-morning-x.mp4` は本人Xの投稿 `https://x.com/Mily_chan36/status/2102557553435836694` に添付された約3.7秒のくまフィルター動画。投稿日時は2026-09-23 09:35 JST。両動画とも512×910。
+- 元ファイルはgitignored `media/original/` に無改変で保管。公開派生はH.264 Baseline、元画角512×910、`+faststart`、メタデータ除去、video-only。元のAAC音声の内容・二次利用権を確認できないため公開派生へ含めない。posterは各公開MP4の2秒の実フレーム。顔加工・トリミング・生成処理なし。
+- Paton順位画像は支援者名・得点が多数見えるStory閲覧スクリーンショット。本人の本文は確認したが、視聴者の個人情報を含むため画像はLatest / NEWS / Gallery / `/stories/` へ公開しない。本文は支援への感謝と本選への意気込みだけを要約し、順位・個人名・点数を転記しない。
+
 写真・動画の受け入れから掲載までの手順と、受領済み素材の台帳です。
 
 どのツール（Claude Code / Codex / Cursor）で作業しても、この手順に従ってください。
