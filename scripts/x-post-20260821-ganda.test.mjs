@@ -157,7 +157,7 @@ describe("2026-08-21 ganda X post — self-hosted photo", () => {
     }
 
     const b14Files = (await readdir(path.join(root, "public/media/news")))
-      .filter((file) => file.includes("mily-b14"));
+      .filter((file) => file.startsWith("mily-b14-"));
     assert.deepEqual(b14Files, [path.basename(PHOTO_FILE)]);
   });
 

@@ -1,5 +1,14 @@
 # メディア運用ガイド — mily-fan-site
 
+## b145 — 2026-09-23 ファンルーム音声２件と自撮り
+
+- オーナーが公開ファンルームURL・投稿画面・UIなしの本人セルフィーを提供し、音声も前例どおり取得してサイト掲載を依頼。公開プロフィールの画像・ボイス一覧APIで音声ID `89002112`（10:27:05 JST）、写真ID `89002120`（10:27:58 JST）、音声ID `89002162`（10:32:15 JST）を照合。
+- b145-01 / b145-02の公開ファイルは `news/mily-b145-01-fanroom-voice-1027.m4a`（17.237秒、46,057 bytes）と `news/mily-b145-02-fanroom-voice-1032.m4a`（8.789秒、23,475 bytes）。元のM4A container（SHOWROOM CDN上の拡張子はaac）はそれぞれ64,933 / 42,747 bytes。受領バイトをgitignored `media/original/` に無改変保存。
+- 元音声SHA256: b145-01 `d7156ce8ced298606534d86ca35ced8c4dd045acb795c2b5730b1767f4e79134`、b145-02 `71d75c31a44fc0df47df4fbab740a1e8d5eceab9031a60c82763ec06dd104f30`。公開SHA256: b145-01 `84028202164054cc93ffbdc0b28d72cc817a2cd880b9977153e99c44df893e34`、b145-02 `b00805a6b0ae6a9e4db23bca3cd0518f4cda48dea0acf06e03ac56e8731a91a9`。
+- `ffmpeg -map 0:a:0 -c:a copy -map_metadata -1 -map_chapters -1 -movflags +faststart` で、12kHz mono AACを再エンコードせずに公開派生へ。両ファイルとも元・公開派生の圧縮音声パケット列のSHA256が一致。CDNへのhotlinkや自動再生なし。
+- b145-03は提供された1206×666の横長セルフィー。原本SHA256 `a737efc7c345d6caa8b56312c9d81e0430dc4e0b80771463ea9fa6c63af44c85`。`media:build` で480 / 960 / 1600命名のJPEG・WebP計6枚を生成（1600命名の実寸は1206×666、拡大なし）。EXIFを除去し、顔補正・トリミングなし。NEWS / Galleryで同じ派生を共有。
+- ファンルーム閲覧スクリーンショット２枚にはほかの視聴者の表示名・コメントと端末UIがあるため公開しない。音声の発話内容を未確認のまま本文へ転記しない。
+
 ## b144 — 2026-09-23 朝のStoryとX動画
 
 - オーナーが2本の縦型MP4とPatonの順位画像を直接提供し、Storyと本人X投稿の掲載を指定。朝StoryとX動画をLatest / NEWS・Galleryにそれぞれ同じ派生ファイルで掲載する。

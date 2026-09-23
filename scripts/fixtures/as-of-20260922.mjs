@@ -6,8 +6,10 @@
  */
 import { news } from "../../src/data/news.ts";
 import { galleryVideos } from "../../src/data/galleryVideos.ts";
+import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-09-23-fanroom-selfie-voices",
   "2026-09-23-morning-commute-x",
   "2026-09-23-morning-commute-story",
   "2026-09-23-paton-thanks-story",
@@ -22,4 +24,7 @@ for (let index = news.length - 1; index >= 0; index--) {
 }
 for (let index = galleryVideos.length - 1; index >= 0; index--) {
   if (newVideoIds.has(galleryVideos[index].id)) galleryVideos.splice(index, 1);
+}
+for (let index = media.length - 1; index >= 0; index--) {
+  if (media[index].id === "mily-b145-03") media.splice(index, 1);
 }
