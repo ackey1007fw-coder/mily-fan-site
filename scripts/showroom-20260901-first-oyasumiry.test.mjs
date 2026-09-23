@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { news as currentNewsForMedia } from "../src/data/news.ts";
 const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };

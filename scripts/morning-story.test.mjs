@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";

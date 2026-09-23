@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { withoutApprovedSongLinks } from "./approved-song-links.mjs";
 import { createHash } from "node:crypto";
