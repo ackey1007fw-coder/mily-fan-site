@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { readdir } from "node:fs/promises";
 import { describe, it } from "node:test";
