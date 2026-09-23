@@ -230,7 +230,6 @@ export const news: NewsItem[] = [
   {
     id: "2026-09-23-morning-commute-x",
     date: "2026-09-23",
-    activityIds: ["live-stream"],
     title: "朝枠ありがとう。大学へ行ってきます🎀",
     body: "9月23日朝、みりぃがXで朝の配信に来てくれた人へのお礼を伝えました。久しぶりに通学の電車で座れたという近況や、休みの人への言葉とともに、大学へ向かう様子を投稿。夜枠21:30〜は投稿時点の予定です。添付された、くまのフィルターを付けた短い動画も掲載しています。",
     source: "https://x.com/Mily_chan36/status/2102557553435836694",
@@ -240,7 +239,6 @@ export const news: NewsItem[] = [
   {
     id: "2026-09-23-morning-commute-story",
     date: "2026-09-23",
-    activityIds: ["live-stream"],
     title: "朝枠ありがとう。通学中のストーリー",
     body: "みりぃがInstagram Storyで朝枠に来てくれた皆さんへお礼を伝えました。電車で座れた近況や、今日も一緒に一日頑張ろうというメッセージを、ハートのフィルターを付けた短い動画に重ねています。",
     sourceLabel: morningCommuteStoryVideo.sourceLabel,
@@ -253,7 +251,6 @@ export const news: NewsItem[] = [
   {
     id: "2026-09-23-paton-thanks-story",
     date: "2026-09-23",
-    activityIds: ["campus-girls"],
     title: "Paton投票への感謝と、本選への思い",
     body: "みりぃがInstagram Storyで、Paton投票に協力してくれた皆さんへ感謝を伝えました。本選までに再び投票期間があることにも触れ、配信ができない分、投票やSNSで自分を知ってもらいながら頑張りたいと綴っています。順位画像には支援者の名前が載っているため、サイトでは文章のみを紹介します。",
     sourceLabel: "Instagram Story",
