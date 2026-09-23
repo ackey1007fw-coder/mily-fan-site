@@ -39,6 +39,15 @@ export const streamRecap20260923Asa: StreamRecap = {
       title: "メイクすると、もっとかわいく",
       body: "メイクで変わる楽しさを話しながら、ブラシを動かす朝のひとこまです。",
       clip: { src: "/media/live-clips/mily-b143-makeup.mp4", poster: stills[2].src, width: 640, height: 360, durationSeconds: 10, sourceTimestamp: "0:15:25" },
+      socialClip: {
+        title: "朝メイクのひとこと", sourceTimestamp: "0:15:25", durationSeconds: 10,
+        links: [
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=x7KwsFjvcCY" },
+          { platform: "tiktok", url: "https://www.tiktok.com/@ackeytan_/video/7688519694814383377" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdnA_oAEb7T/" },
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2102554652877213696" },
+        ],
+      },
     },
     {
       timestamp: "0:18:00",
@@ -55,6 +64,15 @@ export const streamRecap20260923Asa: StreamRecap = {
       title: "みんなと話すと笑顔に",
       body: "来てくれる人たちと話すのがうれしくて笑顔になる、と語った場面。朝のやさしい表情が残りました。",
       clip: { src: "/media/live-clips/mily-b143-smile.mp4", poster: stills[6].src, width: 640, height: 360, durationSeconds: 10, sourceTimestamp: "0:54:15" },
+      socialClip: {
+        title: "みんなと話すと笑顔に", sourceTimestamp: "0:54:15", durationSeconds: 10,
+        links: [
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=Lus1uzQ_LU8" },
+          { platform: "tiktok", url: "https://www.tiktok.com/@ackeytan_/video/7688519895222488341" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdnA_n2DCjC/" },
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2102554669297881140" },
+        ],
+      },
     },
     {
       timestamp: "0:55:10",
