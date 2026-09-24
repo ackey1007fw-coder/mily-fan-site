@@ -1,3 +1,5 @@
+import { streamRecap20260924Ami } from "./streamRecap20260924Ami.ts";
+import { recapSep24Evening } from "./recapSep24Evening.ts";
 import { streamRecap20260924Day } from "./streamRecap20260924Day.ts";
 import { streamRecap20260924Asa } from "./streamRecap20260924Asa.ts";
 import { streamRecap20260923Night } from "./streamRecap20260923Night.ts";
@@ -122,6 +124,8 @@ export type StreamRecapHighlight = {
   clip?: StreamRecapClip;
   /** 公開結果を確認した本人トーク投稿への導線。歌唱・原曲リンクとは別。 */
   socialClip?: StreamRecapSocialClip;
+  /** コラボ相手など、この見どころに直接関係する確認済みの公開リンク。 */
+  relatedLinks?: { label: string; url: string }[];
 };
 
 export type StreamRecapGoal = {
@@ -204,6 +208,8 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260924Ami,
+  recapSep24Evening,
   streamRecap20260924Day,
   streamRecap20260924Asa,
   streamRecap20260923Night,
@@ -253,6 +259,8 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260924Ami,
+  recapSep24Evening,
   streamRecap20260924Day,
   streamRecap20260924Asa,
   streamRecap20260923Night,
