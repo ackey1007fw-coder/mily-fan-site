@@ -2,18 +2,18 @@ import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
 
 const stills: StreamRecapImage[] = [
-  { src: "/media/live/mily-b144-01-night.jpg", width: 640, height: 360, alt: "大きな青いリボンをつけて笑うみりぃ", caption: "0:10:00 青いリボンと笑顔", downloadName: "みりぃ_20260923夜_01.jpg" },
-  { src: "/media/live/mily-b144-02-night.jpg", width: 640, height: 360, alt: "青いリボンをつけてカメラへ笑顔を向けるみりぃ", caption: "0:20:00 カメラへにっこり", downloadName: "みりぃ_20260923夜_02.jpg" },
-  { src: "/media/live/mily-b144-03-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて近くから笑うみりぃ", caption: "0:25:00 近くで見せた笑顔", downloadName: "みりぃ_20260923夜_03.jpg" },
-  { src: "/media/live/mily-b144-04-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて大きく笑うみりぃ", caption: "0:30:00 大きな笑顔", downloadName: "みりぃ_20260923夜_04.jpg" },
-  { src: "/media/live/mily-b144-05-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて手を上げるみりぃ", caption: "0:45:00 おしゃべり中のひとこま", downloadName: "みりぃ_20260923夜_05.jpg" },
-  { src: "/media/live/mily-b144-06-night.jpg", width: 640, height: 360, alt: "青いリボン姿で四次審査の案内ボードを見せるみりぃ", caption: "0:50:00 四次審査の案内ボード", downloadName: "みりぃ_20260923夜_06.jpg" },
-  { src: "/media/live/mily-b144-07-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて穏やかに話すみりぃ", caption: "0:55:00 ゆったりトーク", downloadName: "みりぃ_20260923夜_07.jpg" },
-  { src: "/media/live/mily-b144-08-night.jpg", width: 640, height: 360, alt: "青いリボンをつけてカメラを見つめるみりぃ", caption: "1:00:00 カメラを見つめて", downloadName: "みりぃ_20260923夜_08.jpg" },
-  { src: "/media/live/mily-b144-09-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて笑顔で話すみりぃ", caption: "1:10:00 夜のおしゃべり", downloadName: "みりぃ_20260923夜_09.jpg" },
-  { src: "/media/live/mily-b144-10-night.jpg", width: 640, height: 360, alt: "青いリボンに手を添えて話すみりぃ", caption: "1:30:00 リボンに手を添えて", downloadName: "みりぃ_20260923夜_10.jpg" },
-  { src: "/media/live/mily-b144-11-night.jpg", width: 640, height: 360, alt: "青いリボン姿で明るく笑うみりぃ", caption: "1:50:00 終盤の笑顔", downloadName: "みりぃ_20260923夜_11.jpg" },
-  { src: "/media/live/mily-b144-12-night.jpg", width: 640, height: 360, alt: "配信の終盤に両手を動かしながら話すみりぃ", caption: "2:00:00 締めくくりのおしゃべり", downloadName: "みりぃ_20260923夜_12.jpg" },
+  { src: "/media/live/mily-b155-01-night.jpg", width: 640, height: 360, alt: "大きな青いリボンをつけて笑うみりぃ", caption: "0:10:00 青いリボンと笑顔", downloadName: "みりぃ_20260923夜_01.jpg" },
+  { src: "/media/live/mily-b155-02-night.jpg", width: 640, height: 360, alt: "青いリボンをつけてカメラへ笑顔を向けるみりぃ", caption: "0:20:00 カメラへにっこり", downloadName: "みりぃ_20260923夜_02.jpg" },
+  { src: "/media/live/mily-b155-03-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて近くから笑うみりぃ", caption: "0:25:00 近くで見せた笑顔", downloadName: "みりぃ_20260923夜_03.jpg" },
+  { src: "/media/live/mily-b155-04-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて大きく笑うみりぃ", caption: "0:30:00 大きな笑顔", downloadName: "みりぃ_20260923夜_04.jpg" },
+  { src: "/media/live/mily-b155-05-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて手を上げるみりぃ", caption: "0:45:00 おしゃべり中のひとこま", downloadName: "みりぃ_20260923夜_05.jpg" },
+  { src: "/media/live/mily-b155-06-night.jpg", width: 640, height: 360, alt: "青いリボン姿で四次審査の案内ボードを見せるみりぃ", caption: "0:50:00 四次審査の案内ボード", downloadName: "みりぃ_20260923夜_06.jpg" },
+  { src: "/media/live/mily-b155-07-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて穏やかに話すみりぃ", caption: "0:55:00 ゆったりトーク", downloadName: "みりぃ_20260923夜_07.jpg" },
+  { src: "/media/live/mily-b155-08-night.jpg", width: 640, height: 360, alt: "青いリボンをつけてカメラを見つめるみりぃ", caption: "1:00:00 カメラを見つめて", downloadName: "みりぃ_20260923夜_08.jpg" },
+  { src: "/media/live/mily-b155-09-night.jpg", width: 640, height: 360, alt: "青いリボンをつけて笑顔で話すみりぃ", caption: "1:10:00 夜のおしゃべり", downloadName: "みりぃ_20260923夜_09.jpg" },
+  { src: "/media/live/mily-b155-10-night.jpg", width: 640, height: 360, alt: "青いリボンに手を添えて話すみりぃ", caption: "1:30:00 リボンに手を添えて", downloadName: "みりぃ_20260923夜_10.jpg" },
+  { src: "/media/live/mily-b155-11-night.jpg", width: 640, height: 360, alt: "青いリボン姿で明るく笑うみりぃ", caption: "1:50:00 終盤の笑顔", downloadName: "みりぃ_20260923夜_11.jpg" },
+  { src: "/media/live/mily-b155-12-night.jpg", width: 640, height: 360, alt: "配信の終盤に両手を動かしながら話すみりぃ", caption: "2:00:00 締めくくりのおしゃべり", downloadName: "みりぃ_20260923夜_12.jpg" },
 ];
 
 export const streamRecap20260923Night: StreamRecap = {
@@ -27,7 +27,7 @@ export const streamRecap20260923Night: StreamRecap = {
   image: stills[1],
   gallery: stills,
   galleryZip: {
-    src: "/media/live/mily-b144-night-stills.zip",
+    src: "/media/live/mily-b155-night-stills.zip",
     filename: "みりぃ_20260923夜_スクショ12枚.zip",
     label: "12枚まとめて保存",
   },
@@ -46,7 +46,7 @@ export const streamRecap20260923Night: StreamRecap = {
       timestamp: "0:44:50",
       title: "配信で話すのが楽しく",
       body: "配信を重ねるうちに話しやすくなり、来てくれる人が増えて楽しく配信できていると話しました。",
-      clip: { src: "/media/live-clips/mily-b144-cute.mp4", poster: stills[4].src, width: 640, height: 360, durationSeconds: 12, sourceTimestamp: "0:44:50" },
+      clip: { src: "/media/live-clips/mily-b155-cute.mp4", poster: stills[4].src, width: 640, height: 360, durationSeconds: 12, sourceTimestamp: "0:44:50" },
     },
     {
       timestamp: "1:10:34",

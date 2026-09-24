@@ -1,5 +1,22 @@
 # メディア運用ガイド — mily-fan-site
 
+## b156 — 2026-09-24 SHOWROOM朝配信
+
+- オーナー承認済みの保存録画から、当該回だけの実フレーム12枚、ZIP、本人トーク短尺を作成。録画開始記録は05:32:49 JST、メディア実測3844.041秒。
+- 公開静止画は `live/mily-b156-01-morning.jpg` 〜 `mily-b156-12-morning.jpg`（640×360）。顔・身体の生成、補正、生成塗り足しなし。
+- `live/mily-b156-morning-stills.zip` は上記12枚のみを収録。
+- `live-clips/mily-b156-cute.mp4` とSNS用縦型 `mily-b156-cute-vertical.mp4` は録画の実映像・原音からの短いトーク抜粋。録画全編・全文文字起こし・視聴者名は公開しない。
+- provenance: `owner-provided`。掲載面はLIVE STREAM配信メモのみ。Gallery / NEWSへ複製しない。
+
+## b155 — 2026-09-23 SHOWROOM夜配信
+
+- オーナー承認済みの保存録画から、当該回だけの実フレーム12枚、ZIP、本人トーク短尺を作成。録画開始記録は20:29:48 JST、メディア実測7322.901秒。
+- 公開静止画は `live/mily-b155-01-night.jpg` 〜 `mily-b155-12-night.jpg`（640×360）。顔・身体の生成、補正、生成塗り足しなし。
+- `live/mily-b155-night-stills.zip` は上記12枚のみを収録。
+- `live-clips/mily-b155-cute.mp4` とSNS用縦型 `mily-b155-cute-vertical.mp4` は録画の実映像・原音からの短いトーク抜粋。録画全編・全文文字起こし・視聴者名は公開しない。
+- provenance: `owner-provided`。掲載面はLIVE STREAM配信メモのみ。Gallery / NEWSへ複製しない。
+
+
 ## b145 — 2026-09-23 ファンルーム音声２件と自撮り
 
 - オーナーが公開ファンルームURL・投稿画面・UIなしの本人セルフィーを提供し、音声も前例どおり取得してサイト掲載を依頼。公開プロフィールの画像・ボイス一覧APIで音声ID `89002112`（10:27:05 JST）、写真ID `89002120`（10:27:58 JST）、音声ID `89002162`（10:32:15 JST）を照合。

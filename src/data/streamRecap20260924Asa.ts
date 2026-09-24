@@ -2,18 +2,18 @@ import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
 
 const stills: StreamRecapImage[] = [
-  { src: "/media/live/mily-b145-01-morning.jpg", width: 640, height: 360, alt: "朝の配信で笑顔を見せるみりぃ", caption: "0:07:30 朝の笑顔", downloadName: "みりぃ_20260924朝_01.jpg" },
-  { src: "/media/live/mily-b145-02-morning.jpg", width: 640, height: 360, alt: "メイクスポンジを頬に当てるみりぃ", caption: "0:10:00 メイク中のひとこま", downloadName: "みりぃ_20260924朝_02.jpg" },
-  { src: "/media/live/mily-b145-03-morning.jpg", width: 640, height: 360, alt: "メイクをしながら目を細めて笑うみりぃ", caption: "0:17:30 メイクと笑顔", downloadName: "みりぃ_20260924朝_03.jpg" },
-  { src: "/media/live/mily-b145-04-morning.jpg", width: 640, height: 360, alt: "朝の配信でカメラへ穏やかに話すみりぃ", caption: "0:20:00 朝のおしゃべり", downloadName: "みりぃ_20260924朝_04.jpg" },
-  { src: "/media/live/mily-b145-05-morning.jpg", width: 640, height: 360, alt: "画面近くで笑顔を見せるみりぃ", caption: "0:27:30 近くでにっこり", downloadName: "みりぃ_20260924朝_05.jpg" },
-  { src: "/media/live/mily-b145-06-morning.jpg", width: 640, height: 360, alt: "メイクを終えつつカメラへ話すみりぃ", caption: "0:32:30 メイクも終盤へ", downloadName: "みりぃ_20260924朝_06.jpg" },
-  { src: "/media/live/mily-b145-07-morning.jpg", width: 640, height: 360, alt: "朝の配信で明るい表情を見せるみりぃ", caption: "0:35:00 明るい表情", downloadName: "みりぃ_20260924朝_07.jpg" },
-  { src: "/media/live/mily-b145-08-morning.jpg", width: 640, height: 360, alt: "カメラ近くから笑顔で話すみりぃ", caption: "0:42:30 仕上がりを見せて", downloadName: "みりぃ_20260924朝_08.jpg" },
-  { src: "/media/live/mily-b145-09-morning.jpg", width: 640, height: 360, alt: "メイク後に笑顔でカメラを見るみりぃ", caption: "0:45:00 メイク後の笑顔", downloadName: "みりぃ_20260924朝_09.jpg" },
-  { src: "/media/live/mily-b145-10-morning.jpg", width: 640, height: 360, alt: "配信終盤に笑顔で話すみりぃ", caption: "0:50:00 まだ話していたい朝", downloadName: "みりぃ_20260924朝_10.jpg" },
-  { src: "/media/live/mily-b145-11-morning.jpg", width: 640, height: 360, alt: "両手の人差し指を頬の近くに向けて笑うみりぃ", caption: "0:55:00 かわいいポーズ", downloadName: "みりぃ_20260924朝_11.jpg" },
-  { src: "/media/live/mily-b145-12-morning.jpg", width: 640, height: 360, alt: "片手を広げて明るく話すみりぃ", caption: "1:02:30 締めくくりのひとこま", downloadName: "みりぃ_20260924朝_12.jpg" },
+  { src: "/media/live/mily-b156-01-morning.jpg", width: 640, height: 360, alt: "朝の配信で笑顔を見せるみりぃ", caption: "0:07:30 朝の笑顔", downloadName: "みりぃ_20260924朝_01.jpg" },
+  { src: "/media/live/mily-b156-02-morning.jpg", width: 640, height: 360, alt: "メイクスポンジを頬に当てるみりぃ", caption: "0:10:00 メイク中のひとこま", downloadName: "みりぃ_20260924朝_02.jpg" },
+  { src: "/media/live/mily-b156-03-morning.jpg", width: 640, height: 360, alt: "メイクをしながら目を細めて笑うみりぃ", caption: "0:17:30 メイクと笑顔", downloadName: "みりぃ_20260924朝_03.jpg" },
+  { src: "/media/live/mily-b156-04-morning.jpg", width: 640, height: 360, alt: "朝の配信でカメラへ穏やかに話すみりぃ", caption: "0:20:00 朝のおしゃべり", downloadName: "みりぃ_20260924朝_04.jpg" },
+  { src: "/media/live/mily-b156-05-morning.jpg", width: 640, height: 360, alt: "画面近くで笑顔を見せるみりぃ", caption: "0:27:30 近くでにっこり", downloadName: "みりぃ_20260924朝_05.jpg" },
+  { src: "/media/live/mily-b156-06-morning.jpg", width: 640, height: 360, alt: "メイクを終えつつカメラへ話すみりぃ", caption: "0:32:30 メイクも終盤へ", downloadName: "みりぃ_20260924朝_06.jpg" },
+  { src: "/media/live/mily-b156-07-morning.jpg", width: 640, height: 360, alt: "朝の配信で明るい表情を見せるみりぃ", caption: "0:35:00 明るい表情", downloadName: "みりぃ_20260924朝_07.jpg" },
+  { src: "/media/live/mily-b156-08-morning.jpg", width: 640, height: 360, alt: "カメラ近くから笑顔で話すみりぃ", caption: "0:42:30 仕上がりを見せて", downloadName: "みりぃ_20260924朝_08.jpg" },
+  { src: "/media/live/mily-b156-09-morning.jpg", width: 640, height: 360, alt: "メイク後に笑顔でカメラを見るみりぃ", caption: "0:45:00 メイク後の笑顔", downloadName: "みりぃ_20260924朝_09.jpg" },
+  { src: "/media/live/mily-b156-10-morning.jpg", width: 640, height: 360, alt: "配信終盤に笑顔で話すみりぃ", caption: "0:50:00 まだ話していたい朝", downloadName: "みりぃ_20260924朝_10.jpg" },
+  { src: "/media/live/mily-b156-11-morning.jpg", width: 640, height: 360, alt: "両手の人差し指を頬の近くに向けて笑うみりぃ", caption: "0:55:00 かわいいポーズ", downloadName: "みりぃ_20260924朝_11.jpg" },
+  { src: "/media/live/mily-b156-12-morning.jpg", width: 640, height: 360, alt: "片手を広げて明るく話すみりぃ", caption: "1:02:30 締めくくりのひとこま", downloadName: "みりぃ_20260924朝_12.jpg" },
 ];
 
 export const streamRecap20260924Asa: StreamRecap = {
@@ -27,7 +27,7 @@ export const streamRecap20260924Asa: StreamRecap = {
   image: stills[10],
   gallery: stills,
   galleryZip: {
-    src: "/media/live/mily-b145-morning-stills.zip",
+    src: "/media/live/mily-b156-morning-stills.zip",
     filename: "みりぃ_20260924朝_スクショ12枚.zip",
     label: "12枚まとめて保存",
   },
@@ -66,7 +66,7 @@ export const streamRecap20260924Asa: StreamRecap = {
       timestamp: "0:51:18",
       title: "朝配信を終わりたくない",
       body: "あと少しで終了というところで、楽しくて朝配信を終わりたくない、と名残惜しそうに話しました。",
-      clip: { src: "/media/live-clips/mily-b145-cute.mp4", poster: stills[9].src, width: 640, height: 360, durationSeconds: 8, sourceTimestamp: "0:51:18" },
+      clip: { src: "/media/live-clips/mily-b156-cute.mp4", poster: stills[9].src, width: 640, height: 360, durationSeconds: 8, sourceTimestamp: "0:51:18" },
     },
     {
       timestamp: "1:01:30",
