@@ -234,6 +234,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-09-25-first-avatar-distribution-x",
+    date: "2026-09-25",
+    title: "朝からありがとう。昨夜の初アバ配布🎀🩵",
+    body: "9月25日7:48、みりぃがXで、朝の配信に来てくれた人へのお礼を伝えました。文面の「昨日の夜」は9月24日夜の初アバター配布で、たくさんの人に着替えてもらえて幸せだったと投稿しています。添付された配信画面には視聴者の名前と順位が写っているため、サイトでは文章のみを紹介します。",
+    source: "https://x.com/Mily_chan36/status/2103255202749198794",
+    sourceLabel: "みりぃのX投稿を見る",
+    message: {
+      label: "みりぃのX",
+      text:
+        "朝から配信に来てくれた皆様ありがとう╰(*´︶`*)╯♡\n" +
+        "\n" +
+        "昨日の夜の初アバ配布の様子をお届け🎀🩵\n" +
+        "たーくさんの方に着替えてもらえて幸せです。\n" +
+        "\n" +
+        "みりぃさん、これからも頑張るどー‼️",
+    },
+  },
+  {
     id: "2026-09-24-face-to-face-class-story",
     date: "2026-09-24",
     title: "今日は対面授業へ。みりぃの朝ストーリー🐾",
