@@ -703,6 +703,7 @@ function StreamRecapArticle({
                   {highlight.title}
                 </h5>
                 <p className="mt-2 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+                {highlight.relatedLinks ? <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1">{highlight.relatedLinks.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4">{link.label} ↗</a>)}</div> : null}
                 {highlight.socialClip ? <StreamSocialClipLinks clip={highlight.socialClip} id={`social-${recap.id}-${highlight.timestamp.replace(/:/g, "")}`} /> : null}
                 {highlight.clip ? (
                   <figure className="mt-3 overflow-hidden rounded-xl bg-paper-card">
