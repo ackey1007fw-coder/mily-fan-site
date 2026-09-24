@@ -125,7 +125,7 @@ describe("2026-09-12 X 3次SHOWROOM完走・WEB投票 — scope", () => {
 describe("2026-09-12 X 3次SHOWROOM完走・WEB投票 — Portal Feed", () => {
   it("keeps a single video NEWS item instead of extra text cards", () => {
     const feed = createPortalFeed({
-      newsItems: news,
+      newsItems: news.filter((entry) => entry.date <= "2026-09-12"),
       now: new Date("2026-09-12T22:30:00+09:00"),
     });
     const avatar = findFeedItem(feed, portalNewsId(AVATAR_ID));

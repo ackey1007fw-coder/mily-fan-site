@@ -1,3 +1,4 @@
+import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
 import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
 import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
 import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXStoryVideo.ts";
@@ -149,6 +150,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  faceToFaceClassStoryVideo,
   morningXVideo,
   morningCommuteStoryVideo,
   tiktokAmiMeetVideo,

@@ -17,6 +17,14 @@
 - provenance: `owner-provided`。掲載面はLIVE STREAM配信メモのみ。Gallery / NEWSへ複製しない。
 
 
+## b146 — 2026-09-24 対面授業へ向かう朝のStory
+
+- オーナーが512×910・約5.3秒のInstagram Story動画を直接提供し、サイト掲載を依頼。本人セルフィーに猫耳フィルターとウインク、画面内の授業・朝のメッセージを確認。識別可能な第三者・端末UI・私的連絡先は見当たらない。
+- 元素材は `media/original/mily-b146-01-face-to-face-class-story.mp4` に無改変保存（gitignore、commitしない）。3,279,202 bytes、SHA256 `da1bf66364336e9b6b165d13f98c88a39ef49dddc1e2f3ff0a8611e9aec16a12`。
+- 公開MP4は `public/media/gallery/mily-b146-01-face-to-face-class-story.mp4`。190,853 bytes、SHA256 `d6f6433be6d2bda39bd349a73aba9852e0cac2e02a9393a78b063a44d3352167`。H.264 Constrained Baseline、512×910、video-only、`+faststart`、metadata / chapter除去。元AAC音声は二次利用権を確認できないため掲載しない。
+- posterは `public/media/gallery/mily-b146-01-face-to-face-class-story-poster.jpg`。公開MP4の3.0秒地点の実フレーム、512×910、36,543 bytes、SHA256 `ceccc94218699552f4992350021e69f45bc70508a4ebacdfbc76b662d1692b58`。トリミング・AI生成・顔補正なし。
+- Latest / NEWS と Gallery が同じメディアオブジェクトを共有する。恒久的なStory permalinkはないため公開データは非リンクの `Instagram Story` labelのみ。`/stories/`記事は作らない。
+
 ## b145 — 2026-09-23 ファンルーム音声２件と自撮り
 
 - オーナーが公開ファンルームURL・投稿画面・UIなしの本人セルフィーを提供し、音声も前例どおり取得してサイト掲載を依頼。公開プロフィールの画像・ボイス一覧APIで音声ID `89002112`（10:27:05 JST）、写真ID `89002120`（10:27:58 JST）、音声ID `89002162`（10:32:15 JST）を照合。
