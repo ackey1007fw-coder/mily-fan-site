@@ -29,7 +29,17 @@ export const recapSep24Evening: StreamRecap = {
   image: stills[5], gallery: stills,
   galleryZip: { src: "/media/live/mily-b158-evening-stills.zip", filename: "みりぃ_20260924夜_スクショ12枚.zip", label: "12枚まとめて保存" },
   highlights: [
-    { timestamp: "0:05:04", title: "初めてのアバターを紹介", body: "初めて獲得したみりぃのアバターを紹介。配布できるようになった喜びを笑顔で伝え、みんなにも手に取ってほしいと呼びかけました。", clip: { src: "/media/live-clips/mily-b158-avatar.mp4", poster: "/media/live-clips/mily-b158-avatar-poster.jpg", width: 640, height: 360, durationSeconds: 10.4, sourceTimestamp: "0:05:04" } },
+    { timestamp: "0:05:04", title: "初めてのアバターを紹介", body: "初めて獲得したみりぃのアバターを紹介。配布できるようになった喜びを笑顔で伝え、みんなにも手に取ってほしいと呼びかけました。", clip: { src: "/media/live-clips/mily-b158-avatar.mp4", poster: "/media/live-clips/mily-b158-avatar-poster.jpg", width: 640, height: 360, durationSeconds: 10.4, sourceTimestamp: "0:05:04" },
+      socialClip: {
+        title: "初アバター配布の夜", sourceTimestamp: "0:05:04", durationSeconds: 10.4,
+        links: [
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2103147371005620354" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdrOiNJjx5w/" },
+          { platform: "tiktok", url: "https://www.tiktok.com/t/7689126898185587986" },
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=pAvOzPjqPkI" },
+        ],
+      },
+    },
     { timestamp: "0:23:55", title: "みんなのおかげで配布の日", body: "初アバターの配布をあらためて報告。受け取りに来てくれた人へ感謝し、喜びを分かち合いました。" },
     { timestamp: "0:29:20", title: "アバターと一緒に", body: "みんなでみりぃのアバターを着て、記念の画面を撮りたいと話しました。" },
     { timestamp: "0:44:25", title: "あみちゃんの話題へ", body: "フレキャンに挑戦する天宮あみさんの配信や、ふたりで話す機会について話が広がりました。" },
