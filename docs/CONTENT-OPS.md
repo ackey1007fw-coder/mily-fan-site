@@ -4,8 +4,8 @@
 
 - NEWS ID `2026-09-25-first-avatar-distribution-x`。本人X `https://x.com/Mily_chan36/status/2103255202749198794` は2026-09-24 22:48:11 UTC / 2026-09-25 07:48 JST。朝の配信へのお礼、昨日の夜の初アバター配布、着替えてもらえたこと、「みりぃさん、これからも頑張るどー」を原文どおり message に置く。
 - 文面の「昨日の夜」は投稿日の前日、9月24日夜。既存の配信メモへ自動転記せず、現在の streamSchedule も変えない。
-- 添付2枚はSHOWROOM配信画面で、視聴者の名前と順位が写る。X画像CDNの取得・hotlinkはせず、Gallery / media にも入れない。文章のみ。
-- Activities・`/stories/`・プロフィール・events・contest には追加しない。
+- 添付2枚は本人XのSHOWROOM配信画面。2026-09-25、オーナーがこの2枚の掲載を明示したため、Latest / NEWSに無改変で載せる。画面内の表示名と順位は本文・altへ書き写さない。X画像CDNのhotlinkはしない。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/`・Activitiesには入れない。
+- Activities・`/stories/`・プロフィール・events・contest・streamScheduleには追加しない。
 
 ## 2026-09-24 21:00 / 22:55 SHOWROOM配信レポート（b158 / b159）
 
