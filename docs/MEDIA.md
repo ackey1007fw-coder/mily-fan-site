@@ -1,5 +1,20 @@
 # メディア運用ガイド — mily-fan-site
 
+## b160 — 2026-09-25 初アバター配布の本人X画像
+
+オーナーが指定した本人X `https://x.com/Mily_chan36/status/2103255202749198794`（2026-09-25 07:48 JST）の添付2枚を、Latest / NEWS専用の自己ホスト画像として掲載する。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/`・Activitiesには追加しない。
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b160-01 | `news/mily-b160-01-first-avatar-point.jpg` | 青いTシャツのみりぃが、初アバ配布の配信画面で両手の人差し指を下げて笑う縦写真。811×1238 | ✅ NEWS代表 |
+| b160-02 | `news/mily-b160-02-first-avatar-heart.jpg` | 同じ配信画面で両手のハートを作って笑う縦写真。809×1246 | ✅ 同じNEWSの2枚目 |
+
+- provenance: オーナーがこの投稿の画像掲載を明示。公開JPEGは取得バイトから ICC プロファイル（APP2）だけを除いたもの。画素数・クロップ・回転・再エンコードはしていない。
+- 元素材は gitignore の `media/original/` に受領バイトのまま保管し、コミットしない。
+- 公開ファイルに EXIF / GPS / IPTC / XMP / ICC はない。
+- 画面内の表示名と順位は画像に残し、NEWS本文・alt・contest・配信予定へは転記しない。
+- Xの画像URLはhotlinkしない。
+
 ## 2026-09-24 夜配信 / b158・b159
 
 - オーナーが掲載を依頼した各SHOWROOM録画から、実フレームを抽出。元録画は変更せず、AIによる顔・身体の生成、置換、補正は行わない。LIVE STREAM専用とし、Gallery / NEWSへ複製しない。

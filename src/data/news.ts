@@ -6,6 +6,7 @@ import {
 } from "./september23Fanroom.ts";
 import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
 import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
+import { firstAvatarDistributionImages } from "./firstAvatarDistributionImages.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
@@ -237,9 +238,11 @@ export const news: NewsItem[] = [
     id: "2026-09-25-first-avatar-distribution-x",
     date: "2026-09-25",
     title: "朝からありがとう。昨夜の初アバ配布🎀🩵",
-    body: "9月25日7:48、みりぃがXで、朝の配信に来てくれた人へのお礼を伝えました。文面の「昨日の夜」は9月24日夜の初アバター配布で、たくさんの人に着替えてもらえて幸せだったと投稿しています。添付された配信画面には視聴者の名前と順位が写っているため、サイトでは文章のみを紹介します。",
+    body: "9月25日7:48、みりぃがXで、朝の配信に来てくれた人へのお礼を伝えました。文面の「昨日の夜」は9月24日夜の初アバター配布で、たくさんの人に着替えてもらえて幸せだったと投稿しています。添えられた配信画面2枚も、同じ投稿のまま掲載しています。画面内の表示名と順位は本文へ書き写していません。",
     source: "https://x.com/Mily_chan36/status/2103255202749198794",
     sourceLabel: "みりぃのX投稿を見る",
+    media: firstAvatarDistributionImages.point,
+    additionalMedia: [firstAvatarDistributionImages.heart],
     message: {
       label: "みりぃのX",
       text:
