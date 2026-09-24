@@ -5,6 +5,7 @@ import {
   fanroomVoice1032,
 } from "./september23Fanroom.ts";
 import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
+import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
@@ -232,6 +233,14 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-24-face-to-face-class-story",
+    date: "2026-09-24",
+    title: "今日は対面授業へ。みりぃの朝ストーリー🐾",
+    body: "9月24日朝、みりぃがInstagram Storyを投稿。前日はオンライン授業の日に大学へ向かってしまったことを振り返りつつ、この日は対面授業へ。猫耳フィルターとウインクを交えながら、今日も一緒に乗り越えようとメッセージを届けています。",
+    sourceLabel: faceToFaceClassStoryVideo.sourceLabel,
+    media: faceToFaceClassStoryVideo,
+  },
   {
     id: "2026-09-23-fanroom-selfie-voices",
     date: "2026-09-23",
