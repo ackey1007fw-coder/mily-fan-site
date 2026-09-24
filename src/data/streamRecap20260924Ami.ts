@@ -33,7 +33,17 @@ export const streamRecap20260924Ami: StreamRecap = {
     { timestamp: "0:00:18", title: "ふたりの画面がつながる", body: "天宮あみさんと一緒に画面へ登場。コラボ表示や声の聞こえ方を確かめながら、笑顔で話し始めました。" },
     { timestamp: "0:02:55", title: "画面越しのハート", body: "左右の画面で手を動かし、ふたりでハートの形を作ろうと試します。映り方の左右が違って、楽しい掛け合いになりました。" },
     { timestamp: "0:09:20", title: "初めてのコラボに感謝", body: "初めて試したコラボ配信を楽しみ、両方のルームから来てくれた皆さんに感謝を伝えました。" },
-    { timestamp: "0:24:10", title: "ふたりで目指す舞台", body: "ふたりでファイナリストを目指し、笑顔で終えたら韓国旅行へ行くという約束にも触れました。あみさんの活動も応援できます。", relatedLinks: [amiMilyKoreaPromise.amiEntry, amiMilyKoreaPromise.amiX, amiMilyKoreaPromise.amiTikTok], clip: { src: "/media/live-clips/mily-b159-ami-farewell.mp4", poster: "/media/live-clips/mily-b159-ami-farewell-poster.jpg", width: 480, height: 270, durationSeconds: 21.2, sourceTimestamp: "0:24:10" } },
+    { timestamp: "0:24:10", title: "ふたりで目指す舞台", body: "ふたりでファイナリストを目指し、笑顔で終えたら韓国旅行へ行くという約束にも触れました。あみさんの活動も応援できます。", relatedLinks: [amiMilyKoreaPromise.amiEntry, amiMilyKoreaPromise.amiX, amiMilyKoreaPromise.amiTikTok], clip: { src: "/media/live-clips/mily-b159-ami-farewell.mp4", poster: "/media/live-clips/mily-b159-ami-farewell-poster.jpg", width: 480, height: 270, durationSeconds: 21.2, sourceTimestamp: "0:24:10" },
+      socialClip: {
+        title: "みりぃと天宮あみさんのコラボ", sourceTimestamp: "0:24:10", durationSeconds: 21.2,
+        links: [
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2103147411728200049" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdrOjd9Djus/" },
+          { platform: "tiktok", url: "https://www.tiktok.com/t/7689126956205559061" },
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=H0S4XkKDIl4" },
+        ],
+      },
+    },
     { timestamp: "0:25:00", title: "あみさんのルームへお礼", body: "あみさんのルームの皆さんへもお礼を伝え、ふたりで手を振ってコラボを締めくくりました。" },
     { timestamp: "0:25:25", title: "みりぃからもう一度", body: "コラボ後は単独画面に戻り、急な配信になったことや一緒に話せた喜びを振り返りました。" },
   ],

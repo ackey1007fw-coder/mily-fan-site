@@ -43,7 +43,15 @@ export const approvedTalkLinks = [
   "https://www.youtube.com/watch?v=Lus1uzQ_LU8",
   "https://www.tiktok.com/@ackeytan_/video/7688519895222488341",
   "https://www.instagram.com/reel/DdnA_n2DCjC/",
-  "https://x.com/ackey_RiRi_supp/status/2102554669297881140"
+  "https://x.com/ackey_RiRi_supp/status/2102554669297881140",
+  "https://x.com/ackey_RiRi_supp/status/2103147371005620354",
+  "https://www.instagram.com/reel/DdrOiNJjx5w/",
+  "https://www.tiktok.com/t/7689126898185587986",
+  "https://www.youtube.com/watch?v=pAvOzPjqPkI",
+  "https://x.com/ackey_RiRi_supp/status/2103147411728200049",
+  "https://www.instagram.com/reel/DdrOjd9Djus/",
+  "https://www.tiktok.com/t/7689126956205559061",
+  "https://www.youtube.com/watch?v=H0S4XkKDIl4"
 ];
 export function withoutApprovedTalkLinks(text) {
   return approvedTalkLinks.reduce((out, url) => out.replaceAll(url, ""), text);
