@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { checkStreamBlackoutNotice } from "./stream-blackouts.browser-checks.mjs";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -312,6 +313,9 @@ try {
           await photo.screenshot({ path: join(output, `${scenario.name}-night-fanroom-${route.includes("activities") ? "live" : "news"}.png`) });
         }
         assert.deepEqual(errors, []);
+      });
+      await check("NG board is separate from confirmed slots, responsive and expires in JST", async () => {
+        await checkStreamBlackoutNotice({ context, base, output, scenario });
       });
       result.status = "passed";
     } catch (error) {

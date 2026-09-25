@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
 import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
+import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import { VoteSpotlight } from "./components/VoteSpotlight";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
@@ -294,6 +295,7 @@ export default function SupportPage() {
           ) : null}
         </div>
 
+        <StreamBlackoutNotice />
         <SupportCalendarAgenda calendar={calendar} today={today} />
 
         {pendingItems.length > 0 ? (

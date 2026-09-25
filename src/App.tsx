@@ -13,6 +13,7 @@ import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
 import { SupportMusicVideo } from "./components/SupportMusicVideo";
 import { TodayDashboard } from "./components/TodayDashboard";
+import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import {
   HOME_GALLERY_LIMIT,
   HOME_NEWS_LIMIT,
@@ -34,6 +35,7 @@ export default function App() {
         <Hero />
         <PatonVoteGuide />
         <TodayDashboard />
+        <StreamBlackoutNotice compact />
         <Support />
         <ActivitiesGateway />
         <ChallengeConnection />
