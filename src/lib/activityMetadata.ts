@@ -27,6 +27,16 @@ export function activityPageMetadata(pathname: string): ActivityPageMetadata {
     throw new Error(`Unknown Activity route: ${pathname}`);
   }
 
+  if (activity.id === "live-stream") {
+    return {
+      title: "三橋莉子（みりぃ）の配信レポート・歌リスト｜非公式ファンサイト",
+      description:
+        "SHOWROOM配信のレポート、写真、歌った曲と原曲へのリンクをまとめた、三橋莉子（みりぃ / Mily）さんのファン運営・非公式ページです。",
+      canonical: activityUrl(activity.route),
+      breadcrumbLabel: activity.label,
+    };
+  }
+
   return {
     title: `${activity.label}｜みりぃの活動｜ファン運営・非公式サイト`,
     description: `${activity.summary} みりぃ（三橋莉子 / Mily）さんを応援する、ファン運営の非公式活動ページです。`,
