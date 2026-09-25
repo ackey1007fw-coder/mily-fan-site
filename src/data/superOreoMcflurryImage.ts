@@ -10,5 +10,5 @@ export const superOreoMcflurryImage = {
   src: "/media/news/mily-b162-01-super-oreo-mcflurry.jpg",
   width: 1536,
   height: 2048,
-  alt: "テーブルの上のマックフルーリー超オレオを、黒いネイルの左手で持つ写真。カップにはオレオとスプーンが乗っている",
+  alt: "木目のテーブルに置かれたマックフルーリー超オレオのカップ。アイスの上に砕いたオレオが乗っている",
 } as const;

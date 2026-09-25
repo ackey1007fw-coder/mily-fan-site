@@ -240,7 +240,7 @@ export const news: NewsItem[] = [
     date: "2026-09-25",
     sameDayOrder: 20,
     title: "君はマックフルーリー超オレオの鏡だ🪞",
-    body: "9月25日18:25、みりぃがXで、テーブルの上のマックフルーリー超オレオの写真とともに投稿しました。カップを持つ手元と、向かい側の白い服の人も写っています。相手の名前は投稿にないため書いていません。",
+    body: "9月25日18:25、みりぃがXで、テーブルの上のマックフルーリー超オレオの写真とともに投稿しました。",
     source: "https://x.com/Mily_chan36/status/2103415595043852403",
     sourceLabel: "みりぃのX投稿を見る",
     media: superOreoMcflurryImage,

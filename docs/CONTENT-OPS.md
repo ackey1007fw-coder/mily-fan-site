@@ -4,7 +4,7 @@
 
 - NEWS ID `2026-09-25-super-oreo-mcflurry-x`。本人X `https://x.com/Mily_chan36/status/2103415595043852403` は2026-09-25 09:25:32 UTC / 2026-09-25 18:25 JST。マックフルーリー超オレオの写真1枚と、原文どおりの2行を message に置く。
 - オーナーがこの投稿の画像掲載を明示したため、Latest / NEWSに無改変で載せる。X画像CDNのhotlinkはしない。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/`・Activitiesには入れない。
-- 写真にはカップを持つ手元と、向かい側の白い服の人が写る。相手の名前は投稿にないため本文・altへ書かない。
+- 9/25訂正: 公開JPEGを目視照合。写っているのはテーブル上のカップであり、手・人物・スプーンは確認できない。本文・altの誤った描写を除去し、画像・出典URL・引用原文は変更しない。
 - 同日朝7:48の初アバター配布Xより後の投稿なので `sameDayOrder: 20` でLatest先頭にする。プロフィール・events・contest・streamScheduleには追加しない。
 
 
