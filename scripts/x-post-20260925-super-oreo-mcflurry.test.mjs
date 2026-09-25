@@ -40,7 +40,9 @@ describe("2026-09-25 X マックフルーリー超オレオ", () => {
     assert.equal(entry.message?.label, "みりぃのX");
     assert.equal(entry.message?.text, MESSAGE);
     assert.match(entry.body, /マックフルーリー超オレオ/);
-    assert.match(entry.body, /相手の名前は投稿にない/);
+    assert.equal(entry.body, "9月25日18:25、みりぃがXで、テーブルの上のマックフルーリー超オレオの写真とともに投稿しました。");
+    assert.equal(entry.media.alt, "木目のテーブルに置かれたマックフルーリー超オレオのカップ。アイスの上に砕いたオレオが乗っている");
+    assert.doesNotMatch(entry.body + entry.media.alt, /手元|左手|ネイル|白い服|相手|人物|スプーン/);
     assert.doesNotMatch(entry.body, /あっきー|天宮|Hiro|ちゃんきー/);
     assert.doesNotMatch(entry.media.alt, /あっきー|天宮|Hiro|ちゃんきー/);
     const serialized = JSON.stringify(entry);
