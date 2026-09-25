@@ -1,5 +1,14 @@
 # メディア運用ガイド — mily-fan-site
 
+## b161 — 2026-09-25 SHOWROOM朝配信
+
+- オーナーが掲載を依頼した朝枠の保存録画から、実フレーム10枚をLIVE STREAM専用に採用。録画開始記録は06:36:12 JST、メディア実測3654.058秒。元録画に変更なし。
+- `live/mily-b161-01-morning.jpg`〜`10-morning.jpg` は640×360。録画内140、320、510、850、1190、1370、1730、1910、2990、3510秒。代表は08。コメント欄・視聴者名は写さない。
+- `live/mily-b161-morning-stills.zip` は上記10枚を同一バイトで収録。
+- `live-clips/mily-b161-no-makeup-talk.mp4` は530秒から13秒の本人トーク。縦型 `mily-b161-no-makeup-talk-vertical.mp4` は元画面を切らずに中央へ配置。原音保持、顔や声の生成・補正なし。posterも実フレーム。
+- この回の歌唱は確認できず、歌唱抜粋や歌詞は公開していない。Gallery / NEWSへの素材複製はしない。
+
+
 ## b160 — 2026-09-25 初アバター配布の本人X画像
 
 オーナーが指定した本人X `https://x.com/Mily_chan36/status/2103255202749198794`（2026-09-25 07:48 JST）の添付2枚を、Latest / NEWS専用の自己ホスト画像として掲載する。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/`・Activitiesには追加しない。
