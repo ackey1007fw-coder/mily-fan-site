@@ -7,6 +7,7 @@ import {
 import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
 import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
 import { firstAvatarDistributionImages } from "./firstAvatarDistributionImages.ts";
+import { superOreoMcflurryImage } from "./superOreoMcflurryImage.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
@@ -234,6 +235,22 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-09-25-super-oreo-mcflurry-x",
+    date: "2026-09-25",
+    sameDayOrder: 20,
+    title: "君はマックフルーリー超オレオの鏡だ🪞",
+    body: "9月25日18:25、みりぃがXで、テーブルの上のマックフルーリー超オレオの写真とともに投稿しました。カップを持つ手元と、向かい側の白い服の人も写っています。相手の名前は投稿にないため書いていません。",
+    source: "https://x.com/Mily_chan36/status/2103415595043852403",
+    sourceLabel: "みりぃのX投稿を見る",
+    media: superOreoMcflurryImage,
+    message: {
+      label: "みりぃのX",
+      text:
+        "こんなに“超オレオ”を全うしてるフルーリーある？\n" +
+        "君は“マックフルーリー超オレオ”の鏡だ🪞✨",
+    },
+  },
   {
     id: "2026-09-25-first-avatar-distribution-x",
     date: "2026-09-25",
