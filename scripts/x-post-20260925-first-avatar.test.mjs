@@ -31,7 +31,7 @@ describe("2026-09-25 X 初アバター配布の様子", () => {
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(news.filter((candidate) => candidate.source === SOURCE).length, 1);
-    assert.equal(sortNewsByDateDesc(news)[0], entry);
+    assert.equal(sortNewsByDateDesc(news)[1], entry);
     assert.equal(entry.date, "2026-09-25");
     assert.equal(entry.sameDayOrder, undefined);
     assert.equal(entry.activityIds, undefined);

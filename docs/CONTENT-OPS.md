@@ -1,5 +1,13 @@
 # 日常更新ガイド — mily-fan-site
 
+## 2026-09-25確認: マックフルーリー超オレオの本人X
+
+- NEWS ID `2026-09-25-super-oreo-mcflurry-x`。本人X `https://x.com/Mily_chan36/status/2103415595043852403` は2026-09-25 09:25:32 UTC / 2026-09-25 18:25 JST。マックフルーリー超オレオの写真1枚と、原文どおりの2行を message に置く。
+- オーナーがこの投稿の画像掲載を明示したため、Latest / NEWSに無改変で載せる。X画像CDNのhotlinkはしない。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/`・Activitiesには入れない。
+- 写真にはカップを持つ手元と、向かい側の白い服の人が写る。相手の名前は投稿にないため本文・altへ書かない。
+- 同日朝7:48の初アバター配布Xより後の投稿なので `sameDayOrder: 20` でLatest先頭にする。プロフィール・events・contest・streamScheduleには追加しない。
+
+
 ## 2026-09-25 SHOWROOM朝配信レポート（b161）
 
 - 6:30開始と前夜に案内された枠。保存録画は06:36:12から3654.058秒で、録画開始以前は未確認。
