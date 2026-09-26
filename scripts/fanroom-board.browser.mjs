@@ -30,6 +30,10 @@ try {
           await page.goto('https://site.test'+route,{waitUntil:'networkidle'});
           const photo=page.locator('img[src*="mily-b167-01-night-thanks-board"]').first();
           await photo.scrollIntoViewIfNeeded();
+          await page.waitForFunction(() => {
+            const img=document.querySelector('img[src*="mily-b167-01-night-thanks-board"]');
+            return img && img.complete && img.naturalWidth > 0;
+          });
           await photo.evaluate(img => img.decode());
           const card=photo.locator('xpath=ancestor::li[1]');
           assert.match(await card.innerText(), /9月27日.*5:30〜.*22:30〜/);
