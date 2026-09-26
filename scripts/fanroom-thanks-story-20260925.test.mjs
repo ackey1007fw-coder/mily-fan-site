@@ -15,7 +15,7 @@ test("Sep 25 fanroom article preserves quotes and NEWS-only publication", () => 
   assert.equal(item.message.text, "必ずファイナルに行けるよう努力し続けるので、見ててね🎀🩵\n\nみんなからの愛をいただきました❤️\n大好きです。いつもありがとう。");
   assert.match(item.body, /夜配信後/);
   assert.doesNotMatch(JSON.stringify(item), /5:30|IMG_8709|IMG_8710|進出決定/);
-  assert.equal(item.url, "/activities/live/#recap-2026-09-25-night-showroom");
+  assert.equal(item.url, "https://mily-fan-site.vercel.app/activities/live/#recap-2026-09-25-night-showroom");
   assert.ok(streamRecaps.some(({ id }) => id === "2026-09-25-night-showroom"));
   assert.equal(stories.some(({ slug }) => slug === "2026-09-25-thanks-and-finals"), false);
   const sameDay = sortNewsByDateDesc(news.filter(({ date }) => date === item.date));
