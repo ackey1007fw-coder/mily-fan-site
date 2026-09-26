@@ -41,8 +41,9 @@ describe("reusable STORIES content", () => {
   it("publishes the source-backed second-round story with the approved copy", () => {
     const story = storyBySlug("second-round-2026");
     assert.ok(story);
-    assert.equal(stories.length, 6);
+    assert.equal(stories.length, 7);
     assert.deepEqual(visibleStories(), [
+      storyBySlug("2026-09-25-thanks-and-finals"),
       storyBySlug("2026-08-25-motivation"),
       storyBySlug("2026-08-23-musical-special"),
       storyBySlug("campus-girls-2027-second-stage-jury-award"),
