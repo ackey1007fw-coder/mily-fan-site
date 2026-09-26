@@ -236,6 +236,25 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
 {
+  "id": "2026-09-26-fanroom-morning-dream-gongcha",
+  "date": "2026-09-26",
+  "title": "夢の中でもファンルーム。朝ラジオの一枚をお届け",
+  "body": "9月26日朝のラジオ配信後、みりぃが7:48にSHOWROOMファンルームを更新。短めの朝枠になったことに触れ、「寝る！！二度寝する！！」と、ひと休みすることを伝えました。\n\n配信でも話していた夢の話には、もう一つ続きが。ファンルームにたくさんの返信が届く夢も見ていたことを、投稿を書きながら思い出したそうです。笑い泣きの絵文字を添えて届けられた、朝のおしゃべりの小さな後日談です。\n\n一緒に投稿されたのは、青いリボンを付け、ゴンチャのカップを掲げる写真。「今日ラジオで掲げた写真」と本人が紹介した一枚を、ここでもお届けします。\n\n夜の配信については、この投稿時点で「早くても19:00〜」が目安になると思うと案内し、改めて連絡すると伝えていました。確定した開始時刻の告知ではありません。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "media": {
+    "kind": "image",
+    "src": "/media/news/mily-b165-01-gongcha-fanroom-1600.jpg",
+    "srcSet": "/media/news/mily-b165-01-gongcha-fanroom-480.jpg 480w, /media/news/mily-b165-01-gongcha-fanroom-960.jpg 960w, /media/news/mily-b165-01-gongcha-fanroom-1600.jpg 1206w",
+    "webpSrcSet": "/media/news/mily-b165-01-gongcha-fanroom-480.webp 480w, /media/news/mily-b165-01-gongcha-fanroom-960.webp 960w, /media/news/mily-b165-01-gongcha-fanroom-1600.webp 1206w",
+    "sizes": "(min-width: 640px) 24rem, 100vw",
+    "width": 1206,
+    "height": 679,
+    "alt": "青いリボンと紺色のトップス姿のみりぃが、赤いストローを挿したゴンチャのカップを顔の横に掲げる写真"
+  },
+  "url": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-09-26-morning-radio",
+  "ctaLabel": "朝のラジオ配信レポートを読む"
+},
+{
   "id": "2026-09-25-fanroom-thanks-and-finals",
   "date": "2026-09-25",
   "sameDayOrder": 30,
