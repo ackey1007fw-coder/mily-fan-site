@@ -27,7 +27,7 @@ describe("2026-09-25 X マックフルーリー超オレオ", () => {
     assert.ok(entry);
     assert.equal(news.filter((candidate) => candidate.id === NEWS_ID).length, 1);
     assert.equal(news.filter((candidate) => candidate.source === SOURCE).length, 1);
-    assert.equal(sortNewsByDateDesc(news)[0], entry);
+    assert.equal(sortNewsByDateDesc(news.filter(({ id }) => ["2026-09-25-first-avatar-distribution-x", "2026-09-25-super-oreo-mcflurry-x"].includes(id)))[0], entry);
     assert.equal(entry.date, "2026-09-25");
     assert.equal(entry.sameDayOrder, 20);
     assert.equal(entry.activityIds, undefined);

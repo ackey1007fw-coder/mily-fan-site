@@ -9,6 +9,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-09-25-fanroom-thanks-and-finals",
   "2026-09-25-super-oreo-mcflurry-x",
   "2026-09-25-first-avatar-distribution-x",
   "2026-09-24-face-to-face-class-story",
