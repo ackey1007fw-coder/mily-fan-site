@@ -246,7 +246,7 @@ export const news: NewsItem[] = [
     "label": "みりぃのメッセージより抜粋（23:07／23:09）",
     "text": "必ずファイナルに行けるよう努力し続けるので、見ててね🎀🩵\n\nみんなからの愛をいただきました❤️\n大好きです。いつもありがとう。"
   },
-  "url": "/activities/live/#recap-2026-09-25-night-showroom",
+  "url": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-09-25-night-showroom",
   "ctaLabel": "同じ夜の配信レポートを読む"
 },
   {
