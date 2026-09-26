@@ -4,6 +4,7 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
 import { PatonVoteGuide } from "./components/PatonVoteGuide";
+import { ShowroomAdRewardGuide } from "./components/ShowroomAdRewardGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
 import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import { VoteSpotlight } from "./components/VoteSpotlight";
@@ -234,6 +235,7 @@ export default function SupportPage() {
           </div>
         ) : null}
         <PatonVoteGuide />
+        <ShowroomAdRewardGuide />
 
         {todayItems.length > 0 ? (
           <SectionShell eyebrow="Today" title="今日のみりぃ">
