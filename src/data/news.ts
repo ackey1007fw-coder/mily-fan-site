@@ -235,6 +235,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+{
+  "id": "2026-09-25-fanroom-thanks-and-finals",
+  "date": "2026-09-25",
+  "sameDayOrder": 30,
+  "title": "みんなの愛を受け取って。感謝とファイナルへの思い",
+  "body": "9月25日の夜配信後、みりぃがファンルームで、話を聴いてくれた皆さんへの感謝を伝えました。またパワーアップした姿を待っていてほしいという思いと、ファイナルへ向けた言葉を記事にまとめました。",
+  "sourceLabel": "SHOWROOMファンルーム・本人メッセージ",
+  "url": "/stories/2026-09-25-thanks-and-finals/",
+  "ctaLabel": "夜のメッセージを読む"
+},
   {
     id: "2026-09-25-super-oreo-mcflurry-x",
     date: "2026-09-25",
