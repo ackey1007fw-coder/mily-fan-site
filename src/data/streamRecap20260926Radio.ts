@@ -36,6 +36,17 @@ export const streamRecap20260926Radio: StreamRecap = {
       timestamp: "0:26:28",
       title: "これからの届け方を相談",
       body: "今後の活動をどう届けていくか考え、みんなからの意見も聞いてみたいと話しました。最後は自分で判断したいという思いも伝えています。",
+      socialClip: {
+        title: "これからの活動をみんなと相談",
+        sourceTimestamp: "0:26:17",
+        durationSeconds: 30,
+        links: [
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=4-ei2ZZs96I" },
+          { platform: "tiktok", url: "https://www.tiktok.com/t/7689703069029829908" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/DdvOawnEiqi/" },
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2103710100967821434" },
+        ],
+      },
     },
     {
       timestamp: "0:34:21",
