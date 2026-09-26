@@ -236,6 +236,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
 {
+  "id": "2026-09-26-fanroom-recording-finished",
+  "date": "2026-09-26",
+  "sameDayOrder": 10,
+  "title": "「収録終わったー！」写真とともに届いた午後の報告",
+  "body": "9月26日16:16、みりぃがSHOWROOMファンルームに写真を投稿。同じ時刻に「収録終わったー！」と、収録を終えたことを知らせてくれました。\n\n添えられたのは、レンガ調の壁を背景に、髪に手を添えてカメラを見つめる一枚。紺色のトップス姿の写真とともに、「また連絡する📞」という言葉も届けていました。\n\n収録、おつかれさまでした。次のお知らせも楽しみにしています。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "media": {
+    "kind": "image",
+    "src": "/media/news/mily-b166-01-recording-finished-fanroom-1600.jpg",
+    "srcSet": "/media/news/mily-b166-01-recording-finished-fanroom-480.jpg 480w, /media/news/mily-b166-01-recording-finished-fanroom-960.jpg 960w, /media/news/mily-b166-01-recording-finished-fanroom-1600.jpg 1206w",
+    "webpSrcSet": "/media/news/mily-b166-01-recording-finished-fanroom-480.webp 480w, /media/news/mily-b166-01-recording-finished-fanroom-960.webp 960w, /media/news/mily-b166-01-recording-finished-fanroom-1600.webp 1206w",
+    "sizes": "(min-width: 640px) 24rem, 100vw",
+    "width": 1206,
+    "height": 670,
+    "alt": "レンガ調の壁を背景に、紺色のトップス姿で髪に手を添えてカメラを見つめるみりぃ"
+  }
+},
+{
   "id": "2026-09-26-fanroom-morning-dream-gongcha",
   "date": "2026-09-26",
   "title": "夢の中でもファンルーム。朝ラジオの一枚をお届け",
