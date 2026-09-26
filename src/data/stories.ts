@@ -5,10 +5,6 @@ import { seasideCircleMusicalSpecialVideo } from "./seasideCircleMusicalSpecialV
 import { seasideCircleMusicalSpecialThanksVideo } from "./seasideCircleMusicalSpecialThanksVideo.ts";
 
 export const storySources = {
-  "fanroom-2026-09-25-night-thanks": {
-    id: "fanroom-2026-09-25-night-thanks",
-    label: "SHOWROOMファンルーム・本人メッセージ（2026年9月25日 23:06〜23:09）",
-  },
   "pre-final-message": {
     id: "pre-final-message",
     label: "最終配信前に届けられた本人メッセージ",
@@ -1223,107 +1219,7 @@ const seasideCircleMusicalSpecialStory: Story = {
   ],
 };
 
-const september25ThanksStory: Story = {
-  "slug": "2026-09-25-thanks-and-finals",
-  "href": "/stories/2026-09-25-thanks-and-finals/",
-  "title": "みんなの愛を受け取って。感謝とファイナルへの思い",
-  "cardTitle": "みんなの愛を受け取って。9月25日夜のメッセージ",
-  "eyebrow": "配信後の言葉",
-  "lead": "9月25日の夜配信後、みりぃがSHOWROOMのファンルームに残したのは、話を聴いてくれた人への感謝と、ファイナルを目指す思いでした。普段の明るさだけでなく、気持ちが沈むこともある自分について綴り、またパワーアップした姿を待っていてほしいと伝えています。",
-  "cardDescription": "夜配信を終えたみりぃから、話を聴いてくれたみんなへの感謝。再びパワーアップした姿を届けたいという思いと、ファイナルへ向けた言葉を紹介します。",
-  "date": "2026-09-25",
-  "dateLabel": "2026.09.25",
-  "published": true,
-  "sourceIds": [
-    "fanroom-2026-09-25-night-thanks"
-  ],
-  "leadMediaId": null,
-  "media": [],
-  "sections": [
-    {
-      "id": "thanks-for-listening",
-      "title": "話を聴いてくれたみんなへ",
-      "blocks": [
-        {
-          "type": "paragraph",
-          "text": "23:06の投稿で、みりぃはその夜、弱音を聴いてくれた皆さんへお礼を伝えました。普段は明るく過ごしていても、ときには涙を流しながらしょげてしまうこともあると、自分の言葉で振り返っています。",
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "配信後にも改めて言葉を届け、受け止めてくれた人たちへ感謝を伝えた夜でした。",
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "next-step",
-      "title": "またパワーアップした姿を",
-      "blocks": [
-        {
-          "type": "paragraph",
-          "text": "続く23:07の投稿では、これまでの経験を振り返り、そんなときの先には素敵な未来が待っていた、と前向きな見方を綴っています。弱いところを見せることもあるけれど、またパワーアップした自分を待っていてくれたらうれしい。その思いが、メッセージに続いていました。",
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "さらに、ファイナルへ向けた気持ちもはっきりと伝えています。",
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        },
-        {
-          "type": "quote",
-          "paragraphs": [
-            "必ずファイナルに行けるよう努力し続けるので、見ててね🎀🩵"
-          ],
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "received-love",
-      "title": "「みんなからの愛をいただきました」",
-      "blocks": [
-        {
-          "type": "paragraph",
-          "text": "23:08には配信画面の写真を投稿し、そのあと23:09のメッセージで、みんなからの応援を受け取った喜びを言葉にしました。",
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        },
-        {
-          "type": "quote",
-          "paragraphs": [
-            "みんなからの愛をいただきました❤️",
-            "大好きです。いつもありがとう。"
-          ],
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        },
-        {
-          "type": "paragraph",
-          "text": "話を聴いてくれたことへのお礼、またパワーアップした姿を届けたいという思い、そしてファイナルを目指す決意。配信後のメッセージには、受け取った応援への感謝と、これからも歩みを続けたい気持ちが綴られていました。",
-          "sourceIds": [
-            "fanroom-2026-09-25-night-thanks"
-          ]
-        }
-      ]
-    }
-  ]
-};
-
 export const stories: Story[] = [
-  september25ThanksStory,
   motivationMorningStory,
   seasideCircleMusicalSpecialStory,
   campusGirlsSecondStageJuryAwardStory,
