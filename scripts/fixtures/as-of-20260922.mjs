@@ -7,6 +7,7 @@
 import { news } from "../../src/data/news.ts";
 import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
+import { stories } from "../../src/data/stories.ts";
 
 const newNewsIds = new Set([
   "2026-09-25-fanroom-thanks-and-finals",
@@ -32,4 +33,9 @@ for (let index = galleryVideos.length - 1; index >= 0; index--) {
 }
 for (let index = media.length - 1; index >= 0; index--) {
   if (media[index].id === "mily-b145-03") media.splice(index, 1);
+}
+
+// Keep the historical story order and feed window stable as new articles arrive.
+for (let index = stories.length - 1; index >= 0; index--) {
+  if (stories[index].slug === "2026-09-25-thanks-and-finals") stories.splice(index, 1);
 }
