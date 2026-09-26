@@ -236,6 +236,30 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
 {
+  "id": "2026-09-26-fanroom-night-thanks-board",
+  "date": "2026-09-26",
+  "sameDayOrder": 20,
+  "title": "みんなとファイナルへ。夜配信のお礼とボードのメッセージ",
+  "body": "9月26日の夜配信後、みりぃがSHOWROOMファンルームに写真とお礼を届けました。23:36に投稿された写真には、ルームに来てくれるみんなへの「Love」と、次回の「5:30〜」を書いたホワイトボードを手にする姿が。\n\n続く23:38の投稿では、夜枠に来てくれた皆さんへ感謝を伝え、「みんなと絶対にファイナル行くんだから」と、ファイナルを目指す思いを綴りました。最後は「おやすみりぃ」の言葉で締めくくっています。\n\n投稿時点の翌日・9月27日の配信予定は、朝5:30〜、夜22:30〜。終了時刻の案内はありません。予定は変更になる場合があるため、最新の案内はSHOWROOMでご確認ください。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "message": {
+    "label": "みりぃのメッセージより抜粋（23:38）",
+    "text": "みんなと絶対にファイナル行くんだから"
+  },
+  "media": {
+    "kind": "image",
+    "src": "/media/news/mily-b167-01-night-thanks-board-1600.jpg",
+    "srcSet": "/media/news/mily-b167-01-night-thanks-board-480.jpg 480w, /media/news/mily-b167-01-night-thanks-board-960.jpg 960w, /media/news/mily-b167-01-night-thanks-board-1600.jpg 1206w",
+    "webpSrcSet": "/media/news/mily-b167-01-night-thanks-board-480.webp 480w, /media/news/mily-b167-01-night-thanks-board-960.webp 960w, /media/news/mily-b167-01-night-thanks-board-1600.webp 1206w",
+    "sizes": "(min-width: 640px) 24rem, 100vw",
+    "width": 1206,
+    "height": 666,
+    "alt": "紺色のトップス姿のみりぃが、ルームに来てくれるみんなへのLoveとNEXT：5:30〜を書いたホワイトボードを掲げる写真"
+  },
+  "relatedUrl": "https://www.showroom-live.com/r/circle2026_0734",
+  "ctaLabel": "SHOWROOMで最新の案内を見る"
+},
+{
   "id": "2026-09-26-fanroom-recording-finished",
   "date": "2026-09-26",
   "sameDayOrder": 10,
