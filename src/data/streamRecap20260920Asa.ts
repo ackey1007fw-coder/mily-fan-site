@@ -57,14 +57,6 @@ export const streamRecap20260920Asa: StreamRecap = {
       timestamp: "1:30:32",
       title: "配信が本当に楽しい",
       body: "終わる時間が近づいても、配信をやめるのが惜しいと話すみりぃ。配信することも、みんなと話すことも楽しいと伝えました。",
-      clip: {
-        src: "/media/live-clips/mily-b134-11-stream-joy.mp4",
-        poster: "/media/live-clips/mily-b134-11-stream-joy-poster.jpg",
-        width: 640,
-        height: 360,
-        durationSeconds: 16.1,
-        sourceTimestamp: "1:30:32",
-      },
       socialClip: {
         title: "配信が本当に楽しい",
         sourceTimestamp: "1:30:32",

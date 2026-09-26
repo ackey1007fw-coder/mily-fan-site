@@ -30,7 +30,7 @@ export const RANKING_NOTE_WITHOUT_RANGE = buildRankingNote();
 
 /** 全カードに共通する非掲載範囲。回ごとに言い換えない。 */
 export const RECAP_WITHHOLD_NOTE =
-  "録音音声・画面録画・全文文字起こしは掲載していません。視聴者の表示名・コメント画面も載せていません。";
+  "録音音声・画面録画の全編と全文文字起こしは掲載していません。視聴者の表示名・コメント画面も載せていません。";
 
 /** 数字はカード作成時点の記録であり、現在値として固定しない。 */
 export const RECAP_FIGURES_NOTE = "フォロワー数や目標の数字は配信時点の記録です。";
