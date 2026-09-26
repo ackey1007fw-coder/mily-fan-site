@@ -256,7 +256,7 @@ export const news: NewsItem[] = [
     "height": 666,
     "alt": "紺色のトップス姿のみりぃが、ルームに来てくれるみんなへのLoveとNEXT：5:30〜を書いたホワイトボードを掲げる写真"
   },
-  "url": "https://www.showroom-live.com/r/circle2026_0734",
+  "relatedUrl": "https://www.showroom-live.com/r/circle2026_0734",
   "ctaLabel": "SHOWROOMで最新の案内を見る"
 },
 {

@@ -1,3 +1,5 @@
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { HOME_NEWS_LIMIT, ARCHIVE_LOAD_MORE_LABEL } from "../src/lib/homePortal.ts";
 import assert from 'node:assert/strict';
 import { readFile, stat, mkdir, writeFile } from 'node:fs/promises';
 import { resolve, join, extname, relative, sep } from 'node:path';
@@ -29,6 +31,16 @@ try {
         for (const route of ['/','/news/']) {
           await page.goto('https://site.test'+route,{waitUntil:'networkidle'});
           const photo=page.locator('img[src*="mily-b167-01-night-thanks-board"]').first();
+          const onHome=sortNewsByDateDesc(news).slice(0,HOME_NEWS_LIMIT).some(item=>item.id==='2026-09-26-fanroom-night-thanks-board');
+          if(route==='/' && !onHome) {
+            assert.equal(await photo.count(),0,'Older records leave the capped homepage');
+            results.push({engine,width,route,status:'passed',outsideHomeLimit:true});
+            continue;
+          }
+          if(route==='/news/') {
+            const more=page.getByRole('button',{name:ARCHIVE_LOAD_MORE_LABEL,exact:true});
+            for(let pageIndex=0; !(await photo.count()) && await more.count() && pageIndex<news.length; pageIndex++) await more.click();
+          }
           await photo.scrollIntoViewIfNeeded();
           await page.waitForFunction(() => {
             const img=document.querySelector('img[src*="mily-b167-01-night-thanks-board"]');
