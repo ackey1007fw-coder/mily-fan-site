@@ -9,7 +9,7 @@ const secondary = "inline-flex min-h-11 max-w-full items-center justify-center r
 export function ShowroomAdRewardTeaser() {
   return (
     <div className="mt-6 rounded-2xl border border-apricot/40 bg-apricot-soft/30 p-4 sm:p-5" data-ad-reward-teaser>
-      <h3 className="text-base font-bold text-ink">広告で、無料の応援をプラス。</h3>
+      <h3 className="text-base font-bold text-ink"><span className="inline-block">広告で、</span><span className="inline-block">無料の応援をプラス。</span></h3>
       <p className="mt-2 text-sm leading-7 text-ink-muted">
         広告視聴の抽選で、ギフトなどを獲得するチャンス。集めたら、みりぃの配信で贈って応援しよう。
       </p>
@@ -28,7 +28,7 @@ export function ShowroomAdRewardGuide() {
     <section id="showroom-ad-reward" aria-labelledby="ad-reward-title" className={`${SECTION_ANCHOR_OFFSET} px-4 py-8 sm:py-10`}>
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-8">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">Free support / SHOWROOM</p>
-        <h2 id="ad-reward-title" className="mt-3 text-2xl font-bold leading-relaxed text-ink sm:text-3xl">広告で、無料の応援をプラス。</h2>
+        <h2 id="ad-reward-title" className="mt-3 text-2xl font-bold leading-relaxed text-ink sm:text-3xl"><span className="inline-block">広告で、</span><span className="inline-block">無料の応援をプラス。</span></h2>
         <p className="mt-4 text-sm leading-7 text-ink-muted">
           「課金は難しいけれど、みりぃを応援したい」。そんなときの選択肢が、SHOWROOMの広告視聴ボーナス抽選です。
           広告を見ることで、ギフトやShow Goldなどが当たる抽選に参加できます。
