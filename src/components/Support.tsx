@@ -6,6 +6,7 @@ import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
+import { ShowroomAdRewardTeaser } from "./ShowroomAdRewardGuide";
 
 /**
  * ホームの compact Support gateway。
@@ -62,6 +63,7 @@ export function Support() {
             </ExternalLink>
           ))}
         </div>
+        <ShowroomAdRewardTeaser />
         {gatewayVoteActions.some(({ note }) => note) ? (
           <div className="mt-3 space-y-1">
             {gatewayVoteActions.map((action) =>
