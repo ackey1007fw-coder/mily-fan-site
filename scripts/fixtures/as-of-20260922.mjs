@@ -9,6 +9,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-09-27-radio-kawaii-story",
   "2026-09-26-fanroom-night-thanks-board",
   "2026-09-26-fanroom-recording-finished",
   "2026-09-26-fanroom-morning-dream-gongcha",
@@ -22,6 +23,7 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b168-01-kawaii-radio-story",
   "mily-b146-01-face-to-face-class-story",
   "mily-b144-02-morning-x",
   "mily-b144-01-morning-commute-story",

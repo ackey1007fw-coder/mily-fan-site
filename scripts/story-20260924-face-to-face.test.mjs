@@ -21,7 +21,7 @@ describe("2026-09-24 face-to-face class Instagram Story", () => {
     assert.equal(item.source, undefined);
     assert.equal(item.sourceLabel, "Instagram Story");
     assert.equal(item.media, faceToFaceClassStoryVideo);
-    assert.equal(galleryVideos[0], faceToFaceClassStoryVideo);
+    assert.equal(galleryVideos.filter(video => video.sourceDate === "2026-09-24")[0], faceToFaceClassStoryVideo);
     assert.equal(galleryVideos.filter((video) => video === item.media).length, 1);
     assert.equal(item.activityIds, undefined);
     assert.match(item.body, /対面授業/);
