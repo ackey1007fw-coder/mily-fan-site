@@ -31,6 +31,7 @@ try {
       const errors = []; page.on("pageerror", e => errors.push(e.message));
       await page.route("**/*", route => new URL(route.request().url()).origin === origin ? route.continue() : route.fulfill({status:204,body:""}));
       for (const route of ["/", "/news/", "/activities/radio/"]) {
+        console.log(`Checking ${engine} ${width}px ${route}`);
         await page.goto(origin + route, { waitUntil: "networkidle" });
         const card = page.locator("li").filter({ has: page.getByText(item.title, { exact: true }) }).first();
         const onHome = sortNewsByDateDesc(news).slice(0,HOME_NEWS_LIMIT).some(n => n.id === item.id);
@@ -40,19 +41,29 @@ try {
           for(let i=0; !(await card.count()) && await more.count() && i<news.length; i++) await more.click();
         }
         await card.waitFor();
-        const v = card.locator(`video[src="${video.src}"]`);
-        const photo = card.locator(`img[src="${image.src}"]`);
-        assert.equal(await v.count(),1); assert.equal(await photo.count(),1);
+        assert.match(await card.innerText(), /トークテーマは『かわいい』/);
+        const isRadio = route === "/activities/radio/";
+        // ActivitiesPage intentionally separates compact NEWS from lead related media.
+        const v = (isRadio ? page : card).locator(`video[src="${video.src}"]`);
+        assert.equal(await v.count(),1);
         assert.equal(await v.getAttribute("preload"),"none");
         assert.equal(await v.getAttribute("autoplay"),null);
         assert.notEqual(await v.getAttribute("controls"),null);
         assert.notEqual(await v.getAttribute("playsinline"),null);
-        await photo.scrollIntoViewIfNeeded();
-        await page.waitForFunction(img => img.complete && img.naturalWidth > 0, await photo.elementHandle());
-        await photo.evaluate(img => img.decode());
-        const state = await photo.evaluate(img => ({width:img.naturalWidth,fit:getComputedStyle(img).objectFit,ratio:img.getBoundingClientRect().width/img.getBoundingClientRect().height}));
-        assert.ok(state.width>0); assert.equal(state.fit,"contain");
-        assert.ok(Math.abs(state.ratio-864/1536)<0.002);
+        let state = null;
+        if (isRadio) {
+          assert.equal(await card.locator("video,img").count(),0,"Radio NEWS stays compact; video belongs to related media");
+          assert.equal(await page.locator(`img[src="${image.src}"]`).count(),0,"Additional photo stays on HOME/NEWS only");
+        } else {
+          const photo = card.locator(`img[src="${image.src}"]`);
+          assert.equal(await photo.count(),1);
+          await photo.scrollIntoViewIfNeeded();
+          await page.waitForFunction(img => img.complete && img.naturalWidth > 0, await photo.elementHandle());
+          await photo.evaluate(img => img.decode());
+          state = await photo.evaluate(img => ({width:img.naturalWidth,fit:getComputedStyle(img).objectFit,ratio:img.getBoundingClientRect().width/img.getBoundingClientRect().height}));
+          assert.ok(state.width>0); assert.equal(state.fit,"contain");
+          assert.ok(Math.abs(state.ratio-864/1536)<0.002);
+        }
         await v.scrollIntoViewIfNeeded();
         await v.evaluate(async el => {el.muted=true; await el.play();});
         await page.waitForFunction(el => el.currentTime > .1, await v.elementHandle());
@@ -68,7 +79,8 @@ try {
         assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
         assert.deepEqual(errors,[]);
         await card.screenshot({path:join(output,`${engine}-${width}-${route.replaceAll("/","_")||"home"}.png`)});
-        results.push({engine,width,route,status:"passed",imageState:state,videoPlayed:true});
+        if (isRadio) await v.screenshot({path:join(output,`${engine}-${width}-radio-related-video.png`)});
+        results.push({engine,width,route,status:"passed",imageState:state,videoPlayed:true,compactRadioNews:isRadio});
       }
     } finally { await browser.close(); }
   }
