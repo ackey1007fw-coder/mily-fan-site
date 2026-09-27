@@ -20,6 +20,110 @@ export type RadioMusicEpisode = {
 
 /** Confirmed on-air songs from FM湘南マジックウェイブ「湘南シーサイドサークル」. */
 export const radioMusicEpisodes: RadioMusicEpisode[] = [
+{
+  "id": "2026-09-27-kawaii",
+  "date": "2026-09-27",
+  "dateLabel": "2026.09.27（日）",
+  "theme": "かわいい",
+  "broadcastLabel": "10:00〜13:00 放送",
+  "songs": [
+    {
+      "timestamp": "0:05:45",
+      "title": "好きすぎて滅！",
+      "artist": "M!LK",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ZVUxJsPfoX8"
+    },
+    {
+      "timestamp": "0:13:45",
+      "title": "チェリボム",
+      "artist": "SILENT SIREN",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Sl7B_7h2-OM"
+    },
+    {
+      "timestamp": "0:25:12",
+      "title": "Thinking Out Loud",
+      "artist": "Ed Sheeran",
+      "youtubeUrl": "https://www.youtube.com/watch?v=lp-EO5I60KA"
+    },
+    {
+      "timestamp": "0:36:07",
+      "title": "福笑い",
+      "artist": "高橋優",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uUT0CLa6KWo"
+    },
+    {
+      "timestamp": "0:54:01",
+      "title": "にゃんにゃんにゃん",
+      "artist": "コレサワ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=xjD4dAFJLp8"
+    },
+    {
+      "timestamp": "1:09:50",
+      "title": "新宝島",
+      "artist": "サカナクション",
+      "youtubeUrl": "https://www.youtube.com/watch?v=LIlZCmETvsY"
+    },
+    {
+      "timestamp": "1:23:17",
+      "title": "SWEET MEMORIES",
+      "artist": "松田聖子",
+      "youtubeUrl": "https://www.youtube.com/watch?v=nz-ZAXac5Fk",
+      "youtubeVersionNote": "リンク先は本人公式の「SWEET MEMORIES〜甘い記憶〜」2020年版（YouTube Edit）。放送で確認したSWEET MEMORIESとは録音・歌詞構成が異なります。"
+    },
+    {
+      "timestamp": "1:35:11",
+      "title": "若いんだし！",
+      "artist": "モーニング娘。'17",
+      "youtubeUrl": "https://www.youtube.com/watch?v=SQmLjcLfVbo"
+    },
+    {
+      "timestamp": "1:47:32",
+      "title": "ハピネス",
+      "artist": "AI",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uKgmu8g-kXE"
+    },
+    {
+      "timestamp": "1:54:25",
+      "title": "わたしの一番かわいいところ",
+      "artist": "FRUITS ZIPPER",
+      "youtubeUrl": "https://www.youtube.com/watch?v=NQUo3vITjgY"
+    },
+    {
+      "timestamp": "2:10:33",
+      "title": "チョコレイト・ディスコ",
+      "artist": "Perfume",
+      "youtubeUrl": "https://www.youtube.com/watch?v=1WTy2yqKI4w",
+      "youtubeVersionNote": "音源照合では2012-Mixが候補。リンク先は本人公式の通常版MVであり、放送音源と同一のミックスとは断定していません。"
+    },
+    {
+      "timestamp": "2:23:17",
+      "title": "恋するフォーチュンクッキー",
+      "artist": "AKB48",
+      "youtubeUrl": "https://www.youtube.com/watch?v=dFf4AgBNR1E"
+    },
+    {
+      "timestamp": "2:33:47",
+      "title": "気まぐれロマンティック",
+      "artist": "いきものがかり",
+      "youtubeUrl": "https://www.youtube.com/watch?v=5XCSt_0lwOE"
+    },
+    {
+      "timestamp": "2:42:27",
+      "title": "Candy Pop",
+      "artist": "TWICE",
+      "youtubeUrl": "https://www.youtube.com/watch?v=wQ_POfToaVY"
+    },
+    {
+      "timestamp": "2:51:12",
+      "title": "最上級にかわいいの！",
+      "artist": "超ときめき♡宣伝部",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Y4KjiTGBggw"
+    }
+  ],
+  "sourceLabel": "放送内の曲紹介・音源照合・各楽曲の公式YouTube公開情報",
+  "verifiedAt": "2026-09-27",
+  "note": "収録範囲から確認できた15曲です。時刻は重複を除いた収録音声内の目安で、放送時刻・楽曲カット版とは異なります。番組終了後の別番組の曲は含めません。松田聖子とPerfumeは、リンク先と放送版の違いを各曲に注記しています。"
+},
   {
     "id": "2026-09-13-solo-theme",
     "date": "2026-09-13",
@@ -362,3 +466,11 @@ export function radioMusicSongCount(
 ): number {
   return episodes.reduce((count, episode) => count + episode.songs.length, 0);
 }
+
+/** Owner-requested non-official playlist of verified official song videos. */
+export const radioMusicPlaylist = {
+  url: "https://www.youtube.com/playlist?list=PLD69UVBfxh5g",
+  title: "湘南シーサイドサークル｜オンエア楽曲セレクション",
+  verifiedAt: "2026-09-27",
+  note: "9月27日の15曲を先頭に、確認済みの過去回の楽曲もまとめた非公式セレクションです。放送と異なる版は各曲に注記しています。",
+} as const;
