@@ -21,6 +21,7 @@ import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
 import { NewsImage } from "./NewsImage";
+import { TikTokEmbedCard } from "./TikTokEmbedCard";
 
 function NewsLink({
   href,
@@ -50,6 +51,10 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
   if (media.kind === "mixch") {
     if (!media.published) return null;
     return <MixchOutboundCard movie={media} />;
+  }
+
+  if (media.kind === "tiktok") {
+    return media.published ? <TikTokEmbedCard video={media} /> : null;
   }
 
   if (media.kind === "audio") {

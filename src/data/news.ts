@@ -14,6 +14,7 @@ import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
+import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -184,14 +185,17 @@ export type NewsMedia =
   | NewsVideoMedia
   | NewsImageMedia
   | NewsMixchMedia
-  | NewsAudioMedia;
+  | NewsAudioMedia
+  | TikTokPostVideo;
 
 export function isNewsAudio(media: NewsMedia): media is NewsAudioMedia {
   return media.kind === "audio";
 }
 
 export function newsMediaKey(media: NewsMedia): string {
-  return media.kind === "mixch" ? `${media.kind}:${media.id}` : `${media.kind}:${media.src}`;
+  return media.kind === "mixch" || media.kind === "tiktok"
+    ? `${media.kind}:${media.id}`
+    : `${media.kind}:${media.src}`;
 }
 
 export type NewsMessage = {
@@ -232,7 +236,7 @@ export type NewsItem = {
 export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
   if (!item.media) return [];
   return [item.media, ...(item.additionalMedia ?? [])].filter(
-    (media) => media.kind !== "mixch" || media.published,
+    (media) => (media.kind !== "mixch" && media.kind !== "tiktok") || media.published,
   );
 }
 
@@ -361,6 +365,15 @@ export const news: NewsItem[] = [
         "\n" +
         "みりぃさん、これからも頑張るどー‼️",
     },
+  },
+  {
+    id: "2026-09-24-tiktok-good-vibes",
+    date: tiktokGoodVibesVideo.sourceDate,
+    title: "みりぃの表情とポーズを楽しむTikTok",
+    body: "9月24日、ラジオDJネキみりぃ（@seasidecircle）が短い縦型動画をTikTokに投稿しました。青い服のみりぃがカメラに向かい、ウインクや両手のポーズなど、次々に表情を見せています。動画はTikTokの公式プレーヤーで再生できます。",
+    source: tiktokGoodVibesVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    media: tiktokGoodVibesVideo,
   },
   {
     id: "2026-09-24-face-to-face-class-story",
