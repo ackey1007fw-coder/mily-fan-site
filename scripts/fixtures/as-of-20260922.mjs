@@ -9,6 +9,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-09-24-tiktok-good-vibes",
   "2026-09-27-radio-kawaii-story",
   "2026-09-26-fanroom-night-thanks-board",
   "2026-09-26-fanroom-recording-finished",

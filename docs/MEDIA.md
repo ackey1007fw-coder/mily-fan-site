@@ -4469,3 +4469,10 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 - `public/media/live/mily-b163-01-night.jpg` 0:04:00、02 0:10:00、03 0:13:00、04 0:22:00、05 0:25:00、06 0:28:00、07 0:52:00、08 1:01:00、09 1:10:00、10 1:28:00。ZIP `mily-b163-night-stills.zip` はこの10枚と同一のJPEG。各画像640×360でEXIF/ICCなし、ZIPのCRCと展開バイトを照合済み。
 - `public/media/live-clips/mily-b163-night-hat-talk.mp4` は0:10:14から約14秒。非歌唱トークの実映像・元音声を含むH.264/AAC、640×360。posterは同じ実映像から作成。
 - `mily-b163-night-hat-talk-vertical.mp4` は720×1280のSNS版。中央に元の実映像を元比率で置き、紫の背景、題字、非公式ファン編集表示を追加。音声は原音。両動画を末尾までデコードして検証済み。歌唱・第三者映像は含まない。
+
+## 2026-09-24 TikTok投稿（9/27掲載依頼、公式プレーヤー）
+
+- オーナーが指定したTikTok投稿 `https://www.tiktok.com/@seasidecircle/video/7689042883369880853` と提供動画を、14.4秒の内容・画角で照合。原本は5,971,779 bytes、SHA256 `8bdad9fb85ba07c448c88a695f60c445a4dcf6eb9404766a548ad022b136767b`。受領原本は変更せず、公開repoへコミットしない。
+- TikTok公式ページの当該投稿データに `id=7689042883369880853`、`author.uniqueId=seasidecircle`、`createTime=1790244809` を確認。JSTでは2026-09-24 19:13:29。本文は `#fyp`。画面は青い服のみりぃの表情と手振り。
+- 原投稿には既存楽曲が付いている。音源を含むMP4を自己ホストせず、TikTok公式の埋め込みプレーヤーでNEWSとGalleryに表示し、恒久投稿URLへの導線を添える。TikTok側の公開状態・再生環境に依存する。
+- 顔・身体の加工、AI生成、切り抜き、別の写真への差し替えはしない。端末UI・非公開情報は公開データへ含めない。
