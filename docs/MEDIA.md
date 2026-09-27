@@ -1,4 +1,14 @@
 # メディア運用ガイド — mily-fan-site
+
+## b168 — 2026-09-27 ラジオ「かわいい」テーマ・お便り案内Story
+
+- オーナーが縦型動画1本とUIなし写真1枚を提供し、サイト掲載を明示。動画は512×910・8.2秒・246フレーム、写真は864×1536。くま耳・眼鏡等のフィルターは原投稿そのもの。AI生成・顔補正・構図変更は行わない。
+- 元動画: 4,970,647 bytes、SHA256 `f70a96bc6de2f44348a2f81ca60df70d7ecc67f66da50ca29ae278169e9be160`。元写真: 352,783 bytes、SHA256 `1e2af9f632574e837db52fbcf14e910ddab7ecd4ab579ef4dbb25f9f6206eaf8`。原本は非公開受領領域とgitignoredの原本領域へ無改変保存し、コミットしない。
+- 公開動画 `mily-b168-01-kawaii-radio-story.mp4`: 2,173,806 bytes、SHA256 `5ff59c66390d8ffde5c02f1ef8f0970d582f2fea7417bea28982ff214dda958a`。H.264 Constrained Baseline / yuv420p、video-only、metadata・chapters除去、faststart。未確認のBGMを除き、映像は全8.2秒を維持。
+- poster `mily-b168-01-kawaii-radio-story-poster.jpg`: 59,875 bytes、SHA256 `3f15c68e0b78326909f88640b819ca00e594ed671f58fbda603ee907840c343f`。複数の実フレーム候補を比較し、公開動画4.0秒のピース・ウインクと文字が見えるフレームを採用。512×910。
+- 写真 `mily-b168-02-radio-message-story-{480,960,1600}.{jpg,webp}`: 既存media:buildと同じsharp処理（rotate、withoutEnlargement、JPEG quality82/mozjpeg、WebP quality78、metadata除去）をPC外で実行。実幅480 / 864 / 864px。srcsetは480wと864wのみを使い、960wや1600wと誤記しない。
+- 公開先は `public/media/gallery/`。動画はLatest / NEWS・Gallery共通、写真はNEWSの追加素材。公開データに受け渡しURL・元ファイル名・私的パスを残さない。見出しは日付付きの案内記録、完全匿名の送信サービスという断定なし。
+
 ## b167 — 2026-09-26 夜配信後のボード写真
 
 - オーナー提供のUIなし本人投稿写真をLatest / NEWS専用に掲載。23:36の写真投稿と照合し、SHOWROOM公開画像一覧の投稿ID `89032430`でも同一写真・9/26の投稿日時を確認。撮影日・撮影者・個別permalinkは未確認。

@@ -82,6 +82,14 @@ jobs:
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
         run: node scripts/avatar-story.browser.mjs
 
+      - name: Radio Story browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --experimental-strip-types scripts/radio-story-20260927.browser.mjs
+
       - name: Radio archive browser checks
         timeout-minutes: 5
         env:
