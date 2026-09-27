@@ -321,6 +321,9 @@ export function verifyNews(items) {
         if (!canonicalPost || canonicalPost[1] !== media.postId) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs a confirmed TikTok post URL`);
         }
+        if (!media.id?.trim() || media.sourceDate !== item.date || media.published !== true) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs id, matching sourceDate, and published status`);
+        }
         if (slot === "media" && item.source !== media.sourceUrl) {
           errors.push(`news "${item.id ?? "?"}" TikTok source must equal media.sourceUrl`);
         }
