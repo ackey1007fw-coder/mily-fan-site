@@ -48,17 +48,14 @@ try {
         assert.notEqual(await v.getAttribute("controls"),null);
         assert.notEqual(await v.getAttribute("playsinline"),null);
         await photo.scrollIntoViewIfNeeded();
-        await page.waitForFunction(src => {
-          const img = document.querySelector(`img[src="${src}"]`);
-          return img && img.complete && img.naturalWidth > 0;
-        }, image.src);
+        await page.waitForFunction(img => img.complete && img.naturalWidth > 0, await photo.elementHandle());
         await photo.evaluate(img => img.decode());
         const state = await photo.evaluate(img => ({width:img.naturalWidth,fit:getComputedStyle(img).objectFit,ratio:img.getBoundingClientRect().width/img.getBoundingClientRect().height}));
         assert.ok(state.width>0); assert.equal(state.fit,"contain");
         assert.ok(Math.abs(state.ratio-864/1536)<0.002);
         await v.scrollIntoViewIfNeeded();
         await v.evaluate(async el => {el.muted=true; await el.play();});
-        await page.waitForFunction(src => {const v=document.querySelector(`video[src="${src}"]`);return v && v.currentTime>.1;}, video.src);
+        await page.waitForFunction(el => el.currentTime > .1, await v.elementHandle());
         await v.evaluate(el => el.pause());
         for (const [label,url] of [["ラジオを聴く（FM公式）",radioProgram.listenUrl],["番組にお便りを送る（FM公式）",RADIO_KAWAII_MESSAGE_FORM_URL]]) {
           const link=card.getByRole("link",{name:label,exact:true});
