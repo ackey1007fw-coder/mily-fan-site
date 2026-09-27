@@ -96,7 +96,7 @@ export const streamRecap20260927Asa: StreamRecap = {
   gallery: morningGallery,
   galleryZip: {"src": "/media/live/mily-b169-11-20260927-asa-stills.zip", "filename": "mily-b169-11-20260927-asa-stills.zip", "label": "朝配信のスクショ10枚をまとめて保存"},
   highlights: [
-    {"timestamp": "0:02:15", "title": "両手くねくねのタコ踊り", "body": "両手を交互にくねくね動かすタコ踊りを披露。最後はカメラに笑顔を向ける、朝のひと幕です。", "clip": {"src": "/media/live-clips/mily-b169-12-20260927-asa-taco-000215.mp4", "poster": "/media/live/mily-b169-01-20260927-asa-000220.jpg", "width": 640, "height": 360, "durationSeconds": 7.6, "sourceTimestamp": "0:02:15"}},
+    {"timestamp": "0:02:15", "title": "両手くねくねのタコ踊り", "body": "両手を交互にくねくね動かすタコ踊りを披露。最後はカメラに笑顔を向ける、朝のひと幕です。", "clip": {"src": "/media/live-clips/mily-b169-12-20260927-asa-taco-000215.mp4", "poster": "/media/live/mily-b169-01-20260927-asa-000220.jpg", "width": 640, "height": 360, "durationSeconds": 7.6, "sourceTimestamp": "0:02:15"}, "socialClip": {"title": "タコ踊りの7秒", "sourceTimestamp": "0:02:15", "durationSeconds": 7.6, "links": [{"platform": "x", "url": "https://x.com/ackey_RiRi_supp/status/2104136102365823130"}, {"platform": "instagram", "url": "https://www.instagram.com/reel/DdyRJObDpQZ/"}, {"platform": "tiktok", "url": "https://www.tiktok.com/t/7690141584322579733"}, {"platform": "youtube", "url": "https://www.youtube.com/watch?v=ant30v2jT_A"}]}},
     { timestamp: "0:02:36", title: "ラジオへ向かう朝", body: "早朝に集まったみんなへあいさつ。この日は「湘南シーサイドサークル」の生放送に向かうと話し、準備をしながらおしゃべりを始めました。" },
     { timestamp: "0:08:37", title: "メイクの過程を一緒に", body: "初めて来た人にも声をかけ、メイクができあがるまでを見届けてほしいとお誘い。番組を聴く方法や、ファンサイトの聴取リンクも案内しました。" },
     { timestamp: "0:25:17", title: "集中したいのにコメント渋滞", body: "メイクに集中しようとしたところへ、次々とコメントが届きます。読めないと言いながらもさかのぼって返し、なかなか手が進まないやり取りになりました。" },
