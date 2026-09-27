@@ -237,7 +237,7 @@ export function Gallery({
               <>
                 <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
                 <p className="mt-1 text-sm text-ink-muted">
-                  動画はサイト内または公式プレーヤーでご覧いただけます。
+                  お預かりした動画はサイト内で、TikTokの投稿は公式プレーヤーでご覧いただけます。
                 </p>
               </>
             )}
