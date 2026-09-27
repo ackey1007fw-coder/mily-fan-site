@@ -425,7 +425,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
         <div className="flex flex-wrap gap-2 text-xs font-semibold text-apricot-ink">
           <span className="rounded-full bg-paper px-3 py-1.5">{episode.broadcastLabel}</span>
           <span className="rounded-full bg-paper px-3 py-1.5">
-            パーソナリティ：{episode.presenters.join("・")}
+            出演・進行：{episode.presenters.join("・")}
           </span>
         </div>
         <p className="mt-5 text-sm leading-7 text-ink-muted sm:text-base sm:leading-8">

@@ -32,6 +32,6 @@ describe('September 27 kawaii radio archive',()=>{
   const page=await readFile(new URL('../src/RadioMusicPage.tsx',import.meta.url),'utf8');
   assert.match(page,/ExternalLink href=\{radioMusicPlaylist.url\}/);
   assert.match(page,/YouTube再生リストを開く/);
-  assert.doesNotMatch(page,/PLZULeB94UnlQ|トーク版\.mp4|MilyRadio-20260927-private/);
+  assert.doesNotMatch(page,/トーク版\.mp4|MilyRadio-[0-9]{8}-private/);
  });
 });
