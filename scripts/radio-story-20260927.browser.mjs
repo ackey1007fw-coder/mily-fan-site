@@ -48,6 +48,10 @@ try {
         assert.notEqual(await v.getAttribute("controls"),null);
         assert.notEqual(await v.getAttribute("playsinline"),null);
         await photo.scrollIntoViewIfNeeded();
+        await page.waitForFunction(src => {
+          const img = document.querySelector(`img[src="${src}"]`);
+          return img && img.complete && img.naturalWidth > 0;
+        }, image.src);
         await photo.evaluate(img => img.decode());
         const state = await photo.evaluate(img => ({width:img.naturalWidth,fit:getComputedStyle(img).objectFit,ratio:img.getBoundingClientRect().width/img.getBoundingClientRect().height}));
         assert.ok(state.width>0); assert.equal(state.fit,"contain");
