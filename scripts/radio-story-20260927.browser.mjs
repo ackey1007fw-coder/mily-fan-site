@@ -58,7 +58,9 @@ try {
         await page.waitForFunction(el => el.currentTime > .1, await v.elementHandle());
         await v.evaluate(el => el.pause());
         for (const [label,url] of [["ラジオを聴く（FM公式）",radioProgram.listenUrl],["番組にお便りを送る（FM公式）",RADIO_KAWAII_MESSAGE_FORM_URL]]) {
-          const link=card.getByRole("link",{name:label,exact:true});
+          // ExternalLink adds a screen-reader-only new-tab notice to the accessible name.
+          const link=card.getByRole("link",{name:label});
+          assert.equal(await link.count(),1);
           assert.equal(await link.getAttribute("href"),url);
           assert.equal(await link.getAttribute("target"),"_blank");
           assert.match(await link.getAttribute("rel"),/noopener/);
