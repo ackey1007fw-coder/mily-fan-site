@@ -1,4 +1,4 @@
-import { kawaiiRadioStoryVideo } from "./kawaiiRadioStoryVideo.ts";
+import { kawaiiRadioStoryVideo, kawaiiRadioAdditionalVideos } from "./kawaiiRadioStoryVideo.ts";
 import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
 import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
 import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
@@ -151,6 +151,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  ...kawaiiRadioAdditionalVideos,
   kawaiiRadioStoryVideo,
   faceToFaceClassStoryVideo,
   morningXVideo,

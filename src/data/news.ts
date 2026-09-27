@@ -1,4 +1,4 @@
-import { kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
+import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "./radio.ts";
 import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
 import {
@@ -242,11 +242,11 @@ export const news: NewsItem[] = [
     date: "2026-09-27",
     activityIds: ["radio"],
     title: "9/27のラジオは『かわいい』がテーマ📻 お便りも募集中",
-    body: "みりぃがInstagram Storyで、9月27日（日）10:00〜13:00の『湘南シーサイドサークル』を案内しました。トークテーマは『かわいい』。黒い眼鏡のフィルターにピースとウインクを添えた動画と、お便りの送り口を指さす写真を届けています。\n\nお便りは下のFM公式フォームから送れます。ラジオネームとは別に氏名・メールアドレスなどの入力欄があるため、フォームの案内を確認してからお送りください。\n\nこのお知らせは9月27日放送の案内記録です。動画は背景音楽を含まない映像のみの掲載です。",
+    body: "みりぃがInstagram Storyで、9月27日（日）10:00〜13:00の『湘南シーサイドサークル』を案内しました。トークテーマは『かわいい』。黒い眼鏡のフィルターにピースとウインクを添えた動画に加え、スタジオでディレクターのマナティーさんとヘッドホンを着けた2ショットも。星のフィルター姿でお便りの送り口を指さす動画と、くま耳のウインク写真も届きました。写真1枚・動画3本で、放送に向けたみりぃの表情を楽しめます。\n\nお便りは下のFM公式フォームから送れます。ラジオネームとは別に氏名・メールアドレスなどの入力欄があるため、フォームの案内を確認してからお送りください。\n\nこのお知らせは9月27日放送の案内記録です。動画は背景音楽を含まない映像のみの掲載です。",
     sourceLabel: "Instagram Story",
     additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
     media: kawaiiRadioStoryVideo,
-    additionalMedia: [kawaiiRadioMessageImage],
+    additionalMedia: [kawaiiRadioMessageImage, ...kawaiiRadioAdditionalVideos],
     relatedUrl: radioProgram.listenUrl,
     ctaLabel: "ラジオを聴く（FM公式）",
     additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],

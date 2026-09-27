@@ -23,6 +23,8 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b168-03-radio-studio-story",
+  "mily-b168-04-radio-message-stars-story",
   "mily-b168-01-kawaii-radio-story",
   "mily-b146-01-face-to-face-class-story",
   "mily-b144-02-morning-x",
@@ -36,5 +38,5 @@ for (let index = galleryVideos.length - 1; index >= 0; index--) {
   if (newVideoIds.has(galleryVideos[index].id)) galleryVideos.splice(index, 1);
 }
 for (let index = media.length - 1; index >= 0; index--) {
-  if (media[index].id === "mily-b145-03") media.splice(index, 1);
+  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id)) media.splice(index, 1);
 }

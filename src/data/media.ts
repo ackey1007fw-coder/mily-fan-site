@@ -1,3 +1,4 @@
+import { kawaiiRadioMessagePhoto } from "./kawaiiRadioStoryVideo.ts";
 import { nightRibbonFanroomPhoto } from "./nightRibbonFanroomSelfie.ts";
 import { september23FanroomPhoto } from "./september23Fanroom.ts";
 import { morningFanroomSelfiePhoto } from "./morningFanroomSelfie.ts";
@@ -79,6 +80,7 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  kawaiiRadioMessagePhoto,
   september23FanroomPhoto,
   campusGirlsPrelimFinalResultPhoto,
   ...movieNightPhotos,

@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { HOME_NEWS_LIMIT, ARCHIVE_LOAD_MORE_LABEL } from "../src/lib/homePortal.ts";
-import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO_KAWAII_MESSAGE_FORM_URL } from "../src/data/kawaiiRadioStoryVideo.ts";
+import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO_KAWAII_MESSAGE_FORM_URL, kawaiiRadioAdditionalVideos } from "../src/data/kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "../src/data/radio.ts";
 const item = news.find(item => item.id === "2026-09-27-radio-kawaii-story");
 const tools = process.env.PLAYWRIGHT_MODULE_ROOT;
@@ -68,6 +68,17 @@ try {
         await v.evaluate(async el => {el.muted=true; await el.play();});
         await page.waitForFunction(el => el.currentTime > .1, await v.elementHandle());
         await v.evaluate(el => el.pause());
+        if (!isRadio) {
+          assert.equal(await card.locator("video").count(), 3);
+          for (const extra of kawaiiRadioAdditionalVideos) {
+            const player = card.locator(`video[src="${extra.src}"]`);
+            assert.equal(await player.count(), 1);
+            await player.scrollIntoViewIfNeeded();
+            await player.evaluate(async el => { el.muted = true; await el.play(); });
+            await page.waitForFunction(el => el.currentTime > .1, await player.elementHandle());
+            await player.evaluate(el => el.pause());
+          }
+        }
         for (const [label,url] of [["ラジオを聴く（FM公式）",radioProgram.listenUrl],["番組にお便りを送る（FM公式）",RADIO_KAWAII_MESSAGE_FORM_URL]]) {
           // ExternalLink adds a screen-reader-only new-tab notice to the accessible name.
           const link=card.getByRole("link",{name:label});
@@ -82,6 +93,28 @@ try {
         if (isRadio) await v.screenshot({path:join(output,`${engine}-${width}-radio-related-video.png`)});
         results.push({engine,width,route,status:"passed",imageState:state,videoPlayed:true,compactRadioNews:isRadio});
       }
+      await page.goto(origin + "/gallery/", { waitUntil: "networkidle" });
+      const galleryPhoto = page.locator(`img[src="${image.src}"]`);
+      assert.equal(await galleryPhoto.count(), 1);
+      await galleryPhoto.scrollIntoViewIfNeeded();
+      await page.waitForFunction(img => img.complete && img.naturalWidth > 0, await galleryPhoto.elementHandle());
+      const ratio = await galleryPhoto.evaluate(img => img.getBoundingClientRect().width / img.getBoundingClientRect().height);
+      assert.ok(Math.abs(ratio - 864 / 1536) < .002);
+      await galleryPhoto.screenshot({path:join(output,`${engine}-${width}-gallery-photo.png`)});
+      const more = page.getByRole("button", {name:ARCHIVE_LOAD_MORE_LABEL,exact:true});
+      for (const entry of [video, ...kawaiiRadioAdditionalVideos]) {
+        const player = page.locator(`video[src="${entry.src}"]`);
+        for (let i = 0; !(await player.count()) && await more.count() && i < 40; i++) await more.click();
+        assert.equal(await player.count(), 1);
+        await player.scrollIntoViewIfNeeded();
+        assert.equal(await player.getAttribute("preload"), "none");
+        await player.evaluate(async el => { el.muted = true; await el.play(); });
+        await page.waitForFunction(el => el.currentTime > .1, await player.elementHandle());
+        await player.evaluate(el => el.pause());
+      }
+      assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+      assert.deepEqual(errors, []);
+      results.push({engine,width,route:"/gallery/",status:"passed",videosPlayed:3,photosLoaded:1});
     } finally { await browser.close(); }
   }
 } finally {
