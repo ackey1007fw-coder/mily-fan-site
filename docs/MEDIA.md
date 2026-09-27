@@ -1,5 +1,21 @@
 # メディア運用ガイド — mily-fan-site
 
+## b169 — 2026-09-27朝SHOWROOM「タコ踊り」SNS短尺
+
+- 出典: オーナーが掲載を依頼した2026-09-27朝のSHOWROOM保存録画（録画開始記録05:34:17 JST）。録画先頭から0:02:15の非歌唱場面。元録画・非公開の保存先は公開しない。
+- 元clip: `public/media/live-clips/mily-b169-12-20260927-asa-taco-000215.mp4`（640×360、元音声・元画角、約7.6秒）。当該回のLIVE STREAM見どころに掲載済み。
+- 公開派生: `public/media/live-clips/mily-b169-12-20260927-asa-taco-vertical.mp4`（720×1280、H.264/AAC、約7.57秒）。元映像を切らずに縦型キャンバスの中央へ置き、日付・非公式ファン編集・配信レポートへの案内を付加。元音声を維持し、顔の加工なし。#360で公開済み。
+- オーナーがこの場面について明示承認したSNS展開は、次の**4面だけ**。投稿済みURLは `src/data/streamRecap20260927Asa.ts` の当該 `socialClip` と一致する。X投稿で縦型派生と同一バイト列を使用したかは未確認であり、同一ファイルの配布とは記録しない。
+
+| 公開先 | 投稿済みURL |
+| --- | --- |
+| X | https://x.com/ackey_RiRi_supp/status/2104136102365823130 |
+| Instagram Reels | https://www.instagram.com/reel/DdyRJObDpQZ/ |
+| TikTok | https://www.tiktok.com/t/7690141584322579733 |
+| YouTube Shorts | https://www.youtube.com/watch?v=ant30v2jT_A |
+
+- この承認は他の配信回・素材・投稿先や、NEWS / Galleryへの複製には及ばない。既存投稿と公開ファイルは変更・再投稿・削除しない。
+
 ## b168 追加 — 2026-09-27 ラジオStory全4素材の掲載
 
 - 同日の追加依頼で、提供写真1枚・動画3本すべてのNEWS / Gallery掲載を明示承認。#355の既存NEWSを拡充し、記事・既存素材を重複生成しない。
