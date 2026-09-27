@@ -197,7 +197,9 @@ export function Gallery({
     typeof limit === "number" ? visible : capped
   ).filter((entry) => entry.kind === "mixch");
   const selfHostedVideos = visible.filter((entry) => entry.kind === "video");
-  const tiktokVideos = visible.filter((entry) => entry.kind === "tiktok");
+  const tiktokVideos = (typeof limit === "number" ? visible : entries).filter(
+    (entry) => entry.kind === "tiktok",
+  );
 
   return (
     <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
@@ -239,16 +241,16 @@ export function Gallery({
                 </p>
               </>
             )}
-            {mixchCards.length > 0 ? (
+            {tiktokVideos.length > 0 ? (
               <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
-                {mixchCards.map((entry) => (
+                {tiktokVideos.map((entry) => (
                   <GalleryCard key={entry.key} entry={entry} />
                 ))}
               </ul>
             ) : null}
-            {tiktokVideos.length > 0 ? (
+            {mixchCards.length > 0 ? (
               <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
-                {tiktokVideos.map((entry) => (
+                {mixchCards.map((entry) => (
                   <GalleryCard key={entry.key} entry={entry} />
                 ))}
               </ul>
