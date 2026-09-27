@@ -1,3 +1,4 @@
+import { media, srcSetFor } from "../src/data/media.ts";
 import assert from "node:assert/strict";
 import { it } from "node:test";
 import { readFile } from "node:fs/promises";
@@ -8,11 +9,11 @@ import sharp from "sharp";
 import { fileURLToPath } from "node:url";
 import { news, newsDisplayMedia } from "../src/data/news.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
-import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO_KAWAII_MESSAGE_FORM_URL } from "../src/data/kawaiiRadioStoryVideo.ts";
+import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO_KAWAII_MESSAGE_FORM_URL, kawaiiRadioAdditionalVideos, kawaiiRadioMessagePhoto } from "../src/data/kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "../src/data/radio.ts";
 const item = news.find(item => item.id === "2026-09-27-radio-kawaii-story");
 const file = src => new URL(`../public${src}`, import.meta.url);
-it("keeps the 9/27 radio announcement source-bounded with both approved media", () => {
+it("keeps the 9/27 radio announcement source-bounded with all four approved media", () => {
   assert.ok(item);
   assert.equal(news.filter(n => n.id === item.id).length, 1);
   assert.equal(item.date, "2026-09-27");
@@ -23,7 +24,13 @@ it("keeps the 9/27 radio announcement source-bounded with both approved media", 
   assert.match(item.body, /10:00〜13:00/);
   assert.match(item.body, /氏名・メールアドレス/);
   assert.match(item.body, /映像のみ/);
-  assert.deepEqual(newsDisplayMedia(item), [video, image]);
+  assert.deepEqual(newsDisplayMedia(item), [video, image, ...kawaiiRadioAdditionalVideos]);
+  for (const v of kawaiiRadioAdditionalVideos) {
+    assert.equal(galleryVideos.filter(g => g.id === v.id).length, 1);
+    assert.equal(galleryVideos.find(g => g.id === v.id), v);
+  }
+  assert.equal(media.find(m => m.id === kawaiiRadioMessagePhoto.id), kawaiiRadioMessagePhoto);
+  assert.equal(srcSetFor(kawaiiRadioMessagePhoto, "jpg"), image.srcSet);
   assert.equal(galleryVideos.filter(v => v.id === video.id).length, 1);
   assert.equal(galleryVideos.find(v => v.id === video.id), video);
   assert.equal(item.relatedUrl, radioProgram.listenUrl);
@@ -60,4 +67,23 @@ it("uses real responsive widths, uncropped pictures, and no metadata", async () 
   }
   assert.equal(image.width, 864);
   assert.equal(image.height, 1536);
+});
+
+it("keeps both additional Story videos full-length and metadata-free", async () => {
+  for (const [index, v] of kawaiiRadioAdditionalVideos.entries()) {
+    const bytes = await readFile(file(v.src));
+    const probe = JSON.parse(execFileSync(ffprobe.path, ["-v", "error", "-show_streams", "-show_format", "-of", "json", fileURLToPath(file(v.src))]));
+    assert.equal(probe.streams.length, 1);
+    assert.equal(probe.streams[0].codec_name, "h264");
+    assert.equal(probe.streams[0].profile, "Constrained Baseline");
+    assert.equal(probe.streams[0].width, 512);
+    assert.equal(probe.streams[0].height, 910);
+    assert.ok(Math.abs(Number(probe.format.duration) - [19.034, 5.6][index]) < 0.04);
+    assert.ok(bytes.indexOf("moov") > 0 && bytes.indexOf("moov") < bytes.indexOf("mdat"));
+    for (const key of ["creation_time", "location", "comment"]) assert.equal(probe.format.tags[key], undefined);
+    const poster = await sharp(await readFile(file(v.poster))).metadata();
+    assert.equal(poster.width, 512);
+    assert.equal(poster.height, 910);
+    assert.equal(poster.exif, undefined);
+  }
 });

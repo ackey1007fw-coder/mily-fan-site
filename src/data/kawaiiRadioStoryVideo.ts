@@ -1,3 +1,5 @@
+import type { MediaItem } from "./media.ts";
+import additionalManifest from "./kawaiiRadioAdditionalVideos.json" with { type: "json" };
 import type { MorningStoryVideo } from "./morningStoryVideo.ts";
 import type { NewsImageMedia } from "./news.ts";
 import manifest from "./kawaiiRadioStoryVideo.json" with { type: "json" };
@@ -17,4 +19,24 @@ export const kawaiiRadioMessageImage: NewsImageMedia = {
   width: 864,
   height: 1536,
   alt: "くま耳とキラキラのフィルター姿のみりぃがウインクし、『ここから』『匿名でメール送れるよ』のお便り案内を指さす写真",
+};
+
+/** Same public files are shared by NEWS and Gallery. */
+export const kawaiiRadioAdditionalVideos = additionalManifest as MorningStoryVideo[];
+
+export const kawaiiRadioMessagePhoto: MediaItem = {
+  id: "mily-b168-02",
+  kind: "photo",
+  basePath: "/media/gallery/mily-b168-02-radio-message-story",
+  widths: [480, 960, 1600],
+  width: kawaiiRadioMessageImage.width,
+  height: kawaiiRadioMessageImage.height,
+  alt: kawaiiRadioMessageImage.alt,
+  caption: "9月27日のInstagram Story。お便りの送り口を案内するみりぃ。",
+  provenance: "owner-provided",
+  sourceUrl: null,
+  sourceDate: "2026-09-27",
+  credit: null,
+  aspect: "864 / 1536",
+  published: true,
 };
