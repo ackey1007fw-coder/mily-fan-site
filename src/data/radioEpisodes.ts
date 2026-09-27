@@ -1,3 +1,4 @@
+import { radioEpisode20260927 } from "./radioEpisode20260927.ts";
 export type RadioEpisodeHighlight = {
   timestamp: string;
   title: string;
@@ -419,4 +420,4 @@ export const radioEpisode20260823: RadioEpisode = {
   "transcriptionNote": "オーナー提供の自動文字起こしの前後関係を確認し、放送内容を要約しました。音声の全編手動聴取・全文校正は行っていません。話者や固有名詞が不確かな箇所は省略しています。時刻は録音開始からの目安です。番組で語られた経験・意見として記載し、観劇制度の現在の条件を案内するものではありません。録音音声・歌詞・全文文字起こしは掲載していません。"
 };
 
-export const radioEpisodes: RadioEpisode[] = [radioEpisode20260913, radioEpisode20260830, radioEpisode20260823];
+export const radioEpisodes: RadioEpisode[] = [radioEpisode20260927, radioEpisode20260913, radioEpisode20260830, radioEpisode20260823];

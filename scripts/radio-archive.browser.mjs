@@ -50,8 +50,9 @@ try {
           const highlights = page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`);
           assert.equal(await highlights.locator('li').count(), 11);
           assert.ok((await highlights.innerText()).length > 2000, 'Detailed recap is rendered');
-          await page.getByText('主なコーナーとタイムスタンプを見る', { exact: true }).first().click();
-          assert.equal(await page.locator('details[open] li').count(), 17);
+          const historicalSection = highlights.locator('xpath=ancestor::section[1]');
+          await historicalSection.getByText('主なコーナーとタイムスタンプを見る', { exact: true }).click();
+          assert.equal(await historicalSection.locator('details[open] li').count(), 17);
           await highlights.screenshot({ path: join(output, `${engine}-${width}-highlights.png`) });
         }
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${route}: no horizontal overflow at ${width}px`);
