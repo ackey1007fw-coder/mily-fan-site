@@ -459,7 +459,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
               </h4>
               <p className="mt-2 text-sm leading-7 text-ink-muted">{highlight.body}</p>
               {highlight.quote ? (
-                <blockquote className="mt-4 border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
+                <blockquote className="mt-4 whitespace-pre-line border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
                   {highlight.quote}
                 </blockquote>
               ) : null}
