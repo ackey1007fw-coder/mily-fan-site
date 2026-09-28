@@ -97,7 +97,7 @@ transcriptionNote: buildTranscriptionNote({
 }),
 ```
 
-- 共通文（`RECAP_WITHHOLD_NOTE` / `RECAP_FIGURES_NOTE`）を回ごとに言い換えない。
+- 共通文（`RECAP_WITHHOLD_NOTE` / `RECAP_CLIP_WITHHOLD_NOTE` / `RECAP_FIGURES_NOTE`）を回ごとに言い換えない。承認済み短尺を掲載する回は `publishedClips: true` を指定し、全編非公開と短い抜粋の掲載を区別する。
 - 静止画がない回は `stills: ""` ではなく「静止画は掲載していません。」と書く。
 
 ## 4. 表記辞書（統一してよい語）

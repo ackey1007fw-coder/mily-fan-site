@@ -15,6 +15,7 @@ import {
   buildRankingNote,
   RECAP_FIGURES_NOTE,
   RECAP_WITHHOLD_NOTE,
+  RECAP_CLIP_WITHHOLD_NOTE,
   buildTranscriptionNote,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
@@ -198,10 +199,12 @@ describe("配信メモの統一ルール", () => {
 
       it("builds the note from the shared sentences", () => {
         const note = recap.transcriptionNote;
-        assert.ok(note.includes(RECAP_WITHHOLD_NOTE), "共通の非掲載範囲の文がない");
+        const withholdNote = note.includes(RECAP_CLIP_WITHHOLD_NOTE) ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
+        if (withholdNote === RECAP_CLIP_WITHHOLD_NOTE) assert.ok(recap.highlights.some(item => item.clip), "抜粋掲載の注記には実際の短尺が必要");
+        assert.ok(note.includes(withholdNote), "共通の非掲載範囲の文がない");
         assert.ok(note.endsWith(RECAP_FIGURES_NOTE), "数字の注記で終わっていない");
         assert.ok(
-          note.indexOf(RECAP_WITHHOLD_NOTE) > 0,
+          note.indexOf(withholdNote) > 0,
           "素材の説明が非掲載範囲より前にない",
         );
         assert.match(note, /静止画は/);
@@ -381,4 +384,13 @@ describe("配信メモの統一ルール", () => {
     assert.match(rules, /統一しない語/);
     assert.doesNotMatch(rules, /drive\.google\.com|docs\.google\.com/);
   });
+});
+
+// 全編非公開と承認済み抜粋を混同しない。既定の非掲載文は保持する。
+it("distinguishes full recordings from approved short excerpts", () => {
+  const note = buildTranscriptionNote({ material: "素材。", stills: "静止画。", publishedClips: true });
+  assert.ok(note.includes(RECAP_CLIP_WITHHOLD_NOTE));
+  assert.ok(!note.includes(RECAP_WITHHOLD_NOTE));
+  const night = streamRecaps.find(item => item.id === "2026-09-27-night-showroom");
+  assert.ok(night.transcriptionNote.includes(RECAP_CLIP_WITHHOLD_NOTE));
 });

@@ -207,6 +207,7 @@ export const streamRecap20260927Night: StreamRecap = {
   "verifiedAt": "2026-09-28",
   "transcriptionNote": buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    publishedClips: true,
     stills: "静止画は同じ録画の実フレーム10枚です。掲載画像を個別に目視確認し、録画内時刻を付記しています。",
     extra: "録画開始記録22:30:29、メディア実測5550.483秒。完了済み47区間の自動文字起こし全体を確認しました。短尺2本は同じ録画の原音付き抜粋で、1秒間隔の実フレームと音声トラックを検査しています。全編の手動聴取・逐語校正・連続視聴は未実施です。録画開始以前と連続性は未確認で、時刻は録画先頭からの目安です。今回の確認範囲で歌唱曲は確定していません。",
   })

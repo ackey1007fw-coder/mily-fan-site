@@ -32,23 +32,29 @@ export const RANKING_NOTE_WITHOUT_RANGE = buildRankingNote();
 export const RECAP_WITHHOLD_NOTE =
   "録音音声・画面録画・全文文字起こしは掲載していません。視聴者の表示名・コメント画面も載せていません。";
 
+/** 承認済みの短尺を掲載する回では、全編と抜粋を区別する。 */
+export const RECAP_CLIP_WITHHOLD_NOTE =
+  "録音音声・画面録画の全編と全文文字起こしは掲載していません。承認済みの短い抜粋のみ掲載しています。視聴者の表示名・コメント画面も載せていません。";
+
 /** 数字はカード作成時点の記録であり、現在値として固定しない。 */
 export const RECAP_FIGURES_NOTE = "フォロワー数や目標の数字は配信時点の記録です。";
 
 /**
  * 注記を「素材 → 非掲載範囲 → 静止画 → 補足 → 数字」の順に組み立てる。
- * 回ごとに違うのは material / stills / extra だけ。
+ * publishedClips は承認済み短尺の掲載がある回だけ指定する。
  */
 export function buildTranscriptionNote({
   material,
   stills,
   extra,
+  publishedClips = false,
 }: {
   material: string;
   stills: string;
   extra?: string;
+  publishedClips?: boolean;
 }): string {
-  return [material, RECAP_WITHHOLD_NOTE, stills, extra, RECAP_FIGURES_NOTE]
+  return [material, publishedClips ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE, stills, extra, RECAP_FIGURES_NOTE]
     .filter(Boolean)
     .join("");
 }
