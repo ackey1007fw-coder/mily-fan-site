@@ -125,7 +125,7 @@ export const streamRecap20260927Night: StreamRecap = {
         "durationSeconds": 10,
         "links": [
           { "platform": "x", "url": "https://x.com/ackey_RiRi_supp/status/2104521135261897014" },
-          { "platform": "instagram", "url": "https://www.instagram.com/reels/Dd0_RyYiW9-/" },
+          { "platform": "instagram", "url": "https://www.instagram.com/reel/Dd0_RyYiW9-/" },
           { "platform": "tiktok", "url": "https://www.tiktok.com/@ackeytan_/video/7690533760294554900" },
           { "platform": "youtube", "url": "https://www.youtube.com/watch?v=5JK8DupppFg" }
         ]

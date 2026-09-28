@@ -65,7 +65,7 @@ export const approvedTalkLinks = [
   "https://www.tiktok.com/t/7690141584322579733",
   "https://www.youtube.com/watch?v=ant30v2jT_A",
   "https://x.com/ackey_RiRi_supp/status/2104521135261897014",
-  "https://www.instagram.com/reels/Dd0_RyYiW9-/",
+  "https://www.instagram.com/reel/Dd0_RyYiW9-/",
   "https://www.tiktok.com/@ackeytan_/video/7690533760294554900",
   "https://www.youtube.com/watch?v=5JK8DupppFg",
 ];
