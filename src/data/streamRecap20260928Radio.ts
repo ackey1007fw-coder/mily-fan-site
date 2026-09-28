@@ -41,6 +41,17 @@ export const streamRecap20260928Radio: StreamRecap = {
       timestamp: "0:54:30",
       title: "お互いを照らし合う",
       body: "応援してくれるみんなと自分は、互いを照らし合っていると話す場面。原音付きの短い抜粋を掲載しています。",
+      socialClip: {
+        title: "お互いを照らし合う朝",
+        sourceTimestamp: "0:54:30",
+        durationSeconds: 9.8,
+        links: [
+          { platform: "x", url: "https://x.com/ackey_RiRi_supp/status/2104681062899032084" },
+          { platform: "instagram", url: "https://www.instagram.com/reel/Dd2IHY6DK3s/" },
+          { platform: "tiktok", url: "https://www.tiktok.com/@ackeytan_/video/7690697555725864198" },
+          { platform: "youtube", url: "https://www.youtube.com/watch?v=yq0GsaXZ9QI" },
+        ],
+      },
       clip: {
         src: "/media/live-clips/mily-b171-01-20260928-morning-mutual-light-005430.mp4",
         poster: "/media/live/mily-b164-01-morning-radio.jpg",
