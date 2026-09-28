@@ -54,7 +54,7 @@ try {
       }
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
       assert.deepEqual(errors, []);
-      await card.locator('summary').scrollIntoViewIfNeeded();
+      await card.locator(':scope > summary').scrollIntoViewIfNeeded();
       await page.screenshot({ path: join(output, `${engine}-${width}.png`) });
       results.push({ engine, width, stills: 10, playableClips: 2, zip: '200', overflow: false, errors });
     } finally { await browser.close(); }
