@@ -7,7 +7,7 @@
 - `live-clips/mily-b171-01-20260928-morning-mutual-light-005430.mp4` は録画内3270.0秒から9.8秒の本人トーク。640×360 / 15fps / H.264 / AAC、603,057 bytes、SHA256 `165970342ab9337c3bae895e97b5e1098fc0f264e212d8fc41bfdd138ce2486f`。同じ録画の原音を保持し、動画・音声トラックと全尺デコードを確認。該当自動文字起こしで、互いを照らし合うという発言と前後の個人名の区切りを照合した。手動聴取・全フレーム目視ではない。
 - ラジオ形式の静止写真のため、タコの踊りの実映像と呼ばない。録画原本・全文文字起こし・視聴者名は公開しない。
 - 9/29の追加依頼で、このb171-01の9.8秒トークだけをX・Instagram Reels・TikTok・YouTube Shortsへ展開。SNS版は720×1280 / 30fps / H.264 / AAC、947,806 bytes、原音付き・追加BGMなし。配信画面の静止写真を実映像や踊りとして説明しない。ほかの回・素材・投稿先へ承認を広げない。
-- 各投稿先の履歴で成功を確認し、さらに接続先の投稿一覧から実投稿を読み戻した。X: https://x.com/ackey_RiRi_supp/status/2104681062899032084 ／ Instagram: https://www.instagram.com/reel/Dd2IHY6DK3s/ ／ TikTok: https://www.tiktok.com/@ackeytan_/video/7690697555725864198 ／ YouTube Shorts: https://www.youtube.com/watch?v=yq0GsaXZ9QI 。既存投稿は再送しない。
+- 各投稿先の履歴で成功を確認し、接続先の投稿一覧から実投稿を読み戻した。投稿IDはX `2104681062899032084`、Instagram `Dd2IHY6DK3s`、TikTok `7690697555725864198`、YouTube Shorts `yq0GsaXZ9QI`。実URLの正本は当該回の `socialClip` と `scripts/approved-talk-links.mjs`。既存投稿は再送しない。
 
 
 ## b170 — 2026-09-27 SHOWROOM夜配信の実フレームと短尺
