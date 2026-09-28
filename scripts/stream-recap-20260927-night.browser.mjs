@@ -41,6 +41,12 @@ try {
       assert.equal(await zip.getAttribute('href'), recap.galleryZip.src);
       assert.equal(await zip.getAttribute('download'), recap.galleryZip.filename);
       assert.equal((await page.request.get(origin + recap.galleryZip.src)).status(), 200);
+      for (const link of recap.highlights.flatMap(h => h.socialClip?.links || [])) {
+        const anchor = card.locator(`a[href="${link.url}"]`);
+        assert.equal(await anchor.count(), 1);
+        assert.equal(await anchor.getAttribute('target'), '_blank');
+        assert.match(await anchor.getAttribute('rel'), /noopener/);
+      }
       const videos = card.locator('video');
       assert.equal(await videos.count(), 2);
       for (let i = 0; i < 2; i++) {

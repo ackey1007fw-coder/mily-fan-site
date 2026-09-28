@@ -119,6 +119,17 @@ export const streamRecap20260927Night: StreamRecap = {
       "timestamp": "0:55:18",
       "title": "ダブルピースでスクショタイム",
       "body": "シュシュを見せた後は、両手でピース。ウインクや笑顔を向ける、短いスクショタイムです。",
+      "socialClip": {
+        "title": "ダブルピース、からのウインク。",
+        "sourceTimestamp": "0:55:18",
+        "durationSeconds": 10,
+        "links": [
+          { "platform": "x", "url": "https://x.com/ackey_RiRi_supp/status/2104521135261897014" },
+          { "platform": "instagram", "url": "https://www.instagram.com/reel/Dd0_RyYiW9-/" },
+          { "platform": "tiktok", "url": "https://www.tiktok.com/@ackeytan_/video/7690533760294554900" },
+          { "platform": "youtube", "url": "https://www.youtube.com/watch?v=5JK8DupppFg" }
+        ]
+      },
       "clip": {
         "src": "/media/live-clips/mily-b170-12-20260927-night-peace-005518.mp4",
         "poster": "/media/live/mily-b170-07-20260927-night-005520.jpg",
