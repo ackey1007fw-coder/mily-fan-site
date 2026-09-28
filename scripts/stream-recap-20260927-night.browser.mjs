@@ -34,6 +34,8 @@ try {
       assert.equal(await card.locator('img').count(), 11);
       for (const image of await card.locator('img').all()) {
         await image.scrollIntoViewIfNeeded();
+        // Lazy-loaded gallery images may not have a selected source until the next frame.
+        await page.waitForFunction(img => img.complete && img.naturalWidth > 0, await image.elementHandle());
         await image.evaluate(img => img.decode());
         assert.equal(await image.evaluate(img => img.naturalWidth), 640);
       }
