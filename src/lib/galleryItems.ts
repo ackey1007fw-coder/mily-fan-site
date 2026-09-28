@@ -17,12 +17,14 @@ import {
 } from "../data/galleryVideos.ts";
 import { isMixchMovie, type MixchMovie } from "../data/mixchMovies.ts";
 import { media, visibleMedia, type MediaItem } from "../data/media.ts";
+import { tiktokGoodVibesVideo, type TikTokPostVideo } from "../data/tiktokGoodVibesVideo.ts";
 
 export type GalleryEntry =
   | { kind: "media"; key: string; item: MediaItem }
   | { kind: "drive-photo"; key: string; item: DrivePhotoView }
   | { kind: "video"; key: string; item: DriveVideoView }
-  | { kind: "mixch"; key: string; item: MixchMovie };
+  | { kind: "mixch"; key: string; item: MixchMovie }
+  | { kind: "tiktok"; key: string; item: TikTokPostVideo };
 
 function partition<T>(items: T[], pred: (item: T) => boolean): [T[], T[]] {
   const matched: T[] = [];
@@ -114,6 +116,11 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: item.id,
       item,
     })),
+    ...(tiktokGoodVibesVideo.published ? [{
+      kind: "tiktok" as const,
+      key: tiktokGoodVibesVideo.id,
+      item: tiktokGoodVibesVideo,
+    }] : []),
     ...selfHosted.map(driveVideoView).map((item) => ({
       kind: "video" as const,
       key: item.key,

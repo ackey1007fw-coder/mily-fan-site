@@ -17,14 +17,15 @@ import {
 } from "../data/galleryVideos.ts";
 import { isMixchMovie, type MixchMovie } from "../data/mixchMovies.ts";
 import { stories, type Story, type StoryMedia } from "../data/stories.ts";
+import type { TikTokPostVideo } from "../data/tiktokGoodVibesVideo.ts";
 
 /**
- * Mixch outbound cards and Fan Room audio are NEWS (+ Gallery for Mixch) only,
+ * Mixch outbound cards, TikTok embeds and Fan Room audio are NEWS (+ Gallery) only,
  * not Activity related media.
  */
 export type ActivityMediaItem = Exclude<
   NewsMedia | StoryMedia | GalleryVideoItem,
-  MixchMovie | NewsAudioMedia
+  MixchMovie | NewsAudioMedia | TikTokPostVideo
 >;
 
 export type ActivityMediaSources = {
@@ -66,15 +67,15 @@ function activityMediaKey(media: ActivityMediaItem): string {
 
 function isActivityNewsMedia(
   media: NewsMedia,
-): media is Exclude<NewsMedia, MixchMovie | NewsAudioMedia> {
-  return !isMixchMovie(media) && !isNewsAudio(media);
+): media is Exclude<NewsMedia, MixchMovie | NewsAudioMedia | TikTokPostVideo> {
+  return !isMixchMovie(media) && !isNewsAudio(media) && media.kind !== "tiktok";
 }
 
 /**
  * Selects explicitly related NEWS media plus media from related STORY slugs.
  * Story view objects that point at a Gallery manifest are resolved back to that
  * existing manifest object. Results are then deduplicated by manifest id.
- * Mixch outbound cards and Fan Room audio are NEWS-only and are not included here.
+ * Mixch outbound cards, TikTok embeds and Fan Room audio are NEWS/Gallery-only and are not included here.
  */
 export function selectActivityMedia(
   activityId: ActivityId,

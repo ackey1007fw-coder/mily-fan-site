@@ -316,6 +316,25 @@ export function verifyNews(items) {
         }
         continue;
       }
+      if (media?.kind === "tiktok") {
+        const canonicalPost = /^https:\/\/www\.tiktok\.com\/@[A-Za-z0-9._-]+\/video\/(\d{16,20})$/.exec(media.sourceUrl ?? "");
+        if (!canonicalPost || canonicalPost[1] !== media.postId) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs a confirmed TikTok post URL`);
+        }
+        if (!media.id?.trim() || media.sourceDate !== item.date || media.published !== true) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs id, matching sourceDate, and published status`);
+        }
+        if (slot === "media" && item.source !== media.sourceUrl) {
+          errors.push(`news "${item.id ?? "?"}" TikTok source must equal media.sourceUrl`);
+        }
+        if (typeof media.src === "string") {
+          errors.push(`news "${item.id ?? "?"}" ${slot} must use the official TikTok player`);
+        }
+        if (!media.alt?.trim()) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs alt text`);
+        }
+        continue;
+      }
       if (media?.kind === "audio") {
         if (!media.src?.startsWith("/media/")) {
           errors.push(
