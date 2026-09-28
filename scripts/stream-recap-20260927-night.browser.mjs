@@ -48,21 +48,21 @@ try {
         assert.match(await anchor.getAttribute('rel'), /noopener/);
       }
       const videos = card.locator('video');
-      assert.equal(await videos.count(), 2);
-      for (let i = 0; i < 2; i++) {
+      assert.equal(await videos.count(), 3);
+      for (let i = 0; i < 3; i++) {
         const video = videos.nth(i);
         await video.scrollIntoViewIfNeeded();
         await video.evaluate(v => { v.muted = true; v.load(); });
         await video.evaluate(v => v.play());
         await page.waitForFunction(v => v.currentTime > 0, await video.elementHandle());
-        assert.ok(Math.abs(await video.evaluate(v => v.duration) - [10, 10.8][i]) < .25);
+        assert.ok(Math.abs(await video.evaluate(v => v.duration) - [12, 10, 10.8][i]) < .25);
         await video.evaluate(v => v.pause());
       }
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
       assert.deepEqual(errors, []);
       await card.locator(':scope > summary').scrollIntoViewIfNeeded();
       await page.screenshot({ path: join(output, `${engine}-${width}.png`) });
-      results.push({ engine, width, stills: 10, playableClips: 2, zip: '200', overflow: false, errors });
+      results.push({ engine, width, stills: 10, playableClips: 3, zip: '200', overflow: false, errors });
     } finally { await browser.close(); }
   }
 } finally {
