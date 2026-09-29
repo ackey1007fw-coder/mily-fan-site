@@ -740,7 +740,7 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回のスクショ"
           id={`${recap.id}-stills`}
-          note={`かわいいカットを${recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。`}
+          note={recap.galleryNote ?? `かわいいカットを${recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。`}
         >
           <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
             {recap.gallery.map((still) => (
