@@ -81,8 +81,9 @@ describe("配信メモの統一ルール", () => {
     const recap = streamRecaps.find((item) => item.id === "2026-09-28-night-thanks");
     assert.ok(recap);
     const safeName = "mily-b172-01-thanks-smile-005345.jpg";
-    assert.deepEqual(recap.gallery.map((image) => image.src), ["/media/live/" + safeName]);
-    assert.equal(recap.image, recap.gallery[0]);
+    assert.equal(recap.image.src, "/media/live/" + safeName);
+    assert.equal(recap.gallery, undefined);
+    assert.equal(recap.galleryNote, undefined);
     assert.equal(recap.galleryZip, undefined);
     assert.ok(recap.transcriptionNote.includes(RECAP_WITHHOLD_NOTE));
     assert.equal(recap.ranking[0], RANKING_NOTE_WITHOUT_RANGE);
