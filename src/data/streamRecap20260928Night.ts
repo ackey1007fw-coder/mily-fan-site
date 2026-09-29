@@ -3,17 +3,6 @@ import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote
 
 const gallery: StreamRecapImage[] = [
   {"src":"/media/live/mily-b172-01-thanks-smile-005345.jpg","width":640,"height":360,"alt":"赤い髪飾りを付け、カメラに向かって笑顔を見せるみりぃ","caption":"配信中の笑顔（録画内0:53:45）","downloadName":"mily-b172-01-thanks-smile-005345.jpg"},
-  {"src":"/media/live/mily-b172-02-thanks-board-01.jpg","width":800,"height":573,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 1（9月28日投稿）","downloadName":"mily-b172-02-thanks-board-01.jpg"},
-  {"src":"/media/live/mily-b172-03-thanks-board-02.jpg","width":782,"height":1600,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 2（9月28日投稿）","downloadName":"mily-b172-03-thanks-board-02.jpg"},
-  {"src":"/media/live/mily-b172-04-thanks-board-03.jpg","width":770,"height":1600,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 3（9月28日投稿）","downloadName":"mily-b172-04-thanks-board-03.jpg"},
-  {"src":"/media/live/mily-b172-05-thanks-board-04.jpg","width":800,"height":1590,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 4（9月28日投稿）","downloadName":"mily-b172-05-thanks-board-04.jpg"},
-  {"src":"/media/live/mily-b172-06-thanks-board-05.jpg","width":800,"height":587,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 5（9月28日投稿）","downloadName":"mily-b172-06-thanks-board-05.jpg"},
-  {"src":"/media/live/mily-b172-07-thanks-board-06.jpg","width":800,"height":569,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 6（9月28日投稿）","downloadName":"mily-b172-07-thanks-board-06.jpg"},
-  {"src":"/media/live/mily-b172-08-thanks-board-07.jpg","width":800,"height":593,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 7（9月28日投稿）","downloadName":"mily-b172-08-thanks-board-07.jpg"},
-  {"src":"/media/live/mily-b172-09-thanks-board-08.jpg","width":800,"height":565,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 8（9月28日投稿）","downloadName":"mily-b172-09-thanks-board-08.jpg"},
-  {"src":"/media/live/mily-b172-10-thanks-board-09.jpg","width":800,"height":1087,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 9（9月28日投稿）","downloadName":"mily-b172-10-thanks-board-09.jpg"},
-  {"src":"/media/live/mily-b172-11-thanks-board-10.jpg","width":800,"height":1129,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 10（9月28日投稿）","downloadName":"mily-b172-11-thanks-board-10.jpg"},
-  {"src":"/media/live/mily-b172-12-thanks-board-11.jpg","width":800,"height":1108,"alt":"みりぃが手書きで感謝をつづったお礼ボード","caption":"本人ファンルームのお礼画像 11（9月28日投稿）","downloadName":"mily-b172-12-thanks-board-11.jpg"},
 ];
 
 export const streamRecap20260928Night: StreamRecap = {
@@ -26,8 +15,7 @@ export const streamRecap20260928Night: StreamRecap = {
   summary: "初めてのお礼配信は、手書きのボードと笑顔で三次審査の応援に感謝を届ける夜。スクショタイムを挟み、後半はいつものおしゃべりへ。手紙をもらう喜びも話しながら、約3時間を一緒に過ごしたみんなへお礼を伝えました。",
   image: gallery[0],
   gallery,
-  galleryNote: "配信中の実スクショ1枚と、本人が配信後に公開した手書きのお礼画像11枚です。お礼画像内の表示名は掲載承認に基づき保持しています。各画像を保存できます。",
-  galleryZip: { src: "/media/live/mily-b172-20260928-thanks-images.zip", filename: "mily-20260928-thanks-images.zip", label: "この回の画像12枚をまとめて保存" },
+  galleryNote: "配信中の実スクショ1枚です。個人名・ポイントを含むお礼ボードは掲載していません。画像を保存できます。",
   highlights: [
     { timestamp: "0:01:13", title: "ゆっくり届けるお礼", body: "この日は時間をかけてお礼配信をしようと話してスタート。三次審査を応援してくれた人たちへ、感謝を伝える時間になりました。" },
     { timestamp: "0:47:25", title: "手書きのボードを掲げて", body: "用意したお礼ボードをカメラへ。書き込んだ言葉を見せながら、応援への思いを届けていました。" },
@@ -37,7 +25,7 @@ export const streamRecap20260928Night: StreamRecap = {
     { timestamp: "3:03:58", title: "一緒に過ごした夜に感謝", body: "お礼配信といつもの配信を続けてできたことを振り返り、みんなのおかげだと感謝。長い時間を一緒に過ごしてくれた人たちへ、おやすみのあいさつを届けました。" },
   ],
   goals: [],
-  ranking: [buildRankingNote(undefined, undefined, "end", true)],
+  ranking: [buildRankingNote()],
   timeline: [
     { timestamp: "0:01:13", label: "ゆっくりお礼を届ける夜の始まり" },
     { timestamp: "0:47:25", label: "手書きボードをカメラへ" },
@@ -55,8 +43,7 @@ export const streamRecap20260928Night: StreamRecap = {
   verifiedAt: "2026-09-29",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    approvedThankYouBoards: true,
-    stills: "静止画は録画内0:53:45の実フレーム1枚と、本人が配信後の9月28日23:17〜23:21にファンルームで公開した手書きのお礼画像11枚です。配信中の画面と配信後の投稿画像を区別しています。",
+    stills: "静止画は録画内0:53:45の実フレーム1枚です。お礼ボードと画像一括保存は、個人名・ポイントの露出を防ぐため掲載していません。",
     extra: "録画開始記録20:00:33、メディア実測11191.703秒。94区間の自動文字起こしが完了し、主要場面の文字起こしと実フレーム10時点を確認しました。全編の手動聴取・逐語校正は未実施です。録画終了記録との差があり、完全な連続収録とは認定していません。時刻は録画先頭からの目安です。歌唱曲と短尺の原音確認は未完了のため、この版では掲載していません。",
   }),
 };
