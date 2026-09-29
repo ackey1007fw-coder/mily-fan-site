@@ -16,7 +16,7 @@ import {
   morningStoryVideo,
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
-import { media } from "../src/data/media.ts";
+import { media } from "./fixtures/media-before-b173.ts";
 import { news } from "./fixtures/news-before-b41.ts";
 import { stories } from "../src/data/stories.ts";
 import { validateVideoDerivatives } from "./build-drive-gallery.mjs";

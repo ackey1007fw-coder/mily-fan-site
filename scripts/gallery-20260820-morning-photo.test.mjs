@@ -13,7 +13,7 @@ import {
   media,
   srcSetFor,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {

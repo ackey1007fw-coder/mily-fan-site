@@ -13,7 +13,7 @@ import { activities } from "../src/data/activities.ts";
 import { events } from "../src/data/events.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media, visibleMedia } from "../src/data/media.ts";
+import { media, visibleMedia } from "./fixtures/media-before-b173.ts";
 import {
   CAMPUS_GIRLS_PRELIM_FINAL_RESULT_X_URL,
   campusGirlsPrelimFinalResultImage,

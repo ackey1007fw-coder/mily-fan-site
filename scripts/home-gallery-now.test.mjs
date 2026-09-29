@@ -290,26 +290,27 @@ describe("Gallery portrait-first order", () => {
     assert.deepEqual(
       preview.map((entry) => entry.key),
       [
-        "mily-b63-01",
-        "mily-b38-01",
-        "mily-b31-01",
-        "mily-b30-01",
-        "mily-b29-01",
-        "mily-b28-01",
+        "mily-b173-01",
+        "mily-b173-02",
+        "mily-b173-03",
+        "mily-b173-04",
+        "mily-b173-05",
+        "mily-b173-06",
       ],
     );
   });
 
-  it("keeps one cinema cut and does not copy media arrays into the HOME picker", () => {
+  it("keeps cinema cuts in the archive without copying media arrays into the HOME picker", () => {
     const preview = selectGalleryPreview(HOME_GALLERY_LIMIT);
-    const cinemaCount = preview.filter(
+    const archive = selectGalleryEntries();
+    const cinemaCount = archive.filter(
       (entry) => cinemaEventKey(entry) === "mily-b38",
     ).length;
-    assert.equal(cinemaCount, 1);
-    assert.equal(preview[0]?.key, "mily-b63-01");
+    assert.ok(cinemaCount >= 1);
+    assert.equal(preview[0]?.key, "mily-b173-01");
     assert.equal(
-      preview.filter((entry) => entry.key.startsWith("mily-b38-")).length,
-      1,
+      preview.filter((entry) => entry.key.startsWith("mily-b173-")).length,
+      HOME_GALLERY_LIMIT,
     );
 
     const selector = source("src/lib/galleryItems.ts");

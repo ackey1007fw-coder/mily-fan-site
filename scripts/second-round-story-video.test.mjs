@@ -21,7 +21,7 @@ import {
   tiktokRadioVideo,
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
-import { media } from "../src/data/media.ts";
+import { media } from "./fixtures/media-before-b173.ts";
 import { news } from "./fixtures/news-before-b41.ts";
 import { stories, storyBySlug, storySources } from "../src/data/stories.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";

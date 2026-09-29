@@ -29,8 +29,8 @@ import {
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { media } from "./fixtures/media-before-b173.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b173.ts";
 import { socials } from "../src/data/socials.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";

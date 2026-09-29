@@ -19,7 +19,7 @@ import {
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media, visibleMedia } from "../src/data/media.ts";
+import { media, visibleMedia } from "./fixtures/media-before-b173.ts";
 import { followers400StoryVideo } from "../src/data/followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "../src/data/morningStreamThanksInstagramStoryImage.ts";
 import {

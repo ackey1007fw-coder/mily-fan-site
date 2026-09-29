@@ -15,7 +15,7 @@ import {
   featuredPhoto,
   media,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import {
   GIRLSAWARD_SHOWROOM_6TH_X_URL,
   girlsawardShowroomSixthImage,

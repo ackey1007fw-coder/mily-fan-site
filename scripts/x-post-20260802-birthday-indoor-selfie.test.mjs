@@ -15,7 +15,7 @@ import {
   featuredPhoto,
   media,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import {
   BIRTHDAY_INDOOR_SELFIE_X_URL,
   birthdayIndoorSelfieImage,
