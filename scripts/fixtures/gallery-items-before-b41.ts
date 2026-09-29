@@ -6,6 +6,13 @@ import {
 } from "../../src/lib/galleryItems.ts";
 
 const laterGalleryIds = new Set([
+  "mily-b173-01",
+  "mily-b173-02",
+  "mily-b173-03",
+  "mily-b173-04",
+  "mily-b173-05",
+  "mily-b173-06",
+  "mily-b173-07",
   "mily-b141-01-tiktok-ami-meet",
   "mily-b141-02-tiktok-ami-meet-story",
   "mily-b141-03-tiktok-ami-twin-coord",

@@ -8,7 +8,7 @@ import { describe, it } from "node:test";
 import sharp from "sharp";
 
 import { agestockYokohamaNewsImages } from "../src/data/agestockYokohamaNewsImages.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b173.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const NEWS_ID = "2026-09-21-agestock-yokohama";

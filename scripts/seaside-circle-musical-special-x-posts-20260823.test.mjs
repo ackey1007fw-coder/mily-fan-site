@@ -22,7 +22,7 @@ import {
   media,
   srcSetFor,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
