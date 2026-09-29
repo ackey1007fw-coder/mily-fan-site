@@ -1,3 +1,4 @@
+import { streamRecap20260928Night } from "./streamRecap20260928Night.ts";
 import { streamRecap20260928Radio } from "./streamRecap20260928Radio.ts";
 import { streamRecap20260927Night } from "./streamRecap20260927Night.ts";
 import { streamRecap20260927Asa } from "./streamRecap20260927Asa.ts";
@@ -107,6 +108,7 @@ export {
   RECAP_FIGURES_NOTE,
   RECAP_WITHHOLD_NOTE,
   RECAP_CLIP_WITHHOLD_NOTE,
+  RECAP_THANKS_WITHHOLD_NOTE,
   REPORT_MATERIAL_NOTE,
   SINGLE_STILL_NOTE,
   TRANSCRIPT_MATERIAL_NOTE,
@@ -202,6 +204,8 @@ export type StreamRecap = {
   summary: string;
   image?: StreamRecapImage;
   gallery?: StreamRecapImage[];
+  /** 出典が混在する承認済み画像セットの説明。通常回は既定の説明を使う。 */
+  galleryNote?: string;
   galleryZip?: StreamRecapGalleryZip;
   songs?: StreamRecapSong[];
   highlights: StreamRecapHighlight[];
@@ -215,6 +219,7 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20260928Night,
   streamRecap20260928Radio,
   streamRecap20260927Night,
   streamRecap20260927Asa,
@@ -272,6 +277,7 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20260928Night,
   streamRecap20260928Radio,
   streamRecap20260927Night,
   streamRecap20260927Asa,

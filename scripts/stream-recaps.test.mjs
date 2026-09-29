@@ -16,6 +16,7 @@ import {
   RECAP_FIGURES_NOTE,
   RECAP_WITHHOLD_NOTE,
   RECAP_CLIP_WITHHOLD_NOTE,
+  RECAP_THANKS_WITHHOLD_NOTE,
   buildTranscriptionNote,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
@@ -43,7 +44,7 @@ const MAX = {
 
 const RANKING_PLACE = "[1-9]\\d{0,2}";
 const RANKING_NOTE_SHAPE = new RegExp(
-  `^配信(?:終了時|中)に(?:、${RANKING_PLACE}位から${RANKING_PLACE}位まで)?ランキングを読み上げました。個人名は掲載していません。$`,
+  `^配信(?:終了時|中)に(?:、${RANKING_PLACE}位から${RANKING_PLACE}位まで)?ランキングを読み上げました。(?:本文に)?個人名は掲載していません。$`,
 );
 const THEME_PREFIXES = ["朝", "昼", "夕", "夜", "深夜"];
 const PLATFORMS = new Set(["SHOWROOM", "MixChannel"]);
@@ -77,6 +78,21 @@ function startMinutes(broadcastLabel) {
 }
 
 describe("配信メモの統一ルール", () => {
+  it("limits the thank-you image exception to its approved recap", () => {
+    const recap = streamRecaps.find((item) => item.id === "2026-09-28-night-thanks");
+    assert.ok(recap);
+    assert.equal(recap.gallery.length, 12);
+    assert.match(recap.galleryNote, /実スクショ1枚.*お礼画像11枚/);
+    assert.ok(streamRecaps.filter((item) => item.id !== recap.id).every((item) => item.galleryNote === undefined));
+    assert.equal(recap.image, recap.gallery[0]);
+    assert.ok(recap.transcriptionNote.includes(RECAP_THANKS_WITHHOLD_NOTE));
+    assert.ok(!recap.transcriptionNote.includes(RECAP_WITHHOLD_NOTE));
+    assert.equal(recap.ranking[0], "配信終了時にランキングを読み上げました。本文に個人名は掲載していません。");
+    assert.ok(recap.highlights.every((item) => !item.clip && !item.socialClip && !item.quote));
+    assert.ok(recap.gallery.every((item) => item.src.startsWith("/media/live/mily-b172-")));
+    assert.throws(() => buildTranscriptionNote({ material: "素材。", stills: "静止画。", approvedThankYouBoards: true, publishedClips: true }));
+  });
+
   it("keeps the archive newest-first, with the later slot first on the same day", () => {
     assert.ok(streamRecaps.length > 0);
     const ids = streamRecaps.map((recap) => recap.id);
@@ -182,6 +198,7 @@ describe("配信メモの統一ルール", () => {
         assert.ok(recap.ranking.length <= 1, "ランキングは0件か1件");
         for (const entry of recap.ranking) {
           assert.match(entry, RANKING_NOTE_SHAPE, `ランキングは定型文だけ: ${entry}`);
+          if (entry.includes("本文に個人名")) assert.equal(recap.id, "2026-09-28-night-thanks");
         }
 
         const { timeline } = recap;
@@ -199,7 +216,9 @@ describe("配信メモの統一ルール", () => {
 
       it("builds the note from the shared sentences", () => {
         const note = recap.transcriptionNote;
-        const withholdNote = note.includes(RECAP_CLIP_WITHHOLD_NOTE) ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
+        const approvedBoards = recap.id === "2026-09-28-night-thanks";
+        const withholdNote = approvedBoards ? RECAP_THANKS_WITHHOLD_NOTE : note.includes(RECAP_CLIP_WITHHOLD_NOTE) ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
+        if (!approvedBoards) assert.ok(!note.includes(RECAP_THANKS_WITHHOLD_NOTE));
         if (withholdNote === RECAP_CLIP_WITHHOLD_NOTE) assert.ok(recap.highlights.some(item => item.clip), "抜粋掲載の注記には実際の短尺が必要");
         assert.ok(note.includes(withholdNote), "共通の非掲載範囲の文がない");
         assert.ok(note.endsWith(RECAP_FIGURES_NOTE), "数字の注記で終わっていない");
