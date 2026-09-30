@@ -2027,12 +2027,16 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - 本番のChromium 320/1440pxとWebKit 390pxで25写真・5動画の実再生・ZIP HTTP200・h5見出し5件・横overflowなしを確認した実行記録を照合。
 - Upload-Postの履歴と2件の処理結果を読戻し、同じb174-42（2,017,315 bytes、33.792秒）の4媒体各1投稿の成功を確認。最初のXだけ503で失敗し、Xのみの再試行で成功。他3面の再投稿はしていない。今回の照合作業でも再投稿なし。
 
-| 媒体 | 公開日時 | 成功した投稿 |
+| 媒体 | 公開日時 | 成功した投稿ID |
 | --- | --- | --- |
-| X | 2026-10-01 07:49 JST | https://x.com/ackey_RiRi_supp/status/2105429878744957138 |
-| Instagram Reels | 2026-10-01 07:47 JST | https://www.instagram.com/reel/Dd7cQIaHc4F/ |
-| TikTok | 2026-10-01 07:48 JST | https://www.tiktok.com/@ackeytan_/video/7691463601068068117 |
-| YouTube Shorts | 2026-10-01 07:47 JST | https://www.youtube.com/watch?v=qU4c89P-eV8 |
+| X | 2026-10-01 07:49 JST | `2105429878744957138` |
+| Instagram Reels | 2026-10-01 07:47 JST | `Dd7cQIaHc4F` |
+| TikTok | 2026-10-01 07:48 JST | `7691463601068068117` |
+| YouTube Shorts | 2026-10-01 07:47 JST | `qU4c89P-eV8` |
+
+実URLと実投稿の読戻し結果は [公開記録](LIVE-TALK-POSTS-20260929.md) を参照。
 
 - 既存の投稿確認記録ではXの `@Mily_chan36`、Instagramの本文 `@mily_chan36`と本人タグ、TikTokの `@seasidecircle`、YouTubeのカバー設定を確認済み。Instagram/TikTokのメンション修正は既存投稿の編集であり再投稿ではない。投稿サービスの履歴には編集前本文が残るため、編集後の読戻し記録と区別する。
 - **Codex再レビューの証跡不足:** #372のCodex review submissionは旧head `a9e138c`のみで、修正head `b032116`のCodex完了は照合時点で確認できない。旧レビューやオーナー名義の修正返信をcurrent-head Codexレビューとして扱わない。#372は再レビュー完了確認前にマージ済みだったため、公開・CI・スレッド解決とレビュー完了を分けて記録し、補完レビューの結果は追加確認後に記録する。
+
+- 接続先4媒体の実投稿一覧も読戻し、X・Instagram・TikTokの指定メンション文字列とYouTubeの投稿IDを確認した。X実投稿ではサイトURLが本文から除去されており、動画内アドレスの案内とクリック可能な導線を混同しない。

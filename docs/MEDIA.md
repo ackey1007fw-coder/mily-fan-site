@@ -4535,11 +4535,13 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 - 公開素材は `mily-b174-42-20260929-night-five-scenes-social.mp4`（2,017,315 bytes、720×1280、33.792秒、H.264/AAC）。題字は `Mily`、冒頭は修正カバー40、各5時間台の原音付き映像。顔・身体の生成変更なし。
 - 投稿履歴・処理結果でX、Instagram Reels、TikTok、YouTube Shortsの4件の成功と素材サイズを照合。Xの初回503失敗は成功として数えず、Xだけの再試行が成功。公開済み3面の再送・4件の重複投稿はなし。
 
-| 媒体 | 公開日時 | 成功した投稿 |
+| 媒体 | 公開日時 | 成功した投稿ID |
 | --- | --- | --- |
-| X | 2026-10-01 07:49 JST | https://x.com/ackey_RiRi_supp/status/2105429878744957138 |
-| Instagram Reels | 2026-10-01 07:47 JST | https://www.instagram.com/reel/Dd7cQIaHc4F/ |
-| TikTok | 2026-10-01 07:48 JST | https://www.tiktok.com/@ackeytan_/video/7691463601068068117 |
-| YouTube Shorts | 2026-10-01 07:47 JST | https://www.youtube.com/watch?v=qU4c89P-eV8 |
+| X | 2026-10-01 07:49 JST | `2105429878744957138` |
+| Instagram Reels | 2026-10-01 07:47 JST | `Dd7cQIaHc4F` |
+| TikTok | 2026-10-01 07:48 JST | `7691463601068068117` |
+| YouTube Shorts | 2026-10-01 07:47 JST | `qU4c89P-eV8` |
+
+実URLと実投稿の読戻し結果は [公開記録](LIVE-TALK-POSTS-20260929.md) を参照。
 
 - 本人メンション・Instagram本人タグ・YouTubeカバーについては既存投稿の確認記録を照合。Instagram/TikTokではメンションを既存投稿の本文編集で補い、編集後読戻し確認済み。今回の運用記録追記で投稿本文・動画・写真を再加工しない。
