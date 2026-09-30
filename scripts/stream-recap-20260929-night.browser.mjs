@@ -32,7 +32,7 @@ try {
       assert.equal(await card.getAttribute('open'), '');
       assert.equal(await card.getByRole('heading', { name: recap.theme, exact: true }).count(), 1);
       assert.equal(await card.locator('img').count(), 26);
-      assert.equal(await card.getByRole('heading', { name: /録画 \d:00〜の5枚/ }).count(), 5);
+      assert.equal(await card.getByRole('heading', { name: /録画 \d:00〜の5枚/, level: 5 }).count(), 5);
       for (const image of await card.locator('img').all()) {
         await image.scrollIntoViewIfNeeded();
         // Lazy-loaded gallery images may not have a selected source until the next frame.

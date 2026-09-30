@@ -746,7 +746,7 @@ function StreamRecapArticle({
             {recap.gallery.map((still, index) => (
               <Fragment key={still.src}>
                 {still.galleryHour !== undefined && (index === 0 || recap.gallery?.[index - 1].galleryHour !== still.galleryHour) ? (
-                  <li className="col-span-full mt-3"><h4 className="text-sm font-semibold text-sage-deep">録画 {still.galleryHour}:00〜の5枚</h4></li>
+                  <li className="col-span-full mt-3"><h5 className="text-sm font-semibold text-sage-deep">録画 {still.galleryHour}:00〜の5枚</h5></li>
                 ) : null}
               <li>
                 <figure className="overflow-hidden rounded-2xl bg-sage-soft/40">
