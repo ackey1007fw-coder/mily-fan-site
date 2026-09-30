@@ -106,6 +106,14 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node --experimental-strip-types scripts/stream-recap-20260927-night.browser.mjs
 
+      - name: September 29 hourly recap browser checks
+        timeout-minutes: 5
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-recap-20260929-night.browser.mjs
+
       - name: Radio archive browser checks
         timeout-minutes: 5
         env:
