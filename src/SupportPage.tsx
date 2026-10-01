@@ -8,6 +8,7 @@ import { ShowroomAdRewardGuide } from "./components/ShowroomAdRewardGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
 import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import { VoteSpotlight } from "./components/VoteSpotlight";
+import { FourthRoundSupportGuide } from "./components/FourthRoundSupportGuide";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
 import { links } from "./data/links";
@@ -234,6 +235,7 @@ export default function SupportPage() {
             />
           </div>
         ) : null}
+        <FourthRoundSupportGuide />
         <PatonVoteGuide />
         <ShowroomAdRewardGuide />
 
