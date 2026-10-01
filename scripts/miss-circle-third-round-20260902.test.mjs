@@ -542,7 +542,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(contest.currentPhase?.name, "4次審査");
     assert.equal(contest.currentPhase?.start, "2026-10-02");
     assert.equal(contest.currentPhase?.end, "2026-10-12");
-    assert.equal(contest.lastVerifiedAt, "2026-09-18");
+    assert.equal(contest.lastVerifiedAt, "2026-10-01");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
     assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
       "WEB投票 10/2 12:00〜10/12 23:59",

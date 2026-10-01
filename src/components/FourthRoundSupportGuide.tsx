@@ -1,0 +1,53 @@
+import { contest } from "../data/contest";
+import { missCircleFourthRoundShowroomEventLink } from "../data/links";
+import { missCircleFourthRoundWebVote, missCircleFourthRoundShowroomReview, type SupportEventSchedule } from "../data/supportEvents";
+import { useSupportEventClock } from "../lib/useSupportEventClock";
+import { ExternalLink } from "./ExternalLink";
+
+const dateTime = new Intl.DateTimeFormat("ja-JP", { timeZone: "Asia/Tokyo", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23" });
+function formatScheduleRange(schedule: SupportEventSchedule) {
+  return schedule.state === "confirmed-period"
+    ? `${dateTime.format(new Date(schedule.start))}〜${dateTime.format(new Date(schedule.end))}`
+    : "公式案内をご確認ください";
+}
+
+export function FourthRoundSupportGuide() {
+  const now = useSupportEventClock();
+  const schedule = missCircleFourthRoundWebVote.schedule;
+  if (schedule.state !== "confirmed-period" || now > Date.parse(schedule.end)) return null;
+
+  return (
+    <section id="fourth-round-guide" aria-labelledby="fourth-round-heading" className="scroll-mt-24 px-4 py-8">
+      <div className="mx-auto max-w-3xl rounded-3xl border border-apricot/50 bg-paper-card p-5 shadow-card sm:p-8">
+        <p className="text-xs font-semibold tracking-wide text-sage-deep">MISS CIRCLE CONTEST 2026 · ENTRY 734</p>
+        <h2 id="fourth-round-heading" className="mt-2 text-2xl font-bold text-ink">四次審査の応援ガイド</h2>
+        <p className="mt-3 text-sm leading-7 text-ink-muted">三橋莉子（みりぃ）を応援する、3つの審査。日程はすべて日本時間です。WEB投票とSHOWROOMは開始・締切時刻が異なります。</p>
+        <ol className="mt-6 space-y-5">
+          <li className="rounded-2xl bg-sage-soft/35 p-4">
+            <h3 className="font-bold text-ink">1. WEB投票審査</h3>
+            <p className="mt-2 text-sm font-semibold text-sage-deep">{formatScheduleRange(schedule)}</p>
+            <p className="mt-2 text-sm leading-7 text-ink-muted">ENTRY 734の「投票する」からLINEログインへ進み、三橋莉子であることを確認してください。開始後はこのページ上部・ホームの投票ボタンから直接進めます。投票回数や手順は公式投票画面の案内に従ってください。</p>
+            <ExternalLink href={contest.entryUrl} className="mt-3 inline-flex min-h-11 items-center font-semibold text-sage-deep underline">ENTRY 734・公式投票入口を見る</ExternalLink>
+          </li>
+          <li className="rounded-2xl bg-sage-soft/35 p-4">
+            <h3 className="font-bold text-ink">2. SHOWROOM無料ギフト審査</h3>
+            <p className="mt-2 text-sm font-semibold text-sage-deep">{formatScheduleRange(missCircleFourthRoundShowroomReview.schedule)}</p>
+            <p className="mt-2 text-sm leading-7 text-ink-muted">主催者がイベント審査とは別に設けている審査項目です。みりぃの配信で応援し、対象となる無料ギフト・集計条件は公式案内を確認してください。有料ギフトがこの審査にも算入されるとは案内していません。</p>
+          </li>
+          <li className="rounded-2xl bg-apricot-soft/35 p-4">
+            <h3 className="font-bold text-ink">3. SHOWROOMイベント審査</h3>
+            <p className="mt-2 text-sm font-semibold text-sage-deep">{formatScheduleRange(missCircleFourthRoundShowroomReview.schedule)}</p>
+            <p className="mt-2 text-sm leading-7 text-ink-muted">「超十代2027出演オーディション」のイベントポイント・ランキングによる審査です。ギフトには無料・有料があり、有料ギフトの購入・送信は任意です。送信前にギフトの種類と必要なShow Goldを確認してください。</p>
+            <p className="mt-2 text-sm leading-7 text-ink-muted">10月3日・8日は各05:00〜23:59、獲得ポイントが1.2倍になるボーナス期間。加算は翌営業日までに行われ、期間ランキングには反映されません。無料ギフト審査にも倍率が適用されるとは確認できていません。</p>
+          </li>
+        </ol>
+        <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+          <ExternalLink href={contest.entryUrl} className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-3 text-sm font-semibold text-white">ENTRY 734から配信ルームへ</ExternalLink>
+          <ExternalLink href={missCircleFourthRoundShowroomEventLink.url} className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/25 px-5 py-3 text-sm font-semibold text-sage-deep">四次イベントの公式ルール・特典</ExternalLink>
+        </div>
+        <p className="mt-4 text-xs leading-6 text-ink-muted">複数アカウントでの応援は禁止されています。イベント特典には順位・選出などの条件があります。最新の対象ギフト、ミッション、集計・特典条件は公式イベントページをご確認ください。</p>
+        <p className="mt-3 text-xs leading-6 text-ink-muted">確認日：2026年10月1日 · 日程の出典：<ExternalLink href={missCircleFourthRoundWebVote.source} className="font-semibold text-sage-deep underline">主催者公式SCHEDULE</ExternalLink> · 非公式の応援案内です。</p>
+      </div>
+    </section>
+  );
+}

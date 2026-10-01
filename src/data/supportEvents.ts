@@ -6,6 +6,8 @@ import {
   campusGirlsFinalsExPatonVoteLink,
   missCircleShowroomEventLink,
   missCircleWebVoteLink,
+  missCircleFourthRoundWebVoteLink,
+  missCircleFourthRoundShowroomEventLink,
 } from "./links.ts";
 
 export type SupportEventKind =
@@ -223,9 +225,10 @@ export const missCircleFourthRoundWebVote: SupportEvent = {
     allDay: false,
     timezone: "Asia/Tokyo",
   },
-  // 四次審査の投票先は未発表。ENTRY 734以外のCTAを推測しない。
+  ctaLinkId: missCircleFourthRoundWebVoteLink.id,
+  note: "ENTRY 734 三橋莉子の公式投票ページへ。LINEログインと投票画面の手順・注意を確認してください。SHOWROOMとは別の審査です。",
   source: "https://www.misscircle.jp/",
-  verifiedAt: "2026-09-18",
+  verifiedAt: "2026-10-01",
   priority: 90,
 };
 
@@ -233,7 +236,8 @@ export const missCircleFourthRoundShowroomReview: SupportEvent = {
   id: "miss-circle-2026-4th-showroom-review",
   activityId: "miss-circle",
   kind: "stream-event",
-  title: "SHOWROOM審査",
+  title: "SHOWROOM無料ギフト審査・イベント審査",
+  note: "無料ギフト審査とイベント審査は別の審査項目です。対象ギフトや集計条件は公式案内で確認してください。",
   schedule: {
     state: "confirmed-period",
     start: "2026-10-03T05:00:00+09:00",
@@ -242,9 +246,9 @@ export const missCircleFourthRoundShowroomReview: SupportEvent = {
     allDay: false,
     timezone: "Asia/Tokyo",
   },
-  // 四次審査のイベントページは未発表。三次審査URLを流用しない。
-  source: "https://www.misscircle.jp/",
-  verifiedAt: "2026-09-18",
+  ctaLinkId: missCircleFourthRoundShowroomEventLink.id,
+  source: missCircleFourthRoundShowroomEventLink.url,
+  verifiedAt: "2026-10-01",
   priority: 80,
 };
 

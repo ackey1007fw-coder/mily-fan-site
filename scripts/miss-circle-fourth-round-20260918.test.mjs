@@ -43,7 +43,7 @@ describe("MISS CIRCLE 2026 fourth round", () => {
       end: "2026-10-12",
       source: "https://www.misscircle.jp/",
     });
-    assert.equal(contest.lastVerifiedAt, "2026-09-18");
+    assert.equal(contest.lastVerifiedAt, "2026-10-01");
     assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
       "WEB投票 10/2 12:00〜10/12 23:59",
       "SHOWROOM審査 10/3 5:00〜10/12 21:59",
@@ -75,17 +75,18 @@ describe("MISS CIRCLE 2026 fourth round", () => {
     );
   });
 
-  it("registers official windows without guessing fourth-round CTA URLs", () => {
+  it("registers official windows and newly confirmed fourth-round CTA URLs", () => {
     for (const event of [
       missCircleFourthRoundWebVote,
       missCircleFourthRoundShowroomReview,
     ]) {
       assert.equal(isValidSupportEvent(event), true);
-      assert.equal(event.source, "https://www.misscircle.jp/");
-      assert.equal(event.verifiedAt, "2026-09-18");
-      assert.equal(event.ctaLinkId, undefined);
+      assert.equal(event.verifiedAt, "2026-10-01");
+      assert.ok(links.some(({ id }) => id === event.ctaLinkId));
       assert.equal(supportEvents.filter(({ id }) => id === event.id).length, 1);
     }
+    assert.equal(missCircleFourthRoundWebVote.source, "https://www.misscircle.jp/");
+    assert.equal(missCircleFourthRoundShowroomReview.source, "https://www.showroom-live.com/event/circle2026_4th");
     assert.equal(missCircleFourthRoundWebVote.schedule.start, "2026-10-02T12:00:00+09:00");
     assert.equal(missCircleFourthRoundWebVote.schedule.end, "2026-10-12T23:59:59+09:00");
     assert.equal(missCircleFourthRoundShowroomReview.schedule.start, "2026-10-03T05:00:00+09:00");
