@@ -13,15 +13,13 @@ export function buildRankingNote(
   fromPlace?: number,
   toPlace?: number,
   timing: "end" | "during" = "end",
-  approvedThankYouBoards = false,
 ): string {
   const range =
     fromPlace === undefined || toPlace === undefined
       ? ""
       : `、${fromPlace}位から${toPlace}位まで`;
   const timingLabel = timing === "during" ? "配信中に" : "配信終了時に";
-  const privacy = approvedThankYouBoards ? "本文に個人名は掲載していません。" : "個人名は掲載していません。";
-  return `${timingLabel}${range}ランキングを読み上げました。${privacy}`;
+  return `${timingLabel}${range}ランキングを読み上げました。個人名は掲載していません。`;
 }
 
 /** 既存の確認済みカードで、読み上げ範囲まで確認できている定型文。 */
@@ -38,10 +36,6 @@ export const RECAP_WITHHOLD_NOTE =
 export const RECAP_CLIP_WITHHOLD_NOTE =
   "録音音声・画面録画の全編と全文文字起こしは掲載していません。承認済みの短い抜粋のみ掲載しています。視聴者の表示名・コメント画面も載せていません。";
 
-/** 9/28お礼画像への明示承認。画像内だけの表示名と本文の非掲載を区別する。 */
-export const RECAP_THANKS_WITHHOLD_NOTE =
-  "録音音声・画面録画・全文文字起こしは掲載していません。本人が公開したお礼画像内の表示名は、この回に限る掲載承認に基づき保持しています。本文・説明文には個別名やポイントを書き写さず、コメント画面は掲載していません。";
-
 /** 数字はカード作成時点の記録であり、現在値として固定しない。 */
 export const RECAP_FIGURES_NOTE = "フォロワー数や目標の数字は配信時点の記録です。";
 
@@ -54,16 +48,13 @@ export function buildTranscriptionNote({
   stills,
   extra,
   publishedClips = false,
-  approvedThankYouBoards = false,
 }: {
   material: string;
   stills: string;
   extra?: string;
   publishedClips?: boolean;
-  approvedThankYouBoards?: boolean;
 }): string {
-  if (approvedThankYouBoards && publishedClips) throw new Error("Thank-you clip disclosure must be reviewed before publication");
-  const withhold = approvedThankYouBoards ? RECAP_THANKS_WITHHOLD_NOTE : publishedClips ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
+  const withhold = publishedClips ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
   return [material, withhold, stills, extra, RECAP_FIGURES_NOTE]
     .filter(Boolean)
     .join("");

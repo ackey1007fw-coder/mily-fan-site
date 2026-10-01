@@ -34,6 +34,7 @@ try {
       const hourlyCount = new Set(recap.gallery.map(image => image.galleryHour)).size;
       await page.goto(`${origin}/activities/live/#recap-${recap.id}`, { waitUntil: 'networkidle' });
       const card = page.locator(`#recap-${recap.id}`);
+      await page.waitForFunction(id => document.getElementById(id)?.hasAttribute('open'), `recap-${recap.id}`);
       assert.equal(await card.getAttribute('open'), '');
       assert.equal(await card.getByRole('heading', { name: recap.theme, exact: true }).count(), 1);
       assert.equal(await card.locator('img').count(), recap.gallery.length + 1);
