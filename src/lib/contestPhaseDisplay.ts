@@ -18,7 +18,7 @@ type TokyoDateTime = {
 };
 
 function parseIsoTokyo(value: string): TokyoDateTime | null {
-  const match = /^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2}):\d{2}\+09:00$/.exec(value);
+  const match = /^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2}):\d{2}(?:\.\d+)?\+09:00$/.exec(value);
   if (!match) return null;
   return {
     date: match[1],

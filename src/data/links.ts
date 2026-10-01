@@ -41,6 +41,21 @@ export const missCircleShowroomEventLink: SiteLink = {
   note: "MISS CIRCLE CONTEST 2026 三次審査のCanCamモデル発掘オーディション。",
 };
 
+/** 四次専用。三次NEWSのリンクと説明は保持する。 */
+export const missCircleFourthRoundWebVoteLink: SiteLink = {
+  id: "miss-circle-2026-4th-web-vote-734",
+  label: "ENTRY 734にWEB投票する",
+  url: missCircleWebVoteLink.url,
+  note: "MISS CIRCLE CONTEST 2026 四次審査。ENTRY 734 三橋莉子。LINEログイン後、投票画面の案内に従ってください。",
+};
+
+export const missCircleFourthRoundShowroomEventLink: SiteLink = {
+  id: "miss-circle-2026-4th-showroom-event",
+  label: "四次SHOWROOMイベントの詳細を見る",
+  url: "https://www.showroom-live.com/event/circle2026_4th",
+  note: "MISS CIRCLE CONTEST 2026 四次審査・超十代2027出演オーディション。",
+};
+
 export const seasideCircleMessageFormLink: SiteLink = {
   id: "fm-smw-ssc-message-form",
   label: "番組へメッセージを送る",
@@ -65,6 +80,8 @@ export const links: SiteLink[] = [
   },
   missCircleWebVoteLink,
   missCircleShowroomEventLink,
+  missCircleFourthRoundWebVoteLink,
+  missCircleFourthRoundShowroomEventLink,
   campusGirlsPatonVoteLink,
   campusGirlsFinalsExPatonVoteLink,
   {
