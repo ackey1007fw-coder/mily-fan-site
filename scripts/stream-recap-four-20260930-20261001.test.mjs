@@ -13,7 +13,8 @@ const recordings = [
 const seconds = time => time.split(':').reduce((total, part) => total * 60 + Number(part), 0);
 
 test('four separate recaps preserve recording bounds and five stills plus one scene per hour', () => {
-  assert.deepEqual(streamRecaps.slice(0, 4).map(recap => recap.id), recordings.map(([id]) => id));
+  const recordingIds = recordings.map(([id]) => id);
+  assert.deepEqual(streamRecaps.filter(recap => recordingIds.includes(recap.id)).map(recap => recap.id), recordingIds);
   const assets = new Set();
   for (const [id, duration, batch] of recordings) {
     const recap = streamRecaps.find(item => item.id === id);
