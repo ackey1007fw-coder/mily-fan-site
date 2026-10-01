@@ -1,4 +1,5 @@
 import type { StreamRecap } from "./streamRecaps.ts";
+import { streamRecap20260926Radio } from "./streamRecap20260926Radio.ts";
 import {
   AUTO_TRANSCRIPT_MATERIAL_NOTE,
   RANKING_NOTE_WITHOUT_RANGE,
@@ -13,6 +14,7 @@ export const streamRecap20261001Day: StreamRecap = {
   broadcastLabel: "15:04頃〜 約50分",
   platformLabel: "SHOWROOM",
   summary: "ラジオ形式の昼配信。トマトにまつわる話や好きな曲、漢字の読みなど、コメントから話題が広がりました。メッセージへの思いにも触れ、応援への感謝を伝えました。",
+  image: streamRecap20260926Radio.image,
   highlights: [
     {
       timestamp: "0:00:22",
@@ -64,11 +66,11 @@ export const streamRecap20261001Day: StreamRecap = {
     { timestamp: "0:49:06", label: "夜の案内と締めくくり" },
   ],
   nextNote: "配信時点では、同日夜にも配信する予定だと案内していました。",
-  sourceLabel: "2026年10月1日 SHOWROOM昼配信（保存録画・自動文字起こし確認）",
+  sourceLabel: "2026年10月1日 SHOWROOM昼配信（保存録画・自動文字起こし・表示写真のオーナー確認）",
   verifiedAt: "2026-10-01",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    stills: "静止画は掲載していません。",
-    extra: "原音の手動聴取・逐語校正は未実施です。時刻は録画先頭からの目安です。配信で使われた画像と歌唱曲は確定していません。",
+    stills: "静止画は当日の表示写真としてオーナーが確認した既存画像を1枚だけ掲載しています。",
+    extra: "保存録画の映像は全尺黒のため、この回の録画から抽出したスクショではありません。原音の手動聴取・逐語校正は未実施です。時刻は録画先頭からの目安です。歌唱曲は確定していません。",
   }),
 };

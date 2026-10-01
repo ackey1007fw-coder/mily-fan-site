@@ -13,7 +13,7 @@ export const streamRecap20260926Radio: StreamRecap = {
     src: "/media/live/mily-b164-01-morning-radio.jpg",
     width: 640,
     height: 360,
-    alt: "朝のSHOWROOMラジオ配信で表示された、ドリンクのカップを持つみりぃの写真",
+    alt: "SHOWROOMラジオ配信で表示された、ドリンクのカップを持つみりぃの写真",
     caption: "配信画面に表示された写真",
   },
   highlights: [
