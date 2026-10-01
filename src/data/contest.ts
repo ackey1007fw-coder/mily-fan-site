@@ -59,5 +59,5 @@ export const contest: Contest = {
     end: "2026-10-12",
     source: "https://www.misscircle.jp/",
   },
-  lastVerifiedAt: "2026-09-18",
+  lastVerifiedAt: "2026-10-01",
 };

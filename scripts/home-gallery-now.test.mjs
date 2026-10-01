@@ -387,7 +387,7 @@ describe("confirmed Miss Circle third-round dates", () => {
     assert.equal(contest.currentPhase?.start, "2026-10-02");
     assert.equal(contest.currentPhase?.end, "2026-10-12");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-09-18");
+    assert.equal(contest.lastVerifiedAt, "2026-10-01");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
 
     const afterPaton = selectHomeVoteAction({
