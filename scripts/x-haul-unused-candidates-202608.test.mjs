@@ -14,7 +14,7 @@ import {
   featuredPhoto,
   media,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import {
   OHAYO_WHITE_POLO_X_URL,
   ohayoWhitePoloPeaceImage,

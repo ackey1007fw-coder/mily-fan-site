@@ -9,6 +9,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-01-mixch-kossori",
   "2026-09-24-tiktok-good-vibes",
   "2026-09-27-radio-kawaii-story",
   "2026-09-26-fanroom-night-thanks-board",
@@ -24,6 +25,7 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mixch-m-1pcWWQwK",
   "mily-b168-03-radio-studio-story",
   "mily-b168-04-radio-message-stars-story",
   "mily-b168-01-kawaii-radio-story",

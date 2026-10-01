@@ -1,6 +1,6 @@
 import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
-import { news as currentNewsForMedia } from "../src/data/news.ts";
+import { news as currentNewsForMedia } from "./fixtures/news-before-b173.ts";
 const priorMediaSources = {
   newsItems: currentNewsForMedia.filter(
     ({ id }) => id !== "2026-09-20-cold-umbrella-story",
@@ -23,8 +23,8 @@ import {
   visibleGalleryVideos,
 } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media } from "../src/data/media.ts";
-import { news, sortNewsByDateDesc } from "../src/data/news.ts";
+import { media } from "./fixtures/media-before-b173.ts";
+import { news, sortNewsByDateDesc } from "./fixtures/news-before-b173.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
 import { streamSchedule } from "../src/data/streamSchedule.ts";

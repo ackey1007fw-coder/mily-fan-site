@@ -39,6 +39,7 @@ const MAX = {
   timelineLabel: 32,
   nextNote: 120,
   gallery: 12,
+  hourlyGallery: 25,
 };
 
 const RANKING_PLACE = "[1-9]\\d{0,2}";
@@ -77,6 +78,16 @@ function startMinutes(broadcastLabel) {
 }
 
 describe("配信メモの統一ルール", () => {
+  it("keeps September 29's five hourly sets and one clip per hour, including the partial final hour", () => {
+    const recap = streamRecaps.find((item) => item.id === "2026-09-29-night-showroom");
+    assert.ok(recap);
+    assert.equal(recap.gallery.length, 25);
+    const clips = recap.highlights.map((item) => item.clip).filter(Boolean);
+    assert.equal(clips.length, 5);
+    assert.deepEqual(clips.map((clip) => Number(clip.sourceTimestamp.split(":")[0])), [0, 1, 2, 3, 4]);
+    assert.ok(clips.every((clip) => seconds(clip.sourceTimestamp) + clip.durationSeconds <= 14957.528));
+    assert.ok(recap.transcriptionNote.includes("最後の約9分も5枚"));
+  });
   it("withholds the unsafe thank-you boards and ZIP, including direct asset access", async () => {
     const recap = streamRecaps.find((item) => item.id === "2026-09-28-night-thanks");
     assert.ok(recap);
@@ -228,10 +239,23 @@ describe("配信メモの統一ルール", () => {
 
       it("publishes only complete, non-duplicated stills", async () => {
         const stills = recap.gallery ?? [];
+        const hourly = stills.some((still) => still.galleryHour !== undefined);
+        if (hourly) {
+          const hours = [...new Set(stills.map((still) => still.galleryHour))];
+          assert.ok(hours.length >= 1 && hours.length <= 5);
+          assert.deepEqual(hours, hours.map((_, index) => index));
+          for (const hour of hours) {
+            const batch = stills.filter((still) => still.galleryHour === hour);
+            assert.equal(batch.length, 5, "時間帯ごとに5枚を揃える");
+            assert.ok(batch.every((still) => still.caption?.startsWith(`${hour}:`)), "各画像の時刻が時間帯と一致する");
+          }
+          assert.deepEqual(stills.map((still) => still.galleryHour), hours.flatMap((hour) => Array(5).fill(hour)), "時間帯順に連続させる");
+        }
+        const galleryLimit = hourly ? MAX.hourlyGallery : MAX.gallery;
         if (stills.length > 0) {
           assert.ok(
-            stills.length <= MAX.gallery,
-            `スクショ ${stills.length}枚は多すぎ（上限${MAX.gallery}）`,
+            stills.length <= galleryLimit,
+            `スクショ ${stills.length}枚は多すぎ（上限${galleryLimit}）`,
           );
           // 代表は「そのカードの顔」。時系列の先頭とは限らないので、
           // ギャラリー内の同じオブジェクトであることだけを見る。

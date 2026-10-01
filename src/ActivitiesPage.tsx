@@ -1,5 +1,5 @@
 import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
-import { useEffect, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { RadioSongList } from "./components/RadioSongList";
@@ -743,8 +743,12 @@ function StreamRecapArticle({
           note={recap.galleryNote ?? `かわいいカットを${recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。`}
         >
           <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {recap.gallery.map((still) => (
-              <li key={still.src}>
+            {recap.gallery.map((still, index) => (
+              <Fragment key={still.src}>
+                {still.galleryHour !== undefined && (index === 0 || recap.gallery?.[index - 1].galleryHour !== still.galleryHour) ? (
+                  <li className="col-span-full mt-3"><h5 className="text-sm font-semibold text-sage-deep">録画 {still.galleryHour}:00〜の5枚</h5></li>
+                ) : null}
+              <li>
                 <figure className="overflow-hidden rounded-2xl bg-sage-soft/40">
                   <img
                     src={still.src}
@@ -767,6 +771,7 @@ function StreamRecapArticle({
                   </figcaption>
                 </figure>
               </li>
+              </Fragment>
             ))}
           </ul>
           {recap.galleryZip ? (

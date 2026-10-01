@@ -20,6 +20,7 @@ import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
+import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -72,6 +73,7 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -241,6 +243,27 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-01-mixch-kossori",
+    date: "2026-10-01",
+    activityIds: ["campus-girls"],
+    title: "ミクチャ「君だけにこっそり教えてあげる〜」",
+    body: "10月1日、みりぃがXでミクチャ動画「君だけにこっそり教えてあげる〜╰(*´︶`*)╯♡」を紹介しました。キャンガル2027にも出場中で、本選までに自分を知ってもらう期間だと伝え、応援を呼びかけています。\n\n動画は9月29日にミクチャへ投稿されたものです。サムネイルをタップすると、ミクチャの元動画が開きます。",
+    source: "https://x.com/Mily_chan36/status/2105482567290102013",
+    sourceLabel: "Xの投稿を見る",
+    url: mixchKossoriMovie.mixchUrl,
+    ctaLabel: "Mixchで見る",
+    media: mixchKossoriMovie,
+  },
+  {
+    id: "2026-09-29-record-cafe-mily-collection",
+    date: "2026-09-29",
+    title: "レコードカフェ第二弾🍰☕️【みりぃ集】",
+    body: "みりぃが、あみちゃんと訪れたレコードカフェでの写真を投稿しました。レコード棚の前でのポーズや、ヘッドホンを着けてピンクのレコードとケーキを楽しむ場面など、7枚をまとめて紹介します。みりぃは、写真をたくさん撮ってくれたあみちゃん（@amis2_m.h）へ感謝を伝えています。\n\n写真は本人投稿としてオーナーから提供されたものです。元投稿の恒久URL・投稿日は未確認のため、表示日はサイトへの受領日です。",
+    sourceLabel: "みりぃのSNS投稿（元投稿URL未確認）",
+    media: recordCafeMilyNewsImages[0],
+    additionalMedia: recordCafeMilyNewsImages.slice(1),
+  },
   {
     id: "2026-09-27-radio-kawaii-story",
     date: "2026-09-27",
