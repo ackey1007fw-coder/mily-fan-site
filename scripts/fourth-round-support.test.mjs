@@ -14,7 +14,8 @@ test("fourth-round voting switches at noon JST and stops after its last second",
   const live = input("2026-10-02T12:00:00+09:00");
   assert.equal(selectHomeVoteSpotlight(live).state, "live");
   assert.equal(selectHomeVoteActions(live)[0].url, "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734");
-  assert.equal(displayStatus(missCircleFourthRoundWebVote.schedule, Date.parse("2026-10-12T23:59:59+09:00")), "live");
+  assert.equal(displayStatus(missCircleFourthRoundWebVote.schedule, Date.parse("2026-10-12T23:59:59.999+09:00")), "live");
+  assert.equal(selectHomeVoteSpotlight(input("2026-10-12T23:59:59.500+09:00")).state, "live");
   assert.equal(selectHomeVoteActions(input("2026-10-13T00:00:00+09:00"))[0].url, contest.entryUrl);
 });
 test("SHOWROOM has a different deadline and fourth-round destination while third-round stays intact", () => {
