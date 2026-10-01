@@ -73,6 +73,7 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -242,6 +243,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-01-mixch-kossori",
+    date: "2026-10-01",
+    activityIds: ["campus-girls"],
+    title: "ミクチャ「君だけにこっそり教えてあげる〜」",
+    body: "10月1日、みりぃがXでミクチャ動画「君だけにこっそり教えてあげる〜╰(*´︶`*)╯♡」を紹介しました。キャンガル2027にも出場中で、本選までに自分を知ってもらう期間だと伝え、応援を呼びかけています。\n\n動画は9月29日にミクチャへ投稿されたものです。サムネイルをタップすると、ミクチャの元動画が開きます。",
+    source: "https://x.com/Mily_chan36/status/2105482567290102013",
+    sourceLabel: "Xの投稿を見る",
+    url: mixchKossoriMovie.mixchUrl,
+    ctaLabel: "Mixchで見る",
+    media: mixchKossoriMovie,
+  },
   {
     id: "2026-09-29-record-cafe-mily-collection",
     date: "2026-09-29",

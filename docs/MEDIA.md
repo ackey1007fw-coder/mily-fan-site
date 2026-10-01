@@ -1,5 +1,11 @@
 # メディア運用ガイド — mily-fan-site
 
+## Mixch 1pcWWQwK — 「君だけにこっそり教えてあげる〜」（2026-10-01紹介）
+
+- オーナー指定の公開動画 https://mixch.tv/m/1pcWWQwK 。本人アカウント https://mixch.tv/u/10114673 をページ上の投稿者リンクとVideoObject authorで照合。動画投稿日は2026-09-29、本人Xによる再紹介日は2026-10-01。
+- 公式og:imageとthumbnailUrlが同一であることを確認。480×853のサムネイルは、本人が猫耳フィルターで人差し指を立てた場面。第三者の名前・コメント・端末UIはなく、原投稿の構図・フィルターを維持する。
+- `src/data/mixchMovies.ts` の `mixchKossoriMovie` をNEWS / LatestとGalleryで共有。Mixchの動画・画像ファイルはrepoへコピーせず、公式サムネイルのみ既存の限定例外で表示する。PlayとCTAは元のMixch動画ページへ移動する。
+
 ## b173 — レコードカフェ第二弾【みりぃ集】（2026-09-29受領）
 
 - オーナーが本人投稿文と写真7枚を直接提供し、NEWS / Gallery掲載を明示。7枚とも1153×1536のJPEG。投稿日・撮影日・恒久投稿URLは未確認のため、マニフェストのsourceDate / sourceUrlはnull。

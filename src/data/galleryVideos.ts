@@ -64,6 +64,7 @@ import {
   type TikTokSayonaraIchigoVideo,
 } from "./tiktokSayonaraIchigoVideo.ts";
 import {
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -95,6 +96,7 @@ export {
   showroomAvatarRightsStoryVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -198,6 +200,7 @@ export const galleryVideos: GalleryVideoItem[] = [
   tiktokSayonaraIchigoVideo,
   // Undated owner-provided Story: keep it outside dated ordering until the source date is confirmed.
   showroomAvatarRightsStoryVideo,
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
