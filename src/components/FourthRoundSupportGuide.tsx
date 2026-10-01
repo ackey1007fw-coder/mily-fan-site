@@ -26,7 +26,7 @@ export function FourthRoundSupportGuide() {
           <li className="rounded-2xl bg-sage-soft/35 p-4">
             <h3 className="font-bold text-ink">1. WEB投票審査</h3>
             <p className="mt-2 text-sm font-semibold text-sage-deep">{formatScheduleRange(schedule)}</p>
-            <p className="mt-2 text-sm leading-7 text-ink-muted">ENTRY 734の「投票する」からLINEログインへ進み、三橋莉子であることを確認してください。開始後はこのページ上部・ホームの投票ボタンから直接進めます。投票回数や手順は公式投票画面の案内に従ってください。</p>
+            <p className="mt-2 text-sm leading-7 text-ink-muted">ENTRY 734の「WEB投票」からLINEログインへ進み、三橋莉子であることを確認してください。開始後はこのページ上部・ホームの投票ボタンから直接進めます。投票回数や手順は公式投票画面の案内に従ってください。</p>
             <ExternalLink href={contest.entryUrl} className="mt-3 inline-flex min-h-11 items-center font-semibold text-sage-deep underline">ENTRY 734・公式投票入口を見る</ExternalLink>
           </li>
           <li className="rounded-2xl bg-sage-soft/35 p-4">
