@@ -98,7 +98,7 @@ export const streamRecap20261002Asa: StreamRecap = {
   galleryNote: "朝配信の実フレームから、表情やしぐさの異なる10枚を選びました。時刻は録画先頭からの目安です。",
   highlights: [
     { timestamp: "0:03:39", title: "正午から始まるWEB投票", body: "この日の正午から投票が始まると案内し、みんなへ応援を呼びかけました。審査を前にしたドキドキも伝えながら、朝の挨拶が続きます。" },
-    { timestamp: "0:09:45", title: "一緒に頑張るぞ", body: "応援に来てくれたみんなへ感謝を伝え、一緒に頑張ろうと呼びかけました。コメントに応えながら、審査へ向かう気持ちを共有します。" },
+    { timestamp: "0:10:21", title: "みんなを信じて前へ", body: "応援に来てくれたみんなを信じ、前に進みたいと話しました。翌日からのSHOWROOM審査へのドキドキも伝えます。" },
     { timestamp: "0:16:15", title: "忙しい朝も無理なく", body: "金曜日の忙しい朝、無理せず聞いてほしいと呼びかけました。バタバタしながら来てくれるみんなへ、嬉しい気持ちも伝えます。" },
     { timestamp: "0:26:09", title: "翌日からのSHOWROOM審査", body: "WEB投票とSHOWROOM審査の開始日の違いに触れ、SHOWROOMは翌日からと案内しました。審査のページを確認しながら、応援方法を話します。" },
     { timestamp: "0:31:23", title: "無料ギフト審査の案内を確認", body: "主催者サイトの無料ギフト審査の記載をみんなと確認しました。イベント審査とあわせて、応援の準備についてコメントとやりとりします。" },
@@ -110,7 +110,7 @@ export const streamRecap20261002Asa: StreamRecap = {
   timeline: [
     { timestamp: "0:00:50", label: "朝の挨拶" },
     { timestamp: "0:03:39", label: "当日正午からのWEB投票" },
-    { timestamp: "0:09:45", label: "みんなと一緒に頑張る呼びかけ" },
+    { timestamp: "0:10:21", label: "みんなを信じて前に進む気持ち" },
     { timestamp: "0:10:34", label: "投票の操作確認と夜配信の案内" },
     { timestamp: "0:16:15", label: "忙しい朝の視聴への気遣い" },
     { timestamp: "0:26:09", label: "翌日からのSHOWROOM審査" },
