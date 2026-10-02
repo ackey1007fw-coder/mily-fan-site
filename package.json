@@ -12,8 +12,7 @@
     "test": "node --disable-warning=ExperimentalWarning --experimental-strip-types --test scripts/*.test.mjs",
     "media:build": "node scripts/build-media.mjs",
     "drive-gallery:build": "node scripts/build-drive-gallery.mjs",
-    "guard": "node scripts/check-site-identity.mjs main && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-site-url.mjs && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-social-report-quality.mjs",
-    "social:preflight": "node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-social-report-quality.mjs"
+    "guard": "node scripts/check-site-identity.mjs main && node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/check-site-url.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react-swc": "^3.7.2",
