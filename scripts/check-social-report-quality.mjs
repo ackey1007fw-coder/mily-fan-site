@@ -7,16 +7,16 @@ import { validateReportMedia, prepareSocialReport, prepareReplacement, validateP
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const json = async name => JSON.parse((await readFile(name, "utf8")).replace(/^\uFEFF/, ""));
 try {
-  const manifest = await json(path.join(root, "scripts/social-report-media.json"));
   const args = process.argv.slice(2);
   const seenOptions = new Set();
   for (let i = 1; i < args.length; i++) {
-    if (!["--owner-decision", "--ledger", "--prepare-replacement"].includes(args[i]) || seenOptions.has(args[i])) throw new Error("Unknown or repeated preflight option");
+    if (!["--owner-decision", "--ledger", "--media", "--prepare-replacement"].includes(args[i]) || seenOptions.has(args[i])) throw new Error("Unknown or repeated preflight option");
     seenOptions.add(args[i]);
     if (args[i] !== "--prepare-replacement") { if (!args[i + 1] || args[i + 1].startsWith("--")) throw new Error("Missing preflight option file"); i++; }
   }
   const option = name => { const index = args.indexOf(name); if (index < 0) return undefined; if (!args[index + 1] || args[index + 1].startsWith("--")) throw new Error(`Missing ${name} file`); return path.resolve(args[index + 1]); };
   const ownerPath = option("--owner-decision"), ledgerPath = option("--ledger");
+  const manifest = await json(option("--media") ?? path.join(root, "scripts/social-report-media.json"));
   const ledger = await json(ledgerPath ?? path.join(root, "scripts/social-report-publications.json"));
   await validateReportMedia(manifest, { root, recaps: streamRecaps });
   await validatePublicationLedger(ledger, { root, recaps: streamRecaps });
