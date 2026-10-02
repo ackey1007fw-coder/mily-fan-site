@@ -21,7 +21,7 @@ import { stories } from "../src/data/stories.ts";
 import {
   streamSchedule,
   upcomingSlots,
-} from "../src/data/streamSchedule.ts";
+} from "./fixtures/stream-schedule-before-b183.ts";
 import {
   isValidSupportEvent,
   missCircleThirdRoundShowroomReview,

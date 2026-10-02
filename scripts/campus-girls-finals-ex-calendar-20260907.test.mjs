@@ -224,7 +224,7 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     assert.equal(nextSupportEventBoundary(VOL2_START), fourthVoteDay);
     assert.equal(nextSupportEventBoundary(fourthVoteDay), fourthWebStart);
     assert.equal(nextSupportEventBoundary(fourthWebStart), fourthShowroomStart);
-    assert.equal(nextSupportEventBoundary(fourthShowroomStart), VOL2_END + 1);
+    assert.equal(nextSupportEventBoundary(fourthShowroomStart), Date.parse("2026-10-03T06:30:00+09:00"));
     assert.equal(nextSupportEventBoundary(VOL6_END), VOL6_END + 1);
     assert.equal(nextSupportEventBoundary(VOL6_END + 1), null);
   });

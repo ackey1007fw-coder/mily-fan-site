@@ -19,6 +19,8 @@
  * - 日付・時刻は JST。確認済み終了時刻がある枠は終了時に非表示にし、
  *   終了時刻が未確認の枠だけ開始から約3時間を表示上限にします。
  */
+import { fourthRoundStreamSchedule } from "./fourthRoundStreamSchedule.ts";
+
 export type StreamSlot = {
   /** JSTの日付 "2026-08-16" */
   date: string;
@@ -31,6 +33,7 @@ export type StreamSlot = {
 };
 
 export const streamSchedule: StreamSlot[] = [
+  ...fourthRoundStreamSchedule,
   { date: "2026-09-03", time: "07:30", endTime: "08:00" },
   { date: "2026-09-03", time: "14:40", endTime: "15:20" },
   { date: "2026-09-03", time: "21:00", endTime: "21:50" },

@@ -215,7 +215,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
 
     const { events } = await import("../src/data/events.ts");
-    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { streamSchedule } = await import("./fixtures/stream-schedule-before-b183.ts");
     assert.deepEqual(events, []);
     assert.equal(
       streamSchedule.some((entry) => JSON.stringify(entry).includes("b29")),

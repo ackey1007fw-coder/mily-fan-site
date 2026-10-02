@@ -21,12 +21,15 @@ export function NewsImage({
     />
   );
 
-  if (!media.webpSrcSet) return image;
-
-  return (
+  const rendered = !media.webpSrcSet ? image : (
     <picture>
       <source type="image/webp" srcSet={media.webpSrcSet} sizes={media.sizes} />
       {image}
     </picture>
   );
+  return media.fullSizeSrc ? (
+    <a href={media.fullSizeSrc} target="_blank" rel="noopener noreferrer" className="block cursor-zoom-in" aria-label={`${media.alt}（原寸で開く）`}>
+      {rendered}
+    </a>
+  ) : rendered;
 }
