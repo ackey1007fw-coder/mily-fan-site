@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
-import { prepareSocialReport, submitSocialReport, publicationState, validateReportMedia, sha256 } from "./social-report-quality.mjs";
+import { prepareSocialReport, submitSocialReport, publicationState, validateReportMedia, validatePublicationLedger, sha256 } from "./social-report-quality.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse((await readFile(path.join(root, "scripts/social-report-media.json"), "utf8")).replace(/^\uFEFF/, ""));
@@ -42,6 +42,11 @@ const failures = [
   ["stale visual inspection", (p, c) => { c.manifest.coverReview.sha256 = "0".repeat(64); }, /visual inspection/],
   ["unconfirmed grid", (p, c) => { delete c.manifest.coverReview.gridCrops; }, /Grid crop inspection/],
   ["lost title in grid", (p, c) => { c.manifest.coverReview.titleBounds = [0, 0, 500, 300]; }, /lost in grid/],
+  ["no title text", (p, c) => { c.manifest.coverReview.observedText = ["Mily", "2026.10.02"]; }, /title text/],
+  ["zero title and person bounds", (p, c) => { c.manifest.coverReview.titleBounds = c.manifest.coverReview.personBounds = [0, 0, 0, 0]; }, /Invalid zero/],
+  ["outside image crop", (p, c) => { c.manifest.coverReview.gridCrops[0] = [0, 0, 720, 901]; }, /out-of-image/],
+  ["duplicate crop", (p, c) => { c.manifest.coverReview.gridCrops[1] = c.manifest.coverReview.gridCrops[0]; }, /Repeated grid/],
+  ["no portrait grid", (p, c) => { c.manifest.coverReview.gridCrops[1] = [0, 80, 720, 800]; }, /square and portrait/],
   ["caption review omitted", p => { delete p.captionReview; }, /Caption\/broadcast/],
   ["wrong stream date", p => { p.caption = p.caption.replace("2026年10月2日", "2026年10月1日"); }, /broadcast date/],
   ["person tag omitted", p => { p.personTags = []; }, /Person-tag/],
@@ -51,7 +56,15 @@ const failures = [
   ["existing scheduled post", p => { p.snapshots.scheduled.responses[0] = { total: 1, scheduled_posts: [{ job_id: "old", profile_username: "ackey", platforms: ["instagram"], title: caption }] }; }, /Existing scheduled/],
   ["existing published post", p => { p.snapshots.history.responses[0] = { total: 1, in_progress: [], history: [{ platform_post_id: "old", profile_username: "ackey", platform: "instagram", post_caption: caption, success: true }] }; }, /Existing scheduled\/published/],
   ["existing processing job", p => { p.snapshots.history.responses[0].in_progress = [{ job_id: "active", profile_username: "ackey", platform: "instagram", post_caption: caption }]; }, /Existing scheduled/],
-  ["existing ledger post", (p, c) => { c.ledger = [{ recapId: p.recapId, account: p.account, platform: p.platform, state: "published_unverified" }]; }, /Existing ledger/],
+  ["existing ledger post", (p, c) => { c.ledger = [{ recapId: p.recapId, account: p.account, platform: p.platform, state: "published_unverified", publishedUrl: "https://www.instagram.com/p/fixture/" }]; }, /Existing ledger/],
+  ["queued real-schema null caption", p => { p.snapshots.history.responses[0].in_progress = [{ job_id: "old", request_id: "request", profile_username: "ackey", platform: "instagram", post_title: null, post_caption: null, status: "queued", success: null }]; }, /Unknown same-account/],
+  ["unknown scheduled row", p => { p.snapshots.scheduled.responses[0] = { total: 1, scheduled_posts: [{ job_id: "old", profile_username: "ackey", platforms: "instagram", title: null, caption: null }] }; }, /Unknown same-account/],
+  ["unknown successful history", p => { p.snapshots.history.responses[0] = { total: 1, in_progress: [], history: [{ platform_post_id: "old", profile_username: "ackey", platform: "instagram", post_caption: null, success: true }] }; }, /Unknown same-account/],
+  ["processing ID missing", p => { p.snapshots.history.responses[0].in_progress = [{ profile_username: "ackey", platform: "instagram" }]; }, /Unidentified/],
+  ["malformed processing destination", p => { p.snapshots.history.responses[0].in_progress = [{ job_id: "old", profile_username: "ackey", platform: { instagram: true } }]; }, /Malformed destination/],
+  ["processing destination missing", p => { p.snapshots.history.responses[0].in_progress = [{ job_id: "old" }]; }, /Malformed destination/],
+  ["null processing row", p => { p.snapshots.history.responses[0].in_progress = [null]; }, /Malformed duplicate/],
+  ["invalid persisted verified state", (p, c) => { c.ledger = [{ state: "published_verified" }]; }, /Invalid publication/],
   ["unreadable delivery bytes", (p, c) => { c.fetchBytes = async () => Buffer.from("SPA fallback HTML"); }, /Delivery bytes/],
   ["unknown delivery host", p => { p.mediaUrls[0] = "https://example.com/cover.png"; }, /delivery origin/],
 ];
@@ -85,7 +98,11 @@ test("registered live bytes have intact source regions; raw-image-only self decl
 
 const publication = () => ({ platform: "instagram", publishedUrl: "https://www.instagram.com/p/test/", caption, requiredSiteUrl: caption.split("\n")[2], personMention: "@mily_chan36", mediaOrder: manifest.order, coverId: manifest.coverId });
 const observation = () => ({ postUrl: "https://www.instagram.com/p/test/", reviewer: "test screen-inspection fixture", checkedAt, evidencePath: "fixture.png", evidenceSha256: sha256(Buffer.from("screen fixture")), visibleCaption: caption, mediaOrder: manifest.order, gridCoverId: manifest.coverId, personTags: ["mily_chan36"], checks: { body: "verified", mediaOrder: "verified", mention: "verified", siteUrl: "verified", gridCover: "verified", personTag: "verified" } });
-const evidence = { readEvidence: async () => Buffer.from("screen fixture") };
+// Codec fixture only: these bytes do not claim a real SNS screen inspection.
+const screenshotFixture = await readFile(path.join(root, "public", manifest.items[0].path));
+const screenObservation = observation;
+const inspectedObservation = () => ({ ...screenObservation(), evidenceSha256: sha256(screenshotFixture), capture: { kind: "browser-screenshot", postUrl: "https://www.instagram.com/p/test/", capturedAt: checkedAt } });
+const evidence = { readEvidence: async () => screenshotFixture };
 
 test("API success or inaccessible screen cannot be promoted to verified", async () => {
   assert.equal(await publicationState({ success: true }), "submitted");
@@ -94,19 +111,48 @@ test("API success or inaccessible screen cannot be promoted to verified", async 
   assert.equal(await publicationState(publication(), { ...observation(), screenError: "timeout" }, evidence), "published_unverified");
 });
 test("all real-screen observations plus evidence hash are required for verified", async () => {
-  assert.equal(await publicationState(publication(), observation(), evidence), "published_verified");
+  assert.equal(await publicationState(publication(), inspectedObservation(), evidence), "published_verified");
   for (const key of Object.keys(observation().checks)) {
-    const o = observation(); o.checks[key] = "unknown";
+    const o = inspectedObservation(); o.checks[key] = "unknown";
     assert.equal(await publicationState(publication(), o, evidence), "published_unverified", key);
   }
-  const o = observation(); o.personTags = [];
+  const o = inspectedObservation(); o.personTags = [];
   assert.equal(await publicationState(publication(), o, evidence), "published_unverified");
   assert.equal(await publicationState(publication(), observation(), { readEvidence: async () => { throw new Error("missing"); } }), "published_unverified");
 });
 test("X payload URL and actual visible URL are independent; claimed check cannot hide stripped URL", async () => {
   const r = { ...publication(), platform: "x", personMention: "@Mily_chan36", caption: caption.replace("@mily_chan36", "@Mily_chan36") };
-  const o = { ...observation(), visibleCaption: r.caption };
+  const o = { ...inspectedObservation(), visibleCaption: r.caption };
   assert.equal(await publicationState(r, o, evidence), "published_verified");
   o.visibleCaption = r.caption.replace(r.requiredSiteUrl, "");
   assert.equal(await publicationState(r, o, evidence), "published_unverified");
+});
+
+test("arbitrary text, missing capture provenance and another post cannot verify publication", async () => {
+  assert.equal(await publicationState(publication(), observation(), { readEvidence: async () => Buffer.from("screen fixture") }), "published_unverified");
+  const o = inspectedObservation(); o.capture.postUrl = "https://www.instagram.com/p/other/";
+  assert.equal(await publicationState(publication(), o, evidence), "published_unverified");
+  const textCapture = inspectedObservation(); textCapture.evidenceSha256 = sha256(Buffer.from("text"));
+  assert.equal(await publicationState(publication(), textCapture, { readEvidence: async () => Buffer.from("text") }), "published_unverified");
+});
+
+test("ledger entry validator rechecks identity and actual verified evidence", async () => {
+  const options = { root, recaps: streamRecaps, ...evidence };
+  const verified = { ...publication(), recapId: manifest.recapId, account: "ackeytan_0720", state: "published_verified", observation: inspectedObservation() };
+  await validatePublicationLedger([verified], options);
+  await assert.rejects(() => validatePublicationLedger([{ state: "published_verified" }], options), /Invalid publication/);
+  await assert.rejects(() => validatePublicationLedger([{ ...verified, observation: undefined }], options), /evidence path/);
+  await assert.rejects(() => validatePublicationLedger([verified], { ...options, readEvidence: async () => Buffer.from("garbage") }), /actual-screen evidence/);
+  await validatePublicationLedger([{ recapId: manifest.recapId, account: "ackeytan_0720", platform: "instagram", state: "published_unverified", publishedUrl: verified.publishedUrl }], options);
+  await assert.rejects(() => validatePublicationLedger([{ state: "scheduled" }], options), /Invalid publication/);
+  await assert.rejects(() => validatePublicationLedger([{ ...verified, state: "submitted", observation: undefined }], options), /Incomplete submitted/);
+});
+
+test("queued null-caption job needs an ID-bound known other recap", async () => {
+  const p = fresh();
+  p.snapshots.history.responses[0].in_progress = [{ job_id: "other", request_id: "request", profile_username: "ackey", platform: "instagram", post_title: null, post_caption: null, status: "queued", success: null }];
+  p.snapshots.scheduled.responses[0] = { total: 1, scheduled_posts: [{ job_id: "other", profile_username: "ackey", platforms: "instagram", title: "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-01-night-showroom" }] };
+  await prepareSocialReport(p, context());
+  p.snapshots.scheduled.responses[0].scheduled_posts[0].job_id = "unrelated";
+  await assert.rejects(() => prepareSocialReport(p, context()), /Unknown same-account/);
 });

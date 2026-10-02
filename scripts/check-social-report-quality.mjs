@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
-import { validateReportMedia, prepareSocialReport, PUBLICATION_STATES } from "./social-report-quality.mjs";
+import { validateReportMedia, prepareSocialReport, validatePublicationLedger } from "./social-report-quality.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const json = async name => JSON.parse((await readFile(name, "utf8")).replace(/^\uFEFF/, ""));
@@ -10,7 +10,7 @@ try {
   const manifest = await json(path.join(root, "scripts/social-report-media.json"));
   const ledger = await json(path.join(root, "scripts/social-report-publications.json"));
   await validateReportMedia(manifest, { root, recaps: streamRecaps });
-  if (!Array.isArray(ledger) || ledger.some(row => !PUBLICATION_STATES.includes(row.state))) throw new Error("Invalid publication state ledger");
+  await validatePublicationLedger(ledger, { root, recaps: streamRecaps });
   if (process.argv[2]) {
     const plan = await json(path.resolve(process.argv[2]));
     const payload = await prepareSocialReport(plan, { root, recaps: streamRecaps, manifest, ledger, fetchBytes: async url => {
