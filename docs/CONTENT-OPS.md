@@ -2176,3 +2176,11 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - 回ごとのSNS manifestを使うには `pnpm social:preflight <private-plan.json> --media scripts/social-report-media-20261002-night.json`。既存の朝manifest・予約・検査を保持し、夜用manifestと送信planの配信一致を検査する。対象recapや元画像が違えば停止する。manifest指定で重複検査・人物タグ・本文検査を省略しない。
 - ローカル検証はtypecheck・全2,451 tests・guard成功。Windowsで既存poster検査がfile URLのpathnameをパスとして扱って失敗したため、同じ画像をreadFileのバイト列でsharpへ渡す1行修正を含む。過去配信内容・公開素材は変更しない。画像batchの索引更新前に起きた旧パス参照失敗は解消済み。
 - 原映像全尺は188,572フレーム・1:44:51.491まで復号成功、エラー0。320/390/1440幅で実画像10枚・保存リンク10件・横overflowなし・JSエラーなしを確認。CI/Preview/current-headレビューと本番公開は別のゲートとして確認する。
+
+### 10/2夜・SNS準備欄（未送信）
+
+- 共通の対象記事は `https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-02-night-showroom`。正式カバーは `live/mily-b182-11-night-instagram.png`（Mily／日付／夜配信の表題／非公式表示）。本人画像の画角・全ピクセルを保持。この記事が本番で確認できるまで送信・予約しない。
+- Instagram: 接続済みの応援用アカウントへ、表紙11→12〜20の計10枚。本人mentionは既存確認済み `@mily_chan36`。本文案は「2026年10月2日夜のMily（みりぃ）。WEB投票が始まった夜、みんなの投票報告にありがとう。翌日からのSHOWROOM審査へ、一緒に頑張りたい思いも伝えてくれました。」と対象記事URL・非公式表示・本人mentionを含む。各画像altと人物タグを含めた正式payloadを夜manifestでpreflightする。朝10/3 09:00の既存予約は変更しない。
+- X: 正式カバー11＋実画像02／05／10の4枚を候補に、既存確認済み `@Mily_chan36` と対象記事URLを含む本文案を準備。既知のURL欠落経路は保存payloadだけで成功とせず、正規の投稿画面でリンク表示・遷移を確認できる経路を確定してから送信する。
+- TikTok: 表紙11→12〜20の10枚、音声・BGMなしの画像投稿候補。本人mentionは既存確認済み `@mily_chan36`。FM用handleを今回へ流用しない。媒体の実caption・正式表紙・記事URL導線を確認できるpayloadを準備してから送信する。YouTube Shorts／Reels等の音声短尺3候補は聴覚・字幕・切点検品待ちで非公開。
+- 重複照合: 予約一覧の朝1件を保持。取得した履歴359件とInstagram投稿本体274件には対象夜の記事URL一致がないが、成功履歴の [9/25朝Reel](https://www.instagram.com/reel/DdtEqRbFS6p/) 1件の現在の内容・公開時刻を確認できない。履歴のupload記録 `2026-09-25T08:52:12.746Z` は実公開日時の証明ではない。削除済み・別配信と決めつけず、朝予約入替だけの過去例外を夜へ流用しない。送信前にはfreshな全一覧・処理中・投稿本体と台帳を再照合し、未確認が残れば保留する。
