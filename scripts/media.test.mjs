@@ -84,9 +84,10 @@ describe("media collection", () => {
     assert.equal(item.aspect, "1152 / 2048");
   });
 
-  it("keeps landscape tiles on the default 4/3 aspect", () => {
+  it("keeps default landscape tiles at 4/3 and preserves approved poster aspect", () => {
     // 縦写真と正方形だけが aspect を持つ。4/3 の横写真は既定のまま。
     const portraits = new Set([
+      "mily-b183-01",
       "mily-b173-01",
       "mily-b173-02",
       "mily-b173-03",

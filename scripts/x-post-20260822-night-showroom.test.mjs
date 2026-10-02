@@ -232,7 +232,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
   it("does not hand-enter the 8/23 slots into schedule data", async () => {
     const { events } = await import("../src/data/events.ts");
-    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { streamSchedule } = await import("./fixtures/stream-schedule-before-b183.ts");
     const { supportEvents } = await import("../src/data/supportEvents.ts");
 
     assert.deepEqual(events, []);

@@ -1,5 +1,12 @@
 # メディア運用ガイド — mily-fan-site
 
+## b183 — 四次審査前半の本人X配信タイムスケジュール
+
+- オーナー指定の本人X `https://x.com/mily_chan36/status/2106033785867555040` の添付予定画像を提供し、サイト反映を明示依頼。2026年10月2日の本人案内。制作時刻や制作者は未確認。画像内の13枠と依頼文を目視照合。
+- 原JPEG1536×1024、519785Bをgitignored `media/original/mily-b183-01-fourth-round-stream-schedule.jpg` に保持。NEWS原寸 `public/media/news/mily-b183-01-fourth-round-stream-schedule.jpg` はmetadata除去対象なしで元バイトと一致。SHA256 `08e13a5780bcf2207b63554a8f46f096bc7fbb203f75262f0ea0b7ab49d8a958`、デコード画素一致、EXIF/IPTC/XMP/ICCなし。
+- Gallery用480/960/1600名のJPEG・WebP計6点を既存sharpで生成。1600名は拡大せず1536×1024、srcsetは1536w。顔・文字・装飾・元構図を維持し、生成変更・crop・既存asset上書きなし。
+- HOMEとNEWSはobject-containで全体表示＋原寸リンク、Galleryは1536/1024の元比率で拡大導線。非公開Library ID・private原稿・個人別応援分析はpublic repoへ含めない。
+
 ## b181 — 四次審査 WEB投票応援案内（2026-10-02受領）
 
 - オーナーが指定した `430FB8B3-0735-404A-9B33-B373C0931A2B.mp4` を個人Google Drive経由で取得。原本589,076 bytes、SHA256 `18157dc202ba0ce221553c3d579ecdf2802066cc107c081999a024862be2fa7b`。実検証は2.000秒、512×910、30fps、60フレーム、H.264 / yuv420p、音声トラックなし。全尺デコード成功、0.5秒・1.5秒の実フレームを目視。

@@ -21,6 +21,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
+import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -165,6 +166,8 @@ export type NewsImageMedia = {
   width: number;
   height: number;
   alt: string;
+  /** Optional self-hosted original-size image for posters with readable text. */
+  fullSizeSrc?: string;
   /** Optional Gallery-style srcset. Absent images keep a single `src`. */
   srcSet?: string;
   webpSrcSet?: string;
@@ -243,6 +246,14 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-02-fourth-round-stream-schedule", date: "2026-10-02",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "四次審査前半・10月3日〜7日の配信予定",
+    body: "みりぃが四次審査前半の配信予定を案内しました。10月3日は6:30〜7:30と21:40〜22:40。5日間の13枠をHOMEの予定一覧に掲載しています。時刻は2026年・JSTです。4日・7日の朝枠は画像に「きっかけ」と表記されています。\n\n画像の「3日と8日は1.2倍DAY」はSHOWROOMイベント審査の獲得ポイントの案内です。公式の対象時間は各05:00〜23:59。無料ギフト審査とイベント審査の違い・集計の注意は応援案内をご確認ください。8日の配信時刻はこの画像では未案内です。\n\n10月2日の本人告知に基づく予定です。変更は本人の最新Xをご確認ください。画像は全体を表示し、タップすると原寸で開けます。",
+    source: FOURTH_ROUND_SCHEDULE_X_URL, sourceLabel: "本人Xの予定案内",
+    media: fourthRoundScheduleNewsImage,
+  },
   {
     id: "2026-10-01-mixch-kossori",
     date: "2026-10-01",

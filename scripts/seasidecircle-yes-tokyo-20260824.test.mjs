@@ -20,7 +20,7 @@ import { events } from "../src/data/events.ts";
 import { links } from "../src/data/links.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { stories } from "../src/data/stories.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";

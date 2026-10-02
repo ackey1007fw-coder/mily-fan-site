@@ -133,7 +133,7 @@ describe("2026-08-26 10:00 stream X announcement — scope and ordering", () => 
 
   it("does not hand-enter the 10:00 slot into schedule data", async () => {
     const { events } = await import("../src/data/events.ts");
-    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { streamSchedule } = await import("./fixtures/stream-schedule-before-b183.ts");
     const { supportEvents } = await import("../src/data/supportEvents.ts");
 
     assert.deepEqual(events, []);

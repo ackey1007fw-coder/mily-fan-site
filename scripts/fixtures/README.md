@@ -20,3 +20,5 @@ tested directly against the production modules in
 tested in `x-posts-20260829-showroom-radio.test.mjs`, the 8/30 Mixch
 movie is tested in `mixch-final-day-20260830.test.mjs`, and the 8/30〜31
 X posts are tested in `x-posts-20260830-31-news.test.mjs`.
+
+The October 2 b183 first-party schedule poster and NEWS are excluded from these older views. Current content is covered directly by `fourth-round-stream-schedule-20261003.test.mjs`; historical expected counts and orders remain unchanged.

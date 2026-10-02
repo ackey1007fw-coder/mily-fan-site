@@ -3,7 +3,7 @@ import { news as currentNews } from "../../src/data/news.ts";
 
 /** Historical NEWS snapshot before the owner-dated b58 TikTok addition. */
 export const news = currentNews.filter(
-  ({ id }) =>
+  ({ id }) => id !== "2026-10-02-fourth-round-stream-schedule" &&
     id !== "2026-10-01-mixch-kossori" &&
     id !== "2026-09-29-record-cafe-mily-collection" &&
     id !== "2026-09-24-tiktok-good-vibes" &&

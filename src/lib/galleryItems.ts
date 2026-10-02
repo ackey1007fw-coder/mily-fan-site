@@ -63,6 +63,7 @@ export function isObjectWithoutPerson(item: MediaItem): boolean {
 /** みりぃの顔・姿が主役の写真。 */
 export function isMilyPortraitPhoto(item: MediaItem): boolean {
   if (item.kind !== "photo") return false;
+  if (/stream-schedule/.test(item.basePath)) return false;
   if (isShowroomUiScreenshot(item)) return false;
   if (isRadioTrioPhoto(item)) return false;
   if (isSkyOrLandscapePhoto(item)) return false;

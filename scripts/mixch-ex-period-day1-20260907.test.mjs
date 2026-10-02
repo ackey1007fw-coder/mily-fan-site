@@ -16,8 +16,8 @@ import {
 } from "../src/data/galleryVideos.ts";
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-20260909.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { verifyNews } from "./content-invariants.mjs";

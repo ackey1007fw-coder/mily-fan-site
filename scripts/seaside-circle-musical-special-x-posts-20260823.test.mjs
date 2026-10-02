@@ -31,7 +31,7 @@ import {
   storyBySlug,
   storySources,
 } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 import {
   DRIVE_HOST_PATTERN,
