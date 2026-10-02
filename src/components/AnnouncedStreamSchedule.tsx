@@ -1,12 +1,15 @@
 import { fourthRoundStreamSchedule, fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "../data/fourthRoundStreamSchedule";
 import { upcomingSlots } from "../data/streamSchedule";
-import { formatSlotDate } from "../lib/useStreamSchedule";
+import { formatSlotDate, useStreamSchedule } from "../lib/useStreamSchedule";
+import { confirmedShowroomAction } from "../lib/homeToday";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { NewsImage } from "./NewsImage";
 import { ExternalLink } from "./ExternalLink";
 
 export function AnnouncedStreamSchedule() {
   const now = useSupportEventClock();
+  const { roomUrl } = useStreamSchedule();
+  const showroomUrl = roomUrl ?? confirmedShowroomAction()?.url;
   const slots = upcomingSlots(fourthRoundStreamSchedule, [], now);
   if (slots.length === 0) return null;
   return (
@@ -25,7 +28,7 @@ export function AnnouncedStreamSchedule() {
         <p className="mt-3 text-xs leading-6 text-ink-muted">終了予定時刻を過ぎた枠は一覧から外れます。「きっかけ」は本人画像の表記です。10月8日の配信時刻はこの画像では未案内です。</p>
         <div className="mt-4 flex flex-wrap gap-3">
           <ExternalLink href={FOURTH_ROUND_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">本人Xの案内を見る</ExternalLink>
-          <ExternalLink href="https://www.showroom-live.com/r/circle2026_0734" className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white">みりぃのSHOWROOMへ</ExternalLink>
+          {showroomUrl ? <ExternalLink href={showroomUrl} className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white">みりぃのSHOWROOMへ</ExternalLink> : null}
           <a href="/support/" className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">投票・無料ギフト・イベント審査の案内</a>
         </div>
       </div>

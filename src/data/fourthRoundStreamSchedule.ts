@@ -33,5 +33,8 @@ export const fourthRoundSchedulePhoto = {
 export const fourthRoundScheduleNewsImage = {
   kind: "image" as const, src: FOURTH_ROUND_SCHEDULE_IMAGE,
   fullSizeSrc: FOURTH_ROUND_SCHEDULE_IMAGE,
+  srcSet: [480, 960, 1600].map(w => `${fourthRoundSchedulePhoto.basePath}-${w}.jpg ${Math.min(w, 1536)}w`).join(", "),
+  webpSrcSet: [480, 960, 1600].map(w => `${fourthRoundSchedulePhoto.basePath}-${w}.webp ${Math.min(w, 1536)}w`).join(", "),
+  sizes: "(max-width: 768px) calc(100vw - 72px), 696px",
   width: 1536, height: 1024, alt: fourthRoundSchedulePhoto.alt,
 };

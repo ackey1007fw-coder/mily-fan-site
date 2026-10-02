@@ -8,6 +8,7 @@ import {news} from '../src/data/news.ts';
 import {nextSupportEventBoundary} from '../src/lib/useSupportEventClock.ts';
 import {isMilyPortraitPhoto} from '../src/lib/galleryItems.ts';
 import {fourthRoundSchedulePhoto} from '../src/data/fourthRoundStreamSchedule.ts';
+import {resolveNewsLinks} from '../src/lib/newsLinks.ts';
 
 test('first-party poster has exactly 13 source-confirmed JST slots and no eighth-day inference',()=>{
  assert.equal(slots.length,13);
@@ -44,4 +45,24 @@ test('NEWS links the complete poster and source without turning it into a stream
  for(const key of ['exif','iptc','xmp','icc'])assert.equal(metadata[key],undefined);
  assert.match(item.body,/05:00〜23:59/);
  assert.match(readFileSync('src/components/AnnouncedStreamSchedule.tsx','utf8'),/実配信の記録ではありません/);
+});
+
+test('poster derivatives use actual widths and preserve original zoom target',async()=>{
+ for(const [key,extension] of [['srcSet','jpg'],['webpSrcSet','webp']]){
+  for(const candidate of image[key].split(', ')){
+   const [path,descriptor]=candidate.split(' ');
+   assert.equal((await sharp(`public${path}`).metadata()).width,Number(descriptor.slice(0,-1)));
+   assert.ok(path.endsWith(`.${extension}`));
+  }
+ }
+ assert.match(image.sizes,/100vw/);assert.equal(image.fullSizeSrc,image.src);
+});
+
+test('historical schedule NEWS stays truthful after all slots expire and links Support',()=>{
+ const item=news.find(n=>n.id==='2026-10-02-fourth-round-stream-schedule');
+ const now=Date.parse('2026-10-08T12:00:00+09:00');
+ assert.equal(upcomingSlots(slots,[],now).length,0);
+ assert.match(item.body,/本人画像では5日間の13枠/);
+ assert.doesNotMatch(item.body,/13枠をHOMEの予定一覧に掲載しています/);
+ assert.equal(resolveNewsLinks(item,now).cta.url,'/support/');
 });
