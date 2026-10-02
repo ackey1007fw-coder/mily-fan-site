@@ -12,11 +12,11 @@
 | 媒体 | 状態 | 日時（JST） | 結果 |
 | --- | --- | --- | --- |
 | TikTok | 公開成功、接続先読戻し済み | 2026-10-02 12:16:36 | https://www.tiktok.com/t/7691903695587609864 |
-| Instagram feed | 既存予約を保持、未公開 | 2026-10-03 09:00予定 | job `1e65617b9dcb4394b24056dcdf253948` / request `6a3a990a583b467995315be814650d06` |
+| Instagram feed | 08:40 JST読戻し時点でscheduled、公開未確認 | 2026-10-03 09:00予定 | job `33d2a92ad07c42989cef9272f6b62deb` / request `5677e5efbfe447a7bd346c58930b62d3` |
 | X | 投稿文＋添付4枚を完成、未投稿 | — | URLを保持できる投稿経路での実行が残る |
 
 - TikTok request `c3cb533b34dc46ab8fbd0be50bca4353` / job `9faff7f0662b49c9a2048669a6591178`はcompleted・success=true、公開ID `7691903695587609864`。接続先一覧でも同ID・PHOTO・本文の `@seasidecircle`・記事URL・開始日表記を確認した。
-- 既存Instagram予約は2026-10-02 10:47:34 JST作成。予約一覧の本文は `@mily_chan36` と当該記事URLを含み、jobはqueued / pending。今回、予約日時・本文・画像・タグを変更していない。予約APIの返却には本人ユーザータグの設定が含まれないため、本文メンションの確認と本人タグの確認を混同しない。本人タグは未確認、公開成功URLも未確定。
+- 初回の旧Instagram予約（job `1e65617b9dcb4394b24056dcdf253948` / request `6a3a990a583b467995315be814650d06`）は2026-10-02 10:47:34 JST作成。以下は初回確認時点の履歴であり、現行jobは上表と末尾の読戻し記録を使う。予約一覧の本文は `@mily_chan36` と当該記事URLを含み、jobはqueued / pending。今回、予約日時・本文・画像・タグを変更していない。予約APIの返却には本人ユーザータグの設定が含まれないため、本文メンションの確認と本人タグの確認を混同しない。本人タグは未確認、公開成功URLも未確定。
 - XのUpload-Post経路は本文・title・first commentからクリック可能なURLを除去する[現行仕様](https://docs.upload-post.com/api/upload-photo/)。必須のサイト導線を失う投稿を行わず、完成した本文・画像4枚を保持。ブラウザーへの経路変更または人間による投稿が残る。未投稿を送信済みにしない。
 - Instagram Reels・YouTube Shorts、音声付きSNS、未聴取短尺4候補は投稿していない。
 
@@ -73,7 +73,7 @@ https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-02-morning-showr
 
 公開済み夜Instagram・夜X・朝TikTokには変更を加えない。朝XのURL保持対応は別担当の既存作業と調整し、ここで追加投稿しない。
 
-### 今回のInstagram予約payload（準備済み・未送信）
+### PR #383制作時点のInstagram予約payload（当時は準備済み・未送信）
 
 - 既存profile `ackey`／Instagram `ackeytan_0720`、画像carousel10枚。先頭 `mily-b180-11-morning-instagram-cover.png`、続いて `12`〜`20-morning-instagram-still-01`〜`09.png`。元場面の順序は10／01〜09。全10画像に個別altを付ける。
 - 予約予定は2026-10-03 09:00 Asia/Tokyo（00:00 UTC）。本文メンション `@mily_chan36`、本人タグ `{username:"mily_chan36", x:0.5, y:0.9}`。画像のサイトURL表示と本文の当該記事リンクを併用する。
@@ -92,3 +92,10 @@ https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-02-morning-showr
 非公式ファン制作／当日の録画から選んだ実スクショです。
 #三橋莉子 #みりぃ #SHOWROOM #ミスサークル2026
 ```
+
+## 2026-10-03 08:40 JST 現行Instagram予約の読戻し
+
+- 夜レポSNSの後続確認で、予約一覧は朝レポの1件。現行job `33d2a92ad07c42989cef9272f6b62deb`、request `5677e5efbfe447a7bd346c58930b62d3`。予約日時2026-10-03 09:00 JST（00:00 UTC）、元timezone `Asia/Tokyo`。profile `ackey`／Instagram `ackeytan_0720`、朝記事URLと本文mention `@mily_chan36`、先頭素材名 `mily-b180-11-morning-instagram-cover.png`を照合した。
+- job詳細はqueued／scheduler pending、処理成功0／失敗0／total 1。履歴の本文nullの処理中行も同じjob／requestと対応する。これは予約の読戻しであり、公開成功や実画面の全画像順序・本人タグの確認ではない。
+- 旧job `1e65617b9dcb4394b24056dcdf253948`は現在の予約一覧にない。今回の確認では取消・再登録・編集APIを呼んでおらず、誰がいつ取消したかや取消成功を推定しない。上の「変更していない」「準備済み・未送信」は各制作時点の履歴で、現行予約が旧jobのままという意味ではない。
+- [公開状態台帳](../scripts/social-report-publications.json)も現行jobへ更新。公開後はこの現行job／requestの処理結果と公開URLを読戻し、4状態を区別して更新する。朝の予約・投稿を夜レポの実施結果に数えない。

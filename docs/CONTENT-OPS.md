@@ -2207,7 +2207,7 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 
 #### 残る操作
 
-1. Instagramの未照合1件、TikTokの未照合3件の現在の投稿本体を確認し、対象夜との重複を解決する。取得不能なら対象を限定したオーナー判断が必要で、通常の投稿承認だけで未知履歴を無視しない。
+1. Instagramの未照合1件、TikTokの未照合3件の現在の投稿本体を取得・確認し、対象夜との重複を解決する。現行Instagram preflightのownerDecisionは指定された朝予約入替の1件に限定され、夜用の判断記録では通過できない。現行で実行可能な解決は投稿本体の取得・照合であり、取得不能の間は送信保留を維持する。夜への例外拡張をこの作業で実装・承認した扱いにしない。
 2. Xは応援用アカウントの正規画面へサインインしたうえで、直前の予約・処理中・既存投稿を再照合し、完成した4枚と本文を一度だけ送信する。
 3. 送信直前に全一覧を取得し直す。Instagramは`pnpm social:preflight <private-plan.json> --media scripts/social-report-media-20261002-night.json --ledger <private-current-ledger.json>`を成功させてから、完成payloadで一度だけ投稿または将来時刻へ予約する。過去のsnapshotをfreshと扱わない。
 4. 返却job／requestと予約一覧・公開URLを読戻し、4状態の適切な値で台帳を更新する。正式表紙・枚数・順序・本文・mention・本人タグ・サイト導線の実画面確認後だけ`published_verified`へ進める。未確認なら不足項目を明記して保持する。
