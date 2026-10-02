@@ -62,7 +62,7 @@ describe("2026-09-03 SHOWROOM三次初日朝配信メモ", () => {
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.summary, /すっぴん/);
     assert.match(recap.summary, /WEB投票/);
-    assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
+    assert.match(recap.transcriptionNote, /録音音声・画面録画の全編と全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /10枚/);
     const recapIndex = streamRecaps.indexOf(recap);
     assert.ok(recapIndex >= 0);

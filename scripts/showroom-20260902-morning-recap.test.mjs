@@ -54,7 +54,7 @@ describe("2026-09-02 SHOWROOM朝ラジオ配信メモ", () => {
     assert.equal(recap.verifiedAt, "2026-09-03");
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.summary, /みんなの太陽/);
-    assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
+    assert.match(recap.transcriptionNote, /録音音声・画面録画の全編と全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /静止画は録画の実フレームを1枚だけ掲載/);
   });
 
