@@ -68,7 +68,7 @@ test('each new recap ships decodable original-size JPEGs and faststart video ass
       const moov = bytes.indexOf(Buffer.from('moov'));
       const mdat = bytes.indexOf(Buffer.from('mdat'));
       assert.ok(moov > 0 && mdat > moov);
-      const poster = await sharp(new URL('../public' + clip.poster, import.meta.url).pathname).metadata();
+      const poster = await sharp(await readFile(new URL('../public' + clip.poster, import.meta.url))).metadata();
       assert.equal(poster.width, 640);
       assert.equal(poster.height, 360);
     }

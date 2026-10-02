@@ -9,6 +9,11 @@ import { prepareSocialReport, prepareReplacement, submitSocialReport, publicatio
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse((await readFile(path.join(root, "scripts/social-report-media.json"), "utf8")).replace(/^\uFEFF/, ""));
+test("night report keeps its own reviewed cover and rejects another broadcast", async () => {
+  const night = JSON.parse(await readFile(path.join(root, "scripts/social-report-media-20261002-night.json"), "utf8"));
+  await validateReportMedia(night, { root, recaps: streamRecaps });
+  await assert.rejects(() => validateReportMedia({ ...night, recapId: manifest.recapId }, { root, recaps: streamRecaps }), /another broadcast/);
+});
 const now = Date.parse("2026-10-02T06:00:00Z"), checkedAt = new Date(now).toISOString();
 const caption = "@mily_chan36\n2026年10月2日 朝配信\nhttps://mily-fan-site.vercel.app/activities/live/#recap-2026-10-02-morning-showroom";
 const fresh = () => ({
@@ -89,9 +94,9 @@ for (const [name, change, expected] of replacementFailures) test(`replacement pr
   await assert.rejects(() => prepareReplacement(p, c), expected);
 });
 test("CLI rejects undocumented bypass flags and options without a plan", () => {
-  for (const args of [["fixture.json", "--ignore-unknown"], ["--prepare-replacement"]]) {
+  for (const args of [["fixture.json", "--ignore-unknown"], ["--prepare-replacement"], ["fixture.json", "--media"]]) {
     const result = spawnSync(process.execPath, ["--disable-warning=ExperimentalWarning", "--experimental-strip-types", "scripts/check-social-report-quality.mjs", ...args], { cwd: root, encoding: "utf8" });
-    assert.equal(result.status, 1); assert.match(result.stderr, /Unknown or repeated|Plan file required/);
+    assert.equal(result.status, 1); assert.match(result.stderr, /Unknown or repeated|Plan file required|Missing preflight option file/);
   }
 });
 
