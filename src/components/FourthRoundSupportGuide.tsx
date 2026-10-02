@@ -32,6 +32,12 @@ export function FourthRoundSupportGuide() {
               <h4 className="text-lg font-bold text-ink">WEB投票方法</h4>
               <p className="mt-2 text-sm leading-7 text-ink-muted">公式投票ページを開き、LINEログイン後に「三橋莉子・ENTRY 734」であることを確認して、画面の案内に従って投票してください。</p>
               <figure className="mt-4">
+                <a href="/media/support/mily-b181-02-fourth-round-web-vote-howto.jpg" target="_blank" rel="noopener noreferrer" className="block" aria-label="本人提供の投票方法画像を原寸で開く（新しいタブ）">
+                  <img src="/media/support/mily-b181-02-fourth-round-web-vote-howto.jpg" width={864} height={1536} loading="lazy" decoding="async" alt="本人提供のWEB投票方法。リンク先へ進み、WEB投票を選び、三橋莉子・ENTRY 734を確認して投票する手順。画像の回数・人数の記載は下の説明をご確認ください。" className="mx-auto h-auto w-full max-w-sm rounded-xl" />
+                </a>
+                <figcaption className="mt-2 text-xs leading-6 text-ink-muted">本人提供の案内画像。タップすると原寸で読めます。画像内の「ここをタップ」は、このページの「三橋莉子にWEB投票する（公式）」ボタンから進んでください。画像には「1日1回、12日（月）まで」「1人5名まで」と記載されていますが、主催者の現行ルールとして再確認できていません。回数・投票できる人数は公式投票画面をご確認ください。</figcaption>
+              </figure>
+              <figure className="mt-4">
                 <video controls playsInline preload="metadata" width={512} height={910} poster="/media/support/mily-b181-01-fourth-round-web-vote-poster.jpg" aria-label="三橋莉子からのWEB投票応援案内（2秒・音声なし）" aria-describedby="web-vote-video-description" className="mx-auto h-auto w-full max-w-sm rounded-xl">
                   <source src="/media/support/mily-b181-01-fourth-round-web-vote.mp4" type="video/mp4" />
                   動画を再生できない場合は、<a href="/media/support/mily-b181-01-fourth-round-web-vote.mp4" className="underline">投票応援案内の動画を開く</a>。
