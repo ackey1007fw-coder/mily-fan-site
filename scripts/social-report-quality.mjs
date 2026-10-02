@@ -195,14 +195,14 @@ export async function submitSocialReport(plan, context, dispatch) {
 /** Verifies review records and decodable screenshots; screen meaning/provenance needs human inspection. */
 export async function publicationState(record, observation, { readEvidence = readFile } = {}) {
   if (!record.publishedUrl) return record.scheduledDate ? "scheduled" : "submitted";
-  const required = ["body", "mediaOrder", "mention", "siteUrl"];
+  const required = ["body", "mediaOrder", "mention", "siteUrl", "siteClickthrough"];
   if (record.platform === "instagram") required.push("gridCover", "personTag");
   const reviewed = observation && observation.postUrl === record.publishedUrl && text(observation.reviewer) && time(observation.checkedAt) && text(observation.evidencePath) && /^[a-f0-9]{64}$/.test(observation.evidenceSha256 ?? "") && required.every(key => observation.checks?.[key] === "verified");
   if (!reviewed) return "published_unverified";
   const capture = observation.capture;
   if (capture?.kind !== "browser-screenshot" || capture.postUrl !== record.publishedUrl || !time(capture.capturedAt) || Date.parse(capture.capturedAt) > Date.parse(observation.checkedAt)) return "published_unverified";
   const matching = text(record.caption) && observation.visibleCaption === record.caption && text(record.requiredSiteUrl) && observation.visibleCaption.includes(record.requiredSiteUrl) && text(record.personMention) && observation.visibleCaption.includes(record.personMention) && Array.isArray(record.mediaOrder) && record.mediaOrder.length > 0 && JSON.stringify(observation.mediaOrder) === JSON.stringify(record.mediaOrder);
-  if (!matching || observation.screenError || (record.platform === "instagram" && (observation.gridCoverId !== record.coverId || !text(record.coverId) || !observation.personTags?.includes("mily_chan36")))) return "published_unverified";
+  if (!matching || observation.openedSiteUrl !== record.requiredSiteUrl || observation.screenError || (record.platform === "instagram" && (observation.gridCoverId !== record.coverId || !text(record.coverId) || !observation.personTags?.includes("mily_chan36")))) return "published_unverified";
   try {
     const bytes = await readEvidence(observation.evidencePath);
     if (sha256(bytes) !== observation.evidenceSha256) return "published_unverified";

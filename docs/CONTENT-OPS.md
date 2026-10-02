@@ -2155,3 +2155,5 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - Instagramでは `get_media` を同じprofile／platformで読み取り、5分以内の `snapshots.nativeMedia` に実request（user／platform）とレスポンスを入れる。成功履歴のplatform_post_idと投稿本体のid、公開URLとpermalinkを一致させ、投稿本体の明示的な時差付き `timestamp` を使う。取得した各投稿について確認し、部分的な一覧から「見つからないので削除済み」と推定しない。[Media List仕様](https://docs.upload-post.com/api/instagram-media/) / [Meta IG Media](https://developers.facebook.com/documentation/instagram-platform/reference/instagram-media)
 - 対象の確認済み配信日を日本時間00:00の保守的な境界にする。b180は10/2朝の録画・実フレームであり、記録開始6:01:27頃を厳密な配信開始とは扱わない。前日までに投稿本体が作成されたと確認できれば、当日の実フレームを含むこのレポート投稿ではない。判定は成功履歴だけに適用し、未来予約・処理中・status不明・日時欠落・時差不明・無効な日付・ID／URL不一致では停止する。現在の投稿本文が対象レポートURLへ変更されている場合も重複として停止する。
 - 実照合では既知の別配信URLがない45件中44件を投稿IDと投稿本体の時刻で確認できた。残る1件は投稿一覧に見つからず詳細取得も失敗したため、判別不能のまま停止している。これを手動の全許可や無条件除外で解かない。取消前に残る停止条件を解決する。
+
+- 公開実画面確認済みへの更新にはサイトURLの表示だけでなく、媒体で利用できる導線から対象記事へ進んだ確認（siteClickthroughとopenedSiteUrl）を残す。リンク先を取得できない場合やトップだけを開いて当該記事へ到達していない場合は未確認を維持する。Instagram本文のURLをクリック可能とは推定せず、実際に使えた導線と結果を記録する。

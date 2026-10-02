@@ -157,7 +157,7 @@ const observation = () => ({ postUrl: "https://www.instagram.com/p/test/", revie
 // Codec fixture only: these bytes do not claim a real SNS screen inspection.
 const screenshotFixture = await readFile(path.join(root, "public", manifest.items[0].path));
 const screenObservation = observation;
-const inspectedObservation = () => ({ ...screenObservation(), evidenceSha256: sha256(screenshotFixture), capture: { kind: "browser-screenshot", postUrl: "https://www.instagram.com/p/test/", capturedAt: checkedAt } });
+const inspectedObservation = () => ({ ...screenObservation(), openedSiteUrl: publication().requiredSiteUrl, checks: { ...screenObservation().checks, siteClickthrough: "verified" }, evidenceSha256: sha256(screenshotFixture), capture: { kind: "browser-screenshot", postUrl: "https://www.instagram.com/p/test/", capturedAt: checkedAt } });
 const evidence = { readEvidence: async () => screenshotFixture };
 
 test("API success or inaccessible screen cannot be promoted to verified", async () => {
@@ -168,13 +168,15 @@ test("API success or inaccessible screen cannot be promoted to verified", async 
 });
 test("all real-screen observations plus evidence hash are required for verified", async () => {
   assert.equal(await publicationState(publication(), inspectedObservation(), evidence), "published_verified");
-  for (const key of Object.keys(observation().checks)) {
+  for (const key of Object.keys(inspectedObservation().checks)) {
     const o = inspectedObservation(); o.checks[key] = "unknown";
     assert.equal(await publicationState(publication(), o, evidence), "published_unverified", key);
   }
   const o = inspectedObservation(); o.personTags = [];
   assert.equal(await publicationState(publication(), o, evidence), "published_unverified");
   assert.equal(await publicationState(publication(), observation(), { readEvidence: async () => { throw new Error("missing"); } }), "published_unverified");
+  const wrongDestination = inspectedObservation(); wrongDestination.openedSiteUrl = "https://mily-fan-site.vercel.app/";
+  assert.equal(await publicationState(publication(), wrongDestination, evidence), "published_unverified");
 });
 test("X payload URL and actual visible URL are independent; claimed check cannot hide stripped URL", async () => {
   const r = { ...publication(), platform: "x", personMention: "@Mily_chan36", caption: caption.replace("@mily_chan36", "@Mily_chan36") };
