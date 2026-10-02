@@ -13,7 +13,7 @@ const approvedCase = Object.freeze({
   recapId: "2026-10-02-morning-showroom", profile: "ackey", account: "ackeytan_0720", platform: "instagram",
   jobId: "ef98a03c6ea94265b78a526e33816eca", requestId: "d93443bdc90840ce8ad12d80d96ec93d", postId: "18097399505439064", postUrl: "https://www.instagram.com/reel/DdtEqRbFS6p/",
   replacementJobId: "1e65617b9dcb4394b24056dcdf253948", replacementRequestId: "6a3a990a583b467995315be814650d06", scheduledDate: "2026-10-03T09:00:00+09:00",
-  messageId: "Sentinel_2de3401e367081919fb76be579db04a9",
+  messageIdDigest: "c9aaf08ccfcbc0e8e42f9823a855fb4a77ea767f5116095ce24eb4df5e75f520",
 });
 
 function validateOwnerDecision(decision, plan, now) {
@@ -151,7 +151,7 @@ async function checkedReport(plan, context, pendingReplacement = false) {
   if (plan.scheduledDate) requireValue(time(plan.scheduledDate) && Date.parse(plan.scheduledDate) > now && plan.timezone === "Asia/Tokyo", "Invalid schedule/timezone");
   const scheduled = snapshotRows(plan.snapshots?.scheduled, "scheduled_posts", now);
   const decisionPresent = validateOwnerDecision(context.ownerDecision, plan, now);
-  const isPendingReplacement = row => pendingReplacement && row.job_id === approvedCase.replacementJobId && (row.request_id == null || row.request_id === approvedCase.replacementRequestId) && row.profile_username === plan.profile && (row.platform === plan.platform || row.platforms?.includes(plan.platform));
+  const isPendingReplacement = row => pendingReplacement && (scheduled.includes(row) || (inProgress.includes(row) && row.status === "queued")) && row.success !== true && !text(row.platform_post_id) && !text(row.post_url) && row.job_id === approvedCase.replacementJobId && (row.request_id == null || row.request_id === approvedCase.replacementRequestId) && row.profile_username === plan.profile && (row.platform === plan.platform || row.platforms?.includes(plan.platform));
   const history = snapshotRows(plan.snapshots?.history, "history", now);
   const inProgress = plan.snapshots.history.responses.flatMap(response => {
     const rows = unwrap(response).in_progress;
@@ -159,6 +159,7 @@ async function checkedReport(plan, context, pendingReplacement = false) {
     return rows;
   });
   requireValue(history.every(row => typeof row.success === "boolean"), "Unknown history status");
+  if (pendingReplacement) requireValue(![...scheduled, ...history, ...inProgress].some(row => row.job_id === approvedCase.replacementJobId && (row.success === true || text(row.platform_post_id) || text(row.post_url))), "Old replacement job has publication evidence; stop before cancellation");
   const sourceNames = assets.flatMap(item => [path.basename(item.path), path.basename(item.source)]);
   const native = nativeMediaRows(plan.snapshots?.nativeMedia, plan, now);
   // Day-start precedes every approved frame of this confirmed morning report.

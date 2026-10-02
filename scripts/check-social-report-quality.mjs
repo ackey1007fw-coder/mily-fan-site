@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
-import { validateReportMedia, prepareSocialReport, prepareReplacement, validatePublicationLedger } from "./social-report-quality.mjs";
+import { validateReportMedia, prepareSocialReport, prepareReplacement, validatePublicationLedger, sha256 } from "./social-report-quality.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const json = async name => JSON.parse((await readFile(name, "utf8")).replace(/^\uFEFF/, ""));
@@ -22,7 +22,12 @@ try {
   await validatePublicationLedger(ledger, { root, recaps: streamRecaps });
   if (args[0] && !args[0].startsWith("--")) {
     const plan = await json(path.resolve(args[0]));
-    const context = { root, recaps: streamRecaps, manifest, ledger, ownerDecision: ownerPath ? await json(ownerPath) : undefined, fetchBytes: async url => {
+    const ownerDecision = ownerPath ? await json(ownerPath) : undefined;
+    if (ownerDecision) {
+      if (typeof ownerDecision.messageId !== "string" || !ownerDecision.messageId.trim()) throw new Error("Private owner message ID required");
+      ownerDecision.messageIdDigest = sha256(ownerDecision.messageId);
+    }
+    const context = { root, recaps: streamRecaps, manifest, ledger, ownerDecision, fetchBytes: async url => {
       const result = await fetch(url, { signal: AbortSignal.timeout(10000) });
       if (!result.ok) throw new Error(`Media HTTP ${result.status}`);
       return Buffer.from(await result.arrayBuffer());

@@ -23,7 +23,7 @@ const context = () => ({ root, recaps: streamRecaps, manifest: structuredClone(m
   fetchBytes: async url => readFile(path.join(root, "public", new URL(url).pathname)) });
 
 // Controlled test receipt time; this fixture is not the real owner instruction record.
-const ownerDecision = () => ({ kind: "unverified-known-exception", recapId: manifest.recapId, profile: "ackey", account: "ackeytan_0720", platform: "instagram", jobId: "ef98a03c6ea94265b78a526e33816eca", requestId: "d93443bdc90840ce8ad12d80d96ec93d", postId: "18097399505439064", postUrl: "https://www.instagram.com/reel/DdtEqRbFS6p/", replacementJobId: "1e65617b9dcb4394b24056dcdf253948", replacementRequestId: "6a3a990a583b467995315be814650d06", scheduledDate: "2026-10-03T09:00:00+09:00", messageId: "Sentinel_2de3401e367081919fb76be579db04a9", recordedAt: checkedAt, originalInstruction: "未確認の既知例外。この1件だけを理由に今回の10/2朝Instagram予約入替全体を停止しなくてよいです。旧予約をキャンセル。2026-10-03 09:00 JST。", note: "1件のみ内容未確認のため完全な過去投稿網羅確認ではない" });
+const ownerDecision = () => ({ kind: "unverified-known-exception", recapId: manifest.recapId, profile: "ackey", account: "ackeytan_0720", platform: "instagram", jobId: "ef98a03c6ea94265b78a526e33816eca", requestId: "d93443bdc90840ce8ad12d80d96ec93d", postId: "18097399505439064", postUrl: "https://www.instagram.com/reel/DdtEqRbFS6p/", replacementJobId: "1e65617b9dcb4394b24056dcdf253948", replacementRequestId: "6a3a990a583b467995315be814650d06", scheduledDate: "2026-10-03T09:00:00+09:00", messageIdDigest: "c9aaf08ccfcbc0e8e42f9823a855fb4a77ea767f5116095ce24eb4df5e75f520", recordedAt: checkedAt, originalInstruction: "未確認の既知例外。この1件だけを理由に今回の10/2朝Instagram予約入替全体を停止しなくてよいです。旧予約をキャンセル。2026-10-03 09:00 JST。", note: "1件のみ内容未確認のため完全な過去投稿網羅確認ではない" });
 const exceptionRow = () => ({ profile_username: "ackey", platform: "instagram", job_id: ownerDecision().jobId, request_id: ownerDecision().requestId, platform_post_id: ownerDecision().postId, post_url: ownerDecision().postUrl, post_caption: null, success: true });
 function exceptionFixture() {
   const p = fresh(), c = context(); c.ownerDecision = ownerDecision();
@@ -46,7 +46,7 @@ test("exact authorized historical exception stays unverified and does not widen 
   await assert.rejects(() => prepareSocialReport(p, c), /Unknown same-account/);
 });
 test("missing instruction, changed scope or claimed verification cannot authorize the exception", async () => {
-  for (const key of ["jobId", "requestId", "postId", "postUrl", "recapId", "profile", "account", "platform", "messageId", "replacementJobId", "replacementRequestId"]) {
+  for (const key of ["jobId", "requestId", "postId", "postUrl", "recapId", "profile", "account", "platform", "messageIdDigest", "replacementJobId", "replacementRequestId"]) {
     const { p, c } = exceptionFixture(); c.ownerDecision[key] = "*";
     await assert.rejects(() => prepareSocialReport(p, c), /exact approved case/);
   }
@@ -287,4 +287,19 @@ test("queued null-caption job needs an ID-bound known other recap", async () => 
   await prepareSocialReport(p, context());
   p.snapshots.scheduled.responses[0].scheduled_posts[0].job_id = "unrelated";
   await assert.rejects(() => prepareSocialReport(p, context()), /Unknown same-account/);
+});
+
+test("replacement preparation stops conflicting old-job publication evidence", async () => {
+  for (const location of ["history", "in_progress", "scheduled_posts"]) for (const evidence of [{ success: true }, { platform_post_id: "published-post" }, { post_url: "https://www.instagram.com/p/publishedFixture/" }]) {
+    const { p, c } = replacementFixture();
+    if (location === "scheduled_posts") Object.assign(p.snapshots.scheduled.responses[0].scheduled_posts[0], evidence);
+    else if (location === "in_progress") Object.assign(p.snapshots.history.responses[0].in_progress[0], evidence);
+    else { p.snapshots.history.responses[0].history.push({ ...p.snapshots.history.responses[0].in_progress[0], success: true, post_caption: null, ...evidence }); p.snapshots.history.responses[0].total++; }
+    await assert.rejects(() => prepareReplacement(p, c), /publication evidence/);
+  }
+});
+
+test("replacement preparation does not exempt processing old job", async () => {
+ const { p, c } = replacementFixture(); p.snapshots.history.responses[0].in_progress[0].status = "processing";
+ await assert.rejects(() => prepareReplacement(p, c), /Existing scheduled/);
 });
