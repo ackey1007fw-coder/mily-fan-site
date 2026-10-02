@@ -31,6 +31,13 @@ export function FourthRoundSupportGuide() {
             <div id="web-vote-howto" className="mt-5 scroll-mt-24 border-t border-sage/20 pt-4">
               <h4 className="text-lg font-bold text-ink">WEB投票方法</h4>
               <p className="mt-2 text-sm leading-7 text-ink-muted">公式投票ページを開き、LINEログイン後に「三橋莉子・ENTRY 734」であることを確認して、画面の案内に従って投票してください。</p>
+              <figure className="mt-4">
+                <video controls playsInline preload="metadata" width={512} height={910} poster="/media/support/mily-fourth-round-web-vote-20261002-poster.jpg" aria-label="三橋莉子からのWEB投票応援案内（2秒・音声なし）" className="mx-auto h-auto w-full max-w-sm rounded-xl">
+                  <source src="/media/support/mily-fourth-round-web-vote-20261002.mp4" type="video/mp4" />
+                  動画を再生できない場合は、<a href="/media/support/mily-fourth-round-web-vote-20261002.mp4" className="underline">投票応援案内の動画を開く</a>。
+                </video>
+                <figcaption className="mt-2 text-xs leading-6 text-ink-muted">本人からの応援案内（2秒・音声なし）。止めて読むことができます。動画内の「あと30分」は投稿時点の案内です。投票期間は上記の日程を、投票手順・回数は公式画面をご確認ください。</figcaption>
+              </figure>
               {now >= Date.parse(schedule.start) ? (
                 <ExternalLink href={missCircleFourthRoundWebVoteLink.url} className="mt-4 inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-3 text-sm font-semibold text-white">三橋莉子にWEB投票する（公式）</ExternalLink>
               ) : (
