@@ -6,15 +6,20 @@ import { radioEpisode20260927 as recap } from '../src/data/radioEpisode20260927.
 import { radioMusicEpisodes,radioMusicPlaylist } from '../src/data/radioMusic.ts';
 const music=radioMusicEpisodes.find(x=>x.id===recap.id);
 describe('September 27 kawaii radio archive',()=>{
- it('adds a source-bounded recap without replacing historical episodes',()=>{
+ it('adds a source-bounded recap without replacing historical episodes',async()=>{
   assert.equal(radioEpisodes[0],recap); assert.equal(recap.date,'2026-09-27');
   assert.equal(recap.milyHighlights.length,15); assert.equal(recap.timeline.length,15);
   assert.equal(recap.listenerMessages.length,4);
-  assert.deepEqual(recap.presenters,['みりぃ（パーソナリティ）','マナティ（ディレクター）']);
+  assert.deepEqual(recap.presenters,['みりぃ（パーソナリティ）','マナティー（ディレクター）']);
+  const publishedText=JSON.stringify(recap);
+  assert.doesNotMatch(publishedText,/マナティ(?!ー)|免許合宿|卒業検定|一緒にドライブ/);
+  assert.match(recap.milyHighlights.find(x=>x.timestamp==='1:15:18')?.body??'',/みりぃは運転を始めたころ/);
   assert.match(recap.transcriptionNote,/全編を人手で逐語校正したものではありません/);
   assert.match(recap.transcriptionNote,/放送時刻や楽曲カット版/);
   assert.match(recap.nextEpisodeNote,/放送時点/);
-  assert.ok(recap.milyHighlights.some(x=>x.quote?.includes('君からLINE')&&x.quote?.includes('丸い月')));
+  assert.equal(recap.milyHighlights.find(x=>x.timestamp==='2:46:11')?.quote,'「空を見て」\n君からLINE\n丸い月');
+  const article=await readFile(new URL('../src/ActivitiesPage.tsx',import.meta.url),'utf8');
+  assert.match(article,/<blockquote className="mt-4 whitespace-pre-line /);
   assert.doesNotMatch(JSON.stringify(recap),/drive\.google|C:\\|\.ogg|\.part|youtu\.be|youtube\.com|夏目漱石/);
  });
  it('publishes exactly the 15 in-program songs and marks two version differences',()=>{
