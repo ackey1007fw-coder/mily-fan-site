@@ -2109,4 +2109,4 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - WEB投票は10/2正午、SHOWROOMの無料ギフト審査とイベント審査は10/3からという開始日の違いを、配信と https://www.misscircle.jp/ および https://www.showroom-live.com/event/circle2026_4th で照合。審査の詳しい案内は既存のSupport Hubを利用し、今回の配信メモから新しい条件を推測して追記しない。
 - 実スクショ10枚を全体35候補＋前後30候補から選定。元の640×360画角を保持し、顔・身体の生成・補正・クロップは行わない。代表画像と10保存リンクを既存カードで表示し、新しい回を先頭に置く。
 - 短尺・音声付きSNSは原音の聴覚検品待ち。画像・本文のサイト公開工程は独立して進める。PR #380は品質確認中で、この記録はmerge・本番反映・SNS予約または投稿完了を意味しない。
-- 全文読解後の最終版はローカルの関連666テスト、typecheck、identity/URL guard、buildを通過。PC・モバイル表示の最終再確認とGitHub CI・Preview・current-headの品質確認を進める。本番反映済みとは扱わない。
+- 全文読解後の最終版はローカルの関連729テスト（非公開Drive ID境界検査を含む）、typecheck、identity/URL guard、buildを通過。PC・モバイル表示の最終再確認とGitHub CI・Preview・current-headの品質確認を進める。本番反映済みとは扱わない。

@@ -85,7 +85,7 @@ const gallery =
   }
 ];
 
-export const streamRecap20261002Morning: StreamRecap = {
+export const streamRecap20261002Asa: StreamRecap = {
   id: "2026-10-02-morning-showroom",
   date: "2026-10-02",
   dateLabel: "2026.10.02（金）",
