@@ -3,8 +3,9 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { spawnSync } from "node:child_process";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
-import { prepareSocialReport, submitSocialReport, publicationState, validateReportMedia, validatePublicationLedger, sha256 } from "./social-report-quality.mjs";
+import { prepareSocialReport, prepareReplacement, submitSocialReport, publicationState, validateReportMedia, validatePublicationLedger, sha256 } from "./social-report-quality.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const manifest = JSON.parse((await readFile(path.join(root, "scripts/social-report-media.json"), "utf8")).replace(/^\uFEFF/, ""));
@@ -20,6 +21,79 @@ const fresh = () => ({
 });
 const context = () => ({ root, recaps: streamRecaps, manifest: structuredClone(manifest), ledger: [], now,
   fetchBytes: async url => readFile(path.join(root, "public", new URL(url).pathname)) });
+
+// Controlled test receipt time; this fixture is not the real owner instruction record.
+const ownerDecision = () => ({ kind: "unverified-known-exception", recapId: manifest.recapId, profile: "ackey", account: "ackeytan_0720", platform: "instagram", jobId: "ef98a03c6ea94265b78a526e33816eca", requestId: "d93443bdc90840ce8ad12d80d96ec93d", postId: "18097399505439064", postUrl: "https://www.instagram.com/reel/DdtEqRbFS6p/", replacementJobId: "1e65617b9dcb4394b24056dcdf253948", replacementRequestId: "6a3a990a583b467995315be814650d06", scheduledDate: "2026-10-03T09:00:00+09:00", messageId: "Sentinel_2de3401e367081919fb76be579db04a9", recordedAt: checkedAt, originalInstruction: "未確認の既知例外。この1件だけを理由に今回の10/2朝Instagram予約入替全体を停止しなくてよいです。旧予約をキャンセル。2026-10-03 09:00 JST。", note: "1件のみ内容未確認のため完全な過去投稿網羅確認ではない" });
+const exceptionRow = () => ({ profile_username: "ackey", platform: "instagram", job_id: ownerDecision().jobId, request_id: ownerDecision().requestId, platform_post_id: ownerDecision().postId, post_url: ownerDecision().postUrl, post_caption: null, success: true });
+function exceptionFixture() {
+  const p = fresh(), c = context(); c.ownerDecision = ownerDecision();
+  p.snapshots.history.responses[0].total = 1; p.snapshots.history.responses[0].history = [exceptionRow()];
+  return { p, c };
+}
+function replacementFixture() {
+  const { p, c } = exceptionFixture(); p.replacementJobId = ownerDecision().replacementJobId;
+  const old = { job_id: p.replacementJobId, request_id: ownerDecision().replacementRequestId, profile_username: "ackey", platforms: ["instagram"], title: caption, original_timezone: "Asia/Tokyo", original_scheduled_str: p.scheduledDate, source_filename: path.basename(manifest.items[0].source) };
+  p.snapshots.scheduled.responses[0] = { total: 1, scheduled_posts: [old] };
+  p.snapshots.history.responses[0].in_progress = [{ job_id: old.job_id, request_id: old.request_id, profile_username: "ackey", platform: "instagram", post_title: null, post_caption: null, status: "queued", success: null }];
+  c.ledger = [{ recapId: p.recapId, platform: p.platform, account: p.account, state: "scheduled", jobId: old.job_id, scheduledDate: p.scheduledDate }];
+  return { p, c };
+}
+
+test("exact authorized historical exception stays unverified and does not widen unknown allowance", async () => {
+  const { p, c } = exceptionFixture(); await prepareSocialReport(p, c);
+  assert.equal(c.ownerDecision.kind, "unverified-known-exception"); assert.match(c.ownerDecision.note, /完全な過去投稿網羅確認ではない/);
+  p.snapshots.history.responses[0].history.push({ ...exceptionRow(), request_id: "another", job_id: "another", platform_post_id: "another" }); p.snapshots.history.responses[0].total++;
+  await assert.rejects(() => prepareSocialReport(p, c), /Unknown same-account/);
+});
+test("missing instruction, changed scope or claimed verification cannot authorize the exception", async () => {
+  for (const key of ["jobId", "requestId", "postId", "postUrl", "recapId", "profile", "account", "platform", "messageId", "replacementJobId", "replacementRequestId"]) {
+    const { p, c } = exceptionFixture(); c.ownerDecision[key] = "*";
+    await assert.rejects(() => prepareSocialReport(p, c), /exact approved case/);
+  }
+  for (const change of [c => { delete c.ownerDecision; }, c => { c.ownerDecision.originalInstruction = "approved"; }, c => { c.ownerDecision.note = "重複なし確認済み"; }, c => { c.ownerDecision.recordedAt = "2026-10-03T00:00:00Z"; }]) {
+    const { p, c } = exceptionFixture(); change(c);
+    await assert.rejects(() => prepareSocialReport(p, c), /Unknown same-account|Owner instruction/);
+  }
+});
+test("authorized Reel exception cannot excuse queued/scheduled or target-URL duplicate rows", async () => {
+  for (const kind of ["queued", "scheduled", "target"]) {
+    const { p, c } = exceptionFixture();
+    if (kind === "queued") p.snapshots.history.responses[0].in_progress = [{ ...exceptionRow(), success: null }];
+    if (kind === "scheduled") p.snapshots.scheduled.responses[0] = { total: 1, scheduled_posts: [exceptionRow()] };
+    if (kind === "target") p.snapshots.history.responses[0].history[0].post_caption = caption;
+    await assert.rejects(() => prepareSocialReport(p, c), /Unknown same-account|Existing scheduled/);
+  }
+});
+test("replacement preparation checks all ten assets while leaving old job; normal dispatch still blocks", async () => {
+  const { p, c } = replacementFixture(); const prepared = await prepareReplacement(p, c);
+  assert.equal(prepared.state, "prepared_not_submitted"); assert.equal(prepared.mustCancelJobId, p.replacementJobId);
+  assert.equal(prepared.payload.photosPathsOrUrls.length, 10); assert.equal(prepared.payloadSha256, sha256(Buffer.from(JSON.stringify(prepared.payload))));
+  assert.equal(p.snapshots.scheduled.responses[0].total, 1); assert.equal(c.ledger[0].state, "scheduled");
+  let calls = 0; c.pendingReplacement = true;
+  await assert.rejects(() => submitSocialReport(p, c, () => { calls++; }), /Existing scheduled/); assert.equal(calls, 0);
+});
+const replacementFailures = [
+  ["wrong old job", (p, c) => { p.replacementJobId = "other"; }, /Wrong replacement/],
+  ["wrong new time", p => { p.scheduledDate = "2026-10-04T09:00:00+09:00"; }, /Wrong replacement/],
+  ["old time unknown", p => { delete p.snapshots.scheduled.responses[0].scheduled_posts[0].original_scheduled_str; }, /Old reservation/],
+  ["old source wrong", p => { p.snapshots.scheduled.responses[0].scheduled_posts[0].source_filename = "unrelated.jpg"; }, /Old reservation/],
+  ["old account wrong", p => { p.snapshots.scheduled.responses[0].scheduled_posts[0].profile_username = "other"; }, /Old reservation/],
+  ["old request mismatch", p => { p.snapshots.history.responses[0].in_progress[0].request_id = "other"; }, /Existing scheduled/],
+  ["missing owner record", (p, c) => { delete c.ownerDecision; }, /Replacement owner/],
+  ["cover missing", (p, c) => { delete c.manifest.coverId; }, /cover must be first/i],
+  ["body URL missing", p => { p.caption = "@mily_chan36 2026年10月2日"; }, /report URL/],
+  ["another target reservation", p => { p.snapshots.scheduled.responses[0].scheduled_posts.push({ ...p.snapshots.scheduled.responses[0].scheduled_posts[0], job_id: "another" }); p.snapshots.scheduled.responses[0].total++; }, /Existing scheduled/],
+];
+for (const [name, change, expected] of replacementFailures) test(`replacement preparation stops ${name}`, async () => {
+  const { p, c } = replacementFixture(); change(p, c);
+  await assert.rejects(() => prepareReplacement(p, c), expected);
+});
+test("CLI rejects undocumented bypass flags and options without a plan", () => {
+  for (const args of [["fixture.json", "--ignore-unknown"], ["--prepare-replacement"]]) {
+    const result = spawnSync(process.execPath, ["--disable-warning=ExperimentalWarning", "--experimental-strip-types", "scripts/check-social-report-quality.mjs", ...args], { cwd: root, encoding: "utf8" });
+    assert.equal(result.status, 1); assert.match(result.stderr, /Unknown or repeated|Plan file required/);
+  }
+});
 
 function historical() {
   const p = fresh();

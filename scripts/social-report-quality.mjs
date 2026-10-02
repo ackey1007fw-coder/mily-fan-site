@@ -9,6 +9,21 @@ const requireValue = (value, message) => { if (!value) throw new Error(message);
 const text = value => typeof value === "string" && value.trim().length > 0;
 const time = value => Number.isFinite(Date.parse(value));
 const reportUrl = id => `https://mily-fan-site.vercel.app/activities/live/#recap-${id}`;
+const approvedCase = Object.freeze({
+  recapId: "2026-10-02-morning-showroom", profile: "ackey", account: "ackeytan_0720", platform: "instagram",
+  jobId: "ef98a03c6ea94265b78a526e33816eca", requestId: "d93443bdc90840ce8ad12d80d96ec93d", postId: "18097399505439064", postUrl: "https://www.instagram.com/reel/DdtEqRbFS6p/",
+  replacementJobId: "1e65617b9dcb4394b24056dcdf253948", replacementRequestId: "6a3a990a583b467995315be814650d06", scheduledDate: "2026-10-03T09:00:00+09:00",
+  messageId: "Sentinel_2de3401e367081919fb76be579db04a9",
+});
+
+function validateOwnerDecision(decision, plan, now) {
+  if (!decision) return false;
+  requireValue(decision.kind === "unverified-known-exception" && Object.entries(approvedCase).every(([key, value]) => decision[key] === value), "Owner decision is not the exact approved case");
+  requireValue(["recapId", "profile", "account", "platform"].every(key => plan[key] === approvedCase[key]), "Owner decision does not apply to this report/account");
+  requireValue(plan.scheduledDate === approvedCase.scheduledDate && plan.timezone === "Asia/Tokyo", "Owner decision does not apply to this schedule");
+  requireValue(Number.isFinite(strictTimestamp(decision.recordedAt)) && Date.parse(decision.recordedAt) <= now && text(decision.originalInstruction) && decision.originalInstruction.includes("未確認の既知例外") && decision.originalInstruction.includes("この1件だけを理由に今回の10/2朝Instagram予約入替全体を停止しなくてよいです。") && decision.note === "1件のみ内容未確認のため完全な過去投稿網羅確認ではない", "Owner instruction/unknown-state record missing");
+  return true;
+}
 
 // Require an explicit offset and a real calendar date; never parse local/ambiguous times.
 function strictTimestamp(value) {
@@ -117,7 +132,7 @@ function snapshotRows(snapshot, key, now) {
 }
 
 /** Read-only prepare: refuses unknown checks and never invokes a posting API itself. */
-export async function prepareSocialReport(plan, context) {
+async function checkedReport(plan, context, pendingReplacement = false) {
   const { root, recaps, manifest, ledger, now = Date.now(), fetchBytes } = context;
   const { recap, assets } = await validateReportMedia(manifest, { root, recaps });
   requireValue(plan.recapId === recap.id && plan.platform === "instagram" && plan.kind === "image", "Payload and manifest do not match");
@@ -135,6 +150,8 @@ export async function prepareSocialReport(plan, context) {
   requireValue(Array.isArray(plan.altText) && plan.altText.length === assets.length && plan.altText.every(text), "Incomplete alt text");
   if (plan.scheduledDate) requireValue(time(plan.scheduledDate) && Date.parse(plan.scheduledDate) > now && plan.timezone === "Asia/Tokyo", "Invalid schedule/timezone");
   const scheduled = snapshotRows(plan.snapshots?.scheduled, "scheduled_posts", now);
+  const decisionPresent = validateOwnerDecision(context.ownerDecision, plan, now);
+  const isPendingReplacement = row => pendingReplacement && row.job_id === approvedCase.replacementJobId && (row.request_id == null || row.request_id === approvedCase.replacementRequestId) && row.profile_username === plan.profile && (row.platform === plan.platform || row.platforms?.includes(plan.platform));
   const history = snapshotRows(plan.snapshots?.history, "history", now);
   const inProgress = plan.snapshots.history.responses.flatMap(response => {
     const rows = unwrap(response).in_progress;
@@ -157,6 +174,7 @@ export async function prepareSocialReport(plan, context) {
   for (const row of [...scheduled, ...history, ...inProgress]) {
     requireValue(row && typeof row === "object", "Malformed duplicate lookup row");
     const platforms = platformsOf(row);
+    if (isPendingReplacement(row)) continue;
     if ((!inProgress.includes(row) && !scheduled.includes(row) && row.success !== true) || row.profile_username !== plan.profile || !platforms.includes(plan.platform)) continue;
     const ids = [row.job_id, row.request_id].filter(text);
     requireValue(ids.length > 0 || text(row.platform_post_id), "Unidentified processing/publication job");
@@ -168,11 +186,12 @@ export async function prepareSocialReport(plan, context) {
     if (media) requireValue(!matches({ ...row, caption: media.caption }), "Existing target report in native post caption; do not duplicate");
     const nativePublishedAt = media && strictTimestamp(media.timestamp);
     const historicalPublished = history.includes(row) && !inProgress.includes(row) && !scheduled.includes(row) && row.success === true && (!("status" in row) || ["completed", "success", "published"].includes(row.status)) && !row.fallback_to_inbox && media && instagramPostKey(row.post_url) && instagramPostKey(row.post_url) === instagramPostKey(media.permalink) && ["IMAGE", "VIDEO", "CAROUSEL_ALBUM"].includes(media.media_type) && (typeof media.caption === "string" || media.caption === null) && Number.isFinite(nativePublishedAt) && nativePublishedAt < earliestReportDay && nativePublishedAt <= now;
-    requireValue(knownOther || historicalPublished, "Unknown same-account job/post: read details by job/request ID before submission");
+    const knownUnverifiedException = decisionPresent && history.includes(row) && !inProgress.includes(row) && !scheduled.includes(row) && row.success === true && row.job_id === approvedCase.jobId && row.request_id === approvedCase.requestId && row.platform_post_id === approvedCase.postId && row.post_url === approvedCase.postUrl;
+    requireValue(knownOther || historicalPublished || knownUnverifiedException, "Unknown same-account job/post: read details by job/request ID before submission");
   }
-  requireValue(!scheduled.some(matches) && !inProgress.some(matches) && !history.some(row => row.success && matches(row)), "Existing scheduled/published post; do not duplicate");
+  requireValue(!scheduled.some(row => matches(row) && !isPendingReplacement(row)) && !inProgress.some(row => matches(row) && !isPendingReplacement(row)) && !history.some(row => row.success && matches(row)), "Existing scheduled/published post; do not duplicate");
   await validatePublicationLedger(ledger, { recaps, root });
-  requireValue(!ledger.some(row => row.recapId === recap.id && row.platform === plan.platform && row.account === plan.account && PUBLICATION_STATES.includes(row.state)), "Existing ledger record; cancel/reconcile separately before submission");
+  requireValue(!ledger.some(row => row.recapId === recap.id && row.platform === plan.platform && row.account === plan.account && PUBLICATION_STATES.includes(row.state) && !(pendingReplacement && row.state === "scheduled" && row.jobId === approvedCase.replacementJobId && strictTimestamp(row.scheduledDate) === strictTimestamp(plan.scheduledDate))), "Existing ledger record; cancel/reconcile separately before submission");
   requireValue(Array.isArray(plan.mediaUrls) && plan.mediaUrls.length === assets.length && typeof fetchBytes === "function", "Delivery URLs not verified");
   for (let i = 0; i < assets.length; i++) {
     const delivery = new URL(plan.mediaUrls[i]);
@@ -180,6 +199,22 @@ export async function prepareSocialReport(plan, context) {
     requireValue(sha256(await fetchBytes(delivery.href)) === assets[i].sha256, "Delivery bytes differ from inspected asset");
   }
   return { user: plan.profile, platforms: ["instagram"], photosPathsOrUrls: [...plan.mediaUrls], title: plan.caption, ...(plan.scheduledDate ? { scheduledDate: plan.scheduledDate, timezone: plan.timezone } : {}), asyncUpload: true, platformOptions: { media_type: "IMAGE", user_tags: JSON.stringify(plan.personTags), instagram_alt_text: JSON.stringify(plan.altText) } };
+}
+
+export async function prepareSocialReport(plan, context) {
+  return checkedReport(plan, context);
+}
+
+/** Checks the new payload while the authorized old job remains; NEVER dispatches. */
+export async function prepareReplacement(plan, context) {
+  const now = context.now ?? Date.now();
+  requireValue(plan.replacementJobId === approvedCase.replacementJobId && plan.scheduledDate === approvedCase.scheduledDate, "Wrong replacement job/date");
+  requireValue(validateOwnerDecision(context.ownerDecision, plan, now) && context.ownerDecision.originalInstruction.includes("旧予約をキャンセル") && context.ownerDecision.originalInstruction.includes("2026-10-03 09:00 JST"), "Replacement owner instruction missing");
+  const jobs = snapshotRows(plan.snapshots?.scheduled, "scheduled_posts", now);
+  const old = jobs.filter(row => row.job_id === plan.replacementJobId);
+  requireValue(old.length === 1 && old[0].profile_username === plan.profile && old[0].platforms?.includes(plan.platform) && old[0].original_timezone === "Asia/Tokyo" && strictTimestamp(old[0].original_scheduled_str) === strictTimestamp(plan.scheduledDate) && [old[0].title, old[0].caption].some(body => typeof body === "string" && body.includes(reportUrl(plan.recapId))) && context.manifest.items.some(item => path.basename(item.source) === old[0].source_filename), "Old reservation identity/time/source not confirmed");
+  const payload = await checkedReport(plan, context, true);
+  return { state: "prepared_not_submitted", mustCancelJobId: plan.replacementJobId, payloadSha256: sha256(Buffer.from(JSON.stringify(payload))), payload, note: context.ownerDecision.note };
 }
 
 /** The dispatch adapter is called only after every preflight check succeeds. */
