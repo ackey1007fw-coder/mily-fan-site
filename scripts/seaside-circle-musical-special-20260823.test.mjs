@@ -67,6 +67,28 @@ const YOUTUBE_ARCHIVE_PATTERN = new RegExp(
   ["youtu", ".be/", "y065", "xWn"].join("") + "|" + ["youtube", ".com/", "watch"].join(""),
   "i",
 );
+// Only these independently acknowledged public talk receipts may appear in this section.
+const APPROVED_TALK_RECEIPTS = [
+  { recap: "2026-10-02-night-showroom", id: "U0pQNKgr5yo", job: "6419fa33dce64bf0a6d34fec8ea9bffc", request: "6d9490ee60db44e79844e7b3084352f2" },
+  { recap: "2026-10-03-asa-showroom", id: "Bnv7uihCrDQ", job: "12e4004af86745138b06d544a58e2552", request: "93ce469672ac46269bfc5cf129b75120" },
+];
+const TALK_RECEIPT_HEADING = "## 2026-10-03 トーク縦動画4件の公開結果（API確認）";
+function withoutApprovedTalkReceiptLinks(text) {
+  let inReceipts = false;
+  return text.split(/\r?\n/).map(line => {
+    if (/^#{1,2} /.test(line)) inReceipts = line === TALK_RECEIPT_HEADING;
+    if (!inReceipts) return line;
+    for (const record of APPROVED_TALK_RECEIPTS) {
+      const url = `https://www.youtube.com/watch?v=${record.id}`;
+      if (line.startsWith(`- ${record.recap} / youtube / `)
+          && line.includes(`/ media \`${record.id}\` / job \`${record.job}\` / request \`${record.request}\``)) {
+        return line.replace(url, "[approved public talk receipt]");
+      }
+    }
+    return line;
+  }).join("\n");
+}
+
 const STORY_PERMALINK_PATTERN = /instagram\.com\/stories\//i;
 const PERSONAL_STORY_LABEL = /本人Instagram Story|みりぃのInstagram Story|@mily_chan36 のInstagram Story/;
 const LISTENER_PATTERN = new RegExp(
@@ -416,8 +438,11 @@ describe("2026-08-23 seaside circle musical special — privacy and routing", ()
     for (const relative of published) {
       const text = await readFile(path.join(root, relative), "utf8");
       for (const pattern of forbidden) {
-        const checkedText = relative === "docs/CONTENT-OPS.md" && pattern === YOUTUBE_ARCHIVE_PATTERN
+        let checkedText = relative === "docs/CONTENT-OPS.md" && pattern === YOUTUBE_ARCHIVE_PATTERN
           ? withoutApprovedSongLinks(text) : text;
+        if (["docs/CONTENT-OPS.md", "docs/MEDIA.md"].includes(relative) && pattern === YOUTUBE_ARCHIVE_PATTERN) {
+          checkedText = withoutApprovedTalkReceiptLinks(checkedText);
+        }
         assert.equal(pattern.test(checkedText), false, `${relative} ${pattern}`);
       }
       assert.equal(findDriveIds(text).length, 0, relative);
@@ -470,5 +495,27 @@ describe("2026-08-23 seaside circle musical special — privacy and routing", ()
     assert.match(gallery, /object-contain|aspect-\[9\/16\]/);
     assert.doesNotMatch(latest, /autoPlay/);
     assert.doesNotMatch(storyPage, /autoPlay/);
+  });
+});
+
+
+describe("approved talk receipts preserve archive privacy checks", () => {
+  const line = record => `- ${record.recap} / youtube / 2026-10-03: https://www.youtube.com/watch?v=${record.id} / media \`${record.id}\` / job \`${record.job}\` / request \`${record.request}\``;
+  it("allows only the two acknowledged talk URLs in their receipt section", () => {
+    for (const record of APPROVED_TALK_RECEIPTS) {
+      assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(TALK_RECEIPT_HEADING + "\n" + line(record))), false);
+      assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(TALK_RECEIPT_HEADING + "\r\n" + line(record))), false);
+    }
+  });
+  it("still rejects private archive links and mismatched or out-of-section receipts", () => {
+    const forbidden = "https://www.youtube.com/watch?v=" + "privateArchive";
+    assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(TALK_RECEIPT_HEADING + "\n" + forbidden)), true);
+    const oldArchive = ["https://youtu", ".be/", "y065", "xWn"].join("");
+    assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(TALK_RECEIPT_HEADING + "\n" + oldArchive)), true);
+    for (const record of APPROVED_TALK_RECEIPTS) {
+      assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(line(record))), true);
+      assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(TALK_RECEIPT_HEADING + "\n" + line(record).replace(record.job, "different-job"))), true);
+      assert.equal(YOUTUBE_ARCHIVE_PATTERN.test(withoutApprovedTalkReceiptLinks(TALK_RECEIPT_HEADING + "\n" + line(record) + "\n## Other section\n" + forbidden)), true);
+    }
   });
 });

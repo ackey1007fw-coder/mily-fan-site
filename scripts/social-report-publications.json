@@ -44,5 +44,57 @@
     "jobId": "81a4027e3d844642ac07f5fc81ba366c",
     "publishedAt": "2026-10-03T10:48:27+09:00",
     "note": "実映像・原音・本文・mention実リンク・専用coverを親native確認。要約は逐語字幕と区別。本文recap URLは非クリックで、Reels専用画面では下端非公式表記がUIと重なる。通常投稿詳細では全表示。完全な導線検証ではないためpublished_verifiedにしない。公開済み差替なし。"
+  },
+  {
+    "recapId": "2026-10-02-night-showroom",
+    "platform": "tiktok",
+    "account": "ackeytan_",
+    "state": "published_unverified",
+    "mediaType": "video",
+    "jobId": "892eed8ef0e34933b956c1caf6e315c7",
+    "requestId": "a060d00c9fbb4467811569a835e1e2f1",
+    "mediaId": "7692284470770109697",
+    "publishedUrl": "https://www.tiktok.com/@ackeytan_/video/7692284470770109697?utm_campaign=tt4d_open_api&utm_source=7529407175366705169",
+    "publishedAt": "2026-10-03T12:53:42.503+09:00",
+    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 正式permalinkは接続済recent media APIの返値と一致。独立nativeでは旧shareURLがおすすめへredirectし、profileエラーで未検品。 独立nativeで夜朝の実再生と日付・Mily・要約を確認。captionは@seasidecircle実mention、通常SHOWROOMへの機械的流用禁止指示との不整合。recapURLは非クリック/#recapタグ化。専用cover・一覧重複・公開後原音/PTS/字幕同期は未検証。caption採用は既存TikTok投稿からの流用で対象本人指定照合が不足。公開済edit/delete/repostは未実施。"
+  },
+  {
+    "recapId": "2026-10-02-night-showroom",
+    "platform": "youtube",
+    "account": "@ouen_archive",
+    "state": "published_unverified",
+    "mediaType": "video",
+    "jobId": "6419fa33dce64bf0a6d34fec8ea9bffc",
+    "requestId": "6d9490ee60db44e79844e7b3084352f2",
+    "mediaId": "U0pQNKgr5yo",
+    "publishedUrl": "https://www.youtube.com/watch?v=U0pQNKgr5yo",
+    "publishedAt": "2026-10-03T12:53:18.103+09:00",
+    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 独立nativeで対象ページ・配信日・要約区別・正recapクリックリンクを確認。再生readyState0で実再生・cover/字幕同期は未確認。本人YouTube handleを推測追加しない。"
+  },
+  {
+    "recapId": "2026-10-03-asa-showroom",
+    "platform": "tiktok",
+    "account": "ackeytan_",
+    "state": "published_unverified",
+    "mediaType": "video",
+    "jobId": "43d5047ea2fc427fabe59804c80450eb",
+    "requestId": "4a2172bd2f2346ef8f7f292f19afcd0c",
+    "mediaId": "7692284782541098241",
+    "publishedUrl": "https://www.tiktok.com/@ackeytan_/video/7692284782541098241?utm_campaign=tt4d_open_api&utm_source=7529407175366705169",
+    "publishedAt": "2026-10-03T12:55:25.788+09:00",
+    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 正式permalinkは接続済recent media APIの返値と一致。独立nativeでは旧shareURLがおすすめへredirectし、profileエラーで未検品。 独立nativeで夜朝の実再生と日付・Mily・要約を確認。captionは@seasidecircle実mention、通常SHOWROOMへの機械的流用禁止指示との不整合。recapURLは非クリック/#recapタグ化。専用cover・一覧重複・公開後原音/PTS/字幕同期は未検証。caption採用は既存TikTok投稿からの流用で対象本人指定照合が不足。公開済edit/delete/repostは未実施。"
+  },
+  {
+    "recapId": "2026-10-03-asa-showroom",
+    "platform": "youtube",
+    "account": "@ouen_archive",
+    "state": "published_unverified",
+    "mediaType": "video",
+    "jobId": "12e4004af86745138b06d544a58e2552",
+    "requestId": "93ce469672ac46269bfc5cf129b75120",
+    "mediaId": "Bnv7uihCrDQ",
+    "publishedUrl": "https://www.youtube.com/watch?v=Bnv7uihCrDQ",
+    "publishedAt": "2026-10-03T12:54:28.872+09:00",
+    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 独立nativeで対象ページ・配信日・要約区別・正recapクリックリンクを確認。再生readyState0で実再生・cover/字幕同期は未確認。本人YouTube handleを推測追加しない。"
   }
 ]

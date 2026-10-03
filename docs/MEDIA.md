@@ -1,3 +1,22 @@
+### TikTok独立native確認後の残件
+
+- 夜・朝の正式permalinkで実再生成功、日付・Mily・要約表示を確認。両captionの実mentionは `@seasidecircle`。既存TikTok投稿captionから流用し、通常SHOWROOMへの機械的流用禁止と対象本人指定の照合が不足した。published_unverifiedを維持。
+- recap URLは非クリックで #recap タグ化。専用cover・一覧重複・公開後原音/PTS/字幕同期は未検証。公開済み投稿のedit/delete/repostはしていない。
+- 接続済Upload-Postの編集toolはpending scheduled post対象のみ。公開済caption/mention変更の正規API操作は確認できていない。native編集可否は未確認で、権限や削除再投稿による回避をしない。
+
+## 2026-10-03 トーク縦動画4件の公開結果（API確認）
+
+- 10/2夜10.25秒・10/3朝18.65秒の既存トークのみ。最新明示承認後、対象重複・予約・処理中なしを確認して各1回送信。歌唱・本人TikTok再投稿は含めない。
+- 各件は published_unverified。独立YouTube画面では対象ページ・配信日・要約区別・正recapクリックリンクを確認、実再生・cover/同期は未確認。TikTok正式permalinkで夜朝の実再生・日付・Mily・要約を確認。mention不整合・記事URL非クリック・専用cover/同期など未検証項目を残す。旧shareURLのredirect/profileエラーは初回検品の履歴。正式permalinkは接続済recent media APIで取得して台帳に保存。既存Instagram投稿は変更・再投稿しない。
+- safearea修正版は原音開始時刻・長さ・フレーム数一致、最後まで機械再生成功。AI実聴とは区別。TikTokは20→23fps変換、変換後の原音/PTS/字幕同期は未測定。YouTubeは変換なし。
+
+- 2026-10-02-night-showroom / tiktok / 2026-10-03T12:53:42.503+09:00: https://www.tiktok.com/t/7692284470770109697 / media `7692284470770109697` / job `892eed8ef0e34933b956c1caf6e315c7` / request `a060d00c9fbb4467811569a835e1e2f1`
+- 2026-10-02-night-showroom / youtube / 2026-10-03T12:53:18.103+09:00: https://www.youtube.com/watch?v=U0pQNKgr5yo / media `U0pQNKgr5yo` / job `6419fa33dce64bf0a6d34fec8ea9bffc` / request `6d9490ee60db44e79844e7b3084352f2`
+- 2026-10-03-asa-showroom / tiktok / 2026-10-03T12:55:25.788+09:00: https://www.tiktok.com/t/7692284782541098241 / media `7692284782541098241` / job `43d5047ea2fc427fabe59804c80450eb` / request `4a2172bd2f2346ef8f7f292f19afcd0c`
+- 2026-10-03-asa-showroom / youtube / 2026-10-03T12:54:28.872+09:00: https://www.youtube.com/watch?v=Bnv7uihCrDQ / media `Bnv7uihCrDQ` / job `12e4004af86745138b06d544a58e2552` / request `93ce469672ac46269bfc5cf129b75120`
+
+- YouTube URLはAPI返却の公開トーク2件を記録。過去の私的録画・歌唱アーカイブの禁止は維持。詳細台帳: `scripts/social-report-publications.json`。個人保存先・原録画・認証情報は公開repoに含めない。
+
 # メディア運用ガイド — mily-fan-site
 
 ## b184 — 2026年10月3日朝の実録画スクショ
