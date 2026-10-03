@@ -1,7 +1,7 @@
 ## 2026-10-03 トーク縦動画4件の公開結果（API確認）
 
 - 10/2夜10.25秒・10/3朝18.65秒の既存トークのみ。最新明示承認後、対象重複・予約・処理中なしを確認して各1回送信。歌唱・本人TikTok再投稿は含めない。
-- 各件は published_unverified。native公開画面の再生・本文・mention・記事リンク確認は未完。既存Instagram投稿は変更・再投稿しない。
+- 各件は published_unverified。独立YouTube画面では対象ページ・配信日・要約区別・正recapクリックリンクを確認、実再生・cover/同期は未確認。TikTok旧shareURLはおすすめへredirect、profileエラーでnative未検品。正式permalinkは接続済recent media APIで取得して台帳に保存。既存Instagram投稿は変更・再投稿しない。
 - safearea修正版は原音開始時刻・長さ・フレーム数一致、最後まで機械再生成功。AI実聴とは区別。TikTokは20→23fps変換、変換後の原音/PTS/字幕同期は未測定。YouTubeは変換なし。
 
 - 2026-10-02-night-showroom / tiktok / 2026-10-03T12:53:42.503+09:00: https://www.tiktok.com/t/7692284470770109697 / media `7692284470770109697` / job `892eed8ef0e34933b956c1caf6e315c7` / request `a060d00c9fbb4467811569a835e1e2f1`
