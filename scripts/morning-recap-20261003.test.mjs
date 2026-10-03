@@ -9,7 +9,7 @@ import {resolveNewsLinks} from '../src/lib/newsLinks.ts';
 
 test('October 3 morning recap keeps source seconds aligned with reviewed ten stills',()=>{
  const manifest=JSON.parse(readFileSync('docs/MILY_MORNING_MEDIA_20261003.json'));
- assert.equal(streamRecaps[0],recap);assert.equal(recap.gallery.length,10);
+ assert.ok(streamRecaps.includes(recap));assert.equal(recap.gallery.length,10);
  assert.equal(recap.highlights.length,8);assert.equal(recap.songs,undefined);
  const times=recap.gallery.map(photo=>{const file=photo.src.split('/').at(-1);const source=manifest.photos.find(x=>x.file===file);assert.ok(source.source_identical);assert.match(photo.caption,new RegExp(`^${Math.floor(source.source_seconds/3600)}:${String(Math.floor(source.source_seconds%3600/60)).padStart(2,'0')}:${String(source.source_seconds%60).padStart(2,'0')}`));return source.source_seconds;});
  assert.deepEqual(times,[...times].sort((a,b)=>a-b));
