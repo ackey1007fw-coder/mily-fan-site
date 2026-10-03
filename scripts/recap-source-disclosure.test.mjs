@@ -4,6 +4,33 @@ import { readFileSync } from 'node:fs';
 import { streamRecaps } from '../src/data/streamRecaps.ts';
 import { radioEpisodes } from '../src/data/radioEpisodes.ts';
 import { recapSourceDisclosure, recapGalleryNote } from '../src/lib/recapSourceDisclosure.ts';
+import { RECAP_FIGURES_NOTE } from '../src/data/streamRecapRules.ts';
+
+test('historical figure scope survives even without a structured goals section', () => {
+  const morning = streamRecaps.find(recap => recap.id === '2026-08-18-morning-showroom');
+  assert.equal(morning.goals.length, 0);
+  assert.match(morning.summary, /3000/);
+  for (const recap of [...streamRecaps, ...radioEpisodes]) {
+    if (recap.transcriptionNote.includes(RECAP_FIGURES_NOTE)) {
+      assert.ok(recapSourceDisclosure(recap.sourceLabel, recap.transcriptionNote).verification.includes(RECAP_FIGURES_NOTE), recap.id);
+    }
+  }
+});
+
+test('caption summaries preserve YouTube provenance and do not invent saved material', () => {
+  const youtube = streamRecaps.find(recap => recap.id === '2026-08-08-shinya-radio-0025');
+  assert.match(recapSourceDisclosure(youtube.sourceLabel, youtube.transcriptionNote).material, /YouTubeの自動字幕/);
+  for (const recap of [...streamRecaps, ...radioEpisodes]) {
+    const first = recap.transcriptionNote.split('。')[0];
+    if (/自動字幕/.test(first) && /YouTube/.test(`${first} ${recap.sourceLabel}`)) {
+      const material = recapSourceDisclosure(recap.sourceLabel, recap.transcriptionNote).material;
+      assert.match(material, /YouTubeの自動字幕/);
+      assert.doesNotMatch(material, /保存された/);
+    }
+  }
+  assert.match(recapSourceDisclosure('SHOWROOM', '保存済みの日本語自動字幕をもとに整理しています。').material, /保存された/);
+  assert.equal(recapSourceDisclosure('SHOWROOM', '日本語自動字幕をもとに整理しています。').material, '自動字幕をもとにした要約です。');
+});
 
 test('all existing recap verification records are preserved in the operational ledger', () => {
   const ledger = JSON.parse(readFileSync('docs/RECAP-VERIFICATION-LEDGER.json', 'utf8'));
