@@ -10,6 +10,7 @@ import { tokyoDateKey } from "./monthCalendar.ts";
 import { SUPPORT_HUB_ROUTE } from "./supportHub.ts";
 import { patonVoteLiveNote } from "./patonVoteLiveCopy.ts";
 import { displayStatus, formatScheduleEndLabel } from "./supportCalendar.ts";
+import { fourthRoundDailyVote, type DailyVoteGuide } from "./fourthRoundDailyVote.ts";
 
 export const HOME_ROUTE = "/" as const;
 export const NEWS_ARCHIVE_ROUTE = "/news/" as const;
@@ -49,6 +50,8 @@ export type HomeVoteAction = {
 };
 
 export type HomeVoteSpotlight = {
+  eventId?: string;
+  dailyVote?: DailyVoteGuide;
   kind?: "vote" | "support";
   state: "upcoming" | "live";
   eyebrow: string;
@@ -110,8 +113,9 @@ export function selectHomeVoteSpotlight(input: {
       const start = Date.parse(event.schedule.start);
       if (tokyoDateKey(start) !== tokyoDateKey(input.now)) continue;
       const startClock = tokyoClockFormatter.format(new Date(start));
-      return {
-        state: "upcoming",
+        return {
+          state: "upcoming",
+          eventId: event.id,
         eyebrow: `${phase}・本日スタート`,
         title: `本日${startClock}からWEB投票`,
         note: `${startClock}になると、この案内は${input.contest.entryNumber}への投票ボタンに切り替わります。`,
@@ -125,8 +129,9 @@ export function selectHomeVoteSpotlight(input: {
 
     if (status === "live") {
       const deadline = formatScheduleEndLabel(event.schedule);
-      return {
-        state: "live",
+        return {
+          state: "live",
+          eventId: event.id,
         eyebrow: `${phase}・WEB投票`,
         title: "WEB投票受付中",
         note: `${input.contest.entryNumber} 三橋莉子の投票ページへ直接進めます。${deadline ? `\n投票締切 ${deadline}` : ""}`,
@@ -146,7 +151,9 @@ export function selectHomeVoteSpotlight(input: {
 export function selectHomePrioritySupport(input: Parameters<typeof selectHomeVoteSpotlight>[0]): HomeVoteSpotlight | null {
   const vote = selectHomeVoteSpotlight(input);
   if (vote?.state === "live") {
-    return { ...vote, kind: "vote", eyebrow: "いま一番お願いしたい応援", title: "三橋莉子にWEB投票をお願いします" };
+    const dailyVote = vote.eventId === "miss-circle-2026-4th-web-vote" ? fourthRoundDailyVote(input.now) : null;
+    return { ...vote, kind: "vote", eyebrow: "いま一番お願いしたい応援", title: "三橋莉子にWEB投票をお願いします",
+      ...(dailyVote ? { dailyVote } : {}) };
   }
   const active = input.supportEvents
     .filter((event) => event.kind !== "result" && displayStatus(event.schedule, input.now) === "live")
