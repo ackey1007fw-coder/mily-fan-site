@@ -4668,3 +4668,10 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 - Instagram／TikTokは11→20の10枚、Xは正式表紙11＋元JPEG02／05／10の4枚の送信素材・本文・altを準備済み。Instagram人物タグ、本人mention、夜記事URL、WEB投票10/2 12:00とSHOWROOM審査10/3 05:00（JST）の区別を保持する。
 - SNSは未送信・未予約。Instagramは過去Reel1件、TikTokは過去成功3件の現在の投稿本体照合が未完。Xは正規画面の認証が中断された。素材検品済みと送信完了を区別し、公開URLやjobを作った扱いにしない。
 - 非公開の完成payloadと残る操作を用意。詳細は[CONTENT-OPSの仕上げ読戻し](CONTENT-OPS.md#102夜sns仕上げの読戻し2026-10-03-0840-jst)を参照。音声短尺3候補は聴覚・字幕・切点未検品のため引き続き非公開。
+
+
+## 2026-10-03 確認：大学へ行くときのメイク（TikTok）
+
+- 元投稿：https://www.tiktok.com/@seasidecircle/video/7692016046542228756 。本人投稿本文「大学に行く時はとにかくメイク薄い💄」。投稿日時は未確認、NEWSの日付は確認日として明示。
+- 指定済み元素材と投稿映像の対応は別担当が確認。NEWS／Galleryは既存TikTok公式playerと元投稿リンクを共有し、動画・音源を外部へ再ホストしない。動画本体・個人保存先・私的受渡しURLは公開repoに追加しない。
+- 10/2夜・10/3朝のトーク短尺は公開Instagramへの既存socialClip導線を使用。オーナーの原音確認と、全編のAI聴取は区別。公開済み投稿は変更せず、非クリックURL等の不備は投稿台帳に保持。

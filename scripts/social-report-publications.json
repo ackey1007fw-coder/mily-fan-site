@@ -3,10 +3,11 @@
     "recapId": "2026-10-02-morning-showroom",
     "platform": "instagram",
     "account": "ackeytan_0720",
-    "state": "scheduled",
+    "state": "published_unverified",
     "jobId": "33d2a92ad07c42989cef9272f6b62deb",
     "scheduledDate": "2026-10-03T09:00:00+09:00",
-    "note": "2026-10-03 08:40 JSTの予約一覧・job詳細で朝記事URL、正式表紙の素材名、09:00 JST、queued／scheduler pendingを読戻し。旧jobは現予約一覧にないが、この作業による取消成功とは扱わない。公開実画面・全画像順序・本人タグは未確認。"
+    "note": "公開と通常画面の10枚・cover・本文・mention・プロフィール導線は親native確認済み。写真の本人ユーザータグは未確認なのでpublished_verifiedとはしない。",
+    "publishedUrl": "https://www.instagram.com/p/DeAuXhdjKT1/"
   },
   {
     "recapId": "2026-10-01-night-showroom",
@@ -23,5 +24,25 @@
     "state": "published_unverified",
     "publishedUrl": "https://x.com/ackey_RiRi_supp/status/2105810215341801680",
     "note": "必須記事URLの実表示なし。Upload-Postがcaption/title/first_commentからクリック可能URLを除去する現行仕様による。補完返信は未承認、未実施。"
+  },
+  {
+    "recapId": "2026-10-02-night-showroom",
+    "platform": "instagram",
+    "account": "ackeytan_0720",
+    "state": "published_unverified",
+    "publishedUrl": "https://www.instagram.com/reel/DeA6JODFNPd/",
+    "jobId": "a1b01b5381144694bea847e1cd7da30c",
+    "publishedAt": "2026-10-03T10:44:55+09:00",
+    "note": "実映像・原音・本文・mention実リンク・専用coverを親native確認。要約は逐語字幕と区別。本文recap URLは非クリックで、Reels専用画面では下端非公式表記がUIと重なる。通常投稿詳細では全表示。完全な導線検証ではないためpublished_verifiedにしない。公開済み差替なし。"
+  },
+  {
+    "recapId": "2026-10-03-asa-showroom",
+    "platform": "instagram",
+    "account": "ackeytan_0720",
+    "state": "published_unverified",
+    "publishedUrl": "https://www.instagram.com/reel/DeA6ilVjsal/",
+    "jobId": "81a4027e3d844642ac07f5fc81ba366c",
+    "publishedAt": "2026-10-03T10:48:27+09:00",
+    "note": "実映像・原音・本文・mention実リンク・専用coverを親native確認。要約は逐語字幕と区別。本文recap URLは非クリックで、Reels専用画面では下端非公式表記がUIと重なる。通常投稿詳細では全表示。完全な導線検証ではないためpublished_verifiedにしない。公開済み差替なし。"
   }
 ]

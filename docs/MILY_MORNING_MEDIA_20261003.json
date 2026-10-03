@@ -123,14 +123,13 @@
     "visual_review": "720x1280 inspected; photo pixels unchanged; formal name Mily",
     "public_path": "/media/live/mily-b184-20261003-morning-cover.png"
   },
-  "published": false,
+  "published": true,
   "source": {
-    "file": "mily_showroom_2026-10-03_06-30-44_live23505265.mkv",
     "live_id": "23505265",
     "recording_start_jst": "2026-10-03T06:30:44+09:00",
     "time_basis": "video seek seconds; not ASR offsets; not exact wall-clock broadcast time"
   },
-  "publication_state": "Draft PR; not merged",
+  "publication_state": "Published via PR388; merge 35120df7b37ba648458faa4c19d398644c8be2ba; production article and still downloads checked",
   "social_cover": {
     "file": "mily-b184-20261003-morning-cover-4x5.png",
     "public_path": "/media/live/mily-b184-20261003-morning-cover-4x5.png",
@@ -148,7 +147,7 @@
     ],
     "safe_crop_photo_pixels_identical": true,
     "formal_name": "Mily",
-    "published": false,
+    "published": true,
     "crop_visual_review": "full 4:5 and central 1:1 inspected; Mily/date/title/face visible; photo pixels preserved"
   }
 }

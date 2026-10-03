@@ -12,7 +12,7 @@
 | 媒体 | 状態 | 日時（JST） | 結果 |
 | --- | --- | --- | --- |
 | TikTok | 公開成功、接続先読戻し済み | 2026-10-02 12:16:36 | https://www.tiktok.com/t/7691903695587609864 |
-| Instagram feed | published：親native担当が公開・実表示を確認 | 2026-10-03 09:01:45 JST | [公開投稿](https://www.instagram.com/p/DeAuXhdjKT1/) / job `33d2a92ad07c42989cef9272f6b62deb` / request `5677e5efbfe447a7bd346c58930b62d3` |
+| Instagram feed | published_with_unverified_photo_tag：親native担当が公開・実表示を確認、写真の本人タグは未確認 | 2026-10-03 09:01:45 JST | [公開投稿](https://www.instagram.com/p/DeAuXhdjKT1/) / job `33d2a92ad07c42989cef9272f6b62deb` / request `5677e5efbfe447a7bd346c58930b62d3` |
 | X | 投稿文＋添付4枚を完成、未投稿 | — | URLを保持できる投稿経路での実行が残る |
 
 - 10/3 09:43–45 JSTの親native確認：Instagramは正式表紙から01〜09の計10枚・順番・本文の日付・本人mentionリンク・プロフィールのファンサイト導線を確認。本文URL文字列は確認済み、写真の人物タグは未確認。これは10/2朝の投稿であり、10/2夜・10/3朝の投稿ではない。

@@ -94,7 +94,7 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
 
   return (
     <li className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
-      <p className="text-xs text-ink-muted">{item.date}</p>
+      <p className="text-xs text-ink-muted">{item.dateBasis === "confirmed-on" ? "確認日 " : ""}{item.date}</p>
       <p className="mt-1 font-semibold text-ink">{item.title}</p>
       <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-muted">{item.body}</p>
       {item.message ? (
