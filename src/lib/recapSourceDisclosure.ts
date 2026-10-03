@@ -1,7 +1,7 @@
-import { RECAP_CLIP_WITHHOLD_NOTE, RECAP_FIGURES_NOTE, RECAP_WITHHOLD_NOTE } from '../data/streamRecapRules.ts';
+import { RECAP_CLIP_WITHHOLD_NOTE, RECAP_WITHHOLD_NOTE } from '../data/streamRecapRules.ts';
 
 const productionSentences = new Set(
-  [RECAP_WITHHOLD_NOTE, RECAP_CLIP_WITHHOLD_NOTE, RECAP_FIGURES_NOTE]
+  [RECAP_WITHHOLD_NOTE, RECAP_CLIP_WITHHOLD_NOTE]
     .flatMap(text => text.split('。').filter(Boolean)),
 );
 
@@ -13,11 +13,13 @@ export function recapSourceDisclosure(sourceLabel: string, note: string) {
     ? '提供レポートと文字起こし抜粋をもとにした要約です。'
     : first.includes('動画の音声')
       ? '提供動画をもとにした記録です。'
-      : /自動字幕/.test(first)
-        ? '保存された自動字幕をもとにした要約です。'
-        : /自動文字起こし/.test(first)
-          ? '自動文字起こしをもとにした要約です。'
-          : first ? `${first}。` : '';
+      : /自動字幕/.test(first) && /YouTube/.test(`${first} ${sourceLabel}`)
+        ? 'YouTubeの自動字幕をもとにした要約です。'
+        : /自動字幕/.test(first)
+          ? `${/保存/.test(first) ? '保存された' : ''}自動字幕をもとにした要約です。`
+          : /自動文字起こし/.test(first)
+            ? '自動文字起こしをもとにした要約です。'
+            : first ? `${first}。` : '';
   const sourceScope = /全文|全体|分割/.test(first) ? [first.replace(/[\d,]+行/g, '').replace(/\s+/g, ' ')] : [];
   const verification = [...new Set([...sourceScope, ...sentences.slice(1)].filter(sentence => {
     if (productionSentences.has(sentence)) return false;
