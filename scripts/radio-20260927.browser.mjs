@@ -32,7 +32,22 @@ try{
      await page.locator('main > header').screenshot({path:join(output,`${engine}-${width}-music-playlist.png`)});
     }else{
      const hi=page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`);assert.equal(await hi.locator('li').count(),15);assert.match(await hi.innerText(),/君からLINE/);assert.match(await hi.innerText(),/丸い月/);
-     const outer=hi.locator('xpath=ancestor::section[1]');assert.match(await outer.innerText(),/全編を人手で逐語校正したものではありません/);
+     const outer=hi.locator('xpath=ancestor::section[1]');
+     const source=outer.locator('[data-recap-source]');
+     const verification=source.locator('[data-recap-verification]');
+     assert.equal(await source.locator(':scope > p').count(),2);
+     assert.match(await source.innerText(),/自動文字起こしをもとにした要約です/);
+     assert.equal(await verification.evaluate(element=>element.open),false);
+     assert.doesNotMatch(await source.innerText(),/全編を人手で逐語校正したものではありません/);
+     await verification.getByText('出典・確認状況',{exact:true}).focus();
+     await page.keyboard.press('Enter');
+     assert.equal(await verification.evaluate(element=>element.open),true);
+     assert.match(await verification.innerText(),/全編を人手で逐語校正したものではありません/);
+     assert.match(await verification.innerText(),/記録できなかった内容は補っていません/);
+     assert.match(await verification.innerText(),/放送時刻や楽曲カット版の再生時刻とは異なります/);
+     await verification.getByText('出典・確認状況',{exact:true}).click();
+     assert.equal(await verification.evaluate(element=>element.open),false);
+     assert.doesNotMatch(await source.innerText(),/全編を人手で逐語校正したものではありません/);
      await outer.getByText('主なコーナーとタイムスタンプを見る',{exact:true}).click();assert.equal(await outer.locator('details[open] li').count(),15);
      await hi.screenshot({path:join(output,`${engine}-${width}-highlights.png`)});
     }
