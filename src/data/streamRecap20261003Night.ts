@@ -37,7 +37,7 @@ export const streamRecap20261003Night: StreamRecap = {
     { timestamp: "0:50:00", label: "マイクを持つ場面" },
     { timestamp: "0:58:30", label: "終盤の笑顔" },
   ],
-  nextNote: "配信時点の翌日案内は原音確認が未完了のため、時刻を確定記載していません。最新予定は本人の案内とLIVEページをご確認ください。",
+  nextNote: "",
   sourceLabel: "2026年10月3日 SHOWROOM夜配信（保存録画・自動文字起こし）", verifiedAt: "2026-10-04",
   transcriptionNote: buildTranscriptionNote({ material: AUTO_TRANSCRIPT_MATERIAL_NOTE, stills: "静止画はこの夜の実フレーム10枚を目視確認し、不要な背景を切り出して除いたものです。顔の生成・補正は行っていません。", extra: "元録画の音声時刻を照合していますが、全編手動聴取・逐語校正は未実施です。境界の重複・不確定語句を含むため、本人の逐語引用、歌った曲名、翌日の時刻は確定掲載していません。画像の時刻は録画内の目安です。" }),
 };
