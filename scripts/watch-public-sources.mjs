@@ -157,7 +157,8 @@ async function main() {
       socials.find((item) => item.platform === "showroom")?.url ?? null;
     findings.push(...diffShowroom(registeredShowroom, room));
 
-    // フェーズ表記は、本人と確認できたルーム名からのみ読む
+    // 本人と確認できたルーム名から審査段階だけを比較する。
+    // 宣伝文句・日付・倍率の変更や段階表記の欠落だけでは change にしない。
     findings.push(...diffPhase(contest.currentPhase?.name ?? null, room?.roomName ?? null));
   }
 

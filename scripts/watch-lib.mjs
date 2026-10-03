@@ -154,19 +154,47 @@ export function diffShowroom(registeredUrl, resolved) {
   return findings;
 }
 
+/** 宣伝文句ではなく、明記された審査段階だけを比較用の値にする。 */
+function normalizePhase(text) {
+  if (typeof text !== "string") return null;
+  const normalized = text.normalize("NFKC");
+  const phases = new Set();
+  const kanjiNumbers = "一二三四五六七八九十";
+  // 数字の途中を拾わない（14次を4次、十四次を四次と誤認しない）。
+  const rounds = /(?<![0-9〇零一二三四五六七八九十百千万])(?:第\s*)?([0-9]+|[一二三四五六七八九十])\s*次/gu;
+  for (const match of normalized.matchAll(rounds)) {
+    const number = /^[0-9]+$/.test(match[1])
+      ? Number(match[1])
+      : kanjiNumbers.indexOf(match[1]) + 1;
+    if (!Number.isSafeInteger(number) || number <= 0) return null;
+    phases.add(`第${number}次`);
+  }
+  // 長い表記を先に消費し、セミファイナルをファイナルに含めない。
+  for (const match of normalized.matchAll(/セミファイナル|準決勝|ファイナル|決勝/gu)) {
+    phases.add(
+      match[0] === "セミファイナル" || match[0] === "準決勝"
+        ? "セミファイナル"
+        : "ファイナル",
+    );
+  }
+  // 段階なし・複数段階は変更ではなく判定不能。登録値から補完しない。
+  return phases.size === 1 ? [...phases][0] : null;
+}
+
 /**
- * 審査フェーズの表記を比較する。
- * 公開表記（ルーム名など）に登録済みフェーズ名が含まれていれば「変更なし」。
+ * 審査段階を正規化して比較する（ガチ・最終日・日付・倍率等は比較しない）。
+ * 段階が欠ける／曖昧なら unavailable とし、change は確定した段階差だけ。
  */
 export function diffPhase(registeredPhaseName, observedText) {
-  if (typeof observedText !== "string" || observedText.trim() === "") {
+  const observedPhase = normalizePhase(observedText);
+  if (!observedPhase) {
     return [
       {
         severity: SEVERITY.unavailable,
         item: "審査フェーズ",
         current: registeredPhaseName,
-        observed: null,
-        note: "フェーズ表記を含む公開文字列を取得できなかった。",
+        observed: observedText ?? null,
+        note: "公開表記から審査段階を一意に判定できなかった。宣伝文句の変更や段階表記の欠落を審査の変更とは扱わない。",
       },
     ];
   }
@@ -176,19 +204,31 @@ export function diffPhase(registeredPhaseName, observedText) {
         severity: SEVERITY.change,
         item: "審査フェーズ（未登録）",
         current: null,
-        observed: observedText,
-        note: "contest.ts に currentPhase が未登録。公開表記を確認して登録を検討する。",
+        observed: observedPhase,
+        note: `contest.ts に currentPhase が未登録。公開表記を確認して登録を検討する。取得表記: ${observedText}`,
       },
     ];
   }
-  if (observedText.includes(registeredPhaseName)) return [];
+  const registeredPhase = normalizePhase(registeredPhaseName);
+  if (!registeredPhase) {
+    return [
+      {
+        severity: SEVERITY.unavailable,
+        item: "審査フェーズ",
+        current: registeredPhaseName,
+        observed: observedPhase,
+        note: "登録済みフェーズ名から審査段階を一意に判定できなかった。手動確認が必要。",
+      },
+    ];
+  }
+  if (registeredPhase === observedPhase) return [];
   return [
     {
       severity: SEVERITY.change,
       item: "審査フェーズ",
-      current: registeredPhaseName,
-      observed: observedText,
-      note: "公開表記に登録済みフェーズ名が含まれていない。審査が進んだ可能性。",
+      current: registeredPhase,
+      observed: observedPhase,
+      note: `公開表記の審査段階が登録済み段階と異なる。目視確認が必要。取得表記: ${observedText}`,
     },
   ];
 }
