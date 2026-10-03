@@ -979,6 +979,11 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
           );
         })}
       </ul>
+      <p className="mt-6">
+        <a href="/news/" className={secondaryCta}>
+          過去のお知らせをすべて見る
+        </a>
+      </p>
     </SectionShell>
   );
 }

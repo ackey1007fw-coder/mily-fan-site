@@ -292,10 +292,12 @@ try {
         assert.ok(archiveIndex >= 0);
         for (const route of ["/news/", "/activities/live/"]) {
           await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
-          if (route === "/news/") {
-            for (let count = NEWS_ARCHIVE_INITIAL; count <= archiveIndex; count += ARCHIVE_PAGE_SIZE) {
-              await page.locator("#latest").getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true }).click();
-            }
+          if (route === "/activities/live/") {
+            await page.getByRole("link", { name: "過去のお知らせをすべて見る", exact: true }).click();
+            await page.waitForURL(`${base}/news/`);
+          }
+          for (let count = NEWS_ARCHIVE_INITIAL; count <= archiveIndex; count += ARCHIVE_PAGE_SIZE) {
+            await page.locator("#latest").getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true }).click();
           }
           const photo = page.locator('img[src*="mily-b123-01-night-ribbon-fanroom-selfie"]').first();
           await photo.scrollIntoViewIfNeeded();

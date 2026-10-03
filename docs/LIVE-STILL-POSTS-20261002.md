@@ -12,9 +12,10 @@
 | 媒体 | 状態 | 日時（JST） | 結果 |
 | --- | --- | --- | --- |
 | TikTok | 公開成功、接続先読戻し済み | 2026-10-02 12:16:36 | https://www.tiktok.com/t/7691903695587609864 |
-| Instagram feed | 08:40 JST読戻し時点でscheduled、公開未確認 | 2026-10-03 09:00予定 | job `33d2a92ad07c42989cef9272f6b62deb` / request `5677e5efbfe447a7bd346c58930b62d3` |
+| Instagram feed | published：親native担当が公開・実表示を確認 | 2026-10-03 09:01:45 JST | [公開投稿](https://www.instagram.com/p/DeAuXhdjKT1/) / job `33d2a92ad07c42989cef9272f6b62deb` / request `5677e5efbfe447a7bd346c58930b62d3` |
 | X | 投稿文＋添付4枚を完成、未投稿 | — | URLを保持できる投稿経路での実行が残る |
 
+- 10/3 09:43–45 JSTの親native確認：Instagramは正式表紙から01〜09の計10枚・順番・本文の日付・本人mentionリンク・プロフィールのファンサイト導線を確認。本文URL文字列は確認済み、写真の人物タグは未確認。これは10/2朝の投稿であり、10/2夜・10/3朝の投稿ではない。
 - TikTok request `c3cb533b34dc46ab8fbd0be50bca4353` / job `9faff7f0662b49c9a2048669a6591178`はcompleted・success=true、公開ID `7691903695587609864`。接続先一覧でも同ID・PHOTO・本文の `@seasidecircle`・記事URL・開始日表記を確認した。
 - 初回の旧Instagram予約（job `1e65617b9dcb4394b24056dcdf253948` / request `6a3a990a583b467995315be814650d06`）は2026-10-02 10:47:34 JST作成。以下は初回確認時点の履歴であり、現行jobは上表と末尾の読戻し記録を使う。予約一覧の本文は `@mily_chan36` と当該記事URLを含み、jobはqueued / pending。今回、予約日時・本文・画像・タグを変更していない。予約APIの返却には本人ユーザータグの設定が含まれないため、本文メンションの確認と本人タグの確認を混同しない。本人タグは未確認、公開成功URLも未確定。
 - XのUpload-Post経路は本文・title・first commentからクリック可能なURLを除去する[現行仕様](https://docs.upload-post.com/api/upload-photo/)。必須のサイト導線を失う投稿を行わず、完成した本文・画像4枚を保持。ブラウザーへの経路変更または人間による投稿が残る。未投稿を送信済みにしない。
