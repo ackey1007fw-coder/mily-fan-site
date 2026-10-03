@@ -511,7 +511,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
 
       <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
         {episode.nextEpisodeNote ? <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p> : null}
-        <RecapSourceInfo sourceLabel={episode.sourceLabel} verifiedAt={episode.verifiedAt} transcriptionNote={episode.transcriptionNote} />
+        <RecapSourceInfo sourceLabel={episode.sourceLabel} verifiedAt={episode.verifiedAt} transcriptionNote={episode.transcriptionNote} medium="FMラジオ" />
       </div>
     </SectionShell>
   );
@@ -840,7 +840,7 @@ function StreamRecapArticle({
         </details>
       ) : null}
 
-      <RecapSourceInfo sourceLabel={recap.sourceLabel} verifiedAt={recap.verifiedAt} transcriptionNote={recap.transcriptionNote} imageTimes={Boolean(recap.gallery?.some(image => /\d+:\d{2}/.test(image.caption ?? "")))} />
+      <RecapSourceInfo sourceLabel={recap.sourceLabel} verifiedAt={recap.verifiedAt} transcriptionNote={recap.transcriptionNote} medium={recap.platformLabel} imageTimes={Boolean(recap.gallery?.some(image => /\d+:\d{2}/.test(image.caption ?? "")))} />
     </details>
   );
 }
