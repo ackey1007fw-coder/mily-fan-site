@@ -9,6 +9,7 @@ import {nextSupportEventBoundary} from '../src/lib/useSupportEventClock.ts';
 import {isMilyPortraitPhoto} from '../src/lib/galleryItems.ts';
 import {fourthRoundSchedulePhoto} from '../src/data/fourthRoundStreamSchedule.ts';
 import {resolveNewsLinks} from '../src/lib/newsLinks.ts';
+import {verifyNews} from './content-invariants.mjs';
 
 test('first-party poster has exactly 13 source-confirmed JST slots and no eighth-day inference',()=>{
  assert.equal(slots.length,13);
@@ -65,4 +66,6 @@ test('historical schedule NEWS stays truthful after all slots expire and links S
  assert.match(item.body,/本人画像では5日間の13枠/);
  assert.doesNotMatch(item.body,/13枠をHOMEの予定一覧に掲載しています/);
  assert.equal(resolveNewsLinks(item,now).cta.url,'/support/');
+ assert.deepEqual(verifyNews([item]),[]);
+ assert.ok(verifyNews([{...item,relatedUrl:'/unconfirmed/'}]).length>0);
 });

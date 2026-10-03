@@ -16,3 +16,7 @@
 - SHOWROOM導線は既存schedule hookのroomUrl優先、確認済みsocialをfallbackとし、URL正本を増やさない。
 
 関連5 tests、typecheck、Vite build成功。fresh Chrome390/1440で480/960WebP選択、object-contain、原寸リンク、API room overrideとfallback、overflowなし、JS errorなしを確認。全体test/build/guard、朝本文全編照合、current-head reviewはこの後の公開条件。
+
+## 全編照合追補 — 09:13 JST
+
+既存ASR全編1188 segments完了。音声frame168803件のPTS対応、最大frame誤差0.000667秒。suffix再開1694.67 decoded秒は1703.843元録画秒、WAV sample cut誤差/重複/欠落0。本文は要約、実聴したという意味ではない。個人名・曲名・歌詞・gift明細を公開本文へ入れず、原音clipは保留。記事・NEWS導線を追加、最終QA/CI待ち。

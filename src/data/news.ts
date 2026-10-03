@@ -22,6 +22,7 @@ import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
+import { site } from "./site.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -246,6 +247,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-03-morning-showroom-recap", date: "2026-10-03",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "四次審査の朝、歌とキラキラへのありがとう",
+    body: "10月3日朝のSHOWROOM配信を振り返ります。朝から届く応援や投票報告にお礼を伝え、歌とやりとりで盛り上がった約60分。1.2倍DAYの案内と、次の21時40分からの配信も確認しました。\n\n見どころ・タイムライン・実録画から選んだスクショ10枚を配信メモに掲載しています。投票先や無料ギフト審査とイベント審査の違いは、応援案内をご確認ください。",
+    sourceLabel: "10月3日SHOWROOM朝配信（保存録画・自動文字起こし）",
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-03-asa-showroom`,
+    ctaLabel: "朝配信のメモとスクショ10枚を見る",
+    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-still.jpg", width: 640, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
+  },
   {
     id: "2026-10-02-fourth-round-stream-schedule", date: "2026-10-02",
     activityIds: ["live-stream", "miss-circle"],

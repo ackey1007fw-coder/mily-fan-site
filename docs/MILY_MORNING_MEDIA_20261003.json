@@ -112,7 +112,7 @@
     }
   ],
   "cover": {
-    "file": "mily-20261003-morning-cover.png",
+    "file": "mily-b184-20261003-morning-cover.png",
     "size": [
       720,
       1280
@@ -120,7 +120,8 @@
     "source": "mily-b184-02-20261003-morning-still.jpg",
     "photo_pixels_identical": true,
     "formal_name": "Mily",
-    "visual_review": "720x1280 inspected; photo pixels unchanged; formal name Mily"
+    "visual_review": "720x1280 inspected; photo pixels unchanged; formal name Mily",
+    "public_path": "/media/live/mily-b184-20261003-morning-cover.png"
   },
   "published": false,
   "source": {
@@ -128,5 +129,6 @@
     "live_id": "23505265",
     "recording_start_jst": "2026-10-03T06:30:44+09:00",
     "time_basis": "video seek seconds; not ASR offsets; not exact wall-clock broadcast time"
-  }
+  },
+  "publication_state": "Draft PR; not merged"
 }

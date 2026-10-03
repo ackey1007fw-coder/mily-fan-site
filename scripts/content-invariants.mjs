@@ -173,7 +173,7 @@ function isInternalStoryHref(url) {
 }
 
 function assertNewsRelatedHref(url, label, id, errors) {
-  if (isSafeHttpUrl(url) || isInternalStoryHref(url)) return;
+  if (isSafeHttpUrl(url) || isInternalStoryHref(url) || url === "/support/") return;
   errors.push(`${label} "${id}" needs a confirmed http(s) URL or a local /stories/ path`);
 }
 
