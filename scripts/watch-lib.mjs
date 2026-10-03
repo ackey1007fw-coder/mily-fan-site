@@ -169,8 +169,11 @@ function normalizePhase(text) {
     if (!Number.isSafeInteger(number) || number <= 0) return null;
     phases.add(`第${number}次`);
   }
-  // 長い表記を先に消費し、セミファイナルをファイナルに含めない。
-  for (const match of normalized.matchAll(/セミファイナル|準決勝|ファイナル|決勝/gu)) {
+  // 複合表記を先に消費し、準々決勝等の末尾だけを決勝と誤認しない。
+  for (const match of normalized.matchAll(/準[々準]*決勝|予選決勝|セミファイナル|ファイナル|決勝/gu)) {
+    if (!["セミファイナル", "準決勝", "ファイナル", "決勝"].includes(match[0])) {
+      return null;
+    }
     phases.add(
       match[0] === "セミファイナル" || match[0] === "準決勝"
         ? "セミファイナル"
