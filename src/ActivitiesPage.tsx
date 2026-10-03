@@ -1,4 +1,6 @@
 import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
+import { RecapSourceInfo } from "./components/RecapSourceInfo";
+import { recapGalleryNote } from "./lib/recapSourceDisclosure";
 import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
@@ -509,10 +511,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
 
       <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
         {episode.nextEpisodeNote ? <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p> : null}
-        <p className="mt-3 text-xs leading-6 text-ink-muted">
-          出典: {episode.sourceLabel} · {formatDate(episode.verifiedAt)}確認
-        </p>
-        <p className="mt-2 text-xs leading-6 text-ink-muted">{episode.transcriptionNote}</p>
+        <RecapSourceInfo sourceLabel={episode.sourceLabel} verifiedAt={episode.verifiedAt} transcriptionNote={episode.transcriptionNote} medium="FMラジオ" />
       </div>
     </SectionShell>
   );
@@ -740,7 +739,7 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回のスクショ"
           id={`${recap.id}-stills`}
-          note={recap.galleryNote ?? `かわいいカットを${recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。`}
+          note={recapGalleryNote(recap.galleryNote, recap.gallery.length)}
         >
           <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
             {recap.gallery.map((still, index) => (
@@ -802,6 +801,7 @@ function StreamRecapArticle({
               </li>
             ))}
           </ul>
+          <p className="mt-2 text-xs leading-5 text-ink-muted">フォロワー数や目標の数字は配信時点の記録です。</p>
         </StreamRecapSection>
       ) : null}
 
@@ -840,12 +840,7 @@ function StreamRecapArticle({
         </details>
       ) : null}
 
-      <div className="mt-4 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
-        <p className="text-xs leading-5 text-ink-muted">
-          出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
-        </p>
-        <p className="mt-2 text-xs leading-5 text-ink-muted">{recap.transcriptionNote}</p>
-      </div>
+      <RecapSourceInfo sourceLabel={recap.sourceLabel} verifiedAt={recap.verifiedAt} transcriptionNote={recap.transcriptionNote} medium={recap.platformLabel} imageTimes={Boolean(recap.gallery?.some(image => /\d+:\d{2}/.test(image.caption ?? "")))} />
     </details>
   );
 }

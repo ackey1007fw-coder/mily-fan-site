@@ -7,6 +7,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
+import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
 import { ARCHIVE_LOAD_MORE_LABEL, ARCHIVE_PAGE_SIZE, NEWS_ARCHIVE_INITIAL } from "../src/lib/homePortal.ts";
 import { buildStreamSongCatalog, selectCatalogSongs } from "../src/lib/streamSongCatalog.ts";
 
@@ -214,7 +215,14 @@ try {
         await page.waitForFunction((hash) => document.querySelector(hash)?.open === true, hash);
         const recap = page.locator(hash);
         assert.ok((await recap.innerText()).includes(latest.summary));
-        assert.ok((await recap.innerText()).includes(latest.transcriptionNote));
+        const disclosure = recapSourceDisclosure(latest.sourceLabel, latest.transcriptionNote);
+        const sourceInfo = recap.locator('[data-recap-source]');
+        assert.ok((await sourceInfo.innerText()).includes(disclosure.material));
+        const verification = sourceInfo.locator('[data-recap-verification]');
+        assert.equal(await verification.evaluate(element => element.open), false);
+        await verification.locator('summary').click();
+        assert.equal(await verification.evaluate(element => element.open), true);
+        for (const text of disclosure.verification) assert.ok((await sourceInfo.innerText()).includes(text));
         for (const song of latest.songs ?? []) {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
