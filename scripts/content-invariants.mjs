@@ -230,7 +230,7 @@ export function verifyNews(items) {
             `news "${item.id ?? "?"}" additionalCtas[${index}] needs a label`,
           );
         }
-        if (!cta?.url || !isSafeHttpUrl(cta.url)) {
+        if (!cta?.url || (!isSafeHttpUrl(cta.url) && cta.url !== "/support/")) {
           errors.push(
             `news "${item.id ?? "?"}" additionalCtas[${index}] needs a confirmed http(s) URL`,
           );

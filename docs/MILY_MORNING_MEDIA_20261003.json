@@ -130,5 +130,25 @@
     "recording_start_jst": "2026-10-03T06:30:44+09:00",
     "time_basis": "video seek seconds; not ASR offsets; not exact wall-clock broadcast time"
   },
-  "publication_state": "Draft PR; not merged"
+  "publication_state": "Draft PR; not merged",
+  "social_cover": {
+    "file": "mily-b184-20261003-morning-cover-4x5.png",
+    "public_path": "/media/live/mily-b184-20261003-morning-cover-4x5.png",
+    "size": [
+      720,
+      900
+    ],
+    "photo_source": "mily-b184-02-20261003-morning-still.jpg",
+    "photo_pixels_identical": true,
+    "central_square_crop": [
+      0,
+      90,
+      720,
+      810
+    ],
+    "safe_crop_photo_pixels_identical": true,
+    "formal_name": "Mily",
+    "published": false,
+    "crop_visual_review": "full 4:5 and central 1:1 inspected; Mily/date/title/face visible; photo pixels preserved"
+  }
 }
