@@ -1,3 +1,4 @@
+import { tiktokCampusMakeupVideo } from "../data/tiktokCampusMakeupVideo.ts";
 /**
  * Gallery の表示用selector。
  *
@@ -117,6 +118,7 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: item.id,
       item,
     })),
+    ...(tiktokCampusMakeupVideo.published ? [{ kind: "tiktok" as const, key: tiktokCampusMakeupVideo.id, item: tiktokCampusMakeupVideo }] : []),
     ...(tiktokGoodVibesVideo.published ? [{
       kind: "tiktok" as const,
       key: tiktokGoodVibesVideo.id,

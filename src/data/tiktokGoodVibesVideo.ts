@@ -3,13 +3,13 @@ export type TikTokPostVideo = {
   id: string;
   postId: string;
   sourceUrl: string;
-  sourceDate: string;
+  sourceDate: string | null;
   alt: string;
   published: boolean;
 };
 
 /** Official player keeps attribution and licensed post audio on TikTok. */
-export const tiktokGoodVibesVideo: TikTokPostVideo = {
+export const tiktokGoodVibesVideo: TikTokPostVideo & { sourceDate: string } = {
   kind: "tiktok",
   id: "mily-tiktok-7689042883369880853",
   postId: "7689042883369880853",

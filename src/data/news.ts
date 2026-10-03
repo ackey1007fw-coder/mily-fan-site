@@ -1,3 +1,4 @@
+import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "./radio.ts";
 import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
@@ -218,6 +219,8 @@ export type NewsItem = {
   id: string;
   /** Display date, ISO `YYYY-MM-DD`. */
   date: string;
+  /** Confirmation date shown explicitly when the original publication date is unknown. */
+  dateBasis?: "confirmed-on";
   /** Explicit editorial order within the same date. Higher values appear first. */
   sameDayOrder?: number;
   /** Explicit Activity relations only. Absence means deliberately unclassified. */
@@ -247,6 +250,17 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-03-confirmed-tiktok-campus-makeup",
+    date: "2026-10-03",
+    dateBasis: "confirmed-on",
+    title: "大学に行くときは、薄いメイク💄",
+    body: "みりぃのTikTokに、大学へ行くときのメイクを紹介する短い動画が登場。10月3日に投稿内容を確認しました。投稿日は未確認です。元の動画はTikTok公式プレーヤーで見られます。",
+    source: tiktokCampusMakeupVideo.sourceUrl,
+    sourceLabel: "みりぃのTikTok投稿（投稿日未確認）",
+    media: tiktokCampusMakeupVideo,
+    message: { label: "みりぃの投稿本文", text: "大学に行く時はとにかくメイク薄い💄" },
+  },
   {
     id: "2026-10-03-morning-showroom-recap", date: "2026-10-03",
     activityIds: ["live-stream", "miss-circle"],

@@ -1,3 +1,6 @@
+import { tiktokCampusMakeupVideo } from "../../src/data/tiktokCampusMakeupVideo.ts";
+// This confirmed-on October 3 item did not exist in the historical September snapshot.
+tiktokCampusMakeupVideo.published = false;
 /**
  * Historical tests were written against the site as it stood on 2026-09-22.
  * Node runs test files in separate workers, so remove later records from
@@ -9,6 +12,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-03-confirmed-tiktok-campus-makeup",
   "2026-10-01-mixch-kossori",
   "2026-09-24-tiktok-good-vibes",
   "2026-09-27-radio-kawaii-story",

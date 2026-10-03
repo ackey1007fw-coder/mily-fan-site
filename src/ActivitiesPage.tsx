@@ -934,7 +934,7 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
           return (
             <li key={item.id} className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
               <time dateTime={item.date} className="text-xs text-ink-muted">
-                {formatDate(item.date)}
+                {item.dateBasis === "confirmed-on" ? "確認日 " : ""}{formatDate(item.date)}
               </time>
               <h3 className="mt-2 text-lg font-bold leading-relaxed text-ink">{item.title}</h3>
               <p className="mt-2 whitespace-pre-line text-sm leading-7 text-ink-muted">{item.body}</p>

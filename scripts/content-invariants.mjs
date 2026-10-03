@@ -321,7 +321,10 @@ export function verifyNews(items) {
         if (!canonicalPost || canonicalPost[1] !== media.postId) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs a confirmed TikTok post URL`);
         }
-        if (!media.id?.trim() || media.sourceDate !== item.date || media.published !== true) {
+        const matchingDate = media.sourceDate === null
+          ? item.dateBasis === "confirmed-on" && item.body.includes("投稿日は未確認")
+          : media.sourceDate === item.date;
+        if (!media.id?.trim() || !matchingDate || media.published !== true) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs id, matching sourceDate, and published status`);
         }
         if (slot === "media" && item.source !== media.sourceUrl) {
