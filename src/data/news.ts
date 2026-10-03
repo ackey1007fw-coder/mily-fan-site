@@ -22,6 +22,7 @@ import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
+import { site } from "./site.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -247,12 +248,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-03-morning-showroom-recap", date: "2026-10-03",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "四次審査の朝、歌とキラキラへのありがとう",
+    body: "10月3日朝のSHOWROOM配信を振り返ります。朝から届く応援や投票報告にお礼を伝え、歌とやりとりで盛り上がった約60分。1.2倍DAYの案内と、次の21時40分からの配信も確認しました。\n\n見どころ・タイムライン・実録画から選んだスクショ10枚を配信メモに掲載しています。投票先や無料ギフト審査とイベント審査の違いは、応援案内をご確認ください。",
+    sourceLabel: "10月3日SHOWROOM朝配信（保存録画・自動文字起こし）",
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-03-asa-showroom`,
+    ctaLabel: "朝配信のメモとスクショ10枚を見る",
+    additionalCtas: [{ label: "投票・無料ギフト・イベント審査の案内", url: "/support/" }],
+    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-still.jpg", width: 640, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
+  },
+  {
     id: "2026-10-02-fourth-round-stream-schedule", date: "2026-10-02",
     activityIds: ["live-stream", "miss-circle"],
     title: "四次審査前半・10月3日〜7日の配信予定",
-    body: "みりぃが四次審査前半の配信予定を案内しました。10月3日は6:30〜7:30と21:40〜22:40。5日間の13枠をHOMEの予定一覧に掲載しています。時刻は2026年・JSTです。4日・7日の朝枠は画像に「きっかけ」と表記されています。\n\n画像の「3日と8日は1.2倍DAY」はSHOWROOMイベント審査の獲得ポイントの案内です。公式の対象時間は各05:00〜23:59。無料ギフト審査とイベント審査の違い・集計の注意は応援案内をご確認ください。8日の配信時刻はこの画像では未案内です。\n\n10月2日の本人告知に基づく予定です。変更は本人の最新Xをご確認ください。画像は全体を表示し、タップすると原寸で開けます。",
+    body: "みりぃが四次審査前半の配信予定を案内しました。10月3日は6:30〜7:30と21:40〜22:40。本人画像では5日間の13枠を案内しています。HOMEの予定一覧には終了予定時刻前の枠を表示します。時刻は2026年・JSTです。4日・7日の朝枠は画像に「きっかけ」と表記されています。\n\n画像の「3日と8日は1.2倍DAY」はSHOWROOMイベント審査の獲得ポイントの案内です。公式の対象時間は各05:00〜23:59。無料ギフト審査とイベント審査の違い・集計の注意は応援案内をご確認ください。8日の配信時刻はこの画像では未案内です。\n\n10月2日の本人告知に基づく予定です。変更は本人の最新Xをご確認ください。画像は全体を表示し、タップすると原寸で開けます。",
     source: FOURTH_ROUND_SCHEDULE_X_URL, sourceLabel: "本人Xの予定案内",
     media: fourthRoundScheduleNewsImage,
+    relatedUrl: "/support/", ctaLabel: "投票・無料ギフト・イベント審査の案内",
   },
   {
     id: "2026-10-01-mixch-kossori",

@@ -1,0 +1,154 @@
+{
+  "photos": [
+    {
+      "file": "mily-b184-01-20261003-morning-still.jpg",
+      "source_seconds": 30,
+      "sha256": "16e32089d4bb1566da6cc324ff80b83ffa78f0c2b804dcbaea13a439deea4406",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-02-20261003-morning-still.jpg",
+      "source_seconds": 360,
+      "sha256": "faeb81ad726e243076dda3d227593b282a7a1f6b9dafd3dbdaab6c6d76803dc8",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-03-20261003-morning-still.jpg",
+      "source_seconds": 540,
+      "sha256": "f05b480f554ab20100cc1a07700dd8b463eb1f2145403505e7e42c3a02268e4f",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-04-20261003-morning-still.jpg",
+      "source_seconds": 2880,
+      "sha256": "bef8903ba9022736edde480172bf5338a94420d5d92a9fe29184c1907cf58e22",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-05-20261003-morning-still.jpg",
+      "source_seconds": 1440,
+      "sha256": "5dd5d1fe6b978d61f151f057996b2c863b35cc20da8bbcdaddce398ea9e6cfa8",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-06-20261003-morning-still.jpg",
+      "source_seconds": 1620,
+      "sha256": "1de5196394d2b17ae314d4d166756e301bdc20d095a9a931ba4989d48789d853",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-07-20261003-morning-still.jpg",
+      "source_seconds": 1800,
+      "sha256": "686d0fc1a212b8f86fd64da9fb09419d32cac6e69796d051ab7b81ea1ef9ed0f",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-08-20261003-morning-still.jpg",
+      "source_seconds": 2700,
+      "sha256": "f383c87abe34b1dd426252200b097385c1b48c074796d1db0320cae677fceba0",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-09-20261003-morning-still.jpg",
+      "source_seconds": 3240,
+      "sha256": "8c9eb36d7e24e98787b52916b64aa9dbb1d7fd1f05fa0e67c8a80ec04ef0317d",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    },
+    {
+      "file": "mily-b184-10-20261003-morning-still.jpg",
+      "source_seconds": 3580,
+      "sha256": "f9fc91c312bedeab0ad25216dee4a7b375a04c8bcf754416315c15d0108aa525",
+      "size": [
+        640,
+        360
+      ],
+      "source_identical": true,
+      "visual_review": "individually reviewed at original 640x360; no viewer UI or third party; eye-closed provisional frame replaced"
+    }
+  ],
+  "cover": {
+    "file": "mily-b184-20261003-morning-cover.png",
+    "size": [
+      720,
+      1280
+    ],
+    "source": "mily-b184-02-20261003-morning-still.jpg",
+    "photo_pixels_identical": true,
+    "formal_name": "Mily",
+    "visual_review": "720x1280 inspected; photo pixels unchanged; formal name Mily",
+    "public_path": "/media/live/mily-b184-20261003-morning-cover.png"
+  },
+  "published": false,
+  "source": {
+    "file": "mily_showroom_2026-10-03_06-30-44_live23505265.mkv",
+    "live_id": "23505265",
+    "recording_start_jst": "2026-10-03T06:30:44+09:00",
+    "time_basis": "video seek seconds; not ASR offsets; not exact wall-clock broadcast time"
+  },
+  "publication_state": "Draft PR; not merged",
+  "social_cover": {
+    "file": "mily-b184-20261003-morning-cover-4x5.png",
+    "public_path": "/media/live/mily-b184-20261003-morning-cover-4x5.png",
+    "size": [
+      720,
+      900
+    ],
+    "photo_source": "mily-b184-02-20261003-morning-still.jpg",
+    "photo_pixels_identical": true,
+    "central_square_crop": [
+      0,
+      90,
+      720,
+      810
+    ],
+    "safe_crop_photo_pixels_identical": true,
+    "formal_name": "Mily",
+    "published": false,
+    "crop_visual_review": "full 4:5 and central 1:1 inspected; Mily/date/title/face visible; photo pixels preserved"
+  }
+}

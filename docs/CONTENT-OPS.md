@@ -2211,3 +2211,10 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 2. Xは応援用アカウントの正規画面へサインインしたうえで、直前の予約・処理中・既存投稿を再照合し、完成した4枚と本文を一度だけ送信する。
 3. 送信直前に全一覧を取得し直す。Instagramは`pnpm social:preflight <private-plan.json> --media scripts/social-report-media-20261002-night.json --ledger <private-current-ledger.json>`を成功させてから、完成payloadで一度だけ投稿または将来時刻へ予約する。過去のsnapshotをfreshと扱わない。
 4. 返却job／requestと予約一覧・公開URLを読戻し、4状態の適切な値で台帳を更新する。正式表紙・枚数・順序・本文・mention・本人タグ・サイト導線の実画面確認後だけ`published_verified`へ進める。未確認なら不足項目を明記して保持する。
+
+
+## 2026-10-03 09:13 JST — 朝配信メモと既存10/2朝Instagram予約の結果
+
+- 新しい朝live23505265はPR388で制作。画像10枚、Mily表紙、元録画秒順gallery、ASR要約の見どころ/timeline、NEWSからの導線。公開はcurrent-head品質確認後。PR386追補4件を別commitに分けた。
+- 既存の10/2朝Instagram予約job33d2...は親native担当が09:01:45 publishedを確認。URL https://www.instagram.com/p/DeAuXhdjKT1/ 。正式表紙、10枚順cover→01..09、欠落・文字化けなし、本文が10/2朝と一致、本人mentionリンクとprofileのファンサイト導線を確認したとの報告。
+- captionの記事URLは外部クリックリンクとしては機能せず、profile導線を確認。人物photo tagは未確認。この担当は送信・予約変更・削除・再投稿をしていない。これを今回10/3朝投稿の完了として扱わない。

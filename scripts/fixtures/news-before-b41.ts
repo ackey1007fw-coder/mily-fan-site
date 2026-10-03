@@ -1,5 +1,7 @@
 export * from "../../src/data/news.ts";
-import { news as currentNews } from "../../src/data/news.ts";
+import { news as liveNews } from "../../src/data/news.ts";
+// Preserve the historical NEWS snapshot before the October 3 morning recap.
+const currentNews = liveNews.filter(({ id }) => id !== "2026-10-03-morning-showroom-recap");
 
 const laterNewsIds = new Set([
   "2026-10-02-fourth-round-stream-schedule",
