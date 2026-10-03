@@ -8,7 +8,7 @@ import { site } from "../data/site";
 import { supportEvents } from "../data/supportEvents";
 import {
   selectHomeVoteActions,
-  selectHomeVoteSpotlight,
+  selectHomePrioritySupport,
 } from "../lib/homePortal";
 import { selectHomeHeroNews } from "../lib/patonVoteLiveCopy";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
@@ -28,7 +28,7 @@ export function Hero() {
     links,
     now,
   });
-  const spotlight = selectHomeVoteSpotlight({
+  const spotlight = selectHomePrioritySupport({
     contest,
     supportEvents,
     links,

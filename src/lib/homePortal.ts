@@ -49,6 +49,7 @@ export type HomeVoteAction = {
 };
 
 export type HomeVoteSpotlight = {
+  kind?: "vote" | "support";
   state: "upcoming" | "live";
   eyebrow: string;
   title: string;
@@ -139,6 +140,31 @@ export function selectHomeVoteSpotlight(input: {
   }
 
   return null;
+}
+
+/** 本人の希望に合わせ、受付中の投票を最優先。終了後は有効な応援だけを案内する。 */
+export function selectHomePrioritySupport(input: Parameters<typeof selectHomeVoteSpotlight>[0]): HomeVoteSpotlight | null {
+  const vote = selectHomeVoteSpotlight(input);
+  if (vote?.state === "live") {
+    return { ...vote, kind: "vote", eyebrow: "いま一番お願いしたい応援", title: "三橋莉子にWEB投票をお願いします" };
+  }
+  const active = input.supportEvents
+    .filter((event) => event.kind !== "result" && displayStatus(event.schedule, input.now) === "live")
+    .sort((a, b) => Number(b.kind === "vote") - Number(a.kind === "vote") || (b.priority ?? 0) - (a.priority ?? 0));
+  for (const event of active) {
+    const link = input.links.find(({ id }) => id === event.ctaLinkId);
+    if (!link) continue;
+    const deadline = formatScheduleEndLabel(event.schedule);
+    return {
+      kind: event.kind === "vote" ? "vote" : "support",
+      state: "live",
+      eyebrow: "いまお願いしたい応援",
+      title: event.title,
+      note: [event.note, deadline ? `締切 ${deadline}` : null].filter(Boolean).join("\n"),
+      action: { label: link.label, mobileLabel: link.label, url: link.url },
+    };
+  }
+  return vote;
 }
 
 function contestVoteAction(contest: Contest): HomeVoteAction {

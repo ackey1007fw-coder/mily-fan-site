@@ -10,9 +10,9 @@
 - 各件は published_unverified。独立YouTube画面では対象ページ・配信日・要約区別・正recapクリックリンクを確認、実再生・cover/同期は未確認。TikTok正式permalinkで夜朝の実再生・日付・Mily・要約を確認。mention不整合・記事URL非クリック・専用cover/同期など未検証項目を残す。旧shareURLのredirect/profileエラーは初回検品の履歴。正式permalinkは接続済recent media APIで取得して台帳に保存。既存Instagram投稿は変更・再投稿しない。
 - safearea修正版は原音開始時刻・長さ・フレーム数一致、最後まで機械再生成功。AI実聴とは区別。TikTokは20→23fps変換、変換後の原音/PTS/字幕同期は未測定。YouTubeは変換なし。
 
-- 2026-10-02-night-showroom / tiktok / 2026-10-03T12:53:42.503+09:00: https://www.tiktok.com/t/7692284470770109697 / media `7692284470770109697` / job `892eed8ef0e34933b956c1caf6e315c7` / request `a060d00c9fbb4467811569a835e1e2f1`
+- 2026-10-02-night-showroom / tiktok / 2026-10-03T12:53:42.503+09:00: https://www.tiktok.com/@ackeytan_/video/7692284470770109697 / media `7692284470770109697` / job `892eed8ef0e34933b956c1caf6e315c7` / request `a060d00c9fbb4467811569a835e1e2f1`
 - 2026-10-02-night-showroom / youtube / 2026-10-03T12:53:18.103+09:00: https://www.youtube.com/watch?v=U0pQNKgr5yo / media `U0pQNKgr5yo` / job `6419fa33dce64bf0a6d34fec8ea9bffc` / request `6d9490ee60db44e79844e7b3084352f2`
-- 2026-10-03-asa-showroom / tiktok / 2026-10-03T12:55:25.788+09:00: https://www.tiktok.com/t/7692284782541098241 / media `7692284782541098241` / job `43d5047ea2fc427fabe59804c80450eb` / request `4a2172bd2f2346ef8f7f292f19afcd0c`
+- 2026-10-03-asa-showroom / tiktok / 2026-10-03T12:55:25.788+09:00: https://www.tiktok.com/@ackeytan_/video/7692284782541098241 / media `7692284782541098241` / job `43d5047ea2fc427fabe59804c80450eb` / request `4a2172bd2f2346ef8f7f292f19afcd0c`
 - 2026-10-03-asa-showroom / youtube / 2026-10-03T12:54:28.872+09:00: https://www.youtube.com/watch?v=Bnv7uihCrDQ / media `Bnv7uihCrDQ` / job `12e4004af86745138b06d544a58e2552` / request `93ce469672ac46269bfc5cf129b75120`
 
 - YouTube URLはAPI返却の公開トーク2件を記録。過去の私的録画・歌唱アーカイブの禁止は維持。詳細台帳: `scripts/social-report-publications.json`。個人保存先・原録画・認証情報は公開repoに含めない。
@@ -2237,3 +2237,9 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - 新しい朝live23505265はPR388で制作。画像10枚、Mily表紙、元録画秒順gallery、ASR要約の見どころ/timeline、NEWSからの導線。公開はcurrent-head品質確認後。PR386追補4件を別commitに分けた。
 - 既存の10/2朝Instagram予約job33d2...は親native担当が09:01:45 publishedを確認。URL https://www.instagram.com/p/DeAuXhdjKT1/ 。正式表紙、10枚順cover→01..09、欠落・文字化けなし、本文が10/2朝と一致、本人mentionリンクとprofileのファンサイト導線を確認したとの報告。
 - captionの記事URLは外部クリックリンクとしては機能せず、profile導線を確認。人物photo tagは未確認。この担当は送信・予約変更・削除・再投稿をしていない。これを今回10/3朝投稿の完了として扱わない。
+
+## 2026-10-03 本人希望：その時点の最優先応援をトップへ
+
+ホームと応援ページは既存の案内カードを共有し、確認済み受付期間中の三橋莉子・ENTRY 734のWEB投票を最優先に表示する。本人の音声で「投票が一番大事」「その時一番応援してもらいたいものをトップに」と指定された。投票終了後は直接投票URLを残さず、確認済みの有効な応援へ切り替える。日程未確認・リンク未確認・終了した応援は切替先に使わない。最新レポート・公開切抜き・予定と既存の応援方法はその下に保持する。
+
+四次WEB投票は主催者公式SCHEDULE（https://www.misscircle.jp/）の10月2日12:00〜10月12日23:59を再確認。既存のENTRY 734確認済み投票URLと三次履歴を維持し、投票操作は実行しない。自動SNS投稿の稼働状態とは別の表示変更である。

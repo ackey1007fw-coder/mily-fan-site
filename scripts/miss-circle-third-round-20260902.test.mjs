@@ -483,7 +483,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       "utf8",
     );
     const support = await readFile(path.join(root, "src/SupportPage.tsx"), "utf8");
-    assert.match(spotlight, /data-vote-state=\{spotlight\.state\}/);
+    assert.match(spotlight, /data-vote-state=\{spotlight\.kind === "support" \? undefined : spotlight\.state\}/);
     assert.match(spotlight, /border-2 border-apricot/);
     assert.match(spotlight, /bg-apricot-ink[^\n]+text-white/);
     assert.match(hero, /<VoteSpotlight/);
