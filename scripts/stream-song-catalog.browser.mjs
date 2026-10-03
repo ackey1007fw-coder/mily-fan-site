@@ -222,7 +222,7 @@ try {
         assert.equal(await verification.evaluate(element => element.open), false);
         await verification.locator('summary').click();
         assert.equal(await verification.evaluate(element => element.open), true);
-        for (const text of disclosure.verification) assert.ok((await verification.innerText()).includes(text));
+        for (const text of disclosure.verification) assert.ok((await sourceInfo.innerText()).includes(text));
         for (const song of latest.songs ?? []) {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
