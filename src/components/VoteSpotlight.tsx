@@ -49,6 +49,27 @@ export function VoteSpotlight({
           {spotlight.action.label}
         </ExternalLink>
       </div>
+      {spotlight.dailyVote ? (
+        <div className="mt-5 border-t border-apricot/40 pt-4">
+          <p className="text-base font-bold leading-7 text-ink">{spotlight.dailyVote.dailyLabel}</p>
+          <p className="mt-1 text-sm font-semibold text-apricot-ink">{spotlight.dailyVote.deadline}</p>
+          <p className="mt-3 text-sm leading-7 text-ink-muted">{spotlight.dailyVote.benefitNote}</p>
+          <ExternalLink href={spotlight.dailyVote.announcement.url} className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline">
+            {spotlight.dailyVote.announcement.label}
+          </ExternalLink>
+          <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            {spotlight.dailyVote.contacts.map((contact) => (
+              <ExternalLink key={contact.id} href={contact.url} className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft">
+                {contact.label}
+              </ExternalLink>
+            ))}
+          </div>
+          <p className="mt-3 text-xs leading-6 text-ink-muted">
+            {spotlight.dailyVote.ruleNote}{" "}
+            <ExternalLink href={spotlight.dailyVote.dailySource.url} className="font-semibold text-sage-deep underline">{spotlight.dailyVote.dailySource.label}</ExternalLink>
+          </p>
+        </div>
+      ) : null}
     </aside>
   );
 }
