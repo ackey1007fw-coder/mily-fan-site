@@ -11,11 +11,11 @@
 - safearea修正版は原音開始時刻・長さ・フレーム数一致、最後まで機械再生成功。AI実聴とは区別。TikTokは20→23fps変換、変換後の原音/PTS/字幕同期は未測定。YouTubeは変換なし。
 
 - 2026-10-02-night-showroom / tiktok / 2026-10-03T12:53:42.503+09:00: https://www.tiktok.com/t/7692284470770109697 / media `7692284470770109697` / job `892eed8ef0e34933b956c1caf6e315c7` / request `a060d00c9fbb4467811569a835e1e2f1`
-- 2026-10-02-night-showroom / youtube / 2026-10-03T12:53:18.103+09:00: https://www.youtube.com/shorts/U0pQNKgr5yo / media `U0pQNKgr5yo` / job `6419fa33dce64bf0a6d34fec8ea9bffc` / request `6d9490ee60db44e79844e7b3084352f2`
+- 2026-10-02-night-showroom / youtube / 2026-10-03T12:53:18.103+09:00: https://www.youtube.com/watch?v=U0pQNKgr5yo / media `U0pQNKgr5yo` / job `6419fa33dce64bf0a6d34fec8ea9bffc` / request `6d9490ee60db44e79844e7b3084352f2`
 - 2026-10-03-asa-showroom / tiktok / 2026-10-03T12:55:25.788+09:00: https://www.tiktok.com/t/7692284782541098241 / media `7692284782541098241` / job `43d5047ea2fc427fabe59804c80450eb` / request `4a2172bd2f2346ef8f7f292f19afcd0c`
-- 2026-10-03-asa-showroom / youtube / 2026-10-03T12:54:28.872+09:00: https://www.youtube.com/shorts/Bnv7uihCrDQ / media `Bnv7uihCrDQ` / job `12e4004af86745138b06d544a58e2552` / request `93ce469672ac46269bfc5cf129b75120`
+- 2026-10-03-asa-showroom / youtube / 2026-10-03T12:54:28.872+09:00: https://www.youtube.com/watch?v=Bnv7uihCrDQ / media `Bnv7uihCrDQ` / job `12e4004af86745138b06d544a58e2552` / request `93ce469672ac46269bfc5cf129b75120`
 
-- YouTube短編のdocsリンクはShorts表示、APIが返したwatch URLは詳細台帳にそのまま保持。詳細台帳: `scripts/social-report-publications.json`。個人保存先・原録画・認証情報は公開repoに含めない。
+- YouTube URLはAPI返却の公開トーク2件を記録。過去の私的録画・歌唱アーカイブの禁止は維持。詳細台帳: `scripts/social-report-publications.json`。個人保存先・原録画・認証情報は公開repoに含めない。
 
 # メディア運用ガイド — mily-fan-site
 
