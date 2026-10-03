@@ -4,9 +4,9 @@
     "platform": "instagram",
     "account": "ackeytan_0720",
     "state": "scheduled",
-    "jobId": "1e65617b9dcb4394b24056dcdf253948",
+    "jobId": "33d2a92ad07c42989cef9272f6b62deb",
     "scheduledDate": "2026-10-03T09:00:00+09:00",
-    "note": "旧カバーなし予約。新カバー準備と予約変更は別状態。cancel・再予約未実施。"
+    "note": "2026-10-03 08:40 JSTの予約一覧・job詳細で朝記事URL、正式表紙の素材名、09:00 JST、queued／scheduler pendingを読戻し。旧jobは現予約一覧にないが、この作業による取消成功とは扱わない。公開実画面・全画像順序・本人タグは未確認。"
   },
   {
     "recapId": "2026-10-01-night-showroom",
