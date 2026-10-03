@@ -1,3 +1,9 @@
+### TikTok独立native確認後の残件
+
+- 夜・朝の正式permalinkで実再生成功、日付・Mily・要約表示を確認。両captionの実mentionは `@seasidecircle`。既存TikTok投稿captionから流用し、通常SHOWROOMへの機械的流用禁止と対象本人指定の照合が不足した。published_unverifiedを維持。
+- recap URLは非クリックで #recap タグ化。専用cover・一覧重複・公開後原音/PTS/字幕同期は未検証。公開済み投稿のedit/delete/repostはしていない。
+- 接続済Upload-Postの編集toolはpending scheduled post対象のみ。公開済caption/mention変更の正規API操作は確認できていない。native編集可否は未確認で、権限や削除再投稿による回避をしない。
+
 ## 2026-10-03 トーク縦動画4件の公開結果（API確認）
 
 - 10/2夜10.25秒・10/3朝18.65秒の既存トークのみ。最新明示承認後、対象重複・予約・処理中なしを確認して各1回送信。歌唱・本人TikTok再投稿は含めない。

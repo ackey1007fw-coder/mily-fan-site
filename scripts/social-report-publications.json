@@ -56,7 +56,7 @@
     "mediaId": "7692284470770109697",
     "publishedUrl": "https://www.tiktok.com/@ackeytan_/video/7692284470770109697?utm_campaign=tt4d_open_api&utm_source=7529407175366705169",
     "publishedAt": "2026-10-03T12:53:42.503+09:00",
-    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 正式permalinkは接続済recent media APIの返値と一致。独立nativeでは旧shareURLがおすすめへredirectし、profileエラーで未検品。"
+    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 正式permalinkは接続済recent media APIの返値と一致。独立nativeでは旧shareURLがおすすめへredirectし、profileエラーで未検品。 独立nativeで夜朝の実再生と日付・Mily・要約を確認。captionは@seasidecircle実mention、通常SHOWROOMへの機械的流用禁止指示との不整合。recapURLは非クリック/#recapタグ化。専用cover・一覧重複・公開後原音/PTS/字幕同期は未検証。caption採用は既存TikTok投稿からの流用で対象本人指定照合が不足。公開済edit/delete/repostは未実施。"
   },
   {
     "recapId": "2026-10-02-night-showroom",
@@ -82,7 +82,7 @@
     "mediaId": "7692284782541098241",
     "publishedUrl": "https://www.tiktok.com/@ackeytan_/video/7692284782541098241?utm_campaign=tt4d_open_api&utm_source=7529407175366705169",
     "publishedAt": "2026-10-03T12:55:25.788+09:00",
-    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 正式permalinkは接続済recent media APIの返値と一致。独立nativeでは旧shareURLがおすすめへredirectし、profileエラーで未検品。"
+    "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 正式permalinkは接続済recent media APIの返値と一致。独立nativeでは旧shareURLがおすすめへredirectし、profileエラーで未検品。 独立nativeで夜朝の実再生と日付・Mily・要約を確認。captionは@seasidecircle実mention、通常SHOWROOMへの機械的流用禁止指示との不整合。recapURLは非クリック/#recapタグ化。専用cover・一覧重複・公開後原音/PTS/字幕同期は未検証。caption採用は既存TikTok投稿からの流用で対象本人指定照合が不足。公開済edit/delete/repostは未実施。"
   },
   {
     "recapId": "2026-10-03-asa-showroom",
