@@ -18,10 +18,10 @@ export function VoteSpotlight({
 
   return (
     <aside
-      aria-label="MISS CIRCLE WEB投票のご案内"
+      aria-label={spotlight.kind === "support" ? "いまお願いしたい応援" : "MISS CIRCLE WEB投票のご案内"}
       aria-live="polite"
       aria-atomic="true"
-      data-vote-state={spotlight.state}
+      data-vote-state={spotlight.kind === "support" ? undefined : spotlight.state}
       className={`${className} overflow-hidden rounded-3xl border-2 border-apricot bg-gradient-to-br from-apricot-soft via-paper-card to-sage-soft/70 p-5 shadow-card sm:p-6`}
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">

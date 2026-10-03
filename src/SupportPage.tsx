@@ -13,7 +13,7 @@ import { contest } from "./data/contest";
 import { events } from "./data/events";
 import { links } from "./data/links";
 import { supportEvents } from "./data/supportEvents";
-import { selectHomeVoteSpotlight } from "./lib/homePortal";
+import { selectHomePrioritySupport } from "./lib/homePortal";
 import {
   activityRouteForSupport,
   selectSupportNow,
@@ -209,7 +209,7 @@ export default function SupportPage() {
     daysAhead: radioOccurrenceDaysAhead,
   });
   const pendingItems = calendar.pending;
-  const voteSpotlight = selectHomeVoteSpotlight({
+  const voteSpotlight = selectHomePrioritySupport({
     contest,
     supportEvents,
     links,
@@ -226,15 +226,16 @@ export default function SupportPage() {
       </a>
       <Header />
       <main id="support-main">
-        <SupportHero />
         {voteSpotlight ? (
-          <div className="px-4 pb-4">
+          <div className="px-4 pb-4 pt-6">
             <VoteSpotlight
               spotlight={voteSpotlight}
               className="mx-auto max-w-3xl"
+              headingAs="p"
             />
           </div>
         ) : null}
+        <SupportHero />
         <FourthRoundSupportGuide />
         <PatonVoteGuide />
         <ShowroomAdRewardGuide />
