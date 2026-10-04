@@ -31,7 +31,10 @@ try {
         const isMusic = route.endsWith('/music/');
         if (!isMusic) {
           for (const recap of radioEpisodes.filter(item => !radioMusicEpisodes.some(music => music.id === item.id))) {
-            assert.equal(await page.locator(`section[aria-labelledby="${recap.id}-songs"]`).count(), 0, "未確認の曲目セクションは表示しない");
+            const unknownSongs = page.locator(`section[aria-labelledby="${recap.id}-songs"]`);
+            assert.equal(await unknownSongs.count(), 1, "既存の曲目確認中の案内を表示する");
+            assert.match(await unknownSongs.innerText(), /曲目は確認中/);
+            assert.equal(await unknownSongs.getByRole('link', { name: 'YouTubeで聴く' }).count(), 0, "未確認の曲リンクを作らない");
             assert.equal(await page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`).count(), 1, "曲目未確認でも放送メモは表示する");
           }
         }
