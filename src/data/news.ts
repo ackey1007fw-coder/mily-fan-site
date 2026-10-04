@@ -253,6 +253,14 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-04-day-showroom-recap", date: "2026-10-04", sameDayOrder: 1040,
+    activityIds: ["live-stream"], title: "昼の歌とおしゃべり、応援ありがとう",
+    body: "午前のラジオを終えた昼のSHOWROOM。星や投票へのお礼、声の話、クマを楽しむやりとりを振り返ります。当日の実フレーム6枚と、自動文字起こしをもとにした配信メモです。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-20261004-day-09-still.jpg", width: 640, height: 360, alt: "昼配信で大きな笑顔を見せるみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-day-showroom`, ctaLabel: "昼の配信メモを見る",
+  },
+  {
     id: "2026-10-04-confirmed-vote-support-video",
     date: "2026-10-04",
     dateBasis: "confirmed-on",
