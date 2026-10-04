@@ -256,8 +256,8 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 export const news: NewsItem[] = [
   {
     id: "2026-10-04-night-showroom-recap", date: "2026-10-04", sameDayOrder: 2230,
-    activityIds: ["live-stream"], title: "夜のラジオの余韻と、みんなへのありがとう",
-    body: "ラジオ1周年の振り返り、服の色の見え方、昼の配信枠や応援の輪を広げたいという思い。夜のSHOWROOMを、自動文字起こしをもとにした配信メモと当日の実フレーム8枚で振り返ります。",
+    activityIds: ["live-stream"], title: "ラジオの余韻が残る夜、みんなへのありがとう",
+    body: "ラジオ1周年の振り返りに、画面越しの服の色や締めの言い間違いの話も。来られる時間に合わせた配信と、応援の輪を広げたい思いを、配信メモと当日の実写真8枚で振り返ります。",
     sourceLabel: "当日の保存録画・自動文字起こし",
     media: { kind: "image", src: "/media/live/mily-b190-05-20261004-night-still.jpg", width: 380, height: 360, alt: "夜配信でマイクに手を添えて笑うみりぃ" },
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-night-showroom`, ctaLabel: "夜の配信メモと写真を見る",
