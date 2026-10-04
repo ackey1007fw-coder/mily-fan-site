@@ -307,7 +307,7 @@ export const news: NewsItem[] = [
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-03-asa-showroom`,
     ctaLabel: "朝配信のメモとスクショ10枚を見る",
     additionalCtas: [{ label: "投票・無料ギフト・イベント審査の案内", url: "/support/" }],
-    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-20261004-day-still.jpg", width: 640, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
+    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-still.jpg", width: 640, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
   },
   {
     id: "2026-10-02-fourth-round-stream-schedule", date: "2026-10-02",
