@@ -27,6 +27,7 @@ export type RadioEpisode = {
   broadcastLabel: string;
   presenters: string[];
   summary: string;
+  highlightsLabel?: string;
   milyHighlights: RadioEpisodeHighlight[];
   listenerMessages: RadioEpisodeMessage[];
   timeline: RadioEpisodeTimelineItem[];

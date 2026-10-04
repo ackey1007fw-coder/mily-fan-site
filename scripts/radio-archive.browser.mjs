@@ -58,6 +58,31 @@ try {
           }
         }
         if (!isMusic) {
+          const anniversary = radioEpisodes.find(item => item.date === '2026-10-04');
+          const anniversaryHighlights = page.locator(`section[aria-labelledby="${anniversary.id}-mily-highlights"]`);
+          const anniversaryMessages = page.locator(`section[aria-labelledby="${anniversary.id}-listener-messages"]`);
+          assert.equal(await anniversaryHighlights.locator('li').count(), 16);
+          assert.equal(await anniversaryMessages.locator('li').count(), 5);
+          assert.equal(await anniversaryHighlights.locator('h3').innerText(), '番組の見どころ');
+          for (const [section, items] of [[anniversaryHighlights, anniversary.milyHighlights], [anniversaryMessages, anniversary.listenerMessages]]) {
+            const text = await section.innerText();
+            for (const item of items) assert.ok(text.includes(item.body), `${item.title}: full body rendered`);
+          }
+          const anniversarySection = anniversaryHighlights.locator('xpath=ancestor::section[1]');
+          const anniversaryTimeline = anniversarySection.locator('details').filter({ hasText: '主なコーナーとタイムスタンプを見る' });
+          const timelineToggle = anniversaryTimeline.locator('summary');
+          assert.equal(await anniversaryTimeline.evaluate(element => element.open), false);
+          await timelineToggle.click();
+          assert.equal(await anniversaryTimeline.locator('li').count(), 16);
+          const timelineText = await anniversaryTimeline.innerText();
+          for (const item of anniversary.timeline) assert.ok(timelineText.includes(item.label), item.label);
+          assert.ok(timelineText.includes('2年目へ向かうエンディング'));
+          await timelineToggle.click();
+          assert.equal(await anniversaryTimeline.evaluate(element => element.open), false);
+          await timelineToggle.click();
+          assert.equal(await anniversaryTimeline.evaluate(element => element.open), true);
+          await anniversaryHighlights.screenshot({ path: join(output, `${engine}-${width}-anniversary-highlights.png`) });
+          await anniversaryMessages.screenshot({ path: join(output, `${engine}-${width}-anniversary-messages.png`) });
           const recap = radioEpisodes.find(item => item.date === '2026-09-13');
           const highlights = page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`);
           assert.equal(await highlights.locator('li').count(), 11);
