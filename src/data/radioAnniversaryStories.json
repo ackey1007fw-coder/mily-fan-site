@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mily-b186-01-radio-anniversary-story",
+    "kind": "video",
+    "alt": "スタジオのMily・マナティ・もこの3人と、湘南シーサイドサークル1周年、トークテーマ「湘南シーサイドサークル」の案内を表示する縦型動画",
+    "src": "/media/gallery/mily-b186-01-radio-anniversary-story.mp4",
+    "poster": "/media/gallery/mily-b186-01-radio-anniversary-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-04",
+    "activityIds": ["radio"],
+    "published": true
+  },
+  {
+    "id": "mily-b186-02-radio-message-story",
+    "kind": "video",
+    "alt": "スタジオでピースする2人と、「メッセージはこちらから送れます」のお便り案内を表示する縦型動画",
+    "src": "/media/gallery/mily-b186-02-radio-message-story.mp4",
+    "poster": "/media/gallery/mily-b186-02-radio-message-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-04",
+    "activityIds": ["radio"],
+    "published": true
+  }
+]

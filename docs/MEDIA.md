@@ -1,3 +1,12 @@
+## 素材台帳（batch b186 / 受領日 2026-10-04）
+
+- オーナーが直接提供し、既存ファンサイトへの掲載を依頼したInstagram Story動画2本。1周年・テーマ案内（b186-01）とお便り募集（b186-02）。NEWS／HOMEとGalleryは同じMP4・posterを共有する。
+- 元投稿の恒久URL・投稿日・Storyスタンプのリンク先は未確認。manifestのsourceDateはnull、receivedDateは2026-10-04。NEWSは確認日として表示。新たな出演・放送予定を認定しない。
+- 0／5／10／15／19秒の実フレームを目視。スタジオの公開出演者・番組の案内のみ。閲覧者UI・私的連絡先・非公開DMはない。顔の生成・補正・クロップなし、元の512×910画角を維持。
+- 原本は無改変でgitignore対象のmedia/originalに保持。公開派生は未確認BGMを除いたvideo-only。H.264 Constrained Baseline／yuv420p／faststart、metadata・chapters除去。両動画の映像トラックは元と同じ571フレーム・19.033333秒、全尺デコード成功。原本の19.918345秒は音声を含むコンテナ尺であり、映像を切り詰めた差ではない。posterは公開派生の2秒の実フレーム。
+- b186-01：原本SHA256 `a783046e1292444c18a9ac02d4e687ec9cc9b09104d99454eac6e6e44bfbb500`、公開MP4 658,686 bytes／SHA256 `95251b922e8d33cc9f633a681d7c0c7f35da9ff6c5b7d9631993b37211eaecc2`。
+- b186-02：原本SHA256 `6a1725e5664d472ecd21dd83be09b12359a701e0eb486ea1f6a697969364a983`、公開MP4 593,703 bytes／SHA256 `45f357b6ed368078a2b598d8695ed0bd6786f09e288dd71c6060357500ceb38f`。
+
 ### TikTok独立native確認後の残件
 
 - 夜・朝の正式permalinkで実再生成功、日付・Mily・要約表示を確認。両captionの実mentionは `@seasidecircle`。既存TikTok投稿captionから流用し、通常SHOWROOMへの機械的流用禁止と対象本人指定の照合が不足した。published_unverifiedを維持。
