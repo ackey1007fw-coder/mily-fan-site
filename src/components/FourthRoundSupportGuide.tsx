@@ -1,4 +1,5 @@
 import { contest } from "../data/contest";
+import { providedVoteVideo } from "../data/providedVoteVideo";
 import { missCircleFourthRoundShowroomEventLink, missCircleFourthRoundWebVoteLink } from "../data/links";
 import { missCircleFourthRoundWebVote, missCircleFourthRoundShowroomReview, type SupportEventSchedule } from "../data/supportEvents";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
@@ -22,6 +23,22 @@ export function FourthRoundSupportGuide() {
         <p className="text-xs font-semibold tracking-wide text-sage-deep">MISS CIRCLE CONTEST 2026 · ENTRY 734</p>
         <h2 id="fourth-round-heading" className="mt-2 text-2xl font-bold text-ink">四次審査の応援ガイド</h2>
         <p className="mt-3 text-sm leading-7 text-ink-muted">三橋莉子（みりぃ）を応援する、3つの審査。日程はすべて日本時間です。WEB投票とSHOWROOMは開始・締切時刻が異なります。</p>
+        {providedVoteVideo.published ? (
+          <figure id="vote-support-video" className="mt-6 scroll-mt-24 rounded-2xl border border-sage/20 bg-sage-soft/20 p-4">
+            <h3 className="mb-3 text-lg font-bold text-ink">みりぃからの投票応援動画</h3>
+            <video src={providedVoteVideo.src} poster={providedVoteVideo.poster} width={providedVoteVideo.width} height={providedVoteVideo.height} controls playsInline preload="none" aria-label={providedVoteVideo.alt} aria-describedby="vote-support-video-description" className="mx-auto max-h-[72vh] w-full max-w-sm rounded-xl bg-sage-soft object-contain">
+              動画を再生できない場合は、<a href={providedVoteVideo.src} className="underline">投票応援動画を開く</a>。
+            </video>
+            <figcaption id="vote-support-video-description" className="mt-3 text-xs leading-6 text-ink-muted">
+              オーナー提供の動画（5秒・音声なし）。撮影・投稿日時は未確認です。動画内の「3日目」は投稿時点の文言で、現在の日程を示すものではありません。動画内のリンク表示はタップできません。投票は下の公式ボタンから進めます。
+            </figcaption>
+            {now >= Date.parse(schedule.start) ? (
+              <ExternalLink href={missCircleFourthRoundWebVoteLink.url} className="mt-3 inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-3 text-sm font-semibold text-white">三橋莉子にWEB投票する（公式）</ExternalLink>
+            ) : (
+              <ExternalLink href={contest.entryUrl} className="mt-3 inline-flex min-h-11 items-center font-semibold text-sage-deep underline">ENTRY 734・公式投票入口を見る</ExternalLink>
+            )}
+          </figure>
+        ) : null}
         <ol className="mt-6 space-y-5">
           <li className="rounded-2xl bg-sage-soft/35 p-4">
             <h3 className="font-bold text-ink">1. WEB投票審査</h3>

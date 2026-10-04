@@ -1,3 +1,11 @@
+## 素材台帳（batch b187 / 受領日 2026-10-04）
+
+- オーナーが提供し、実装・検証・レビューを経た本番公開を承認した投票応援動画1本。原本1,540,247 bytes、SHA256 `97b503995c6e67dd02f4b0b547df893ce9258c2bbfc2789bea12c7a8b9b581be`。原本を無改変でgitignored `media/original/` に保持。
+- 撮影日・投稿日・元投稿URLは未確認。sourceDate / sourceUrlはnull、receivedDateは2026-10-04。NEWSは確認日として表示。映像の「3日目」を現在の日程へ読み替えない。
+- 原本の全150フレーム（5秒、30fps）を実フレーム一覧で目視。本人の鏡越しの姿と投票を呼びかける表示のみ。第三者の顔・閲覧者UI・私的連絡先・DMなし。音声トラックなし。顔・身体・文字・画角の生成変更、補正、クロップ、音声追加なし。
+- 公開MP4は映像ストリームを再エンコードせず、metadata / chapters除去・faststart化。512×910、H.264 High / yuv420p、5秒・150フレーム。1,540,162 bytes、SHA256 `37ecb6188db2e9aee486bb58f3fde1bbec027df956cbf0a45400ec6c46200e40`。posterは同じ動画の1秒の実フレームJPEG。
+- HOME / NEWS・応援ページ・Galleryで同じ公開MP4 / posterを共有。controls / playsInline、自動再生なし、元の縦構図を全体表示。動画内リンク表示は操作できないため、応援ページの既存ENTRY 734公式投票URLへの期間連動ボタンを添える。投票・ギフト・SNS操作は行わない。
+
 ## 素材台帳（batch b186 / 受領日 2026-10-04）
 
 - オーナーが直接提供し、既存ファンサイトへの掲載を依頼したInstagram Story動画2本。1周年・テーマ案内（b186-01）とお便り募集（b186-02）。NEWS／HOMEとGalleryは同じMP4・posterを共有する。

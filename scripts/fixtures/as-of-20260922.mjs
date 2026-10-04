@@ -12,6 +12,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-04-confirmed-vote-support-video",
   "2026-10-04-radio-anniversary-stories",
   "2026-10-03-confirmed-tiktok-campus-makeup",
   "2026-10-01-mixch-kossori",
@@ -30,6 +31,7 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b187-01-vote-support",
   "mily-b186-01-radio-anniversary-story",
   "mily-b186-02-radio-message-story",
   "mixch-m-1pcWWQwK",

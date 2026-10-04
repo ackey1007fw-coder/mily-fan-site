@@ -1,3 +1,4 @@
+import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
@@ -251,6 +252,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-04-confirmed-vote-support-video",
+    date: "2026-10-04",
+    dateBasis: "confirmed-on",
+    activityIds: ["miss-circle"],
+    title: "みりぃへの投票を呼びかける、5秒の動画",
+    body: "みりぃへの投票を呼びかける動画を、サイト内でご覧いただけます。再生ボタンを押してお楽しみください。音声はありません。\n\n10月4日に受領・内容確認した動画です。撮影・投稿日時は未確認。映像内の『3日目』は投稿時点の文言で、現在の日程を示すものではありません。動画内のリンク表示はタップできません。現在の投票先・受付期間は、下の応援案内をご確認ください。",
+    sourceLabel: "オーナー提供動画（撮影・投稿日時未確認）",
+    media: providedVoteVideo,
+    relatedUrl: `${site.siteUrl}/support/#vote-support-video`,
+    ctaLabel: "投票動画と公式投票案内を見る",
+  },
   {
     id: "2026-10-04-radio-anniversary-stories",
     date: "2026-10-04",
