@@ -5,6 +5,8 @@ import {
 } from "../../src/data/galleryVideos.ts";
 
 const laterVideoIds = new Set([
+  "mily-b186-01-radio-anniversary-story",
+  "mily-b186-02-radio-message-story",
   "mixch-m-1pcWWQwK",
   "mily-b141-01-tiktok-ami-meet",
   "mily-b141-02-tiktok-ami-meet-story",

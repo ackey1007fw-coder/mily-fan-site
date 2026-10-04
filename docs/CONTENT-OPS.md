@@ -1,3 +1,10 @@
+## 2026-10-04受領：ラジオ1周年・お便り募集のStory2本
+
+- NEWS `2026-10-04-radio-anniversary-stories` に動画2本をまとめ、HOME／NEWSとGalleryへ同じ公開派生を追加。ラジオ関連NEWS・代表動画は既存の選択処理を使用。読み物の `/stories/` には追加しない。
+- オーナー提供の素材に表示された1周年、テーマ「湘南シーサイドサークル」、お便り案内を紹介。日付は受領・確認日と明示し、投稿日・出演時間は推測しない。出典は非リンクのInstagram Story label。
+- 聴取・お便りは既存のFM公式導線を再利用。Storyスタンプの遷移先とは認定しない。新しいSNS投稿・予定・プロフィール更新は含まない。
+- 公開動画は元画角・全映像フレームを保持し、未確認BGMを除いた映像のみ。素材の受入・privacy確認・原本と派生のハッシュはMEDIAのb186台帳へ記録。
+
 ### TikTok独立native確認後の残件
 
 - 夜・朝の正式permalinkで実再生成功、日付・Mily・要約表示を確認。両captionの実mentionは `@seasidecircle`。既存TikTok投稿captionから流用し、通常SHOWROOMへの機械的流用禁止と対象本人指定の照合が不足した。published_unverifiedを維持。

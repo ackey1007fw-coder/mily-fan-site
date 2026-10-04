@@ -7,6 +7,7 @@ import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { HOME_NEWS_LIMIT, ARCHIVE_LOAD_MORE_LABEL } from "../src/lib/homePortal.ts";
 import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO_KAWAII_MESSAGE_FORM_URL, kawaiiRadioAdditionalVideos } from "../src/data/kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "../src/data/radio.ts";
+import { radioAnniversaryStories } from "../src/data/radioAnniversaryStories.ts";
 const item = news.find(item => item.id === "2026-09-27-radio-kawaii-story");
 const tools = process.env.PLAYWRIGHT_MODULE_ROOT;
 assert.ok(tools);
@@ -33,6 +34,30 @@ try {
       for (const route of ["/", "/news/", "/activities/radio/"]) {
         console.log(`Checking ${engine} ${width}px ${route}`);
         await page.goto(origin + route, { waitUntil: "networkidle" });
+        const anniversaryCard = page.locator("li").filter({ has: page.getByText("湘南シーサイドサークル1周年📻 スタジオからのStory2本", { exact: true }) }).first();
+        await anniversaryCard.waitFor();
+        const anniversaryVideos = route === "/activities/radio/" ? radioAnniversaryStories.slice(0, 1) : radioAnniversaryStories;
+        for (const entry of anniversaryVideos) {
+          const player = (route === "/activities/radio/" ? page : anniversaryCard).locator(`video[src="${entry.src}"]`);
+          assert.equal(await player.count(), 1);
+          assert.equal(await player.getAttribute("preload"), "none");
+          assert.equal(await player.getAttribute("autoplay"), null);
+          assert.notEqual(await player.getAttribute("controls"), null);
+          assert.notEqual(await player.getAttribute("playsinline"), null);
+          await player.scrollIntoViewIfNeeded();
+          await player.evaluate(async el => { el.muted = true; await el.play(); });
+          await page.waitForFunction(el => el.currentTime > .1, await player.elementHandle());
+          assert.deepEqual(await player.evaluate(el => ({ width: el.videoWidth, height: el.videoHeight, fit: getComputedStyle(el).objectFit })), { width: 512, height: 910, fit: "contain" });
+          await player.evaluate(el => el.pause());
+        }
+        if (route !== "/activities/radio/") {
+          assert.equal(await anniversaryCard.getByRole("link", { name: "ラジオを聴く（FM公式）" }).getAttribute("href"), radioProgram.listenUrl);
+          assert.equal(await anniversaryCard.getByRole("link", { name: "番組にお便りを送る（FM公式）" }).getAttribute("href"), RADIO_KAWAII_MESSAGE_FORM_URL);
+          await anniversaryCard.screenshot({ path: join(output, `${engine}-${width}-anniversary-${route.replaceAll("/", "_")}.png`) });
+        }
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+        assert.deepEqual(errors, []);
+        results.push({ engine, width, route, anniversaryVideosPlayed: anniversaryVideos.length, status: "passed" });
         const card = page.locator("li").filter({ has: page.getByText(item.title, { exact: true }) }).first();
         const onHome = sortNewsByDateDesc(news).slice(0,HOME_NEWS_LIMIT).some(n => n.id === item.id);
         if (route === "/" && !onHome) { results.push({engine,width,route,status:"passed",outsideHomeLimit:true}); continue; }
@@ -102,7 +127,7 @@ try {
       assert.ok(Math.abs(ratio - 864 / 1536) < .002);
       await galleryPhoto.screenshot({path:join(output,`${engine}-${width}-gallery-photo.png`)});
       const more = page.getByRole("button", {name:ARCHIVE_LOAD_MORE_LABEL,exact:true});
-      for (const entry of [video, ...kawaiiRadioAdditionalVideos]) {
+      for (const entry of [video, ...kawaiiRadioAdditionalVideos, ...radioAnniversaryStories]) {
         const player = page.locator(`video[src="${entry.src}"]`);
         for (let i = 0; !(await player.count()) && await more.count() && i < 40; i++) await more.click();
         assert.equal(await player.count(), 1);
@@ -114,7 +139,7 @@ try {
       }
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
       assert.deepEqual(errors, []);
-      results.push({engine,width,route:"/gallery/",status:"passed",videosPlayed:3,photosLoaded:1});
+      results.push({engine,width,route:"/gallery/",status:"passed",videosPlayed:5,photosLoaded:1});
     } finally { await browser.close(); }
   }
 } finally {

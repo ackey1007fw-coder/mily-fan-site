@@ -1,3 +1,4 @@
+import { radioAnniversaryStories, type RadioAnniversaryStoryVideo } from "./radioAnniversaryStories.ts";
 import { kawaiiRadioStoryVideo, kawaiiRadioAdditionalVideos } from "./kawaiiRadioStoryVideo.ts";
 import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
 import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
@@ -74,6 +75,7 @@ import {
 } from "./mixchMovies.ts";
 
 export type SelfHostedGalleryVideo =
+  | RadioAnniversaryStoryVideo
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
@@ -153,6 +155,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  ...radioAnniversaryStories,
   ...kawaiiRadioAdditionalVideos,
   kawaiiRadioStoryVideo,
   faceToFaceClassStoryVideo,

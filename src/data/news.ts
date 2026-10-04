@@ -1,3 +1,4 @@
+import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "./radio.ts";
@@ -250,6 +251,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-04-radio-anniversary-stories",
+    date: "2026-10-04",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "湘南シーサイドサークル1周年📻 スタジオからのStory2本",
+    body: "湘南シーサイドサークルの1周年を祝うInstagram Storyが届きました。スタジオに並ぶMily・マナティ・もこの3人と、トークテーマ『湘南シーサイドサークル』の案内。もう1本では、ピースする2人とともに『メッセージはこちらから送れます』とお便りを呼びかけています。\n\nラジオの聴取とお便りは、下のFM公式リンクから。メッセージフォームの入力項目をご確認のうえ、お送りください。\n\n10月4日に受領・内容確認したStoryの記録です。投稿日は未確認。動画は背景音楽を含まない映像のみで掲載しています。",
+    sourceLabel: "Instagram Story（投稿日未確認）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioAnniversaryStories[0],
+    additionalMedia: radioAnniversaryStories.slice(1),
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
   {
     id: "2026-10-03-confirmed-tiktok-campus-makeup",
     date: "2026-10-03",
