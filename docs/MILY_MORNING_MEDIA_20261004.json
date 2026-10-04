@@ -160,7 +160,7 @@
   ],
   "publication_acceptance": {
     "received_date": "2026-10-04",
-    "source": "owner-provided same-morning recording; seven extracted frames verified by hashes; original frames retained privately",
+    "source": "owner-provided same-morning recording; seven extracted frames verified by hashes; private preservation copies retained; seven original images remain in public git history at da0f5fd; current served selection is four; no history deletion or rewrite",
     "scope": [
       "LIVE STREAM recap",
       "same recap representative image in NEWS",
