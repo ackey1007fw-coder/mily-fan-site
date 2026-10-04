@@ -58,6 +58,20 @@ try {
           }
         }
         if (!isMusic) {
+          const anniversary = radioEpisodes.find(item => item.date === '2026-10-04');
+          const anniversaryHighlights = page.locator(`section[aria-labelledby="${anniversary.id}-mily-highlights"]`);
+          const anniversaryMessages = page.locator(`section[aria-labelledby="${anniversary.id}-listener-messages"]`);
+          assert.equal(await anniversaryHighlights.locator('li').count(), anniversary.milyHighlights.length);
+          assert.equal(await anniversaryMessages.locator('li').count(), anniversary.listenerMessages.length);
+          for (const item of anniversary.milyHighlights) {
+            assert.ok((await anniversaryHighlights.innerText()).includes(item.body), item.title);
+          }
+          const anniversarySection = anniversaryHighlights.locator('xpath=ancestor::section[1]');
+          await anniversarySection.getByText('主なコーナーとタイムスタンプを見る', { exact: true }).click();
+          assert.equal(await anniversarySection.locator('details[open] li').count(), anniversary.timeline.length);
+          assert.ok((await anniversarySection.innerText()).includes('たくさんのお便りに感謝して、2年目へ'));
+          await anniversaryHighlights.screenshot({ path: join(output, `${engine}-${width}-anniversary-highlights.png`) });
+          await anniversaryMessages.screenshot({ path: join(output, `${engine}-${width}-anniversary-messages.png`) });
           const recap = radioEpisodes.find(item => item.date === '2026-09-13');
           const highlights = page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`);
           assert.equal(await highlights.locator('li').count(), 11);
