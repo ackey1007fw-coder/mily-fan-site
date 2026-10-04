@@ -1,3 +1,4 @@
+import { providedVoteVideo, type ProvidedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories, type RadioAnniversaryStoryVideo } from "./radioAnniversaryStories.ts";
 import { kawaiiRadioStoryVideo, kawaiiRadioAdditionalVideos } from "./kawaiiRadioStoryVideo.ts";
 import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
@@ -75,6 +76,7 @@ import {
 } from "./mixchMovies.ts";
 
 export type SelfHostedGalleryVideo =
+  | ProvidedVoteVideo
   | RadioAnniversaryStoryVideo
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
@@ -155,6 +157,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  providedVoteVideo,
   ...radioAnniversaryStories,
   ...kawaiiRadioAdditionalVideos,
   kawaiiRadioStoryVideo,

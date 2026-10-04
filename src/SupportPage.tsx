@@ -9,6 +9,7 @@ import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
 import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import { VoteSpotlight } from "./components/VoteSpotlight";
 import { FourthRoundSupportGuide } from "./components/FourthRoundSupportGuide";
+import { ProvidedVoteSupportVideo } from "./components/ProvidedVoteSupportVideo";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
 import { links } from "./data/links";
@@ -236,6 +237,7 @@ export default function SupportPage() {
           </div>
         ) : null}
         <SupportHero />
+        <ProvidedVoteSupportVideo />
         <FourthRoundSupportGuide />
         <PatonVoteGuide />
         <ShowroomAdRewardGuide />
