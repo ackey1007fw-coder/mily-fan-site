@@ -90,6 +90,7 @@ export function selectActivityMedia(
 
   const relatedNewsMedia = sortNewsByDateDesc(newsItems)
     .filter((item) => item.activityIds?.includes(activityId))
+    .filter((item) => item.activityMediaIds === undefined || item.activityMediaIds.includes(activityId))
     .flatMap((item): ActivityMediaItem[] =>
       item.media && isActivityNewsMedia(item.media) ? [item.media] : [],
     );

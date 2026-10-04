@@ -56,7 +56,7 @@
 | `date` | `YYYY-MM-DD`。`id` の先頭と一致 | — |
 | `dateLabel` | `YYYY.MM.DD（曜）`。`date` と一致する曜日 | — |
 | `theme` | **朝 / 昼 / 夕 / 夜 / 深夜 で始める**。プラットフォーム名を入れない | 〜16 |
-| `broadcastLabel` | `H:MM頃〜 約N分`（時は 0〜23） | — |
+| `broadcastLabel` | `H:MM頃〜 約N分`（時は 0〜23）。実開始未確認で録画開始だけ判明する場合は `録画開始H:MM頃〜 約N分` と明示し、注記で録画の長さと区別する | — |
 | `platformLabel` | `SHOWROOM` または `MixChannel` | — |
 | `summary` | その回を1〜3文で。です・ます | 〜140 |
 | `highlights` | 8件まで。目安は5〜7件。素材が薄い回は少ないままでよい（水増ししない） | — |
