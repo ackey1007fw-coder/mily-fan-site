@@ -221,6 +221,7 @@ try {
         const verification = sourceInfo.locator('[data-recap-verification]');
         assert.equal(await verification.evaluate(element => element.open), false);
         await verification.locator('summary').click();
+        await page.waitForFunction((hash) => document.querySelector(`${hash} [data-recap-verification]`)?.open === true, hash, { timeout: 5000 });
         assert.equal(await verification.evaluate(element => element.open), true);
         for (const text of disclosure.verification) assert.ok((await sourceInfo.innerText()).includes(text));
         for (const song of latest.songs ?? []) {

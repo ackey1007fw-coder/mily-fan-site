@@ -1,0 +1,76 @@
+{
+  "batch": "b190",
+  "sourceDate": "2026-10-04",
+  "verifiedAt": "2026-10-05",
+  "source": "当日のオーナー承認済み保存録画の実フレーム",
+  "allowedSurfaces": [
+    "LIVE STREAM",
+    "同じ回のNEWSとHOME代表画像"
+  ],
+  "excludedSurfaces": [
+    "一般Gallery",
+    "SNS"
+  ],
+  "inputCandidateCount": 10,
+  "selectedCount": 8,
+  "privacy": "右側の背景メモを画角外に切り出し。第三者・視聴者表示名・コメント・アプリUIなし。顔・身体の生成加工なし。",
+  "sourceVerification": "全尺10区間の自動文字起こし。全編手動聴取・逐語校正未実施。曲名と短尺公開検品は未完了。",
+  "images": [
+    {
+      "name": "mily-b190-01-20261004-night-still.jpg",
+      "sourceSeconds": 30,
+      "width": 380,
+      "height": 360,
+      "sha256": "2e2246ca1e40b5ad314a04bfc4ea2bae328004c278fa855405e3e0f344e65eb2"
+    },
+    {
+      "name": "mily-b190-02-20261004-night-still.jpg",
+      "sourceSeconds": 600,
+      "width": 380,
+      "height": 360,
+      "sha256": "fd7cfda559f3a27098d728829221eb5f59826c0cedbf837c28d132c720f1efb7"
+    },
+    {
+      "name": "mily-b190-03-20261004-night-still.jpg",
+      "sourceSeconds": 900,
+      "width": 380,
+      "height": 360,
+      "sha256": "0f62665936e88959f7dae1cb3538370a388be110bdcfa871c4ec20d4021ad101"
+    },
+    {
+      "name": "mily-b190-04-20261004-night-still.jpg",
+      "sourceSeconds": 1200,
+      "width": 380,
+      "height": 360,
+      "sha256": "fa1e7e3e5e9b6cb896cf0bada438465a8a2b9c7b70497a7f3b4161f4b6cae432"
+    },
+    {
+      "name": "mily-b190-05-20261004-night-still.jpg",
+      "sourceSeconds": 1500,
+      "width": 380,
+      "height": 360,
+      "sha256": "5547a681ef7b8729a40a08d528441e0359c207b2ce129767c675a930dd2d57b6"
+    },
+    {
+      "name": "mily-b190-06-20261004-night-still.jpg",
+      "sourceSeconds": 1800,
+      "width": 380,
+      "height": 360,
+      "sha256": "e5c31f6d3a0601f032f73fd26131f2d3fe02e2349ca50ed345fbc4454fa398a8"
+    },
+    {
+      "name": "mily-b190-07-20261004-night-still.jpg",
+      "sourceSeconds": 2100,
+      "width": 380,
+      "height": 360,
+      "sha256": "2db19cb8391018906c982e07bdea9c3611fa9e6ac607b567a9f80da0df56fa14"
+    },
+    {
+      "name": "mily-b190-08-20261004-night-still.jpg",
+      "sourceSeconds": 2400,
+      "width": 380,
+      "height": 360,
+      "sha256": "65e684c1aa7c619a2a86d4767a03bcaded2106f11980d652534d94d91b17c89e"
+    }
+  ]
+}

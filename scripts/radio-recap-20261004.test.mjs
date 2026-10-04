@@ -44,6 +44,13 @@ test('detailed October 4 recap covers the program and on-air letters without pri
  assert.match(page,/episode\.highlightsLabel \?\? "みりぃの見どころ"/);
 });
 
+test('prompted performances stay separate from claims about everyday emotions',()=>{
+ const item=recap.milyHighlights.find(item=>item.timestamp==='2:17:43');
+ assert.match(item.body,/お題/);
+ assert.match(item.body,/せりふ.*披露/);
+ assert.doesNotMatch(item.body,/普段の気持ち|気持ちがにじむ|思いを伝え|真剣|本心/);
+});
+
 test('anniversary topics, letters and timeline stay ordered within the program source range',()=>{
  const seconds=stamp=>stamp.split(':').reduce((value,part)=>value*60+Number(part),0);
  for(const items of [recap.milyHighlights,recap.listenerMessages,recap.timeline]) {
