@@ -12,8 +12,13 @@ export function createPublicationFeed() {
     ...stories.filter(item => item.published).map(item => ({ id:`mily:story:${item.slug}`, kind:"article", title:item.title, url:new URL(item.href,site.siteUrl).href })),
     ...news.filter(item => item.publicationNotice === "important" || newsDisplayMedia(item).some(media => media.kind === "video" || ((media.kind === "tiktok" || media.kind === "mixch") && media.published))).map(item => ({ id:`mily:news:${item.id}`, kind:item.publicationNotice === "important" ? "important" : "video", title:item.title, url:newsPublicationUrl(item) })),
   ];
+  for (const entry of news) {
+    if (entry.publicationArticle && !items.some(item => item.kind === "article" && item.id === entry.publicationArticle?.id && item.url === entry.publicationArticle.url)) {
+      throw new Error(`Unknown publication article correspondence: ${entry.id}`);
+    }
+  }
   return { version:1, eventKind:"site_publication", items:items.map(item => {
-    const title = news.find(entry => entry.relatedUrl && newsPublicationUrl(entry) === item.url)?.title ?? item.title;
+    const title = news.find(entry => entry.publicationArticle?.id === item.id)?.title ?? item.title;
     return {...item,title,...publicationShare(title,item.url)};
   }) };
 }

@@ -6,6 +6,8 @@
 
 新しい記事・動画・重要なお知らせだけを対象とする。初回有効化時に既存content IDと正規URLをbaseline登録し、過去全件の投稿をしない。修正、再ビルド、再デプロイは新規content IDを生成しない。同じURLに別IDを割り当てても再送しない。
 
+NEWSの`relatedUrl`は一般的な関連CTAであり、そのNEWSの記事URLとは扱わない。通常は`/news/#news-<id>`を通知・X共有の対象にする。既知の個別記事を紹介するNEWSだけ`publicationArticle: { id, url }`で対応を明示し、build時に公開記事レジストリの同一ID/URLと照合する。共通の応援ページへリンクする別告知は別々のNEWSアンカーを持つ。
+
 `scripts/publication-notification-state.mjs`は永続SQLite outboxのプロトコルであり、監視ジョブや投稿APIを追加するものではない。単一の既存運用から使用し、SQLiteは所有者専用の既存運用データ領域に置く。content ID/ThreadsとURL/Threadsの両方を一意にclaimする。公開URLのHTTP200だけでは不足し、同じcontent IDの実表示を確認した5分以内の証跡を必須とする。
 
 claim後は送信前でも結果不明として再送不可。成功時は実際のThreads permalink、失敗時は秘密値を除いた理由、結果不明時は照合待ちとして保持する。結果不明の投稿を自動再試行せず、既存接続先の投稿一覧と処理履歴を照合する。Xは投稿API・課金を使用せず、同じ文面とURLの無料手動intentを作る。
