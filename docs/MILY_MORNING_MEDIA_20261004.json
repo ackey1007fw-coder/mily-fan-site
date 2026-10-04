@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-04",
+  "batch": "b188",
+  "source_dimensions": [
+    640,
+    360
+  ],
+  "source_decoded_audio_duration_seconds": 2616.5333125,
+  "source_media_duration_seconds": 2616.558,
+  "time_basis": "recording-relative approximate offsets; not broadcast wallclock",
+  "photos": [
+    {
+      "file": "mily-b188-01-20261004-morning-still.jpg",
+      "source_seconds": 30,
+      "bytes": 16407,
+      "sha256": "6e36211be7da3af05ce83ed62a2cdde7507d3b83f48f5efead182fdea212a44e",
+      "source_identical": true
+    },
+    {
+      "file": "mily-b188-02-20261004-morning-still.jpg",
+      "source_seconds": 180,
+      "bytes": 23472,
+      "sha256": "c081296c47d0feead45b3dbfb672db97e506ccafcf1085beeb45f8120175f2b4",
+      "source_identical": true
+    },
+    {
+      "file": "mily-b188-03-20261004-morning-still.jpg",
+      "source_seconds": 420,
+      "bytes": 22755,
+      "sha256": "e0555b89e4ae02fc8d45ebecd7c7a1f13ae55f37ec65538bc73e2816a305caf5",
+      "source_identical": true
+    },
+    {
+      "file": "mily-b188-04-20261004-morning-still.jpg",
+      "source_seconds": 660,
+      "bytes": 21731,
+      "sha256": "3b6c58472a1ea95e1f3366fd672ad9bd904054baef02926c03d2ce77f06415af",
+      "source_identical": true
+    },
+    {
+      "file": "mily-b188-05-20261004-morning-still.jpg",
+      "source_seconds": 900,
+      "bytes": 21717,
+      "sha256": "9824f8584a9ca4013c2156b169dd24f11bad61558744a1738f3289d7d69fd77d",
+      "source_identical": true
+    },
+    {
+      "file": "mily-b188-06-20261004-morning-still.jpg",
+      "source_seconds": 1140,
+      "bytes": 21629,
+      "sha256": "d3a996b3bc1ffa6e99185221322ad788d503fd5978681cbbbf70041f61bcf4e2",
+      "source_identical": true
+    },
+    {
+      "file": "mily-b188-07-20261004-morning-still.jpg",
+      "source_seconds": 2100,
+      "bytes": 22126,
+      "sha256": "394159c99c504efd9ce5cc0045b1f6949dc68243a777c53e883b753e347b6c43",
+      "source_identical": true
+    }
+  ],
+  "visual_review": "actual frames reviewed; no generated face or replacement",
+  "image_count": 7,
+  "additional_stills": "three further source frames may be added after safe extraction and visual review; no filler images",
+  "asr_scope": "nine chunks cover full decoded audio; 1059 candidate segments, no whole-program manual listening",
+  "confirmed_gift_quantity": null
+}

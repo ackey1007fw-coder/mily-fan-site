@@ -253,6 +253,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-04-morning-showroom-recap", date: "2026-10-04",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "ラジオ前の朝、キラキラ星と投票へのありがとう",
+    body: "10月4日朝のSHOWROOM配信を振り返ります。早朝の応援と投票報告への感謝、挨拶しやすいコメント欄への喜び、ラジオへ向かう前の気持ちをまとめました。\n\n見どころ・タイムライン・当日の実スクショ7枚を掲載しています。本文は自動文字起こしをもとにした要約です。現在の投票先や受付期間は、応援案内をご確認ください。",
+    sourceLabel: "10月4日SHOWROOM朝配信（保存録画・自動文字起こし）",
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-asa-showroom`,
+    ctaLabel: "朝の配信レポートと写真を見る",
+    media: { kind: "image", src: "/media/live/mily-b188-06-20261004-morning-still.jpg", alt: "ホワイトボードと大きな笑顔のみりぃ", width: 640, height: 360 },
+  },
+  {
     id: "2026-10-04-confirmed-vote-support-video",
     date: "2026-10-04",
     dateBasis: "confirmed-on",
