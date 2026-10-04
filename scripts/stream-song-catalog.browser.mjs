@@ -260,13 +260,23 @@ try {
           assert.equal(zip.status(), 200);
           assert.equal((await zip.body()).readUInt32LE(0), 0x04034b50);
         }
-        const timeline = recap.locator(":scope > details");
+        const latestHasTimeline = latest.timeline.length > 0 || latest.nextNote !== "";
+        if (!latestHasTimeline) {
+          assert.equal(await recap.locator(":scope > details").count(), 0, "空のタイムラインと次枠は表示しない");
+        }
+        const timelineRecap = latestHasTimeline
+          ? latest
+          : streamRecaps.find((item) => item.timeline.length > 0 || item.nextNote !== "");
+        assert.ok(timelineRecap, "既存のタイムライン開閉を検証する回が必要");
+        const timelineHash = `#recap-${timelineRecap.id}`;
+        if (!latestHasTimeline) await page.goto(`${live}${timelineHash}`, { waitUntil: "networkidle" });
+        const timeline = page.locator(timelineHash).locator(":scope > details");
         const timelineSummary = timeline.locator(":scope > summary");
         await timelineSummary.click();
         if (!(await timeline.evaluate((node) => node.open))) await timelineSummary.click();
-        await page.waitForFunction((hash) => document.querySelector(hash)?.querySelector(":scope > details")?.open === true, hash);
+        await page.waitForFunction((hash) => document.querySelector(hash)?.querySelector(":scope > details")?.open === true, timelineHash);
         assert.equal(await timeline.evaluate((node) => node.open), true);
-        assert.ok((await timeline.textContent()).includes(latest.nextNote));
+        assert.ok((await timeline.textContent()).includes(timelineRecap.nextNote));
         await overflow();
         await recap.screenshot({ path: join(output, `${scenario.name}-latest-recap.png`) });
       });

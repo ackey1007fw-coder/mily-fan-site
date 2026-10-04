@@ -10,7 +10,7 @@ import {selectActivityMedia} from '../src/lib/activityMedia.ts';
 import {selectActivityNews} from '../src/lib/activityContent.ts';
 
 test('October 4 morning is linked without inventing the next slot, rank or gift count',()=>{
- assert.equal(streamRecaps[0],recap);assert.equal(recap.nextNote,'');assert.deepEqual(recap.ranking,[]);assert.equal(recap.songs,undefined);
+ assert.equal(streamRecaps.find(item=>item.id===recap.id),recap);assert.equal(recap.nextNote,'');assert.deepEqual(recap.ranking,[]);assert.equal(recap.songs,undefined);
  assert.match(recap.transcriptionNote,/手動聴取・逐語校正は未実施/);
  assert.match(recap.transcriptionNote,/時刻は復号音声・元録画の先頭/);
  assert.doesNotMatch(JSON.stringify(recap),/drive\.google|libfile_|C:\\|14:45|4818|5000|\.wav|\.mkv/);
