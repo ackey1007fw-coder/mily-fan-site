@@ -9,6 +9,8 @@ import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO
 import { radioProgram } from "../src/data/radio.ts";
 import { radioAnniversaryStories } from "../src/data/radioAnniversaryStories.ts";
 const item = news.find(item => item.id === "2026-09-27-radio-kawaii-story");
+const anniversaryItem = news.find(item => item.id === "2026-10-04-radio-anniversary-stories");
+assert.ok(anniversaryItem);
 const tools = process.env.PLAYWRIGHT_MODULE_ROOT;
 assert.ok(tools);
 const engines = await import(pathToFileURL(join(tools, "playwright/index.mjs")).href);
@@ -35,6 +37,18 @@ try {
         console.log(`Checking ${engine} ${width}px ${route}`);
         await page.goto(origin + route, { waitUntil: "networkidle" });
         const anniversaryCard = page.locator("li").filter({ has: page.getByText("湘南シーサイドサークル1周年📻 スタジオからのStory2本", { exact: true }) }).first();
+        const anniversaryOnHome = sortNewsByDateDesc(news).slice(0, HOME_NEWS_LIMIT).some(n => n.id === anniversaryItem.id);
+        if (route === "/" && !anniversaryOnHome) {
+          assert.equal(await anniversaryCard.count(), 0, "HOME上限外の周年NEWSは表示しない");
+          for (const entry of radioAnniversaryStories) assert.equal(await page.locator(`video[src="${entry.src}"]`).count(), 0);
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+          assert.deepEqual(errors, []);
+          results.push({ engine, width, route, anniversaryOutsideHomeLimit: true, anniversaryVideosPlayed: 0, status: "passed" });
+        } else {
+        if (route === "/news/") {
+          const more = page.getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true });
+          for (let i = 0; !(await anniversaryCard.count()) && await more.count() && i < news.length; i++) await more.click();
+        }
         await anniversaryCard.waitFor();
         const anniversaryVideos = route === "/activities/radio/" ? radioAnniversaryStories.slice(0, 1) : radioAnniversaryStories;
         for (const entry of anniversaryVideos) {
@@ -58,6 +72,7 @@ try {
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
         assert.deepEqual(errors, []);
         results.push({ engine, width, route, anniversaryVideosPlayed: anniversaryVideos.length, status: "passed" });
+        }
         const card = page.locator("li").filter({ has: page.getByText(item.title, { exact: true }) }).first();
         const onHome = sortNewsByDateDesc(news).slice(0,HOME_NEWS_LIMIT).some(n => n.id === item.id);
         if (route === "/" && !onHome) { results.push({engine,width,route,status:"passed",outsideHomeLimit:true}); continue; }
