@@ -227,6 +227,8 @@ export type NewsItem = {
   sameDayOrder?: number;
   /** Explicit Activity relations only. Absence means deliberately unclassified. */
   activityIds?: ActivityId[];
+  /** Optional media-surface scope. NEWS relations remain in activityIds; absent keeps the existing propagation. */
+  activityMediaIds?: ActivityId[];
   title: string;
   body: string;
   source?: string;
@@ -259,6 +261,17 @@ export const news: NewsItem[] = [
     sourceLabel: "当日の保存録画・自動文字起こし",
     media: { kind: "image", src: "/media/live/mily-b189-09-20261004-day-still.jpg", width: 640, height: 360, alt: "昼配信で大きな笑顔を見せるみりぃ" },
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-day-showroom`, ctaLabel: "昼の配信メモを見る",
+  },
+  {
+    id: "2026-10-04-morning-showroom-recap", date: "2026-10-04",
+    activityIds: ["live-stream", "miss-circle"],
+    activityMediaIds: ["live-stream"],
+    title: "ラジオ前の朝、キラキラ星と投票へのありがとう",
+    body: "10月4日朝のSHOWROOM配信を振り返ります。早朝の応援と投票報告への感謝、挨拶しやすいコメント欄への喜び、ラジオへ向かう前の気持ちをまとめました。\n\n見どころ・タイムライン・当日の実スクショ4枚を掲載しています。本文は自動文字起こしをもとにした要約です。現在の投票先や受付期間は、応援案内をご確認ください。",
+    sourceLabel: "10月4日SHOWROOM朝配信（保存録画・自動文字起こし）",
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-asa-showroom`,
+    ctaLabel: "朝の配信レポートと写真を見る",
+    media: { kind: "image", src: "/media/live/mily-b188-04-20261004-morning-still.jpg", alt: "ホワイトボードを掲げるみりぃ", width: 640, height: 360 },
   },
   {
     id: "2026-10-04-confirmed-vote-support-video",
