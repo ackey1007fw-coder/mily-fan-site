@@ -72,7 +72,7 @@ function seconds(timestamp) {
 }
 
 function startMinutes(broadcastLabel) {
-  const match = broadcastLabel.match(/^([01]?\d|2[0-3]):([0-5]\d)頃〜 約\d+分$/);
+  const match = broadcastLabel.match(/^(?:録画開始)?([01]?\d|2[0-3]):([0-5]\d)頃〜 約\d+分$/);
   assert.ok(match, `broadcastLabel形式: ${broadcastLabel}`);
   return Number(match[1]) * 60 + Number(match[2]);
 }
