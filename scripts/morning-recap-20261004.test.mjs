@@ -21,6 +21,6 @@ test('morning news reaches the actual recap and uses the same representative fra
 test('all selected images are distinct real JPEGs with source-relative times',()=>{
  const manifest=JSON.parse(readFileSync('docs/MILY_MORNING_MEDIA_20261004.json','utf8'));
  assert.equal(new Set(recap.gallery.map(x=>x.src)).size,manifest.photos.length);
- for(const image of recap.gallery){const source=manifest.photos.find(x=>image.src.endsWith(x.file));assert.ok(source);const bytes=readFileSync('public'+image.src);assert.equal(bytes.length,source.bytes);assert.equal(bytes.readUInt16BE(0),0xffd8);assert.equal(image.width,640);assert.equal(image.height,360);}
- assert.equal(recap.image.src,recap.gallery[5].src);
+ for(const image of recap.gallery){const source=manifest.photos.find(x=>image.src.endsWith(x.file));assert.ok(source);const bytes=readFileSync('public'+image.src);assert.equal(bytes.length,source.bytes);assert.equal(bytes.readUInt16BE(0),0xffd8);assert.equal(image.width,source.width);assert.equal(image.height,source.height);}
+ assert.equal(recap.image.src,recap.gallery[1].src);
 });

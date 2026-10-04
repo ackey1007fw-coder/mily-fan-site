@@ -2,17 +2,14 @@ import type { StreamRecap } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote } from "./streamRecapRules.ts";
 
 const moments = [
-  [1, "0:00:30", "手を振るみりぃ"],
-  [2, "0:03:00", "ホワイトボードを持って笑うみりぃ"],
-  [3, "0:07:00", "顔のそばにホワイトボードを掲げるみりぃ"],
-  [4, "0:11:00", "ホワイトボードを掲げるみりぃ"],
-  [5, "0:15:00", "ホワイトボードを持ち、頬のそばに指を添えるみりぃ"],
-  [6, "0:19:00", "ホワイトボードと大きな笑顔のみりぃ"],
-  [7, "0:35:00", "ホワイトボードを胸に笑うみりぃ"],
+  [1, "0:00:30", "笑顔のみりぃ", 290, "privacy-crop"],
+  [4, "0:11:00", "ホワイトボードを掲げるみりぃ", 640, "still"],
+  [5, "0:15:00", "頬のそばに指を添えるみりぃ", 280, "privacy-crop"],
+  [6, "0:19:00", "大きな笑顔のみりぃ", 290, "privacy-crop"],
 ] as const;
-const gallery = moments.map(([index, time, alt]) => {
-  const downloadName = `mily-b188-${String(index).padStart(2, "0")}-20261004-morning-still.jpg`;
-  return { src: `/media/live/${downloadName}`, width: 640, height: 360, alt, caption: `${time}｜${alt}`, downloadName };
+const gallery = moments.map(([index, time, alt, width, variant]) => {
+  const downloadName = `mily-b188-${String(index).padStart(2, "0")}-20261004-morning-${variant}.jpg`;
+  return { src: `/media/live/${downloadName}`, width, height: 360, alt, caption: `${time}｜${alt}`, downloadName };
 });
 
 /** 当日録画の全入力を処理した自動文字起こしの要約。逐語校正は未実施。 */
@@ -20,8 +17,8 @@ export const streamRecap20261004Asa: StreamRecap = {
   id: "2026-10-04-asa-showroom", date: "2026-10-04", dateLabel: "2026.10.04（日）",
   theme: "朝の応援とラジオへ向かう準備", broadcastLabel: "5:55頃〜 約44分", platformLabel: "SHOWROOM",
   summary: "ラジオへ向かう前の早朝枠。キラキラ星や投票報告にお礼を伝え、ファイナリストを目指す気持ちを話しました。挨拶が交わされるコメント欄への喜び、プロフィールからの投票案内、最後のみんなの一日へのエールまで、ホワイトボードと笑顔の約44分を振り返ります。",
-  image: gallery[5], gallery,
-  galleryNote: "当日の録画から選んだ実フレーム7枚です。時刻は元録画の先頭からの目安です。",
+  image: gallery[1], gallery,
+  galleryNote: "当日の録画から選んだ実フレーム4枚です。時刻は元録画の先頭からの目安です。",
   highlights: [
     { timestamp: "0:00:14", title: "早朝に来てくれたみんなへありがとう", body: "朝早くから集まってくれたことへお礼を伝え、キラキラ星での応援をお願いしました。早起きしたみんなとのやりとりから、朝の配信が始まります。" },
     { timestamp: "0:01:35", title: "早起きとファイナリストへの思い", body: "このあとラジオへ行くことを話し、その前に早起きして配信した朝。ファイナリストを目指したい気持ちも伝え、応援を呼びかけました。結果の報告ではなく、この配信で話した目標です。" },
@@ -48,7 +45,7 @@ export const streamRecap20261004Asa: StreamRecap = {
   sourceLabel: "2026年10月4日 朝のSHOWROOM配信（自動文字起こし）", verifiedAt: "2026-10-04",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    stills: "静止画は当日の録画から選んだ実フレーム7枚です。",
+    stills: "静止画は当日の録画から選んだ実フレーム4枚です。",
     extra: "保存録画の音声全体を9分割で自動文字起こしし、本文を要約しています。全編の手動聴取・逐語校正は未実施で、固有名詞や細かな発言には認識誤りの可能性があります。認識が不確かな箇所や個人名、ギフト個数、順位、曲名は掲載していません。時刻は復号音声・元録画の先頭からの目安で、放送時刻とは異なります。次の配信時刻は確定していないため、現在の予定として掲載していません。",
   }),
 };

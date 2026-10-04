@@ -10,58 +10,163 @@
   "time_basis": "recording-relative approximate offsets; not broadcast wallclock",
   "photos": [
     {
-      "file": "mily-b188-01-20261004-morning-still.jpg",
+      "file": "mily-b188-01-20261004-morning-privacy-crop.jpg",
       "source_seconds": 30,
-      "bytes": 16407,
-      "sha256": "6e36211be7da3af05ce83ed62a2cdde7507d3b83f48f5efead182fdea212a44e",
-      "source_identical": true
-    },
-    {
-      "file": "mily-b188-02-20261004-morning-still.jpg",
-      "source_seconds": 180,
-      "bytes": 23472,
-      "sha256": "c081296c47d0feead45b3dbfb672db97e506ccafcf1085beeb45f8120175f2b4",
-      "source_identical": true
-    },
-    {
-      "file": "mily-b188-03-20261004-morning-still.jpg",
-      "source_seconds": 420,
-      "bytes": 22755,
-      "sha256": "e0555b89e4ae02fc8d45ebecd7c7a1f13ae55f37ec65538bc73e2816a305caf5",
-      "source_identical": true
+      "bytes": 8843,
+      "sha256": "bad2b94a3b7bc05f9c02a045a5b7c72a7c3ad62c78329a05eecc3368b429b41b",
+      "source_identical": false,
+      "source_frame_sha256": "6e36211be7da3af05ce83ed62a2cdde7507d3b83f48f5efead182fdea212a44e",
+      "width": 290,
+      "height": 360,
+      "crop_xywh": [
+        100,
+        0,
+        290,
+        360
+      ],
+      "privacy_review": {
+        "third_party_faces": "not observed",
+        "viewer_names_comments_or_app_ui": "not observed",
+        "background_review": "background handwritten paper removed from frame by crop; face unchanged; accepted derivative viewed at actual size"
+      }
     },
     {
       "file": "mily-b188-04-20261004-morning-still.jpg",
       "source_seconds": 660,
       "bytes": 21731,
       "sha256": "3b6c58472a1ea95e1f3366fd672ad9bd904054baef02926c03d2ce77f06415af",
-      "source_identical": true
+      "source_identical": true,
+      "width": 640,
+      "height": 360,
+      "privacy_review": {
+        "third_party_faces": "not observed",
+        "viewer_names_comments_or_app_ui": "not observed",
+        "background_review": "background paper concealed by the visible board; board shows a general support message, no identifiable third-party details observed"
+      },
+      "crop_xywh": null
     },
     {
-      "file": "mily-b188-05-20261004-morning-still.jpg",
+      "file": "mily-b188-05-20261004-morning-privacy-crop.jpg",
       "source_seconds": 900,
-      "bytes": 21717,
-      "sha256": "9824f8584a9ca4013c2156b169dd24f11bad61558744a1738f3289d7d69fd77d",
-      "source_identical": true
+      "bytes": 11183,
+      "sha256": "31b53f52590ea6e3ff7ae63d3c4ee33334c888743f862b23af45438ab6cee37d",
+      "source_identical": false,
+      "source_frame_sha256": "9824f8584a9ca4013c2156b169dd24f11bad61558744a1738f3289d7d69fd77d",
+      "width": 280,
+      "height": 360,
+      "crop_xywh": [
+        110,
+        0,
+        280,
+        360
+      ],
+      "privacy_review": {
+        "third_party_faces": "not observed",
+        "viewer_names_comments_or_app_ui": "not observed",
+        "background_review": "background handwritten paper removed from frame by crop; face unchanged; accepted derivative viewed at actual size"
+      }
     },
     {
-      "file": "mily-b188-06-20261004-morning-still.jpg",
+      "file": "mily-b188-06-20261004-morning-privacy-crop.jpg",
       "source_seconds": 1140,
-      "bytes": 21629,
-      "sha256": "d3a996b3bc1ffa6e99185221322ad788d503fd5978681cbbbf70041f61bcf4e2",
-      "source_identical": true
-    },
-    {
-      "file": "mily-b188-07-20261004-morning-still.jpg",
-      "source_seconds": 2100,
-      "bytes": 22126,
-      "sha256": "394159c99c504efd9ce5cc0045b1f6949dc68243a777c53e883b753e347b6c43",
-      "source_identical": true
+      "bytes": 11089,
+      "sha256": "c7c7cbdace1f7f567ee3da71e29c22b73a8cf92957eb9fd9f2c9fa841f3d375d",
+      "source_identical": false,
+      "source_frame_sha256": "d3a996b3bc1ffa6e99185221322ad788d503fd5978681cbbbf70041f61bcf4e2",
+      "width": 290,
+      "height": 360,
+      "crop_xywh": [
+        100,
+        0,
+        290,
+        360
+      ],
+      "privacy_review": {
+        "third_party_faces": "not observed",
+        "viewer_names_comments_or_app_ui": "not observed",
+        "background_review": "background handwritten paper removed from frame by crop; face unchanged; accepted derivative viewed at actual size"
+      }
     }
   ],
-  "visual_review": "actual frames reviewed; no generated face or replacement",
-  "image_count": 7,
-  "additional_stills": "three further source frames may be added after safe extraction and visual review; no filler images",
+  "visual_review": "four accepted files individually viewed; handwritten background excluded or concealed; no generation or face correction",
+  "image_count": 4,
+  "additional_stills": "no additional safe frames accepted in this revision",
   "asr_scope": "nine chunks cover full decoded audio; 1059 candidate segments, no whole-program manual listening",
-  "confirmed_gift_quantity": null
+  "confirmed_gift_quantity": null,
+  "original_frame_review": [
+    {
+      "index": 1,
+      "source_seconds": 30,
+      "original_frame_sha256": "6e36211be7da3af05ce83ed62a2cdde7507d3b83f48f5efead182fdea212a44e",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "cannot fully read; not certified free of private information",
+      "decision": "cropped derivative accepted",
+      "accepted_file": "mily-b188-01-20261004-morning-privacy-crop.jpg"
+    },
+    {
+      "index": 2,
+      "source_seconds": 180,
+      "original_frame_sha256": "c081296c47d0feead45b3dbfb672db97e506ccafcf1085beeb45f8120175f2b4",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "cannot fully read; not certified free of private information",
+      "decision": "withheld; no natural crop verified",
+      "accepted_file": null
+    },
+    {
+      "index": 3,
+      "source_seconds": 420,
+      "original_frame_sha256": "e0555b89e4ae02fc8d45ebecd7c7a1f13ae55f37ec65538bc73e2816a305caf5",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "cannot fully read; not certified free of private information",
+      "decision": "withheld; no natural crop verified",
+      "accepted_file": null
+    },
+    {
+      "index": 4,
+      "source_seconds": 660,
+      "original_frame_sha256": "3b6c58472a1ea95e1f3366fd672ad9bd904054baef02926c03d2ce77f06415af",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "concealed by support board",
+      "decision": "original accepted",
+      "accepted_file": "mily-b188-04-20261004-morning-still.jpg"
+    },
+    {
+      "index": 5,
+      "source_seconds": 900,
+      "original_frame_sha256": "9824f8584a9ca4013c2156b169dd24f11bad61558744a1738f3289d7d69fd77d",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "cannot fully read; not certified free of private information",
+      "decision": "cropped derivative accepted",
+      "accepted_file": "mily-b188-05-20261004-morning-privacy-crop.jpg"
+    },
+    {
+      "index": 6,
+      "source_seconds": 1140,
+      "original_frame_sha256": "d3a996b3bc1ffa6e99185221322ad788d503fd5978681cbbbf70041f61bcf4e2",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "cannot fully read; not certified free of private information",
+      "decision": "cropped derivative accepted",
+      "accepted_file": "mily-b188-06-20261004-morning-privacy-crop.jpg"
+    },
+    {
+      "index": 7,
+      "source_seconds": 2100,
+      "original_frame_sha256": "394159c99c504efd9ce5cc0045b1f6949dc68243a777c53e883b753e347b6c43",
+      "third_party_faces_names_comment_ui": "not observed at actual 640x360 size",
+      "background_handwritten_paper": "cannot fully read; not certified free of private information",
+      "decision": "withheld; no natural crop verified",
+      "accepted_file": null
+    }
+  ],
+  "publication_acceptance": {
+    "received_date": "2026-10-04",
+    "source": "owner-provided same-morning recording; seven extracted frames verified by hashes; original frames retained privately",
+    "scope": [
+      "LIVE STREAM recap",
+      "same recap representative image in NEWS",
+      "same NEWS in HOME"
+    ],
+    "authorization_basis": "owner instructed resumption and completion of morning PR401 publication and P2 material acceptance on 2026-10-04; this acceptance applies only to this morning recap and its existing NEWS/HOME entry",
+    "other_uses": "SNS publication and other galleries not authorized by this media acceptance"
+  }
 }

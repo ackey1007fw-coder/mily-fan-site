@@ -260,7 +260,7 @@ export const news: NewsItem[] = [
     sourceLabel: "10月4日SHOWROOM朝配信（保存録画・自動文字起こし）",
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-asa-showroom`,
     ctaLabel: "朝の配信レポートと写真を見る",
-    media: { kind: "image", src: "/media/live/mily-b188-06-20261004-morning-still.jpg", alt: "ホワイトボードと大きな笑顔のみりぃ", width: 640, height: 360 },
+    media: { kind: "image", src: "/media/live/mily-b188-04-20261004-morning-still.jpg", alt: "ホワイトボードを掲げるみりぃ", width: 640, height: 360 },
   },
   {
     id: "2026-10-04-confirmed-vote-support-video",
