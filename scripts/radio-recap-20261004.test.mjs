@@ -43,3 +43,18 @@ test('detailed October 4 recap covers the program and on-air letters without pri
  const page=readFileSync('src/ActivitiesPage.tsx','utf8');
  assert.match(page,/episode\.highlightsLabel \?\? "みりぃの見どころ"/);
 });
+
+test('anniversary topics, letters and timeline stay ordered within the program source range',()=>{
+ const seconds=stamp=>stamp.split(':').reduce((value,part)=>value*60+Number(part),0);
+ for(const items of [recap.milyHighlights,recap.listenerMessages,recap.timeline]) {
+  assert.equal(new Set(items.map(item=>item.timestamp)).size,items.length,'No duplicate timestamps');
+  for(const [index,item] of items.entries()) {
+   assert.match(item.timestamp,/^\d+:[0-5]\d:[0-5]\d$/);
+   const value=seconds(item.timestamp);
+   assert.ok(value>=157&&value<=10843,'Exclude adjacent programs and station announcements');
+   if(index>0)assert.ok(seconds(items[index-1].timestamp)<value,'Strict chronological order');
+  }
+ }
+ assert.ok(recap.listenerMessages.every(item=>Object.keys(item).every(key=>['timestamp','title','body'].includes(key))));
+ assert.doesNotMatch(JSON.stringify(recap.listenerMessages),/ラジオネーム|投稿者名|リスナー名|寝室|廊下|勤務|会社/);
+});
