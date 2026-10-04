@@ -29,7 +29,16 @@ try {
       for (const route of ['/activities/radio/', '/activities/radio/music/']) {
         await page.goto(origin + route, { waitUntil: 'networkidle' });
         const isMusic = route.endsWith('/music/');
-        const episodes = isMusic ? radioMusicEpisodes : radioEpisodes.map(recap => radioMusicEpisodes.find(item => item.id === recap.id));
+        if (!isMusic) {
+          for (const recap of radioEpisodes.filter(item => !radioMusicEpisodes.some(music => music.id === item.id))) {
+            assert.equal(await page.locator(`section[aria-labelledby="${recap.id}-songs"]`).count(), 0, "未確認の曲目セクションは表示しない");
+            assert.equal(await page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`).count(), 1, "曲目未確認でも放送メモは表示する");
+          }
+        }
+        const episodes = isMusic ? radioMusicEpisodes : radioEpisodes.flatMap(recap => {
+          const music = radioMusicEpisodes.find(item => item.id === recap.id);
+          return music ? [music] : [];
+        });
         for (const episode of episodes) {
           assert.ok(episode, 'Every recap has a song list');
           const section = isMusic ? page.locator(`[id="music-${episode.id}"]`) : page.locator(`section[aria-labelledby="${episode.id}-songs"]`);
