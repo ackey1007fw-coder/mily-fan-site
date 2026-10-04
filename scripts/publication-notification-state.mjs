@@ -15,6 +15,8 @@ export class PublicationOutbox {
   constructor(path) {
     this.db = new DatabaseSync(path);
     this.db.exec(`PRAGMA busy_timeout=1000;
+      CREATE TABLE IF NOT EXISTS notice_metadata (key TEXT PRIMARY KEY,value TEXT NOT NULL) STRICT;
+      CREATE TABLE IF NOT EXISTS known_publications (content_id TEXT PRIMARY KEY) STRICT;
       CREATE TABLE IF NOT EXISTS notices (
         event_kind TEXT NOT NULL, content_id TEXT NOT NULL, platform TEXT NOT NULL,
         url TEXT NOT NULL, title TEXT NOT NULL, state TEXT NOT NULL,
@@ -30,12 +32,18 @@ export class PublicationOutbox {
       (event_kind,content_id,platform,url,title,state) VALUES ('site_publication',?,'threads',?,?,'baseline')`);
     this.db.exec('BEGIN IMMEDIATE');
     try {
-      for (const item of items) insert.run(item.id, publicationUrl(item.url), item.title);
+      if (this.db.prepare("SELECT value FROM notice_metadata WHERE key='baseline_initialized'").get()) throw new Error('Baseline already initialized');
+      for (const item of items) {
+        this.db.prepare('INSERT OR IGNORE INTO known_publications VALUES (?)').run(item.id);
+        insert.run(item.id, publicationUrl(item.url), item.title);
+      }
+      this.db.prepare("INSERT INTO notice_metadata VALUES ('baseline_initialized','1')").run();
       this.db.exec('COMMIT');
     } catch (error) { this.db.exec('ROLLBACK'); throw error; }
   }
 
   claim(item, proof, now = new Date().toISOString()) {
+    if (!this.db.prepare("SELECT value FROM notice_metadata WHERE key='baseline_initialized'").get()) throw new Error('First activation baseline is required');
     const url = publicationUrl(item.url);
     const at = Date.parse(now), checked = Date.parse(proof?.checkedAt);
     if (!item.id || !item.title || !Number.isFinite(at) || !['article','video','important'].includes(item.kind)) throw new Error('Invalid publication');
@@ -43,10 +51,14 @@ export class PublicationOutbox {
         proof?.contentId !== item.id || !Number.isFinite(checked) || checked > at || at - checked > 300000) {
       throw new Error('Fresh public rendering evidence is required');
     }
-    const result = this.db.prepare(`INSERT OR IGNORE INTO notices
-      (event_kind,content_id,platform,url,title,state,claimed_at)
-      VALUES ('site_publication',?,'threads',?,?,'claimed',?)`).run(item.id,url,item.title,now);
-    return result.changes === 1;
+    this.db.exec('BEGIN IMMEDIATE');
+    try {
+      const known=this.db.prepare('INSERT OR IGNORE INTO known_publications VALUES (?)').run(item.id);
+      const result=known.changes ? this.db.prepare(`INSERT OR IGNORE INTO notices
+        (event_kind,content_id,platform,url,title,state,claimed_at)
+        VALUES ('site_publication',?,'threads',?,?,'claimed',?)`).run(item.id,url,item.title,now) : {changes:0};
+      this.db.exec('COMMIT');return result.changes===1;
+    } catch(error){this.db.exec('ROLLBACK');throw error;}
   }
 
   finish(id, result, now = new Date().toISOString()) {

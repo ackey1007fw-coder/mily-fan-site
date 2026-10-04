@@ -218,6 +218,8 @@ export type NewsSourceLink = {
 };
 
 export type NewsItem = {
+  /** Explicitly opt an important notice into first-publication announcements. */
+  publicationNotice?: "important";
   id: string;
   /** Display date, ISO `YYYY-MM-DD`. */
   date: string;

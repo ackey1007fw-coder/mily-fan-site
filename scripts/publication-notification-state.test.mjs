@@ -12,11 +12,14 @@ const proof = { url:item.url, contentId:item.id, httpStatus:200, contentVisible:
 test('two connections cannot claim the same publication, URL aliases, or redeploys twice', () => {
   const dir = mkdtempSync(join(tmpdir(),'mily-notices-')); const path = join(dir,'outbox.sqlite');
   const first = new PublicationOutbox(path), second = new PublicationOutbox(path);
+  first.seedExisting([]);
   try {
     assert.equal(first.claim(item,proof,now),true);
     assert.equal(second.claim(item,proof,now),false);
     const alias = {...item,id:'renamed-id'};
     assert.equal(second.claim(alias,{...proof,contentId:alias.id},now),false);
+    const movedAlias={...alias,url:item.url+'-moved'};
+    assert.equal(second.claim(movedAlias,{...proof,url:movedAlias.url,contentId:alias.id},now),false);
     first.finish(item.id,{state:'unknown',reason:'response_not_received'},now);
     assert.equal(second.claim(item,proof,now),false);
     assert.equal(second.get(item.id).state,'unknown');
@@ -26,7 +29,9 @@ test('two connections cannot claim the same publication, URL aliases, or redeplo
 test('baseline suppresses old articles and no send is claimed without fresh visible production evidence', () => {
   const outbox = new PublicationOutbox(':memory:');
   try {
+    assert.throws(()=>outbox.claim(item,proof,now),/baseline/);
     outbox.seedExisting([item]);
+    assert.throws(()=>outbox.seedExisting([]),/already initialized/);
     assert.equal(outbox.claim(item,proof,now),false);
     const next = {...item,id:'next',url:item.url+'-next'};
     for (const change of [{httpStatus:404},{contentVisible:false},{checkedAt:'2026-10-04T11:54:59Z'},{contentId:'wrong'}]) {
@@ -39,6 +44,7 @@ test('baseline suppresses old articles and no send is claimed without fresh visi
 
 test('success requires a real permalink; failures and uncertain results are never retried automatically', () => {
   const outbox = new PublicationOutbox(':memory:');
+  outbox.seedExisting([]);
   try {
     assert.equal(outbox.claim(item,proof,now),true);
     assert.throws(()=>outbox.finish(item.id,{state:'success',permalink:'https://www.threads.com/@profile'},now));
