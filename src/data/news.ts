@@ -255,6 +255,14 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-04-radio-anniversary-recap", date: "2026-10-04", activityIds: ["radio"],
+    title: "湘南シーサイドサークル1周年の放送メモ",
+    body: "番組の1周年を振り返る日曜日。おめでとうの演じ分け、リスナーへの感謝、未来に向けた一句を、自動文字起こしに基づく要約でまとめました。森石鹸の公式ショップも、番組で紹介された話題からご案内しています。",
+    sourceLabel: "当日の保存音声・自動文字起こし",
+    relatedUrl: `${site.siteUrl}/activities/radio/#2026-10-04-anniversary-mily-highlights`,
+    ctaLabel: "1周年の放送メモを見る",
+  },
+  {
     id: "2026-10-04-day-showroom-recap", date: "2026-10-04", sameDayOrder: 1040,
     activityIds: ["live-stream"], title: "昼の歌とおしゃべり、応援ありがとう",
     body: "午前のラジオを終えた昼のSHOWROOM。星や投票へのお礼、声の話、クマを楽しむやりとりを振り返ります。当日の実フレーム6枚と、自動文字起こしをもとにした配信メモです。",

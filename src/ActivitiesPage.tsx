@@ -503,7 +503,14 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
               <span className="shrink-0 font-semibold tabular-nums text-sage-deep">
                 {item.timestamp}
               </span>
-              <span className="text-ink-muted">{item.label}</span>
+              <span className="text-ink-muted">
+                {item.label}
+                {item.relatedLinks?.map(link => (
+                  <ExternalLink key={link.url} href={link.url} className="mt-2 block py-2 font-semibold text-sage-deep underline">
+                    {link.label}
+                  </ExternalLink>
+                ))}
+              </span>
             </li>
           ))}
         </ol>

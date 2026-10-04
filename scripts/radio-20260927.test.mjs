@@ -7,7 +7,7 @@ import { radioMusicEpisodes,radioMusicPlaylist } from '../src/data/radioMusic.ts
 const music=radioMusicEpisodes.find(x=>x.id===recap.id);
 describe('September 27 kawaii radio archive',()=>{
  it('adds a source-bounded recap without replacing historical episodes',()=>{
-  assert.equal(radioEpisodes[0],recap); assert.equal(recap.date,'2026-09-27');
+  assert.equal(radioEpisodes.find(item=>item.date==='2026-09-27'),recap); assert.equal(recap.date,'2026-09-27');
   assert.equal(recap.milyHighlights.length,15); assert.equal(recap.timeline.length,15);
   assert.equal(recap.listenerMessages.length,4);
   assert.deepEqual(recap.presenters,['みりぃ（パーソナリティ）','マナティ（ディレクター）']);
