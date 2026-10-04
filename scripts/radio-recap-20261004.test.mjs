@@ -8,7 +8,7 @@ import {readFileSync} from 'node:fs';
 
 test('October 4 radio keeps unverified music, private messages and clips out of publication',()=>{
  assert.equal(radioEpisodes[0],recap);
- assert.deepEqual(recap.listenerMessages,[]);assert.equal(recap.nextEpisodeNote,'');
+ assert.equal(recap.nextEpisodeNote,'');
  assert.equal(radioMusicEpisodes.find(item=>item.id===recap.id),undefined);
  assert.match(recap.transcriptionNote,/全編の手動聴取・逐語校正は未実施/);
  assert.doesNotMatch(JSON.stringify(recap),/libfile_|drive\.google|\.ogg|\.flac|\.mp4|\.srt|C:\\|YouTube|youtube\.com/);
@@ -17,11 +17,29 @@ test('October 4 radio keeps unverified music, private messages and clips out of 
 test('shop link belongs to program topic without attributing the introduction to Mily',()=>{
  const item=recap.timeline.find(item=>item.relatedLinks?.length);
  assert.equal(item.relatedLinks[0].url,'https://morisekken.handcrafted.jp/');
- assert.ok(!recap.milyHighlights.some(item=>/石鹸/.test(item.title+' '+item.body)));
+ assert.equal(recap.highlightsLabel,'番組の見どころ');
+ const soap=recap.milyHighlights.find(item=>/石けん/.test(item.title));
+ assert.ok(soap);
+ assert.doesNotMatch(soap.body,/みりぃ|もこ|マナティ/);
  assert.match(recap.transcriptionNote,/紹介者は確定していません/);
  const page=readFileSync('src/ActivitiesPage.tsx','utf8');
  assert.match(page,/item\.relatedLinks\?\.map/);
  const entry=news.find(item=>item.id==='2026-10-04-radio-anniversary-recap');
  assert.equal(entry.relatedUrl,'https://mily-fan-site.vercel.app/activities/radio/#'+recap.id+'-mily-highlights');
  assert.equal(entry.media,undefined);
+});
+
+test('detailed October 4 recap covers the program and on-air letters without private material',()=>{
+ assert.equal(recap.milyHighlights.length,16);
+ assert.equal(recap.listenerMessages.length,5);
+ assert.equal(recap.timeline.length,16);
+ assert.deepEqual(recap.milyHighlights.map(item=>item.timestamp),recap.timeline.map(item=>item.timestamp));
+ for(const topic of ['おめでとう','感謝','光','篠笛','防災','きっかけ']) {
+  assert.ok(recap.milyHighlights.some(item=>(item.title+' '+item.body).includes(topic)),topic);
+ }
+ assert.match(recap.transcriptionNote,/放送内で紹介された内容を5つのまとまり/);
+ assert.match(recap.transcriptionNote,/紹介総数や逐語表現を確定したものではありません/);
+ assert.doesNotMatch(JSON.stringify([...recap.milyHighlights,...recap.listenerMessages]),/必須場面|現行候補|ASR|DM|大学名|Library|libfile_/);
+ const page=readFileSync('src/ActivitiesPage.tsx','utf8');
+ assert.match(page,/episode\.highlightsLabel \?\? "みりぃの見どころ"/);
 });
