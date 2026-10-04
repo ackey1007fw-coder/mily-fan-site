@@ -257,7 +257,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-10-04-radio-anniversary-recap", date: "2026-10-04", activityIds: ["radio"],
     title: "湘南シーサイドサークル1周年の放送メモ",
-    body: "番組の1周年を振り返る日曜日。おめでとうの演じ分け、リスナーへの感謝、未来に向けた一句を、自動文字起こしに基づく要約でまとめました。森石鹸の公式ショップも、番組で紹介された話題からご案内しています。",
+    body: "番組1周年の放送を、16の話題と放送内のお便り5つの要約で振り返ります。番組の始まり、篠笛の紹介、防災フェア中継、おめでとうの演じ分け、感謝、新学期の一句まで、自動文字起こしをもとにした詳細メモです。",
     sourceLabel: "当日の保存音声・自動文字起こし",
     relatedUrl: `${site.siteUrl}/activities/radio/#2026-10-04-anniversary-mily-highlights`,
     ctaLabel: "1周年の放送メモを見る",

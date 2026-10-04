@@ -444,10 +444,10 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
 
       {episode.milyHighlights.length > 0 ? <section aria-labelledby={`${episode.id}-mily-highlights`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          Mily Highlights
+          {episode.highlightsLabel ? "Program Highlights" : "Mily Highlights"}
         </p>
         <h3 id={`${episode.id}-mily-highlights`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
-          みりぃの見どころ
+          {episode.highlightsLabel ?? "みりぃの見どころ"}
         </h3>
         <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {episode.milyHighlights.map((highlight) => (
