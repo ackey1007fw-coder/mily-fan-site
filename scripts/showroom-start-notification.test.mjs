@@ -11,6 +11,14 @@ test('existing detector state gates actual target live and excludes schedules, s
  assert.equal(liveStartEligible({...event,source:'another'},state,[],now),false);
  assert.equal(liveStartEligible(event,state,[{kind:'showroom_live_ended',room_id:573253,previous_live_id:123,at:'2026-10-04T13:30:04Z'}],now),false);
 });
+test('an ended live ID stays terminal even if a later start is regenerated after reconnect',()=>{
+ const later=Date.parse('2026-10-04T13:30:20Z');
+ const restarted={...event,at:'2026-10-04T13:30:15Z'};
+ const cached={...state,checked_epoch:later/1000};
+ const ended=[{kind:'showroom_live_ended',room_id:573253,previous_live_id:123,at:'2026-10-04T13:30:10Z'}];
+ assert.equal(liveStartEligible(restarted,cached,ended,later),false);
+ const outbox=new LiveStartOutbox(':memory:');try{assert.equal(outbox.claim(restarted,cached,ended,later),false);assert.equal(outbox.get(123),undefined);}finally{outbox.close()}
+});
 test('one live session claims once, another session with the same official URL remains eligible',()=>{
  const outbox=new LiveStartOutbox(':memory:');try{
  assert.equal(outbox.claim(event,state,[],now),true);assert.equal(outbox.claim(event,state,[],now),false);

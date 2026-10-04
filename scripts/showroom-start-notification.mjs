@@ -12,7 +12,7 @@ export function liveStartEligible(event, state, endedEvents, now = Date.now()) {
     Number.isFinite(eventAt) && eventAt <= now && now - eventAt <= 90000 &&
     Number.isFinite(checkedAt) && checkedAt <= now && now - checkedAt <= 30000 &&
     Array.isArray(endedEvents) && !endedEvents.some(end => end.kind === 'showroom_live_ended' &&
-      end.room_id === MILY_ROOM_ID && end.previous_live_id === event.live_id && Date.parse(end.at) >= eventAt);
+      end.room_id === MILY_ROOM_ID && end.previous_live_id === event.live_id);
 }
 
 export class LiveStartOutbox {

@@ -10,3 +10,8 @@ test('an actual start that ends before the connector call is never posted',async
  const outbox=new LiveStartOutbox(':memory:');let reads=0,calls=0;const event={kind:'showroom_live_started',source:'mily',room_id:573253,live_id:123,at:'2026-10-04T13:30:00Z'};
  try{const result=await deliverLiveStart(outbox,event,{now:()=>now,readExistingState:async()=>({state:{room_id:573253,live_id:123,live:++reads===1,checked_epoch:now/1000},endedEvents:[]}),publishThreads:async()=>{calls++;return{state:'success',permalink:'https://www.threads.com/@ackeytan_0720/post/real'}}});assert.equal(result.state,'failed');assert.equal(calls,0);assert.equal(outbox.get(123).reason,'live_ended_or_stale_before_send');}finally{outbox.close()}
 });
+test('end followed by a regenerated start never invokes the sending callback',async()=>{
+ const at=Date.parse('2026-10-04T13:30:20Z'),outbox=new LiveStartOutbox(':memory:');let calls=0;
+ const event={kind:'showroom_live_started',source:'mily',room_id:573253,live_id:123,at:'2026-10-04T13:30:15Z'};
+ try{const result=await deliverLiveStart(outbox,event,{now:()=>at,readExistingState:async()=>({state:{room_id:573253,live_id:123,live:true,checked_epoch:at/1000},endedEvents:[{kind:'showroom_live_ended',room_id:573253,previous_live_id:123,at:'2026-10-04T13:30:10Z'}]}),publishThreads:async()=>{calls++;return{state:'success',permalink:'https://www.threads.com/@ackeytan_0720/post/real'}}});assert.equal(result.state,'ineligible_or_duplicate');assert.equal(calls,0);}finally{outbox.close()}
+});
