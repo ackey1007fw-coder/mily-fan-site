@@ -10,7 +10,7 @@ const moments = [
   [9, "録画2・0:14:32", "大きな笑顔のみりぃ"],
 ] as const;
 const gallery = moments.map(([index, time, alt]) => {
-  const downloadName = `mily-20261004-day-${String(index).padStart(2, "0")}-still.jpg`;
+  const downloadName = `mily-b189-${String(index).padStart(2, "0")}-20261004-day-still.jpg`;
   return { src: `/media/live/${downloadName}`, width: 640, height: 360, alt, caption: `${time}｜${alt}`, downloadName };
 });
 
