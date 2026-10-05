@@ -2258,3 +2258,10 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 特典の一次根拠は本人X https://x.com/Mily_chan36/status/2105843753768612039 。12日まで毎日投票した方へ「コンプリートありがとう動画」、1人ずつ別の動画、コンプリート報告先は後日案内という範囲だけを掲載する。Xプロフィールは最新案内の確認、Instagramプロフィールは本人への確認として既存socials正本から案内し、確定した応募先・DM宛先とは書かない。連続開始日・必要スクリーンショット・報告期限・新しい申込条件は推測しない。
 
 今回提供された画像は現サイトの投票カードの確認スクリーンショットで、特典告知素材として新規掲載しない。既存b181画像・動画と三次履歴を保持。投票・LINE認証・本人へのDM・SNS送信は行わない。四次の受付期間外には日次・特典・連絡導線も最優先カードから外す。追補PRは新規の明示マージ承認までDraftとする。
+
+## 2026-10-05 Paton EX2 day 2 guidance
+
+- HOME and /support/ share PatonExTwoGuide, linked to official entrant12600 and event551. Free daily applause costs0coins;4x applause costs50coins. Login required. No gift/purchase/login/SNS action performed by the agent.
+- Official display is October5 00:00–23:59 without a verified timezone. Keep this as dated guidance, not a confirmed supportEvents period. No +09:00 assumption, inferred reset time, live/ended state or automatic deadline is introduced. The participant button asks visitors to check official acceptance; it does not assert current availability. October9's participant URL remains unknown.
+- New dated NEWS points to the shared guide; old PatonVoteGuide and all MISS CIRCLE WEB/SHOWROOM paths remain unchanged. Existing historical NEWS fixtures exclude this later item to retain their earlier snapshots.
+- Public HTML checked for name, period and gift coin values. Exact login-after behavior is not verified. No new media, profile or notification changes.

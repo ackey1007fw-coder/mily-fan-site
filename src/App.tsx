@@ -1,4 +1,5 @@
 import { ActivitiesGateway } from "./components/ActivitiesGateway";
+import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
 import { ActivityBanner } from "./components/ActivityBanner";
 import { ChallengeConnection } from "./components/ChallengeConnection";
 import { Footer } from "./components/Footer";
@@ -34,6 +35,7 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <PatonExTwoGuide />
         <PatonVoteGuide />
         <TodayDashboard />
         <AnnouncedStreamSchedule />

@@ -27,6 +27,7 @@ import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
 import { site } from "./site.ts";
+import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -255,6 +256,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-05-paton-ex2-day2-guide",
+    date: "2026-10-05",
+    dateBasis: "confirmed-on",
+    activityIds: ["campus-girls"],
+    title: "10月5日のPaton：無料拍手の確認案内",
+    body: "CAMPUS BOYS/GIRLS 2027 本選EX2②の公式掲載期間は10月5日0:00〜23:59（公式ページ表記）です。三橋莉子（みりぃ）の本人ページに「1日1回無料！拍手」（0コイン）が用意されています。ログインが必要で、「4倍拍手」（50コイン）は別の有料ギフトです。\n\nこの記録は10月5日分です。タイムゾーンと日付切替時刻は未確認のため、このサイトでは現在の受付状況を判定していません。応援案内から公式ページで本人名・受付状況・コイン数をご確認ください。",
+    source: patonExTwoDayTwo.eventUrl,
+    sourceLabel: "Paton公式・本選EX2②",
+    relatedUrl: `${site.siteUrl}/support/#paton-ex2-day2-guide`,
+    ctaLabel: "10月5日分のPaton案内を見る",
+  },
   {
     id: "2026-10-05-car-vote-day-four-x",
     date: "2026-10-05",
