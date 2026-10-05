@@ -4,13 +4,13 @@ import {readFile} from "node:fs/promises";
 import sharp from "sharp";
 import {streamRecap20261005Asa as recap} from "../src/data/streamRecap20261005Asa.ts";
 
-test("October 5 morning has distinct real, original-size stills without metadata", async () => {
+test("October 5 morning has distinct real, privacy-cropped stills without metadata", async () => {
   assert.equal(recap.gallery.length, 8);
   const contents = new Set();
   for (const image of recap.gallery) {
     const bytes = await readFile(new URL(`../public${image.src}`, import.meta.url));
     const metadata = await sharp(bytes).metadata();
-    assert.equal(metadata.width, 640); assert.equal(metadata.height, 360);
+    assert.equal(metadata.width, 430); assert.equal(metadata.height, 360);
     assert.equal(image.width, metadata.width); assert.equal(image.height, metadata.height);
     assert.equal(metadata.exif, undefined); assert.equal(metadata.icc, undefined);
     contents.add(bytes.toString("base64"));

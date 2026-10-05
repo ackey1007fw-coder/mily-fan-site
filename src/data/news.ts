@@ -262,7 +262,7 @@ export const news: NewsItem[] = [
     title: "10月5日、朝の挨拶と歌のおしゃべり",
     body: "紫のヘアピンで朝の挨拶。投票報告や指ハートへのお礼、定期券の話、歌の練習を8つの場面にまとめました。当日の保存録画を自動文字起こしした要約と、実写真8枚です。手動聴取・曲名確認は未完了のため、不確かな情報は掲載していません。",
     sourceLabel: "当日の保存録画・自動文字起こし",
-    media: { kind: "image", src: "/media/live/mily-b192-02-20261005-morning-still.jpg", width: 640, height: 360, alt: "朝配信で笑顔で手を振るみりぃ" },
+    media: { kind: "image", src: "/media/live/mily-b192-02-20261005-morning-privacy-still.png", width: 430, height: 360, alt: "朝配信で笑顔で画面を見るみりぃ" },
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-05-asa-showroom`,
     ctaLabel: "朝の配信まとめと写真を見る",
   },
@@ -311,7 +311,7 @@ export const news: NewsItem[] = [
     activityIds: ["live-stream"], title: "昼の歌とおしゃべり、応援ありがとう",
     body: "午前のラジオを終えた昼のSHOWROOM。星や投票へのお礼、声の話、クマを楽しむやりとりを振り返ります。当日の実フレーム6枚と、自動文字起こしをもとにした配信メモです。",
     sourceLabel: "当日の保存録画・自動文字起こし",
-    media: { kind: "image", src: "/media/live/mily-b189-09-20261004-day-still.jpg", width: 640, height: 360, alt: "昼配信で大きな笑顔を見せるみりぃ" },
+    media: { kind: "image", src: "/media/live/mily-b189-09-20261004-day-still.jpg", width: 430, height: 360, alt: "昼配信で大きな笑顔を見せるみりぃ" },
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-day-showroom`, ctaLabel: "昼の配信メモを見る",
   },
   {
@@ -323,7 +323,7 @@ export const news: NewsItem[] = [
     sourceLabel: "10月4日SHOWROOM朝配信（保存録画・自動文字起こし）",
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-asa-showroom`,
     ctaLabel: "朝の配信レポートと写真を見る",
-    media: { kind: "image", src: "/media/live/mily-b188-04-20261004-morning-still.jpg", alt: "ホワイトボードを掲げるみりぃ", width: 640, height: 360 },
+    media: { kind: "image", src: "/media/live/mily-b188-04-20261004-morning-still.jpg", alt: "ホワイトボードを掲げるみりぃ", width: 430, height: 360 },
   },
   {
     id: "2026-10-04-confirmed-vote-support-video",
@@ -372,7 +372,7 @@ export const news: NewsItem[] = [
     relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-03-asa-showroom`,
     ctaLabel: "朝配信のメモとスクショ10枚を見る",
     additionalCtas: [{ label: "投票・無料ギフト・イベント審査の案内", url: "/support/" }],
-    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-still.jpg", width: 640, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
+    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-still.jpg", width: 430, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
   },
   {
     id: "2026-10-02-fourth-round-stream-schedule", date: "2026-10-02",
