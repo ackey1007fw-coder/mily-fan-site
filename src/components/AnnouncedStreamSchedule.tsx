@@ -1,4 +1,4 @@
-import { fourthRoundStreamSchedule, fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "../data/fourthRoundStreamSchedule";
+import { fourthRoundStreamSchedule, fourthRoundScheduleNewsImage, fourthRoundScheduleChangeNotice, FOURTH_ROUND_SCHEDULE_X_URL } from "../data/fourthRoundStreamSchedule";
 import { upcomingSlots } from "../data/streamSchedule";
 import { formatSlotDate, useStreamSchedule } from "../lib/useStreamSchedule";
 import { confirmedShowroomAction } from "../lib/homeToday";
@@ -17,6 +17,10 @@ export function AnnouncedStreamSchedule() {
       <div className="mx-auto max-w-3xl rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-6">
         <h2 className="text-xl font-bold text-ink">四次審査・本人告知の配信予定</h2>
         <p className="mt-2 text-sm leading-7 text-ink-muted">10月3日〜7日の予定（2026年・JST）。10月2日の本人告知に基づく予定で、実配信の記録ではありません。変更は本人の最新Xをご確認ください。</p>
+        <p className="mt-3 rounded-xl border border-sage/25 bg-sage-soft/60 px-4 py-3 text-sm leading-7 text-ink">
+          {fourthRoundScheduleChangeNotice.message}{" "}
+          <ExternalLink href={fourthRoundScheduleChangeNotice.sourceUrl} className="font-semibold text-sage-deep underline underline-offset-4">本人Xの変更案内を見る</ExternalLink>
+        </p>
         <NewsImage media={fourthRoundScheduleNewsImage} className="mt-4 h-auto w-full rounded-xl object-contain" />
         <p className="mt-2 text-xs text-ink-muted">画像をタップすると原寸で開きます。画像内の文字は下の予定一覧でも読めます。</p>
         <ul className="mt-4 grid gap-2 sm:grid-cols-2">

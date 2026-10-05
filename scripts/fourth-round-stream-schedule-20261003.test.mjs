@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFileSync} from 'node:fs';
 import sharp from 'sharp';
-import {fourthRoundStreamSchedule as slots, fourthRoundScheduleNewsImage as image, FOURTH_ROUND_SCHEDULE_X_URL} from '../src/data/fourthRoundStreamSchedule.ts';
+import {fourthRoundStreamSchedule as slots, fourthRoundScheduleNewsImage as image, fourthRoundScheduleChangeNotice, FOURTH_ROUND_SCHEDULE_X_URL} from '../src/data/fourthRoundStreamSchedule.ts';
 import {streamSchedule,upcomingSlots,slotStartMs,slotEndMs} from '../src/data/streamSchedule.ts';
 import {news} from '../src/data/news.ts';
 import {nextSupportEventBoundary} from '../src/lib/useSupportEventClock.ts';
@@ -33,6 +33,15 @@ test('every confirmed slot expires at its end and cannot remain next',()=>{
  assert.equal(upcomingSlots(slots,[],Date.parse('2026-10-03T07:30:00+09:00'))[0].time,'21:40');
  assert.equal(upcomingSlots(slots,[],Date.parse('2026-10-07T22:30:00+09:00')).length,0);
  assert.equal(nextSupportEventBoundary(Date.parse('2026-10-03T07:29:59+09:00')),Date.parse('2026-10-03T07:30:00+09:00'));
+});
+
+test('change notice links the newer first-party post without inferring replacement slots',()=>{
+ assert.equal(fourthRoundScheduleChangeNotice.sourceUrl,'https://x.com/mily_chan36/status/2107125051904725482');
+ assert.equal(fourthRoundScheduleChangeNotice.message,'配信時間の変更が案内されています。最新の時間は本人投稿をご確認ください。');
+ assert.deepEqual(slots.filter(s=>s.date==='2026-10-06').map(s=>[s.time,s.endTime]),[['05:30','06:30'],['14:45','15:15'],['22:00','22:30']]);
+ const component=readFileSync('src/components/AnnouncedStreamSchedule.tsx','utf8');
+ assert.ok(component.indexOf('fourthRoundScheduleChangeNotice.message')<component.indexOf('<NewsImage'));
+ assert.match(component,/href=\{fourthRoundScheduleChangeNotice.sourceUrl\}/);
 });
 
 test('NEWS links the complete poster and source without turning it into a stream recap',async()=>{
