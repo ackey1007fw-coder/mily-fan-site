@@ -72,7 +72,8 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
         playsInline
         preload="none"
         aria-label={media.alt}
-        className="mx-auto mt-4 aspect-[9/16] w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+        style={{ aspectRatio: `${media.width} / ${media.height}` }}
+        className="mx-auto mt-4 w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
       />
     );
   }

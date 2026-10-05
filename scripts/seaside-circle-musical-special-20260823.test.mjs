@@ -485,7 +485,8 @@ describe("2026-08-23 seaside circle musical special — privacy and routing", ()
     assert.match(html, /rel="canonical" href="__STORY_2026_08_23_MUSICAL_SPECIAL_CANONICAL__"/);
     assert.match(html, /"@type": "Article"/);
     assert.match(sitemap, /\/stories\/2026-08-23-musical-special\//);
-    assert.match(latest, /aspect-\[9\/16\].*max-w-sm/);
+    assert.match(latest, /aspectRatio: `\$\{media\.width\} \/ \$\{media\.height\}`/);
+    assert.match(latest, /w-full max-w-sm/);
     assert.match(latest, /object-contain/);
     assert.match(latest, /controls/);
     assert.match(latest, /playsInline/);

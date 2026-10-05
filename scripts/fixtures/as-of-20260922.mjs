@@ -12,6 +12,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-05-car-vote-day-four-x",
   "2026-10-04-confirmed-vote-support-video",
   "2026-10-04-radio-anniversary-stories",
   "2026-10-03-confirmed-tiktok-campus-makeup",

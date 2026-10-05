@@ -1,3 +1,4 @@
+import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourXVideo.ts";
 import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
@@ -254,6 +255,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-05-car-vote-day-four-x",
+    date: "2026-10-05",
+    title: "みりぽち4日目！車内からの短い動画🚗",
+    body: "10月5日9:43、みりぃがXで投票4日目を呼びかけ、公式ENTRY 734ページへのリンクと車内の短い動画を届けてくれました。赤い光の中、シートベルトを着けてカメラを見る約2秒の映像です。\n\n『4日目』は投稿時点の案内です。現在の投票先・受付期間は、下の応援案内をご確認ください。サイトの動画は音声なしで掲載しています。",
+    source: CAR_VOTE_DAY_FOUR_X_URL,
+    sourceLabel: "みりぃのX投稿（10月5日9:43 JST）",
+    media: carVoteDayFourXVideo,
+    message: { label: "みりぃの投稿より", text: "みりぽちー！！4日目だ╰(*´︶`*)╯♡" },
+    relatedUrl: `${site.siteUrl}/support/`,
+    ctaLabel: "投票・応援案内を見る",
+  },
   {
     id: "2026-10-04-night-showroom-recap", date: "2026-10-04", sameDayOrder: 2230,
     activityIds: ["live-stream"], title: "ラジオの余韻が残る夜、みんなへのありがとう",
