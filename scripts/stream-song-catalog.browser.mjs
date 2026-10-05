@@ -220,7 +220,21 @@ try {
         assert.ok((await sourceInfo.innerText()).includes(disclosure.material));
         const verification = sourceInfo.locator('[data-recap-verification]');
         assert.equal(await verification.evaluate(element => element.open), false);
-        await verification.locator('summary').click();
+        const verificationSummary = verification.locator('summary');
+        // Keep the touch target away from the viewport edge before the one real click.
+        // Trial click retains Playwright's stability/visibility/hit-target checks without toggling.
+        await verificationSummary.evaluate(element => element.scrollIntoView({ block: "center", behavior: "instant" }));
+        await page.waitForFunction((hash) => {
+          const summary = document.querySelector(`${hash} [data-recap-verification] > summary`);
+          if (!summary) return false;
+          const rect = summary.getBoundingClientRect();
+          const hit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+          return rect.top >= 80 && rect.bottom <= window.innerHeight - 80 && (hit === summary || summary.contains(hit));
+        }, hash, { timeout: 5000 });
+        await verificationSummary.click({ trial: true });
+        assert.equal(await verification.evaluate(element => element.open), false);
+        result.latestDisclosureClick = { viewport: scenario.viewport, box: await verificationSummary.boundingBox(), centeredHitTarget: true };
+        await verificationSummary.click();
         await page.waitForFunction((hash) => document.querySelector(`${hash} [data-recap-verification]`)?.open === true, hash, { timeout: 5000 });
         assert.equal(await verification.evaluate(element => element.open), true);
         for (const text of disclosure.verification) assert.ok((await sourceInfo.innerText()).includes(text));
