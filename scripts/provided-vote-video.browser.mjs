@@ -66,6 +66,36 @@ try {
     results.push({ width, state, time, status: "passed", videoRetained: true, expiryTimerChecked: state === "last-ms", fullPlaybackChecked: state === "ended" });
     await page.close();
   }
+  // The October 5 owner-provided X video exercises the landscape NEWS player.
+  for (const width of [390, 1440]) for (const route of ["/", "/news/"]) {
+    const page = await browser.newPage({ viewport: { width, height: 900 } });
+    const errors = []; page.on("pageerror", error => errors.push(error.message));
+    await page.route("**/*", request => new URL(request.request().url()).origin === origin ? request.continue() : request.fulfill({ status: 204, body: "" }));
+    await page.goto(origin + route, { waitUntil: "domcontentloaded" });
+    const card = page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
+    await card.waitFor();
+    assert.equal(await card.count(), 1);
+    const video = card.locator('video[src="/media/news/mily-b191-01-car-vote-day4.mp4"]');
+    assert.equal(await video.count(), 1);
+    assert.match(await card.innerText(), /音声なし/);
+    assert.match(await card.innerText(), /『4日目』は投稿時点の案内/);
+    assert.equal(await card.locator('a[href="https://x.com/Mily_chan36/status/2106908009385640372"]').count(), 1);
+    assert.equal(await card.getByRole("link", { name: /^投票・応援案内を見る/ }).getAttribute("href"), "https://mily-fan-site.vercel.app/support/");
+    assert.equal(await video.getAttribute("preload"), "none");
+    await video.scrollIntoViewIfNeeded();
+    await video.evaluate(video => video.play());
+    await page.waitForFunction(() => document.querySelector('video[src="/media/news/mily-b191-01-car-vote-day4.mp4"]')?.ended, null, { timeout: 15000 });
+    const playback = await video.evaluate(video => ({ width: video.videoWidth, height: video.videoHeight, duration: video.duration, ended: video.ended, controls: video.controls, inline: video.playsInline, autoplay: video.autoplay, error: video.error?.code, ratio: video.getBoundingClientRect().width / video.getBoundingClientRect().height }));
+    assert.equal(playback.width, 910); assert.equal(playback.height, 512);
+    assert.ok(Math.abs(playback.duration - 58 / 30) < 0.01);
+    assert.ok(Math.abs(playback.ratio - 910 / 512) < 0.02);
+    assert.ok(playback.ended && playback.controls && playback.inline && !playback.autoplay && !playback.error);
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    assert.deepEqual(errors, []);
+    await card.screenshot({ path: join(output, `car-x-${route === "/" ? "home" : "news"}-${width}.png`) });
+    results.push({ width, route, status: "passed", landscapeVideo: playback });
+    await page.close();
+  }
   await writeFile(join(output, "results.json"), JSON.stringify({ head: process.env.PR_HEAD_SHA || null, results }, null, 2));
   console.log(`Provided vote video: ${results.length} boundary cases passed; expired archive video plays to 5 seconds.`);
 } finally { await browser.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)); }

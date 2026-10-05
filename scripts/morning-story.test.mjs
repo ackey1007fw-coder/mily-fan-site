@@ -195,7 +195,7 @@ describe("Latest video playback contract", () => {
     assert.match(latest, /playsInline/);
     assert.match(latest, /preload="none"/);
     assert.doesNotMatch(latest, /autoPlay|autoplay|\bloop\b/);
-    assert.match(latest, /aspect-\[9\/16\]/);
+    assert.match(latest, /aspectRatio: `\$\{media\.width\} \/ \$\{media\.height\}`/);
   });
 });
 
