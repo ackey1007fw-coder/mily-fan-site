@@ -4756,3 +4756,11 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 - 元投稿：https://www.tiktok.com/@seasidecircle/video/7692016046542228756 。本人投稿本文「大学に行く時はとにかくメイク薄い💄」。投稿日時は未確認、NEWSの日付は確認日として明示。
 - 指定済み元素材と投稿映像の対応は別担当が確認。NEWS／Galleryは既存TikTok公式playerと元投稿リンクを共有し、動画・音源を外部へ再ホストしない。動画本体・個人保存先・私的受渡しURLは公開repoに追加しない。
 - 10/2夜・10/3朝のトーク短尺は公開Instagramへの既存socialClip導線を使用。オーナーの原音確認と、全編のAI聴取は区別。公開済み投稿は変更せず、非クリックURL等の不備は投稿台帳に保持。
+
+## b192 — 2026-10-05 morning SHOWROOM real stills
+
+- Owner authorized reading/copying the saved recording and preparing the morning public article. The original video remains private outside this repo.
+- Eight actual640x360 frames, recording-relative00:30/03:00/09:00/15:00/21:00/24:00/33:00/38:00. All eight inspected at native size; no viewer names, comment overlay, other people or device UI visible. Unselected blurred/closed-eye candidates were excluded.
+- public/media/live/mily-b192-01 through08-20261005-morning-still.jpg. Representative02 shows a wave/smile. Full landscape composition retained; no crop, enlargement, face generation or retouching.
+- Removed only JPEG metadata/comment marker segments. All eight decoded RGB images match the private extracted candidates exactly; EXIF/ICC absent. Private provenance manifest retains source/public hashes, times and checks. No full recording, audio, transcript, private file IDs or signed links are committed.
+- All 21 saved-recording chunks (40:05.596) were processed locally with the existing small/int8 ASR model, one CPU thread. The resulting text was reviewed for the summary; manual auditory review and song-name verification were not performed. Unverified song names, viewer identities, rankings and quantities are omitted. Recording start is approximate 06:00; actual broadcast start and complete coverage remain unknown. No external audio upload. The ledger does not claim publication or manual hearing.

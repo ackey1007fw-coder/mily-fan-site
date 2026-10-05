@@ -257,6 +257,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-05-morning-showroom-recap", date: "2026-10-05",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "10月5日、朝の挨拶と歌のおしゃべり",
+    body: "紫のヘアピンで朝の挨拶。投票報告や指ハートへのお礼、定期券の話、歌の練習を8つの場面にまとめました。当日の保存録画を自動文字起こしした要約と、実写真8枚です。手動聴取・曲名確認は未完了のため、不確かな情報は掲載していません。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-b192-02-20261005-morning-still.jpg", width: 640, height: 360, alt: "朝配信で笑顔で手を振るみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-05-asa-showroom`,
+    ctaLabel: "朝の配信まとめと写真を見る",
+  },
+  {
     id: "2026-10-05-paton-ex2-day2-guide",
     date: "2026-10-05",
     dateBasis: "confirmed-on",
