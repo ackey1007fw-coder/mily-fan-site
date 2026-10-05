@@ -3,17 +3,17 @@ import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote } from "./streamR
 
 const moments = [
   [1, "0:00:30", "紫のヘアピンを付けて画面を見るみりぃ"],
-  [2, "0:03:00", "笑顔で画面を見るみりぃ"],
+  [2, "0:03:00", "笑顔で手を振るみりぃ"],
   [3, "0:09:00", "画面を見ながら笑うみりぃ"],
   [4, "0:15:00", "カメラへ話しかけるみりぃ"],
   [5, "0:21:00", "両手で髪を整えるみりぃ"],
   [6, "0:24:00", "頭の上に両手を添えるみりぃ"],
-  [7, "0:27:00", "歌いながら手を動かすみりぃ"],
+  [7, "0:33:00", "頬に手を添えるみりぃ"],
   [8, "0:38:00", "カメラに近づいて話すみりぃ"],
 ] as const;
 const gallery = moments.map(([index, time, alt]) => {
-  const downloadName = `mily-b192-${String(index).padStart(2, "0")}-20261005-morning-privacy-still.png`;
-  return { src: `/media/live/${downloadName}`, width: 430, height: 360, alt, caption: `${time}｜${alt}`, downloadName };
+  const downloadName = `mily-b192-${String(index).padStart(2, "0")}-20261005-morning-still.jpg`;
+  return { src: `/media/live/${downloadName}`, width: 640, height: 360, alt, caption: `${time}｜${alt}`, downloadName };
 });
 
 /** 保存録画全21区間のローカル自動文字起こしを元に要約。手動聴取は未実施。 */
