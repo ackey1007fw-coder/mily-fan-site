@@ -80,7 +80,7 @@ try {
     assert.match(await card.innerText(), /音声なし/);
     assert.match(await card.innerText(), /『4日目』は投稿時点の案内/);
     assert.equal(await card.locator('a[href="https://x.com/Mily_chan36/status/2106908009385640372"]').count(), 1);
-    assert.equal(await card.locator('a[href="https://mily-fan-site.vercel.app/support/"]').count(), 1);
+    assert.equal(await card.getByRole("link", { name: /^投票・応援案内を見る/ }).getAttribute("href"), "https://mily-fan-site.vercel.app/support/");
     assert.equal(await video.getAttribute("preload"), "none");
     await video.scrollIntoViewIfNeeded();
     await video.evaluate(video => video.play());
