@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -237,6 +238,7 @@ export default function SupportPage() {
           </div>
         ) : null}
         <SupportHero />
+        <PatonExTwoGuide />
         <ProvidedVoteSupportVideo />
         <FourthRoundSupportGuide />
         <PatonVoteGuide />
