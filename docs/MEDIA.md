@@ -4759,6 +4759,8 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 
 ## b192 — 2026-10-05 morning SHOWROOM real stills
 
+- Published URL compatibility: retain the eight `mily-b192-01` through `08-20261005-morning-privacy-still.png` files at their original paths, restored byte-for-byte from PR410 merge `e9f190879f96fda58102b8b5dc363d12245d9172`. These previously published 430×360 PNGs remain download-compatible assets; the current article and NEWS continue using the restored background-inclusive 640×360 JPEGs. No redirect, new crop, or JPEG replacement is introduced. Exact original sizes/SHA-256 are in `scripts/assets/morning-20261005-legacy-png.json`; unit and post-build HTTP checks protect all eight URLs.
+
 - Owner authorized reading/copying the saved recording and preparing the morning public article. The original video remains private outside this repo.
 - Eight actual640x360 frames, recording-relative00:30/03:00/09:00/15:00/21:00/24:00/33:00/38:00. All eight inspected at native size; no comment overlay, other people or device UI visible. Unselected blurred/closed-eye candidates were excluded.
 - Background acceptance: at2026-10-05 21:04:55JST, the user explained that the blue notes mark supporters who reached fan level10 and explicitly instructed preserving the background in all8 photos. The source framing is restored; no crop, enlargement, face generation or retouching. Names on the notes are not guessed, transcribed or used as article content. This acceptance comes from the owner's specific explanation/permission, not from inability to read the notes.
