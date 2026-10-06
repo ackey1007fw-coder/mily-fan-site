@@ -4764,3 +4764,13 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 - Background acceptance: at2026-10-05 21:04:55JST, the user explained that the blue notes mark supporters who reached fan level10 and explicitly instructed preserving the background in all8 photos. The source framing is restored; no crop, enlargement, face generation or retouching. Names on the notes are not guessed, transcribed or used as article content. This acceptance comes from the owner's specific explanation/permission, not from inability to read the notes.
 - public/media/live/mily-b192-01 through08-20261005-morning-still.jpg. Representative02 shows a wave/smile. Removed only JPEG metadata/comment marker segments; decoded RGB matches extracted source frames, EXIF/ICC absent. Private provenance manifest retains source-frame/public hashes and requested seek times. Exact selected frame PTS and original recording hash were not measured and are not inferred from frame hashes. No full recording, audio, transcript, private file IDs, note text or signed links are committed.
 - All 21 saved-recording chunks (40:05.596) were processed locally with the existing small/int8 ASR model, one CPU thread. The resulting text was reviewed for the summary; manual auditory review and song-name verification were not performed. Unverified song names, viewer identities, rankings and quantities are omitted. Recording start is approximate 06:00; actual broadcast start and complete coverage remain unknown. No external audio upload. The ledger does not claim publication or manual hearing.
+
+### 2026-10-06 朝配信の実写真3枚
+
+当日の保存録画の実フレームを640×360の元JPEGのまま掲載。独立検品でcaptionの適合と背景を確認し、新しいP1/P2指摘なし。画素変更なし、確認画像の各領域と元JPEGのRGB一致を検証。代表写真は11:00の笑顔。掲載面はLIVE STREAM・NEWS・HOME。MISS CIRCLE関連NEWSリンクは保持し、関連メディアへ画像は展開しない。
+
+|asset|録画内目安|caption|SHA256|
+|---|---|---|---|
+|mily-b194-01-20261006-morning-still.jpg|0:00:30|目線を下に向けるみりぃ|a74b518d520a8a3aeefa7fe05fb3495d141a0e10b564b801d99a2f30489963c0|
+|mily-b194-02-20261006-morning-still.jpg|0:11:00|カメラへ笑顔を向けるみりぃ|298d6a63073b7de8229a28ed153b3fb5500613aeee003e53b45e0bb7281fd573|
+|mily-b194-03-20261006-morning-still.jpg|0:40:00|顔の前に手を添えるみりぃ|d7b5fac875e1b3081393ddb9dd816b75da92732893629987fe57104006fd0c0f|
