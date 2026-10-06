@@ -2265,3 +2265,7 @@ YouTubeの個別動画ページで曲名・アーティスト・投稿チャン�
 - Official display is October5 00:00–23:59 without a verified timezone. Keep this as dated guidance, not a confirmed supportEvents period. No +09:00 assumption, inferred reset time, live/ended state or automatic deadline is introduced. The participant button asks visitors to check official acceptance; it does not assert current availability. October9's participant URL remains unknown.
 - New dated NEWS points to the shared guide; old PatonVoteGuide and all MISS CIRCLE WEB/SHOWROOM paths remain unchanged. Existing historical NEWS fixtures exclude this later item to retain their earlier snapshots.
 - Public HTML checked for name, period and gift coin values. Exact login-after behavior is not verified. No new media, profile or notification changes.
+
+## 2026-10-06 昼の配信メモ
+
+既存StreamRecap構成に昼記事を追加。同日朝より先に配置し、HOME／NEWSから同記事へ案内。7話題は挨拶、朝の時間変更への応答、キラキラ協力、本人発言としてのアバター権、投票報告へのお礼、終盤のランキングと申請、夜枠案内と締め。個人名・順位範囲・私生活詳細・未確認の曲名を省略。写真候補3点は黒画面のため写真なし。確認範囲は共通折畳み注記へ集約し、約42分は保存録画の尺と明示。配信予定・プロフィール・SNS投稿は変更しない。
