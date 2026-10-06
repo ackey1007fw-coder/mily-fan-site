@@ -118,7 +118,7 @@ export const streamRecap20261006Asa: StreamRecap = {
       "label": "午後枠への案内"
     }
   ],
-  "nextNote": "",
+  "nextNote": "配信時点では午後枠の案内がありました。現在の予定は配信予定欄をご確認ください。",
   "sourceLabel": "2026年10月6日 朝のSHOWROOM配信（保存録画・自動文字起こし）",
   "verifiedAt": "2026-10-07",
   gallery, image: gallery[1],

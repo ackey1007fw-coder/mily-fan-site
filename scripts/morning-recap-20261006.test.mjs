@@ -15,3 +15,11 @@ test("October 6 morning recap retains reviewed photos and confines activity medi
  assert.equal(r.image.src,r.gallery[1].src);const n=news.find(n=>n.id==='2026-10-06-morning-showroom-recap');assert.ok(n);assert.equal(n.media.src,r.image.src);assert.ok(n.relatedUrl.endsWith('#recap-'+r.id));assert.deepEqual(n.activityMediaIds,['live-stream']);assert.ok(n.activityIds.includes('miss-circle'));assert.ok(selectActivityMedia('live-stream').some(m=>m.src===n.media.src));assert.ok(!selectActivityMedia('miss-circle').some(m=>m.src===n.media.src));
  const article=JSON.stringify(r.highlights);assert.doesNotMatch(article,/審査に関わ|総得票|心強|仲間にな|獲得しました|喉|鼻水|体温|薬|診断|保健室|オンライン授業|通学|キラ.{0,2}審査/);assert.doesNotMatch(JSON.stringify(r),/AppData|source-working-copy|live23517453/);assert.deepEqual(r.goals,[]);assert.deepEqual(r.ranking,[RANKING_NOTE_WITHOUT_RANGE]);assert.match(r.transcriptionNote,/全文の実音聴取・逐語校正は未完了/);
 });
+
+test("October 6 morning preserves the historical afternoon-slot notice without a guessed time", () => {
+ const r=streamRecaps.find(r=>r.id==='2026-10-06-morning-showroom');
+ assert.equal(r.nextNote,'配信時点では午後枠の案内がありました。現在の予定は配信予定欄をご確認ください。');
+ assert.ok(r.highlights.some(item=>item.body.includes('午後の枠')));
+ assert.ok(r.timeline.some(item=>item.label==='午後枠への案内'));
+ assert.doesNotMatch(r.nextNote,/\d{1,2}:\d{2}|確定|決定/);
+});
