@@ -33,7 +33,7 @@ export const streamRecap20261006Yoru: StreamRecap = {
     {
       "timestamp": "0:16:00",
       "title": "コメントとのおしゃべり",
-      "body": "面白いというコメントに応じ、みんなに笑ってほしいと話しました。"
+      "body": "おしゃべりの中で、みんなに笑ってほしいと話しました。"
     },
     {
       "timestamp": "0:29:48",
