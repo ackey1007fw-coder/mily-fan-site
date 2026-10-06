@@ -1,5 +1,5 @@
 import type { StreamRecap } from "./streamRecaps.ts";
-import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote } from "./streamRecapRules.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote, RANKING_NOTE_WITHOUT_RANGE } from "./streamRecapRules.ts";
 
 const gallery = [
   {
@@ -75,7 +75,7 @@ export const streamRecap20261006Asa: StreamRecap = {
     }
   ],
   "goals": [],
-  "ranking": [],
+  "ranking": [RANKING_NOTE_WITHOUT_RANGE],
   "timeline": [
     {
       "timestamp": "0:00:33",

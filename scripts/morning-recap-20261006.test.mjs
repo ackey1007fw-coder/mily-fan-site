@@ -1,3 +1,4 @@
+import { RANKING_NOTE_WITHOUT_RANGE } from "../src/data/streamRecapRules.ts";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -12,5 +13,5 @@ test("October 6 morning recap retains reviewed photos and confines activity medi
  for(const [i,p] of r.gallery.entries()){const b=await readFile(new URL('../public'+p.src,import.meta.url));assert.equal(createHash('sha256').update(b).digest('hex'),sha[i]);const m=await sharp(b).metadata();assert.equal(m.width,640);assert.equal(m.height,360);assert.equal(m.exif,undefined);assert.equal(m.xmp,undefined);assert.doesNotMatch(p.caption,/歌唱中|投票のお礼を言う|心強/);}
  assert.equal(r.broadcastLabel,"録画開始05:40頃〜 約41分");assert.match(r.summary,/保存録画は約41分/);assert.match(r.transcriptionNote,/コンテナ参考値41分28.619秒/);assert.match(r.transcriptionNote,/配信全体の尺ではありません/);
  assert.equal(r.image.src,r.gallery[1].src);const n=news.find(n=>n.id==='2026-10-06-morning-showroom-recap');assert.ok(n);assert.equal(n.media.src,r.image.src);assert.ok(n.relatedUrl.endsWith('#recap-'+r.id));assert.deepEqual(n.activityMediaIds,['live-stream']);assert.ok(n.activityIds.includes('miss-circle'));assert.ok(selectActivityMedia('live-stream').some(m=>m.src===n.media.src));assert.ok(!selectActivityMedia('miss-circle').some(m=>m.src===n.media.src));
- const article=JSON.stringify(r.highlights);assert.doesNotMatch(article,/審査に関わ|総得票|心強|仲間にな|獲得しました|喉|鼻水|体温|薬|診断|保健室|オンライン授業|通学|キラ.{0,2}審査/);assert.doesNotMatch(JSON.stringify(r),/AppData|source-working-copy|live23517453/);assert.deepEqual(r.goals,[]);assert.deepEqual(r.ranking,[]);assert.match(r.transcriptionNote,/全文の実音聴取・逐語校正は未完了/);
+ const article=JSON.stringify(r.highlights);assert.doesNotMatch(article,/審査に関わ|総得票|心強|仲間にな|獲得しました|喉|鼻水|体温|薬|診断|保健室|オンライン授業|通学|キラ.{0,2}審査/);assert.doesNotMatch(JSON.stringify(r),/AppData|source-working-copy|live23517453/);assert.deepEqual(r.goals,[]);assert.deepEqual(r.ranking,[RANKING_NOTE_WITHOUT_RANGE]);assert.match(r.transcriptionNote,/全文の実音聴取・逐語校正は未完了/);
 });
