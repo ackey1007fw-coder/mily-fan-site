@@ -28,14 +28,14 @@ const gallery = [
   }
 ];
 
-export const streamRecap20261006Morning: StreamRecap = {
+export const streamRecap20261006Asa: StreamRecap = {
   "id": "2026-10-06-morning-showroom",
   "date": "2026-10-06",
   "dateLabel": "2026.10.06（火）",
   "theme": "朝の投票報告と応援へのお礼",
   "broadcastLabel": "録画開始05:40頃〜 約41分",
   "platformLabel": "SHOWROOM",
-  "summary": "朝の挨拶から、投票報告へのお礼へ。投票日数の表示を確認し、キラキラ星での応援やアバター権の話題を挟みながらコメントとやり取りします。終盤は読み上げと感謝、一日の挨拶。当日の実写真3枚と、自動文字起こしに基づく要約です。",
+  "summary": "朝の挨拶から、投票報告へのお礼へ。投票日数の表示を確認し、キラキラ星での応援やアバター権の話題を挟みながらコメントとやり取りします。終盤は読み上げと感謝、一日の挨拶。保存録画は約41分。当日の実写真3枚と、自動文字起こしに基づく要約です。",
   "galleryNote": "当日の保存録画から選んだ実写真3枚です。写真の時刻は録画の先頭からの目安で、写っている表情・仕草のみを紹介しています。",
   "highlights": [
     {
@@ -122,5 +122,5 @@ export const streamRecap20261006Morning: StreamRecap = {
   "sourceLabel": "2026年10月6日 朝のSHOWROOM配信（保存録画・自動文字起こし）",
   "verifiedAt": "2026-10-07",
   gallery, image: gallery[1],
-  transcriptionNote: buildTranscriptionNote({ material: AUTO_TRANSCRIPT_MATERIAL_NOTE, stills: "静止画は当日の保存録画の実写真3枚です。", extra: "保存録画21区間の自動文字起こしをもとにした要約です。全文の実音聴取・逐語校正は未完了です。時刻は録画内の目安です。審査条件・ポイント・獲得結果は確定していません。当時の午後枠案内から現在の予定は生成しません。" })
+  transcriptionNote: buildTranscriptionNote({ material: AUTO_TRANSCRIPT_MATERIAL_NOTE, stills: "静止画は当日の保存録画の実写真3枚です。", extra: "保存録画21区間の自動文字起こしをもとにした要約です。全文の実音聴取・逐語校正は未完了です。時刻は録画内の目安です。約41分は保存録画のコンテナ参考値41分28.619秒を丸めた表記で、配信全体の尺ではありません。審査条件・ポイント・獲得結果は確定していません。当時の午後枠案内から現在の予定は生成しません。" })
 };

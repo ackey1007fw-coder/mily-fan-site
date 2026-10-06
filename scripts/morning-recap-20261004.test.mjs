@@ -22,7 +22,8 @@ test('recording start is not presented as the confirmed broadcast start',()=>{
 });
 test('morning photo stays in accepted surfaces while miss-circle NEWS relation remains',()=>{
  const item=news.find(x=>x.id==='2026-10-04-morning-showroom-recap');
- assert.ok(selectActivityNews('miss-circle').some(x=>x.id===item.id));
+ assert.equal(selectActivityNews('miss-circle').length,3);
+ assert.ok(selectActivityNews('miss-circle',news,news.length).some(x=>x.id===item.id));
  const sources={newsItems:[item],storyItems:[]};
  assert.ok(selectActivityMedia('live-stream',sources).some(x=>x.src===item.media.src));
  for(const id of ['miss-circle','radio','campus-girls'])assert.ok(!selectActivityMedia(id,sources).some(x=>x.src===item.media.src));
