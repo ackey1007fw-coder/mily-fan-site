@@ -257,6 +257,29 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+  "id": "2026-10-06-morning-showroom-recap",
+  "date": "2026-10-06",
+  "activityIds": [
+    "live-stream",
+    "miss-circle"
+  ],
+  "activityMediaIds": [
+    "live-stream"
+  ],
+  "title": "10月6日朝：投票報告へのお礼と、応援の話題",
+  "body": "投票日数の表示確認、投票報告へのお礼、キラキラ星での応援案内、アバター権の話題、終盤の読み上げと挨拶をまとめました。当日の実写真3枚と、自動文字起こしに基づく要約です。",
+  "sourceLabel": "当日の保存録画・自動文字起こし",
+  "media": {
+    "kind": "image",
+    "src": "/media/live/mily-b194-02-20261006-morning-still.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "カメラへ笑顔を向けるみりぃ"
+  },
+  "relatedUrl": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-06-morning-showroom",
+  "ctaLabel": "朝の配信まとめと写真を見る"
+},
+  {
     id: "2026-10-05-night-showroom-recap", date: "2026-10-05", sameDayOrder: 1,
     activityIds: ["live-stream", "miss-circle"],
     activityMediaIds: ["live-stream"],
