@@ -1,4 +1,5 @@
 import { contest } from "../data/contest";
+import { fourthRoundEventUpdate } from "../data/fourthRoundEventUpdate";
 import { missCircleFourthRoundShowroomEventLink, missCircleFourthRoundWebVoteLink } from "../data/links";
 import { missCircleFourthRoundWebVote, missCircleFourthRoundShowroomReview, type SupportEventSchedule } from "../data/supportEvents";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
@@ -66,6 +67,11 @@ export function FourthRoundSupportGuide() {
             <p className="mt-2 text-sm leading-7 text-ink-muted">10月3日・8日は各05:00〜23:59、獲得ポイントが1.2倍になるボーナス期間。加算は翌営業日までに行われ、期間ランキングには反映されません。無料ギフト審査にも倍率が適用されるとは確認できていません。</p>
           </li>
         </ol>
+        <aside aria-label="公式イベント更新" className="mt-5 rounded-2xl border border-sage/25 p-4">
+          <h3 className="font-bold text-ink">特別番組の出演条件について公式更新</h3>
+          <p className="mt-2 text-sm leading-7 text-ink-muted">{fourthRoundEventUpdate.body}</p>
+          <p className="mt-2 text-xs leading-6 text-ink-muted">{fourthRoundEventUpdate.note}</p>
+        </aside>
         <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
           <ExternalLink href={contest.entryUrl} className="inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-3 text-sm font-semibold text-white">ENTRY 734から配信ルームへ</ExternalLink>
           <ExternalLink href={missCircleFourthRoundShowroomEventLink.url} className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/25 px-5 py-3 text-sm font-semibold text-sage-deep">四次イベントの公式ルール・特典</ExternalLink>
