@@ -257,6 +257,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+  "id": "2026-10-06-night-showroom-recap",
+  "date": "2026-10-06",
+  "sameDayOrder": 2,
+  "activityIds": [
+    "live-stream",
+    "miss-circle"
+  ],
+  "activityMediaIds": [
+    "live-stream"
+  ],
+  "title": "10月6日夜：応援へのお礼と、サイコロのおしゃべり",
+  "body": "キラキラと投票報告へのお礼、アバター、ラジオの交通情報、サイコロの数字を使った言葉遊び、終盤のランキングと挨拶をまとめました。音声配信の自動文字起こしに基づく、写真なしの記事です。",
+  "sourceLabel": "当日の保存録画・自動文字起こし",
+  "relatedUrl": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-06-night-showroom",
+  "ctaLabel": "夜の配信まとめを見る"
+},
+  {
   "id": "2026-10-06-noon-showroom-recap",
   "date": "2026-10-06",
   "sameDayOrder": 1,
