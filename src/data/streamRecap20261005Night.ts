@@ -1,5 +1,5 @@
 import type { StreamRecap } from "./streamRecaps.ts";
-import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote } from "./streamRecapRules.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote, RANKING_NOTE_WITHOUT_RANGE } from "./streamRecapRules.ts";
 
 const gallery = [
   ["01", "0:07:00", "カメラへ笑顔を向けるみりぃ"],
@@ -26,7 +26,7 @@ export const streamRecap20261005Night: StreamRecap = {
     { timestamp: "1:18:14", title: "終盤も応答しながら、お礼の時間へ", body: "終盤はランキングの読み上げとお礼の時間へ。レベル上昇にも反応しながら、今後も来てほしいと伝えます。最後までコメントとのやり取りを挟みつつ、応援へのお礼を重ねました。" },
     { timestamp: "1:20:27", title: "翌日への案内と、就寝前の挨拶", body: "最後には翌日の配信に触れ、就寝前の挨拶で締めくくられました。この回の案内は過去の会話として扱い、現在の日程は応援案内でご確認ください。" },
   ],
-  goals: [], ranking: [],
+  goals: [], ranking: [RANKING_NOTE_WITHOUT_RANGE],
   timeline: [
     { timestamp: "0:03:29", label: "投票報告へのお礼" },
     { timestamp: "0:06:49", label: "虫の出来事とコメントへの応答" },

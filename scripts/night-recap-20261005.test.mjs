@@ -1,3 +1,4 @@
+import { RANKING_NOTE_WITHOUT_RANGE } from "../src/data/streamRecapRules.ts";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -31,5 +32,5 @@ test("October 5 night recap connects the archive and NEWS with reviewed real pho
   const publicText = JSON.stringify(recap);
   assert.doesNotMatch(publicText, /お風呂|入浴|ズボン|転ん|幼少|ちっちゃい頃|オンライン授業|朝一番|必修|虫が苦手|Xでの報告|DM|AppData|source-working-copy|live23515832/);
   assert.match(recap.transcriptionNote, /未完了/);
-  assert.deepEqual(recap.ranking, []);
+  assert.deepEqual(recap.ranking, [RANKING_NOTE_WITHOUT_RANGE]);
 });
