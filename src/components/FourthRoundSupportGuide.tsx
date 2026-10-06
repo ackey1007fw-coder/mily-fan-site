@@ -22,7 +22,7 @@ export function FourthRoundSupportGuide() {
       <div className="mx-auto max-w-3xl rounded-3xl border border-apricot/50 bg-paper-card p-5 shadow-card sm:p-8">
         <p className="text-xs font-semibold tracking-wide text-sage-deep">MISS CIRCLE CONTEST 2026 · ENTRY 734</p>
         <h2 id="fourth-round-heading" className="mt-2 text-2xl font-bold text-ink">四次審査の応援ガイド</h2>
-        <p className="mt-3 text-sm leading-7 text-ink-muted">三橋莉子（みりぃ）を応援する、3つの審査。日程はすべて日本時間です。WEB投票とSHOWROOMは開始・締切時刻が異なります。</p>
+        <p className="mt-3 text-sm leading-7 text-ink-muted">三橋莉子（みりぃ）を応援する、3つの審査。WEB投票とSHOWROOMの審査日程は日本時間です。開始・締切時刻が異なります。</p>
         <ol className="mt-6 space-y-5">
           <li className="rounded-2xl bg-sage-soft/35 p-4">
             <h3 className="font-bold text-ink">1. WEB投票審査</h3>
