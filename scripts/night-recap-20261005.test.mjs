@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
 import { news } from "../src/data/news.ts";
+import { selectActivityMedia } from "../src/lib/activityMedia.ts";
 
 test("October 5 night recap connects the archive and NEWS with reviewed real photos", async () => {
   const recap = streamRecaps.find(r => r.id === "2026-10-05-night-showroom");
@@ -23,8 +24,12 @@ test("October 5 night recap connects the archive and NEWS with reviewed real pho
   const item = news.find(n => n.id === "2026-10-05-night-showroom-recap");
   assert.ok(item.relatedUrl.endsWith(`#recap-${recap.id}`));
   assert.equal(item.media.src, recap.image.src);
+  assert.deepEqual(item.activityMediaIds, ["live-stream"]);
+  assert.ok(item.activityIds.includes("miss-circle"));
+  assert.ok(selectActivityMedia("live-stream").some(media => media.src === item.media.src));
+  assert.ok(!selectActivityMedia("miss-circle").some(media => media.src === item.media.src));
   const publicText = JSON.stringify(recap);
-  assert.doesNotMatch(publicText, /お風呂|入浴|ズボン|転ん|幼少|ちっちゃい頃|DM|AppData|source-working-copy|live23515832/);
+  assert.doesNotMatch(publicText, /お風呂|入浴|ズボン|転ん|幼少|ちっちゃい頃|オンライン授業|朝一番|必修|虫が苦手|Xでの報告|DM|AppData|source-working-copy|live23515832/);
   assert.match(recap.transcriptionNote, /未完了/);
   assert.deepEqual(recap.ranking, []);
 });

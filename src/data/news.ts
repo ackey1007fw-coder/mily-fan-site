@@ -259,6 +259,7 @@ export const news: NewsItem[] = [
   {
     id: "2026-10-05-night-showroom-recap", date: "2026-10-05", sameDayOrder: 1,
     activityIds: ["live-stream", "miss-circle"],
+    activityMediaIds: ["live-stream"],
     title: "10月5日夜、投票へのお礼とコメントのおしゃべり",
     body: "投票報告へのお礼、虫の話への応答、歌への案内、授業の話題、終盤の挨拶をまとめました。当日の実写真3枚と、自動文字起こしに基づく要約です。",
     sourceLabel: "当日の保存録画・自動文字起こし",

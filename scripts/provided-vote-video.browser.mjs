@@ -72,6 +72,14 @@ try {
     const errors = []; page.on("pageerror", error => errors.push(error.message));
     await page.route("**/*", request => new URL(request.request().url()).origin === origin ? request.continue() : request.fulfill({ status: 204, body: "" }));
     await page.goto(origin + route, { waitUntil: "domcontentloaded" });
+    if (route === "/") {
+      assert.equal(await page.locator("#latest > div > ul > li").count(), 3, "HOME retains its three latest NEWS cards");
+      assert.equal(await page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" }).count(), 0, "Historical video remains outside the HOME limit");
+      const archive = page.getByRole("link", { name: "最新情報をすべて見る", exact: true });
+      assert.equal(await archive.getAttribute("href"), "/news/");
+      await archive.click();
+      await page.waitForURL(origin + "/news/");
+    }
     const card = page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
     await card.waitFor();
     assert.equal(await card.count(), 1);
