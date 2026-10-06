@@ -1,3 +1,4 @@
+import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
 import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourXVideo.ts";
 import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
@@ -256,6 +257,15 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-07-fourth-round-official-update",
+    date: "2026-10-07",
+    activityIds: ["miss-circle"],
+    title: "四次イベント：特別番組の出演条件について公式更新",
+    body: `${fourthRoundEventUpdate.body}\n\n${fourthRoundEventUpdate.note}`,
+    source: fourthRoundEventUpdate.source,
+    sourceLabel: "SHOWROOM公式イベントページ（10月6日更新）",
+  },
   {
   "id": "2026-10-06-night-showroom-recap",
   "date": "2026-10-06",
