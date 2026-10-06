@@ -257,6 +257,23 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+  "id": "2026-10-06-noon-showroom-recap",
+  "date": "2026-10-06",
+  "sameDayOrder": 1,
+  "activityIds": [
+    "live-stream",
+    "miss-circle"
+  ],
+  "activityMediaIds": [
+    "live-stream"
+  ],
+  "title": "10月6日昼：応援へのお礼と、アバター権の話題",
+  "body": "朝の時間変更への応答、キラキラへの協力の呼びかけ、アバター権の話題、投票報告へのお礼、終盤のランキングと挨拶をまとめました。自動文字起こしに基づく写真なしの記事です。",
+  "sourceLabel": "当日の保存録画・自動文字起こし",
+  "relatedUrl": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-06-noon-showroom",
+  "ctaLabel": "昼の配信まとめを見る"
+},
+  {
   "id": "2026-10-06-morning-showroom-recap",
   "date": "2026-10-06",
   "activityIds": [
