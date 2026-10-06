@@ -257,6 +257,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-05-night-showroom-recap", date: "2026-10-05", sameDayOrder: 1,
+    activityIds: ["live-stream", "miss-circle"],
+    title: "10月5日夜、投票へのお礼とコメントのおしゃべり",
+    body: "投票報告へのお礼、虫の話への応答、歌への案内、授業の話題、終盤の挨拶をまとめました。当日の実写真3枚と、自動文字起こしに基づく要約です。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-b193-01-20261005-night-still.jpg", width: 640, height: 360, alt: "カメラへ笑顔を向けるみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-05-night-showroom`,
+    ctaLabel: "夜の配信まとめと写真を見る",
+  },
+  {
     id: "2026-10-05-morning-showroom-recap", date: "2026-10-05",
     activityIds: ["live-stream", "miss-circle"],
     title: "10月5日、朝の挨拶と歌のおしゃべり",
