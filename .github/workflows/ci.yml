@@ -41,6 +41,9 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Previously published morning PNG URL compatibility
+        run: node scripts/morning-png-compat.http.mjs
+
       - name: Site identity guard
         run: pnpm guard
 
