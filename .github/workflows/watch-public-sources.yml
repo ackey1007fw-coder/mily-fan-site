@@ -8,9 +8,16 @@ name: Watch public sources
 
 on:
   schedule:
-    # 毎日 09:10 JST（= 00:10 UTC）
+    # 毎日 09:10 JST（= 00:10 UTC）。定刻実行は保証されない。
+    # 2026-09-24〜10-07の14回は4:36〜6:07遅延。別時刻の有効性は未確認のため予備は追加しない。
     - cron: "10 0 * * *"
   workflow_dispatch:
+    inputs:
+      check_existing_fingerprint:
+        description: "任意: 既存open Issueの8桁fingerprintで重複判定を検証（Issue作成なし）"
+        type: string
+        required: false
+        default: ""
   # 監視ロジック自体を変更したときの動作確認（作業ブランチ限定）
   push:
     branches: ["claude/**"]
@@ -33,10 +40,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
 
@@ -48,13 +55,16 @@ jobs:
 
       - name: Find existing open issue for this change
         id: existing
-        if: steps.watch.outputs.has-changes == 'true'
+        if: steps.watch.outputs.has-changes == 'true' || inputs.check_existing_fingerprint != ''
         env:
           GH_TOKEN: ${{ github.token }}
           # 外部由来の文字列は shell へ展開しない。fingerprint は16進8桁のみ。
-          FINGERPRINT: ${{ steps.watch.outputs.fingerprint }}
+          FINGERPRINT: ${{ inputs.check_existing_fingerprint || steps.watch.outputs.fingerprint }}
+          CHECK_EXISTING_FINGERPRINT: ${{ inputs.check_existing_fingerprint }}
         run: |
           set -euo pipefail
+          # 手動入力も検証する。検証モードでは公開情報の比較は行うがIssueは作成しない。
+          [[ "$FINGERPRINT" =~ ^[0-9a-f]{8}$ ]] || { echo "fingerprint must be 8 lowercase hex digits" >&2; exit 1; }
           # タイトルと本文の両方で指紋を探す。
           # （本文の HTML コメントは環境によって落ちうるため、タイトル側も見る）
           matches=$(gh issue list \
@@ -65,9 +75,13 @@ jobs:
             --limit 50 \
             --jq "[.[] | select((.title + .body) | contains(\"$FINGERPRINT\"))] | length")
           echo "count=$matches" >> "$GITHUB_OUTPUT"
+          if [ -n "$CHECK_EXISTING_FINGERPRINT" ]; then
+            [ "$matches" -gt 0 ] || { echo "No matching open Issue for dedupe verification" >&2; exit 1; }
+            echo "重複判定の検証: fingerprint=$FINGERPRINT / open Issue=$matches 件。検証モードではIssueを作成しません。" >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Open an issue for human review
-        if: steps.watch.outputs.has-changes == 'true' && steps.existing.outputs.count == '0'
+        if: inputs.check_existing_fingerprint == '' && steps.watch.outputs.has-changes == 'true' && steps.existing.outputs.count == '0'
         env:
           GH_TOKEN: ${{ github.token }}
           REPORT_PATH: ${{ runner.temp }}/watch-report.md
@@ -88,6 +102,6 @@ jobs:
             --body-file "$REPORT_PATH"
 
       - name: Note when issue creation is skipped
-        if: steps.watch.outputs.has-changes == 'true' && steps.existing.outputs.count != '0'
+        if: (steps.watch.outputs.has-changes == 'true' || inputs.check_existing_fingerprint != '') && steps.existing.outputs.count != '0'
         run: |
           echo "同じ内容の open Issue が既にあるため、新規作成をスキップしました。" >> "$GITHUB_STEP_SUMMARY"
