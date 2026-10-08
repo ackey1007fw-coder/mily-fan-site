@@ -239,7 +239,7 @@ export default function SupportPage() {
           </div>
         ) : null}
         <SupportHero />
-        <AnnouncedStreamSchedule />
+        <AnnouncedStreamSchedule showSupportLink={false} />
         <PatonExTwoGuide />
         <ProvidedVoteSupportVideo />
         <FourthRoundSupportGuide />

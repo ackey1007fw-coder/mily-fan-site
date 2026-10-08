@@ -6,7 +6,7 @@ import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { NewsImage } from "./NewsImage";
 import { ExternalLink } from "./ExternalLink";
 
-export function AnnouncedStreamSchedule() {
+export function AnnouncedStreamSchedule({ showSupportLink = true }: { showSupportLink?: boolean }) {
   const now = useSupportEventClock();
   const { roomUrl } = useStreamSchedule();
   const showroomUrl = roomUrl ?? confirmedShowroomAction()?.url;
@@ -36,7 +36,7 @@ export function AnnouncedStreamSchedule() {
           {hasOctober8Slots ? <ExternalLink href={OCTOBER_8_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">10月8日の本人X告知を見る</ExternalLink> : null}
           {hasPosterSlots ? <ExternalLink href={FOURTH_ROUND_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">10月2日の本人X告知を見る</ExternalLink> : null}
           {showroomUrl ? <ExternalLink href={showroomUrl} className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white">みりぃのSHOWROOMへ</ExternalLink> : null}
-          <a href="/support/" className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">投票・無料ギフト・イベント審査の案内</a>
+          {showSupportLink ? <a href="/support/" className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">投票・無料ギフト・イベント審査の案内</a> : null}
         </div>
       </div>
     </section>

@@ -45,6 +45,7 @@ try {
             await card.waitFor();
             await card.scrollIntoViewIfNeeded();
             assert.equal(await card.count(), 1);
+            assert.equal(await card.locator('a[href="/support/"]').count(), path === '/' ? 1 : 0, 'Support must not link to itself');
             assert.deepEqual(await card.locator('li span').allTextContents(), ['10/8(木) 14:40〜15:20', '10/8(木) 21:30〜22:10']);
             const text = await card.innerText();
             assert.match(text, /本人X/);
