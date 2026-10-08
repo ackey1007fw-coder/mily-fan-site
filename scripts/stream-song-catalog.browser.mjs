@@ -206,6 +206,15 @@ try {
       await check("direct recap link opens after a fresh page load", async () => {
         await page.goto(`${live}${targetHash}`, { waitUntil: "networkidle" });
         await page.waitForFunction((hash) => document.querySelector(hash)?.open === true, targetHash);
+        await page.waitForFunction((hash) => {
+          const target = document.querySelector(hash);
+          const heading = target?.querySelector(":scope > summary h3");
+          if (!target || !heading) return false;
+          const targetRect = target.getBoundingClientRect();
+          const headingRect = heading.getBoundingClientRect();
+          return targetRect.top >= 0 && targetRect.top < 150
+            && headingRect.top >= 0 && headingRect.bottom <= window.innerHeight;
+        }, targetHash, { timeout: 5000 });
         await overflow();
       });
       await check("latest recap opens with recording caveats, songs and historical next slot", async () => {

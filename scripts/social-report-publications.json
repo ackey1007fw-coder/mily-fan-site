@@ -96,5 +96,18 @@
     "publishedUrl": "https://www.youtube.com/watch?v=Bnv7uihCrDQ",
     "publishedAt": "2026-10-03T12:54:28.872+09:00",
     "note": "本人の対象2本への明示承認後、重複・予約・処理中を確認して正規送信。API公開成功。native再生・本文・mention・リンク検品は未完。TikTokは20→23fps変換、変換後原音/PTS/同期は未測定。YouTubeは変換なし。再送不要。 独立nativeで対象ページ・配信日・要約区別・正recapクリックリンクを確認。再生readyState0で実再生・cover/字幕同期は未確認。本人YouTube handleを推測追加しない。"
+  },
+  {
+    "recapId": "2026-10-08-night-showroom",
+    "platform": "youtube",
+    "account": "@ouen_archive",
+    "state": "published_unverified",
+    "mediaType": "video",
+    "jobId": "ece90dccf97e41cd925c833479eefefb",
+    "requestId": "467b6ccaa3784868abea0176cb1eebbd",
+    "mediaId": "9hPii8Yk2ms",
+    "publishedUrl": "https://www.youtube.com/watch?v=9hPii8Yk2ms",
+    "publishedAt": "2026-10-09T01:32:48+09:00",
+    "note": "送信直前に履歴386件・予約0・処理中0、対象profileのYouTube成功160件をnative投稿ID・URL・前日以前の実公開時刻と照合して1回送信。公開API成功、接続先native mediaでも同ID・URL・題名を確認。縦動画6.6秒は変換なし。実画面で本文・日付・本人Instagramへの案内と対象recapへのクリック到達を確認。プレーヤーはreadyState0で実再生・公開後原音・グリッド表紙の検証が残るためpublished_verifiedとはしない。原音は前後ASR・全decode照合、手動聴取は未実施。再送不要。"
   }
 ]
