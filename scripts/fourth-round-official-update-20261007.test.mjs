@@ -11,7 +11,7 @@ test('official event update reaches current NEWS and only MISS CIRCLE while hist
   assert.equal(news.filter(x => x.id === id).length, 1);
   assert.equal(item.date, '2026-10-07');
   assert.equal(item.source, 'https://www.showroom-live.com/event/circle2026_4th');
-  assert.equal(sortNewsByDateDesc(news)[0], item);
+  assert.equal(sortNewsByDateDesc(news.filter(x => x.date <= item.date))[0], item);
   assert.deepEqual(item.activityIds, ['miss-circle']);
   assert.ok(selectActivityNews('miss-circle', news).includes(item));
   assert.ok(!selectActivityNews('live-stream', news).includes(item));

@@ -1,9 +1,10 @@
 import type { StreamSlot } from "./streamSchedule.ts";
 
 export const FOURTH_ROUND_SCHEDULE_X_URL = "https://x.com/mily_chan36/status/2106033785867555040";
+export const OCTOBER_8_SCHEDULE_X_URL = "https://x.com/Mily_chan36/status/2107858042541023674";
 export const FOURTH_ROUND_SCHEDULE_IMAGE = "/media/news/mily-b183-01-fourth-round-stream-schedule.jpg";
 
-/** 本人の10月2日告知画像。すべて2026年・JST。実配信記録とは別。 */
+/** 本人の10月2日告知画像と10月8日00:38のX告知。すべて2026年・JST。実配信記録とは別。 */
 export const fourthRoundStreamSchedule: StreamSlot[] = [
   { date: "2026-10-03", time: "06:30", endTime: "07:30" },
   { date: "2026-10-03", time: "21:40", endTime: "22:40" },
@@ -18,6 +19,8 @@ export const fourthRoundStreamSchedule: StreamSlot[] = [
   { date: "2026-10-07", time: "06:40", endTime: "07:20", note: "きっかけ（本人画像の表記）" },
   { date: "2026-10-07", time: "12:30", endTime: "13:00" },
   { date: "2026-10-07", time: "21:40", endTime: "22:30" },
+  { date: "2026-10-08", time: "14:40", endTime: "15:20", note: "10月8日の本人X告知・1.2倍DAY" },
+  { date: "2026-10-08", time: "21:30", endTime: "22:10", note: "10月8日の本人X告知・1.2倍DAY" },
 ];
 
 export const fourthRoundSchedulePhoto = {

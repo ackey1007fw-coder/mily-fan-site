@@ -11,14 +11,14 @@ import {fourthRoundSchedulePhoto} from '../src/data/fourthRoundStreamSchedule.ts
 import {resolveNewsLinks} from '../src/lib/newsLinks.ts';
 import {verifyNews} from './content-invariants.mjs';
 
-test('first-party poster has exactly 13 source-confirmed JST slots and no eighth-day inference',()=>{
- assert.equal(slots.length,13);
- assert.equal(new Set(slots.map(s=>`${s.date}T${s.time}`)).size,13);
- assert.equal(slots.filter(s=>s.note?.includes('きっかけ')).length,2);
- assert.equal(slots.some(s=>s.date==='2026-10-08'),false);
- assert.equal(slots.some(s=>s.date==='2026-10-03'&&s.time==='14:45'),false);
- for(const date of new Set(slots.map(s=>s.date))){
-  assert.equal(slots.filter(s=>s.date===date).reduce((n,s)=>n+(slotEndMs(s)-slotStartMs(s))/60000,0),120);
+test('first-party poster retains exactly its 13 source-confirmed JST slots',()=>{
+ const posterSlots=slots.filter(s=>s.date<'2026-10-08');
+ assert.equal(posterSlots.length,13);
+ assert.equal(new Set(posterSlots.map(s=>`${s.date}T${s.time}`)).size,13);
+ assert.equal(posterSlots.filter(s=>s.note?.includes('きっかけ')).length,2);
+ assert.equal(posterSlots.some(s=>s.date==='2026-10-03'&&s.time==='14:45'),false);
+ for(const date of new Set(posterSlots.map(s=>s.date))){
+  assert.equal(posterSlots.filter(s=>s.date===date).reduce((n,s)=>n+(slotEndMs(s)-slotStartMs(s))/60000,0),120);
  }
  for(const slot of slots)assert.ok(streamSchedule.includes(slot));
 });
@@ -31,7 +31,7 @@ test('every confirmed slot expires at its end and cannot remain next',()=>{
   assert.ok(!upcomingSlots(slots,[],end+1).includes(slot));
  }
  assert.equal(upcomingSlots(slots,[],Date.parse('2026-10-03T07:30:00+09:00'))[0].time,'21:40');
- assert.equal(upcomingSlots(slots,[],Date.parse('2026-10-07T22:30:00+09:00')).length,0);
+ assert.equal(upcomingSlots(slots,[],Date.parse('2026-10-07T22:30:00+09:00'))[0].date,'2026-10-08');
  assert.equal(nextSupportEventBoundary(Date.parse('2026-10-03T07:29:59+09:00')),Date.parse('2026-10-03T07:30:00+09:00'));
 });
 
@@ -62,7 +62,7 @@ test('poster derivatives use actual widths and preserve original zoom target',as
 test('historical schedule NEWS stays truthful after all slots expire and links Support',()=>{
  const item=news.find(n=>n.id==='2026-10-02-fourth-round-stream-schedule');
  const now=Date.parse('2026-10-08T12:00:00+09:00');
- assert.equal(upcomingSlots(slots,[],now).length,0);
+ assert.equal(upcomingSlots(slots.filter(s=>s.date<'2026-10-08'),[],now).length,0);
  assert.match(item.body,/本人画像では5日間の13枠/);
  assert.doesNotMatch(item.body,/13枠をHOMEの予定一覧に掲載しています/);
  assert.equal(resolveNewsLinks(item,now).cta.url,'/support/');
