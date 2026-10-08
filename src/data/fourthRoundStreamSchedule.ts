@@ -41,4 +41,3 @@ export const fourthRoundScheduleNewsImage = {
   sizes: "(max-width: 768px) calc(100vw - 72px), 696px",
   width: 1536, height: 1024, alt: fourthRoundSchedulePhoto.alt,
 };
-

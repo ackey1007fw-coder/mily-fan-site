@@ -28,11 +28,12 @@ test('October 8 slots expire exactly at their announced JST ends', () => {
 });
 
 test('October 8 NEWS has one source-linked announcement and no stream-result assertion', async () => {
-  const { news } = await import('../src/data/news.ts');
+  const { news, sortNewsByDateDesc } = await import('../src/data/news.ts');
   const items = news.filter(item => item.source === OCTOBER_8_SCHEDULE_X_URL);
   assert.equal(items.length, 1);
   const item = items[0];
   assert.equal(item.date, '2026-10-08');
+  assert.equal(sortNewsByDateDesc(news)[0], item);
   assert.match(item.body, /14:40〜15:20/);
   assert.match(item.body, /21:30〜22:10/);
   assert.match(item.body, /告知予定/);

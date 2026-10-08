@@ -69,4 +69,3 @@ test('historical schedule NEWS stays truthful after all slots expire and links S
  assert.deepEqual(verifyNews([item]),[]);
  assert.ok(verifyNews([{...item,relatedUrl:'/unconfirmed/'}]).length>0);
 });
-
