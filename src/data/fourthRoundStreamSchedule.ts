@@ -3,6 +3,12 @@ import type { StreamSlot } from "./streamSchedule.ts";
 export const FOURTH_ROUND_SCHEDULE_X_URL = "https://x.com/mily_chan36/status/2106033785867555040";
 export const FOURTH_ROUND_SCHEDULE_IMAGE = "/media/news/mily-b183-01-fourth-round-stream-schedule.jpg";
 
+/** 変更の告知のみ。新投稿の対象日・タイムゾーンは未確認。 */
+export const fourthRoundScheduleChangeNotice = {
+  message: "配信時間の変更が案内されています。最新の時間は本人投稿をご確認ください。",
+  sourceUrl: "https://x.com/mily_chan36/status/2107125051904725482",
+};
+
 /** 本人の10月2日告知画像。すべて2026年・JST。実配信記録とは別。 */
 export const fourthRoundStreamSchedule: StreamSlot[] = [
   { date: "2026-10-03", time: "06:30", endTime: "07:30" },
