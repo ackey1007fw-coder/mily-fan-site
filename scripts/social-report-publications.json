@@ -108,6 +108,96 @@
     "mediaId": "9hPii8Yk2ms",
     "publishedUrl": "https://www.youtube.com/watch?v=9hPii8Yk2ms",
     "publishedAt": "2026-10-09T01:32:48+09:00",
-    "note": "送信直前に履歴386件・予約0・処理中0、対象profileのYouTube成功160件をnative投稿ID・URL・前日以前の実公開時刻と照合して1回送信。公開API成功、接続先native mediaでも同ID・URL・題名を確認。縦動画6.6秒は変換なし。実画面で本文・日付・本人Instagramへの案内と対象recapへのクリック到達を確認。プレーヤーはreadyState0で実再生・公開後原音・グリッド表紙の検証が残るためpublished_verifiedとはしない。原音は前後ASR・全decode照合、手動聴取は未実施。再送不要。"
+    "note": "送信直前に履歴386件・予約0・処理中0、対象profileのYouTube成功160件をnative投稿ID・URL・前日以前の実公開時刻と照合して1回送信。公開API成功、接続先native mediaでも同ID・URL・題名を確認。縦動画6.6秒は変換なし。実画面で本文・日付・本人Instagramへの案内と対象recapへのクリック到達を確認。プレーヤーはreadyState0で実再生・公開後原音・グリッド表紙の検証が残るためpublished_verifiedとはしない。原音は前後ASR・全decode照合、手動聴取は未実施。再送不要。 2026-10-09の再確認でも、公開ページの動画要素はreadyState=0・currentTime=0（ミュート解除）で、1回の再読み込み後も実再生・公開後原音を確認できなかった。再アップロードはしていない。",
+    "followUpVerification": {
+      "checkedAt": "2026-10-08T19:51:32.715Z",
+      "profile": "ackey",
+      "historyCount": 387,
+      "scheduledCount": 0,
+      "inProgressCount": 0,
+      "newPostsSubmitted": 0,
+      "platforms": [
+        {
+          "platform": "instagram",
+          "account": "ackeytan_0720",
+          "result": "held_not_submitted",
+          "publishedUrl": null,
+          "nativeMediaFetched": 280,
+          "nativeMediaComplete": true,
+          "reason": "当該夜回の投稿は取得した実投稿一覧にないが、旧成功ジョブ1件の投稿本体を確認できない。履歴・request/job詳細はcompleted。投稿本体APIはHTTP 400で、削除と認証問題を区別できない。",
+          "unresolvedJobs": [
+            {
+              "jobId": "ef98a03c6ea94265b78a526e33816eca",
+              "requestId": "d93443bdc90840ce8ad12d80d96ec93d",
+              "mediaId": "18097399505439064",
+              "publishedUrl": "https://www.instagram.com/reel/DdtEqRbFS6p/"
+            }
+          ]
+        },
+        {
+          "platform": "tiktok",
+          "account": "ackeytan_",
+          "result": "held_not_submitted",
+          "publishedUrl": null,
+          "nativeMediaFetched": 185,
+          "nativeMediaComplete": true,
+          "reason": "当該夜回の投稿は取得した実投稿一覧にないが、旧成功ジョブ3件の投稿本体・公開先の照合が未完了。うち2件はrequest/job詳細も公開ID・URLがnullのまま。日時や題名だけで除外しない。",
+          "unresolvedJobs": [
+            {
+              "jobId": "e9c56c0e90f1433d93a0e36cb20fe08b",
+              "requestId": "55db28d350d845ec8456c73abf76965b",
+              "mediaId": "7690874790231428358",
+              "publishedUrl": "https://www.tiktok.com/t/7690874790231428358"
+            },
+            {
+              "jobId": "3c1a791e9a14480081331a6ecbb8ddc0",
+              "requestId": "e832ec9003ad403a96e1fa1dfa0dd5c2",
+              "mediaId": null,
+              "publishedUrl": null
+            },
+            {
+              "jobId": "1bef0dbd154643d2a966ea85390011ea",
+              "requestId": "8193ca9e49604080bab721b4d51de927",
+              "mediaId": null,
+              "publishedUrl": null
+            }
+          ]
+        },
+        {
+          "platform": "x",
+          "account": "ackey_RiRi_supp",
+          "result": "held_not_submitted",
+          "publishedUrl": null,
+          "nativeMediaFetched": 1619,
+          "nativeMediaComplete": false,
+          "reason": "取得した実投稿一覧に当該夜回の動画はない。17ページ取得後の次ページはDNS取得エラー。旧成功ジョブ1件は別配信の送信記録を読戻せたが、X投稿本体の現在の本文・公開時刻が未取得。公開条件を満たすと認定せず送信しない。",
+          "unresolvedJobs": [
+            {
+              "jobId": "bf4ce460364f4ecdaa551b6e9b49121a",
+              "requestId": "4cde5b9310cb467ead68414b68206b5f",
+              "mediaId": "2103409932552843705",
+              "publishedUrl": "https://x.com/ackey_RiRi_supp/status/2103409932552843705"
+            }
+          ]
+        },
+        {
+          "platform": "youtube",
+          "account": "@ouen_archive",
+          "result": "published_unverified",
+          "mediaId": "9hPii8Yk2ms",
+          "publishedUrl": "https://www.youtube.com/watch?v=9hPii8Yk2ms",
+          "playbackCheck": {
+            "attempted": true,
+            "reloadCount": 1,
+            "currentTime": 0,
+            "readyState": 0,
+            "muted": false,
+            "playbackConfirmed": false,
+            "publishedAudioConfirmed": false
+          },
+          "reason": "既存公開ID・URL・題名は接続先media APIと一致。公開ページは開けるが動画が読み込めず、再生・公開後原音は未確認。再送していない。"
+        }
+      ]
+    }
   }
 ]
