@@ -146,6 +146,14 @@ jobs:
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
         run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/radio-archive.browser.mjs
 
+      - name: October 8 morning short report browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-recap-20261008-morning.browser.mjs
+
       - name: Upload song catalog browser evidence
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
