@@ -578,12 +578,30 @@ function StreamRecapArticle({
   const [open, setOpen] = useState(defaultOpen);
 
   useEffect(() => {
+    const targetId = `recap-${recap.id}`;
+    const targetHash = `#${targetId}`;
+    let frame = 0;
     const openLinkedRecap = () => {
-      if (window.location.hash === `#recap-${recap.id}`) setOpen(true);
+      if (window.location.hash !== targetHash) return;
+      setOpen(true);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        if (window.location.hash !== targetHash) return;
+        document.getElementById(targetId)?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "instant"
+            : "smooth",
+          block: "start",
+        });
+      });
     };
     openLinkedRecap();
     window.addEventListener("hashchange", openLinkedRecap);
-    return () => window.removeEventListener("hashchange", openLinkedRecap);
+    return () => {
+      window.removeEventListener("hashchange", openLinkedRecap);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+    };
   }, [recap.id]);
 
   return (

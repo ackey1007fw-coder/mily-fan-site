@@ -35,7 +35,7 @@ export const streamRecap20261008Night: StreamRecap = {
     { timestamp: "0:04:33", title: "みんなの応援が力に", body: "投票や応援へのお礼に続いて、みんなの応援が力になると話しました。来てくれた人や、応援を届けてくれた人へ感謝を伝える場面です。" },
     { timestamp: "0:07:44", title: "一緒にお話ししたかった", body: "みんなと一緒にお話ししたかったと振り返り、この時間に起きられてよかったと話しました。" },
     { timestamp: "0:22:17", title: "歌いたくなった気持ち", body: "歌いたくなったと話し、みんなへ問いかけるみりぃ。笑顔になる短いトークを抜粋しました。", clip: { src: "/media/live-clips/mily-b197-12-20261008-night-want-to-sing.mp4", poster: "/media/live-clips/mily-b197-12-20261008-night-want-to-sing-poster.jpg", width: 640, height: 360, durationSeconds: 4.4, sourceTimestamp: "0:22:17" } },
-    { timestamp: "0:26:36", title: "愛を感じたというお礼", body: "愛を感じたと話し、ありがとうを重ねました。感謝を伝える6.6秒のトークです。", clip: { src: "/media/live-clips/mily-b197-13-20261008-night-thank-you.mp4", poster: "/media/live-clips/mily-b197-13-20261008-night-thank-you-poster.jpg", width: 640, height: 360, durationSeconds: 6.6, sourceTimestamp: "0:26:36" } },
+    { timestamp: "0:26:36", title: "愛を感じたというお礼", body: "愛を感じたと話し、ありがとうを重ねました。感謝を伝える6.6秒のトークです。", clip: { src: "/media/live-clips/mily-b197-13-20261008-night-thank-you.mp4", poster: "/media/live-clips/mily-b197-13-20261008-night-thank-you-poster.jpg", width: 640, height: 360, durationSeconds: 6.6, sourceTimestamp: "0:26:36" }, socialClip: { title: "応援がうれしい夜", sourceTimestamp: "0:26:36", durationSeconds: 6.6, links: [{ platform: "youtube", url: "https://www.youtube.com/watch?v=9hPii8Yk2ms" }] } },
     { timestamp: "0:32:30", title: "耳を前に倒した姿", body: "ヘアバンドの耳が前に倒れた姿で笑っています。同じヘアバンドでも、形が変わった場面です。" },
     { timestamp: "0:38:30", title: "笑顔で両手を振る場面", body: "終盤には両手を広げ、カメラに向かって手を振っています。夜の笑顔を最後の写真にも残しました。" },
   ],
