@@ -4,9 +4,4 @@ import { news as liveNews } from "../../src/data/news.ts";
 const currentNews = liveNews.filter(({ id }) => id !== "2026-10-08-showroom-announced-schedule" && id !== "2026-10-07-fourth-round-official-update" && id !== "2026-10-06-night-showroom-recap" && id !== "2026-10-06-noon-showroom-recap" && id !== "2026-10-06-morning-showroom-recap" && id !== "2026-10-05-night-showroom-recap" && id !== "2026-10-05-morning-showroom-recap" && id !== "2026-10-05-paton-ex2-day2-guide" && id !== "2026-10-05-car-vote-day-four-x" && id !== "2026-10-04-night-showroom-recap" && id !== "2026-10-04-radio-anniversary-recap" && id !== "2026-10-04-day-showroom-recap" && id !== "2026-10-04-morning-showroom-recap" && id !== "2026-10-04-confirmed-vote-support-video" && id !== "2026-10-04-radio-anniversary-stories" && id !== "2026-10-03-morning-showroom-recap" && id !== "2026-10-03-confirmed-tiktok-campus-makeup");
 
 /** Keep historical Activity-media assertions before the October 2 poster. */
-// Pin the earlier media scope; the current October 8 scope is tested against live NEWS.
-export const news = currentNews
-  .filter(({ id }) => id !== "2026-10-02-fourth-round-stream-schedule")
-  .map((item) => item.id === "2026-09-01-first-showroom-oyasumiry"
-    ? { ...item, activityMediaIds: undefined }
-    : item);
+export const news = currentNews.filter(({id}) => id !== "2026-10-02-fourth-round-stream-schedule");
