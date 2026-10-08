@@ -109,6 +109,7 @@ import {
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 import { morningFanroomVoice } from "./morningFanroomVoice.ts";
 import { incomingCallFanroomVoice } from "./incomingCallFanroomVoice.ts";
+import { october8FanroomVoice } from "./october8FanroomVoice.ts";
 import {
   OHAYO_WHITE_POLO_X_URL,
   ohayoWhitePoloPeaceImage,
@@ -257,6 +258,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-08-fanroom-voice-message",
+    date: "2026-10-08",
+    sameDayOrder: 10,
+    activityIds: ["live-stream"],
+    title: "みりぃからの連絡💌 生声メッセージが届きました",
+    body: "10月8日18:13、SHOWROOMファンルームに届いた、みりぃ本人の音声メッセージ。下のプレーヤーから聴けます。\n\n18:15の投稿では、夜の配信は「今の所は21:30〜の予定」と案内していました。最新の予定・連絡は、元のファンルームをご確認ください。",
+    sourceLabel: "SHOWROOMファンルーム（10月8日18:13・18:15 JST）",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: october8FanroomVoice,
+  },
   {
     id: "2026-10-08-showroom-announced-schedule",
     date: "2026-10-08",
