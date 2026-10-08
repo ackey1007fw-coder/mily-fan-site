@@ -1,7 +1,14 @@
 import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { news as currentNewsForMedia } from "./fixtures/news-before-b183.ts";
-const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
+// This test covers the earlier media surface; current scope has its own regression.
+const priorMediaSources = {
+  newsItems: currentNewsForMedia
+    .filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks")
+    .map((item) => item.id === "2026-09-01-first-showroom-oyasumiry"
+      ? { ...item, activityMediaIds: undefined }
+      : item),
+};
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";
