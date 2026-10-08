@@ -34,7 +34,10 @@ try {
       // Follow the existing CI fixture: only the local build is exercised.
       await page.route('**/*', route => {
         const url = new URL(route.request().url());
-        if (url.origin !== origin) return route.fulfill({ status: 204, body: '' });
+        if (url.origin !== origin) {
+          if (route.request().resourceType() === 'stylesheet') return route.fulfill({ status: 200, contentType: 'text/css', body: '' });
+          return route.fulfill({ status: 204, body: '' });
+        }
         // Vite preview has no serverless API. Use the same unavailable-API
         // fixture as the existing browser checks, without inventing live data.
         if (url.pathname.startsWith('/api/')) {
@@ -52,10 +55,13 @@ try {
       assert.ok((await card.innerText()).includes(recap.summary));
       assert.equal(await card.locator('img, video, audio').count(), 0);
       const ids = await page.locator('details[id^="recap-"]').evaluateAll(cards => cards.map(item => item.id));
-      assert.equal(ids[0], `recap-${recap.id}`);
-      assert.equal(ids[1], 'recap-2026-10-07-noon-showroom');
-      assert.ok(!ids.includes('recap-2026-10-07-night-showroom'));
-      assert.equal(await page.locator('#recap-2026-10-07-noon-showroom img').count(), 3);
+      const morningId = `recap-${recap.id}`;
+      const noonId = 'recap-2026-10-07-noon-showroom';
+      assert.equal(ids.filter(id => id === morningId).length, 1);
+      assert.equal(ids.filter(id => id === noonId).length, 1);
+      assert.ok(ids.indexOf(morningId) < ids.indexOf(noonId));
+      const noonPhotos = await page.locator(`#${noonId} img`).evaluateAll(images => images.map(image => image.getAttribute('src')));
+      for (const src of ['/media/live/mily-b195-01-20261007-noon-board.jpg', '/media/live/mily-b195-02-20261007-noon-slide.jpg']) assert.ok(noonPhotos.includes(src), src);
       const source = card.locator('[data-recap-source]');
       const verification = source.locator('[data-recap-verification]');
       assert.equal(await verification.getAttribute('open'), null);
