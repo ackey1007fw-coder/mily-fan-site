@@ -26,7 +26,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
-import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
+import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
 import { site } from "./site.ts";
 import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
 /**
@@ -257,6 +257,17 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-08-showroom-announced-schedule",
+    date: "2026-10-08",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "10月8日のSHOWROOM告知予定・1.2倍DAY",
+    body: "10月8日00:38の本人Xで、同日のSHOWROOMは14:40〜15:20と21:30〜22:10（2026年・JST）と案内されています。この日は「1.2倍DAY」と案内されています。\n\n本人による告知予定です。実際の開始・終了を確認した配信記録ではありません。変更は本人の最新Xをご確認ください。応援ページの本人告知欄には、終了予定時刻前の枠を表示します。",
+    source: OCTOBER_8_SCHEDULE_X_URL,
+    sourceLabel: "本人Xの予定告知（10月8日00:38 JST）",
+    relatedUrl: "/support/",
+    ctaLabel: "配信予定・四次審査の応援案内を見る",
+  },
   {
     id: "2026-10-07-fourth-round-official-update",
     date: "2026-10-07",
