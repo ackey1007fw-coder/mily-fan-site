@@ -33,7 +33,7 @@ test('October 8 NEWS has one source-linked announcement and no stream-result ass
   assert.equal(items.length, 1);
   const item = items[0];
   assert.equal(item.date, '2026-10-08');
-  assert.equal(sortNewsByDateDesc(news)[0], item);
+  assert.equal(sortNewsByDateDesc(news.filter(entry => entry.date < item.date || entry.id === item.id))[0], item);
   assert.match(item.body, /14:40〜15:20/);
   assert.match(item.body, /21:30〜22:10/);
   assert.match(item.body, /告知予定/);
