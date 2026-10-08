@@ -25,14 +25,24 @@ try {
   assert.ok(ready, 'The existing CI build must be available');
   for (const [engine, width, height] of [['chromium', 320, 850], ['webkit', 390, 844], ['chromium', 1440, 1000]]) {
     const browser = await engines[engine].launch({ headless: true });
-    const result = { engine, viewport: { width, height }, screenshots: [], pageErrors: [], consoleErrors: [], passed: false };
+    const result = { engine, viewport: { width, height }, screenshots: [], pageErrors: [], consoleErrors: [], unavailableApiFixtures: [], passed: false };
     results.push(result);
     try {
       const page = await browser.newPage({ viewport: { width, height } });
       page.on('pageerror', error => result.pageErrors.push(error.message));
-      page.on('console', message => { if (message.type() === 'error') result.consoleErrors.push(message.text()); });
+      page.on('console', message => { if (message.type() === 'error') result.consoleErrors.push({ text: message.text(), url: message.location().url }); });
       // Follow the existing CI fixture: only the local build is exercised.
-      await page.route('**/*', route => new URL(route.request().url()).origin === origin ? route.continue() : route.fulfill({ status: 204, body: '' }));
+      await page.route('**/*', route => {
+        const url = new URL(route.request().url());
+        if (url.origin !== origin) return route.fulfill({ status: 204, body: '' });
+        // Vite preview has no serverless API. Use the same unavailable-API
+        // fixture as the existing browser checks, without inventing live data.
+        if (url.pathname.startsWith('/api/')) {
+          result.unavailableApiFixtures.push(url.href);
+          return route.fulfill({ status: 503, contentType: 'application/json', body: '{}' });
+        }
+        return route.continue();
+      });
       await page.goto(`${origin}/activities/live/#recap-${recap.id}`, { waitUntil: 'networkidle' });
       const card = page.locator(`#recap-${recap.id}`);
       assert.equal(await card.getAttribute('open'), '');
@@ -71,7 +81,9 @@ try {
       await card.locator(':scope > summary').click();
       assert.equal(await card.getAttribute('open'), '');
       assert.deepEqual(result.pageErrors, []);
-      assert.deepEqual(result.consoleErrors, []);
+      const unexpectedConsoleErrors = result.consoleErrors.filter(error =>
+        !result.unavailableApiFixtures.includes(error.url) || !/^Failed to load resource:.*503/.test(error.text));
+      assert.deepEqual(unexpectedConsoleErrors, []);
       result.passed = true;
     } finally { await browser.close(); }
   }
