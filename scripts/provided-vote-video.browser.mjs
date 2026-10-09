@@ -81,6 +81,15 @@ try {
       await page.waitForURL(origin + "/news/");
     }
     const card = page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
+    // The archive is paginated: new posts can move this historical card beyond
+    // the initial window. Exercise its real "more" button rather than requiring
+    // an old article to remain in the first page forever.
+    await page.locator("#latest").waitFor();
+    const loadMore = page.getByRole("button", { name: "もっと見る", exact: true });
+    for (let pageIndex = 0; pageIndex < 8 && await card.count() === 0; pageIndex++) {
+      assert.ok(await loadMore.count(), "Historical NEWS video must remain reachable through archive pagination");
+      await loadMore.click();
+    }
     await card.waitFor();
     assert.equal(await card.count(), 1);
     const video = card.locator('video[src="/media/news/mily-b191-01-car-vote-day4.mp4"]');
