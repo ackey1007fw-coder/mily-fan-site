@@ -14,6 +14,16 @@ const results = [];
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp4': 'video/mp4' };
 await mkdir(output, { recursive: true });
 
+async function serveAsset(route, url) {
+  let file = resolve(root, '.' + decodeURIComponent(url.pathname));
+  const rel = relative(root, file);
+  if (rel === '..' || rel.startsWith('..' + sep)) return route.fulfill({ status: 403, body: '' });
+  try {
+    if ((await stat(file)).isDirectory()) file = join(file, 'index.html');
+    await route.fulfill({ status: 200, contentType: mime[extname(file)] || 'application/octet-stream', body: await readFile(file) });
+  } catch { await route.fulfill({ status: 404, body: 'Not found' }); }
+}
+
 try {
   for (const [engine, launcher] of [['chromium', chromium], ['webkit', webkit]]) {
     const browser = await launcher.launch({ headless: true });
@@ -35,13 +45,7 @@ try {
               return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, roomUrl, live: { state: 'offline', liveId: null, startedAt: null, observedAt: new Date(await page.evaluate(() => Date.now())).toISOString() }, next: { state: 'scheduled', at: '2026-10-11T12:00:00.000Z' } }) });
             }
             if (url.pathname.startsWith('/api/')) return route.fulfill({ status: 503, contentType: 'application/json', body: '{}' });
-            let file = resolve(root, '.' + decodeURIComponent(url.pathname));
-            const rel = relative(root, file);
-            if (rel === '..' || rel.startsWith('..' + sep)) return route.fulfill({ status: 403, body: '' });
-            try {
-              if ((await stat(file)).isDirectory()) file = join(file, 'index.html');
-              await route.fulfill({ status: 200, contentType: mime[extname(file)] || 'application/octet-stream', body: await readFile(file) });
-            } catch { await route.fulfill({ status: 404, body: 'Not found' }); }
+            await serveAsset(route, url);
           });
           for (const path of ['/', '/support/']) {
             await page.goto('https://site.test' + path, { waitUntil: 'networkidle' });
@@ -89,6 +93,30 @@ try {
           await page.close();
         }
       }
+      // No known announcement/support boundary exists at this API-only slot's end.
+      // Keep the page mounted and reuse the cached API response through periodic refreshes.
+      const page = await browser.newPage({ viewport: { width: 390, height: 900 } });
+      const errors = [];
+      page.on('pageerror', error => errors.push(error.message));
+      const futureTime = new Date('2026-10-13T07:59:59+09:00');
+      await page.clock.install({ time: futureTime });
+      await page.clock.pauseAt(futureTime);
+      await page.route('**/*', async route => {
+        const url = new URL(route.request().url());
+        if (url.hostname !== 'site.test') return route.fulfill({ status: 204, body: '' });
+        if (url.pathname === '/api/mily-schedule') return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true, slots: [{ date: '2026-10-13', time: '08:00', endTime: '08:01' }], source: { roomUrl } }) });
+        if (url.pathname.startsWith('/api/')) return route.fulfill({ status: 503, contentType: 'application/json', body: '{}' });
+        await serveAsset(route, url);
+      });
+      await page.goto('https://site.test/activities/live/', { waitUntil: 'networkidle' });
+      const current = page.locator('section[aria-labelledby="live-current"]');
+      await current.waitFor();
+      assert.match(await current.innerText(), /10\/13\(火\) 08:00〜08:01/);
+      await page.clock.fastForward(121_000);
+      await page.waitForFunction(() => !document.querySelector('section[aria-labelledby="live-current"]')?.textContent.includes('08:00〜08:01'));
+      assert.deepEqual(errors, []);
+      results.push({ engine, width: 390, apiState: 'future-api-only', status: 'passed', mountedExpiry: '08:01', navigationOrFocus: false });
+      await page.close();
     } finally { await browser.close(); }
   }
 } finally {

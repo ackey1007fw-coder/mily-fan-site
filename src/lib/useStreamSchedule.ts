@@ -218,7 +218,10 @@ export function useStreamSchedule(): StreamScheduleView {
     };
   }, []);
 
-  const now = useSupportEventClock();
+  // 本人告知の開始・終了でも再描画し、毎分の取得やlive更新では
+  // ハードコードされていないAPI枠も実際の現在時刻で判定する。
+  useSupportEventClock();
+  const now = Date.now();
   return withShowroomNext(toStreamScheduleView(fetched, streamSchedule, now), live, now);
 }
 
