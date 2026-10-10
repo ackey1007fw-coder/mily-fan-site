@@ -46,13 +46,13 @@ try {
             await card.scrollIntoViewIfNeeded();
             assert.equal(await card.count(), 1);
             assert.equal(await card.locator('a[href="/support/"]').count(), path === '/' ? 1 : 0, 'Support must not link to itself');
-            assert.deepEqual(await card.locator('li span').allTextContents(), ['10/8(木) 14:40〜15:20', '10/8(木) 21:30〜22:10']);
+            assert.deepEqual(await card.locator('li').filter({ hasText: '10/8(木)' }).locator('span').allTextContents(), ['10/8(木) 14:40〜15:20', '10/8(木) 21:30〜22:10']);
             const text = await card.innerText();
             assert.match(text, /本人X/);
             assert.match(text, /JST/);
             assert.match(text, /実配信の記録ではありません/);
             assert.match(text, /1\.2倍DAY/);
-            assert.doesNotMatch(text, /5:50|6:30|配信中|未案内/);
+            assert.doesNotMatch((await card.locator('li').filter({ hasText: '10/8(木)' }).allTextContents()).join(' '), /5:50|6:30|配信中|未案内/);
             assert.equal(await card.locator('img').count(), 0, 'Old poster must not represent the October 8 source');
             const link = card.locator(`a[href="${source}"]`);
             assert.equal(await link.count(), 1);
@@ -71,10 +71,10 @@ try {
           }
           // Keep the Support page mounted and cross both expiry boundaries without reloading.
           await page.clock.fastForward(Date.parse('2026-10-08T15:20:00+09:00') - initialTime.getTime());
-          await page.waitForFunction(() => document.querySelectorAll('#announced-stream li').length === 1);
-          assert.match(await page.locator('#announced-stream li').innerText(), /21:30〜22:10/);
+          await page.waitForFunction(() => [...document.querySelectorAll('#announced-stream li')].filter(li => li.textContent.includes('10/8(木)')).length === 1);
+          assert.match(await page.locator('#announced-stream li').filter({ hasText: '10/8(木)' }).innerText(), /21:30〜22:10/);
           await page.clock.fastForward(Date.parse('2026-10-08T22:10:00+09:00') - Date.parse('2026-10-08T15:20:00+09:00'));
-          await page.waitForFunction(() => !document.querySelector('#announced-stream'));
+          await page.waitForFunction(() => ![...document.querySelectorAll('#announced-stream li')].some(li => li.textContent.includes('10/8(木)')));
           results.push({ engine, width, apiState, path: '/support/', status: 'passed', mountedExpiry: ['15:20', '22:10'] });
           await page.close();
         }

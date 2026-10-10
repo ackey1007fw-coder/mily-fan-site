@@ -26,7 +26,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
-import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
+import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL, OCTOBER_11_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
 import { site } from "./site.ts";
 import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
 /**
@@ -258,6 +258,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-11-showroom-announced-schedule",
+    date: "2026-10-11",
+    dateBasis: "confirmed-on",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "10月11日（日）のSHOWROOM告知予定：夜21:00〜22:00",
+    body: "本人Xで、10月11日（日）のSHOWROOMは朝5:30〜6:30、夜21:00〜22:00と案内されています（2026年・JST）。\n\n本人による告知予定で、実際の開始・終了を確認した配信記録ではありません。HOME・応援ページの本人告知欄には、終了予定時刻前の枠だけを表示します。変更は本人の最新Xをご確認ください。\n\n四次審査のSHOWROOMは10月12日21:59、WEB投票は同日23:59まで。詳しい応援方法は応援ページへ。",
+    source: OCTOBER_11_SCHEDULE_X_URL,
+    sourceLabel: "本人Xの10月11日配信予定告知",
+    relatedUrl: "/support/",
+    ctaLabel: "配信予定・四次審査の応援案内を見る",
+  },
   {
     id: "2026-10-08-fanroom-voice-message",
     date: "2026-10-08",

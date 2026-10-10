@@ -1,4 +1,4 @@
-import { fourthRoundStreamSchedule, fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "../data/fourthRoundStreamSchedule";
+import { fourthRoundStreamSchedule, fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL, OCTOBER_11_SCHEDULE_X_URL } from "../data/fourthRoundStreamSchedule";
 import { upcomingSlots } from "../data/streamSchedule";
 import { formatSlotDate, useStreamSchedule } from "../lib/useStreamSchedule";
 import { confirmedShowroomAction } from "../lib/homeToday";
@@ -13,6 +13,7 @@ export function AnnouncedStreamSchedule({ showSupportLink = true }: { showSuppor
   const slots = upcomingSlots(fourthRoundStreamSchedule, [], now);
   const hasPosterSlots = slots.some(slot => slot.date < "2026-10-08");
   const hasOctober8Slots = slots.some(slot => slot.date === "2026-10-08");
+  const hasOctober11Slots = slots.some(slot => slot.date === "2026-10-11");
   if (slots.length === 0) return null;
   return (
     <section id="announced-stream" className="scroll-mt-24 px-4 py-6">
@@ -33,6 +34,7 @@ export function AnnouncedStreamSchedule({ showSupportLink = true }: { showSuppor
         </ul>
         <p className="mt-3 text-xs leading-6 text-ink-muted">終了予定時刻を過ぎた枠は一覧から外れます。実際の配信開始はSHOWROOMでご確認ください。</p>
         <div className="mt-4 flex flex-wrap gap-3">
+          {hasOctober11Slots ? <ExternalLink href={OCTOBER_11_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">10月11日の本人X告知を見る</ExternalLink> : null}
           {hasOctober8Slots ? <ExternalLink href={OCTOBER_8_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">10月8日の本人X告知を見る</ExternalLink> : null}
           {hasPosterSlots ? <ExternalLink href={FOURTH_ROUND_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">10月2日の本人X告知を見る</ExternalLink> : null}
           {showroomUrl ? <ExternalLink href={showroomUrl} className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white">みりぃのSHOWROOMへ</ExternalLink> : null}

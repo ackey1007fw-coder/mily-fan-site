@@ -8,6 +8,8 @@ import {
 import { useShowroomLive } from "./useMilyRealtimeStatus.ts";
 import { withShowroomNext } from "./showroomSchedule.ts";
 import type { ScheduleAvailability } from "./supportCalendar.ts";
+import { withConfirmedAnnouncedEndTime } from "./announcedStreamDetails.ts";
+import { useSupportEventClock } from "./useSupportEventClock.ts";
 
 /**
  * /api/mily-schedule の取得を1か所に集約するフック。
@@ -182,7 +184,7 @@ export function toStreamScheduleView(
 ): StreamScheduleView {
   return {
     slots: fetched.availability === "ok"
-      ? upcomingSlots([], fetched.slots, now)
+      ? upcomingSlots([], fetched.slots.map(withConfirmedAnnouncedEndTime), now)
       : upcomingSlots(manual, [], now),
     manualSlots: upcomingSlots(manual, [], now),
     roomUrl: fetched.roomUrl,
@@ -216,7 +218,7 @@ export function useStreamSchedule(): StreamScheduleView {
     };
   }, []);
 
-  const now = Date.now();
+  const now = useSupportEventClock();
   return withShowroomNext(toStreamScheduleView(fetched, streamSchedule, now), live, now);
 }
 
