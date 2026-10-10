@@ -222,6 +222,10 @@ export type NewsSourceLink = {
 };
 
 export type NewsItem = {
+  /** Explicit article correspondence, verified against the publication registry at build time. A related CTA is not this correspondence. */
+  publicationArticle?: { id: string; url: string };
+  /** Explicitly opt an important notice into first-publication announcements. */
+  publicationNotice?: "important";
   id: string;
   /** Display date, ISO `YYYY-MM-DD`. */
   date: string;
@@ -402,6 +406,7 @@ export const news: NewsItem[] = [
   },
   {
     id: "2026-10-04-radio-anniversary-recap", date: "2026-10-04", activityIds: ["radio"],
+    publicationArticle: { id:"mily:radio:2026-10-04-anniversary", url:`${site.siteUrl}/activities/radio/#2026-10-04-anniversary-mily-highlights` },
     title: "湘南シーサイドサークル1周年の放送メモ",
     body: "番組1周年の放送を、16の話題と放送内のお便り5つの要約で振り返ります。番組の始まり、篠笛の紹介、防災フェア中継、おめでとうの演じ分け、感謝、新学期の一句まで、自動文字起こしをもとにした詳細メモです。",
     sourceLabel: "当日の保存音声・自動文字起こし",
@@ -410,6 +415,7 @@ export const news: NewsItem[] = [
   },
   {
     id: "2026-10-04-day-showroom-recap", date: "2026-10-04", sameDayOrder: 1040,
+    publicationArticle: { id:"mily:recap:2026-10-04-day-showroom", url:`${site.siteUrl}/activities/live/#recap-2026-10-04-day-showroom` },
     activityIds: ["live-stream"], title: "昼の歌とおしゃべり、応援ありがとう",
     body: "午前のラジオを終えた昼のSHOWROOM。星や投票へのお礼、声の話、クマを楽しむやりとりを振り返ります。当日の実フレーム6枚と、自動文字起こしをもとにした配信メモです。",
     sourceLabel: "当日の保存録画・自動文字起こし",
@@ -418,6 +424,7 @@ export const news: NewsItem[] = [
   },
   {
     id: "2026-10-04-morning-showroom-recap", date: "2026-10-04",
+    publicationArticle: { id:"mily:recap:2026-10-04-asa-showroom", url:`${site.siteUrl}/activities/live/#recap-2026-10-04-asa-showroom` },
     activityIds: ["live-stream", "miss-circle"],
     activityMediaIds: ["live-stream"],
     title: "ラジオ前の朝、キラキラ星と投票へのありがとう",

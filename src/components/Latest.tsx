@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   news,
   newsDisplayMedia,
@@ -22,6 +22,7 @@ import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
 import { NewsImage } from "./NewsImage";
 import { TikTokEmbedCard } from "./TikTokEmbedCard";
+import { newsPublicationUrl, publicationShare } from "../lib/publicationShare";
 
 function NewsLink({
   href,
@@ -92,9 +93,10 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
 
 export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
   const resolvedLinks = resolveNewsLinks(item, now);
+  const share = publicationShare(item.title, newsPublicationUrl(item));
 
   return (
-    <li className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
+    <li id={`news-${item.id}`} className={`${SECTION_ANCHOR_OFFSET} rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card`}>
       <p className="text-xs text-ink-muted">{item.dateBasis === "confirmed-on" ? "確認日 " : ""}{item.date}</p>
       <p className="mt-1 font-semibold text-ink">{item.title}</p>
       <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-muted">{item.body}</p>
@@ -170,6 +172,9 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
           ))}
         </div>
       ) : null}
+      <ExternalLink href={share.manualXUrl} className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-sage hover:underline">
+        このお知らせをXでシェア
+      </ExternalLink>
     </li>
   );
 }
@@ -190,11 +195,38 @@ export function Latest({
   const now = useSupportEventClock();
   const latestNews = sortNewsByDateDesc(news);
   const capped = typeof limit === "number" ? latestNews.slice(0, limit) : latestNews;
-  const [visibleCount, setVisibleCount] = useState(
-    initialVisible ?? capped.length,
-  );
+  const [visibleCount, setVisibleCount] = useState(() => {
+    const initial = initialVisible ?? capped.length;
+    if (typeof limit === "number" || typeof window === "undefined") return initial;
+    try {
+      const anchor = decodeURIComponent(window.location.hash);
+      const index = capped.findIndex(item => anchor === `#news-${item.id}`);
+      return Math.max(initial, index + 1);
+    } catch { return initial; }
+  });
   const visibleNews = capped.slice(0, visibleCount);
   const canLoadMore = visibleCount < capped.length;
+  useEffect(() => {
+    if (typeof limit === "number") return;
+    let frame: number | undefined;
+    const revealAnchor = () => {
+      try {
+        const anchor = decodeURIComponent(window.location.hash);
+        const index = news.findIndex(item => anchor === `#news-${item.id}`);
+        if (index < 0) return;
+        const sortedIndex = sortNewsByDateDesc(news).findIndex(item => item.id === news[index].id);
+        setVisibleCount(count => Math.max(count, sortedIndex + 1));
+        if (frame !== undefined) cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => document.getElementById(anchor.slice(1))?.scrollIntoView());
+      } catch { /* A malformed fragment does not alter the archive. */ }
+    };
+    revealAnchor();
+    window.addEventListener("hashchange", revealAnchor);
+    return () => {
+      window.removeEventListener("hashchange", revealAnchor);
+      if (frame !== undefined) cancelAnimationFrame(frame);
+    };
+  }, [limit]);
 
   return (
     <section id="latest" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
