@@ -26,6 +26,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
+import { godivaNanaNewsImages } from "./godivaNanaPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
 import { site } from "./site.ts";
 import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
@@ -258,6 +259,22 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-09-godiva-nana-instagram-archive",
+    date: "2026-10-09",
+    dateBasis: "confirmed-on",
+    title: "GODIVA × NANA 🍫🩵 コラボドリンクを楽しむみりぃ",
+    body: "みりぃがInstagramで、GODIVAと『NANA』のコラボドリンクを紹介しました。一緒にいた友達が『NANA』好きで、自分もフレーバーに惹かれて購入したそう。カップを手に笑顔を向けた写真など、提供された3枚を掲載します。\n\n元投稿の投稿日・撮影日は未確認です。表示日は写真と投稿文をサイト用に受領した2026年10月9日です。",
+    source: "https://www.instagram.com/p/DeRQGExEyoX/",
+    sourceLabel: "本人Instagramの元投稿を見る",
+    ctaLabel: "Instagramで元投稿を見る",
+    media: godivaNanaNewsImages[0],
+    additionalMedia: godivaNanaNewsImages.slice(1),
+    message: {
+      label: "みりぃのInstagram投稿",
+      text: "GODIVAがNANAコラボしてた時の🍫🩵\n\n一緒にいた友達がNANA好きで、私もフレーバーに惹かれて購入🥤\n\n美味しかったぁ🤤\n\n#ミスサークル #ミスサー #godiva #nana #ミスコン",
+    },
+  },
   {
     id: "2026-10-08-fanroom-voice-message",
     date: "2026-10-08",
