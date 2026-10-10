@@ -3,6 +3,8 @@ import { createServer } from "node:http";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, extname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { news } from "../src/data/news.ts";
+import { ARCHIVE_LOAD_MORE_LABEL } from "../src/lib/homePortal.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const moduleRoot = process.env.PLAYWRIGHT_MODULE_ROOT;
@@ -81,6 +83,12 @@ try {
       await page.waitForURL(origin + "/news/");
     }
     const card = page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
+    await page.locator("#latest > div > ul > li").first().waitFor();
+    const more = page.getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true });
+    // 新しいNEWSで過去記事が次ページへ移っても、利用者と同じ操作で開く。
+    for (let pages = 0; !(await card.count()) && await more.count() && pages < news.length; pages++) {
+      await more.click();
+    }
     await card.waitFor();
     assert.equal(await card.count(), 1);
     const video = card.locator('video[src="/media/news/mily-b191-01-car-vote-day4.mp4"]');

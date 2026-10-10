@@ -1,6 +1,7 @@
 import { isObservationStale, type LiveView } from "./realtimeStore.ts";
 import type { StreamScheduleView } from "./useStreamSchedule.ts";
 import type { StreamSlot } from "../data/streamSchedule.ts";
+import { withConfirmedAnnouncedEndTime } from "./announcedStreamDetails.ts";
 
 const checkedFmt = new Intl.DateTimeFormat("ja-JP", {
   timeZone: "Asia/Tokyo", month: "numeric", day: "numeric",
@@ -18,11 +19,11 @@ export function showroomNextSlot(live: LiveView, now: number): StreamSlot | null
   } catch { return null; }
   // UTC+09:00は通年固定。ブラウザーのタイムゾーンには依存しない。
   const jst = new Date(at + 9 * 60 * 60 * 1000).toISOString();
-  return {
+  return withConfirmedAnnouncedEndTime({
     date: jst.slice(0, 10),
     time: jst.slice(11, 16),
     note: `SHOWROOM登録予定（${checkedFmt.format(new Date(live.observedAt!))} 確認）`,
-  };
+  });
 }
 
 /** SHOWROOMは次回1枠のみ。競合日を混ぜず翌日以降だけ公式で補完する。 */
