@@ -83,6 +83,7 @@ try {
       await page.waitForURL(origin + "/news/");
     }
     const card = page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
+    await page.locator("#latest > div > ul > li").first().waitFor();
     const more = page.getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true });
     // 新しいNEWSで過去記事が次ページへ移っても、利用者と同じ操作で開く。
     for (let pages = 0; !(await card.count()) && await more.count() && pages < news.length; pages++) {
