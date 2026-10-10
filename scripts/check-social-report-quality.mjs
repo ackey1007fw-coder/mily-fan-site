@@ -35,5 +35,12 @@ try {
     const payload = await (args.includes("--prepare-replacement") ? prepareReplacement : prepareSocialReport)(plan, context);
     if (context.ownerDecision) console.error(`social-report: ${context.ownerDecision.note}`);
     process.stdout.write(JSON.stringify(payload, null, 2) + "\n");
-  } else { if (args.length) throw new Error("Plan file required with options"); console.log("social-report: registered cover, original source pixels and publication states verified (no post/schedule API called)"); }
+  } else {
+    if (args.length) throw new Error("Plan file required with options");
+    // CI guard: validate every active reviewed Instagram manifest, not only the default morning cover.
+    for (const name of ["social-report-media-20261002-night.json", "social-report-media-20261008-night.json"]) {
+      await validateReportMedia(await json(path.join(root, "scripts", name)), { root, recaps: streamRecaps });
+    }
+    console.log("social-report: registered cover, original source pixels and publication states verified (no post/schedule API called)");
+  }
 } catch (error) { console.error(`social-report: BLOCKED: ${error.message}`); process.exitCode = 1; }
