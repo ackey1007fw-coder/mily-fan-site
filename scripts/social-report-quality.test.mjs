@@ -14,6 +14,15 @@ test("night report keeps its own reviewed cover and rejects another broadcast", 
   await validateReportMedia(night, { root, recaps: streamRecaps });
   await assert.rejects(() => validateReportMedia({ ...night, recapId: manifest.recapId }, { root, recaps: streamRecaps }), /another broadcast/);
 });
+test("October 8 night Instagram carousel has its formal reviewed cover first and unchanged source pixels", async () => {
+  const night = JSON.parse(await readFile(path.join(root, "scripts/social-report-media-20261008-night.json"), "utf8"));
+  const out = await validateReportMedia(night, { root, recaps: streamRecaps });
+  assert.equal(out.assets.length, 5);
+  assert.equal(night.order[0], night.coverId);
+  assert.equal(night.coverId, "mily-b197-15-night-ig-cover");
+  assert.ok(night.items.every(item => item.path.includes("b197-") && item.source.includes("b197-")));
+  await assert.rejects(() => validateReportMedia({ ...night, order: [...night.order].reverse() }, { root, recaps: streamRecaps }), /cover must be first/i);
+});
 const now = Date.parse("2026-10-02T06:00:00Z"), checkedAt = new Date(now).toISOString();
 const caption = "@mily_chan36\n2026年10月2日 朝配信\nhttps://mily-fan-site.vercel.app/activities/live/#recap-2026-10-02-morning-showroom";
 const fresh = () => ({

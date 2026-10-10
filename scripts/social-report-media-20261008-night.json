@@ -4,19 +4,19 @@
   "platform": "instagram",
   "recapId": "2026-10-08-night-showroom",
   "date": "2026-10-08",
-  "coverId": "mily-b197-14-night-ig-cover",
+  "coverId": "mily-b197-15-night-ig-cover",
   "coverTitle": "夜のありがとうとリボン",
   "order": [
-    "mily-b197-14-night-ig-cover",
-    "mily-b197-15-night-ig-still-01",
-    "mily-b197-16-night-ig-still-02",
-    "mily-b197-17-night-ig-still-03",
-    "mily-b197-18-night-ig-still-04"
+    "mily-b197-15-night-ig-cover",
+    "mily-b197-16-night-ig-still-01",
+    "mily-b197-17-night-ig-still-02",
+    "mily-b197-18-night-ig-still-03",
+    "mily-b197-19-night-ig-still-04"
   ],
   "items": [
     {
-      "id": "mily-b197-14-night-ig-cover",
-      "path": "/media/live/mily-b197-14-night-ig-cover.png",
+      "id": "mily-b197-15-night-ig-cover",
+      "path": "/media/live/mily-b197-15-night-ig-cover.png",
       "source": "/media/live/mily-b197-02-20261008-night-still.jpg",
       "photoBounds": [
         40,
@@ -27,8 +27,8 @@
       "sha256": "0d86293770f17dfbf3e6d21e9298a1d0f392159c1768c0a47ffe1004a0b2bdfd"
     },
     {
-      "id": "mily-b197-15-night-ig-still-01",
-      "path": "/media/live/mily-b197-15-night-ig-still-01.png",
+      "id": "mily-b197-16-night-ig-still-01",
+      "path": "/media/live/mily-b197-16-night-ig-still-01.png",
       "source": "/media/live/mily-b197-01-20261008-night-still.jpg",
       "photoBounds": [
         40,
@@ -39,8 +39,8 @@
       "sha256": "e3c21851b8be854d864e42ed9da977fe26f65e17cc8bda0e9a84b63a6a135b54"
     },
     {
-      "id": "mily-b197-16-night-ig-still-02",
-      "path": "/media/live/mily-b197-16-night-ig-still-02.png",
+      "id": "mily-b197-17-night-ig-still-02",
+      "path": "/media/live/mily-b197-17-night-ig-still-02.png",
       "source": "/media/live/mily-b197-05-20261008-night-still.jpg",
       "photoBounds": [
         40,
@@ -51,8 +51,8 @@
       "sha256": "737b536b52ecece859c169aaa2c8d4eeb050ac2d02f96485adf35eff3b0f90e5"
     },
     {
-      "id": "mily-b197-17-night-ig-still-03",
-      "path": "/media/live/mily-b197-17-night-ig-still-03.png",
+      "id": "mily-b197-18-night-ig-still-03",
+      "path": "/media/live/mily-b197-18-night-ig-still-03.png",
       "source": "/media/live/mily-b197-07-20261008-night-still.jpg",
       "photoBounds": [
         40,
@@ -63,8 +63,8 @@
       "sha256": "a0cbb8e7ebb75986e23d45c23f100f22b40485327f852ef90cb50b074fc3246a"
     },
     {
-      "id": "mily-b197-18-night-ig-still-04",
-      "path": "/media/live/mily-b197-18-night-ig-still-04.png",
+      "id": "mily-b197-19-night-ig-still-04",
+      "path": "/media/live/mily-b197-19-night-ig-still-04.png",
       "source": "/media/live/mily-b197-10-20261008-night-still.jpg",
       "photoBounds": [
         40,
@@ -78,7 +78,7 @@
   "coverReview": {
     "sha256": "0d86293770f17dfbf3e6d21e9298a1d0f392159c1768c0a47ffe1004a0b2bdfd",
     "reviewer": "ChatGPT: original frame and 720x900 grid visual review",
-    "reviewedAt": "2026-10-10T11:44:05Z",
+    "reviewedAt": "2026-10-10T11:57:31Z",
     "personBounds": [
       195,
       334,
