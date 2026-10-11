@@ -1,9 +1,11 @@
 import { tiktokCampusMakeupVideo } from "../../src/data/tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "../../src/data/tiktokOct04SelfieVideo.ts";
+import { tiktokOct07RibbonVideo } from "../../src/data/tiktokOct07RibbonVideo.ts";
 // This confirmed-on October 3 item did not exist in the historical September snapshot.
 tiktokCampusMakeupVideo.published = false;
 // The October 4 official TikTok embed was not present on 2026-09-22.
 tiktokOct04SelfieVideo.published = false;
+tiktokOct07RibbonVideo.published = false;
 /**
  * Historical tests were written against the site as it stood on 2026-09-22.
  * Node runs test files in separate workers, so remove later records from
@@ -15,6 +17,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-07-tiktok-ribbon",
   "2026-10-04-tiktok-selfie",
   "2026-10-11-radio-tournament-stories",
   "2026-10-08-fanroom-voice-message",
