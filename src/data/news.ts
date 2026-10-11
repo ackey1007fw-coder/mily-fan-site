@@ -272,7 +272,7 @@ export const news: NewsItem[] = [
     additionalMedia: radioOct11Stories.slice(1),
     relatedUrl: radioProgram.listenUrl,
     ctaLabel: "ラジオを聴く（FM公式）",
-    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }, { label: "10/11「大会」放送レポートを読む", url: `${site.siteUrl}/activities/radio/#2026-10-11-taikai-mily-highlights` }],
   },
   {
     id: "2026-10-08-fanroom-voice-message",

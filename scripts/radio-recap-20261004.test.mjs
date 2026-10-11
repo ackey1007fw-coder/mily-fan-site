@@ -7,7 +7,7 @@ import {news} from '../src/data/news.ts';
 import {readFileSync} from 'node:fs';
 
 test('October 4 radio keeps unverified music, private messages and clips out of publication',()=>{
- assert.equal(radioEpisodes[0],recap);
+ assert.equal(radioEpisodes[1],recap);
  assert.equal(recap.nextEpisodeNote,'');
  assert.equal(radioMusicEpisodes.find(item=>item.id===recap.id),undefined);
  assert.match(recap.transcriptionNote,/全編の手動聴取・逐語校正は未実施/);
