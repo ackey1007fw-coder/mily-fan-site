@@ -1,6 +1,6 @@
 import type { MediaItem } from "./media.ts";
 
-const basePath = "/media/gallery/mily-b202-01-ssc-aftershow-duo";
+const basePath = "/media/gallery/mily-b203-01-ssc-aftershow-duo";
 const widths = [480, 960, 1000] as const;
 
 /**
@@ -11,7 +11,7 @@ const widths = [480, 960, 1000] as const;
  * alone and contains no private reply, username or app UI.
  */
 export const radioFanroomAftershowPhoto = {
-  id: "mily-b202-01-ssc-aftershow-duo",
+  id: "mily-b203-01-ssc-aftershow-duo",
   kind: "photo",
   basePath,
   widths,
@@ -20,7 +20,7 @@ export const radioFanroomAftershowPhoto = {
   alt: "車内で並んで写真を撮る2人。左側の人物はマスク姿でピース、右側の人物は頬に手を添えている",
   caption: "10月11日『湘南シーサイドサークル』放送後、13:12にSHOWROOMファンルームへ投稿された2ショット写真。",
   provenance: "owner-provided",
-  sourceUrl: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+  sourceUrl: null,
   sourceDate: "2026-10-11",
   credit: null,
   aspect: "1000 / 562",

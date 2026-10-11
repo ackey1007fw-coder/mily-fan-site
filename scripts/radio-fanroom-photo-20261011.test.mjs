@@ -6,14 +6,14 @@ import { radioEpisode20261011 } from "../src/data/radioEpisode20261011.ts";
 import { news } from "../src/data/news.ts";
 import { radioOct11Stories } from "../src/data/radioOct11Stories.ts";
 
-const stem = "mily-b202-01-ssc-aftershow-duo";
+const stem = "mily-b203-01-ssc-aftershow-duo";
 
 describe("October 11 Fan Room post-show two-person photo", () => {
   it("uses real cropped photo derivatives, with no DM or UI screenshot", () => {
     assert.equal(radioFanroomAftershowPhoto.id, stem);
     assert.deepEqual(radioFanroomAftershowPhoto.widths, [480, 960, 1000]);
     assert.equal(radioFanroomAftershowPhoto.sourceDate, "2026-10-11");
-    assert.ok(radioFanroomAftershowPhoto.sourceUrl.includes("room_id=573253"));
+    assert.equal(radioFanroomAftershowPhoto.sourceUrl, null);
     assert.equal(radioFanroomAftershowPhoto.published, true);
     for (const width of [480, 960, 1000]) {
       for (const ext of ["jpg", "webp"]) {
@@ -44,7 +44,7 @@ describe("October 11 Fan Room post-show two-person photo", () => {
     assert.equal(promo.additionalMedia?.[0].id, radioOct11Stories[1].id);
     assert.equal(promo.additionalMedia?.[1].src, radioFanroomAftershowNewsImage.src);
     assert.equal(promo.additionalMedia?.[1].kind, "image");
-    assert.ok(promo.additionalSources?.some((source) => source.url.includes("room_id=573253")));
+    assert.match(promo.sourceLabel ?? "", /SHOWROOMファンルーム写真/);
     assert.match(promo.body, /13:12/);
     assert.ok(!promo.body.includes("あっきー"));
   });

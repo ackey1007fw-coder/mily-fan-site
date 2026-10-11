@@ -268,7 +268,7 @@ export const news: NewsItem[] = [
     title: "10/11の湘南シーサイドサークル📻 テーマは「大会」",
     body: "10月11日（日）の「湘南シーサイドサークル」は、トークテーマ「大会」！ みりぃと共演者がスタジオから番組を案内する動画と、お便りの送り口を紹介する動画の計2本をお届けします。スタジオの表情と告知をぜひご覧ください。\n\n番組枠は日曜10:00〜13:00。番組枠3時間は、みりぃ本人の出演時間を表すものではありません。お便りはFM公式フォームから送れます。\n\nこのお知らせは10月11日に受領・内容確認した告知動画の記録です。SNSでの投稿日は未確認です。放送本編のレポートではありません。動画は未確認の背景音楽を除いた映像のみで掲載しています。\n\n放送終了後、13:12にSHOWROOMファンルームへ投稿された2ショット写真も追加しました。アプリの画面やコメントは掲載せず、写真部分のみを収録しています。",
     sourceLabel: "番組告知Story（投稿日未確認・10月11日確認）／SHOWROOMファンルーム写真（10月11日13:12投稿）",
-    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }, { label: "SHOWROOMファンルーム", url: "https://www.showroom-live.com/room/fan_club?room_id=573253" }],
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
     media: radioOct11Stories[0],
     additionalMedia: [...radioOct11Stories.slice(1), radioFanroomAftershowNewsImage],
     relatedUrl: radioProgram.listenUrl,
