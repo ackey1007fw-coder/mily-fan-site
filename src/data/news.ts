@@ -301,6 +301,15 @@ export const news: NewsItem[] = [
     ctaLabel: "配信予定・四次審査の応援案内を見る",
   },
   {
+    id: "2026-10-07-fourth-round-official-update",
+    date: "2026-10-07",
+    activityIds: ["miss-circle"],
+    title: "四次イベント：特別番組の出演条件について公式更新",
+    body: `${fourthRoundEventUpdate.body}\n\n${fourthRoundEventUpdate.note}`,
+    source: fourthRoundEventUpdate.source,
+    sourceLabel: "SHOWROOM公式イベントページ（10月6日更新）",
+  },
+  {
     id: "2026-10-07-tiktok-ribbon",
     date: tiktokOct07RibbonVideo.sourceDate,
     title: "青いシュシュと手のポーズ、みりぃのTikTok💙",
@@ -309,15 +318,6 @@ export const news: NewsItem[] = [
     sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
     media: tiktokOct07RibbonVideo,
     message: { label: "みりぃの投稿本文", text: "💖💖💖" },
-  },
-  {
-    id: "2026-10-07-fourth-round-official-update",
-    date: "2026-10-07",
-    activityIds: ["miss-circle"],
-    title: "四次イベント：特別番組の出演条件について公式更新",
-    body: `${fourthRoundEventUpdate.body}\n\n${fourthRoundEventUpdate.note}`,
-    source: fourthRoundEventUpdate.source,
-    sourceLabel: "SHOWROOM公式イベントページ（10月6日更新）",
   },
   {
   "id": "2026-10-06-night-showroom-recap",
