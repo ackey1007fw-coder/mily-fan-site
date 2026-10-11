@@ -1,0 +1,36 @@
+[
+  {
+    "id": "mily-b201-01-radio-tournament-story",
+    "kind": "video",
+    "alt": "スタジオで並ぶみりぃと共演者。『湘南シーサイドサークル』10:00〜13:00、本日のトークテーマ『大会』の告知が表示された縦型動画",
+    "src": "/media/gallery/mily-b201-01-radio-tournament-story.mp4",
+    "poster": "/media/gallery/mily-b201-01-radio-tournament-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "番組告知Story（投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-11",
+    "activityIds": [
+      "radio"
+    ],
+    "published": true
+  },
+  {
+    "id": "mily-b201-02-radio-message-story",
+    "kind": "video",
+    "alt": "顔に犬の鼻のフィルターを使った人物が『湘南シーサイドサークル』10:00〜13:00とお便り受付を案内する縦型動画",
+    "src": "/media/gallery/mily-b201-02-radio-message-story.mp4",
+    "poster": "/media/gallery/mily-b201-02-radio-message-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "番組告知Story（投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-11",
+    "activityIds": [
+      "radio"
+    ],
+    "published": true
+  }
+]
