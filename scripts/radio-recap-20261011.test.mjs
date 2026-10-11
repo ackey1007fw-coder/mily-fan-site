@@ -70,7 +70,9 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
     ));
     assert.ok(promo);
     assert.equal(promo.media?.id, radioOct11Stories[0].id);
-    assert.equal(promo.additionalMedia?.length, 1);
+    assert.equal(promo.additionalMedia?.length, 2);
+    assert.equal(promo.additionalMedia?.[0].id, radioOct11Stories[1].id);
+    assert.ok(promo.additionalMedia?.[1].src.includes("mily-b202-01-ssc-aftershow-duo"));
     assert.equal(radioOct11Stories.every((story) => story.published), true);
   });
 });
