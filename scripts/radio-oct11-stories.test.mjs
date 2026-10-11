@@ -27,6 +27,14 @@ test("October 11 radio Stories use two owner-provided, dated-by-receipt videos",
   }
 });
 
+test("September historical fixture excludes b201, preserving original archive regressions", () => {
+  const fixture = readFileSync(resolve(root, "scripts/fixtures/as-of-20260922.mjs"), "utf8");
+  assert.match(fixture, /2026-10-11-radio-tournament-stories/);
+  for (const item of manifest) {
+    assert.ok(fixture.includes(item.id), `${item.id} must be excluded from older snapshot`);
+  }
+});
+
 test("October 11 radio announcement appears in NEWS and Gallery", () => {
   const news = readFileSync(resolve(root, "src/data/news.ts"), "utf8");
   const gallery = readFileSync(resolve(root, "src/data/galleryVideos.ts"), "utf8");
