@@ -1,5 +1,6 @@
 import { tiktokCampusMakeupVideo } from "../data/tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "../data/tiktokOct04SelfieVideo.ts";
+import { tiktokOct07RibbonVideo } from "../data/tiktokOct07RibbonVideo.ts";
 /**
  * Gallery の表示用selector。
  *
@@ -119,6 +120,7 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: item.id,
       item,
     })),
+    ...(tiktokOct07RibbonVideo.published ? [{ kind: "tiktok" as const, key: tiktokOct07RibbonVideo.id, item: tiktokOct07RibbonVideo }] : []),
     ...(tiktokOct04SelfieVideo.published ? [{ kind: "tiktok" as const, key: tiktokOct04SelfieVideo.id, item: tiktokOct04SelfieVideo }] : []),
     ...(tiktokCampusMakeupVideo.published ? [{ kind: "tiktok" as const, key: tiktokCampusMakeupVideo.id, item: tiktokCampusMakeupVideo }] : []),
     ...(tiktokGoodVibesVideo.published ? [{

@@ -6,6 +6,7 @@ import { radioOct11Stories } from "./radioOct11Stories.ts";
 import { radioFanroomAftershowNewsImage } from "./radioFanroomAftershowPhoto.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "./tiktokOct04SelfieVideo.ts";
+import { tiktokOct07RibbonVideo } from "./tiktokOct07RibbonVideo.ts";
 import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "./radio.ts";
 import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
@@ -307,6 +308,16 @@ export const news: NewsItem[] = [
     body: `${fourthRoundEventUpdate.body}\n\n${fourthRoundEventUpdate.note}`,
     source: fourthRoundEventUpdate.source,
     sourceLabel: "SHOWROOM公式イベントページ（10月6日更新）",
+  },
+  {
+    id: "2026-10-07-tiktok-ribbon",
+    date: tiktokOct07RibbonVideo.sourceDate,
+    title: "青いシュシュと手のポーズ、みりぃのTikTok💙",
+    body: "10月7日、みりぃ（@seasidecircle）が短い縦型動画をTikTokに投稿しました。紺色のカーディガンと青いシュシュ姿で、カメラに向かって手のポーズやさまざまな表情を見せる約9秒の動画です。TikTok公式プレーヤーでご覧いただけます。",
+    source: tiktokOct07RibbonVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    media: tiktokOct07RibbonVideo,
+    message: { label: "みりぃの投稿本文", text: "💖💖💖" },
   },
   {
   "id": "2026-10-06-night-showroom-recap",
