@@ -80,8 +80,16 @@ try {
       await archive.click();
       await page.waitForURL(origin + "/news/");
     }
-    const card = page.locator("li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
-    await card.waitFor();
+    const card = page.locator("#latest li").filter({ hasText: "みりぽち4日目！車内からの短い動画" });
+    // A new NEWS item can move this historical card beyond the first archive page.
+    // Keep testing the original video instead of assuming a fixed NEWS position.
+    await page.locator("#latest li").first().waitFor();
+    for (let attempt = 0; attempt < 20 && (await card.count()) === 0; attempt++) {
+      const loadMore = page.locator("#latest button").filter({ hasText: "もっと見る" });
+      assert.equal(await loadMore.count(), 1, "Historical video remains reachable by NEWS pagination");
+      await loadMore.click();
+    }
+    await card.waitFor({ timeout: 10000 });
     assert.equal(await card.count(), 1);
     const video = card.locator('video[src="/media/news/mily-b191-01-car-vote-day4.mp4"]');
     assert.equal(await video.count(), 1);
