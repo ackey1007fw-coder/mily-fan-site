@@ -40,6 +40,7 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
 
   it("discloses source limits and does not publish recordings, DM, or personal identifiers", () => {
     assert.match(recap.transcriptionNote, /全編の手動聴取・逐語校正は未実施/);
+    assert.match(recap.transcriptionNote, /画面録画4本の音声トラックが再生可能/);
     assert.match(recap.transcriptionNote, /楽曲名『明日も』はリスナーのリアルタイム聴取/);
     const quoted = recap.milyHighlights.filter((highlight) => highlight.quote !== undefined);
     assert.equal(quoted.length, 1);
