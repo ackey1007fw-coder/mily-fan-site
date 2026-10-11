@@ -1,3 +1,4 @@
+import { X_FINAL_DAY_PEACE_POST_URL, xFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
 import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
 import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourXVideo.ts";
 import { providedVoteVideo } from "./providedVoteVideo.ts";
@@ -262,6 +263,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-11-x-fourth-round-final-day-peace",
+    date: "2026-10-11",
+    sameDayOrder: 2359,
+    activityIds: ["miss-circle"],
+    title: "四次審査、10/12が最終日！三つ編みピースのみりぃ🩵",
+    body: "本人Xの10月11日23:59（JST）の投稿で、10月12日（月）が四次審査の最終日と案内されました。WEB投票は12日23:59、SHOWROOM審査は12日21:59までとの投稿時点の説明です。受付状況は必ず公式ページで確認してください。\n\n投稿には、三つ編み姿で両手ピースを見せる約2秒の可愛い動画も添えられています。オーナー提供動画から作った音声なしの公開版を掲載しました。",
+    source: X_FINAL_DAY_PEACE_POST_URL,
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    media: xFinalDayPeaceVideo,
+    message: { label: "投稿のひとこと", text: "今日の朝の私を添えて🩵" },
+    relatedUrl: "/support/",
+    ctaLabel: "四次審査の応援案内を見る",
+    additionalCtas: [{ label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" }],
+  },
   {
     id: "2026-10-11-radio-tournament-stories",
     date: "2026-10-11",
