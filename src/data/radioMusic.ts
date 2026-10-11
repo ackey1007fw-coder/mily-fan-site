@@ -88,11 +88,18 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "title": "Changes",
         "artist": "Charlie Puth",
         "youtubeUrl": "https://www.youtube.com/watch?v=Jrf8N1EMUhg"
+      },
+      {
+        "timestamp": "2:40:38",
+        "title": "明日も",
+        "artist": "SHISHAMO",
+        "youtubeUrl": "https://www.youtube.com/watch?v=zhCtzmDWsN0",
+        "youtubeVersionNote": "SHISHAMO公式ミュージックビデオ。12:40ごろの放送についてリスナーのリアルタイム聴取で確認した楽曲です。"
       }
     ],
-    "sourceLabel": "2026/10/11の放送音声・曲紹介と各アーティスト／レーベル公式YouTube動画",
+    "sourceLabel": "2026/10/11の放送音声・曲紹介・リスナーのリアルタイム聴取と、各アーティスト／レーベル公式YouTube動画",
     "verifiedAt": "2026-10-11",
-    "note": "放送開始から11:56ごろまでに曲紹介と曲名を確認できた10曲の途中経過です。放送後半は未確認のため、全曲網羅ではありません。時刻は曲紹介時点のおおよその位置で、実際の曲頭と一致しない場合があります。YouTubeリンク先は公式映像・公式音源で、当日放送された音源の版とは異なることがあります。"
+    "note": "放送開始から12:40ごろまでに確認できた11曲の途中経過です。「明日も」はリスナーのリアルタイム聴取による確認です。放送の全曲網羅ではありません。時刻は曲紹介前後のおおよその位置で、実際の曲頭と一致しない場合があります。YouTubeリンク先は公式映像・公式音源で、当日放送された音源の版とは異なることがあります。"
   },
 {
   "id": "2026-09-27-kawaii",

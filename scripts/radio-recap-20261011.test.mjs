@@ -22,7 +22,7 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
 
   it("covers the entire program with detailed highlights and an aligned timeline", () => {
     assert.equal(recap.milyHighlights.length, 18);
-    assert.equal(recap.listenerMessages.length, 5);
+    assert.equal(recap.listenerMessages.length, 4);
     assert.equal(recap.timeline.length, 18);
     assert.deepEqual(recap.timeline.map(({ timestamp }) => timestamp), recap.milyHighlights.map(({ timestamp }) => timestamp));
     for (const set of [recap.timeline, recap.milyHighlights, recap.listenerMessages]) {
@@ -32,7 +32,7 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
       assert.deepEqual(stamps.map(toSeconds), stamps.map(toSeconds).toSorted((a, b) => a - b));
       assert.ok(stamps.every((value) => toSeconds(value) >= 120 && toSeconds(value) <= 10700));
     }
-    for (const topic of ["大会", "応援", "熱血ヒロイン", "アカペラ", "胸キュン", "海そば", "一句", "ネクスト"]) {
+    for (const topic of ["大会", "応援", "熱血ヒロイン", "アカペラ", "胸キュン", "海そば", "一句", "次の一歩"]) {
       const body = JSON.stringify(recap.milyHighlights) + recap.summary;
       assert.ok(body.includes(topic), topic);
     }
@@ -42,10 +42,8 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
     assert.match(recap.transcriptionNote, /全編の手動聴取・逐語校正は未実施/);
     assert.match(recap.transcriptionNote, /画面録画4本の音声トラックが再生可能/);
     assert.match(recap.transcriptionNote, /楽曲名『明日も』はリスナーのリアルタイム聴取/);
-    const quoted = recap.milyHighlights.filter((highlight) => highlight.quote !== undefined);
-    assert.equal(quoted.length, 1);
-    assert.match(quoted[0].quote, /認めよう.*幸せ噛みしめ.*ネクストへ/);
-    assert.match(recap.transcriptionNote, /2種類の自動文字起こしで照合した暫定表記/);
+    assert.ok(recap.milyHighlights.every((highlight) => highlight.quote === undefined));
+    assert.match(recap.transcriptionNote, /2種類の自動文字起こしで照合して整理/);
     const publicText = JSON.stringify(recap);
     assert.doesNotMatch(publicText, /\.ogg|\.mp4|\.m4a|C:\\\\|Library|libfile_|private\.md|@ackey|school|DM|教頭|教師|担任/);
     assert.ok(recap.listenerMessages.every((message) => Object.keys(message).every((key) => ["timestamp", "title", "body"].includes(key))));
