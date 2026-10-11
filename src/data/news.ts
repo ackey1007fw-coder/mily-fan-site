@@ -5,6 +5,7 @@ import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { radioOct11Stories } from "./radioOct11Stories.ts";
 import { radioFanroomAftershowNewsImage } from "./radioFanroomAftershowPhoto.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
+import { tiktokOct04SelfieVideo } from "./tiktokOct04SelfieVideo.ts";
 import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "./radio.ts";
 import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
@@ -470,6 +471,15 @@ export const news: NewsItem[] = [
     relatedUrl: radioProgram.listenUrl,
     ctaLabel: "ラジオを聴く（FM公式）",
     additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
+  {
+    id: "2026-10-04-tiktok-selfie",
+    date: tiktokOct04SelfieVideo.sourceDate,
+    title: "みりぃの表情を楽しむ、短いTikTok動画📱",
+    body: "10月4日、みりぃ（@seasidecircle）が、カメラに向かって表情を見せる短い縦型動画をTikTokに投稿しました。ブルーグレーのトップス姿のみりぃを、TikTok公式プレーヤーで楽しめます。動画の原音と投稿者表示はTikTok側でご確認ください。",
+    source: tiktokOct04SelfieVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    media: tiktokOct04SelfieVideo,
   },
   {
     id: "2026-10-03-confirmed-tiktok-campus-makeup",
