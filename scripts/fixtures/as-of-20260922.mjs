@@ -12,6 +12,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-11-radio-tournament-stories",
   "2026-10-08-fanroom-voice-message",
   "2026-10-08-showroom-announced-schedule",
   "2026-10-05-car-vote-day-four-x",
@@ -34,6 +35,8 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b201-01-radio-tournament-story",
+  "mily-b201-02-radio-message-story",
   "mily-b187-01-vote-support",
   "mily-b186-01-radio-anniversary-story",
   "mily-b186-02-radio-message-story",

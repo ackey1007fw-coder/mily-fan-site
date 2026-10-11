@@ -2,6 +2,7 @@ import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
 import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourXVideo.ts";
 import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
+import { radioOct11Stories } from "./radioOct11Stories.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "./radio.ts";
@@ -258,6 +259,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-11-radio-tournament-stories",
+    date: "2026-10-11",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "10/11の湘南シーサイドサークル📻 テーマは「大会」",
+    body: "10月11日（日）の「湘南シーサイドサークル」は、トークテーマ「大会」！ みりぃと共演者がスタジオから番組を案内する動画と、お便りの送り口を紹介する動画の計2本をお届けします。スタジオの表情と告知をぜひご覧ください。\n\n番組枠は日曜10:00〜13:00。番組枠3時間は、みりぃ本人の出演時間を表すものではありません。お便りはFM公式フォームから送れます。\n\nこのお知らせは10月11日に受領・内容確認した告知動画の記録です。SNSでの投稿日は未確認です。放送本編のレポートではありません。動画は未確認の背景音楽を除いた映像のみで掲載しています。",
+    sourceLabel: "番組告知Story（投稿日未確認・10月11日確認）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioOct11Stories[0],
+    additionalMedia: radioOct11Stories.slice(1),
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
   {
     id: "2026-10-08-fanroom-voice-message",
     date: "2026-10-08",
