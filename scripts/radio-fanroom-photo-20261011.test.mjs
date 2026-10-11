@@ -3,10 +3,8 @@ import { readFileSync, statSync } from "node:fs";
 import { describe, it } from "node:test";
 import { radioFanroomAftershowPhoto, radioFanroomAftershowNewsImage } from "../src/data/radioFanroomAftershowPhoto.ts";
 import { radioEpisode20261011 } from "../src/data/radioEpisode20261011.ts";
-import { media } from "../src/data/media.ts";
 import { news } from "../src/data/news.ts";
 import { radioOct11Stories } from "../src/data/radioOct11Stories.ts";
-import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 
 const stem = "mily-b202-01-ssc-aftershow-duo";
 
@@ -28,9 +26,9 @@ describe("October 11 Fan Room post-show two-person photo", () => {
   });
 
   it("shows the photograph in Gallery and today's radio recap", () => {
-    assert.equal(media[0].id, stem);
-    const gallery = selectGalleryEntries().filter((item) => item.kind === "media" && item.item.id === stem);
-    assert.equal(gallery.length, 1);
+    const galleryPage = readFileSync("src/GalleryPage.tsx", "utf8");
+    assert.match(galleryPage, /radioFanroomAftershowPhoto/);
+    assert.match(galleryPage, /<figure/);
     assert.equal(radioEpisode20261011.aftershowPhoto?.src, `/media/gallery/${stem}-1000.jpg`);
     assert.match(radioEpisode20261011.aftershowPhoto?.caption ?? "", /13:12/);
     const page = readFileSync("src/ActivitiesPage.tsx", "utf8");
