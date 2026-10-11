@@ -25,7 +25,7 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
     "date": "2026-10-11",
     "dateLabel": "2026.10.11（日）",
     "theme": "大会",
-    "broadcastLabel": "10:00〜13:00 放送回（現在確認中）",
+    "broadcastLabel": "10:00〜13:00 放送（保存音声による曲目照合）",
     "songs": [
       {
         "timestamp": "0:05:03",
@@ -90,16 +90,44 @@ export const radioMusicEpisodes: RadioMusicEpisode[] = [
         "youtubeUrl": "https://www.youtube.com/watch?v=Jrf8N1EMUhg"
       },
       {
+        "timestamp": "2:10:18",
+        "title": "革命道中 - On The Way",
+        "artist": "アイナ・ジ・エンド",
+        "youtubeUrl": "https://www.youtube.com/watch?v=NLIGDjKBLY0",
+        "youtubeVersionNote": "12:10台に紹介。本人公式MV。"
+      },
+      {
+        "timestamp": "2:21:08",
+        "title": "YOUR WAY'S BETTER",
+        "artist": "Forrest Frank",
+        "youtubeUrl": "https://www.youtube.com/watch?v=T1LRsp8qBY0",
+        "youtubeVersionNote": "12:21の曲紹介と録音から判定。録音の音響指紋は「YOUR WAY'S BETTER (SHORTER)」を示します。リンク先は本人の公式Lyric Videoで、録音版の長さと異なる場合があります。"
+      },
+      {
+        "timestamp": "2:29:29",
+        "title": "'I' Novel",
+        "artist": "RADWIMPS",
+        "youtubeUrl": "https://www.youtube.com/watch?v=H8Kt925tvyw",
+        "youtubeVersionNote": "12:29の曲紹介と録音照合による曲名。配信元の公式Topic音源です。"
+      },
+      {
         "timestamp": "2:40:38",
         "title": "明日も",
         "artist": "SHISHAMO",
         "youtubeUrl": "https://www.youtube.com/watch?v=zhCtzmDWsN0",
         "youtubeVersionNote": "SHISHAMO公式ミュージックビデオ。12:40ごろの放送についてリスナーのリアルタイム聴取で確認した楽曲です。"
+      },
+      {
+        "timestamp": "2:51:42",
+        "title": "Blue Jeans",
+        "artist": "HANA",
+        "youtubeUrl": "https://www.youtube.com/watch?v=r_AOa3yVz8A",
+        "youtubeVersionNote": "12:51の曲紹介と録音照合。HANA公式ミュージックビデオです。"
       }
     ],
-    "sourceLabel": "2026/10/11の放送音声・曲紹介・リスナーのリアルタイム聴取と、各アーティスト／レーベル公式YouTube動画",
+    "sourceLabel": "2026/10/11の保存音声（曲紹介・全編80点の音楽認識と境界区間の追加照合）／本人・レーベル公式YouTube動画／一部リスナー聴取",
     "verifiedAt": "2026-10-11",
-    "note": "放送開始から12:40ごろまでに確認できた11曲の途中経過です。「明日も」はリスナーのリアルタイム聴取による確認です。放送の全曲網羅ではありません。時刻は曲紹介前後のおおよその位置で、実際の曲頭と一致しない場合があります。YouTubeリンク先は公式映像・公式音源で、当日放送された音源の版とは異なることがあります。"
+    "note": "10月11日の放送録音を2分15秒間隔80点で音楽認識し、曲紹介・境界区間も照合した確認済みのオンエア楽曲15曲です。短い番組BGM・ジングルは含めていません。曲紹介時刻はおおよその目安で、実際の曲頭と一致しない場合があります。「明日も」はリスナーのリアルタイム聴取と録音の両方で確認しました。公式YouTubeへのリンクは放送で使われた版・尺と異なる場合があります。"
   },
 {
   "id": "2026-09-27-kawaii",
