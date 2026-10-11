@@ -63,12 +63,12 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
   });
 
   it("puts a discoverable NEWS link beside the approved October 11 promo videos", () => {
-    const item = news.find(({ id }) => id === "2026-10-11-radio-taikai-recap");
-    assert.ok(item);
-    assert.deepEqual(item.activityIds, ["radio"]);
-    assert.equal(item.relatedUrl, "https://mily-fan-site.vercel.app/activities/radio/#2026-10-11-taikai-mily-highlights");
-    assert.equal(item.media, undefined);
+    assert.equal(news.some(({ id }) => id === "2026-10-11-radio-taikai-recap"), false);
     const promo = news.find(({ id }) => id === "2026-10-11-radio-tournament-stories");
+    assert.ok(promo);
+    assert.ok(promo.additionalCtas?.some((link) =>
+      link.url === "https://mily-fan-site.vercel.app/activities/radio/#2026-10-11-taikai-mily-highlights"
+    ));
     assert.ok(promo);
     assert.equal(promo.media?.id, radioOct11Stories[0].id);
     assert.equal(promo.additionalMedia?.length, 1);

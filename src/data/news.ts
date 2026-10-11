@@ -260,16 +260,6 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
-    id: "2026-10-11-radio-taikai-recap",
-    date: "2026-10-11",
-    activityIds: ["radio"],
-    title: "10/11ラジオ『大会』｜挑戦すること、応援すること、次へ進むこと",
-    body: "10月11日の『湘南シーサイドサークル』は、みりぃともこさんで届けた「大会」回。陸上への思いを綴ったお便り、もこさんのアカペラサークルでの経験、熱血ヒロインの演技、食べ物の話、照れながら挑んだ胸キュン選手権、最後の『今日の一句』を振り返ります。\n\n18の見どころ、5つのお便りの要約、時刻付きの全体タイムライン、確認できたオンエア楽曲へのリンクを掲載。保存音声と自動文字起こしによる非公式レポートで、音声・歌詞・全文書き起こしは再配布していません。",
-    sourceLabel: "10月11日の保存音声・自動文字起こし（非公式放送メモ）",
-    relatedUrl: `${site.siteUrl}/activities/radio/#2026-10-11-taikai-mily-highlights`,
-    ctaLabel: "大会回の放送レポートを読む",
-  },
-  {
     id: "2026-10-11-radio-tournament-stories",
     date: "2026-10-11",
     dateBasis: "confirmed-on",
@@ -282,7 +272,7 @@ export const news: NewsItem[] = [
     additionalMedia: radioOct11Stories.slice(1),
     relatedUrl: radioProgram.listenUrl,
     ctaLabel: "ラジオを聴く（FM公式）",
-    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }, { label: "10/11「大会」放送レポートを読む", url: `${site.siteUrl}/activities/radio/#2026-10-11-taikai-mily-highlights` }],
   },
   {
     id: "2026-10-08-fanroom-voice-message",
