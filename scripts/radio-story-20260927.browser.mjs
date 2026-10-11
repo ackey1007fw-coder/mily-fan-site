@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { HOME_NEWS_LIMIT, ARCHIVE_LOAD_MORE_LABEL } from "../src/lib/homePortal.ts";
+import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { kawaiiRadioStoryVideo as video, kawaiiRadioMessageImage as image, RADIO_KAWAII_MESSAGE_FORM_URL, kawaiiRadioAdditionalVideos } from "../src/data/kawaiiRadioStoryVideo.ts";
 import { radioProgram } from "../src/data/radio.ts";
 import { radioAnniversaryStories } from "../src/data/radioAnniversaryStories.ts";
@@ -76,6 +77,25 @@ try {
         const card = page.locator("li").filter({ has: page.getByText(item.title, { exact: true }) }).first();
         const onHome = sortNewsByDateDesc(news).slice(0,HOME_NEWS_LIMIT).some(n => n.id === item.id);
         if (route === "/" && !onHome) { results.push({engine,width,route,status:"passed",outsideHomeLimit:true}); continue; }
+        // Activity pages intentionally show only their three most recent related NEWS.
+        // A newer radio announcement can move 9/27 outside that window without
+        // removing the original NEWS archive entry or its related-media video.
+        if (route === "/activities/radio/" && !selectActivityNews("radio").some(n => n.id === item.id)) {
+          assert.equal(await card.count(), 0, "Historical NEWS is outside the compact Radio latest window");
+          assert.equal(await page.locator(`img[src="${image.src}"]`).count(), 0, "Radio does not embed the additional NEWS photo");
+          const relatedVideo = page.locator(`video[src="${video.src}"]`);
+          assert.equal(await relatedVideo.count(), 1, "Original 9/27 video remains in Radio related media");
+          assert.equal(await relatedVideo.getAttribute("preload"), "none");
+          assert.equal(await relatedVideo.getAttribute("autoplay"), null);
+          await relatedVideo.scrollIntoViewIfNeeded();
+          await relatedVideo.evaluate(async el => { el.muted = true; await el.play(); });
+          await page.waitForFunction(el => el.currentTime > .1, await relatedVideo.elementHandle());
+          await relatedVideo.evaluate(el => el.pause());
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+          assert.deepEqual(errors, []);
+          results.push({ engine, width, route, status: "passed", historicalNewsOutsideLatestWindow: true, relatedVideoPlayed: true });
+          continue;
+        }
         if (route === "/news/") {
           const more = page.getByRole("button",{name:ARCHIVE_LOAD_MORE_LABEL,exact:true});
           for(let i=0; !(await card.count()) && await more.count() && i<news.length; i++) await more.click();
