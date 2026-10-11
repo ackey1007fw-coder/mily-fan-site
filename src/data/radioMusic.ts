@@ -20,6 +20,80 @@ export type RadioMusicEpisode = {
 
 /** Confirmed on-air songs from FM湘南マジックウェイブ「湘南シーサイドサークル」. */
 export const radioMusicEpisodes: RadioMusicEpisode[] = [
+  {
+    "id": "2026-10-11-taikai",
+    "date": "2026-10-11",
+    "dateLabel": "2026.10.11（日）",
+    "theme": "大会",
+    "broadcastLabel": "10:00〜13:00 放送回（現在確認中）",
+    "songs": [
+      {
+        "timestamp": "0:05:03",
+        "title": "好きすぎて滅！",
+        "artist": "M!LK",
+        "youtubeUrl": "https://www.youtube.com/watch?v=ZVUxJsPfoX8"
+      },
+      {
+        "timestamp": "0:12:00",
+        "title": "アポロドロス",
+        "artist": "Mrs. GREEN APPLE",
+        "youtubeUrl": "https://www.youtube.com/watch?v=dOR5-Y80CUA"
+      },
+      {
+        "timestamp": "0:28:24",
+        "title": "RPG",
+        "artist": "SEKAI NO OWARI",
+        "youtubeUrl": "https://www.youtube.com/watch?v=Mi9uNu35Gmk"
+      },
+      {
+        "timestamp": "0:39:02",
+        "title": "Family Song",
+        "artist": "星野源",
+        "youtubeUrl": "https://www.youtube.com/watch?v=Ucbp-Ej5RpI"
+      },
+      {
+        "timestamp": "0:56:11",
+        "title": "High Hopes",
+        "artist": "Panic! At The Disco",
+        "youtubeUrl": "https://www.youtube.com/watch?v=IPXIgEAGe4U"
+      },
+      {
+        "timestamp": "1:09:25",
+        "title": "アドベンチャー",
+        "artist": "YOASOBI",
+        "youtubeUrl": "https://www.youtube.com/watch?v=Av3xaZkVpJs"
+      },
+      {
+        "timestamp": "1:20:50",
+        "title": "Vision of Love",
+        "artist": "Mariah Carey",
+        "youtubeUrl": "https://www.youtube.com/watch?v=tov22NtCMC4",
+        "youtubeVersionNote": "Mariah Carey公式VEVOによるミュージックビデオです。"
+      },
+      {
+        "timestamp": "1:31:00",
+        "title": "ボーイフレンド",
+        "artist": "aiko",
+        "youtubeUrl": "https://www.youtube.com/watch?v=9Jh-FBYGaU4"
+      },
+      {
+        "timestamp": "1:43:40",
+        "title": "ヒーロー",
+        "artist": "FUNKY MONKEY BABYS",
+        "youtubeUrl": "https://www.youtube.com/watch?v=uJ8ViGoaV6k",
+        "youtubeVersionNote": "楽曲の権利元dreamusicが公開する公式ミュージックビデオです。"
+      },
+      {
+        "timestamp": "1:56:18",
+        "title": "Changes",
+        "artist": "Charlie Puth",
+        "youtubeUrl": "https://www.youtube.com/watch?v=Jrf8N1EMUhg"
+      }
+    ],
+    "sourceLabel": "2026/10/11の放送音声・曲紹介と各アーティスト／レーベル公式YouTube動画",
+    "verifiedAt": "2026-10-11",
+    "note": "放送開始から11:56ごろまでに曲紹介と曲名を確認できた10曲の途中経過です。放送後半は未確認のため、全曲網羅ではありません。時刻は曲紹介時点のおおよその位置で、実際の曲頭と一致しない場合があります。YouTubeリンク先は公式映像・公式音源で、当日放送された音源の版とは異なることがあります。"
+  },
 {
   "id": "2026-09-27-kawaii",
   "date": "2026-09-27",
@@ -471,6 +545,6 @@ export function radioMusicSongCount(
 export const radioMusicPlaylist = {
   url: "https://www.youtube.com/playlist?list=PLD69UVBfxh5g",
   title: "湘南シーサイドサークル｜オンエア楽曲セレクション",
-  verifiedAt: "2026-09-27",
-  note: "9月27日の15曲を先頭に、確認済みの過去回の楽曲もまとめた非公式セレクションです。放送と異なる版は各曲に注記しています。",
+  verifiedAt: "2026-10-11",
+  note: "10月11日の確認済み楽曲も加えた、各回共通の非公式オンエア楽曲リストです。原曲アーティストや権利元の公式動画を中心に収録しています。放送で流れた音源の版と異なる場合があります。",
 } as const;
