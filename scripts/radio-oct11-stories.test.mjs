@@ -40,6 +40,6 @@ test("October 11 radio announcement appears in NEWS and Gallery", () => {
   const gallery = readFileSync(resolve(root, "src/data/galleryVideos.ts"), "utf8");
   assert.match(news, /2026-10-11-radio-tournament-stories/);
   assert.match(news, /media: radioOct11Stories\[0\]/);
-  assert.match(news, /additionalMedia: radioOct11Stories\.slice\(1\)/);
+  assert.match(news, /additionalMedia: \[\.\.\.radioOct11Stories\.slice\(1\), radioFanroomAftershowNewsImage\]/);
   assert.match(gallery, /\.\.\.radioOct11Stories/);
 });

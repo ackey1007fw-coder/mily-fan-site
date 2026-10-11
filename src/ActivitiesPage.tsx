@@ -435,6 +435,28 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
         </p>
       </div>
 
+      {episode.aftershowPhoto ? (
+        <figure className="mt-6 overflow-hidden rounded-2xl border border-sage/15 bg-paper-card shadow-card">
+          <picture>
+            {episode.aftershowPhoto.webpSrcSet ? (
+              <source type="image/webp" srcSet={episode.aftershowPhoto.webpSrcSet} sizes={episode.aftershowPhoto.sizes} />
+            ) : null}
+            <img
+              src={episode.aftershowPhoto.src}
+              srcSet={episode.aftershowPhoto.srcSet}
+              sizes={episode.aftershowPhoto.sizes}
+              width={episode.aftershowPhoto.width}
+              height={episode.aftershowPhoto.height}
+              alt={episode.aftershowPhoto.alt}
+              loading="lazy"
+              decoding="async"
+              className="w-full aspect-video object-contain"
+            />
+          </picture>
+          <figcaption className="px-5 py-4 text-sm leading-7 text-ink-muted">{episode.aftershowPhoto.caption}</figcaption>
+        </figure>
+      ) : null}
+
       <section aria-labelledby={`${episode.id}-songs`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">On Air Music</p>
         <h3 id={`${episode.id}-songs`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">この放送で流れた楽曲</h3>

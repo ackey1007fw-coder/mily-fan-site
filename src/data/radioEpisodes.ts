@@ -28,6 +28,7 @@ export type RadioEpisode = {
   broadcastLabel: string;
   presenters: string[];
   summary: string;
+  aftershowPhoto?: { src: string; srcSet?: string; webpSrcSet?: string; sizes?: string; width: number; height: number; alt: string; caption: string };
   highlightsLabel?: string;
   milyHighlights: RadioEpisodeHighlight[];
   listenerMessages: RadioEpisodeMessage[];
