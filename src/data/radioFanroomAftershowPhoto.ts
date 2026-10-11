@@ -23,7 +23,7 @@ export const radioFanroomAftershowPhoto = {
   sourceUrl: null,
   sourceDate: "2026-10-11",
   credit: null,
-  aspect: "1000 / 562",
+
   published: true,
 } satisfies MediaItem;
 
