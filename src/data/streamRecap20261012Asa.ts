@@ -42,7 +42,7 @@ export const streamRecap20261012Asa: StreamRecap = {
   broadcastLabel: "録画開始5:32頃〜 約61分",
   platformLabel: "SHOWROOM",
   summary:
-    "MISS CIRCLE 2026四次審査の最終日。朝から訪れた人たちに感謝を伝え、ファイナルを目指す思いや好きなことを話しました。終盤には夜21:00〜21:59の最終枠を案内。笑顔やピースを当日の実写真12枚で振り返ります。",
+    "MISS CIRCLE CONTEST 2026の四次審査最終日。朝から訪れた人たちに感謝を伝え、ファイナルを目指す思いや好きなことを話しました。終盤には夜21:00〜21:59の最終枠を案内。笑顔やピースを当日の実写真12枚で振り返ります。",
   image: gallery[6],
   gallery,
   galleryNote:

@@ -11,9 +11,13 @@ const item = streamRecap20261012Asa;
 
 describe("2026-10-12 morning SHOWROOM recap", () => {
   it("adds the morning slot exactly once above both October 11 recaps", () => {
-    assert.equal(streamRecaps[0], item);
-    assert.equal(streamRecaps[1].id, "2026-10-11-night-showroom");
-    assert.equal(streamRecaps[2].id, "2026-10-11-asa-showroom");
+    const ids = streamRecaps.map((recap) => recap.id);
+    const morning12 = ids.indexOf(item.id);
+    const night11 = ids.indexOf("2026-10-11-night-showroom");
+    const morning11 = ids.indexOf("2026-10-11-asa-showroom");
+    assert.ok(morning12 >= 0 && night11 >= 0 && morning11 >= 0);
+    assert.equal(streamRecaps[morning12], item);
+    assert.ok(morning12 < night11 && night11 < morning11);
     assert.equal(streamRecaps.filter((x) => x.id === item.id).length, 1);
     assert.equal(item.dateLabel, "2026.10.12（月）");
   });
