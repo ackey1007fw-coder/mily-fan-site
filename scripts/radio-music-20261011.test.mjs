@@ -11,7 +11,7 @@ describe("2026-10-11 radio on-air music incremental archive", () => {
     assert.equal(episode.theme, "大会");
     assert.equal(episode.songs.length, 11);
     assert.match(episode.note ?? "", /全曲網羅ではありません/);
-    assert.match(episode.note ?? "", /曲紹介時点/);
+    assert.match(episode.note ?? "", /曲紹介前後/);
     assert.equal(radioMusicEpisodes.filter((item) => item.date === "2026-10-11").length, 1);
   });
 
