@@ -1,6 +1,9 @@
 import { tiktokCampusMakeupVideo } from "../../src/data/tiktokCampusMakeupVideo.ts";
+import { tiktokOct04SelfieVideo } from "../../src/data/tiktokOct04SelfieVideo.ts";
 // This confirmed-on October 3 item did not exist in the historical September snapshot.
 tiktokCampusMakeupVideo.published = false;
+// October 4 TikTok post did not exist in the September 22 historical snapshot.
+tiktokOct04SelfieVideo.published = false;
 /**
  * Historical tests were written against the site as it stood on 2026-09-22.
  * Node runs test files in separate workers, so remove later records from
@@ -12,6 +15,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-04-tiktok-selfie",
   "2026-10-11-radio-tournament-stories",
   "2026-10-08-fanroom-voice-message",
   "2026-10-08-showroom-announced-schedule",
