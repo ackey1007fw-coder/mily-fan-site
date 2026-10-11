@@ -11,8 +11,13 @@ const item = streamRecap20261011Night;
 
 describe("2026-10-11 night SHOWROOM recap", () => {
   it("keeps the existing morning entry and latest-first order", () => {
-    assert.equal(streamRecaps[0], item);
-    assert.equal(streamRecaps[1].id, "2026-10-11-asa-showroom");
+    const ids = streamRecaps.map((recap) => recap.id);
+    const morning12 = ids.indexOf("2026-10-12-asa-showroom");
+    const night11 = ids.indexOf(item.id);
+    const morning11 = ids.indexOf("2026-10-11-asa-showroom");
+    assert.ok(morning12 >= 0 && night11 >= 0 && morning11 >= 0);
+    assert.equal(streamRecaps[night11], item);
+    assert.ok(morning12 < night11 && night11 < morning11);
     assert.equal(streamRecaps.filter((recap) => recap.id === item.id).length, 1);
   });
   it("distinguishes broadcast recap from uncertain raw ASR and private analytics", () => {
