@@ -6,7 +6,7 @@ import { describe, it } from "node:test";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDir = path.join(root, "public/media/gallery");
-const prefix = "mily-b215-01-20261011-twin-braids-peace";
+const prefix = "mily-b216-01-20261011-twin-braids-peace";
 
 describe("2026-10-11 X final-day post and owner-provided clip", () => {
   it("keeps one shared X video source in NEWS and Gallery", async () => {

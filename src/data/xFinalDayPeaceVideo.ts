@@ -17,11 +17,11 @@ export const X_FINAL_DAY_PEACE_POST_URL =
   "https://x.com/Mily_chan36/status/2109297721366773862";
 
 export const xFinalDayPeaceVideo: XFinalDayPeaceVideo = {
-  id: "mily-b215-01-x-final-day-peace",
+  id: "mily-b216-01-x-final-day-peace",
   kind: "video",
   alt: "三つ編み姿のみりぃが淡いブルーのトップスと黒い羽織で両手ピースする2秒の無音動画",
-  src: "/media/gallery/mily-b215-01-20261011-twin-braids-peace.mp4",
-  poster: "/media/gallery/mily-b215-01-20261011-twin-braids-peace-poster.jpg",
+  src: "/media/gallery/mily-b216-01-20261011-twin-braids-peace.mp4",
+  poster: "/media/gallery/mily-b216-01-20261011-twin-braids-peace-poster.jpg",
   width: 910,
   height: 512,
   provenance: "owner-provided",
