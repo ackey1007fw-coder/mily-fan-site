@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "kind": "image",
+  "platform": "instagram",
+  "recapId": "2026-10-11-asa-showroom",
+  "date": "2026-10-11",
+  "coverId": "mily-b202-01-20261011-asa-ig-cover",
+  "coverTitle": "朝のメイクと三つ編み",
+  "order": [
+    "mily-b202-01-20261011-asa-ig-cover",
+    "mily-b202-02-20261011-asa-ig-makeup",
+    "mily-b202-03-20261011-asa-ig-puff",
+    "mily-b202-04-20261011-asa-ig-smile",
+    "mily-b202-05-20261011-asa-ig-gesture"
+  ],
+  "items": [
+    {
+      "id": "mily-b202-01-20261011-asa-ig-cover",
+      "path": "/media/live/mily-b202-01-20261011-asa-ig-cover.png",
+      "source": "/media/live/mily-b200-09-20261011-asa-still.jpg",
+      "photoBounds": [
+        60,
+        190,
+        440,
+        550
+      ],
+      "sha256": "cdc2a618820335aac1717dbf08c11d3c7e2319f5b9d1f173737af74ae41578d2"
+    },
+    {
+      "id": "mily-b202-02-20261011-asa-ig-makeup",
+      "path": "/media/live/mily-b202-02-20261011-asa-ig-makeup.png",
+      "source": "/media/live/mily-b200-03-20261011-asa-still.jpg",
+      "photoBounds": [
+        60,
+        190,
+        440,
+        550
+      ],
+      "sha256": "e5b8ac6eb267b0770b6f23f9dfb8c21f6beb56f6e01f2a7a1c13feafd7e04bd4"
+    },
+    {
+      "id": "mily-b202-03-20261011-asa-ig-puff",
+      "path": "/media/live/mily-b202-03-20261011-asa-ig-puff.png",
+      "source": "/media/live/mily-b200-04-20261011-asa-still.jpg",
+      "photoBounds": [
+        60,
+        190,
+        440,
+        550
+      ],
+      "sha256": "c55fd3513823de087672392def0e66344117a44bb285279c5cb196c46c57bc4d"
+    },
+    {
+      "id": "mily-b202-04-20261011-asa-ig-smile",
+      "path": "/media/live/mily-b202-04-20261011-asa-ig-smile.png",
+      "source": "/media/live/mily-b200-08-20261011-asa-still.jpg",
+      "photoBounds": [
+        60,
+        190,
+        440,
+        550
+      ],
+      "sha256": "3be4905907f8fc348a4b51f3b89010901b483310e2e7696d3fd9ca4fb816be7e"
+    },
+    {
+      "id": "mily-b202-05-20261011-asa-ig-gesture",
+      "path": "/media/live/mily-b202-05-20261011-asa-ig-gesture.png",
+      "source": "/media/live/mily-b200-12-20261011-asa-still.jpg",
+      "photoBounds": [
+        60,
+        190,
+        440,
+        550
+      ],
+      "sha256": "bcf7a0c13c54157c03a4db776f14d3001cec5bf2517753bfad758c56cef70fe4"
+    }
+  ],
+  "coverReview": {
+    "sha256": "cdc2a618820335aac1717dbf08c11d3c7e2319f5b9d1f173737af74ae41578d2",
+    "reviewer": "ChatGPT: original photo + formal title checked in 500x625 and grid crop",
+    "reviewedAt": "2026-10-11T04:33:00Z",
+    "personBounds": [
+      85,
+      220,
+      430,
+      530
+    ],
+    "titleBounds": [
+      60,
+      90,
+      440,
+      142
+    ],
+    "gridCrops": [
+      [
+        0,
+        62,
+        500,
+        562
+      ],
+      [
+        16,
+        0,
+        484,
+        625
+      ]
+    ],
+    "observedText": [
+      "Mily / 2026.10.11",
+      "朝のメイクと三つ編み",
+      "SHOWROOM / MORNING",
+      "非公式ファン編集"
+    ]
+  }
+}
