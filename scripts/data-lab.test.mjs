@@ -46,7 +46,7 @@ test("data-lab never imports private analysis URLs or personal audience records"
   ];
   for (const path of paths) {
     const content = read(path);
-    assert.doesNotMatch(content, /chatgpt\.site|tasty-mite|ackey1007fw@gmail|viewer[_-]?id|private[_-]?recording/i, path);
+    assert.doesNotMatch(content, /drive\.google\.com|@gmail\.com|viewer[_-]?id|private[_-]?recording/i, path);
   }
   const html = read(paths[0]);
   assert.match(html, /assets\/data\.js/);
