@@ -37,6 +37,6 @@ SHOWROOMイベント参加ルームは71、公式進出者プロフィールと�
 
 - 共通ヘッダーは1024px未満を開閉メニュー、1024px以上を1行ナビにする。コンテナ上限は1024px。
 - canonical / og:url / og:image / twitter:image は Vite が `src/data/site.ts` のURLヘルパーから生成。`public/`への未変換HTML配置は行わない。
-- SNSカードは既存SVGを1200×630のPNGへ書き出した `og-card-20261013.png`。SVG原本は保持する。
+- SNSカードは既存SVGの共有用英語表記を `Mily SIGNAL` に揃え、1200×630のPNGへ書き出した `og-card-20261013.png`。SVG原本は保持する。
 - robotsの `noindex,nofollow,noarchive` は維持し、sitemapへは追加しない。
 - `scripts/data-lab.browser.mjs` でモバイル・PC・ブレークポイント前後、ナビ開閉、生成メタデータ・画像取得・公開データ表示を検査する。
