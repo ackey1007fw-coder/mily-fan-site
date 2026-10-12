@@ -1,3 +1,4 @@
+import { fourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
 import { X_FINAL_DAY_PEACE_POST_URL, xFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
 import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
 import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourXVideo.ts";
@@ -263,6 +264,19 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-12-fourth-round-final-day-story",
+    date: "2026-10-12",
+    dateBasis: "confirmed-on",
+    activityIds: ["miss-circle", "live-stream"],
+    activityMediaIds: [],
+    title: "投票最終日のありがとう🩵 最終枠を案内するStory",
+    body: "投票への感謝と、四次審査最終日の応援を呼びかけるStory。三つ編みとヘッドホン姿のみりぃとともに、画面には「投票最終日」「SHOWROOM最終枠 21:00〜21:59」の案内が表示されています。\n\n10月12日に受領・確認した動画の記録です。元の投稿日・撮影日時は未確認で、配信時刻は動画内の案内として紹介しています。最新の予定・受付状況は公式ページでご確認ください。公開版は未確認の背景音楽を除いた映像のみです。",
+    sourceLabel: "Instagram Story（投稿日未確認・10月12日確認）",
+    media: fourthRoundFinalDayStoryVideo,
+    relatedUrl: "/support/",
+    ctaLabel: "四次審査の応援案内を見る",
+  },
   {
     id: "2026-10-11-x-fourth-round-final-day-peace",
     date: "2026-10-11",

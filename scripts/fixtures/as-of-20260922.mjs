@@ -17,6 +17,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-12-fourth-round-final-day-story",
   "2026-10-11-x-fourth-round-final-day-peace",
   "2026-10-07-tiktok-ribbon",
   "2026-10-04-tiktok-selfie",
@@ -43,6 +44,7 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b217-01-fourth-round-final-day-story",
   "mily-b216-01-x-final-day-peace",
   "mily-b201-01-radio-tournament-story",
   "mily-b201-02-radio-message-story",

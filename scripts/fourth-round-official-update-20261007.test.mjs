@@ -13,7 +13,9 @@ test('official event update reaches current NEWS and only MISS CIRCLE while hist
   assert.equal(item.source, 'https://www.showroom-live.com/event/circle2026_4th');
   assert.equal(sortNewsByDateDesc(news.filter(x => x.date <= item.date))[0], item);
   assert.deepEqual(item.activityIds, ['miss-circle']);
-  assert.ok(selectActivityNews('miss-circle', news).includes(item));
+  // Newer announcements can move this item outside the compact three-item window.
+  assert.ok(selectActivityNews('miss-circle', news, news.length).includes(item));
+  assert.ok(selectActivityNews('miss-circle', news.filter(x => x.date <= item.date)).includes(item));
   assert.ok(!selectActivityNews('live-stream', news).includes(item));
   assert.equal(item.media, undefined);
   assert.equal(item.additionalMedia, undefined);
