@@ -41,6 +41,14 @@ test("public final-night report excludes people-specific and private analytics c
   assert.deepEqual(evidence.counter_observations.map(x => x.stars), [6140, 6150, 7271]);
   assert.deepEqual(evidence.uncertainty.post_cutoff_stars_range, [1121, 1131]);
   assert.equal(evidence.uncertainty.official_final_event_point, null);
+  const previous = evidence.cross_day_anonymized_inputs.filter(x => x.date === "2026-10-11");
+  const finalDay = evidence.cross_day_anonymized_inputs.filter(x => x.date === "2026-10-12");
+  assert.equal(previous.reduce((sum,x) => sum+x.stars,0),8938);
+  assert.equal(finalDay.reduce((sum,x) => sum+x.stars,0),11880);
+  assert.equal(evidence.cross_day_comparison.change_percent_rounded_one_decimal,32.9);
+  assert.ok(evidence.cross_day_anonymized_inputs.every(x => x.observed_at_jst && x.complete_capture === false));
+  assert.ok(!JSON.stringify(evidence).includes("recording_ended_at_jst"));
+  assert.ok(!JSON.stringify(evidence).includes("counter_last_valid_is_after_recording_end"));
   assert.ok(!JSON.stringify(evidence).includes("display_name"));
   assert.ok(!page.includes("<script"), "the report must remain a non-scripted aggregate page");
 });
