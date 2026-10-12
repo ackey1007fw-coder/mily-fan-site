@@ -1,4 +1,5 @@
 import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
+import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
 import { RecapSourceInfo } from "./components/RecapSourceInfo";
 import { recapGalleryNote } from "./lib/recapSourceDisclosure";
 import { Fragment, useEffect, useState, type ReactNode } from "react";
@@ -1188,6 +1189,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
+        {content.activity.id === "live-stream" ? <AnnouncedStreamSchedule /> : null}
         {content.activity.id === "live-stream" ? <StreamSongCatalog /> : null}
         <RadioEpisodeRecap activityId={content.activity.id} />
         <StreamRecap activityId={content.activity.id} />

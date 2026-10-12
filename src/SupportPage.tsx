@@ -35,6 +35,7 @@ import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useSupportEventClock } from "./lib/useSupportEventClock";
 import { useStreamSchedule } from "./lib/useStreamSchedule";
 import { useTokyoNow } from "./lib/useTokyoNow";
+import { withFinalStreamAnnouncement } from "./lib/finalStreamAnnouncement";
 
 const primaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
@@ -200,7 +201,7 @@ export default function SupportPage() {
     now,
   });
   const nowItems = selectSupportNow({ supportEvents, live, radio, now });
-  const calendar = buildSupportCalendar({
+  const calendar = withFinalStreamAnnouncement(buildSupportCalendar({
     contest,
     supportEvents,
     fanEvents: events,
@@ -210,7 +211,7 @@ export default function SupportPage() {
     includeRadio: true,
     now,
     daysAhead: radioOccurrenceDaysAhead,
-  });
+  }), { slots, manualSlots, roomUrl, availability }, now);
   const pendingItems = calendar.pending;
   const voteSpotlight = selectHomePrioritySupport({
     contest,
