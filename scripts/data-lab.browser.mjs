@@ -100,6 +100,16 @@ try {
             path: join(output, `${engine}-${width}-data-lab.png`),
             fullPage: true,
           });
+          await page.goto(`${baseUrl}/data-lab/reports/20261012-final-night/`, { waitUntil: "networkidle" });
+          assert.match(await page.title(), /最終夜配信/);
+          assert.match(await page.locator("h1").innerText(), /22:00/);
+          assert.equal(await page.locator(".final-table").count(), 2);
+          assert.equal(await page.locator("svg.plot polyline").count(), 1);
+          assert.match(await page.locator("#ranking").innerText(), /712,986/);
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+            "Final-night report must not overflow horizontally");
+          await page.screenshot({ path: join(output, `${engine}-${width}-final-night.png`), fullPage: true });
+
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Home has horizontal overflow");
