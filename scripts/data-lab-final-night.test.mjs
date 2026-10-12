@@ -11,6 +11,11 @@ test("the existing MILY SIGNAL page links to the October 12 final night report",
   assert.match(landing, /href="reports\/20261012-final-night\/"/);
   assert.match(landing, /id="now"/);
   assert.match(landing, /noindex,nofollow,noarchive/);
+  // The concurrent header/template migration may replace the static HTML.
+  // The unchanged shared data-lab app must provide an idempotent fallback link.
+  const app = read("public/data-lab/assets/app.js");
+  assert.match(app, /finalNightAnchor && !\$\('final-night'\)/);
+  assert.match(app, /\/data-lab\/reports\/20261012-final-night\//);
 });
 
 test("the final-night report keeps the cutoff, timestamps and provisional nature of counts", () => {
