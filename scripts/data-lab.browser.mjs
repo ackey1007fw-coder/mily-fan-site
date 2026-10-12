@@ -15,17 +15,18 @@ const mime = {
   ".jpg": "image/jpeg", ".png": "image/png",
 };
 const results = [];
+const baseUrl = process.env.DATA_LAB_BASE_URL || "https://site.test";
 await mkdir(output, { recursive: true });
 
 try {
   for (const [engine, launch] of [["chromium", chromium], ["webkit", webkit]]) {
     const browser = await launch.launch({ headless: true });
     try {
-      for (const width of [320, 390, 1440]) {
+      for (const width of [320, 390, 768, 1023, 1024, 1440]) {
         const page = await browser.newPage({ viewport: { width, height: 950 } });
         const errors = [];
         page.on("pageerror", error => errors.push(error.message));
-        await page.route("**/*", async route => {
+        if (!process.env.DATA_LAB_BASE_URL) await page.route("**/*", async route => {
           const url = new URL(route.request().url());
           if (url.hostname !== "site.test") return route.fulfill({ status: 204, body: "" });
           if (url.pathname.startsWith("/api/")) {
@@ -47,8 +48,29 @@ try {
         });
 
         try {
-          await page.goto("https://site.test/data-lab/", { waitUntil: "networkidle" });
+          await page.goto(`${baseUrl}/data-lab/`, { waitUntil: "networkidle" });
           assert.match(await page.title(), /MILY SIGNAL/);
+          const head = await page.evaluate(() => ({
+            canonical: document.querySelector('link[rel="canonical"]').href,
+            ogUrl: document.querySelector('meta[property="og:url"]').content,
+            ogImage: document.querySelector('meta[property="og:image"]').content,
+            twitterImage: document.querySelector('meta[name="twitter:image"]').content,
+            card: document.querySelector('meta[name="twitter:card"]').content,
+            robots: document.querySelector('meta[name="robots"]').content,
+          }));
+          assert.equal(head.canonical, "https://mily-fan-site.vercel.app/data-lab/");
+          assert.equal(head.ogUrl, head.canonical);
+          assert.equal(head.ogImage, "https://mily-fan-site.vercel.app/data-lab/assets/og-card-20261013.png");
+          assert.equal(head.twitterImage, head.ogImage);
+          assert.equal(head.card, "summary_large_image");
+          assert.equal(head.robots, "noindex,nofollow,noarchive");
+          const cardSize = await page.evaluate(async imageUrl => {
+            const image = new Image();
+            image.src = imageUrl;
+            await image.decode();
+            return { width: image.naturalWidth, height: image.naturalHeight };
+          }, `${baseUrl}${new URL(head.ogImage).pathname}`);
+          assert.deepEqual(cardSize, { width: 1200, height: 630 });
           assert.match(await page.locator("h1").innerText(), /データ/);
           assert.equal(await page.locator("#sr-chart .bar-row").count(), 10);
           assert.ok((await page.locator("#sr-chart .is-mily .bar").boundingBox()).width > 10, "SR chart bars must be visibly rendered");
@@ -78,11 +100,41 @@ try {
             path: join(output, `${engine}-${width}-data-lab.png`),
             fullPage: true,
           });
-          await page.goto("https://site.test/", { waitUntil: "networkidle" });
+          await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Home has horizontal overflow");
+          const header = page.locator("header").first();
+          const nav = page.getByRole("navigation", { name: "サイトナビ", exact: true });
+          const menu = page.getByRole("button", { name: "メニュー", exact: true });
+          const headerHeight = (await header.boundingBox()).height;
+          assert.ok(headerHeight <= 70, `Header must remain compact at ${width}px (got ${headerHeight}px)`);
+          if (width >= 1024) {
+            assert.ok(await nav.isVisible());
+            assert.equal(await menu.isVisible(), false);
+            const links = await nav.locator("a").evaluateAll(elements => elements.map(element => {
+              const box = element.getBoundingClientRect();
+              return { top: box.top, right: box.right };
+            }));
+            assert.equal(links.length, 8);
+            assert.ok(links.every(link => Math.abs(link.top - links[0].top) < 1), "All desktop links must share one row");
+            assert.ok(links.every(link => link.right <= width), "Desktop links must fit the viewport");
+          } else {
+            assert.ok(await menu.isVisible());
+            assert.equal(await nav.isVisible(), false);
+            await menu.click();
+            assert.equal(await menu.getAttribute("aria-expanded"), "true");
+            const disclosure = page.getByRole("navigation", { name: "サイトメニュー", exact: true });
+            assert.equal(await disclosure.locator("a").count(), 8);
+            assert.ok(await disclosure.getByRole("link", { name: "データ分析", exact: true }).isVisible());
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+            await page.keyboard.press("Escape");
+            assert.equal(await menu.getAttribute("aria-expanded"), "false");
+          }
+          await page.screenshot({ path: join(output, `${engine}-${width}-header.png`) });
+          await page.evaluate(() => window.scrollTo(0, 500));
+          assert.ok(Math.abs((await header.boundingBox()).y) < 1, "Header must stick to the viewport");
           assert.deepEqual(errors, [], "Browser JavaScript must not throw");
-          results.push({ engine, width, roster: 70, grade3: 27, search: "ok", overflow: false });
+          results.push({ engine, width, roster: 70, grade3: 27, search: "ok", overflow: false, headerHeight, navigation: width >= 1024 ? "single-row" : "disclosure", metadata: head });
         } finally {
           await page.close();
         }

@@ -182,8 +182,8 @@ describe("P6 navigation", () => {
     assert.match(header, /min-h-11/);
     assert.doesNotMatch(header, /overflow-x-auto/);
     assert.doesNotMatch(header, /min-h-10\b/);
-    assert.match(header, /hidden [^"]*md:flex/);
-    assert.match(header, /md:hidden/);
+    assert.match(header, /hidden [^"]*lg:flex/);
+    assert.match(header, /lg:hidden/);
   });
 
   it("uses the same site navigation on Activities and Support routes", () => {

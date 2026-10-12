@@ -3,7 +3,7 @@
 ## 入口と公開範囲
 
 - ファンサイト内の独立した読み物ページ: `/data-lab/`
-- 公開ファイル: `public/data-lab/index.html`、`assets/`、`data/`
+- HTML正本: `data-lab/index.html`（ViteのHTML入力）。静的素材: `public/data-lab/assets/`、`data/`
 - ナビゲーション: `src/lib/dataLabRoute.ts` → `src/lib/navigation.ts`
 - HOMEの導線: `src/components/DataLabGateway.tsx` → `src/App.tsx`
 - 外部の非公開分析システムとは**接続しない**。非公開URL・認証情報・個人別貢献記録・録画・コメント・DM・収集ログを公開コードへ持ち込まない。
@@ -32,3 +32,11 @@ SHOWROOMイベント参加ルームは71、公式進出者プロフィールと�
 - CI: `pnpm typecheck`、`pnpm test`、`pnpm build`、`pnpm guard`。モバイル実表示は別途確認。
 
 一般公開時にnoindexを外す場合は、ページの内容・出典・権利・表示検証を行い、必要に応じて公開サイトのsitemap追加も同時に検討する。
+
+## ヘッダー・共有メタデータ
+
+- 共通ヘッダーは1024px未満を開閉メニュー、1024px以上を1行ナビにする。コンテナ上限は1024px。
+- canonical / og:url / og:image / twitter:image は Vite が `src/data/site.ts` のURLヘルパーから生成。`public/`への未変換HTML配置は行わない。
+- SNSカードは既存SVGを1200×630のPNGへ書き出した `og-card-20261013.png`。SVG原本は保持する。
+- robotsの `noindex,nofollow,noarchive` は維持し、sitemapへは追加しない。
+- `scripts/data-lab.browser.mjs` でモバイル・PC・ブレークポイント前後、ナビ開閉、生成メタデータ・画像取得・公開データ表示を検査する。

@@ -8,7 +8,7 @@ const desktopLink =
 const menuLink =
   "inline-flex min-h-11 w-full items-center rounded-xl px-3 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft";
 const menuButton =
-  "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 text-sm font-semibold text-sage-deep hover:bg-sage-soft md:hidden";
+  "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 text-sm font-semibold text-sage-deep hover:bg-sage-soft lg:hidden";
 
 const HEADER_OFFSET_GAP_PX = 8;
 
@@ -68,10 +68,10 @@ export function Header() {
       ref={headerRef}
       className="sticky top-0 z-20 border-b border-sage/15 bg-paper/90 backdrop-blur"
     >
-      <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2.5">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-2.5">
         <a
           href={HOME_ROUTE}
-          className="min-w-0 font-semibold tracking-wide text-sage-deep"
+          className="shrink-0 font-semibold tracking-wide text-sage-deep"
         >
           {profile.displayName}
           <span className="ml-2 text-xs font-medium text-ink-muted">
@@ -80,7 +80,7 @@ export function Header() {
         </a>
         <nav
           aria-label="サイトナビ"
-          className="hidden min-w-0 flex-wrap items-center justify-end gap-x-0.5 gap-y-1 md:flex"
+          className="hidden min-w-0 flex-nowrap items-center justify-end gap-x-0.5 gap-y-1 lg:flex"
         >
           {items.map((item) => (
             <a key={item.href} href={item.href} className={desktopLink}>
@@ -102,9 +102,9 @@ export function Header() {
         id={menuId}
         hidden={!open}
         aria-label="サイトメニュー"
-        className="border-t border-sage/15 px-4 py-2 md:hidden"
+        className="border-t border-sage/15 px-4 py-2 lg:hidden"
       >
-        <ul className="mx-auto max-w-3xl space-y-1">
+        <ul className="mx-auto max-w-5xl space-y-1">
           {items.map((item) => (
             <li key={item.href}>
               <a href={item.href} className={menuLink}>
