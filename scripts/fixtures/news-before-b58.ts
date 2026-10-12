@@ -5,7 +5,8 @@ const currentNews = liveNews.filter(({ id }) => id !== "2026-10-08-fanroom-voice
 
 /** Historical NEWS snapshot before the owner-dated b58 TikTok addition. */
 export const news = currentNews.filter(
-  ({ id }) => id !== "2026-10-02-fourth-round-stream-schedule" &&
+  ({ id }) => id !== "2026-10-12-fourth-round-final-day-story" &&
+    id !== "2026-10-02-fourth-round-stream-schedule" &&
     id !== "2026-10-01-mixch-kossori" &&
     id !== "2026-09-29-record-cafe-mily-collection" &&
     id !== "2026-09-24-tiktok-good-vibes" &&

@@ -1,3 +1,4 @@
+import { fourthRoundFinalDayStoryVideo, type FourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
 import { xFinalDayPeaceVideo, type XFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
 import { providedVoteVideo, type ProvidedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories, type RadioAnniversaryStoryVideo } from "./radioAnniversaryStories.ts";
@@ -78,6 +79,7 @@ import {
 } from "./mixchMovies.ts";
 
 export type SelfHostedGalleryVideo =
+  | FourthRoundFinalDayStoryVideo
   | XFinalDayPeaceVideo
   | ProvidedVoteVideo
   | RadioAnniversaryStoryVideo
@@ -161,6 +163,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  fourthRoundFinalDayStoryVideo,
   xFinalDayPeaceVideo,
   ...radioOct11Stories,
   providedVoteVideo,
