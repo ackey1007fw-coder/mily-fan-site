@@ -51,6 +51,7 @@ try {
           assert.match(await page.title(), /MILY SIGNAL/);
           assert.match(await page.locator("h1").innerText(), /データ/);
           assert.equal(await page.locator("#sr-chart .bar-row").count(), 10);
+          assert.ok((await page.locator("#sr-chart .is-mily .bar").boundingBox()).width > 10, "SR chart bars must be visibly rendered");
           assert.equal(await page.locator("#forecast-chart .bar-row").count(), 6);
           assert.equal(await page.locator("#roster-body tr").count(), 20);
 
