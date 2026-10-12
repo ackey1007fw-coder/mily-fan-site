@@ -1,0 +1,83 @@
+{
+  "schema": "mily-signal-anonymous-observation-v1",
+  "as_of": "2026-10-12",
+  "published_kind": "anonymized-manually-summarized-archival-observations",
+  "room_public_url": "https://www.showroom-live.com/r/circle2026_0734",
+  "counter_public_source_url": "https://nao.qa/ap/comment.php?id=573253",
+  "official_event_public_url": "https://www.showroom-live.com/event/circle2026_4th",
+  "official_event_api_url": "https://www.showroom-live.com/api/room/event_and_support?room_id=573253",
+  "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+  "counter_observations": [
+    {
+      "observed_at_jst": "2026-10-12T21:59:23.243+09:00",
+      "stars": 6140,
+      "other_free": 1550,
+      "comments": 476,
+      "star100_contributor_count": 60,
+      "source": "public_screen_reference_not_verified_sent_count"
+    },
+    {
+      "observed_at_jst": "2026-10-12T22:00:42.359+09:00",
+      "stars": 6150,
+      "other_free": 1550,
+      "comments": 547,
+      "star100_contributor_count": 60,
+      "source": "public_screen_reference_not_verified_sent_count"
+    },
+    {
+      "observed_at_jst": "2026-10-12T23:19:30.696+09:00",
+      "stars": 7271,
+      "other_free": 1571,
+      "comments": 1126,
+      "star100_contributor_count": 71,
+      "source": "last_valid_online_display_reference_after_recording_end"
+    }
+  ],
+  "event_snapshots": [
+    {
+      "observed_at_jst": "2026-10-12T21:07:31+09:00",
+      "cumulative_event_pt": 684240,
+      "block_rank": 6,
+      "official_final": false
+    },
+    {
+      "observed_at_jst": "2026-10-12T21:15:09+09:00",
+      "cumulative_event_pt": 688971,
+      "block_rank": 6,
+      "official_final": false
+    },
+    {
+      "observed_at_jst": "2026-10-12T21:37:16+09:00",
+      "cumulative_event_pt": 712986,
+      "block_rank": 6,
+      "official_final": false
+    }
+  ],
+  "uncertainty": {
+    "cutoff_gap_jst": [
+      "2026-10-12T21:59:23.243+09:00",
+      "2026-10-12T22:00:42.359+09:00"
+    ],
+    "post_cutoff_stars_range": [
+      1121,
+      1131
+    ],
+    "post_cutoff_comment_range": [
+      579,
+      650
+    ],
+    "recording_ended_at_jst": "2026-10-12T23:18:45+09:00",
+    "counter_last_valid_is_after_recording_end": true,
+    "coverage_complete": false,
+    "verified_real_gift_quantity": false,
+    "official_final_event_point": null,
+    "official_final_event_rank": null
+  },
+  "excluded": [
+    "supporter_identifiers",
+    "comment_text",
+    "recordings",
+    "private_dashboard",
+    "raw_capture_logs"
+  ]
+}
