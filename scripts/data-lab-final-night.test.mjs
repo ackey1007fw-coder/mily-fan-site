@@ -22,7 +22,7 @@ test("the final-night report keeps the cutoff, timestamps and provisional nature
   }
   assert.match(page, /<svg[^>]+role="img"/);
   assert.match(page, /配信中の参考カウンター/);
-  assert.match(page, /最終順位の公式確定値ではありません/);
+  assert.match(page, /22:00時点の公式最終順位・確定ポイントではありません/);
   assert.match(page, /href="\.\.\/\.\.\/"[^>]*>データラボへ戻る/);
 });
 
