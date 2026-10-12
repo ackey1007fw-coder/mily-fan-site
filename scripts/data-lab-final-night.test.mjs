@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 
 const read = (p) => readFileSync(new URL(`../${p}`, import.meta.url), "utf8");
 const landing = read("data-lab/index.html");
-const page = read("public/data-lab/reports/20261012-final-night/index.html");
+const page = read("data-lab/reports/20261012-final-night/index.html");
 
 test("the existing MILY SIGNAL page links to the October 12 final night report", () => {
   assert.match(landing, /id="final-night"/);
@@ -24,7 +24,17 @@ test("the final-night report keeps the cutoff, timestamps and provisional nature
   assert.match(page, /配信中の参考カウンター/);
   assert.match(page, /nao\.qa\/ap\/comment\.php\?id=573253/);
   assert.match(page, /22:00時点の公式最終順位・確定ポイントではありません/);
-  assert.match(page, /href="\.\.\/\.\.\/"[^>]*>データラボへ戻る/);
+  assert.ok(page.includes('href="/data-lab/"'));
+  assert.ok(page.includes('href="/data-lab/assets/styles.css"'));
+  assert.ok(page.includes('href="/data-lab/data/final-night-sources-20261012.json"'));
+  assert.ok(page.includes('rel="canonical" href="__DATA_LAB_FINAL_NIGHT_CANONICAL__"'));
+  assert.ok(page.includes('property="og:url" content="__DATA_LAB_FINAL_NIGHT_CANONICAL__"'));
+  assert.ok(page.includes('name="twitter:image" content="__DATA_LAB_OG_IMAGE__"'));
+  const vite = read("vite.config.ts");
+  assert.ok(vite.includes('dataLabFinalNight: "data-lab/reports/20261012-final-night/index.html"'));
+  assert.ok(vite.includes("dataLabFinalNightUrl()"));
+  const site = read("src/data/site.ts");
+  assert.ok(site.includes("export function dataLabFinalNightUrl()"));
 });
 
 test("public final-night report excludes people-specific and private analytics content", () => {
