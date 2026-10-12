@@ -72,6 +72,10 @@ export function dataLabUrl(): string {
   return `${siteOrigin()}${DATA_LAB_ROUTE}`;
 }
 
+export function dataLabFinalNightUrl(): string {
+  return `${dataLabUrl()}reports/20261012-final-night/`;
+}
+
 export function dataLabOgImageUrl(): string {
   return `${siteOrigin()}/data-lab/assets/og-card-20261013.png`;
 }
