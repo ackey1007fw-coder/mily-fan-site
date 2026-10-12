@@ -131,7 +131,10 @@ try {
             assert.equal(await menu.getAttribute("aria-expanded"), "false");
           }
           await page.screenshot({ path: join(output, `${engine}-${width}-header.png`) });
-          await page.evaluate(() => window.scrollTo(0, 500));
+          await page.evaluate(() => window.scrollTo({ top: 500, behavior: "instant" }));
+          await page.waitForFunction(() =>
+            window.scrollY >= 400 && Math.abs(document.querySelector("header").getBoundingClientRect().top) < 1
+          );
           assert.ok(Math.abs((await header.boundingBox()).y) < 1, "Header must stick to the viewport");
           assert.deepEqual(errors, [], "Browser JavaScript must not throw");
           results.push({ engine, width, roster: 70, grade3: 27, search: "ok", overflow: false, headerHeight, navigation: width >= 1024 ? "single-row" : "disclosure", metadata: head });

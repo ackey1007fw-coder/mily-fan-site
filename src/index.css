@@ -15,11 +15,11 @@
 
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {
-    @apply overflow-x-hidden bg-paper font-sans text-ink antialiased;
+    @apply overflow-x-clip bg-paper font-sans text-ink antialiased;
   }
 
   :focus-visible {
