@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
+import { createPublicationFeed } from "./src/data/publicationFeed.ts";
 import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 import { radioMusicPageMetadata, radioMusicPageStructuredData } from "./src/lib/radioMusicMetadata.ts";
 import { songClipsPageMetadata, songClipsPageStructuredData } from "./src/lib/songClipsMetadata.ts";
@@ -146,6 +147,7 @@ function portalFeedPlugin(): Plugin {
   return {
     name: "portal-feed",
     generateBundle() {
+      this.emitFile({ type:"asset", fileName:"publication-feed.json", source:`${JSON.stringify(createPublicationFeed(),null,2)}\n` });
       this.emitFile({
         type: "asset",
         fileName: "portal-feed.json",
