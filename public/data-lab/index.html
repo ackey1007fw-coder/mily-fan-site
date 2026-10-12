@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#081a27">
+<link rel="canonical" href="https://mily-fan-site.vercel.app/data-lab/">
+<meta name="description" content="みりぃの挑戦をデータで見守る、非公式ファン分析サイト。MISS CIRCLE CONTEST 2026 四次審査の公開データをもとにSHOWROOM順位と外部予測を読み解きます。">
+<title>MILY SIGNAL｜みりぃデータラボ（非公式ファンデータ分析）</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/data.js" defer></script>
+<script src="assets/app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="topbar"><div class="shell">
+<a class="brand" href="#top" aria-label="MILY SIGNAL トップへ"><span class="brand-mark" aria-hidden="true">🍅</span><span><b>MILY <em>SIGNAL</em></b><small>みりぃデータラボ</small></span></a>
+<nav class="nav" aria-label="ページ内メニュー"><a href="#now">SHOWROOM</a><a href="#forecast">外部予測</a><a href="#roster">全出場者</a><a href="#sources">データについて</a></nav>
+<a class="top-cta" href="/" aria-label="みりぃファンサイトのホームに戻る">← ファンサイト</a>
+</div></header>
+<main id="main">
+<section class="hero" id="top"><div class="shell">
+<div><div class="eyebrow">MISS CIRCLE 2026 · 4TH ROUND · PUBLIC DATA</div>
+<h1>応援の輪郭を、<br><em>データで。</em></h1>
+<p class="lead">三橋莉子さん（みりぃ）の挑戦を、公表されている数字から読み解く。順位の向こうにある、少しずつ積み重なる歩みを見つめる非公式データラボ。</p>
+<p class="disclaimer">◌ 非公式のファン制作です。大会・配信サービス・予測作者による公式発表ではありません。</p>
+<div class="hero-actions"><a class="btn btn-primary" href="#now">記録時点の順位を見る <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="#roster">70人のデータを見る</a></div>
+</div>
+<div class="signal-card" role="group" aria-label="SHOWROOMイベント集計の順位、2026年10月12日16時53分時点"><div class="label">SHOWROOM EVENT RANK · 10.12 SNAPSHOT</div><div class="rank">15<small>/ 71 room</small></div><div class="rule"></div><div class="part"><span>大学3年生の中で</span><b>6位 <span class="red">/ 27人</span></b></div><div class="part" style="margin-top:12px"><span>イベント獲得ポイント</span><b>678,800</b></div><p class="fine">2026年10月12日 16:53 JST取得の保存記録。生放送のリアルタイム値ではありません。</p></div>
+</div></section>
+<div class="metrics"><div class="shell metrics-grid" aria-label="注目の4指標">
+<div class="metric"><small>SHOWROOMイベント順位</small><strong>15<small> / 71</small></strong><p>公式イベントの集計</p></div>
+<div class="metric"><small>大学3年生内のSR順位</small><strong>6<small> / 27</small></strong><p>学年情報で再集計</p></div>
+<div class="metric"><small>外部の総合予測順位</small><strong>15<small> / 71</small></strong><p>なおかさんの独自予測</p></div>
+<div class="metric"><small>外部予測の総合スコア</small><strong>28.54</strong><p>公式審査得点ではありません</p></div>
+</div></div>
+
+<section class="section" id="now"><div class="shell">
+<div class="section-head"><div><div class="eyeline">01 / SHOWROOM POSITION</div><h2>SR全体15位。<br>前後の距離は？</h2><p>全体11〜20位の10人を同一尺度で表示。みりぃをトマト色で強調しています。公表されたSHOWROOMイベント順位であり、四次審査の総合結果とは異なります。</p></div></div>
+<div class="chart-grid"><div class="card"><h3>11〜20位のイベントポイント</h3><p class="card-sub">2026.10.12 16:53 JST · 左から順位・名前・ポイント比較・ポイント値</p><div id="sr-chart" class="bar-list" aria-label="SR11位から20位の比較グラフ"><p>公開データを読み込んでいます。</p></div></div>
+<div class="chart-info"><div class="insight"><small>14位との差</small><strong>70,288 pt</strong><p>辻本祐佳さん：749,088pt</p></div><div class="insight"><small>16位との差</small><strong>72,200 pt</strong><p>乾ことこさん：606,600pt</p></div><div class="insight cta"><small>数値の読み方</small><strong>順位は通過の判定ではない</strong><p>四次審査にはWEB投票と無料ギフト審査もあります。SRイベント単体の順位だけでは合否は分かりません。</p></div></div></div>
+</div></section>
+
+<section class="section" id="forecast"><div class="shell">
+<div class="section-head"><div><div class="eyeline">02 / INDEPENDENT FORECAST</div><h2>予測では総合15位。<br>ただし、確定ではない。</h2><p>なおかさんの2026年四次審査予測を紹介。数値は投稿画像の読み取りとEntry番号の突合によるもの。作者の独自モデルで、公式の合否・順位を示すものではありません。</p></div></div>
+<div class="pred-grid"><div class="card"><h3>みりぃの予測サマリー</h3><p class="card-sub">Entry No.734 · 大学3年生 · 総合予測15位</p>
+<div class="pred-summary"><div class="pred-big"><span>予測総合スコア</span><b>28.54</b><small>予測順位 15 / 71</small></div><div class="pred-parts"><div class="line"><span>SR <span class="dim">（原表の項目名）</span></span><strong>11.65</strong></div><div class="line"><span>SR無 <span class="dim">（原表の項目名）</span></span><strong>27.35</strong></div><div class="line"><span>投票想定 <span class="dim">（推定値）</span></span><strong>37.87</strong></div><div class="line"><span>3年生内の予測</span><strong>6 / 27</strong></div></div></div>
+</div>
+<div class="card"><h3>予測14〜18位の近さ</h3><p class="card-sub">全体順位と独自の予測総合スコア（0〜100の尺度で表示）</p><div id="forecast-chart" class="bar-list" aria-label="外部予測の14位付近の比較"><p>予測データを読み込んでいます。</p></div>
+<div class="notice"><strong>14位まで、わずか0.76ポイント。</strong><br>予測上は近接していますが、実際のWEB投票数と予測モデルの計算式は確認できません。順位の逆転や合否の確率を示す数値ではありません。</div></div>
+</div>
+<p class="legend">原投稿：<a href="https://x.com/thehillofreina/status/2109318846670839955" target="_blank" rel="noopener noreferrer">なおかさんの予測（X）↗</a>。画像・全予測表は転載せず、みりぃと順位近傍の一部を検証・引用しています。予測計算の詳細は作者に帰属します。</p>
+</div></section>
+
+<section class="section" id="roster"><div class="shell">
+<div class="section-head"><div><div class="eyeline">03 / VERIFIED ENTRY LIST</div><h2>四次審査・公式進出者70人</h2><p>公式サイトのEntry番号と、SHOWROOM登録ルームの照合結果を一覧化しました。名前やEntry番号で探せて、学年別に絞り込めます。</p></div></div>
+<div class="card table-card"><div class="table-controls"><label class="search" for="roster-search"><span class="dim">出場者を検索</span><input id="roster-search" type="search" placeholder="名前、Entry番号で検索" autocomplete="off" aria-label="出場者名またはEntry番号で検索"></label>
+<div class="filter" aria-label="学年で絞り込み"><button class="active" data-grade="all" aria-pressed="true">全員 70</button><button data-grade="2年" aria-pressed="false">2年 19</button><button data-grade="3年" aria-pressed="false">3年 27</button><button data-grade="4年" aria-pressed="false">4年 23</button><button data-grade="未記載" aria-pressed="false">未記載 1</button></div></div>
+<div class="table-scroll"><table><thead><tr><th class="num" scope="col">SR順位</th><th scope="col">出場者</th><th scope="col">学年</th><th class="num" scope="col">学年内SR</th><th class="num" scope="col">イベントpt</th></tr></thead><tbody id="roster-body"><tr><td colspan="5" class="empty">一覧を読み込んでいます。</td></tr></tbody></table></div>
+<div class="table-footer"><div><div id="roster-count" aria-live="polite">70人の公式プロフィールを照合済み</div><div class="dim">51位以下のポイントは取得範囲外。ゼロとみなしません。予測表71行のうち1行は公式進出者一覧と一致しないため掲載対象から外しています。</div></div><button id="show-all" class="more" type="button">残り50人を見る</button></div></div>
+</div></section>
+
+<section class="section" id="sources"><div class="shell">
+<div class="section-head"><div><div class="eyeline">04 / SOURCES & HOW TO READ</div><h2>データの出どころを、<br>はっきりさせる。</h2><p>更新日時のない順位は誤解のもと。速報と予測と公式記録の境界を見える形で残します。</p></div></div>
+<div class="notes-grid"><div class="card"><h3>公開データの扱い</h3><ul><li><strong>公式プロフィール：</strong> 出場者名、Entry番号、学年のみを使用。公式進出者は70人。</li><li><strong>SHOWROOM：</strong> 四次審査イベントの集計スナップショット。71登録ルームのうち公式名簿と照合できた70人を掲載。</li><li><strong>学年別順位：</strong> 公式プロフィールの学年を使った非公式の再集計。学年別通過枠を意味しません。</li><li><strong>外部予測：</strong> なおかさんの独自分析。実票数・予測式・公式通過人数は未確認。外部投稿と計算結果は独立の情報です。</li><li><strong>個人情報：</strong> 視聴者名、貢献者情報、コメント、録画、DM、会員限定情報は公開していません。</li></ul></div>
+<div class="card"><h3>公式情報へのリンク</h3><div class="source-links"><a href="https://2026.misscircle.jp/entry/734" target="_blank" rel="noopener noreferrer">三橋莉子さん公式プロフィール <span>公式 ↗</span></a><a href="https://2026.misscircle.jp/list/4" target="_blank" rel="noopener noreferrer">四次審査 進出者一覧 <span>公式 ↗</span></a><a href="https://www.misscircle.jp/" target="_blank" rel="noopener noreferrer">大会概要・審査日程 <span>公式 ↗</span></a><a href="https://www.showroom-live.com/event/circle2026_4th" target="_blank" rel="noopener noreferrer">SHOWROOM対象イベント <span>外部 ↗</span></a><a href="https://x.com/thehillofreina/status/2109318846670839955" target="_blank" rel="noopener noreferrer">なおかさんの予測原投稿 <span>外部 ↗</span></a></div>
+<div class="notice"><strong>取得日時：2026年10月12日 16:53 JST</strong><br>固定スナップショットです。データ更新は手動で行います。SHOWROOM審査は10月12日21:59、WEB投票は23:59に終了予定（日本時間）。</div></div></div>
+</div></section>
+
+<section class="bottom"><div class="shell"><div class="bottom-cta"><div><h2>数字の先に、応援がある。</h2><p>みりぃの活動をもっと知りたい人へ。ファンサイトと公式プロフィールから、その魅力に触れてください。</p></div><div class="hero-actions"><a class="btn btn-primary" href="https://2026.misscircle.jp/entry/734" rel="noopener noreferrer" target="_blank">公式プロフィール ↗</a><a class="btn btn-outline" href="/">みりぃファンサイトへ戻る ←</a></div></div></div></section>
+</main>
+<footer><div class="shell"><div>MILY SIGNAL · 非公式ファン制作 / 2026.10.12 snapshot<br>大会運営、SHOWROOM、予測作者とは無関係の自主的な集計サイトです。</div><div>出場者名・順位などはリンク先の公開情報を参照。<br>無断転載ではなく独自の図表として再構成しています。</div></div></footer>
+</body>
+</html>
