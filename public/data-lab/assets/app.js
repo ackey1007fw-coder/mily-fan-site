@@ -3,6 +3,8 @@
 const snap=window.MILY_SNAPSHOT;
 if(!snap || !Array.isArray(snap.roster)) return;
 const $ = (id) => document.getElementById(id);
+// Make public-name search tolerant of spaces and full-width characters.
+const normalizedText = value => String(value).normalize('NFKC').replace(/\s+/g,'').toLocaleLowerCase('ja-JP');
 const fmt = new Intl.NumberFormat('ja-JP');
 const toH = s => String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const score = p => p===null ? '未取得' : fmt.format(p);
@@ -30,7 +32,7 @@ const roster=[...snap.roster].sort((a,b)=>a.srRank-b.srRank||a.entry-b.entry);
 let currentGrade='all',search='',allShown=false;
 const gradeLabels={all:'全学年','2年':'2年','3年':'3年','4年':'4年','未記載':'未記載'};
 function renderTable(){
- const matches=roster.filter(r=>(currentGrade==='all'||r.grade===currentGrade)&&(`${r.name} ${r.entry}`.toLowerCase().includes(search)));
+ const matches=roster.filter(r=>(currentGrade==='all'||r.grade===currentGrade)&&(normalizedText(`${r.name} ${r.entry}`).includes(search)));
  const visible=(search||currentGrade!=='all'||allShown) ? matches : matches.slice(0,20);
  const tbody=$('roster-body');
  tbody.innerHTML=visible.map(r=>{
@@ -47,7 +49,7 @@ function renderTable(){
  btn.hidden=!!search||currentGrade!=='all'||allShown||matches.length<=20;
  btn.textContent=`残り${matches.length-20}人を見る`;
 }
-$('roster-search').addEventListener('input',e=>{search=e.target.value.trim().toLowerCase();renderTable();});
+$('roster-search').addEventListener('input',e=>{search=normalizedText(e.target.value);renderTable();});
 for(const btn of document.querySelectorAll('[data-grade]')){
  btn.addEventListener('click',()=>{
    currentGrade=btn.getAttribute('data-grade');

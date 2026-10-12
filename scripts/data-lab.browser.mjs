@@ -58,6 +58,10 @@ try {
           await page.locator("#roster-search").fill("734");
           assert.equal(await page.locator("#roster-body tr").count(), 1);
           assert.match(await page.locator("#roster-body").innerText(), /三橋/);
+          await page.locator("#roster-search").fill("三橋莉子");
+          assert.equal(await page.locator("#roster-body tr").count(), 1, "Unspaced Japanese name must match");
+          await page.locator("#roster-search").fill("三橋　莉子");
+          assert.equal(await page.locator("#roster-body tr").count(), 1, "Full-width space must match");
           await page.locator("#roster-search").fill("");
           await page.locator('button[data-grade="3年"]').click();
           assert.equal(await page.locator("#roster-body tr").count(), 27);

@@ -26,6 +26,15 @@ test("data-lab snapshot is limited to verified public contestants and frozen sco
   assert.equal(snapshot.meta.showroomRoomsCount, 71);
   assert.equal(snapshot.meta.doNotTreatAsLive, true);
   assert.equal(snapshot.roster.length, 70);
+  const shippedData = JSON.parse(read("public/data-lab/assets/data.js")
+    .replace(/^\s*window\.MILY_SNAPSHOT\s*=\s*/, "")
+    .replace(/;\s*$/, ""));
+  assert.deepEqual(shippedData, snapshot, "Published JS data must match the vetted JSON snapshot");
+  for (const person of snapshot.roster) {
+    assert.deepEqual(Object.keys(person).sort(),
+      ["entry", "name", "grade", "srRank", "gradeSrRank", "srPoints"].sort(),
+      "Public roster must not gain audience-specific attributes");
+  }
   assert.equal(new Set(snapshot.roster.map((person) => person.entry)).size, 70);
   assert.ok(!snapshot.roster.some((person) => person.entry === 1013));
   const mily = snapshot.roster.find((person) => person.entry === 734);
@@ -46,7 +55,7 @@ test("data-lab never imports private analysis URLs or personal audience records"
   ];
   for (const path of paths) {
     const content = read(path);
-    assert.doesNotMatch(content, /drive\.google\.com|@gmail\.com|viewer[_-]?id|private[_-]?recording/i, path);
+    assert.doesNotMatch(content, /drive\.google\.com|@gmail\.com|viewer[_-]?id|private[_-]?recording|tasty-mite-7025|stream-review-ackey|chatgpt\.site|audience[_-]?record|contributor[_-]?id/i, path);
   }
   const html = read(paths[0]);
   assert.match(html, /assets\/data\.js/);
