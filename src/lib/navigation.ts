@@ -1,4 +1,5 @@
 import { ACTIVITIES_HUB_ROUTE } from "./activityRoute.ts";
+import { DATA_LAB_ROUTE } from "./dataLabRoute.ts";
 import {
   GALLERY_ARCHIVE_ROUTE,
   HOME_ROUTE,
@@ -35,6 +36,7 @@ const siteNavItems: NavItem[] = [
   { href: NEWS_ARCHIVE_ROUTE, label: "最新情報", kind: "route" },
   { href: STORIES_ARCHIVE_ROUTE, label: "STORY", kind: "route" },
   { href: GALLERY_ARCHIVE_ROUTE, label: "ギャラリー", kind: "route" },
+  { href: DATA_LAB_ROUTE, label: "データ分析", kind: "route" },
   { href: PROFILE_ROUTE, label: "プロフィール", kind: "route" },
 ];
 
