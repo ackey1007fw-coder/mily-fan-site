@@ -105,6 +105,27 @@ try {
           assert.match(await page.locator("h1").innerText(), /22:00/);
           assert.equal(await page.locator(".final-table").count(), 2);
           assert.equal(await page.locator("svg.plot polyline").count(), 1);
+          const nightHead = await page.evaluate(() => ({
+            canonical: document.querySelector('link[rel="canonical"]')?.href,
+            ogUrl: document.querySelector('meta[property="og:url"]')?.content,
+            ogImage: document.querySelector('meta[property="og:image"]')?.content,
+            twitterImage: document.querySelector('meta[name="twitter:image"]')?.content,
+            robots: document.querySelector('meta[name="robots"]')?.content,
+            stylesheet: document.querySelector('link[rel="stylesheet"]')?.getAttribute("href"),
+            evidence: document.querySelector('a[href$="final-night-sources-20261012.json"]')?.getAttribute("href"),
+          }));
+          assert.equal(nightHead.canonical, "https://mily-fan-site.vercel.app/data-lab/reports/20261012-final-night/");
+          assert.equal(nightHead.ogUrl, nightHead.canonical);
+          assert.equal(nightHead.ogImage, "https://mily-fan-site.vercel.app/data-lab/assets/og-card-20261013.png");
+          assert.equal(nightHead.twitterImage, nightHead.ogImage);
+          assert.equal(nightHead.robots, "noindex,nofollow,noarchive");
+          assert.equal(nightHead.stylesheet, "/data-lab/assets/styles.css");
+          assert.equal(nightHead.evidence, "/data-lab/data/final-night-sources-20261012.json");
+          assert.deepEqual(await page.evaluate(() => {
+            const base = new URL("/data-lab/reports/20261012-final-night", location.origin);
+            return Array.from(document.querySelectorAll('link[rel="stylesheet"],a[href$="final-night-sources-20261012.json"]'))
+              .map(el => new URL(el.getAttribute("href"), base).pathname);
+          }), ["/data-lab/assets/styles.css", "/data-lab/data/final-night-sources-20261012.json"]);
           assert.match(await page.locator("#ranking").innerText(), /712,986/);
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
             "Final-night report must not overflow horizontally");
