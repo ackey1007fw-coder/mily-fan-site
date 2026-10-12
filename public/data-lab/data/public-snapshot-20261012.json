@@ -1,0 +1,719 @@
+{
+  "meta": {
+    "snapshotDate": "2026-10-12",
+    "srRetrievedJst": "2026-10-12 16:53 JST",
+    "forecastImageDate": "2026-10-12",
+    "mode": "independent-unofficial-fan-analysis",
+    "officialRosterCount": 70,
+    "showroomRoomsCount": 71,
+    "predictionRowsCount": 71,
+    "showroomScoreCoverage": 50,
+    "doNotTreatAsLive": true
+  },
+  "mily": {
+    "entry": 734,
+    "grade": "3年",
+    "srRank": 15,
+    "srYearRank": 6,
+    "srPoints": 678800,
+    "forecastRank": 15,
+    "forecastYearRank": 6,
+    "forecastScore": 28.54,
+    "forecastIndicators": {
+      "SR": 11.65,
+      "SR無": 27.35,
+      "投票想定": 37.87
+    }
+  },
+  "srPeers": [
+    {
+      "entry": 1367,
+      "name": "山田 まお",
+      "grade": "2年",
+      "srRank": 11,
+      "gradeSrRank": 1,
+      "srPoints": 983838
+    },
+    {
+      "entry": 56,
+      "name": "望月 結心",
+      "grade": "3年",
+      "srRank": 12,
+      "gradeSrRank": 5,
+      "srPoints": 909506
+    },
+    {
+      "entry": 412,
+      "name": "沼田 和佳奈",
+      "grade": "4年",
+      "srRank": 13,
+      "gradeSrRank": 7,
+      "srPoints": 863096
+    },
+    {
+      "entry": 95,
+      "name": "辻本 祐佳",
+      "grade": "2年",
+      "srRank": 14,
+      "gradeSrRank": 2,
+      "srPoints": 749088
+    },
+    {
+      "entry": 734,
+      "name": "三橋 莉子",
+      "grade": "3年",
+      "srRank": 15,
+      "gradeSrRank": 6,
+      "srPoints": 678800
+    },
+    {
+      "entry": 210,
+      "name": "乾 ことこ",
+      "grade": "4年",
+      "srRank": 16,
+      "gradeSrRank": 8,
+      "srPoints": 606600
+    },
+    {
+      "entry": 237,
+      "name": "塩谷 悠由",
+      "grade": "3年",
+      "srRank": 17,
+      "gradeSrRank": 7,
+      "srPoints": 580226
+    },
+    {
+      "entry": 1285,
+      "name": "内田 真麗杏",
+      "grade": "3年",
+      "srRank": 18,
+      "gradeSrRank": 8,
+      "srPoints": 559290
+    },
+    {
+      "entry": 439,
+      "name": "高乘 美空",
+      "grade": "2年",
+      "srRank": 19,
+      "gradeSrRank": 3,
+      "srPoints": 476059
+    },
+    {
+      "entry": 159,
+      "name": "松本 珠奈",
+      "grade": "3年",
+      "srRank": 20,
+      "gradeSrRank": 9,
+      "srPoints": 436531
+    }
+  ],
+  "forecastNearRanks": [
+    {
+      "rank": 13,
+      "entry": 271,
+      "name": "一ノ瀬 せりな",
+      "score": 30.41
+    },
+    {
+      "rank": 14,
+      "entry": 820,
+      "name": "一ノ 遼",
+      "score": 29.3
+    },
+    {
+      "rank": 15,
+      "entry": 734,
+      "name": "三橋 莉子",
+      "score": 28.54
+    },
+    {
+      "rank": 16,
+      "entry": 210,
+      "name": "乾 ことこ",
+      "score": 27.95
+    },
+    {
+      "rank": 17,
+      "entry": 95,
+      "name": "辻本 祐佳",
+      "score": 27.85
+    },
+    {
+      "rank": 18,
+      "entry": 1285,
+      "name": "内田 真麗杏",
+      "score": 27.39
+    }
+  ],
+  "roster": [
+    {
+      "entry": 1400,
+      "name": "陣ノ内 柚来",
+      "grade": "4年",
+      "srRank": 1,
+      "gradeSrRank": 1,
+      "srPoints": 5934533
+    },
+    {
+      "entry": 585,
+      "name": "大坪 咲月",
+      "grade": "3年",
+      "srRank": 2,
+      "gradeSrRank": 1,
+      "srPoints": 3946377
+    },
+    {
+      "entry": 1612,
+      "name": "鴨川 きらり",
+      "grade": "4年",
+      "srRank": 3,
+      "gradeSrRank": 2,
+      "srPoints": 3251642
+    },
+    {
+      "entry": 112,
+      "name": "赤平 知優",
+      "grade": "4年",
+      "srRank": 4,
+      "gradeSrRank": 3,
+      "srPoints": 2614548
+    },
+    {
+      "entry": 700,
+      "name": "若宮 ゆわな",
+      "grade": "3年",
+      "srRank": 5,
+      "gradeSrRank": 2,
+      "srPoints": 2528839
+    },
+    {
+      "entry": 146,
+      "name": "佐々木 里花",
+      "grade": "4年",
+      "srRank": 6,
+      "gradeSrRank": 4,
+      "srPoints": 2043304
+    },
+    {
+      "entry": 1317,
+      "name": "大原 奈弓",
+      "grade": "3年",
+      "srRank": 7,
+      "gradeSrRank": 3,
+      "srPoints": 1267999
+    },
+    {
+      "entry": 774,
+      "name": "赤松 愛莉",
+      "grade": "3年",
+      "srRank": 8,
+      "gradeSrRank": 4,
+      "srPoints": 1190785
+    },
+    {
+      "entry": 271,
+      "name": "一ノ瀬 せりな",
+      "grade": "4年",
+      "srRank": 9,
+      "gradeSrRank": 5,
+      "srPoints": 1075458
+    },
+    {
+      "entry": 432,
+      "name": "丑田 穂乃香",
+      "grade": "4年",
+      "srRank": 10,
+      "gradeSrRank": 6,
+      "srPoints": 988608
+    },
+    {
+      "entry": 1367,
+      "name": "山田 まお",
+      "grade": "2年",
+      "srRank": 11,
+      "gradeSrRank": 1,
+      "srPoints": 983838
+    },
+    {
+      "entry": 56,
+      "name": "望月 結心",
+      "grade": "3年",
+      "srRank": 12,
+      "gradeSrRank": 5,
+      "srPoints": 909506
+    },
+    {
+      "entry": 412,
+      "name": "沼田 和佳奈",
+      "grade": "4年",
+      "srRank": 13,
+      "gradeSrRank": 7,
+      "srPoints": 863096
+    },
+    {
+      "entry": 95,
+      "name": "辻本 祐佳",
+      "grade": "2年",
+      "srRank": 14,
+      "gradeSrRank": 2,
+      "srPoints": 749088
+    },
+    {
+      "entry": 734,
+      "name": "三橋 莉子",
+      "grade": "3年",
+      "srRank": 15,
+      "gradeSrRank": 6,
+      "srPoints": 678800
+    },
+    {
+      "entry": 210,
+      "name": "乾 ことこ",
+      "grade": "4年",
+      "srRank": 16,
+      "gradeSrRank": 8,
+      "srPoints": 606600
+    },
+    {
+      "entry": 237,
+      "name": "塩谷 悠由",
+      "grade": "3年",
+      "srRank": 17,
+      "gradeSrRank": 7,
+      "srPoints": 580226
+    },
+    {
+      "entry": 1285,
+      "name": "内田 真麗杏",
+      "grade": "3年",
+      "srRank": 18,
+      "gradeSrRank": 8,
+      "srPoints": 559290
+    },
+    {
+      "entry": 439,
+      "name": "高乘 美空",
+      "grade": "2年",
+      "srRank": 19,
+      "gradeSrRank": 3,
+      "srPoints": 476059
+    },
+    {
+      "entry": 159,
+      "name": "松本 珠奈",
+      "grade": "3年",
+      "srRank": 20,
+      "gradeSrRank": 9,
+      "srPoints": 436531
+    },
+    {
+      "entry": 147,
+      "name": "熊坂 茜",
+      "grade": "2年",
+      "srRank": 21,
+      "gradeSrRank": 4,
+      "srPoints": 401622
+    },
+    {
+      "entry": 820,
+      "name": "一ノ 遼",
+      "grade": "4年",
+      "srRank": 22,
+      "gradeSrRank": 9,
+      "srPoints": 397933
+    },
+    {
+      "entry": 618,
+      "name": "上地 花",
+      "grade": "2年",
+      "srRank": 23,
+      "gradeSrRank": 5,
+      "srPoints": 363921
+    },
+    {
+      "entry": 1263,
+      "name": "大沢 美里愛",
+      "grade": "3年",
+      "srRank": 24,
+      "gradeSrRank": 10,
+      "srPoints": 352153
+    },
+    {
+      "entry": 968,
+      "name": "岡部 百伽",
+      "grade": "2年",
+      "srRank": 25,
+      "gradeSrRank": 6,
+      "srPoints": 327085
+    },
+    {
+      "entry": 625,
+      "name": "大西 美羽那",
+      "grade": "4年",
+      "srRank": 26,
+      "gradeSrRank": 10,
+      "srPoints": 314957
+    },
+    {
+      "entry": 1258,
+      "name": "内畑 華穂",
+      "grade": "2年",
+      "srRank": 27,
+      "gradeSrRank": 7,
+      "srPoints": 289456
+    },
+    {
+      "entry": 282,
+      "name": "宮脇 眞子",
+      "grade": "3年",
+      "srRank": 28,
+      "gradeSrRank": 11,
+      "srPoints": 255185
+    },
+    {
+      "entry": 225,
+      "name": "高橋 ひかり",
+      "grade": "4年",
+      "srRank": 29,
+      "gradeSrRank": 11,
+      "srPoints": 254781
+    },
+    {
+      "entry": 1366,
+      "name": "新明 ハルカ",
+      "grade": "4年",
+      "srRank": 30,
+      "gradeSrRank": 12,
+      "srPoints": 230225
+    },
+    {
+      "entry": 151,
+      "name": "一ノ瀬 うゆ",
+      "grade": "3年",
+      "srRank": 31,
+      "gradeSrRank": 12,
+      "srPoints": 225208
+    },
+    {
+      "entry": 313,
+      "name": "大道 悠",
+      "grade": "3年",
+      "srRank": 32,
+      "gradeSrRank": 13,
+      "srPoints": 214192
+    },
+    {
+      "entry": 948,
+      "name": "鈴木 遥",
+      "grade": "4年",
+      "srRank": 33,
+      "gradeSrRank": 13,
+      "srPoints": 141171
+    },
+    {
+      "entry": 1214,
+      "name": "菊池 有咲",
+      "grade": "3年",
+      "srRank": 34,
+      "gradeSrRank": 14,
+      "srPoints": 134752
+    },
+    {
+      "entry": 638,
+      "name": "福田 優奈",
+      "grade": "3年",
+      "srRank": 35,
+      "gradeSrRank": 15,
+      "srPoints": 128852
+    },
+    {
+      "entry": 1310,
+      "name": "真木 音羽",
+      "grade": "3年",
+      "srRank": 36,
+      "gradeSrRank": 16,
+      "srPoints": 80150
+    },
+    {
+      "entry": 126,
+      "name": "神崎 瀬奈",
+      "grade": "2年",
+      "srRank": 37,
+      "gradeSrRank": 8,
+      "srPoints": 30850
+    },
+    {
+      "entry": 89,
+      "name": "足立 結菜",
+      "grade": "3年",
+      "srRank": 38,
+      "gradeSrRank": 17,
+      "srPoints": 26934
+    },
+    {
+      "entry": 1406,
+      "name": "千葉 優花",
+      "grade": "2年",
+      "srRank": 39,
+      "gradeSrRank": 9,
+      "srPoints": 26018
+    },
+    {
+      "entry": 1545,
+      "name": "知念 大空",
+      "grade": "4年",
+      "srRank": 40,
+      "gradeSrRank": 14,
+      "srPoints": 22089
+    },
+    {
+      "entry": 1573,
+      "name": "神崎 京華",
+      "grade": "3年",
+      "srRank": 41,
+      "gradeSrRank": 18,
+      "srPoints": 17167
+    },
+    {
+      "entry": 611,
+      "name": "箕原 那由",
+      "grade": "4年",
+      "srRank": 42,
+      "gradeSrRank": 15,
+      "srPoints": 15384
+    },
+    {
+      "entry": 1614,
+      "name": "小川 芽依",
+      "grade": "2年",
+      "srRank": 43,
+      "gradeSrRank": 10,
+      "srPoints": 12586
+    },
+    {
+      "entry": 720,
+      "name": "今野 来海",
+      "grade": "3年",
+      "srRank": 44,
+      "gradeSrRank": 19,
+      "srPoints": 10605
+    },
+    {
+      "entry": 51,
+      "name": "大島 瑠華",
+      "grade": "4年",
+      "srRank": 45,
+      "gradeSrRank": 16,
+      "srPoints": 8983
+    },
+    {
+      "entry": 506,
+      "name": "長澤 陽菜",
+      "grade": "2年",
+      "srRank": 46,
+      "gradeSrRank": 11,
+      "srPoints": 4440
+    },
+    {
+      "entry": 1239,
+      "name": "野原 愛美里",
+      "grade": "3年",
+      "srRank": 47,
+      "gradeSrRank": 20,
+      "srPoints": 3023
+    },
+    {
+      "entry": 1609,
+      "name": "乃木 えみり",
+      "grade": "3年",
+      "srRank": 48,
+      "gradeSrRank": 21,
+      "srPoints": 2531
+    },
+    {
+      "entry": 729,
+      "name": "濱田 灯里",
+      "grade": "2年",
+      "srRank": 49,
+      "gradeSrRank": 12,
+      "srPoints": 729
+    },
+    {
+      "entry": 433,
+      "name": "穂上 璃咲",
+      "grade": "2年",
+      "srRank": 50,
+      "gradeSrRank": 13,
+      "srPoints": 660
+    },
+    {
+      "entry": 1000,
+      "name": "山本 弥京",
+      "grade": "2年",
+      "srRank": 51,
+      "gradeSrRank": 14,
+      "srPoints": null
+    },
+    {
+      "entry": 12,
+      "name": "桃井 ほのか",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    },
+    {
+      "entry": 145,
+      "name": "大友 凛花",
+      "grade": "2年",
+      "srRank": 52,
+      "gradeSrRank": 15,
+      "srPoints": null
+    },
+    {
+      "entry": 172,
+      "name": "流川 結衣",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    },
+    {
+      "entry": 222,
+      "name": "今咲 あかり",
+      "grade": "2年",
+      "srRank": 52,
+      "gradeSrRank": 15,
+      "srPoints": null
+    },
+    {
+      "entry": 252,
+      "name": "田邉 瑞歩",
+      "grade": "2年",
+      "srRank": 52,
+      "gradeSrRank": 15,
+      "srPoints": null
+    },
+    {
+      "entry": 275,
+      "name": "石井 葵衣",
+      "grade": "3年",
+      "srRank": 52,
+      "gradeSrRank": 22,
+      "srPoints": null
+    },
+    {
+      "entry": 281,
+      "name": "髙木 櫻子",
+      "grade": "3年",
+      "srRank": 52,
+      "gradeSrRank": 22,
+      "srPoints": null
+    },
+    {
+      "entry": 325,
+      "name": "町田 莉都",
+      "grade": "3年",
+      "srRank": 52,
+      "gradeSrRank": 22,
+      "srPoints": null
+    },
+    {
+      "entry": 411,
+      "name": "石井 利佳",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    },
+    {
+      "entry": 481,
+      "name": "木下 ひより",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    },
+    {
+      "entry": 712,
+      "name": "二木 日海留",
+      "grade": "3年",
+      "srRank": 52,
+      "gradeSrRank": 22,
+      "srPoints": null
+    },
+    {
+      "entry": 803,
+      "name": "鵜沼 美颯希",
+      "grade": "未記載",
+      "srRank": 52,
+      "gradeSrRank": null,
+      "srPoints": null
+    },
+    {
+      "entry": 812,
+      "name": "竹内 琴音",
+      "grade": "3年",
+      "srRank": 52,
+      "gradeSrRank": 22,
+      "srPoints": null
+    },
+    {
+      "entry": 1053,
+      "name": "坂本 かれん",
+      "grade": "3年",
+      "srRank": 52,
+      "gradeSrRank": 22,
+      "srPoints": null
+    },
+    {
+      "entry": 1279,
+      "name": "冴木 水奈",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    },
+    {
+      "entry": 1308,
+      "name": "白岡 夕季",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    },
+    {
+      "entry": 1321,
+      "name": "森 千咲",
+      "grade": "2年",
+      "srRank": 52,
+      "gradeSrRank": 15,
+      "srPoints": null
+    },
+    {
+      "entry": 1424,
+      "name": "真板 美侑",
+      "grade": "2年",
+      "srRank": 52,
+      "gradeSrRank": 15,
+      "srPoints": null
+    },
+    {
+      "entry": 1431,
+      "name": "桜乃 琴翔",
+      "grade": "4年",
+      "srRank": 52,
+      "gradeSrRank": 17,
+      "srPoints": null
+    }
+  ],
+  "sources": {
+    "officialContest": "https://www.misscircle.jp/",
+    "officialRoster": "https://2026.misscircle.jp/list/4",
+    "officialMily": "https://2026.misscircle.jp/entry/734",
+    "showroomEvent": "https://www.showroom-live.com/event/circle2026_4th",
+    "showroomMily": "https://www.showroom-live.com/room/profile?room_id=573253",
+    "externalPrediction": "https://x.com/thehillofreina/status/2109318846670839955",
+    "fanSite": "https://mily-fan-site.vercel.app"
+  }
+}

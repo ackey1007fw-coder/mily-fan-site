@@ -1,4 +1,5 @@
 import { ActivitiesGateway } from "./components/ActivitiesGateway";
+import { DataLabGateway } from "./components/DataLabGateway";
 import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
 import { ActivityBanner } from "./components/ActivityBanner";
 import { ChallengeConnection } from "./components/ChallengeConnection";
@@ -42,6 +43,7 @@ export default function App() {
         <StreamBlackoutNotice compact />
         <Support />
         <ActivitiesGateway />
+        <DataLabGateway />
         <ChallengeConnection />
         <SupportMusicVideo />
         <Latest limit={HOME_NEWS_LIMIT} />

@@ -141,6 +141,7 @@ describe("P6 navigation", () => {
         "/news/",
         "/stories/",
         "/gallery/",
+        "/data-lab/",
         "/profile/",
       ],
     );
@@ -165,10 +166,11 @@ describe("P6 navigation", () => {
       "/news/",
       "/stories/",
       "/gallery/",
+      "/data-lab/",
       "/profile/",
     ]);
-    assert.ok(visibleNavItems(0).length <= 7);
-    assert.ok(visibleNavItems(1).length <= 7);
+    assert.ok(visibleNavItems(0).length <= 8);
+    assert.ok(visibleNavItems(1).length <= 8);
   });
 
   it("renders a compact disclosure menu with labelled navs and 44px touch targets", () => {
