@@ -3,7 +3,7 @@
 ## 入口と公開範囲
 
 - ファンサイト内の独立した読み物ページ: `/data-lab/`
-- HTML正本: `data-lab/index.html`（ViteのHTML入力）。静的素材: `public/data-lab/assets/`、`data/`
+- HTML正本: `data-lab/index.html` と `data-lab/reports/20261012-final-night/index.html`（ViteのHTML入力）。静的素材: `public/data-lab/assets/`、`public/data-lab/data/`
 - ナビゲーション: `src/lib/dataLabRoute.ts` → `src/lib/navigation.ts`
 - HOMEの導線: `src/components/DataLabGateway.tsx` → `src/App.tsx`
 - 外部の非公開分析システムとは**接続しない**。非公開URL・認証情報・個人別貢献記録・録画・コメント・DM・収集ログを公開コードへ持ち込まない。
@@ -43,7 +43,7 @@ SHOWROOMイベント参加ルームは71、公式進出者プロフィールと�
 
 ## 2026-10-12 最終夜の匿名集計（2026-10-13 追記）
 
-- `/data-lab/reports/20261012-final-night/` は、同じファンサイトに追加する非公式・匿名の固定振り返りページ。
+- `/data-lab/reports/20261012-final-night/` は、同じファンサイトに追加する非公式・匿名の固定振り返りページ。 HTMLはVite入力とし、canonical / OG / Twitterカードは `site.siteUrl` を正本として生成する。静的アセット・匿名データのリンクは末尾スラッシュ有無に依存しないルート相対URLを使用する。
 - 既存 `/data-lab/` の16:53時点の名簿と順位は保存し、21:37のイベント途中ptと、21:59・22:00・23:19の配信画面参考値を**別の表**で表示する。16:53の値を最新・確定値として上書きしない。
 - 22:00という分析区切りは主催側の21:59終了案内に基づく。21:59:23と22:00:42の間は未観測であるため、締切時点の正確な確定ギフト数は不明。観測前後の増加幅として扱う。
 - 21:37時点の712,986pt・ブロック6位を最終順位にしない。SHOWROOM順位とミスサークル総合通過判定も区別する。
