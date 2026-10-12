@@ -8,7 +8,7 @@ const page = read("data-lab/reports/20261012-final-night/index.html");
 
 test("the existing MILY SIGNAL page links to the October 12 final night report", () => {
   assert.match(landing, /id="final-night"/);
-  assert.match(landing, /href="reports\/20261012-final-night\/"/);
+  assert.match(landing, /href="\/data-lab\/reports\/20261012-final-night\/"/);
   assert.match(landing, /id="now"/);
   assert.match(landing, /noindex,nofollow,noarchive/);
 });

@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import { dataLabUrl, dataLabOgImageUrl, site, sitemapXml } from "../src/data/site.ts";
+import { dataLabUrl, dataLabFinalNightUrl, dataLabOgImageUrl, site, sitemapXml } from "../src/data/site.ts";
 
 const read = (path) => readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 
@@ -10,6 +10,8 @@ test("data-lab URLs follow a changed site origin without enabling indexing", () 
   try {
     site.siteUrl = "https://signal.example.test///";
     assert.equal(dataLabUrl(), "https://signal.example.test/data-lab/");
+    assert.equal(dataLabFinalNightUrl(), "https://signal.example.test/data-lab/reports/20261012-final-night/");
+    assert.ok(!sitemapXml().includes(dataLabFinalNightUrl()));
     assert.equal(dataLabOgImageUrl(), "https://signal.example.test/data-lab/assets/og-card-20261013.png");
     assert.ok(!sitemapXml().includes(dataLabUrl()));
   } finally {

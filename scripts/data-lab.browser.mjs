@@ -100,36 +100,68 @@ try {
             path: join(output, `${engine}-${width}-data-lab.png`),
             fullPage: true,
           });
-          await page.goto(`${baseUrl}/data-lab/reports/20261012-final-night/`, { waitUntil: "networkidle" });
-          assert.match(await page.title(), /最終夜配信/);
-          assert.match(await page.locator("h1").innerText(), /22:00/);
-          assert.equal(await page.locator(".final-table").count(), 2);
-          assert.equal(await page.locator("svg.plot polyline").count(), 1);
-          const nightHead = await page.evaluate(() => ({
-            canonical: document.querySelector('link[rel="canonical"]')?.href,
-            ogUrl: document.querySelector('meta[property="og:url"]')?.content,
-            ogImage: document.querySelector('meta[property="og:image"]')?.content,
-            twitterImage: document.querySelector('meta[name="twitter:image"]')?.content,
-            robots: document.querySelector('meta[name="robots"]')?.content,
-            stylesheet: document.querySelector('link[rel="stylesheet"]')?.getAttribute("href"),
-            evidence: document.querySelector('a[href$="final-night-sources-20261012.json"]')?.getAttribute("href"),
-          }));
-          assert.equal(nightHead.canonical, "https://mily-fan-site.vercel.app/data-lab/reports/20261012-final-night/");
-          assert.equal(nightHead.ogUrl, nightHead.canonical);
-          assert.equal(nightHead.ogImage, "https://mily-fan-site.vercel.app/data-lab/assets/og-card-20261013.png");
-          assert.equal(nightHead.twitterImage, nightHead.ogImage);
-          assert.equal(nightHead.robots, "noindex,nofollow,noarchive");
-          assert.equal(nightHead.stylesheet, "/data-lab/assets/styles.css");
-          assert.equal(nightHead.evidence, "/data-lab/data/final-night-sources-20261012.json");
-          assert.deepEqual(await page.evaluate(() => {
-            const base = new URL("/data-lab/reports/20261012-final-night", location.origin);
-            return Array.from(document.querySelectorAll('link[rel="stylesheet"],a[href$="final-night-sources-20261012.json"]'))
-              .map(el => new URL(el.getAttribute("href"), base).pathname);
-          }), ["/data-lab/assets/styles.css", "/data-lab/data/final-night-sources-20261012.json"]);
-          assert.match(await page.locator("#ranking").innerText(), /712,986/);
-          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
-            "Final-night report must not overflow horizontally");
-          await page.screenshot({ path: join(output, `${engine}-${width}-final-night.png`), fullPage: true });
+          await page.goto(`${baseUrl}/data-lab`, { waitUntil: "networkidle" });
+          const reportLink = page.getByRole("link", { name: "10/12最終夜の分析を読む ↗", exact: true });
+          assert.equal(await reportLink.getAttribute("href"), "/data-lab/reports/20261012-final-night/");
+          assert.equal(await page.locator("#sr-chart .bar-row").count(), 10);
+          const reportVariants = [];
+          for (const suffix of ["/", ""]) {
+            const reportPath = `/data-lab/reports/20261012-final-night${suffix}`;
+            const response = await page.goto(`${baseUrl}${reportPath}`, { waitUntil: "networkidle" });
+            assert.equal(response.status(), 200, `Report must load at ${reportPath}`);
+            assert.match(await page.title(), /最終夜配信/);
+            assert.match(await page.locator("h1").innerText(), /22:00/);
+            assert.equal(await page.locator(".final-table").count(), 2);
+            assert.equal(await page.locator("svg.plot polyline").count(), 1);
+            assert.match(await page.locator("#ranking").innerText(), /712,986/);
+            assert.match(await page.locator("#ranking").innerText(), /公式最終順位・確定ポイントではありません/);
+            assert.match(await page.locator(".final-grid").innerText(), /1,121〜1,131/);
+            const reportHead = await page.evaluate(() => ({
+              canonical: document.querySelector('link[rel="canonical"]')?.href,
+              ogUrl: document.querySelector('meta[property="og:url"]')?.content,
+              ogImage: document.querySelector('meta[property="og:image"]')?.content,
+              twitterImage: document.querySelector('meta[name="twitter:image"]')?.content,
+              card: document.querySelector('meta[name="twitter:card"]')?.content,
+              robots: document.querySelector('meta[name="robots"]')?.content,
+              css: document.querySelector('link[rel="stylesheet"]')?.getAttribute("href"),
+              favicon: document.querySelector('link[rel="icon"]')?.getAttribute("href"),
+              background: getComputedStyle(document.documentElement).getPropertyValue("--bg").trim(),
+            }));
+            assert.equal(reportHead.canonical, `${head.canonical}reports/20261012-final-night/`);
+            assert.equal(reportHead.ogUrl, reportHead.canonical);
+            assert.equal(reportHead.ogImage, head.ogImage);
+            assert.equal(reportHead.twitterImage, head.ogImage);
+            assert.equal(reportHead.card, "summary_large_image");
+            assert.equal(reportHead.robots, head.robots);
+            assert.equal(reportHead.css, "/data-lab/assets/styles.css");
+            assert.equal(reportHead.favicon, "/data-lab/assets/favicon.svg");
+            assert.equal(reportHead.background, "#081a27", "Shared CSS must actually be applied");
+            const internalUrls = await page.locator("a[href],link[href],img[src]").evaluateAll(elements =>
+              elements.map(element => element.getAttribute("href") || element.getAttribute("src"))
+                .filter(url => !url.startsWith("https:") && !url.startsWith("http:"))
+            );
+            assert.ok(internalUrls.every(url => url.startsWith("/") || url.startsWith("#")),
+              "Internal resources and navigation must be independent of the document URL");
+            const dataLink = page.getByRole("link", { name: "固定観測値JSON", exact: true });
+            assert.equal(await dataLink.getAttribute("href"), "/data-lab/data/final-night-sources-20261012.json");
+            const data = await page.evaluate(async href => {
+              const response = await fetch(href);
+              return { status: response.status, contentType: response.headers.get("content-type"), json: await response.json() };
+            }, await dataLink.getAttribute("href"));
+            assert.equal(data.status, 200);
+            assert.match(data.contentType, /application\/json/);
+            assert.deepEqual(data.json.counter_observations.map(point => point.stars), [6140, 6150, 7271]);
+            assert.equal(data.json.uncertainty.official_final_event_rank, null);
+            assert.deepEqual(data.json.uncertainty.post_cutoff_stars_range, [1121, 1131]);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+              "Final-night report must not overflow horizontally");
+            await page.screenshot({ path: join(output, `${engine}-${width}-final-night${suffix ? "" : "-slashless"}.png`), fullPage: true });
+            reportVariants.push({ path: reportPath, metadata: reportHead, dataStatus: data.status });
+            assert.equal(await page.locator(".final-top a").first().getAttribute("href"), "/data-lab/");
+            await page.getByRole("link", { name: "データラボへ戻る", exact: true }).click();
+            await page.waitForURL(`${baseUrl}/data-lab/`);
+            await page.waitForSelector("#sr-chart .bar-row");
+          }
 
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
@@ -168,7 +200,7 @@ try {
           );
           assert.ok(Math.abs((await header.boundingBox()).y) < 1, "Header must stick to the viewport");
           assert.deepEqual(errors, [], "Browser JavaScript must not throw");
-          results.push({ engine, width, roster: 70, grade3: 27, search: "ok", overflow: false, headerHeight, navigation: width >= 1024 ? "single-row" : "disclosure", metadata: head });
+          results.push({ engine, width, roster: 70, grade3: 27, search: "ok", overflow: false, headerHeight, navigation: width >= 1024 ? "single-row" : "disclosure", metadata: head, reportVariants });
         } finally {
           await page.close();
         }
