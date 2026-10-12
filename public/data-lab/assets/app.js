@@ -61,5 +61,24 @@ for(const btn of document.querySelectorAll('[data-grade]')){
 }
 $('show-all').addEventListener('click',()=>{allShown=true;renderTable();});
 renderTable();
+// Forward-compatible entry: the layout PR moves the HTML template into Vite.
+// Only inject this public, static archive link if the template has not included it.
+const finalNightAnchor = $('now');
+if (finalNightAnchor && !$('final-night')) {
+  const finalNight = document.createElement('section');
+  finalNight.id = 'final-night';
+  finalNight.className = 'section';
+  finalNight.innerHTML = `<div class="shell"><div class="section-head">
+    <div><div class="eyeline">FINAL NIGHT · 2026.10.12</div>
+    <h2>22:00まで、そしてその後。</h2>
+    <p>21:59:23のきら星6,140個と、23:19:30の最終オンライン表示7,271個を区別。
+    四次審査最終夜を、イベント対象時間と終了後に分けて分析しました。</p>
+    </div></div><div class="card">
+    <h3>最終夜の匿名データと推移グラフ</h3>
+    <p>22:00前後の観測誤差や、イベント途中順位と確定値の違いも明記しています。</p>
+    <p><a class="btn btn-primary" href="/data-lab/reports/20261012-final-night/">
+    10/12夜の分析を読む ↗</a></p></div></div>`;
+  finalNightAnchor.parentNode.insertBefore(finalNight, finalNightAnchor);
+}
 // This is a frozen public snapshot. Intentionally no remote API calls or analytics.
 })();
