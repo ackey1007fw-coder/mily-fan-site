@@ -224,6 +224,7 @@ describe("home portal navigation", () => {
         "/news/",
         "/stories/",
         "/gallery/",
+        "/data-lab/",
         "/profile/",
       ],
     );
