@@ -10,7 +10,7 @@
 
 ## データ正本と根拠
 
-2026-10-12にオーナーの個人Google Driveから取得した一般公開用ZIP（`MILY_SIGNAL_public_site_v1.zip`）を、最小限のリンク・タイトル変更のみ行って移植。学校Driveは不使用。オリジナルZIP自体は公開repoへ入れない。
+2026-10-12にオーナーの個人Google Driveから取得した一般公開用ZIP（公開版v1の制作パッケージ）を、最小限のリンク・タイトル変更のみ行って移植。学校Driveは不使用。オリジナルZIP自体は公開repoへ入れない。
 
 - 公式進出者70人: https://2026.misscircle.jp/list/4
 - 本人Entry 734: https://2026.misscircle.jp/entry/734
