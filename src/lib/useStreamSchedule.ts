@@ -7,6 +7,8 @@ import {
 } from "../data/streamSchedule.ts";
 import { useShowroomLive } from "./useMilyRealtimeStatus.ts";
 import { withShowroomNext } from "./showroomSchedule.ts";
+import { withFinalStreamAnnouncedEnd } from "./finalStreamAnnouncement.ts";
+import { useSupportEventClock } from "./useSupportEventClock.ts";
 import type { ScheduleAvailability } from "./supportCalendar.ts";
 
 /**
@@ -216,8 +218,9 @@ export function useStreamSchedule(): StreamScheduleView {
     };
   }, []);
 
+  useSupportEventClock();
   const now = Date.now();
-  return withShowroomNext(toStreamScheduleView(fetched, streamSchedule, now), live, now);
+  return withFinalStreamAnnouncedEnd(withShowroomNext(toStreamScheduleView(fetched, streamSchedule, now), live, now), now);
 }
 
 const dateFmt = new Intl.DateTimeFormat("ja-JP", {
