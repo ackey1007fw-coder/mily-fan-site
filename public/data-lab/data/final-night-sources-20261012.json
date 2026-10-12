@@ -30,7 +30,7 @@
       "other_free": 1571,
       "comments": 1126,
       "star100_contributor_count": 71,
-      "source": "last_valid_online_display_reference_after_recording_end"
+      "source": "last_valid_online_display_reference"
     }
   ],
   "event_snapshots": [
@@ -66,12 +66,11 @@
       579,
       650
     ],
-    "recording_ended_at_jst": "2026-10-12T23:18:45+09:00",
-    "counter_last_valid_is_after_recording_end": true,
     "coverage_complete": false,
     "verified_real_gift_quantity": false,
     "official_final_event_point": null,
-    "official_final_event_rank": null
+    "official_final_event_rank": null,
+    "last_counter_is_online_display_reference_only": true
   },
   "excluded": [
     "supporter_identifiers",
@@ -79,5 +78,46 @@
     "recordings",
     "private_dashboard",
     "raw_capture_logs"
-  ]
+  ],
+  "cross_day_anonymized_inputs": [
+    {
+      "date": "2026-10-11",
+      "slot": "morning",
+      "observed_at_jst": "2026-10-11T06:40:36.264+09:00",
+      "stars": 4476,
+      "source": "public_screen_reference_saved_during_broadcast",
+      "complete_capture": false
+    },
+    {
+      "date": "2026-10-11",
+      "slot": "night",
+      "observed_at_jst": "2026-10-11T21:27:09.188+09:00",
+      "stars": 4462,
+      "source": "public_screen_reference_saved_during_broadcast",
+      "complete_capture": false
+    },
+    {
+      "date": "2026-10-12",
+      "slot": "morning",
+      "observed_at_jst": "2026-10-12T06:34:48.875+09:00",
+      "stars": 5740,
+      "source": "public_screen_reference_saved_during_broadcast",
+      "complete_capture": false
+    },
+    {
+      "date": "2026-10-12",
+      "slot": "night_before_cutoff",
+      "observed_at_jst": "2026-10-12T21:59:23.243+09:00",
+      "stars": 6140,
+      "source": "public_screen_reference_saved_during_broadcast",
+      "complete_capture": false
+    }
+  ],
+  "cross_day_comparison": {
+    "oct11_star_sum": 8938,
+    "oct12_before_cutoff_star_sum": 11880,
+    "change_in_star_sum": 2942,
+    "change_percent_rounded_one_decimal": 32.9,
+    "meaning": "comparison_of_observed_public_screen_counters_not_verified_gift_delivery"
+  }
 }
