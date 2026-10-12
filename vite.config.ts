@@ -1,7 +1,7 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
-import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
+import { canonicalUrl, dataLabUrl, dataLabOgImageUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 import { radioMusicPageMetadata, radioMusicPageStructuredData } from "./src/lib/radioMusicMetadata.ts";
 import { songClipsPageMetadata, songClipsPageStructuredData } from "./src/lib/songClipsMetadata.ts";
 import {
@@ -35,6 +35,8 @@ function siteMetadataPlugin(): Plugin {
 
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
+        .replaceAll("__DATA_LAB_CANONICAL__", dataLabUrl())
+        .replaceAll("__DATA_LAB_OG_IMAGE__", dataLabOgImageUrl())
         .replaceAll("__PROFILE_CANONICAL__", profileUrl())
         .replaceAll(
           "__STORY_SECOND_ROUND_CANONICAL__",
@@ -164,6 +166,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: "index.html",
+        dataLab: "data-lab/index.html",
         profile: "profile/index.html",
         activities: "activities/index.html",
         support: "support/index.html",

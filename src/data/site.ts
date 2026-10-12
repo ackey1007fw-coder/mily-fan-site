@@ -1,3 +1,4 @@
+import { DATA_LAB_ROUTE } from "../lib/dataLabRoute.ts";
 import { activities, type ActivityRoute } from "./activities.ts";
 
 export const site = {
@@ -65,6 +66,14 @@ export function songClipsUrl(): string {
 
 export function radioMusicUrl(): string {
   return `${siteOrigin()}/activities/radio/music/`;
+}
+
+export function dataLabUrl(): string {
+  return `${siteOrigin()}${DATA_LAB_ROUTE}`;
+}
+
+export function dataLabOgImageUrl(): string {
+  return `${siteOrigin()}/data-lab/assets/og-card-20261013.png`;
 }
 
 export function ogImageUrl(): string {
