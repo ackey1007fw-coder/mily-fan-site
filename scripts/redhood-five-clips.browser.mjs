@@ -14,7 +14,22 @@ const server=createServer(async(req,res)=>{
  if(!p.startsWith(dist+sep)&&p!==dist){res.writeHead(403);res.end();return;}
  try{
   if(path.startsWith('/api/')){res.writeHead(200,{'Content-Type':'application/json'});res.end('{}');return;}
-  let bytes;try{bytes=await readFile(p);}catch{p=join(dist,'index.html');bytes=await readFile(p);}
+  // Match the production multipage build, not the HOME fallback for directories.
+  if(path.endsWith('/')) p=join(p,'index.html');
+  let bytes;try{bytes=await readFile(p);}catch{
+   if(extname(path)){res.writeHead(404);res.end();return;}
+   p=join(dist,'index.html');bytes=await readFile(p);
+  }
+  // Native players can request byte ranges when beginning or seeking MP4 files.
+  const range=req.headers.range;
+  if(range&&extname(p)==='.mp4'){
+   const match=/^bytes=(\d+)-(\d*)$/.exec(range);
+   if(!match){res.writeHead(416);res.end();return;}
+   const start=Number(match[1]),end=Math.min(match[2]?Number(match[2]):bytes.length-1,bytes.length-1);
+   if(start>end||start>=bytes.length){res.writeHead(416);res.end();return;}
+   res.writeHead(206,{'Content-Type':'video/mp4','Accept-Ranges':'bytes','Content-Range':`bytes ${start}-${end}/${bytes.length}`,'Content-Length':end-start+1});
+   res.end(req.method==='HEAD'?undefined:bytes.subarray(start,end+1));return;
+  }
   res.writeHead(200,{'Content-Type':contentTypes[extname(p)]??'application/octet-stream','Content-Length':bytes.length});
   res.end(req.method==='HEAD'?undefined:bytes);
  }catch{res.writeHead(500);res.end();}
@@ -31,6 +46,7 @@ try {
    for(const width of [390,1440]) {
     const page=await browser.newPage({viewport:{width,height:900}});
     const mediaRequests=[];
+    const pageErrors=[];page.on('pageerror',e=>pageErrors.push(e.stack||String(e)));
     page.on('request',r=>{if(r.url().includes('mily-b220-')&&r.url().endsWith('.mp4'))mediaRequests.push(r.url());});
     await page.route('**/*',route=>route.request().url().startsWith(origin)?route.continue():route.fulfill({status:200,body:'{}'}));
     await page.goto(origin+'/activities/live/#recap-2026-10-12-final-night-showroom',{waitUntil:'networkidle'});
@@ -44,12 +60,30 @@ try {
     assert.equal(new Set(sources.map(s=>s.src)).size,5);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     const first=videos.nth(0),second=videos.nth(1);
+    // Wait for real playback before the next interaction. play() resolution and
+    // React's media event delivery are separate browser tasks (especially WebKit).
     await first.evaluate(async v=>{v.muted=true;await v.play();});
-    await first.evaluate(v=>{if(v.paused)throw Error('first did not start');});
+    await page.waitForFunction(()=>{
+      const v=document.querySelector('[data-approved-song-clips] video');
+      return v && !v.paused && v.readyState>=2 && v.currentTime>0;
+    },undefined,{timeout:15000});
     await second.evaluate(async v=>{v.muted=true;await v.play();});
+    await page.waitForFunction(()=>{
+      const v=document.querySelectorAll('[data-approved-song-clips] video');
+      return v.length===5 && v[0].paused && !v[1].paused && v[1].readyState>=2;
+    },undefined,{timeout:15000});
     assert.ok(await first.evaluate(v=>v.paused),'Playing another excerpt should pause the preceding one');
+    assert.ok(await second.evaluate(v=>!v.paused),'The requested excerpt must stay playing');
     await second.evaluate(v=>v.pause());
     await recap.locator('[data-approved-song-clips]').first().screenshot({path:join(output,`${engine}-${width}.png`)});
+    // The Windows WebKit runner's native media-control layout can emit this
+    // duration-format warning before metadata is available. Keep it in the QA
+    // output; do not suppress application errors or any playback assertion.
+    const nativeControlWarnings=pageErrors.filter(e=>engine==='webkit' && process.platform==='win32'
+      && e.includes('Temporal.Duration properties must be finite and of consistent sign')
+      && e.includes('performScheduledLayout') && !e.includes(origin));
+    assert.deepEqual(pageErrors.filter(e=>!nativeControlWarnings.includes(e)),[],'No application runtime errors');
+    if(nativeControlWarnings.length)console.warn(JSON.stringify({engine,width,nativeControlWarnings}));
     result.push({engine,width,videos:sources.length,preload:'none',overflow:false,exclusivePlayback:true});
     await page.close();
    }
