@@ -76,15 +76,15 @@ try {
     assert.ok(await second.evaluate(v=>!v.paused),'The requested excerpt must stay playing');
     await second.evaluate(v=>v.pause());
     await recap.locator('[data-approved-song-clips]').first().screenshot({path:join(output,`${engine}-${width}.png`)});
-    // The Windows WebKit runner's native media-control layout can emit this
+    // WebKit native media-control layout (observed on Windows and Linux) emits this
     // duration-format warning before metadata is available. Keep it in the QA
     // output; do not suppress application errors or any playback assertion.
-    const nativeControlWarnings=pageErrors.filter(e=>engine==='webkit' && process.platform==='win32'
+    const nativeControlWarnings=pageErrors.filter(e=>engine==='webkit'
       && e.includes('Temporal.Duration properties must be finite and of consistent sign')
       && e.includes('performScheduledLayout') && !e.includes(origin));
     assert.deepEqual(pageErrors.filter(e=>!nativeControlWarnings.includes(e)),[],'No application runtime errors');
     if(nativeControlWarnings.length)console.warn(JSON.stringify({engine,width,nativeControlWarnings}));
-    result.push({engine,width,videos:sources.length,preload:'none',overflow:false,exclusivePlayback:true});
+    result.push({engine,width,videos:sources.length,preload:'none',overflow:false,exclusivePlayback:true,nativeControlWarnings:nativeControlWarnings.length});
     await page.close();
    }
   }finally{await browser.close();}
