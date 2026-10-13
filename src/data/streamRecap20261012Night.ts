@@ -53,6 +53,38 @@ export const streamRecap20261012Night: StreamRecap = {
     filename: "mily_20261012_final_night_screenshots_12.zip",
     label: "12枚まとめて保存",
   },
+  shortClips: [
+    {
+      title: "赤ずきんの笑顔とヘビロテ",
+      caption: "歌いながらの笑顔が印象的な18秒。",
+      clip: { src: "/media/live/mily-b219-01-20261012-redhood_hello_heavyrotation.mp4", poster: "/media/live/mily-b219-01-20261012-redhood_hello_heavyrotation-cover.jpg", width: 720, height: 1280, durationSeconds: 18, sourceTimestamp: "0:32:56" },
+      musicRightsNote: "配信原音を含むため、外部SNSへの転載は各媒体の楽曲利用条件を確認してください。",
+    },
+    {
+      title: "おててふりふり！",
+      caption: "両手を動かして元気いっぱいの21秒。",
+      clip: { src: "/media/live/mily-b219-02-20261012-bouncy_waving.mp4", poster: "/media/live/mily-b219-02-20261012-bouncy_waving-cover.jpg", width: 720, height: 1280, durationSeconds: 21, sourceTimestamp: "0:33:17" },
+      musicRightsNote: "配信原音を含むため、外部SNSへの転載は各媒体の楽曲利用条件を確認してください。",
+    },
+    {
+      title: "とくべチュのかわいい仕草",
+      caption: "前髪を整える表情やにっこり笑顔を切り取った21秒。",
+      clip: { src: "/media/live/mily-b219-03-20261012-tokubetyu_cute_gestures.mp4", poster: "/media/live/mily-b219-03-20261012-tokubetyu_cute_gestures-cover.jpg", width: 720, height: 1280, durationSeconds: 21, sourceTimestamp: "0:42:58" },
+      musicRightsNote: "配信原音を含むため、外部SNSへの転載は各媒体の楽曲利用条件を確認してください。",
+    },
+    {
+      title: "Mela! でにこにこ",
+      caption: "歌唱中の表情と手の動きに注目の21秒。",
+      clip: { src: "/media/live/mily-b219-04-20261012-mela_smile.mp4", poster: "/media/live/mily-b219-04-20261012-mela_smile-cover.jpg", width: 720, height: 1280, durationSeconds: 21, sourceTimestamp: "0:49:56" },
+      musicRightsNote: "配信原音を含むため、外部SNSへの転載は各媒体の楽曲利用条件を確認してください。",
+    },
+    {
+      title: "ファンサでハート",
+      caption: "最終夜のハートと歌唱シーンを収めた18秒。",
+      clip: { src: "/media/live/mily-b219-05-20261012-fansa_heart.mp4", poster: "/media/live/mily-b219-05-20261012-fansa_heart-cover.jpg", width: 720, height: 1280, durationSeconds: 18, sourceTimestamp: "0:57:39" },
+      musicRightsNote: "配信原音を含むため、外部SNSへの転載は各媒体の楽曲利用条件を確認してください。",
+    },
+  ],
   songs: [
     {
       title: "超最強",
