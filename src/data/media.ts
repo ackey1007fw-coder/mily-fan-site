@@ -29,6 +29,7 @@ import { morningMakeupShowroomPhoto } from "./morningMakeupShowroomImage.ts";
 import { gandaBeforeNightStreamPhoto } from "./gandaBeforeNightStream.ts";
 import { movieNightPhotos } from "./movieNightPhotos.ts";
 import { recordCafeMilyPhotos } from "./recordCafeMilyPhotos.ts";
+import { redRidingHoodPhotos } from "./redRidingHoodPhotos.ts";
 import { campusGirlsPrelimFinalResultPhoto } from "./campusGirlsPrelimFinalResultImage.ts";
 import { nightFanroomSelfiePhoto } from "./nightFanroomSelfie.ts";
 import { fourthRoundSchedulePhoto } from "./fourthRoundStreamSchedule.ts";
@@ -82,6 +83,7 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  ...redRidingHoodPhotos,
   fourthRoundSchedulePhoto,
   ...recordCafeMilyPhotos,
   kawaiiRadioMessagePhoto,
