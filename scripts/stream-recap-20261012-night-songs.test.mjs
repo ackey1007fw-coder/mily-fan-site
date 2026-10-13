@@ -27,7 +27,18 @@ test("Oct 12 final-night set has five independently verified songs in singing or
       && u.pathname === "/watch" && u.searchParams.size === 1
       && withoutApprovedSongLinks(song.youtubeUrl) === "[approved song link]";
   }));
-  assert.ok(recap.songs.every(song => !song.clip && !song.karaoke && !song.youtubeVersionNote));
+  assert.ok(recap.songs.every(song => !song.clip && !song.youtubeVersionNote));
+  const historicalKaraoke = [
+    ["超最強", "Wuyx1pDlDvg"],
+    ["とくべチュ、して", "r6dpqf5CRjA"],
+    ["Mela!", "W5ykal8c4rY"],
+  ];
+  for (const [title, videoId] of historicalKaraoke) {
+    const song = recap.songs.find(s => s.title === title);
+    assert.equal(new URL(song.karaoke.youtubeUrl).searchParams.get("v"), videoId);
+    assert.equal(song.karaoke.channel, "カラオケ歌っちゃ王");
+  }
+  assert.ok(recap.songs.filter(song => song.karaoke).length === 3);
   assert.ok(recap.songs.every(song => song.timestamp.startsWith("0:")),
     "song offsets must be within the first hour of the 138-minute saved recording");
 });
@@ -50,7 +61,7 @@ test("Existing song catalog automatically inherits the same five links and recap
 test("New public song metadata does not claim unheard song lyrics or fabricate original audio review", () => {
   const recap = streamRecap20261012Night;
   assert.match(recap.transcriptionNote, /全編の手動実聴・逐語校正は未実施/);
-  assert.match(recap.transcriptionNote, /歌唱した5曲の曲名は自動文字起こしの歌唱区間を原曲の公表歌詞と照合/);
+  assert.match(recap.transcriptionNote, /歌唱した5曲の曲名は自動文字起こしの歌唱区間と原曲の公表歌詞を照合/);
   assert.match(recap.transcriptionNote, /歌詞、個別のリスナー名、ギフトや順位の未確定数値は掲載していません/);
   assert.doesNotMatch(recap.transcriptionNote, /歌唱の曲名・歌詞.*掲載していません/);
   assert.equal(recap.songs.length, 5);
