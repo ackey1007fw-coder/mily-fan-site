@@ -35,7 +35,7 @@ test("recap preserves the final night cutoff, ranking timing and honest source a
   assert.match(target.transcriptionNote, /SHOWROOM審査は21:59まで/);
   assert.doesNotMatch(JSON.stringify(target), /(?:\.mkv|\.jsonl|drive\.google\.com|chatgpt\.site|@gmail\.com|https?:\/\/[^"\s]+private)/i);
   assert.deepEqual(target.goals, []);
-  assert.ok(!target.songs?.length);
+  assert.equal(target.songs?.length, 5, 'The owner-approved official song links should be present');
   assert.ok(target.highlights.every(item => !item.quote));
 });
 
