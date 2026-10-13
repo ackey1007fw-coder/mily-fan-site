@@ -55,23 +55,27 @@ try {
     const videos=recap.locator('[data-approved-song-clips] video');
     assert.equal(await videos.count(),5);
     assert.equal(mediaRequests.length,0,'No video bytes should be requested before user interaction');
-    const sources=await videos.evaluateAll(nodes=>nodes.map(v=>({poster:v.getAttribute('poster'),src:v.querySelector('source')?.getAttribute('src'),preload:v.preload,autoplay:v.autoplay,inline:v.playsInline,controls:v.controls,width:v.getAttribute('width'),height:v.getAttribute('height')})));
-    for(const s of sources){assert.equal(s.preload,'none');assert.equal(s.autoplay,false);assert.equal(s.inline,true);assert.equal(s.controls,true);assert.equal(s.width,'720');assert.equal(s.height,'1280');assert.match(s.src,/^\/media\/live\/mily-b220-\d+-redhood-/);assert.match(s.poster,/-cover\.jpg$/);}
+    const sources=await videos.evaluateAll(nodes=>nodes.map(v=>({poster:v.getAttribute('poster'),src:v.querySelector('source')?.getAttribute('data-src'),initialSrc:v.querySelector('source')?.getAttribute('src'),preload:v.preload,autoplay:v.autoplay,inline:v.playsInline,controls:v.controls,width:v.getAttribute('width'),height:v.getAttribute('height')})));
+    for(const s of sources){assert.equal(s.initialSrc,null);assert.equal(s.preload,'none');assert.equal(s.autoplay,false);assert.equal(s.inline,true);assert.equal(s.controls,true);assert.equal(s.width,'720');assert.equal(s.height,'1280');assert.match(s.src,/^\/media\/live\/mily-b220-\d+-redhood-/);assert.match(s.poster,/-cover\.jpg$/);}
     assert.equal(new Set(sources.map(s=>s.src)).size,5);
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     const first=videos.nth(0),second=videos.nth(1);
     // Wait for real playback before the next interaction. play() resolution and
     // React's media event delivery are separate browser tasks (especially WebKit).
-    await first.evaluate(async v=>{v.muted=true;await v.play();});
+    await first.evaluate(v=>{v.muted=true;});
+    await recap.locator('[data-load-approved-clip]').nth(0).click();
     await page.waitForFunction(()=>{
       const v=document.querySelector('[data-approved-song-clips] video');
       return v && !v.paused && v.readyState>=2 && v.currentTime>0;
     },undefined,{timeout:15000});
-    await second.evaluate(async v=>{v.muted=true;await v.play();});
+    await second.evaluate(v=>{v.muted=true;});
+    await recap.locator('[data-load-approved-clip]').nth(0).click();
     await page.waitForFunction(()=>{
       const v=document.querySelectorAll('[data-approved-song-clips] video');
       return v.length===5 && v[0].paused && !v[1].paused && v[1].readyState>=2;
     },undefined,{timeout:15000});
+    assert.equal(await first.locator('source').getAttribute('src'),sources[0].src);
+    assert.equal(await second.locator('source').getAttribute('src'),sources[1].src);
     assert.ok(await first.evaluate(v=>v.paused),'Playing another excerpt should pause the preceding one');
     assert.ok(await second.evaluate(v=>!v.paused),'The requested excerpt must stay playing');
     await second.evaluate(v=>v.pause());

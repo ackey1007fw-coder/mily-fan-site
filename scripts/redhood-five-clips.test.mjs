@@ -42,6 +42,9 @@ test("approved clips do not autoplay or fetch full videos before viewer interact
   assert.match(ui,/video.pause/);
   assert.match(ui,/poster=\{clip.poster\}/);
   assert.match(ui,/object-contain/);
+  assert.ok(ui.includes("data-src={clip.src}"));
+  assert.ok(ui.includes("onClick={beginPlayback}"));
+  assert.ok(!ui.includes("<source src={clip.src}"));
   const data=JSON.stringify(redhoodClips20261012);
   assert.doesNotMatch(data,/drive\.google|chatgpt\.site|user_id|viewer_id|ScreenRecording/i);
 });
