@@ -46,7 +46,7 @@ describe("10/13 本人Xの人生初赤ずきんコスプレ4枚", () => {
       const photo = redRidingHoodPhotos[i];
       assert.ok(photo);
       assert.equal(media[i], photo);
-      assert.equal(photo.id, `mily-b218-0${i + 1}`);
+      assert.equal(photo.id, `mily-b219-0${i + 1}`);
       assert.equal(photo.sourceUrl, expectedUrl);
       assert.equal(photo.sourceDate, "2026-10-13");
       assert.equal(photo.provenance, "owner-provided");

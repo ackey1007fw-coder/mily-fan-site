@@ -34,9 +34,9 @@ const photoDetails = [
 ] as const;
 
 export const redRidingHoodPhotos = photoDetails.map(([slug, alt, width, height], index) => ({
-  id: `mily-b218-${String(index + 1).padStart(2, "0")}`,
+  id: `mily-b219-${String(index + 1).padStart(2, "0")}`,
   kind: "photo" as const,
-  basePath: `/media/gallery/mily-b218-${String(index + 1).padStart(2, "0")}-${slug}`,
+  basePath: `/media/gallery/mily-b219-${String(index + 1).padStart(2, "0")}-${slug}`,
   widths: [480, 960, 1600] as const,
   width,
   height,
