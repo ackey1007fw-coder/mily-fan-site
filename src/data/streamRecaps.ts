@@ -204,6 +204,15 @@ export type StreamRecapClip = {
   sourceTimestamp: string;
 };
 
+/** SNS向けに本人の実映像から制作した縦型ショート。個人別配信UIは公開しない。 */
+export type StreamRecapShortClip = Omit<StreamRecapClip, "sourceTimestamp"> & {
+  title: string;
+  detail: string;
+  /** 本人配信の時刻帯の目安。端末側の録画・編集開始位置とは厳密には一致しない。 */
+  approximateClockLabel: string;
+  downloadName: string;
+};
+
 /** LIVE SONG CLIPS 用の短い歌唱抜粋。 */
 export type StreamRecapSongClip = StreamRecapClip;
 
@@ -236,6 +245,7 @@ export type StreamRecap = {
   galleryNote?: string;
   galleryZip?: StreamRecapGalleryZip;
   songs?: StreamRecapSong[];
+  shortClips?: StreamRecapShortClip[];
   highlights: StreamRecapHighlight[];
   goals: StreamRecapGoal[];
   ranking: string[];
