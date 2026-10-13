@@ -235,6 +235,8 @@ export type StreamRecap = {
   /** 出典が混在する承認済み画像セットの説明。通常回は既定の説明を使う。 */
   galleryNote?: string;
   galleryZip?: StreamRecapGalleryZip;
+  /** 同一配信の短尺実映像。SNSの投稿完了とは独立したサイト内動画。 */
+  shortClips?: { title: string; caption: string; clip: StreamRecapClip; musicRightsNote?: string }[];
   songs?: StreamRecapSong[];
   highlights: StreamRecapHighlight[];
   goals: StreamRecapGoal[];
