@@ -1,0 +1,63 @@
+{
+  "type": "naoka-public-excerpt",
+  "asOf": "2026-10-12",
+  "providedOn": "2026-10-13",
+  "source": "https://x.com/thehillofReina",
+  "independentForecast": true,
+  "prior": {
+    "rank": 15,
+    "score": 28.54
+  },
+  "latest": {
+    "entry": 734,
+    "rank": 16,
+    "score": 27.83,
+    "SR": 9.48,
+    "SRfree": 26.61,
+    "voteEstimate": 37.99,
+    "srTotalPt": 755120,
+    "nonPaidEstimatedPt": 339253,
+    "nonPaidGrowthVsRound2Pct": 201.7
+  },
+  "near": [
+    {
+      "rank": 13,
+      "entry": 271,
+      "score": 29.47
+    },
+    {
+      "rank": 14,
+      "entry": 820,
+      "score": 29.44
+    },
+    {
+      "rank": 15,
+      "entry": 210,
+      "score": 27.94
+    },
+    {
+      "rank": 16,
+      "entry": 734,
+      "score": 27.83
+    },
+    {
+      "rank": 17,
+      "entry": 1285,
+      "score": 27.36
+    },
+    {
+      "rank": 18,
+      "entry": 95,
+      "score": 27.2
+    },
+    {
+      "rank": 19,
+      "entry": 1258,
+      "score": 25.26
+    }
+  ],
+  "population": {
+    "forecastRows": 71,
+    "officialRosterCount": 70
+  }
+}
