@@ -1,0 +1,74 @@
+{
+  "sourceDate": "2026-10-12",
+  "ownerApprovedOn": "2026-10-13",
+  "kind": "owner-approved-short-excerpts",
+  "audio": "original-recorded-audio-including-singing",
+  "fullRecordingOffsetsVerified": false,
+  "clips": [
+    {
+      "id": "redhood-20261012-01",
+      "title": "赤ずきん笑顔のヘビロテ",
+      "src": "/media/live/mily-b220-01-redhood-heavyrotation.mp4",
+      "poster": "/media/live/mily-b220-02-redhood-heavyrotation-cover.jpg",
+      "width": 720,
+      "height": 1280,
+      "durationSeconds": 18.0,
+      "sha256": "9b21914fa3a8debc47f854f00466b3be11ea8cdc603da01782b26d4750c0ca87",
+      "bytes": 2503519,
+      "posterSha256": "a4dead697b0d8d7ce541248effc9bbb8ee888025866813d37f0910f6a2ab5ee8",
+      "posterBytes": 91225
+    },
+    {
+      "id": "redhood-20261012-02",
+      "title": "おててふりふり",
+      "src": "/media/live/mily-b220-03-redhood-waving.mp4",
+      "poster": "/media/live/mily-b220-04-redhood-waving-cover.jpg",
+      "width": 720,
+      "height": 1280,
+      "durationSeconds": 21.0,
+      "sha256": "e9d702ae2bb689828e6158f4e5ec7012a4b3f00b04d8398c0b4d80b969dc67fa",
+      "bytes": 2910991,
+      "posterSha256": "608a0fe9be4247b2797c1445f8d587c915e436aa0fe4affe0c11b297306307c4",
+      "posterBytes": 87558
+    },
+    {
+      "id": "redhood-20261012-03",
+      "title": "とくべチュの仕草",
+      "src": "/media/live/mily-b220-05-redhood-tokubetyu.mp4",
+      "poster": "/media/live/mily-b220-06-redhood-tokubetyu-cover.jpg",
+      "width": 720,
+      "height": 1280,
+      "durationSeconds": 21.0,
+      "sha256": "effa490a3dfa90ac962fc4d22f9e0d9ced38eb4e87cd1d2697bdcf057162e04d",
+      "bytes": 2572339,
+      "posterSha256": "53ebd054d9ce1b9cda8b8f9e913436d06c70707773f79a89c2cc07ce0d5d276c",
+      "posterBytes": 86908
+    },
+    {
+      "id": "redhood-20261012-04",
+      "title": "Mela!でにこにこ",
+      "src": "/media/live/mily-b220-07-redhood-mela.mp4",
+      "poster": "/media/live/mily-b220-08-redhood-mela-cover.jpg",
+      "width": 720,
+      "height": 1280,
+      "durationSeconds": 21.0,
+      "sha256": "95ed00c79bcc0c89306479021eb31513ed79220c0fcf56c5b2116576bc65dc96",
+      "bytes": 2540711,
+      "posterSha256": "0e477e9bb0d1da06d1b66c2c46045fd184ce4b47b962d155d55449d492fe87be",
+      "posterBytes": 88730
+    },
+    {
+      "id": "redhood-20261012-05",
+      "title": "ファンサでハート",
+      "src": "/media/live/mily-b220-09-redhood-fansa.mp4",
+      "poster": "/media/live/mily-b220-10-redhood-fansa-cover.jpg",
+      "width": 720,
+      "height": 1280,
+      "durationSeconds": 18.0,
+      "sha256": "4df402be3fc9c580835408cef377757988d47ad22d79b1de94f662bc4e9f236c",
+      "bytes": 3175004,
+      "posterSha256": "a49434f12526c846cd40d57d94d086e60e6154be1a3b2940204df06bad9670f2",
+      "posterBytes": 92102
+    }
+  ]
+}

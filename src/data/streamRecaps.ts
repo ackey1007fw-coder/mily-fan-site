@@ -207,6 +207,17 @@ export type StreamRecapClip = {
 /** LIVE SONG CLIPS 用の短い歌唱抜粋。 */
 export type StreamRecapSongClip = StreamRecapClip;
 
+/** Approved short singing excerpts; no fabricated full-recording offset. */
+export type StreamRecapApprovedSongClip = {
+  id: string;
+  title: string;
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  durationSeconds: number;
+};
+
 export type StreamRecapSong = {
   title: string;
   artist: string;
@@ -220,6 +231,8 @@ export type StreamRecapSong = {
   karaoke?: { youtubeUrl: string; channel: string };
   /** オーナー確認済み録画から作った短い歌唱クリップ。 */
   clip?: StreamRecapSongClip;
+  /** Multiple approved excerpts of the same song, in the existing song section. */
+  approvedClips?: StreamRecapApprovedSongClip[];
 };
 
 export type StreamRecap = {
