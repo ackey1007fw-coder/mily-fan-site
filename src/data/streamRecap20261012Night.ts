@@ -53,6 +53,38 @@ export const streamRecap20261012Night: StreamRecap = {
     filename: "mily_20261012_final_night_screenshots_12.zip",
     label: "12枚まとめて保存",
   },
+  songs: [
+    {
+      title: "超最強",
+      artist: "超ときめき♡宣伝部",
+      timestamp: "0:24:20",
+      youtubeUrl: "https://www.youtube.com/watch?v=Yeahpo-0Ub4",
+    },
+    {
+      title: "ヘビーローテーション",
+      artist: "AKB48",
+      timestamp: "0:32:20",
+      youtubeUrl: "https://www.youtube.com/watch?v=lkHlnWFnA0c",
+    },
+    {
+      title: "とくべチュ、して",
+      artist: "＝LOVE",
+      timestamp: "0:40:00",
+      youtubeUrl: "https://www.youtube.com/watch?v=F3P8vcZkIh4",
+    },
+    {
+      title: "Mela!",
+      artist: "緑黄色社会",
+      timestamp: "0:49:02",
+      youtubeUrl: "https://www.youtube.com/watch?v=aRDURmIYBZ4",
+    },
+    {
+      title: "ファンサ",
+      artist: "mona（CV：夏川椎菜）",
+      timestamp: "0:56:21",
+      youtubeUrl: "https://www.youtube.com/watch?v=lzyDD8bMDKs",
+    },
+  ],
   highlights: [
     {
       timestamp: "0:05:10",
@@ -132,6 +164,6 @@ export const streamRecap20261012Night: StreamRecap = {
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
     stills: "静止画は当日の保存録画から切り出した実フレーム12枚です。",
     extra:
-      "配信全体の自動文字起こし411チャンクと保存映像の実フレームを照合しました。全編の手動実聴・逐語校正は未実施です。歌唱の曲名・歌詞、個別のリスナー名、ギフトや順位の未確定数値は掲載していません。録画開始21:00頃は配信全体の開始時刻を確定する情報ではなく、約138分は保存録画の長さです。SHOWROOM審査は21:59までで、その後もおしゃべりが続きました。",
+      "配信全体の自動文字起こし411チャンクと保存映像の実フレームを照合しました。全編の手動実聴・逐語校正は未実施です。歌唱した5曲の曲名は自動文字起こしの歌唱区間を原曲の公表歌詞と照合し、アーティスト公式YouTubeの動画で確認しました。歌詞、個別のリスナー名、ギフトや順位の未確定数値は掲載していません。録画開始21:00頃は配信全体の開始時刻を確定する情報ではなく、約138分は保存録画の長さです。SHOWROOM審査は21:59までで、その後もおしゃべりが続きました。",
   }),
 };
