@@ -227,7 +227,7 @@ describe("配信メモの統一ルール", () => {
       it("builds the note from the shared sentences", () => {
         const note = recap.transcriptionNote;
         const withholdNote = note.includes(RECAP_CLIP_WITHHOLD_NOTE) ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
-        if (withholdNote === RECAP_CLIP_WITHHOLD_NOTE) assert.ok(recap.highlights.some(item => item.clip), "抜粋掲載の注記には実際の短尺が必要");
+        if (withholdNote === RECAP_CLIP_WITHHOLD_NOTE) assert.ok((recap.highlights.some(item => item.clip) || (recap.songs ?? []).some(song => song.clip || (song.approvedClips?.length ?? 0) > 0)), "抜粋掲載の注記には実際の短尺が必要");
         assert.ok(note.includes(withholdNote), "共通の非掲載範囲の文がない");
         assert.ok(note.endsWith(RECAP_FIGURES_NOTE), "数字の注記で終わっていない");
         assert.ok(

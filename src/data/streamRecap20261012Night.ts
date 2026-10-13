@@ -1,3 +1,4 @@
+import { redhoodClips20261012 } from "./redhoodClips20261012.ts";
 import type { StreamRecap } from "./streamRecaps.ts";
 import {
   AUTO_TRANSCRIPT_MATERIAL_NOTE,
@@ -66,12 +67,14 @@ export const streamRecap20261012Night: StreamRecap = {
       artist: "AKB48",
       timestamp: "0:32:20",
       youtubeUrl: "https://www.youtube.com/watch?v=lkHlnWFnA0c",
+      approvedClips: [redhoodClips20261012[0], redhoodClips20261012[1]],
     },
     {
       title: "とくべチュ、して",
       artist: "＝LOVE",
       timestamp: "0:40:00",
       youtubeUrl: "https://www.youtube.com/watch?v=F3P8vcZkIh4",
+      approvedClips: [redhoodClips20261012[2]],
       karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=r6dpqf5CRjA", channel: "カラオケ歌っちゃ王" },
     },
     {
@@ -79,6 +82,7 @@ export const streamRecap20261012Night: StreamRecap = {
       artist: "緑黄色社会",
       timestamp: "0:49:02",
       youtubeUrl: "https://www.youtube.com/watch?v=aRDURmIYBZ4",
+      approvedClips: [redhoodClips20261012[3]],
       karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=W5ykal8c4rY", channel: "カラオケ歌っちゃ王" },
     },
     {
@@ -86,6 +90,7 @@ export const streamRecap20261012Night: StreamRecap = {
       artist: "mona（CV：夏川椎菜）",
       timestamp: "0:56:21",
       youtubeUrl: "https://www.youtube.com/watch?v=lzyDD8bMDKs",
+      approvedClips: [redhoodClips20261012[4]],
     },
   ],
   highlights: [
@@ -164,6 +169,7 @@ export const streamRecap20261012Night: StreamRecap = {
     "2026年10月12日 夜のSHOWROOM最終日配信（保存録画・自動文字起こし）",
   verifiedAt: "2026-10-13",
   transcriptionNote: buildTranscriptionNote({
+    publishedClips: true,
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
     stills: "静止画は当日の保存録画から切り出した実フレーム12枚です。",
     extra:

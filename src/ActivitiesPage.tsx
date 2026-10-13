@@ -1,3 +1,4 @@
+import { ApprovedSongClipList } from "./components/ApprovedSongClipList";
 import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
 import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
 import { RecapSourceInfo } from "./components/RecapSourceInfo";
@@ -675,7 +676,7 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回に歌った曲"
           id={`${recap.id}-songs`}
-          note="「原曲を聴く」は原曲の公式動画、「公式歌唱を聴く」は版を明記した公式動画、「カラオケで歌う」は参考伴奏です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
+          note="「原曲を聴く」は原曲の公式動画、「公式歌唱を聴く」は版を明記した公式動画、「カラオケで歌う」は参考伴奏です。これらの外部リンクはみりぃの歌唱映像ではありません。本人の短い歌唱映像がある場合は、動画枠に明記しています。時刻は録画内の目安です。"
         >
           <ol className="mt-3 space-y-3">
             {recap.songs.map((song, index) => (
@@ -709,6 +710,7 @@ function StreamRecapArticle({
                     {song.youtubeVersionNote ? "YouTubeで公式歌唱を聴く ↗" : "YouTubeで原曲を聴く ↗"}
                   </a>
                   {song.youtubeVersionNote ? <p className="break-words text-xs leading-5 text-ink-muted">{song.youtubeVersionNote}</p> : null}
+                  {song.approvedClips ? <ApprovedSongClipList clips={song.approvedClips} /> : null}
                   {song.karaoke ? (
                     <div className="mt-1">
                       <a
