@@ -737,6 +737,48 @@ function StreamRecapArticle({
 
       {recap.highlights.length > 0 ? (
         <StreamRecapSection title="この回の見どころ" id={`${recap.id}-highlights`}>
+          {recap.shortClips?.length ? (
+            <div className="mt-4 rounded-2xl border border-apricot/30 bg-apricot-soft/25 p-4 sm:p-5">
+              <h5 className="text-base font-bold text-ink">🍅 赤ずきんショート5本</h5>
+              <p className="mt-2 text-sm leading-6 text-ink-muted">
+                本人の実映像と元の歌声で振り返る、かわいい瞬間の非公式ファン編集。
+                AIによる顔・声の生成なし。楽曲の権利関係によりSNSでは視聴が制限される場合があります。
+              </p>
+              <ul className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {recap.shortClips.map((short, index) => (
+                  <li key={short.src} className="min-w-0 overflow-hidden rounded-2xl bg-paper-card shadow-card">
+                    <div className="p-3">
+                      <p className="text-xs font-bold text-sage-deep">#{String(index + 1).padStart(2, "0")} · {short.approximateClockLabel}</p>
+                      <h6 className="mt-1 text-sm font-bold leading-6 text-ink">{short.title}</h6>
+                    </div>
+                    <video
+                      width={short.width}
+                      height={short.height}
+                      controls
+                      playsInline
+                      preload="none"
+                      poster={short.poster}
+                      aria-label={`みりぃの赤ずきんショート動画：${short.title}`}
+                      className="mx-auto aspect-[9/16] max-h-[62vh] w-full bg-black object-contain"
+                    >
+                      <source src={short.src} type="video/mp4" />
+                      この環境では動画を再生できません。
+                    </video>
+                    <div className="space-y-2 px-3 py-3">
+                      <p className="text-xs leading-5 text-ink-muted">{short.detail}（{Math.round(short.durationSeconds)}秒）</p>
+                      <a href={short.src} download={short.downloadName}
+                        className="inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4 hover:no-underline">
+                        動画を保存 ↓
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs leading-5 text-ink-muted">
+                時刻帯は配信中の目安です。YouTubeの原曲公式MVは「この回に歌った曲」から開けます。
+              </p>
+            </div>
+          ) : null}
           <ul className="mt-3 space-y-3">
             {recap.highlights.map((highlight) => (
               <li
