@@ -32,6 +32,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
+import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
 import { site } from "./site.ts";
 import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
@@ -264,6 +265,18 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-13-x-first-cosplay-red-riding-hood",
+    date: "2026-10-13",
+    sameDayOrder: 808,
+    activityIds: ["miss-circle"],
+    title: "人生初コスプレは赤ずきん🍎 三つ編みショット4枚",
+    body: "本人Xの10月13日8:08（日本時間）の投稿で、四次審査の応援への感謝とともに、人生初のコスプレとして赤ずきん姿を披露しました。赤いフードと三つ編み、白いエプロンの衣装を、寄りのショットから全身写真まで4枚で楽しめます。\n\n投稿では同日21:30からのSHOWROOM配信も案内しています。これは投稿時点の告知であり、現在の配信状況や確定予定を示すものではありません。",
+    source: RED_RIDING_HOOD_X_URL,
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    media: redRidingHoodNewsImages[0],
+    additionalMedia: redRidingHoodNewsImages.slice(1),
+  },
   {
     id: "2026-10-12-fourth-round-final-day-story",
     date: "2026-10-12",

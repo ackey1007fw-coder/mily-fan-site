@@ -17,6 +17,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-13-x-first-cosplay-red-riding-hood",
   "2026-10-12-fourth-round-final-day-story",
   "2026-10-11-x-fourth-round-final-day-peace",
   "2026-10-07-tiktok-ribbon",
@@ -67,5 +68,5 @@ for (let index = galleryVideos.length - 1; index >= 0; index--) {
   if (newVideoIds.has(galleryVideos[index].id)) galleryVideos.splice(index, 1);
 }
 for (let index = media.length - 1; index >= 0; index--) {
-  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id)) media.splice(index, 1);
+  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id) || media[index].id.startsWith("mily-b219-")) media.splice(index, 1);
 }
