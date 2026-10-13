@@ -59,6 +59,7 @@ export const streamRecap20261012Night: StreamRecap = {
       artist: "超ときめき♡宣伝部",
       timestamp: "0:24:20",
       youtubeUrl: "https://www.youtube.com/watch?v=Yeahpo-0Ub4",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=Wuyx1pDlDvg", channel: "カラオケ歌っちゃ王" },
     },
     {
       title: "ヘビーローテーション",
@@ -71,12 +72,14 @@ export const streamRecap20261012Night: StreamRecap = {
       artist: "＝LOVE",
       timestamp: "0:40:00",
       youtubeUrl: "https://www.youtube.com/watch?v=F3P8vcZkIh4",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=r6dpqf5CRjA", channel: "カラオケ歌っちゃ王" },
     },
     {
       title: "Mela!",
       artist: "緑黄色社会",
       timestamp: "0:49:02",
       youtubeUrl: "https://www.youtube.com/watch?v=aRDURmIYBZ4",
+      karaoke: { youtubeUrl: "https://www.youtube.com/watch?v=W5ykal8c4rY", channel: "カラオケ歌っちゃ王" },
     },
     {
       title: "ファンサ",
@@ -164,6 +167,6 @@ export const streamRecap20261012Night: StreamRecap = {
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
     stills: "静止画は当日の保存録画から切り出した実フレーム12枚です。",
     extra:
-      "配信全体の自動文字起こし411チャンクと保存映像の実フレームを照合しました。全編の手動実聴・逐語校正は未実施です。歌唱した5曲の曲名は自動文字起こしの歌唱区間を原曲の公表歌詞と照合し、アーティスト公式YouTubeの動画で確認しました。歌詞、個別のリスナー名、ギフトや順位の未確定数値は掲載していません。録画開始21:00頃は配信全体の開始時刻を確定する情報ではなく、約138分は保存録画の長さです。SHOWROOM審査は21:59までで、その後もおしゃべりが続きました。",
+      "配信全体の自動文字起こし411チャンクと保存映像の実フレームを照合しました。全編の手動実聴・逐語校正は未実施です。歌唱した5曲の曲名は自動文字起こしの歌唱区間と原曲の公表歌詞を照合し、アーティスト・レーベルのYouTube動画で確認しました。歌詞、個別のリスナー名、ギフトや順位の未確定数値は掲載していません。録画開始21:00頃は配信全体の開始時刻を確定する情報ではなく、約138分は保存録画の長さです。SHOWROOM審査は21:59までで、その後もおしゃべりが続きました。",
   }),
 };
