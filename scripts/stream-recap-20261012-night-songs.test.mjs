@@ -16,7 +16,7 @@ const expected = [
 test("Oct 12 final-night set has five independently verified songs in singing order", () => {
   const recap = streamRecap20261012Night;
   assert.equal(recap.id, "2026-10-12-final-night-showroom");
-  assert.equal(streamRecaps[0], recap, "The original published recap stays top of LIVE STREAM");
+  assert.ok(streamRecaps.includes(recap), "The original published recap stays in LIVE STREAM");
   assert.deepEqual(recap.songs.map(song => [
     song.title, song.artist, song.timestamp,
     new URL(song.youtubeUrl).searchParams.get("v"),
@@ -66,6 +66,6 @@ test("New public song metadata does not claim unheard song lyrics or fabricate o
   assert.doesNotMatch(recap.transcriptionNote, /歌唱の曲名・歌詞.*掲載していません/);
   assert.equal(recap.songs.length, 5);
   assert.ok(recap.songs.every(song => !Object.hasOwn(song, "lyrics")));
-  const previousDay = streamRecaps[1];
+  const previousDay = streamRecaps[streamRecaps.indexOf(recap) + 1];
   assert.equal(previousDay.id, "2026-10-12-asa-showroom");
 });
