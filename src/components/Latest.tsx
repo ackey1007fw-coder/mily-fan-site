@@ -61,28 +61,6 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
     return <NewsAudioCard media={media} />;
   }
 
-  if (media.kind === "x-embed") {
-    return (
-      <div className="mx-auto mt-4 w-full max-w-sm overflow-hidden rounded-xl border border-sage/15 bg-sage-soft">
-        <iframe
-          title={media.alt}
-          src={`https://platform.twitter.com/embed/Tweet.html?id=${media.postId}&dnt=true`}
-          width="400"
-          height="590"
-          loading="lazy"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
-          className="h-[590px] w-full border-0"
-        />
-        <p className="px-3 py-3 text-sm">
-          <ExternalLink href={media.sourceUrl} className="font-medium text-sage hover:underline">
-            Xで元の動画を見る
-          </ExternalLink>
-        </p>
-      </div>
-    );
-  }
-
   if (media.kind === "video") {
     return (
       <video
@@ -135,6 +113,26 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
       {newsDisplayMedia(item).map((media) => (
         <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
+      {item.xEmbed ? (
+      <div className="mx-auto mt-4 w-full max-w-sm overflow-hidden rounded-xl border border-sage/15 bg-sage-soft">
+        <iframe
+          title={item.xEmbed.alt}
+          src={`https://platform.twitter.com/embed/Tweet.html?id=${item.xEmbed.postId}&dnt=true`}
+          width="400"
+          height="590"
+          loading="lazy"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+          className="h-[590px] w-full border-0"
+        />
+        <p className="px-3 py-3 text-sm">
+          <ExternalLink href={item.xEmbed.sourceUrl} className="font-medium text-sage hover:underline">
+            Xで元の動画を見る
+          </ExternalLink>
+        </p>
+      </div>
+      ) : null}
+
       {item.source ||
       item.sourceLabel ||
       item.additionalSources?.length ||
