@@ -49,5 +49,6 @@ test("Analytics are public anonymous aggregates without supporter names or link 
   assert.ok(json.includes("13:29〜13:35頃"));
   assert.ok(json.includes("607"));
   assert.ok(recap.highlights.some(h=>h.title.includes("きら星")));
-  assert.ok(!recap.highlights.some(h=>(h.relatedLinks??[]).length));
+  const dataLabLink=recap.highlights.flatMap(h=>h.relatedLinks??[])[0];
+  assert.equal(dataLabLink.url,"/data-lab/#noon-20261014");
 });
