@@ -48,6 +48,6 @@ test("Analytics are public anonymous aggregates without supporter names or link 
   assert.doesNotMatch(json,/chatgpt\.site|drive\.google|@gmail\.com|viewer[_-]?id|comment_text|gift_log/);
   assert.ok(json.includes("13:29〜13:35頃"));
   assert.ok(json.includes("607"));
-  const link=recap.highlights.flatMap(x=>x.relatedLinks??[])[0];
-  assert.equal(link.url,"https://mily-fan-site.vercel.app/data-lab/#noon-20261014");
+  assert.ok(recap.highlights.some(h=>h.title.includes("きら星")));
+  assert.ok(!recap.highlights.some(h=>(h.relatedLinks??[]).length));
 });

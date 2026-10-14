@@ -65,12 +65,6 @@ export const streamRecap20261014Noon: StreamRecap = {
       timestamp: "1:10:00",
       title: "13:30台のきら星の山",
       body: "匿名集計では13:29〜13:35頃にきら星表示が607増加。増加のきっかけとなった話題は未確認です。",
-      relatedLinks: [
-        {
-          label: "MILY SIGNALの匿名集計を見る",
-          url: "https://mily-fan-site.vercel.app/data-lab/#noon-20261014",
-        },
-      ],
     },
     {
       timestamp: "1:43:40",
