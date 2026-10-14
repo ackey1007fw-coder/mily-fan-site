@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM post-fourth-round daytime broadcast",
+  "date_jst": "2026-10-14",
+  "slot": "noon",
+  "live_id": 23552113,
+  "scope": "public anonymized counter aggregates only",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed"
+  },
+  "recording_processing_window_jst": {
+    "start": "2026-10-14T12:19:28+09:00",
+    "end": "2026-10-14T14:04:07+09:00",
+    "not_equal_to_confirmed_broadcast_start_end": true
+  },
+  "observed_screen": {
+    "last_valid_screen_saved_at_jst": "2026-10-14T14:04:47.806+09:00",
+    "screen_clock_lag_seconds_approx": 82,
+    "stars": 3866,
+    "total_visits": 350,
+    "comments": 416,
+    "first_visits": 35,
+    "second_visits": 29
+  },
+  "same_day_morning": {
+    "live_id": 23551572,
+    "stars": 3476,
+    "total_visits": 278,
+    "comments": 370,
+    "first_visits": 8,
+    "broadcast_duration_seconds_approx": 5744
+  },
+  "peaks": [
+    {
+      "metric": "stars",
+      "observed_start_jst": "13:29:58.718",
+      "observed_end_jst": "13:34:59.965",
+      "delta": 607
+    },
+    {
+      "metric": "visits",
+      "observed_start_jst": "13:34:59.965",
+      "observed_end_jst": "13:39:20.341",
+      "delta": 47
+    },
+    {
+      "metric": "comments",
+      "observed_start_jst": "13:49:45.035",
+      "observed_end_jst": "13:54:42.739",
+      "delta": 31
+    }
+  ],
+  "five_minute_window_endpoints": [
+    {
+      "window_end_observed_at_jst": "12:29:55.704",
+      "stars": 401,
+      "visits": 28,
+      "comments": 35
+    },
+    {
+      "window_end_observed_at_jst": "12:34:51.085",
+      "stars": 601,
+      "visits": 28,
+      "comments": 54
+    },
+    {
+      "window_end_observed_at_jst": "12:39:52.552",
+      "stars": 801,
+      "visits": 35,
+      "comments": 78
+    },
+    {
+      "window_end_observed_at_jst": "12:44:51.026",
+      "stars": 1029,
+      "visits": 45,
+      "comments": 104
+    },
+    {
+      "window_end_observed_at_jst": "12:49:53.843",
+      "stars": 1159,
+      "visits": 57,
+      "comments": 113
+    },
+    {
+      "window_end_observed_at_jst": "12:54:52.862",
+      "stars": 1359,
+      "visits": 72,
+      "comments": 126
+    },
+    {
+      "window_end_observed_at_jst": "12:59:46.978",
+      "stars": 1375,
+      "visits": 84,
+      "comments": 137
+    },
+    {
+      "window_end_observed_at_jst": "13:04:56.192",
+      "stars": 1575,
+      "visits": 96,
+      "comments": 152
+    },
+    {
+      "window_end_observed_at_jst": "13:09:48.050",
+      "stars": 1775,
+      "visits": 110,
+      "comments": 171
+    },
+    {
+      "window_end_observed_at_jst": "13:14:35.511",
+      "stars": 1935,
+      "visits": 123,
+      "comments": 190
+    },
+    {
+      "window_end_observed_at_jst": "13:19:54.959",
+      "stars": 1986,
+      "visits": 138,
+      "comments": 220
+    },
+    {
+      "window_end_observed_at_jst": "13:24:44.487",
+      "stars": 1987,
+      "visits": 147,
+      "comments": 241
+    },
+    {
+      "window_end_observed_at_jst": "13:29:58.718",
+      "stars": 2089,
+      "visits": 167,
+      "comments": 265
+    },
+    {
+      "window_end_observed_at_jst": "13:34:59.965",
+      "stars": 2696,
+      "visits": 195,
+      "comments": 295
+    },
+    {
+      "window_end_observed_at_jst": "13:39:20.341",
+      "stars": 2917,
+      "visits": 242,
+      "comments": 309
+    },
+    {
+      "window_end_observed_at_jst": "13:44:26.654",
+      "stars": 2958,
+      "visits": 267,
+      "comments": 327
+    },
+    {
+      "window_end_observed_at_jst": "13:49:45.035",
+      "stars": 3440,
+      "visits": 292,
+      "comments": 348
+    },
+    {
+      "window_end_observed_at_jst": "13:54:42.739",
+      "stars": 3660,
+      "visits": 308,
+      "comments": 379
+    },
+    {
+      "window_end_observed_at_jst": "13:59:55.470",
+      "stars": 3860,
+      "visits": 327,
+      "comments": 405
+    },
+    {
+      "window_end_observed_at_jst": "14:04:47.806",
+      "stars": 3866,
+      "visits": 350,
+      "comments": 416
+    }
+  ],
+  "methodological_note": "Five-minute windows' last observable aggregate counts. Recording-processing time is not confirmed broadcast duration. The last display was stored at 14:04:47.806 with about 82s UI clock lag. Reconnection and missing windows mean these values are not official gifts, unique people or event points. No interpolation or asserted cause of changes. Raw data and individuals are not published.",
+  "provenance": "Aggregated reference observations of SHOWROOM public counters, supplied and confirmed 2026-10-14; no personal records, comments, recordings or private links."
+}
