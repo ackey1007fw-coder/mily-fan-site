@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM post-fourth-round night broadcast",
+  "date_jst": "2026-10-14",
+  "slot": "night",
+  "live_id": 23554271,
+  "scope": "public anonymized availability and recording metadata only",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed"
+  },
+  "recording_processing_window_jst": {
+    "start": "2026-10-14T22:02:09+09:00",
+    "end": "2026-10-14T23:12:11+09:00",
+    "not_equal_to_confirmed_broadcast_start_end": true
+  },
+  "recording": {
+    "exists": true,
+    "ffmpeg_reported_success": true,
+    "media_duration_seconds_approx": 4088.738,
+    "complete_coverage_confirmed": false
+  },
+  "observed_screen": {
+    "stars": null,
+    "total_visits": null,
+    "comments": null,
+    "first_visits": null,
+    "second_visits": null,
+    "star100_supporters": null
+  },
+  "screen_values_status": "not_found_for_this_live_in_checked_collector_store; may be recovered from other sources",
+  "timeline_status": "no verified online counter timeline for this live in checked store",
+  "last_valid_online_screen_at_jst": null,
+  "method": "Missing values are null, not zero. Do not copy counters from morning/noon or infer from points. Saved video may have gaps from HLS errors; content and audio unreviewed.",
+  "privacy": "No personal viewer information, recordings, comments, individual rankings, or raw logs are published.",
+  "provenance": "Local recorder summary and duration metadata checked on 2026-10-14; no broadcast content or confirmed online counter values verified."
+}
