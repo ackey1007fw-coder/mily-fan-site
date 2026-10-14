@@ -11,7 +11,7 @@ describe("2026-10-14 X red riding hood lip video", () => {
     assert.equal(source.split(id).length - 1, 1);
     const item = source.slice(source.indexOf(id), source.indexOf(id) + 1000);
     assert.match(item, /date: "2026-10-14"/);
-    assert.match(item, /kind: "x-embed"/);
+    assert.match(item, /xEmbed: \{/);
     assert.match(item, /postId: "2110302889927430480"/);
     assert.match(item, /https:\/\/x\.com\/mily_chan36\/status\/2110302889927430480/);
     assert.match(item, /赤ずきん/);
@@ -22,11 +22,11 @@ describe("2026-10-14 X red riding hood lip video", () => {
 
   it("uses an official X embed and a permanent fallback link, without hotlinking X CDN", async () => {
     const latest = await read("src/components/Latest.tsx");
-    assert.match(latest, /media\.kind === "x-embed"/);
+    assert.ok(latest.includes("{item.xEmbed ? ("));
     assert.match(latest, /platform\.twitter\.com\/embed\/Tweet\.html/);
     assert.match(latest, /dnt=true/);
     assert.match(latest, /loading="lazy"/);
-    assert.match(latest, /href=\{media\.sourceUrl\}/);
+    assert.match(latest, /href=\{item\.xEmbed\.sourceUrl\}/);
     assert.match(latest, /Xで元の動画を見る/);
     assert.doesNotMatch(latest, /video\.twimg\.com/);
   });
