@@ -1,3 +1,16 @@
+# 2026-10-15：10月14日夜・SNS向け2ショート（b223）
+
+- サイトオーナー依頼に基づき同日夜SHOWROOMの保存録画から2本を制作。①録画先頭8:08〜8:34のダブルピース（カバー8:20）、②41:58〜42:24の両手ハート（カバー42:20）。
+- それぞれ実映像・原音26秒＋正式カバー1.5秒、合計約27.52秒。縦720×1280、30fps、H.264/AAC。本人の元640×360映像を全画角保持して中央表示、追加BGM・字幕・顔生成・顔補正なし。
+- 元映像に視聴者名・アバター・コメント欄は含まれていない。原動画・非公開原音・全文文字起こしは公開リポジトリに追加しない。録画内時刻は実配信の時刻を確定するものではない。
+- 4素材はSNSのHTTPSアップロード専用にpublic/media/liveへ保存。既存LIVE STREAM、NEWS、Gallery、予定、プロフィール、他配信本文は変更しない。関連レポートは2026-10-14-night-showroom。
+- SNS投稿時はアカウント、表紙、配信回、本文のリンクと本人メンション、既存投稿の重複を別途検査する。YouTubeは応援アーカイブの限定公開。SNS掲載結果は別途照合する。
+
+- public/media/live/mily-b223-01-20261014-night-double-peace.mp4 : 2770496 bytes, SHA-256 7c36ffdbf9b19027001e3c5f36f887cb8695ca59a25bc9b83a21fbace1cdb263
+- public/media/live/mily-b223-02-20261014-night-double-peace-cover.jpg : 169132 bytes, SHA-256 d3a70b08afd56c8fbda79f1a0dda74c2e7f3ee3177329fb79a46b82c5b6e66b2
+- public/media/live/mily-b223-03-20261014-night-heart.mp4 : 2926244 bytes, SHA-256 8abbb5020aee8fffdd41c2218ec109dbada27cd2585094ba7e528c36cbc02922
+- public/media/live/mily-b223-04-20261014-night-heart-cover.jpg : 166305 bytes, SHA-256 5a19451151df415e313aefa75e9474e752f8c2ee83fe87e78d12ef8ca43cb485
+
 ## b222 — 2026-10-14 夜SHOWROOM・LIVE STREAM実フレーム10枚（2026-10-15受入）
 
 - **掲載許可と掲載面**：サイトオーナーが当日の配信画面を直接提供し、10月14日夜のLIVE STREAM記事への掲載を依頼した。写真は当該記事のスクショ欄だけに掲載し、NEWS・Gallery・他のSNS・他回の記事へ再利用しない。
