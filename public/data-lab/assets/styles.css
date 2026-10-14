@@ -46,3 +46,9 @@ footer{border-top:1px solid #2c4657;padding:30px 0 45px;color:var(--muted);font-
 .morning-table td b{color:#ffb39c}
 @media(max-width:800px){.morning-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}}
 @media(max-width:380px){.morning-kpis>div{padding:13px}.morning-kpis strong{font-size:25px}.morning-table th,.morning-table td{font-size:11px;padding:8px 3px}}
+
+/* Fix: small viewports must not inherit table min-content width. */
+.morning-chart-card,.morning-compare-card{overflow:hidden}
+.morning-table{table-layout:fixed;max-width:100%}
+.morning-table th,.morning-table td{white-space:normal;overflow-wrap:anywhere;word-break:normal}
+@media(max-width:960px){.morning-update .pred-grid{grid-template-columns:minmax(0,1fr)}}
