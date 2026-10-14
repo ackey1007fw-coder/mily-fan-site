@@ -22,6 +22,7 @@ import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
 import { NewsImage } from "./NewsImage";
 import { TikTokEmbedCard } from "./TikTokEmbedCard";
+import { XEmbedCard } from "./XEmbedCard";
 
 function NewsLink({
   href,
@@ -113,6 +114,8 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
       {newsDisplayMedia(item).map((media) => (
         <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
+      {item.xEmbed ? <XEmbedCard embed={item.xEmbed} /> : null}
+
       {item.source ||
       item.sourceLabel ||
       item.additionalSources?.length ||
