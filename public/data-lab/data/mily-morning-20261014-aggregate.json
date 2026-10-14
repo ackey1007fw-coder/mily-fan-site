@@ -4,7 +4,7 @@
   "date_jst": "2026-10-14",
   "scope": "anonymized counter aggregate display only",
   "event_partition": {
-    "fourth_round_ended_jst": "2026-10-12T22:00:00+09:00",
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
     "this_broadcast_excluded_from_fourth_round_total": true,
     "new_event_identity": "unconfirmed"
   },
