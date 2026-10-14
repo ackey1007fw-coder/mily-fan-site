@@ -53,6 +53,12 @@ export const streamRecap20261013Night: StreamRecap = {
       body:
         "赤ずきん写真をサムネイルにするアイデアや写真の話も。見つけてもらうための工夫をリスナーと一緒に考えました。",
     },
+    {
+      timestamp: "0:25:22",
+      title: "交通案内でひと笑い",
+      body:
+        "交通情報を読む流れになり、道路案内をアナウンサー風に披露。次々に飛び出す話題へユーモアたっぷりに応じました。",
+    },
   ],
   goals: [],
   ranking: [],
@@ -65,6 +71,8 @@ export const streamRecap20261013Night: StreamRecap = {
     { timestamp: "0:15:32", label: "今夜配信した理由" },
     { timestamp: "0:17:48", label: "配信サムネイルと写真の話" },
     { timestamp: "0:22:25", label: "言葉遊びと楽しいやり取り" },
+    { timestamp: "0:25:22", label: "交通情報をアナウンサー風に" },
+    { timestamp: "0:34:02", label: "リスナーとのおしゃべり" },
   ],
   nextNote: "",
   sourceLabel:
