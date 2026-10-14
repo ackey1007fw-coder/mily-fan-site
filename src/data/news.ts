@@ -174,6 +174,15 @@ export type NewsVideoMedia = {
   alt: string;
 };
 
+/** Official X post iframe: X video/CDN assets are not copied or hotlinked. */
+export type NewsXEmbedMedia = {
+  kind: "x-embed";
+  /** Numeric X post ID, used only by the official embed endpoint. */
+  postId: string;
+  sourceUrl: string;
+  alt: string;
+};
+
 /** Self-hosted still image that belongs to the post itself, not the Gallery. */
 export type NewsImageMedia = {
   kind: "image";
@@ -203,6 +212,7 @@ export type NewsAudioMedia = {
 
 export type NewsMedia =
   | NewsVideoMedia
+  | NewsXEmbedMedia
   | NewsImageMedia
   | NewsMixchMedia
   | NewsAudioMedia
@@ -213,6 +223,7 @@ export function isNewsAudio(media: NewsMedia): media is NewsAudioMedia {
 }
 
 export function newsMediaKey(media: NewsMedia): string {
+  if (media.kind === "x-embed") return `x-embed:${media.postId}`;
   return media.kind === "mixch" || media.kind === "tiktok"
     ? `${media.kind}:${media.id}`
     : `${media.kind}:${media.src}`;
@@ -265,6 +276,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-14-x-redhood-lip-gloss-video",
+    date: "2026-10-14",
+    sameDayOrder: 1833,
+    title: "赤ずきんみりぃのリップ動画💄",
+    body: "10月14日の本人X投稿から、赤いフードと三つ編み姿のみりぃが、リップを手に取って唇に塗る短い動画を紹介します。オーナー提供の実映像で確認できる、約17秒のワンシーンです。\n\n下のX公式プレーヤーで表示できない場合は、元投稿のリンクからご覧ください。投稿本文の未確認部分は引用していません。",
+    source: "https://x.com/mily_chan36/status/2110302889927430480",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    media: {
+      kind: "x-embed",
+      postId: "2110302889927430480",
+      sourceUrl: "https://x.com/mily_chan36/status/2110302889927430480",
+      alt: "赤ずきん姿のみりぃがリップを塗る短いX動画",
+    },
+  },
   {
     id: "2026-10-13-x-first-cosplay-red-riding-hood",
     date: "2026-10-13",
