@@ -22,12 +22,14 @@ describe("2026-10-14 X red riding hood lip video", () => {
 
   it("uses an official X embed and a permanent fallback link, without hotlinking X CDN", async () => {
     const latest = await read("src/components/Latest.tsx");
-    assert.ok(latest.includes("{item.xEmbed ? ("));
-    assert.match(latest, /platform\.twitter\.com\/embed\/Tweet\.html/);
-    assert.match(latest, /dnt=true/);
-    assert.match(latest, /loading="lazy"/);
-    assert.match(latest, /href=\{item\.xEmbed\.sourceUrl\}/);
-    assert.match(latest, /Xで元の動画を見る/);
-    assert.doesNotMatch(latest, /video\.twimg\.com/);
+    const card = await read("src/components/XEmbedCard.tsx");
+    assert.match(latest, /<XEmbedCard embed=\{item\.xEmbed\} \/>/);
+    assert.doesNotMatch(latest, /<iframe/);
+    assert.match(card, /platform\.twitter\.com\/embed\/Tweet\.html/);
+    assert.match(card, /dnt=true/);
+    assert.match(card, /loading="lazy"/);
+    assert.match(card, /href=\{embed\.sourceUrl\}/);
+    assert.match(card, /Xで元の動画を見る/);
+    assert.doesNotMatch(card, /video\.twimg\.com/);
   });
 });
