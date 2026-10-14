@@ -13,26 +13,10 @@ export const streamRecap20261014Night: StreamRecap = {
   platformLabel: "SHOWROOM",
   summary:
     "10月14日夜のみりぃのSHOWROOM配信は、保存録画が確認できました。今回の配信内容や会話の見どころはまだ音声照合できていません。きら星・訪問・コメントの夜枠の数値も確認できていないため、推測で補わず、確認済みの録画記録を先に公開しています。",
-  highlights: [
-    {
-      timestamp: "0:00:00",
-      title: "10月14日夜の配信を保存",
-      body:
-        "22:02頃に録画処理が始まりました。これは保存処理の開始時刻であり、SHOWROOM上の正確な配信開始時刻を確定するものではありません。",
-    },
-    {
-      timestamp: "1:08:09",
-      title: "約68分の保存映像",
-      body:
-        "録画ファイルの存在と再生時間を確認しました。途中に通信エラーが記録されているため、全区間を欠けなく保存できたとは断定していません。トークの詳細は映像・音声の確認後に追記します。",
-    },
-  ],
+  highlights: [],
   goals: [],
   ranking: [],
-  timeline: [
-    { timestamp: "0:00:00", label: "22:02頃 録画処理開始" },
-    { timestamp: "1:08:09", label: "保存映像の末尾（録画終了確認は23:12頃）" },
-  ],
+  timeline: [],
   nextNote: "",
   sourceLabel: "2026年10月14日 夜のSHOWROOM配信（保存録画のメタデータ確認）",
   verifiedAt: "2026-10-14",
