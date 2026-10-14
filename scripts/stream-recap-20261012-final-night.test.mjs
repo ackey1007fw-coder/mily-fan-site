@@ -9,12 +9,13 @@ import { streamRecaps } from "../src/data/streamRecaps.ts";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const target = streamRecaps.find(item => item.id === "2026-10-12-final-night-showroom");
-const first = streamRecaps[0];
+const targetIndex = streamRecaps.findIndex(item => item.id === "2026-10-12-final-night-showroom");
 
-test("10/12 final night is the first LIVE recap and older morning report survives", () => {
+test("10/12 final night and its older morning report survive newer recaps", () => {
   assert.ok(target);
-  assert.equal(first.id, target.id);
-  assert.equal(streamRecaps[1].id, "2026-10-12-asa-showroom");
+  assert.ok(targetIndex >= 0);
+  assert.equal(streamRecaps[targetIndex], target);
+  assert.equal(streamRecaps[targetIndex + 1].id, "2026-10-12-asa-showroom");
   assert.equal(target.date, "2026-10-12");
   assert.match(target.theme, /^夜/);
   assert.match(target.broadcastLabel, /^録画開始21:00頃〜 約138分$/);
