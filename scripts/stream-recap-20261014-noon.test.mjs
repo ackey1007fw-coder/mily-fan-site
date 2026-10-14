@@ -13,7 +13,8 @@ test("October 14 noon recap uses original visual evidence without inventing a tr
   assert.equal(recap.broadcastLabel,"録画開始12:19頃〜 約105分");
   assert.equal(recap.platformLabel,"SHOWROOM");
   assert.equal(streamRecaps[0],recap);
-  assert.equal(streamRecaps[1].id,"2026-10-13-night-showroom");
+  assert.equal(streamRecaps[1].id,"2026-10-14-morning-showroom");
+  assert.equal(streamRecaps[2].id,"2026-10-13-night-showroom");
   assert.equal(recap.highlights.length,6);
   assert.deepEqual(recap.goals,[]);
   assert.deepEqual(recap.ranking,[]);
