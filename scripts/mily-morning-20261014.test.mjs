@@ -25,6 +25,10 @@ test("the new event is not mixed with October 12 contest and cannot be read as o
   assert.equal(data.date_jst,"2026-10-14");
   assert.equal(data.event_partition.this_broadcast_excluded_from_fourth_round_total,true);
   assert.equal(data.event_partition.new_event_identity,"unconfirmed");
+  assert.equal(data.event_partition.analysis_cutoff_jst,"2026-10-12T22:00:00+09:00");
+  assert.ok(!Object.hasOwn(data.event_partition,"fourth_round_ended_jst"));
+  assert.match(css,/\.morning-table\{table-layout:fixed;max-width:100%;min-width:0\}/);
+  assert.match(page,/2026\.10\.12 四次審査の記録 ＋ 2026\.10\.14 朝の観測/);
   assert.equal(data.observed_screen.stars,3476);
   assert.equal(data.observed_screen.total_visits,278);
   assert.equal(data.observed_screen.comments,370);
