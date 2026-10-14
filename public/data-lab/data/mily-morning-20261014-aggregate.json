@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM post-fourth-round broadcast",
+  "date_jst": "2026-10-14",
+  "scope": "anonymized counter aggregate display only",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed"
+  },
+  "observed_screen": {
+    "start_label_jst": "2026-10-14 07:22:25",
+    "last_valid_online_observed_at_jst": "2026-10-14T08:59:07+09:00",
+    "stars": 3476,
+    "total_visits": 278,
+    "comments": 370,
+    "first_visits": 8,
+    "second_visits": 17,
+    "star_100_contributor_count": 33,
+    "recommended_commenter_count": 38,
+    "other_free": 91,
+    "new_follows": 0
+  },
+  "previous_morning": {
+    "date_jst": "2026-10-13",
+    "duration_seconds": 2226,
+    "stars": 2034,
+    "total_visits": 215,
+    "comments": 263,
+    "first_visits": 2,
+    "star_100_contributor_count": 19
+  },
+  "broadcast_duration_seconds": 5744,
+  "early_approx_37min_observation": {
+    "observed_at_jst": "2026-10-14T07:59:16+09:00",
+    "stars": 1750,
+    "total_visits": 109,
+    "comments": 168
+  },
+  "five_minute_window_endpoints": [
+    {
+      "window_start_jst": "07:20",
+      "stars": 200,
+      "visits": null,
+      "comments": 17
+    },
+    {
+      "window_start_jst": "07:25",
+      "stars": 600,
+      "visits": 18,
+      "comments": 40
+    },
+    {
+      "window_start_jst": "07:30",
+      "stars": 1000,
+      "visits": 34,
+      "comments": 65
+    },
+    {
+      "window_start_jst": "07:35",
+      "stars": 1200,
+      "visits": 57,
+      "comments": 81
+    },
+    {
+      "window_start_jst": "07:40",
+      "stars": 1400,
+      "visits": 75,
+      "comments": 94
+    },
+    {
+      "window_start_jst": "07:45",
+      "stars": 1620,
+      "visits": 90,
+      "comments": 113
+    },
+    {
+      "window_start_jst": "07:50",
+      "stars": 1730,
+      "visits": 96,
+      "comments": 140
+    },
+    {
+      "window_start_jst": "07:55",
+      "stars": 1780,
+      "visits": 109,
+      "comments": 168
+    },
+    {
+      "window_start_jst": "08:00",
+      "stars": 1860,
+      "visits": 115,
+      "comments": 187
+    },
+    {
+      "window_start_jst": "08:05",
+      "stars": 2260,
+      "visits": 131,
+      "comments": 210
+    },
+    {
+      "window_start_jst": "08:10",
+      "stars": 2270,
+      "visits": 153,
+      "comments": 231
+    },
+    {
+      "window_start_jst": "08:15",
+      "stars": 2470,
+      "visits": 172,
+      "comments": 249
+    },
+    {
+      "window_start_jst": "08:20",
+      "stars": 2480,
+      "visits": 183,
+      "comments": 258
+    },
+    {
+      "window_start_jst": "08:25",
+      "stars": 2580,
+      "visits": 193,
+      "comments": 276
+    },
+    {
+      "window_start_jst": "08:30",
+      "stars": 2750,
+      "visits": 205,
+      "comments": 292
+    },
+    {
+      "window_start_jst": "08:35",
+      "stars": 2980,
+      "visits": 224,
+      "comments": 307
+    },
+    {
+      "window_start_jst": "08:40",
+      "stars": 2980,
+      "visits": 224,
+      "comments": 327
+    },
+    {
+      "window_start_jst": "08:45",
+      "stars": 3120,
+      "visits": 239,
+      "comments": 345
+    },
+    {
+      "window_start_jst": "08:50",
+      "stars": 3370,
+      "visits": 257,
+      "comments": 360
+    },
+    {
+      "window_start_jst": "08:55",
+      "stars": 3476,
+      "visits": 278,
+      "comments": 370
+    }
+  ],
+  "methodological_note": "Values come from final valid ONLINE counter screen and 5-minute windows' last observed counter values. These are not official confirmed gifts, unique visitors, or event points; observed data have reconnection and incomplete coverage. No raw comments, individual rankings, user IDs, recordings, private source URLs, or supporter identities are included.",
+  "provenance": "normal visible aggregate counter display (nao.qa), owner-authorized private observation reviewed on 2026-10-14"
+}
