@@ -45,6 +45,7 @@ export const activities: Activity[] = [
     relatedHighlightIds: [
       "miss-circle-2026-entry-734",
       "miss-circle-2026-third-round",
+      "miss-circle-2026-semifinal-advance",
     ],
     relatedStorySlugs: [
       "2026-08-25-motivation",
