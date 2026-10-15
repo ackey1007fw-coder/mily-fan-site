@@ -276,6 +276,34 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-15-miss-circle-semifinal-advance",
+    date: "2026-10-15",
+    sameDayOrder: 1718,
+    activityIds: ["miss-circle"],
+    title: "4次審査突破！みりぃ、セミファイナル進出🍅🎉",
+    body: "10月15日、みりぃ（三橋莉子）がMISS CIRCLE CONTEST 2026の4次審査を突破し、セミファイナル進出を報告しました。本人X投稿を公式埋め込みと元投稿リンクで紹介します。\n\nあわせてサイトオーナーから届いたInstagram Story動画では、三つ編み姿でカメラに向かうみりぃが「4次審査突破!! セミファイナル進出!!」と報告。4次審査で応援してくれたみんなへの感謝と「次も私らしく頑張ります！」という言葉を届けています。Story自体の投稿日は確認できていません。\n\nSHOWROOMファンルームの本人からの連絡へも下のリンクからアクセスできます。今回のファンルーム個別投稿は本文と時刻を直接照合できていないため、発言を推測して転載していません。\n\n主催者公式サイトの案内では、セミファイナル審査は10月下旬〜11月上旬（予定）。詳しい日程・審査方法は公式の続報をご確認ください。",
+    source: "https://x.com/mily_chan36/status/2110646575051747453",
+    sourceLabel: "みりぃ本人のX投稿（10月15日）",
+    additionalSources: [
+      { label: "主催者公式・セミファイナル審査予定", url: "https://www.misscircle.jp/" },
+    ],
+    xEmbed: {
+      postId: "2110646575051747453",
+      sourceUrl: "https://x.com/mily_chan36/status/2110646575051747453",
+      alt: "4次審査突破とセミファイナル進出を報告するみりぃのX投稿",
+    },
+    message: {
+      label: "Instagram Storyに重ねられた本人の言葉",
+      text: "4次審査突破‼ セミファイナル進出‼\n4次審査、たくさん応援してくれてありがとうございます🎀✨\n次も私らしく頑張ります！",
+    },
+    relatedUrl: "/activities/miss-circle/",
+    ctaLabel: "コンテストの歩みを見る",
+    additionalCtas: [
+      { label: "本人のSHOWROOMファンルームを見る", url: "https://www.showroom-live.com/room/fan_club?room_id=573253" },
+      { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
+    ],
+  },
+  {
     id: "2026-10-15-x-sleep-check-in",
     date: "2026-10-15",
     sameDayOrder: 1245,
