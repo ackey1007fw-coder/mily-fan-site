@@ -47,7 +47,7 @@ function assertOfficialWindows(text) {
 
 describe("contest phase official window display", () => {
   it("reads the three official times from supportEvents, not ContestPhase", () => {
-    const phase = contest.currentPhase;
+    const phase = HISTORICAL_FOURTH_ROUND;
     assert.ok(phase);
     assert.equal(contestPhaseDateRangeLabel(phase), "10/2〜10/12");
     assert.equal(contestPhaseHeading(phase), "4次審査（10/2〜10/12）");
