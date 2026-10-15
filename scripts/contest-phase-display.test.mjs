@@ -23,6 +23,13 @@ const WEB_LINE = "WEB投票 10/2 12:00〜10/12 23:59";
 const SHOWROOM_LINE = "SHOWROOM審査 10/3 5:00〜10/12 21:59";
 const SHOWROOM_END_LINE = "SHOWROOMは10/12 21:59終了";
 const OFFICIAL_LINES = [WEB_LINE, SHOWROOM_LINE, SHOWROOM_END_LINE];
+const HISTORICAL_FOURTH_ROUND = {
+  name: "4次審査",
+  start: "2026-10-02",
+  end: "2026-10-12",
+  source: "https://www.misscircle.jp/",
+};
+const historicalContest = { ...contest, currentPhase: HISTORICAL_FOURTH_ROUND };
 const THIRD_ROUND_LINES = [
   "WEB投票 9/3 12:00〜9/13 23:59",
   "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59",
