@@ -31,10 +31,20 @@ test("unobserved online counters remain unknown, not fabricated", () => {
   assert.equal(data.event_partition.this_broadcast_excluded_from_fourth_round_total,true);
   assert.equal(data.event_partition.new_event_identity,"unconfirmed");
   assert.equal(data.event_partition.semifinal_event_points_not_inferred,true);
-  for (const key of ["stars","total_visits","comments","first_visits","second_visits","star100_supporters"]) assert.equal(data.observed_screen[key],null);
-  assert.equal(data.last_valid_online_screen_at_jst,null);
+  assert.equal(data.observed_screen.stars,510);
+  assert.equal(data.observed_screen.comments,31);
+  assert.equal(data.observed_screen.confirmed_final,false);
+  assert.equal(data.observed_screen.observed_at_jst,"2026-10-15T22:03:19.379+09:00");
+  for (const key of ["total_visits","first_visits","second_visits","star100_supporters"]) assert.equal(data.observed_screen[key],null);
+  assert.equal(data.last_valid_online_screen_at_jst,"2026-10-15T22:03:19.379+09:00");
+  assert.equal(data.data_quality.online_counter_observations,16);
+  assert.equal(data.data_quality.full_broadcast_counter_coverage,false);
+  assert.equal(data.data_quality.ui_transient_zero_excluded,true);
+  assert.deepEqual(data.observed_points.map(p=>[p.stars,p.comments]),[[100,7],[300,31],[510,31],[510,31]]);
+  assert.ok(page.includes("冒頭3分の数字を救出"));
+  assert.ok(page.includes("22:01:33の一時的なゼロ戻り表示"));
   assert.equal(data.data_quality.full_playback_or_manual_audio_review,false);
-  assert.match(page,/0個という意味ではありません/);
+  assert.match(page,/0人ではありません/);
   assert.match(page,/10月15日朝/);
 });
 test("public artifacts contain no private source paths or viewer records", () => {
