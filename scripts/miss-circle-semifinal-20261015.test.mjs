@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
 import test from "node:test";
-import { news } from "../src/data/news.ts";
+import { news, newsDisplayMedia } from "../src/data/news.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { activities } from "../src/data/activities.ts";
 
@@ -36,7 +38,19 @@ test("10月15日の本人報告をNEWSに1件だけ追加し、本人XとStory�
   assert.match(item.body, /SHOWROOM審査は10月29日5:00〜11月7日21:59/);
   assert.match(item.body, /締切日が異なります/);
   assert.doesNotMatch(item.body, /10月下旬〜11月上旬|日程未確定/);
-  assert.equal(item.media, undefined, "転載許可済みの公開派生ファイルがないため、Storyや別日写真を自己ホストしたとは装わない");
+  assert.deepEqual(item.media, {
+    kind: "video",
+    src: "/media/gallery/mily-b224-01-semifinal-schedule-story.mp4",
+    poster: "/media/gallery/mily-b224-01-semifinal-schedule-story-poster.jpg",
+    width: 512,
+    height: 910,
+    alt: "セミファイナル審査の期間とWEB投票・SHOWROOM審査の日程が記された、音声なしの縦型告知動画",
+  });
+  assert.deepEqual(newsDisplayMedia(item), [item.media]);
+  const mp4 = readFileSync(new URL("../public/media/gallery/mily-b224-01-semifinal-schedule-story.mp4", import.meta.url));
+  const poster = readFileSync(new URL("../public/media/gallery/mily-b224-01-semifinal-schedule-story-poster.jpg", import.meta.url));
+  assert.equal(createHash("sha256").update(mp4).digest("hex"), "2185d89708e31a129b92bba8ec3eeff71031ce9e5eb03199cf7ee1bcc71e4c55");
+  assert.equal(createHash("sha256").update(poster).digest("hex"), "c4ea59f7a32da1c752258d0ad618d5fb0cc7b36901ebeaaf4011ceddcc219425");
 });
 
 test("進出記録をMISS CIRCLEの歩みに追加し、従来の4次審査投稿を残す", () => {
