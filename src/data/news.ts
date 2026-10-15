@@ -276,6 +276,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-15-x-sleep-check-in",
+    date: "2026-10-15",
+    sameDayOrder: 1245,
+    title: "「一緒に睡眠時間確保しようね」みりぃのX投稿😴",
+    body: "10月15日12:45（日本時間）、みりぃがXで、人生初めてレベルのオール（徹夜）をした近況を報告しました。手足に力が入らず「プルプル」と表現しつつ、みんなにも一緒に睡眠時間を確保しようと呼びかけています。\n\n少し心配になる近況を、いつもの明るい調子で伝えてくれた投稿。みりぃもみんなも、しっかり休めますように。元投稿の全文は本人のXでご覧ください。",
+    source: "https://x.com/mily_chan36/status/2110577902387622329",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    message: { label: "みりぃのひとこと", text: "一緒に睡眠時間確保しようね🥺🥺🥺" },
+  },
+  {
     id: "2026-10-14-x-redhood-lip-gloss-video",
     date: "2026-10-14",
     sameDayOrder: 1833,
