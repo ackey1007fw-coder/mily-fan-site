@@ -83,7 +83,7 @@ describe("contest phase official window display", () => {
     assert.match(afterPaton.note ?? "", /4次審査（10\/2〜10\/12）/);
 
     const today = selectSupportToday({
-      contest,
+      contest: historicalContest,
       streamSlots: [],
       streamRoomUrl: null,
       liveRoomUrl: null,
