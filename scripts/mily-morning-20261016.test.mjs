@@ -1,0 +1,57 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const read = path => readFileSync(new URL("../"+path,import.meta.url),"utf8");
+const html = read("data-lab/index.html");
+const raw = read("public/data-lab/data/mily-morning-20261016-aggregate.json");
+const d=JSON.parse(raw);
+test("October 16 morning appears first without replacing older live or contest snapshots",()=>{
+  for(const id of ["morning-20261016","night-20261015","morning-20261015","night-20261014","noon-20261014","morning-20261014","final-night","naoka-update","roster"])assert.ok(html.includes('id="'+id+'"'),id);
+  assert.ok(html.indexOf('id="morning-20261016"') < html.indexOf('id="night-20261015"'));
+  assert.ok(html.includes('href="#morning-20261016"'));
+  assert.match(html,/noindex,nofollow,noarchive/);
+  assert.equal(d.live_id,23559940);
+  assert.equal(d.event_partition.this_broadcast_excluded_from_fourth_round_total,true);
+  assert.equal(d.event_partition.new_event_identity,"unconfirmed");
+  assert.equal(d.event_partition.not_official_semifinal_event_points,true);
+});
+test("recording and last valid online snapshots are verified but not called broadcast-end totals",()=>{
+  assert.deepEqual([d.observed_screen.stars,d.observed_screen.total_visits,d.observed_screen.comments],[3643,247,338]);
+  assert.deepEqual([d.observed_screen.first_visits,d.observed_screen.second_visits,d.observed_screen.other_free,d.observed_screen.new_follows],[11,14,40,1]);
+  assert.deepEqual([d.observed_screen.star_100_contributor_count,d.observed_screen.recommended_commenter_count],[34,33]);
+  assert.equal(d.observed_screen.last_valid_online_observed_at_jst,"2026-10-16T07:32:54.641+09:00");
+  assert.equal(d.observed_screen.confirmed_final,false);
+  assert.equal(d.recording.ffmpeg_exit_code,0);
+  assert.equal(d.recording.saved,true);
+  assert.equal(d.recording.size_bytes,422068380);
+  assert.equal(d.recording.media_duration_seconds,3372.448);
+  assert.equal(d.recording.complete_coverage_confirmed,false);
+  assert.equal(d.recording_processing_window_jst.not_equal_to_confirmed_broadcast_start_end,true);
+  assert.equal(d.data_quality.ui_end_confirmed,true);
+  assert.equal(d.data_quality.ui_offline_observations,3);
+  assert.equal(d.data_quality.actual_broadcast_end_time_confirmed,false);
+  assert.match(html,/終了瞬間の数値は確認できていません/);
+});
+test("five-minute endpoint list and fair elapsed comparison are from separate observed sessions",()=>{
+  const points=d.five_minute_window_endpoints;
+  assert.equal(points.length,12);
+  assert.deepEqual([points[0].stars,points[0].total_visits,points[0].comments],[300,18,32]);
+  assert.deepEqual([points.at(-1).stars,points.at(-1).total_visits,points.at(-1).comments],[3643,247,338]);
+  assert.ok(points.every((p,i)=>i===0 || new Date(p.observed_at_jst)>new Date(points[i-1].observed_at_jst)));
+  for(const key of ["stars","total_visits","comments"])assert.ok(points.every((p,i)=>i===0||p[key]>=points[i-1][key]),key);
+  assert.equal(points[7].stars-points[6].stars,730);
+  assert.equal(d.largest_observed_window_delta.delta,730);
+  assert.deepEqual(d.same_elapsed_morning_comparison.entries.map(v=>[v.live_id,v.stars,v.total_visits,v.comments]),[[23555653,2755,187,195],[23559940,2151,128,191]]);
+  assert.match(html,/約27分30秒/);
+  assert.match(html,/補間しません/);
+});
+test("counter quality and public privacy boundary preserve unknown values and raw-data separation",()=>{
+  assert.equal(d.data_quality.online_counter_timeline_rows,324);
+  assert.equal(d.data_quality.valid_session_and_all_three_main_counters,311);
+  assert.equal(d.data_quality.excluded_or_incomplete_rows,13);
+  assert.equal(d.data_quality.capture_coverage_complete,false);
+  assert.equal(d.data_quality.participant_unique_count,null);
+  for(const source of [html,raw])assert.doesNotMatch(source,/chatgpt\.site|drive\.google|@gmail\.com|viewer[_-]?id|user[_-]?id|contributor[_-]?id|[A-Z]:\\Users\\/i);
+  for(const key of ["recording_file","file_path","raw_logs","raw_comments","raw_gifts","supporter_names","viewer_id","comment_text"])assert.equal(Object.hasOwn(d,key),false,key);
+  assert.ok(d.privacy.includes("No viewer identities"));
+});
