@@ -4,7 +4,7 @@
   "date_jst": "2026-10-15",
   "slot": "night",
   "live_id": 23558451,
-  "scope": "public non-identifying capture metadata only",
+  "scope": "public non-identifying early online UI reference counts and recording metadata only",
   "event_partition": {
     "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
     "this_broadcast_excluded_from_fourth_round_total": true,
@@ -34,25 +34,58 @@
     "full_content_reviewed": false
   },
   "observed_screen": {
-    "stars": null,
+    "stars": 510,
     "total_visits": null,
-    "comments": null,
+    "comments": 31,
     "first_visits": null,
     "second_visits": null,
-    "star100_supporters": null
+    "star100_supporters": null,
+    "observed_at_jst": "2026-10-15T22:03:19.379+09:00",
+    "capture_window_only": true,
+    "confirmed_final": false,
+    "visits_source_display_invalid": true
   },
-  "last_valid_online_screen_at_jst": null,
-  "screen_values_status": "not independently verified in reviewed recorder metadata",
-  "timeline_status": "no independently verified online counter timeline in reviewed materials",
+  "last_valid_online_screen_at_jst": "2026-10-15T22:03:19.379+09:00",
+  "screen_values_status": "verified star/comment screen observations only in first three minutes; visits displayed as invalid, full-broadcast final values unknown",
+  "timeline_status": "16 stored online UI observations from 22:00:19.516 to 22:03:19.379 JST, with gaps and one transient zero regression excluded",
   "data_quality": {
     "media_metadata_verified": true,
     "recorder_sidecar_saved_true": true,
     "transient_hls_errors_in_log": true,
     "expired_segment_skip_reported": true,
     "full_playback_or_manual_audio_review": false,
-    "screen_counter_coverage_confirmed": false
+    "screen_counter_coverage_confirmed": false,
+    "online_counter_observations": 16,
+    "online_observation_first_jst": "2026-10-15T22:00:19.516+09:00",
+    "online_observation_last_jst": "2026-10-15T22:03:19.379+09:00",
+    "total_visits_observable": false,
+    "ui_transient_zero_excluded": true,
+    "ui_capture_recovery_hold_after_retries": true,
+    "full_broadcast_counter_coverage": false
   },
-  "method": "Recording processing timestamps are not confirmed broadcast start/end. Duration is container metadata, not proof of uninterrupted capture. HLS log reports expired/skipped segments and transport errors. Missing star, visit, comment and first-visit figures are null (unknown), not zero. Do not infer missing time from process/media duration differences or copy other broadcasts' counts.",
+  "method": "Saved normal visible UI snapshots support only the numeric star and comment references from 22:00-22:03 JST. A transient zero regression at 22:01:33 is excluded, not treated as a reset or broadcast ending. The total visits field was invalid/unreadable, hence null, not zero. UI capture stopped around 22:03 after retry exhaustion; recording independently continued until 23:23. The 22:03 sample is NOT a broadcast final total. Video duration and process times are not proof of complete broadcast coverage.",
   "privacy": "Raw recordings, paths, raw logs, viewer identities, gift rankings and comment text are never published.",
-  "provenance": "Checked on 2026-10-16 JST against recording sidecar metadata, ffprobe stream/format fields, and recorder error-log summary. Online screen counters not confirmed."
+  "provenance": "Verified on 2026-10-16 JST from the stored per-live UI counter timeline (16 entries), last online UI snapshot, collector summary and retry-exhausted record; recording sidecar, ffprobe metadata and recorder error log separately checked. Raw UI fragments, viewer identities and local/private source paths withheld.",
+  "observed_points": [
+    {
+      "observed_at_jst": "2026-10-15T22:00:39.707+09:00",
+      "stars": 100,
+      "comments": 7
+    },
+    {
+      "observed_at_jst": "2026-10-15T22:01:56.795+09:00",
+      "stars": 300,
+      "comments": 31
+    },
+    {
+      "observed_at_jst": "2026-10-15T22:02:48.547+09:00",
+      "stars": 510,
+      "comments": 31
+    },
+    {
+      "observed_at_jst": "2026-10-15T22:03:19.379+09:00",
+      "stars": 510,
+      "comments": 31
+    }
+  ]
 }
