@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM post-fourth-round night broadcast (verified metadata)",
+  "date_jst": "2026-10-15",
+  "slot": "night",
+  "live_id": 23558451,
+  "scope": "public non-identifying capture metadata only",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed",
+    "semifinal_event_points_not_inferred": true
+  },
+  "recording_processing_window_jst": {
+    "start": "2026-10-15T21:59:58+09:00",
+    "end": "2026-10-15T23:23:20+09:00",
+    "not_equal_to_confirmed_broadcast_start_end": true
+  },
+  "recording": {
+    "exists": true,
+    "recorder_saved": true,
+    "ffmpeg_exit_code": 0,
+    "size_bytes": 597999981,
+    "media_duration_seconds": 4935.031,
+    "video": {
+      "codec": "h264",
+      "width": 640,
+      "height": 360
+    },
+    "audio": {
+      "codec": "aac"
+    },
+    "complete_coverage_confirmed": false,
+    "full_content_reviewed": false
+  },
+  "observed_screen": {
+    "stars": null,
+    "total_visits": null,
+    "comments": null,
+    "first_visits": null,
+    "second_visits": null,
+    "star100_supporters": null
+  },
+  "last_valid_online_screen_at_jst": null,
+  "screen_values_status": "not independently verified in reviewed recorder metadata",
+  "timeline_status": "no independently verified online counter timeline in reviewed materials",
+  "data_quality": {
+    "media_metadata_verified": true,
+    "recorder_sidecar_saved_true": true,
+    "transient_hls_errors_in_log": true,
+    "expired_segment_skip_reported": true,
+    "full_playback_or_manual_audio_review": false,
+    "screen_counter_coverage_confirmed": false
+  },
+  "method": "Recording processing timestamps are not confirmed broadcast start/end. Duration is container metadata, not proof of uninterrupted capture. HLS log reports expired/skipped segments and transport errors. Missing star, visit, comment and first-visit figures are null (unknown), not zero. Do not infer missing time from process/media duration differences or copy other broadcasts' counts.",
+  "privacy": "Raw recordings, paths, raw logs, viewer identities, gift rankings and comment text are never published.",
+  "provenance": "Checked on 2026-10-16 JST against recording sidecar metadata, ffprobe stream/format fields, and recorder error-log summary. Online screen counters not confirmed."
+}
