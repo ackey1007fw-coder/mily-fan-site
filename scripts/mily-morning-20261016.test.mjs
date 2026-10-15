@@ -55,3 +55,11 @@ test("counter quality and public privacy boundary preserve unknown values and ra
   for(const key of ["recording_file","file_path","raw_logs","raw_comments","raw_gifts","supporter_names","viewer_id","comment_text"])assert.equal(Object.hasOwn(d,key),false,key);
   assert.ok(d.privacy.includes("No viewer identities"));
 });
+
+test("expanded desktop navigation remains single-row and scrollable without document overflow",()=>{
+  const css=read("public/data-lab/assets/styles.css");
+  assert.match(css,/\.nav\{[^}]*flex-wrap:nowrap;white-space:nowrap;overflow-x:auto/);
+  assert.match(css,/\.nav a\{[^}]*white-space:nowrap/);
+  assert.match(css,/@media\(min-width:961px\)/);
+  assert.ok(html.includes('href="#morning-20261016"'));
+});
