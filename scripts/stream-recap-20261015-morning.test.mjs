@@ -13,7 +13,7 @@ test("2026-10-15 morning is latest in existing LIVE STREAM without replacing old
   assert.equal(recap.id,"2026-10-15-morning-showroom");
   assert.equal(recap.dateLabel,"2026.10.15（木）");
   assert.equal(recap.platformLabel,"SHOWROOM");
-  assert.match(recap.broadcastLabel,/録画開始6:02頃〜 約31分/);
+  assert.match(recap.broadcastLabel,/録画開始6:02頃〜 約30分/);
   assert.equal(streamRecaps[0],recap);
   assert.deepEqual(streamRecaps.slice(1,5).map(x=>x.id),[
     "2026-10-14-night-showroom","2026-10-14-noon-showroom",
