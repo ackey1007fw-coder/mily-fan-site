@@ -61,6 +61,31 @@ describe("contest phase official window display", () => {
     assert.doesNotMatch(source("src/lib/contestPhaseDisplay.ts"), /2026-09-03T12:00|2026-09-03T05:00/);
   });
 
+  it("shows semifinal qualification as current with dates still unconfirmed", () => {
+    assert.deepEqual(contest.currentPhase, {
+      name: "セミファイナル進出",
+      start: null,
+      end: null,
+      source: "https://x.com/mily_chan36/status/2110646575051747453",
+    });
+    assert.equal(contest.lastVerifiedAt, "2026-10-15");
+    assert.equal(contestPhaseDateRangeLabel(contest.currentPhase), null);
+    assert.equal(contestPhaseHeading(contest.currentPhase), "セミファイナル進出");
+    assert.equal(contestPhaseDisplayNote(contest.currentPhase), "セミファイナル進出");
+    assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), []);
+    const item = selectSupportToday({
+      contest,
+      streamSlots: [],
+      streamRoomUrl: null,
+      liveRoomUrl: null,
+      radioPhase: "idle",
+      now: Date.parse("2026-10-15T18:00:00+09:00"),
+    }).find(({ key }) => key === "today:contest");
+    assert.equal(item?.value, "セミファイナル進出");
+    assert.match(item?.note ?? "", /2026\.10\.15確認/);
+    assert.doesNotMatch(item?.note ?? "", /10\/2|10\/12/);
+  });
+
   it("keeps the historical third-round rows and ignores unknown phases", () => {
     assert.deepEqual(
       contestOfficialWindowLines(phaseWithName("3次審査")),
