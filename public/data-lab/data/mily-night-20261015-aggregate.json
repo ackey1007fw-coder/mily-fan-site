@@ -47,7 +47,7 @@
   },
   "last_valid_online_screen_at_jst": "2026-10-15T22:03:19.379+09:00",
   "screen_values_status": "verified star/comment screen observations only in first three minutes; visits displayed as invalid, full-broadcast final values unknown",
-  "timeline_status": "16 stored online UI observations from 22:00:19.516 to 22:03:19.379 JST, with gaps and one transient zero regression excluded",
+  "timeline_status": "16 stored screen readings 22:00:19.516-22:03:19.379 JST. Initially unverified/negative-elapsed readings and a transient zero regression are excluded from the four displayed points.",
   "data_quality": {
     "media_metadata_verified": true,
     "recorder_sidecar_saved_true": true,
@@ -61,15 +61,16 @@
     "total_visits_observable": false,
     "ui_transient_zero_excluded": true,
     "ui_capture_recovery_hold_after_retries": true,
-    "full_broadcast_counter_coverage": false
+    "full_broadcast_counter_coverage": false,
+    "ui_initial_unverified_excluded": true
   },
-  "method": "Saved normal visible UI snapshots support only the numeric star and comment references from 22:00-22:03 JST. A transient zero regression at 22:01:33 is excluded, not treated as a reset or broadcast ending. The total visits field was invalid/unreadable, hence null, not zero. UI capture stopped around 22:03 after retry exhaustion; recording independently continued until 23:23. The 22:03 sample is NOT a broadcast final total. Video duration and process times are not proof of complete broadcast coverage.",
+  "method": "Only online UI snapshots after the screen session became verified are charted; initial unverified/negative elapsed display readings and a transient zero regression at 22:01:33 are excluded. The last available snapshot at 22:03:19 contained 510 stars and 31 comments, with invalid total-visits. The clock time is the collector's observation time, not necessarily the screen-rendered stream-time. Capture stopped after retry exhaustion around 22:03; the last sample is NOT the final result for the ~82-minute recorded broadcast.",
   "privacy": "Raw recordings, paths, raw logs, viewer identities, gift rankings and comment text are never published.",
   "provenance": "Verified on 2026-10-16 JST from the stored per-live UI counter timeline (16 entries), last online UI snapshot, collector summary and retry-exhausted record; recording sidecar, ffprobe metadata and recorder error log separately checked. Raw UI fragments, viewer identities and local/private source paths withheld.",
   "observed_points": [
     {
-      "observed_at_jst": "2026-10-15T22:00:39.707+09:00",
-      "stars": 100,
+      "observed_at_jst": "2026-10-15T22:01:21.057+09:00",
+      "stars": 130,
       "comments": 7
     },
     {
