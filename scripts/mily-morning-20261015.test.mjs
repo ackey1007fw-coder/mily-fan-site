@@ -51,7 +51,7 @@ test("five-minute points and fair 27-minute comparison are grounded and not inte
 
 test("public snapshot excludes private sources and individual viewer data",()=>{
   for(const content of [page,raw]){
-    assert.doesNotMatch(content,/chatgpt\\.site|drive\\.google|@gmail\\.com|viewer[_-]?id|user[_-]?id|contributor[_-]?id|https?:\\/\\/[^"' ]*private/i);
+    assert.doesNotMatch(content,/chatgpt\.site|drive\.google|@gmail\.com|viewer[_-]?id|user[_-]?id|contributor[_-]?id|https?:\/\/[^"' ]*private/i);
   }
   for(const key of ["raw_logs","raw_comments","gift_log","comment_text","recording_file","supporter_names","viewer_id","user_id"])assert.ok(!Object.hasOwn(data,key),key);
   assert.equal(data.privacy.includes("anonymous"),true);
