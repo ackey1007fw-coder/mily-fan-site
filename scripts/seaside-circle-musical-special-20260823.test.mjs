@@ -258,8 +258,9 @@ describe("2026-08-23 seaside circle musical special — STORY", () => {
     assert.equal("url" in storySources["broadcast-transcript-2026-08-23"], false);
     assert.equal("url" in storySources["program-instagram-story-2026-08-23"], false);
     assert.equal("url" in storySources["program-instagram-story-thanks-2026-08-23"], false);
-    assert.equal(stories[1], entry);
-    assert.equal(stories[0]?.slug, "2026-08-25-motivation");
+    assert.equal(stories[2], entry);
+    assert.equal(stories[1]?.slug, "2026-08-25-motivation");
+    assert.equal(stories[0]?.slug, "2026-10-15-semifinal");
     assert.equal(storyBySlug("2026-08-18-radio")?.published, true);
     assert.equal(storyBySlug("second-round-result-2026")?.published, true);
   });

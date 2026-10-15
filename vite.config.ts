@@ -63,6 +63,10 @@ function siteMetadataPlugin(): Plugin {
           "__STORY_2026_08_25_MOTIVATION_CANONICAL__",
           storyUrl("2026-08-25-motivation"),
         )
+        .replaceAll(
+          "__STORY_2026_10_15_SEMIFINAL_CANONICAL__",
+          storyUrl("2026-10-15-semifinal"),
+        )
         .replaceAll("__ACTIVITY_PAGE_TITLE__", activityMetadata?.title ?? "")
         .replaceAll(
           "__ACTIVITY_PAGE_DESCRIPTION__",
@@ -189,6 +193,7 @@ export default defineConfig({
         storySeasideMusical:
           "stories/2026-08-23-musical-special/index.html",
         storyMotivation20260825: "stories/2026-08-25-motivation/index.html",
+        storySemifinal20261015: "stories/2026-10-15-semifinal/index.html",
       },
       output: {
         manualChunks: {
