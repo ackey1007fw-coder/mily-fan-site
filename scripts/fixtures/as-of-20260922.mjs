@@ -17,6 +17,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-15-x-sleep-check-in",
   "2026-10-13-x-first-cosplay-red-riding-hood",
   "2026-10-12-fourth-round-final-day-story",
   "2026-10-11-x-fourth-round-final-day-peace",
