@@ -40,7 +40,8 @@ test("unobserved online counters remain unknown, not fabricated", () => {
   assert.equal(data.data_quality.online_counter_observations,16);
   assert.equal(data.data_quality.full_broadcast_counter_coverage,false);
   assert.equal(data.data_quality.ui_transient_zero_excluded,true);
-  assert.deepEqual(data.observed_points.map(p=>[p.stars,p.comments]),[[100,7],[300,31],[510,31],[510,31]]);
+  assert.equal(data.data_quality.ui_initial_unverified_excluded,true);
+  assert.deepEqual(data.observed_points.map(p=>[p.stars,p.comments]),[[130,7],[300,31],[510,31],[510,31]]);
   assert.ok(page.includes("冒頭3分の数字を救出"));
   assert.ok(page.includes("22:01:33の一時的なゼロ戻り表示"));
   assert.equal(data.data_quality.full_playback_or_manual_audio_review,false);
