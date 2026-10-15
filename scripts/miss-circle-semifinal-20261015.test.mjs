@@ -26,7 +26,9 @@ test("10月15日の本人報告をNEWSに1件だけ追加し、本人XとStory�
   assert.match(item.message?.text ?? "", /たくさん/);
   assert.match(item.message?.text ?? "", /次も私らしく頑張ります！/);
   assert.match(item.body, /Story自体の投稿日は確認できていません/);
-  assert.match(item.body, /ファンルーム個別投稿は本文と時刻を直接照合できていない/);
+  assert.match(item.body, /本人投稿2件を公開画面で確認した内容の要約/);
+  assert.match(item.body, /感謝と次の審査への意気込み/);
+  assert.match(item.body, /個別投稿の正確な日本時間と固定リンクは確認できない/);
   assert.equal(item.additionalCtas?.find(({ url }) => url === ROOM_URL)?.label, "本人のSHOWROOMファンルームを見る");
   assert.equal(item.additionalSources?.[0]?.url, "https://www.misscircle.jp/");
   assert.match(item.body, /10月下旬〜11月上旬（予定）/);
