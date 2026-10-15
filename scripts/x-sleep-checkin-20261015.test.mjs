@@ -20,7 +20,9 @@ test("10月15日の本人X・睡眠の呼びかけをNEWSに1件だけ掲載", (
   assert.match(item.body, /人生初めてレベルのオール/);
   assert.match(item.body, /プルプル/);
   assert.equal(item.message?.text, "一緒に睡眠時間確保しようね🥺🥺🥺");
-  assert.equal(sortNewsByDateDesc(news)[0]?.id, targetId, "最新の本人X投稿を先頭に置く");
+  const older = news.find((entry) => entry.id === "2026-10-14-x-redhood-lip-gloss-video");
+  assert.ok(older, "直前の日付の既存NEWSを維持する");
+  assert.equal(sortNewsByDateDesc([older, item])[0]?.id, targetId, "この投稿と以前の記事の時系列を確認する");
 });
 
 test("写真のない本人X投稿には別日の素材を流用しない", () => {
