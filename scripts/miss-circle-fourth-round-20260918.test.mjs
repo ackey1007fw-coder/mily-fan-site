@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { contest } from "../src/data/contest.ts";
+import { fourthRoundContest as historicalContest } from "./fixtures/contest-fourth-round.ts";
 import {
   isValidSupportEvent,
   missCircleFourthRoundShowroomReview,
@@ -37,21 +37,14 @@ function nowItems(now) {
 
 describe("MISS CIRCLE 2026 fourth round", () => {
   it("uses the official fourth-round phase and date-only ContestPhase", () => {
-    assert.deepEqual(contest.currentPhase, {
-      name: "4次審査",
-      start: "2026-10-02",
-      end: "2026-10-12",
-      source: "https://www.misscircle.jp/",
-    });
-    assert.equal(contest.lastVerifiedAt, "2026-10-01");
-    assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
+    assert.deepEqual(contestOfficialWindowLines(historicalContest.currentPhase), [
       "WEB投票 10/2 12:00〜10/12 23:59",
       "SHOWROOM審査 10/3 5:00〜10/12 21:59",
       "SHOWROOMは10/12 21:59終了",
     ]);
     assert.deepEqual(
       contestOfficialWindowLines({
-        ...contest.currentPhase,
+        ...historicalContest.currentPhase,
         start: "2027-10-02",
         end: "2027-10-12",
       }),
@@ -62,8 +55,8 @@ describe("MISS CIRCLE 2026 fourth round", () => {
   it("keeps the fourth round out of HOME NOW until one day before it starts", () => {
     const heroAt = (now) =>
       selectContestNowHero({
-        contest,
-        liveVote: selectHomeVoteAction({ contest, supportEvents, links, now }),
+        contest: historicalContest,
+        liveVote: selectHomeVoteAction({ contest: historicalContest, supportEvents, links, now }),
         now,
       });
 

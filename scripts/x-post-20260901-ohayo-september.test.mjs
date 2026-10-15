@@ -247,7 +247,7 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — scope and identity",
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "4次審査");
+    assert.notEqual(contest.currentPhase?.source, news.find(({ id }) => id === NEWS_ID)?.source);
 
     for (const relative of [
       "src/data/media.ts",

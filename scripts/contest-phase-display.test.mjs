@@ -4,6 +4,7 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import { contest } from "../src/data/contest.ts";
+import { fourthRoundContest as historicalContest } from "./fixtures/contest-fourth-round.ts";
 import { links } from "../src/data/links.ts";
 import { supportEvents } from "../src/data/supportEvents.ts";
 import {
@@ -40,7 +41,7 @@ function assertOfficialWindows(text) {
 
 describe("contest phase official window display", () => {
   it("reads the three official times from supportEvents, not ContestPhase", () => {
-    const phase = contest.currentPhase;
+    const phase = historicalContest.currentPhase;
     assert.ok(phase);
     assert.equal(contestPhaseDateRangeLabel(phase), "10/2〜10/12");
     assert.equal(contestPhaseHeading(phase), "4次審査（10/2〜10/12）");
@@ -52,6 +53,31 @@ describe("contest phase official window display", () => {
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59|5:00/);
     assert.match(source("src/data/contest.ts"), /ContestPhase は日付のみ/);
     assert.doesNotMatch(source("src/lib/contestPhaseDisplay.ts"), /2026-09-03T12:00|2026-09-03T05:00/);
+  });
+
+  it("shows semifinal qualification with the newly confirmed official dates", () => {
+    assert.deepEqual(contest.currentPhase, {
+      name: "セミファイナル進出",
+      start: "2026-10-29",
+      end: "2026-11-08",
+      source: "https://www.misscircle.jp/",
+    });
+    assert.equal(contest.lastVerifiedAt, "2026-10-15");
+    assert.equal(contestPhaseDateRangeLabel(contest.currentPhase), "10/29〜11/8");
+    assert.equal(contestPhaseHeading(contest.currentPhase), "セミファイナル進出（10/29〜11/8）");
+    assert.equal(contestPhaseDisplayNote(contest.currentPhase), "セミファイナル進出（10/29〜11/8）");
+    assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), []);
+    const item = selectSupportToday({
+      contest,
+      streamSlots: [],
+      streamRoomUrl: null,
+      liveRoomUrl: null,
+      radioPhase: "idle",
+      now: Date.parse("2026-10-15T18:00:00+09:00"),
+    }).find(({ key }) => key === "today:contest");
+    assert.equal(item?.value, "セミファイナル進出");
+    assert.match(item?.note ?? "", /2026\.10\.15確認/);
+    assert.doesNotMatch(item?.note ?? "", /10\/2(?:[^0-9]|$)|10\/12/);
   });
 
   it("keeps the historical third-round rows and ignores unknown phases", () => {
@@ -66,7 +92,7 @@ describe("contest phase official window display", () => {
 
   it("surfaces the times on HOME contest note and Support Today", () => {
     const afterPaton = selectHomeVoteAction({
-      contest,
+      contest: historicalContest,
       supportEvents,
       links,
       now: Date.parse("2026-09-02T00:00:00+09:00"),
@@ -76,7 +102,7 @@ describe("contest phase official window display", () => {
     assert.match(afterPaton.note ?? "", /4次審査（10\/2〜10\/12）/);
 
     const today = selectSupportToday({
-      contest,
+      contest: historicalContest,
       streamSlots: [],
       streamRoomUrl: null,
       liveRoomUrl: null,

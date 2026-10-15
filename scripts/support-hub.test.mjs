@@ -309,10 +309,14 @@ describe("Support Today and pending separation", () => {
     );
   });
 
-  it("keeps the live contest phase off pending once official dates are confirmed", () => {
-    assert.deepEqual(selectSupportPending({ contest, supportEvents: [] }), []);
-    assert.equal(contest.currentPhase?.start, "2026-10-02");
-    assert.equal(contest.currentPhase?.end, "2026-10-12");
+  it("keeps the semifinal qualification off pending after official dates are confirmed", () => {
+    assert.deepEqual(
+      selectSupportPending({ contest, supportEvents: [] }).map(({ key }) => key),
+      [],
+    );
+    assert.equal(contest.currentPhase?.name, "セミファイナル進出");
+    assert.equal(contest.currentPhase?.start, "2026-10-29");
+    assert.equal(contest.currentPhase?.end, "2026-11-08");
     assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
     assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
   });

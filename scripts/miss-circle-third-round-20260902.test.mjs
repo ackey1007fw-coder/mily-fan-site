@@ -538,18 +538,14 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     );
   });
 
-  it("keeps ContestPhase date-only and the confirmed personal SHOWROOM slots", async () => {
-    assert.equal(contest.currentPhase?.name, "4次審査");
-    assert.equal(contest.currentPhase?.start, "2026-10-02");
-    assert.equal(contest.currentPhase?.end, "2026-10-12");
-    assert.equal(contest.lastVerifiedAt, "2026-10-01");
-    assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
-    assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
-      "WEB投票 10/2 12:00〜10/12 23:59",
-      "SHOWROOM審査 10/3 5:00〜10/12 21:59",
-      "SHOWROOMは10/12 21:59終了",
+  it("keeps historical third-round windows and the confirmed personal SHOWROOM slots", async () => {
+    assert.deepEqual(contestOfficialWindowLines(THIRD_ROUND_CONTEST.currentPhase), [
+      "WEB投票 9/3 12:00〜9/13 23:59",
+      "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59",
+      "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59",
+      "SHOWROOMは9/12 21:59終了",
     ]);
-    assert.match(contestPhaseDisplayNote(contest.currentPhase), /4次審査（10\/2〜10\/12）/);
+    assert.match(contestPhaseDisplayNote(THIRD_ROUND_CONTEST.currentPhase), /3次審査（9\/3〜9\/13）/);
     assert.deepEqual(streamSchedule, EXPECTED_SLOTS);
     assert.ok(
       streamSchedule.some(
