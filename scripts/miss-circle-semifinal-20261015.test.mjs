@@ -23,7 +23,7 @@ test("10月15日の本人報告をNEWSに1件だけ追加し、本人XとStory�
   });
   assert.match(item.title, /4次審査突破.*セミファイナル進出/);
   assert.match(item.body, /Instagram Story/);
-  assert.match(item.body, /たくさん/);
+  assert.match(item.message?.text ?? "", /たくさん/);
   assert.match(item.message?.text ?? "", /次も私らしく頑張ります！/);
   assert.match(item.body, /Story自体の投稿日は確認できていません/);
   assert.match(item.body, /ファンルーム個別投稿は本文と時刻を直接照合できていない/);
