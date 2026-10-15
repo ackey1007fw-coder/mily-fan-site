@@ -73,7 +73,7 @@ describe("contest phase official window display", () => {
 
   it("surfaces the times on HOME contest note and Support Today", () => {
     const afterPaton = selectHomeVoteAction({
-      contest,
+      contest: historicalContest,
       supportEvents,
       links,
       now: Date.parse("2026-09-02T00:00:00+09:00"),
