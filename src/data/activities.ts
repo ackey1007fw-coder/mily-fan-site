@@ -48,6 +48,7 @@ export const activities: Activity[] = [
       "miss-circle-2026-semifinal-advance",
     ],
     relatedStorySlugs: [
+      "2026-10-15-semifinal",
       "2026-08-25-motivation",
       "second-round-2026",
       "second-round-result-2026",

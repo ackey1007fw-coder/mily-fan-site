@@ -149,6 +149,11 @@ ${activities
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>${storyUrl("2026-10-15-semifinal")}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>${storyUrl("2026-08-25-motivation")}</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

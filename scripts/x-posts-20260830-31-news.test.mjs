@@ -327,6 +327,7 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
   it("flows through Portal Feed without hardcoded news ids", async () => {
     const feed = createPortalFeed({ newsItems: news,
       now: new Date("2026-08-31T08:00:00+09:00"),
+      storyItems: stories.filter((story) => story.date <= "2026-08-31"),
       limit: PORTAL_FEED_LIMIT + 1,
     });
     assertPortalNewsFollowsSort(feed, news);

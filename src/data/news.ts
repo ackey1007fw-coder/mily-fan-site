@@ -286,6 +286,8 @@ export const news: NewsItem[] = [
     sourceLabel: "みりぃ本人のX投稿（10月15日）",
     additionalSources: [
       { label: "主催者公式・セミファイナル審査予定", url: "https://www.misscircle.jp/" },
+      { label: "MISS CIRCLE CONTEST 運営のX投稿（10月15日）", url: "https://x.com/circle_contest/status/2110646640071860374" },
+      { label: "MISS CIRCLE CONTEST 2026 セミファイナル進出者一覧", url: "https://2026.misscircle.jp/list/5" },
     ],
     media: {
       kind: "video",
