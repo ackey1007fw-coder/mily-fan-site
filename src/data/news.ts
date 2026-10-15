@@ -296,7 +296,7 @@ export const news: NewsItem[] = [
       label: "Instagram Storyに重ねられた本人の言葉",
       text: "4次審査突破‼ セミファイナル進出‼\n4次審査、たくさん応援してくれてありがとうございます🎀✨\n次も私らしく頑張ります！",
     },
-    relatedUrl: "/activities/miss-circle/",
+    relatedUrl: `${site.siteUrl}/activities/miss-circle/`,
     ctaLabel: "コンテストの歩みを見る",
     additionalCtas: [
       { label: "本人のSHOWROOMファンルームを見る", url: "https://www.showroom-live.com/room/fan_club?room_id=573253" },
