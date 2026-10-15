@@ -291,7 +291,9 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "4次審査");
+    for (const id of NEW_IDS) {
+      assert.notEqual(contest.currentPhase?.source, news.find((entry) => entry.id === id)?.source);
+    }
   });
 
   it("stays out of profile, media, stories, and schedule files", async () => {

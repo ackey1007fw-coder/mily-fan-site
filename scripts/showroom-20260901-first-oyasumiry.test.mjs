@@ -278,7 +278,7 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "4次審査");
+    assert.notEqual(contest.currentPhase?.source, news.find(({ id }) => id === NEWS_ID)?.source);
   });
 
   it("keeps Portal Feed aligned with NEWS order and the lead still", () => {

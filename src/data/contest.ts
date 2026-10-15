@@ -53,14 +53,14 @@ export const contest: Contest = {
   //     10/3 05:00〜10/12 21:59 を再確認。ContestPhase は日付のみ、
   //     時刻は supportEvents 側で保持する。
   //   2026-10-15: 本人XとInstagram Storyで4次審査突破・セミファイナル進出を確認。
-  //     主催者SCHEDULEは10月下旬〜11月上旬の見込みのみ。正確な開始・終了日は
-  //     公開されていないため null とし、終了済み四次審査をCurrentに表示しない。
+  //     同日の主催者SCHEDULEで審査期間10/29〜11/8を確認。
+  //     現在の進出段階に公式の日付だけを保持し、四次審査の履歴はsupportEventsに残す。
   // 「最終日」表記から締切日を推定して end に入れることはしない。
   currentPhase: {
     name: "セミファイナル進出",
-    start: null,
-    end: null,
-    source: "https://x.com/mily_chan36/status/2110646575051747453",
+    start: "2026-10-29",
+    end: "2026-11-08",
+    source: "https://www.misscircle.jp/",
   },
   lastVerifiedAt: "2026-10-15",
 };

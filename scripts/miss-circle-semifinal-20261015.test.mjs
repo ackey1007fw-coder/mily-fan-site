@@ -31,7 +31,11 @@ test("10月15日の本人報告をNEWSに1件だけ追加し、本人XとStory�
   assert.match(item.body, /個別投稿の正確な日本時間と固定リンクは確認できない/);
   assert.equal(item.additionalCtas?.find(({ url }) => url === ROOM_URL)?.label, "本人のSHOWROOMファンルームを見る");
   assert.equal(item.additionalSources?.[0]?.url, "https://www.misscircle.jp/");
-  assert.match(item.body, /10月下旬〜11月上旬（予定）/);
+  assert.match(item.body, /審査期間は10月29日〜11月8日/);
+  assert.match(item.body, /WEB投票は10月29日12:00〜11月8日23:59/);
+  assert.match(item.body, /SHOWROOM審査は10月29日5:00〜11月7日21:59/);
+  assert.match(item.body, /締切日が異なります/);
+  assert.doesNotMatch(item.body, /10月下旬〜11月上旬|日程未確定/);
   assert.equal(item.media, undefined, "転載許可済みの公開派生ファイルがないため、Storyや別日写真を自己ホストしたとは装わない");
 });
 
