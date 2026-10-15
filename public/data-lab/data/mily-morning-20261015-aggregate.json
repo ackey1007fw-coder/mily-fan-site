@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM post-fourth-round morning broadcast",
+  "date_jst": "2026-10-15",
+  "slot": "morning",
+  "live_id": 23555653,
+  "scope": "public anonymized counter display aggregates only",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed"
+  },
+  "observed_screen": {
+    "start_label_jst": "2026-10-15 06:03:36",
+    "last_valid_online_observed_at_jst": "2026-10-15T06:31:08.545+09:00",
+    "stars": 2755,
+    "total_visits": 187,
+    "comments": 195,
+    "first_visits": 4,
+    "second_visits": 7,
+    "other_free": 40,
+    "new_follows": 0,
+    "star_100_contributor_count": 26,
+    "recommended_commenter_count": 22,
+    "confirmed_final": false
+  },
+  "data_quality": {
+    "online_counter_observations": 156,
+    "disconnect_count": 3,
+    "capture_coverage_complete": false,
+    "stream_end_confirmed": false,
+    "screen_session_end_unverified": true,
+    "last_valid_screen_is_not_final_total": true,
+    "unobserved_after_last_valid_screen": "unknown",
+    "participant_unique_count": null
+  },
+  "five_minute_window_endpoints": [
+    {
+      "window_start_jst": "06:00",
+      "window_end_observed_at_jst": "06:04:53.810",
+      "stars": 400,
+      "visits": null,
+      "comments": 14
+    },
+    {
+      "window_start_jst": "06:05",
+      "window_end_observed_at_jst": "06:09:57.898",
+      "stars": 1145,
+      "visits": 41,
+      "comments": 53
+    },
+    {
+      "window_start_jst": "06:10",
+      "window_end_observed_at_jst": "06:14:59.340",
+      "stars": 1550,
+      "visits": 74,
+      "comments": 94
+    },
+    {
+      "window_start_jst": "06:15",
+      "window_end_observed_at_jst": "06:19:52.543",
+      "stars": 1950,
+      "visits": 107,
+      "comments": 114
+    },
+    {
+      "window_start_jst": "06:20",
+      "window_end_observed_at_jst": "06:24:56.604",
+      "stars": 2515,
+      "visits": 148,
+      "comments": 151
+    },
+    {
+      "window_start_jst": "06:25",
+      "window_end_observed_at_jst": "06:29:50.681",
+      "stars": 2745,
+      "visits": 187,
+      "comments": 181
+    },
+    {
+      "window_start_jst": "06:30",
+      "window_end_observed_at_jst": "06:31:08.545",
+      "stars": 2755,
+      "visits": 187,
+      "comments": 195
+    }
+  ],
+  "observed_windows_of_interest": [
+    {
+      "from_jst": "06:04:53.810",
+      "to_jst": "06:09:57.898",
+      "metric": "stars",
+      "delta": 745
+    },
+    {
+      "from_jst": "06:19:52.543",
+      "to_jst": "06:24:56.604",
+      "metric": "stars",
+      "delta": 565
+    }
+  ],
+  "same_elapsed_comparison": {
+    "basis": "approximately 27 minutes 20-29 seconds after screen-display start label; NOT full broadcast totals",
+    "observations": [
+      {
+        "date_jst": "2026-10-13",
+        "live_id": 23547116,
+        "observed_at_jst": "2026-10-13T06:26:01.239+09:00",
+        "elapsed_from_screen_label_seconds_approx": 1639,
+        "stars": 1732,
+        "total_visits": 146,
+        "comments": 184
+      },
+      {
+        "date_jst": "2026-10-14",
+        "live_id": 23551572,
+        "observed_at_jst": "2026-10-14T07:49:53.594+09:00",
+        "elapsed_from_screen_label_seconds_approx": 1649,
+        "stars": 1620,
+        "total_visits": 90,
+        "comments": 113
+      },
+      {
+        "date_jst": "2026-10-15",
+        "live_id": 23555653,
+        "observed_at_jst": "2026-10-15T06:30:55.651+09:00",
+        "elapsed_from_screen_label_seconds_approx": 1640,
+        "stars": 2745,
+        "total_visits": 187,
+        "comments": 195
+      }
+    ]
+  },
+  "methodological_note": "The source is ordinary visible aggregate counter UI while marked online. Counts are screen observations, not official confirmed gifts, verified comment submissions, unique viewers, or event points. The 15 October session was interrupted three times; the stream end is unverified and all data after 06:31:08 JST are unknown. A null sample is missing, not zero. Window endpoints represent sampled points, without interpolation or verified peak causes. Comparison uses similar elapsed screen time, not final totals.",
+  "privacy": "Public data contain only anonymous aggregates and time windows; no viewer identifiers, individual ranks, raw logs, recordings, comment text, or private file references.",
+  "provenance": "Owner-authorized review of ordinary visible aggregate counter observations, checked on 2026-10-15."
+}
