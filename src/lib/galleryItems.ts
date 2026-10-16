@@ -21,6 +21,7 @@ import {
 import { isMixchMovie, type MixchMovie } from "../data/mixchMovies.ts";
 import { media, visibleMedia, type MediaItem } from "../data/media.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "../data/tiktokGoodVibesVideo.ts";
+import { tiktokSeasideCirclePoseVideo } from "../data/tiktokSeasideCirclePoseVideo.ts";
 
 export type GalleryEntry =
   | { kind: "media"; key: string; item: MediaItem }
@@ -128,6 +129,7 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: tiktokGoodVibesVideo.id,
       item: tiktokGoodVibesVideo,
     }] : []),
+    ...(tiktokSeasideCirclePoseVideo.published ? [{ kind: "tiktok" as const, key: tiktokSeasideCirclePoseVideo.id, item: tiktokSeasideCirclePoseVideo }] : []),
     ...selfHosted.map(driveVideoView).map((item) => ({
       kind: "video" as const,
       key: item.key,
