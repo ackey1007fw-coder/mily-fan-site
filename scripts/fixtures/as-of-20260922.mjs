@@ -1,11 +1,14 @@
 import { tiktokCampusMakeupVideo } from "../../src/data/tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "../../src/data/tiktokOct04SelfieVideo.ts";
 import { tiktokOct07RibbonVideo } from "../../src/data/tiktokOct07RibbonVideo.ts";
+import { tiktokSeasideCircleSharedVideo } from "../../src/data/tiktokSeasideCircleSharedVideo.ts";
 // This confirmed-on October 3 item did not exist in the historical September snapshot.
 tiktokCampusMakeupVideo.published = false;
 // October 4 TikTok post did not exist in the September 22 historical snapshot.
 tiktokOct04SelfieVideo.published = false;
 tiktokOct07RibbonVideo.published = false;
+// This owner-shared TikTok was not yet available in the historical September snapshot.
+tiktokSeasideCircleSharedVideo.published = false;
 /**
  * Historical tests were written against the site as it stood on 2026-09-22.
  * Node runs test files in separate workers, so remove later records from
@@ -17,6 +20,8 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-16-x-red-riding-hood-new-video",
+  "2026-10-16-tiktok-seasidecircle-shared",
   "2026-10-15-miss-circle-semifinal-advance",
   "2026-10-15-x-sleep-check-in",
   "2026-10-13-x-first-cosplay-red-riding-hood",
