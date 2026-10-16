@@ -96,10 +96,51 @@ try {
           assert.equal(await page.locator('a[aria-label="みりぃファンサイトのホームに戻る"]').getAttribute("href"), "/");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Data Lab has horizontal overflow");
 
-          await page.screenshot({
-            path: join(output, `${engine}-${width}-data-lab.png`),
-            fullPage: true,
-          });
+          const labDocumentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+          if (labDocumentHeight <= 30000) {
+            await page.screenshot({
+              path: join(output, `${engine}-${width}-data-lab.png`),
+              fullPage: true,
+            });
+          } else {
+            // Chromium/WebKit cannot take screenshots over 32767px tall.
+            // Preserve evidence from the top, the newest velocity chart and the roster.
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.screenshot({ path: join(output, `${engine}-${width}-data-lab.png`), fullPage: false });
+            const velocityCard = page.locator("#night-20261016-comment-velocity");
+            assert.equal(await velocityCard.locator(".velocity-bar").count(), 8, "All eight speed bars must be visible in the DOM");
+            await velocityCard.screenshot({ path: join(output, `${engine}-${width}-velocity.png`) });
+            await page.locator("#roster").screenshot({ path: join(output, `${engine}-${width}-roster.png`) });
+          }
+          // Historical comment rhythms are a separate archive, not a larger
+          // full-page screenshot of the already long main analysis view.
+          const velocityPage = await page.goto(`${baseUrl}/data-lab/comment-velocity/`, { waitUntil: "networkidle" });
+          assert.equal(velocityPage.status(), 200);
+          assert.match(await page.title(), /コメント分速の記録/);
+          assert.equal(await page.locator('meta[name="robots"]').getAttribute("content"), "noindex,nofollow,noarchive");
+          await page.locator("#velocity-panel").waitFor({ state: "visible" });
+          assert.equal(await page.locator("#velocity-run-picks button").count(), 7);
+          assert.equal(await page.locator("#velocity-archive-body tr").count(), 15);
+          assert.match(await page.locator("#velocity-selected-label").innerText(), /10\/16 夜/);
+          assert.equal(await page.locator("#velocity-chart rect").count(), 8);
+          assert.equal(await page.locator("#velocity-table-body tr").count(), 8);
+          assert.equal(await page.locator("#velocity-mean").innerText(), "7.35");
+          assert.equal(await page.locator("#velocity-max").innerText(), "10.84");
+          await page.getByRole("button", { name: "四次審査期（10/12まで）" }).click();
+          assert.equal(await page.locator("#velocity-run-picks button").count(), 6);
+          assert.match(await page.locator("#velocity-selected-label").innerText(), /10\/12 夜/);
+          assert.ok(await page.locator("#velocity-chart rect").count() > 8);
+          await page.getByRole("button", { name: "10/13以降" }).click();
+          const oct13Night = page.locator("#velocity-run-picks").getByRole("button", { name: /10\/13 夜/ });
+          await oct13Night.click();
+          assert.match(await page.locator("#velocity-selected-label").innerText(), /10\/13 夜/);
+          assert.equal(await page.locator("#velocity-chart rect").count(), 10);
+          await page.locator("#velocity-run-picks").getByRole("button", { name: /10\/16 夜/ }).click();
+          assert.equal(await page.locator("#velocity-chart rect").count(), 8);
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Comment rhythm archive must not overflow the page");
+          if ((engine === "webkit" && width === 390) || (engine === "chromium" && width === 1440)) {
+            await page.screenshot({ path: join(output, `${engine}-${width}-comment-velocity-archive.png`), fullPage: true });
+          }
           await page.goto(`${baseUrl}/data-lab`, { waitUntil: "networkidle" });
           const reportLink = page.getByRole("link", { name: "10/12最終夜の分析を読む ↗", exact: true });
           assert.equal(await reportLink.getAttribute("href"), "/data-lab/reports/20261012-final-night/");
