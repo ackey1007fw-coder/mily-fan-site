@@ -172,6 +172,7 @@ export default defineConfig({
       input: {
         home: "index.html",
         dataLab: "data-lab/index.html",
+        dataLabVelocity: "data-lab/comment-velocity/index.html",
         dataLabFinalNight: "data-lab/reports/20261012-final-night/index.html",
         profile: "profile/index.html",
         activities: "activities/index.html",
