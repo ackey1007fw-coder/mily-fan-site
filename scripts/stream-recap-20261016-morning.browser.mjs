@@ -55,8 +55,9 @@ try {
       assert.ok((await card.innerText()).includes(recap.broadcastLabel));
       assert.ok((await card.innerText()).includes(recap.summary));
       const ids = await page.locator('details[id^="recap-"]').evaluateAll(cards => cards.map(item => item.id));
-      assert.deepEqual(ids.slice(0, 3), [
-        `recap-${recap.id}`, 'recap-2026-10-15-morning-showroom', 'recap-2026-10-14-night-showroom',
+      assert.deepEqual(ids.slice(0, 4), [
+        `recap-${recap.id}`, 'recap-2026-10-15-night-showroom',
+        'recap-2026-10-15-morning-showroom', 'recap-2026-10-14-night-showroom',
       ]);
       assert.equal(ids.filter(id => id === `recap-${recap.id}`).length, 1);
       assert.equal(await card.locator('video, audio').count(), 0);
@@ -102,6 +103,30 @@ try {
       await capture('card-closed');
       await card.locator(':scope > summary').click();
       assert.equal(await card.getAttribute('open'), '');
+      const nightCard = page.locator('#recap-2026-10-15-night-showroom');
+      assert.equal(await nightCard.count(), 1, 'Night recap must not be duplicated');
+      assert.equal(await nightCard.locator('img, video, audio').count(), 0, 'No unapproved night media');
+      await nightCard.locator(':scope > summary').click();
+      assert.equal(await nightCard.getAttribute('open'), '');
+      const nightContent = await nightCard.innerText();
+      for (const snippet of ['夜の四次審査突破と感謝', 'セミファイナル', 'ラジオ']) assert.ok(nightContent.includes(snippet), snippet);
+      const nightLab = nightCard.locator('a[href="/data-lab/#night-20261015"]');
+      assert.equal(await nightLab.count(), 1, 'Link to the independent night data lab');
+      const nextMorning = nightCard.locator('a[href="/activities/live/#recap-2026-10-16-morning-showroom"]');
+      assert.equal(await nextMorning.count(), 1, 'Related morning article');
+      const nightSource = nightCard.locator('[data-recap-source]');
+      assert.ok((await nightSource.innerText()).includes('出典：2026年10月15日 夜のSHOWROOM配信'));
+      const nightVerification = nightSource.locator('[data-recap-verification]');
+      await nightVerification.locator(':scope > summary').click();
+      assert.equal(await nightVerification.getAttribute('open'), '');
+      assert.ok((await nightVerification.innerText()).includes('総訪問と配信終了時の数値は未取得'));
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+        'Night recap must not overflow the viewport');
+      const nightBounds = await nightCard.boundingBox();
+      assert.ok(nightBounds && nightBounds.x >= -1 && nightBounds.x + nightBounds.width <= width + 1);
+      const nightFile = `${engine}-${width}-night-20261015.png`;
+      await nightCard.screenshot({ path: join(output, nightFile) });
+      result.screenshots.push(nightFile);
       assert.deepEqual(result.pageErrors, []);
       const unexpectedConsoleErrors = result.consoleErrors.filter(error =>
         !result.unavailableApiFixtures.includes(error.url) || !/^Failed to load resource:.*503/.test(error.text));

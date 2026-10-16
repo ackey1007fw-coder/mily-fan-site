@@ -13,10 +13,10 @@ test("October 16 has one independent recap before the preserved October 15 and 1
   assert.equal(streamRecaps[0], recap);
   assert.equal(recap.dateLabel, "2026.10.16（金）");
   assert.equal(recap.broadcastLabel, "録画開始6:35頃〜 約56分");
-  assert.deepEqual(streamRecaps.slice(0, 5).map(x => x.id), [
-    "2026-10-16-morning-showroom", "2026-10-15-morning-showroom",
-    "2026-10-14-night-showroom", "2026-10-14-noon-showroom",
-    "2026-10-14-morning-showroom",
+  assert.deepEqual(streamRecaps.slice(0, 6).map(x => x.id), [
+    "2026-10-16-morning-showroom", "2026-10-15-night-showroom",
+    "2026-10-15-morning-showroom", "2026-10-14-night-showroom",
+    "2026-10-14-noon-showroom", "2026-10-14-morning-showroom",
   ]);
   assert.equal(streamRecaps.filter(x => x.id === recap.id).length, 1);
 });
