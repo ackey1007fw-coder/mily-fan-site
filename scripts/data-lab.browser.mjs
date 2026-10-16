@@ -96,10 +96,22 @@ try {
           assert.equal(await page.locator('a[aria-label="みりぃファンサイトのホームに戻る"]').getAttribute("href"), "/");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Data Lab has horizontal overflow");
 
-          await page.screenshot({
-            path: join(output, `${engine}-${width}-data-lab.png`),
-            fullPage: true,
-          });
+          const labDocumentHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+          if (labDocumentHeight <= 30000) {
+            await page.screenshot({
+              path: join(output, `${engine}-${width}-data-lab.png`),
+              fullPage: true,
+            });
+          } else {
+            // Chromium/WebKit cannot take screenshots over 32767px tall.
+            // Preserve evidence from the top, the newest velocity chart and the roster.
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.screenshot({ path: join(output, `${engine}-${width}-data-lab.png`), fullPage: false });
+            const velocityCard = page.locator("#night-20261016-comment-velocity");
+            assert.equal(await velocityCard.locator(".velocity-bar").count(), 8, "All eight speed bars must be visible in the DOM");
+            await velocityCard.screenshot({ path: join(output, `${engine}-${width}-velocity.png`) });
+            await page.locator("#roster").screenshot({ path: join(output, `${engine}-${width}-roster.png`) });
+          }
           await page.goto(`${baseUrl}/data-lab`, { waitUntil: "networkidle" });
           const reportLink = page.getByRole("link", { name: "10/12最終夜の分析を読む ↗", exact: true });
           assert.equal(await reportLink.getAttribute("href"), "/data-lab/reports/20261012-final-night/");
