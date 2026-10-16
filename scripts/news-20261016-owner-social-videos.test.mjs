@@ -18,7 +18,7 @@ it("adds the owner-specified X post exactly once via the official post embed", (
   assert.deepEqual(verifyNews(matches), []);
 });
 
-it("shares the program TikTok between NEWS and Gallery using its official player", () => {
+it("publishes only the canonical TikTok link until the program video can be inspected", () => {
   const postUrl = "https://www.tiktok.com/@seasidecircle/video/7696465009018195221";
   const video = tiktokSeasideCircleSharedVideo;
   const matches = news.filter(({ id }) => id === "2026-10-16-tiktok-seasidecircle-shared");
@@ -29,15 +29,17 @@ it("shares the program TikTok between NEWS and Gallery using its official player
   assert.equal(video.postId, "7696465009018195221");
   assert.equal(video.sourceUrl, postUrl);
   assert.equal(video.sourceDate, null);
+  assert.equal(video.published, false);
   assert.equal(matches[0].dateBasis, "confirmed-on");
   assert.match(matches[0].body, /投稿日は未確認/);
+  assert.match(matches[0].body, /みりぃ本人の登場有無/);
+  assert.match(matches[0].body, /リンクのみ/);
   assert.equal(matches[0].source, postUrl);
-  assert.equal(matches[0].media, video);
-  assert.equal(gallery.length, 1);
-  assert.equal(gallery[0].kind, "tiktok");
-  assert.equal(gallery[0].item, video);
-  assert.equal("src" in video, false);
-  assert.equal("poster" in video, false);
+  assert.equal(matches[0].media, undefined, "do not embed unreviewed program content");
+  assert.equal(matches[0].xEmbed, undefined);
+  assert.equal(gallery.length, 0, "unreviewed media must not appear in Gallery");
+  assert.equal("src" in video, false, "do not rehost TikTok audio or video");
+  assert.equal("poster" in video, false, "do not hotlink an uninspected cover");
   assert.deepEqual(verifyNews(matches), []);
 
   const sorted = sortNewsByDateDesc(news).map(({ id }) => id);
