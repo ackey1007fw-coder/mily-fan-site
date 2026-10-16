@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#081a27">
+<link rel="canonical" href="https://mily-fan-site.vercel.app/data-lab/comment-velocity/">
+<meta name="description" content="三橋莉子さんのSHOWROOM配信のコメント分速を、実際に保存された匿名のオンライン観測から時間帯別に可視化する非公式データラボ。">
+<title>コメント分速の記録｜MILY SIGNAL（非公式）</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MILY SIGNAL｜非公式ファンデータラボ">
+<meta property="og:title" content="コメントが生まれる時間｜MILY SIGNAL">
+<meta property="og:description" content="応援の量だけでなく、会話のリズムを確かめる。匿名の保存観測を時間帯ごとに表示。">
+<meta property="og:url" content="https://mily-fan-site.vercel.app/data-lab/comment-velocity/">
+<meta property="og:image" content="https://mily-fan-site.vercel.app/data-lab/assets/og-card-20261013.png">
+<link rel="icon" href="/data-lab/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/data-lab/assets/styles.css">
+<link rel="stylesheet" href="/data-lab/assets/velocity.css">
+<script src="/data-lab/assets/velocity.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#velocity-main">本文へスキップ</a>
+<header class="topbar">
+<div class="shell velocity-topbar">
+<a class="brand" href="/data-lab/" aria-label="MILY SIGNAL データラボに戻る"><span class="brand-mark" aria-hidden="true">🍅</span><span><b>MILY <em>SIGNAL</em></b><small>COMMENT RHYTHM</small></span></a>
+<a class="top-cta" href="/data-lab/">← データラボ</a>
+</div>
+</header>
+<main id="velocity-main">
+<section class="velocity-hero">
+<div class="shell">
+<div class="velocity-eyeline">SHOWROOM COMMENT RHYTHM / VERIFIED OBSERVATIONS</div>
+<h1>コメントが生まれる<br><em>時間を、見つめよう。</em></h1>
+<p class="velocity-lead">配信には、たくさん会話が行き交う時間も、少し穏やかな時間もあります。累積コメント数が実際にどう変わったか、保存できた区間だけを分速に直して振り返る記録です。</p>
+<div class="velocity-hero-actions">
+<a class="btn btn-primary" href="#velocity-explorer">時間帯のグラフを見る ↓</a>
+<a class="btn btn-outline" href="#velocity-archive">過去の配信を見る ↓</a>
+</div>
+<p class="velocity-headnote">非公式ファン制作｜投稿者名・個別コメント・DM・録画は掲載していません。画面に表示された参考カウンターを使用し、公式の確定値ではありません。</p>
+</div>
+</section>
+
+<section class="section velocity-feature" id="velocity-explorer">
+<div class="shell">
+<div class="section-head"><div>
+<div class="eyeline">01 / 時間帯を選んで、見比べる</div>
+<h2>どの時間に、<br>会話のリズムが変わった？</h2>
+<p>四次審査とその後の配信は、別々の期間として選べます。速さのグラフは各回の観測範囲に限定し、未取得の期間をゼロで埋めません。</p>
+</div></div>
+<div class="velocity-phase-switch" role="group" aria-label="分析する期間">
+<button type="button" data-velocity-phase="after_fourth_round" aria-pressed="true">10/13以降</button>
+<button type="button" data-velocity-phase="fourth_round" aria-pressed="false">四次審査期（10/12まで）</button>
+<button type="button" data-velocity-phase="all" aria-pressed="false">全期間</button>
+</div>
+<div id="velocity-run-picks" class="velocity-run-picks" role="group" aria-label="配信を選択"></div>
+<div id="velocity-loading" class="velocity-loading" role="status">観測データを読み込んでいます…</div>
+<article id="velocity-panel" class="velocity-panel" hidden>
+<div class="velocity-panel-header">
+<div><div id="velocity-selected-phase" class="velocity-mini-label"></div><h3 id="velocity-selected-label"></h3><p id="velocity-source-note" class="velocity-muted"></p></div>
+<a id="velocity-original-link" class="velocity-original-link" href="/data-lab/">この日の記録 ↗</a>
+</div>
+<div class="velocity-kpi-grid">
+<div><small>観測範囲の平均分速</small><strong id="velocity-mean">未取得</strong><span>件/分。配信全体の平均ではありません</span></div>
+<div><small>保存された区間の最大平均</small><strong id="velocity-max">未取得</strong><span>件/分。瞬間最高ではありません</span></div>
+<div><small>有効な約5分区間</small><strong id="velocity-count">未取得</strong><span>欠測は除外します</span></div>
+</div>
+<div class="velocity-chart-scroll" tabindex="0" aria-label="時間帯ごとのコメント分速グラフ。必要に応じて横にスクロールできます">
+<svg id="velocity-chart" role="img" aria-label="時間帯別の平均分速を表す棒グラフ"></svg>
+</div>
+<p id="velocity-chart-note" class="velocity-note"></p>
+<div class="velocity-table-wrap" tabindex="0" aria-label="コメント分速の区間別数値表。横にスクロールできます">
+<table class="velocity-table"><caption>保存オンライン画面の区間差分（コメント数と分速）</caption>
+<thead><tr><th scope="col">観測時刻</th><th scope="col">経過秒</th><th scope="col">増えたコメント</th><th scope="col">平均分速</th></tr></thead>
+<tbody id="velocity-table-body"></tbody>
+</table>
+</div>
+</article>
+</div>
+</section>
+
+<section class="section velocity-archive" id="velocity-archive">
+<div class="shell">
+<div class="section-head"><div><div class="eyeline">02 / 10.10–10.16 ARCHIVE</div><h2>保存できた配信から、<br>少しずつ積み重ねる。</h2>
+<p>過去の保存観測を読み直した履歴です。イベント期間を区別しており、別イベントの星・ポイントを混ぜていません。</p></div></div>
+<div class="velocity-table-wrap" tabindex="0">
+<table class="velocity-table velocity-archive-table">
+<caption>配信ごとのコメント分速（観測範囲のみ・平均の比較条件は異なります）</caption>
+<thead><tr><th scope="col">日付・枠</th><th scope="col">期間</th><th scope="col">観測区間</th><th scope="col">平均分速</th><th scope="col">状態</th></tr></thead>
+<tbody id="velocity-archive-body"></tbody>
+</table>
+</div>
+<div class="velocity-footnote"><strong>収集できていない回について：</strong>10/14夜は比較可能なカウンターがなく、10/15夜は冒頭の約3分間のみ。未取得は「0件」とは違います。</div>
+</div>
+</section>
+
+<section class="section velocity-method" id="velocity-method">
+<div class="shell">
+<div class="section-head"><div><div class="eyeline">03 / HOW TO READ</div><h2>数字に、<br>できることとできないこと。</h2></div></div>
+<div class="velocity-explainer">
+<div class="card"><h3>時間帯の平均分速とは？</h3><p>隣り合う2つの有効オンライン画面で、累積コメント数の差をとり、画面に表示された経過秒数の差から1分当たりへ換算した値です。投稿そのものに時刻をつけて追跡しているわけではありません。</p><p class="velocity-formula">（後のコメント数 − 前のコメント数）×60 ÷ 経過秒数</p></div>
+<div class="card"><h3>見えない時間は、見えないまま</h3><p>録画が保存されていても、集計画面が途中で切れることがあります。欠測区間は0として補わず、最後の観測を配信終了時の確定値として扱いません。表示上の「おすすめcomment人数」を、全員のユニーク投稿者数とも扱いません。</p></div>
+<div class="card"><h3>コメントの速度は、応援の価値ではない</h3><p>時間帯・話題・配信時間・視聴者の都合は毎回異なります。分速の増減だけから、誰かが離れた、応援が弱くなった、本人の発言が原因だと結論づけることはできません。</p></div>
+</div>
+<p class="velocity-headnote">集計出典：保存済み通常可視オンライン画面の匿名カウンター。個別の視聴者・貢献者、私的DM、コメント本文、録画・生ログ・非公開パスは公開しません。10月12日までの四次審査と13日以降を分けた非公式参考分析です。</p>
+</div>
+</section>
+</main>
+<footer class="velocity-footer"><div class="shell"><span>MILY SIGNAL · 非公式のファン制作</span><a href="/data-lab/">データラボへ戻る ↑</a></div></footer>
+</body>
+</html>
