@@ -63,7 +63,7 @@ export const streamRecap20261015Night: StreamRecap = {
     }
   ],
   goals: [],
-  ranking: [buildRankingNote()],
+  ranking: [buildRankingNote(undefined, undefined, "during")],
   timeline: [
     { timestamp: "0:00:04", label: "帰宅直後の挨拶" },
     { timestamp: "0:00:51", label: "四次審査突破・セミファイナル進出" },
