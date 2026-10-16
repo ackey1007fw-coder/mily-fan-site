@@ -2,10 +2,18 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync, statSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 const root = new URL("../", import.meta.url);
 const read = relative => readFileSync(new URL(relative, root));
 const manifest = JSON.parse(read("public/media/live/mily-b227-cute-shorts-20261015-16.json").toString("utf8"));
+
+async function bundledFfprobe() {
+  const module = await import("ffprobe-static");
+  const resolved = module.default ?? module;
+  return resolved.path ?? resolved;
+}
 
 test("exactly two independently sourced 2026-10-15/16 short-form clips exist, not full SHOWROOM archives", () => {
   assert.equal(manifest.schema, 1);
@@ -19,7 +27,7 @@ test("exactly two independently sourced 2026-10-15/16 short-form clips exist, no
 });
 
 for (const entry of manifest.clips) {
-  test(entry.id + " matches verified MP4 SHA-256, byte size, video/audio specs and public boundaries", () => {
+  test(entry.id + " matches verified MP4 SHA-256, byte size, video/audio specs and public boundaries", async () => {
     assert.ok(entry.file.startsWith("/media/live/mily-b227-"));
     assert.ok(entry.file.endsWith(".mp4"));
     const local = "public" + entry.file;
@@ -36,24 +44,22 @@ for (const entry of manifest.clips) {
     assert.match(entry.source, /saved 2026-10-/);
     assert.ok(entry.source_recording_offset_seconds > 0);
     assert.match(entry.recap, /^\/activities\/live\/#recap-2026-10-1[56]-/);
-    // Portable MP4 content checks: GitHub's default test runner does not ship ffprobe.
-    // Production capture + its derived 720×1280 H.264/AAC output were independently
-    // verified by ffprobe on the authorized Windows recorder before upload.
-    // Match the exact bytes via SHA above, plus MP4 atoms/codecs/duration here.
-    assert.equal(buffer.toString("latin1", 4, 8), "ftyp");
-    for (const atom of ["moov", "mdat", "avc1", "mp4a", "mvhd"]) {
-      assert.ok(buffer.includes(Buffer.from(atom)), "missing MP4 atom or codec: " + atom);
-    }
-    const index = buffer.indexOf(Buffer.from("mvhd"));
-    assert.ok(index > 4, "expected movie header");
-    const version = buffer.readUInt8(index + 4);
-    assert.ok(version === 0 || version === 1, "movie header version");
-    const timescale = buffer.readUInt32BE(index + (version === 0 ? 16 : 24));
-    const units = version === 0
-      ? buffer.readUInt32BE(index + 20)
-      : Number(buffer.readBigUInt64BE(index + 28));
-    assert.ok(timescale > 0);
-    assert.ok(Math.abs(units / timescale - entry.duration_seconds) < .05);
+    // Use the platform-specific binary already bundled with this repository.
+    // CI runners do not guarantee a separate system-wide ffprobe executable.
+    const ffprobe = await bundledFfprobe();
+    const result = JSON.parse(execFileSync(ffprobe, [
+      "-v", "error",
+      "-show_entries", "format=duration:stream=codec_type,codec_name,width,height,r_frame_rate",
+      "-of", "json",
+      fileURLToPath(new URL(local, root)),
+    ], { encoding: "utf8" }));
+    const video = result.streams.find(stream => stream.codec_type === "video");
+    const audio = result.streams.find(stream => stream.codec_type === "audio");
+    assert.ok(video && audio);
+    assert.equal(video.codec_name, "h264");
+    assert.equal(audio.codec_name, "aac");
+    assert.deepEqual([video.width, video.height, video.r_frame_rate], [720, 1280, "30/1"]);
+    assert.ok(Math.abs(Number(result.format.duration) - entry.duration_seconds) < .05);
   });
 }
 
