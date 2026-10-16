@@ -46,8 +46,7 @@ test("HTML chart, table and labels all agree with the anonymized speed source",(
  assert.match(h,/noindex,nofollow,noarchive/);
 });
 test("new public output has no individual messages or private source references",()=>{
- const out=section+"
-"+j;
+ const out=[section,j].join(String.fromCharCode(10));
  assert.doesNotMatch(out,/drive\.google|chatgpt\.site|@gmail\.com|[A-Z]:\\Users\\|raw[_-]?comments|viewer[_-]?id|comment[_-]?text/i);
  assert.equal(d.data_quality.participant_unique_count,null);
 });
