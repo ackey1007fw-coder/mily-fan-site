@@ -121,6 +121,7 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: item.id,
       item,
     })),
+    ...(tiktokSeasideCirclePoseVideo.published ? [{ kind: "tiktok" as const, key: tiktokSeasideCirclePoseVideo.id, item: tiktokSeasideCirclePoseVideo }] : []),
     ...(tiktokOct07RibbonVideo.published ? [{ kind: "tiktok" as const, key: tiktokOct07RibbonVideo.id, item: tiktokOct07RibbonVideo }] : []),
     ...(tiktokOct04SelfieVideo.published ? [{ kind: "tiktok" as const, key: tiktokOct04SelfieVideo.id, item: tiktokOct04SelfieVideo }] : []),
     ...(tiktokCampusMakeupVideo.published ? [{ kind: "tiktok" as const, key: tiktokCampusMakeupVideo.id, item: tiktokCampusMakeupVideo }] : []),
@@ -129,7 +130,6 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: tiktokGoodVibesVideo.id,
       item: tiktokGoodVibesVideo,
     }] : []),
-    ...(tiktokSeasideCirclePoseVideo.published ? [{ kind: "tiktok" as const, key: tiktokSeasideCirclePoseVideo.id, item: tiktokSeasideCirclePoseVideo }] : []),
     ...selfHosted.map(driveVideoView).map((item) => ({
       kind: "video" as const,
       key: item.key,
