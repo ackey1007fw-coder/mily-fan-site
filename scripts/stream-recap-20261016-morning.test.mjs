@@ -50,9 +50,9 @@ test("ASR summaries retain their source limitations and do not invent songs, quo
   }
 });
 
-test("the approved real frame is complete, decodable, metadata-free and shared by the hero and gallery", async () => {
-  assert.equal(recap.gallery.length, 1);
-  assert.equal(recap.image, recap.gallery[0]);
+test("the approved real frame is complete, decodable, metadata-free and displayed once", async () => {
+  assert.equal(recap.gallery, undefined);
+  assert.ok(recap.image);
   const bytes = readFileSync(new URL("../public" + recap.image.src, import.meta.url));
   const meta = await sharp(bytes).metadata();
   assert.equal(meta.width, recap.image.width);
@@ -72,6 +72,8 @@ test("the verification ledger matches the article and excludes private sources a
   assert.equal(entry.source, recap.sourceLabel);
   assert.deepEqual(entry.display, recapSourceDisclosure(recap.sourceLabel, recap.transcriptionNote));
   assert.equal(ledger.filter(x => x.id === recap.id).length, 1);
+  assert.match(entry.processingNote, /画角外/);
+  assert.doesNotMatch(recap.transcriptionNote, /画角外|顔の生成|補正/);
   for (const pattern of [/chatgpt\.site/i, /drive\.google/i, /@gmail/i, /\.mkv/i, /viewer[_-]?id/i, /comment[_-]?text/i, /C:\\/i, /https?:\/\//i]) {
     assert.doesNotMatch(JSON.stringify(recap), pattern);
   }

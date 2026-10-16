@@ -60,7 +60,7 @@ try {
       assert.equal(ids.filter(id => id === `recap-${recap.id}`).length, 1);
       assert.equal(await card.locator('video, audio').count(), 0);
       const images = card.locator('img');
-      assert.equal(await images.count(), 2, 'Hero and gallery share the same approved frame');
+      assert.equal(await images.count(), 1, 'The single approved frame must appear only once');
       await images.last().scrollIntoViewIfNeeded();
       await images.last().evaluate(image => image.decode());
       for (const image of await images.all()) {
@@ -68,10 +68,7 @@ try {
         const size = await image.evaluate(item => ({ width: item.naturalWidth, height: item.naturalHeight }));
         assert.deepEqual(size, { width: 380, height: 360 });
       }
-      const download = card.locator('a[download]');
-      assert.equal(await download.count(), 1);
-      assert.equal(await download.getAttribute('href'), recap.image.src);
-      assert.equal(await download.getAttribute('download'), recap.image.downloadName);
+      assert.equal(await card.locator('a[download]').count(), 0, 'No duplicate singleton gallery');
       const lab = card.getByRole('link', { name: 'MILY SIGNAL・10月16日朝の匿名分析 ↗', exact: true });
       assert.equal(await lab.getAttribute('href'), '/data-lab/#morning-20261016');
       assert.equal(await lab.getAttribute('rel'), 'noopener noreferrer');
@@ -97,6 +94,7 @@ try {
       assert.equal(await verification.getAttribute('open'), '');
       const details = await verification.innerText();
       for (const text of ['全編の手動聴取は行っておらず', '完全収録は未確定です。', '実映像との厳密な同期は未確認です。', '配信終了時の最終値は未確定です。', '記録の確認日：2026.10.16']) assert.ok(details.includes(text), text);
+      assert.ok(!details.includes('画角外'), 'Production instructions belong in the ledger');
       await capture('source-open');
       await card.locator(':scope > summary').click();
       assert.equal(await card.getAttribute('open'), null);
