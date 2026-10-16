@@ -17,6 +17,38 @@ const morningStill = {
   downloadName: "mily-b226-01-20261016-morning-postit-pose.jpg",
 };
 
+const morningGallery = [
+  {
+    src: "/media/live/mily-b227-03-20261016-morning-greeting.jpg",
+    width: 640, height: 360,
+    alt: "朝の配信でカメラに顔を向けて話すみりぃ",
+    caption: "0:00:43｜朝のあいさつ",
+    downloadName: "mily-b227-03-20261016-morning-greeting.jpg",
+  },
+  {
+    src: "/media/live/mily-b227-04-20261016-morning-radio-smile.jpg",
+    width: 640, height: 360,
+    alt: "朝のトーク中にカメラへ笑顔を向けるみりぃ",
+    caption: "0:05:00｜ラジオのように聴く朝のトーク",
+    downloadName: "mily-b227-04-20261016-morning-radio-smile.jpg",
+  },
+  morningStill,
+  {
+    src: "/media/live/mily-b227-05-20261016-morning-season-talk.jpg",
+    width: 640, height: 360,
+    alt: "あごに手を添えて笑顔で話すみりぃ",
+    caption: "0:18:40｜季節の話をしながら",
+    downloadName: "mily-b227-05-20261016-morning-season-talk.jpg",
+  },
+  {
+    src: "/media/live/mily-b227-06-20261016-morning-forward-look.jpg",
+    width: 640, height: 360,
+    alt: "カメラをまっすぐ見ながら朝のトークを続けるみりぃ",
+    caption: "0:50:00｜次への思いを話す頃",
+    downloadName: "mily-b227-06-20261016-morning-forward-look.jpg",
+  },
+];
+
 export const streamRecap20261016Asa: StreamRecap = {
   id: "2026-10-16-morning-showroom",
   date: "2026-10-16",
@@ -27,6 +59,7 @@ export const streamRecap20261016Asa: StreamRecap = {
   summary:
     "朝の挨拶から、季節の話やリスナーとの出会いへ。みんなと話す楽しさとセミファイナル進出への感謝、ファイナルを目指す思いを語りました。終盤にはランキングを読み上げ、一日を頑張るエールを送りました。",
   image: morningStill,
+  gallery: morningGallery,
   highlights: [
     {
       timestamp: "0:00:43",
@@ -86,7 +119,7 @@ export const streamRecap20261016Asa: StreamRecap = {
   verifiedAt: "2026-10-16",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    stills: "静止画は当日の保存録画の実フレーム1枚です。",
+    stills: "静止画は当日の保存録画の実フレーム5枚です。",
     extra:
       "録画処理は6:35:03〜7:32:07頃、保存メディアは約56分12秒で、配信の確定開始・終了時刻や全配信時間ではありません。通信エラーがあり、完全収録は未確定です。見どころと索引の時刻は自動文字起こしの経過秒による目安で、実映像との厳密な同期は未確認です。歌唱曲は特定できていないため、曲目は掲載していません。配信終了時の最終値は未確定です。数値と観測時点はリンク先のMILY SIGNALにまとめ、10月12日までの四次審査集計には加えていません。",
   }),

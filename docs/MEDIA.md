@@ -1,3 +1,20 @@
+# b227 — 10月15日夜2枚・10月16日朝4枚の実フレーム追加
+
+- 2026年10月16日、オーナーが両日の既存LIVE STREAM記事へ保存録画の実スクショ追加を明示依頼。掲載先は各回のLIVE STREAMだけ。
+- 夜はlive_id 23558451の録画から12候補を比較し、0:00:51の冒頭の笑顔と0:10:54の両手を合わせた笑顔を採用。代表は後者。朝はlive_id 23559940の録画から12候補を比較し、0:00:43、0:05:00、0:18:40、0:50:00を追加。既存b226の付箋代表画像はSHA-256を含め不変、gallery5枚は録画内時刻順。
+- 全画像640×360。保存録画からffmpegで直接切り出し、背景の付箋の文字領域のみ非生成の不透明マスク。顔・髪・手・身体の画素を編集せず、全画角と表情を維持。JPEG書き出し前の顔領域を元フレームと画素比較し一致、最終6枚も実寸目視。EXIF/GPS/XMPなし。
+- 写真時刻は録画先頭基準。本文の速報ASRと映像の厳密な同期・全編手動聴取は未実施で、既存注記を保持。個人名・コメント・原録画・全文ASR・非公開パスは公開しない。
+- 新規ファイル名b227で追加し、公開済みURLと元バイトは上書きしない。NEWS・Gallery・SNSへは流用しない。
+
+| ファイル | bytes | SHA-256 |
+| --- | ---: | --- |
+| `public/media/live/mily-b227-01-20261015-night-opening-smile.jpg` | 37388 | `3d392eb1c637d2b11a93ee5e57f392e6f449578bf431f34654fe3572c919b3e4` |
+| `public/media/live/mily-b227-02-20261015-night-hands-together.jpg` | 35465 | `95724a90ab0547eaa0b95fb633270483df1b25c2389436196994fdcb45f423d2` |
+| `public/media/live/mily-b227-03-20261016-morning-greeting.jpg` | 38732 | `f5164650c16665443f583ddf49226438e09cb9216ad70ce251533bf54088a669` |
+| `public/media/live/mily-b227-04-20261016-morning-radio-smile.jpg` | 36378 | `8e2be5f0d16a3ff3a1156c8d7c0503deacaed4730a761bbc91b6a34c58ba9fe6` |
+| `public/media/live/mily-b227-05-20261016-morning-season-talk.jpg` | 35964 | `29ec7621fcd2d7b075f6d90dd62916caebc126e97490d101a801e0b59ee5dffa` |
+| `public/media/live/mily-b227-06-20261016-morning-forward-look.jpg` | 32568 | `358123805b06722d68b2691ce9552525efd4fbc75405d7054117ee8fff999559` |
+
 # b226 — 2026-10-16朝SHOWROOMの付箋スクショタイム（LIVE STREAM代表差替）
 
 - オーナーが10月16日に「0:26:00 横を向きながら話す」初期の代表写真を不採用とし、付箋をカメラへ見せているスクショタイムの可愛い実写真へ差し替えるよう明示した。掲載先は2026-10-16朝LIVE STREAM記事のみ。NEWS・Gallery・SNSへの流用は行わない。

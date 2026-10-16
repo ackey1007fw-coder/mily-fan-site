@@ -51,9 +51,22 @@ test("ASR summaries retain their source limitations and do not invent songs, quo
   }
 });
 
-test("the approved real frame is complete, decodable, metadata-free and displayed once", async () => {
-  assert.equal(recap.gallery, undefined);
+test("the five real frames retain the post-it cover and decode without metadata", async () => {
+  assert.equal(recap.gallery.length, 5);
+  assert.equal(recap.gallery[2], recap.image);
+  assert.equal(new Set(recap.gallery.map(x => x.src)).size, 5);
   assert.ok(recap.image);
+  for (const still of recap.gallery) {
+    const bytes = readFileSync(new URL("../public" + still.src, import.meta.url));
+    const meta = await sharp(bytes).metadata();
+    assert.equal(meta.format, "jpeg");
+    assert.equal(meta.width, still.width);
+    assert.equal(meta.height, still.height);
+    assert.equal(meta.exif, undefined);
+    assert.equal(meta.xmp, undefined);
+    await sharp(bytes).raw().toBuffer();
+    assert.equal(still.downloadName, still.src.split("/").at(-1));
+  }
   const bytes = readFileSync(new URL("../public" + recap.image.src, import.meta.url));
   const meta = await sharp(bytes).metadata();
   assert.equal(meta.width, recap.image.width);
