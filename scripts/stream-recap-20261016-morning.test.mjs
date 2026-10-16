@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import sharp from "sharp";
+import { createHash } from "node:crypto";
 import { streamRecap20261016Asa as recap } from "../src/data/streamRecap20261016Asa.ts";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
 import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
@@ -62,7 +63,10 @@ test("the approved real frame is complete, decodable, metadata-free and displaye
   assert.equal(meta.xmp, undefined);
   await sharp(bytes).raw().toBuffer();
   assert.equal(recap.image.downloadName, recap.image.src.split("/").at(-1));
-  assert.match(recap.image.caption, /^0:26:00｜/);
+  assert.match(recap.image.caption, /^0:05:50｜付箋を見せてスクショタイム/);
+  assert.equal(meta.width, 640);
+  assert.equal(meta.height, 360);
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), "936b6c038cdab6fc52533073d2fef9afe20dae1515e1c94d6708b143debdc77e");
 });
 
 test("the verification ledger matches the article and excludes private sources and audience records", () => {
@@ -72,7 +76,7 @@ test("the verification ledger matches the article and excludes private sources a
   assert.equal(entry.source, recap.sourceLabel);
   assert.deepEqual(entry.display, recapSourceDisclosure(recap.sourceLabel, recap.transcriptionNote));
   assert.equal(ledger.filter(x => x.id === recap.id).length, 1);
-  assert.match(entry.processingNote, /画角外/);
+  assert.match(entry.processingNote, /付箋.*文字|付箋.*表示名/);
   assert.doesNotMatch(recap.transcriptionNote, /画角外|顔の生成|補正/);
   for (const pattern of [/chatgpt\.site/i, /drive\.google/i, /@gmail/i, /\.mkv/i, /viewer[_-]?id/i, /comment[_-]?text/i, /C:\\/i, /https?:\/\//i]) {
     assert.doesNotMatch(JSON.stringify(recap), pattern);
