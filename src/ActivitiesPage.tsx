@@ -557,6 +557,25 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
         新しい回を上に置いています。どの回も同じ並び（見どころ → スクショ → 目標 →
         ランキング → タイムスタンプと次枠 → 出典）で書いています。スクショは写真のある回だけです。閉じても日付と一言は残り、画像がある回は静止画も残します。
       </p>
+      <nav
+        aria-label="最新の配信メモへ移動"
+        className="mt-5 rounded-2xl border border-sage/20 bg-sage-soft/30 p-4"
+      >
+        <p className="text-sm font-bold text-ink">
+          最近の配信を見る
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {streamRecaps.slice(0, 3).map((recap) => (
+            <a
+              key={recap.id}
+              href={`#recap-${recap.id}`}
+              className="rounded-full border border-sage/30 bg-paper-card px-3 py-2 text-xs font-semibold text-sage-deep underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage"
+            >
+              {recap.dateLabel} · {recap.theme}
+            </a>
+          ))}
+        </div>
+      </nav>
       <ul className="mt-6 space-y-4">
         {streamRecaps.map((recap, index) => (
           <li key={recap.id}>
