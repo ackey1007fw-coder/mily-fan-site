@@ -68,6 +68,11 @@ const newVideoIds = new Set([
   "mily-b144-01-morning-commute-story",
 ]);
 
+// Exclude the additional October 16 program TikTok from historical fixtures.
+import { tiktokSeasideCirclePoseVideo } from "../../src/data/tiktokSeasideCirclePoseVideo.ts";
+tiktokSeasideCirclePoseVideo.published = false;
+newNewsIds.add("2026-10-16-tiktok-seasidecircle-hand-poses");
+
 for (let index = news.length - 1; index >= 0; index--) {
   if (newNewsIds.has(news[index].id)) news.splice(index, 1);
 }
