@@ -68,7 +68,7 @@ try {
       for (const image of await images.all()) {
         assert.equal(await image.getAttribute('src'), recap.image.src);
         const size = await image.evaluate(item => ({ width: item.naturalWidth, height: item.naturalHeight }));
-        assert.deepEqual(size, { width: 380, height: 360 });
+        assert.deepEqual(size, { width: 640, height: 360 });
       }
       assert.equal(await card.locator('a[download]').count(), 0, 'No duplicate singleton gallery');
       const lab = card.getByRole('link', { name: 'MILY SIGNAL・10月16日朝の匿名分析 ↗', exact: true });
@@ -127,6 +127,40 @@ try {
       const nightFile = `${engine}-${width}-night-20261015.png`;
       await nightCard.screenshot({ path: join(output, nightFile) });
       result.screenshots.push(nightFile);
+
+      // Verify a real reader can FIND the night recap above the expanded morning story.
+      await page.goto(`${origin}/activities/live/`, { waitUntil: 'networkidle' });
+      const jumpNav = page.getByRole('navigation', { name: '最新の配信メモへ移動' });
+      assert.equal(await jumpNav.count(), 1, 'Recent recap jump menu exists above cards');
+      const jumpLinks = jumpNav.locator('a[href^="#recap-"]');
+      assert.equal(await jumpLinks.count(), 3);
+      assert.deepEqual(await jumpLinks.evaluateAll(links => links.map(link => link.getAttribute('href'))), [
+        '#recap-2026-10-16-morning-showroom',
+        '#recap-2026-10-15-night-showroom',
+        '#recap-2026-10-15-morning-showroom',
+      ]);
+      const jumpScreenshot = `${engine}-${width}-recent-links.png`;
+      await jumpNav.screenshot({ path: join(output, jumpScreenshot) });
+      result.screenshots.push(jumpScreenshot);
+      await jumpNav.locator('a[href="#recap-2026-10-15-night-showroom"]').click();
+      await page.waitForFunction(() => {
+        const target = document.getElementById('recap-2026-10-15-night-showroom');
+        return location.hash === '#recap-2026-10-15-night-showroom' && target?.open;
+      });
+      await page.waitForTimeout(850);
+      const nightTop = await nightCard.evaluate(el => el.getBoundingClientRect().top);
+      assert.ok(nightTop >= -30 && nightTop < height * 0.8,
+        'Jump link brings night recap heading into the visible viewport, top=' + nightTop);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+        'Jump menu and night recap do not overflow the screen');
+
+      // Verify a cold-load deep link, including the in-app-browser mobile widths.
+      await page.goto(`${origin}/activities/live/#recap-2026-10-15-night-showroom`, { waitUntil: 'networkidle' });
+      await page.waitForFunction(() => document.getElementById('recap-2026-10-15-night-showroom')?.open);
+      await page.waitForTimeout(850);
+      const directTop = await nightCard.evaluate(el => el.getBoundingClientRect().top);
+      assert.ok(directTop >= -30 && directTop < height * 0.8,
+        'Cold-link night recap becomes visible, top=' + directTop);
       assert.deepEqual(result.pageErrors, []);
       const unexpectedConsoleErrors = result.consoleErrors.filter(error =>
         !result.unavailableApiFixtures.includes(error.url) || !/^Failed to load resource:.*503/.test(error.text));
