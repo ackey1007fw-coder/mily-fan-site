@@ -77,6 +77,7 @@ import { oyasumilyStoryVideo } from "./oyasumilyStoryVideo.ts";
 import { patonSecondStoryVideo } from "./patonSecondStoryVideo.ts";
 import { ohayoSeptemberXVideo } from "./ohayoSeptemberXVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
+import { tiktokSeasideCirclePoseVideo } from "./tiktokSeasideCirclePoseVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { campusGirlsPrelimFinalResultImage } from "./campusGirlsPrelimFinalResultImage.ts";
@@ -312,6 +313,16 @@ export const news: NewsItem[] = [
       { label: "本人のSHOWROOMファンルームを見る", url: "https://www.showroom-live.com/room/fan_club?room_id=573253" },
       { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
     ],
+  },
+  {
+    id: "2026-10-16-tiktok-seasidecircle-hand-poses",
+    date: "2026-10-16",
+    dateBasis: "confirmed-on",
+    title: "みりぃの手のポーズがかわいい！TikTok動画を紹介📱✨",
+    body: "10月16日、湘南シーサイドサークルのTikTokアカウント（@seasidecircle）による別の動画リンクが共有されました。同時に提供された約21秒の縦動画では、みりぃがふわふわの白いクッションを前に、カメラに向かって指や手でさまざまなポーズを見せています。\\n\\n元のTikTok投稿は下の公式プレーヤーと投稿リンクからご覧ください。提供動画とTikTokの公開投稿との完全な一致は未検証です。投稿日と投稿本文は未確認のため、10月16日はリンク確認日として記録しています。",
+    source: tiktokSeasideCirclePoseVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+    media: tiktokSeasideCirclePoseVideo,
   },
   {
     id: "2026-10-15-x-sleep-check-in",
