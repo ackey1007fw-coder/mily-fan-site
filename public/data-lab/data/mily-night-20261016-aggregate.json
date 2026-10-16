@@ -1,0 +1,168 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM 2026-10-16 night: anonymized normal-visible-screen reference counters",
+  "date_jst": "2026-10-16",
+  "slot": "night",
+  "live_id": 23562541,
+  "scope": "Public non-identifying visible counter observations and recorder metadata, not individual users or private conversation",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed",
+    "not_official_semifinal_event_points": true
+  },
+  "recording_processing_window_jst": {
+    "start": "2026-10-16T21:49:18+09:00",
+    "end": "2026-10-16T22:57:33+09:00",
+    "not_equal_to_confirmed_broadcast_start_end": true
+  },
+  "recording": {
+    "saved": true,
+    "ffmpeg_exit_code": 0,
+    "size_bytes": 503594174,
+    "media_duration_seconds": null,
+    "complete_coverage_confirmed": false,
+    "full_content_reviewed": false
+  },
+  "observed_screen": {
+    "last_valid_online_observed_at_jst": "2026-10-16T22:33:37.623+09:00",
+    "elapsed_display": "43分11秒経過",
+    "stars": 2858,
+    "total_visits": 68,
+    "comments": 329,
+    "first_visits": 0,
+    "second_visits": 1,
+    "other_free": 20,
+    "new_follows": 0,
+    "star_100_contributor_count": 28,
+    "recommended_commenter_count": 13,
+    "confirmed_final": false
+  },
+  "data_quality": {
+    "online_counter_timeline_rows": 251,
+    "valid_online_observations": 224,
+    "excluded_or_incomplete_rows": 27,
+    "older_dom_collector_observations": 197,
+    "older_dom_collector_disconnect_count": 2,
+    "older_dom_collector_end_confirmed": false,
+    "counter_end_confirmed": false,
+    "last_valid_counter_not_final_total": true,
+    "capture_coverage_complete": false,
+    "participant_unique_count": null,
+    "recorder_saved_not_proof_of_counter_coverage": true
+  },
+  "five_minute_window_endpoints": [
+    {
+      "observed_at_jst": "2026-10-16T21:55:27.696+09:00",
+      "elapsed_seconds": 305,
+      "stars": 1020,
+      "total_visits": 26,
+      "comments": 49,
+      "recommended_commenter_count": 5
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:00:28.520+09:00",
+      "elapsed_seconds": 602,
+      "stars": 1430,
+      "total_visits": 41,
+      "comments": 83,
+      "recommended_commenter_count": 9
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:05:27.079+09:00",
+      "elapsed_seconds": 901,
+      "stars": 1930,
+      "total_visits": 41,
+      "comments": 137,
+      "recommended_commenter_count": 10
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:10:26.494+09:00",
+      "elapsed_seconds": 1201,
+      "stars": 2030,
+      "total_visits": 55,
+      "comments": 161,
+      "recommended_commenter_count": 10
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:15:21.088+09:00",
+      "elapsed_seconds": 1500,
+      "stars": 2430,
+      "total_visits": 59,
+      "comments": 196,
+      "recommended_commenter_count": 13
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:20:18.076+09:00",
+      "elapsed_seconds": 1799,
+      "stars": 2630,
+      "total_visits": 65,
+      "comments": 232,
+      "recommended_commenter_count": 13
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:25:27.397+09:00",
+      "elapsed_seconds": 2098,
+      "stars": 2730,
+      "total_visits": 66,
+      "comments": 269,
+      "recommended_commenter_count": 13
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:30:21.793+09:00",
+      "elapsed_seconds": 2397,
+      "stars": 2838,
+      "total_visits": 66,
+      "comments": 297,
+      "recommended_commenter_count": 13
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:33:23.932+09:00",
+      "elapsed_seconds": 2579,
+      "stars": 2838,
+      "total_visits": 68,
+      "comments": 328,
+      "recommended_commenter_count": 13
+    },
+    {
+      "observed_at_jst": "2026-10-16T22:33:37.623+09:00",
+      "elapsed_seconds": 2591,
+      "stars": 2858,
+      "total_visits": 68,
+      "comments": 329,
+      "recommended_commenter_count": 13
+    }
+  ],
+  "same_elapsed_morning_night_comparison": {
+    "basis": "approximately 43 minutes on the SHOWROOM UI elapsed display; different dayparts; NOT final full-stream totals nor equal-audience conditions",
+    "entries": [
+      {
+        "date_jst": "2026-10-16",
+        "slot": "morning",
+        "live_id": 23559940,
+        "observed_at_jst": "2026-10-16T07:19:10.004+09:00",
+        "elapsed_seconds": 2585,
+        "stars": 3293,
+        "total_visits": 202,
+        "comments": 273,
+        "recommended_commenter_count": 29
+      },
+      {
+        "date_jst": "2026-10-16",
+        "slot": "night",
+        "live_id": 23562541,
+        "observed_at_jst": "2026-10-16T22:33:23.932+09:00",
+        "elapsed_seconds": 2579,
+        "stars": 2838,
+        "total_visits": 68,
+        "comments": 328,
+        "recommended_commenter_count": 13
+      }
+    ],
+    "comment_count_difference_night_minus_morning": 55,
+    "comment_difference_percent_approx": 20.1
+  },
+  "metric_caveat": "The displayed recommended commenter count is a third-party UI reference and NOT proven to count all unique commenters. Total visits are NOT unique people. Comment volume and perceived participation are different indicators; the cause of differences or fan departure cannot be inferred.",
+  "method": "Only existing authorized per-live normal-visible online counter sidecar is summarized. 251 saved rows include duplicates and incomplete starts; 224 rows pass online-status, verified-session, non-regression and non-null stars/visits/comments filters. Sparse valid observations nearest roughly five-minute elapsed windows plus final valid sample are displayed without interpolation. The other DOM collector has 197 different observations and two disconnects; do not conflate counts. Last valid online screen is at 22:33:37 JST, before recorder completion. No offline UI end confirmation, and actual broadcast start/end seconds and final metrics are unverified. Recorder sidecar saved=true does not guarantee coverage or complete transcription.",
+  "privacy": "Only aggregated metric values and generic recording metadata; no real names, user IDs, comment texts, DM screenshots, raw logs, recordings, private URLs or local storage paths."
+}
