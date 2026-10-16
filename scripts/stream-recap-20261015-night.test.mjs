@@ -32,8 +32,8 @@ test("recap summarizes actual ASR topics without inventing lyrics, quotes, ranki
   assert.equal(recap.timeline.length, 12);
   assert.deepEqual(recap.goals, []);
   assert.equal(recap.songs, undefined);
-  assert.equal(recap.image, undefined);
-  assert.equal(recap.gallery, undefined);
+  assert.equal(recap.gallery.length, 2);
+  assert.equal(recap.image, recap.gallery[0]);
   assert.ok(recap.highlights.every(h => h.quote === undefined));
   assert.equal(recap.ranking.length, 1);
   assert.match(recap.ranking[0], /^配信中にランキングを読み上げました/);
@@ -77,8 +77,8 @@ test("verification ledger records exactly the recap and protects photos and priv
   assert.equal(entry.originalNote, recap.transcriptionNote);
   assert.deepEqual(entry.display, recapSourceDisclosure(recap.sourceLabel, recap.transcriptionNote));
   assert.equal(ledger.filter(x=>x.id===recap.id).length, 1);
-  assert.match(entry.processingNote, /写真の個別掲載承認/);
-  assert.match(recap.transcriptionNote, /静止画は掲載していません/);
+  assert.match(entry.processingNote, /オーナー.*実フレーム/);
+  assert.match(recap.transcriptionNote, /実フレーム2枚/);
   const serial = JSON.stringify(recap);
   for (const re of [/chatgpt\.site/i, /drive\.google/i, /@gmail/i, /[A-Z]:\\Users\\/i,
     /viewer[_-]?id/i, /comment[_-]?text/i, /\.mkv/i, /https?:\/\//i]) {

@@ -7,7 +7,27 @@ import {
 
 // 2026-10-15夜SHOWROOM。保存録画の速報ASR247チャンクと録画サイドカー・匿名画面値を参照。
 // 原音全編の手動聴取・逐語校正・映像との厳密な同期は未実施。見どころは録画先頭からの目安。
-// 配信末尾の画面数値は未取得。写真・録画・個別視聴者・全文文字起こしは一般公開しない。
+// 配信末尾の画面数値は未取得。録画・個別視聴者・全文文字起こしは一般公開しない。
+// 2026-10-16の追加依頼で当日録画の実フレーム2枚を掲載。
+const nightGallery = [
+  {
+    src: "/media/live/mily-b227-01-20261015-night-smile-001500.jpg",
+    width: 640,
+    height: 360,
+    alt: "笑顔で話すみりぃ",
+    caption: "0:15:00｜応援を振り返る夜の笑顔",
+    downloadName: "mily-b227-01-20261015-night-smile-001500.jpg",
+  },
+  {
+    src: "/media/live/mily-b227-02-20261015-night-talk-010700.jpg",
+    width: 640,
+    height: 360,
+    alt: "カメラへ笑顔を向けるみりぃ",
+    caption: "1:07:00｜次の挑戦を語る夜のおしゃべり",
+    downloadName: "mily-b227-02-20261015-night-talk-010700.jpg",
+  }
+];
+
 export const streamRecap20261015Night: StreamRecap = {
   id: "2026-10-15-night-showroom",
   date: "2026-10-15",
@@ -16,6 +36,8 @@ export const streamRecap20261015Night: StreamRecap = {
   broadcastLabel: "録画開始21:59頃〜 約82分",
   platformLabel: "SHOWROOM",
   summary: "四次審査の通過を報告し、セミファイナル進出を喜んだ夜。応援への感謝に加え、ラジオでの活動や次の挑戦についても話しました。終盤はランキングを読み上げ、翌朝の配信を案内しました。",
+  image: nightGallery[0],
+  gallery: nightGallery,
   highlights: [
     {
       timestamp: "0:00:51",
@@ -84,7 +106,7 @@ export const streamRecap20261015Night: StreamRecap = {
   verifiedAt: "2026-10-16",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
-    stills: "静止画は掲載していません。",
+    stills: "静止画は当日の保存録画の実フレーム2枚です。",
     extra: "録画処理は21:59:58〜23:23:20頃、保存映像の尺は約82分15秒で、放送の確定開始・終了時刻や全編の完全収録を意味しません。通信エラーがあります。自動文字起こし247処理チャンクには認識誤りがあり、見どころの時刻は録画先頭基準の目安で、原音の全編手動聴取や逐語校正は未実施です。歌唱曲や不明瞭な固有名詞は載せていません。22:03:19のきら星510・コメント31は早い時点のオンライン参考値で、総訪問と配信終了時の数値は未取得です。10月12日までの四次審査ポイントには加算していません。",
   }),
 };
