@@ -13,11 +13,12 @@ test("October 14 night remains intact behind the later October 15 morning recap"
   assert.equal(recap.id, "2026-10-14-night-showroom");
   assert.equal(recap.date, "2026-10-14");
   assert.equal(recap.theme, "夜のお風呂上がりとハート");
-  assert.equal(streamRecaps[0].id, "2026-10-15-morning-showroom");
-  assert.equal(streamRecaps[1], recap);
-  assert.equal(streamRecaps[2].id, "2026-10-14-noon-showroom");
-  assert.equal(streamRecaps[3].id, "2026-10-14-morning-showroom");
-  assert.equal(streamRecaps[4].id, "2026-10-13-night-showroom");
+  const index = streamRecaps.indexOf(recap);
+  assert.ok(index > 0);
+  assert.equal(streamRecaps[index-1].id, "2026-10-15-morning-showroom");
+  assert.equal(streamRecaps[index+1].id, "2026-10-14-noon-showroom");
+  assert.equal(streamRecaps[index+2].id, "2026-10-14-morning-showroom");
+  assert.equal(streamRecaps[index+3].id, "2026-10-13-night-showroom");
   assert.match(recap.summary, /お風呂上がり/);
   assert.equal(recap.highlights.length, 7);
   assert.equal(recap.timeline.length, 10);
