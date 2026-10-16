@@ -9,13 +9,14 @@ const lab=JSON.parse(read("public/data-lab/data/mily-morning-20261015-aggregate.
 const ledger=JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
 const recap=streamRecap20261015Asa;
 
-test("2026-10-15 morning is latest in existing LIVE STREAM without replacing older recaps",()=>{
+test("2026-10-15 morning retains its content and preceding chronological position",()=>{
   assert.equal(recap.id,"2026-10-15-morning-showroom");
   assert.equal(recap.dateLabel,"2026.10.15（木）");
   assert.equal(recap.platformLabel,"SHOWROOM");
   assert.match(recap.broadcastLabel,/録画開始6:02頃〜 約30分/);
-  assert.equal(streamRecaps[0],recap);
-  assert.deepEqual(streamRecaps.slice(1,5).map(x=>x.id),[
+  const index = streamRecaps.indexOf(recap);
+  assert.ok(index >= 0);
+  assert.deepEqual(streamRecaps.slice(index+1,index+5).map(x=>x.id),[
     "2026-10-14-night-showroom","2026-10-14-noon-showroom",
     "2026-10-14-morning-showroom","2026-10-13-night-showroom"
   ]);
@@ -68,11 +69,13 @@ test("new report withholds unapproved imagery and sensitive audience data",()=>{
 });
 
 test("new ledger faithfully records the report source, caution and order",()=>{
-  assert.equal(ledger[0].id,recap.id);
-  assert.equal(ledger[0].source,recap.sourceLabel);
-  assert.equal(ledger[0].originalNote,recap.transcriptionNote);
-  assert.equal(ledger[1].id,"2026-10-14-night-showroom");
+  const index = ledger.findIndex(x=>x.id===recap.id);
+  assert.ok(index >= 0);
+  const entry = ledger[index];
+  assert.equal(entry.source,recap.sourceLabel);
+  assert.equal(entry.originalNote,recap.transcriptionNote);
+  assert.equal(ledger[index+1].id,"2026-10-14-night-showroom");
   assert.equal(ledger.filter(x=>x.id===recap.id).length,1);
-  assert.match(ledger[0].display.material,/自動文字起こし/);
-  assert.equal(ledger[0].verifiedAt,recap.verifiedAt);
+  assert.match(entry.display.material,/自動文字起こし/);
+  assert.equal(entry.verifiedAt,recap.verifiedAt);
 });
