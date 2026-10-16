@@ -164,5 +164,80 @@
   },
   "metric_caveat": "The displayed recommended commenter count is a third-party UI reference and NOT proven to count all unique commenters. Total visits are NOT unique people. Comment volume and perceived participation are different indicators; the cause of differences or fan departure cannot be inferred.",
   "method": "Only existing authorized per-live normal-visible online counter sidecar is summarized. 251 saved rows include duplicates and incomplete starts; 224 rows pass online-status, verified-session, non-regression and non-null stars/visits/comments filters. Sparse valid observations nearest roughly five-minute elapsed windows plus final valid sample are displayed without interpolation. The other DOM collector has 197 different observations and two disconnects; do not conflate counts. Last valid online screen is at 22:33:37 JST, before recorder completion. No offline UI end confirmation, and actual broadcast start/end seconds and final metrics are unverified. Recorder sidecar saved=true does not guarantee coverage or complete transcription.",
-  "privacy": "Only aggregated metric values and generic recording metadata; no real names, user IDs, comment texts, DM screenshots, raw logs, recordings, private URLs or local storage paths."
+  "privacy": "Only aggregated metric values and generic recording metadata; no real names, user IDs, comment texts, DM screenshots, raw logs, recordings, private URLs or local storage paths.",
+  "comment_velocity": {
+    "method": "Increase of displayed cumulative comment count divided by elapsed time between two verified online observations; not individual message timestamps.",
+    "unit": "comments per minute",
+    "windows": [
+      {
+        "from": "2026-10-16T21:55:27.696+09:00",
+        "to": "2026-10-16T22:00:28.520+09:00",
+        "duration_seconds": 297,
+        "added_comments": 34,
+        "per_minute": 6.87
+      },
+      {
+        "from": "2026-10-16T22:00:28.520+09:00",
+        "to": "2026-10-16T22:05:27.079+09:00",
+        "duration_seconds": 299,
+        "added_comments": 54,
+        "per_minute": 10.84
+      },
+      {
+        "from": "2026-10-16T22:05:27.079+09:00",
+        "to": "2026-10-16T22:10:26.494+09:00",
+        "duration_seconds": 300,
+        "added_comments": 24,
+        "per_minute": 4.8
+      },
+      {
+        "from": "2026-10-16T22:10:26.494+09:00",
+        "to": "2026-10-16T22:15:21.088+09:00",
+        "duration_seconds": 299,
+        "added_comments": 35,
+        "per_minute": 7.02
+      },
+      {
+        "from": "2026-10-16T22:15:21.088+09:00",
+        "to": "2026-10-16T22:20:18.076+09:00",
+        "duration_seconds": 299,
+        "added_comments": 36,
+        "per_minute": 7.22
+      },
+      {
+        "from": "2026-10-16T22:20:18.076+09:00",
+        "to": "2026-10-16T22:25:27.397+09:00",
+        "duration_seconds": 299,
+        "added_comments": 37,
+        "per_minute": 7.42
+      },
+      {
+        "from": "2026-10-16T22:25:27.397+09:00",
+        "to": "2026-10-16T22:30:21.793+09:00",
+        "duration_seconds": 299,
+        "added_comments": 28,
+        "per_minute": 5.62
+      },
+      {
+        "from": "2026-10-16T22:30:21.793+09:00",
+        "to": "2026-10-16T22:33:23.932+09:00",
+        "duration_seconds": 182,
+        "added_comments": 31,
+        "per_minute": 10.22
+      }
+    ],
+    "overall": {
+      "from": "2026-10-16T21:55:27.696+09:00",
+      "to": "2026-10-16T22:33:37.623+09:00",
+      "duration_seconds": 2286,
+      "added_comments": 280,
+      "per_minute": 7.35
+    },
+    "short_end_gap": {
+      "seconds": 12,
+      "added_comments": 1,
+      "excluded_from_chart": true
+    },
+    "coverage_complete": false
+  }
 }
