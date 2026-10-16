@@ -9,12 +9,12 @@ import {
 // 本文の時刻はASRの経過秒による目安。原音全編の手動聴取・逐語校正・厳密な映像同期は未実施。
 // 数値は既存MILY SIGNALを参照し、ここには集計を複製しない。
 const morningStill = {
-  src: "/media/live/mily-b225-01-20261016-morning-talk.jpg",
-  width: 380,
+  src: "/media/live/mily-b226-01-20261016-morning-postit-screenshot.jpg",
+  width: 640,
   height: 360,
-  alt: "ヘアクリップを留め、横を向きながら話すみりぃ",
-  caption: "0:26:00｜横を向きながら話すみりぃ",
-  downloadName: "mily-b225-01-20261016-morning-talk.jpg",
+  alt: "付箋をカメラに見せ、首をかしげて頬に手を添えるみりぃ",
+  caption: "0:05:50｜付箋を見せてスクショタイム（文字は非表示）",
+  downloadName: "mily-b226-01-20261016-morning-postit-screenshot.jpg",
 };
 
 export const streamRecap20261016Asa: StreamRecap = {
