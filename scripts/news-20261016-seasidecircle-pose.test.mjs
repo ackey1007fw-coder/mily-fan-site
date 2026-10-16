@@ -44,3 +44,13 @@ it("does not mistake the earlier shared TikTok for the owner-specified post", ()
     1,
   );
 });
+
+it("preserves the separately shared earlier October 16 TikTok when integrated with main", () => {
+  const prior = news.filter(({ id }) => id === "2026-10-16-tiktok-seasidecircle-shared");
+  assert.equal(prior.length, 1);
+  assert.equal(
+    prior[0].source,
+    "https://www.tiktok.com/@seasidecircle/video/7696465009018195221",
+  );
+  assert.notEqual(prior[0].source, tiktokSeasideCirclePoseVideo.sourceUrl);
+});
