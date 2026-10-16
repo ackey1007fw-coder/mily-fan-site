@@ -5,7 +5,8 @@ import type { TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
  * The short URL resolves to the program account @seasidecircle.
  * Its exact publication date and video caption have not been verified.
  *
- * Render via the official TikTok player; never rehost the post's audio/video.
+ * Keep the post unpublished until the actual TikTok media is independently inspected.
+ * The verified canonical URL can still be linked from NEWS as an external link.
  */
 export const tiktokSeasideCircleSharedVideo: TikTokPostVideo = {
   kind: "tiktok",
@@ -14,5 +15,5 @@ export const tiktokSeasideCircleSharedVideo: TikTokPostVideo = {
   sourceUrl: "https://www.tiktok.com/@seasidecircle/video/7696465009018195221",
   sourceDate: null,
   alt: "湘南シーサイドサークル（@seasidecircle）のTikTok動画",
-  published: true,
+  published: false,
 };
