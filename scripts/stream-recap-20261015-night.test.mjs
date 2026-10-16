@@ -36,7 +36,7 @@ test("recap summarizes actual ASR topics without inventing lyrics, quotes, ranki
   assert.equal(recap.gallery, undefined);
   assert.ok(recap.highlights.every(h => h.quote === undefined));
   assert.equal(recap.ranking.length, 1);
-  assert.match(recap.ranking[0], /^配信終了時にランキングを読み上げました/);
+  assert.match(recap.ranking[0], /^配信中にランキングを読み上げました/);
   assert.match(recap.nextNote, /^配信時点では/);
   assert.match(recap.nextNote, /翌10月16日朝6時半頃/);
   for (const group of [recap.highlights, recap.timeline]) {
