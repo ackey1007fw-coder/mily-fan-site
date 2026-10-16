@@ -125,7 +125,7 @@ try {
       const nightBounds = await nightCard.boundingBox();
       assert.ok(nightBounds && nightBounds.x >= -1 && nightBounds.x + nightBounds.width <= width + 1);
       const nightFile = `${engine}-${width}-night-20261015.png`;
-      await nightCard.screenshot({ path: join(output, nightFile });
+      await nightCard.screenshot({ path: join(output, nightFile) });
       result.screenshots.push(nightFile);
       assert.deepEqual(result.pageErrors, []);
       const unexpectedConsoleErrors = result.consoleErrors.filter(error =>
