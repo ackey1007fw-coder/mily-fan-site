@@ -52,7 +52,8 @@ test("ASR summaries retain their source limitations and do not invent songs, quo
 });
 
 test("the approved real frame is complete, decodable, metadata-free and displayed once", async () => {
-  assert.equal(recap.gallery, undefined);
+  assert.equal(recap.gallery.length, 5);
+  assert.equal(recap.image, recap.gallery[2]);
   assert.ok(recap.image);
   const bytes = readFileSync(new URL("../public" + recap.image.src, import.meta.url));
   const meta = await sharp(bytes).metadata();

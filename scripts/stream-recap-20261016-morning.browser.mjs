@@ -62,15 +62,19 @@ try {
       assert.equal(ids.filter(id => id === `recap-${recap.id}`).length, 1);
       assert.equal(await card.locator('video, audio').count(), 0);
       const images = card.locator('img');
-      assert.equal(await images.count(), 1, 'The single approved frame must appear only once');
-      await images.last().scrollIntoViewIfNeeded();
-      await images.last().evaluate(image => image.decode());
+      assert.equal(await images.count(), 6, 'Representative plus five gallery images');
+      await page.waitForTimeout(850);
       for (const image of await images.all()) {
-        assert.equal(await image.getAttribute('src'), recap.image.src);
+        await image.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(850);
+        await image.evaluate(item => item.decode());
+        const src = await image.getAttribute('src');
+        assert.ok([recap.image, ...recap.gallery].some(item => item.src === src));
         const size = await image.evaluate(item => ({ width: item.naturalWidth, height: item.naturalHeight }));
         assert.deepEqual(size, { width: 640, height: 360 });
       }
-      assert.equal(await card.locator('a[download]').count(), 0, 'No duplicate singleton gallery');
+      assert.equal(await card.locator('a[download]').count(), 5, 'Every gallery image can be saved');
+      assert.deepEqual(await card.locator('img').evaluateAll(items => [...new Set(items.map(item => item.getAttribute('src')))]), [recap.image.src, ...recap.gallery.filter(item => item !== recap.image).map(item => item.src)]);
       const lab = card.getByRole('link', { name: 'MILY SIGNAL・10月16日朝の匿名分析 ↗', exact: true });
       assert.equal(await lab.getAttribute('href'), '/data-lab/#morning-20261016');
       assert.equal(await lab.getAttribute('rel'), 'noopener noreferrer');
@@ -105,9 +109,16 @@ try {
       assert.equal(await card.getAttribute('open'), '');
       const nightCard = page.locator('#recap-2026-10-15-night-showroom');
       assert.equal(await nightCard.count(), 1, 'Night recap must not be duplicated');
-      assert.equal(await nightCard.locator('img, video, audio').count(), 0, 'No unapproved night media');
+      assert.equal(await nightCard.locator('img').count(), 3, 'Night representative plus two gallery images');
+      assert.equal(await nightCard.locator('video, audio').count(), 0);
       await nightCard.locator(':scope > summary').click();
       assert.equal(await nightCard.getAttribute('open'), '');
+      for (const image of await nightCard.locator('img').all()) {
+        await image.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(850);
+        await image.evaluate(item => item.decode());
+        assert.ok(await image.evaluate(item => item.naturalWidth === 640 && item.naturalHeight === 360));
+      }
       const nightContent = await nightCard.innerText();
       for (const snippet of ['夜の四次審査突破と感謝', 'セミファイナル', 'ラジオ']) assert.ok(nightContent.includes(snippet), snippet);
       const nightLab = nightCard.locator('a[href="/data-lab/#night-20261015"]');
