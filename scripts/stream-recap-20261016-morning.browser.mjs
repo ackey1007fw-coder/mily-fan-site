@@ -28,11 +28,12 @@ try {
     const result = { engine, viewport: { width, height }, screenshots: [], pageErrors: [], consoleErrors: [], unavailableApiFixtures: [], passed: false };
     results.push(result);
     try {
-      const page = await browser.newPage({ viewport: { width, height } });
+      const context = await browser.newContext({ viewport: { width, height } });
+      const page = await context.newPage();
       page.on('pageerror', error => result.pageErrors.push(error.message));
       page.on('console', message => { if (message.type() === 'error') result.consoleErrors.push({ text: message.text(), url: message.location().url }); });
       // Follow the existing CI fixture: only the local build is exercised.
-      await page.route('**/*', route => {
+      await context.route('**/*', route => {
         const url = new URL(route.request().url());
         if (url.origin !== origin) {
           if (route.request().resourceType() === 'stylesheet') return route.fulfill({ status: 200, contentType: 'text/css', body: '' });
