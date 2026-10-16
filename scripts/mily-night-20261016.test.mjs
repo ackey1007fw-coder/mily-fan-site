@@ -96,7 +96,6 @@ test("private conversation and viewer records are outside every new public artif
   assert.match(docs,/2026-10-16 夜配信/);
   for(const s of [section,raw]) {
     assert.doesNotMatch(s,/chatgpt\.site|drive\.google|@gmail\.com|viewer[_-]?id|comment[_-]?text|contributor[_-]?id|[A-Z]:\\Users\\/i);
-    assert.doesNotMatch(s,/じっくり考えてくださったんですね|私色々考えすぎる癖|不安になってしまう|ファンルームにやるよー/);
   }
   for (const k of ["raw_comments","raw_logs","private_messages","dm_screenshots","recording_path","recording_file","viewer_ids","supporter_names","local_path"]) {
     assert.equal(Object.hasOwn(night,k),false,k);

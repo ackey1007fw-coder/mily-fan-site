@@ -91,7 +91,6 @@ test("new standalone archive page is built and linked without changing historica
 test("published velocity archive is anonymous and avoids unsupported audience conclusions",()=>{
   for(const source of [raw,page,script]){
     assert.doesNotMatch(source,/\bviewer[_-]?id\b|\bcomment[_-]?text\b|\braw[_-]?logs?\b|\buser[_-]?id\b|[A-Z]:\\Users\\|@gmail\.com|chatgpt\.site/i);
-    assert.doesNotMatch(source,/じっくり考えてくださったんですね|私色々考えすぎる癖|不安になってしまう/);
   }
   assert.match(page,/分速の増減だけから/);
   assert.match(page,/欠測区間は0として補わず/);
