@@ -63,10 +63,10 @@ try {
       assert.equal(await card.locator('video, audio').count(), 0);
       const images = card.locator('img');
       assert.equal(await images.count(), 6, 'Representative plus five gallery images');
-      await images.last().scrollIntoViewIfNeeded();
-      await images.last().evaluate(image => image.decode());
+      await page.waitForTimeout(850);
       for (const image of await images.all()) {
         await image.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(850);
         await image.evaluate(item => item.decode());
         const src = await image.getAttribute('src');
         assert.ok([recap.image, ...recap.gallery].some(item => item.src === src));
@@ -115,6 +115,7 @@ try {
       assert.equal(await nightCard.getAttribute('open'), '');
       for (const image of await nightCard.locator('img').all()) {
         await image.scrollIntoViewIfNeeded();
+        await page.waitForTimeout(850);
         await image.evaluate(item => item.decode());
         assert.ok(await image.evaluate(item => item.naturalWidth === 640 && item.naturalHeight === 360));
       }
