@@ -26,6 +26,7 @@ import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
+import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -275,6 +276,28 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-16-x-red-riding-hood-new-video",
+    date: "2026-10-16",
+    title: "赤ずきん姿のみりぃ、新しいX投稿を紹介🍎",
+    body: "10月16日に共有された、みりぃ本人のX投稿を紹介します。サイトオーナーが同時に提供した約11秒の縦型映像では、赤いフードと三つ編み姿で、カメラに向かって指や手でポーズを取る姿が確認できました。\n\nX投稿は下の公式埋め込みからご覧ください。提供映像と元投稿内メディアとの完全な一致は未検証です。元投稿の本文は直接取得できていないため引用していません。",
+    source: "https://x.com/mily_chan36/status/2110892605605363858",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    xEmbed: {
+      postId: "2110892605605363858",
+      sourceUrl: "https://x.com/mily_chan36/status/2110892605605363858",
+      alt: "赤ずきん姿の縦型映像とともに共有された、みりぃ本人のX投稿",
+    },
+  },
+  {
+    id: "2026-10-16-tiktok-seasidecircle-shared",
+    date: "2026-10-16",
+    dateBasis: "confirmed-on",
+    title: "湘南シーサイドサークルのTikTok投稿リンク📱",
+    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。",
+    source: tiktokSeasideCircleSharedVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を開く",
+  },
   {
     id: "2026-10-15-miss-circle-semifinal-advance",
     date: "2026-10-15",
