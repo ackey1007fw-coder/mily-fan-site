@@ -41,6 +41,15 @@ section.content{margin:56px auto}.section-title{font-size:clamp(1.5rem,3vw,2.15r
 .caution{border-left:4px solid #f3c594;background:#2c333c;border-radius:0 12px 12px 0;padding:16px 20px;color:#e6d8c9;margin:22px 0}
 footer{padding:35px 0 55px;border-top:1px solid #345469;color:#afc5ce;font-size:.84rem}
 @media(max-width:760px){.stats{grid-template-columns:1fr}.comparison,.gaps,.quality{grid-template-columns:1fr}.bar{grid-template-columns:86px minmax(0,1fr) 62px;gap:6px}.bar b,.bar span{font-size:.7rem}.shell{width:min(1080px,calc(100% - 32px))}.hero{padding:44px 0}.panel{padding:16px}}
+
+.mobile-nav{display:none}
+.mobile-nav summary{list-style:none;cursor:pointer;border:1px solid #628296;border-radius:10px;padding:7px 12px;color:#e2f5f6;background:#153b4d;font-weight:750}
+.mobile-nav summary::-webkit-details-marker{display:none}
+.mobile-nav summary:focus-visible,.mobile-nav a:focus-visible{outline:3px solid #b8efdf;outline-offset:3px}
+.mobile-nav nav{display:flex;flex-direction:column;gap:0;background:#102f42;border:1px solid #45667b;border-radius:12px;padding:7px;min-width:195px;margin-top:7px}
+.mobile-nav nav a{display:block;padding:9px 12px;color:#def5f0;text-decoration:none;border-radius:8px}
+.mobile-nav nav a:hover{background:#254d5e}
+@media(max-width:1023px){.top-inner>.nav{display:none}.mobile-nav{display:block;margin-left:auto}.top-inner{align-items:center}}
 </style>
 <script defer src="/data-lab/assets/morning-20261018.js"></script>
 </head><body>
@@ -48,6 +57,8 @@ footer{padding:35px 0 55px;border-top:1px solid #345469;color:#afc5ce;font-size:
 <header class="top"><div class="shell top-inner">
 <a class="brand" href="/data-lab/">🍅 MILY <em>SIGNAL</em> · データラボ</a>
 <nav class="nav" aria-label="関連するページ"><a href="/data-lab/">ラボ一覧</a><a href="/data-lab/reports/20261017-night/">10/17夜</a><a href="/data-lab/reports/20261017-morning/">10/17朝</a><a href="/">ファンサイト</a></nav>
+<details class="mobile-nav"><summary aria-label="関連するページを開く">☰ メニュー</summary>
+<nav aria-label="モバイル向け関連ページ"><a href="/data-lab/">ラボ一覧</a><a href="/data-lab/reports/20261017-night/">10/17夜</a><a href="/data-lab/reports/20261017-morning/">10/17朝</a><a href="/">ファンサイト</a></nav></details>
 </div></header>
 <main id="main">
 <section class="hero"><div class="shell">
@@ -68,6 +79,10 @@ footer{padding:35px 0 55px;border-top:1px solid #345469;color:#afc5ce;font-size:
 <article class="day"><small>10/17 夜 / live23567037</small><h3>およそ49分の保存記録</h3><div class="big">2,970 <small>きら星</small></div><p>総訪問表示 90 / コメント 453</p><p class="detail">23:20:00.307 JST 最後の有効表示。主要3指標は夜レポートの実測を使用。</p><a href="/data-lab/reports/20261017-night/">夜の詳しい分析を読む →</a></article>
 <article class="day morning"><small>10/18 朝 / live23568147</small><h3>およそ113分の保存記録</h3><div class="big">9,887 <small>きら星</small></div><p>総訪問表示 1,603 / コメント 961</p><p class="detail">06:58:00.255 JST 保存画面。数値の最後の進行確認は06:56:37.120 JST。</p><a href="#observations">朝の実測グラフを見る →</a></article>
 </div>
+<div class="panel"><h3>9指標で見比べる、夜と朝の画面参考値</h3>
+<p class="intro">きら星だけでなく、初訪問・再訪問・その他free・星100貢献人数なども確認できます。指標の定義や時間帯は同一とは限らず、差分をそのまま視聴者数や公式評価へ換算しません。</p>
+<div class="scroll" tabindex="0"><table><caption>異なる長さの2配信、最後の有効オンライン画面参考値</caption><thead><tr><th scope="col">画面表示項目</th><th scope="col">10/17夜</th><th scope="col">10/18朝</th></tr></thead>
+<tbody id="m18-nine-metrics"><tr><td colspan="3">比較表を読み込み中…</td></tr></tbody></table></div></div>
 <div class="caution">両配信の正式なイベントIDは未確認。10月12日までのMISS CIRCLE四次審査のポイントと混ぜず、配信ID単位で比較しています。</div>
 </section>
 <section class="content shell" id="observations"><div class="eyebrow2">02 / TIME-BASED OBSERVATIONS</div>
@@ -79,7 +94,7 @@ footer{padding:35px 0 55px;border-top:1px solid #345469;color:#afc5ce;font-size:
 <button type="button" data-m18-metric="comments" aria-pressed="false">コメント</button>
 </div>
 <div class="panel"><div class="chart-wrap" tabindex="0"><svg id="m18-chart" viewBox="0 0 860 350" role="img" aria-label="保存された時刻付き画面表示の離散点"><text x="42" y="75" fill="#edf8fb">データの読み込み中…</text></svg></div>
-<p id="m18-caption" class="chart-cap" aria-live="polite">オレンジの縦帯は、30秒を超えた観測ギャップです。 <span class="gap-legend" aria-hidden="true"></span></p></div>
+<p id="m18-caption" class="chart-cap" aria-live="polite">オレンジの縦帯は、30秒を超えた観測ギャップです。輪郭だけの点は部分観測を示し、完全な9指標が揃った観測とは区別します。 <span class="gap-legend" aria-hidden="true"></span></p></div>
 <div class="panel"><h3>グラフに使った実測点</h3><div class="scroll" tabindex="0"><table><caption>実測の画面表示参考値・39点（JST）</caption>
 <thead><tr><th scope="col">観測時刻</th><th scope="col">きら星</th><th scope="col">総訪問</th><th scope="col">コメント</th></tr></thead><tbody id="m18-observations"><tr><td colspan="4">読み込み中…</td></tr></tbody></table></div></div>
 </section>
@@ -93,6 +108,11 @@ footer{padding:35px 0 55px;border-top:1px solid #345469;color:#afc5ce;font-size:
 <h2 class="section-title">空白も、正しく記録する。</h2>
 <p class="intro">30秒を超えた保存行間の空白は5区間。とくに長いのは約22分40秒の区間。オフライン時の0や前後の数字を使って、空白部分を作り足しません。</p>
 <div id="m18-gap-cards" class="gaps"><p>欠測区間を読み込み中…</p></div>
+<div class="panel"><h3>欠測の前後に残った、部分的な画面記録</h3>
+<p class="intro">9項目が揃わないため39点の完全観測からは除外した数値も、信頼できる項目だけ別枠で表示。表の「未確認」は0ではありません。逆行未検証のゼロも採用しません。グラフでは部分観測を輪郭だけの点で示し、欠測を線で埋めません。</p>
+<div class="scroll" tabindex="0"><table><caption>5つの欠測区間の両端に残る部分観測（JST）</caption><thead><tr><th scope="col">区間／位置</th><th scope="col">時刻</th><th scope="col">きら星</th><th scope="col">総訪問</th><th scope="col">コメント</th></tr></thead>
+<tbody id="m18-boundary-table"><tr><td colspan="5">読み込み中…</td></tr></tbody></table></div></div>
+
 <div class="caution">05:54に手動保存された画面は、きら星4,471・コメント363・総訪問「無効」。この「無効」は0ではなく未取得（null）として保全しています。画面の経過時計0秒表示を分速計算に使っていません。</div>
 </section>
 <section class="content shell" id="quality"><div class="eyebrow2">05 / COLLECTION QUALITY</div>
