@@ -553,7 +553,130 @@
         "cause": "収集・観測が継続しなかった区間（内訳未検証）"
       }
     ],
-    "samplePolicy": "有効画面値の約2分ごとの離散点＋欠測両端の観測点。全906行は公開しない。"
+    "samplePolicy": "有効な9指標の画面値から約2分ごとに抽出した39点と、5か所の欠測境界に残る別扱いの部分観測10点。部分観測の無効な項目はnullとし、逆行未検証のゼロは採用しない。点間の数値や分速は補完しない。",
+    "gapBoundaryObservations": [
+      {
+        "gapIndex": 0,
+        "side": "before",
+        "atJst": "2026-10-18T05:25:25.863+09:00",
+        "stars": null,
+        "visits": null,
+        "comments": null,
+        "nineComplete": false,
+        "regressionUnverified": true,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 0,
+        "side": "after",
+        "atJst": "2026-10-18T05:28:02.834+09:00",
+        "stars": 1763,
+        "visits": null,
+        "comments": 166,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 1,
+        "side": "before",
+        "atJst": "2026-10-18T05:28:29.041+09:00",
+        "stars": 1763,
+        "visits": null,
+        "comments": 169,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 1,
+        "side": "after",
+        "atJst": "2026-10-18T05:37:56.583+09:00",
+        "stars": 2715,
+        "visits": null,
+        "comments": 227,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 2,
+        "side": "before",
+        "atJst": "2026-10-18T05:38:23.530+09:00",
+        "stars": 2715,
+        "visits": null,
+        "comments": 230,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 2,
+        "side": "after",
+        "atJst": "2026-10-18T06:01:03.307+09:00",
+        "stars": 5118,
+        "visits": null,
+        "comments": 435,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 3,
+        "side": "before",
+        "atJst": "2026-10-18T06:01:28.911+09:00",
+        "stars": 5118,
+        "visits": null,
+        "comments": 440,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 3,
+        "side": "after",
+        "atJst": "2026-10-18T06:04:37.287+09:00",
+        "stars": 5335,
+        "visits": null,
+        "comments": 472,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 4,
+        "side": "before",
+        "atJst": "2026-10-18T06:24:53.347+09:00",
+        "stars": 7034,
+        "visits": 1071,
+        "comments": 668,
+        "nineComplete": true,
+        "regressionUnverified": false,
+        "partialObservation": false,
+        "safeForVelocity": false
+      },
+      {
+        "gapIndex": 4,
+        "side": "after",
+        "atJst": "2026-10-18T06:25:23.868+09:00",
+        "stars": 7177,
+        "visits": null,
+        "comments": 674,
+        "nineComplete": false,
+        "regressionUnverified": false,
+        "partialObservation": true,
+        "safeForVelocity": false
+      }
+    ],
+    "boundaryPolicy": "9指標が揃わず主グラフ39点から除外した値も、出典が検証できた指標だけ境界の参考点として表示する。逆行未検証（05:25:25）の星・訪問・コメントはnull。境界値同士を直線でつないだり増加ペースへ使わない。"
   },
   "commentVelocity": {
     "definition": "欠測をまたがない約5分枠内に限定して累積投稿表示の差分÷実観測時間を計算",
@@ -682,7 +805,9 @@
       "notTotalSourceCoverage": true
     },
     "dataCoverageComplete": false,
-    "sourceDataChecksumSha256": "dd3cda04885f234e08588b805bf1d2b61770b90185424c1efb72f9da9c173f71"
+    "sourceDataChecksumSha256": "dd3cda04885f234e08588b805bf1d2b61770b90185424c1efb72f9da9c173f71",
+    "partialBoundaryKnown": 9,
+    "partialBoundaryTotal": 10
   },
   "comparison": {
     "nightLiveId": 23567037,
@@ -691,7 +816,13 @@
       "stars": 2970,
       "visits": 90,
       "comments": 453,
-      "atJst": "2026-10-17T23:20:00.307+09:00"
+      "atJst": "2026-10-17T23:20:00.307+09:00",
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "newFollows": 1,
+      "otherFree": 20,
+      "star100People": 27,
+      "recommendedCommentPeople": 20
     },
     "nightRecordingSeconds": 2947.513,
     "nightAsrChunks": 147,
