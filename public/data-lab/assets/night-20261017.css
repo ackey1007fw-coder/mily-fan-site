@@ -1,0 +1,24 @@
+.n17-body .a17-hero{background:radial-gradient(ellipse at 80% 10%,rgba(181,111,247,.18),transparent 48%),radial-gradient(ellipse at 15% 100%,rgba(103,224,199,.11),transparent 43%),linear-gradient(145deg,#101e39,#071521 78%)}
+.n17-body .a17-eyebrow{color:#d6b3ff}
+.n17-body .a17-hero h1 em{color:#d6b3ff}
+.n17-coverage{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0 25px}
+.n17-coverage>div{border:1px solid #355f70;background:#0f2d3d;border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:7px}
+.n17-coverage small{color:#b8d5d8}.n17-coverage strong{font-size:clamp(1.2rem,2.5vw,1.8rem);font-variant-numeric:tabular-nums}.n17-coverage span{font-size:.84rem;color:#b6cdd6;line-height:1.6}
+#n17-chart-svg{display:block;width:100%;min-width:620px;height:auto}
+.n17-bars{display:grid;gap:11px}
+.n17-bar-row{display:grid;grid-template-columns:114px minmax(0,1fr) 85px;align-items:center;gap:10px}
+.n17-bar-row>span{color:#d6e7ee;font-size:.86rem;font-variant-numeric:tabular-nums}
+.n17-bar-row>b{color:#f4ecff;text-align:right;font-variant-numeric:tabular-nums;font-size:.9rem}
+.n17-bar-track{background:#244359;min-height:18px;border-radius:999px;overflow:hidden}
+.n17-bar-fill{display:block;height:18px;background:linear-gradient(90deg,#8bccf2,#d2affd);border-radius:999px}
+.n17-quality-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.n17-quality-card{background:#102a3a;border:1px solid #355568;border-radius:17px;padding:24px;min-width:0}
+.n17-quality-card h3{margin:12px 0;color:#eef7fb;font-size:1.18rem}.n17-quality-card p{color:#cbdde2;line-height:1.83;font-size:.94rem}
+.n17-quality-card strong{color:#fff0c5}.n17-serious{border-color:#84644e;background:#2c2931}
+.n17-state{display:inline-block;background:#205244;color:#aeefd7;border-radius:999px;padding:5px 10px;font-size:.74rem;font-weight:800}
+.n17-caution{background:#504525;color:#ffe1a8}.n17-danger{background:#66363a;color:#ffc9b7}
+.n17-body a{color:inherit}
+.n17-body .a17-explain-grid a{color:#b2f4dd;text-decoration:underline}
+.n17-body .a17-footer-links a{text-decoration:none}
+@media(max-width:850px){.n17-quality-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.n17-coverage{grid-template-columns:1fr}.n17-quality-grid{grid-template-columns:1fr}.n17-bar-row{grid-template-columns:82px minmax(0,1fr) 72px;gap:7px}.n17-bar-row>span,.n17-bar-row>b{font-size:.78rem}}
