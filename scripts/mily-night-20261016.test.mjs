@@ -14,7 +14,7 @@ test("October 16 night remains linked beneath newer October 17, without replacin
     assert.ok(html.includes('id="' + id + '"'), id);
   }
   assert.ok(html.indexOf('id="night-20261016"') < html.indexOf('id="morning-20261016"'));
-  assert.match(html, /<nav class="nav"[^>]*><a href="#morning-20261017">10\/17朝<\/a><a href="#night-20261016">10\/16夜<\/a>/);
+  assert.match(html, /<nav class="nav"[^>]*><a href="#night-20261017">10\/17夜<\/a><a href="#morning-20261017">10\/17朝<\/a><a href="#night-20261016">10\/16夜<\/a>/);
   assert.match(html,/noindex,nofollow,noarchive/);
   assert.equal(night.live_id,23562541);
   assert.equal(night.event_partition.analysis_cutoff_jst,"2026-10-12T22:00:00+09:00");
