@@ -79,6 +79,7 @@ test("new accessible report is linked from MILY SIGNAL without removing old arch
  assert.match(page,/aria-pressed="true"/);
  assert.match(page,/id="a17-table-body"/);
  assert.match(js,/aria-pressed/);
+ assert.doesNotMatch(js,/\.at\s*\(/,"public untranspiled script must support older mobile Safari");
  assert.match(css,/@media\(max-width:720px\)/);
 });
 test("public report stays anonymized and avoids raw system or viewer details",()=>{
