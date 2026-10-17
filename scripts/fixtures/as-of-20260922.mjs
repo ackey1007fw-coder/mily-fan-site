@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-17-x-relaxed-morning-showroom",
   "2026-10-16-x-red-riding-hood-new-video",
   "2026-10-16-tiktok-seasidecircle-shared",
   "2026-10-15-miss-circle-semifinal-advance",

@@ -278,6 +278,22 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-17-x-relaxed-morning-showroom",
+    date: "2026-10-17",
+    sameDayOrder: 1045,
+    title: "久しぶりにゆっくりゆったり🩵 みりぃの朝配信と自撮り",
+    body: "10月17日10:45（日本時間）、みりぃがXで、ここ数日続いていた慌ただしい配信を振り返り、久しぶりにゆっくり過ごせた朝の配信が幸せだったと報告。来てくれた皆さんへの感謝も伝えています。\n\n朝食は前日のキムチ炒飯と豆苗炒め🌱。投稿には、紺色のトップスで窓辺に立ち、片手でポーズを作る自撮り写真が添えられています。\n\n投稿当時は同日夜22:30からのSHOWROOM配信を予告していました。これは10月17日時点の案内であり、配信の実施や現在の予定を確定するものではありません。最新の案内は本人の投稿をご確認ください。",
+    source: "https://x.com/Mily_chan36/status/2111272418140622870",
+    sourceLabel: "みりぃ本人のX投稿と写真を見る（10月17日）",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b229-01-20261017-relaxed-morning-selfie.jpg",
+      width: 1152,
+      height: 2048,
+      alt: "紺色のトップスで窓辺に立ち、顔の横で指をL字に添えたみりぃの自撮り写真",
+    },
+  },
+  {
     id: "2026-10-16-x-red-riding-hood-new-video",
     date: "2026-10-16",
     title: "赤ずきん姿のみりぃ、新しいX投稿を紹介🍎",
