@@ -19,6 +19,15 @@ function valid(d){
  if(d.commentVelocity?.intervals?.length!==12 || d.lastValidOnline?.stars!==9887||d.lastValidOnline?.visits!==1603||d.lastValidOnline?.comments!==961)return false;
  if(d.quality?.dataCoverageComplete!==false||d.quality?.websocket?.completeSourceCoverageVerified!==false)return false;
  if(d.quality?.visibleDom?.totalKnownDroppedFragments!==113143)return false;
+ const edges=d.counters.gapBoundaryObservations;
+ if(!Array.isArray(edges)||edges.length!==10||d.quality.partialBoundaryTotal!==10||d.quality.partialBoundaryKnown!==9)return false;
+ for(let i=0;i<edges.length;i++){
+  const p=edges[i];
+  if(p.gapIndex!==Math.floor(i/2)||p.side!==(i%2===0?"before":"after")||!Number.isFinite(toMs(p.atJst)))return false;
+  if(!["stars","visits","comments"].every(k=>p[k]===null||(Number.isSafeInteger(p[k])&&p[k]>=0)))return false;
+  if(p.safeForVelocity!==false)return false;
+ }
+ if(edges[0].stars!==null||edges[0].visits!==null||edges[0].comments!==null)return false;
  const a=d.counters.observations;
  for(let i=0;i<a.length;i++){
    if(!Number.isFinite(toMs(a[i].atJst)))return false;
@@ -53,6 +62,13 @@ function chart(d,key){
    target.append(svg("text",{x:60,y:y(v)+4,fill:"#b6d4dd","text-anchor":"end","font-size":12},fmt(v)));
  }
  target.append(svg("text",{x:69,y:23,fill:metric.color,"font-size":15,"font-weight":800},metric.label+"／画面表示"));
+ // Distinguish verified, partial, and untrusted gap-edge values.
+ d.counters.gapBoundaryObservations.forEach(p=>{
+   if(!Number.isSafeInteger(p[key]))return;
+   const ring=svg("circle",{cx:x(toMs(p.atJst)),cy:y(p[key]),r:6,fill:"#102e3c",stroke:"#ffe0a8","stroke-width":2.2,"stroke-dasharray":"2 3"});
+   ring.append(svg("title",{},time(p.atJst)+"／"+metric.label+" "+fmt(p[key])+metric.unit+"。欠測境界の部分観測であり9指標完全ではありません。"));
+   target.append(ring);
+ });
  obs.forEach(p=>{
    const point=svg("circle",{cx:x(toMs(p.atJst)),cy:y(p[key]),r:5.3,fill:metric.color,stroke:"#0c2533","stroke-width":1.5});
    point.append(svg("title",{},time(p.atJst)+"｜"+metric.label+" "+fmt(p[key])+metric.unit+"（参考表示）"));
@@ -63,7 +79,7 @@ function chart(d,key){
    target.append(svg("text",{x:x(t),y:321,fill:"#bdd4db","text-anchor":i===0?"start":i===4?"end":"middle","font-size":13},short(new Date(t).toISOString())));
  }
  target.setAttribute("aria-label",metric.label+"の実測39点。観測ギャップ5区間を色付きで表示。点を線で結ばず、値を補完していません。");
- caption.textContent=metric.label+"｜実測39点。オレンジの帯は30秒以上の観測ギャップ。未観測の増加・減少時刻は推定しません。";
+ caption.textContent=metric.label+"｜完全観測39点と境界の部分観測。オレンジの帯は30秒超の欠測、輪郭の点は部分観測。逆行未検証のゼロは採用せず、間の変化は推定しません。";
 }
 function table(d){
  const body=document.getElementById("m18-observations");body.replaceChildren();
@@ -86,6 +102,29 @@ function pace(d){
    tr.append(th,node("td","+"+fmt(p.commentsIncrease)),node("td",p.minutes.toFixed(2)),node("td",p.observedAveragePerMinute.toFixed(2)+" 件"));tab.append(tr);
  }
 }
+
+function nineMetrics(d){
+ const e=document.getElementById("m18-nine-metrics");if(!e)return;e.replaceChildren();
+ const night=d.comparison.nightLastValidOnline,morning=d.lastValidOnline;
+ const fields=[
+ ["きら星","stars"],["総訪問表示","visits"],["投稿表示","comments"],
+ ["初訪問表示","firstVisits"],["2度訪問表示","repeatVisits"],["新規follow表示","newFollows"],
+ ["その他free表示","otherFree"],["星100貢献人数","star100People"],["おすすめcomment人数","recommendedCommentPeople"]
+ ];
+ fields.forEach(([label,key])=>{
+  const tr=node("tr"),th=node("th",label);th.scope="row";
+  const show=value=>Number.isSafeInteger(value)?fmt(value):"未確認";
+  tr.append(th,node("td",show(night[key])),node("td",show(morning[key])));e.append(tr);
+ });
+}
+function gapBoundary(d){
+ const e=document.getElementById("m18-boundary-table");if(!e)return;e.replaceChildren();
+ const fmtValue=v=>Number.isSafeInteger(v)?fmt(v):"未確認";
+ d.counters.gapBoundaryObservations.forEach(p=>{
+  const tr=node("tr"),h=node("th",(p.gapIndex+1)+" / "+(p.side==="before"?"欠測前":"再観測後"));h.scope="row";
+  tr.append(h,node("td",time(p.atJst)),node("td",fmtValue(p.stars)),node("td",fmtValue(p.visits)),node("td",fmtValue(p.comments)));e.append(tr);
+ });
+}
 function gaps(d){
  const e=document.getElementById("m18-gap-cards");e.replaceChildren();
  for(const g of d.counters.gaps){
@@ -97,7 +136,7 @@ function gaps(d){
 function failure(){
  const t=document.getElementById("m18-chart");
  if(t)t.replaceChildren(svg("text",{x:20,y:70,fill:"#fdd3b8","font-size":16},"匿名データを検証できませんでした。数値は推定しません。"));
- for(const id of ["m18-observations","m18-pace-table","m18-pace-bars","m18-gap-cards"]){
+ for(const id of ["m18-observations","m18-pace-table","m18-pace-bars","m18-gap-cards","m18-boundary-table","m18-nine-metrics"]){
    const e=document.getElementById(id);if(e)e.replaceChildren(node("p","読み込みに失敗しました。未確認データを補完しません。"));
  }
 }
@@ -107,7 +146,7 @@ async function main(){
   if(!response.ok)throw Error("HTTP "+response.status);
   const data=await response.json();
   if(!valid(data))throw Error("Dataset invalid");
-  table(data);pace(data);gaps(data);
+  table(data);pace(data);gaps(data);nineMetrics(data);gapBoundary(data);
   const buttons=document.querySelectorAll("[data-m18-metric]");
   buttons.forEach(b=>b.addEventListener("click",()=>{buttons.forEach(other=>other.setAttribute("aria-pressed",String(other===b)));chart(data,b.dataset.m18Metric);}));
   chart(data,"stars");
