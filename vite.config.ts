@@ -37,6 +37,7 @@ function siteMetadataPlugin(): Plugin {
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
         .replaceAll("__DATA_LAB_CANONICAL__", dataLabUrl())
         .replaceAll("__DATA_LAB_FINAL_NIGHT_CANONICAL__", dataLabFinalNightUrl())
+        .replaceAll("__DATA_LAB_20261017_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261017-night/`)
         .replaceAll("__DATA_LAB_OG_IMAGE__", dataLabOgImageUrl())
         .replaceAll("__PROFILE_CANONICAL__", profileUrl())
         .replaceAll(
