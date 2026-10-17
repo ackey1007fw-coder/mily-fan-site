@@ -105,3 +105,46 @@ test("new files are anonymous and do not expose personal logs or archive links",
  assert.match(page,/非公式/);
  assert.doesNotMatch(page,/アイドル本人が感動|本人は喜んでいる/);
 });
+
+test("gap boundary partial evidence is separately displayed without false zeros",()=>{
+ const edges=data.counters.gapBoundaryObservations;
+ assert.equal(edges.length,10);
+ assert.equal(data.quality.partialBoundaryKnown,9);
+ assert.equal(data.quality.partialBoundaryTotal,10);
+ assert.match(data.counters.boundaryPolicy,/逆行未検証/);
+ assert.deepEqual([edges[0].stars,edges[0].visits,edges[0].comments],[null,null,null]);
+ assert.deepEqual([edges[5].stars,edges[5].visits,edges[5].comments],[5118,null,435]);
+ assert.deepEqual([edges[9].stars,edges[9].visits,edges[9].comments],[7177,null,674]);
+ for(let i=0;i<edges.length;i++){
+   const p=edges[i],g=data.counters.gaps[Math.floor(i/2)];
+   assert.equal(p.gapIndex,Math.floor(i/2));
+   assert.equal(p.side,i%2===0?"before":"after");
+   assert.equal(ms(p.atJst),ms(i%2===0?g.fromJst:g.toJst));
+   assert.equal(p.safeForVelocity,false);
+   for(const key of ["stars","visits","comments"])assert.ok(p[key]===null||Number.isSafeInteger(p[key]));
+ }
+ assert.match(page,/id="m18-boundary-table"/);
+ assert.match(page,/9項目が揃わない/);
+ assert.match(script,/gapBoundaryObservations\.forEach/);
+ assert.match(script,/stroke-dasharray/);
+ assert.match(script,/partialBoundaryTotal/);
+});
+test("mobile page navigation uses native accessible details disclosure below 1024px",()=>{
+ assert.match(page,/<details class="mobile-nav">/);
+ assert.match(page,/<summary aria-label="関連するページを開く">/);
+ assert.match(page,/<nav aria-label="モバイル向け関連ページ">/);
+ assert.match(page,/@media\(max-width:1023px\)/);
+ assert.match(page,/\.top-inner>\.nav\{display:none\}/);
+ assert.match(page,/\.mobile-nav\{display:block/);
+ assert.match(page,/:focus-visible/);
+});
+test("all nine anonymized end-screen metrics are compared as separate screen displays",()=>{
+ const n=data.comparison.nightLastValidOnline,m=data.lastValidOnline;
+ assert.deepEqual([n.stars,n.visits,n.comments,n.firstVisits,n.repeatVisits,n.newFollows,n.otherFree,n.star100People,n.recommendedCommentPeople],
+ [2970,90,453,0,0,1,20,27,20]);
+ assert.deepEqual([m.stars,m.visits,m.comments,m.firstVisits,m.repeatVisits,m.newFollows,m.otherFree,m.star100People,m.recommendedCommentPeople],
+ [9887,1603,961,105,64,7,885,86,151]);
+ assert.match(page,/id="m18-nine-metrics"/);
+ assert.match(script,/function nineMetrics/);
+ assert.match(page,/合計数の大小だけで応援や盛り上がりの優劣は決められません/);
+});
