@@ -11,9 +11,10 @@ const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8"
 const ledger = JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
 const lab = JSON.parse(read("public/data-lab/data/mily-night-20261016-aggregate.json"));
 
-test("October 16 night is an independent latest article above the preserved morning and previous night", () => {
-  assert.equal(streamRecaps[0], recap);
-  assert.deepEqual(streamRecaps.slice(0, 4).map(x => x.id), [
+test("October 16 night remains an independent article above its morning and the previous night", () => {
+  const historicalIndex = streamRecaps.findIndex(x => x === recap);
+  assert.ok(historicalIndex >= 0);
+  assert.deepEqual(streamRecaps.slice(historicalIndex, historicalIndex + 4).map(x => x.id), [
     "2026-10-16-night-showroom", "2026-10-16-morning-showroom",
     "2026-10-15-night-showroom", "2026-10-15-morning-showroom",
   ]);
@@ -78,7 +79,9 @@ test("all eight selected recording frames decode at their declared size without 
 
 test("the verification record exactly matches the public recap while raw material stays private", () => {
   const entry = ledger.find(x => x.id === recap.id);
-  assert.equal(ledger[0], entry);
+  assert.ok(ledger.includes(entry));
+  const historicalIndex = ledger.findIndex(x => x === entry);
+  assert.equal(ledger[historicalIndex + 1]?.id, "2026-10-16-morning-showroom");
   assert.equal(ledger.filter(x => x.id === recap.id).length, 1);
   assert.equal(entry.source, recap.sourceLabel);
   assert.equal(entry.originalNote, recap.transcriptionNote);

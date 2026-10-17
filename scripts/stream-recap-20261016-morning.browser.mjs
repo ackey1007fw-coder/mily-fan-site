@@ -5,6 +5,8 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { streamRecap20261016Asa as recap } from '../src/data/streamRecap20261016Asa.ts';
 import { streamRecap20261016Night as latestRecap } from '../src/data/streamRecap20261016Night.ts';
+import { streamRecap20261017Asa as longRecap } from '../src/data/streamRecap20261017Asa.ts';
+import { streamRecaps } from '../src/data/streamRecaps.ts';
 
 const tools = process.env.PLAYWRIGHT_MODULE_ROOT;
 assert.ok(tools, 'Use the existing CI Playwright installation');
@@ -148,23 +150,25 @@ try {
       assert.equal(await jumpNav.count(), 1, 'Recent recap jump menu exists above cards');
       const jumpLinks = jumpNav.locator('a[href^="#recap-"]');
       assert.equal(await jumpLinks.count(), 3);
-      assert.deepEqual(await jumpLinks.evaluateAll(links => links.map(link => link.getAttribute('href'))), [
-        '#recap-2026-10-16-night-showroom',
-        '#recap-2026-10-16-morning-showroom',
-        '#recap-2026-10-15-night-showroom',
-      ]);
+      assert.deepEqual(
+        await jumpLinks.evaluateAll(links => links.map(link => link.getAttribute('href'))),
+        streamRecaps.slice(0, 3).map(item => '#recap-' + item.id),
+        'The newest-three jump menu follows the real current archive instead of freezing on older articles',
+      );
       const jumpScreenshot = `${engine}-${width}-recent-links.png`;
       await jumpNav.screenshot({ path: join(output, jumpScreenshot) });
       result.screenshots.push(jumpScreenshot);
-      await jumpNav.locator('a[href="#recap-2026-10-15-night-showroom"]').click();
-      await page.waitForFunction(() => {
-        const target = document.getElementById('recap-2026-10-15-night-showroom');
-        return location.hash === '#recap-2026-10-15-night-showroom' && target?.open;
-      });
+      const selectedJump = await jumpLinks.last().getAttribute('href');
+      assert.ok(selectedJump?.startsWith('#recap-'));
+      await jumpLinks.last().click();
+      await page.waitForFunction(href => {
+        const target = document.querySelector(href);
+        return location.hash === href && target?.open;
+      }, selectedJump);
       await page.waitForTimeout(850);
-      const nightTop = await nightCard.evaluate(el => el.getBoundingClientRect().top);
-      assert.ok(nightTop >= -30 && nightTop < height * 0.8,
-        'Jump link brings night recap heading into the visible viewport, top=' + nightTop);
+      const selectedTop = await page.locator(selectedJump).evaluate(el => el.getBoundingClientRect().top);
+      assert.ok(selectedTop >= -30 && selectedTop < height * 0.8,
+        'A current newest-three jump brings its actual target into view, top=' + selectedTop);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
         'Jump menu and night recap do not overflow the screen');
 
@@ -205,6 +209,43 @@ try {
       const latestFile = `${engine}-${width}-night-20261016.png`;
       await latestCard.screenshot({ path: join(output, latestFile) });
       result.screenshots.push(latestFile);
+      // Verify the new 10/17 long-morning article in the same Chromium/WebKit/mobile matrix.
+      await page.goto(`${origin}/activities/live/#recap-${longRecap.id}`, { waitUntil: 'networkidle' });
+      const longCard = page.locator(`#recap-${longRecap.id}`);
+      assert.equal(await longCard.count(), 1);
+      assert.equal(await longCard.getAttribute('open'), '');
+      assert.equal(await longCard.getByRole('heading', { name: longRecap.theme, exact: true }).count(), 1);
+      assert.ok((await longCard.innerText()).includes(longRecap.summary));
+      assert.equal(await longCard.locator('video, audio').count(), 0);
+      assert.equal(await longCard.locator('img').count(), longRecap.gallery.length + 1);
+      assert.equal(await longCard.locator('a[download]').count(), longRecap.gallery.length);
+      const longImages = await longCard.locator('img').all();
+      assert.equal(longImages.length, 12);
+      for (const image of longImages) {
+        await image.scrollIntoViewIfNeeded();
+        await image.evaluate(item => item.decode());
+        assert.ok(await image.evaluate(item => item.naturalWidth === 640 && item.naturalHeight === 360));
+        const src = await image.getAttribute('src');
+        assert.ok(longRecap.gallery.some(item => item.src === src));
+      }
+      assert.equal(await longCard.locator('a[href="/data-lab/reports/20261017-morning/"]').count(), 1);
+      const longSource = longCard.locator('[data-recap-source]');
+      assert.ok((await longSource.innerText()).includes('2026年10月17日 朝のSHOWROOMロング配信'));
+      const longProof = longSource.locator('[data-recap-verification]');
+      assert.equal(await longProof.getAttribute('open'), null);
+      await longProof.locator(':scope > summary').click();
+      const details17 = await longProof.innerText();
+      for (const sentence of ['654処理チャンク','約123分','全編の手動聴取と逐語校正は行っていません']) {
+        assert.ok(details17.includes(sentence), sentence);
+      }
+      await longCard.locator(':scope > summary').scrollIntoViewIfNeeded();
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+      const longBounds = await longCard.boundingBox();
+      assert.ok(longBounds && longBounds.x >= -1 && longBounds.x + longBounds.width <= width + 1);
+      const longFile = `${engine}-${width}-morning-20261017-long.png`;
+      await longCard.screenshot({ path: join(output, longFile) });
+      result.screenshots.push(longFile);
+
       assert.deepEqual(result.pageErrors, []);
       const unexpectedConsoleErrors = result.consoleErrors.filter(error =>
         !result.unavailableApiFixtures.includes(error.url) || !/^Failed to load resource:.*503/.test(error.text));
