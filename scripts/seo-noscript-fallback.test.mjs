@@ -10,6 +10,8 @@ const indexablePages = [
   ["profile/index.html", "/profile/"],
   ["news/index.html", "/news/"],
   ["activities/live/index.html", "/activities/live/"],
+  ["activities/index.html", "/activities/"],
+  ["gallery/index.html", "/gallery/"],
 ];
 
 function source(relative) {
@@ -21,6 +23,7 @@ describe("indexable pages have a safe no-JavaScript navigation fallback", () => 
   const parsedLocs = [...sitemap.matchAll(/<loc>(https:\/\/[^<]+)<\/loc>/g)]
     .map((match) => new URL(match[1]).pathname);
   const locs = new Set(parsedLocs);
+  const fallbackRoutes = new Map(indexablePages.map(([file, route]) => [route, file]));
 
   for (const [file, route] of indexablePages) {
     it(route + " offers truthful nonofficial no-JS information and local links", () => {
@@ -40,6 +43,9 @@ describe("indexable pages have a safe no-JavaScript navigation fallback", () => 
       for (const href of hrefs) {
         assert.ok(href.startsWith("/"), file + ": only local absolute paths are allowed");
         assert.ok(locs.has(href), file + ": fallback link missing from sitemap: " + href);
+        const linkedFile = fallbackRoutes.get(href);
+        assert.ok(linkedFile, file + ": no-JS link leads to a page without a fallback: " + href);
+        assert.match(source(linkedFile), /<noscript>/, file + ": destination is blank without JS: " + href);
       }
       assert.doesNotMatch(fallback, /<script|<iframe|<img|<form|[?&](?:token|key)=/i);
     });
