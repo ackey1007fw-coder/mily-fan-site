@@ -67,3 +67,33 @@ footer{border-top:1px solid #2c4657;padding:30px 0 45px;color:var(--muted);font-
 .noon-update .morning-note a{color:#a1edd7}
 @media(max-width:960px){.noon-update .pred-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:720px){.noon-insights ul{grid-template-columns:1fr;gap:6px}.noon-insights{padding:18px}}
+
+
+/* Third-party support distribution: independently reconstructed for Mily only. */
+.fujiwara-section{background:linear-gradient(155deg,rgba(113,218,197,.06),transparent 70%)}
+.fujiwara-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 18px}
+.fujiwara-stat small{display:block;color:var(--soft);font-size:12px}
+.fujiwara-stat strong{display:block;font-size:clamp(25px,3.5vw,38px);font-variant-numeric:tabular-nums;line-height:1.25;margin:10px 0}
+.fujiwara-stat strong span{font-size:16px}
+.fujiwara-stat p{font-size:12px;color:var(--soft);margin:0}
+.fujiwara-card .card-sub{margin:6px 0 24px}
+.fujiwara-period{margin:22px 0 32px}
+.fujiwara-period-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.fujiwara-period-head strong{font-size:17px}
+.fujiwara-period-head strong span{font-size:12px;color:var(--soft);font-weight:400}
+.fujiwara-period-head b{font-size:19px}
+.fujiwara-stacked{display:flex;height:29px;overflow:hidden;border-radius:8px;background:#0c2937}
+.fujiwara-stacked span{height:100%;display:block}
+.fujiwara-top{background:#fa9675}
+.fujiwara-middle{background:#71dac5}
+.fujiwara-tail{background:#88a8fb}
+.fujiwara-breakdown{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:11px}
+.fujiwara-breakdown span{color:var(--soft);font-size:12px;line-height:1.55}
+.fujiwara-breakdown b{display:block;color:var(--text);font-size:12px;font-variant-numeric:tabular-nums}
+.fujiwara-color-key{display:flex;gap:22px;flex-wrap:wrap;color:var(--soft);font-size:12px}
+.fujiwara-color-key span{display:flex;gap:7px;align-items:center}
+.fujiwara-color-key i{display:inline-block;width:12px;height:12px;border-radius:3px}
+.fujiwara-insights{margin-top:18px}
+.fujiwara-insights .card p{font-size:13px;color:var(--soft);line-height:1.8}
+.fujiwara-insights .card strong{color:var(--text)}
+@media(max-width:780px){.fujiwara-stats{grid-template-columns:1fr;gap:9px}.fujiwara-breakdown{grid-template-columns:1fr;gap:9px}.fujiwara-breakdown b{display:inline;margin-left:7px}.fujiwara-stacked{height:25px}}
