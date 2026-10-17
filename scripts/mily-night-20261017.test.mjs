@@ -117,3 +117,13 @@ test("new published bytes contain no viewer, comment body, raw session or privat
  }
  assert.match(page,/非公式ファン制作/);
 });
+
+
+test("night metadata derives from site helper rather than hard-coded deployment URL",()=>{
+ assert.match(page,/href="__DATA_LAB_20261017_NIGHT_CANONICAL__"/);
+ assert.match(page,/property="og:url" content="__DATA_LAB_20261017_NIGHT_CANONICAL__"/);
+ assert.match(page,/property="og:image" content="__DATA_LAB_OG_IMAGE__"/);
+ assert.doesNotMatch(page,/https:\/\/mily-fan-site\.vercel\.app/);
+ assert.match(vite,/\.replaceAll\("__DATA_LAB_20261017_NIGHT_CANONICAL__"/);
+ assert.match(vite,/\$\{dataLabUrl\(\)\}reports\/20261017-night\//);
+});
