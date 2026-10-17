@@ -31,6 +31,8 @@ test("the article preserves ASR uncertainty, historical schedules and the separa
   for (const text of ["全編の手動聴取は行っておらず", "完全収録は未確定", "203処理チャンク", "厳密な同期は未確認", "配信終了時の最終値は未確定", "四次審査集計には加えていません"]) {
     assert.ok(recap.transcriptionNote.includes(text), text);
   }
+  const labSource = read("docs/DATA-LAB.md").split("## 2026-10-16 夜配信")[1].split("\n## ")[0];
+  assert.equal(labSource.match(/ASR(\d+)処理行/)[1], recap.transcriptionNote.match(/自動文字起こし(\d+)処理チャンク/)[1]);
   assert.ok(recap.highlights.every(x => x.quote === undefined));
   assert.equal(recap.songs, undefined);
   assert.deepEqual(recap.goals, []);
