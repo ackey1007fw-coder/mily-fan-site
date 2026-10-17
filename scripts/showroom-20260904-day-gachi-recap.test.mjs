@@ -66,7 +66,7 @@ describe("2026-09-04 SHOWROOM三次2日目昼配信メモ", () => {
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.summary, /灰色パーカー/);
     assert.match(recap.summary, /スーツ/);
-    assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
+    assert.match(recap.transcriptionNote, /録音音声・画面録画の全編と全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /5枚/);
     const dayIndex = streamRecaps.indexOf(recap);
     assert.ok(dayIndex >= 0);

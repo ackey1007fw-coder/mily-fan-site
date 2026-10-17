@@ -16,7 +16,7 @@ const APPROVED_RECAP_BLOB_SHA = "0a86fc7b7cd834d247cc96e4267a94d0ad2bd364";
 // 公開文は共有定数からも組み立てるので、そちらの変更も再レビュー対象にする。
 // ファイル全体ではなく、実際にページへ出る文だけを対象にする（コメントの手直しで
 // baseline が動くと、再レビューの意味が薄れるため）。
-const APPROVED_RULES_COPY_SHA = "aa8b785c6233d172a166212fd11df4db615d9720";
+const APPROVED_RULES_COPY_SHA = "938e6a04faa6c2289e76cf51023dec08e64ab74d";
 
 function gitBlobSha(source) {
   const bytes = Buffer.from(source.replace(/\r\n/g, "\n"), "utf8");
@@ -63,7 +63,7 @@ describe("2026-09-04 SHOWROOM夜配信メモ", () => {
     assert.doesNotMatch(recap.sourceLabel, /動画確認|音声確認/);
     assert.match(recap.transcriptionNote, /タイムスタンプ.*目安/);
     assert.match(recap.transcriptionNote, /再確認は行っていません/);
-    assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
+    assert.match(recap.transcriptionNote, /録音音声・画面録画の全編と全文文字起こしは掲載していません/);
     assert.match(recap.nextNote, /配信時点では、翌9月5日/);
     assert.match(recap.nextNote, /ファンルームで案内すると話していました/);
     assert.doesNotMatch(recap.nextNote, /\d{1,2}:\d{2}/);

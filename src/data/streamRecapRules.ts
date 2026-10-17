@@ -30,7 +30,7 @@ export const RANKING_NOTE_WITHOUT_RANGE = buildRankingNote();
 
 /** 全カードに共通する非掲載範囲。回ごとに言い換えない。 */
 export const RECAP_WITHHOLD_NOTE =
-  "録音音声・画面録画・全文文字起こしは掲載していません。視聴者の表示名・コメント画面も載せていません。";
+  "録音音声・画面録画の全編と全文文字起こしは掲載していません。視聴者の表示名・コメント画面も載せていません。";
 
 /** 承認済みの短尺を掲載する回では、全編と抜粋を区別する。 */
 export const RECAP_CLIP_WITHHOLD_NOTE =

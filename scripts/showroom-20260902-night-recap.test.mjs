@@ -28,7 +28,7 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.sourceLabel, /夜配信/);
     assert.match(recap.summary, /三次前日/);
-    assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
+    assert.match(recap.transcriptionNote, /録音音声・画面録画の全編と全文文字起こしは掲載していません/);
     assert.ok(streamRecaps.includes(recap));
     assert.ok(
       streamRecaps.indexOf(streamRecap20260902Night) <

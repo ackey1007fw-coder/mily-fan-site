@@ -39,7 +39,7 @@ const APPROVED_RECAP_BLOB_SHA = "6bd6620d7a1d468f56c6bdcfdf2a4b162b400341";
 // 公開文は共有定数からも組み立てるので、そちらの変更も再レビュー対象にする。
 // ファイル全体ではなく、実際にページへ出る文だけを対象にする（コメントの手直しで
 // baseline が動くと、再レビューの意味が薄れるため）。
-const APPROVED_RULES_COPY_SHA = "aa8b785c6233d172a166212fd11df4db615d9720";
+const APPROVED_RULES_COPY_SHA = "938e6a04faa6c2289e76cf51023dec08e64ab74d";
 
 function gitBlobSha(source) {
   // Match Git's LF-normalized source on Windows checkouts as well as CI.
@@ -86,7 +86,7 @@ describe("2026-09-04 SHOWROOM三次2日目朝配信メモ", () => {
     assert.match(recap.sourceLabel, /オーナー提供/);
     assert.match(recap.summary, /灰色パーカー/);
     assert.match(recap.summary, /スーツ/);
-    assert.match(recap.transcriptionNote, /録音音声・画面録画・全文文字起こしは掲載していません/);
+    assert.match(recap.transcriptionNote, /録音音声・画面録画の全編と全文文字起こしは掲載していません/);
     assert.match(recap.transcriptionNote, /5枚/);
     const dayIndex = streamRecaps.indexOf(streamRecap20260904Day);
     assert.ok(dayIndex >= 0);
