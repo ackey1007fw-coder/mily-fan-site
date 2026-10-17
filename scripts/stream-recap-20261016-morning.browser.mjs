@@ -4,6 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { streamRecap20261016Asa as recap } from '../src/data/streamRecap20261016Asa.ts';
+import { streamRecap20261016Night as latestRecap } from '../src/data/streamRecap20261016Night.ts';
 
 const tools = process.env.PLAYWRIGHT_MODULE_ROOT;
 assert.ok(tools, 'Use the existing CI Playwright installation');
@@ -55,7 +56,9 @@ try {
       assert.ok((await card.innerText()).includes(recap.broadcastLabel));
       assert.ok((await card.innerText()).includes(recap.summary));
       const ids = await page.locator('details[id^="recap-"]').evaluateAll(cards => cards.map(item => item.id));
-      assert.deepEqual(ids.slice(0, 4), [
+      const morningIndex = ids.indexOf(`recap-${recap.id}`);
+      assert.ok(morningIndex >= 0);
+      assert.deepEqual(ids.slice(morningIndex, morningIndex + 4), [
         `recap-${recap.id}`, 'recap-2026-10-15-night-showroom',
         'recap-2026-10-15-morning-showroom', 'recap-2026-10-14-night-showroom',
       ]);
@@ -146,9 +149,9 @@ try {
       const jumpLinks = jumpNav.locator('a[href^="#recap-"]');
       assert.equal(await jumpLinks.count(), 3);
       assert.deepEqual(await jumpLinks.evaluateAll(links => links.map(link => link.getAttribute('href'))), [
+        '#recap-2026-10-16-night-showroom',
         '#recap-2026-10-16-morning-showroom',
         '#recap-2026-10-15-night-showroom',
-        '#recap-2026-10-15-morning-showroom',
       ]);
       const jumpScreenshot = `${engine}-${width}-recent-links.png`;
       await jumpNav.screenshot({ path: join(output, jumpScreenshot) });
@@ -172,6 +175,36 @@ try {
       const directTop = await nightCard.evaluate(el => el.getBoundingClientRect().top);
       assert.ok(directTop >= -30 && directTop < height * 0.8,
         'Cold-link night recap becomes visible, top=' + directTop);
+
+      // Exercise the new night article through the same reader flow on all three viewports.
+      await page.goto(`${origin}/activities/live/#recap-${latestRecap.id}`, { waitUntil: 'networkidle' });
+      const latestCard = page.locator(`#recap-${latestRecap.id}`);
+      assert.equal(await latestCard.count(), 1);
+      assert.equal(await latestCard.getAttribute('open'), '');
+      assert.equal(await latestCard.getByRole('heading', { name: latestRecap.theme, exact: true }).count(), 1);
+      assert.ok((await latestCard.innerText()).includes(latestRecap.summary));
+      assert.equal(await latestCard.locator('video, audio').count(), 0);
+      assert.equal(await latestCard.locator('img').count(), latestRecap.gallery.length + 1);
+      assert.equal(await latestCard.locator('a[download]').count(), latestRecap.gallery.length);
+      for (const image of await latestCard.locator('img').all()) {
+        await image.scrollIntoViewIfNeeded();
+        await image.evaluate(item => item.decode());
+        assert.ok(await image.evaluate(item => item.naturalWidth === 640 && item.naturalHeight === 360));
+      }
+      assert.equal(await latestCard.locator('a[href="/data-lab/#night-20261016"]').count(), 1);
+      const latestVerification = latestCard.locator('[data-recap-verification]');
+      assert.equal(await latestVerification.getAttribute('open'), null);
+      await latestVerification.locator(':scope > summary').click();
+      for (const snippet of ['全編の手動聴取は行っておらず', '完全収録は未確定', '配信終了時の最終値は未確定', '記録の確認日：2026.10.17']) {
+        assert.ok((await latestVerification.innerText()).includes(snippet), snippet);
+      }
+      await latestCard.locator(':scope > summary').scrollIntoViewIfNeeded();
+      const latestTop = await latestCard.evaluate(el => el.getBoundingClientRect().top);
+      assert.ok(latestTop >= -30 && latestTop < height * 0.8);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+      const latestFile = `${engine}-${width}-night-20261016.png`;
+      await latestCard.screenshot({ path: join(output, latestFile) });
+      result.screenshots.push(latestFile);
       assert.deepEqual(result.pageErrors, []);
       const unexpectedConsoleErrors = result.consoleErrors.filter(error =>
         !result.unavailableApiFixtures.includes(error.url) || !/^Failed to load resource:.*503/.test(error.text));

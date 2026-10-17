@@ -11,10 +11,11 @@ const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8"
 const lab = JSON.parse(read("public/data-lab/data/mily-morning-20261016-aggregate.json"));
 
 test("October 16 has one independent recap before the preserved October 15 and 14 reports", () => {
-  assert.equal(streamRecaps[0], recap);
+  const index = streamRecaps.indexOf(recap);
+  assert.ok(index >= 0);
   assert.equal(recap.dateLabel, "2026.10.16（金）");
   assert.equal(recap.broadcastLabel, "録画開始6:35頃〜 約56分");
-  assert.deepEqual(streamRecaps.slice(0, 6).map(x => x.id), [
+  assert.deepEqual(streamRecaps.slice(index, index + 6).map(x => x.id), [
     "2026-10-16-morning-showroom", "2026-10-15-night-showroom",
     "2026-10-15-morning-showroom", "2026-10-14-night-showroom",
     "2026-10-14-noon-showroom", "2026-10-14-morning-showroom",

@@ -15,7 +15,9 @@ test("October 15 night LIVE STREAM appears exactly once between October 16 and O
   assert.equal(recap.theme, "夜の四次審査突破と感謝");
   assert.equal(recap.broadcastLabel, "録画開始21:59頃〜 約82分");
   assert.equal(recap.platformLabel, "SHOWROOM");
-  assert.deepEqual(streamRecaps.slice(0, 5).map(item => item.id), [
+  const index = streamRecaps.findIndex(item => item.id === "2026-10-16-morning-showroom");
+  assert.ok(index >= 0);
+  assert.deepEqual(streamRecaps.slice(index, index + 5).map(item => item.id), [
     "2026-10-16-morning-showroom",
     "2026-10-15-night-showroom",
     "2026-10-15-morning-showroom",
@@ -65,7 +67,9 @@ test("night data lab link is exact and capture/online-counter uncertainty is res
 
 test("verification ledger records exactly the recap and protects photos and private source material", () => {
   const ledger = JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
-  assert.deepEqual(ledger.slice(0, 3).map(item => item.id), [
+  const index = ledger.findIndex(item => item.id === "2026-10-16-morning-showroom");
+  assert.ok(index >= 0);
+  assert.deepEqual(ledger.slice(index, index + 3).map(item => item.id), [
     "2026-10-16-morning-showroom",
     "2026-10-15-night-showroom",
     "2026-10-15-morning-showroom",

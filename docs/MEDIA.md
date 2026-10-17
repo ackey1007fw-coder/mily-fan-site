@@ -1,3 +1,20 @@
+# b228 — 2026-10-16夜SHOWROOM・LIVE STREAM実フレーム8枚（2026-10-17受入）
+
+- オーナーが昨夜のLIVE STREAM更新を依頼した範囲で、保存録画の本人実映像を当該記事へ掲載。19時点を比較し、挨拶・近くの笑顔・ラジオ紹介・髪型の相談・お団子・香りの話・終盤の会話・おやすみの8枚を採用。代表は0:37:23のお団子の笑顔。NEWS・一般Gallery・SNS・別回には流用しない。
+- 元640×360の全画角を維持し、背景の付箋の文字だけを不透明色で非表示にした。顔・髪・手・身体・表情を加工せず、AI生成・顔補正・生成塗り足しなし。原寸と公開JPEGを目視確認。EXIF/GPS/XMP等なし。元録画・全文文字起こし・個別視聴者情報は公開しない。
+- 配信ID23562541の同一録画を使用。写真の時刻は録画先頭からの経過時間であり、放送の確定時刻ではない。新規ファイルを使い、既存公開ファイルは上書きしない。
+
+| 公開JPEG（public/media/live/） | 経過秒 | bytes | SHA-256 |
+| --- | ---: | ---: | --- |
+| mily-b228-01-20261016-night-greeting.jpg | 20 | 28507 | c061d858ebdb2129212e7db21c0ed3f69835c5b69a8ca6a833fe41c3e6971a22 |
+| mily-b228-02-20261016-night-close-smile.jpg | 960 | 31971 | 8600cd4e377959d1415befd6dd2e5c020a0be867f35536b1b7b78aa5e93e1af9 |
+| mily-b228-03-20261016-night-radio-talk.jpg | 1560 | 29147 | fe955ad330ca74294155e4b332c294252e05af1531024116e2cd0871210c4957 |
+| mily-b228-04-20261016-night-hair-chat.jpg | 1860 | 28040 | 7dce501f25c474c82c38b69498e370d8c0f6453ba2d0a1e24b86d3a90c3cfe2d |
+| mily-b228-05-20261016-night-bun-pose.jpg | 2243 | 37677 | 6930ea82566b47df835b556e2d0698cd192d1c65a84cc3ec2bdfa5126b054028 |
+| mily-b228-06-20261016-night-fragrance-talk.jpg | 3180 | 28309 | 14ea29081622bf4a5219a47f7e05b23932bea4bab8e4844d21192a6c8fa6a3e0 |
+| mily-b228-07-20261016-night-relaxed-talk.jpg | 3360 | 28549 | 3cc8d66c3c20f63eb87702feba8607e349f339b94969683c16372fd3b7f9359b |
+| mily-b228-08-20261016-night-goodnight.jpg | 3960 | 29010 | ba35b82f38171944520015ef0fc6d60073b88233d7094b1ed2a37984f9dbbcb5 |
+
 # 2026-10-16：湘南シーサイドサークルTikTok・手のポーズ動画（公式埋め込み）
 
 - サイトオーナーが指定したリンク：`https://vt.tiktok.com/ZSgNa8hWE/`。リンクの転送先として確認できた公開URL：`https://www.tiktok.com/@seasidecircle/video/7697054724977151253`。
