@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync, statSync } from "node:fs";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { test } from "node:test";
 import sharp from "sharp";
@@ -44,6 +45,35 @@ test("eleven photos come from this saved morning stream and preserve original fr
     assert.equal(meta.exif, undefined, "do not leak original image EXIF");
   }
   assert.deepEqual([...clocks].sort((a, b) => a - b), clocks);
+});
+
+test("all eleven b230 photos match the published provenance ledger bit-for-bit", () => {
+  const manifest = JSON.parse(readFileSync(new URL("../scripts/stream-recap-20261017-b230-media.json", import.meta.url), "utf8"));
+  assert.equal(manifest.report_id, recap.id);
+  assert.equal(manifest.room_id, 573253);
+  assert.equal(manifest.live_id, 23564059);
+  assert.equal(manifest.intended_public_surface, "only /activities/live/ recap 2026-10-17-morning-showroom");
+  assert.equal(manifest.video_provenance.full_recording_continuity_confirmed, false);
+  assert.equal(manifest.items.length, 11);
+  assert.deepEqual(manifest.items.map(m => m.path).sort(), recap.gallery.map(m => "public" + m.src).sort());
+  const times = [];
+  for(const entry of manifest.items){
+    const bytes = readFileSync(new URL("../" + entry.path, import.meta.url));
+    assert.equal(bytes.length, entry.bytes);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), entry.sha256);
+    assert.equal(entry.width, 640);
+    assert.equal(entry.height, 360);
+    assert.equal(entry.face_or_body_modified, false);
+    assert.equal(entry.exif_removed, true);
+    for(const rect of entry.background_text_mask_boxes){
+      assert.equal(rect.length, 4);
+      assert.ok(rect[0] >= 0 && rect[1] >= 0 && rect[2] <= 640 && rect[3] <= 360);
+      assert.ok(rect[0] < rect[2] && rect[1] < rect[3]);
+    }
+    times.push(entry.video_offset_seconds);
+  }
+  assert.deepEqual(times, [...times].sort((a,b) => a-b));
+  assert.ok(times.every(t => t>=0 && t<=13072.717));
 });
 
 test("recap uses verified themes, source-qualified timing and keeps missing UI counters separate from video", () => {
