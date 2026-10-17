@@ -47,8 +47,8 @@ function renderChart(data,metric) {
   svg.replaceChildren();
   const {segments,gap}=data;
   const points=pointsFor(data);
-  const min=parse(points[0].observed_at_jst),max=parse(points.at(-1).observed_at_jst);
-  const maxY=Math.max(1,points.at(-1)[metric]);
+  const min=parse(points[0].observed_at_jst),max=parse(points[points.length - 1].observed_at_jst);
+  const maxY=Math.max(1,points[points.length - 1][metric]);
   const nice=maxY>5000?2000:maxY>2000?500:maxY>500?250:100;
   const top=Math.ceil((maxY*1.07)/nice)*nice;
   const x=ms=>62+(ms-min)/(max-min)*752;
@@ -77,7 +77,7 @@ function renderChart(data,metric) {
     [segments[1].start_jst,"08:19","middle"],
     [segments[1].end_jst,"09:38","end"]
   ].forEach(([date,label,anchor])=>svg.append(elem("text",{x:x(parse(date)),y:317,"text-anchor":anchor==="start"?"start":anchor==="end"?"end":"middle",fill:"#bed5dc","font-size":14},label)));
-  svg.setAttribute("aria-label",`${key.label}の実測グラフ。06:05〜06:16および08:19〜09:38の保存観測点のみ。06:16〜08:19の約123分は欠測。最後の画面参考表示は${fmt(points.at(-1)[metric])}${key.unit}。配信終了時の確定値ではありません。`);
+  svg.setAttribute("aria-label",`${key.label}の実測グラフ。06:05〜06:16および08:19〜09:38の保存観測点のみ。06:16〜08:19の約123分は欠測。最後の画面参考表示は${fmt(points[points.length - 1][metric])}${key.unit}。配信終了時の確定値ではありません。`);
   caption.textContent=`${key.label}：前半${segments[0].five_minute_window_endpoints.length}点、復旧後${segments[1].five_minute_window_endpoints.length}点。点の間に線は引かず、約123分の欠測から分速を計算しません。総訪問表示はユニーク視聴者人数とは限りません。`;
 }
 function renderTable(data){
