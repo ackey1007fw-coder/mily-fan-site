@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Public summary of Mily's own rows from a third-party contribution-distribution chart; no contributor identities",
+  "source": {
+    "author": "藤原史（@fuhito1109）",
+    "url": "https://x.com/fuhito1109/status/2111415794869645818",
+    "publishedJst": "2026-10-17T20:15:28+09:00",
+    "media": "one public image; all-row reproduction excluded"
+  },
+  "verifiedFrom": "Provided image visually checked against author's original X-post media metadata, 2026-10-17 JST",
+  "subject": {
+    "publicName": "三橋莉子",
+    "entry": 734
+  },
+  "official": false,
+  "rankingScope": "Contribution rank within the participant's SHOWROOM room; not contestant placement",
+  "phases": {
+    "third": {
+      "label": "三次審査",
+      "periodStart": "2026-09-03",
+      "periodEnd": "2026-09-12",
+      "totalPt": 315052,
+      "topOnePt": 126101,
+      "topFivePt": 206151,
+      "ranks6to100Pt": 102843,
+      "ranks101PlusPt": 6058,
+      "topOneSharePct": 40,
+      "topFiveSharePct": 65.4,
+      "ranks6to100SharePct": 32.6,
+      "ranks101PlusSharePct": 1.9
+    },
+    "fourth": {
+      "label": "四次審査",
+      "periodStart": "2026-10-03",
+      "periodEnd": "2026-10-12",
+      "totalPt": 755120,
+      "topOnePt": 244495,
+      "topFivePt": 413760,
+      "ranks6to100Pt": 257981,
+      "ranks101PlusPt": 83379,
+      "topOneSharePct": 32.4,
+      "topFiveSharePct": 54.8,
+      "ranks6to100SharePct": 34.2,
+      "ranks101PlusSharePct": 11
+    }
+  },
+  "interpretation": {
+    "changeInTotalPt": 440068,
+    "topFiveShareChangePercentagePoints": -10.6,
+    "ranks101PlusChangePt": 77321,
+    "ranks101PlusShareChangePercentagePoints": 9.1
+  },
+  "caveats": [
+    "Aggregates from a third-party X post, not organizer-certified final results",
+    "Top one is included in top five: do not add it again",
+    "Contributor counts, unique people and personal activity cannot be inferred",
+    "Distinct from the frozen official 2026-10-12 16:53 snapshot and 2026-10-13 onward events",
+    "No copied full source table, raw logs, or individual contributor identifiers"
+  ]
+}
