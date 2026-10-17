@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM 2026-10-17 morning: saved anonymized valid on-screen counters",
+  "date_jst": "2026-10-17",
+  "slot": "morning",
+  "room_id": 573253,
+  "live_id": 23564059,
+  "scope": "Anonymized public-display reference readings, not official final counts or individual user activity",
+  "event_partition": {
+    "fourth_round_ended_jst": "2026-10-12T21:59:00+09:00",
+    "excluded_from_fourth_round_total": true,
+    "new_event_id": "unconfirmed",
+    "not_official_semifinal_points": true
+  },
+  "observed_screen": {
+    "last_valid_online_observed_at_jst": "2026-10-17T09:38:12.436+09:00",
+    "stars": 11662,
+    "total_visits": 2667,
+    "comments": 1590,
+    "confirmed_final": false,
+    "visit_count_is_not_unique_person_count": true
+  },
+  "recording_processing_window_jst": {
+    "start": "2026-10-17T06:01:17+09:00",
+    "end": "2026-10-17T09:39:49+09:00",
+    "not_official_broadcast_start_end": true
+  },
+  "recording": {
+    "saved": true,
+    "ffmpeg_exit_code": 0,
+    "size_bytes": 1609036086,
+    "complete_coverage_confirmed": false,
+    "media_duration_seconds": null,
+    "recording_is_not_proof_of_counter_coverage": true
+  },
+  "data_quality": {
+    "online_counter_timeline_rows": 548,
+    "valid_online_observations": 515,
+    "excluded_or_incomplete_rows": 33,
+    "observation_segments": 2,
+    "observation_span_complete": false,
+    "ui_offline_end_confirmed": false,
+    "official_broadcast_end_confirmed": false,
+    "showroom_ui_final_total_confirmed": false,
+    "collection_incident": "06:16:18 to 08:19:04 unavailable, plus final UI restart hold around 09:38",
+    "missing_minute_data_not_estimated": true
+  },
+  "gap": {
+    "start_jst": "2026-10-17T06:16:18.381+09:00",
+    "end_jst": "2026-10-17T08:19:04.003+09:00",
+    "elapsed_seconds": 7365.622,
+    "first_valid_before": {
+      "stars": 1155,
+      "total_visits": 91,
+      "comments": 107
+    },
+    "first_valid_after": {
+      "stars": 8383,
+      "total_visits": 1797,
+      "comments": 1053
+    },
+    "cumulative_endpoint_difference": {
+      "stars": 7228,
+      "total_visits": 1706,
+      "comments": 946
+    },
+    "per_minute_series_available": false,
+    "missing_data_are_not_zero": true,
+    "notes": "The difference is only between two recorded counter endpoints; no intermediate event timestamps or minute-level slopes can be reconstructed. One earlier partial 08:17:40 observation lacked valid visit count."
+  },
+  "segments": [
+    {
+      "label": "復旧前の実測",
+      "count": 58,
+      "start_jst": "2026-10-17T06:05:37.920+09:00",
+      "end_jst": "2026-10-17T06:16:18.381+09:00",
+      "five_minute_window_endpoints": [
+        {
+          "observed_at_jst": "2026-10-17T06:05:37.920+09:00",
+          "stars": 230,
+          "total_visits": 36,
+          "comments": 25
+        },
+        {
+          "observed_at_jst": "2026-10-17T06:09:52.094+09:00",
+          "stars": 533,
+          "total_visits": 36,
+          "comments": 53
+        },
+        {
+          "observed_at_jst": "2026-10-17T06:14:48.051+09:00",
+          "stars": 922,
+          "total_visits": 91,
+          "comments": 94
+        },
+        {
+          "observed_at_jst": "2026-10-17T06:16:18.381+09:00",
+          "stars": 1155,
+          "total_visits": 91,
+          "comments": 107
+        }
+      ]
+    },
+    {
+      "label": "復旧後の実測",
+      "count": 457,
+      "start_jst": "2026-10-17T08:19:04.003+09:00",
+      "end_jst": "2026-10-17T09:38:12.436+09:00",
+      "five_minute_window_endpoints": [
+        {
+          "observed_at_jst": "2026-10-17T08:19:04.003+09:00",
+          "stars": 8383,
+          "total_visits": 1797,
+          "comments": 1053
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:19:55.328+09:00",
+          "stars": 8428,
+          "total_visits": 1797,
+          "comments": 1056
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:24:55.154+09:00",
+          "stars": 8716,
+          "total_visits": 1860,
+          "comments": 1078
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:29:57.849+09:00",
+          "stars": 8718,
+          "total_visits": 1912,
+          "comments": 1095
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:34:58.825+09:00",
+          "stars": 9048,
+          "total_visits": 1960,
+          "comments": 1118
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:39:52.551+09:00",
+          "stars": 9270,
+          "total_visits": 2055,
+          "comments": 1146
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:44:55.424+09:00",
+          "stars": 9701,
+          "total_visits": 2131,
+          "comments": 1174
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:49:50.079+09:00",
+          "stars": 9912,
+          "total_visits": 2202,
+          "comments": 1199
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:54:58.958+09:00",
+          "stars": 10036,
+          "total_visits": 2247,
+          "comments": 1236
+        },
+        {
+          "observed_at_jst": "2026-10-17T08:59:48.632+09:00",
+          "stars": 10518,
+          "total_visits": 2289,
+          "comments": 1270
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:04:54.734+09:00",
+          "stars": 10780,
+          "total_visits": 2339,
+          "comments": 1312
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:09:50.795+09:00",
+          "stars": 10990,
+          "total_visits": 2401,
+          "comments": 1357
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:14:57.813+09:00",
+          "stars": 11220,
+          "total_visits": 2450,
+          "comments": 1392
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:19:56.324+09:00",
+          "stars": 11341,
+          "total_visits": 2494,
+          "comments": 1434
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:24:54.183+09:00",
+          "stars": 11541,
+          "total_visits": 2530,
+          "comments": 1475
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:29:51.726+09:00",
+          "stars": 11641,
+          "total_visits": 2566,
+          "comments": 1516
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:34:57.301+09:00",
+          "stars": 11651,
+          "total_visits": 2615,
+          "comments": 1564
+        },
+        {
+          "observed_at_jst": "2026-10-17T09:38:12.436+09:00",
+          "stars": 11662,
+          "total_visits": 2667,
+          "comments": 1590
+        }
+      ]
+    }
+  ],
+  "privacy": "Public report contains only anonymized aggregates and sparse, verified screen timestamps. No viewer IDs, contributor names, raw comments, private URLs, recording contents or local filesystem paths.",
+  "method": "Observed timestamps are Japan Standard Time and were saved while the screen showed online. Only same room/live observations with complete nonnegative stars, visits and comments, verified screen identity, no counter regression and increasing clocks are counted. The plotted endpoints are the last saved observation in each observed five-minute wall-clock window, plus segment boundaries. Points are not connected across unobserved times. Displayed counters are nonofficial reference readings."
+}
