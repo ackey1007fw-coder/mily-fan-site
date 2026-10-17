@@ -46,9 +46,9 @@
   },
   "interpretation": {
     "changeInTotalPt": 440068,
-    "topFiveShareChangePercentagePoints": -10.6,
     "ranks101PlusChangePt": 77321,
-    "ranks101PlusShareChangePercentagePoints": 9.1
+    "top5ShareDeltaPp": -10.6,
+    "tailShareDeltaPp": 9.1
   },
   "caveats": [
     "Aggregates from a third-party X post, not organizer-certified final results",
