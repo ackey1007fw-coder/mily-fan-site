@@ -83,6 +83,14 @@ jobs:
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
         run: node scripts/redhood-five-clips.browser.mjs
 
+      - name: Stream timing navigator browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/stream-timing.browser.mjs
+
       - name: Mily Signal data lab browser checks
         timeout-minutes: 4
         env:

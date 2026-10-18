@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0c1924">
+<title>配信タイミングナビ｜Mily SIGNAL</title>
+<meta name="description" content="莉子さんの保存された配信実績から、きら星・訪問・会話を目的別に比較。時間帯の候補、比較回数、欠測を一緒に確認できる非公式ファン分析。">
+<link rel="canonical" href="__DATA_LAB_TIMING_CANONICAL__">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="配信タイミングナビ｜Mily SIGNAL">
+<meta property="og:description" content="次に試す時間を、実績と一緒に。目的別候補・曜日×時間・比較回数がわかる非公式ファン分析。">
+<meta property="og:url" content="__DATA_LAB_TIMING_CANONICAL__">
+<meta property="og:image" content="__DATA_LAB_OG_IMAGE__">
+<meta property="og:image:alt" content="Mily SIGNAL 非公式ファン分析">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/data-lab/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/data-lab/assets/timing.css">
+<script type="module" src="/data-lab/assets/timing.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header class="masthead"><div class="wrap masthead-inner"><a class="brand" href="/data-lab/">MILY <span>SIGNAL</span><small>DATA LAB / STREAM TIMING</small></a><a class="back" href="/data-lab/">← ラボへ</a></div></header>
+<main id="main" class="wrap">
+<section class="hero" aria-labelledby="page-title">
+<p class="eyebrow">みりぃの配信タイミングナビ</p>
+<h1 id="page-title">次に試す時間を、<br><span>実績と一緒に。</span></h1>
+<p class="intro">「きら星を集めたい」「会話を楽しみたい」。<br>莉子さんの保存された配信実績から、目的に合う<strong>時間帯の候補</strong>を探せます。</p>
+<p id="timing-quicktake" class="quicktake" aria-live="polite" hidden></p>
+<p class="stamp" id="timing-asof">保存データを読み込み中です。</p>
+<p class="important"><strong>この時刻に始めれば伸びる、という予測ではありません。</strong>表示は配信中に観測した時計時刻の実績です。最適な開始時刻を証明するものではありません。生活や体調に無理のない候補を選んでください。</p>
+</section>
+<div id="timing-error" class="panel error" role="alert" hidden><h2>データを読み込めませんでした</h2><p>取得できない状態を「実績ゼロ」には置き換えません。少し時間をおいて再読み込みしてください。</p><button id="timing-retry" type="button">再読み込み</button></div>
+<noscript><div class="panel">比較にはJavaScriptを使います。<a href="/data-lab/">ラボの配信別レポート</a>から保存済みの実績を確認できます。</div></noscript>
+<div id="timing-content" hidden>
+<section class="panel controls" aria-labelledby="conditions-title">
+<div class="section-heading"><p class="eyebrow">01 / 条件を選ぶ</p><h2 id="conditions-title">いつの実績を見る？</h2></div>
+<div class="filters"><label>比較する期間<select id="timing-phase"><option value="after">10/13以降（イベントID未確認）</option><option value="fourth">四次審査期（10/12 22時まで）</option><option value="afterFinal">10/12 22時以降（審査終了後）</option></select></label><label>曜日<select id="timing-day"><option value="all">すべての曜日</option><option value="weekday">平日（月〜金）</option><option value="weekend">土・日</option><option value="1">月曜日</option><option value="2">火曜日</option><option value="3">水曜日</option><option value="4">木曜日</option><option value="5">金曜日</option><option value="6">土曜日</option><option value="0">日曜日</option></select></label></div>
+<p class="fine">審査期と審査後は混ぜません。期間内でも企画・曜日・配信の経過時間などの違いは調整していません。</p>
+</section>
+<section aria-labelledby="overview-title" class="section"><div class="section-heading"><p class="eyebrow">02 / 目的別の入口</p><h2 id="overview-title">まずは、この候補から</h2><p>同じ時間帯を別の日に2回以上観測できた候補。数値の高さだけでなく、<strong>何回の実績か</strong>も一緒に見ます。</p></div><div id="timing-overview" class="overview-grid"></div></section>
+<section class="section panel" aria-labelledby="detail-title">
+<div class="section-heading"><p class="eyebrow">03 / もう少し比べる</p><h2 id="detail-title">今日は何を大切にする？</h2></div>
+<div id="timing-metrics" class="metric-picker" role="group" aria-label="比較する指標"><button type="button" data-metric="comments" aria-pressed="true">会話・盛り上がり</button><button type="button" data-metric="stars" aria-pressed="false">きら星</button><button type="button" data-metric="visits" aria-pressed="false">訪問</button><button type="button" data-metric="firstVisits" aria-pressed="false">初訪問</button><button type="button" data-metric="otherFree" aria-pressed="false">その他無料ギフト</button><button type="button" data-metric="newFollows" aria-pressed="false">新規フォロー</button></div>
+<p id="timing-metric-note" class="fine"></p>
+<div id="timing-summary" class="summary" aria-live="polite" aria-atomic="true"></div>
+<div id="timing-candidates" class="candidate-grid"></div>
+<details class="explore"><summary>1回だけの実績も見る（探索用）</summary><p class="fine">大きな数値でも1回だけでは再現性が分かりません。候補の順位には混ぜていません。</p><div id="timing-exploratory" class="candidate-grid"></div></details>
+</section>
+<section class="section" aria-labelledby="heatmap-title">
+<div class="section-heading"><p class="eyebrow">04 / 曜日 × 時計時刻</p><h2 id="heatmap-title">ひと目で見る、時間帯の実績</h2><p id="timing-heatmap-note">セルを押すと比較回数と実績の幅が分かります。</p></div>
+<div class="heatmap-tools"><span class="fine">色が濃いほど観測ペースが高め。<strong>「不足」は0ではありません。</strong></span><label class="checkbox"><input id="timing-all-hours" type="checkbox">0〜23時をすべて表示</label></div>
+<div class="heatmap-scroll" tabindex="0" role="region" aria-label="曜日と時間帯の比較表"><table class="heatmap"><caption id="timing-caption">10分あたりの観測ペースと比較配信数</caption><thead><tr><th scope="col">時刻</th><th scope="col">月</th><th scope="col">火</th><th scope="col">水</th><th scope="col">木</th><th scope="col">金</th><th scope="col">土</th><th scope="col">日</th></tr></thead><tbody id="timing-heatmap"></tbody></table></div>
+<div id="timing-cell-detail" class="panel cell-detail" aria-live="polite">比較したいセルを選んでください。数値は10分換算の過去の観測ペースで、次の10分の予測ではありません。</div>
+</section>
+<section class="section panel" aria-labelledby="table-title"><div class="section-heading"><p class="eyebrow">05 / 候補を並べて確認</p><h2 id="table-title">時間帯別の数値と根拠</h2></div><div class="table-scroll" tabindex="0" role="region" aria-label="時間帯別の詳細表"><table class="data-table"><caption>各配信で10分以上観測できた時間帯のみ。配信ごとのペースの中央値です。</caption><thead><tr><th scope="col">時間帯</th><th scope="col">10分換算</th><th scope="col">比較配信</th><th scope="col">観測分数</th><th scope="col">基準との差</th><th scope="col">実績の幅</th></tr></thead><tbody id="timing-table"></tbody></table></div><p id="timing-baseline" class="fine"></p><p class="fine">「基準との差」は観測ペースの相対差です。週ごとの成長率、配信時間を変えた効果、次回の増加予測ではありません。</p></section>
+<section class="section panel" aria-labelledby="method-title"><div class="section-heading"><p class="eyebrow">READ THIS FIRST</p><h2 id="method-title">数字に振り回されないために</h2></div>
+<div class="method-grid"><div><h3>使える実績だけ、比べる</h3><p>実際の観測時刻と累積表示の差から1分あたりのペースを計算し、10分換算で見せます。長い配信が有利にならないよう、時間帯ごとに各配信を1票として中央値を取ります。</p></div><div><h3>空白を、無理に埋めない</h3><p>既知の欠測や時刻の逆行をまたぐ区間は使いません。時刻不明の5分枠、時間・日付・審査区分の境界も推測で割り振りません。0の観測と不足は別表示です。</p></div><div><h3>まだ測れていないもの</h3><p id="timing-unavailable">有料ギフトの金額・正式イベントpt・サービス全体の混雑は未接続です。</p><p>無料ギフトの表示を金額へ換算したり、空いている時間を「有利」と断定したりはしません。</p></div><div><h3>時間を決める、最後のひと押し</h3><p>候補を2つに絞り、無理のない範囲で同じ曜日・近い配信尺・似た企画を交互に試し、複数回の実績で見直します。特に深夜の高値を、遅くまで続ける理由にはしないでください。</p></div></div>
+<details><summary>計算方法・出典・比較できなかった範囲</summary><p>1配信×1時間帯につき合計10分以上の有効な観測区間が必要です。時計時刻の同じ1時間内に収まる区間だけを採用し、その区間の増加合計÷実際の観測分数を計算。配信ごとの値の中央値を表示します。2配信の場合は中央2値の平均になるため、突出した1回の影響は残ります。</p><p>候補表示には異なる日で2回以上の実績が必要です。5回以上でも統計的な信頼性や因果関係が検証されたわけではありません。範囲は配信ごとの最小〜最大で、信頼区間ではありません。</p><p>分速アーカイブ由来のコメントも、このページでは保存された時計時刻の差で再計算しています。元ページの「画面の経過秒」基準とは僅かに異なる場合があります。両者に大きなずれがある区間は除外します。</p><p>総訪問表示はユニーク視聴者数ではありません。DOM変化数やWebSocketフレーム数をコメント数へ換算しません。きら星表示は確定した個数・公式イベントptではありません。</p><p id="timing-quality"></p><div id="timing-omitted"></div><h3>再計算に使った公開の匿名集計</h3><p class="fine">出典ファイルの内容は同じでも、採用した指標と区間が異なることがあります。SHA-256は公開ファイルの同一性の記録であり、元の配信を完全収集できた証明ではありません。</p><ul id="timing-sources"></ul><p><a href="/data-lab/data/mily-stream-timing.json" download>このページの匿名集計JSONをダウンロード</a></p></details>
+</section>
+</div>
+<footer><p>非公式ファン制作 / 三橋莉子さん（みりぃ）の保存された実績を用いた参考分析。</p><p>配信予定の発表・本人の推奨・SHOWROOM公式の分析ではありません。</p><a href="/data-lab/">配信別のレポートへ戻る</a></footer>
+</main>
+</body>
+</html>

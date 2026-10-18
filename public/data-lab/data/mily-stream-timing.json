@@ -1,0 +1,4407 @@
+{
+  "schema": "mily-stream-timing-v1",
+  "methodologyVersion": 1,
+  "nonOfficial": true,
+  "dataThroughJst": "2026-10-18T06:57:56.128+09:00",
+  "comparisonMeaning": "observed_clock_time_not_causal_start_time",
+  "fullCoverage": false,
+  "paidGifts": {
+    "available": false,
+    "reason": "時間帯ごとの有料ギフト額・正式イベントptの検証済み系列がありません。"
+  },
+  "congestion": {
+    "available": false,
+    "reason": "配信サービス全体の混雑データは未接続。莉子さん自身の保存実績を表示します。"
+  },
+  "minObservedSecondsPerStreamAndHour": 600,
+  "sources": [
+    {
+      "path": "/data-lab/data/mily-comment-velocity-history-20261010-16.json",
+      "sha256": "acd997d03610e51c85c0d1c85444f112f53687341bda0db499f1dab1bb4edbcd"
+    },
+    {
+      "path": "/data-lab/data/mily-morning-20261014-aggregate.json",
+      "sha256": "4de077c864686e33b09df7bf3d3ffaa96d7016955f8327d3c279647d8d3d1bf9"
+    },
+    {
+      "path": "/data-lab/data/mily-morning-20261015-aggregate.json",
+      "sha256": "862b6d37ecc5a39fd2f0c8181e9fa7d1d4bd2c741fc6e0230e42c6ec133f826b"
+    },
+    {
+      "path": "/data-lab/data/mily-morning-20261016-aggregate.json",
+      "sha256": "5ce1e8d15378e182f47b703789d9c051d8ca15433d6d9d71c1d3bf39f4a3a343"
+    },
+    {
+      "path": "/data-lab/data/mily-morning-20261017-aggregate.json",
+      "sha256": "c9aadd527ce1e169b626ce80c481872dba5efc71830626400d0e9054723ff6de"
+    },
+    {
+      "path": "/data-lab/data/mily-morning-20261018-aggregate.json",
+      "sha256": "33ea75f02fbf0414d7e06e54df544d988b73a7201fc16dc384071033f6b8e5e2"
+    },
+    {
+      "path": "/data-lab/data/mily-night-20261014-aggregate.json",
+      "sha256": "15c5d123fa9dfe42fd76c33e2533f2f6ab990bc614e7be6679c8e10fe48da45a"
+    },
+    {
+      "path": "/data-lab/data/mily-night-20261015-aggregate.json",
+      "sha256": "4882dab463b38871d99cf0eef7dd7d23d59a0a5fec2bed002c4cb2873247102d"
+    },
+    {
+      "path": "/data-lab/data/mily-night-20261016-aggregate.json",
+      "sha256": "7a4ba9fb90415c8754042ad71cb523a2070cba912bc6bb0375242f53ff3b7916"
+    },
+    {
+      "path": "/data-lab/data/mily-night-20261017-aggregate.json",
+      "sha256": "4315e7fe56ca1e5c9e375b18cc9fb418208b829d53abc01dbe5a2a8f2a2739c1"
+    },
+    {
+      "path": "/data-lab/data/mily-noon-20261014-aggregate.json",
+      "sha256": "5771f44d5596bf7be25628ad21fd5cf995e602a7e25a6cc6548db75288e46702"
+    }
+  ],
+  "exclusions": {
+    "clock_disagreement": 6,
+    "invalid_or_reversed_time": 19,
+    "too_short_or_long_interval": 4,
+    "known_gap": 1
+  },
+  "sessions": [
+    {
+      "id": 23534612,
+      "date": "2026-10-10",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-10T07:27:01.110+09:00",
+          "to": "2026-10-10T07:31:50.213+09:00",
+          "seconds": 289.103,
+          "phase": "fourth",
+          "delta": {
+            "comments": 38,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T07:31:50.213+09:00",
+          "to": "2026-10-10T07:36:54.998+09:00",
+          "seconds": 304.785,
+          "phase": "fourth",
+          "delta": {
+            "comments": 32,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T07:36:54.998+09:00",
+          "to": "2026-10-10T07:41:50.714+09:00",
+          "seconds": 295.716,
+          "phase": "fourth",
+          "delta": {
+            "comments": 36,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T07:41:50.714+09:00",
+          "to": "2026-10-10T07:46:50.355+09:00",
+          "seconds": 299.641,
+          "phase": "fourth",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T07:46:50.355+09:00",
+          "to": "2026-10-10T07:52:11.601+09:00",
+          "seconds": 321.246,
+          "phase": "fourth",
+          "delta": {
+            "comments": 18,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T07:52:11.601+09:00",
+          "to": "2026-10-10T07:56:47.355+09:00",
+          "seconds": 275.754,
+          "phase": "fourth",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T07:56:47.355+09:00",
+          "to": "2026-10-10T08:02:02.134+09:00",
+          "seconds": 314.779,
+          "phase": "fourth",
+          "delta": {
+            "comments": 16,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23536776,
+      "date": "2026-10-10",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-10T21:05:37.791+09:00",
+          "to": "2026-10-10T21:10:38.245+09:00",
+          "seconds": 300.454,
+          "phase": "fourth",
+          "delta": {
+            "comments": 28,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:10:38.245+09:00",
+          "to": "2026-10-10T21:15:51.042+09:00",
+          "seconds": 312.797,
+          "phase": "fourth",
+          "delta": {
+            "comments": 29,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:15:51.042+09:00",
+          "to": "2026-10-10T21:20:31.718+09:00",
+          "seconds": 280.676,
+          "phase": "fourth",
+          "delta": {
+            "comments": 4,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:20:31.718+09:00",
+          "to": "2026-10-10T21:25:32.013+09:00",
+          "seconds": 300.295,
+          "phase": "fourth",
+          "delta": {
+            "comments": 13,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:25:32.013+09:00",
+          "to": "2026-10-10T21:30:43.197+09:00",
+          "seconds": 311.184,
+          "phase": "fourth",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:30:43.197+09:00",
+          "to": "2026-10-10T21:35:27.812+09:00",
+          "seconds": 284.615,
+          "phase": "fourth",
+          "delta": {
+            "comments": 19,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:35:27.812+09:00",
+          "to": "2026-10-10T21:40:30.432+09:00",
+          "seconds": 302.62,
+          "phase": "fourth",
+          "delta": {
+            "comments": 6,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:40:30.432+09:00",
+          "to": "2026-10-10T21:45:51.525+09:00",
+          "seconds": 321.093,
+          "phase": "fourth",
+          "delta": {
+            "comments": 23,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:45:51.525+09:00",
+          "to": "2026-10-10T21:50:43.851+09:00",
+          "seconds": 292.326,
+          "phase": "fourth",
+          "delta": {
+            "comments": 18,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:50:43.851+09:00",
+          "to": "2026-10-10T21:55:36.394+09:00",
+          "seconds": 292.543,
+          "phase": "fourth",
+          "delta": {
+            "comments": 6,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T21:55:36.394+09:00",
+          "to": "2026-10-10T22:00:39.695+09:00",
+          "seconds": 303.301,
+          "phase": "fourth",
+          "delta": {
+            "comments": 19,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T22:00:39.695+09:00",
+          "to": "2026-10-10T22:05:40.862+09:00",
+          "seconds": 301.167,
+          "phase": "fourth",
+          "delta": {
+            "comments": 20,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T22:05:40.862+09:00",
+          "to": "2026-10-10T22:10:36.879+09:00",
+          "seconds": 296.017,
+          "phase": "fourth",
+          "delta": {
+            "comments": 19,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-10T22:10:36.879+09:00",
+          "to": "2026-10-10T22:15:31.334+09:00",
+          "seconds": 294.455,
+          "phase": "fourth",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23538599,
+      "date": "2026-10-11",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-11T05:39:07.314+09:00",
+          "to": "2026-10-11T05:44:18.909+09:00",
+          "seconds": 311.595,
+          "phase": "fourth",
+          "delta": {
+            "comments": 33,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T05:44:18.909+09:00",
+          "to": "2026-10-11T05:49:22.655+09:00",
+          "seconds": 303.746,
+          "phase": "fourth",
+          "delta": {
+            "comments": 26,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T05:49:22.655+09:00",
+          "to": "2026-10-11T05:54:22.371+09:00",
+          "seconds": 299.716,
+          "phase": "fourth",
+          "delta": {
+            "comments": 42,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T05:54:22.371+09:00",
+          "to": "2026-10-11T05:59:24.379+09:00",
+          "seconds": 302.008,
+          "phase": "fourth",
+          "delta": {
+            "comments": 30,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T05:59:24.379+09:00",
+          "to": "2026-10-11T06:04:31.361+09:00",
+          "seconds": 306.982,
+          "phase": "fourth",
+          "delta": {
+            "comments": 28,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:04:31.361+09:00",
+          "to": "2026-10-11T06:09:29.888+09:00",
+          "seconds": 298.527,
+          "phase": "fourth",
+          "delta": {
+            "comments": 32,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:09:29.888+09:00",
+          "to": "2026-10-11T06:14:42.261+09:00",
+          "seconds": 312.373,
+          "phase": "fourth",
+          "delta": {
+            "comments": 42,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:14:42.261+09:00",
+          "to": "2026-10-11T06:19:23.001+09:00",
+          "seconds": 280.74,
+          "phase": "fourth",
+          "delta": {
+            "comments": 42,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:19:23.001+09:00",
+          "to": "2026-10-11T06:24:52.222+09:00",
+          "seconds": 329.221,
+          "phase": "fourth",
+          "delta": {
+            "comments": 53,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:24:52.222+09:00",
+          "to": "2026-10-11T06:29:43.961+09:00",
+          "seconds": 291.739,
+          "phase": "fourth",
+          "delta": {
+            "comments": 35,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:29:43.961+09:00",
+          "to": "2026-10-11T06:34:59.411+09:00",
+          "seconds": 315.45,
+          "phase": "fourth",
+          "delta": {
+            "comments": 40,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T06:34:59.411+09:00",
+          "to": "2026-10-11T06:39:35.622+09:00",
+          "seconds": 276.211,
+          "phase": "fourth",
+          "delta": {
+            "comments": 45,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23540963,
+      "date": "2026-10-11",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-11T20:35:34.297+09:00",
+          "to": "2026-10-11T20:40:29.638+09:00",
+          "seconds": 295.341,
+          "phase": "fourth",
+          "delta": {
+            "comments": 22,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T20:40:29.638+09:00",
+          "to": "2026-10-11T20:45:29.946+09:00",
+          "seconds": 300.308,
+          "phase": "fourth",
+          "delta": {
+            "comments": 23,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T20:45:29.946+09:00",
+          "to": "2026-10-11T20:50:29.733+09:00",
+          "seconds": 299.787,
+          "phase": "fourth",
+          "delta": {
+            "comments": 31,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T20:50:29.733+09:00",
+          "to": "2026-10-11T20:55:32.838+09:00",
+          "seconds": 303.105,
+          "phase": "fourth",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T20:55:32.838+09:00",
+          "to": "2026-10-11T21:00:33.594+09:00",
+          "seconds": 300.756,
+          "phase": "fourth",
+          "delta": {
+            "comments": 9,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T21:00:33.594+09:00",
+          "to": "2026-10-11T21:05:27.029+09:00",
+          "seconds": 293.435,
+          "phase": "fourth",
+          "delta": {
+            "comments": 12,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T21:05:27.029+09:00",
+          "to": "2026-10-11T21:10:35.513+09:00",
+          "seconds": 308.484,
+          "phase": "fourth",
+          "delta": {
+            "comments": 6,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T21:10:35.513+09:00",
+          "to": "2026-10-11T21:15:40.651+09:00",
+          "seconds": 305.138,
+          "phase": "fourth",
+          "delta": {
+            "comments": 0,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T21:15:40.651+09:00",
+          "to": "2026-10-11T21:20:45.244+09:00",
+          "seconds": 304.593,
+          "phase": "fourth",
+          "delta": {
+            "comments": 56,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-11T21:20:45.244+09:00",
+          "to": "2026-10-11T21:25:39.461+09:00",
+          "seconds": 294.217,
+          "phase": "fourth",
+          "delta": {
+            "comments": 23,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23542891,
+      "date": "2026-10-12",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-12T05:37:51.616+09:00",
+          "to": "2026-10-12T05:42:52.896+09:00",
+          "seconds": 301.28,
+          "phase": "fourth",
+          "delta": {
+            "comments": 16,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T05:42:52.896+09:00",
+          "to": "2026-10-12T05:47:57.982+09:00",
+          "seconds": 305.086,
+          "phase": "fourth",
+          "delta": {
+            "comments": 12,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T05:47:57.982+09:00",
+          "to": "2026-10-12T05:52:59.723+09:00",
+          "seconds": 301.741,
+          "phase": "fourth",
+          "delta": {
+            "comments": 33,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T06:03:03.382+09:00",
+          "to": "2026-10-12T06:08:06.241+09:00",
+          "seconds": 302.859,
+          "phase": "fourth",
+          "delta": {
+            "comments": 38,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T06:08:06.241+09:00",
+          "to": "2026-10-12T06:13:08.881+09:00",
+          "seconds": 302.64,
+          "phase": "fourth",
+          "delta": {
+            "comments": 46,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T06:13:08.881+09:00",
+          "to": "2026-10-12T06:18:29.811+09:00",
+          "seconds": 320.93,
+          "phase": "fourth",
+          "delta": {
+            "comments": 46,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T06:18:29.811+09:00",
+          "to": "2026-10-12T06:23:03.032+09:00",
+          "seconds": 273.221,
+          "phase": "fourth",
+          "delta": {
+            "comments": 33,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T06:23:03.032+09:00",
+          "to": "2026-10-12T06:28:19.508+09:00",
+          "seconds": 316.476,
+          "phase": "fourth",
+          "delta": {
+            "comments": 50,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T06:28:19.508+09:00",
+          "to": "2026-10-12T06:33:04.151+09:00",
+          "seconds": 284.643,
+          "phase": "fourth",
+          "delta": {
+            "comments": 52,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23545277,
+      "date": "2026-10-12",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-12T21:05:56.638+09:00",
+          "to": "2026-10-12T21:11:02.632+09:00",
+          "seconds": 305.994,
+          "phase": "fourth",
+          "delta": {
+            "comments": 0,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T21:11:02.632+09:00",
+          "to": "2026-10-12T21:16:00.758+09:00",
+          "seconds": 298.126,
+          "phase": "fourth",
+          "delta": {
+            "comments": 65,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T21:16:00.758+09:00",
+          "to": "2026-10-12T21:21:27.384+09:00",
+          "seconds": 326.626,
+          "phase": "fourth",
+          "delta": {
+            "comments": 91,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T21:21:27.384+09:00",
+          "to": "2026-10-12T21:26:37.342+09:00",
+          "seconds": 309.958,
+          "phase": "fourth",
+          "delta": {
+            "comments": 43,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:06:03.876+09:00",
+          "to": "2026-10-12T22:11:31.346+09:00",
+          "seconds": 327.47,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 60,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:11:31.346+09:00",
+          "to": "2026-10-12T22:16:09.446+09:00",
+          "seconds": 278.1,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 38,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:16:09.446+09:00",
+          "to": "2026-10-12T22:21:18.965+09:00",
+          "seconds": 309.519,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:21:18.965+09:00",
+          "to": "2026-10-12T22:26:55.352+09:00",
+          "seconds": 336.387,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 30,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:26:55.352+09:00",
+          "to": "2026-10-12T22:31:26.946+09:00",
+          "seconds": 271.594,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 23,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:31:26.946+09:00",
+          "to": "2026-10-12T22:36:24.550+09:00",
+          "seconds": 297.604,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 35,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:36:24.550+09:00",
+          "to": "2026-10-12T22:41:51.793+09:00",
+          "seconds": 327.243,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 37,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:41:51.793+09:00",
+          "to": "2026-10-12T22:46:28.350+09:00",
+          "seconds": 276.557,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 28,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-12T22:51:37.051+09:00",
+          "to": "2026-10-12T22:56:48.316+09:00",
+          "seconds": 311.265,
+          "phase": "afterFinal",
+          "delta": {
+            "comments": 36,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23547116,
+      "date": "2026-10-13",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-13T06:03:47.890+09:00",
+          "to": "2026-10-13T06:08:47.495+09:00",
+          "seconds": 299.605,
+          "phase": "after",
+          "delta": {
+            "comments": 40,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T06:08:47.495+09:00",
+          "to": "2026-10-13T06:13:42.753+09:00",
+          "seconds": 295.258,
+          "phase": "after",
+          "delta": {
+            "comments": 37,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T06:13:42.753+09:00",
+          "to": "2026-10-13T06:18:45.304+09:00",
+          "seconds": 302.551,
+          "phase": "after",
+          "delta": {
+            "comments": 27,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T06:18:45.304+09:00",
+          "to": "2026-10-13T06:24:20.203+09:00",
+          "seconds": 334.899,
+          "phase": "after",
+          "delta": {
+            "comments": 34,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T06:24:20.203+09:00",
+          "to": "2026-10-13T06:28:47.358+09:00",
+          "seconds": 267.155,
+          "phase": "after",
+          "delta": {
+            "comments": 40,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T06:28:47.358+09:00",
+          "to": "2026-10-13T06:33:47.652+09:00",
+          "seconds": 300.294,
+          "phase": "after",
+          "delta": {
+            "comments": 51,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23550160,
+      "date": "2026-10-13",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-13T22:36:37.194+09:00",
+          "to": "2026-10-13T22:41:26.023+09:00",
+          "seconds": 288.829,
+          "phase": "after",
+          "delta": {
+            "comments": 33,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T22:41:26.023+09:00",
+          "to": "2026-10-13T22:46:26.247+09:00",
+          "seconds": 300.224,
+          "phase": "after",
+          "delta": {
+            "comments": 31,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T22:46:26.247+09:00",
+          "to": "2026-10-13T22:51:23.124+09:00",
+          "seconds": 296.877,
+          "phase": "after",
+          "delta": {
+            "comments": 40,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T22:51:23.124+09:00",
+          "to": "2026-10-13T22:56:33.258+09:00",
+          "seconds": 310.134,
+          "phase": "after",
+          "delta": {
+            "comments": 44,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T22:56:33.258+09:00",
+          "to": "2026-10-13T23:01:36.985+09:00",
+          "seconds": 303.727,
+          "phase": "after",
+          "delta": {
+            "comments": 43,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T23:01:36.985+09:00",
+          "to": "2026-10-13T23:06:34.072+09:00",
+          "seconds": 297.087,
+          "phase": "after",
+          "delta": {
+            "comments": 39,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T23:06:34.072+09:00",
+          "to": "2026-10-13T23:11:34.102+09:00",
+          "seconds": 300.03,
+          "phase": "after",
+          "delta": {
+            "comments": 39,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T23:11:34.102+09:00",
+          "to": "2026-10-13T23:16:35.837+09:00",
+          "seconds": 301.735,
+          "phase": "after",
+          "delta": {
+            "comments": 46,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T23:16:35.837+09:00",
+          "to": "2026-10-13T23:21:33.090+09:00",
+          "seconds": 297.253,
+          "phase": "after",
+          "delta": {
+            "comments": 31,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-13T23:21:33.090+09:00",
+          "to": "2026-10-13T23:26:42.818+09:00",
+          "seconds": 309.728,
+          "phase": "after",
+          "delta": {
+            "comments": 36,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23551572,
+      "date": "2026-10-14",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-14T07:27:22.317+09:00",
+          "to": "2026-10-14T07:32:41.446+09:00",
+          "seconds": 319.129,
+          "phase": "after",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T07:32:41.446+09:00",
+          "to": "2026-10-14T07:37:35.711+09:00",
+          "seconds": 294.265,
+          "phase": "after",
+          "delta": {
+            "comments": 20,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T07:37:35.711+09:00",
+          "to": "2026-10-14T07:42:40.955+09:00",
+          "seconds": 305.244,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T07:42:40.955+09:00",
+          "to": "2026-10-14T07:47:40.045+09:00",
+          "seconds": 299.09,
+          "phase": "after",
+          "delta": {
+            "comments": 19,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T07:47:40.045+09:00",
+          "to": "2026-10-14T07:52:37.157+09:00",
+          "seconds": 297.112,
+          "phase": "after",
+          "delta": {
+            "comments": 16,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T07:52:37.157+09:00",
+          "to": "2026-10-14T07:57:38.091+09:00",
+          "seconds": 300.934,
+          "phase": "after",
+          "delta": {
+            "comments": 35,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T07:57:38.091+09:00",
+          "to": "2026-10-14T08:02:30.036+09:00",
+          "seconds": 291.945,
+          "phase": "after",
+          "delta": {
+            "comments": 19,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:02:30.036+09:00",
+          "to": "2026-10-14T08:07:43.391+09:00",
+          "seconds": 313.355,
+          "phase": "after",
+          "delta": {
+            "comments": 22,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:07:43.391+09:00",
+          "to": "2026-10-14T08:12:32.816+09:00",
+          "seconds": 289.425,
+          "phase": "after",
+          "delta": {
+            "comments": 24,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:12:32.816+09:00",
+          "to": "2026-10-14T08:17:34.706+09:00",
+          "seconds": 301.89,
+          "phase": "after",
+          "delta": {
+            "comments": 20,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:17:34.706+09:00",
+          "to": "2026-10-14T08:22:30.020+09:00",
+          "seconds": 295.314,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:22:30.020+09:00",
+          "to": "2026-10-14T08:27:31.177+09:00",
+          "seconds": 301.157,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:27:31.177+09:00",
+          "to": "2026-10-14T08:32:29.350+09:00",
+          "seconds": 298.173,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:42:39.254+09:00",
+          "to": "2026-10-14T08:47:45.455+09:00",
+          "seconds": 306.201,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:47:45.455+09:00",
+          "to": "2026-10-14T08:52:37.518+09:00",
+          "seconds": 292.063,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T08:52:37.518+09:00",
+          "to": "2026-10-14T08:57:42.472+09:00",
+          "seconds": 304.954,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23552113,
+      "date": "2026-10-14",
+      "slot": "noon",
+      "windows": [
+        {
+          "from": "2026-10-14T12:25:28.811+09:00",
+          "to": "2026-10-14T12:30:28.501+09:00",
+          "seconds": 299.69,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:30:28.501+09:00",
+          "to": "2026-10-14T12:35:24.108+09:00",
+          "seconds": 295.607,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:35:24.108+09:00",
+          "to": "2026-10-14T12:40:26.215+09:00",
+          "seconds": 302.107,
+          "phase": "after",
+          "delta": {
+            "comments": 25,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:40:26.215+09:00",
+          "to": "2026-10-14T12:45:35.963+09:00",
+          "seconds": 309.748,
+          "phase": "after",
+          "delta": {
+            "comments": 23,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:45:35.963+09:00",
+          "to": "2026-10-14T12:50:39.612+09:00",
+          "seconds": 303.649,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:50:39.612+09:00",
+          "to": "2026-10-14T12:55:37.490+09:00",
+          "seconds": 297.878,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:55:37.490+09:00",
+          "to": "2026-10-14T13:00:35.911+09:00",
+          "seconds": 298.421,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:00:35.911+09:00",
+          "to": "2026-10-14T13:05:31.947+09:00",
+          "seconds": 296.036,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:05:31.947+09:00",
+          "to": "2026-10-14T13:10:26.250+09:00",
+          "seconds": 294.303,
+          "phase": "after",
+          "delta": {
+            "comments": 19,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:10:26.250+09:00",
+          "to": "2026-10-14T13:15:32.213+09:00",
+          "seconds": 305.963,
+          "phase": "after",
+          "delta": {
+            "comments": 26,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:15:32.213+09:00",
+          "to": "2026-10-14T13:20:26.182+09:00",
+          "seconds": 293.969,
+          "phase": "after",
+          "delta": {
+            "comments": 26,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:20:26.182+09:00",
+          "to": "2026-10-14T13:25:37.784+09:00",
+          "seconds": 311.602,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:25:37.784+09:00",
+          "to": "2026-10-14T13:30:33.975+09:00",
+          "seconds": 296.191,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:30:33.975+09:00",
+          "to": "2026-10-14T13:35:40.977+09:00",
+          "seconds": 307.002,
+          "phase": "after",
+          "delta": {
+            "comments": 30,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:35:40.977+09:00",
+          "to": "2026-10-14T13:40:43.727+09:00",
+          "seconds": 302.75,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:40:43.727+09:00",
+          "to": "2026-10-14T13:46:06.570+09:00",
+          "seconds": 322.843,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:46:06.570+09:00",
+          "to": "2026-10-14T13:50:36.684+09:00",
+          "seconds": 270.114,
+          "phase": "after",
+          "delta": {
+            "comments": 23,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:50:36.684+09:00",
+          "to": "2026-10-14T13:55:43.162+09:00",
+          "seconds": 306.478,
+          "phase": "after",
+          "delta": {
+            "comments": 31,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T13:55:43.162+09:00",
+          "to": "2026-10-14T14:00:52.494+09:00",
+          "seconds": 309.332,
+          "phase": "after",
+          "delta": {
+            "comments": 22,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-14T12:29:55.704+09:00",
+          "to": "2026-10-14T12:34:51.085+09:00",
+          "seconds": 295.381,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T12:34:51.085+09:00",
+          "to": "2026-10-14T12:39:52.552+09:00",
+          "seconds": 301.467,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 200,
+            "visits": 7,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T12:39:52.552+09:00",
+          "to": "2026-10-14T12:44:51.026+09:00",
+          "seconds": 298.474,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 228,
+            "visits": 10,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T12:44:51.026+09:00",
+          "to": "2026-10-14T12:49:53.843+09:00",
+          "seconds": 302.817,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 130,
+            "visits": 12,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T12:49:53.843+09:00",
+          "to": "2026-10-14T12:54:52.862+09:00",
+          "seconds": 299.019,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 200,
+            "visits": 15,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T12:54:52.862+09:00",
+          "to": "2026-10-14T12:59:46.978+09:00",
+          "seconds": 294.116,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 16,
+            "visits": 12,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T12:59:46.978+09:00",
+          "to": "2026-10-14T13:04:56.192+09:00",
+          "seconds": 309.214,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 200,
+            "visits": 12,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:04:56.192+09:00",
+          "to": "2026-10-14T13:09:48.050+09:00",
+          "seconds": 291.858,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 200,
+            "visits": 14,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:09:48.050+09:00",
+          "to": "2026-10-14T13:14:35.511+09:00",
+          "seconds": 287.461,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 160,
+            "visits": 13,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:14:35.511+09:00",
+          "to": "2026-10-14T13:19:54.959+09:00",
+          "seconds": 319.448,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 51,
+            "visits": 15,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:19:54.959+09:00",
+          "to": "2026-10-14T13:24:44.487+09:00",
+          "seconds": 289.528,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 1,
+            "visits": 9,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:24:44.487+09:00",
+          "to": "2026-10-14T13:29:58.718+09:00",
+          "seconds": 314.231,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 102,
+            "visits": 20,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:29:58.718+09:00",
+          "to": "2026-10-14T13:34:59.965+09:00",
+          "seconds": 301.247,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 607,
+            "visits": 28,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:34:59.965+09:00",
+          "to": "2026-10-14T13:39:20.341+09:00",
+          "seconds": 260.376,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 221,
+            "visits": 47,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:39:20.341+09:00",
+          "to": "2026-10-14T13:44:26.654+09:00",
+          "seconds": 306.313,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 41,
+            "visits": 25,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:44:26.654+09:00",
+          "to": "2026-10-14T13:49:45.035+09:00",
+          "seconds": 318.381,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 482,
+            "visits": 25,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:49:45.035+09:00",
+          "to": "2026-10-14T13:54:42.739+09:00",
+          "seconds": 297.704,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 220,
+            "visits": 16,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:54:42.739+09:00",
+          "to": "2026-10-14T13:59:55.470+09:00",
+          "seconds": 312.731,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 200,
+            "visits": 19,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        },
+        {
+          "from": "2026-10-14T13:59:55.470+09:00",
+          "to": "2026-10-14T14:04:47.806+09:00",
+          "seconds": 292.336,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 6,
+            "visits": 23,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-noon-20261014-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。",
+        "画面時計の遅れの記録があります。時刻は保存観測時刻です。"
+      ]
+    },
+    {
+      "id": 23554271,
+      "date": "2026-10-14",
+      "slot": "night",
+      "windows": [],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。",
+        "時間帯比較に必要な複数の観測時刻・数値が不足しています。"
+      ]
+    },
+    {
+      "id": 23555653,
+      "date": "2026-10-15",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-15T06:08:43.068+09:00",
+          "to": "2026-10-15T06:13:44.828+09:00",
+          "seconds": 301.76,
+          "phase": "after",
+          "delta": {
+            "comments": 49,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-15T06:13:44.828+09:00",
+          "to": "2026-10-15T06:18:37.128+09:00",
+          "seconds": 292.3,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-15T06:18:37.128+09:00",
+          "to": "2026-10-15T06:23:39.455+09:00",
+          "seconds": 302.327,
+          "phase": "after",
+          "delta": {
+            "comments": 32,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-15T06:23:39.455+09:00",
+          "to": "2026-10-15T06:28:35.424+09:00",
+          "seconds": 295.969,
+          "phase": "after",
+          "delta": {
+            "comments": 35,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-15T06:04:53.810+09:00",
+          "to": "2026-10-15T06:09:57.898+09:00",
+          "seconds": 304.088,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 745,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261015-aggregate.json"
+        },
+        {
+          "from": "2026-10-15T06:09:57.898+09:00",
+          "to": "2026-10-15T06:14:59.340+09:00",
+          "seconds": 301.442,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 405,
+            "visits": 33,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261015-aggregate.json"
+        },
+        {
+          "from": "2026-10-15T06:14:59.340+09:00",
+          "to": "2026-10-15T06:19:52.543+09:00",
+          "seconds": 293.203,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 400,
+            "visits": 33,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261015-aggregate.json"
+        },
+        {
+          "from": "2026-10-15T06:19:52.543+09:00",
+          "to": "2026-10-15T06:24:56.604+09:00",
+          "seconds": 304.061,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 565,
+            "visits": 41,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261015-aggregate.json"
+        },
+        {
+          "from": "2026-10-15T06:24:56.604+09:00",
+          "to": "2026-10-15T06:29:50.681+09:00",
+          "seconds": 294.077,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 230,
+            "visits": 39,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261015-aggregate.json"
+        },
+        {
+          "from": "2026-10-15T06:29:50.681+09:00",
+          "to": "2026-10-15T06:31:08.545+09:00",
+          "seconds": 77.864,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261015-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23558451,
+      "date": "2026-10-15",
+      "slot": "night",
+      "windows": [],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。",
+        "時間帯比較に必要な複数の観測時刻・数値が不足しています。"
+      ]
+    },
+    {
+      "id": 23559940,
+      "date": "2026-10-16",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-16T06:41:00.983+09:00",
+          "to": "2026-10-16T06:46:02.283+09:00",
+          "seconds": 301.3,
+          "phase": "after",
+          "delta": {
+            "comments": 46,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T06:46:02.283+09:00",
+          "to": "2026-10-16T06:50:56.771+09:00",
+          "seconds": 294.488,
+          "phase": "after",
+          "delta": {
+            "comments": 33,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T06:50:56.771+09:00",
+          "to": "2026-10-16T06:55:56.993+09:00",
+          "seconds": 300.222,
+          "phase": "after",
+          "delta": {
+            "comments": 26,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T06:55:56.993+09:00",
+          "to": "2026-10-16T07:01:04.872+09:00",
+          "seconds": 307.879,
+          "phase": "after",
+          "delta": {
+            "comments": 36,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T07:01:04.872+09:00",
+          "to": "2026-10-16T07:06:08.739+09:00",
+          "seconds": 303.867,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T07:06:08.739+09:00",
+          "to": "2026-10-16T07:11:07.433+09:00",
+          "seconds": 298.694,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T07:11:07.433+09:00",
+          "to": "2026-10-16T07:16:05.772+09:00",
+          "seconds": 298.339,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T07:16:05.772+09:00",
+          "to": "2026-10-16T07:21:11.262+09:00",
+          "seconds": 305.49,
+          "phase": "after",
+          "delta": {
+            "comments": 26,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T07:21:11.262+09:00",
+          "to": "2026-10-16T07:26:09.469+09:00",
+          "seconds": 298.207,
+          "phase": "after",
+          "delta": {
+            "comments": 27,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T07:26:09.469+09:00",
+          "to": "2026-10-16T07:31:03.822+09:00",
+          "seconds": 294.353,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": null,
+            "visits": null,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-comment-velocity-history-20261010-16.json"
+        },
+        {
+          "from": "2026-10-16T06:39:57.836+09:00",
+          "to": "2026-10-16T06:44:53.655+09:00",
+          "seconds": 295.819,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 471,
+            "visits": 20,
+            "firstVisits": 0,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T06:44:53.655+09:00",
+          "to": "2026-10-16T06:49:50.134+09:00",
+          "seconds": 296.479,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 350,
+            "visits": 26,
+            "firstVisits": 3,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T06:49:50.134+09:00",
+          "to": "2026-10-16T06:54:51.289+09:00",
+          "seconds": 301.155,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 430,
+            "visits": 18,
+            "firstVisits": 0,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T06:54:51.289+09:00",
+          "to": "2026-10-16T06:59:46.977+09:00",
+          "seconds": 295.688,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 280,
+            "visits": 18,
+            "firstVisits": 1,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T06:59:46.977+09:00",
+          "to": "2026-10-16T07:04:53.874+09:00",
+          "seconds": 306.897,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 350,
+            "visits": 28,
+            "firstVisits": 1,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T07:04:53.874+09:00",
+          "to": "2026-10-16T07:09:49.987+09:00",
+          "seconds": 296.113,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 122,
+            "visits": 19,
+            "firstVisits": 2,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T07:09:49.987+09:00",
+          "to": "2026-10-16T07:14:53.191+09:00",
+          "seconds": 303.204,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 730,
+            "visits": 25,
+            "firstVisits": 0,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T07:14:53.191+09:00",
+          "to": "2026-10-16T07:19:50.355+09:00",
+          "seconds": 297.164,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 260,
+            "visits": 30,
+            "firstVisits": 1,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T07:19:50.355+09:00",
+          "to": "2026-10-16T07:24:57.966+09:00",
+          "seconds": 307.611,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 110,
+            "visits": 15,
+            "firstVisits": 2,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T07:24:57.966+09:00",
+          "to": "2026-10-16T07:29:53.237+09:00",
+          "seconds": 295.271,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 240,
+            "visits": 30,
+            "firstVisits": 1,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T07:29:53.237+09:00",
+          "to": "2026-10-16T07:32:54.641+09:00",
+          "seconds": 181.404,
+          "phase": "after",
+          "delta": {
+            "comments": null,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261016-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23562541,
+      "date": "2026-10-16",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-16T21:55:27.696+09:00",
+          "to": "2026-10-16T22:00:28.520+09:00",
+          "seconds": 300.824,
+          "phase": "after",
+          "delta": {
+            "comments": 34,
+            "stars": 410,
+            "visits": 15,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:00:28.520+09:00",
+          "to": "2026-10-16T22:05:27.079+09:00",
+          "seconds": 298.559,
+          "phase": "after",
+          "delta": {
+            "comments": 54,
+            "stars": 500,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:05:27.079+09:00",
+          "to": "2026-10-16T22:10:26.494+09:00",
+          "seconds": 299.415,
+          "phase": "after",
+          "delta": {
+            "comments": 24,
+            "stars": 100,
+            "visits": 14,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:10:26.494+09:00",
+          "to": "2026-10-16T22:15:21.088+09:00",
+          "seconds": 294.594,
+          "phase": "after",
+          "delta": {
+            "comments": 35,
+            "stars": 400,
+            "visits": 4,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:15:21.088+09:00",
+          "to": "2026-10-16T22:20:18.076+09:00",
+          "seconds": 296.988,
+          "phase": "after",
+          "delta": {
+            "comments": 36,
+            "stars": 200,
+            "visits": 6,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:20:18.076+09:00",
+          "to": "2026-10-16T22:25:27.397+09:00",
+          "seconds": 309.321,
+          "phase": "after",
+          "delta": {
+            "comments": 37,
+            "stars": 100,
+            "visits": 1,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:25:27.397+09:00",
+          "to": "2026-10-16T22:30:21.793+09:00",
+          "seconds": 294.396,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": 108,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        },
+        {
+          "from": "2026-10-16T22:30:21.793+09:00",
+          "to": "2026-10-16T22:33:23.932+09:00",
+          "seconds": 182.139,
+          "phase": "after",
+          "delta": {
+            "comments": 31,
+            "stars": 0,
+            "visits": 2,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-night-20261016-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23564059,
+      "date": "2026-10-17",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-17T06:05:37.920+09:00",
+          "to": "2026-10-17T06:09:52.094+09:00",
+          "seconds": 254.174,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": 303,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T06:09:52.094+09:00",
+          "to": "2026-10-17T06:14:48.051+09:00",
+          "seconds": 295.957,
+          "phase": "after",
+          "delta": {
+            "comments": 41,
+            "stars": 389,
+            "visits": 55,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T06:14:48.051+09:00",
+          "to": "2026-10-17T06:16:18.381+09:00",
+          "seconds": 90.33,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 233,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:19:04.003+09:00",
+          "to": "2026-10-17T08:19:55.328+09:00",
+          "seconds": 51.325,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 45,
+            "visits": 0,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:19:55.328+09:00",
+          "to": "2026-10-17T08:24:55.154+09:00",
+          "seconds": 299.826,
+          "phase": "after",
+          "delta": {
+            "comments": 22,
+            "stars": 288,
+            "visits": 63,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:24:55.154+09:00",
+          "to": "2026-10-17T08:29:57.849+09:00",
+          "seconds": 302.695,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": 2,
+            "visits": 52,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:29:57.849+09:00",
+          "to": "2026-10-17T08:34:58.825+09:00",
+          "seconds": 300.976,
+          "phase": "after",
+          "delta": {
+            "comments": 23,
+            "stars": 330,
+            "visits": 48,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:34:58.825+09:00",
+          "to": "2026-10-17T08:39:52.551+09:00",
+          "seconds": 293.726,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": 222,
+            "visits": 95,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:39:52.551+09:00",
+          "to": "2026-10-17T08:44:55.424+09:00",
+          "seconds": 302.873,
+          "phase": "after",
+          "delta": {
+            "comments": 28,
+            "stars": 431,
+            "visits": 76,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:44:55.424+09:00",
+          "to": "2026-10-17T08:49:50.079+09:00",
+          "seconds": 294.655,
+          "phase": "after",
+          "delta": {
+            "comments": 25,
+            "stars": 211,
+            "visits": 71,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:49:50.079+09:00",
+          "to": "2026-10-17T08:54:58.958+09:00",
+          "seconds": 308.879,
+          "phase": "after",
+          "delta": {
+            "comments": 37,
+            "stars": 124,
+            "visits": 45,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:54:58.958+09:00",
+          "to": "2026-10-17T08:59:48.632+09:00",
+          "seconds": 289.674,
+          "phase": "after",
+          "delta": {
+            "comments": 34,
+            "stars": 482,
+            "visits": 42,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T08:59:48.632+09:00",
+          "to": "2026-10-17T09:04:54.734+09:00",
+          "seconds": 306.102,
+          "phase": "after",
+          "delta": {
+            "comments": 42,
+            "stars": 262,
+            "visits": 50,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:04:54.734+09:00",
+          "to": "2026-10-17T09:09:50.795+09:00",
+          "seconds": 296.061,
+          "phase": "after",
+          "delta": {
+            "comments": 45,
+            "stars": 210,
+            "visits": 62,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:09:50.795+09:00",
+          "to": "2026-10-17T09:14:57.813+09:00",
+          "seconds": 307.018,
+          "phase": "after",
+          "delta": {
+            "comments": 35,
+            "stars": 230,
+            "visits": 49,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:14:57.813+09:00",
+          "to": "2026-10-17T09:19:56.324+09:00",
+          "seconds": 298.511,
+          "phase": "after",
+          "delta": {
+            "comments": 42,
+            "stars": 121,
+            "visits": 44,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:19:56.324+09:00",
+          "to": "2026-10-17T09:24:54.183+09:00",
+          "seconds": 297.859,
+          "phase": "after",
+          "delta": {
+            "comments": 41,
+            "stars": 200,
+            "visits": 36,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:24:54.183+09:00",
+          "to": "2026-10-17T09:29:51.726+09:00",
+          "seconds": 297.543,
+          "phase": "after",
+          "delta": {
+            "comments": 41,
+            "stars": 100,
+            "visits": 36,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:29:51.726+09:00",
+          "to": "2026-10-17T09:34:57.301+09:00",
+          "seconds": 305.575,
+          "phase": "after",
+          "delta": {
+            "comments": 48,
+            "stars": 10,
+            "visits": 49,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T09:34:57.301+09:00",
+          "to": "2026-10-17T09:38:12.436+09:00",
+          "seconds": 195.135,
+          "phase": "after",
+          "delta": {
+            "comments": 26,
+            "stars": 11,
+            "visits": 52,
+            "firstVisits": null,
+            "otherFree": null,
+            "newFollows": null
+          },
+          "source": "/data-lab/data/mily-morning-20261017-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23567037,
+      "date": "2026-10-17",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-17T22:32:25.524+09:00",
+          "to": "2026-10-17T22:32:57.755+09:00",
+          "seconds": 32.231,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 90,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:32:57.755+09:00",
+          "to": "2026-10-17T22:33:59.599+09:00",
+          "seconds": 61.844,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 70,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:33:59.599+09:00",
+          "to": "2026-10-17T22:34:56.281+09:00",
+          "seconds": 56.682,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 40,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:34:56.281+09:00",
+          "to": "2026-10-17T22:35:59.874+09:00",
+          "seconds": 63.593,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:35:59.874+09:00",
+          "to": "2026-10-17T22:36:59.560+09:00",
+          "seconds": 59.686,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 11,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:36:59.560+09:00",
+          "to": "2026-10-17T22:37:59.859+09:00",
+          "seconds": 60.299,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:37:59.859+09:00",
+          "to": "2026-10-17T22:38:55.996+09:00",
+          "seconds": 56.137,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:38:55.996+09:00",
+          "to": "2026-10-17T22:39:59.449+09:00",
+          "seconds": 63.453,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:39:59.449+09:00",
+          "to": "2026-10-17T22:40:59.448+09:00",
+          "seconds": 59.999,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:40:59.448+09:00",
+          "to": "2026-10-17T22:41:55.590+09:00",
+          "seconds": 56.142,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:41:55.590+09:00",
+          "to": "2026-10-17T22:42:56.105+09:00",
+          "seconds": 60.515,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 5,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:42:56.105+09:00",
+          "to": "2026-10-17T22:43:57.515+09:00",
+          "seconds": 61.41,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 300,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:43:57.515+09:00",
+          "to": "2026-10-17T22:44:56.341+09:00",
+          "seconds": 58.826,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:44:56.341+09:00",
+          "to": "2026-10-17T22:45:55.920+09:00",
+          "seconds": 59.579,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:45:55.920+09:00",
+          "to": "2026-10-17T22:46:58.952+09:00",
+          "seconds": 63.032,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:46:58.952+09:00",
+          "to": "2026-10-17T22:47:57.405+09:00",
+          "seconds": 58.453,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 150,
+            "visits": 8,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:47:57.405+09:00",
+          "to": "2026-10-17T22:48:59.745+09:00",
+          "seconds": 62.34,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:48:59.745+09:00",
+          "to": "2026-10-17T22:49:57.917+09:00",
+          "seconds": 58.172,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 230,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:49:57.917+09:00",
+          "to": "2026-10-17T22:50:57.130+09:00",
+          "seconds": 59.213,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 70,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:50:57.130+09:00",
+          "to": "2026-10-17T22:51:57.164+09:00",
+          "seconds": 60.034,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:51:57.164+09:00",
+          "to": "2026-10-17T22:52:57.511+09:00",
+          "seconds": 60.347,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 100,
+            "visits": 13,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:52:57.511+09:00",
+          "to": "2026-10-17T22:53:58.308+09:00",
+          "seconds": 60.797,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:53:58.308+09:00",
+          "to": "2026-10-17T22:54:54.861+09:00",
+          "seconds": 56.553,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:54:54.861+09:00",
+          "to": "2026-10-17T22:55:59.317+09:00",
+          "seconds": 64.456,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:55:59.317+09:00",
+          "to": "2026-10-17T22:56:55.992+09:00",
+          "seconds": 56.675,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:56:55.992+09:00",
+          "to": "2026-10-17T22:57:56.648+09:00",
+          "seconds": 60.656,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 500,
+            "visits": 9,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:57:56.648+09:00",
+          "to": "2026-10-17T22:58:57.421+09:00",
+          "seconds": 60.773,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 120,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:58:57.421+09:00",
+          "to": "2026-10-17T22:59:54.902+09:00",
+          "seconds": 57.481,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 50,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T22:59:54.902+09:00",
+          "to": "2026-10-17T23:00:59.963+09:00",
+          "seconds": 65.061,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 50,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:00:59.963+09:00",
+          "to": "2026-10-17T23:01:56.490+09:00",
+          "seconds": 56.527,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:01:56.490+09:00",
+          "to": "2026-10-17T23:02:55.337+09:00",
+          "seconds": 58.847,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": 0,
+            "visits": 9,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:02:55.337+09:00",
+          "to": "2026-10-17T23:03:56.341+09:00",
+          "seconds": 61.004,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:03:56.341+09:00",
+          "to": "2026-10-17T23:04:57.023+09:00",
+          "seconds": 60.682,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:04:57.023+09:00",
+          "to": "2026-10-17T23:05:56.086+09:00",
+          "seconds": 59.063,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:05:56.086+09:00",
+          "to": "2026-10-17T23:06:58.932+09:00",
+          "seconds": 62.846,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:06:58.932+09:00",
+          "to": "2026-10-17T23:07:56.357+09:00",
+          "seconds": 57.425,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 100,
+            "visits": 8,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:07:56.357+09:00",
+          "to": "2026-10-17T23:08:56.503+09:00",
+          "seconds": 60.146,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:08:56.503+09:00",
+          "to": "2026-10-17T23:09:56.933+09:00",
+          "seconds": 60.43,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:09:56.933+09:00",
+          "to": "2026-10-17T23:10:57.686+09:00",
+          "seconds": 60.753,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:10:57.686+09:00",
+          "to": "2026-10-17T23:11:55.950+09:00",
+          "seconds": 58.264,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:11:55.950+09:00",
+          "to": "2026-10-17T23:12:58.950+09:00",
+          "seconds": 63,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:12:58.950+09:00",
+          "to": "2026-10-17T23:13:59.824+09:00",
+          "seconds": 60.874,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 0,
+            "visits": 7,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:13:59.824+09:00",
+          "to": "2026-10-17T23:14:56.398+09:00",
+          "seconds": 56.574,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:14:56.398+09:00",
+          "to": "2026-10-17T23:15:54.377+09:00",
+          "seconds": 57.979,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:15:54.377+09:00",
+          "to": "2026-10-17T23:16:59.155+09:00",
+          "seconds": 64.778,
+          "phase": "after",
+          "delta": {
+            "comments": 16,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:16:59.155+09:00",
+          "to": "2026-10-17T23:17:54.402+09:00",
+          "seconds": 55.247,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:17:54.402+09:00",
+          "to": "2026-10-17T23:18:58.657+09:00",
+          "seconds": 64.255,
+          "phase": "after",
+          "delta": {
+            "comments": 17,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        },
+        {
+          "from": "2026-10-17T23:18:58.657+09:00",
+          "to": "2026-10-17T23:19:56.164+09:00",
+          "seconds": 57.507,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261017-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23568147,
+      "date": "2026-10-18",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-18T05:06:14.391+09:00",
+          "to": "2026-10-18T05:09:59.546+09:00",
+          "seconds": 225.155,
+          "phase": "after",
+          "delta": {
+            "comments": 22,
+            "stars": 40,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:09:59.546+09:00",
+          "to": "2026-10-18T05:11:57.647+09:00",
+          "seconds": 118.101,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 70,
+            "visits": 58,
+            "firstVisits": 3,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:11:57.647+09:00",
+          "to": "2026-10-18T05:13:55.007+09:00",
+          "seconds": 117.36,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 46,
+            "visits": 0,
+            "firstVisits": 3,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:13:55.007+09:00",
+          "to": "2026-10-18T05:15:56.037+09:00",
+          "seconds": 121.03,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 270,
+            "visits": 0,
+            "firstVisits": 4,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:15:56.037+09:00",
+          "to": "2026-10-18T05:17:57.738+09:00",
+          "seconds": 121.701,
+          "phase": "after",
+          "delta": {
+            "comments": 18,
+            "stars": 260,
+            "visits": 60,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:17:57.738+09:00",
+          "to": "2026-10-18T05:19:56.070+09:00",
+          "seconds": 118.332,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:19:56.070+09:00",
+          "to": "2026-10-18T05:21:55.306+09:00",
+          "seconds": 119.236,
+          "phase": "after",
+          "delta": {
+            "comments": 18,
+            "stars": 144,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:21:55.306+09:00",
+          "to": "2026-10-18T05:23:56.843+09:00",
+          "seconds": 121.537,
+          "phase": "after",
+          "delta": {
+            "comments": 18,
+            "stars": 70,
+            "visits": 51,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T05:23:56.843+09:00",
+          "to": "2026-10-18T05:24:59.056+09:00",
+          "seconds": 62.213,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:05:00.217+09:00",
+          "to": "2026-10-18T06:05:56.148+09:00",
+          "seconds": 55.931,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:05:56.148+09:00",
+          "to": "2026-10-18T06:07:55.988+09:00",
+          "seconds": 119.84,
+          "phase": "after",
+          "delta": {
+            "comments": 24,
+            "stars": 191,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 60,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:07:55.988+09:00",
+          "to": "2026-10-18T06:09:58.372+09:00",
+          "seconds": 122.384,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": 221,
+            "visits": 75,
+            "firstVisits": 0,
+            "otherFree": 200,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:09:58.372+09:00",
+          "to": "2026-10-18T06:11:54.537+09:00",
+          "seconds": 116.165,
+          "phase": "after",
+          "delta": {
+            "comments": 19,
+            "stars": 101,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:11:54.537+09:00",
+          "to": "2026-10-18T06:13:58.548+09:00",
+          "seconds": 124.011,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": 101,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:13:58.548+09:00",
+          "to": "2026-10-18T06:15:59.258+09:00",
+          "seconds": 120.71,
+          "phase": "after",
+          "delta": {
+            "comments": 18,
+            "stars": 266,
+            "visits": 73,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:15:59.258+09:00",
+          "to": "2026-10-18T06:17:42.006+09:00",
+          "seconds": 102.748,
+          "phase": "after",
+          "delta": {
+            "comments": 19,
+            "stars": 184,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 20,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:17:42.006+09:00",
+          "to": "2026-10-18T06:21:58.935+09:00",
+          "seconds": 256.929,
+          "phase": "after",
+          "delta": {
+            "comments": 35,
+            "stars": 404,
+            "visits": 90,
+            "firstVisits": 4,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:21:58.935+09:00",
+          "to": "2026-10-18T06:23:56.837+09:00",
+          "seconds": 117.902,
+          "phase": "after",
+          "delta": {
+            "comments": 22,
+            "stars": 111,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:23:56.837+09:00",
+          "to": "2026-10-18T06:24:53.347+09:00",
+          "seconds": 56.51,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:25:59.587+09:00",
+          "to": "2026-10-18T06:27:54.246+09:00",
+          "seconds": 114.659,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 241,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:27:54.246+09:00",
+          "to": "2026-10-18T06:29:57.386+09:00",
+          "seconds": 123.14,
+          "phase": "after",
+          "delta": {
+            "comments": 16,
+            "stars": 232,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:29:57.386+09:00",
+          "to": "2026-10-18T06:31:57.795+09:00",
+          "seconds": 120.409,
+          "phase": "after",
+          "delta": {
+            "comments": 21,
+            "stars": 232,
+            "visits": 87,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:31:57.795+09:00",
+          "to": "2026-10-18T06:33:59.949+09:00",
+          "seconds": 122.154,
+          "phase": "after",
+          "delta": {
+            "comments": 20,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:33:59.949+09:00",
+          "to": "2026-10-18T06:35:58.521+09:00",
+          "seconds": 118.572,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 130,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:35:58.521+09:00",
+          "to": "2026-10-18T06:37:54.442+09:00",
+          "seconds": 115.921,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": 172,
+            "visits": 83,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:37:54.442+09:00",
+          "to": "2026-10-18T06:39:54.908+09:00",
+          "seconds": 120.466,
+          "phase": "after",
+          "delta": {
+            "comments": 22,
+            "stars": 430,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:39:54.908+09:00",
+          "to": "2026-10-18T06:41:23.822+09:00",
+          "seconds": 88.914,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 81,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:41:23.822+09:00",
+          "to": "2026-10-18T06:43:56.144+09:00",
+          "seconds": 152.322,
+          "phase": "after",
+          "delta": {
+            "comments": 24,
+            "stars": 231,
+            "visits": 82,
+            "firstVisits": 3,
+            "otherFree": 60,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:43:56.144+09:00",
+          "to": "2026-10-18T06:45:58.397+09:00",
+          "seconds": 122.253,
+          "phase": "after",
+          "delta": {
+            "comments": 23,
+            "stars": 80,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:45:58.397+09:00",
+          "to": "2026-10-18T06:47:57.306+09:00",
+          "seconds": 118.909,
+          "phase": "after",
+          "delta": {
+            "comments": 24,
+            "stars": 275,
+            "visits": 77,
+            "firstVisits": 3,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:47:57.306+09:00",
+          "to": "2026-10-18T06:49:58.854+09:00",
+          "seconds": 121.548,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 40,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:49:58.854+09:00",
+          "to": "2026-10-18T06:51:59.908+09:00",
+          "seconds": 121.054,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": 102,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:51:59.908+09:00",
+          "to": "2026-10-18T06:53:57.268+09:00",
+          "seconds": 117.36,
+          "phase": "after",
+          "delta": {
+            "comments": 18,
+            "stars": 10,
+            "visits": 95,
+            "firstVisits": 0,
+            "otherFree": 30,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:53:57.268+09:00",
+          "to": "2026-10-18T06:55:59.750+09:00",
+          "seconds": 122.482,
+          "phase": "after",
+          "delta": {
+            "comments": 27,
+            "stars": 31,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        },
+        {
+          "from": "2026-10-18T06:55:59.750+09:00",
+          "to": "2026-10-18T06:57:56.128+09:00",
+          "seconds": 116.378,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    }
+  ]
+}
