@@ -162,8 +162,7 @@ function webAnalyticsHtmlPlugin(): Plugin {
     // preview. Serve an inert stand-in only for local browser QA, so the
     // existing console-error assertions still catch unrelated broken assets.
     configurePreviewServer(server) {
-      server.middlewares.use("/_vercel/insights/script.js", (request, response, next) => {
-        if (request.method !== "GET" && request.method !== "HEAD") return next();
+      server.middlewares.use("/_vercel/insights/script.js", (_request, response) => {
         response.setHeader("Content-Type", "application/javascript; charset=utf-8");
         response.setHeader("Cache-Control", "no-store");
         response.statusCode = 200;
