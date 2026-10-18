@@ -70,9 +70,10 @@
     "snapshotCheckedJst": "2026-10-19T06:48:14.166+09:00"
   },
   "asr": {
-    "status": "processing_at_2026-10-19T06:37:53+09:00",
+    "status": "processing",
     "processedChunksAtCheck": 32,
     "finished": false,
-    "verbatimAccuracyVerified": false
+    "verbatimAccuracyVerified": false,
+    "checkedAtJst": "2026-10-19T06:37:53+09:00"
   }
 }
