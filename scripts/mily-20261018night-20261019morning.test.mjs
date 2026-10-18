@@ -33,7 +33,7 @@ test("home, report routes, canonical and publication boundaries",()=>{
  assert.ok(home.indexOf('id="morning-20261019"') < home.indexOf('id="night-20261018"'));
  assert.ok(home.indexOf('id="night-20261018"') < home.indexOf('id="morning-20261018"'));
  for(const id of ["morning-20261019","night-20261018","morning-20261018","night-20261017"]){assert.ok(home.includes('id="'+id+'"'));}
- assert.match(home,/reports\\/20261019-morning/);assert.match(home,/reports\\/20261018-night/);
+ assert.match(home,/reports\/20261019-morning/);assert.match(home,/reports\/20261018-night/);
  for(const [h,s] of [[nightHtml,"20261018_NIGHT"],[morningHtml,"20261019_MORNING"]]){
   assert.match(h,/noindex,nofollow,noarchive/);assert.match(h,/非公式/);assert.match(h,/__DATA_LAB_OG_IMAGE__/);assert.ok(h.includes("__DATA_LAB_"+s+"_CANONICAL__"));assert.match(h,/四次審査/);assert.match(h,/コメント本文/);
  }
