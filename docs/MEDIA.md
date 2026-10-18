@@ -1,3 +1,27 @@
+# b229 — 2026-10-17夜・10-18朝のLIVE STREAM実写真12枚（10/18承認）
+
+- **掲載承認と掲載面**：オーナーがSHOWROOM画面10枚を提供、同日mily-fan-site.vercel.appへの反映を明示依頼。10/17夜4枚・10/18朝8枚の同一録画実フレームを、各LIVE STREAM記事内だけに掲載。一般Gallery、NEWS、SNS、別の配信記事への掲載には流用しない。
+- **出典**：同一回の保存SHOWROOM録画の本人映像から、640×360を保った実フレームを直接抽出。10/17夜の録画処理開始は22:29頃・保存約49分08秒、18日朝は5:03頃・保存約113分06秒。表中の時刻は録画先頭からの経過時間で、正式放送の開始時刻ではない。
+- **プライバシー**：元録画はランキング名、アバター、コメント欄のオーバーレイなし。付箋の小さな手書き文字を公表しないよう、**背景の付箋領域のみ**通常のガウスぼかし（35px radius）＋羽根状境界で判読しにくくし、肌／衣服／髪の画素領域を保護して原寸の写真12枚を目視確認。本人の顔・髪・手・身体にAI生成・補正・置換・ポーズ合成を行わず、EXIF/GPS/XMP等を付与しない。写真加工は背景文字の秘匿用のみ。
+- **代表写真**：夜は冒頭0:01:15の笑顔、朝は0:49:02の両手ハート（通し番号11）。ギャラリーは録画内の時刻順。朝0:48:02の頭上ハートも掲載する。
+- **公開から除外**：元のSHOWROOMランキング付き画面、録画本体、未加工フレーム原本、原音、全文ASR、生コメント・視聴者別情報、私的Slack/Drive/Higgsfieldリンク、選定ZIP。GitHubのpublicへは下表の安全確認済み派生JPEGのみを追加し、既存公開ファイルの上書きはしない。
+- **容量**：640×360・12枚合計394,619 bytes。新規プレフィックス b229。出典とSHA256は下表、原本は自宅PCの個人AI-Bridgeに非公開保存。
+
+| 公開JPEG（public/media/live/） | 録画先頭からの時間 | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| `mily-b229-01-night-smile-greeting-00075s.jpg` | 0:01:15 | 24771 | `882c8dbffacd19feac4716a79aa2afddb86f0e0a87130a617332f34804d08408` |
+| `mily-b229-02-night-both-hands-wave-01101s.jpg` | 0:18:21 | 25034 | `d9bb24a18c0931a9cf73703720afada65992a95cad3463788a7e48eb5cc5b089` |
+| `mily-b229-03-night-side-smile-01275s.jpg` | 0:21:15 | 30122 | `b27d17aabbb4f9c46725b49a1d5b41797178db61118b885a842963f2947c2d5f` |
+| `mily-b229-04-night-farewell-wave-02923s.jpg` | 0:48:43 | 25302 | `d79d1fc9c206041fe3f8800b87664103e3636ca3fe6a907d3402a51baf37a9ca` |
+| `mily-b229-05-morning-overhead-heart-early-01425s.jpg` | 0:23:45 | 42432 | `5e2187db61f328efd3bfbe22884f785a3366cc61ad7bdd9bf2d141c68b391042` |
+| `mily-b229-06-morning-bright-smile-02148s.jpg` | 0:35:48 | 29151 | `64e3c5ad04e35eb7551510ccf1e12cc0001e7123cb3b907b6a65dde2c4505b32` |
+| `mily-b229-07-morning-hair-up-pose-02184s.jpg` | 0:36:24 | 45278 | `332420ffd5a86bf5b0e9a872c007ad10027b1a16a45e1c96b8ce44ac03414157` |
+| `mily-b229-08-morning-close-up-smile-02504s.jpg` | 0:41:44 | 33353 | `3a61da82725407766dabf9c50985d3df78e9bebf1df5b065470ffe9836b7f0e5` |
+| `mily-b229-09-morning-small-hand-heart-02762s.jpg` | 0:46:02 | 30197 | `8191c5678d5d8cbe1a82d47bc75e1b75e2ae26209bb818627ef7b3d7cd0499ed` |
+| `mily-b229-10-morning-overhead-heart-02882s.jpg` | 0:48:02 | 44657 | `fba2b660a8220388218298b5e0b711bdf7e96433a35b987b5f926d693f095ca8` |
+| `mily-b229-11-morning-large-hand-heart-02942s.jpg` | 0:49:02 | 34830 | `4153264d6b9d8e32aa9c80835bc4e76e11afbd99d535663aee451497d50628ff` |
+| `mily-b229-12-morning-happy-hands-03140s.jpg` | 0:52:20 | 29492 | `ffb7e4e146421e713a08ef466fa80f51fd290eac9d3eb9356faa2604dc09b955` |
+
 # b228 — 2026-10-16夜SHOWROOM・LIVE STREAM実フレーム8枚（2026-10-17受入）
 
 - オーナーが昨夜のLIVE STREAM更新を依頼した範囲で、保存録画の本人実映像を当該記事へ掲載。19時点を比較し、挨拶・近くの笑顔・ラジオ紹介・髪型の相談・お団子・香りの話・終盤の会話・おやすみの8枚を採用。代表は0:37:23のお団子の笑顔。NEWS・一般Gallery・SNS・別回には流用しない。
