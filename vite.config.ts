@@ -158,17 +158,6 @@ function webAnalyticsHtmlPlugin(): Plugin {
     transformIndexHtml(html) {
       return injectVercelWebAnalytics(html);
     },
-    // Vercel provides this special asset in deployments, not in local Vite
-    // preview. Serve an inert stand-in only for local browser QA, so the
-    // existing console-error assertions still catch unrelated broken assets.
-    configurePreviewServer(server) {
-      server.middlewares.use("/_vercel/insights/script.js", (_request, response) => {
-        response.setHeader("Content-Type", "application/javascript; charset=utf-8");
-        response.setHeader("Cache-Control", "no-store");
-        response.statusCode = 200;
-        response.end("// Local Vite preview fixture; no analytics are collected.");
-      });
-    },
   };
 }
 
