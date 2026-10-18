@@ -52,7 +52,7 @@ Actions: `ci.yml`（typecheck / test / build / guard）、`watch-public-sources.
 
 ## 4. 未完了・次にやること
 
-- Open / Draft PR が約20本たまっている（2026-10-18 時点。多くは古い fallback・文言修正・実験）。**新しい作業の前に、同じファイルを触るPRがないか必ず確認**し、古いものは内容を確認してオーナーに整理（close / 統合）を提案する。勝手に close しない。
+- 古い Open / Draft PR（fallback・文言修正・実験など）が積み上がっている。本数・番号は変わるので**着手時に GitHub で確認**し、同じファイルを触るPRがないか見る。古いものは内容を確認してオーナーに整理（close / 統合）を提案する。勝手に close しない。
 - セミファイナル以降の審査日程・投票導線の更新（公式発表を待って反映）。
 - MILY SIGNAL の一般公開（noindex 解除）はオーナー判断待ち。`docs/DATA-LAB.md` の条件を満たすまで外さない。
 - SNS展開（X / Instagram / TikTok / YouTube）の公開実画面確認は、`docs/CONTENT-OPS.md`「SNS表紙・送信・公開確認の恒久チェック」の4状態で管理する。
@@ -69,7 +69,9 @@ Actions: `ci.yml`（typecheck / test / build / guard）、`watch-public-sources.
 ```bash
 pnpm install --frozen-lockfile
 pnpm typecheck && pnpm test && pnpm build && pnpm guard
-git diff --check
+git diff --check                      # 未ステージの変更
+git diff --cached --check             # ステージ済みの変更
+git diff --check origin/main...HEAD   # コミット済みのPR差分（最新のbaseを取得後）
 ```
 
 ## 6. ハマりどころ（実際に踏んだもの）
