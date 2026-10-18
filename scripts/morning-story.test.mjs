@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";
@@ -15,7 +16,7 @@ import {
   morningStoryVideo,
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
-import { media } from "../src/data/media.ts";
+import { media } from "./fixtures/media-before-b173.ts";
 import { news } from "./fixtures/news-before-b41.ts";
 import { stories } from "../src/data/stories.ts";
 import { validateVideoDerivatives } from "./build-drive-gallery.mjs";
@@ -194,7 +195,7 @@ describe("Latest video playback contract", () => {
     assert.match(latest, /playsInline/);
     assert.match(latest, /preload="none"/);
     assert.doesNotMatch(latest, /autoPlay|autoplay|\bloop\b/);
-    assert.match(latest, /aspect-\[9\/16\]/);
+    assert.match(latest, /aspectRatio: `\$\{media\.width\} \/ \$\{media\.height\}`/);
   });
 });
 

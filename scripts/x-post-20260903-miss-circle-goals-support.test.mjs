@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
@@ -11,7 +12,7 @@ import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { contest } from "../src/data/contest.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
@@ -187,7 +188,7 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — scope", () => {
     );
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
     assert.deepEqual(events, []);
-    assert.equal(contest.currentPhase?.name, "3次審査");
+    assert.notEqual(contest.currentPhase?.source, SOURCE);
 
     for (const relative of [
       "src/data/media.ts",

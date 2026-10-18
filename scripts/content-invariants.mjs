@@ -173,7 +173,7 @@ function isInternalStoryHref(url) {
 }
 
 function assertNewsRelatedHref(url, label, id, errors) {
-  if (isSafeHttpUrl(url) || isInternalStoryHref(url)) return;
+  if (isSafeHttpUrl(url) || isInternalStoryHref(url) || url === "/support/") return;
   errors.push(`${label} "${id}" needs a confirmed http(s) URL or a local /stories/ path`);
 }
 
@@ -230,7 +230,7 @@ export function verifyNews(items) {
             `news "${item.id ?? "?"}" additionalCtas[${index}] needs a label`,
           );
         }
-        if (!cta?.url || !isSafeHttpUrl(cta.url)) {
+        if (!cta?.url || (!isSafeHttpUrl(cta.url) && cta.url !== "/support/")) {
           errors.push(
             `news "${item.id ?? "?"}" additionalCtas[${index}] needs a confirmed http(s) URL`,
           );
@@ -313,6 +313,28 @@ export function verifyNews(items) {
         }
         if (!Number.isInteger(media.width) || !Number.isInteger(media.height)) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs intrinsic width/height`);
+        }
+        continue;
+      }
+      if (media?.kind === "tiktok") {
+        const canonicalPost = /^https:\/\/www\.tiktok\.com\/@[A-Za-z0-9._-]+\/video\/(\d{16,20})$/.exec(media.sourceUrl ?? "");
+        if (!canonicalPost || canonicalPost[1] !== media.postId) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs a confirmed TikTok post URL`);
+        }
+        const matchingDate = media.sourceDate === null
+          ? item.dateBasis === "confirmed-on" && item.body.includes("投稿日は未確認")
+          : media.sourceDate === item.date;
+        if (!media.id?.trim() || !matchingDate || media.published !== true) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs id, matching sourceDate, and published status`);
+        }
+        if (slot === "media" && item.source !== media.sourceUrl) {
+          errors.push(`news "${item.id ?? "?"}" TikTok source must equal media.sourceUrl`);
+        }
+        if (typeof media.src === "string") {
+          errors.push(`news "${item.id ?? "?"}" ${slot} must use the official TikTok player`);
+        }
+        if (!media.alt?.trim()) {
+          errors.push(`news "${item.id ?? "?"}" ${slot} needs alt text`);
         }
         continue;
       }

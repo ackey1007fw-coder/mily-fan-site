@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -10,7 +11,7 @@ import { promisify } from "node:util";
 import sharp from "sharp";
 import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media } from "../src/data/media.ts";
+import { media } from "./fixtures/media-before-b173.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {
@@ -231,7 +232,7 @@ describe("2026-08-22 night SHOWROOM thanks X post — scope and ordering", () =>
 
   it("does not hand-enter the 8/23 slots into schedule data", async () => {
     const { events } = await import("../src/data/events.ts");
-    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { streamSchedule } = await import("./fixtures/stream-schedule-before-b183.ts");
     const { supportEvents } = await import("../src/data/supportEvents.ts");
 
     assert.deepEqual(events, []);

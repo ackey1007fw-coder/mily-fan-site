@@ -29,6 +29,22 @@ export function isMixchMovie(item: { kind: string }): item is MixchMovie {
   return item.kind === "mixch";
 }
 
+/** 2026-09-29 Mixch movie; reintroduced on X on 2026-10-01. */
+export const mixchKossoriMovie: MixchMovie = {
+  id: "mixch-m-1pcWWQwK",
+  kind: "mixch",
+  mixchUrl: "https://mixch.tv/m/1pcWWQwK",
+  poster:
+    "https://d2jtsb989t238a.cloudfront.net/m/rsayjj4tarvsgbdrp9j9vrhnr21uwy850a7qo3zaer91by8hks537zqqv45vxwgrjetzytqc3xy4df4w6geq9n4i94lbcqerqld3ihhlyujxzmj6mec06ue4w963m35g/thumb_normal",
+  width: 480,
+  height: 853,
+  alt: "猫耳のフィルターを使い、人差し指を立てたみりぃのMixch動画サムネイル。再生するとMixchで開きます",
+  title: "君だけにこっそり教えてあげる〜╰(*´︶`*)╯♡",
+  published: true,
+  sourceDate: "2026-09-29",
+  accountUrl: CONFIRMED_MIXCH_ACCOUNT_URL,
+};
+
 /** 2026-09-07 Mixch「キャンガル2027Aブロック本選進出決定‼️」 https://mixch.tv/m/Tfb8i9dy */
 export const mixchExPeriodDay1Movie: MixchMovie = {
   id: "mixch-m-Tfb8i9dy",
@@ -111,6 +127,7 @@ export const mixchConfidenceMessageMovie: MixchMovie = {
 
 /** Newest first. NEWS and Gallery import these objects; do not copy Mixch files. */
 export const mixchMovies: MixchMovie[] = [
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,

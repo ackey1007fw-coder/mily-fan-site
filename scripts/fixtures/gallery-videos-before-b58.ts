@@ -4,6 +4,15 @@ import { galleryVideos as current, type GalleryVideoItem } from "../../src/data/
 /** Preserve the gallery snapshot used by the pre-b58 content regressions. */
 export const galleryVideos = current.filter(
   ({ id }) =>
+    id !== "mily-b217-01-fourth-round-final-day-story" &&
+    id !== "mixch-m-1pcWWQwK" &&
+    id !== "mily-b141-01-tiktok-ami-meet" &&
+    id !== "mily-b141-02-tiktok-ami-meet-story" &&
+    id !== "mily-b141-03-tiktok-ami-twin-coord" &&
+    id !== "mily-b140-01-tiktok-ami-tokyo" &&
+    id !== "mily-b135-01-cold-umbrella-story" &&
+    id !== "mily-b128-01-campus-girls-paton-15x-story" &&
+    id !== "mily-b139-01-tiktok-kossori" &&
     id !== "mily-b92-01-showroom-avatar-rights-story" &&
     id !== "mily-b66-01-stream-thanks-morning-slot-story" &&
     id !== "mixch-m-Tfb8i9dy" &&

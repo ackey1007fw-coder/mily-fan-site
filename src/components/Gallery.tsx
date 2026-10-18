@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { TikTokEmbedCard } from "./TikTokEmbedCard";
 import { defaultSrc, srcSetFor } from "../data/media";
 import {
   selectGalleryEntries,
@@ -138,6 +139,14 @@ function VideoCard({ entry }: { entry: Extract<GalleryEntry, { kind: "video" }> 
   );
 }
 
+function TikTokCard({ entry }: { entry: Extract<GalleryEntry, { kind: "tiktok" }> }) {
+  return (
+    <li className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">
+      <TikTokEmbedCard video={entry.item} />
+    </li>
+  );
+}
+
 function MixchCard({ entry }: { entry: Extract<GalleryEntry, { kind: "mixch" }> }) {
   return (
     <li className="overflow-hidden rounded-2xl border border-sage/15 bg-paper-card p-2 shadow-card">
@@ -150,6 +159,7 @@ function GalleryCard({ entry }: { entry: GalleryEntry }) {
   if (entry.kind === "media") return <MediaPhotoCard entry={entry} />;
   if (entry.kind === "drive-photo") return <DrivePhotoCard entry={entry} />;
   if (entry.kind === "mixch") return <MixchCard entry={entry} />;
+  if (entry.kind === "tiktok") return <TikTokCard entry={entry} />;
   return <VideoCard entry={entry} />;
 }
 
@@ -187,6 +197,9 @@ export function Gallery({
     typeof limit === "number" ? visible : capped
   ).filter((entry) => entry.kind === "mixch");
   const selfHostedVideos = visible.filter((entry) => entry.kind === "video");
+  const tiktokVideos = (typeof limit === "number" ? visible : entries).filter(
+    (entry) => entry.kind === "tiktok",
+  );
 
   return (
     <section id="gallery" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
@@ -218,16 +231,23 @@ export function Gallery({
           </ul>
         ) : null}
 
-        {mixchCards.length > 0 || selfHostedVideos.length > 0 ? (
+        {mixchCards.length > 0 || tiktokVideos.length > 0 || selfHostedVideos.length > 0 ? (
           <div className={photos.length > 0 ? "mt-10" : "mt-6"}>
             {limit ? null : (
               <>
                 <h3 className="text-lg font-bold text-ink">動画アーカイブ</h3>
                 <p className="mt-1 text-sm text-ink-muted">
-                  お預かりした動画。
+                  お預かりした動画はサイト内で、TikTokの投稿は公式プレーヤーでご覧いただけます。
                 </p>
               </>
             )}
+            {tiktokVideos.length > 0 ? (
+              <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
+                {tiktokVideos.map((entry) => (
+                  <GalleryCard key={entry.key} entry={entry} />
+                ))}
+              </ul>
+            ) : null}
             {mixchCards.length > 0 ? (
               <ul className="mt-4 grid items-start gap-4 sm:grid-cols-2">
                 {mixchCards.map((entry) => (

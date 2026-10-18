@@ -5,6 +5,17 @@ import {
 } from "../../src/data/galleryVideos.ts";
 
 const laterVideoIds = new Set([
+  "mily-b217-01-fourth-round-final-day-story",
+  "mily-b186-01-radio-anniversary-story",
+  "mily-b186-02-radio-message-story",
+  "mixch-m-1pcWWQwK",
+  "mily-b141-01-tiktok-ami-meet",
+  "mily-b141-02-tiktok-ami-meet-story",
+  "mily-b141-03-tiktok-ami-twin-coord",
+  "mily-b140-01-tiktok-ami-tokyo",
+  "mily-b135-01-cold-umbrella-story",
+  "mily-b128-01-campus-girls-paton-15x-story",
+  "mily-b139-01-tiktok-kossori",
   "mily-b92-01-showroom-avatar-rights-story",
   "mily-b66-01-stream-thanks-morning-slot-story",
   "mixch-m-Tfb8i9dy",

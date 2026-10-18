@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -371,7 +372,10 @@ describe("2026-08-24 first makeup stream — no /stories/ article", () => {
 
   it("keeps Portal Feed on the SHOWROOM lead image", () => {
     const feedNews = news.filter((entry) => entry.id !== "2026-08-28-stream-thanks");
-    const feed = createPortalFeed({ newsItems: feedNews });
+    const feed = createPortalFeed({
+      newsItems: feedNews,
+      storyItems: stories.filter((story) => story.date <= "2026-09-22"),
+    });
     const newsItem = findFeedItem(feed, portalNewsId(NEWS_ID));
     const image = new URL(PHOTO, siteOrigin()).href;
 

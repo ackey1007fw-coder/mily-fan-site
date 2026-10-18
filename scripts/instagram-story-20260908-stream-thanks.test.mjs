@@ -1,5 +1,6 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
-import { news as currentNewsForMedia } from "../src/data/news.ts";
+import { news as currentNewsForMedia } from "./fixtures/news-before-b183.ts";
 const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -25,10 +26,10 @@ import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-20260909.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
@@ -175,7 +176,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — Latest / NEWS"
     const entry = item();
 
     assert.equal(entry.media, streamThanksMorningSlotStoryVideo);
-    assert.equal(galleryVideos[0], streamThanksMorningSlotStoryVideo);
+    assert.equal(galleryVideos[7], streamThanksMorningSlotStoryVideo);
     assert.deepEqual(
       galleryVideos.filter(({ id }) => id === MEDIA_ID),
       [streamThanksMorningSlotStoryVideo],
@@ -355,7 +356,7 @@ describe("2026-09-08 Instagram Story 配信お礼・翌朝枠 — privacy and sc
     assert.match(docs, new RegExp(POSTER_SHA256));
     assert.match(docs, /4\.0秒地点の実フレーム/);
     assert.match(docs, /再投稿表示/);
-    assert.match(ops, /85件/);
+    assert.match(ops, /88件/);
     assert.match(ops, /独立動画33本/);
     assert.match(section, /video-only/);
     assert.match(section, /sameDayOrder: 10/);

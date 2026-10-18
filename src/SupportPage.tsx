@@ -1,16 +1,22 @@
 import type { ReactNode } from "react";
+import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
+import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
 import { PatonVoteGuide } from "./components/PatonVoteGuide";
+import { ShowroomAdRewardGuide } from "./components/ShowroomAdRewardGuide";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
+import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import { VoteSpotlight } from "./components/VoteSpotlight";
+import { FourthRoundSupportGuide } from "./components/FourthRoundSupportGuide";
+import { ProvidedVoteSupportVideo } from "./components/ProvidedVoteSupportVideo";
 import { contest } from "./data/contest";
 import { events } from "./data/events";
 import { links } from "./data/links";
 import { supportEvents } from "./data/supportEvents";
-import { selectHomeVoteSpotlight } from "./lib/homePortal";
+import { selectHomePrioritySupport } from "./lib/homePortal";
 import {
   activityRouteForSupport,
   selectSupportNow,
@@ -29,6 +35,7 @@ import { useMilyRealtimeStatus } from "./lib/useMilyRealtimeStatus";
 import { useSupportEventClock } from "./lib/useSupportEventClock";
 import { useStreamSchedule } from "./lib/useStreamSchedule";
 import { useTokyoNow } from "./lib/useTokyoNow";
+import { withFinalStreamAnnouncement } from "./lib/finalStreamAnnouncement";
 
 const primaryCta =
   "inline-flex min-h-11 items-center justify-center rounded-full bg-sage px-5 py-2.5 text-sm font-semibold text-white hover:bg-sage-deep";
@@ -194,7 +201,7 @@ export default function SupportPage() {
     now,
   });
   const nowItems = selectSupportNow({ supportEvents, live, radio, now });
-  const calendar = buildSupportCalendar({
+  const calendar = withFinalStreamAnnouncement(buildSupportCalendar({
     contest,
     supportEvents,
     fanEvents: events,
@@ -204,9 +211,9 @@ export default function SupportPage() {
     includeRadio: true,
     now,
     daysAhead: radioOccurrenceDaysAhead,
-  });
+  }), { slots, manualSlots, roomUrl, availability }, now);
   const pendingItems = calendar.pending;
-  const voteSpotlight = selectHomeVoteSpotlight({
+  const voteSpotlight = selectHomePrioritySupport({
     contest,
     supportEvents,
     links,
@@ -223,16 +230,22 @@ export default function SupportPage() {
       </a>
       <Header />
       <main id="support-main">
-        <SupportHero />
         {voteSpotlight ? (
-          <div className="px-4 pb-4">
+          <div className="px-4 pb-4 pt-6">
             <VoteSpotlight
               spotlight={voteSpotlight}
               className="mx-auto max-w-3xl"
+              headingAs="p"
             />
           </div>
         ) : null}
+        <SupportHero />
+        <AnnouncedStreamSchedule showSupportLink={false} />
+        <PatonExTwoGuide />
+        <ProvidedVoteSupportVideo />
+        <FourthRoundSupportGuide />
         <PatonVoteGuide />
+        <ShowroomAdRewardGuide />
 
         {todayItems.length > 0 ? (
           <SectionShell eyebrow="Today" title="今日のみりぃ">
@@ -294,6 +307,7 @@ export default function SupportPage() {
           ) : null}
         </div>
 
+        <StreamBlackoutNotice />
         <SupportCalendarAgenda calendar={calendar} today={today} />
 
         {pendingItems.length > 0 ? (

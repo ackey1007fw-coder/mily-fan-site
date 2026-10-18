@@ -1,10 +1,14 @@
 import assert from "node:assert/strict";
+import { checkStreamBlackoutNotice } from "./stream-blackouts.browser-checks.mjs";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
+import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
+import { ARCHIVE_LOAD_MORE_LABEL, ARCHIVE_PAGE_SIZE, NEWS_ARCHIVE_INITIAL } from "../src/lib/homePortal.ts";
 import { buildStreamSongCatalog, selectCatalogSongs } from "../src/lib/streamSongCatalog.ts";
 
 // CI installs the pinned browser tooling outside the application/lockfile.
@@ -152,7 +156,11 @@ try {
       });
       await check("original / karaoke links preserve approved URLs and safe new tabs", async () => {
         const links = await section.locator('a[target="_blank"]').evaluateAll((nodes) => nodes.map((node) => ({ href: node.getAttribute("href"), rel: node.rel, label: node.getAttribute("aria-label") })));
-        const approved = new Set(catalog.flatMap((song) => [song.youtubeUrl, ...(song.karaoke ? [song.karaoke.youtubeUrl] : [])]));
+        const approved = new Set([
+          "https://music.youtube.com/playlist?list=PLIr0jsL1PyBQ",
+          "https://www.youtube.com/playlist?list=PLIr0jsL1PyBQ",
+          ...catalog.flatMap((song) => [song.youtubeUrl, ...(song.karaoke ? [song.karaoke.youtubeUrl] : [])]),
+        ]);
         assert.deepEqual(new Set(links.map((link) => link.href)), approved);
         for (const link of links) {
           assert.ok(link.rel.split(/\s+/).includes("noopener") && link.rel.split(/\s+/).includes("noreferrer"));
@@ -198,6 +206,15 @@ try {
       await check("direct recap link opens after a fresh page load", async () => {
         await page.goto(`${live}${targetHash}`, { waitUntil: "networkidle" });
         await page.waitForFunction((hash) => document.querySelector(hash)?.open === true, targetHash);
+        await page.waitForFunction((hash) => {
+          const target = document.querySelector(hash);
+          const heading = target?.querySelector(":scope > summary h3");
+          if (!target || !heading) return false;
+          const targetRect = target.getBoundingClientRect();
+          const headingRect = heading.getBoundingClientRect();
+          return targetRect.top >= 0 && targetRect.top < 150
+            && headingRect.top >= 0 && headingRect.bottom <= window.innerHeight;
+        }, targetHash, { timeout: 5000 });
         await overflow();
       });
       await check("latest recap opens with recording caveats, songs and historical next slot", async () => {
@@ -207,10 +224,50 @@ try {
         await page.waitForFunction((hash) => document.querySelector(hash)?.open === true, hash);
         const recap = page.locator(hash);
         assert.ok((await recap.innerText()).includes(latest.summary));
-        assert.ok((await recap.innerText()).includes(latest.transcriptionNote));
+        const disclosure = recapSourceDisclosure(latest.sourceLabel, latest.transcriptionNote);
+        const sourceInfo = recap.locator('[data-recap-source]');
+        assert.ok((await sourceInfo.innerText()).includes(disclosure.material));
+        const verification = sourceInfo.locator('[data-recap-verification]');
+        assert.equal(await verification.evaluate(element => element.open), false);
+        const verificationSummary = verification.locator('summary');
+        // Keep the touch target away from the viewport edge before the one real click.
+        // Trial click retains Playwright's stability/visibility/hit-target checks without toggling.
+        await verificationSummary.evaluate(element => element.scrollIntoView({ block: "center", behavior: "instant" }));
+        await page.waitForFunction((hash) => {
+          const summary = document.querySelector(`${hash} [data-recap-verification] > summary`);
+          if (!summary) return false;
+          const rect = summary.getBoundingClientRect();
+          const hit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+          return rect.top >= 80 && rect.bottom <= window.innerHeight - 80 && (hit === summary || summary.contains(hit));
+        }, hash, { timeout: 5000 });
+        await verificationSummary.click({ trial: true });
+        assert.equal(await verification.evaluate(element => element.open), false);
+        result.latestDisclosureClick = { viewport: scenario.viewport, box: await verificationSummary.boundingBox(), centeredHitTarget: true };
+        await verificationSummary.click();
+        await page.waitForFunction((hash) => document.querySelector(`${hash} [data-recap-verification]`)?.open === true, hash, { timeout: 5000 });
+        assert.equal(await verification.evaluate(element => element.open), true);
+        for (const text of disclosure.verification) assert.ok((await sourceInfo.innerText()).includes(text));
         for (const song of latest.songs ?? []) {
           assert.ok((await recap.innerText()).includes(song.title));
           assert.equal(await recap.locator(`a[href="${song.youtubeUrl}"]`).count(), 1);
+        }
+        for (const highlight of latest.highlights.filter((item) => item.clip)) {
+          const clip = highlight.clip;
+          const video = recap.getByLabel(`みりぃの${highlight.title}の短い動画`, { exact: true });
+          await video.scrollIntoViewIfNeeded();
+          assert.equal(await video.getAttribute("poster"), clip.poster);
+          assert.equal(await video.getAttribute("preload"), "none");
+          assert.equal(await video.getAttribute("autoplay"), null);
+          assert.equal(await video.locator("source").getAttribute("src"), clip.src);
+          // Muting applies only to this browser test. The published clip retains its audio.
+          await video.evaluate(async (node) => { node.muted = true; await node.play(); });
+          await page.waitForFunction((src) => [...document.querySelectorAll("video")].some(
+            (node) => node.querySelector("source")?.getAttribute("src") === src && node.currentTime > 0.1,
+          ), clip.src);
+          assert.deepEqual(await video.evaluate((node) => [node.videoWidth, node.videoHeight]), [clip.width, clip.height]);
+          assert.ok(await video.evaluate((node) => !node.error && node.controls && node.playsInline));
+          await video.evaluate((node) => node.pause());
+          await overflow();
         }
         for (const still of latest.gallery ?? []) {
           const photo = recap.locator(`img[src="${still.src}"]`).last();
@@ -227,13 +284,23 @@ try {
           assert.equal(zip.status(), 200);
           assert.equal((await zip.body()).readUInt32LE(0), 0x04034b50);
         }
-        const timeline = recap.locator(":scope > details");
+        const latestHasTimeline = latest.timeline.length > 0 || latest.nextNote !== "";
+        if (!latestHasTimeline) {
+          assert.equal(await recap.locator(":scope > details").count(), 0, "空のタイムラインと次枠は表示しない");
+        }
+        const timelineRecap = latestHasTimeline
+          ? latest
+          : streamRecaps.find((item) => item.timeline.length > 0 || item.nextNote !== "");
+        assert.ok(timelineRecap, "既存のタイムライン開閉を検証する回が必要");
+        const timelineHash = `#recap-${timelineRecap.id}`;
+        if (!latestHasTimeline) await page.goto(`${live}${timelineHash}`, { waitUntil: "networkidle" });
+        const timeline = page.locator(timelineHash).locator(":scope > details");
         const timelineSummary = timeline.locator(":scope > summary");
         await timelineSummary.click();
         if (!(await timeline.evaluate((node) => node.open))) await timelineSummary.click();
-        await page.waitForFunction((hash) => document.querySelector(hash)?.querySelector(":scope > details")?.open === true, hash);
+        await page.waitForFunction((hash) => document.querySelector(hash)?.querySelector(":scope > details")?.open === true, timelineHash);
         assert.equal(await timeline.evaluate((node) => node.open), true);
-        assert.ok((await timeline.textContent()).includes(latest.nextNote));
+        assert.ok((await timeline.textContent()).includes(timelineRecap.nextNote));
         await overflow();
         await recap.screenshot({ path: join(output, `${scenario.name}-latest-recap.png`) });
       });
@@ -262,8 +329,18 @@ try {
         await posts.screenshot({ path: join(output, `${scenario.name}-social-song-posts.png`) });
       });
       await check("night Fan Room photo renders on NEWS and LIVE with historical wording", async () => {
+        const nightFanroomId = "2026-09-15-night-fanroom-thanks";
+        const archiveIndex = sortNewsByDateDesc(news).findIndex((item) => item.id === nightFanroomId);
+        assert.ok(archiveIndex >= 0);
         for (const route of ["/news/", "/activities/live/"]) {
           await page.goto(`${base}${route}`, { waitUntil: "networkidle" });
+          if (route === "/activities/live/") {
+            await page.getByRole("link", { name: "過去のお知らせをすべて見る", exact: true }).click();
+            await page.waitForURL(`${base}/news/`);
+          }
+          for (let count = NEWS_ARCHIVE_INITIAL; count <= archiveIndex; count += ARCHIVE_PAGE_SIZE) {
+            await page.locator("#latest").getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true }).click();
+          }
           const photo = page.locator('img[src*="mily-b123-01-night-ribbon-fanroom-selfie"]').first();
           await photo.scrollIntoViewIfNeeded();
           // Scrolling can switch a responsive source while decode() is pending.
@@ -280,6 +357,9 @@ try {
           await photo.screenshot({ path: join(output, `${scenario.name}-night-fanroom-${route.includes("activities") ? "live" : "news"}.png`) });
         }
         assert.deepEqual(errors, []);
+      });
+      await check("NG board is separate from confirmed slots, responsive and expires in JST", async () => {
+        await checkStreamBlackoutNotice({ context, base, output, scenario });
       });
       result.status = "passed";
     } catch (error) {

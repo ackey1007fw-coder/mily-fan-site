@@ -1,5 +1,32 @@
+import { fourthRoundFinalDayStoryVideo, type FourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
+import { xFinalDayPeaceVideo, type XFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
+import { providedVoteVideo, type ProvidedVoteVideo } from "./providedVoteVideo.ts";
+import { radioAnniversaryStories, type RadioAnniversaryStoryVideo } from "./radioAnniversaryStories.ts";
+import { radioOct11Stories, type RadioOct11StoryVideo } from "./radioOct11Stories.ts";
+import { kawaiiRadioStoryVideo, kawaiiRadioAdditionalVideos } from "./kawaiiRadioStoryVideo.ts";
+import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
+import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
+import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
+import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXStoryVideo.ts";
 import { showroomAvatarRightsStoryVideo, type ShowroomAvatarRightsStoryVideo } from "./showroomAvatarRightsStoryVideo.ts";
 import { tiktokPortraitVideo, type TikTokPortraitVideo } from "./tiktokPortraitVideo.ts";
+import {
+  tiktokKossoriVideo,
+  type TikTokKossoriVideo,
+} from "./tiktokKossoriVideo.ts";
+import {
+  tiktokAmiTokyoVideo,
+  type TikTokAmiTokyoVideo,
+} from "./tiktokAmiTokyoVideo.ts";
+import {
+  tiktokAmiMeetVideo,
+  type TikTokAmiMeetVideo,
+} from "./tiktokAmiMeetVideo.ts";
+import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
+import {
+  tiktokAmiTwinCoordVideo,
+  type TikTokAmiTwinCoordVideo,
+} from "./tiktokAmiTwinCoordVideo.ts";
 import {
   eventStory20260821,
   morningOhayo20260821,
@@ -42,6 +69,7 @@ import {
   type TikTokSayonaraIchigoVideo,
 } from "./tiktokSayonaraIchigoVideo.ts";
 import {
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -51,19 +79,34 @@ import {
 } from "./mixchMovies.ts";
 
 export type SelfHostedGalleryVideo =
+  | FourthRoundFinalDayStoryVideo
+  | XFinalDayPeaceVideo
+  | ProvidedVoteVideo
+  | RadioAnniversaryStoryVideo
+  | RadioOct11StoryVideo
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
   | TikTokPortraitVideo
+  | TikTokKossoriVideo
+  | TikTokAmiTokyoVideo
+  | TikTokAmiMeetVideo
+  | TikTokAmiTwinCoordVideo
   | ShowroomAvatarRightsStoryVideo
   | TikTokSayonaraIchigoVideo;
 
 export type GalleryVideoItem = SelfHostedGalleryVideo | MixchMovie;
 export {
   tiktokPortraitVideo,
+  tiktokKossoriVideo,
+  tiktokAmiTokyoVideo,
+  tiktokAmiMeetVideo,
+  tiktokAmiMeetStoryVideo,
+  tiktokAmiTwinCoordVideo,
   showroomAvatarRightsStoryVideo,
   earthquakeSafetyStoryVideo,
   eventStory20260821,
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -89,6 +132,8 @@ export {
   voteDayFiveSoonStoryVideo,
   morningThanksVoteStoryVideo,
   streamThanksMorningSlotStoryVideo,
+  campusGirlsPatonFifteenXStoryVideo,
+  coldUmbrellaStoryVideo,
   nightThanksMorningStreamStoryVideo,
   patonVoteCollageStoryVideo,
   patonVoteMirrorStoryVideo,
@@ -118,6 +163,23 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  fourthRoundFinalDayStoryVideo,
+  xFinalDayPeaceVideo,
+  ...radioOct11Stories,
+  providedVoteVideo,
+  ...radioAnniversaryStories,
+  ...kawaiiRadioAdditionalVideos,
+  kawaiiRadioStoryVideo,
+  faceToFaceClassStoryVideo,
+  morningXVideo,
+  morningCommuteStoryVideo,
+  tiktokAmiMeetVideo,
+  tiktokAmiMeetStoryVideo,
+  tiktokAmiTwinCoordVideo,
+  tiktokAmiTokyoVideo,
+  coldUmbrellaStoryVideo,
+  campusGirlsPatonFifteenXStoryVideo,
+  tiktokKossoriVideo,
   streamThanksMorningSlotStoryVideo,
   morningThanksVoteStoryVideo,
   voteDayFiveSoonStoryVideo,
@@ -153,6 +215,7 @@ export const galleryVideos: GalleryVideoItem[] = [
   tiktokSayonaraIchigoVideo,
   // Undated owner-provided Story: keep it outside dated ordering until the source date is confirmed.
   showroomAvatarRightsStoryVideo,
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,

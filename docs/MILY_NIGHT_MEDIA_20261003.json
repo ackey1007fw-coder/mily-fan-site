@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "batch": "b185",
+  "recap_id": "2026-10-03-night-showroom",
+  "owner_approval": {
+    "basis": "2026-10-03 owner request: publish verified stream recap and public-facing information within existing publication approvals",
+    "scope": [
+      "October 3 night LIVE recap",
+      "ten recording-frame JPEGs",
+      "recap cover PNG"
+    ],
+    "sns_posting": false
+  },
+  "source": {
+    "description": "Owner-designated saved recording of the October 3 night SHOWROOM stream",
+    "time_basis": "relative seconds in original recording; not absolute broadcast time",
+    "original_modified": false,
+    "manual_audio_review": false
+  },
+  "privacy_review": {
+    "images_individually_reviewed": true,
+    "viewer_names": false,
+    "viewer_comments": false,
+    "viewer_avatars": false,
+    "third_party_people": false,
+    "handwritten_background": "excluded by the documented crop",
+    "face_generation_or_correction": false,
+    "upscale": false
+  },
+  "photos": [
+    {
+      "file": "mily-b185-01-20261003-night-0030.jpg",
+      "source_seconds": 30,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "0832e4208ce4f281269c78e1fd59a999ca621eb41fb127aebb907eb8621ab16e",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-02-20261003-night-0360.jpg",
+      "source_seconds": 360,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "87c98327ea96f67b47e37a71b803471a1f5a3bd795c14c75156b5051321e58d1",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-03-20261003-night-0740.jpg",
+      "source_seconds": 740,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "2ed4e215d7a341931b39dc2a5a8c1d2e57a69510d2246fcf8f758e7839f6d188",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-04-20261003-night-1080.jpg",
+      "source_seconds": 1080,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "196faeeb1d50fce42b3926121261f76d7cda24e4eea954c105827fc0109a470e",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-05-20261003-night-1440.jpg",
+      "source_seconds": 1440,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "fd340d518e90745a330896453a06c7c17735b2cee9f9b43503fc782b9aaded1c",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-06-20261003-night-1830.jpg",
+      "source_seconds": 1830,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "7a793116f6b01efed752a43cd0f5a6b5343c634f060d3d26cd51ebbc442930ea",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-07-20261003-night-2190.jpg",
+      "source_seconds": 2190,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "6a3426f077dad7ec0d7c7c66204fffdf314e41130ef54ce65e431f39a9f86364",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-08-20261003-night-2540.jpg",
+      "source_seconds": 2540,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "6706afa3251795c00e737fefbcd62e1ecd43ba2376619be564f0ba6b27e5f48f",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-09-20261003-night-3000.jpg",
+      "source_seconds": 3000,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "2b9c75d34e697b257fd1e066fc72a81bd4ebead28d84aaeec980fd20892471c4",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    },
+    {
+      "file": "mily-b185-10-20261003-night-3510.jpg",
+      "source_seconds": 3510,
+      "source_size": [
+        640,
+        360
+      ],
+      "crop": [
+        0,
+        0,
+        420,
+        360
+      ],
+      "size": [
+        420,
+        360
+      ],
+      "sha256": "1dfe81a30b094353170430aa9d2be18011a83eca214a67fe9fc2e7b1ebf887de",
+      "visual_review": "final_crop_checked; handwritten background excluded; no viewer overlays; source softness retained",
+      "auditory_review": false
+    }
+  ],
+  "cover": {
+    "file": "mily-b185-11-20261003-night-cover.png",
+    "size": [
+      720,
+      1280
+    ],
+    "sha256": "6bfdee711d591815bda587f4b3e78e64392606ba848f2cef96d0c344e5812a0c",
+    "source_photo": "mily-b185-10-20261003-night-3510.jpg",
+    "photo_bounds": [
+      150,
+      360,
+      570,
+      720
+    ],
+    "source_pixels_identical": true,
+    "visual_review": "checked; all labels within canvas, handwritten background absent",
+    "site_usage": "retained public asset; not attached to recap gallery",
+    "sns_posted": false
+  }
+}

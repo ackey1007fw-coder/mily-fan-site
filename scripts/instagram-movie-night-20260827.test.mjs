@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -10,7 +11,7 @@ import sharp from "sharp";
 import { events } from "../src/data/events.ts";
 import { galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media, visibleMedia } from "../src/data/media.ts";
+import { media, visibleMedia } from "./fixtures/media-before-b173.ts";
 import {
   MOVIE_NIGHT_INSTAGRAM_PROFILE_URL,
   MOVIE_NIGHT_INSTAGRAM_URL,

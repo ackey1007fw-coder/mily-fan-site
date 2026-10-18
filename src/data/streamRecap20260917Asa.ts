@@ -1,0 +1,75 @@
+import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
+import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildRankingNote, buildTranscriptionNote } from "./streamRecapRules.ts";
+
+const stillDescriptions = [
+  ["0:25:00", "鏡を手にした笑顔", "鏡を手に持ち、カメラに向かって笑顔を見せるみりぃ"],
+  ["0:31:04", "メイク中の笑顔", "髪を横でまとめ、メイク中に笑顔を見せるみりぃ"],
+  ["0:39:58", "髪をほどく場面", "両手を上げ、髪をほどきながら笑うみりぃ"],
+  ["0:43:04", "髪を下ろした姿", "髪を下ろし、カメラに近づいて笑顔を見せるみりぃ"],
+  ["0:46:02", "顔の横で指を広げたポーズ", "顔の横で指を広げ、カメラを見つめるみりぃ"],
+  ["0:51:56", "両手を添えた笑顔", "頭の両側に手を添え、笑顔を見せるみりぃ"],
+  ["0:54:58", "首をかしげた笑顔", "首をかしげ、歯を見せて笑うみりぃ"],
+  ["1:04:00", "片手を振る場面", "髪を横でまとめ、カメラへ片手を振るみりぃ"],
+  ["1:12:02", "手を合わせた笑顔", "顔の前で手を合わせ、笑顔を見せるみりぃ"],
+  ["1:13:28", "両手を広げたポーズ", "顔の横に両手を広げ、笑顔でポーズをとるみりぃ"],
+] as const;
+
+const approvedStills: StreamRecapImage[] = stillDescriptions.map(([timestamp, label, alt], index) => ({
+  src: `/media/live/mily-b126-${String(index + 1).padStart(2, "0")}-morning.jpg`,
+  width: 640,
+  height: 360,
+  alt,
+  caption: `${timestamp} ${label}`,
+  downloadName: `みりぃ_20260917朝_${String(index + 1).padStart(2, "0")}.jpg`,
+}));
+
+export const streamRecap20260917Asa: StreamRecap = {
+  id: "2026-09-17-asa-showroom",
+  date: "2026-09-17",
+  dateLabel: "2026.09.17（木）",
+  theme: "朝のメイクと音楽トーク",
+  broadcastLabel: "8:32頃〜 約74分",
+  platformLabel: "SHOWROOM",
+  summary: "お出かけ前のメイクから、吹奏楽部時代のトロンボーンやラジオの話まで広がった朝配信。終盤には13位から1位までライブランキングを読み上げ、夜にも配信すると案内しました。",
+  image: approvedStills[9],
+  gallery: approvedStills,
+  galleryZip: { src: "/media/live/mily-b126-morning-stills.zip", filename: "みりぃ_20260917朝_スクショ10枚.zip", label: "10枚まとめて保存" },
+  highlights: [
+    { timestamp: "0:03:14", title: "かわいすぎるとスマホが？", body: "褒め言葉に、かわいくなりすぎると光ってスマホが壊れてしまう、と冗談で応じました。新しいスマホの準備はできているかと問いかけ、朝からやり取りが弾みました。" },
+    { timestamp: "0:08:31", title: "私自身が太陽", body: "太陽に負けないというやり取りでは、自分自身が太陽だとひと言。メイクをしてもしなくても負けない、と明るく返しました。", quote: "私自身が太陽だから" },
+    { timestamp: "0:23:55", title: "一緒にメイクする朝", body: "一人で先にメイクするより、みんなと話しながらの方が楽しいと思って配信にした、と説明。アイラインの工程では、一旦静かになると言って真剣に集中しました。" },
+    { timestamp: "0:42:45", title: "メイク完成と元気のおすそ分け", body: "メイクが完成したことを報告し、カメラへ笑顔を見せました。朝から元気なトークについても、みんなに元気を届けたい気持ちで配信している、と話しました。" },
+    { timestamp: "0:45:58", title: "四次審査に向けて", body: "初めて訪れた人へ、MISS CIRCLE CONTESTに出場中と自己紹介。四次審査に向けて頑張るので、これからも見てほしいと呼びかけました。" },
+    { timestamp: "0:47:32", title: "吹奏楽部のキャプテン時代", body: "高校時代は吹奏楽部のキャプテンを務め、誰よりも頑張らなければと思っていたと振り返りました。やると決めたらとことんやる、という姿勢も語りました。" },
+    { timestamp: "0:50:09", title: "担当はトロンボーン", body: "吹奏楽部で担当していた楽器はトロンボーンと紹介。スライドで音程を取るため、自分の耳を頼りに調整すると話しました。" },
+    { timestamp: "1:02:49", title: "ラジオとおしゃべり", body: "ラジオパーソナリティをしていることに触れ、おしゃべりが好きなので配信でも一緒に話してほしいと呼びかけました。" },
+  ],
+  goals: [],
+  ranking: [buildRankingNote(13, 1)],
+  timeline: [
+    { timestamp: "0:00:43", label: "お出かけ前のメイク配信" },
+    { timestamp: "0:03:14", label: "かわいさとスマホの冗談" },
+    { timestamp: "0:08:31", label: "私自身が太陽というひと言" },
+    { timestamp: "0:15:31", label: "眉毛の色とアイメイク" },
+    { timestamp: "0:23:55", label: "一緒にメイク配信をする理由" },
+    { timestamp: "0:24:25", label: "アイラインに集中" },
+    { timestamp: "0:42:45", label: "メイク完成の報告" },
+    { timestamp: "0:44:14", label: "みんなに元気を届けたい気持ち" },
+    { timestamp: "0:45:58", label: "四次審査への意気込み" },
+    { timestamp: "0:47:32", label: "吹奏楽部のキャプテン時代" },
+    { timestamp: "0:50:09", label: "担当楽器はトロンボーン" },
+    { timestamp: "0:52:34", label: "耳を頼りに音程を調整する話" },
+    { timestamp: "1:02:49", label: "ラジオとおしゃべりの話" },
+    { timestamp: "1:08:12", label: "髪型のアレンジに挑戦" },
+    { timestamp: "1:10:33", label: "13位から1位までランキング読み上げ" },
+    { timestamp: "1:12:41", label: "夜にも配信すると案内" },
+  ],
+  nextNote: "配信時点では、同日夜にも配信すると案内。帰宅時刻によるため時間は未定で、改めて連絡すると話していました。",
+  sourceLabel: "2026年9月17日 SHOWROOM朝配信（オーナー提供録画・録画範囲の自動文字起こし確認）",
+  verifiedAt: "2026-09-17",
+  transcriptionNote: buildTranscriptionNote({
+    material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
+    stills: "静止画は録画の実フレーム10枚を掲載しています。",
+    extra: "録画開始記録8:32:47、メディア実測4434.404秒から表示を8:32頃・約74分に丸めています。録画範囲全体を37チャンク・1221区間の自動文字起こしで確認しました。配信全編の完全収録は保証しません。聞き取りが不確かな固有名詞・数値は省いています。タイムスタンプは録画先頭からの目安です。",
+  }),
+};

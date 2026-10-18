@@ -1,3 +1,6 @@
+import { tiktokCampusMakeupVideo } from "../data/tiktokCampusMakeupVideo.ts";
+import { tiktokOct04SelfieVideo } from "../data/tiktokOct04SelfieVideo.ts";
+import { tiktokOct07RibbonVideo } from "../data/tiktokOct07RibbonVideo.ts";
 /**
  * Gallery の表示用selector。
  *
@@ -17,12 +20,15 @@ import {
 } from "../data/galleryVideos.ts";
 import { isMixchMovie, type MixchMovie } from "../data/mixchMovies.ts";
 import { media, visibleMedia, type MediaItem } from "../data/media.ts";
+import { tiktokGoodVibesVideo, type TikTokPostVideo } from "../data/tiktokGoodVibesVideo.ts";
+import { tiktokSeasideCirclePoseVideo } from "../data/tiktokSeasideCirclePoseVideo.ts";
 
 export type GalleryEntry =
   | { kind: "media"; key: string; item: MediaItem }
   | { kind: "drive-photo"; key: string; item: DrivePhotoView }
   | { kind: "video"; key: string; item: DriveVideoView }
-  | { kind: "mixch"; key: string; item: MixchMovie };
+  | { kind: "mixch"; key: string; item: MixchMovie }
+  | { kind: "tiktok"; key: string; item: TikTokPostVideo };
 
 function partition<T>(items: T[], pred: (item: T) => boolean): [T[], T[]] {
   const matched: T[] = [];
@@ -61,6 +67,7 @@ export function isObjectWithoutPerson(item: MediaItem): boolean {
 /** みりぃの顔・姿が主役の写真。 */
 export function isMilyPortraitPhoto(item: MediaItem): boolean {
   if (item.kind !== "photo") return false;
+  if (/stream-schedule/.test(item.basePath)) return false;
   if (isShowroomUiScreenshot(item)) return false;
   if (isRadioTrioPhoto(item)) return false;
   if (isSkyOrLandscapePhoto(item)) return false;
@@ -114,6 +121,15 @@ export function selectGalleryEntries(): GalleryEntry[] {
       key: item.id,
       item,
     })),
+    ...(tiktokSeasideCirclePoseVideo.published ? [{ kind: "tiktok" as const, key: tiktokSeasideCirclePoseVideo.id, item: tiktokSeasideCirclePoseVideo }] : []),
+    ...(tiktokOct07RibbonVideo.published ? [{ kind: "tiktok" as const, key: tiktokOct07RibbonVideo.id, item: tiktokOct07RibbonVideo }] : []),
+    ...(tiktokOct04SelfieVideo.published ? [{ kind: "tiktok" as const, key: tiktokOct04SelfieVideo.id, item: tiktokOct04SelfieVideo }] : []),
+    ...(tiktokCampusMakeupVideo.published ? [{ kind: "tiktok" as const, key: tiktokCampusMakeupVideo.id, item: tiktokCampusMakeupVideo }] : []),
+    ...(tiktokGoodVibesVideo.published ? [{
+      kind: "tiktok" as const,
+      key: tiktokGoodVibesVideo.id,
+      item: tiktokGoodVibesVideo,
+    }] : []),
     ...selfHosted.map(driveVideoView).map((item) => ({
       kind: "video" as const,
       key: item.key,

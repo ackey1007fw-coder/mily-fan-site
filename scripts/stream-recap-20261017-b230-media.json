@@ -1,0 +1,186 @@
+{
+  "schema": 1,
+  "report_id": "2026-10-17-morning-showroom",
+  "room_id": 573253,
+  "live_id": 23564059,
+  "recording_process_window_jst": {
+    "start": "2026-10-17T06:01:17+09:00",
+    "end": "2026-10-17T09:39:49+09:00",
+    "not_official_broadcast_bounds": true
+  },
+  "video_provenance": {
+    "saved_media_duration_s": 13072.717,
+    "width": 640,
+    "height": 360,
+    "frame_capture_origin": "same verified archived H264 video",
+    "full_recording_continuity_confirmed": false
+  },
+  "intended_public_surface": "only /activities/live/ recap 2026-10-17-morning-showroom",
+  "scope_limitations": [
+    "No original recording, ASR payload or viewer identifying data in public files.",
+    "Face, hair and body not edited. Only small background sticky text regions selectively blurred.",
+    "EXIF removed; gallery stills are re-encoded JPEG derivatives, never original recorder overwrites."
+  ],
+  "items": [
+    {
+      "filename": "mily-b230-01-20261017-long-003640-close-smile.jpg",
+      "path": "public/media/live/mily-b230-01-20261017-long-003640-close-smile.jpg",
+      "video_offset_seconds": 2200,
+      "bytes": 14499,
+      "sha256": "ccc9d18eb4410b63a3fb93ee2dad6d2d87636beabf7f6fec0d655fa41723f52e",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [
+        [
+          480,
+          0,
+          610,
+          202
+        ]
+      ],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-02-20261017-long-013000-friendly-talk.jpg",
+      "path": "public/media/live/mily-b230-02-20261017-long-013000-friendly-talk.jpg",
+      "video_offset_seconds": 5400,
+      "bytes": 13856,
+      "sha256": "d56117f2ab4264cfcb90fa08fdec77a563a88fc70594371bbefc0340a677a423",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [
+        [
+          445,
+          0,
+          610,
+          253
+        ]
+      ],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-03-20261017-long-014410-bright-smile.jpg",
+      "path": "public/media/live/mily-b230-03-20261017-long-014410-bright-smile.jpg",
+      "video_offset_seconds": 6250,
+      "bytes": 13046,
+      "sha256": "476e9640e286f772de61290fb1ee4866a68155146cfc60a1f9d55119952a1c14",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-04-20261017-long-015820-relaxed-chat.jpg",
+      "path": "public/media/live/mily-b230-04-20261017-long-015820-relaxed-chat.jpg",
+      "video_offset_seconds": 7100,
+      "bytes": 13552,
+      "sha256": "e1a6c071a59c6753205cc4243d22a3ecd5e787e5ce3785a2f5189478c9160069",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-05-20261017-long-021140-cozy-talk.jpg",
+      "path": "public/media/live/mily-b230-05-20261017-long-021140-cozy-talk.jpg",
+      "video_offset_seconds": 7900,
+      "bytes": 13164,
+      "sha256": "7d8cb680860c9301bfee0301117565e9f4316bec1a4eb6bfafb7902b8409d5ad",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-06-20261017-long-022640-hand-wave.jpg",
+      "path": "public/media/live/mily-b230-06-20261017-long-022640-hand-wave.jpg",
+      "video_offset_seconds": 8800,
+      "bytes": 16342,
+      "sha256": "30f1d4aad6f2e2622df486111f056555d90abda63aac4b3d7c7380acda2a803b",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-07-20261017-long-024140-leaning-smile.jpg",
+      "path": "public/media/live/mily-b230-07-20261017-long-024140-leaning-smile.jpg",
+      "video_offset_seconds": 9700,
+      "bytes": 15728,
+      "sha256": "f8dade35bdf73d1319327acf05373fcfd98b72c0581e1b10e54ca353d9425bcc",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-08-20261017-long-025640-close-talk.jpg",
+      "path": "public/media/live/mily-b230-08-20261017-long-025640-close-talk.jpg",
+      "video_offset_seconds": 10600,
+      "bytes": 15000,
+      "sha256": "b23c81861c00542ef67c0c671eea3a6919867946517f0d7d2c810d2e675a25b7",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-09-20261017-long-031230-gentle-gesture.jpg",
+      "path": "public/media/live/mily-b230-09-20261017-long-031230-gentle-gesture.jpg",
+      "video_offset_seconds": 11550,
+      "bytes": 14741,
+      "sha256": "18ed9e5c67745618ed11aa985da66e22a6960e722520c053ce0b5d27d486009d",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-10-20261017-long-032640-leaning-chat.jpg",
+      "path": "public/media/live/mily-b230-10-20261017-long-032640-leaning-chat.jpg",
+      "video_offset_seconds": 12400,
+      "bytes": 15695,
+      "sha256": "0b763b49f72fc7eefcc4fcde53661fe506ab40fec3f4a14e699b15f2441a845a",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [
+        [
+          545,
+          52,
+          639,
+          160
+        ]
+      ],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    },
+    {
+      "filename": "mily-b230-11-20261017-long-033700-farewell.jpg",
+      "path": "public/media/live/mily-b230-11-20261017-long-033700-farewell.jpg",
+      "video_offset_seconds": 13020,
+      "bytes": 12856,
+      "sha256": "54c757871cd55e81e1964a6f91db0bd817fbc902e6263a849abd5dbed46689df",
+      "width": 640,
+      "height": 360,
+      "background_text_mask_boxes": [
+        [
+          540,
+          40,
+          640,
+          170
+        ]
+      ],
+      "face_or_body_modified": false,
+      "exif_removed": true
+    }
+  ]
+}

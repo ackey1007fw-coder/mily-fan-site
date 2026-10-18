@@ -1,14 +1,15 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, it } from "node:test";
-import { media } from "../src/data/media.ts";
+import { media } from "./fixtures/media-before-b173.ts";
 import { earthquakeSafetyStoryVideo, galleryVideos } from "./fixtures/gallery-videos-before-b41.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");

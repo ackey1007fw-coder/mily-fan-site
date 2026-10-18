@@ -1,6 +1,8 @@
 // Owner-requested song links, verified against artist/label or accompaniment creator channels.
 // Removing only these exact URLs lets existing private-archive checks keep running.
 const approved = new Set([
+  // 2026-09-20: weeeek / NEWS — にゅうちゅうぶ | NEWS official の公式MV。
+  "https://www.youtube.com/watch?v=bYAvL803fAE",
   // 2026-09-16: 嵐の公式MV。9/15夜の短い口ずさみ2曲として記録。
   "https://www.youtube.com/watch?v=evCrxxtslVU",
   "https://www.youtube.com/watch?v=EAgACSowE5k",
@@ -37,6 +39,13 @@ const approved = new Set([
   "https://www.youtube.com/watch?v=fyrMcSH9ax0",
   "https://www.youtube.com/watch?v=3-kV0xU5aNc",
   "https://www.youtube.com/watch?v=kzZ6KXDM1RI",
+  // 2026-10-12最終夜：録画文字起こしと正式歌詞を照合、原曲公式MVを個別確認。
+  // 超ときめき♡宣伝部 Official / 超最強。
+  "https://www.youtube.com/watch?v=Yeahpo-0Ub4",
+  // AKB48 Official / ヘビーローテーション。
+  "https://www.youtube.com/watch?v=lkHlnWFnA0c",
+  // HoneyWorks OFFICIAL / mona（CV：夏川椎菜）「ファンサ」。
+  "https://www.youtube.com/watch?v=lzyDD8bMDKs",
   "https://www.youtube.com/watch?v=F3P8vcZkIh4",
   "https://www.youtube.com/watch?v=vtJEXV-ZZBw",
 
@@ -64,6 +73,8 @@ const approved = new Set([
   "https://www.youtube.com/watch?v=Lv9pOboKtjg",
   // 2026-09-15: 高嶺の花子さん / back number — back number Official Artist Channel の公式MV。
   "https://www.youtube.com/watch?v=SII-S-zCg-c",
+  // 2026-09-24: 自由への扉 / 小此木麻里 — DisneyMusicJapanVEVO 個別動画・確認済みチャンネルを実見。
+  "https://www.youtube.com/watch?v=6E2ZGtMQdYs",
   // 2026-09-14: てぃんさぐぬ花 / 沖縄民謡 — 夏川りみ Topic の正規配信音源。See CONTENT-OPS audit.
   "https://www.youtube.com/watch?v=IJ6B4t-hxxY",
   // 2026-09-14: 島人ぬ宝 / BEGIN — BEGIN Official Artist Channel の公式ライブ映像。See CONTENT-OPS audit.

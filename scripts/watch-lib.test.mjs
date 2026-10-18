@@ -132,6 +132,82 @@ describe("showroom diffing", () => {
 });
 
 describe("phase diffing", () => {
+  for (const text of [
+    "4次審査",
+    "10/2〜4次🩵三橋莉子🍅✨(みりぃ)#ミスサークル2026",
+    "4次ガチ‼️1.2倍DAY🔥三橋莉子🍅✨(みりぃ)#ミスサー",
+    "🔥4次最終日🩵三橋莉子🍅✨",
+    "第４次 審査 三橋莉子",
+    "第四次審査 三橋莉子",
+    "四次審査 三橋莉子",
+  ]) {
+    it(`treats ${text} as the same fourth round`, () => {
+      assert.deepEqual(diffPhase("4次審査", text), []);
+      assert.equal(hasChanges(diffPhase("4次審査", text)), false);
+    });
+  }
+
+  for (const text of [
+    "初アバ配布中🈂️三橋莉子🍅✨(みりぃ)#ミスサークル2026",
+    "1.2倍DAY🔥三橋莉子🍅✨",
+    "3次終了・4次へ 三橋莉子",
+    "4次審査・セミファイナル 三橋莉子",
+    "十四次審査 三橋莉子",
+    "準々決勝 三橋莉子",
+    "準準決勝 三橋莉子",
+    "準々々決勝 三橋莉子",
+    "予選決勝 三橋莉子",
+    "4次審査・準々決勝 三橋莉子",
+    "",
+    null,
+    4,
+  ]) {
+    it(`treats missing or ambiguous stages (${text}) as unavailable`, () => {
+      const findings = diffPhase("4次審査", text);
+      assert.equal(findings[0].severity, SEVERITY.unavailable);
+      assert.equal(hasChanges(findings), false);
+    });
+  }
+
+  for (const text of ["3次審査", "5次ガチ", "14次審査", "セミファイナル", "ファイナル", "準決勝", "決勝"]) {
+    it(`still detects a different stage (${text})`, () => {
+      const findings = diffPhase("4次審査", `${text} 三橋莉子`);
+      assert.equal(findings[0].severity, SEVERITY.change);
+      assert.equal(hasChanges(findings), true);
+    });
+  }
+
+  it("does not let a matching substring hide conflicting stages", () => {
+    assert.equal(
+      diffPhase("4次審査", "4次審査・5次審査 三橋莉子")[0].severity,
+      SEVERITY.unavailable,
+    );
+    assert.equal(diffPhase("4次審査", "4次・4次ガチ 三橋莉子").length, 0);
+  });
+
+  it("distinguishes semifinals from finals and normalizes their aliases", () => {
+    assert.deepEqual(diffPhase("セミファイナル", "準決勝 三橋莉子"), []);
+    assert.deepEqual(diffPhase("ファイナル", "決勝 三橋莉子"), []);
+    assert.equal(diffPhase("セミファイナル", "ファイナル 三橋莉子")[0].severity, SEVERITY.change);
+    assert.equal(diffPhase("ファイナル", "セミファイナル 三橋莉子")[0].severity, SEVERITY.change);
+  });
+
+  it("only proposes registration when an explicit stage is observed", () => {
+    assert.equal(diffPhase(null, "4次ガチ 三橋莉子")[0].severity, SEVERITY.change);
+    assert.equal(hasChanges(diffPhase(null, "初アバ配布中 三橋莉子")), false);
+    assert.equal(diffPhase("審査中", "4次ガチ 三橋莉子")[0].severity, SEVERITY.unavailable);
+  });
+
+  it("dedupes the same stage transition despite promotional wording changes", () => {
+    const first = diffPhase("3次審査", "10/2〜4次 三橋莉子");
+    const second = diffPhase("第３次最終日", "4次ガチ‼️1.2倍DAY 三橋莉子");
+    assert.equal(first[0].current, "第3次");
+    assert.equal(first[0].observed, "第4次");
+    assert.equal(fingerprint(first), fingerprint(second));
+    assert.notEqual(fingerprint(first), fingerprint(diffPhase("3次審査", "5次審査 三橋莉子")));
+    assert.match(first[0].note, /10\/2〜4次/);
+  });
+
   it("passes when the public text still contains the registered phase", () => {
     assert.deepEqual(
       diffPhase("2次審査", "🔥2次審査🩵三橋莉子🍅✨ #ミスサークル2026"),

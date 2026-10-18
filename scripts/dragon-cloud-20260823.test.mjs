@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -259,7 +260,7 @@ describe("2026-08-23 dragon-cloud Instagram post — Gallery", () => {
   it("adds only the expected 18 Gallery derivatives and one NEWS image", async () => {
     const files = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"))
-      .filter((file) => file.includes("mily-b20"));
+      .filter((file) => file.includes("mily-b20-"));
 
     assert.equal(files.length, 19);
     assert.equal(files.filter((file) => file.startsWith("media/gallery/")).length, 18);

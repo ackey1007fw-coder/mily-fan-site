@@ -1,9 +1,11 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { describe, it } from "node:test";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { highlights } from "../src/data/highlights.ts";
+import { stories } from "../src/data/stories.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
@@ -146,7 +148,9 @@ describe("2026-08-24 CAMPUS GIRLS Final STAGE guide — Latest entry", () => {
   });
 
   it("keeps Portal Feed aligned with the new Latest lead", () => {
-    const feed = createPortalFeed();
+    const feed = createPortalFeed({
+      storyItems: stories.filter((story) => story.date <= "2026-09-22"),
+    });
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
 
     assert.ok(entry);

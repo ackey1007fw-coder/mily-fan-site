@@ -1,3 +1,4 @@
+import { DATA_LAB_ROUTE } from "../lib/dataLabRoute.ts";
 import { activities, type ActivityRoute } from "./activities.ts";
 
 export const site = {
@@ -67,6 +68,18 @@ export function radioMusicUrl(): string {
   return `${siteOrigin()}/activities/radio/music/`;
 }
 
+export function dataLabUrl(): string {
+  return `${siteOrigin()}${DATA_LAB_ROUTE}`;
+}
+
+export function dataLabFinalNightUrl(): string {
+  return `${dataLabUrl()}reports/20261012-final-night/`;
+}
+
+export function dataLabOgImageUrl(): string {
+  return `${siteOrigin()}/data-lab/assets/og-card-20261013.png`;
+}
+
 export function ogImageUrl(): string {
   const imagePath = site.ogImagePath.startsWith("/")
     ? site.ogImagePath
@@ -134,6 +147,11 @@ ${activities
     <loc>${radioMusicUrl()}</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>${storyUrl("2026-10-15-semifinal")}</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>${storyUrl("2026-08-25-motivation")}</loc>

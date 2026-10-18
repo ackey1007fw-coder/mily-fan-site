@@ -84,9 +84,22 @@ describe("media collection", () => {
     assert.equal(item.aspect, "1152 / 2048");
   });
 
-  it("keeps landscape tiles on the default 4/3 aspect", () => {
-    // 縦写真と正方形だけが aspect を持つ。4/3 の横写真は既定のまま。
-    const portraits = new Set([
+  it("keeps default landscape tiles at 4/3 and preserves approved poster aspect", () => {
+    // 縦・正方形・16:9など、4/3以外の元構図を保持する写真だけがaspectを持つ。
+    const explicitAspects = new Set([
+      "mily-b219-01",
+      "mily-b219-02",
+      "mily-b219-03",
+      "mily-b219-04",
+      "mily-b183-01",
+      "mily-b173-01",
+      "mily-b173-02",
+      "mily-b173-03",
+      "mily-b173-04",
+      "mily-b173-05",
+      "mily-b173-06",
+      "mily-b173-07",
+      "mily-b168-02",
       "mily-b05-01",
       "mily-b08-01",
       "mily-b10-01",
@@ -113,9 +126,10 @@ describe("media collection", () => {
       "mily-b97-01",
       "mily-b110-01",
       "mily-b123-01",
+      "mily-b145-03",
     ]);
     for (const item of media) {
-      if (portraits.has(item.id)) {
+      if (explicitAspects.has(item.id)) {
         assert.ok(item.aspect, item.id);
         continue;
       }

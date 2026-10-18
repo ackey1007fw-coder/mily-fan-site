@@ -1,5 +1,6 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
-import { news as currentNewsForMedia } from "../src/data/news.ts";
+import { news as currentNewsForMedia } from "./fixtures/news-before-b183.ts";
 const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -27,11 +28,11 @@ import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-20260909.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { missCircleThirdRoundWebVote } from "../src/data/supportEvents.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
@@ -242,9 +243,9 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
   it("shares one manifest object per Story with Gallery, Activities, and Portal Feed", () => {
     const [night, morning] = fixtures;
 
-    // 9/8 の b66 Story が先頭。b65 は 2〜3番目。
-    assert.equal(galleryVideos[1], morning.item);
-    assert.equal(galleryVideos[2], night.item);
+    // 9/22 の b141 TikTok 3本が先頭。9/21 の b140 は 4番目。9/20 の b135 Story が5番目。9/18 の b128 は 6番目。9/16 の b139 TikTok は 7番目。9/8 の b66 は 8番目。b65 は 9〜10番目。
+    assert.equal(galleryVideos[8], morning.item);
+    assert.equal(galleryVideos[9], night.item);
 
     for (const fixture of fixtures) {
       const entry = newsItem(fixture.newsId);
@@ -469,7 +470,7 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — privacy and scope", 
     // source date は画面表示と元動画の container creation_time からの判断。オーナー確認待ちを明記する。
     assert.match(docs, /オーナーの明示確認/);
     assert.match(section, /オーナーの明示確認/);
-    assert.match(ops, /85件/);
+    assert.match(ops, /88件/);
     assert.match(ops, /独立動画33本/);
     assert.match(section, /video-only/);
     assert.match(section, /sameDayOrder: 50/);

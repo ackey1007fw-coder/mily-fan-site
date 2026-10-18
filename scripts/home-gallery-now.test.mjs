@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import path from "node:path";
@@ -5,6 +6,7 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import { radioProgram } from "../shared/radio-program.js";
 import { contest } from "../src/data/contest.ts";
+import { fourthRoundContest } from "./fixtures/contest-fourth-round.ts";
 import { links } from "../src/data/links.ts";
 import { mixchFinalDayMovie } from "../src/data/mixchMovies.ts";
 import { news } from "./fixtures/news-before-b58.ts";
@@ -54,6 +56,15 @@ const unknownLive = {
 };
 
 const NONE_BANNER = { kind: "NONE", stateLabel: "", title: "" };
+const THIRD_ROUND_CONTEST = {
+  ...contest,
+  currentPhase: {
+    name: "3次審査",
+    start: "2026-09-03",
+    end: "2026-09-13",
+    source: "https://www.misscircle.jp/",
+  },
+};
 
 function homeToday(now, overrides = {}) {
   return selectHomeToday({
@@ -115,7 +126,7 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
   });
 
   it("does not leave a dead Paton button after 9/1 23:59 JST", () => {
-    const ended = homeToday(END + 1);
+    const ended = homeToday(END + 1, { contest: fourthRoundContest });
     const nowHero = ended.nowItems.find((item) => item.origin === "contest");
     assert.equal(
       ended.nowItems.some((item) => item.cta?.url === PATON_URL),
@@ -130,12 +141,14 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
     assert.equal(ended.voteActions[0].label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].deadlineLabel, undefined);
-    assert.match(ended.voteActions[0].note ?? "", /3次審査/);
-    assert.ok(nowHero);
-    assert.equal(nowHero.cta?.url, contest.entryUrl);
-    assert.equal(nowHero.cta?.label, "ENTRY 734を応援する");
-    assert.match(nowHero.note ?? "", /3次審査/);
-    assert.doesNotMatch(nowHero.title, /CAMPUS GIRLS|FinalSTAGE|Paton/i);
+    assert.match(ended.voteActions[0].note ?? "", /4次審査/);
+    assert.equal(nowHero, undefined);
+    assert.equal(
+      ended.dashboardVoteButtons.some(
+        (action) => action.url === contest.entryUrl,
+      ),
+      true,
+    );
   });
 
   it("keeps the live vote in the compact NOW cap even when SHOWROOM and radio are live", () => {
@@ -218,11 +231,12 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
     );
     assert.equal(
       ended.dashboardVoteButtons.some((action) => action.url === contest.entryUrl),
+      true,
+    );
+    assert.equal(
+      ended.nowItems.some((item) => item.origin === "contest"),
       false,
     );
-    assert.equal(ended.nowItems[0]?.origin, "contest");
-    assert.equal(ended.nowItems[0]?.cta?.url, contest.entryUrl);
-    assert.equal(ended.nowItems[0]?.cta?.label, "ENTRY 734を応援する");
     assert.equal(ended.voteActions[0].url, contest.entryUrl);
   });
 
@@ -277,26 +291,27 @@ describe("Gallery portrait-first order", () => {
     assert.deepEqual(
       preview.map((entry) => entry.key),
       [
-        "mily-b63-01",
-        "mily-b38-01",
-        "mily-b31-01",
-        "mily-b30-01",
-        "mily-b29-01",
-        "mily-b28-01",
+        "mily-b173-01",
+        "mily-b173-02",
+        "mily-b173-03",
+        "mily-b173-04",
+        "mily-b173-05",
+        "mily-b173-06",
       ],
     );
   });
 
-  it("keeps one cinema cut and does not copy media arrays into the HOME picker", () => {
+  it("keeps cinema cuts in the archive without copying media arrays into the HOME picker", () => {
     const preview = selectGalleryPreview(HOME_GALLERY_LIMIT);
-    const cinemaCount = preview.filter(
+    const archive = selectGalleryEntries();
+    const cinemaCount = archive.filter(
       (entry) => cinemaEventKey(entry) === "mily-b38",
     ).length;
-    assert.equal(cinemaCount, 1);
-    assert.equal(preview[0]?.key, "mily-b63-01");
+    assert.ok(cinemaCount >= 1);
+    assert.equal(preview[0]?.key, "mily-b173-01");
     assert.equal(
-      preview.filter((entry) => entry.key.startsWith("mily-b38-")).length,
-      1,
+      preview.filter((entry) => entry.key.startsWith("mily-b173-")).length,
+      HOME_GALLERY_LIMIT,
     );
 
     const selector = source("src/lib/galleryItems.ts");
@@ -367,32 +382,27 @@ describe("Gallery portrait-first order", () => {
   });
 });
 
-describe("confirmed Miss Circle third-round dates", () => {
-  it("records official SCHEDULE dates and keeps ContestPhase date-only", () => {
-    assert.equal(contest.currentPhase?.name, "3次審査");
-    assert.equal(contest.currentPhase?.start, "2026-09-03");
-    assert.equal(contest.currentPhase?.end, "2026-09-13");
-    assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-09-03");
-    assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
-
+describe("confirmed Miss Circle historical round dates", () => {
+  it("keeps the historical fourth-round SCHEDULE in the fallback vote note", () => {
     const afterPaton = selectHomeVoteAction({
-      contest,
+      contest: fourthRoundContest,
       supportEvents,
       links,
       now: END + 1,
     });
     assert.equal(afterPaton.url, contest.entryUrl);
-    assert.match(afterPaton.note ?? "", /9\/3/);
-    assert.match(afterPaton.note ?? "", /9\/13/);
+    assert.match(afterPaton.note ?? "", /4次審査/);
+    assert.match(afterPaton.note ?? "", /10\/2/);
+    assert.match(afterPaton.note ?? "", /10\/12/);
   });
 
   it("makes 3rd-round support the HOME now-path from 9/2 through 9/13", () => {
-    const approaching = homeToday(Date.parse("2026-09-02T00:00:00+09:00"));
-    const during = homeToday(Date.parse("2026-09-03T12:00:00+09:00"));
-    const lastDay = homeToday(Date.parse("2026-09-13T23:59:00+09:00"));
-    const after = homeToday(Date.parse("2026-09-14T00:00:00+09:00"));
-    const stillPaton = homeToday(END);
+    const history = { contest: THIRD_ROUND_CONTEST };
+    const approaching = homeToday(Date.parse("2026-09-02T00:00:00+09:00"), history);
+    const during = homeToday(Date.parse("2026-09-03T12:00:00+09:00"), history);
+    const lastDay = homeToday(Date.parse("2026-09-13T23:59:00+09:00"), history);
+    const after = homeToday(Date.parse("2026-09-14T00:00:00+09:00"), history);
+    const stillPaton = homeToday(END, history);
     const webVoteUrl =
       "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734";
 

@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -28,12 +29,12 @@ import {
   patonVoteHowToSpokenMessage,
 } from "../src/data/patonVoteHowTo.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { campusGirlsFinalStageRankingStoryVideos } from "../src/data/campusGirlsFinalStageStorySeries.ts";
 import { contest } from "../src/data/contest.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { findFeedItem, portalNewsId } from "./portal-feed-order.mjs";
@@ -366,14 +367,14 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.equal(liveNews[4]?.id, "2026-08-30-consecutive-stream-30");
     assert.equal(liveNews[5]?.id, "2026-08-30-morning-showroom-0600");
     assert.equal(liveNews[6]?.id, THIRTY_DAY_NEWS_ID);
-    assert.equal(selectActivityMedia("campus-girls")[1]?.id, "mily-b63-01-campus-girls-prelim-final-result");
-    assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b47-02-paton-second-story");
-    assert.equal(selectActivityMedia("campus-girls")[3]?.id, "mily-b46-01-paton-vote-final-day-story");
-    assert.equal(selectActivityMedia("campus-girls")[4]?.id, "mily-b45-01-paton-vote-voice-story");
-    assert.equal(selectActivityMedia("campus-girls")[5], patonVoteFirstPlaceStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[6], patonVoteFifteenXStoryVideo);
-    assert.equal(selectActivityMedia("campus-girls")[7], campusGirlsPatonPortraitImage);
-    assert.equal(selectActivityMedia("campus-girls")[8], campusGirlsHoldSecondStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[2]?.id, "mily-b63-01-campus-girls-prelim-final-result");
+    assert.equal(selectActivityMedia("campus-girls")[3]?.id, "mily-b47-02-paton-second-story");
+    assert.equal(selectActivityMedia("campus-girls")[4]?.id, "mily-b46-01-paton-vote-final-day-story");
+    assert.equal(selectActivityMedia("campus-girls")[5]?.id, "mily-b45-01-paton-vote-voice-story");
+    assert.equal(selectActivityMedia("campus-girls")[6], patonVoteFirstPlaceStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[7], patonVoteFifteenXStoryVideo);
+    assert.equal(selectActivityMedia("campus-girls")[8], campusGirlsPatonPortraitImage);
+    assert.equal(selectActivityMedia("campus-girls")[9], campusGirlsHoldSecondStoryVideo);
     assert.notEqual(
       selectActivityMedia("live-stream")[0]?.id,
       "mily-b44-04-showroom-30-day-anniversary-story",

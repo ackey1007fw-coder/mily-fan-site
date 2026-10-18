@@ -1,0 +1,61 @@
+{
+  "sourceCommit": "e9f190879f96fda58102b8b5dc363d12245d9172",
+  "assets": [
+    {
+      "url": "/media/live/mily-b192-01-20261005-morning-privacy-still.png",
+      "bytes": 165601,
+      "sha256": "870ab3785f8698f57f6f147cea66f1b8006cd9c60b205072766f2f7e24a62e05",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-02-20261005-morning-privacy-still.png",
+      "bytes": 159631,
+      "sha256": "17f397349bb6a0640a6872a353af3508d54e9242f20869cd53c2cc4ef7575c65",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-03-20261005-morning-privacy-still.png",
+      "bytes": 169199,
+      "sha256": "6d249803a95d41c51f24665cc4e3918e41e3960b7b7b72e4817a38e39786fc41",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-04-20261005-morning-privacy-still.png",
+      "bytes": 165327,
+      "sha256": "27a507ad8255a49a23e1c74a5950b768709bb26bbf92a7090639d9383c659cbc",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-05-20261005-morning-privacy-still.png",
+      "bytes": 227294,
+      "sha256": "b9f8873c046d17d983c6211951b653e276a88d93c6ae99101c49842c48f55672",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-06-20261005-morning-privacy-still.png",
+      "bytes": 194537,
+      "sha256": "d71d63d453fe6c577ff1213363329e4792af1ff54ffcf01ea8a73f86df3f4ca0",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-07-20261005-morning-privacy-still.png",
+      "bytes": 153988,
+      "sha256": "035984e4309810130f38e7fa8206c5a73be291193642e1a82f5c13512e6657d7",
+      "width": 430,
+      "height": 360
+    },
+    {
+      "url": "/media/live/mily-b192-08-20261005-morning-privacy-still.png",
+      "bytes": 190938,
+      "sha256": "ee3300728d85ce00a806bc8481df1e583e36f30025e4fd1fed464980a0175c91",
+      "width": 430,
+      "height": 360
+    }
+  ]
+}

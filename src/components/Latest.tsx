@@ -21,6 +21,8 @@ import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
 import { NewsImage } from "./NewsImage";
+import { TikTokEmbedCard } from "./TikTokEmbedCard";
+import { XEmbedCard } from "./XEmbedCard";
 
 function NewsLink({
   href,
@@ -52,6 +54,10 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
     return <MixchOutboundCard movie={media} />;
   }
 
+  if (media.kind === "tiktok") {
+    return media.published ? <TikTokEmbedCard video={media} /> : null;
+  }
+
   if (media.kind === "audio") {
     return <NewsAudioCard media={media} />;
   }
@@ -67,7 +73,8 @@ function NewsMediaBlock({ media }: { media: NewsMedia }) {
         playsInline
         preload="none"
         aria-label={media.alt}
-        className="mx-auto mt-4 aspect-[9/16] w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
+        style={{ aspectRatio: `${media.width} / ${media.height}` }}
+        className="mx-auto mt-4 w-full max-w-sm rounded-xl bg-sage-soft object-contain focus:outline-none focus-visible:ring-2 focus-visible:ring-sage"
       />
     );
   }
@@ -89,7 +96,7 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
 
   return (
     <li className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
-      <p className="text-xs text-ink-muted">{item.date}</p>
+      <p className="text-xs text-ink-muted">{item.dateBasis === "confirmed-on" ? "確認日 " : ""}{item.date}</p>
       <p className="mt-1 font-semibold text-ink">{item.title}</p>
       <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-muted">{item.body}</p>
       {item.message ? (
@@ -107,6 +114,8 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
       {newsDisplayMedia(item).map((media) => (
         <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
+      {item.xEmbed ? <XEmbedCard embed={item.xEmbed} /> : null}
+
       {item.source ||
       item.sourceLabel ||
       item.additionalSources?.length ||

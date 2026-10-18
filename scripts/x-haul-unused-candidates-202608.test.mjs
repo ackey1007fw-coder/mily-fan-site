@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -13,7 +14,7 @@ import {
   featuredPhoto,
   media,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import {
   OHAYO_WHITE_POLO_X_URL,
   ohayoWhitePoloPeaceImage,
@@ -296,7 +297,7 @@ describe("2026-08-08 timetable graphic — new NEWS, not Gallery", () => {
     assert.equal(existsSync(path.join(root, "public/media/gallery/mily-b34-01-second-round-timetable-480.jpg")), false);
 
     const { events } = await import("../src/data/events.ts");
-    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { streamSchedule } = await import("./fixtures/stream-schedule-before-b183.ts");
     assert.deepEqual(events, []);
     assert.equal(JSON.stringify(streamSchedule).includes("b34"), false);
     assert.equal(JSON.stringify(streamSchedule).includes("2026-08-08-second-round-timetable"), false);

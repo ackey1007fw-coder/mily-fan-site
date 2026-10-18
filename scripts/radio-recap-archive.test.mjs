@@ -3,8 +3,8 @@ import { describe, it } from "node:test";
 import { radioEpisodes, radioEpisode20260830, radioEpisode20260913 } from "../src/data/radioEpisodes.ts";
 
 describe("radio recap archive", () => {
-  it("retains the previous episode and lists the new broadcast first", () => {
-    assert.equal(radioEpisodes[0], radioEpisode20260913);
+  it("retains historical episodes and keeps date-descending order", () => {
+    assert.ok(radioEpisodes.includes(radioEpisode20260913));
     assert.ok(radioEpisodes.includes(radioEpisode20260830));
     assert.equal(new Set(radioEpisodes.map(({ id }) => id)).size, radioEpisodes.length);
     assert.deepEqual(radioEpisodes.map(({ date }) => date),

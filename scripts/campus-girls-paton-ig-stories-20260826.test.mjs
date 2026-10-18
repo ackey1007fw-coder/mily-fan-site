@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -18,7 +19,7 @@ import {
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media, visibleMedia } from "../src/data/media.ts";
+import { media, visibleMedia } from "./fixtures/media-before-b173.ts";
 import { followers400StoryVideo } from "../src/data/followers400StoryVideo.ts";
 import { morningStreamThanksInstagramStoryImage } from "../src/data/morningStreamThanksInstagramStoryImage.ts";
 import {
@@ -39,7 +40,7 @@ import {
 } from "./portal-feed-order.mjs";
 import { siteOrigin } from "../src/data/site.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
 import { selectActivityMedia } from "./fixtures/activity-media-before-b41.ts";
 import { isFaststart, validateVideoDerivatives } from "./build-drive-gallery.mjs";

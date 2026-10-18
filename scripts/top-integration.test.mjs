@@ -141,6 +141,7 @@ describe("P6 navigation", () => {
         "/news/",
         "/stories/",
         "/gallery/",
+        "/data-lab/",
         "/profile/",
       ],
     );
@@ -165,10 +166,11 @@ describe("P6 navigation", () => {
       "/news/",
       "/stories/",
       "/gallery/",
+      "/data-lab/",
       "/profile/",
     ]);
-    assert.ok(visibleNavItems(0).length <= 7);
-    assert.ok(visibleNavItems(1).length <= 7);
+    assert.ok(visibleNavItems(0).length <= 8);
+    assert.ok(visibleNavItems(1).length <= 8);
   });
 
   it("renders a compact disclosure menu with labelled navs and 44px touch targets", () => {
@@ -180,8 +182,8 @@ describe("P6 navigation", () => {
     assert.match(header, /min-h-11/);
     assert.doesNotMatch(header, /overflow-x-auto/);
     assert.doesNotMatch(header, /min-h-10\b/);
-    assert.match(header, /hidden [^"]*md:flex/);
-    assert.match(header, /md:hidden/);
+    assert.match(header, /hidden [^"]*lg:flex/);
+    assert.match(header, /lg:hidden/);
   });
 
   it("uses the same site navigation on Activities and Support routes", () => {
@@ -387,7 +389,7 @@ describe("P6 home Today semantics", () => {
   });
 
   it("keeps the confirmed vote schedule in SupportEvents instead of home UI", () => {
-    assert.equal(supportEvents.length, 10);
+    assert.equal(supportEvents.length, 12);
     assert.equal(supportEvents[0].activityId, "campus-girls");
     assert.equal(supportEvents[0].kind, "vote");
     const homeSources = [

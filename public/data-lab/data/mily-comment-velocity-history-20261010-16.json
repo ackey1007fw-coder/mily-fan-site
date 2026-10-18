@@ -1,0 +1,1642 @@
+{
+  "schema": 1,
+  "published_scope": "Anonymized cumulative comment display readings, no user-level events",
+  "calculation": "Difference of successive near-five-minute online cumulative samples, normalized by on-screen elapsed seconds",
+  "source_coverage": "Historical locally saved online UI counter snapshots; independently filtered and aggregated",
+  "phase_boundary": "2026-10-12 fourth-round contest ended; post-2026-10-12 data is not part of that contest",
+  "capture_full_confirmed": false,
+  "sessions": [
+    {
+      "live_id": 23534612,
+      "date_jst": "2026-10-10",
+      "slot": "morning",
+      "phase": "fourth_round",
+      "valid_rows": 156,
+      "stored_rows": 176,
+      "observed_first": {
+        "at_jst": "2026-10-10T07:27:01.110+09:00",
+        "elapsed_seconds": 308,
+        "comments": 59
+      },
+      "observed_last": {
+        "at_jst": "2026-10-10T08:05:29.247+09:00",
+        "elapsed_seconds": 2538,
+        "comments": 262
+      },
+      "observed_span": {
+        "duration_seconds": 2230,
+        "added_comments": 203,
+        "per_minute": 5.46
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-10T07:27:01.110+09:00",
+          "to": "2026-10-10T07:31:50.213+09:00",
+          "from_elapsed_seconds": 308,
+          "to_elapsed_seconds": 602,
+          "duration_seconds": 294,
+          "added_comments": 38,
+          "per_minute": 7.76
+        },
+        {
+          "from": "2026-10-10T07:31:50.213+09:00",
+          "to": "2026-10-10T07:36:54.998+09:00",
+          "from_elapsed_seconds": 602,
+          "to_elapsed_seconds": 902,
+          "duration_seconds": 300,
+          "added_comments": 32,
+          "per_minute": 6.4
+        },
+        {
+          "from": "2026-10-10T07:36:54.998+09:00",
+          "to": "2026-10-10T07:41:50.714+09:00",
+          "from_elapsed_seconds": 902,
+          "to_elapsed_seconds": 1200,
+          "duration_seconds": 298,
+          "added_comments": 36,
+          "per_minute": 7.25
+        },
+        {
+          "from": "2026-10-10T07:41:50.714+09:00",
+          "to": "2026-10-10T07:46:50.355+09:00",
+          "from_elapsed_seconds": 1200,
+          "to_elapsed_seconds": 1499,
+          "duration_seconds": 299,
+          "added_comments": 25,
+          "per_minute": 5.02
+        },
+        {
+          "from": "2026-10-10T07:46:50.355+09:00",
+          "to": "2026-10-10T07:52:11.601+09:00",
+          "from_elapsed_seconds": 1499,
+          "to_elapsed_seconds": 1812,
+          "duration_seconds": 313,
+          "added_comments": 18,
+          "per_minute": 3.45
+        },
+        {
+          "from": "2026-10-10T07:52:11.601+09:00",
+          "to": "2026-10-10T07:56:47.355+09:00",
+          "from_elapsed_seconds": 1812,
+          "to_elapsed_seconds": 2097,
+          "duration_seconds": 285,
+          "added_comments": 25,
+          "per_minute": 5.26
+        },
+        {
+          "from": "2026-10-10T07:56:47.355+09:00",
+          "to": "2026-10-10T08:02:02.134+09:00",
+          "from_elapsed_seconds": 2097,
+          "to_elapsed_seconds": 2386,
+          "duration_seconds": 289,
+          "added_comments": 16,
+          "per_minute": 3.32
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23536776,
+      "date_jst": "2026-10-10",
+      "slot": "night",
+      "phase": "fourth_round",
+      "valid_rows": 344,
+      "stored_rows": 354,
+      "observed_first": {
+        "at_jst": "2026-10-10T21:02:46.662+09:00",
+        "elapsed_seconds": 131,
+        "comments": 23
+      },
+      "observed_last": {
+        "at_jst": "2026-10-10T22:21:14.557+09:00",
+        "elapsed_seconds": 4757,
+        "comments": 326
+      },
+      "observed_span": {
+        "duration_seconds": 4626,
+        "added_comments": 303,
+        "per_minute": 3.93
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-10T21:05:37.791+09:00",
+          "to": "2026-10-10T21:10:38.245+09:00",
+          "from_elapsed_seconds": 302,
+          "to_elapsed_seconds": 601,
+          "duration_seconds": 299,
+          "added_comments": 28,
+          "per_minute": 5.62
+        },
+        {
+          "from": "2026-10-10T21:10:38.245+09:00",
+          "to": "2026-10-10T21:15:51.042+09:00",
+          "from_elapsed_seconds": 601,
+          "to_elapsed_seconds": 911,
+          "duration_seconds": 310,
+          "added_comments": 29,
+          "per_minute": 5.61
+        },
+        {
+          "from": "2026-10-10T21:15:51.042+09:00",
+          "to": "2026-10-10T21:20:31.718+09:00",
+          "from_elapsed_seconds": 911,
+          "to_elapsed_seconds": 1198,
+          "duration_seconds": 287,
+          "added_comments": 4,
+          "per_minute": 0.84
+        },
+        {
+          "from": "2026-10-10T21:20:31.718+09:00",
+          "to": "2026-10-10T21:25:32.013+09:00",
+          "from_elapsed_seconds": 1198,
+          "to_elapsed_seconds": 1497,
+          "duration_seconds": 299,
+          "added_comments": 13,
+          "per_minute": 2.61
+        },
+        {
+          "from": "2026-10-10T21:25:32.013+09:00",
+          "to": "2026-10-10T21:30:43.197+09:00",
+          "from_elapsed_seconds": 1497,
+          "to_elapsed_seconds": 1790,
+          "duration_seconds": 293,
+          "added_comments": 25,
+          "per_minute": 5.12
+        },
+        {
+          "from": "2026-10-10T21:30:43.197+09:00",
+          "to": "2026-10-10T21:35:27.812+09:00",
+          "from_elapsed_seconds": 1790,
+          "to_elapsed_seconds": 2094,
+          "duration_seconds": 304,
+          "added_comments": 19,
+          "per_minute": 3.75
+        },
+        {
+          "from": "2026-10-10T21:35:27.812+09:00",
+          "to": "2026-10-10T21:40:30.432+09:00",
+          "from_elapsed_seconds": 2094,
+          "to_elapsed_seconds": 2394,
+          "duration_seconds": 300,
+          "added_comments": 6,
+          "per_minute": 1.2
+        },
+        {
+          "from": "2026-10-10T21:40:30.432+09:00",
+          "to": "2026-10-10T21:45:51.525+09:00",
+          "from_elapsed_seconds": 2394,
+          "to_elapsed_seconds": 2707,
+          "duration_seconds": 313,
+          "added_comments": 23,
+          "per_minute": 4.41
+        },
+        {
+          "from": "2026-10-10T21:45:51.525+09:00",
+          "to": "2026-10-10T21:50:43.851+09:00",
+          "from_elapsed_seconds": 2707,
+          "to_elapsed_seconds": 3004,
+          "duration_seconds": 297,
+          "added_comments": 18,
+          "per_minute": 3.64
+        },
+        {
+          "from": "2026-10-10T21:50:43.851+09:00",
+          "to": "2026-10-10T21:55:36.394+09:00",
+          "from_elapsed_seconds": 3004,
+          "to_elapsed_seconds": 3278,
+          "duration_seconds": 274,
+          "added_comments": 6,
+          "per_minute": 1.31
+        },
+        {
+          "from": "2026-10-10T21:55:36.394+09:00",
+          "to": "2026-10-10T22:00:39.695+09:00",
+          "from_elapsed_seconds": 3278,
+          "to_elapsed_seconds": 3603,
+          "duration_seconds": 325,
+          "added_comments": 19,
+          "per_minute": 3.51
+        },
+        {
+          "from": "2026-10-10T22:00:39.695+09:00",
+          "to": "2026-10-10T22:05:40.862+09:00",
+          "from_elapsed_seconds": 3603,
+          "to_elapsed_seconds": 3901,
+          "duration_seconds": 298,
+          "added_comments": 20,
+          "per_minute": 4.03
+        },
+        {
+          "from": "2026-10-10T22:05:40.862+09:00",
+          "to": "2026-10-10T22:10:36.879+09:00",
+          "from_elapsed_seconds": 3901,
+          "to_elapsed_seconds": 4200,
+          "duration_seconds": 299,
+          "added_comments": 19,
+          "per_minute": 3.81
+        },
+        {
+          "from": "2026-10-10T22:10:36.879+09:00",
+          "to": "2026-10-10T22:15:31.334+09:00",
+          "from_elapsed_seconds": 4200,
+          "to_elapsed_seconds": 4488,
+          "duration_seconds": 288,
+          "added_comments": 25,
+          "per_minute": 5.21
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23538599,
+      "date_jst": "2026-10-11",
+      "slot": "morning",
+      "phase": "fourth_round",
+      "valid_rows": 227,
+      "stored_rows": 247,
+      "observed_first": {
+        "at_jst": "2026-10-11T05:38:03.425+09:00",
+        "elapsed_seconds": 228,
+        "comments": 32
+      },
+      "observed_last": {
+        "at_jst": "2026-10-11T06:40:36.264+09:00",
+        "elapsed_seconds": 3903,
+        "comments": 491
+      },
+      "observed_span": {
+        "duration_seconds": 3675,
+        "added_comments": 459,
+        "per_minute": 7.49
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-11T05:39:07.314+09:00",
+          "to": "2026-10-11T05:44:18.909+09:00",
+          "from_elapsed_seconds": 291,
+          "to_elapsed_seconds": 603,
+          "duration_seconds": 312,
+          "added_comments": 33,
+          "per_minute": 6.35
+        },
+        {
+          "from": "2026-10-11T05:44:18.909+09:00",
+          "to": "2026-10-11T05:49:22.655+09:00",
+          "from_elapsed_seconds": 603,
+          "to_elapsed_seconds": 902,
+          "duration_seconds": 299,
+          "added_comments": 26,
+          "per_minute": 5.22
+        },
+        {
+          "from": "2026-10-11T05:49:22.655+09:00",
+          "to": "2026-10-11T05:54:22.371+09:00",
+          "from_elapsed_seconds": 902,
+          "to_elapsed_seconds": 1201,
+          "duration_seconds": 299,
+          "added_comments": 42,
+          "per_minute": 8.43
+        },
+        {
+          "from": "2026-10-11T05:54:22.371+09:00",
+          "to": "2026-10-11T05:59:24.379+09:00",
+          "from_elapsed_seconds": 1201,
+          "to_elapsed_seconds": 1500,
+          "duration_seconds": 299,
+          "added_comments": 30,
+          "per_minute": 6.02
+        },
+        {
+          "from": "2026-10-11T05:59:24.379+09:00",
+          "to": "2026-10-11T06:04:31.361+09:00",
+          "from_elapsed_seconds": 1500,
+          "to_elapsed_seconds": 1800,
+          "duration_seconds": 300,
+          "added_comments": 28,
+          "per_minute": 5.6
+        },
+        {
+          "from": "2026-10-11T06:04:31.361+09:00",
+          "to": "2026-10-11T06:09:29.888+09:00",
+          "from_elapsed_seconds": 1800,
+          "to_elapsed_seconds": 2088,
+          "duration_seconds": 288,
+          "added_comments": 32,
+          "per_minute": 6.67
+        },
+        {
+          "from": "2026-10-11T06:09:29.888+09:00",
+          "to": "2026-10-11T06:14:42.261+09:00",
+          "from_elapsed_seconds": 2088,
+          "to_elapsed_seconds": 2410,
+          "duration_seconds": 322,
+          "added_comments": 42,
+          "per_minute": 7.83
+        },
+        {
+          "from": "2026-10-11T06:14:42.261+09:00",
+          "to": "2026-10-11T06:19:23.001+09:00",
+          "from_elapsed_seconds": 2410,
+          "to_elapsed_seconds": 2696,
+          "duration_seconds": 286,
+          "added_comments": 42,
+          "per_minute": 8.81
+        },
+        {
+          "from": "2026-10-11T06:19:23.001+09:00",
+          "to": "2026-10-11T06:24:52.222+09:00",
+          "from_elapsed_seconds": 2696,
+          "to_elapsed_seconds": 2995,
+          "duration_seconds": 299,
+          "added_comments": 53,
+          "per_minute": 10.64
+        },
+        {
+          "from": "2026-10-11T06:24:52.222+09:00",
+          "to": "2026-10-11T06:29:43.961+09:00",
+          "from_elapsed_seconds": 2995,
+          "to_elapsed_seconds": 3294,
+          "duration_seconds": 299,
+          "added_comments": 35,
+          "per_minute": 7.02
+        },
+        {
+          "from": "2026-10-11T06:29:43.961+09:00",
+          "to": "2026-10-11T06:34:59.411+09:00",
+          "from_elapsed_seconds": 3294,
+          "to_elapsed_seconds": 3614,
+          "duration_seconds": 320,
+          "added_comments": 40,
+          "per_minute": 7.5
+        },
+        {
+          "from": "2026-10-11T06:34:59.411+09:00",
+          "to": "2026-10-11T06:39:35.622+09:00",
+          "from_elapsed_seconds": 3614,
+          "to_elapsed_seconds": 3903,
+          "duration_seconds": 289,
+          "added_comments": 45,
+          "per_minute": 9.34
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23540963,
+      "date_jst": "2026-10-11",
+      "slot": "night",
+      "phase": "fourth_round",
+      "valid_rows": 240,
+      "stored_rows": 257,
+      "observed_first": {
+        "at_jst": "2026-10-11T20:33:43.269+09:00",
+        "elapsed_seconds": 194,
+        "comments": 13
+      },
+      "observed_last": {
+        "at_jst": "2026-10-11T21:27:09.188+09:00",
+        "elapsed_seconds": 3326,
+        "comments": 219
+      },
+      "observed_span": {
+        "duration_seconds": 3132,
+        "added_comments": 206,
+        "per_minute": 3.95
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-11T20:35:34.297+09:00",
+          "to": "2026-10-11T20:40:29.638+09:00",
+          "from_elapsed_seconds": 298,
+          "to_elapsed_seconds": 598,
+          "duration_seconds": 300,
+          "added_comments": 22,
+          "per_minute": 4.4
+        },
+        {
+          "from": "2026-10-11T20:40:29.638+09:00",
+          "to": "2026-10-11T20:45:29.946+09:00",
+          "from_elapsed_seconds": 598,
+          "to_elapsed_seconds": 897,
+          "duration_seconds": 299,
+          "added_comments": 23,
+          "per_minute": 4.62
+        },
+        {
+          "from": "2026-10-11T20:45:29.946+09:00",
+          "to": "2026-10-11T20:50:29.733+09:00",
+          "from_elapsed_seconds": 897,
+          "to_elapsed_seconds": 1195,
+          "duration_seconds": 298,
+          "added_comments": 31,
+          "per_minute": 6.24
+        },
+        {
+          "from": "2026-10-11T20:50:29.733+09:00",
+          "to": "2026-10-11T20:55:32.838+09:00",
+          "from_elapsed_seconds": 1195,
+          "to_elapsed_seconds": 1494,
+          "duration_seconds": 299,
+          "added_comments": 17,
+          "per_minute": 3.41
+        },
+        {
+          "from": "2026-10-11T20:55:32.838+09:00",
+          "to": "2026-10-11T21:00:33.594+09:00",
+          "from_elapsed_seconds": 1494,
+          "to_elapsed_seconds": 1795,
+          "duration_seconds": 301,
+          "added_comments": 9,
+          "per_minute": 1.79
+        },
+        {
+          "from": "2026-10-11T21:00:33.594+09:00",
+          "to": "2026-10-11T21:05:27.029+09:00",
+          "from_elapsed_seconds": 1795,
+          "to_elapsed_seconds": 2093,
+          "duration_seconds": 298,
+          "added_comments": 12,
+          "per_minute": 2.42
+        },
+        {
+          "from": "2026-10-11T21:05:27.029+09:00",
+          "to": "2026-10-11T21:10:35.513+09:00",
+          "from_elapsed_seconds": 2093,
+          "to_elapsed_seconds": 2405,
+          "duration_seconds": 312,
+          "added_comments": 6,
+          "per_minute": 1.15
+        },
+        {
+          "from": "2026-10-11T21:10:35.513+09:00",
+          "to": "2026-10-11T21:15:40.651+09:00",
+          "from_elapsed_seconds": 2405,
+          "to_elapsed_seconds": 2692,
+          "duration_seconds": 287,
+          "added_comments": 0,
+          "per_minute": 0
+        },
+        {
+          "from": "2026-10-11T21:15:40.651+09:00",
+          "to": "2026-10-11T21:20:45.244+09:00",
+          "from_elapsed_seconds": 2692,
+          "to_elapsed_seconds": 3003,
+          "duration_seconds": 311,
+          "added_comments": 56,
+          "per_minute": 10.8
+        },
+        {
+          "from": "2026-10-11T21:20:45.244+09:00",
+          "to": "2026-10-11T21:25:39.461+09:00",
+          "from_elapsed_seconds": 3003,
+          "to_elapsed_seconds": 3303,
+          "duration_seconds": 300,
+          "added_comments": 23,
+          "per_minute": 4.6
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23542891,
+      "date_jst": "2026-10-12",
+      "slot": "morning",
+      "phase": "fourth_round",
+      "valid_rows": 219,
+      "stored_rows": 226,
+      "observed_first": {
+        "at_jst": "2026-10-12T05:33:31.131+09:00",
+        "elapsed_seconds": 42,
+        "comments": 0
+      },
+      "observed_last": {
+        "at_jst": "2026-10-12T06:34:48.875+09:00",
+        "elapsed_seconds": 3647,
+        "comments": 446
+      },
+      "observed_span": {
+        "duration_seconds": 3605,
+        "added_comments": 446,
+        "per_minute": 7.42
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-12T05:37:51.616+09:00",
+          "to": "2026-10-12T05:42:52.896+09:00",
+          "from_elapsed_seconds": 293,
+          "to_elapsed_seconds": 601,
+          "duration_seconds": 308,
+          "added_comments": 16,
+          "per_minute": 3.12
+        },
+        {
+          "from": "2026-10-12T05:42:52.896+09:00",
+          "to": "2026-10-12T05:47:57.982+09:00",
+          "from_elapsed_seconds": 601,
+          "to_elapsed_seconds": 902,
+          "duration_seconds": 301,
+          "added_comments": 12,
+          "per_minute": 2.39
+        },
+        {
+          "from": "2026-10-12T05:47:57.982+09:00",
+          "to": "2026-10-12T05:52:59.723+09:00",
+          "from_elapsed_seconds": 902,
+          "to_elapsed_seconds": 1199,
+          "duration_seconds": 297,
+          "added_comments": 33,
+          "per_minute": 6.67
+        },
+        {
+          "from": "2026-10-12T06:03:03.382+09:00",
+          "to": "2026-10-12T06:08:06.241+09:00",
+          "from_elapsed_seconds": 1800,
+          "to_elapsed_seconds": 2109,
+          "duration_seconds": 309,
+          "added_comments": 38,
+          "per_minute": 7.38
+        },
+        {
+          "from": "2026-10-12T06:08:06.241+09:00",
+          "to": "2026-10-12T06:13:08.881+09:00",
+          "from_elapsed_seconds": 2109,
+          "to_elapsed_seconds": 2408,
+          "duration_seconds": 299,
+          "added_comments": 46,
+          "per_minute": 9.23
+        },
+        {
+          "from": "2026-10-12T06:13:08.881+09:00",
+          "to": "2026-10-12T06:18:29.811+09:00",
+          "from_elapsed_seconds": 2408,
+          "to_elapsed_seconds": 2707,
+          "duration_seconds": 299,
+          "added_comments": 46,
+          "per_minute": 9.23
+        },
+        {
+          "from": "2026-10-12T06:18:29.811+09:00",
+          "to": "2026-10-12T06:23:03.032+09:00",
+          "from_elapsed_seconds": 2707,
+          "to_elapsed_seconds": 3002,
+          "duration_seconds": 295,
+          "added_comments": 33,
+          "per_minute": 6.71
+        },
+        {
+          "from": "2026-10-12T06:23:03.032+09:00",
+          "to": "2026-10-12T06:28:19.508+09:00",
+          "from_elapsed_seconds": 3002,
+          "to_elapsed_seconds": 3301,
+          "duration_seconds": 299,
+          "added_comments": 50,
+          "per_minute": 10.03
+        },
+        {
+          "from": "2026-10-12T06:28:19.508+09:00",
+          "to": "2026-10-12T06:33:04.151+09:00",
+          "from_elapsed_seconds": 3301,
+          "to_elapsed_seconds": 3597,
+          "duration_seconds": 296,
+          "added_comments": 52,
+          "per_minute": 10.54
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23545277,
+      "date_jst": "2026-10-12",
+      "slot": "night",
+      "phase": "fourth_round",
+      "valid_rows": 236,
+      "stored_rows": 249,
+      "observed_first": {
+        "at_jst": "2026-10-12T21:03:47.075+09:00",
+        "elapsed_seconds": 171,
+        "comments": 24
+      },
+      "observed_last": {
+        "at_jst": "2026-10-12T23:19:30.696+09:00",
+        "elapsed_seconds": 8254,
+        "comments": 1126
+      },
+      "observed_span": {
+        "duration_seconds": 8083,
+        "added_comments": 1102,
+        "per_minute": 8.18
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-12T21:05:56.638+09:00",
+          "to": "2026-10-12T21:11:02.632+09:00",
+          "from_elapsed_seconds": 300,
+          "to_elapsed_seconds": 600,
+          "duration_seconds": 300,
+          "added_comments": 0,
+          "per_minute": 0
+        },
+        {
+          "from": "2026-10-12T21:11:02.632+09:00",
+          "to": "2026-10-12T21:16:00.758+09:00",
+          "from_elapsed_seconds": 600,
+          "to_elapsed_seconds": 899,
+          "duration_seconds": 299,
+          "added_comments": 65,
+          "per_minute": 13.04
+        },
+        {
+          "from": "2026-10-12T21:16:00.758+09:00",
+          "to": "2026-10-12T21:21:27.384+09:00",
+          "from_elapsed_seconds": 899,
+          "to_elapsed_seconds": 1224,
+          "duration_seconds": 325,
+          "added_comments": 91,
+          "per_minute": 16.8
+        },
+        {
+          "from": "2026-10-12T21:21:27.384+09:00",
+          "to": "2026-10-12T21:26:37.342+09:00",
+          "from_elapsed_seconds": 1224,
+          "to_elapsed_seconds": 1511,
+          "duration_seconds": 287,
+          "added_comments": 43,
+          "per_minute": 8.99
+        },
+        {
+          "from": "2026-10-12T21:48:01.176+09:00",
+          "to": "2026-10-12T21:51:14.919+09:00",
+          "from_elapsed_seconds": 2693,
+          "to_elapsed_seconds": 2993,
+          "duration_seconds": 300,
+          "added_comments": 70,
+          "per_minute": 14
+        },
+        {
+          "from": "2026-10-12T22:06:03.876+09:00",
+          "to": "2026-10-12T22:11:31.346+09:00",
+          "from_elapsed_seconds": 3889,
+          "to_elapsed_seconds": 4215,
+          "duration_seconds": 326,
+          "added_comments": 60,
+          "per_minute": 11.04
+        },
+        {
+          "from": "2026-10-12T22:11:31.346+09:00",
+          "to": "2026-10-12T22:16:09.446+09:00",
+          "from_elapsed_seconds": 4215,
+          "to_elapsed_seconds": 4486,
+          "duration_seconds": 271,
+          "added_comments": 38,
+          "per_minute": 8.41
+        },
+        {
+          "from": "2026-10-12T22:16:09.446+09:00",
+          "to": "2026-10-12T22:21:18.965+09:00",
+          "from_elapsed_seconds": 4486,
+          "to_elapsed_seconds": 4798,
+          "duration_seconds": 312,
+          "added_comments": 25,
+          "per_minute": 4.81
+        },
+        {
+          "from": "2026-10-12T22:21:18.965+09:00",
+          "to": "2026-10-12T22:26:55.352+09:00",
+          "from_elapsed_seconds": 4798,
+          "to_elapsed_seconds": 5112,
+          "duration_seconds": 314,
+          "added_comments": 30,
+          "per_minute": 5.73
+        },
+        {
+          "from": "2026-10-12T22:26:55.352+09:00",
+          "to": "2026-10-12T22:31:26.946+09:00",
+          "from_elapsed_seconds": 5112,
+          "to_elapsed_seconds": 5410,
+          "duration_seconds": 298,
+          "added_comments": 23,
+          "per_minute": 4.63
+        },
+        {
+          "from": "2026-10-12T22:31:26.946+09:00",
+          "to": "2026-10-12T22:36:24.550+09:00",
+          "from_elapsed_seconds": 5410,
+          "to_elapsed_seconds": 5696,
+          "duration_seconds": 286,
+          "added_comments": 35,
+          "per_minute": 7.34
+        },
+        {
+          "from": "2026-10-12T22:36:24.550+09:00",
+          "to": "2026-10-12T22:41:51.793+09:00",
+          "from_elapsed_seconds": 5696,
+          "to_elapsed_seconds": 6021,
+          "duration_seconds": 325,
+          "added_comments": 37,
+          "per_minute": 6.83
+        },
+        {
+          "from": "2026-10-12T22:41:51.793+09:00",
+          "to": "2026-10-12T22:46:28.350+09:00",
+          "from_elapsed_seconds": 6021,
+          "to_elapsed_seconds": 6294,
+          "duration_seconds": 273,
+          "added_comments": 28,
+          "per_minute": 6.15
+        },
+        {
+          "from": "2026-10-12T22:46:28.350+09:00",
+          "to": "2026-10-12T22:51:37.051+09:00",
+          "from_elapsed_seconds": 6294,
+          "to_elapsed_seconds": 6567,
+          "duration_seconds": 273,
+          "added_comments": 22,
+          "per_minute": 4.84
+        },
+        {
+          "from": "2026-10-12T22:51:37.051+09:00",
+          "to": "2026-10-12T22:56:48.316+09:00",
+          "from_elapsed_seconds": 6567,
+          "to_elapsed_seconds": 6880,
+          "duration_seconds": 313,
+          "added_comments": 36,
+          "per_minute": 6.9
+        },
+        {
+          "from": "2026-10-12T22:56:48.316+09:00",
+          "to": "2026-10-12T23:01:47.922+09:00",
+          "from_elapsed_seconds": 6880,
+          "to_elapsed_seconds": 7217,
+          "duration_seconds": 337,
+          "added_comments": 34,
+          "per_minute": 6.05
+        },
+        {
+          "from": "2026-10-12T23:13:16.982+09:00",
+          "to": "2026-10-12T23:17:31.211+09:00",
+          "from_elapsed_seconds": 7789,
+          "to_elapsed_seconds": 8101,
+          "duration_seconds": 312,
+          "added_comments": 34,
+          "per_minute": 6.54
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23547116,
+      "date_jst": "2026-10-13",
+      "slot": "morning",
+      "phase": "after_fourth_round",
+      "valid_rows": 173,
+      "stored_rows": 177,
+      "observed_first": {
+        "at_jst": "2026-10-13T05:59:57.584+09:00",
+        "elapsed_seconds": 67,
+        "comments": 6
+      },
+      "observed_last": {
+        "at_jst": "2026-10-13T06:36:28.658+09:00",
+        "elapsed_seconds": 2196,
+        "comments": 263
+      },
+      "observed_span": {
+        "duration_seconds": 2129,
+        "added_comments": 257,
+        "per_minute": 7.24
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-13T06:03:47.890+09:00",
+          "to": "2026-10-13T06:08:47.495+09:00",
+          "from_elapsed_seconds": 299,
+          "to_elapsed_seconds": 598,
+          "duration_seconds": 299,
+          "added_comments": 40,
+          "per_minute": 8.03
+        },
+        {
+          "from": "2026-10-13T06:08:47.495+09:00",
+          "to": "2026-10-13T06:13:42.753+09:00",
+          "from_elapsed_seconds": 598,
+          "to_elapsed_seconds": 898,
+          "duration_seconds": 300,
+          "added_comments": 37,
+          "per_minute": 7.4
+        },
+        {
+          "from": "2026-10-13T06:13:42.753+09:00",
+          "to": "2026-10-13T06:18:45.304+09:00",
+          "from_elapsed_seconds": 898,
+          "to_elapsed_seconds": 1197,
+          "duration_seconds": 299,
+          "added_comments": 27,
+          "per_minute": 5.42
+        },
+        {
+          "from": "2026-10-13T06:18:45.304+09:00",
+          "to": "2026-10-13T06:24:20.203+09:00",
+          "from_elapsed_seconds": 1197,
+          "to_elapsed_seconds": 1522,
+          "duration_seconds": 325,
+          "added_comments": 34,
+          "per_minute": 6.28
+        },
+        {
+          "from": "2026-10-13T06:24:20.203+09:00",
+          "to": "2026-10-13T06:28:47.358+09:00",
+          "from_elapsed_seconds": 1522,
+          "to_elapsed_seconds": 1796,
+          "duration_seconds": 274,
+          "added_comments": 40,
+          "per_minute": 8.76
+        },
+        {
+          "from": "2026-10-13T06:28:47.358+09:00",
+          "to": "2026-10-13T06:33:47.652+09:00",
+          "from_elapsed_seconds": 1796,
+          "to_elapsed_seconds": 2094,
+          "duration_seconds": 298,
+          "added_comments": 51,
+          "per_minute": 10.27
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23550160,
+      "date_jst": "2026-10-13",
+      "slot": "night",
+      "phase": "after_fourth_round",
+      "valid_rows": 273,
+      "stored_rows": 293,
+      "observed_first": {
+        "at_jst": "2026-10-13T22:35:09.847+09:00",
+        "elapsed_seconds": 219,
+        "comments": 28
+      },
+      "observed_last": {
+        "at_jst": "2026-10-13T23:31:21.412+09:00",
+        "elapsed_seconds": 3493,
+        "comments": 449
+      },
+      "observed_span": {
+        "duration_seconds": 3274,
+        "added_comments": 421,
+        "per_minute": 7.72
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-13T22:36:37.194+09:00",
+          "to": "2026-10-13T22:41:26.023+09:00",
+          "from_elapsed_seconds": 311,
+          "to_elapsed_seconds": 596,
+          "duration_seconds": 285,
+          "added_comments": 33,
+          "per_minute": 6.95
+        },
+        {
+          "from": "2026-10-13T22:41:26.023+09:00",
+          "to": "2026-10-13T22:46:26.247+09:00",
+          "from_elapsed_seconds": 596,
+          "to_elapsed_seconds": 895,
+          "duration_seconds": 299,
+          "added_comments": 31,
+          "per_minute": 6.22
+        },
+        {
+          "from": "2026-10-13T22:46:26.247+09:00",
+          "to": "2026-10-13T22:51:23.124+09:00",
+          "from_elapsed_seconds": 895,
+          "to_elapsed_seconds": 1195,
+          "duration_seconds": 300,
+          "added_comments": 40,
+          "per_minute": 8
+        },
+        {
+          "from": "2026-10-13T22:51:23.124+09:00",
+          "to": "2026-10-13T22:56:33.258+09:00",
+          "from_elapsed_seconds": 1195,
+          "to_elapsed_seconds": 1506,
+          "duration_seconds": 311,
+          "added_comments": 44,
+          "per_minute": 8.49
+        },
+        {
+          "from": "2026-10-13T22:56:33.258+09:00",
+          "to": "2026-10-13T23:01:36.985+09:00",
+          "from_elapsed_seconds": 1506,
+          "to_elapsed_seconds": 1805,
+          "duration_seconds": 299,
+          "added_comments": 43,
+          "per_minute": 8.63
+        },
+        {
+          "from": "2026-10-13T23:01:36.985+09:00",
+          "to": "2026-10-13T23:06:34.072+09:00",
+          "from_elapsed_seconds": 1805,
+          "to_elapsed_seconds": 2092,
+          "duration_seconds": 287,
+          "added_comments": 39,
+          "per_minute": 8.15
+        },
+        {
+          "from": "2026-10-13T23:06:34.072+09:00",
+          "to": "2026-10-13T23:11:34.102+09:00",
+          "from_elapsed_seconds": 2092,
+          "to_elapsed_seconds": 2403,
+          "duration_seconds": 311,
+          "added_comments": 39,
+          "per_minute": 7.52
+        },
+        {
+          "from": "2026-10-13T23:11:34.102+09:00",
+          "to": "2026-10-13T23:16:35.837+09:00",
+          "from_elapsed_seconds": 2403,
+          "to_elapsed_seconds": 2702,
+          "duration_seconds": 299,
+          "added_comments": 46,
+          "per_minute": 9.23
+        },
+        {
+          "from": "2026-10-13T23:16:35.837+09:00",
+          "to": "2026-10-13T23:21:33.090+09:00",
+          "from_elapsed_seconds": 2702,
+          "to_elapsed_seconds": 3001,
+          "duration_seconds": 299,
+          "added_comments": 31,
+          "per_minute": 6.22
+        },
+        {
+          "from": "2026-10-13T23:21:33.090+09:00",
+          "to": "2026-10-13T23:26:42.818+09:00",
+          "from_elapsed_seconds": 3001,
+          "to_elapsed_seconds": 3300,
+          "duration_seconds": 299,
+          "added_comments": 36,
+          "per_minute": 7.22
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23551572,
+      "date_jst": "2026-10-14",
+      "slot": "morning",
+      "phase": "after_fourth_round",
+      "valid_rows": 397,
+      "stored_rows": 418,
+      "observed_first": {
+        "at_jst": "2026-10-14T07:26:30.966+09:00",
+        "elapsed_seconds": 242,
+        "comments": 25
+      },
+      "observed_last": {
+        "at_jst": "2026-10-14T08:59:07.826+09:00",
+        "elapsed_seconds": 5713,
+        "comments": 370
+      },
+      "observed_span": {
+        "duration_seconds": 5471,
+        "added_comments": 345,
+        "per_minute": 3.78
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-14T07:27:22.317+09:00",
+          "to": "2026-10-14T07:32:41.446+09:00",
+          "from_elapsed_seconds": 295,
+          "to_elapsed_seconds": 605,
+          "duration_seconds": 310,
+          "added_comments": 25,
+          "per_minute": 4.84
+        },
+        {
+          "from": "2026-10-14T07:32:41.446+09:00",
+          "to": "2026-10-14T07:37:35.711+09:00",
+          "from_elapsed_seconds": 605,
+          "to_elapsed_seconds": 904,
+          "duration_seconds": 299,
+          "added_comments": 20,
+          "per_minute": 4.01
+        },
+        {
+          "from": "2026-10-14T07:37:35.711+09:00",
+          "to": "2026-10-14T07:42:40.955+09:00",
+          "from_elapsed_seconds": 904,
+          "to_elapsed_seconds": 1204,
+          "duration_seconds": 300,
+          "added_comments": 11,
+          "per_minute": 2.2
+        },
+        {
+          "from": "2026-10-14T07:42:40.955+09:00",
+          "to": "2026-10-14T07:47:40.045+09:00",
+          "from_elapsed_seconds": 1204,
+          "to_elapsed_seconds": 1502,
+          "duration_seconds": 298,
+          "added_comments": 19,
+          "per_minute": 3.83
+        },
+        {
+          "from": "2026-10-14T07:47:40.045+09:00",
+          "to": "2026-10-14T07:52:37.157+09:00",
+          "from_elapsed_seconds": 1502,
+          "to_elapsed_seconds": 1802,
+          "duration_seconds": 300,
+          "added_comments": 16,
+          "per_minute": 3.2
+        },
+        {
+          "from": "2026-10-14T07:52:37.157+09:00",
+          "to": "2026-10-14T07:57:38.091+09:00",
+          "from_elapsed_seconds": 1802,
+          "to_elapsed_seconds": 2103,
+          "duration_seconds": 301,
+          "added_comments": 35,
+          "per_minute": 6.98
+        },
+        {
+          "from": "2026-10-14T07:57:38.091+09:00",
+          "to": "2026-10-14T08:02:30.036+09:00",
+          "from_elapsed_seconds": 2103,
+          "to_elapsed_seconds": 2388,
+          "duration_seconds": 285,
+          "added_comments": 19,
+          "per_minute": 4
+        },
+        {
+          "from": "2026-10-14T08:02:30.036+09:00",
+          "to": "2026-10-14T08:07:43.391+09:00",
+          "from_elapsed_seconds": 2388,
+          "to_elapsed_seconds": 2699,
+          "duration_seconds": 311,
+          "added_comments": 22,
+          "per_minute": 4.24
+        },
+        {
+          "from": "2026-10-14T08:07:43.391+09:00",
+          "to": "2026-10-14T08:12:32.816+09:00",
+          "from_elapsed_seconds": 2699,
+          "to_elapsed_seconds": 2999,
+          "duration_seconds": 300,
+          "added_comments": 24,
+          "per_minute": 4.8
+        },
+        {
+          "from": "2026-10-14T08:12:32.816+09:00",
+          "to": "2026-10-14T08:17:34.706+09:00",
+          "from_elapsed_seconds": 2999,
+          "to_elapsed_seconds": 3297,
+          "duration_seconds": 298,
+          "added_comments": 20,
+          "per_minute": 4.03
+        },
+        {
+          "from": "2026-10-14T08:17:34.706+09:00",
+          "to": "2026-10-14T08:22:30.020+09:00",
+          "from_elapsed_seconds": 3297,
+          "to_elapsed_seconds": 3596,
+          "duration_seconds": 299,
+          "added_comments": 15,
+          "per_minute": 3.01
+        },
+        {
+          "from": "2026-10-14T08:22:30.020+09:00",
+          "to": "2026-10-14T08:27:31.177+09:00",
+          "from_elapsed_seconds": 3596,
+          "to_elapsed_seconds": 3895,
+          "duration_seconds": 299,
+          "added_comments": 9,
+          "per_minute": 1.81
+        },
+        {
+          "from": "2026-10-14T08:27:31.177+09:00",
+          "to": "2026-10-14T08:32:29.350+09:00",
+          "from_elapsed_seconds": 3895,
+          "to_elapsed_seconds": 4195,
+          "duration_seconds": 300,
+          "added_comments": 17,
+          "per_minute": 3.4
+        },
+        {
+          "from": "2026-10-14T08:32:29.350+09:00",
+          "to": "2026-10-14T08:38:03.108+09:00",
+          "from_elapsed_seconds": 4195,
+          "to_elapsed_seconds": 4493,
+          "duration_seconds": 298,
+          "added_comments": 17,
+          "per_minute": 3.42
+        },
+        {
+          "from": "2026-10-14T08:38:03.108+09:00",
+          "to": "2026-10-14T08:42:39.254+09:00",
+          "from_elapsed_seconds": 4493,
+          "to_elapsed_seconds": 4805,
+          "duration_seconds": 312,
+          "added_comments": 20,
+          "per_minute": 3.85
+        },
+        {
+          "from": "2026-10-14T08:42:39.254+09:00",
+          "to": "2026-10-14T08:47:45.455+09:00",
+          "from_elapsed_seconds": 4805,
+          "to_elapsed_seconds": 5104,
+          "duration_seconds": 299,
+          "added_comments": 21,
+          "per_minute": 4.21
+        },
+        {
+          "from": "2026-10-14T08:47:45.455+09:00",
+          "to": "2026-10-14T08:52:37.518+09:00",
+          "from_elapsed_seconds": 5104,
+          "to_elapsed_seconds": 5390,
+          "duration_seconds": 286,
+          "added_comments": 12,
+          "per_minute": 2.52
+        },
+        {
+          "from": "2026-10-14T08:52:37.518+09:00",
+          "to": "2026-10-14T08:57:42.472+09:00",
+          "from_elapsed_seconds": 5390,
+          "to_elapsed_seconds": 5702,
+          "duration_seconds": 312,
+          "added_comments": 17,
+          "per_minute": 3.27
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23552113,
+      "date_jst": "2026-10-14",
+      "slot": "noon",
+      "phase": "after_fourth_round",
+      "valid_rows": 411,
+      "stored_rows": 438,
+      "observed_first": {
+        "at_jst": "2026-10-14T12:25:28.811+09:00",
+        "elapsed_seconds": 297,
+        "comments": 22
+      },
+      "observed_last": {
+        "at_jst": "2026-10-14T14:04:47.806+09:00",
+        "elapsed_seconds": 6185,
+        "comments": 416
+      },
+      "observed_span": {
+        "duration_seconds": 5888,
+        "added_comments": 394,
+        "per_minute": 4.01
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-14T12:25:28.811+09:00",
+          "to": "2026-10-14T12:30:28.501+09:00",
+          "from_elapsed_seconds": 297,
+          "to_elapsed_seconds": 597,
+          "duration_seconds": 300,
+          "added_comments": 14,
+          "per_minute": 2.8
+        },
+        {
+          "from": "2026-10-14T12:30:28.501+09:00",
+          "to": "2026-10-14T12:35:24.108+09:00",
+          "from_elapsed_seconds": 597,
+          "to_elapsed_seconds": 896,
+          "duration_seconds": 299,
+          "added_comments": 21,
+          "per_minute": 4.21
+        },
+        {
+          "from": "2026-10-14T12:35:24.108+09:00",
+          "to": "2026-10-14T12:40:26.215+09:00",
+          "from_elapsed_seconds": 896,
+          "to_elapsed_seconds": 1196,
+          "duration_seconds": 300,
+          "added_comments": 25,
+          "per_minute": 5
+        },
+        {
+          "from": "2026-10-14T12:40:26.215+09:00",
+          "to": "2026-10-14T12:45:35.963+09:00",
+          "from_elapsed_seconds": 1196,
+          "to_elapsed_seconds": 1506,
+          "duration_seconds": 310,
+          "added_comments": 23,
+          "per_minute": 4.45
+        },
+        {
+          "from": "2026-10-14T12:45:35.963+09:00",
+          "to": "2026-10-14T12:50:39.612+09:00",
+          "from_elapsed_seconds": 1506,
+          "to_elapsed_seconds": 1806,
+          "duration_seconds": 300,
+          "added_comments": 8,
+          "per_minute": 1.6
+        },
+        {
+          "from": "2026-10-14T12:50:39.612+09:00",
+          "to": "2026-10-14T12:55:37.490+09:00",
+          "from_elapsed_seconds": 1806,
+          "to_elapsed_seconds": 2105,
+          "duration_seconds": 299,
+          "added_comments": 17,
+          "per_minute": 3.41
+        },
+        {
+          "from": "2026-10-14T12:55:37.490+09:00",
+          "to": "2026-10-14T13:00:35.911+09:00",
+          "from_elapsed_seconds": 2105,
+          "to_elapsed_seconds": 2404,
+          "duration_seconds": 299,
+          "added_comments": 9,
+          "per_minute": 1.81
+        },
+        {
+          "from": "2026-10-14T13:00:35.911+09:00",
+          "to": "2026-10-14T13:05:31.947+09:00",
+          "from_elapsed_seconds": 2404,
+          "to_elapsed_seconds": 2702,
+          "duration_seconds": 298,
+          "added_comments": 15,
+          "per_minute": 3.02
+        },
+        {
+          "from": "2026-10-14T13:05:31.947+09:00",
+          "to": "2026-10-14T13:10:26.250+09:00",
+          "from_elapsed_seconds": 2702,
+          "to_elapsed_seconds": 3001,
+          "duration_seconds": 299,
+          "added_comments": 19,
+          "per_minute": 3.81
+        },
+        {
+          "from": "2026-10-14T13:10:26.250+09:00",
+          "to": "2026-10-14T13:15:32.213+09:00",
+          "from_elapsed_seconds": 3001,
+          "to_elapsed_seconds": 3301,
+          "duration_seconds": 300,
+          "added_comments": 26,
+          "per_minute": 5.2
+        },
+        {
+          "from": "2026-10-14T13:15:32.213+09:00",
+          "to": "2026-10-14T13:20:26.182+09:00",
+          "from_elapsed_seconds": 3301,
+          "to_elapsed_seconds": 3588,
+          "duration_seconds": 287,
+          "added_comments": 26,
+          "per_minute": 5.44
+        },
+        {
+          "from": "2026-10-14T13:20:26.182+09:00",
+          "to": "2026-10-14T13:25:37.784+09:00",
+          "from_elapsed_seconds": 3588,
+          "to_elapsed_seconds": 3899,
+          "duration_seconds": 311,
+          "added_comments": 21,
+          "per_minute": 4.05
+        },
+        {
+          "from": "2026-10-14T13:25:37.784+09:00",
+          "to": "2026-10-14T13:30:33.975+09:00",
+          "from_elapsed_seconds": 3899,
+          "to_elapsed_seconds": 4197,
+          "duration_seconds": 298,
+          "added_comments": 21,
+          "per_minute": 4.23
+        },
+        {
+          "from": "2026-10-14T13:30:33.975+09:00",
+          "to": "2026-10-14T13:35:40.977+09:00",
+          "from_elapsed_seconds": 4197,
+          "to_elapsed_seconds": 4510,
+          "duration_seconds": 313,
+          "added_comments": 30,
+          "per_minute": 5.75
+        },
+        {
+          "from": "2026-10-14T13:35:40.977+09:00",
+          "to": "2026-10-14T13:40:43.727+09:00",
+          "from_elapsed_seconds": 4510,
+          "to_elapsed_seconds": 4795,
+          "duration_seconds": 285,
+          "added_comments": 17,
+          "per_minute": 3.58
+        },
+        {
+          "from": "2026-10-14T13:40:43.727+09:00",
+          "to": "2026-10-14T13:46:06.570+09:00",
+          "from_elapsed_seconds": 4795,
+          "to_elapsed_seconds": 5108,
+          "duration_seconds": 313,
+          "added_comments": 17,
+          "per_minute": 3.26
+        },
+        {
+          "from": "2026-10-14T13:46:06.570+09:00",
+          "to": "2026-10-14T13:50:36.684+09:00",
+          "from_elapsed_seconds": 5108,
+          "to_elapsed_seconds": 5407,
+          "duration_seconds": 299,
+          "added_comments": 23,
+          "per_minute": 4.62
+        },
+        {
+          "from": "2026-10-14T13:50:36.684+09:00",
+          "to": "2026-10-14T13:55:43.162+09:00",
+          "from_elapsed_seconds": 5407,
+          "to_elapsed_seconds": 5706,
+          "duration_seconds": 299,
+          "added_comments": 31,
+          "per_minute": 6.22
+        },
+        {
+          "from": "2026-10-14T13:55:43.162+09:00",
+          "to": "2026-10-14T14:00:52.494+09:00",
+          "from_elapsed_seconds": 5706,
+          "to_elapsed_seconds": 6005,
+          "duration_seconds": 299,
+          "added_comments": 22,
+          "per_minute": 4.41
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23555653,
+      "date_jst": "2026-10-15",
+      "slot": "morning",
+      "phase": "after_fourth_round",
+      "valid_rows": 129,
+      "stored_rows": 156,
+      "observed_first": {
+        "at_jst": "2026-10-15T06:07:50.870+09:00",
+        "elapsed_seconds": 246,
+        "comments": 36
+      },
+      "observed_last": {
+        "at_jst": "2026-10-15T06:31:08.545+09:00",
+        "elapsed_seconds": 1637,
+        "comments": 195
+      },
+      "observed_span": {
+        "duration_seconds": 1391,
+        "added_comments": 159,
+        "per_minute": 6.86
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-15T06:08:43.068+09:00",
+          "to": "2026-10-15T06:13:44.828+09:00",
+          "from_elapsed_seconds": 299,
+          "to_elapsed_seconds": 597,
+          "duration_seconds": 298,
+          "added_comments": 49,
+          "per_minute": 9.87
+        },
+        {
+          "from": "2026-10-15T06:13:44.828+09:00",
+          "to": "2026-10-15T06:18:37.128+09:00",
+          "from_elapsed_seconds": 597,
+          "to_elapsed_seconds": 896,
+          "duration_seconds": 299,
+          "added_comments": 17,
+          "per_minute": 3.41
+        },
+        {
+          "from": "2026-10-15T06:18:37.128+09:00",
+          "to": "2026-10-15T06:23:39.455+09:00",
+          "from_elapsed_seconds": 896,
+          "to_elapsed_seconds": 1196,
+          "duration_seconds": 300,
+          "added_comments": 32,
+          "per_minute": 6.4
+        },
+        {
+          "from": "2026-10-15T06:23:39.455+09:00",
+          "to": "2026-10-15T06:28:35.424+09:00",
+          "from_elapsed_seconds": 1196,
+          "to_elapsed_seconds": 1494,
+          "duration_seconds": 298,
+          "added_comments": 35,
+          "per_minute": 7.05
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    },
+    {
+      "live_id": 23559940,
+      "date_jst": "2026-10-16",
+      "slot": "morning",
+      "phase": "after_fourth_round",
+      "valid_rows": 311,
+      "stored_rows": 324,
+      "observed_first": {
+        "at_jst": "2026-10-16T06:37:33.063+09:00",
+        "elapsed_seconds": 89,
+        "comments": 14
+      },
+      "observed_last": {
+        "at_jst": "2026-10-16T07:32:54.641+09:00",
+        "elapsed_seconds": 3324,
+        "comments": 338
+      },
+      "observed_span": {
+        "duration_seconds": 3235,
+        "added_comments": 324,
+        "per_minute": 6.01
+      },
+      "observed_windows": [
+        {
+          "from": "2026-10-16T06:41:00.983+09:00",
+          "to": "2026-10-16T06:46:02.283+09:00",
+          "from_elapsed_seconds": 298,
+          "to_elapsed_seconds": 597,
+          "duration_seconds": 299,
+          "added_comments": 46,
+          "per_minute": 9.23
+        },
+        {
+          "from": "2026-10-16T06:46:02.283+09:00",
+          "to": "2026-10-16T06:50:56.771+09:00",
+          "from_elapsed_seconds": 597,
+          "to_elapsed_seconds": 895,
+          "duration_seconds": 298,
+          "added_comments": 33,
+          "per_minute": 6.64
+        },
+        {
+          "from": "2026-10-16T06:50:56.771+09:00",
+          "to": "2026-10-16T06:55:56.993+09:00",
+          "from_elapsed_seconds": 895,
+          "to_elapsed_seconds": 1194,
+          "duration_seconds": 299,
+          "added_comments": 26,
+          "per_minute": 5.22
+        },
+        {
+          "from": "2026-10-16T06:55:56.993+09:00",
+          "to": "2026-10-16T07:01:04.872+09:00",
+          "from_elapsed_seconds": 1194,
+          "to_elapsed_seconds": 1493,
+          "duration_seconds": 299,
+          "added_comments": 36,
+          "per_minute": 7.22
+        },
+        {
+          "from": "2026-10-16T07:01:04.872+09:00",
+          "to": "2026-10-16T07:06:08.739+09:00",
+          "from_elapsed_seconds": 1493,
+          "to_elapsed_seconds": 1805,
+          "duration_seconds": 312,
+          "added_comments": 21,
+          "per_minute": 4.04
+        },
+        {
+          "from": "2026-10-16T07:06:08.739+09:00",
+          "to": "2026-10-16T07:11:07.433+09:00",
+          "from_elapsed_seconds": 1805,
+          "to_elapsed_seconds": 2105,
+          "duration_seconds": 300,
+          "added_comments": 28,
+          "per_minute": 5.6
+        },
+        {
+          "from": "2026-10-16T07:11:07.433+09:00",
+          "to": "2026-10-16T07:16:05.772+09:00",
+          "from_elapsed_seconds": 2105,
+          "to_elapsed_seconds": 2404,
+          "duration_seconds": 299,
+          "added_comments": 28,
+          "per_minute": 5.62
+        },
+        {
+          "from": "2026-10-16T07:16:05.772+09:00",
+          "to": "2026-10-16T07:21:11.262+09:00",
+          "from_elapsed_seconds": 2404,
+          "to_elapsed_seconds": 2703,
+          "duration_seconds": 299,
+          "added_comments": 26,
+          "per_minute": 5.22
+        },
+        {
+          "from": "2026-10-16T07:21:11.262+09:00",
+          "to": "2026-10-16T07:26:09.469+09:00",
+          "from_elapsed_seconds": 2703,
+          "to_elapsed_seconds": 3001,
+          "duration_seconds": 298,
+          "added_comments": 27,
+          "per_minute": 5.44
+        },
+        {
+          "from": "2026-10-16T07:26:09.469+09:00",
+          "to": "2026-10-16T07:31:03.822+09:00",
+          "from_elapsed_seconds": 3001,
+          "to_elapsed_seconds": 3300,
+          "duration_seconds": 299,
+          "added_comments": 28,
+          "per_minute": 5.62
+        }
+      ],
+      "data_quality": {
+        "capture_complete": false,
+        "official_final_confirmed": false,
+        "time_basis": "visible UI elapsed seconds",
+        "window_target_tolerance_seconds": 40,
+        "minimum_window_duration_seconds": 220,
+        "maximum_window_duration_seconds": 380
+      }
+    }
+  ],
+  "unavailable": [
+    {
+      "date_jst": "2026-10-14",
+      "slot": "night",
+      "reason": "No valid public counter series established"
+    },
+    {
+      "date_jst": "2026-10-15",
+      "slot": "night",
+      "reason": "Only initial approximately three-minute fragment; no comparable five-minute windows"
+    }
+  ]
+}

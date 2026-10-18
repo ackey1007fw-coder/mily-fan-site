@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -21,7 +22,7 @@ import {
   tiktokRadioVideo,
   visibleGalleryVideos,
 } from "./fixtures/gallery-videos-before-b41.ts";
-import { media } from "../src/data/media.ts";
+import { media } from "./fixtures/media-before-b173.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import {

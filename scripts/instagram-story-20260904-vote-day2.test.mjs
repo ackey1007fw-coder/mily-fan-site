@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -22,11 +23,11 @@ import { media } from "../src/data/media.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-20260909.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { missCircleThirdRoundWebVote } from "../src/data/supportEvents.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
@@ -346,7 +347,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — privacy and scope", () =>
     // source date はオーナーの明示確認による投稿日。画面の「2日目」からの逆算ではない。
     assert.match(docs, /オーナーが明示確認した投稿日/);
     assert.match(section, /オーナーが「9\/4の投稿を直後に受け取った」と/);
-    assert.match(ops, /85件/);
+    assert.match(ops, /88件/);
     assert.match(ops, /独立動画33本/);
     assert.match(section, /video-only/);
     assert.match(section, /特典の内容・条件・付与方法は補わない/);

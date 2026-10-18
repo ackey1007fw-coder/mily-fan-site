@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
@@ -20,7 +21,7 @@ import { stories } from "../src/data/stories.ts";
 import {
   streamSchedule,
   upcomingSlots,
-} from "../src/data/streamSchedule.ts";
+} from "./fixtures/stream-schedule-before-b183.ts";
 import {
   isValidSupportEvent,
   missCircleThirdRoundShowroomReview,
@@ -76,6 +77,14 @@ const SHOWROOM_END = Date.parse("2026-09-12T21:59:59+09:00");
 const SPOTLIGHT_DAY_START = Date.parse("2026-09-03T00:00:00+09:00");
 const CONTEST_END = Date.parse("2026-09-14T00:00:00+09:00");
 const PATON_END = Date.parse("2026-09-01T23:59:00+09:00");
+const THIRD_ROUND_CONTEST = {
+  ...contest,
+  currentPhase: {
+    name: "3次審査",
+    start: "2026-09-03",
+    end: "2026-09-13",
+  },
+};
 const TIMETABLE_FILE = path.join(root, "public", THIRD_ROUND_TIMETABLE_SRC.slice(1));
 const TIMETABLE_SHA256 =
   "bf4d4c5f6396bebe9c4a74ae3a5143d226e2b5a537e46ea30d850fed1dc169f9";
@@ -324,13 +333,13 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       ).length,
       1,
     );
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 3);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 4);
     assert.equal(events.length, 0);
   });
 
   it("puts both periods and the personal SHOWROOM slots on the calendar", () => {
     const calendar = buildSupportCalendar({
-      contest,
+      contest: THIRD_ROUND_CONTEST,
       supportEvents,
       fanEvents: events,
       streamSlots: streamSchedule,
@@ -435,7 +444,12 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
 
   it("spotlights today's 12:00 launch, then switches to the direct WEB vote", async () => {
     const spotlightAt = (now) =>
-      selectHomeVoteSpotlight({ contest, supportEvents, links, now });
+      selectHomeVoteSpotlight({
+        contest: THIRD_ROUND_CONTEST,
+        supportEvents,
+        links,
+        now,
+      });
     const previousDay = spotlightAt(Date.parse("2026-09-02T23:59:59+09:00"));
     const before = spotlightAt(Date.parse("2026-09-03T11:59:59+09:00"));
     const during = spotlightAt(WEB_START);
@@ -469,7 +483,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       "utf8",
     );
     const support = await readFile(path.join(root, "src/SupportPage.tsx"), "utf8");
-    assert.match(spotlight, /data-vote-state=\{spotlight\.state\}/);
+    assert.match(spotlight, /data-vote-state=\{spotlight\.kind === "support" \? undefined : spotlight\.state\}/);
     assert.match(spotlight, /border-2 border-apricot/);
     assert.match(spotlight, /bg-apricot-ink[^\n]+text-white/);
     assert.match(hero, /<VoteSpotlight/);
@@ -492,8 +506,14 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     assert.equal(nextSupportEventBoundary(WEB_START), snsStart);
     assert.equal(nextSupportEventBoundary(snsStart), SHOWROOM_END + 1);
     assert.equal(nextSupportEventBoundary(SHOWROOM_END + 1), WEB_END + 1);
-    assert.equal(nextSupportEventBoundary(WEB_END + 1), CONTEST_END);
-    assert.equal(nextSupportEventBoundary(CONTEST_END - 1), CONTEST_END);
+    assert.equal(
+      nextSupportEventBoundary(WEB_END + 1),
+      Date.parse("2026-09-16T00:00:00+09:00"),
+    );
+    assert.equal(
+      nextSupportEventBoundary(CONTEST_END - 1),
+      Date.parse("2026-09-16T00:00:00+09:00"),
+    );
     assert.equal(nextSupportEventBoundary(CONTEST_END), Date.parse("2026-09-16T00:00:00+09:00"));
     assert.equal(nextSupportEventBoundary(patonExStart), snsEnd + 1);
     assert.equal(nextSupportEventBoundary(snsEnd), snsEnd + 1);
@@ -518,19 +538,14 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
     );
   });
 
-  it("keeps ContestPhase date-only and the confirmed personal SHOWROOM slots", async () => {
-    assert.equal(contest.currentPhase?.name, "3次審査");
-    assert.equal(contest.currentPhase?.start, "2026-09-03");
-    assert.equal(contest.currentPhase?.end, "2026-09-13");
-    assert.equal(contest.lastVerifiedAt, "2026-09-03");
-    assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
-    assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), [
+  it("keeps historical third-round windows and the confirmed personal SHOWROOM slots", async () => {
+    assert.deepEqual(contestOfficialWindowLines(THIRD_ROUND_CONTEST.currentPhase), [
       "WEB投票 9/3 12:00〜9/13 23:59",
       "SHOWROOM無料ギフト審査 9/3 5:00〜9/12 21:59",
       "SHOWROOMイベント審査 9/3 5:00〜9/12 21:59",
       "SHOWROOMは9/12 21:59終了",
     ]);
-    assert.match(contestPhaseDisplayNote(contest.currentPhase), /3次審査（9\/3〜9\/13）/);
+    assert.match(contestPhaseDisplayNote(THIRD_ROUND_CONTEST.currentPhase), /3次審査（9\/3〜9\/13）/);
     assert.deepEqual(streamSchedule, EXPECTED_SLOTS);
     assert.ok(
       streamSchedule.some(

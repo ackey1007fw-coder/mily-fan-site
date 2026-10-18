@@ -1,4 +1,6 @@
 import { ActivitiesGateway } from "./components/ActivitiesGateway";
+import { DataLabGateway } from "./components/DataLabGateway";
+import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
 import { ActivityBanner } from "./components/ActivityBanner";
 import { ChallengeConnection } from "./components/ChallengeConnection";
 import { Footer } from "./components/Footer";
@@ -11,7 +13,10 @@ import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { ScrollToTopButton } from "./components/ScrollToTopButton";
 import { Stories } from "./components/Stories";
 import { Support } from "./components/Support";
+import { SupportMusicVideo } from "./components/SupportMusicVideo";
 import { TodayDashboard } from "./components/TodayDashboard";
+import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
+import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
 import {
   HOME_GALLERY_LIMIT,
   HOME_NEWS_LIMIT,
@@ -31,11 +36,16 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <PatonExTwoGuide />
         <PatonVoteGuide />
         <TodayDashboard />
+        <AnnouncedStreamSchedule />
+        <StreamBlackoutNotice compact />
         <Support />
         <ActivitiesGateway />
+        <DataLabGateway />
         <ChallengeConnection />
+        <SupportMusicVideo />
         <Latest limit={HOME_NEWS_LIMIT} />
         <Stories limit={HOME_STORY_LIMIT} />
         <Gallery limit={HOME_GALLERY_LIMIT} />

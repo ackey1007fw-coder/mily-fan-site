@@ -1,4 +1,6 @@
+import { kawaiiRadioMessagePhoto } from "./kawaiiRadioStoryVideo.ts";
 import { nightRibbonFanroomPhoto } from "./nightRibbonFanroomSelfie.ts";
+import { september23FanroomPhoto } from "./september23Fanroom.ts";
 import { morningFanroomSelfiePhoto } from "./morningFanroomSelfie.ts";
 /**
  * Photo / video manifest.
@@ -26,8 +28,11 @@ import {
 import { morningMakeupShowroomPhoto } from "./morningMakeupShowroomImage.ts";
 import { gandaBeforeNightStreamPhoto } from "./gandaBeforeNightStream.ts";
 import { movieNightPhotos } from "./movieNightPhotos.ts";
+import { recordCafeMilyPhotos } from "./recordCafeMilyPhotos.ts";
+import { redRidingHoodPhotos } from "./redRidingHoodPhotos.ts";
 import { campusGirlsPrelimFinalResultPhoto } from "./campusGirlsPrelimFinalResultImage.ts";
 import { nightFanroomSelfiePhoto } from "./nightFanroomSelfie.ts";
+import { fourthRoundSchedulePhoto } from "./fourthRoundStreamSchedule.ts";
 
 export type MediaKind = "photo" | "video";
 
@@ -78,6 +83,11 @@ const FM_SMW_X_AFTER =
   "https://x.com/fm_smw856/status/2091499993102524714";
 
 export const media: MediaItem[] = [
+  ...redRidingHoodPhotos,
+  fourthRoundSchedulePhoto,
+  ...recordCafeMilyPhotos,
+  kawaiiRadioMessagePhoto,
+  september23FanroomPhoto,
   campusGirlsPrelimFinalResultPhoto,
   ...movieNightPhotos,
   eveningRadioShowroomPhoto,

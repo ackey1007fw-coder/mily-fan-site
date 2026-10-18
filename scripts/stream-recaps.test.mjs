@@ -1,3 +1,4 @@
+import { withoutApprovedTalkLinks } from "./approved-talk-links.mjs";
 // LIVE STREAM の配信メモを、どのエージェントが書いても同じ形になるよう検査する。
 // ルール本文は docs/LIVE-STREAM-RECAP.md。数値を変えるときは両方を同じPRで直す。
 import assert from "node:assert/strict";
@@ -14,6 +15,7 @@ import {
   buildRankingNote,
   RECAP_FIGURES_NOTE,
   RECAP_WITHHOLD_NOTE,
+  RECAP_CLIP_WITHHOLD_NOTE,
   buildTranscriptionNote,
   streamRecaps,
 } from "../src/data/streamRecaps.ts";
@@ -37,6 +39,7 @@ const MAX = {
   timelineLabel: 32,
   nextNote: 120,
   gallery: 12,
+  hourlyGallery: 25,
 };
 
 const RANKING_PLACE = "[1-9]\\d{0,2}";
@@ -69,12 +72,38 @@ function seconds(timestamp) {
 }
 
 function startMinutes(broadcastLabel) {
-  const match = broadcastLabel.match(/^([01]?\d|2[0-3]):([0-5]\d)頃〜 約\d+分$/);
+  const match = broadcastLabel.match(/^(?:録画開始)?([01]?\d|2[0-3]):([0-5]\d)頃〜 約\d+分$/);
   assert.ok(match, `broadcastLabel形式: ${broadcastLabel}`);
   return Number(match[1]) * 60 + Number(match[2]);
 }
 
 describe("配信メモの統一ルール", () => {
+  it("keeps September 29's five hourly sets and one clip per hour, including the partial final hour", () => {
+    const recap = streamRecaps.find((item) => item.id === "2026-09-29-night-showroom");
+    assert.ok(recap);
+    assert.equal(recap.gallery.length, 25);
+    const clips = recap.highlights.map((item) => item.clip).filter(Boolean);
+    assert.equal(clips.length, 5);
+    assert.deepEqual(clips.map((clip) => Number(clip.sourceTimestamp.split(":")[0])), [0, 1, 2, 3, 4]);
+    assert.ok(clips.every((clip) => seconds(clip.sourceTimestamp) + clip.durationSeconds <= 14957.528));
+    assert.ok(recap.transcriptionNote.includes("最後の約9分も5枚"));
+  });
+  it("withholds the unsafe thank-you boards and ZIP, including direct asset access", async () => {
+    const recap = streamRecaps.find((item) => item.id === "2026-09-28-night-thanks");
+    assert.ok(recap);
+    const safeName = "mily-b172-01-thanks-smile-005345.jpg";
+    assert.equal(recap.image.src, "/media/live/" + safeName);
+    assert.equal(recap.gallery, undefined);
+    assert.equal(recap.galleryNote, undefined);
+    assert.equal(recap.galleryZip, undefined);
+    assert.ok(recap.transcriptionNote.includes(RECAP_WITHHOLD_NOTE));
+    assert.equal(recap.ranking[0], RANKING_NOTE_WITHOUT_RANGE);
+    assert.doesNotMatch(JSON.stringify(recap), /thanks-board|thanks-images\.zip|表示名.*保持|本文に個人名/);
+    // Checking references alone would leave the old URLs downloadable from public/.
+    const files = await readdir(path.join(root, "public"), { recursive: true });
+    assert.deepEqual(files.filter((file) => path.basename(file).startsWith("mily-b172-")).sort(), [path.join("media", "live", safeName)]);
+  });
+
   it("keeps the archive newest-first, with the later slot first on the same day", () => {
     assert.ok(streamRecaps.length > 0);
     const ids = streamRecaps.map((recap) => recap.id);
@@ -197,10 +226,12 @@ describe("配信メモの統一ルール", () => {
 
       it("builds the note from the shared sentences", () => {
         const note = recap.transcriptionNote;
-        assert.ok(note.includes(RECAP_WITHHOLD_NOTE), "共通の非掲載範囲の文がない");
+        const withholdNote = note.includes(RECAP_CLIP_WITHHOLD_NOTE) ? RECAP_CLIP_WITHHOLD_NOTE : RECAP_WITHHOLD_NOTE;
+        if (withholdNote === RECAP_CLIP_WITHHOLD_NOTE) assert.ok((recap.highlights.some(item => item.clip) || (recap.songs ?? []).some(song => song.clip || (song.approvedClips?.length ?? 0) > 0)), "抜粋掲載の注記には実際の短尺が必要");
+        assert.ok(note.includes(withholdNote), "共通の非掲載範囲の文がない");
         assert.ok(note.endsWith(RECAP_FIGURES_NOTE), "数字の注記で終わっていない");
         assert.ok(
-          note.indexOf(RECAP_WITHHOLD_NOTE) > 0,
+          note.indexOf(withholdNote) > 0,
           "素材の説明が非掲載範囲より前にない",
         );
         assert.match(note, /静止画は/);
@@ -208,10 +239,23 @@ describe("配信メモの統一ルール", () => {
 
       it("publishes only complete, non-duplicated stills", async () => {
         const stills = recap.gallery ?? [];
+        const hourly = stills.some((still) => still.galleryHour !== undefined);
+        if (hourly) {
+          const hours = [...new Set(stills.map((still) => still.galleryHour))];
+          assert.ok(hours.length >= 1 && hours.length <= 5);
+          assert.deepEqual(hours, hours.map((_, index) => index));
+          for (const hour of hours) {
+            const batch = stills.filter((still) => still.galleryHour === hour);
+            assert.equal(batch.length, 5, "時間帯ごとに5枚を揃える");
+            assert.ok(batch.every((still) => still.caption?.startsWith(`${hour}:`)), "各画像の時刻が時間帯と一致する");
+          }
+          assert.deepEqual(stills.map((still) => still.galleryHour), hours.flatMap((hour) => Array(5).fill(hour)), "時間帯順に連続させる");
+        }
+        const galleryLimit = hourly ? MAX.hourlyGallery : MAX.gallery;
         if (stills.length > 0) {
           assert.ok(
-            stills.length <= MAX.gallery,
-            `スクショ ${stills.length}枚は多すぎ（上限${MAX.gallery}）`,
+            stills.length <= galleryLimit,
+            `スクショ ${stills.length}枚は多すぎ（上限${galleryLimit}）`,
           );
           // 代表は「そのカードの顔」。時系列の先頭とは限らないので、
           // ギャラリー内の同じオブジェクトであることだけを見る。
@@ -327,7 +371,7 @@ describe("配信メモの統一ルール", () => {
         recap.transcriptionNote,
         recap.nextNote,
         ...recap.ranking,
-        ...recap.highlights.flatMap(({ title, body, quote }) => [title, body, quote ?? ""]),
+        ...recap.highlights.flatMap(({ title, body, quote, socialClip }) => [title, body, quote ?? "", socialClip?.title ?? "", socialClip?.sourceTimestamp ?? ""]),
         ...recap.goals.flatMap(({ item, target, statusThen }) => [item, target, statusThen]),
         ...recap.timeline.map(({ label }) => label),
         ...[recap.image, ...(recap.gallery ?? [])]
@@ -339,8 +383,8 @@ describe("配信メモの統一ルール", () => {
       .join("\n");
     assert.doesNotMatch(publishedText, /\.(mp3|aac|mp4|mov|ts|wav|m4a)\b/i);
     // 原曲リンクはオーナー承認済みの公式動画だけ（scripts/approved-song-links.mjs）。
-    // それ以外のURLは、素材の出所が漏れるので配信メモへ書かない。
-    assert.doesNotMatch(withoutApprovedSongLinks(data), /https?:\/\//);
+    // 本人トークの公開投稿も exact allowlist のみ。それ以外の素材URLは許可しない。
+    assert.doesNotMatch(withoutApprovedTalkLinks(withoutApprovedSongLinks(data)), /https?:\/\//);
     assert.doesNotMatch(data, /transcriptionNote:\s*["`]/);
     assert.match(data, /buildTranscriptionNote/);
   });
@@ -380,4 +424,13 @@ describe("配信メモの統一ルール", () => {
     assert.match(rules, /統一しない語/);
     assert.doesNotMatch(rules, /drive\.google\.com|docs\.google\.com/);
   });
+});
+
+// 全編非公開と承認済み抜粋を混同しない。既定の非掲載文は保持する。
+it("distinguishes full recordings from approved short excerpts", () => {
+  const note = buildTranscriptionNote({ material: "素材。", stills: "静止画。", publishedClips: true });
+  assert.ok(note.includes(RECAP_CLIP_WITHHOLD_NOTE));
+  assert.ok(!note.includes(RECAP_WITHHOLD_NOTE));
+  const night = streamRecaps.find(item => item.id === "2026-09-27-night-showroom");
+  assert.ok(night.transcriptionNote.includes(RECAP_CLIP_WITHHOLD_NOTE));
 });

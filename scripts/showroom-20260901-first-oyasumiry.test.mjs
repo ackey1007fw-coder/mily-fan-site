@@ -1,6 +1,14 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
-import { news as currentNewsForMedia } from "../src/data/news.ts";
-const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
+import { news as currentNewsForMedia } from "./fixtures/news-before-b183.ts";
+// This test covers the earlier media surface; current scope has its own regression.
+const priorMediaSources = {
+  newsItems: currentNewsForMedia
+    .filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks")
+    .map((item) => item.id === "2026-09-01-first-showroom-oyasumiry"
+      ? { ...item, activityMediaIds: undefined }
+      : item),
+};
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";
@@ -25,11 +33,11 @@ import {
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { contest } from "../src/data/contest.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { verifyNews } from "./content-invariants.mjs";
 import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
 import {
@@ -270,7 +278,7 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "3次審査");
+    assert.notEqual(contest.currentPhase?.source, news.find(({ id }) => id === NEWS_ID)?.source);
   });
 
   it("keeps Portal Feed aligned with NEWS order and the lead still", () => {

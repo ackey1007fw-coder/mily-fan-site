@@ -1,3 +1,6 @@
+import { radioEpisode20260927 } from "./radioEpisode20260927.ts";
+import { radioEpisode20261004 } from "./radioEpisode20261004.ts";
+import { radioEpisode20261011 } from "./radioEpisode20261011.ts";
 export type RadioEpisodeHighlight = {
   timestamp: string;
   title: string;
@@ -14,6 +17,7 @@ export type RadioEpisodeMessage = {
 export type RadioEpisodeTimelineItem = {
   timestamp: string;
   label: string;
+  relatedLinks?: { label: string; url: string }[];
 };
 
 export type RadioEpisode = {
@@ -24,6 +28,8 @@ export type RadioEpisode = {
   broadcastLabel: string;
   presenters: string[];
   summary: string;
+  aftershowPhoto?: { src: string; srcSet?: string; webpSrcSet?: string; sizes?: string; width: number; height: number; alt: string; caption: string };
+  highlightsLabel?: string;
   milyHighlights: RadioEpisodeHighlight[];
   listenerMessages: RadioEpisodeMessage[];
   timeline: RadioEpisodeTimelineItem[];
@@ -419,4 +425,4 @@ export const radioEpisode20260823: RadioEpisode = {
   "transcriptionNote": "オーナー提供の自動文字起こしの前後関係を確認し、放送内容を要約しました。音声の全編手動聴取・全文校正は行っていません。話者や固有名詞が不確かな箇所は省略しています。時刻は録音開始からの目安です。番組で語られた経験・意見として記載し、観劇制度の現在の条件を案内するものではありません。録音音声・歌詞・全文文字起こしは掲載していません。"
 };
 
-export const radioEpisodes: RadioEpisode[] = [radioEpisode20260913, radioEpisode20260830, radioEpisode20260823];
+export const radioEpisodes: RadioEpisode[] = [radioEpisode20261011, radioEpisode20261004, radioEpisode20260927, radioEpisode20260913, radioEpisode20260830, radioEpisode20260823];

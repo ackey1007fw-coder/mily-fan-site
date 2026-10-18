@@ -1,4 +1,9 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { ApprovedSongClipList } from "./components/ApprovedSongClipList";
+import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
+import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
+import { RecapSourceInfo } from "./components/RecapSourceInfo";
+import { recapGalleryNote } from "./lib/recapSourceDisclosure";
+import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { RadioSongList } from "./components/RadioSongList";
@@ -424,13 +429,35 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
         <div className="flex flex-wrap gap-2 text-xs font-semibold text-apricot-ink">
           <span className="rounded-full bg-paper px-3 py-1.5">{episode.broadcastLabel}</span>
           <span className="rounded-full bg-paper px-3 py-1.5">
-            パーソナリティ：{episode.presenters.join("・")}
+            出演・進行：{episode.presenters.join("・")}
           </span>
         </div>
         <p className="mt-5 text-sm leading-7 text-ink-muted sm:text-base sm:leading-8">
           {episode.summary}
         </p>
       </div>
+
+      {episode.aftershowPhoto ? (
+        <figure className="mt-6 overflow-hidden rounded-2xl border border-sage/15 bg-paper-card shadow-card">
+          <picture>
+            {episode.aftershowPhoto.webpSrcSet ? (
+              <source type="image/webp" srcSet={episode.aftershowPhoto.webpSrcSet} sizes={episode.aftershowPhoto.sizes} />
+            ) : null}
+            <img
+              src={episode.aftershowPhoto.src}
+              srcSet={episode.aftershowPhoto.srcSet}
+              sizes={episode.aftershowPhoto.sizes}
+              width={episode.aftershowPhoto.width}
+              height={episode.aftershowPhoto.height}
+              alt={episode.aftershowPhoto.alt}
+              loading="lazy"
+              decoding="async"
+              className="w-full aspect-video object-contain"
+            />
+          </picture>
+          <figcaption className="px-5 py-4 text-sm leading-7 text-ink-muted">{episode.aftershowPhoto.caption}</figcaption>
+        </figure>
+      ) : null}
 
       <section aria-labelledby={`${episode.id}-songs`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">On Air Music</p>
@@ -441,10 +468,10 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
 
       {episode.milyHighlights.length > 0 ? <section aria-labelledby={`${episode.id}-mily-highlights`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
-          Mily Highlights
+          {episode.highlightsLabel ? "Program Highlights" : "Mily Highlights"}
         </p>
         <h3 id={`${episode.id}-mily-highlights`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">
-          みりぃの見どころ
+          {episode.highlightsLabel ?? "みりぃの見どころ"}
         </h3>
         <ul className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {episode.milyHighlights.map((highlight) => (
@@ -500,7 +527,14 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
               <span className="shrink-0 font-semibold tabular-nums text-sage-deep">
                 {item.timestamp}
               </span>
-              <span className="text-ink-muted">{item.label}</span>
+              <span className="text-ink-muted">
+                {item.label}
+                {item.relatedLinks?.map(link => (
+                  <ExternalLink key={link.url} href={link.url} className="mt-2 block py-2 font-semibold text-sage-deep underline">
+                    {link.label}
+                  </ExternalLink>
+                ))}
+              </span>
             </li>
           ))}
         </ol>
@@ -508,10 +542,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
 
       <div className="mt-6 rounded-2xl border border-sage/15 bg-paper-card p-5">
         {episode.nextEpisodeNote ? <p className="text-sm leading-7 text-ink-muted">{episode.nextEpisodeNote}</p> : null}
-        <p className="mt-3 text-xs leading-6 text-ink-muted">
-          出典: {episode.sourceLabel} · {formatDate(episode.verifiedAt)}確認
-        </p>
-        <p className="mt-2 text-xs leading-6 text-ink-muted">{episode.transcriptionNote}</p>
+        <RecapSourceInfo sourceLabel={episode.sourceLabel} verifiedAt={episode.verifiedAt} transcriptionNote={episode.transcriptionNote} medium="FMラジオ" />
       </div>
     </SectionShell>
   );
@@ -526,6 +557,25 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
         新しい回を上に置いています。どの回も同じ並び（見どころ → スクショ → 目標 →
         ランキング → タイムスタンプと次枠 → 出典）で書いています。スクショは写真のある回だけです。閉じても日付と一言は残り、画像がある回は静止画も残します。
       </p>
+      <nav
+        aria-label="最新の配信メモへ移動"
+        className="mt-5 rounded-2xl border border-sage/20 bg-sage-soft/30 p-4"
+      >
+        <p className="text-sm font-bold text-ink">
+          最近の配信を見る
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {streamRecaps.slice(0, 3).map((recap) => (
+            <a
+              key={recap.id}
+              href={`#recap-${recap.id}`}
+              className="rounded-full border border-sage/30 bg-paper-card px-3 py-2 text-xs font-semibold text-sage-deep underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage"
+            >
+              {recap.dateLabel} · {recap.theme}
+            </a>
+          ))}
+        </div>
+      </nav>
       <ul className="mt-6 space-y-4">
         {streamRecaps.map((recap, index) => (
           <li key={recap.id}>
@@ -571,12 +621,30 @@ function StreamRecapArticle({
   const [open, setOpen] = useState(defaultOpen);
 
   useEffect(() => {
+    const targetId = `recap-${recap.id}`;
+    const targetHash = `#${targetId}`;
+    let frame = 0;
     const openLinkedRecap = () => {
-      if (window.location.hash === `#recap-${recap.id}`) setOpen(true);
+      if (window.location.hash !== targetHash) return;
+      setOpen(true);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        if (window.location.hash !== targetHash) return;
+        document.getElementById(targetId)?.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "instant"
+            : "smooth",
+          block: "start",
+        });
+      });
     };
     openLinkedRecap();
     window.addEventListener("hashchange", openLinkedRecap);
-    return () => window.removeEventListener("hashchange", openLinkedRecap);
+    return () => {
+      window.removeEventListener("hashchange", openLinkedRecap);
+      if (frame !== 0) window.cancelAnimationFrame(frame);
+    };
   }, [recap.id]);
 
   return (
@@ -627,7 +695,7 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回に歌った曲"
           id={`${recap.id}-songs`}
-          note="「原曲を聴く」は原曲の公式動画、「公式歌唱を聴く」は版を明記した公式動画、「カラオケで歌う」は参考伴奏です。みりぃの歌唱映像ではありません。時刻は録画内の目安です。"
+          note="「原曲を聴く」は原曲の公式動画、「公式歌唱を聴く」は版を明記した公式動画、「カラオケで歌う」は参考伴奏です。これらの外部リンクはみりぃの歌唱映像ではありません。本人の短い歌唱映像がある場合は、動画枠に明記しています。時刻は録画内の目安です。"
         >
           <ol className="mt-3 space-y-3">
             {recap.songs.map((song, index) => (
@@ -661,6 +729,7 @@ function StreamRecapArticle({
                     {song.youtubeVersionNote ? "YouTubeで公式歌唱を聴く ↗" : "YouTubeで原曲を聴く ↗"}
                   </a>
                   {song.youtubeVersionNote ? <p className="break-words text-xs leading-5 text-ink-muted">{song.youtubeVersionNote}</p> : null}
+                  {song.approvedClips ? <ApprovedSongClipList clips={song.approvedClips} /> : null}
                   {song.karaoke ? (
                     <div className="mt-1">
                       <a
@@ -702,6 +771,28 @@ function StreamRecapArticle({
                   {highlight.title}
                 </h5>
                 <p className="mt-2 text-sm leading-6 text-ink-muted">{highlight.body}</p>
+                {highlight.relatedLinks ? <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1">{highlight.relatedLinks.map((link) => <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4">{link.label} ↗</a>)}</div> : null}
+                {highlight.socialClip ? <StreamSocialClipLinks clip={highlight.socialClip} id={`social-${recap.id}-${highlight.timestamp.replace(/:/g, "")}`} /> : null}
+                {highlight.clip ? (
+                  <figure className="mt-3 overflow-hidden rounded-xl bg-paper-card">
+                    <video
+                      className="h-auto w-full bg-black object-contain"
+                      width={highlight.clip.width}
+                      height={highlight.clip.height}
+                      controls
+                      playsInline
+                      preload="none"
+                      poster={highlight.clip.poster}
+                      aria-label={`みりぃの${highlight.title}の短い動画`}
+                    >
+                      <source src={highlight.clip.src} type="video/mp4" />
+                      動画を再生できない環境です。
+                    </video>
+                    <figcaption className="px-3 py-2 text-xs leading-5 text-ink-muted">
+                      録画内 {highlight.clip.sourceTimestamp}頃から・約{Math.round(highlight.clip.durationSeconds)}秒
+                    </figcaption>
+                  </figure>
+                ) : null}
                 {highlight.quote ? (
                   <blockquote className="mt-3 border-l-2 border-apricot pl-3 text-sm font-medium leading-6 text-ink">
                     {highlight.quote}
@@ -717,11 +808,15 @@ function StreamRecapArticle({
         <StreamRecapSection
           title="この回のスクショ"
           id={`${recap.id}-stills`}
-          note={`かわいいカットを${recap.gallery.length}枚。コメントや他の方の表示は外してあります。各写真を保存できます。`}
+          note={recapGalleryNote(recap.galleryNote, recap.gallery.length)}
         >
           <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
-            {recap.gallery.map((still) => (
-              <li key={still.src}>
+            {recap.gallery.map((still, index) => (
+              <Fragment key={still.src}>
+                {still.galleryHour !== undefined && (index === 0 || recap.gallery?.[index - 1].galleryHour !== still.galleryHour) ? (
+                  <li className="col-span-full mt-3"><h5 className="text-sm font-semibold text-sage-deep">録画 {still.galleryHour}:00〜の5枚</h5></li>
+                ) : null}
+              <li>
                 <figure className="overflow-hidden rounded-2xl bg-sage-soft/40">
                   <img
                     src={still.src}
@@ -744,6 +839,7 @@ function StreamRecapArticle({
                   </figcaption>
                 </figure>
               </li>
+              </Fragment>
             ))}
           </ul>
           {recap.galleryZip ? (
@@ -774,6 +870,7 @@ function StreamRecapArticle({
               </li>
             ))}
           </ul>
+          <p className="mt-2 text-xs leading-5 text-ink-muted">フォロワー数や目標の数字は配信時点の記録です。</p>
         </StreamRecapSection>
       ) : null}
 
@@ -812,12 +909,7 @@ function StreamRecapArticle({
         </details>
       ) : null}
 
-      <div className="mt-4 rounded-2xl border border-sage/15 bg-paper px-4 py-3">
-        <p className="text-xs leading-5 text-ink-muted">
-          出典: {recap.sourceLabel} · {formatDate(recap.verifiedAt)}確認
-        </p>
-        <p className="mt-2 text-xs leading-5 text-ink-muted">{recap.transcriptionNote}</p>
-      </div>
+      <RecapSourceInfo sourceLabel={recap.sourceLabel} verifiedAt={recap.verifiedAt} transcriptionNote={recap.transcriptionNote} medium={recap.platformLabel} imageTimes={Boolean(recap.gallery?.some(image => /\d+:\d{2}/.test(image.caption ?? "")))} />
     </details>
   );
 }
@@ -906,7 +998,7 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
           return (
             <li key={item.id} className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
               <time dateTime={item.date} className="text-xs text-ink-muted">
-                {formatDate(item.date)}
+                {item.dateBasis === "confirmed-on" ? "確認日 " : ""}{formatDate(item.date)}
               </time>
               <h3 className="mt-2 text-lg font-bold leading-relaxed text-ink">{item.title}</h3>
               <p className="mt-2 whitespace-pre-line text-sm leading-7 text-ink-muted">{item.body}</p>
@@ -951,6 +1043,11 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
           );
         })}
       </ul>
+      <p className="mt-6">
+        <a href="/news/" className={secondaryCta}>
+          過去のお知らせをすべて見る
+        </a>
+      </p>
     </SectionShell>
   );
 }
@@ -1113,6 +1210,7 @@ function ActivityDetail({ activity }: { activity: Activity }) {
       <main id="activity-main">
         <ActivityHero activity={content.activity} />
         <ActivityCurrent activityId={content.activity.id} />
+        {content.activity.id === "live-stream" ? <AnnouncedStreamSchedule /> : null}
         {content.activity.id === "live-stream" ? <StreamSongCatalog /> : null}
         <RadioEpisodeRecap activityId={content.activity.id} />
         <StreamRecap activityId={content.activity.id} />

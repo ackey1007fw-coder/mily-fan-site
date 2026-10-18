@@ -1,7 +1,42 @@
+import { fourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
+import { X_FINAL_DAY_PEACE_POST_URL, xFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
+import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
+import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourXVideo.ts";
+import { providedVoteVideo } from "./providedVoteVideo.ts";
+import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
+import { radioOct11Stories } from "./radioOct11Stories.ts";
+import { radioFanroomAftershowNewsImage } from "./radioFanroomAftershowPhoto.ts";
+import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
+import { tiktokOct04SelfieVideo } from "./tiktokOct04SelfieVideo.ts";
+import { tiktokOct07RibbonVideo } from "./tiktokOct07RibbonVideo.ts";
+import { kawaiiRadioAdditionalVideos, kawaiiRadioStoryVideo, kawaiiRadioMessageImage, RADIO_KAWAII_MESSAGE_FORM_URL } from "./kawaiiRadioStoryVideo.ts";
+import { radioProgram } from "./radio.ts";
 import { nightRibbonFanroomImage } from "./nightRibbonFanroomSelfie.ts";
+import {
+  september23FanroomImage,
+  fanroomVoice1027,
+  fanroomVoice1032,
+} from "./september23Fanroom.ts";
+import { morningCommuteStoryVideo, morningXVideo } from "./morningCommuteMedia.ts";
+import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
+import { firstAvatarDistributionImages } from "./firstAvatarDistributionImages.ts";
+import { superOreoMcflurryImage } from "./superOreoMcflurryImage.ts";
 import { avatarAchievementStoryVideo } from "./avatarAchievementStoryVideo.ts";
 import { morningFanroomSelfieImage } from "./morningFanroomSelfie.ts";
 import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
+import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
+import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
+import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
+import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
+import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
+import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
+import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
+import { amiMilyKoreaPromise } from "./challengeConnection.ts";
+import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
+import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
+import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
+import { site } from "./site.ts";
+import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
 /**
  * Latest updates. Keep this empty rather than filling unverified items.
  * The UI sorts a copy by date, then optional sameDayOrder. Unranked same-day
@@ -18,6 +53,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
  */
 import type { ActivityId } from "./activities.ts";
 import {
+  campusGirlsFinalsExPatonVoteLink,
   campusGirlsPatonVoteLink,
   missCircleWebVoteLink,
 } from "./links.ts";
@@ -42,6 +78,7 @@ import { oyasumilyStoryVideo } from "./oyasumilyStoryVideo.ts";
 import { patonSecondStoryVideo } from "./patonSecondStoryVideo.ts";
 import { ohayoSeptemberXVideo } from "./ohayoSeptemberXVideo.ts";
 import { tiktokRadioVideo } from "./tiktokRadioVideo.ts";
+import { tiktokSeasideCirclePoseVideo } from "./tiktokSeasideCirclePoseVideo.ts";
 import { tiktokSayonaraIchigoVideo } from "./tiktokSayonaraIchigoVideo.ts";
 import { campusGirlsSecondStageResultImage } from "./campusGirlsSecondStageResultImage.ts";
 import { campusGirlsPrelimFinalResultImage } from "./campusGirlsPrelimFinalResultImage.ts";
@@ -53,6 +90,7 @@ import { seasideCircleMovieThemeStoryVideo } from "./seasideCircleMovieThemeStor
 import { morningMakeupShowroomImage } from "./morningMakeupShowroomImage.ts";
 import { morningMakeupInstagramStoryImage } from "./morningMakeupInstagramStoryImage.ts";
 import {
+  mixchKossoriMovie,
   mixchExPeriodDay1Movie,
   mixchFinalDayMovie,
   mixchExpressiveMovie,
@@ -80,6 +118,7 @@ import {
 import { girlAwardEventVoice } from "./girlAwardEventVoice.ts";
 import { morningFanroomVoice } from "./morningFanroomVoice.ts";
 import { incomingCallFanroomVoice } from "./incomingCallFanroomVoice.ts";
+import { october8FanroomVoice } from "./october8FanroomVoice.ts";
 import {
   OHAYO_WHITE_POLO_X_URL,
   ohayoWhitePoloPeaceImage,
@@ -107,6 +146,8 @@ import { thirdRoundStoryAdditionalMedia } from "./thirdRoundStoryMedia.ts";
 import { webVoteDay2StoryVideo } from "./webVoteDay2StoryVideo.ts";
 import { voteDayFiveSoonStoryVideo } from "./voteDayFiveSoonStoryVideo.ts";
 import { morningThanksVoteStoryVideo } from "./morningThanksVoteStoryVideo.ts";
+import { campusGirlsPatonFifteenXStoryVideo } from "./campusGirlsPatonFifteenXStoryVideo.ts";
+import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
 import { streamThanksMorningSlotStoryVideo } from "./streamThanksMorningSlotStoryVideo.ts";
 import { finalDayNightStoryVideo } from "./finalDayNightStoryVideo.ts";
 import { miripochiStoryVideo } from "./miripochiStoryVideo.ts";
@@ -124,6 +165,7 @@ import {
   MOVIE_NIGHT_INSTAGRAM_URL,
   movieNightNewsImages,
 } from "./movieNightPhotos.ts";
+import { agestockYokohamaNewsImages } from "./agestockYokohamaNewsImages.ts";
 
 export type NewsVideoMedia = {
   kind: "video";
@@ -134,6 +176,14 @@ export type NewsVideoMedia = {
   alt: string;
 };
 
+/** Official X post iframe: X video/CDN assets are not copied or hotlinked. */
+export type NewsXEmbed = {
+  /** Numeric X post ID, used only by the official embed endpoint. */
+  postId: string;
+  sourceUrl: string;
+  alt: string;
+};
+
 /** Self-hosted still image that belongs to the post itself, not the Gallery. */
 export type NewsImageMedia = {
   kind: "image";
@@ -141,6 +191,8 @@ export type NewsImageMedia = {
   width: number;
   height: number;
   alt: string;
+  /** Optional self-hosted original-size image for posters with readable text. */
+  fullSizeSrc?: string;
   /** Optional Gallery-style srcset. Absent images keep a single `src`. */
   srcSet?: string;
   webpSrcSet?: string;
@@ -163,14 +215,17 @@ export type NewsMedia =
   | NewsVideoMedia
   | NewsImageMedia
   | NewsMixchMedia
-  | NewsAudioMedia;
+  | NewsAudioMedia
+  | TikTokPostVideo;
 
 export function isNewsAudio(media: NewsMedia): media is NewsAudioMedia {
   return media.kind === "audio";
 }
 
 export function newsMediaKey(media: NewsMedia): string {
-  return media.kind === "mixch" ? `${media.kind}:${media.id}` : `${media.kind}:${media.src}`;
+  return media.kind === "mixch" || media.kind === "tiktok"
+    ? `${media.kind}:${media.id}`
+    : `${media.kind}:${media.src}`;
 }
 
 export type NewsMessage = {
@@ -187,10 +242,14 @@ export type NewsItem = {
   id: string;
   /** Display date, ISO `YYYY-MM-DD`. */
   date: string;
+  /** Confirmation date shown explicitly when the original publication date is unknown. */
+  dateBasis?: "confirmed-on";
   /** Explicit editorial order within the same date. Higher values appear first. */
   sameDayOrder?: number;
   /** Explicit Activity relations only. Absence means deliberately unclassified. */
   activityIds?: ActivityId[];
+  /** Optional media-surface scope. NEWS relations remain in activityIds; absent keeps the existing propagation. */
+  activityMediaIds?: ActivityId[];
   title: string;
   body: string;
   source?: string;
@@ -203,6 +262,8 @@ export type NewsItem = {
   /** Extra action buttons. Support-event URLs are shown only in their confirmed window. */
   additionalCtas?: NewsSourceLink[];
   media?: NewsMedia;
+  /** NEWS-only outbound X embed, never propagated as an ActivityMediaItem. */
+  xEmbed?: NewsXEmbed;
   /** Extra stills/videos on the same NEWS card. Lead image stays `media`. */
   additionalMedia?: NewsMedia[];
   message?: NewsMessage;
@@ -211,11 +272,835 @@ export type NewsItem = {
 export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
   if (!item.media) return [];
   return [item.media, ...(item.additionalMedia ?? [])].filter(
-    (media) => media.kind !== "mixch" || media.published,
+    (media) => (media.kind !== "mixch" && media.kind !== "tiktok") || media.published,
   );
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-17-x-relaxed-morning-showroom",
+    date: "2026-10-17",
+    sameDayOrder: 1045,
+    title: "久しぶりにゆっくりゆったり🩵 みりぃの朝配信と自撮り",
+    body: "10月17日10:45（日本時間）、みりぃがXで、ここ数日続いていた慌ただしい配信を振り返り、久しぶりにゆっくり過ごせた朝の配信が幸せだったと報告。来てくれた皆さんへの感謝も伝えています。\n\n朝食は前日のキムチ炒飯と豆苗炒め🌱。投稿には、紺色のトップスで窓辺に立ち、片手でポーズを作る自撮り写真が添えられています。\n\n投稿当時は同日夜22:30からのSHOWROOM配信を予告していました。これは10月17日時点の案内であり、配信の実施や現在の予定を確定するものではありません。最新の案内は本人の投稿をご確認ください。",
+    source: "https://x.com/Mily_chan36/status/2111272418140622870",
+    sourceLabel: "みりぃ本人のX投稿と写真を見る（10月17日）",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b229-01-20261017-relaxed-morning-selfie.jpg",
+      width: 1152,
+      height: 2048,
+      alt: "紺色のトップスで窓辺に立ち、顔の横で指をL字に添えたみりぃの自撮り写真",
+    },
+  },
+  {
+    id: "2026-10-16-x-red-riding-hood-new-video",
+    date: "2026-10-16",
+    title: "赤ずきん姿のみりぃ、新しいX投稿を紹介🍎",
+    body: "10月16日に共有された、みりぃ本人のX投稿を紹介します。サイトオーナーが同時に提供した約11秒の縦型映像では、赤いフードと三つ編み姿で、カメラに向かって指や手でポーズを取る姿が確認できました。\n\nX投稿は下の公式埋め込みからご覧ください。提供映像と元投稿内メディアとの完全な一致は未検証です。元投稿の本文は直接取得できていないため引用していません。",
+    source: "https://x.com/mily_chan36/status/2110892605605363858",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    xEmbed: {
+      postId: "2110892605605363858",
+      sourceUrl: "https://x.com/mily_chan36/status/2110892605605363858",
+      alt: "赤ずきん姿の縦型映像とともに共有された、みりぃ本人のX投稿",
+    },
+  },
+  {
+    id: "2026-10-16-tiktok-seasidecircle-shared",
+    date: "2026-10-16",
+    dateBasis: "confirmed-on",
+    title: "湘南シーサイドサークルのTikTok投稿リンク📱",
+    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。",
+    source: tiktokSeasideCircleSharedVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を開く",
+  },
+  {
+    id: "2026-10-15-miss-circle-semifinal-advance",
+    date: "2026-10-15",
+    sameDayOrder: 1718,
+    activityIds: ["miss-circle"],
+    title: "4次審査突破！みりぃ、セミファイナル進出🍅🎉",
+    body: "10月15日、みりぃ（三橋莉子）がMISS CIRCLE CONTEST 2026の4次審査を突破し、セミファイナル進出を報告しました。本人X投稿を公式埋め込みと元投稿リンクで紹介します。\n\nあわせてサイトオーナーから届いたInstagram Story動画では、三つ編み姿でカメラに向かうみりぃが「4次審査突破!! セミファイナル進出!!」と報告。4次審査で応援してくれたみんなへの感謝と「次も私らしく頑張ります！」という言葉を届けています。Story自体の投稿日は確認できていません。\n\nSHOWROOMファンルームでも、本人がセミファイナル進出者の発表を案内し、ここまでの応援への感謝と次の審査への意気込み、引き続き応援してほしい思いを伝えています。ファンルームの本人投稿2件を公開画面で確認した内容の要約です。個別投稿の正確な日本時間と固定リンクは確認できないため、下のファンルーム全体へのリンクからご覧ください。\n\n主催者公式サイトで確認したセミファイナル審査期間は10月29日〜11月8日です。WEB投票は10月29日12:00〜11月8日23:59、SHOWROOM審査は10月29日5:00〜11月7日21:59（いずれも日本時間）。WEB投票とSHOWROOMは締切日が異なります。審査の詳細は公式の続報をご確認ください。\n\nサイトオーナーから提供されたセミファイナル審査日程の縦型告知動画を音声なしで掲載しています。動画自体の投稿日は確認できていません。",
+    source: "https://x.com/mily_chan36/status/2110646575051747453",
+    sourceLabel: "みりぃ本人のX投稿（10月15日）",
+    additionalSources: [
+      { label: "主催者公式・セミファイナル審査予定", url: "https://www.misscircle.jp/" },
+      { label: "MISS CIRCLE CONTEST 運営のX投稿（10月15日）", url: "https://x.com/circle_contest/status/2110646640071860374" },
+      { label: "MISS CIRCLE CONTEST 2026 セミファイナル進出者一覧", url: "https://2026.misscircle.jp/list/5" },
+    ],
+    media: {
+      kind: "video",
+      src: "/media/gallery/mily-b224-01-semifinal-schedule-story.mp4",
+      poster: "/media/gallery/mily-b224-01-semifinal-schedule-story-poster.jpg",
+      width: 512,
+      height: 910,
+      alt: "セミファイナル審査の期間とWEB投票・SHOWROOM審査の日程が記された、音声なしの縦型告知動画",
+    },
+    xEmbed: {
+      postId: "2110646575051747453",
+      sourceUrl: "https://x.com/mily_chan36/status/2110646575051747453",
+      alt: "4次審査突破とセミファイナル進出を報告するみりぃのX投稿",
+    },
+    message: {
+      label: "Instagram Storyに重ねられた本人の言葉",
+      text: "4次審査突破‼ セミファイナル進出‼\n4次審査、たくさん応援してくれてありがとうございます🎀✨\n次も私らしく頑張ります！",
+    },
+    relatedUrl: `${site.siteUrl}/activities/miss-circle/`,
+    ctaLabel: "コンテストの歩みを見る",
+    additionalCtas: [
+      { label: "本人のSHOWROOMファンルームを見る", url: "https://www.showroom-live.com/room/fan_club?room_id=573253" },
+      { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
+    ],
+  },
+  {
+    id: "2026-10-16-tiktok-seasidecircle-hand-poses",
+    date: "2026-10-16",
+    dateBasis: "confirmed-on",
+    title: "みりぃの手のポーズがかわいい！TikTok動画を紹介📱✨",
+    body: "10月16日、湘南シーサイドサークルのTikTokアカウント（@seasidecircle）による別の動画リンクが共有されました。同時に提供された約21秒の縦動画では、みりぃがふわふわの白いクッションを前に、カメラに向かって指や手でさまざまなポーズを見せています。\n\n元のTikTok投稿は下の公式プレーヤーと投稿リンクからご覧ください。提供動画とTikTokの公開投稿との完全な一致は未検証です。投稿日は未確認です。投稿本文も直接確認できていないため、10月16日はリンク確認日として記録しています。",
+    source: tiktokSeasideCirclePoseVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+    media: tiktokSeasideCirclePoseVideo,
+  },
+  {
+    id: "2026-10-15-x-sleep-check-in",
+    date: "2026-10-15",
+    sameDayOrder: 1245,
+    title: "「一緒に睡眠時間確保しようね」みりぃのX投稿😴",
+    body: "10月15日12:45（日本時間）、みりぃがXで、人生初めてレベルのオール（徹夜）をした近況を報告しました。手足に力が入らず「プルプル」と表現しつつ、みんなにも一緒に睡眠時間を確保しようと呼びかけています。\n\n体調の経過やその後の状況は確認できていません。元投稿の全文は本人のXでご覧ください。",
+    source: "https://x.com/mily_chan36/status/2110577902387622329",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    message: { label: "みりぃのひとこと", text: "一緒に睡眠時間確保しようね🥺🥺🥺" },
+  },
+  {
+    id: "2026-10-14-x-redhood-lip-gloss-video",
+    date: "2026-10-14",
+    sameDayOrder: 1833,
+    title: "赤ずきんみりぃのリップ動画💄",
+    body: "10月14日の本人X投稿から、赤いフードと三つ編み姿のみりぃが、リップを手に取って唇に塗る短い動画を紹介します。オーナー提供の実映像で確認できる、約17秒のワンシーンです。\n\n下のX公式プレーヤーで表示できない場合は、元投稿のリンクからご覧ください。投稿本文の未確認部分は引用していません。",
+    source: "https://x.com/mily_chan36/status/2110302889927430480",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    xEmbed: {
+      postId: "2110302889927430480",
+      sourceUrl: "https://x.com/mily_chan36/status/2110302889927430480",
+      alt: "赤ずきん姿のみりぃがリップを塗る短いX動画",
+    },
+  },
+  {
+    id: "2026-10-13-x-first-cosplay-red-riding-hood",
+    date: "2026-10-13",
+    sameDayOrder: 808,
+    activityIds: ["miss-circle"],
+    title: "人生初コスプレは赤ずきん🍎 三つ編みショット4枚",
+    body: "本人Xの10月13日8:08（日本時間）の投稿で、四次審査の応援への感謝とともに、人生初のコスプレとして赤ずきん姿を披露しました。赤いフードと三つ編み、白いエプロンの衣装を、寄りのショットから全身写真まで4枚で楽しめます。\n\n投稿では同日21:30からのSHOWROOM配信も案内しています。これは投稿時点の告知であり、現在の配信状況や確定予定を示すものではありません。\n\nあわせて共有されたInstagram投稿文では、四次審査を応援してくれた人への感謝と、現状に満足せず上を目指す決意が語られています。セミファイナル、ファイナルも応援してくれるみんなと楽しみたいというメッセージです。Instagramの投稿日は未確認のため、この記事の日付（10月13日）は元のX投稿の日付です。",
+    source: RED_RIDING_HOOD_X_URL,
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    additionalSources: [{ label: "赤ずきんと四次審査への思い（Instagram）", url: "https://www.instagram.com/p/DeeMBKZk67F/" }],
+    message: { label: "Instagramでのメッセージ", text: "上しか見ていません。みりぃの下剋上はまだまだこれからです。" },
+    media: redRidingHoodNewsImages[0],
+    additionalMedia: redRidingHoodNewsImages.slice(1),
+  },
+  {
+    id: "2026-10-12-fourth-round-final-day-story",
+    date: "2026-10-12",
+    dateBasis: "confirmed-on",
+    activityIds: ["miss-circle", "live-stream"],
+    activityMediaIds: [],
+    title: "投票最終日のありがとう🩵 最終枠を案内するStory",
+    body: "投票への感謝と、四次審査最終日の応援を呼びかけるStory。三つ編みとヘッドホン姿のみりぃとともに、画面には「投票最終日」「SHOWROOM最終枠 21:00〜21:59」の案内が表示されています。\n\n10月12日に受領・確認した動画の記録です。元の投稿日・撮影日時は未確認で、配信時刻は動画内の案内として紹介しています。最新の予定・受付状況は公式ページでご確認ください。公開版は未確認の背景音楽を除いた映像のみです。",
+    sourceLabel: "Instagram Story（投稿日未確認・10月12日確認）",
+    media: fourthRoundFinalDayStoryVideo,
+    relatedUrl: "/support/",
+    ctaLabel: "四次審査の応援案内を見る",
+  },
+  {
+    id: "2026-10-11-x-fourth-round-final-day-peace",
+    date: "2026-10-11",
+    sameDayOrder: 2359,
+    activityIds: ["miss-circle"],
+    title: "四次審査、10/12が最終日！三つ編みピースのみりぃ🩵",
+    body: "本人Xの10月11日23:59（JST）の投稿で、10月12日（月）が四次審査の最終日と案内されました。WEB投票は12日23:59、SHOWROOM審査は12日21:59までとの投稿時点の説明です。受付状況は必ず公式ページで確認してください。\n\n投稿には、三つ編み姿で両手ピースを見せる約2秒の可愛い動画も添えられています。オーナー提供動画から作った音声なしの公開版を掲載しました。",
+    source: X_FINAL_DAY_PEACE_POST_URL,
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    media: xFinalDayPeaceVideo,
+    message: { label: "投稿のひとこと", text: "今日の朝の私を添えて🩵" },
+    relatedUrl: "/support/",
+    ctaLabel: "四次審査の応援案内を見る",
+    additionalCtas: [{ label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" }],
+  },
+  {
+    id: "2026-10-11-radio-tournament-stories",
+    date: "2026-10-11",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "10/11の湘南シーサイドサークル📻 テーマは「大会」",
+    body: "10月11日（日）の「湘南シーサイドサークル」は、トークテーマ「大会」！ みりぃと共演者がスタジオから番組を案内する動画と、お便りの送り口を紹介する動画の計2本をお届けします。スタジオの表情と告知をぜひご覧ください。\n\n番組枠は日曜10:00〜13:00。番組枠3時間は、みりぃ本人の出演時間を表すものではありません。お便りはFM公式フォームから送れます。\n\nこのお知らせは10月11日に受領・内容確認した告知動画の記録です。SNSでの投稿日は未確認です。放送本編のレポートではありません。動画は未確認の背景音楽を除いた映像のみで掲載しています。\n\n放送終了後、13:12にSHOWROOMファンルームへ投稿された2ショット写真も追加しました。アプリの画面やコメントは掲載せず、写真部分のみを収録しています。",
+    sourceLabel: "番組告知Story（投稿日未確認・10月11日確認）／SHOWROOMファンルーム写真（10月11日13:12投稿）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioOct11Stories[0],
+    additionalMedia: [...radioOct11Stories.slice(1), radioFanroomAftershowNewsImage],
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }, { label: "10/11「大会」放送レポートを読む", url: `${site.siteUrl}/activities/radio/#2026-10-11-taikai-mily-highlights` }],
+  },
+  {
+    id: "2026-10-08-fanroom-voice-message",
+    date: "2026-10-08",
+    sameDayOrder: 10,
+    activityIds: ["live-stream"],
+    title: "みりぃからの連絡💌 生声メッセージが届きました",
+    body: "10月8日18:13、SHOWROOMファンルームに届いた、みりぃ本人の音声メッセージ。下のプレーヤーから聴けます。\n\n18:15の投稿では、夜の配信は「今の所は21:30〜の予定」と案内していました。最新の予定・連絡は、元のファンルームをご確認ください。",
+    sourceLabel: "SHOWROOMファンルーム（10月8日18:13・18:15 JST）",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: october8FanroomVoice,
+  },
+  {
+    id: "2026-10-08-showroom-announced-schedule",
+    date: "2026-10-08",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "10月8日のSHOWROOM告知予定・1.2倍DAY",
+    body: "10月8日00:38の本人Xで、同日のSHOWROOMは14:40〜15:20と21:30〜22:10（2026年・JST）と案内されています。この日は「1.2倍DAY」と案内されています。\n\n本人による告知予定です。実際の開始・終了を確認した配信記録ではありません。変更は本人の最新Xをご確認ください。応援ページの本人告知欄には、終了予定時刻前の枠を表示します。",
+    source: OCTOBER_8_SCHEDULE_X_URL,
+    sourceLabel: "本人Xの予定告知（10月8日00:38 JST）",
+    relatedUrl: "/support/",
+    ctaLabel: "配信予定・四次審査の応援案内を見る",
+  },
+  {
+    id: "2026-10-07-fourth-round-official-update",
+    date: "2026-10-07",
+    activityIds: ["miss-circle"],
+    title: "四次イベント：特別番組の出演条件について公式更新",
+    body: `${fourthRoundEventUpdate.body}\n\n${fourthRoundEventUpdate.note}`,
+    source: fourthRoundEventUpdate.source,
+    sourceLabel: "SHOWROOM公式イベントページ（10月6日更新）",
+  },
+  {
+    id: "2026-10-07-tiktok-ribbon",
+    date: tiktokOct07RibbonVideo.sourceDate,
+    title: "青いシュシュと手のポーズ、みりぃのTikTok💙",
+    body: "10月7日、みりぃ（@seasidecircle）が短い縦型動画をTikTokに投稿しました。紺色のカーディガンと青いシュシュ姿で、カメラに向かって手のポーズやさまざまな表情を見せる約9秒の動画です。TikTok公式プレーヤーでご覧いただけます。",
+    source: tiktokOct07RibbonVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    media: tiktokOct07RibbonVideo,
+    message: { label: "みりぃの投稿本文", text: "💖💖💖" },
+  },
+  {
+  "id": "2026-10-06-night-showroom-recap",
+  "date": "2026-10-06",
+  "sameDayOrder": 2,
+  "activityIds": [
+    "live-stream",
+    "miss-circle"
+  ],
+  "activityMediaIds": [
+    "live-stream"
+  ],
+  "title": "10月6日夜：応援へのお礼と、サイコロのおしゃべり",
+  "body": "キラキラと投票報告へのお礼、アバター、ラジオの交通情報、サイコロの数字を使った言葉遊び、終盤のランキングと挨拶をまとめました。音声配信の自動文字起こしに基づく、写真なしの記事です。",
+  "sourceLabel": "当日の保存録画・自動文字起こし",
+  "relatedUrl": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-06-night-showroom",
+  "ctaLabel": "夜の配信まとめを見る"
+},
+  {
+  "id": "2026-10-06-noon-showroom-recap",
+  "date": "2026-10-06",
+  "sameDayOrder": 1,
+  "activityIds": [
+    "live-stream",
+    "miss-circle"
+  ],
+  "activityMediaIds": [
+    "live-stream"
+  ],
+  "title": "10月6日昼：応援へのお礼と、アバター権の話題",
+  "body": "朝の時間変更への応答、キラキラへの協力の呼びかけ、アバター権の話題、投票報告へのお礼、終盤のランキングと挨拶をまとめました。自動文字起こしに基づく写真なしの記事です。",
+  "sourceLabel": "当日の保存録画・自動文字起こし",
+  "relatedUrl": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-06-noon-showroom",
+  "ctaLabel": "昼の配信まとめを見る"
+},
+  {
+  "id": "2026-10-06-morning-showroom-recap",
+  "date": "2026-10-06",
+  "activityIds": [
+    "live-stream",
+    "miss-circle"
+  ],
+  "activityMediaIds": [
+    "live-stream"
+  ],
+  "title": "10月6日朝：投票報告へのお礼と、応援の話題",
+  "body": "投票日数の表示確認、投票報告へのお礼、キラキラ星での応援案内、アバター権の話題、終盤の読み上げと挨拶をまとめました。当日の実写真3枚と、自動文字起こしに基づく要約です。",
+  "sourceLabel": "当日の保存録画・自動文字起こし",
+  "media": {
+    "kind": "image",
+    "src": "/media/live/mily-b194-02-20261006-morning-still.jpg",
+    "width": 640,
+    "height": 360,
+    "alt": "カメラへ笑顔を向けるみりぃ"
+  },
+  "relatedUrl": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-10-06-morning-showroom",
+  "ctaLabel": "朝の配信まとめと写真を見る"
+},
+  {
+    id: "2026-10-05-night-showroom-recap", date: "2026-10-05", sameDayOrder: 1,
+    activityIds: ["live-stream", "miss-circle"],
+    activityMediaIds: ["live-stream"],
+    title: "10月5日夜、投票へのお礼とコメントのおしゃべり",
+    body: "投票報告へのお礼、虫の話への応答、歌への案内、授業の話題、終盤の挨拶をまとめました。当日の実写真3枚と、自動文字起こしに基づく要約です。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-b193-01-20261005-night-still.jpg", width: 640, height: 360, alt: "カメラへ笑顔を向けるみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-05-night-showroom`,
+    ctaLabel: "夜の配信まとめと写真を見る",
+  },
+  {
+    id: "2026-10-05-morning-showroom-recap", date: "2026-10-05",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "10月5日、朝の挨拶と歌のおしゃべり",
+    body: "紫のヘアピンで朝の挨拶。投票報告や指ハートへのお礼、定期券の話、歌の練習を8つの場面にまとめました。当日の保存録画を自動文字起こしした要約と、実写真8枚です。手動聴取・曲名確認は未完了のため、不確かな情報は掲載していません。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-b192-02-20261005-morning-still.jpg", width: 640, height: 360, alt: "朝配信で笑顔で手を振るみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-05-asa-showroom`,
+    ctaLabel: "朝の配信まとめと写真を見る",
+  },
+  {
+    id: "2026-10-05-paton-ex2-day2-guide",
+    date: "2026-10-05",
+    dateBasis: "confirmed-on",
+    activityIds: ["campus-girls"],
+    title: "10月5日のPaton：無料拍手の確認案内",
+    body: "CAMPUS BOYS/GIRLS 2027 本選EX2②の公式掲載期間は10月5日0:00〜23:59（公式ページ表記）です。三橋莉子（みりぃ）の本人ページに「1日1回無料！拍手」（0コイン）が用意されています。ログインが必要で、「4倍拍手」（50コイン）は別の有料ギフトです。\n\nこの記録は10月5日分です。タイムゾーンと日付切替時刻は未確認のため、このサイトでは現在の受付状況を判定していません。応援案内から公式ページで本人名・受付状況・コイン数をご確認ください。",
+    source: patonExTwoDayTwo.eventUrl,
+    sourceLabel: "Paton公式・本選EX2②",
+    relatedUrl: `${site.siteUrl}/support/#paton-ex2-day2-guide`,
+    ctaLabel: "10月5日分のPaton案内を見る",
+  },
+  {
+    id: "2026-10-05-car-vote-day-four-x",
+    date: "2026-10-05",
+    title: "みりぽち4日目！車内からの短い動画🚗",
+    body: "10月5日9:43、みりぃがXで投票4日目を呼びかけ、公式ENTRY 734ページへのリンクと車内の短い動画を届けてくれました。赤い光の中、シートベルトを着けてカメラを見る約2秒の映像です。\n\n『4日目』は投稿時点の案内です。現在の投票先・受付期間は、下の応援案内をご確認ください。サイトの動画は音声なしで掲載しています。",
+    source: CAR_VOTE_DAY_FOUR_X_URL,
+    sourceLabel: "みりぃのX投稿（10月5日9:43 JST）",
+    media: carVoteDayFourXVideo,
+    message: { label: "みりぃの投稿より", text: "みりぽちー！！4日目だ╰(*´︶`*)╯♡" },
+    relatedUrl: `${site.siteUrl}/support/`,
+    ctaLabel: "投票・応援案内を見る",
+  },
+  {
+    id: "2026-10-04-night-showroom-recap", date: "2026-10-04", sameDayOrder: 2230,
+    activityIds: ["live-stream"], title: "ラジオの余韻が残る夜、みんなへのありがとう",
+    body: "ラジオ1周年の振り返りに、画面越しの服の色や締めの言い間違いの話も。来られる時間に合わせた配信と、応援の輪を広げたい思いを、配信メモと当日の実写真8枚で振り返ります。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-b190-05-20261004-night-still.jpg", width: 380, height: 360, alt: "夜配信でマイクに手を添えて笑うみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-night-showroom`, ctaLabel: "夜の配信メモと写真を見る",
+  },
+  {
+    id: "2026-10-04-radio-anniversary-recap", date: "2026-10-04", activityIds: ["radio"],
+    title: "湘南シーサイドサークル1周年の放送メモ",
+    body: "番組1周年の放送を、16の話題と放送内のお便り5つの要約で振り返ります。番組の始まり、篠笛の紹介、防災フェア中継、おめでとうの演じ分け、感謝、新学期の一句まで、自動文字起こしをもとにした詳細メモです。",
+    sourceLabel: "当日の保存音声・自動文字起こし",
+    relatedUrl: `${site.siteUrl}/activities/radio/#2026-10-04-anniversary-mily-highlights`,
+    ctaLabel: "1周年の放送メモを見る",
+  },
+  {
+    id: "2026-10-04-day-showroom-recap", date: "2026-10-04", sameDayOrder: 1040,
+    activityIds: ["live-stream"], title: "昼の歌とおしゃべり、応援ありがとう",
+    body: "午前のラジオを終えた昼のSHOWROOM。星や投票へのお礼、声の話、クマを楽しむやりとりを振り返ります。当日の実フレーム6枚と、自動文字起こしをもとにした配信メモです。",
+    sourceLabel: "当日の保存録画・自動文字起こし",
+    media: { kind: "image", src: "/media/live/mily-b189-09-20261004-day-still.jpg", width: 640, height: 360, alt: "昼配信で大きな笑顔を見せるみりぃ" },
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-day-showroom`, ctaLabel: "昼の配信メモを見る",
+  },
+  {
+    id: "2026-10-04-morning-showroom-recap", date: "2026-10-04",
+    activityIds: ["live-stream", "miss-circle"],
+    activityMediaIds: ["live-stream"],
+    title: "ラジオ前の朝、キラキラ星と投票へのありがとう",
+    body: "10月4日朝のSHOWROOM配信を振り返ります。早朝の応援と投票報告への感謝、挨拶しやすいコメント欄への喜び、ラジオへ向かう前の気持ちをまとめました。\n\n見どころ・タイムライン・当日の実スクショ4枚を掲載しています。本文は自動文字起こしをもとにした要約です。現在の投票先や受付期間は、応援案内をご確認ください。",
+    sourceLabel: "10月4日SHOWROOM朝配信（保存録画・自動文字起こし）",
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-04-asa-showroom`,
+    ctaLabel: "朝の配信レポートと写真を見る",
+    media: { kind: "image", src: "/media/live/mily-b188-04-20261004-morning-still.jpg", alt: "ホワイトボードを掲げるみりぃ", width: 640, height: 360 },
+  },
+  {
+    id: "2026-10-04-confirmed-vote-support-video",
+    date: "2026-10-04",
+    dateBasis: "confirmed-on",
+    activityIds: ["miss-circle"],
+    title: "みりぃへの投票を呼びかける、5秒の動画",
+    body: "みりぃへの投票を呼びかける動画を、サイト内でご覧いただけます。再生ボタンを押してお楽しみください。音声はありません。\n\n10月4日に受領・内容確認した動画です。撮影・投稿日時は未確認。映像内の『3日目』は投稿時点の文言で、現在の日程を示すものではありません。動画内のリンク表示はタップできません。現在の投票先・受付期間は、下の応援案内をご確認ください。",
+    sourceLabel: "オーナー提供動画（撮影・投稿日時未確認）",
+    media: providedVoteVideo,
+    relatedUrl: `${site.siteUrl}/support/#vote-support-video`,
+    ctaLabel: "投票動画と公式投票案内を見る",
+  },
+  {
+    id: "2026-10-04-radio-anniversary-stories",
+    date: "2026-10-04",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "湘南シーサイドサークル1周年📻 スタジオからのStory2本",
+    body: "湘南シーサイドサークルの1周年を祝うInstagram Storyが届きました。スタジオに並ぶMily・マナティ・もこの3人と、トークテーマ『湘南シーサイドサークル』の案内。もう1本では、ピースする2人とともに『メッセージはこちらから送れます』とお便りを呼びかけています。\n\nラジオの聴取とお便りは、下のFM公式リンクから。メッセージフォームの入力項目をご確認のうえ、お送りください。\n\n10月4日に受領・内容確認したStoryの記録です。投稿日は未確認。動画は背景音楽を含まない映像のみで掲載しています。",
+    sourceLabel: "Instagram Story（投稿日未確認）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioAnniversaryStories[0],
+    additionalMedia: radioAnniversaryStories.slice(1),
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
+  {
+    id: "2026-10-04-tiktok-selfie",
+    date: tiktokOct04SelfieVideo.sourceDate,
+    title: "みりぃの表情を楽しむ、短いTikTok動画📱",
+    body: "10月4日、みりぃ（@seasidecircle）が、カメラに向かって表情を見せる短い縦型動画をTikTokに投稿しました。ブルーグレーのトップス姿のみりぃを、TikTok公式プレーヤーで楽しめます。動画の原音と投稿者表示はTikTok側でご確認ください。",
+    source: tiktokOct04SelfieVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    media: tiktokOct04SelfieVideo,
+  },
+  {
+    id: "2026-10-03-confirmed-tiktok-campus-makeup",
+    date: "2026-10-03",
+    dateBasis: "confirmed-on",
+    title: "大学に行くときは、薄いメイク💄",
+    body: "みりぃのTikTokに、大学へ行くときのメイクを紹介する短い動画が登場。10月3日に投稿内容を確認しました。投稿日は未確認です。元の動画はTikTok公式プレーヤーで見られます。",
+    source: tiktokCampusMakeupVideo.sourceUrl,
+    sourceLabel: "みりぃのTikTok投稿（投稿日未確認）",
+    media: tiktokCampusMakeupVideo,
+    message: { label: "みりぃの投稿本文", text: "大学に行く時はとにかくメイク薄い💄" },
+  },
+  {
+    id: "2026-10-03-morning-showroom-recap", date: "2026-10-03",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "四次審査の朝、歌とキラキラへのありがとう",
+    body: "10月3日朝のSHOWROOM配信を振り返ります。朝から届く応援や投票報告にお礼を伝え、歌とやりとりで盛り上がった約60分。1.2倍DAYの案内と、次の21時40分からの配信も確認しました。\n\n見どころ・タイムライン・実録画から選んだスクショ10枚を配信メモに掲載しています。投票先や無料ギフト審査とイベント審査の違いは、応援案内をご確認ください。",
+    sourceLabel: "10月3日SHOWROOM朝配信（保存録画・自動文字起こし）",
+    relatedUrl: `${site.siteUrl}/activities/live/#recap-2026-10-03-asa-showroom`,
+    ctaLabel: "朝配信のメモとスクショ10枚を見る",
+    additionalCtas: [{ label: "投票・無料ギフト・イベント審査の案内", url: "/support/" }],
+    media: { kind: "image", src: "/media/live/mily-b184-02-20261003-morning-still.jpg", width: 640, height: 360, alt: "朝配信で顔を近づけて笑うみりぃ" },
+  },
+  {
+    id: "2026-10-02-fourth-round-stream-schedule", date: "2026-10-02",
+    activityIds: ["live-stream", "miss-circle"],
+    title: "四次審査前半・10月3日〜7日の配信予定",
+    body: "みりぃが四次審査前半の配信予定を案内しました。10月3日は6:30〜7:30と21:40〜22:40。本人画像では5日間の13枠を案内しています。HOMEの予定一覧には終了予定時刻前の枠を表示します。時刻は2026年・JSTです。4日・7日の朝枠は画像に「きっかけ」と表記されています。\n\n画像の「3日と8日は1.2倍DAY」はSHOWROOMイベント審査の獲得ポイントの案内です。公式の対象時間は各05:00〜23:59。無料ギフト審査とイベント審査の違い・集計の注意は応援案内をご確認ください。8日の配信時刻はこの画像では未案内です。\n\n10月2日の本人告知に基づく予定です。変更は本人の最新Xをご確認ください。画像は全体を表示し、タップすると原寸で開けます。",
+    source: FOURTH_ROUND_SCHEDULE_X_URL, sourceLabel: "本人Xの予定案内",
+    media: fourthRoundScheduleNewsImage,
+    relatedUrl: "/support/", ctaLabel: "投票・無料ギフト・イベント審査の案内",
+  },
+  {
+    id: "2026-10-01-mixch-kossori",
+    date: "2026-10-01",
+    activityIds: ["campus-girls"],
+    title: "ミクチャ「君だけにこっそり教えてあげる〜」",
+    body: "10月1日、みりぃがXでミクチャ動画「君だけにこっそり教えてあげる〜╰(*´︶`*)╯♡」を紹介しました。キャンガル2027にも出場中で、本選までに自分を知ってもらう期間だと伝え、応援を呼びかけています。\n\n動画は9月29日にミクチャへ投稿されたものです。サムネイルをタップすると、ミクチャの元動画が開きます。",
+    source: "https://x.com/Mily_chan36/status/2105482567290102013",
+    sourceLabel: "Xの投稿を見る",
+    url: mixchKossoriMovie.mixchUrl,
+    ctaLabel: "Mixchで見る",
+    media: mixchKossoriMovie,
+  },
+  {
+    id: "2026-09-29-record-cafe-mily-collection",
+    date: "2026-09-29",
+    title: "レコードカフェ第二弾🍰☕️【みりぃ集】",
+    body: "みりぃが、あみちゃんと訪れたレコードカフェでの写真を投稿しました。レコード棚の前でのポーズや、ヘッドホンを着けてピンクのレコードとケーキを楽しむ場面など、7枚をまとめて紹介します。みりぃは、写真をたくさん撮ってくれたあみちゃん（@amis2_m.h）へ感謝を伝えています。\n\n写真は本人投稿としてオーナーから提供されたものです。元投稿の恒久URL・投稿日は未確認のため、表示日はサイトへの受領日です。",
+    sourceLabel: "みりぃのSNS投稿（元投稿URL未確認）",
+    media: recordCafeMilyNewsImages[0],
+    additionalMedia: recordCafeMilyNewsImages.slice(1),
+  },
+  {
+    id: "2026-09-27-radio-kawaii-story",
+    date: "2026-09-27",
+    activityIds: ["radio"],
+    title: "9/27のラジオは『かわいい』がテーマ📻 お便りも募集中",
+    body: "みりぃがInstagram Storyで、9月27日（日）10:00〜13:00の『湘南シーサイドサークル』を案内しました。トークテーマは『かわいい』。黒い眼鏡のフィルターにピースとウインクを添えた動画に加え、スタジオでディレクターのマナティーさんとヘッドホンを着けた2ショットも。星のフィルター姿でお便りの送り口を指さす動画と、くま耳のウインク写真も届きました。写真1枚・動画3本で、放送に向けたみりぃの表情を楽しめます。\n\nお便りは下のFM公式フォームから送れます。ラジオネームとは別に氏名・メールアドレスなどの入力欄があるため、フォームの案内を確認してからお送りください。\n\nこのお知らせは9月27日放送の案内記録です。動画は背景音楽を含まない映像のみの掲載です。",
+    sourceLabel: "Instagram Story",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: kawaiiRadioStoryVideo,
+    additionalMedia: [kawaiiRadioMessageImage, ...kawaiiRadioAdditionalVideos],
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
+{
+  "id": "2026-09-26-fanroom-night-thanks-board",
+  "date": "2026-09-26",
+  "sameDayOrder": 20,
+  "title": "みんなとファイナルへ。夜配信のお礼とボードのメッセージ",
+  "body": "9月26日の夜配信後、みりぃがSHOWROOMファンルームに写真とお礼を届けました。23:36に投稿された写真には、ルームに来てくれるみんなへの「Love」と、次回の「5:30〜」を書いたホワイトボードを手にする姿が。\n\n続く23:38の投稿では、夜枠に来てくれた皆さんへ感謝を伝え、「みんなと絶対にファイナル行くんだから」と、ファイナルを目指す思いを綴りました。最後は「おやすみりぃ」の言葉で締めくくっています。\n\n投稿時点の翌日・9月27日の配信予定は、朝5:30〜、夜22:30〜。終了時刻の案内はありません。予定は変更になる場合があるため、最新の案内はSHOWROOMでご確認ください。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "message": {
+    "label": "みりぃのメッセージより抜粋（23:38）",
+    "text": "みんなと絶対にファイナル行くんだから"
+  },
+  "media": {
+    "kind": "image",
+    "src": "/media/news/mily-b167-01-night-thanks-board-1600.jpg",
+    "srcSet": "/media/news/mily-b167-01-night-thanks-board-480.jpg 480w, /media/news/mily-b167-01-night-thanks-board-960.jpg 960w, /media/news/mily-b167-01-night-thanks-board-1600.jpg 1206w",
+    "webpSrcSet": "/media/news/mily-b167-01-night-thanks-board-480.webp 480w, /media/news/mily-b167-01-night-thanks-board-960.webp 960w, /media/news/mily-b167-01-night-thanks-board-1600.webp 1206w",
+    "sizes": "(min-width: 640px) 24rem, 100vw",
+    "width": 1206,
+    "height": 666,
+    "alt": "紺色のトップス姿のみりぃが、ルームに来てくれるみんなへのLoveとNEXT：5:30〜を書いたホワイトボードを掲げる写真"
+  },
+  "relatedUrl": "https://www.showroom-live.com/r/circle2026_0734",
+  "ctaLabel": "SHOWROOMで最新の案内を見る"
+},
+{
+  "id": "2026-09-26-fanroom-recording-finished",
+  "date": "2026-09-26",
+  "sameDayOrder": 10,
+  "title": "「収録終わったー！」写真とともに届いた午後の報告",
+  "body": "9月26日16:16、みりぃがSHOWROOMファンルームに写真を投稿。同じ時刻に「収録終わったー！」と、収録を終えたことを知らせてくれました。\n\n添えられたのは、レンガ調の壁を背景に、髪に手を添えてカメラを見つめる一枚。紺色のトップス姿の写真とともに、「また連絡する📞」という言葉も届けていました。\n\n収録、おつかれさまでした。次のお知らせも楽しみにしています。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "media": {
+    "kind": "image",
+    "src": "/media/news/mily-b166-01-recording-finished-fanroom-1600.jpg",
+    "srcSet": "/media/news/mily-b166-01-recording-finished-fanroom-480.jpg 480w, /media/news/mily-b166-01-recording-finished-fanroom-960.jpg 960w, /media/news/mily-b166-01-recording-finished-fanroom-1600.jpg 1206w",
+    "webpSrcSet": "/media/news/mily-b166-01-recording-finished-fanroom-480.webp 480w, /media/news/mily-b166-01-recording-finished-fanroom-960.webp 960w, /media/news/mily-b166-01-recording-finished-fanroom-1600.webp 1206w",
+    "sizes": "(min-width: 640px) 24rem, 100vw",
+    "width": 1206,
+    "height": 670,
+    "alt": "レンガ調の壁を背景に、紺色のトップス姿で髪に手を添えてカメラを見つめるみりぃ"
+  }
+},
+{
+  "id": "2026-09-26-fanroom-morning-dream-gongcha",
+  "date": "2026-09-26",
+  "title": "夢の中でもファンルーム。朝ラジオの一枚をお届け",
+  "body": "9月26日朝のラジオ配信後、みりぃが7:48にSHOWROOMファンルームを更新。短めの朝枠になったことに触れ、「寝る！！二度寝する！！」と、ひと休みすることを伝えました。\n\n配信でも話していた夢の話には、もう一つ続きが。ファンルームにたくさんの返信が届く夢も見ていたことを、投稿を書きながら思い出したそうです。笑い泣きの絵文字を添えて届けられた、朝のおしゃべりの小さな後日談です。\n\n一緒に投稿されたのは、青いリボンを付け、ゴンチャのカップを掲げる写真。「今日ラジオで掲げた写真」と本人が紹介した一枚を、ここでもお届けします。\n\n夜の配信については、この投稿時点で「早くても19:00〜」が目安になると思うと案内し、改めて連絡すると伝えていました。確定した開始時刻の告知ではありません。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "media": {
+    "kind": "image",
+    "src": "/media/news/mily-b165-01-gongcha-fanroom-1600.jpg",
+    "srcSet": "/media/news/mily-b165-01-gongcha-fanroom-480.jpg 480w, /media/news/mily-b165-01-gongcha-fanroom-960.jpg 960w, /media/news/mily-b165-01-gongcha-fanroom-1600.jpg 1206w",
+    "webpSrcSet": "/media/news/mily-b165-01-gongcha-fanroom-480.webp 480w, /media/news/mily-b165-01-gongcha-fanroom-960.webp 960w, /media/news/mily-b165-01-gongcha-fanroom-1600.webp 1206w",
+    "sizes": "(min-width: 640px) 24rem, 100vw",
+    "width": 1206,
+    "height": 679,
+    "alt": "青いリボンと紺色のトップス姿のみりぃが、赤いストローを挿したゴンチャのカップを顔の横に掲げる写真"
+  },
+  "url": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-09-26-morning-radio",
+  "ctaLabel": "朝のラジオ配信レポートを読む"
+},
+{
+  "id": "2026-09-25-fanroom-thanks-and-finals",
+  "date": "2026-09-25",
+  "sameDayOrder": 30,
+  "title": "みんなの愛を受け取って。感謝とファイナルへの思い",
+  "body": "9月25日の夜配信後、みりぃがSHOWROOMのファンルームに残したのは、話を聴いてくれた人への感謝と、ファイナルを目指す思いでした。\n\n23:06の投稿では、その夜に弱音を聴いてくれた皆さんへお礼を伝えました。普段は明るく過ごしていても、ときには涙を流しながらしょげてしまうこともあると、自分の言葉で振り返っています。\n\n続く23:07の投稿では、これまでの経験を振り返り、そんなときの先には素敵な未来が待っていた、と前向きな見方を綴りました。弱いところを見せることもあるけれど、またパワーアップした自分を待っていてくれたらうれしい。その思いとともに、ファイナルへ向けて努力を続けると伝えています。\n\n23:08には配信画面の写真を投稿し、23:09には「みんなからの愛をいただきました」と感謝を届けました。話を聴いてくれたことへのお礼、再びパワーアップした姿を届けたいという思い、そしてファイナルを目指す決意。配信後のメッセージには、受け取った応援への感謝と、これからも歩みを続けたい気持ちが綴られていました。",
+  "sourceLabel": "SHOWROOMファンルーム",
+  "message": {
+    "label": "みりぃのメッセージより抜粋（23:07／23:09）",
+    "text": "必ずファイナルに行けるよう努力し続けるので、見ててね🎀🩵\n\nみんなからの愛をいただきました❤️\n大好きです。いつもありがとう。"
+  },
+  "url": "https://mily-fan-site.vercel.app/activities/live/#recap-2026-09-25-night-showroom",
+  "ctaLabel": "同じ夜の配信レポートを読む"
+},
+  {
+    id: "2026-09-25-super-oreo-mcflurry-x",
+    date: "2026-09-25",
+    sameDayOrder: 20,
+    title: "君はマックフルーリー超オレオの鏡だ🪞",
+    body: "9月25日18:25、みりぃがXで、テーブルの上のマックフルーリー超オレオの写真とともに投稿しました。",
+    source: "https://x.com/Mily_chan36/status/2103415595043852403",
+    sourceLabel: "みりぃのX投稿を見る",
+    media: superOreoMcflurryImage,
+    message: {
+      label: "みりぃのX",
+      text:
+        "こんなに“超オレオ”を全うしてるフルーリーある？\n" +
+        "君は“マックフルーリー超オレオ”の鏡だ🪞✨",
+    },
+  },
+  {
+    id: "2026-09-25-first-avatar-distribution-x",
+    date: "2026-09-25",
+    title: "朝からありがとう。昨夜の初アバ配布🎀🩵",
+    body: "9月25日7:48、みりぃがXで、朝の配信に来てくれた人へのお礼を伝えました。文面の「昨日の夜」は9月24日夜の初アバター配布で、たくさんの人に着替えてもらえて幸せだったと投稿しています。添えられた配信画面2枚も、同じ投稿のまま掲載しています。画面内の表示名と順位は本文へ書き写していません。",
+    source: "https://x.com/Mily_chan36/status/2103255202749198794",
+    sourceLabel: "みりぃのX投稿を見る",
+    media: firstAvatarDistributionImages.point,
+    additionalMedia: [firstAvatarDistributionImages.heart],
+    message: {
+      label: "みりぃのX",
+      text:
+        "朝から配信に来てくれた皆様ありがとう╰(*´︶`*)╯♡\n" +
+        "\n" +
+        "昨日の夜の初アバ配布の様子をお届け🎀🩵\n" +
+        "たーくさんの方に着替えてもらえて幸せです。\n" +
+        "\n" +
+        "みりぃさん、これからも頑張るどー‼️",
+    },
+  },
+  {
+    id: "2026-09-24-tiktok-good-vibes",
+    date: tiktokGoodVibesVideo.sourceDate,
+    title: "みりぃの表情とポーズを楽しむTikTok",
+    body: "9月24日、ラジオDJネキみりぃ（@seasidecircle）が短い縦型動画をTikTokに投稿しました。青い服のみりぃがカメラに向かい、ウインクや両手のポーズなど、次々に表情を見せています。動画はTikTokの公式プレーヤーで再生できます。",
+    source: tiktokGoodVibesVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    media: tiktokGoodVibesVideo,
+  },
+  {
+    id: "2026-09-24-face-to-face-class-story",
+    date: "2026-09-24",
+    title: "今日は対面授業へ。みりぃの朝ストーリー🐾",
+    body: "9月24日朝、みりぃがInstagram Storyを投稿。前日はオンライン授業の日に大学へ向かってしまったことを振り返りつつ、この日は対面授業へ。猫耳フィルターとウインクを交えながら、今日も一緒に乗り越えようとメッセージを届けています。",
+    sourceLabel: faceToFaceClassStoryVideo.sourceLabel,
+    media: faceToFaceClassStoryVideo,
+  },
+  {
+    id: "2026-09-23-fanroom-selfie-voices",
+    date: "2026-09-23",
+    sameDayOrder: 30,
+    title: "みりぃからの連絡💌 音声と自撮りをお届け",
+    body: "9月23日10:27、SHOWROOMファンルームに音声と青いリボン姿の自撮りを投稿。10:28には風で髪がボサボサになったことを伝え、10:31には『やらかしみりぃでーす』とひとこと。10:32の音声も合わせて聴けます。",
+    sourceLabel: "SHOWROOMファンルーム",
+    url: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    ctaLabel: "元のファンルームを見る",
+    media: september23FanroomImage,
+    additionalMedia: [fanroomVoice1027, fanroomVoice1032],
+  },
+  {
+    id: "2026-09-23-morning-commute-x",
+    date: "2026-09-23",
+    title: "朝枠ありがとう。大学へ行ってきます🎀",
+    body: "9月23日朝、みりぃがXで朝の配信に来てくれた人へのお礼を伝えました。久しぶりに通学の電車で座れたという近況や、休みの人への言葉とともに、大学へ向かう様子を投稿。夜枠21:30〜は投稿時点の予定です。添付された、くまのフィルターを付けた短い動画も掲載しています。",
+    source: "https://x.com/Mily_chan36/status/2102557553435836694",
+    sourceLabel: "みりぃのX投稿を見る",
+    media: morningXVideo,
+  },
+  {
+    id: "2026-09-23-morning-commute-story",
+    date: "2026-09-23",
+    title: "朝枠ありがとう。通学中のストーリー",
+    body: "みりぃがInstagram Storyで朝枠に来てくれた皆さんへお礼を伝えました。電車で座れた近況や、今日も一緒に一日頑張ろうというメッセージを、ハートのフィルターを付けた短い動画に重ねています。",
+    sourceLabel: morningCommuteStoryVideo.sourceLabel,
+    media: morningCommuteStoryVideo,
+    message: {
+      label: "ストーリーの文字",
+      text: "皆様おはようございます🌞💖\n朝枠来てくれたみんなありがとう\nいつもの通学では座れない時間帯の電車で座れたみりぃです。\nシルバーウィークの影響かなぁぁ！\n今日も一緒に一日中頑張ろう〜✨",
+    },
+  },
+  {
+    id: "2026-09-23-paton-thanks-story",
+    date: "2026-09-23",
+    title: "Paton投票への感謝と、本選への思い",
+    body: "みりぃがInstagram Storyで、Paton投票に協力してくれた皆さんへ感謝を伝えました。本選までに再び投票期間があることにも触れ、配信ができない分、投票やSNSで自分を知ってもらいながら頑張りたいと綴っています。順位画像には支援者の名前が載っているため、サイトでは文章のみを紹介します。",
+    sourceLabel: "Instagram Story",
+  },
+  {
+    id: "2026-09-22-tiktok-ami-meet",
+    date: "2026-09-22",
+    title: "「あみちゃんに会ってきたの〜」TikTok",
+    body: "9月22日、ラジオDJネキみりぃのTikTokに、フレキャン2026出場中のあみちゃんに会ったときの動画が投稿されました。屋内の階段前で、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが並び、ピンクのハートのフィルターを付けて手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、終始お話ししすぎて音楽を聞くお店だったのに語りまくったことと、今度はお話しし放題のところで会おうと伝えています。",
+    source: tiktokAmiMeetVideo.sourceUrl,
+    sourceLabel: "ラジオDJネキみりぃのTikTok投稿を見る",
+    additionalSources: [
+      {
+        label: "みりぃのX投稿を見る",
+        url: "https://x.com/Mily_chan36/status/2102326348996137262",
+      },
+    ],
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiMeetVideo,
+    message: {
+      label: "ラジオDJネキみりぃの投稿",
+      text: "フレキャン2026出場中のあみちゃん@Ami に会ってきたの〜🫦🩵✨終始お話ししすぎて、音楽聞くお店だったのに語りまくるという。今度はお話しし放題のところで会おうねっ✌🏻🎀#ミスサー #フレキャン #ミスコン",
+    },
+  },
+  {
+    id: "2026-09-22-tiktok-ami-meet-story",
+    date: "2026-09-22",
+    title: "「あみちゃんに会ってきたのよ〜」TikTok",
+    body: "9月22日、ラジオDJネキみりぃのTikTokに、フレキャン出場中のあみちゃんに会ったときの縦型動画が投稿されました。画面には「フレキャン出場中のあみちゃんに会ってきたのよ〜」とあり、格子の床に並んで寝そべるみりぃと天宮あみさんのクリップが上下に重なっています。恒久的な投稿URLは確認できていません。",
+    sourceLabel: tiktokAmiMeetStoryVideo.sourceLabel,
+    relatedUrl: "https://www.tiktok.com/@seasidecircle",
+    ctaLabel: "ラジオDJネキみりぃのTikTokを見る",
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiMeetStoryVideo,
+    message: {
+      label: "画面の文字",
+      text: "フレキャン出場中のあみちゃんに会ってきたのよ〜💋🩵✨",
+    },
+  },
+  {
+    id: "2026-09-22-tiktok-ami-twin-coord",
+    date: "2026-09-22",
+    title: "「水玉で双子コーデにしたんだよぉ」TikTok",
+    body: "9月22日、天宮あみさんのTikTokに、みりぃと水玉の双子コーデをしたときの動画が投稿されました。格子の床に並んで寝そべり、黒い水玉のトップスのみりぃと白い水玉のトップスの天宮あみさんが手を動かしたりポーズを取ったりしている短い縦型動画です。",
+    source: tiktokAmiTwinCoordVideo.sourceUrl,
+    sourceLabel: "天宮あみさんのTikTok投稿を見る",
+    additionalSources: [
+      {
+        label: "みりぃのX投稿を見る",
+        url: "https://x.com/Mily_chan36/status/2102327155162267936",
+      },
+    ],
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiTwinCoordVideo,
+    message: {
+      label: "天宮あみさんの投稿",
+      text: "水玉で双子コーデにしたんだよぉ@ラジオDJネキみりぃ🛜  #フレキャン2026 #ミスサー2026 #ミスコン  #大学生 #双子コーデ",
+    },
+  },
+  {
+    id: "2026-09-21-agestock-yokohama",
+    date: "2026-09-21",
+    title: "AGESTOCK2026 in横アリに参戦🎀",
+    body: "9月21日、みりぃがXで「AGESTOCK2026 in横アリ 参戦🎀」と報告。同じくミスサー出場者のきらりちゃん（@circle2026_1612）と参戦したことを伝えています。",
+    source: "https://x.com/Mily_chan36/status/2101944527695057190",
+    sourceLabel: "Xの投稿を見る",
+    additionalCtas: [
+      {
+        label: "きらりちゃんの公式紹介（ENTRY 1612）を見る",
+        url: "https://2026.misscircle.jp/entry/1612",
+      },
+      {
+        label: "きらりちゃんのSHOWROOMを見る",
+        url: "https://www.showroom-live.com/r/circle2026_1612",
+      },
+      {
+        label: "きらりちゃんのXを見る",
+        url: "https://x.com/circle2026_1612",
+      },
+    ],
+    media: agestockYokohamaNewsImages.twoShot,
+    additionalMedia: [agestockYokohamaNewsImages.group],
+  },
+  {
+    id: "2026-09-21-tiktok-ami-tokyo",
+    date: "2026-09-21",
+    title: "「東京で遊んでいただきました」TikTok",
+    body: "9月21日、天宮あみさんのTikTokに、みりぃと東京で遊んだときの動画が投稿されました。屋内の階段前で、白いトップスのみりぃと黒いトップスの天宮あみさんが並び、手を動かしたりポーズを取ったりしている短い縦型動画です。投稿では、ミスサーの三橋莉子さんに東京で遊んでいただいたことと、ファイナリストになって韓国へ行く約束に触れています。",
+    source: tiktokAmiTokyoVideo.sourceUrl,
+    sourceLabel: "天宮あみさんのTikTok投稿を見る",
+    additionalCtas: [
+      {
+        label: amiMilyKoreaPromise.amiEntry.label,
+        url: amiMilyKoreaPromise.amiEntry.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiX.label,
+        url: amiMilyKoreaPromise.amiX.url,
+      },
+      {
+        label: amiMilyKoreaPromise.amiTikTok.label,
+        url: amiMilyKoreaPromise.amiTikTok.url,
+      },
+    ],
+    media: tiktokAmiTokyoVideo,
+    message: {
+      label: "天宮あみさんの投稿",
+      text: "ミスサーの三橋莉子@ラジオDJネキみりぃ🛜 さんに東京で遊んでいただきましたぁ🫶🏻︎💕︎︎ りこさんとの約束🤞ファイナリストになって韓国だ🇰🇷 #フレキャン2026 #ミスサー2026 #EBiDAN #ミスコン #大学生",
+    },
+  },
+  {
+    id: "2026-09-20-cold-umbrella-story",
+    date: "2026-09-20",
+    title: "寒がりのみりいには耐え難い気温かも",
+    body: "9月20日、みりぃがInstagram Storyで、銀の傘の下からくまの耳と鼻のフィルターを付けた縦型動画を届けました。画面には「みんな〜 寒がりのみりいには耐え難い気温かも」「行ってきまーす」とあり、出かける直前の様子です。同じ日のXでも、寒がりであることと体調管理を呼びかけています。",
+    sourceLabel: coldUmbrellaStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalSources: [
+      {
+        label: "みりぃのX",
+        url: "https://x.com/Mily_chan36/status/2101590482250088823",
+      },
+    ],
+    media: coldUmbrellaStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text:
+        "みんな〜\n" +
+        "寒がりのみりいには耐え難い気温かも🥶🥶🥶\n" +
+        "行ってきまーす٩(ˊᗜˋ*)و♪",
+    },
+  },
+  {
+    id: "2026-09-18-kikkake-and-regular-stream",
+    date: "2026-09-18",
+    sameDayOrder: 10,
+    activityIds: ["live-stream"],
+    title: "13:40〜「初！きっかけ配信」、通常配信は15:30まで",
+    body: "9月18日13:37、みりぃがXで、13:40〜14:40の「初！きっかけ配信」と、その後の通常配信を15:30まで行うと案内しました。16:07時点では配信は終了しており、次回配信は未定でした。",
+    source: "https://x.com/Mily_chan36/status/2100806349680713766",
+    sourceLabel: "Xの投稿を見る",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    ctaLabel: "SHOWROOMを見る",
+    message: {
+      label: "みりぃのX",
+      text:
+        "13:40〜14:40初！きっかけ配信🛜\n" +
+        "終わったら通常配信を15:30までやります💖\n" +
+        "見にきてくれたら喜びます‼︎",
+    },
+  },
+  {
+    id: "2026-09-18-campus-girls-paton-15x-story",
+    date: "2026-09-18",
+    activityIds: ["campus-girls"],
+    title: "Paton投票本日1.5倍DAY",
+    body: "9月18日朝、みりぃがInstagram Storyで、CAMPUS GIRLS 2027のPaton投票が本日1.5倍DAYであることを案内しました。画面上部に「キャンガール」、リンクスタンプに「Paton投票本日1.5倍DAY」と出ています。紺の花柄トップスに水色のストライプリボンをつけ、前髪に触れながらカメラを見ている短い動画です。",
+    sourceLabel: campusGirlsPatonFifteenXStoryVideo.sourceLabel,
+    relatedUrl: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    additionalCtas: [
+      {
+        label: campusGirlsFinalsExPatonVoteLink.label,
+        url: campusGirlsFinalsExPatonVoteLink.url,
+      },
+    ],
+    media: campusGirlsPatonFifteenXStoryVideo,
+    message: {
+      label: "みりぃのStory",
+      text: "キャンガール\nPaton投票本日1.5倍DAY\u{1F64F}\u{1F499}\u2728",
+    },
+  },
   {
     id: "2026-09-16-miss-circle-fourth-round",
     date: "2026-09-16",
@@ -229,6 +1114,19 @@ export const news: NewsItem[] = [
       { label: "みりぃのX", url: "https://x.com/Mily_chan36/status/2100162935473807484" },
     ],
     ctaLabel: "公式の進出者一覧を見る",
+  },
+  {
+    id: "2026-09-16-tiktok-kossori",
+    date: "2026-09-16",
+    title: "「君だけにこっそり教えてあげるっ」TikTok",
+    body: "9月16日、湘南シーサイドサークルのTikTokに、みりぃの動画が投稿されました。猫耳フィルターをつけ、ハートやヒョウ柄のメガネなどのスタンプを変えながら、指を立てたりハートを作ったりしている短い縦型動画です。",
+    source: tiktokKossoriVideo.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+    media: tiktokKossoriVideo,
+    message: {
+      label: "湘南シーサイドサークルの投稿",
+      text: "君だけにこっそり教えてあげるっ🩷",
+    },
   },
   {
     id: "2026-09-15-night-fanroom-thanks",
@@ -796,6 +1694,7 @@ WEB投票は9月3日12:00〜9月13日23:59、SHOWROOMの無料ギフト審査・
     date: "2026-09-01",
     sameDayOrder: 20,
     activityIds: ["live-stream"],
+    activityMediaIds: [], // HOME / NEWS-only stills; do not propagate to Activity media.
     title: "9月初配信、おやすみりー",
     body: "9月1日22:31から翌0:19頃まで、約1時間48分。9月はじめての配信。すっぴんで、帽子で前髪が潰れた、うるうるカラコンで目が乾いた、と話していた。今月の目標は「ミリィの栄養素」70人。ボードの1人目はあっきーさん、2人目はやすぴさん。パトン投票はその夜が最終日で、当時2位。最後はおやすみなさい、おやすみりー、おみりー。山を一歩ずつ登って、肩を組んで這い上がろう、という話もあった。",
     sourceLabel: "SHOWROOM",

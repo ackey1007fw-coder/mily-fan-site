@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readdir, readFile } from "node:fs/promises";
@@ -14,10 +15,10 @@ import { ohayoSeptemberXVideo } from "../src/data/ohayoSeptemberXVideo.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { septemberMilyStoryVideo } from "../src/data/septemberMilyStoryVideo.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { contest } from "../src/data/contest.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { verifyNews } from "./content-invariants.mjs";
 import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
 import {
@@ -246,7 +247,7 @@ describe("2026-09-01 X おはよ〜 今日から9月ー — scope and identity",
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "3次審査");
+    assert.notEqual(contest.currentPhase?.source, news.find(({ id }) => id === NEWS_ID)?.source);
 
     for (const relative of [
       "src/data/media.ts",

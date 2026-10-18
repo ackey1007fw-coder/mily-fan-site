@@ -1,11 +1,12 @@
 import { contest } from "../data/contest";
 import { links } from "../data/links";
-import { supportEvents } from "../data/supportEvents";
+import { supportEvents, missCircleFourthRoundWebVote } from "../data/supportEvents";
 import { selectHomeVoteActions } from "../lib/homePortal";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
 import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
+import { ShowroomAdRewardTeaser } from "./ShowroomAdRewardGuide";
 
 /**
  * ホームの compact Support gateway。
@@ -62,6 +63,10 @@ export function Support() {
             </ExternalLink>
           ))}
         </div>
+        <ShowroomAdRewardTeaser />
+        {missCircleFourthRoundWebVote.schedule.state === "confirmed-period" && now <= Date.parse(missCircleFourthRoundWebVote.schedule.end) ? <a href={`${SUPPORT_HUB_ROUTE}#fourth-round-guide`} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline">
+          四次審査の日程・投票・SHOWROOMの応援方法
+        </a> : null}
         {gatewayVoteActions.some(({ note }) => note) ? (
           <div className="mt-3 space-y-1">
             {gatewayVoteActions.map((action) =>

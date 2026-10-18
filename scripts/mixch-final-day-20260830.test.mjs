@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { readdir } from "node:fs/promises";
 import { describe, it } from "node:test";
@@ -15,8 +16,8 @@ import {
 } from "../src/data/galleryVideos.ts";
 import { news, newsDisplayMedia, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { verifyNews } from "./content-invariants.mjs";

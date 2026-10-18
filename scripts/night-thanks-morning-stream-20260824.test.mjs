@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -18,7 +19,7 @@ import {
 import { events } from "../src/data/events.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { stories } from "../src/data/stories.ts";
 import { createPortalFeed } from "./fixtures/portal-feed-before-b41.ts";
 import { selectActivityNews } from "./fixtures/activity-content-before-b41.ts";
@@ -548,6 +549,7 @@ describe("2026-08-24 night thanks morning stream — privacy", () => {
   it("keeps Portal Feed aligned with the new Latest lead", () => {
     const feed = createPortalFeed({
       newsItems: news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3"),
+      storyItems: stories.filter((story) => story.date <= "2026-09-22"),
     });
     const entry = feed.items.find((candidate) => candidate.id === `mily:news:${NEWS_ID}`);
     const latestIds = sortNewsByDateDesc(news.filter((entry) => entry.id !== "2026-08-28-stream-thanks").filter((entry) => entry.id !== "2026-08-28-paton-vote-day-3").filter((entry) => entry.id !== "2026-08-27-mixch-expressive").filter((entry) => entry.id !== "2026-08-27-paton-vote-how-to").filter((entry) => entry.id !== "2026-08-27-x-followers-100").filter((entry) => entry.id !== "2026-08-27-seaside-circle-movie-theme-story").filter((entry) => entry.id !== "2026-08-27-miss-circle-showroom-story").filter((entry) => entry.id !== "2026-08-27-movie-night")).map((candidate) => candidate.id);

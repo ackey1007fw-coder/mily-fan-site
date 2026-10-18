@@ -1,5 +1,11 @@
 # Historical content views
 
+The October 11 b201 radio Story NEWS and two Gallery videos are also excluded
+from the September 22 historical snapshot (`as-of-20260922.mjs`), while their
+current production media, NEWS registration, and archive paths are checked by
+`radio-oct11-stories.test.mjs` and the current typecheck/build. This preserves
+the original historical count and order assertions without suppressing any tests.
+
 The dated regression suites under `scripts/` capture the editorial state that
 existed before batch b41. Many of those suites intentionally assert the top
 NEWS/Gallery position or an exact item count from that point in time.
@@ -20,3 +26,5 @@ tested directly against the production modules in
 tested in `x-posts-20260829-showroom-radio.test.mjs`, the 8/30 Mixch
 movie is tested in `mixch-final-day-20260830.test.mjs`, and the 8/30〜31
 X posts are tested in `x-posts-20260830-31-news.test.mjs`.
+
+The October 2 b183 first-party schedule poster and NEWS are excluded from these older views. Current content is covered directly by `fourth-round-stream-schedule-20261003.test.mjs`; historical expected counts and orders remain unchanged.

@@ -47,6 +47,12 @@ export function ChallengeConnection() {
               {item.amiX.label}
             </ExternalLink>
             <ExternalLink
+              href={item.amiTikTok.url}
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-rose-200 bg-rose-50 px-5 py-2.5 text-sm font-semibold text-rose-700 hover:bg-rose-100"
+            >
+              {item.amiTikTok.label}
+            </ExternalLink>
+            <ExternalLink
               href={contest.entryUrl}
               className="inline-flex min-h-11 items-center justify-center rounded-full border border-sage/30 bg-paper px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
             >

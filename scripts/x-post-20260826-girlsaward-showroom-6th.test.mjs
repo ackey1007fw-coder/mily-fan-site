@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -14,7 +15,7 @@ import {
   featuredPhoto,
   media,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import {
   GIRLSAWARD_SHOWROOM_6TH_X_URL,
   girlsawardShowroomSixthImage,
@@ -270,7 +271,7 @@ describe("2026-08-26 GirlsAward SHOWROOM 6th-place X post — scope and ordering
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
 
     const { events } = await import("../src/data/events.ts");
-    const { streamSchedule } = await import("../src/data/streamSchedule.ts");
+    const { streamSchedule } = await import("./fixtures/stream-schedule-before-b183.ts");
     assert.deepEqual(events, []);
     assert.equal(
       streamSchedule.some((entry) => JSON.stringify(entry).includes("girlsaward")),

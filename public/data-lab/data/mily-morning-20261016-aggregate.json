@@ -1,0 +1,195 @@
+{
+  "schema": 1,
+  "subject": "Mily SHOWROOM post-fourth-round October 16 morning broadcast",
+  "date_jst": "2026-10-16",
+  "slot": "morning",
+  "live_id": 23559940,
+  "scope": "public anonymized normal-visible-screen counter reference observations and verified recording metadata",
+  "event_partition": {
+    "analysis_cutoff_jst": "2026-10-12T22:00:00+09:00",
+    "this_broadcast_excluded_from_fourth_round_total": true,
+    "new_event_identity": "unconfirmed",
+    "not_official_semifinal_event_points": true
+  },
+  "recording_processing_window_jst": {
+    "start": "2026-10-16T06:35:03+09:00",
+    "end": "2026-10-16T07:32:07+09:00",
+    "not_equal_to_confirmed_broadcast_start_end": true
+  },
+  "recording": {
+    "exists": true,
+    "saved": true,
+    "ffmpeg_exit_code": 0,
+    "size_bytes": 422068380,
+    "media_duration_seconds": 3372.448,
+    "video": {
+      "codec": "h264",
+      "width": 640,
+      "height": 360
+    },
+    "audio": {
+      "codec": "aac"
+    },
+    "full_content_reviewed": false,
+    "complete_coverage_confirmed": false,
+    "hls_transport_errors_recorded": true
+  },
+  "observed_screen": {
+    "last_valid_online_observed_at_jst": "2026-10-16T07:32:54.641+09:00",
+    "stars": 3643,
+    "total_visits": 247,
+    "comments": 338,
+    "first_visits": 11,
+    "second_visits": 14,
+    "other_free": 40,
+    "new_follows": 1,
+    "star_100_contributor_count": 34,
+    "recommended_commenter_count": 33,
+    "confirmed_final": false
+  },
+  "data_quality": {
+    "online_counter_timeline_rows": 324,
+    "valid_session_and_all_three_main_counters": 311,
+    "excluded_or_incomplete_rows": 13,
+    "collector_raw_observations": 200,
+    "collector_disconnect_count": 1,
+    "collector_end_confirmed_flag": false,
+    "extended_sidecar_online_counters": true,
+    "last_valid_counter_not_final_total": true,
+    "ui_offline_observations": 3,
+    "first_offline_observed_at_jst": "2026-10-16T07:33:08.630+09:00",
+    "ui_end_confirmed_at_jst": "2026-10-16T07:33:28.663+09:00",
+    "ui_end_confirmed": true,
+    "actual_broadcast_end_time_confirmed": false,
+    "capture_coverage_complete": false,
+    "participant_unique_count": null
+  },
+  "five_minute_window_endpoints": [
+    {
+      "observed_at_jst": "2026-10-16T06:39:57.836+09:00",
+      "stars": 300,
+      "total_visits": 18,
+      "comments": 32,
+      "first_visits": 0,
+      "second_visits": 1
+    },
+    {
+      "observed_at_jst": "2026-10-16T06:44:53.655+09:00",
+      "stars": 771,
+      "total_visits": 38,
+      "comments": 73,
+      "first_visits": 0,
+      "second_visits": 4
+    },
+    {
+      "observed_at_jst": "2026-10-16T06:49:50.134+09:00",
+      "stars": 1121,
+      "total_visits": 64,
+      "comments": 112,
+      "first_visits": 3,
+      "second_visits": 5
+    },
+    {
+      "observed_at_jst": "2026-10-16T06:54:51.289+09:00",
+      "stars": 1551,
+      "total_visits": 82,
+      "comments": 139,
+      "first_visits": 3,
+      "second_visits": 5
+    },
+    {
+      "observed_at_jst": "2026-10-16T06:59:46.977+09:00",
+      "stars": 1831,
+      "total_visits": 100,
+      "comments": 171,
+      "first_visits": 4,
+      "second_visits": 6
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:04:53.874+09:00",
+      "stars": 2181,
+      "total_visits": 128,
+      "comments": 196,
+      "first_visits": 5,
+      "second_visits": 7
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:09:49.987+09:00",
+      "stars": 2303,
+      "total_visits": 147,
+      "comments": 210,
+      "first_visits": 7,
+      "second_visits": 9
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:14:53.191+09:00",
+      "stars": 3033,
+      "total_visits": 172,
+      "comments": 250,
+      "first_visits": 7,
+      "second_visits": 9
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:19:50.355+09:00",
+      "stars": 3293,
+      "total_visits": 202,
+      "comments": 278,
+      "first_visits": 8,
+      "second_visits": 10
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:24:57.966+09:00",
+      "stars": 3403,
+      "total_visits": 217,
+      "comments": 305,
+      "first_visits": 10,
+      "second_visits": 11
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:29:53.237+09:00",
+      "stars": 3643,
+      "total_visits": 247,
+      "comments": 327,
+      "first_visits": 11,
+      "second_visits": 13
+    },
+    {
+      "observed_at_jst": "2026-10-16T07:32:54.641+09:00",
+      "stars": 3643,
+      "total_visits": 247,
+      "comments": 338,
+      "first_visits": 11,
+      "second_visits": 14
+    }
+  ],
+  "largest_observed_window_delta": {
+    "start_jst": "2026-10-16T07:09:49.987+09:00",
+    "end_jst": "2026-10-16T07:14:53.191+09:00",
+    "metric": "stars",
+    "delta": 730,
+    "meaning": "increase between adjacent approximately five-minute valid-snapshot endpoints, not a verified causal highlight or whole-stream maximum"
+  },
+  "same_elapsed_morning_comparison": {
+    "basis": "approximately 27 minutes 31-33 seconds of displayed/derived elapsed time, NOT complete morning stream totals",
+    "entries": [
+      {
+        "date_jst": "2026-10-15",
+        "live_id": 23555653,
+        "observed_at_jst": "2026-10-15T06:31:08.545+09:00",
+        "stars": 2755,
+        "total_visits": 187,
+        "comments": 195
+      },
+      {
+        "date_jst": "2026-10-16",
+        "live_id": 23559940,
+        "observed_at_jst": "2026-10-16T07:03:39.464+09:00",
+        "stars": 2151,
+        "total_visits": 128,
+        "comments": 191
+      }
+    ]
+  },
+  "privacy": "Public release contains only anonymized screen aggregates. No viewer identities, contributor names, raw comments, recordings, private paths, raw logs or non-public analysis-site URLs.",
+  "method": "Times are observed UI sample timestamps (Asia/Tokyo). Counter rows require an online-labelled verified screen and non-null stars, total visits and comments; 13 excluded/incomplete records are not zero-filled. 5-minute endpoints are discrete observations and intervals between points are not interpolated. The SHOWROOM display is unofficial, its total visits are not unique people, and star count is not contest event points. Recorded media duration is not the exact broadcast duration; ffmpeg logged HLS transport errors. Three explicit offline UI observations confirmed that the stream had ended, but not its exact official end second."
+}

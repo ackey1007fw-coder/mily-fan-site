@@ -2,6 +2,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  dataLabUrl,
+  dataLabOgImageUrl,
   activitiesUrl,
   activityUrl,
   canonicalUrl,
@@ -104,6 +106,53 @@ export function verifySiteUrlConsistency() {
   const robots = readRelative("public/robots.txt");
   const sitemap = readRelative("public/sitemap.xml");
   const viteConfig = readRelative("vite.config.ts");
+  const dataLabHtml = readRelative("data-lab/index.html");
+  const finalNightHtml = readRelative("data-lab/reports/20261012-final-night/index.html");
+  for (const required of [
+    'rel="canonical" href="__DATA_LAB_FINAL_NIGHT_CANONICAL__"',
+    'property="og:url" content="__DATA_LAB_FINAL_NIGHT_CANONICAL__"',
+    'property="og:image" content="__DATA_LAB_OG_IMAGE__"',
+    'name="twitter:image" content="__DATA_LAB_OG_IMAGE__"',
+    'name="robots" content="noindex,nofollow,noarchive"',
+    'href="/data-lab/assets/styles.css"',
+  ]) {
+    if (!finalNightHtml.includes(required)) {
+      errors.push("Final-night report missing required generated metadata or root-relative assets: " + required);
+    }
+  }
+  if (!viteConfig.includes('dataLabFinalNight: "data-lab/reports/20261012-final-night/index.html"') ||
+      !viteConfig.includes('.replaceAll("__DATA_LAB_FINAL_NIGHT_CANONICAL__", dataLabFinalNightUrl())')) {
+    errors.push("Final-night report must be a Vite HTML input with site-derived metadata");
+  }
+  if (finalNightHtml.split("</head>")[0].includes("https://") ||
+      finalNightHtml.split("</head>")[0].includes("http://")) {
+    errors.push("Final-night HTML head must not hardcode a site origin");
+  }
+
+  for (const required of [
+    'rel="canonical" href="__DATA_LAB_CANONICAL__"',
+    'property="og:url" content="__DATA_LAB_CANONICAL__"',
+    'property="og:image" content="__DATA_LAB_OG_IMAGE__"',
+    'name="twitter:image" content="__DATA_LAB_OG_IMAGE__"',
+    'name="twitter:card" content="summary_large_image"',
+    'name="robots" content="noindex,nofollow,noarchive"',
+  ]) {
+    if (!dataLabHtml.includes(required)) errors.push(`Data Lab metadata missing: ${required}`);
+  }
+  if (!viteConfig.includes('dataLab: "data-lab/index.html"') ||
+      !viteConfig.includes('.replaceAll("__DATA_LAB_CANONICAL__", dataLabUrl())') ||
+      !viteConfig.includes('.replaceAll("__DATA_LAB_OG_IMAGE__", dataLabOgImageUrl())')) {
+    errors.push("Data Lab must be a Vite HTML input with metadata generated from site.siteUrl");
+  }
+  if (/https?:\/\//.test(dataLabHtml.split("</head>")[0])) {
+    errors.push("Data Lab head must not hardcode an origin");
+  }
+  if (!dataLabUrl().startsWith(origin + "/") || !dataLabOgImageUrl().startsWith(origin + "/")) {
+    errors.push("Data Lab canonical and card must follow site.siteUrl");
+  }
+  if (sitemap.includes(`<loc>${dataLabUrl()}</loc>`)) {
+    errors.push("Data Lab must remain out of the sitemap while noindex is retained");
+  }
 
   if (!origin.startsWith("https://")) {
     errors.push(`site.siteUrl must be an https origin (got "${site.siteUrl}")`);

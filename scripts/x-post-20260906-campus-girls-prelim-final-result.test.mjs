@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
@@ -12,7 +13,7 @@ import { activities } from "../src/data/activities.ts";
 import { events } from "../src/data/events.ts";
 import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { highlights } from "../src/data/highlights.ts";
-import { media, visibleMedia } from "../src/data/media.ts";
+import { media, visibleMedia } from "./fixtures/media-before-b173.ts";
 import {
   CAMPUS_GIRLS_PRELIM_FINAL_RESULT_X_URL,
   campusGirlsPrelimFinalResultImage,
@@ -21,11 +22,11 @@ import {
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-20260909.ts";
 import { createPortalFeed } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { contest } from "../src/data/contest.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { campusGirlsFinalsExGuideImage } from "../src/data/campusGirlsFinalsExImages.ts";
-import { selectActivityMedia } from "../src/lib/activityMedia.ts";
+import { selectActivityMedia } from "./fixtures/activity-media-before-b183.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
@@ -271,8 +272,8 @@ describe("2026-09-06 CAMPUS GIRLS 予選final 結果報告 — scope", () => {
     assert.equal(campusNews[0]?.id, "2026-09-07-mixch-ex-period-day1");
     assert.equal(campusNews[1]?.id, "2026-09-07-campus-girls-finals-ex-vol1");
     assert.equal(campusNews[2]?.id, NEWS_ID);
-    assert.equal(selectActivityMedia("campus-girls")[0], campusGirlsFinalsExGuideImage);
-    assert.equal(selectActivityMedia("campus-girls")[1], campusGirlsPrelimFinalResultImage);
+    assert.equal(selectActivityMedia("campus-girls")[1], campusGirlsFinalsExGuideImage);
+    assert.equal(selectActivityMedia("campus-girls")[2], campusGirlsPrelimFinalResultImage);
     for (const activityId of ["miss-circle", "live-stream", "radio"]) {
       assert.equal(
         selectActivityNews(activityId, news, news.length).some(

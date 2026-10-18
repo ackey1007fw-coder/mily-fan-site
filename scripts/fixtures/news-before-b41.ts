@@ -1,8 +1,24 @@
 export * from "../../src/data/news.ts";
-import { news as currentNews } from "../../src/data/news.ts";
+import { news as liveNews } from "../../src/data/news.ts";
+// Preserve the historical NEWS snapshot before the October 3 morning recap.
+const currentNews = liveNews.filter(({ id }) => id !== "2026-10-17-x-relaxed-morning-showroom" && id !== "2026-10-15-miss-circle-semifinal-advance" && id !== "2026-10-15-x-sleep-check-in" && id !== "2026-10-14-x-redhood-lip-gloss-video" && id !== "2026-10-13-x-first-cosplay-red-riding-hood" && id !== "2026-10-11-x-fourth-round-final-day-peace" && id !== "2026-10-08-fanroom-voice-message" && id !== "2026-10-08-showroom-announced-schedule" && id !== "2026-10-07-fourth-round-official-update" && id !== "2026-10-06-night-showroom-recap" && id !== "2026-10-06-noon-showroom-recap" && id !== "2026-10-06-morning-showroom-recap" && id !== "2026-10-05-night-showroom-recap" && id !== "2026-10-05-morning-showroom-recap" && id !== "2026-10-05-paton-ex2-day2-guide" && id !== "2026-10-05-car-vote-day-four-x" && id !== "2026-10-04-night-showroom-recap" && id !== "2026-10-04-radio-anniversary-recap" && id !== "2026-10-04-day-showroom-recap" && id !== "2026-10-04-morning-showroom-recap" && id !== "2026-10-04-confirmed-vote-support-video" && id !== "2026-10-04-radio-anniversary-stories" && id !== "2026-10-03-morning-showroom-recap" && id !== "2026-10-03-confirmed-tiktok-campus-makeup");
 
 const laterNewsIds = new Set([
+  "2026-10-12-fourth-round-final-day-story",
+  "2026-10-02-fourth-round-stream-schedule",
+  "2026-10-01-mixch-kossori",
+  "2026-09-29-record-cafe-mily-collection",
+  "2026-09-24-tiktok-good-vibes",
+  "2026-09-22-tiktok-ami-meet",
+  "2026-09-22-tiktok-ami-meet-story",
+  "2026-09-22-tiktok-ami-twin-coord",
+  "2026-09-21-agestock-yokohama",
+  "2026-09-21-tiktok-ami-tokyo",
+  "2026-09-20-cold-umbrella-story",
+  "2026-09-18-kikkake-and-regular-stream",
+  "2026-09-18-campus-girls-paton-15x-story",
   "2026-09-16-miss-circle-fourth-round",
+  "2026-09-16-tiktok-kossori",
   "2026-09-15-night-fanroom-thanks",
   "2026-09-15-fanroom-incoming-call-voice",
   "2026-09-13-seaside-circle-after-radio-thanks",

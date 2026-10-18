@@ -1,0 +1,179 @@
+{
+  "kind": "image",
+  "schemaVersion": 1,
+  "coverId": "mily-b182-11-night-instagram",
+  "date": "2026-10-02",
+  "platform": "instagram",
+  "recapId": "2026-10-02-night-showroom",
+  "coverTitle": "四次審査初日の夜",
+  "coverReview": {
+    "sha256": "7fbf07edc4ab7c2d160e79bc87dd3be0a649a7ade8c3c5e58cf6529f35e429e8",
+    "reviewer": "Codex original-frame and grid visual inspection",
+    "reviewedAt": "2026-10-02T15:39:00Z",
+    "personBounds": [
+      80,
+      300,
+      630,
+      660
+    ],
+    "titleBounds": [
+      40,
+      104,
+      490,
+      155
+    ],
+    "gridCrops": [
+      [
+        0,
+        90,
+        720,
+        810
+      ],
+      [
+        22,
+        0,
+        697,
+        900
+      ]
+    ],
+    "observedText": [
+      "Mily / 2026.10.02 NIGHT",
+      "四次審査初日の夜",
+      "SHOWROOM 配信レポート"
+    ]
+  },
+  "items": [
+    {
+      "id": "mily-b182-11-night-instagram",
+      "path": "/media/live/mily-b182-11-night-instagram.png",
+      "source": "/media/live/mily-b182-08-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "7fbf07edc4ab7c2d160e79bc87dd3be0a649a7ade8c3c5e58cf6529f35e429e8"
+    },
+    {
+      "id": "mily-b182-12-night-instagram",
+      "path": "/media/live/mily-b182-12-night-instagram.png",
+      "source": "/media/live/mily-b182-01-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "48d9d1d58071a8628ddb31eb7fd92f8c24d84c6b8f997b9b11168c40fc226d26"
+    },
+    {
+      "id": "mily-b182-13-night-instagram",
+      "path": "/media/live/mily-b182-13-night-instagram.png",
+      "source": "/media/live/mily-b182-02-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "7d3e3910d4eb71c7e5609ab0b3f203b7e4834dd9d80f26f6e0bb38afb6aff5f8"
+    },
+    {
+      "id": "mily-b182-14-night-instagram",
+      "path": "/media/live/mily-b182-14-night-instagram.png",
+      "source": "/media/live/mily-b182-03-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "18ec69a8c289508b8f79913ec1a0df0047ffe21fbed9cf58783b16aa75a02802"
+    },
+    {
+      "id": "mily-b182-15-night-instagram",
+      "path": "/media/live/mily-b182-15-night-instagram.png",
+      "source": "/media/live/mily-b182-04-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "ee30b8328be9e81d3c58b30a9de46cf3dd3d3f3db8b987b1b84bb6cc77f29ec1"
+    },
+    {
+      "id": "mily-b182-16-night-instagram",
+      "path": "/media/live/mily-b182-16-night-instagram.png",
+      "source": "/media/live/mily-b182-05-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "c38745dbedaef289268f65e6b997e43e3567cca772f699191ea113965e451d56"
+    },
+    {
+      "id": "mily-b182-17-night-instagram",
+      "path": "/media/live/mily-b182-17-night-instagram.png",
+      "source": "/media/live/mily-b182-06-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "e4c7bf2071987612876eaa2fc0be2b8c68dc26abf29a324c03cc926386399a05"
+    },
+    {
+      "id": "mily-b182-18-night-instagram",
+      "path": "/media/live/mily-b182-18-night-instagram.png",
+      "source": "/media/live/mily-b182-07-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "2865536572e1cc3435e1e5317c8a382a412e420fe3e0921003adf24d83ced906"
+    },
+    {
+      "id": "mily-b182-19-night-instagram",
+      "path": "/media/live/mily-b182-19-night-instagram.png",
+      "source": "/media/live/mily-b182-09-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "b4ffc05a820cc53c15328b1d58cf0967da21c0ae6d5a46f8db74f44834274be0"
+    },
+    {
+      "id": "mily-b182-20-night-instagram",
+      "path": "/media/live/mily-b182-20-night-instagram.png",
+      "source": "/media/live/mily-b182-10-20261002-night-still.jpg",
+      "photoBounds": [
+        40,
+        300,
+        680,
+        660
+      ],
+      "sha256": "b4704304eac4911cb22047cdd97abb4fe4268ced69a50ad5d4c3d65e2666f29e"
+    }
+  ],
+  "order": [
+    "mily-b182-11-night-instagram",
+    "mily-b182-12-night-instagram",
+    "mily-b182-13-night-instagram",
+    "mily-b182-14-night-instagram",
+    "mily-b182-15-night-instagram",
+    "mily-b182-16-night-instagram",
+    "mily-b182-17-night-instagram",
+    "mily-b182-18-night-instagram",
+    "mily-b182-19-night-instagram",
+    "mily-b182-20-night-instagram"
+  ]
+}

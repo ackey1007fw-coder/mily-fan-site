@@ -29,7 +29,19 @@ try {
       for (const route of ['/activities/radio/', '/activities/radio/music/']) {
         await page.goto(origin + route, { waitUntil: 'networkidle' });
         const isMusic = route.endsWith('/music/');
-        const episodes = isMusic ? radioMusicEpisodes : radioEpisodes.map(recap => radioMusicEpisodes.find(item => item.id === recap.id));
+        if (!isMusic) {
+          for (const recap of radioEpisodes.filter(item => !radioMusicEpisodes.some(music => music.id === item.id))) {
+            const unknownSongs = page.locator(`section[aria-labelledby="${recap.id}-songs"]`);
+            assert.equal(await unknownSongs.count(), 1, "既存の曲目確認中の案内を表示する");
+            assert.match(await unknownSongs.innerText(), /曲目は確認中/);
+            assert.equal(await unknownSongs.getByRole('link', { name: 'YouTubeで聴く' }).count(), 0, "未確認の曲リンクを作らない");
+            assert.equal(await page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`).count(), 1, "曲目未確認でも放送メモは表示する");
+          }
+        }
+        const episodes = isMusic ? radioMusicEpisodes : radioEpisodes.flatMap(recap => {
+          const music = radioMusicEpisodes.find(item => item.id === recap.id);
+          return music ? [music] : [];
+        });
         for (const episode of episodes) {
           assert.ok(episode, 'Every recap has a song list');
           const section = isMusic ? page.locator(`[id="music-${episode.id}"]`) : page.locator(`section[aria-labelledby="${episode.id}-songs"]`);
@@ -46,12 +58,38 @@ try {
           }
         }
         if (!isMusic) {
+          const anniversary = radioEpisodes.find(item => item.date === '2026-10-04');
+          const anniversaryHighlights = page.locator(`section[aria-labelledby="${anniversary.id}-mily-highlights"]`);
+          const anniversaryMessages = page.locator(`section[aria-labelledby="${anniversary.id}-listener-messages"]`);
+          assert.equal(await anniversaryHighlights.locator('li').count(), 16);
+          assert.equal(await anniversaryMessages.locator('li').count(), 5);
+          assert.equal(await anniversaryHighlights.locator('h3').innerText(), '番組の見どころ');
+          for (const [section, items] of [[anniversaryHighlights, anniversary.milyHighlights], [anniversaryMessages, anniversary.listenerMessages]]) {
+            const text = await section.innerText();
+            for (const item of items) assert.ok(text.includes(item.body), `${item.title}: full body rendered`);
+          }
+          const anniversarySection = anniversaryHighlights.locator('xpath=ancestor::section[1]');
+          const anniversaryTimeline = anniversarySection.locator('details').filter({ hasText: '主なコーナーとタイムスタンプを見る' });
+          const timelineToggle = anniversaryTimeline.locator('summary');
+          assert.equal(await anniversaryTimeline.evaluate(element => element.open), false);
+          await timelineToggle.click();
+          assert.equal(await anniversaryTimeline.locator('li').count(), 16);
+          const timelineText = await anniversaryTimeline.innerText();
+          for (const item of anniversary.timeline) assert.ok(timelineText.includes(item.label), item.label);
+          assert.ok(timelineText.includes('2年目へ向かうエンディング'));
+          await timelineToggle.click();
+          assert.equal(await anniversaryTimeline.evaluate(element => element.open), false);
+          await timelineToggle.click();
+          assert.equal(await anniversaryTimeline.evaluate(element => element.open), true);
+          await anniversaryHighlights.screenshot({ path: join(output, `${engine}-${width}-anniversary-highlights.png`) });
+          await anniversaryMessages.screenshot({ path: join(output, `${engine}-${width}-anniversary-messages.png`) });
           const recap = radioEpisodes.find(item => item.date === '2026-09-13');
           const highlights = page.locator(`section[aria-labelledby="${recap.id}-mily-highlights"]`);
           assert.equal(await highlights.locator('li').count(), 11);
           assert.ok((await highlights.innerText()).length > 2000, 'Detailed recap is rendered');
-          await page.getByText('主なコーナーとタイムスタンプを見る', { exact: true }).first().click();
-          assert.equal(await page.locator('details[open] li').count(), 17);
+          const historicalSection = highlights.locator('xpath=ancestor::section[1]');
+          await historicalSection.getByText('主なコーナーとタイムスタンプを見る', { exact: true }).click();
+          assert.equal(await historicalSection.locator('details[open] li').count(), 17);
           await highlights.screenshot({ path: join(output, `${engine}-${width}-highlights.png`) });
         }
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${route}: no horizontal overflow at ${width}px`);

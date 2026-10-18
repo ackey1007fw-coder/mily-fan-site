@@ -1,9 +1,11 @@
+import { ExternalLink } from "./components/ExternalLink";
 import { RadioSongList } from "./components/RadioSongList";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import {
   radioMusicEpisodes,
   radioMusicSongCount,
+  radioMusicPlaylist,
 } from "./data/radioMusic";
 
 const episodes = [...radioMusicEpisodes].sort((a, b) => b.date.localeCompare(a.date));
@@ -28,6 +30,11 @@ export default function RadioMusicPage() {
             <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">
               「湘南シーサイドサークル」の放送で確認できた楽曲を、放送回ごとにまとめる非公式アーカイブです。
             </p>
+            <section aria-labelledby="radio-playlist-heading" className="mt-6 rounded-2xl border border-sage/20 bg-sage-soft/50 p-5">
+              <h2 id="radio-playlist-heading" className="text-lg font-bold text-ink">曲を続けて聴きたい方へ</h2>
+              <p className="mt-2 text-sm leading-7 text-ink-muted">{radioMusicPlaylist.note}</p>
+              <ExternalLink href={radioMusicPlaylist.url} className="mt-4 inline-flex min-h-11 items-center rounded-full bg-sage px-5 py-3 text-sm font-bold text-white hover:bg-sage-deep">YouTube再生リストを開く</ExternalLink>
+            </section>
             <nav aria-label="放送日から楽曲を探す" className="mt-5 flex flex-wrap gap-2">
               {episodes.map((episode) => <a key={episode.id} href={`#music-${episode.id}`} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-bold text-sage-deep">{episode.dateLabel} · {episode.songs.length}曲</a>)}
             </nav>

@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
@@ -21,7 +22,7 @@ import {
   media,
   srcSetFor,
   visibleMedia,
-} from "../src/data/media.ts";
+} from "./fixtures/media-before-b173.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b41.ts";
 import { profile } from "../src/data/profile.ts";
 import { socials } from "../src/data/socials.ts";
@@ -30,7 +31,7 @@ import {
   storyBySlug,
   storySources,
 } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { verifyMedia, verifyNews } from "./content-invariants.mjs";
 import {
   DRIVE_HOST_PATTERN,
@@ -303,7 +304,7 @@ describe("2026-08-23 seaside circle official X posts — Gallery photos", () => 
   it("adds only the expected 12 Gallery derivatives and no NEWS stills", async () => {
     const files = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"))
-      .filter((file) => file.includes("mily-b22"));
+      .filter((file) => file.includes("mily-b22-"));
 
     assert.equal(files.length, 12);
     assert.equal(files.every((file) => file.startsWith("media/gallery/")), true);

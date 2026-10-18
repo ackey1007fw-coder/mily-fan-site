@@ -1,3 +1,4 @@
+import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
@@ -12,7 +13,7 @@ import { campusGirlsPatonVoteLink } from "../src/data/links.ts";
 import { news, sortNewsByDateDesc } from "./fixtures/news-before-b58.ts";
 import { createPortalFeed, PORTAL_FEED_LIMIT } from "../src/data/portalFeed.ts";
 import { stories } from "../src/data/stories.ts";
-import { streamSchedule } from "../src/data/streamSchedule.ts";
+import { streamSchedule } from "./fixtures/stream-schedule-before-b183.ts";
 import { contest } from "../src/data/contest.ts";
 import { selectActivityNews } from "../src/lib/activityContent.ts";
 import { resolveNewsLinks } from "../src/lib/newsLinks.ts";
@@ -290,7 +291,9 @@ describe("2026-08-30〜31 X posts — activity and identity", () => {
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "3次審査");
+    for (const id of NEW_IDS) {
+      assert.notEqual(contest.currentPhase?.source, news.find((entry) => entry.id === id)?.source);
+    }
   });
 
   it("stays out of profile, media, stories, and schedule files", async () => {
@@ -324,6 +327,7 @@ describe("2026-08-30〜31 X posts — Portal Feed and CONTENT-OPS", () => {
   it("flows through Portal Feed without hardcoded news ids", async () => {
     const feed = createPortalFeed({ newsItems: news,
       now: new Date("2026-08-31T08:00:00+09:00"),
+      storyItems: stories.filter((story) => story.date <= "2026-08-31"),
       limit: PORTAL_FEED_LIMIT + 1,
     });
     assertPortalNewsFollowsSort(feed, news);
