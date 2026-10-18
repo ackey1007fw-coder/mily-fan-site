@@ -53,6 +53,11 @@ try {
      target.scrollIntoView=(...args)=>{window.__glitterRealignCalls++;return original(...args);};
     });
     const weekly=page.getByLabel('今週の公式ランキングpt');
+    // Only after the initial landing is verified, navigate to the calculator as a user would.
+    // fill() alone can edit an offscreen input in WebKit without scrolling to it.
+    await weekly.scrollIntoViewIfNeeded();
+    await weekly.click();
+    await page.waitForFunction(()=>document.querySelector('#glitter-heading').getBoundingClientRect().bottom<0);
     await weekly.fill('15000');
     await page.getByLabel('今週の残り日数（今日を含む）').selectOption('5');
     // #glitter-calc is the h3; the labelled region also contains the results.
