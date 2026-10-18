@@ -25,7 +25,7 @@ test("10/19 morning is partial, invalid visit and no false final zero",()=>{
  assert.equal(morning.earlyPartialObservation.stars,0);assert.equal(morning.earlyPartialObservation.visits,null);assert.equal(morning.earlyPartialObservation.comments,0);
  assert.equal(morning.earlyPartialObservation.metricsComplete,false);assert.equal(morning.earlyPartialObservation.isFinal,false);
  assert.equal(morning.quality.collectorChildExitCode,79);assert.equal(morning.quality.endConfirmed,false);assert.equal(morning.quality.manualAttentionRequired,true);
- assert.equal(morning.recording.saved,null);assert.equal(morning.quality.dataCoverageComplete,false);
+ assert.equal(morning.recording.saved,true);assert.equal(morning.recording.fullContinuityVerified,false);assert.equal(morning.recording.ffmpegExitCode,0);assert.equal(morning.asr.processedChunksAtCheck,32);assert.equal(morning.asr.finished,false);assert.equal(morning.quality.dataCoverageComplete,false);
  assert.equal(morning.quality.websocket.receivedFrames,5);assert.equal(morning.quality.websocket.persistedFrames,5);
  assert.equal(morning.observations.length,0);
 });

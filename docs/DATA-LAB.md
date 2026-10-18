@@ -172,6 +172,6 @@ SHOWROOMイベント参加ルームは71、公式進出者プロフィールと�
 ## 2026-10-18 夜／2026-10-19 朝：匿名観測と未取得を別々に掲載
 
 - 10/18 夜 room573253・live23571625：最後の有効オンライン画面は10/19 00:07:08.712 JST、きら星2,080・総訪問表示77・コメント457、初訪問0・2度訪問1・新規follow1・その他free200・星100貢献人数19・おすすめcomment人数17。録画 saved=true／358,092,668 bytes／ffmpeg exit0 だが全編連続性は未検証。WS 729/729保存（配信元全件の証明ではない）、DOM 25,744断片破棄（コメント件数ではない）、HTTP relay EPERM・未保存44件。公開匿名JSONは `public/data-lab/data/mily-night-20261018-aggregate.json`。配信尺・コメント分速・取得できなかった時刻の値は推測しない。
-- 10/19 朝 room573253・live23572405：05:53:00.196 JSTの序盤部分観測で星0／投稿0・総訪問「無効」。終了時刻と最後の有効最終カウンターは検証不可。collector child exit79・HOLD、WS受信5/保存5、DOM保存観測1／40画面変化、HTTP応答2件観測。録画・ASR保存も未確認。これらは短いrunの受信範囲に限る。公開匿名JSONは `public/data-lab/data/mily-morning-20261019-aggregate.json`。
+- 10/19 朝 room573253・live23572405：05:53:00.196 JSTの序盤部分観測で星0／投稿0・総訪問「無効」。終了時刻と最後の有効最終カウンターは検証不可。collector child exit79・HOLD、WS受信5/保存5、DOM保存観測1／40画面変化、HTTP応答2件観測。録画sidecar saved=true・ffmpeg exit0（処理05:49:09〜06:32:48 JST）、ASRは06:37:53時点32チャンク処理中。全編の連続性・録画実体のdecode・ASR完了は未確認。これらは短いrunの受信範囲に限る。公開匿名JSONは `public/data-lab/data/mily-morning-20261019-aggregate.json`。
 - 個別レポート `/data-lab/reports/20261018-night/` と `/data-lab/reports/20261019-morning/` は**実測の結果と収集欠損を併記**し、朝の0を最終値として採用しない。いずれも非公式・noindex/nofollow/noarchive、未確認の正式イベントIDと10/12までの四次審査ptを分離する。公開する時系列が無いためコメント分速を創作せず、配信タイミングナビの11件入力は変更しない。新しい時刻付き十分な観測が確定するまでは対象に追加しない。
 - 実測元は既存の個人所有収集データと障害台帳。公開repo・JSONに元ログ・個人名・コメント原文・ローカルパス・非公開システムURL・認証情報を転記しない。

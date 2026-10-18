@@ -27,10 +27,15 @@
     "verifiedZeroAtEnd": false
   },
   "recording": {
-    "saved": null,
+    "saved": true,
+    "source": "既存録画sidecarの保存成功申告",
+    "ffmpegExitCode": 0,
     "bytes": null,
+    "startProcessingJst": "2026-10-19T05:49:09+09:00",
+    "endProcessingJst": "2026-10-19T06:32:48+09:00",
     "durationSeconds": null,
-    "fullContinuityVerified": false
+    "fullContinuityVerified": false,
+    "actualFileDecodeVerified": false
   },
   "quality": {
     "endConfirmed": false,
@@ -55,12 +60,19 @@
       "responsesPrepared": 2,
       "persistedCountVerified": false,
       "complete": false
-    }
+    },
+    "recordingSidecarSaved": true
   },
   "observations": [],
   "provenance": {
     "basis": "既存私有収集記録の最終オンライン部分観測およびヘルスファイル",
     "partialObservationIsNotFinal": true,
     "snapshotCheckedJst": "2026-10-19T06:48:14.166+09:00"
+  },
+  "asr": {
+    "status": "processing_at_2026-10-19T06:37:53+09:00",
+    "processedChunksAtCheck": 32,
+    "finished": false,
+    "verbatimAccuracyVerified": false
   }
 }
