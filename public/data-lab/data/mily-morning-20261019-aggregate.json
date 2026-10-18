@@ -1,0 +1,66 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23572405,
+  "dateJst": "2026-10-19",
+  "session": "morning",
+  "eventName": "未確認（2026-10-12終了のMISS CIRCLE四次審査とは別集計）",
+  "sourceDescription": "既存SHOWROOM通常閲覧画面の個人情報を含まない初期観測と収集品質の監査",
+  "measurementNote": "オンライン序盤の部分観測のみ。最終画面・配信終了を検証できていません。0は最終値ではなく、総訪問は無効表示。最新の配信全体データを取得できたとは見なしません。",
+  "finalServiceValueVerified": false,
+  "lastValidOnline": null,
+  "earlyPartialObservation": {
+    "atJst": "2026-10-19T05:53:00.196+09:00",
+    "stars": 0,
+    "visits": null,
+    "comments": 0,
+    "firstVisits": 0,
+    "repeatVisits": 0,
+    "newFollows": 0,
+    "otherFree": 0,
+    "star100People": 0,
+    "recommendedCommentPeople": 0,
+    "visitsDisplay": "無効",
+    "isFinal": false,
+    "metricsComplete": false,
+    "verifiedZeroAtEnd": false
+  },
+  "recording": {
+    "saved": null,
+    "bytes": null,
+    "durationSeconds": null,
+    "fullContinuityVerified": false
+  },
+  "quality": {
+    "endConfirmed": false,
+    "state": "offline_unresolved_hold_end_unverified",
+    "manualAttentionRequired": true,
+    "collectorChildExitCode": 79,
+    "dataCoverageComplete": false,
+    "recordingAndAsrVerified": false,
+    "websocket": {
+      "receivedFrames": 5,
+      "persistedFrames": 5,
+      "sourceCompletenessVerified": false
+    },
+    "visibleDom": {
+      "savedObservations": 1,
+      "observedMutations": 40,
+      "reportedDroppedFragmentsInShortRun": 0,
+      "sourceEventsVerified": false
+    },
+    "httpRelay": {
+      "responsesObserved": 2,
+      "responsesPrepared": 2,
+      "persistedCountVerified": false,
+      "complete": false
+    }
+  },
+  "observations": [],
+  "provenance": {
+    "basis": "既存私有収集記録の最終オンライン部分観測およびヘルスファイル",
+    "partialObservationIsNotFinal": true,
+    "snapshotCheckedJst": "2026-10-19T06:48:14.166+09:00"
+  }
+}

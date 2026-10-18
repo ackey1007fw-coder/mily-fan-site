@@ -1,0 +1,63 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23571625,
+  "dateJst": "2026-10-18",
+  "session": "night",
+  "eventName": "未確認（2026-10-12終了のMISS CIRCLE四次審査とは別集計）",
+  "sourceDescription": "既存SHOWROOM通常閲覧画面の保存カウンターと、収集器の保存済み終了後監査（個人情報を除去した要約）",
+  "measurementNote": "非公式の最後に保存された有効オンライン画面の参考値。公式最終値、公式pt、ギフト実数、ユニーク視聴者数ではありません。欠測・未保存の区間をゼロ補完しません。",
+  "finalServiceValueVerified": false,
+  "lastValidOnline": {
+    "atJst": "2026-10-19T00:07:08.712+09:00",
+    "stars": 2080,
+    "visits": 77,
+    "comments": 457,
+    "firstVisits": 0,
+    "repeatVisits": 1,
+    "newFollows": 1,
+    "otherFree": 200,
+    "star100People": 19,
+    "recommendedCommentPeople": 17
+  },
+  "recording": {
+    "saved": true,
+    "bytes": 358092668,
+    "ffmpegExitCode": 0,
+    "startProcessingJst": "2026-10-18T23:18:16+09:00",
+    "endProcessingJst": "2026-10-19T00:06:31+09:00",
+    "durationSeconds": null,
+    "fullContinuityVerified": false
+  },
+  "quality": {
+    "endSeenOffline": true,
+    "endConfirmedFromOfficialRoomAtJst": "2026-10-19T00:13:00+09:00",
+    "dataCoverageComplete": false,
+    "websocket": {
+      "receivedFrames": 729,
+      "persistedFrames": 729,
+      "sourceCompletenessVerified": false
+    },
+    "visibleDom": {
+      "droppedObserverFragments": 25744,
+      "notLostCommentCount": true,
+      "rawComplete": false
+    },
+    "httpRelay": {
+      "lastSavedJst": "2026-10-18T23:39:36+09:00",
+      "pendingAtEnd": 44,
+      "writeError": "EPERM",
+      "complete": false
+    },
+    "asr": {
+      "status": "未確認"
+    }
+  },
+  "observations": [],
+  "provenance": {
+    "basis": "個人所有の既存収集器の保存済みカウンターと同日障害台帳",
+    "observedAtPrecision": "0.001秒（通常閲覧画面の時刻記録）",
+    "sampledTimelinePublished": false
+  }
+}
