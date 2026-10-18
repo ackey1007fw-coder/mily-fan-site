@@ -6,6 +6,7 @@ import { describe, it } from "node:test";
 import { fileURLToPath } from "node:url";
 import { radioProgram } from "../shared/radio-program.js";
 import { contest } from "../src/data/contest.ts";
+import { fourthRoundContest } from "./fixtures/contest-fourth-round.ts";
 import { links } from "../src/data/links.ts";
 import { mixchFinalDayMovie } from "../src/data/mixchMovies.ts";
 import { news } from "./fixtures/news-before-b58.ts";
@@ -125,7 +126,7 @@ describe("HOME 今日のみりぃ — Paton vote window", () => {
   });
 
   it("does not leave a dead Paton button after 9/1 23:59 JST", () => {
-    const ended = homeToday(END + 1);
+    const ended = homeToday(END + 1, { contest: fourthRoundContest });
     const nowHero = ended.nowItems.find((item) => item.origin === "contest");
     assert.equal(
       ended.nowItems.some((item) => item.cta?.url === PATON_URL),
@@ -381,22 +382,16 @@ describe("Gallery portrait-first order", () => {
   });
 });
 
-describe("confirmed Miss Circle third-round dates", () => {
-  it("records official SCHEDULE dates and keeps ContestPhase date-only", () => {
-    assert.equal(contest.currentPhase?.name, "4次審査");
-    assert.equal(contest.currentPhase?.start, "2026-10-02");
-    assert.equal(contest.currentPhase?.end, "2026-10-12");
-    assert.equal(contest.currentPhase?.source, "https://www.misscircle.jp/");
-    assert.equal(contest.lastVerifiedAt, "2026-10-01");
-    assert.doesNotMatch(JSON.stringify(contest.currentPhase), /12:00|05:00|21:59/);
-
+describe("confirmed Miss Circle historical round dates", () => {
+  it("keeps the historical fourth-round SCHEDULE in the fallback vote note", () => {
     const afterPaton = selectHomeVoteAction({
-      contest,
+      contest: fourthRoundContest,
       supportEvents,
       links,
       now: END + 1,
     });
     assert.equal(afterPaton.url, contest.entryUrl);
+    assert.match(afterPaton.note ?? "", /4次審査/);
     assert.match(afterPaton.note ?? "", /10\/2/);
     assert.match(afterPaton.note ?? "", /10\/12/);
   });

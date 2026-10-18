@@ -1,7 +1,8 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { injectVercelWebAnalytics } from "./src/lib/vercelWebAnalytics.ts";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
-import { canonicalUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
+import { canonicalUrl, dataLabUrl, dataLabFinalNightUrl, dataLabOgImageUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 import { radioMusicPageMetadata, radioMusicPageStructuredData } from "./src/lib/radioMusicMetadata.ts";
 import { songClipsPageMetadata, songClipsPageStructuredData } from "./src/lib/songClipsMetadata.ts";
 import {
@@ -35,6 +36,11 @@ function siteMetadataPlugin(): Plugin {
 
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
+        .replaceAll("__DATA_LAB_CANONICAL__", dataLabUrl())
+        .replaceAll("__DATA_LAB_FINAL_NIGHT_CANONICAL__", dataLabFinalNightUrl())
+        .replaceAll("__DATA_LAB_20261017_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261017-night/`)
+        .replaceAll("__DATA_LAB_20261018_MORNING_CANONICAL__", `${dataLabUrl()}reports/20261018-morning/`)
+        .replaceAll("__DATA_LAB_OG_IMAGE__", dataLabOgImageUrl())
         .replaceAll("__PROFILE_CANONICAL__", profileUrl())
         .replaceAll(
           "__STORY_SECOND_ROUND_CANONICAL__",
@@ -59,6 +65,10 @@ function siteMetadataPlugin(): Plugin {
         .replaceAll(
           "__STORY_2026_08_25_MOTIVATION_CANONICAL__",
           storyUrl("2026-08-25-motivation"),
+        )
+        .replaceAll(
+          "__STORY_2026_10_15_SEMIFINAL_CANONICAL__",
+          storyUrl("2026-10-15-semifinal"),
         )
         .replaceAll("__ACTIVITY_PAGE_TITLE__", activityMetadata?.title ?? "")
         .replaceAll(
@@ -142,6 +152,15 @@ function siteMetadataPlugin(): Plugin {
   };
 }
 
+function webAnalyticsHtmlPlugin(): Plugin {
+  return {
+    name: "vercel-web-analytics-html",
+    transformIndexHtml(html) {
+      return injectVercelWebAnalytics(html);
+    },
+  };
+}
+
 function portalFeedPlugin(): Plugin {
   return {
     name: "portal-feed",
@@ -156,7 +175,7 @@ function portalFeedPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), siteMetadataPlugin(), portalFeedPlugin()],
+  plugins: [react(), siteMetadataPlugin(), webAnalyticsHtmlPlugin(), portalFeedPlugin()],
   build: {
     target: "es2020",
     minify: "esbuild",
@@ -164,6 +183,12 @@ export default defineConfig({
     rollupOptions: {
       input: {
         home: "index.html",
+        dataLab: "data-lab/index.html",
+        dataLabVelocity: "data-lab/comment-velocity/index.html",
+        dataLabMorning20261017: "data-lab/reports/20261017-morning/index.html",
+        dataLabNight20261017: "data-lab/reports/20261017-night/index.html",
+        dataLabMorning20261018: "data-lab/reports/20261018-morning/index.html",
+        dataLabFinalNight: "data-lab/reports/20261012-final-night/index.html",
         profile: "profile/index.html",
         activities: "activities/index.html",
         support: "support/index.html",
@@ -184,6 +209,7 @@ export default defineConfig({
         storySeasideMusical:
           "stories/2026-08-23-musical-special/index.html",
         storyMotivation20260825: "stories/2026-08-25-motivation/index.html",
+        storySemifinal20261015: "stories/2026-10-15-semifinal/index.html",
       },
       output: {
         manualChunks: {

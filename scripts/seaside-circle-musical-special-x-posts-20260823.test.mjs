@@ -304,7 +304,7 @@ describe("2026-08-23 seaside circle official X posts — Gallery photos", () => 
   it("adds only the expected 12 Gallery derivatives and no NEWS stills", async () => {
     const files = (await readdir(path.join(root, "public"), { recursive: true }))
       .map((file) => String(file).replaceAll("\\", "/"))
-      .filter((file) => file.includes("mily-b22"));
+      .filter((file) => file.includes("mily-b22-"));
 
     assert.equal(files.length, 12);
     assert.equal(files.every((file) => file.startsWith("media/gallery/")), true);

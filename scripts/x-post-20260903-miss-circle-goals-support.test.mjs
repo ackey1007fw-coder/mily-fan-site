@@ -188,7 +188,7 @@ describe("2026-09-03 X 三次審査の目標と応援方法 — scope", () => {
     );
     assert.equal(existsSync(path.join(root, "stories", NEWS_ID)), false);
     assert.deepEqual(events, []);
-    assert.equal(contest.currentPhase?.name, "4次審査");
+    assert.notEqual(contest.currentPhase?.source, SOURCE);
 
     for (const relative of [
       "src/data/media.ts",

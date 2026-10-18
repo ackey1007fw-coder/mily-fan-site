@@ -94,6 +94,21 @@ export const storySources = {
     label: "MISS CIRCLE CONTEST 2026 ENTRY 734 プロフィール",
     url: "https://2026.misscircle.jp/entry/734",
   },
+  "x-2026-10-15-semifinal-advance": {
+    id: "x-2026-10-15-semifinal-advance",
+    label: "本人X投稿（2026年10月15日）",
+    url: "https://x.com/Mily_chan36/status/2110646575051747453",
+  },
+  "misscircle-2026-semifinal-post": {
+    id: "misscircle-2026-semifinal-post",
+    label: "MISS CIRCLE CONTEST 運営のX投稿（2026年10月15日）",
+    url: "https://x.com/circle_contest/status/2110646640071860374",
+  },
+  "misscircle-2026-semifinal-list": {
+    id: "misscircle-2026-semifinal-list",
+    label: "MISS CIRCLE CONTEST 2026 セミファイナル進出者一覧",
+    url: "https://2026.misscircle.jp/list/5",
+  },
 } as const;
 
 export type StorySourceId = keyof typeof storySources;
@@ -1219,7 +1234,67 @@ const seasideCircleMusicalSpecialStory: Story = {
   ],
 };
 
+const semifinalAdvanceStory: Story = {
+  slug: "2026-10-15-semifinal",
+  href: "/stories/2026-10-15-semifinal/",
+  title: "4次審査を越えて、セミファイナルへ",
+  cardTitle: "4次審査を越えて、セミファイナルへ",
+  eyebrow: "MISS CIRCLE CONTEST 2026｜4次審査突破",
+  badge: "4次審査突破",
+  lead:
+    "10月15日の夕方、みりぃから「ご報告」が届きました。MISS CIRCLE CONTEST 2026の4次審査を突破して、セミファイナルに進みます。",
+  cardDescription:
+    "MISS CIRCLE CONTEST 2026の4次審査を突破して、セミファイナルに進みます。",
+  date: "2026-10-15",
+  dateLabel: "2026.10.15",
+  published: true,
+  sourceIds: [
+    "x-2026-10-15-semifinal-advance",
+    "misscircle-2026-semifinal-post",
+    "misscircle-2026-semifinal-list",
+  ],
+  leadMediaId: null,
+  media: [],
+  sections: [
+    {
+      id: "semifinal-advance",
+      title: "4次審査を越えて、セミファイナルへ",
+      blocks: [
+        {
+          type: "paragraph",
+          text: "10月15日の夕方、みりぃから「ご報告」が届きました。",
+          sourceIds: ["x-2026-10-15-semifinal-advance"],
+        },
+        {
+          type: "paragraph",
+          text: "MISS CIRCLE CONTEST 2026の4次審査を突破して、セミファイナルに進みます。",
+          sourceIds: ["x-2026-10-15-semifinal-advance"],
+        },
+        {
+          type: "paragraph",
+          text: "「4次審査もたくさんの応援ありがとうございました」「次も頑張るど〜」と本人。",
+          sourceIds: ["x-2026-10-15-semifinal-advance"],
+        },
+        {
+          type: "paragraph",
+          text: "運営もこの日、セミファイナル審査の進出者をサイトで発表しました。",
+          sourceIds: [
+            "misscircle-2026-semifinal-post",
+            "misscircle-2026-semifinal-list",
+          ],
+        },
+        {
+          type: "paragraph",
+          text: "セミファイナルの日程や審査の方法は、決まったら運営の案内で確認してください。",
+          sourceIds: ["misscircle-2026-semifinal-post"],
+        },
+      ],
+    },
+  ],
+};
+
 export const stories: Story[] = [
+  semifinalAdvanceStory,
   motivationMorningStory,
   seasideCircleMusicalSpecialStory,
   campusGirlsSecondStageJuryAwardStory,

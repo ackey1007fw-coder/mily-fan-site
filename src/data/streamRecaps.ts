@@ -1,3 +1,22 @@
+import { streamRecap20261018Asa } from "./streamRecap20261018Asa.ts";
+import { streamRecap20261017Night } from "./streamRecap20261017Night.ts";
+import { streamRecap20261017Asa } from "./streamRecap20261017Asa.ts";
+import { streamRecap20261016Night } from "./streamRecap20261016Night.ts";
+import { streamRecap20261016Asa } from "./streamRecap20261016Asa.ts";
+import { streamRecap20261015Night } from "./streamRecap20261015Night.ts";
+import { streamRecap20261015Asa } from "./streamRecap20261015Asa.ts";
+import { streamRecap20261014Night } from "./streamRecap20261014Night.ts";
+import { streamRecap20261014Noon } from "./streamRecap20261014Noon.ts";
+import { streamRecap20261014Asa } from "./streamRecap20261014Asa.ts";
+import { streamRecap20261013Night } from "./streamRecap20261013Night.ts";
+import { streamRecap20261012Night } from "./streamRecap20261012Night.ts";
+import { streamRecap20261012Asa } from "./streamRecap20261012Asa.ts";
+import { streamRecap20261011Night } from "./streamRecap20261011Night.ts";
+import { streamRecap20261011Asa } from "./streamRecap20261011Asa.ts";
+import { streamRecap20261009Night } from "./streamRecap20261009Night.ts";
+import { streamRecap20261008Night } from "./streamRecap20261008Night.ts";
+import { streamRecap20261008Asa } from "./streamRecap20261008Asa.ts";
+import { streamRecap20261007Day } from "./streamRecap20261007Day.ts";
 import { streamRecap20261006Yoru } from "./streamRecap20261006Yoru.ts";
 import { streamRecap20261006Day } from "./streamRecap20261006Day.ts";
 import { streamRecap20261006Asa } from "./streamRecap20261006Asa.ts";
@@ -199,6 +218,17 @@ export type StreamRecapClip = {
 /** LIVE SONG CLIPS 用の短い歌唱抜粋。 */
 export type StreamRecapSongClip = StreamRecapClip;
 
+/** Approved short singing excerpts; no fabricated full-recording offset. */
+export type StreamRecapApprovedSongClip = {
+  id: string;
+  title: string;
+  src: string;
+  poster: string;
+  width: number;
+  height: number;
+  durationSeconds: number;
+};
+
 export type StreamRecapSong = {
   title: string;
   artist: string;
@@ -212,6 +242,8 @@ export type StreamRecapSong = {
   karaoke?: { youtubeUrl: string; channel: string };
   /** オーナー確認済み録画から作った短い歌唱クリップ。 */
   clip?: StreamRecapSongClip;
+  /** Multiple approved excerpts of the same song, in the existing song section. */
+  approvedClips?: StreamRecapApprovedSongClip[];
 };
 
 export type StreamRecap = {
@@ -239,6 +271,18 @@ export type StreamRecap = {
 };
 
 export {
+  streamRecap20261017Asa,
+  streamRecap20261016Asa,
+  streamRecap20261016Night,
+  streamRecap20261015Night,
+  streamRecap20261015Asa,
+  streamRecap20261014Night,
+  streamRecap20261014Noon,
+  streamRecap20261013Night,
+  streamRecap20261012Night,
+  streamRecap20261012Asa,
+  streamRecap20261011Night,
+  streamRecap20261011Asa,
   streamRecap20260929Night,
   streamRecap20260928Night,
   streamRecap20260928Radio,
@@ -298,6 +342,25 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20261018Asa,
+  streamRecap20261017Night,
+  streamRecap20261017Asa,
+  streamRecap20261016Night,
+  streamRecap20261016Asa,
+  streamRecap20261015Night,
+  streamRecap20261015Asa,
+  streamRecap20261014Night,
+  streamRecap20261014Noon,
+  streamRecap20261014Asa,
+  streamRecap20261013Night,
+  streamRecap20261012Night,
+  streamRecap20261012Asa,
+  streamRecap20261011Night,
+  streamRecap20261011Asa,
+  streamRecap20261009Night,
+  streamRecap20261008Night,
+  streamRecap20261008Asa,
+  streamRecap20261007Day,
   streamRecap20261006Yoru,
   streamRecap20261006Day,
   streamRecap20261006Asa,

@@ -52,12 +52,15 @@ export const contest: Contest = {
   //     WEB投票 10/2 12:00〜10/12 23:59、SHOWROOM審査
   //     10/3 05:00〜10/12 21:59 を再確認。ContestPhase は日付のみ、
   //     時刻は supportEvents 側で保持する。
+  //   2026-10-15: 本人XとInstagram Storyで4次審査突破・セミファイナル進出を確認。
+  //     同日の主催者SCHEDULEで審査期間10/29〜11/8を確認。
+  //     現在の進出段階に公式の日付だけを保持し、四次審査の履歴はsupportEventsに残す。
   // 「最終日」表記から締切日を推定して end に入れることはしない。
   currentPhase: {
-    name: "4次審査",
-    start: "2026-10-02",
-    end: "2026-10-12",
+    name: "セミファイナル進出",
+    start: "2026-10-29",
+    end: "2026-11-08",
     source: "https://www.misscircle.jp/",
   },
-  lastVerifiedAt: "2026-10-01",
+  lastVerifiedAt: "2026-10-15",
 };

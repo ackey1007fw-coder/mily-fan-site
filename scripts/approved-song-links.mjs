@@ -39,6 +39,13 @@ const approved = new Set([
   "https://www.youtube.com/watch?v=fyrMcSH9ax0",
   "https://www.youtube.com/watch?v=3-kV0xU5aNc",
   "https://www.youtube.com/watch?v=kzZ6KXDM1RI",
+  // 2026-10-12最終夜：録画文字起こしと正式歌詞を照合、原曲公式MVを個別確認。
+  // 超ときめき♡宣伝部 Official / 超最強。
+  "https://www.youtube.com/watch?v=Yeahpo-0Ub4",
+  // AKB48 Official / ヘビーローテーション。
+  "https://www.youtube.com/watch?v=lkHlnWFnA0c",
+  // HoneyWorks OFFICIAL / mona（CV：夏川椎菜）「ファンサ」。
+  "https://www.youtube.com/watch?v=lzyDD8bMDKs",
   "https://www.youtube.com/watch?v=F3P8vcZkIh4",
   "https://www.youtube.com/watch?v=vtJEXV-ZZBw",
 

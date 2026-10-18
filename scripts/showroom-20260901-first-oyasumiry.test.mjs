@@ -1,7 +1,14 @@
 import "./fixtures/as-of-20260922.mjs";
 import assert from "node:assert/strict";
 import { news as currentNewsForMedia } from "./fixtures/news-before-b183.ts";
-const priorMediaSources = { newsItems: currentNewsForMedia.filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks") };
+// This test covers the earlier media surface; current scope has its own regression.
+const priorMediaSources = {
+  newsItems: currentNewsForMedia
+    .filter(({ id }) => id !== "2026-09-15-night-fanroom-thanks")
+    .map((item) => item.id === "2026-09-01-first-showroom-oyasumiry"
+      ? { ...item, activityMediaIds: undefined }
+      : item),
+};
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
 import { readFile, readdir, stat } from "node:fs/promises";
@@ -271,7 +278,7 @@ describe("2026-09-01 first SHOWROOM おやすみりー — scope", () => {
       streamSchedule.every((slot) => slot.date.startsWith("2026-09-") && slot.date >= "2026-09-03"),
       true,
     );
-    assert.equal(contest.currentPhase?.name, "4次審査");
+    assert.notEqual(contest.currentPhase?.source, news.find(({ id }) => id === NEWS_ID)?.source);
   });
 
   it("keeps Portal Feed aligned with NEWS order and the lead still", () => {

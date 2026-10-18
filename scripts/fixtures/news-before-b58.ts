@@ -1,11 +1,12 @@
 export * from "../../src/data/news.ts";
 import { news as liveNews } from "../../src/data/news.ts";
 // Preserve the historical NEWS snapshot before the October 3 morning recap.
-const currentNews = liveNews.filter(({ id }) => id !== "2026-10-07-fourth-round-official-update" && id !== "2026-10-06-night-showroom-recap" && id !== "2026-10-06-noon-showroom-recap" && id !== "2026-10-06-morning-showroom-recap" && id !== "2026-10-05-night-showroom-recap" && id !== "2026-10-05-morning-showroom-recap" && id !== "2026-10-05-paton-ex2-day2-guide" && id !== "2026-10-05-car-vote-day-four-x" && id !== "2026-10-04-night-showroom-recap" && id !== "2026-10-04-radio-anniversary-recap" && id !== "2026-10-04-day-showroom-recap" && id !== "2026-10-04-morning-showroom-recap" && id !== "2026-10-04-confirmed-vote-support-video" && id !== "2026-10-04-radio-anniversary-stories" && id !== "2026-10-03-morning-showroom-recap" && id !== "2026-10-03-confirmed-tiktok-campus-makeup");
+const currentNews = liveNews.filter(({ id }) => id !== "2026-10-14-x-redhood-lip-gloss-video" && id !== "2026-10-13-x-first-cosplay-red-riding-hood" && id !== "2026-10-08-fanroom-voice-message" && id !== "2026-10-08-showroom-announced-schedule" && id !== "2026-10-07-fourth-round-official-update" && id !== "2026-10-06-night-showroom-recap" && id !== "2026-10-06-noon-showroom-recap" && id !== "2026-10-06-morning-showroom-recap" && id !== "2026-10-05-night-showroom-recap" && id !== "2026-10-05-morning-showroom-recap" && id !== "2026-10-05-paton-ex2-day2-guide" && id !== "2026-10-05-car-vote-day-four-x" && id !== "2026-10-04-night-showroom-recap" && id !== "2026-10-04-radio-anniversary-recap" && id !== "2026-10-04-day-showroom-recap" && id !== "2026-10-04-morning-showroom-recap" && id !== "2026-10-04-confirmed-vote-support-video" && id !== "2026-10-04-radio-anniversary-stories" && id !== "2026-10-03-morning-showroom-recap" && id !== "2026-10-03-confirmed-tiktok-campus-makeup");
 
 /** Historical NEWS snapshot before the owner-dated b58 TikTok addition. */
 export const news = currentNews.filter(
-  ({ id }) => id !== "2026-10-02-fourth-round-stream-schedule" &&
+  ({ id }) => id !== "2026-10-12-fourth-round-final-day-story" &&
+    id !== "2026-10-02-fourth-round-stream-schedule" &&
     id !== "2026-10-01-mixch-kossori" &&
     id !== "2026-09-29-record-cafe-mily-collection" &&
     id !== "2026-09-24-tiktok-good-vibes" &&

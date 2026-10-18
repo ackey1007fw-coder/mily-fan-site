@@ -136,9 +136,9 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Latest entry", () 
     assert.match(radio.body, /8月29日/);
     assert.match(radio.body, /14:40からのSHOWROOMラジオ配信を案内/);
     assert.match(radio.body, /配信前の記録/);
-    assert.equal(contest.currentPhase?.name, "4次審査");
-    assert.equal(contest.currentPhase?.start, "2026-10-02");
-    assert.equal(contest.currentPhase?.end, "2026-10-12");
+    for (const source of [LIVE_SOURCE, RADIO_SOURCE]) {
+      assert.notEqual(contest.currentPhase?.source, source);
+    }
 
     for (const phrase of [
       "配信します",
@@ -263,6 +263,7 @@ describe("2026-08-29 SHOWROOM radio / third-round X posts — Portal Feed", () =
   it("flows through Portal Feed without a hardcoded news id or image", async () => {
     const feed = createPortalFeed({ newsItems: news,
       now: new Date("2026-08-29T16:00:00+09:00"),
+      storyItems: stories.filter((story) => story.date <= "2026-08-29"),
       limit: PORTAL_FEED_LIMIT + 4,
     });
     const liveEntry = findFeedItem(feed, portalNewsId(LIVE_ID));

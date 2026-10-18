@@ -75,11 +75,25 @@
     />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <main lang="ja">
+          <h1>みりぃ（三橋莉子 / Mily）ファンサイト（非公式）</h1>
+          <p>ラジオ、ライブ配信、コンテストなどの活動をまとめたファン運営の非公式サイトです。本人運営ではありません。</p>
+          <p>JavaScriptが無効なため、最新情報や写真の一部は表示されません。主要なページへは以下のリンクから移動できます。</p>
+          <nav aria-label="主要ページ">
+            <ul>
+              <li><a href="/profile/">プロフィール</a></li>
+              <li><a href="/activities/">活動</a></li>
+              <li><a href="/activities/live/">配信レポート</a></li>
+              <li><a href="/news/">NEWS</a></li>
+              <li><a href="/gallery/">Gallery</a></li>
+            </ul>
+          </nav>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/mily-analytics-loader.js"></script>
   </body>
 </html>

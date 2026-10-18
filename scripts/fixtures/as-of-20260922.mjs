@@ -1,6 +1,14 @@
 import { tiktokCampusMakeupVideo } from "../../src/data/tiktokCampusMakeupVideo.ts";
+import { tiktokOct04SelfieVideo } from "../../src/data/tiktokOct04SelfieVideo.ts";
+import { tiktokOct07RibbonVideo } from "../../src/data/tiktokOct07RibbonVideo.ts";
+import { tiktokSeasideCircleSharedVideo } from "../../src/data/tiktokSeasideCircleSharedVideo.ts";
 // This confirmed-on October 3 item did not exist in the historical September snapshot.
 tiktokCampusMakeupVideo.published = false;
+// October 4 TikTok post did not exist in the September 22 historical snapshot.
+tiktokOct04SelfieVideo.published = false;
+tiktokOct07RibbonVideo.published = false;
+// This owner-shared TikTok was not yet available in the historical September snapshot.
+tiktokSeasideCircleSharedVideo.published = false;
 /**
  * Historical tests were written against the site as it stood on 2026-09-22.
  * Node runs test files in separate workers, so remove later records from
@@ -12,6 +20,19 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-17-x-relaxed-morning-showroom",
+  "2026-10-16-x-red-riding-hood-new-video",
+  "2026-10-16-tiktok-seasidecircle-shared",
+  "2026-10-15-miss-circle-semifinal-advance",
+  "2026-10-15-x-sleep-check-in",
+  "2026-10-13-x-first-cosplay-red-riding-hood",
+  "2026-10-12-fourth-round-final-day-story",
+  "2026-10-11-x-fourth-round-final-day-peace",
+  "2026-10-07-tiktok-ribbon",
+  "2026-10-04-tiktok-selfie",
+  "2026-10-11-radio-tournament-stories",
+  "2026-10-08-fanroom-voice-message",
+  "2026-10-08-showroom-announced-schedule",
   "2026-10-05-car-vote-day-four-x",
   "2026-10-04-confirmed-vote-support-video",
   "2026-10-04-radio-anniversary-stories",
@@ -32,6 +53,10 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b217-01-fourth-round-final-day-story",
+  "mily-b216-01-x-final-day-peace",
+  "mily-b201-01-radio-tournament-story",
+  "mily-b201-02-radio-message-story",
   "mily-b187-01-vote-support",
   "mily-b186-01-radio-anniversary-story",
   "mily-b186-02-radio-message-story",
@@ -44,6 +69,11 @@ const newVideoIds = new Set([
   "mily-b144-01-morning-commute-story",
 ]);
 
+// Exclude the additional October 16 program TikTok from historical fixtures.
+import { tiktokSeasideCirclePoseVideo } from "../../src/data/tiktokSeasideCirclePoseVideo.ts";
+tiktokSeasideCirclePoseVideo.published = false;
+newNewsIds.add("2026-10-16-tiktok-seasidecircle-hand-poses");
+
 for (let index = news.length - 1; index >= 0; index--) {
   if (newNewsIds.has(news[index].id)) news.splice(index, 1);
 }
@@ -51,5 +81,5 @@ for (let index = galleryVideos.length - 1; index >= 0; index--) {
   if (newVideoIds.has(galleryVideos[index].id)) galleryVideos.splice(index, 1);
 }
 for (let index = media.length - 1; index >= 0; index--) {
-  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id)) media.splice(index, 1);
+  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id) || media[index].id.startsWith("mily-b219-")) media.splice(index, 1);
 }

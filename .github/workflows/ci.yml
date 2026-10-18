@@ -19,6 +19,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: PR diff whitespace
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: git diff --check "$PR_BASE_SHA...$PR_HEAD_SHA"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -58,6 +67,45 @@ jobs:
           done
           npm install --prefix "$RUNNER_TEMP/mily-browser-tools" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.61.1
           node "$RUNNER_TEMP/mily-browser-tools/node_modules/playwright/cli.js" install --with-deps chromium webkit
+
+      - name: October 16 morning recap, still and lab link browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-recap-20261016-morning.browser.mjs
+
+      - name: Approved redhood five-clips browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+        run: node scripts/redhood-five-clips.browser.mjs
+
+      - name: Mily Signal data lab browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/data-lab.browser.mjs
+
+      - name: October 12 final stream and separate vote deadlines browser checks
+        timeout-minutes: 5
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/final-stream-20261012.browser.mjs
+
+      - name: October 8 announced stream schedule browser checks
+        timeout-minutes: 5
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/announced-stream-20261008.browser.mjs
 
       - name: Ad reward beginner guide browser checks
         timeout-minutes: 3
@@ -145,6 +193,14 @@ jobs:
           PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
         run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/radio-archive.browser.mjs
+
+      - name: October 8 morning short report browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-recap-20261008-morning.browser.mjs
 
       - name: Upload song catalog browser evidence
         if: ${{ always() }}

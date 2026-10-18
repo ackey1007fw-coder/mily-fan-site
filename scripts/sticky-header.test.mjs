@@ -12,11 +12,14 @@ describe("sticky header scroll container", () => {
     const app = source("src/App.tsx");
     const archive = source("src/components/ArchiveShell.tsx");
     const header = source("src/components/Header.tsx");
+    const baseCss = source("src/index.css");
 
     assert.match(app, /overflow-x-clip/);
     assert.doesNotMatch(app, /overflow-x-hidden/);
     assert.match(archive, /overflow-x-clip/);
     assert.doesNotMatch(archive, /overflow-x-hidden/);
     assert.match(header, /sticky top-0/);
+    assert.doesNotMatch(baseCss, /overflow-x-hidden|overflow-x: hidden/);
+    assert.match(baseCss, /overflow-x: clip/);
   });
 });
