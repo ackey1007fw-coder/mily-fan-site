@@ -56,6 +56,13 @@ try{
      await page.locator('[data-metric="stars"]').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('[data-metric="stars"]').getAttribute('aria-pressed'),'true');
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth),false,'filtered overflow');
      await page.locator('.back').click();assert.equal(new URL(page.url()).pathname,'/data-lab/');assert.ok(await page.locator('a[href="/data-lab/stream-timing/"]').count()>=1);
+     const nightRes=await page.goto(base+'/data-lab/reports/20261018-night/',{waitUntil:'networkidle'});assert.equal(nightRes.status(),200);
+     await page.locator('#n18-points tr').first().waitFor({state:'visible'});
+     assert.equal(await page.locator('#n18-points tr').count(),25);
+     await page.locator('[data-n18-metric="comments"]').click();assert.equal(await page.locator('[data-n18-metric="comments"]').getAttribute('aria-pressed'),'true');
+     assert.ok((await page.locator('#n18-pace tr').count())>=7);
+     assert.equal(await page.locator('meta[name=robots]').getAttribute('content'),'noindex,nofollow,noarchive');
+     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth),false,'night report mobile overflow');
      assert.deepEqual(errors,[]);
      results.push({engine:engineName,width,passed:true});
     }finally{await context.close();}
