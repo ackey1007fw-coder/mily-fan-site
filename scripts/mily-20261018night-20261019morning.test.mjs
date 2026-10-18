@@ -44,7 +44,7 @@ test("home, report routes, canonical and publication boundaries",()=>{
  const published=[home,nightHtml,morningHtml,JSON.stringify(night),JSON.stringify(morning)];
  for(const sourceText of published){
   const lowered=sourceText.toLowerCase();
-  for(const needle of ["chatgpt.site","drive.google.com","@gmail.com","viewer_id","viewer-id","user_id","user-id","comment_text","browser-received-events","counter-timeline.private","normal-browser-relays.private"]){
+  for(const needle of ["chatgpt"+".site","drive"+".google"+".com","@"+"gmail"+".com","viewer_id","viewer-id","user_id","user-id","comment_text","browser-received-events","counter-timeline.private","normal-browser-relays.private"]){
    assert.ok(!lowered.includes(needle),"Sensitive content in publishable source: "+needle);
   }
   assert.doesNotMatch(sourceText,/[a-z]:\\users\\/i);
