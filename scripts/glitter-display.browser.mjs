@@ -45,6 +45,13 @@ try {
     };
     await page.goto('https://site.test/support/#show-glitter-guide',{waitUntil:'networkidle'});
     await checkLanding('cold-share-link');
+    // Observe actual guide alignment, not pixel drift caused by focus scrolling.
+    await page.evaluate(()=>{
+     window.__glitterRealignCalls=0;
+     const target=document.getElementById('show-glitter-guide');
+     const original=target.scrollIntoView.bind(target);
+     target.scrollIntoView=(...args)=>{window.__glitterRealignCalls++;return original(...args);};
+    });
     const weekly=page.getByLabel('今週の公式ランキングpt');
     await weekly.fill('15000');
     await page.getByLabel('今週の残り日数（今日を含む）').selectOption('5');
@@ -52,8 +59,11 @@ try {
     const calculator=page.locator('[aria-labelledby="glitter-calc"]');
     assert.match(await calculator.innerText(),/25,000pt/);
     assert.match(await calculator.innerText(),/5,000pt/);
-    const y=await page.evaluate(()=>scrollY);await page.waitForTimeout(200);
-    assert.ok(Math.abs((await page.evaluate(()=>scrollY))-y)<2,'Calculator input must not force a jump to the heading');
+    await page.waitForTimeout(350);
+    const inputState=await page.evaluate(()=>({realignCalls:window.__glitterRealignCalls,headingBottom:document.querySelector('#glitter-heading').getBoundingClientRect().bottom,scrollY}));
+    console.log('calculator-scroll',JSON.stringify({engine,width,...inputState}));
+    assert.equal(inputState.realignCalls,0,'Calculator rerender must not realign the guide');
+    assert.ok(inputState.headingBottom<0,'Input must remain below the guide heading, not jump back');
     await page.goto('https://site.test/support/',{waitUntil:'networkidle'});
     assert.equal(await page.evaluate(()=>scrollY),0,'Plain Support stays at the top');
     await page.locator('[data-glitter-entry]').click();await checkLanding('top-entry');
