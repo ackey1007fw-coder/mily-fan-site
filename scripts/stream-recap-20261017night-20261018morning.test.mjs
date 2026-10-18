@@ -32,7 +32,7 @@ test("each item uses actual ASR limitations and the corresponding data lab link"
     assert.ok(x.transcriptionNote.includes(recording));
     assert.ok(x.transcriptionNote.includes("全編の手動聴取"));
     assert.ok(x.transcriptionNote.includes("静止画は掲載していません"));
-    assert.ok(x.transcriptionNote.includes("公式最終値"));
+    assert.ok(x.transcriptionNote.includes("配信終了時の確定値"));
     assert.ok(x.highlights.some((h) => h.relatedLinks?.some((link) => link.url === url)));
     assert.equal(x.nextNote, "");
     assert.deepEqual(x.ranking, []);
