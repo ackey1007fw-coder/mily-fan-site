@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { injectVercelWebAnalytics } from "./src/lib/vercelWebAnalytics.ts";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
 import { canonicalUrl, dataLabUrl, dataLabFinalNightUrl, dataLabOgImageUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 import { radioMusicPageMetadata, radioMusicPageStructuredData } from "./src/lib/radioMusicMetadata.ts";
@@ -151,6 +152,15 @@ function siteMetadataPlugin(): Plugin {
   };
 }
 
+function webAnalyticsHtmlPlugin(): Plugin {
+  return {
+    name: "vercel-web-analytics-html",
+    transformIndexHtml(html) {
+      return injectVercelWebAnalytics(html);
+    },
+  };
+}
+
 function portalFeedPlugin(): Plugin {
   return {
     name: "portal-feed",
@@ -165,7 +175,7 @@ function portalFeedPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), siteMetadataPlugin(), portalFeedPlugin()],
+  plugins: [react(), siteMetadataPlugin(), webAnalyticsHtmlPlugin(), portalFeedPlugin()],
   build: {
     target: "es2020",
     minify: "esbuild",
