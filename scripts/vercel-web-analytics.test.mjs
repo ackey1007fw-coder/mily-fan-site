@@ -1,36 +1,63 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { runInNewContext } from 'node:vm';
 import { injectVercelWebAnalytics } from '../src/lib/vercelWebAnalytics.ts';
 
 const scriptPath = '/_vercel/insights/script.js';
-
-function scriptCount(html) {
-  return html.split(scriptPath).length - 1;
+function scriptCount(html) { return html.split(scriptPath).length - 1; }
+function simulateBrowser(html, protocol) {
+  const inserted = [];
+  const matches = [...html.matchAll(/<script data-mily-analytics-loader>([\s\S]*?)<\/script>/g)];
+  assert.equal(matches.length, 1);
+  const window = { location: { protocol } };
+  const document = {
+    createElement: (tagName) => ({ tagName }),
+    head: { appendChild: (element) => inserted.push(element) },
+  };
+  runInNewContext(matches[0][1], { window, document });
+  return inserted;
 }
 
-test('injects exactly one Web Analytics script into an independent HTML entry', () => {
-  const page = '<!doctype html>\n<html>\n<body>\n  <main>profile</main>\n</body>\n</html>';
-  const result = injectVercelWebAnalytics(page);
-  assert.equal(scriptCount(result), 1);
-  assert.match(result, /window\.va = window\.va \|\| function/);
-  assert.match(result, /<script defer src="\/_vercel\/insights\/script\.js"><\/script>/);
-  assert.ok(result.indexOf(scriptPath) < result.indexOf('</body>'));
+test('inserts analytics once in secondary HTML entries', () => {
+  const input = '<!doctype html>\n<html>\n<body>\n  <main>profile</main>\n</body>\n</html>';
+  const output = injectVercelWebAnalytics(input);
+  assert.equal(scriptCount(output), 1);
+  assert.match(output, /window\.va = window\.va \|\| function/);
+  assert.ok(output.indexOf(scriptPath) < output.indexOf('</body>'));
+  assert.match(output, /data-mily-analytics-loader/);
 });
 
-test('does not duplicate analytics already present in the home HTML', () => {
-  const home = '<body>\n<script>window.va = window.va || function() {};</script>\n<script defer src="/_vercel/insights/script.js"></script>\n</body>';
-  assert.equal(injectVercelWebAnalytics(home), home);
-  assert.equal(scriptCount(injectVercelWebAnalytics(home)), 1);
+test('replaces legacy home loader instead of adding a second one', () => {
+  const input = '<body>\n<script>window.va = window.va || function() {};</script>\n<script defer src="/_vercel/insights/script.js"></script>\n</body>';
+  const output = injectVercelWebAnalytics(input);
+  assert.equal(scriptCount(output), 1);
+  assert.doesNotMatch(output, /<script defer src="\/_vercel\/insights\/script\.js"/);
+  assert.equal(output.split('window.va = ').length, 2);
+  assert.equal(simulateBrowser(output, 'http:').length, 0);
 });
 
-test('is idempotent for secondary pages', () => {
-  const secondary = '<body>\n<div id="root"></div>\n</body>';
-  const once = injectVercelWebAnalytics(secondary);
-  const twice = injectVercelWebAnalytics(once);
-  assert.equal(twice, once);
-  assert.equal(scriptCount(twice), 1);
+test('injection is idempotent', () => {
+  const input = '<body><div id="root"></div>\n</body>';
+  const once = injectVercelWebAnalytics(input);
+  assert.equal(injectVercelWebAnalytics(once), once);
+  assert.equal(scriptCount(once), 1);
 });
 
-test('does not rewrite fragments with no closing body tag', () => {
-  assert.equal(injectVercelWebAnalytics('<p>Hello</p>'), '<p>Hello</p>');
+test('avoids requesting Vercel-only script from local HTTP previews', () => {
+  const output = injectVercelWebAnalytics('<body>\n</body>');
+  assert.equal(simulateBrowser(output, 'http:').length, 0);
+});
+
+test('loads one first-party script on HTTPS deployments', () => {
+  const output = injectVercelWebAnalytics('<body>\n</body>');
+  const scripts = simulateBrowser(output, 'https:');
+  assert.equal(scripts.length, 1);
+  assert.equal(scripts[0].tagName, 'script');
+  assert.equal(scripts[0].src, scriptPath);
+  assert.equal(scripts[0].defer, true);
+});
+
+test('leaves HTML fragments without a closing body tag unchanged', () => {
+  const fragment = '<p>Hello</p>';
+  assert.equal(injectVercelWebAnalytics(fragment), fragment);
 });
