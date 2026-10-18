@@ -42,5 +42,11 @@ test("home, report routes, canonical and publication boundaries",()=>{
  for(const route of ["dataLabNight20261018", "dataLabMorning20261019"]){assert.ok(vite.includes(route));}
  for(const x of ["__DATA_LAB_20261018_NIGHT_CANONICAL__","__DATA_LAB_20261019_MORNING_CANONICAL__"]){assert.ok(vite.includes(x));}
  const published=[home,nightHtml,morningHtml,JSON.stringify(night),JSON.stringify(morning)];
- for(const s of published){assert.doesNotMatch(s,/chatgpt\\.site|drive\\.google\\.com|[A-Z]:\\\\Users\\\\|viewer[_-]?id|user[_-]?id|comment_text|browser-received-events|counter-timeline\\.private|normal-browser-relays\\.private|@gmail\\.com/i);}
+ for(const sourceText of published){
+  const lowered=sourceText.toLowerCase();
+  for(const needle of ["chatgpt.site","drive.google.com","@gmail.com","viewer_id","viewer-id","user_id","user-id","comment_text","browser-received-events","counter-timeline.private","normal-browser-relays.private"]){
+   assert.ok(!lowered.includes(needle),"Sensitive content in publishable source: "+needle);
+  }
+  assert.doesNotMatch(sourceText,/[a-z]:\\users\\/i);
+ }
 });
