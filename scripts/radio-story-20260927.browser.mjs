@@ -155,6 +155,13 @@ try {
       }
       await page.goto(origin + "/gallery/", { waitUntil: "networkidle" });
       const galleryPhoto = page.locator(`img[src="${image.src}"]`);
+      // Newer Gallery items can push this historical photo past the initial
+      // window; reach it through the real archive "more" button.
+      const galleryMore = page.getByRole("button", {name:ARCHIVE_LOAD_MORE_LABEL,exact:true});
+      for (let pageIndex = 0; pageIndex < 8 && await galleryPhoto.count() === 0; pageIndex++) {
+        assert.ok(await galleryMore.count(), "Historical Gallery photo must remain reachable through archive pagination");
+        await galleryMore.first().click();
+      }
       assert.equal(await galleryPhoto.count(), 1);
       await galleryPhoto.scrollIntoViewIfNeeded();
       await page.waitForFunction(img => img.complete && img.naturalWidth > 0, await galleryPhoto.elementHandle());
