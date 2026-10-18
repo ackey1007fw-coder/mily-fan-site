@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { injectVercelWebAnalytics } from "./src/lib/vercelWebAnalytics.ts";
 import { createPortalFeed } from "./src/data/portalFeed.ts";
 import { canonicalUrl, dataLabUrl, dataLabFinalNightUrl, dataLabOgImageUrl, ogImageUrl, profileUrl, storyUrl } from "./src/data/site";
 import { radioMusicPageMetadata, radioMusicPageStructuredData } from "./src/lib/radioMusicMetadata.ts";
@@ -151,6 +152,26 @@ function siteMetadataPlugin(): Plugin {
   };
 }
 
+function webAnalyticsHtmlPlugin(): Plugin {
+  return {
+    name: "vercel-web-analytics-html",
+    transformIndexHtml(html) {
+      return injectVercelWebAnalytics(html);
+    },
+    // Vercel provides this special asset in deployments, not in local Vite
+    // preview. Serve an inert stand-in only for local browser QA, so the
+    // existing console-error assertions still catch unrelated broken assets.
+    configurePreviewServer(server) {
+      server.middlewares.use("/_vercel/insights/script.js", (_request, response) => {
+        response.setHeader("Content-Type", "application/javascript; charset=utf-8");
+        response.setHeader("Cache-Control", "no-store");
+        response.statusCode = 200;
+        response.end("// Local Vite preview fixture; no analytics are collected.");
+      });
+    },
+  };
+}
+
 function portalFeedPlugin(): Plugin {
   return {
     name: "portal-feed",
@@ -165,7 +186,7 @@ function portalFeedPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), siteMetadataPlugin(), portalFeedPlugin()],
+  plugins: [react(), siteMetadataPlugin(), webAnalyticsHtmlPlugin(), portalFeedPlugin()],
   build: {
     target: "es2020",
     minify: "esbuild",
