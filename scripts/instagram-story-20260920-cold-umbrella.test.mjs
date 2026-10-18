@@ -60,13 +60,13 @@ const POSTER_SHA256 =
 const ORIGINAL_SHA256 =
   "428ee17e3c64c7e134ba8a59a2c92a0b3cf5fa521f1fe6a8f8ba2fee177e2201";
 
-const TITLE = "寒がりのみりいには耐え難い気温かも";
+const TITLE = "寒がりのみりぃには耐え難い気温かも";
 const BODY =
-  "9月20日、みりぃがInstagram Storyで、銀の傘の下からくまの耳と鼻のフィルターを付けた縦型動画を届けました。画面には「みんな〜 寒がりのみりいには耐え難い気温かも」「行ってきまーす」とあり、出かける直前の様子です。同じ日のXでも、寒がりであることと体調管理を呼びかけています。";
+  "9月20日、みりぃがInstagram Storyで、銀の傘の下からくまの耳と鼻のフィルターを付けた縦型動画を届けました。画面には「みんな〜 寒がりのみりぃには耐え難い気温かも」「行ってきまーす」とあり、出かける直前の様子です。同じ日のXでも、寒がりであることと体調管理を呼びかけています。";
 const MESSAGE =
   "みんな〜\n" +
-  "寒がりのみりいには耐え難い気温かも🥶🥶🥶\n" +
-  "行ってきまーす٩(ˊᗜˋ*)و♪";
+  "寒がりのみりぃには耐え難い気温かも🫢🫢🫢\n" +
+  "行ってきまーす٩(^‿^)۶♪";
 
 function item() {
   return news.find((entry) => entry.id === NEWS_ID);
@@ -248,7 +248,7 @@ describe("2026-09-20 Instagram Story 寒がり傘 — Latest / NEWS", () => {
     const entry = item();
     const copy = `${entry.title}\n${entry.body}\n${entry.message.text}`;
 
-    assert.match(copy, /寒がりのみりいには耐え難い気温かも/);
+    assert.match(copy, /寒がりのみりぃには耐え難い気温かも/);
     assert.match(copy, /行ってきまーす/);
     assert.doesNotMatch(copy, /横アリ|横浜アリーナ/);
     assert.doesNotMatch(copy, /0:00|23:59|0時|23時/);
@@ -351,7 +351,7 @@ describe("2026-09-20 Instagram Story 寒がり傘 — privacy and scope", () => 
     const docs = await readFile(path.join(root, "docs/MEDIA.md"), "utf8");
     const ops = await readFile(path.join(root, "docs/CONTENT-OPS.md"), "utf8");
     const start = ops.indexOf(
-      "## 2026-09-20確認: Instagram Story「寒がりのみりいには耐え難い気温かも」",
+      "## 2026-09-20確認: Instagram Story「寒がりのみりぃには耐え難い気温かも」",
     );
     assert.notEqual(start, -1);
     const section = ops.slice(start, ops.indexOf("\n## 2026-09-19確認", start));
