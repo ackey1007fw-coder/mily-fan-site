@@ -1,14 +1,13 @@
 import {createServer} from 'node:http';
 import {readFile,writeFile,mkdir,stat} from 'node:fs/promises';
 import {resolve,extname,sep} from 'node:path';
-import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
-import {fileURLToPath} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 const root=fileURLToPath(new URL('../dist/',import.meta.url));
 const artifact=resolve(process.env.SONG_CATALOG_ARTIFACT_DIR || fileURLToPath(new URL('../artifacts/stream-timing/',import.meta.url)));
 const moduleRoot=process.env.PLAYWRIGHT_MODULE_ROOT;
-const require=createRequire(moduleRoot?resolve(moduleRoot,'package.json'):import.meta.url);
-const {chromium,webkit}=require('playwright');
+assert.ok(moduleRoot,'CI Playwright modules must be installed');
+const {chromium,webkit}=await import(pathToFileURL(resolve(moduleRoot,'playwright/index.mjs')).href);
 const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.png':'image/png'};
 const server=createServer(async(req,res)=>{
  try{
