@@ -27,11 +27,11 @@ test("each item uses actual ASR limitations and the corresponding data lab link"
   expectations.forEach(({ id, chunks, recording, url }, index) => {
     const x = latest[index];
     assert.equal(x.id, id);
-    assert.match(x.sourceLabel, /保存録画の速報自動文字起こし/);
+    assert.match(x.sourceLabel, /保存録画の実フレーム・速報自動文字起こし/);
     assert.ok(x.transcriptionNote.includes(chunks));
     assert.ok(x.transcriptionNote.includes(recording));
     assert.ok(x.transcriptionNote.includes("全編の手動聴取"));
-    assert.ok(x.transcriptionNote.includes("静止画は掲載していません"));
+    assert.ok(x.transcriptionNote.includes("静止画は当該回の保存録画から抽出した実フレーム"));
     assert.ok(x.transcriptionNote.includes("配信終了時の確定値"));
     assert.ok(x.highlights.some((h) => h.relatedLinks?.some((link) => link.url === url)));
     assert.equal(x.nextNote, "");
@@ -61,8 +61,10 @@ test("timestamps stay within saved duration and text remains grounded", () => {
 
 test("no viewer details, private records, unapproved stills, or invented song IDs leak publicly", () => {
   for (const r of latest) {
-    assert.equal(r.image, undefined);
-    assert.equal(r.gallery, undefined);
+    assert.ok([4, 8].includes(r.gallery?.length));
+    assert.ok(r.gallery.some((item) => item.src === r.image?.src));
+    assert.equal(r.galleryZip, undefined);
+    assert.ok(r.gallery.every((item) => item.src.startsWith("/media/live/mily-b229-")));
     assert.equal(r.songs, undefined);
     assert.equal(r.approvedSongClips, undefined);
     const publicText = JSON.stringify(r);
