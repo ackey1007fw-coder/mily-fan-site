@@ -1,0 +1,25 @@
+# DECISION_LOG — mily-fan-site
+
+長く守る判断と、その理由。**追記のみ**（変更するときは新しい行で「D-xx を置き換え」と書く）。
+2026-10-18 に、それまでのPR・`AGENTS.md`・運用資料に散らばっていた既存判断を集約して作成した。各行の根拠は記載のファイル / PR。D-01〜D-17 の「日付」は、そのルールが入ったおおよその時期（月単位）。
+
+| ID | 日付 | 判断 | 理由 | 影響範囲・根拠 |
+| --- | --- | --- | --- | --- |
+| D-01 | 2026-08-14 | このサイトは**ファン制作・非公式**。「公式」「公認」と書かない。年号付きサイトにせず、2027年以降も同じrepoで続ける | 本人運営と誤認させない。長期の応援アーカイブにする | 全ページ / `README.md` / `AGENTS.md` |
+| D-02 | 2026-08 | 英語表記は **Mily / mily** に固定。l を重ねた綴りは誤りとして guard で全ファイル検査 | 本人の公開identity（Instagram @mily_chan36）。spellcheck やAIの推測で"修正"される事故を防ぐ | `scripts/check-site-identity.mjs` / `AGENTS.md` 作業前チェック |
+| D-03 | 2026-08 | 他の人物・他のファンサイトの名前・URL・データをこのrepoに書かない（guard で検出） | 姉妹サイト間の取り違え事故の再発防止 | `scripts/check-site-identity.mjs` の FORBIDDEN |
+| D-04 | 2026-08 | `AGENTS.md` を全ツール共通の**唯一のルール置き場**とし、`CLAUDE.md` 等はポインタだけにする | ルール分岐を防ぐ | `AGENTS.md` / `CLAUDE.md` |
+| D-05 | 2026-08 | canonical は `https://mily-fan-site.vercel.app`。canonical / OG は `src/data/site.ts` のヘルパーから生成 | URLの一元管理 | `src/data/site.ts` / `scripts/check-site-url.mjs` |
+| D-06 | 2026-08 | 元素材は `media/original/`（コミットしない）。公開派生は `pnpm media:build`。**公開済みファイル名は不変・上書き禁止** | キャッシュ事故と、NEWS / SNS からのリンク切れ防止（#412） | `docs/MEDIA.md` / `scripts/build-media.mjs` |
+| D-07 | 2026-08 | 本人の顔のAI生成・置換・補正・生成塗り足しは禁止。写真は比率合わせのために顔・身体を切らない | 本人への敬意と事実性 | `AGENTS.md` メディア |
+| D-08 | 2026-08 | X / Instagram の自動取得・CDN hotlink・動画DLはしない。Mixch はオーナー指定 movie URL の outbound カードだけ（公式サムネイル可）を限定例外とする | 権利・規約・本人の公開範囲を守る | `AGENTS.md` / `src/components/MixchOutboundCard.tsx` |
+| D-09 | 2026-08 | 配信予定は `/api/mily-schedule` が ENTRY 734 起点で room を自動解決。room ID を直書き・推測しない。手入力 fallback に未確認時刻を書かない | room 変更への耐性と、誤った予定を出さないため | `api/mily-schedule.js` / `streamSchedule.ts` |
+| D-10 | 2026-08 | FMの放送状態は確認できたときだけ `true`。取得失敗は `null`、別番組は `false`。放送枠だけで本人出演を断定しない | false と unavailable を混ぜると誤情報になる | `api/mily-radio-status.js` / `radio.ts` |
+| D-11 | 2026-09 | **photo-forward**：承認済みの安全な実素材は積極的に複数使う。非掲載は例外で、理由を残す | みりぃの魅力が伝わるサイトにするため。ただし安全条件は緩めない | `AGENTS.md` ビジュアル方針 |
+| D-12 | 2026-09 | 配信メモは既存 `StreamRecap` 型と各回1ファイル。元動画確認か提供資料のみかを区別し、全文文字起こし・録画・ランキング個人名は公開しない | 公開アーカイブとしての正確さとプライバシー | `docs/LIVE-STREAM-RECAP.md` |
+| D-13 | 2026-09 | 既定のマージ委任：停止条件がなく「マージしてよい条件」を current head で満たせば、接続済みAIが squash merge まで進めてよい | オーナーの確認待ちで日々の更新が止まらないようにする | `AGENTS.md` 既定のマージ委任 |
+| D-14 | 2026-09 | Codex review は任意の追加レビュー。利用上限・接続障害だけで merge を止めない。ただし接続エラーを成功扱いしない | レビュー基盤の不調で運用が止まるのを防ぐ | `AGENTS.md` 任意のCodexレビュー依頼の委任 |
+| D-15 | 2026-09 | SNS投稿は 予約済み / 送信受理 / 公開実画面未確認 / 公開実画面確認済み の4状態で扱う | API成功だけでは表紙・本文・リンクが正しい保証がない | `docs/CONTENT-OPS.md` |
+| D-16 | 2026-09 | サブエージェントは原則自動起動しない（最大2・再帰禁止） | 使用枠とトークンの節約、品質の一貫性 | `AGENTS.md` サブエージェント節 |
+| D-17 | 2026-10-12 | MILY SIGNAL（`/data-lab/`）は匿名・集計のみ。個人を特定できる視聴者データ・非公開分析システムを持ち込まない。`noindex` を維持し、一般公開はオーナー判断 | 参加者・視聴者のプライバシー。固定スナップショットを最新値と誤認させない | `docs/DATA-LAB.md` |
+| D-18 | 2026-10-18 | オーナーの明示依頼により、Project Memory（`docs/AI_HANDOFF.md` / `docs/DECISION_LOG.md` / `docs/AI_PROJECT_MEMORY_SKILL.md`）を導入した | 複数AI・複数チャット間で、説明し直しなく引き継げるようにする | このファイル |
