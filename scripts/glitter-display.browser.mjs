@@ -48,8 +48,10 @@ try {
     const weekly=page.getByLabel('今週の公式ランキングpt');
     await weekly.fill('15000');
     await page.getByLabel('今週の残り日数（今日を含む）').selectOption('5');
-    assert.match(await page.locator('#glitter-calc').innerText(),/25,000pt/);
-    assert.match(await page.locator('#glitter-calc').innerText(),/5,000pt/);
+    // #glitter-calc is the h3; the labelled region also contains the results.
+    const calculator=page.locator('[aria-labelledby="glitter-calc"]');
+    assert.match(await calculator.innerText(),/25,000pt/);
+    assert.match(await calculator.innerText(),/5,000pt/);
     const y=await page.evaluate(()=>scrollY);await page.waitForTimeout(200);
     assert.ok(Math.abs((await page.evaluate(()=>scrollY))-y)<2,'Calculator input must not force a jump to the heading');
     await page.goto('https://site.test/support/',{waitUntil:'networkidle'});
