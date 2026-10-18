@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir,stat} from 'node:fs/promises';
 import {resolve,extname,sep} from 'node:path';
 import assert from 'node:assert/strict';
 import {fileURLToPath,pathToFileURL} from 'node:url';
-const root=fileURLToPath(new URL('../dist/',import.meta.url));
+const root=resolve(fileURLToPath(new URL('../dist/',import.meta.url)));
 const artifact=resolve(process.env.SONG_CATALOG_ARTIFACT_DIR || fileURLToPath(new URL('../artifacts/stream-timing/',import.meta.url)));
 const moduleRoot=process.env.PLAYWRIGHT_MODULE_ROOT;
 assert.ok(moduleRoot,'CI Playwright modules must be installed');
