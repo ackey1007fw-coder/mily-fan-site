@@ -64,6 +64,9 @@ export function Support() {
           ))}
         </div>
         <ShowroomAdRewardTeaser />
+        <a href="/support/#show-glitter-guide" className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline underline-offset-4 hover:text-sage-deep">
+          🥇 金グリッターの獲得条件・維持ガイドを見る
+        </a>
         {missCircleFourthRoundWebVote.schedule.state === "confirmed-period" && now <= Date.parse(missCircleFourthRoundWebVote.schedule.end) ? <a href={`${SUPPORT_HUB_ROUTE}#fourth-round-guide`} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-sage-deep underline">
           四次審査の日程・投票・SHOWROOMの応援方法
         </a> : null}
