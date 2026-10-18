@@ -10,8 +10,8 @@ import { streamRecaps } from "../src/data/streamRecaps.ts";
 const recap = streamRecap20261017Asa;
 const siteRoot = new URL("../", import.meta.url);
 
-test("long October 17 morning is the latest unique LIVE STREAM card", () => {
-  assert.equal(streamRecaps[0], recap);
+test("long October 17 morning remains a unique LIVE STREAM card below 10/18 and 10/17 night", () => {
+  assert.equal(streamRecaps[2], recap);
   assert.equal(streamRecaps.filter((item) => item.id === recap.id).length, 1);
   assert.equal(recap.id, "2026-10-17-morning-showroom");
   assert.equal(recap.date, "2026-10-17");
