@@ -204,6 +204,33 @@ try {
             await page.waitForSelector("#sr-chart .bar-row");
           }
 
+          await page.goto(`${baseUrl}/data-lab/`, { waitUntil: "networkidle" });
+          await page.getByRole("link", { name: "10/19朝の分析レポートを読む ↗", exact: true }).click();
+          await page.waitForURL(`${baseUrl}/data-lab/reports/20261019-morning/`);
+          assert.match(await page.title(), /10月19日朝の記録と金グリッター目標/);
+          assert.match(await page.locator(".alert").innerText(), /朝配信だけの獲得ptではありません/);
+          assert.match(await page.locator("#morning-findings").innerText(), /評価は保留/);
+          await page.getByRole("link", { name: "今週の金グリ目標へ ↓", exact: true }).click();
+          await page.waitForURL(`${baseUrl}/data-lab/reports/20261019-morning/#glitter-goal`);
+          assert.ok(await page.getByRole("heading", { name: "次の金グリッターへ。今週の現在地", exact: true }).isVisible());
+          assert.equal(await page.locator("#weekly-minimum").getAttribute("value"), "7089");
+          assert.match(await page.locator("#glitter-goal").innerText(), /32,911/);
+          assert.match(await page.locator("#glitter-goal").innerText(), /自動更新されません/);
+          assert.equal(await page.locator("details").getAttribute("open"), null,
+            "Invalid early zeroes must stay folded on initial load");
+          await page.locator("details summary").click();
+          assert.notEqual(await page.locator("details").getAttribute("open"), null);
+          assert.ok(await page.getByRole("cell", { name: "無効・欠測", exact: true }).isVisible());
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+            `Morning report must not overflow at ${width}px in ${engine}`);
+          await page.locator("details summary").click();
+          await page.locator("#glitter-goal").screenshot({ path: join(output, `${engine}-${width}-morning-glitter-goal.png`) });
+          await page.getByRole("link", { name: "前夜18日の画面実測を見る ↗", exact: true }).click();
+          await page.waitForURL(`${baseUrl}/data-lab/reports/20261018-night/`);
+          assert.match(await page.locator("h1").innerText(), /10月18日夜/);
+          assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
+            `October 18 night report must not overflow at ${width}px in ${engine}`);
+
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Home has horizontal overflow");
