@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark"><meta name="theme-color" content="#101d28">
+<title>金グリッター進捗ボード｜Mily SIGNAL</title>
+<meta name="description" content="みりぃの公式Classicタレント順位と週間pt、40,000ptまでの残り、配信回数別の目安。取得時刻と未確認条件を分けて確認できます。">
+<link rel="canonical" href="__DATA_LAB_GLITTER_CANONICAL__"><meta property="og:url" content="__DATA_LAB_GLITTER_CANONICAL__">
+<meta property="og:title" content="金グリッター進捗ボード｜Mily SIGNAL"><meta property="og:type" content="website"><meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="__DATA_LAB_OG_IMAGE__"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/data-lab/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/data-lab/assets/glitter-progress.css"><script type="module" src="/data-lab/assets/glitter-progress.js"></script>
+</head><body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header><div class="shell top"><a class="brand" href="/data-lab/">MILY <span>SIGNAL</span><small>DATA LAB / WEEKLY GLITTER</small></a><a class="pill" href="/data-lab/">← ラボ</a></div></header>
+<main id="main" class="shell">
+<section class="hero"><p class="eyebrow">みりぃ × 公式Classicランキング</p><h1>次の金グリッターへ。<br><span>「あとどのくらい？」</span></h1><p class="lead">三橋莉子さんの<strong>タレント枠の順位とポイント</strong>を確認して、無理のない応援の目安をつくろう。</p><div class="toolbar"><p id="period">日本時間の集計期間を確認中</p><button id="refresh" type="button">最新の取得結果を読む ↻</button></div><p id="status" role="status" aria-live="polite">公式ランキングを確認しています。</p></section>
+<noscript><div class="notice">JavaScriptを有効にすると進捗を確認できます。<a href="https://www.showroom-live.com/ranking" target="_blank" rel="noopener noreferrer">SHOWROOM公式ランキング</a>でタレント・週間を選んでください。</div></noscript>
+<section class="score-grid" aria-label="週間の進捗">
+<article class="card main-score"><p class="eyebrow">週間40,000ptの最低条件まで</p><h2>あと <strong id="remaining">確認中</strong><span> pt</span></h2><label for="progress">ポイント条件の進捗 <span id="percent">未確認</span></label><progress id="progress" max="40000" value="0" aria-label="週間最低40,000ptへの進捗" hidden></progress><p>今週 <strong id="weekly-points">未確認</strong> pt / 40,000pt</p><p class="fine">40,000ptに到達しても、順位条件が別に必要です。</p></article>
+<article class="card rank-card"><p class="eyebrow">タレント枠・週間ランキング</p><h2><strong id="weekly-rank">未確認</strong><span> 位</span></h2><p id="listed">ランキング掲載数も確認中です。</p><p id="rank-gap" class="small-box">直上順位との差は未確認です。</p><p class="fine">掲載数を上位約10%の分母にしません。順位・ptは集計途中で動きます。</p></article>
+</section>
+<div class="notice"><strong>順位条件の自動判定は未対応。</strong>上位約10%の正確な境界順位・ptは未照合です。現在の順位と、最低ptの達成を分けて見てください。<a href="https://www.showroom-live.com/ranking" target="_blank" rel="noopener noreferrer">公式でタレント・週間を確認 ↗</a></div>
+<section class="two-col section">
+<article class="card"><p class="eyebrow">TODAY / 今の特典を継続するために</p><h2>今日のデイリー</h2><p class="medium"><strong id="daily-points">未確認</strong> pt <span class="muted">／ <span id="daily-rank">未確認</span>位</span></p><p id="daily-remaining">4,000ptの最低条件まで：未確認</p><p class="fine">今日も「4,000pt以上＋ジャンル上位約20%」が別々に必要です。ポイント条件の達成はデイリー獲得確定ではありません。</p><p id="daily-time" class="stamp"></p></article>
+<article class="card"><p class="eyebrow">PLAN / 今週の残りを分けると</p><h2>これからの積み上げ目安</h2><p class="medium">1日平均 <strong id="daily-average">未確認</strong> pt</p><p id="days-note">今日を含む残り日数で、まだ必要なptを割る計算です。</p><p id="suggested-note" class="fine">42,000ptはファン制作の参考目標です。獲得保証ではありません。</p></article>
+</section>
+<section class="card section" aria-labelledby="plan-heading"><p class="eyebrow">NEXT STREAM / 配信回数を決めたら</p><h2 id="plan-heading">1配信あたり、どのくらい？</h2><div class="form-row"><label>今週の目標<select id="target"><option value="40000">40,000pt（最低ポイント条件）</option><option value="42000">42,000pt（参考目標）</option></select></label><label>日曜までの残り配信回数（仮定）<input id="streams" type="number" min="1" max="99" step="1" inputmode="numeric" placeholder="例：12"></label></div><p id="stream-plan" class="plan-result" aria-live="polite">予定に合う配信回数を入力すると、1配信あたりの目安が出ます。</p><p class="fine">この入力は公式な配信予定ではなく試算です。選んだ目標ptまでの差を配信回数で割り、小数点以下を切り上げます。順位や他ルームの増加、今後の成果を予測する計算ではありません。日間条件は別に確認してください。</p></section>
+<section class="card section"><p class="eyebrow">DATA NOTES / 数字の読み方</p><h2>公式の数値と、応援の目安を分ける</h2><div class="notes-grid"><div><h3>公式ランキングから取得</h3><p>Classic・タレント枠の日間／週間だけを読みます。週間は日本時間の月曜〜日曜。きら星の画面表示、イベントpt、月間ボーナスとは混ぜません。</p></div><div><h3>5分ごとに読み直す</h3><p>画面が開かれている間、約5分ごとに再取得します。非表示中は通信を休止します。取得時刻は当サイトが読んだ時刻で、SHOWROOM側の集計反映時刻とは異なります。</p></div><div><h3>欠測をゼロにしない</h3><p>取得失敗、本人未確認、週替わり、10分以上古い値では現在値を「未確認」にします。日間／週間を別々に検証し、古い週の数字で新しい週を埋めません。</p></div><div><h3>毎日を無理なく続ける</h3><p>無料の応援やコメントを大切に。目標のための無理な課金・長時間配信を勧めるボードではありません。体調と予定を優先してください。</p></div></div><p id="weekly-time" class="stamp"></p><p><a href="/support/#show-glitter-guide">獲得・特典継続の公式ルールを読む →</a></p><p><a href="/api/mily-glitter" target="_blank" rel="noopener noreferrer">この画面の公開データJSON</a> · <a href="https://campaign.showroom-live.com/award2024/" target="_blank" rel="noopener noreferrer">SHOWROOM公式・獲得条件</a></p></section>
+<footer>非公式ファン制作 / Mily SIGNAL<br>本人運営・SHOWROOM公式の分析や獲得保証ではありません。</footer>
+</main></body></html>

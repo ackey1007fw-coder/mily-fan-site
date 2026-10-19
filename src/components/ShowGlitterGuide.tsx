@@ -45,6 +45,8 @@ export function ShowGlitterGuide() {
           </a>
         </div>
 
+        <p className="rounded-2xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm font-bold text-amber-950"><a href="/data-lab/glitter/" className="inline-flex min-h-11 items-center underline underline-offset-4">🥇 今の公式pt・タレント順位・あと何pt？を進捗ボードで見る →</a></p>
+
         <div aria-labelledby="glitter-rules" className="space-y-4">
           <h3 id="glitter-rules" className="text-2xl font-bold text-ink">まずは「2つの条件」を覚えよう</h3>
           <p className="text-sm leading-7 text-ink-muted">SHOWROOMのClassicジャンルランキングでは、<strong>ポイントとジャンル内順位の両方</strong>を満たす必要があります。</p>

@@ -13,6 +13,12 @@ on:
       - 'src/index.css'
       - 'support/**'
       - 'scripts/glitter*'
+      - 'api/mily-glitter.js'
+      - 'server/mily-glitter.js'
+      - 'server/mily-showroom.js'
+      - 'public/data-lab/assets/glitter-*'
+      - 'data-lab/glitter/**'
+      - 'data-lab/index.html'
       - 'vite.config.ts'
       - 'package.json'
       - 'pnpm-lock.yaml'
@@ -49,6 +55,12 @@ jobs:
           GLITTER_ARTIFACT_DIR: ${{ runner.temp }}/glitter-display
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/glitter-display.browser.mjs
+      - name: Test official-point progress, failure and week boundaries
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          GLITTER_ARTIFACT_DIR: ${{ runner.temp }}/glitter-display
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/glitter-progress.browser.mjs
       - name: Save browser evidence
         if: always()
         uses: actions/upload-artifact@v4
