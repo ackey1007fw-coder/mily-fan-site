@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { injectVercelWebAnalytics } from "../src/lib/vercelWebAnalytics.ts";
+import { planShowGlitterWeek } from "../src/lib/showGlitter.ts";
 const read = path => readFileSync(new URL("../"+path, import.meta.url),"utf8");
 const night = JSON.parse(read("public/data-lab/data/mily-night-20261018-aggregate.json"));
 const morning = JSON.parse(read("public/data-lab/data/mily-morning-20261019-aggregate.json"));
@@ -17,6 +19,47 @@ test("10/18 night nine verified screen metrics, NOT official end score",()=>{
  assert.equal(night.quality.visibleDom.droppedObserverFragments,25744);assert.equal(night.quality.visibleDom.notLostCommentCount,true);
  assert.equal(night.quality.httpRelay.pendingAtEnd,44);assert.equal(night.quality.httpRelay.writeError,"EPERM");assert.equal(night.quality.dataCoverageComplete,false);
  assert.equal(night.observations.length,0);assert.match(night.eventName,/未確認/);
+});
+test("official glitter snapshot is period-scoped and never a morning session total",()=>{
+ const g=morning.officialGlitterSnapshot;
+ assert.equal(g.snapshotType,"fixed-historical");assert.equal(g.isMorningSessionPoints,false);
+ assert.equal(g.roomId,morning.roomId);assert.deepEqual(g.genre,{id:103,name:"タレント"});
+ assert.equal(g.weekly.periodStart,"2026-10-19");assert.equal(g.weekly.periodEnd,"2026-10-25");
+ assert.equal(g.daily.periodStart,"2026-10-19");assert.equal(g.daily.periodEnd,"2026-10-19");
+ assert.equal(g.weekly.points,7089);assert.equal(g.weekly.rank,18);assert.equal(g.daily.points,7089);
+ assert.equal(g.weekly.gapToNextRank,g.weekly.nextRankPoints-g.weekly.points);
+ assert.equal(g.weekly.cutoffRank,null);assert.equal(g.daily.cutoffRank,null);assert.equal(g.rankCondition,"unverified");
+ assert.equal(g.weekly.listedCountIsEligibilityDenominator,false);assert.equal(g.plan.guaranteesGlitter,false);
+ assert.equal(morning.lastValidOnline,null);assert.equal(morning.observations.length,0);
+ for(const period of ["weekly","daily"]){
+  const row=g[period];assert.match(row.sourceUrl,new RegExp("/103/"+period+"/20261019"));
+  assert.ok(morningHtml.includes(row.observedAt));
+ }
+ assert.match(morningHtml,/自動更新されません/);assert.match(morningHtml,/朝配信だけの獲得ptではありません/);
+ assert.match(home,/20261019-morning\/#glitter-goal/);
+});
+test("published weekly goals agree with official points, remaining days and rounding",()=>{
+ const g=morning.officialGlitterSnapshot,p=g.plan;
+ const inclusive=planShowGlitterWeek(g.weekly.points,p.daysIncludingToday);
+ const nextDays=planShowGlitterWeek(g.weekly.points,p.daysAfterToday);
+ assert.equal(p.remainingToMinimum,inclusive.remainingToMinimum);
+ assert.equal(p.remainingToSuggested,Math.max(0,p.suggestedWeekly-g.weekly.points));
+ assert.equal(p.remainingToDailyMinimum,Math.max(0,p.dailyMinimum-g.daily.points));
+ assert.equal(p.averageIncludingTodayToMinimum,inclusive.dailyAverageToMinimum);
+ assert.equal(p.averageIncludingTodayToSuggested,inclusive.dailyAverageToSuggested);
+ assert.equal(p.averageNextDaysToMinimum,nextDays.dailyAverageToMinimum);
+ assert.equal(p.averageNextDaysToSuggested,nextDays.dailyAverageToSuggested);
+ for(const value of [g.weekly.points,p.remainingToMinimum,p.remainingToSuggested,p.averageIncludingTodayToMinimum,p.averageIncludingTodayToSuggested,p.averageNextDaysToMinimum,p.averageNextDaysToSuggested]){
+  assert.ok(morningHtml.includes(value.toLocaleString("en-US")),"HTML must match snapshot arithmetic: "+value);
+ }
+});
+test("both new report pages receive exactly one CSP-safe analytics loader",()=>{
+ for(const html of [nightHtml,morningHtml]){
+  const result=injectVercelWebAnalytics(html);
+  assert.equal((result.match(/src="\/mily-analytics-loader\.js"/g)||[]).length,1);
+  assert.equal(injectVercelWebAnalytics(result),result);
+  assert.match(result,/script-src 'self'/);
+ }
 });
 test("10/19 morning is partial, invalid visit and no false final zero",()=>{
  assert.equal(morning.schema,night.schema);assert.equal(morning.roomId,573253);assert.equal(morning.liveId,23572405);assert.equal(morning.dateJst,"2026-10-19");assert.equal(morning.session,"morning");

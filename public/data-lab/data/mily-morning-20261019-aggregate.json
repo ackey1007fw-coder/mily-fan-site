@@ -75,5 +75,55 @@
     "finished": false,
     "verbatimAccuracyVerified": false,
     "checkedAtJst": "2026-10-19T06:37:53+09:00"
+  },
+  "officialGlitterSnapshot": {
+    "snapshotType": "fixed-historical",
+    "sourcePage": "https://www.showroom-live.com/ranking",
+    "ruleSource": "https://campaign.showroom-live.com/award2024/",
+    "genre": {
+      "id": 103,
+      "name": "タレント"
+    },
+    "roomId": 573253,
+    "isMorningSessionPoints": false,
+    "rankCondition": "unverified",
+    "weekly": {
+      "observedAt": "2026-10-19T09:50:12+09:00",
+      "periodStart": "2026-10-19",
+      "periodEnd": "2026-10-25",
+      "points": 7089,
+      "rank": 18,
+      "listedCount": 84,
+      "listedCountIsEligibilityDenominator": false,
+      "nextRank": 17,
+      "nextRankPoints": 8049,
+      "gapToNextRank": 960,
+      "cutoffRank": null,
+      "sourceUrl": "https://www.showroom-live.com/api/genre_ranking/103/weekly/20261019?page=1&count=20"
+    },
+    "daily": {
+      "observedAt": "2026-10-19T09:51:43+09:00",
+      "periodStart": "2026-10-19",
+      "periodEnd": "2026-10-19",
+      "points": 7089,
+      "rank": 18,
+      "cutoffRank": null,
+      "sourceUrl": "https://www.showroom-live.com/api/genre_ranking/103/daily/20261019?page=1&count=20"
+    },
+    "plan": {
+      "weeklyMinimum": 40000,
+      "suggestedWeekly": 42000,
+      "dailyMinimum": 4000,
+      "daysIncludingToday": 7,
+      "daysAfterToday": 6,
+      "remainingToMinimum": 32911,
+      "remainingToSuggested": 34911,
+      "remainingToDailyMinimum": 0,
+      "averageIncludingTodayToMinimum": 4702,
+      "averageIncludingTodayToSuggested": 4988,
+      "averageNextDaysToMinimum": 5486,
+      "averageNextDaysToSuggested": 5819,
+      "guaranteesGlitter": false
+    }
   }
 }

@@ -7,6 +7,8 @@ import { Header } from "./components/Header";
 import { MonthlyScheduleCalendar } from "./components/MonthlyScheduleCalendar";
 import { PatonVoteGuide } from "./components/PatonVoteGuide";
 import { ShowroomAdRewardGuide } from "./components/ShowroomAdRewardGuide";
+import { ShowGlitterGuide } from "./components/ShowGlitterGuide";
+import { ShowGlitterEntry } from "./components/ShowGlitterEntry";
 import { SupportScheduleItemCard } from "./components/SupportScheduleItemCard";
 import { StreamBlackoutNotice } from "./components/StreamBlackoutNotice";
 import { VoteSpotlight } from "./components/VoteSpotlight";
@@ -228,6 +230,7 @@ export default function SupportPage() {
       >
         本文へスキップ
       </a>
+      <ShowGlitterEntry />
       <Header />
       <main id="support-main">
         {voteSpotlight ? (
@@ -246,6 +249,7 @@ export default function SupportPage() {
         <FourthRoundSupportGuide />
         <PatonVoteGuide />
         <ShowroomAdRewardGuide />
+        <ShowGlitterGuide />
 
         {todayItems.length > 0 ? (
           <SectionShell eyebrow="Today" title="今日のみりぃ">

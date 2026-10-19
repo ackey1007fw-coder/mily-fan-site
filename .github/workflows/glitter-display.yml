@@ -1,0 +1,59 @@
+name: Glitter display regression
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/support-main.tsx'
+      - 'src/SupportPage.tsx'
+      - 'src/components/ShowGlitter*.tsx'
+      - 'src/components/Support.tsx'
+      - 'src/components/Header.tsx'
+      - 'src/lib/glitterFragment.ts'
+      - 'src/lib/navigation.ts'
+      - 'src/index.css'
+      - 'support/**'
+      - 'scripts/glitter*'
+      - 'vite.config.ts'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - '.github/workflows/glitter-display.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    name: Glitter share-link browser checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Install isolated browser tooling
+        run: |
+          for source_file in /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources; do
+            if [ -f "$source_file" ]; then
+              sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' "$source_file"
+            fi
+          done
+          npm install --prefix "$RUNNER_TEMP/mily-browser-tools" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.61.1
+          node "$RUNNER_TEMP/mily-browser-tools/node_modules/playwright/cli.js" install --with-deps chromium webkit
+      - name: Test initial fragment and visible entry links
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          GLITTER_ARTIFACT_DIR: ${{ runner.temp }}/glitter-display
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/glitter-display.browser.mjs
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: glitter-display-${{ github.run_id }}
+          path: ${{ runner.temp }}/glitter-display
+          if-no-files-found: ignore
+          retention-days: 14
