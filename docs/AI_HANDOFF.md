@@ -115,3 +115,10 @@ git diff --check origin/main...HEAD   # コミット済みのPR差分（最新�
 - 必読: `docs/DATA-LAB.md` の計算法とDecision Logの判断境界。10分換算と予測、配信中の時計時刻と開始時刻の効果、有料ギフトとfree表示を混同しない。
 - 品質: `scripts/stream-timing.test.mjs` と `scripts/stream-timing.browser.mjs`。CI/プレビュー/本番を別々に確認する。Native分析先との数値一致は、その担当による反映と読戻し後にのみ完了とする。
 - 全体混雑・有料ギフト金額・正式イベントptは未接続。追加する場合は検証済みの集計と日時・定義・期間区分を先に確定する。
+
+
+## 金グリッター進捗ボード（2026-10-19）
+
+- `/data-lab/glitter/` と `/api/mily-glitter`。Lab・Supportから公式Classicタレント順位、週間最低ptとの差、日間条件、配信回数別試算を確認。
+- 運用・データ契約は `docs/GLITTER-PROGRESS.md`。きら星／イベントptと混ぜず、順位境界は未確認。古い週・10分以上前・取得失敗を現在のゼロにしない。
+- 既存Native分析先は別担当・別の実表示確認。公開APIからの最小数値共有のみ許容し、公開側から私的データを読み込まない。

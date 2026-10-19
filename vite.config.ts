@@ -37,6 +37,7 @@ function siteMetadataPlugin(): Plugin {
       return html
         .replaceAll("__SITE_CANONICAL__", canonicalUrl())
         .replaceAll("__DATA_LAB_CANONICAL__", dataLabUrl())
+        .replaceAll("__DATA_LAB_GLITTER_CANONICAL__", `${dataLabUrl()}glitter/`)
         .replaceAll("__DATA_LAB_TIMING_CANONICAL__", `${dataLabUrl()}stream-timing/`)
         .replaceAll("__DATA_LAB_FINAL_NIGHT_CANONICAL__", dataLabFinalNightUrl())
         .replaceAll("__DATA_LAB_20261017_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261017-night/`)
@@ -185,6 +186,7 @@ export default defineConfig({
       input: {
         home: "index.html",
         dataLab: "data-lab/index.html",
+        dataLabGlitter: "data-lab/glitter/index.html",
         dataLabTiming: "data-lab/stream-timing/index.html",
         dataLabVelocity: "data-lab/comment-velocity/index.html",
         dataLabMorning20261017: "data-lab/reports/20261017-morning/index.html",
