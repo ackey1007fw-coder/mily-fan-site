@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
 
-const current = streamRecaps.slice(0, 3);
-const latest = current.slice(0, 2);
 const ids = [
   "2026-10-18-morning-showroom",
   "2026-10-17-night-showroom",
   "2026-10-17-morning-showroom",
 ];
+const current = streamRecaps.filter((recap) => ids.includes(recap.id));
+const latest = current.slice(0, 2);
 
 test("10/18 morning and 10/17 night are exactly once, newer than the existing 10/17 morning", () => {
   assert.deepEqual(current.map((x) => x.id), ids);

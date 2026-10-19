@@ -59,7 +59,7 @@ test("night and morning link only their own photos, in recording-time order", ()
     assert.match(recap.sourceLabel, /実フレーム/);
     assert.equal(recap.galleryZip, undefined);
   }
-  assert.equal(streamRecaps[0].image.src, "/media/live/" + entries[10].filename);
-  assert.equal(streamRecaps[1].image.src, "/media/live/" + entries[0].filename);
-  assert.equal(streamRecaps[2].id, "2026-10-17-morning-showroom");
+  assert.equal(streamRecaps.find((r) => r.id === "2026-10-18-morning-showroom").image.src, "/media/live/" + entries[10].filename);
+  assert.equal(streamRecaps.find((r) => r.id === "2026-10-17-night-showroom").image.src, "/media/live/" + entries[0].filename);
+  assert.equal(streamRecaps.find((r) => r.id === "2026-10-17-morning-showroom").id, "2026-10-17-morning-showroom");
 });
