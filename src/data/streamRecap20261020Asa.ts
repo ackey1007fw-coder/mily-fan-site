@@ -43,7 +43,8 @@ export const streamRecap20261020Asa: StreamRecap = {
   {
     "timestamp": "0:37:52",
     "title": "今日も一緒に頑張ろう",
-    "body": "それぞれの一日にある小さな頑張りにも触れ、一緒に頑張ろうと送り出しました。最後まで手を振りながら挨拶しました。"
+    "body": "それぞれの一日にある小さな頑張りにも触れ、一緒に頑張ろうと送り出しました。最後まで手を振りながら挨拶しました。",
+    relatedLinks: [{ label: "MILY SIGNAL・10月20日朝の観測と確認範囲", url: "/data-lab/reports/20261020-morning/" }]
   }
 ],
   goals: [],
