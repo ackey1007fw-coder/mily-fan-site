@@ -1,0 +1,129 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23572405,
+  "dateJst": "2026-10-19",
+  "session": "morning",
+  "eventName": "未確認（2026-10-12終了のMISS CIRCLE四次審査とは別集計）",
+  "sourceDescription": "既存SHOWROOM通常閲覧画面の個人情報を含まない初期観測と収集品質の監査",
+  "measurementNote": "オンライン序盤の部分観測のみ。最終画面・配信終了を検証できていません。0は最終値ではなく、総訪問は無効表示。最新の配信全体データを取得できたとは見なしません。",
+  "finalServiceValueVerified": false,
+  "lastValidOnline": null,
+  "earlyPartialObservation": {
+    "atJst": "2026-10-19T05:53:00.196+09:00",
+    "stars": 0,
+    "visits": null,
+    "comments": 0,
+    "firstVisits": 0,
+    "repeatVisits": 0,
+    "newFollows": 0,
+    "otherFree": 0,
+    "star100People": 0,
+    "recommendedCommentPeople": 0,
+    "visitsDisplay": "無効",
+    "isFinal": false,
+    "metricsComplete": false,
+    "verifiedZeroAtEnd": false
+  },
+  "recording": {
+    "saved": true,
+    "source": "既存録画sidecarの保存成功申告",
+    "ffmpegExitCode": 0,
+    "bytes": null,
+    "startProcessingJst": "2026-10-19T05:49:09+09:00",
+    "endProcessingJst": "2026-10-19T06:32:48+09:00",
+    "durationSeconds": null,
+    "fullContinuityVerified": false,
+    "actualFileDecodeVerified": false
+  },
+  "quality": {
+    "endConfirmed": false,
+    "state": "offline_unresolved_hold_end_unverified",
+    "manualAttentionRequired": true,
+    "collectorChildExitCode": 79,
+    "dataCoverageComplete": false,
+    "recordingAndAsrVerified": false,
+    "websocket": {
+      "receivedFrames": 5,
+      "persistedFrames": 5,
+      "sourceCompletenessVerified": false
+    },
+    "visibleDom": {
+      "savedObservations": 1,
+      "observedMutations": 40,
+      "reportedDroppedFragmentsInShortRun": 0,
+      "sourceEventsVerified": false
+    },
+    "httpRelay": {
+      "responsesObserved": 2,
+      "responsesPrepared": 2,
+      "persistedCountVerified": false,
+      "complete": false
+    },
+    "recordingSidecarSaved": true
+  },
+  "observations": [],
+  "provenance": {
+    "basis": "既存私有収集記録の最終オンライン部分観測およびヘルスファイル",
+    "partialObservationIsNotFinal": true,
+    "snapshotCheckedJst": "2026-10-19T06:48:14.166+09:00"
+  },
+  "asr": {
+    "status": "processing",
+    "processedChunksAtCheck": 32,
+    "finished": false,
+    "verbatimAccuracyVerified": false,
+    "checkedAtJst": "2026-10-19T06:37:53+09:00"
+  },
+  "officialGlitterSnapshot": {
+    "snapshotType": "fixed-historical",
+    "sourcePage": "https://www.showroom-live.com/ranking",
+    "ruleSource": "https://campaign.showroom-live.com/award2024/",
+    "genre": {
+      "id": 103,
+      "name": "タレント"
+    },
+    "roomId": 573253,
+    "isMorningSessionPoints": false,
+    "rankCondition": "unverified",
+    "weekly": {
+      "observedAt": "2026-10-19T09:50:12+09:00",
+      "periodStart": "2026-10-19",
+      "periodEnd": "2026-10-25",
+      "points": 7089,
+      "rank": 18,
+      "listedCount": 84,
+      "listedCountIsEligibilityDenominator": false,
+      "nextRank": 17,
+      "nextRankPoints": 8049,
+      "gapToNextRank": 960,
+      "cutoffRank": null,
+      "sourceUrl": "https://www.showroom-live.com/api/genre_ranking/103/weekly/20261019?page=1&count=20"
+    },
+    "daily": {
+      "observedAt": "2026-10-19T09:51:43+09:00",
+      "periodStart": "2026-10-19",
+      "periodEnd": "2026-10-19",
+      "points": 7089,
+      "rank": 18,
+      "cutoffRank": null,
+      "sourceUrl": "https://www.showroom-live.com/api/genre_ranking/103/daily/20261019?page=1&count=20"
+    },
+    "plan": {
+      "weeklyMinimum": 40000,
+      "suggestedWeekly": 42000,
+      "dailyMinimum": 4000,
+      "daysIncludingToday": 7,
+      "daysAfterToday": 6,
+      "remainingToMinimum": 32911,
+      "remainingToSuggested": 34911,
+      "remainingToDailyMinimum": 0,
+      "averageIncludingTodayToMinimum": 4702,
+      "averageIncludingTodayToSuggested": 4988,
+      "averageNextDaysToMinimum": 5486,
+      "averageNextDaysToSuggested": 5819,
+      "guaranteesGlitter": false
+    }
+  }
+}
