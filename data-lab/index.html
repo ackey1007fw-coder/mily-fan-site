@@ -29,14 +29,16 @@
 <meta name="twitter:image:alt" content="Mily SIGNAL — 応援の輪郭を、データで。非公式ファン分析">
 <link rel="icon" href="/data-lab/assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/data-lab/assets/styles.css">
+<link rel="stylesheet" href="/data-lab/assets/daily-archive.css">
 <script src="/data-lab/assets/data.js" defer></script>
 <script src="/data-lab/assets/app.js" defer></script>
+<script type="module" src="/data-lab/assets/daily-archive.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
 <header class="topbar"><div class="shell">
 <a class="brand" href="#top" aria-label="MILY SIGNAL トップへ"><span class="brand-mark" aria-hidden="true">🍅</span><span><b>MILY <em>SIGNAL</em></b><small>みりぃデータラボ</small></span></a>
-<nav class="nav" aria-label="ページ内メニュー"><a href="#morning-20261020">10/20朝</a><a href="#morning-20261018">10/18朝</a><a href="#night-20261017">10/17夜</a><a href="#morning-20261017">10/17朝</a><a href="#night-20261016">10/16夜</a><a href="#morning-20261019">10/19朝</a><a href="#night-20261018">10/18夜</a><a href="/data-lab/comment-velocity/">分速アーカイブ</a><a href="#morning-20261016">10/16朝</a><a href="#night-20261015">10/15夜</a><a href="#morning-20261015">10/15朝</a><a href="#night-20261014">10/14夜</a><a href="#noon-20261014">10/14昼</a><a href="#final-night">10/12最終夜</a><a href="#now">SHOWROOM</a><a href="#naoka-update">予測更新</a><a href="#forecast">旧予測</a><a href="#roster">全出場者</a><a href="#sources">データについて</a></nav>
+<nav class="nav" aria-label="ページ内メニュー"><a href="#daily-archive">日付別・グラフ</a><a href="#morning-20261020">10/20朝</a><a href="#morning-20261019">10/19朝</a><a href="#night-20261018">10/18夜</a><a href="#morning-20261018">10/18朝</a><a href="#night-20261017">10/17夜</a><a href="#morning-20261017">10/17朝</a><a href="#night-20261016">10/16夜</a><a href="#morning-20261016">10/16朝</a><a href="#night-20261015">10/15夜</a><a href="#morning-20261015">10/15朝</a><a href="#night-20261014">10/14夜</a><a href="#noon-20261014">10/14昼</a><a href="#morning-20261014">10/14朝</a><a href="#final-night">10/12最終夜</a><a href="/data-lab/comment-velocity/">コメント分速</a><a href="#now">SHOWROOM</a><a href="#naoka-update">予測更新</a><a href="#roster">全出場者</a><a href="#sources">データについて</a></nav>
 <a class="top-cta" href="/" aria-label="みりぃファンサイトのホームに戻る">← ファンサイト</a>
 </div></header>
 <main id="main">
@@ -62,6 +64,16 @@
 
 
 
+<section class="section day-archive" id="daily-archive">
+  <div class="shell">
+    <div class="section-head"><div><div class="eyeline">DAY BY DAY / 配信を日付から探す</div><h2>日付を選んで、<br>朝・昼・夜の応援を振り返る。</h2><p>各日の配信を独立表示。3指標を切り替えて、保存できた時間帯だけを点のグラフで確認できます。日付は<strong>配信日（JST）</strong>を基準とし、翌日未明まで続いた配信も同じ回にまとめます。</p></div></div>
+    <div class="daily-metric-controls" aria-label="日付別グラフの表示指標"><span>グラフで見る指標</span><button class="active" type="button" data-daily-metric="stars" aria-pressed="true">きら星</button><button type="button" data-daily-metric="visits" aria-pressed="false">総訪問表示</button><button type="button" data-daily-metric="comments" aria-pressed="false">コメント</button></div>
+    <nav id="daily-fallback-links" class="daily-fallback" aria-label="日付別の記録を探す"><a href="#morning-20261020">10/20</a><a href="#morning-20261019">10/19</a><a href="#night-20261018">10/18</a><a href="#night-20261017">10/17</a><a href="#night-20261016">10/16</a><a href="#night-20261015">10/15</a><a href="#night-20261014">10/14</a></nav>
+    <div id="daily-stream-groups" class="daily-stream-groups" aria-label="日付ごとの配信と実測グラフ"></div>
+    <p class="daily-footer-note">※非公式の通常可視画面参考値です。確定ギフト数・正式イベントpt・実際のユニーク人数ではありません。欠測は0にせず、点の間を線でつなぎません。取得時間の異なる配信を合計値だけで順位付けしません。</p>
+    <p class="daily-footer-note">四次審査当日の別資料は<a href="/data-lab/reports/20261012-final-night/">10月12日・最終夜の分析</a>から確認できます。</p>
+  </div>
+</section>
 <section class="section" id="stream-timing"><div class="shell"><div class="section-head"><div><div class="eyeline">STREAM TIMING / 目的から選ぶ</div><h2>次に試す時間を、実績と一緒に。</h2><p>きら星・訪問・会話を目的別に比較。時間帯の候補、曜日ごとの実績、比較した配信数と欠測を一緒に確認できます。保存された配信中の時計時刻の実績であり、最適な開始時刻を保証するものではありません。</p></div></div><p><a class="btn btn-primary" href="/data-lab/stream-timing/">配信タイミングナビを開く ↗</a></p></div></section>
 <section class="section morning-update noon-update" id="morning-20261020"><div class="shell"><div class="section-head"><div><div class="eyeline">NEW / 2026.10.20 MORNING · TAIL UNVERIFIED</div><h2>10月20日朝。<br>観測できた応援と、末尾の未確認。</h2><p>403件の有効な9指標から35点を掲載。06:28:05の画面は、きら星<strong>2,545</strong>／総訪問表示<strong>281</strong>／コメント<strong>254</strong>。締めの挨拶はその後も続いており、<strong>終了時の最終値とは扱いません。</strong></p></div></div><div class="morning-kpis"><div><small>きら星・画面参考値</small><strong>2,545</strong></div><div><small>総訪問表示</small><strong>281</strong></div><div><small>コメント表示</small><strong>254</strong></div></div><p><a class="btn btn-primary" href="/data-lab/reports/20261020-morning/">10/20朝の推移・9指標・確認範囲 ↗</a> <a class="btn" href="/activities/live/#recap-2026-10-20-morning-showroom">配信メモ ↗</a></p></div></section>
 <section class="section morning-update noon-update" id="morning-20261019"><div class="shell">
@@ -496,6 +508,6 @@
 
 <section class="bottom"><div class="shell"><div class="bottom-cta"><div><h2>数字の先に、応援がある。</h2><p>みりぃの活動をもっと知りたい人へ。ファンサイトと公式プロフィールから、その魅力に触れてください。</p></div><div class="hero-actions"><a class="btn btn-primary" href="https://2026.misscircle.jp/entry/734" rel="noopener noreferrer" target="_blank">公式プロフィール ↗</a><a class="btn btn-outline" href="/">みりぃファンサイトへ戻る ←</a></div></div></div></section>
 </main>
-<footer><div class="shell"><div>MILY SIGNAL · 非公式ファン制作 / 2026.10.12 四次審査の記録 ＋ 2026.10.14 朝の観測・昼の観測<br>大会運営、SHOWROOM、予測作者とは無関係の自主的な集計サイトです。</div><div>出場者名・順位などはリンク先の公開情報を参照。<br>無断転載ではなく独自の図表として再構成しています。</div></div></footer>
+<footer><div class="shell"><div>MILY SIGNAL · 非公式ファン制作 / 2026.10.12 四次審査の記録 ＋ 10/14以降の日付別・朝昼夜の観測<br>大会運営、SHOWROOM、予測作者とは無関係の自主的な集計サイトです。</div><div>出場者名・順位などはリンク先の公開情報を参照。<br>無断転載ではなく独自の図表として再構成しています。</div></div></footer>
 </body>
 </html>
