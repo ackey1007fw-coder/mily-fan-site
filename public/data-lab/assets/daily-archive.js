@@ -1,4 +1,4 @@
-import { DAILY_STREAM_ENTRIES, groupByBroadcastDate, observationPoints, lastObservedValue, METRICS, SLOT_LABELS } from "./daily-archive-core.mjs";
+import { DAILY_STREAM_ENTRIES, groupByBroadcastDate, observationPoints, lastObservedValue, METRICS, SLOT_LABELS } from "./daily-archive-core.js";
 
 const host = document.getElementById("daily-stream-groups");
 if (host) {
