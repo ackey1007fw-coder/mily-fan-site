@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
   DAILY_STREAM_ENTRIES, groupByBroadcastDate, observationPoints, lastObservedValue, METRICS,
-} from "../public/data-lab/assets/daily-archive-core.mjs";
+} from "../public/data-lab/assets/daily-archive-core.js";
 
 const read = (path) => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 const dataFor = (file) => JSON.parse(read("public/data-lab/data/" + file));
@@ -66,7 +66,7 @@ test("crossing midnight stays on broadcast date and documented data gaps stay ga
 test("date UI and graphs remain within published Lab and existing LIVE STREAM routes", () => {
   const html = read("data-lab/index.html");
   const script = read("public/data-lab/assets/daily-archive.js");
-  const core = read("public/data-lab/assets/daily-archive-core.mjs");
+  const core = read("public/data-lab/assets/daily-archive-core.js");
   const live = read("src/ActivitiesPage.tsx");
   assert.match(html, /id="daily-archive"/);
   assert.match(html, /id="daily-stream-groups"/);
