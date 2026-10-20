@@ -194,7 +194,7 @@ SHOWROOMイベント参加ルームは71、公式進出者プロフィールと�
 ## 日付別の配信記録・観測グラフ（2026-10-20）
 
 - データラボ入口の `#daily-archive` に「配信日（JST）→朝・昼・夜→その回の観測点」を追加。既存の各回レポート・一覧セクション・LIVE STREAM記事・公開URLを維持する。LIVE STREAM側も日付見出しでカードを束ね、日付別ラボへ相互リンクする。
-- 公開用の個別データは、すでにrepo内の `public/data-lab/data/mily-*-aggregate.json` に存在する**匿名集計のみ**。対応ファイルと既存レポートのリンクは `public/data-lab/assets/daily-archive-core.mjs` の `DAILY_STREAM_ENTRIES` に明示登録する。新しい配信日を掲載する際は、匿名データ・既存詳細ページ・リンクの照合後にここへ追加する。ファイル一覧はネットワーク探索・私的記録の自動発見にしない。
+- 公開用の個別データは、すでにrepo内の `public/data-lab/data/mily-*-aggregate.json` に存在する**匿名集計のみ**。対応ファイルと既存レポートのリンクは `public/data-lab/assets/daily-archive-core.js` の `DAILY_STREAM_ENTRIES` に明示登録する。新しい配信日を掲載する際は、匿名データ・既存詳細ページ・リンクの照合後にここへ追加する。ファイル一覧はネットワーク探索・私的記録の自動発見にしない。
 - グラフの点は公開集計中の `observations` / `counters.observations` / `segments[].five_minute_window_endpoints` / `five_minute_window_endpoints` / `observed_points` に限る。日時を伴う有効数値のみを点で描き、欠測期間を直線補間しない。区間の**開始時刻だけ**が分かる値は、終了時点の観測として採用しない。2点未満・読込失敗は「未取得」と表示する。
 - `lastValidOnline` / `observed_screen` の有効画面参考値と、終了時の**公式確定値**は別。特に10/19朝の序盤部分観測・0表示を最終値へ昇格させない。跨日配信は録画完了の日ではなく配信日でグルーピングする。
 - 画面の指標切替（きら星・総訪問表示・コメント）は表示だけ。各回の長さ・欠測が異なるため、日付横断の累計値ランキングやギフトのpt換算はしない。noindexとCSP、既存の本人データ・個人情報非掲載は変更しない。
