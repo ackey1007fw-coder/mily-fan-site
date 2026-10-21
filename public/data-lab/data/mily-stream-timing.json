@@ -2,7 +2,7 @@
   "schema": "mily-stream-timing-v1",
   "methodologyVersion": 1,
   "nonOfficial": true,
-  "dataThroughJst": "2026-10-18T06:57:56.128+09:00",
+  "dataThroughJst": "2026-10-21T08:05:54.523+09:00",
   "comparisonMeaning": "observed_clock_time_not_causal_start_time",
   "fullCoverage": false,
   "paidGifts": {
@@ -58,12 +58,20 @@
     {
       "path": "/data-lab/data/mily-noon-20261014-aggregate.json",
       "sha256": "5771f44d5596bf7be25628ad21fd5cf995e602a7e25a6cc6548db75288e46702"
+    },
+    {
+      "path": "/data-lab/data/mily-night-20261020-aggregate.json",
+      "sha256": "9c09464d9159e5ef756befb2b406a935efc5faed283b4d01ab6ea7f2a084eed8"
+    },
+    {
+      "path": "/data-lab/data/mily-morning-20261021-aggregate.json",
+      "sha256": "d9e032e46845a3efcc6530e8b4cd16af1ffd64889c671a8b1e0f8f5ca2793ad5"
     }
   ],
   "exclusions": {
-    "clock_disagreement": 6,
+    "clock_disagreement": 9,
     "invalid_or_reversed_time": 19,
-    "too_short_or_long_interval": 4,
+    "too_short_or_long_interval": 15,
     "known_gap": 1
   },
   "sessions": [
@@ -4397,6 +4405,5066 @@
             "newFollows": 0
           },
           "source": "/data-lab/data/mily-morning-20261018-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23578225,
+      "date": "2026-10-20",
+      "slot": "night",
+      "windows": [
+        {
+          "from": "2026-10-20T18:02:57.937+09:00",
+          "to": "2026-10-20T18:03:57.095+09:00",
+          "seconds": 59.158,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:03:57.095+09:00",
+          "to": "2026-10-20T18:04:55.521+09:00",
+          "seconds": 58.426,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 73,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:04:55.521+09:00",
+          "to": "2026-10-20T18:05:55.817+09:00",
+          "seconds": 60.296,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 39,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:05:55.817+09:00",
+          "to": "2026-10-20T18:06:52.980+09:00",
+          "seconds": 57.163,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 180,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:06:52.980+09:00",
+          "to": "2026-10-20T18:07:58.845+09:00",
+          "seconds": 65.865,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 230,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 4,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:07:58.845+09:00",
+          "to": "2026-10-20T18:08:59.108+09:00",
+          "seconds": 60.263,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 106,
+            "visits": 35,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:08:59.108+09:00",
+          "to": "2026-10-20T18:09:55.990+09:00",
+          "seconds": 56.882,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:09:55.990+09:00",
+          "to": "2026-10-20T18:10:59.396+09:00",
+          "seconds": 63.406,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:10:59.396+09:00",
+          "to": "2026-10-20T18:11:58.099+09:00",
+          "seconds": 58.703,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 13,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:11:58.099+09:00",
+          "to": "2026-10-20T18:12:55.745+09:00",
+          "seconds": 57.646,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:12:55.745+09:00",
+          "to": "2026-10-20T18:13:56.287+09:00",
+          "seconds": 60.542,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 5,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:13:56.287+09:00",
+          "to": "2026-10-20T18:14:59.801+09:00",
+          "seconds": 63.514,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 96,
+            "visits": 39,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:14:59.801+09:00",
+          "to": "2026-10-20T18:15:58.292+09:00",
+          "seconds": 58.491,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 2,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:15:58.292+09:00",
+          "to": "2026-10-20T18:16:57.627+09:00",
+          "seconds": 59.335,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:16:57.627+09:00",
+          "to": "2026-10-20T18:17:52.498+09:00",
+          "seconds": 54.871,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:17:52.498+09:00",
+          "to": "2026-10-20T18:18:59.432+09:00",
+          "seconds": 66.934,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 31,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:18:59.432+09:00",
+          "to": "2026-10-20T18:19:58.802+09:00",
+          "seconds": 59.37,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:19:58.802+09:00",
+          "to": "2026-10-20T18:20:59.620+09:00",
+          "seconds": 60.818,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 1,
+            "visits": 32,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:20:59.620+09:00",
+          "to": "2026-10-20T18:21:59.122+09:00",
+          "seconds": 59.502,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:21:59.122+09:00",
+          "to": "2026-10-20T18:22:57.630+09:00",
+          "seconds": 58.508,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:22:57.630+09:00",
+          "to": "2026-10-20T18:23:59.786+09:00",
+          "seconds": 62.156,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:23:59.786+09:00",
+          "to": "2026-10-20T18:24:59.980+09:00",
+          "seconds": 60.194,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:24:59.980+09:00",
+          "to": "2026-10-20T18:25:59.999+09:00",
+          "seconds": 60.019,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 116,
+            "visits": 16,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:25:59.999+09:00",
+          "to": "2026-10-20T18:26:58.716+09:00",
+          "seconds": 58.717,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:26:58.716+09:00",
+          "to": "2026-10-20T18:27:59.366+09:00",
+          "seconds": 60.65,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:27:59.366+09:00",
+          "to": "2026-10-20T18:28:58.400+09:00",
+          "seconds": 59.034,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:28:58.400+09:00",
+          "to": "2026-10-20T18:29:54.908+09:00",
+          "seconds": 56.508,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 24,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:29:54.908+09:00",
+          "to": "2026-10-20T18:30:59.600+09:00",
+          "seconds": 64.692,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:30:59.600+09:00",
+          "to": "2026-10-20T18:31:58.988+09:00",
+          "seconds": 59.388,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:32:56.737+09:00",
+          "to": "2026-10-20T18:33:58.982+09:00",
+          "seconds": 62.245,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:33:58.982+09:00",
+          "to": "2026-10-20T18:34:58.366+09:00",
+          "seconds": 59.384,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 19,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:34:58.366+09:00",
+          "to": "2026-10-20T18:35:58.349+09:00",
+          "seconds": 59.983,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:35:58.349+09:00",
+          "to": "2026-10-20T18:36:55.765+09:00",
+          "seconds": 57.416,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:36:55.765+09:00",
+          "to": "2026-10-20T18:37:56.319+09:00",
+          "seconds": 60.554,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:37:56.319+09:00",
+          "to": "2026-10-20T18:38:55.442+09:00",
+          "seconds": 59.123,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 210,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:38:55.442+09:00",
+          "to": "2026-10-20T18:39:58.479+09:00",
+          "seconds": 63.037,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 0,
+            "visits": 21,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:39:58.479+09:00",
+          "to": "2026-10-20T18:40:55.790+09:00",
+          "seconds": 57.311,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:40:55.790+09:00",
+          "to": "2026-10-20T18:41:59.826+09:00",
+          "seconds": 64.036,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:41:59.826+09:00",
+          "to": "2026-10-20T18:42:56.543+09:00",
+          "seconds": 56.717,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:42:56.543+09:00",
+          "to": "2026-10-20T18:43:55.146+09:00",
+          "seconds": 58.603,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:43:55.146+09:00",
+          "to": "2026-10-20T18:44:57.706+09:00",
+          "seconds": 62.56,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:44:57.706+09:00",
+          "to": "2026-10-20T18:45:58.640+09:00",
+          "seconds": 60.934,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 23,
+            "firstVisits": 0,
+            "otherFree": 100,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:45:58.640+09:00",
+          "to": "2026-10-20T18:46:55.533+09:00",
+          "seconds": 56.893,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:46:55.533+09:00",
+          "to": "2026-10-20T18:47:59.258+09:00",
+          "seconds": 63.725,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:47:59.258+09:00",
+          "to": "2026-10-20T18:48:56.331+09:00",
+          "seconds": 57.073,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:48:56.331+09:00",
+          "to": "2026-10-20T18:49:54.122+09:00",
+          "seconds": 57.791,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 10,
+            "visits": 9,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:50:58.885+09:00",
+          "to": "2026-10-20T18:51:55.690+09:00",
+          "seconds": 56.805,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:51:55.690+09:00",
+          "to": "2026-10-20T18:52:56.337+09:00",
+          "seconds": 60.647,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:52:56.337+09:00",
+          "to": "2026-10-20T18:53:59.247+09:00",
+          "seconds": 62.91,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:53:59.247+09:00",
+          "to": "2026-10-20T18:54:56.754+09:00",
+          "seconds": 57.507,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 0,
+            "visits": 27,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:54:56.754+09:00",
+          "to": "2026-10-20T18:55:57.098+09:00",
+          "seconds": 60.344,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:55:57.098+09:00",
+          "to": "2026-10-20T18:56:56.073+09:00",
+          "seconds": 58.975,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 11,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:56:56.073+09:00",
+          "to": "2026-10-20T18:57:59.416+09:00",
+          "seconds": 63.343,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:57:59.416+09:00",
+          "to": "2026-10-20T18:58:56.748+09:00",
+          "seconds": 57.332,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 11,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:58:56.748+09:00",
+          "to": "2026-10-20T18:59:56.539+09:00",
+          "seconds": 59.791,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T18:59:56.539+09:00",
+          "to": "2026-10-20T19:00:57.680+09:00",
+          "seconds": 61.141,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 91,
+            "visits": 46,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:00:57.680+09:00",
+          "to": "2026-10-20T19:01:58.701+09:00",
+          "seconds": 61.021,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:01:58.701+09:00",
+          "to": "2026-10-20T19:02:56.420+09:00",
+          "seconds": 57.719,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:02:56.420+09:00",
+          "to": "2026-10-20T19:03:38.447+09:00",
+          "seconds": 42.027,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 50,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:05:59.338+09:00",
+          "to": "2026-10-20T19:06:57.524+09:00",
+          "seconds": 58.186,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 129,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:06:57.524+09:00",
+          "to": "2026-10-20T19:07:57.154+09:00",
+          "seconds": 59.63,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:07:57.154+09:00",
+          "to": "2026-10-20T19:08:58.676+09:00",
+          "seconds": 61.522,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 390,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:08:58.676+09:00",
+          "to": "2026-10-20T19:09:58.975+09:00",
+          "seconds": 60.299,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:09:58.975+09:00",
+          "to": "2026-10-20T19:10:57.586+09:00",
+          "seconds": 58.611,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 100,
+            "visits": 26,
+            "firstVisits": 0,
+            "otherFree": 20,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:10:57.586+09:00",
+          "to": "2026-10-20T19:11:57.817+09:00",
+          "seconds": 60.231,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:11:57.817+09:00",
+          "to": "2026-10-20T19:12:56.913+09:00",
+          "seconds": 59.096,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:12:56.913+09:00",
+          "to": "2026-10-20T19:13:56.134+09:00",
+          "seconds": 59.221,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 11,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:13:56.134+09:00",
+          "to": "2026-10-20T19:14:58.670+09:00",
+          "seconds": 62.536,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:14:58.670+09:00",
+          "to": "2026-10-20T19:15:56.884+09:00",
+          "seconds": 58.214,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 300,
+            "visits": 18,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:15:56.884+09:00",
+          "to": "2026-10-20T19:16:59.560+09:00",
+          "seconds": 62.676,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:16:59.560+09:00",
+          "to": "2026-10-20T19:17:57.210+09:00",
+          "seconds": 57.65,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:17:57.210+09:00",
+          "to": "2026-10-20T19:18:59.353+09:00",
+          "seconds": 62.143,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:18:59.353+09:00",
+          "to": "2026-10-20T19:19:57.505+09:00",
+          "seconds": 58.152,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 30,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:19:57.505+09:00",
+          "to": "2026-10-20T19:20:56.228+09:00",
+          "seconds": 58.723,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 20,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:20:56.228+09:00",
+          "to": "2026-10-20T19:21:58.869+09:00",
+          "seconds": 62.641,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:21:58.869+09:00",
+          "to": "2026-10-20T19:22:57.574+09:00",
+          "seconds": 58.705,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:22:57.574+09:00",
+          "to": "2026-10-20T19:23:56.084+09:00",
+          "seconds": 58.51,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:23:56.084+09:00",
+          "to": "2026-10-20T19:24:56.167+09:00",
+          "seconds": 60.083,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 99,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:24:56.167+09:00",
+          "to": "2026-10-20T19:25:59.391+09:00",
+          "seconds": 63.224,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 100,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:25:59.391+09:00",
+          "to": "2026-10-20T19:26:55.937+09:00",
+          "seconds": 56.546,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": 100,
+            "visits": 13,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:26:55.937+09:00",
+          "to": "2026-10-20T19:27:57.861+09:00",
+          "seconds": 61.924,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:27:57.861+09:00",
+          "to": "2026-10-20T19:28:58.103+09:00",
+          "seconds": 60.242,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:28:58.103+09:00",
+          "to": "2026-10-20T19:29:57.845+09:00",
+          "seconds": 59.742,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:29:57.845+09:00",
+          "to": "2026-10-20T19:30:58.563+09:00",
+          "seconds": 60.718,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:30:58.563+09:00",
+          "to": "2026-10-20T19:31:56.808+09:00",
+          "seconds": 58.245,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 200,
+            "visits": 17,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:33:57.829+09:00",
+          "to": "2026-10-20T19:34:57.793+09:00",
+          "seconds": 59.964,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:34:57.793+09:00",
+          "to": "2026-10-20T19:35:57.777+09:00",
+          "seconds": 59.984,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:35:57.777+09:00",
+          "to": "2026-10-20T19:36:58.528+09:00",
+          "seconds": 60.751,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 28,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:36:58.528+09:00",
+          "to": "2026-10-20T19:37:55.727+09:00",
+          "seconds": 57.199,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:37:55.727+09:00",
+          "to": "2026-10-20T19:38:56.227+09:00",
+          "seconds": 60.5,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 120,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:40:58.158+09:00",
+          "to": "2026-10-20T19:41:55.358+09:00",
+          "seconds": 57.2,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 100,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:41:55.358+09:00",
+          "to": "2026-10-20T19:42:53.997+09:00",
+          "seconds": 58.639,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 131,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 50,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:42:53.997+09:00",
+          "to": "2026-10-20T19:43:59.846+09:00",
+          "seconds": 65.849,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 80,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:43:59.846+09:00",
+          "to": "2026-10-20T19:44:59.528+09:00",
+          "seconds": 59.682,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:44:59.528+09:00",
+          "to": "2026-10-20T19:45:59.989+09:00",
+          "seconds": 60.461,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 30,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:45:59.989+09:00",
+          "to": "2026-10-20T19:46:57.397+09:00",
+          "seconds": 57.408,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 201,
+            "visits": 16,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:46:57.397+09:00",
+          "to": "2026-10-20T19:47:57.042+09:00",
+          "seconds": 59.645,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:47:57.042+09:00",
+          "to": "2026-10-20T19:48:55.934+09:00",
+          "seconds": 58.892,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 30,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:48:55.934+09:00",
+          "to": "2026-10-20T19:49:59.736+09:00",
+          "seconds": 63.802,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:49:59.736+09:00",
+          "to": "2026-10-20T19:50:59.592+09:00",
+          "seconds": 59.856,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:50:59.592+09:00",
+          "to": "2026-10-20T19:51:56.668+09:00",
+          "seconds": 57.076,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 12,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:51:56.668+09:00",
+          "to": "2026-10-20T19:52:56.370+09:00",
+          "seconds": 59.702,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:52:56.370+09:00",
+          "to": "2026-10-20T19:53:56.712+09:00",
+          "seconds": 60.342,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:53:56.712+09:00",
+          "to": "2026-10-20T19:54:59.263+09:00",
+          "seconds": 62.551,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:54:59.263+09:00",
+          "to": "2026-10-20T19:55:59.840+09:00",
+          "seconds": 60.577,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:55:59.840+09:00",
+          "to": "2026-10-20T19:56:57.360+09:00",
+          "seconds": 57.52,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 17,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:56:57.360+09:00",
+          "to": "2026-10-20T19:57:56.324+09:00",
+          "seconds": 58.964,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:57:56.324+09:00",
+          "to": "2026-10-20T19:58:55.980+09:00",
+          "seconds": 59.656,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 105,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:58:55.980+09:00",
+          "to": "2026-10-20T19:59:57.278+09:00",
+          "seconds": 61.298,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T19:59:57.278+09:00",
+          "to": "2026-10-20T20:00:58.390+09:00",
+          "seconds": 61.112,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:00:58.390+09:00",
+          "to": "2026-10-20T20:01:56.754+09:00",
+          "seconds": 58.364,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 0,
+            "visits": 20,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:01:56.754+09:00",
+          "to": "2026-10-20T20:02:54.368+09:00",
+          "seconds": 57.614,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:02:54.368+09:00",
+          "to": "2026-10-20T20:03:58.673+09:00",
+          "seconds": 64.305,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 160,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:03:58.673+09:00",
+          "to": "2026-10-20T20:04:57.423+09:00",
+          "seconds": 58.75,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:04:57.423+09:00",
+          "to": "2026-10-20T20:05:58.372+09:00",
+          "seconds": 60.949,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:05:58.372+09:00",
+          "to": "2026-10-20T20:06:58.572+09:00",
+          "seconds": 60.2,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 11,
+            "visits": 21,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:06:58.572+09:00",
+          "to": "2026-10-20T20:07:55.843+09:00",
+          "seconds": 57.271,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:07:55.843+09:00",
+          "to": "2026-10-20T20:08:58.950+09:00",
+          "seconds": 63.107,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:08:58.950+09:00",
+          "to": "2026-10-20T20:09:57.110+09:00",
+          "seconds": 58.16,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:09:57.110+09:00",
+          "to": "2026-10-20T20:10:56.136+09:00",
+          "seconds": 59.026,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:10:56.136+09:00",
+          "to": "2026-10-20T20:11:58.497+09:00",
+          "seconds": 62.361,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:11:58.497+09:00",
+          "to": "2026-10-20T20:12:55.710+09:00",
+          "seconds": 57.213,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 28,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:12:55.710+09:00",
+          "to": "2026-10-20T20:13:57.489+09:00",
+          "seconds": 61.779,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:13:57.489+09:00",
+          "to": "2026-10-20T20:14:58.282+09:00",
+          "seconds": 60.793,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:14:58.282+09:00",
+          "to": "2026-10-20T20:15:52.425+09:00",
+          "seconds": 54.143,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 70,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:15:52.425+09:00",
+          "to": "2026-10-20T20:16:59.379+09:00",
+          "seconds": 66.954,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 30,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:16:59.379+09:00",
+          "to": "2026-10-20T20:17:58.255+09:00",
+          "seconds": 58.876,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 101,
+            "visits": 26,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:17:58.255+09:00",
+          "to": "2026-10-20T20:18:57.407+09:00",
+          "seconds": 59.152,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:18:57.407+09:00",
+          "to": "2026-10-20T20:19:58.336+09:00",
+          "seconds": 60.929,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:19:58.336+09:00",
+          "to": "2026-10-20T20:20:56.336+09:00",
+          "seconds": 58,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:20:56.336+09:00",
+          "to": "2026-10-20T20:21:58.655+09:00",
+          "seconds": 62.319,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:21:58.655+09:00",
+          "to": "2026-10-20T20:22:58.784+09:00",
+          "seconds": 60.129,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 13,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:22:58.784+09:00",
+          "to": "2026-10-20T20:23:57.759+09:00",
+          "seconds": 58.975,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:23:57.759+09:00",
+          "to": "2026-10-20T20:24:57.242+09:00",
+          "seconds": 59.483,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:24:57.242+09:00",
+          "to": "2026-10-20T20:25:55.289+09:00",
+          "seconds": 58.047,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:25:55.289+09:00",
+          "to": "2026-10-20T20:26:59.232+09:00",
+          "seconds": 63.943,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:26:59.232+09:00",
+          "to": "2026-10-20T20:27:59.750+09:00",
+          "seconds": 60.518,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 10,
+            "visits": 26,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:27:59.750+09:00",
+          "to": "2026-10-20T20:28:58.837+09:00",
+          "seconds": 59.087,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 3,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:28:58.837+09:00",
+          "to": "2026-10-20T20:29:58.196+09:00",
+          "seconds": 59.359,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:29:58.196+09:00",
+          "to": "2026-10-20T20:30:58.369+09:00",
+          "seconds": 60.173,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:30:58.369+09:00",
+          "to": "2026-10-20T20:31:55.641+09:00",
+          "seconds": 57.272,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:31:55.641+09:00",
+          "to": "2026-10-20T20:32:56.364+09:00",
+          "seconds": 60.723,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 22,
+            "firstVisits": 0,
+            "otherFree": 100,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:32:56.364+09:00",
+          "to": "2026-10-20T20:33:55.318+09:00",
+          "seconds": 58.954,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:33:55.318+09:00",
+          "to": "2026-10-20T20:34:56.855+09:00",
+          "seconds": 61.537,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:34:56.855+09:00",
+          "to": "2026-10-20T20:35:56.321+09:00",
+          "seconds": 59.466,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:35:56.321+09:00",
+          "to": "2026-10-20T20:36:53.737+09:00",
+          "seconds": 57.416,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 101,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:36:53.737+09:00",
+          "to": "2026-10-20T20:37:54.997+09:00",
+          "seconds": 61.26,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 16,
+            "firstVisits": 0,
+            "otherFree": 40,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:37:54.997+09:00",
+          "to": "2026-10-20T20:38:55.418+09:00",
+          "seconds": 60.421,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 60,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:38:55.418+09:00",
+          "to": "2026-10-20T20:39:57.794+09:00",
+          "seconds": 62.376,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 101,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 20,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:39:57.794+09:00",
+          "to": "2026-10-20T20:40:55.947+09:00",
+          "seconds": 58.153,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:40:55.947+09:00",
+          "to": "2026-10-20T20:41:56.617+09:00",
+          "seconds": 60.67,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:41:56.617+09:00",
+          "to": "2026-10-20T20:42:58.389+09:00",
+          "seconds": 61.772,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 110,
+            "visits": 28,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:42:58.389+09:00",
+          "to": "2026-10-20T20:43:58.361+09:00",
+          "seconds": 59.972,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:43:58.361+09:00",
+          "to": "2026-10-20T20:44:59.072+09:00",
+          "seconds": 60.711,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:44:59.072+09:00",
+          "to": "2026-10-20T20:45:56.769+09:00",
+          "seconds": 57.697,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:45:56.769+09:00",
+          "to": "2026-10-20T20:46:56.411+09:00",
+          "seconds": 59.642,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:46:56.411+09:00",
+          "to": "2026-10-20T20:47:57.735+09:00",
+          "seconds": 61.324,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:47:57.735+09:00",
+          "to": "2026-10-20T20:48:56.567+09:00",
+          "seconds": 58.832,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 0,
+            "visits": 13,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:48:56.567+09:00",
+          "to": "2026-10-20T20:49:52.585+09:00",
+          "seconds": 56.018,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:49:52.585+09:00",
+          "to": "2026-10-20T20:50:59.654+09:00",
+          "seconds": 67.069,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:50:59.654+09:00",
+          "to": "2026-10-20T20:51:58.684+09:00",
+          "seconds": 59.03,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:51:58.684+09:00",
+          "to": "2026-10-20T20:52:56.264+09:00",
+          "seconds": 57.58,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:52:56.264+09:00",
+          "to": "2026-10-20T20:53:57.549+09:00",
+          "seconds": 61.285,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 20,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:53:57.549+09:00",
+          "to": "2026-10-20T20:54:56.351+09:00",
+          "seconds": 58.802,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:54:56.351+09:00",
+          "to": "2026-10-20T20:55:59.636+09:00",
+          "seconds": 63.285,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:55:59.636+09:00",
+          "to": "2026-10-20T20:56:59.173+09:00",
+          "seconds": 59.537,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:56:59.173+09:00",
+          "to": "2026-10-20T20:57:54.861+09:00",
+          "seconds": 55.688,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:57:54.861+09:00",
+          "to": "2026-10-20T20:58:56.528+09:00",
+          "seconds": 61.667,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 100,
+            "visits": 16,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:58:56.528+09:00",
+          "to": "2026-10-20T20:59:54.451+09:00",
+          "seconds": 57.923,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T20:59:54.451+09:00",
+          "to": "2026-10-20T21:00:52.829+09:00",
+          "seconds": 58.378,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:00:52.829+09:00",
+          "to": "2026-10-20T21:01:58.055+09:00",
+          "seconds": 65.226,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:01:58.055+09:00",
+          "to": "2026-10-20T21:02:58.548+09:00",
+          "seconds": 60.493,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:02:58.548+09:00",
+          "to": "2026-10-20T21:03:56.269+09:00",
+          "seconds": 57.721,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 10,
+            "visits": 15,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:03:56.269+09:00",
+          "to": "2026-10-20T21:04:58.670+09:00",
+          "seconds": 62.401,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:04:58.670+09:00",
+          "to": "2026-10-20T21:05:58.374+09:00",
+          "seconds": 59.704,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:05:58.374+09:00",
+          "to": "2026-10-20T21:06:56.442+09:00",
+          "seconds": 58.068,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:06:56.442+09:00",
+          "to": "2026-10-20T21:07:57.398+09:00",
+          "seconds": 60.956,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:07:57.398+09:00",
+          "to": "2026-10-20T21:08:55.300+09:00",
+          "seconds": 57.902,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 19,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:08:55.300+09:00",
+          "to": "2026-10-20T21:09:59.627+09:00",
+          "seconds": 64.327,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:09:59.627+09:00",
+          "to": "2026-10-20T21:10:59.766+09:00",
+          "seconds": 60.139,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:10:59.766+09:00",
+          "to": "2026-10-20T21:11:57.598+09:00",
+          "seconds": 57.832,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:11:57.598+09:00",
+          "to": "2026-10-20T21:12:55.039+09:00",
+          "seconds": 57.441,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:12:55.039+09:00",
+          "to": "2026-10-20T21:13:55.811+09:00",
+          "seconds": 60.772,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:13:55.811+09:00",
+          "to": "2026-10-20T21:14:58.712+09:00",
+          "seconds": 62.901,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 1,
+            "visits": 13,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:14:58.712+09:00",
+          "to": "2026-10-20T21:15:57.644+09:00",
+          "seconds": 58.932,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:15:57.644+09:00",
+          "to": "2026-10-20T21:16:55.511+09:00",
+          "seconds": 57.867,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:16:55.511+09:00",
+          "to": "2026-10-20T21:17:56.285+09:00",
+          "seconds": 60.774,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:17:56.285+09:00",
+          "to": "2026-10-20T21:18:55.463+09:00",
+          "seconds": 59.178,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 1,
+            "visits": 25,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:18:55.463+09:00",
+          "to": "2026-10-20T21:19:57.790+09:00",
+          "seconds": 62.327,
+          "phase": "after",
+          "delta": {
+            "comments": 24,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:19:57.790+09:00",
+          "to": "2026-10-20T21:20:55.229+09:00",
+          "seconds": 57.439,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:20:55.229+09:00",
+          "to": "2026-10-20T21:21:57.478+09:00",
+          "seconds": 62.249,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:21:57.478+09:00",
+          "to": "2026-10-20T21:22:59.386+09:00",
+          "seconds": 61.908,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:22:59.386+09:00",
+          "to": "2026-10-20T21:23:59.171+09:00",
+          "seconds": 59.785,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 10,
+            "visits": 17,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:23:59.171+09:00",
+          "to": "2026-10-20T21:24:58.837+09:00",
+          "seconds": 59.666,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:24:58.837+09:00",
+          "to": "2026-10-20T21:25:55.502+09:00",
+          "seconds": 56.665,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        },
+        {
+          "from": "2026-10-20T21:25:55.502+09:00",
+          "to": "2026-10-20T21:26:36.457+09:00",
+          "seconds": 40.955,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 40,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-night-20261020-aggregate.json"
+        }
+      ],
+      "notes": [
+        "保存できた観測区間のみ。配信全体・公式確定値ではありません。"
+      ]
+    },
+    {
+      "id": 23581008,
+      "date": "2026-10-21",
+      "slot": "morning",
+      "windows": [
+        {
+          "from": "2026-10-21T05:36:58.319+09:00",
+          "to": "2026-10-21T05:37:58.225+09:00",
+          "seconds": 59.906,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 50,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:37:58.225+09:00",
+          "to": "2026-10-21T05:38:58.759+09:00",
+          "seconds": 60.534,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 51,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:38:58.759+09:00",
+          "to": "2026-10-21T05:39:56.644+09:00",
+          "seconds": 57.885,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:39:56.644+09:00",
+          "to": "2026-10-21T05:40:57.540+09:00",
+          "seconds": 60.896,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:40:57.540+09:00",
+          "to": "2026-10-21T05:41:58.260+09:00",
+          "seconds": 60.72,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 95,
+            "visits": 54,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:41:58.260+09:00",
+          "to": "2026-10-21T05:42:58.517+09:00",
+          "seconds": 60.257,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:42:58.517+09:00",
+          "to": "2026-10-21T05:43:56.440+09:00",
+          "seconds": 57.923,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:43:56.440+09:00",
+          "to": "2026-10-21T05:44:58.044+09:00",
+          "seconds": 61.604,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:44:58.044+09:00",
+          "to": "2026-10-21T05:45:58.315+09:00",
+          "seconds": 60.271,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:45:58.315+09:00",
+          "to": "2026-10-21T05:46:57.989+09:00",
+          "seconds": 59.674,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 110,
+            "visits": 81,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:46:57.989+09:00",
+          "to": "2026-10-21T05:47:51.374+09:00",
+          "seconds": 53.385,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 231,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:47:51.374+09:00",
+          "to": "2026-10-21T05:48:56.001+09:00",
+          "seconds": 64.627,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 353,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:48:56.001+09:00",
+          "to": "2026-10-21T05:49:54.669+09:00",
+          "seconds": 58.668,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 22,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:49:54.669+09:00",
+          "to": "2026-10-21T05:50:50.605+09:00",
+          "seconds": 55.936,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 120,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:50:50.605+09:00",
+          "to": "2026-10-21T05:51:50.191+09:00",
+          "seconds": 59.586,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": 122,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:53:56.697+09:00",
+          "to": "2026-10-21T05:54:51.167+09:00",
+          "seconds": 54.47,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 94,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:54:51.167+09:00",
+          "to": "2026-10-21T05:55:25.296+09:00",
+          "seconds": 34.129,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 16,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:57:59.959+09:00",
+          "to": "2026-10-21T05:58:57.527+09:00",
+          "seconds": 57.568,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T05:58:57.527+09:00",
+          "to": "2026-10-21T05:59:51.697+09:00",
+          "seconds": 54.17,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:01:22.756+09:00",
+          "to": "2026-10-21T06:01:57.873+09:00",
+          "seconds": 35.117,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:01:57.873+09:00",
+          "to": "2026-10-21T06:02:55.564+09:00",
+          "seconds": 57.691,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 11,
+            "visits": 73,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:02:55.564+09:00",
+          "to": "2026-10-21T06:03:57.041+09:00",
+          "seconds": 61.477,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 238,
+            "visits": 0,
+            "firstVisits": 3,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:03:57.041+09:00",
+          "to": "2026-10-21T06:04:55.587+09:00",
+          "seconds": 58.546,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 70,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:04:55.587+09:00",
+          "to": "2026-10-21T06:05:59.786+09:00",
+          "seconds": 64.199,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 41,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:05:59.786+09:00",
+          "to": "2026-10-21T06:06:55.751+09:00",
+          "seconds": 55.965,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 11,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:06:55.751+09:00",
+          "to": "2026-10-21T06:07:54.436+09:00",
+          "seconds": 58.685,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 12,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:10:03.789+09:00",
+          "to": "2026-10-21T06:10:59.322+09:00",
+          "seconds": 55.533,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 181,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:10:59.322+09:00",
+          "to": "2026-10-21T06:11:56.389+09:00",
+          "seconds": 57.067,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 32,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:11:56.389+09:00",
+          "to": "2026-10-21T06:12:55.054+09:00",
+          "seconds": 58.665,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 102,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:12:55.054+09:00",
+          "to": "2026-10-21T06:13:57.458+09:00",
+          "seconds": 62.404,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 20,
+            "visits": 82,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:13:57.458+09:00",
+          "to": "2026-10-21T06:14:59.209+09:00",
+          "seconds": 61.751,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 118,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:14:59.209+09:00",
+          "to": "2026-10-21T06:15:58.759+09:00",
+          "seconds": 59.55,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 213,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:15:58.759+09:00",
+          "to": "2026-10-21T06:16:58.270+09:00",
+          "seconds": 59.511,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 90,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:16:58.270+09:00",
+          "to": "2026-10-21T06:17:58.383+09:00",
+          "seconds": 60.113,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 30,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:17:58.383+09:00",
+          "to": "2026-10-21T06:18:55.694+09:00",
+          "seconds": 57.311,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 111,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:18:55.694+09:00",
+          "to": "2026-10-21T06:19:58.992+09:00",
+          "seconds": 63.298,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 121,
+            "visits": 89,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:19:58.992+09:00",
+          "to": "2026-10-21T06:20:54.876+09:00",
+          "seconds": 55.884,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:20:54.876+09:00",
+          "to": "2026-10-21T06:21:55.046+09:00",
+          "seconds": 60.17,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:21:55.046+09:00",
+          "to": "2026-10-21T06:22:59.219+09:00",
+          "seconds": 64.173,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:22:59.219+09:00",
+          "to": "2026-10-21T06:23:44.329+09:00",
+          "seconds": 45.11,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 50,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:24:59.806+09:00",
+          "to": "2026-10-21T06:25:58.834+09:00",
+          "seconds": 59.028,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 36,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:25:58.834+09:00",
+          "to": "2026-10-21T06:26:59.226+09:00",
+          "seconds": 60.392,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:26:59.226+09:00",
+          "to": "2026-10-21T06:27:57.551+09:00",
+          "seconds": 58.325,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 131,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:27:57.551+09:00",
+          "to": "2026-10-21T06:28:53.332+09:00",
+          "seconds": 55.781,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 214,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:28:53.332+09:00",
+          "to": "2026-10-21T06:29:56.623+09:00",
+          "seconds": 63.291,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 113,
+            "visits": 81,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:29:56.623+09:00",
+          "to": "2026-10-21T06:30:59.368+09:00",
+          "seconds": 62.745,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 124,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:30:59.368+09:00",
+          "to": "2026-10-21T06:31:59.414+09:00",
+          "seconds": 60.046,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 104,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:31:59.414+09:00",
+          "to": "2026-10-21T06:32:56.440+09:00",
+          "seconds": 57.026,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 122,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:32:56.440+09:00",
+          "to": "2026-10-21T06:33:59.370+09:00",
+          "seconds": 62.93,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 125,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 2,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:33:59.370+09:00",
+          "to": "2026-10-21T06:34:55.697+09:00",
+          "seconds": 56.327,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 132,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:34:55.697+09:00",
+          "to": "2026-10-21T06:35:48.372+09:00",
+          "seconds": 52.675,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 85,
+            "visits": 99,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:35:48.372+09:00",
+          "to": "2026-10-21T06:36:57.584+09:00",
+          "seconds": 69.212,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 126,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:36:57.584+09:00",
+          "to": "2026-10-21T06:37:53.212+09:00",
+          "seconds": 55.628,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:39:27.277+09:00",
+          "to": "2026-10-21T06:39:59.336+09:00",
+          "seconds": 32.059,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 34,
+            "visits": 79,
+            "firstVisits": 1,
+            "otherFree": 10,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:39:59.336+09:00",
+          "to": "2026-10-21T06:40:58.287+09:00",
+          "seconds": 58.951,
+          "phase": "after",
+          "delta": {
+            "comments": 14,
+            "stars": 300,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:40:58.287+09:00",
+          "to": "2026-10-21T06:41:56.275+09:00",
+          "seconds": 57.988,
+          "phase": "after",
+          "delta": {
+            "comments": 12,
+            "stars": 120,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:41:56.275+09:00",
+          "to": "2026-10-21T06:42:54.504+09:00",
+          "seconds": 58.229,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 130,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:42:54.504+09:00",
+          "to": "2026-10-21T06:43:56.641+09:00",
+          "seconds": 62.137,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 81,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:43:56.641+09:00",
+          "to": "2026-10-21T06:44:57.941+09:00",
+          "seconds": 61.3,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 31,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:44:57.941+09:00",
+          "to": "2026-10-21T06:45:57.633+09:00",
+          "seconds": 59.692,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 100,
+            "visits": 57,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:45:57.633+09:00",
+          "to": "2026-10-21T06:46:58.137+09:00",
+          "seconds": 60.504,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:46:58.137+09:00",
+          "to": "2026-10-21T06:47:57.365+09:00",
+          "seconds": 59.228,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:47:57.365+09:00",
+          "to": "2026-10-21T06:48:57.623+09:00",
+          "seconds": 60.258,
+          "phase": "after",
+          "delta": {
+            "comments": 10,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:48:57.623+09:00",
+          "to": "2026-10-21T06:49:56.639+09:00",
+          "seconds": 59.016,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 59,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:49:56.639+09:00",
+          "to": "2026-10-21T06:50:55.403+09:00",
+          "seconds": 58.764,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:50:55.403+09:00",
+          "to": "2026-10-21T06:51:56.222+09:00",
+          "seconds": 60.819,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:51:56.222+09:00",
+          "to": "2026-10-21T06:52:57.413+09:00",
+          "seconds": 61.191,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:52:57.413+09:00",
+          "to": "2026-10-21T06:53:56.552+09:00",
+          "seconds": 59.139,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:53:56.552+09:00",
+          "to": "2026-10-21T06:54:58.095+09:00",
+          "seconds": 61.543,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 21,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:54:58.095+09:00",
+          "to": "2026-10-21T06:55:58.205+09:00",
+          "seconds": 60.11,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 11,
+            "visits": 52,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:55:58.205+09:00",
+          "to": "2026-10-21T06:56:57.310+09:00",
+          "seconds": 59.105,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:56:57.310+09:00",
+          "to": "2026-10-21T06:57:56.829+09:00",
+          "seconds": 59.519,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:57:56.829+09:00",
+          "to": "2026-10-21T06:58:57.912+09:00",
+          "seconds": 61.083,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:58:57.912+09:00",
+          "to": "2026-10-21T06:59:57.033+09:00",
+          "seconds": 59.121,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T06:59:57.033+09:00",
+          "to": "2026-10-21T07:00:59.136+09:00",
+          "seconds": 62.103,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 39,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:00:59.136+09:00",
+          "to": "2026-10-21T07:01:58.702+09:00",
+          "seconds": 59.566,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 6,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:01:58.702+09:00",
+          "to": "2026-10-21T07:02:56.345+09:00",
+          "seconds": 57.643,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:02:56.345+09:00",
+          "to": "2026-10-21T07:03:59.035+09:00",
+          "seconds": 62.69,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:03:59.035+09:00",
+          "to": "2026-10-21T07:04:56.877+09:00",
+          "seconds": 57.842,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:04:56.877+09:00",
+          "to": "2026-10-21T07:05:56.336+09:00",
+          "seconds": 59.459,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 1,
+            "visits": 57,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:05:56.336+09:00",
+          "to": "2026-10-21T07:06:58.274+09:00",
+          "seconds": 61.938,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:06:58.274+09:00",
+          "to": "2026-10-21T07:07:58.817+09:00",
+          "seconds": 60.543,
+          "phase": "after",
+          "delta": {
+            "comments": 9,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:07:58.817+09:00",
+          "to": "2026-10-21T07:08:55.190+09:00",
+          "seconds": 56.373,
+          "phase": "after",
+          "delta": {
+            "comments": 15,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:08:55.190+09:00",
+          "to": "2026-10-21T07:09:53.937+09:00",
+          "seconds": 58.747,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:09:53.937+09:00",
+          "to": "2026-10-21T07:10:59.583+09:00",
+          "seconds": 65.646,
+          "phase": "after",
+          "delta": {
+            "comments": 13,
+            "stars": 211,
+            "visits": 59,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:10:59.583+09:00",
+          "to": "2026-10-21T07:11:59.710+09:00",
+          "seconds": 60.127,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:11:59.710+09:00",
+          "to": "2026-10-21T07:12:56.804+09:00",
+          "seconds": 57.094,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:12:56.804+09:00",
+          "to": "2026-10-21T07:13:58.953+09:00",
+          "seconds": 62.149,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:13:58.953+09:00",
+          "to": "2026-10-21T07:14:57.247+09:00",
+          "seconds": 58.294,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 11,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:14:57.247+09:00",
+          "to": "2026-10-21T07:15:56.981+09:00",
+          "seconds": 59.734,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 120,
+            "visits": 84,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:15:56.981+09:00",
+          "to": "2026-10-21T07:16:58.082+09:00",
+          "seconds": 61.101,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 171,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:16:58.082+09:00",
+          "to": "2026-10-21T07:17:59.672+09:00",
+          "seconds": 61.59,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 30,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:17:59.672+09:00",
+          "to": "2026-10-21T07:18:54.022+09:00",
+          "seconds": 54.35,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:18:54.022+09:00",
+          "to": "2026-10-21T07:19:53.148+09:00",
+          "seconds": 59.126,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 90,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:19:53.148+09:00",
+          "to": "2026-10-21T07:20:58.850+09:00",
+          "seconds": 65.702,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 100,
+            "visits": 62,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:20:58.850+09:00",
+          "to": "2026-10-21T07:21:55.104+09:00",
+          "seconds": 56.254,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:21:55.104+09:00",
+          "to": "2026-10-21T07:22:55.942+09:00",
+          "seconds": 60.838,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:22:55.942+09:00",
+          "to": "2026-10-21T07:23:55.417+09:00",
+          "seconds": 59.475,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 200,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:23:55.417+09:00",
+          "to": "2026-10-21T07:24:54.845+09:00",
+          "seconds": 59.428,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 20,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 1,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:24:54.845+09:00",
+          "to": "2026-10-21T07:25:56.483+09:00",
+          "seconds": 61.638,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:25:56.483+09:00",
+          "to": "2026-10-21T07:26:54.560+09:00",
+          "seconds": 58.077,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 53,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:26:54.560+09:00",
+          "to": "2026-10-21T07:27:57.359+09:00",
+          "seconds": 62.799,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:27:57.359+09:00",
+          "to": "2026-10-21T07:28:53.187+09:00",
+          "seconds": 55.828,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 60,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:28:53.187+09:00",
+          "to": "2026-10-21T07:29:55.273+09:00",
+          "seconds": 62.086,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 39,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:29:55.273+09:00",
+          "to": "2026-10-21T07:30:56.426+09:00",
+          "seconds": 61.153,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 36,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:30:56.426+09:00",
+          "to": "2026-10-21T07:31:58.406+09:00",
+          "seconds": 61.98,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:31:58.406+09:00",
+          "to": "2026-10-21T07:32:59.155+09:00",
+          "seconds": 60.749,
+          "phase": "after",
+          "delta": {
+            "comments": 7,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:32:59.155+09:00",
+          "to": "2026-10-21T07:33:56.295+09:00",
+          "seconds": 57.14,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:33:56.295+09:00",
+          "to": "2026-10-21T07:34:55.557+09:00",
+          "seconds": 59.262,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 70,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:34:55.557+09:00",
+          "to": "2026-10-21T07:35:58.541+09:00",
+          "seconds": 62.984,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 30,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:35:58.541+09:00",
+          "to": "2026-10-21T07:36:57.719+09:00",
+          "seconds": 59.178,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 100,
+            "visits": 48,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 1
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:36:57.719+09:00",
+          "to": "2026-10-21T07:37:57.682+09:00",
+          "seconds": 59.963,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:37:57.682+09:00",
+          "to": "2026-10-21T07:38:55.768+09:00",
+          "seconds": 58.086,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:38:55.768+09:00",
+          "to": "2026-10-21T07:39:59.908+09:00",
+          "seconds": 64.14,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:39:59.908+09:00",
+          "to": "2026-10-21T07:40:55.973+09:00",
+          "seconds": 56.065,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:40:55.973+09:00",
+          "to": "2026-10-21T07:41:56.640+09:00",
+          "seconds": 60.667,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:41:56.640+09:00",
+          "to": "2026-10-21T07:42:59.563+09:00",
+          "seconds": 62.923,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 1,
+            "visits": 42,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:42:59.563+09:00",
+          "to": "2026-10-21T07:43:56.058+09:00",
+          "seconds": 56.495,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 3,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:43:56.058+09:00",
+          "to": "2026-10-21T07:44:58.604+09:00",
+          "seconds": 62.546,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 3,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:44:58.604+09:00",
+          "to": "2026-10-21T07:45:58.713+09:00",
+          "seconds": 60.109,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:45:58.713+09:00",
+          "to": "2026-10-21T07:46:58.183+09:00",
+          "seconds": 59.47,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 50,
+            "firstVisits": 0,
+            "otherFree": 2,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:46:58.183+09:00",
+          "to": "2026-10-21T07:47:59.511+09:00",
+          "seconds": 61.328,
+          "phase": "after",
+          "delta": {
+            "comments": 2,
+            "stars": 110,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:47:59.511+09:00",
+          "to": "2026-10-21T07:48:59.623+09:00",
+          "seconds": 60.112,
+          "phase": "after",
+          "delta": {
+            "comments": 5,
+            "stars": 1,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:48:59.623+09:00",
+          "to": "2026-10-21T07:49:56.387+09:00",
+          "seconds": 56.764,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 100,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:49:56.387+09:00",
+          "to": "2026-10-21T07:50:54.149+09:00",
+          "seconds": 57.762,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 75,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:50:54.149+09:00",
+          "to": "2026-10-21T07:51:57.259+09:00",
+          "seconds": 63.11,
+          "phase": "after",
+          "delta": {
+            "comments": 0,
+            "stars": 25,
+            "visits": 59,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:51:57.259+09:00",
+          "to": "2026-10-21T07:52:59.819+09:00",
+          "seconds": 62.56,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 5,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:52:59.819+09:00",
+          "to": "2026-10-21T07:53:51.368+09:00",
+          "seconds": 51.549,
+          "phase": "after",
+          "delta": {
+            "comments": 1,
+            "stars": 2,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:53:51.368+09:00",
+          "to": "2026-10-21T07:54:57.432+09:00",
+          "seconds": 66.064,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 99,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:54:57.432+09:00",
+          "to": "2026-10-21T07:55:55.310+09:00",
+          "seconds": 57.878,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 111,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:55:55.310+09:00",
+          "to": "2026-10-21T07:56:56.627+09:00",
+          "seconds": 61.317,
+          "phase": "after",
+          "delta": {
+            "comments": 4,
+            "stars": 0,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:56:56.627+09:00",
+          "to": "2026-10-21T07:57:56.545+09:00",
+          "seconds": 59.918,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 0,
+            "visits": 36,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:57:56.545+09:00",
+          "to": "2026-10-21T07:58:57.598+09:00",
+          "seconds": 61.053,
+          "phase": "after",
+          "delta": {
+            "comments": 3,
+            "stars": 130,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:58:57.598+09:00",
+          "to": "2026-10-21T07:59:58.342+09:00",
+          "seconds": 60.744,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 81,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T07:59:58.342+09:00",
+          "to": "2026-10-21T08:00:58.619+09:00",
+          "seconds": 60.277,
+          "phase": "after",
+          "delta": {
+            "comments": 6,
+            "stars": 30,
+            "visits": 0,
+            "firstVisits": 1,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T08:00:58.619+09:00",
+          "to": "2026-10-21T08:01:59.189+09:00",
+          "seconds": 60.57,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 10,
+            "visits": 47,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T08:01:59.189+09:00",
+          "to": "2026-10-21T08:02:58.197+09:00",
+          "seconds": 59.008,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 11,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T08:02:58.197+09:00",
+          "to": "2026-10-21T08:03:46.974+09:00",
+          "seconds": 48.777,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 152,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T08:03:46.974+09:00",
+          "to": "2026-10-21T08:04:55.478+09:00",
+          "seconds": 68.504,
+          "phase": "after",
+          "delta": {
+            "comments": 8,
+            "stars": 90,
+            "visits": 0,
+            "firstVisits": 2,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
+        },
+        {
+          "from": "2026-10-21T08:04:55.478+09:00",
+          "to": "2026-10-21T08:05:54.523+09:00",
+          "seconds": 59.045,
+          "phase": "after",
+          "delta": {
+            "comments": 11,
+            "stars": 10,
+            "visits": 0,
+            "firstVisits": 0,
+            "otherFree": 0,
+            "newFollows": 0
+          },
+          "source": "/data-lab/data/mily-morning-20261021-aggregate.json"
         }
       ],
       "notes": [

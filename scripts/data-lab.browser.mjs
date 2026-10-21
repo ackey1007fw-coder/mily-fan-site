@@ -97,8 +97,10 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 7, "Seven broadcast dates from 10/14 through 10/20");
-            const today = page.locator("#daily-2026-10-20");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 8, "Eight broadcast dates from 10/14 through 10/21");
+            const day20 = page.locator("#daily-2026-10-20");
+            await day20.locator("summary").click();
+            const today = day20.locator(".daily-stream-card").last();
             await today.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
             assert.equal(await today.locator("svg.daily-plot circle").count(), 35, "Only the 35 actually saved Oct 20 counter points");
             assert.match(await today.locator(".daily-stream-stat").innerText(), /2,545/);
@@ -255,6 +257,29 @@ try {
           assert.match(await page.locator("h1").innerText(), /10月18日夜/);
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
             `October 18 night report must not overflow at ${width}px in ${engine}`);
+
+          if (width === 390 || width === 1440) {
+            for (const [route, count, recap, stars] of [
+              ["20261020-night", 207, "2026-10-20-night-showroom", "7,087"],
+              ["20261021-morning", 155, "2026-10-21-morning-showroom", "11,214"],
+            ]) {
+              const report = await page.goto(`${baseUrl}/data-lab/reports/${route}/`, { waitUntil: "networkidle" });
+              assert.equal(report.status(), 200);
+              assert.match(await page.locator("h1").innerText(), new RegExp(`${count}点`));
+              assert.ok((await page.locator(".cards").innerText()).includes(stars));
+              assert.equal(await page.locator('meta[name="robots"]').getAttribute("content"), "noindex,nofollow,noarchive");
+              for (const key of ["stars", "visits", "comments"]) {
+                await page.locator(`label[for="metric-${key}"]`).click();
+                assert.ok(await page.locator(`.metric-panel[data-metric="${key}"]`).isVisible());
+                assert.equal(await page.locator(`.metric-panel[data-metric="${key}"] circle`).count(), count);
+              }
+              assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Observation report overflow");
+              await page.screenshot({ path: join(output, `${engine}-${width}-${route}.png`), fullPage: true });
+              await page.locator(`nav a[href="/activities/live/#recap-${recap}"]`).click();
+              await page.locator(`#recap-${recap}`).waitFor({ state: "visible" });
+              assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "New recap overflow");
+            }
+          }
 
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
