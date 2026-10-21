@@ -672,9 +672,9 @@ function StreamRecapArticle({
         frame = 0;
         if (window.location.hash !== targetHash) return;
         document.getElementById(targetId)?.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "instant"
-            : "smooth",
+          // Deep links must land immediately even when earlier recaps contain lazy media.
+          // Smooth scrolling over a long archive can leave the destination offscreen.
+          behavior: "instant",
           block: "start",
         });
       });
