@@ -45,6 +45,10 @@ try {
     await page.waitForFunction(id=>document.querySelector('#recap-'+id+' video')?.readyState>=1,g.recapId);
     const info=await video.evaluate(v=>({duration:v.duration,width:v.videoWidth,height:v.videoHeight}));
     assert.ok(Math.abs(info.duration-clip.durationSeconds)<0.1);assert.deepEqual([info.width,info.height],[720,1280]);
+    await video.evaluate(v=>{v.muted=true;return v.play();});
+    await page.waitForFunction(id=>document.querySelector('#recap-'+id+' video')?.currentTime>0.5,g.recapId);
+    assert.equal(await video.evaluate(v=>v.error),null);
+    await video.evaluate(v=>v.pause());
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
     await card.locator(':scope > summary').scrollIntoViewIfNeeded();
     const filename=engine+'-'+width+'-'+g.code+'.png';await page.screenshot({path:join(output,filename)});

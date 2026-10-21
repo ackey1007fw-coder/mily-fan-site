@@ -22,6 +22,9 @@ test('Oct 20-21: four unique streams retain their own approved photos, talk and 
   assert.match(recap.transcriptionNote, /先頭0.3秒/);
   assert.match(recap.transcriptionNote, /手動聴取/);
   const clipItem = group.files.find(f => f.role === 'talk');
+  const stillItems = group.files.filter(f => f.role === 'still');
+  assert.deepEqual(recap.gallery.map(image => image.src), stillItems.map(file => '/media/live/' + file.name));
+  assert.equal(clips[0].poster, '/media/live/' + group.files.find(f => f.role === 'talk-cover').name);
   assert.equal(clips[0].src, '/media/live/' + clipItem.name);
   assert.equal(clips[0].durationSeconds, clipItem.durationSeconds);
   for (const file of group.files) {

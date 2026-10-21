@@ -9,15 +9,30 @@ import ffprobe from "ffprobe-static";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
 
 const run = promisify(execFile);
+const approvedMedia = JSON.parse(await readFile(new URL('./stream-media-20261020-21.json', import.meta.url), 'utf8')).groups;
+const seconds = stamp => stamp.split(':').reduce((total, part) => total * 60 + Number(part), 0);
 const clips = streamRecaps.flatMap((recap) => recap.highlights
   .filter((highlight) => highlight.clip)
   .map((highlight) => ({ recap, highlight, clip: highlight.clip })));
 
 test("talk highlights use short, playable clips with audio and real-frame posters", async () => {
-  for (const { highlight, clip } of clips) {
-    assert.match(clip.src, /^\/media\/live-clips\/mily-b\d+-.*\.mp4$/);
+  for (const { recap, highlight, clip } of clips) {
+    const approved = approvedMedia.find(group => group.recapId === recap.id);
+    if (approved) {
+      const media = approved.files.find(file => file.role === 'talk');
+      const poster = approved.files.find(file => file.role === 'talk-cover');
+      assert.equal(recap.date, approved.date);
+      assert.equal(clip.src, '/media/live/' + media.name);
+      assert.equal(clip.poster, '/media/live/' + poster.name);
+      assert.equal(seconds(clip.sourceTimestamp), Math.floor(media.sourceSeconds));
+      // A highlight can start just before its actual excerpt; source time stays tied to the manifest.
+      assert.ok(seconds(clip.sourceTimestamp) >= seconds(highlight.timestamp));
+      assert.ok(seconds(clip.sourceTimestamp) - seconds(highlight.timestamp) <= 1);
+    } else {
+      assert.match(clip.src, /^\/media\/live-clips\/mily-b\d+-.*\.mp4$/);
+      assert.equal(clip.sourceTimestamp, highlight.timestamp);
+    }
     assert.match(clip.sourceTimestamp, /^\d:[0-5]\d:[0-5]\d$/);
-    assert.equal(clip.sourceTimestamp, highlight.timestamp);
     assert.ok(clip.durationSeconds > 0 && clip.durationSeconds <= 90);
     const videoUrl = new URL(`../public${clip.src}`, import.meta.url);
     const { stdout } = await run(ffprobe.path, [
