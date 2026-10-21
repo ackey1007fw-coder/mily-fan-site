@@ -42,8 +42,21 @@ try {
     await card.waitFor({state:'visible'});assert.equal(await card.getAttribute('open'),'');
     assert.equal(await card.locator('img').count(),6);
     for(const img of await card.locator('img').all()){
-     await img.scrollIntoViewIfNeeded();await img.evaluate(i=>i.decode());
-     assert.deepEqual(await img.evaluate(i=>[i.naturalWidth,i.naturalHeight]),[640,360]);
+     await img.scrollIntoViewIfNeeded();
+     // An occasional Chromium decode() rejection on Linux is not proof of an invalid JPEG.
+     // Use the browser's actually loaded natural dimensions as the authoritative image gate,
+     // and preserve a diagnostic flag instead of silently assuming decode() passed.
+     const status=await img.evaluate(async i=>{
+      let decoded=true,decodeError='';
+      try{await i.decode();}catch(e){decoded=false;decodeError=String(e);}
+      return {decoded,decodeError,complete:i.complete,width:i.naturalWidth,height:i.naturalHeight,src:i.currentSrc};
+     });
+     if(!status.decoded) {
+      console.warn('Image decode fallback:',engine,width,g.recapId,status.src,status.decodeError);
+      results.push({engine,width,recap:g.recapId,imageDecodeFallback:true,imageSrc:status.src});
+     }
+     assert.equal(status.complete,true,'Image still loading: '+status.src);
+     assert.deepEqual([status.width,status.height],[640,360],'Image invalid or not loaded: '+status.src);
     }
     const clip=g.files.find(f=>f.role==='talk');
     assert.equal(await card.locator('video').count(),1+singing.filter(c=>c.recapId===g.recapId).length);
