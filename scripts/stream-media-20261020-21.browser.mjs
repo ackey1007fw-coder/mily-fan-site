@@ -25,17 +25,17 @@ try {
  for(let i=0;i<100;i++){try{ready=(await fetch(origin)).ok;}catch{}if(ready)break;await new Promise(r=>setTimeout(r,100));}
  assert.ok(ready);
  for(const [engine,width,height] of [['chromium',390,844],['webkit',390,844],['chromium',1440,1000]]){
-  const browser=await engines[engine].launch({headless:true});
-  try {
-   const context=await browser.newContext({viewport:{width,height}});
+  for(const g of groups){
+   // Isolate each recap in a fresh browser process to avoid cross-stream decoder/image-memory contention.
+   const browser=await engines[engine].launch({headless:true});
+   try {
+    const context=await browser.newContext({viewport:{width,height}});
    await context.route('**/*',route=>{
     const u=new URL(route.request().url());
     if(u.origin!==origin)return route.fulfill({status:204,body:''});
     if(u.pathname.startsWith('/api/'))return route.fulfill({status:503,contentType:'application/json',body:'{}'});
     return route.continue();
    });
-   for(const g of groups){
-    // Each recap uses a fresh tab so prior video decoders and lazy images cannot contend with this one.
     const page=await context.newPage(); const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto(origin+'/activities/live/#recap-'+g.recapId,{waitUntil:'networkidle'});
     const card=page.locator('#recap-'+g.recapId);
@@ -79,8 +79,8 @@ try {
     results.push({engine,width,recap:g.recapId,passed:true,screenshot:filename,...info});
     assert.deepEqual(errors,[]);
     await page.close();
-   }
-  }finally{await browser.close();}
+   }finally{await browser.close();}
+  }
  }
 }finally{
  server.kill('SIGTERM');
