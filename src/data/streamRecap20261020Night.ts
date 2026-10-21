@@ -1,7 +1,10 @@
+import { media232Gallery, media232Clip } from "./streamMedia2026102021.ts";
 import type { StreamRecap } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote, buildRankingNote } from "./streamRecapRules.ts";
 
 export const streamRecap20261020Night: StreamRecap = {
+  gallery: media232Gallery,
+  image: media232Gallery[4],
   "id": "2026-10-20-night-showroom",
   "date": "2026-10-20",
   "dateLabel": "2026.10.20（火）",
@@ -16,6 +19,7 @@ export const streamRecap20261020Night: StreamRecap = {
     },
     {
       "timestamp": "0:52:28",
+      clip: media232Clip,
       "title": "新しい時間帯の出会い",
       "body": "この時間帯での配信を試し、新しい出会いを楽しみにしていると話しました。訪れた人やフォローしてくれた人へお礼を伝えました。"
     },
@@ -84,5 +88,5 @@ export const streamRecap20261020Night: StreamRecap = {
   "verifiedAt": "2026-10-21",
   "broadcastLabel": "録画開始18:01頃〜 約209分",
   "ranking": [buildRankingNote()],
-  transcriptionNote: buildTranscriptionNote({material: AUTO_TRANSCRIPT_MATERIAL_NOTE, stills: "静止画は掲載していません。", extra: "録画2本の保存尺は合計約209分18秒。自動文字起こし628処理区間のうち、掲載する話題の区間を照合しました。通信エラー・再接続の記録があり、全区間の連続性は未確認です。時刻は2本の保存メディアを順番に並べた経過の目安です。実際の時計時刻とは区別し、連続収録を保証しません。同一配信の録画2本に対応する自動文字起こしのうち、掲載話題に関係する区間を照合しました。原音の手動聴取・動画の視聴は行っていません。録画処理時刻と配信開始時刻は別で、分割間を含む全区間の連続性は未検証です。歌唱曲名と次枠時刻は確定していません。匿名の数値と取得範囲はデータラボへ掲載しています。"}),
+  transcriptionNote: buildTranscriptionNote({material: AUTO_TRANSCRIPT_MATERIAL_NOTE, stills: "同じ配信の実フレーム5枚を掲載しています。", publishedClips: true, extra: "オーナー承認のトーク短尺を追加。先頭0.3秒は同じ配信の表紙静止画で、原音と尺は保持しています。背景の紙にある文字だけをぼかしています。以下は全編記事の確認範囲です。録画2本の保存尺は合計約209分18秒。自動文字起こし628処理区間のうち、掲載する話題の区間を照合しました。通信エラー・再接続の記録があり、全区間の連続性は未確認です。時刻は2本の保存メディアを順番に並べた経過の目安です。実際の時計時刻とは区別し、連続収録を保証しません。同一配信の録画2本に対応する自動文字起こしのうち、掲載話題に関係する区間を照合しました。原音の手動聴取・動画の視聴は行っていません。録画処理時刻と配信開始時刻は別で、分割間を含む全区間の連続性は未検証です。歌唱曲名と次枠時刻は確定していません。匿名の数値と取得範囲はデータラボへ掲載しています。"}),
 };

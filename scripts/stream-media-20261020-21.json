@@ -1,0 +1,606 @@
+{
+  "version": 1,
+  "scope": "Approved Oct 20-21 stream media",
+  "groups": [
+    {
+      "code": "20261020-morning",
+      "batch": 231,
+      "recapId": "2026-10-20-morning-showroom",
+      "title": "今日も一緒に頑張ろう",
+      "date": "2026-10-20",
+      "representative": 3,
+      "files": [
+        {
+          "name": "mily-b231-01-20261020-morning-still.png",
+          "sha256": "60e911b3c189bc4c73c9a4ce1c24fc6fda813cb74cb27c1539bea620fb8e9f72",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 180
+        },
+        {
+          "name": "mily-b231-02-20261020-morning-still.png",
+          "sha256": "acc65c455e5bc756f48751acd63d86d34b8f9d2b40d6f7ac6780b0b71b39f1b8",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 300
+        },
+        {
+          "name": "mily-b231-03-20261020-morning-still.png",
+          "sha256": "dce3e54c426b45070a8cf0e46a8b6305bfe3ef2c8c61c9af58224bcd351d5119",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 1140
+        },
+        {
+          "name": "mily-b231-04-20261020-morning-still.png",
+          "sha256": "178c173100c2a936a642d942f687ee938a3309526799cb33e477aead28fa4f41",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 1740
+        },
+        {
+          "name": "mily-b231-05-20261020-morning-still.png",
+          "sha256": "5b980cca2ed09b9f1c71c9b32ef3e04578960e139ae68801e3835434476859be",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 1980
+        },
+        {
+          "name": "mily-b231-06-20261020-morning-social-cover.png",
+          "sha256": "9a2b15dca0040c2bd3b0b7825f3c2a8bb2ec782a7aad4222d6447453b292e348",
+          "width": 720,
+          "height": 900,
+          "role": "social-cover",
+          "source": "mily-b231-03-20261020-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b231-07-20261020-morning-social-photo.png",
+          "sha256": "008da6c860abb4b38b0166aac79f3512290e5450fe5a93a513a4c029d2dfe49c",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b231-01-20261020-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b231-08-20261020-morning-social-photo.png",
+          "sha256": "708971ab7af9b38bf14527abfbfe5987721214e8099d59a0d9488cb3c5aec4a6",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b231-02-20261020-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b231-09-20261020-morning-social-photo.png",
+          "sha256": "fa4efec0fb65822628b820ad07710b309f36a5f22107e243aec96df1210adde7",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b231-03-20261020-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b231-10-20261020-morning-social-photo.png",
+          "sha256": "247652df1b1d63b221881f050ccb5b7b5d676d9af08da5fdde8ddf250322b843",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b231-04-20261020-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b231-11-20261020-morning-social-photo.png",
+          "sha256": "1fa745f2d5f7bb81e6a0bb242eb340ffa098651e7b84b04e8724bf0227d685c3",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b231-05-20261020-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b231-12-20261020-morning-talk.mp4",
+          "sha256": "d1adf7141425348bf9f1e8d9a0dfbde6d5390bd615503f5e03d2c0539c0205a2",
+          "width": 720,
+          "height": 1280,
+          "role": "talk",
+          "durationSeconds": 25.2,
+          "sourceSeconds": 2272.5
+        },
+        {
+          "name": "mily-b231-13-20261020-morning-talk-cover.png",
+          "sha256": "0df9965066bef86154ad3bb38808b179ea84c5044e45a23f2224864204cdf654",
+          "width": 720,
+          "height": 1280,
+          "role": "talk-cover"
+        }
+      ]
+    },
+    {
+      "code": "20261020-night",
+      "batch": 232,
+      "recapId": "2026-10-20-night-showroom",
+      "title": "新しい時間帯、新しい出会い",
+      "date": "2026-10-20",
+      "representative": 5,
+      "files": [
+        {
+          "name": "mily-b232-01-20261020-night-still.png",
+          "sha256": "d76fb696e8b2aad5c5b2d05098b6858fc2a55fa732df6a1928557a5153d22a61",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 180
+        },
+        {
+          "name": "mily-b232-02-20261020-night-still.png",
+          "sha256": "15b7a4eb251f0daf8f76ca35200d1e8fa6c44d9ef9e5e8e8f1332ebe596e3573",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 1800
+        },
+        {
+          "name": "mily-b232-03-20261020-night-still.png",
+          "sha256": "25061948d46fefa1b01690c036d678bbf10694dafcb86bee32b2a7a0bd6cd8c6",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 3155
+        },
+        {
+          "name": "mily-b232-04-20261020-night-still.png",
+          "sha256": "e8d3a8911ae4398aebccdb8ecb4c5fab2ac07c307db4296ac6c4195b3b416ec3",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 7000
+        },
+        {
+          "name": "mily-b232-05-20261020-night-still.png",
+          "sha256": "62f39d99507bf28006409367702be5bad1b49875e0028a94ef6f769d81538498",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 10000
+        },
+        {
+          "name": "mily-b232-06-20261020-night-social-cover.png",
+          "sha256": "e403f526bc047789a1593ab41197cad5fd6533232a1c2fed50e09ec2108bd9d5",
+          "width": 720,
+          "height": 900,
+          "role": "social-cover",
+          "source": "mily-b232-05-20261020-night-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b232-07-20261020-night-social-photo.png",
+          "sha256": "af7f37d3ae90abb6c96fff3484f4a4a3922f6b4e3cb577bc951a75280992a1c4",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b232-01-20261020-night-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b232-08-20261020-night-social-photo.png",
+          "sha256": "f00f62cf7ffd5281e1cb2df15d0423969c6099dd143504ceed9e6024411ed205",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b232-02-20261020-night-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b232-09-20261020-night-social-photo.png",
+          "sha256": "7e09c282965700f15f3d46da629c95f5a14d756869030ae38cebc833d94f07bc",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b232-03-20261020-night-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b232-10-20261020-night-social-photo.png",
+          "sha256": "f30d4f67c8de27a47fb3a0d9e6e736d167e8f32fedb06138cc40d74c17896007",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b232-04-20261020-night-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b232-11-20261020-night-social-photo.png",
+          "sha256": "8c8e0b293c7f458209a4cbf9ed057349b08c99b78caaa3484743308682021b40",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b232-05-20261020-night-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b232-12-20261020-night-talk.mp4",
+          "sha256": "613e87059cb268205ccb753afe4dd44ed27aaddb9d61b9e589f74bd09f571feb",
+          "width": 720,
+          "height": 1280,
+          "role": "talk",
+          "durationSeconds": 24,
+          "sourceSeconds": 3148.6
+        },
+        {
+          "name": "mily-b232-13-20261020-night-talk-cover.png",
+          "sha256": "6119f74d65c5b0f8406cc3d262171d3db7ad23114a21943ac60fc86d5216b2ec",
+          "width": 720,
+          "height": 1280,
+          "role": "talk-cover"
+        }
+      ]
+    },
+    {
+      "code": "20261021-morning",
+      "batch": 233,
+      "recapId": "2026-10-21-morning-showroom",
+      "title": "見つけてくれて、ありがとう",
+      "date": "2026-10-21",
+      "representative": 3,
+      "files": [
+        {
+          "name": "mily-b233-01-20261021-morning-still.png",
+          "sha256": "9cd13b6c72f1c7092e7fdc6314dbf63a59d365d900d12b6c5e137d9005f014ca",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 2133.082
+        },
+        {
+          "name": "mily-b233-02-20261021-morning-still.png",
+          "sha256": "924da49415d6ed01ac604728dc7c14ca7d779e97f4dbc79ad32cc25af8eb4125",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 2553.082
+        },
+        {
+          "name": "mily-b233-03-20261021-morning-still.png",
+          "sha256": "5cbf12dfb6f3b15c3095dff441b3483fb121543d1eaf5c3c952a29ac3e90321e",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 3167.082
+        },
+        {
+          "name": "mily-b233-04-20261021-morning-still.png",
+          "sha256": "eb5b5a28c60e9a374b8fd48c6d02e785b24c97d652af4c03df7c63f906334677",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 3186.582
+        },
+        {
+          "name": "mily-b233-05-20261021-morning-still.png",
+          "sha256": "007d5b6fd3eb72fed38c15b9dbeb834db0001a89c7ded8e962ab4e01126d7266",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 8995.082
+        },
+        {
+          "name": "mily-b233-06-20261021-morning-social-cover.png",
+          "sha256": "d829b138c436b389e2f58717dfa2c0fedbe4e46f1a2cfa5c42b7f9c80e73835c",
+          "width": 720,
+          "height": 900,
+          "role": "social-cover",
+          "source": "mily-b233-03-20261021-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b233-07-20261021-morning-social-photo.png",
+          "sha256": "c6277c5fbba7c0171ea180a9cad73d28e86dda178f233e6fe8a99d36acd2d3f6",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b233-01-20261021-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b233-08-20261021-morning-social-photo.png",
+          "sha256": "99efef9f711f7c3438f549326248c3f662910be895abd11ba9bfa0f19eb8614a",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b233-02-20261021-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b233-09-20261021-morning-social-photo.png",
+          "sha256": "127a22aaeeb33bf94c87843f9c9fefb6b0ef37ebc3e2796c21b322f5edc2ade8",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b233-03-20261021-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b233-10-20261021-morning-social-photo.png",
+          "sha256": "946482468deaf2895e88f67c84eca218b0616f9c148a2d8222d53d5b22657a65",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b233-04-20261021-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b233-11-20261021-morning-social-photo.png",
+          "sha256": "42811952b554046b635324a054b6687bbd99dc9471af982e45ee775fc799a26f",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b233-05-20261021-morning-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b233-12-20261021-morning-talk.mp4",
+          "sha256": "ea33d59497889dbf0f4e9fedae8e7d3a39a6a43115ab3d86295503771c6b1a22",
+          "width": 720,
+          "height": 1280,
+          "role": "talk",
+          "durationSeconds": 19.8,
+          "sourceSeconds": 3167.082
+        },
+        {
+          "name": "mily-b233-13-20261021-morning-talk-cover.png",
+          "sha256": "8f1ed66c77bcaa8d959b43fb029661a2989e888af41b81b405ae0df0e8c935b7",
+          "width": 720,
+          "height": 1280,
+          "role": "talk-cover"
+        }
+      ]
+    },
+    {
+      "code": "20261021-noon",
+      "batch": 234,
+      "recapId": "2026-10-21-noon-showroom",
+      "title": "午後も一緒に頑張ろう",
+      "date": "2026-10-21",
+      "representative": 3,
+      "files": [
+        {
+          "name": "mily-b234-01-20261021-noon-still.png",
+          "sha256": "aec4cc7cbbf11627db9398546de4445abe511d48cfc59a5794f1cc4872b5845f",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 900
+        },
+        {
+          "name": "mily-b234-02-20261021-noon-still.png",
+          "sha256": "2b2861e3d291e1ab092b117a8ad203ff5c966bc32a0e83c2782cab8d768f05a3",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 1600
+        },
+        {
+          "name": "mily-b234-03-20261021-noon-still.png",
+          "sha256": "1abdbe0f87d357d31fbc37b31571d6748a185372f41e51920d485520213d1330",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 2100
+        },
+        {
+          "name": "mily-b234-04-20261021-noon-still.png",
+          "sha256": "2b6efd36ac7f2babfbb972d7216ab7595c587d08dba9d1a663ff50a0f30b0dce",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 2700
+        },
+        {
+          "name": "mily-b234-05-20261021-noon-still.png",
+          "sha256": "fb9c7d5600d79211ef2f93370d97a5789fd975af478befe1fb8b49682bd2ec5a",
+          "width": 640,
+          "height": 360,
+          "role": "still",
+          "recordingSeconds": 2958
+        },
+        {
+          "name": "mily-b234-06-20261021-noon-social-cover.png",
+          "sha256": "d754f152836a7060e6f08540ed0eeeed84dc09243eaa29c25eb9b8b02c72db9e",
+          "width": 720,
+          "height": 900,
+          "role": "social-cover",
+          "source": "mily-b234-03-20261021-noon-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b234-07-20261021-noon-social-photo.png",
+          "sha256": "7a13701a300786486c4ad80db1b19e77c542e98f88b2a2c7fd95db306346e02e",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b234-01-20261021-noon-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b234-08-20261021-noon-social-photo.png",
+          "sha256": "03980ad3cfa824ab76867755f766b62d4b403eea43cea93adbeca94edfc1a60e",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b234-02-20261021-noon-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b234-09-20261021-noon-social-photo.png",
+          "sha256": "843aeaa84a0f755af5880d7c7cd4b49856d2c8355f43d4f147c5dd75893d88f6",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b234-03-20261021-noon-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b234-10-20261021-noon-social-photo.png",
+          "sha256": "238e5305f2dda7933e2ea74e935580d34f0cd49b0aeb5086f9337a3315b203b2",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b234-04-20261021-noon-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b234-11-20261021-noon-social-photo.png",
+          "sha256": "5276630ac01a1f28485e0b9c19651c0f6e67e518be9cd260be18197f449e0cf6",
+          "width": 720,
+          "height": 900,
+          "role": "social-photo",
+          "source": "mily-b234-05-20261021-noon-still.png",
+          "photoBounds": [
+            40,
+            270,
+            680,
+            630
+          ]
+        },
+        {
+          "name": "mily-b234-12-20261021-noon-talk.mp4",
+          "sha256": "33afa205ea9421d2b679aa96fe8c5e63b4d4b3a17ec7dd0dde377b3e56f4ea9e",
+          "width": 720,
+          "height": 1280,
+          "role": "talk",
+          "durationSeconds": 19,
+          "sourceSeconds": 2940.1
+        },
+        {
+          "name": "mily-b234-13-20261021-noon-talk-cover.png",
+          "sha256": "d0e93dffd2d559862b72949d108eded7d1b8431dd74c9a7833ff1180f4f6ce41",
+          "width": 720,
+          "height": 1280,
+          "role": "talk-cover"
+        }
+      ]
+    }
+  ]
+}
