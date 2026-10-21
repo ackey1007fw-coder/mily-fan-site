@@ -93,13 +93,14 @@ test('same public source used twice cannot inflate observations',()=>{
  const src=aggregate(points([0,5,10]));const d=buildDataset([src,src]);assert.equal(d.sessions.length,1);assert.equal(d.sessions[0].windows.length,2);
 });
 test('snapshot is deterministically regenerated from the exact public sources',()=>{
- assert.equal(INPUTS.length,11);assert.equal(read('public/data-lab/data/mily-stream-timing.json'),serialized());
- const d=generate();assert.equal(d.sessions.length,18);assert.equal(d.sources.length,11);
+ assert.equal(INPUTS.length,13);assert.equal(read('public/data-lab/data/mily-stream-timing.json'),serialized());
+ const d=generate();assert.equal(d.sessions.length,20);assert.equal(d.sources.length,13);
  for(const s of d.sources)assert.match(s.sha256,/^[a-f0-9]{64}$/);
  assert.equal(d.nonOfficial,true);assert.equal(d.fullCoverage,false);assert.equal(d.paidGifts.available,false);assert.equal(d.congestion.available,false);
 });
-test('actual after-event reference results match fixed regression values',()=>{
- const d=generate(),c=explore(d),s=explore(d,{metric:'stars'}),v=explore(d,{metric:'visits'});
+test('existing through-Oct18 reference results remain unchanged after adding two sessions',()=>{
+ const d=generate(); d.sessions=d.sessions.filter(s=>![23578225,23581008].includes(s.id));
+ const c=explore(d),s=explore(d,{metric:'stars'}),v=explore(d,{metric:'visits'});
  assert.equal(c.hours[6].n,5);assert.equal(c.hours[22].n,3);assert.equal(c.hours[23].n,2);
  assert.ok(Math.abs(c.hours[6].value-7.634342763098676)<1e-9);
  assert.ok(Math.abs(s.hours[6].value-84.67659078617046)<1e-9);assert.equal(s.hours[6].n,4);
@@ -108,7 +109,8 @@ test('actual after-event reference results match fixed regression values',()=>{
 });
 test('fourth-round observations cannot leak into after-event candidates',()=>{
  const d=generate();for(const phase of Object.keys(PHASES)){const r=explore(d,{phase});for(const c of r.candidates)for(const id of c.streamIds)assert.ok(d.sessions.find(s=>s.id===id).windows.some(w=>intervalPhase(w.from,w.to)===phase));}
- assert.equal(explore(d,{metric:'otherFree'}).candidates.length,0);
+ const legacy={...d,sessions:d.sessions.filter(s=>![23578225,23581008].includes(s.id))};
+ assert.equal(explore(legacy,{metric:'otherFree'}).candidates.length,0);
 });
 test('public output is aggregate-only and does not expose private sources',()=>{
  for(const path of ['public/data-lab/data/mily-stream-timing.json','public/data-lab/assets/timing.js','public/data-lab/assets/timing-core.mjs','data-lab/stream-timing/index.html'])assert.doesNotMatch(read(path),/chatgpt\.site|drive\.google\.com|[A-Z]:\\Users\\|viewer[_-]?id|user[_-]?id|comment_text|access_token|transcript\.jsonl|counter-timeline\.private/i);

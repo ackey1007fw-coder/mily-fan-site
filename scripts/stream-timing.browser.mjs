@@ -35,7 +35,7 @@ try{
      assert.ok((await page.locator('#timing-overview').innerText()).includes('6時台'));
      assert.equal(await page.locator('#timing-overview article').count(),3);
      assert.equal(await page.locator('#timing-candidates article').count(),3);
-     assert.ok((await page.locator('#timing-asof').innerText()).includes('対象18配信'));
+     assert.ok((await page.locator('#timing-asof').innerText()).includes('対象20配信'));
      assert.equal(await page.locator('meta[name=robots]').getAttribute('content'),'noindex,nofollow,noarchive');
      assert.ok((await page.locator('link[rel=canonical]').getAttribute('href')).endsWith('/data-lab/stream-timing/'));
      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth),false,'document overflow');

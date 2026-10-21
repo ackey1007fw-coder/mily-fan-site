@@ -9,7 +9,8 @@ export const INPUTS = [
   'mily-morning-20261016-aggregate', 'mily-morning-20261017-aggregate',
   'mily-morning-20261018-aggregate', 'mily-night-20261014-aggregate',
   'mily-night-20261015-aggregate', 'mily-night-20261016-aggregate',
-  'mily-night-20261017-aggregate', 'mily-noon-20261014-aggregate'
+  'mily-night-20261017-aggregate', 'mily-noon-20261014-aggregate',
+  'mily-night-20261020-aggregate', 'mily-morning-20261021-aggregate'
 ];
 const ROOT=fileURLToPath(new URL('../',import.meta.url));
 export function generate() {

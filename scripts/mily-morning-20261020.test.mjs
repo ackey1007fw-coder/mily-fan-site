@@ -14,8 +14,8 @@ test('October 20 observations retain missing tails, exact time basis and source 
  assert.equal(data.observedWindow.isWholeSessionAverage,false);assert.ok(Date.parse(last.atJst)<Date.parse(data.asr.transcribedThroughJst));
  assert.doesNotMatch(JSON.stringify(data),/capture_epoch|writer_pid|viewer_id|AppData|drive\.google|chatgpt\.site|transcript\.jsonl/);
 });
-test('new recap is unique and latest, qualified and linked from the lab without unapproved media',()=>{
- const recap=streamRecaps[0];assert.equal(recap.id,'2026-10-20-morning-showroom');assert.equal(streamRecaps.filter(r=>r.id===recap.id).length,1);assert.equal(recap.gallery,undefined);assert.equal(recap.image,undefined);assert.equal(recap.galleryZip,undefined);
+test('October 20 morning recap remains unique, qualified and linked from the lab without unapproved media',()=>{
+ const recap=streamRecaps.find(r=>r.id==='2026-10-20-morning-showroom');assert.ok(recap);assert.equal(streamRecaps.filter(r=>r.id===recap.id).length,1);assert.equal(recap.gallery,undefined);assert.equal(recap.image,undefined);assert.equal(recap.galleryZip,undefined);
  assert.match(recap.transcriptionNote,/最終集計は未確認/);assert.ok(recap.highlights.some(h=>h.relatedLinks?.some(l=>l.url==='/data-lab/reports/20261020-morning/')));for(const point of [...recap.highlights,...recap.timeline])assert.ok(point.timestamp.split(':').reduce((n,t)=>n*60+Number(t),0)<data.recording.durationSeconds);
  const report=read('data-lab/reports/20261020-morning/index.html');assert.match(report,/noindex,nofollow,noarchive/);assert.match(report,/最終値は未確認/);assert.equal((report.match(/<circle /g)||[]).length,105);assert.match(read('data-lab/index.html'),/reports\/20261020-morning\//);
  assert.match(report,/#recap-2026-10-20-morning-showroom/);

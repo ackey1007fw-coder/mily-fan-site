@@ -97,7 +97,9 @@ export function buildDataset(sources) {
         }
         if(historyIds.has(id)) delta.comments=null;
         if(points[i-1].safeForVelocity===false || points[i].safeForVelocity===false || points[i-1].regressionUnverified || points[i].regressionUnverified) { reject('unsafe_boundary'); continue; }
-        add(s,left.at,right.at,delta,src.path,null,gaps);
+        const elapsed = validNumber(points[i-1].elapsedSeconds) && validNumber(points[i].elapsedSeconds)
+          ? points[i].elapsedSeconds - points[i-1].elapsedSeconds : null;
+        add(s,left.at,right.at,delta,src.path,elapsed,gaps);
       }
     }
     if (!groups.some(g=>g?.length>1)) s.notes.push('時間帯比較に必要な複数の観測時刻・数値が不足しています。');
