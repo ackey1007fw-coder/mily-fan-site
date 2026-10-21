@@ -796,6 +796,16 @@ function StreamRecapArticle({
         </StreamRecapSection>
       ) : null}
 
+      {recap.singingExcerpts && recap.singingExcerpts.length > 0 ? (
+        <StreamRecapSection
+          title="歌唱中のかわいい仕草・振り付け"
+          id={`${recap.id}-singing-excerpts`}
+          note="実録画・配信原音から作った短尺です。曲名は未確認のため推測で記載していません。フルアーカイブではありません。"
+        >
+          <ApprovedSongClipList clips={recap.singingExcerpts} />
+        </StreamRecapSection>
+      ) : null}
+
       {recap.highlights.length > 0 ? (
         <StreamRecapSection title="この回の見どころ" id={`${recap.id}-highlights`}>
           <ul className="mt-3 space-y-3">

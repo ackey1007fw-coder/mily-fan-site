@@ -12,6 +12,7 @@ export const streamRecap20261021Asa: StreamRecap = {
   "theme": "朝の歌と新しい出会い",
   "platformLabel": "SHOWROOM",
   "summary": "朝早く訪れた人たちに挨拶し、歌や会話を楽しんだ配信。セミファイナルに向けた応援を呼びかけ、新しい選曲にも挑戦しました。最後は出会いやフォローへの感謝を伝えました。",
+  singingExcerpts: [singingPeace20261021],
   "highlights": [
     {
       "timestamp": "0:00:30",
@@ -22,12 +23,6 @@ export const streamRecap20261021Asa: StreamRecap = {
       "timestamp": "0:27:50",
       "title": "セミファイナルへ一緒に",
       "body": "コンテストに挑戦していることを紹介し、セミファイナルからでも一緒に歩んでほしいと呼びかけました。"
-    },
-    {
-      "timestamp": "0:50:15",
-      "title": "歌に合わせてダブルピース",
-      clip: singingPeace20261021,
-      "body": "両手でピースを見せて、リズムに合わせて手を動かす朝の歌唱場面。笑顔と振り付けを28秒で振り返ります。"
     },
     {
       "timestamp": "0:52:46",

@@ -73,10 +73,14 @@ try {
     assert.equal(await video.evaluate(v=>v.error),null);
     await video.evaluate(v=>v.pause());
     for(const song of singing.filter(c=>c.recapId===g.recapId)){
-     const sv=card.locator('video:has(source[src="'+song.video.src+'"])');
+     const sv=card.locator('video:has(source[data-src="'+song.video.src+'"])');
      assert.equal(await sv.count(),1);assert.equal(await sv.getAttribute('poster'),song.poster.src);
      assert.equal(await sv.getAttribute('autoplay'),null);await sv.scrollIntoViewIfNeeded();
-     await sv.evaluate(v=>{v.preload='metadata';v.load();});
+     // Singing videos are intentionally loaded only after a genuine click.
+     const load=sv.locator('..').locator('button[data-load-approved-clip]');
+     assert.equal(await load.count(),1);
+     await sv.evaluate(v=>{v.muted=true;});
+     await load.click();
      await waitVideo(page,g.recapId,song.video.src,'metadata');
      assert.deepEqual(await sv.evaluate(v=>[v.videoWidth,v.videoHeight]),[720,1280]);
      assert.ok(Math.abs(await sv.evaluate(v=>v.duration)-28)<0.25);

@@ -12,23 +12,12 @@ export const streamRecap20261020Night: StreamRecap = {
   "theme": "夜の出会いと決意",
   "platformLabel": "SHOWROOM",
   "summary": "新しい時間帯での出会いを喜び、好きな歌を届けた夜。セミファイナルを越えてファイナルへ進みたいという思いを話し、最後は応援への感謝を伝えました。",
+  singingExcerpts: [singingRound20261020, singingCheeks20261020],
   "highlights": [
     {
       "timestamp": "0:14:09",
       "title": "好きな曲で歌の時間へ",
       "body": "何度歌っても飽きないほど好きな曲の話をして、歌の時間へ。初めて訪れた人にも自己紹介し、見つけてくれたことに感謝しました。"
-    },
-    {
-      "timestamp": "0:16:31",
-      "title": "歌いながら、指でまるっ",
-      clip: singingRound20261020,
-      "body": "指先で丸をつくってカメラへ。手を振る動きや笑顔も続く、歌唱中の28秒です。"
-    },
-    {
-      "timestamp": "0:18:32",
-      "title": "ほっぺにちょん、からの笑顔",
-      clip: singingCheeks20261020,
-      "body": "頬に指を添えたり、両手を顔のそばへ寄せたり。歌に合わせて変わる仕草を28秒にまとめました。"
     },
     {
       "timestamp": "0:52:28",

@@ -231,6 +231,8 @@ export type StreamRecapApprovedSongClip = {
   width: number;
   height: number;
   durationSeconds: number;
+  /** Optional saved-media timeline position. Never a wall-clock time. */
+  sourceTimestamp?: string;
 };
 
 export type StreamRecapSong = {
@@ -264,6 +266,8 @@ export type StreamRecap = {
   galleryNote?: string;
   galleryZip?: StreamRecapGalleryZip;
   songs?: StreamRecapSong[];
+  /** Owner-approved short singing excerpts with unverified song titles. Do not mix with talk highlights or claim a known track. */
+  singingExcerpts?: StreamRecapApprovedSongClip[];
   highlights: StreamRecapHighlight[];
   goals: StreamRecapGoal[];
   ranking: string[];
