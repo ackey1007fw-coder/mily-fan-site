@@ -94,6 +94,31 @@ try {
           assert.equal(await page.locator("#roster-body tr").count(), 70);
           assert.equal(await page.locator('#roster-body tr.mily-row').count(), 1);
           assert.equal(await page.locator('a[aria-label="みりぃファンサイトのホームに戻る"]').getAttribute("href"), "/");
+          // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
+          if (width === 390 || width === 1440) {
+            await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 7, "Seven broadcast dates from 10/14 through 10/20");
+            const today = page.locator("#daily-2026-10-20");
+            await today.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
+            assert.equal(await today.locator("svg.daily-plot circle").count(), 35, "Only the 35 actually saved Oct 20 counter points");
+            assert.match(await today.locator(".daily-stream-stat").innerText(), /2,545/);
+            await page.locator('button[data-daily-metric="visits"]').click();
+            assert.match(await today.locator(".daily-stream-stat").innerText(), /281/);
+            assert.equal(await page.locator('button[data-daily-metric="visits"]').getAttribute("aria-pressed"), "true");
+            await page.locator('button[data-daily-metric="comments"]').click();
+            assert.match(await today.locator(".daily-stream-stat").innerText(), /254/);
+            await page.locator('button[data-daily-metric="stars"]').click();
+            const unknown = page.locator("#daily-2026-10-19");
+            await unknown.locator("summary").click();
+            await unknown.locator('[data-missing="true"]').waitFor({ state: "visible" });
+            assert.match(await unknown.locator(".daily-stream-chart").innerText(), /時刻付き観測が2点未満/);
+            const eighteenth = page.locator("#daily-2026-10-18");
+            await eighteenth.locator("summary").click();
+            assert.equal(await eighteenth.locator(".daily-stream-card").count(), 2, "Oct 18 night/morning remain distinct");
+            assert.match(await eighteenth.locator(".daily-stream-card").first().locator("h4").innerText(), /夜/);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Day archive must not cause horizontal overflow");
+            await today.screenshot({ path: join(output, `${engine}-${width}-day-archive.png`) });
+          }
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Data Lab has horizontal overflow");
 
           const labDocumentHeight = await page.evaluate(() => document.documentElement.scrollHeight);

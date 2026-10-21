@@ -78,7 +78,11 @@ describe("2026-09-02 SHOWROOM夜ラジオ配信メモ", () => {
 
     assert.match(page, /function StreamRecap/);
     assert.match(page, /activityId !== "live-stream"/);
-    assert.match(page, /streamRecaps\.map/);
+    // Every recap remains reachable once through the date-grouped archive.
+    assert.match(page, /for \(const recap of streamRecaps\)/);
+    assert.match(page, /dateGroups\.map/);
+    assert.match(page, /day\.recaps\.map/);
+    assert.match(page, /<StreamRecapArticle recap=\{recap\}/);
     assert.match(page, /defaultOpen/);
     assert.match(page, /この回の見どころ/);
     assert.match(page, /この回の目標/);

@@ -551,6 +551,18 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
 function StreamRecap({ activityId }: { activityId: ActivityId }) {
   if (activityId !== "live-stream") return null;
 
+  // Keep the existing newest-first stream order, grouping only adjacent same-day cards.
+  // The broadcast date is authoritative even when a late-night stream crosses midnight.
+  const dateGroups: { date: string; dateLabel: string; recaps: StreamRecapData[] }[] = [];
+  for (const recap of streamRecaps) {
+    const lastGroup = dateGroups[dateGroups.length - 1];
+    if (lastGroup?.date === recap.date) {
+      lastGroup.recaps.push(recap);
+    } else {
+      dateGroups.push({ date: recap.date, dateLabel: recap.dateLabel, recaps: [recap] });
+    }
+  }
+
   return (
     <SectionShell eyebrow="Stream Archive" title="配信メモ">
       <p className="mt-4 text-sm leading-7 text-ink-muted">
@@ -576,13 +588,41 @@ function StreamRecap({ activityId }: { activityId: ActivityId }) {
           ))}
         </div>
       </nav>
-      <ul className="mt-6 space-y-4">
-        {streamRecaps.map((recap, index) => (
-          <li key={recap.id}>
-            <StreamRecapArticle recap={recap} defaultOpen={index === 0} />
-          </li>
+      <nav aria-label="配信を日付から探す" className="mt-4 rounded-2xl border border-sage/20 bg-paper-card p-4">
+        <p className="text-sm font-bold text-ink">日付で探す</p>
+        <p className="mt-1 text-xs leading-5 text-ink-muted">同じ日の朝・昼・夜は一つにまとめています。各日の記録は下の見出しから確認できます。</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {dateGroups.slice(0, 14).map((day) => (
+            <a key={day.date} href={`#stream-day-${day.date}`}
+              className="rounded-full border border-sage/30 bg-sage-soft/30 px-3 py-2 text-xs font-semibold text-sage-deep underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage">
+              {day.dateLabel} · {day.recaps.length}枠
+            </a>
+          ))}
+        </div>
+      </nav>
+      <div className="mt-6 space-y-7">
+        {dateGroups.map((day, dayIndex) => (
+          <section key={day.date} aria-labelledby={`stream-day-${day.date}`}>
+            <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3 border-b border-sage/20 pb-3">
+              <h3 id={`stream-day-${day.date}`} className="scroll-mt-24 text-lg font-bold text-ink">
+                <time dateTime={day.date}>{day.dateLabel}</time> <span className="text-xs font-normal text-ink-muted">（{day.recaps.length}枠）</span>
+              </h3>
+              {day.date >= "2026-10-14" && day.date <= "2026-10-20" ? (
+                <a href={`/data-lab/#daily-${day.date}`} className="text-xs font-semibold text-sage-deep underline underline-offset-4">
+                  この日の観測グラフ・欠測を見る ↗
+                </a>
+              ) : null}
+            </div>
+            <ul className="space-y-4">
+              {day.recaps.map((recap, recapIndex) => (
+                <li key={recap.id}>
+                  <StreamRecapArticle recap={recap} defaultOpen={dayIndex === 0 && recapIndex === 0} />
+                </li>
+              ))}
+            </ul>
+          </section>
         ))}
-      </ul>
+      </div>
     </SectionShell>
   );
 }
