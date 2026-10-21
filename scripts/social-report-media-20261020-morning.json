@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "kind": "image",
+  "platform": "instagram",
+  "recapId": "2026-10-20-morning-showroom",
+  "date": "2026-10-20",
+  "coverId": "mily-b231-06-20261020-morning-social-cover",
+  "coverTitle": "今日も一緒に頑張ろう",
+  "order": [
+    "mily-b231-06-20261020-morning-social-cover",
+    "mily-b231-07-20261020-morning-social-photo",
+    "mily-b231-08-20261020-morning-social-photo",
+    "mily-b231-09-20261020-morning-social-photo",
+    "mily-b231-10-20261020-morning-social-photo",
+    "mily-b231-11-20261020-morning-social-photo"
+  ],
+  "items": [
+    {
+      "id": "mily-b231-06-20261020-morning-social-cover",
+      "path": "/media/live/mily-b231-06-20261020-morning-social-cover.png",
+      "source": "/media/live/mily-b231-03-20261020-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "9a2b15dca0040c2bd3b0b7825f3c2a8bb2ec782a7aad4222d6447453b292e348"
+    },
+    {
+      "id": "mily-b231-07-20261020-morning-social-photo",
+      "path": "/media/live/mily-b231-07-20261020-morning-social-photo.png",
+      "source": "/media/live/mily-b231-01-20261020-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "008da6c860abb4b38b0166aac79f3512290e5450fe5a93a513a4c029d2dfe49c"
+    },
+    {
+      "id": "mily-b231-08-20261020-morning-social-photo",
+      "path": "/media/live/mily-b231-08-20261020-morning-social-photo.png",
+      "source": "/media/live/mily-b231-02-20261020-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "708971ab7af9b38bf14527abfbfe5987721214e8099d59a0d9488cb3c5aec4a6"
+    },
+    {
+      "id": "mily-b231-09-20261020-morning-social-photo",
+      "path": "/media/live/mily-b231-09-20261020-morning-social-photo.png",
+      "source": "/media/live/mily-b231-03-20261020-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "fa4efec0fb65822628b820ad07710b309f36a5f22107e243aec96df1210adde7"
+    },
+    {
+      "id": "mily-b231-10-20261020-morning-social-photo",
+      "path": "/media/live/mily-b231-10-20261020-morning-social-photo.png",
+      "source": "/media/live/mily-b231-04-20261020-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "247652df1b1d63b221881f050ccb5b7b5d676d9af08da5fdde8ddf250322b843"
+    },
+    {
+      "id": "mily-b231-11-20261020-morning-social-photo",
+      "path": "/media/live/mily-b231-11-20261020-morning-social-photo.png",
+      "source": "/media/live/mily-b231-05-20261020-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "1fa745f2d5f7bb81e6a0bb242eb340ffa098651e7b84b04e8724bf0227d685c3"
+    }
+  ],
+  "coverReview": {
+    "sha256": "9a2b15dca0040c2bd3b0b7825f3c2a8bb2ec782a7aad4222d6447453b292e348",
+    "reviewer": "ChatGPT: actual images, title, identity and two grid crops inspected",
+    "reviewedAt": "2026-10-21T11:44:00Z",
+    "personBounds": [
+      135,
+      290,
+      590,
+      625
+    ],
+    "titleBounds": [
+      65,
+      175,
+      655,
+      220
+    ],
+    "gridCrops": [
+      [
+        0,
+        90,
+        720,
+        810
+      ],
+      [
+        22,
+        0,
+        697,
+        900
+      ]
+    ],
+    "observedText": [
+      "Mily",
+      "2026.10.20",
+      "今日も一緒に頑張ろう",
+      "非公式ファン制作"
+    ]
+  }
+}

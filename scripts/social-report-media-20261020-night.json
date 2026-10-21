@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "kind": "image",
+  "platform": "instagram",
+  "recapId": "2026-10-20-night-showroom",
+  "date": "2026-10-20",
+  "coverId": "mily-b232-06-20261020-night-social-cover",
+  "coverTitle": "新しい時間帯、新しい出会い",
+  "order": [
+    "mily-b232-06-20261020-night-social-cover",
+    "mily-b232-07-20261020-night-social-photo",
+    "mily-b232-08-20261020-night-social-photo",
+    "mily-b232-09-20261020-night-social-photo",
+    "mily-b232-10-20261020-night-social-photo",
+    "mily-b232-11-20261020-night-social-photo"
+  ],
+  "items": [
+    {
+      "id": "mily-b232-06-20261020-night-social-cover",
+      "path": "/media/live/mily-b232-06-20261020-night-social-cover.png",
+      "source": "/media/live/mily-b232-05-20261020-night-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "e403f526bc047789a1593ab41197cad5fd6533232a1c2fed50e09ec2108bd9d5"
+    },
+    {
+      "id": "mily-b232-07-20261020-night-social-photo",
+      "path": "/media/live/mily-b232-07-20261020-night-social-photo.png",
+      "source": "/media/live/mily-b232-01-20261020-night-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "af7f37d3ae90abb6c96fff3484f4a4a3922f6b4e3cb577bc951a75280992a1c4"
+    },
+    {
+      "id": "mily-b232-08-20261020-night-social-photo",
+      "path": "/media/live/mily-b232-08-20261020-night-social-photo.png",
+      "source": "/media/live/mily-b232-02-20261020-night-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "f00f62cf7ffd5281e1cb2df15d0423969c6099dd143504ceed9e6024411ed205"
+    },
+    {
+      "id": "mily-b232-09-20261020-night-social-photo",
+      "path": "/media/live/mily-b232-09-20261020-night-social-photo.png",
+      "source": "/media/live/mily-b232-03-20261020-night-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "7e09c282965700f15f3d46da629c95f5a14d756869030ae38cebc833d94f07bc"
+    },
+    {
+      "id": "mily-b232-10-20261020-night-social-photo",
+      "path": "/media/live/mily-b232-10-20261020-night-social-photo.png",
+      "source": "/media/live/mily-b232-04-20261020-night-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "f30d4f67c8de27a47fb3a0d9e6e736d167e8f32fedb06138cc40d74c17896007"
+    },
+    {
+      "id": "mily-b232-11-20261020-night-social-photo",
+      "path": "/media/live/mily-b232-11-20261020-night-social-photo.png",
+      "source": "/media/live/mily-b232-05-20261020-night-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "8c8e0b293c7f458209a4cbf9ed057349b08c99b78caaa3484743308682021b40"
+    }
+  ],
+  "coverReview": {
+    "sha256": "e403f526bc047789a1593ab41197cad5fd6533232a1c2fed50e09ec2108bd9d5",
+    "reviewer": "ChatGPT: actual images, title, identity and two grid crops inspected",
+    "reviewedAt": "2026-10-21T11:44:00Z",
+    "personBounds": [
+      135,
+      290,
+      590,
+      625
+    ],
+    "titleBounds": [
+      65,
+      175,
+      655,
+      220
+    ],
+    "gridCrops": [
+      [
+        0,
+        90,
+        720,
+        810
+      ],
+      [
+        22,
+        0,
+        697,
+        900
+      ]
+    ],
+    "observedText": [
+      "Mily",
+      "2026.10.20",
+      "新しい時間帯、新しい出会い",
+      "非公式ファン制作"
+    ]
+  }
+}
