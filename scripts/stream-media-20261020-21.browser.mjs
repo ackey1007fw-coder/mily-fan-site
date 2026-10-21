@@ -34,8 +34,9 @@ try {
     if(u.pathname.startsWith('/api/'))return route.fulfill({status:503,contentType:'application/json',body:'{}'});
     return route.continue();
    });
-   const page=await context.newPage(); const errors=[];page.on('pageerror',e=>errors.push(e.message));
    for(const g of groups){
+    // Each recap uses a fresh tab so prior video decoders and lazy images cannot contend with this one.
+    const page=await context.newPage(); const errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto(origin+'/activities/live/#recap-'+g.recapId,{waitUntil:'networkidle'});
     const card=page.locator('#recap-'+g.recapId);
     await card.waitFor({state:'visible'});assert.equal(await card.getAttribute('open'),'');
@@ -76,8 +77,9 @@ try {
     const filename=engine+'-'+width+'-'+g.code+'.png';await page.screenshot({path:join(output,filename)});
     await card.locator(':scope > summary').click();assert.equal(await card.getAttribute('open'),null);
     results.push({engine,width,recap:g.recapId,passed:true,screenshot:filename,...info});
+    assert.deepEqual(errors,[]);
+    await page.close();
    }
-   assert.deepEqual(errors,[]);
   }finally{await browser.close();}
  }
 }finally{
