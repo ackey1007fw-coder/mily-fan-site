@@ -1,0 +1,71 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23585463,
+  "dateJst": "2026-10-22",
+  "session": "morning",
+  "label": "10月22日 朝の配信",
+  "eventName": "当該配信の参加イベントは未照合。10月12日終了の四次審査とは別集計。",
+  "sourceDescription": "同一配信の保存メディア、録画メタデータ、自動文字起こし状態、匿名の収集品質を照合",
+  "verifiedAtJst": "2026-10-22T13:24:57+09:00",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "observations": [],
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "measurementNote": "数値収集経路で有効な観測を保存できませんでした。未取得は応援が0という意味ではありません。",
+  "comparisonNote": "過去枠の値や文字起こしから数値を補わず、時間帯比較・配信効率の計算には加えません。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": true,
+    "startProcessingJst": "2026-10-22T06:00:19+09:00",
+    "endProcessingJst": "2026-10-22T06:26:03+09:00",
+    "durationSeconds": 1495.124,
+    "bytes": 17158878,
+    "ffmpegExitCode": 0,
+    "metadataProbed": true,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "録画処理の時刻と保存ファイルの実尺。配信の公式開始終了時刻・完全収録とは別。"
+  },
+  "asr": {
+    "status": "finished",
+    "processedChunks": 75,
+    "transcribedThroughJst": "2026-10-22T06:25:11+09:00",
+    "updatedAtJst": "2026-10-22T06:26:05+09:00",
+    "selectedTopicsRead": true,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "savedNumericObservations": 0,
+    "captureRestartRecords": 3,
+    "navigationFailureRecords": 9,
+    "minuteChecks": 25,
+    "minuteChecksWithSavedCounters": 0,
+    "endConfirmed": false,
+    "issue": "通常閲覧ページへの遷移に失敗。根本原因は未確定。",
+    "alternateSavedChannelRecords": 0,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "recap": {
+    "basis": "保存済み自動文字起こしの該当区間を読取。逐語引用ではない。",
+    "summary": "朝のラジオ配信で挨拶を交わし、飲み物の話題などで交流。最後は来てくれた人へのお礼と、一日へのエールで締めくくりました。",
+    "timeRangesApproxJst": [
+      "06:00–06:01",
+      "06:09–06:10",
+      "06:24–06:25"
+    ]
+  }
+}
