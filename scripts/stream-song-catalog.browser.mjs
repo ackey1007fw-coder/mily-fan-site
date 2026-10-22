@@ -350,7 +350,7 @@ try {
           assert.equal(await video.getAttribute("preload"), "none");
           assert.equal(await video.locator("source").getAttribute("src"), null);
           assert.equal(await video.locator("source").getAttribute("data-src"), clip.src);
-          assert.equal(await figure.locator("..").locator('a[href^="/activities/live/#recap-"]').getAttribute("href"), `/activities/live/#recap-${recapId}`);
+          assert.equal(await figure.locator("xpath=ancestor::li[1]").locator('a[href^="/activities/live/#recap-"]').getAttribute("href"), `/activities/live/#recap-${recapId}`);
           await video.scrollIntoViewIfNeeded();
           await video.evaluate((node) => { node.muted = true; });
           await figure.getByRole("button", { name: `「${clip.title}」を再生`, exact: true }).click();
