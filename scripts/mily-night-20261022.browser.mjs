@@ -17,11 +17,24 @@ try{
   try{
    const context=await browser.newContext({viewport:{width,height}});
    await context.route('**/*',route=>{const u=new URL(route.request().url());if(u.origin!==origin)return route.fulfill({status:204,body:''});if(u.pathname.startsWith('/api/'))return route.fulfill({status:503,contentType:'application/json',body:'{}'});return route.continue();});
-   const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+   const page=await context.newPage(),errors=[],imageResponses=[];page.on('pageerror',e=>errors.push(e.message));
+   page.on('response',response=>{const path=new URL(response.url()).pathname;if(path.startsWith('/media/live/mily-b236-')&&path.endsWith('.png'))imageResponses.push({path,status:response.status(),contentType:response.headers()['content-type']});});
+   page.on('requestfailed',request=>{const path=new URL(request.url()).pathname;if(path.startsWith('/media/live/mily-b236-'))imageResponses.push({path,failure:request.failure()});});
    await page.goto(origin+'/activities/live/#recap-2026-10-22-night-showroom',{waitUntil:'networkidle'});
    const card=page.locator('#recap-2026-10-22-night-showroom');await card.waitFor({state:'visible'});assert.equal(await card.getAttribute('open'),'');
    assert.equal(await card.locator('img').count(),11);
-   for(const img of await card.locator('img').all()){await img.scrollIntoViewIfNeeded();await img.evaluate(i=>i.decode());assert.deepEqual(await img.evaluate(i=>[i.naturalWidth,i.naturalHeight]),[640,360]);}
+   for(const [index,img] of (await card.locator('img').all()).entries()){
+    await img.scrollIntoViewIfNeeded();
+    try{
+     // Scrolling queues lazy loading; wait for its request before decoding.
+     await page.waitForFunction(i=>i.complete&&i.naturalWidth>0,await img.elementHandle(),{timeout:15000});
+     await img.evaluate(i=>i.decode());
+     assert.deepEqual(await img.evaluate(i=>[i.naturalWidth,i.naturalHeight]),[640,360]);
+    }catch(error){
+     console.error('Night recap image failed',JSON.stringify({engine,width,index,...await img.evaluate(i=>({src:i.getAttribute('src'),currentSrc:i.currentSrc,complete:i.complete,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight})),imageResponses}));
+     throw error;
+    }
+   }
    assert.equal(await card.locator('a[download]').count(),11);
    const videos=await card.locator('video').all();assert.equal(videos.length,3);
    for(const [i,video] of videos.entries()){
