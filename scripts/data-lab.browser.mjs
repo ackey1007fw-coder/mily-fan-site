@@ -97,7 +97,12 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 8, "Eight broadcast dates from 10/14 through 10/21");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 9, "Nine broadcast dates from 10/14 through 10/22");
+            const day22 = page.locator("#daily-2026-10-22");
+            if (!(await day22.getAttribute("open") !== null)) await day22.locator("summary").click();
+            await day22.locator('[data-missing="true"]').waitFor({ state: "visible" });
+            assert.equal(await day22.locator("svg.daily-plot").count(), 0, "Missing counters must not produce a zero graph");
+            assert.match(await day22.locator(".daily-stream-stat").innerText(), /未取得/);
             const day20 = page.locator("#daily-2026-10-20");
             await day20.locator("summary").click();
             const today = day20.locator(".daily-stream-card").last();
@@ -138,6 +143,24 @@ try {
             assert.equal(await velocityCard.locator(".velocity-bar").count(), 8, "All eight speed bars must be visible in the DOM");
             await velocityCard.screenshot({ path: join(output, `${engine}-${width}-velocity.png`) });
             await page.locator("#roster").screenshot({ path: join(output, `${engine}-${width}-roster.png`) });
+          }
+          if (width === 390 || width === 1440) {
+            const morningResponse = await page.goto(`${baseUrl}/data-lab/reports/20261022-morning/`, { waitUntil: "networkidle" });
+            assert.equal(morningResponse.status(), 200);
+            assert.equal(await page.locator('[data-metric]').count(), 3);
+            for (const metric of ["stars", "visits", "comments"]) assert.equal(await page.locator(`[data-metric="${metric}"]`).innerText(), "未取得");
+            assert.match(await page.locator("#coverage").innerText(), /24分55.124秒/);
+            assert.match(await page.locator("#recap").innerText(), /一日へのエール/);
+            assert.equal(await page.locator('meta[name="robots"]').getAttribute("content"), "noindex,nofollow,noarchive");
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+            await page.screenshot({ path: join(output, `${engine}-${width}-oct22-morning.png`), fullPage: true });
+            const progressResponse = await page.goto(`${baseUrl}/data-lab/progress/`, { waitUntil: "networkidle" });
+            assert.equal(progressResponse.status(), 200);
+            assert.equal(await page.locator('[data-peer-rank]').count(), 9);
+            assert.match(await page.locator('#campaign-20261021').innerText(), /Green以上/);
+            assert.match(await page.locator('#campaign-20261021').innerText(), /ブーストランキング/);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+            await page.locator('#campaign-20261021').screenshot({ path: join(output, `${engine}-${width}-campaign-scope.png`) });
           }
           // Historical comment rhythms are a separate archive, not a larger
           // full-page screenshot of the already long main analysis view.
