@@ -44,7 +44,7 @@ export const streamRecap20261022Night: StreamRecap = {
     { title: "イイじゃん", artist: "M!LK", timestamp: "0:55:00", youtubeUrl: "https://www.youtube.com/watch?v=GW-XMhRQDFI" },
     { title: "夜に駆ける", artist: "YOASOBI", timestamp: "1:01:19", youtubeUrl: "https://www.youtube.com/watch?v=x8VYWazR5mE" },
   ],
-  ranking: [buildRankingNote()],
+  ranking: [buildRankingNote(undefined, undefined, "during")],
   timeline: [
     { timestamp: "0:07:32", label: "ヘアバンドを紹介" },
     { timestamp: "0:23:06", label: "ハロウィンの話題" },
