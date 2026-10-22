@@ -158,6 +158,20 @@ try {
             const progressResponse = await page.goto(`${baseUrl}/data-lab/progress/`, { waitUntil: "networkidle" });
             assert.equal(progressResponse.status(), 200);
             assert.equal(await page.locator('[data-peer-rank]').count(), 9);
+            const week = page.locator('#week-20261015-21');
+            assert.equal(await week.locator('[data-week-day]').count(), 7);
+            assert.equal(await week.locator('.week-fill').count(), 14);
+            assert.match(await week.locator('[data-week-proof="total"]').innerText(), /136,547/);
+            assert.match(await week.locator('[data-week-proof="above"]').innerText(), /7.*7日/);
+            assert.match(await week.locator('[data-week-proof="rank"]').innerText(), /6.*16/);
+            await week.locator('#week-fixed-cohort > summary').click();
+            assert.equal(await week.locator('[data-week-peer]').count(), 16);
+            await week.locator('#week-missing > summary').click();
+            assert.match(await week.locator('#week-missing').innerText(), /19人/);
+            assert.match(await week.locator('#week-missing').innerText(), /未掲載を0とせず/);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Seven-day section must not overflow');
+            await week.locator('.week-chart').screenshot({ path: join(output, `${engine}-${width}-seven-day-progress.png`) });
+
             const dailyPeers = page.locator('#daily-peers-20261021');
             assert.equal(await dailyPeers.locator('[data-daily-peer-entry]').count(), 23);
             assert.match(await dailyPeers.locator('[data-day-proof="points"]').innerText(), /30,020/);
