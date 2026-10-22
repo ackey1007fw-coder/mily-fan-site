@@ -194,7 +194,15 @@ try {
         await summary.press("Enter");
         const link = card.locator(`a[href="${targetHash}"]`).first();
         await link.click();
-        await page.waitForFunction((hash) => location.hash === hash && document.querySelector(hash)?.open === true, targetHash);
+        await page.waitForFunction((hash) => location.hash === hash && document.querySelector(hash)?.open === true, targetHash).catch(async (error) => {
+          const state = await page.evaluate((hash) => ({
+            expectedHash: hash,
+            actualHash: location.hash,
+            targetExists: document.querySelector(hash) !== null,
+            targetOpen: document.querySelector(hash)?.open ?? null,
+          }), targetHash);
+          throw new Error(`${error.message}; recap jump state: ${JSON.stringify(state)}`, { cause: error });
+        });
         const target = page.locator(targetHash);
         await target.locator(":scope > summary").click();
         await page.waitForFunction((hash) => document.querySelector(hash)?.open === false, targetHash);
