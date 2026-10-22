@@ -1,6 +1,7 @@
 # AI_HANDOFF — mily-fan-site
 
-> 最終更新: 2026-10-18（Claude Code が、これまでの制作・運用の全体を次のAIへ引き継ぐために作成）
+> 最終更新: 2026-10-22（YouTube公開区分・SNS本文方針を追記。以下の10/18時点の実装スナップショットは日付どおり扱う）
+> 初版: 2026-10-18（Claude Code が、これまでの制作・運用の全体を次のAIへ引き継ぐために作成）
 > 読む順番: `AGENTS.md` → `README.md` → **このファイル** → `docs/DECISION_LOG.md` → `docs/AI_PROJECT_MEMORY_SKILL.md` → 対象コード・テスト
 
 このファイルは「いまの状態」のセーブデータです。ルール本体は `AGENTS.md`。ここはルールを追加・緩和しません。
@@ -122,3 +123,8 @@ git diff --check origin/main...HEAD   # コミット済みのPR差分（最新�
 - `/data-lab/glitter/` と `/api/mily-glitter`。Lab・Supportから公式Classicタレント順位、週間最低ptとの差、日間条件、配信回数別試算を確認。
 - 運用・データ契約は `docs/GLITTER-PROGRESS.md`。きら星／イベントptと混ぜず、順位境界は未確認。古い週・10分以上前・取得失敗を現在のゼロにしない。
 - 既存Native分析先は別担当・別の実表示確認。公開APIからの最小数値共有のみ許容し、公開側から私的データを読み込まない。
+
+
+## 2026-10-22：短尺公開とSNS本文の引継ぎ
+
+ルールはAGENTS.mdのSNS節、理由はDECISION_LOG.mdのD-19/D-20を参照。フルアーカイブのみunlisted、公開依頼された短尺はpublic。SNS本文は具体的な仕草への短い感想を先頭にし、長い技術説明は制作記録へ分離する。予約・送信受理・実公開・公開後検品は区別する。各投稿の実状態は非公開運用台帳を確認する。

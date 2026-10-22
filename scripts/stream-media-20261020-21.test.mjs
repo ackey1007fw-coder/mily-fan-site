@@ -16,7 +16,7 @@ test('Oct 20-21: four unique streams retain their own approved photos, talk and 
   assert.ok(recap); assert.equal(recap.date, group.date);
   assert.equal(recap.gallery.length, 5);
   assert.equal(recap.image, recap.gallery[group.representative - 1]);
-  const clips = recap.highlights.flatMap(h => h.clip ? [h.clip] : []);
+  const clips = recap.highlights.flatMap(h => h.clip && group.files.some(f => h.clip.src === "/media/live/" + f.name) ? [h.clip] : []);
   assert.equal(clips.length, 1); assert.ok(clips[0].durationSeconds <= 30);
   assert.deepEqual([clips[0].width, clips[0].height], [720, 1280]);
   assert.match(recap.transcriptionNote, /先頭0.3秒/);

@@ -10,6 +10,7 @@ import { streamRecaps } from "../src/data/streamRecaps.ts";
 import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
 import { ARCHIVE_LOAD_MORE_LABEL, ARCHIVE_PAGE_SIZE, NEWS_ARCHIVE_INITIAL } from "../src/lib/homePortal.ts";
 import { buildStreamSongCatalog, selectCatalogSongs } from "../src/lib/streamSongCatalog.ts";
+import { buildStreamSongClips, buildUnidentifiedSingingClips } from "../src/lib/streamSongClips.ts";
 
 // CI installs the pinned browser tooling outside the application/lockfile.
 const playwright = process.env.PLAYWRIGHT_MODULE_ROOT
@@ -20,6 +21,13 @@ const output = resolve(process.env.SONG_CATALOG_ARTIFACT_DIR ?? join(tmpdir(), "
 const base = "http://127.0.0.1:4173";
 const live = `${base}/activities/live/`;
 const catalog = buildStreamSongCatalog(streamRecaps);
+const identifiedClips = buildStreamSongClips(streamRecaps);
+const unidentifiedClips = buildUnidentifiedSingingClips(streamRecaps);
+const expectedClipSources = [
+  ...identifiedClips.map((item) => item.performance.clip.src),
+  ...unidentifiedClips.map((item) => item.clip.src),
+].sort();
+assert.equal(new Set(expectedClipSources).size, expectedClipSources.length, "Each approved singing excerpt must have a unique source");
 assert.ok(catalog.length > 0, "The approved song data must not be empty");
 const initialCount = Math.min(6, catalog.length);
 const probe = catalog.find((song) => song.title === "Mela!") ?? catalog[0];
@@ -323,10 +331,42 @@ try {
           assert.ok(await photo.evaluate((node) => node.naturalWidth > 0));
         }
         assert.equal(await posts.locator("video,iframe").count(), 0);
-        assert.equal(await page.locator("video").count(), 6);
         await overflow();
         assert.deepEqual(errors, []);
         await posts.screenshot({ path: join(output, `${scenario.name}-social-song-posts.png`) });
+      });
+      await check("song players match every approved source exactly once, including unidentified excerpts", async () => {
+        const players = page.locator("video");
+        assert.equal(await players.count(), expectedClipSources.length);
+        const renderedSources = await players.locator("source").evaluateAll((nodes) => nodes.map((node) => node.getAttribute("src") ?? node.getAttribute("data-src")).sort());
+        assert.deepEqual(renderedSources, expectedClipSources, "Missing, duplicated or unexpected song player");
+        const unidentified = page.locator("#unidentified-singing-clips");
+        assert.equal(await unidentified.locator("video").count(), unidentifiedClips.length);
+        for (const { recapId, clip } of unidentifiedClips) {
+          const figure = unidentified.locator(`figure[id="${clip.id}"]`);
+          const video = figure.locator("video");
+          assert.equal(await video.getAttribute("poster"), clip.poster);
+          assert.equal(await video.getAttribute("autoplay"), null);
+          assert.equal(await video.getAttribute("preload"), "none");
+          assert.equal(await video.locator("source").getAttribute("src"), null);
+          assert.equal(await video.locator("source").getAttribute("data-src"), clip.src);
+          assert.equal(await figure.locator("xpath=ancestor::li[1]").locator('a[href^="/activities/live/#recap-"]').getAttribute("href"), `/activities/live/#recap-${recapId}`);
+          await video.scrollIntoViewIfNeeded();
+          await video.evaluate((node) => { node.muted = true; });
+          await figure.getByRole("button", { name: `「${clip.title}」を再生`, exact: true }).click();
+          await page.waitForFunction((id) => {
+            const video = document.getElementById(id)?.querySelector("video");
+            return video && video.readyState >= 2 && video.currentTime > 0.5;
+          }, clip.id);
+          assert.equal(await video.locator("source").getAttribute("src"), clip.src);
+          const info = await video.evaluate((node) => ({ width: node.videoWidth, height: node.videoHeight, duration: node.duration, error: node.error }));
+          assert.deepEqual([info.width, info.height], [clip.width, clip.height]);
+          assert.ok(Math.abs(info.duration - clip.durationSeconds) < 0.25);
+          assert.equal(info.error, null);
+          await video.evaluate((node) => node.pause());
+        }
+        assert.deepEqual(errors, []);
+        await overflow();
       });
       await check("night Fan Room photo renders on NEWS and LIVE with historical wording", async () => {
         const nightFanroomId = "2026-09-15-night-fanroom-thanks";

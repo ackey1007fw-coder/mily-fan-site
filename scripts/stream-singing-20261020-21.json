@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "scope": "Owner-approved short singing excerpts, not full archives",
+  "clips": [
+    {
+      "id": "night-round",
+      "recapId": "2026-10-20-night-showroom",
+      "kind": "singing",
+      "sourcePart": 1,
+      "partSeconds": 991.0,
+      "sourceSeconds": 991.0,
+      "sourceTimestamp": "0:16:31",
+      "durationSeconds": 28,
+      "width": 720,
+      "height": 1280,
+      "youtubePrivacyStatus": "public",
+      "title": "指で、まるっ。",
+      "video": {
+        "src": "/media/live-clips/mily-b235-01-20261020-night-singing-round.mp4",
+        "sha256": "be8bc0d350997561df3d836480ece64c8fc1df3e12be6b8dc6698a0f15117f42",
+        "bytes": 3183786
+      },
+      "poster": {
+        "src": "/media/live-clips/mily-b235-01-20261020-night-singing-round-cover.jpg",
+        "sha256": "3646110cf034e442b4f2648b7009fe84b2dec2b6f8222a09a14846c32eb25857",
+        "bytes": 147139
+      }
+    },
+    {
+      "id": "night-cheeks",
+      "recapId": "2026-10-20-night-showroom",
+      "kind": "singing",
+      "sourcePart": 1,
+      "partSeconds": 1112.0,
+      "sourceSeconds": 1112.0,
+      "sourceTimestamp": "0:18:32",
+      "durationSeconds": 28,
+      "width": 720,
+      "height": 1280,
+      "youtubePrivacyStatus": "public",
+      "title": "ほっぺに、ちょん。",
+      "video": {
+        "src": "/media/live-clips/mily-b235-02-20261020-night-singing-cheeks.mp4",
+        "sha256": "0bb644c10e329adaf902887b203f7894d059b4a2f382929da413a4d6365336ee",
+        "bytes": 2877075
+      },
+      "poster": {
+        "src": "/media/live-clips/mily-b235-02-20261020-night-singing-cheeks-cover.jpg",
+        "sha256": "58b7da7cfbd595e1a20d5844ca00670d2e35b68fab82a8d536f053053268afd4",
+        "bytes": 139070
+      }
+    },
+    {
+      "id": "morning-peace",
+      "recapId": "2026-10-21-morning-showroom",
+      "kind": "singing",
+      "sourcePart": 2,
+      "partSeconds": 1062.0,
+      "sourceSeconds": 3015.082,
+      "sourceTimestamp": "0:50:15",
+      "durationSeconds": 28,
+      "width": 720,
+      "height": 1280,
+      "youtubePrivacyStatus": "public",
+      "title": "ダブルピース！",
+      "video": {
+        "src": "/media/live-clips/mily-b235-03-20261021-morning-singing-peace.mp4",
+        "sha256": "20d9222fe116fb6ed8dab57f4707e85338d6c69e87abe436e3824e3c11acab95",
+        "bytes": 2886356
+      },
+      "poster": {
+        "src": "/media/live-clips/mily-b235-03-20261021-morning-singing-peace-cover.jpg",
+        "sha256": "41308159526ca660c6e7a94e85a7ccc74730715928841711d0c4993b8afc94c2",
+        "bytes": 140816
+      }
+    }
+  ]
+}

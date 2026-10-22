@@ -672,9 +672,9 @@ function StreamRecapArticle({
         frame = 0;
         if (window.location.hash !== targetHash) return;
         document.getElementById(targetId)?.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "instant"
-            : "smooth",
+          // Deep links must land immediately even when earlier recaps contain lazy media.
+          // Smooth scrolling over a long archive can leave the destination offscreen.
+          behavior: "instant",
           block: "start",
         });
       });
@@ -793,6 +793,16 @@ function StreamRecapArticle({
               </li>
             ))}
           </ol>
+        </StreamRecapSection>
+      ) : null}
+
+      {recap.singingExcerpts && recap.singingExcerpts.length > 0 ? (
+        <StreamRecapSection
+          title="歌唱中のかわいい仕草・振り付け"
+          id={`${recap.id}-singing-excerpts`}
+          note="実録画・配信原音から作った短尺です。曲名は未確認のため推測で記載していません。フルアーカイブではありません。"
+        >
+          <ApprovedSongClipList clips={recap.singingExcerpts} />
         </StreamRecapSection>
       ) : null}
 
