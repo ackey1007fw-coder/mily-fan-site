@@ -1,3 +1,4 @@
+import { checkProgressReading } from "./mily-progress-reading.browser.mjs";
 import assert from "node:assert/strict";
 import { readFile, stat, mkdir, writeFile } from "node:fs/promises";
 import { resolve, join, extname, relative, sep } from "node:path";
@@ -157,6 +158,7 @@ try {
             await page.screenshot({ path: join(output, `${engine}-${width}-oct22-morning.png`), fullPage: true });
             const progressResponse = await page.goto(`${baseUrl}/data-lab/progress/`, { waitUntil: "networkidle" });
             assert.equal(progressResponse.status(), 200);
+            await checkProgressReading(page, { output, engine, width });
             assert.equal(await page.locator('[data-peer-rank]').count(), 9);
             const week = page.locator('#week-20261015-21');
             assert.equal(await week.locator('[data-week-day]').count(), 7);

@@ -25,6 +25,7 @@
 
 .week-day{display:grid;grid-template-columns:58px minmax(0,1fr);gap:12px;margin:18px 0}.week-day h3{font-size:14px;padding-top:8px}.week-line{display:grid;grid-template-columns:112px minmax(0,1fr) 102px;gap:10px;align-items:center;margin:5px 0;font-size:12px}.week-line strong{text-align:right;font-size:13px;white-space:nowrap;font-variant-numeric:tabular-nums}.week-track{height:18px;background:#edf1ed;border-radius:4px;overflow:hidden}.week-fill{display:block;height:100%;background:var(--accent)}.week-median{background:#819597}.week-scale{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:0 112px 0 192px}.week-panel details>div{overflow-wrap:anywhere}.week-panel .table-scroll{max-width:100%}@media(max-width:650px){.week-day{display:block;margin:22px 0}.week-day h3{padding:0;margin-bottom:6px}.week-line{grid-template-columns:84px minmax(0,1fr) 82px;gap:7px;font-size:10px}.week-line strong{font-size:11px}.week-scale{margin-left:91px;margin-right:89px}.week-panel .kpi strong{font-size:clamp(23px,6vw,32px)}}
 </style>
+<link rel="stylesheet" href="/data-lab/assets/progress-reading.css">
 </head>
 <body>
 <a class="skip" href="#main">本文へスキップ</a>
@@ -35,13 +36,29 @@
 <h1>積み重ねた応援は、<br><span>数字にも残っている。</span></h1>
 <p class="lead">三橋莉子さん（みりぃ）の応援を、過去の審査から直近の日間記録まで振り返るページです。自分の歩みと、同じ指標の出場者比較を分けて、ここまでに届いた応援を確かめます。</p>
 <p class="stamp">作成：2026年10月22日 ｜ 掲載値は過去の保存記録。現在順位・最新配信の比較ではありません。</p>
-<div class="kpis" aria-label="保存データから確認できる変化">
-<div class="kpi"><small>三次 → 四次の総ポイント</small><strong data-proof="total-ratio">2.40<em>倍</em></strong><p>315,052 → 755,120pt<br>第三者の公開集計</p></div>
-<div class="kpi"><small>同集計の増加分</small><strong data-proof="total-gain">+440,068</strong><p>ptの増加<br>配信時間の効果とは別</p></div>
-<div class="kpi"><small>上位5人以外の貢献pt</small><strong data-proof="outside-ratio">3.13<em>倍</em></strong><p>108,901 → 341,360pt<br>人数の増加率ではない</p></div>
+<section class="progress-digest" id="at-a-glance" aria-labelledby="digest-title">
+<p class="section-label">まず30秒で / 2026.10.15–10.21の固定記録</p>
+<h2 id="digest-title">ここまで届いた応援を、<br>3つの事実で。</h2>
+<div class="digest-facts">
+<article><h3>1日だけではない記録</h3><p class="digest-number" data-digest-proof="days">7<span> / 7日</span></p><p>同じ16ルームの各日中央値を、7日すべてで上回りました。</p></article>
+<article><h3>7日分の応援の合計</h3><p class="digest-number" data-digest-proof="total">136,547<span>pt</span></p><p>公式の日間ジャンルptを独自に合算。公式週間ランキングとは別です。</p></article>
+<article><h3>7日合計の中央値に対して</h3><p class="digest-number" data-digest-proof="ratio">2.01<span>倍</span></p><p>全7日分が揃った同じ16ルームの、合計の中央値との比較です。</p></article>
 </div>
-<p class="note">上の3指標は藤原史さんの公開集計にある、みりぃ本人の行から計算。大会が認定した最終結果ではありません。<a href="#sources">出典・計算方法</a></p>
-<nav class="index" aria-label="このページの内容"><a href="#week-20261015-21">直近7日間の積み重ね</a><a href="#daily-peers-20261021">NEW 10/21の日間比較</a><a href="#growth">① 自分の成長</a><a href="#comparison">② 同時点の比較</a><a href="#reading">③ 盛り上がりの読み方</a></nav>
+<p class="digest-scope">比較対象は本人を含む固定16ルーム。名簿35人のうち、未掲載のある19人は合計比較から除外しています。全員の順位・審査順位・盛り上がり度・配信効率・通過の保証ではありません。</p>
+<p class="digest-message">この数字は、明日も超えなければならないノルマではありません。ここまで届いた応援を、振り返るための記録です。</p>
+<div class="progress-actions"><a class="progress-action" href="#week-20261015-21">7日分のグラフへ</a><a href="/data-lab/data/semifinal-talent-seven-days-20261015-21.json">元データ・出典を確かめる</a></div>
+<details id="progress-reading-guide"><summary>「中央値」と比較範囲の読み方</summary><div><p>中央値は、数字を小さい順に並べたときの真ん中の値です。16ルームなら8番目と9番目の平均です。「毎日の中央値」と「7日合計の中央値」は、別々に計算しています。</p><p>単日の23ルーム内4番目と、7日合計の16ルーム内6番目は、期間も相手も違います。順位が下がったという意味ではありません。比較は届いた応援の参考で、人の価値や努力量の順位ではありません。</p></div></details>
+<div class="progress-share" id="progress-share"><button class="progress-action" type="button" id="progress-copy" aria-controls="progress-share-manual" hidden>要点と出典リンクをコピー</button><p id="progress-copy-status" class="note" role="status" aria-live="polite" aria-atomic="true"></p>
+<details id="progress-share-manual"><summary>送る文章を確認・手動でコピー</summary><div><label for="progress-share-text">期間・対象・注意書き付きの要約</label><textarea id="progress-share-text" readonly rows="10" spellcheck="false">みりぃの積み重ね｜2026年10月15日〜21日の記録
+
+SHOWROOM Classic・タレントの日間ptは、7日分合計136,547pt。全7日分が確認できた同じ16ルーム（本人を含む）の各日中央値を、7日すべてで上回りました。7日合計は、この16ルームの合計中央値の約2.01倍です。
+
+名簿35人中、未掲載のある19人は合計比較から除外しています。公式データの非公式な独自集計で、審査順位・盛り上がり度・配信効率や通過の保証ではありません。
+
+ここまで届いた応援を、ひとつの瞬間だけでなく積み重ねで。
+出典・比較条件：__DATA_LAB_PROGRESS_CANONICAL__#at-a-glance</textarea><p class="note">コピーは送信ではありません。送信先のアプリに貼り付け、内容を確認して使えます。</p></div></details></div>
+</section>
+<nav class="index" aria-label="このページの内容"><a href="#at-a-glance">30秒の要点</a><a href="#week-20261015-21">直近7日間の積み重ね</a><a href="#daily-peers-20261021">NEW 10/21の日間比較</a><a href="#growth">① 自分の成長</a><a href="#comparison">② 同時点の比較</a><a href="#reading">③ 盛り上がりの読み方</a></nav>
 </section>
 <section class="panel week-panel" id="week-20261015-21">
 <div class="section-label">SEVEN DAYS / 2026.10.15–10.21</div>
@@ -139,6 +156,13 @@
 </section>
 <section class="panel" id="growth">
 <div class="section-label">01 / 三次から四次へ</div><h2>総量も、上位5人以外の応援も増えた。</h2>
+<div class="kpis" aria-label="保存データから確認できる変化">
+<div class="kpi"><small>三次 → 四次の総ポイント</small><strong data-proof="total-ratio">2.40<em>倍</em></strong><p>315,052 → 755,120pt<br>第三者の公開集計</p></div>
+<div class="kpi"><small>同集計の増加分</small><strong data-proof="total-gain">+440,068</strong><p>ptの増加<br>配信時間の効果とは別</p></div>
+<div class="kpi"><small>上位5人以外の貢献pt</small><strong data-proof="outside-ratio">3.13<em>倍</em></strong><p>108,901 → 341,360pt<br>人数の増加率ではない</p></div>
+</div>
+<p class="note">上の3指標は藤原史さんの公開集計にある、みりぃ本人の行から計算。大会が認定した最終結果ではありません。<a href="#sources">出典・計算方法</a></p>
+
 <p>三次は9月3〜12日、四次は10月3〜12日。どちらも10日間の集計です。配信時間・企画・倍率などの条件まで同じとは限りませんが、記録されたポイントは確かに増えています。</p>
 <div class="chart" role="img" aria-label="総ポイント。三次315052、四次755120。両方とも0から800000ポイントの同じ尺度。">
 <div class="chart-row third"><span>三次審査</span><span class="track"><span class="fill" style="width:39.3815%"></span></span><strong data-proof="third-total">315,052pt</strong></div>
@@ -191,5 +215,6 @@
 <p><a href="/data-lab/">データラボへ戻る</a> ／ <a href="/activities/live/">配信の記録を見る</a></p>
 </main>
 <footer class="footer">Mily SIGNAL ｜ 非公式・ファン制作<br>検索エンジンへの索引登録を抑止していますが、URLで閲覧できる公開ページです。</footer>
+<script type="module" src="/data-lab/assets/progress-share.js"></script>
 </body>
 </html>
