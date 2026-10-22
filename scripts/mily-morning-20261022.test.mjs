@@ -60,3 +60,12 @@ test("Published additions exclude raw transcripts, identifiers and non-public de
  assert.doesNotMatch(text, /drive\.google\.com|@gmail\.com|chatgpt\.site|C:\\Users|viewer[_-]?id|contributor[_-]?id|live-transcript\.txt|ui-raw\.jsonl|本人は焦|完璧主義/i);
  for (const m of text.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) assert.match(m[0], /rel="noopener noreferrer"/);
 });
+
+test("October 22: analytics injection and mobile no-JS navigation remain available", () => {
+ assert.match(page, /^<\/body>$/m);
+ const home = read("data-lab/index.html");
+ const fallback = home.match(/id="daily-fallback-links"[\s\S]*?<\/nav>/)?.[0];
+ assert.ok(fallback);
+ assert.match(fallback, /href="#morning-20261022">10\/22<\/a>/);
+ assert.ok(fallback.indexOf("morning-20261022") < fallback.indexOf("morning-20261021"));
+});

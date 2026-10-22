@@ -147,6 +147,7 @@ try {
           if (width === 390 || width === 1440) {
             const morningResponse = await page.goto(`${baseUrl}/data-lab/reports/20261022-morning/`, { waitUntil: "networkidle" });
             assert.equal(morningResponse.status(), 200);
+            assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(), 1, "New report keeps analytics injection");
             assert.equal(await page.locator('[data-metric]').count(), 3);
             for (const metric of ["stars", "visits", "comments"]) assert.equal(await page.locator(`[data-metric="${metric}"]`).innerText(), "未取得");
             assert.match(await page.locator("#coverage").innerText(), /24分55.124秒/);
