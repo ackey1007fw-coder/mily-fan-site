@@ -218,6 +218,14 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-recap-20261008-morning.browser.mjs
 
+      - name: October 22 night media and lab browser checks
+        timeout-minutes: 5
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/mily-night-20261022.browser.mjs
+
       - name: Upload song catalog browser evidence
         if: ${{ always() }}
         uses: actions/upload-artifact@v4

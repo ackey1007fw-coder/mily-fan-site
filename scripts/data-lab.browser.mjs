@@ -100,9 +100,15 @@ try {
             assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 9, "Nine broadcast dates from 10/14 through 10/22");
             const day22 = page.locator("#daily-2026-10-22");
             if (!(await day22.getAttribute("open") !== null)) await day22.locator("summary").click();
-            await day22.locator('[data-missing="true"]').waitFor({ state: "visible" });
+            const day22Cards = day22.locator(".daily-stream-card");
+            assert.equal(await day22Cards.count(), 2, "Oct 22 night and morning remain separate");
+            assert.deepEqual(await day22Cards.locator("h4").allTextContents(), ["夜の配信", "朝の配信"]);
+            for (const [index, expected] of [[0, "未確認"], [1, "未取得"]]) {
+              const card = day22Cards.nth(index);
+              await card.locator('[data-missing="true"]').waitFor({ state: "visible" });
+              assert.equal(await card.locator(".daily-stream-number").innerText(), expected);
+            }
             assert.equal(await day22.locator("svg.daily-plot").count(), 0, "Missing counters must not produce a zero graph");
-            assert.match(await day22.locator(".daily-stream-stat").innerText(), /未取得/);
             const day20 = page.locator("#daily-2026-10-20");
             await day20.locator("summary").click();
             const today = day20.locator(".daily-stream-card").last();

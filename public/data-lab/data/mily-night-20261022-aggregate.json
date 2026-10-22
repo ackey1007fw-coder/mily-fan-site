@@ -1,0 +1,64 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23588035,
+  "dateJst": "2026-10-22",
+  "session": "night",
+  "label": "10月22日 夜の配信",
+  "eventName": "当該配信の参加イベントは未照合。10月12日終了の四次審査とは別集計。",
+  "sourceDescription": "同一夜配信の保存メディア、録画メタデータ、自動文字起こしの対象区間を照合",
+  "verifiedAtJst": "2026-10-22T23:40:00+09:00",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "observations": [],
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "measurementNote": "確認できる数値の原記録がまだないため、9指標は未確認として扱います。応援が0という意味ではありません。",
+  "comparisonNote": "過去枠の値や自動文字起こしからカウンターを補わず、時間帯比較・配信効率の計算には加えません。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": true,
+    "startProcessingJst": "2026-10-22T21:02:40+09:00",
+    "endProcessingJst": "2026-10-22T22:39:20+09:00",
+    "durationSeconds": 5726.763,
+    "bytes": 662388896,
+    "ffmpegExitCode": 0,
+    "metadataProbed": true,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "録画処理の時刻と保存ファイルの実尺。配信の公式開始終了時刻・完全収録とは別。"
+  },
+  "asr": {
+    "status": "finished",
+    "generatedSegments": 194,
+    "selectedTopicsRead": true,
+    "selectedClipRangesRetranscribed": true,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "numericEvidenceStatus": "unverified",
+    "savedNumericObservations": null,
+    "endConfirmed": false,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "recap": {
+    "basis": "保存録画の実フレームと自動文字起こしの該当区間を参照。逐語引用ではない。",
+    "summary": "紫のリボンのヘアバンドを紹介し、おしゃべりと歌を届けた夜。来てくれた人に感謝し、みんなが楽しいと思える配信にしたいと話しました。",
+    "recordingTimeRangesApprox": ["0:07:32–0:07:39", "0:55:00–1:05:00", "1:26:51–1:27:01", "1:34:55–1:35:06"],
+    "publishedStills": 10,
+    "publishedTalkClips": 3,
+    "liveRecapUrl": "/activities/live/#recap-2026-10-22-night-showroom"
+  }
+}
