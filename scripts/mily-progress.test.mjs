@@ -69,7 +69,7 @@ test("progress: peer selection is the predetermined four places on either side",
 });
 
 test("progress: historical comparisons and unverified campaign effects remain distinct", () => {
-  for (const text of ["現在順位・最新配信の比較ではありません", "公式の認定最終値ではありません", "直近のイベント効果・ライバル比較は、まだ未検証", "未取得を0として順位付けしません", "同じ配信時間にそろえた効率比較ではありません", "ファン人数・新規人数・定着率は分かりません"]) assert.ok(page.includes(text), text);
+  for (const text of ["現在順位・最新配信の比較ではありません", "公式の認定最終値ではありません", "きっかけ配信の効果・配信時間をそろえた比較は、まだ未検証", "未取得を0として順位付けしません", "同じ配信時間にそろえた効率比較ではありません", "ファン人数・新規人数・定着率は分かりません"]) assert.ok(page.includes(text), text);
   assert.doesNotMatch(page, /forecastScore|voteEstimate|勝率|絶対に通過|必ず勝てる|本人は焦|完璧主義/);
 });
 
