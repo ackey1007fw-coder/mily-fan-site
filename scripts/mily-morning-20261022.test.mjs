@@ -31,10 +31,10 @@ test("October 22: no numeric observations means unknown, not zero-valued perform
  assert.doesNotMatch(page, /<svg|<polyline|<canvas/);
 });
 test("October 22: archive links and canonical input are complete without losing prior dates", () => {
- const entry = DAILY_STREAM_ENTRIES.find(x => x.date === "2026-10-22");
+ const entry = DAILY_STREAM_ENTRIES.find(x => x.date === "2026-10-22" && x.slot === "morning");
  assert.equal(entry.file, "mily-morning-20261022-aggregate.json");
  assert.equal(entry.report, "/data-lab/reports/20261022-morning/");
- assert.equal(DAILY_STREAM_ENTRIES.filter(x => x.date === "2026-10-22").length, 1);
+ assert.equal(DAILY_STREAM_ENTRIES.filter(x => x.date === "2026-10-22" && x.slot === "morning").length, 1);
  const home = read("data-lab/index.html"), config = read("vite.config.ts");
  assert.ok(home.indexOf('id="morning-20261022"') < home.indexOf('id="morning-20261021"'));
  assert.ok(home.includes(entry.report)); assert.ok(config.includes('dataLabMorning20261022: "data-lab/reports/20261022-morning/index.html"'));
@@ -66,6 +66,6 @@ test("October 22: analytics injection and mobile no-JS navigation remain availab
  const home = read("data-lab/index.html");
  const fallback = home.match(/id="daily-fallback-links"[\s\S]*?<\/nav>/)?.[0];
  assert.ok(fallback);
- assert.match(fallback, /href="#morning-20261022">10\/22<\/a>/);
- assert.ok(fallback.indexOf("morning-20261022") < fallback.indexOf("morning-20261021"));
+ assert.match(fallback, /href="#night-20261022">10\/22<\/a>/);
+ assert.ok(fallback.indexOf("night-20261022") < fallback.indexOf("morning-20261021"));
 });

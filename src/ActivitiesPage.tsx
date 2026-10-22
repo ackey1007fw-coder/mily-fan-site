@@ -672,9 +672,8 @@ function StreamRecapArticle({
         frame = 0;
         if (window.location.hash !== targetHash) return;
         document.getElementById(targetId)?.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "instant"
-            : "smooth",
+          // Article links should land immediately, even across a long archive.
+          behavior: "instant",
           block: "start",
         });
       });

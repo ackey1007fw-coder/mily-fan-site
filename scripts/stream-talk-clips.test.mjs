@@ -10,6 +10,7 @@ import { streamRecaps } from "../src/data/streamRecaps.ts";
 
 const run = promisify(execFile);
 const approvedMedia = JSON.parse(await readFile(new URL('./stream-media-20261020-21.json', import.meta.url), 'utf8')).groups;
+const night20261022 = JSON.parse(await readFile(new URL('./mily-night-20261022-media.json', import.meta.url), 'utf8'));
 const seconds = stamp => stamp.split(':').reduce((total, part) => total * 60 + Number(part), 0);
 const clips = streamRecaps.flatMap((recap) => recap.highlights
   .filter((highlight) => highlight.clip)
@@ -18,7 +19,19 @@ const clips = streamRecaps.flatMap((recap) => recap.highlights
 test("talk highlights use short, playable clips with audio and real-frame posters", async () => {
   for (const { recap, highlight, clip } of clips) {
     const approved = approvedMedia.find(group => group.recapId === recap.id);
-    if (approved) {
+    if (recap.id === night20261022.recapId) {
+      const media = night20261022.files.find(file => file.role === 'talk' && clip.src === '/media/live/' + file.name);
+      assert.ok(media, clip.src);
+      const poster = night20261022.files.find(file => file.role === 'poster' && clip.poster === '/media/live/' + file.name);
+      assert.ok(poster, clip.poster);
+      assert.equal(recap.date, '2026-10-22');
+      assert.equal(seconds(clip.sourceTimestamp), Math.floor(media.recordingSeconds));
+      assert.equal(clip.durationSeconds, media.durationSeconds);
+      assert.equal(poster.recordingSeconds, media.recordingSeconds);
+      // Each timestamp marks the discussed moment inside its excerpt, including its brief lead-in.
+      assert.ok(seconds(highlight.timestamp) >= Math.floor(media.recordingSeconds));
+      assert.ok(seconds(highlight.timestamp) <= media.recordingSeconds + media.durationSeconds);
+    } else if (approved) {
       const media = approved.files.find(file => file.role === 'talk');
       const poster = approved.files.find(file => file.role === 'talk-cover');
       assert.equal(recap.date, approved.date);

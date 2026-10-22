@@ -69,7 +69,8 @@ if (host) {
     if (data === undefined) return;
     const points = data ? observationPoints(data, metric, entry.date) : [];
     const last = data ? lastObservedValue(data, metric, entry.date) : null;
-    value.textContent = last === null ? "未取得" : numberFormat.format(last);
+    const numericUnverified = data?.quality?.numericEvidenceStatus === "unverified";
+    value.textContent = last === null ? (numericUnverified ? "未確認" : "未取得") : numberFormat.format(last);
     value.dataset.missing = String(last === null);
     chart.replaceChildren();
     if (points.length >= 2) {
@@ -79,9 +80,11 @@ if (host) {
       note.textContent = points.length + "個の時刻付き観測点。点の間と前後は補間していません。最終結果ではありません。";
     } else {
       chart.append(element("p", "daily-no-chart", data
-        ? "この指標の時刻付き観測が2点未満のため、推移グラフは表示できません。"
+        ? (numericUnverified ? "画面カウンターの原本を照合できていないため、推移グラフは表示できません。" : "この指標の時刻付き観測が2点未満のため、推移グラフは表示できません。")
         : "保存済みの匿名集計を読み込めません。各回のレポートを参照してください。"));
-      note.textContent = "欠測を0として描画しません。既存の各回レポートには別の図表がある場合があります。";
+      note.textContent = numericUnverified
+        ? "原本の有無・観測件数・最終値は未確認です。数値を0として補いません。"
+        : "欠測を0として描画しません。既存の各回レポートには別の図表がある場合があります。";
     }
   }
   function createCard(entry) {

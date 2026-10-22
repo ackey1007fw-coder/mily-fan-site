@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "recapId": "2026-10-22-night-showroom",
+  "sourceDurationSeconds": 5726.763,
+  "files": [
+    {
+      "name": "mily-b236-01-20261022-night-00062s.png",
+      "recordingSeconds": 62,
+      "width": 640,
+      "height": 360,
+      "bytes": 180830,
+      "sha256": "99314dcaaf8ea86b32b9d6b9e3578c7bda8ea67044ab22152c42d7318e2278e0",
+      "backgroundRedactionPixels": 9483
+    },
+    {
+      "name": "mily-b236-02-20261022-night-00540s.png",
+      "recordingSeconds": 540,
+      "width": 640,
+      "height": 360,
+      "bytes": 134341,
+      "sha256": "33f66e5184a746cb6552f775f88a6da75b80fb161e7aa7b548465edc88629c30",
+      "backgroundRedactionPixels": 14707
+    },
+    {
+      "name": "mily-b236-03-20261022-night-00714s.png",
+      "recordingSeconds": 714,
+      "width": 640,
+      "height": 360,
+      "bytes": 144553,
+      "sha256": "3f0adb39da1df32639b0544c5ac40ac681a4c603465efac78de5b904313136d5",
+      "backgroundRedactionPixels": 26656
+    },
+    {
+      "name": "mily-b236-04-20261022-night-00718s.png",
+      "recordingSeconds": 718,
+      "width": 640,
+      "height": 360,
+      "bytes": 107985,
+      "sha256": "1954c558a4fa015218ed4aceaac2e6832567ba6cf50e67e36de56344ef38fdcb",
+      "backgroundRedactionPixels": 25689
+    },
+    {
+      "name": "mily-b236-05-20261022-night-02160s.png",
+      "recordingSeconds": 2160,
+      "width": 640,
+      "height": 360,
+      "bytes": 144455,
+      "sha256": "22b968e82411da32944c0ea0ebcedf29a7af52d21568b3486315816f2551396b",
+      "backgroundRedactionPixels": 27663
+    },
+    {
+      "name": "mily-b236-06-20261022-night-02700s.png",
+      "recordingSeconds": 2700,
+      "width": 640,
+      "height": 360,
+      "bytes": 123043,
+      "sha256": "9edc912463414dfe5deffc93f9b551550c27d49d8a8945388fee2494887f46fb",
+      "backgroundRedactionPixels": 19000
+    },
+    {
+      "name": "mily-b236-07-20261022-night-04320s.png",
+      "recordingSeconds": 4320,
+      "width": 640,
+      "height": 360,
+      "bytes": 118893,
+      "sha256": "796016cb052e4dd4c80cdc9d1ec75b71a04e48e5bbfd6def0f6b8608b58e0a53",
+      "backgroundRedactionPixels": 29966
+    },
+    {
+      "name": "mily-b236-08-20261022-night-04860s.png",
+      "recordingSeconds": 4860,
+      "width": 640,
+      "height": 360,
+      "bytes": 120292,
+      "sha256": "c17547504640bac09fddb6f0581187589897b49dbc4fc5c27f52beb57ef574b3",
+      "backgroundRedactionPixels": 27920
+    },
+    {
+      "name": "mily-b236-09-20261022-night-05220s.png",
+      "recordingSeconds": 5220,
+      "width": 640,
+      "height": 360,
+      "bytes": 121311,
+      "sha256": "ce6427a9181a5eb5f2f9502916cbf943385914e010bc3dbf7398220b3fd7fb7e",
+      "backgroundRedactionPixels": 24436
+    },
+    {
+      "name": "mily-b236-10-20261022-night-05400s.png",
+      "recordingSeconds": 5400,
+      "width": 640,
+      "height": 360,
+      "bytes": 96563,
+      "sha256": "deb8260d599bad2912572a1f83e6c50912a468c33a44670b6b19920ada4dde11",
+      "backgroundRedactionPixels": 33820
+    },
+    {
+      "name": "mily-b236-11-20261022-night-headband.mp4",
+      "role": "talk",
+      "width": 720,
+      "height": 1280,
+      "recordingSeconds": 448.9,
+      "durationSeconds": 18.2,
+      "bytes": 1721740,
+      "sha256": "8f778b2b2c54fd1d432db793c4e3e46b72bb7bfe713464bf349875b77504f3b5"
+    },
+    {
+      "name": "mily-b236-11-20261022-night-headband-cover.jpg",
+      "role": "poster",
+      "width": 720,
+      "height": 1280,
+      "recordingSeconds": 448.9,
+      "durationSeconds": null,
+      "bytes": 137226,
+      "sha256": "b3079018ff13afaaacf4bfbb767144636d4ef1540167e2dc824b3ca608a8fbf9"
+    },
+    {
+      "name": "mily-b236-12-20261022-night-together.mp4",
+      "role": "talk",
+      "width": 720,
+      "height": 1280,
+      "recordingSeconds": 5210.6,
+      "durationSeconds": 10.8,
+      "bytes": 1126282,
+      "sha256": "e4ec24336c9d5a633f6deb79d945ade21a6cad823f008302029ff5bb2ed6daa8"
+    },
+    {
+      "name": "mily-b236-12-20261022-night-together-cover.jpg",
+      "role": "poster",
+      "width": 720,
+      "height": 1280,
+      "recordingSeconds": 5210.6,
+      "durationSeconds": null,
+      "bytes": 129720,
+      "sha256": "941051dfed177f9d86c9303bcf5ad6c2488b2497e4d19d923ddce7a375547af1"
+    },
+    {
+      "name": "mily-b236-13-20261022-night-goodnight.mp4",
+      "role": "talk",
+      "width": 720,
+      "height": 1280,
+      "recordingSeconds": 5695.1,
+      "durationSeconds": 11.0,
+      "bytes": 1250794,
+      "sha256": "8ecd1d2facac32e70645346257c750d54abb7252a93afaf9736804debab5d8e3"
+    },
+    {
+      "name": "mily-b236-13-20261022-night-goodnight-cover.jpg",
+      "role": "poster",
+      "width": 720,
+      "height": 1280,
+      "recordingSeconds": 5695.1,
+      "durationSeconds": null,
+      "bytes": 120610,
+      "sha256": "81e7c0d67cdb6009b0476f4ac0fc7b2f9635c8e4c861ee6f71043cf31d7c7a7f"
+    }
+  ]
+}
