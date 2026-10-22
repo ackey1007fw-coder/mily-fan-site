@@ -33,6 +33,12 @@ export function DataLabGateway() {
           >
             データ分析を見る <span aria-hidden="true">↗</span>
           </a>
+          <a
+            href={`${DATA_LAB_ROUTE}progress/`}
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-sage px-5 py-2.5 text-sm font-semibold text-sage-deep transition hover:bg-sage-soft sm:w-auto"
+          >
+            応援の積み重ねを見る <span aria-hidden="true">↗</span>
+          </a>
           <p className="text-xs text-ink-muted">
             2026年10月12日の記録 · 非公式ファン制作
           </p>
