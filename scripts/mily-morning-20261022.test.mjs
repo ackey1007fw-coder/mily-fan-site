@@ -52,7 +52,7 @@ test("Halloween: eligibility and boost apply to their stated scopes, not invente
  assert.match(facts.sourceSha256, /^[a-f0-9]{64}$/);
  assert.match(progress, /id="campaign-20261021"/); assert.ok(progress.includes(facts.sourceUrl));
  assert.match(progress, /本人の現在の利用可否や再利用間隔の解除を確認したものではありません/);
- assert.match(progress, /直近のイベント効果・ライバル比較は、まだ未検証/);
+ assert.match(progress, /きっかけ配信の効果・配信時間をそろえた比較は、まだ未検証/);
  assert.match(progress, /未取得を0として順位付けしません/);
 });
 test("Published additions exclude raw transcripts, identifiers and non-public destinations", () => {

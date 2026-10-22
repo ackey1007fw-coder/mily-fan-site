@@ -158,6 +158,13 @@ try {
             const progressResponse = await page.goto(`${baseUrl}/data-lab/progress/`, { waitUntil: "networkidle" });
             assert.equal(progressResponse.status(), 200);
             assert.equal(await page.locator('[data-peer-rank]').count(), 9);
+            const dailyPeers = page.locator('#daily-peers-20261021');
+            assert.equal(await dailyPeers.locator('[data-daily-peer-entry]').count(), 23);
+            assert.match(await dailyPeers.locator('[data-day-proof="points"]').innerText(), /30,020/);
+            assert.match(await dailyPeers.locator('[data-day-proof="rank"]').innerText(), /4.*23/);
+            assert.match(await dailyPeers.innerText(), /全35人中の4位でも/);
+            assert.equal(await dailyPeers.locator('[data-unlisted-count="12"]').count(), 1);
+            await dailyPeers.screenshot({ path: join(output, `${engine}-${width}-daily-peers.png`) });
             assert.match(await page.locator('#campaign-20261021').innerText(), /Green以上/);
             assert.match(await page.locator('#campaign-20261021').innerText(), /ブーストランキング/);
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
