@@ -279,6 +279,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-23-x-cold-morning-malatang",
+    date: "2026-10-23",
+    sameDayOrder: 843,
+    title: "急な肌寒さに上着を出して🍂 みりぃの麻辣湯気分",
+    body: "10月23日8:43（日本時間）、みりぃがXで、肌寒い朝に薄手の上着を出したと近況を投稿。これからの冬をどう乗り越えようかと考えつつ、大学へ向かう様子を伝えています。\n\n無性に麻辣湯が食べたくなったそうで、鮮やかなオレンジ色の器に麺や具材が入った麻辣湯の写真も添えています。元の投稿文と写真は、下のX公式埋め込みまたは本人の投稿リンクからご覧ください。",
+    source: "https://x.com/Mily_chan36/status/2113416020597825627",
+    sourceLabel: "みりぃ本人のX投稿と麻辣湯の写真を見る（10月23日）",
+    xEmbed: {
+      postId: "2113416020597825627",
+      sourceUrl: "https://x.com/Mily_chan36/status/2113416020597825627",
+      alt: "肌寒い朝と大学へ向かう近況を綴り、麻辣湯の写真を添えたみりぃのX投稿",
+    },
+  },
+  {
     id: "2026-10-17-x-relaxed-morning-showroom",
     date: "2026-10-17",
     sameDayOrder: 1045,
