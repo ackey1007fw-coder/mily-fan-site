@@ -10,12 +10,12 @@ const data=JSON.parse(read('public/data-lab/data/mily-night-20261022-aggregate.j
 const media=JSON.parse(read('scripts/mily-night-20261022-media.json'));
 const night=streamRecaps.find(r=>r.id==='2026-10-22-night-showroom');
 test('October 22 night and morning are separate, ordered recaps with independent source limits',()=>{
- assert.deepEqual(streamRecaps.slice(0,2).map(r=>r.id),['2026-10-22-night-showroom','2026-10-22-morning-showroom']);
+ assert.deepEqual(streamRecaps.slice(1,3).map(r=>r.id),['2026-10-22-night-showroom','2026-10-22-morning-showroom']);
  assert.equal(data.liveId,23588035);assert.equal(data.recording.durationSeconds,5726.763);
  assert.equal(data.recording.startProcessingJst,'2026-10-22T21:02:40+09:00');assert.equal(data.recording.endProcessingJst,'2026-10-22T22:39:20+09:00');
  assert.match(night.transcriptionNote,/音声の手動聴取・全文の逐語校正は未実施/);
- assert.match(streamRecaps[1].transcriptionNote,/24分55.124秒/);
- assert.equal(streamRecaps[1].gallery,undefined);
+ assert.match(streamRecaps[2].transcriptionNote,/24分55.124秒/);
+ assert.equal(streamRecaps[2].gallery,undefined);
 });
 test('unknown night counters never become measured zero or timing-comparison evidence',()=>{
  assert.equal(Object.keys(data.metrics).length,9);assert.ok(Object.values(data.metrics).every(x=>x===null));
