@@ -279,6 +279,17 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-21-mixch-campus-girls-edit",
+    date: "2026-10-21",
+    title: "みりぃが編集したMixch動画を紹介🎬",
+    body: "10月21日、みりぃがCAMPUS GIRLS関連の編集動画を本人Xで紹介。本人投稿からMixchの元動画へ。動画の映像内容とサムネイルは独立確認できていないため、ここでは推測を加えていません。",
+    source: "https://x.com/Mily_chan36/status/2112740758302429609",
+    sourceLabel: "みりぃ本人のX投稿を見る",
+    url: "https://mixch.tv/m/Rqr8BqD3",
+    ctaLabel: "Mixchの動画を見る",
+  },
+
+  {
     id: "2026-10-17-x-relaxed-morning-showroom",
     date: "2026-10-17",
     sameDayOrder: 1045,
