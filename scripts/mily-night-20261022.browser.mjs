@@ -21,7 +21,9 @@ try{
    page.on('response',response=>{const path=new URL(response.url()).pathname;if(path.startsWith('/media/live/mily-b236-')&&path.endsWith('.png'))imageResponses.push({path,status:response.status(),contentType:response.headers()['content-type']});});
    page.on('requestfailed',request=>{const path=new URL(request.url()).pathname;if(path.startsWith('/media/live/mily-b236-'))imageResponses.push({path,failure:request.failure()});});
    await page.goto(origin+'/activities/live/#recap-2026-10-22-night-showroom',{waitUntil:'networkidle'});
-   const card=page.locator('#recap-2026-10-22-night-showroom');await card.waitFor({state:'visible'});assert.equal(await card.getAttribute('open'),'');
+   const card=page.locator('#recap-2026-10-22-night-showroom');await card.waitFor({state:'visible'});
+   await page.waitForFunction(id=>document.getElementById(id)?.hasAttribute('open'),'recap-2026-10-22-night-showroom');
+   assert.equal(await card.getAttribute('open'),'');
    assert.equal(await card.locator('img').count(),11);
    for(const [index,img] of (await card.locator('img').all()).entries()){
     await img.scrollIntoViewIfNeeded();
@@ -48,7 +50,9 @@ try{
    await page.screenshot({path:join(out,`${engine}-${width}-live.png`)});
    await page.goto(origin+'/data-lab/reports/20261022-night/',{waitUntil:'networkidle'});assert.match(await page.locator('h1').innerText(),/10月22日 夜/);assert.equal(await page.locator('[data-metric]').count(),3);assert.ok((await page.locator('[data-metric]').allTextContents()).every(x=>x==='未確認'));
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:join(out,`${engine}-${width}-lab.png`)});
-   await page.goto(origin+'/activities/live/#recap-2026-10-22-morning-showroom',{waitUntil:'networkidle'});assert.equal(await page.locator('#recap-2026-10-22-morning-showroom').getAttribute('open'),'');
+   await page.goto(origin+'/activities/live/#recap-2026-10-22-morning-showroom',{waitUntil:'networkidle'});
+   await page.waitForFunction(id=>document.getElementById(id)?.hasAttribute('open'),'recap-2026-10-22-morning-showroom');
+   assert.equal(await page.locator('#recap-2026-10-22-morning-showroom').getAttribute('open'),'');
    assert.deepEqual(errors,[]);results.push({engine,width,photos:10,clips:3,nightLab:true,morningRecap:true});
   }finally{await browser.close();}
  }
