@@ -19,7 +19,7 @@ export const streamRecap20261023Asa: StreamRecap = {
     { timestamp: "0:52:14", title: "一日の始まりにエール", body: "最後は来てくれた人たちに感謝し、一日を頑張ろうと送り出しました。" },
   ],
   goals: [{ item: "審査", target: "次のステージへ", statusThen: "意欲を語りました" }],
-  ranking: [buildRankingNote()],
+  ranking: [buildRankingNote(undefined, undefined, "during")],
   timeline: [
     { timestamp: "0:00:36", label: "配信時間の勘違いと挨拶" },
     { timestamp: "0:09:34", label: "寝起きとメイクの話題" },
