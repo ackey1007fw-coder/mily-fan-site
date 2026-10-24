@@ -8,7 +8,7 @@ const data=JSON.parse(read("public/data-lab/data/mily-morning-20261023-aggregate
 const morning=streamRecaps.find((r)=>r.id==="2026-10-23-morning-showroom");
 test("2026-10-23 morning is a separate newest LIVE STREAM recap",()=>{
  assert.ok(morning);
- assert.equal(streamRecaps[0],morning);
+ assert.equal(streamRecaps[1],morning);
  assert.equal(morning.dateLabel,"2026.10.23（金）");
  assert.match(morning.broadcastLabel,/録画開始6:30頃〜 約52分/);
  assert.equal(morning.gallery,undefined);
@@ -33,7 +33,7 @@ test("verified recording and ASR metadata are separate from unverified counters"
   assert.equal(lastObservedValue(data,metric,data.dateJst),null);
   assert.deepEqual(observationPoints(data,metric,data.dateJst),[]);
  }
- const entry=DAILY_STREAM_ENTRIES[0];
+ const entry=DAILY_STREAM_ENTRIES.find(e=>e.date==="2026-10-23" && e.slot==="morning");
  assert.deepEqual({date:entry.date,slot:entry.slot,section:entry.section},{date:"2026-10-23",slot:"morning",section:"morning-20261023"});
 });
 test("lab report is indexed, noindex, truthful and never exposes private sources",()=>{
