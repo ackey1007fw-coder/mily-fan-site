@@ -10,7 +10,7 @@ const recap = streamRecaps.find((r) => r.id === "2026-10-24-morning-radio");
 
 test("2026-10-24 radio recap is newest and remains SHOWROOM, not FM", () => {
   assert.ok(recap);
-  assert.equal(streamRecaps[0], recap);
+  assert.equal(streamRecaps[1], recap);
   assert.equal(recap.dateLabel, "2026.10.24（土）");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.match(recap.broadcastLabel, /録画開始7:09頃〜 約93分/);
@@ -63,7 +63,7 @@ test("2026-10-24 saved nine online counters are nonfinal and keep observed times
     }
   }
   assert.match(recap.transcriptionNote, /8:40:12/);
-  assert.deepEqual(DAILY_STREAM_ENTRIES[0], {
+  assert.deepEqual(DAILY_STREAM_ENTRIES[1], {
     date: "2026-10-24", slot: "morning",
     file: "mily-morning-20261024-aggregate.json",
     section: "morning-20261024", report: "/data-lab/reports/20261024-morning/"
@@ -75,7 +75,7 @@ test("10/24 lab report links and safety remain intact", () => {
   const home = read("data-lab/index.html");
   const vite = read("vite.config.ts");
   const ledger = JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
-  assert.equal(ledger[0].id, recap.id);
+  assert.equal(ledger[1].id, recap.id);
   assert.match(report, /93分26.255秒/);
   assert.match(report, /281区間/);
   assert.match(report, /4,718/);

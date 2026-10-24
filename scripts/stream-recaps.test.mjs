@@ -72,6 +72,9 @@ function seconds(timestamp) {
 }
 
 function startMinutes(broadcastLabel) {
+  // A screen-only record has no verified broadcast start or full duration.
+  const observed = broadcastLabel.match(/^画面観測([01]?\d|2[0-3]):([0-5]\d)〜([01]?\d|2[0-3]):([0-5]\d)（配信開始未確認）$/);
+  if (observed) return Number(observed[1]) * 60 + Number(observed[2]);
   const match = broadcastLabel.match(/^(?:録画開始)?([01]?\d|2[0-3]):([0-5]\d)頃〜 約\d+分$/);
   assert.ok(match, `broadcastLabel形式: ${broadcastLabel}`);
   return Number(match[1]) * 60 + Number(match[2]);
