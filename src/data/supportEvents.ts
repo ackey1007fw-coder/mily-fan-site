@@ -395,8 +395,9 @@ export const kobeMontebrancoAmbassadorAudition: SupportEvent = {
     allDay: false,
     timezone: "Asia/Tokyo",
   },
+  note: "MISS CIRCLE CONTEST 2026のセミファイナル審査とは別のSHOWROOMイベントです。イベント期間の終了は10月25日21:59。最新情報・参加条件は出典のイベントページをご確認ください。",
   source: "https://www.showroom-live.com/event/kobe_montebranco",
-  verifiedAt: "2026-10-21",
+  verifiedAt: "2026-10-24",
 };
 
 export const supportEvents: SupportEvent[] = [
