@@ -11,7 +11,7 @@ const recap = streamRecaps.find(x => x.id === "2026-10-24-noon-showroom");
 
 test("10/24 noon: distinguish last valid online reference from confirmed offline", () => {
   assert.ok(recap);
-  assert.equal(streamRecaps[0], recap);
+  assert.equal(streamRecaps[1], recap);
   assert.equal(recap.dateLabel, "2026.10.24（土）");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.equal(recap.broadcastLabel, "画面観測14:45〜16:01（配信開始未確認）");
@@ -45,11 +45,11 @@ test("10/24 noon: distinguish last valid online reference from confirmed offline
       assert.ok(points[i].value>=points[i-1].value);
     }
   }
-  assert.deepEqual(DAILY_STREAM_ENTRIES[0], {
+  assert.deepEqual(DAILY_STREAM_ENTRIES[1], {
     date:"2026-10-24",slot:"noon",file:"mily-noon-20261024-aggregate.json",
     section:"noon-20261024",report:"/data-lab/reports/20261024-noon/"
   });
-  assert.equal(DAILY_STREAM_ENTRIES[1].slot,"morning");
+  assert.equal(DAILY_STREAM_ENTRIES[2].slot,"morning");
 });
 
 test("10/24 noon: public lab report and preview entry are anonymous",()=>{
@@ -57,8 +57,8 @@ test("10/24 noon: public lab report and preview entry are anonymous",()=>{
   const home=read("data-lab/index.html");
   const vite=read("vite.config.ts");
   const ledger=JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
-  assert.equal(ledger[0].id, recap.id);
-  assert.equal(ledger[1].id, "2026-10-24-morning-radio");
+  assert.equal(ledger[1].id, recap.id);
+  assert.equal(ledger[2].id, "2026-10-24-morning-radio");
   assert.match(report,/3,904/);
   assert.match(report,/391/);
   assert.match(report,/461/);
