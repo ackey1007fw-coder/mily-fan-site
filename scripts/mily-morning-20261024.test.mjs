@@ -23,7 +23,7 @@ test("2026-10-24 radio recap is newest and remains SHOWROOM, not FM", () => {
   assert.match(recap.transcriptionNote, /全編の手動聴取/);
 });
 
-test("2026-10-24 measured recording facts and unknown counters stay separate", () => {
+test("2026-10-24 saved nine online counters are nonfinal and keep observed times", () => {
   assert.equal(data.roomId, 573253);
   assert.equal(data.liveId, 23594458);
   assert.equal(data.format, "radio");
@@ -33,15 +33,36 @@ test("2026-10-24 measured recording facts and unknown counters stay separate", (
   assert.equal(data.recording.fullContinuityVerified, false);
   assert.equal(data.asr.processedChunks, 281);
   assert.equal(data.asr.verbatimAccuracyVerified, false);
-  assert.equal(data.quality.numericEvidenceStatus, "unverified");
-  assert.equal(Object.keys(data.metrics).length, 9);
-  assert.ok(Object.values(data.metrics).every((v) => v === null));
-  assert.deepEqual(data.observations, []);
+  assert.equal(data.finalServiceValueVerified, false);
+  assert.equal(data.completeCoverageConfirmed, false);
   assert.equal(data.timingComparisonEligible, false);
-  for (const metric of ["stars", "visits", "comments"]) {
-    assert.equal(lastObservedValue(data, metric, data.dateJst), null);
-    assert.deepEqual(observationPoints(data, metric, data.dateJst), []);
+  assert.equal(data.quality.numericEvidenceStatus, "observed_last_valid_nonfinal");
+  assert.equal(data.quality.totalTimelineRows, 1125);
+  assert.equal(data.quality.savedNumericObservations, 1018);
+  assert.equal(data.quality.incompleteNineRows, 54);
+  assert.equal(data.quality.regressionFlaggedRows, 53);
+  assert.equal(data.quality.endConfirmed, false);
+  assert.deepEqual(data.metrics, {
+    stars: 4718, visits: 423, comments: 703, firstVisits: 14,
+    repeatVisits: 22, newFollows: 1, otherFree: 283,
+    star100People: 43, recommendedCommentPeople: 40
+  });
+  assert.equal(data.lastValidOnline.atJst, "2026-10-24T08:40:12.776+09:00");
+  assert.equal(data.lastValidOnline.confirmedFinal, false);
+  assert.equal(data.observations.length, 19);
+  assert.equal(data.observations.at(-1).stars, 4718);
+  assert.equal(data.observations.at(-1).visits, 423);
+  assert.equal(data.observations.at(-1).comments, 703);
+  for (const [metric, expected] of [["stars", 4718], ["visits", 423], ["comments", 703]]) {
+    assert.equal(lastObservedValue(data, metric, data.dateJst), expected);
+    const observed = observationPoints(data, metric, data.dateJst);
+    assert.equal(observed.length, 19);
+    for (let index = 1; index < observed.length; index++) {
+      assert.ok(observed[index].time > observed[index - 1].time);
+      assert.ok(observed[index].value >= observed[index - 1].value);
+    }
   }
+  assert.match(recap.transcriptionNote, /8:40:12/);
   assert.deepEqual(DAILY_STREAM_ENTRIES[0], {
     date: "2026-10-24", slot: "morning",
     file: "mily-morning-20261024-aggregate.json",
@@ -57,6 +78,9 @@ test("10/24 lab report links and safety remain intact", () => {
   assert.equal(ledger[0].id, recap.id);
   assert.match(report, /93分26.255秒/);
   assert.match(report, /281区間/);
+  assert.match(report, /4,718/);
+  assert.match(report, /8:40:12/);
+  assert.match(home, /LAST VALID SCREEN 08:40 JST/);
   assert.match(report, /noindex,nofollow,noarchive/);
   assert.ok(home.includes('id="morning-20261024"'));
   assert.ok(home.indexOf('id="morning-20261024"') < home.indexOf('id="morning-20261023"'));
