@@ -83,7 +83,7 @@ test("10/25 morning: link report, preserve prior day, metadata and privacy", () 
   assert.ok(home.includes("/activities/live/#recap-" + recap.id));
   assert.ok(vite.includes("__DATA_LAB_20261025_MORNING_CANONICAL__"));
   assert.ok(vite.includes('dataLabMorning20261025: "data-lab/reports/20261025-morning/index.html"'));
-  assert.doesNotMatch(report + JSON.stringify(data) + JSON.stringify(recap), /drive[.]google[.]com|@gmail[.]com|chatgpt[.]site|C:\\\\Users|viewer[_-]?id|contributor[_-]?id|live-transcript[.]txt|ui-raw[.]jsonl/i);
+  assert.doesNotMatch(report + JSON.stringify(data) + JSON.stringify(recap), /drive[.]google[.]com|@gmail[.]com|chatgpt[.]site|C:\\Users|viewer[_-]?id|contributor[_-]?id|live-transcript[.]txt|ui-raw[.]jsonl/i);
   assert.equal(streamRecaps[1].id,"2026-10-24-noon-showroom");
   assert.equal(streamRecaps[2].id,"2026-10-24-morning-radio");
 });
