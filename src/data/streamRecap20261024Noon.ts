@@ -6,7 +6,7 @@ export const streamRecap20261024Noon: StreamRecap = {
   date: "2026-10-24",
   dateLabel: "2026.10.24（土）",
   theme: "昼の配信と応援の記録",
-  broadcastLabel: "14:45頃〜 約76分",
+  broadcastLabel: "画面観測14:45〜16:01（配信開始未確認）",
   platformLabel: "SHOWROOM",
   summary: "10月24日昼のSHOWROOM配信。保存された通常閲覧画面の9指標と時刻付き観測を照合しました。本人の発言内容と正式な開始時刻はまだ未確認です。",
   highlights: [],

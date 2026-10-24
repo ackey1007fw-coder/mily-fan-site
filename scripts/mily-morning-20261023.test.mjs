@@ -6,9 +6,12 @@ import { DAILY_STREAM_ENTRIES, observationPoints, lastObservedValue } from "../p
 const read=(path)=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 const data=JSON.parse(read("public/data-lab/data/mily-morning-20261023-aggregate.json"));
 const morning=streamRecaps.find((r)=>r.id==="2026-10-23-morning-showroom");
-test("2026-10-23 morning is a separate newest LIVE STREAM recap",()=>{
+test("2026-10-23 morning stays separate and chronologically ordered as recaps are added",()=>{
  assert.ok(morning);
- assert.equal(streamRecaps[2],morning);
+ const index=streamRecaps.indexOf(morning);
+ const newer=streamRecaps.findIndex(r=>r.id==="2026-10-24-morning-radio");
+ const older=streamRecaps.findIndex(r=>r.id==="2026-10-22-night-showroom");
+ assert.ok(newer>=0 && newer<index && index<older);
  assert.equal(morning.dateLabel,"2026.10.23（金）");
  assert.match(morning.broadcastLabel,/録画開始6:30頃〜 約52分/);
  assert.equal(morning.gallery,undefined);
