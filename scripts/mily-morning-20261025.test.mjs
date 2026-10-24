@@ -77,7 +77,7 @@ test("10/25 morning: link report, preserve prior day, metadata and privacy", () 
   assert.match(report,/6:40:46/);
   assert.match(report,/13観測点/);
   assert.match(report,/noindex,nofollow,noarchive/);
-  assert.match(injectVercelWebAnalytics(report), /<script defer src="\\/mily-analytics-loader.js"><\\/script>/);
+  assert.ok(injectVercelWebAnalytics(report).includes('<script defer src="/mily-analytics-loader.js"></script>'));
   assert.ok(home.includes('id="morning-20261025"'));
   assert.ok(home.indexOf('id="morning-20261025"') < home.indexOf('id="noon-20261024"'));
   assert.ok(home.includes("/activities/live/#recap-" + recap.id));
