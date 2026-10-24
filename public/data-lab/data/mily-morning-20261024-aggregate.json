@@ -1,0 +1,76 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23594458,
+  "dateJst": "2026-10-24",
+  "session": "morning",
+  "label": "10月24日 朝のラジオ配信",
+  "eventName": "当該配信のイベント参加状況・正式ポイントは未照合。過去審査とは別集計。",
+  "sourceDescription": "同一回の録画サイドカー・ffprobeのメディア実尺と形式・完了した自動文字起こしを照合",
+  "verifiedAtJst": "2026-10-24T09:50:00+09:00",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "observations": [],
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "measurementNote": "この回の9指標の有効な画面原値は未照合です。未確認は応援0を意味しません。",
+  "comparisonNote": "文字起こし・過去枠の数字から画面カウンターを補わず、時間帯の伸びやランキング比較に加えません。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": true,
+    "startProcessingJst": "2026-10-24T07:09:16+09:00",
+    "endProcessingJst": "2026-10-24T08:43:46+09:00",
+    "durationSeconds": 5606.255,
+    "bytes": 64393668,
+    "ffmpegExitCode": 0,
+    "metadataProbed": true,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "videoWidth": 640,
+    "videoHeight": 360,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "録画処理時刻と保存映像の実尺は異なる。SHOWROOMの正式な開始・終了と完全収録は未確認。通信エラーログあり。"
+  },
+  "asr": {
+    "status": "finished",
+    "processedChunks": 281,
+    "transcribedThroughJst": "2026-10-24T08:42:40+09:00",
+    "selectedTopicsRead": true,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "numericEvidenceStatus": "unverified",
+    "savedNumericObservations": null,
+    "endConfirmed": false,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "recap": {
+    "basis": "同一朝配信の自動文字起こしを非逐語で要約。誤認識が多く、細かな発言や進路の確定事実を断定しない。",
+    "summary": "朝のラジオ形式で、将来の夢と舞台・表現への思い、結果に向けた決意と応援への感謝を届けました。",
+    "recordingTimeRangesApprox": [
+      "0:19:20–0:20:00",
+      "0:25:20–0:27:00",
+      "0:37:00–0:43:00",
+      "1:00:20–1:01:00",
+      "1:10:25–1:11:00",
+      "1:29:35–1:31:00"
+    ],
+    "publishedStills": 0,
+    "publishedTalkClips": 0,
+    "liveRecapUrl": "/activities/live/#recap-2026-10-24-morning-radio"
+  },
+  "format": "radio"
+}
