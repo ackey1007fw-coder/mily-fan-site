@@ -102,10 +102,11 @@ try {
              const day24 = page.locator("#daily-2026-10-24");
              if (!(await day24.getAttribute("open") !== null)) await day24.locator("summary").click();
              const day24Radio = day24.locator(".daily-stream-card");
-             assert.equal(await day24Radio.count(), 1, "Oct 24 radio is a distinct morning slot");
-             await day24Radio.locator('[data-missing="false"]').waitFor({ state: "visible" });
-             assert.equal(await day24Radio.locator(".daily-stream-number").innerText(), "4,718", "Last valid online count is not an official final");
-             assert.equal(await day24Radio.locator("svg.daily-plot").count(), 1, "Nineteen measured points render a chart");
+             assert.equal(await day24Radio.count(), 2, "Oct 24 afternoon and morning stay separate");
+             await day24Radio.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
+             assert.equal(await day24Radio.first().locator(".daily-stream-number").innerText(), "3,904", "Noon last valid screen is not an official final");
+             assert.equal(await day24Radio.last().locator(".daily-stream-number").innerText(), "4,718", "Morning last valid screen is not an official final");
+             assert.equal(await day24Radio.locator("svg.daily-plot").count(), 2, "Noon and morning real observations each render a chart");
             const day22 = page.locator("#daily-2026-10-22");
             if (!(await day22.getAttribute("open") !== null)) await day22.locator("summary").click();
             const day22Cards = day22.locator(".daily-stream-card");
