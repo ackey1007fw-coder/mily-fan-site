@@ -19,7 +19,7 @@ export const streamRecap20261024Radio: StreamRecap = {
     { timestamp: "1:29:35", title: "ランキングとありがとう", body: "終盤にはランキングに触れ、朝のラジオに集まった人たちへお礼を伝えました。" },
   ],
   goals: [],
-  ranking: [buildRankingNote()],
+  ranking: [buildRankingNote(undefined, undefined, "during")],
   timeline: [
     { timestamp: "0:01:40", label: "配信時刻と朝の挨拶" },
     { timestamp: "0:19:20", label: "将来の夢を話すきっかけ" },
