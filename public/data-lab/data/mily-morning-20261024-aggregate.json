@@ -7,25 +7,153 @@
   "session": "morning",
   "label": "10月24日 朝のラジオ配信",
   "eventName": "当該配信のイベント参加状況・正式ポイントは未照合。過去審査とは別集計。",
-  "sourceDescription": "同一回の録画サイドカー・ffprobeのメディア実尺と形式・完了した自動文字起こしを照合",
-  "verifiedAtJst": "2026-10-24T09:50:00+09:00",
+  "sourceDescription": "同一回の通常閲覧画面で収集した匿名の9指標と時刻付き観測を保存原本で照合。録画メタデータ・自動文字起こしとは別に扱う",
+  "verifiedAtJst": "2026-10-24",
   "finalServiceValueVerified": false,
   "completeCoverageConfirmed": false,
-  "lastValidOnline": null,
-  "observations": [],
-  "metrics": {
-    "stars": null,
-    "visits": null,
-    "comments": null,
-    "firstVisits": null,
-    "repeatVisits": null,
-    "newFollows": null,
-    "otherFree": null,
-    "star100People": null,
-    "recommendedCommentPeople": null
+  "lastValidOnline": {
+    "atJst": "2026-10-24T08:40:12.776+09:00",
+    "uiProgressAtJst": "2026-10-24T08:40:12.776+09:00",
+    "stars": 4718,
+    "visits": 423,
+    "comments": 703,
+    "firstVisits": 14,
+    "repeatVisits": 22,
+    "newFollows": 1,
+    "otherFree": 283,
+    "star100People": 43,
+    "recommendedCommentPeople": 40,
+    "confirmedFinal": false
   },
-  "measurementNote": "この回の9指標の有効な画面原値は未照合です。未確認は応援0を意味しません。",
-  "comparisonNote": "文字起こし・過去枠の数字から画面カウンターを補わず、時間帯の伸びやランキング比較に加えません。",
+  "observations": [
+    {
+      "atJst": "2026-10-24T07:14:56.180+09:00",
+      "stars": 1168,
+      "visits": 52,
+      "comments": 58
+    },
+    {
+      "atJst": "2026-10-24T07:19:59.003+09:00",
+      "stars": 1812,
+      "visits": 87,
+      "comments": 103
+    },
+    {
+      "atJst": "2026-10-24T07:24:57.810+09:00",
+      "stars": 1912,
+      "visits": 108,
+      "comments": 136
+    },
+    {
+      "atJst": "2026-10-24T07:29:56.378+09:00",
+      "stars": 2113,
+      "visits": 131,
+      "comments": 170
+    },
+    {
+      "atJst": "2026-10-24T07:34:55.547+09:00",
+      "stars": 2413,
+      "visits": 154,
+      "comments": 221
+    },
+    {
+      "atJst": "2026-10-24T07:39:53.525+09:00",
+      "stars": 2843,
+      "visits": 178,
+      "comments": 262
+    },
+    {
+      "atJst": "2026-10-24T07:44:59.592+09:00",
+      "stars": 3014,
+      "visits": 197,
+      "comments": 302
+    },
+    {
+      "atJst": "2026-10-24T07:49:55.662+09:00",
+      "stars": 3034,
+      "visits": 208,
+      "comments": 336
+    },
+    {
+      "atJst": "2026-10-24T07:54:57.427+09:00",
+      "stars": 3134,
+      "visits": 230,
+      "comments": 377
+    },
+    {
+      "atJst": "2026-10-24T07:59:58.768+09:00",
+      "stars": 3254,
+      "visits": 255,
+      "comments": 414
+    },
+    {
+      "atJst": "2026-10-24T08:04:57.445+09:00",
+      "stars": 3955,
+      "visits": 280,
+      "comments": 448
+    },
+    {
+      "atJst": "2026-10-24T08:09:46.916+09:00",
+      "stars": 4276,
+      "visits": 280,
+      "comments": 488
+    },
+    {
+      "atJst": "2026-10-24T08:14:58.639+09:00",
+      "stars": 4356,
+      "visits": 309,
+      "comments": 531
+    },
+    {
+      "atJst": "2026-10-24T08:19:56.627+09:00",
+      "stars": 4385,
+      "visits": 342,
+      "comments": 565
+    },
+    {
+      "atJst": "2026-10-24T08:24:56.803+09:00",
+      "stars": 4395,
+      "visits": 360,
+      "comments": 594
+    },
+    {
+      "atJst": "2026-10-24T08:29:59.906+09:00",
+      "stars": 4396,
+      "visits": 381,
+      "comments": 636
+    },
+    {
+      "atJst": "2026-10-24T08:34:57.542+09:00",
+      "stars": 4506,
+      "visits": 403,
+      "comments": 667
+    },
+    {
+      "atJst": "2026-10-24T08:39:53.446+09:00",
+      "stars": 4668,
+      "visits": 423,
+      "comments": 703
+    },
+    {
+      "atJst": "2026-10-24T08:40:12.776+09:00",
+      "stars": 4718,
+      "visits": 423,
+      "comments": 703
+    }
+  ],
+  "metrics": {
+    "stars": 4718,
+    "visits": 423,
+    "comments": 703,
+    "firstVisits": 14,
+    "repeatVisits": 22,
+    "newFollows": 1,
+    "otherFree": 283,
+    "star100People": 43,
+    "recommendedCommentPeople": 40
+  },
+  "measurementNote": "2026年10月24日8:40:12 JSTに通常閲覧画面から保存した9指標の最後の有効な画面参考値。配信終了時・公式イベントポイント・送付ギフトの確定値ではありません。終盤の欠損・数値逆行は採用していません。",
+  "comparisonNote": "1,125件の保存画面観測のうち異常フラグなし・9指標完備の1,018件から、5分間隔の実測19点を抽出。点の間を補完しません。正式な開始終了・完全連続性が未確認のため、他の配信の時間帯比較や審査ポイントには含めません。",
   "timingComparisonEligible": false,
   "recording": {
     "saved": true,
@@ -52,10 +180,18 @@
     "manualAudioListeningVerified": false
   },
   "quality": {
-    "numericEvidenceStatus": "unverified",
-    "savedNumericObservations": null,
+    "numericEvidenceStatus": "observed_last_valid_nonfinal",
+    "savedNumericObservations": 1018,
     "endConfirmed": false,
-    "missingDataIsNotZeroPerformance": true
+    "missingDataIsNotZeroPerformance": true,
+    "totalTimelineRows": 1125,
+    "incompleteNineRows": 54,
+    "regressionFlaggedRows": 53,
+    "selectedTimedObservations": 19,
+    "observedUntilJst": "2026-10-24T08:40:12.776+09:00",
+    "finalVerified": false,
+    "coverageComplete": false,
+    "counterSource": "normal_visible_ui"
   },
   "recap": {
     "basis": "同一朝配信の自動文字起こしを非逐語で要約。誤認識が多く、細かな発言や進路の確定事実を断定しない。",

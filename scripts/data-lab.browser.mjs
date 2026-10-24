@@ -103,8 +103,9 @@ try {
              if (!(await day24.getAttribute("open") !== null)) await day24.locator("summary").click();
              const day24Radio = day24.locator(".daily-stream-card");
              assert.equal(await day24Radio.count(), 1, "Oct 24 radio is a distinct morning slot");
-             await day24Radio.locator('[data-missing="true"]').waitFor({ state: "visible" });
-             assert.equal(await day24Radio.locator(".daily-stream-number").innerText(), "未確認", "Unverified radio counters are not zero");
+             await day24Radio.locator('[data-missing="false"]').waitFor({ state: "visible" });
+             assert.equal(await day24Radio.locator(".daily-stream-number").innerText(), "4,718", "Last valid online count is not an official final");
+             assert.equal(await day24Radio.locator("svg.daily-plot").count(), 1, "Nineteen measured points render a chart");
             const day22 = page.locator("#daily-2026-10-22");
             if (!(await day22.getAttribute("open") !== null)) await day22.locator("summary").click();
             const day22Cards = day22.locator(".daily-stream-card");
