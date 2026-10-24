@@ -98,7 +98,15 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 11, "Eleven broadcast dates from 10/14 through 10/24");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 12, "Twelve broadcast dates from 10/14 through 10/25");
+            const day25 = page.locator("#daily-2026-10-25");
+            if (!(await day25.getAttribute("open") !== null)) await day25.locator("summary").click();
+            const day25Card = day25.locator(".daily-stream-card");
+            assert.equal(await day25Card.count(), 1, "10/25 morning must remain its own stream");
+            await day25Card.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
+            assert.equal(await day25Card.locator(".daily-stream-number").innerText(), "3,767", "The nonfinal morning value is explicitly observed");
+            await day25.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
+            assert.equal(await day25.locator("svg.daily-plot circle").count(), 13, "Only 13 observed time points are plotted");
              const day24 = page.locator("#daily-2026-10-24");
              if (!(await day24.getAttribute("open") !== null)) await day24.locator("summary").click();
              const day24Radio = day24.locator(".daily-stream-card");

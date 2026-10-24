@@ -1,0 +1,175 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23598624,
+  "dateJst": "2026-10-25",
+  "session": "morning",
+  "label": "10月25日 朝のメイク配信",
+  "eventName": "当該配信の正式なイベントポイント・イベント参加状況は未照合。画面参考値と混同しない。",
+  "sourceDescription": "同一回の通常閲覧画面に保存された匿名9指標と時計時刻を照合。録画・自動文字起こしとは別証拠",
+  "verifiedAtJst": "2026-10-25",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": {
+    "atJst": "2026-10-25T06:40:46.523+09:00",
+    "uiProgressAtJst": "2026-10-25T06:40:46.523+09:00",
+    "stars": 3767,
+    "visits": 665,
+    "comments": 553,
+    "firstVisits": 16,
+    "repeatVisits": 35,
+    "newFollows": 1,
+    "otherFree": 111,
+    "star100People": 35,
+    "recommendedCommentPeople": 58,
+    "confirmedFinal": false
+  },
+  "observations": [
+    {
+      "atJst": "2026-10-25T05:44:53.346+09:00",
+      "stars": 1197,
+      "visits": 62,
+      "comments": 78
+    },
+    {
+      "atJst": "2026-10-25T05:49:58.623+09:00",
+      "stars": 1482,
+      "visits": 107,
+      "comments": 109
+    },
+    {
+      "atJst": "2026-10-25T05:54:57.106+09:00",
+      "stars": 1734,
+      "visits": 160,
+      "comments": 144
+    },
+    {
+      "atJst": "2026-10-25T05:59:50.827+09:00",
+      "stars": 2285,
+      "visits": 204,
+      "comments": 185
+    },
+    {
+      "atJst": "2026-10-25T06:04:58.153+09:00",
+      "stars": 2395,
+      "visits": 247,
+      "comments": 222
+    },
+    {
+      "atJst": "2026-10-25T06:09:56.993+09:00",
+      "stars": 2815,
+      "visits": 297,
+      "comments": 264
+    },
+    {
+      "atJst": "2026-10-25T06:14:59.434+09:00",
+      "stars": 2879,
+      "visits": 346,
+      "comments": 296
+    },
+    {
+      "atJst": "2026-10-25T06:19:57.099+09:00",
+      "stars": 3010,
+      "visits": 418,
+      "comments": 331
+    },
+    {
+      "atJst": "2026-10-25T06:24:57.143+09:00",
+      "stars": 3221,
+      "visits": 472,
+      "comments": 393
+    },
+    {
+      "atJst": "2026-10-25T06:29:56.473+09:00",
+      "stars": 3561,
+      "visits": 548,
+      "comments": 449
+    },
+    {
+      "atJst": "2026-10-25T06:34:54.249+09:00",
+      "stars": 3664,
+      "visits": 604,
+      "comments": 494
+    },
+    {
+      "atJst": "2026-10-25T06:39:53.213+09:00",
+      "stars": 3767,
+      "visits": 604,
+      "comments": 545
+    },
+    {
+      "atJst": "2026-10-25T06:40:46.523+09:00",
+      "stars": 3767,
+      "visits": 665,
+      "comments": 553
+    }
+  ],
+  "metrics": {
+    "stars": 3767,
+    "visits": 665,
+    "comments": 553,
+    "firstVisits": 16,
+    "repeatVisits": 35,
+    "newFollows": 1,
+    "otherFree": 111,
+    "star100People": 35,
+    "recommendedCommentPeople": 58
+  },
+  "measurementNote": "2026年10月25日6:40:46 JSTに画面の進行を確認できた最後の有効な9指標。停止後の再保存を新しい実測としない。配信終了時・公式イベントポイント・送付ギフトの確定値ではない。",
+  "comparisonNote": "保存カウンター916行のうち9指標の揃った865行から、5分ごとの各時間帯にある実観測13点のみを抽出。欠損51行は除外し、点間を補間しない。録画・収集の完全連続性が未確認なので時間帯比較には使わない。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": true,
+    "startProcessingJst": "2026-10-25T05:37:35+09:00",
+    "endProcessingJst": "2026-10-25T06:41:50+09:00",
+    "durationSeconds": 3773.772,
+    "bytes": 401521084,
+    "ffmpegExitCode": 0,
+    "metadataProbed": true,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "videoWidth": 640,
+    "videoHeight": 360,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "録画処理時刻と保存映像の実尺は正式な配信開始終了と同じではない。通信エラー記録があり、完全収録は未確認。"
+  },
+  "asr": {
+    "status": "finished",
+    "processedChunks": 189,
+    "transcribedThroughJst": "2026-10-25T06:40:26+09:00",
+    "selectedTopicsRead": true,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "numericEvidenceStatus": "observed_last_valid_nonfinal",
+    "totalTimelineRows": 916,
+    "savedNumericObservations": 865,
+    "incompleteNineRows": 51,
+    "regressionFlaggedRows": 0,
+    "selectedTimedObservations": 13,
+    "endConfirmed": false,
+    "missingDataIsNotZeroPerformance": true,
+    "observedUntilJst": "2026-10-25T06:40:46.523+09:00",
+    "finalVerified": false,
+    "coverageComplete": false,
+    "counterSource": "normal_visible_ui",
+    "note": "オフライン画面の観測は配信の公式な終了時刻・確定カウンターを証明しない。"
+  },
+  "recap": {
+    "basis": "保存録画メタデータと自動文字起こしの該当箇所による非逐語の要約。固有名詞・細かな発言・本人の意図は推測しない。",
+    "summary": "メイクをしながら朝の会話を楽しみ、次の審査や応援、ラジオへ向かう前の挨拶について話しました。",
+    "recordingTimeRangesApprox": [
+      "0:00:02–0:03:30",
+      "0:15:50–0:18:00",
+      "0:35:50–0:44:00",
+      "0:59:58–1:02:35"
+    ],
+    "publishedStills": 0,
+    "publishedTalkClips": 0,
+    "liveRecapUrl": "/activities/live/#recap-2026-10-25-morning-showroom"
+  },
+  "format": "video"
+}
