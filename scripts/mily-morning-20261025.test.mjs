@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
 import { DAILY_STREAM_ENTRIES, observationPoints, lastObservedValue } from "../public/data-lab/assets/daily-archive-core.js";
+import { injectVercelWebAnalytics } from "../src/lib/vercelWebAnalytics.ts";
 
 const read = (path) => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 const data = JSON.parse(read("public/data-lab/data/mily-morning-20261025-aggregate.json"));
@@ -76,6 +77,7 @@ test("10/25 morning: link report, preserve prior day, metadata and privacy", () 
   assert.match(report,/6:40:46/);
   assert.match(report,/13観測点/);
   assert.match(report,/noindex,nofollow,noarchive/);
+  assert.match(injectVercelWebAnalytics(report), /<script defer src="\\/mily-analytics-loader.js"><\\/script>/);
   assert.ok(home.includes('id="morning-20261025"'));
   assert.ok(home.indexOf('id="morning-20261025"') < home.indexOf('id="noon-20261024"'));
   assert.ok(home.includes("/activities/live/#recap-" + recap.id));
