@@ -8,7 +8,7 @@ const data=JSON.parse(read("public/data-lab/data/mily-morning-20261023-aggregate
 const morning=streamRecaps.find((r)=>r.id==="2026-10-23-morning-showroom");
 test("2026-10-23 morning is a separate newest LIVE STREAM recap",()=>{
  assert.ok(morning);
- assert.equal(streamRecaps[1],morning);
+ assert.equal(streamRecaps[2],morning);
  assert.equal(morning.dateLabel,"2026.10.23（金）");
  assert.match(morning.broadcastLabel,/録画開始6:30頃〜 約52分/);
  assert.equal(morning.gallery,undefined);
