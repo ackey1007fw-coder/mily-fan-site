@@ -40,8 +40,14 @@ describe("October 25 radio: recap and talk video publication", () => {
     assert.ok(announcement.additionalCtas.some(({ url }) => url.endsWith(`/activities/radio/#radio-${recap.id}`)));
   });
 
-  it("uses distinct real YouTube destinations and existing local covers for all requested videos", () => {
-    assert.ok(recap.talkVideos.length >= 4);
+  it("publishes only the three approved excerpts with their existing local covers", () => {
+    assert.equal(recap.talkVideos.length, 3);
+    assert.deepEqual(recap.talkVideos.map(({ id }) => id), [
+      "radio-20261025-haiku", "radio-20261025-kyun", "radio-20261025-actor",
+    ]);
+    assert.deepEqual(recap.talkVideos.map(({ youtubeUrl }) => new URL(youtubeUrl).searchParams.get("v")), [
+      "U5MERfYNg_o", "zh-pSqs80wo", "K5XFOqYT4r8",
+    ]);
     assert.equal(new Set(recap.talkVideos.map(({ id }) => id)).size, recap.talkVideos.length);
     assert.equal(new Set(recap.talkVideos.map(({ youtubeUrl }) => youtubeUrl)).size, recap.talkVideos.length);
     for (const video of recap.talkVideos) {
@@ -56,6 +62,6 @@ describe("October 25 radio: recap and talk video publication", () => {
       assert.ok(video.poster.width > 0 && video.poster.height > 0);
     }
     const titles = recap.talkVideos.map(({ title }) => title).join(" ");
-    for (const topic of ["トーク", "一句", "胸キュン", "ルシファー"]) assert.ok(titles.includes(topic), topic);
+    for (const topic of ["一句", "胸キュン", "ルシファー"]) assert.ok(titles.includes(topic), topic);
   });
 });
