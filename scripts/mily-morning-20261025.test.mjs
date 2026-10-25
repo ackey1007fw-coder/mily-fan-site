@@ -16,9 +16,9 @@ test("10/25 morning: exact room/live ID and chronological card without unapprove
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.match(recap.broadcastLabel, /録画開始5:37頃〜 約63分/);
   assert.match(recap.summary, /メイク/);
-  assert.equal(recap.gallery, undefined);
-  assert.equal(recap.image, undefined);
-  assert.equal(recap.highlights.length, 6);
+  assert.equal(recap.gallery.length, 6);
+  assert.equal(recap.image, recap.gallery[1]);
+  assert.equal(recap.highlights.length, 7);
   assert.deepEqual(recap.ranking, []);
   assert.match(recap.transcriptionNote, /全編の手動聴取/);
   assert.equal(data.roomId, 573253);
