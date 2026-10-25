@@ -16,7 +16,7 @@ export const radioEpisode20261025: RadioEpisode = {
     {
       "id": "radio-20261025-haiku",
       "title": "今日の一句｜空回り、余裕も大事、前を向け",
-      "description": "みりぃの一句の発表、込めた意味、もう一度の読み上げげ、判定後の掛け合いを続けて楽しめます。",
+      "description": "みりぃの一句の発表、込めた意味、もう一度の読み上げ、判定後の掛け合いを続けて楽しめます。",
       "durationLabel": "3分04秒",
       "sourceTimeLabel": "元の放送時刻の目安：12:46:43〜12:49:47",
       "poster": {
