@@ -14,23 +14,9 @@ export const radioEpisode20261025: RadioEpisode = {
   highlightsLabel: "番組の見どころ",
   talkVideos: [
     {
-      "id": "radio-20261025-fulltalk",
-      "title": "10/25 ハロウィン回のトークまとめ",
-      "description": "妄想会議、お便り、声の演技、プチ大磯、パンケーキ、胸キュン、今日の一句、約1年の振り返りまで。楽曲部分を除いたトークを16章にまとめ、当日の番組案内画像で振り返ります。",
-      "durationLabel": "約1時間52分",
-      "sourceTimeLabel": "10:00〜13:00の放送から、トーク部分を編集しています。",
-      "poster": {
-        "src": "/media/radio/mily-b239-01-20261025-radio-fulltalk-cover.jpg",
-        "width": 1280,
-        "height": 720,
-        "alt": "10月25日ハロウィン回の番組告知と「トークアーカイブ」の表紙"
-      },
-      "youtubeUrl": "https://www.youtube.com/watch?v=xj57ja16Px8"
-    },
-    {
       "id": "radio-20261025-haiku",
       "title": "今日の一句｜空回り、余裕も大事、前を向け",
-      "description": "みりぃの一句の発表、込めた意味、もう一度の読み上げ、判定後の掛け合いを続けて楽しめます。",
+      "description": "みりぃの一句の発表、込めた意味、もう一度の読み上げげ、判定後の掛け合いを続けて楽しめます。",
       "durationLabel": "3分04秒",
       "sourceTimeLabel": "元の放送時刻の目安：12:46:43〜12:49:47",
       "poster": {
