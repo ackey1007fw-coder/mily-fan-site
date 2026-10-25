@@ -8,6 +8,12 @@ export const sha256 = bytes => createHash("sha256").update(bytes).digest("hex");
 const requireValue = (value, message) => { if (!value) throw new Error(message); };
 const text = value => typeof value === "string" && value.trim().length > 0;
 const time = value => Number.isFinite(Date.parse(value));
+// Inspect only the requested platform, preserving top-level provider fields.
+const publicationBodies = (row, platform) => [
+  row.title, row.post_caption, row.post_title, row.caption,
+  row.platform_content?.[platform]?.title,
+  row.platform_content?.[platform]?.caption,
+].filter(value => typeof value === "string");
 const reportUrl = id => `https://mily-fan-site.vercel.app/activities/live/#recap-${id}`;
 const approvedCase = Object.freeze({
   recapId: "2026-10-02-morning-showroom", profile: "ackey", account: "ackeytan_0720", platform: "instagram",
@@ -165,7 +171,7 @@ async function checkedReport(plan, context, pendingReplacement = false) {
   // Day-start precedes every approved frame of this confirmed morning report.
   // Do not claim the recorder's start is the exact broadcast start.
   const earliestReportDay = Date.parse(`${recap.date}T00:00:00+09:00`);
-  const matches = row => (row.platform === plan.platform || row.platforms?.includes(plan.platform)) && row.profile_username === plan.profile && ([row.title, row.post_caption, row.post_title, row.caption].some(t => typeof t === "string" && t.includes(url)) || sourceNames.includes(row.source_filename));
+  const matches = row => (row.platform === plan.platform || row.platforms?.includes(plan.platform)) && row.profile_username === plan.profile && (publicationBodies(row, plan.platform).some(t => typeof t === "string" && t.includes(url)) || sourceNames.includes(row.source_filename));
   const platformsOf = row => {
     const value = row.platform ?? row.platforms;
     const platforms = typeof value === "string" ? [value] : value;
@@ -182,7 +188,7 @@ async function checkedReport(plan, context, pendingReplacement = false) {
     const related = [...scheduled, ...history].filter(other => [other.job_id, other.request_id].some(id => text(id) && ids.includes(id)));
     const candidates = [row, ...related];
     requireValue(!candidates.some(matches), "Existing scheduled/published processing job; do not duplicate");
-    const knownOther = candidates.some(other => other.profile_username === plan.profile && platformsOf(other).includes(plan.platform) && [other.title, other.post_caption, other.post_title, other.caption].some(body => typeof body === "string" && recaps.some(r => r.id !== recap.id && body.includes(reportUrl(r.id)))));
+    const knownOther = candidates.some(other => other.profile_username === plan.profile && platformsOf(other).includes(plan.platform) && publicationBodies(other, plan.platform).some(body => typeof body === "string" && recaps.some(r => r.id !== recap.id && body.includes(reportUrl(r.id)))));
     const media = typeof row.platform_post_id === "string" ? native.find(m => m.id === row.platform_post_id) : undefined;
     if (media) requireValue(!matches({ ...row, caption: media.caption }), "Existing target report in native post caption; do not duplicate");
     const nativePublishedAt = media && strictTimestamp(media.timestamp);

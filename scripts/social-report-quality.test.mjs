@@ -317,3 +317,44 @@ test("replacement preparation does not exempt processing old job", async () => {
  const { p, c } = replacementFixture(); p.snapshots.history.responses[0].in_progress[0].status = "processing";
  await assert.rejects(() => prepareReplacement(p, c), /Existing scheduled/);
 });
+
+// Isolated proposed regressions. Synthetic fixtures, never live API snapshots.
+function nestedScheduledFixture(body, platform = 'instagram') {
+  const p = fresh();
+  p.snapshots.scheduled.responses[0] = { total: 1, scheduled_posts: [{
+    profile_username: 'ackey', platforms: ['instagram'], job_id: 'nested-fixture',
+    title: null, caption: null, platform_content: { [platform]: { caption: body } },
+  }] };
+  return p;
+}
+const otherRecapForNested = streamRecaps.find(r => r.id !== manifest.recapId);
+const otherCaptionForNested = `https://mily-fan-site.vercel.app/activities/live/#recap-${otherRecapForNested.id}`;
+test('nested Instagram other-report caption is recognized without rewriting raw fixture', async () => {
+  const p = nestedScheduledFixture(otherCaptionForNested), before = JSON.stringify(p);
+  await prepareSocialReport(p, context()); assert.equal(JSON.stringify(p), before);
+});
+test('nested target report blocks duplicate dispatch', async () => {
+  let calls=0; await assert.rejects(()=>submitSocialReport(nestedScheduledFixture(caption),context(),()=>{calls++;}),/Existing scheduled/);assert.equal(calls,0);
+});
+test('other top-level recap cannot override nested target duplicate', async () => {
+  const p=nestedScheduledFixture(caption);p.snapshots.scheduled.responses[0].scheduled_posts[0].title=otherCaptionForNested;
+  await assert.rejects(()=>prepareSocialReport(p,context()),/Existing scheduled/);
+});
+test('another platform caption cannot identify Instagram job', async () => {
+  await assert.rejects(()=>prepareSocialReport(nestedScheduledFixture(otherCaptionForNested,'x'),context()),/Unknown same-account/);
+});
+test('nested non-string caption stays unknown', async () => {
+  await assert.rejects(()=>prepareSocialReport(nestedScheduledFixture({text:otherCaptionForNested}),context()),/Unknown same-account/);
+});
+test('nested parser fix does not waive old Reel missing native evidence', async () => {
+  const p=nestedScheduledFixture(otherCaptionForNested);
+  p.snapshots.history.responses[0]={total:1,history:[exceptionRow()],in_progress:[]};
+  await assert.rejects(()=>prepareSocialReport(p,context()),/Unknown same-account/);
+});
+for (const variant of ['wrong-profile','wrong-platform']) test(`related job ${variant} nested caption cannot clear unknown Instagram row`, async()=>{
+ const p=nestedScheduledFixture('unknown');
+ const r={...structuredClone(p.snapshots.scheduled.responses[0].scheduled_posts[0]),platform_content:{instagram:{caption:otherCaptionForNested}}};
+ if(variant==='wrong-profile')r.profile_username='other';else r.platforms=['x'];
+ r.success=true; p.snapshots.history.responses[0]={total:1,history:[r],in_progress:[]};
+ await assert.rejects(()=>prepareSocialReport(p,context()),/Unknown same-account/);
+});
