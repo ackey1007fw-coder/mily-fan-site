@@ -218,6 +218,14 @@ jobs:
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
         run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/radio-archive.browser.mjs
 
+      - name: October 25 radio talk video browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/radio-talk-20261025.browser.mjs
+
       - name: October 8 morning short report browser checks
         timeout-minutes: 3
         env:

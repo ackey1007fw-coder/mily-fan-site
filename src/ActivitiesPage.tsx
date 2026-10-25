@@ -7,6 +7,7 @@ import { Fragment, useEffect, useState, type ReactNode } from "react";
 import { radioProgram } from "../shared/radio-program.js";
 import { ExternalLink } from "./components/ExternalLink";
 import { RadioSongList } from "./components/RadioSongList";
+import { RadioTalkVideos } from "./components/RadioTalkVideos";
 import { radioMusicEpisodes } from "./data/radioMusic";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -411,6 +412,22 @@ function RadioStorySpotlight({ activityId }: { activityId: ActivityId }) {
 }
 
 function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
+  useEffect(() => {
+    if (activityId !== "radio") return;
+    let frameId: number | undefined;
+    const followEpisodeLink = () => {
+      const linkedEpisode = radioEpisodes.find((episode) => window.location.hash === `#radio-${episode.id}`);
+      if (!linkedEpisode) return;
+      if (frameId !== undefined) cancelAnimationFrame(frameId);
+      frameId = requestAnimationFrame(() => document.getElementById(`radio-${linkedEpisode.id}`)?.scrollIntoView({ block: "start" }));
+    };
+    followEpisodeLink();
+    window.addEventListener("hashchange", followEpisodeLink);
+    return () => {
+      if (frameId !== undefined) cancelAnimationFrame(frameId);
+      window.removeEventListener("hashchange", followEpisodeLink);
+    };
+  }, [activityId]);
   if (activityId !== "radio") return null;
   return (
     <>
@@ -424,7 +441,7 @@ function RadioEpisodeRecap({ activityId }: { activityId: ActivityId }) {
 function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
   const musicEpisode = radioMusicEpisodes.find((music) => music.id === episode.id);
   return (
-    <SectionShell eyebrow="On Air Archive" title={`${episode.dateLabel} ${episode.theme}`}>
+    <SectionShell id={`radio-${episode.id}`} eyebrow="On Air Archive" title={`${episode.dateLabel} ${episode.theme}`}>
       <div className="mt-5 rounded-3xl border border-apricot/30 bg-apricot-soft/45 p-5 shadow-card sm:p-7">
         <div className="flex flex-wrap gap-2 text-xs font-semibold text-apricot-ink">
           <span className="rounded-full bg-paper px-3 py-1.5">{episode.broadcastLabel}</span>
@@ -435,6 +452,7 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
         <p className="mt-5 text-sm leading-7 text-ink-muted sm:text-base sm:leading-8">
           {episode.summary}
         </p>
+        {episode.timestampNote ? <p className="mt-3 text-xs leading-6 text-ink-muted">{episode.timestampNote}</p> : null}
       </div>
 
       {episode.aftershowPhoto ? (
@@ -458,6 +476,8 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
           <figcaption className="px-5 py-4 text-sm leading-7 text-ink-muted">{episode.aftershowPhoto.caption}</figcaption>
         </figure>
       ) : null}
+
+      {episode.talkVideos ? <RadioTalkVideos videos={episode.talkVideos} episodeId={episode.id} /> : null}
 
       <section aria-labelledby={`${episode.id}-songs`} className="mt-9">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">On Air Music</p>
@@ -485,9 +505,12 @@ function RadioEpisodeRecapArticle({ episode }: { episode: RadioEpisode }) {
               </h4>
               <p className="mt-2 text-sm leading-7 text-ink-muted">{highlight.body}</p>
               {highlight.quote ? (
-                <blockquote className="mt-4 whitespace-pre-line border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
-                  {highlight.quote}
-                </blockquote>
+                <Fragment>
+                  <blockquote className="mt-4 whitespace-pre-line border-l-2 border-apricot pl-4 text-sm font-medium leading-7 text-ink">
+                    {highlight.quote}
+                  </blockquote>
+                  {highlight.quoteNote ? <p className="mt-2 pl-4 text-xs leading-5 text-ink-muted">{highlight.quoteNote}</p> : null}
+                </Fragment>
               ) : null}
             </li>
           ))}
@@ -1006,16 +1029,18 @@ function ActivityCurrent({ activityId }: { activityId: ActivityId }) {
 }
 
 function SectionShell({
+  id,
   eyebrow,
   title,
   children,
 }: {
+  id?: string;
   eyebrow: string;
   title: string;
   children: ReactNode;
 }) {
   return (
-    <section className="border-t border-sage/15 px-4 py-10 sm:py-12">
+    <section id={id} className="scroll-mt-20 border-t border-sage/15 px-4 py-10 sm:py-12">
       <div className="mx-auto max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">
           {eyebrow}

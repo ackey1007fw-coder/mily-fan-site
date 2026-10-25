@@ -292,7 +292,10 @@ export const news: NewsItem[] = [
     additionalMedia: radioHalloweenStories.slice(1),
     relatedUrl: radioProgram.listenUrl,
     ctaLabel: "ラジオを聴く（FM公式）",
-    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+    additionalCtas: [
+      { label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL },
+      { label: "10/25の放送レポート・トーク動画を見る", url: `${site.siteUrl}/activities/radio/#radio-2026-10-25-halloween` },
+    ],
   },
   {
     id: "2026-10-23-x-cold-morning-malatang",
