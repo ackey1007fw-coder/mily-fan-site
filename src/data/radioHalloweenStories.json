@@ -1,0 +1,32 @@
+[
+  {
+    "id": "mily-b237-01-red-hood-radio-story",
+    "kind": "video",
+    "alt": "赤いフードと白いエプロンの衣装のみりぃが立ち、『ここからお聴きいただけます』とラジオ聴取を案内する縦型動画",
+    "src": "/media/gallery/mily-b237-01-red-hood-radio-story.mp4",
+    "poster": "/media/gallery/mily-b237-01-red-hood-radio-story-poster.jpg",
+    "width": 512,
+    "height": 908,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（10月25日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-25",
+    "activityIds": ["radio"],
+    "published": true
+  },
+  {
+    "id": "mily-b237-02-halloween-radio-story",
+    "kind": "video",
+    "alt": "くま耳とラメのフィルター姿のみりぃが手を振り、『湘南シーサイドサークル』10:00〜13:00、テーマ『ハロウィン』とお便りの送り口を案内する縦型動画",
+    "src": "/media/gallery/mily-b237-02-halloween-radio-story.mp4",
+    "poster": "/media/gallery/mily-b237-02-halloween-radio-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（10月25日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-25",
+    "activityIds": ["radio"],
+    "published": true
+  }
+]

@@ -5,6 +5,7 @@ import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourX
 import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { radioOct11Stories } from "./radioOct11Stories.ts";
+import { radioHalloweenStories } from "./radioHalloweenStories.ts";
 import { radioFanroomAftershowNewsImage } from "./radioFanroomAftershowPhoto.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "./tiktokOct04SelfieVideo.ts";
@@ -278,6 +279,21 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-25-radio-halloween-stories",
+    date: "2026-10-25",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "赤ずきんとくま耳でラジオ案内🎃 ハロウィンのStory2本",
+    body: "赤ずきん姿でラジオの聴き方を案内するみりぃと、くま耳フィルター姿で番組・お便りの送り口を紹介するみりぃ。ハロウィン気分のStoryを2本まとめました。\n\n画面では、FM85.6MHz『湘南シーサイドサークル』10:00〜13:00と、テーマ『ハロウィン』を案内しています。聴取やお便りは、下のFM公式リンクからどうぞ。\n\n動画は音声なしで掲載しています。10月25日は素材を受領・確認した日です。元の投稿日・撮影日は未確認のため、現在の放送予定はFM公式の案内をご確認ください。",
+    sourceLabel: "Instagram Story（10月25日確認・投稿日未確認）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioHalloweenStories[0],
+    additionalMedia: radioHalloweenStories.slice(1),
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
   {
     id: "2026-10-23-x-cold-morning-malatang",
     date: "2026-10-23",
