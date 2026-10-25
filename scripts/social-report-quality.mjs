@@ -22,8 +22,30 @@ const approvedCase = Object.freeze({
   messageIdDigest: "c9aaf08ccfcbc0e8e42f9823a855fb4a77ea767f5116095ce24eb4df5e75f520",
 });
 
+// One owner-approved unavailable historical Reel, for this report only.
+// The private approval text stays outside the repository; hashes bind its receipt.
+const b238Case = Object.freeze({
+  scopeId: "MILY-IG-20261025AM-B238-PUBLISH-01",
+  recapId: "2026-10-25-morning-showroom", profile: "ackey", account: "ackeytan_0720", platform: "instagram",
+  jobId: "ef98a03c6ea94265b78a526e33816eca", requestId: "d93443bdc90840ce8ad12d80d96ec93d",
+  postId: "18097399505439064", postUrl: "https://www.instagram.com/reel/DdtEqRbFS6p/",
+  messageIdDigest: "346619617c9231a2eb5bd89babb10267ac76b7fd46e5b0e0670a6002f703739c",
+  questionMessageIdDigest: "e9987eda3e44c7627fe8fcbbbc8ea4cd757dff65a4fd9df99941fa00f6065ffa",
+  originalInstructionDigest: "94661d918ef96f1021d9a15f976517f83956018ba716984d960f274bf02f3cad",
+  recordedAt: "2026-10-25T05:23:27.893Z",
+});
+function validateB238Decision(decision, plan, now) {
+  requireValue(decision.kind === "unverified-known-exception" && Object.entries(b238Case).every(([key, value]) => decision[key] === value), "B238 owner decision is not the exact approved case");
+  requireValue(["recapId", "profile", "account", "platform"].every(key => plan[key] === b238Case[key]) && plan.kind === "image" && plan.provider === "upload-post" && !plan.scheduledDate && !plan.replacementJobId, "B238 owner decision scope mismatch");
+  requireValue(Number.isFinite(now) && now >= strictTimestamp(b238Case.recordedAt) && now < Date.parse("2026-10-25T15:00:00Z"), "B238 owner decision expired or not yet valid");
+  requireValue(decision.note === "1件のみ内容未確認のため完全な過去投稿網羅確認ではない", "B238 private approval or unknown-state record missing");
+  requireValue(sha256(plan.caption) === "717c3e15b8bde6a74c765bda76378246b7fbfebd191326a569c3af02a8c831ba" && plan.order?.join("|") === Array.from({ length: 7 }, (_, i) => `mily-b238-${String(i + 8).padStart(2, "0")}-20261025-morning-social-${i === 0 ? "cover" : "photo"}`).join("|"), "B238 approved caption or media order changed");
+  return true;
+}
+
 function validateOwnerDecision(decision, plan, now) {
   if (!decision) return false;
+  if (decision.scopeId === b238Case.scopeId) return validateB238Decision(decision, plan, now);
   requireValue(decision.kind === "unverified-known-exception" && Object.entries(approvedCase).every(([key, value]) => decision[key] === value), "Owner decision is not the exact approved case");
   requireValue(["recapId", "profile", "account", "platform"].every(key => plan[key] === approvedCase[key]), "Owner decision does not apply to this report/account");
   requireValue(plan.scheduledDate === approvedCase.scheduledDate && plan.timezone === "Asia/Tokyo", "Owner decision does not apply to this schedule");
@@ -157,6 +179,7 @@ async function checkedReport(plan, context, pendingReplacement = false) {
   if (plan.scheduledDate) requireValue(time(plan.scheduledDate) && Date.parse(plan.scheduledDate) > now && plan.timezone === "Asia/Tokyo", "Invalid schedule/timezone");
   const scheduled = snapshotRows(plan.snapshots?.scheduled, "scheduled_posts", now);
   const decisionPresent = validateOwnerDecision(context.ownerDecision, plan, now);
+  const exceptionCase = context.ownerDecision?.scopeId === b238Case.scopeId ? b238Case : approvedCase;
   const isPendingReplacement = row => pendingReplacement && (scheduled.includes(row) || (inProgress.includes(row) && row.status === "queued")) && row.success !== true && !text(row.platform_post_id) && !text(row.post_url) && row.job_id === approvedCase.replacementJobId && (row.request_id == null || row.request_id === approvedCase.replacementRequestId) && row.profile_username === plan.profile && (row.platform === plan.platform || row.platforms?.includes(plan.platform));
   const history = snapshotRows(plan.snapshots?.history, "history", now);
   const inProgress = plan.snapshots.history.responses.flatMap(response => {
@@ -193,7 +216,7 @@ async function checkedReport(plan, context, pendingReplacement = false) {
     if (media) requireValue(!matches({ ...row, caption: media.caption }), "Existing target report in native post caption; do not duplicate");
     const nativePublishedAt = media && strictTimestamp(media.timestamp);
     const historicalPublished = history.includes(row) && !inProgress.includes(row) && !scheduled.includes(row) && row.success === true && (!("status" in row) || ["completed", "success", "published"].includes(row.status)) && !row.fallback_to_inbox && media && instagramPostKey(row.post_url) && instagramPostKey(row.post_url) === instagramPostKey(media.permalink) && ["IMAGE", "VIDEO", "CAROUSEL_ALBUM"].includes(media.media_type) && (typeof media.caption === "string" || media.caption === null) && Number.isFinite(nativePublishedAt) && nativePublishedAt < earliestReportDay && nativePublishedAt <= now;
-    const knownUnverifiedException = decisionPresent && history.includes(row) && !inProgress.includes(row) && !scheduled.includes(row) && row.success === true && row.job_id === approvedCase.jobId && row.request_id === approvedCase.requestId && row.platform_post_id === approvedCase.postId && row.post_url === approvedCase.postUrl;
+    const knownUnverifiedException = decisionPresent && (!context.ownerDecision.scopeId || (!("status" in row) || ["completed", "success", "published"].includes(row.status)) && !row.fallback_to_inbox) && history.includes(row) && !inProgress.includes(row) && !scheduled.includes(row) && row.success === true && row.job_id === exceptionCase.jobId && row.request_id === exceptionCase.requestId && row.platform_post_id === exceptionCase.postId && row.post_url === exceptionCase.postUrl;
     requireValue(knownOther || historicalPublished || knownUnverifiedException, "Unknown same-account job/post: read details by job/request ID before submission");
   }
   requireValue(!scheduled.some(row => matches(row) && !isPendingReplacement(row)) && !inProgress.some(row => matches(row) && !isPendingReplacement(row)) && !history.some(row => row.success && matches(row)), "Existing scheduled/published post; do not duplicate");
