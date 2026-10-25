@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-25-radio-halloween-stories",
   "2026-10-23-x-cold-morning-malatang",
   "2026-10-17-x-relaxed-morning-showroom",
   "2026-10-16-x-red-riding-hood-new-video",
@@ -54,6 +55,10 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b237-01-red-hood-radio-story",
+  "mily-b237-02-halloween-radio-story",
+  "mily-b237-03-halloween-radio-poster-story",
+  "mily-b237-04-radio-duo-story",
   "mily-b217-01-fourth-round-final-day-story",
   "mily-b216-01-x-final-day-peace",
   "mily-b201-01-radio-tournament-story",
