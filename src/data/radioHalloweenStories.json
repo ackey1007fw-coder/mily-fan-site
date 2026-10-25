@@ -28,5 +28,35 @@
     "receivedDate": "2026-10-25",
     "activityIds": ["radio"],
     "published": true
+  },
+  {
+    "id": "mily-b237-03-halloween-radio-poster-story",
+    "kind": "video",
+    "alt": "月とカボチャを背景に3人の写真を並べ、FM85.6MHz『湘南シーサイドサークル』10月25日（日）10:00〜13:00生放送、テーマ『ハロウィン』とお便り募集を案内する縦型動画",
+    "src": "/media/gallery/mily-b237-03-halloween-radio-poster-story.mp4",
+    "poster": "/media/gallery/mily-b237-03-halloween-radio-poster-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（10月25日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-25",
+    "activityIds": ["radio"],
+    "published": true
+  },
+  {
+    "id": "mily-b237-04-radio-duo-story",
+    "kind": "video",
+    "alt": "みりぃと共演者がカメラに向かって手を伸ばすツーショットに、『湘南シーサイドサークル 10:00-13:00生放送！』『こちらからお聴きください』と表示された縦型動画",
+    "src": "/media/gallery/mily-b237-04-radio-duo-story.mp4",
+    "poster": "/media/gallery/mily-b237-04-radio-duo-story-poster.jpg",
+    "width": 512,
+    "height": 910,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（10月25日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-10-25",
+    "activityIds": ["radio"],
+    "published": true
   }
 ]
