@@ -75,7 +75,6 @@ export const approvedTalkLinks = [
   "https://www.instagram.com/reel/DeA6JODFNPd/",
   "https://www.instagram.com/reel/DeA6ilVjsal/",
   "https://www.youtube.com/watch?v=9hPii8Yk2ms",
-  "https://www.youtube.com/watch?v=xj57ja16Px8",
   "https://www.youtube.com/watch?v=U5MERfYNg_o",
   "https://www.youtube.com/watch?v=zh-pSqs80wo",
   "https://www.youtube.com/watch?v=K5XFOqYT4r8",
