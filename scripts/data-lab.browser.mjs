@@ -389,6 +389,7 @@ try {
               if (date === "20261025") {
                 const photo = supplement.locator("img");
                 await photo.scrollIntoViewIfNeeded();
+                await page.waitForFunction(image => image.complete && image.naturalWidth > 0, await photo.elementHandle());
                 await photo.evaluate(image => image.decode());
                 assert.deepEqual(await photo.evaluate(image => [image.naturalWidth, image.naturalHeight]), [130, 200]);
                 assert.ok(await photo.evaluate(image => image.getBoundingClientRect().width <= 130 && image.getBoundingClientRect().height <= 200));
