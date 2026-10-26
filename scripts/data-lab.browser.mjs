@@ -369,6 +369,26 @@ try {
             }
           }
 
+          if ([320, 1440].includes(width)) {
+            await page.goto(`${baseUrl}/data-lab/reports/20261026-night/`, { waitUntil: "networkidle" });
+            assert.match(await page.locator("h1").innerText(), /10月26日夜/);
+            assert.equal(await page.locator('[data-metric="visits"]').innerText(), "未確認");
+            assert.equal(await page.locator("svg, canvas, video, audio").count(), 0);
+            await page.getByRole("link", { name: "LIVE STREAMのこの回へ", exact: true }).click();
+            const card = page.locator("#recap-2026-10-26-night-showroom");
+            await card.waitFor({ state: "visible" });
+            assert.match(await card.innerText(), /視聴メモ22:30頃〜（終了未確認）/);
+            assert.match(await card.innerText(), /録画内の経過時刻ではありません/);
+            assert.match(await card.innerText(), /22:47頃/);
+            assert.match(await card.innerText(), /終盤（メモ範囲内）/);
+            assert.equal(await card.locator("img, video, audio").count(), 0);
+            const details = card.locator("[data-recap-verification]");
+            await details.locator("summary").click();
+            assert.match(await details.innerText(), /実尺・連続性・正式な配信開始終了は未確認/);
+            assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Memo recap must not overflow");
+            await card.screenshot({ path: join(output, `${engine}-${width}-night-20261026-live.png`) });
+          }
+
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
           assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Home has horizontal overflow");
