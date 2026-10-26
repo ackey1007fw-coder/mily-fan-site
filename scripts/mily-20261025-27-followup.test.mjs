@@ -38,7 +38,7 @@ for (const [slot, day, live, values, progress] of [
 test('thank-you report retains owner-authorized thanks and exact small real photo',()=>{
   const h=read('data-lab/reports/20261025-night/index.html');
   for(const phrase of ['感謝を形にして届ける準備','コメントと日々の訪問を覚えている','あっきーへのお礼','目標を言葉に','長い夜の締め']) assert.ok(h.includes(phrase));
-  const bytes=readFileSync('public/media/live/mily-20261025-night-face-safe.jpg');
+  const bytes=readFileSync('public/media/live/mily-b239-01-night-thanks-face-safe.jpg');
   assert.equal(bytes.length,3000);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),'d1d7ab9bfaeff6694ae1bf4da681275357b4f787e3ba93c3052b373761ad9cee');
   assert.match(h,/width="130" height="200"/);
