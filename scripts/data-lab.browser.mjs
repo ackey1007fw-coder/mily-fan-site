@@ -98,19 +98,21 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 13, "Thirteen broadcast dates from 10/14 through 10/26");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 14, "Fourteen broadcast dates from 10/14 through 10/27");
             const day26 = page.locator("#daily-2026-10-26");
             assert.equal(await day26.count(), 1, "Oct 26 receives exactly one separate broadcast date");
             if (!(await day26.getAttribute("open") !== null)) await day26.locator("summary").click();
             const day26Card = day26.locator(".daily-stream-card");
             assert.equal(await day26Card.count(), 1, "Partial night memo is a single card");
-            await day26Card.locator('[data-missing="true"]').waitFor({ state: "visible" });
-            assert.equal(await day26Card.locator(".daily-stream-number").innerText(), "未確認", "Unverified counters are not replaced by the memo's viewer numbers");
+            await day26Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
+            assert.equal(await day26Card.locator(".daily-stream-number").innerText(), "2,720", "Third-party screen stars remain separate from memo viewer figures");
             assert.equal(await day26Card.locator("svg.daily-plot").count(), 0, "No graph without measured time-series points");
-            assert.match(await day26Card.locator(".daily-stream-chart").innerText(), /原本を照合できていない/);
+            assert.match(await day26Card.locator(".daily-stream-chart").innerText(), /時刻付き観測が2点未満/);
             const day25 = page.locator("#daily-2026-10-25");
             if (!(await day25.getAttribute("open") !== null)) await day25.locator("summary").click();
-            const day25Card = day25.locator(".daily-stream-card");
+            const day25Cards = day25.locator(".daily-stream-card");
+            assert.equal(await day25Cards.count(), 2, "Night and morning stay separate");
+            const day25Card = day25Cards.last();
             assert.equal(await day25Card.count(), 1, "10/25 morning must remain its own stream");
             await day25Card.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
             assert.equal(await day25Card.locator(".daily-stream-number").innerText(), "3,767", "The nonfinal morning value is explicitly observed");
@@ -370,6 +372,30 @@ try {
           }
 
           if ([320, 1440].includes(width)) {
+            for (const [date, slot, visits, marker] of [
+              ["20261025", "night", "239", "あっきーへのお礼"],
+              ["20261026", "night", "110", "応援する側にプレッシャー"],
+              ["20261027", "morning", "354", "今日も一緒に頑張ろう"],
+            ]) {
+              await page.goto(`${baseUrl}/data-lab/reports/${date}-${slot}/`, { waitUntil: "networkidle" });
+              const supplement = page.locator("#asr-followup");
+              assert.match(await supplement.innerText(), /第三者SHOWROOM Emulator/);
+              assert.match(await supplement.innerText(), /確定終値ではありません/);
+              assert.match(await supplement.innerText(), /映像PTSの同期/);
+              assert.ok((await supplement.innerText()).includes(marker));
+              assert.ok((await supplement.locator("table").innerText()).includes(visits));
+              assert.equal(await supplement.locator("tbody tr").count(), 9);
+              assert.equal(await page.locator("video, audio").count(), 0);
+              if (date === "20261025") {
+                const photo = supplement.locator("img");
+                await photo.scrollIntoViewIfNeeded();
+                await photo.evaluate(image => image.decode());
+                assert.deepEqual(await photo.evaluate(image => [image.naturalWidth, image.naturalHeight]), [130, 200]);
+                assert.ok(await photo.evaluate(image => image.getBoundingClientRect().width <= 130 && image.getBoundingClientRect().height <= 200));
+              }
+              assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+              await supplement.screenshot({ path: join(output, `${engine}-${width}-${date}-${slot}-followup.png`) });
+            }
             await page.goto(`${baseUrl}/data-lab/reports/20261026-night/`, { waitUntil: "networkidle" });
             assert.match(await page.locator("h1").innerText(), /10月26日夜/);
             assert.equal(await page.locator('[data-metric="visits"]').innerText(), "未確認");

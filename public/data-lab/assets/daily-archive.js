@@ -69,7 +69,7 @@ if (host) {
     if (data === undefined) return;
     const points = data ? observationPoints(data, metric, entry.date) : [];
     const last = data ? lastObservedValue(data, metric, entry.date) : null;
-    const numericUnverified = data?.quality?.numericEvidenceStatus === "unverified";
+    const numericUnverified = data?.quality?.numericEvidenceStatus === "unverified" && !data?.referenceSnapshot;
     value.textContent = last === null ? (numericUnverified ? "未確認" : "未取得") : numberFormat.format(last);
     value.dataset.missing = String(last === null);
     chart.replaceChildren();
@@ -82,7 +82,7 @@ if (host) {
       chart.append(element("p", "daily-no-chart", data
         ? (numericUnverified ? "画面カウンターの原本を照合できていないため、推移グラフは表示できません。" : "この指標の時刻付き観測が2点未満のため、推移グラフは表示できません。")
         : "保存済みの匿名集計を読み込めません。各回のレポートを参照してください。"));
-      note.textContent = numericUnverified
+      note.textContent = data?.referenceSnapshot ? data.referenceSnapshot.note + " 最終画面進行（JST）: " + data.referenceSnapshot.lastScreenProgressAtJst + "。推移・時間帯比較には使いません。" : numericUnverified
         ? "原本の有無・観測件数・最終値は未確認です。数値を0として補いません。"
         : "欠測を0として描画しません。既存の各回レポートには別の図表がある場合があります。";
     }
