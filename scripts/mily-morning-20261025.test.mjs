@@ -59,7 +59,7 @@ test("10/25 morning: save nonfinal nine metrics; graph only observed and monoton
       assert.ok(points[i].value >= points[i-1].value);
     }
   }
-  assert.deepEqual(DAILY_STREAM_ENTRIES[0], {
+  assert.deepEqual(DAILY_STREAM_ENTRIES.find((entry) => entry.date === "2026-10-25" && entry.slot === "morning"), {
     date:"2026-10-25",slot:"morning",file:"mily-morning-20261025-aggregate.json",
     section:"morning-20261025",report:"/data-lab/reports/20261025-morning/"
   });

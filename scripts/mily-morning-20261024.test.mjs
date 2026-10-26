@@ -63,7 +63,7 @@ test("2026-10-24 saved nine online counters are nonfinal and keep observed times
     }
   }
   assert.match(recap.transcriptionNote, /8:40:12/);
-  assert.deepEqual(DAILY_STREAM_ENTRIES[2], {
+  assert.deepEqual(DAILY_STREAM_ENTRIES.find((entry) => entry.date === "2026-10-24" && entry.slot === "morning"), {
     date: "2026-10-24", slot: "morning",
     file: "mily-morning-20261024-aggregate.json",
     section: "morning-20261024", report: "/data-lab/reports/20261024-morning/"

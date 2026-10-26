@@ -1,0 +1,104 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": null,
+  "liveId": null,
+  "dateJst": "2026-10-26",
+  "session": "night",
+  "label": "10月26日 夜の雑談・応援相談配信",
+  "eventName": "セミファイナルに向けた応援方法を配信内で相談。対象回の公式イベントpt・最終成績は未照合。",
+  "sourceDescription": "提供された2026年10月26日22:30頃から23:50頃までの途中視聴メモのみ。元映像・数値画面の原本・全文文字起こしは本更新では照合していない。",
+  "verifiedAtJst": "2026-10-27",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "observations": [],
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "partialViewerMemo": {
+    "displayAtStart": 18,
+    "displayNearMemoEnd": 435,
+    "observationEndApproxJst": "2026-10-26T23:50:00+09:00",
+    "source": "途中視聴メモ（数値画面原本・集計定義未照合）",
+    "confirmedFinal": false,
+    "comparableToVisitsMetric": false,
+    "continuousSeriesVerified": false
+  },
+  "measurementNote": "既存ラボの9指標は原記録未照合のためnull。視聴者数18→435は提供途中メモの参考表示で、画面定義・観測間隔・正式な終了時の値が未確認。総訪問表示、イベントpt、きら星数へ読み替えない。",
+  "comparisonNote": "23:50頃までのメモは全編の確認記録ではない。途中表示の始点・終点だけでは時系列曲線・区間増分・速度・時間帯比較を作らない。欠測を0にしない。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": null,
+    "metadataProbed": false,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "この更新では録画データと処理時刻・保存尺は未照合。配信の正式な開始終了と録画有無も確定しない。"
+  },
+  "asr": {
+    "status": "unverified",
+    "selectedTopicsRead": false,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "numericEvidenceStatus": "unverified",
+    "savedNumericObservations": null,
+    "endConfirmed": false,
+    "missingDataIsNotZeroPerformance": true,
+    "observedUntilApproxJst": "2026-10-26T23:50:00+09:00",
+    "finalVerified": false,
+    "coverageComplete": false,
+    "counterSource": "provided_partial_viewing_memo",
+    "note": "18→435は途中の別種の表示であり、既存9指標の数値観測とは分ける。"
+  },
+  "recap": {
+    "basis": "提供された23:50頃までの視聴メモを話題別に再構成。録画・音声・元の文字起こしを今回直接確認していないため非逐語の暫定要約。",
+    "summary": "身近な出来事から始まり、配信の時間帯や応援の仕組みをリスナーと考えた夜。終盤にはセミファイナルへの思いと感謝も伝えました。",
+    "approximateJstTopics": [
+      {
+        "at": "22:30頃",
+        "topic": "朝のメイクにまつわる話から配信がスタート"
+      },
+      {
+        "at": "22:37頃",
+        "topic": "前髪を褒められた日のエピソード"
+      },
+      {
+        "at": "22:47頃",
+        "topic": "大学やアルバイトと配信時間の両立を相談"
+      },
+      {
+        "at": "22:57頃",
+        "topic": "きら星・ミッション・星集めの時間などの応援方法を相談"
+      },
+      {
+        "at": "23:08頃",
+        "topic": "本番に向き合う自分の性格について"
+      },
+      {
+        "at": "23:18頃",
+        "topic": "手紙のファイルを忘れたかもしれないと気づき、翌日の報告の話題に"
+      },
+      {
+        "at": "終盤（記録範囲内）",
+        "topic": "セミファイナルに向けて意見を持ち帰り、感謝を伝える"
+      }
+    ],
+    "fullChorusWithinMemoRangeReported": false,
+    "fullBroadcastSingingVerified": false,
+    "endTimeVerified": false,
+    "publishedStills": 0,
+    "publishedTalkClips": 0,
+    "liveRecapUrl": null
+  },
+  "format": "video"
+}
