@@ -11,7 +11,8 @@ const recap = streamRecaps.find((item) => item.id === "2026-10-25-morning-showro
 
 test("10/25 morning: exact room/live ID and chronological card without unapproved media", () => {
   assert.ok(recap);
-  assert.equal(streamRecaps[0], recap);
+  assert.equal(streamRecaps.filter(item => item.id === recap.id).length, 1);
+  assert.ok(streamRecaps.indexOf(recap) < streamRecaps.findIndex(item => item.date < recap.date));
   assert.equal(recap.dateLabel, "2026.10.25（日）");
   assert.equal(recap.platformLabel, "SHOWROOM");
   assert.match(recap.broadcastLabel, /録画開始5:37頃〜 約63分/);
@@ -70,7 +71,7 @@ test("10/25 morning: link report, preserve prior day, metadata and privacy", () 
   const home = read("data-lab/index.html");
   const vite = read("vite.config.ts");
   const ledger = JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
-  assert.equal(ledger[0].id, recap.id);
+  assert.equal(ledger.find(item => item.id === recap.id)?.source, recap.sourceLabel);
   assert.match(report,/62分53.772秒/);
   assert.match(report,/189処理チャンク/);
   assert.match(report,/3,767/);
@@ -84,6 +85,6 @@ test("10/25 morning: link report, preserve prior day, metadata and privacy", () 
   assert.ok(vite.includes("__DATA_LAB_20261025_MORNING_CANONICAL__"));
   assert.ok(vite.includes('dataLabMorning20261025: "data-lab/reports/20261025-morning/index.html"'));
   assert.doesNotMatch(report + JSON.stringify(data) + JSON.stringify(recap), /drive[.]google[.]com|@gmail[.]com|chatgpt[.]site|C:\\Users|viewer[_-]?id|contributor[_-]?id|live-transcript[.]txt|ui-raw[.]jsonl/i);
-  assert.equal(streamRecaps[1].id,"2026-10-24-noon-showroom");
-  assert.equal(streamRecaps[2].id,"2026-10-24-morning-radio");
+  const priorIds = ["2026-10-24-noon-showroom", "2026-10-24-morning-radio"];
+  assert.deepEqual(streamRecaps.filter(item => priorIds.includes(item.id)).map(item => item.id), priorIds);
 });

@@ -23,8 +23,8 @@ test("10/26 night is the newest single entry without duplicating prior days", ()
 test("separate preliminary viewer memo is not the official nine counter series or confirmed final", () => {
   assert.equal(data.dateJst, "2026-10-26");
   assert.equal(data.session, "night");
-  assert.equal(data.liveId, null);
-  assert.equal(data.roomId, null);
+  assert.equal(data.liveId, 23605926);
+  assert.equal(data.roomId, 573253);
   assert.equal(data.finalServiceValueVerified, false);
   assert.equal(data.completeCoverageConfirmed, false);
   assert.equal(data.quality.endConfirmed, false);
@@ -47,7 +47,13 @@ test("separate preliminary viewer memo is not the official nine counter series o
 });
 
 test("partial coverage and non-verbatim topics prevent false completion claims", () => {
-  assert.equal(data.recording.saved, null);
+  assert.equal(data.recording.saved, true);
+  assert.equal(data.recording.metadataRecordRead, true);
+  assert.equal(data.recording.processingStartedAtJst, "2026-10-26T22:30:24+09:00");
+  assert.equal(data.recording.processingEndedAtJst, "2026-10-26T23:59:35+09:00");
+  assert.equal(data.recording.metadataProbed, false);
+  assert.equal(data.recording.actualFileDecodeVerified, false);
+  assert.equal(data.recording.fullContinuityVerified, false);
   assert.equal(data.asr.status, "unverified");
   assert.equal(data.recap.endTimeVerified, false);
   assert.equal(data.recap.fullBroadcastSingingVerified, false);

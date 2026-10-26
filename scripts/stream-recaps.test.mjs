@@ -72,6 +72,8 @@ function seconds(timestamp) {
 }
 
 function startMinutes(broadcastLabel) {
+  const memo = broadcastLabel.match(/^視聴メモ([01]?\d|2[0-3]):([0-5]\d)頃〜（終了未確認）$/);
+  if (memo) return Number(memo[1]) * 60 + Number(memo[2]);
   // A screen-only record has no verified broadcast start or full duration.
   const observed = broadcastLabel.match(/^画面観測([01]?\d|2[0-3]):([0-5]\d)〜([01]?\d|2[0-3]):([0-5]\d)（配信開始未確認）$/);
   if (observed) return Number(observed[1]) * 60 + Number(observed[2]);
@@ -176,8 +178,20 @@ describe("配信メモの統一ルール", () => {
           `見どころ ${highlights.length}件は多すぎ（上限${MAX.highlights}）`,
         );
 
-        const stamps = highlights.map(({ timestamp }) => seconds(timestamp));
+        const stamps = highlights.map(({ timestamp }) => {
+          if (recap.timestampBasis !== "memo-clock") return seconds(timestamp);
+          if (timestamp === "終盤（メモ範囲内）") return Infinity;
+          const clock = timestamp.match(/^([01]?\d|2[0-3]):([0-5]\d)頃$/);
+          assert.ok(clock, `視聴メモの時計時刻形式: ${timestamp}`);
+          return Number(clock[1]) * 60 + Number(clock[2]);
+        });
         assert.deepEqual(stamps, [...stamps].sort((left, right) => left - right));
+        if (recap.timestampBasis === "memo-clock") {
+          assert.match(recap.sourceLabel, /提供視聴メモ/);
+          assert.match(recap.transcriptionNote, /録画内の経過時刻ではありません/);
+          assert.equal(recap.timeline.length, 0, "録画内の索引を捏造しない");
+          assert.ok(highlights.every(item => !item.clip && !item.socialClip));
+        }
 
         for (const highlight of highlights) {
           atMost(highlight.title, MAX.highlightTitle, `${recap.id} title`);
