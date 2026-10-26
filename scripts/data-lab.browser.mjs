@@ -377,6 +377,7 @@ try {
             await page.getByRole("link", { name: "LIVE STREAMのこの回へ", exact: true }).click();
             const card = page.locator("#recap-2026-10-26-night-showroom");
             await card.waitFor({ state: "visible" });
+            await page.waitForFunction(() => document.getElementById("recap-2026-10-26-night-showroom")?.hasAttribute("open"));
             assert.match(await card.innerText(), /視聴メモ22:30頃〜（終了未確認）/);
             assert.match(await card.innerText(), /録画内の経過時刻ではありません/);
             assert.match(await card.innerText(), /22:47頃/);
