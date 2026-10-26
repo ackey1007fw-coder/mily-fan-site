@@ -45,11 +45,12 @@ test("10/24 noon: distinguish last valid online reference from confirmed offline
       assert.ok(points[i].value>=points[i-1].value);
     }
   }
-  assert.deepEqual(DAILY_STREAM_ENTRIES[1], {
+  assert.deepEqual(DAILY_STREAM_ENTRIES.find((entry) => entry.date === "2026-10-24" && entry.slot === "noon"), {
     date:"2026-10-24",slot:"noon",file:"mily-noon-20261024-aggregate.json",
     section:"noon-20261024",report:"/data-lab/reports/20261024-noon/"
   });
-  assert.equal(DAILY_STREAM_ENTRIES[2].slot,"morning");
+  const noonIndex = DAILY_STREAM_ENTRIES.findIndex((entry) => entry.date === "2026-10-24" && entry.slot === "noon");
+  assert.equal(DAILY_STREAM_ENTRIES[noonIndex + 1].slot, "morning", "Within 10/24, noon still precedes morning");
 });
 
 test("10/24 noon: public lab report and preview entry are anonymous",()=>{

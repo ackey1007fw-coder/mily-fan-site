@@ -98,7 +98,16 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 12, "Twelve broadcast dates from 10/14 through 10/25");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 13, "Thirteen broadcast dates from 10/14 through 10/26");
+            const day26 = page.locator("#daily-2026-10-26");
+            assert.equal(await day26.count(), 1, "Oct 26 receives exactly one separate broadcast date");
+            if (!(await day26.getAttribute("open") !== null)) await day26.locator("summary").click();
+            const day26Card = day26.locator(".daily-stream-card");
+            assert.equal(await day26Card.count(), 1, "Partial night memo is a single card");
+            await day26Card.locator('[data-missing="true"]').waitFor({ state: "visible" });
+            assert.equal(await day26Card.locator(".daily-stream-number").innerText(), "未確認", "Unverified counters are not replaced by the memo's viewer numbers");
+            assert.equal(await day26Card.locator("svg.daily-plot").count(), 0, "No graph without measured time-series points");
+            assert.match(await day26Card.locator(".daily-stream-chart").innerText(), /原本を照合できていない/);
             const day25 = page.locator("#daily-2026-10-25");
             if (!(await day25.getAttribute("open") !== null)) await day25.locator("summary").click();
             const day25Card = day25.locator(".daily-stream-card");
@@ -168,6 +177,16 @@ try {
             await page.locator("#roster").screenshot({ path: join(output, `${engine}-${width}-roster.png`) });
           }
           if (width === 390 || width === 1440) {
+            const memoResponse = await page.goto(`${baseUrl}/data-lab/reports/20261026-night/`, { waitUntil: "networkidle" });
+            assert.equal(memoResponse.status(), 200, "October 26 preliminary report is built and reachable");
+            assert.match(await page.title(), /10月26日夜/);
+            assert.equal(await page.locator('meta[name="robots"]').getAttribute("content"), "noindex,nofollow,noarchive");
+            assert.equal(await page.locator('link[rel="canonical"]').getAttribute("href"), "https://mily-fan-site.vercel.app/data-lab/reports/20261026-night/");
+            assert.match(await page.locator("#coverage").innerText(), /未確認/);
+            assert.equal(await page.locator('[data-metric]').count(), 3);
+            for (const metric of ["stars", "visits", "comments"]) assert.equal(await page.locator(`[data-metric="${metric}"]`).innerText(), "未確認");
+            assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(), 1, "Report keeps analytics injection");
+
             const morningResponse = await page.goto(`${baseUrl}/data-lab/reports/20261022-morning/`, { waitUntil: "networkidle" });
             assert.equal(morningResponse.status(), 200);
             assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(), 1, "New report keeps analytics injection");
