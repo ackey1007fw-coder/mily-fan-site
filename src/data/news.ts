@@ -294,7 +294,7 @@ export const news: NewsItem[] = [
     ctaLabel: "ラジオを聴く（FM公式）",
     additionalCtas: [
       { label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL },
-      { label: "10/25の放送レポート・トーク動画を見る", url: `${site.siteUrl}/activities/radio/#radio-2026-10-25-halloween` },
+      { label: "10/25の放送レポート・切り抜き3本を見る", url: `${site.siteUrl}/activities/radio/#radio-2026-10-25-halloween` },
     ],
   },
   {

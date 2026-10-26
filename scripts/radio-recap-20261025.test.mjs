@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync } from "node:fs";
 import { describe, it } from "node:test";
 import { radioEpisode20261025 as recap } from "../src/data/radioEpisode20261025.ts";
 import { radioEpisodes } from "../src/data/radioEpisodes.ts";
@@ -63,5 +63,9 @@ describe("October 25 radio: recap and talk video publication", () => {
     }
     const titles = recap.talkVideos.map(({ title }) => title).join(" ");
     for (const topic of ["一句", "胸キュン", "ルシファー"]) assert.ok(titles.includes(topic), topic);
+    assert.doesNotMatch(JSON.stringify(recap.talkVideos), /fulltalk|フル版|全体版/);
+    assert.deepEqual(readdirSync("public/media/radio").filter((name) => name.includes("b239")).sort(),
+      recap.talkVideos.map(({ poster }) => poster.src.split("/").at(-1)).sort(),
+      "Public b239 assets contain only the approved excerpt covers");
   });
 });

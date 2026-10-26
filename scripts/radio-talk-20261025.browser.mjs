@@ -44,9 +44,13 @@ try {
       assert.match(await article.innerText(), /2:15:00は12:15頃/);
       assert.match(await article.innerText(), /空回り\s+余裕も大事\s+前を向け/);
       assert.match(await article.innerText(), /音声の書き起こし/);
-      assert.ok(recap.talkVideos.length >= 4, "All requested videos are ready");
+      assert.deepEqual(recap.talkVideos.map(({ id }) => id), [
+        "radio-20261025-haiku", "radio-20261025-kyun", "radio-20261025-actor",
+      ], "Only the three approved excerpts are published");
       const cards = article.locator("[data-radio-talk-video]");
-      assert.equal(await cards.count(), recap.talkVideos.length);
+      assert.equal(await cards.count(), 3);
+      assert.deepEqual(await cards.evaluateAll((elements) => elements.map(({ id }) => id)), recap.talkVideos.map(({ id }) => id));
+      assert.doesNotMatch(await article.innerText(), /フル版|フル編集|全編を(?:見る|聴く)|トーク全体版/);
       assert.equal(await article.locator("iframe").count(), 0, "No iframe before viewer action");
       assert.equal(youtubeRequests.length, 0, "No YouTube request before viewer action");
       for (const video of recap.talkVideos) {
@@ -78,6 +82,12 @@ try {
       assert.equal(await page.evaluate(() => document.activeElement?.tagName), "IFRAME", "Keyboard activation moves focus to the player");
       assert.equal(await article.locator("iframe").count(), 1, "Only the requested video loads");
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "No horizontal overflow");
+      await page.goto(`${origin}/news/`, { waitUntil: "networkidle" });
+      const newsLink = page.getByRole("link", { name: /^10\/25の放送レポート・切り抜き3本を見る/ });
+      assert.equal(await newsLink.count(), 1, "Related NEWS retains the excerpt-only route");
+      assert.equal(new URL(await newsLink.getAttribute("href")).pathname, "/activities/radio/");
+      assert.equal(new URL(await newsLink.getAttribute("href")).hash, `#radio-${recap.id}`);
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "No NEWS horizontal overflow");
       assert.deepEqual(errors, []);
       results.push({ engine, width, videos: recap.talkVideos.length, status: "passed", verification: "Local layout and iframe integration; external playback is checked separately" });
     } finally {

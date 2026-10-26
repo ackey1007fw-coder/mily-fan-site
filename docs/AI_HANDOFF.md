@@ -1,6 +1,6 @@
 # AI_HANDOFF — mily-fan-site
 
-> 最終更新: 2026-10-25（RADIOの任意トーク動画表示と放送回への直接リンクを追記）
+> 最終更新: 2026-10-26（10/25 RADIOの公開範囲を切り抜き3本と放送レポートへ統一）
 > 読む順番: `AGENTS.md` → `README.md` → **このファイル** → `docs/DECISION_LOG.md` → `docs/AI_PROJECT_MEMORY_SKILL.md` → 対象コード・テスト
 
 このファイルは「いまの状態」のセーブデータです。ルール本体は `AGENTS.md`。ここはルールを追加・緩和しません。
@@ -35,7 +35,7 @@
 | `/activities/miss-circle/`・`/activities/campus-girls/` | コンテスト活動の記録 | `contest.ts` `activities.ts` |
 | `/data-lab/` | **MILY SIGNAL**：匿名・集計のみの配信データ分析（noindex） | `data-lab/` HTML + `public/data-lab/data/*.json`（`docs/DATA-LAB.md`） |
 
-RADIOは掲載を依頼された回だけ、`RadioEpisode.talkVideos` と共通の `RadioTalkVideos` で限定公開YouTubeのトーク映像を表示できる。自己ホストの表紙を先に表示し、操作後にプレイヤーを読み込む。実際の放送音声と告知画像による編集動画を、放送中のスタジオ映像と混同しない。回への直接リンクは `/activities/radio/#radio-{episode.id}`。楽曲一覧・既存の過去記事は別のまま保持する。
+RADIOは掲載を依頼された回だけ、`RadioEpisode.talkVideos` と共通の `RadioTalkVideos` で承認済みの切り抜きを表示できる。10/25回は「今日の一句」「胸キュン選手権」「演技」の3本と放送レポートを公開対象とし、フルのトーク編集版のリンク・埋め込み・QR・誘導・表紙は公開サイトやSNSへ掲載しない。旧版や履歴から復元しない。原音・完成ファイルは私的保存を維持する。自己ホストの表紙を先に表示し、操作後にプレイヤーを読み込む。実際の放送音声と告知画像による編集動画を、放送中のスタジオ映像と混同しない。回への直接リンクは `/activities/radio/#radio-{episode.id}`。楽曲一覧・既存の過去記事は保持する。X・noteの公開記事、YouTubeの公開設定・概要欄・固定コメントの修正完了は、実画面を確認するまで未確認とする。既存SNS担当の作業を重複実施しない。
 
 API（Vercel Functions, ESM）:
 - `/api/mily-schedule` … ENTRY 734 起点で SHOWROOM room を**自動解決**して配信予定を返す。room ID を直書きしない。

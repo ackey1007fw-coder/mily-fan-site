@@ -66,9 +66,9 @@ export function RadioTalkVideos({ videos, episodeId }: { videos: readonly RadioE
   return (
     <section aria-labelledby={`${episodeId}-talk-videos`} className="mt-9">
       <p className="text-xs font-semibold uppercase tracking-[0.18em] text-sage-deep">Talk Archive</p>
-      <h3 id={`${episodeId}-talk-videos`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">声で振り返る、今日の放送</h3>
+      <h3 id={`${episodeId}-talk-videos`} className="mt-2 text-xl font-bold text-ink sm:text-2xl">声で振り返る、放送の切り抜き</h3>
       <p className="mt-3 text-sm leading-7 text-ink-muted">
-        放送のトーク音声に、当日の番組案内画像・映像を合わせた非公式ファン編集です。放送中のスタジオ映像ではありません。
+        放送の一部を切り抜いたトーク音声に、当日の番組案内画像・映像を合わせた非公式ファン編集です。放送中のスタジオ映像ではありません。
       </p>
       <p className="mt-2 text-xs leading-6 text-ink-muted">
         楽曲のオンエア部分はカットしています。見たい動画を選ぶとプレイヤーが表示されます。再生できない場合は、YouTubeのリンクからお楽しみください。
