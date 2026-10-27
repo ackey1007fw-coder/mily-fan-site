@@ -1,0 +1,21 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {streamRecaps} from '../src/data/streamRecaps.ts';
+import {DAILY_STREAM_ENTRIES,observationPoints,lastObservedValue} from '../public/data-lab/assets/daily-archive-core.js';
+test('October 27 night keeps memo, third-party screen and recording evidence separate',()=>{
+ const r=streamRecaps[0];assert.equal(r.id,'2026-10-27-night-showroom');assert.equal(r.timestampBasis,'memo-clock');
+ assert.match(r.transcriptionNote,/原音聴取は0秒/);assert.match(r.transcriptionNote,/録画内の経過時刻ではありません/);
+ const d=JSON.parse(readFileSync('public/data-lab/data/mily-night-20261027-aggregate.json'));
+ assert.equal(d.liveId,23610474);assert.deepEqual(Object.values(d.referenceSnapshot.metrics),[2,0,121,621,0,2350,50,23,20]);
+ assert.equal(d.referenceSnapshot.savedObservedAtJst,'2026-10-27T23:54:09.974+09:00');
+ assert.equal(d.referenceSnapshot.lastScreenProgressAtJst,'2026-10-27T23:52:00.809+09:00');
+ assert.equal(d.referenceSnapshot.verified_final,false);assert.equal(d.referenceSnapshot.official,false);assert.equal(d.timingComparisonEligible,false);
+ assert.equal(d.partialViewerMemo.displayNearMemoEnd,398);assert.equal(d.partialViewerMemo.comparableToVisitsMetric,false);
+ assert.equal(d.recording.durationSeconds,4786.348);assert.equal(d.contentEvidence.manualAudioListeningSeconds,0);assert.equal(d.contentEvidence.newAsrStarted,false);
+ assert.deepEqual(observationPoints(d,'visits',d.dateJst),[]);assert.equal(lastObservedValue(d,'visits',d.dateJst),121);
+ assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.file==='mily-night-20261027-aggregate.json').length,1);
+ assert.equal(createHash('sha256').update(readFileSync('public'+r.image.src)).digest('hex'),'5cb048f2a71925819b6334eef0514f78aae47b8172cf2617ea8d107d371956c7');
+ assert.deepEqual([r.image.width,r.image.height],[180,305]);assert.equal(r.songs,undefined);
+});

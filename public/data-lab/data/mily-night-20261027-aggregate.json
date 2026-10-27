@@ -1,0 +1,115 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23610474,
+  "dateJst": "2026-10-27",
+  "session": "night",
+  "label": "10月27日夜 手紙に込めたありがとう",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "metrics": {
+    "firstVisits": null,
+    "repeatVisits": null,
+    "visits": null,
+    "comments": null,
+    "newFollows": null,
+    "stars": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "observations": [],
+  "timingComparisonEligible": false,
+  "quality": {
+    "finalVerified": false,
+    "coverageComplete": false,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "referenceSnapshot": {
+    "source": "第三者SHOWROOM Emulatorの保存済み最終有効オンライン画面記録を担当者が照合",
+    "verified_final": false,
+    "savedObservedAtJst": "2026-10-27T23:54:09.974+09:00",
+    "lastScreenProgressAtJst": "2026-10-27T23:52:00.809+09:00",
+    "offlineReceiptAtJst": null,
+    "metrics": {
+      "firstVisits": 2,
+      "repeatVisits": 0,
+      "visits": 121,
+      "comments": 621,
+      "newFollows": 0,
+      "stars": 2350,
+      "otherFree": 50,
+      "star100People": 23,
+      "recommendedCommentPeople": 20
+    },
+    "fieldLabels": {
+      "firstVisits": {
+        "rawField": "visitarea",
+        "label": "初訪問"
+      },
+      "repeatVisits": {
+        "rawField": "visit2area",
+        "label": "2度訪問"
+      },
+      "visits": {
+        "rawField": "visittotalarea",
+        "label": "総訪問"
+      },
+      "comments": {
+        "rawField": "commentarea",
+        "label": "投稿数"
+      },
+      "newFollows": {
+        "rawField": "followarea",
+        "label": "新規follow"
+      },
+      "stars": {
+        "rawField": "twinklearea",
+        "label": "星個数"
+      },
+      "otherFree": {
+        "rawField": "othergiftarea",
+        "label": "その他free"
+      },
+      "star100People": {
+        "rawField": "twinkletotalarea",
+        "label": "星100貢献人数"
+      },
+      "recommendedCommentPeople": {
+        "rawField": "recommendarea",
+        "label": "おすすめcomment人数"
+      }
+    },
+    "note": "第三者SHOWROOM Emulatorの最終有効画面参考値です。公式総訪問・同時視聴者・実人数・確定贈呈量・公式pt・確定終値ではありません。「総訪問」の算出方法も未確認です。保存観測時刻は画面内容の進行時刻や真の配信終端ではありません。offlineの0は終値へ採用していません。",
+    "endLastUsableRecordAtJst": "2026-10-27T23:53:28.261+09:00",
+    "official": false
+  },
+  "partialViewerMemo": {
+    "displayAtStart": 21,
+    "displayNearMemoEnd": 398,
+    "confirmedFinal": false,
+    "comparableToVisitsMetric": false,
+    "note": "22:33頃21→23:50頃398は定義・時刻未照合の途中メモ。総訪問121と置換・合算・比較しない。"
+  },
+  "recording": {
+    "saved": true,
+    "exitCode": 0,
+    "processingStartedAtJst": "2026-10-27T22:32:02+09:00",
+    "processingEndedAtJst": "2026-10-27T23:52:39+09:00",
+    "bytes": 592990885,
+    "durationSeconds": 4786.348,
+    "codec": "H264/AAC",
+    "fullContinuityVerified": false,
+    "audioSyncVerified": false,
+    "officialStartVerified": false,
+    "uiStartDisplayJst": "2026-10-27T22:31:58+09:00"
+  },
+  "contentEvidence": {
+    "basis": "本人提供の途中視聴メモ",
+    "manualAudioListeningSeconds": 0,
+    "asrRead": false,
+    "newAsrStarted": false
+  }
+}
