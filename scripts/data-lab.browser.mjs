@@ -379,6 +379,7 @@ try {
             ]) {
               await page.goto(`${baseUrl}/data-lab/reports/${date}-${slot}/`, { waitUntil: "networkidle" });
               const supplement = page.locator("#asr-followup");
+              assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(), 1);
               assert.match(await supplement.innerText(), /第三者SHOWROOM Emulator/);
               assert.match(await supplement.innerText(), /確定終値ではありません/);
               assert.match(await supplement.innerText(), /映像PTSの同期/);

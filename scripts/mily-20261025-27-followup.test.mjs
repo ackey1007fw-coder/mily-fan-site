@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { injectVercelWebAnalytics } from '../src/lib/vercelWebAnalytics.ts';
 import { lastObservedValue, observationPoints, DAILY_STREAM_ENTRIES } from '../public/data-lab/assets/daily-archive-core.js';
 const read = p => readFileSync(p, 'utf8');
 for (const [slot, day, live, values, progress] of [
@@ -33,6 +34,7 @@ for (const [slot, day, live, values, progress] of [
   assert.match(html,/原音の手動聴取・逐語校正/);
   assert.match(html,/映像PTSの同期/);
   assert.match(html,/noindex,nofollow,noarchive/);
+  assert.equal((injectVercelWebAnalytics(html).match(/src="\/mily-analytics-loader.js"/g) ?? []).length, 1);
   assert.doesNotMatch(html+JSON.stringify(d),/drive\.google|\.jsonl|C:\\Users|<video|<audio/);
 });
 test('thank-you report retains owner-authorized thanks and exact small real photo',()=>{
