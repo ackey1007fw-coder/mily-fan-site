@@ -372,6 +372,16 @@ try {
           }
 
           if ([320, 1440].includes(width)) {
+            await page.goto(`${baseUrl}/data-lab/reports/20261027-night/`, {waitUntil:"networkidle"});
+            assert.match(await page.locator("main").innerText(), /原音聴取0秒/);
+            assert.equal(await page.locator("tbody tr").count(),9);
+            assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(),1);
+            const nightPhoto=page.locator("main img");await nightPhoto.scrollIntoViewIfNeeded();
+            await page.waitForFunction(i=>i.complete&&i.naturalWidth>0,await nightPhoto.elementHandle());
+            await nightPhoto.evaluate(i=>i.decode());
+            assert.deepEqual(await nightPhoto.evaluate(i=>[i.naturalWidth,i.naturalHeight,i.width,i.height]),[180,305,180,305]);
+            assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+            await page.screenshot({path:join(output,`${engine}-${width}-night-20261027.png`),fullPage:true});
             for (const [date, slot, visits, marker] of [
               ["20261025", "night", "239", "あっきーへのお礼"],
               ["20261026", "night", "110", "応援する側にプレッシャー"],

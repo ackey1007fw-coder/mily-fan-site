@@ -27,6 +27,7 @@ try {for(const [engine,launcher] of [['chromium',chromium],['webkit',webkit]]){
    try{if((await stat(file)).isDirectory())file=join(file,'index.html');return route.fulfill({status:200,contentType:mime[extname(file)]||'application/octet-stream',body:await readFile(file)});}catch{return route.fulfill({status:404,body:'Missing'});}
   });
   await page.goto('https://site.test/data-lab/glitter/',{waitUntil:'networkidle'});
+  await page.waitForFunction(() => document.querySelector('#weekly-points')?.textContent === '7,089' && !document.querySelector('#refresh')?.disabled);
   assert.equal(await page.locator('#remaining').innerText(),'32,911');
   assert.equal(await page.locator('#weekly-points').innerText(),'7,089');
   assert.equal(await page.locator('#weekly-rank').innerText(),'18');
