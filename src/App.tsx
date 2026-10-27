@@ -1,6 +1,7 @@
 import { ActivitiesGateway } from "./components/ActivitiesGateway";
 import { DataLabGateway } from "./components/DataLabGateway";
 import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
+import { CampusGirlsExThreeGuide } from "./components/CampusGirlsExThreeGuide";
 import { ActivityBanner } from "./components/ActivityBanner";
 import { ChallengeConnection } from "./components/ChallengeConnection";
 import { Footer } from "./components/Footer";
@@ -36,6 +37,7 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
+        <CampusGirlsExThreeGuide />
         <PatonExTwoGuide />
         <PatonVoteGuide />
         <TodayDashboard />
