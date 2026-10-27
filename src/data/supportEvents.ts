@@ -337,7 +337,7 @@ export const campusGirlsFinalsExThree: SupportEvent = {
   activityId: "campus-girls",
   kind: "support-campaign",
   title: "CAMPUS GIRLS 2027 本選EX vol.3",
-  note: "配信・ムービーは10/19 12:00〜11/1 23:59、XのSNS審査は10/19 12:00〜10/30 12:00。Paton投票は10/21・10/27・11/2の各日0:00〜23:59。Paton最終回は配信終了後です。公式の最新案内を確認してください。",
+  note: "配信・ムービーは10/19 12:00〜11/1 23:59、XのSNS審査は10/19 12:00〜10/30 12:00。Paton投票は10/21・10/27・11/2の各日0:00〜23:59。Paton最終回は配信終了後です。最新案内を確認してください。",
   schedule: {
     state: "confirmed-period",
     start: "2026-10-19T12:00:00+09:00",
