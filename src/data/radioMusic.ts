@@ -21,6 +21,98 @@ export type RadioMusicEpisode = {
 /** Confirmed on-air songs from FM湘南マジックウェイブ「湘南シーサイドサークル」. */
 export const radioMusicEpisodes: RadioMusicEpisode[] = [
   {
+    "id": "2026-10-25-halloween",
+    "date": "2026-10-25",
+    "dateLabel": "2026.10.25（日）",
+    "theme": "ハロウィン",
+    "broadcastLabel": "10:00〜13:00 放送（保存音声による曲目照合）",
+    "songs": [
+      {
+        "timestamp": "0:07:04",
+        "title": "唱",
+        "artist": "Ado",
+        "youtubeUrl": "https://www.youtube.com/watch?v=pgXpM4l_MwI"
+      },
+      {
+        "timestamp": "0:13:48",
+        "title": "Call me Cruella",
+        "artist": "Florence + The Machine",
+        "youtubeUrl": "https://www.youtube.com/watch?v=1i738h6F0hg"
+      },
+      {
+        "timestamp": "0:24:52",
+        "title": "Brand New",
+        "artist": "Mrs. GREEN APPLE",
+        "youtubeUrl": "https://www.youtube.com/watch?v=dePs7UPp6GQ"
+      },
+      {
+        "timestamp": "0:37:28",
+        "title": "This Is Halloween",
+        "artist": "The Citizens of Halloween",
+        "youtubeUrl": "https://www.youtube.com/watch?v=ZVuToMilP0A",
+        "youtubeVersionNote": "放送内紹介はDanny Elfman。リンク先の公式映像の歌唱表記はThe Citizens of Halloweenです。"
+      },
+      {
+        "timestamp": "0:55:43",
+        "title": "悪魔の子",
+        "artist": "ヒグチアイ",
+        "youtubeUrl": "https://www.youtube.com/watch?v=N4F3bjlL_H4"
+      },
+      {
+        "timestamp": "1:09:25",
+        "title": "Monster",
+        "artist": "嵐",
+        "youtubeUrl": "https://www.youtube.com/watch?v=JedKBJVHhiE"
+      },
+      {
+        "timestamp": "1:22:18",
+        "title": "ヴァンパイア",
+        "artist": "DECO*27 feat. 初音ミク",
+        "youtubeUrl": "https://www.youtube.com/watch?v=e1xCOsgWG0M"
+      },
+      {
+        "timestamp": "1:33:58",
+        "title": "君の知らない世界へ",
+        "artist": "M!LK",
+        "youtubeUrl": "https://www.youtube.com/watch?v=987XgTpMPg4"
+      },
+      {
+        "timestamp": "1:55:04",
+        "title": "Happy Halloween",
+        "artist": "Junky",
+        "youtubeUrl": "https://www.youtube.com/watch?v=1DcgczDzQPk",
+        "youtubeVersionNote": "作者Junkyの公式動画は鏡音リン歌唱です。放送版との一致は未確認です。"
+      },
+      {
+        "timestamp": "2:10:05",
+        "title": "百鬼夜行",
+        "artist": "米津玄師",
+        "youtubeUrl": "https://www.youtube.com/watch?v=X-7cG-SVGA0"
+      },
+      {
+        "timestamp": "2:21:26",
+        "title": "炎と森のカーニバル",
+        "artist": "SEKAI NO OWARI",
+        "youtubeUrl": "https://www.youtube.com/watch?v=w9V3x61D994"
+      },
+      {
+        "timestamp": "2:31:58",
+        "title": "Crazy Party Night ～ぱんぷきんの逆襲～",
+        "artist": "きゃりーぱみゅぱみゅ",
+        "youtubeUrl": "https://www.youtube.com/watch?v=2bJ49dOSP9o"
+      },
+      {
+        "timestamp": "2:49:44",
+        "title": "Thriller",
+        "artist": "Michael Jackson",
+        "youtubeUrl": "https://www.youtube.com/watch?v=sOnqjkJTMaA"
+      }
+    ],
+    "sourceLabel": "2026/10/25の保存音声（曲紹介・音声指紋照合）／アーティスト・権利元の公式YouTube動画",
+    "verifiedAt": "2026-10-25",
+    "note": "放送内の曲紹介と保存音声の音声指紋照合をもとに確認できた13曲です。時刻は10:00からの曲紹介の目安で、曲頭と一致しない場合があります。各リンクはアーティスト・権利元の公式公開音源で、放送で使われた版・尺と異なる場合があります。"
+  },
+  {
     "id": "2026-10-11-taikai",
     "date": "2026-10-11",
     "dateLabel": "2026.10.11（日）",

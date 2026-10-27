@@ -10,8 +10,8 @@ import { radioOct11Stories } from "../src/data/radioOct11Stories.ts";
 const toSeconds = (stamp) => stamp.split(":").reduce((n, part) => n * 60 + Number(part), 0);
 
 describe("October 11 radio: tournament full-broadcast recap", () => {
-  it("adds the October 11 broadcast first while retaining all previous reports", () => {
-    assert.equal(radioEpisodes[0], recap);
+  it("retains the October 11 broadcast in date order with all previous reports", () => {
+    assert.equal(radioEpisodes.filter(({ date }) => date <= recap.date)[0], recap);
     assert.ok(radioEpisodes.some(({ id }) => id === "2026-10-04-anniversary"));
     assert.ok(radioEpisodes.some(({ id }) => id === "2026-09-27-kawaii"));
     assert.deepEqual(radioEpisodes.map(({ date }) => date), radioEpisodes.map(({ date }) => date).toSorted().reverse());
@@ -54,7 +54,7 @@ describe("October 11 radio: tournament full-broadcast recap", () => {
     const music = radioMusicEpisodes.find(({ id }) => id === recap.id);
     assert.ok(music);
     assert.ok(music.songs.length >= 10);
-    assert.equal(radioMusicEpisodes[0].id, "2026-10-11-taikai");
+    assert.equal(radioMusicEpisodes.filter(({ date }) => date <= recap.date)[0].id, "2026-10-11-taikai");
     assert.equal(music.songs[0].title, "好きすぎて滅！");
     const page = readFileSync("src/ActivitiesPage.tsx", "utf8");
     assert.match(page, /musicEpisode = radioMusicEpisodes\.find/);
