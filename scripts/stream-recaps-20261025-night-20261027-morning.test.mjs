@@ -21,7 +21,10 @@ for (const item of expected) {
       assert.ok(hour * 3600 + minute * 60 + second < item.duration);
       assert.ok(!h.quote && !h.clip && !h.socialClip);
     }
-    assert.equal(recap.image, undefined);
+    if (item.id === "2026-10-25-night-showroom") {
+      assert.equal(recap.image.src, "/media/live/mily-b239-01-night-thanks-face-safe.jpg");
+      assert.equal(recap.image.width, 130); assert.equal(recap.image.height, 200);
+    } else assert.equal(recap.image, undefined);
     assert.equal(recap.gallery, undefined);
     assert.equal(recap.songs, undefined);
     assert.deepEqual(recap.ranking, []);

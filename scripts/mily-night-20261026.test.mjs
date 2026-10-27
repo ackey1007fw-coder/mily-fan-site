@@ -15,7 +15,7 @@ test("10/26 night is the newest single entry without duplicating prior days", ()
   assert.equal(entries[0].slot, "night");
   assert.equal(entries[0].file, "mily-night-20261026-aggregate.json");
   assert.equal(entries[0].report, "/data-lab/reports/20261026-night/");
-  assert.equal(groupByBroadcastDate()[0].date, "2026-10-26");
+  assert.equal(groupByBroadcastDate()[0].date, "2026-10-27");
   assert.ok(DAILY_STREAM_ENTRIES.some((e) => e.date === "2026-10-25"));
   assert.ok(DAILY_STREAM_ENTRIES.some((e) => e.date === "2026-10-22"));
 });
@@ -41,7 +41,8 @@ test("separate preliminary viewer memo is not the official nine counter series o
   assert.ok(Object.values(data.metrics).every((value) => value === null));
   assert.equal(data.timingComparisonEligible, false);
   for (const metric of ["stars", "visits", "comments"]) {
-    assert.equal(lastObservedValue(data, metric, data.dateJst), null);
+    assert.equal(lastObservedValue(data, metric, data.dateJst), data.referenceSnapshot.metrics[metric]);
+    assert.equal(data.referenceSnapshot.verified_final, false);
     assert.deepEqual(observationPoints(data, metric, data.dateJst), []);
   }
 });
