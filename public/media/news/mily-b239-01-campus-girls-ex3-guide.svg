@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="916" height="1320" viewBox="0 0 916 1320" role="img" aria-labelledby="title desc">
+<title id="title">CAMPUS GIRLS 2027 本選EX vol.3 審査スケジュール</title>
+<desc id="desc">配信審査10月19日から11月1日、SNS審査10月19日から10月30日、Paton投票10月21日・27日・11月2日。</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4eeff"/><stop offset=".48" stop-color="#fcf3fd"/><stop offset="1" stop-color="#eaf5ff"/></linearGradient>
+<linearGradient id="hd" x1="0" y1="0" x2="1"><stop stop-color="#7457d7"/><stop offset=".5" stop-color="#c43d9a"/><stop offset="1" stop-color="#689de3"/></linearGradient>
+<filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="15" flood-color="#9782b0" flood-opacity=".16"/></filter>
+</defs>
+<rect width="916" height="1320" fill="url(#bg)"/>
+<g fill="none" stroke="#d4b8eb" stroke-width="3" opacity=".65"><circle cx="60" cy="80" r="55"/><circle cx="860" cy="125" r="72"/><circle cx="872" cy="1240" r="80"/><circle cx="68" cy="1178" r="69"/></g>
+<g fill="#b89cdc" opacity=".6"><path d="M83 243l9 22 22 9-22 9-9 22-9-22-22-9 22-9z"/><path d="M817 40l8 17 17 8-17 8-8 17-8-17-17-8 17-8z"/><path d="M831 1101l7 17 17 7-17 7-7 17-7-17-17-7 17-7z"/></g>
+<text x="458" y="108" text-anchor="middle" font-size="30" font-family="sans-serif" font-weight="700" fill="#626091" letter-spacing="4">CAMPUS GIRLS 2027</text>
+<text x="458" y="191" text-anchor="middle" font-size="67" font-family="sans-serif" font-weight="800" fill="url(#hd)">本選 EX vol.3</text>
+<text x="458" y="242" text-anchor="middle" font-size="23" font-family="sans-serif" fill="#6e658f">Aブロック・男女合同</text>
+<g font-family="sans-serif" filter="url(#shadow)">
+<rect x="60" y="285" width="796" height="220" rx="28" fill="#ffffff"/>
+<rect x="60" y="285" width="796" height="65" rx="28" fill="#e973b0"/>
+<rect x="60" y="325" width="796" height="25" fill="#e973b0"/>
+<text x="93" y="331" font-size="32" font-weight="700" fill="#ffffff">① 配信・ムービー審査</text>
+<text x="91" y="396" font-size="29" font-weight="700" fill="#603e6a">10/19(月) 12:00 ～ 11/1(日) 23:59</text>
+<text x="91" y="443" font-size="24" fill="#574a75">ミクチャでの配信＋ムービーによる審査</text>
+<text x="91" y="482" font-size="21" fill="#80728b">※配信ptの10%は次回EX vol.4へ持ち越し</text>
+<rect x="60" y="540" width="796" height="222" rx="28" fill="#ffffff"/>
+<rect x="60" y="540" width="796" height="65" rx="28" fill="#6299de"/>
+<rect x="60" y="580" width="796" height="25" fill="#6299de"/>
+<text x="93" y="587" font-size="32" font-weight="700" fill="#ffffff">② SNS審査（X）</text>
+<text x="91" y="654" font-size="29" font-weight="700" fill="#3f5779">10/19(月) 12:00 ～ 10/30(金) 12:00</text>
+<text x="91" y="700" font-size="23" fill="#574a75">テーマ「応援してくれるファンに向けて」</text>
+<text x="91" y="737" font-size="21" fill="#80728b">#CAMPUSGIRLS2027  #キャンガル</text>
+<rect x="60" y="797" width="796" height="300" rx="28" fill="#ffffff"/>
+<rect x="60" y="797" width="796" height="65" rx="28" fill="#cf70ac"/>
+<rect x="60" y="837" width="796" height="25" fill="#cf70ac"/>
+<text x="93" y="845" font-size="32" font-weight="700" fill="#ffffff">③ Paton 投票審査</text>
+<text x="91" y="911" font-size="27" font-weight="700" fill="#633b69">第1回　10/21(水) 0:00～23:59</text>
+<text x="91" y="961" font-size="27" font-weight="700" fill="#a82679">第2回　10/27(火) 0:00～23:59</text>
+<text x="91" y="1011" font-size="27" font-weight="700" fill="#633b69">第3回　11/2(月) 0:00～23:59</text>
+<text x="91" y="1064" font-size="22" fill="#80728b">獲得ポイント＋順位・達成状況に応じた加点</text>
+</g>
+<rect x="105" y="1142" width="706" height="82" rx="32" fill="#ffffff" stroke="#d8bfe8" stroke-width="3"/>
+<text x="458" y="1192" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="700" fill="#9a427f">みりぃ（三橋莉子）を応援しよう 🍅✨</text>
+<text x="458" y="1266" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#817a99">非公式ファンサイトによる要点整理／詳細は公式案内を確認</text>
+</svg>
