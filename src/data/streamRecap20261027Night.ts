@@ -3,11 +3,11 @@ import { buildTranscriptionNote } from "./streamRecapRules.ts";
 export const streamRecap20261027Night: StreamRecap = {
  id:"2026-10-27-night-showroom",date:"2026-10-27",dateLabel:"2026.10.27（火）",theme:"夜の手紙とありがとう",
  broadcastLabel:"視聴メモ22:31頃〜（終了未確認）",timestampBasis:"memo-clock",platformLabel:"SHOWROOM",
- summary:"手紙を通じて応援への感謝を届けた夜。あっきーへのお礼やセミファイナルに向けた話があり、23:50過ぎまで延長していたという視聴メモを整理しました。",
+ summary:"手紙を通じて応援への感謝を届けた夜。日頃の応援へのお礼やセミファイナルに向けた話があり、23:50過ぎまで延長していたという視聴メモを整理しました。",
  image:{src:"/media/live/mily-b240-01-night-letter-face-safe.jpg",width:180,height:305,alt:"10月27日夜の配信のみりぃ",caption:"同回の実写真を顔中心に通常クロップ。180×305px原寸。手紙本文や他の人の表示名は含めていません。"},
  highlights:[
  {timestamp:"22:31頃",title:"手紙で届ける感謝",body:"手紙を通じて、日頃の応援への感謝を届ける時間が続きました。正式な開始時刻を確認した記録ではありません。"},
- {timestamp:"23:25頃",title:"あっきーへのありがとう",body:"あっきーへのお礼と、変わらずの応援への感謝、セミファイナルに向けた話があったというメモです。手紙全文や個別順位は掲載しません。"},
+ {timestamp:"23:25頃",title:"日頃の応援へのお礼",body:"日頃の応援へのお礼と、変わらずの応援への感謝、セミファイナルに向けた話があったというメモです。手紙全文や個別順位は掲載しません。"},
  {timestamp:"23:50頃",title:"延長した夜のお手紙タイム",body:"23:50を過ぎても配信が続いていたとの視聴メモがあります。終盤には手紙を扇状に広げる場面がありました。正式な終了時刻は未確認です。",relatedLinks:[{label:"確認範囲と第三者画面参考値",url:"/data-lab/reports/20261027-night/"}]}
  ],goals:[],ranking:[],timeline:[],nextNote:"",
  sourceLabel:"2026年10月27日 夜のSHOWROOM配信（本人提供視聴メモ・保存ファイル計測の担当報告）",

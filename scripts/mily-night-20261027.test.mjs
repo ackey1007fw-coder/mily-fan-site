@@ -18,4 +18,7 @@ test('October 27 night keeps memo, third-party screen and recording evidence sep
  assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.file==='mily-night-20261027-aggregate.json').length,1);
  assert.equal(createHash('sha256').update(readFileSync('public'+r.image.src)).digest('hex'),'5cb048f2a71925819b6334eef0514f78aae47b8172cf2617ea8d107d371956c7');
  assert.deepEqual([r.image.width,r.image.height],[180,305]);assert.equal(r.songs,undefined);
+ const html=readFileSync('data-lab/reports/20261027-night/index.html','utf8');
+ assert.doesNotMatch(JSON.stringify(r)+html,/あっきー|アッキー/);
+ assert.match(html,/23:25〜23:30頃/);
 });
