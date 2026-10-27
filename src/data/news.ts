@@ -280,33 +280,6 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
-    id: "2026-10-27-campus-girls-finals-ex3-guide",
-    date: "2026-10-27",
-    dateBasis: "confirmed-on",
-    activityIds: ["campus-girls"],
-    title: "CAMPUS GIRLS 2027 本選EX vol.3の審査案内💐 10/27はPaton投票日",
-    body: "みりぃ（三橋莉子）が参加している「CAMPUS BOYS/GIRLS 2027 本選EX vol.3」の案内をまとめました。大会資料と公式ページを10月27日に確認した内容です。\n\n①ミクチャの配信・ムービー審査は10月19日（月）12:00〜11月1日（日）23:59。②XでのSNS審査は10月19日（月）12:00〜10月30日（金）12:00。投稿テーマは「応援してくれるファンに向けて」、指定ハッシュタグは #CAMPUSGIRLS2027 と #キャンガル です。\n\n③Paton投票審査は10月21日（水）・10月27日（火）・11月2日（月）の各日0:00〜23:59。今日は2回目の投票日です。Paton公式ページにみりぃ本人のエントリーを確認できました。10月27日のページでは、1日1回の無料アイテム「拍手」も案内されています。投票・アイテムの利用条件はPatonの画面で確認してください。\n\n掲載画像は提供された主催者の詳細画像を基に、文字を見やすく整理した非公式の要約図です。元画像そのものの再掲載ではありません。配信審査とPatonの3回目は終了日が異なるため、締切を混同しないようご注意ください。順位・ptの変動値は記事に固定していません。",
-    source: "https://mixch.tv/live/event/24861",
-    sourceLabel: "ミクチャ公式・本選EX vol.3イベント",
-    additionalSources: [
-      { label: "Paton公式・10/27の第2回投票", url: "https://paton.jp/event/detail/596" },
-      { label: "CAMPUS GIRLS 2027 公式サイト", url: "https://www.campusboys.jp/campusgirls2027" },
-    ],
-    relatedUrl: "https://paton.jp/event/entrant/13990",
-    ctaLabel: "Patonでみりぃの応援ページを見る（10/27審査）",
-    additionalCtas: [
-      { label: "ミクチャのイベントを見る", url: "https://mixch.tv/live/event/24861" },
-    ],
-    media: {
-      kind: "image",
-      src: "/media/news/mily-b239-01-campus-girls-ex3-guide.svg",
-      width: 916,
-      height: 1320,
-      alt: "CAMPUS GIRLS 2027 本選EX vol.3の配信審査、SNS審査、Paton投票の日程をまとめた非公式案内図",
-    },
-  },
-
-  {
     id: "2026-10-25-radio-halloween-stories",
     date: "2026-10-25",
     dateBasis: "confirmed-on",
