@@ -22,6 +22,9 @@ test('October 28 morning keeps ASR summary, black-video limits and screen refere
  const html=readFileSync('data-lab/reports/20261028-morning/index.html','utf8');
  assert.match(html,/noindex,nofollow,noarchive/);assert.doesNotMatch(html,/<img|<video|<audio/);
  assert.equal((injectVercelWebAnalytics(html).match(/src="\/mily-analytics-loader.js"/g)??[]).length,1);
+ const lab=readFileSync('data-lab/index.html','utf8');
+ assert.match(lab,/<nav id="daily-fallback-links"[^>]*><a href="#morning-20261028">10\/28<\/a>/);
+ assert.equal((lab.match(/id="morning-20261028"/g)??[]).length,1);
  const all=JSON.stringify(r)+html+JSON.stringify(d);
  assert.doesNotMatch(all,/あっきー|アッキー|ピラ|drive\.google|\.jsonl|C:\\\\Users/);
 });
