@@ -103,7 +103,7 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
           id: "campus-girls-finals-ex-vol-3-2026",
           title: "CAMPUS GIRLS 2027 本選EX vol.3",
           start: "2026-10-19T12:00:00+09:00",
-          end: "2026-11-01T12:00:00+09:00",
+          end: "2026-11-01T23:59:59+09:00",
         },
         {
           id: "campus-girls-finals-ex-vol-4-2026",
@@ -127,8 +127,15 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     );
 
     for (const event of laterVolumes) {
-      assert.equal(event.source, SOURCE);
-      assert.equal(event.verifiedAt, "2026-09-07");
+      if (event.id === campusGirlsFinalsExThree.id) {
+        assert.equal(event.source, "https://mixch.tv/live/event/24861");
+        assert.equal(event.verifiedAt, "2026-10-27");
+        assert.match(event.note, /10\/30 12:00/);
+        assert.match(event.note, /11\/2/);
+      } else {
+        assert.equal(event.source, SOURCE);
+        assert.equal(event.verifiedAt, "2026-09-07");
+      }
       assert.equal(event.activityId, "campus-girls");
       assert.equal(event.ctaLinkId, undefined);
       assert.equal(event.shareText, undefined);
@@ -183,7 +190,7 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     const adapted = adaptSupportEvents(supportEvents, SNS_START).items;
     for (const item of adapted.filter((entry) => entry.title.includes("本選EX"))) {
       assert.equal(item.cta, undefined);
-      assert.equal(item.source, SOURCE);
+      assert.equal(item.source, item.key === `support-event:${campusGirlsFinalsExThree.id}` ? "https://mixch.tv/live/event/24861" : SOURCE);
       assert.equal(item.allDay, false);
     }
   });

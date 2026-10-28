@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
 import { PatonExTwoGuide } from "./components/PatonExTwoGuide";
+import { CampusGirlsExThreeGuide } from "./components/CampusGirlsExThreeGuide";
 import { ExternalLink } from "./components/ExternalLink";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
@@ -244,6 +245,7 @@ export default function SupportPage() {
         ) : null}
         <SupportHero />
         <AnnouncedStreamSchedule showSupportLink={false} />
+        <CampusGirlsExThreeGuide />
         <PatonExTwoGuide />
         <ProvidedVoteSupportVideo />
         <FourthRoundSupportGuide />
