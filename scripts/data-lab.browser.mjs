@@ -1,3 +1,4 @@
+import { DAILY_STREAM_ENTRIES } from "../public/data-lab/assets/daily-archive-core.js";
 import { checkMorning20261029 } from "./mily-morning-20261029.browser.mjs";
 import { checkProgressReading } from "./mily-progress-reading.browser.mjs";
 import assert from "node:assert/strict";
@@ -17,6 +18,7 @@ const mime = {
   ".jpg": "image/jpeg", ".png": "image/png",
 };
 const results = [];
+const expectedBroadcastDates = [...new Set(DAILY_STREAM_ENTRIES.map(entry => entry.date))].sort().reverse();
 const baseUrl = process.env.DATA_LAB_BASE_URL || "https://site.test";
 await mkdir(output, { recursive: true });
 
@@ -103,7 +105,8 @@ try {
             const openDay = async day => {
               if (await day.evaluate(el => Boolean(el.closest("details:not([open])")))) await page.locator("#daily-past > summary").click();
             };
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 19, "Nineteen broadcast dates from 10/14 through 11/1");
+            const renderedBroadcastDates = await page.locator("#daily-stream-groups .daily-day").evaluateAll(nodes => nodes.map(node => node.id.replace(/^daily-/, "")));
+            assert.deepEqual(renderedBroadcastDates, expectedBroadcastDates, "Every registered broadcast date appears exactly once in descending order");
             const day1101 = page.locator("#daily-2026-11-01");
             assert.equal(await day1101.count(), 1, "Nov 1 has its own date");
             await openDay(day1101);
