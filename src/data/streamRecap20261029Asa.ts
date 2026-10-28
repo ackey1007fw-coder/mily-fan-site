@@ -22,7 +22,7 @@ export const streamRecap20261029Asa: StreamRecap = {
   ranking: [],
   timeline: [],
   nextNote: "",
-  sourceLabel: "2026年10月29日 朝のSHOWROOM配信（提供された視聴メモ）",
+  sourceLabel: "2026年10月29日 朝のSHOWROOM配信（オーナー提供視聴メモ）",
   verifiedAt: "2026-10-29",
   transcriptionNote: buildTranscriptionNote({
     material: "提供された視聴メモに基づく非逐語の要約です。原音・映像の再確認は行っていません。",
