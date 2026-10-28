@@ -1,0 +1,30 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {streamRecaps} from '../src/data/streamRecaps.ts';
+import {DAILY_STREAM_ENTRIES,observationPoints,lastObservedValue} from '../public/data-lab/assets/daily-archive-core.js';
+import {injectVercelWebAnalytics} from '../src/lib/vercelWebAnalytics.ts';
+test('October 28 morning keeps ASR summary, black-video limits and screen references separate',()=>{
+ const r=streamRecaps[0];assert.equal(r.id,'2026-10-28-morning-showroom');assert.equal(r.timestampBasis,'asr-clock');
+ assert.equal(r.image,undefined);assert.equal(r.songs,undefined);
+ assert.match(r.transcriptionNote,/全239区間/);assert.match(r.transcriptionNote,/原音の手動聴取・逐語校正は未実施/);
+ assert.match(r.transcriptionNote,/黒画面/);assert.match(r.transcriptionNote,/別の回の写真も使っていません/);
+ const d=JSON.parse(readFileSync('public/data-lab/data/mily-morning-20261028-aggregate.json'));
+ assert.equal(d.liveId,23611801);assert.deepEqual(Object.values(d.referenceSnapshot.metrics),[9,12,333,402,0,3293,5,29,40]);
+ assert.equal(d.referenceSnapshot.lastScreenProgressAtJst,'2026-10-28T07:55:07.688+09:00');
+ assert.ok(Date.parse(d.referenceSnapshot.savedObservedAtJst)>Date.parse(d.referenceSnapshot.lastScreenProgressAtJst));
+ assert.equal(d.referenceSnapshot.verified_final,false);assert.equal(d.referenceSnapshot.official,false);
+ assert.equal(d.finalServiceValueVerified,false);assert.equal(d.timingComparisonEligible,false);assert.deepEqual(d.observations,[]);
+ assert.equal(d.recording.durationSeconds,4789.82);assert.equal(d.recording.videoBlackCheck.causeVerified,false);assert.equal(d.recording.videoBlackCheck.allFramesDecoded,143695);assert.equal(d.recording.videoBlackCheck.allFramesBlack,true);
+ assert.equal(d.asrSupplement.manualAudioListeningVerified,false);assert.equal(d.asrSupplement.ptsSyncVerified,false);assert.equal(d.asrSupplement.singingVerified,false);
+ for(const k of ['stars','visits','comments']){assert.deepEqual(observationPoints(d,k,d.dateJst),[]);assert.equal(lastObservedValue(d,k,d.dateJst),d.referenceSnapshot.metrics[k]);}
+ assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.file==='mily-morning-20261028-aggregate.json').length,1);
+ const html=readFileSync('data-lab/reports/20261028-morning/index.html','utf8');
+ assert.match(html,/noindex,nofollow,noarchive/);assert.doesNotMatch(html,/<img|<video|<audio/);
+ assert.equal((injectVercelWebAnalytics(html).match(/src="\/mily-analytics-loader.js"/g)??[]).length,1);
+ const lab=readFileSync('data-lab/index.html','utf8');
+ assert.match(lab,/<nav id="daily-fallback-links"[^>]*><a href="#morning-20261028">10\/28<\/a>/);
+ assert.equal((lab.match(/id="morning-20261028"/g)??[]).length,1);
+ const all=JSON.stringify(r)+html+JSON.stringify(d);
+ assert.doesNotMatch(all,/あっきー|アッキー|ピラ|drive\.google|\.jsonl|C:\\\\Users/);
+});

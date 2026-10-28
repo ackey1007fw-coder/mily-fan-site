@@ -1,3 +1,4 @@
+import { streamRecap20261028Asa } from "./streamRecap20261028Asa.ts";
 import { streamRecap20261027Night } from "./streamRecap20261027Night.ts";
 import { streamRecap20261027Asa } from "./streamRecap20261027Asa.ts";
 import { streamRecap20261025Night } from "./streamRecap20261025Night.ts";
@@ -267,7 +268,7 @@ export type StreamRecap = {
   theme: string;
   broadcastLabel: string;
   /** 視聴メモの時計時刻。未指定の回は従来どおり録画内の経過時刻。 */
-  timestampBasis?: "memo-clock";
+  timestampBasis?: "memo-clock" | "asr-clock";
   platformLabel: string;
   summary: string;
   image?: StreamRecapImage;
@@ -358,6 +359,7 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap20261028Asa,
   streamRecap20261027Night,
   streamRecap20261027Asa,
   streamRecap20261026Night,

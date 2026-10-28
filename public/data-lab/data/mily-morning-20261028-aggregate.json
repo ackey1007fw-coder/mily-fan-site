@@ -1,0 +1,127 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23611801,
+  "dateJst": "2026-10-28",
+  "session": "morning",
+  "label": "10月28日朝 声で届けた、決戦前日の朝",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "metrics": {
+    "firstVisits": null,
+    "repeatVisits": null,
+    "visits": null,
+    "comments": null,
+    "newFollows": null,
+    "stars": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "observations": [],
+  "timingComparisonEligible": false,
+  "quality": {
+    "finalVerified": false,
+    "coverageComplete": false,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "referenceSnapshot": {
+    "source": "第三者SHOWROOM Emulatorの保存済み最終有効オンライン画面記録を担当者が照合",
+    "verified_final": false,
+    "savedObservedAtJst": "2026-10-28T07:56:55.729+09:00",
+    "lastScreenProgressAtJst": "2026-10-28T07:55:07.688+09:00",
+    "offlineReceiptAtJst": "2026-10-28T07:57:18.435+09:00",
+    "metrics": {
+      "firstVisits": 9,
+      "repeatVisits": 12,
+      "visits": 333,
+      "comments": 402,
+      "newFollows": 0,
+      "stars": 3293,
+      "otherFree": 5,
+      "star100People": 29,
+      "recommendedCommentPeople": 40
+    },
+    "fieldLabels": {
+      "firstVisits": {
+        "rawField": "visitarea",
+        "label": "初訪問"
+      },
+      "repeatVisits": {
+        "rawField": "visit2area",
+        "label": "2度訪問"
+      },
+      "visits": {
+        "rawField": "visittotalarea",
+        "label": "総訪問"
+      },
+      "comments": {
+        "rawField": "commentarea",
+        "label": "投稿数"
+      },
+      "newFollows": {
+        "rawField": "followarea",
+        "label": "新規follow"
+      },
+      "stars": {
+        "rawField": "twinklearea",
+        "label": "星個数"
+      },
+      "otherFree": {
+        "rawField": "othergiftarea",
+        "label": "その他free"
+      },
+      "star100People": {
+        "rawField": "twinkletotalarea",
+        "label": "星100貢献人数"
+      },
+      "recommendedCommentPeople": {
+        "rawField": "recommendarea",
+        "label": "おすすめcomment人数"
+      }
+    },
+    "note": "第三者SHOWROOM Emulatorの最終有効画面参考値です。公式総訪問・同時視聴者・実人数・確定贈呈量・公式pt・確定終値ではありません。「総訪問」の算出方法も未確認です。保存観測時刻は画面内容の進行時刻や真の配信終端ではありません。offlineの0は終値へ採用していません。",
+    "official": false
+  },
+  "recording": {
+    "saved": true,
+    "exitCode": 0,
+    "processingStartedAtJst": "2026-10-28T06:35:00+09:00",
+    "processingEndedAtJst": "2026-10-28T07:55:35+09:00",
+    "bytes": 55050524,
+    "durationSeconds": 4789.82,
+    "codec": "H264/AAC",
+    "videoResolution": "640x360",
+    "fullContinuityVerified": false,
+    "audioSyncVerified": false,
+    "officialStartVerified": false,
+    "uiStartDisplayJst": "2026-10-28T06:34:56+09:00",
+    "videoBlackCheck": {
+      "allFramesDecoded": 143695,
+      "allFramesBlack": true,
+      "maxLumaEveryFrame": 17,
+      "blackdetect": "pix_th=0.10 pic_th=0.98 black 0〜4789.753s",
+      "keyframesChecked": 4782,
+      "sampledFramesVisuallyChecked": 9,
+      "causeVerified": false,
+      "note": "全フレームが黒画面。ASRでは顔出しを見送ったという趣旨の話があるが、原因は確認していない。写真は掲載しない。"
+    }
+  },
+  "asrSupplement": {
+    "chunks": 239,
+    "readInFull": true,
+    "transcribedThroughJst": "2026-10-28T07:54:49+09:00",
+    "manualAudioListeningVerified": false,
+    "ptsSyncVerified": false,
+    "singingVerified": false,
+    "newAsrStarted": false
+  },
+  "contentEvidence": {
+    "basis": "保存ASR全239区間の読解（非逐語要約）",
+    "manualAudioListeningSeconds": 0,
+    "asrRead": true,
+    "newAsrStarted": false
+  }
+}

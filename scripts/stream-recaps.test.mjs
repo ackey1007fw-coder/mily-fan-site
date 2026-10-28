@@ -179,6 +179,11 @@ describe("配信メモの統一ルール", () => {
         );
 
         const stamps = highlights.map(({ timestamp }) => {
+          if (recap.timestampBasis === "asr-clock") {
+            const asrClock = timestamp.match(/^([01]?\d|2[0-3]):([0-5]\d)頃$/);
+            assert.ok(asrClock, `ASRの時計時刻形式: ${timestamp}`);
+            return Number(asrClock[1]) * 60 + Number(asrClock[2]);
+          }
           if (recap.timestampBasis !== "memo-clock") return seconds(timestamp);
           if (timestamp === "終盤（メモ範囲内）") return Infinity;
           const clock = timestamp.match(/^([01]?\d|2[0-3]):([0-5]\d)頃$/);
@@ -186,6 +191,12 @@ describe("配信メモの統一ルール", () => {
           return Number(clock[1]) * 60 + Number(clock[2]);
         });
         assert.deepEqual(stamps, [...stamps].sort((left, right) => left - right));
+        if (recap.timestampBasis === "asr-clock") {
+          assert.match(recap.sourceLabel, /ASR/);
+          assert.match(recap.transcriptionNote, /映像との同期や正式な配信開始・終了時刻は確認していません/);
+          assert.equal(recap.timeline.length, 0, "録画内の索引を捏造しない");
+          assert.ok(highlights.every(item => !item.clip && !item.socialClip));
+        }
         if (recap.timestampBasis === "memo-clock") {
           assert.match(recap.sourceLabel, /提供視聴メモ/);
           assert.match(recap.transcriptionNote, /録画内の経過時刻ではありません/);

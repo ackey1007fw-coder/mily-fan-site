@@ -98,7 +98,15 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 14, "Fourteen broadcast dates from 10/14 through 10/27");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 15, "Fifteen broadcast dates from 10/14 through 10/28");
+            const day28 = page.locator("#daily-2026-10-28");
+            assert.equal(await day28.count(), 1, "Oct 28 receives exactly one separate broadcast date");
+            if (!(await day28.getAttribute("open") !== null)) await day28.locator("summary").click();
+            const day28Card = day28.locator(".daily-stream-card");
+            assert.equal(await day28Card.count(), 1, "Oct 28 morning is a single card");
+            await day28Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
+            assert.equal(await day28Card.locator(".daily-stream-number").innerText(), "3,293", "Third-party screen stars are a nonfinal reference value");
+            assert.equal(await day28Card.locator("svg.daily-plot").count(), 0, "No graph without measured time-series points");
             const day26 = page.locator("#daily-2026-10-26");
             assert.equal(await day26.count(), 1, "Oct 26 receives exactly one separate broadcast date");
             if (!(await day26.getAttribute("open") !== null)) await day26.locator("summary").click();
@@ -372,6 +380,13 @@ try {
           }
 
           if ([320, 1440].includes(width)) {
+            await page.goto(`${baseUrl}/data-lab/reports/20261028-morning/`, {waitUntil:"networkidle"});
+            assert.match(await page.locator("main").innerText(), /全239区間/);
+            assert.equal(await page.locator("tbody tr").count(),9);
+            assert.equal(await page.locator("main img").count(),0);
+            assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(),1);
+            assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+            await page.screenshot({path:join(output,`${engine}-${width}-morning-20261028.png`),fullPage:true});
             await page.goto(`${baseUrl}/data-lab/reports/20261027-night/`, {waitUntil:"networkidle"});
             assert.match(await page.locator("main").innerText(), /原音聴取0秒/);
             assert.equal(await page.locator("tbody tr").count(),9);

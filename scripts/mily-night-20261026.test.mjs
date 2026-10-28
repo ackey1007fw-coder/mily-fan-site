@@ -15,7 +15,7 @@ test("10/26 night is the newest single entry without duplicating prior days", ()
   assert.equal(entries[0].slot, "night");
   assert.equal(entries[0].file, "mily-night-20261026-aggregate.json");
   assert.equal(entries[0].report, "/data-lab/reports/20261026-night/");
-  assert.equal(groupByBroadcastDate()[0].date, "2026-10-27");
+  assert.equal(groupByBroadcastDate()[0].date, "2026-10-28");
   assert.ok(DAILY_STREAM_ENTRIES.some((e) => e.date === "2026-10-25"));
   assert.ok(DAILY_STREAM_ENTRIES.some((e) => e.date === "2026-10-22"));
 });

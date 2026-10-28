@@ -798,6 +798,7 @@ function StreamRecapArticle({
       {recap.highlights.length > 0 ? (
         <StreamRecapSection title="この回の見どころ" id={`${recap.id}-highlights`}>
           {recap.timestampBasis === "memo-clock" ? <p className="mt-3 text-xs leading-5 text-ink-muted">時刻は視聴メモにある日本時間の目安です。録画内の経過時刻ではありません。</p> : null}
+          {recap.timestampBasis === "asr-clock" ? <p className="mt-3 text-xs leading-5 text-ink-muted">時刻は自動文字起こしに記録された日本時間の目安です。映像との同期や正式な配信時刻は確認していません。</p> : null}
           <ul className="mt-3 space-y-3">
             {recap.highlights.map((highlight) => (
               <li
