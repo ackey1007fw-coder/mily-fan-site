@@ -1,3 +1,4 @@
+import { checkMorning20261029 } from "./mily-morning-20261029.browser.mjs";
 import { checkProgressReading } from "./mily-progress-reading.browser.mjs";
 import assert from "node:assert/strict";
 import { readFile, stat, mkdir, writeFile } from "node:fs/promises";
@@ -442,6 +443,8 @@ try {
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Memo recap must not overflow");
             await card.screenshot({ path: join(output, `${engine}-${width}-night-20261026-live.png`) });
           }
+
+          await checkMorning20261029(page, baseUrl, output, engine, width);
 
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
