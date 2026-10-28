@@ -1,3 +1,5 @@
+import { DAILY_STREAM_ENTRIES } from "../public/data-lab/assets/daily-archive-core.js";
+import { checkMorning20261029 } from "./mily-morning-20261029.browser.mjs";
 import { checkProgressReading } from "./mily-progress-reading.browser.mjs";
 import assert from "node:assert/strict";
 import { readFile, stat, mkdir, writeFile } from "node:fs/promises";
@@ -16,6 +18,7 @@ const mime = {
   ".jpg": "image/jpeg", ".png": "image/png",
 };
 const results = [];
+const expectedBroadcastDates = [...new Set(DAILY_STREAM_ENTRIES.map(entry => entry.date))].sort().reverse();
 const baseUrl = process.env.DATA_LAB_BASE_URL || "https://site.test";
 await mkdir(output, { recursive: true });
 
@@ -98,7 +101,8 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 15, "Fifteen broadcast dates from 10/14 through 10/28");
+            const renderedBroadcastDates = await page.locator("#daily-stream-groups .daily-day").evaluateAll(nodes => nodes.map(node => node.id.replace(/^daily-/, "")));
+            assert.deepEqual(renderedBroadcastDates, expectedBroadcastDates, "Every registered broadcast date appears exactly once in descending order");
             const day28 = page.locator("#daily-2026-10-28");
             assert.equal(await day28.count(), 1, "Oct 28 receives exactly one separate broadcast date");
             if (!(await day28.getAttribute("open") !== null)) await day28.locator("summary").click();
@@ -442,6 +446,8 @@ try {
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Memo recap must not overflow");
             await card.screenshot({ path: join(output, `${engine}-${width}-night-20261026-live.png`) });
           }
+
+          await checkMorning20261029(page, baseUrl, output, engine, width);
 
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");

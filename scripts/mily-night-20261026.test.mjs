@@ -9,13 +9,15 @@ const report = read("data-lab/reports/20261026-night/index.html");
 const index = read("data-lab/index.html");
 const vite = read("vite.config.ts");
 
-test("10/26 night is the newest single entry without duplicating prior days", () => {
+test("10/26 night remains unique while the archive follows its newest date", () => {
   const entries = DAILY_STREAM_ENTRIES.filter((e) => e.date === "2026-10-26");
   assert.equal(entries.length, 1);
   assert.equal(entries[0].slot, "night");
   assert.equal(entries[0].file, "mily-night-20261026-aggregate.json");
   assert.equal(entries[0].report, "/data-lab/reports/20261026-night/");
-  assert.equal(groupByBroadcastDate()[0].date, "2026-10-28");
+  const dates = [...new Set(DAILY_STREAM_ENTRIES.map((entry) => entry.date))].sort().reverse();
+  assert.deepEqual(groupByBroadcastDate().map((group) => group.date), dates);
+  assert.deepEqual(groupByBroadcastDate().find((group) => group.date === "2026-10-26").entries, entries);
   assert.ok(DAILY_STREAM_ENTRIES.some((e) => e.date === "2026-10-25"));
   assert.ok(DAILY_STREAM_ENTRIES.some((e) => e.date === "2026-10-22"));
 });

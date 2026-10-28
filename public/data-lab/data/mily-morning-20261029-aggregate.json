@@ -1,0 +1,482 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23616187,
+  "dateJst": "2026-10-29",
+  "session": "morning",
+  "label": "10月29日朝 きら星の増え方を振り返る",
+  "verifiedAtJst": "2026-10-29T06:53:35.439+09:00",
+  "sourceDescription": "同一配信の第三者SHOWROOM Emulator通常閲覧画面に保存された匿名カウンター。画面の進行時刻を確認し、停止画面の再保存を新しい観測に数えない。",
+  "sourceUrl": "https://nao.qa/ap/comment.php?id=573253",
+  "eventName": null,
+  "eventPoints": null,
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": {
+    "atJst": "2026-10-29T06:32:47.154+09:00",
+    "uiProgressAtJst": "2026-10-29T06:32:47.154+09:00",
+    "savedObservedAtJst": "2026-10-29T06:32:47.154+09:00",
+    "stars": 4665,
+    "visits": 649,
+    "comments": 319,
+    "firstVisits": 21,
+    "repeatVisits": 25,
+    "newFollows": 2,
+    "otherFree": 6170,
+    "star100People": 43,
+    "recommendedCommentPeople": 48,
+    "confirmedFinal": false
+  },
+  "metrics": {
+    "stars": 4665,
+    "visits": 649,
+    "comments": 319,
+    "firstVisits": 21,
+    "repeatVisits": 25,
+    "newFollows": 2,
+    "otherFree": 6170,
+    "star100People": 43,
+    "recommendedCommentPeople": 48
+  },
+  "observations": [
+    {
+      "atJst": "2026-10-29T06:00:30.658+09:00",
+      "savedObservedAtJst": "2026-10-29T06:00:30.658+09:00",
+      "stars": 120,
+      "visits": null,
+      "comments": 1
+    },
+    {
+      "atJst": "2026-10-29T06:00:56.866+09:00",
+      "savedObservedAtJst": "2026-10-29T06:00:56.866+09:00",
+      "stars": 260,
+      "visits": null,
+      "comments": 6
+    },
+    {
+      "atJst": "2026-10-29T06:01:57.063+09:00",
+      "savedObservedAtJst": "2026-10-29T06:01:57.063+09:00",
+      "stars": 490,
+      "visits": 18,
+      "comments": 12
+    },
+    {
+      "atJst": "2026-10-29T06:02:56.841+09:00",
+      "savedObservedAtJst": "2026-10-29T06:02:56.841+09:00",
+      "stars": 730,
+      "visits": 18,
+      "comments": 16
+    },
+    {
+      "atJst": "2026-10-29T06:03:56.409+09:00",
+      "savedObservedAtJst": "2026-10-29T06:03:56.409+09:00",
+      "stars": 752,
+      "visits": 18,
+      "comments": 19
+    },
+    {
+      "atJst": "2026-10-29T06:04:52.290+09:00",
+      "savedObservedAtJst": "2026-10-29T06:04:52.290+09:00",
+      "stars": 994,
+      "visits": 18,
+      "comments": 20
+    },
+    {
+      "atJst": "2026-10-29T06:05:57.834+09:00",
+      "savedObservedAtJst": "2026-10-29T06:05:57.834+09:00",
+      "stars": 1406,
+      "visits": 18,
+      "comments": 28
+    },
+    {
+      "atJst": "2026-10-29T06:06:54.387+09:00",
+      "savedObservedAtJst": "2026-10-29T06:06:54.387+09:00",
+      "stars": 1612,
+      "visits": 125,
+      "comments": 35
+    },
+    {
+      "atJst": "2026-10-29T06:07:42.481+09:00",
+      "savedObservedAtJst": "2026-10-29T06:07:42.481+09:00",
+      "stars": 1762,
+      "visits": 125,
+      "comments": 40
+    },
+    {
+      "atJst": "2026-10-29T06:08:52.913+09:00",
+      "savedObservedAtJst": "2026-10-29T06:08:52.913+09:00",
+      "stars": 1952,
+      "visits": 125,
+      "comments": 52
+    },
+    {
+      "atJst": "2026-10-29T06:09:51.311+09:00",
+      "savedObservedAtJst": "2026-10-29T06:09:51.311+09:00",
+      "stars": 2068,
+      "visits": 125,
+      "comments": 61
+    },
+    {
+      "atJst": "2026-10-29T06:10:26.254+09:00",
+      "savedObservedAtJst": "2026-10-29T06:10:26.254+09:00",
+      "stars": 2168,
+      "visits": 125,
+      "comments": 66
+    },
+    {
+      "atJst": "2026-10-29T06:11:09.256+09:00",
+      "savedObservedAtJst": "2026-10-29T06:11:09.256+09:00",
+      "stars": 2218,
+      "visits": null,
+      "comments": 66
+    },
+    {
+      "atJst": "2026-10-29T06:11:59.174+09:00",
+      "savedObservedAtJst": "2026-10-29T06:11:59.174+09:00",
+      "stars": 2318,
+      "visits": 240,
+      "comments": 71
+    },
+    {
+      "atJst": "2026-10-29T06:12:49.428+09:00",
+      "savedObservedAtJst": "2026-10-29T06:12:49.428+09:00",
+      "stars": 2420,
+      "visits": 240,
+      "comments": 78
+    },
+    {
+      "atJst": "2026-10-29T06:13:58.368+09:00",
+      "savedObservedAtJst": "2026-10-29T06:13:58.368+09:00",
+      "stars": 2530,
+      "visits": 240,
+      "comments": 91
+    },
+    {
+      "atJst": "2026-10-29T06:14:53.091+09:00",
+      "savedObservedAtJst": "2026-10-29T06:14:53.091+09:00",
+      "stars": 2640,
+      "visits": 240,
+      "comments": 95
+    },
+    {
+      "atJst": "2026-10-29T06:15:58.994+09:00",
+      "savedObservedAtJst": "2026-10-29T06:15:58.994+09:00",
+      "stars": 2860,
+      "visits": 240,
+      "comments": 113
+    },
+    {
+      "atJst": "2026-10-29T06:16:56.374+09:00",
+      "savedObservedAtJst": "2026-10-29T06:16:56.374+09:00",
+      "stars": 2960,
+      "visits": 240,
+      "comments": 124
+    },
+    {
+      "atJst": "2026-10-29T06:17:53.768+09:00",
+      "savedObservedAtJst": "2026-10-29T06:17:53.768+09:00",
+      "stars": 3160,
+      "visits": 354,
+      "comments": 130
+    },
+    {
+      "atJst": "2026-10-29T06:18:53.918+09:00",
+      "savedObservedAtJst": "2026-10-29T06:18:53.918+09:00",
+      "stars": 3170,
+      "visits": 354,
+      "comments": 153
+    },
+    {
+      "atJst": "2026-10-29T06:19:54.565+09:00",
+      "savedObservedAtJst": "2026-10-29T06:19:54.565+09:00",
+      "stars": 3390,
+      "visits": 354,
+      "comments": 162
+    },
+    {
+      "atJst": "2026-10-29T06:20:55.441+09:00",
+      "savedObservedAtJst": "2026-10-29T06:20:55.441+09:00",
+      "stars": 3680,
+      "visits": 354,
+      "comments": 176
+    },
+    {
+      "atJst": "2026-10-29T06:21:57.093+09:00",
+      "savedObservedAtJst": "2026-10-29T06:21:57.093+09:00",
+      "stars": 3781,
+      "visits": 354,
+      "comments": 182
+    },
+    {
+      "atJst": "2026-10-29T06:22:50.740+09:00",
+      "savedObservedAtJst": "2026-10-29T06:22:50.740+09:00",
+      "stars": 3781,
+      "visits": 465,
+      "comments": 191
+    },
+    {
+      "atJst": "2026-10-29T06:23:53.586+09:00",
+      "savedObservedAtJst": "2026-10-29T06:23:53.586+09:00",
+      "stars": 3911,
+      "visits": 465,
+      "comments": 202
+    },
+    {
+      "atJst": "2026-10-29T06:24:59.905+09:00",
+      "savedObservedAtJst": "2026-10-29T06:24:59.905+09:00",
+      "stars": 4041,
+      "visits": 465,
+      "comments": 216
+    },
+    {
+      "atJst": "2026-10-29T06:25:40.194+09:00",
+      "savedObservedAtJst": "2026-10-29T06:25:40.194+09:00",
+      "stars": 4091,
+      "visits": 465,
+      "comments": 218
+    },
+    {
+      "atJst": "2026-10-29T06:26:21.358+09:00",
+      "savedObservedAtJst": "2026-10-29T06:26:21.358+09:00",
+      "stars": 4413,
+      "visits": null,
+      "comments": 235
+    },
+    {
+      "atJst": "2026-10-29T06:26:56.423+09:00",
+      "savedObservedAtJst": "2026-10-29T06:26:56.423+09:00",
+      "stars": 4423,
+      "visits": null,
+      "comments": 236
+    },
+    {
+      "atJst": "2026-10-29T06:27:57.758+09:00",
+      "savedObservedAtJst": "2026-10-29T06:27:57.758+09:00",
+      "stars": 4504,
+      "visits": 558,
+      "comments": 243
+    },
+    {
+      "atJst": "2026-10-29T06:28:56.215+09:00",
+      "savedObservedAtJst": "2026-10-29T06:28:56.215+09:00",
+      "stars": 4524,
+      "visits": 558,
+      "comments": 268
+    },
+    {
+      "atJst": "2026-10-29T06:29:59.333+09:00",
+      "savedObservedAtJst": "2026-10-29T06:29:59.333+09:00",
+      "stars": 4524,
+      "visits": 558,
+      "comments": 280
+    },
+    {
+      "atJst": "2026-10-29T06:30:50.258+09:00",
+      "savedObservedAtJst": "2026-10-29T06:30:50.258+09:00",
+      "stars": 4524,
+      "visits": 558,
+      "comments": 288
+    },
+    {
+      "atJst": "2026-10-29T06:31:55.548+09:00",
+      "savedObservedAtJst": "2026-10-29T06:31:55.548+09:00",
+      "stars": 4545,
+      "visits": 558,
+      "comments": 299
+    },
+    {
+      "atJst": "2026-10-29T06:32:47.154+09:00",
+      "savedObservedAtJst": "2026-10-29T06:32:47.154+09:00",
+      "stars": 4665,
+      "visits": 649,
+      "comments": 319
+    }
+  ],
+  "analysisEndpoints": [
+    {
+      "atJst": "2026-10-29T06:00:30.658+09:00",
+      "stars": 120,
+      "visits": null,
+      "comments": 1
+    },
+    {
+      "atJst": "2026-10-29T06:04:52.290+09:00",
+      "stars": 994,
+      "visits": 18,
+      "comments": 20
+    },
+    {
+      "atJst": "2026-10-29T06:09:51.311+09:00",
+      "stars": 2068,
+      "visits": 125,
+      "comments": 61
+    },
+    {
+      "atJst": "2026-10-29T06:14:53.091+09:00",
+      "stars": 2640,
+      "visits": 240,
+      "comments": 95
+    },
+    {
+      "atJst": "2026-10-29T06:19:54.565+09:00",
+      "stars": 3390,
+      "visits": 354,
+      "comments": 162
+    },
+    {
+      "atJst": "2026-10-29T06:24:59.905+09:00",
+      "stars": 4041,
+      "visits": 465,
+      "comments": 216
+    },
+    {
+      "atJst": "2026-10-29T06:29:59.333+09:00",
+      "stars": 4524,
+      "visits": 558,
+      "comments": 280
+    },
+    {
+      "atJst": "2026-10-29T06:32:47.154+09:00",
+      "stars": 4665,
+      "visits": 649,
+      "comments": 319
+    }
+  ],
+  "endpointDifferences": [
+    {
+      "fromJst": "2026-10-29T06:00:30.658+09:00",
+      "toJst": "2026-10-29T06:04:52.290+09:00",
+      "starsIncrease": 874,
+      "elapsedSeconds": 261.632,
+      "containsObservationGap": false,
+      "ratePublished": false
+    },
+    {
+      "fromJst": "2026-10-29T06:04:52.290+09:00",
+      "toJst": "2026-10-29T06:09:51.311+09:00",
+      "starsIncrease": 1074,
+      "elapsedSeconds": 299.021,
+      "containsObservationGap": false,
+      "ratePublished": false
+    },
+    {
+      "fromJst": "2026-10-29T06:09:51.311+09:00",
+      "toJst": "2026-10-29T06:14:53.091+09:00",
+      "starsIncrease": 572,
+      "elapsedSeconds": 301.78,
+      "containsObservationGap": true,
+      "ratePublished": false
+    },
+    {
+      "fromJst": "2026-10-29T06:14:53.091+09:00",
+      "toJst": "2026-10-29T06:19:54.565+09:00",
+      "starsIncrease": 750,
+      "elapsedSeconds": 301.474,
+      "containsObservationGap": false,
+      "ratePublished": false
+    },
+    {
+      "fromJst": "2026-10-29T06:19:54.565+09:00",
+      "toJst": "2026-10-29T06:24:59.905+09:00",
+      "starsIncrease": 651,
+      "elapsedSeconds": 305.34,
+      "containsObservationGap": false,
+      "ratePublished": false
+    },
+    {
+      "fromJst": "2026-10-29T06:24:59.905+09:00",
+      "toJst": "2026-10-29T06:29:59.333+09:00",
+      "starsIncrease": 483,
+      "elapsedSeconds": 299.428,
+      "containsObservationGap": true,
+      "ratePublished": false
+    },
+    {
+      "fromJst": "2026-10-29T06:29:59.333+09:00",
+      "toJst": "2026-10-29T06:32:47.154+09:00",
+      "starsIncrease": 141,
+      "elapsedSeconds": 167.821,
+      "containsObservationGap": false,
+      "ratePublished": false
+    }
+  ],
+  "analysis": {
+    "observedIncrease": 4545,
+    "firstObservedStars": 120,
+    "largestSelectedInterval": {
+      "fromJst": "2026-10-29T06:04:52.290+09:00",
+      "toJst": "2026-10-29T06:09:51.311+09:00",
+      "starsIncrease": 1074,
+      "elapsedSeconds": 299.021,
+      "containsObservationGap": false,
+      "ratePublished": false
+    },
+    "share0610Pct": 44.3,
+    "share0620Pct": 72.7,
+    "interpretation": "約5分刻みの比較では6:04:52〜6:09:51の+1,074が最大。開始時刻の効果、話題との因果関係、別枠の予測は示さない。"
+  },
+  "quality": {
+    "numericEvidenceStatus": "observed_last_valid_nonfinal",
+    "timelineRowsAtSnapshot": 433,
+    "freshRowsAccepted": 304,
+    "uniqueFreshScreenTimes": 225,
+    "selectedTimedObservations": 36,
+    "freshnessLimitSeconds": 30,
+    "screenRegressionsInAcceptedSeries": 0,
+    "gapsOver30s": [
+      {
+        "fromJst": "2026-10-29T06:10:26.254+09:00",
+        "toJst": "2026-10-29T06:11:09.256+09:00",
+        "seconds": 43.002,
+        "meaning": "採用した画面進行の観測間隔。配信停止や失われたギフト数を証明しない。"
+      },
+      {
+        "fromJst": "2026-10-29T06:25:40.194+09:00",
+        "toJst": "2026-10-29T06:26:21.358+09:00",
+        "seconds": 41.164,
+        "meaning": "採用した画面進行の観測間隔。配信停止や失われたギフト数を証明しない。"
+      }
+    ],
+    "initialVisitsMissing": {
+      "firstObservedAtJst": "2026-10-29T06:00:30.658+09:00",
+      "firstNumericAtJst": "2026-10-29T06:01:57.063+09:00",
+      "firstNumericValue": 18,
+      "sourceDisplay": "無効",
+      "backfilled": false
+    },
+    "lastScreenProgressAtJst": "2026-10-29T06:32:47.154+09:00",
+    "snapshotCutoffJst": "2026-10-29T06:42:28.481+09:00",
+    "staleResavesExcluded": true,
+    "endConfirmed": true,
+    "finalVerified": false,
+    "coverageComplete": false,
+    "missingDataIsNotZeroPerformance": true,
+    "rawDetailComplete": false,
+    "detailLossMeaning": "詳細画面変化の取りこぼしがある。内部断片数は失ったコメント数・人数・ギフト数ではない。",
+    "sourceEventCoverageConfirmed": false,
+    "endConfirmation": {
+      "kind": "normal_ui_explicit_offline",
+      "confirmedAtJst": "2026-10-29T06:44:34.260+09:00",
+      "offlineObservedAtJst": [
+        "2026-10-29T06:44:26.113+09:00",
+        "2026-10-29T06:44:30.188+09:00",
+        "2026-10-29T06:44:34.260+09:00"
+      ],
+      "meaning": "通常閲覧画面の明示offline連続3回を確認した時刻。正式な配信終了時刻・数値の最終確定・全イベント取得の証明ではない。"
+    }
+  },
+  "measurementNote": "すべて第三者画面の参考値。公式最終値・確定贈呈量・公式イベントpt・実人数ではない。総訪問の初期欠測を0や他の人数で埋めず、その他freeをきら星へ合算しない。",
+  "comparisonNote": "保存時刻と画面進行時刻の差が30秒以内で、同一回・オンライン・逆行未検出の観測を抽出。同一画面進行時刻は最初の保存だけを採用。グラフは離散点で、欠測を補間しない。約5分区間は実際の観測時刻の差分であり、完全な5分集計ではない。観測の空きをまたぐ差分も瞬間的な増加や分速へ読み替えない。",
+  "recording": {
+    "saved": true,
+    "ffmpegExitCode": 0,
+    "processingStartedAtJst": "2026-10-29T06:00:13+09:00",
+    "processingEndedAtJst": "2026-10-29T06:33:16+09:00",
+    "bytes": 250519993,
+    "fullContinuityVerified": false,
+    "actualFileDecodeVerified": false,
+    "note": "保存ファイルと記録メタデータを照合。録画処理の終了を正式な配信終了時刻や全編無欠落の証明としない。"
+  }
+}
