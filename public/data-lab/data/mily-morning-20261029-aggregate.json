@@ -413,8 +413,8 @@
       "containsObservationGap": false,
       "ratePublished": false
     },
-    "shareOfLastDisplayBefore0610Percent": 44.3,
-    "shareOfLastDisplayBefore0620Percent": 72.7,
+    "share0610Pct": 44.3,
+    "share0620Pct": 72.7,
     "interpretation": "約5分刻みの比較では6:04:52〜6:09:51の+1,074が最大。開始時刻の効果、話題との因果関係、別枠の予測は示さない。"
   },
   "quality": {
@@ -425,7 +425,7 @@
     "selectedTimedObservations": 36,
     "freshnessLimitSeconds": 30,
     "screenRegressionsInAcceptedSeries": 0,
-    "observationGapsOver30Seconds": [
+    "gapsOver30s": [
       {
         "fromJst": "2026-10-29T06:10:26.254+09:00",
         "toJst": "2026-10-29T06:11:09.256+09:00",
