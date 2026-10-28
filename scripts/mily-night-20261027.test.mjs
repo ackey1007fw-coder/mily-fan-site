@@ -5,7 +5,7 @@ import {createHash} from 'node:crypto';
 import {streamRecaps} from '../src/data/streamRecaps.ts';
 import {DAILY_STREAM_ENTRIES,observationPoints,lastObservedValue} from '../public/data-lab/assets/daily-archive-core.js';
 test('October 27 night keeps memo, third-party screen and recording evidence separate',()=>{
- const r=streamRecaps[0];assert.equal(r.id,'2026-10-27-night-showroom');assert.equal(r.timestampBasis,'memo-clock');
+ const r=streamRecaps.find(x=>x.id==='2026-10-27-night-showroom');assert.ok(r);assert.equal(r.timestampBasis,'memo-clock');
  assert.match(r.transcriptionNote,/原音聴取は0秒/);assert.match(r.transcriptionNote,/録画内の経過時刻ではありません/);
  const d=JSON.parse(readFileSync('public/data-lab/data/mily-night-20261027-aggregate.json'));
  assert.equal(d.liveId,23610474);assert.deepEqual(Object.values(d.referenceSnapshot.metrics),[2,0,121,621,0,2350,50,23,20]);

@@ -372,6 +372,13 @@ try {
           }
 
           if ([320, 1440].includes(width)) {
+            await page.goto(`${baseUrl}/data-lab/reports/20261028-morning/`, {waitUntil:"networkidle"});
+            assert.match(await page.locator("main").innerText(), /全239区間/);
+            assert.equal(await page.locator("tbody tr").count(),9);
+            assert.equal(await page.locator("main img").count(),0);
+            assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(),1);
+            assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+            await page.screenshot({path:join(output,`${engine}-${width}-morning-20261028.png`),fullPage:true});
             await page.goto(`${baseUrl}/data-lab/reports/20261027-night/`, {waitUntil:"networkidle"});
             assert.match(await page.locator("main").innerText(), /原音聴取0秒/);
             assert.equal(await page.locator("tbody tr").count(),9);
