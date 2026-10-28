@@ -98,7 +98,15 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 15, "Fifteen broadcast dates from 10/14 through 10/28");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 16, "Sixteen broadcast dates from 10/14 through 10/29");
+            const day29 = page.locator("#daily-2026-10-29");
+            assert.equal(await day29.count(), 1, "Oct 29 remains a separate broadcast date");
+            if (!(await day29.getAttribute("open") !== null)) await day29.locator("summary").click();
+            const day29Card = day29.locator(".daily-stream-card");
+            assert.equal(await day29Card.count(), 1);
+            await day29Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
+            assert.equal(await day29Card.locator(".daily-stream-number").innerText(), "4,665");
+            assert.equal(await day29Card.locator("svg.daily-plot").count(), 0, "Sparse references do not enter the shared time series");
             const day28 = page.locator("#daily-2026-10-28");
             assert.equal(await day28.count(), 1, "Oct 28 receives exactly one separate broadcast date");
             if (!(await day28.getAttribute("open") !== null)) await day28.locator("summary").click();
@@ -380,6 +388,14 @@ try {
           }
 
           if ([320, 1440].includes(width)) {
+            await page.goto(`${baseUrl}/data-lab/reports/20261029-morning/`, {waitUntil:"networkidle"});
+            assert.match(await page.locator("main").innerText(), /4,545/);
+            assert.match(await page.locator("main").innerText(), /189,627/);
+            assert.equal(await page.locator("tbody tr").count(),17);
+            assert.equal(await page.locator("main img").count(),0);
+            assert.equal(await page.locator('script[src="/mily-analytics-loader.js"]').count(),1);
+            assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+            await page.screenshot({path:join(output,`${engine}-${width}-morning-20261029.png`),fullPage:true});
             await page.goto(`${baseUrl}/data-lab/reports/20261028-morning/`, {waitUntil:"networkidle"});
             assert.match(await page.locator("main").innerText(), /全239区間/);
             assert.equal(await page.locator("tbody tr").count(),9);
