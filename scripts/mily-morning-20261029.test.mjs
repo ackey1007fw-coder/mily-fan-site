@@ -36,13 +36,13 @@ test('endpoint differences and gaps do not imply missing gifts or cross-gap rate
  assert.deepEqual(d.analysisEndpoints.map(r=>r.stars),[120,994,2068,2640,3390,4041,4524,4665]);
  assert.deepEqual(d.endpointDifferences.map(r=>r.starsIncrease),[874,1074,572,750,651,483,141]);
  assert.equal(d.analysis.observedIncrease,4545);assert.equal(d.analysis.largestSelectedInterval.starsIncrease,1074);
- assert.equal(d.analysis.shareOfLastDisplayBefore0610Percent,44.3);assert.equal(d.analysis.shareOfLastDisplayBefore0620Percent,72.7);
+ assert.equal(d.analysis.share0610Pct,44.3);assert.equal(d.analysis.share0620Pct,72.7);
  assert.deepEqual(d.endpointDifferences.map(r=>r.containsObservationGap),[false,false,true,false,false,true,false]);
  for(let i=0;i<d.endpointDifferences.length;i++){
   const x=d.endpointDifferences[i],a=d.analysisEndpoints[i],b=d.analysisEndpoints[i+1];
   assert.equal(x.starsIncrease,b.stars-a.stars);assert.equal(x.elapsedSeconds,(Date.parse(b.atJst)-Date.parse(a.atJst))/1000);assert.equal(x.ratePublished,false);
  }
- assert.deepEqual(d.quality.observationGapsOver30Seconds.map(g=>g.seconds),[43.002,41.164]);
+ assert.deepEqual(d.quality.gapsOver30s.map(g=>g.seconds),[43.002,41.164]);
  assert.equal(d.endpointDifferences.at(-1).elapsedSeconds,167.821);
 });
 test('report and daily registration retain boundaries and existing fallback',()=>{
