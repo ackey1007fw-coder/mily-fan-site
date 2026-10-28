@@ -382,6 +382,24 @@ export const campusGirlsFinalStagePatonVote: SupportEvent = {
   priority: 100,
 };
 
+export const kobeMontebrancoAmbassadorAudition: SupportEvent = {
+  id: "showroom-kobe-montebranco-ambassador-audition-2026",
+  activityId: "live-stream",
+  kind: "stream-event",
+  title: "神戸で味わう、絞りたてモンブラン。『神戸モンテブランコ』アンバサダーオーディション",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-10-19T18:00:00+09:00",
+    // イベントページの「21:59」を秒単位の終了境界へ正規化する。
+    end: "2026-10-25T21:59:59.999+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  note: "MISS CIRCLE CONTEST 2026のセミファイナル審査とは別のSHOWROOMイベントです。イベント期間の終了は10月25日21:59。最新情報・参加条件は出典のイベントページをご確認ください。",
+  source: "https://www.showroom-live.com/event/kobe_montebranco",
+  verifiedAt: "2026-10-24",
+};
+
 export const supportEvents: SupportEvent[] = [
   campusGirlsFinalStagePatonVote,
   missCircleThirdRoundWebVote,
@@ -395,4 +413,5 @@ export const supportEvents: SupportEvent[] = [
   campusGirlsFinalsExFour,
   campusGirlsFinalsExFive,
   campusGirlsFinalsExSix,
+  kobeMontebrancoAmbassadorAudition,
 ];
