@@ -1,0 +1,177 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23616187,
+  "dateJst": "2026-10-29",
+  "session": "morning",
+  "label": "10月29日朝 セミファイナル初日の歌枠",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "metrics": {
+    "firstVisits": null,
+    "repeatVisits": null,
+    "visits": null,
+    "comments": null,
+    "newFollows": null,
+    "stars": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "observations": [],
+  "timingComparisonEligible": false,
+  "quality": {
+    "finalVerified": false,
+    "coverageComplete": false,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "referenceSnapshot": {
+    "source": "第三者SHOWROOM Emulatorの保存済み最終有効オンライン画面記録を担当者が照合",
+    "verified_final": false,
+    "savedObservedAtJst": "2026-10-29T06:34:16.126+09:00",
+    "lastScreenProgressAtJst": "2026-10-29T06:32:47.154+09:00",
+    "offlineReceiptAtJst": "2026-10-29T06:44:34.260+09:00",
+    "metrics": {
+      "firstVisits": 21,
+      "repeatVisits": 25,
+      "visits": 649,
+      "comments": 319,
+      "newFollows": 2,
+      "stars": 4665,
+      "otherFree": 6170,
+      "star100People": 43,
+      "recommendedCommentPeople": 48
+    },
+    "fieldLabels": {
+      "firstVisits": {
+        "rawField": "visitarea",
+        "label": "初訪問"
+      },
+      "repeatVisits": {
+        "rawField": "visit2area",
+        "label": "2度訪問"
+      },
+      "visits": {
+        "rawField": "visittotalarea",
+        "label": "総訪問"
+      },
+      "comments": {
+        "rawField": "commentarea",
+        "label": "投稿数"
+      },
+      "newFollows": {
+        "rawField": "followarea",
+        "label": "新規follow"
+      },
+      "stars": {
+        "rawField": "twinklearea",
+        "label": "星個数"
+      },
+      "otherFree": {
+        "rawField": "othergiftarea",
+        "label": "その他free"
+      },
+      "star100People": {
+        "rawField": "twinkletotalarea",
+        "label": "星100貢献人数"
+      },
+      "recommendedCommentPeople": {
+        "rawField": "recommendarea",
+        "label": "おすすめcomment人数"
+      }
+    },
+    "note": "第三者SHOWROOM Emulatorの最終有効画面参考値です。公式総訪問・同時視聴者・実人数・確定贈呈量・公式pt・確定終値ではありません。「総訪問」の算出方法も未確認です。保存観測時刻は画面内容の進行時刻や真の配信終端ではありません。offlineの0は終値へ採用していません。",
+    "official": false
+  },
+  "recording": {
+    "saved": true,
+    "exitCode": 0,
+    "processingStartedAtJst": "2026-10-29T06:00:13+09:00",
+    "processingEndedAtJst": "2026-10-29T06:33:16+09:00",
+    "bytes": 250519993,
+    "durationSeconds": 1938.737,
+    "codec": "H264/AAC",
+    "videoResolution": "640x360",
+    "fullContinuityVerified": false,
+    "audioSyncVerified": false,
+    "officialStartVerified": false,
+    "endWarningsPresent": true
+  },
+  "contentEvidence": {
+    "basis": "提供された視聴メモの非逐語要約",
+    "manualAudioListeningSeconds": 0,
+    "songTitlesAudioVerified": false
+  },
+  "collectionQuality": {
+    "rows": 393,
+    "completeMetricRows": 360,
+    "partialRows": 33,
+    "repeatedSameValueRows": 180,
+    "regressions": 0,
+    "gapsOver20Seconds": 4,
+    "maxGapSeconds": 43.002,
+    "domDroppedFragments": 189627,
+    "domDropReason": "byte_limit",
+    "rawComplete": false,
+    "receivedFrames": 1521,
+    "savedFrames": 1521,
+    "pendingFrames": 0,
+    "droppedFrames": 0,
+    "collectorFinished": true,
+    "collectorExitCode": 0,
+    "collectorFinishedAtJst": "2026-10-29T06:44:39.377+09:00",
+    "note": "画面変化の断片数はコメント件数やギフト件数ではありません。受信済みフレームの保存一致は全イベントの完全捕捉を証明しません。"
+  },
+  "starTrendReference": {
+    "official": false,
+    "basis": "同一回の画面進行時刻に対応する参考値。代表8点、間を補間しない。",
+    "initialToLastIncrease": 4545,
+    "star100PeopleIncrease": 42,
+    "largestAdjacentSampleIncrease": 1074,
+    "points": [
+      {
+        "screenProgressAtJst": "2026-10-29T06:00:30+09:00",
+        "stars": 120,
+        "star100People": 1
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:04:52+09:00",
+        "stars": 994,
+        "star100People": 8
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:09:51+09:00",
+        "stars": 2068,
+        "star100People": 18
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:14:53+09:00",
+        "stars": 2640,
+        "star100People": 23
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:19:54+09:00",
+        "stars": 3390,
+        "star100People": 31
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:24:59+09:00",
+        "stars": 4041,
+        "star100People": 37
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:29:59+09:00",
+        "stars": 4524,
+        "star100People": 42
+      },
+      {
+        "screenProgressAtJst": "2026-10-29T06:32:47+09:00",
+        "stars": 4665,
+        "star100People": 43
+      }
+    ],
+    "note": "代表点間で最大の増加は6:04:52〜6:09:51の＋1,074。曲・投票呼びかけとの因果関係、1.2倍換算、公式ポイントや全ギフト量を推定しません。"
+  }
+}
