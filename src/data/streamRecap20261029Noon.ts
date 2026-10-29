@@ -24,10 +24,10 @@ export const streamRecap20261029Noon: StreamRecap = {
   gallery: noonGallery,
   highlights: [
     { timestamp: "0:02:00", title: "昼枠の応援タイム", body: "きら星の応援について呼びかけ、短い昼枠に足を運んだ人たちへお礼を伝えていました。" },
-    { timestamp: "0:06:40", title: "ファイナルへの思い", body: "次のステージに進みたい気持ちと、応援への感謝が語られました。", clip: { src: "/media/live/mily-b241-07-20261029-noon-final-talk.mp4", poster: "/media/live/mily-b241-07-20261029-noon-final-talk-cover.jpg", width: 640, height: 360, durationSeconds: 16, sourceTimestamp: "0:06:38" } },
+    { timestamp: "0:06:38", title: "ファイナルへの思い", body: "次のステージに進みたい気持ちと、応援への感謝が語られました。", clip: { src: "/media/live-clips/mily-b241-07-20261029-noon-final-talk.mp4", poster: "/media/live/mily-b241-07-20261029-noon-final-talk-cover.jpg", width: 640, height: 360, durationSeconds: 16, sourceTimestamp: "0:06:38" } },
     { timestamp: "0:12:50", title: "きら星の送り方", body: "きら星の送り方や切り替えのタイミングについて、リスナーと確認する場面がありました。" },
-    { timestamp: "0:17:05", title: "一緒に頑張りたい", body: "セミファイナルの話題と、ここからみんなで頑張りたいという呼びかけがありました。", clip: { src: "/media/live/mily-b241-08-20261029-noon-together-talk.mp4", poster: "/media/live/mily-b241-08-20261029-noon-together-talk-cover.jpg", width: 640, height: 360, durationSeconds: 17, sourceTimestamp: "0:17:05" } },
-    { timestamp: "0:28:36", title: "お礼と次枠の話", body: "応援へのお礼を伝え、配信時点では同日夜の枠についても案内していました。", clip: { src: "/media/live/mily-b241-09-20261029-noon-thanks-talk.mp4", poster: "/media/live/mily-b241-09-20261029-noon-thanks-talk-cover.jpg", width: 640, height: 360, durationSeconds: 18, sourceTimestamp: "0:28:36" }, relatedLinks: [{ label: "昼枠の画面参考値と欠測", url: "/data-lab/reports/20261029-noon/" }] },
+    { timestamp: "0:17:05", title: "一緒に頑張りたい", body: "セミファイナルの話題と、ここからみんなで頑張りたいという呼びかけがありました。", clip: { src: "/media/live-clips/mily-b241-08-20261029-noon-together-talk.mp4", poster: "/media/live/mily-b241-08-20261029-noon-together-talk-cover.jpg", width: 640, height: 360, durationSeconds: 17, sourceTimestamp: "0:17:05" } },
+    { timestamp: "0:28:36", title: "お礼と次枠の話", body: "応援へのお礼を伝え、配信時点では同日夜の枠についても案内していました。", clip: { src: "/media/live-clips/mily-b241-09-20261029-noon-thanks-talk.mp4", poster: "/media/live/mily-b241-09-20261029-noon-thanks-talk-cover.jpg", width: 640, height: 360, durationSeconds: 18, sourceTimestamp: "0:28:36" }, relatedLinks: [{ label: "昼枠の画面参考値と欠測", url: "/data-lab/reports/20261029-noon/" }] },
   ],
   goals: [],
   ranking: [],

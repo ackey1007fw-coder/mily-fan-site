@@ -8,7 +8,7 @@
 - **公開しないもの**：全編MKV、ASR全記録、数値生ログ、視聴者名・コメント・個別貢献順位、非公開パス、承認外の歌唱映像。Vercel本番では6JPEGと3MP4、同回の3posterを個別読み戻しして公開検収する。
 - **SHA256／寸法**：写真・posterは640×360、MP4は映像640×360＋音声。以下は派生バイトの照合値。
 
-| # | 公開ファイル（public/media/live/） | 録画内の目安 | Bytes | SHA256 |
+| # | 公開ファイル（JPEG：public/media/live/、MP4：public/media/live-clips/） | 録画内の目安 | Bytes | SHA256 |
 | --- | --- | --- | ---: | --- |
 | 01 | `mily-b241-01-20261029-noon-hands-pose.jpg` | 0:04:25 | 19730 | `f3c968f4703a8f1e177d375c1e163caa77e74df3c9bdf264a63670035e5ef08d` |
 | 02 | `mily-b241-02-20261029-noon-smile.jpg` | 0:06:40 | 20068 | `414ddce3b8d70ca3866b65d8026a324ed07c9a9b9958b243fbef744692638c32` |
