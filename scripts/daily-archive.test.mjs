@@ -19,7 +19,7 @@ test("daily archive uses one real public snapshot per date/slot and latest-first
   for (const entry of DAILY_STREAM_ENTRIES) {
     const data = dataFor(entry.file);
     assert.equal(data.dateJst ?? data.date_jst, entry.date);
-    assert.match(entry.section, /^(morning|noon|night)-202610\d\d$/);
+    assert.match(entry.section, /^(morning|morning1|noon|night)-202610\d\d$/);
     assert.match(entry.report, /^\/data-lab\//);
   }
 });
