@@ -280,6 +280,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-29-x-miss-circle-semifinal-period",
+    date: "2026-10-29",
+    sameDayOrder: 1200,
+    activityIds: ["miss-circle"],
+    title: "MISS CIRCLE CONTEST 2026 セミファイナル🔥 投票期間は10/29〜11/8",
+    body: "10月29日12:00（日本時間）、みりぃがXで、MISS CIRCLE CONTEST 2026のセミファイナルに進出したことを伝えました。投票期間は10/29〜11/8です。\n\n本人によると、セミファイナルには現在35名が出場し、ファイナルへ進めるのは12名です。投票は1日1票ずつ、毎日3人までと案内しています。元の投稿は本人のXからご覧ください。",
+    source: "https://x.com/Mily_chan36/status/2115639888062345707",
+    sourceLabel: "みりぃ本人のX投稿を見る（10月29日）",
+    message: {
+      label: "みりぃの投稿",
+      text: "現在地：セミファイナル🔥\n現在35名いますが、ここからファイナルへ進めるのはわずか12名のみ。",
+    },
+  },
+  {
     id: "2026-10-25-radio-halloween-stories",
     date: "2026-10-25",
     dateBasis: "confirmed-on",
