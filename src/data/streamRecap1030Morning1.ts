@@ -1,7 +1,7 @@
 import type { StreamRecap } from "./streamRecaps.ts";
 import { buildTranscriptionNote } from "./streamRecapRules.ts";
 
-export const streamRecap20261030Morning1: StreamRecap = {
+export const streamRecap1030Morning1: StreamRecap = {
   id: "2026-10-30-morning1-showroom",
   date: "2026-10-30",
   dateLabel: "2026.10.30（金）",

@@ -23,7 +23,7 @@ test('October 28 morning keeps ASR summary, black-video limits and screen refere
  assert.match(html,/noindex,nofollow,noarchive/);assert.doesNotMatch(html,/<img|<video|<audio/);
  assert.equal((injectVercelWebAnalytics(html).match(/src="\/mily-analytics-loader.js"/g)??[]).length,1);
  const lab=readFileSync('data-lab/index.html','utf8');
- assert.match(lab,/<nav id="daily-fallback-links"[^>]*><a href="#noon-20261029">10\/29<\/a><a href="#morning-20261028">10\/28<\/a>/);
+ assert.match(lab,/<nav id="daily-fallback-links"[^>]*>[\s\S]*?<a href="#noon-20261029">10\/29<\/a><a href="#morning-20261028">10\/28<\/a>/);
  assert.equal((lab.match(/id="morning-20261028"/g)??[]).length,1);
  const all=JSON.stringify(r)+html+JSON.stringify(d);
  assert.doesNotMatch(all,/あっきー|アッキー|ピラ|drive\.google|\.jsonl|C:\\\\Users/);
