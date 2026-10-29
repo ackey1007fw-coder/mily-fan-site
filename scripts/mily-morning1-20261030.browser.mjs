@@ -54,10 +54,12 @@ try {
         await day.waitFor();
         if (await day.getAttribute("open") === null) await day.locator("summary").click();
         await day.locator("svg circle").first().waitFor();
-        assert.equal(await day.locator(".daily-stream-card").count(), 1);
-        assert.match(await day.locator("h4").innerText(), /朝1枠目/);
-        assert.equal(await day.locator(".daily-stream-number").innerText(), "1,898");
-        assert.equal(await day.locator("svg circle").count(), 100);
+        assert.equal(await day.locator(".daily-stream-card").count(), 2);
+        const card = day.locator(".daily-stream-card").filter({ has: page.locator("h4", { hasText: "朝1枠目" }) });
+        assert.equal(await card.count(), 1);
+        assert.match(await card.locator("h4").innerText(), /朝1枠目/);
+        assert.equal(await card.locator(".daily-stream-number").innerText(), "1,898");
+        assert.equal(await card.locator("svg circle").count(), 100);
         await page.goto(base + "/activities/live/#recap-2026-10-30-morning1-showroom", { waitUntil: "networkidle" });
         const recap = page.locator("#recap-2026-10-30-morning1-showroom");
         await recap.waitFor();
