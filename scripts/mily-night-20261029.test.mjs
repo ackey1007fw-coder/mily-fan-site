@@ -122,3 +122,16 @@ test('public surfaces do not contain private endpoints, storage paths or raw vie
   const text=JSON.stringify(data)+html+read('src/data/streamRecap20261029Night.ts');
   assert.doesNotMatch(text,/C:\\Users|AppData|MilyPrivateCollection|slack\.com|app\.notion\.com|delivery_token|writer_pid|viewer_name|transcript\.jsonl|\.mkv/);
 });
+
+test('night recap satisfies shared presentation limits without inventing a midnight offset', () => {
+  assert.ok(recap.theme.startsWith('夜'));
+  assert.ok(recap.theme.length <= 16);
+  assert.ok(recap.summary.length <= 140);
+  assert.match(recap.broadcastLabel, /^録画開始23:02頃〜 約59分$/);
+  for (const h of recap.highlights) {
+    assert.match(h.timestamp, /^(?:[01]?\d|2[0-3]):[0-5]\d頃$/);
+    assert.ok(h.title.length <= 20);
+    assert.ok(h.body.length <= 100);
+  }
+  assert.match(recap.transcriptionNote, /映像との同期や正式な配信開始・終了時刻は確認していません/);
+});
