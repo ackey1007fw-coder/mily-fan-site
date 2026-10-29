@@ -1,5 +1,6 @@
 // Published anonymous snapshots only. No private dashboard, live API, or inferred values.
 export const DAILY_STREAM_ENTRIES = Object.freeze([
+  {date:"2026-10-30",slot:"morning1",file:"mily-morning1-20261030-aggregate.json",section:"morning1-20261030",report:"/data-lab/reports/20261030-morning1/"},
   {date:"2026-10-29",slot:"noon",file:"mily-noon-20261029-aggregate.json",section:"noon-20261029",report:"/data-lab/reports/20261029-noon/"},
   {date:"2026-10-28",slot:"morning",file:"mily-morning-20261028-aggregate.json",section:"morning-20261028",report:"/data-lab/reports/20261028-morning/"},
   {date:"2026-10-27",slot:"night",file:"mily-night-20261027-aggregate.json",section:"night-20261027",report:"/data-lab/reports/20261027-night/"},
@@ -34,8 +35,8 @@ export const METRICS = Object.freeze({
   visits: "総訪問表示",
   comments: "コメント表示",
 });
-export const SLOT_LABELS = Object.freeze({ morning: "朝", noon: "昼", night: "夜" });
-const slotOrder = Object.freeze({ night: 0, noon: 1, morning: 2 });
+export const SLOT_LABELS = Object.freeze({ morning: "朝", morning1: "朝1枠目（5時台）", noon: "昼", night: "夜" });
+const slotOrder = Object.freeze({ night: 0, noon: 1, morning: 2, morning1: 3 });
 
 export function groupByBroadcastDate(entries = DAILY_STREAM_ENTRIES) {
   const sorted = [...entries].sort((a, b) =>

@@ -98,7 +98,7 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 16, "Sixteen broadcast dates from 10/14 through 10/29");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 17, "Seventeen broadcast dates from 10/14 through 10/30");
             const day29 = page.locator("#daily-2026-10-29");
             assert.equal(await day29.count(), 1, "Oct 29 noon has its own date");
             if (!(await day29.getAttribute("open") !== null)) await day29.locator("summary").click();
