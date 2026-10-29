@@ -121,10 +121,10 @@
     "counterSource": "normal_visible_ui"
   },
   "recap": {
-    "basis": "保存された速報自動文字起こし88処理区間の非逐語要約。原音全編の手動確認、映像との同期、全編無欠落は未確認。",
+    "basis": "保存ASR88処理区間の非逐語要約。同じ昼枠の実フレーム写真6枚と原音の短いトーク3本をLIVE STREAMで公開。原音の全編手動聴取・全編無欠落は未確認。",
     "summary": "セミファイナル初日の感謝、きら星の応援、次のステージへの思いを話した昼枠。",
-    "publishedStills": 0,
-    "publishedTalkClips": 0,
+    "publishedStills": 6,
+    "publishedTalkClips": 3,
     "liveRecapUrl": "/activities/live/#recap-2026-10-29-noon-showroom"
   },
   "format": "showroom"
