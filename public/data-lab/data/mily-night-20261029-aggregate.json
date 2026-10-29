@@ -1,0 +1,2294 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23619613,
+  "dateJst": "2026-10-29",
+  "session": "night",
+  "format": "showroom",
+  "label": "10月29日 23:00枠・夜のSHOWROOM配信",
+  "eventName": "セミファイナル初日の夜。画面参考値を獲得イベントpt・最終順位に換算しません。",
+  "sourceDescription": "同一夜枠の通常閲覧画面に保存された匿名カウンター。個人別の貢献情報・コメント本文・生ログを含まない固定スナップショットです。",
+  "verifiedAtJst": "2026-10-30",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": {
+    "atJst": "2026-10-29T23:58:38.673+09:00",
+    "uiProgressAtJst": "2026-10-29T23:57:09.074+09:00",
+    "stars": 3984,
+    "visits": null,
+    "comments": null,
+    "firstVisits": 9,
+    "repeatVisits": 7,
+    "newFollows": null,
+    "otherFree": 2320,
+    "star100People": 38,
+    "recommendedCommentPeople": 19,
+    "confirmedFinal": false
+  },
+  "metrics": {
+    "stars": 3984,
+    "visits": null,
+    "comments": null,
+    "firstVisits": 9,
+    "repeatVisits": 7,
+    "newFollows": null,
+    "otherFree": 2320,
+    "star100People": 38,
+    "recommendedCommentPeople": 19
+  },
+  "observations": [
+    {
+      "atJst": "2026-10-29T23:02:28.288+09:00",
+      "stars": 0,
+      "otherFree": 0,
+      "star100People": 0,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 0
+    },
+    {
+      "atJst": "2026-10-29T23:02:32.681+09:00",
+      "stars": 100,
+      "otherFree": 0,
+      "star100People": 1,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 0
+    },
+    {
+      "atJst": "2026-10-29T23:02:38.665+09:00",
+      "stars": 100,
+      "otherFree": 0,
+      "star100People": 1,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:02:42.815+09:00",
+      "stars": 200,
+      "otherFree": 0,
+      "star100People": 2,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:02:48.003+09:00",
+      "stars": 300,
+      "otherFree": 0,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:02:56.438+09:00",
+      "stars": 300,
+      "otherFree": 20,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:01.235+09:00",
+      "stars": 300,
+      "otherFree": 60,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:06.483+09:00",
+      "stars": 300,
+      "otherFree": 120,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:10.757+09:00",
+      "stars": 300,
+      "otherFree": 140,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:15.978+09:00",
+      "stars": 310,
+      "otherFree": 140,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:20.607+09:00",
+      "stars": 330,
+      "otherFree": 140,
+      "star100People": 3,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:34.497+09:00",
+      "stars": 510,
+      "otherFree": 140,
+      "star100People": 4,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:48.935+09:00",
+      "stars": 592,
+      "otherFree": 140,
+      "star100People": 5,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:03:55.253+09:00",
+      "stars": 600,
+      "otherFree": 140,
+      "star100People": 6,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:04:20.320+09:00",
+      "stars": 600,
+      "otherFree": 180,
+      "star100People": 6,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:04:28.768+09:00",
+      "stars": 600,
+      "otherFree": 200,
+      "star100People": 6,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:05:15.429+09:00",
+      "stars": 700,
+      "otherFree": 200,
+      "star100People": 7,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 2
+    },
+    {
+      "atJst": "2026-10-29T23:05:19.665+09:00",
+      "stars": 800,
+      "otherFree": 200,
+      "star100People": 8,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 2
+    },
+    {
+      "atJst": "2026-10-29T23:05:32.524+09:00",
+      "stars": 800,
+      "otherFree": 200,
+      "star100People": 8,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 2
+    },
+    {
+      "atJst": "2026-10-29T23:06:03.915+09:00",
+      "stars": 810,
+      "otherFree": 200,
+      "star100People": 8,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 2
+    },
+    {
+      "atJst": "2026-10-29T23:06:11.144+09:00",
+      "stars": 840,
+      "otherFree": 200,
+      "star100People": 8,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 2
+    },
+    {
+      "atJst": "2026-10-29T23:06:16.499+09:00",
+      "stars": 860,
+      "otherFree": 200,
+      "star100People": 8,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 2
+    },
+    {
+      "atJst": "2026-10-29T23:06:24.782+09:00",
+      "stars": 890,
+      "otherFree": 200,
+      "star100People": 8,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 3
+    },
+    {
+      "atJst": "2026-10-29T23:06:29.217+09:00",
+      "stars": 900,
+      "otherFree": 200,
+      "star100People": 9,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 3
+    },
+    {
+      "atJst": "2026-10-29T23:07:17.436+09:00",
+      "stars": 930,
+      "otherFree": 200,
+      "star100People": 9,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 4
+    },
+    {
+      "atJst": "2026-10-29T23:07:24.245+09:00",
+      "stars": 950,
+      "otherFree": 200,
+      "star100People": 9,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 4
+    },
+    {
+      "atJst": "2026-10-29T23:07:31.126+09:00",
+      "stars": 970,
+      "otherFree": 200,
+      "star100People": 9,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 4
+    },
+    {
+      "atJst": "2026-10-29T23:07:39.223+09:00",
+      "stars": 1000,
+      "otherFree": 200,
+      "star100People": 10,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 4
+    },
+    {
+      "atJst": "2026-10-29T23:08:13.278+09:00",
+      "stars": 1000,
+      "otherFree": 200,
+      "star100People": 10,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:08:22.544+09:00",
+      "stars": 1020,
+      "otherFree": 200,
+      "star100People": 10,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:08:28.839+09:00",
+      "stars": 1040,
+      "otherFree": 200,
+      "star100People": 10,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:08:33.135+09:00",
+      "stars": 1050,
+      "otherFree": 200,
+      "star100People": 10,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:08:38.542+09:00",
+      "stars": 1170,
+      "otherFree": 200,
+      "star100People": 11,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:08:42.996+09:00",
+      "stars": 1180,
+      "otherFree": 200,
+      "star100People": 11,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:08:49.049+09:00",
+      "stars": 1200,
+      "otherFree": 200,
+      "star100People": 12,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 5
+    },
+    {
+      "atJst": "2026-10-29T23:09:02.533+09:00",
+      "stars": 1200,
+      "otherFree": 200,
+      "star100People": 12,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 6
+    },
+    {
+      "atJst": "2026-10-29T23:09:32.472+09:00",
+      "stars": 1300,
+      "otherFree": 200,
+      "star100People": 13,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 6
+    },
+    {
+      "atJst": "2026-10-29T23:12:20.631+09:00",
+      "stars": 1310,
+      "otherFree": 200,
+      "star100People": 13,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 6
+    },
+    {
+      "atJst": "2026-10-29T23:12:25.422+09:00",
+      "stars": 1330,
+      "otherFree": 200,
+      "star100People": 13,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 6
+    },
+    {
+      "atJst": "2026-10-29T23:12:34.700+09:00",
+      "stars": 1360,
+      "otherFree": 200,
+      "star100People": 13,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 7
+    },
+    {
+      "atJst": "2026-10-29T23:12:42.398+09:00",
+      "stars": 1390,
+      "otherFree": 200,
+      "star100People": 13,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 7
+    },
+    {
+      "atJst": "2026-10-29T23:12:46.915+09:00",
+      "stars": 1400,
+      "otherFree": 200,
+      "star100People": 14,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 7
+    },
+    {
+      "atJst": "2026-10-29T23:13:03.628+09:00",
+      "stars": 1500,
+      "otherFree": 200,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 7
+    },
+    {
+      "atJst": "2026-10-29T23:13:09.421+09:00",
+      "stars": 1500,
+      "otherFree": 200,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:13:17.675+09:00",
+      "stars": 1500,
+      "otherFree": 210,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:13:44.964+09:00",
+      "stars": 1500,
+      "otherFree": 230,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:13:49.327+09:00",
+      "stars": 1500,
+      "otherFree": 260,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:13:53.711+09:00",
+      "stars": 1500,
+      "otherFree": 290,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:13:58.240+09:00",
+      "stars": 1500,
+      "otherFree": 300,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:14:02.523+09:00",
+      "stars": 1500,
+      "otherFree": 310,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:06.922+09:00",
+      "stars": 1600,
+      "otherFree": 310,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:15.228+09:00",
+      "stars": 1600,
+      "otherFree": 320,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:19.517+09:00",
+      "stars": 1600,
+      "otherFree": 330,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:27.876+09:00",
+      "stars": 1600,
+      "otherFree": 360,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:32.382+09:00",
+      "stars": 1600,
+      "otherFree": 390,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:36.826+09:00",
+      "stars": 1600,
+      "otherFree": 420,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:41.301+09:00",
+      "stars": 1600,
+      "otherFree": 460,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:45.875+09:00",
+      "stars": 1600,
+      "otherFree": 480,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:50.260+09:00",
+      "stars": 1600,
+      "otherFree": 510,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:54.861+09:00",
+      "stars": 1600,
+      "otherFree": 550,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:16:59.324+09:00",
+      "stars": 1600,
+      "otherFree": 580,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:18:51.004+09:00",
+      "stars": 1620,
+      "otherFree": 580,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:18:57.176+09:00",
+      "stars": 1640,
+      "otherFree": 580,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:02.807+09:00",
+      "stars": 1660,
+      "otherFree": 580,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:07.211+09:00",
+      "stars": 1670,
+      "otherFree": 580,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:12.748+09:00",
+      "stars": 1690,
+      "otherFree": 580,
+      "star100People": 16,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:21.768+09:00",
+      "stars": 1800,
+      "otherFree": 580,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:26.015+09:00",
+      "stars": 1800,
+      "otherFree": 610,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:30.554+09:00",
+      "stars": 1800,
+      "otherFree": 660,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:35.325+09:00",
+      "stars": 1800,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:05.383+09:00",
+      "stars": 1810,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:11.559+09:00",
+      "stars": 1830,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:20.428+09:00",
+      "stars": 1840,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:27.668+09:00",
+      "stars": 1870,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:32.525+09:00",
+      "stars": 1890,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:36.917+09:00",
+      "stars": 1900,
+      "otherFree": 680,
+      "star100People": 19,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:20:45.521+09:00",
+      "stars": 1900,
+      "otherFree": 690,
+      "star100People": 19,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:21:20.079+09:00",
+      "stars": 2000,
+      "otherFree": 690,
+      "star100People": 20,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:02.822+09:00",
+      "stars": 2100,
+      "otherFree": 690,
+      "star100People": 21,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:23.693+09:00",
+      "stars": 2100,
+      "otherFree": 691,
+      "star100People": 21,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:28.023+09:00",
+      "stars": 2200,
+      "otherFree": 698,
+      "star100People": 22,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:41.317+09:00",
+      "stars": 2200,
+      "otherFree": 700,
+      "star100People": 22,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:46.167+09:00",
+      "stars": 2210,
+      "otherFree": 700,
+      "star100People": 22,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:53.318+09:00",
+      "stars": 2240,
+      "otherFree": 700,
+      "star100People": 22,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:22:58.737+09:00",
+      "stars": 2260,
+      "otherFree": 700,
+      "star100People": 22,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:23:04.312+09:00",
+      "stars": 2280,
+      "otherFree": 700,
+      "star100People": 22,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:23:10.019+09:00",
+      "stars": 2300,
+      "otherFree": 700,
+      "star100People": 23,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:23:32.227+09:00",
+      "stars": 2310,
+      "otherFree": 700,
+      "star100People": 23,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:23:39.864+09:00",
+      "stars": 2330,
+      "otherFree": 700,
+      "star100People": 23,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:23:49.640+09:00",
+      "stars": 2370,
+      "otherFree": 700,
+      "star100People": 23,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:23:55.708+09:00",
+      "stars": 2390,
+      "otherFree": 700,
+      "star100People": 23,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:24:00.291+09:00",
+      "stars": 2400,
+      "otherFree": 700,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:24:29.314+09:00",
+      "stars": 2430,
+      "otherFree": 700,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:24:42.751+09:00",
+      "stars": 2490,
+      "otherFree": 700,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-10-29T23:25:09.952+09:00",
+      "stars": 2490,
+      "otherFree": 720,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-10-29T23:25:16.085+09:00",
+      "stars": 2490,
+      "otherFree": 750,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-10-29T23:25:20.775+09:00",
+      "stars": 2490,
+      "otherFree": 780,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-10-29T23:25:26.923+09:00",
+      "stars": 2590,
+      "otherFree": 820,
+      "star100People": 25,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-10-29T23:25:33.169+09:00",
+      "stars": 2590,
+      "otherFree": 870,
+      "star100People": 25,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 10
+    },
+    {
+      "atJst": "2026-10-29T23:25:38.255+09:00",
+      "stars": 2590,
+      "otherFree": 880,
+      "star100People": 25,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 10
+    },
+    {
+      "atJst": "2026-10-29T23:25:45.292+09:00",
+      "stars": 2690,
+      "otherFree": 920,
+      "star100People": 26,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:27:52.915+09:00",
+      "stars": 2690,
+      "otherFree": 920,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:28:05.587+09:00",
+      "stars": 2690,
+      "otherFree": 940,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:28:12.227+09:00",
+      "stars": 2692,
+      "otherFree": 1000,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:28:17.916+09:00",
+      "stars": 2692,
+      "otherFree": 1050,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:28:22.954+09:00",
+      "stars": 2692,
+      "otherFree": 1100,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:28:28.414+09:00",
+      "stars": 2692,
+      "otherFree": 1140,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:28:34.336+09:00",
+      "stars": 2692,
+      "otherFree": 1160,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:08.554+09:00",
+      "stars": 2693,
+      "otherFree": 1180,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:13.354+09:00",
+      "stars": 2693,
+      "otherFree": 1190,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:18.544+09:00",
+      "stars": 2693,
+      "otherFree": 1200,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:24.690+09:00",
+      "stars": 2703,
+      "otherFree": 1220,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:32.331+09:00",
+      "stars": 2733,
+      "otherFree": 1240,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:40.791+09:00",
+      "stars": 2763,
+      "otherFree": 1260,
+      "star100People": 26,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:48.869+09:00",
+      "stars": 2793,
+      "otherFree": 1280,
+      "star100People": 27,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 11
+    },
+    {
+      "atJst": "2026-10-29T23:29:56.931+09:00",
+      "stars": 2803,
+      "otherFree": 1310,
+      "star100People": 27,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 12
+    },
+    {
+      "atJst": "2026-10-29T23:30:07.816+09:00",
+      "stars": 2843,
+      "otherFree": 1340,
+      "star100People": 27,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 12
+    },
+    {
+      "atJst": "2026-10-29T23:30:21.420+09:00",
+      "stars": 2893,
+      "otherFree": 1370,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 12
+    },
+    {
+      "atJst": "2026-10-29T23:30:26.912+09:00",
+      "stars": 2893,
+      "otherFree": 1400,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 12
+    },
+    {
+      "atJst": "2026-10-29T23:30:31.460+09:00",
+      "stars": 2893,
+      "otherFree": 1400,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:30:35.619+09:00",
+      "stars": 2893,
+      "otherFree": 1420,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:30:40.238+09:00",
+      "stars": 2893,
+      "otherFree": 1430,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:30:44.768+09:00",
+      "stars": 2893,
+      "otherFree": 1440,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:30:49.093+09:00",
+      "stars": 2893,
+      "otherFree": 1460,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:30:53.672+09:00",
+      "stars": 2893,
+      "otherFree": 1480,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:30:58.308+09:00",
+      "stars": 2893,
+      "otherFree": 1510,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:03.227+09:00",
+      "stars": 2893,
+      "otherFree": 1550,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:08.381+09:00",
+      "stars": 2893,
+      "otherFree": 1590,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:13.977+09:00",
+      "stars": 2893,
+      "otherFree": 1620,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:18.894+09:00",
+      "stars": 2893,
+      "otherFree": 1660,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:24.085+09:00",
+      "stars": 2893,
+      "otherFree": 1700,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:29.411+09:00",
+      "stars": 2893,
+      "otherFree": 1720,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:31:55.887+09:00",
+      "stars": 2893,
+      "otherFree": 1720,
+      "star100People": 28,
+      "firstVisits": 2,
+      "repeatVisits": 2,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:32:26.384+09:00",
+      "stars": 2893,
+      "otherFree": 1720,
+      "star100People": 28,
+      "firstVisits": 3,
+      "repeatVisits": 2,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:32:56.398+09:00",
+      "stars": 2993,
+      "otherFree": 1720,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 2,
+      "recommendedCommentPeople": 13
+    },
+    {
+      "atJst": "2026-10-29T23:33:36.526+09:00",
+      "stars": 2993,
+      "otherFree": 1720,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 2,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:35:08.641+09:00",
+      "stars": 2993,
+      "otherFree": 1720,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:36:55.201+09:00",
+      "stars": 2993,
+      "otherFree": 1740,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:00.048+09:00",
+      "stars": 2993,
+      "otherFree": 1770,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:05.132+09:00",
+      "stars": 2993,
+      "otherFree": 1790,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:09.799+09:00",
+      "stars": 2993,
+      "otherFree": 1810,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:15.941+09:00",
+      "stars": 3003,
+      "otherFree": 1810,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:21.523+09:00",
+      "stars": 3023,
+      "otherFree": 1810,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:27.264+09:00",
+      "stars": 3043,
+      "otherFree": 1810,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:33.381+09:00",
+      "stars": 3063,
+      "otherFree": 1810,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:37:38.682+09:00",
+      "stars": 3073,
+      "otherFree": 1810,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:38:08.034+09:00",
+      "stars": 3173,
+      "otherFree": 1810,
+      "star100People": 30,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:38:38.903+09:00",
+      "stars": 3273,
+      "otherFree": 1810,
+      "star100People": 31,
+      "firstVisits": 3,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:21.376+09:00",
+      "stars": 3273,
+      "otherFree": 1810,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:38.257+09:00",
+      "stars": 3273,
+      "otherFree": 1830,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:43.530+09:00",
+      "stars": 3273,
+      "otherFree": 1860,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:48.649+09:00",
+      "stars": 3273,
+      "otherFree": 1880,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:54.097+09:00",
+      "stars": 3273,
+      "otherFree": 1890,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:58.506+09:00",
+      "stars": 3273,
+      "otherFree": 1920,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:40:03.649+09:00",
+      "stars": 3273,
+      "otherFree": 1930,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:40:08.693+09:00",
+      "stars": 3273,
+      "otherFree": 1970,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:40:46.360+09:00",
+      "stars": 3273,
+      "otherFree": 1990,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:40:50.772+09:00",
+      "stars": 3273,
+      "otherFree": 2000,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:40:55.502+09:00",
+      "stars": 3273,
+      "otherFree": 2010,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:40:59.963+09:00",
+      "stars": 3273,
+      "otherFree": 2020,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:04.475+09:00",
+      "stars": 3273,
+      "otherFree": 2030,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:09.155+09:00",
+      "stars": 3273,
+      "otherFree": 2040,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:13.621+09:00",
+      "stars": 3273,
+      "otherFree": 2050,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:18.082+09:00",
+      "stars": 3273,
+      "otherFree": 2060,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:22.546+09:00",
+      "stars": 3273,
+      "otherFree": 2070,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:26.973+09:00",
+      "stars": 3273,
+      "otherFree": 2080,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:31.479+09:00",
+      "stars": 3273,
+      "otherFree": 2090,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:36.146+09:00",
+      "stars": 3273,
+      "otherFree": 2100,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:40.570+09:00",
+      "stars": 3273,
+      "otherFree": 2100,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:41:45.014+09:00",
+      "stars": 3273,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:42:41.497+09:00",
+      "stars": 3273,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 4,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:43:16.709+09:00",
+      "stars": 3273,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 4,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:44:40.400+09:00",
+      "stars": 3273,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:44:53.359+09:00",
+      "stars": 3283,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:44:58.280+09:00",
+      "stars": 3293,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:05.087+09:00",
+      "stars": 3313,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:11.381+09:00",
+      "stars": 3333,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:17.979+09:00",
+      "stars": 3353,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:23.170+09:00",
+      "stars": 3363,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:27.634+09:00",
+      "stars": 3373,
+      "otherFree": 2110,
+      "star100People": 32,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:36.293+09:00",
+      "stars": 3373,
+      "otherFree": 2110,
+      "star100People": 32,
+      "firstVisits": 6,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:45.435+09:00",
+      "stars": 3383,
+      "otherFree": 2110,
+      "star100People": 32,
+      "firstVisits": 6,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:45:53.985+09:00",
+      "stars": 3413,
+      "otherFree": 2110,
+      "star100People": 32,
+      "firstVisits": 6,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:46:05.353+09:00",
+      "stars": 3453,
+      "otherFree": 2110,
+      "star100People": 32,
+      "firstVisits": 6,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:46:13.096+09:00",
+      "stars": 3473,
+      "otherFree": 2110,
+      "star100People": 33,
+      "firstVisits": 6,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:46:31.002+09:00",
+      "stars": 3573,
+      "otherFree": 2110,
+      "star100People": 34,
+      "firstVisits": 6,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:46:35.415+09:00",
+      "stars": 3573,
+      "otherFree": 2110,
+      "star100People": 34,
+      "firstVisits": 7,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:47:20.090+09:00",
+      "stars": 3673,
+      "otherFree": 2110,
+      "star100People": 35,
+      "firstVisits": 7,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:48:24.680+09:00",
+      "stars": 3683,
+      "otherFree": 2110,
+      "star100People": 35,
+      "firstVisits": 7,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:49:42.787+09:00",
+      "stars": 3783,
+      "otherFree": 2110,
+      "star100People": 36,
+      "firstVisits": 8,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:50:23.861+09:00",
+      "stars": 3883,
+      "otherFree": 2110,
+      "star100People": 37,
+      "firstVisits": 8,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:50:29.406+09:00",
+      "stars": 3883,
+      "otherFree": 2110,
+      "star100People": 37,
+      "firstVisits": 8,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 17
+    },
+    {
+      "atJst": "2026-10-29T23:50:33.530+09:00",
+      "stars": 3883,
+      "otherFree": 2110,
+      "star100People": 37,
+      "firstVisits": 8,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:50:37.721+09:00",
+      "stars": 3883,
+      "otherFree": 2110,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:52:36.474+09:00",
+      "stars": 3883,
+      "otherFree": 2120,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:52:41.036+09:00",
+      "stars": 3883,
+      "otherFree": 2130,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:52:45.637+09:00",
+      "stars": 3883,
+      "otherFree": 2150,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:52:50.542+09:00",
+      "stars": 3883,
+      "otherFree": 2160,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:52:55.032+09:00",
+      "stars": 3883,
+      "otherFree": 2180,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:53:01.266+09:00",
+      "stars": 3883,
+      "otherFree": 2190,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 18
+    },
+    {
+      "atJst": "2026-10-29T23:54:52.248+09:00",
+      "stars": 3883,
+      "otherFree": 2210,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-10-29T23:54:57.373+09:00",
+      "stars": 3883,
+      "otherFree": 2230,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-10-29T23:55:02.954+09:00",
+      "stars": 3883,
+      "otherFree": 2280,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-10-29T23:55:10.406+09:00",
+      "stars": 3884,
+      "otherFree": 2320,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-10-29T23:55:32.627+09:00",
+      "stars": 3984,
+      "otherFree": 2320,
+      "star100People": 38,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-10-29T23:57:09.074+09:00",
+      "stars": 3984,
+      "otherFree": 2320,
+      "star100People": 38,
+      "firstVisits": 9,
+      "repeatVisits": 7,
+      "recommendedCommentPeople": 19
+    }
+  ],
+  "selectedObservations": [
+    {
+      "atJst": "2026-10-29T23:02:28.288+09:00",
+      "stars": 0,
+      "otherFree": 0,
+      "star100People": 0,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 0
+    },
+    {
+      "atJst": "2026-10-29T23:04:28.768+09:00",
+      "stars": 600,
+      "otherFree": 200,
+      "star100People": 6,
+      "firstVisits": 0,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 1
+    },
+    {
+      "atJst": "2026-10-29T23:09:32.472+09:00",
+      "stars": 1300,
+      "otherFree": 200,
+      "star100People": 13,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 6
+    },
+    {
+      "atJst": "2026-10-29T23:14:02.523+09:00",
+      "stars": 1500,
+      "otherFree": 310,
+      "star100People": 15,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:19:35.325+09:00",
+      "stars": 1800,
+      "otherFree": 680,
+      "star100People": 18,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-10-29T23:24:42.751+09:00",
+      "stars": 2490,
+      "otherFree": 700,
+      "star100People": 24,
+      "firstVisits": 1,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-10-29T23:29:56.931+09:00",
+      "stars": 2803,
+      "otherFree": 1310,
+      "star100People": 27,
+      "firstVisits": 2,
+      "repeatVisits": 1,
+      "recommendedCommentPeople": 12
+    },
+    {
+      "atJst": "2026-10-29T23:33:36.526+09:00",
+      "stars": 2993,
+      "otherFree": 1720,
+      "star100People": 29,
+      "firstVisits": 3,
+      "repeatVisits": 2,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:39:58.506+09:00",
+      "stars": 3273,
+      "otherFree": 1920,
+      "star100People": 31,
+      "firstVisits": 4,
+      "repeatVisits": 3,
+      "recommendedCommentPeople": 14
+    },
+    {
+      "atJst": "2026-10-29T23:44:58.280+09:00",
+      "stars": 3293,
+      "otherFree": 2110,
+      "star100People": 31,
+      "firstVisits": 5,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 15
+    },
+    {
+      "atJst": "2026-10-29T23:49:42.787+09:00",
+      "stars": 3783,
+      "otherFree": 2110,
+      "star100People": 36,
+      "firstVisits": 8,
+      "repeatVisits": 5,
+      "recommendedCommentPeople": 16
+    },
+    {
+      "atJst": "2026-10-29T23:54:57.373+09:00",
+      "stars": 3883,
+      "otherFree": 2230,
+      "star100People": 37,
+      "firstVisits": 9,
+      "repeatVisits": 6,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-10-29T23:57:09.074+09:00",
+      "stars": 3984,
+      "otherFree": 2320,
+      "star100People": 38,
+      "firstVisits": 9,
+      "repeatVisits": 7,
+      "recommendedCommentPeople": 19
+    }
+  ],
+  "sampleIntervals": [
+    {
+      "fromJst": "2026-10-29T23:02:28.288+09:00",
+      "toJst": "2026-10-29T23:04:28.768+09:00",
+      "seconds": 120.48,
+      "starsIncrease": 600
+    },
+    {
+      "fromJst": "2026-10-29T23:04:28.768+09:00",
+      "toJst": "2026-10-29T23:09:32.472+09:00",
+      "seconds": 303.704,
+      "starsIncrease": 700
+    },
+    {
+      "fromJst": "2026-10-29T23:09:32.472+09:00",
+      "toJst": "2026-10-29T23:14:02.523+09:00",
+      "seconds": 270.051,
+      "starsIncrease": 200
+    },
+    {
+      "fromJst": "2026-10-29T23:14:02.523+09:00",
+      "toJst": "2026-10-29T23:19:35.325+09:00",
+      "seconds": 332.802,
+      "starsIncrease": 300
+    },
+    {
+      "fromJst": "2026-10-29T23:19:35.325+09:00",
+      "toJst": "2026-10-29T23:24:42.751+09:00",
+      "seconds": 307.426,
+      "starsIncrease": 690
+    },
+    {
+      "fromJst": "2026-10-29T23:24:42.751+09:00",
+      "toJst": "2026-10-29T23:29:56.931+09:00",
+      "seconds": 314.18,
+      "starsIncrease": 313
+    },
+    {
+      "fromJst": "2026-10-29T23:29:56.931+09:00",
+      "toJst": "2026-10-29T23:33:36.526+09:00",
+      "seconds": 219.595,
+      "starsIncrease": 190
+    },
+    {
+      "fromJst": "2026-10-29T23:33:36.526+09:00",
+      "toJst": "2026-10-29T23:39:58.506+09:00",
+      "seconds": 381.98,
+      "starsIncrease": 280
+    },
+    {
+      "fromJst": "2026-10-29T23:39:58.506+09:00",
+      "toJst": "2026-10-29T23:44:58.280+09:00",
+      "seconds": 299.774,
+      "starsIncrease": 20
+    },
+    {
+      "fromJst": "2026-10-29T23:44:58.280+09:00",
+      "toJst": "2026-10-29T23:49:42.787+09:00",
+      "seconds": 284.507,
+      "starsIncrease": 490
+    },
+    {
+      "fromJst": "2026-10-29T23:49:42.787+09:00",
+      "toJst": "2026-10-29T23:54:57.373+09:00",
+      "seconds": 314.586,
+      "starsIncrease": 100
+    },
+    {
+      "fromJst": "2026-10-29T23:54:57.373+09:00",
+      "toJst": "2026-10-29T23:57:09.074+09:00",
+      "seconds": 131.701,
+      "starsIncrease": 101
+    }
+  ],
+  "unusableMetrics": {
+    "visits": "全行が欠測。0人ではありません。",
+    "comments": "保存表示は全行0で、実コメント数として検証できません。",
+    "newFollows": "保存表示は全行0で、新規フォロー数として検証できません。"
+  },
+  "measurementNote": "画面進行23:57:09.074の参考値。最後の有効値の保存23:58:38.673、翌0:05:00.316のオフライン確認とは別時点です。公式終値・実贈呈数・実人数・イベントptではありません。",
+  "comparisonNote": "画面進行から保存まで30秒以内という今回の分析用条件で478行を採用し、同一進行時刻を重複排除した206点を表示。これは測定完全性を保証する条件ではありません。時刻の間は補間せず、前回との厳密な時間帯比較には含めません。",
+  "quality": {
+    "numericTimelineRows": 811,
+    "freshRows": 478,
+    "staleRowsExcluded": 333,
+    "freshnessThresholdSeconds": 30,
+    "uniqueUiProgressPoints": 206,
+    "duplicateProgressRowsNotSummed": 272,
+    "selectedTimedObservations": 13,
+    "uiProgressIntervalsOverThirtySeconds": 30,
+    "maxUiProgressIntervalSeconds": 168.159,
+    "uiProgressIntervals": [
+      {
+        "fromJst": "2026-10-29T23:04:28.768+09:00",
+        "toJst": "2026-10-29T23:05:15.429+09:00",
+        "seconds": 46.661
+      },
+      {
+        "fromJst": "2026-10-29T23:05:32.524+09:00",
+        "toJst": "2026-10-29T23:06:03.915+09:00",
+        "seconds": 31.391
+      },
+      {
+        "fromJst": "2026-10-29T23:06:29.217+09:00",
+        "toJst": "2026-10-29T23:07:17.436+09:00",
+        "seconds": 48.219
+      },
+      {
+        "fromJst": "2026-10-29T23:07:39.223+09:00",
+        "toJst": "2026-10-29T23:08:13.278+09:00",
+        "seconds": 34.055
+      },
+      {
+        "fromJst": "2026-10-29T23:09:32.472+09:00",
+        "toJst": "2026-10-29T23:12:20.631+09:00",
+        "seconds": 168.159
+      },
+      {
+        "fromJst": "2026-10-29T23:14:02.523+09:00",
+        "toJst": "2026-10-29T23:16:06.922+09:00",
+        "seconds": 124.399
+      },
+      {
+        "fromJst": "2026-10-29T23:16:59.324+09:00",
+        "toJst": "2026-10-29T23:18:51.004+09:00",
+        "seconds": 111.68
+      },
+      {
+        "fromJst": "2026-10-29T23:19:35.325+09:00",
+        "toJst": "2026-10-29T23:20:05.383+09:00",
+        "seconds": 30.058
+      },
+      {
+        "fromJst": "2026-10-29T23:20:45.521+09:00",
+        "toJst": "2026-10-29T23:21:20.079+09:00",
+        "seconds": 34.558
+      },
+      {
+        "fromJst": "2026-10-29T23:21:20.079+09:00",
+        "toJst": "2026-10-29T23:22:02.822+09:00",
+        "seconds": 42.743
+      },
+      {
+        "fromJst": "2026-10-29T23:25:45.292+09:00",
+        "toJst": "2026-10-29T23:27:52.915+09:00",
+        "seconds": 127.623
+      },
+      {
+        "fromJst": "2026-10-29T23:28:34.336+09:00",
+        "toJst": "2026-10-29T23:29:08.554+09:00",
+        "seconds": 34.218
+      },
+      {
+        "fromJst": "2026-10-29T23:31:55.887+09:00",
+        "toJst": "2026-10-29T23:32:26.384+09:00",
+        "seconds": 30.497
+      },
+      {
+        "fromJst": "2026-10-29T23:32:26.384+09:00",
+        "toJst": "2026-10-29T23:32:56.398+09:00",
+        "seconds": 30.014
+      },
+      {
+        "fromJst": "2026-10-29T23:32:56.398+09:00",
+        "toJst": "2026-10-29T23:33:36.526+09:00",
+        "seconds": 40.128
+      },
+      {
+        "fromJst": "2026-10-29T23:33:36.526+09:00",
+        "toJst": "2026-10-29T23:35:08.641+09:00",
+        "seconds": 92.115
+      },
+      {
+        "fromJst": "2026-10-29T23:35:08.641+09:00",
+        "toJst": "2026-10-29T23:36:55.201+09:00",
+        "seconds": 106.56
+      },
+      {
+        "fromJst": "2026-10-29T23:38:08.034+09:00",
+        "toJst": "2026-10-29T23:38:38.903+09:00",
+        "seconds": 30.869
+      },
+      {
+        "fromJst": "2026-10-29T23:38:38.903+09:00",
+        "toJst": "2026-10-29T23:39:21.376+09:00",
+        "seconds": 42.473
+      },
+      {
+        "fromJst": "2026-10-29T23:40:08.693+09:00",
+        "toJst": "2026-10-29T23:40:46.360+09:00",
+        "seconds": 37.667
+      },
+      {
+        "fromJst": "2026-10-29T23:41:45.014+09:00",
+        "toJst": "2026-10-29T23:42:41.497+09:00",
+        "seconds": 56.483
+      },
+      {
+        "fromJst": "2026-10-29T23:42:41.497+09:00",
+        "toJst": "2026-10-29T23:43:16.709+09:00",
+        "seconds": 35.212
+      },
+      {
+        "fromJst": "2026-10-29T23:43:16.709+09:00",
+        "toJst": "2026-10-29T23:44:40.400+09:00",
+        "seconds": 83.691
+      },
+      {
+        "fromJst": "2026-10-29T23:46:35.415+09:00",
+        "toJst": "2026-10-29T23:47:20.090+09:00",
+        "seconds": 44.675
+      },
+      {
+        "fromJst": "2026-10-29T23:47:20.090+09:00",
+        "toJst": "2026-10-29T23:48:24.680+09:00",
+        "seconds": 64.59
+      },
+      {
+        "fromJst": "2026-10-29T23:48:24.680+09:00",
+        "toJst": "2026-10-29T23:49:42.787+09:00",
+        "seconds": 78.107
+      },
+      {
+        "fromJst": "2026-10-29T23:49:42.787+09:00",
+        "toJst": "2026-10-29T23:50:23.861+09:00",
+        "seconds": 41.074
+      },
+      {
+        "fromJst": "2026-10-29T23:50:37.721+09:00",
+        "toJst": "2026-10-29T23:52:36.474+09:00",
+        "seconds": 118.753
+      },
+      {
+        "fromJst": "2026-10-29T23:53:01.266+09:00",
+        "toJst": "2026-10-29T23:54:52.248+09:00",
+        "seconds": 110.982
+      },
+      {
+        "fromJst": "2026-10-29T23:55:32.627+09:00",
+        "toJst": "2026-10-29T23:57:09.074+09:00",
+        "seconds": 96.447
+      }
+    ],
+    "intervalCaveat": "UI進行記録の間隔であり、通信断や配信の停止時間を意味しません。",
+    "collectorReceived": 2407,
+    "collectorSaved": 2407,
+    "collectorPending": 0,
+    "domDiscarded": 1878,
+    "rawComplete": false,
+    "endConfirmed": true,
+    "endConfirmationKind": "three_explicit_offline_ui_observations",
+    "endObservedAtJst": "2026-10-30T00:05:00.316+09:00",
+    "collectorExitedAtJst": "2026-10-30T00:05:04.828+09:00",
+    "collectorExitCode": 0,
+    "finalVerified": false,
+    "coverageComplete": false,
+    "missingDataIsNotZeroPerformance": true,
+    "counterSource": "normal_visible_ui",
+    "fileWriteStallReported": true,
+    "fileWriteStallReportedFromJst": "2026-10-29T23:21:57+09:00",
+    "fileWriteStallReportedToJst": "2026-10-29T23:45:55+09:00",
+    "continuousRecoveryVerified": false,
+    "rawCounterSha256": "0a1f80e0815d67d7d12e541ea5666c191ac7ab67222c8c1b553d44109fcee8f5"
+  },
+  "recording": {
+    "saved": true,
+    "durationSeconds": 3521.477,
+    "completeCoverageConfirmed": false,
+    "officialBroadcastDuration": false
+  },
+  "recap": {
+    "basis": "保存された自動文字起こしの冒頭・終盤を確認した非逐語要約。原音の手動聴取・映像同期は未確認。",
+    "summary": "夜のあいさつ、初日から続く挑戦への思い、終盤のお礼を、確認した文字起こしの範囲で整理。",
+    "publishedStills": 0,
+    "publishedTalkClips": 0,
+    "mediaStatus": "pending_visual_and_audio_review",
+    "liveRecapUrl": "/activities/live/#recap-2026-10-29-night-showroom"
+  }
+}
