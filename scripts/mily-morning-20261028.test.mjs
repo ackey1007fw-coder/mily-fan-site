@@ -5,7 +5,7 @@ import {streamRecaps} from '../src/data/streamRecaps.ts';
 import {DAILY_STREAM_ENTRIES,observationPoints,lastObservedValue} from '../public/data-lab/assets/daily-archive-core.js';
 import {injectVercelWebAnalytics} from '../src/lib/vercelWebAnalytics.ts';
 test('October 28 morning keeps ASR summary, black-video limits and screen references separate',()=>{
- const r=streamRecaps[0];assert.equal(r.id,'2026-10-28-morning-showroom');assert.equal(r.timestampBasis,'asr-clock');
+ const r=streamRecaps.find(x=>x.id==='2026-10-28-morning-showroom');assert.ok(r);assert.equal(r.timestampBasis,'asr-clock');
  assert.equal(r.image,undefined);assert.equal(r.songs,undefined);
  assert.match(r.transcriptionNote,/全239区間/);assert.match(r.transcriptionNote,/原音の手動聴取・逐語校正は未実施/);
  assert.match(r.transcriptionNote,/黒画面/);assert.match(r.transcriptionNote,/別の回の写真も使っていません/);
@@ -23,7 +23,7 @@ test('October 28 morning keeps ASR summary, black-video limits and screen refere
  assert.match(html,/noindex,nofollow,noarchive/);assert.doesNotMatch(html,/<img|<video|<audio/);
  assert.equal((injectVercelWebAnalytics(html).match(/src="\/mily-analytics-loader.js"/g)??[]).length,1);
  const lab=readFileSync('data-lab/index.html','utf8');
- assert.match(lab,/<nav id="daily-fallback-links"[^>]*><a href="#morning-20261028">10\/28<\/a>/);
+ assert.match(lab,/<nav id="daily-fallback-links"[^>]*><a href="#noon-20261029">10\/29<\/a><a href="#morning-20261028">10\/28<\/a>/);
  assert.equal((lab.match(/id="morning-20261028"/g)??[]).length,1);
  const all=JSON.stringify(r)+html+JSON.stringify(d);
  assert.doesNotMatch(all,/あっきー|アッキー|ピラ|drive\.google|\.jsonl|C:\\\\Users/);
