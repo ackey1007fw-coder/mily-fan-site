@@ -98,7 +98,16 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 15, "Fifteen broadcast dates from 10/14 through 10/28");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 16, "Sixteen broadcast dates from 10/14 through 10/29");
+            const day29 = page.locator("#daily-2026-10-29");
+            assert.equal(await day29.count(), 1, "Oct 29 noon has its own date");
+            if (!(await day29.getAttribute("open") !== null)) await day29.locator("summary").click();
+            const day29Card = day29.locator(".daily-stream-card");
+            assert.equal(await day29Card.count(), 1, "Oct 29 noon has exactly one card");
+            await day29Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
+            assert.equal(await day29Card.locator(".daily-stream-number").innerText(), "4,724", "Noon shows a nonfinal screen reference");
+            await day29Card.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
+            assert.equal(await day29Card.locator("svg.daily-plot circle").count(), 8, "Noon plots eight original time-stamped points");
             const day28 = page.locator("#daily-2026-10-28");
             assert.equal(await day28.count(), 1, "Oct 28 receives exactly one separate broadcast date");
             if (!(await day28.getAttribute("open") !== null)) await day28.locator("summary").click();
