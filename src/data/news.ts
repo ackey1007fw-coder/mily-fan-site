@@ -280,6 +280,24 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    "id": "2026-10-31-stream-thanks-instagram-story",
+    "date": "2026-10-31",
+    "dateBasis": "confirmed-on",
+    "title": "応援への感謝と、ファイナルへの決意🩵 みりぃのStory",
+    "body": "配信の一場面とともに、みりぃが応援してくれる皆さんへの感謝を綴ったInstagram Story。「素敵な景色を見せてくれてありがとう」「絶対絶対ファイナル行こうね」という言葉が添えられています。\n\n提供された動画を音声なしで掲載しています。視聴者情報を守るため、配信画面の一部を非表示・ぼかしにしています。元の投稿はInstagramのリンクからご覧ください。\n\n10月31日は素材の受領・確認日です。元の投稿日・撮影日・配信日時は未確認です。動画内の「2日目」や数値は当時の表示で、現在の投票案内や確定成績ではありません。Storyは公開期限により閲覧できなくなる場合があります。",
+    "source": "https://www.instagram.com/stories/mily_chan36/4018909648824563123/",
+    "sourceLabel": "本人Instagram Story（提供動画で内容確認）",
+    "ctaLabel": "Instagramの元Storyを見る",
+    "media": {
+      "kind": "video",
+      "src": "/media/gallery/mily-b242-01-stream-thanks-story.mp4",
+      "poster": "/media/gallery/mily-b242-01-stream-thanks-story-poster.jpg",
+      "width": 480,
+      "height": 854,
+      "alt": "口元に手を添えるみりぃの配信映像と、応援への感謝・ファイナルへの言葉を載せたStory（音声なし・視聴者情報の一部を非表示）"
+    }
+  },
+  {
     id: "2026-10-29-x-miss-circle-semifinal-period",
     date: "2026-10-29",
     sameDayOrder: 1200,
