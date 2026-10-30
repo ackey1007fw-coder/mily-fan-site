@@ -12,11 +12,14 @@ const end = text.indexOf("\n  },", start) + 5;
 const item = JSON.parse(text.slice(start, end).trim().replace(/,$/, ""));
 const hash = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
 
-test("Story is a single confirmed-on NEWS item with the owner-supplied source", () => {
+test("Story is a single confirmed-on NEWS item with a non-link source label", () => {
   assert.equal(item.id, "2026-10-31-stream-thanks-instagram-story");
   assert.equal(item.date, "2026-10-31");
   assert.equal(item.dateBasis, "confirmed-on");
-  assert.equal(item.source, "https://www.instagram.com/stories/mily_chan36/4018909648824563123/");
+  assert.equal(item.source, undefined);
+  assert.equal(item.sourceLabel, "Instagram Story（10月31日確認・投稿日未確認）");
+  assert.equal(item.url, "https://www.instagram.com/mily_chan36");
+  assert.equal(item.ctaLabel, "Instagramプロフィールを見る");
   assert.equal(text.split(`\"id\": \"${item.id}\"`).length - 1, 1);
   assert.match(item.body, /音声なし/);
   assert.match(item.body, /投稿日・撮影日・配信日時は未確認/);

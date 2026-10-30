@@ -12,7 +12,7 @@ const server = spawn(process.execPath, ["node_modules/vite/bin/vite.js", "previe
 const poster = "/media/gallery/mily-b242-01-stream-thanks-story-poster.jpg";
 const selector = `video[poster=\"${poster}\"]`;
 const title = "応援への感謝と、ファイナルへの決意🩵 みりぃのStory";
-const source = "https://www.instagram.com/stories/mily_chan36/4018909648824563123/";
+const source = "https://www.instagram.com/mily_chan36";
 try {
   let up = false;
   for (let attempt = 0; attempt < 60; attempt++) {
