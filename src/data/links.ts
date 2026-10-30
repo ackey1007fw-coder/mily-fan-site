@@ -49,6 +49,14 @@ export const missCircleFourthRoundWebVoteLink: SiteLink = {
   note: "MISS CIRCLE CONTEST 2026 四次審査。ENTRY 734 三橋莉子。LINEログイン後、投票画面の案内に従ってください。",
 };
 
+/** セミファイナル。公式ENTRY 734の投票先を2026-10-31に再確認。過去審査の説明は保持。 */
+export const missCircleSemifinalWebVoteLink: SiteLink = {
+  id: "miss-circle-2026-semifinal-web-vote-734",
+  label: "みりぃにWEB投票する",
+  url: missCircleWebVoteLink.url,
+  note: "MISS CIRCLE CONTEST 2026 セミファイナル。ENTRY 734 三橋莉子。投票画面の案内に従ってください。",
+};
+
 export const missCircleFourthRoundShowroomEventLink: SiteLink = {
   id: "miss-circle-2026-4th-showroom-event",
   label: "四次SHOWROOMイベントの詳細を見る",
@@ -81,6 +89,7 @@ export const links: SiteLink[] = [
   missCircleWebVoteLink,
   missCircleShowroomEventLink,
   missCircleFourthRoundWebVoteLink,
+  missCircleSemifinalWebVoteLink,
   missCircleFourthRoundShowroomEventLink,
   campusGirlsPatonVoteLink,
   campusGirlsFinalsExPatonVoteLink,

@@ -27,6 +27,7 @@ export function MobileActionDock() {
     links,
     now,
   });
+  const isLiveVote = spotlight?.state === "live";
   const [selectedVoteAction] = voteActions;
   const voteAction = spotlight?.action ?? selectedVoteAction;
   const additionalVoteActions = voteActions.filter(
@@ -40,7 +41,7 @@ export function MobileActionDock() {
           href={voteAction.url}
           target="_blank"
           rel="noopener noreferrer"
-          className={`inline-flex min-h-11 min-w-0 flex-1 items-center justify-center rounded-full px-2 text-xs font-semibold text-white ${
+          className={`inline-flex min-h-11 min-w-0 items-center justify-center rounded-full px-2 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-apricot-ink ${isLiveVote ? "min-h-12 flex-[2] text-sm" : "flex-1 text-xs"} ${
             spotlight
               ? "bg-apricot-ink hover:bg-ink"
               : "bg-sage hover:bg-sage-deep"
