@@ -48,7 +48,7 @@ test("morning2: distinct recap and archive slots, original morning-one evidence 
   assert.equal(ledger.originalNote, recap.transcriptionNote);
   assert.deepEqual(ledger.display, recapSourceDisclosure(recap.sourceLabel, recap.transcriptionNote));
   const day = groupByBroadcastDate().find(g => g.date === "2026-10-30");
-  assert.deepEqual(day.entries.map(e => e.slot), ["morning2", "morning1"]);
+  assert.deepEqual(day.entries.map(e => e.slot), ["night", "morning2", "morning1"]);
   assert.equal(DAILY_STREAM_ENTRIES.filter(e => e.file === "mily-morning2-20261030-aggregate.json").length, 1);
   const old = JSON.parse(read("public/data-lab/data/mily-morning1-20261030-aggregate.json"));
   assert.equal(old.observations.length, 100); assert.equal(old.liveId, 23620568); assert.equal(old.metrics.stars, 1898);

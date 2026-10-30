@@ -54,7 +54,7 @@ try {
         await day.waitFor();
         if (await day.getAttribute("open") === null) await day.locator("summary").click();
         await day.locator("svg circle").first().waitFor();
-        assert.equal(await day.locator(".daily-stream-card").count(), 2);
+        assert.equal(await day.locator(".daily-stream-card").count(), 3);
         const card = day.locator(".daily-stream-card").filter({ has: page.locator("h4", { hasText: "朝1枠目" }) });
         assert.equal(await card.count(), 1);
         assert.match(await card.locator("h4").innerText(), /朝1枠目/);

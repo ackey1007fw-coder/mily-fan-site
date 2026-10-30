@@ -131,8 +131,8 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/data-lab.browser.mjs
 
-      - name: October 30 morning sessions browser checks
-        timeout-minutes: 3
+      - name: October 30 sessions browser checks
+        timeout-minutes: 4
         env:
           PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
@@ -140,6 +140,7 @@ jobs:
         run: |
           node scripts/mily-morning1-20261030.browser.mjs
           node scripts/mily-morning2-20261030.browser.mjs
+          node scripts/mily-night-20261030.browser.mjs
 
       - name: October 12 final stream and separate vote deadlines browser checks
         timeout-minutes: 5
