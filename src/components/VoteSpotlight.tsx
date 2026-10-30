@@ -23,7 +23,7 @@ export function VoteSpotlight({
       aria-live="polite"
       aria-atomic="true"
       data-vote-state={spotlight.kind === "support" ? undefined : spotlight.state}
-      className={`${className} overflow-hidden rounded-3xl border-2 ${isLiveVote ? "border-apricot-ink" : "border-apricot"} bg-gradient-to-br from-apricot-soft via-paper-card to-sage-soft/70 p-5 shadow-card sm:p-6`}
+      className={`${className} overflow-hidden rounded-3xl border-2 border-apricot ${isLiveVote ? "ring-2 ring-apricot-ink" : ""} bg-gradient-to-br from-apricot-soft via-paper-card to-sage-soft/70 p-5 shadow-card sm:p-6`}
     >
       <div className={`flex flex-col gap-5 ${isLiveVote ? "" : "sm:flex-row sm:items-center sm:justify-between"}`}>
         <div className="min-w-0">
