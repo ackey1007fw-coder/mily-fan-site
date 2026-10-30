@@ -32,8 +32,8 @@ test("video and real-frame poster use the reviewed local bytes and original port
   assert.equal(item.media.width, 480);
   assert.equal(item.media.height, 854);
   for (const [path, expected] of [
-    [item.media.src, "a6d25e50d406cbb24d927934e1de0b828eeb7e45c21746452ddcee6aa11bb0b6"],
-    [item.media.poster, "5a1a97ad26bf892f0c9db17361603be9bf10d8a60f8a4b2b59695ce40236ec83"],
+    [item.media.src, "5af048f4a1231156f518ddf8a34d20fd177c620ce1502fa810aa82a61d1c16bd"],
+    [item.media.poster, "46d4a81f62564cc5c74a793f0fd159fecb01cf75ecfb1bc50cd683c03a4bd1c2"],
   ]) assert.equal(hash(fs.readFileSync(new URL(`public${path}`, root))), expected);
 });
 function boxes(buffer, from = 0, to = buffer.length) {

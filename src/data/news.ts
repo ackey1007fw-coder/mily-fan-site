@@ -290,8 +290,8 @@ export const news: NewsItem[] = [
     "ctaLabel": "Instagramプロフィールを見る",
     "media": {
       "kind": "video",
-      "src": "/media/gallery/mily-b242-01-stream-thanks-story.mp4",
-      "poster": "/media/gallery/mily-b242-01-stream-thanks-story-poster.jpg",
+      "src": "/media/gallery/mily-b242-01-stream-thanks-story-v3.mp4",
+      "poster": "/media/gallery/mily-b242-01-stream-thanks-story-v3-poster.jpg",
       "width": 480,
       "height": 854,
       "alt": "口元に手を添えるみりぃの配信映像と、応援への感謝・ファイナルへの言葉を載せたStory（音声なし・視聴者情報の一部を非表示）"

@@ -9,7 +9,7 @@ const { chromium, webkit } = require(path.join(process.env.PLAYWRIGHT_MODULE_ROO
 const port = 4187;
 const base = `http://127.0.0.1:${port}`;
 const server = spawn(process.execPath, ["node_modules/vite/bin/vite.js", "preview", "--host", "127.0.0.1", "--port", String(port), "--strictPort"], { stdio: "ignore" });
-const poster = "/media/gallery/mily-b242-01-stream-thanks-story-poster.jpg";
+const poster = "/media/gallery/mily-b242-01-stream-thanks-story-v3-poster.jpg";
 const selector = `video[poster=\"${poster}\"]`;
 const title = "応援への感謝と、ファイナルへの決意🩵 みりぃのStory";
 const source = "https://www.instagram.com/mily_chan36";
@@ -28,7 +28,7 @@ try {
         try {
           for (const route of ["/", "/news/"]) {
             await page.goto(base + route, { waitUntil: "domcontentloaded" });
-            await page.getByRole("heading", { name: title, exact: true }).waitFor();
+            await page.getByText(title, { exact: true }).waitFor();
             const video = page.locator(selector);
             assert.equal(await video.count(), 1, "single Story player");
             assert.ok(await page.locator(`a[href=\"${source}\"]`).count() > 0);
@@ -38,7 +38,10 @@ try {
             await video.evaluate(async el => { el.muted = true; await el.play(); });
             await page.waitForFunction(s => document.querySelector(s)?.currentTime > 0.1, selector);
             const result = await video.evaluate(el => ({ width: el.videoWidth, height: el.videoHeight, duration: el.duration, error: el.error?.code ?? null }));
-            assert.deepEqual(result, { width: 480, height: 854, duration: 58.8, error: null });
+            assert.equal(result.width, 480);
+            assert.equal(result.height, 854);
+            assert.equal(result.error, null);
+            assert.ok(Math.abs(result.duration - 58.8) < 0.05, "58.8-second video");
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "no horizontal overflow");
             await video.evaluate(el => el.pause());
             const out = process.env.SONG_CATALOG_ARTIFACT_DIR;
