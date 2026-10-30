@@ -63,7 +63,8 @@ try {
               assert.ok(box.y + box.height <= photo.y, "Voting comes before the portrait");
               assert.ok(box.y + box.height < (width < 640 ? 760 : 1000), "Primary CTA is visible without scrolling");
             }
-            if (width < 640) {
+            // The existing fixed dock belongs to HOME; SUPPORT keeps its page-top spotlight.
+            if (width < 640 && path === "/") {
               const dock = page.locator("div.fixed.inset-x-0.bottom-0");
               assert.equal(await dock.count(), 1);
               const primary = dock.locator(`a[href="${voteUrl}"]`);
