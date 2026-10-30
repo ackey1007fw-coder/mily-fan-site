@@ -28,15 +28,20 @@ try {
         try {
           for (const route of ["/", "/news/"]) {
             await page.goto(base + route, { waitUntil: "domcontentloaded" });
-            await page.getByText(title, { exact: true }).waitFor();
-            const video = page.locator(selector);
-            assert.equal(await video.count(), 1, "single Story player");
+            const latest = page.locator("#latest");
+            await latest.getByText(title, { exact: true }).waitFor();
+            const video = latest.locator(selector);
+            assert.equal(await video.count(), 1, "single Story player in Latest");
+            if (route === "/") {
+              assert.equal(await page.locator("#top").getByText(title, { exact: true }).count(), 1, "HOME featured copy");
+              assert.equal(await page.locator("#top").locator(selector).count(), 1, "HOME featured player");
+            }
             assert.ok(await page.locator(`a[href=\"${source}\"]`).count() > 0);
             assert.equal(await video.getAttribute("preload"), "none");
             assert.ok(await video.evaluate(el => el.controls && el.playsInline && !el.autoplay));
             await video.scrollIntoViewIfNeeded();
             await video.evaluate(async el => { el.muted = true; await el.play(); });
-            await page.waitForFunction(s => document.querySelector(s)?.currentTime > 0.1, selector);
+            await page.waitForFunction(s => document.querySelector(s)?.currentTime > 0.1, `#latest ${selector}`);
             const result = await video.evaluate(el => ({ width: el.videoWidth, height: el.videoHeight, duration: el.duration, error: el.error?.code ?? null }));
             assert.equal(result.width, 480);
             assert.equal(result.height, 854);
