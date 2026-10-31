@@ -2,7 +2,7 @@ import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, RANKING_NOTE_WITHOUT_RANGE, buildTranscriptionNote } from "./streamRecapRules.ts";
 
 // The owner's own authorized recording of this morning live. Photos and the talk excerpt are from this live only.
-// Handwritten names on the sticky notes and on the held sign are hidden with flat paper-colored fills (no generative edits).
+// Handwritten names on the background sticky notes are hidden with flat paper-colored fills (no generative edits). The held sign at 0:13:00 is shown unmasked per owner confirmation (2026-11-01).
 const moments = [
   [31, "hair-hands", "両手で髪に触れてカメラを見るみりぃ", "髪に手を添えて"],
   [218, "close-smile", "カメラに近づいて笑顔を見せるみりぃ", "朝のにっこり"],
