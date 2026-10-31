@@ -36,6 +36,7 @@ try {
           assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1),'no horizontal overflow');
         }
         await page.clock.fastForward(11*60*60*1000);
+        await page.locator('#announced-stream').waitFor({state:'detached',timeout:10000});
         assert.equal(await page.locator('#announced-stream').count(),0,'finished slots vanish without reload');
         console.log(JSON.stringify({engine,width,passed:true}));
         await page.close();
