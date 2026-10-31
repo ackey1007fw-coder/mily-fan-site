@@ -21,17 +21,25 @@ try {
         for (const route of ['/','/news/','/support/','/activities/live/']) {
           await page.goto(base+route,{waitUntil:'domcontentloaded'});
           if (route === '/' || route === '/news/') {
-            await page.locator('#latest').getByText('昼14:45へ変更、夜は仮装配信🎃 10月31日のSHOWROOM案内',{exact:true}).waitFor();
+            await page.locator('#latest').getByText('夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内',{exact:true}).waitFor();
+            const latest = await page.locator('#latest').innerText();
+            assert.match(latest,/15:52更新.*21:05〜21:50/);
+            assert.match(latest,/朝の案内の履歴/);
           }
           if (route !== '/news/') {
             const notice = page.locator('#announced-stream');
             await notice.getByText('10月31日・本人告知の配信予定',{exact:true}).waitFor();
             assert.match(await notice.innerText(),/14:45〜15:15/);
-            assert.match(await notice.innerText(),/21:00〜21:50/);
-            assert.doesNotMatch(await notice.innerText(),/07:00〜07:30/);
+            assert.match(await notice.innerText(),/21:05〜21:50/);
+            assert.doesNotMatch(await notice.innerText(),/07:00〜07:30|21:00/);
             const link=notice.getByRole('link',{name:'本人ファンルームで最新の案内を見る'});
             assert.equal(await link.getAttribute('href'),'https://www.showroom-live.com/room/fan_club?room_id=573253');
             assert.match(await link.getAttribute('rel'),/noopener/);
+          }
+          if (route === '/support/') {
+            const calendar = page.locator('section[aria-labelledby="selected-day-schedule-heading"]');
+            assert.match(await calendar.innerText(), /21:05〜21:50/);
+            assert.doesNotMatch(await calendar.innerText(), /21:00/);
           }
           assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1),'no horizontal overflow');
         }
