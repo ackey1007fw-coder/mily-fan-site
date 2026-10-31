@@ -98,7 +98,14 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 17, "Seventeen broadcast dates from 10/14 through 10/30");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 18, "Eighteen broadcast dates from 10/14 through 10/31");
+            const day31 = page.locator("#daily-2026-10-31");
+            assert.equal(await day31.count(), 1, "Oct 31 noon has its own date");
+            if (!(await day31.getAttribute("open") !== null)) await day31.locator("summary").click();
+            const day31Card = day31.locator(".daily-stream-card");
+            assert.equal(await day31Card.count(), 1, "Oct 31 noon has exactly one card");
+            assert.equal(await day31Card.locator(".daily-stream-number").first().innerText(), "2,751", "Oct 31 noon shows the nonfinal last valid star display");
+            assert.equal(await day31Card.locator("svg.daily-plot circle").count(), 0, "Oct 31 noon plots no invented points");
             const day29 = page.locator("#daily-2026-10-29");
             assert.equal(await day29.count(), 1, "Oct 29 noon has its own date");
             if (!(await day29.getAttribute("open") !== null)) await day29.locator("summary").click();
