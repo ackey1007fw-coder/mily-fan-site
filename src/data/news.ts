@@ -280,6 +280,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-31-fanroom-stream-update",
+    date: "2026-10-31",
+    sameDayOrder: 811,
+    activityIds: ["live-stream"],
+    title: "昼14:45へ変更、夜は仮装配信🎃 10月31日のSHOWROOM案内",
+    body: "10月31日05:29〜05:32（日本時間）、みりぃがファンルームで早朝のきっかけ枠を取りやめ、昼14:45〜15:15へ移すと案内しました。変更後は7:00〜7:30、14:45〜15:15、21:00〜21:50の3枠で、すべて通常配信です。早起きして待っていた皆さんへのお詫びも伝えています。\n\n08:08には朝枠を盛り上げてくれた皆さんへ感謝し、次枠14:45〜15:15を再案内。夜枠ではハロウィンの仮装をすると予告しました。08:11の返信でも来訪・応援への感謝と、ファイナル進出への決意を伝えています。\n\n2026年10月31日時点の本人告知です。予定と実際の配信開始・終了は別で、正確な実施時刻は未確認です。変更は本人ファンルームの最新案内をご確認ください。",
+    source: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    sourceLabel: "本人ファンルーム（10月31日05:29〜05:32・08:08・08:11 JST）",
+  },
+  {
     "id": "2026-10-31-stream-thanks-instagram-story",
     "date": "2026-10-31",
     "dateBasis": "confirmed-on",

@@ -33,7 +33,7 @@ try {
             const video = latest.locator(selector);
             assert.equal(await video.count(), 1, "single Story player in Latest");
             if (route === "/") {
-              assert.equal(await page.locator("#top").getByText(title, { exact: true }).count(), 1, "HOME featured copy");
+              assert.equal(await page.locator("#top").getByText("昼14:45へ変更、夜は仮装配信🎃 10月31日のSHOWROOM案内", { exact: true }).count(), 1, "HOME features the newer same-day announcement; Story remains in Latest");
               assert.equal(await page.locator("#top").getByRole("link", { name: "最新情報へ", exact: true }).getAttribute("href"), "#latest", "HOME text teaser links to playable Latest");
             }
             assert.ok(await page.locator(`a[href=\"${source}\"]`).count() > 0);

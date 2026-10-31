@@ -1,0 +1,46 @@
+import assert from 'node:assert/strict';
+import { spawn } from 'node:child_process';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { setTimeout as delay } from 'node:timers/promises';
+const require = createRequire(import.meta.url);
+const { chromium, webkit } = require(path.join(process.env.PLAYWRIGHT_MODULE_ROOT, 'playwright'));
+const base = 'http://127.0.0.1:4188';
+const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js','preview','--host','127.0.0.1','--port','4188','--strictPort'],{stdio:'ignore'});
+try {
+  let ready = false;
+  for (let i=0;i<60;i++) { try { if ((await fetch(base)).ok) { ready=true; break; } } catch {} await delay(200); }
+  assert.ok(ready);
+  for (const [engine, launcher] of [['chromium',chromium],['webkit',webkit]]) {
+    const browser = await launcher.launch();
+    try {
+      for (const width of [390,1440]) {
+        const page = await browser.newPage({viewport:{width,height:1000}});
+        await page.clock.install({time:new Date('2026-10-31T11:00:00+09:00')});
+        await page.route('**/api/**',route=>route.fulfill({json:{ok:false,slots:[]}}));
+        for (const route of ['/','/news/','/support/','/activities/live/']) {
+          await page.goto(base+route,{waitUntil:'domcontentloaded'});
+          if (route === '/' || route === '/news/') {
+            await page.locator('#latest').getByText('昼14:45へ変更、夜は仮装配信🎃 10月31日のSHOWROOM案内',{exact:true}).waitFor();
+          }
+          if (route !== '/news/') {
+            const notice = page.locator('#announced-stream');
+            await notice.getByText('10月31日・本人告知の配信予定',{exact:true}).waitFor();
+            assert.match(await notice.innerText(),/14:45〜15:15/);
+            assert.match(await notice.innerText(),/21:00〜21:50/);
+            assert.doesNotMatch(await notice.innerText(),/07:00〜07:30/);
+            const link=notice.getByRole('link',{name:'本人ファンルームで最新の案内を見る'});
+            assert.equal(await link.getAttribute('href'),'https://www.showroom-live.com/room/fan_club?room_id=573253');
+            assert.match(await link.getAttribute('rel'),/noopener/);
+          }
+          assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1),'no horizontal overflow');
+        }
+        await page.clock.fastForward(11*60*60*1000);
+        await page.locator('#announced-stream').waitFor({state:'detached',timeout:10000});
+        assert.equal(await page.locator('#announced-stream').count(),0,'finished slots vanish without reload');
+        console.log(JSON.stringify({engine,width,passed:true}));
+        await page.close();
+      }
+    } finally { await browser.close(); }
+  }
+} finally { server.kill(); }
