@@ -98,17 +98,21 @@ try {
           // New day-by-day archive: verify real points, 3 metric switches and unknown final values.
           if (width === 390 || width === 1440) {
             await page.locator("#daily-stream-groups .daily-day").first().waitFor({ state: "visible" });
+            // Dates are no longer per-date accordions: the newest dates are open cards and older dates sit in one collapsed "過去の回".
+            const openDay = async day => {
+              if (await day.evaluate(el => Boolean(el.closest("details:not([open])")))) await page.locator("#daily-past > summary").click();
+            };
             assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 18, "Eighteen broadcast dates from 10/14 through 10/31");
             const day31 = page.locator("#daily-2026-10-31");
             assert.equal(await day31.count(), 1, "Oct 31 noon has its own date");
-            if (!(await day31.getAttribute("open") !== null)) await day31.locator("summary").click();
+            await openDay(day31);
             const day31Card = day31.locator(".daily-stream-card");
             assert.equal(await day31Card.count(), 1, "Oct 31 noon has exactly one card");
             assert.equal(await day31Card.locator(".daily-stream-number").first().innerText(), "2,751", "Oct 31 noon shows the nonfinal last valid star display");
             assert.equal(await day31Card.locator("svg.daily-plot circle").count(), 0, "Oct 31 noon plots no invented points");
             const day29 = page.locator("#daily-2026-10-29");
             assert.equal(await day29.count(), 1, "Oct 29 noon has its own date");
-            if (!(await day29.getAttribute("open") !== null)) await day29.locator("summary").click();
+            await openDay(day29);
             const day29Card = day29.locator(".daily-stream-card");
             assert.equal(await day29Card.count(), 1, "Oct 29 noon has exactly one card");
             await day29Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
@@ -117,7 +121,7 @@ try {
             assert.equal(await day29Card.locator("svg.daily-plot circle").count(), 8, "Noon plots eight original time-stamped points");
             const day28 = page.locator("#daily-2026-10-28");
             assert.equal(await day28.count(), 1, "Oct 28 receives exactly one separate broadcast date");
-            if (!(await day28.getAttribute("open") !== null)) await day28.locator("summary").click();
+            await openDay(day28);
             const day28Card = day28.locator(".daily-stream-card");
             assert.equal(await day28Card.count(), 1, "Oct 28 morning is a single card");
             await day28Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
@@ -125,7 +129,7 @@ try {
             assert.equal(await day28Card.locator("svg.daily-plot").count(), 0, "No graph without measured time-series points");
             const day26 = page.locator("#daily-2026-10-26");
             assert.equal(await day26.count(), 1, "Oct 26 receives exactly one separate broadcast date");
-            if (!(await day26.getAttribute("open") !== null)) await day26.locator("summary").click();
+            await openDay(day26);
             const day26Card = day26.locator(".daily-stream-card");
             assert.equal(await day26Card.count(), 1, "Partial night memo is a single card");
             await day26Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
@@ -133,7 +137,7 @@ try {
             assert.equal(await day26Card.locator("svg.daily-plot").count(), 0, "No graph without measured time-series points");
             assert.match(await day26Card.locator(".daily-stream-chart").innerText(), /時刻付き観測が2点未満/);
             const day25 = page.locator("#daily-2026-10-25");
-            if (!(await day25.getAttribute("open") !== null)) await day25.locator("summary").click();
+            await openDay(day25);
             const day25Cards = day25.locator(".daily-stream-card");
             assert.equal(await day25Cards.count(), 2, "Night and morning stay separate");
             const day25Card = day25Cards.last();
@@ -143,7 +147,7 @@ try {
             await day25.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
             assert.equal(await day25.locator("svg.daily-plot circle").count(), 13, "Only 13 observed time points are plotted");
              const day24 = page.locator("#daily-2026-10-24");
-             if (!(await day24.getAttribute("open") !== null)) await day24.locator("summary").click();
+             await openDay(day24);
              const day24Radio = day24.locator(".daily-stream-card");
              assert.equal(await day24Radio.count(), 2, "Oct 24 afternoon and morning stay separate");
              await day24Radio.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
@@ -151,7 +155,7 @@ try {
              assert.equal(await day24Radio.last().locator(".daily-stream-number").innerText(), "4,718", "Morning last valid screen is not an official final");
              assert.equal(await day24Radio.locator("svg.daily-plot").count(), 2, "Noon and morning real observations each render a chart");
             const day22 = page.locator("#daily-2026-10-22");
-            if (!(await day22.getAttribute("open") !== null)) await day22.locator("summary").click();
+            await openDay(day22);
             const day22Cards = day22.locator(".daily-stream-card");
             assert.equal(await day22Cards.count(), 2, "Oct 22 night and morning remain separate");
             assert.deepEqual(await day22Cards.locator("h4").allTextContents(), ["夜の配信", "朝の配信"]);
@@ -162,7 +166,7 @@ try {
             }
             assert.equal(await day22.locator("svg.daily-plot").count(), 0, "Missing counters must not produce a zero graph");
             const day20 = page.locator("#daily-2026-10-20");
-            await day20.locator("summary").click();
+            await openDay(day20);
             const today = day20.locator(".daily-stream-card").last();
             await today.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
             assert.equal(await today.locator("svg.daily-plot circle").count(), 35, "Only the 35 actually saved Oct 20 counter points");
@@ -174,11 +178,11 @@ try {
             assert.match(await today.locator(".daily-stream-stat").innerText(), /254/);
             await page.locator('button[data-daily-metric="stars"]').click();
             const unknown = page.locator("#daily-2026-10-19");
-            await unknown.locator("summary").click();
+            await openDay(unknown);
             await unknown.locator('[data-missing="true"]').waitFor({ state: "visible" });
             assert.match(await unknown.locator(".daily-stream-chart").innerText(), /時刻付き観測が2点未満/);
             const eighteenth = page.locator("#daily-2026-10-18");
-            await eighteenth.locator("summary").click();
+            await openDay(eighteenth);
             assert.equal(await eighteenth.locator(".daily-stream-card").count(), 2, "Oct 18 night/morning remain distinct");
             assert.match(await eighteenth.locator(".daily-stream-card").first().locator("h4").innerText(), /夜/);
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Day archive must not cause horizontal overflow");
@@ -443,7 +447,7 @@ try {
             assert.match(await page.locator("h1").innerText(), /10月26日夜/);
             assert.equal(await page.locator('[data-metric="visits"]').innerText(), "未確認");
             assert.equal(await page.locator("svg, canvas, video, audio").count(), 0);
-            await page.getByRole("link", { name: "LIVE STREAMのこの回へ", exact: true }).click();
+            await page.getByRole("link", { name: "この回の配信へ", exact: true }).click();
             const card = page.locator("#recap-2026-10-26-night-showroom");
             await card.waitFor({ state: "visible" });
             await page.waitForFunction(() => document.getElementById("recap-2026-10-26-night-showroom")?.hasAttribute("open"));
