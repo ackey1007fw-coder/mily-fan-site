@@ -29,7 +29,7 @@ test("10/30 night: all three static SVGs match observations exactly",()=>{
  assert.match(report,/300は最終結果ではありません/);assert.match(report,/初期化時の0/);assert.match(report,/保存9行/);assert.match(report,/配信終了時刻ではありません/);assert.match(report,/noindex,nofollow,noarchive/);
 });
 test("10/30 night: recap is limited to still inspection, no fabricated speech or approved media",()=>{
- assert.ok(recap);assert.match(recap.transcriptionNote,/22:33:29時点/);assert.equal(streamRecaps[0].id,recap.id);assert.equal(recap.highlights.length,1);
+ assert.ok(recap);assert.match(recap.transcriptionNote,/22:33:29時点/);assert.equal(streamRecaps.find(r=>r.date==="2026-10-30").id,recap.id);assert.equal(recap.highlights.length,1);
  assert.equal(recap.highlights[0].timestamp,"0:00:14");assert.equal(recap.image,undefined);assert.equal(recap.gallery,undefined);assert.equal(recap.songs,undefined);
  assert.equal(recap.timeline.length,0);assert.equal(recap.ranking.length,0);assert.match(recap.transcriptionNote,/発話内容の要約ではありません/);assert.match(recap.transcriptionNote,/原音の手動聴取・発話内容・全編の映像確認は未実施/);
  const record=JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json")).find(r=>r.id===recap.id);assert.equal(record.originalNote,recap.transcriptionNote);assert.deepEqual(record.display,recapSourceDisclosure(recap.sourceLabel,recap.transcriptionNote));
