@@ -24,7 +24,7 @@ export function Footer() {
             <span aria-hidden="true">←</span>
             応援アーカイブへ戻る
           </a>
-          <p className="mt-1 text-xs text-ink-muted/80">
+          <p className="mt-1 text-xs text-ink-muted">
             5つの応援サイトをつなぐ非公式ポータル
           </p>
         </div>

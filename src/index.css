@@ -18,6 +18,12 @@
     overflow-x: clip;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply overflow-x-clip bg-paper font-sans text-ink antialiased;
   }

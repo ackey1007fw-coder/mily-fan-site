@@ -67,12 +67,25 @@
       }
     </script>
 
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      imagesrcset="/media/gallery/mily-b01-03-bouquet-smile-480.webp 480w, /media/gallery/mily-b01-03-bouquet-smile-960.webp 960w, /media/gallery/mily-b01-03-bouquet-smile-1600.webp 1600w"
+      imagesizes="(min-width: 1024px) 17rem, 100vw"
+      fetchpriority="high"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    </noscript>
   </head>
   <body>
     <div id="root">
