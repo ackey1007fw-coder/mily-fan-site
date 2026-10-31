@@ -28,7 +28,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
 import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
-import { tiktokSeasideCircleOct31Video } from "./tiktokSeasideCircleOct31Video.ts";
+import { sscTikTokOct31 } from "./sscTikTokOct31.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -287,7 +287,7 @@ export const news: NewsItem[] = [
     sameDayOrder: 1000,
     title: "湘南シーサイドサークルのTikTok投稿リンク📱",
     body: "湘南シーサイドサークル（@seasidecircle）のTikTok動画リンクを紹介します。動画は元のTikTok投稿からご覧ください。\n\n投稿内容・説明文・みりぃ本人の登場有無は独立確認できていません。10月31日はリンクの共有・確認日で、動画の投稿日を示すものではありません。",
-    source: tiktokSeasideCircleOct31Video.sourceUrl,
+    source: sscTikTokOct31.sourceUrl,
     sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
   },
   {
