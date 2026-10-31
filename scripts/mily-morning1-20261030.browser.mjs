@@ -52,7 +52,7 @@ try {
         await page.goto(base + "/data-lab/#daily-2026-10-30", { waitUntil: "networkidle" });
         const day = page.locator("#daily-2026-10-30");
         await day.waitFor();
-        if (await day.getAttribute("open") === null) await day.locator("summary").click();
+        if (await day.evaluate(el => Boolean(el.closest("details:not([open])")))) await page.locator("#daily-past > summary").click(); // dates sit in one collapsed "過去の回", not per-date accordions
         await day.locator("svg circle").first().waitFor();
         assert.equal(await day.locator(".daily-stream-card").count(), 3);
         const card = day.locator(".daily-stream-card").filter({ has: page.locator("h4", { hasText: "朝1枠目" }) });

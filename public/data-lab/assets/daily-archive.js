@@ -89,7 +89,7 @@ if (host) {
   }
   function createCard(entry, options = {}) {
     const article = element("article", "daily-stream-card" + (options.large ? " daily-stream-card-large" : ""));
-    const title = element("h4", "", (options.large ? dayFormat.format(new Date(entry.date + "T12:00:00+09:00")) + " " : "") + SLOT_LABELS[entry.slot] + "の配信");
+    const title = element("h4", "", SLOT_LABELS[entry.slot] + "の配信");
     if (options.isNew) title.prepend(element("span", "daily-new", "NEW"));
     const status = element("div", "daily-stream-stat");
     const label = element("span", "", METRICS[metric] + "（最後の有効な画面参考値）");
@@ -114,66 +114,61 @@ if (host) {
       renderCard(card);
     }));
   }
+  // Latest broadcasts: whole broadcast dates, newest first, until at least LATEST_COUNT broadcasts are shown.
+  // A date is never split between the large block and "過去の回", so every date keeps one #daily-YYYY-MM-DD.
   const LATEST_COUNT = 3;
   const NEW_COUNT = 1;
   const days = groupByBroadcastDate(DAILY_STREAM_ENTRIES);
-  const ordered = days.flatMap((day) => day.entries);
-  const usedIds = new Set();
-
-  // Latest broadcasts: large summary cards, loaded right away.
-  const latest = element("div", "daily-latest");
-  const latestCards = [];
-  ordered.slice(0, LATEST_COUNT).forEach((entry, index) => {
-    const { article, card } = createCard(entry, { large: true, isNew: index < NEW_COUNT });
-    if (!usedIds.has(entry.date)) { article.id = "daily-" + entry.date; usedIds.add(entry.date); }
-    latestCards.push(card);
-    latest.append(article);
-  });
-
-  // Older broadcasts: one collapsed block, grouped by broadcast date, loaded when visible.
-  const past = element("details", "daily-past");
-  past.id = "daily-past";
-  const pastEntries = ordered.slice(LATEST_COUNT);
-  const pastSummary = element("summary", "daily-past-summary");
-  pastSummary.append(element("span", "daily-past-title", "過去の回"), element("span", "daily-day-count", pastEntries.length + "枠 · タップで表示"));
-  const pastBody = element("div", "daily-past-body");
-  const pastDays = [];
-  for (const day of groupByBroadcastDate(pastEntries)) {
-    const group = element("section", "daily-day");
-    const continued = usedIds.has(day.date);
-    if (!continued) { group.id = "daily-" + day.date; usedIds.add(day.date); }
-    group.append(element("h4", "daily-day-title", dayFormat.format(new Date(day.date + "T12:00:00+09:00")) + (continued ? "（つづき）" : "")));
+  let latestDayCount = 0;
+  for (let shown = 0; latestDayCount < days.length && shown < LATEST_COUNT; latestDayCount++) shown += days[latestDayCount].entries.length;
+  let newLeft = NEW_COUNT;
+  function createDay(day, large) {
+    const group = element("section", "daily-day" + (large ? " daily-day-latest" : ""));
+    group.id = "daily-" + day.date;
+    group.append(element("h4", "daily-day-title", dayFormat.format(new Date(day.date + "T12:00:00+09:00"))));
     const body = element("div", "daily-day-body");
     const dayCards = [];
     for (const entry of day.entries) {
-      const { article, card } = createCard(entry);
+      const { article, card } = createCard(entry, { large, isNew: large && newLeft-- > 0 });
       dayCards.push(card);
       body.append(article);
     }
     group.append(body);
-    pastBody.append(group);
-    pastDays.push({ group, dayCards });
+    return { group, dayCards };
+  }
+
+  // Latest dates: large summary cards, loaded right away.
+  const latest = element("div", "daily-latest");
+  const latestCards = [];
+  for (const day of days.slice(0, latestDayCount)) {
+    const { group, dayCards } = createDay(day, true);
+    latestCards.push(...dayCards);
+    latest.append(group);
+  }
+
+  // Older dates: one collapsed block, loaded when visible.
+  const past = element("details", "daily-past");
+  past.id = "daily-past";
+  const pastDayList = days.slice(latestDayCount);
+  const pastEntryCount = pastDayList.reduce((sum, day) => sum + day.entries.length, 0);
+  const pastSummary = element("summary", "daily-past-summary");
+  pastSummary.append(element("span", "daily-past-title", "過去の回"), element("span", "daily-day-count", pastEntryCount + "枠 · タップで表示"));
+  const pastBody = element("div", "daily-past-body");
+  const pastDays = [];
+  for (const day of pastDayList) {
+    const found = createDay(day, false);
+    pastBody.append(found.group);
+    pastDays.push(found);
   }
   past.append(pastSummary, pastBody);
   host.append(latest, past);
 
-  let observer;
+  // Older dates load their saved aggregates only once "過去の回" is opened (same as the former per-date accordions).
+  let pastLoaded = false;
   function watchPastDays() {
-    if (observer !== undefined) return;
-    if (!("IntersectionObserver" in window)) {
-      observer = null;
-      pastDays.forEach(({ dayCards }) => void loadCards(dayCards));
-      return;
-    }
-    observer = new IntersectionObserver((records) => {
-      for (const record of records) {
-        if (!record.isIntersecting) continue;
-        observer.unobserve(record.target);
-        const found = pastDays.find(({ group }) => group === record.target);
-        if (found) void loadCards(found.dayCards);
-      }
-    }, { rootMargin: "300px 0px" });
-    pastDays.forEach(({ group }) => observer.observe(group));
+    if (pastLoaded) return;
+    pastLoaded = true;
+    pastDays.forEach(({ dayCards }) => void loadCards(dayCards));
   }
   past.addEventListener("toggle", () => { if (past.open) watchPastDays(); });
 
