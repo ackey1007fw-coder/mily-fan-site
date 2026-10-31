@@ -16,7 +16,7 @@ export default function SongPostCollection() {
             <article key={recap.id} className="overflow-hidden rounded-3xl border border-sage/20 bg-paper-card shadow-card">
               {recap.image ? (
                 <figure className="relative">
-                  <img src={recap.image.src} alt={recap.image.alt} width={recap.image.width} height={recap.image.height} loading="lazy" className="max-h-80 w-full bg-sage-soft object-contain" />
+                  <img src={recap.image.src} alt={recap.image.alt} width={recap.image.width} height={recap.image.height} loading="lazy" decoding="async" className="max-h-80 w-full bg-sage-soft object-contain" />
                   <figcaption className="absolute bottom-3 left-3 rounded-full bg-paper/95 px-3 py-1 text-xs text-ink">この配信の写真</figcaption>
                 </figure>
               ) : null}
