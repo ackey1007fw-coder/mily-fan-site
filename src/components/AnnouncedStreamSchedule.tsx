@@ -8,11 +8,30 @@ import { confirmedShowroomAction } from "../lib/homeToday";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { NewsImage } from "./NewsImage";
 import { ExternalLink } from "./ExternalLink";
+import { OCTOBER_31_FANROOM_URL } from "../data/oct31Plan";
+import { upcomingOct31Slots } from "../lib/oct31Plan";
 
 export function AnnouncedStreamSchedule({ showSupportLink = true }: { showSupportLink?: boolean }) {
   const now = useSupportEventClock();
   const schedule = useStreamSchedule();
   const { roomUrl } = schedule;
+  const october31Slots = upcomingOct31Slots(now);
+  if (october31Slots.length > 0) return (
+    <section id="announced-stream" className="scroll-mt-24 px-4 py-6">
+      <div className="mx-auto max-w-3xl rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-6">
+        <h2 className="text-xl font-bold text-ink">10月31日・本人告知の配信予定</h2>
+        <p className="mt-2 text-sm leading-7 text-ink-muted">早朝のきっかけ枠を取りやめ、昼14:45〜15:15へ変更。すべて通常配信です。夜はハロウィンの仮装を予告しています。</p>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          {october31Slots.map(slot => <li key={slot.time} className="rounded-xl bg-sage-soft/50 px-4 py-3">
+            <p className="font-semibold text-ink">{formatSlotDate(slot)} {slot.time}〜{slot.endTime}</p>
+            <p className="mt-1 text-sm text-ink-muted">{slot.note}</p>
+          </li>)}
+        </ul>
+        <p className="mt-3 text-xs leading-6 text-ink-muted">2026年・JST。10月31日05:32・08:08の本人告知に基づく予定で、実配信の記録ではありません。終了予定時刻を過ぎた枠は一覧から外れます。SHOWROOMの登録予定とは別の案内です。</p>
+        <ExternalLink href={OCTOBER_31_FANROOM_URL} className="mt-4 inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">本人ファンルームで最新の案内を見る</ExternalLink>
+      </div>
+    </section>
+  );
   const showroomUrl = roomUrl ?? confirmedShowroomAction()?.url;
   const finalSlot = finalStreamAnnouncement(schedule, now);
   const slots = upcomingSlots(fourthRoundStreamSchedule.filter(slot => slot.date !== "2026-10-12"), [], now);

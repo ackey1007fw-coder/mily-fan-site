@@ -9,6 +9,7 @@ import { tokyoDateKey } from "./monthCalendar.ts";
 import { nextDisplayStatusBoundary } from "./supportCalendar.ts";
 import { fourthRoundStreamSchedule } from "../data/fourthRoundStreamSchedule.ts";
 import { slotStartMs, slotEndMs } from "../data/streamSchedule.ts";
+import { october31StreamSlots, OCTOBER_31_ANNOUNCED_AT } from "../data/oct31Plan.ts";
 
 const MAX_TIMEOUT_MS = 2_147_483_647;
 const listeners = new Set<() => void>();
@@ -54,6 +55,8 @@ export function nextSupportEventBoundary(now: number): number | null {
         )
       : null;
   const boundaries = [
+    Date.parse(OCTOBER_31_ANNOUNCED_AT),
+    ...october31StreamSlots.flatMap(slot => [slotStartMs(slot), slotEndMs(slot)]),
     ...fourthRoundStreamSchedule.flatMap(slot => [slotStartMs(slot), slotEndMs(slot)]),
     ...voteStartDayBoundaries,
     ...supportEvents.map(({ schedule }) =>

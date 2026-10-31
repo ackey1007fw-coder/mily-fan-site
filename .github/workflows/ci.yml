@@ -68,6 +68,12 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/mily-browser-tools" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.61.1
           node "$RUNNER_TEMP/mily-browser-tools/node_modules/playwright/cli.js" install --with-deps chromium webkit
 
+      - name: October 31 announced schedule browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+        run: node scripts/fanroom-stream-update-20261031.browser.mjs
+
       - name: October 31 gratitude Story browser checks
         timeout-minutes: 4
         env:

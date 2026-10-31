@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-10-31-fanroom-stream-update",
   "2026-10-31-stream-thanks-instagram-story",
   "2026-10-29-x-miss-circle-semifinal-period",
   "2026-10-25-radio-halloween-stories",
