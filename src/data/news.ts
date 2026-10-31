@@ -28,6 +28,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
 import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
+import { tiktokSeasideCircleOct31Video } from "./tiktokSeasideCircleOct31Video.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -279,6 +280,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-10-31-tiktok-seasidecircle-shared",
+    date: "2026-10-31",
+    dateBasis: "confirmed-on",
+    sameDayOrder: 1000,
+    title: "湘南シーサイドサークルのTikTok投稿リンク📱",
+    body: "湘南シーサイドサークル（@seasidecircle）のTikTok動画リンクを紹介します。動画は元のTikTok投稿からご覧ください。\n\n投稿内容・説明文・みりぃ本人の登場有無は独立確認できていません。10月31日はリンクの共有・確認日で、動画の投稿日を示すものではありません。",
+    source: tiktokSeasideCircleOct31Video.sourceUrl,
+    sourceLabel: "湘南シーサイドサークルのTikTok投稿を見る",
+  },
   {
     id: "2026-10-31-fanroom-stream-update",
     date: "2026-10-31",
