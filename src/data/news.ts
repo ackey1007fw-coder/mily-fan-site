@@ -28,6 +28,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
 import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
+import { sscTikTokOct31 } from "./sscTikTokOct31.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -384,9 +385,15 @@ export const news: NewsItem[] = [
     date: "2026-10-16",
     dateBasis: "confirmed-on",
     title: "湘南シーサイドサークルのTikTok投稿リンク📱",
-    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。",
+    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。\n\n10月31日に新たに共有された別のTikTok投稿も関連リンクに追加しました。こちらも投稿日、動画の内容や出演者は未確認です。",
     source: tiktokSeasideCircleSharedVideo.sourceUrl,
     sourceLabel: "湘南シーサイドサークルのTikTok投稿を開く",
+    additionalSources: [
+      {
+        label: "10月31日に共有された別のTikTok投稿を見る",
+        url: sscTikTokOct31.sourceUrl,
+      },
+    ],
   },
   {
     id: "2026-10-15-miss-circle-semifinal-advance",
