@@ -16,7 +16,7 @@ test("10/31 noon is one separate entry, newest first, without touching earlier d
   assert.equal(entries[0].slot, "noon");
   assert.equal(entries[0].report, "/data-lab/reports/20261031-noon/");
   const dates = groupByBroadcastDate().map((g) => g.date);
-  assert.equal(dates[0], "2026-10-31");
+  assert.ok(dates.indexOf("2026-10-31") >= 0 && dates.indexOf("2026-10-31") < dates.indexOf("2026-10-30"));
   assert.equal(DAILY_STREAM_ENTRIES.filter((e) => e.date === "2026-10-30").length, 3);
 });
 

@@ -102,7 +102,16 @@ try {
             const openDay = async day => {
               if (await day.evaluate(el => Boolean(el.closest("details:not([open])")))) await page.locator("#daily-past > summary").click();
             };
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 18, "Eighteen broadcast dates from 10/14 through 10/31");
+            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 19, "Nineteen broadcast dates from 10/14 through 11/1");
+            const day1101 = page.locator("#daily-2026-11-01");
+            assert.equal(await day1101.count(), 1, "Nov 1 morning has its own date");
+            await openDay(day1101);
+            const day1101Card = day1101.locator(".daily-stream-card");
+            assert.equal(await day1101Card.count(), 1, "Nov 1 morning has exactly one card");
+            await day1101Card.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
+            assert.equal(await day1101Card.locator(".daily-stream-number").first().innerText(), "2,453", "Nov 1 morning shows the partial last valid star display");
+            await day1101Card.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
+            assert.equal(await day1101Card.locator("svg.daily-plot circle").count(), 21, "Nov 1 morning plots its 21 saved points");
             const day31 = page.locator("#daily-2026-10-31");
             assert.equal(await day31.count(), 1, "Oct 31 noon has its own date");
             await openDay(day31);
