@@ -7,11 +7,11 @@
 .daily-metric-controls button{border:1px solid #638393;border-radius:99px;background:#123442;color:#f5fafa;font-weight:750;padding:9px 16px;min-height:44px}
 .daily-metric-controls button.active{background:var(--mint);color:#0b2531;border-color:var(--mint)}
 .daily-stream-groups{display:grid;gap:12px}
-.daily-day{border:1px solid #426475;border-radius:19px;overflow:hidden;background:linear-gradient(135deg,#163a47,#102e3c)}
-.daily-day-summary{cursor:pointer;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:18px 22px;min-height:64px;list-style-position:inside}
-.daily-day-summary:hover{background:rgba(132,225,200,.08)}
-.daily-day-summary:focus-visible{outline:3px solid #ffeab7;outline-offset:-4px}
-.daily-day[open]>.daily-day-summary{border-bottom:1px solid rgba(154,200,212,.25);background:rgba(105,201,183,.09)}
+
+
+
+
+
 .daily-day-title{font-weight:850;color:#f8fcfc;font-size:19px}
 .daily-day-count{color:#bfd4db;font-size:12px;font-weight:650;white-space:nowrap}
 .daily-day-body{padding:18px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
@@ -27,8 +27,23 @@
 .daily-no-chart{padding:15px;border:1px dashed #577583;border-radius:10px}
 .daily-stream-links{display:flex;flex-wrap:wrap;gap:10px 16px;margin:12px 0 0;font-size:12px;font-weight:750}
 .daily-stream-links a{color:#a1edd9}
-.daily-fallback{display:flex;flex-wrap:wrap;gap:9px;margin:10px 0}
-.daily-fallback a{padding:8px 12px;border:1px solid #638393;border-radius:99px}
+.daily-fallback{display:flex;flex-wrap:nowrap;gap:9px;margin:10px 0 6px;padding:4px 2px 12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;max-width:100%}
+.daily-fallback a{flex:0 0 auto;white-space:nowrap;scroll-snap-align:start;display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1px solid #638393;border-radius:99px;background:#123442;color:#f5fafa;font-size:13px;font-weight:750;text-decoration:none}.daily-fallback a:first-child{background:var(--tomato);border-color:var(--tomato);color:#161d25}.daily-fallback a:focus-visible{outline-offset:-3px}.daily-fallback a:hover{background:rgba(128,220,197,.16)}.daily-fallback a:first-child:hover{background:#ff9c82}
 .daily-footer-note{color:var(--soft);font-size:12px;margin-top:18px}
-@media(max-width:730px){.daily-day-body{grid-template-columns:1fr;padding:12px}.daily-day-summary{padding:15px 13px}.daily-stream-card{padding:14px 12px}.daily-day-title{font-size:17px}.daily-day-count{font-size:11px}.daily-stream-number{font-size:26px}}
+.daily-latest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:16px}
+.daily-stream-card-large{padding:22px;border-radius:22px;background:linear-gradient(145deg,#1d4252,#112d3b);border-color:#4f7181;box-shadow:0 14px 34px rgba(0,0,0,.18);scroll-margin-top:95px}
+.daily-stream-card-large h4{font-size:17px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.daily-stream-card-large .daily-stream-number{font-size:clamp(34px,4vw,48px);letter-spacing:-.04em}
+.daily-new{display:inline-block;padding:1px 9px;border-radius:99px;background:var(--tomato);color:#161d25;font-size:11px;font-weight:900;letter-spacing:.08em}
+.daily-past{border:1px solid #426475;border-radius:19px;overflow:hidden;background:linear-gradient(135deg,#163a47,#102e3c)}
+.daily-past-summary{cursor:pointer;display:flex;gap:12px;align-items:center;justify-content:space-between;padding:18px 22px;min-height:64px;list-style-position:inside}
+.daily-past-summary:hover{background:rgba(132,225,200,.08)}
+.daily-past-summary:focus-visible{outline:3px solid #ffeab7;outline-offset:-4px}
+.daily-past[open]>.daily-past-summary{border-bottom:1px solid rgba(154,200,212,.25);background:rgba(105,201,183,.09)}
+.daily-past-title{font-weight:850;color:#f8fcfc;font-size:19px}
+.daily-past-body{display:grid;gap:6px;padding:6px 0 10px}
+.daily-day{scroll-margin-top:95px}
+.daily-day>.daily-day-title{display:block;margin:12px 22px 0;font-size:16px}
+@media(max-width:1000px){.daily-latest{grid-template-columns:1fr}}
+@media(max-width:730px){.daily-past-summary{padding:15px 13px}.daily-past-title{font-size:17px}.daily-day>.daily-day-title{margin:10px 13px 0}.daily-stream-card-large{padding:17px 15px}.daily-day-body{grid-template-columns:1fr;padding:12px}.daily-stream-card{padding:14px 12px}.daily-day-title{font-size:17px}.daily-day-count{font-size:11px}.daily-stream-number{font-size:26px}}
 @media(prefers-reduced-motion:reduce){.day-archive *{scroll-behavior:auto}}

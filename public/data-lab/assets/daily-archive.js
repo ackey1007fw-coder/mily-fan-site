@@ -87,9 +87,10 @@ if (host) {
         : "欠測を0として描画しません。既存の各回レポートには別の図表がある場合があります。";
     }
   }
-  function createCard(entry) {
-    const article = element("article", "daily-stream-card");
-    const title = element("h4", "", SLOT_LABELS[entry.slot] + "の配信");
+  function createCard(entry, options = {}) {
+    const article = element("article", "daily-stream-card" + (options.large ? " daily-stream-card-large" : ""));
+    const title = element("h4", "", (options.large ? dayFormat.format(new Date(entry.date + "T12:00:00+09:00")) + " " : "") + SLOT_LABELS[entry.slot] + "の配信");
+    if (options.isNew) title.prepend(element("span", "daily-new", "NEW"));
     const status = element("div", "daily-stream-stat");
     const label = element("span", "", METRICS[metric] + "（最後の有効な画面参考値）");
     const value = element("strong", "daily-stream-number", "読み込み前");
@@ -105,36 +106,77 @@ if (host) {
     article.append(title, status, chart, note, links);
     const card = { entry, data: undefined, label, value, chart, note };
     cards.push(card);
-    return article;
+    return { article, card };
   }
-  async function loadDay(details, dayCards) {
-    await Promise.all(dayCards.map(async (card) => {
+  async function loadCards(group) {
+    await Promise.all(group.map(async (card) => {
       if (card.data === undefined) card.data = await getData(card.entry);
+      renderCard(card);
     }));
-    if (details.open) dayCards.forEach(renderCard);
   }
+  const LATEST_COUNT = 3;
+  const NEW_COUNT = 1;
   const days = groupByBroadcastDate(DAILY_STREAM_ENTRIES);
-  let firstDay;
-  for (const day of days) {
-    const details = element("details", "daily-day");
-    details.id = "daily-" + day.date;
-    const summary = element("summary", "daily-day-summary");
-    const shownDate = dayFormat.format(new Date(day.date + "T12:00:00+09:00"));
-    summary.append(element("span", "daily-day-title", shownDate), element("span", "daily-day-count", day.entries.length + "枠 · タップで表示"));
+  const ordered = days.flatMap((day) => day.entries);
+  const usedIds = new Set();
+
+  // Latest broadcasts: large summary cards, loaded right away.
+  const latest = element("div", "daily-latest");
+  const latestCards = [];
+  ordered.slice(0, LATEST_COUNT).forEach((entry, index) => {
+    const { article, card } = createCard(entry, { large: true, isNew: index < NEW_COUNT });
+    if (!usedIds.has(entry.date)) { article.id = "daily-" + entry.date; usedIds.add(entry.date); }
+    latestCards.push(card);
+    latest.append(article);
+  });
+
+  // Older broadcasts: one collapsed block, grouped by broadcast date, loaded when visible.
+  const past = element("details", "daily-past");
+  past.id = "daily-past";
+  const pastEntries = ordered.slice(LATEST_COUNT);
+  const pastSummary = element("summary", "daily-past-summary");
+  pastSummary.append(element("span", "daily-past-title", "過去の回"), element("span", "daily-day-count", pastEntries.length + "枠 · タップで表示"));
+  const pastBody = element("div", "daily-past-body");
+  const pastDays = [];
+  for (const day of groupByBroadcastDate(pastEntries)) {
+    const group = element("section", "daily-day");
+    const continued = usedIds.has(day.date);
+    if (!continued) { group.id = "daily-" + day.date; usedIds.add(day.date); }
+    group.append(element("h4", "daily-day-title", dayFormat.format(new Date(day.date + "T12:00:00+09:00")) + (continued ? "（つづき）" : "")));
     const body = element("div", "daily-day-body");
     const dayCards = [];
     for (const entry of day.entries) {
-      const article = createCard(entry);
-      dayCards.push(cards.at(-1));
+      const { article, card } = createCard(entry);
+      dayCards.push(card);
       body.append(article);
     }
-    details.append(summary, body);
-    details.addEventListener("toggle", () => { if (details.open) void loadDay(details, dayCards); });
-    host.append(details);
-    if (!firstDay) firstDay = details;
+    group.append(body);
+    pastBody.append(group);
+    pastDays.push({ group, dayCards });
   }
-  const fallback = document.getElementById("daily-fallback-links");
-  if (fallback) fallback.hidden = true;
+  past.append(pastSummary, pastBody);
+  host.append(latest, past);
+
+  let observer;
+  function watchPastDays() {
+    if (observer !== undefined) return;
+    if (!("IntersectionObserver" in window)) {
+      observer = null;
+      pastDays.forEach(({ dayCards }) => void loadCards(dayCards));
+      return;
+    }
+    observer = new IntersectionObserver((records) => {
+      for (const record of records) {
+        if (!record.isIntersecting) continue;
+        observer.unobserve(record.target);
+        const found = pastDays.find(({ group }) => group === record.target);
+        if (found) void loadCards(found.dayCards);
+      }
+    }, { rootMargin: "300px 0px" });
+    pastDays.forEach(({ group }) => observer.observe(group));
+  }
+  past.addEventListener("toggle", () => { if (past.open) watchPastDays(); });
+
   for (const btn of metricButtons) {
     btn.addEventListener("click", () => {
       const next = btn.dataset.dailyMetric;
@@ -151,16 +193,23 @@ if (host) {
       });
     });
   }
-  // Shared day links work even after an initial hash navigation.
+  // Use day anchors once enhanced cards exist; keep HTML fallback links usable without JS.
+  document.querySelectorAll("#daily-fallback-links a").forEach((link) => {
+    const entry = DAILY_STREAM_ENTRIES.find((candidate) => "#" + candidate.section === link.getAttribute("href"));
+    if (entry) link.href = "#daily-" + entry.date;
+  });
+  // Shared day links (/data-lab/#daily-YYYY-MM-DD) keep working, including older days inside "過去の回".
   function openLinkedDay() {
     if (!location.hash.startsWith("#daily-")) return;
     const found = document.getElementById(location.hash.slice(1));
-    if (found?.tagName === "DETAILS") found.open = true;
+    if (!found || !host.contains(found)) return;
+    if (past.contains(found) && !past.open) {
+      past.open = true;
+      watchPastDays();
+    }
+    found.scrollIntoView();
   }
   window.addEventListener("hashchange", openLinkedDay);
   openLinkedDay();
-  if (firstDay) {
-    firstDay.open = true;
-    void loadDay(firstDay, cards.filter((card) => card.entry.date === days[0].date));
-  }
+  void loadCards(latestCards);
 }
