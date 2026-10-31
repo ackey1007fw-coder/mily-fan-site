@@ -1,3 +1,10 @@
+# 2026-10-31：湘南シーサイドサークル TikTokリンク（オーナー指定）
+
+- オーナー指定の短縮URL `https://vt.tiktok.com/ZSgvXuMyS/` は、`https://www.tiktok.com/@seasidecircle/video/7702609878941994261` へリダイレクトすることを確認。動画IDは `7702609878941994261`。既存NEWSの別TikTokリンクとは別投稿。
+- TikTokの本文・映像・本人登場・元の公開日はブラウザ取得制限により独立確認できていない。10月31日はリンク受領・確認日（`dateBasis: "confirmed-on"`）であり、投稿日として扱わない。
+- HOME Latest / NEWSに出典リンクのみ追加。既存の未確認動画の扱いと同じく `published: false` を保持し、TikTok公式埋め込み・Gallery・RADIO・自己ホスト動画を追加しない。後日映像確認できたら別途判断。
+- 追加リンクはオーナーがこの依頼で指定。SNS投稿、他の配信・分析・予定、他人の写真や音源には触れない。
+
 # 2026-10-31：本人FRの配信予定変更・朝枠後のお礼
 
 - HOME / NEWSに1記事、既存の本人告知欄（HOME / SUPPORT / LIVE STREAM）とSUPPORTカレンダーへ本人の公開告知を反映。登録予定API・fallback・実ライブ判定は変更しない。
