@@ -38,16 +38,40 @@ test("only the last valid star display is kept; it is not a confirmed final", ()
   assert.equal(data.quality.source_event_counts_verified, false);
   assert.equal(data.quality.summedAcrossDisconnect, false);
   assert.deepEqual(data.quality.gaps.map((g) => [g.startJst, g.endJst]), [["2026-10-31T14:53:08.485+09:00", "2026-10-31T14:57:00.945+09:00"]]);
-  assert.equal(data.observations.length, 0);
+  assert.equal(data.observations.length, 183);
+  assert.equal(data.quality.publishedObservationPoints, 183);
   assert.equal(lastObservedValue(data, "stars", data.dateJst), 2751);
   assert.equal(lastObservedValue(data, "visits", data.dateJst), 142);
   assert.equal(lastObservedValue(data, "comments", data.dateJst), 252);
   assert.match(data.measurementNote, /ユニーク視聴者数ではない/);
-  assert.deepEqual(observationPoints(data, "stars", data.dateJst), []);
+  assert.equal(observationPoints(data, "stars", data.dateJst).length, 183);
+  assert.equal(observationPoints(data, "visits", data.dateJst).length, 164);
+  assert.equal(observationPoints(data, "comments", data.dateJst).length, 183);
   assert.equal(data.partialViewerMemo, undefined);
 });
 
-test("report shows reservations and no fabricated chart", () => {
+test("183 anonymous timestamped points: measured only, nulls kept, gap not filled", () => {
+  const obs = data.observations;
+  const keys = ["atJst", "stars", "visits", "comments", "firstVisits", "repeatVisits", "newFollows", "otherFree", "star100People", "recommendedCommentPeople"];
+  for (const o of obs) assert.deepEqual(Object.keys(o).sort(), [...keys].sort());
+  const times = obs.map((o) => Date.parse(o.atJst));
+  assert.equal(new Set(times).size, 183);
+  for (let i = 1; i < times.length; i += 1) assert.ok(times[i] > times[i - 1]);
+  assert.equal(obs[0].atJst, "2026-10-31T14:45:41.600+09:00");
+  assert.equal(obs.at(-1).atJst, data.lastValidOnline.atJst);
+  for (const k of Object.keys(data.metrics)) assert.equal(obs.at(-1)[k], data.metrics[k], k);
+  assert.equal(obs.filter((o) => o.visits === null).length, 19);
+  for (const o of obs) for (const k of keys.slice(1)) if (k !== "visits") assert.ok(Number.isInteger(o[k]) && o[k] >= 0, k);
+  for (let i = 1; i < obs.length; i += 1) assert.ok(obs[i].stars >= obs[i - 1].stars);
+  const gs = Date.parse("2026-10-31T14:53:08.485+09:00"), ge = Date.parse("2026-10-31T14:57:00.945+09:00");
+  assert.equal(times.filter((t) => t > gs && t < ge).length, 0);
+  const csv = read("public/data-lab/data/mily-noon-20261031-observations.csv").trim().split("\n");
+  assert.equal(csv.length, 184);
+  assert.equal(csv[0], keys.join(","));
+  csv.slice(1).forEach((line, i) => assert.equal(line, keys.map((k) => obs[i][k] === null ? "" : String(obs[i][k])).join(",")));
+});
+
+test("report shows reservations and an unconnected point chart", () => {
   assert.match(report, /2,751/);
   assert.match(report, /15:21:26/);
   assert.match(report, /14:53:08〜14:57:00/);
@@ -56,7 +80,13 @@ test("report shows reservations and no fabricated chart", () => {
   assert.match(report, /ユニーク視聴者数ではありません/);
   assert.match(report, /142/);
   assert.match(report, /252/);
-  assert.doesNotMatch(report, /<svg|<polyline|<canvas/);
+  assert.doesNotMatch(report, /<polyline|<canvas/);
+  assert.match(report, /id="observation-charts"/);
+  assert.match(report, /src="\/data-lab\/assets\/noon-20261031\.js"/);
+  assert.match(report, /183点の匿名CSV/);
+  const js = read("public/data-lab/assets/noon-20261031.js");
+  assert.doesNotMatch(js, /polyline|"path"|lineTo/);
+  assert.match(js, /if \(value === null\) continue;/);
   assert.match(report, /noindex,nofollow,noarchive/);
   assert.ok(!/https?:\/\//.test(report.replace(/http-equiv="Content-Security-Policy"[^>]*>/g, "")));
   assert.doesNotMatch(report + JSON.stringify(data), /drive\.google\.com|@gmail\.com|chatgpt\.site|C:\\Users|viewer[_-]?id|contributor[_-]?id|\.jsonl/i);
