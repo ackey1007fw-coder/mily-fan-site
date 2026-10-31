@@ -28,7 +28,8 @@ test("only the last valid star display is kept; it is not a confirmed final", ()
   assert.equal(data.lastValidOnline.atJst, "2026-10-31T15:21:26.341+09:00");
   assert.equal(data.lastValidOnline.confirmedFinal, false);
   assert.equal(Object.keys(data.metrics).length, 9);
-  for (const [k, v] of Object.entries(data.metrics)) if (k !== "stars") assert.equal(v, null, k);
+  assert.deepEqual(data.metrics, { stars: 2751, visits: 142, comments: 252, firstVisits: 4, repeatVisits: 5, newFollows: 0, otherFree: 190, star100People: 27, recommendedCommentPeople: 21 });
+  for (const k of Object.keys(data.metrics)) assert.equal(data.lastValidOnline[k], data.metrics[k], k);
   assert.equal(data.finalServiceValueVerified, false);
   assert.equal(data.completeCoverageConfirmed, false);
   assert.equal(data.timingComparisonEligible, false);
@@ -39,7 +40,9 @@ test("only the last valid star display is kept; it is not a confirmed final", ()
   assert.deepEqual(data.quality.gaps.map((g) => [g.startJst, g.endJst]), [["2026-10-31T14:53:08.485+09:00", "2026-10-31T14:57:00.945+09:00"]]);
   assert.equal(data.observations.length, 0);
   assert.equal(lastObservedValue(data, "stars", data.dateJst), 2751);
-  assert.equal(lastObservedValue(data, "visits", data.dateJst), null);
+  assert.equal(lastObservedValue(data, "visits", data.dateJst), 142);
+  assert.equal(lastObservedValue(data, "comments", data.dateJst), 252);
+  assert.match(data.measurementNote, /ユニーク視聴者数ではない/);
   assert.deepEqual(observationPoints(data, "stars", data.dateJst), []);
   assert.equal(data.partialViewerMemo, undefined);
 });
@@ -50,6 +53,9 @@ test("report shows reservations and no fabricated chart", () => {
   assert.match(report, /14:53:08〜14:57:00/);
   assert.match(report, /確定合計ではありません/);
   assert.match(report, /未取得/);
+  assert.match(report, /ユニーク視聴者数ではありません/);
+  assert.match(report, /142/);
+  assert.match(report, /252/);
   assert.doesNotMatch(report, /<svg|<polyline|<canvas/);
   assert.match(report, /noindex,nofollow,noarchive/);
   assert.ok(!/https?:\/\//.test(report.replace(/http-equiv="Content-Security-Policy"[^>]*>/g, "")));

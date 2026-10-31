@@ -7,8 +7,8 @@
   "session": "noon",
   "format": "showroom",
   "label": "10月31日 昼のSHOWROOM配信",
-  "eventName": "昼枠のきら星画面参考値のみ。同日の朝7時枠・夜枠とは別集計。",
-  "sourceDescription": "同じ配信中に保存された通常閲覧画面のきら星表示を、担当者が保存データで照合した報告に基づく。個人別データ・コメント本文・生ログは含みません。",
+  "eventName": "昼枠の画面参考9指標（最後の有効表示）のみ。同日の朝7時枠・夜枠とは別集計。",
+  "sourceDescription": "同じ配信中に保存された通常閲覧画面（collector）の9指標を、担当者が保存データで照合した報告（2026-10-31 20:42・22:14 JST）に基づく。個人別データ・コメント本文・生ログは含みません。",
   "verifiedAtJst": "2026-10-31",
   "finalServiceValueVerified": false,
   "completeCoverageConfirmed": false,
@@ -16,31 +16,31 @@
   "lastValidOnline": {
     "atJst": "2026-10-31T15:21:26.341+09:00",
     "stars": 2751,
-    "visits": null,
-    "comments": null,
-    "firstVisits": null,
-    "repeatVisits": null,
-    "newFollows": null,
-    "otherFree": null,
-    "star100People": null,
-    "recommendedCommentPeople": null,
+    "visits": 142,
+    "comments": 252,
+    "firstVisits": 4,
+    "repeatVisits": 5,
+    "newFollows": 0,
+    "otherFree": 190,
+    "star100People": 27,
+    "recommendedCommentPeople": 21,
     "uiProgressAtJst": "2026-10-31T15:21:26.341+09:00",
     "confirmedFinal": false
   },
   "metrics": {
     "stars": 2751,
-    "visits": null,
-    "comments": null,
-    "firstVisits": null,
-    "repeatVisits": null,
-    "newFollows": null,
-    "otherFree": null,
-    "star100People": null,
-    "recommendedCommentPeople": null
+    "visits": 142,
+    "comments": 252,
+    "firstVisits": 4,
+    "repeatVisits": 5,
+    "newFollows": 0,
+    "otherFree": 190,
+    "star100People": 27,
+    "recommendedCommentPeople": 21
   },
   "observations": [],
   "quality": {
-    "numericEvidenceStatus": "last_valid_screen_only",
+    "numericEvidenceStatus": "last_valid_screen_nine_metrics",
     "captureWindowJst": {
       "start": "2026-10-31T14:45:41.600+09:00",
       "end": "2026-10-31T15:23:23.284+09:00"
@@ -69,9 +69,10 @@
     "finalVerified": false,
     "missingDataIsNotZeroPerformance": true,
     "publishedObservationPoints": 0,
-    "note": "時刻付きの匿名観測点は今回の公開データに含めていないため、グラフ・増分・速度・時間帯比較は作らない。きら星以外の8指標は未取得でnull。視聴メモの人数表示は別種の参考表示のため、この匿名データへ入れない。"
+    "note": "9指標はいずれも15:21:26.341 JSTの最後の有効画面表示で、公式確定値ではない。総訪問表示はユニーク視聴者数ではない。時刻付きの匿名観測点（担当者側183点）は今回の公開データに含めていないため、グラフ・増分・速度・時間帯比較は作らない。視聴メモの人数表示は別種の参考表示のため、この匿名データへ入れない。",
+    "endEvidenceNote": "ui-summaryの更新時刻は終了証拠より約22秒前、後発receiptは3回offline。更新時刻だけでは生成順や判定の正当性を確定できず、不一致として残す。"
   },
-  "measurementNote": "きら星2,751は終了前の最後の有効画面表示（15:21:26.341 JST）。verified_final=false・source_event_counts_verified=false・end_confirmed=falseで、確定合計・公式イベントpt・実贈呈数ではない。",
+  "measurementNote": "9指標は終了前の最後の有効画面表示（15:21:26.341 JST）：きら星2,751・総訪問表示142・コメント252・初訪問4・再訪問5・新規フォロー0・その他無料190・星100人数27・おすすめコメント人数21。verified_final=false・source_event_counts_verified=false・end_confirmed=falseで、確定合計・公式イベントpt・実贈呈数・ユニーク視聴者数ではない。",
   "comparisonNote": "観測点を公開していないため推移グラフは未取得表示。条件の異なる他の枠と優劣比較しない。",
   "recap": {
     "liveRecapUrl": "/activities/live/#recap-2026-10-31-noon-showroom",

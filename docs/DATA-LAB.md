@@ -251,3 +251,4 @@ SHOWROOMイベント参加ルームは71、公式進出者プロフィールと�
 - 14:53:08.485〜14:57:00.945の232.460秒は910のまま進まない欠測。切断前後は同じlive ID・capture系列のため加算しない。verified_final=false・source_event_counts_verified=false・end_confirmed=falseで、確定合計・公式ptではない。
 - きら星以外の8指標はnull。時刻付き観測点は公開データに含めないため、グラフは作らず「未取得」表示。視聴メモの人数表示（47〜600）は別種の参考表示として入れない。タイミング比較から除外。
 - 新規 `public/data-lab/data/mily-noon-20261031-aggregate.json`、`data-lab/reports/20261031-noon/index.html`、日別一覧・本番ルート、`scripts/mily-noon-20261031-signal.test.mjs`。LIVE STREAMの同回にはきら星参考値を一文追記。Nativeは別writer管理で今回の変更対象外。
+- 追補（2026-10-31 22:14 JST報告）：担当者が保存データを再照合した15:21:26.341 JSTの最後の有効画面表示で、残り8指標のnullを埋めた（総訪問表示142・コメント252・初訪問4・再訪問5・新規フォロー0・その他無料190・星100人数27・おすすめコメント人数21）。いずれもcollector画面参考値で公式確定値ではない。総訪問表示はユニーク視聴者数ではない。欠測232.460秒・verified_final=false・end_confirmed=false、終了判定の不一致（ui-summary更新時刻と後発offline receipt）を維持。担当者側の183観測点は公開データに含めず、グラフは未取得のまま。
