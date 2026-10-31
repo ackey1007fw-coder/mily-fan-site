@@ -45,7 +45,8 @@ try {
         assert.match(full, /21:00〜21:50/);
         assert.match(full, /提供された視聴確認メモ/);
         assert.match(full, /ポイント数の確定値は未確認/);
-        assert.doesNotMatch(full, /21:05|21:55|5分押し/);
+        assert.match(full, /【後報】同日15:52の本人ファンルーム告知で21:05〜21:50へ変更/);
+        assert.doesNotMatch(full, /21:55|5分押し/);
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "No horizontal overflow");
         assert.equal(errors.length, 0, errors.join("\n"));
         await recap.screenshot({ path: join(output, `${name}-${width}.png`) });

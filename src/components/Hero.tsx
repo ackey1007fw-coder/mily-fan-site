@@ -5,6 +5,7 @@ import { news } from "../data/news";
 import { PATON_VOTE_HOW_TO_ANCHOR_ID } from "../data/patonVoteHowTo";
 import { profile } from "../data/profile";
 import { site } from "../data/site";
+import { sscTikTokOct31 } from "../data/sscTikTokOct31";
 import { supportEvents } from "../data/supportEvents";
 import {
   selectHomeVoteActions,
@@ -155,6 +156,12 @@ export function Hero() {
                   {link.label}
                 </ExternalLink>
               ))}
+              <ExternalLink
+                href={sscTikTokOct31.sourceUrl}
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-sage/30 bg-paper-card px-4 py-2 text-sm font-semibold text-sage-deep hover:bg-sage-soft sm:w-auto"
+              >
+                10月31日共有の番組TikTokを見る
+              </ExternalLink>
             </div>
           ) : null}
         </div>

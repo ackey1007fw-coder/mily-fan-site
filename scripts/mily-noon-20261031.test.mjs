@@ -37,12 +37,12 @@ test("10/31 noon: gratitude and aspiration, without invented outcomes, songs or 
   assert.equal(recap.gallery, undefined);
   assert.deepEqual(recap.ranking, []);
   assert.ok(recap.highlights.every(h => !h.clip && !h.socialClip && !h.quote));
-  assert.doesNotMatch(text, /21:05|21:55|5分押し|５分押し|5分遅|instagram[.]com|youtu[.]be|drive[.]google[.]com|@gmail[.]com|C:\\Users/i);
+  assert.doesNotMatch(text, /21:55|5分押し|５分押し|5分遅|instagram[.]com|youtu[.]be|drive[.]google[.]com|@gmail[.]com|C:\\Users/i);
 });
 test("10/31 noon: historical night announcement and honest source disclosure are retained", () => {
   assert.match(recap.nextNote, /^配信時点では、夜枠を21:00〜21:50/);
   assert.match(recap.nextNote, /ハロウィンコスプレ予定/);
-  assert.match(recap.nextNote, /現在の確定予定とは区別/);
+  assert.match(recap.nextNote, /【後報】同日15:52の本人ファンルーム告知で21:05〜21:50へ変更/);
   assert.match(recap.sourceLabel, /オーナーによる提供視聴メモ・保存ASR参照/);
   assert.match(recap.transcriptionNote, /原音の手動聴取・全編映像の再確認・逐語校正は未実施/);
   const ledger = JSON.parse(read("docs/RECAP-VERIFICATION-LEDGER.json"));
