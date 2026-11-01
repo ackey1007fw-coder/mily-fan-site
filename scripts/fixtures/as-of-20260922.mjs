@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-11-01-x-radio-studio-selfie",
   "2026-11-01-radio-theme-talk-stories",
   "2026-11-01-maid-bunny-vote-day4-story",
   "2026-10-31-fanroom-stream-update",

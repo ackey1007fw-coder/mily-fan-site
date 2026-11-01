@@ -282,6 +282,26 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-11-01-x-radio-studio-selfie",
+    date: "2026-11-01",
+    sameDayOrder: 1006,
+    activityIds: ["radio"],
+    activityMediaIds: [], // HOME / NEWS-only X photo; do not propagate to Activity media.
+    title: "今日もラジオはじまった📻 ヘッドホン姿のスタジオ自撮り",
+    body: "11月1日10:06（日本時間）、みりぃがXで「今日もラジオはじまったぞー！！」と投稿。13:00までラジオパーソナリティーをしていることを伝え、FM湘南マジックウェイブのサイマルラジオのページを添えて「聴いてみてね」と呼びかけています。\n\n投稿には、ヘッドホンをつけ、スタジオのマイクを手にカメラを見つめる自撮り写真が添えられています。\n\n放送時間は投稿時点の本人の案内です。放送の内容はこの投稿からは確認していません。聴き方や最新の放送情報はFM公式の案内をご確認ください。",
+    source: "https://x.com/Mily_chan36/status/2116698308303598036",
+    sourceLabel: "みりぃ本人のX投稿と写真を見る（11月1日）",
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b246-01-20261101-radio-studio-selfie.jpg",
+      width: 1152,
+      height: 2048,
+      alt: "ヘッドホンをつけ、水色のトップスでスタジオのマイクを片手に持ち、カメラを見つめるみりぃの縦長の自撮り写真",
+    },
+  },
+  {
     id: "2026-11-01-radio-theme-talk-stories",
     date: "2026-11-01",
     dateBasis: "confirmed-on",
