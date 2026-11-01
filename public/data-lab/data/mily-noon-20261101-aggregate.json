@@ -1,0 +1,199 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23630916,
+  "dateJst": "2026-11-01",
+  "session": "noon",
+  "format": "showroom",
+  "label": "11月1日 昼のSHOWROOM配信",
+  "eventName": "昼枠の途中記録。14:52より前と14:57以降は未取得。同日の朝枠とは別集計。",
+  "sourceDescription": "同じ配信の通常閲覧画面から約30秒ごとに保存した匿名カウンターを照合。個人別データ・コメント本文・生ログは含みません。",
+  "verifiedAtJst": "2026-11-01",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": {
+    "atJst": "2026-11-01T14:56:56+09:00",
+    "stars": 1248,
+    "visits": 45,
+    "comments": 67,
+    "firstVisits": 2,
+    "repeatVisits": 0,
+    "newFollows": 0,
+    "otherFree": 60,
+    "star100People": 11,
+    "recommendedCommentPeople": 11,
+    "uiProgressAtJst": "2026-11-01T14:56:56+09:00",
+    "confirmedFinal": false
+  },
+  "metrics": {
+    "stars": 1248,
+    "visits": 45,
+    "comments": 67,
+    "firstVisits": 2,
+    "repeatVisits": 0,
+    "newFollows": 0,
+    "otherFree": 60,
+    "star100People": 11,
+    "recommendedCommentPeople": 11
+  },
+  "measurementNote": "14:56:56時点の途中画面参考値。以後の数値は未取得で、配信終了までの値ではありません。公式終値・実人数・実贈呈量・イベントptではありません。",
+  "comparisonNote": "保存できたのは配信開始から約7分後の約4分半のみです。14:52より前と14:57以降は欠測で、0に置き換えていません。増加速度・ピーク・時間帯効果は評価せず、他の枠と優劣比較しません。",
+  "quality": {
+    "savedSampleRows": 11,
+    "validRows": 10,
+    "failedRequestRowsExcluded": 0,
+    "offlineAfterEndRowsExcluded": 1,
+    "samplingIntervalSecondsApprox": 30,
+    "counterSource": "normal_visible_ui",
+    "captureWindowJst": {
+      "start": "2026-11-01T14:52:27+09:00",
+      "end": "2026-11-01T14:56:56+09:00"
+    },
+    "gaps": [
+      {
+        "startJst": "2026-11-01T14:45:31+09:00",
+        "endJst": "2026-11-01T14:52:27+09:00",
+        "reason": "取得処理の再起動待ち（配信開始の検知が遅れた）"
+      },
+      {
+        "startJst": "2026-11-01T14:56:56+09:00",
+        "endJst": "2026-11-01T15:20:55+09:00",
+        "reason": "取得処理の停止。終了判定時には表示が消えていた"
+      }
+    ],
+    "endDetectedAtJst": "2026-11-01T15:20:55+09:00",
+    "verified_final": false,
+    "viewerCountExcluded": true,
+    "liveOfflineDetected": true
+  },
+  "recap": {
+    "basis": "同回の保存録画の自動文字起こしと実フレーム確認。",
+    "publishedStills": 10,
+    "publishedTalkClips": 3,
+    "liveRecapUrl": "/activities/live/#recap-2026-11-01-noon-showroom"
+  },
+  "observations": [
+    {
+      "atJst": "2026-11-01T14:52:27+09:00",
+      "stars": 938,
+      "visits": 34,
+      "comments": 47,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 8,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-11-01T14:52:55+09:00",
+      "stars": 1038,
+      "visits": 34,
+      "comments": 49,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 9,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-11-01T14:53:26+09:00",
+      "stars": 1038,
+      "visits": 34,
+      "comments": 51,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 9,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-11-01T14:53:56+09:00",
+      "stars": 1148,
+      "visits": 34,
+      "comments": 53,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 10,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-11-01T14:54:26+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 54,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 11,
+      "recommendedCommentPeople": 8
+    },
+    {
+      "atJst": "2026-11-01T14:54:56+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 56,
+      "firstVisits": 1,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 11,
+      "recommendedCommentPeople": 9
+    },
+    {
+      "atJst": "2026-11-01T14:55:26+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 60,
+      "firstVisits": 2,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 11,
+      "recommendedCommentPeople": 10
+    },
+    {
+      "atJst": "2026-11-01T14:55:55+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 61,
+      "firstVisits": 2,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 11,
+      "recommendedCommentPeople": 10
+    },
+    {
+      "atJst": "2026-11-01T14:56:25+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 63,
+      "firstVisits": 2,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 11,
+      "recommendedCommentPeople": 10
+    },
+    {
+      "atJst": "2026-11-01T14:56:56+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 67,
+      "firstVisits": 2,
+      "repeatVisits": 0,
+      "newFollows": 0,
+      "otherFree": 60,
+      "star100People": 11,
+      "recommendedCommentPeople": 11
+    }
+  ]
+}
