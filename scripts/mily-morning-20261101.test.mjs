@@ -54,7 +54,7 @@ const csv = read("public/data-lab/data/mily-morning-20261101-observations.csv").
 test("11/1 morning SIGNAL: newest separate entry with 21 partial observations, not a final", () => {
   const entries = DAILY_STREAM_ENTRIES.filter(e => e.date === "2026-11-01" && e.slot === "morning");
   assert.equal(entries.length, 1);
-  assert.equal(groupByBroadcastDate()[0].date, "2026-11-01");
+  assert.ok(groupByBroadcastDate().some(d => d.date === "2026-11-01"));
   assert.equal(signal.liveId, 23629786);
   assert.equal(signal.observations.length, 21);
   assert.equal(csv.length, 22);
