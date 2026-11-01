@@ -1,0 +1,199 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23634120,
+  "dateJst": "2026-11-02",
+  "session": "morning",
+  "format": "showroom",
+  "label": "11月2日 朝のSHOWROOM配信",
+  "eventName": "朝枠（映像なしのラジオ形式）の途中記録。6:16より前と6:22以降は未取得。",
+  "sourceDescription": "同じ配信の通常閲覧画面から約30秒ごとに保存した匿名カウンターを照合。個人別データ・コメント本文・生ログは含みません。",
+  "verifiedAtJst": "2026-11-02",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": {
+    "atJst": "2026-11-02T06:21:33+09:00",
+    "stars": 2383,
+    "visits": 268,
+    "comments": 131,
+    "firstVisits": 4,
+    "repeatVisits": 7,
+    "newFollows": 0,
+    "otherFree": 0,
+    "star100People": 22,
+    "recommendedCommentPeople": 23,
+    "uiProgressAtJst": "2026-11-02T06:21:33+09:00",
+    "confirmedFinal": false
+  },
+  "metrics": {
+    "stars": 2383,
+    "visits": 268,
+    "comments": 131,
+    "firstVisits": 4,
+    "repeatVisits": 7,
+    "newFollows": 0,
+    "otherFree": 0,
+    "star100People": 22,
+    "recommendedCommentPeople": 23
+  },
+  "measurementNote": "6:21:33時点の途中画面参考値。以後の数値は未取得で、配信終了までの値ではありません。公式終値・実人数・実贈呈量・イベントptではありません。",
+  "comparisonNote": "保存できたのは配信開始から約15分後の約5分のみです。保存範囲の前後は欠測で、0に置き換えていません。増加速度・ピーク・時間帯効果は評価せず、他の枠と優劣比較しません。",
+  "quality": {
+    "savedSampleRows": 11,
+    "validRows": 10,
+    "failedRequestRowsExcluded": 0,
+    "offlineAfterEndRowsExcluded": 1,
+    "samplingIntervalSecondsApprox": 30,
+    "counterSource": "normal_visible_ui",
+    "captureWindowJst": {
+      "start": "2026-11-02T06:16:34+09:00",
+      "end": "2026-11-02T06:21:33+09:00"
+    },
+    "gaps": [
+      {
+        "startJst": "2026-11-02T06:01:36+09:00",
+        "endJst": "2026-11-02T06:16:34+09:00",
+        "reason": "取得処理の再起動待ち（配信開始の検知が遅れた）"
+      },
+      {
+        "startJst": "2026-11-02T06:20:32+09:00",
+        "endJst": "2026-11-02T06:21:33+09:00",
+        "reason": "約30秒ごとの保存が1回分抜けた"
+      },
+      {
+        "startJst": "2026-11-02T06:21:33+09:00",
+        "endJst": "2026-11-02T06:50:38+09:00",
+        "reason": "取得処理の停止。終了判定時には表示が消えていた"
+      }
+    ],
+    "endDetectedAtJst": "2026-11-02T06:50:38+09:00",
+    "verified_final": false,
+    "viewerCountExcluded": true,
+    "liveOfflineDetected": true
+  },
+  "observations": [
+    {
+      "atJst": "2026-11-02T06:16:34+09:00",
+      "stars": 2029,
+      "visits": 205,
+      "comments": 107,
+      "firstVisits": 3,
+      "repeatVisits": 5,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-11-02T06:17:03+09:00",
+      "stars": 2031,
+      "visits": 205,
+      "comments": 109,
+      "firstVisits": 3,
+      "repeatVisits": 5,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-11-02T06:17:32+09:00",
+      "stars": 2032,
+      "visits": 205,
+      "comments": 110,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-11-02T06:18:02+09:00",
+      "stars": 2033,
+      "visits": 205,
+      "comments": 111,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-11-02T06:18:33+09:00",
+      "stars": 2033,
+      "visits": 205,
+      "comments": 111,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-11-02T06:19:03+09:00",
+      "stars": 2033,
+      "visits": 205,
+      "comments": 114,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 19
+    },
+    {
+      "atJst": "2026-11-02T06:19:33+09:00",
+      "stars": 2043,
+      "visits": 205,
+      "comments": 114,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 19,
+      "recommendedCommentPeople": 20
+    },
+    {
+      "atJst": "2026-11-02T06:20:02+09:00",
+      "stars": 2153,
+      "visits": 205,
+      "comments": 120,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 20,
+      "recommendedCommentPeople": 20
+    },
+    {
+      "atJst": "2026-11-02T06:20:32+09:00",
+      "stars": 2283,
+      "visits": 205,
+      "comments": 125,
+      "firstVisits": 3,
+      "repeatVisits": 6,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 21,
+      "recommendedCommentPeople": 23
+    },
+    {
+      "atJst": "2026-11-02T06:21:33+09:00",
+      "stars": 2383,
+      "visits": 268,
+      "comments": 131,
+      "firstVisits": 4,
+      "repeatVisits": 7,
+      "newFollows": 0,
+      "otherFree": 0,
+      "star100People": 22,
+      "recommendedCommentPeople": 23
+    }
+  ],
+  "recapNote": "映像なしのラジオ形式の回のため、LIVE STREAMの配信メモ・写真・短尺はありません。"
+}
