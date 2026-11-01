@@ -20,6 +20,9 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-11-01-x-radio-studio-selfie",
+  "2026-11-01-radio-theme-talk-stories",
+  "2026-11-01-maid-bunny-vote-day4-story",
   "2026-10-31-fanroom-stream-update",
   "2026-10-31-stream-thanks-instagram-story",
   "2026-10-29-x-miss-circle-semifinal-period",
@@ -58,6 +61,9 @@ const newNewsIds = new Set([
   "2026-09-23-paton-thanks-story",
 ]);
 const newVideoIds = new Set([
+  "mily-b245-01-radio-dance-story",
+  "mily-b245-02-radio-studio-trio-story",
+  "mily-b245-03-maid-bunny-vote-day4-story",
   "mily-b237-01-red-hood-radio-story",
   "mily-b237-02-halloween-radio-story",
   "mily-b237-03-halloween-radio-poster-story",

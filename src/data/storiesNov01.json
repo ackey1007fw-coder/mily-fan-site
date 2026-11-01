@@ -1,0 +1,47 @@
+[
+  {
+    "id": "mily-b245-01-radio-dance-story",
+    "kind": "video",
+    "alt": "くま耳のフィルター姿のみりぃが水色のカーディガンと水玉のスカートで踊り、『ここからお聴きいただけます』『10:00〜13:00 ラジオパーソナリティするよ』とラジオ聴取を案内する縦型動画",
+    "src": "/media/gallery/mily-b245-01-radio-dance-story.mp4",
+    "poster": "/media/gallery/mily-b245-01-radio-dance-story-poster.jpg",
+    "width": 720,
+    "height": 1280,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（11月1日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-11-01",
+    "activityIds": ["radio"],
+    "published": true
+  },
+  {
+    "id": "mily-b245-02-radio-studio-trio-story",
+    "kind": "video",
+    "alt": "ヘッドホン姿のみりぃがスタジオで共演者2人と並んでピースし、『FM湘南マジックウェイブ【湘南シーサイドサークル】』10:00〜13:00、本日のテーマトーク『1番○○なもの』と聴取先を案内する縦型動画",
+    "src": "/media/gallery/mily-b245-02-radio-studio-trio-story.mp4",
+    "poster": "/media/gallery/mily-b245-02-radio-studio-trio-story-poster.jpg",
+    "width": 720,
+    "height": 1280,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（11月1日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-11-01",
+    "activityIds": ["radio"],
+    "published": true
+  },
+  {
+    "id": "mily-b245-03-maid-bunny-vote-day4-story",
+    "kind": "video",
+    "alt": "白いうさぎ耳のメイド衣装のみりぃが頬杖をついてウインクし、『今年のハロウィンはメイドうさぎした』『髪の長さも髪色も変えた』『4日目の投票はこちらから』と表示された縦型動画",
+    "src": "/media/gallery/mily-b245-03-maid-bunny-vote-day4-story.mp4",
+    "poster": "/media/gallery/mily-b245-03-maid-bunny-vote-day4-story-poster.jpg",
+    "width": 720,
+    "height": 1280,
+    "provenance": "owner-provided",
+    "sourceLabel": "Instagram Story（11月1日確認・投稿日未確認）",
+    "sourceDate": null,
+    "receivedDate": "2026-11-01",
+    "activityIds": ["miss-circle"],
+    "published": true
+  }
+]

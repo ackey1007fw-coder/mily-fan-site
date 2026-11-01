@@ -4,6 +4,7 @@ import { providedVoteVideo, type ProvidedVoteVideo } from "./providedVoteVideo.t
 import { radioAnniversaryStories, type RadioAnniversaryStoryVideo } from "./radioAnniversaryStories.ts";
 import { radioOct11Stories, type RadioOct11StoryVideo } from "./radioOct11Stories.ts";
 import { radioHalloweenStories, type RadioHalloweenStoryVideo } from "./radioHalloweenStories.ts";
+import { storiesNov01, type StoriesNov01Video } from "./storiesNov01.ts";
 import { kawaiiRadioStoryVideo, kawaiiRadioAdditionalVideos } from "./kawaiiRadioStoryVideo.ts";
 import { faceToFaceClassStoryVideo } from "./faceToFaceClassStoryVideo.ts";
 import { coldUmbrellaStoryVideo } from "./coldUmbrellaStoryVideo.ts";
@@ -86,6 +87,7 @@ export type SelfHostedGalleryVideo =
   | RadioAnniversaryStoryVideo
   | RadioOct11StoryVideo
   | RadioHalloweenStoryVideo
+  | StoriesNov01Video
   | MorningStoryVideo
   | MorningShowroomRunwayVideo
   | TikTokRadioVideo
@@ -165,6 +167,7 @@ export function isSelfHostedGalleryVideo(
  * Mixch is not a DriveGalleryVideo.
  */
 export const galleryVideos: GalleryVideoItem[] = [
+  ...storiesNov01,
   ...radioHalloweenStories,
   fourthRoundFinalDayStoryVideo,
   xFinalDayPeaceVideo,
