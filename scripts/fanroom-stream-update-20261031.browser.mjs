@@ -6,6 +6,8 @@ import { setTimeout as delay } from 'node:timers/promises';
 const require = createRequire(import.meta.url);
 const { chromium, webkit } = require(path.join(process.env.PLAYWRIGHT_MODULE_ROOT, 'playwright'));
 const base = 'http://127.0.0.1:4188';
+const TITLE = '夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内';
+const LOAD_MORE = 'もっと見る';
 const server = spawn(process.execPath, ['node_modules/vite/bin/vite.js','preview','--host','127.0.0.1','--port','4188','--strictPort'],{stdio:'ignore'});
 try {
   let ready = false;
@@ -21,10 +23,19 @@ try {
         for (const route of ['/','/news/','/support/','/activities/live/']) {
           await page.goto(base+route,{waitUntil:'domcontentloaded'});
           if (route === '/' || route === '/news/') {
-            await page.locator('#latest').getByText('夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内',{exact:true}).waitFor();
-            const latest = await page.locator('#latest').innerText();
-            assert.match(latest,/15:52更新.*21:05〜21:50/);
-            assert.match(latest,/朝の案内の履歴/);
+            const card = page.locator('#latest').getByText(TITLE,{exact:true});
+            if (route === '/' && (await card.count()) === 0) {
+              assert.equal(await page.locator('#latest li').count(), 3, 'HOME keeps three latest NEWS cards');
+            } else {
+              if (route === '/news/') {
+                const more = page.getByRole('button',{name:LOAD_MORE,exact:true});
+                for (let i=0; !(await card.count()) && await more.count() && i<40; i++) await more.click();
+              }
+              await card.waitFor();
+              const latest = await page.locator('#latest').innerText();
+              assert.match(latest,/15:52更新.*21:05〜21:50/);
+              assert.match(latest,/朝の案内の履歴/);
+            }
           }
           if (route !== '/news/') {
             const notice = page.locator('#announced-stream');

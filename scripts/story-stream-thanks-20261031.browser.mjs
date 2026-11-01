@@ -13,6 +13,7 @@ const poster = "/media/gallery/mily-b242-01-stream-thanks-story-v3-poster.jpg";
 const selector = `video[poster=\"${poster}\"]`;
 const title = "応援への感謝と、ファイナルへの決意🩵 みりぃのStory";
 const source = "https://www.instagram.com/mily_chan36";
+const LOAD_MORE = "もっと見る";
 try {
   let up = false;
   for (let attempt = 0; attempt < 60; attempt++) {
@@ -29,11 +30,24 @@ try {
           for (const route of ["/", "/news/"]) {
             await page.goto(base + route, { waitUntil: "domcontentloaded" });
             const latest = page.locator("#latest");
-            await latest.getByText(title, { exact: true }).waitFor();
+            const storyCard = latest.getByText(title, { exact: true });
+            if (route === "/" && (await storyCard.count()) === 0) {
+              assert.equal(await latest.locator("li").count(), 3, "HOME keeps three latest NEWS cards");
+              const heroTitle = await latest.locator("li p.font-semibold").first().innerText();
+              assert.equal(await page.locator("#top").getByText(heroTitle, { exact: true }).count(), 1, "HOME hero follows the current newest NEWS");
+              assert.equal(await page.locator("#top").getByRole("link", { name: "最新情報へ", exact: true }).getAttribute("href"), "#latest", "HOME text teaser links to playable Latest");
+              assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "no horizontal overflow");
+              console.log(JSON.stringify({ engine, width, route, outsideHomeLimit: true, passed: true }));
+              continue;
+            }
+            if (route === "/news/") {
+              const more = page.getByRole("button", { name: LOAD_MORE, exact: true });
+              for (let i = 0; !(await storyCard.count()) && await more.count() && i < 40; i++) await more.click();
+            }
+            await storyCard.waitFor();
             const video = latest.locator(selector);
             assert.equal(await video.count(), 1, "single Story player in Latest");
             if (route === "/") {
-              assert.equal(await page.locator("#top").getByText("夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内", { exact: true }).count(), 1, "HOME features the newer same-day announcement; Story remains in Latest");
               assert.equal(await page.locator("#top").getByRole("link", { name: "最新情報へ", exact: true }).getAttribute("href"), "#latest", "HOME text teaser links to playable Latest");
             }
             assert.ok(await page.locator(`a[href=\"${source}\"]`).count() > 0);
