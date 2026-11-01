@@ -8,8 +8,8 @@ const read = p => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 const text = JSON.stringify(recap);
 
 test("11/1 morning: newest card, recording-relative timestamps, no invented end time", () => {
-  // The same-day noon card (later slot) sits above the morning card.
-  assert.equal(streamRecaps[1], recap);
+  // The same-day noon and night cards (later slots) sit above the morning card.
+  assert.equal(streamRecaps[2], recap);
   assert.equal(streamRecaps[0].date, "2026-11-01");
   assert.equal(recap.id, "2026-11-01-morning-showroom");
   assert.equal(recap.dateLabel, "2026.11.01（日）");
