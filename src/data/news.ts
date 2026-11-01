@@ -6,6 +6,7 @@ import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { radioOct11Stories } from "./radioOct11Stories.ts";
 import { radioHalloweenStories } from "./radioHalloweenStories.ts";
+import { maidBunnyVoteDay4Story, radioNov01Stories } from "./storiesNov01.ts";
 import { radioFanroomAftershowNewsImage } from "./radioFanroomAftershowPhoto.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "./tiktokOct04SelfieVideo.ts";
@@ -280,6 +281,32 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-01-radio-theme-talk-stories",
+    date: "2026-11-01",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "今日もラジオパーソナリティ📻 テーマトークは『1番○○なもの』",
+    body: "くま耳フィルターで元気に踊りながら「10:00〜13:00 ラジオパーソナリティするよ」と案内するみりぃと、ヘッドホン姿でスタジオからピースする3ショット。ラジオの案内Story2本をまとめました。\n\nスタジオのStoryには、FM湘南マジックウェイブ『湘南シーサイドサークル』10:00〜13:00、本日のテーマトーク『1番○○なもの』と表示されています。聴取は下のFM公式リンクからどうぞ。\n\n動画は音声なしで掲載しています。11月1日は素材を受領・確認した日です。元の投稿日・撮影日と放送の実施内容は未確認のため、最新の放送情報はFM公式の案内をご確認ください。",
+    sourceLabel: "Instagram Story（11月1日確認・投稿日未確認）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioNov01Stories[0],
+    additionalMedia: radioNov01Stories.slice(1),
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+  },
+  {
+    id: "2026-11-01-maid-bunny-vote-day4-story",
+    date: "2026-11-01",
+    dateBasis: "confirmed-on",
+    activityIds: ["miss-circle"],
+    title: "今年のハロウィンはメイドうさぎ🐰 セミファイナル4日目のStory",
+    body: "白いうさぎ耳のメイド衣装で、頬杖をついてウインクするみりぃのStory。「今年のハロウィンはメイドうさぎした」「髪の長さも髪色も変えた」という言葉と、「4日目の投票はこちらから」の案内が添えられています。\n\nMISS CIRCLE CONTEST 2026のセミファイナル審査は、公式サイトでは10月29日〜11月8日（WEB投票は11月8日23:59まで、SHOWROOM審査は11月7日21:59まで）と案内されています。投票方法と受付状況は応援ページと公式ページでご確認ください。\n\n動画は音声なしで掲載しています。11月1日は素材を受領・確認した日です。元の投稿日・撮影日は未確認で、「4日目」は動画内の表示として紹介しています。",
+    sourceLabel: "Instagram Story（11月1日確認・投稿日未確認）",
+    media: maidBunnyVoteDay4Story,
+    relatedUrl: "/support/",
+    ctaLabel: "セミファイナルの応援・投票案内を見る",
+  },
   {
     id: "2026-10-31-fanroom-stream-update",
     date: "2026-10-31",

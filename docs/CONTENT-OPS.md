@@ -1,3 +1,10 @@
+# 2026-11-01受領：ラジオ案内Story2本・メイドうさぎ投票4日目Story（b245）
+
+- オーナーが本人Instagram Storyの縦動画3本を直接提供し、サイト実装を依頼。NEWS 2件（`2026-11-01-radio-theme-talk-stories`：RADIO、`2026-11-01-maid-bunny-vote-day4-story`：MISS CIRCLE）をHOME / NEWSへ追加し、Galleryにも同じ3本を各1回だけ掲載。素材検査・SHAは`docs/MEDIA.md`のb245。
+- 本文は画面文字の範囲で紹介。ラジオのテーマトーク『1番○○なもの』、10:00〜13:00は動画内の案内で、放送の実施内容・投稿日の証拠には置き換えない。共演者の呼び名は転記しない。
+- 投票はmisscircle.jpトップのセミファイナル日程（2026-11-01再確認）だけを書き、Storyスタンプのリンク先は未確認のため推測しない。投票CTAは既存の`/support/`へ。過去回の固定順序テストには今回のNEWS / 動画IDを除外として追加し、過去スナップショットの意味を維持する。
+- 日常のコンテンツ追加のためProject Memoryは変更しない。公開完了はcurrent-head CI・オーナー確認・merge・本番実表示で判定する。
+
 # 2026-11-01 朝配信（LIVE STREAM・MILY SIGNAL）
 
 - オーナー依頼により、11月1日朝のSHOWROOM配信をLIVE STREAMへ1記事、MILY SIGNALへ個別記事1件として追加。写真11枚・原音あいさつ短尺1本はb243（`docs/MEDIA.md`）。Native Siteは既存の別writer管理で、こちらからは並行編集しない。
