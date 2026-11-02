@@ -49,8 +49,19 @@ export type HomeVoteAction = {
   deadlineLabel?: string;
 };
 
+/** 今日で締め切る別の投票。メインの案内と並べ、締切をボタンの直前に大きく出す。 */
+export type HomeUrgentVote = {
+  eventId: string;
+  title: string;
+  note?: string;
+  /** 例: `本日 11/2 23:59（JST）締切` */
+  deadlineLabel: string;
+  action: { label: string; url: string };
+};
+
 export type HomeVoteSpotlight = {
   eventId?: string;
+  urgentVotes?: HomeUrgentVote[];
   dailyVote?: DailyVoteGuide;
   kind?: "vote" | "support";
   state: "upcoming" | "live";
@@ -147,8 +158,54 @@ export function selectHomeVoteSpotlight(input: {
   return null;
 }
 
+/**
+ * 受付中で、今日（JST）のうちに締め切る投票。メインの案内とURLが重なるものは除く。
+ */
+export function selectHomeUrgentVotes(input: {
+  supportEvents: SupportEvent[];
+  links: SiteLink[];
+  now: number;
+  excludeUrl?: string;
+}): HomeUrgentVote[] {
+  if (!Number.isFinite(input.now)) {
+    throw new Error("now must be a finite timestamp");
+  }
+  const today = tokyoDateKey(input.now);
+  return input.supportEvents
+    .filter(
+      (event) =>
+        event.kind === "vote" &&
+        event.ctaLinkId !== undefined &&
+        event.schedule.state === "confirmed-period" &&
+        displayStatus(event.schedule, input.now) === "live" &&
+        tokyoDateKey(Date.parse(event.schedule.end)) === today,
+    )
+    .sort((a, b) => (b.priority ?? 0) - (a.priority ?? 0))
+    .flatMap((event): HomeUrgentVote[] => {
+      const link = input.links.find(({ id }) => id === event.ctaLinkId);
+      const deadline = formatScheduleEndLabel(event.schedule);
+      if (!link || !deadline || link.url === input.excludeUrl) return [];
+      return [
+        {
+          eventId: event.id,
+          title: event.title,
+          ...(event.note ? { note: event.note } : {}),
+          deadlineLabel: `本日 ${deadline}締切`,
+          action: { label: link.label, url: link.url },
+        },
+      ];
+    });
+}
+
 /** 本人の希望に合わせ、受付中の投票を最優先。終了後は有効な応援だけを案内する。 */
 export function selectHomePrioritySupport(input: Parameters<typeof selectHomeVoteSpotlight>[0]): HomeVoteSpotlight | null {
+  const result = selectHomePrioritySupportBase(input);
+  if (!result) return null;
+  const urgentVotes = selectHomeUrgentVotes({ ...input, excludeUrl: result.action.url });
+  return urgentVotes.length > 0 ? { ...result, urgentVotes } : result;
+}
+
+function selectHomePrioritySupportBase(input: Parameters<typeof selectHomeVoteSpotlight>[0]): HomeVoteSpotlight | null {
   const vote = selectHomeVoteSpotlight(input);
   if (vote?.state === "live") {
     const dailyVote = vote.eventId === "miss-circle-2026-4th-web-vote" ? fourthRoundDailyVote(input.now) : null;
