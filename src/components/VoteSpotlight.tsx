@@ -25,6 +25,31 @@ export function VoteSpotlight({
       data-vote-state={spotlight.kind === "support" ? undefined : spotlight.state}
       className={`${className} overflow-hidden rounded-3xl border-2 border-apricot ${isLiveVote ? "ring-2 ring-apricot-ink" : ""} bg-gradient-to-br from-apricot-soft via-paper-card to-sage-soft/70 p-5 shadow-card sm:p-6`}
     >
+      {spotlight.urgentVotes?.map((urgent) => (
+        <section
+          key={urgent.eventId}
+          aria-label={`${urgent.title} ${urgent.deadlineLabel}`}
+          data-urgent-vote={urgent.eventId}
+          className="mb-5 rounded-2xl border-2 border-apricot-ink bg-paper-card p-4 sm:p-5"
+        >
+          <p className="inline-flex rounded-full bg-apricot-ink px-3 py-1 text-xs font-bold tracking-wide text-white">
+            今夜締切
+          </p>
+          <p className="mt-2 text-lg font-bold leading-snug text-ink sm:text-xl">{urgent.title}</p>
+          {urgent.note ? (
+            <p className="mt-1 text-sm leading-7 text-ink-muted">{urgent.note}</p>
+          ) : null}
+          <p className="mt-3 text-xl font-extrabold leading-tight text-apricot-ink sm:text-2xl">
+            ⏰ {urgent.deadlineLabel}
+          </p>
+          <ExternalLink
+            href={urgent.action.url}
+            className="mt-3 inline-flex min-h-14 w-full items-center justify-center rounded-full bg-apricot-ink px-6 py-3 text-lg font-bold text-white shadow-card hover:bg-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-apricot-ink sm:text-xl"
+          >
+            {urgent.action.label}
+          </ExternalLink>
+        </section>
+      ))}
       <div className={`flex flex-col gap-5 ${isLiveVote ? "" : "sm:flex-row sm:items-center sm:justify-between"}`}>
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">

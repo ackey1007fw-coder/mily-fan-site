@@ -4,6 +4,7 @@ import { CAMPUS_GIRLS_FINALS_EX_VOL1_X_URL } from "./campusGirlsFinalsExImages.t
 import {
   links,
   campusGirlsFinalsExPatonVoteLink,
+  campusGirlsFinalsExThreeDayThreePatonVoteLink,
   missCircleShowroomEventLink,
   missCircleWebVoteLink,
   missCircleFourthRoundWebVoteLink,
@@ -406,6 +407,33 @@ export const campusGirlsFinalStagePatonVote: SupportEvent = {
   priority: 100,
 };
 
+/**
+ * 本選EX3③。期間・アイテムは2026-11-02にPatonイベント詳細（detail/602）で確認。
+ * 本人Xの11/2 15:40（JST）投稿でも「パトン投票、本日の23:59まで」「無料拍手から」と案内。
+ */
+export const campusGirlsFinalsExThreeDayThreePatonVote: SupportEvent = {
+  id: "campus-girls-finals-ex3-3-paton-2026-11-02",
+  activityId: "campus-girls",
+  kind: "vote",
+  title: "キャンガル2027 本選EX3③ Paton投票（本日のみ）",
+  note:
+    "Patonの三橋莉子（みりぃ）ページで、ギフトの「1日1回無料！拍手」（0コイン）から応援できます。ログインが必要です。MISS CIRCLE CONTEST 2026とは別のコンテストです。",
+  shareText: "キャンガル2027 本選EX3③のPaton投票は今日11/2の23:59まで！無料拍手で応援お願いします🗳️",
+  shareHashtag: "#キャンガル2027",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-11-02T00:00:00+09:00",
+    // Paton公式の「23:59」は最終分を含む。
+    end: "2026-11-02T23:59:59+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  ctaLinkId: campusGirlsFinalsExThreeDayThreePatonVoteLink.id,
+  source: "https://paton.jp/event/detail/602",
+  verifiedAt: "2026-11-02",
+  priority: 100,
+};
+
 export const supportEvents: SupportEvent[] = [
   campusGirlsFinalStagePatonVote,
   missCircleThirdRoundWebVote,
@@ -420,4 +448,5 @@ export const supportEvents: SupportEvent[] = [
   campusGirlsFinalsExFour,
   campusGirlsFinalsExFive,
   campusGirlsFinalsExSix,
+  campusGirlsFinalsExThreeDayThreePatonVote,
 ];
