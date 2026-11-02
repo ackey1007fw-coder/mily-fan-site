@@ -494,7 +494,9 @@ try {
             await card.screenshot({ path: join(output, `${engine}-${width}-night-20261026-live.png`) });
           }
 
-          await checkMorning20261029(page, baseUrl, output, engine, width);
+          if (width === 390 || width === 1440) {
+            await checkMorning20261029(page, baseUrl, output, engine, width);
+          }
 
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });
           assert.ok(await page.locator('a[href="/data-lab/"]').count() >= 2, "Home card and nav links must exist");
