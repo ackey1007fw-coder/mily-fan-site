@@ -1,7 +1,7 @@
 import { links } from "../data/links.ts";
 import type { NewsItem } from "../data/news.ts";
 import { supportEvents } from "../data/supportEvents.ts";
-import { isSupportEventUrlActive } from "./supportEventLinks.ts";
+import { isSupportEventLinkActive, isSupportEventUrlActive } from "./supportEventLinks.ts";
 
 export type ResolvedNewsLinks = {
   relatedUrl?: string;
@@ -33,16 +33,16 @@ export function resolveNewsLinks(
       ? relatedTarget
       : undefined;
   const ctaUrl = relatedTarget ? relatedUrl : item.source;
-  const additionalCtas = (item.additionalCtas ?? []).filter(
-    ({ url }) =>
-      url !== ctaUrl &&
-      isSupportEventUrlActive({
-        url,
-        links,
-        supportEvents,
-        now,
-      }),
-  );
+  const additionalCtas = (item.additionalCtas ?? []).filter(({ url, linkId }) => {
+    if (url === ctaUrl) return false;
+    // Reused vote URLs may belong to several rounds. An explicit link ID
+    // selects this article's round without reviving historical NEWS buttons.
+    if (linkId !== undefined) {
+      const link = links.find(link => link.id === linkId);
+      return link?.url === url && isSupportEventLinkActive({ linkId, supportEvents, now });
+    }
+    return isSupportEventUrlActive({ url, links, supportEvents, now });
+  });
 
   return {
     ...(relatedUrl ? { relatedUrl } : {}),

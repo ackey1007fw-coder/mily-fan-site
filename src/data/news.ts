@@ -59,6 +59,7 @@ import {
   campusGirlsFinalsExPatonVoteLink,
   campusGirlsPatonVoteLink,
   missCircleWebVoteLink,
+  missCircleSemifinalWebVoteLink,
 } from "./links.ts";
 import {
   eventStory20260821,
@@ -262,8 +263,8 @@ export type NewsItem = {
   relatedUrl?: string;
   url?: string;
   ctaLabel?: string;
-  /** Extra action buttons. Support-event URLs are shown only in their confirmed window. */
-  additionalCtas?: NewsSourceLink[];
+  /** Extra actions. linkId selects the confirmed window when rounds share a URL. */
+  additionalCtas?: (NewsSourceLink & { linkId?: string })[];
   media?: NewsMedia;
   /** NEWS-only outbound X embed, never propagated as an ActivityMediaItem. */
   xEmbed?: NewsXEmbed;
@@ -280,6 +281,22 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-02-x-entry-photo-change",
+    date: "2026-11-02",
+    activityIds: ["miss-circle"],
+    title: "投票ページの写真が変わりました📸 みりぃからご報告",
+    body: "11月2日、みりぃがXとSHOWROOMファンルームで、MISS CIRCLE CONTEST 2026の投票ページ（ENTRY 734）のプロフィール写真を、運営さんが変更してくれたと報告しました。新しい写真は、Xのアイコンと同じ写真です。\n\n写真学科の方に新しく撮ってもらうにはまだ時間がかかりそうで、今回は前に撮ってもらった写真を使うことにしたそうです。本人からは「間違えて🍁を持っている人を探さないでね」との案内も。投票の際は、新しい写真のみりぃを探してください。\n\nWeb投票は11月8日まで、1日1票です。",
+    source: "https://x.com/Mily_chan36/status/2117041571904577712",
+    sourceLabel: "みりぃ本人のX投稿を見る（11月2日）",
+    additionalSources: [
+      { label: "本人のファンルームでも報告（11月2日）", url: "https://www.showroom-live.com/room/fan_club?room_id=573253" },
+    ],
+    additionalCtas: [
+      { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
+      { label: missCircleSemifinalWebVoteLink.label, url: missCircleSemifinalWebVoteLink.url, linkId: missCircleSemifinalWebVoteLink.id },
+    ],
+  },
   {
     id: "2026-10-31-fanroom-stream-update",
     date: "2026-10-31",
