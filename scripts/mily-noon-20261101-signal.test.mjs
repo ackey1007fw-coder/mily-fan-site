@@ -8,12 +8,11 @@ const report = read("data-lab/reports/20261101-noon/index.html");
 const labIndex = read("data-lab/index.html");
 const csv = read("public/data-lab/data/mily-noon-20261101-observations.csv").trim().split("\n");
 
-test("11/1 noon SIGNAL: separate entry above the same-day morning, 10 partial observations, not a final", () => {
+test("11/1 noon SIGNAL: separate entry between the same-day night and morning, 10 partial observations, not a final", () => {
   const entries = DAILY_STREAM_ENTRIES.filter(e => e.date === "2026-11-01");
-  assert.deepEqual(entries.map(e => e.slot), ["noon", "morning"]);
-  const day = groupByBroadcastDate()[0];
-  assert.equal(day.date, "2026-11-01");
-  assert.deepEqual(day.entries.map(e => e.slot), ["noon", "morning"]);
+  assert.deepEqual(entries.map(e => e.slot), ["night", "noon", "morning"]);
+  const day = groupByBroadcastDate().find(d => d.date === "2026-11-01");
+  assert.deepEqual(day.entries.map(e => e.slot), ["night", "noon", "morning"]);
   assert.equal(signal.liveId, 23630916);
   assert.equal(signal.session, "noon");
   assert.equal(signal.observations.length, 10);

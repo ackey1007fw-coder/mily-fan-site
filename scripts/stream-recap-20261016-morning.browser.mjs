@@ -52,6 +52,7 @@ try {
       });
       await page.goto(`${origin}/activities/live/#recap-${recap.id}`, { waitUntil: 'networkidle' });
       const card = page.locator(`#recap-${recap.id}`);
+      await page.waitForFunction(id => document.getElementById(id)?.hasAttribute('open'), `recap-${recap.id}`);
       assert.equal(await card.getAttribute('open'), '');
       assert.equal(await card.getByRole('heading', { name: recap.theme, exact: true }).count(), 1);
       assert.ok((await card.innerText()).includes(recap.dateLabel));
@@ -184,6 +185,7 @@ try {
       await page.goto(`${origin}/activities/live/#recap-${latestRecap.id}`, { waitUntil: 'networkidle' });
       const latestCard = page.locator(`#recap-${latestRecap.id}`);
       assert.equal(await latestCard.count(), 1);
+      await page.waitForFunction(id => document.getElementById(id)?.hasAttribute('open'), `recap-${latestRecap.id}`);
       assert.equal(await latestCard.getAttribute('open'), '');
       assert.equal(await latestCard.getByRole('heading', { name: latestRecap.theme, exact: true }).count(), 1);
       assert.ok((await latestCard.innerText()).includes(latestRecap.summary));
@@ -213,6 +215,7 @@ try {
       await page.goto(`${origin}/activities/live/#recap-${longRecap.id}`, { waitUntil: 'networkidle' });
       const longCard = page.locator(`#recap-${longRecap.id}`);
       assert.equal(await longCard.count(), 1);
+      await page.waitForFunction(id => document.getElementById(id)?.hasAttribute('open'), `recap-${longRecap.id}`);
       assert.equal(await longCard.getAttribute('open'), '');
       assert.equal(await longCard.getByRole('heading', { name: longRecap.theme, exact: true }).count(), 1);
       assert.ok((await longCard.innerText()).includes(longRecap.summary));

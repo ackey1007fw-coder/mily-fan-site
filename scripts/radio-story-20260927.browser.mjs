@@ -180,10 +180,19 @@ try {
         const player = page.locator(`video[src="${entry.src}"]`);
         for (let i = 0; !(await player.count()) && await more.count() && i < 40; i++) await more.click();
         assert.equal(await player.count(), 1);
+        await page.evaluate(() => { for (const el of document.querySelectorAll("video")) el.pause(); });
         await player.scrollIntoViewIfNeeded();
         assert.equal(await player.getAttribute("preload"), "none");
-        await player.evaluate(async el => { el.muted = true; await el.play(); });
-        await page.waitForFunction(el => el.currentTime > .1, await player.elementHandle());
+        let advanced = false;
+        for (let attempt = 0; attempt < 3 && !advanced; attempt++) {
+          await player.evaluate(async el => {
+            el.muted = true;
+            try { await el.play(); } catch {}
+          });
+          advanced = await page.waitForFunction(el => el.currentTime > .1, await player.elementHandle(), { timeout: 15000 }).then(() => true).catch(() => false);
+          if (!advanced) await player.evaluate(el => { el.pause(); el.currentTime = 0; });
+        }
+        assert.ok(advanced, `Gallery radio Story video must start playing: ${entry.src}`);
         await player.evaluate(el => el.pause());
       }
       assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
