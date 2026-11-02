@@ -27,6 +27,14 @@ export const campusGirlsFinalsExPatonVoteLink: SiteLink = {
   note: "CAMPUS BOYS/GIRLS 2027 本選EX1。三橋莉子（みりぃ）の応援ページ。",
 };
 
+/** 本選EX3③（11/2のみ）。2026-11-02にPaton本人ページと本人Xで確認。 */
+export const campusGirlsFinalsExThreeDayThreePatonVoteLink: SiteLink = {
+  id: "campus-girls-finals-ex3-3-paton-14102",
+  label: "Patonで無料拍手を送る",
+  url: "https://paton.jp/event/entrant/14102",
+  note: "CAMPUS BOYS/GIRLS 2027 本選EX3③。三橋莉子（みりぃ）の応援ページ。",
+};
+
 export const missCircleWebVoteLink: SiteLink = {
   id: "miss-circle-2026-web-vote-734",
   label: "WEB投票する",
@@ -93,6 +101,7 @@ export const links: SiteLink[] = [
   missCircleFourthRoundShowroomEventLink,
   campusGirlsPatonVoteLink,
   campusGirlsFinalsExPatonVoteLink,
+  campusGirlsFinalsExThreeDayThreePatonVoteLink,
   {
     id: "fm-smw-staff",
     label: "FM湘南マジックウェイブ スタッフ",

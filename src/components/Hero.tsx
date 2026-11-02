@@ -86,6 +86,9 @@ export function Hero() {
             ラジオ、配信、コンテスト。みりぃの今をひとつに。
           </p>
           <div className="mt-8 flex flex-col gap-3">
+            {voteAction?.deadlineLabel ? (
+              <p className="text-base font-bold text-apricot-ink">⏰ {voteAction.deadlineLabel}</p>
+            ) : null}
             {voteAction ? (
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <ExternalLink

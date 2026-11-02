@@ -137,8 +137,8 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
       assert.equal(event.note.toLowerCase().includes("millie"), false);
     }
 
-    assert.equal(supportEvents.length, 13);
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 5);
+    assert.equal(supportEvents.length, 14);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 6);
     assert.deepEqual(events, []);
   });
 
@@ -181,7 +181,8 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
     assert.equal(jan3.includes("CAMPUS GIRLS 2027 本選EX vol.6"), true);
 
     const adapted = adaptSupportEvents(supportEvents, SNS_START).items;
-    for (const item of adapted.filter((entry) => entry.title.includes("本選EX"))) {
+    // EX3③（11/2のみ）はPaton投票先つきの別イベントなので除く。
+    for (const item of adapted.filter((entry) => entry.title.includes("本選EX") && !entry.title.includes("EX3③"))) {
       assert.equal(item.cta, undefined);
       assert.equal(item.source, SOURCE);
       assert.equal(item.allDay, false);
