@@ -1,7 +1,7 @@
 import type { StreamRecap, StreamRecapImage } from "./streamRecaps.ts";
 import { AUTO_TRANSCRIPT_MATERIAL_NOTE, buildTranscriptionNote } from "./streamRecapRules.ts";
 
-// The owner's authorized recording of this afternoon live (14:53-15:08 JST of a 14:45-15:15 live; opening and closing minutes not recorded).
+// The owner's authorized recording of this noon live (14:53-15:08 JST of a 14:45-15:15 live; opening and closing minutes not recorded).
 // Photos and the three short excerpts are from this live only.
 // Handwritten names on the background sticky notes are hidden with flat paper-colored fills (no generative edits, no face or body edits).
 const moments = [
@@ -17,29 +17,29 @@ const moments = [
   [860, "bunny-ears-up", "両手でうさ耳を押さえて笑うみりぃ", "うさ耳で最後に"],
 ] as const;
 const clock = (s: number) => `${Math.floor(s / 3600)}:${String(Math.floor(s / 60) % 60).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
-export const afternoon20261102Gallery: StreamRecapImage[] = moments.map(([seconds, slug, alt, label], i) => {
-  const filename = `mily-b249-${String(i + 1).padStart(2, "0")}-20261102-afternoon-${slug}.jpg`;
+export const noon20261102Gallery: StreamRecapImage[] = moments.map(([seconds, slug, alt, label], i) => {
+  const filename = `mily-b249-${String(i + 1).padStart(2, "0")}-20261102-noon-${slug}.jpg`;
   return { src: `/media/live/${filename}`, width: 640, height: 360, alt, caption: `${clock(seconds)}｜${label}`, downloadName: filename };
 });
 const clip = (n: number, slug: string, durationSeconds: number, sourceTimestamp: string) => ({
-  src: `/media/live-clips/mily-b249-${n}-20261102-afternoon-${slug}.mp4`,
-  poster: `/media/live/mily-b249-${n}-20261102-afternoon-${slug}-cover.jpg`,
+  src: `/media/live-clips/mily-b249-${n}-20261102-noon-${slug}.mp4`,
+  poster: `/media/live/mily-b249-${n}-20261102-noon-${slug}-cover.jpg`,
   width: 640,
   height: 360,
   durationSeconds,
   sourceTimestamp,
 });
 
-export const streamRecap1102Afternoon: StreamRecap = {
-  id: "2026-11-02-afternoon-showroom",
+export const streamRecap1102Noon: StreamRecap = {
+  id: "2026-11-02-noon-showroom",
   date: "2026-11-02",
   dateLabel: "2026.11.02（月）",
   theme: "昼の崖っぷち宣言と笑顔",
   broadcastLabel: "14:45頃〜 約30分",
   platformLabel: "SHOWROOM",
   summary: "WEB投票5日目の昼枠。「今日は泣かない」と決めて笑顔を通し、「今はこの気分」という1曲を歌いました。リクエストに応えてイカ・タコ・にゃんのポーズで盛り上げ、初めて来た人へ「セミファイナルは崖っぷち。私のことを知ってほしい」と自己紹介しました。",
-  image: afternoon20261102Gallery[0],
-  gallery: afternoon20261102Gallery,
+  image: noon20261102Gallery[0],
+  gallery: noon20261102Gallery,
   highlights: [
     { timestamp: "0:00:30", title: "みんなが優しくて", body: "最初の頃はメイクをしなきゃと気負っていたけれど、みんなが優しくて本当にありがとうと伝えました。" },
     { timestamp: "0:01:36", title: "投票5日目", body: "WEB投票はとても大事と話し、みんなを信じていると伝えました。4日目と言い間違えて5日目と笑って訂正し、画面右上のハートをタップしてピンクにしてほしいと呼びかけました。" },
