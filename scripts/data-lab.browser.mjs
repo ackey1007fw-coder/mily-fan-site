@@ -113,8 +113,14 @@ try {
             const day1102 = page.locator("#daily-2026-11-02");
             assert.equal(await day1102.count(), 1, "Nov 2 has its own date");
             await openDay(day1102);
-            const day1102Card = day1102.locator(".daily-stream-card");
-            assert.equal(await day1102Card.count(), 1, "Nov 2 morning has exactly one card");
+            const day1102Cards = day1102.locator(".daily-stream-card");
+            assert.equal(await day1102Cards.count(), 2, "Nov 2 has separate noon and morning cards");
+            const day1102Noon = day1102Cards.nth(0);
+            await day1102Noon.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
+            assert.equal(await day1102Noon.locator(".daily-stream-number").first().innerText(), "3,360", "Nov 2 noon shows the last valid star display before the end");
+            await day1102Noon.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
+            assert.equal(await day1102Noon.locator("svg.daily-plot circle").count(), 40, "Nov 2 noon plots its 40 saved points");
+            const day1102Card = day1102Cards.nth(1);
             await day1102Card.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
             assert.equal(await day1102Card.locator(".daily-stream-number").first().innerText(), "2,383", "Nov 2 morning shows the partial last valid star display");
             await day1102Card.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
