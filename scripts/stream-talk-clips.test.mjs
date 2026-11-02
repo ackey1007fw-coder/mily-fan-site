@@ -18,7 +18,7 @@ const clips = streamRecaps.flatMap((recap) => recap.highlights
 
 test("talk highlights use short, playable clips with audio and real-frame posters", async () => {
   for (const { recap, highlight, clip } of clips) {
-    const approved = approvedMedia.find(group => group.recapId === recap.id);
+    const approved = approvedMedia.find(group => group.recapId === recap.id && group.files.some(file => clip.src === "/media/live/" + file.name));
     if (recap.id === night20261022.recapId) {
       const media = night20261022.files.find(file => file.role === 'talk' && clip.src === '/media/live/' + file.name);
       assert.ok(media, clip.src);

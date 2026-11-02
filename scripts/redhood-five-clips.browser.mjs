@@ -65,13 +65,13 @@ try {
     await first.evaluate(v=>{v.muted=true;});
     await recap.locator('[data-load-approved-clip]').nth(0).click();
     await page.waitForFunction(()=>{
-      const v=document.querySelector('[data-approved-song-clips] video');
+      const v=document.querySelector('#recap-2026-10-12-final-night-showroom [data-approved-song-clips] video');
       return v && !v.paused && v.readyState>=2 && v.currentTime>0;
     },undefined,{timeout:15000});
     await second.evaluate(v=>{v.muted=true;});
     await recap.locator('[data-load-approved-clip]').nth(0).click();
     await page.waitForFunction(()=>{
-      const v=document.querySelectorAll('[data-approved-song-clips] video');
+      const v=document.querySelectorAll('#recap-2026-10-12-final-night-showroom [data-approved-song-clips] video');
       return v.length===5 && v[0].paused && !v[1].paused && v[1].readyState>=2;
     },undefined,{timeout:15000});
     assert.equal(await first.locator('source').getAttribute('src'),sources[0].src);

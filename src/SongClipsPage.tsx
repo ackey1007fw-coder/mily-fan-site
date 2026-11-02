@@ -1,11 +1,13 @@
+import { ApprovedSongClipList } from "./components/ApprovedSongClipList";
 import SongPostCollection from "./components/SongPostCollection";
 import { streamSongPosts } from "./data/streamSongPosts";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { streamRecaps } from "./data/streamRecaps";
-import { buildStreamSongClips, songClipAnchor } from "./lib/streamSongClips";
+import { buildStreamSongClips, buildUnidentifiedSingingClips, songClipAnchor } from "./lib/streamSongClips";
 
 const clips = buildStreamSongClips(streamRecaps);
+const unidentifiedClips = buildUnidentifiedSingingClips(streamRecaps);
 
 export default function SongClipsPage() {
   return (
@@ -25,7 +27,7 @@ export default function SongClipsPage() {
             <h1 className="mt-2 text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">みりぃの歌唱クリップ</h1>
             <p className="mt-5 max-w-2xl text-base leading-8 text-ink-muted sm:text-lg">みりぃの歌声と表情を、TikTok・YouTube・リール・Xで。歌った回のレポートと一緒に、お気に入りの場面を探せるアーカイブです。</p>
             <div className="mt-5 rounded-2xl border border-sage/20 bg-sage-soft/45 p-4 text-sm leading-7 text-ink-muted">
-              <p><strong className="text-ink">SNSで{streamSongPosts.length}場面・このページで{clips.length}本。</strong> SNSのボタンは各投稿へ、このページのプレーヤーは短い歌唱抜粋へつながります。</p>
+              <p><strong className="text-ink">SNSで{streamSongPosts.length}場面・このページで{clips.length + unidentifiedClips.length}本。</strong> SNSのボタンは各投稿へ、このページのプレーヤーは短い歌唱抜粋へつながります。</p>
               <p className="mt-2">楽曲・伴奏などの権利は各権利者に帰属します。原曲は各カードの公式YouTubeリンクから確認できます。</p>
             </div>
           </div>
@@ -79,6 +81,24 @@ export default function SongClipsPage() {
             )}
           </div>
         </section>
+        {unidentifiedClips.length > 0 ? (
+          <section id="unidentified-singing-clips" aria-labelledby="unidentified-singing-title" className="px-4 pb-14">
+            <div className="mx-auto max-w-3xl">
+              <h2 id="unidentified-singing-title" className="mb-3 text-2xl font-bold">曲名未確認の歌唱ショート</h2>
+              <p className="mb-6 text-sm leading-7 text-ink-muted">本人の歌唱中の仕草を収めた短尺です。曲名・原曲の公式リンクは確認できていないため掲載しません。録画の元音声のみを使用しています。</p>
+              <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                {unidentifiedClips.map((item) => (
+                  <li key={item.clip.id} className="rounded-3xl border border-sage/20 bg-paper-card p-4 shadow-card">
+                    <p className="text-sm font-semibold text-sage-deep">{item.dateLabel}・{item.broadcastLabel}</p>
+                    <ApprovedSongClipList clips={[item.clip]} />
+                    <p className="mt-2 text-xs leading-6 text-ink-muted">録画内 {item.clip.sourceTimestamp}頃から。非公式ファン編集。</p>
+                    <a href={`/activities/live/#recap-${item.recapId}`} className="mt-2 inline-flex min-h-11 items-center text-sm font-bold text-sage-deep underline">元の配信レポートを見る →</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        ) : null}
       </main>
       <Footer />
     </div>
