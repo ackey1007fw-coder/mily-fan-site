@@ -137,6 +137,7 @@ try {
             await openDay(day31);
             const day31Card = day31.locator(".daily-stream-card");
             assert.equal(await day31Card.count(), 1, "Oct 31 noon has exactly one card");
+            await day31Card.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
             assert.equal(await day31Card.locator(".daily-stream-number").first().innerText(), "2,751", "Oct 31 noon shows the nonfinal last valid star display");
             assert.equal(await day31Card.locator("svg.daily-plot circle").count(), 0, "Oct 31 noon plots no invented points");
             const day29 = page.locator("#daily-2026-10-29");
