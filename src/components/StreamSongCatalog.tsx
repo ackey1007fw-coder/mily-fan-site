@@ -2,11 +2,11 @@ import { streamSongPosts } from "../data/streamSongPosts";
 import { useState } from "react";
 import { streamRecaps } from "../data/streamRecaps";
 import { buildStreamSongCatalog, catalogArtists, catalogBroadcastCount, selectCatalogSongs, type SongOrder } from "../lib/streamSongCatalog";
-import { catalogSongClipCount, songClipPerformanceAnchor } from "../lib/streamSongClips";
+import { buildUnidentifiedSingingClips, catalogSongClipCount, songClipPerformanceAnchor } from "../lib/streamSongClips";
 
 const catalog = buildStreamSongCatalog(streamRecaps);
 const artists = catalogArtists(catalog);
-const clipCount = catalogSongClipCount(catalog);
+const clipCount = catalogSongClipCount(catalog) + buildUnidentifiedSingingClips(streamRecaps).length;
 const INITIAL_SONG_COUNT = 6;
 const originalSongsPlaylistUrl = "https://www.youtube.com/playlist?list=PLIr0jsL1PyBQ";
 const originalSongsMusicUrl = "https://music.youtube.com/playlist?list=PLIr0jsL1PyBQ";

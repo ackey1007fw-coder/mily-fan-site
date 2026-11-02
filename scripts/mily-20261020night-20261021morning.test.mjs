@@ -22,7 +22,7 @@ test('both recaps retain date order, their own recordings and an explicit review
   for(const point of [...recap.highlights,...recap.timeline])assert.ok(point.timestamp.split(':').reduce((n,v)=>n*60+Number(v),0)<d.recording.mediaDurationSecondsTotal);
   for(const key of ['galleryZip','songs'])assert.equal(recap[key],undefined);
   assert.equal(recap.gallery.length,5);assert.ok(recap.gallery.includes(recap.image));
-  assert.equal(recap.highlights.filter(h=>h.clip).length,1);
+  assert.equal(recap.highlights.filter(h=>h.clip?.src.endsWith("-talk.mp4")).length,1);
  }
  assert.equal(streamRecaps.find(r=>r.id==='2026-10-21-morning-showroom').ranking.length,0);assert.equal(streamRecaps.find(r=>r.id==='2026-10-20-night-showroom').ranking.length,1);
 });

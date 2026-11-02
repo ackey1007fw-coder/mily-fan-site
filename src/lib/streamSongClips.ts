@@ -1,4 +1,4 @@
-import type { StreamRecapSongClip } from "../data/streamRecaps.ts";
+import type { StreamRecap, StreamRecapApprovedSongClip, StreamRecapSongClip } from "../data/streamRecaps.ts";
 import { buildStreamSongCatalog, type CatalogSong, type SongPerformance, type SongRecap } from "./streamSongCatalog.ts";
 
 export type StreamSongClipItem = {
@@ -51,4 +51,29 @@ export function buildStreamSongClips(recaps: readonly SongRecap[]): StreamSongCl
 
 export function catalogSongClipCount(catalog: readonly CatalogSong[]): number {
   return catalog.reduce((count, song) => count + song.performances.filter((performance) => performance.clip).length, 0);
+}
+
+
+export type UnidentifiedSingingClipItem = {
+  recapId: string;
+  date: string;
+  dateLabel: string;
+  theme: string;
+  broadcastLabel: string;
+  clip: StreamRecapApprovedSongClip;
+};
+
+/** Discover approved singing excerpts without inventing a song title or a YouTube source. */
+export function buildUnidentifiedSingingClips(
+  recaps: readonly Pick<StreamRecap, "id" | "date" | "dateLabel" | "theme" | "broadcastLabel" | "singingExcerpts">[],
+): UnidentifiedSingingClipItem[] {
+  const result: UnidentifiedSingingClipItem[] = [];
+  for (const recap of recaps) {
+    for (const clip of recap.singingExcerpts ?? []) {
+      result.push({ recapId: recap.id, date: recap.date, dateLabel: recap.dateLabel, theme: recap.theme, broadcastLabel: recap.broadcastLabel, clip });
+    }
+  }
+  return result.sort((a,b) => b.date.localeCompare(a.date)
+    || broadcastMinutes(b.broadcastLabel)-broadcastMinutes(a.broadcastLabel)
+    || (a.clip.sourceTimestamp ?? "").localeCompare(b.clip.sourceTimestamp ?? "", "en",{numeric:true}));
 }
