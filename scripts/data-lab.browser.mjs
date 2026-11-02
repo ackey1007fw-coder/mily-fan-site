@@ -1,3 +1,5 @@
+import { DAILY_STREAM_ENTRIES } from "../public/data-lab/assets/daily-archive-core.js";
+import { checkMorning20261029 } from "./mily-morning-20261029.browser.mjs";
 import { checkProgressReading } from "./mily-progress-reading.browser.mjs";
 import assert from "node:assert/strict";
 import { readFile, stat, mkdir, writeFile } from "node:fs/promises";
@@ -16,6 +18,7 @@ const mime = {
   ".jpg": "image/jpeg", ".png": "image/png",
 };
 const results = [];
+const expectedBroadcastDates = [...new Set(DAILY_STREAM_ENTRIES.map(entry => entry.date))].sort().reverse();
 const baseUrl = process.env.DATA_LAB_BASE_URL || "https://site.test";
 await mkdir(output, { recursive: true });
 
@@ -109,7 +112,8 @@ try {
                 return numbers.length > 0 && numbers.every(node => node.hasAttribute("data-missing"));
               }, dayId);
             };
-            assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 19, "Nineteen broadcast dates from 10/14 through 11/1");
+            const renderedBroadcastDates = await page.locator("#daily-stream-groups .daily-day").evaluateAll(nodes => nodes.map(node => node.id.replace(/^daily-/, "")));
+            assert.deepEqual(renderedBroadcastDates, expectedBroadcastDates, "Every registered broadcast date appears exactly once in descending order");
             const day1101 = page.locator("#daily-2026-11-01");
             assert.equal(await day1101.count(), 1, "Nov 1 has its own date");
             await openDay(day1101);
@@ -130,17 +134,22 @@ try {
             await openDay(day31);
             const day31Card = day31.locator(".daily-stream-card");
             assert.equal(await day31Card.count(), 1, "Oct 31 noon has exactly one card");
+            await day31Card.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
             assert.equal(await day31Card.locator(".daily-stream-number").first().innerText(), "2,751", "Oct 31 noon shows the nonfinal last valid star display");
             assert.equal(await day31Card.locator("svg.daily-plot circle").count(), 0, "Oct 31 noon plots no invented points");
             const day29 = page.locator("#daily-2026-10-29");
-            assert.equal(await day29.count(), 1, "Oct 29 noon has its own date");
+            assert.equal(await day29.count(), 1, "Oct 29 noon and morning share one date");
             await openDay(day29);
-            const day29Card = day29.locator(".daily-stream-card");
-            assert.equal(await day29Card.count(), 1, "Oct 29 noon has exactly one card");
-            await day29Card.locator('[data-missing="false"]').waitFor({ state: "visible" });
-            assert.equal(await day29Card.locator(".daily-stream-number").innerText(), "4,724", "Noon shows a nonfinal screen reference");
-            await day29Card.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
-            assert.equal(await day29Card.locator("svg.daily-plot circle").count(), 8, "Noon plots eight original time-stamped points");
+            const day29Cards = day29.locator(".daily-stream-card");
+            assert.equal(await day29Cards.count(), 2, "Oct 29 noon and morning stay separate");
+            const day29Noon = day29Cards.nth(0);
+            await day29Noon.locator('[data-missing="false"]').waitFor({ state: "visible" });
+            assert.equal(await day29Noon.locator(".daily-stream-number").innerText(), "4,724", "Noon shows a nonfinal screen reference");
+            await day29Noon.locator("svg.daily-plot circle").first().waitFor({ state: "visible" });
+            assert.equal(await day29Noon.locator("svg.daily-plot circle").count(), 8, "Noon plots eight original time-stamped points");
+            const day29Morning = day29Cards.nth(1);
+            await day29Morning.locator('[data-missing="false"]').waitFor({ state: "visible" });
+            assert.equal(await day29Morning.locator(".daily-stream-number").innerText(), "4,665", "Morning last valid screen is not an official final");
             const day28 = page.locator("#daily-2026-10-28");
             assert.equal(await day28.count(), 1, "Oct 28 receives exactly one separate broadcast date");
             await openDay(day28);
@@ -483,6 +492,10 @@ try {
             assert.match(await details.innerText(), /実尺・連続性・正式な配信開始終了は未確認/);
             assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "Memo recap must not overflow");
             await card.screenshot({ path: join(output, `${engine}-${width}-night-20261026-live.png`) });
+          }
+
+          if (width === 390 || width === 1440) {
+            await checkMorning20261029(page, baseUrl, output, engine, width);
           }
 
           await page.goto(`${baseUrl}/`, { waitUntil: "networkidle" });

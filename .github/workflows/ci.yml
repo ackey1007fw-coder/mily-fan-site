@@ -145,7 +145,7 @@ jobs:
         run: node scripts/stream-timing.browser.mjs
 
       - name: Mily Signal data lab browser checks
-        timeout-minutes: 4
+        timeout-minutes: 6
         env:
           PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
