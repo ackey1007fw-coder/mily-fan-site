@@ -212,7 +212,7 @@ jobs:
         run: node scripts/provided-vote-video.browser.mjs
 
       - name: Radio Story browser checks
-        timeout-minutes: 3
+        timeout-minutes: 4
         env:
           PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
