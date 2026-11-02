@@ -137,8 +137,8 @@ describe("CAMPUS GIRLS 本選EX 日程をカレンダーへ", () => {
       assert.equal(event.note.toLowerCase().includes("millie"), false);
     }
 
-    assert.equal(supportEvents.length, 12);
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 4);
+    assert.equal(supportEvents.length, 13);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 5);
     assert.deepEqual(events, []);
   });
 

@@ -1,3 +1,16 @@
+import { streamRecap1101Night } from "./streamRecap1101Night.ts";
+import { streamRecap1101Noon } from "./streamRecap1101Noon.ts";
+import { streamRecap1101Morning } from "./streamRecap1101Morning.ts";
+import { streamRecap1031Noon } from "./streamRecap1031Noon.ts";
+import { streamRecap1030Night } from "./streamRecap1030Night.ts";
+import { streamRecap1030Morning2 } from "./streamRecap1030Morning2.ts";
+import { streamRecap1030Morning1 } from "./streamRecap1030Morning1.ts";
+import { streamRecap20261029Noon } from "./streamRecap20261029Noon.ts";
+import { streamRecap20261028Asa } from "./streamRecap20261028Asa.ts";
+import { streamRecap20261027Night } from "./streamRecap20261027Night.ts";
+import { streamRecap20261027Asa } from "./streamRecap20261027Asa.ts";
+import { streamRecap20261025Night } from "./streamRecap20261025Night.ts";
+import { streamRecap20261026Night } from "./streamRecap20261026Night.ts";
 import { streamRecap20261025Asa } from "./streamRecap20261025Asa.ts";
 import { streamRecap20261024Noon } from "./streamRecap20261024Noon.ts";
 import { streamRecap20261024Radio } from "./streamRecap20261024Radio.ts";
@@ -262,6 +275,8 @@ export type StreamRecap = {
   dateLabel: string;
   theme: string;
   broadcastLabel: string;
+  /** 視聴メモの時計時刻。未指定の回は従来どおり録画内の経過時刻。 */
+  timestampBasis?: "memo-clock" | "asr-clock";
   platformLabel: string;
   summary: string;
   image?: StreamRecapImage;
@@ -352,6 +367,19 @@ export {
 
 /** 新しい配信メモを先頭へ。 */
 export const streamRecaps: StreamRecap[] = [
+  streamRecap1101Night,
+  streamRecap1101Noon,
+  streamRecap1101Morning,
+  streamRecap1031Noon,
+  streamRecap1030Night,
+  streamRecap1030Morning2,
+  streamRecap1030Morning1,
+  streamRecap20261029Noon,
+  streamRecap20261028Asa,
+  streamRecap20261027Night,
+  streamRecap20261027Asa,
+  streamRecap20261026Night,
+  streamRecap20261025Night,
   streamRecap20261025Asa,
   streamRecap20261024Noon,
   streamRecap20261024Radio,

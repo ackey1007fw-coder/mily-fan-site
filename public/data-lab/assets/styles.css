@@ -97,3 +97,17 @@ footer{border-top:1px solid #2c4657;padding:30px 0 45px;color:var(--muted);font-
 .fujiwara-insights .card p{font-size:13px;color:var(--soft);line-height:1.8}
 .fujiwara-insights .card strong{color:var(--text)}
 @media(max-width:780px){.fujiwara-stats{grid-template-columns:1fr;gap:9px}.fujiwara-breakdown{grid-template-columns:1fr;gap:9px}.fujiwara-breakdown b{display:inline;margin-left:7px}.fujiwara-stacked{height:25px}}
+
+/* Hub: one primary action, the rest as quiet text links; 3-item header */
+.hero-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin:16px 0 0;font-size:13px;font-weight:700}
+.hero-links a{color:var(--soft);text-decoration:underline;text-decoration-color:rgba(185,204,211,.4)}
+.hero-links a:hover{color:white}
+@media(min-width:961px){.topbar .nav{flex:0 1 auto;gap:28px;margin-left:auto;overflow:visible}.topbar .nav a{font-size:13px}}
+.reports-head{padding-bottom:0}
+.data-details{margin:12px 0}
+.data-details>summary{display:inline-flex;align-items:center;min-height:44px;padding:6px 16px;border:1px solid #456b77;border-radius:999px;cursor:pointer;font-size:13px;font-weight:800;color:var(--aqua)}
+.data-details>summary:focus-visible{outline:3px solid #ffeab7;outline-offset:4px}
+.data-details[open]>summary{margin-bottom:10px}
+.report-index{display:flex;flex-wrap:wrap;gap:8px}
+.report-index a{display:inline-flex;align-items:center;min-height:40px;padding:6px 13px;border:1px solid #3d6271;border-radius:99px;font-size:12px;font-weight:700;color:var(--soft);text-decoration:none}
+.report-index a:hover{color:white;background:rgba(128,220,197,.1)}

@@ -358,3 +358,51 @@ for (const variant of ['wrong-profile','wrong-platform']) test(`related job ${va
  r.success=true; p.snapshots.history.responses[0]={total:1,history:[r],in_progress:[]};
  await assert.rejects(()=>prepareSocialReport(p,context()),/Unknown same-account/);
 });
+
+// Synthetic B238 fixtures. They are never used as live provider responses.
+const b238Manifest = JSON.parse(await readFile(path.join(root, 'scripts/social-report-media-20261025-morning.json'), 'utf8'));
+const b238Now = Date.parse('2026-10-25T05:30:00Z');
+const b238Caption = 'ダブルピースもウインクも、朝からかわいい☺️🍅\nみりぃ、スクショタイムありがとう！📸\n\n三橋莉子（みりぃ） @mily_chan36\n2026-10-25 朝SHOWROOM／非公式ファン投稿\nhttps://mily-fan-site.vercel.app/activities/live/#recap-2026-10-25-morning-showroom\n#三橋莉子 #みりぃ';
+function b238Fixture() {
+ const p=fresh(),c=context(),stamp=new Date(b238Now).toISOString();
+ Object.assign(p,{recapId:b238Manifest.recapId,order:[...b238Manifest.order],caption:b238Caption,mediaUrls:b238Manifest.items.map(i=>'https://mily-fan-site.vercel.app'+i.path),altText:b238Manifest.items.map(()=> 'Reviewed approved B238 photo'),captionReview:{recapId:b238Manifest.recapId,reviewer:'synthetic test fixture',reviewedAt:stamp,sha256:sha256(b238Caption)}});
+ delete p.scheduledDate; delete p.timezone;
+ p.snapshots={scheduled:{checkedAt:stamp,responses:[{scheduled_posts:[],total:0}]},history:{checkedAt:stamp,responses:[{history:[{...exceptionRow(),status:'completed'}],in_progress:[],total:1}]}};
+ Object.assign(c,{now:b238Now,manifest:structuredClone(b238Manifest),ownerDecision:{kind:'unverified-known-exception',scopeId:'MILY-IG-20261025AM-B238-PUBLISH-01',recapId:b238Manifest.recapId,profile:'ackey',account:'ackeytan_0720',platform:'instagram',jobId:'ef98a03c6ea94265b78a526e33816eca',requestId:'d93443bdc90840ce8ad12d80d96ec93d',postId:'18097399505439064',postUrl:'https://www.instagram.com/reel/DdtEqRbFS6p/',messageIdDigest:'346619617c9231a2eb5bd89babb10267ac76b7fd46e5b0e0670a6002f703739c',questionMessageIdDigest:'e9987eda3e44c7627fe8fcbbbc8ea4cd757dff65a4fd9df99941fa00f6065ffa',recordedAt:'2026-10-25T05:23:27.893Z',originalInstructionDigest:'94661d918ef96f1021d9a15f976517f83956018ba716984d960f274bf02f3cad',note:'1件のみ内容未確認のため完全な過去投稿網羅確認ではない'}});
+ return {p,c};
+}
+test('B238 exact new owner decision prepares only the seven-image request and keeps evidence unverified',async()=>{
+ const {p,c}=b238Fixture(),before=JSON.stringify(p);const out=await prepareSocialReport(p,c);
+ assert.equal(out.photosPathsOrUrls.length,7);assert.equal(JSON.stringify(p),before);assert.match(c.ownerDecision.note,/未確認/);
+});
+for(const k of ['scopeId','recapId','profile','account','platform','jobId','requestId','postId','postUrl','messageIdDigest','questionMessageIdDigest','recordedAt','originalInstructionDigest','note']) test(`B238 rejects altered approval ${k}`,async()=>{
+ const {p,c}=b238Fixture();c.ownerDecision[k]='invalid';await assert.rejects(()=>prepareSocialReport(p,c),/owner decision|private approval|exact approved case/i);
+});
+for(const [name,change] of [
+ ['missing approval',(p,c)=>delete c.ownerDecision],
+ ['old approval',(p,c)=>c.ownerDecision=ownerDecision()],
+  ['scheduled request',p=>{p.scheduledDate='2026-10-25T10:00:00Z';p.timezone='Asia/Tokyo';}],
+ ['replacement request',p=>p.replacementJobId='not-allowed'],
+ ['changed caption',p=>{p.caption+=' changed';p.captionReview.sha256=sha256(p.caption);}],
+ ['unknown other history',p=>{p.snapshots.history.responses[0].history.push({...exceptionRow(),job_id:'other',request_id:'other',platform_post_id:'other'});p.snapshots.history.responses[0].total++;}],
+ ['target nested caption',p=>p.snapshots.history.responses[0].history[0].platform_content={instagram:{caption:b238Caption}}],
+ ['processing old Reel',p=>p.snapshots.history.responses[0].history[0].status='processing'],
+ ['inbox fallback',p=>p.snapshots.history.responses[0].history[0].fallback_to_inbox=true],
+ ['queued old Reel',p=>p.snapshots.history.responses[0].in_progress=[{...exceptionRow(),success:null}]],
+ ['scheduled old Reel',p=>p.snapshots.scheduled.responses[0]={total:1,scheduled_posts:[exceptionRow()]}],
+ ['stale snapshots',p=>p.snapshots.history.checkedAt='2026-10-25T04:00:00Z'],
+ ['partial history',p=>p.snapshots.history.responses[0].total++],
+ ['already submitted ledger',(p,c)=>c.ledger=[{recapId:p.recapId,platform:p.platform,account:p.account,state:'submitted',jobId:'already-submitted'}]],
+ ]) test(`B238 scoped exception blocks ${name}`,async()=>{
+ const {p,c}=b238Fixture();change(p,c);let calls=0;await assert.rejects(()=>submitSocialReport(p,c,()=>{calls++;}));assert.equal(calls,0);
+});
+
+for(const stamp of ['2026-10-25T05:23:27Z','2026-10-25T15:00:00Z']) test(`B238 rejects approval outside validity at ${stamp}`,async()=>{
+ const {p,c}=b238Fixture();c.now=Date.parse(stamp);p.snapshots.history.checkedAt=stamp;p.snapshots.scheduled.checkedAt=stamp;
+ await assert.rejects(()=>prepareSocialReport(p,c),/B238 owner decision expired or not yet valid/);
+});
+
+for(const key of ['job_id','request_id','platform_post_id','post_url']) test(`B238 rejects different historical ${key}`,async()=>{
+ const {p,c}=b238Fixture();p.snapshots.history.responses[0].history[0][key]='other';
+ await assert.rejects(()=>prepareSocialReport(p,c),/Unknown same-account/);
+});
