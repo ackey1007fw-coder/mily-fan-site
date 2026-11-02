@@ -104,6 +104,13 @@ try {
             // Dates are no longer per-date accordions: the newest dates are open cards and older dates sit in one collapsed "過去の回".
             const openDay = async day => {
               if (await day.evaluate(el => Boolean(el.closest("details:not([open])")))) await page.locator("#daily-past > summary").click();
+              const dayId = await day.getAttribute("id");
+              await page.waitForFunction(id => {
+                const root = document.getElementById(id);
+                if (!root) return false;
+                const numbers = [...root.querySelectorAll(".daily-stream-number")];
+                return numbers.length > 0 && numbers.every(node => node.hasAttribute("data-missing"));
+              }, dayId);
             };
             const renderedBroadcastDates = await page.locator("#daily-stream-groups .daily-day").evaluateAll(nodes => nodes.map(node => node.id.replace(/^daily-/, "")));
             assert.deepEqual(renderedBroadcastDates, expectedBroadcastDates, "Every registered broadcast date appears exactly once in descending order");
