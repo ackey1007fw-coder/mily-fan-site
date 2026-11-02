@@ -7,6 +7,7 @@ import {
   missCircleShowroomEventLink,
   missCircleWebVoteLink,
   missCircleFourthRoundWebVoteLink,
+  missCircleSemifinalWebVoteLink,
   missCircleFourthRoundShowroomEventLink,
 } from "./links.ts";
 
@@ -252,6 +253,29 @@ export const missCircleFourthRoundShowroomReview: SupportEvent = {
   priority: 80,
 };
 
+/** 主催者SCHEDULEとENTRY 734の投票リンクを2026-10-31に確認。 */
+export const missCircleSemifinalWebVote: SupportEvent = {
+  id: "miss-circle-2026-semifinal-web-vote",
+  activityId: "miss-circle",
+  kind: "vote",
+  title: "セミファイナル WEB投票",
+  shareText: "MISS CIRCLE CONTEST 2026 セミファイナルのWEB投票をお願いします🗳️",
+  shareHashtag: "#ミスサークル2026",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-10-29T12:00:00+09:00",
+    // 公式の「23:59まで」は最終分を含む。既存の終了判定で期限後は自動的に外す。
+    end: "2026-11-08T23:59:59.999+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  ctaLinkId: missCircleSemifinalWebVoteLink.id,
+  note: "ENTRY 734 三橋莉子の公式投票ページへ。投票画面の手順・注意を確認してください。SHOWROOMとは別の審査です。",
+  source: "https://www.misscircle.jp/",
+  verifiedAt: "2026-10-31",
+  priority: 90,
+};
+
 export const campusGirlsFinalsExSnsReview: SupportEvent = {
   id: "campus-girls-finals-ex-sns-vol1-2026",
   activityId: "campus-girls",
@@ -388,6 +412,7 @@ export const supportEvents: SupportEvent[] = [
   missCircleThirdRoundShowroomReview,
   missCircleFourthRoundWebVote,
   missCircleFourthRoundShowroomReview,
+  missCircleSemifinalWebVote,
   campusGirlsFinalsExSnsReview,
   campusGirlsFinalsExPatonReview,
   campusGirlsFinalsExTwo,

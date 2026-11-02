@@ -1,5 +1,23 @@
 // Published anonymous snapshots only. No private dashboard, live API, or inferred values.
 export const DAILY_STREAM_ENTRIES = Object.freeze([
+  {date:"2026-11-01",slot:"noon",file:"mily-noon-20261101-aggregate.json",section:"noon-20261101",report:"/data-lab/reports/20261101-noon/"},
+  {date:"2026-11-01",slot:"morning",file:"mily-morning-20261101-aggregate.json",section:"morning-20261101",report:"/data-lab/reports/20261101-morning/"},
+  {date:"2026-10-31",slot:"noon",file:"mily-noon-20261031-aggregate.json",section:"noon-20261031",report:"/data-lab/reports/20261031-noon/"},
+  {date:"2026-10-30",slot:"night",file:"mily-night-20261030-aggregate.json",section:"night-20261030",report:"/data-lab/reports/20261030-night/"},
+  {date:"2026-10-30",slot:"morning2",file:"mily-morning2-20261030-aggregate.json",section:"morning2-20261030",report:"/data-lab/reports/20261030-morning2/"},
+  {date:"2026-10-30",slot:"morning1",file:"mily-morning1-20261030-aggregate.json",section:"morning1-20261030",report:"/data-lab/reports/20261030-morning1/"},
+  {date:"2026-10-29",slot:"noon",file:"mily-noon-20261029-aggregate.json",section:"noon-20261029",report:"/data-lab/reports/20261029-noon/"},
+  {date:"2026-10-28",slot:"morning",file:"mily-morning-20261028-aggregate.json",section:"morning-20261028",report:"/data-lab/reports/20261028-morning/"},
+  {date:"2026-10-27",slot:"night",file:"mily-night-20261027-aggregate.json",section:"night-20261027",report:"/data-lab/reports/20261027-night/"},
+  { date: "2026-10-27", slot: "morning", file: "mily-morning-20261027-aggregate.json", section: "morning-20261027", report: "/data-lab/reports/20261027-morning/" },
+  { date: "2026-10-26", slot: "night", file: "mily-night-20261026-aggregate.json", section: "night-20261026", report: "/data-lab/reports/20261026-night/" },
+  { date: "2026-10-25", slot: "night", file: "mily-night-20261025-aggregate.json", section: "night-20261025", report: "/data-lab/reports/20261025-night/" },
+  { date: "2026-10-25", slot: "morning", file: "mily-morning-20261025-aggregate.json", section: "morning-20261025", report: "/data-lab/reports/20261025-morning/" },
+  { date: "2026-10-24", slot: "noon", file: "mily-noon-20261024-aggregate.json", section: "noon-20261024", report: "/data-lab/reports/20261024-noon/" },
+  { date: "2026-10-24", slot: "morning", file: "mily-morning-20261024-aggregate.json", section: "morning-20261024", report: "/data-lab/reports/20261024-morning/" },
+  { date: "2026-10-23", slot: "morning", file: "mily-morning-20261023-aggregate.json", section: "morning-20261023", report: "/data-lab/reports/20261023-morning/" },
+  { date: "2026-10-22", slot: "night", file: "mily-night-20261022-aggregate.json", section: "night-20261022", report: "/data-lab/reports/20261022-night/" },
+  { date: "2026-10-22", slot: "morning", file: "mily-morning-20261022-aggregate.json", section: "morning-20261022", report: "/data-lab/reports/20261022-morning/" },
   { date: "2026-10-21", slot: "morning", file: "mily-morning-20261021-aggregate.json", section: "morning-20261021", report: "/data-lab/reports/20261021-morning/" },
   { date: "2026-10-20", slot: "night", file: "mily-night-20261020-aggregate.json", section: "night-20261020", report: "/data-lab/reports/20261020-night/" },
   { date: "2026-10-20", slot: "morning", file: "mily-morning-20261020-aggregate.json", section: "morning-20261020", report: "/data-lab/reports/20261020-morning/" },
@@ -22,8 +40,8 @@ export const METRICS = Object.freeze({
   visits: "総訪問表示",
   comments: "コメント表示",
 });
-export const SLOT_LABELS = Object.freeze({ morning: "朝", noon: "昼", night: "夜" });
-const slotOrder = Object.freeze({ night: 0, noon: 1, morning: 2 });
+export const SLOT_LABELS = Object.freeze({ morning: "朝", morning1: "朝1枠目（5時台）", morning2: "朝2枠目（6時台）", noon: "昼", night: "夜" });
+const slotOrder = Object.freeze({ night: 0, noon: 1, morning: 2, morning1: 3, morning2: 2.5 });
 
 export function groupByBroadcastDate(entries = DAILY_STREAM_ENTRIES) {
   const sorted = [...entries].sort((a, b) =>
@@ -89,7 +107,7 @@ export function observationPoints(data, metric, date) {
 export function lastObservedValue(data, metric, date) {
   if (!(metric in METRICS)) return null;
   // "earlyPartialObservation" must never be promoted to a last valid result.
-  const last = data?.lastValidOnline ?? data?.observed_screen;
+  const last = data?.referenceSnapshot?.metrics ?? data?.lastValidOnline ?? data?.observed_screen;
   const value = metricValue(last, metric);
   if (value !== null) return value;
   const points = observationPoints(data, metric, date);

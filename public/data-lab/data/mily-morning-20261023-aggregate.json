@@ -1,0 +1,75 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23590004,
+  "dateJst": "2026-10-23",
+  "session": "morning",
+  "label": "10月23日 朝の配信",
+  "eventName": "当該配信のイベント参加状況・正式ポイントは未照合。過去審査とは別集計。",
+  "sourceDescription": "保存済み録画のサイドカーメタデータ、ffprobeの映像実尺・音声映像形式、同配信の自動文字起こし記録を照合",
+  "verifiedAtJst": "2026-10-23T10:22:00+09:00",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "observations": [],
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "measurementNote": "この回の9指標について有効な数値の原記録を今回照合できていません。未確認は応援が0だったことを意味しません。",
+  "comparisonNote": "文字起こしの声や過去枠の数字からカウンターを補いません。配信時間帯の効率・伸び・ランキング比較には加えません。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": true,
+    "startProcessingJst": "2026-10-23T06:30:16+09:00",
+    "endProcessingJst": "2026-10-23T07:23:28+09:00",
+    "durationSeconds": 3148.245,
+    "bytes": 389320809,
+    "ffmpegExitCode": 0,
+    "metadataProbed": true,
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "videoWidth": 640,
+    "videoHeight": 360,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "録画処理の開始終了時刻と保存ファイルの実尺は異なる。SHOWROOM公式開始終了時刻と全区間の連続性は未確認。"
+  },
+  "asr": {
+    "status": "finished",
+    "processedChunks": 157,
+    "transcribedThroughJst": "2026-10-23T07:22:44+09:00",
+    "selectedTopicsRead": true,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "numericEvidenceStatus": "unverified",
+    "savedNumericObservations": null,
+    "endConfirmed": false,
+    "missingDataIsNotZeroPerformance": true
+  },
+  "recap": {
+    "basis": "同一朝配信の自動文字起こしを要約。誤認識が多く、逐語引用や未確認数字は載せない。",
+    "summary": "朝の開始時刻の勘違いを話し、メイクや寝起きの話、初見さんへの挨拶、次の審査への思いと感謝を伝えました。",
+    "recordingTimeRangesApprox": [
+      "0:00:36–0:01:20",
+      "0:09:34–0:11:00",
+      "0:38:50–0:39:12",
+      "0:42:53–0:43:10",
+      "0:48:40–0:49:05",
+      "0:52:14–0:52:25"
+    ],
+    "publishedStills": 0,
+    "publishedTalkClips": 0,
+    "liveRecapUrl": "/activities/live/#recap-2026-10-23-morning-showroom"
+  }
+}

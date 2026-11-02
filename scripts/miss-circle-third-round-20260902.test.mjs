@@ -333,7 +333,7 @@ describe("2026-09-02 MISS CIRCLE 三次審査 NEWS + calendar", () => {
       ).length,
       1,
     );
-    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 4);
+    assert.equal(supportEvents.filter((event) => event.kind === "vote").length, 5);
     assert.equal(events.length, 0);
   });
 

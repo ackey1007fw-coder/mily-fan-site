@@ -28,7 +28,8 @@ describe("indexable pages have a safe no-JavaScript navigation fallback", () => 
   for (const [file, route] of indexablePages) {
     it(route + " offers truthful nonofficial no-JS information and local links", () => {
       const html = source(file);
-      assert.equal(html.match(/<noscript>/g)?.length, 1);
+      // <head> の <noscript> は Web フォントの no-JS 読み込み用。本文の fallback は1つだけ。
+      assert.equal(html.slice(html.indexOf("<body")).match(/<noscript>/g)?.length, 1);
       const fallback = html.match(/<div id="root">\s*<noscript>([\s\S]*?)<\/noscript>\s*<\/div>/)?.[1];
       assert.ok(fallback, "no-JS fallback must be inside #root in " + file);
       assert.match(fallback, /<h1>.*<\/h1>/);

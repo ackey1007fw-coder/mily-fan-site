@@ -38,7 +38,7 @@ try {
   } else {
     if (args.length) throw new Error("Plan file required with options");
     // CI guard: validate every active reviewed Instagram manifest, not only the default morning cover.
-    for (const name of ["social-report-media-20261002-night.json", "social-report-media-20261008-night.json", "social-report-media-20261011-morning.json", "social-report-media-20261020-morning.json", "social-report-media-20261020-night.json", "social-report-media-20261021-morning.json", "social-report-media-20261021-noon.json"]) {
+    for (const name of ["social-report-media-20261002-night.json", "social-report-media-20261008-night.json", "social-report-media-20261011-morning.json", "social-report-media-20261020-morning.json", "social-report-media-20261020-night.json", "social-report-media-20261021-morning.json", "social-report-media-20261021-noon.json", "social-report-media-20261025-morning.json"]) {
       await validateReportMedia(await json(path.join(root, "scripts", name)), { root, recaps: streamRecaps });
     }
     console.log("social-report: registered cover, original source pixels and publication states verified (no post/schedule API called)");

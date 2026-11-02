@@ -5,6 +5,7 @@ import { CAR_VOTE_DAY_FOUR_X_URL, carVoteDayFourXVideo } from "./carVoteDayFourX
 import { providedVoteVideo } from "./providedVoteVideo.ts";
 import { radioAnniversaryStories } from "./radioAnniversaryStories.ts";
 import { radioOct11Stories } from "./radioOct11Stories.ts";
+import { radioHalloweenStories } from "./radioHalloweenStories.ts";
 import { radioFanroomAftershowNewsImage } from "./radioFanroomAftershowPhoto.ts";
 import { tiktokCampusMakeupVideo } from "./tiktokCampusMakeupVideo.ts";
 import { tiktokOct04SelfieVideo } from "./tiktokOct04SelfieVideo.ts";
@@ -27,6 +28,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
 import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
+import { sscTikTokOct31 } from "./sscTikTokOct31.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -279,6 +281,77 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-31-fanroom-stream-update",
+    date: "2026-10-31",
+    sameDayOrder: 1552,
+    activityIds: ["live-stream"],
+    title: "夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内",
+    body: "【15:52更新・日本時間】今夜のハロウィンコスプレ配信は21:05〜21:50です。本人がファンルームで、夜枠の開始を21:00から21:05へ変更して案内しました。\n\n【朝の案内の履歴】05:29〜05:32には、早朝のきっかけ枠を取りやめ、昼14:45〜15:15へ移すと告知。当時は7:00〜7:30、14:45〜15:15、21:00〜21:50の3枠をすべて通常配信と案内していました。早起きして待っていた皆さんへのお詫びも伝えています。\n\n08:08には朝枠を盛り上げてくれた皆さんへ感謝し、次枠14:45〜15:15を再案内。夜枠ではハロウィンの仮装をすると予告しました。08:11の返信でも来訪・応援への感謝と、ファイナル進出への決意を伝えています。\n\n2026年10月31日時点の本人告知です。予定と実際の配信開始・終了は別で、正確な実施時刻は未確認です。変更は本人ファンルームの最新案内をご確認ください。",
+    source: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    sourceLabel: "本人ファンルーム（10月31日15:52更新／05:29〜05:32・08:08・08:11 JST）",
+  },
+  {
+    "id": "2026-10-31-stream-thanks-instagram-story",
+    "date": "2026-10-31",
+    "dateBasis": "confirmed-on",
+    "title": "応援への感謝と、ファイナルへの決意🩵 みりぃのStory",
+    "body": "配信の一場面とともに、みりぃが応援してくれる皆さんへの感謝を綴ったInstagram Story。「素敵な景色を見せてくれてありがとう」「絶対絶対ファイナル行こうね」という言葉が添えられています。\n\n提供された動画を音声なしで掲載しています。視聴者情報を守るため、配信画面の一部を非表示・ぼかしにしています。最新の投稿は本人のInstagramでご確認ください。\n\n10月31日は素材の受領・確認日です。元の投稿日・撮影日・配信日時は未確認です。動画内の「2日目」や数値は当時の表示で、現在の投票案内や確定成績ではありません。",
+    "url": "https://www.instagram.com/mily_chan36",
+    "sourceLabel": "Instagram Story（10月31日確認・投稿日未確認）",
+    "ctaLabel": "Instagramプロフィールを見る",
+    "media": {
+      "kind": "video",
+      "src": "/media/gallery/mily-b242-01-stream-thanks-story-v3.mp4",
+      "poster": "/media/gallery/mily-b242-01-stream-thanks-story-v3-poster.jpg",
+      "width": 480,
+      "height": 854,
+      "alt": "口元に手を添えるみりぃの配信映像と、応援への感謝・ファイナルへの言葉を載せたStory（音声なし・視聴者情報の一部を非表示）"
+    }
+  },
+  {
+    id: "2026-10-29-x-miss-circle-semifinal-period",
+    date: "2026-10-29",
+    sameDayOrder: 1200,
+    activityIds: ["miss-circle"],
+    title: "MISS CIRCLE CONTEST 2026 セミファイナル🔥 投票期間は10/29〜11/8",
+    body: "10月29日12:00（日本時間）、みりぃがXで、MISS CIRCLE CONTEST 2026のセミファイナルに進出したことを伝えました。投票期間は10/29〜11/8です。\n\n本人によると、セミファイナルには現在35名が出場し、ファイナルへ進めるのは12名です。投票は1日1票ずつ、毎日3人までと案内しています。元の投稿は本人のXからご覧ください。",
+    source: "https://x.com/Mily_chan36/status/2115639888062345707",
+    sourceLabel: "みりぃ本人のX投稿を見る（10月29日）",
+    message: {
+      label: "みりぃの投稿",
+      text: "現在地：セミファイナル🔥\n現在35名いますが、ここからファイナルへ進めるのはわずか12名のみ。",
+    },
+  },
+  {
+    id: "2026-10-25-radio-halloween-stories",
+    date: "2026-10-25",
+    dateBasis: "confirmed-on",
+    activityIds: ["radio"],
+    title: "ハロウィンのラジオ案内🎃 Story4本をまとめて",
+    body: "赤ずきん姿で聴き方を案内するみりぃ、くま耳フィルターで手を振るみりぃ、ハロウィンの番組告知、そしてツーショットでの聴取案内。4本のStoryをまとめました。\n\n番組告知の画面には、FM85.6MHz『湘南シーサイドサークル』10月25日（日）10:00〜13:00生放送、テーマ『ハロウィン』と、お便り募集の案内が表示されています。聴取やお便りは、下のFM公式リンクからどうぞ。\n\n動画は音声なしで掲載しています。10月25日は素材を受領・確認した日です。元の投稿日・撮影日は未確認のため、現在の放送予定はFM公式の案内をご確認ください。",
+    sourceLabel: "Instagram Story（10月25日確認・投稿日未確認）",
+    additionalSources: [{ label: "FM公式の番組情報", url: radioProgram.programUrl }],
+    media: radioHalloweenStories[0],
+    additionalMedia: radioHalloweenStories.slice(1),
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [{ label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL }],
+  },
+  {
+    id: "2026-10-23-x-cold-morning-malatang",
+    date: "2026-10-23",
+    sameDayOrder: 843,
+    title: "急な肌寒さに上着を出して🍂 みりぃの麻辣湯気分",
+    body: "10月23日8:43（日本時間）、みりぃがXで、肌寒い朝に薄手の上着を出したと近況を投稿。これからの冬をどう乗り越えようかと考えつつ、大学へ向かう様子を伝えています。\n\n無性に麻辣湯が食べたくなったそうで、鮮やかなオレンジ色の器に麺や具材が入った麻辣湯の写真も添えています。元の投稿文と写真は、下のX公式埋め込みまたは本人の投稿リンクからご覧ください。",
+    source: "https://x.com/Mily_chan36/status/2113416020597825627",
+    sourceLabel: "みりぃ本人のX投稿と麻辣湯の写真を見る（10月23日）",
+    xEmbed: {
+      postId: "2113416020597825627",
+      sourceUrl: "https://x.com/Mily_chan36/status/2113416020597825627",
+      alt: "肌寒い朝と大学へ向かう近況を綴り、麻辣湯の写真を添えたみりぃのX投稿",
+    },
+  },
+  {
     id: "2026-10-17-x-relaxed-morning-showroom",
     date: "2026-10-17",
     sameDayOrder: 1045,
@@ -312,9 +385,15 @@ export const news: NewsItem[] = [
     date: "2026-10-16",
     dateBasis: "confirmed-on",
     title: "湘南シーサイドサークルのTikTok投稿リンク📱",
-    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。",
+    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。\n\n10月31日に新たに共有された別のTikTok投稿も関連リンクに追加しました。こちらも投稿日、動画の内容や出演者は未確認です。",
     source: tiktokSeasideCircleSharedVideo.sourceUrl,
     sourceLabel: "湘南シーサイドサークルのTikTok投稿を開く",
+    additionalSources: [
+      {
+        label: "10月31日に共有された別のTikTok投稿を見る",
+        url: sscTikTokOct31.sourceUrl,
+      },
+    ],
   },
   {
     id: "2026-10-15-miss-circle-semifinal-advance",

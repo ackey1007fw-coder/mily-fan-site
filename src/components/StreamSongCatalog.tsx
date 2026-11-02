@@ -158,8 +158,18 @@ export function StreamSongCatalog() {
                                   className={linkClass}
                                   onClick={(event) => {
                                     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-                                    const target = document.getElementById(`recap-${performance.id}`);
-                                    if (target instanceof HTMLDetailsElement) target.open = true;
+                                    const hash = `#recap-${performance.id}`;
+                                    if (!document.getElementById(`recap-${performance.id}`)) return;
+                                    event.preventDefault();
+                                    // Keep opening and reopening on the recap's hash-driven React state path.
+                                    if (window.location.hash === hash) {
+                                      window.dispatchEvent(new HashChangeEvent("hashchange", {
+                                        oldURL: window.location.href,
+                                        newURL: window.location.href,
+                                      }));
+                                    } else {
+                                      window.location.hash = hash;
+                                    }
                                   }}
                                 >
                                   {performance.dateLabel} {performance.theme}

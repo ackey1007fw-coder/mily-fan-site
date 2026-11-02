@@ -1,0 +1,447 @@
+{
+  "schema": "mily-official-day-cohort-v1",
+  "analysisIsOfficialContestResult": false,
+  "targetDate": "2026-10-21",
+  "metric": "SHOWROOM Classic タレント 日間ジャンルpt",
+  "genreId": 103,
+  "snapshotOnly": true,
+  "automaticRefresh": false,
+  "rosterSource": {
+    "url": "https://2026.misscircle.jp/list/semifinal",
+    "checkedDateJst": "2026-10-22",
+    "sha256": "88ceb54b0e21167601d85dd62973a22f3059aa687c363e7e32671d2c925cf167",
+    "count": 35
+  },
+  "rankingSources": [
+    {
+      "url": "https://www.showroom-live.com/api/genre_ranking/103/daily/20261021?page=1&count=100",
+      "retrievedAtJst": "2026-10-22T14:57:17.033331+09:00",
+      "rows": 100,
+      "nextPage": 2,
+      "sha256": "3eb44933027ae31dca80033d4de0f3012c5bbadca53aa1ec31439bd4a4b0fd42"
+    },
+    {
+      "url": "https://www.showroom-live.com/api/genre_ranking/103/daily/20261021?page=2&count=100",
+      "retrievedAtJst": "2026-10-22T14:57:17.668674+09:00",
+      "rows": 100,
+      "nextPage": 3,
+      "sha256": "63ae6a7e979c29431a4b83dfac2b639f0ce9b71c810ab7a6b8bb91aef80e2332"
+    },
+    {
+      "url": "https://www.showroom-live.com/api/genre_ranking/103/daily/20261021?page=3&count=100",
+      "retrievedAtJst": "2026-10-22T14:57:18.081049+09:00",
+      "rows": 40,
+      "nextPage": 0,
+      "sha256": "87272eb7ec8929c4a852a3eb82e517b3839f0d5ccc06d2fdfcbde134b6d44d4b"
+    }
+  ],
+  "rankingRecordsRetrieved": 240,
+  "paginationComplete": true,
+  "selectionRule": "公式セミファイナル名簿のSHOWROOMルームIDと、対象日・タレントジャンル掲載値のルームIDが一致する全件。数値の大小で対象を選ばない。",
+  "roster": [
+    {
+      "entry": 56,
+      "roomId": 571766
+    },
+    {
+      "entry": 95,
+      "roomId": 571774
+    },
+    {
+      "entry": 112,
+      "roomId": 574705
+    },
+    {
+      "entry": 146,
+      "roomId": 571786
+    },
+    {
+      "entry": 147,
+      "roomId": 571787
+    },
+    {
+      "entry": 151,
+      "roomId": 571788
+    },
+    {
+      "entry": 159,
+      "roomId": 571789
+    },
+    {
+      "entry": 210,
+      "roomId": 571799
+    },
+    {
+      "entry": 225,
+      "roomId": 571803
+    },
+    {
+      "entry": 237,
+      "roomId": 571804
+    },
+    {
+      "entry": 271,
+      "roomId": 571815
+    },
+    {
+      "entry": 282,
+      "roomId": 571820
+    },
+    {
+      "entry": 313,
+      "roomId": 571826
+    },
+    {
+      "entry": 412,
+      "roomId": 571843
+    },
+    {
+      "entry": 432,
+      "roomId": 571848
+    },
+    {
+      "entry": 439,
+      "roomId": 571851
+    },
+    {
+      "entry": 585,
+      "roomId": 573230
+    },
+    {
+      "entry": 618,
+      "roomId": 573236
+    },
+    {
+      "entry": 625,
+      "roomId": 573239
+    },
+    {
+      "entry": 638,
+      "roomId": 573241
+    },
+    {
+      "entry": 700,
+      "roomId": 573248
+    },
+    {
+      "entry": 734,
+      "roomId": 573253
+    },
+    {
+      "entry": 774,
+      "roomId": 573255
+    },
+    {
+      "entry": 820,
+      "roomId": 573261
+    },
+    {
+      "entry": 948,
+      "roomId": 574713
+    },
+    {
+      "entry": 968,
+      "roomId": 574715
+    },
+    {
+      "entry": 1258,
+      "roomId": 574740
+    },
+    {
+      "entry": 1263,
+      "roomId": 574741
+    },
+    {
+      "entry": 1285,
+      "roomId": 574746
+    },
+    {
+      "entry": 1317,
+      "roomId": 574752
+    },
+    {
+      "entry": 1366,
+      "roomId": 574762
+    },
+    {
+      "entry": 1367,
+      "roomId": 574763
+    },
+    {
+      "entry": 1400,
+      "roomId": 574768
+    },
+    {
+      "entry": 1406,
+      "roomId": 574770
+    },
+    {
+      "entry": 1612,
+      "roomId": 575457
+    }
+  ],
+  "listedParticipants": [
+    {
+      "entry": 56,
+      "roomId": 571766,
+      "points": 126554,
+      "genreRank": 9,
+      "withinListedRank": 1
+    },
+    {
+      "entry": 585,
+      "roomId": 573230,
+      "points": 100680,
+      "genreRank": 11,
+      "withinListedRank": 2
+    },
+    {
+      "entry": 1612,
+      "roomId": 575457,
+      "points": 39351,
+      "genreRank": 26,
+      "withinListedRank": 3
+    },
+    {
+      "entry": 734,
+      "roomId": 573253,
+      "points": 30020,
+      "genreRank": 35,
+      "withinListedRank": 4
+    },
+    {
+      "entry": 1317,
+      "roomId": 574752,
+      "points": 28646,
+      "genreRank": 36,
+      "withinListedRank": 5
+    },
+    {
+      "entry": 237,
+      "roomId": 571804,
+      "points": 27112,
+      "genreRank": 37,
+      "withinListedRank": 6
+    },
+    {
+      "entry": 271,
+      "roomId": 571815,
+      "points": 16642,
+      "genreRank": 57,
+      "withinListedRank": 7
+    },
+    {
+      "entry": 700,
+      "roomId": 573248,
+      "points": 14331,
+      "genreRank": 66,
+      "withinListedRank": 8
+    },
+    {
+      "entry": 1263,
+      "roomId": 574741,
+      "points": 13979,
+      "genreRank": 69,
+      "withinListedRank": 9
+    },
+    {
+      "entry": 432,
+      "roomId": 571848,
+      "points": 13785,
+      "genreRank": 71,
+      "withinListedRank": 10
+    },
+    {
+      "entry": 1367,
+      "roomId": 574763,
+      "points": 11907,
+      "genreRank": 76,
+      "withinListedRank": 11
+    },
+    {
+      "entry": 1285,
+      "roomId": 574746,
+      "points": 10090,
+      "genreRank": 83,
+      "withinListedRank": 12
+    },
+    {
+      "entry": 112,
+      "roomId": 574705,
+      "points": 8520,
+      "genreRank": 98,
+      "withinListedRank": 13
+    },
+    {
+      "entry": 625,
+      "roomId": 573239,
+      "points": 8456,
+      "genreRank": 100,
+      "withinListedRank": 14
+    },
+    {
+      "entry": 820,
+      "roomId": 573261,
+      "points": 5139,
+      "genreRank": 123,
+      "withinListedRank": 15
+    },
+    {
+      "entry": 210,
+      "roomId": 571799,
+      "points": 5137,
+      "genreRank": 124,
+      "withinListedRank": 16
+    },
+    {
+      "entry": 1258,
+      "roomId": 574740,
+      "points": 4861,
+      "genreRank": 126,
+      "withinListedRank": 17
+    },
+    {
+      "entry": 412,
+      "roomId": 571843,
+      "points": 4426,
+      "genreRank": 130,
+      "withinListedRank": 18
+    },
+    {
+      "entry": 439,
+      "roomId": 571851,
+      "points": 4066,
+      "genreRank": 132,
+      "withinListedRank": 19
+    },
+    {
+      "entry": 151,
+      "roomId": 571788,
+      "points": 3186,
+      "genreRank": 150,
+      "withinListedRank": 20
+    },
+    {
+      "entry": 618,
+      "roomId": 573236,
+      "points": 2479,
+      "genreRank": 164,
+      "withinListedRank": 21
+    },
+    {
+      "entry": 968,
+      "roomId": 574715,
+      "points": 1460,
+      "genreRank": 190,
+      "withinListedRank": 22
+    },
+    {
+      "entry": 948,
+      "roomId": 574713,
+      "points": 3,
+      "genreRank": 240,
+      "withinListedRank": 23
+    }
+  ],
+  "unlistedParticipants": [
+    {
+      "entry": 95,
+      "roomId": 571774,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 146,
+      "roomId": 571786,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 147,
+      "roomId": 571787,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 159,
+      "roomId": 571789,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 225,
+      "roomId": 571803,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 282,
+      "roomId": 571820,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 313,
+      "roomId": 571826,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 638,
+      "roomId": 573241,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 774,
+      "roomId": 573255,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 1366,
+      "roomId": 574762,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 1400,
+      "roomId": 574768,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    },
+    {
+      "entry": 1406,
+      "roomId": 574770,
+      "points": null,
+      "reason": "not_listed_in_this_genre_day"
+    }
+  ],
+  "coverage": {
+    "rosterCount": 35,
+    "listedCount": 23,
+    "unlistedCount": 12,
+    "coversAllSemifinalists": false
+  },
+  "mily": {
+    "entry": 734,
+    "roomId": 573253,
+    "points": 30020,
+    "genreRank": 35,
+    "withinListedRank": 4
+  },
+  "listedMedianPoints": 10090,
+  "milyToListedMedianRatio": 2.98,
+  "boundaries": {
+    "isContestRank": false,
+    "allSemifinalistsRank": null,
+    "isLivePopularityIndex": false,
+    "isSpecificBroadcastTotal": false,
+    "equalBroadcastDuration": false,
+    "campaignEffectMeasured": false,
+    "unlistedMeansZero": false,
+    "qualificationProbability": null,
+    "dailyBoundaryTimeVerified": false,
+    "missingMorningCountersRecovered": false
+  }
+}

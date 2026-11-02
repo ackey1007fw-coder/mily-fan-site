@@ -1,0 +1,16 @@
+/* Keep the evidence itself static and readable without JavaScript. */
+.progress-digest{margin:26px 0 18px;padding:28px;border:1px solid #bed5c8;border-radius:22px;background:#f0f7f1;scroll-margin-top:16px}
+.progress-digest h2{margin-top:8px}.digest-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.digest-facts article{padding:18px;background:white;border:1px solid #d7dfd9;border-radius:14px;min-width:0}
+.digest-facts h3{font-size:14px;line-height:1.6}.digest-facts article>p:last-child{font-size:14px;margin-bottom:0}
+.digest-number{font-size:clamp(27px,3.6vw,38px);line-height:1.4;font-weight:800;color:#146357;font-variant-numeric:tabular-nums;margin:10px 0;white-space:nowrap}
+.digest-number span{font-size:16px;margin-left:4px}.digest-scope{font-size:14px;line-height:1.8}.digest-message{padding:14px 0 0;border-top:1px solid #bed5c8;font-weight:650}
+.progress-actions{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:18px 0}.progress-actions>a{padding:10px 0}
+.progress-action{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:10px 16px!important;border:1px solid #146357;border-radius:10px;background:#146357;color:#fff;font:inherit;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;max-width:100%;text-align:center;white-space:normal}
+.progress-action:disabled{opacity:.7;cursor:wait}.progress-action:focus-visible,.progress-share textarea:focus-visible{outline:3px solid #a84b58;outline-offset:4px}
+.progress-share{margin-top:20px;padding-top:18px;border-top:1px solid #bed5c8}.progress-share [hidden]{display:none!important}
+.progress-share label{display:block;font-size:14px;margin-bottom:8px}.progress-share textarea{display:block;width:100%;max-width:100%;min-height:240px;resize:vertical;border:1px solid #8a9e94;border-radius:8px;padding:12px;font:inherit;font-size:16px;line-height:1.75;color:#193540;background:#fff;overflow-wrap:anywhere}
+.progress-share #progress-copy-status:empty{display:none}.progress-digest summary{padding:8px 0;min-height:44px}
+.progress-digest details>div{font-size:14px}.progress-digest a{overflow-wrap:anywhere}.progress-digest .progress-action{color:white}
+@media(max-width:650px){.progress-digest{padding:20px 16px}.digest-facts{grid-template-columns:1fr;gap:10px}.digest-facts article{padding:14px 16px}.digest-number{font-size:32px}.digest-facts h3{margin-bottom:0}.progress-actions{align-items:stretch;flex-direction:column;gap:8px}.progress-share>.progress-action{width:100%}.progress-digest .section-label{font-size:11px;letter-spacing:.04em}}
+@media print{.progress-share{display:none}.progress-digest{background:white;break-inside:avoid}.progress-actions{display:none}.digest-facts{grid-template-columns:repeat(3,minmax(0,1fr))}.digest-facts article{padding:12px}.digest-number{font-size:25px}}

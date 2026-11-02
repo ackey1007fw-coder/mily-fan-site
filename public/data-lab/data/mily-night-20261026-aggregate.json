@@ -1,0 +1,171 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23605926,
+  "dateJst": "2026-10-26",
+  "session": "night",
+  "label": "10月26日 夜の雑談・応援相談配信",
+  "eventName": "セミファイナルに向けた応援方法を配信内で相談。対象回の公式イベントpt・最終成績は未照合。",
+  "sourceDescription": "内容は2026年10月26日22:30頃から23:50頃までの途中視聴メモに基づく。録画処理メタデータで対象回のIDと保存成功記録を追加確認。元映像・数値画面原本・全文文字起こしは直接照合していない。",
+  "verifiedAtJst": "2026-10-27",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "lastValidOnline": null,
+  "observations": [],
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "partialViewerMemo": {
+    "displayAtStart": 18,
+    "displayNearMemoEnd": 435,
+    "observationEndApproxJst": "2026-10-26T23:50:00+09:00",
+    "source": "途中視聴メモ（数値画面原本・集計定義未照合）",
+    "confirmedFinal": false,
+    "comparableToVisitsMetric": false,
+    "continuousSeriesVerified": false
+  },
+  "measurementNote": "既存ラボの9指標は原記録未照合のためnull。視聴者数18→435は提供途中メモの参考表示で、画面定義・観測間隔・正式な終了時の値が未確認。総訪問表示、イベントpt、きら星数へ読み替えない。",
+  "comparisonNote": "23:50頃までのメモは全編の確認記録ではない。途中表示の始点・終点だけでは時系列曲線・区間増分・速度・時間帯比較を作らない。欠測を0にしない。",
+  "timingComparisonEligible": false,
+  "recording": {
+    "saved": true,
+    "metadataRecordRead": true,
+    "processingStartedAtJst": "2026-10-26T22:30:24+09:00",
+    "processingEndedAtJst": "2026-10-26T23:59:35+09:00",
+    "metadataProbed": false,
+    "actualFileDecodeVerified": false,
+    "fullContinuityVerified": false,
+    "timeMeaning": "保存成功と処理時刻は録画処理メタデータの記録。映像本体は取得上限により直接照合できず、実尺・デコード・連続性・正式な配信開始終了は未確認。処理区間を配信全体の時間にしない。"
+  },
+  "asr": {
+    "status": "unverified",
+    "selectedTopicsRead": false,
+    "verbatimAccuracyVerified": false,
+    "manualAudioListeningVerified": false
+  },
+  "quality": {
+    "numericEvidenceStatus": "unverified",
+    "savedNumericObservations": null,
+    "endConfirmed": false,
+    "missingDataIsNotZeroPerformance": true,
+    "observedUntilApproxJst": "2026-10-26T23:50:00+09:00",
+    "finalVerified": false,
+    "coverageComplete": false,
+    "counterSource": "provided_partial_viewing_memo",
+    "note": "18→435は途中の別種の表示であり、既存9指標の数値観測とは分ける。"
+  },
+  "recap": {
+    "basis": "提供された23:50頃までの視聴メモを話題別に再構成。録画・音声・元の文字起こしを今回直接確認していないため非逐語の暫定要約。",
+    "summary": "身近な出来事から始まり、配信の時間帯や応援の仕組みをリスナーと考えた夜。終盤にはセミファイナルへの思いと感謝も伝えました。",
+    "approximateJstTopics": [
+      {
+        "at": "22:30頃",
+        "topic": "朝のメイクにまつわる話から配信がスタート"
+      },
+      {
+        "at": "22:37頃",
+        "topic": "前髪を褒められた日のエピソード"
+      },
+      {
+        "at": "22:47頃",
+        "topic": "大学やアルバイトと配信時間の両立を相談"
+      },
+      {
+        "at": "22:57頃",
+        "topic": "きら星・ミッション・星集めの時間などの応援方法を相談"
+      },
+      {
+        "at": "23:08頃",
+        "topic": "本番に向き合う自分の性格について"
+      },
+      {
+        "at": "23:18頃",
+        "topic": "手紙のファイルを忘れたかもしれないと気づき、翌日の報告の話題に"
+      },
+      {
+        "at": "終盤（記録範囲内）",
+        "topic": "セミファイナルに向けて意見を持ち帰り、感謝を伝える"
+      }
+    ],
+    "fullChorusWithinMemoRangeReported": false,
+    "fullBroadcastSingingVerified": false,
+    "endTimeVerified": false,
+    "publishedStills": 0,
+    "publishedTalkClips": 0,
+    "liveRecapUrl": "/activities/live/#recap-2026-10-26-night-showroom"
+  },
+  "format": "video",
+  "referenceSnapshot": {
+    "source": "第三者SHOWROOM Emulatorの保存済み最終有効オンライン画面記録を担当者が照合",
+    "verified_final": false,
+    "savedObservedAtJst": "2026-10-27T00:00:57.787+09:00",
+    "lastScreenProgressAtJst": "2026-10-26T23:58:45.277+09:00",
+    "offlineReceiptAtJst": "2026-10-27T00:01:20.557+09:00",
+    "metrics": {
+      "firstVisits": 3,
+      "repeatVisits": 2,
+      "visits": 110,
+      "comments": 629,
+      "newFollows": 0,
+      "stars": 2720,
+      "otherFree": 121,
+      "star100People": 26,
+      "recommendedCommentPeople": 19
+    },
+    "fieldLabels": {
+      "firstVisits": {
+        "rawField": "visitarea",
+        "label": "初訪問"
+      },
+      "repeatVisits": {
+        "rawField": "visit2area",
+        "label": "2度訪問"
+      },
+      "visits": {
+        "rawField": "visittotalarea",
+        "label": "総訪問"
+      },
+      "comments": {
+        "rawField": "commentarea",
+        "label": "投稿数"
+      },
+      "newFollows": {
+        "rawField": "followarea",
+        "label": "新規follow"
+      },
+      "stars": {
+        "rawField": "twinklearea",
+        "label": "星個数"
+      },
+      "otherFree": {
+        "rawField": "othergiftarea",
+        "label": "その他free"
+      },
+      "star100People": {
+        "rawField": "twinkletotalarea",
+        "label": "星100貢献人数"
+      },
+      "recommendedCommentPeople": {
+        "rawField": "recommendarea",
+        "label": "おすすめcomment人数"
+      }
+    },
+    "note": "第三者SHOWROOM Emulatorの最終有効画面参考値です。公式総訪問・同時視聴者・実人数・確定贈呈量・公式pt・確定終値ではありません。「総訪問」の算出方法も未確認です。保存観測時刻は画面内容の進行時刻や真の配信終端ではありません。offlineの0は終値へ採用していません。"
+  },
+  "asrSupplement": {
+    "recordsReadByReporter": 1039,
+    "manualAudioListeningVerified": false,
+    "ptsSyncVerified": false,
+    "verbatimAccuracyVerified": false,
+    "note": "担当者が保存ASRを分割読解した匿名化要約です。原音の手動聴取・逐語校正、ASR秒と映像PTSの同期、全編無欠落は未確認です。歌唱の有無・曲名は未確定です。"
+  }
+}

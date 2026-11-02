@@ -29,7 +29,7 @@ describe("2026-10-14 X red riding hood lip video", () => {
     assert.match(card, /dnt=true/);
     assert.match(card, /loading="lazy"/);
     assert.match(card, /href=\{embed\.sourceUrl\}/);
-    assert.match(card, /Xで元の動画を見る/);
+    assert.match(card, /Xで元の投稿を見る/);
     assert.doesNotMatch(card, /video\.twimg\.com/);
   });
 });

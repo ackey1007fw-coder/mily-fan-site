@@ -50,7 +50,14 @@ try {
           const more = page.getByRole("button", { name: ARCHIVE_LOAD_MORE_LABEL, exact: true });
           for (let i = 0; !(await anniversaryCard.count()) && await more.count() && i < news.length; i++) await more.click();
         }
-        await anniversaryCard.waitFor();
+        // Radio keeps only its latest related NEWS; older announcement cards
+        // can leave that window while their lead videos remain in related media.
+        const anniversaryOnRadio = selectActivityNews("radio").some(n => n.id === anniversaryItem.id);
+        if (route === "/activities/radio/" && !anniversaryOnRadio) {
+          assert.equal(await anniversaryCard.count(), 0, "Historical anniversary NEWS is outside the compact Radio latest window");
+        } else {
+          await anniversaryCard.waitFor();
+        }
         const anniversaryVideos = route === "/activities/radio/" ? radioAnniversaryStories.slice(0, 1) : radioAnniversaryStories;
         for (const entry of anniversaryVideos) {
           const player = (route === "/activities/radio/" ? page : anniversaryCard).locator(`video[src="${entry.src}"]`);

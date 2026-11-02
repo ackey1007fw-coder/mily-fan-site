@@ -18,25 +18,43 @@ function useHeaderOffset(ref: RefObject<HTMLElement>) {
     if (!element) return;
 
     const root = document.documentElement;
-    const apply = () => {
-      const height = Math.ceil(element.getBoundingClientRect().height);
+    let published: number | null = null;
+    const publish = (rawHeight: number) => {
+      const height = Math.ceil(rawHeight);
+      // 同じ値の再書き込みで style 再計算を起こさない
+      if (height === published) return;
+      published = height;
       root.style.setProperty(
         "--header-offset",
         `${height + HEADER_OFFSET_GAP_PX}px`,
       );
     };
-
-    apply();
+    const measure = () => publish(element.getBoundingClientRect().height);
 
     if (typeof ResizeObserver === "undefined") {
-      window.addEventListener("resize", apply);
+      // 非対応環境: 初回と resize を rAF にまとめ、同期 reflow を避ける
+      let frame = requestAnimationFrame(measure);
+      const onResize = () => {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(measure);
+      };
+      window.addEventListener("resize", onResize);
       return () => {
-        window.removeEventListener("resize", apply);
+        cancelAnimationFrame(frame);
+        window.removeEventListener("resize", onResize);
         root.style.removeProperty("--header-offset");
       };
     }
 
-    const observer = new ResizeObserver(apply);
+    // ResizeObserver は observe 直後（初回レイアウト後）にも通知するため、
+    // effect 内で同期的に計測しない。entry のサイズを使い reflow を強制しない。
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[entries.length - 1];
+      if (!entry) return;
+      const box = entry.borderBoxSize?.[0];
+      if (box) publish(box.blockSize);
+      else measure();
+    });
     observer.observe(element);
     return () => {
       observer.disconnect();

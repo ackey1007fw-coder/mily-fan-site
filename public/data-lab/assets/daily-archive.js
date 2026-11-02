@@ -69,7 +69,8 @@ if (host) {
     if (data === undefined) return;
     const points = data ? observationPoints(data, metric, entry.date) : [];
     const last = data ? lastObservedValue(data, metric, entry.date) : null;
-    value.textContent = last === null ? "未取得" : numberFormat.format(last);
+    const numericUnverified = data?.quality?.numericEvidenceStatus === "unverified" && !data?.referenceSnapshot;
+    value.textContent = last === null ? (numericUnverified ? "未確認" : "未取得") : numberFormat.format(last);
     value.dataset.missing = String(last === null);
     chart.replaceChildren();
     if (points.length >= 2) {
@@ -79,14 +80,17 @@ if (host) {
       note.textContent = points.length + "個の時刻付き観測点。点の間と前後は補間していません。最終結果ではありません。";
     } else {
       chart.append(element("p", "daily-no-chart", data
-        ? "この指標の時刻付き観測が2点未満のため、推移グラフは表示できません。"
+        ? (numericUnverified ? "画面カウンターの原本を照合できていないため、推移グラフは表示できません。" : "この指標の時刻付き観測が2点未満のため、推移グラフは表示できません。")
         : "保存済みの匿名集計を読み込めません。各回のレポートを参照してください。"));
-      note.textContent = "欠測を0として描画しません。既存の各回レポートには別の図表がある場合があります。";
+      note.textContent = data?.referenceSnapshot ? data.referenceSnapshot.note + " 最終画面進行（JST）: " + data.referenceSnapshot.lastScreenProgressAtJst + "。推移・時間帯比較には使いません。" : numericUnverified
+        ? "原本の有無・観測件数・最終値は未確認です。数値を0として補いません。"
+        : "欠測を0として描画しません。既存の各回レポートには別の図表がある場合があります。";
     }
   }
-  function createCard(entry) {
-    const article = element("article", "daily-stream-card");
+  function createCard(entry, options = {}) {
+    const article = element("article", "daily-stream-card" + (options.large ? " daily-stream-card-large" : ""));
     const title = element("h4", "", SLOT_LABELS[entry.slot] + "の配信");
+    if (options.isNew) title.prepend(element("span", "daily-new", "NEW"));
     const status = element("div", "daily-stream-stat");
     const label = element("span", "", METRICS[metric] + "（最後の有効な画面参考値）");
     const value = element("strong", "daily-stream-number", "読み込み前");
@@ -102,36 +106,72 @@ if (host) {
     article.append(title, status, chart, note, links);
     const card = { entry, data: undefined, label, value, chart, note };
     cards.push(card);
-    return article;
+    return { article, card };
   }
-  async function loadDay(details, dayCards) {
-    await Promise.all(dayCards.map(async (card) => {
+  async function loadCards(group) {
+    await Promise.all(group.map(async (card) => {
       if (card.data === undefined) card.data = await getData(card.entry);
+      renderCard(card);
     }));
-    if (details.open) dayCards.forEach(renderCard);
   }
+  // Latest broadcasts: whole broadcast dates, newest first, until at least LATEST_COUNT broadcasts are shown.
+  // A date is never split between the large block and "過去の回", so every date keeps one #daily-YYYY-MM-DD.
+  const LATEST_COUNT = 3;
+  const NEW_COUNT = 1;
   const days = groupByBroadcastDate(DAILY_STREAM_ENTRIES);
-  let firstDay;
-  for (const day of days) {
-    const details = element("details", "daily-day");
-    details.id = "daily-" + day.date;
-    const summary = element("summary", "daily-day-summary");
-    const shownDate = dayFormat.format(new Date(day.date + "T12:00:00+09:00"));
-    summary.append(element("span", "daily-day-title", shownDate), element("span", "daily-day-count", day.entries.length + "枠 · タップで表示"));
+  let latestDayCount = 0;
+  for (let shown = 0; latestDayCount < days.length && shown < LATEST_COUNT; latestDayCount++) shown += days[latestDayCount].entries.length;
+  let newLeft = NEW_COUNT;
+  function createDay(day, large) {
+    const group = element("section", "daily-day" + (large ? " daily-day-latest" : ""));
+    group.id = "daily-" + day.date;
+    group.append(element("h4", "daily-day-title", dayFormat.format(new Date(day.date + "T12:00:00+09:00"))));
     const body = element("div", "daily-day-body");
     const dayCards = [];
     for (const entry of day.entries) {
-      const article = createCard(entry);
-      dayCards.push(cards.at(-1));
+      const { article, card } = createCard(entry, { large, isNew: large && newLeft-- > 0 });
+      dayCards.push(card);
       body.append(article);
     }
-    details.append(summary, body);
-    details.addEventListener("toggle", () => { if (details.open) void loadDay(details, dayCards); });
-    host.append(details);
-    if (!firstDay) firstDay = details;
+    group.append(body);
+    return { group, dayCards };
   }
-  const fallback = document.getElementById("daily-fallback-links");
-  if (fallback) fallback.hidden = true;
+
+  // Latest dates: large summary cards, loaded right away.
+  const latest = element("div", "daily-latest");
+  const latestCards = [];
+  for (const day of days.slice(0, latestDayCount)) {
+    const { group, dayCards } = createDay(day, true);
+    latestCards.push(...dayCards);
+    latest.append(group);
+  }
+
+  // Older dates: one collapsed block, loaded when visible.
+  const past = element("details", "daily-past");
+  past.id = "daily-past";
+  const pastDayList = days.slice(latestDayCount);
+  const pastEntryCount = pastDayList.reduce((sum, day) => sum + day.entries.length, 0);
+  const pastSummary = element("summary", "daily-past-summary");
+  pastSummary.append(element("span", "daily-past-title", "過去の回"), element("span", "daily-day-count", pastEntryCount + "枠 · タップで表示"));
+  const pastBody = element("div", "daily-past-body");
+  const pastDays = [];
+  for (const day of pastDayList) {
+    const found = createDay(day, false);
+    pastBody.append(found.group);
+    pastDays.push(found);
+  }
+  past.append(pastSummary, pastBody);
+  host.append(latest, past);
+
+  // Older dates load their saved aggregates only once "過去の回" is opened (same as the former per-date accordions).
+  let pastLoaded = false;
+  function watchPastDays() {
+    if (pastLoaded) return;
+    pastLoaded = true;
+    pastDays.forEach(({ dayCards }) => void loadCards(dayCards));
+  }
+  past.addEventListener("toggle", () => { if (past.open) watchPastDays(); });
+
   for (const btn of metricButtons) {
     btn.addEventListener("click", () => {
       const next = btn.dataset.dailyMetric;
@@ -148,16 +188,23 @@ if (host) {
       });
     });
   }
-  // Shared day links work even after an initial hash navigation.
+  // Use day anchors once enhanced cards exist; keep HTML fallback links usable without JS.
+  document.querySelectorAll("#daily-fallback-links a").forEach((link) => {
+    const entry = DAILY_STREAM_ENTRIES.find((candidate) => "#" + candidate.section === link.getAttribute("href"));
+    if (entry) link.href = "#daily-" + entry.date;
+  });
+  // Shared day links (/data-lab/#daily-YYYY-MM-DD) keep working, including older days inside "過去の回".
   function openLinkedDay() {
     if (!location.hash.startsWith("#daily-")) return;
     const found = document.getElementById(location.hash.slice(1));
-    if (found?.tagName === "DETAILS") found.open = true;
+    if (!found || !host.contains(found)) return;
+    if (past.contains(found) && !past.open) {
+      past.open = true;
+      watchPastDays();
+    }
+    found.scrollIntoView();
   }
   window.addEventListener("hashchange", openLinkedDay);
   openLinkedDay();
-  if (firstDay) {
-    firstDay.open = true;
-    void loadDay(firstDay, cards.filter((card) => card.entry.date === days[0].date));
-  }
+  void loadCards(latestCards);
 }

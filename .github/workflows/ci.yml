@@ -60,13 +60,58 @@ jobs:
         timeout-minutes: 8
         run: |
           # Avoid the Azure mirror's slow package downloads; keep Ubuntu's signed archives.
-          for source_file in /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources; do
+          for source_file in /etc/apt/sources.list /etc/apt/sources.list.d/ubuntu.sources /etc/apt/apt-mirrors.txt; do
             if [ -f "$source_file" ]; then
               sudo sed -i 's|http://azure.archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' "$source_file"
             fi
           done
           npm install --prefix "$RUNNER_TEMP/mily-browser-tools" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.61.1
           node "$RUNNER_TEMP/mily-browser-tools/node_modules/playwright/cli.js" install --with-deps chromium webkit
+
+      - name: October 31 noon recap browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/mily-noon-20261031.browser.mjs
+
+      - name: October 31 announced schedule browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+        run: node scripts/fanroom-stream-update-20261031.browser.mjs
+
+      - name: October 31 gratitude Story browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+        run: node scripts/story-stream-thanks-20261031.browser.mjs
+
+      - name: Semifinal vote prominence and expiry browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/semifinal-vote-prominence.browser.mjs
+
+      - name: October 22 night media and lab browser checks
+        timeout-minutes: 5
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/mily-night-20261022.browser.mjs
+
+      - name: Song catalog browser checks
+        timeout-minutes: 5
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-song-catalog.browser.mjs
 
       - name: October 20-21 approved media browser checks
         timeout-minutes: 4
@@ -107,6 +152,17 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/data-lab.browser.mjs
 
+      - name: October 30 sessions browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          node scripts/mily-morning1-20261030.browser.mjs
+          node scripts/mily-morning2-20261030.browser.mjs
+          node scripts/mily-night-20261030.browser.mjs
+
       - name: October 12 final stream and separate vote deadlines browser checks
         timeout-minutes: 5
         env:
@@ -139,14 +195,6 @@ jobs:
           SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node --experimental-strip-types scripts/fanroom-board.browser.mjs
-
-      - name: Song catalog browser checks
-        timeout-minutes: 5
-        env:
-          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
-          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/stream-song-catalog.browser.mjs
 
       - name: Avatar Story browser checks
         timeout-minutes: 3

@@ -1,6 +1,10 @@
 // Owner-requested song links, verified against artist/label or accompaniment creator channels.
 // Removing only these exact URLs lets existing private-archive checks keep running.
 const approved = new Set([
+  // 2026-10-22: M!LK「イイじゃん」— sd-milk.com/contents/998372 の公式MVリンク。
+  "https://www.youtube.com/watch?v=GW-XMhRQDFI",
+  // 2026-10-22: YOASOBI「夜に駆ける」— 公式Weverse media/2-142486060 の公式MVリンク。
+  "https://www.youtube.com/watch?v=x8VYWazR5mE",
   // 2026-09-20: weeeek / NEWS — にゅうちゅうぶ | NEWS official の公式MV。
   "https://www.youtube.com/watch?v=bYAvL803fAE",
   // 2026-09-16: 嵐の公式MV。9/15夜の短い口ずさみ2曲として記録。

@@ -21,7 +21,7 @@ export function XEmbedCard({ embed }: { embed: NewsXEmbed }) {
       />
       <p className="px-3 py-3 text-sm">
         <ExternalLink href={embed.sourceUrl} className="font-medium text-sage hover:underline">
-          Xで元の動画を見る
+          Xで元の投稿を見る
         </ExternalLink>
       </p>
     </div>

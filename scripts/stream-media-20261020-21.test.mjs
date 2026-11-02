@@ -42,5 +42,11 @@ test('Oct 20-21: four unique streams retain their own approved photos, talk and 
   await validateReportMedia(carousel,{ root: process.cwd(), recaps: streamRecaps });
  }
  assert.equal(allFiles.length,52);
- assert.equal(streamRecaps[0].id, '2026-10-21-noon-showroom');
+ const reviewedIds = new Set(manifest.groups.map(group => group.recapId));
+ assert.deepEqual(streamRecaps.filter(recap => reviewedIds.has(recap.id)).map(recap => recap.id), [
+  '2026-10-21-noon-showroom',
+  '2026-10-21-morning-showroom',
+  '2026-10-20-night-showroom',
+  '2026-10-20-morning-showroom',
+ ]);
 });

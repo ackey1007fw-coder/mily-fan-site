@@ -1,0 +1,24 @@
+{
+  "schema": "mily-public-campaign-facts-v1",
+  "sourceUrl": "https://lp.showroom-live.com/halloween2026/",
+  "sourceType": "official-public-page",
+  "checkedAtJst": "2026-10-22T13:25:09+09:00",
+  "sourceSha256": "3af39073541907363f4ce67e4db0fd3112c8470b511e62291a5ad397eaef83c4",
+  "title": "ハロウィン2026キャンペーン",
+  "startsAtJst": "2026-10-21T15:00:00+09:00",
+  "endsAtJst": "2026-11-01T23:59:00+09:00",
+  "style": "Classic",
+  "kikkakeEligibility": {
+    "normal": "Blue以上またはグレード対象外",
+    "campaign": "Green以上またはグレード対象外",
+    "meaning": "対象グレードの緩和。個別の利用可否・再利用間隔の解除を確認したものではない。"
+  },
+  "boostAppliesTo": "ハロウィン2026ブーストランキングのみ",
+  "notVerified": [
+    "本人の現在の利用可否",
+    "各ライバルの参加状況・同時点の盛り上がり度",
+    "盛り上がり度やミスサークル審査への効果",
+    "同条件の配信効率比較"
+  ],
+  "inferenceBoundary": "専用ランキングのブーストを別の指標の倍率として使いません。表示の差だけで努力の差や将来の通過を判断しません。"
+}

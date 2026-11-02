@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "kind": "image",
+  "platform": "instagram",
+  "recapId": "2026-10-25-morning-showroom",
+  "date": "2026-10-25",
+  "coverId": "mily-b238-08-20261025-morning-social-cover",
+  "coverTitle": "朝のスクショタイム",
+  "order": [
+    "mily-b238-08-20261025-morning-social-cover",
+    "mily-b238-09-20261025-morning-social-photo",
+    "mily-b238-10-20261025-morning-social-photo",
+    "mily-b238-11-20261025-morning-social-photo",
+    "mily-b238-12-20261025-morning-social-photo",
+    "mily-b238-13-20261025-morning-social-photo",
+    "mily-b238-14-20261025-morning-social-photo"
+  ],
+  "items": [
+    {
+      "id": "mily-b238-08-20261025-morning-social-cover",
+      "path": "/media/live/mily-b238-08-20261025-morning-social-cover.png",
+      "source": "/media/live/mily-b238-02-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "8e1d99e2ffd951c1733c1b0aafeedce9784fda2a289b0f19bc15dfbbc80b91af"
+    },
+    {
+      "id": "mily-b238-09-20261025-morning-social-photo",
+      "path": "/media/live/mily-b238-09-20261025-morning-social-photo.png",
+      "source": "/media/live/mily-b238-01-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "3ae896eb3c186d013297e9d8111f4da36f2892d1ee852e629082c9d57cda4758"
+    },
+    {
+      "id": "mily-b238-10-20261025-morning-social-photo",
+      "path": "/media/live/mily-b238-10-20261025-morning-social-photo.png",
+      "source": "/media/live/mily-b238-02-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "c87f3dd1c5ee987a140ed2064339ed20b39a15bd1dc8292d0ec0890686839cb6"
+    },
+    {
+      "id": "mily-b238-11-20261025-morning-social-photo",
+      "path": "/media/live/mily-b238-11-20261025-morning-social-photo.png",
+      "source": "/media/live/mily-b238-03-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "9d02770ca97367a54e01d3378d8400d7e8a24b884de8fa86cd273582898c11c5"
+    },
+    {
+      "id": "mily-b238-12-20261025-morning-social-photo",
+      "path": "/media/live/mily-b238-12-20261025-morning-social-photo.png",
+      "source": "/media/live/mily-b238-04-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "af52ee17c92517927e906e9448f463ce0e9592bb72598450742436c05274d846"
+    },
+    {
+      "id": "mily-b238-13-20261025-morning-social-photo",
+      "path": "/media/live/mily-b238-13-20261025-morning-social-photo.png",
+      "source": "/media/live/mily-b238-05-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "87f74a845f39aa0df62cc39e7815c4e94198c313ca66b600d46cdc908a03fef3"
+    },
+    {
+      "id": "mily-b238-14-20261025-morning-social-photo",
+      "path": "/media/live/mily-b238-14-20261025-morning-social-photo.png",
+      "source": "/media/live/mily-b238-06-20261025-morning-still.png",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "62ec74e8ccdfff74dddeef5891e0d938c05a2f050ddba5574ec064d6768f0b12"
+    }
+  ],
+  "coverReview": {
+    "sha256": "8e1d99e2ffd951c1733c1b0aafeedce9784fda2a289b0f19bc15dfbbc80b91af",
+    "reviewer": "ChatGPT: inspected approved photo and formal cover with square and portrait grid crops",
+    "reviewedAt": "2026-10-25T01:52:17+00:00",
+    "personBounds": [
+      40,
+      320,
+      680,
+      630
+    ],
+    "titleBounds": [
+      45,
+      208,
+      657,
+      249
+    ],
+    "gridCrops": [
+      [
+        0,
+        90,
+        720,
+        810
+      ],
+      [
+        22,
+        0,
+        697,
+        900
+      ]
+    ],
+    "observedText": [
+      "Mily",
+      "2026.10.25",
+      "朝のスクショタイム",
+      "非公式ファン制作"
+    ]
+  }
+}
