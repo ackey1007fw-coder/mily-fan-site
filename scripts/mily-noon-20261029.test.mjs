@@ -51,7 +51,8 @@ test("10/29 noon: only its own nonfinal screen values and correct archive order"
  assert.equal(observationPoints(data,"comments",data.dateJst).length,0);
  for(const [key,value] of [["stars",4724],["visits",215],["comments",174]])assert.equal(lastObservedValue(data,key,data.dateJst),value);
  assert.deepEqual(DAILY_STREAM_ENTRIES.find(e=>e.date==="2026-10-29"&&e.slot==="noon"),{date:"2026-10-29",slot:"noon",file:"mily-noon-20261029-aggregate.json",section:"noon-20261029",report:"/data-lab/reports/20261029-noon/"});
- assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.date==="2026-10-29").length,1);
+ assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.date==="2026-10-29").length,2);
+ assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.date==="2026-10-29"&&e.slot==="morning").length,1);
  assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.date==="2026-10-28"&&e.slot==="morning").length,1);
 });
 test("10/29 noon: report, provenance, noindex and privacy boundaries",()=>{
