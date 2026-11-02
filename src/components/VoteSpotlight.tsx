@@ -13,8 +13,9 @@ export function VoteSpotlight({
   if (!spotlight) return null;
 
   const isLive = spotlight.state === "live";
+  const isLiveVote = isLive && spotlight.kind !== "support";
   const headingClassName =
-    "mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl";
+    "mt-3 text-2xl font-bold leading-snug tracking-tight text-ink sm:text-3xl";
 
   return (
     <aside
@@ -22,13 +23,18 @@ export function VoteSpotlight({
       aria-live="polite"
       aria-atomic="true"
       data-vote-state={spotlight.kind === "support" ? undefined : spotlight.state}
-      className={`${className} overflow-hidden rounded-3xl border-2 border-apricot bg-gradient-to-br from-apricot-soft via-paper-card to-sage-soft/70 p-5 shadow-card sm:p-6`}
+      className={`${className} overflow-hidden rounded-3xl border-2 border-apricot ${isLiveVote ? "ring-2 ring-apricot-ink" : ""} bg-gradient-to-br from-apricot-soft via-paper-card to-sage-soft/70 p-5 shadow-card sm:p-6`}
     >
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className={`flex flex-col gap-5 ${isLiveVote ? "" : "sm:flex-row sm:items-center sm:justify-between"}`}>
         <div className="min-w-0">
-          <p className="inline-flex rounded-full bg-apricot-ink px-3 py-1 text-xs font-bold tracking-wide text-white">
-            {spotlight.eyebrow}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="inline-flex rounded-full bg-apricot-ink px-3 py-1 text-xs font-bold tracking-wide text-white">
+              {spotlight.eyebrow}
+            </p>
+            {isLiveVote ? (
+              <p className="text-sm font-bold text-apricot-ink">WEB投票 受付中</p>
+            ) : null}
+          </div>
           {headingAs === "h2" ? (
             <h2 className={headingClassName}>{spotlight.title}</h2>
           ) : (
@@ -40,7 +46,7 @@ export function VoteSpotlight({
         </div>
         <ExternalLink
           href={spotlight.action.url}
-          className={`inline-flex min-h-12 w-full shrink-0 items-center justify-center rounded-full px-6 py-3 text-base font-bold shadow-card sm:w-auto ${
+          className={`inline-flex min-h-12 w-full shrink-0 items-center justify-center rounded-full px-6 py-3 font-bold shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-apricot-ink ${isLiveVote ? "min-h-14 text-lg sm:text-xl" : "text-base sm:w-auto"} ${
             isLive
               ? "bg-apricot-ink text-white hover:bg-ink"
               : "border border-apricot bg-paper-card text-apricot-ink hover:bg-apricot-soft"

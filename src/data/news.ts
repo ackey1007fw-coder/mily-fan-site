@@ -28,6 +28,7 @@ import { tiktokPortraitVideo } from "./tiktokPortraitVideo.ts";
 import { tiktokKossoriVideo } from "./tiktokKossoriVideo.ts";
 import { tiktokGoodVibesVideo, type TikTokPostVideo } from "./tiktokGoodVibesVideo.ts";
 import { tiktokSeasideCircleSharedVideo } from "./tiktokSeasideCircleSharedVideo.ts";
+import { sscTikTokOct31 } from "./sscTikTokOct31.ts";
 import { tiktokAmiTokyoVideo } from "./tiktokAmiTokyoVideo.ts";
 import { tiktokAmiMeetVideo } from "./tiktokAmiMeetVideo.ts";
 import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
@@ -280,6 +281,34 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-10-31-fanroom-stream-update",
+    date: "2026-10-31",
+    sameDayOrder: 1552,
+    activityIds: ["live-stream"],
+    title: "夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内",
+    body: "【15:52更新・日本時間】今夜のハロウィンコスプレ配信は21:05〜21:50です。本人がファンルームで、夜枠の開始を21:00から21:05へ変更して案内しました。\n\n【朝の案内の履歴】05:29〜05:32には、早朝のきっかけ枠を取りやめ、昼14:45〜15:15へ移すと告知。当時は7:00〜7:30、14:45〜15:15、21:00〜21:50の3枠をすべて通常配信と案内していました。早起きして待っていた皆さんへのお詫びも伝えています。\n\n08:08には朝枠を盛り上げてくれた皆さんへ感謝し、次枠14:45〜15:15を再案内。夜枠ではハロウィンの仮装をすると予告しました。08:11の返信でも来訪・応援への感謝と、ファイナル進出への決意を伝えています。\n\n2026年10月31日時点の本人告知です。予定と実際の配信開始・終了は別で、正確な実施時刻は未確認です。変更は本人ファンルームの最新案内をご確認ください。",
+    source: "https://www.showroom-live.com/room/fan_club?room_id=573253",
+    sourceLabel: "本人ファンルーム（10月31日15:52更新／05:29〜05:32・08:08・08:11 JST）",
+  },
+  {
+    "id": "2026-10-31-stream-thanks-instagram-story",
+    "date": "2026-10-31",
+    "dateBasis": "confirmed-on",
+    "title": "応援への感謝と、ファイナルへの決意🩵 みりぃのStory",
+    "body": "配信の一場面とともに、みりぃが応援してくれる皆さんへの感謝を綴ったInstagram Story。「素敵な景色を見せてくれてありがとう」「絶対絶対ファイナル行こうね」という言葉が添えられています。\n\n提供された動画を音声なしで掲載しています。視聴者情報を守るため、配信画面の一部を非表示・ぼかしにしています。最新の投稿は本人のInstagramでご確認ください。\n\n10月31日は素材の受領・確認日です。元の投稿日・撮影日・配信日時は未確認です。動画内の「2日目」や数値は当時の表示で、現在の投票案内や確定成績ではありません。",
+    "url": "https://www.instagram.com/mily_chan36",
+    "sourceLabel": "Instagram Story（10月31日確認・投稿日未確認）",
+    "ctaLabel": "Instagramプロフィールを見る",
+    "media": {
+      "kind": "video",
+      "src": "/media/gallery/mily-b242-01-stream-thanks-story-v3.mp4",
+      "poster": "/media/gallery/mily-b242-01-stream-thanks-story-v3-poster.jpg",
+      "width": 480,
+      "height": 854,
+      "alt": "口元に手を添えるみりぃの配信映像と、応援への感謝・ファイナルへの言葉を載せたStory（音声なし・視聴者情報の一部を非表示）"
+    }
+  },
+  {
     id: "2026-10-29-x-miss-circle-semifinal-period",
     date: "2026-10-29",
     sameDayOrder: 1200,
@@ -356,9 +385,15 @@ export const news: NewsItem[] = [
     date: "2026-10-16",
     dateBasis: "confirmed-on",
     title: "湘南シーサイドサークルのTikTok投稿リンク📱",
-    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。",
+    body: "10月16日、サイトオーナーから湘南シーサイドサークル（@seasidecircle）のTikTok投稿リンクが共有されました。\n\n元の投稿日は未確認です。リンク先の動画内容、投稿文、みりぃ本人の登場有無を独立確認できていないため、サイト内での動画再生・ギャラリー登録は保留し、元投稿へのリンクのみ案内しています。\n\n10月31日に新たに共有された別のTikTok投稿も関連リンクに追加しました。こちらも投稿日、動画の内容や出演者は未確認です。",
     source: tiktokSeasideCircleSharedVideo.sourceUrl,
     sourceLabel: "湘南シーサイドサークルのTikTok投稿を開く",
+    additionalSources: [
+      {
+        label: "10月31日に共有された別のTikTok投稿を見る",
+        url: sscTikTokOct31.sourceUrl,
+      },
+    ],
   },
   {
     id: "2026-10-15-miss-circle-semifinal-advance",

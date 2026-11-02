@@ -53,7 +53,7 @@ describe("mily site identity", () => {
 
   it("keeps the unofficial disclaimer in the document title", async () => {
     const html = await read("index.html");
-    assert.match(html, /<title>三橋莉子（みりぃ）ファンサイト｜配信・活動情報（非公式）<\/title>/);
+    assert.match(html, /<title>三橋莉子（みりぃ）応援｜ENTRY 734 投票・配信予定（非公式ファンサイト）<\/title>/);
     assert.match(html, /ファン運営の非公式サイト/);
     assert.match(html, /本人運営ではありません/);
     assert.doesNotMatch(html, /公式・公認・本人運営ではありません/);

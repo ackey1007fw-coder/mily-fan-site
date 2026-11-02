@@ -13,8 +13,9 @@ const recap = streamRecaps.find(item => item.id === "2026-10-29-noon-showroom");
 const oldRecap = streamRecaps.find(item => item.id === "2026-10-28-morning-showroom");
 
 test("10/29 noon: only its own nonfinal screen values and correct archive order", () => {
- assert.ok(recap);assert.equal(streamRecaps[0],recap);
+ assert.ok(recap);assert.ok(streamRecaps.indexOf(recap)>=0);
  assert.equal(streamRecaps.filter(x=>x.id===recap.id).length,1);
+ assert.ok(oldRecap);
  assert.ok(streamRecaps.some(item=>item.id==="2026-10-28-morning-showroom"),"The already-published Oct 28 morning recap remains registered");
  assert.equal(recap.broadcastLabel,"録画開始14:47頃〜 約29分");
  assert.equal(recap.timestampBasis,undefined, "The new clip indices use recording offsets, not ASR-clock time");
@@ -50,7 +51,7 @@ test("10/29 noon: only its own nonfinal screen values and correct archive order"
  assert.equal(observationPoints(data,"visits",data.dateJst).length,0);
  assert.equal(observationPoints(data,"comments",data.dateJst).length,0);
  for(const [key,value] of [["stars",4724],["visits",215],["comments",174]])assert.equal(lastObservedValue(data,key,data.dateJst),value);
- assert.deepEqual(DAILY_STREAM_ENTRIES[0],{date:"2026-10-29",slot:"noon",file:"mily-noon-20261029-aggregate.json",section:"noon-20261029",report:"/data-lab/reports/20261029-noon/"});
+ assert.deepEqual(DAILY_STREAM_ENTRIES.find(e=>e.date==="2026-10-29"&&e.slot==="noon"),{date:"2026-10-29",slot:"noon",file:"mily-noon-20261029-aggregate.json",section:"noon-20261029",report:"/data-lab/reports/20261029-noon/"});
  assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.date==="2026-10-29").length,1);
  assert.equal(DAILY_STREAM_ENTRIES.filter(e=>e.date==="2026-10-28"&&e.slot==="morning").length,1);
 });

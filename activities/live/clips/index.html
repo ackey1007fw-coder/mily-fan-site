@@ -30,7 +30,15 @@
     <script type="application/ld+json">__SONG_CLIPS_JSON_LD__</script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet" />
+    </noscript>
   </head>
   <body>
     <div id="root"></div>
