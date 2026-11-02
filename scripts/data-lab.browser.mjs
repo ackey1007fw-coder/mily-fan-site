@@ -101,6 +101,13 @@ try {
             // Dates are no longer per-date accordions: the newest dates are open cards and older dates sit in one collapsed "過去の回".
             const openDay = async day => {
               if (await day.evaluate(el => Boolean(el.closest("details:not([open])")))) await page.locator("#daily-past > summary").click();
+              const dayId = await day.getAttribute("id");
+              await page.waitForFunction(id => {
+                const root = document.getElementById(id);
+                if (!root) return false;
+                const numbers = [...root.querySelectorAll(".daily-stream-number")];
+                return numbers.length > 0 && numbers.every(node => node.hasAttribute("data-missing"));
+              }, dayId);
             };
             assert.equal(await page.locator("#daily-stream-groups .daily-day").count(), 20, "Twenty broadcast dates from 10/14 through 11/2");
             const day1102 = page.locator("#daily-2026-11-02");
