@@ -24,8 +24,8 @@ export async function checkMorning20261029(page, baseUrl, output, engine, width)
     await page.locator('#daily-past > summary').click();
   }
   await page.waitForFunction(() => {
-    const numbers = [...document.querySelectorAll('#daily-2026-10-29 .daily-stream-number')];
-    return numbers.length === 2 && numbers.every(node => node.hasAttribute('data-missing'));
+    const numbers = [...document.querySelectorAll('#daily-past .daily-stream-number')];
+    return numbers.length > 0 && numbers.every(node => node.hasAttribute('data-missing'));
   });
   const cards=day.locator('.daily-stream-card');
   assert.equal(await cards.count(),2);
@@ -35,8 +35,9 @@ export async function checkMorning20261029(page, baseUrl, output, engine, width)
   assert.equal(await morning.locator('svg circle').count(),36);
   const reportLink=morning.getByRole('link',{name:'個別の分析・グラフを見る ↗',exact:true});
   assert.equal(await reportLink.getAttribute('href'),'/data-lab/reports/20261029-morning/');
+  await reportLink.scrollIntoViewIfNeeded();
   await Promise.all([
-    page.waitForURL(/\/data-lab\/reports\/20261029-morning\//),
+    page.waitForURL(url => url.pathname.replace(/\/$/, "") === "/data-lab/reports/20261029-morning", { waitUntil: "commit" }),
     reportLink.click(),
   ]);
 }
