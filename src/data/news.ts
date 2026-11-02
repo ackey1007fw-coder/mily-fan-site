@@ -59,6 +59,7 @@ import {
   campusGirlsFinalsExPatonVoteLink,
   campusGirlsPatonVoteLink,
   missCircleWebVoteLink,
+  missCircleSemifinalWebVoteLink,
 } from "./links.ts";
 import {
   eventStory20260821,
@@ -262,8 +263,8 @@ export type NewsItem = {
   relatedUrl?: string;
   url?: string;
   ctaLabel?: string;
-  /** Extra action buttons. Support-event URLs are shown only in their confirmed window. */
-  additionalCtas?: NewsSourceLink[];
+  /** Extra actions. linkId selects the confirmed window when rounds share a URL. */
+  additionalCtas?: (NewsSourceLink & { linkId?: string })[];
   media?: NewsMedia;
   /** NEWS-only outbound X embed, never propagated as an ActivityMediaItem. */
   xEmbed?: NewsXEmbed;
@@ -293,7 +294,7 @@ export const news: NewsItem[] = [
     ],
     additionalCtas: [
       { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
-      { label: missCircleWebVoteLink.label, url: missCircleWebVoteLink.url },
+      { label: missCircleSemifinalWebVoteLink.label, url: missCircleSemifinalWebVoteLink.url, linkId: missCircleSemifinalWebVoteLink.id },
     ],
   },
   {

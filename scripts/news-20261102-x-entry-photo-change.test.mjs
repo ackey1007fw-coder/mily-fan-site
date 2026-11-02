@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { news, sortNewsByDateDesc } from '../src/data/news.ts';
+import { missCircleWebVoteLink, missCircleSemifinalWebVoteLink } from '../src/data/links.ts';
+import { resolveNewsLinks } from '../src/lib/newsLinks.ts';
 
 test('2026-11-02 entry photo change NEWS is a single sourced Latest item', () => {
   const items = news.filter((n) => n.id === '2026-11-02-x-entry-photo-change');
@@ -30,6 +32,26 @@ test('2026-11-02 entry photo change NEWS is a single sourced Latest item', () =>
   );
   // 写真は添付しない（X/Instagram画像の転載・自動取得をしない）。
   assert.equal(item.media, undefined);
-  // 2026-11-02時点でLatestの先頭に立つ。
-  assert.equal(sortNewsByDateDesc(news)[0].id, '2026-11-02-x-entry-photo-change');
+  // 後日のNEWS追加で壊れないよう、この告知とそれ以前の記録で順序を確認する。
+  assert.equal(sortNewsByDateDesc(news.filter(n => n.date < item.date || n.id === item.id))[0].id, item.id);
+});
+
+test('photo notice uses the semifinal window while old NEWS retains its original expiry', () => {
+  const item = news.find(n => n.id === '2026-11-02-x-entry-photo-change');
+  const start = Date.parse('2026-10-29T12:00:00+09:00');
+  const end = Date.parse('2026-11-08T23:59:59.999+09:00');
+  const vote = item.additionalCtas.find(cta => cta.url === missCircleSemifinalWebVoteLink.url);
+  assert.equal(vote.linkId, missCircleSemifinalWebVoteLink.id);
+  const urlsAt = now => resolveNewsLinks(item, now).additionalCtas.map(cta => cta.url);
+  for (const now of [start, Date.parse('2026-11-02T18:50:00+09:00'), end]) {
+    assert.deepEqual(urlsAt(now), item.additionalCtas.map(cta => cta.url));
+  }
+  for (const now of [start - 1, end + 1]) {
+    assert.deepEqual(urlsAt(now), ['https://2026.misscircle.jp/entry/734']);
+  }
+  const legacy = { ...item, additionalCtas: [{ label: missCircleWebVoteLink.label, url: missCircleWebVoteLink.url }] };
+  assert.deepEqual(resolveNewsLinks(legacy, Date.parse('2026-11-02T18:50:00+09:00')), {});
+  for (const cta of [{ ...vote, linkId: 'unknown-link' }, { ...vote, url: 'https://example.com/invalid' }]) {
+    assert.deepEqual(resolveNewsLinks({ ...item, additionalCtas: [cta] }, start), {});
+  }
 });
