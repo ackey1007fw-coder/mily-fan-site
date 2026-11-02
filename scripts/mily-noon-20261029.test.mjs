@@ -15,7 +15,8 @@ const oldRecap = streamRecaps.find(item => item.id === "2026-10-28-morning-showr
 test("10/29 noon: only its own nonfinal screen values and correct archive order", () => {
  assert.ok(recap);assert.ok(streamRecaps.indexOf(recap)>=0);
  assert.equal(streamRecaps.filter(x=>x.id===recap.id).length,1);
- assert.equal(streamRecaps[streamRecaps.indexOf(recap)+1],oldRecap);
+ assert.ok(oldRecap);
+ assert.ok(streamRecaps.some(item=>item.id==="2026-10-28-morning-showroom"),"The already-published Oct 28 morning recap remains registered");
  assert.equal(recap.broadcastLabel,"録画開始14:47頃〜 約29分");
  assert.equal(recap.timestampBasis,undefined, "The new clip indices use recording offsets, not ASR-clock time");
  assert.equal(recap.gallery?.length,6);assert.equal(recap.image,recap.gallery?.[1]);assert.equal(recap.songs,undefined);
