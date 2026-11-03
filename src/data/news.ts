@@ -282,6 +282,35 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-11-03-x-miripoti-day6",
+    date: "2026-11-03",
+    activityIds: ["miss-circle"],
+    title: "セミファイナル6日目🍊 みりぽちのお時間です",
+    body: "11月3日0:00（日本時間）、みりぃがXで、日付が回って「みりぽち」の時間だと呼びかけました。MISS CIRCLE CONTEST 2026のセミファイナルは6日目、残り5日です。\n\n応援してくれる皆さんへの感謝と、投票報告を待っていることも伝えています。投稿には、今年初のみかん🍊を頬のそばに持った自撮り写真2枚が添えられています。\n\nWeb投票は11月8日まで、1日1票です。",
+    source: "https://x.com/Mily_chan36/status/2117270522547335564",
+    sourceLabel: "みりぃ本人のX投稿を見る（11月3日）",
+    additionalCtas: [
+      { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
+      { label: missCircleSemifinalWebVoteLink.label, url: missCircleSemifinalWebVoteLink.url, linkId: missCircleSemifinalWebVoteLink.id },
+    ],
+    media: {
+      kind: "image",
+      src: "/media/news/mily-b250-01-20261103-first-mikan-classroom.jpg",
+      width: 1152,
+      height: 2048,
+      alt: "ターコイズ色のトップスで、今年初のみかんを頬のそばに持ってほほ笑むみりぃ（教室の背景）",
+    },
+    additionalMedia: [
+      {
+        kind: "image",
+        src: "/media/news/mily-b250-02-20261103-first-mikan-wink.jpg",
+        width: 1152,
+        height: 2048,
+        alt: "白い壁の前で、今年初のみかんを頬のそばに持ってウインクするみりぃ",
+      },
+    ],
+  },
+  {
     id: "2026-11-02-x-entry-photo-change",
     date: "2026-11-02",
     activityIds: ["miss-circle"],
