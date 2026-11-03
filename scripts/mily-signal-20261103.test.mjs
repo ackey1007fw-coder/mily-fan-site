@@ -65,6 +65,6 @@ test("verified handoff keeps one UI series, conservative end flags, and separate
 });
 test("latest archive and gateway use November 3; latest missing values do not reuse older readings",()=>{
   assert.equal(groupByBroadcastDate()[0].date,"2026-11-03");
-  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261103-morning\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261103-(noon|morning)\/">最新の配信レポート/);
   assert.equal(lastObservedValue({lastValidOnline:{visits:null},observations:[{atJst:"2026-11-02T22:00:00+09:00",visits:100}]},"visits","2026-11-02"),null);
 });

@@ -44,6 +44,7 @@ function siteMetadataPlugin(): Plugin {
         .replaceAll("__DATA_LAB_20261025_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261025-night/`)
         .replaceAll("__DATA_LAB_20261102_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261102-night/`)
         .replaceAll("__DATA_LAB_20261103_MORNING_CANONICAL__", `${dataLabUrl()}reports/20261103-morning/`)
+        .replaceAll("__DATA_LAB_20261103_NOON_CANONICAL__", `${dataLabUrl()}reports/20261103-noon/`)
         .replaceAll("__DATA_LAB_20261102_NOON_CANONICAL__", `${dataLabUrl()}reports/20261102-noon/`)
         .replaceAll("__DATA_LAB_20261102_MORNING_CANONICAL__", `${dataLabUrl()}reports/20261102-morning/`)
         .replaceAll("__DATA_LAB_20261101_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261101-night/`)
@@ -227,6 +228,7 @@ export default defineConfig({
         dataLabNight20261025: "data-lab/reports/20261025-night/index.html",
         dataLabNight_20261102: "data-lab/reports/20261102-night/index.html",
         dataLabMorning_20261103: "data-lab/reports/20261103-morning/index.html",
+        dataLabNoon_20261103: "data-lab/reports/20261103-noon/index.html",
         dataLabNoon_20261102: "data-lab/reports/20261102-noon/index.html",
         dataLabMorning_20261102: "data-lab/reports/20261102-morning/index.html",
         dataLabNight_20261101: "data-lab/reports/20261101-night/index.html",

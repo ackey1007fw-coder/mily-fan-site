@@ -128,9 +128,14 @@ try {
             assert.equal(await day1102Night.locator('svg.daily-plot circle').count(),20);
             await page.locator('button[data-daily-metric="stars"]').click();
             const day1103 = page.locator('#daily-2026-11-03');
-            assert.equal(await day1103.locator('.daily-stream-card').count(),1);
-            assert.equal(await day1103.locator('.daily-stream-number').innerText(),"3,643");
-            assert.equal(await day1103.locator('svg.daily-plot circle').count(),42);
+            const day1103Cards = day1103.locator('.daily-stream-card');
+            assert.equal(await day1103Cards.count(),2,"Nov 3 has separate noon and morning cards");
+            await day1103Cards.nth(0).locator('[data-missing="true"]').first().waitFor({state:"visible"});
+            assert.equal(await day1103Cards.nth(0).locator('.daily-stream-number').innerText(),"未取得","Nov 3 noon has no UI counters; shows 未取得, not 0");
+            assert.equal(await day1103Cards.nth(0).locator('svg.daily-plot circle').count(),0);
+            await day1103Cards.nth(1).locator('[data-missing="false"]').first().waitFor({state:"visible"});
+            assert.equal(await day1103Cards.nth(1).locator('.daily-stream-number').innerText(),"3,643");
+            assert.equal(await day1103Cards.nth(1).locator('svg.daily-plot circle').count(),42);
             const day1102Noon = day1102Cards.nth(1);
             await day1102Noon.locator('[data-missing="false"]').first().waitFor({ state: "visible" });
             assert.equal(await day1102Noon.locator(".daily-stream-number").first().innerText(), "3,360", "Nov 2 noon shows the last valid star display before the end");
