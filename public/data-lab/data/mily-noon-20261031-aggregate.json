@@ -2270,7 +2270,7 @@
     "endEvidenceNote": "ui-summaryの更新時刻は終了証拠より約22秒前、後発receiptは3回offline。更新時刻だけでは生成順や判定の正当性を確定できず、不一致として残す。"
   },
   "measurementNote": "9指標は終了前の最後の有効画面表示（15:21:26.341 JST）：きら星2,751・総訪問表示142・コメント252・初訪問4・再訪問5・新規フォロー0・その他無料190・星100人数27・おすすめコメント人数21。verified_final=false・source_event_counts_verified=false・end_confirmed=falseで、確定合計・公式イベントpt・実贈呈数・ユニーク視聴者数ではない。",
-  "comparisonNote": "観測点を公開していないため推移グラフは未取得表示。条件の異なる他の枠と優劣比較しない。",
+  "comparisonNote": "保存記録から画面進行183時点を追補。総訪問null19点と232.460秒の欠測、表示値の減少を保持し、点の間を補間しない。条件の異なる他の枠と優劣比較しない。",
   "recap": {
     "liveRecapUrl": "/activities/live/#recap-2026-10-31-noon-showroom",
     "publishedStills": 0,
