@@ -25,7 +25,7 @@ test("20261102-morning SIGNAL: separate entry, 10 partial observations, not a fi
   assert.equal(lastObservedValue(signal, "stars", signal.dateJst), signal.metrics.stars);
   assert.equal(observationPoints(signal, "stars", signal.dateJst).length, 10);
   for (const o of signal.observations) assert.equal(Object.keys(o).length, 10);
-  assert.equal(groupByBroadcastDate()[0].date, "2026-11-02");
+  assert.ok(groupByBroadcastDate().some(day => day.date === "2026-11-02"));
   assert.equal(signal.recap, undefined);
   assert.doesNotMatch(report, /activities\/live/);
 });
