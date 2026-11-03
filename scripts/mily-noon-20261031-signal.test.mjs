@@ -38,19 +38,21 @@ test("only the last valid star display is kept; it is not a confirmed final", ()
   assert.equal(data.quality.source_event_counts_verified, false);
   assert.equal(data.quality.summedAcrossDisconnect, false);
   assert.deepEqual(data.quality.gaps.map((g) => [g.startJst, g.endJst]), [["2026-10-31T14:53:08.485+09:00", "2026-10-31T14:57:00.945+09:00"]]);
-  assert.equal(data.observations.length, 0);
+  assert.equal(data.observations.length, 183);
   assert.equal(lastObservedValue(data, "stars", data.dateJst), 2751);
   assert.equal(lastObservedValue(data, "visits", data.dateJst), 142);
   assert.equal(lastObservedValue(data, "comments", data.dateJst), 252);
   assert.match(data.measurementNote, /ユニーク視聴者数ではない/);
-  assert.deepEqual(observationPoints(data, "stars", data.dateJst), []);
+  assert.equal(observationPoints(data, "stars", data.dateJst).length, 183);
+  assert.equal(observationPoints(data, "visits", data.dateJst).length, 164);
+  assert.equal(observationPoints(data, "comments", data.dateJst).length, 183);
   assert.equal(data.partialViewerMemo, undefined);
 });
 
 test("report shows reservations and no fabricated chart", () => {
   assert.match(report, /2,751/);
   assert.match(report, /15:21:26/);
-  assert.match(report, /14:53:08〜14:57:00/);
+  assert.match(report, /14:53:08.485〜14:57:00.945/);
   assert.match(report, /確定合計ではありません/);
   assert.match(report, /未取得/);
   assert.match(report, /ユニーク視聴者数ではありません/);

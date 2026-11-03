@@ -1,5 +1,7 @@
 // Published anonymous snapshots only. No private dashboard, live API, or inferred values.
 export const DAILY_STREAM_ENTRIES = Object.freeze([
+  {"date":"2026-11-03","slot":"morning","file":"mily-morning-20261103-aggregate.json","section":"morning-20261103","report":"/data-lab/reports/20261103-morning/"},
+  {"date":"2026-11-02","slot":"night","file":"mily-night-20261102-aggregate.json","section":"night-20261102","report":"/data-lab/reports/20261102-night/"},
   {date:"2026-11-02",slot:"noon",file:"mily-noon-20261102-aggregate.json",section:"noon-20261102",report:"/data-lab/reports/20261102-noon/"},
   {date:"2026-11-02",slot:"morning",file:"mily-morning-20261102-aggregate.json",section:"morning-20261102",report:"/data-lab/reports/20261102-morning/"},
   {date:"2026-11-01",slot:"night",file:"mily-night-20261101-aggregate.json",section:"night-20261101",report:"/data-lab/reports/20261101-night/"},
@@ -112,6 +114,9 @@ export function lastObservedValue(data, metric, date) {
   if (!(metric in METRICS)) return null;
   // "earlyPartialObservation" must never be promoted to a last valid result.
   const last = data?.referenceSnapshot?.metrics ?? data?.lastValidOnline ?? data?.observed_screen;
+  // An explicitly missing latest reading must not be replaced by an older value.
+  const latestKeys = metric === "visits" ? ["visits", "total_visits"] : [metric];
+  if (last && latestKeys.some((key) => Object.hasOwn(last, key))) return metricValue(last, metric);
   const value = metricValue(last, metric);
   if (value !== null) return value;
   const points = observationPoints(data, metric, date);

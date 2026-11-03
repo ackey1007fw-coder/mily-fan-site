@@ -10,10 +10,10 @@ const csv = read("public/data-lab/data/mily-noon-20261102-observations.csv").tri
 
 test("20261102-noon SIGNAL: separate entry above the same-day morning, 40 observations, not a final", () => {
   const entries = DAILY_STREAM_ENTRIES.filter(e => e.date === "2026-11-02");
-  assert.deepEqual(entries.map(e => e.slot), ["noon", "morning"]);
-  const day = groupByBroadcastDate()[0];
+  assert.deepEqual(entries.map(e => e.slot), ["night", "noon", "morning"]);
+  const day = groupByBroadcastDate().find(day => day.date === "2026-11-02");
   assert.equal(day.date, "2026-11-02");
-  assert.deepEqual(day.entries.map(e => e.slot), ["noon", "morning"]);
+  assert.deepEqual(day.entries.map(e => e.slot), ["night", "noon", "morning"]);
   assert.equal(signal.liveId, 23634935);
   assert.equal(signal.session, "noon");
   assert.equal(signal.observations.length, 40);
