@@ -1,0 +1,298 @@
+{
+ "schema": "mily-anonymous-live-observations-v1",
+ "nonOfficial": true,
+ "roomId": 573253,
+ "liveId": 23639251,
+ "dateJst": "2026-11-03",
+ "session": "noon",
+ "format": "showroom",
+ "label": "11月3日昼のSHOWROOM配信",
+ "eventName": "同回の公開API・公開WebSocket記録。画面カウンター（きら星・総訪問表示・コメント表示）は取得していません。他の枠・他の取得経路とは合算しません。",
+ "sourceDescription": "SHOWROOM公開APIの定期取得と公開WebSocketによる自動記録から、匿名の件数・時刻・累積ptだけを採用。個人別情報・コメント本文・原ログは含みません。",
+ "verifiedAtJst": "2026-11-03",
+ "finalServiceValueVerified": false,
+ "completeCoverageConfirmed": false,
+ "timingComparisonEligible": false,
+ "lastValidOnline": {
+  "atJst": null,
+  "stars": null,
+  "visits": null,
+  "comments": null,
+  "firstVisits": null,
+  "repeatVisits": null,
+  "newFollows": null,
+  "otherFree": null,
+  "star100People": null,
+  "recommendedCommentPeople": null,
+  "confirmedFinal": false
+ },
+ "metrics": {
+  "stars": null,
+  "visits": null,
+  "comments": null,
+  "firstVisits": null,
+  "repeatVisits": null,
+  "newFollows": null,
+  "otherFree": null,
+  "star100People": null,
+  "recommendedCommentPeople": null
+ },
+ "measurementNote": "画面カウンター9指標はこの回の取得経路にないため未取得（null）。0ではありません。",
+ "comparisonNote": "API・WebSocketの記録は画面カウンターと定義が異なるため、他の回の画面参考値と並べたり合算したりしません。逆算・0埋め・補間をしません。",
+ "apiRecord": {
+  "status": "確定（終了確認済み）",
+  "end_confirmed": true,
+  "liveStartedAtJst": "2026-11-03T14:45:33+09:00",
+  "liveEndDetectedAtJst": "2026-11-03T15:16:55+09:00",
+  "recordingStartedAtJst": "2026-11-03T14:46:08+09:00",
+  "uncapturedStart": {
+   "startJst": "2026-11-03T14:45:33+09:00",
+   "endJst": "2026-11-03T14:46:08+09:00",
+   "seconds": 35,
+   "note": "配信開始から記録開始までの推移は未取得（null）。0ではありません。"
+  },
+  "commentLogEntries": 187,
+  "commentLogNote": "公開APIのコメント履歴と公開WebSocketで記録した個別コメントの件数（運営メッセージ除く、数字だけのカウントコメントを含む）。画面のコメント表示カウンターとは別の値です。完全捕捉は未検証。",
+  "giftLogEntries": 137,
+  "giftLogNote": "個別ギフトの記録件数（1件に複数個を含む場合あり）。贈呈個数・ptではなく、画面の集計値とは合算しません。完全捕捉は未検証。",
+  "eventPoints": {
+   "start": {
+    "atJst": "2026-11-03T14:46:08+09:00",
+    "rank": 3,
+    "point": 1431989
+   },
+   "end": {
+    "atJst": "2026-11-03T15:16:40+09:00",
+    "rank": 3,
+    "point": 1446011
+   },
+   "pointDifference": 14022,
+   "note": "公開APIのイベント累積ptを2回読んだ差。14:45:33〜14:46:08のptは未取得。公式に発表された枠単体のptではありません。"
+  },
+  "eventObservations": [
+   {
+    "atJst": "2026-11-03T14:50:22+09:00",
+    "rank": 3,
+    "point": 1431989
+   },
+   {
+    "atJst": "2026-11-03T14:54:33+09:00",
+    "rank": 3,
+    "point": 1434736
+   },
+   {
+    "atJst": "2026-11-03T14:58:44+09:00",
+    "rank": 3,
+    "point": 1436398
+   },
+   {
+    "atJst": "2026-11-03T15:02:56+09:00",
+    "rank": 3,
+    "point": 1437772
+   },
+   {
+    "atJst": "2026-11-03T15:07:12+09:00",
+    "rank": 3,
+    "point": 1439268
+   },
+   {
+    "atJst": "2026-11-03T15:11:24+09:00",
+    "rank": 3,
+    "point": 1442028
+   },
+   {
+    "atJst": "2026-11-03T15:15:38+09:00",
+    "rank": 3,
+    "point": 1446011
+   }
+  ],
+  "viewNum": {
+   "field": "view_num",
+   "sourceApi": "room/profile",
+   "meaning": "未確認",
+   "meaningNote": "SHOWROOM公開APIの項目名はview_num。公式の定義は未確認で、時間とともに増えるだけの値でした。同時視聴者数・ユニーク人数としては扱いません。",
+   "lastObserved": {
+    "atJst": "2026-11-03T15:15:55+09:00",
+    "value": 516
+   },
+   "maxObserved": 516,
+   "observations": [
+    {
+     "atJst": "2026-11-03T14:46:30+09:00",
+     "view_num": 62
+    },
+    {
+     "atJst": "2026-11-03T14:47:19+09:00",
+     "view_num": 82
+    },
+    {
+     "atJst": "2026-11-03T14:48:08+09:00",
+     "view_num": 97
+    },
+    {
+     "atJst": "2026-11-03T14:48:57+09:00",
+     "view_num": 99
+    },
+    {
+     "atJst": "2026-11-03T14:49:46+09:00",
+     "view_num": 109
+    },
+    {
+     "atJst": "2026-11-03T14:50:40+09:00",
+     "view_num": 123
+    },
+    {
+     "atJst": "2026-11-03T14:51:29+09:00",
+     "view_num": 126
+    },
+    {
+     "atJst": "2026-11-03T14:52:19+09:00",
+     "view_num": 139
+    },
+    {
+     "atJst": "2026-11-03T14:53:08+09:00",
+     "view_num": 142
+    },
+    {
+     "atJst": "2026-11-03T14:53:58+09:00",
+     "view_num": 145
+    },
+    {
+     "atJst": "2026-11-03T14:54:50+09:00",
+     "view_num": 154
+    },
+    {
+     "atJst": "2026-11-03T14:55:40+09:00",
+     "view_num": 181
+    },
+    {
+     "atJst": "2026-11-03T14:56:29+09:00",
+     "view_num": 188
+    },
+    {
+     "atJst": "2026-11-03T14:57:19+09:00",
+     "view_num": 194
+    },
+    {
+     "atJst": "2026-11-03T14:58:09+09:00",
+     "view_num": 195
+    },
+    {
+     "atJst": "2026-11-03T14:59:01+09:00",
+     "view_num": 213
+    },
+    {
+     "atJst": "2026-11-03T14:59:51+09:00",
+     "view_num": 228
+    },
+    {
+     "atJst": "2026-11-03T15:00:41+09:00",
+     "view_num": 234
+    },
+    {
+     "atJst": "2026-11-03T15:01:31+09:00",
+     "view_num": 257
+    },
+    {
+     "atJst": "2026-11-03T15:02:21+09:00",
+     "view_num": 279
+    },
+    {
+     "atJst": "2026-11-03T15:03:14+09:00",
+     "view_num": 283
+    },
+    {
+     "atJst": "2026-11-03T15:04:05+09:00",
+     "view_num": 289
+    },
+    {
+     "atJst": "2026-11-03T15:04:55+09:00",
+     "view_num": 306
+    },
+    {
+     "atJst": "2026-11-03T15:05:46+09:00",
+     "view_num": 321
+    },
+    {
+     "atJst": "2026-11-03T15:06:37+09:00",
+     "view_num": 323
+    },
+    {
+     "atJst": "2026-11-03T15:07:29+09:00",
+     "view_num": 325
+    },
+    {
+     "atJst": "2026-11-03T15:08:20+09:00",
+     "view_num": 329
+    },
+    {
+     "atJst": "2026-11-03T15:09:10+09:00",
+     "view_num": 343
+    },
+    {
+     "atJst": "2026-11-03T15:10:00+09:00",
+     "view_num": 357
+    },
+    {
+     "atJst": "2026-11-03T15:10:50+09:00",
+     "view_num": 389
+    },
+    {
+     "atJst": "2026-11-03T15:11:42+09:00",
+     "view_num": 458
+    },
+    {
+     "atJst": "2026-11-03T15:12:33+09:00",
+     "view_num": 479
+    },
+    {
+     "atJst": "2026-11-03T15:13:23+09:00",
+     "view_num": 486
+    },
+    {
+     "atJst": "2026-11-03T15:14:13+09:00",
+     "view_num": 496
+    },
+    {
+     "atJst": "2026-11-03T15:15:04+09:00",
+     "view_num": 511
+    },
+    {
+     "atJst": "2026-11-03T15:15:55+09:00",
+     "view_num": 516
+    }
+   ],
+   "excluded": "終了後の0は配信中の値ではないため不採用。"
+  }
+ },
+ "quality": {
+  "savedSampleRows": 36,
+  "validRows": 36,
+  "publishedObservationPoints": 0,
+  "counterSource": "public_api_and_websocket_logger",
+  "uiCountersCaptured": false,
+  "gaps": [
+   {
+    "startJst": "2026-11-03T14:45:33+09:00",
+    "endJst": "2026-11-03T14:46:08+09:00",
+    "seconds": 35,
+    "note": "配信開始から記録開始までの空き"
+   }
+  ],
+  "regressions": [],
+  "liveEndDetected": true,
+  "liveEndDetectedAtJst": "2026-11-03T15:16:55+09:00",
+  "end_confirmed": true,
+  "verified_final": false,
+  "missingDataIsNotZeroPerformance": true,
+  "interpolated": false,
+  "zeroFilled": false,
+  "displayLabel": "API記録は確定（終了確認済み）／画面カウンターは未取得",
+  "sourceReconciliation": {
+   "selectedSeries": "public_api_and_websocket_log",
+   "otherSeriesMerged": false,
+   "note": "画面カウンター系列とは定義が異なるため接合・合算していません。"
+  }
+ },
+ "observations": []
+}
