@@ -51,30 +51,28 @@ const report = read("data-lab/reports/20261101-morning/index.html");
 const labIndex = read("data-lab/index.html");
 const csv = read("public/data-lab/data/mily-morning-20261101-observations.csv").trim().split("\n");
 
-test("11/1 morning SIGNAL: recovered 195 screen observations, not a final", () => {
+test("11/1 morning SIGNAL: newest separate entry with 21 partial observations, not a final", () => {
   const entries = DAILY_STREAM_ENTRIES.filter(e => e.date === "2026-11-01" && e.slot === "morning");
   assert.equal(entries.length, 1);
   assert.ok(groupByBroadcastDate().some(d => d.date === "2026-11-01"));
   assert.equal(signal.liveId, 23629786);
-  assert.equal(signal.observations.length, 195);
-  assert.equal(csv.length, 196);
-  assert.deepEqual(signal.metrics, { stars: 3397, visits: 293, comments: 265, firstVisits: 5, repeatVisits: 11, newFollows: 1, otherFree: 761, star100People: 31, recommendedCommentPeople: 33 });
-  assert.equal(signal.lastValidOnline.atJst, "2026-11-01T06:36:43.974+09:00");
+  assert.equal(signal.observations.length, 21);
+  assert.equal(csv.length, 22);
+  assert.deepEqual(signal.metrics, { stars: 2453, visits: 121, comments: 143, firstVisits: 2, repeatVisits: 2, newFollows: 0, otherFree: 711, star100People: 22, recommendedCommentPeople: 16 });
+  assert.equal(signal.lastValidOnline.atJst, "2026-11-01T06:21:58+09:00");
   assert.equal(signal.lastValidOnline.confirmedFinal, false);
   assert.equal(signal.finalServiceValueVerified, false);
   assert.equal(signal.completeCoverageConfirmed, false);
   assert.equal(signal.timingComparisonEligible, false);
-  assert.equal(signal.quality.excludedRegressionFlagRows, 28);
-  assert.equal(signal.quality.end_confirmed, true);
-  assert.equal(lastObservedValue(signal, "stars", signal.dateJst), 3397);
-  assert.equal(observationPoints(signal, "stars", signal.dateJst).length, 195);
-  assert.equal(observationPoints(signal, "visits", signal.dateJst).length, 173);
+  assert.equal(signal.quality.gaps.length, 3);
+  assert.equal(lastObservedValue(signal, "stars", signal.dateJst), 2453);
+  assert.equal(observationPoints(signal, "stars", signal.dateJst).length, 21);
   for (const o of signal.observations) assert.equal(Object.keys(o).length, 10);
 });
 
 test("11/1 morning SIGNAL: report, lab home and routes stay consistent and anonymous", () => {
-  assert.match(report, /最後の画面参考値で、確定合計ではありません/);
-  assert.match(report, /06:36:43.974/);
+  assert.match(report, /途中の参考値で、確定合計ではありません/);
+  assert.match(report, /6:21:58以降/);
   assert.match(report, /noindex,nofollow,noarchive/);
   assert.ok(labIndex.indexOf('id="morning-20261101"') < labIndex.indexOf('id="noon-20261031"'));
   assert.match(labIndex, /href="#morning-20261101">11\/1 朝/);
