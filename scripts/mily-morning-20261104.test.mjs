@@ -16,7 +16,7 @@ test("11/4 morning: newest card above the 11/3 night, recording-relative timesta
   assert.equal(recap.dateLabel, "2026.11.04（水）");
   assert.equal(recap.broadcastLabel, "6:41頃〜 約35分");
   assert.equal(recap.timestampBasis, undefined);
-  assert.match(recap.transcriptionNote, /正式な終了時刻は確認していません/);
+  assert.match(recap.transcriptionNote, /配信全区間の収録と正式な終了時刻は確認していません/);
   assert.match(recap.transcriptionNote, /歌唱場面の動画は掲載していません/);
 });
 
