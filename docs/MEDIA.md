@@ -1,3 +1,23 @@
+## b254：2026-11-04夜 LIVE STREAM写真10枚
+
+- **承認範囲**：オーナーが11月4日夜（20:50枠）の配信まとめ追加を依頼（2026-11-04 JST）。対象は当該SHOWROOM夜配信の**LIVE STREAM記事**に限定。Draft PRでオーナー確認を経てからmerge判断する。
+- **正本**：同回の保存済み録画（約61分・開始から終了まで）の実フレーム。
+- **写真**：1/2縮小のみ、JPEG quality90。顔・髪・手・身体の生成・補正・置換なし。06/07はスクショタイムで手に持った付箋（視聴者名）が写らないよう顔部分のみ切り出し。背景の付箋はそのまま。
+- **公開しないもの**：全編録画、動画・音声、ASR全記録、視聴者名・コメント、私生活の細部、非公開パス。
+
+| # | 公開ファイル（public/media/live/） | 録画内の目安 | Bytes | SHA256 |
+| --- | --- | --- | ---: | --- |
+| 01 | `mily-b254-01-20261104-night-opening-smile.jpg` | 0:01:40 | 29443 | `752accf50656f5545cce36ff313fbc6a7c359e90fd1eae298340b598b23f0af7` |
+| 02 | `mily-b254-02-20261104-night-pointing-smile.jpg` | 0:03:00 | 28713 | `dcb2de789d69e7fac5e0eadcaeaf5afe454187a505e49ad8bbdfbf5d17459bbf` |
+| 03 | `mily-b254-03-20261104-night-bunny-ears.jpg` | 0:14:30 | 31726 | `d539d9fc0afbf442ee51f91f4d989b1fee9a33f125c16c95474c44a925efe595` |
+| 04 | `mily-b254-04-20261104-night-heart-hands.jpg` | 0:25:45 | 28366 | `89b1187b1ed6bc7383dff0a346fdc41c5bfea671fee25abaee57c849a470126e` |
+| 05 | `mily-b254-05-20261104-night-shy-hands.jpg` | 0:27:44 | 28965 | `099c929e6caed23b4e2591f756d60e17cf54e42f57e37e5fa215910c4f2c1919` |
+| 06 | `mily-b254-06-20261104-night-pose-facecrop.jpg` | 0:33:07 | 18539 | `058d5a0e8ac88ec63aac64d723657a95119e66936c633652aa5ef0fa03eddb66` |
+| 07 | `mily-b254-07-20261104-night-pose2-facecrop.jpg` | 0:52:48 | 18108 | `8295c6318a33b957b189000987992ee6255ebb1c154024e4bf8e813ece502d17` |
+| 08 | `mily-b254-08-20261104-night-hand-cheek.jpg` | 0:57:25 | 28979 | `4ce50c7c9fffef72b6817127edb4d0ed7e15a5017862041f4b4c75f08439df31` |
+| 09 | `mily-b254-09-20261104-night-wave-smile.jpg` | 0:59:54 | 28253 | `0e65cd1984d4e251478e871ffebdac3e1f02d52074d1a8a8177b8a9f7810daed` |
+| 10 | `mily-b254-10-20261104-night-bye-bunny.jpg` | 1:00:34 | 31454 | `2d74d71a8f76f53e2a5fa6113c25315ac9904aa625775e8bc501a2cfe2928aeb` |
+
 ## b253：2026-11-04昼 LIVE STREAM写真10枚
 
 - **承認範囲**：オーナーが11月4日昼（14:45枠）のスクショ・切り抜き・サイト更新を依頼（2026-11-04 JST）。対象は当該SHOWROOM昼配信の**LIVE STREAM記事**に限定。Draft PRでオーナー確認を経てからmerge判断する。

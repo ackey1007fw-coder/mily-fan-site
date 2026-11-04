@@ -1,3 +1,8 @@
+# 2026-11-04 夜配信（LIVE STREAM）
+
+- オーナー依頼（2026-11-04 JST）により、11月4日夜のSHOWROOM配信をLIVE STREAMへ1記事追加。写真10枚はb254（`docs/MEDIA.md`）。MILY SIGNALの同回は#591で反映済み（`/data-lab/reports/20261104-night/` へリンク）。
+- 録画は20:50頃開始・約61分。本文は切り抜き区間の自動文字起こしを非逐語で要約し、リスナーや個人の名前を出さない。動画はサイトに載せない。`songs`・`ranking` は空。
+
 # 2026-11-04 昼配信（LIVE STREAM）
 
 - オーナー依頼（2026-11-04 JST）により、11月4日昼のSHOWROOM配信をLIVE STREAMへ1記事追加。写真10枚はb253（`docs/MEDIA.md`）。MILY SIGNALの同回の観測点は#589で反映済み。

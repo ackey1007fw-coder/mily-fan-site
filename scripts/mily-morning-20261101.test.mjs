@@ -9,8 +9,8 @@ const text = JSON.stringify(recap);
 
 test("11/1 morning: newest card, recording-relative timestamps, no invented end time", () => {
   // The 11/2 noon card and the same-day noon and night cards (later slots) sit above the morning card.
-  assert.equal(streamRecaps[6], recap);
-  assert.equal(streamRecaps[4].date, "2026-11-01");
+  assert.equal(streamRecaps[7], recap);
+  assert.equal(streamRecaps[5].date, "2026-11-01");
   assert.equal(recap.id, "2026-11-01-morning-showroom");
   assert.equal(recap.dateLabel, "2026.11.01（日）");
   assert.equal(recap.broadcastLabel, "6:06頃〜 約30分");
