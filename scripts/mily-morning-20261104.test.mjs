@@ -8,9 +8,9 @@ import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
 const read = p => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 const text = JSON.stringify(recap);
 
-test("11/4 morning: newest card above the 11/3 night, recording-relative timestamps", () => {
-  assert.equal(streamRecaps[0], recap);
-  assert.equal(streamRecaps[1], night);
+test("11/4 morning: below the 11/4 noon card, above the 11/3 night, recording-relative timestamps", () => {
+  assert.equal(streamRecaps[1], recap);
+  assert.equal(streamRecaps[2], night);
   assert.equal(recap.id, "2026-11-04-morning-showroom");
   assert.equal(recap.dateLabel, "2026.11.04（水）");
   assert.equal(recap.broadcastLabel, "6:41頃〜 約35分");
