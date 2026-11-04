@@ -39,6 +39,7 @@ test("11/4 morning: all 16 previously published b252 URLs have an exact privacy 
   assert.equal(filenames.length, 16);
   const routes = JSON.parse(read("vercel.json")).rewrites;
   assert.equal(routes.length, 16);
+  assert.match(JSON.parse(read("package.json")).scripts.build, /vite build && node scripts\/withhold-b252-media\.mjs$/);
   for (const name of filenames) {
     const dir = name.endsWith("mp4") ? "live-clips" : "live";
     assert.deepEqual(routes.find(r => r.source === `/media/${dir}/${name}`), {
