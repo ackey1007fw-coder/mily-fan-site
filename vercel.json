@@ -15,22 +15,103 @@
     {
       "source": "/media/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "DENY" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/media/live/mily-b252-01-20261104-morning-hand-forehead-morning.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-02-20261104-morning-hood-hands-giggle.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-03-20261104-morning-hood-smile.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-04-20261104-morning-nyan-hands-cheeks.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-05-20261104-morning-nyan-hands-behind-head.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-06-20261104-morning-hood-hands-cheeks.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-07-20261104-morning-nyan-paws.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-08-20261104-morning-punk-nyan-point.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-09-20261104-morning-hands-together-wink.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-10-20261104-morning-closing-cheeks-smile.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-64-20261104-morning-energy-charge-cover.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-65-20261104-morning-vote-appeal-cover.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live/mily-b252-66-20261104-morning-deko-dashi-cover.jpg",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live-clips/mily-b252-64-20261104-morning-energy-charge.mp4",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live-clips/mily-b252-65-20261104-morning-vote-appeal.mp4",
+      "destination": "/api/mily-b252-media-unavailable"
+    },
+    {
+      "source": "/media/live-clips/mily-b252-66-20261104-morning-deko-dashi.mp4",
+      "destination": "/api/mily-b252-media-unavailable"
     }
   ]
 }
