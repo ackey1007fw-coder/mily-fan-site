@@ -127,7 +127,15 @@ try {
             assert.equal(await day1102Night.locator('.daily-stream-number').innerText(),"118");
             assert.equal(await day1102Night.locator('svg.daily-plot circle').count(),20);
             await page.locator('button[data-daily-metric="stars"]').click();
+            const day1104 = page.locator('#daily-2026-11-04');
+            await openDay(day1104);
+            const day1104Cards = day1104.locator('.daily-stream-card');
+            assert.equal(await day1104Cards.count(),1,"Nov 4 has one morning card");
+            await day1104Cards.nth(0).locator('[data-missing="false"]').first().waitFor({state:"visible"});
+            assert.equal(await day1104Cards.nth(0).locator('.daily-stream-number').innerText(),"3,975","Nov 4 morning shows the last valid star display before reset");
+            assert.equal(await day1104Cards.nth(0).locator('svg.daily-plot circle').count(),65);
             const day1103 = page.locator('#daily-2026-11-03');
+            await openDay(day1103);
             const day1103Cards = day1103.locator('.daily-stream-card');
             assert.equal(await day1103Cards.count(),3,"Nov 3 has separate night, noon and morning cards");
             await day1103Cards.nth(0).locator('[data-missing="false"]').first().waitFor({state:"visible"});
