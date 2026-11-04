@@ -40,5 +40,5 @@ test("2026-11-03 noon: report and JSON keep viewers anonymous and labels honest"
   assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-03").entries.map(x=>x.slot),["night","noon","morning"]);
   assert.equal(e.length,3);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261103-noon/index.html"));
-  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261104-morning|20261103-(night|noon))\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261104-noon|20261104-morning|20261103-(night|noon))\/">最新の配信レポート/);
 });
