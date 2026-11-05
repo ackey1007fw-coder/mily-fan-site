@@ -130,10 +130,13 @@ try {
             const day1105 = page.locator('#daily-2026-11-05');
             await openDay(day1105);
             const day1105Cards = day1105.locator('.daily-stream-card');
-            assert.equal(await day1105Cards.count(),1,"Nov 5 has the morning card");
+            assert.equal(await day1105Cards.count(),2,"Nov 5 has the noon and morning cards");
             await day1105Cards.nth(0).locator('[data-missing="false"]').first().waitFor({state:"visible"});
-            assert.equal(await day1105Cards.nth(0).locator('.daily-stream-number').innerText(),"3,564","Nov 5 morning shows the last valid star display before reset");
-            assert.equal(await day1105Cards.nth(0).locator('svg.daily-plot circle').count(),99);
+            assert.equal(await day1105Cards.nth(0).locator('.daily-stream-number').innerText(),"4,222","Nov 5 noon shows the last valid star display before reset");
+            assert.equal(await day1105Cards.nth(0).locator('svg.daily-plot circle').count(),48);
+            await day1105Cards.nth(1).locator('[data-missing="false"]').first().waitFor({state:"visible"});
+            assert.equal(await day1105Cards.nth(1).locator('.daily-stream-number').innerText(),"3,564","Nov 5 morning shows the last valid star display before reset");
+            assert.equal(await day1105Cards.nth(1).locator('svg.daily-plot circle').count(),99);
             const day1104 = page.locator('#daily-2026-11-04');
             await openDay(day1104);
             const day1104Cards = day1104.locator('.daily-stream-card');

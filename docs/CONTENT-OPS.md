@@ -1,3 +1,8 @@
+# 2026-11-05 昼配信（LIVE STREAM）
+
+- オーナー依頼（2026-11-05 JST）により、11月5日昼のSHOWROOM配信をLIVE STREAMへ1記事追加。写真10枚＋フォトページ1枚はb256（`docs/MEDIA.md`）。MILY SIGNALの同回は同じDraft PRで追加（`/data-lab/reports/20261105-noon/` へリンク）。
+- 録画は14:45頃開始・約31分（車内から）。本文は自動文字起こしを非逐語で要約し、リスナーや個人の名前・私生活の細部を出さない。動画はサイトに載せない。`songs` は「高嶺の花子さん」1曲（既存回と同じ原曲リンク）。`ranking` は空。
+
 # 2026-11-05 朝配信（LIVE STREAM）
 
 - オーナー依頼（2026-11-05 JST）により、11月5日朝のSHOWROOM配信をLIVE STREAMへ1記事追加。写真10枚＋フォトページ1枚はb255（`docs/MEDIA.md`）。MILY SIGNALの同回は同じDraft PRで追加（`/data-lab/reports/20261105-morning/` へリンク）。

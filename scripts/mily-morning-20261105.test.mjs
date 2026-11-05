@@ -3,14 +3,16 @@ import assert from "node:assert/strict";
 import { readFileSync, statSync } from "node:fs";
 import { streamRecaps } from "../src/data/streamRecaps.ts";
 import { streamRecap1105Morning as recap } from "../src/data/streamRecap1105Morning.ts";
+import { streamRecap1105Noon as noon } from "../src/data/streamRecap1105Noon.ts";
 import { streamRecap1104Night as night } from "../src/data/streamRecap1104Night.ts";
 import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
 const read = p => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 const text = JSON.stringify(recap);
 
-test("11/5 morning: newest card above the 11/4 night, recording-relative timestamps", () => {
-  assert.equal(streamRecaps[0], recap);
-  assert.equal(streamRecaps[1], night);
+test("11/5 morning: below the 11/5 noon card, above the 11/4 night, recording-relative timestamps", () => {
+  assert.equal(streamRecaps[0], noon);
+  assert.equal(streamRecaps[1], recap);
+  assert.equal(streamRecaps[2], night);
   assert.equal(recap.id, "2026-11-05-morning-showroom");
   assert.equal(recap.broadcastLabel, "6:00頃〜 約31分");
   assert.equal(recap.timestampBasis, undefined);
