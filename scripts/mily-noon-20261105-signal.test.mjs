@@ -1,0 +1,36 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {DAILY_STREAM_ENTRIES, groupByBroadcastDate, observationPoints, lastObservedValue} from "../public/data-lab/assets/daily-archive-core.js";
+const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
+const data=JSON.parse(read("public/data-lab/data/mily-noon-20261105-aggregate.json"));
+const report=read("data-lab/reports/20261105-noon/index.html");
+const csv=read("public/data-lab/data/mily-noon-20261105-observations.csv");
+test("2026-11-05 noon: last valid UI display is a mid-stream reference, not final",()=>{
+  assert.equal(data.liveId,23647558);assert.equal(data.roomId,573253);
+  assert.equal(data.dateJst,"2026-11-05");assert.equal(data.session,"noon");
+  assert.equal(data.finalServiceValueVerified,false);assert.equal(data.quality.verified_final,false);assert.equal(data.quality.end_confirmed,false);
+  assert.equal(data.lastValidOnline.confirmedFinal,false);
+  assert.deepEqual({...data.metrics},{stars:4222,visits:142,comments:209,firstVisits:6,repeatVisits:4,newFollows:1,otherFree:150,star100People:40,recommendedCommentPeople:27});
+  assert.equal(data.observations.length,48);
+  assert.equal(lastObservedValue(data,"stars","2026-11-05"),4222);
+  assert.equal(observationPoints(data,"stars","2026-11-05").length,48);
+  assert.equal(data.quality.interpolated,false);assert.equal(data.quality.zeroFilled,false);
+  assert.equal(data.quality.sourceReconciliation.otherSeriesMerged,false);
+  assert.ok(data.observations.every(o=>o.stars>0),"post-end reset rows are excluded");
+  for(let i=1;i<data.observations.length;i++) assert.ok(Date.parse(data.observations[i].atJst)>Date.parse(data.observations[i-1].atJst));
+  assert.equal(data.eventPointObservations.end.point-data.eventPointObservations.start.point,33606);
+  assert.equal(csv.trim().split("\n").length,49);
+});
+test("2026-11-05 noon: report and JSON keep viewers anonymous and wiring is in place",()=>{
+  const all=report+JSON.stringify(data)+csv;
+  assert.doesNotMatch(all,/\/workspace\/|\.jsonl|user_id|avatar|viewer[_-]?id|comment_text|access_token|drive\.google|uniqueCommenters|giftPointsEst|gap_to_upper|gap_to_lower|bcsvr|SREmu|那丘|なおか/i);
+  assert.match(report,/noindex,nofollow,noarchive/);
+  assert.match(report,/確定合計ではありません/);assert.match(report,/途中参考値/);assert.match(report,/\+33,606/);
+  for(const o of data.observations) assert.ok(report.includes(o.atJst.slice(11,19)));
+  assert.ok(groupByBroadcastDate().find(g=>g.date==="2026-11-05").entries.some(x=>x.slot==="noon"));
+  assert.deepEqual(groupByBroadcastDate()[0].entries.map(x=>x.slot),["noon","morning"]);
+  assert.match(report,/時間帯ごとのきら星の伸び/);assert.match(report,/イベントptの1日ごとの記録/);assert.match(report,/記録なし/);assert.equal(data.growthBySlot.slots.length,3);
+  assert.ok(read("vite.config.ts").includes("data-lab/reports/20261105-noon/index.html"));
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261105-noon\/">最新の配信レポート/);
+});

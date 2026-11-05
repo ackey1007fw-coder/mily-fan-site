@@ -10,9 +10,9 @@ const text = JSON.stringify(recap);
 
 test("11/1 noon: below the same-day night card, above the same-day morning, recording-relative timestamps", () => {
   // The same-day night card (later slot) sits above the noon card.
-  assert.equal(streamRecaps[6].id, "2026-11-01-night-showroom");
-  assert.equal(streamRecaps[7], recap);
-  assert.equal(streamRecaps[8], morning);
+  assert.equal(streamRecaps[7].id, "2026-11-01-night-showroom");
+  assert.equal(streamRecaps[8], recap);
+  assert.equal(streamRecaps[9], morning);
   assert.equal(recap.id, "2026-11-01-noon-showroom");
   assert.equal(recap.dateLabel, "2026.11.01（日）");
   assert.equal(recap.broadcastLabel, "14:45頃〜 約30分");
