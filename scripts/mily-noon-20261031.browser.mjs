@@ -36,12 +36,12 @@ try {
         const text = await recap.innerText();
         assert.match(text, /昼の感謝とファイナルへの決意/);
         assert.match(text, /切断後も同じ枠で再開/);
-        assert.match(text, /通過結果の発表ではありません/);
-        assert.match(text, /15:21頃600/);
-        assert.match(text, /実人数・総訪問数・確定終値とは区別/);
         assert.equal(await recap.locator("video,audio,iframe,img").count(), 0);
         // Nested disclosures may be closed; inspect their text without inventing UI visibility.
         const full = await recap.textContent();
+        assert.match(full, /通過結果の発表ではありません/);
+        assert.match(full, /15:21頃600/);
+        assert.match(full, /実人数・総訪問数・確定終値とは区別/);
         assert.match(full, /21:00〜21:50/);
         assert.match(full, /提供された視聴確認メモ/);
         assert.match(full, /ポイント数の確定値は未確認/);
