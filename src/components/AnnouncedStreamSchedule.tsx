@@ -1,6 +1,6 @@
 import { fourthRoundStreamSchedule, fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL, OCTOBER_12_FINAL_STREAM_SOURCE } from "../data/fourthRoundStreamSchedule";
 import { X_FINAL_DAY_PEACE_POST_URL } from "../data/xFinalDayPeaceVideo";
-import { missCircleFourthRoundWebVoteLink, missCircleFourthRoundShowroomEventLink } from "../data/links";
+import { missCircleFourthRoundWebVoteLink, missCircleFourthRoundShowroomEventLink, missCircleSemifinalWebVoteLink } from "../data/links";
 import { finalStreamAnnouncement } from "../lib/finalStreamAnnouncement";
 import { upcomingSlots } from "../data/streamSchedule";
 import { formatSlotDate, useStreamSchedule } from "../lib/useStreamSchedule";
@@ -10,11 +10,36 @@ import { NewsImage } from "./NewsImage";
 import { ExternalLink } from "./ExternalLink";
 import { OCTOBER_31_FANROOM_URL } from "../data/oct31Plan";
 import { upcomingOct31Slots } from "../lib/oct31Plan";
+import { NOVEMBER_07_SCHEDULE_X_URL } from "../data/nov07Plan";
+import { upcomingNov07Slots } from "../lib/nov07Plan";
 
 export function AnnouncedStreamSchedule({ showSupportLink = true }: { showSupportLink?: boolean }) {
   const now = useSupportEventClock();
   const schedule = useStreamSchedule();
   const { roomUrl } = schedule;
+  const showroomUrl = roomUrl ?? confirmedShowroomAction()?.url;
+  const november07Slots = upcomingNov07Slots(now);
+  if (november07Slots.length > 0) return (
+    <section id="announced-stream" className="scroll-mt-24 px-4 py-6">
+      <div className="mx-auto max-w-3xl rounded-3xl border border-sage/20 bg-paper-card p-5 shadow-card sm:p-6">
+        <h2 className="text-xl font-bold text-ink">11月7日・本人告知の配信予定</h2>
+        <p className="mt-2 text-sm leading-7 text-ink-muted">本人Xによると、SR審査の最終日は11月7日（土）です。7:00〜8:00と、21:00〜21:59の最終枠が案内されています。最終枠では、投票で選ばれた衣装を着ると案内しています。</p>
+        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+          {november07Slots.map(slot => <li key={slot.time} className="rounded-xl bg-sage-soft/50 px-4 py-3">
+            <p className="font-semibold text-ink">{formatSlotDate(slot)} {slot.time}〜{slot.endTime}</p>
+            <p className="mt-1 text-sm text-ink-muted">{slot.note}</p>
+          </li>)}
+        </ul>
+        <p className="mt-3 text-xs leading-6 text-ink-muted">2026年・JST。11月7日0:04の本人Xに基づく予定で、実配信の記録ではありません。終了予定時刻を過ぎた枠は一覧から外れます。WEB投票の期限（11月8日23:59 JST）とは別の案内です。SHOWROOMの登録予定とは別に表示しています。</p>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <ExternalLink href={NOVEMBER_07_SCHEDULE_X_URL} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">本人Xの予定告知を見る</ExternalLink>
+          {showroomUrl ? <ExternalLink href={showroomUrl} className="inline-flex min-h-11 items-center rounded-full bg-sage px-4 py-2 text-sm font-semibold text-white">みりぃのSHOWROOMへ</ExternalLink> : null}
+          <ExternalLink href={missCircleSemifinalWebVoteLink.url} className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">{missCircleSemifinalWebVoteLink.label}</ExternalLink>
+          {showSupportLink ? <a href="/support/" className="inline-flex min-h-11 items-center rounded-full border border-sage/30 px-4 py-2 text-sm font-semibold text-sage-deep">投票・応援案内を見る</a> : null}
+        </div>
+      </div>
+    </section>
+  );
   const october31Slots = upcomingOct31Slots(now);
   if (october31Slots.length > 0) return (
     <section id="announced-stream" className="scroll-mt-24 px-4 py-6">
@@ -32,7 +57,6 @@ export function AnnouncedStreamSchedule({ showSupportLink = true }: { showSuppor
       </div>
     </section>
   );
-  const showroomUrl = roomUrl ?? confirmedShowroomAction()?.url;
   const finalSlot = finalStreamAnnouncement(schedule, now);
   const slots = upcomingSlots(fourthRoundStreamSchedule.filter(slot => slot.date !== "2026-10-12"), [], now);
   if (finalSlot) slots.push(finalSlot);

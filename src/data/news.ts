@@ -38,6 +38,7 @@ import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 import { godivaNanaNewsImages } from "./godivaNanaPhotos.ts";
 import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
+import { NOVEMBER_07_SCHEDULE_X_URL } from "./nov07Plan.ts";
 import { site } from "./site.ts";
 import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
 /**
@@ -281,6 +282,22 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-07-x-showroom-sr-final-schedule",
+    date: "2026-11-07",
+    sameDayOrder: 4,
+    activityIds: ["live-stream", "miss-circle"],
+    title: "11月7日（土）7:00〜と最終枠21:00〜 本人XのSHOWROOM案内",
+    body: "11月7日0:04（日本時間）、みりぃがXで、みりぽち10日目と、同日のSHOWROOM予定を案内しました。投票先はENTRY 734です。\n\n本人によると、SR審査の最終日は11月7日（土）です。案内された枠は次のとおりです（2026年・JST）。\n7:00〜8:00\n21:00〜21:59（最終枠）\n\n最終枠では、投票で選ばれた衣装を着ると案内しています。応援してくれている人への感謝とともに、最終枠はみりぃルームで待っていると伝えています。\n\nWEB投票の期限（11月8日23:59 JST）は、SR審査最終日とは別の案内です。受付状況はENTRY 734のページで確認してください。投稿に添えられた写真は転載せず、下の本人Xからご覧ください。\n\n本人による告知予定です。実際の開始・終了を確認した配信記録ではありません。変更は本人の最新Xをご確認ください。",
+    source: NOVEMBER_07_SCHEDULE_X_URL,
+    sourceLabel: "みりぃ本人のX投稿を見る（11月7日 00:04 JST）",
+    relatedUrl: "/support/",
+    ctaLabel: "配信予定・応援案内を見る",
+    additionalCtas: [
+      { label: "ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
+      { label: missCircleSemifinalWebVoteLink.label, url: missCircleSemifinalWebVoteLink.url, linkId: missCircleSemifinalWebVoteLink.id },
+    ],
+  },
   {
     id: "2026-11-02-x-entry-photo-change",
     date: "2026-11-02",
