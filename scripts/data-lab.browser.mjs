@@ -127,6 +127,13 @@ try {
             assert.equal(await day1102Night.locator('.daily-stream-number').innerText(),"118");
             assert.equal(await day1102Night.locator('svg.daily-plot circle').count(),20);
             await page.locator('button[data-daily-metric="stars"]').click();
+            const day1107 = page.locator('#daily-2026-11-07');
+            await openDay(day1107);
+            const day1107Cards = day1107.locator('.daily-stream-card');
+            assert.equal(await day1107Cards.count(),1,"Nov 7 has the morning card");
+            await day1107Cards.nth(0).locator('[data-missing="false"]').first().waitFor({state:"visible"});
+            assert.equal(await day1107Cards.nth(0).locator('.daily-stream-number').innerText(),"5,341","Nov 7 morning shows the last valid star display before reset");
+            assert.equal(await day1107Cards.nth(0).locator('svg.daily-plot circle').count(),151);
             const day1106 = page.locator('#daily-2026-11-06');
             await openDay(day1106);
             const day1106Cards = day1106.locator('.daily-stream-card');
