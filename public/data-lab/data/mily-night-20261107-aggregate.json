@@ -1,0 +1,222 @@
+{
+ "schema": "mily-anonymous-live-observations-v1",
+ "nonOfficial": true,
+ "roomId": 573253,
+ "liveId": 23657394,
+ "dateJst": "2026-11-07",
+ "session": "night",
+ "format": "showroom",
+ "label": "11月7日夜のSHOWROOM配信",
+ "eventName": "同回の匿名UI観測と公開APIのイベント累積pt。他の枠・他の取得経路とは合算しません。イベントptの途中観測を配信全体の増加分として扱いません。",
+ "sourceDescription": "公開されている非公式の画面エミュレーターに表示される匿名カウンターと、公開APIのイベント累積pt。原ログ・個人別情報は含みません。無効なJSON行は除外しています。",
+ "verifiedAtJst": "2026-11-07",
+ "finalServiceValueVerified": false,
+ "completeCoverageConfirmed": false,
+ "timingComparisonEligible": false,
+ "lastValidOnline": {
+  "atJst": "2026-11-07T22:55:16+09:00",
+  "stars": 6198,
+  "visits": null,
+  "comments": null,
+  "firstVisits": null,
+  "repeatVisits": null,
+  "newFollows": null,
+  "otherFree": null,
+  "star100People": null,
+  "recommendedCommentPeople": null,
+  "confirmedFinal": false
+ },
+ "metrics": {
+  "stars": 6198,
+  "visits": null,
+  "comments": null,
+  "firstVisits": null,
+  "repeatVisits": null,
+  "newFollows": null,
+  "otherFree": null,
+  "star100People": null,
+  "recommendedCommentPeople": null
+ },
+ "measurementNote": "途中参考値（22:55:16の最後の有効なきら星表示。終了時の確定値ではありません）。公式確定ギフト数・実贈呈量・イベントpt・ユニーク視聴者数ではありません。終了時に0と読めた値は欠測として扱い、0件の成果とはしません。view_numは同時視聴者数として扱いません。",
+ "comparisonNote": "同一経路の実測点だけを表示。欠測はnullのまま保持し、他経路の点で埋めず、0埋め・補間・時間帯効果の推定をしません。",
+ "commentLog": {
+  "entries": 676,
+  "anonymousPosterCount": 69,
+  "separateFromUiCommentDisplay": true,
+  "uiCommentDisplay": 822,
+  "note": "コメント記録676件・投稿者69人は個別ログの匿名集計。画面のコメント表示822とは別集計です。個人名は含みません。画面表示822の取得時刻は未確認のため、最後の有効なきら星表示へ結び付けません。"
+ },
+ "quality": {
+  "savedSampleRows": null,
+  "validRows": 1,
+  "excludedRows": null,
+  "excludedDetail": {
+   "malformedRows": "無効なJSON行は除外。件数は未掲載",
+   "postEndResetRows": "終了時の0表示は欠測として除外。0件の成果とは扱わない",
+   "unpublishedUiSeries": "きら星の途中時系列は未掲載。公開するのは最後の有効表示1点"
+  },
+  "publishedObservationPoints": 1,
+  "captureWindowJst": {
+   "start": "2026-11-07T22:55:16+09:00",
+   "end": "2026-11-07T22:55:16+09:00"
+  },
+  "gaps": [
+   {
+    "startJst": "2026-11-07T21:00:00+09:00",
+    "endJst": "2026-11-07T22:55:16+09:00",
+    "note": "配信開始から最後の有効なきら星表示までの画面カウンター時系列は未掲載。欠測であり0ではない"
+   },
+   {
+    "startJst": "2026-11-07T21:54:00+09:00",
+    "endJst": null,
+    "note": "イベント累積ptは21:54以降欠測。0ではない。配信終了時のptは未取得"
+   }
+  ],
+  "regressions": [],
+  "visitsNulledRows": 1,
+  "liveEndDetected": false,
+  "liveEndDetectedAtJst": null,
+  "secondsLastValidToEnd": null,
+  "verified_final": false,
+  "source_event_counts_verified": false,
+  "missingDataIsNotZeroPerformance": true,
+  "interpolated": false,
+  "zeroFilled": false,
+  "counterSource": "public_emulator_visible_ui_auto_capture",
+  "end_confirmed": false,
+  "displayLabel": "途中参考値（終了時未確認）",
+  "timestampBasis": "画面カウンターの取得時刻。別経路の画面進行時刻とは同一視しません。イベントptの21:11と21:54は分までの確認です。",
+  "missingCountsByMetric": {
+   "stars": 0,
+   "visits": 1,
+   "comments": 1,
+   "firstVisits": 1,
+   "repeatVisits": 1,
+   "newFollows": 1,
+   "otherFree": 1,
+   "star100People": 1,
+   "recommendedCommentPeople": 1
+  },
+  "sourceReconciliation": {
+   "selectedSeries": "public_emulator_ui_auto_capture",
+   "otherSeriesMerged": false,
+   "note": "別経路の記録とは合算・接合せず、確認できた値だけを独立採用しています。"
+  },
+  "end_confirmed_reason": "22:55:16を最後の有効なきら星表示として採用。配信終了時の画面カウンターとイベントptは確認できないため途中参考値とします。終了時の0は欠測です。"
+ },
+ "observations": [
+  {
+   "atJst": "2026-11-07T22:55:16+09:00",
+   "stars": 6198,
+   "visits": null,
+   "comments": null,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": null,
+   "otherFree": null,
+   "star100People": null,
+   "recommendedCommentPeople": null
+  }
+ ],
+ "sourceIntegrity": {
+  "observationsCsvSha256": "f169b6dbf5c69d2670b07485e3b5960d666f6cbc3de18b186f39f23c028732d0"
+ },
+ "eventPointObservations": {
+  "source": "public_api_auto_capture",
+  "separateFromUiCounters": true,
+  "partialObservedGain": true,
+  "notSessionTotal": true,
+  "start": {
+   "at": "2026-11-07T21:11:00+09:00",
+   "rank": 3,
+   "point": 2935792,
+   "minutePrecisionOnly": true
+  },
+  "end": {
+   "at": "2026-11-07T21:54:00+09:00",
+   "rank": 3,
+   "point": 3085847,
+   "minutePrecisionOnly": true,
+   "note": "最後の有効なイベントpt観測。配信終了時の値ではない"
+  },
+  "pointDifference": 150055,
+  "missingAfterJst": "2026-11-07T21:54:00+09:00",
+  "streamEndPointUnknown": true,
+  "note": "公開API記録のイベント累積ptの途中観測差（21:11の2,935,792→21:54の3,085,847）。22時以降は欠測であり0ではない。配信終了時のptは未取得のため、この差を配信全体の増加分としては扱いません。配信枠単体の公式確定ptではなく、画面のきら星やWSギフト推定ptと合算しません。有効な順位観測は3位。終値の順位は未確認です。"
+ },
+ "growthBySlot": {
+  "note": "きら星の途中時系列は未掲載のため、時間帯ごとの伸びは計算していません。欠測を補間しません。",
+  "slots": []
+ },
+ "ownFrameComparison": {
+  "note": "本人の各枠の画面カウンター（同一経路）。観測区間の始点〜最後の有効表示の差を観測分数で割った値。途中参考値で、確定値ではありません。11/7夜は最後の有効表示だけを公開しているため、1分あたりの伸びは計算していません。",
+  "frames": [
+   {
+    "frame": "11/4朝",
+    "starsLastValid": 3975,
+    "captureMinutes": 26.2,
+    "starsPerMinute": 87.4
+   },
+   {
+    "frame": "11/4昼",
+    "starsLastValid": 3862,
+    "captureMinutes": 5.1,
+    "starsPerMinute": 138.3
+   },
+   {
+    "frame": "11/4夜",
+    "starsLastValid": 3643,
+    "captureMinutes": 57.2,
+    "starsPerMinute": 49.7
+   },
+   {
+    "frame": "11/5朝",
+    "starsLastValid": 3564,
+    "captureMinutes": 30.4,
+    "starsPerMinute": 113.9
+   },
+   {
+    "frame": "11/5昼",
+    "starsLastValid": 4222,
+    "captureMinutes": 25.0,
+    "starsPerMinute": 132.6
+   },
+   {
+    "frame": "11/5夜",
+    "starsLastValid": 3313,
+    "captureMinutes": 56.4,
+    "starsPerMinute": 57.0
+   },
+   {
+    "frame": "11/6朝",
+    "starsLastValid": 4441,
+    "captureMinutes": 21.6,
+    "starsPerMinute": 111.0
+   },
+   {
+    "frame": "11/6昼",
+    "starsLastValid": 4824,
+    "captureMinutes": 28.0,
+    "starsPerMinute": 154.6
+   },
+   {
+    "frame": "11/6夜",
+    "starsLastValid": 2691,
+    "captureMinutes": 37.9,
+    "starsPerMinute": 29.1
+   },
+   {
+    "frame": "11/7朝",
+    "starsLastValid": 5341,
+    "captureMinutes": 56.9,
+    "starsPerMinute": 71.3
+   },
+   {
+    "frame": "11/7夜",
+    "starsLastValid": 6198,
+    "captureMinutes": null,
+    "starsPerMinute": null
+   }
+  ]
+ }
+}
