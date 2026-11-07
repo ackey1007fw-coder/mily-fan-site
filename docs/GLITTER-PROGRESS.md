@@ -32,3 +32,12 @@
 共有純粋ロジック：public/data-lab/assets/glitter-model.js。既存src/lib/showGlitter.tsの閾値とテストで整合させる。API・UI・時刻境界・未取得・数値型・ページネーション・公開データ最小化の単体テストとブラウザ検査を実施する。CI/プレビュー/本番表示はそれぞれ独立に確認する。
 
 Native分析先は既存担当がこの公開APIを読むだけ。公開側から非公開分析先へ接続せず、URL・個別視聴者・生ログ・認証情報を共有JSONや公開repoに置かない。Native側の実装・数値一致・実表示はその担当の証拠がそろうまで未完了。
+
+## 同じページの別ボード（混ぜない）
+
+`/data-lab/glitter/` には、金グリッター公式ptとは別物として次を置く。合算しない。
+
+- きら星表: ルーム画面カウンターのログ上の最大。非公式。終了時の最終値ではない。欠測は「欠測」で、0にしない。
+- event_id 44211（`/event/circle2026_sf`、セミファイナル）の公開順位スナップショット。公式最終発表ではない。前後差だけを出す。私的情報・DM・視聴者名は置かない。
+
+履歴の追記は `node scripts/fetch-event-ranking-44211.mjs`。GitHub Actions は `workflow_dispatch` のみ（課金する schedule は付けない）。自動commitしない。
