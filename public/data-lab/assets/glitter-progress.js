@@ -1,4 +1,6 @@
 import { planProgress, tokyoPeriods, REFRESH_MS } from './glitter-model.js';
+import { KIRA_STAR_SLOTS, formatKiraStars, kiraNote } from './kira-star-slots.js';
+import { EVENT_44211_SNAPSHOT, event44211Gaps, formatEventPoints, formatPointDelta } from './event-44211-snapshot.js';
 const $ = id => document.getElementById(id);
 const fmt = x => x === null || x === undefined ? '未確認' : x.toLocaleString('ja-JP');
 const stamp = value => { const time = Date.parse(value); return Number.isFinite(time) ? new Intl.DateTimeFormat('ja-JP', {timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(time) + ' JST' : '未確認'; };
@@ -39,8 +41,55 @@ async function load() {
     payload = data; failed = false;
   } catch { failed = true; } finally { clearTimeout(timer); loading = false; render(); }
 }
+function fillKiraTable() {
+  const body = $('kira-star-body');
+  if (!body || body.childElementCount) return;
+  for (const slot of KIRA_STAR_SLOTS) {
+    const tr = document.createElement('tr');
+    if (slot.quality === 'missing') tr.className = 'missing';
+    const th = document.createElement('th');
+    th.scope = 'row';
+    th.textContent = slot.label;
+    const stars = document.createElement('td');
+    stars.textContent = formatKiraStars(slot.stars);
+    const note = document.createElement('td');
+    note.textContent = kiraNote(slot);
+    tr.append(th, stars, note);
+    body.append(tr);
+  }
+}
+function fillEventRanking() {
+  const body = $('event-44211-body');
+  const gapBox = $('event-44211-gaps');
+  if (!body || !gapBox) return;
+  const shot = EVENT_44211_SNAPSHOT;
+  const gaps = event44211Gaps(shot);
+  gapBox.textContent = 'みりぃは9位・' + formatEventPoints(shot.mily.point) + 'pt。すぐ上の8位・' + shot.above.displayName + 'さんまで あと ' + formatEventPoints(gaps.toAbove) + 'pt。すぐ下の10位・' + shot.below.displayName + 'さんとは ' + formatEventPoints(gaps.toBelow) + 'pt差。1位は' + shot.first.displayName + 'さんの ' + formatEventPoints(shot.first.point) + 'pt。';
+  if (body.childElementCount) return;
+  const rows = [
+    { ...shot.first, delta: gaps.toFirst, self: false },
+    { ...shot.above, delta: gaps.toAbove, self: false },
+    { ...shot.mily, delta: 0, self: true },
+    { ...shot.below, delta: -gaps.toBelow, self: false },
+  ];
+  for (const row of rows) {
+    const tr = document.createElement('tr');
+    if (row.self) tr.className = 'is-mily';
+    const rank = document.createElement('th');
+    rank.scope = 'row';
+    rank.textContent = String(row.rank);
+    const name = document.createElement('td');
+    name.textContent = row.displayName;
+    const point = document.createElement('td');
+    point.textContent = formatEventPoints(row.point);
+    const delta = document.createElement('td');
+    delta.textContent = formatPointDelta(row.delta);
+    tr.append(rank, name, point, delta);
+    body.append(tr);
+  }
+}
 $('refresh').addEventListener('click', load);
 $('streams').addEventListener('input', render); $('target').addEventListener('change', render);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) {render(); if (Date.now() - lastAttempt >= REFRESH_MS || payload?.daily?.periodStart !== tokyoPeriods().today) load();} });
 setInterval(() => { if (!document.hidden) {render(); if (Date.now() - lastAttempt >= REFRESH_MS || (payload?.daily?.periodStart !== tokyoPeriods().today && Date.now() - lastAttempt >= 30000)) load();} },30000);
-render(); load();
+fillKiraTable(); fillEventRanking(); render(); load();

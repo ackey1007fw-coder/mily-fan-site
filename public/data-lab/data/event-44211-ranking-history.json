@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "eventId": 44211,
+  "eventUrl": "https://www.showroom-live.com/event/circle2026_sf",
+  "eventTitle": "【ミスサー枠】SDGs推進 TGC しずおか 2027 出演オーディション",
+  "phase": "semifinal",
+  "disclaimer": "非公式ファン制作の公開ランキング読取。公式の最終結果ではない。個人の私的情報・DM・視聴者名は含まない。",
+  "observations": [
+    {
+      "observedAtJst": "2026-11-08T04:25:00+09:00",
+      "source": "manual-snapshot",
+      "totalEntries": 35,
+      "identity": "unique",
+      "mily": {
+        "rank": 9,
+        "point": 3696180,
+        "displayName": "みりぃ",
+        "roomUrlKey": "circle2026_0734"
+      },
+      "above": {
+        "rank": 8,
+        "point": 4420589,
+        "displayName": "高乘美空",
+        "roomUrlKey": null
+      },
+      "below": {
+        "rank": 10,
+        "point": 3678165,
+        "displayName": "辻本祐佳",
+        "roomUrlKey": null
+      },
+      "first": {
+        "rank": 1,
+        "point": 9727643,
+        "displayName": "陣ノ内柚来",
+        "roomUrlKey": null
+      },
+      "gapToAbove": 724409,
+      "gapToBelow": 18015,
+      "rooms": [
+        {
+          "rank": 1,
+          "point": 9727643,
+          "room_name": "陣ノ内柚来"
+        },
+        {
+          "rank": 8,
+          "point": 4420589,
+          "room_name": "高乘美空"
+        },
+        {
+          "rank": 9,
+          "point": 3696180,
+          "room_name": "みりぃ",
+          "room_url_key": "circle2026_0734"
+        },
+        {
+          "rank": 10,
+          "point": 3678165,
+          "room_name": "辻本祐佳"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+name: Record event 44211 ranking
+
+# 公開 SHOWROOM event_id 44211 の room_list を手動で1回読む。
+# リポジトリへは書き込まない。課金する schedule / cron は付けない。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    name: Fetch public ranking (dry-run)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Fetch ranking without writing history
+        run: node scripts/fetch-event-ranking-44211.mjs --dry-run

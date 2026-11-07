@@ -27,6 +27,21 @@ try {for(const [engine,launcher] of [['chromium',chromium],['webkit',webkit]]){
    try{if((await stat(file)).isDirectory())file=join(file,'index.html');return route.fulfill({status:200,contentType:mime[extname(file)]||'application/octet-stream',body:await readFile(file)});}catch{return route.fulfill({status:404,body:'Missing'});}
   });
   await page.goto('https://site.test/data-lab/glitter/',{waitUntil:'networkidle'});
+  await page.waitForFunction(() => document.querySelector('#kira-star-body tr') && document.querySelector('#event-44211-body tr.is-mily'));
+  assert.match(await page.locator('#kira-heading').innerText(),/きら星/);
+  assert.match(await page.locator('#kira-stars').innerText(),/最終値ではありません/);
+  assert.match(await page.locator('#kira-star-body').innerText(),/10\/29朝/);
+  assert.match(await page.locator('#kira-star-body').innerText(),/4,665/);
+  assert.match(await page.locator('#kira-star-body').innerText(),/11\/7夜[\s\S]*欠測/);
+  assert.match(await page.locator('#event-44211-gaps').innerText(),/724,409pt/);
+  assert.match(await page.locator('#event-44211-gaps').innerText(),/18,015pt/);
+  assert.match(await page.locator('#event-44211-body').innerText(),/みりぃ/);
+  assert.match(await page.locator('#event-44211-body').innerText(),/高乘美空/);
+  assert.match(await page.locator('#event-44211-body').innerText(),/辻本祐佳/);
+  assert.match(await page.locator('#event-44211-body').innerText(),/陣ノ内柚来/);
+  assert.match(await page.locator('#event-44211-body').innerText(),/\+724,409/);
+  assert.match(await page.locator('#event-44211-body').innerText(),/−18,015/);
+  assert.match(await page.locator('#event-44211 a[href="https://www.showroom-live.com/event/circle2026_sf"]').getAttribute('rel') || '',/noopener/);
   await page.waitForFunction(() => document.querySelector('#weekly-points')?.textContent === '7,089' && !document.querySelector('#refresh')?.disabled);
   assert.equal(await page.locator('#remaining').innerText(),'32,911');
   assert.equal(await page.locator('#weekly-points').innerText(),'7,089');

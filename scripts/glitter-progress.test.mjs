@@ -75,4 +75,6 @@ test('Lab and Support links, Vite route, noindex and CSP are preserved',()=>{
  for(const p of ['data-lab/index.html','src/components/ShowGlitterGuide.tsx'])assert.ok(read(p).includes('/data-lab/glitter/'));
  const h=read('data-lab/glitter/index.html');assert.match(h,/noindex,nofollow,noarchive/);assert.match(h,/順位条件の自動判定は未対応/);assert.match(h,/connect-src 'self'/);assert.ok(read('vite.config.ts').includes('data-lab/glitter/index.html'));
  assert.ok(!read('server/mily-glitter.js').includes('573253'));assert.ok(!read('server/mily-glitter.js').includes('is_ranked'));
+ assert.match(h,/id="kira-stars"/);assert.match(h,/id="event-44211"/);
+ assert.ok(!h.includes('showroom-live.com/api/'));
 });
