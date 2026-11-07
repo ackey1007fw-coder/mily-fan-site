@@ -85,7 +85,7 @@ td.number{text-align:right;font-variant-numeric:tabular-nums}
 .time{white-space:nowrap;font-variant-numeric:tabular-nums}
 summary{cursor:pointer;padding:12px 0;font-weight:700;min-height:44px}
 figure{margin:18px 0 4px}
-svg{width:100%;height:auto;display:block}
+svg,img.report-chart{width:100%;height:auto;display:block}
 .plot-wrap{overflow-x:auto}
 .plot-wrap svg{min-width:560px}
 figcaption{font-size:13px}
