@@ -68,6 +68,12 @@ jobs:
           npm install --prefix "$RUNNER_TEMP/mily-browser-tools" --no-package-lock --ignore-scripts --no-audit --no-fund playwright@1.61.1
           node "$RUNNER_TEMP/mily-browser-tools/node_modules/playwright/cli.js" install --with-deps chromium webkit
 
+      - name: November 9 morning recap browser checks
+        timeout-minutes: 3
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+        run: node --disable-warning=ExperimentalWarning --experimental-strip-types scripts/mily-morning-20261109.browser.mjs
+
       - name: October 31 noon recap browser checks
         timeout-minutes: 3
         env:
