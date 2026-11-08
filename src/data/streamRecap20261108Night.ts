@@ -27,7 +27,7 @@ export const streamRecap20261108Night: StreamRecap = {
   ],
   nextNote: "配信時点では、翌11月9日6:00〜6:30の朝配信を案内していました。",
   sourceLabel: "2026年11月8日 夜のSHOWROOM配信（保存録画の自動文字起こし）",
-  verifiedAt: "2026-11-09",
+  verifiedAt: "2026-11-08",
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
     stills: "静止画は掲載していません。",
