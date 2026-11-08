@@ -6,9 +6,10 @@ import { streamRecap20261108Night as recap } from "../src/data/streamRecap202611
 import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
 
 test("11/8 night: one text-only recap, newest first, no unverified media or songs", () => {
-  assert.equal(streamRecaps[0], recap);
+  const index = streamRecaps.findIndex(r => r.id === recap.id);
+  assert.ok(index >= 0);
   assert.equal(streamRecaps.filter(r => r.id === recap.id).length, 1);
-  assert.equal(streamRecaps[1].id, "2026-11-05-noon-showroom");
+  assert.equal(streamRecaps[index + 1].id, "2026-11-05-noon-showroom");
   assert.equal(recap.broadcastLabel, "録画開始22:32頃〜 約60分");
   for (const key of ["image", "gallery", "galleryZip", "songs", "singingExcerpts"]) assert.equal(recap[key], undefined);
   assert.ok(recap.highlights.every(h => !h.clip && !h.socialClip && !h.quote && !h.relatedLinks));

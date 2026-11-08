@@ -9,8 +9,10 @@ const read = p => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 const text = JSON.stringify(recap);
 
 test("11/5 noon: below 11/8 night and above 11/5 morning, recording-relative timestamps", () => {
-  assert.equal(streamRecaps[1], recap);
-  assert.equal(streamRecaps[2], morning);
+  const index = streamRecaps.findIndex(r => r.id === recap.id);
+  assert.ok(index >= 0);
+  assert.equal(streamRecaps[index], recap);
+  assert.equal(streamRecaps[index + 1], morning);
   assert.equal(recap.id, "2026-11-05-noon-showroom");
   assert.equal(recap.broadcastLabel, "14:45頃〜 約31分");
   assert.equal(recap.timestampBasis, undefined);
