@@ -207,5 +207,107 @@
       "三橋莉子（みりぃ）",
       "SHOWROOM / 非公式ファン編集"
     ]
-  }
+  },
+  "tiktokVariants": [
+    {
+      "id": "mily-b257-12-20261108-night-social-cover",
+      "path": "/media/live/mily-b257-12-20261108-night-social-cover.webp",
+      "source": "/media/live/mily-b257-12-20261108-night-social-cover.png",
+      "sha256": "3a9494ed7d7397a054cfc16fcdbc222171c4c44ae3d724c1e004ef307adca1a6",
+      "bytes": 137126,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-13-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-13-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-13-20261108-night-social-photo.png",
+      "sha256": "4d28f22ae52e16b03fed207b06788cda11fc40e99e21f7ee4aa5646ac2852144",
+      "bytes": 153808,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-14-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-14-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-14-20261108-night-social-photo.png",
+      "sha256": "61a1ee44ea2490b4a484237ab22101bd88231e3534538d45f930bed01d58fc4e",
+      "bytes": 141434,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-15-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-15-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-15-20261108-night-social-photo.png",
+      "sha256": "bdb05860babb36327df4b0d19d77ef1b7b5c590860e758888101d6014e356efd",
+      "bytes": 125382,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-16-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-16-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-16-20261108-night-social-photo.png",
+      "sha256": "6757718feeeff44b307080da39ef7946001b729fff43f0741ce347fc85f1d40b",
+      "bytes": 129126,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-17-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-17-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-17-20261108-night-social-photo.png",
+      "sha256": "b0bd70df7d6118b1868508100c6a021f5be9cf8886e495dbd361859589478110",
+      "bytes": 151552,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-18-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-18-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-18-20261108-night-social-photo.png",
+      "sha256": "d237e0f9f6617414cb304f738c24c3b308efb85c69da4a01b84b595eed0614bb",
+      "bytes": 146962,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-19-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-19-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-19-20261108-night-social-photo.png",
+      "sha256": "1d5cc337fe8ca7f13f9683d7d91915d0096983fb16a915f38d48268bc6b36bcb",
+      "bytes": 143816,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-20-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-20-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-20-20261108-night-social-photo.png",
+      "sha256": "140ce4d692b076541f24102995519c2057e6c9f3c655f957b790c164e69fdd16",
+      "bytes": 148684,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    },
+    {
+      "id": "mily-b257-21-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-21-20261108-night-social-photo.webp",
+      "source": "/media/live/mily-b257-21-20261108-night-social-photo.png",
+      "sha256": "27035473e2e1e643af3999ecb666da6f94b9a11457dc18da285bee8909a5a95a",
+      "bytes": 140124,
+      "width": 720,
+      "height": 900,
+      "lossless": true
+    }
+  ]
 }
