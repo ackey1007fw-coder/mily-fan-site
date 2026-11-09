@@ -68,7 +68,7 @@ export const streamRecap1109Night: StreamRecap = {
     { timestamp: "1:10:35", label: "寝る前のバイバイ" },
     { timestamp: "1:11:04", label: "締めの挨拶と翌朝の案内" },
   ],
-  nextNote: "配信の中では、翌朝6時から6時半に配信すると案内していました。",
+  nextNote: "配信時点では、翌朝6時から6時半に配信すると案内していました。",
   sourceLabel: "2026年11月9日 夜のSHOWROOM配信（保存録画の自動文字起こし・実フレーム確認）",
   verifiedAt: "2026-11-10",
   transcriptionNote: buildTranscriptionNote({
