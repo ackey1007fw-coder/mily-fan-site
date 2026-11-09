@@ -1,3 +1,34 @@
+## b260：2026-11-09夜 写真10枚・原音トーク短尺4本
+
+- 対象は2026-11-09夜のLIVE STREAM記事だけ。NEWS・Gallery・SNS・別配信には展開しない。
+- 同回の保存録画（640×360、実尺71分16.914秒）から選定した実フレーム10枚と、歌唱のない雑談部分の原音付き短尺4本。記録時刻は録画先頭からの目安で、配信の時計時刻とは区別する。採用秒：写真 165・427・682・1247・1470・2067・2772・2967・3207・4192、短尺 2765.74–2792.62・3566.66–3588.76・4235.34–4254.82・4263.58–4276.88。
+- 写真とポスターは各1枚を実寸で目視。採用した写真・ポスターに、読み取れる個人名の書かれた手持ち付箋・コメントUI・第三者人物は見つけていない。壁の背景は元のまま。背景の読めない名前を推測して本文へ書かない。
+- 静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大はしていない。JPEGにEXIF/GPS/IPTCなし。代表写真は10。
+- 短尺は原音付き（H.264/AAC）。掲載範囲は別経路の自動認識（Whisper large-v3）で照合した。締めの順位・名前の読み上げ範囲は採用していない。短尺1本（感情の話）には、本人のお礼の一言として視聴者の表示名への短い言及が含まれる。歌唱とみられる範囲は権利確認が済んでいないため含まない。A/V同期は切り出し範囲のフレームと音声で確認。
+- 写真ZIPには掲載JPEG10枚だけを収録し、バイト一致を検査。元録画、全文ASR、個別視聴者の情報、非公開素材の場所は含めない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b260-01-20261109-night-opening-laugh.jpg | 15454 | a1320fd5b574997d55b916232c1984ef6be0c54531ccc51f142e957e78b02951 |
+| public/media/live/mily-b260-02-20261109-night-soft-apology.jpg | 16359 | 42ca8e79a82dfcc11ea349f5033212e689ce3ed87dbd92492ef8525ff9d34880 |
+| public/media/live/mily-b260-03-20261109-night-tilt-laugh.jpg | 17873 | ceed6f7684b331567842a498c19af746c1de0a6ea45b64807773808e1f307236 |
+| public/media/live/mily-b260-04-20261109-night-hair-touch-smile.jpg | 16725 | dc4493d5e7d7dd6ee088602cdb466b3750552d89e5452655855cbbfce875d470 |
+| public/media/live/mily-b260-05-20261109-night-serious-talk.jpg | 17031 | a540a3c0e76bb596336dd9bd08000b0d56055cb99840f6370fd181a5bb096e15 |
+| public/media/live/mily-b260-06-20261109-night-puzzle-smile.jpg | 16355 | a6f81bbec912c2ff0066cfb4ba89775e0ad4c555e707aa0c3f9aee4c8f6c75c6 |
+| public/media/live/mily-b260-07-20261109-night-lean-talk.jpg | 15897 | 2ead0204363bebabdc09fba1a8be9ff76e9d1935b0df4cbed87c80076f52e24a |
+| public/media/live/mily-b260-08-20261109-night-front-smile.jpg | 17391 | 12f5ae0abc2e02e57003fa279756c46b4518f51a6f8dbe39d06ee824fffbdac6 |
+| public/media/live/mily-b260-09-20261109-night-bright-smile.jpg | 16818 | cc93710b220193768ef3653b0f8c3f2c013aa119032d69d263652f99d092f543 |
+| public/media/live/mily-b260-10-20261109-night-closing-smile.jpg | 15619 | 5d64f6c15ba8ceadce71e5f1dd4a7470b466fcecb734b8a310195caf70337b6c |
+| public/media/live/mily-b260-20261109-night-photos.zip | 167240 | 5ca8cefa1ccd5c7046ae8c6b63f1b476e2a2b7a2304bcbae96f9a1c5b81c7456 |
+| public/media/live-clips/mily-b260-11-20261109-night-emotion-talk.mp4 | 1400853 | fcce54439ff1fb00580029362259976180af71163da25bf44605fbd5e2fc2428 |
+| public/media/live-clips/mily-b260-11-20261109-night-emotion-talk-poster.jpg | 13826 | c356f5ed323c49c07c74465002ea137baaee2e68b678a1477157bba20a265292 |
+| public/media/live-clips/mily-b260-12-20261109-night-bonzu-origin.mp4 | 1231915 | abd32825e2aab6331ba777a54e54306810c894cd70222c070f7c9d3f3f08fbe0 |
+| public/media/live-clips/mily-b260-12-20261109-night-bonzu-origin-poster.jpg | 15050 | 6208acee1c97d2beb709d924f1f20f7e6f196b47f4fefc4729d07ca9838b8766 |
+| public/media/live-clips/mily-b260-13-20261109-night-goodbye.mp4 | 1537069 | 874a0fa25c95de1631450f5d01d24b44d2a6c4d066ea545df7aac9e31ac7e205 |
+| public/media/live-clips/mily-b260-13-20261109-night-goodbye-poster.jpg | 13705 | b3da288a972b781488c3a852eb6efb3b21b9622748085caa31903316d8e917b1 |
+| public/media/live-clips/mily-b260-14-20261109-night-last-goodbye.mp4 | 1012340 | ce4f0da844a5d0353a92d6bf3ead190ff121e8aaee3b04bce81a7584849d57d0 |
+| public/media/live-clips/mily-b260-14-20261109-night-last-goodbye-poster.jpg | 13467 | 3adf2ff304f113b611ca02370fc45b85ed08e6afcb3c05a47b343865136d84e1 |
+
 ## b259：2026-11-08夜 原音トーク短尺2本（b257記事への追加）
 
 - 対象は2026-11-08夜のLIVE STREAM記事だけ。写真はb257で公開済みのため追加しない。NEWS・Gallery・SNS・別配信には展開しない。
