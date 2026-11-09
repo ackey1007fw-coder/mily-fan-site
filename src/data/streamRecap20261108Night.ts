@@ -37,18 +37,18 @@ export const streamRecap20261108Night: StreamRecap = {
   highlights: [
     { timestamp: "0:03:00", title: "応援と投票への感謝", body: "結果がまだわからない中で、セミファイナル期間を振り返り、応援と投票への感謝を伝えました。" },
     { timestamp: "0:10:20", title: "コメントへの思い", body: "すべてに個別返信する時間は取れなくても、寄せられたコメントを見ているという話がありました。" },
-    { timestamp: "0:34:40", title: "配信100日の記念企画", body: "配信100日の記念として、アバターを揃えた記念撮影を呼びかけました。トマトのファンマークを取り入れたアバターも話題になりました。" },
+    { timestamp: "0:35:13", title: "配信100日の記念企画", body: "配信100日の記念として、アバターを揃えた記念撮影を呼びかけました。トマトのファンマークを取り入れたアバターも話題になりました。", clip: { src: "/media/live-clips/mily-b259-11-20261108-night-photo-call.mp4", poster: "/media/live-clips/mily-b259-11-20261108-night-photo-call-poster.jpg", width: 640, height: 360, durationSeconds: 17, sourceTimestamp: "0:35:13" } },
     { timestamp: "0:53:25", title: "猫耳と肉球の記念ポーズ", body: "猫耳と肉球をつけ、両手を頭のそばに上げてポーズをとりました。" },
-    { timestamp: "0:57:14", title: "これからも楽しい時間を", body: "これからも皆で配信を楽しみたいという思いと、感謝を伝えました。" },
+    { timestamp: "0:57:25", title: "これからも楽しい時間を", body: "これからも皆で配信を楽しみたいという思いと、感謝を伝えました。", clip: { src: "/media/live-clips/mily-b259-12-20261108-night-closing-thanks.mp4", poster: "/media/live-clips/mily-b259-12-20261108-night-closing-thanks-poster.jpg", width: 640, height: 360, durationSeconds: 22, sourceTimestamp: "0:57:25" } },
   ],
   goals: [],
   ranking: [],
   timeline: [
     { timestamp: "0:03:00", label: "セミファイナルの応援への感謝" },
     { timestamp: "0:10:20", label: "寄せられたコメントの話" },
-    { timestamp: "0:34:40", label: "配信100日の記念企画" },
+    { timestamp: "0:35:13", label: "配信100日の記念企画" },
     { timestamp: "0:53:20", label: "記念撮影への呼びかけ" },
-    { timestamp: "0:57:14", label: "これからの配信への思い" },
+    { timestamp: "0:57:25", label: "これからの配信への思い" },
   ],
   nextNote: "配信時点では、翌11月9日6:00〜6:30の朝配信を案内していました。",
   sourceLabel: "2026年11月8日 夜のSHOWROOM配信（保存録画の自動文字起こし・実フレーム確認）",
@@ -56,6 +56,7 @@ export const streamRecap20261108Night: StreamRecap = {
   transcriptionNote: buildTranscriptionNote({
     material: AUTO_TRANSCRIPT_MATERIAL_NOTE,
     stills: "静止画は当日の保存録画の実フレーム10枚を掲載しています。",
-    extra: "本文は自動文字起こしに基づく要約で、原音の手動聴取・逐語校正は未実施です。時刻は録画先頭からの目安です。録画実尺は約60分で、処理開始から終了までの時計上の幅とは約51秒異なります。全区間の連続性は未確認です。配信100日は本人の説明に基づき、日付からの独立した検算はしていません。曲名は未確認のため掲載していません。原音付きの短尺候補は、実聴と公開条件の確認が済むまで掲載していません。",
+    publishedClips: true,
+    extra: "本文は自動文字起こしに基づく要約で、原音の手動聴取・逐語校正は未実施です。時刻は録画先頭からの目安です。録画実尺は約60分で、処理開始から終了までの時計上の幅とは約51秒異なります。全区間の連続性は未確認です。配信100日は本人の説明に基づき、日付からの独立した検算はしていません。曲名は未確認のため掲載していません。短尺は原音付きで、歌唱のない雑談部分から切り出し、掲載範囲は原音の文字起こしで照合しています。",
   }),
 };
