@@ -76,6 +76,14 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: node scripts/mily-noon-20261031.browser.mjs
 
+      - name: November 8 night media browser checks
+        timeout-minutes: 4
+        env:
+          PLAYWRIGHT_MODULE_ROOT: ${{ runner.temp }}/mily-browser-tools/node_modules
+          SONG_CATALOG_ARTIFACT_DIR: ${{ runner.temp }}/song-catalog-browser
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: node scripts/mily-night-20261108.browser.mjs
+
       - name: October 31 announced schedule browser checks
         timeout-minutes: 3
         env:

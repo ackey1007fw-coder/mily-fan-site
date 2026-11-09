@@ -1,3 +1,26 @@
+## b257：2026-11-08夜 写真10枚
+
+- 対象は当日のLIVE STREAM記事だけ。同回の既存本文を保持し、NEWS・Gallery・SNS・別配信には展開しない。
+- 同回の保存録画から選定した実フレーム10枚（640×360）。記録時刻は録画先頭からの目安で、配信の時計時刻とは区別する。
+- 写真は各1枚を実寸で目視。採用範囲に手持ち付箋・コメントUI・第三者人物は見つけていない。壁の背景は元のまま。背景の読めない名前を推測して本文へ書かない。
+- 元JPEGのバイトを保持し、顔・身体・背景の生成や補正、拡大はしていない。JPEGにEXIF/GPS/IPTCなし。代表写真は09。
+- 写真ZIPには掲載JPEG10枚だけを収録し、1件ごとのバイト一致・CRCを検査。元録画、全文ASR、個別視聴者の情報、非公開素材の場所は含めない。
+- 無音動画の掲載案は取り下げ、公開MP4とその参照を除外。原音付き短尺候補は実聴と公開条件の確認が済むまで非掲載。歌唱や曲名の確認、全配信の連続性、原音全編の実聴は完了扱いにしない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b257-01-20261108-night-hair-arrange.jpg | 27985 | 1cb8c598a9922ef5c4b0079b8e9af75a3c50c03523ffe63f2495e70fc88993f4 |
+| public/media/live/mily-b257-02-20261108-night-red-ribbon.jpg | 22951 | 366fb32b99253ae81a2384f34c0315a432a5849cc23c15b4d7d9cc31e534017e |
+| public/media/live/mily-b257-03-20261108-night-camera-smile.jpg | 21034 | 6f53e72ee754f93f896901da39ceb04d177c45073597a8542ecfafc711704f5b |
+| public/media/live/mily-b257-04-20261108-night-talk-expression.jpg | 22812 | eb65435fa8acc295ac517c611756a51510f7e3b2c393b16a1df9f7e8c1e6d583 |
+| public/media/live/mily-b257-05-20261108-night-side-ponytail.jpg | 26923 | e39c66b404ff2b098dbb0dea206fc27208c6c15f4dbbef43e651a7f17e3d12a0 |
+| public/media/live/mily-b257-06-20261108-night-talk-smile.jpg | 23415 | 6416ae43a853e184eeeab7d2a48a2c4ddddb3db05f371d9b03ba1126b35c9288 |
+| public/media/live/mily-b257-07-20261108-night-cat-ears.jpg | 25108 | 34c8ae818fecc0d36c92aaad65e51928e15dfa36a8cc7e44d19f10cc764252ef |
+| public/media/live/mily-b257-08-20261108-night-paws-up.jpg | 24200 | a54204df9ea35eddc3f72b55872c962cad5c7f4d433d4979adf9f76179354bb8 |
+| public/media/live/mily-b257-09-20261108-night-both-paws.jpg | 24287 | 01deb61699b52ab06d0cf4fe2a7a128efc4d61d848235b8d9350ad51401f16d7 |
+| public/media/live/mily-b257-10-20261108-night-closing-cat-ears.jpg | 22991 | 75939e6fa0bbc924f77da3dfcb1a7bf162c6be7c8d5bccde23464ccb9c4c1ab1 |
+| public/media/live/mily-b257-20261108-night-photos.zip | 243168 | 8c481461b126de97c86fd284eee4f036cbbad3404fd15dd217ea60880eec6149 |
+
 ## b256：2026-11-05昼 LIVE STREAM写真10枚＋フォトページ1枚
 
 - **承認範囲**：オーナーが11月5日昼（14:45枠）のスクショ・サイト更新・数値分析を依頼（2026-11-05 JST）。対象は当該SHOWROOM昼配信の**LIVE STREAM記事**に限定。Draft PRでオーナー確認を経てからmerge判断する。
