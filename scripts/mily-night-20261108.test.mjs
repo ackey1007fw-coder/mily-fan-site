@@ -22,18 +22,27 @@ test("11/8 night: one recap, reviewed stills only; no unreviewed audio or muted 
     assert.ok(existsSync(new URL(`../public${image.src}`, import.meta.url)));
   }
   const clips = recap.highlights.filter(h => h.clip).map(h => h.clip);
-  assert.equal(clips.length, 0);
+  assert.deepEqual(clips.map(c => [c.src.split("/").at(-1), c.durationSeconds]), [
+    ["mily-b259-11-20261108-night-photo-call.mp4", 17],
+    ["mily-b259-12-20261108-night-closing-thanks.mp4", 22],
+  ]);
+  for (const clip of clips) {
+    assert.equal(clip.width, 640);
+    assert.equal(clip.height, 360);
+    assert.ok(existsSync(new URL(`../public${clip.src}`, import.meta.url)));
+    assert.ok(existsSync(new URL(`../public${clip.poster}`, import.meta.url)));
+  }
   assert.equal(existsSync(new URL("../public/media/live-clips/mily-b257-11-20261108-night-cat-paws-muted.mp4", import.meta.url)), false);
   assert.ok(recap.highlights.every(h => !h.socialClip && !h.quote && !h.relatedLinks));
   assert.deepEqual(recap.goals, []);
   assert.deepEqual(recap.ranking, []);
-  assert.deepEqual(recap.highlights.map(h => h.timestamp), ["0:03:00", "0:10:20", "0:34:40", "0:53:25", "0:57:14"]);
+  assert.deepEqual(recap.highlights.map(h => h.timestamp), ["0:03:00", "0:10:20", "0:35:13", "0:53:25", "0:57:25"]);
 });
 
 test("11/8 night: ASR and timing limits remain explicit and ledger matches", () => {
-  for (const text of ["自動文字起こし", "手動聴取・逐語校正は未実施", "約51秒", "連続性は未確認", "曲名は未確認", "原音付きの短尺候補は、実聴と公開条件の確認が済むまで掲載していません"]) assert.ok(recap.transcriptionNote.includes(text));
+  for (const text of ["自動文字起こし", "手動聴取・逐語校正は未実施", "約51秒", "連続性は未確認", "曲名は未確認", "掲載範囲は原音の文字起こしで照合しています"]) assert.ok(recap.transcriptionNote.includes(text));
   assert.match(recap.nextNote, /^配信時点では、翌11月9日6:00〜6:30/);
-  assert.doesNotMatch(JSON.stringify(recap), /23662416|drive\.google|\.mkv|\.mp4|\/Users\/|\/workspace\/|live_id/);
+  assert.doesNotMatch(JSON.stringify(recap), /23662416|drive\.google|\.mkv|\/Users\/|\/workspace\/|live_id/);
   const ledger = JSON.parse(readFileSync(new URL("../docs/RECAP-VERIFICATION-LEDGER.json", import.meta.url), "utf8"));
   const rows = ledger.filter(r => r.id === recap.id);
   assert.equal(rows.length, 1);

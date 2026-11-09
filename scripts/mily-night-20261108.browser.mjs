@@ -44,7 +44,7 @@ try {
         assert.equal(await recap.getAttribute("open"), "");
         assert.match(await recap.innerText(), /夜は配信100日のありがとう/);
         assert.equal(await recap.locator("img").count(), 11);
-        assert.equal(await recap.locator("video").count(), 0);
+        assert.equal(await recap.locator("video").count(), 2);
         assert.equal(await recap.locator("audio,iframe").count(), 0);
         for (const image of await recap.locator("img").all()) {
           await image.scrollIntoViewIfNeeded();
@@ -61,7 +61,7 @@ try {
         assert.equal(errors.length, 0, errors.join("\n"));
         await recap.locator("summary").first().screenshot({ path: join(output, `${name}-${width}-cover.png`) });
         await recap.locator('section').filter({ hasText: 'この回のスクショ' }).last().screenshot({ path: join(output, `${name}-${width}-gallery.png`) });
-        results.push({ engine: name, width, passed: true, imageCount: 11, galleryCount: 10, videoCount: 0, zipStatus, base, head: process.env.PR_HEAD_SHA || null });
+        results.push({ engine: name, width, passed: true, imageCount: 11, galleryCount: 10, videoCount: 2, zipStatus, base, head: process.env.PR_HEAD_SHA || null });
         await page.close();
       }
     } finally { await browser.close(); }

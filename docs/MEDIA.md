@@ -1,3 +1,47 @@
+## b259：2026-11-08夜 原音トーク短尺2本（b257記事への追加）
+
+- 対象は2026-11-08夜のLIVE STREAM記事だけ。写真はb257で公開済みのため追加しない。NEWS・Gallery・SNS・別配信には展開しない。
+- 同回の保存録画（640×360、実尺約60分）の歌唱のない雑談部分から切り出した原音付き短尺2本。記録時刻は録画先頭からの目安で、配信の時計時刻とは区別する。採用秒：短尺 2113–2130・3445–3467。
+- 掲載範囲は別経路の自動認識（Whisper large-v3）で照合し、視聴者の表示名を含む発話範囲は切り出し対象から外した。締めの歌唱部分は権利確認が済んでいないため含まない。
+- ポスターは短尺内の実フレームを実寸で目視。目を閉じたフレームは不採用とし、差し替えた。採用範囲に手持ち付箋・コメントUI・第三者人物は見つけていない。壁の背景は元のまま。
+- 短尺は原音付き（H.264/AAC）。顔・身体・背景の生成や補正、拡大はしていない。元録画、全文ASR、個別視聴者の情報、非公開素材の場所は含めない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live-clips/mily-b259-11-20261108-night-photo-call.mp4 | 1333841 | 66b112f3a87cb1bec0b2e429ce9fe09978ae669d3deb4be2f4cffcc4b3eedbeb |
+| public/media/live-clips/mily-b259-11-20261108-night-photo-call-poster.jpg | 18713 | 958340d20e5b80e16c38d625033912436c1f99180445dbecd24b32f492f045ee |
+| public/media/live-clips/mily-b259-12-20261108-night-closing-thanks.mp4 | 1947682 | 3b2b1112990d14dbfe3dd8d5b88daf40b90691e29fcecca72e7659942cddbfc7 |
+| public/media/live-clips/mily-b259-12-20261108-night-closing-thanks-poster.jpg | 17790 | 9d598f4ff4ef99b0ca43cb9a03db6d9bddfc97af1f31d5acea41ded5b0153210 |
+
+## b258：2026-11-09朝 写真10枚・原音トーク短尺3本
+
+- 対象は2026-11-09朝のLIVE STREAM記事だけ。NEWS・Gallery・SNS・別配信には展開しない。
+- 同回の保存録画（640×360、実尺約36分）から選定した実フレーム10枚と、歌唱のない雑談部分の原音付き短尺3本。記録時刻は録画先頭からの目安で、配信の時計時刻とは区別する。採用秒：写真 60・150・300・1050・1110・1200・2040・2070・2145・2160、短尺 1296–1308・1326–1352・2145–2167。
+- 写真とポスターは各1枚を実寸で目視。採用範囲に手持ち付箋・コメントUI・第三者人物は見つけていない。壁の背景は元のまま。背景の読めない名前を推測して本文へ書かない。
+- 静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大はしていない。JPEGにEXIF/GPS/IPTCなし。代表写真は10。
+- 短尺は原音付き（H.264/AAC）。視聴者の表示名を含む発話範囲は切り出し対象から外した。A/V同期は切り出し範囲のフレームと音声で確認。歌唱は含まない。
+- 写真ZIPには掲載JPEG10枚だけを収録。元録画、全文ASR、個別視聴者の情報、非公開素材の場所は含めない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b258-01-20261109-morning-wave-greeting.jpg | 21146 | d8f0cc4d736a665ce1d65d8d5431187a86ebf3f25959d8342787b7e5e7de383d |
+| public/media/live/mily-b258-02-20261109-morning-tilt-smile.jpg | 22952 | 0c2a791730f488cd99ce4872d19145d0e5647afccc19b2a670ebceeacc4d584f |
+| public/media/live/mily-b258-03-20261109-morning-chin-pose.jpg | 24331 | 86dd4ccfa61a41771a05e2451641cab9a65fe070964661e6dedd486617df00ef |
+| public/media/live/mily-b258-04-20261109-morning-soft-smile.jpg | 21042 | acc18a2bf8a375cece70009ab141091ada5f480ccbc493dc7e272fe27d786662 |
+| public/media/live/mily-b258-05-20261109-morning-cheek-pose.jpg | 23487 | 40c726a89899d8c914d3bebe0cf4317344b4f30a363fa559ca52683cc8c3d76a |
+| public/media/live/mily-b258-06-20261109-morning-hood-talk.jpg | 22208 | b8b6ac6a93d83e73bdd0f07baf1199028337e742cac231ace4bc631ddf8d2cfc |
+| public/media/live/mily-b258-07-20261109-morning-talk-smile.jpg | 21686 | 7fa78867c1f296f7425cfe392137c64fcf2538eca885a33afd5146d52d858894 |
+| public/media/live/mily-b258-08-20261109-morning-hands-up.jpg | 23157 | e1426c93af27dfa12b4ec39bc21bff84215952498f1f55cffa59d16f5883c4ee |
+| public/media/live/mily-b258-09-20261109-morning-paws-pose.jpg | 20459 | f808e951deb7f6eb9a0d76e03ab983bf80e12c725eae6db964a94b8d3e4ac5e4 |
+| public/media/live/mily-b258-10-20261109-morning-cheek-smile.jpg | 23509 | b5cdebacbea72ac89df5cf5a154d538b6ddcf4426be7ca9ba65f95c7ba3fc0a8 |
+| public/media/live/mily-b258-20261109-morning-photos.zip | 225750 | cf2e4fd838aab0f50300050ee08ed4a0011ee03e40f5330de3248b7524d36356 |
+| public/media/live-clips/mily-b258-11-20261109-morning-dream-talk.mp4 | 844618 | eb5a53d47a8141e0d85c99cd92bbd032efee1ddba5617a5f5c4a777c54320e4f |
+| public/media/live-clips/mily-b258-11-20261109-morning-dream-talk-poster.jpg | 22166 | 3e9536cf93dd66aebef370367a44f930b09146294a42bb06cca9515bee0e5f13 |
+| public/media/live-clips/mily-b258-12-20261109-morning-final-hopes.mp4 | 1672759 | 479d14d993beb27fd435ff3d6938a57d87e50be78c4b348d46701b3153b7a569 |
+| public/media/live-clips/mily-b258-12-20261109-morning-final-hopes-poster.jpg | 20577 | 4dfb35d0fe63679166e6145564f0f902091cf30a352303bdc5b1ca12f7baeb11 |
+| public/media/live-clips/mily-b258-13-20261109-morning-closing-talk.mp4 | 1617960 | 391bf6b7be1101091c5b7e3bbb8e5d5d7af253db8675aa56013750b2e0d4593a |
+| public/media/live-clips/mily-b258-13-20261109-morning-closing-talk-poster.jpg | 21364 | 8d814746860abe169c4c67f36c7da83db7d9b1bfc0b4fae09a9343ba15646d1e |
+
 ## b257 SNS派生：2026-11-08夜 写真10枚
 
 - 承認済みの同回写真10枚を、SNS向け720×900の静止画に配置。元の640×360の写真を拡大・切り取り・補正せず、画素一致を検査した。顔・身体・背景の生成なし。
