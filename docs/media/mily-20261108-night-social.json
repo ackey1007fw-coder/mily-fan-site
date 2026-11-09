@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 1,
+  "kind": "image",
+  "platform": "instagram",
+  "recapId": "2026-11-08-night-showroom",
+  "date": "2026-11-08",
+  "coverId": "mily-b257-12-20261108-night-social-cover",
+  "coverTitle": "この笑顔、ずるい。",
+  "order": [
+    "mily-b257-12-20261108-night-social-cover",
+    "mily-b257-13-20261108-night-social-photo",
+    "mily-b257-14-20261108-night-social-photo",
+    "mily-b257-15-20261108-night-social-photo",
+    "mily-b257-16-20261108-night-social-photo",
+    "mily-b257-17-20261108-night-social-photo",
+    "mily-b257-18-20261108-night-social-photo",
+    "mily-b257-19-20261108-night-social-photo",
+    "mily-b257-20-20261108-night-social-photo",
+    "mily-b257-21-20261108-night-social-photo"
+  ],
+  "items": [
+    {
+      "id": "mily-b257-12-20261108-night-social-cover",
+      "path": "/media/live/mily-b257-12-20261108-night-social-cover.png",
+      "source": "/media/live/mily-b257-06-20261108-night-talk-smile.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "e3d3bd1084710c7ae00ef75dcfae2cc893f28882d0adfd9b668630ab5695a052",
+      "sourcePhotoNumber": 6,
+      "caption": "笑顔のトーク場面",
+      "sourceOffset": "46:20"
+    },
+    {
+      "id": "mily-b257-13-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-13-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-01-20261108-night-hair-arrange.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "8444385c6c63efa5c3df6fa4b13a0c7427f9aa9ffcbe3fea410ef2d833ab6f39",
+      "sourcePhotoNumber": 1,
+      "caption": "髪を整えるしぐさ",
+      "sourceOffset": "00:30"
+    },
+    {
+      "id": "mily-b257-14-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-14-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-02-20261108-night-red-ribbon.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "522cf5e78e5edd0d259b3899a1cf9983f90399acb3fdc57a380ada3f31522557",
+      "sourcePhotoNumber": 2,
+      "caption": "赤いリボンと制服風の衣装",
+      "sourceOffset": "01:40"
+    },
+    {
+      "id": "mily-b257-15-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-15-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-03-20261108-night-camera-smile.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "51996fe95c7c9a4cf4ecfa4b6db1468062a47729f1199c7e129b1106b5f84bd3",
+      "sourcePhotoNumber": 3,
+      "caption": "カメラに向けた笑顔",
+      "sourceOffset": "08:00"
+    },
+    {
+      "id": "mily-b257-16-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-16-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-04-20261108-night-talk-expression.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "48fac03ff92d9c3ce24906c23e1b4b4374c54c5da06506edbaf23b38fac39013",
+      "sourcePhotoNumber": 4,
+      "caption": "会話中の表情",
+      "sourceOffset": "20:00"
+    },
+    {
+      "id": "mily-b257-17-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-17-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-05-20261108-night-side-ponytail.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "96d6408d375026fa253ae6ad7cf97677ee4b8ae4381b863a83471d6d9ec0a9f7",
+      "sourcePhotoNumber": 5,
+      "caption": "サイドにまとめた髪",
+      "sourceOffset": "33:50"
+    },
+    {
+      "id": "mily-b257-18-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-18-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-07-20261108-night-cat-ears.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "1a427af9b28c5023bc671e74a59e5091b0684dafa4115dd487b1160714810b7a",
+      "sourcePhotoNumber": 7,
+      "caption": "猫耳をつけた近景",
+      "sourceOffset": "53:20"
+    },
+    {
+      "id": "mily-b257-19-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-19-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-08-20261108-night-paws-up.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "25aa054141f2ca7c9e7817ab446c1504bf55e486dca79b14370f7d48678cbde1",
+      "sourcePhotoNumber": 8,
+      "caption": "肉球を頭のそばに",
+      "sourceOffset": "53:40"
+    },
+    {
+      "id": "mily-b257-20-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-20-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-09-20261108-night-both-paws.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "42760000b04f5f5d55ce7e55acd5cdb94c6673466ea9af70f1e4096d3e7c3d55",
+      "sourcePhotoNumber": 9,
+      "caption": "両手の肉球ポーズ",
+      "sourceOffset": "53:55"
+    },
+    {
+      "id": "mily-b257-21-20261108-night-social-photo",
+      "path": "/media/live/mily-b257-21-20261108-night-social-photo.png",
+      "source": "/media/live/mily-b257-10-20261108-night-closing-cat-ears.jpg",
+      "photoBounds": [
+        40,
+        270,
+        680,
+        630
+      ],
+      "sha256": "223fba16bd3616cb2a2c1b522ded896f9149cd695bb719a63b424266606adaaa",
+      "sourcePhotoNumber": 10,
+      "caption": "終盤の猫耳のしぐさ",
+      "sourceOffset": "59:05"
+    }
+  ],
+  "coverReview": {
+    "sha256": "e3d3bd1084710c7ae00ef75dcfae2cc893f28882d0adfd9b668630ab5695a052",
+    "reviewer": "dot: inspected actual cover, square and 3:4 grid previews",
+    "reviewedAt": "2026-11-09T01:17:48.902Z",
+    "personBounds": [
+      40,
+      270,
+      680,
+      630
+    ],
+    "titleBounds": [
+      165,
+      178,
+      562,
+      226
+    ],
+    "gridCrops": [
+      [
+        0,
+        90,
+        720,
+        810
+      ],
+      [
+        22,
+        0,
+        697,
+        900
+      ]
+    ],
+    "observedText": [
+      "Mily",
+      "2026.11.08",
+      "この笑顔、ずるい。",
+      "三橋莉子（みりぃ）",
+      "SHOWROOM / 非公式ファン編集"
+    ]
+  }
+}
