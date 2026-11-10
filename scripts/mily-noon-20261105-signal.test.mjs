@@ -32,5 +32,5 @@ test("2026-11-05 noon: report and JSON keep viewers anonymous and wiring is in p
   assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-05").entries.map(x=>x.slot),["night","noon","morning"]);
   assert.match(report,/時間帯ごとのきら星の伸び/);assert.match(report,/イベントptの1日ごとの記録/);assert.match(report,/記録なし/);assert.equal(data.growthBySlot.slots.length,3);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261105-noon/index.html"));
-  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261110-morning|20261107-night|20261107-morning|20261106-night|20261106-noon|20261106-morning|20261105-night|20261105-noon)\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261110-night|20261110-morning|20261107-night|20261107-morning|20261106-night|20261106-noon|20261106-morning|20261105-night|20261105-noon)\/">最新の配信レポート/);
 });

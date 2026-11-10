@@ -1,5 +1,6 @@
 // Published anonymous snapshots only. No private dashboard, live API, or inferred values.
 export const DAILY_STREAM_ENTRIES = Object.freeze([
+  {"date":"2026-11-10","slot":"night","file":"mily-night-20261110-aggregate.json","section":"night-20261110","report":"/data-lab/reports/20261110-night/"},
   {"date":"2026-11-10","slot":"morning","file":"mily-morning-20261110-aggregate.json","section":"morning-20261110","report":"/data-lab/reports/20261110-morning/"},
   {"date":"2026-11-07","slot":"night","file":"mily-night-20261107-aggregate.json","section":"night-20261107","report":"/data-lab/reports/20261107-night/"},
   {"date":"2026-11-07","slot":"morning","file":"mily-morning-20261107-aggregate.json","section":"morning-20261107","report":"/data-lab/reports/20261107-morning/"},
