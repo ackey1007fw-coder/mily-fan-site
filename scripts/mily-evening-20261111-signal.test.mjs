@@ -32,7 +32,7 @@ test("2026-11-11 evening: report and JSON keep viewers anonymous and wiring is i
   assert.match(report,/確定合計ではありません/);assert.match(report,/途中参考値/);assert.match(report,/\+6,850pt/);
   assert.match(report,/17:38:27/);assert.match(report,/17:08〜17:13は未記録/);
   for(const o of data.observations) assert.ok(report.includes(o.atJst.slice(11,19)));
-  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-11").entries.map(x=>x.slot),["evening","morning"]);
+  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-11").entries.map(x=>x.slot),["evening","noon","morning"]);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261111-evening/index.html"));
   assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261111-evening\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"),/evening: "夕方"/);
