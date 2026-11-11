@@ -135,3 +135,10 @@ li{margin-bottom:8px}
  .range-table th{margin-bottom:4px;color:var(--mint);font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* SNS stand-in photos on radio / no-video reports */
+.sns-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin:18px 0 8px}
+.sns-photo-grid figure{margin:0;background:rgba(19,46,61,.6);border:1px solid var(--line);border-radius:18px;overflow:hidden;padding:0 0 12px}
+.sns-photo-grid img{width:100%;height:auto;display:block;aspect-ratio:3/4;object-fit:cover;object-position:center top}
+.sns-photo-grid figcaption{padding:10px 14px 0;font-size:13px;line-height:1.55}
+.sns-photo-grid a{color:var(--aqua)}
