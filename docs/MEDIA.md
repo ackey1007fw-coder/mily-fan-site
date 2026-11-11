@@ -1,3 +1,23 @@
+## b261：2026-11-11夕方ラジオ回の本人X写真8枚（MILY SIGNAL）
+
+- 対象は既存の `/data-lab/reports/20261111-evening/` だけ。NEWS・Gallery・LIVE STREAM記事・SNS投稿には展開しない。
+- この枠は映像が全編黒のラジオ配信だったため、オーナー依頼により、配信画面の代わりとして本人X（@Mily_chan36）の直近公開投稿から選んだ写真8枚を自己ホストで掲載する。X画像CDNへのhotlinkはしない。
+- 公開メディアURLから保存し、トリミング・縮小のみ。顔・身体・背景の生成や補正はしていない。JPEGにGPSは付けていない。
+- 各写真に元ポストへのリンクと「本人Xより」を付ける。この枠の配信映像ではない旨を本文に書く。
+- 屋外、場所が分かる背景、他者の顔、壁の氏名らしい付箋、目が閉じた写真は主候補から外した。07のみ、壁の付箋を除くトリミングを公開版に使っている。
+- Draft PRのまま。Ready・merge・投稿・本人への送信はしない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b261-01-20261111-evening-sns-studio-portrait.jpg | 90547 | f3378c000b0a61d66846c954555ceda48087709c43a93b6bcae3d3de933a3c1f |
+| public/media/live/mily-b261-02-20261111-evening-sns-sukeban-paws-close.jpg | 194208 | a9409c414edf87cfb6e1a2bb6b5a43ccb37be4025ce9dd4319c11c72bdef8ec0 |
+| public/media/live/mily-b261-03-20261111-evening-sns-sukeban-smile.jpg | 172156 | b4ee8e1c49478230885e31f0d6b38189eca7245df5de801fcb4f1fabc489ef9d |
+| public/media/live/mily-b261-04-20261111-evening-sns-sukeban-fullbody.jpg | 136808 | b726eb0de9f4a3d953388c36ba05920d30ed69a2b41188b2e1e64882158e6c06 |
+| public/media/live/mily-b261-05-20261111-evening-sns-finger-pose.jpg | 116179 | 1bc5d3fde5df452d1712665706147b7d6b649009311e9256e8026a75fcf24193 |
+| public/media/live/mily-b261-06-20261111-evening-sns-table-wide-eyes.jpg | 344040 | c6fcfc974bd82a380339a50ff7d7fc8f2db43de98a680801a62b244c600ddeb3 |
+| public/media/live/mily-b261-07-20261111-evening-sns-cat-ears-cheek.jpg | 136164 | 0d9be090eaa9c4714b397d39ed8019cd56ab4f94a734fb700258912e98b3bff7 |
+| public/media/live/mily-b261-08-20261111-evening-sns-shop-selfie.jpg | 239913 | bd92a1cbd06fdd29fd019b80eabb7f1da503e7f31d69825f295a2a2f0eb5eee3 |
+
 ## b260：2026-11-09夜 写真10枚・原音トーク短尺4本
 
 - 対象は2026-11-09夜のLIVE STREAM記事だけ。NEWS・Gallery・SNS・別配信には展開しない。

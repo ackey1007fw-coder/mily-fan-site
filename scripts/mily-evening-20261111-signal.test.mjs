@@ -37,3 +37,18 @@ test("2026-11-11 evening: report and JSON keep viewers anonymous and wiring is i
   assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261111-evening\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"),/evening: "夕方"/);
 });
+
+test("2026-11-11 evening: radio stand-in photos credit the original X posts",()=>{
+  assert.match(report,/本人Xの最近の写真/);
+  assert.match(report,/ラジオ配信/);
+  assert.match(report,/この枠の配信映像ではありません/);
+  assert.match(report,/生成や顔の加工はしていません/);
+  const ids=["2120427968283750451","2119083488733491214","2117633751773786406","2116183359382823222","2118721115514384479","2118358092559827235"];
+  for (const id of ids){
+    assert.match(report,new RegExp("https://x.com/Mily_chan36/status/"+id));
+  }
+  assert.equal((report.match(/本人Xより/g)||[]).length,8);
+  assert.match(report,/\/media\/live\/mily-b261-01-20261111-evening-sns-studio-portrait\.jpg/);
+  assert.doesNotMatch(report,/flagged|CLASSROOM|OTHER-PERSON|ginkgo-OUTDOOR|user_id|\/workspace\//);
+  assert.doesNotMatch(report,/pbs\.twimg\.com/);
+});
