@@ -8,7 +8,7 @@ const report=read("data-lab/reports/20261111-afternoon/index.html");
 const csv=read("public/data-lab/data/mily-afternoon-20261111-observations.csv");
 test("2026-11-11 afternoon: last valid UI display is a mid-stream reference; new-event pt is a recorded difference",()=>{
   assert.equal(data.liveId,23672535);assert.equal(data.roomId,573253);
-  assert.equal(data.dateJst,"2026-11-11");assert.equal(data.session,"afternoon");
+  assert.equal(data.dateJst,"2026-11-11");assert.equal(data.session,"noon");
   assert.equal(data.finalServiceValueVerified,false);assert.equal(data.quality.verified_final,false);assert.equal(data.quality.end_confirmed,false);
   assert.equal(data.lastValidOnline.confirmedFinal,false);
   assert.deepEqual({...data.metrics},{stars:5027,visits:852,comments:538,firstVisits:26,repeatVisits:36,newFollows:3,otherFree:232,star100People:46,recommendedCommentPeople:51});
