@@ -1,5 +1,6 @@
 // Published anonymous snapshots only. No private dashboard, live API, or inferred values.
 export const DAILY_STREAM_ENTRIES = Object.freeze([
+  {"date":"2026-11-11","slot":"evening","file":"mily-evening-20261111-aggregate.json","section":"evening-20261111","report":"/data-lab/reports/20261111-evening/"},
   {"date":"2026-11-11","slot":"noon","file":"mily-afternoon-20261111-aggregate.json","section":"noon-20261111","report":"/data-lab/reports/20261111-afternoon/"},
   {"date":"2026-11-11","slot":"morning","file":"mily-morning-20261111-aggregate.json","section":"morning-20261111","report":"/data-lab/reports/20261111-morning/"},
   {"date":"2026-11-10","slot":"night","file":"mily-night-20261110-aggregate.json","section":"night-20261110","report":"/data-lab/reports/20261110-night/"},
@@ -63,8 +64,8 @@ export const METRICS = Object.freeze({
   visits: "総訪問表示",
   comments: "コメント表示",
 });
-export const SLOT_LABELS = Object.freeze({ morning: "朝", morning1: "朝1枠目（5時台）", morning2: "朝2枠目（6時台）", noon: "昼", night: "夜" });
-const slotOrder = Object.freeze({ night: 0, noon: 1, morning: 2, morning1: 3, morning2: 2.5 });
+export const SLOT_LABELS = Object.freeze({ morning: "朝", morning1: "朝1枠目（5時台）", morning2: "朝2枠目（6時台）", noon: "昼", evening: "夕方", night: "夜" });
+const slotOrder = Object.freeze({ night: 0, evening: 0.5, noon: 1, morning: 2, morning1: 3, morning2: 2.5 });
 
 export function groupByBroadcastDate(entries = DAILY_STREAM_ENTRIES) {
   const sorted = [...entries].sort((a, b) =>
