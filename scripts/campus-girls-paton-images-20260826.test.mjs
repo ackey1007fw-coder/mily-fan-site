@@ -135,7 +135,7 @@ describe("2026-08-26 CAMPUS GIRLS Paton NEWS images", () => {
     );
 
     for (const content of serialized) {
-      assert.equal(content.includes("mily-b26"), false);
+      assert.equal(content.includes("mily-b26-"), false);
     }
   });
 });

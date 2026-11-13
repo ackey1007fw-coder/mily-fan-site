@@ -1,3 +1,19 @@
+## b262：2026-11-13 本人Instagram「去年の紅葉」写真5枚（NEWS・Gallery）
+
+- オーナーが特定の投稿を指定して掲載を依頼した「オーナー指定素材」（AGENTS.md のメディア例外、2026-11-13追加）。出典は本人のInstagram投稿 https://www.instagram.com/p/DfrcoWLEyck/ （2026-11-13 2:45 JST、写真5点・動画3点のカルーセル）。取得経路：オーナー指定により取得（2026-11-13）。
+- 写真5点を投稿表示の原寸（1536×2048）で保存し、原本は無改変で gitignored の `media/original/` に保持（GitHubへはコミットしない）。公開派生は `pnpm media:build` で 480/960/1600 の JPEG・WebP を生成し、EXIF等のメタデータは除去。顔・身体の生成・補正・トリミングはしていない。
+- 動画3点（手元のイチョウの葉／後ろ姿で歩く4人／見上げるイチョウ）は、ブラウザ・連携の正規手段ではファイルを取得できなかったため未掲載。本人のInstagramへの出典リンクで案内する。オーナーから原ファイルの提供があれば別バッチで追加する。
+- 第三者情報：2枚目の友達2名は、本人が投稿時にハートスタンプで顔を隠した状態のまま（こちらでは加工しない）。4枚目の背景の通行人は incidental で、個人を特定できる情報は読み取れない。
+- 掲載面：NEWS `2026-11-13-instagram-autumn-leaves` の代表＋追加写真と、Gallery（`src/data/media.ts`、`provenance: "sns-post"`、`sourceDate: "2026-11-13"`）。
+
+| 原本（media/original、非公開） | Bytes | SHA256 |
+| --- | ---: | --- |
+| mily-b262-01-night-ginkgo-leaf-face.jpg | 639946 | a13dbb8b075228ce5bbf7ab9d2335f80f9fb963db46565916d5e3d595c1cffc4 |
+| mily-b262-02-day-ginkgo-friends.jpg | 697982 | 929cca7e2d4fcfab4615f1a69b3362a59caaff21ebd893a2beef09e0abb59108 |
+| mily-b262-03-night-ginkgo-closeup.jpg | 311054 | 3fb30d0751dadbeee4c2ac400178c966e0d27c27336ba098612bc200fad5f3b4 |
+| mily-b262-04-night-ginkgo-wide.jpg | 391594 | b78a716e9c633f9e0c0dfcfc86b55a3cfb2d5a763f5974b3a8eb661f4ca82de2 |
+| mily-b262-05-night-ginkgo-peace.jpg | 319472 | 684db55ca005fac11bb604dd6edc69d4cd0cf68ca1fa09b5d88900d31f939fca |
+
 ## b261：2026-11-11夕方ラジオ回の本人X写真8枚（MILY SIGNAL）
 
 - 対象は既存の `/data-lab/reports/20261111-evening/` だけ。NEWS・Gallery・LIVE STREAM記事・SNS投稿には展開しない。
