@@ -283,6 +283,14 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-11-13-instagram-autumn-leaves",
+    date: "2026-11-13",
+    title: "去年の紅葉を、みんなに共有🍂 みりぃのInstagram",
+    body: "11月13日2:45（日本時間）、みりぃがInstagramで、去年の秋の紅葉の写真と動画、あわせて8点を共有しました。黄金色のイチョウ並木の下で、大きな葉を顔に添えた写真や、友達と並んでポーズをとる写真などです。\n\n大学帰りに友達と合流したのが懐かしい、と振り返っています。今年はそれぞれ忙しくさせてもらっていて、紅葉を見に行く予定は立てられていないとのこと。それでも、活動を応援してくれて、背中を押してくれる友達が大好きで、写真を見返して、みんなに会った気分になっていると綴っています。\n\n投稿では「皆様は紅葉見にいきましたか〜？？ おすすめのスポットあれば教えて欲しい」と呼びかけています。写真と動画は転載せず、下の本人のInstagramからご覧ください。",
+    source: "https://www.instagram.com/p/DfrcoWLEyck/",
+    sourceLabel: "みりぃ本人のInstagram投稿を見る（11月13日）",
+  },
+  {
     id: "2026-11-07-x-showroom-sr-final-schedule",
     date: "2026-11-07",
     sameDayOrder: 4,
