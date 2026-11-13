@@ -213,7 +213,7 @@ describe("2026-09-06 CAMPUS GIRLS 予選final 結果報告 — media", () => {
     const gallery = media.find((entry) => entry.id === "mily-b63-01");
 
     assert.equal(gallery, campusGirlsPrelimFinalResultPhoto);
-    assert.equal(visible[0], campusGirlsPrelimFinalResultPhoto);
+    assert.equal(visible[1], campusGirlsPrelimFinalResultPhoto);
     assert.equal(gallery.published, true);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.provenance, "sns-post");

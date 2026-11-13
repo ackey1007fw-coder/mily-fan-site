@@ -123,7 +123,7 @@ describe("X haul unused candidates — keep birthday and skip published dupes", 
       true,
     );
     assert.equal(news.length, 49);
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 36);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 37);
     assert.deepEqual(verifyNews(news), []);
     assert.deepEqual(verifyMedia(media), []);
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
@@ -146,7 +146,7 @@ describe("2026-08-06 OHAYO white polo — NEWS + Gallery", () => {
 
   it("publishes Gallery + NEWS JPEG without hotlinks or published duplicates", async () => {
     const visible = visibleMedia(media);
-    assert.equal(visible[8], ohayoWhitePoloPeacePhoto);
+    assert.equal(visible[9], ohayoWhitePoloPeacePhoto);
     const newsFile = publicFile(ohayoWhitePoloPeaceImage.src);
     assert.equal((await stat(newsFile)).size, 190_333);
     assert.equal(await sha256(newsFile), OHAYO_NEWS_SHA);
@@ -185,7 +185,7 @@ describe("2026-08-05 panda past pic — NEWS + Gallery", () => {
 
   it("publishes a new selfie, not b06 wink", async () => {
     const visible = visibleMedia(media);
-    assert.equal(visible[7], pandaPastPicPhoto);
+    assert.equal(visible[8], pandaPastPicPhoto);
     const newsFile = publicFile(pandaPastPicImage.src);
     assert.equal(await sha256(newsFile), PANDA_NEWS_SHA);
     await assertNotDuplicateOfPublished(PANDA_NEWS_SHA);
@@ -242,7 +242,7 @@ describe("2026-08-18 evening radio SHOWROOM — attach to existing NEWS + Galler
     assert.equal(entry.body.includes("体調不良"), false);
     assert.equal(entry.body.includes("病気"), false);
     assert.ok(morning);
-    assert.equal(visibleMedia(media)[6], eveningRadioShowroomPhoto);
+    assert.equal(visibleMedia(media)[7], eveningRadioShowroomPhoto);
   });
 
   it("self-hosts a new screenshot, not a published duplicate", async () => {

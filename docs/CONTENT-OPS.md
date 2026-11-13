@@ -1,3 +1,11 @@
+# 2026-11-14：朝のInstagram Story「OHAYO :)」をNEWS・Galleryへ追加
+
+- オーナー依頼により、11月14日朝の本人Instagram StoryをもとにNEWSへ1件追加（ID `2026-11-14-instagram-story-ohayo`）。今朝のSHOWROOM配信後に更新された、車内セルフィーの2コマコラージュ。
+- 取得経路はオーナー提供の画面録画。端末UIのないクリーンな全画面フレームを写真正本とし、動画・音声（市販楽曲）は公開しない。Story共有URLは一時的なため公開コード・文書へ残さず、出典は非リンクのInstagram Storyラベル＋本人プロフィールへの関連リンクとする。
+- 写真1点（b265）はNEWSの代表写真とGalleryへ掲載（`src/data/storyOhayoPhoto.ts`、`provenance: "owner-provided"`、`sourceDate: "2026-11-14"`）。コラージュは分割・トリミングせず、元の縦構図のまま掲載する。
+- 本文は画面で確認できる範囲だけを紹介：Hump Back「僕らは今日も車の中」のミュージックスタンプ、ウインクと手書きの「OHAYO :)」。場所・時刻の推測や第三者情報は入れない。
+- 日常のコンテンツ追加のためProject Memoryは変更しない。公開完了はcurrent-head CI・オーナー確認・merge・本番実表示で判定する。
+
 # 2026-11-11：夕方ラジオ回のレポートへ本人X写真を追加
 
 - オーナー依頼により、11/11夕方（room573253 live23672797、ラジオ配信で映像は全編黒）の既存MILY SIGNALページ `/data-lab/reports/20261111-evening/`（#614 は merge 済み）へ、本人Xの最近の公開写真8枚を掲載する。

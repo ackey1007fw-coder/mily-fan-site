@@ -245,7 +245,8 @@ describe("2026-08-20 morning photo — surrounding content is untouched", () => 
     // b08 公開後に、別の owner-confirmed batch b10 が5枚、b20 が3枚、b22 が2枚、
     // 2026-08-26 に b28 が1枚と b27 の静止画が2枚、b29-01 が1枚、
     // その後 b30〜b32 と既存 NEWS の b14 / b24 が Gallery に追加されている。
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 36);
+    // 2026-11-14 には b265（本人Instagram Storyの写真）が1枚追加された。
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 37);
     // Hero の featured を奪っていない
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
     assert.equal(
