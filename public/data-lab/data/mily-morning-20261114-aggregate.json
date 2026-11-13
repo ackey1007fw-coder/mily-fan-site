@@ -1,0 +1,294 @@
+{
+ "schema": "mily-anonymous-live-observations-v1",
+ "nonOfficial": true,
+ "roomId": 573253,
+ "liveId": 23683757,
+ "dateJst": "2026-11-14",
+ "session": "morning",
+ "format": "showroom",
+ "label": "11月14日朝のSHOWROOM配信",
+ "eventName": "同回の匿名UI観測とエミュレーター表示のイベント累積pt（新イベント「湘南PRのぼり2027年1月版応援大使決定戦！」）。他の枠・他の取得経路とは合算しません。",
+ "sourceDescription": "公開されている非公式の画面エミュレーターに表示される匿名カウンターを、視聴中の手動読み取り（約10分間隔のスナップショット）で記録した値だけを採用。原ログ・個人別情報は含みません。",
+ "verifiedAtJst": "2026-11-14",
+ "finalServiceValueVerified": false,
+ "completeCoverageConfirmed": false,
+ "timingComparisonEligible": false,
+ "lastValidOnline": {
+  "atJst": "2026-11-14T05:58:40+09:00",
+  "stars": 11964,
+  "visits": 1301,
+  "comments": 982,
+  "firstVisits": 98,
+  "repeatVisits": 16,
+  "newFollows": 12,
+  "otherFree": 765,
+  "star100People": 100,
+  "recommendedCommentPeople": 295,
+  "confirmedFinal": false
+ },
+ "metrics": {
+  "stars": 11964,
+  "visits": 1301,
+  "comments": 982,
+  "firstVisits": 98,
+  "repeatVisits": 16,
+  "newFollows": 12,
+  "otherFree": 765,
+  "star100People": 100,
+  "recommendedCommentPeople": 295
+ },
+ "measurementNote": "途中参考値（終了直前の最後の有効表示。終了時の確定値ではありません）。公式確定ギフト数・実贈呈量・イベントpt・ユニーク視聴者数ではありません。",
+ "comparisonNote": "同一経路の実測点だけを表示。欠測はnullのまま保持し、他経路の点で埋めず、0埋め・補間・時間帯効果の推定をしません。",
+ "quality": {
+  "savedSampleRows": 9,
+  "validRows": 7,
+  "excludedRows": 2,
+  "excludedDetail": {
+   "zeroDisplayRows": 1,
+   "postEndFrozenRows": 1
+  },
+  "publishedObservationPoints": 7,
+  "captureWindowJst": {
+   "start": "2026-11-14T04:54:32+09:00",
+   "end": "2026-11-14T05:58:40+09:00"
+  },
+  "gaps": [
+   {
+    "startJst": "2026-11-14T04:30:14+09:00",
+    "endJst": "2026-11-14T04:54:32+09:00",
+    "seconds": 1458,
+    "note": "配信開始から観測開始までの空き（04:30〜04:54は未記録。補間・逆算なし）"
+   },
+   {
+    "startJst": "2026-11-14T04:54:32+09:00",
+    "endJst": "2026-11-14T05:04:45+09:00",
+    "seconds": 613
+   },
+   {
+    "startJst": "2026-11-14T05:04:45+09:00",
+    "endJst": "2026-11-14T05:14:15+09:00",
+    "seconds": 570
+   },
+   {
+    "startJst": "2026-11-14T05:14:15+09:00",
+    "endJst": "2026-11-14T05:24:13+09:00",
+    "seconds": 598
+   },
+   {
+    "startJst": "2026-11-14T05:24:13+09:00",
+    "endJst": "2026-11-14T05:37:26+09:00",
+    "seconds": 793
+   },
+   {
+    "startJst": "2026-11-14T05:37:26+09:00",
+    "endJst": "2026-11-14T05:50:39+09:00",
+    "seconds": 793
+   },
+   {
+    "startJst": "2026-11-14T05:50:39+09:00",
+    "endJst": "2026-11-14T05:58:40+09:00",
+    "seconds": 481
+   }
+  ],
+  "regressions": [],
+  "visitsNulledRows": 1,
+  "liveEndDetected": true,
+  "liveEndDetectedAtJst": "2026-11-14T05:59:23+09:00",
+  "secondsLastValidToEnd": 43,
+  "verified_final": false,
+  "source_event_counts_verified": false,
+  "missingDataIsNotZeroPerformance": true,
+  "interpolated": false,
+  "zeroFilled": false,
+  "counterSource": "public_emulator_visible_ui_manual_capture",
+  "end_confirmed": false,
+  "displayLabel": "途中参考値（終了時未確認）",
+  "timestampBasis": "各読み取り時刻は、配信開始時刻（公式APIのstarted_at=04:30:14）に、読み取り時に記録されたエミュレーターの経過表示を加えて換算したもの。秒は換算値です。別経路の画面進行時刻とは同一視しません。",
+  "firstVisitsNote": "初訪問は画面表示どおりの値です。",
+  "missingCountsByMetric": {
+   "stars": 0,
+   "visits": 1,
+   "comments": 0,
+   "firstVisits": 0,
+   "repeatVisits": 0,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 0,
+   "recommendedCommentPeople": 0
+  },
+  "sourceReconciliation": {
+   "selectedSeries": "public_emulator_ui_manual_snapshots",
+   "otherSeriesMerged": false,
+   "note": "別経路の記録（公式APIキャプチャ・ルーム表示）とは合算・接合せず、この一つの系列を独立採用しています。"
+  },
+  "end_confirmed_reason": "最後の有効表示（05:58:40）の43秒後（05:59:23）に公式APIが配信終了を検知しました。エミュレーターの計測は経過89分03秒で停止し、終了後の読み取り（コメント表示990・他は同値）は計測停止値として除外しました。SHOWROOM公式の終了時確定値は取得していないため途中参考値とします。"
+ },
+ "observations": [
+  {
+   "atJst": "2026-11-14T04:54:32+09:00",
+   "stars": 3275,
+   "visits": null,
+   "comments": 240,
+   "firstVisits": 33,
+   "repeatVisits": 0,
+   "newFollows": 3,
+   "otherFree": 44,
+   "star100People": 27,
+   "recommendedCommentPeople": 79
+  },
+  {
+   "atJst": "2026-11-14T05:04:45+09:00",
+   "stars": 5252,
+   "visits": 530,
+   "comments": 354,
+   "firstVisits": 49,
+   "repeatVisits": 0,
+   "newFollows": 4,
+   "otherFree": 44,
+   "star100People": 43,
+   "recommendedCommentPeople": 132
+  },
+  {
+   "atJst": "2026-11-14T05:14:15+09:00",
+   "stars": 7276,
+   "visits": 615,
+   "comments": 464,
+   "firstVisits": 60,
+   "repeatVisits": 0,
+   "newFollows": 5,
+   "otherFree": 84,
+   "star100People": 61,
+   "recommendedCommentPeople": 172
+  },
+  {
+   "atJst": "2026-11-14T05:24:13+09:00",
+   "stars": 9361,
+   "visits": 793,
+   "comments": 599,
+   "firstVisits": 79,
+   "repeatVisits": 0,
+   "newFollows": 8,
+   "otherFree": 365,
+   "star100People": 78,
+   "recommendedCommentPeople": 229
+  },
+  {
+   "atJst": "2026-11-14T05:37:26+09:00",
+   "stars": 10758,
+   "visits": 1083,
+   "comments": 755,
+   "firstVisits": 88,
+   "repeatVisits": 3,
+   "newFollows": 10,
+   "otherFree": 626,
+   "star100People": 90,
+   "recommendedCommentPeople": 274
+  },
+  {
+   "atJst": "2026-11-14T05:50:39+09:00",
+   "stars": 11413,
+   "visits": 1171,
+   "comments": 886,
+   "firstVisits": 92,
+   "repeatVisits": 6,
+   "newFollows": 11,
+   "otherFree": 706,
+   "star100People": 95,
+   "recommendedCommentPeople": 287
+  },
+  {
+   "atJst": "2026-11-14T05:58:40+09:00",
+   "stars": 11964,
+   "visits": 1301,
+   "comments": 982,
+   "firstVisits": 98,
+   "repeatVisits": 16,
+   "newFollows": 12,
+   "otherFree": 765,
+   "star100People": 100,
+   "recommendedCommentPeople": 295
+  }
+ ],
+ "sourceIntegrity": {
+  "observationsCsvSha256": "b77651c1332cf16c2af93b816e6a2e8ab21ded1ec99d82f87d69b5583c005088"
+ },
+ "eventPointObservations": {
+  "source": "public_emulator_visible_ui_manual_capture",
+  "sameSnapshotsAsUiCounters": true,
+  "eventActive": true,
+  "eventName": "湘南PRのぼり2027年1月版応援大使決定戦！",
+  "eventPeriodJst": {
+   "start": "2026-11-09T18:00:00+09:00",
+   "end": "2026-11-15T21:59:59+09:00"
+  },
+  "start": {
+   "at": "2026-11-14T04:54:32+09:00",
+   "rank": 3,
+   "point": 212630
+  },
+  "end": {
+   "at": "2026-11-14T05:58:40+09:00",
+   "rank": 2,
+   "point": 236539
+  },
+  "pointDifference": 23909,
+  "midSamples": [
+   {
+    "at": "2026-11-14T05:04:45+09:00",
+    "rank": 3,
+    "point": 217022
+   },
+   {
+    "at": "2026-11-14T05:14:15+09:00",
+    "rank": 3,
+    "point": 220416
+   },
+   {
+    "at": "2026-11-14T05:24:13+09:00",
+    "rank": 2,
+    "point": 223307
+   },
+   {
+    "at": "2026-11-14T05:37:26+09:00",
+    "rank": 2,
+    "point": 226110
+   },
+   {
+    "at": "2026-11-14T05:50:39+09:00",
+    "rank": 2,
+    "point": 235433
+   }
+  ],
+  "note": "エミュレーター表示のイベント累積pt（04:54:32の212,630→05:58:40の236,539）。順位は視聴時のルーム表示によるもの（04:49時点で3位・212,870ptと表示。05:18頃に2位・221,391ptへ）。3位から2位に上がった正確な時刻は、記録の間（05:14:15〜05:24:13）にあるため未確認です。ルーム表示の値は別経路の表示として注記するだけで、この系列には混ぜていません。観測開始（04:54:32）は配信開始（04:30:14）の約24分後のため、04:30〜04:54の増分は含まれていません（補間・逆算なし）。配信枠単体の公式確定ptではなく、画面のきら星と合算しません。終了時のルーム表示も2位・236,539ptで最終読取と同値でしたが、公式確定値ではありません。"
+ },
+ "commentLog": {
+  "entries": 1121,
+  "anonymousPosterCount": 438,
+  "separateFromUiCommentDisplay": true,
+  "uiCommentDisplay": 982,
+  "note": "コメント記録1,121件（カウント系を除くと1,023件）・投稿者438人は公式APIキャプチャの個別ログの匿名集計（重複除去後、04:30:52〜05:58:52取得）。画面のコメント表示982（05:58:40）とは別集計です。個人名は含みません。"
+ },
+ "growthBySlot": {
+  "note": "各時間帯の終わりに近い実測点どうしの差。欠測区間は補間しません。途中参考値。",
+  "slots": [
+   {
+    "slot": "05:00〜05:30",
+    "fromJst": "2026-11-14T05:04:45+09:00",
+    "toJst": "2026-11-14T05:24:13+09:00",
+    "starsFrom": 5252,
+    "starsTo": 9361,
+    "starsGain": 4109,
+    "minutes": 19.5
+   },
+   {
+    "slot": "05:30〜06:00",
+    "fromJst": "2026-11-14T05:37:26+09:00",
+    "toJst": "2026-11-14T05:58:40+09:00",
+    "starsFrom": 10758,
+    "starsTo": 11964,
+    "starsGain": 1206,
+    "minutes": 21.2
+   }
+  ]
+ }
+}
