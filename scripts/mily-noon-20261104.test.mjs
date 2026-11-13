@@ -9,8 +9,8 @@ const read = p => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 const text = JSON.stringify(recap);
 
 test("11/4 noon: below the 11/4 night card, above the 11/4 morning, recording-relative timestamps", () => {
-  assert.equal(streamRecaps[6], recap);
-  assert.equal(streamRecaps[7], night);
+  assert.equal(streamRecaps[8], recap);
+  assert.equal(streamRecaps[9], night);
   assert.equal(recap.id, "2026-11-04-noon-showroom");
   assert.equal(recap.dateLabel, "2026.11.04（水）");
   assert.equal(recap.broadcastLabel, "14:45頃〜 約20分");
