@@ -283,6 +283,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-11-12-miss-circle-finalist",
+    date: "2026-11-12",
+    activityIds: ["miss-circle"],
+    title: "三橋莉子、ミスサークル2026 ファイナリストに選出",
+    body: "三橋莉子（みりぃ）が、MISS CIRCLE CONTEST 2026のファイナリスト12名に選出されました（日本大学・Bブロック、ENTRY 734）。主催者公式のファイナリスト一覧で確認しました。\n\nセミファイナル期間中、毎日配信を続けてきたみりぃへ、たくさんの応援をありがとうございました。\n\nファイナル審査は11月26日〜12月6日に行われます。審査方法とグランプリ発表日は後日発表予定です。表彰式は12月12日に品川インターシティホールで開催されます。\n\nファイナルでも、みりぃらしく挑み続ける姿を一緒に応援していきましょう。",
+    source: "https://2026.misscircle.jp/list/final",
+    sourceLabel: "主催者公式・ファイナリスト一覧を見る",
+    relatedUrl: `${site.siteUrl}/activities/miss-circle/`,
+    ctaLabel: "コンテストの歩みを見る",
+    additionalCtas: [
+      { label: "公式ENTRY 734を見る", url: "https://2026.misscircle.jp/entry/734" },
+    ],
+  },
+  {
     id: "2026-11-07-x-showroom-sr-final-schedule",
     date: "2026-11-07",
     sameDayOrder: 4,
