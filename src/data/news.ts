@@ -35,6 +35,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
+import { storyOhayoNewsImage } from "./storyOhayoPhoto.ts";
 import { autumnLeavesNewsImages } from "./autumnLeavesPhotos.ts";
 import { godivaNanaNewsImages } from "./godivaNanaPhotos.ts";
 import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
@@ -283,6 +284,30 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-14-radio-seasidecircle-weekly",
+    date: "2026-11-14",
+    activityIds: ["radio"],
+    title: "毎週日曜はラジオの日📻 FM湘南マジックウェイブ『湘南シーサイドサークル』パーソナリティ",
+    body: "みりぃは、FM湘南マジックウェイブ（85.6MHz）のお昼の番組『湘南シーサイドサークル』（#SSC）で、ラジオDJネキみりぃとしてパーソナリティを務めています。放送は毎週日曜10:00〜13:00の生放送です。\n\n明日11月15日（日）のトークテーマは「成長」。日曜のお昼は、ラジオでみりぃの声を聴いてください。番組へのメッセージは、FM公式フォームから送れます。\n\n最新の番組情報は、FM公式の番組ページをご確認ください。",
+    source: radioProgram.programUrl,
+    sourceLabel: "FM公式の番組ページを見る",
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [
+      { label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL },
+    ],
+  },
+  {
+    id: "2026-11-14-instagram-story-ohayo",
+    date: "2026-11-14",
+    title: "「OHAYO :)」車の中から朝のあいさつ🩵 みりぃのInstagram Story",
+    body: "11月14日朝、みりぃがInstagram Storyを更新しました。今朝のSHOWROOM配信を終えたあとの、車の中からのセルフィー2コマです。\n\n上段は、少し横を向いたカットに、Hump Backの「僕らは今日も車の中」のミュージックスタンプ。下段はウインクとともに、手書きの「OHAYO :)」が添えられています。\n\nStoryは一定時間で消える投稿です。写真はこの記事とギャラリーに掲載しています。最新の投稿は本人のInstagramでご確認ください。",
+    url: "https://www.instagram.com/mily_chan36",
+    sourceLabel: "Instagram Story（11月14日）",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: storyOhayoNewsImage,
+  },
   {
     id: "2026-11-13-instagram-autumn-leaves",
     date: "2026-11-13",

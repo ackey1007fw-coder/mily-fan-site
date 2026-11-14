@@ -20,11 +20,19 @@ try {
         await page.route('**/api/**',route=>route.fulfill({json:{ok:false,slots:[]}}));
         for (const route of ['/','/news/','/support/','/activities/live/']) {
           await page.goto(base+route,{waitUntil:'domcontentloaded'});
-          if (route === '/' || route === '/news/') {
-            await page.locator('#latest').getByText('夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内',{exact:true}).waitFor();
-            const latest = await page.locator('#latest').innerText();
-            assert.match(latest,/15:52更新.*21:05〜21:50/);
-            assert.match(latest,/朝の案内の履歴/);
+          if (route === '/news/') {
+            const list = page.locator('#latest');
+            const title = '夜は21:05から仮装配信🎃 10月31日のSHOWROOM案内';
+            const item = list.locator('li').filter({ hasText: title });
+            for (let n = 0; n < 20 && (await item.count()) === 0; n++) {
+              const more = list.getByRole('button', { name: 'もっと見る', exact: true });
+              if ((await more.count()) === 0) break;
+              await more.click();
+            }
+            await item.getByText(title, { exact: true }).waitFor();
+            const body = await item.innerText();
+            assert.match(body, /15:52更新.*21:05〜21:50/);
+            assert.match(body, /朝の案内の履歴/);
           }
           if (route !== '/news/') {
             const notice = page.locator('#announced-stream');

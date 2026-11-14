@@ -291,12 +291,12 @@ describe("Gallery portrait-first order", () => {
     assert.deepEqual(
       preview.map((entry) => entry.key),
       [
+        "mily-b265-01",
         "mily-b262-01",
         "mily-b262-02",
         "mily-b262-03",
         "mily-b262-04",
         "mily-b262-05",
-        "mily-b198-01",
       ],
     );
   });
@@ -308,14 +308,18 @@ describe("Gallery portrait-first order", () => {
       (entry) => cinemaEventKey(entry) === "mily-b38",
     ).length;
     assert.ok(cinemaCount >= 1);
-    assert.equal(preview[0]?.key, "mily-b262-01");
+    assert.equal(preview[0]?.key, "mily-b265-01");
+    assert.equal(
+      preview.filter((entry) => entry.key.startsWith("mily-b265-")).length,
+      1,
+    );
     assert.equal(
       preview.filter((entry) => entry.key.startsWith("mily-b262-")).length,
       5,
     );
     assert.equal(
       preview.filter((entry) => entry.key.startsWith("mily-b198-")).length,
-      HOME_GALLERY_LIMIT - 5,
+      HOME_GALLERY_LIMIT - 6,
     );
 
     const selector = source("src/lib/galleryItems.ts");
