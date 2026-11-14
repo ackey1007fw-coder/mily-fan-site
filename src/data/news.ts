@@ -36,6 +36,7 @@ import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 import { storyOhayoNewsImage } from "./storyOhayoPhoto.ts";
+import { autumnLeavesNewsImages } from "./autumnLeavesPhotos.ts";
 import { godivaNanaNewsImages } from "./godivaNanaPhotos.ts";
 import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
@@ -306,6 +307,16 @@ export const news: NewsItem[] = [
     sourceLabel: "Instagram Story（11月14日）",
     ctaLabel: "Instagramプロフィールを見る",
     media: storyOhayoNewsImage,
+  },
+  {
+    id: "2026-11-13-instagram-autumn-leaves",
+    date: "2026-11-13",
+    title: "去年の紅葉を、みんなに共有🍂 みりぃのInstagram",
+    body: "11月13日2:45（日本時間）、みりぃがInstagramで、去年の秋の紅葉の写真と動画、あわせて8点を共有しました。黄金色のイチョウ並木の下で、大きな葉を顔に添えた写真や、友達と並んでポーズをとる写真などです。写真5点はこの記事とギャラリーにも掲載しています。\n\n大学帰りに友達と合流したのが懐かしい、と振り返っています。今年はそれぞれ忙しくさせてもらっていて、紅葉を見に行く予定は立てられていないとのこと。それでも、活動を応援してくれて、背中を押してくれる友達が大好きで、写真を見返して、みんなに会った気分になっていると綴っています。\n\n投稿では「皆様は紅葉見にいきましたか〜？？ おすすめのスポットあれば教えて欲しい」と呼びかけています。動画3点は、下の本人のInstagramからご覧ください。",
+    source: "https://www.instagram.com/p/DfrcoWLEyck/",
+    sourceLabel: "みりぃ本人のInstagram投稿を見る（11月13日）",
+    media: autumnLeavesNewsImages[0],
+    additionalMedia: autumnLeavesNewsImages.slice(1),
   },
   {
     id: "2026-11-07-x-showroom-sr-final-schedule",

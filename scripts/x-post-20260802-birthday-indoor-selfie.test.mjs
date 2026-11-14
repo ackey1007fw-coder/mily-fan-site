@@ -148,7 +148,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     const gallery = media.find((entry) => entry.id === "mily-b29-01");
 
     assert.equal(gallery, birthdayIndoorSelfiePhoto);
-    assert.equal(visible[10], birthdayIndoorSelfiePhoto);
+    assert.equal(visible[15], birthdayIndoorSelfiePhoto);
     assert.equal(gallery.kind, "photo");
     assert.equal(gallery.published, true);
     assert.equal(gallery.provenance, "sns-post");
@@ -161,7 +161,7 @@ describe("2026-08-02 21st birthday — attach unused X indoor selfie", () => {
     assert.equal(gallery.aspect, "1536 / 2048");
     assert.notEqual(gallery.featured, true);
     assert.equal(featuredPhoto(media)?.id, "mily-b01-03");
-    assert.equal(media.filter((entry) => entry.kind === "photo").length, 37);
+    assert.equal(media.filter((entry) => entry.kind === "photo").length, 42);
     assert.deepEqual(verifyMedia(media), []);
 
     const jpg480 = publicFile(`${GALLERY_BASE}-480.jpg`);

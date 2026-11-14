@@ -97,7 +97,8 @@ npmでlockfileを作り直さない。認証情報を会話・ファイル・ロ
 - ファイル名は `mily-bNN-NN-<slug>` 形式。日付が未確認のうちはファイル名に日付を入れない（捏造しない）。
 - 掲載は `src/data/media.ts` の `published: true` のみ。出典 URL・投稿日・撮影者が未確認の項目は `null` のまま残す（推測して埋めない）。
 - 本人の顔の AI 生成・置換・補正・加工、生成塗り足しは禁止。
-- X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードしない。X / Instagram の画像 CDN URL をサイトメディアとして hotlink しない。Mixch の `_movie_mps` / MP4 をこのドメインで再生しない。Mixch タイムラインはクロールせず、オーナーが指定した movie URL だけを扱う。
+- X / Instagram / Mixch の動画ファイルを git、`media/original/`、`public/media/` へ自動ダウンロードしない。X / Instagram の画像 CDN URL をサイトメディアとして hotlink しない。
+- **オーナー指定の個別投稿の例外:** オーナーが特定の X / Instagram 投稿 URL を指定して掲載を依頼した場合に限り、その投稿の写真・動画を、オーナー提供素材と同等の「オーナー指定素材」として `media/original/` へ保存し、通常のパイプライン（メタデータ除去・出典と投稿日の記録・MEDIA.md 台帳）で取り込んでよい。これは個別指定への例外であり、自動巡回・一括取得・CDN hotlink の禁止は変わらない。取り込んだ素材の出典は当該投稿 URL とし、取得経路として「オーナー指定により取得」と台帳に記録する。Mixch の `_movie_mps` / MP4 をこのドメインで再生しない。Mixch タイムラインはクロールせず、オーナーが指定した movie URL だけを扱う。
 - **Mixch outbound の限定例外:** オーナー指定の公開 Mixch 動画（`https://mixch.tv/m/{id}`、確認済み本人アカウント `https://mixch.tv/u/10114673`）は、NEWS（Latest）と Gallery で Mixch outbound player card として出してよい。Activities の「関連するメディア」には出さない（`activityIds` による関連 NEWS は残す）。カードは動画らしく見せる（poster + play overlay）。poster はその動画の公式 Mixch サムネイル（`thumbnailUrl` / mixch.tv の og:image）を使ってよい。これは唯一の SNS サムネイル例外で、X / Instagram は禁止のまま。Play / click / CTA は Mixch movie URL を新しいタブで `rel="noopener noreferrer"` 付きで開く。NEWS と Gallery は動画ごとに同じオブジェクトを共有する（TikTok `tiktokRadioVideo` と同じ）。Mixch ファイルを repo にコピーしない。オーナーが後から原ファイルを提供した場合は既存の自己ホストパイプラインを使う（別経路）。photo-forward は維持し、Mixch カードはビジュアルとして数えるので該当 NEWS をテキストだけにしない。
 
 ## 配信予定の自動取得

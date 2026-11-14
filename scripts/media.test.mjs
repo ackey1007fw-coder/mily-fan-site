@@ -88,6 +88,11 @@ describe("media collection", () => {
     // 縦・正方形・16:9など、4/3以外の元構図を保持する写真だけがaspectを持つ。
     const explicitAspects = new Set([
       "mily-b265-01",
+      "mily-b262-01",
+      "mily-b262-02",
+      "mily-b262-03",
+      "mily-b262-04",
+      "mily-b262-05",
       "mily-b198-01",
       "mily-b198-02",
       "mily-b198-03",

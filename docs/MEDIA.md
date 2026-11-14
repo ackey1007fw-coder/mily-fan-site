@@ -112,6 +112,61 @@
 | public/media/live-clips/mily-b263-11-20261113-night-more-power-left-poster.jpg | 16368 | 0257c5b6db1582dae56dd9f21abd48f663c2b3fdf99646b601b843ca1f7d67cd |
 | public/media/live-clips/mily-b263-12-20261113-night-hope-remains.mp4 | 582652 | dce3ad57a44dac4ebc0a78e1b2eaf828c23eff790e5f436adc97a9f51ec8eb53 |
 | public/media/live-clips/mily-b263-12-20261113-night-hope-remains-poster.jpg | 15846 | 3b94db5df814d872e3fbe5f83cb2dd9e792a68c93b434c7e93fc7e2033d0c38a |
+## b262：2026-11-13 本人Instagram「去年の紅葉」写真5枚（NEWS・Gallery）
+
+- オーナーが特定の投稿を指定して掲載を依頼した「オーナー指定素材」（AGENTS.md のメディア例外、2026-11-13追加）。出典は本人のInstagram投稿 https://www.instagram.com/p/DfrcoWLEyck/ （2026-11-13 2:45 JST、写真5点・動画3点のカルーセル）。取得経路：オーナー指定により取得（2026-11-13）。
+- 写真5点を投稿表示の原寸（1536×2048）で保存し、原本は無改変で gitignored の `media/original/` に保持（GitHubへはコミットしない）。公開派生は `pnpm media:build` で 480/960/1600 の JPEG・WebP を生成し、EXIF等のメタデータは除去。顔・身体の生成・補正・トリミングはしていない。
+- 動画3点（手元のイチョウの葉／後ろ姿で歩く4人／見上げるイチョウ）は、ブラウザ・連携の正規手段ではファイルを取得できなかったため未掲載。本人のInstagramへの出典リンクで案内する。オーナーから原ファイルの提供があれば別バッチで追加する。
+- 第三者情報：2枚目の友達2名は、本人が投稿時にハートスタンプで顔を隠した状態のまま（こちらでは加工しない）。4枚目の背景の通行人は incidental で、個人を特定できる情報は読み取れない。
+- 掲載面：NEWS `2026-11-13-instagram-autumn-leaves` の代表＋追加写真と、Gallery（`src/data/media.ts`、`provenance: "sns-post"`、`sourceDate: "2026-11-13"`）。
+
+| 原本（media/original、非公開） | Bytes | SHA256 |
+| --- | ---: | --- |
+| mily-b262-01-night-ginkgo-leaf-face.jpg | 639946 | a13dbb8b075228ce5bbf7ab9d2335f80f9fb963db46565916d5e3d595c1cffc4 |
+| mily-b262-02-day-ginkgo-friends.jpg | 697982 | 929cca7e2d4fcfab4615f1a69b3362a59caaff21ebd893a2beef09e0abb59108 |
+| mily-b262-03-night-ginkgo-closeup.jpg | 311054 | 3fb30d0751dadbeee4c2ac400178c966e0d27c27336ba098612bc200fad5f3b4 |
+| mily-b262-04-night-ginkgo-wide.jpg | 391594 | b78a716e9c633f9e0c0dfcfc86b55a3cfb2d5a763f5974b3a8eb661f4ca82de2 |
+| mily-b262-05-night-ginkgo-peace.jpg | 319472 | 684db55ca005fac11bb604dd6edc69d4cd0cf68ca1fa09b5d88900d31f939fca |
+
+### b262 公開派生の受入確認（2026-11-14）
+
+- 指定された受け渡し先から既存の公開派生30点を無改変で受領。原本5枚のSHA256は上表の原本用であり、公開派生のSHA256とは区別する。今回は原本の再取得・再生成はしていない。
+- 5写真それぞれの最大JPEGを目視し、全30点のコンタクトシートも照合した。視聴者の表示名・コメントUIは見つけていない。2枚目のハートスタンプと背景の人物は受領時のまま。顔・身体・背景の加工はしていない。
+- 480派生は480×640、960派生は960×1280、1600派生は1536×2048（拡大なし）。全30点でEXIF / GPS / IPTC / XMP / ICCがないこと、同じ写真のサイズ・形式違いであることを確認。合計5,405,250 bytes。
+- 以下の配置・Bytes・SHA256を実ファイルと照合。既存の公開ファイルは上書きせず、b262の新規名だけを追加した。非公開の受け渡しURL・IDは記録しない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/gallery/mily-b262-01-night-ginkgo-leaf-face-480.jpg | 80286 | 7ad4b01732f3f7bd36bd87a78b8ca80b1d8024448b2afce495dd44bc30bfc93b |
+| public/media/gallery/mily-b262-01-night-ginkgo-leaf-face-480.webp | 78324 | bf27452a4bbc3e55b6f8c1d3af5ebb8344561466b0ab853259b847cc0ef0b51a |
+| public/media/gallery/mily-b262-01-night-ginkgo-leaf-face-960.jpg | 251792 | 99a428694d49d04285bb019a110f29acd78864f89e8cb213b434ff7a5da35736 |
+| public/media/gallery/mily-b262-01-night-ginkgo-leaf-face-960.webp | 222188 | 6dc37233f6c43f813cd1423381dd327edc415c18800d36e382a5f4b71abf5bf0 |
+| public/media/gallery/mily-b262-01-night-ginkgo-leaf-face-1600.jpg | 539662 | 0fcb61bad9a66ad8e798d26ad04d9599124bf64cc18656367e04d1204023530b |
+| public/media/gallery/mily-b262-01-night-ginkgo-leaf-face-1600.webp | 412176 | 506c51420558cd37950aaab867de79939e43a6e3307fb98d1b197056a631780f |
+| public/media/gallery/mily-b262-02-day-ginkgo-friends-480.jpg | 78338 | 378a4a0d3649e76ad7ae2153ca92f5645675f4978a3e6ddc89bf1bf98ff53d6b |
+| public/media/gallery/mily-b262-02-day-ginkgo-friends-480.webp | 76046 | 5f7ac06c7aa391636723a0fa551b64883b617afd6c108603557e6d14896c963f |
+| public/media/gallery/mily-b262-02-day-ginkgo-friends-960.jpg | 274116 | 02f037ab04f3d6a65fff5a7fbf9cdbbf26b58c1313ee85030daa362460f08f07 |
+| public/media/gallery/mily-b262-02-day-ginkgo-friends-960.webp | 252150 | a3f3e483a55d39eb7e437a2744975b16bb5434c1f22b956023d27fd70f5910e0 |
+| public/media/gallery/mily-b262-02-day-ginkgo-friends-1600.jpg | 590772 | 13aa456c25e3d57011e8c87ee4e2f39d87ac98fed9527c371c056e66c88693bb |
+| public/media/gallery/mily-b262-02-day-ginkgo-friends-1600.webp | 468736 | b14e5e4ad82f5239211fae324d8aa0076e0e1ad0087a9ece0769852b127be0b9 |
+| public/media/gallery/mily-b262-03-night-ginkgo-closeup-480.jpg | 33326 | 70c368d26a47954dfdbe191496a1de3552c17984c651334c0f5019275e9c797e |
+| public/media/gallery/mily-b262-03-night-ginkgo-closeup-480.webp | 20326 | 164fd0f6eb8bfa08e31ae82480829a391beb6e871a1b0e3448ce5e55c40caef1 |
+| public/media/gallery/mily-b262-03-night-ginkgo-closeup-960.jpg | 99885 | 6a0c1a633ff017f7ff0292b1caf70a78b1e57cbf5e7066ba9a2758b998921e1b |
+| public/media/gallery/mily-b262-03-night-ginkgo-closeup-960.webp | 52446 | 7fb2997e2dd49e8ae8543e043dc2659de9f8dd97eff632e7c9a39824486b7cb2 |
+| public/media/gallery/mily-b262-03-night-ginkgo-closeup-1600.jpg | 250558 | 2d41143b33532a0a1c5abeac9cde5939969bbcc1f55d7999f72ea1df5ae0ca67 |
+| public/media/gallery/mily-b262-03-night-ginkgo-closeup-1600.webp | 116712 | 673da7a165e67039a753275e91997470af8761e14b9124e9ecc96ec32d52c04c |
+| public/media/gallery/mily-b262-04-night-ginkgo-wide-480.jpg | 47583 | 2f730162305aa4702a48d8fc1d5b66e29d65847125c70c6e1f99b597a2e3c3a9 |
+| public/media/gallery/mily-b262-04-night-ginkgo-wide-480.webp | 35586 | 2ddc4f49bb0ce80900efbb4de0685c7d496507c65e7b6dd63be0e73abb0286f4 |
+| public/media/gallery/mily-b262-04-night-ginkgo-wide-960.jpg | 140394 | 1e08ce3eec7d74ba3b7bb6cf263bce34c965243d117453a7f1224f8dba74438c |
+| public/media/gallery/mily-b262-04-night-ginkgo-wide-960.webp | 94374 | 988bb52142e434f5a2b72b8913c6ee44075f48acc02a46391670271f37f3f2b5 |
+| public/media/gallery/mily-b262-04-night-ginkgo-wide-1600.jpg | 325909 | 78740a19c6770070b27a08c5577376f6233d64a19179158c5dac4468a2a5cdf5 |
+| public/media/gallery/mily-b262-04-night-ginkgo-wide-1600.webp | 181836 | e64495354a3b36854f39237c90100131501cd5e7372e9cd4e5d59c2d9c44fd63 |
+| public/media/gallery/mily-b262-05-night-ginkgo-peace-480.jpg | 43083 | f1b08d5e8ee28498883cd9f1cb6e275ce5a06c3becc013601c0976e13c4258e7 |
+| public/media/gallery/mily-b262-05-night-ginkgo-peace-480.webp | 30468 | 3bdc734919e2955bc6fcf4b35e562848a41f7690d0135c1412e622dd3dfb3beb |
+| public/media/gallery/mily-b262-05-night-ginkgo-peace-960.jpg | 125415 | 4ee72fe2f8fa313199735e286f61604d9e90a639ff770244e1491a4e5c6b9cdc |
+| public/media/gallery/mily-b262-05-night-ginkgo-peace-960.webp | 78864 | 58b0f44f8de55c58e2831a239c1d7076591999e4160f4af6a4ac504f45b7c73b |
+| public/media/gallery/mily-b262-05-night-ginkgo-peace-1600.jpg | 263153 | ae9d98564cea13771fa3dfa859e9d5ef921b34d72a8607362f3306646f621613 |
+| public/media/gallery/mily-b262-05-night-ginkgo-peace-1600.webp | 140746 | cd67e55527e3f02b5601add95458e2153edff75040de409632c1851f78091caf |
 
 ## b261：2026-11-11夕方ラジオ回の本人X写真8枚（MILY SIGNAL）
 
