@@ -8,7 +8,7 @@ import { recapSourceDisclosure } from "../src/lib/recapSourceDisclosure.ts";
 test("11/9 night: one recap, reviewed stills and talk-only clips with original audio", () => {
   assert.equal(streamRecaps.find(r => r.id === recap.id), recap);
   assert.equal(streamRecaps.filter(r => r.id === recap.id).length, 1);
-  assert.equal(streamRecaps[0], recap);
+  assert.equal(streamRecaps[2], recap);
   assert.equal(recap.broadcastLabel, "録画開始22:30頃〜 約71分");
   for (const key of ["songs", "singingExcerpts"]) assert.equal(recap[key], undefined);
   assert.equal(recap.gallery.length, 10);
