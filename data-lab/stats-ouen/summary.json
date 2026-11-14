@@ -1,0 +1,646 @@
+{
+  "title": "みりぃ 数字で応援まとめ",
+  "compiled_at_jst": "2026-11-14T19:30:00+09:00",
+  "room_id": 573253,
+  "display_name": "みりぃ",
+  "public_name": "三橋莉子",
+  "purpose": "ファン目線で、出典つきの数字を時系列に残し、みんなで更新する共同編集の土台。未確認の数字は書かず未確認欄へ。",
+  "confirmed": {
+    "dashboard": {
+      "followers": 427,
+      "show_rank": "A-3",
+      "daily_streak_days": 106,
+      "last_access": "2026/11/14 14:12",
+      "month_end_followers": {
+        "sep": 321,
+        "oct": 385,
+        "latest": 427,
+        "diff_sep": 66,
+        "diff_oct": 64,
+        "diff_nov_so_far": 42
+      },
+      "source": "https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253",
+      "fetched_at_jst": "2026-11-14T19:16:38+09:00"
+    },
+    "followers_daily_self_log": [
+      {
+        "date": "2026-11-03",
+        "followers": 393,
+        "recorded_at_jst": "2026-11-03T23:32:08.990785+09:00",
+        "source": "showroom-logs/573253/20261103_2231_live23641251/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-04",
+        "followers": 395,
+        "recorded_at_jst": "2026-11-04T21:51:19.209532+09:00",
+        "source": "showroom-logs/573253/20261104_2050_live23644591/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-05",
+        "followers": 399,
+        "recorded_at_jst": "2026-11-05T22:29:59.519447+09:00",
+        "source": "showroom-logs/573253/20261105_2132_live23649291/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-06",
+        "followers": 408,
+        "recorded_at_jst": "2026-11-06T22:46:33.510181+09:00",
+        "source": "showroom-logs/573253/20261106_2132_live23653460/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-07",
+        "followers": 409,
+        "recorded_at_jst": "2026-11-07T22:59:45.502859+09:00",
+        "source": "showroom-logs/573253/20261107_2100_live23657394/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-08",
+        "followers": 410,
+        "recorded_at_jst": "2026-11-08T12:37:53.862712+09:00",
+        "source": "showroom-logs/573253/20261108_1201_live23660035/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-10",
+        "followers": 407,
+        "recorded_at_jst": "2026-11-10T23:09:02.168350+09:00",
+        "source": "showroom-logs/573253/20261110_2152_live23670095/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-11",
+        "followers": 416,
+        "recorded_at_jst": "2026-11-11T22:49:07.852919+09:00",
+        "source": "showroom-logs/573253/20261111_2132_live23674155/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-12",
+        "followers": 416,
+        "recorded_at_jst": "2026-11-12T23:37:06.578009+09:00",
+        "source": "showroom-logs/573253/20261112_2131_live23678187/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-13",
+        "followers": 422,
+        "recorded_at_jst": "2026-11-13T23:23:51.556423+09:00",
+        "source": "showroom-logs/573253/20261113_2201_live23682422/end_snapshot.json の follower_num",
+        "note": "その日の自作記録の最後の値。記録のない日は行なし（補間していない）"
+      },
+      {
+        "date": "2026-11-14",
+        "followers": 427,
+        "recorded_at_jst": "2026-11-14T19:16:38+09:00",
+        "source": "SHOWROOM公開API room/profile（2026-11-14 19:16 JST）",
+        "note": "期間の終わりが当日のため、公式公開APIの現在値を最後の点にしている"
+      }
+    ],
+    "streams_logged": [
+      {
+        "date": "2026-11-03",
+        "live_id": 23638183,
+        "start_jst": "2026-11-03T06:31:01+09:00",
+        "end_jst": "2026-11-03T07:02:02.983931+09:00",
+        "minutes_approx": 31.0,
+        "followers_start": 393,
+        "followers_end": 393,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261103_0630_wait",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-03",
+        "live_id": 23639251,
+        "start_jst": "2026-11-03T14:45:33+09:00",
+        "end_jst": "2026-11-03T15:16:55.811591+09:00",
+        "minutes_approx": 31.4,
+        "followers_start": 394,
+        "followers_end": 394,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261103_1445_live23639251",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-03",
+        "live_id": 23641251,
+        "start_jst": "2026-11-03T22:31:37+09:00",
+        "end_jst": "2026-11-03T23:32:23.336486+09:00",
+        "minutes_approx": 60.8,
+        "followers_start": 396,
+        "followers_end": 393,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261103_2231_live23641251",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-04",
+        "live_id": 23642484,
+        "start_jst": "2026-11-04T06:41:25+09:00",
+        "end_jst": "2026-11-04T07:16:49.330050+09:00",
+        "minutes_approx": 35.4,
+        "followers_start": 393,
+        "followers_end": 393,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261104_0641_live23642484",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-04",
+        "live_id": 23643335,
+        "start_jst": "2026-11-04T14:45:15+09:00",
+        "end_jst": "2026-11-04T15:19:28.616975+09:00",
+        "minutes_approx": 34.2,
+        "followers_start": 394,
+        "followers_end": 394,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261104_1445_live23643335",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-04",
+        "live_id": 23644591,
+        "start_jst": "2026-11-04T20:50:06+09:00",
+        "end_jst": "2026-11-04T21:51:33.639116+09:00",
+        "minutes_approx": 61.5,
+        "followers_start": 395,
+        "followers_end": 395,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261104_2050_live23644591",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-05",
+        "live_id": 23646534,
+        "start_jst": "2026-11-05T05:59:49+09:00",
+        "end_jst": "2026-11-05T06:31:54.087989+09:00",
+        "minutes_approx": 32.1,
+        "followers_start": 395,
+        "followers_end": 395,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261105_0559_live23646534",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-05",
+        "live_id": 23647558,
+        "start_jst": "2026-11-05T14:45:15+09:00",
+        "end_jst": "2026-11-05T15:17:10.702339+09:00",
+        "minutes_approx": 31.9,
+        "followers_start": 396,
+        "followers_end": 397,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261105_1445_live23647558",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-05",
+        "live_id": 23649291,
+        "start_jst": "2026-11-05T21:32:12+09:00",
+        "end_jst": "2026-11-05T22:30:14.096347+09:00",
+        "minutes_approx": 58.0,
+        "followers_start": 398,
+        "followers_end": 399,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261105_2132_live23649291",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-06",
+        "live_id": 23651039,
+        "start_jst": "2026-11-06T07:00:22+09:00",
+        "end_jst": "2026-11-06T07:31:56.306323+09:00",
+        "minutes_approx": 31.6,
+        "followers_start": 401,
+        "followers_end": 401,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261106_0700_live23651039",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-06",
+        "live_id": 23651900,
+        "start_jst": "2026-11-06T14:45:07+09:00",
+        "end_jst": "2026-11-06T15:22:33.305681+09:00",
+        "minutes_approx": 37.4,
+        "followers_start": 407,
+        "followers_end": 407,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261106_1445_live23651900",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-06",
+        "live_id": 23653460,
+        "start_jst": "2026-11-06T21:32:22+09:00",
+        "end_jst": "2026-11-06T22:46:47.802202+09:00",
+        "minutes_approx": 74.4,
+        "followers_start": 407,
+        "followers_end": 408,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261106_2132_live23653460",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-07",
+        "live_id": 23655200,
+        "start_jst": "2026-11-07T07:02:26+09:00",
+        "end_jst": "2026-11-07T08:04:58.783747+09:00",
+        "minutes_approx": 62.5,
+        "followers_start": 408,
+        "followers_end": 409,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261107_0702_live23655200",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-07",
+        "live_id": 23657394,
+        "start_jst": "2026-11-07T21:00:09+09:00",
+        "end_jst": "2026-11-07T22:59:58.190486+09:00",
+        "minutes_approx": 119.8,
+        "followers_start": 412,
+        "followers_end": 409,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261107_2100_live23657394",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-08",
+        "live_id": 23660035,
+        "start_jst": "2026-11-08T12:01:32+09:00",
+        "end_jst": "2026-11-08T12:38:09.281921+09:00",
+        "minutes_approx": 36.6,
+        "followers_start": 410,
+        "followers_end": 410,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261108_1201_live23660035",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-10",
+        "live_id": 23667421,
+        "start_jst": "2026-11-10T06:07:49+09:00",
+        "end_jst": "2026-11-10T06:38:49.574817+09:00",
+        "minutes_approx": 31.0,
+        "followers_start": 410,
+        "followers_end": 408,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261110_0607_live23667421",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-10",
+        "live_id": 23670095,
+        "start_jst": "2026-11-10T21:52:08+09:00",
+        "end_jst": "2026-11-10T23:09:14.027260+09:00",
+        "minutes_approx": 77.1,
+        "followers_start": 408,
+        "followers_end": 407,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261110_2152_live23670095",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-11",
+        "live_id": 23671695,
+        "start_jst": "2026-11-11T06:59:05+09:00",
+        "end_jst": "2026-11-11T09:15:49.588907+09:00",
+        "minutes_approx": 136.7,
+        "followers_start": 408,
+        "followers_end": 411,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261111_0659_live23671695",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-11",
+        "live_id": 23672535,
+        "start_jst": "2026-11-11T14:45:12+09:00",
+        "end_jst": "2026-11-11T16:15:20.414331+09:00",
+        "minutes_approx": 90.1,
+        "followers_start": 413,
+        "followers_end": 415,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261111_1445_live23672535",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-11",
+        "live_id": 23672797,
+        "start_jst": "2026-11-11T17:08:06+09:00",
+        "end_jst": "2026-11-11T17:39:03.439451+09:00",
+        "minutes_approx": 31.0,
+        "followers_start": 415,
+        "followers_end": 414,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261111_1708_live23672797",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-11",
+        "live_id": 23674155,
+        "start_jst": "2026-11-11T21:32:23+09:00",
+        "end_jst": "2026-11-11T22:49:19.828161+09:00",
+        "minutes_approx": 76.9,
+        "followers_start": 416,
+        "followers_end": 416,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261111_2132_live23674155",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-12",
+        "live_id": 23675715,
+        "start_jst": "2026-11-12T06:07:23+09:00",
+        "end_jst": "2026-11-12T06:39:02.406632+09:00",
+        "minutes_approx": 31.7,
+        "followers_start": 416,
+        "followers_end": 416,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261112_0607_live23675715",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-12",
+        "live_id": 23678187,
+        "start_jst": "2026-11-12T21:31:02+09:00",
+        "end_jst": "2026-11-12T23:37:18.519279+09:00",
+        "minutes_approx": 126.3,
+        "followers_start": 417,
+        "followers_end": 416,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261112_2131_live23678187",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-13",
+        "live_id": 23679723,
+        "start_jst": "2026-11-13T05:30:43+09:00",
+        "end_jst": "2026-11-13T07:26:31.183865+09:00",
+        "minutes_approx": 115.8,
+        "followers_start": 419,
+        "followers_end": 420,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261113_0530_live23679723",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-13",
+        "live_id": 23681900,
+        "start_jst": "2026-11-13T20:45:06+09:00",
+        "end_jst": "2026-11-13T21:51:05.747414+09:00",
+        "minutes_approx": 66.0,
+        "followers_start": 423,
+        "followers_end": 423,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261113_2045_live23681900",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-13",
+        "live_id": 23682422,
+        "start_jst": "2026-11-13T22:01:26+09:00",
+        "end_jst": "2026-11-13T23:24:03.492667+09:00",
+        "minutes_approx": 82.6,
+        "followers_start": 422,
+        "followers_end": 422,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261113_2201_live23682422",
+        "notes": ""
+      },
+      {
+        "date": "2026-11-14",
+        "live_id": 23683757,
+        "start_jst": "2026-11-14T04:30:14+09:00",
+        "end_jst": "2026-11-14T05:59:23+09:00",
+        "minutes_approx": 89.2,
+        "followers_start": null,
+        "followers_end": null,
+        "karaoke_telop_logged": false,
+        "source": "自作記録（PC録画＋MILY SIGNAL #623の開始/終了検知。カラオケ字幕の記録なし）",
+        "log_dir": "",
+        "notes": "フォロワーと曲はこの枠の自動記録がないため入れていません"
+      },
+      {
+        "date": "2026-11-14",
+        "live_id": 23684728,
+        "start_jst": "2026-11-14T13:21:10+09:00",
+        "end_jst": "2026-11-14T14:13:20.654617+09:00",
+        "minutes_approx": 52.2,
+        "followers_start": 430,
+        "followers_end": 429,
+        "karaoke_telop_logged": true,
+        "source": "showroom-logs（自動記録）",
+        "log_dir": "20261114_1321_live23684728",
+        "notes": ""
+      }
+    ],
+    "songs_self_log_top": [
+      [
+        "にゃんにゃんにゃん",
+        15
+      ],
+      [
+        "にゃんにゃんにゃん(パンクにゃんにゃん)",
+        6
+      ],
+      [
+        "最強の推し！",
+        4
+      ],
+      [
+        "ファンサ",
+        3
+      ],
+      [
+        "ヘビーローテーション",
+        3
+      ],
+      [
+        "超最強",
+        3
+      ]
+    ],
+    "songs_showroom_fan_past_month_top10": [
+      {
+        "title": "にゃんにゃんにゃん",
+        "last": "2026/11/12",
+        "count": 16
+      },
+      {
+        "title": "完璧主義で☆",
+        "last": "2026/11/13",
+        "count": 7
+      },
+      {
+        "title": "とくべチュ、して",
+        "last": "2026/11/13",
+        "count": 7
+      },
+      {
+        "title": "にゃんにゃんにゃん(パンクにゃんにゃん)",
+        "last": "2026/11/11",
+        "count": 7
+      },
+      {
+        "title": "超最強",
+        "last": "2026/11/12",
+        "count": 6
+      },
+      {
+        "title": "私は最強 (ウタ from ONE PIECE FILM RED)",
+        "last": "2026/11/11",
+        "count": 6
+      },
+      {
+        "title": "かわいいだけじゃだめですか？",
+        "last": "2026/11/06",
+        "count": 6
+      },
+      {
+        "title": "初恋サイダー",
+        "last": "2026/11/13",
+        "count": 5
+      },
+      {
+        "title": "私、アイドル宣言",
+        "last": "2026/11/11",
+        "count": 5
+      },
+      {
+        "title": "ファンサ",
+        "last": "2026/11/11",
+        "count": 5
+      }
+    ],
+    "kpi_self_log_nov": {
+      "followers_now": 427,
+      "followers_now_note": "公式 11/14 19:16時点",
+      "streams": 28,
+      "streams_note": "11/3〜11/14 記録できた枠",
+      "hours": 29.1,
+      "hours_note": "開始〜終了検知の合計",
+      "growth_text": "11/3 393人 → 427人（+34）",
+      "followers_series_note": [
+        "各日の最後に記録した人数（自作記録）。記録のない日は点なし",
+        "showroom-fan.com：10月末385人→最新427人（+42）"
+      ]
+    },
+    "coverage": {
+      "days_with_streams_logged": [
+        "2026-11-03",
+        "2026-11-04",
+        "2026-11-05",
+        "2026-11-06",
+        "2026-11-07",
+        "2026-11-08",
+        "2026-11-10",
+        "2026-11-11",
+        "2026-11-12",
+        "2026-11-13",
+        "2026-11-14"
+      ],
+      "days_without_logs": [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-09"
+      ],
+      "streams_without_karaoke_log": [
+        "2026-11-14T04:30:14+09:00"
+      ]
+    }
+  },
+  "unconfirmed_or_conflicts": [
+    {
+      "id": "followers-429-vs-427",
+      "summary": "showroom-fan の11/14配信行は朝・昼ともフォロワー429。ダッシュボード現在値と公式公開API（19:16 JST）は427。",
+      "details": "自作記録の11/14昼は開始430・終了429（end_snapshot）。その後の現在値427との差は未確認（理由を推測しない）。11/14朝の429（+7）はダッシュボード配信欄のみで、自作の開始/終了スナップショットがない。",
+      "sources": [
+        "https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253",
+        "showroom-logs/573253/20261114_1321_live23684728/start_snapshot.json および end_snapshot.json",
+        "SHOWROOM公開API room/profile（2026-11-14 19:16 JST）"
+      ]
+    },
+    {
+      "id": "song-count-methods-differ",
+      "summary": "曲の回数は、showroom-fan（過去1ヶ月）と自作のカラオケ字幕記録（11/3〜11/14の27枠）で一致しない。合算しない。",
+      "examples": [
+        "曲 にゃんにゃんにゃん: showroom-fan 過去1ヶ月 16回（直近2026/11/12） / 自作記録 15回",
+        "曲 完璧主義で☆: showroom-fan 過去1ヶ月 7回（直近2026/11/13） / 自作記録 2回",
+        "曲 とくべチュ、して: showroom-fan 過去1ヶ月 7回（直近2026/11/13） / 自作記録 1回",
+        "曲 にゃんにゃんにゃん(パンクにゃんにゃん): showroom-fan 過去1ヶ月 7回（直近2026/11/11） / 自作記録 6回",
+        "曲 超最強: showroom-fan 過去1ヶ月 6回（直近2026/11/12） / 自作記録 3回",
+        "曲 私は最強 (ウタ from ONE PIECE FILM RED): showroom-fan 過去1ヶ月 6回（直近2026/11/11） / 自作記録 2回",
+        "曲 かわいいだけじゃだめですか？: showroom-fan 過去1ヶ月 6回（直近2026/11/06） / 自作記録 1回",
+        "曲 初恋サイダー: showroom-fan 過去1ヶ月 5回（直近2026/11/13） / 自作記録 2回",
+        "曲 私、アイドル宣言: showroom-fan 過去1ヶ月 5回（直近2026/11/11） / 自作記録 2回",
+        "曲 ファンサ: showroom-fan 過去1ヶ月 5回（直近2026/11/11） / 自作記録 3回"
+      ]
+    },
+    {
+      "id": "missing-days",
+      "summary": "自作記録のない日: 2026-11-01、2026-11-02、2026-11-09。これらの日のフォロワー・曲・枠の数字は入れていない（0とも補間ともしない）。11/8夕〜11/9は自作ログなし。"
+    },
+    {
+      "id": "20261114-morning-no-auto-log",
+      "summary": "11/14朝（live23683757）は showroom-logs に自動記録フォルダがなく、枠の長さは別の自作録画と MILY SIGNAL #623 から確認。フォロワーと曲はこの枠では未算入。イベント累積ptは画面の手動読取（途中）。"
+    },
+    {
+      "id": "event-gaps",
+      "summary": "イベントptは記録区間の差だけを書く。枠の前後の未記録ぶんは各枠の獲得に含めない。44211と44143は別イベントで合算しない。11/7夜は終了時pt未取得。貢献ランキングの個人名は公開データに含めない。"
+    },
+    {
+      "id": "intra-day-follower-wiggle",
+      "summary": "同一日内でも開始/終了フォロワーが前後することがある（例: 11/13夜①終了423、夜②開始・終了422。11/11夕方は開始スナップショット415、終了スナップショット414で変動の確定は未確認）。理由は未確認。"
+    },
+    {
+      "id": "historical-rank-streak",
+      "summary": "SHOWランク A-3 とまいにち106日は2026-11-14時点のダッシュボード現在値のみ。日付ごとのランク・まいにち日数の時系列は未確認。"
+    },
+    {
+      "id": "open-draft-prs",
+      "summary": "PR #620（11/13朝）と PR #628（11/14昼）などは Draft のまま未merge。数字の出典には使うが、本番サイトに載っているとは限らない。"
+    }
+  ],
+  "sources_index": [
+    "https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253",
+    "https://showroom-fan.com/dashboard/liver_song_list.php?room_id=573253&duration=1&view_mode=count",
+    "SHOWROOM公開API room/profile（フォロワー現在値、2026-11-14 19:16 JST）",
+    "自作自動記録 showroom-logs（開始/終了スナップショット・カラオケ字幕・公開APIのイベント累積pt）",
+    "mily-points-since-1029.md（イベントptの記録区間表。補間なし）",
+    "MILY SIGNAL 数字ページのPR（例: merged #596、Draft #620、Draft #628）。置き場は data-lab/reports/ と public/data-lab/data/",
+    "週次画像カードの生成結果は別作業（読み取りのみ。このまとめの正本には複製しない）"
+  ]
+}

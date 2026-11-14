@@ -1,0 +1,4 @@
+as_of,followers,show_rank,daily_streak_days,source,note
+2026-09-30（9月末・各月の最終配信時点）,321,,,https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253 （2026-11-14取得。ページ注記：月末時点の数値は各月の最終配信時点）,ダッシュボード「フォロワー推移（直近3ヶ月）」
+2026-10-31（10月末・各月の最終配信時点）,385,,,https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253 （2026-11-14取得）,9月末比 +64
+2026-11-14 19:16 JST（最新）,427,A-3,106,https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253 および SHOWROOM公開API room/profile（stats-card 取得時刻 2026-11-14 19:16 JST）,10月末比 +42。ランクとまいにち日数はダッシュボード現在値のみ（過去日の時系列は未確認）
