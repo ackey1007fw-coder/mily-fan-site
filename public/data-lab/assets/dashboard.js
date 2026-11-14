@@ -194,12 +194,55 @@ function renderStreams(data) {
   $("streams-note").textContent = data.streamsNote ?? "";
 }
 
-function renderSongs(songs) {
-  if (songs?.status === "preparing") {
-    $("songs-note").textContent = songs.note ?? "";
-  } else if (songs?.note) {
-    $("songs-note").textContent = songs.note;
+function referenceBox(box, sourceLabel, url) {
+  box.replaceChildren();
+  box.append(el("span", "参考値", "ref-tag"));
+  const p = el("p");
+  p.append(document.createTextNode(`出典：${sourceLabel}（自前の実測ではありません）`));
+  if (url) {
+    p.append(document.createTextNode(" "));
+    const a = el("a", "出典ページ ↗");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    p.append(a);
   }
+  box.append(p);
+  return box;
+}
+
+function renderFollowersReference(rp) {
+  const box = $("followers-reference");
+  if (!rp || !Array.isArray(rp.followersMonthEnd)) {
+    box.hidden = true;
+    return;
+  }
+  referenceBox(box, rp.source ?? "", rp.url);
+  const ul = document.createElement("ul");
+  for (const row of rp.followersMonthEnd) {
+    ul.append(el("li", `${row.label}：${fmt(row.followers)}人`));
+  }
+  box.append(ul);
+  box.append(
+    el("p", "月末時点の参考値です。上の推移グラフ（自前実測）には含めていません。", "fine"),
+  );
+}
+
+function renderSongs(songs) {
+  if (songs?.note) $("songs-note").textContent = songs.note;
+  const box = $("song-reference");
+  const ref = songs?.reference;
+  if (!ref) {
+    box.hidden = true;
+    return;
+  }
+  referenceBox(box, ref.source ?? "", ref.url);
+  box.append(
+    el(
+      "p",
+      `「${ref.title}」（${ref.artist}）は${ref.periodLabel}に${fmt(ref.plays)}回歌われています。自前の曲別集計ではなく、出典ページの参考値です。`,
+    ),
+  );
 }
 
 async function main() {
@@ -210,6 +253,7 @@ async function main() {
     renderProfile(data);
     renderFollowersChart(data.followersHistory ?? []);
     renderFollowersTable(data.followersHistory ?? []);
+    renderFollowersReference(data.referencePoints);
     renderEvent(data.currentEvent);
     renderStreams(data);
     renderSongs(data.songs);

@@ -82,9 +82,31 @@ test("current event snapshots are dated observations ending at the 2026-11-14 no
   assert.match(ev.note, /最終確定順位ではありません/);
 });
 
-test("song stats stay an honest placeholder until verified data exists", () => {
-  assert.equal(dashboard.songs.status, "preparing");
+test("historical reference points stay attributed and out of our measured series", () => {
+  const rp = dashboard.referencePoints;
+  assert.equal(rp.source, "showroom-fan.com 配信者ダッシュボード");
+  assert.equal(rp.url, "https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253");
+  assert.deepEqual(
+    rp.followersMonthEnd.map((r) => [r.month, r.followers]),
+    [
+      ["2026-09", 321],
+      ["2026-10", 385],
+    ],
+  );
+  // 参考値は自前実測の系列へ混ぜない。
+  assert.ok(dashboard.followersHistory.every((h) => h.dateJst >= "2026-11-14"));
+  assert.ok(!dashboard.followersHistory.some((h) => h.followers === 321 || h.followers === 385));
+});
+
+test("song stats stay an honest placeholder, with one attributed karaoke reference point", () => {
+  assert.equal(dashboard.songs.ownStatsStatus, "preparing");
   assert.match(dashboard.songs.note, /推測の回数は載せません/);
+  const ref = dashboard.songs.reference;
+  assert.equal(ref.title, "にゃんにゃんにゃん");
+  assert.equal(ref.plays, 16);
+  assert.equal(ref.periodLabel, "2026年11月");
+  assert.match(ref.source, /showroom-fan\.com/);
+  assert.match(ref.url, /^https:\/\/showroom-fan\.com\/dashboard\/liver_song_list\.php/);
 });
 
 test("dashboard page keeps noindex and fan-site metadata wiring", () => {

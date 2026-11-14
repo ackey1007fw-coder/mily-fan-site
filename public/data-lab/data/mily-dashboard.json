@@ -759,8 +759,33 @@
     ],
     "note": "順位とptは観測時点のスナップショットです。公式の最終確定順位ではありません。観測のない日は補間しません。"
   },
+  "referencePoints": {
+    "note": "以下は外部サイトに掲載された参考値です。自前の実測系列（フォロワー推移・曲別集計）には混ぜず、出典を明記して分けて表示します。",
+    "followersMonthEnd": [
+      {
+        "month": "2026-09",
+        "label": "2026年9月末",
+        "followers": 321
+      },
+      {
+        "month": "2026-10",
+        "label": "2026年10月末",
+        "followers": 385
+      }
+    ],
+    "source": "showroom-fan.com 配信者ダッシュボード",
+    "url": "https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253"
+  },
   "songs": {
-    "status": "preparing",
-    "note": "カラオケの曲別集計は、検証済みの集計データが揃ってから掲載します。推測の回数は載せません。"
+    "ownStatsStatus": "preparing",
+    "note": "自前で検証した曲別集計はまだありません。推測の回数は載せません。",
+    "reference": {
+      "title": "にゃんにゃんにゃん",
+      "artist": "コレサワ",
+      "plays": 16,
+      "periodLabel": "2026年11月",
+      "source": "showroom-fan.com カラオケリスト",
+      "url": "https://showroom-fan.com/dashboard/liver_song_list.php?room_id=573253&duration=1&view_mode=count"
+    }
   }
 }
