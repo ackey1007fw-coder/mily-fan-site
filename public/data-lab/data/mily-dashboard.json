@@ -1,0 +1,791 @@
+{
+  "schema": "mily-dashboard-v1",
+  "nonOfficial": true,
+  "updatedDateJst": "2026-11-14",
+  "profile": {
+    "roomId": 573253,
+    "followers": 427,
+    "showRank": "A-3",
+    "liveContinuousDays": 106,
+    "isOnlive": false,
+    "observedDateJst": "2026-11-14",
+    "source": "SHOWROOM公式プロフィールAPI（/api/room/profile）の2026-11-14実測。follower_num / show_rank_subdivided / live_continuous_days を使用",
+    "lastStream": {
+      "dateJst": "2026-11-14",
+      "sessionLabel": "昼",
+      "endedAtJst": "2026-11-14T14:12:53+09:00",
+      "note": "自前キャプチャの終了検知時刻。公式の終了時刻ではありません"
+    }
+  },
+  "followersHistory": [
+    {
+      "dateJst": "2026-11-14",
+      "followers": 427,
+      "source": "SHOWROOM公式プロフィールAPI follower_num（2026-11-14実測）"
+    }
+  ],
+  "streams": [
+    {
+      "dateJst": "2026-11-14",
+      "session": "noon",
+      "label": "11月14日昼のSHOWROOM配信",
+      "liveId": 23684728,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false,
+      "metricsNote": "画面カウンター集計は各回レポートで準備中（自前キャプチャで配信実施を確認）"
+    },
+    {
+      "dateJst": "2026-11-14",
+      "session": "morning",
+      "label": "11月14日朝のSHOWROOM配信",
+      "liveId": 23683757,
+      "lastValidAtJst": "2026-11-14T05:58:40+09:00",
+      "stars": 11964,
+      "visits": 1301,
+      "comments": 982,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-13",
+      "session": "night",
+      "label": "11月13日夜のSHOWROOM配信（22:01開始）",
+      "liveId": 23682422,
+      "lastValidAtJst": "2026-11-13T23:23:31+09:00",
+      "stars": 1639,
+      "visits": 116,
+      "comments": 733,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-11",
+      "session": "night",
+      "label": "11月11日夜のSHOWROOM配信",
+      "liveId": 23674155,
+      "lastValidAtJst": "2026-11-11T22:39:39+09:00",
+      "stars": 1660,
+      "visits": 136,
+      "comments": 1113,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-11",
+      "session": "evening",
+      "label": "11月11日夕方のSHOWROOM配信",
+      "liveId": 23672797,
+      "lastValidAtJst": "2026-11-11T17:38:27+09:00",
+      "stars": 1652,
+      "visits": 223,
+      "comments": 325,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-11",
+      "session": "noon",
+      "label": "11月11日昼のSHOWROOM配信",
+      "liveId": 23672535,
+      "lastValidAtJst": "2026-11-11T16:09:33+09:00",
+      "stars": 5027,
+      "visits": 852,
+      "comments": 538,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-11",
+      "session": "morning",
+      "label": "11月11日朝のSHOWROOM配信",
+      "liveId": 23671695,
+      "lastValidAtJst": "2026-11-11T09:14:56+09:00",
+      "stars": 8816,
+      "visits": 1240,
+      "comments": 712,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-10",
+      "session": "night",
+      "label": "11月10日夜のSHOWROOM配信",
+      "liveId": 23670095,
+      "lastValidAtJst": "2026-11-10T23:03:51+09:00",
+      "stars": 2720,
+      "visits": 107,
+      "comments": 582,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-10",
+      "session": "morning",
+      "label": "11月10日朝のSHOWROOM配信",
+      "liveId": 23667421,
+      "lastValidAtJst": "2026-11-10T06:34:41+09:00",
+      "stars": 2018,
+      "visits": 268,
+      "comments": 228,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-07",
+      "session": "night",
+      "label": "11月7日夜のSHOWROOM配信",
+      "liveId": 23657394,
+      "lastValidAtJst": "2026-11-07T22:55:16+09:00",
+      "stars": 6198,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-07",
+      "session": "morning",
+      "label": "11月7日朝のSHOWROOM配信",
+      "liveId": 23655200,
+      "lastValidAtJst": "2026-11-07T08:02:34+09:00",
+      "stars": 5341,
+      "visits": 875,
+      "comments": 584,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-06",
+      "session": "night",
+      "label": "11月6日夜のSHOWROOM配信",
+      "liveId": 23653460,
+      "lastValidAtJst": "2026-11-06T22:20:34+09:00",
+      "stars": 2691,
+      "visits": 175,
+      "comments": 383,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-06",
+      "session": "noon",
+      "label": "11月6日昼のSHOWROOM配信",
+      "liveId": 23651900,
+      "lastValidAtJst": "2026-11-06T15:15:27+09:00",
+      "stars": 4824,
+      "visits": 116,
+      "comments": 165,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-06",
+      "session": "morning",
+      "label": "11月6日朝のSHOWROOM配信",
+      "liveId": 23651039,
+      "lastValidAtJst": "2026-11-06T07:30:09+09:00",
+      "stars": 4441,
+      "visits": 271,
+      "comments": 207,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-05",
+      "session": "night",
+      "label": "11月5日夜のSHOWROOM配信",
+      "liveId": 23649291,
+      "lastValidAtJst": "2026-11-05T22:29:22+09:00",
+      "stars": 3313,
+      "visits": 113,
+      "comments": 597,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-05",
+      "session": "noon",
+      "label": "11月5日昼のSHOWROOM配信",
+      "liveId": 23647558,
+      "lastValidAtJst": "2026-11-05T15:16:06+09:00",
+      "stars": 4222,
+      "visits": 142,
+      "comments": 209,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-05",
+      "session": "morning",
+      "label": "11月5日朝のSHOWROOM配信",
+      "liveId": 23646534,
+      "lastValidAtJst": "2026-11-05T06:31:03+09:00",
+      "stars": 3564,
+      "visits": 286,
+      "comments": 285,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-04",
+      "session": "night",
+      "label": "11月4日夜のSHOWROOM配信",
+      "liveId": 23644591,
+      "lastValidAtJst": "2026-11-04T21:50:44+09:00",
+      "stars": 3643,
+      "visits": 148,
+      "comments": 482,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-04",
+      "session": "noon",
+      "label": "11月4日昼のSHOWROOM配信",
+      "liveId": 23643335,
+      "lastValidAtJst": "2026-11-04T15:07:37+09:00",
+      "stars": 3862,
+      "visits": 114,
+      "comments": 137,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-04",
+      "session": "morning",
+      "label": "11月4日朝のSHOWROOM配信",
+      "liveId": 23642484,
+      "lastValidAtJst": "2026-11-04T07:16:13+09:00",
+      "stars": 3975,
+      "visits": 313,
+      "comments": 286,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-03",
+      "session": "night",
+      "label": "11月3日夜のSHOWROOM配信",
+      "liveId": 23641251,
+      "lastValidAtJst": "2026-11-03T23:30:52+09:00",
+      "stars": 2453,
+      "visits": 126,
+      "comments": 525,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-03",
+      "session": "noon",
+      "label": "11月3日昼のSHOWROOM配信",
+      "liveId": 23639251,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-03",
+      "session": "morning",
+      "label": "11月3日朝のSHOWROOM配信",
+      "liveId": 23638183,
+      "lastValidAtJst": "2026-11-03T07:00:58+09:00",
+      "stars": 3643,
+      "visits": 321,
+      "comments": 260,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-02",
+      "session": "night",
+      "label": "11月2日夜のSHOWROOM配信",
+      "liveId": 23636506,
+      "lastValidAtJst": "2026-11-02T22:21:09+09:00",
+      "stars": 3853,
+      "visits": 118,
+      "comments": 551,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-02",
+      "session": "noon",
+      "label": "11月2日 昼のSHOWROOM配信",
+      "liveId": 23634935,
+      "lastValidAtJst": "2026-11-02T15:15:19+09:00",
+      "stars": 3360,
+      "visits": 330,
+      "comments": 186,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-02",
+      "session": "morning",
+      "label": "11月2日 朝のSHOWROOM配信",
+      "liveId": 23634120,
+      "lastValidAtJst": "2026-11-02T06:21:33+09:00",
+      "stars": 2383,
+      "visits": 268,
+      "comments": 131,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-01",
+      "session": "night",
+      "label": "11月1日 夜のSHOWROOM配信",
+      "liveId": 23633097,
+      "lastValidAtJst": "2026-11-01T22:58:31+09:00",
+      "stars": 2641,
+      "visits": 78,
+      "comments": 195,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-01",
+      "session": "noon",
+      "label": "11月1日 昼のSHOWROOM配信",
+      "liveId": 23630916,
+      "lastValidAtJst": "2026-11-01T14:56:56+09:00",
+      "stars": 1248,
+      "visits": 45,
+      "comments": 67,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-11-01",
+      "session": "morning",
+      "label": "11月1日 朝のSHOWROOM配信",
+      "liveId": 23629786,
+      "lastValidAtJst": "2026-11-01T06:21:58+09:00",
+      "stars": 2453,
+      "visits": 121,
+      "comments": 143,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-31",
+      "session": "noon",
+      "label": "10月31日 昼のSHOWROOM配信",
+      "liveId": 23626331,
+      "lastValidAtJst": "2026-10-31T15:21:26.341+09:00",
+      "stars": 2751,
+      "visits": 142,
+      "comments": 252,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-30",
+      "session": "night",
+      "label": "10月30日 夜のSHOWROOM配信（冒頭のみ）",
+      "liveId": 23623900,
+      "lastValidAtJst": "2026-10-30T22:33:29.730+09:00",
+      "stars": 300,
+      "visits": 24,
+      "comments": 20,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-30",
+      "session": "morning2",
+      "label": "10月30日 朝2枠目（6時台）のSHOWROOM配信",
+      "liveId": 23620643,
+      "lastValidAtJst": "2026-10-30T06:08:50.943+09:00",
+      "stars": 961,
+      "visits": 37,
+      "comments": 50,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-30",
+      "session": "morning1",
+      "label": "10月30日 朝1枠目（5時台）のSHOWROOM配信",
+      "liveId": 23620568,
+      "lastValidAtJst": "2026-10-30T05:17:50.969+09:00",
+      "stars": 1898,
+      "visits": 129,
+      "comments": 77,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-29",
+      "session": "noon",
+      "label": "10月29日 昼のSHOWROOM配信",
+      "liveId": 23617260,
+      "lastValidAtJst": "2026-10-29T15:18:08.320+09:00",
+      "stars": 4724,
+      "visits": 215,
+      "comments": 174,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-29",
+      "session": "morning",
+      "label": "10月29日朝 きら星の増え方を振り返る",
+      "liveId": 23616187,
+      "lastValidAtJst": "2026-10-29T06:32:47.154+09:00",
+      "stars": 4665,
+      "visits": 649,
+      "comments": 319,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-28",
+      "session": "morning",
+      "label": "10月28日朝 声で届けた、決戦前日の朝",
+      "liveId": 23611801,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-27",
+      "session": "night",
+      "label": "10月27日夜 手紙に込めたありがとう",
+      "liveId": 23610474,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-27",
+      "session": "morning",
+      "label": "朝の感謝と、一日を応援する挨拶",
+      "liveId": 23607190,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-26",
+      "session": "night",
+      "label": "10月26日 夜の雑談・応援相談配信",
+      "liveId": 23605926,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-25",
+      "session": "night",
+      "label": "一人ひとりへのありがとうから、皆で進む目標へ",
+      "liveId": 23602065,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-25",
+      "session": "morning",
+      "label": "10月25日 朝のメイク配信",
+      "liveId": 23598624,
+      "lastValidAtJst": "2026-10-25T06:40:46.523+09:00",
+      "stars": 3767,
+      "visits": 665,
+      "comments": 553,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-24",
+      "session": "noon",
+      "label": "10月24日 昼のSHOWROOM配信",
+      "liveId": 23595513,
+      "lastValidAtJst": "2026-10-24T16:01:00.811+09:00",
+      "stars": 3904,
+      "visits": 391,
+      "comments": 461,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-24",
+      "session": "morning",
+      "label": "10月24日 朝のラジオ配信",
+      "liveId": 23594458,
+      "lastValidAtJst": "2026-10-24T08:40:12.776+09:00",
+      "stars": 4718,
+      "visits": 423,
+      "comments": 703,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-23",
+      "session": "morning",
+      "label": "10月23日 朝の配信",
+      "liveId": 23590004,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-22",
+      "session": "night",
+      "label": "10月22日 夜の配信",
+      "liveId": 23588035,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-22",
+      "session": "morning",
+      "label": "10月22日 朝の配信",
+      "liveId": 23585463,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-21",
+      "session": "morning",
+      "label": "10月21日 朝の配信",
+      "liveId": 23581008,
+      "lastValidAtJst": "2026-10-21T08:07:32.736+09:00",
+      "stars": 11214,
+      "visits": 1882,
+      "comments": 972,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-20",
+      "session": "night",
+      "label": "10月20日 夜の配信",
+      "liveId": 23578225,
+      "lastValidAtJst": "2026-10-20T21:26:36.457+09:00",
+      "stars": 7087,
+      "visits": 856,
+      "comments": 1170,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-20",
+      "session": "morning",
+      "label": null,
+      "liveId": 23576663,
+      "lastValidAtJst": "2026-10-20T06:28:05.459000+09:00",
+      "stars": 2545,
+      "visits": 281,
+      "comments": 254,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-19",
+      "session": "morning",
+      "label": null,
+      "liveId": 23572405,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-18",
+      "session": "night",
+      "label": null,
+      "liveId": 23571625,
+      "lastValidAtJst": "2026-10-19T00:07:08.712+09:00",
+      "stars": 2080,
+      "visits": 77,
+      "comments": 457,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-18",
+      "session": "morning",
+      "label": null,
+      "liveId": 23568147,
+      "lastValidAtJst": "2026-10-18T06:58:00.255+09:00",
+      "stars": 9887,
+      "visits": 1603,
+      "comments": 961,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-17",
+      "session": "night",
+      "label": null,
+      "liveId": 23567037,
+      "lastValidAtJst": "2026-10-17T23:20:00.307+09:00",
+      "stars": 2970,
+      "visits": 90,
+      "comments": 453,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-17",
+      "session": "morning",
+      "label": "10月17日朝のSHOWROOM配信",
+      "liveId": 23564059,
+      "lastValidAtJst": "2026-10-17T09:38:12.436+09:00",
+      "stars": 11662,
+      "visits": 2667,
+      "comments": 1590,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-16",
+      "session": "night",
+      "label": "10月16日夜のSHOWROOM配信",
+      "liveId": 23562541,
+      "lastValidAtJst": "2026-10-16T22:33:37.623+09:00",
+      "stars": 2858,
+      "visits": 68,
+      "comments": 329,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-16",
+      "session": "morning",
+      "label": "10月16日朝のSHOWROOM配信",
+      "liveId": 23559940,
+      "lastValidAtJst": "2026-10-16T07:32:54.641+09:00",
+      "stars": 3643,
+      "visits": 247,
+      "comments": 338,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-15",
+      "session": "night",
+      "label": "10月15日夜のSHOWROOM配信",
+      "liveId": 23558451,
+      "lastValidAtJst": null,
+      "stars": 510,
+      "visits": null,
+      "comments": 31,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-15",
+      "session": "morning",
+      "label": "10月15日朝のSHOWROOM配信",
+      "liveId": 23555653,
+      "lastValidAtJst": "2026-10-15T06:31:08.545+09:00",
+      "stars": 2755,
+      "visits": 187,
+      "comments": 195,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-14",
+      "session": "night",
+      "label": "10月14日夜のSHOWROOM配信",
+      "liveId": 23554271,
+      "lastValidAtJst": null,
+      "stars": null,
+      "visits": null,
+      "comments": null,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-14",
+      "session": "noon",
+      "label": "10月14日昼のSHOWROOM配信",
+      "liveId": 23552113,
+      "lastValidAtJst": null,
+      "stars": 3866,
+      "visits": 350,
+      "comments": 416,
+      "confirmedFinal": false
+    },
+    {
+      "dateJst": "2026-10-14",
+      "session": "morning",
+      "label": "10月14日朝のSHOWROOM配信",
+      "liveId": 23551572,
+      "lastValidAtJst": "2026-10-14T08:59:07+09:00",
+      "stars": 3476,
+      "visits": 278,
+      "comments": 370,
+      "confirmedFinal": false
+    }
+  ],
+  "streamsNote": "きら星・総訪問・コメントは各回の最後の有効画面表示（途中参考値）です。公式確定値・実ユニーク視聴者数・イベントptではありません。未取得の回は null のまま表示します。",
+  "currentEvent": {
+    "name": "湘南PRのぼり2027年1月版応援大使決定戦！",
+    "eventId": 44143,
+    "periodJst": {
+      "start": "2026-11-09T18:00:00+09:00",
+      "end": "2026-11-15T21:59:59+09:00"
+    },
+    "url": "https://www.showroom-live.com/event/enoshimataxi_pr28",
+    "snapshots": [
+      {
+        "atJst": "2026-11-10T23:09:02+09:00",
+        "rank": 6,
+        "point": 5111,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      },
+      {
+        "atJst": "2026-11-11T09:15:37+09:00",
+        "rank": 2,
+        "point": 57562,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      },
+      {
+        "atJst": "2026-11-11T16:15:08+09:00",
+        "rank": 3,
+        "point": 67965,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      },
+      {
+        "atJst": "2026-11-11T17:38:51+09:00",
+        "rank": 2,
+        "point": 77255,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      },
+      {
+        "atJst": "2026-11-11T22:49:07+09:00",
+        "rank": 2,
+        "point": 102363,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      },
+      {
+        "atJst": "2026-11-13T23:23:51+09:00",
+        "rank": 3,
+        "point": 203036,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      },
+      {
+        "atJst": "2026-11-14T05:58:40+09:00",
+        "rank": 2,
+        "point": 236539,
+        "source": "公開エミュレーター表示の手動読取（データラボ朝集計）"
+      },
+      {
+        "atJst": "2026-11-14T14:12:46+09:00",
+        "rank": 3,
+        "point": 243556,
+        "source": "公開APIの観測記録（データラボ各回集計）"
+      }
+    ],
+    "note": "順位とptは観測時点のスナップショットです。公式の最終確定順位ではありません。観測のない日は補間しません。"
+  },
+  "referencePoints": {
+    "note": "以下は外部サイトに掲載された参考値です。自前の実測系列（フォロワー推移・曲別集計）には混ぜず、出典を明記して分けて表示します。",
+    "followersMonthEnd": [
+      {
+        "month": "2026-09",
+        "label": "2026年9月末",
+        "followers": 321
+      },
+      {
+        "month": "2026-10",
+        "label": "2026年10月末",
+        "followers": 385
+      }
+    ],
+    "source": "showroom-fan.com 配信者ダッシュボード",
+    "url": "https://showroom-fan.com/dashboard/liver_dashboard.php?room_id=573253"
+  },
+  "songs": {
+    "ownStatsStatus": "preparing",
+    "note": "自前で検証した曲別集計はまだありません。推測の回数は載せません。",
+    "reference": {
+      "title": "にゃんにゃんにゃん",
+      "artist": "コレサワ",
+      "plays": 16,
+      "periodLabel": "過去1か月",
+      "source": "showroom-fan.com カラオケリスト",
+      "url": "https://showroom-fan.com/dashboard/liver_song_list.php?room_id=573253&duration=1&view_mode=count"
+    }
+  }
+}

@@ -39,6 +39,7 @@ function siteMetadataPlugin(): Plugin {
         .replaceAll("__DATA_LAB_CANONICAL__", dataLabUrl())
         .replaceAll("__DATA_LAB_PROGRESS_CANONICAL__", `${dataLabUrl()}progress/`)
         .replaceAll("__DATA_LAB_GLITTER_CANONICAL__", `${dataLabUrl()}glitter/`)
+        .replaceAll("__DATA_LAB_DASHBOARD_CANONICAL__", `${dataLabUrl()}dashboard/`)
         .replaceAll("__DATA_LAB_TIMING_CANONICAL__", `${dataLabUrl()}stream-timing/`)
         .replaceAll("__DATA_LAB_FINAL_NIGHT_CANONICAL__", dataLabFinalNightUrl())
         .replaceAll("__DATA_LAB_20261025_NIGHT_CANONICAL__", `${dataLabUrl()}reports/20261025-night/`)
@@ -239,6 +240,7 @@ export default defineConfig({
         dataLab: "data-lab/index.html",
         dataLabProgress: "data-lab/progress/index.html",
         dataLabGlitter: "data-lab/glitter/index.html",
+        dataLabDashboard: "data-lab/dashboard/index.html",
         dataLabTiming: "data-lab/stream-timing/index.html",
         dataLabVelocity: "data-lab/comment-velocity/index.html",
         dataLabMorning20261017: "data-lab/reports/20261017-morning/index.html",
