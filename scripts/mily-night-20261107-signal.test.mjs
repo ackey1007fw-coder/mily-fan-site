@@ -58,6 +58,6 @@ test("2026-11-07 night: report keeps partial event-pt wording, anonymity, and wi
   assert.ok(groupByBroadcastDate().find(g=>g.date==="2026-11-07").entries.some(x=>x.slot==="night"));
   assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-07").entries.map(x=>x.slot),["night","morning"]);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261107-night/index.html"));
-  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261114-morning|20261111-night|20261111-evening|20261111-afternoon|20261111-morning|20261110-night|20261110-morning|20261107-night)\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261114-noon|20261114-morning|20261111-night|20261111-evening|20261111-afternoon|20261111-morning|20261110-night|20261110-morning|20261107-night)\/">最新の配信レポート/);
   assert.ok(DAILY_STREAM_ENTRIES.some(e=>e.date==="2026-11-07"&&e.slot==="night"));
 });

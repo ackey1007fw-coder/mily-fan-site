@@ -32,9 +32,9 @@ test("2026-11-14 morning: report and JSON keep viewers anonymous and wiring is i
   assert.match(report,/確定合計ではありません/);assert.match(report,/途中参考値/);assert.match(report,/\+23,909pt/);
   assert.match(report,/05:58:40/);assert.match(report,/04:30〜04:54は未記録/);
   for(const o of data.observations) assert.ok(report.includes(o.atJst.slice(11,19)));
-  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-14").entries.map(x=>x.slot),["morning"]);
+  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-14").entries.map(x=>x.slot),["noon","morning"]);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261114-morning/index.html"));
-  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261114-morning\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/(20261114-noon|20261114-morning)\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"),/morning: "朝"/);
 });
 test("2026-11-14 morning: owner-selected stream stills are wired into the report",()=>{
