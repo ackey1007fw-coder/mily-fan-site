@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="dark"><meta name="theme-color" content="#101d28">
+<title>みりぃダッシュボード｜Mily SIGNAL</title>
+<meta name="description" content="みりぃ（三橋莉子）さんのフォロワー推移、配信の記録、参加中イベントの観測スナップショットをまとめた非公式ファン制作ダッシュボード。数値は観測時点の記録で、公式確定値ではありません。">
+<link rel="canonical" href="__DATA_LAB_DASHBOARD_CANONICAL__"><meta property="og:url" content="__DATA_LAB_DASHBOARD_CANONICAL__">
+<meta property="og:title" content="みりぃダッシュボード｜Mily SIGNAL"><meta property="og:type" content="website"><meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="__DATA_LAB_OG_IMAGE__"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/data-lab/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/data-lab/assets/dashboard.css"><script type="module" src="/data-lab/assets/dashboard.js"></script>
+</head><body>
+<a class="skip" href="#main">本文へスキップ</a>
+<header><div class="shell top"><a class="brand" href="/data-lab/">MILY <span>SIGNAL</span><small>DATA LAB / DASHBOARD</small></a><a class="pill" href="/data-lab/">← ラボ</a></div></header>
+<main id="main" class="shell">
+<section class="hero"><p class="eyebrow">三橋莉子（みりぃ） × SHOWROOMの記録</p><h1>みりぃの「いま」を、<br><span>数字でふりかえる。</span></h1><p class="lead">フォロワーの推移、毎日の配信の記録、参加中イベントの順位の動きを1ページに集めた、ファン制作・非公式のダッシュボードです。どれも<strong>観測した時点の記録</strong>で、SHOWROOM公式の確定値ではありません。</p><p id="status" role="status" aria-live="polite">記録データを読み込んでいます。</p></section>
+<noscript><div class="notice">JavaScriptを有効にするとダッシュボードを確認できます。元データは<a href="/data-lab/data/mily-dashboard.json">公開JSON</a>から読めます。</div></noscript>
+<section class="score-grid" aria-label="プロフィール要約">
+<article class="card main-score"><p class="eyebrow">フォロワー</p><h2><strong id="followers">確認中</strong><span> 人</span></h2><p id="followers-source" class="fine">SHOWROOM公式プロフィールAPIの実測値です。</p></article>
+<article class="card"><p class="eyebrow">SHOWランク</p><h2><strong id="show-rank">確認中</strong></h2><p class="fine">プロフィールAPIの show_rank_subdivided（観測時点）です。</p></article>
+<article class="card"><p class="eyebrow">まいにち配信</p><h2><strong id="streak">確認中</strong><span> 日</span></h2><p class="fine">連続配信日数（live_continuous_days・観測時点）です。</p></article>
+<article class="card"><p class="eyebrow">最終配信</p><h2 class="medium" id="last-stream">確認中</h2><p id="last-stream-note" class="fine"></p></article>
+</section>
+<section class="card section" aria-labelledby="followers-heading"><p class="eyebrow">FOLLOWERS / フォロワー推移</p><h2 id="followers-heading">フォロワーの歩み</h2><div id="followers-chart" class="chart-wrap"></div><div class="table-wrap"><table id="followers-table"><caption>観測した日ごとのフォロワー数。観測のない日は補間しません。</caption><thead><tr><th>観測日</th><th>フォロワー</th><th>前回観測から</th><th>出典</th></tr></thead><tbody></tbody></table></div><p class="fine">記録は2026-11-14から、自前スナップショットの蓄積で増えていきます。外部サイトの過去データを転載したものではありません。</p></section>
+<section class="card section" aria-labelledby="event-heading"><p class="eyebrow">EVENT / 参加中イベント</p><h2 id="event-heading">確認中</h2><p id="event-period" class="fine"></p><p class="medium">最新観測 <strong id="event-latest">確認中</strong></p><div class="table-wrap"><table id="event-table"><caption>各配信で観測した順位と累積ptのスナップショット。公式の最終確定順位ではありません。</caption><thead><tr><th>観測時刻</th><th>順位</th><th>累積pt</th><th>出典</th></tr></thead><tbody></tbody></table></div><p id="event-note" class="fine"></p><p><a id="event-link" href="https://www.showroom-live.com/event/enoshimataxi_pr28" target="_blank" rel="noopener noreferrer">SHOWROOM公式イベントページ ↗</a></p></section>
+<section class="card section" aria-labelledby="streams-heading"><p class="eyebrow">STREAMS / 配信の記録</p><h2 id="streams-heading">これまでの配信（2026-10-14〜）</h2><div class="table-wrap"><table id="streams-table"><caption>きら星・総訪問・コメントは各回の最後の有効画面表示（途中参考値）です。公式確定値・実ユニーク視聴者数ではありません。</caption><thead><tr><th>日付</th><th>配信</th><th>きら星</th><th>総訪問表示</th><th>コメント</th></tr></thead><tbody></tbody></table></div><p id="streams-note" class="fine"></p><p><a href="/data-lab/#daily-archive">日付別の観測グラフと各回レポートはラボ入口から →</a></p></section>
+<section class="card section" aria-labelledby="songs-heading"><p class="eyebrow">SONGS / カラオケの記録</p><h2 id="songs-heading">曲の記録は準備中</h2><p id="songs-note">カラオケの曲別集計は、検証済みの集計データが揃ってから掲載します。</p></section>
+<section class="card section" aria-labelledby="notes-heading"><p class="eyebrow">DATA NOTES / 数字の読み方</p><h2 id="notes-heading">出典と、混ぜないもの</h2><div class="notes-grid"><div><h3>フォロワー・ランク・連続日数</h3><p>SHOWROOM公式プロフィールAPI（/api/room/profile）の実測を、日付つきで記録しています。観測した瞬間の値で、常時更新のライブ表示ではありません。</p></div><div><h3>配信の記録</h3><p>データラボ各回の匿名集計（最後の有効画面表示）をそのまま束ねています。画面カウンターは公式確定ギフト数・実視聴者数・イベントptとは別物です。未取得の回は「未取得」のままにします。</p></div><div><h3>イベント順位</h3><p>公開APIと公開画面から観測した順位・累積ptのスナップショットです。観測していない時刻の値は補間せず、最終順位と呼びません。</p></div><div><h3>公開しないもの</h3><p>視聴者・支援者の個人名やID、コメント本文、個別の貢献記録は載せません。集計と時点値だけを公開します。</p></div></div><p><a href="/data-lab/data/mily-dashboard.json" target="_blank" rel="noopener noreferrer">この画面の公開データJSON</a> · <a href="/data-lab/">Mily SIGNALトップへ</a></p></section>
+<footer>非公式ファン制作 / Mily SIGNAL<br>本人運営・SHOWROOM公式の分析ではありません。数値は観測時点の記録です。</footer>
+</main></body></html>
