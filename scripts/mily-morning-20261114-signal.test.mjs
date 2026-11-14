@@ -43,26 +43,26 @@ test("2026-11-14 morning: owner-selected stream stills are wired into the report
   assert.match(report,/生成や顔の加工はしていません/);
   assert.match(report,/録画のない05:32:09〜05:41:57の区間の写真はありません/);
   const wired=[
-    "mily-b264-16-20261114-morning-cat-paws-gentle-smile.jpg",
-    "mily-b264-09-20261114-morning-song-cat-paw-pose.jpg",
-    "mily-b264-01-20261114-morning-cat-paws-forward-smile.jpg",
-    "mily-b264-02-20261114-morning-cat-ear-big-laugh.jpg",
-    "mily-b264-15-20261114-morning-pointing-smile.jpg",
-    "mily-b264-03-20261114-morning-cat-paws-to-camera.jpg",
-    "mily-b264-17-20261114-morning-cat-paws-big-smile.jpg",
-    "mily-b264-18-20261114-morning-cat-paws-cheeks.jpg",
-    "mily-b264-05-20261114-morning-goodbye-both-hands-wave.jpg",
-    "mily-b264-06-20261114-morning-goodbye-final-pose.jpg",
+    "mily-b266-16-20261114-morning-cat-paws-gentle-smile.jpg",
+    "mily-b266-09-20261114-morning-song-cat-paw-pose.jpg",
+    "mily-b266-01-20261114-morning-cat-paws-forward-smile.jpg",
+    "mily-b266-02-20261114-morning-cat-ear-big-laugh.jpg",
+    "mily-b266-15-20261114-morning-pointing-smile.jpg",
+    "mily-b266-03-20261114-morning-cat-paws-to-camera.jpg",
+    "mily-b266-17-20261114-morning-cat-paws-big-smile.jpg",
+    "mily-b266-18-20261114-morning-cat-paws-cheeks.jpg",
+    "mily-b266-05-20261114-morning-goodbye-both-hands-wave.jpg",
+    "mily-b266-06-20261114-morning-goodbye-final-pose.jpg",
   ];
   for(const name of wired) assert.ok(report.includes("/media/live/"+name),name);
-  assert.equal((report.match(/\/media\/live\/mily-b264-/g)||[]).length,10);
+  assert.equal((report.match(/\/media\/live\/mily-b266-/g)||[]).length,10);
   const section=report.slice(report.indexOf('id="stream-media"'));
-  assert.ok(section.indexOf("mily-b264-16-")<section.indexOf("mily-b264-09-"),"lead visual is still 16");
+  assert.ok(section.indexOf("mily-b266-16-")<section.indexOf("mily-b266-09-"),"lead visual is still 16");
   for(const name of [
-    "mily-b264-04-20261114-morning-laugh-raised-hands.jpg",
-    "mily-b264-07-20261114-morning-talk-smile.jpg",
-    "mily-b264-08-20261114-morning-cat-ear-talk-smile.jpg",
-    "mily-b264-10-20261114-morning-cat-ear-bright-smile.jpg",
+    "mily-b266-04-20261114-morning-laugh-raised-hands.jpg",
+    "mily-b266-07-20261114-morning-talk-smile.jpg",
+    "mily-b266-08-20261114-morning-cat-ear-talk-smile.jpg",
+    "mily-b266-10-20261114-morning-cat-ear-bright-smile.jpg",
   ]) assert.ok(!report.includes(name),"unselected still stays unwired: "+name);
   assert.doesNotMatch(report,/pbs\.twimg\.com|drive\.google|user_id|\/workspace\//);
 });
@@ -70,12 +70,12 @@ test("2026-11-14 morning: only audio-checked clips are wired; read-out and unver
   assert.match(report,/短い映像（原音つき）/);
   assert.match(report,/名前や順位の読み上げ区間を含まないことを確かめた2本だけ/);
   for(const name of [
-    "mily-b264-11-20261114-morning-clip-cat-ear-talk-paws.mp4",
-    "mily-b264-11-20261114-morning-clip-cat-ear-talk-paws-poster.jpg",
-    "mily-b264-12-20261114-morning-clip-goodbye-both-hands-wave.mp4",
-    "mily-b264-12-20261114-morning-clip-goodbye-both-hands-wave-poster.jpg",
+    "mily-b266-11-20261114-morning-clip-cat-ear-talk-paws.mp4",
+    "mily-b266-11-20261114-morning-clip-cat-ear-talk-paws-poster.jpg",
+    "mily-b266-12-20261114-morning-clip-goodbye-both-hands-wave.mp4",
+    "mily-b266-12-20261114-morning-clip-goodbye-both-hands-wave-poster.jpg",
   ]) assert.ok(report.includes("/media/live-clips/"+name),name);
   assert.equal((report.match(/<video/g)||[]).length,2);
-  for(const prefix of ["mily-b264-13-","mily-b264-14-"])
+  for(const prefix of ["mily-b266-13-","mily-b266-14-"])
     assert.ok(!report.includes(prefix),"unwired clip stays out: "+prefix);
 });

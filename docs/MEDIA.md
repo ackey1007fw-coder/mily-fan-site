@@ -1,5 +1,6 @@
-## b264：2026-11-14朝 写真14枚・短尺4本
+## b266：2026-11-14朝 写真14枚・短尺4本
 
+- #625で11/13夜・第2枠が b264 を使ったため、この朝パックの番号を b266 に振り直した（#624のStoryは b265）。元のDriveフォルダ名は「mily-fan-site b264 derivatives (2026-11-14 morning pack)」のまま。
 - 対象は2026-11-14朝枠（04:30開始、第1部きっかけ枠＋第2部通常枠）の配信パック。MILY SIGNALレポート（`data-lab/reports/20261114-morning/`）と同じDraft PRで用意した。
 - 2026-11-14にオーナーが選定（05:46〜05:48のスクショタイムのポーズを優先＋むぎ推薦）。写真は10枚（01・02・03・05・06・09・15・16・17・18）を同レポートへ配線し、代表写真は16。04・07・08・10は未配線の候補のまま残す。短尺は音声確認を通ったものだけを配線する。
 - 15〜18は、オーナーのスマホスクショ指定を受けて同じ録画（05:41:57開始分）から追加抽出した実フレーム。彼のスクショ自体（アバター・視聴者名が写る）は掲載しない。
@@ -12,28 +13,28 @@
 
 | 公開ファイル | Bytes | SHA256 |
 | --- | ---: | --- |
-| public/media/live/mily-b264-01-20261114-morning-cat-paws-forward-smile.jpg | 23314 | ea60bd08716f2c0c58b66c048824a19bc6bdbfb14cd63ccd86f51de25c59cf73 |
-| public/media/live/mily-b264-02-20261114-morning-cat-ear-big-laugh.jpg | 23288 | bce63291d9a6fed7f587b3c815c4f3ea962c26546486ef67c35764668d8820ab |
-| public/media/live/mily-b264-03-20261114-morning-cat-paws-to-camera.jpg | 24476 | 5ae52b14cd2383d8e52d876b4b73adca51a2437c30e8b932780017418dc890b3 |
-| public/media/live/mily-b264-04-20261114-morning-laugh-raised-hands.jpg | 24275 | 8e50e4c46ba2d146d511b334f2cb5f97c1549c23b7d9abff6252b725e803c3a2 |
-| public/media/live/mily-b264-05-20261114-morning-goodbye-both-hands-wave.jpg | 21911 | 07a209a24ac2ee1bc4770719fefaa5300adbd4e81293cd96dd994812c114f276 |
-| public/media/live/mily-b264-06-20261114-morning-goodbye-final-pose.jpg | 25262 | 155e3433305c615fb62343c3dca28ffb771bfe0c2fd933a26596ecc0380b27ce |
-| public/media/live/mily-b264-07-20261114-morning-talk-smile.jpg | 25078 | 4e68cede71d7d4fb40ae5c5638c6ee0676abe0f1550faf06e06efe66f1e40fd6 |
-| public/media/live/mily-b264-08-20261114-morning-cat-ear-talk-smile.jpg | 27390 | f8c122ee24666a43d6131ddc41551204bce2df72021134597de0296bf7edbb50 |
-| public/media/live/mily-b264-09-20261114-morning-song-cat-paw-pose.jpg | 27690 | c3b7b900b2de2e44bf2d3edf14f6a743dffbe344480b6502f405b4ffb73139a2 |
-| public/media/live/mily-b264-10-20261114-morning-cat-ear-bright-smile.jpg | 26907 | b56d34ad4bb518dfabf41c98c7d862eb0f2d950aa09276df3b0891272541e6cc |
-| public/media/live/mily-b264-15-20261114-morning-pointing-smile.jpg | 15842 | ca3ea6dca9915b0ff45785abdf4d8b0a68e63a629f8c8b1a4d8748cdde2342b3 |
-| public/media/live/mily-b264-16-20261114-morning-cat-paws-gentle-smile.jpg | 16035 | bdd918a57c5716f87c8626564d1a0155242ef78496514b44d226826980fe3cb9 |
-| public/media/live/mily-b264-17-20261114-morning-cat-paws-big-smile.jpg | 15041 | 86c596fb7e80c47202e10f4e0c8c42d13b0460f24f33701544da2d7b13103cb3 |
-| public/media/live/mily-b264-18-20261114-morning-cat-paws-cheeks.jpg | 14543 | 4e6963720207f41d3d0957501eddcc74fe97244e74c52880166228061c5a7507 |
-| public/media/live-clips/mily-b264-11-20261114-morning-clip-cat-ear-talk-paws.mp4 | 1913493 | 1c760b7c81694006ddb39040a31e93a0c927127ea9649a6eb9c7c9bc11c2e685 |
-| public/media/live-clips/mily-b264-11-20261114-morning-clip-cat-ear-talk-paws-poster.jpg | 22475 | 250337dac610b76d5517dd497a6313e047b22fff6214177955473f663f488064 |
-| public/media/live-clips/mily-b264-12-20261114-morning-clip-goodbye-both-hands-wave.mp4 | 1723213 | 5f3d29b4005f34b7a8318e709fb06cf575beb0a63f1a447c4f78260c56e76323 |
-| public/media/live-clips/mily-b264-12-20261114-morning-clip-goodbye-both-hands-wave-poster.jpg | 21159 | 48e6007afe0974b7262af4669ea9934f4c0402711ff3e62fec21b3c5b9c2d68f |
-| public/media/live-clips/mily-b264-13-20261114-morning-clip-laughter-wave.mp4 | 1886190 | 266323e88738501fa012b91ab80a1f7979a44aec38bde39db19e92d160501fbd |
-| public/media/live-clips/mily-b264-13-20261114-morning-clip-laughter-wave-poster.jpg | 23620 | d57c452e91c9616e4c855a9c2f94db9e14887474944e4639c8689f52144843a2 |
-| public/media/live-clips/mily-b264-14-20261114-morning-clip-song-cat-paw-gesture.mp4 | 1178977 | f90ae8e1be803c40acbd0c94602d8ba4381943620be49bb6c73e4119eae75b92 |
-| public/media/live-clips/mily-b264-14-20261114-morning-clip-song-cat-paw-gesture-poster.jpg | 27593 | ef8a138947a17b7fe061437b7fa4b3d1fc7c52b317dda0ad4e6a67938fef1a4b |
+| public/media/live/mily-b266-01-20261114-morning-cat-paws-forward-smile.jpg | 23314 | ea60bd08716f2c0c58b66c048824a19bc6bdbfb14cd63ccd86f51de25c59cf73 |
+| public/media/live/mily-b266-02-20261114-morning-cat-ear-big-laugh.jpg | 23288 | bce63291d9a6fed7f587b3c815c4f3ea962c26546486ef67c35764668d8820ab |
+| public/media/live/mily-b266-03-20261114-morning-cat-paws-to-camera.jpg | 24476 | 5ae52b14cd2383d8e52d876b4b73adca51a2437c30e8b932780017418dc890b3 |
+| public/media/live/mily-b266-04-20261114-morning-laugh-raised-hands.jpg | 24275 | 8e50e4c46ba2d146d511b334f2cb5f97c1549c23b7d9abff6252b725e803c3a2 |
+| public/media/live/mily-b266-05-20261114-morning-goodbye-both-hands-wave.jpg | 21911 | 07a209a24ac2ee1bc4770719fefaa5300adbd4e81293cd96dd994812c114f276 |
+| public/media/live/mily-b266-06-20261114-morning-goodbye-final-pose.jpg | 25262 | 155e3433305c615fb62343c3dca28ffb771bfe0c2fd933a26596ecc0380b27ce |
+| public/media/live/mily-b266-07-20261114-morning-talk-smile.jpg | 25078 | 4e68cede71d7d4fb40ae5c5638c6ee0676abe0f1550faf06e06efe66f1e40fd6 |
+| public/media/live/mily-b266-08-20261114-morning-cat-ear-talk-smile.jpg | 27390 | f8c122ee24666a43d6131ddc41551204bce2df72021134597de0296bf7edbb50 |
+| public/media/live/mily-b266-09-20261114-morning-song-cat-paw-pose.jpg | 27690 | c3b7b900b2de2e44bf2d3edf14f6a743dffbe344480b6502f405b4ffb73139a2 |
+| public/media/live/mily-b266-10-20261114-morning-cat-ear-bright-smile.jpg | 26907 | b56d34ad4bb518dfabf41c98c7d862eb0f2d950aa09276df3b0891272541e6cc |
+| public/media/live/mily-b266-15-20261114-morning-pointing-smile.jpg | 15842 | ca3ea6dca9915b0ff45785abdf4d8b0a68e63a629f8c8b1a4d8748cdde2342b3 |
+| public/media/live/mily-b266-16-20261114-morning-cat-paws-gentle-smile.jpg | 16035 | bdd918a57c5716f87c8626564d1a0155242ef78496514b44d226826980fe3cb9 |
+| public/media/live/mily-b266-17-20261114-morning-cat-paws-big-smile.jpg | 15041 | 86c596fb7e80c47202e10f4e0c8c42d13b0460f24f33701544da2d7b13103cb3 |
+| public/media/live/mily-b266-18-20261114-morning-cat-paws-cheeks.jpg | 14543 | 4e6963720207f41d3d0957501eddcc74fe97244e74c52880166228061c5a7507 |
+| public/media/live-clips/mily-b266-11-20261114-morning-clip-cat-ear-talk-paws.mp4 | 1913493 | 1c760b7c81694006ddb39040a31e93a0c927127ea9649a6eb9c7c9bc11c2e685 |
+| public/media/live-clips/mily-b266-11-20261114-morning-clip-cat-ear-talk-paws-poster.jpg | 22475 | 250337dac610b76d5517dd497a6313e047b22fff6214177955473f663f488064 |
+| public/media/live-clips/mily-b266-12-20261114-morning-clip-goodbye-both-hands-wave.mp4 | 1723213 | 5f3d29b4005f34b7a8318e709fb06cf575beb0a63f1a447c4f78260c56e76323 |
+| public/media/live-clips/mily-b266-12-20261114-morning-clip-goodbye-both-hands-wave-poster.jpg | 21159 | 48e6007afe0974b7262af4669ea9934f4c0402711ff3e62fec21b3c5b9c2d68f |
+| public/media/live-clips/mily-b266-13-20261114-morning-clip-laughter-wave.mp4 | 1886190 | 266323e88738501fa012b91ab80a1f7979a44aec38bde39db19e92d160501fbd |
+| public/media/live-clips/mily-b266-13-20261114-morning-clip-laughter-wave-poster.jpg | 23620 | d57c452e91c9616e4c855a9c2f94db9e14887474944e4639c8689f52144843a2 |
+| public/media/live-clips/mily-b266-14-20261114-morning-clip-song-cat-paw-gesture.mp4 | 1178977 | f90ae8e1be803c40acbd0c94602d8ba4381943620be49bb6c73e4119eae75b92 |
+| public/media/live-clips/mily-b266-14-20261114-morning-clip-song-cat-paw-gesture-poster.jpg | 27593 | ef8a138947a17b7fe061437b7fa4b3d1fc7c52b317dda0ad4e6a67938fef1a4b |
 
 ## b264：2026-11-13夜・第2枠 写真10枚・原音トーク短尺2本
 
