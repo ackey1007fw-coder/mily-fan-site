@@ -1,0 +1,670 @@
+{
+ "schema": "mily-anonymous-live-observations-v1",
+ "nonOfficial": true,
+ "roomId": 573253,
+ "liveId": 23687917,
+ "dateJst": "2026-11-15",
+ "session": "morning",
+ "format": "showroom",
+ "label": "11月15日朝のSHOWROOM配信（06:03開始・ラジオ形式）",
+ "eventName": "同回の匿名UI観測と公開APIのイベント累積pt（新イベント「湘南PRのぼり2027年1月版応援大使決定戦！」）。他の枠・他の取得経路とは合算しません。",
+ "sourceDescription": "公開されている非公式の画面エミュレーターに表示される匿名カウンターを約15秒ごとに自動記録した値だけを採用。原ログ・個人別情報は含みません。",
+ "verifiedAtJst": "2026-11-15",
+ "finalServiceValueVerified": false,
+ "completeCoverageConfirmed": false,
+ "timingComparisonEligible": false,
+ "lastValidOnline": {
+  "atJst": "2026-11-15T06:24:50+09:00",
+  "stars": 1254,
+  "visits": 199,
+  "comments": 204,
+  "firstVisits": 1,
+  "repeatVisits": 8,
+  "newFollows": 0,
+  "otherFree": 110,
+  "star100People": 11,
+  "recommendedCommentPeople": 21,
+  "confirmedFinal": false
+ },
+ "metrics": {
+  "stars": 1254,
+  "visits": 199,
+  "comments": 204,
+  "firstVisits": 1,
+  "repeatVisits": 8,
+  "newFollows": 0,
+  "otherFree": 110,
+  "star100People": 11,
+  "recommendedCommentPeople": 21
+ },
+ "measurementNote": "途中参考値（0に戻る前の最後の有効表示。終了時の確定値ではありません）。公式確定ギフト数・実贈呈量・イベントpt・ユニーク視聴者数ではありません。",
+ "comparisonNote": "同一経路の実測点だけを表示。欠測はnullのまま保持し、他経路の点で埋めず、0埋め・補間・時間帯効果の推定をしません。",
+ "quality": {
+  "savedSampleRows": 43,
+  "validRows": 41,
+  "excludedRows": 2,
+  "excludedDetail": {
+   "malformedRows": 0,
+   "postEndResetRows": 2
+  },
+  "publishedObservationPoints": 41,
+  "captureWindowJst": {
+   "start": "2026-11-15T06:06:52+09:00",
+   "end": "2026-11-15T06:24:50+09:00"
+  },
+  "gaps": [
+   {
+    "startJst": "2026-11-15T06:03:37+09:00",
+    "endJst": "2026-11-15T06:06:52+09:00",
+    "seconds": 195,
+    "note": "配信開始から観測開始までの空き（06:03〜06:06は未記録。補間・逆算なし）"
+   },
+   {
+    "startJst": "2026-11-15T06:13:53+09:00",
+    "endJst": "2026-11-15T06:16:10+09:00",
+    "seconds": 137
+   },
+   {
+    "startJst": "2026-11-15T06:16:42+09:00",
+    "endJst": "2026-11-15T06:21:50+09:00",
+    "seconds": 308
+   }
+  ],
+  "regressions": [],
+  "visitsNulledRows": 9,
+  "liveEndDetected": true,
+  "liveEndDetectedAtJst": "2026-11-15T06:28:11+09:00",
+  "secondsLastValidToEnd": 201,
+  "verified_final": false,
+  "source_event_counts_verified": false,
+  "missingDataIsNotZeroPerformance": true,
+  "interpolated": false,
+  "zeroFilled": false,
+  "counterSource": "public_emulator_visible_ui_auto_capture",
+  "end_confirmed": false,
+  "displayLabel": "途中参考値（終了時未確認）",
+  "timestampBasis": "画面カウンターの取得時刻。別経路の画面進行時刻とは同一視しません。",
+  "firstVisitsNote": "初訪問は画面表示どおりの値です（取得できなかった行はnull）。",
+  "missingCountsByMetric": {
+   "stars": 0,
+   "visits": 9,
+   "comments": 0,
+   "firstVisits": 9,
+   "repeatVisits": 9,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 0,
+   "recommendedCommentPeople": 0
+  },
+  "sourceReconciliation": {
+   "selectedSeries": "public_emulator_ui_auto_capture",
+   "otherSeriesMerged": false,
+   "note": "別経路の記録とは合算・接合せず、この一つの系列を独立採用しています。"
+  },
+  "end_confirmed_reason": "06:24:50の後、06:28:11に画面カウンターが0に戻りました。0に戻る直前の最後の表示であり、終了時の確定値は確認できないため途中参考値とします。",
+  "broadcastStyle": "radio",
+  "broadcastStyleSource": "official_start_snapshot_is_radio_now"
+ },
+ "observations": [
+  {
+   "atJst": "2026-11-15T06:06:52+09:00",
+   "stars": 401,
+   "visits": null,
+   "comments": 20,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 4,
+   "recommendedCommentPeople": 6
+  },
+  {
+   "atJst": "2026-11-15T06:07:08+09:00",
+   "stars": 401,
+   "visits": null,
+   "comments": 23,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 4,
+   "recommendedCommentPeople": 6
+  },
+  {
+   "atJst": "2026-11-15T06:07:24+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 26,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 7
+  },
+  {
+   "atJst": "2026-11-15T06:07:40+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 28,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 7
+  },
+  {
+   "atJst": "2026-11-15T06:07:57+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 32,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 7
+  },
+  {
+   "atJst": "2026-11-15T06:08:13+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 38,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 8
+  },
+  {
+   "atJst": "2026-11-15T06:08:29+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 42,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 8
+  },
+  {
+   "atJst": "2026-11-15T06:08:45+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 44,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 8
+  },
+  {
+   "atJst": "2026-11-15T06:09:01+09:00",
+   "stars": 501,
+   "visits": null,
+   "comments": 46,
+   "firstVisits": null,
+   "repeatVisits": null,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 8
+  },
+  {
+   "atJst": "2026-11-15T06:09:17+09:00",
+   "stars": 501,
+   "visits": 69,
+   "comments": 51,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 9
+  },
+  {
+   "atJst": "2026-11-15T06:09:33+09:00",
+   "stars": 502,
+   "visits": 69,
+   "comments": 55,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 9
+  },
+  {
+   "atJst": "2026-11-15T06:09:48+09:00",
+   "stars": 502,
+   "visits": 69,
+   "comments": 59,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 5,
+   "recommendedCommentPeople": 9
+  },
+  {
+   "atJst": "2026-11-15T06:10:05+09:00",
+   "stars": 602,
+   "visits": 69,
+   "comments": 61,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 6,
+   "recommendedCommentPeople": 9
+  },
+  {
+   "atJst": "2026-11-15T06:10:21+09:00",
+   "stars": 602,
+   "visits": 69,
+   "comments": 67,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 0,
+   "star100People": 6,
+   "recommendedCommentPeople": 10
+  },
+  {
+   "atJst": "2026-11-15T06:10:37+09:00",
+   "stars": 602,
+   "visits": 69,
+   "comments": 68,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 10,
+   "star100People": 6,
+   "recommendedCommentPeople": 10
+  },
+  {
+   "atJst": "2026-11-15T06:10:53+09:00",
+   "stars": 612,
+   "visits": 69,
+   "comments": 71,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 30,
+   "star100People": 6,
+   "recommendedCommentPeople": 11
+  },
+  {
+   "atJst": "2026-11-15T06:11:09+09:00",
+   "stars": 612,
+   "visits": 69,
+   "comments": 72,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 40,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:11:25+09:00",
+   "stars": 612,
+   "visits": 69,
+   "comments": 77,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 70,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:11:41+09:00",
+   "stars": 612,
+   "visits": 69,
+   "comments": 77,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 70,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:11:57+09:00",
+   "stars": 612,
+   "visits": 69,
+   "comments": 82,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:12:13+09:00",
+   "stars": 632,
+   "visits": 69,
+   "comments": 83,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:12:32+09:00",
+   "stars": 632,
+   "visits": 69,
+   "comments": 86,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:12:48+09:00",
+   "stars": 632,
+   "visits": 69,
+   "comments": 91,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:13:04+09:00",
+   "stars": 632,
+   "visits": 69,
+   "comments": 93,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 12
+  },
+  {
+   "atJst": "2026-11-15T06:13:20+09:00",
+   "stars": 642,
+   "visits": 69,
+   "comments": 97,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 13
+  },
+  {
+   "atJst": "2026-11-15T06:13:36+09:00",
+   "stars": 642,
+   "visits": 69,
+   "comments": 98,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 13
+  },
+  {
+   "atJst": "2026-11-15T06:13:53+09:00",
+   "stars": 642,
+   "visits": 69,
+   "comments": 99,
+   "firstVisits": 0,
+   "repeatVisits": 1,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 6,
+   "recommendedCommentPeople": 13
+  },
+  {
+   "atJst": "2026-11-15T06:16:10+09:00",
+   "stars": 832,
+   "visits": 108,
+   "comments": 120,
+   "firstVisits": 0,
+   "repeatVisits": 2,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 7,
+   "recommendedCommentPeople": 17
+  },
+  {
+   "atJst": "2026-11-15T06:16:26+09:00",
+   "stars": 942,
+   "visits": 108,
+   "comments": 125,
+   "firstVisits": 0,
+   "repeatVisits": 3,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 9,
+   "recommendedCommentPeople": 18
+  },
+  {
+   "atJst": "2026-11-15T06:16:42+09:00",
+   "stars": 942,
+   "visits": 108,
+   "comments": 128,
+   "firstVisits": 0,
+   "repeatVisits": 3,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 9,
+   "recommendedCommentPeople": 18
+  },
+  {
+   "atJst": "2026-11-15T06:21:50+09:00",
+   "stars": 1172,
+   "visits": 150,
+   "comments": 177,
+   "firstVisits": 1,
+   "repeatVisits": 6,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:22:06+09:00",
+   "stars": 1172,
+   "visits": 150,
+   "comments": 179,
+   "firstVisits": 1,
+   "repeatVisits": 6,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:22:22+09:00",
+   "stars": 1172,
+   "visits": 150,
+   "comments": 180,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:22:38+09:00",
+   "stars": 1172,
+   "visits": 150,
+   "comments": 183,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:22:54+09:00",
+   "stars": 1172,
+   "visits": 150,
+   "comments": 188,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:23:10+09:00",
+   "stars": 1172,
+   "visits": 150,
+   "comments": 190,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:23:27+09:00",
+   "stars": 1173,
+   "visits": 150,
+   "comments": 191,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:23:43+09:00",
+   "stars": 1173,
+   "visits": 150,
+   "comments": 196,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:23:59+09:00",
+   "stars": 1174,
+   "visits": 150,
+   "comments": 201,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 90,
+   "star100People": 11,
+   "recommendedCommentPeople": 20
+  },
+  {
+   "atJst": "2026-11-15T06:24:34+09:00",
+   "stars": 1184,
+   "visits": 150,
+   "comments": 204,
+   "firstVisits": 1,
+   "repeatVisits": 7,
+   "newFollows": 0,
+   "otherFree": 110,
+   "star100People": 11,
+   "recommendedCommentPeople": 21
+  },
+  {
+   "atJst": "2026-11-15T06:24:50+09:00",
+   "stars": 1254,
+   "visits": 199,
+   "comments": 204,
+   "firstVisits": 1,
+   "repeatVisits": 8,
+   "newFollows": 0,
+   "otherFree": 110,
+   "star100People": 11,
+   "recommendedCommentPeople": 21
+  }
+ ],
+ "sourceIntegrity": {
+  "observationsCsvSha256": "cab349e86ef38488378486afcd48f2ccf20086d3b7182abea3e259364d0ebebd"
+ },
+ "eventPointObservations": {
+  "source": "public_api_auto_capture",
+  "separateFromUiCounters": true,
+  "eventActive": true,
+  "eventName": "湘南PRのぼり2027年1月版応援大使決定戦！",
+  "eventPeriodJst": {
+   "start": "2026-11-09T18:00:00+09:00",
+   "end": "2026-11-15T21:59:59+09:00"
+  },
+  "start": {
+   "at": "2026-11-15T06:06:49.016025+09:00",
+   "rank": 2,
+   "point": 272543
+  },
+  "end": {
+   "at": "2026-11-15T06:28:25.140180+09:00",
+   "rank": 2,
+   "point": 282152
+  },
+  "pointDifference": 9609,
+  "midSamples": [
+   {
+    "at": "2026-11-15T06:10:39.273299+09:00",
+    "rank": 2,
+    "point": 273588
+   },
+   {
+    "at": "2026-11-15T06:16:29.034188+09:00",
+    "rank": 2,
+    "point": 277352
+   }
+  ],
+  "note": "公開API記録のイベント累積pt（06:06:49の272,543→06:28:25の282,152）。開始時の記録は配信開始（06:03）の約3分後のため、06:03〜06:06の増分は含まれていません（補間・逆算なし）。配信枠単体の公式確定ptではなく、画面のきら星と合算しません。順位は記録した全時点（06:06:49〜06:28:25）で2位のままです。終了時の記録（06:28:25）は配信終了検知（06:28:37）の直前に取った値です。同日の他の枠とも合算しません。"
+ },
+ "commentLog": {
+  "entries": 149,
+  "anonymousPosterCount": 24,
+  "separateFromUiCommentDisplay": true,
+  "uiCommentDisplay": 204,
+  "note": "コメント記録149件（カウント系を除くと148件）・投稿者24人は個別ログの匿名集計。画面のコメント表示204（06:24:50）とは別集計です。個人名は含みません。"
+ },
+ "recapNote": "このDraftには配信メモ（写真・クリップ）を含めていません。この枠は開始スナップショットでラジオ形式（映像なし）と記録されています。",
+ "growthBySlot": {
+  "note": "各時間帯の終わりに近い実測点どうしの差。欠測区間は補間しません。途中参考値。",
+  "slots": [
+   {
+    "slot": "06:00〜06:15",
+    "fromJst": "2026-11-15T06:06:52+09:00",
+    "toJst": "2026-11-15T06:13:53+09:00",
+    "starsFrom": 401,
+    "starsTo": 642,
+    "starsGain": 241,
+    "minutes": 7.0
+   },
+   {
+    "slot": "06:15〜06:30",
+    "fromJst": "2026-11-15T06:13:53+09:00",
+    "toJst": "2026-11-15T06:24:50+09:00",
+    "starsFrom": 642,
+    "starsTo": 1254,
+    "starsGain": 612,
+    "minutes": 10.9
+   }
+  ]
+ }
+}
