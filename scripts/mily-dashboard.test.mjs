@@ -104,7 +104,7 @@ test("song stats stay an honest placeholder, with one attributed karaoke referen
   const ref = dashboard.songs.reference;
   assert.equal(ref.title, "にゃんにゃんにゃん");
   assert.equal(ref.plays, 16);
-  assert.equal(ref.periodLabel, "2026年11月");
+  assert.equal(ref.periodLabel, "過去1か月");
   assert.match(ref.source, /showroom-fan\.com/);
   assert.match(ref.url, /^https:\/\/showroom-fan\.com\/dashboard\/liver_song_list\.php/);
 });
