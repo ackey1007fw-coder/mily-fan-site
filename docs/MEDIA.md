@@ -1,3 +1,24 @@
+## b265：2026-11-14朝 本人Instagram Story「OHAYO :)」写真1枚（NEWS・Gallery）
+
+- オーナーが特定のStoryを指定して掲載を依頼した「オーナー指定素材」。出典は本人のInstagram Story（2026-11-14朝、@mily_chan36）。Story共有URLは一時的なため、公開コード・文書へは残さない（Story共有URLの扱いに従う）。取得経路：オーナーが提供した画面録画（2026-11-14受領）。録画・動画ファイル自体は公開しない。
+- 内容は、本人がデザインした車内セルフィーの2コマコラージュ（上段：横向きのカット＋Hump Back「僕らは今日も車の中」のミュージックスタンプ／下段：ウインク＋手書き「OHAYO :)」）。コラージュは分割・トリミングせず1枚のまま掲載。公開用フレームは録画から切り出した端末UIなしのクリーンな全画面（720×1280 PNG、SHA-256 `f95b87176a13ec7ce5814db0793f714357759b44678a10d42276f8e264db861d`）を正本とし、JPEG化したものを `media/original/` に無改変で保持（GitHubへはコミットしない）。公開派生は `pnpm media:build` で 480/960/1600 の JPEG・WebP を生成し、EXIF等のメタデータは除去。元素材が720px幅のため、960/1600派生は拡大されず720×1280のまま。顔・身体の生成・補正はしていない。
+- Storyの音声（市販楽曲）は権利確認ができないため公開しない。掲載は写真のみ。
+- 第三者情報：本人のみが映る。車内のみで、ナンバープレート・標識・住所など場所を特定できる情報は読み取れない。視聴者名・端末UIは含まない。
+- 掲載面：NEWS `2026-11-14-instagram-story-ohayo` の代表写真と、Gallery（`src/data/media.ts`、`provenance: "owner-provided"`、`sourceUrl: null`、`sourceDate: "2026-11-14"`）。
+
+| 原本（media/original、非公開） | Bytes | SHA256 |
+| --- | ---: | --- |
+| mily-b265-01-20261114-story-ohayo-car.jpg | 95701 | e32ecf6ba39830f2372ecf1ea1ae867ca9622c0b83380728c288353ba084d57b |
+
+| 公開派生（public/media/gallery/） | 寸法 | Bytes | SHA256 |
+| --- | --- | ---: | --- |
+| mily-b265-01-20261114-story-ohayo-car-480.jpg | 480×853 | 41593 | 12b71ad4d1bdf098e62cbfb1f3eab860fa480a083b4d394560b7cd483c26e1df |
+| mily-b265-01-20261114-story-ohayo-car-480.webp | 480×853 | 23342 | 43d6425277de591ded7a0da7f555c26d9bf8f2c786f76ef3a006f263866540fb |
+| mily-b265-01-20261114-story-ohayo-car-960.jpg | 720×1280 | 70189 | bd53affc4ed2f6fdd8c6d189e541216567784d8366289bd78756fe216a6e7697 |
+| mily-b265-01-20261114-story-ohayo-car-960.webp | 720×1280 | 38082 | d56cd38c4c366047e3100b680e7695c32f5cd9efe429f1888e4af9d25b70850c |
+| mily-b265-01-20261114-story-ohayo-car-1600.jpg | 720×1280 | 70189 | bd53affc4ed2f6fdd8c6d189e541216567784d8366289bd78756fe216a6e7697 |
+| mily-b265-01-20261114-story-ohayo-car-1600.webp | 720×1280 | 38082 | d56cd38c4c366047e3100b680e7695c32f5cd9efe429f1888e4af9d25b70850c |
+
 ## b266：2026-11-14朝 写真14枚・短尺4本
 
 - #625で11/13夜・第2枠が b264 を使ったため、この朝パックの番号を b266 に振り直した（#624のStoryは b265）。元のDriveフォルダ名は「mily-fan-site b264 derivatives (2026-11-14 morning pack)」のまま。

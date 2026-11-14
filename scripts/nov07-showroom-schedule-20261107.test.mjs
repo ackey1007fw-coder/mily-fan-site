@@ -63,7 +63,8 @@ test('11/7 NEWS is the sourced Latest lead without scraped media or a changed WE
   assert.equal(item.sameDayOrder, 4);
   assert.deepEqual(item.activityIds, ['live-stream', 'miss-circle']);
   assert.equal(item.source, NOVEMBER_07_SCHEDULE_X_URL);
-  assert.equal(sortNewsByDateDesc(news)[0], item);
+  // Latest lead as of 2026-11-07 (newer NEWS items have since taken the lead).
+  assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.date <= '2026-11-07'))[0], item);
   assert.match(item.title, /7:00/);
   assert.match(item.title, /21:00/);
   assert.match(item.body, /みりぽち10日目/);

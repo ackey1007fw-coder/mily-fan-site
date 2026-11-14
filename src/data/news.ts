@@ -35,6 +35,7 @@ import { tiktokAmiMeetStoryVideo } from "./tiktokAmiMeetStoryVideo.ts";
 import { tiktokAmiTwinCoordVideo } from "./tiktokAmiTwinCoordVideo.ts";
 import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
+import { storyOhayoNewsImage } from "./storyOhayoPhoto.ts";
 import { godivaNanaNewsImages } from "./godivaNanaPhotos.ts";
 import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
@@ -282,6 +283,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-14-instagram-story-ohayo",
+    date: "2026-11-14",
+    title: "「OHAYO :)」車の中から朝のあいさつ🩵 みりぃのInstagram Story",
+    body: "11月14日朝、みりぃがInstagram Storyを更新しました。今朝のSHOWROOM配信を終えたあとの、車の中からのセルフィー2コマです。\n\n上段は、少し横を向いたカットに、Hump Backの「僕らは今日も車の中」のミュージックスタンプ。下段はウインクとともに、手書きの「OHAYO :)」が添えられています。\n\nStoryは一定時間で消える投稿です。写真はこの記事とギャラリーに掲載しています。最新の投稿は本人のInstagramでご確認ください。",
+    url: "https://www.instagram.com/mily_chan36",
+    sourceLabel: "Instagram Story（11月14日）",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: storyOhayoNewsImage,
+  },
   {
     id: "2026-11-07-x-showroom-sr-final-schedule",
     date: "2026-11-07",
