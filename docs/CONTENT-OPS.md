@@ -1,3 +1,10 @@
+# 2026-11-14：毎週日曜のラジオ番組『湘南シーサイドサークル』をNEWSへ追加
+
+- オーナー依頼により、FM湘南マジックウェイブ（85.6MHz）『湘南シーサイドサークル』（#SSC）のパーソナリティとしての出演を案内するNEWSを1件追加（ID `2026-11-14-radio-seasidecircle-weekly`）。放送は毎週日曜10:00〜13:00の生放送で、番組名・放送枠・担当はFM公式の番組ページで確認した既存の確認済み事実（`shared/radio-program.js`）。
+- 明日11月15日（日）のトークテーマ「成長」も本文で案内した。ラジオDJネームは「ラジオDJネキみりぃ」。
+- 写真は添付しない。出典・聴取・お便りフォームは既存のFM公式リンク（`radioProgram.programUrl` / `radioProgram.listenUrl` / `RADIO_KAWAII_MESSAGE_FORM_URL`）を再利用し、新しい外部リンクは登録していない。
+- 「毎週必ず本人が3時間出演している」とは断定しない（既存のradio運用どおり）。日常のコンテンツ追加のためProject Memoryは変更しない。公開完了はcurrent-head CI・オーナー確認・merge・本番実表示で判定する。
+
 # 2026-11-14：朝のInstagram Story「OHAYO :)」をNEWS・Galleryへ追加
 
 - オーナー依頼により、11月14日朝の本人Instagram StoryをもとにNEWSへ1件追加（ID `2026-11-14-instagram-story-ohayo`）。今朝のSHOWROOM配信後に更新された、車内セルフィーの2コマコラージュ。

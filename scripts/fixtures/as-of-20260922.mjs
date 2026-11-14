@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-11-14-radio-seasidecircle-weekly",
   "2026-11-14-instagram-story-ohayo",
   "2026-11-07-x-showroom-sr-final-schedule",
   "2026-11-02-x-entry-photo-change",
