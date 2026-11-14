@@ -284,6 +284,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-11-14-radio-seasidecircle-weekly",
+    date: "2026-11-14",
+    activityIds: ["radio"],
+    title: "毎週日曜はラジオの日📻 FM湘南マジックウェイブ『湘南シーサイドサークル』パーソナリティ",
+    body: "みりぃは、FM湘南マジックウェイブ（85.6MHz）のお昼の番組『湘南シーサイドサークル』（#SSC）で、ラジオDJネキみりぃとしてパーソナリティを務めています。放送は毎週日曜10:00〜13:00の生放送です。\n\n明日11月15日（日）のトークテーマは「成長」。日曜のお昼は、ラジオでみりぃの声を聴いてください。番組へのメッセージは、FM公式フォームから送れます。\n\n最新の番組情報は、FM公式の番組ページをご確認ください。",
+    source: radioProgram.programUrl,
+    sourceLabel: "FM公式の番組ページを見る",
+    relatedUrl: radioProgram.listenUrl,
+    ctaLabel: "ラジオを聴く（FM公式）",
+    additionalCtas: [
+      { label: "番組にお便りを送る（FM公式）", url: RADIO_KAWAII_MESSAGE_FORM_URL },
+    ],
+  },
+  {
     id: "2026-11-14-instagram-story-ohayo",
     date: "2026-11-14",
     title: "「OHAYO :)」車の中から朝のあいさつ🩵 みりぃのInstagram Story",
