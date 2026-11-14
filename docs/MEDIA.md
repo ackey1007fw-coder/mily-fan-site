@@ -35,6 +35,62 @@
 | public/media/live-clips/mily-b264-14-20261114-morning-clip-song-cat-paw-gesture.mp4 | 1178977 | f90ae8e1be803c40acbd0c94602d8ba4381943620be49bb6c73e4119eae75b92 |
 | public/media/live-clips/mily-b264-14-20261114-morning-clip-song-cat-paw-gesture-poster.jpg | 27593 | ef8a138947a17b7fe061437b7fa4b3d1fc7c52b317dda0ad4e6a67938fef1a4b |
 
+## b264：2026-11-13夜・第2枠 写真10枚・原音トーク短尺2本
+
+- 対象は2026-11-13夜・第2枠（22:01頃開始）のLIVE STREAM記事だけ。NEWS・Gallery・SNS・別配信には展開しない。
+- 同回の保存録画（640×360、実尺82分03秒）から選定した実フレーム10枚と、歌唱のない雑談部分の原音付き短尺2本。映像は全編あり、記録時刻は録画先頭からの目安で、配信の時計時刻とは区別する。採用秒：写真 90・480・1752・2040・2280・2760・3180・3395・4080・4500、短尺 2682.0–2705.6・3442.4–3460.8。
+- 写真とポスターは各1枚を実寸で目視。採用した写真・ポスターに、コメントUI・第三者人物は見つけていない。壁の背景は元のまま（付箋の文字はこの解像度では読み取れない）。目を閉じたフレームと動きの大きいフレームは不採用とした。背景の読めない名前を推測して本文へ書かない。
+- 静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大はしていない。JPEGにEXIF/GPS/IPTCなし。代表写真は06。
+- 短尺は原音付き（H.264/AAC）。掲載範囲は別経路の自動認識（Whisper medium）で照合した。歌唱区間は含んでいない（「時の流れに身をまかせ」を途中まで歌った場面は本文にだけ記した）。短尺の前後に視聴者の名前への言及が続く区間は含めていない。A/V同期は切り出し範囲のフレームと音声で確認。
+- 写真ZIPには掲載JPEG10枚だけを収録し、バイト一致を検査。元録画、全文ASR、個別視聴者の情報、非公開素材の場所は含めない。
+- Draft PRのまま。Ready・merge・投稿・本人への送信はしない。写真と短尺の選定・配置はオーナー確認待ち。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b264-01-20261113-night2-opening.jpg | 16602 | 8761b12fce9dccfef3533f1afdecd12d8e9536012018c0f0ff3d95a2c7406e4f |
+| public/media/live/mily-b264-02-20261113-night2-lean-in.jpg | 17015 | 6d15fdc446dbf04fbba1d2c12eeadb16675e414d58add190a229e66a49d6265a |
+| public/media/live/mily-b264-03-20261113-night2-big-smile.jpg | 16156 | f748b0b5aa81bca9881d2548c01d7ca2000ee21df8c3d962a1eeeed92f0d6305 |
+| public/media/live/mily-b264-04-20261113-night2-laugh.jpg | 17359 | c1ed2a0f87373fde39b825f51e802811055a7aefba4c7baa6abd2a5636dd6d59 |
+| public/media/live/mily-b264-05-20261113-night2-close-up.jpg | 16993 | 656e7cd8980a79b3f7c4d3572291d59f787c4ed527de635fd3ea1b2c8cc1de76 |
+| public/media/live/mily-b264-06-20261113-night2-cat-ears-smile.jpg | 16812 | 21fc2d1c7829ffd58a34df4ec9154da3bd3bdac2f96563b404cf12b1c67db90f |
+| public/media/live/mily-b264-07-20261113-night2-cat-ears-pout.jpg | 16957 | c05863af9ccc91dbb0b0e3b78d6ea4c21d822b896e6afaeef19441d23a7dabee |
+| public/media/live/mily-b264-08-20261113-night2-big-laugh.jpg | 17968 | 4c44533f7c9bdf2cce1dc1c6511f4644c9fad9b276cfd11067c95471c75e2788 |
+| public/media/live/mily-b264-09-20261113-night2-calm-look.jpg | 17925 | b336a1aa4ce632337bb31c83bd027f65f4e154e11f9490d83a8dd98a84984aab |
+| public/media/live/mily-b264-10-20261113-night2-head-tilt.jpg | 16810 | 60eb5ca9b8e60c3ae1527f3d3ba1ccd12117e9059fd859e7b39a563971ab5746 |
+| public/media/live/mily-b264-20261113-night2-photos.zip | 171877 | fbe4949f7e44e9734dddfa07d9ed8dd966a01ec69650b4a5312bc99a7d201ace |
+| public/media/live-clips/mily-b264-11-20261113-night2-motto.mp4 | 983008 | fe3b4337eab421b877d7c155cbdf9e811844163bb2fc09a11393545e4c8413cd |
+| public/media/live-clips/mily-b264-11-20261113-night2-motto-poster.jpg | 15936 | 720515438861065b4256b06daf7f9a1b969cfca9cf3c7251e67529bf01ed7303 |
+| public/media/live-clips/mily-b264-12-20261113-night2-gift-replies.mp4 | 765337 | 04328fc7db3449da1771c9c578a1b554f562c61ac6ca75929a66ce412e7aad21 |
+| public/media/live-clips/mily-b264-12-20261113-night2-gift-replies-poster.jpg | 17128 | b294ca81bcd98c06196861bbfa17973db21b2938ccf73b55b6c83d407d88f3cb |
+
+## b263：2026-11-13夜・第1枠 写真10枚・原音トーク短尺2本
+
+- 対象は2026-11-13夜・第1枠（20:45頃開始）のLIVE STREAM記事だけ。NEWS・Gallery・SNS・別配信には展開しない。同日夜の第2枠（22:01頃開始）は b264 で別途扱う。
+- 同回の保存録画（640×360、実尺63分31秒）から選定した実フレーム10枚と、歌唱のない雑談部分の原音付き短尺2本。映像は録画開始から約45分（約2,730秒まで）が真っ黒で声だけの時間だったため、静止画と短尺は映像のある区間の実フレームだけを使っている。記録時刻は録画先頭からの目安で、配信の時計時刻とは区別する。採用秒：写真 2790・2880・2970・3060・3150・3240・3420・3510・3600・3780、短尺 3536.4–3558.2・3599.5–3612.6。
+- 写真とポスターは各1枚を実寸で目視。採用した写真・ポスターに、コメントUI・第三者人物は見つけていない。壁の背景は元のまま（付箋の文字はこの解像度では読み取れない）。目を閉じたフレームとうつむいたフレームは不採用とした。背景の読めない名前を推測して本文へ書かない。
+- 静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大はしていない。JPEGにEXIF/GPS/IPTCなし。代表写真は09。
+- 短尺は原音付き（H.264/AAC）。掲載範囲は別経路の自動認識（Whisper large-v3）で照合した。この回に歌唱は確認されておらず、歌唱区間は含んでいない。冒頭の名前の呼びかけ区間と、締めの名前感謝が続く可能性のある区間は採用していない。短尺12（希望の話）には、本人の反応として視聴者の表示名への短い言及が1件含まれる（読み上げ区間ではない）。A/V同期は切り出し範囲のフレームと音声で確認。
+- 写真ZIPには掲載JPEG10枚だけを収録し、バイト一致を検査。元録画、全文ASR、個別視聴者の情報、非公開素材の場所は含めない。
+- Draft PRのまま。Ready・merge・投稿・本人への送信はしない。写真と短尺の選定・配置はオーナー確認待ち。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b263-01-20261113-night-serious-look.jpg | 16432 | d2cd5e59a38440612ceae19a7ecff00db9b38360c77140e8c97c573edf703e65 |
+| public/media/live/mily-b263-02-20261113-night-thinking.jpg | 17119 | 829eddec99e95211617ee01af4192e6ccbb1c9eaf39eb8996e91d9664382bd88 |
+| public/media/live/mily-b263-03-20261113-night-smile.jpg | 16631 | df69a470073eb0f90ec1dfea5469e1930c2e65907fcac117247dbc4b962aed1e |
+| public/media/live/mily-b263-04-20261113-night-hair-touch.jpg | 18302 | e0f3a905cf9954aa1e8846bdd6360d7803b732f696b132d0ce8769c54aba998a |
+| public/media/live/mily-b263-05-20261113-night-talking.jpg | 16630 | f501dc1128691eedcb716c1cefce25e0feb53b08f9194a1fda4ab0c9721a27da |
+| public/media/live/mily-b263-06-20261113-night-lean-in.jpg | 16057 | 4382458b29058725f9ec1981d02fc2fdf6358079cd865d49161a3ead7d5caa68 |
+| public/media/live/mily-b263-07-20261113-night-tearful-soft.jpg | 16630 | 9c964ff5d6250886fb7ea1f2b1bcda323a65be8f202189f3e8c924cf1f685901 |
+| public/media/live/mily-b263-08-20261113-night-big-laugh.jpg | 16575 | a243772a4c460714c037b142e07a00031ac9d3b3e47af0d863487b2466a5d736 |
+| public/media/live/mily-b263-09-20261113-night-bright-smile.jpg | 15792 | 35b5e266c361ac3119a0f2f432ce2449699b0717bac823bd93ad1ff5442cd33b |
+| public/media/live/mily-b263-10-20261113-night-hand-on-chest.jpg | 17071 | be22910afef5466516374f79ea22330dd37956ef2f730e9491b60724975e01e2 |
+| public/media/live/mily-b263-20261113-night-photos.zip | 169041 | 28613f143ba8a65f2c0ec51ed93d51edabfcad3c93601f3749205443d87b3eae |
+| public/media/live-clips/mily-b263-11-20261113-night-more-power-left.mp4 | 971037 | d67f174f78a1fa66d749320f3f38eff88977de4f86322c6db075c3bd88e3f9d1 |
+| public/media/live-clips/mily-b263-11-20261113-night-more-power-left-poster.jpg | 16368 | 0257c5b6db1582dae56dd9f21abd48f663c2b3fdf99646b601b843ca1f7d67cd |
+| public/media/live-clips/mily-b263-12-20261113-night-hope-remains.mp4 | 582652 | dce3ad57a44dac4ebc0a78e1b2eaf828c23eff790e5f436adc97a9f51ec8eb53 |
+| public/media/live-clips/mily-b263-12-20261113-night-hope-remains-poster.jpg | 15846 | 3b94db5df814d872e3fbe5f83cb2dd9e792a68c93b434c7e93fc7e2033d0c38a |
+
 ## b261：2026-11-11夕方ラジオ回の本人X写真8枚（MILY SIGNAL）
 
 - 対象は既存の `/data-lab/reports/20261111-evening/` だけ。NEWS・Gallery・LIVE STREAM記事・SNS投稿には展開しない。
