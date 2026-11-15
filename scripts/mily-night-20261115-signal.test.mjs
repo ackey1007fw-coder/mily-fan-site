@@ -40,3 +40,27 @@ test("2026-11-15 night: report and JSON keep viewers anonymous and wiring is in 
   assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261115-night\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"),/night: "夜"/);
 });
+test("2026-11-15 night: owner-approved stream stills (b268) are wired into the report",()=>{
+  assert.match(report,/この配信の写真/);
+  assert.match(report,/実フレームです/);
+  assert.match(report,/生成や顔の加工はしていません/);
+  assert.match(report,/オーナー確認のうえ掲載しています/);
+  const wired=[
+    "mily-b268-05-20261115-night-cat-paws-forward-smile.jpg",
+    "mily-b268-01-20261115-night-opening-arms-smile.jpg",
+    "mily-b268-02-20261115-night-hood-smile.jpg",
+    "mily-b268-03-20261115-night-cheek-fingers-smile.jpg",
+    "mily-b268-04-20261115-night-cat-ear-big-laugh.jpg",
+    "mily-b268-06-20261115-night-cat-paws-to-camera.jpg",
+    "mily-b268-07-20261115-night-quiz-close-smile.jpg",
+    "mily-b268-08-20261115-night-cat-ear-laugh.jpg",
+    "mily-b268-09-20261115-night-closing-peace-smile.jpg",
+    "mily-b268-10-20261115-night-closing-gentle-wave.jpg",
+  ];
+  for(const name of wired) assert.ok(report.includes("/media/live/"+name),name);
+  assert.equal((report.match(/\/media\/live\/mily-b268-/g)||[]).length,10);
+  const section=report.slice(report.indexOf('id="stream-media"'));
+  assert.ok(section.indexOf("mily-b268-05-")<section.indexOf("mily-b268-01-"),"lead visual is still 05");
+  assert.ok(!report.includes("/media/live-clips/"),"no clips wired into this report");
+  assert.doesNotMatch(report,/pbs\.twimg\.com|drive\.google|user_id|\/workspace\//);
+});
