@@ -1,0 +1,290 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23690557,
+  "dateJst": "2026-11-15",
+  "session": "night",
+  "format": "showroom",
+  "label": "11月15日夜のSHOWROOM配信（21:30開始・湘南PRイベント最終日）",
+  "eventName": "公式APIのコメント・ギフト記録の匿名集計と、イベント「湘南PRのぼり2027年1月版応援大使決定戦！」の締切・結果注記。画面UIカウンター（きら星・総訪問表示など）はこの枠では取得していません。他の枠・他の取得経路とは合算しません。",
+  "sourceDescription": "SHOWROOM公式Web APIのコメント記録・ギフト記録を約30秒ごとに取得した保存ログだけを匿名集計。原ログ・個人別情報・コメント本文は含みません。",
+  "verifiedAtJst": "2026-11-15",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": null,
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "measurementNote": "この枠の数値は画面UIカウンターではなく、公式APIのコメント・ギフト記録の匿名集計です。公式確定ギフト数・実贈呈量・イベントpt・ユニーク視聴者数ではありません。取得は22:22:04に一度止まり22:29:11に再開しましたが、コメント記録は累積式のため再取得で全件を回収でき、コメントの欠測はありません。配信終了時刻（22:52頃）は視聴記録・録画による概数で、公式確定ではありません。",
+  "comparisonNote": "同一経路の実測点だけを表示。欠測はnullのまま保持し、他経路の点で埋めず、0埋め・補間・時間帯効果の推定をしません。",
+  "quality": {
+    "rawCommentLogRows": 956,
+    "systemAnnouncementRows": 131,
+    "refetchDuplicateRows": 56,
+    "viewerCommentRows": 769,
+    "publishedObservationPoints": 9,
+    "captureWindowJst": {
+      "start": "2026-11-15T21:30:45+09:00",
+      "end": "2026-11-15T22:52:08+09:00"
+    },
+    "commentLogRecoveredFromJst": "2026-11-15T21:30:22+09:00",
+    "gaps": [],
+    "regressions": [],
+    "liveEndDetected": false,
+    "verified_final": false,
+    "end_confirmed": false,
+    "source_event_counts_verified": false,
+    "missingDataIsNotZeroPerformance": true,
+    "interpolated": false,
+    "zeroFilled": false
+  },
+  "observations": [
+    {
+      "atJst": "2026-11-15T21:35:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 27,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T21:45:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 90,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T21:55:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 166,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T22:05:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 250,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T22:15:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 354,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T22:25:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 437,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T22:35:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 575,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T22:45:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 699,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-15T22:50:00+09:00",
+      "stars": null,
+      "visits": null,
+      "comments": 745,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    }
+  ],
+  "sourceIntegrity": {
+    "observationsCsvSha256": "4130034f32e16a114127d181a0960db222e39ad55ff2fe6dcfb247144debedc0"
+  },
+  "eventPointObservations": {
+    "source": "not_captured_for_this_frame",
+    "separateFromUiCounters": true,
+    "eventActive": true,
+    "eventName": "湘南PRのぼり2027年1月版応援大使決定戦！",
+    "eventPeriodJst": {
+      "start": "2026-11-09T18:00:00+09:00",
+      "end": "2026-11-15T21:59:59+09:00"
+    },
+    "start": null,
+    "end": null,
+    "lastKnownBeforeFrame": {
+      "at": "2026-11-15T06:28:25+09:00",
+      "rank": 2,
+      "point": 282152,
+      "source": "public_api_auto_capture",
+      "note": "同日朝枠の公開API記録。目標300,000ptまで残り17,848ptでした。"
+    },
+    "outcome": "イベントはこの枠の配信中の21:59に終了しました。結果はアバ権（アバター権）獲得です（本人が昼枠後にファンルーム投稿（2026-11-15 15:35）で発表し、この枠の締めでも本人が報告しました）。最終累積ptの公式確定値は未公表（イベント結果待ち）で公式確認待ちです。締切直前（2026-11-15 21:43〜21:46）のルーム表示では2位・309,616pt（300,000pt達成）が最後の実測で、最終ptはこれ以上になりますが、正確な最終値は公式集計待ちです。",
+    "finalObservation": {
+      "windowJst": {
+        "start": "2026-11-15T21:43:00+09:00",
+        "end": "2026-11-15T21:46:00+09:00"
+      },
+      "rank": 2,
+      "point": 309616,
+      "goalPoint": 300000,
+      "goalAchieved": true,
+      "source": "room_display_before_deadline",
+      "officialFinalPublished": false,
+      "note": "イベント締切（21:59）の約13〜16分前に、この枠の配信中ルームで表示された値です。SHOWROOM公式の確定表示は「イベント結果待ち」で未公表のため、この観測値を公式確定値として扱いません。最終ptはこの値以上ですが、正確な最終値は公式集計待ちです。"
+    },
+    "note": "この枠の開始・終了時点のイベント累積ptは公式APIでは記録していません。朝枠の記録（282,152pt）をこの枠の開始値として扱わず、最終ptを推測で埋めません。締切直前のルーム表示による最終観測値は finalObservation に分離して記録しました。"
+  },
+  "commentLog": {
+    "entries": 956,
+    "viewerEntries": 769,
+    "anonymousPosterCount": 36,
+    "separateFromUiCommentDisplay": true,
+    "uiCommentDisplay": null,
+    "note": "コメント記録956件のうち、システム告知131件と再取得による重複56件を除いた視聴者コメントは769件（うちカウント系2件、通常コメント767件）・投稿者36人（個別ログの匿名集計）。画面UIのコメント表示はこの枠では取得していません。"
+  },
+  "giftLog": {
+    "entries": 49,
+    "totalItems": 350,
+    "lastRecordedAtJst": "2026-11-15T22:40:06+09:00",
+    "note": "ギフト記録49件（個数の合計350）。ptへの換算はしません。最後の記録は22:40:06です。"
+  },
+  "growthBySlot": {
+    "note": "実測点どうしの差（通常コメントの累積）。欠測区間は補間しません。区間は10分ごとで、最後の区間は22:45→22:50の5分です。",
+    "slots": [
+      {
+        "slot": "21:35〜21:45",
+        "fromJst": "2026-11-15T21:35:00+09:00",
+        "toJst": "2026-11-15T21:45:00+09:00",
+        "commentsFrom": 27,
+        "commentsTo": 90,
+        "commentsGain": 63,
+        "minutes": 10.0
+      },
+      {
+        "slot": "21:45〜21:55",
+        "fromJst": "2026-11-15T21:45:00+09:00",
+        "toJst": "2026-11-15T21:55:00+09:00",
+        "commentsFrom": 90,
+        "commentsTo": 166,
+        "commentsGain": 76,
+        "minutes": 10.0
+      },
+      {
+        "slot": "21:55〜22:05",
+        "fromJst": "2026-11-15T21:55:00+09:00",
+        "toJst": "2026-11-15T22:05:00+09:00",
+        "commentsFrom": 166,
+        "commentsTo": 250,
+        "commentsGain": 84,
+        "minutes": 10.0
+      },
+      {
+        "slot": "22:05〜22:15",
+        "fromJst": "2026-11-15T22:05:00+09:00",
+        "toJst": "2026-11-15T22:15:00+09:00",
+        "commentsFrom": 250,
+        "commentsTo": 354,
+        "commentsGain": 104,
+        "minutes": 10.0
+      },
+      {
+        "slot": "22:15〜22:25",
+        "fromJst": "2026-11-15T22:15:00+09:00",
+        "toJst": "2026-11-15T22:25:00+09:00",
+        "commentsFrom": 354,
+        "commentsTo": 437,
+        "commentsGain": 83,
+        "minutes": 10.0
+      },
+      {
+        "slot": "22:25〜22:35",
+        "fromJst": "2026-11-15T22:25:00+09:00",
+        "toJst": "2026-11-15T22:35:00+09:00",
+        "commentsFrom": 437,
+        "commentsTo": 575,
+        "commentsGain": 138,
+        "minutes": 10.0
+      },
+      {
+        "slot": "22:35〜22:45",
+        "fromJst": "2026-11-15T22:35:00+09:00",
+        "toJst": "2026-11-15T22:45:00+09:00",
+        "commentsFrom": 575,
+        "commentsTo": 699,
+        "commentsGain": 124,
+        "minutes": 10.0
+      },
+      {
+        "slot": "22:45〜22:50",
+        "fromJst": "2026-11-15T22:45:00+09:00",
+        "toJst": "2026-11-15T22:50:00+09:00",
+        "commentsFrom": 699,
+        "commentsTo": 745,
+        "commentsGain": 46,
+        "minutes": 5.0
+      }
+    ]
+  },
+  "recapNote": "このDraftには配信メモと切り抜きを含めていません。写真は、配信パック（b268）の実フレーム10枚を、オーナー確認のうえ、このレポートに掲載しています。"
+}

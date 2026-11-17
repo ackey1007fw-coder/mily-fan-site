@@ -1,3 +1,26 @@
+## b268：2026-11-15夜 写真10枚
+
+- 対象は2026-11-15夜枠（21:30開始、live 23690557、「湘南PRのぼり2027年1月版応援大使決定戦！」最終日）の配信パック。b267は同日のラジオ告知素材（news）で使用済みのため、この夜パックの番号を b268 とする。
+- 2026-11-15にオーナーが掲載を承認。写真10枚すべてを MILY SIGNAL レポート（`data-lab/reports/20261115-night/`）へ配線し、代表写真は05。切り抜き3本（パック側の候補A〜C）はこのPRではサイトへ配線しない。
+- 出典は同回配信の保存録画（640×360、82分16秒）から選定した実フレーム。10秒間隔の全494フレームをコンタクトシートで目視し、目つぶり・ブレ・変顔を除外した。猫耳の肉球ポーズと締めのピースは0.5秒間隔の追加抽出から選定し、採用分はすべて原寸でも確認済み。
+- 背景ボードの付箋は、拡大しても録画解像度では手書き文字が判読できない。視聴者名が特定できる情報・コメント欄の写り込みはない（確認済み）。
+- 静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大はしていない。寸法は640×360。
+- 掲載時刻は録画開始（21:30:20）を起点にした壁時刻の目安で、配信開始（21:30:18）とは約2秒の差がある。
+- Draft PRのまま。Ready・merge・投稿はしない（push は じぴ 経由）。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b268-01-20261115-night-opening-arms-smile.jpg | 19674 | 9f895691333c6f90dc5354b253b110e4163f5f48e35ca7552441329a4e3bc775 |
+| public/media/live/mily-b268-02-20261115-night-hood-smile.jpg | 18803 | ce066821a7a8fd8b5c2c55a662873a9e3860e072e2623c6abe3ec82d8ebbbf09 |
+| public/media/live/mily-b268-03-20261115-night-cheek-fingers-smile.jpg | 18378 | fd58547dfc3022e6458d65882301009fa48a79825612c6add53ca8b126b4888f |
+| public/media/live/mily-b268-04-20261115-night-cat-ear-big-laugh.jpg | 18598 | 99a4c2e5d7efd79c8014c788b43f813d7828168d5968a854d1671b6c56a8c837 |
+| public/media/live/mily-b268-05-20261115-night-cat-paws-forward-smile.jpg | 23035 | 05ef4e35f61a04743eb51d6b126705b4943f5455cae04c5ab59af313bd8a1d6f |
+| public/media/live/mily-b268-06-20261115-night-cat-paws-to-camera.jpg | 22895 | 875b747190661fb4a7af5d89015b3440c4289771ea3811fe381166d2b8a3248d |
+| public/media/live/mily-b268-07-20261115-night-quiz-close-smile.jpg | 17351 | ea159ec5b2e2d03dd86f0e7c19a4d2f14bf9755abc05660b04f5c46893d1893a |
+| public/media/live/mily-b268-08-20261115-night-cat-ear-laugh.jpg | 17932 | 7db53344c0d9d9a495501202f8d63cf0bdb1a0c4c2416570dfa4c248f0a3c480 |
+| public/media/live/mily-b268-09-20261115-night-closing-peace-smile.jpg | 24817 | fe9137dea5ed6c218f42ca4c03a3652fbc585fc381ecab96d835451fb513b152 |
+| public/media/live/mily-b268-10-20261115-night-closing-gentle-wave.jpg | 17762 | 3ff225bac789b6ac6671f2e62e6b7ede629b6a0c94c6f2f16c408e44bd0eedda |
+
 ## b265：2026-11-14朝 本人Instagram Story「OHAYO :)」写真1枚（NEWS・Gallery）
 
 - オーナーが特定のStoryを指定して掲載を依頼した「オーナー指定素材」。出典は本人のInstagram Story（2026-11-14朝、@mily_chan36）。Story共有URLは一時的なため、公開コード・文書へは残さない（Story共有URLの扱いに従う）。取得経路：オーナーが提供した画面録画（2026-11-14受領）。録画・動画ファイル自体は公開しない。

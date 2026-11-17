@@ -1,0 +1,66 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+import {groupByBroadcastDate, observationPoints, lastObservedValue} from "../public/data-lab/assets/daily-archive-core.js";
+const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
+const data=JSON.parse(read("public/data-lab/data/mily-night-20261115-aggregate.json"));
+const report=read("data-lab/reports/20261115-night/index.html");
+const csv=read("public/data-lab/data/mily-night-20261115-observations.csv");
+test("2026-11-15 night: API comment log aggregates only; event pt for this frame is not recorded and the outcome is the announced avatar right",()=>{
+  assert.equal(data.liveId,23690557);assert.equal(data.roomId,573253);
+  assert.equal(data.dateJst,"2026-11-15");assert.equal(data.session,"night");
+  assert.equal(data.finalServiceValueVerified,false);assert.equal(data.quality.verified_final,false);assert.equal(data.quality.end_confirmed,false);
+  assert.equal(data.lastValidOnline,null);
+  assert.deepEqual({...data.metrics},{stars:null,visits:null,comments:null,firstVisits:null,repeatVisits:null,newFollows:null,otherFree:null,star100People:null,recommendedCommentPeople:null});
+  assert.equal(data.observations.length,9);
+  assert.equal(lastObservedValue(data,"comments","2026-11-15"),745);
+  assert.equal(observationPoints(data,"comments","2026-11-15").length,9);
+  assert.equal(observationPoints(data,"stars","2026-11-15").length,0);
+  assert.equal(data.quality.interpolated,false);assert.equal(data.quality.zeroFilled,false);
+  assert.equal(data.quality.rawCommentLogRows,956);assert.equal(data.quality.systemAnnouncementRows,131);assert.equal(data.quality.refetchDuplicateRows,56);assert.equal(data.quality.viewerCommentRows,769);
+  const ev=data.eventPointObservations;
+  assert.equal(ev.eventActive,true);assert.equal(ev.start,null);assert.equal(ev.end,null);
+  assert.equal(ev.lastKnownBeforeFrame.point,282152);assert.equal(ev.lastKnownBeforeFrame.rank,2);
+  assert.equal(ev.finalObservation.point,309616);assert.equal(ev.finalObservation.rank,2);assert.equal(ev.finalObservation.goalAchieved,true);assert.equal(ev.finalObservation.officialFinalPublished,false);
+  assert.match(ev.outcome,/アバ権/);assert.match(ev.outcome,/公式確認待ち/);
+  assert.equal(data.commentLog.entries,956);assert.equal(data.commentLog.viewerEntries,769);assert.equal(data.commentLog.anonymousPosterCount,36);
+  assert.equal(data.giftLog.entries,49);assert.equal(data.giftLog.totalItems,350);
+  assert.equal(csv.trim().split("\n").length,10);
+  assert.match(ev.note,/推測で埋めません/);
+});
+test("2026-11-15 night: report and JSON keep viewers anonymous and wiring is in place",()=>{
+  const all=report+JSON.stringify(data)+csv;
+  assert.doesNotMatch(all,/\/workspace\/|\.jsonl|user_id|avatar_id|viewer[_-]?id|comment_text|access_token|drive\.google|uniqueCommenters|giftPointsEst|gap_to_upper|gap_to_lower|bcsvr|SREmu|那丘|なおか/i);
+  assert.match(report,/noindex,nofollow,noarchive/);
+  assert.match(report,/公式確認待ち/);assert.match(report,/アバ権/);assert.match(report,/309,616pt/);
+  assert.match(report,/22:29:11/);assert.match(report,/欠測はありません/);
+  for(const o of data.observations) assert.ok(report.includes(o.atJst.slice(11,19)));
+  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-15").entries.map(x=>x.slot),["night","noon","morning"]);
+  assert.ok(read("vite.config.ts").includes("data-lab/reports/20261115-night/index.html"));
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261115-night\/">最新の配信レポート/);
+  assert.match(read("public/data-lab/assets/daily-archive-core.js"),/night: "夜"/);
+});
+test("2026-11-15 night: owner-approved stream stills (b268) are wired into the report",()=>{
+  assert.match(report,/この配信の写真/);
+  assert.match(report,/実フレームです/);
+  assert.match(report,/生成や顔の加工はしていません/);
+  assert.match(report,/オーナー確認のうえ掲載しています/);
+  const wired=[
+    "mily-b268-05-20261115-night-cat-paws-forward-smile.jpg",
+    "mily-b268-01-20261115-night-opening-arms-smile.jpg",
+    "mily-b268-02-20261115-night-hood-smile.jpg",
+    "mily-b268-03-20261115-night-cheek-fingers-smile.jpg",
+    "mily-b268-04-20261115-night-cat-ear-big-laugh.jpg",
+    "mily-b268-06-20261115-night-cat-paws-to-camera.jpg",
+    "mily-b268-07-20261115-night-quiz-close-smile.jpg",
+    "mily-b268-08-20261115-night-cat-ear-laugh.jpg",
+    "mily-b268-09-20261115-night-closing-peace-smile.jpg",
+    "mily-b268-10-20261115-night-closing-gentle-wave.jpg",
+  ];
+  for(const name of wired) assert.ok(report.includes("/media/live/"+name),name);
+  assert.equal((report.match(/\/media\/live\/mily-b268-/g)||[]).length,10);
+  const section=report.slice(report.indexOf('id="stream-media"'));
+  assert.ok(section.indexOf("mily-b268-05-")<section.indexOf("mily-b268-01-"),"lead visual is still 05");
+  assert.ok(!report.includes("/media/live-clips/"),"no clips wired into this report");
+  assert.doesNotMatch(report,/pbs\.twimg\.com|drive\.google|user_id|\/workspace\//);
+});
