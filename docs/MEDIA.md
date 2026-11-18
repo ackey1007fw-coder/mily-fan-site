@@ -1,3 +1,26 @@
+## b270：2026-11-18朝 写真10枚
+
+- 対象は2026-11-18朝枠（09:30開始、live 23700631、イベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！」開催中）の配信パック。番号はパック側の採番（b270）に従う。
+- 写真10枚すべてを MILY SIGNAL レポート（`data-lab/reports/20261118-morning/`）へ配線し、代表写真は05。切り抜き3本（パック側のc1〜c3）はこのPRではサイトへ配線しない。
+- 出典は同回配信の保存録画のうち顔出し部分（09:45以降）から選定した実フレーム。前半は音声のみ＋静止画のため写真はない。目つぶり・ブレ・一瞬の黒画面の付近は除外し、採用分は原寸でも確認済み。
+- 静止画は実フレームのJPEG化（quality 95、EXIFなし）で、顔・身体・背景の生成や補正、拡大、クロップ、色補正はしていない。寸法は640×360。
+- 掲載時刻は録画の切り出し位置（顔出し部分の開始を09:45:00／09:53:00とする想定）から推定した目安で、数秒〜数十秒のずれがありうる。
+- バイナリの配置は別担当が行う（このDraftのテキスト側には含めていない）。下表のBytes・SHA-256はパック側の実ファイルで確認済み。
+- Draft PRのまま。Ready・merge・投稿はしない。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b270-01-20261118-morning-opening-big-smile.jpg | 32465 | 80ddd53a8de614c02da5887e6bbba315e8fa847b1f674e8b04760cca6dda9131 |
+| public/media/live/mily-b270-02-20261118-morning-smile.jpg | 33624 | 5b30e09b158690cf372031c89caaf9116d3074019d0a22532a108b429874c90d |
+| public/media/live/mily-b270-03-20261118-morning-bangs-hands.jpg | 33384 | d4ba8b6755dc61f7b908ce1b16c41ec654fb8ffd4828fdeafbd43060b4b14774 |
+| public/media/live/mily-b270-04-20261118-morning-big-smile.jpg | 33382 | f01471b9ff53d8e6c474f6f691871a97b4517dbe3559fe03ca2fde548decd9f4 |
+| public/media/live/mily-b270-05-20261118-morning-compact-smile.jpg | 32569 | 822899c4bdcc2d3006c5ac2a6f8faf0da18ed04596e0a09be19e29d34a626c5f |
+| public/media/live/mily-b270-06-20261118-morning-mascara-smile.jpg | 34389 | 9469aec7a567a026d988158c8dd3f24e1310c731d4a1abecea1d2fe54869b801 |
+| public/media/live/mily-b270-07-20261118-morning-hands-open-smile.jpg | 34057 | e7124b6b5f58d0763056abbbd58939a0bc4fd05c8ed940228d7a6b23157d0c6f |
+| public/media/live/mily-b270-08-20261118-morning-close-smile.jpg | 32323 | 1cb7e83a8151b7b17eda7753cb376e2b8a97222244d1e8117c2be4ace455f302 |
+| public/media/live/mily-b270-09-20261118-morning-closing-smile.jpg | 32701 | 2b19ce64372c1588c85f7fc370901fc1b7f6acf60fc01425923b80e2b1c0a954 |
+| public/media/live/mily-b270-10-20261118-morning-peace-smile.jpg | 36415 | 61c9e30468520b22bbe9b5ec52332128e87b1f3797dc711f9c30b3d5bf1044e8 |
+
 ## b268：2026-11-15夜 写真10枚
 
 - 対象は2026-11-15夜枠（21:30開始、live 23690557、「湘南PRのぼり2027年1月版応援大使決定戦！」最終日）の配信パック。b267は同日のラジオ告知素材（news）で使用済みのため、この夜パックの番号を b268 とする。
