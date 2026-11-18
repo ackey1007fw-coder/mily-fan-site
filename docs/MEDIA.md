@@ -1,3 +1,25 @@
+## b272：2026-11-18夜 写真10枚
+
+- 対象は2026-11-18夜枠（22:30開始、live 23703128、顔出しトーク枠）の配信パック。二次検品担当が同回配信の録画から切り出した実フレーム10枚。
+- 写真10枚すべてを MILY SIGNAL レポート（`data-lab/reports/20261118-night/`）へ配線し、代表写真は03。切り抜きはこのPRではサイトへ配線しない。
+- 出典は同回配信の保存録画（640×360）から選定した実フレーム。目が開いた明るい表情を選び、背景の付箋は判読できないことを確認済み。
+- 静止画は実フレーム（PNG）をJPEG化（quality 95、EXIFなし）したもので、顔・身体・背景の生成や補正、拡大、クロップ、色補正はしていない。寸法は640×360。
+- 掲載時刻は録画内の位置から確認した実時刻。
+- バイナリの配置は別担当が行う（このDraftのテキスト側には含めていない）。下表のBytes・SHA-256は実ファイルで確認済み。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b272-01-20261118-night-cheeks-hands-pose.jpg | 50694 | e8f896edc5f09536e274fbb011d6c60db75de988d90c211196ef346ea86fce26 |
+| public/media/live/mily-b272-02-20261118-night-waving-smile.jpg | 50531 | 39a75c809207098bb7adbfaea91482ac958e569d5ce505174bcf7e3e438557b7 |
+| public/media/live/mily-b272-03-20261118-night-hands-spread-big-smile.jpg | 47591 | 2d52e513162a770d28452d067d43a90bc5a33f927d08b439b8794e2e0c49facf |
+| public/media/live/mily-b272-04-20261118-night-hand-forehead-smile.jpg | 51701 | 9078fc026c513a5d4cc7bf63ba0a0ddf8703a4c6281433941d48b646592067af |
+| public/media/live/mily-b272-05-20261118-night-cheek-hand-profile.jpg | 46764 | a60848f397c4a60e50bb740cb345f77d72f84d3da5786ad75dd0939b318f4a16 |
+| public/media/live/mily-b272-06-20261118-night-hands-open-smile.jpg | 52205 | c33b0310c31771beb3572ba5040cec9fdbdcd31ef573c7c90329d9b86e82189c |
+| public/media/live/mily-b272-07-20261118-night-cat-ears-headband.jpg | 53376 | 71ac0df276e1a872f86b622268d266c10cb34fcb6b42883da53c1bbaade242d2 |
+| public/media/live/mily-b272-08-20261118-night-cat-ears-mittens.jpg | 44886 | 0ce6c6c5c01234bc4498bda99704df7fb030ea0c4346fa7b600d67555d102ba3 |
+| public/media/live/mily-b272-09-20261118-night-cat-ears-peace.jpg | 52529 | b9658e771634168a52743fa0b68168bf15f169c4d33cefad8f76bd2e6c92fa55 |
+| public/media/live/mily-b272-10-20261118-night-cat-ears-waving-goodnight.jpg | 43110 | 6d6cd00ccd240ded1cd7881cb5edcbc49b19b670309de469e5382453205e4fce |
+
 ## b271：2026-11-17深夜 写真10枚
 
 - 対象は2026-11-17深夜枠（00:31開始、live 23695542、ゲリラの顔出しトーク枠）の配信パック。パック側の仮番号は b269 だったが、b270 が 2026-11-18 朝枠で使用済みのため、この台帳では b271 として登録する。

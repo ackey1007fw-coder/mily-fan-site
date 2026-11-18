@@ -143,10 +143,13 @@ try {
             const day1118 = page.locator('#daily-2026-11-18');
             await openDay(day1118);
             const day1118Cards = day1118.locator('.daily-stream-card');
-            assert.equal(await day1118Cards.count(),1,"Nov 18 has the morning card on this branch");
+            assert.equal(await day1118Cards.count(),2,"Nov 18 has the night and morning cards on this branch");
             await day1118Cards.nth(0).locator('[data-missing="true"]').first().waitFor({state:"visible"});
-            assert.equal(await day1118Cards.nth(0).locator('.daily-stream-number').innerText(),"未取得","Nov 18 morning has no UI counters; shows 未取得, not 0");
+            assert.equal(await day1118Cards.nth(0).locator('.daily-stream-number').innerText(),"未取得","Nov 18 night has no UI counters; shows 未取得, not 0");
             assert.equal(await day1118Cards.nth(0).locator('svg.daily-plot circle').count(),0);
+            await day1118Cards.nth(1).locator('[data-missing="true"]').first().waitFor({state:"visible"});
+            assert.equal(await day1118Cards.nth(1).locator('.daily-stream-number').innerText(),"未取得","Nov 18 morning has no UI counters; shows 未取得, not 0");
+            assert.equal(await day1118Cards.nth(1).locator('svg.daily-plot circle').count(),0);
             const day1117 = page.locator('#daily-2026-11-17');
             await openDay(day1117);
             const day1117Cards = day1117.locator('.daily-stream-card');

@@ -137,7 +137,7 @@ test("2026-11-17 late: API comment-log aggregate keeps viewers anonymous and wir
   "late"
 ]);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261117-late/index.html"));
-  assert.match(read("data-lab/index.html"), /href="\/data-lab\/reports\/20261118-morning\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"), /href="\/data-lab\/reports\/20261118-night\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"), /night: "夜"/);
 });
 

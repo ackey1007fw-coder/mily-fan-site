@@ -129,6 +129,6 @@ test("2026-11-16 morning: API comment-log aggregate (incl. system announcements)
   "morning"
 ]);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261116-morning/index.html"));
-  assert.match(read("data-lab/index.html"), /href="\/data-lab\/reports\/20261118-morning\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"), /href="\/data-lab\/reports\/20261118-night\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"), /night: "夜"/);
 });

@@ -39,9 +39,9 @@ test("2026-11-18 morning: report and JSON keep viewers anonymous and wiring is i
   assert.match(report,/公式確定値ではありません/);assert.match(report,/12,644pt/);assert.match(report,/12,693pt/);
   assert.match(report,/欠測はありません/);
   for(const o of data.observations) assert.ok(report.includes(o.atJst.slice(11,19)));
-  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-18").entries.map(x=>x.slot),["morning"]);
+  assert.deepEqual(groupByBroadcastDate().find(g=>g.date==="2026-11-18").entries.map(x=>x.slot),["night","morning"]);
   assert.ok(read("vite.config.ts").includes("data-lab/reports/20261118-morning/index.html"));
-  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261118-morning\/">最新の配信レポート/);
+  assert.match(read("data-lab/index.html"),/href="\/data-lab\/reports\/20261118-night\/">最新の配信レポート/);
   assert.match(read("public/data-lab/assets/daily-archive-core.js"),/morning: "朝"/);
 });
 test("2026-11-18 morning: stream stills (b270) are wired into the report",()=>{
