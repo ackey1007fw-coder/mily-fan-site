@@ -1,3 +1,24 @@
+## b271：2026-11-17深夜 写真10枚
+
+- 対象は2026-11-17深夜枠（00:31開始、live 23695542、ゲリラの顔出しトーク枠）の配信パック。パック側の仮番号は b269 だったが、b270 が 2026-11-18 朝枠で使用済みのため、この台帳では b271 として登録する。
+- 写真10枚すべてを MILY SIGNAL レポート（`data-lab/reports/20261117-late/`）へ配線し、代表写真は09。切り抜きはこのPRではサイトへ配線しない。
+- 出典は同回配信の保存録画から選定した実フレーム。静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大、クロップ、色補正はしていない。寸法は640×360。
+- 掲載時刻は録画内の位置から推定した壁時刻の目安で、数秒〜数十秒のずれがありうる。
+- バイナリは実JPEGファイルをそのまま配置した（Bytes・SHA-256は下表のとおり、パック側の台帳と一致）。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b271-01-20261117-late-hands-heart-open.jpg | 23815 | 447939319db0876a694a46afa481d85e52bdd0f6c9fa9f956fa1a705ad36176a |
+| public/media/live/mily-b271-02-20261117-late-hands-heart-smile.jpg | 25283 | 44500b6dd5380e9517ffcdaf0b1b61c90452bf2c39f7c1868e38fd34fc6b55b8 |
+| public/media/live/mily-b271-03-20261117-late-compact-gesture.jpg | 23563 | 4d1129edad89889d7cfd14ac43526e027897af00be5324d6a4dd07f91652296a |
+| public/media/live/mily-b271-04-20261117-late-hands-heart-front.jpg | 26168 | fcf6ef001dec50017d11ef88b080aa281f51b2079e5d4cd265805a18160f0c61 |
+| public/media/live/mily-b271-05-20261117-late-peace-laugh.jpg | 26056 | f8b97be8831195a11341e0cd21992926e1f6c4a208aa0b3fda3572c368c5119d |
+| public/media/live/mily-b271-06-20261117-late-hands-heart-bright.jpg | 27770 | f0ea9f9f66202aa1b67ea842e3dcf1a1e305d1c19c1b5ade2bd9fa6cfb8bfb9f |
+| public/media/live/mily-b271-07-20261117-late-compact-close.jpg | 25523 | a5933e203b3f799fc1260f3a8f32dee005b04f9f61d1fdb382f334a64816cdeb |
+| public/media/live/mily-b271-08-20261117-late-hands-heart-close.jpg | 28073 | 8f9ca7a7045730d767f28a4285b7596653d3c04ecdacccb3d16378fe4ef5cff3 |
+| public/media/live/mily-b271-09-20261117-late-hands-heart-big-smile.jpg | 25070 | e239ceffe42869b6f15660d9732a0715fe68f9bd380b6a3860241b08c76239c2 |
+| public/media/live/mily-b271-10-20261117-late-hands-heart-closing.jpg | 24112 | 2d1d5e40016b30aafeb0ef9d0502edbd46188bd5d6345eab4796513ef6cb6c68 |
+
 ## b270：2026-11-18朝 写真10枚
 
 - 対象は2026-11-18朝枠（09:30開始、live 23700631、イベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！」開催中）の配信パック。番号はパック側の採番（b270）に従う。
