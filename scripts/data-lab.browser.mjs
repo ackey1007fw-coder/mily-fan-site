@@ -140,6 +140,13 @@ try {
             await day1115Cards.nth(2).locator('[data-missing="false"]').first().waitFor({state:"visible"});
             assert.equal(await day1115Cards.nth(2).locator('.daily-stream-number').innerText(),"1,254","Nov 15 morning shows the last valid star display");
             assert.equal(await day1115Cards.nth(2).locator('svg.daily-plot circle').count(),41);
+            const day1118 = page.locator('#daily-2026-11-18');
+            await openDay(day1118);
+            const day1118Cards = day1118.locator('.daily-stream-card');
+            assert.equal(await day1118Cards.count(),1,"Nov 18 has the morning card on this branch");
+            await day1118Cards.nth(0).locator('[data-missing="true"]').first().waitFor({state:"visible"});
+            assert.equal(await day1118Cards.nth(0).locator('.daily-stream-number').innerText(),"未取得","Nov 18 morning has no UI counters; shows 未取得, not 0");
+            assert.equal(await day1118Cards.nth(0).locator('svg.daily-plot circle').count(),0);
             const day1114 = page.locator('#daily-2026-11-14');
             await openDay(day1114);
             const day1114Cards = day1114.locator('.daily-stream-card');
