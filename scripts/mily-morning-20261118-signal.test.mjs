@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
+import {createHash} from "node:crypto";
+import sharp from "sharp";
 import {groupByBroadcastDate, observationPoints, lastObservedValue} from "../public/data-lab/assets/daily-archive-core.js";
 const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
 const data=JSON.parse(read("public/data-lab/data/mily-morning-20261118-aggregate.json"));
@@ -65,4 +67,20 @@ test("2026-11-18 morning: stream stills (b270) are wired into the report",()=>{
   assert.ok(section.indexOf("mily-b270-05-")<section.indexOf("mily-b270-01-"),"lead visual is still 05");
   assert.ok(!report.includes("/media/live-clips/"),"no clips wired into this report");
   assert.doesNotMatch(report,/pbs\.twimg\.com|drive\.google|user_id|\/workspace\//);
+});
+
+test("2026-11-18 morning: all ten b270 JPEG binaries match the approved media ledger",async()=>{
+  const ledger=read("docs/MEDIA.md");
+  const entries=[...ledger.matchAll(/\| (public\/media\/live\/mily-b270-[^ |]+) \| (\d+) \| ([a-f0-9]{64}) \|/g)];
+  assert.equal(entries.length,10);
+  for(const [,file,size,hash] of entries){
+    const bytes=readFileSync(new URL("../"+file,import.meta.url));
+    assert.equal(bytes.length,Number(size),file+": approved byte count");
+    assert.equal(bytes.subarray(0,3).toString("hex"),"ffd8ff",file+": binary JPEG, not encoded text");
+    assert.equal(createHash("sha256").update(bytes).digest("hex"),hash,file+": approved SHA-256");
+    const info=await sharp(bytes).metadata();
+    assert.equal(info.format,"jpeg");assert.equal(info.width,640);assert.equal(info.height,360);
+    assert.equal(info.exif,undefined);
+    await sharp(bytes).raw().toBuffer();
+  }
 });
