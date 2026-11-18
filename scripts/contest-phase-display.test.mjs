@@ -55,17 +55,17 @@ describe("contest phase official window display", () => {
     assert.doesNotMatch(source("src/lib/contestPhaseDisplay.ts"), /2026-09-03T12:00|2026-09-03T05:00/);
   });
 
-  it("shows semifinal qualification with the newly confirmed official dates", () => {
+  it("shows final qualification with the newly confirmed official dates", () => {
     assert.deepEqual(contest.currentPhase, {
-      name: "セミファイナル進出",
-      start: "2026-10-29",
-      end: "2026-11-08",
+      name: "ファイナル進出",
+      start: "2026-11-26",
+      end: "2026-12-06",
       source: "https://www.misscircle.jp/",
     });
-    assert.equal(contest.lastVerifiedAt, "2026-10-15");
-    assert.equal(contestPhaseDateRangeLabel(contest.currentPhase), "10/29〜11/8");
-    assert.equal(contestPhaseHeading(contest.currentPhase), "セミファイナル進出（10/29〜11/8）");
-    assert.equal(contestPhaseDisplayNote(contest.currentPhase), "セミファイナル進出（10/29〜11/8）");
+    assert.equal(contest.lastVerifiedAt, "2026-11-19");
+    assert.equal(contestPhaseDateRangeLabel(contest.currentPhase), "11/26〜12/6");
+    assert.equal(contestPhaseHeading(contest.currentPhase), "ファイナル進出（11/26〜12/6）");
+    assert.equal(contestPhaseDisplayNote(contest.currentPhase), "ファイナル進出（11/26〜12/6）");
     assert.deepEqual(contestOfficialWindowLines(contest.currentPhase), []);
     const item = selectSupportToday({
       contest,
@@ -73,10 +73,10 @@ describe("contest phase official window display", () => {
       streamRoomUrl: null,
       liveRoomUrl: null,
       radioPhase: "idle",
-      now: Date.parse("2026-10-15T18:00:00+09:00"),
+      now: Date.parse("2026-11-19T12:00:00+09:00"),
     }).find(({ key }) => key === "today:contest");
-    assert.equal(item?.value, "セミファイナル進出");
-    assert.match(item?.note ?? "", /2026\.10\.15確認/);
+    assert.equal(item?.value, "ファイナル進出");
+    assert.match(item?.note ?? "", /2026\.11\.19確認/);
     assert.doesNotMatch(item?.note ?? "", /10\/2(?:[^0-9]|$)|10\/12/);
   });
 

@@ -285,6 +285,43 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 
 export const news: NewsItem[] = [
   {
+    id: "2026-11-19-showroom-morning-off-makeup",
+    date: "2026-11-19",
+    activityIds: ["live-stream"],
+    title: "今朝のSHOWROOM配信はお休み。帰宅後と夜に振替2枠の予定",
+    body: "11月19日朝に予定していたSHOWROOM配信は、本人がファンルームでお休みを告知しました。振替として、帰宅後に1枠・夜にもう1枠の配信を予定しているとのことです。\n\n開始時刻はまだ発表されていません。最新の案内は本人のファンルーム・X・Instagramをご確認ください。",
+    sourceLabel: "本人のSHOWROOMファンルーム告知（11月19日）",
+  },
+  {
+    id: "2026-11-16-showroom-wing-takanawa-event",
+    date: "2026-11-16",
+    sameDayOrder: 2,
+    activityIds: ["live-stream"],
+    title: "SHOWROOMイベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦」開催中（〜11月22日）",
+    body: "SHOWROOMで、品川駅・高輪口のサイネージCM放映権を競うイベントが開催中です。期間は11月16日18:00〜11月22日21:59（日本時間）です。\n\nみりぃの配信は下のルームから見られます。イベントの順位やptは変動するため、このページでは固定の数字を載せていません。最新の状況はSHOWROOMでご確認ください。",
+    url: "https://www.showroom-live.com/r/circle2026_0734",
+    sourceLabel: "SHOWROOMイベント（11月16日〜22日）",
+    ctaLabel: "みりぃのSHOWROOMルームを見る",
+  },
+  {
+    id: "2026-11-16-final-penlight-colors",
+    date: "2026-11-16",
+    sameDayOrder: 1,
+    activityIds: ["miss-circle"],
+    title: "ファイナルのペンライト色は「白と青」に。本人が配信で宣言",
+    body: "11月16日朝のSHOWROOM配信で、みりぃがミスサークルのファイナルに向けて、ペンライトの色を白と青にそろえてほしいと宣言しました。\n\n12月12日の表彰式などで応援するときの目印にしてください。",
+    sourceLabel: "本人のSHOWROOM配信での発言（11月16日朝）",
+  },
+  {
+    id: "2026-11-11-miss-circle-final-advance",
+    date: "2026-11-11",
+    activityIds: ["miss-circle"],
+    title: "ミスサークル2026、ファイナル進出が決定！ファイナリスト12名に",
+    body: "三橋莉子（みりぃ）がセミファイナルを突破し、MISS CIRCLE CONTEST 2026のファイナリスト12名（Bブロック）に選ばれました。\n\nファイナル審査は11月26日〜12月6日です（主催者公式SCHEDULE）。表彰式は12月12日に品川インターシティホールで開かれ、本人はウェディングドレスで出るとInstagramで伝えています。\n\n審査方法などの詳細は、主催者の続報をご確認ください。",
+    source: "https://www.misscircle.jp/",
+    sourceLabel: "主催者公式サイトを見る",
+  },
+  {
     id: "2026-11-14-radio-seasidecircle-weekly",
     date: "2026-11-14",
     activityIds: ["radio"],
