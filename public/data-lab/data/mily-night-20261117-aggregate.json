@@ -1,0 +1,284 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23698513,
+  "dateJst": "2026-11-17",
+  "session": "night",
+  "format": "showroom",
+  "label": "11月17日夜のSHOWROOM配信（21:30開始・ラジオ形式）",
+  "eventName": "公式APIのコメント・ギフト記録の匿名集計と、イベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！」の観測注記。画面UIカウンター（きら星・総訪問表示など）はこの枠では取得していません。コメント取得は22:32:33で止まっており、件数は取得範囲内の集計です。他の枠・他の取得経路とは合算しません。",
+  "sourceDescription": "SHOWROOM公式Web APIのコメント記録・ギフト記録を約30秒ごとに取得した保存ログだけを匿名集計。原ログ・個人別情報・コメント本文は含みません。",
+  "verifiedAtJst": "2026-11-19",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": null,
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "observations": [
+    {
+      "atJst": "2026-11-17T21:35:00+09:00",
+      "comments": 28,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T21:40:00+09:00",
+      "comments": 66,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T21:45:00+09:00",
+      "comments": 103,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T21:50:00+09:00",
+      "comments": 143,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T21:55:00+09:00",
+      "comments": 177,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:00:00+09:00",
+      "comments": 210,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:05:00+09:00",
+      "comments": 239,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:10:00+09:00",
+      "comments": 275,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:15:00+09:00",
+      "comments": 309,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:20:00+09:00",
+      "comments": 340,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:25:00+09:00",
+      "comments": 387,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-17T22:30:00+09:00",
+      "comments": 422,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    }
+  ],
+  "finalObservedCommentCount": {
+    "atJst": "2026-11-17T22:32:31+09:00",
+    "comments": 459
+  },
+  "commentLog": {
+    "rawRows": 464,
+    "duplicatesRemoved": 5,
+    "uniqueComments": 459,
+    "uniquePosters": 40,
+    "countComments": 0,
+    "lastCommentAtJst": "2026-11-17T22:32:31+09:00"
+  },
+  "giftLog": {
+    "entries": 23,
+    "totalItems": 153,
+    "lastGiftAtJst": "2026-11-17T22:26:51+09:00"
+  },
+  "growthBySlot": [
+    {
+      "fromJst": "21:35:00",
+      "toJst": "21:40:00",
+      "commentsAdded": 38
+    },
+    {
+      "fromJst": "21:40:00",
+      "toJst": "21:45:00",
+      "commentsAdded": 37
+    },
+    {
+      "fromJst": "21:45:00",
+      "toJst": "21:50:00",
+      "commentsAdded": 40
+    },
+    {
+      "fromJst": "21:50:00",
+      "toJst": "21:55:00",
+      "commentsAdded": 34
+    },
+    {
+      "fromJst": "21:55:00",
+      "toJst": "22:00:00",
+      "commentsAdded": 33
+    },
+    {
+      "fromJst": "22:00:00",
+      "toJst": "22:05:00",
+      "commentsAdded": 29
+    },
+    {
+      "fromJst": "22:05:00",
+      "toJst": "22:10:00",
+      "commentsAdded": 36
+    },
+    {
+      "fromJst": "22:10:00",
+      "toJst": "22:15:00",
+      "commentsAdded": 34
+    },
+    {
+      "fromJst": "22:15:00",
+      "toJst": "22:20:00",
+      "commentsAdded": 31
+    },
+    {
+      "fromJst": "22:20:00",
+      "toJst": "22:25:00",
+      "commentsAdded": 47
+    },
+    {
+      "fromJst": "22:25:00",
+      "toJst": "22:30:00",
+      "commentsAdded": 35
+    }
+  ],
+  "eventPointObservations": {
+    "eventName": "品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！",
+    "eventPeriodJst": "2026-11-16T18:00:00+09:00/2026-11-22T21:59:00+09:00",
+    "start": null,
+    "end": {
+      "at": "2026-11-17T22:52:00+09:00",
+      "rank": 4,
+      "points": 7683,
+      "source": "room_display_after_stream",
+      "note": "配信終了後のルーム表示。時刻は視聴記録による概数。"
+    },
+    "afterFrameObservation": {
+      "at": "2026-11-18T06:26:00+09:00",
+      "rank": 4,
+      "points": 7683,
+      "source": "public_api_snapshot"
+    },
+    "note": "開始時点の観測がないため、この枠の増加分は計算しない。いずれも観測値で、公式確定値ではない。"
+  },
+  "quality": {
+    "rawCommentLogRows": 464,
+    "duplicateCommentRowsRemoved": 5,
+    "commentFetchWindowJst": {
+      "first": "2026-11-17T21:28:29+09:00",
+      "last": "2026-11-17T22:32:32+09:00"
+    },
+    "liveEndDetected": false,
+    "notes": [
+      "コメント取得は配信中の22:32:33で停止した。配信終了（22:52頃）までのコメントは未取得で、このページの件数は取得範囲内の集計。",
+      "終了間際のルーム表示では視聴者数が最大497人だった（表示の観測値で、この集計とは別経路）。",
+      "配信終了時刻（22:52頃）は視聴記録による概数で、公式確定ではない。"
+    ]
+  },
+  "sourceIntegrity": {
+    "observationsCsvSha256": "0535ec0572b5d0ff23134e0e11ee6916f0e455ab19d7fd241cdf8fd93955b956"
+  }
+}

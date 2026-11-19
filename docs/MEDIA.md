@@ -1,3 +1,46 @@
+## b272：2026-11-18夜 写真10枚
+
+- 対象は2026-11-18夜枠（22:30開始、live 23703128、顔出しトーク枠）の配信パック。二次検品担当が同回配信の録画から切り出した実フレーム10枚。
+- 写真10枚すべてを MILY SIGNAL レポート（`data-lab/reports/20261118-night/`）へ配線し、代表写真は03。切り抜きはこのPRではサイトへ配線しない。
+- 出典は同回配信の保存録画（640×360）から選定した実フレーム。目が開いた明るい表情を選び、背景の付箋は判読できないことを確認済み。
+- 静止画は実フレーム（PNG）をJPEG化（quality 95、EXIFなし）したもので、顔・身体・背景の生成や補正、拡大、クロップ、色補正はしていない。寸法は640×360。
+- 掲載時刻は録画内の位置から確認した実時刻。
+- バイナリの配置は別担当が行う（このDraftのテキスト側には含めていない）。下表のBytes・SHA-256は実ファイルで確認済み。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b272-01-20261118-night-cheeks-hands-pose.jpg | 50694 | e8f896edc5f09536e274fbb011d6c60db75de988d90c211196ef346ea86fce26 |
+| public/media/live/mily-b272-02-20261118-night-waving-smile.jpg | 50531 | 39a75c809207098bb7adbfaea91482ac958e569d5ce505174bcf7e3e438557b7 |
+| public/media/live/mily-b272-03-20261118-night-hands-spread-big-smile.jpg | 47591 | 2d52e513162a770d28452d067d43a90bc5a33f927d08b439b8794e2e0c49facf |
+| public/media/live/mily-b272-04-20261118-night-hand-forehead-smile.jpg | 51701 | 9078fc026c513a5d4cc7bf63ba0a0ddf8703a4c6281433941d48b646592067af |
+| public/media/live/mily-b272-05-20261118-night-cheek-hand-profile.jpg | 46764 | a60848f397c4a60e50bb740cb345f77d72f84d3da5786ad75dd0939b318f4a16 |
+| public/media/live/mily-b272-06-20261118-night-hands-open-smile.jpg | 52205 | c33b0310c31771beb3572ba5040cec9fdbdcd31ef573c7c90329d9b86e82189c |
+| public/media/live/mily-b272-07-20261118-night-cat-ears-headband.jpg | 53376 | 71ac0df276e1a872f86b622268d266c10cb34fcb6b42883da53c1bbaade242d2 |
+| public/media/live/mily-b272-08-20261118-night-cat-ears-mittens.jpg | 44886 | 0ce6c6c5c01234bc4498bda99704df7fb030ea0c4346fa7b600d67555d102ba3 |
+| public/media/live/mily-b272-09-20261118-night-cat-ears-peace.jpg | 52529 | b9658e771634168a52743fa0b68168bf15f169c4d33cefad8f76bd2e6c92fa55 |
+| public/media/live/mily-b272-10-20261118-night-cat-ears-waving-goodnight.jpg | 43110 | 6d6cd00ccd240ded1cd7881cb5edcbc49b19b670309de469e5382453205e4fce |
+
+## b271：2026-11-17深夜 写真10枚
+
+- 対象は2026-11-17深夜枠（00:31開始、live 23695542、ゲリラの顔出しトーク枠）の配信パック。パック側の仮番号は b269 だったが、b270 が 2026-11-18 朝枠で使用済みのため、この台帳では b271 として登録する。
+- 写真10枚すべてを MILY SIGNAL レポート（`data-lab/reports/20261117-late/`）へ配線し、代表写真は09。切り抜きはこのPRではサイトへ配線しない。
+- 出典は同回配信の保存録画から選定した実フレーム。静止画は実フレームのJPEG化で、顔・身体・背景の生成や補正、拡大、クロップ、色補正はしていない。寸法は640×360。
+- 掲載時刻は録画内の位置から推定した壁時刻の目安で、数秒〜数十秒のずれがありうる。
+- バイナリは実JPEGファイルをそのまま配置した（Bytes・SHA-256は下表のとおり、パック側の台帳と一致）。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/live/mily-b271-01-20261117-late-hands-heart-open.jpg | 23815 | 447939319db0876a694a46afa481d85e52bdd0f6c9fa9f956fa1a705ad36176a |
+| public/media/live/mily-b271-02-20261117-late-hands-heart-smile.jpg | 25283 | 44500b6dd5380e9517ffcdaf0b1b61c90452bf2c39f7c1868e38fd34fc6b55b8 |
+| public/media/live/mily-b271-03-20261117-late-compact-gesture.jpg | 23563 | 4d1129edad89889d7cfd14ac43526e027897af00be5324d6a4dd07f91652296a |
+| public/media/live/mily-b271-04-20261117-late-hands-heart-front.jpg | 26168 | fcf6ef001dec50017d11ef88b080aa281f51b2079e5d4cd265805a18160f0c61 |
+| public/media/live/mily-b271-05-20261117-late-peace-laugh.jpg | 26056 | f8b97be8831195a11341e0cd21992926e1f6c4a208aa0b3fda3572c368c5119d |
+| public/media/live/mily-b271-06-20261117-late-hands-heart-bright.jpg | 27770 | f0ea9f9f66202aa1b67ea842e3dcf1a1e305d1c19c1b5ade2bd9fa6cfb8bfb9f |
+| public/media/live/mily-b271-07-20261117-late-compact-close.jpg | 25523 | a5933e203b3f799fc1260f3a8f32dee005b04f9f61d1fdb382f334a64816cdeb |
+| public/media/live/mily-b271-08-20261117-late-hands-heart-close.jpg | 28073 | 8f9ca7a7045730d767f28a4285b7596653d3c04ecdacccb3d16378fe4ef5cff3 |
+| public/media/live/mily-b271-09-20261117-late-hands-heart-big-smile.jpg | 25070 | e239ceffe42869b6f15660d9732a0715fe68f9bd380b6a3860241b08c76239c2 |
+| public/media/live/mily-b271-10-20261117-late-hands-heart-closing.jpg | 24112 | 2d1d5e40016b30aafeb0ef9d0502edbd46188bd5d6345eab4796513ef6cb6c68 |
+
 ## b270：2026-11-18朝 写真10枚
 
 - 対象は2026-11-18朝枠（09:30開始、live 23700631、イベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！」開催中）の配信パック。番号はパック側の採番（b270）に従う。

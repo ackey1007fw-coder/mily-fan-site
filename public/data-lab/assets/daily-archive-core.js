@@ -1,6 +1,10 @@
 // Published anonymous snapshots only. No private dashboard, live API, or inferred values.
 export const DAILY_STREAM_ENTRIES = Object.freeze([
+  {"date":"2026-11-18","slot":"night","file":"mily-night-20261118-aggregate.json","section":"night-20261118","report":"/data-lab/reports/20261118-night/"},
   {"date":"2026-11-18","slot":"morning","file":"mily-morning-20261118-aggregate.json","section":"morning-20261118","report":"/data-lab/reports/20261118-morning/"},
+  {"date":"2026-11-17","slot":"night","file":"mily-night-20261117-aggregate.json","section":"night-20261117","report":"/data-lab/reports/20261117-night/"},
+  {"date":"2026-11-17","slot":"late","file":"mily-late-20261117-aggregate.json","section":"late-20261117","report":"/data-lab/reports/20261117-late/"},
+  {"date":"2026-11-16","slot":"morning","file":"mily-morning-20261116-aggregate.json","section":"morning-20261116","report":"/data-lab/reports/20261116-morning/"},
   {"date":"2026-11-15","slot":"night","file":"mily-night-20261115-aggregate.json","section":"night-20261115","report":"/data-lab/reports/20261115-night/"},
   {"date":"2026-11-15","slot":"noon","file":"mily-afternoon-20261115-aggregate.json","section":"noon-20261115","report":"/data-lab/reports/20261115-afternoon/"},
   {"date":"2026-11-15","slot":"morning","file":"mily-morning-20261115-aggregate.json","section":"morning-20261115","report":"/data-lab/reports/20261115-morning/"},
@@ -73,8 +77,8 @@ export const METRICS = Object.freeze({
   visits: "総訪問表示",
   comments: "コメント表示",
 });
-export const SLOT_LABELS = Object.freeze({ morning: "朝", morning1: "朝1枠目（5時台）", morning2: "朝2枠目（6時台）", noon: "昼", evening: "夕方", night: "夜" });
-const slotOrder = Object.freeze({ night: 0, evening: 0.5, noon: 1, morning: 2, morning1: 3, morning2: 2.5 });
+export const SLOT_LABELS = Object.freeze({ morning: "朝", morning1: "朝1枠目（5時台）", morning2: "朝2枠目（6時台）", noon: "昼", evening: "夕方", night: "夜", late: "深夜" });
+const slotOrder = Object.freeze({ night: 0, evening: 0.5, noon: 1, morning: 2, morning1: 3, morning2: 2.5, late: 4 });
 
 export function groupByBroadcastDate(entries = DAILY_STREAM_ENTRIES) {
   const sorted = [...entries].sort((a, b) =>

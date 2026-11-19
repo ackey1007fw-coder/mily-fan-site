@@ -1,0 +1,218 @@
+{
+  "schema": "mily-anonymous-live-observations-v1",
+  "nonOfficial": true,
+  "roomId": 573253,
+  "liveId": 23691998,
+  "dateJst": "2026-11-16",
+  "session": "morning",
+  "format": "showroom",
+  "label": "11月16日朝のSHOWROOM配信（05:50開始・ラジオ形式、大学前のトーク枠）",
+  "eventName": "公式APIのコメント・ギフト記録の匿名集計。画面UIカウンター（きら星・総訪問表示など）はこの枠では取得していません。コメント累積には配信開始・終了などのシステム告知62件を含みます。他の枠・他の取得経路とは合算しません。",
+  "sourceDescription": "SHOWROOM公式Web APIのコメント記録・ギフト記録を約30秒ごとに取得した保存ログだけを匿名集計。原ログ・個人別情報・コメント本文は含みません。",
+  "verifiedAtJst": "2026-11-19",
+  "finalServiceValueVerified": false,
+  "completeCoverageConfirmed": false,
+  "timingComparisonEligible": false,
+  "lastValidOnline": null,
+  "metrics": {
+    "stars": null,
+    "visits": null,
+    "comments": null,
+    "firstVisits": null,
+    "repeatVisits": null,
+    "newFollows": null,
+    "otherFree": null,
+    "star100People": null,
+    "recommendedCommentPeople": null
+  },
+  "observations": [
+    {
+      "atJst": "2026-11-16T05:55:00+09:00",
+      "comments": 30,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:00:00+09:00",
+      "comments": 82,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:05:00+09:00",
+      "comments": 120,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:10:00+09:00",
+      "comments": 186,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:15:00+09:00",
+      "comments": 221,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:20:00+09:00",
+      "comments": 285,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:25:00+09:00",
+      "comments": 331,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:30:00+09:00",
+      "comments": 377,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    },
+    {
+      "atJst": "2026-11-16T06:35:00+09:00",
+      "comments": 436,
+      "stars": null,
+      "visits": null,
+      "firstVisits": null,
+      "repeatVisits": null,
+      "newFollows": null,
+      "otherFree": null,
+      "star100People": null,
+      "recommendedCommentPeople": null
+    }
+  ],
+  "finalObservedCommentCount": {
+    "atJst": "2026-11-16T06:37:44+09:00",
+    "comments": 468
+  },
+  "commentLog": {
+    "rawRows": 556,
+    "systemAnnouncements": 62,
+    "duplicatesRemoved": 88,
+    "uniqueComments": 468,
+    "uniqueViewerComments": 406,
+    "uniquePosters": 78,
+    "countComments": 0,
+    "lastCommentAtJst": "2026-11-16T06:37:44+09:00"
+  },
+  "giftLog": {
+    "entries": 23,
+    "totalItems": 158,
+    "lastGiftAtJst": "2026-11-16T06:36:28+09:00"
+  },
+  "growthBySlot": [
+    {
+      "fromJst": "05:55:00",
+      "toJst": "06:00:00",
+      "commentsAdded": 52
+    },
+    {
+      "fromJst": "06:00:00",
+      "toJst": "06:05:00",
+      "commentsAdded": 38
+    },
+    {
+      "fromJst": "06:05:00",
+      "toJst": "06:10:00",
+      "commentsAdded": 66
+    },
+    {
+      "fromJst": "06:10:00",
+      "toJst": "06:15:00",
+      "commentsAdded": 35
+    },
+    {
+      "fromJst": "06:15:00",
+      "toJst": "06:20:00",
+      "commentsAdded": 64
+    },
+    {
+      "fromJst": "06:20:00",
+      "toJst": "06:25:00",
+      "commentsAdded": 46
+    },
+    {
+      "fromJst": "06:25:00",
+      "toJst": "06:30:00",
+      "commentsAdded": 46
+    },
+    {
+      "fromJst": "06:30:00",
+      "toJst": "06:35:00",
+      "commentsAdded": 59
+    }
+  ],
+  "quality": {
+    "rawCommentLogRows": 556,
+    "systemAnnouncementRows": 62,
+    "duplicateCommentRowsRemoved": 88,
+    "commentFetchWindowJst": {
+      "first": "2026-11-16T05:48:24+09:00",
+      "last": "2026-11-16T06:38:50+09:00"
+    },
+    "liveEndDetected": true,
+    "notes": [
+      "取得の再起動が2回あり、05:54:47→05:56:16（89秒）と06:24:33→06:29:38（305秒）は取得間隔が空いている。その間のコメントを取りこぼした可能性がある。",
+      "コメント累積468件は視聴者コメント406件とシステム告知62件の合計。投稿者78人はシステム告知を除く。",
+      "終了間際のルーム表示では視聴者数が最大1,070人だった（表示の観測値で、この集計とは別経路）。",
+      "配信終了時刻（06:38頃）は視聴記録による概数で、公式確定ではない。"
+    ]
+  },
+  "sourceIntegrity": {
+    "observationsCsvSha256": "54724b09bd8c62b89d4eda6f8a7b41bbda66f6031b6b09c8c0f9056614c9dacb"
+  }
+}
