@@ -5799,3 +5799,34 @@ ffmpeg -ss 14.0 -i public/media/gallery/mily-b141-01-tiktok-ami-meet.mp4 \
 トークは録画内448.9秒から18.2秒、5210.6秒から10.8秒、5695.1秒から11.0秒。720×1280／20fps／H.264／AAC 48kHzステレオ、先頭0.3秒に同じ回の本人写真表紙を表示。録画由来の音声と尺を保持し、AACへ再エンコードしている。追加BGM・合成音声・逐語字幕はない。実フレームと候補区間の再ASRを照合し、全編の手動聴取・逐語校正を実施したとは扱わない。寸法・経過秒・SHA-256・bytesは `scripts/mily-night-20261022-media.json`。
 
 原録画実尺95分26.763秒と、録画処理開始21:02:40／終了22:39:20 JSTを分ける。画面カウンター9項目と観測件数は未確認でnull。保存失敗や不存在と断定せず、最後の実測値や効率比較へ加算しない。原本・ASR全文・視聴者名・私有保存先は公開repoに含めない。
+
+## 素材台帳（batch b273 / 受領日・source date 2026-11-19）
+
+2026-11-19 18:31 の Instagram Story（映画館での自撮り動画）。オーナーが
+取得・提供したファイルを掲載する。Story には恒久 permalink がないため
+`sourceUrl` は持たない。映画『ママがもうこの世界にいなくても　私の命の日記』を
+観た感想は、本人の Instagram 投稿（https://www.instagram.com/p/Df6wwMhkxpZ/）で
+確認した。
+
+- provenance: `owner-provided`（オーナー指定の受け渡しファイル。SNSから取得していない）
+- Instagram Story / source date: `2026-11-19` / 恒久permalinkなし。`sourceUrl` は持たない
+- 元素材は `media/original/` に受領バイトを変えず保管（gitignore済み・コミットしない）
+- 公開MP4は元素材と同一バイト（再エンコードなし）。従来の Story 動画
+  （b27-04 等）は音声ストリームなしで掲載してきたが、本素材は AAC 音声を
+  含む。音声を残すかどうかは PR レビューで判断する
+- AI生成・AI加工・顔補正・generative fill・outpainting・テロップ削除なし
+- 受け渡し用URL / file IDは公開情報へ残さない
+
+| ID | 公開ファイル | 内容 | 掲載 |
+| --- | --- | --- | --- |
+| b273-01 | `news/mily-b273-01-20261119-movie-story.mp4` | 映画館でポップコーンを手に、猫フィルターで涙する自撮り。480×854 / 15.115秒。owner-provided | ✅ HOME Latest / `/news/` のみ。Gallery・`media.ts`・`galleryVideos.ts`・`/stories/` には追加しない |
+| b273-01 poster | `news/mily-b273-01-20261119-movie-story-poster.jpg` | 公開MP4の実フレーム（1.0秒地点）。480×854 | ✅ NEWS専用 |
+
+### 公開ファイルの実測
+
+b273-01 公開MP4: 593,245 bytes / H.264 High / 480×854 / 30fps /
+450 frames / 15.114785秒 / yuv420p / `has_b_frames` 2 / AAC音声あり /
+sha256 `7012644696bbdfcd914e40c694036289ccb4824c0323cf9d33b7ff67f20d71fb`
+
+b273-01 poster: 50,741 bytes / 480×854 JPEG / sha256
+`02ea7072834d9b99065e6643f59512107ef7f73a5e24c7792e430c8faa7b56a5`

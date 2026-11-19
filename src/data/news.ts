@@ -116,6 +116,7 @@ import {
   patonVoteMirrorStillImage,
 } from "./patonVoteStoryStills.ts";
 import { followers400StoryVideo } from "./followers400StoryVideo.ts";
+import { movieStoryVideo20261119 } from "./movieStoryVideo20261119.ts";
 import { morningStreamThanksInstagramStoryImage } from "./morningStreamThanksInstagramStoryImage.ts";
 import { girlsawardShowroomSixthImage } from "./girlsawardShowroom6th.ts";
 import {
@@ -284,6 +285,20 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-19-instagram-story-movie",
+    date: "2026-11-19",
+    title: "「観たい映画、観てきたよ」無事、号泣しました",
+    body: "11月19日、みりぃがInstagram Storyで、観たかった映画を観てきたことを報告しました。ポップコーンを手に「無事号泣しました」と伝える、映画館での自撮り動画です。本人のInstagram投稿では、映画『ママがもうこの世界にいなくても　私の命の日記』を観て、開始15分で泣いたと感想も綴っています。",
+    sourceLabel: "Instagram Story",
+    url: "https://www.instagram.com/mily_chan36",
+    ctaLabel: "Instagramプロフィールを見る",
+    media: movieStoryVideo20261119,
+    message: {
+      label: "みりぃのStory",
+      text: "観たい映画観てきたよ\n無事号泣しました (；；)",
+    },
+  },
   {
     id: "2026-11-14-radio-seasidecircle-weekly",
     date: "2026-11-14",
