@@ -12,6 +12,14 @@ export type Highlight = {
 
 export const highlights: Highlight[] = [
   {
+    id: "miss-circle-2026-final-advance",
+    year: 2026,
+    dateLabel: "2026年11月11日",
+    title: "MISS CIRCLE CONTEST 2026 セミファイナル突破・ファイナル進出",
+    body: "セミファイナルを突破し、ファイナリスト12名に選ばれました。ファイナル審査は11月26日〜12月6日。表彰式は12月12日に品川インターシティホールで開催されます。",
+    source: "https://www.misscircle.jp/",
+  },
+  {
     id: "miss-circle-2026-semifinal-advance",
     year: 2026,
     dateLabel: "2026年10月15日",

@@ -84,6 +84,13 @@ try {
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), "No horizontal overflow");
       await page.goto(`${origin}/news/`, { waitUntil: "networkidle" });
       const newsLink = page.getByRole("link", { name: /^10\/25の放送レポート・切り抜き3本を見る/ });
+      // Newer NEWS items can move this related item beyond the first archive
+      // page. Page through the archive instead of assuming a fixed position.
+      for (let attempt = 0; attempt < 20 && (await newsLink.count()) === 0; attempt++) {
+        const loadMore = page.locator("#latest button").filter({ hasText: "もっと見る" });
+        assert.equal(await loadMore.count(), 1, "Related NEWS remains reachable by NEWS pagination");
+        await loadMore.click();
+      }
       assert.equal(await newsLink.count(), 1, "Related NEWS retains the excerpt-only route");
       assert.equal(new URL(await newsLink.getAttribute("href")).pathname, "/activities/radio/");
       assert.equal(new URL(await newsLink.getAttribute("href")).hash, `#radio-${recap.id}`);

@@ -277,6 +277,44 @@ export const missCircleSemifinalWebVote: SupportEvent = {
   priority: 90,
 };
 
+/** SHOWROOMイベントの開催期間を2026-11-19に確認（本人のルームで開催中）。 */
+export const showroomWingTakanawaEvent: SupportEvent = {
+  id: "showroom-wing-takanawa-2026",
+  activityId: "live-stream",
+  kind: "stream-event",
+  title: "品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！",
+  note: "SHOWROOMのイベントです。みりぃのルームの配信から応援できます。順位・ptは変動するため、最新の状況はSHOWROOMで確認してください。",
+  schedule: {
+    state: "confirmed-period",
+    start: "2026-11-16T18:00:00+09:00",
+    // 公式の「21:59まで」を秒単位の終了境界へ正規化する。
+    end: "2026-11-22T21:59:59.999+09:00",
+    allDay: false,
+    timezone: "Asia/Tokyo",
+  },
+  source: "https://www.showroom-live.com/r/circle2026_0734",
+  verifiedAt: "2026-11-19",
+  priority: 85,
+};
+
+/** 主催者SCHEDULEで表彰式の日程・会場を2026-11-19に確認。 */
+export const missCircleFinalCeremony: SupportEvent = {
+  id: "miss-circle-2026-final-ceremony",
+  activityId: "miss-circle",
+  kind: "result",
+  title: "表彰式（品川インターシティホール）",
+  note: "表彰式は品川インターシティホールで開かれます。本人はウェディングドレスで出るとInstagramで伝えています。",
+  schedule: {
+    state: "confirmed-instant",
+    at: "2026-12-12",
+    allDay: true,
+    timezone: "Asia/Tokyo",
+  },
+  source: "https://www.misscircle.jp/",
+  verifiedAt: "2026-11-19",
+  priority: 90,
+};
+
 export const campusGirlsFinalsExSnsReview: SupportEvent = {
   id: "campus-girls-finals-ex-sns-vol1-2026",
   activityId: "campus-girls",
@@ -441,6 +479,8 @@ export const supportEvents: SupportEvent[] = [
   missCircleFourthRoundWebVote,
   missCircleFourthRoundShowroomReview,
   missCircleSemifinalWebVote,
+  showroomWingTakanawaEvent,
+  missCircleFinalCeremony,
   campusGirlsFinalsExSnsReview,
   campusGirlsFinalsExPatonReview,
   campusGirlsFinalsExTwo,

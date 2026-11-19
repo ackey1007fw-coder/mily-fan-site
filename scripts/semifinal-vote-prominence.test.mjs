@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { contest } from "../src/data/contest.ts";
+import { semifinalContest } from "./fixtures/contest-semifinal.ts";
 import { links, missCircleSemifinalWebVoteLink } from "../src/data/links.ts";
 import { isValidSupportEvent, supportEvents, missCircleSemifinalWebVote, missCircleFourthRoundWebVote } from "../src/data/supportEvents.ts";
 import { selectHomeVoteSpotlight, selectHomePrioritySupport, selectHomeVoteAction } from "../src/lib/homePortal.ts";
 
 const start = Date.parse("2026-10-29T12:00:00+09:00");
 const end = Date.parse("2026-11-08T23:59:59.999+09:00");
-const input = (now) => ({ contest, links, supportEvents, now });
+const input = (now) => ({ contest: semifinalContest, links, supportEvents, now });
 const voteUrl = "https://liff.line.me/1656040756-GwmBkdPY/vote/misscircle2026/N/734";
 
 describe("semifinal vote prominence", () => {
