@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { contest } from "../src/data/contest.ts";
 import { links } from "../src/data/links.ts";
 import { socials } from "../src/data/socials.ts";
+import { homePageStructuredData } from "../src/lib/homeMetadata.ts";
 import {
   isValidSlot,
   upcomingSlots,
@@ -260,13 +261,27 @@ describe("follow section", () => {
 describe("structured data", () => {
   it("declares unofficial WebSite and confirmed Person sameAs in JSON-LD", async () => {
     const html = await read("index.html");
+
     assert.match(html, /application\/ld\+json/);
-    assert.match(html, /"name": "みりぃ ファンサイト（非公式）"/);
-    assert.match(html, /https:\/\/x\.com\/Mily_chan36/);
-    assert.match(html, /https:\/\/www\.tiktok\.com\/@mily_chan36/);
-    assert.match(html, /https:\/\/www\.showroom-live\.com\/r\/circle2026_0734/);
-    assert.match(html, /https:\/\/mixch\.tv\/u\/10114673/);
-    assert.match(html, /https:\/\/2026\.misscircle\.jp\/entry\/734/);
+    assert.match(html, /__HOME_JSON_LD__/);
+
+    const data = homePageStructuredData();
+    const graph = Array.isArray(data["@graph"]) ? data["@graph"] : [];
+    const website = graph.find((node) => node["@type"] === "WebSite");
+    const person = graph.find((node) => node["@type"] === "Person");
+    assert.ok(website);
+    assert.ok(person);
+    assert.match(website.name, /非公式/);
+    assert.match(website.description, /非公式ファンサイト/);
+    assert.match(person.description, /非公式ファンサイト/);
+    assert.equal(person.name, "三橋莉子");
+    for (const social of socials) {
+      assert.ok(
+        person.sameAs.includes(social.url),
+        `Person sameAs must include ${social.url}`,
+      );
+    }
+    assert.ok(person.sameAs.includes(contest.entryUrl));
   });
 });
 
