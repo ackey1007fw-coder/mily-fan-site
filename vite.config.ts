@@ -19,6 +19,10 @@ import {
   STORIES_ARCHIVE_ROUTE,
 } from "./src/lib/homePortal.ts";
 import {
+  homePageMetadata,
+  homePageStructuredData,
+} from "./src/lib/homeMetadata.ts";
+import {
   supportPageMetadata,
   supportPageStructuredData,
 } from "./src/lib/supportMetadata.ts";
@@ -205,6 +209,12 @@ function siteMetadataPlugin(): Plugin {
         .replaceAll(
           "__RADIO_MUSIC_JSON_LD__",
           JSON.stringify(radioMusicPageStructuredData(), null, 2),
+        )
+        .replaceAll("__HOME_PAGE_TITLE__", homePageMetadata.title)
+        .replaceAll("__HOME_PAGE_DESCRIPTION__", homePageMetadata.description)
+        .replaceAll(
+          "__HOME_JSON_LD__",
+          JSON.stringify(homePageStructuredData(), null, 2),
         )
         .replaceAll("__SITE_OG_IMAGE__", ogImageUrl());
     },

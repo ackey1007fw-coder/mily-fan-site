@@ -43,7 +43,7 @@ describe("site share payload", () => {
     assert.equal(payload.title, site.displayTitle);
     assert.equal(payload.text, `${site.description}\n#三橋莉子`);
     assert.match(payload.text, /みりぃ（三橋莉子 \/ Mily）/);
-    assert.match(payload.text, /ファン運営の非公式サイトです/);
+    assert.match(payload.text, /ファン運営の非公式ファンサイトです/);
     assert.match(payload.text, /本人運営ではありません/);
     assert.doesNotMatch(payload.text, /公認ではありません/);
   });

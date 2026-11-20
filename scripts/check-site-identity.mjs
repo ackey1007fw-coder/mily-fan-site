@@ -131,15 +131,20 @@ export async function checkIdentity(branch = (process.argv[2] || "").trim()) {
 
   const titleMatch = html.match(/<title>([^<]*)<\/title>/);
   const title = titleMatch ? titleMatch[1] : "";
-  if (!title.includes(EXPECTED.titleIncludes)) {
+  const titleIsInjected = title === "__HOME_PAGE_TITLE__";
+  if (!titleIsInjected && !title.includes(EXPECTED.titleIncludes)) {
     errors.push(`index.html title does not include "${EXPECTED.titleIncludes}" (title="${title}").`);
   }
-  if (!title.includes("非公式")) {
+  if (!titleIsInjected && !title.includes("非公式")) {
     errors.push(`index.html title must include "非公式".`);
   }
 
+  const hasUnofficialDisclaimer =
+    html.includes("ファン運営の非公式サイト") ||
+    html.includes("非公式ファンサイト") ||
+    html.includes("__HOME_PAGE_DESCRIPTION__");
   if (
-    !html.includes("ファン運営の非公式サイト") ||
+    !hasUnofficialDisclaimer ||
     !html.includes("本人運営ではありません") ||
     html.includes("公式・公認・本人運営ではありません")
   ) {
