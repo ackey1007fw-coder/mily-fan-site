@@ -37,6 +37,7 @@ import { amiMilyKoreaPromise } from "./challengeConnection.ts";
 import { recordCafeMilyNewsImages } from "./recordCafeMilyPhotos.ts";
 import { storyOhayoNewsImage } from "./storyOhayoPhoto.ts";
 import { autumnLeavesNewsImages } from "./autumnLeavesPhotos.ts";
+import { photoshootDayNewsImages } from "./photoshootDayPhotos.ts";
 import { godivaNanaNewsImages } from "./godivaNanaPhotos.ts";
 import { RED_RIDING_HOOD_X_URL, redRidingHoodNewsImages } from "./redRidingHoodPhotos.ts";
 import { fourthRoundScheduleNewsImage, FOURTH_ROUND_SCHEDULE_X_URL, OCTOBER_8_SCHEDULE_X_URL } from "./fourthRoundStreamSchedule.ts";
@@ -284,6 +285,16 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-21-instagram-photoshoot-day",
+    date: "2026-11-21",
+    title: "たくさん写真を撮ってもらった日📸 みりぃのInstagram",
+    body: "11月21日6:02（日本時間）、みりぃがInstagramで、撮影の日の写真と動画、あわせて6点を共有しました。黒いコートに紺のフリルブラウスと白いスカートの鏡越し自撮りや、スタジオで白いスカートがふわっと揺れる動画などです。自撮り3点はこの記事とギャラリーにも掲載しています。\n\n撮っていただいた写真は、後日ゆっくり載せるので楽しみにしていてほしいとのこと。「めっちゃ素敵すぎる写真」だそうで、公開が待ち遠しいです。\n\n寒さの中で秋を感じたとも綴っていて、紅葉の見ごろがいつか、まだ見られるところがあるかをみんなに尋ねています。動画3点は、下の本人のInstagramからご覧ください。",
+    source: "https://www.instagram.com/p/DgAZjpJk1TR/",
+    sourceLabel: "みりぃ本人のInstagram投稿を見る（11月21日）",
+    media: photoshootDayNewsImages[0],
+    additionalMedia: photoshootDayNewsImages.slice(1),
+  },
   {
     id: "2026-11-19-showroom-morning-off-makeup",
     date: "2026-11-19",

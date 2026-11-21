@@ -87,6 +87,9 @@ describe("media collection", () => {
   it("keeps default landscape tiles at 4/3 and preserves approved poster aspect", () => {
     // 縦・正方形・16:9など、4/3以外の元構図を保持する写真だけがaspectを持つ。
     const explicitAspects = new Set([
+      "mily-b274-01",
+      "mily-b274-02",
+      "mily-b274-03",
       "mily-b265-01",
       "mily-b262-01",
       "mily-b262-02",
