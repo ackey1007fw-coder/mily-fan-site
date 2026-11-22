@@ -1,3 +1,32 @@
+## b274：2026-11-21 本人Instagram「撮影の日」写真3枚
+
+- 対象は2026-11-21 06:02（JST）の本人Instagram投稿（カルーセル6点＝写真3・動画3）。番号は main の最終使用 b270 と、未マージPRで使用済みの b271（データラボ）・b272（データラボ）・b273（2026-11-19 Story映画NEWS）の次として b274 を採番。
+- オーナーがこの投稿URLを指定して掲載を依頼した「オーナー指定素材」（2026-11-22）。写真3点を NEWS `2026-11-21-instagram-photoshoot-day` と Gallery（`src/data/photoshootDayPhotos.ts`、`provenance: "sns-post"`、`sourceDate: "2026-11-21"`）へ配線し、代表写真は01。動画3点はこのPRではサイトへ配線しない（紅葉投稿 b262 と同じ扱い。本人のInstagramで視聴可能）。
+- 出典は本人の公開投稿から取得した原本（1080×1440 JPEG）。公開派生は `media:build` で 480/960/1600 の JPEG・WebP を生成し、EXIF等のメタデータは除去（元素材1080px幅のため1600派生は1080のまま）。顔・身体・背景の生成や補正、クロップ、色補正はしていない。
+- 映っているのは本人のみ。場所を特定できる情報・第三者の写り込みはない（取得時に目視確認）。
+- Draft PRのまま。Ready・mergeはオーナーOK後。
+
+| 公開ファイル | Bytes | SHA256 |
+| --- | ---: | --- |
+| public/media/gallery/mily-b274-01-mirror-selfie-coat-480.jpg | 33990 | 3bb8d2315bb56990c7c0281a4e16f8ba224799c1688bfbdbcd40ef49cb064538 |
+| public/media/gallery/mily-b274-01-mirror-selfie-coat-480.webp | 20878 | cbf472b2a9c08fd099531e022c57d4dc8d9fd953911cb29db2fa4424d1afaab3 |
+| public/media/gallery/mily-b274-01-mirror-selfie-coat-960.jpg | 98024 | 3e3fb0f8223dfb241be719a84c2b32d18abdb7dfd1586b02a0b35529f0867523 |
+| public/media/gallery/mily-b274-01-mirror-selfie-coat-960.webp | 56252 | 5b3ff777f86df1fd759ec3d556eac945ffc104b7eca453d778492099cc7cb1fd |
+| public/media/gallery/mily-b274-01-mirror-selfie-coat-1600.jpg | 111204 | 40898b53b8c7ce1b3d62a051972238933d34cdf021d050e4d11121f1c2157e4f |
+| public/media/gallery/mily-b274-01-mirror-selfie-coat-1600.webp | 69342 | fbfebe45c22a5856d59b3a13efa7f1e43c43cf77d7de2236c05f68afd8e678dc |
+| public/media/gallery/mily-b274-02-mirror-selfie-smile-480.jpg | 34008 | e9c2d52e0a4de067fadf98320ee0f301597845a683f9b70946d88b2c38914561 |
+| public/media/gallery/mily-b274-02-mirror-selfie-smile-480.webp | 21584 | 265862290f74235c6affe2edf8cc29a53def74dbf14bc3b6d746cc307a3f65c0 |
+| public/media/gallery/mily-b274-02-mirror-selfie-smile-960.jpg | 97776 | c2e00ac024dda9268627e751d082fffaeca139578da1ecfd2fbfe12017080bec |
+| public/media/gallery/mily-b274-02-mirror-selfie-smile-960.webp | 56362 | e479f71444d639ade7eb3437bab6e44eb1dd36bfa5e3116cd743d56e58d3feb6 |
+| public/media/gallery/mily-b274-02-mirror-selfie-smile-1600.jpg | 110113 | bed903f2f4c9039f2b4438f21b83f37a308cc6e339942132bad0a9b4bb3175f4 |
+| public/media/gallery/mily-b274-02-mirror-selfie-smile-1600.webp | 69144 | 89a9b8cda9457f2ba724e427e9da86ea60ec7cc3ccbb9c7b324f8348855e248f |
+| public/media/gallery/mily-b274-03-mirror-selfie-bag-480.jpg | 33701 | 6a1e5f95bcb01eb786d9377981a33ce653a3452ff61b4b248c5fa63b6c587c2a |
+| public/media/gallery/mily-b274-03-mirror-selfie-bag-480.webp | 20510 | 402c920f31492660cc2b42718ad06b1f3f212bed834d0f14b490b2c899623bdd |
+| public/media/gallery/mily-b274-03-mirror-selfie-bag-960.jpg | 97907 | 03b33117ae5b2c7a92c3e009626258b7dd9e1a7f29c80a5dcd458a5f41985d38 |
+| public/media/gallery/mily-b274-03-mirror-selfie-bag-960.webp | 57478 | a49ac118832e6b1a32ada2df25d1398d268b8ca75253b3f878365ae9624c198f |
+| public/media/gallery/mily-b274-03-mirror-selfie-bag-1600.jpg | 111129 | 681cb5bf329bd15e210f13ca79ba3c542d7d655fc5741f4d7a46de83e8965fda |
+| public/media/gallery/mily-b274-03-mirror-selfie-bag-1600.webp | 69754 | f4d47afa0e0009283ae2d757d4cbbfe70c6c381f06df1e17ef01aa2be020b853 |
+
 ## b270：2026-11-18朝 写真10枚
 
 - 対象は2026-11-18朝枠（09:30開始、live 23700631、イベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！」開催中）の配信パック。番号はパック側の採番（b270）に従う。

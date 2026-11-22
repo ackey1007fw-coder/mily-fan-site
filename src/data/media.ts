@@ -31,6 +31,7 @@ import { movieNightPhotos } from "./movieNightPhotos.ts";
 import { recordCafeMilyPhotos } from "./recordCafeMilyPhotos.ts";
 import { storyOhayoPhotos } from "./storyOhayoPhoto.ts";
 import { autumnLeavesPhotos } from "./autumnLeavesPhotos.ts";
+import { photoshootDayPhotos } from "./photoshootDayPhotos.ts";
 import { godivaNanaPhotos } from "./godivaNanaPhotos.ts";
 import { redRidingHoodPhotos } from "./redRidingHoodPhotos.ts";
 import { campusGirlsPrelimFinalResultPhoto } from "./campusGirlsPrelimFinalResultImage.ts";
@@ -89,6 +90,7 @@ export const media: MediaItem[] = [
   ...storyOhayoPhotos,
   ...autumnLeavesPhotos,
   ...redRidingHoodPhotos,
+  ...photoshootDayPhotos,
   ...godivaNanaPhotos,
   fourthRoundSchedulePhoto,
   ...recordCafeMilyPhotos,
