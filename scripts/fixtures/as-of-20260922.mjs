@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-11-23-instagram-malatang-vlog",
   "2026-11-23-campus-girls-ex4-paton-vote",
   "2026-11-14-radio-seasidecircle-weekly",
   "2026-11-14-instagram-story-ohayo",
@@ -96,5 +97,5 @@ for (let index = galleryVideos.length - 1; index >= 0; index--) {
   if (newVideoIds.has(galleryVideos[index].id)) galleryVideos.splice(index, 1);
 }
 for (let index = media.length - 1; index >= 0; index--) {
-  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id) || media[index].id.startsWith("mily-b219-") || media[index].id.startsWith("mily-b277-")) media.splice(index, 1);
+  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id) || media[index].id.startsWith("mily-b219-") || media[index].id.startsWith("mily-b277-") || media[index].id.startsWith("mily-b278-")) media.splice(index, 1);
 }
