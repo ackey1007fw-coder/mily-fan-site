@@ -16,6 +16,11 @@ test("malatang vlog NEWS and reel video share the confirmed details", () => {
   assert.equal(item.sourceLabel, "みりぃ本人のInstagramリールを見る（11月23日）");
   assert.match(item.body, /楊國福の麻辣湯/);
   assert.match(item.body, /私の命の日記/);
+  assert.deepEqual(item.xEmbed, {
+    postId: "2124832680739319820",
+    sourceUrl: "https://x.com/Mily_chan36/status/2124832680739319820",
+    alt: "休日Vlogの編集を頑張ったことを伝え、Instagramリールへのリンクを添えたみりぃのX投稿",
+  });
   assert.deepEqual(malatangVlogReelVideo, {
     id: "mily-b278-01-malatang-vlog", kind: "video",
     alt: "楊國福の麻辣湯を食べるみりぃの休日Vlog動画（Instagramリール、音声なし）",
