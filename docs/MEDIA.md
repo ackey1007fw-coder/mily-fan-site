@@ -1,3 +1,14 @@
+## b277：2026-11-23 本選Ex.4 パトン投票 Instagram Story
+
+- 出典は本人のInstagram Story（2026-11-23 14:57 JST投稿）。オーナー指定により取得。恒久的な公開permalinkはない。
+- BGMが第三者楽曲のため、公開動画は音声を除去。NEWSに掲載。
+
+| 原本・公開派生 | Bytes | SHA256 |
+| --- | ---: | --- |
+| media/original/mily-b277-01-campus-girls-ex4-story-original.mp4 | 391433 | 7c53b08dfd3a49ba6f54db46e2b30a9ab06d9da069298897fd667a64c9fb5ef0 |
+| public/media/gallery/mily-b277-01-campus-girls-ex4-story.mp4 | 235752 | 2685e6fb952ed107836c08d7bbf0049362ab4f59a75afc59e5ed4417b117084b |
+| public/media/gallery/mily-b277-01-campus-girls-ex4-story-poster.jpg | 129473 | bb9e9b01fcbe90030041121d3d38fc45739e7abd7ce257428628a0d26cacc6d8 |
+
 ## b270：2026-11-18朝 写真10枚
 
 - 対象は2026-11-18朝枠（09:30開始、live 23700631、イベント「品川駅・高輪口『ウィング高輪』サイネージCM放映権争奪戦！」開催中）の配信パック。番号はパック側の採番（b270）に従う。

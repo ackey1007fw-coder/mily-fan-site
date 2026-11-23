@@ -1,3 +1,4 @@
+import { campusGirlsEx4StoryVideo } from "./campusGirlsEx4StoryVideo.ts";
 import { fourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
 import { X_FINAL_DAY_PEACE_POST_URL, xFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
 import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
@@ -59,6 +60,7 @@ import { patonExTwoDayTwo } from "./patonExTwoDayTwo.ts";
  */
 import type { ActivityId } from "./activities.ts";
 import {
+  campusGirlsFinalsExFourPatonVoteLink,
   campusGirlsFinalsExPatonVoteLink,
   campusGirlsPatonVoteLink,
   missCircleWebVoteLink,
@@ -284,6 +286,17 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-23-campus-girls-ex4-paton-vote",
+    date: "2026-11-23",
+    activityIds: ["campus-girls"],
+    title: "CAMPUS GIRLS 2027 本選Ex.4、今日限定のパトン投票スタート",
+    body: "みりぃがInstagram Storyで、本日限定のパトン投票を案内しました。無料拍手からも応援できます。\n\nPatonのページでは、学業と両立しながらの挑戦の中で、自分を信じて可能性を追い、皆さんを勇気づけたいという決意を伝えています。投票は11月23日限定です。一緒に応援しましょう！",
+    source: campusGirlsFinalsExFourPatonVoteLink.url,
+    sourceLabel: "Paton 本人ページ・Instagram Story（11月23日）",
+    ctaLabel: campusGirlsFinalsExFourPatonVoteLink.label,
+    media: campusGirlsEx4StoryVideo,
+  },
   {
     id: "2026-11-19-showroom-morning-off-makeup",
     date: "2026-11-19",
