@@ -1,4 +1,5 @@
 import { campusGirlsEx4StoryVideo } from "./campusGirlsEx4StoryVideo.ts";
+import { malatangVlogReelVideo } from "./malatangVlogReelVideo.ts";
 import { fourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
 import { X_FINAL_DAY_PEACE_POST_URL, xFinalDayPeaceVideo } from "./xFinalDayPeaceVideo.ts";
 import { fourthRoundEventUpdate } from "./fourthRoundEventUpdate.ts";
@@ -296,6 +297,15 @@ export const news: NewsItem[] = [
     sourceLabel: "Paton 本人ページ・Instagram Story（11月23日）",
     ctaLabel: campusGirlsFinalsExFourPatonVoteLink.label,
     media: campusGirlsEx4StoryVideo,
+  },
+  {
+    id: "2026-11-23-instagram-malatang-vlog",
+    date: "2026-11-23",
+    title: "休日Vlog👗💖 麻辣湯はいつなんどきも食べたいのよ",
+    body: "11月23日3:46（日本時間）、みりぃがInstagramリールで「ミスサーファイナリストの休日Vlog」を公開しました。5時30分の起床とメイクから始まり、写真を撮ってもらいに出かける様子や、映画『私の命の日記』の鑑賞まで、休みの日の1日を追った動画です。\n\nお昼は楊國福の麻辣湯を実食。キャプションの「麻辣湯はいつなんどきも食べたいのよ」のとおり、大好きな麻辣湯をおいしそうに食べる様子が見られます。夜は大好きな五右衛門パスタを食べて、1時の就寝までが収められています。",
+    source: "https://www.instagram.com/reel/DgFTKOTzQyJ/",
+    sourceLabel: "みりぃ本人のInstagramリールを見る（11月23日）",
+    media: malatangVlogReelVideo,
   },
   {
     id: "2026-11-19-showroom-morning-off-makeup",

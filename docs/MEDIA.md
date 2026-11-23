@@ -1,3 +1,14 @@
+## b278：2026-11-23 麻辣湯 休日Vlog Instagramリール
+
+- 出典は本人のInstagramリール（2026-11-23 03:46 JST投稿、https://www.instagram.com/reel/DgFTKOTzQyJ/）。オーナー指定により取得。
+- 公開動画は音声を除去して掲載（b277と同方針）。ポスターは麻辣湯を食べる場面（36.5秒付近）の実フレーム。NEWSに掲載。
+
+| 原本・公開派生 | Bytes | SHA256 |
+| --- | ---: | --- |
+| media/original/mily-b278-01-malatang-vlog-original.mp4 | 10580630 | b2f2e8e6f003f3eb98732ec5ee080862ee6d1cad41bcf27549799d23f3119c64 |
+| public/media/gallery/mily-b278-01-malatang-vlog.mp4 | 8415513 | 0351fce898f40a74bf8ff7c8f0f32d33e21b6d7e0ead7527d4399d1fd126a7b1 |
+| public/media/gallery/mily-b278-01-malatang-vlog-poster.jpg | 83502 | ffd1caa5e39ca59f6621434ef63bc64cf73d8f97454d8734ab771b31e84ea738 |
+
 ## b277：2026-11-23 本選Ex.4 パトン投票 Instagram Story
 
 - 出典は本人のInstagram Story（2026-11-23 14:57 JST投稿）。オーナー指定により取得。恒久的な公開permalinkはない。
