@@ -1,3 +1,5 @@
+import { finalistForestNewsImages } from "./finalistForestPhotos.ts";
+import { komorebiShootNewsImages } from "./komorebiShootPhotos.ts";
 import { campusGirlsEx4StoryVideo } from "./campusGirlsEx4StoryVideo.ts";
 import { malatangVlogReelVideo } from "./malatangVlogReelVideo.ts";
 import { fourthRoundFinalDayStoryVideo } from "./fourthRoundFinalDayStoryVideo.ts";
@@ -287,6 +289,27 @@ export function newsDisplayMedia(item: NewsItem): NewsMedia[] {
 }
 
 export const news: NewsItem[] = [
+  {
+    id: "2026-11-25-instagram-finalist-announce",
+    date: "2026-11-25",
+    activityIds: ["miss-circle"],
+    title: "ミスサークル2026 ファイナリスト選出✨ 決意を語ったInstagram投稿",
+    body: "11月25日2:47（日本時間）、みりぃがInstagramで、MISS CIRCLE CONTEST 2026のファイナリストに選出されたことを報告しました。\n\nこれまで夢を公にしてこなかったこと、自分に問い続けてきた時間のこと、そして応援の中で想いが確かなものに変わってきたことを、まっすぐに綴っています。将来は舞台や映像の世界で、歌や演技を通して芸術を届けたい。そのためにアナウンスも身につけたいと語り、「三橋莉子の下剋上、ここからです」と結んでいます。\n\n写真は、齊藤結さんが撮影した、森の木漏れ日の中の3点です。この記事とギャラリーにも掲載しています。\n\nファイナル審査は11月26日〜12月6日です。WEB投票やSHOWROOMの無料ギフトなどで応援できます。最後まで一緒に応援しましょう！",
+    source: "https://www.instagram.com/p/DgKWbe_E10B/",
+    sourceLabel: "みりぃ本人のInstagram投稿を見る（11月25日）",
+    media: finalistForestNewsImages[0],
+    additionalMedia: finalistForestNewsImages.slice(1),
+  },
+  {
+    id: "2026-11-24-instagram-komorebi-photos",
+    date: "2026-11-24",
+    title: "木漏れ日のお出かけフォト🍂 齊藤結さんが撮るみりぃ",
+    body: "11月24日未明、写真を撮っている齊藤結さんがInstagramで、みりぃと初めて会ったお出かけの日の写真を、3つの投稿で共有しました。\n\n「ずっと笑ってたな〜」と振り返るとおり、美味しいご飯を食べて、お散歩して、たくさんお話した1日だったそうです。公園の木漏れ日の中で撮ったポートレートや、カフェでパンケーキを食べる様子など、あわせて6点をこの記事とギャラリーに掲載しています。\n\n帰りがけに公園で見つけたという、可愛い木漏れ日の影の写真も一緒にどうぞ。この日の写真は、翌25日にみりぃ本人がファイナリスト選出の報告投稿でも使っています。",
+    source: "https://www.instagram.com/p/DgHrkZrE_8x/",
+    sourceLabel: "齊藤結さんのInstagram投稿を見る（11月24日）",
+    media: komorebiShootNewsImages[0],
+    additionalMedia: komorebiShootNewsImages.slice(1),
+  },
   {
     id: "2026-11-23-campus-girls-ex4-paton-vote",
     date: "2026-11-23",

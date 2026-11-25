@@ -9,7 +9,7 @@ import { news } from "../src/data/news.ts";
 test("Ex.4 NEWS, Story and Paton link share the confirmed details", () => {
   const item = news.find(({ id }) => id === "2026-11-23-campus-girls-ex4-paton-vote");
   assert.ok(item);
-  assert.equal(news[0], item);
+  assert.equal(news[2], item);
   assert.equal(item.date, "2026-11-23");
   assert.equal(item.title, "CAMPUS GIRLS 2027 本選Ex.4、今日限定のパトン投票スタート");
   assert.equal(item.media, campusGirlsEx4StoryVideo);
