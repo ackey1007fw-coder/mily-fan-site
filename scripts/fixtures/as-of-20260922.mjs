@@ -20,6 +20,7 @@ import { galleryVideos } from "../../src/data/galleryVideos.ts";
 import { media } from "../../src/data/media.ts";
 
 const newNewsIds = new Set([
+  "2026-11-26-instagram-yamaokaya-umihotaru",
   "2026-11-25-instagram-finalist-announce",
   "2026-11-24-instagram-komorebi-photos",
   "2026-11-23-instagram-malatang-vlog",
@@ -99,5 +100,5 @@ for (let index = galleryVideos.length - 1; index >= 0; index--) {
   if (newVideoIds.has(galleryVideos[index].id)) galleryVideos.splice(index, 1);
 }
 for (let index = media.length - 1; index >= 0; index--) {
-  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id) || media[index].id.startsWith("mily-b219-") || media[index].id.startsWith("mily-b277-") || media[index].id.startsWith("mily-b278-") || media[index].id.startsWith("mily-b280-") || media[index].id.startsWith("mily-b281-")) media.splice(index, 1);
+  if (["mily-b145-03", "mily-b168-02"].includes(media[index].id) || media[index].id.startsWith("mily-b219-") || media[index].id.startsWith("mily-b277-") || media[index].id.startsWith("mily-b278-") || media[index].id.startsWith("mily-b280-") || media[index].id.startsWith("mily-b282-") || media[index].id.startsWith("mily-b281-")) media.splice(index, 1);
 }

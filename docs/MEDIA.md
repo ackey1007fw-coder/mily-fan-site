@@ -1,3 +1,60 @@
+## b282：2026-11-26 山岡家と海ほたる 本人Instagram投稿
+
+- 出典は本人のInstagram投稿（2026-11-26 02:50 JST投稿、https://www.instagram.com/p/DgM7i3xE_Bv/）。オーナー指定により取得。
+- 大好きな友達と山岡家で辛くてあつあつなラーメンを食べ、海ほたるでは強風の中を猛ダッシュした日のカルーセル投稿。写真6点はGallery（media.ts）と NEWS `2026-11-26-instagram-yamaokaya-umihotaru` の両方に掲載。動画3点（音声なし）はNEWSに掲載。
+- 公開派生は `pnpm media:build` で生成し、EXIF等のメタデータは除去。顔・身体・背景の生成や補正、クロップ、色補正はしていない。動画のポスターは各動画のフレームから生成。
+
+| 原本・公開派生 | 寸法 | Bytes | SHA256 |
+| --- | --- | ---: | --- |
+| media/original/mily-b282-01-ramen-chopsticks.jpg | 1476×1107 | 170776 | e01e64bd844f6210d52837a4ab21452e8cd93c7de34393bc0825507538468431 |
+| media/original/mily-b282-02-ramen-side-glance.jpg | 1476×1107 | 163768 | 1367f8c67edeb2bb74adcdc17f27c70f026d56951c479822b5d85f5b6c4987aa |
+| media/original/mily-b282-03-gyoza-plate.jpg | 1476×1107 | 164584 | faf8bbeb8515ea85fdc4f87fdf30b203d02f8325b44722ab08f061f9d5972e16 |
+| media/original/mily-b282-04-gyoza-lookdown.jpg | 1476×1107 | 168797 | 7ec068a49ca587e1b6603c18ea11ea2edb7ce1926a2bea54212ab6af148b4dd7 |
+| media/original/mily-b282-05-ramen-three-bowls.jpg | 1108×831 | 132943 | 69aac999d63d346e888794f89ad66d47c047d6c253def0fceb88f7c27b2a7fc7 |
+| media/original/mily-b282-09-yamaokaya-sign.jpg | 1108×831 | 31285 | 6bc1f09620849b8902b6cfb5b5f15b65f7665c5f5a6289df58b03a0dd9be4b5a |
+| public/media/gallery/mily-b282-01-ramen-chopsticks-1600.jpg | 1476×1107 | 138076 | 4c7a696ab78117390c7290475bea28052383252bb1cfdf6d1eed0c81a6a7327d |
+| public/media/gallery/mily-b282-01-ramen-chopsticks-1600.webp | 1476×1107 | 69080 | bf87f87eae64b2706fc963a0cfe8bea653df13a63f1b573c6ca58f32913df5a6 |
+| public/media/gallery/mily-b282-01-ramen-chopsticks-480.jpg | 480×360 | 22844 | 7e59daa1417e3b56e3289bddad51882c3e1582d96eaa59cb89f692df795d644e |
+| public/media/gallery/mily-b282-01-ramen-chopsticks-480.webp | 480×360 | 15458 | a4e7fb66bb19dc8a7f8f91cf510cf16ab50efb82162e0b023af1b939f0bf90d8 |
+| public/media/gallery/mily-b282-01-ramen-chopsticks-960.jpg | 960×720 | 65179 | 70beb4c04340c489ed0b99ab15db3faf55e150677b88d52c4b26312546563c10 |
+| public/media/gallery/mily-b282-01-ramen-chopsticks-960.webp | 960×720 | 38120 | 2b1b2d4ad5e88ef9e5eeb3a703843d6e346870c35273d0ebfc33bdef96bdb96d |
+| public/media/gallery/mily-b282-02-ramen-side-glance-1600.jpg | 1476×1107 | 132695 | 1f10685d3aa90892e2fb7a17021ed2d439ca124d52edc63e6e90fb89793ac4a1 |
+| public/media/gallery/mily-b282-02-ramen-side-glance-1600.webp | 1476×1107 | 64942 | aba1cd398c60e92ecc62fac781b012524ff74dd0e70832ed13580f1dca9b491c |
+| public/media/gallery/mily-b282-02-ramen-side-glance-480.jpg | 480×360 | 23635 | 28dd89201aaf092e9e3f947bbe700c94c98ec1338587e5d12ae088f40d3e8419 |
+| public/media/gallery/mily-b282-02-ramen-side-glance-480.webp | 480×360 | 15934 | 0179cf188318db3a26729fcaef7e7a53c44447e4b5d8369171cf9767de94cacb |
+| public/media/gallery/mily-b282-02-ramen-side-glance-960.jpg | 960×720 | 64741 | 8e2b72e0875ff20adf4a9fd239d1c530efb779ae33d1b79efb2da6e185f9622f |
+| public/media/gallery/mily-b282-02-ramen-side-glance-960.webp | 960×720 | 36918 | f93e4009da3c3998ffd40ab00a6bed9d01ba0da3f1363ad858712150153bf7e6 |
+| public/media/gallery/mily-b282-03-gyoza-plate-1600.jpg | 1476×1107 | 133675 | 8122de42d857a70c0281c9066ac75ff33cf9a82ccfd4b6f62ec0ec4d53403e5b |
+| public/media/gallery/mily-b282-03-gyoza-plate-1600.webp | 1476×1107 | 67502 | 16fcb92f7a48ceb45863bdec2f182f689c6a8409e4768ec83e1469ad453282c9 |
+| public/media/gallery/mily-b282-03-gyoza-plate-480.jpg | 480×360 | 24759 | 808f8de079f8b779cc3e7ec9779e35cd1e5330afd21f3877017cedcfc5f7f427 |
+| public/media/gallery/mily-b282-03-gyoza-plate-480.webp | 480×360 | 16704 | 229771ebee868c281dda9c86519336c3109c376951428929da9c15a8ae15641a |
+| public/media/gallery/mily-b282-03-gyoza-plate-960.jpg | 960×720 | 66224 | e5caa8b44088d354b1680f02a3029418a2c654d680c79c1b3d318506c19e6992 |
+| public/media/gallery/mily-b282-03-gyoza-plate-960.webp | 960×720 | 38786 | 33085cdcc6eea3462285a1c96bde6ccd00f612492a7a1d6a44b7be1bae8ba651 |
+| public/media/gallery/mily-b282-04-gyoza-lookdown-1600.jpg | 1476×1107 | 136884 | 17daab08abee2def018d188fc43902a41d1c892089a83474b121ac82aa672e3e |
+| public/media/gallery/mily-b282-04-gyoza-lookdown-1600.webp | 1476×1107 | 72242 | a69f7b3d71d021c91f13b05f5d02206899cab9f19fcea1c005cb481a44986867 |
+| public/media/gallery/mily-b282-04-gyoza-lookdown-480.jpg | 480×360 | 24601 | a55f9f5efda05bb66a3395681985f4fd0c99231fe6733dc81b12b6df160f822f |
+| public/media/gallery/mily-b282-04-gyoza-lookdown-480.webp | 480×360 | 16866 | a2ceec61788db8820522e6e9d368b94927c865177b900dfa5cb6d9d7ceceab78 |
+| public/media/gallery/mily-b282-04-gyoza-lookdown-960.jpg | 960×720 | 66613 | 40bd91509d4f8be5d50a35f9c8a3b1136ceaabd1a338164c493597d299d74f60 |
+| public/media/gallery/mily-b282-04-gyoza-lookdown-960.webp | 960×720 | 39162 | 27464670bcac14146a521f4c1d660245b131083f7e68c81f66612c3d0ad93b3c |
+| public/media/gallery/mily-b282-05-ramen-three-bowls-1600.jpg | 1108×831 | 111454 | 79cf426492bcd03bd86824898e8d4b92de259e4fb920ead466cea6bac26294af |
+| public/media/gallery/mily-b282-05-ramen-three-bowls-1600.webp | 1108×831 | 65934 | a2042f2a4d80b076d8b5ff8bb780522d493f6aaf8a05dca1f4e0fa716affa058 |
+| public/media/gallery/mily-b282-05-ramen-three-bowls-480.jpg | 480×360 | 32832 | 82359dac06737ab78d3cb1b670821ba73719b47ace44eafe09978be40572425e |
+| public/media/gallery/mily-b282-05-ramen-three-bowls-480.webp | 480×360 | 24796 | 543aaa742e580f75afa6c1de215226fc0bf5bcff2aa7a3a2e132601bad1bd396 |
+| public/media/gallery/mily-b282-05-ramen-three-bowls-960.jpg | 960×720 | 86759 | 36b104cfff84221ad5a8ea37dde243d1efb351cac5230941b86fda49fccd8050 |
+| public/media/gallery/mily-b282-05-ramen-three-bowls-960.webp | 960×720 | 54116 | faea7336dc256ca24852e86a8f205a58941910a6268378aaf8928a9b09900657 |
+| public/media/gallery/mily-b282-06-umihotaru-dash-poster.jpg | 476×358 | 12562 | bccd0defcb3f373ea393c81292e07ab60a2d0dc3ee81e95ff344c87ac91983fd |
+| public/media/gallery/mily-b282-06-umihotaru-dash.mp4 | mp4 | 185671 | a48f9adf8d9232ffd13830755a826db59a2b6caa171a6b0a7235b43a571d7e75 |
+| public/media/gallery/mily-b282-07-night-walk-poster.jpg | 476×358 | 7660 | a03d74ce4ffa50d35d2a58d2f71723a29c32e7b4d9221ef22aecc89fca68d11e |
+| public/media/gallery/mily-b282-07-night-walk.mp4 | mp4 | 85289 | 63d549f4d4bc5e21501905d1c6817e6e2c3d2ad284ee7ace352c79aa2d6c4777 |
+| public/media/gallery/mily-b282-08-night-drive-poster.jpg | 720×540 | 9172 | 11acfbb1574bcae2d13c8068e4923ea500b1b784de7c4700a8deffcffe86a0e3 |
+| public/media/gallery/mily-b282-08-night-drive.mp4 | mp4 | 127850 | d3cf91370c090353bc1ee9489a96fd581e3ab2778f2732a38820f555694b57a4 |
+| public/media/gallery/mily-b282-09-yamaokaya-sign-1600.jpg | 1108×831 | 25053 | 955c050afb32a451d3cfa412ca0113d061497583da3bdd167833ac641c96c010 |
+| public/media/gallery/mily-b282-09-yamaokaya-sign-1600.webp | 1108×831 | 11054 | 16e996fccbed7d3ff7d573a0a3a88aade6ba0c7da3c477f281e8e544b378b625 |
+| public/media/gallery/mily-b282-09-yamaokaya-sign-480.jpg | 480×360 | 7588 | 42fb41d98f2f341218b6fb81bc8802aba9eaf5f50c01f96d4b0827daac0ecb2f |
+| public/media/gallery/mily-b282-09-yamaokaya-sign-480.webp | 480×360 | 4440 | 83a5ab36589abdc7edf122d20a3541506e89b38a3c5fa326982b757d813db7d5 |
+| public/media/gallery/mily-b282-09-yamaokaya-sign-960.jpg | 960×720 | 18293 | b0157a4d66ba0877d6576dabf6be26bddb4671ec201bef5837394252f54f180f |
+| public/media/gallery/mily-b282-09-yamaokaya-sign-960.webp | 960×720 | 9250 | cf768e5cf39f36cda198a025cb8dc3ca8d49f4ee48eafe846c6976f23b746a59 |
+
 ## b281：2026-11-25 ファイナリスト選出の報告 本人Instagram投稿
 
 - 出典は本人のInstagram投稿（2026-11-25 02:47 JST投稿、https://www.instagram.com/p/DgKWbe_E10B/）。オーナー指定により取得。
