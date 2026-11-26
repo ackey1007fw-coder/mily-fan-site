@@ -8,7 +8,7 @@ import { news } from "../src/data/news.ts";
 test("malatang vlog NEWS and reel video share the confirmed details", () => {
   const item = news.find(({ id }) => id === "2026-11-23-instagram-malatang-vlog");
   assert.ok(item);
-  assert.equal(news[3], item);
+  assert.equal(news[4], item);
   assert.equal(item.date, "2026-11-23");
   assert.equal(item.title, "休日Vlog👗💖 麻辣湯はいつなんどきも食べたいのよ");
   assert.equal(item.media, malatangVlogReelVideo);

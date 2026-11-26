@@ -27,6 +27,7 @@ import {
 } from "./patonVoteStoryStills.ts";
 import { morningMakeupShowroomPhoto } from "./morningMakeupShowroomImage.ts";
 import { gandaBeforeNightStreamPhoto } from "./gandaBeforeNightStream.ts";
+import { yamaokayaPhotos } from "./yamaokayaPhotos.ts";
 import { finalistForestPhotos } from "./finalistForestPhotos.ts";
 import { komorebiShootPhotos } from "./komorebiShootPhotos.ts";
 import { movieNightPhotos } from "./movieNightPhotos.ts";
@@ -91,6 +92,7 @@ export const media: MediaItem[] = [
   ...storyOhayoPhotos,
   ...autumnLeavesPhotos,
   ...redRidingHoodPhotos,
+  ...yamaokayaPhotos,
   ...finalistForestPhotos,
   ...komorebiShootPhotos,
   ...godivaNanaPhotos,
