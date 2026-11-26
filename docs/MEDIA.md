@@ -1,3 +1,84 @@
+## b281：2026-11-25 ファイナリスト選出の報告 本人Instagram投稿
+
+- 出典は本人のInstagram投稿（2026-11-25 02:47 JST投稿、https://www.instagram.com/p/DgKWbe_E10B/）。オーナー指定により取得。
+- MISS CIRCLE CONTEST 2026 ファイナリスト選出の報告投稿。写真3点は齊藤結（@_____fil_）さんの撮影で、本人投稿文に「Pic: @_____fil_」のクレジットがある。Gallery（media.ts）と NEWS `2026-11-25-instagram-finalist-announce` の両方に掲載。
+- 公開派生は `pnpm media:build` で生成し、EXIF等のメタデータは除去。顔・身体・背景の生成や補正、クロップ、色補正はしていない。元素材は3000×2000。
+
+| 原本・公開派生 | 寸法 | Bytes | SHA256 |
+| --- | --- | ---: | --- |
+| media/original/mily-b281-01-forest-smile.jpg | 3000×2000 | 267156 | 10b578da2071c49c017fbfd6c66ba4b2d9f64a14ab6aabe2b218beab4f123da6 |
+| public/media/gallery/mily-b281-01-forest-smile-480.jpg | 480×320 | 12301 | 6f18d567408fd44b671668c0c03f93836933a9ae732d675fbeddb70d64aebaed |
+| public/media/gallery/mily-b281-01-forest-smile-480.webp | 480×320 | 6906 | b0b8e94b0788386c23ed99e811e606b389f99c877eda0e90dcc91d7ca60b30f7 |
+| public/media/gallery/mily-b281-01-forest-smile-960.jpg | 960×640 | 33641 | f80d612555651ff695cc3b5565ca8f3112da0fed52930a665d43db9a936ef855 |
+| public/media/gallery/mily-b281-01-forest-smile-960.webp | 960×640 | 17246 | 02f976859f1aad2fa65386960037b1efafe4fa435ae14adc01bf5711702146a2 |
+| public/media/gallery/mily-b281-01-forest-smile-1600.jpg | 1600×1067 | 70420 | eceab3cef793d0f27407f8d080eefbe346b8d028a54a6b8640a99958c1c633a0 |
+| public/media/gallery/mily-b281-01-forest-smile-1600.webp | 1600×1067 | 34848 | 0e494e49b4847f5a46e964c75c0a74cd6e8738ffa5dc1f18e5100e8545e7ae65 |
+| media/original/mily-b281-02-forest-lookup-profile.jpg | 3000×2000 | 272088 | 122ecc46327f8d8f3aa1a683624d4862abacbd765ab18a7360b78a04d302c034 |
+| public/media/gallery/mily-b281-02-forest-lookup-profile-480.jpg | 480×320 | 13469 | 07016ec4dc4f589328ef81d16a446497e21a89ede07deccf1c31c81475156cfe |
+| public/media/gallery/mily-b281-02-forest-lookup-profile-480.webp | 480×320 | 7762 | 90ad5750c048f45f9a1f0b0404ac24d26708f5c7daabd43e65aed3913042ddd3 |
+| public/media/gallery/mily-b281-02-forest-lookup-profile-960.jpg | 960×640 | 35897 | a45481fe383fc00690e79d5e8d707bf2126671bf9d45740b0a71c565b803e187 |
+| public/media/gallery/mily-b281-02-forest-lookup-profile-960.webp | 960×640 | 18738 | 3e0473ec6b25247f77bfe0176f466fa546034e8dbd5aa310f4f2cbc05991c4fe |
+| public/media/gallery/mily-b281-02-forest-lookup-profile-1600.jpg | 1600×1067 | 73610 | a340cf8feec3a604f5150121d80d7099c8ae6e34acc39648c09335121d8b1c87 |
+| public/media/gallery/mily-b281-02-forest-lookup-profile-1600.webp | 1600×1067 | 37380 | 155964f154d2deb08d5923eff1f97ed97bd137b230fba132dab9ff17f32500a2 |
+| media/original/mily-b281-03-forest-lookup.jpg | 3000×2000 | 305574 | 64ef302446b1f14d6013e422121b33a46a971d84f422d680efd8ad6b50d7d4b3 |
+| public/media/gallery/mily-b281-03-forest-lookup-480.jpg | 480×320 | 14180 | a64d920fa363285f238abe4ab6c448f9c0c7179336b02ba3703b6285142201aa |
+| public/media/gallery/mily-b281-03-forest-lookup-480.webp | 480×320 | 8168 | a651b5d8c94fae9dd2e878c0e92b3d198ebc64953da8ab5586445ae77eb4af76 |
+| public/media/gallery/mily-b281-03-forest-lookup-960.jpg | 960×640 | 38803 | 414b8b4fbed34e91108e48759fd31e39a77c29a66a43235c298b42689445e0a3 |
+| public/media/gallery/mily-b281-03-forest-lookup-960.webp | 960×640 | 20156 | f4ba021201921c36cc58d78a046f85992d4b9e031d3849080e87403fdb092192 |
+| public/media/gallery/mily-b281-03-forest-lookup-1600.jpg | 1600×1067 | 81241 | defe5825a3630e53d060e7e14a929625e8abfde23160fbe9404090fbadac26a0 |
+| public/media/gallery/mily-b281-03-forest-lookup-1600.webp | 1600×1067 | 42250 | 5a435b36318a407b7b7541c06760bad3011f177395d840eccc0ddaa85a0effc3 |
+
+## b280：2026-11-24 木漏れ日のお出かけフォト 齊藤結さんInstagram投稿
+
+- 出典は齊藤結（@_____fil_）さんのInstagram投稿3件（2026-11-24 01:54〜01:56 JST投稿、https://www.instagram.com/p/DgHrkZrE_8x/ ほか2件）。オーナー指定により取得。
+- みりぃと初めて会ったお出かけの日の写真6点。カフェの2カットは投稿どおりのコラージュ1枚のまま掲載し、分割・トリミングはしていない。Gallery（media.ts）と NEWS `2026-11-24-instagram-komorebi-photos` の両方に掲載。
+- 公開派生は `pnpm media:build` で生成し、EXIF等のメタデータは除去。顔・身体・背景の生成や補正、クロップ、色補正はしていない。元素材が1080px・1088px幅のものは `-1600` 派生も拡大せず元素材の幅のまま。
+
+| 原本・公開派生 | 寸法 | Bytes | SHA256 |
+| --- | --- | ---: | --- |
+| media/original/mily-b280-01-park-backlight.jpg | 1080×1350 | 107755 | f199609ecf4c9db43e7381ae5bc72a7f22ab05647cef85ef5256d1ee23bdc34e |
+| public/media/gallery/mily-b280-01-park-backlight-480.jpg | 480×600 | 17071 | cad38a3618a3c6fadf18e31d693e5bc2c00bfcedcd35d777be73c3714b4414a4 |
+| public/media/gallery/mily-b280-01-park-backlight-480.webp | 480×600 | 9462 | 8a0afeb0dd57e73663654d1735348bbe20ad26464c74738fae5cb20a98ad56f8 |
+| public/media/gallery/mily-b280-01-park-backlight-960.jpg | 960×1200 | 44556 | 5e31acf972646aaca9459e03217cb0357bc07bebbbcfc8743eebccececdf9dae |
+| public/media/gallery/mily-b280-01-park-backlight-960.webp | 960×1200 | 23080 | c23e2d792bf21c60b89dd33b92a83f8776e93c725562eafaec9759dd2b28ac2d |
+| public/media/gallery/mily-b280-01-park-backlight-1600.jpg | 1080×1350 | 55748 | 14f0227563e68b9f05325efda3441d1b7db328ee0909cc72943ec996ef30a705 |
+| public/media/gallery/mily-b280-01-park-backlight-1600.webp | 1080×1350 | 27562 | a362b249021841e1153514ac2fc3e4c40f8fbbe9ef001cb21ee3f5866b03a8ec |
+| media/original/mily-b280-02-komorebi-shadow.jpg | 2000×2666 | 1072391 | cbfc7577de498f465eacf1b915b875304d7c419afc9a7553f13894582dd7c9e5 |
+| public/media/gallery/mily-b280-02-komorebi-shadow-480.jpg | 480×640 | 49685 | d6993bfc0c92c21c6f4ad67bee22175189afa3e28a0e1f6f1848d0883a5e9063 |
+| public/media/gallery/mily-b280-02-komorebi-shadow-480.webp | 480×640 | 47310 | 600cb7d28bbefda6986e0e64de5b6fd69a806c5cfbcb66f548a0f43ef6bbcc6d |
+| public/media/gallery/mily-b280-02-komorebi-shadow-960.jpg | 960×1280 | 172255 | 76995b4e26a3b05eeb28efcedfdfbe302786410ea99cc664ae0ed8f54eb47a34 |
+| public/media/gallery/mily-b280-02-komorebi-shadow-960.webp | 960×1280 | 153758 | 169ceacbaefabd35a6a41605b3bffee7b252021cda885ebb7e56bbdd154a4ecf |
+| public/media/gallery/mily-b280-02-komorebi-shadow-1600.jpg | 1600×2133 | 400184 | 40bdd80cf74753fd66174f7a1bc19b6b9de274946209b6e6f4cc6e884230addd |
+| public/media/gallery/mily-b280-02-komorebi-shadow-1600.webp | 1600×2133 | 313874 | 65a013bdce6f3d060dfd3e49f8e61382b24a89c23c371f10bcd98ed396bad5 |
+| media/original/mily-b280-03-cafe-sweets-collage.jpg | 1080×1350 | 133251 | 0bc803b04d641d3a57f47ddd3dc8b07fb165576078a847451e2e7c7904a462e6 |
+| public/media/gallery/mily-b280-03-cafe-sweets-collage-480.jpg | 480×600 | 24601 | 82072207b972f788ea8d57c8b38f3dd3e4200b0d555da1afb3679abb57d57b19 |
+| public/media/gallery/mily-b280-03-cafe-sweets-collage-480.webp | 480×600 | 15142 | a0cf945f4783995b59c99ac664ee971743f0f0ca642caea180a1c301e755966d |
+| public/media/gallery/mily-b280-03-cafe-sweets-collage-960.jpg | 960×1200 | 63760 | 89d3216e3def005a72c3fa45238b46931bf66a9f3eac88db54fafaf4c9ac4106 |
+| public/media/gallery/mily-b280-03-cafe-sweets-collage-960.webp | 960×1200 | 34520 | 5db9f2de7022a7c43245e74834eee52bbf05d62984e40caa488e19e3292d8177 |
+| public/media/gallery/mily-b280-03-cafe-sweets-collage-1600.jpg | 1080×1350 | 75678 | 72ac5334368266f3a2b7bf5053fa5c3df6ddef4c8a2fb614da866a4143381a3e |
+| public/media/gallery/mily-b280-03-cafe-sweets-collage-1600.webp | 1080×1350 | 40606 | 8e30400bc26bae91cf1d06a7377b476023d59bbcd259fc9a05351200c7c935e2 |
+| media/original/mily-b280-04-cafe-pancakes.jpg | 3000×2000 | 567056 | 7efeba8171cd4ee0d2c37d054e47f6eb0e7b18020d0223fcad270e563bb80446 |
+| public/media/gallery/mily-b280-04-cafe-pancakes-480.jpg | 480×320 | 19076 | 7c92b961e40d39fd9ae7656579797a76b4b867f66de06650f2246a474ee36c81 |
+| public/media/gallery/mily-b280-04-cafe-pancakes-480.webp | 480×320 | 11806 | eee99268fc81169e22ae323d2361a7db37af6f46f062d516ebc04f57576f6283 |
+| public/media/gallery/mily-b280-04-cafe-pancakes-960.jpg | 960×640 | 48776 | b796e33dda7df8ba7adb095901e20129b4ca802b61da5cf59ea16bd5c38b16dc |
+| public/media/gallery/mily-b280-04-cafe-pancakes-960.webp | 960×640 | 27202 | ea1208c104c5a456219ce33e8b47241f13412732a6e9546d48478aaa2e1ca206 |
+| public/media/gallery/mily-b280-04-cafe-pancakes-1600.jpg | 1600×1067 | 99061 | b7b645da98bdbcd0eb5ebc0b16b4c784be5c04a372746b755076b53fc918cf6d |
+| public/media/gallery/mily-b280-04-cafe-pancakes-1600.webp | 1600×1067 | 51032 | 4098bda0747d8652d9ab6c631aec8cda594ffc553cb7193912392f19289591da |
+| media/original/mily-b280-05-forest-lean.jpg | 1088×1344 | 145724 | 79dd98cc8bc4c7223788c65153d6435f58168965fc233be770819b145ed96e93 |
+| public/media/gallery/mily-b280-05-forest-lean-480.jpg | 480×593 | 23348 | 3801f43452104a3e9439bc97f62962f8de8264c5d8a27a14ac6afd07f82cec05 |
+| public/media/gallery/mily-b280-05-forest-lean-480.webp | 480×593 | 14490 | 1ac89b12df342ce10b9723774a0ff1053d732b2dedaf81140d76eb1d23c2ba18 |
+| public/media/gallery/mily-b280-05-forest-lean-960.jpg | 960×1186 | 63968 | 5f77fa7a73ac40818b4f2433ae768381c123190039db9155732255fbb749530a |
+| public/media/gallery/mily-b280-05-forest-lean-960.webp | 960×1186 | 33830 | cb8f41d201d4169857a8303bec71267a16d2d44e0ceb54d2f8d7ce88ad1992ac |
+| public/media/gallery/mily-b280-05-forest-lean-1600.jpg | 1088×1344 | 77569 | b56f1b53680427401c214da865e3cf26f7f2a11847d79bde48dfd0533e11b84c |
+| public/media/gallery/mily-b280-05-forest-lean-1600.webp | 1088×1344 | 40496 | f71bd61fd34fbf1b7cfa5bccc04b0ab94aca77913128b445d4681e207ab27ae8 |
+| media/original/mily-b280-06-wall-komorebi-fullbody.jpg | 1088×1344 | 154275 | 70e2707b2f3d7349bdea735b533bc1cf23bf22db56423d9e764403ee2de83232 |
+| public/media/gallery/mily-b280-06-wall-komorebi-fullbody-480.jpg | 480×593 | 18075 | 70550aa070adbcd2217e366b88d6ef1b1c6878c6793d499157730ac258a1e19e |
+| public/media/gallery/mily-b280-06-wall-komorebi-fullbody-480.webp | 480×593 | 10446 | 56ef9cc184a9ba0a2df7dbdabb5a1be8640025db0cadd94c91d51600823f1a8b |
+| public/media/gallery/mily-b280-06-wall-komorebi-fullbody-960.jpg | 960×1186 | 57588 | 35c5c27979b07de2742256ab9e4f228f32192b51257b610a905b06c0c16e86b5 |
+| public/media/gallery/mily-b280-06-wall-komorebi-fullbody-960.webp | 960×1186 | 29514 | 93464a647b437a3f04427e871856ef3a2d2269d363c530f1274695027696eb7a |
+| public/media/gallery/mily-b280-06-wall-komorebi-fullbody-1600.jpg | 1088×1344 | 72479 | 99eef67b6d50ef1d8b7f0bab33d1770b63dfe5f496fcbd2fc40fe30c580545d5 |
+| public/media/gallery/mily-b280-06-wall-komorebi-fullbody-1600.webp | 1088×1344 | 37242 | 888771cd766dd08fcd694d4b625c52ee44ac29d24ad220795d0a47965b2f69ca |
+
 ## b278：2026-11-23 麻辣湯 休日Vlog Instagramリール
 
 - 出典は本人のInstagramリール（2026-11-23 03:46 JST投稿、https://www.instagram.com/reel/DgFTKOTzQyJ/）。オーナー指定により取得。
