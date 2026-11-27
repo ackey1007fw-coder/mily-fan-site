@@ -13,6 +13,9 @@ import { adaptStreamSlots } from '../src/lib/supportCalendar.ts';
 import { resolveNewsLinks } from '../src/lib/newsLinks.ts';
 import { supportEvents } from '../src/data/supportEvents.ts';
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const at = (date, time) => Date.parse(`${date}T${time}+09:00`);
 
 test('November 7 slots stay hidden until the X post and expire at announced JST ends', () => {
@@ -67,16 +70,16 @@ test('11/7 NEWS is the sourced Latest lead without scraped media or a changed WE
   assert.equal(sortNewsByDateDesc(news.filter((entry) => entry.date <= '2026-11-07'))[0], item);
   assert.match(item.title, /7:00/);
   assert.match(item.title, /21:00/);
-  assert.match(item.body, /みりぽち10日目/);
-  assert.match(item.body, /SR審査の最終日は11月7日/);
-  assert.match(item.body, /7:00〜8:00/);
-  assert.match(item.body, /21:00〜21:59（最終枠）/);
-  assert.match(item.body, /投票で選ばれた衣装/);
-  assert.match(item.body, /みりぃルーム/);
-  assert.match(item.body, /WEB投票の期限（11月8日23:59 JST）/);
-  assert.match(item.body, /写真は転載せず/);
-  assert.match(item.body, /告知予定/);
-  assert.match(item.body, /配信記録ではありません/);
+  assert.match(cardText(item), /みりぽち10日目/);
+  assert.match(cardText(item), /SR審査の最終日は11月7日/);
+  assert.match(cardText(item), /7:00〜8:00/);
+  assert.match(cardText(item), /21:00〜21:59（最終枠）/);
+  assert.match(cardText(item), /投票で選ばれた衣装/);
+  assert.match(cardText(item), /みりぃルーム/);
+  assert.match(cardText(item), /WEB投票の期限（11月8日23:59 JST）/);
+  assert.match(cardText(item), /写真は転載せず/);
+  assert.match(cardText(item), /告知予定/);
+  assert.match(cardText(item), /配信記録ではありません/);
   assert.doesNotMatch(item.body, /公認|本人運営|21:30〜22:30/);
   assert.doesNotMatch(`${item.title}\n${item.body}`, /このサイトは公式|公式ファンサイト/);
   assert.equal(item.media, undefined);

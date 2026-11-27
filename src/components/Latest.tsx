@@ -1,9 +1,10 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   news,
   newsDisplayMedia,
   newsMediaKey,
   sortNewsByDateDesc,
+  type NewsCategory,
   type NewsItem,
   type NewsMedia,
 } from "../data/news";
@@ -14,6 +15,15 @@ import {
   NEWS_ARCHIVE_ROUTE,
 } from "../lib/homePortal";
 import { SECTION_ANCHOR_OFFSET } from "../lib/navigation";
+import {
+  countNewsByCategory,
+  filterNewsByCategory,
+  NEWS_CATEGORY_LABELS,
+  NEWS_CATEGORY_ORDER,
+  NEWS_CATEGORY_QUERY_KEY,
+  newsCategoriesOf,
+  readNewsCategoryFromSearch,
+} from "../lib/newsCategories";
 import { resolveNewsLinks } from "../lib/newsLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { EmptyState } from "./EmptyState";
@@ -21,6 +31,7 @@ import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
 import { NewsImage } from "./NewsImage";
+import { NewsNotes } from "./NewsNotes";
 import { TikTokEmbedCard } from "./TikTokEmbedCard";
 import { XEmbedCard } from "./XEmbedCard";
 
@@ -96,7 +107,21 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
 
   return (
     <li className="rounded-2xl border border-sage/15 bg-paper-card p-5 shadow-card">
-      <p className="text-xs text-ink-muted">{item.dateBasis === "confirmed-on" ? "確認日 " : ""}{item.date}</p>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+        <p className="text-xs text-ink-muted">{item.dateBasis === "confirmed-on" ? "確認日 " : ""}{item.date}</p>
+        <p className="flex flex-wrap gap-1">
+          <span className="sr-only">カテゴリ：</span>
+          {newsCategoriesOf(item).map((category) => (
+            <span
+              key={category}
+              data-news-category={category}
+              className="rounded-full bg-sage-soft px-2 py-0.5 text-[11px] font-medium leading-4 text-sage-deep"
+            >
+              {NEWS_CATEGORY_LABELS[category]}
+            </span>
+          ))}
+        </p>
+      </div>
       <p className="mt-1 font-semibold text-ink">{item.title}</p>
       <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink-muted">{item.body}</p>
       {item.message ? (
@@ -115,6 +140,7 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
         <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
       {item.xEmbed ? <XEmbedCard embed={item.xEmbed} /> : null}
+      <NewsNotes notes={item.notes} />
 
       {item.source ||
       item.sourceLabel ||
@@ -177,27 +203,103 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
   );
 }
 
+function NewsCategoryFilter({
+  selected,
+  counts,
+  total,
+  onSelect,
+}: {
+  selected: NewsCategory | null;
+  counts: Record<NewsCategory, number>;
+  total: number;
+  onSelect: (category: NewsCategory | null) => void;
+}) {
+  const options: { value: NewsCategory | null; label: string; count: number }[] = [
+    { value: null, label: "すべて", count: total },
+    ...NEWS_CATEGORY_ORDER.filter((category) => counts[category] > 0).map((category) => ({
+      value: category,
+      label: NEWS_CATEGORY_LABELS[category],
+      count: counts[category],
+    })),
+  ];
+
+  return (
+    <div role="group" aria-label="カテゴリで絞り込む" className="mt-2 flex flex-wrap gap-2">
+      {options.map((option) => {
+        const active = option.value === selected;
+        return (
+          <button
+            key={option.value ?? "all"}
+            type="button"
+            aria-pressed={active}
+            data-news-filter={option.value ?? "all"}
+            onClick={() => onSelect(option.value)}
+            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold ${
+              active
+                ? "border-sage bg-sage text-white"
+                : "border-sage/30 bg-paper-card text-sage-deep hover:bg-sage-soft"
+            }`}
+          >
+            {option.label}
+            <span className={`text-xs font-medium ${active ? "text-white/85" : "text-ink-muted"}`}>
+              {option.count}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function writeCategoryToUrl(category: NewsCategory | null) {
+  try {
+    const url = new URL(window.location.href);
+    if (category) url.searchParams.set(NEWS_CATEGORY_QUERY_KEY, category);
+    else url.searchParams.delete(NEWS_CATEGORY_QUERY_KEY);
+    window.history.replaceState(window.history.state, "", url);
+  } catch {
+    // URL sync is a convenience only; filtering still works without it.
+  }
+}
+
 export function Latest({
   limit,
   initialVisible,
   archiveHref = NEWS_ARCHIVE_ROUTE,
   showArchiveCta = Boolean(limit),
   showIntro = true,
+  showCategoryFilter = false,
 }: {
   limit?: number;
   initialVisible?: number;
   archiveHref?: string;
   showArchiveCta?: boolean;
   showIntro?: boolean;
+  /** Category chips with `?category=` sync. Used on the /news/ archive only. */
+  showCategoryFilter?: boolean;
 }) {
   const now = useSupportEventClock();
   const latestNews = sortNewsByDateDesc(news);
   const capped = typeof limit === "number" ? latestNews.slice(0, limit) : latestNews;
-  const [visibleCount, setVisibleCount] = useState(
-    initialVisible ?? capped.length,
-  );
-  const visibleNews = capped.slice(0, visibleCount);
-  const canLoadMore = visibleCount < capped.length;
+  const pageSize = initialVisible ?? capped.length;
+  const [category, setCategory] = useState<NewsCategory | null>(null);
+  const [visibleCount, setVisibleCount] = useState(pageSize);
+
+  useEffect(() => {
+    if (!showCategoryFilter) return;
+    const fromUrl = readNewsCategoryFromSearch(window.location.search);
+    if (fromUrl) setCategory(fromUrl);
+  }, [showCategoryFilter]);
+
+  const filtered = showCategoryFilter ? filterNewsByCategory(capped, category) : capped;
+  const visibleNews = filtered.slice(0, visibleCount);
+  const canLoadMore = visibleCount < filtered.length;
+
+  const selectCategory = (next: NewsCategory | null) => {
+    setCategory(next);
+    setVisibleCount(pageSize);
+    writeCategoryToUrl(next);
+  };
 
   return (
     <section id="latest" className={`${SECTION_ANCHOR_OFFSET} px-4 py-10`}>
@@ -212,6 +314,19 @@ export function Latest({
         ) : (
           <h2 className="sr-only">最新情報一覧</h2>
         )}
+        {showCategoryFilter && capped.length > 0 ? (
+          <>
+            <NewsCategoryFilter
+              selected={category}
+              counts={countNewsByCategory(capped)}
+              total={capped.length}
+              onSelect={selectCategory}
+            />
+            <p className="mt-3 text-xs text-ink-muted" aria-live="polite" data-news-filter-status>
+              {category ? `「${NEWS_CATEGORY_LABELS[category]}」の記事 ${filtered.length}件` : `すべての記事 ${filtered.length}件`}
+            </p>
+          </>
+        ) : null}
         {latestNews.length === 0 ? (
           <div className="mt-6">
             <EmptyState
@@ -233,7 +348,7 @@ export function Latest({
               className="inline-flex min-h-11 items-center rounded-full border border-sage/30 bg-paper-card px-5 py-2.5 text-sm font-semibold text-sage-deep hover:bg-sage-soft"
               onClick={() =>
                 setVisibleCount((count) =>
-                  Math.min(count + ARCHIVE_PAGE_SIZE, capped.length),
+                  Math.min(count + ARCHIVE_PAGE_SIZE, filtered.length),
                 )
               }
             >

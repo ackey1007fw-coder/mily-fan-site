@@ -5,6 +5,9 @@ import { tiktokSeasideCirclePoseVideo } from "../src/data/tiktokSeasideCirclePos
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 it("publishes only the specified second @seasidecircle TikTok once on NEWS and Gallery", () => {
   const canonicalUrl = "https://www.tiktok.com/@seasidecircle/video/7697054724977151253";
   const itemId = "2026-10-16-tiktok-seasidecircle-hand-poses";
@@ -22,8 +25,8 @@ it("publishes only the specified second @seasidecircle TikTok once on NEWS and G
   assert.equal(entries[0].dateBasis, "confirmed-on");
   assert.equal(entries[0].source, canonicalUrl);
   assert.equal(entries[0].media, video);
-  assert.match(entries[0].body, /完全な一致は未検証/);
-  assert.match(entries[0].body, /投稿日.*未確認/);
+  assert.match(cardText(entries[0]), /完全な一致は未検証/);
+  assert.match(cardText(entries[0]), /投稿日.*未確認/);
   assert.equal(gallery.length, 1);
   assert.equal(gallery[0].kind, "tiktok");
   assert.equal(gallery[0].item, video);

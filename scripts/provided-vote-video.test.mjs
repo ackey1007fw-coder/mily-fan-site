@@ -7,6 +7,9 @@ import { galleryVideos } from "../src/data/galleryVideos.ts";
 import { driveVideoView } from "../src/data/driveGallery.ts";
 import { news } from "../src/data/news.ts";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 test("provided vote video keeps unknown source dates and shares one asset across NEWS and Gallery", () => {
   const item = news.find(item => item.id === "2026-10-04-confirmed-vote-support-video");
   assert.equal(item.media, providedVoteVideo);
@@ -15,8 +18,8 @@ test("provided vote video keeps unknown source dates and shares one asset across
   assert.equal(item.dateBasis, "confirmed-on");
   assert.equal(providedVoteVideo.sourceDate, null);
   assert.equal(providedVoteVideo.sourceUrl, null);
-  assert.match(item.body, /撮影・投稿日時は未確認/);
-  assert.match(item.body, /現在の日程を示すものではありません/);
+  assert.match(cardText(item), /撮影・投稿日時は未確認/);
+  assert.match(cardText(item), /現在の日程を示すものではありません/);
   assert.equal(item.relatedUrl, "https://mily-fan-site.vercel.app/support/#vote-support-video");
   assert.doesNotMatch(JSON.stringify({ item, providedVoteVideo }), /drive\.google|libfile_|file_000|C:\\\\Users/);
 });

@@ -6,6 +6,9 @@ import { news, newsDisplayMedia } from "../src/data/news.ts";
 import { highlights } from "../src/data/highlights.ts";
 import { activities } from "../src/data/activities.ts";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const X_URL = "https://x.com/mily_chan36/status/2110646575051747453";
 const ROOM_URL = "https://www.showroom-live.com/room/fan_club?room_id=573253";
 
@@ -24,19 +27,19 @@ test("10月15日の本人報告をNEWSに1件だけ追加し、本人XとStory�
     alt: "4次審査突破とセミファイナル進出を報告するみりぃのX投稿",
   });
   assert.match(item.title, /4次審査突破.*セミファイナル進出/);
-  assert.match(item.body, /Instagram Story/);
+  assert.match(cardText(item), /Instagram Story/);
   assert.match(item.message?.text ?? "", /たくさん/);
   assert.match(item.message?.text ?? "", /次も私らしく頑張ります！/);
-  assert.match(item.body, /Story自体の投稿日は確認できていません/);
-  assert.match(item.body, /本人投稿2件を公開画面で確認した内容の要約/);
-  assert.match(item.body, /感謝と次の審査への意気込み/);
-  assert.match(item.body, /個別投稿の正確な日本時間と固定リンクは確認できない/);
+  assert.match(cardText(item), /Story自体の投稿日は確認できていません/);
+  assert.match(cardText(item), /本人投稿2件を公開画面で確認した内容の要約/);
+  assert.match(cardText(item), /感謝と次の審査への意気込み/);
+  assert.match(cardText(item), /個別投稿の正確な日本時間と固定リンクは確認できない/);
   assert.equal(item.additionalCtas?.find(({ url }) => url === ROOM_URL)?.label, "本人のSHOWROOMファンルームを見る");
   assert.equal(item.additionalSources?.[0]?.url, "https://www.misscircle.jp/");
-  assert.match(item.body, /審査期間は10月29日〜11月8日/);
-  assert.match(item.body, /WEB投票は10月29日12:00〜11月8日23:59/);
-  assert.match(item.body, /SHOWROOM審査は10月29日5:00〜11月7日21:59/);
-  assert.match(item.body, /締切日が異なります/);
+  assert.match(cardText(item), /審査期間は10月29日〜11月8日/);
+  assert.match(cardText(item), /WEB投票は10月29日12:00〜11月8日23:59/);
+  assert.match(cardText(item), /SHOWROOM審査は10月29日5:00〜11月7日21:59/);
+  assert.match(cardText(item), /締切日が異なります/);
   assert.doesNotMatch(item.body, /10月下旬〜11月上旬|日程未確定/);
   assert.deepEqual(item.media, {
     kind: "video",

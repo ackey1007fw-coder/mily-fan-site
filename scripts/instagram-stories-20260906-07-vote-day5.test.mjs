@@ -43,6 +43,9 @@ import {
   portalNewsId,
 } from "./portal-feed-order.mjs";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
@@ -71,7 +74,8 @@ const fixtures = [
     activityIds: ["miss-circle"],
     title: "「30分後5日目の投票できるよ」4日目の投票も呼びかけ",
     body:
-      "9月6日の夜、みりぃがInstagram Storyで、リンクスタンプに「30分後5日目の投票できるよ」と書いて投票を呼びかけました。あわせて「4日目まだの方はダッシュで上のリンクに飛んで投票お願いします〜」と添えています。リンク先はStoryの表示だけでは確認できないため、ここには書きません。くま耳とキラキラのフィルターをつけて、ピースサインをしている短い動画です。",
+      "9月6日の夜、みりぃがInstagram Storyで、リンクスタンプに「30分後5日目の投票できるよ」と書いて投票を呼びかけました。あわせて「4日目まだの方はダッシュで上のリンクに飛んで投票お願いします〜」と添えています。くま耳とキラキラのフィルターをつけて、ピースサインをしている短い動画です。",
+    notes: ["リンク先はStoryの表示だけでは確認できないため、ここには書きません。"],
     message:
       "30分後5日目の投票できるよ\u{1F633}\u{1FA75}\n" +
       "4日目まだの方は\n" +
@@ -98,7 +102,8 @@ const fixtures = [
     activityIds: ["live-stream", "miss-circle"],
     title: "朝配信ありがとう、次枠は22:00〜。「5日目ポチッはこちらから」",
     body:
-      "9月7日の朝、みりぃがInstagram Storyで、朝配信へのお礼と、次枠が22:00からであることを伝えました。あわせて、リンクスタンプに「5日目ポチッはこちらから」と書いて投票を呼びかけています。リンク先はStoryの表示だけでは確認できないため、ここには書きません。黒いトップスで、片目をつぶってピースサインをしている短い動画です。",
+      "9月7日の朝、みりぃがInstagram Storyで、朝配信へのお礼と、次枠が22:00からであることを伝えました。あわせて、リンクスタンプに「5日目ポチッはこちらから」と書いて投票を呼びかけています。黒いトップスで、片目をつぶってピースサインをしている短い動画です。",
+    notes: ["リンク先はStoryの表示だけでは確認できないため、ここには書きません。"],
     message:
       "朝配信来てくれたみんなありがとう〜\u{1F484}✨\n" +
       "次枠は22:00〜\n" +
@@ -201,6 +206,7 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
       assert.deepEqual(entry.activityIds, fixture.activityIds);
       assert.equal(entry.title, fixture.title);
       assert.equal(entry.body, fixture.body);
+      assert.deepEqual(entry.notes, fixture.notes);
       assert.equal(entry.message?.label, "みりぃのStory");
       assert.equal(entry.message?.text, fixture.message);
       assert.equal(entry.additionalMedia, undefined);
@@ -337,7 +343,7 @@ describe("2026-09-06〜07 Instagram Story 投票5日目 — Latest / NEWS", () =
       assert.doesNotMatch(copy, /9月13日|9\/13|23:59|12:00/);
       assert.doesNotMatch(copy, /1日1回/);
       assert.doesNotMatch(copy, /liff\.line\.me|misscircle\.jp|instagram\.com|showroom-live\.com/);
-      assert.match(entry.body, /確認できないため、ここには書きません/);
+      assert.match(cardText(entry), /確認できないため、ここには書きません/);
     }
   });
 });

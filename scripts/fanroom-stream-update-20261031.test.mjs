@@ -4,6 +4,9 @@ import { upcomingOct31Slots, withOct31Plan } from '../src/lib/oct31Plan.ts';
 import { nextSupportEventBoundary } from '../src/lib/useSupportEventClock.ts';
 import { news } from '../src/data/news.ts';
 import { adaptStreamSlots } from '../src/lib/supportCalendar.ts';
+
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
 const at = t => Date.parse(`2026-10-31T${t}:00+09:00`);
 
 test('the canceled early slot never returns and each announced slot expires at its confirmed end', () => {
@@ -35,10 +38,10 @@ test('NEWS keeps the owner announcement and gratitude separate from verified liv
   assert.equal(items[0].date, '2026-10-31');
   assert.equal(items[0].sameDayOrder, 1552);
   assert.match(items[0].title, /21:05/);
-  assert.match(items[0].body, /15:52更新.*21:05〜21:50/);
-  assert.match(items[0].body, /当時は.*21:00〜21:50.*案内していました/);
-  assert.match(items[0].body, /14:45〜15:15/);
-  assert.match(items[0].body, /正確な実施時刻は未確認/);
+  assert.match(cardText(items[0]), /15:52更新.*21:05〜21:50/);
+  assert.match(cardText(items[0]), /当時は.*21:00〜21:50.*案内していました/);
+  assert.match(cardText(items[0]), /14:45〜15:15/);
+  assert.match(cardText(items[0]), /正確な実施時刻は未確認/);
   assert.equal(items[0].media, undefined);
 });
 

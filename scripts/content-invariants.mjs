@@ -184,6 +184,26 @@ export function verifyNews(items) {
     if (!item.title || !item.body) {
       errors.push(`news "${item.id ?? "?"}" is missing title or body`);
     }
+    if (
+      item.notes !== undefined &&
+      (!Array.isArray(item.notes) ||
+        item.notes.length === 0 ||
+        item.notes.some((note) => typeof note !== "string" || !note.trim() || note !== note.trim()))
+    ) {
+      errors.push(`news "${item.id ?? "?"}" notes must be a non-empty list of trimmed sentences`);
+    }
+    if (item.notes?.some((note) => item.body.includes(note))) {
+      errors.push(`news "${item.id ?? "?"}" repeats a note inside body`);
+    }
+    if (
+      item.categories !== undefined &&
+      (!Array.isArray(item.categories) ||
+        item.categories.length === 0 ||
+        new Set(item.categories).size !== item.categories.length ||
+        item.categories.some((category) => !["contest", "stream", "radio", "sns"].includes(category)))
+    ) {
+      errors.push(`news "${item.id ?? "?"}" categories must be unique known NEWS categories`);
+    }
     if (!isValidDateOnly(item.date ?? "")) {
       errors.push(`news "${item.id ?? "?"}" date must be a real YYYY-MM-DD`);
     }
@@ -322,7 +342,7 @@ export function verifyNews(items) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs a confirmed TikTok post URL`);
         }
         const matchingDate = media.sourceDate === null
-          ? item.dateBasis === "confirmed-on" && item.body.includes("投稿日は未確認")
+          ? item.dateBasis === "confirmed-on" && [item.body, ...(item.notes ?? [])].join("\n").includes("投稿日は未確認")
           : media.sourceDate === item.date;
         if (!media.id?.trim() || !matchingDate || media.published !== true) {
           errors.push(`news "${item.id ?? "?"}" ${slot} needs id, matching sourceDate, and published status`);

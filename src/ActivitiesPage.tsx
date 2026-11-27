@@ -1,4 +1,5 @@
 import { ApprovedSongClipList } from "./components/ApprovedSongClipList";
+import { NewsNotes } from "./components/NewsNotes";
 import { StreamSocialClipLinks } from "./components/StreamSocialClipLinks";
 import { AnnouncedStreamSchedule } from "./components/AnnouncedStreamSchedule";
 import { RecapSourceInfo } from "./components/RecapSourceInfo";
@@ -1079,6 +1080,7 @@ function ActivityNews({ items, now }: { items: NewsItem[]; now: number }) {
               </time>
               <h3 className="mt-2 text-lg font-bold leading-relaxed text-ink">{item.title}</h3>
               <p className="mt-2 whitespace-pre-line text-sm leading-7 text-ink-muted">{item.body}</p>
+              <NewsNotes notes={item.notes} />
               <div className="mt-4 flex flex-wrap gap-3">
                 {item.source ? (
                   <ExternalLink href={item.source} className="text-sm font-semibold text-sage hover:underline">

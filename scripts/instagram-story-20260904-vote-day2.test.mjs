@@ -33,6 +33,9 @@ import { verifyNews } from "./content-invariants.mjs";
 import { DRIVE_FOLDER_PATTERN, DRIVE_HOST_PATTERN } from "./scan-tracked-text.mjs";
 import { findFeedItem, portalNewsId } from "./portal-feed-order.mjs";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
@@ -51,7 +54,8 @@ const POSTER_SHA256 =
 
 const TITLE = "「2日目ポチッとな〜」投票の呼びかけ";
 const BODY =
-  "みりぃがInstagram Storyで、リンクスタンプに「2日目ポチッとな〜」と書いて投票を呼びかけました。あわせて「毎日連続投票者の特典ちゃんもあるよっ」と添えています。リンク先と特典の内容はStoryの表示だけでは確認できないため、ここには書きません。くま耳とキラキラのフィルターをつけて、手を振ったりピースをしたりしている短い動画です。";
+  "みりぃがInstagram Storyで、リンクスタンプに「2日目ポチッとな〜」と書いて投票を呼びかけました。あわせて「毎日連続投票者の特典ちゃんもあるよっ」と添えています。くま耳とキラキラのフィルターをつけて、手を振ったりピースをしたりしている短い動画です。";
+const NOTES = ["リンク先と特典の内容はStoryの表示だけでは確認できないため、ここには書きません。"];
 const MESSAGE =
   "（毎日連続投票者の特典ちゃんもあるよっ\u{1FA75}ボソッ）\n" +
   "2日目ポチッとな〜\u{1F5F3}\u{FE0F}❣\u{FE0F}❣\u{FE0F}";
@@ -141,6 +145,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
     assert.deepEqual(entry.activityIds, ["miss-circle"]);
     assert.equal(entry.title, TITLE);
     assert.equal(entry.body, BODY);
+    assert.deepEqual(entry.notes, NOTES);
     assert.equal(entry.message.label, "みりぃのStory");
     assert.equal(entry.message.text, MESSAGE);
     assert.deepEqual(verifyNews([entry]), []);
@@ -234,7 +239,7 @@ describe("2026-09-04 Instagram Story 投票2日目 — Latest / NEWS", () => {
     assert.doesNotMatch(copy, /1日1回/);
     assert.doesNotMatch(copy, /liff\.line\.me|misscircle\.jp|instagram\.com/);
     assert.doesNotMatch(copy, /特典は|特典の内容は[^SなをここS]*[0-9]/);
-    assert.match(entry.body, /確認できないため、ここには書きません/);
+    assert.match(cardText(entry), /確認できないため、ここには書きません/);
   });
 });
 
