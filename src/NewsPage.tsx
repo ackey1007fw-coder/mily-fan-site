@@ -13,6 +13,7 @@ export default function NewsPage() {
         initialVisible={NEWS_ARCHIVE_INITIAL}
         showArchiveCta={false}
         showIntro={false}
+        showCategoryFilter
       />
     </ArchiveShell>
   );

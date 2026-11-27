@@ -5,6 +5,9 @@ import { tiktokSeasideCircleSharedVideo } from "../src/data/tiktokSeasideCircleS
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 it("adds the owner-specified X post exactly once via the official post embed", () => {
   const matches = news.filter(({ id }) => id === "2026-10-16-x-red-riding-hood-new-video");
   assert.equal(matches.length, 1);
@@ -14,7 +17,7 @@ it("adds the owner-specified X post exactly once via the official post embed", (
   assert.equal(post.xEmbed?.postId, "2110892605605363858");
   assert.equal(post.xEmbed?.sourceUrl, post.source);
   assert.equal(post.media, undefined, "do not pretend the uploaded MP4 is self-hosted");
-  assert.match(post.body, /完全な一致は未検証/);
+  assert.match(cardText(post), /完全な一致は未検証/);
   assert.deepEqual(verifyNews(matches), []);
 });
 
@@ -31,9 +34,9 @@ it("publishes only the canonical TikTok link until the program video can be insp
   assert.equal(video.sourceDate, null);
   assert.equal(video.published, false);
   assert.equal(matches[0].dateBasis, "confirmed-on");
-  assert.match(matches[0].body, /投稿日は未確認/);
-  assert.match(matches[0].body, /みりぃ本人の登場有無/);
-  assert.match(matches[0].body, /リンクのみ/);
+  assert.match(cardText(matches[0]), /投稿日は未確認/);
+  assert.match(cardText(matches[0]), /みりぃ本人の登場有無/);
+  assert.match(cardText(matches[0]), /リンクのみ/);
   assert.equal(matches[0].source, postUrl);
   assert.equal(matches[0].media, undefined, "do not embed unreviewed program content");
   assert.equal(matches[0].xEmbed, undefined);

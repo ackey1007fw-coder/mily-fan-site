@@ -39,6 +39,9 @@ import { isFaststart } from "./build-drive-gallery.mjs";
 import { verifyNews } from "./content-invariants.mjs";
 import { findFeedItem, portalNewsId } from "./portal-feed-order.mjs";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const run = promisify(execFile);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDirectory = path.join(root, "public/media/gallery");
@@ -401,16 +404,16 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     const fifteenX = newsItem(FIFTEEN_X_NEWS_ID);
     const thirtyDay = newsItem(THIRTY_DAY_NEWS_ID);
 
-    assert.match(firstPlace.body, /投稿時点の記録/);
-    assert.match(firstPlace.body, /1位/);
-    assert.match(firstPlace.body, /102,700pt/);
-    assert.match(firstPlace.body, /現在の順位を示すものではありません/);
+    assert.match(cardText(firstPlace), /投稿時点の記録/);
+    assert.match(cardText(firstPlace), /1位/);
+    assert.match(cardText(firstPlace), /102,700pt/);
+    assert.match(cardText(firstPlace), /現在の順位を示すものではありません/);
     assert.match(firstPlace.message.text, /待ってー！現在1位だ/);
     assert.match(firstPlace.message.text, /31日は1.5倍DAY/);
     assert.equal(firstPlace.body.includes("Mixch"), false);
 
-    assert.match(fifteenX.body, /1\.5倍/);
-    assert.match(fifteenX.body, /緊急案内/);
+    assert.match(cardText(fifteenX), /1\.5倍/);
+    assert.match(cardText(fifteenX), /緊急案内/);
     assert.doesNotMatch(fifteenX.body, /0:00|23:59|なるよーん/);
     assert.match(fifteenX.message.text, /緊急告知/);
     assert.match(fifteenX.message.text, /明日はpaton投票が/);
@@ -423,9 +426,9 @@ describe("2026-08-30〜31 Instagram Story — Latest / NEWS", () => {
     assert.doesNotMatch(patonVoteFifteenXStoryVideo.alt, /0:00|23:59/);
     assert.equal(fifteenX.body.includes("Mixch"), false);
 
-    assert.match(thirtyDay.body, /30日連続配信記念日/);
-    assert.match(thirtyDay.body, /7:30/);
-    assert.match(thirtyDay.body, /配信前の記録/);
+    assert.match(cardText(thirtyDay), /30日連続配信記念日/);
+    assert.match(cardText(thirtyDay), /7:30/);
+    assert.match(cardText(thirtyDay), /配信前の記録/);
     assert.equal(thirtyDay.body.includes("Paton"), false);
     assert.doesNotMatch(thirtyDay.message.text, /#ミスサー/);
     assert.match(thirtyDay.message.text, /【8\/30（日）】/);

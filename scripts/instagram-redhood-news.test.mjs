@@ -3,6 +3,9 @@ import test from "node:test";
 import { news } from "../src/data/news.ts";
 import { redRidingHoodNewsImages } from "../src/data/redRidingHoodPhotos.ts";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 test("赤ずきんの既存NEWSからXとInstagramの両投稿を開ける", () => {
   const matching = news.filter(({ id }) => id === "2026-10-13-x-first-cosplay-red-riding-hood");
   assert.equal(matching.length, 1, "同じ写真の記事を重複させない");
@@ -14,7 +17,7 @@ test("赤ずきんの既存NEWSからXとInstagramの両投稿を開ける", () 
     label: "赤ずきんと四次審査への思い（Instagram）",
     url: "https://www.instagram.com/p/DeeMBKZk67F/",
   }]);
-  assert.match(item.body, /Instagramの投稿日は未確認/);
+  assert.match(cardText(item), /Instagramの投稿日は未確認/);
   assert.match(item.message?.text ?? "", /みりぃの下剋上はまだまだこれからです。/);
   assert.equal(item.media?.src, redRidingHoodNewsImages[0].src);
   assert.equal(item.additionalMedia?.length, 3, "既存の本人実写真4枚を維持する");

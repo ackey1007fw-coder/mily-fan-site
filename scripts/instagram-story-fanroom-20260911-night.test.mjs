@@ -18,6 +18,9 @@ import { news, sortNewsByDateDesc } from "../src/data/news.ts";
 import { selectGalleryEntries } from "../src/lib/galleryItems.ts";
 import { verifyNews } from "./content-invariants.mjs";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const galleryDir = path.join(root, "public/media/gallery");
 const run = promisify(execFile);
@@ -71,7 +74,7 @@ describe("2026-09-11 night Story / Fan Room / Gallery update", () => {
     assert.equal(entry.relatedUrl, "https://www.instagram.com/mily_chan36");
     assert.equal(entry.media, miripochiStoryVideo);
     assert.equal(entry.additionalCtas?.[0]?.url, missCircleWebVoteLink.url);
-    assert.match(entry.body, /遷移先は素材だけでは確認できない/);
+    assert.match(cardText(entry), /遷移先は素材だけでは確認できない/);
   });
   it("records the 8/12 typo as corrected to the September 12 schedule", () => {
     const entry = news.find(({ id }) => id === STORY_ID);
@@ -80,9 +83,9 @@ describe("2026-09-11 night Story / Fan Room / Gallery update", () => {
     assert.equal(finalDayNightStoryVideo.sourceDate, "2026-09-11");
     assert.equal(finalDayNightStoryVideo.sourceLabel, "Instagram Story");
     assert.equal(finalDayNightStoryVideo.provenance, "owner-provided");
-    assert.match(entry.body, /翌9月12日/);
-    assert.match(entry.body, /8月じゃなくて9月じゃーん！！！間違えすみません/);
-    assert.match(entry.body, /公開動画の表示はそのまま/);
+    assert.match(cardText(entry), /翌9月12日/);
+    assert.match(cardText(entry), /8月じゃなくて9月じゃーん！！！間違えすみません/);
+    assert.match(cardText(entry), /公開動画の表示はそのまま/);
     assert.equal(entry.additionalCtas?.[0]?.url, "https://www.showroom-live.com/r/circle2026_0734");
   });
 
@@ -92,7 +95,7 @@ describe("2026-09-11 night Story / Fan Room / Gallery update", () => {
     assert.equal(entry.source, undefined);
     assert.equal(entry.sourceLabel, "SHOWROOMファンルーム");
     assert.equal(entry.url, "https://www.showroom-live.com/room/fan_club?room_id=573253");
-    assert.match(entry.body, /9月11日23:10/);
+    assert.match(cardText(entry), /9月11日23:10/);
     assert.equal(entry.message?.label, "みりぃのファンルーム");
     assert.match(entry.message?.text ?? "", /3次審査突破&アバ権獲得/);
     assert.equal(entry.media, undefined);

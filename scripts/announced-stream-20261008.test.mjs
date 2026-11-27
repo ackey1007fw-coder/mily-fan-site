@@ -3,6 +3,9 @@ import { test } from 'node:test';
 import { fourthRoundStreamSchedule, OCTOBER_8_SCHEDULE_X_URL } from '../src/data/fourthRoundStreamSchedule.ts';
 import { upcomingSlots, streamSchedule } from '../src/data/streamSchedule.ts';
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const today = fourthRoundStreamSchedule.filter(slot => slot.date === '2026-10-08');
 
 test('October 8 slots preserve only the two requested X-announced windows', () => {
@@ -34,10 +37,10 @@ test('October 8 NEWS has one source-linked announcement and no stream-result ass
   const item = items[0];
   assert.equal(item.date, '2026-10-08');
   assert.equal(sortNewsByDateDesc(news.filter(entry => entry.date < item.date || entry.id === item.id))[0], item);
-  assert.match(item.body, /14:40〜15:20/);
-  assert.match(item.body, /21:30〜22:10/);
-  assert.match(item.body, /告知予定/);
-  assert.match(item.body, /配信記録ではありません/);
+  assert.match(cardText(item), /14:40〜15:20/);
+  assert.match(cardText(item), /21:30〜22:10/);
+  assert.match(cardText(item), /告知予定/);
+  assert.match(cardText(item), /配信記録ではありません/);
   assert.doesNotMatch(item.body, /5:50|6:30|配信しました|配信中です/);
   assert.equal(item.relatedUrl, '/support/');
   assert.equal(item.media, undefined);

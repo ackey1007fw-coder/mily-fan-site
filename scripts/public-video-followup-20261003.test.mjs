@@ -7,6 +7,9 @@ import {news} from '../src/data/news.ts';
 import {selectGalleryEntries} from '../src/lib/galleryItems.ts';
 import {verifyNews} from './content-invariants.mjs';
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 test('published talk links match the correct source slots without private delivery URLs',()=>{
  for(const [recap,url] of [[night,'https://www.instagram.com/reel/DeA6JODFNPd/'],[morning,'https://www.instagram.com/reel/DeA6ilVjsal/']]){
   const clips=recap.highlights.flatMap(x=>x.socialClip?[x.socialClip]:[]);
@@ -20,7 +23,7 @@ test('published talk links match the correct source slots without private delive
 test('campus makeup keeps unknown post date distinct from editorial confirmation and appears once',()=>{
  assert.equal(video.sourceDate,null);assert.equal(video.postId,'7692016046542228756');
  const item=news.find(x=>x.media===video);assert.equal(item.date,'2026-10-03');
- assert.match(item.body,/10月3日に投稿内容を確認/);assert.match(item.body,/投稿日は未確認/);
+ assert.match(cardText(item),/10月3日に投稿内容を確認/);assert.match(cardText(item),/投稿日は未確認/);
  assert.equal(item.message.text,'大学に行く時はとにかくメイク薄い💄');
  assert.deepEqual(verifyNews([item]),[]);
  assert.ok(verifyNews([{...item,dateBasis:undefined}]).length);

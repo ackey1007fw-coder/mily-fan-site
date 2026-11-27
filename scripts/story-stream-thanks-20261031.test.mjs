@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import crypto from "node:crypto";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const root = new URL("../", import.meta.url);
 const text = fs.readFileSync(new URL("src/data/news.ts", root), "utf8");
 const marker = "export const news: NewsItem[] = [\n";
@@ -21,9 +24,9 @@ test("Story is a single confirmed-on NEWS item with a non-link source label", ()
   assert.equal(item.url, "https://www.instagram.com/mily_chan36");
   assert.equal(item.ctaLabel, "Instagramプロフィールを見る");
   assert.equal(text.split(`\"id\": \"${item.id}\"`).length - 1, 1);
-  assert.match(item.body, /音声なし/);
-  assert.match(item.body, /投稿日・撮影日・配信日時は未確認/);
-  assert.match(item.body, /現在の投票案内や確定成績ではありません/);
+  assert.match(cardText(item), /音声なし/);
+  assert.match(cardText(item), /投稿日・撮影日・配信日時は未確認/);
+  assert.match(cardText(item), /現在の投票案内や確定成績ではありません/);
   assert.equal(item.additionalCtas, undefined);
   assert.equal(item.activityIds, undefined);
 });

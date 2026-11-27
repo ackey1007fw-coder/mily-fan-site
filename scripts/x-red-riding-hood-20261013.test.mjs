@@ -12,6 +12,9 @@ import {
   redRidingHoodNewsImages,
 } from "../src/data/redRidingHoodPhotos.ts";
 
+// NEWS card text: body plus the separated verification notes.
+const cardText = (entry) => [entry.body, ...(entry.notes ?? [])].join("\n");
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const expectedUrl = "https://x.com/Mily_chan36/status/2109783240366288956";
 
@@ -25,9 +28,9 @@ describe("10/13 本人Xの人生初赤ずきんコスプレ4枚", () => {
     assert.equal(post.source, expectedUrl);
     assert.deepEqual(post.activityIds, ["miss-circle"]);
     assert.match(post.title, /赤ずきん/);
-    assert.match(post.body, /人生初/);
-    assert.match(post.body, /21:30/);
-    assert.match(post.body, /投稿時点/);
+    assert.match(cardText(post), /人生初/);
+    assert.match(cardText(post), /21:30/);
+    assert.match(cardText(post), /投稿時点/);
     assert.equal(post.media, redRidingHoodNewsImages[0]);
     assert.deepEqual(post.additionalMedia, redRidingHoodNewsImages.slice(1));
     assert.equal(newsDisplayMedia(post).length, 4);
