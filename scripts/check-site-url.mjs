@@ -173,6 +173,15 @@ export function verifySiteUrlConsistency() {
   if (!html.includes('name="twitter:image"') || !html.includes('content="__SITE_OG_IMAGE__"')) {
     errors.push("index.html twitter:image must use __SITE_OG_IMAGE__ from site.siteUrl");
   }
+  if (
+    !html.includes("<title>__HOME_PAGE_TITLE__</title>") ||
+    !html.includes('content="__HOME_PAGE_DESCRIPTION__"')
+  ) {
+    errors.push("index.html title and description must use home metadata placeholders");
+  }
+  if (!html.includes("__HOME_JSON_LD__")) {
+    errors.push("index.html must include generated home JSON-LD");
+  }
   if (!profileHtml.includes('href="__PROFILE_CANONICAL__"')) {
     errors.push("profile/index.html canonical href must use __PROFILE_CANONICAL__");
   }
@@ -403,6 +412,12 @@ export function verifySiteUrlConsistency() {
     }
   }
 
+  if (
+    !viteConfig.includes("homePageMetadata.title") ||
+    !viteConfig.includes("homePageStructuredData()")
+  ) {
+    errors.push("vite.config.ts must inject home title, description, and JSON-LD from homeMetadata");
+  }
   if (
     !viteConfig.includes("canonicalUrl()") ||
     !viteConfig.includes("profileUrl()") ||

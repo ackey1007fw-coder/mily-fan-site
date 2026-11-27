@@ -79,9 +79,9 @@ export function Hero() {
             {site.displayTitle}
           </p>
           <h1 className="mt-2 text-4xl font-bold tracking-tight text-ink sm:text-5xl">
-            {profile.displayName}
+            {profile.publicName}（{profile.displayName}）
           </h1>
-          <p className="mt-2 text-lg text-ink-muted">{profile.publicName}</p>
+          <p className="mt-2 text-lg text-ink-muted">{profile.aliases.join(" / ")}</p>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-ink">
             ラジオ、配信、コンテスト。みりぃの今をひとつに。
           </p>
