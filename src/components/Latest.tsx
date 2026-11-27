@@ -31,6 +31,7 @@ import { ExternalLink } from "./ExternalLink";
 import { MixchOutboundCard } from "./MixchOutboundCard";
 import { NewsAudioCard } from "./NewsAudioCard";
 import { NewsImage } from "./NewsImage";
+import { NewsNotes } from "./NewsNotes";
 import { TikTokEmbedCard } from "./TikTokEmbedCard";
 import { XEmbedCard } from "./XEmbedCard";
 
@@ -139,21 +140,7 @@ export function NewsArticle({ item, now }: { item: NewsItem; now: number }) {
         <NewsMediaBlock key={newsMediaKey(media)} media={media} />
       ))}
       {item.xEmbed ? <XEmbedCard embed={item.xEmbed} /> : null}
-      {item.notes?.length ? (
-        <aside
-          aria-label="確認状況・注記"
-          className="mt-4 rounded-xl border border-dashed border-sage/25 bg-paper px-4 py-3"
-        >
-          <p className="text-[11px] font-semibold tracking-wide text-ink-muted">確認状況・注記</p>
-          <div className="mt-1 space-y-1 text-xs leading-relaxed text-ink-muted">
-            {item.notes.map((note) => (
-              <p key={note} data-news-note>
-                {note}
-              </p>
-            ))}
-          </div>
-        </aside>
-      ) : null}
+      <NewsNotes notes={item.notes} />
 
       {item.source ||
       item.sourceLabel ||

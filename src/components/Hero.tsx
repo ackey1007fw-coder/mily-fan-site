@@ -16,6 +16,7 @@ import { SUPPORT_HUB_ROUTE } from "../lib/supportHub";
 import { isSupportEventUrlActive } from "../lib/supportEventLinks";
 import { useSupportEventClock } from "../lib/useSupportEventClock";
 import { ExternalLink } from "./ExternalLink";
+import { NewsNotes } from "./NewsNotes";
 import { Socials } from "./Socials";
 import { VoteSpotlight } from "./VoteSpotlight";
 
@@ -212,6 +213,7 @@ export function Hero() {
           <p className="text-xs text-ink-muted">{latest.date}</p>
           <p className="mt-1 font-semibold text-ink">{latest.title}</p>
           <p className="mt-2 text-sm leading-relaxed text-ink-muted">{latest.body}</p>
+          <NewsNotes notes={latest.notes} className="mt-3" />
           <a
             href="#latest"
             className="mt-3 inline-flex text-sm font-medium text-sage hover:underline"

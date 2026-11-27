@@ -86,7 +86,15 @@ describe("NEWS verification notes", () => {
 
   it("renders categories and notes on the NEWS card and filters only on /news/", () => {
     const latest = readFileSync(new URL("../src/components/Latest.tsx", import.meta.url), "utf8");
-    assert.match(latest, /aria-label="確認状況・注記"/);
+    const notes = readFileSync(new URL("../src/components/NewsNotes.tsx", import.meta.url), "utf8");
+    assert.match(notes, /aria-label="確認状況・注記"/);
+    // Every surface that renders a NEWS body must also render its separated notes.
+    for (const file of ["components/Latest.tsx", "components/Hero.tsx", "ActivitiesPage.tsx"]) {
+      const source = readFileSync(new URL(`../src/${file}`, import.meta.url), "utf8");
+      const bodies = source.match(/\{(?:item|latest)\.body\}/g)?.length ?? 0;
+      const rendered = source.match(/<NewsNotes notes=\{(?:item|latest)\.notes\}/g)?.length ?? 0;
+      assert.ok(bodies > 0 && rendered > 0, file);
+    }
     assert.match(latest, /data-news-category=/);
     assert.match(latest, /aria-pressed=\{active\}/);
     const page = readFileSync(new URL("../src/NewsPage.tsx", import.meta.url), "utf8");
